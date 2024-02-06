@@ -48,9 +48,7 @@ CMapTMS::CMapTMS(const QString& filename, CMapDraw* parent) : IMapOnline(parent)
   qDebug() << "------------------------------";
   qDebug() << "TMS: try to open" << filename;
 
-  proj.init(
-      "EPSG:3857",
-      "EPSG:4326");
+  proj.init("EPSG:3857", "EPSG:4326");
 
   qDebug() << "tms:" << proj.getProjSrc();
 
@@ -159,8 +157,9 @@ void CMapTMS::getLayers(QListWidget& list) /* override */
     int i = 0;
     for (const layer_t& layer : qAsConst(layers)) {
       QListWidgetItem* item = new QListWidgetItem(layer.title, &list);
-      item->setCheckState(layer.enabled ? Qt::Checked : Qt::Unchecked);
+      int enabled = layer.enabled;
       item->setData(Qt::UserRole, i++);
+      item->setCheckState(enabled ? Qt::Checked : Qt::Unchecked);
     }
 
     connect(&list, &QListWidget::itemChanged, this, &CMapTMS::slotLayersChanged);

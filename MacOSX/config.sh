@@ -7,9 +7,12 @@
 # Also set some vars for coloring output
 ######################################################################## 
 
-# only include onece
-if [[ -z $INCLUDED ]]; then
-export INCLUDED="yes"
+# only include once
+if [ -z "$INCLUDED" ]; then
+    export INCLUDED="yes"
+else
+    return
+fi
 
 # Some vars
 ######################################################################## 
@@ -56,19 +59,20 @@ if [[ "$QMSDEVDIR" == "$DIR_SCRIPT" ]] || [[ "$QMSDEVDIR"  ==  ${DIR_SCRIPT%/*} 
     exit
 fi
 
-# root dir for building QMS
-
-
 # Parameters for the build
 ########################################################################
 
-# build GDAL from source
-# if set with any value -> build GDAL from source
-# if an empty string -> take GDAL from homebrew
-export BUILD_GDAL=
+# Default: Build with homebrew packages and copz the libs and bins into the bundle
 
-# preparing to create a brew-package
-# if set with any value -> prepare for QMS brew package
+# build with macports
+# if set with any value -> build with macports
+# if an empty string -> build with homebrew
+# export MACPORTS_BUILD="x"
+export MACPORTS_BUILD=
+
+# build with brew package, but do not copy libs and bins from the brew package
+# into the bundle, i.e. the brew packages are nedded at runtime 
+# if set with any value -> do not copy brew packages into the bundle
 # if an empty string -> create self-contained bundle
 export BREW_PACKAGE_BUILD=
 
@@ -77,15 +81,26 @@ export BREW_PACKAGE_BUILD=
 # if an empty string -> compile, build and nundle w/o XCode
 export XCODE_PROJECT=
 
-# checking arguments: intested in -x (Xcode), -g (GDAL), -b (Homebrew)
-while getopts ":bgx" opt; do
+
+# GDAL: if set to "x", it will be built from source. 
+# If not set (i.e. blank), GDAL will be taken from the package manager
+export BUILD_GDAL="x"
+# PROJ (still experimental): if set to "x", it will be built from source. 
+# If not set (i.e. blank), PROJ will be taken from the package manager
+export BUILD_PROJ=
+
+
+# checking arguments: intested in -x (Xcode), -m (MacPorts), -b (Homebrew)
+while getopts ":bmx" opt; do
   case $opt in
     b)
         export BREW_PACKAGE_BUILD="x"
+        export MACPORTS_BUILD=
         shift
         ;;
-    g)
-        export BUILD_GDAL="x"
+    m)
+        export MACPORTS_BUILD="x"
+        export BREW_PACKAGE_BUILD=
         shift
         ;;
     x)
@@ -104,18 +119,27 @@ done
 echo $INFO
 echo "Parameters driving the build process:"
 echo "-------------------------------------"
-echo "Brew pkg built = ${BREW_PACKAGE_BUILD}"
-echo "Build GDAL from source = ${BUILD_GDAL}"
+echo "Brew pkg needed at run time = ${BREW_PACKAGE_BUILD}"
+echo "Build with MacPorts = ${MACPORTS_BUILD}"
 echo "Xcode build = ${XCODE_PROJECT}"
 echo "-------------------------------------"
 echo ${NC}
 
-fi  #include once
 
 ########################################################################
 # Addtional Vars / Paramters for building
 
 export LOCAL_ENV=$QMSDEVDIR/local  # folder for building pkgs from source
+
+# package manager
+eval "$(brew shellenv)"   # set HOMEBREW_PREFIX
+export PACKAGES_PATH=$HOMEBREW_PREFIX
+if [[ "$MACPORTS_BUILD" == "x" ]]; then
+    export MACPORTS=/opt/local          # Macports package manager
+    export HOMEBREW_PREFIX=
+    export BREW_PACKAGE_BUILD=
+    export PACKAGES_PATH=$MACPORTS
+fi
 
 # Directories for QMS
 export BUILD_RELEASE_DIR=$QMSDEVDIR/release # app bundles will be put
@@ -123,15 +147,64 @@ export QMS_SRC_DIR=$QMSDEVDIR/qmapshack # QMS source dir (clone from GitHub)
 export SRC_OSX_DIR=$QMSDEVDIR/qmapshack/MacOSX # Sources only for MacOS
 
 # QT5
-export QT_DIR=$HOMEBREW_PREFIX/opt/qt5
-export Qt5_DIR=$QT_DIR/lib/cmake
-
-# GDAL
-if [ -z "${BUILD_GDAL}" ]; then
-    export GDAL_DIR=`brew --prefix gdal`
+if [[ "$MACPORTS_BUILD" == "x" ]]; then
+    export QT_DEV_PATH=$PACKAGES_PATH/libexec/qt5
 else
-    export GDAL_DIR=$LOCAL_ENV
+    export QT_DEV_PATH=$PACKAGES_PATH/opt/qt5
+fi
+export Qt5_DIR=$QT_DEV_PATH/lib/cmake
+
+# Other packages needed
+if [[ "$MACPORTS_BUILD" == "x" ]]; then
+    export GDAL=$PACKAGES_PATH
+    export ROUTINO_DEV_PATH=$PACKAGES_PATH
+    export PROJ_DEV_PATH=$PACKAGES_PATH/lib/proj9
+    export QuaZip_Qt5_DIR=$PACKAGES_PATH/lib/cmake/QuaZip-Qt5-1.4
+else
+    # GDAL, ROUTINO, QUAZIP, PROJ are compiled from source
+    if [[ "$BUILD_GDAL" == "x" ]]; then
+        export GDAL_RELEASE="3.7"
+        export GDAL=$LOCAL_ENV
+    else
+        export GDAL=$PACKAGES_PATH
+    fi
+    export ROUTINO_DEV_PATH=$LOCAL_ENV
+    if [[ "$BUILD_PROJ" == "x" ]]; then
+        export PROJ_DEV_PATH=$LOCAL_ENV
+    else
+        export PROJ_DEV_PATH=$PACKAGES_PATH
+    fi
+    export QuaZip_Qt5_DIR=$LOCAL_ENV/lib/cmake/QuaZip-Qt5-1.4
 fi
 
-cd $QMSDEVDIR
+# env vars for building QMS
+export OSX_DEPLOYMENT_TARGET=12.0  # MacOS build target
 
+########################################################################
+# print all config variables
+echo $INFO
+echo "Config variables:"
+echo "-------------------------------------"
+echo "MACPORTS = $MACPORTS"
+echo "HOMEBREW_PREFIX = $HOMEBREW_PREFIX"
+echo "PACKAGES_PATH = $PACKAGES_PATH"
+echo "LOCAL_ENV = $LOCAL_ENV"
+echo "BREW_PACKAGE_BUILD = $BREW_PACKAGE_BUILD"
+echo "MACPORTS_BUILD = $MACPORTS_BUILD"
+echo "BUILD_RELEASE_DIR = $BUILD_RELEASE_DIR"
+echo "QMS_SRC_DIR = $QMS_SRC_DIR"
+echo "SRC_OSX_DIR = $SRC_OSX_DIR"
+echo "QT_DEV_PATH = $QT_DEV_PATH"
+echo "Qt5_DIR = $Qt5_DIR"
+echo "BUILD_GDAL = $BUILD_GDAL"
+echo "GDAL = $GDAL"
+echo "GDAL_RELEASE = $GDAL_RELEASE"
+echo "ROUTINO_DEV_PATH = $ROUTINO_DEV_PATH"
+echo "BUILD_PROJ = $BUILD_PROJ"
+echo "PROJ_DEV_PATH = $PROJ_DEV_PATH"
+echo "QuaZip_Qt5_DIR = $QuaZip_Qt5_DIR"
+echo "OSX_DEPLOYMENT_TARGET = $OSX_DEPLOYMENT_TARGET"
+echo "-------------------------------------"
+echo ${NC}
+
+cd $QMSDEVDIR

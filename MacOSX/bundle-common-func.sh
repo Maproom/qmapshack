@@ -1,10 +1,46 @@
-#!/bin/bash
+#!/bin/sh
+
+source $QMSDEVDIR/qmapshack/MacOSX/config.sh   # check for important paramters
+
+# Directories for QMS
+SRC_RESOURCES_DIR=$SRC_OSX_DIR/resources
+BUILD_BIN_DIR=$QMSDEVDIR/build_QMapShack/bin
+
+# vars for bundling
+set -a
+declare APP_LANG=("ca" "cs" "de" "en" "es" "fr" "nl" "ru")
+APP_NAME_LOWER="$(tr [A-Z] [a-z] <<< "$APP_NAME")"
+APP_BUNDLE=$APP_NAME.app
+
+APP_BUNDLE_QMAPTOOL=QMapTool.app
+
+BUILD_BUNDLE_DIR=$BUILD_RELEASE_DIR/$APP_BUNDLE
+BUILD_BUNDLE_CONTENTS_DIR=$BUILD_BUNDLE_DIR/Contents
+BUILD_BUNDLE_APP_DIR=$BUILD_BUNDLE_DIR/Contents/MacOS
+BUILD_BUNDLE_RES_DIR=$BUILD_BUNDLE_DIR/Contents/Resources
+BUILD_BUNDLE_FRW_DIR=$BUILD_BUNDLE_DIR/Contents/Frameworks
+BUILD_BUNDLE_PLUGIN_DIR=$BUILD_BUNDLE_DIR/Contents/PlugIns
+BUILD_BUNDLE_EXTLIB_DIR=$BUILD_BUNDLE_DIR/Contents/lib
+BUILD_BUNDLE_APP_FILE=$BUILD_BUNDLE_APP_DIR/$APP_NAME
+
+BUILD_BUNDLE_RES_QM_DIR=$BUILD_BUNDLE_RES_DIR/translations
+BUILD_BUNDLE_RES_GDAL_DIR=$BUILD_BUNDLE_RES_DIR/gdal
+BUILD_BUNDLE_RES_GEOS_DIR=$BUILD_BUNDLE_RES_DIR/geos
+BUILD_BUNDLE_RES_PROJ_DIR=$BUILD_BUNDLE_RES_DIR/proj
+BUILD_BUNDLE_RES_ROUTINO_DIR=$BUILD_BUNDLE_RES_DIR/routino
+BUILD_BUNDLE_RES_HELP_DIR=$BUILD_BUNDLE_RES_DIR/help
+BUILD_BUNDLE_RES_BIN_DIR=$BUILD_BUNDLE_CONTENTS_DIR/Tools
+
+HELP_QMS_DIR=$QMS_SRC_DIR/src/qmapshack/doc
+HELP_QMT_DIR=$QMS_SRC_DIR/src/qmaptool/doc
+
+set +a
+
 
 APP_VERSION=0
 BUILD_TIME=$(date +"%y-%m-%dT%H:%M:%S")
 BUILD_HASH_KEY=0
 COMMIT_STATUS=0
-
 
 function buildIcon {
     rm -rf $BUILD_BIN_DIR/$APP_NAME.iconset
@@ -35,9 +71,11 @@ function buildAppStructure {
     #         *.icns
     #      Frameworks/
     #         <libs>
-    #      PlugIns
+    #      PlugIns/
     #         <libs>
-    
+    #      Tools/
+    #      libs/
+
     rm -rf $BUILD_BUNDLE_DIR
     mkdir $BUILD_BUNDLE_DIR
     mkdir $BUILD_BUNDLE_CONTENTS_DIR
@@ -46,6 +84,9 @@ function buildAppStructure {
     mkdir $BUILD_BUNDLE_RES_QM_DIR
     mkdir $BUILD_BUNDLE_FRW_DIR
     mkdir $BUILD_BUNDLE_PLUGIN_DIR
+    if [[ "$BREW_PACKAGE_BUILD" == "" ]] ; then
+        mkdir $BUILD_BUNDLE_EXTLIB_DIR
+    fi
 
     # TODO not all copied from predefined data is needed in every case (eg icon)
     # predefined data
@@ -60,8 +101,8 @@ function buildAppStructure {
 
     cp -v $SRC_RESOURCES_DIR/$APP_NAME.icns $BUILD_BUNDLE_RES_DIR
     cp -v $SRC_RESOURCES_DIR/*.qss $BUILD_BUNDLE_RES_DIR
-    # inject PATH of HOMEBREW, so that external tools can be run from the app bundles
-    sed  "s|HOMEBREW|$HOMEBREW_PREFIX|" $SRC_RESOURCES_DIR/Info.plist > $QMSDEVDIR/Info.plist
+    # inject PATH of PACKAGES_PATH, so that external tools can be run from the app bundles
+    sed  "s|PACKAGES_PATH|$PACKAGES_PATH|" $SRC_RESOURCES_DIR/Info.plist > $QMSDEVDIR/Info.plist
     mv $QMSDEVDIR/Info.plist $BUILD_BUNDLE_CONTENTS_DIR
 
     # new icon, if one has been created (otherwise the one from predefined data)
@@ -69,7 +110,7 @@ function buildAppStructure {
         echo "cp -v $BUILD_BIN_DIR/$APP_NAME.icns $BUILD_BUNDLE_RES_DIR/"
         cp -v $BUILD_BIN_DIR/$APP_NAME.icns $BUILD_BUNDLE_RES_DIR/
     fi
-    
+
     # binary
     cp -v $BUILD_BIN_DIR/$APP_NAME_LOWER  $BUILD_BUNDLE_APP_DIR/$APP_NAME
 
@@ -81,79 +122,154 @@ function buildAppStructure {
 function copyQtTrqnslations {
     for i in "${APP_LANG[@]}"
     do
-        cp -v $QT_DIR/translations/*_${i}.qm $BUILD_BUNDLE_RES_QM_DIR
+        cp -v $QT_DEV_PATH/translations/*_${i}.qm $BUILD_BUNDLE_RES_QM_DIR
     done
 }
 
 
 function qtDeploy {
-    # -no-strip 
-    $QT_DIR/bin/macdeployqt $BUILD_BUNDLE_DIR -always-overwrite -verbose=3
+    # -no-strip
+    echo "MACdeployQT  $QT_DEV_PATH/ and  $BUILD_BUNDLE_DIR/"
+    $QT_DEV_PATH/bin/macdeployqt $BUILD_BUNDLE_DIR -always-overwrite -verbose=3
 }
 
 
 function printLinkingApp {
+    echo "--------------------------------------------"
+    echo "*** printLinkingApp ***"
     printLinking $BUILD_BUNDLE_APP_FILE
 
-    for F in `find $BUILD_BUNDLE_FRW_DIR -type f -type f \( -iname "*.dylib" -o -iname "*.so" \)`    
-    do
-        printLinking $F
-    done
-    
-    for F in `find $BUILD_BUNDLE_FRW_DIR/Qt*.framework/Versions/5 -type f -maxdepth 1` 
+    for F in `find $BUILD_BUNDLE_FRW_DIR -type f -type f \( -iname "*.dylib" -o -iname "*.so" \)`
     do
         printLinking $F
     done
 
-    for F in `find $BUILD_BUNDLE_PLUGIN_DIR -type f -type f \( -iname "*.dylib" -o -iname "*.so" \)` 
+    for F in `find $BUILD_BUNDLE_FRW_DIR/Qt*.framework/Versions/5 -type f -maxdepth 1`
     do
         printLinking $F
     done
-    
+
+    for F in `find $BUILD_BUNDLE_FRW_DIR/Qt*.framework/Versions/5/Helpers/QtWebEngineProcess.app/Contents/MacOS/QtWebEngineProcess -type f -maxdepth 1`
+    do
+        printLinking $F
+    done
+
+    for F in `find $BUILD_BUNDLE_PLUGIN_DIR -type f -type f \( -iname "*.dylib" -o -iname "*.so" \)`
+    do
+        printLinking $F
+    done
+
     checkLibraries $BUILD_BUNDLE_APP_FILE
 
-    for F in `find $BUILD_BUNDLE_FRW_DIR -type f -type f \( -iname "*.dylib" -o -iname "*.so" \)`    
-    do
-        checkLibraries $F
-    done
-    
-    for F in `find $BUILD_BUNDLE_FRW_DIR/Qt*.framework/Versions/5 -type f -maxdepth 1` 
+    for F in `find $BUILD_BUNDLE_FRW_DIR -type f -type f \( -iname "*.dylib" -o -iname "*.so" \)`
     do
         checkLibraries $F
     done
 
-    for F in `find $BUILD_BUNDLE_PLUGIN_DIR -type f -type f \( -iname "*.dylib" -o -iname "*.so" \)` 
+    for F in `find $BUILD_BUNDLE_FRW_DIR/Qt*.framework/Versions/5 -type f -maxdepth 1`
     do
         checkLibraries $F
-    done   
+    done
+
+    for F in `find $BUILD_BUNDLE_FRW_DIR/Qt*.framework/Versions/5/Helpers/QtWebEngineProcess.app/Contents/MacOS/QtWebEngineProcess -type f -maxdepth 1`
+    do
+        echo $F
+        checkLibraries $F
+    done
+
+    for F in `find $BUILD_BUNDLE_PLUGIN_DIR -type f -type f \( -iname "*.dylib" -o -iname "*.so" \)`
+    do
+        checkLibraries $F
+    done
 }
 
 
 function adjustLinking {
- 
-    for F in `find $BUILD_BUNDLE_PLUGIN_DIR -type f -type f \( -iname "*.dylib" -o -iname "*.so" \)` 
-    do 
+
+    for F in `find $BUILD_BUNDLE_PLUGIN_DIR -type f -type f \( -iname "*.dylib" -o -iname "*.so" \)`
+    do
         adjustLinkQt $F "libq"
-        adjustLinkQt $F "/usr/local/"
+        # adjustLinkQt $F "$PACKAGES_PATH/"
     done
 
-    for F in `find $BUILD_BUNDLE_FRW_DIR/Qt*.framework/Versions/5 -type f -maxdepth 1` 
-    do 
-        adjustLinkQt $F "Qt"
-        adjustLinkQt $F "/usr/local/"
+    for F in `find $BUILD_BUNDLE_FRW_DIR/Qt*.framework/Versions/5 -type f -maxdepth 1`
+    do
+        adjustLinkQt $F "$PACKAGES_PATH/"
     done
 
-    for F in `find $BUILD_BUNDLE_FRW_DIR -type f -type f \( -iname "*.dylib" -o -iname "*.so" \)` 
-    do 
+    for F in `find $BUILD_BUNDLE_FRW_DIR -type f -type f \( -iname "*.dylib" -o -iname "*.so" \)`
+    do
         adjustLinkQt $F "Qt"
-        adjustLinkQt $F "libroutino"
-        adjustLinkQt $F "/usr/local/"
+        if [ -z "$MACPORTS_BUILD" ]; then
+            adjustLinkQt $F "libroutino"
+        fi
+        # echo "--- Adjusting libs with references to $PACKAGES_PATH ---"
+        adjustLinkDyLib $F
+        
     done
 
     adjustLinkQt $BUILD_BUNDLE_APP_FILE "Qt"
     adjustLinkQt $BUILD_BUNDLE_APP_FILE "libroutino"
+
+    # Special treatment for QtWebEngineCore
+    # QtWebEngineProcess.app is an app within QtWebEngineCore.framework, which references other Qt frameworks
+    PATH_TO_QTWEBENGINEPROCESS="QtWebEngineCore.framework/Helpers/QtWebEngineProcess.app"
+    F=$BUILD_BUNDLE_FRW_DIR/$PATH_TO_QTWEBENGINEPROCESS/Contents/MacOS/QtWebEngineProcess
+    adjustLinkQt $F "$PACKAGES_PATH/"
+    if [ -d "$BUILD_BUNDLE_FRW_DIR/$PATH_TO_QTWEBENGINEPROCESS/Contents" ]; then
+        pushd $BUILD_BUNDLE_FRW_DIR/$PATH_TO_QTWEBENGINEPROCESS/Contents
+        ln -s ../../../../../../../Frameworks .
+        popd
+    fi
 }
 
+function adjustLinkDyLib {
+    echo ">>> Adjusting dylibs of `basename $1`"
+    # adjust all dylibs in Frameworks with references to package manager
+    F=$1 # file
+    
+    # exclude symlinks
+    if [[ -L "$F" ]]; then
+            return
+    fi
+
+    for P in `otool -L $F | awk '{print $1}'`
+    do
+        # $P = dylib referenced by $F
+        # get filename of path
+        LIB=`basename $P`
+        
+        # only for references to package, i.e. check if $P starts with $PACKAGES_PATH
+         if [[ "$P" =~ ^"$PACKAGES_PATH"  ]]; then
+            PREL="@executable_path/../Frameworks/$LIB"
+            echo "Changing $LIB to reference $PREL"
+            sudo install_name_tool -change $P $PREL $F
+         fi
+    done
+}
+
+function adjustLinkExtTool {
+    # $1 = filename of exttool
+    echo ">>> Adjusting ext Tools of $1"
+    for P in `otoolrecursive $1`
+    do
+
+        LIB=${P##*/}    
+        LIB=${LIB%%:}
+        PREL="@executable_path/../Frameworks/$LIB"
+
+        if [[ "$P" == *".framework"* ]]; then
+            LIB_VERSION=Versions/5
+            LIB=$LIB.framework/$LIB_VERSION/$LIB
+            PREL="@executable_path/../Frameworks/$LIB"
+        else
+             echo "cp -v $P ../Frameworks/"
+        fi
+   
+        echo "install_name_tool -change $P $PREL `basename $1`"
+        install_name_tool -change $P $PREL $1
+    done
+}
 
 function adjustLinkQt {
     F=$1 # file
@@ -162,13 +278,17 @@ function adjustLinkQt {
 
     for P in `otool -L $F | awk '{print $1}'`
     do
+        # exclude symlinks
+        if [[ -L "$P" ]]; then
+            break
+        fi
         #  replace double slashes
         if [[ "$P" == *//* ]]; then 
             PSLASH=$(echo $P | sed 's,//,/,g')
             sudo install_name_tool -change $P $PSLASH $F
         fi
 
-        LIB=${P##*/}
+        LIB=${P##*/}    
         LIB=${LIB%%:}
         PREL="@executable_path/../Frameworks/$LIB"
 
@@ -182,13 +302,13 @@ function adjustLinkQt {
             PREL="@executable_path/../PlugIns/$LIB"
         fi
 
-echo "-----"
-echo "F    = $F"
-echo "FREL = $FREL"
-echo "L    = $L"
-echo "P    = $P"
-echo "LIB  = $LIB"
-echo "PREL = $PREL"
+        echo "-----"
+        echo "F    = $F"
+        echo "FREL = $FREL"
+        echo "L    = $L"
+        echo "P    = $P"
+        echo "LIB  = $LIB"
+        echo "PREL = $PREL"
 
         if [[ "$P" == "$FREL" ]]; then
             echo "no update - is a relativ id"
@@ -198,7 +318,36 @@ echo "PREL = $PREL"
         elif [[ "$P" == *$L* ]]; then
             echo "name_tool: $FREL > $PREL ($P)"
             sudo install_name_tool -change $P $PREL $F
+        elif [[ "$P" == @loader_path* ]]; then
+            echo "name_tool: $FREL > $PREL ($P)"
+            sudo install_name_tool -change $P $PREL $F
+        elif [[ "$P" == @rpath* ]]; then
+            echo "name_tool: $FREL > $PREL ($P)"
+            sudo install_name_tool -change $P $PREL $F
         fi
+    done
+}
+
+
+function adjustLinkingExtTools {
+    echo "--------------------------------------------"
+    echo "Add rpath @executable_path/../Frameworks to "
+    for F in `find $BUILD_BUNDLE_RES_BIN_DIR -type f ! \( -name "*.py" \)`
+    do
+        echo "F    = $F"
+        install_name_tool -add_rpath @executable_path/../Frameworks $F
+        adjustLinkExtTool $F
+    done
+    echo "--------------------------------------------"
+}
+
+
+function printLinkingExtTools {
+    echo "--------------------------------------------"
+    echo "*** printLinkingExtTools ***"
+    for F in `find $BUILD_BUNDLE_RES_BIN_DIR -type f ! \( -name "*.py" \)`
+    do
+        printLinking $F
     done
 }
 
@@ -206,9 +355,15 @@ echo "PREL = $PREL"
 function checkLibraries {
 	F=$1 # file
 	DIR=${BUILD_BUNDLE_APP_FILE%/*}
-	
+
+    echo "--------------------"
+    echo "das File: $F"
+    echo "--------------------"
+
 	for P in `otool -L $F | awk '{print $1}'`
     do
+        #echo $P
+        
     	if [[ "$P" == "@executable_path"* ]]; then
     		FREL=${P##@executable_path}
     		LIB=${DIR}${FREL}
@@ -220,6 +375,7 @@ function checkLibraries {
     	if [[ "$P" == "/"* && "$P" != "/System/Library/"* && "$P" != "/usr/lib/"* && "$P" != *":" ]]; then
     		echo "external library: $P"
     	fi
+        
     done
 }
 
@@ -254,13 +410,13 @@ function extractVersion {
 }
 
 function readRevisionHash {
-cd $QMS_SRC_DIR
-BUILD_HASH_KEY=$(git rev-parse HEAD)
-COMMIT_STATUS=$(git status -s -uno)
+    cd $QMS_SRC_DIR
+    BUILD_HASH_KEY=$(git rev-parse HEAD)
+    COMMIT_STATUS=$(git status -s -uno)
 
-if [[ "$COMMIT_STATUS" != "" ]]; then
-read -p "BEWARE - There are uncommited changes..."
-fi
+    if [[ "$COMMIT_STATUS" != "" ]]; then
+    read -p "BEWARE - There are uncommited changes..."
+    fi
 }
 
 function updateInfoPlist {
@@ -285,7 +441,4 @@ if [[ "$1" == "info" ]]; then
 fi
 if [[ "$1" == "info-before" ]]; then
     printLinking $BUILD_RELEASE_DIR/$APP_NAME
-    # TODO
-    printLinking $LIB_ROUTINO_LIB_DIR/libroutino.so
 fi
-

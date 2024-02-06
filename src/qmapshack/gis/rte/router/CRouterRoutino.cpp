@@ -92,12 +92,12 @@ CRouterRoutino::CRouterRoutino(QWidget* parent)
     comboLanguage->addItem(tr("Czech"), "cs");
     comboLanguage->addItem(tr("Spanish"), "es");
 
-
     connect(toolSetupPaths, &QToolButton::clicked, this, &CRouterRoutino::slotSetupPaths);
 
     SETTINGS;
     dbPaths = cfg.value("Route/routino/paths", dbPaths).toStringList();
     buildDatabaseList();
+
 
     comboProfile->setCurrentIndex(cfg.value("Route/routino/profile", 0).toInt());
     comboLanguage->setCurrentIndex(cfg.value("Route/routino/language", 0).toInt());
@@ -105,6 +105,7 @@ CRouterRoutino::CRouterRoutino(QWidget* parent)
     comboDatabase->setCurrentIndex(cfg.value("Route/routino/database", 0).toInt());
 
     updateHelpText();
+
 }
 
 CRouterRoutino::~CRouterRoutino()

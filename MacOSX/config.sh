@@ -163,7 +163,7 @@ if [[ "$MACPORTS_BUILD" == "x" ]]; then
 else
     # GDAL, ROUTINO, QUAZIP, PROJ are compiled from source
     if [[ "$BUILD_GDAL" == "x" ]]; then
-        export GDAL_RELEASE="3.7"
+        export GDAL_RELEASE="3.8"
         export GDAL=$LOCAL_ENV
     else
         export GDAL=$PACKAGES_PATH
@@ -179,6 +179,9 @@ fi
 
 # env vars for building QMS
 export OSX_DEPLOYMENT_TARGET=12.0  # MacOS build target
+
+# prefer local development environment:
+export PATH=$LOCAL_ENV/bin:$PATH
 
 ########################################################################
 # print all config variables

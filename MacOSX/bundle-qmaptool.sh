@@ -50,7 +50,7 @@ function copyAdditionalLibraries {
                 cp -vP `brew --prefix gdal`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
                 cp -vP `brew --prefix openexr`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
                 cp -vP `brew --prefix geos`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
-
+                cp -vP `brew --prefix jpeg-xl`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
             fi
             $LOCAL_ENV/bin/otoolrecursive -u $GDAL/lib/libgdal.dylib | xargs -I{} cp -vf {} $BUILD_BUNDLE_FRW_DIR
 

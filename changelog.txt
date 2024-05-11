@@ -1,5 +1,7 @@
 V1.XX.X
 [QMS-656] TMS/WMTS: Fix loosing layer selection when reloading maps
+[QMS-668] MacOS build adapted to new gdal version and new brew packages
+[QMS-675] The label colors defined in the TYP are not used
 
 V1.17.1
 [QMS-547] Fixed: QMS freezes on zoom when activating multi-layered online maps

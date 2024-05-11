@@ -475,12 +475,12 @@ bool CGarminTyp::parsePolygon(QDataStream& in, QMap<quint32, polygon_property>& 
       property.labelType = (label_type_e)(t8 & 0x07);
 
       if (t8 & 0x08) {
-        in >> r >> g >> b;
+        in >> b >> g >> r;
         property.colorLabelDay = qRgb(r, g, b);
       }
 
       if (t8 & 0x10) {
-        in >> r >> g >> b;
+        in >> b >> g >> r;
         property.colorLabelNight = qRgb(r, g, b);
       }
 #ifdef DBG
@@ -826,12 +826,12 @@ bool CGarminTyp::parsePolyline(QDataStream& in, QMap<quint32, polyline_property>
       property.labelType = (label_type_e)(t8_1 & 0x07);
 
       if (t8_1 & 0x08) {
-        in >> r >> g >> b;
+        in >> b >> g >> r;
         property.colorLabelDay = qRgb(r, g, b);
       }
 
       if (t8_1 & 0x10) {
-        in >> r >> g >> b;
+        in >> b >> g >> r;
         property.colorLabelNight = qRgb(r, g, b);
       }
 #ifdef DBG
@@ -1141,12 +1141,12 @@ bool CGarminTyp::parsePoint(QDataStream& in, QMap<quint32, point_property>& poin
       property.labelType = (label_type_e)(t8_1 & 0x07);
 
       if (t8_1 & 0x08) {
-        in >> r >> g >> b;
+        in >> b >> g >> r;
         property.colorLabelDay = qRgb(r, g, b);
       }
 
       if (t8_1 & 0x10) {
-        in >> r >> g >> b;
+        in >> b >> g >> r;
         property.colorLabelNight = qRgb(r, g, b);
       }
 #ifdef DBG

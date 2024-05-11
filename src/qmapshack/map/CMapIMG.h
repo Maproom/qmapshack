@@ -150,7 +150,8 @@ class CMapIMG : public IMap {
     QPoint pt;
     QRect rect;
     QString str;
-    CGarminTyp::label_type_e type = CGarminTyp::eStandard;
+    CGarminTyp::point_property property;
+    bool isNight = false;
   };
 
   quint8 scale2bits(const QPointF& scale);
@@ -165,7 +166,7 @@ class CMapIMG : public IMap {
                   bool fast, const QRectF& viewport, polytype_t& polylines, polytype_t& polygons, pointtype_t& points,
                   pointtype_t& pois);
   bool intersectsWithExistingLabel(const QRect& rect) const;
-  void addLabel(const CGarminPoint& pt, const QRect& rect, CGarminTyp::label_type_e type);
+  void addLabel(const CGarminPoint& pt, const QRect& rect, const CGarminTyp::point_property& property, bool isDay);
   void drawPolygons(QPainter& p, polytype_t& lines);
   void drawPolylines(QPainter& p, polytype_t& lines, const QPointF& scale);
   void drawPoints(QPainter& p, pointtype_t& pts, QVector<QRectF>& rectPois);
@@ -173,12 +174,11 @@ class CMapIMG : public IMap {
   void drawLabels(QPainter& p, const QVector<strlbl_t>& lbls);
   void drawText(QPainter& p);
 
-  void drawLine(QPainter& p, CGarminPolygon& l, const CGarminTyp::polyline_property& property,
-                const QFontMetricsF& metrics, const QFont& font, const QPointF& scale);
+  void drawLine(QPainter& p, CGarminPolygon& l, const CGarminTyp::polyline_property& property, const QFont& font, const QPointF& scale);
   void drawLine(QPainter& p, const CGarminPolygon& l);
 
-  void collectText(const CGarminPolygon& item, const QPolygonF& line, const QFont& font, const QFontMetricsF& metrics,
-                   qint32 lineWidth);
+  void collectText(const CGarminPolygon& item, const QPolygonF& line, const QFont& font,
+                   qint32 lineWidth, const QColor& color);
 
   void getInfoPoints(const pointtype_t& points, const QPoint& pt, QMultiMap<QString, QString>& dict) const;
   void getInfoPolylines(const QPoint& pt, QMultiMap<QString, QString>& dict) const;
@@ -479,6 +479,7 @@ class CMapIMG : public IMap {
     QFont font;
     QVector<qreal> lengths;
     qint32 lineWidth;
+    QColor color;
   };
 
   QVector<textpath_t> textpaths;

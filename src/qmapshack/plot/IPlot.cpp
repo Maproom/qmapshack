@@ -1183,8 +1183,8 @@ void IPlot::drawActivities(QPainter& p) {
     const CTrackData::trkpt_t* trkptEnd = trkData.getTrkPtByTotalIndex(range.idxTotalEnd);
 
     if (data->axisType == CPlotData::eAxisTime) {
-      x1 = data->x().val2pt(trkptBeg->time.toTime_t());
-      x2 = data->x().val2pt(trkptEnd->time.toTime_t());
+      x1 = data->x().val2pt(trkptBeg->time.toSecsSinceEpoch());
+      x2 = data->x().val2pt(trkptEnd->time.toSecsSinceEpoch());
     } else {
       x1 = data->x().val2pt(trkptBeg->distance);
       x2 = data->x().val2pt(trkptEnd->distance);

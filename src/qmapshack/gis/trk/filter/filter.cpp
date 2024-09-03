@@ -254,7 +254,7 @@ void CGisItemTrk::filterOffsetElevation(int offset) {
 }
 
 void CGisItemTrk::filterNewDate(const QDateTime& date) {
-  qint64 delta = qint64(date.toTime_t()) - qint64(timeStart.toUTC().toTime_t());
+  qint64 delta = qint64(date.toSecsSinceEpoch()) - qint64(timeStart.toUTC().toSecsSinceEpoch());
 
   for (CTrackData::trkpt_t& pt : trk) {
     pt.time = pt.time.addSecs(delta);
@@ -490,8 +490,8 @@ void CGisItemTrk::filterChangeStartPoint(qint32 idxNewStartPoint, const QString&
   QDateTime newTimeStart = pts[idxNewStartPoint].time;
   QDateTime newTimeEnd = pts[idxNewStartPoint - 1].time;
 
-  qint64 deltaStart = qint64(oldTimeStart.toUTC().toTime_t()) - qint64(newTimeStart.toUTC().toTime_t());
-  qint64 deltaEnd = qint64(oldTimeEnd.toUTC().toTime_t()) - qint64(newTimeEnd.toUTC().toTime_t());
+  qint64 deltaStart = qint64(oldTimeStart.toUTC().toSecsSinceEpoch()) - qint64(newTimeStart.toUTC().toSecsSinceEpoch());
+  qint64 deltaEnd = qint64(oldTimeEnd.toUTC().toSecsSinceEpoch()) - qint64(newTimeEnd.toUTC().toSecsSinceEpoch());
 
   qint32 i;
   for (i = 0; i < idxNewStartPoint; ++i) {

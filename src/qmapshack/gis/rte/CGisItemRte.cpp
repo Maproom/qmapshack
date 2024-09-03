@@ -556,7 +556,7 @@ void CGisItemRte::drawItem(QPainter& p, const QRectF& /*viewport*/, CGisDraw* gi
     p.drawEllipse(anchor, 5, 5);
 
     QString str, val, unit;
-    IUnit::self().seconds2time((mouseMoveFocus->time.toTime_t() - startTime.toTime_t()), val, unit);
+    IUnit::self().seconds2time((mouseMoveFocus->time.toSecsSinceEpoch() - startTime.toSecsSinceEpoch()), val, unit);
     str += tr("Time: %1%2").arg(val, unit) + " ";
     IUnit::self().meter2distance(mouseMoveFocus->distance, val, unit);
     str += tr("Distance: %1%2").arg(val, unit);
@@ -803,7 +803,7 @@ void CGisItemRte::setResult(Routino_Output* route, const QString& options) {
       rtept->fakeSubpt.instruction = QString(next->desc1) + ".\n" + QString(next->desc2) + ".";
 
       rte.totalDistance = rtept->fakeSubpt.distance;
-      rte.totalTime = rtept->fakeSubpt.time.toTime_t() - time.toTime_t();
+      rte.totalTime = rtept->fakeSubpt.time.toSecsSinceEpoch() - time.toSecsSinceEpoch();
     } else if (rtept != nullptr) {
       rtept->subpts << subpt_t();
       subpt_t& subpt = rtept->subpts.last();
@@ -826,7 +826,7 @@ void CGisItemRte::setResult(Routino_Output* route, const QString& options) {
       }
 
       rte.totalDistance = subpt.distance;
-      rte.totalTime = subpt.time.toTime_t() - time.toTime_t();
+      rte.totalTime = subpt.time.toSecsSinceEpoch() - time.toSecsSinceEpoch();
       subpt.instruction = QString(next->desc1) + ".\n" + QString(next->desc2) + ".";
     }
 

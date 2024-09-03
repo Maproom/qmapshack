@@ -185,8 +185,8 @@ void CDeviceGarmin::reorderProjects(IGisProject* project) {
 }
 
 QString CDeviceGarmin::simplifiedName(IGisProject* project) {
-  QString name = project->getName();
-  return name.remove(QRegExp("[^A-Za-z0-9_]"));
+  static const QRegularExpression re("[^A-Za-z0-9_]");
+  return project->getName().remove(re);
 }
 
 QString CDeviceGarmin::createFileName(IGisProject* project, const QString& path, const QString& suffix) {
@@ -256,9 +256,10 @@ void CDeviceGarmin::saveImages(CGisItemWpt& wpt) {
     }
 
     QString filename;
+    static const QRegularExpression re("[^A-Za-z0-9_]");
     for (const CGisItemWpt::image_t& image : images) {
       filename = image.info;
-      filename = filename.remove(QRegExp("[^A-Za-z0-9_]"));
+      filename = filename.remove(re);
 
       if (!filename.endsWith("jpg")) {
         filename += ".jpg";

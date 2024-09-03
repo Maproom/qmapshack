@@ -261,20 +261,21 @@ void CDetailsGeoCache::slotRequestFinished(QNetworkReply* reply) {
     return;
   }
 
-  QRegExp re1(".*CachePageImages.*");
-  QRegExp re2("(https://.*\\.jpg).*>(.*)</a>");
-  re2.setMinimal(true);
+  static const QRegularExpression re1(QRegularExpression::anchoredPattern(".*CachePageImages.*"));
+  static const QRegularExpression re2("(https://.*\\.jpg).*>(.*)</a>",
+                                      QRegularExpression::PatternOption::InvertedGreedinessOption);
 
   bool watchOut = false;
   QStringList lines = asw.split("\n");
   for (const QString& line : qAsConst(lines)) {
-    if (!watchOut && re1.exactMatch(line)) {
+    if (!watchOut && re1.match(line).hasMatch()) {
       watchOut = true;
     } else if (watchOut) {
-      int pos = 0;
-      while ((pos = re2.indexIn(line, pos)) != NOIDX) {
-        QString url = re2.cap(1);
-        QString info = re2.cap(2);
+      QRegularExpressionMatchIterator i = re2.globalMatch(line);
+      while (i.hasNext()) {
+        const QRegularExpressionMatch& match = i.next();
+        QString url = match.captured(1);
+        QString info = match.captured(2);
 
         QNetworkRequest request;
         request.setUrl(url);
@@ -282,8 +283,6 @@ void CDetailsGeoCache::slotRequestFinished(QNetworkReply* reply) {
         reply->setProperty("whatfor", "image");
         reply->setProperty("info", info);
         cntSpoiler++;
-
-        pos += re2.matchedLength();
       }
 
       watchOut = false;

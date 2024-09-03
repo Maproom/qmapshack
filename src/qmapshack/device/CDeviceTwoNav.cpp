@@ -81,16 +81,17 @@ CDeviceTwoNav::~CDeviceTwoNav() {}
 
 void CDeviceTwoNav::readReginfo(const QString& filename) {
   QString product, unittype;
-  QRegExp re("(.*)=(.*)");
+  static const QRegularExpression re(QRegularExpression::anchoredPattern("(.*)=(.*)"));
   QFile file(filename);
   file.open(QIODevice::ReadOnly);
 
   while (!file.atEnd()) {
     QString line = file.readLine().simplified();
 
-    if (re.exactMatch(line)) {
-      QString tok = re.cap(1);
-      QString val = re.cap(2);
+    const QRegularExpressionMatch& match = re.match(line);
+    if (match.hasMatch()) {
+      QString tok = match.captured(1);
+      QString val = match.captured(2);
 
       if (tok == "product") {
         product = val;
@@ -106,8 +107,9 @@ void CDeviceTwoNav::readReginfo(const QString& filename) {
 }
 
 void CDeviceTwoNav::insertCopyOfProject(IGisProject* project) {
+  static const QRegularExpression re("[^A-Za-z0-9_]");
   QString name = project->getName();
-  name = name.remove(QRegExp("[^A-Za-z0-9_]"));
+  name = name.remove(re);
 
   QDir dirData = dir.absoluteFilePath(pathData);
   QString filename = dirData.absoluteFilePath(name);

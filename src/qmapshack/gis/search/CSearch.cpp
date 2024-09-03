@@ -167,24 +167,24 @@ CSearch::CSearch(QString searchstring) : searchText(searchstring) {
       const static QString capIgnAnd = "(?:" + tr("and") + ")?";
       // The second number, the units and the "and" are optional
       // The String has to be matched completely in order to avoid false positives thus the ^ and the $
-      QRegExp numericArguments(
+      static const QRegularExpression numericArguments(
           "^" + capNum + capIgnWS + capUnit + capIgnWS + capIgnAnd + capIgnWS + capNumOpt + capIgnWS + capUnit + "$",
-          Qt::CaseInsensitive);
-      numericArguments.indexIn(filterValueString);
-      if (numericArguments.cap(0).simplified() != "") {
-        if (numericArguments.cap(1) != "")  // to avoid removal of NOFLOAT
+          QRegularExpression::PatternOption::CaseInsensitiveOption);
+      const QRegularExpressionMatch& match = numericArguments.match(filterValueString);
+      if (match.captured(0).simplified() != "") {
+        if (match.captured(1) != "")  // to avoid removal of NOFLOAT
         {
-          filterValue.value1 = numericArguments.cap(1).toFloat();
+          filterValue.value1 = match.captured(1).toFloat();
         }
 
-        filterValue.str1 = numericArguments.cap(2);
+        filterValue.str1 = match.captured(2);
 
-        if (numericArguments.cap(3) != "")  // to avoid removal of NOFLOAT
+        if (match.captured(3) != "")  // to avoid removal of NOFLOAT
         {
-          filterValue.value2 = numericArguments.cap(3).toFloat();
+          filterValue.value2 = match.captured(3).toFloat();
         }
 
-        filterValue.str2 = numericArguments.cap(4);
+        filterValue.str2 = match.captured(4);
       }
     }
     if (filterValue.toString().isEmpty()) {
@@ -574,9 +574,11 @@ QMap<CSearch::search_type_e, CSearch::fSearch> CSearch::initSearchTypeLambdaMap(
   map.insert(eSearchTypeRegEx, [](const searchValue_t& itemValue, searchValue_t& searchValue) {
     if (CSearch::caseSensitivity == Qt::CaseInsensitive)  // There is no option to make regex caseinsensitive
     {
-      return itemValue.toString().toLower().contains(QRegExp(searchValue.toString().toLower()));
+      const QRegularExpression re(searchValue.toString().toLower());
+      return itemValue.toString().toLower().contains(re);
     } else {
-      return itemValue.toString().contains(QRegExp(searchValue.toString()));
+      const QRegularExpression re(searchValue.toString());
+      return itemValue.toString().contains(re);
     }
   });
   return map;

@@ -49,7 +49,8 @@ static void loadTranslations() {
     defined(Q_OS_CYGWIN)
   QString resourceDir = QLibraryInfo::location(QLibraryInfo::TranslationsPath);
   QString translationPath = QCoreApplication::applicationDirPath();
-  translationPath.replace(QRegExp("bin$"), "share/" APP_STR "/translations");
+  static const QRegularExpression re("bin$");
+  translationPath.replace(re, "share/" APP_STR "/translations");
   prepareTranslator(resourceDir, "qt_");
   prepareTranslator(translationPath, APP_STR "_");
 #endif

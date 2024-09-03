@@ -505,8 +505,10 @@ void CRtAisInfo::getString(const QByteArray& data, QString& string, int start, i
       string.insert(ci++, c);
     }
   }
-  string.replace(QRegExp("^[@\\s]+"), "");
-  string.replace(QRegExp("[@\\s]+$"), "");
+  static const QRegularExpression re1("^[@\\s]+");
+  static const QRegularExpression re2("[@\\s]+$");
+  string.replace(re1, "");
+  string.replace(re2, "");
 }
 
 void CRtAisInfo::startRecord(const QString& filename) {

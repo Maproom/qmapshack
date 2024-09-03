@@ -559,13 +559,15 @@ void COverlayRefMap::slotLoadGcp() {
   file.open(QIODevice::ReadOnly);
   QString line = file.readLine();
   if (line.trimmed() == "#V1.0") {
-    QRegExp re1("^-gcp\\s(-{0,1}[0-9]+)\\s(-{0,1}[0-9]+)\\s(-{0,1}[0-9\\.]+)\\s(-{0,1}[0-9\\.]+).*$");
+    static const QRegularExpression re1(
+        "^-gcp\\s(-{0,1}[0-9]+)\\s(-{0,1}[0-9]+)\\s(-{0,1}[0-9\\.]+)\\s(-{0,1}[0-9\\.]+).*$");
 
     qint32 cnt = 1;
     while (1) {
-      if (re1.exactMatch(line)) {
-        QPointF ptPtx(re1.cap(1).toDouble(), re1.cap(2).toDouble());
-        QPointF ptRef(re1.cap(4).toDouble(), re1.cap(3).toDouble());
+      const QRegularExpressionMatch& match = re1.match(line);
+      if (match.hasMatch()) {
+        QPointF ptPtx(match.captured(1).toDouble(), match.captured(2).toDouble());
+        QPointF ptRef(match.captured(4).toDouble(), match.captured(3).toDouble());
         new COverlayRefMapPoint(cnt++, ptRef, ptPtx, treeWidget);
       }
 

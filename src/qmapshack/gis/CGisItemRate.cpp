@@ -52,7 +52,8 @@ qreal CGisItemRate::getRating() { return rating; }
 bool CGisItemRate::getRatingChanged() { return ratingChanged; }
 
 QSet<QString> CGisItemRate::getKeywords() const {
-  const QList<QString>& keywords = keywordPlainTextEdit->toPlainText().split(QRegExp("\\s*,\\s*"), Qt::SkipEmptyParts);
+  static const QRegularExpression re("\\s*,\\s*");
+  const QList<QString>& keywords = keywordPlainTextEdit->toPlainText().split(re, Qt::SkipEmptyParts);
   return {keywords.begin(), keywords.end()};
 }
 

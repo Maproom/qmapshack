@@ -1119,7 +1119,6 @@ void CMapIMG::draw(IDrawContext::buffer_t& buf) /* override */
   USE_ANTI_ALIASING(p, true);
 
   QFont f = CMainWindow::self().getMapFont();
-  fm = QFontMetrics(f);
 
   p.setFont(f);
   p.setPen(Qt::black);
@@ -1934,13 +1933,13 @@ void CMapIMG::drawText(QPainter& p) {
 
     // get path length and string length
     qreal length = qAbs(path.length());
-    qreal width = fm.width(textpath.text);
+    qreal width = fm.size(Qt::TextSingleLine, textpath.text).width();
 
     // adjust font size until string fits into polyline
     while (width > (length * 0.7)) {
       font.setPointSize(font.pointSize() - 1);
       fm = QFontMetricsF(font);
-      width = fm.width(textpath.text);
+      width = fm.size(Qt::TextSingleLine, textpath.text).width();
 
       if ((font.pointSize() < 6)) {
         break;
@@ -1977,7 +1976,7 @@ void CMapIMG::drawText(QPainter& p) {
     // get starting angle of first two letters
     const QString& text = textpath.text;
     qreal percent1 = offset / length;
-    qreal percent2 = (offset + fm.width(text.left(2))) / length;
+    qreal percent2 = (offset + fm.size(Qt::TextSingleLine, text.left(2)).width()) / length;
 
     QPointF point1 = path.pointAtPercent(percent1);
     QPointF point2 = path.pointAtPercent(percent2);
@@ -1997,7 +1996,7 @@ void CMapIMG::drawText(QPainter& p) {
 
     for (int i = 0; i < size; ++i) {
       // percent1 = percent2;
-      percent2 = (offset + fm.width(text[i])) / length;
+      percent2 = (offset + fm.size(Qt::TextSingleLine, text[i]).width()) / length;
 
       point1 = point2;
       point2 = path.pointAtPercent(percent2);
@@ -2030,7 +2029,7 @@ void CMapIMG::drawText(QPainter& p) {
 
       p.restore();
 
-      offset += fm.width(text[i]);
+      offset += fm.size(Qt::TextSingleLine, text[i]).width();
     }
   }
 }

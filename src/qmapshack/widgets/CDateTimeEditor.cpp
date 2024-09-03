@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2015 Florian Pigorsch <mail@florian-pigorsch.de> 
+    Copyright (C) 2015 Florian Pigorsch <mail@florian-pigorsch.de>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -225,14 +225,14 @@ bool CDateTimeEditor::focusNextPrevChild(bool next) {
 const QSize& CDateTimeEditor::getCharSize() const {
   if (m_font != font() || m_charSize.isEmpty()) {
     m_font = font();
-    const QFontMetrics metrics = fontMetrics();
+    const QFontMetrics fm = fontMetrics();
 
     m_charSize.setWidth(0);
     m_charSize.setHeight(0);
 
     const QString& chars = "0123456789-: YMDHS";
     for (const QChar& c : chars) {
-      const QSize cSize = metrics.size(0, c);
+      const QSize cSize = fm.size(Qt::TextSingleLine, c);
       m_charSize = m_charSize.expandedTo(cSize);
     }
   }

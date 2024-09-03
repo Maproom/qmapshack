@@ -70,7 +70,7 @@ const QVariant& CValue::operator=(const QVariant& v) {
     SETTINGS;
     cfg.setValue(cfgTag, v);
 
-    for (CValue* value : qAsConst(allValues)) {
+    for (CValue* value : std::as_const(allValues)) {
       if (value != this) {
         value->updateSys(cfgTag, v);
       }

@@ -50,7 +50,7 @@ public:
 
     std::sort(items.begin(), items.end(), lessThan);
 
-    for (QTreeWidgetItem *item : qAsConst(items)) {
+    for (QTreeWidgetItem *item : std::as_const(items)) {
       treeFiles->addTopLevelItem(item);
     }
 

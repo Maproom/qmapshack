@@ -466,7 +466,7 @@ void CRouterBRouterTilesSelect::slotDownload() {
 }
 
 void CRouterBRouterTilesSelect::slotDownloadReadReady() {
-  for (QNetworkReply* reply : qAsConst(tilesDownloadManagerReplies)) {
+  for (QNetworkReply* reply : std::as_const(tilesDownloadManagerReplies)) {
     if (reply->bytesAvailable() > 0) {
       try {
         const QString& fileName = reply->property("tile").toString();

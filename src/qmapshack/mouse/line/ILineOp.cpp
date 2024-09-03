@@ -321,7 +321,7 @@ void ILineOp::tryRouting(IGisLine::point_t& pt1, IGisLine::point_t& pt2) const {
   try {
     if (CRouterSetup::self().calcRoute(pt1.coord, pt2.coord, subs) >= 0) {
       pt1.subpts.clear();
-      for (const QPointF& sub : qAsConst(subs)) {
+      for (const QPointF& sub : std::as_const(subs)) {
         pt1.subpts << IGisLine::subpt_t(sub);
       }
     }
@@ -350,7 +350,7 @@ void ILineOp::finalizeOperation(qint32 idx) {
     if (idx > 0) {
       IGisLine::point_t& pt1 = points[idx - 1];
       pt1.subpts.clear();
-      for (const QPointF& pt : qAsConst(subLineCoord1)) {
+      for (const QPointF& pt : std::as_const(subLineCoord1)) {
         pt1.subpts << IGisLine::subpt_t(pt);
       }
     }
@@ -358,7 +358,7 @@ void ILineOp::finalizeOperation(qint32 idx) {
     if (idx < (points.size() - 1)) {
       IGisLine::point_t& pt1 = points[idx];
       pt1.subpts.clear();
-      for (const QPointF& pt : qAsConst(subLineCoord2)) {
+      for (const QPointF& pt : std::as_const(subLineCoord2)) {
         pt1.subpts << IGisLine::subpt_t(pt);
       }
     }

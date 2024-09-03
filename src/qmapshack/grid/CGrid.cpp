@@ -297,22 +297,22 @@ void CGrid::draw(QPainter& p, const QRect& rect) {
     int yoff = fm.height() + fm.ascent();
     int xoff = fm.horizontalAdvance("XX.XXXX") >> 1;
 
-    for (const val_t& val : qAsConst(horzTopTicks)) {
+    for (const val_t& val : std::as_const(horzTopTicks)) {
       CDraw::text(qAbs(val.val) < 1.e-5 ? "0" : QString("%1%2").arg(val.val * RAD_TO_DEG).arg(QChar(0260)), p,
                   QPoint(val.pos, yoff), textColor);
     }
 
-    for (const val_t& val : qAsConst(horzBtmTicks)) {
+    for (const val_t& val : std::as_const(horzBtmTicks)) {
       CDraw::text(qAbs(val.val) < 1.e-5 ? "0" : QString("%1%2").arg(val.val * RAD_TO_DEG).arg(QChar(0260)), p,
                   QPoint(val.pos, h), textColor);
     }
 
-    for (const val_t& val : qAsConst(vertLftTicks)) {
+    for (const val_t& val : std::as_const(vertLftTicks)) {
       CDraw::text(qAbs(val.val) < 1.e-5 ? "0" : QString("%1%2").arg(val.val * RAD_TO_DEG).arg(QChar(0260)), p,
                   QPoint(xoff, val.pos), textColor);
     }
 
-    for (const val_t& val : qAsConst(vertRgtTicks)) {
+    for (const val_t& val : std::as_const(vertRgtTicks)) {
       CDraw::text(qAbs(val.val) < 1.e-5 ? "0" : QString("%1%2").arg(val.val * RAD_TO_DEG).arg(QChar(0260)), p,
                   QPoint(w - xoff, val.pos), textColor);
     }
@@ -321,19 +321,19 @@ void CGrid::draw(QPainter& p, const QRect& rect) {
     int yoff = fm.height() + fm.ascent();
     int xoff = fm.horizontalAdvance("XXXX") >> 1;
 
-    for (const val_t& val : qAsConst(horzTopTicks)) {
+    for (const val_t& val : std::as_const(horzTopTicks)) {
       CDraw::text(QString("%1").arg(qint32(val.val / 1000)), p, QPoint(val.pos, yoff), textColor);
     }
 
-    for (const val_t& val : qAsConst(horzBtmTicks)) {
+    for (const val_t& val : std::as_const(horzBtmTicks)) {
       CDraw::text(QString("%1").arg(qint32(val.val / 1000)), p, QPoint(val.pos, h), textColor);
     }
 
-    for (const val_t& val : qAsConst(vertLftTicks)) {
+    for (const val_t& val : std::as_const(vertLftTicks)) {
       CDraw::text(QString("%1").arg(qint32(val.val / 1000)), p, QPoint(xoff, val.pos), textColor);
     }
 
-    for (const val_t& val : qAsConst(vertRgtTicks)) {
+    for (const val_t& val : std::as_const(vertRgtTicks)) {
       CDraw::text(QString("%1").arg(qint32(val.val / 1000)), p, QPoint(w - xoff, val.pos), textColor);
     }
   }

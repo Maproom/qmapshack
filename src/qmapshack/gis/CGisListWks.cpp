@@ -2022,7 +2022,7 @@ bool CGisListWks::event(QEvent* e) {
           }
         }
 
-        for (CDBProject* project : qAsConst(projects)) {
+        for (CDBProject* project : std::as_const(projects)) {
           project->blockUpdateItems(false);
         }
         e->accept();

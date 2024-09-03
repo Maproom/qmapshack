@@ -248,7 +248,7 @@ void CGisWorkspace::slotActivityTrkByKey(const QList<IGisItem::key_t>& keys, trk
       }
     }
 
-    for (IGisProject* project : qAsConst(projects)) {
+    for (IGisProject* project : std::as_const(projects)) {
       project->blockUpdateItems(false);
     }
   }
@@ -516,11 +516,11 @@ void CGisWorkspace::delItemsByKey(const QList<IGisItem::key_t>& keys) {
 
   // make all database projects that are changed to post their new status
   // this will update the database view.
-  for (CDBProject* project : qAsConst(projects)) {
+  for (CDBProject* project : std::as_const(projects)) {
     project->postStatus(true);
   }
   // unblock update for all projects seen
-  for (IGisProject* project : qAsConst(projectsAll)) {
+  for (IGisProject* project : std::as_const(projectsAll)) {
     project->blockUpdateItems(false);
   }
 
@@ -619,7 +619,7 @@ void CGisWorkspace::changeWptSymByKey(const QList<IGisItem::key_t>& keys, const 
     }
   }
 
-  for (IGisProject* project : qAsConst(projects)) {
+  for (IGisProject* project : std::as_const(projects)) {
     project->blockUpdateItems(false);
   }
 
@@ -667,7 +667,7 @@ void CGisWorkspace::addEleToWptTrkByKey(const QList<IGisItem::key_t>& keys) {
     }
   }
 
-  for (IGisProject* project : qAsConst(projects)) {
+  for (IGisProject* project : std::as_const(projects)) {
     project->blockUpdateItems(false);
   }
 
@@ -954,7 +954,7 @@ void CGisWorkspace::colorTrkByKey(const QList<IGisItem::key_t>& keys) {
       }
     }
 
-    for (IGisProject* project : qAsConst(projects)) {
+    for (IGisProject* project : std::as_const(projects)) {
       project->blockUpdateItems(false);
     }
   }
@@ -1215,7 +1215,7 @@ void CGisWorkspace::tagItemsByKey(const QList<IGisItem::key_t>& keys) {
   dlg.exec();
 
   if (dlg.result() == QDialog::Accepted) {
-    for (IGisItem* gisItem : qAsConst(items)) {
+    for (IGisItem* gisItem : std::as_const(items)) {
       if (dlg.getRatingChanged()) {
         gisItem->setRating(dlg.getRating());
       }

@@ -1180,7 +1180,7 @@ QMap<searchProperty_e, CGisItemWpt::fSearch> CGisItemWpt::initKeywordLambdaMap()
   });
   map.insert(eSearchPropertyGeocacheLoggedBy, [](CGisItemWpt* item) {
     searchValue_t searchValue;
-    for (const geocachelog_t& log : qAsConst(item->geocache.logs)) {
+    for (const geocachelog_t& log : std::as_const(item->geocache.logs)) {
       searchValue.str1 += log.finder + ", ";
     }
     return searchValue;

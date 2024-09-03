@@ -90,7 +90,7 @@ void ITrack::updateData() {
   }
 
   line.clear();
-  for (const QPointF& trkpt : qAsConst(coords)) {
+  for (const QPointF& trkpt : std::as_const(coords)) {
     QPointF pt(trkpt.x(), trkpt.y());
     proj.transform(pt, PJ_INV);
     line << pt;

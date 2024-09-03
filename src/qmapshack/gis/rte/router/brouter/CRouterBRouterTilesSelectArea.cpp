@@ -96,7 +96,7 @@ void CRouterBRouterTilesSelectArea::drawGrid() {
   QPainter painter(this);
   painter.setPen(gridPen);
 
-  for (const QPoint& tile : qAsConst(gridTiles)) {
+  for (const QPoint& tile : std::as_const(gridTiles)) {
     painter.drawPolyline(gridPolygon(tile));
   }
 }

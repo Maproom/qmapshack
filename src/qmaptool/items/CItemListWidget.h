@@ -49,7 +49,7 @@ class CItemListWidget : public QWidget, private Ui::IItemListWidget {
 
     std::sort(items.begin(), items.end(), lessThan);
 
-    for (QListWidgetItem* item : qAsConst(items)) {
+    for (QListWidgetItem* item : std::as_const(items)) {
       listFiles->addItem(item);
     }
 

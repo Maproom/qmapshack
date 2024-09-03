@@ -98,7 +98,7 @@ void CGisSummaryDropZone::dropEvent(QDropEvent* e) {
   CSelectCopyAction::result_e copyActionForAll = CSelectCopyAction::eResultSkip;
   for (const CGisSummary::folder_t& folder : folders) {
     CDBProject* project = new CDBProject(folder.db, folder.id, nullptr);
-    for (IGisItem* gisItem : qAsConst(gisItems)) {
+    for (IGisItem* gisItem : std::as_const(gisItems)) {
       project->insertCopyOfItem(gisItem, -1, copyActionForAll);
     }
 

@@ -79,7 +79,7 @@ void CMouseSelect::findItems(QList<IGisItem*>& items) {
     cntTrk = 0;
     cntRte = 0;
     cntOvl = 0;
-    for (IGisItem* item : qAsConst(items)) {
+    for (IGisItem* item : std::as_const(items)) {
       itemKeys << item->getKey();
       switch (item->type()) {
         case IGisItem::eTypeWpt:
@@ -154,11 +154,11 @@ void CMouseSelect::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect&
   QList<IGisItem*> items;
   findItems(items);
 
-  for (IGisItem* item : qAsConst(items)) {
+  for (IGisItem* item : std::as_const(items)) {
     item->drawHighlight(p);
   }
 
-  for (QPointF pos : qAsConst(posPoiHighlight)) {
+  for (QPointF pos : std::as_const(posPoiHighlight)) {
     if (pos != NOPOINTF) {
       gis->convertRad2Px(pos);
       QRectF r(0, 0, 42, 42);

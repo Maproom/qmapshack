@@ -79,7 +79,7 @@ void CToolBarSetupDialog::configure() const {
       selectedItems << new CDialogItem(action->icon(), "---------------", action->objectName());
     } else {
       QString configuredName = action->objectName();
-      for (QListWidgetItem* const& item : qAsConst(availableItems)) {
+      for (QListWidgetItem* const& item : std::as_const(availableItems)) {
         if (configuredName == dynamic_cast<CDialogItem* const>(item)->actionName) {
           selectedItems << item;
           break;

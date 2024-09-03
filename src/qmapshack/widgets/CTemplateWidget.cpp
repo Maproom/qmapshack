@@ -72,7 +72,7 @@ QString CTemplateWidget::text() {
   std::sort(groups.begin(), groups.end(),
             [](const QGroupBox* g1, const QGroupBox* g2) { return g1->objectName() < g2->objectName(); });
 
-  for (const QGroupBox* group : qAsConst(groups)) {
+  for (const QGroupBox* group : std::as_const(groups)) {
     str += QString("<p><b>%1</b>: ").arg(group->title());
     str += resolveGroup(group);
     str += "</p>";
@@ -88,7 +88,7 @@ QString CTemplateWidget::resolveGroup(const QGroupBox* group) {
     return w1->property("order").toInt() < w2->property("order").toInt();
   });
 
-  for (const QWidget* w : qAsConst(widgets)) {
+  for (const QWidget* w : std::as_const(widgets)) {
     const QString pre(str.isEmpty() ? "" : ", ");
 
     {

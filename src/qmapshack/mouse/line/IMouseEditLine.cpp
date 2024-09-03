@@ -155,7 +155,7 @@ void IMouseEditLine::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRec
     pixelPts.clear();
     pixelSubs.clear();
 
-    for (const IGisLine::point_t& pt : qAsConst(points)) {
+    for (const IGisLine::point_t& pt : std::as_const(points)) {
       pixelLine << pt.pixel;
       pixelPts << pt.pixel;
 
@@ -181,7 +181,7 @@ void IMouseEditLine::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRec
   p.setPen(Qt::NoPen);
   p.setBrush(Qt::white);
   QRect r1(0, 0, 9, 9);
-  for (const QPointF& pt : qAsConst(pixelPts)) {
+  for (const QPointF& pt : std::as_const(pixelPts)) {
     r1.moveCenter(pt.toPoint());
     p.drawRect(r1);
   }
@@ -191,12 +191,12 @@ void IMouseEditLine::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRec
   p.setPen(Qt::NoPen);
   p.setBrush(Qt::black);
   QRect r2(0, 0, 7, 7);
-  for (const QPointF& pt : qAsConst(pixelPts)) {
+  for (const QPointF& pt : std::as_const(pixelPts)) {
     r2.moveCenter(pt.toPoint());
     p.drawRect(r2);
   }
 
-  for (const QPointF& pt : qAsConst(pixelSubs)) {
+  for (const QPointF& pt : std::as_const(pixelSubs)) {
     p.drawEllipse(pt, 2, 2);
   }
 
@@ -450,7 +450,7 @@ void IMouseEditLine::updateStatus() {
   qreal lastEle = points[0].ele;
   QPointF lastPos = points[0].coord;
 
-  for (const IGisLine::point_t& pt1 : qAsConst(points)) {
+  for (const IGisLine::point_t& pt1 : std::as_const(points)) {
     qreal delta = pt1.ele - lastEle;
     if (qAbs(delta) > ASCENT_THRESHOLD) {
       if (delta > 0) {

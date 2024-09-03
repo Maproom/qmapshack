@@ -57,7 +57,7 @@ void IMapOnline::slotQueueChanged() {
 
       QNetworkRequest request;
       request.setUrl(url);
-      for (const rawHeaderItem_t& item : qAsConst(rawHeaderItems)) {
+      for (const rawHeaderItem_t& item : std::as_const(rawHeaderItems)) {
         request.setRawHeader(item.name.toLatin1(), item.value.toLatin1());
       }
       accessManager->get(request);

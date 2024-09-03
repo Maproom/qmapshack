@@ -462,7 +462,7 @@ bool CTcxProject::saveAs(const QString& fn, IGisProject& project) {
   if (activityTrks.size() != 0) {
     tcx.appendChild(activitiesNode);
   }
-  for (CGisItemTrk* trkToBeSaved : qAsConst(activityTrks)) {
+  for (CGisItemTrk* trkToBeSaved : std::as_const(activityTrks)) {
     trkToBeSaved->saveTCXactivity(activitiesNode);
   }
 
@@ -470,7 +470,7 @@ bool CTcxProject::saveAs(const QString& fn, IGisProject& project) {
   if (courseTrks.size() != 0) {
     tcx.appendChild(coursesNode);
   }
-  for (CGisItemTrk* trkToBeSaved : qAsConst(courseTrks)) {
+  for (CGisItemTrk* trkToBeSaved : std::as_const(courseTrks)) {
     trkToBeSaved->saveTCXcourse(coursesNode);
   }
 

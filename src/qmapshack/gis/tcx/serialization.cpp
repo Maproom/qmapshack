@@ -161,7 +161,7 @@ void CGisItemTrk::saveTCXcourse(QDomNode& coursesNode) {
   }
 
   int i = 0;
-  for (const IGisItem::key_t& wptKey : qAsConst(wptKeys))  // browse course points
+  for (const IGisItem::key_t& wptKey : std::as_const(wptKeys))  // browse course points
   {
     CGisItemWpt* wptItem = dynamic_cast<CGisItemWpt*>(project->getItemByKey(wptKey));
     wptItem->saveTCX(courseNode, trkPtToOverwriteDateTimes[i++]);
@@ -185,7 +185,7 @@ void CGisItemTrk::saveTCXactivity(QDomNode& activitiesNode) {
   activityNode.lastChild().appendChild(
       doc.createTextNode(trk.segs[0].pts[0].time.toString("yyyy-MM-dd'T'hh:mm:ss'Z'")));
 
-  for (const CTrackData::trkseg_t& seg : qAsConst(trk.segs)) {
+  for (const CTrackData::trkseg_t& seg : std::as_const(trk.segs)) {
     QDomElement lapElmt = doc.createElement("Lap");
     activityNode.appendChild(lapElmt);
     lapElmt.setAttribute("StartTime", seg.pts[0].time.toString("yyyy-MM-dd'T'hh:mm:ss'Z'"));

@@ -38,7 +38,7 @@ class CRouterBRouterTilesSelectLayout : public QLayout {
   QSize sizeHint() const override { return QSize(200, 200); }
 
   void setGeometry(const QRect& r) override {
-    for (QLayoutItem* item : qAsConst(items)) {
+    for (QLayoutItem* item : std::as_const(items)) {
       item->setGeometry(r);
     }
   }

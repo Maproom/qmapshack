@@ -513,7 +513,7 @@ void CRouterBRouterSetupWizard::slotProfileDownClicked() const {
 void CRouterBRouterSetupWizard::updateProfiles() const {
   const QStringList& profiles = setup->getProfiles();
   QStringList available;
-  for (const QString& profile : qAsConst(setup->onlineProfilesAvailable)) {
+  for (const QString& profile : std::as_const(setup->onlineProfilesAvailable)) {
     if (!profiles.contains(profile)) {
       available << profile;
     }

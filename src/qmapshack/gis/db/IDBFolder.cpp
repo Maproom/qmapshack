@@ -551,7 +551,7 @@ void IDBFolder::setChildIndicator() {
 
 void IDBFolder::addItemsSorted(QList<CDBItem*>& items) {
   sortItems(items);
-  for (CDBItem* item : qAsConst(items)) {
+  for (CDBItem* item : std::as_const(items)) {
     addChild(item);
   }
   items.clear();

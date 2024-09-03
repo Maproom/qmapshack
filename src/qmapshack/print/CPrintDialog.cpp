@@ -207,7 +207,7 @@ void CPrintDialog::slotPrint() {
   int n = 0;
   PROGRESS_SETUP(tr("Printing pages."), 0, N, this);
 
-  for (const QPointF& pt : qAsConst(centers)) {
+  for (const QPointF& pt : std::as_const(centers)) {
     if (!first) {
       printer.newPage();
     } else {

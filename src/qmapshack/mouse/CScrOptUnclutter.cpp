@@ -61,7 +61,7 @@ void CScrOptUnclutter::clear() {
 void CScrOptUnclutter::mouseMove(const QPoint& pos) {
   IScrOpt::mouseMove(pos);
 
-  for (const item_t& item : qAsConst(items)) {
+  for (const item_t& item : std::as_const(items)) {
     if (item.active.contains(mousePos) || item.text.contains(mousePos)) {
       if (!doSpecialCursor) {
         CCanvas::setOverrideCursor(Qt::PointingHandCursor, "CScrOptUnclutter::mouseMoveEvent");
@@ -97,7 +97,7 @@ IGisItem::key_t CScrOptUnclutter::getItemKey(int index) {
 }
 
 const CScrOptUnclutter::item_t* CScrOptUnclutter::selectItem(const QPoint& point) {
-  for (const item_t& item : qAsConst(items)) {
+  for (const item_t& item : std::as_const(items)) {
     if (item.active.contains(point) || item.text.contains(point)) {
       return &item;
     }
@@ -124,7 +124,7 @@ void CScrOptUnclutter::draw(QPainter& p) {
     }
   }
 
-  for (const item_t& item : qAsConst(items)) {
+  for (const item_t& item : std::as_const(items)) {
     p.setPen(Qt::NoPen);
     p.setBrush(QColor(255, 255, 255, 255));
     p.drawEllipse(item.area.center(), 20, 20);

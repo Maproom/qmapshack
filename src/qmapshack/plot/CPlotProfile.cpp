@@ -149,7 +149,7 @@ void CPlotProfile::updateData() {
 
   if (trk->isInterpolationEnabled()) {
     QPolygonF spline;
-    for (const QPointF& pt : qAsConst(lineEle)) {
+    for (const QPointF& pt : std::as_const(lineEle)) {
       spline << QPointF(pt.x(), trk->getElevationInterpolated(pt.x()) * elevationFactor);
     }
 

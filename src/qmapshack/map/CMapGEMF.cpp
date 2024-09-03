@@ -104,7 +104,7 @@ CMapGEMF::CMapGEMF(const QString& filename, CMapDraw* parent) : IMap(eFeatVisibi
 
   for (quint32 i = 0; i <= MAX_ZOOM_LEVEL; i++) {
     QList<range_t> rangeZoom;
-    for (const range_t& range : qAsConst(ranges)) {
+    for (const range_t& range : std::as_const(ranges)) {
       if (range.zoomlevel == i) {
         rangeZoom << range;
         minZoom = qMin(i, minZoom);
@@ -200,7 +200,7 @@ void CMapGEMF::draw(IDrawContext::buffer_t& buf) {
 quint64 CMapGEMF::getFilenameFromAddress(const quint64 offset, QString& filename) {
   quint64 temp = offset;
 
-  for (const gemffile_t& gf : qAsConst(files)) {
+  for (const gemffile_t& gf : std::as_const(files)) {
     if (temp < gf.size) {
       filename = gf.filename;
 

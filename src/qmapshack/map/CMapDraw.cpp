@@ -89,7 +89,7 @@ void CMapDraw::setupMapPath(const QString& path) {
 void CMapDraw::setupMapPath(const QStringList& paths) {
   mapPaths = paths;
 
-  for (CMapDraw* map : qAsConst(maps)) {
+  for (CMapDraw* map : std::as_const(maps)) {
     QStringList keys;
     map->saveActiveMapsList(keys);
     map->buildMapList();
@@ -269,7 +269,7 @@ void CMapDraw::buildMapList() {
 
   QSet<QString> maps;
 
-  for (const QString& path : qAsConst(mapPaths)) {
+  for (const QString& path : std::as_const(mapPaths)) {
     QDir dir(path);
 
     // find available maps

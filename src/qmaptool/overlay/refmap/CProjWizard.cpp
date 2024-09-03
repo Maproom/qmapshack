@@ -52,7 +52,7 @@ CProjWizard::CProjWizard(QLineEdit& line, QWidget* parent) : QDialog(parent), li
   }
   std::sort(list.begin(), list.end(), mitabLessThan);
 
-  for (const mitab_entry_t& entry : qAsConst(list)) {
+  for (const mitab_entry_t& entry : std::as_const(list)) {
     comboDatum->addItem(entry.name, entry.idx);
   }
 

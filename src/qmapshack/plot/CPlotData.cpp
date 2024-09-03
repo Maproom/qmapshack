@@ -55,7 +55,7 @@ void CPlotData::setLimits() {
     ymax = p.y();
   }
 
-  for (const line_t& line : qAsConst(lines)) {
+  for (const line_t& line : std::as_const(lines)) {
     const QPolygonF& points = line.points;
     for (const QPointF& p : points) {
       if (p.y() != NOFLOAT) {

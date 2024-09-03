@@ -81,7 +81,7 @@ void CDemDraw::setupDemPath(const QString& path) {
 void CDemDraw::setupDemPath(const QStringList& paths) {
   demPaths = paths;
 
-  for (CDemDraw* dem : qAsConst(dems)) {
+  for (CDemDraw* dem : std::as_const(dems)) {
     QStringList keys;
     dem->saveActiveMapsList(keys);
     dem->buildMapList();
@@ -124,7 +124,7 @@ void CDemDraw::buildMapList() {
   QMutexLocker lock(&CDemItem::mutexActiveDems);
   demList->clear();
 
-  for (const QString& path : qAsConst(demPaths)) {
+  for (const QString& path : std::as_const(demPaths)) {
     QDir dir(path);
     // find available maps
     const QStringList& filenames = dir.entryList(supportedFormats, QDir::Files | QDir::Readable, QDir::Name);

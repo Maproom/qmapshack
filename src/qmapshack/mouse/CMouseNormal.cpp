@@ -266,7 +266,7 @@ void CMouseNormal::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect&
         break;
       }
 
-      for (IGisItem* item : qAsConst(items)) {
+      for (IGisItem* item : std::as_const(items)) {
         item->drawHighlight(p);
         screenUnclutter->addItem(item);
       }

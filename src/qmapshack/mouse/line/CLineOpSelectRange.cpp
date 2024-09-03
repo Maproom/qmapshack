@@ -159,7 +159,7 @@ void CLineOpSelectRange::drawFg(QPainter& p) {
           r.moveCenter(points[i].pixel);
           p.drawRect(r);
 
-          for (const IGisLine::subpt_t& subpt : qAsConst(points[i].subpts)) {
+          for (const IGisLine::subpt_t& subpt : std::as_const(points[i].subpts)) {
             p.drawEllipse(subpt.pixel, 2, 2);
           }
         }

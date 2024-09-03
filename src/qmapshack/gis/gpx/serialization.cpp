@@ -299,7 +299,7 @@ static void writeXml(QDomNode& ext, const QHash<QString, QVariant>& extensions) 
     return CKnownExtension::get(k1).order < CKnownExtension::get(k2).order;
   });
 
-  for (const QString& key : qAsConst(keys)) {
+  for (const QString& key : std::as_const(keys)) {
     QStringList tags = key.split('|', Qt::SkipEmptyParts);
 
     if (tags.size() == 1) {
@@ -312,7 +312,7 @@ static void writeXml(QDomNode& ext, const QHash<QString, QVariant>& extensions) 
 
       QString lastTag = tags.last();
       tags.pop_back();
-      for (const QString& tag : qAsConst(tags)) {
+      for (const QString& tag : std::as_const(tags)) {
         QDomNode child = node.firstChildElement(tag);
         if (child.isNull()) {
           QDomElement elem = doc.createElement(tags.first());
@@ -639,7 +639,7 @@ void CGisItemWpt::writeGcExt(QDomNode& xmlCache) {
     QDomElement xmlLogs = xmlCache.ownerDocument().createElement("groundspeak:logs");
     xmlCache.appendChild(xmlLogs);
 
-    for (const geocachelog_t& log : qAsConst(geocache.logs)) {
+    for (const geocachelog_t& log : std::as_const(geocache.logs)) {
       QDomElement xmlLog = xmlCache.ownerDocument().createElement("groundspeak:log");
       xmlLogs.appendChild(xmlLog);
 
@@ -736,7 +736,7 @@ void CGisItemTrk::save(QDomNode& gpx, bool strictGpx11) {
     writeXml(gpxx, "gpxx:DisplayColor", trk.color);
   }
 
-  for (const CTrackData::trkseg_t& seg : qAsConst(trk.segs)) {
+  for (const CTrackData::trkseg_t& seg : std::as_const(trk.segs)) {
     QDomElement xmlTrkseg = doc.createElement("trkseg");
     xmlTrk.appendChild(xmlTrkseg);
 
@@ -803,7 +803,7 @@ void CGisItemRte::save(QDomNode& gpx, bool strictGpx11) {
     writeXml(xmlExt, "ql:key", key.item);
   }
 
-  for (const rtept_t& pt : qAsConst(rte.pts)) {
+  for (const rtept_t& pt : std::as_const(rte.pts)) {
     QDomElement xmlRtept = doc.createElement("rtept");
     xmlRte.appendChild(xmlRtept);
     writeWpt(xmlRtept, pt, strictGpx11);
@@ -861,7 +861,7 @@ void CGisItemOvlArea::save(QDomNode& gpx, bool strictGpx11) {
   writeXml(xmlArea, "ql:flags", flags);
   writeXml(xmlArea, history);
 
-  for (const pt_t& pt : qAsConst(area.pts)) {
+  for (const pt_t& pt : std::as_const(area.pts)) {
     QDomElement xmlPt = doc.createElement("ql:point");
     xmlArea.appendChild(xmlPt);
     writeWpt(xmlPt, pt, strictGpx11);

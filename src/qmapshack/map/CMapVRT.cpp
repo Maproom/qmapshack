@@ -210,7 +210,7 @@ bool CMapVRT::testForOverviews(const QString& filename) {
     return false;
   }
 
-  for (const QString& file : qAsConst(files)) {
+  for (const QString& file : std::as_const(files)) {
     using pGDALDataset = QSharedPointer<GDALDataset>;
     pGDALDataset _dataset = pGDALDataset((GDALDataset*)GDALOpen(file.toUtf8(), GA_ReadOnly), GDALClose);
     // _dataset will be destroyed automatically by shared pointer.

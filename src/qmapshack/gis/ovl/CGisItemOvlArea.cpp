@@ -133,7 +133,7 @@ QPointF CGisItemOvlArea::getPointCloseBy(const QPoint& screenPos) {
   qint32 i = 0;
   qint32 idx = NOIDX;
   qint32 d = NOINT;
-  for (const QPointF& point : qAsConst(polygonArea)) {
+  for (const QPointF& point : std::as_const(polygonArea)) {
     int tmp = (screenPos - point).manhattanLength();
     if (tmp < d) {
       idx = i;
@@ -185,7 +185,7 @@ void CGisItemOvlArea::deriveSecondaryData() {
   qreal south = 90;
   qreal west = 180;
 
-  for (const pt_t& pt : qAsConst(area.pts)) {
+  for (const pt_t& pt : std::as_const(area.pts)) {
     if (pt.lon < west) {
       west = pt.lon;
     }
@@ -238,7 +238,7 @@ void CGisItemOvlArea::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRe
 
   QPointF pt1;
 
-  for (const pt_t& pt : qAsConst(area.pts)) {
+  for (const pt_t& pt : std::as_const(area.pts)) {
     pt1.setX(pt.lon);
     pt1.setY(pt.lat);
     pt1 *= DEG_TO_RAD;

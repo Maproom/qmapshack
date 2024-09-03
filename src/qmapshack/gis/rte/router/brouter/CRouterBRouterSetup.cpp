@@ -251,7 +251,7 @@ void CRouterBRouterSetup::readLocalProfiles() {
       changed = true;
     }
   }
-  for (const QString& profile : qAsConst(installedProfiles)) {
+  for (const QString& profile : std::as_const(installedProfiles)) {
     if (!localProfiles.contains(profile)) {
       localProfiles << profile;
       changed = true;

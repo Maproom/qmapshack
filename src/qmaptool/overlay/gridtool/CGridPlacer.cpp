@@ -203,7 +203,7 @@ void CGridPlacer::slotSetArea() {
   qreal left = NOFLOAT;
   qreal right = -NOFLOAT;
 
-  for (const CGridPoint& point : qAsConst(points)) {
+  for (const CGridPoint& point : std::as_const(points)) {
     const QPointF& pt = point.getPoint();
 
     top = qMin(pt.y(), top);

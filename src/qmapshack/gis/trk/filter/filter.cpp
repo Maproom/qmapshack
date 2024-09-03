@@ -97,7 +97,7 @@ void CGisItemTrk::filterRemoveInvalidPoints() {
 
   for (CTrackData::trkseg_t& seg : trk.segs) {
     QVector<CTrackData::trkpt_t> pts;
-    for (const CTrackData::trkpt_t& pt : qAsConst(seg.pts)) {
+    for (const CTrackData::trkpt_t& pt : std::as_const(seg.pts)) {
       if (pt.isInvalid(CTrackData::trkpt_t::invalid_e(invalidMask))) {
         nothingDone = false;
         continue;
@@ -130,7 +130,7 @@ void CGisItemTrk::filterDelete() {
 
   for (CTrackData::trkseg_t& seg : trk.segs) {
     QVector<CTrackData::trkpt_t> pts;
-    for (const CTrackData::trkpt_t& pt : qAsConst(seg.pts)) {
+    for (const CTrackData::trkpt_t& pt : std::as_const(seg.pts)) {
       if (pt.isHidden()) {
         nothingDone = false;
         continue;
@@ -437,7 +437,7 @@ void CGisItemTrk::filterSplitSegment() {
   }
 
   int part = 0;
-  for (const CTrackData::trkseg_t& seg : qAsConst(trk.segs)) {
+  for (const CTrackData::trkseg_t& seg : std::as_const(trk.segs)) {
     if (0 < seg.pts.count()) {
       qint32 idx1 = seg.pts[0].idxTotal;
       qint32 idx2 = seg.pts[seg.pts.count() - 1].idxTotal;
@@ -533,7 +533,7 @@ void CGisItemTrk::filterLoopsCut(qreal minLoopLength) {
 
       bool firstCycle = true;
       CTrackData::trkpt_t prevScannedPt;
-      for (const CTrackData::trkpt_t& scannedPt : qAsConst(pts)) {
+      for (const CTrackData::trkpt_t& scannedPt : std::as_const(pts)) {
         if (scannedPt.idxTotal == pts[pts.size() - 2].idxTotal) {
           break;
         }

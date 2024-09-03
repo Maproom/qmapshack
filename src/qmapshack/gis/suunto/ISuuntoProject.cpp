@@ -39,7 +39,7 @@ void ISuuntoProject::fillTrackPointsFromSamples(QList<sample_t>& samplesList, QL
   int lap = 0;
   CTrackData::trkseg_t* seg = &(trk.segs[lap]);
 
-  for (const sample_t& sample : qAsConst(samplesList)) {
+  for (const sample_t& sample : std::as_const(samplesList)) {
     if (sample.time > lapsList[lap]) {
       lap++;
       seg = &(trk.segs[lap]);

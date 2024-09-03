@@ -124,7 +124,7 @@ CDBProject::CDBProject(const QString& filename, IDBFolder* parentFolder, CGisLis
   addChildren(items);
 
   // set change indication else the item will not be saved
-  for (QTreeWidgetItem* item : qAsConst(items)) {
+  for (QTreeWidgetItem* item : std::as_const(items)) {
     IGisItem* gisItem = dynamic_cast<IGisItem*>(item);
     if (gisItem) {
       gisItem->updateDecoration(IGisItem::eMarkChanged, IGisItem::eMarkNone);
@@ -602,7 +602,7 @@ void CDBProject::showItems(CEvtD2WShowItems* evt, action_e action2ForAll) {
     qDeleteAll(takeChildren());
   }
 
-  for (const evt_item_t& item : qAsConst(evt->items)) {
+  for (const evt_item_t& item : std::as_const(evt->items)) {
     IGisItem* gisItem = IGisItem::newGisItem(item.type, item.id, db, this);
 
     /* [Issue #72] Database/Workspace inconsistency in QMS 1.4.0
@@ -642,7 +642,7 @@ void CDBProject::hideItems(CEvtD2WHideItems* evt) {
 
   QMessageBox::StandardButtons last = QMessageBox::YesToAll;
 
-  for (const QString& k : qAsConst(evt->keys)) {
+  for (const QString& k : std::as_const(evt->keys)) {
     key.item = k;
     delItemByKey(key, last);
   }

@@ -267,7 +267,7 @@ void CDetailsGeoCache::slotRequestFinished(QNetworkReply* reply) {
 
   bool watchOut = false;
   QStringList lines = asw.split("\n");
-  for (const QString& line : qAsConst(lines)) {
+  for (const QString& line : std::as_const(lines)) {
     if (!watchOut && re1.match(line).hasMatch()) {
       watchOut = true;
     } else if (watchOut) {

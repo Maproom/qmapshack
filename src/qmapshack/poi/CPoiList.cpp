@@ -73,7 +73,7 @@ void CPoiList::sort() {
   std::sort(items1.begin(), items1.end(), &sortByName<CPoiFileItem>);
 
   QList<QTreeWidgetItem*> items2;
-  for (CPoiFileItem* item : qAsConst(items1)) {
+  for (CPoiFileItem* item : std::as_const(items1)) {
     items2 << item;
   }
   treeWidget->addTopLevelItems(items2);

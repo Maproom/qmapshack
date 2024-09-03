@@ -95,7 +95,7 @@ void CMapList::sort() {
   std::sort(items1.begin(), items1.end(), &sortByName<CMapItem>);
 
   QList<QTreeWidgetItem*> items2;
-  for (CMapItem* item : qAsConst(items1)) {
+  for (CMapItem* item : std::as_const(items1)) {
     items2 << item;
   }
   treeWidget->addTopLevelItems(items2);

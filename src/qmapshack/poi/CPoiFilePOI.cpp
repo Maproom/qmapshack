@@ -127,7 +127,7 @@ void CPoiFilePOI::draw(IDrawContext::buffer_t& buf) {
         if (poi->needsRedraw()) {
           return;
         }
-        for (quint64 poiToDrawID : qAsConst(loadedPoisByArea)[categoryID][minLonM10][minLatM10]) {
+        for (quint64 poiToDrawID : std::as_const(loadedPoisByArea)[categoryID][minLonM10][minLatM10]) {
           const CPoiItemPOI& poiToDraw = loadedPois[poiToDrawID];
           QPointF pt = poiToDraw.getCoordinates();
           poi->convertRad2Px(pt);
@@ -158,7 +158,7 @@ void CPoiFilePOI::draw(IDrawContext::buffer_t& buf) {
   }
 
   // Draw Icons
-  for (const poiGroup_t& poiGroup : qAsConst(displayedPois)) {
+  for (const poiGroup_t& poiGroup : std::as_const(displayedPois)) {
     QFontMetricsF fm(CMainWindow::self().getMapFont());
 
     QPixmap icon;
@@ -220,7 +220,7 @@ bool CPoiFilePOI::findPoiCloseBy(const QPoint& px, QSet<IPoiItem>& poiItems, QLi
 
   poiGroup_t poiGroup;
   if (getPoiGroupCloseBy(px, poiGroup)) {
-    for (quint64 key : qAsConst(poiGroup.pois)) {
+    for (quint64 key : std::as_const(poiGroup.pois)) {
       poiItems.insert(loadedPois[key].toPoi());
     }
     posPoiHighlight.append(poiGroup.iconCenter);
@@ -252,7 +252,7 @@ void CPoiFilePOI::findPoisIn(const QRectF& degRect, QSet<IPoiItem>& pois, QList<
             !loadedPoisByArea[categoryID][minLonM10].contains(minLatM10)) {
           loadPOIsFromFile(categoryID, minLonM10, minLatM10);
         }
-        for (quint64 poiFoundID : qAsConst(loadedPoisByArea)[categoryID][minLonM10][minLatM10]) {
+        for (quint64 poiFoundID : std::as_const(loadedPoisByArea)[categoryID][minLonM10][minLatM10]) {
           const CPoiItemPOI& poiItemFound = loadedPois[poiFoundID];
           if (!copiedItems.contains(poiItemFound.getKey())) {
             // Maybe look through the whole code of selecting items from a map to avoid this conversion
@@ -267,7 +267,7 @@ void CPoiFilePOI::findPoisIn(const QRectF& degRect, QSet<IPoiItem>& pois, QList<
   }
 
   // Find Highlights
-  for (const poiGroup_t& poiGroup : qAsConst(displayedPois)) {
+  for (const poiGroup_t& poiGroup : std::as_const(displayedPois)) {
     if (degRect.contains(poiGroup.iconCenter * RAD_TO_DEG)) {
       posPoiHighlight.append(poiGroup.iconCenter);
     }
@@ -309,7 +309,7 @@ bool CPoiFilePOI::getToolTip(const QPoint& px, QString& str) const {
       str += "<i>" + tr("Zoom in to see more details.") + "</i>";
       if (poiGroup.pois.count() <= 10) {
         str += "<br>\n" + tr("POIs at this point:");
-        for (quint64 poiID : qAsConst(poiGroup.pois)) {
+        for (quint64 poiID : std::as_const(poiGroup.pois)) {
           str += "<br>\n<b>" + loadedPois[poiID].getName() + "</b>";
         }
       }

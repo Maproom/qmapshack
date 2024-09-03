@@ -40,7 +40,7 @@ CWptIconManager::~CWptIconManager() {
 }
 
 void CWptIconManager::removeNumberedBullets() {
-  for (const QString& filename : qAsConst(mapNumberedBullets)) {
+  for (const QString& filename : std::as_const(mapNumberedBullets)) {
     QFile::remove(filename);
   }
   mapNumberedBullets.clear();
@@ -304,7 +304,7 @@ QMenu* CWptIconManager::getWptIconMenu(const QString& title, QObject* obj, const
 
   std::sort(keys.begin(), keys.end(), sortByString);
 
-  for (const QString& key : qAsConst(keys)) {
+  for (const QString& key : std::as_const(keys)) {
     const QString& icon = wptIcons[key].path;
     QPixmap pixmap = loadIcon(icon);
 

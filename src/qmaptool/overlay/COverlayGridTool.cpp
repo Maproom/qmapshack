@@ -146,7 +146,7 @@ bool COverlayGridTool::drawFx(QPainter& p, CCanvas::redraw_e needsRedraw) {
     p.setPen(QPen(Qt::white, 1));
     p.setBrush(Qt::darkGreen);
 
-    for (COverlayRefMapPoint* point : qAsConst(refPoints)) {
+    for (COverlayRefMapPoint* point : std::as_const(refPoints)) {
       QPointF pt = point->getPtPtx();
       context->convertMap2Screen(pt);
       dot1.moveCenter(pt);

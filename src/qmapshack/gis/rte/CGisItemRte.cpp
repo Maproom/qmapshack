@@ -142,7 +142,7 @@ IGisItem* CGisItemRte::createClone() {
 
 bool CGisItemRte::isCalculated() {
   bool yes = true;
-  for (const rtept_t& pt : qAsConst(rte.pts)) {
+  for (const rtept_t& pt : std::as_const(rte.pts)) {
     if ((pt.fakeSubpt.lat == NOFLOAT) || (pt.fakeSubpt.lon == NOFLOAT)) {
       yes = false;
       break;
@@ -417,7 +417,7 @@ QPointF CGisItemRte::getPointCloseBy(const QPoint& screenPos) {
 
   qint32 d = NOINT;
   QPointF pt = NOPOINTF;
-  for (const QPointF& point : qAsConst(line)) {
+  for (const QPointF& point : std::as_const(line)) {
     int tmp = (screenPos - point).manhattanLength();
     if (tmp < d) {
       pt = point;
@@ -467,7 +467,7 @@ void CGisItemRte::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
   QVector<QPixmap> icons;
   QVector<QPointF> focus;
 
-  for (const rtept_t& rtept : qAsConst(rte.pts)) {
+  for (const rtept_t& rtept : std::as_const(rte.pts)) {
     QPointF pt(rtept.lon * DEG_TO_RAD, rtept.lat * DEG_TO_RAD);
 
     gis->convertRad2Px(pt);
@@ -588,7 +588,7 @@ void CGisItemRte::drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF
     return;
   }
 
-  for (const rtept_t& rtept : qAsConst(rte.pts)) {
+  for (const rtept_t& rtept : std::as_const(rte.pts)) {
     QPointF pt(rtept.lon * DEG_TO_RAD, rtept.lat * DEG_TO_RAD);
 
     gis->convertRad2Px(pt);
@@ -737,7 +737,7 @@ QPointF CGisItemRte::setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode, c
     quint32 i = 0;
     qint32 d1 = NOINT;
 
-    for (const QPointF& point : qAsConst(line)) {
+    for (const QPointF& point : std::as_const(line)) {
       int tmp = (pt - point).manhattanLength();
       if (tmp <= d1) {
         idx = i;
@@ -760,7 +760,7 @@ QPointF CGisItemRte::setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode, c
 
 const CGisItemRte::subpt_t* CGisItemRte::getSubPtByIndex(quint32 idx) {
   quint32 cnt = 0;
-  for (const rtept_t& rtept : qAsConst(rte.pts)) {
+  for (const rtept_t& rtept : std::as_const(rte.pts)) {
     if (cnt == idx) {
       return &rtept.fakeSubpt;
     }

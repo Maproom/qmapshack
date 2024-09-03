@@ -220,7 +220,7 @@ void CRouterRoutino::buildDatabaseList() {
 
   IAppSetup* setup = IAppSetup::getPlatformInstance();
 
-  for (const QString& path : qAsConst(dbPaths)) {
+  for (const QString& path : std::as_const(dbPaths)) {
     QDir dir(path);
     const QStringList& filenames =
         dir.entryList(QStringList("*segments.mem"), QDir::Files | QDir::Readable, QDir::Name);
@@ -369,7 +369,7 @@ void CRouterRoutino::calcRoute(const IGisItem::key_t& key) {
 
     int idx = 0;
     QVector<Routino_Waypoint*> waypoints(line.size(), nullptr);
-    for (const IGisLine::point_t& pt : qAsConst(line)) {
+    for (const IGisLine::point_t& pt : std::as_const(line)) {
       waypoints[idx] = Routino_FindWaypoint(data, profile, pt.coord.y() * RAD_TO_DEG, pt.coord.x() * RAD_TO_DEG);
       if (waypoints[idx] == nullptr) {
         throw xlateRoutinoError(Routino_errno);

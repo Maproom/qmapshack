@@ -91,7 +91,7 @@ void CDemList::sort() {
   std::sort(items1.begin(), items1.end(), &sortByName<CDemItem>);
 
   QList<QTreeWidgetItem*> items2;
-  for (CDemItem* item : qAsConst(items1)) {
+  for (CDemItem* item : std::as_const(items1)) {
     items2 << item;
   }
   treeWidget->addTopLevelItems(items2);

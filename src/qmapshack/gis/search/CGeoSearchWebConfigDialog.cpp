@@ -56,7 +56,7 @@ CGeoSearchWebConfigDialog::CGeoSearchWebConfigDialog(QList<CGeoSearchWeb::servic
 void CGeoSearchWebConfigDialog::setupTreeWidget() {
   treeServices->clear();
 
-  for (const CGeoSearchWeb::service_t& service : qAsConst(services)) {
+  for (const CGeoSearchWeb::service_t& service : std::as_const(services)) {
     QTreeWidgetItem* item = new QTreeWidgetItem(treeServices);
     item->setText(0, service.name);
     item->setIcon(0, QIcon(service.icon));

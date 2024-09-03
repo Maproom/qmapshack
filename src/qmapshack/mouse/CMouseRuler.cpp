@@ -148,7 +148,7 @@ void CMouseRuler::slotToWpt() {
 
   bool first = true;
   QMutexLocker lock(&IGisItem::mutexItems);
-  for (const QPointF& pt : qAsConst(ruler)) {
+  for (const QPointF& pt : std::as_const(ruler)) {
     if (!first) {
       // update name after the first one
       name = CGisItemWpt::getLastName(name);

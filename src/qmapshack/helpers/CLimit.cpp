@@ -161,7 +161,7 @@ void CLimit::setMax(const qreal& val) {
 QString CLimit::getUnit() const { return funcGetUnit(source); }
 
 void CLimit::updateSys() {
-  for (CLimit* limit : qAsConst(allLimits)) {
+  for (CLimit* limit : std::as_const(allLimits)) {
     if (limit != this) {
       limit->updateSys(source);
     }

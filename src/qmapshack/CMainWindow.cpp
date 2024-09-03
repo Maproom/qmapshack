@@ -294,14 +294,14 @@ CMainWindow::CMainWindow() : id(QRandomGenerator::global()->generate()) {
 
   if (cfg.contains("MainWindow/activedocks")) {
     const QStringList& dockNames = cfg.value("MainWindow/activedocks").toStringList();
-    for (QDockWidget* const& dock : qAsConst(docks)) {
+    for (QDockWidget* const& dock : std::as_const(docks)) {
       if (dockNames.contains(dock->objectName())) {
         activeDocks << dock;
       }
     }
   }
 
-  for (QDockWidget* const& dock : qAsConst(docks)) {
+  for (QDockWidget* const& dock : std::as_const(docks)) {
     connect(dock, &QDockWidget::visibilityChanged, this, &CMainWindow::slotDockVisibilityChanged);
     connect(dock, &QDockWidget::topLevelChanged, this, &CMainWindow::slotDockFloating);
   }
@@ -464,7 +464,7 @@ CMainWindow::CMainWindow() : id(QRandomGenerator::global()->generate()) {
   prepareMenuForMac();
 
   // make sure all actions that have a shortcut are available even when menu and toolbar are not visible
-  for (QAction* action : qAsConst(availableActions)) {
+  for (QAction* action : std::as_const(availableActions)) {
     if (!action->shortcuts().isEmpty()) {
       addAction(action);
     }
@@ -495,7 +495,7 @@ CMainWindow::~CMainWindow() {
   cfg.setValue("geometry", saveGeometry());
   cfg.setValue("units", IUnit::self().type);
   QStringList activeDockNames;
-  for (QDockWidget* const& dock : qAsConst(activeDocks)) {
+  for (QDockWidget* const& dock : std::as_const(activeDocks)) {
     activeDockNames << dock->objectName();
   }
   cfg.setValue("activedocks", activeDockNames);
@@ -1374,7 +1374,7 @@ void CMainWindow::showDocks() const {
 
 void CMainWindow::hideDocks() {
   activeDocks.clear();
-  for (QDockWidget* const& dock : qAsConst(docks)) {
+  for (QDockWidget* const& dock : std::as_const(docks)) {
     if (!dock->isHidden()) {
       dock->hide();
       activeDocks << dock;
@@ -1396,7 +1396,7 @@ void CMainWindow::slotDockVisibilityChanged(bool visible) {
   if (visible) {
     activeDocks.clear();
   } else {
-    for (QDockWidget* const& dock : qAsConst(docks)) {
+    for (QDockWidget* const& dock : std::as_const(docks)) {
       if (!dock->isHidden()) {
         visible = true;
         break;

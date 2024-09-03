@@ -126,7 +126,7 @@ void CDateTimeEditor::paintEvent(QPaintEvent* /*event*/) {
   }
 
   painter.setRenderHint(QPainter::Antialiasing);
-  for (const CharacterInfo& c : qAsConst(m_characters)) {
+  for (const CharacterInfo& c : std::as_const(m_characters)) {
     const QRect r = getCharacterRect(c.m_position);
     if (c.m_position == m_selectedPosition) {
       painter.setPen(pal.highlightedText().color());
@@ -326,7 +326,7 @@ bool CDateTimeEditor::selectFirstPosition() {
   m_selectedPosition = -1;
   m_selectedGroup = NONE;
 
-  for (const CharacterInfo& c : qAsConst(m_characters)) {
+  for (const CharacterInfo& c : std::as_const(m_characters)) {
     if (c.isEditable()) {
       found = true;
       m_selectedPosition = c.m_position;

@@ -145,7 +145,7 @@ void CSelectDoubleListWidget::slotUp() const {
   std::sort(indices.begin(), indices.end());
 
   int i = 0;
-  for (int index : qAsConst(indices)) {
+  for (int index : std::as_const(indices)) {
     if (index > i) {
       listSelected->insertItem(index - 1, listSelected->takeItem(index));
       listSelected->setCurrentRow(index - 1, QItemSelectionModel::Select);
@@ -164,7 +164,7 @@ void CSelectDoubleListWidget::slotDown() const {
   std::sort(indices.begin(), indices.end(), [](int a, int b) { return a > b; });
 
   int i = listSelected->count() - 1;
-  for (int index : qAsConst(indices)) {
+  for (int index : std::as_const(indices)) {
     if (index < i) {
       listSelected->insertItem(index + 1, listSelected->takeItem(index));
       listSelected->setCurrentRow(index + 1, QItemSelectionModel::Select);

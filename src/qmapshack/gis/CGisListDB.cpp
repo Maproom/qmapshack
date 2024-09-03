@@ -492,7 +492,7 @@ void CGisListDB::slotDelFolder() {
   }
 
   // iterate over all items to be deleted.
-  for (QTreeWidgetItem* item : qAsConst(itemsToDelete)) {
+  for (QTreeWidgetItem* item : std::as_const(itemsToDelete)) {
     // Test if the item's parent is also in the list.
     // If it is skip it because it will be deleted together with its parent.
     if (itemsToDelete.contains(item->parent())) {
@@ -626,7 +626,7 @@ void CGisListDB::slotMoveFolder() {
   }
 
   // iterate over all items to be deleted.
-  for (IDBFolder* folder : qAsConst(foldersToDelete)) {
+  for (IDBFolder* folder : std::as_const(foldersToDelete)) {
     // Test if the item's parent is also in the list.
     // If it is skip it because it will be deleted together with it's parent.
     if (foldersToDelete.contains(dynamic_cast<IDBFolder*>(folder->parent()))) {
@@ -736,7 +736,7 @@ void CGisListDB::slotDelLostFoundItem() {
   }
 
   qDeleteAll(delItems);
-  for (CDBFolderLostFound* folder : qAsConst(folders)) {
+  for (CDBFolderLostFound* folder : std::as_const(folders)) {
     folder->update();
 
     IDBFolderSql* dbfolder = folder->getDBFolder();
@@ -800,13 +800,13 @@ void CGisListDB::slotDelItem() {
   }
 
   qDeleteAll(dbItems);
-  for (IDBFolderSql* dbFolder : qAsConst(dbFolders)) {
+  for (IDBFolderSql* dbFolder : std::as_const(dbFolders)) {
     dbFolder->updateLostFound();
     dbFolder->announceChange();
   }
 
   // tell all folders to update their statistics and waypoint/track correlations
-  for (IDBFolder* folder : qAsConst(folders)) {
+  for (IDBFolder* folder : std::as_const(folders)) {
     folder->updateItemsOnWks();
   }
 }

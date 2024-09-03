@@ -170,10 +170,10 @@ CCanvas::~CCanvas() {
   saveSizeTrackProfile();
 
   /* stop running drawing-threads and don't destroy unless they have finished*/
-  for (IDrawContext* context : qAsConst(allDrawContext)) {
+  for (IDrawContext* context : std::as_const(allDrawContext)) {
     context->quit();
   }
-  for (IDrawContext* context : qAsConst(allDrawContext)) {
+  for (IDrawContext* context : std::as_const(allDrawContext)) {
     context->wait();
   }
 
@@ -476,7 +476,7 @@ void CCanvas::reportStatus(const QString& key, const QString& msg) {
   QString report;
   QStringList keys = statusMessages.keys();
   keys.sort();
-  for (const QString& key : qAsConst(keys)) {
+  for (const QString& key : std::as_const(keys)) {
     report += statusMessages[key] + "\n";
   }
 
@@ -1015,7 +1015,7 @@ void CCanvas::setup() {
 QString CCanvas::getProjection() { return map->getProjection(); }
 
 void CCanvas::setProjection(const QString& proj) {
-  for (IDrawContext* context : qAsConst(allDrawContext)) {
+  for (IDrawContext* context : std::as_const(allDrawContext)) {
     if (!context->setProjection(proj)) {
       QMessageBox::warning(this, tr("Map Projection..."),
                            tr("Failed to setup map projection. Please configure a valid projection."), QMessageBox::Ok);
@@ -1027,7 +1027,7 @@ void CCanvas::setProjection(const QString& proj) {
 }
 
 void CCanvas::setScales(const scales_type_e type) {
-  for (IDrawContext* context : qAsConst(allDrawContext)) {
+  for (IDrawContext* context : std::as_const(allDrawContext)) {
     context->setScales(type);
   }
 }
@@ -1137,7 +1137,7 @@ void CCanvas::showProfile(bool yes) {
 
 bool CCanvas::setDrawContextSize(const QSize& s) {
   bool done = true;
-  for (IDrawContext* context : qAsConst(allDrawContext)) {
+  for (IDrawContext* context : std::as_const(allDrawContext)) {
     done &= context->resize(s);
   }
   return done;
@@ -1155,15 +1155,15 @@ void CCanvas::print(QPainter& p, const QRectF& area, const QPointF& focus, bool 
 
   redraw_e redraw = eRedrawAll;
 
-  for (IDrawContext* context : qAsConst(allDrawContext)) {
+  for (IDrawContext* context : std::as_const(allDrawContext)) {
     context->draw(p, redraw, focus);
   }
 
-  for (IDrawContext* context : qAsConst(allDrawContext)) {
+  for (IDrawContext* context : std::as_const(allDrawContext)) {
     context->wait();
   }
 
-  for (IDrawContext* context : qAsConst(allDrawContext)) {
+  for (IDrawContext* context : std::as_const(allDrawContext)) {
     context->draw(p, redraw, focus);
   }
 

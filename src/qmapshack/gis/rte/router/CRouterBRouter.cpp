@@ -236,7 +236,7 @@ QNetworkRequest CRouterBRouter::getRequest(const QVector<QPointF>& routePoints, 
         QPolygonF polygon;
         line->getPolylineDegFromData(polygon);
         QString nogoPoints;
-        for (const QPointF point : qAsConst(polygon)) {
+        for (const QPointF point : std::as_const(polygon)) {
           if (!nogoPoints.isEmpty()) {
             nogoPoints.append(",");
           }

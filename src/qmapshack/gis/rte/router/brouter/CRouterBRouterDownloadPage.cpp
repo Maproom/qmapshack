@@ -78,7 +78,7 @@ void CRouterBRouterDownloadPage::begin() {
 
 void CRouterBRouterDownloadPage::slotListVersionsClicked(const QModelIndex& index) {
   const QString& version = index.data().toString();
-  for (const CRouterBRouterReleaseItem& item : qAsConst(releaseItems)) {
+  for (const CRouterBRouterReleaseItem& item : std::as_const(releaseItems)) {
     if (item.name == version) {
       downloadUrl = QUrl(item.url);
       textVersionDetails->setText(item.description);
@@ -93,7 +93,7 @@ void CRouterBRouterDownloadPage::slotListVersionsClicked(const QModelIndex& inde
 
 void CRouterBRouterDownloadPage::updateModel() const {
   QStringList versions;
-  for (const CRouterBRouterReleaseItem& item : qAsConst(releaseItems)) {
+  for (const CRouterBRouterReleaseItem& item : std::as_const(releaseItems)) {
     versions.append(item.name);
   }
   model->setStringList(versions);
@@ -226,7 +226,7 @@ void CRouterBRouterDownloadPage::localBRouterDownloadFinished(QNetworkReply* rep
       }
       textLocalInstall->append(tr("installing into %1").arg(setup->localDir));
       setup->installLocalBRouter(messageList);
-      for (const QString& message : qAsConst(messageList)) {
+      for (const QString& message : std::as_const(messageList)) {
         textLocalInstall->append(message);
       }
       messageList.clear();
@@ -236,7 +236,7 @@ void CRouterBRouterDownloadPage::localBRouterDownloadFinished(QNetworkReply* rep
       setComplete(setup->isLocalBRouterValid);
       setup->readLocalProfiles();
     } catch (const QString& msg) {
-      for (const QString& message : qAsConst(messageList)) {
+      for (const QString& message : std::as_const(messageList)) {
         textLocalInstall->append(message);
       }
       if (outfile.isOpen()) {

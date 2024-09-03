@@ -636,7 +636,7 @@ void CMapIMG::readBasics() {
 
   // combine copyright sections
   copyright.clear();
-  for (const QString& str : qAsConst(copyrights)) {
+  for (const QString& str : std::as_const(copyrights)) {
     if (!copyright.isEmpty()) {
       copyright += "\n";
     }
@@ -1025,7 +1025,7 @@ void CMapIMG::processPrimaryMapData() {
    * Query all subfiles for possible maplevels.
    * Exclude basemap to avoid pollution.
    */
-  for (const subfile_desc_t& subfile : qAsConst(subfiles)) {
+  for (const subfile_desc_t& subfile : std::as_const(subfiles)) {
     for (const maplevel_t& maplevel : subfile.maplevels) {
       if (!maplevel.inherited) {
         map_level_t ml;
@@ -1221,7 +1221,7 @@ void CMapIMG::loadVisibleData(bool fast, polytype_t& polygons, polytype_t& polyl
   }
 #endif
 
-  for (const subfile_desc_t& subfile : qAsConst(subfiles)) {
+  for (const subfile_desc_t& subfile : std::as_const(subfiles)) {
     //        qDebug() << "-------";
     //        qDebug() << (viewport.topLeft() * RAD_TO_DEG) << (viewport.bottomRight() * RAD_TO_DEG);
     //        qDebug() << (subfile.area.topLeft() * RAD_TO_DEG) << (subfile.area.bottomRight() * RAD_TO_DEG);
@@ -1925,7 +1925,7 @@ void CMapIMG::drawLabels(QPainter& p, const QVector<strlbl_t>& lbls) {
 void CMapIMG::drawText(QPainter& p) {
   p.setPen(Qt::black);
 
-  for (const textpath_t& textpath : qAsConst(textpaths)) {
+  for (const textpath_t& textpath : std::as_const(textpaths)) {
     QPainterPath path;
     QFont font = textpath.font;
     QFontMetricsF fm(font);
@@ -2250,7 +2250,7 @@ void CMapIMG::getInfoPolygons(const QPoint& pt, QMultiMap<QString, QString>& dic
 bool CMapIMG::findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint32 threshold,
                                   QPolygonF& polyline) /* override */
 {
-  for (const CGarminPolygon& line : qAsConst(polylines)) {
+  for (const CGarminPolygon& line : std::as_const(polylines)) {
     if (line.pixel.size() < 2) {
       continue;
     }

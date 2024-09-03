@@ -37,7 +37,7 @@ class CFileExt : public QFile {
   }
 
   void free() {
-    for (uchar* p : qAsConst(mappedSections)) {
+    for (uchar* p : std::as_const(mappedSections)) {
       unmap(p);
     }
     mappedSections.clear();

@@ -137,21 +137,21 @@ const QString CPlotAxis::fmtdbl(qreal val) {
   return f;
 }
 
-int CPlotAxis::getScaleWidth(const QFontMetrics& m) {
+int CPlotAxis::getScaleWidth(const QFontMetrics& fm) {
   if (!valid) {
     return 0;
   }
 
   if (scaleWidth > 0) {
-    return scaleWidth * m.horizontalAdvance("X");
+    return scaleWidth * fm.horizontalAdvance("X");
   }
 
-  int width = 6 * m.horizontalAdvance("X");
+  int width = 6 * fm.horizontalAdvance("X");
   QString format_single_prec = ((interval * ticScale) < 1) ? fmtdbl(interval) : fmtsgl(interval);
 
   const tic_t* t = ticmark();
   while (nullptr != t) {
-    int tmp = m.horizontalAdvance(QString::asprintf(format_single_prec.toLatin1().data(), t->val * ticScale));
+    int tmp = fm.horizontalAdvance(QString::asprintf(format_single_prec.toLatin1().data(), t->val * ticScale));
     width = qMax(width, tmp);
 
     t = ticmark(t);

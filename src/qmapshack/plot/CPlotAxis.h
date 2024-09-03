@@ -62,7 +62,7 @@ class CPlotAxis : public QObject {
   /// calculate format for the given value
   virtual const QString fmtdbl(qreal val);
   /// get the maximum width of a scale with provided fontmetrics
-  virtual int getScaleWidth(const QFontMetrics& m);
+  virtual int getScaleWidth(const QFontMetrics& fm);
   /// get a new ticmark object
   virtual const tic_t* ticmark(const tic_t* t = nullptr);
   /// get the total limits and the used ones

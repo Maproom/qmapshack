@@ -26,7 +26,6 @@
 #include "helpers/CSettings.h"
 #include "items/CItemRefMap.h"
 #include "overlay/refmap/COverlayRefMapPoint.h"
-#include "overlay/refmap/CProjWizard.h"
 
 COverlayGridTool::COverlayGridTool(QWidget* parent) : QWidget(parent) {
   setupUi(this);
@@ -244,14 +243,14 @@ void COverlayGridTool::slotCalculate() {
 
   qreal disty = qSqrt(dx2 * dx2 + dy2 * dy2);
 
-  QMatrix translationMatrix(1, 0, 0, 1, ptTopLeft.x(), ptTopLeft.y());
-  QMatrix rotationMatrix(qCos(alpha), qSin(alpha), -qSin(alpha), qCos(alpha), 0, 0);
-  QMatrix scalingMatrix(distx, 0, 0, disty, 0, 0);
+  QTransform translationMatrix(1, 0, 0, 1, ptTopLeft.x(), ptTopLeft.y());
+  QTransform rotationMatrix(qCos(alpha), qSin(alpha), -qSin(alpha), qCos(alpha), 0, 0);
+  QTransform scalingMatrix(distx, 0, 0, disty, 0, 0);
 
   // forward matrix index -> map pixel coord
-  QMatrix mxFwd = scalingMatrix * rotationMatrix * translationMatrix;
+  QTransform mxFwd = scalingMatrix * rotationMatrix * translationMatrix;
   // backward matrix map pixel coord -> index
-  QMatrix mxBwd = mxFwd.inverted();
+  QTransform mxBwd = mxFwd.inverted();
 
   QPointF tl = mxBwd.map(area.topLeft());
   QPointF br = mxBwd.map(area.bottomRight());

@@ -58,7 +58,7 @@ class CPoiItemPOI {
   QStringList wikidataRelatedKeys;
   QStringList nameRelatedKeys;
   QString garminIcon;
-  quint64 key;
+  quint64 key{0};
   QString name;
 };
 

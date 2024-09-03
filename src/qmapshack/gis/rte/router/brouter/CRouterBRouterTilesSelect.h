@@ -59,9 +59,9 @@ class CRouterBRouterTilesSelect : public QWidget {
   static const QString patternTileName;
   static const QString patternDate;
   static const QString patternSize;
-  static const QRegExp regExpTileName;
-  static const QRegExp regExpDate;
-  static const QRegExp regExpSize;
+  static const QRegularExpression regExpTileName;
+  static const QRegularExpression regExpDate;
+  static const QRegularExpression regExpSize;
   static const QString formatDate;
   static const QLocale localeDate;
 

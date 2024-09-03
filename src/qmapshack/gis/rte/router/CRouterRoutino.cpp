@@ -212,7 +212,7 @@ void CRouterRoutino::slotSetupPaths() {
 }
 
 void CRouterRoutino::buildDatabaseList() {
-  QRegExp re("(.*)-segments.mem");
+  static const QRegularExpression re(QRegularExpression::anchoredPattern("(.*)-segments.mem"));
   freeDatabaseList();
 
   // initialise
@@ -226,8 +226,9 @@ void CRouterRoutino::buildDatabaseList() {
         dir.entryList(QStringList("*segments.mem"), QDir::Files | QDir::Readable, QDir::Name);
     for (const QString& filename : filenames) {
       QString prefix;
-      if (re.exactMatch(filename)) {
-        prefix = re.cap(1);
+      const QRegularExpressionMatch& match = re.match(filename);
+      if (match.hasMatch()) {
+        prefix = match.captured(1);
       } else {
         continue;
       }

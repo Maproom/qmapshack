@@ -168,15 +168,14 @@ CTextEditWidget::~CTextEditWidget() {
 
 QString CTextEditWidget::getHtml() {
   QString str = textEdit->toHtml();
-  QRegExp re(".*(\\<body.*body\\>).*");
-  if (re.exactMatch(str)) {
-    str = re.cap(1);
+  static const QRegularExpression re(QRegularExpression::anchoredPattern(".*(\\<body.*body\\>).*"));
+  const QRegularExpressionMatch& match = re.match(str);
+  if (match.hasMatch()) {
+    str = match.captured(1);
 
-    QRegExp re1("<body.*>");
-    re1.setMinimal(true);
+    static const QRegularExpression re1("<body.*>", QRegularExpression::PatternOption::InvertedGreedinessOption);
     str = str.replace("body>", "div>").replace(re1, "<div>");
   }
-
   return str;
 }
 

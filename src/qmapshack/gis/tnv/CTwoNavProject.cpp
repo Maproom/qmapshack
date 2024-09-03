@@ -87,7 +87,8 @@ bool CTwoNavProject::save() {
       CGisItemTrk* trk = dynamic_cast<CGisItemTrk*>(item);
       if (trk) {
         QString fn = trk->getName();
-        fn = fn.remove(QRegExp("[^A-Za-z0-9_]"));
+        static const QRegularExpression re("[^A-Za-z0-9_]");
+        fn = fn.remove(re);
         fn = dir.absoluteFilePath(fn + ".trk");
 
         if (!trk->saveTwoNav(fn)) {
@@ -105,7 +106,8 @@ bool CTwoNavProject::save() {
     }
 
     QString fn = getName();
-    fn = fn.remove(QRegExp("[^A-Za-z0-9_]"));
+    static const QRegularExpression re("[^A-Za-z0-9_]");
+    fn = fn.remove(re);
 
     if (!wpts.isEmpty()) {
       if (!saveWpts(wpts, dir.absoluteFilePath(fn + ".wpt"), dir)) {

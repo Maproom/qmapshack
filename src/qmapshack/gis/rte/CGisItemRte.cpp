@@ -1096,13 +1096,13 @@ void CGisItemRte::setResultFromBRouter(const QDomDocument& xml, const QString& o
     if (node.isComment()) {
       const QString& commentTxt = node.toComment().data();
       // ' track-length = 180864 filtered ascend = 428 plain-ascend = -172 cost=270249 '
-      const QRegExp rxAscDes(
+      static const QRegularExpression rxAscDes(
           "(\\s*track-length\\s*=\\s*)(-?\\d+)(\\s*)(filtered "
           "ascend\\s*=\\s*-?\\d+)(\\s*)(plain-ascend\\s*=\\s*-?\\d+)(\\s*)(cost\\s*=\\s*-?\\d+)(\\s*)");
-      int pos = rxAscDes.indexIn(commentTxt);
-      if (pos > -1) {
-        rte.totalDistance = rxAscDes.cap(2).toFloat();
-        rte.cmt = QString("%1, %2, %3").arg(rxAscDes.cap(4), rxAscDes.cap(6), rxAscDes.cap(8));
+      const QRegularExpressionMatch& match = rxAscDes.match(commentTxt);
+      if (match.hasMatch()) {
+        rte.totalDistance = match.captured(2).toFloat();
+        rte.cmt = QString("%1, %2, %3").arg(match.captured(4), match.captured(6), match.captured(8));
       }
       break;
     }

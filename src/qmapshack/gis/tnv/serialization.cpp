@@ -96,10 +96,11 @@ static QStringList writeCompeTime(const QDateTime& t, bool isTrack) {
 
 static QDateTime readCompeTime(QString str, bool isTrack) {
   QDateTime timestamp;
-  QRegExp re("([0-9]{2})-([A-Za-z]{3})-.*");
+  static const QRegularExpression re(QRegularExpression::anchoredPattern("([0-9]{2})-([A-Za-z]{3})-.*"));
 
-  if (re.exactMatch(str)) {
-    QString monthStr = re.cap(2);
+  const QRegularExpressionMatch& match = re.match(str);
+  if (match.hasMatch()) {
+    QString monthStr = match.captured(2);
 
     QHash<QString, QString> monthStr2Num{{"JAN", "01"}, {"FEB", "02"}, {"MAR", "03"}, {"APR", "04"},
                                          {"MAY", "05"}, {"JUN", "06"}, {"JUL", "07"}, {"AUG", "08"},

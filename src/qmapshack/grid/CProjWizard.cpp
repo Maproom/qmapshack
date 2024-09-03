@@ -74,28 +74,32 @@ CProjWizard::CProjWizard(QLineEdit& line) : QDialog(CMainWindow::getBestWidgetFo
           &CProjWizard::slotChange);
 
   QString projstr = line.text();
-  QRegExp re2("\\s*EPSG:3857");
-  QRegExp re3("\\s*\\+proj=merc\\s(.*)");
-  QRegExp re4("\\s*\\+proj=utm \\+zone=([0-9]+)\\s(.*)");
+  static const QRegularExpression re2(QRegularExpression::anchoredPattern("\\s*EPSG:3857"));
+  static const QRegularExpression re3(QRegularExpression::anchoredPattern("\\s*\\+proj=merc\\s(.*)"));
+  static const QRegularExpression re4(QRegularExpression::anchoredPattern("\\s*\\+proj=utm \\+zone=([0-9]+)\\s(.*)"));
 
-  if (re2.exactMatch(projstr)) {
+  const QRegularExpressionMatch& match2 = re2.match(projstr);
+  if (match2.hasMatch()) {  // case 2
     radioWorldMercator->setChecked(true);
-  } else if (re3.exactMatch(projstr)) {
-    radioMercator->setChecked(true);
-    findDatum(re3.cap(1));
-  } else if (re4.exactMatch(projstr)) {
-    radioUTM->setChecked(true);
-    spinUTMZone->setValue(re4.cap(1).toInt());
-
-    QString datum = re4.cap(2);
-    if (datum.startsWith("+south ")) {
-      datum = datum.mid(7);
-      comboHemisphere->setCurrentIndex(1);
+  } else {
+    const QRegularExpressionMatch& match3 = re3.match(projstr);
+    if (match3.hasMatch()) {  // case 3
+      radioMercator->setChecked(true);
+      findDatum(match3.captured(1));
+    } else {
+      const QRegularExpressionMatch& match4 = re4.match(projstr);
+      if (match4.hasMatch()) {  // case 3
+        radioUTM->setChecked(true);
+        spinUTMZone->setValue(match4.captured(1).toInt());
+        QString datum = match4.captured(2);
+        if (datum.startsWith("+south ")) {
+          datum = datum.mid(7);
+          comboHemisphere->setCurrentIndex(1);
+        }
+        findDatum(datum);
+      }
     }
-
-    findDatum(datum);
   }
-
   slotChange();
 }
 

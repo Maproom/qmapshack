@@ -58,7 +58,8 @@ void CRouterBRouterLocal::startBRouter() {
 
   if (brouterState == QProcess::NotRunning) {
     QStringList args;
-    args << brouter.setup->localJavaOpts.split(QRegExp("\\s+"));
+    static const QRegularExpression re("\\s+");
+    args << brouter.setup->localJavaOpts.split(re);
     args << QString("-DmaxRunningTime=%1").arg(brouter.setup->localMaxRunningTime);
     args << "-cp";
     args << brouter.setup->localBRouterJar;

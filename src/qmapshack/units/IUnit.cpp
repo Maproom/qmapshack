@@ -422,18 +422,21 @@ const char* IUnit::tblTimezone[] = {"Africa/Abidjan",
 
 const int N_TIMEZONES = sizeof(IUnit::tblTimezone) / sizeof(const char*);
 
-const QRegExp IUnit::reCoord1(
-    "^\\s*([N|S]){1}\\W*([0-9]+)\\W*([0-9]+\\.[0-9]+)\\s+([E|W|O]){1}\\W*([0-9]+)\\W*([0-9]+\\.[0-9]+)\\s*$");
+const QRegularExpression IUnit::reCoord1(QRegularExpression::anchoredPattern(
+    "^\\s*([N|S]){1}\\W*([0-9]+)\\W*([0-9]+\\.[0-9]+)\\s+([E|W|O]){1}\\W*([0-9]+)\\W*([0-9]+\\.[0-9]+)\\s*$"));
 
-const QRegExp IUnit::reCoord2("^\\s*([N|S]){1}\\s*([0-9]+\\.[0-9]+)\\W*\\s+([E|W|O]){1}\\s*([0-9]+\\.[0-9]+)\\W*\\s*$");
+const QRegularExpression IUnit::reCoord2(QRegularExpression::anchoredPattern(
+    "^\\s*([N|S]){1}\\s*([0-9]+\\.[0-9]+)\\W*\\s+([E|W|O]){1}\\s*([0-9]+\\.[0-9]+)\\W*\\s*$"));
 
-const QRegExp IUnit::reCoord3("^\\s*([-0-9]+\\.[0-9]+)\\s+([-0-9]+\\.[0-9]+)\\s*$");
+const QRegularExpression IUnit::reCoord3(
+    QRegularExpression::anchoredPattern("^\\s*([-0-9]+\\.[0-9]+)\\s+([-0-9]+\\.[0-9]+)\\s*$"));
 
-const QRegExp IUnit::reCoord4(
+const QRegularExpression IUnit::reCoord4(QRegularExpression::anchoredPattern(
     "^\\s*([N|S]){1}\\s*([0-9]+)\\W+([0-9]+)\\W+([0-9]+\\.[0-9]+)\\W*([E|W|O]){1}\\W*([0-9]+)\\W+([0-9]+)\\W+([0-9]+\\."
-    "[0-9]+)\\W*\\s*$");
+    "[0-9]+)\\W*\\s*$"));
 
-const QRegExp IUnit::reCoord5("^\\s*([-0-9]+\\.[0-9]+)([N|S])\\s+([-0-9]+\\.[0-9]+)([W|E])\\s*$");
+const QRegularExpression IUnit::reCoord5(
+    QRegularExpression::anchoredPattern("^\\s*([-0-9]+\\.[0-9]+)([N|S])\\s+([-0-9]+\\.[0-9]+)([W|E])\\s*$"));
 
 IUnit::IUnit(const type_e& type, const QString& baseUnit, const qreal baseFactor, const QString& speedUnit,
              const qreal speedFactor, const QString& elevationUnit, const qreal elevationFactor, QObject* parent)
@@ -655,7 +658,7 @@ bool IUnit::parseTimestamp(const QString& time, QDateTime& datetime) {
 }
 
 QDateTime IUnit::parseTimestamp(const QString& timetext, int& tzoffset) {
-  const QRegExp tzRE("[-+]\\d\\d:\\d\\d$");
+  static const QRegularExpression tzRE("[-+]\\d\\d:\\d\\d$");
   int i;
 
   tzoffset = 0;
@@ -676,9 +679,7 @@ QDateTime IUnit::parseTimestamp(const QString& timetext, int& tzoffset) {
   if (timetext.indexOf("Z") != NOIDX) {
     format += "'Z'";
     applyTzOffset = true;
-  }
-
-  else if ((i = tzRE.indexIn(timetext)) != NOIDX) {
+  } else if ((i = timetext.indexOf(tzRE)) != NOIDX) {
     // trailing timezone offset [-+]HH:MM present
     // This does not match the original intentions of the GPX
     // file format but appears to be found occasionally in
@@ -819,48 +820,53 @@ void IUnit::degToStr(const qreal& x, const qreal& y, QString& str) {
 }
 
 bool IUnit::strToDeg(const QString& str, qreal& lon, qreal& lat) {
-  if (reCoord2.exactMatch(str)) {
-    bool signLat = reCoord2.cap(1) == "S";
-    qreal absLat = reCoord2.cap(2).toDouble();
+  const QRegularExpressionMatch& match1 = reCoord1.match(str);
+  const QRegularExpressionMatch& match2 = reCoord2.match(str);
+  const QRegularExpressionMatch& match3 = reCoord3.match(str);
+  const QRegularExpressionMatch& match4 = reCoord4.match(str);
+  const QRegularExpressionMatch& match5 = reCoord5.match(str);
+  if (match2.hasMatch()) {
+    bool signLat = match2.captured(1) == "S";
+    qreal absLat = match2.captured(2).toDouble();
     lat = signLat ? -absLat : absLat;
 
-    bool signLon = reCoord2.cap(3) == "W";
-    qreal absLon = reCoord2.cap(4).toDouble();
+    bool signLon = match2.captured(3) == "W";
+    qreal absLon = match2.captured(4).toDouble();
     lon = signLon ? -absLon : absLon;
-  } else if (reCoord1.exactMatch(str)) {
-    bool signLat = reCoord1.cap(1) == "S";
-    int degLat = reCoord1.cap(2).toInt();
-    qreal minLat = reCoord1.cap(3).toDouble();
+  } else if (match1.hasMatch()) {
+    bool signLat = match1.captured(1) == "S";
+    int degLat = match1.captured(2).toInt();
+    qreal minLat = match1.captured(3).toDouble();
 
     GPS_Math_DegMin_To_Deg(signLat, degLat, minLat, lat);
 
-    bool signLon = reCoord1.cap(4) == "W";
-    int degLon = reCoord1.cap(5).toInt();
-    qreal minLon = reCoord1.cap(6).toDouble();
+    bool signLon = match1.captured(4) == "W";
+    int degLon = match1.captured(5).toInt();
+    qreal minLon = match1.captured(6).toDouble();
 
     GPS_Math_DegMin_To_Deg(signLon, degLon, minLon, lon);
-  } else if (reCoord3.exactMatch(str)) {
-    lat = reCoord3.cap(1).toDouble();
-    lon = reCoord3.cap(2).toDouble();
-  } else if (reCoord4.exactMatch(str)) {
-    bool signLat = reCoord4.cap(1) == "S";
-    int degLat = reCoord4.cap(2).toInt();
-    int minLat = reCoord4.cap(3).toInt();
-    qreal secLat = reCoord4.cap(4).toFloat();
+  } else if (match3.hasMatch()) {
+    lat = match3.captured(1).toDouble();
+    lon = match3.captured(2).toDouble();
+  } else if (match4.hasMatch()) {
+    bool signLat = match4.captured(1) == "S";
+    int degLat = match4.captured(2).toInt();
+    int minLat = match4.captured(3).toInt();
+    qreal secLat = match4.captured(4).toFloat();
 
     GPS_Math_DegMinSec_To_Deg(signLat, degLat, minLat, secLat, lat);
 
-    bool signLon = reCoord4.cap(5) == "W";
-    int degLon = reCoord4.cap(6).toInt();
-    int minLon = reCoord4.cap(7).toInt();
-    qreal secLon = reCoord4.cap(8).toFloat();
+    bool signLon = match4.captured(5) == "W";
+    int degLon = match4.captured(6).toInt();
+    int minLon = match4.captured(7).toInt();
+    qreal secLon = match4.captured(8).toFloat();
 
     GPS_Math_DegMinSec_To_Deg(signLon, degLon, minLon, secLon, lon);
-  } else if (reCoord5.exactMatch(str)) {
-    bool signLon = reCoord4.cap(4) == "W";
-    bool signLat = reCoord4.cap(2) == "S";
-    lat = reCoord5.cap(1).toDouble();
-    lon = reCoord5.cap(3).toDouble();
+  } else if (match5.hasMatch()) {
+    bool signLon = match5.captured(4) == "W";
+    bool signLat = match5.captured(2) == "S";
+    lat = match5.captured(1).toDouble();
+    lon = match5.captured(3).toDouble();
 
     if (signLon) {
       lon = -lon;
@@ -886,15 +892,15 @@ bool IUnit::strToDeg(const QString& str, qreal& lon, qreal& lat) {
 }
 
 bool IUnit::isValidCoordString(const QString& str) {
-  if (reCoord1.exactMatch(str)) {
+  if (reCoord1.match(str).hasMatch()) {
     return true;
-  } else if (reCoord2.exactMatch(str)) {
+  } else if (reCoord2.match(str).hasMatch()) {
     return true;
-  } else if (reCoord3.exactMatch(str)) {
+  } else if (reCoord3.match(str).hasMatch()) {
     return true;
-  } else if (reCoord4.exactMatch(str)) {
+  } else if (reCoord4.match(str).hasMatch()) {
     return true;
-  } else if (reCoord5.exactMatch(str)) {
+  } else if (reCoord5.match(str).hasMatch()) {
     return true;
   }
   return false;

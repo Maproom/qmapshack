@@ -31,7 +31,7 @@ void CMapTreeWidget::dragEnterEvent(QDragEnterEvent* e) {
 }
 
 void CMapTreeWidget::dragMoveEvent(QDragMoveEvent* e) {
-  CMapItem* item = dynamic_cast<CMapItem*>(itemAt(e->pos()));
+  CMapItem* item = dynamic_cast<CMapItem*>(itemAt(e->position().toPoint()));
 
   if (item && item->isActivated()) {
     e->setDropAction(Qt::MoveAction);

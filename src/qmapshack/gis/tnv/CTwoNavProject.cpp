@@ -164,7 +164,7 @@ bool CTwoNavProject::saveWpts(QList<CGisItemWpt*>& wpts, const QString& filename
     return false;
   }
   QTextStream out(&file);
-  out.setCodec(QTextCodec::codecForName("UTF-8"));
+  out.setEncoding(QStringConverter::Utf8);
 
   qreal north = -90.0;
   qreal south = 90.0;

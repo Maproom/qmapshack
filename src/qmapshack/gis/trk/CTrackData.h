@@ -141,7 +141,7 @@ class CTrackData {
     }
 
     inline void sanitizeFlags() {
-      if ((activity == eAct20None)) {
+      if (activity == eAct20None) {
         act10_e act = act10_e(flags & eActMask);
         if (act1to2.contains(act)) {
           activity = act1to2[act];
@@ -268,7 +268,10 @@ class CTrackData {
   }
 
   template <typename T1, typename T2>
-  class iterator : public std::iterator<std::forward_iterator_tag, T2> {
+  class iterator {
+    using iterator_category = std::forward_iterator_tag;
+    using value_type = T2;
+
     T1& trk;
     int seg = 0;
     int pt = 0;

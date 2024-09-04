@@ -19,6 +19,7 @@
 
 #include <canvas/CCanvas.h>
 
+#include <QActionGroup>
 #include <QMenu>
 #include <QTimer>
 

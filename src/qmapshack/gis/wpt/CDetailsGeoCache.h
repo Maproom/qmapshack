@@ -26,6 +26,7 @@
 class CGisItemWpt;
 class QNetworkAccessManager;
 class QTimer;
+class QNetworkReply;
 
 class CDetailsGeoCache : public QDialog, private Ui::IDetailsGeoCache {
   Q_OBJECT

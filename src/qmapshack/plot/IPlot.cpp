@@ -221,7 +221,7 @@ void IPlot::leaveEvent(QEvent* /*e*/) {
   update();
 }
 
-void IPlot::enterEvent(QEvent* /*e*/) {
+void IPlot::enterEvent(QEnterEvent* /*e*/) {
   needsRedraw = true;
   QCursor cursor = QCursor(QPixmap(":/cursors/cursorArrow.png"), 0, 0);
   CCanvas::setOverrideCursor(cursor, "IPlot::enterEvent");

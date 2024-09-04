@@ -467,7 +467,7 @@ QString IGisProject::getInfo() const {
   if (!desc.isEmpty()) {
     str += "<br/>\n";
 
-    if (desc.count() < 100) {
+    if (desc.length() < 100) {
       str += desc;
     } else {
       str += desc.left(97) + "...";

@@ -389,7 +389,7 @@ void CGisListWks::dragMoveEvent(QDragMoveEvent* e) {
   setDragDropMode(QAbstractItemView::DragDrop);
 
   QTreeWidgetItem* item1 = currentItem();
-  QTreeWidgetItem* item2 = itemAt(e->pos());
+  QTreeWidgetItem* item2 = itemAt(e->position().toPoint());
 
   // changing the item order is only valid for single selected items
   if (selectedItems().count() == 1) {
@@ -523,13 +523,13 @@ void CGisListWks::dropEvent(QDropEvent* e) {
    */
   if (items.size() == 1) {
     // calc. index offset (below/above item)
-    QRect r = visualItemRect(itemAt(e->pos()));
+    QRect r = visualItemRect(itemAt(e->position().toPoint()));
     int y1 = r.top() + r.height() / 2;
-    int y2 = e->pos().y();
+    int y2 = e->position().toPoint().y();
     int off = y2 > y1 ? 1 : 0;
 
     IGisProject* prj1 = dynamic_cast<IGisProject*>(currentItem());
-    IGisProject* prj2 = dynamic_cast<IGisProject*>(itemAt(e->pos()));
+    IGisProject* prj2 = dynamic_cast<IGisProject*>(itemAt(e->position().toPoint()));
     if (prj1 && prj2) {
       prj2->setFlags(prj2->flags() & ~Qt::ItemIsDropEnabled);
       QTreeWidget::dropEvent(e);
@@ -539,7 +539,7 @@ void CGisListWks::dropEvent(QDropEvent* e) {
     }
 
     CGisItemWpt* wpt1 = dynamic_cast<CGisItemWpt*>(currentItem());
-    CGisItemWpt* wpt2 = dynamic_cast<CGisItemWpt*>(itemAt(e->pos()));
+    CGisItemWpt* wpt2 = dynamic_cast<CGisItemWpt*>(itemAt(e->position().toPoint()));
 
     if (wpt1 && wpt2) {
       if (wpt1->parent() == wpt2->parent()) {
@@ -555,7 +555,7 @@ void CGisListWks::dropEvent(QDropEvent* e) {
     }
 
     CGisItemTrk* trk1 = dynamic_cast<CGisItemTrk*>(currentItem());
-    CGisItemTrk* trk2 = dynamic_cast<CGisItemTrk*>(itemAt(e->pos()));
+    CGisItemTrk* trk2 = dynamic_cast<CGisItemTrk*>(itemAt(e->position().toPoint()));
 
     if (trk1 && trk2) {
       if (trk1->parent() == trk2->parent()) {
@@ -571,7 +571,7 @@ void CGisListWks::dropEvent(QDropEvent* e) {
     }
 
     CGisItemRte* rte1 = dynamic_cast<CGisItemRte*>(currentItem());
-    CGisItemRte* rte2 = dynamic_cast<CGisItemRte*>(itemAt(e->pos()));
+    CGisItemRte* rte2 = dynamic_cast<CGisItemRte*>(itemAt(e->position().toPoint()));
 
     if (rte1 && rte2) {
       if (rte1->parent() == rte2->parent()) {
@@ -587,7 +587,7 @@ void CGisListWks::dropEvent(QDropEvent* e) {
     }
 
     CGisItemOvlArea* area1 = dynamic_cast<CGisItemOvlArea*>(currentItem());
-    CGisItemOvlArea* area2 = dynamic_cast<CGisItemOvlArea*>(itemAt(e->pos()));
+    CGisItemOvlArea* area2 = dynamic_cast<CGisItemOvlArea*>(itemAt(e->position().toPoint()));
 
     if (area1 && area2) {
       if (area1->parent() == area2->parent()) {
@@ -604,7 +604,7 @@ void CGisListWks::dropEvent(QDropEvent* e) {
   }
 
   // check if item at position is a project and insert a copy of all selected items
-  IGisProject* project = dynamic_cast<IGisProject*>(itemAt(e->pos()));
+  IGisProject* project = dynamic_cast<IGisProject*>(itemAt(e->position().toPoint()));
   if (project) {
     project->blockUpdateItems(true);
 
@@ -624,7 +624,7 @@ void CGisListWks::dropEvent(QDropEvent* e) {
     project->blockUpdateItems(false);
   }
 
-  IDevice* device = dynamic_cast<IDevice*>(itemAt(e->pos()));
+  IDevice* device = dynamic_cast<IDevice*>(itemAt(e->position().toPoint()));
   if (device) {
     const QList<QTreeWidgetItem*>& items = selectedItems();
     for (QTreeWidgetItem* item : items) {

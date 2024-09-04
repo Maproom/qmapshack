@@ -40,7 +40,7 @@ static qreal toDegree(qint32 semicircles) { return semicircles * (degrees / twoP
  */
 static QDateTime toDateTime(quint32 timestamp) {
   QDateTime dateTime;
-  dateTime.setTime_t(sec1970to1990 + timestamp);
+  dateTime.setSecsSinceEpoch(sec1970to1990 + timestamp);
   return dateTime.toUTC();
 }
 

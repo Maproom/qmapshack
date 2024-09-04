@@ -906,26 +906,26 @@ set( RCS
 # Some Qt magic
 ###############################################################################################
 
-qt5_wrap_ui(UI_HDRS ${UIS})
-qt5_add_resources(RC_SRCS ${RCS})
+qt6_wrap_ui(UI_HDRS ${UIS})
+qt6_add_resources(RC_SRCS ${RCS})
 
 ###############################################################################################
 # Translation related stuff
 ###############################################################################################
-translate_ts(${APPLICATION_NAME}_QM_FILES
-    UPDATE_TRANSLATIONS ${UPDATE_TRANSLATIONS}
-    UPDATE_OPTIONS "-I${CMAKE_CURRENT_SOURCE_DIR}" ${KEEP_OLD_TRANSLATIONS}
-    SOURCES ${SRCS} ${HDRS} ${UIS}
-    TEMPLATE ${APPLICATION_NAME}
-    TRANSLATION_DIR "locale"
-)
+# translate_ts(${APPLICATION_NAME}_QM_FILES
+#     UPDATE_TRANSLATIONS ${UPDATE_TRANSLATIONS}
+#     UPDATE_OPTIONS "-I${CMAKE_CURRENT_SOURCE_DIR}" ${KEEP_OLD_TRANSLATIONS}
+#     SOURCES ${SRCS} ${HDRS} ${UIS}
+#     TEMPLATE ${APPLICATION_NAME}
+#     TRANSLATION_DIR "locale"
+# )
 
-if (UNIX AND NOT WIN32 AND NOT APPLE)
-    translate_desktop(${APPLICATION_NAME}_DESKTOP_FILES
-        TRANSLATION_DIR "locale"
-        SOURCES "${PROJECT_SOURCE_DIR}/qmapshack.desktop.in"
-    )
-endif()
+# if (UNIX AND NOT WIN32 AND NOT APPLE)
+#     translate_desktop(${APPLICATION_NAME}_DESKTOP_FILES
+#         TRANSLATION_DIR "locale"
+#         SOURCES "${PROJECT_SOURCE_DIR}/qmapshack.desktop.in"
+#     )
+# endif()
 
 ###############################################################################################
 # Build source file and include paths lists
@@ -978,21 +978,22 @@ if(${DEVELOPMENT_VERSION})
 endif(${DEVELOPMENT_VERSION})
 
 if(Qt5DBus_FOUND)
-    set(DBUS_LIB Qt5::DBus)
+    set(DBUS_LIB Qt6::DBus)
 else(Qt5DBus_FOUND)
     set(DBUS_LIB)
 endif(Qt5DBus_FOUND)
 
 target_link_libraries(${APPLICATION_NAME}
-    Qt5::Widgets
-    Qt5::Xml
-    Qt5::Sql
-    Qt5::PrintSupport
-    Qt5::UiTools
-    Qt5::Network
-    Qt5::WebEngineWidgets
-    Qt5::Qml
-    Qt5::Help
+    Qt6::Widgets
+    Qt6::Xml
+    Qt6::Sql
+    Qt6::PrintSupport
+    Qt6::UiTools
+    Qt6::Network
+    Qt6::WebEngineWidgets
+    Qt6::Qml
+    Qt6::Help
+    Qt6::Core5Compat
     ${DBUS_LIB}
     ${GDAL_LIBRARIES}
     ${PROJ_LIBRARIES}

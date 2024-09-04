@@ -84,7 +84,7 @@ void CSingleInstanceProxy::slotNewConnection() {
 
     // raise the application window to top of desktop
     w.raise();
-    QApplication::setActiveWindow(&w);
+    w.activateWindow();
   }
 
   socket->close();

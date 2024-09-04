@@ -33,7 +33,7 @@ bool CRtOpenSkyRecord::writeEntry(const CRtOpenSky::aircraft_t& aircraft) {
   trkpt.lon = aircraft.longitude;
   trkpt.lat = aircraft.latitude;
   trkpt.ele = aircraft.geoAltitude;
-  trkpt.time = QDateTime::fromTime_t(aircraft.timePosition);
+  trkpt.time = QDateTime::fromSecsSinceEpoch(aircraft.timePosition);
 
   stream << trkpt;
   track << trkpt;

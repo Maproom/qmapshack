@@ -487,7 +487,7 @@ QString CGisItemTrk::getInfo(quint32 feature) const {
     }
 
     QString desc = removeHtml(trk.desc).simplified();
-    if (desc.count()) {
+    if (desc.length()) {
       if (!str.isEmpty()) {
         str += "<br/>\n";
       }
@@ -495,7 +495,7 @@ QString CGisItemTrk::getInfo(quint32 feature) const {
     }
 
     QString cmt = removeHtml(trk.cmt).simplified();
-    if ((cmt != desc) && cmt.count()) {
+    if ((cmt != desc) && cmt.length()) {
       if (!str.isEmpty()) {
         str += "<br/>\n";
       }

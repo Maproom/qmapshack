@@ -342,12 +342,12 @@ QString CGisItemOvlArea::getInfo(quint32 feature) const {
   str += "<br/>\n" + tr("Area: %1%2").arg(val, unit);
 
   QString desc = removeHtml(area.desc).simplified();
-  if (desc.count()) {
+  if (desc.length()) {
     if (!str.isEmpty()) {
       str += "<br/>\n";
     }
 
-    if ((feature & eFeatureShowFullText) || (desc.count() < 300)) {
+    if ((feature & eFeatureShowFullText) || (desc.length() < 300)) {
       str += desc;
     } else {
       str += desc.left(297) + "...";
@@ -355,12 +355,12 @@ QString CGisItemOvlArea::getInfo(quint32 feature) const {
   }
 
   QString cmt = removeHtml(area.cmt).simplified();
-  if ((cmt != desc) && cmt.count()) {
+  if ((cmt != desc) && cmt.length()) {
     if (!str.isEmpty()) {
       str += "<br/>\n";
     }
 
-    if ((feature & eFeatureShowFullText) || (cmt.count() < 300)) {
+    if ((feature & eFeatureShowFullText) || (cmt.length() < 300)) {
       str += cmt;
     } else {
       str += cmt.left(297) + "...";

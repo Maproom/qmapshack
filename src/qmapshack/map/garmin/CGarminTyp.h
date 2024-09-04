@@ -21,6 +21,8 @@
 
 #include <QtGui>
 
+class QTextCodec;
+
 class CGarminTyp {
   Q_DECLARE_TR_FUNCTIONS(CGarminTyp)
  public:

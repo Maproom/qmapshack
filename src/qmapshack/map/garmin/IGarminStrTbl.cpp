@@ -18,6 +18,7 @@
 
 #include "IGarminStrTbl.h"
 
+#include <QtCore5Compat/QTextCodec>
 #include <QtCore>
 
 #include "helpers/CFileExt.h"

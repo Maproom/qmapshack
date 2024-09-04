@@ -23,7 +23,7 @@
 
 class CFileExt;
 class QByteArray;
-class QStringList;
+class QTextCodec;
 
 class IGarminStrTbl : public QObject {
  public:

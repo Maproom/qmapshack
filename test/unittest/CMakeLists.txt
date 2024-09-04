@@ -24,7 +24,7 @@ find_package(ROUTINO REQUIRED)
 
 if(UNIX)
     if(Qt5DBus_FOUND)
-        set(DBUS_LIB Qt5::DBus)
+        set(DBUS_LIB Qt6::DBus)
     endif(Qt5DBus_FOUND)
 else(UNIX)
     set(DBUS_LIB)
@@ -66,13 +66,13 @@ add_executable(qttest EXCLUDE_FROM_ALL
 file(COPY input DESTINATION ${CMAKE_BINARY_DIR}/bin/)
 
 target_link_libraries(qttest
-    Qt5::Widgets
-    Qt5::Xml
-    Qt5::Script
-    Qt5::Sql
-    Qt5::WebKitWidgets
-    Qt5::PrintSupport
-    Qt5::Test
+    Qt6::Widgets
+    Qt6::Xml
+    Qt6::Script
+    Qt6::Sql
+    Qt6::WebKitWidgets
+    Qt6::PrintSupport
+    Qt6::Test
     QMS
     ${DBUS_LIB}
     ${GDAL_LIBRARIES}

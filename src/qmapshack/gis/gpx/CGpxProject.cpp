@@ -338,7 +338,7 @@ bool CGpxProject::saveAs(const QString& fn, IGisProject& project, bool strictGpx
       throw tr("Failed to create file '%1'").arg(_fn_);
     }
     QTextStream out(&file);
-    out.setCodec("UTF-8");
+    out.setEncoding(QStringConverter::Utf8);
     out << "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\" ?>" << Qt::endl;
 
     out << doc.toString();

@@ -52,7 +52,7 @@ bool IRtRecord::readFile(const QString& filename) {
     QByteArray data;
     stream >> crc >> data;
 
-    if ((qChecksum(data.data(), data.size()) != crc) || (stream.status() != QDataStream::Ok)) {
+    if ((qChecksum(data) != crc) || (stream.status() != QDataStream::Ok)) {
       error = tr("Failed to read entry. Truncate record to last valid entry.");
       file.close();
       QFile::resize(filename, size);
@@ -77,7 +77,7 @@ bool IRtRecord::writeEntry(const QByteArray& data) {
   stream.setVersion(QDataStream::Qt_5_2);
   stream.setByteOrder(QDataStream::LittleEndian);
 
-  quint16 crc = qChecksum(data.data(), data.size());
+  quint16 crc = qChecksum(data);
   stream << crc << data;
 
   if (stream.status() != QDataStream::Ok) {

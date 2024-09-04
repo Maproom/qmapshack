@@ -32,7 +32,7 @@ class CHelpBrowser : public QTextBrowser {
   QVariant loadResource(int type, const QUrl& name) override;
 
  public slots:
-  void setSource(const QUrl& url) override;
+  void setSource(const QUrl& url);
 
  private:
   QHelpEngine* engine;

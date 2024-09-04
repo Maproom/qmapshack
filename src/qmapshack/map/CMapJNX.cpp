@@ -18,6 +18,7 @@
 
 #include "map/CMapJNX.h"
 
+#include <QtCore5Compat/QTextCodec>
 #include <QtGui>
 
 #include "helpers/CDraw.h"

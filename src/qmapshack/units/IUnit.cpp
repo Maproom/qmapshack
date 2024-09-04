@@ -688,12 +688,12 @@ QDateTime IUnit::parseTimestamp(const QString& timetext, int& tzoffset) {
     // add the literal string to the format so fromString()
     // will succeed
     format += "'";
-    format += timetext.rightRef(6);
+    format += timetext.right(6);
     format += "'";
 
     // calculate the offset
-    int offsetHours(timetext.midRef(i + 1, 2).toUInt());
-    int offsetMinutes(timetext.midRef(i + 4, 2).toUInt());
+    int offsetHours(timetext.mid(i + 1, 2).toUInt());
+    int offsetMinutes(timetext.mid(i + 4, 2).toUInt());
     if (timetext[i] == '-') {
       tzoffset = -(60 * offsetHours + offsetMinutes);
     } else {

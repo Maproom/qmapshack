@@ -61,11 +61,8 @@
 #       COMPONENT Optional install component. Only effective if INSTALL_DIR
 #                   present. Defaults to "Runtime".
 
-# CMake v2.8.3 needed to use the CMakeParseArguments module
-cmake_minimum_required(VERSION 2.8.3 FATAL_ERROR)
-
 # We use our patched version to round a annoying bug.
-include(Qt5PatchedLinguistToolsMacros)
+include(Qt6PatchedLinguistToolsMacros)
 
 function(translate_ts qmFiles)
     set(oneValueArgs USE_QT5 UPDATE_TRANSLATIONS TEMPLATE TRANSLATION_DIR INSTALL_DIR COMPONENT)

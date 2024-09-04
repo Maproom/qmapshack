@@ -27,7 +27,7 @@
 #include "units/IUnit.h"
 
 void CDemTreeWidget::dragMoveEvent(QDragMoveEvent* event) {
-  CDemItem* item = dynamic_cast<CDemItem*>(itemAt(event->pos()));
+  CDemItem* item = dynamic_cast<CDemItem*>(itemAt(event->position().toPoint()));
 
   if (item && item->isActivated()) {
     event->setDropAction(Qt::MoveAction);

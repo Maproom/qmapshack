@@ -649,7 +649,7 @@ void CCanvas::wheelEvent(QWheelEvent* e) {
   update();
 }
 
-void CCanvas::enterEvent(QEvent* e) {
+void CCanvas::enterEvent(QEnterEvent* e) {
   if (labelHelp->isVisible()) {
     return;
   }

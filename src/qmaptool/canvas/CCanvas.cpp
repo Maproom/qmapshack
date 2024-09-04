@@ -115,7 +115,7 @@ void CCanvas::wheelEvent(QWheelEvent* e) {
   tool->wheelEventFx(e);
 }
 
-void CCanvas::enterEvent(QEvent* e) {
+void CCanvas::enterEvent(QEnterEvent* e) {
   QMutexLocker lock(&mutex);
 
   tool->enterEventFx(e);

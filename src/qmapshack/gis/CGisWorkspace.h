@@ -289,8 +289,7 @@ class CGisWorkspace : public QWidget, private Ui::IGisWorkspace {
      @brief Add a new waypoint by Position
      @param pt    the position in degrees
    */
-  void addWptByPos(const QPointF& pt, const QString& name = QString::Null(),
-                   const QString& desc = QString::Null()) const;
+  void addWptByPos(const QPointF& pt, const QString& name = QString(), const QString& desc = QString()) const;
 
   void addPoisAsWpt(const QSet<IPoiItem>& pois, IGisProject* project = nullptr) const;
   void addPoiAsWpt(const IPoiItem& poi, IGisProject* project = nullptr) const;

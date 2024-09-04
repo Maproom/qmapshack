@@ -45,7 +45,7 @@ CFilterNewDate::CFilterNewDate(CGisItemTrk& trk, QWidget* parent) : QWidget(pare
 
     case IUnit::eTZAuto: {
       CTrackData::trkpt_t trkpt = *trk.getTrackData().begin();
-      zone = IUnit::pos2timezone(trkpt * DEG_TO_RAD);
+      zone = IUnit::pos2timezone(trkpt.radPoint() * DEG_TO_RAD);
       // break; // intended
     }
 

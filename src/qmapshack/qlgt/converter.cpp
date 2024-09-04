@@ -41,7 +41,7 @@ CDBProject::CDBProject(CQlgtFolder& folder) : IGisProject(eTypeDb, "", (CGisList
 
 CGisItemWpt::CGisItemWpt(const CQlgtWpt& wpt1, IGisProject* project) : IGisItem(project, eTypeWpt, NOIDX) {
   qreal direction;
-  QDateTime time = QDateTime::fromTime_t(wpt1.timestamp, QTimeZone("UTC"));
+  QDateTime time = QDateTime::fromSecsSinceEpoch(wpt1.timestamp, QTimeZone("UTC"));
 
   wpt.time = time.toUTC();
   wpt.name = wpt1.name;
@@ -131,7 +131,7 @@ CGisItemTrk::CGisItemTrk(const CQlgtTrack& trk1, IGisProject* project)
   CTrackData::trkseg_t seg;
   for (const CQlgtTrack::pt_t& pt1 : trk1.track) {
     CTrackData::trkpt_t pt;
-    QDateTime time = QDateTime::fromTime_t(pt1._timestamp, QTimeZone("UTC"));
+    QDateTime time = QDateTime::fromSecsSinceEpoch(pt1._timestamp, QTimeZone("UTC"));
     time = time.addMSecs(pt1._timestamp_msec);
 
     pt.lon = pt1._lon;

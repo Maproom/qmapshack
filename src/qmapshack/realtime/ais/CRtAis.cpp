@@ -127,7 +127,7 @@ void CRtAis::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blo
     ship_t& ship = ships[key];
 
     if (!ship.aid) {
-      QDateTime lim = QDateTime::fromTime_t(ship.timePosition).addSecs(900);
+      QDateTime lim = QDateTime::fromSecsSinceEpoch(ship.timePosition).addSecs(900);
       if (lim < now) {
         ships.remove(key);
         continue;
@@ -180,7 +180,7 @@ void CRtAis::fastDraw(QPainter& p, const QRectF& viewport, CRtDraw* rt) {
     if (!ship.callsign.isEmpty()) text += "<tr><td>" + tr("callsign:") + "</td><td>" + ship.callsign + "</td></tr>";
     if (!ship.imo.isEmpty()) text += "<tr><td>" + tr("imo:") + "</td><td>" + ship.imo + "</td></tr>";
     if (!ship.mmsi.isEmpty()) text += "<tr><td>" + tr("mmsi:") + "</td><td>" + ship.mmsi + "</td></tr>";
-    text += "<tr><td>" + tr("last contact:") + "</td><td>" + QDateTime::fromTime_t(ship.timePosition).toString() +
+    text += "<tr><td>" + tr("last contact:") + "</td><td>" + QDateTime::fromSecsSinceEpoch(ship.timePosition).toString() +
             "</td></tr>";
     text += "<tr><td>" + tr("longitude:") + "</td><td>" + QString::number(ship.longitude) + "°</td></tr>";
     text += "<tr><td>" + tr("latitude:") + "</td><td>" + QString::number(ship.latitude) + "°</td></tr>";

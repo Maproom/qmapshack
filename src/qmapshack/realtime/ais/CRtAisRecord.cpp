@@ -33,7 +33,7 @@ bool CRtAisRecord::writeEntry(const CRtAis::ship_t& ship) {
   trkpt.lon = ship.longitude;
   trkpt.lat = ship.latitude;
   trkpt.ele = 0;
-  trkpt.time = QDateTime::fromTime_t(ship.timePosition);
+  trkpt.time = QDateTime::fromSecsSinceEpoch(ship.timePosition);
 
   stream << trkpt;
   track << trkpt;

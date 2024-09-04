@@ -21,10 +21,11 @@
 
 #include "map/garmin/CGarminTyp.h"
 
-#include <stdio.h>
+#include <qtextcodec.h>
 #include <string.h>
 
 #include <QMessageBox>
+#include <QtCore5Compat>
 #include <QtCore>
 
 #include "CMainWindow.h"
@@ -84,7 +85,7 @@ bool CGarminTyp::parseHeader(QDataStream& in) {
 
   for (i = 0; i < 10; ++i) {
     in >> byte;
-    garmintyp.append(byte);
+    garmintyp.append(QChar(byte));
   }
   garmintyp.append(0);
   if (garmintyp != "GARMIN TYP") {
@@ -151,15 +152,12 @@ bool CGarminTyp::parseDrawOrder(QDataStream& in, QList<quint32>& drawOrder) {
   quint8 typ;
   quint32 subtyp;
 
-  int count = 1;
-
   const int N = sectOrder.arraySize / sectOrder.arrayModulo;
 
   for (i = 0; i < N; i++) {
     in >> typ >> subtyp;
     //         qDebug() << Qt::hex << typ << subtyp;
     if (typ == 0) {
-      count++;
     } else if (subtyp == 0) {
 #ifdef DBG
       qDebug() << QString("Type 0x%1 is priority %2").arg(typ, 0, 16).arg(count);
@@ -951,7 +949,7 @@ bool CGarminTyp::decodeColorTable(QDataStream& in, QImage& img, int ncolors, int
 }
 
 void CGarminTyp::decodeBitmap(QDataStream& in, QImage& img, int w, int h, int bpp) {
-  int x = 0, j = 0;
+  int x = 0;
   quint8 color;
 
   if (bpp == 0) {
@@ -983,7 +981,6 @@ void CGarminTyp::decodeBitmap(QDataStream& in, QImage& img, int w, int h, int bp
         //                 %5").arg(x).arg(y).arg(value,0,16).arg(color).arg(j);
         x += 1;
       }
-      j += 1;
     }
     x = 0;
   }

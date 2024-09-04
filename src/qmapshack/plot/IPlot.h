@@ -76,7 +76,7 @@ class IPlot : public QWidget, public INotifyTrk {
   void paintEvent(QPaintEvent* e) override;
   void resizeEvent(QResizeEvent* e) override;
   void leaveEvent(QEvent* e) override;
-  void enterEvent(QEvent* e) override;
+  void enterEvent(QEnterEvent* e) override;
   void keyPressEvent(QKeyEvent* e) override;
   void mouseMoveEvent(QMouseEvent* e) override;
   void mousePressEvent(QMouseEvent* e) override;

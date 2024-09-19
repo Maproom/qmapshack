@@ -626,23 +626,13 @@ void CGisListWks::dropEvent(QDropEvent* e) {
 
   IDevice* device = dynamic_cast<IDevice*>(itemAt(e->pos()));
   if (device) {
-    IGisProject* project = dynamic_cast<IGisProject*>(currentItem());
-    if (project) {
-      CCanvas* canvas = CMainWindow::self().getVisibleCanvas();
-      if (canvas) {
-        canvas->reportStatus(
-            "device",
-            tr("<b>Update devices</b><p>Update %1<br/>Please wait...</p>").arg(device->text(CGisListWks::eColumnName)));
-        canvas->update();
-        qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
+    const QList<QTreeWidgetItem*>& items = selectedItems();
+    for (QTreeWidgetItem* item : items) {
+      IGisProject* project = dynamic_cast<IGisProject*>(item);
+      if (project == nullptr) {
+        continue;
       }
-
-      int lastResult = CSelectCopyAction::eResultNone;
-      device->insertCopyOfProject(project, lastResult);
-
-      if (canvas) {
-        canvas->reportStatus("device", "");
-      }
+      syncPrjToDevices(project, {device->getKey()});
     }
   }
 
@@ -1811,7 +1801,14 @@ void CGisListWks::slotSyncWksDev() {
       }
     }
   }
-  syncPrjToDevices(project, keys);
+  const QList<QTreeWidgetItem*>& items = selectedItems();
+  for (QTreeWidgetItem* item : items) {
+    IGisProject* project = dynamic_cast<IGisProject*>(item);
+    if (project == nullptr) {
+      continue;
+    }
+    syncPrjToDevices(project, keys);
+  }
 }
 
 void CGisListWks::slotSyncDevWks() {

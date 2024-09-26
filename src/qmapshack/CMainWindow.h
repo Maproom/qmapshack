@@ -126,7 +126,7 @@ class CMainWindow : public QMainWindow, private Ui::IMainWindow {
  protected:
   bool eventFilter(QObject* obj, QEvent* event) override;
 #ifdef Q_OS_WIN64
-  bool CMainWindow::nativeEvent(const QByteArray& eventType, void* message, long* result);
+  bool nativeEvent(const QByteArray& eventType, void* message, qintptr* result);
 #endif  // Q_OS_WIN64
   void dragEnterEvent(QDragEnterEvent* event) override;
   void dropEvent(QDropEvent* event) override;

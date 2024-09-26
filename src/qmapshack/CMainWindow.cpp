@@ -69,11 +69,12 @@
 #include "version.h"
 
 #ifdef Q_OS_WIN64
+#include <windows.h>
 #include <dbt.h>
 #include <guiddef.h>
 #include <initguid.h>
 #include <usbiodef.h>
-#include <windows.h>
+
 
 #include "device/CDeviceWatcherWindows.h"
 #endif  // Q_OS_WIN64
@@ -1472,7 +1473,7 @@ void CMainWindow::displayFullscreen() {
 static void sendDeviceEvent(DWORD unitmask, bool add) {
   for (char i = 0; i < 26; ++i) {
     if (unitmask & 0x1) {
-      QString path = QString(i + 'A') + ":/";
+      QString path = QString::number(i) + "A:/";
       qDebug() << "sendDeviceEvent" << path << add;
       CEventDevice* event = new CEventDevice(path, add);
       QCoreApplication::postEvent(CDeviceWatcherWindows::self(), event);
@@ -1482,7 +1483,7 @@ static void sendDeviceEvent(DWORD unitmask, bool add) {
   }
 }
 
-bool CMainWindow::nativeEvent(const QByteArray& eventType, void* message, long* result) {
+bool CMainWindow::nativeEvent(const QByteArray& eventType, void* message, qintptr* result) {
   MSG* msg = (MSG*)message;
   // qDebug() << "nativeEvent" << eventType << msg->message << msg->lParam << msg->wParam;
 

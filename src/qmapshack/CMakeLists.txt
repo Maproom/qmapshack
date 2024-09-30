@@ -368,12 +368,12 @@ set( SRCS
 )
 
 
-if(Qt5DBus_FOUND)
+if(Qt6DBus_FOUND)
 set( SRCS
     ${SRCS}
     device/CDeviceWatcherLinux.cpp
 )
-endif(Qt5DBus_FOUND)
+endif(Qt6DBus_FOUND)
 
 
 if (APPLE)
@@ -746,12 +746,12 @@ set( HDRS
 )
 
 
-if(Qt5DBus_FOUND)
+if(Qt6DBus_FOUND)
 set( HDRS
     ${HDRS}
     device/CDeviceWatcherLinux.h
 )
-endif(Qt5DBus_FOUND)
+endif(Qt6DBus_FOUND)
 
 
 if(APPLE)
@@ -977,11 +977,11 @@ if(${DEVELOPMENT_VERSION})
     )
 endif(${DEVELOPMENT_VERSION})
 
-if(Qt5DBus_FOUND)
+if(Qt6DBus_FOUND)
     set(DBUS_LIB Qt6::DBus)
-else(Qt5DBus_FOUND)
+else(Qt6DBus_FOUND)
     set(DBUS_LIB)
-endif(Qt5DBus_FOUND)
+endif(Qt6DBus_FOUND)
 
 target_link_libraries(${APPLICATION_NAME}
     Qt6::Widgets

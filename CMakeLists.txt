@@ -200,9 +200,9 @@ endif()
 
 if(USE_QT6DBus)
     find_package(Qt6DBus REQUIRED)
-    if(Qt5DBus_FOUND)
+    if(Qt6DBus_FOUND)
         add_definitions(-DHAVE_DBUS)
-    endif(Qt5DBus_FOUND)
+    endif(Qt6DBus_FOUND)
 endif(USE_QT6DBus)
 
 # Everything included. Let's finetune the mess a bit more

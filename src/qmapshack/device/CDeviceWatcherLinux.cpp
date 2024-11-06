@@ -146,7 +146,6 @@ void CDeviceWatcherLinux::slotUpdate() {
 }
 
 QString CDeviceWatcherLinux::readMountPoint(const QString& path) {
-  QStringList points;
   QDBusMessage message =
       QDBusMessage::createMethodCall("org.freedesktop.UDisks2", path, "org.freedesktop.DBus.Properties", "Get");
 
@@ -157,30 +156,51 @@ QString CDeviceWatcherLinux::readMountPoint(const QString& path) {
     message.setArguments(args);
   }
 
-  QDBusMessage reply = QDBusConnection::systemBus().call(message);
+  const QDBusMessage& reply = QDBusConnection::systemBus().call(message);
 
 #if defined(Q_OS_FREEBSD)
+  // this is probably broken code and needs to be fixed
   for (const QVariant& arg : reply.arguments()) {
     if (!arg.value<QDBusVariant>().variant().value<QStringList>().isEmpty()) {
       points.append(arg.value<QDBusVariant>().variant().value<QStringList>().first());
     }
   }
 #else
-  QList<QByteArray> list;
-  {
-    const QList<QVariant>& args = reply.arguments();
-    for (const QVariant& arg : args) {
-      arg.value<QDBusVariant>().variant().value<QDBusArgument>() >> list;
-    }
-  }
+  QStringList mountPoints;
 
-  for (const QByteArray& point : std::as_const(list)) {
-    points.append(point);
+  for (const QVariant& arg : reply.arguments()) {
+    // This seems to be the only way to get the underlying DBus data type.
+    // It's is a very poor design. Maybe we do not understand Qt.
+    const QVariant& dbusVar = arg.value<QDBusVariant>().variant();
+    const QDBusArgument& dbusArg = dbusVar.value<QDBusArgument>();
+
+    // Test for the correct signature. It's not really expected to fail.
+    // But better safe than sorry
+    if (dbusArg.currentSignature() != "aay") {
+      continue;
+    }
+
+    // As the signature is "aay" it's an array of an array of bytes.
+    // This translates to an array of QByteArray. Don't know why there
+    // should be several mount points and if that is ever happening.
+    // But we do not expect less wackiness from a DBus definition.
+
+    // That is the way Qt wants us to iterate
+    dbusArg.beginArray();
+    while (!dbusArg.atEnd()) {
+      QByteArray data;
+      dbusArg >> data;
+      // Not sure about this one. But my guts feeling tells me that
+      // we should decode the stuff according to the system's requirements.
+      auto decoder = QStringDecoder(QStringDecoder::System);
+      mountPoints << decoder(data.data());
+    }
+    dbusArg.endArray();
   }
 #endif
 
-  if (!points.isEmpty()) {
-    return points.first();
+  if (!mountPoints.isEmpty()) {
+    return mountPoints.first();
   }
   return "";
 }

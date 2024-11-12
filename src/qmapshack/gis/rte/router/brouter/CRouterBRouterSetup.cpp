@@ -670,7 +670,7 @@ void CRouterBRouterSetup::displayProfileAsync(const QString& profile) {
       file.open(QIODevice::ReadOnly);
       const QByteArray& content = file.readAll();
       file.close();
-      emit sigDisplayOnlineProfileFinished(profile, QString(content));
+      emit sigDisplayOnlineProfileFinished(profile, QString(content.data()));
     }
   } else {
     Q_ASSERT(installMode == eModeOnline);
@@ -711,7 +711,7 @@ void CRouterBRouterSetup::loadOnlineProfileFinished(QNetworkReply* reply) {
     readLocalProfiles();
   } else {
     Q_ASSERT(mode == eProfileDisplay);
-    emit sigDisplayOnlineProfileFinished(profile, QString(content));
+    emit sigDisplayOnlineProfileFinished(profile, QString(content.data()));
   }
 }
 

@@ -33,10 +33,10 @@ CTimeDialog::CTimeDialog(QWidget* parent, const QDateTime& datetime)
 
   const QList<QByteArray>& ids = QTimeZone::availableTimeZoneIds();
   foreach (const QByteArray& id, ids) {
-    comboTimezone->addItem(id);
+    comboTimezone->addItem(id.data());
   }
 
-  comboTimezone->setCurrentText(zone);
+  comboTimezone->setCurrentText(zone.data());
 
   const QDateTime& newTime = timestamp_utc0.toTimeZone(QTimeZone(zone));
   dateTimeEdit->setDateTime(newTime);

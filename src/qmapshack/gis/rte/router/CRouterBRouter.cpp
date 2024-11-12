@@ -341,7 +341,7 @@ int CRouterBRouter::synchronousRequest(const QVector<QPointF>& points, const QLi
     const QDomElement& xmlGpx = xml.documentElement();
 
     if (xmlGpx.isNull() || xmlGpx.tagName() != "gpx") {
-      throw QString(res);
+      throw QString(res.data());
     }
     setup->parseBRouterVersion(xmlGpx.attribute("creator"));
 
@@ -469,7 +469,7 @@ void CRouterBRouter::slotRequestFinished(QNetworkReply* reply) {
 
     const QDomElement& xmlGpx = xml.documentElement();
     if (xmlGpx.isNull() || xmlGpx.tagName() != "gpx") {
-      throw QString(res);
+      throw QString(res.data());
     }
 
     IGisItem::key_t key;

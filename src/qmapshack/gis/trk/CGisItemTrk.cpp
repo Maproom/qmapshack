@@ -991,10 +991,10 @@ void CGisItemTrk::deriveSecondaryData() {
         continue;
       }
 
+      d1 = trkpt2.distance;
+      e1 = trkpt2.ele;
+      t1 = trkpt2.time.toMSecsSinceEpoch() / 1000.0;
       if (trkpt.distance - trkpt2.distance >= 25) {
-        d1 = trkpt2.distance;
-        e1 = trkpt2.ele;
-        t1 = trkpt2.time.toMSecsSinceEpoch() / 1000.0;
         break;
       }
     }
@@ -1008,10 +1008,10 @@ void CGisItemTrk::deriveSecondaryData() {
         continue;
       }
 
+      d2 = trkpt2.distance;
+      e2 = trkpt2.ele;
+      t2 = trkpt2.time.toMSecsSinceEpoch() / 1000.0;
       if (trkpt2.distance - trkpt.distance >= 25) {
-        d2 = trkpt2.distance;
-        e2 = trkpt2.ele;
-        t2 = trkpt2.time.toMSecsSinceEpoch() / 1000.0;
         break;
       }
     }

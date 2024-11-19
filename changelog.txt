@@ -4,6 +4,7 @@ V1.XX.X
 [QMS-675] The label colors defined in the TYP are not used
 [QMS-680] Fix: Sending multiple selected projects to device
 [QMS-683] Fix alglib error on interpolation
+[QMS-692] Trackpoints erroneously flaged invalid for short tracks (<50m)
 
 V1.17.1
 [QMS-547] Fixed: QMS freezes on zoom when activating multi-layered online maps

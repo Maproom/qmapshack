@@ -6,6 +6,7 @@ V1.XX.X
 [QMS-683] Fix alglib error on interpolation
 [QMS-692] Trackpoints erroneously flaged invalid for short tracks (<50m)
 [QMS-699] Fix writing to default config when using command line parameter -c
+[QMS-706] Apply PNG file’s offset to user-defined waypoint icon from "External Icons" folder
 
 V1.17.1
 [QMS-547] Fixed: QMS freezes on zoom when activating multi-layered online maps

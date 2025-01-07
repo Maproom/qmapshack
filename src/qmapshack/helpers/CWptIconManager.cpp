@@ -198,8 +198,9 @@ void CWptIconManager::init() {
 }
 
 void CWptIconManager::setWptIconByName(const QString& name, const QString& filename) {
-  QPixmap icon(filename);
-  wptIcons[name] = icon_t(filename, icon.width() >> 1, icon.height() >> 1);
+  QImage icon(filename);
+  wptIcons[name] = (icon.offset() == QPoint(0, 0)) ? icon_t(filename, icon.width() >> 1, icon.height() >> 1)
+                                                   : icon_t(filename, icon.offset().x(), icon.offset().y());
 }
 
 void CWptIconManager::setWptIconByName(const QString& name, const QPixmap& icon) {

@@ -21,6 +21,7 @@
 #include "CMainWindow.h"
 #include "gis/GeoMath.h"
 #include "gis/proj_x.h"
+#include "helpers/CSettings.h"
 #include "units/CUnitAviation.h"
 #include "units/CUnitImperial.h"
 #include "units/CUnitMetric.h"
@@ -600,7 +601,7 @@ void IUnit::setUnitType(type_e t, QObject* parent) {
       break;
   }
 
-  QSettings cfg;
+  SETTINGS;
   cfg.setValue("Units/type", t);
 }
 

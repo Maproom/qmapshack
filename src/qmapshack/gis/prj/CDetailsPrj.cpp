@@ -208,6 +208,7 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable) {
 
   fmtTableStandard.setBorder(1);
   fmtTableStandard.setBorderBrush(Qt::black);
+  fmtTableStandard.setBorderCollapse(false);
   fmtTableStandard.setCellPadding(4);
   fmtTableStandard.setCellSpacing(0);
   fmtTableStandard.setHeaderRowCount(1);

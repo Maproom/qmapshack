@@ -74,9 +74,7 @@ CProjWizard::CProjWizard(QLineEdit& line, QWidget* parent) : QDialog(parent), li
           &CProjWizard::slotChange);
 
   QString projstr = line.text();
-  static const QRegularExpression re2(QRegularExpression::anchoredPattern(
-      "\\s*\\+proj=merc \\+a=6378137 \\+b=6378137 \\+lat_ts=0.001 \\+lon_0=0.0 \\+x_0=0.0 \\+y_0=0 \\+k=1.0 \\+units=m "
-      "\\+nadgrids=@null \\+no_defs"));
+  static const QRegularExpression re2(QRegularExpression::anchoredPattern("\\s*EPSG:3857"));
   static const QRegularExpression re3(QRegularExpression::anchoredPattern("\\s*\\+proj=merc\\s(.*)"));
   static const QRegularExpression re4(QRegularExpression::anchoredPattern("\\s*\\+proj=utm \\+zone=([0-9]+)\\s(.*)"));
 

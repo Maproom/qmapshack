@@ -29,11 +29,15 @@ const qreal IDrawContext::scalesDefault[N_DEFAULT_ZOOM_LEVELS] = {
     //, 15000.0, 20000.0, 30000.0, 50000.0, 70000.0
 };
 
+// For TMS maps at zoom 0 there is only one tile of 256 px, and 6378137 is the radius of the sphere considered in Web Mercator,
+// so at zoom 0 one pixel equals 156543.033928041 m
+#define MPIXEL (156543.033928041 * 1.00025)
 #define N_SQUARE_ZOOM_LEVELS 17
 const qreal IDrawContext::scalesSquare[N_SQUARE_ZOOM_LEVELS] = {
-    0.1492910709,   0.2985821417,    0.5971642834,    1.1943285668,    2.3886571336,   4.7773142672,
-    9.5546285344,   19.1092570688,   38.2185141376,   76.4370282752,   152.8740565504, 305.7481131008,
-    611.4962262016, 1222.9924524032, 2445.9849048064, 4891.9698096128, 9783.9396192256};
+   MPIXEL/1048576., MPIXEL/524288., MPIXEL/262144., MPIXEL/131072., MPIXEL/65536.,
+   MPIXEL/32768., MPIXEL/16384., MPIXEL/8192., MPIXEL/4096.,
+   MPIXEL/2048., MPIXEL/1024., MPIXEL/512., MPIXEL/256.,
+   MPIXEL/128., MPIXEL/64., MPIXEL/32., MPIXEL/16.};
 
 QPointF operator*(const QPointF& p1, const QPointF& p2) { return QPointF(p1.x() * p2.x(), p1.y() * p2.y()); }
 

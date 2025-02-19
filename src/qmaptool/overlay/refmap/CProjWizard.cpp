@@ -74,9 +74,7 @@ CProjWizard::CProjWizard(QLineEdit& line, QWidget* parent) : QDialog(parent), li
           &CProjWizard::slotChange);
 
   QString projstr = line.text();
-  QRegExp re2(
-      "\\s*\\+proj=merc \\+a=6378137 \\+b=6378137 \\+lat_ts=0.001 \\+lon_0=0.0 \\+x_0=0.0 \\+y_0=0 \\+k=1.0 \\+units=m "
-      "\\+nadgrids=@null \\+no_defs");
+  QRegExp re2("\\s*EPSG:3857");
   QRegExp re3("\\s*\\+proj=merc\\s(.*)");
   QRegExp re4("\\s*\\+proj=utm \\+zone=([0-9]+)\\s(.*)");
 

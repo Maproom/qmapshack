@@ -53,15 +53,22 @@ void IMapOnline::slotQueueChanged() {
     // request up to 6 pending request
     for (int i = 0; i < (6 - urlPending.size()); i++) {
       QString url = urlQueue.dequeue();
+      // remove all remaining duplicates from queue
+      urlQueue.removeAll(url);
       lastRequest = urlQueue.isEmpty();
 
-      QNetworkRequest request;
-      request.setUrl(url);
-      for (const rawHeaderItem_t& item : qAsConst(rawHeaderItems)) {
-        request.setRawHeader(item.name.toLatin1(), item.value.toLatin1());
+      if (!urlPending.contains(url)) {
+        QNetworkRequest request;
+        request.setUrl(url);
+        for (const rawHeaderItem_t& item : qAsConst(rawHeaderItems)) {
+          request.setRawHeader(item.name.toLatin1(), item.value.toLatin1());
+        }
+	// allow http(s) redirects
+	request.setAttribute(QNetworkRequest::RedirectPolicyAttribute,QNetworkRequest::NoLessSafeRedirectPolicy);
+
+        accessManager->get(request);
+        urlPending << url;
       }
-      accessManager->get(request);
-      urlPending << url;
 
       if (lastRequest) {
         break;
@@ -90,7 +97,8 @@ void IMapOnline::slotQueueChanged() {
 void IMapOnline::slotRequestFinished(QNetworkReply* reply) {
   QMutexLocker lock(&mutex);
 
-  QString url = reply->url().toString();
+  // use originally requested url due to possible redirects
+  QString url = reply->request().url().toString();
   if (urlPending.contains(url)) {
     QImage img;
     // only take good responses

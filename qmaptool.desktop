@@ -11,5 +11,3 @@ GenericName=Tool to create raster maps
 Keywords=map;raster;referencing
 MimeType=application/x-tif;
 StartupNotify=true
-
-#TRANSLATIONS_DIR=src/locale

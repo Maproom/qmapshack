@@ -920,13 +920,6 @@ qt6_add_resources(RC_SRCS ${RCS})
 #     TRANSLATION_DIR "locale"
 # )
 
-# if (UNIX AND NOT WIN32 AND NOT APPLE)
-#     translate_desktop(${APPLICATION_NAME}_DESKTOP_FILES
-#         TRANSLATION_DIR "locale"
-#         SOURCES "${PROJECT_SOURCE_DIR}/qmapshack.desktop.in"
-#     )
-# endif()
-
 ###############################################################################################
 # Build source file and include paths lists
 ###############################################################################################

@@ -1,8 +1,3 @@
-# Prevent custom commands/targets outputs to be deleted by make clean
-# We need this to prevent .ts files from being deleted with make clean, when
-# UPDATE_TRANSLATIONS=ON
-# WARNING: Only works with Makefile generator.
-set_directory_properties(PROPERTIES CLEAN_NO_CUSTOM TRUE)
 # Find includes in corresponding build directories
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 # Instruct CMake to run moc automatically when needed.

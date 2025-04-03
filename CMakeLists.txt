@@ -194,6 +194,10 @@ find_package(ROUTINO                REQUIRED)
 find_package(QuaZip-Qt6             REQUIRED)
 find_package(ALGLIB                         ) # optional as we can use our local version
 
+qt_standard_project_setup(
+    I18N_TRANSLATED_LANGUAGES ca cs de es fr it nl ru
+)
+
 if(${PROJ_VERSION} VERSION_LESS 8.0.0)
     message( SEND_ERROR "You need at least PROJ 8.0.0 or newer.")
 endif()

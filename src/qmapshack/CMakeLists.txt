@@ -895,12 +895,21 @@ set( UIS
     widgets/ITextEditWidgetSelMenu.ui
 )
 
-
 set( RCS
     resources.qrc
 )
 
-
+set( TRANSLATIONS
+    locale/${APPLICATION_NAME}.ts
+    locale/${APPLICATION_NAME}_ca.ts
+    locale/${APPLICATION_NAME}_cs.ts
+    locale/${APPLICATION_NAME}_de.ts
+    locale/${APPLICATION_NAME}_es.ts
+    locale/${APPLICATION_NAME}_fr.ts
+    locale/${APPLICATION_NAME}_it.ts
+    locale/${APPLICATION_NAME}_nl.ts
+    locale/${APPLICATION_NAME}_ru.ts
+)
 
 ###############################################################################################
 # Some Qt magic
@@ -912,13 +921,11 @@ qt6_add_resources(RC_SRCS ${RCS})
 ###############################################################################################
 # Translation related stuff
 ###############################################################################################
-# translate_ts(${APPLICATION_NAME}_QM_FILES
-#     UPDATE_TRANSLATIONS ${UPDATE_TRANSLATIONS}
-#     UPDATE_OPTIONS "-I${CMAKE_CURRENT_SOURCE_DIR}" ${KEEP_OLD_TRANSLATIONS}
-#     SOURCES ${SRCS} ${HDRS} ${UIS}
-#     TEMPLATE ${APPLICATION_NAME}
-#     TRANSLATION_DIR "locale"
-# )
+
+qt_add_translations(${APPLICATION_NAME}
+    TS_FILES ${TRANSLATIONS}
+    QM_FILES_OUTPUT_VARIABLE ${APPLICATION_NAME}_QM_FILES
+)
 
 ###############################################################################################
 # Build source file and include paths lists

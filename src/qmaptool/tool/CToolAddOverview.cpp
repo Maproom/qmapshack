@@ -40,13 +40,13 @@ CToolAddOverview::CToolAddOverview(QWidget* parent) : IToolGui(parent) {
   connect(CMainWindow::self().showToolHelp(), &QAction::toggled, labelHelp, &QLabel::setVisible);
 
   connect(itemList, &CItemListWidget::sigAddItem, this, &CToolAddOverview::slotAddItem);
-  connect(checkBy2, &QCheckBox::stateChanged, this, &CToolAddOverview::slotSelectionChanged);
-  connect(checkBy4, &QCheckBox::stateChanged, this, &CToolAddOverview::slotSelectionChanged);
-  connect(checkBy8, &QCheckBox::stateChanged, this, &CToolAddOverview::slotSelectionChanged);
-  connect(checkBy16, &QCheckBox::stateChanged, this, &CToolAddOverview::slotSelectionChanged);
-  connect(checkBy32, &QCheckBox::stateChanged, this, &CToolAddOverview::slotSelectionChanged);
-  connect(checkBy64, &QCheckBox::stateChanged, this, &CToolAddOverview::slotSelectionChanged);
-  connect(checkRemove, &QCheckBox::stateChanged, this, &CToolAddOverview::slotSelectionChanged);
+  connect(checkBy2, &QCheckBox::checkStateChanged, this, &CToolAddOverview::slotSelectionChanged);
+  connect(checkBy4, &QCheckBox::checkStateChanged, this, &CToolAddOverview::slotSelectionChanged);
+  connect(checkBy8, &QCheckBox::checkStateChanged, this, &CToolAddOverview::slotSelectionChanged);
+  connect(checkBy16, &QCheckBox::checkStateChanged, this, &CToolAddOverview::slotSelectionChanged);
+  connect(checkBy32, &QCheckBox::checkStateChanged, this, &CToolAddOverview::slotSelectionChanged);
+  connect(checkBy64, &QCheckBox::checkStateChanged, this, &CToolAddOverview::slotSelectionChanged);
+  connect(checkRemove, &QCheckBox::checkStateChanged, this, &CToolAddOverview::slotSelectionChanged);
 
   connect(itemList, &CItemListWidget::sigSelectionChanged, this, &CToolAddOverview::slotMapSelectionChanged);
 
@@ -99,12 +99,12 @@ void CToolAddOverview::slotAddItem(const QString& filename, QListWidget* list) {
 
 void CToolAddOverview::slotMapSelectionChanged() {
   CMainWindow::self().getCanvas()->slotTriggerCompleteUpdate(CCanvas::eRedrawAll);
-  slotSelectionChanged();
+  slotSelectionChanged(Qt::Checked);
 }
 
-void CToolAddOverview::slotSelectionChanged() {
-  bool enable = checkBy2->isChecked() | checkBy4->isChecked() | checkBy8->isChecked() | checkBy16->isChecked() |
-                checkBy32->isChecked() | checkBy64->isChecked() | checkRemove->isChecked();
+void CToolAddOverview::slotSelectionChanged(Qt::CheckState /*state*/) {
+  bool enable = checkBy2->isChecked() || checkBy4->isChecked() || checkBy8->isChecked() || checkBy16->isChecked() ||
+                checkBy32->isChecked() || checkBy64->isChecked() || checkRemove->isChecked();
   pushStart->setEnabled(enable && itemList->count());
 
   bool isRemove = checkRemove->isChecked();

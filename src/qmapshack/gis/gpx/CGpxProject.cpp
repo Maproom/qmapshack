@@ -96,12 +96,14 @@ void CGpxProject::loadGpx(const QString& filename, CGpxProject* project) {
 
   // load file content to xml document
   QDomDocument xml;
-  QString msg;
-  int line;
-  int column;
-  if (!xml.setContent(&file, false, &msg, &line, &column)) {
+  const QDomDocument::ParseResult& result = xml.setContent(&file);
+  if (!result) {
     file.close();
-    throw tr("Failed to read: %1\nline %2, column %3:\n %4").arg(filename).arg(line).arg(column).arg(msg);
+    throw tr("Failed to read: %1\nline %2, column %3:\n %4")
+        .arg(filename)
+        .arg(result.errorLine)
+        .arg(result.errorColumn)
+        .arg(result.errorMessage);
   }
   file.close();
 
@@ -220,7 +222,7 @@ bool CGpxProject::saveAs(const QString& fn, IGisProject& project, bool strictGpx
 
     // load file content to xml document
     QDomDocument xml;
-    if (xml.setContent(&file, false)) {
+    if (xml.setContent(&file)) {
       const QDomElement& docElem = xml.documentElement();
       const QDomNamedNodeMap& attr = docElem.attributes();
       createdByQMS = attr.namedItem("creator").nodeValue().startsWith("QMapShack");

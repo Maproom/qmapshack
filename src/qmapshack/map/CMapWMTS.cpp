@@ -41,15 +41,17 @@ CMapWMTS::CMapWMTS(const QString& filename, CMapDraw* parent) : IMapOnline(paren
     return;
   }
 
-  QString msg;
-  int line, column;
   QDomDocument dom;
-  if (!dom.setContent(&file, true, &msg, &line, &column)) {
+  const QDomDocument::ParseResult& result = dom.setContent(&file);
+  if (!result) {
     file.close();
-    QMessageBox::critical(
-        CMainWindow::getBestWidgetForParent(), tr("Error..."),
-        tr("Failed to read: %1\nline %2, column %3:\n %4").arg(filename).arg(line).arg(column).arg(msg),
-        QMessageBox::Abort, QMessageBox::Abort);
+    QMessageBox::critical(CMainWindow::getBestWidgetForParent(), tr("Error..."),
+                          tr("Failed to read: %1\nline %2, column %3:\n %4")
+                              .arg(filename)
+                              .arg(result.errorLine)
+                              .arg(result.errorColumn)
+                              .arg(result.errorMessage),
+                          QMessageBox::Abort, QMessageBox::Abort);
     return;
   }
   file.close();

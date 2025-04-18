@@ -83,12 +83,14 @@ void CLogProject::loadLog(const QString& filename, CLogProject* project) {
 
   // load file content to xml document
   QDomDocument xml;
-  QString msg;
-  int line;
-  int column;
-  if (!xml.setContent(&file, false, &msg, &line, &column)) {
+  const QDomDocument::ParseResult& result = xml.setContent(&file);
+  if (!result) {
     file.close();
-    throw tr("Failed to read: %1\nline %2, column %3:\n %4").arg(filename).arg(line).arg(column).arg(msg);
+    throw tr("Failed to read: %1\nline %2, column %3:\n %4")
+        .arg(filename)
+        .arg(result.errorLine)
+        .arg(result.errorColumn)
+        .arg(result.errorMessage);
   }
   file.close();
 

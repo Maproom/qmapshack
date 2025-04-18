@@ -93,12 +93,14 @@ void CTcxProject::loadTcx(const QString& filename, CTcxProject* project) {
   }
 
   QDomDocument xml;
-  QString msg;
-  int line;
-  int column;
-  if (!xml.setContent(&file, false, &msg, &line, &column)) {
+  const QDomDocument::ParseResult& result = xml.setContent(&file);
+  if (!result) {
     file.close();
-    throw tr("Failed to read: %1\nline %2, column %3:\n %4").arg(filename).arg(line).arg(column).arg(msg);
+    throw tr("Failed to read: %1\nline %2, column %3:\n %4")
+        .arg(filename)
+        .arg(result.errorLine)
+        .arg(result.errorColumn)
+        .arg(result.errorMessage);
   }
   file.close();
 
@@ -323,7 +325,7 @@ bool CTcxProject::saveAs(const QString& fn, IGisProject& project) {
 
     // load file content to xml document
     QDomDocument xmlTcx;
-    if (xmlTcx.setContent(&file, false)) {
+    if (xmlTcx.setContent(&file)) {
       const QDomNodeList& tcxAuthor = xmlTcx.elementsByTagName("Author");
       if (tcxAuthor.item(0).isElement()) {
         const QDomNodeList& tcxAuthorName = tcxAuthor.item(0).toElement().elementsByTagName("Name");

@@ -706,7 +706,7 @@ QDateTime IUnit::parseTimestamp(const QString& timetext, int& tzoffset) {
   QDateTime datetime = QDateTime::fromString(timetext, format);
 
   if (applyTzOffset) {
-    datetime.setOffsetFromUtc(tzoffset);
+    datetime.setTimeZone(QTimeZone::fromSecondsAheadOfUtc(tzoffset));
   } else {  // if timetext has no 'Z' and no [-+]HH:MM then this is local time then simply switch to UTC without
             // applying any offset
     datetime = datetime.toUTC();

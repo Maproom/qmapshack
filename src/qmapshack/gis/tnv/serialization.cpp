@@ -72,7 +72,7 @@ static QStringList writeCompeTime(const QDateTime& t, bool isTrack) {
     return result;
   }
 
-  QDateTime timestamp = t.toTimeSpec(Qt::UTC);
+  QDateTime timestamp = t.toTimeZone(QTimeZone::UTC);
 
   QString monthStrs[] = {"", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
   QString monthStr = monthStrs[timestamp.date().month()];
@@ -118,7 +118,7 @@ static QDateTime readCompeTime(QString str, bool isTrack) {
     }
   }
 
-  timestamp.setTimeSpec(Qt::UTC);
+  timestamp.setTimeZone(QTimeZone::UTC);
   return timestamp;
 }
 
@@ -632,10 +632,7 @@ bool CTwoNavProject::loadWpts(const QString& filename, const QDir& dir) {
           str += line;
         }
 
-        QString errorMsg;
-        int errorLine = 0;
-        int errorColumn = 0;
-        wpt.gpx.setContent(str, &errorMsg, &errorLine, &errorColumn);
+        wpt.gpx.setContent(str);
         break;
       }
 

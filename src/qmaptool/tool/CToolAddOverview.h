@@ -37,7 +37,7 @@ class CToolAddOverview : public IToolGui, public ITool, private Ui::IToolAddOver
  private slots:
   void slotAddItem(const QString& filename, QListWidget* list);
   void slotMapSelectionChanged();
-  void slotSelectionChanged();
+  void slotSelectionChanged(Qt::CheckState state);
   void slotStart();
   void slotFinished(qint32 id);
 

@@ -40,12 +40,13 @@ CDeviceGarmin::CDeviceGarmin(const QString& path, const QString& key, const QStr
   }
 
   QDomDocument dom;
-  QString msg;
-  int line;
-  int column;
-  if (!dom.setContent(&file, false, &msg, &line, &column)) {
-    qDebug()
-        << QString("Failed to read: %1\nline %2, column %3:\n %4").arg(file.fileName()).arg(line).arg(column).arg(msg);
+  const QDomDocument::ParseResult& result = dom.setContent(&file);
+  if (!result) {
+    qDebug() << QString("Failed to read: %1\nline %2, column %3:\n %4")
+                    .arg(file.fileName())
+                    .arg(result.errorLine)
+                    .arg(result.errorColumn)
+                    .arg(result.errorMessage);
   }
 
   file.close();

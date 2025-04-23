@@ -1,0 +1,62 @@
+
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node>
+    <interface name="org.kde.kmtp.Storage">
+        <property access="read" type="s" name="description" />
+        <property access="read" type="t" name="maxCapacity" />
+        <property access="read" type="t" name="freeSpaceInBytes" />
+        <method name="getFilesAndFolders">
+            <arg direction="in" type="s" name="path" />
+            <arg direction="out" type="a(uuustxs)" />
+            <arg direction="out" type="i" name="exists" />
+            <annotation value="KMTPFileList" name="org.qtproject.QtDBus.QtTypeName.Out0" />
+        </method>
+        <method name="getFilesAndFolders2">
+            <arg direction="out" type="o" />
+            <arg direction="in" type="s" name="path" />
+        </method>
+        <method name="getFileMetadata">
+            <arg direction="in" type="s" name="path" />
+            <arg direction="out" type="(uuustxs)" />
+            <annotation value="KMTPFile" name="org.qtproject.QtDBus.QtTypeName.Out0" />
+        </method>
+        <method name="getFileToHandler">
+            <arg direction="in" type="s" name="path" />
+            <arg direction="out" type="i" />
+        </method>
+        <method name="getFileToFileDescriptor">
+            <arg direction="in" type="h" name="descriptor" />
+            <arg direction="in" type="s" name="sourcePath" />
+            <arg direction="out" type="i" name="result" />
+        </method>
+        <method name="sendFileFromFileDescriptor">
+            <arg direction="in" type="h" name="descriptor" />
+            <arg direction="in" type="s" name="destinationPath" />
+            <arg direction="out" type="i" />
+        </method>
+        <method name="setFileName">
+            <arg direction="in" type="s" name="path" />
+            <arg direction="in" type="s" name="newName" />
+            <arg direction="out" type="i" name="result" />
+        </method>
+        <method name="createFolder">
+            <arg direction="in" type="s" name="path" />
+            <arg direction="out" type="u" />
+        </method>
+        <method name="deleteObject">
+            <arg direction="in" type="s" name="path" />
+            <arg direction="out" type="i" name="result" />
+        </method>
+        <signal name="dataReady">
+            <arg direction="out" type="ay" name="data" />
+            <annotation value="QByteArray" name="org.qtproject.QtDBus.QtTypeName.Out0" />
+        </signal>
+        <signal name="copyProgress">
+            <arg type="t" name="transferredBytes" />
+            <arg type="t" name="totalBytes" />
+        </signal>
+        <signal name="copyFinished">
+            <arg type="i" name="result" />
+        </signal>
+    </interface>
+</node>

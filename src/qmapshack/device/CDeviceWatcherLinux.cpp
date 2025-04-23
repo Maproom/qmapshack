@@ -22,10 +22,16 @@
 #include <QtWidgets>
 #include <QtXml>
 
+#include "canvas/CCanvas.h"
+#include "device/CDeviceGarminMtp.h"
 #include "device/IDevice.h"
+#include "device/dbus/org.kde.kmtp.Device.h"
+#include "device/dbus/org.kde.kmtp.Storage.h"
 #include "gis/CGisListWks.h"
 
 CDeviceWatcherLinux::CDeviceWatcherLinux(CGisListWks* parent) : IDeviceWatcher(parent) {
+  qDBusRegisterMetaType<KMTPFile>();
+  qDBusRegisterMetaType<KMTPFileList>();
   QDBusConnection::systemBus().connect("org.freedesktop.UDisks2", "/org/freedesktop/UDisks2",
                                        "org.freedesktop.DBus.ObjectManager", "InterfacesAdded", this,
                                        SLOT(slotDeviceAdded(QDBusObjectPath, QVariantMap)));
@@ -33,6 +39,10 @@ CDeviceWatcherLinux::CDeviceWatcherLinux(CGisListWks* parent) : IDeviceWatcher(p
   QDBusConnection::systemBus().connect("org.freedesktop.UDisks2", "/org/freedesktop/UDisks2",
                                        "org.freedesktop.DBus.ObjectManager", "InterfacesRemoved", this,
                                        SLOT(slotDeviceRemoved(QDBusObjectPath, QStringList)));
+
+  kmtpDaemon = new org::kde::kmtp::Daemon("org.kde.kiod6", "/modules/kmtpd", QDBusConnection::sessionBus(), this);
+  connect(kmtpDaemon, &org::kde::kmtp::Daemon::devicesChanged, this, &CDeviceWatcherLinux::slotKMTPDeviceChanged);
+  slotKMTPDeviceChanged();
 }
 
 CDeviceWatcherLinux::~CDeviceWatcherLinux() {}
@@ -151,8 +161,7 @@ QString CDeviceWatcherLinux::readMountPoint(const QString& path) {
 
   {
     QList<QVariant> args;
-    args << "org.freedesktop.UDisks2.Filesystem"
-         << "MountPoints";
+    args << "org.freedesktop.UDisks2.Filesystem" << "MountPoints";
     message.setArguments(args);
   }
 
@@ -203,4 +212,42 @@ QString CDeviceWatcherLinux::readMountPoint(const QString& path) {
     return mountPoints.first();
   }
   return "";
+}
+
+void CDeviceWatcherLinux::slotKMTPDeviceChanged() {
+  qDebug() << "CDeviceWatcherLinux::slotKMTPDeviceChanged()";
+
+  // as the signal only signals a change in the list, we need to find out
+  // which storage is new, which is already attached and which one is removed
+  QSet<QString> oldKnownKmtpStorages = knownKmtpStorages;
+  knownKmtpStorages.clear();
+
+  // iterate over all MTP devices
+  const QList<QDBusObjectPath>& devices = kmtpDaemon->listDevices().value();
+  for (const QDBusObjectPath& devicePath : devices) {
+    org::kde::kmtp::Device device("org.kde.kiod6", devicePath.path(), QDBusConnection::sessionBus(), this);
+
+    // iterate over the storages of each device
+    const QList<QDBusObjectPath>& storages = device.listStorages();
+    for (const QDBusObjectPath& storagePath : storages) {
+      org::kde::kmtp::Storage storage("org.kde.kiod6", storagePath.path(), QDBusConnection::sessionBus(), this);
+      qDebug() << "Probe MTP storage " << storage.description();
+      // check if we can find a file GarminDevice.xml at the expected location
+      const KMTPFile& fileGarminDeviceXml = storage.getFileMetadata("/GARMIN/GarminDevice.xml").value();
+      if (fileGarminDeviceXml.isValid() && !fileGarminDeviceXml.isFolder()) {
+        CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
+        const QString& key = QString("%1@%2").arg(storage.description(), device.udi());
+        if (!oldKnownKmtpStorages.contains(key)) {
+          new CDeviceGarminMtp(storagePath, device.friendlyName(), key, listWks);
+          emit sigChanged();
+        }
+        knownKmtpStorages.insert(key);
+        oldKnownKmtpStorages.remove(key);
+      }
+    }
+  }
+
+  for (const QString& key : oldKnownKmtpStorages) {
+    listWks->removeDevice(key);
+  }
 }

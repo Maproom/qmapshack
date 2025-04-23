@@ -37,9 +37,14 @@ set( SRCS
     dem/IDemProp.cpp
     device/CDeviceGarmin.cpp
     device/CDeviceGarminArchive.cpp
+    device/CDeviceGarminMtp.cpp
     device/CDeviceTwoNav.cpp
     device/IDevice.cpp
     device/IDeviceWatcher.cpp
+    device/dbus/org.kde.kmtp.Daemon.cpp
+    device/dbus/org.kde.kmtp.Device.cpp
+    device/dbus/org.kde.kmtp.Storage.cpp
+    device/dbus/metatypes.cpp
     gis/CGisDatabase.cpp
     gis/CGisDraw.cpp
     gis/CGisItemRate.cpp
@@ -407,9 +412,14 @@ set( HDRS
     dem/IDemProp.h
     device/CDeviceGarmin.h
     device/CDeviceGarminArchive.h
+    device/CDeviceGarminMtp.h
     device/CDeviceTwoNav.h
     device/IDevice.h
     device/IDeviceWatcher.h
+    device/dbus/org.kde.kmtp.Daemon.h
+    device/dbus/org.kde.kmtp.Device.h
+    device/dbus/org.kde.kmtp.Storage.h
+    device/dbus/metatypes.h
     gis/CGisDatabase.h
     gis/CGisDraw.h
     gis/CGisItemRate.h

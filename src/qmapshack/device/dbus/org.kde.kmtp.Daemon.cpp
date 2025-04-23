@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler <oliver.eichler@gmx.de>
+    Copyright (C) 2021 Oliver Eichler <oliver.eichler@gmx.de>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,31 +16,14 @@
 
 **********************************************************************************************/
 
-#ifndef CDEVICEWATCHERLINUX_H
-#define CDEVICEWATCHERLINUX_H
-
-#include "device/IDeviceWatcher.h"
 #include "device/dbus/org.kde.kmtp.Daemon.h"
-class QDBusObjectPath;
 
-class CDeviceWatcherLinux : public IDeviceWatcher {
-  Q_OBJECT
- public:
-  CDeviceWatcherLinux(CGisListWks* parent);
-  virtual ~CDeviceWatcherLinux();
+/*
+ * Implementation of interface class OrgKdeKmtpDaemonInterface
+ */
 
- private slots:
-  void slotDeviceAdded(const QDBusObjectPath& path, const QVariantMap& map);
-  void slotDeviceRemoved(const QDBusObjectPath& path, const QStringList& list);
-  void slotUpdate() override;
+OrgKdeKmtpDaemonInterface::OrgKdeKmtpDaemonInterface(const QString &service, const QString &path,
+                                                     const QDBusConnection &connection, QObject *parent)
+    : QDBusAbstractInterface(service, path, staticInterfaceName(), connection, parent) {}
 
-  void slotKMTPDeviceChanged();
-
- private:
-  QString readMountPoint(const QString& path);
-
-  org::kde::kmtp::Daemon* kmtpDaemon;
-  QSet<QString> knownKmtpStorages;
-};
-
-#endif  // CDEVICEWATCHERLINUX_H
+OrgKdeKmtpDaemonInterface::~OrgKdeKmtpDaemonInterface() {}

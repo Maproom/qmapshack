@@ -31,7 +31,7 @@ class CDeviceGarmin;
 class IDevice : public QTreeWidgetItem {
   Q_DECLARE_TR_FUNCTIONS(IDevice)
  public:
-  enum type_e { eTypeNone = 0, eTypeGarmin = 1, eTypeTwoNav = 2 };
+  enum type_e { eTypeNone = 0, eTypeGarmin = 1, eTypeTwoNav = 2, eTypeGarminMtp = 3 };
 
   IDevice(const QString& path, type_e type, const QString& key, QTreeWidget* parent);
   IDevice(const QString& path, type_e type, const QString& key, CDeviceGarmin* parent);

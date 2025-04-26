@@ -12,6 +12,7 @@ V1.XX.X
 [QMS-715] Remove duplicate tile map server requests for the same tile, allow HTTP(S) redirection
 
 
+
 V1.17.1
 [QMS-547] Fixed: QMS freezes on zoom when activating multi-layered online maps
 [QMS-622] Update BRouter setup (install from github)

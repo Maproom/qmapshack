@@ -60,11 +60,11 @@ void IMapOnline::slotQueueChanged() {
       if (!urlPending.contains(url)) {
         QNetworkRequest request;
         request.setUrl(url);
-        for (const rawHeaderItem_t& item : qAsConst(rawHeaderItems)) {
+        for (const rawHeaderItem_t& item : std::as_const(rawHeaderItems)) {
           request.setRawHeader(item.name.toLatin1(), item.value.toLatin1());
         }
-	      // allow http(s) redirects
-	      request.setAttribute(QNetworkRequest::RedirectPolicyAttribute,QNetworkRequest::NoLessSafeRedirectPolicy);
+        // allow http(s) redirects
+        request.setAttribute(QNetworkRequest::RedirectPolicyAttribute, QNetworkRequest::NoLessSafeRedirectPolicy);
 
         accessManager->get(request);
         urlPending << url;

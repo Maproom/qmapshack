@@ -164,8 +164,15 @@ cxx_add_flag_if_supported(-Woverloaded-virtual)
 ###############################################################################################
 # Find all required packages and setup internal variables
 ###############################################################################################
-find_package(Qt6Widgets             REQUIRED)
 find_package(Qt6Core                REQUIRED)
+
+
+if (Qt6Core_VERSION VERSION_LESS 6.8.0)
+        message(FATAL_ERROR "Qt 6.8.0 or later is required.")
+endif()
+
+
+find_package(Qt6Widgets             REQUIRED)
 find_package(Qt6Xml                 REQUIRED)
 find_package(Qt6Sql                 REQUIRED)
 find_package(Qt6LinguistTools       REQUIRED)

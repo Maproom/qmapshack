@@ -44,6 +44,16 @@ CGpxProject::CGpxProject(const QString& filename, IDevice* parent) : IGisProject
   blockUpdateItems(false);
 }
 
+CGpxProject::CGpxProject(QFile& file, const QString& filename, IDevice* parent)
+    : IGisProject(eTypeGpx, filename, parent) {
+  setIcon(CGisListWks::eColumnIcon, QIcon("://icons/32x32/GpxProject.png"));
+  blockUpdateItems(true);
+  loadGpx(file, filename, this);
+  setName(QFileInfo(filename).completeBaseName().replace("_", " "));
+  setupName("");
+  blockUpdateItems(false);
+}
+
 CGpxProject::CGpxProject(const QString& filename, const IGisProject* project, IDevice* parent)
     : IGisProject(eTypeGpx, filename, parent) {
   setIcon(CGisListWks::eColumnIcon, QIcon("://icons/32x32/GpxProject.png"));
@@ -93,7 +103,10 @@ void CGpxProject::loadGpx(const QString& filename, CGpxProject* project) {
   if (!file.open(QIODevice::ReadOnly)) {
     throw tr("Failed to open %1").arg(filename);
   }
+  loadGpx(file, filename, project);
+}
 
+void CGpxProject::loadGpx(QFile& file, const QString& filename, CGpxProject* project) {
   // load file content to xml document
   QDomDocument xml;
   const QDomDocument::ParseResult& result = xml.setContent(&file);
@@ -245,6 +258,10 @@ bool CGpxProject::saveAs(const QString& fn, IGisProject& project, bool strictGpx
     file.close();
   }
 
+  return saveAs(file, _fn_, project, strictGpx11);
+}
+
+bool CGpxProject::saveAs(QFile& file, const QString& filename, IGisProject& project, bool strictGpx11) {
   //  ---- start content of gpx
   QDomDocument doc;
   QDomNode gpx = project.writeMetadata(doc, strictGpx11);
@@ -336,8 +353,8 @@ bool CGpxProject::saveAs(const QString& fn, IGisProject& project, bool strictGpx
 
   bool res = true;
   try {
-    if (!file.open(QIODevice::WriteOnly)) {
-      throw tr("Failed to create file '%1'").arg(_fn_);
+    if (!file.isOpen() && !file.open(QIODevice::WriteOnly)) {
+      throw tr("Failed to create file '%1'").arg(filename);
     }
     QTextStream out(&file);
     out.setEncoding(QStringConverter::Utf8);
@@ -346,7 +363,7 @@ bool CGpxProject::saveAs(const QString& fn, IGisProject& project, bool strictGpx
     out << doc.toString();
     file.close();
     if (file.error() != QFile::NoError) {
-      throw tr("Failed to write file '%1'").arg(_fn_);
+      throw tr("Failed to write file '%1'").arg(filename);
     }
   } catch (const QString& msg) {
     // as saveAs() can be called from the thread that exports a database showing the

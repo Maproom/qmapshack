@@ -215,39 +215,50 @@ QString CDeviceWatcherLinux::readMountPoint(const QString& path) {
 }
 
 void CDeviceWatcherLinux::slotKMTPDeviceChanged() {
-  qDebug() << "CDeviceWatcherLinux::slotKMTPDeviceChanged()";
-
-  // as the signal only signals a change in the list, we need to find out
-  // which storage is new, which is already attached and which one is removed
-  QSet<QString> oldKnownKmtpStorages = knownKmtpStorages;
-  knownKmtpStorages.clear();
+  // As the signal only signals a change in the device list, we need to find out
+  // which device is new, which is already attached and which one is removed
+  QMap<QString, QStringList> oldKnownKMTPDevices = knownKMTPDevices;
+  knownKMTPDevices.clear();
 
   // iterate over all MTP devices
   const QList<QDBusObjectPath>& devices = kmtpDaemon->listDevices().value();
   for (const QDBusObjectPath& devicePath : devices) {
     org::kde::kmtp::Device device("org.kde.kiod6", devicePath.path(), QDBusConnection::sessionBus(), this);
-
-    // iterate over the storages of each device
-    const QList<QDBusObjectPath>& storages = device.listStorages();
-    for (const QDBusObjectPath& storagePath : storages) {
-      org::kde::kmtp::Storage storage("org.kde.kiod6", storagePath.path(), QDBusConnection::sessionBus(), this);
-      qDebug() << "Probe MTP storage " << storage.description();
-      // check if we can find a file GarminDevice.xml at the expected location
-      const KMTPFile& fileGarminDeviceXml = storage.getFileMetadata("/GARMIN/GarminDevice.xml").value();
-      if (fileGarminDeviceXml.isValid() && !fileGarminDeviceXml.isFolder()) {
-        CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
-        const QString& key = QString("%1@%2").arg(storage.description(), device.udi());
-        if (!oldKnownKmtpStorages.contains(key)) {
-          new CDeviceGarminMtp(storagePath, device.friendlyName(), key, listWks);
-          emit sigChanged();
+    const QString& key = device.udi();
+    // skip known devices
+    if (oldKnownKMTPDevices.contains(key)) {
+      knownKMTPDevices[key] = oldKnownKMTPDevices.take(key);
+    } else {
+      // check unknown devices for a storage with GarminDevice.xml in the path
+      const QList<QDBusObjectPath>& storages = device.listStorages();
+      for (const QDBusObjectPath& storagePath : storages) {
+        org::kde::kmtp::Storage storage("org.kde.kiod6", storagePath.path(), QDBusConnection::sessionBus(), this);
+        const KMTPFile& fileGarminDeviceXml = storage.getFileMetadata("/GARMIN/GarminDevice.xml").value();
+        if (fileGarminDeviceXml.isValid() && !fileGarminDeviceXml.isFolder()) {
+          // If the device is a Garmin add each storage of the device as a single device.
+          addKMTPDevice(device, key);
+          break;
         }
-        knownKmtpStorages.insert(key);
-        oldKnownKmtpStorages.remove(key);
       }
     }
   }
 
-  for (const QString& key : oldKnownKmtpStorages) {
-    listWks->removeDevice(key);
+  // oldKnownKMTPDevices now contains all devices that need to be removed.
+  for (const QStringList& keys : std::as_const(oldKnownKMTPDevices)) {
+    for (const QString& key : keys) {
+      listWks->removeDevice(key);
+    }
   }
+}
+
+void CDeviceWatcherLinux::addKMTPDevice(org::kde::kmtp::Device& device, const QString& deviceKey) {
+  CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
+  const QList<QDBusObjectPath>& storages = device.listStorages();
+  for (const QDBusObjectPath& storagePath : storages) {
+    org::kde::kmtp::Storage storage("org.kde.kiod6", storagePath.path(), QDBusConnection::sessionBus(), this);
+    const QString& key = QString("%1@%2").arg(storage.description(), device.udi());
+    new CDeviceGarminMtp(storagePath, device.friendlyName(), key, listWks);
+    knownKMTPDevices[deviceKey] << key;
+  }
+  emit sigChanged();
 }

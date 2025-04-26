@@ -19,85 +19,100 @@
 #include "device/CDeviceGarminMtp.h"
 
 #include "gis/CGisListWks.h"
+#include "gis/fit/CFitProject.h"
+#include "gis/gpx/CGpxProject.h"
 
 CDeviceGarminMtp::CDeviceGarminMtp(const QDBusObjectPath& objectPathStorage, const QString& model, const QString& key,
                                    QTreeWidget* parent)
     : IDevice("", eTypeGarminMtp, key, parent), QObject(parent) {
   storage = new org::kde::kmtp::Storage("org.kde.kiod6", objectPathStorage.path(), QDBusConnection::sessionBus(), this);
-
   setText(CGisListWks::eColumnName, QString("%1 (%2)").arg(model, storage->description()));
-  // todo: find root path
-  dir.setPath("/GARMIN");
 
-  // try to read the icon from the device
+  // Find the "GARMIN" or "Garmin" folder
+  const KMTPFileList topLevelFiles = storage->getFilesAndFolders("/");
+  for (const KMTPFile& file : topLevelFiles) {
+    if (file.isFolder()) {
+      if (file.filename().toUpper() == "GARMIN") {
+        dir.setPath("/" + file.filename());
+      }
+    }
+  }
+  if (dir.dirName().isEmpty()) {
+    return;
+  }
+
+  // Try to read the icon from the device
   QTemporaryFile icon;
-  if (getFileFromStorage(dir.filePath("Garmintriangletm.ico"), icon)) {
+  if (readFileFromStorage(dir.filePath("Garmintriangletm.ico"), icon)) {
     QPixmap pixmap;
+    icon.open();
     pixmap.loadFromData(icon.readAll());
     if (!pixmap.isNull()) {
       setIcon(CGisListWks::eColumnIcon, pixmap);
     }
   }
 
-  // Read information from GarminDevice.xml
+  // Try to read detailed information from GarminDevice.xml
   QTemporaryFile garminDeviceXmlFile;
-  if (!getFileFromStorage(dir.filePath("GarminDevice.xml"), garminDeviceXmlFile)) {
-    return;
-  }
-
-  QDomDocument dom;
-  const QDomDocument::ParseResult& result = dom.setContent(&garminDeviceXmlFile);
-  if (!result) {
-    qDebug() << QString("Failed to read: %1\nline %2, column %3:\n %4")
-                    .arg(garminDeviceXmlFile.fileName())
-                    .arg(result.errorLine)
-                    .arg(result.errorColumn)
-                    .arg(result.errorMessage);
-    return;
-  }
-
-  const QDomElement& xmlDevice = dom.documentElement();
-  const QDomNode& xmlModel = xmlDevice.namedItem("Model");
-  id = xmlDevice.namedItem("Id").toElement().text().trimmed();
-  description = xmlModel.namedItem("Description").toElement().text().trimmed();
-  partno = xmlModel.namedItem("PartNumber").toElement().text().trimmed();
-
-  // update the tool tip with information from the device xml
-  setToolTip(CGisListWks::eColumnName,
-             QString("%1 (%2, V%3)")
-                 .arg(description, partno, xmlModel.namedItem("SoftwareVersion").toElement().text().trimmed()));
-
-  const QDomNode& xmlMassStorageMode = xmlDevice.namedItem("MassStorageMode");
-  const QDomNodeList& xmlDataTypes = xmlMassStorageMode.toElement().elementsByTagName("DataType");
-
-  const int N = xmlDataTypes.count();
-  for (int n = 0; n < N; n++) {
-    const QDomNode& xmlDataType = xmlDataTypes.item(n);
-    const QDomNode& xmlName = xmlDataType.namedItem("Name");
-    const QDomNode& xmlFile = xmlDataType.namedItem("File");
-    const QDomNode& xmlLocation = xmlFile.namedItem("Location");
-    const QDomNode& xmlPath = xmlLocation.namedItem("Path");
-
-    QString name = xmlName.toElement().text().trimmed();
-
-    if (name == "GPSData") {
-      pathGpx = xmlPath.toElement().text().trimmed();
-    } else if (name == "GeotaggedPhotos") {
-      pathPictures = xmlPath.toElement().text().trimmed();
-    } else if (name == "GeocachePhotos") {
-      pathSpoilers = xmlPath.toElement().text().trimmed();
-    } else if (name == "FIT_TYPE_4") {
-      pathActivities = xmlPath.toElement().text().trimmed();
-    } else if (name == "FIT_TYPE_6") {
-      // courses
-      pathCourses = xmlPath.toElement().text().trimmed();
-    } else if (name == "FIT_TYPE_8") {
-      pathLocations = xmlPath.toElement().text().trimmed();
-    } else if (name == "Adventures") {
-      pathAdventures = xmlPath.toElement().text().trimmed();
-    } else if (name == "FitnessCourses") {
-      pathTcx = xmlPath.toElement().text().trimmed();
+  if (readFileFromStorage(dir.filePath("GarminDevice.xml"), garminDeviceXmlFile)) {
+    QDomDocument dom;
+    garminDeviceXmlFile.open();
+    const QDomDocument::ParseResult& result = dom.setContent(&garminDeviceXmlFile);
+    if (!result) {
+      qDebug() << QString("Failed to read: %1\nline %2, column %3:\n %4")
+                      .arg(garminDeviceXmlFile.fileName())
+                      .arg(result.errorLine)
+                      .arg(result.errorColumn)
+                      .arg(result.errorMessage);
+      return;
     }
+
+    const QDomElement& xmlDevice = dom.documentElement();
+    const QDomNode& xmlModel = xmlDevice.namedItem("Model");
+    id = xmlDevice.namedItem("Id").toElement().text().trimmed();
+    description = xmlModel.namedItem("Description").toElement().text().trimmed();
+    partno = xmlModel.namedItem("PartNumber").toElement().text().trimmed();
+
+    // update the tool tip with information from the device xml
+    setToolTip(CGisListWks::eColumnName,
+               QString("%1 (%2, V%3)")
+                   .arg(description, partno, xmlModel.namedItem("SoftwareVersion").toElement().text().trimmed()));
+
+    const QDomNode& xmlMassStorageMode = xmlDevice.namedItem("MassStorageMode");
+    const QDomNodeList& xmlDataTypes = xmlMassStorageMode.toElement().elementsByTagName("DataType");
+
+    const int N = xmlDataTypes.count();
+    for (int n = 0; n < N; n++) {
+      const QDomNode& xmlDataType = xmlDataTypes.item(n);
+      const QDomNode& xmlName = xmlDataType.namedItem("Name");
+      const QDomNode& xmlFile = xmlDataType.namedItem("File");
+      const QDomNode& xmlLocation = xmlFile.namedItem("Location");
+      const QDomNode& xmlPath = xmlLocation.namedItem("Path");
+
+      QString name = xmlName.toElement().text().trimmed();
+
+      if (name == "GPSData") {
+        pathGpx = xmlPath.toElement().text().trimmed().replace("Garmin", "/GARMIN");
+      } else if (name == "GeotaggedPhotos") {
+        pathPictures = xmlPath.toElement().text().trimmed().replace("Garmin", "/GARMIN");
+      } else if (name == "GeocachePhotos") {
+        pathSpoilers = xmlPath.toElement().text().trimmed().replace("Garmin", "/GARMIN");
+      } else if (name == "FIT_TYPE_4") {
+        pathActivities = xmlPath.toElement().text().trimmed().replace("Garmin", "/GARMIN");
+      } else if (name == "FIT_TYPE_6") {
+        // courses
+        pathCourses = xmlPath.toElement().text().trimmed().replace("Garmin", "/GARMIN");
+      } else if (name == "FIT_TYPE_8") {
+        pathLocations = xmlPath.toElement().text().trimmed().replace("Garmin", "/GARMIN");
+      } else if (name == "Adventures") {
+        pathAdventures = xmlPath.toElement().text().trimmed().replace("Garmin", "/GARMIN");
+      } else if (name == "FitnessCourses") {
+        pathTcx = xmlPath.toElement().text().trimmed().replace("Garmin", "/GARMIN");
+      }
+    }
+  } else {
+    // build paths for memory card storages that do not have a GarminDevice.xml
+    pathGpx = dir.filePath("GPX");
   }
 
   qDebug() << pathGpx;
@@ -110,34 +125,135 @@ CDeviceGarminMtp::CDeviceGarminMtp(const QDBusObjectPath& objectPathStorage, con
   qDebug() << pathTcx;
 
   createProjectsFromFiles(pathGpx, "gpx");
+  createProjectsFromFiles(pathActivities, "fit");
 }
 
-void CDeviceGarminMtp::insertCopyOfProject(IGisProject* project) {}
+bool CDeviceGarminMtp::removeFromDevice(const QString& filename) {
+  qDebug() << "CDeviceGarminMtp::removeFromDevice(" << filename << ")";
+  return storage->deleteObject(filename) == 0;
+}
 
-void CDeviceGarminMtp::createProjectsFromFiles(QString subdirecoty, QString fileEnding) {}
+void CDeviceGarminMtp::insertCopyOfProject(IGisProject* project) {
+  const QString& filename = createFileName(project, pathGpx, ".gpx");
+  qDebug() << "CDeviceGarminMtp::insertCopyOfProject(" << filename << ")";
 
-bool CDeviceGarminMtp::getFileFromStorage(const QString& path, QTemporaryFile& file) {
-  file.open();
+  CGpxProject* gpx = new CGpxProject(filename, project, this);
+  if (!gpx->isValid()) {
+    delete gpx;
+    return;
+  }
+
+  QTemporaryFile file;
+  file.open();  // saveAs will close the file
+  if (!CGpxProject::saveAs(file, filename, *gpx, false)) {
+    delete gpx;
+    return;
+  }
+
+  if (!sendFileToStorage(filename, file)) {
+    delete gpx;
+    return;
+  }
+
+  // move new project to top of any sub-folder/sub-device item
+  reorderProjects(gpx);
+}
+
+void CDeviceGarminMtp::createProjectsFromFiles(QString subdirectory, QString extension) {
+  QDir d(subdirectory);
+  const KMTPFileList& files = storage->getFilesAndFolders(subdirectory).value();
+  for (const KMTPFile& file : files) {
+    if (!file.isFolder() && file.filename().endsWith(extension)) {
+      QTemporaryFile tempFile;
+      if (!readFileFromStorage(d.filePath(file.filename()), tempFile)) {
+        return;
+      }
+      tempFile.open();
+      IGisProject* project = nullptr;
+      if (extension == "gpx") {
+        project = new CGpxProject(tempFile, d.filePath(file.filename()), this);
+      } else if (extension == "fit") {
+        project = new CFitProject(tempFile, d.filePath(file.filename()), this);
+      }
+      if (project && !project->isValid()) {
+        delete project;
+      }
+    }
+  }
+}
+
+bool CDeviceGarminMtp::sendFileToStorage(const QString& path, QTemporaryFile& file) {
+  if (file.isOpen()) {
+    file.seek(0);
+  } else {
+    file.open();
+  }
+
   QDBusUnixFileDescriptor descriptor(file.handle());
-  int res = storage->getFileToFileDescriptor(descriptor, path);
-  if (res) {
-    qWarning() << "Failed to load" << path;
+  if (waitForCopyOperation(storage, [descriptor, path, this]() {
+        return storage->sendFileFromFileDescriptor(descriptor, path).value();
+      })) {
+    qWarning() << "Failed to send file" << path;
     return false;
   }
-  if (waitForCopyOperation(storage)) {
-    qWarning() << "Failed to copy" << path;
-    return false;
-  }
-  file.seek(0);
+  file.close();
   return true;
 }
 
-int CDeviceGarminMtp::waitForCopyOperation(const org::kde::kmtp::Storage* storage) {
+bool CDeviceGarminMtp::readFileFromStorage(const QString& path, QTemporaryFile& file) {
+  if (file.isOpen()) {
+    file.seek(0);
+  } else {
+    file.open();
+  }
+
+  QDBusUnixFileDescriptor descriptor(file.handle());
+  if (waitForCopyOperation(
+          storage, [descriptor, path, this]() { return storage->getFileToFileDescriptor(descriptor, path).value(); })) {
+    qWarning() << "Failed to read file" << path;
+    return false;
+  }
+  file.close();
+  return true;
+}
+
+int CDeviceGarminMtp::waitForCopyOperation(const org::kde::kmtp::Storage* storage, fn_operation operation) {
   QEventLoop loop;
   connect(storage, &org::kde::kmtp::Storage::copyProgress, &loop,
           [](qulonglong sent, qulonglong total) { qDebug() << "processed size:" << sent << "of" << total; });
-
-  // any chance to 'miss' the copyFinished signal and dead lock the worker?
   connect(storage, &org::kde::kmtp::Storage::copyFinished, &loop, &QEventLoop::exit);
-  return loop.exec();
+
+  if (operation() == 0) {
+    return loop.exec();
+  } else {
+    return -1;
+  }
+}
+
+QString CDeviceGarminMtp::createFileName(IGisProject* project, const QString& path, const QString& suffix) const {
+  return QDir(path).filePath(simplifiedName(project) + suffix);
+}
+
+QString CDeviceGarminMtp::simplifiedName(IGisProject* project) const {
+  static const QRegularExpression re("[^A-Za-z0-9_]");
+  return project->getName().remove(re);
+}
+
+void CDeviceGarminMtp::reorderProjects(IGisProject* project) {
+  // move new project to top of any sub-folder/sub-device item
+  int newIdx = NOIDX;
+  const int myIdx = childCount() - 1;
+  for (int i = myIdx - 1; i >= 0; i--) {
+    IDevice* device = dynamic_cast<IDevice*>(child(i));
+    if (0 == device) {
+      break;
+    }
+
+    newIdx = i;
+  }
+
+  if (newIdx != NOIDX) {
+    takeChild(myIdx);
+    insertChild(newIdx, project);
+  }
 }

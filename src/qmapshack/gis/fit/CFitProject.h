@@ -30,6 +30,7 @@ class CFitProject final : public IGisProject {
  public:
   CFitProject(const QString& filename, CGisListWks* parent);
   CFitProject(const QString& filename, IDevice* parent);
+  CFitProject(QFile &file, const QString &filename, IDevice* parent);
   virtual ~CFitProject();
 
   const QString getFileDialogFilter() const override { return IGisProject::filedialogFilterFIT; }
@@ -40,7 +41,9 @@ class CFitProject final : public IGisProject {
 
  private:
   void loadFitFromFile(const QString& filename, bool showErrorMsg);
+  void loadFitFromFile(QFile& file, bool showErrorMsg);
   void tryOpeningFitFile(const QString& filename);
+  void tryOpeningFitFile(QFile& file);
   void createGisItems(QFile& file);
 };
 

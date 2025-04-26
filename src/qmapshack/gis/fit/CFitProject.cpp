@@ -39,11 +39,37 @@ CFitProject::CFitProject(const QString& filename, IDevice* parent) : IGisProject
   loadFitFromFile(filename, false);
 }
 
+CFitProject::CFitProject(QFile& file, const QString& filename, IDevice* parent)
+    : IGisProject(eTypeFit, filename, parent) {
+  loadFitFromFile(file, false);
+  // setName(QFileInfo(filename).completeBaseName().replace("_", " "));
+  // setupName("");
+}
+
 void CFitProject::loadFitFromFile(const QString& filename, bool showErrorMsg) {
   setIcon(CGisListWks::eColumnIcon, QIcon("://icons/32x32/FitProject.png"));
   blockUpdateItems(true);
   try {
     tryOpeningFitFile(filename);
+  } catch (QString& errormsg) {
+    if (showErrorMsg) {
+      QMessageBox::critical(CMainWindow::getBestWidgetForParent(), tr("Failed to load file %1...").arg(filename),
+                            errormsg, QMessageBox::Abort);
+    } else {
+      qWarning() << "Failed to load FIT file:" << errormsg;
+    }
+    valid = false;
+  }
+
+  sortItems();
+  blockUpdateItems(false);
+}
+
+void CFitProject::loadFitFromFile(QFile& file, bool showErrorMsg) {
+  setIcon(CGisListWks::eColumnIcon, QIcon("://icons/32x32/FitProject.png"));
+  blockUpdateItems(true);
+  try {
+    tryOpeningFitFile(file);
   } catch (QString& errormsg) {
     if (showErrorMsg) {
       QMessageBox::critical(CMainWindow::getBestWidgetForParent(), tr("Failed to load file %1...").arg(filename),
@@ -71,11 +97,14 @@ void CFitProject::tryOpeningFitFile(const QString& filename) {
     valid = true;
     return;
   }
-
   if (!file.open(QIODevice::ReadOnly)) {
     throw tr("Failed to open FIT file %1.").arg(filename);
   }
 
+  tryOpeningFitFile(file);
+}
+
+void CFitProject::tryOpeningFitFile(QFile& file) {
   try {
     createGisItems(file);
   } catch (QString& errormsg) {

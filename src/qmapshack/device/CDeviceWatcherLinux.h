@@ -21,6 +21,7 @@
 
 #include "device/IDeviceWatcher.h"
 #include "device/dbus/org.kde.kmtp.Daemon.h"
+#include "device/dbus/org.kde.kmtp.Device.h"
 class QDBusObjectPath;
 
 class CDeviceWatcherLinux : public IDeviceWatcher {
@@ -38,9 +39,10 @@ class CDeviceWatcherLinux : public IDeviceWatcher {
 
  private:
   QString readMountPoint(const QString& path);
+  void addKMTPDevice(org::kde::kmtp::Device& device, const QString &deviceKey);
 
   org::kde::kmtp::Daemon* kmtpDaemon;
-  QSet<QString> knownKmtpStorages;
+  QMap<QString, QStringList> knownKMTPDevices;
 };
 
 #endif  // CDEVICEWATCHERLINUX_H

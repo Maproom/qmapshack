@@ -19,6 +19,8 @@
 #ifndef CDEVICEGARMINMTP_H
 #define CDEVICEGARMINMTP_H
 
+#include <functional>
+
 #include "device/IDevice.h"
 #include "device/dbus/org.kde.kmtp.Storage.h"
 
@@ -31,15 +33,22 @@ class CDeviceGarminMtp : public IDevice, private QObject {
                    QTreeWidget* parent);
   virtual ~CDeviceGarminMtp() = default;
 
+  bool removeFromDevice(const QString& filename);
+
  protected:
   void insertCopyOfProject(IGisProject* project) override;
 
   org::kde::kmtp::Storage* storage;
 
  private:
-  bool getFileFromStorage(const QString& path, QTemporaryFile& file);
-  int waitForCopyOperation(const org::kde::kmtp::Storage* storage);
-  void createProjectsFromFiles(QString subdirecoty, QString fileEnding);
+  using fn_operation = std::function<int()>;
+  bool readFileFromStorage(const QString& path, QTemporaryFile& file);
+  bool sendFileToStorage(const QString& path, QTemporaryFile& file);
+  int waitForCopyOperation(const org::kde::kmtp::Storage* storage, fn_operation operation);
+  void createProjectsFromFiles(QString subdirectory, QString extension);
+  QString createFileName(IGisProject* project, const QString& path, const QString& suffix) const;
+  QString simplifiedName(IGisProject* project) const;
+  void reorderProjects(IGisProject* project);
 
   QString id;
   QString partno;

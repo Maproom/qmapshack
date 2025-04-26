@@ -23,6 +23,7 @@
 #include <QtWidgets>
 
 #include "CMainWindow.h"
+#include "device/CDeviceGarminMtp.h"
 #include "device/IDevice.h"
 #include "gis/CGisDraw.h"
 #include "gis/CGisListWks.h"
@@ -783,6 +784,11 @@ void IGisProject::umount() {
 }
 
 bool IGisProject::remove() {
+  CDeviceGarminMtp* mtp = dynamic_cast<CDeviceGarminMtp*>(parent());
+  if (mtp != nullptr) {
+    return mtp->removeFromDevice(filename);
+  }
+
   CProjectMountLock mountLock(*this);
 
   /*

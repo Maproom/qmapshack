@@ -23,12 +23,14 @@
 
 class CGisListWks;
 class CGisDraw;
+class QFile;
 
 class CGpxProject : public IGisProject {
   Q_DECLARE_TR_FUNCTIONS(CGpxProject)
  public:
   CGpxProject(const QString& filename, CGisListWks* parent);
   CGpxProject(const QString& filename, IDevice* parent);
+  CGpxProject(QFile& file, const QString& filename, IDevice* parent);
   CGpxProject(const QString& filename, const IGisProject* project, IDevice* parent);
   virtual ~CGpxProject();
 
@@ -39,11 +41,13 @@ class CGpxProject : public IGisProject {
   bool canSave() const override { return true; }
 
   static bool saveAs(const QString& fn, IGisProject& project, bool strictGpx11);
+  static bool saveAs(QFile& file, const QString &filename, IGisProject& project, bool strictGpx11);
 
   static void loadGpx(const QString& filename, CGpxProject* project);
 
  private:
   void loadGpx(const QString& filename);
+  static void loadGpx(QFile& file, const QString &filename, CGpxProject* project);
 };
 
 #endif  // CGPXPROJECT_H

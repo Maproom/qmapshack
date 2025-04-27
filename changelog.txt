@@ -1,4 +1,5 @@
 V1.XX.X
+[QMS-730] TMS/WMTS fixed accidentally removed namespace processing
 [QMS-648] Porting to Qt6
 [QMS-656] TMS/WMTS: Fix loosing layer selection when reloading maps
 [QMS-668] MacOS build adapted to new gdal version and new brew packages
@@ -32,7 +33,7 @@ V1.17.0
 [QMS-490] Potentially incorrect slope shading opacity for slope value NOFLOAT
 [QMS-499] Disable close action for projects with autom. sync. to device
 [QMS-503] BRouter Version 1.6.3 local setup fails
-[QMS-507] QMapTool: Early projection validity check 
+[QMS-507] QMapTool: Early projection validity check
 [QMS-517] GPX-tracks are not displayed if lon or lat are invariant over the entire track
 [QMS-518] Enable edit for timestamps of waypoints
 [QMS-522] Change URLs of built-in maps from http to https
@@ -51,7 +52,7 @@ V1.17.0
 [QMS-591] MacOS build adapted for new Quazip version / preperation for brew package
 [QMS-594] Java version check fails in BRouter setup
 [QMS-606] Better hillshading with high resolution Lidar data
-[QMS-608] Update local copy of alglib 
+[QMS-608] Update local copy of alglib
 [QMS-610] Replace uncrustify by clang-format
 [QMS-612] Optimize DEM rendering by using a thread pool
 [QMS-615] Syntax error when compiling QMS for Windows

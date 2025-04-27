@@ -84,7 +84,7 @@ function buildAppStructure {
     mkdir $BUILD_BUNDLE_RES_QM_DIR
     mkdir $BUILD_BUNDLE_FRW_DIR
     mkdir $BUILD_BUNDLE_PLUGIN_DIR
-    if [[ "$BREW_PACKAGE_BUILD" == "" ]] ; then
+    if [ "$BREW_PACKAGE_BUILD" = "" ] ; then
         mkdir $BUILD_BUNDLE_EXTLIB_DIR
     fi
 
@@ -115,14 +115,22 @@ function buildAppStructure {
     cp -v $BUILD_BIN_DIR/$APP_NAME_LOWER  $BUILD_BUNDLE_APP_DIR/$APP_NAME
 
     # app translations
-    cp -v $BUILD_DIR/src/$APP_NAME_LOWER/*.qm $BUILD_BUNDLE_RES_QM_DIR
+    cp -v $BUILD_QMAPSHACK_DIR/src/$APP_NAME_LOWER/*.qm $BUILD_BUNDLE_RES_QM_DIR
 }
 
 
-function copyQtTrqnslations {
+function copyQtTranslations {
+    QT_TRANSLATIONS_DIR=$(find $QT_DEV_PATH -type d -name translations | head -n1)
     for i in "${APP_LANG[@]}"
     do
-        cp -v $QT_DEV_PATH/translations/*_${i}.qm $BUILD_BUNDLE_RES_QM_DIR
+        for MOD in qtbase qtmultimedia qtquickcontrols2 qtdeclarative
+        do
+            FILE="$QT_TRANSLATIONS_DIR/${MOD}_${i}.qm"
+            if [ -f "$FILE" ]; then
+                echo "Copying $FILE to $BUILD_BUNDLE_RES_QM_DIR/"
+                cp -v "$FILE" "$BUILD_BUNDLE_RES_QM_DIR/"
+            fi
+        done
     done
 }
 
@@ -144,12 +152,11 @@ function printLinkingApp {
         printLinking $F
     done
 
-    for F in `find $BUILD_BUNDLE_FRW_DIR/Qt*.framework/Versions/5 -type f -maxdepth 1`
+    for F in `find $BUILD_BUNDLE_FRW_DIR/Qt*.framework/Versions/A -type f -maxdepth 1`
     do
         printLinking $F
     done
-
-    for F in `find $BUILD_BUNDLE_FRW_DIR/Qt*.framework/Versions/5/Helpers/QtWebEngineProcess.app/Contents/MacOS/QtWebEngineProcess -type f -maxdepth 1`
+    for F in `find $BUILD_BUNDLE_FRW_DIR/Qt*.framework/Versions/A/Helpers/QtWebEngineProcess.app/Contents/MacOS/QtWebEngineProcess -type f -maxdepth 1`
     do
         printLinking $F
     done
@@ -166,12 +173,11 @@ function printLinkingApp {
         checkLibraries $F
     done
 
-    for F in `find $BUILD_BUNDLE_FRW_DIR/Qt*.framework/Versions/5 -type f -maxdepth 1`
+    for F in `find $BUILD_BUNDLE_FRW_DIR/Qt*.framework/Versions/A -type f -maxdepth 1`
     do
         checkLibraries $F
     done
-
-    for F in `find $BUILD_BUNDLE_FRW_DIR/Qt*.framework/Versions/5/Helpers/QtWebEngineProcess.app/Contents/MacOS/QtWebEngineProcess -type f -maxdepth 1`
+    for F in `find $BUILD_BUNDLE_FRW_DIR/Qt*.framework/Versions/A/Helpers/QtWebEngineProcess.app/Contents/MacOS/QtWebEngineProcess -type f -maxdepth 1`
     do
         echo $F
         checkLibraries $F
@@ -224,27 +230,32 @@ function adjustLinking {
 }
 
 function adjustLinkDyLib {
-    echo ">>> Adjusting dylibs of `basename $1`"
-    # adjust all dylibs in Frameworks with references to package manager
+    echo "adjustLinkDyLib >>> Adjusting dylibs of `basename $1`"
     F=$1 # file
     
     # exclude symlinks
-    if [[ -L "$F" ]]; then
-            return
+    if [ -L "$F" ]; then
+        return
     fi
 
     for P in `otool -L $F | awk '{print $1}'`
     do
-        # $P = dylib referenced by $F
-        # get filename of path
         LIB=`basename $P`
-        
-        # only for references to package, i.e. check if $P starts with $PACKAGES_PATH
-         if [[ "$P" =~ ^"$PACKAGES_PATH"  ]]; then
-            PREL="@executable_path/../Frameworks/$LIB"
-            echo "Changing $LIB to reference $PREL"
-            sudo install_name_tool -change $P $PREL $F
-         fi
+        # 1. adjust libraries from the package path
+        case "$P" in
+           "$PACKAGES_PATH"*) 
+             PREL="@executable_path/../Frameworks/$LIB"
+             echo "Changing $LIB to reference $PREL"
+             sudo install_name_tool -change $P $PREL $F
+             ;;
+
+           # 2. adjust rpath libraries that are known to cause problems
+           @rpath/libproj.25.dylib)
+             echo "Fixing libproj @rpath in $F"
+             sudo install_name_tool -change @rpath/libproj.25.dylib \
+                 @executable_path/../Frameworks/libproj.25.dylib $F
+             ;;
+        esac
     done
 }
 
@@ -258,13 +269,16 @@ function adjustLinkExtTool {
         LIB=${LIB%%:}
         PREL="@executable_path/../Frameworks/$LIB"
 
-        if [[ "$P" == *".framework"* ]]; then
-            LIB_VERSION=Versions/5
-            LIB=$LIB.framework/$LIB_VERSION/$LIB
-            PREL="@executable_path/../Frameworks/$LIB"
-        else
-             echo "cp -v $P ../Frameworks/"
-        fi
+        case "$P" in
+            *".framework"*)
+                LIB_VERSION=Versions/A
+                LIB=$LIB.framework/$LIB_VERSION/$LIB
+                PREL="@executable_path/../Frameworks/$LIB"
+                ;;
+            *)
+                echo "cp -v $P ../Frameworks/"
+                ;;
+        esac
    
         echo "install_name_tool -change $P $PREL `basename $1`"
         install_name_tool -change $P $PREL $1
@@ -279,28 +293,33 @@ function adjustLinkQt {
     for P in `otool -L $F | awk '{print $1}'`
     do
         # exclude symlinks
-        if [[ -L "$P" ]]; then
+        if [ -L "$P" ]; then
             break
         fi
         #  replace double slashes
-        if [[ "$P" == *//* ]]; then 
-            PSLASH=$(echo $P | sed 's,//,/,g')
-            sudo install_name_tool -change $P $PSLASH $F
-        fi
+        case "$P" in
+            *//*)
+                PSLASH=$(echo $P | sed 's,//,/,g')
+                sudo install_name_tool -change $P $PSLASH $F
+                ;;
+        esac
 
         LIB=${P##*/}    
         LIB=${LIB%%:}
         PREL="@executable_path/../Frameworks/$LIB"
 
-        if [[ "$P" == *".framework"* ]]; then
-            LIB_VERSION=Versions/5
-            LIB=$LIB.framework/$LIB_VERSION/$LIB
-            PREL="@executable_path/../Frameworks/$LIB"
-        elif [[ "$P" == *"PlugIns"* ]]; then
-            # subdirectory for PlugIns
-            LIB=${P##*PlugIns/} # remove prepart
-            PREL="@executable_path/../PlugIns/$LIB"
-        fi
+        case "$P" in
+            *".framework"*)
+                LIB_VERSION=Versions/A
+                LIB=$LIB.framework/$LIB_VERSION/$LIB
+                PREL="@executable_path/../Frameworks/$LIB"
+                ;;
+            *"PlugIns"*)
+                # subdirectory for PlugIns
+                LIB=${P##*PlugIns/} # remove prepart
+                PREL="@executable_path/../PlugIns/$LIB"
+                ;;
+        esac
 
         echo "-----"
         echo "F    = $F"
@@ -310,18 +329,18 @@ function adjustLinkQt {
         echo "LIB  = $LIB"
         echo "PREL = $PREL"
 
-        if [[ "$P" == "$FREL" ]]; then
+        if [ "$P" = "$FREL" ]; then
             echo "no update - is a relativ id"
-		elif [[ "$LIB" == *"$FREL" ]]; then
+        elif echo "$LIB" | grep -q "$FREL"; then
             echo "name_tool: $FREL >> $PREL ($P)"
             sudo install_name_tool -id $PREL $F
-        elif [[ "$P" == *$L* ]]; then
+        elif echo "$P" | grep -q "$L"; then
             echo "name_tool: $FREL > $PREL ($P)"
             sudo install_name_tool -change $P $PREL $F
-        elif [[ "$P" == @loader_path* ]]; then
+        elif echo "$P" | grep -q "^@loader_path"; then
             echo "name_tool: $FREL > $PREL ($P)"
             sudo install_name_tool -change $P $PREL $F
-        elif [[ "$P" == @rpath* ]]; then
+        elif echo "$P" | grep -q "^@rpath"; then
             echo "name_tool: $FREL > $PREL ($P)"
             sudo install_name_tool -change $P $PREL $F
         fi
@@ -398,7 +417,7 @@ function extractVersion {
     MINOR_VERSION=$(sed -E -n 's/.*_VERSION_MINOR.*([[:digit:]]+).*/\1/p' $QMS_SRC_DIR/src/$APP_NAME_LOWER/CMakeLists.txt)
     PATCH_VERSION=$(sed -E -n 's/.*_VERSION_PATCH.*([[:digit:]]+).*/\1/p' $QMS_SRC_DIR/src/$APP_NAME_LOWER/CMakeLists.txt)
 
-    if [[ -z "$MAJOR_VERSION" ]]; then
+    if [ -z "$MAJOR_VERSION" ]; then
          # project(QMapShack VERSION 1.11.0)
         MAJOR_VERSION=$(sed -E -n 's/.*QMapShack VERSION.*([[:digit:]]+)\.([[:digit:]]+)\.([[:digit:]]+).*/\1/p' $QMS_SRC_DIR/CMakeLists.txt)
         MINOR_VERSION=$(sed -E -n 's/.*QMapShack VERSION.*([[:digit:]]+)\.([[:digit:]]+)\.([[:digit:]]+).*/\2/p' $QMS_SRC_DIR/CMakeLists.txt)
@@ -433,12 +452,12 @@ function updateInfoPlist {
 }
 
 
-if [[ "$1" == "icon" ]]; then
+if [ "$1" = "icon" ]; then
     buildIcon
 fi
-if [[ "$1" == "info" ]]; then
+if [ "$1" = "info" ]; then
     printLinkingApp
 fi
-if [[ "$1" == "info-before" ]]; then
+if [ "$1" = "info-before" ]; then
     printLinking $BUILD_RELEASE_DIR/$APP_NAME
 fi

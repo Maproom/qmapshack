@@ -22,6 +22,10 @@ export ATTN=$(tput setaf 1)  # red
 export NC=$(tput sgr0)
 
 export QMSDEVDIR=${QMSDEVDIR%/} # remove trailing slash, if there is any
+export BUILD_QMAPSHACK_DIR="$QMSDEVDIR/build_QMapShack"
+
+# ARM64 or Intel(?)
+export CMAKE_OSX_ARCHITECTURES=$(uname -m)
 
 echo ${ATTN}
 echo "-------------------------------------------------"
@@ -36,7 +40,7 @@ echo ${NC}
 # Check if you build qmapshack outside of the source dir (cloned from GitHub)
 ########################################################################
 
-if [[ "$QMSDEVDIR" == "" ]]; then
+if [ "$QMSDEVDIR" = "" ]; then
     echo $ATTN
     echo "shell var QMSDEVDIR is not set"
     echo "Please export QMSDEVDIR to a folder outside of qmapshack"
@@ -49,7 +53,7 @@ fi
 # echo $DIR_SCRIPT
 echo ${DIR_SCRIPT%/*}
 # echo ${DIR_SCRIPT%/*}/*
-if [[ "$QMSDEVDIR" == "$DIR_SCRIPT" ]] || [[ "$QMSDEVDIR"  ==  ${DIR_SCRIPT%/*}  ]]; then
+if [ "$QMSDEVDIR" = "$DIR_SCRIPT" ] || [ "$QMSDEVDIR" = "${DIR_SCRIPT%/*}" ]; then
     echo $ATTN
     echo "Your shell var QMSDEVDIR points to a driectory inside qmapshack"
     echo "Please export QMSDEVDIR to a folder outside of qmapshack"
@@ -87,7 +91,7 @@ export XCODE_PROJECT=
 export BUILD_GDAL="x"
 # PROJ (still experimental): if set to "x", it will be built from source. 
 # If not set (i.e. blank), PROJ will be taken from the package manager
-export BUILD_PROJ=
+export BUILD_PROJ="x"
 
 
 # checking arguments: intested in -x (Xcode), -m (MacPorts), -b (Homebrew)
@@ -134,7 +138,7 @@ export LOCAL_ENV=$QMSDEVDIR/local  # folder for building pkgs from source
 # package manager
 eval "$(brew shellenv)"   # set HOMEBREW_PREFIX
 export PACKAGES_PATH=$HOMEBREW_PREFIX
-if [[ "$MACPORTS_BUILD" == "x" ]]; then
+if [ "$MACPORTS_BUILD" = "x" ]; then
     export MACPORTS=/opt/local          # Macports package manager
     export HOMEBREW_PREFIX=
     export BREW_PACKAGE_BUILD=
@@ -146,35 +150,35 @@ export BUILD_RELEASE_DIR=$QMSDEVDIR/release # app bundles will be put
 export QMS_SRC_DIR=$QMSDEVDIR/qmapshack # QMS source dir (clone from GitHub)
 export SRC_OSX_DIR=$QMSDEVDIR/qmapshack/MacOSX # Sources only for MacOS
 
-# QT5
-if [[ "$MACPORTS_BUILD" == "x" ]]; then
-    export QT_DEV_PATH=$PACKAGES_PATH/libexec/qt5
+# QT6
+if [ "$MACPORTS_BUILD" = "x" ]; then
+    export QT_DEV_PATH=$PACKAGES_PATH/libexec/qt6
 else
-    export QT_DEV_PATH=$PACKAGES_PATH/opt/qt5
+    export QT_DEV_PATH=$PACKAGES_PATH/opt/qt@6
 fi
-export Qt5_DIR=$QT_DEV_PATH/lib/cmake
+export Qt6_DIR=$QT_DEV_PATH/lib/cmake
 
 # Other packages needed
-if [[ "$MACPORTS_BUILD" == "x" ]]; then
+if [ "$MACPORTS_BUILD" = "x" ]; then
     export GDAL=$PACKAGES_PATH
     export ROUTINO_DEV_PATH=$PACKAGES_PATH
     export PROJ_DEV_PATH=$PACKAGES_PATH/lib/proj9
-    export QuaZip_Qt5_DIR=$PACKAGES_PATH/lib/cmake/QuaZip-Qt5-1.4
+    export QuaZip_Qt6_DIR=$PACKAGES_PATH/lib/cmake/QuaZip-Qt6-1.5
 else
     # GDAL, ROUTINO, QUAZIP, PROJ are compiled from source
-    if [[ "$BUILD_GDAL" == "x" ]]; then
-        export GDAL_RELEASE="3.8"
+    if [ "$BUILD_GDAL" = "x" ]; then
+        export GDAL_RELEASE="3.10"
         export GDAL=$LOCAL_ENV
     else
         export GDAL=$PACKAGES_PATH
     fi
     export ROUTINO_DEV_PATH=$LOCAL_ENV
-    if [[ "$BUILD_PROJ" == "x" ]]; then
+    if [ "$BUILD_PROJ" = "x" ]; then
         export PROJ_DEV_PATH=$LOCAL_ENV
     else
         export PROJ_DEV_PATH=$PACKAGES_PATH
     fi
-    export QuaZip_Qt5_DIR=$LOCAL_ENV/lib/cmake/QuaZip-Qt5-1.4
+export QuaZip_Qt6_DIR=$LOCAL_ENV/lib/cmake/QuaZip-Qt6-1.5
 fi
 
 # env vars for building QMS
@@ -198,14 +202,14 @@ echo "BUILD_RELEASE_DIR = $BUILD_RELEASE_DIR"
 echo "QMS_SRC_DIR = $QMS_SRC_DIR"
 echo "SRC_OSX_DIR = $SRC_OSX_DIR"
 echo "QT_DEV_PATH = $QT_DEV_PATH"
-echo "Qt5_DIR = $Qt5_DIR"
+echo "Qt6_DIR = $Qt6_DIR"
 echo "BUILD_GDAL = $BUILD_GDAL"
 echo "GDAL = $GDAL"
 echo "GDAL_RELEASE = $GDAL_RELEASE"
 echo "ROUTINO_DEV_PATH = $ROUTINO_DEV_PATH"
 echo "BUILD_PROJ = $BUILD_PROJ"
 echo "PROJ_DEV_PATH = $PROJ_DEV_PATH"
-echo "QuaZip_Qt5_DIR = $QuaZip_Qt5_DIR"
+echo "QuaZip_Qt6_DIR = $QuaZip_Qt6_DIR"
 echo "OSX_DEPLOYMENT_TARGET = $OSX_DEPLOYMENT_TARGET"
 echo "-------------------------------------"
 echo ${NC}

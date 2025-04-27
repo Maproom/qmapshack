@@ -26,10 +26,9 @@ read -n 1 -s
 
 ######################################################################## 
 # clean up
-if [[ "$1" == "clean" ]]; then
-
+if [ "$1" = "clean" ]; then
+    unset INCLUDED
     source $SRC_OSX_DIR/clean.sh
-    exit
 fi
 
 ########################################################################
@@ -60,7 +59,7 @@ fi
 ######################################################################## 
 # build Proj
 if [ -z "$MACPORTS_BUILD" ]; then
-   if [[ "$BUILD_PROJ" == "x" ]]; then
+   if [ "$BUILD_PROJ" = "x" ]; then
         cd $QMSDEVDIR
         source $SRC_OSX_DIR/build-proj.sh
         cd $QMSDEVDIR
@@ -70,7 +69,7 @@ fi
 ######################################################################## 
 # build GDAL
 if [ -z "$MACPORTS_BUILD" ]; then
-   if [[ "$BUILD_GDAL" == "x" ]]; then
+   if [ "$BUILD_GDAL" = "x" ]; then
         cd $QMSDEVDIR
         source $SRC_OSX_DIR/build-gdal.sh
         cd $QMSDEVDIR
@@ -89,7 +88,6 @@ sh $SRC_OSX_DIR/build-QMS.sh
 cd $QMSDEVDIR
 
 # Bundling QMapShack and QMapTool
-# source $QMS_BUILD_FILES/bundle.sh
 source $SRC_OSX_DIR/bundle-all.sh
 cd $QMSDEVDIR
 
@@ -106,5 +104,3 @@ cd $QMSDEVDIR
 # echo "${INFO}QMapShack can ignore dark mode by adding the following key to the \"info.plist\" file.${NC}"
 # echo "${INFO}<key>NSRequiresAquaSystemAppearance</key> <string>true</string>${NC}"
 # echo "${INFO}The \"info.plist\" file can be found in the bundle of the app under the \"Contents\" folder,${NC}"
-
-

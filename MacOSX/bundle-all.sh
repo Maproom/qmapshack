@@ -4,7 +4,7 @@ source $QMSDEVDIR/qmapshack/MacOSX/config.sh   # check for important paramters
 
 # Bundling QMapShack and QMapTool
 echo "${INFO}Bundle QMapShack ...${NC}"
-mkdir $BUILD_RELEASE_DIR
+mkdir -p $BUILD_RELEASE_DIR
 cd $SRC_OSX_DIR
 source ./bundle-qmapshack.sh
 cd $SRC_OSX_DIR

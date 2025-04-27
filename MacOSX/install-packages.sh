@@ -31,7 +31,7 @@ if [ -z "$MACPORTS_BUILD" ]; then
     rm -f $QMSDEVDIR/brewlist*.txt
     brew list > $QMSDEVDIR/brewlist-`date +%s`.txt
     brew install cmake
-    brew install qt@5
+    brew install qt@6
 
     brew install dbus
 

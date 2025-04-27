@@ -2,7 +2,7 @@
 
 source $QMSDEVDIR/qmapshack/MacOSX/config.sh   # check for important paramters
 
-echo "${ATTN}Building QMapShack.app ...${NC}"
+echo "${ATTN}Bundling QMapShack.app ...${NC}"
 echo "${ATTN}--------------------------${NC}"
 
 set -a
@@ -13,12 +13,12 @@ source $SRC_OSX_DIR/bundle-common-func.sh
 
 
 function extendAppStructure {
-    mkdir $BUILD_BUNDLE_RES_QM_DIR
-    mkdir $BUILD_BUNDLE_RES_GDAL_DIR
-    mkdir $BUILD_BUNDLE_RES_PROJ_DIR
-    mkdir $BUILD_BUNDLE_RES_ROUTINO_DIR
-    mkdir $BUILD_BUNDLE_RES_HELP_DIR
-    mkdir $BUILD_BUNDLE_RES_BIN_DIR
+    mkdir -p "$BUILD_BUNDLE_RES_QM_DIR"
+    mkdir -p "$BUILD_BUNDLE_RES_GDAL_DIR"
+    mkdir -p "$BUILD_BUNDLE_RES_PROJ_DIR"
+    mkdir -p "$BUILD_BUNDLE_RES_ROUTINO_DIR"
+    mkdir -p "$BUILD_BUNDLE_RES_HELP_DIR"
+    mkdir -p "$BUILD_BUNDLE_RES_BIN_DIR"
 }
 
 
@@ -27,43 +27,36 @@ function copyAdditionalLibraries {
 
         echo "---building with homebrew---"
         cp -v    $ROUTINO_DEV_PATH/lib/libroutino* $BUILD_BUNDLE_FRW_DIR
-        cp -v    $LOCAL_ENV/lib/libquazip*.dylib $BUILD_BUNDLE_FRW_DIR
+        install -m 644 $LOCAL_ENV/lib/libquazip*.dylib $BUILD_BUNDLE_FRW_DIR
 
         if [ -z "$BREW_PACKAGE_BUILD" ]; then
             # copy only if built as standalone package (QMS not as a brew pkg)
             echo "---build needs brew at runtime---"
 
-            if [[ "$BUILD_GDAL" == "x" ]]; then
-                cp -vP `brew --prefix openjpeg`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
-                cp -vP `brew --prefix libkml`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
-                cp -vP `brew --prefix minizip`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
-                cp -vP `brew --prefix uriparser`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
-                cp -vP `brew --prefix geos`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
-                cp -vP $LOCAL_ENV/lib/libgdal*.dylib $BUILD_BUNDLE_FRW_DIR
+            if [ "$BUILD_GDAL" = "x" ]; then
+                install -m 644 `brew --prefix openjpeg`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
+                install -m 644 `brew --prefix libkml`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
+                install -m 644 `brew --prefix minizip`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
+                install -m 644 `brew --prefix uriparser`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
+                install -m 644 `brew --prefix geos`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
+                install -m 644 $LOCAL_ENV/lib/libgdal*.dylib $BUILD_BUNDLE_FRW_DIR
             else
-                cp -vP `brew --prefix gdal`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
-                cp -vP `brew --prefix openexr`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
-                cp -vP `brew --prefix geos`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
-                cp -vP `brew --prefix jpeg-xl`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
+                install -m 644 `brew --prefix gdal`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
+                install -m 644 `brew --prefix openexr`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
+                install -m 644 `brew --prefix geos`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
+                install -m 644 `brew --prefix jpeg-xl`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
             fi
             
             $LOCAL_ENV/bin/otoolrecursive -u $BUILD_BUNDLE_FRW_DIR/libgdal.dylib | xargs -I{} cp -v {} $BUILD_BUNDLE_FRW_DIR
 
-            if [[ "$BUILD_PROJ" == "x" ]]; then
-                cp -vP $LOCAL_ENV/lib/libproj*.dylib $BUILD_BUNDLE_FRW_DIR
+            if [ "$BUILD_PROJ" = "x" ]; then
+                install -m 644 $LOCAL_ENV/lib/libproj*.dylib $BUILD_BUNDLE_FRW_DIR
             else
-                cp -vP `brew --prefix proj`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
+                install -m 644 `brew --prefix proj`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
             fi
-            cp -vP `brew --prefix dbus`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
+            install -m 644 `brew --prefix dbus`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
 
-            cp -v -R $QT_DEV_PATH/lib/QtOpenGL.framework $BUILD_BUNDLE_FRW_DIR
-            cp -v -R $QT_DEV_PATH/lib/QtQuick.framework $BUILD_BUNDLE_FRW_DIR
-            cp -v -R $QT_DEV_PATH/lib/QtQml.framework $BUILD_BUNDLE_FRW_DIR
-        fi
-        if [[ "$BUILD_GDAL" == "x" ]]; then
-            cp -vL $GDAL/lib/libgdal*.dylib $BUILD_BUNDLE_FRW_DIR
-        else
-            cp -vP `brew --prefix gdal`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
+            cp -v -R $QT_DEV_PATH/lib/QtQuickWidgets.framework $BUILD_BUNDLE_FRW_DIR
         fi
         
     else
@@ -92,10 +85,14 @@ function copyAdditionalLibraries {
 
 function copyExternalFiles {
     if [ -z "$MACPORTS_BUILD" ]; then
-
         echo "---building with homebrew---"
-        cp -vP $LOCAL_ENV/share/gdal/* $BUILD_BUNDLE_RES_GDAL_DIR
-        if [[ "$BUILD_PROJ" == "x" ]]; then
+        
+        if [ "$BUILD_GDAL" = "x" ]; then
+            cp -vP $LOCAL_ENV/share/gdal/* $BUILD_BUNDLE_RES_GDAL_DIR
+        else
+            cp -vP $(brew --prefix gdal)/share/gdal/* $BUILD_BUNDLE_RES_GDAL_DIR
+        fi
+        if [ "$BUILD_PROJ" = "x" ]; then
             cp -vP $LOCAL_ENV/share/proj/* $BUILD_BUNDLE_RES_PROJ_DIR
         else
             cp -vP $PACKAGES_PATH/share/proj/* $BUILD_BUNDLE_RES_PROJ_DIR
@@ -132,13 +129,17 @@ function copyExtTools {
  
         if [ -z "$BREW_PACKAGE_BUILD" ]; then
             # copy only if built as standalone package (QMS not as a brew pkg)
-            if [[ "$BUILD_PROJ" == "x" ]]; then
+            if [ "$BUILD_PROJ" = "x" ]; then
                 cp -v $LOCAL_ENV/bin/proj             $BUILD_BUNDLE_RES_BIN_DIR
             else
                 cp -v $PACKAGES_PATH/bin/proj             $BUILD_BUNDLE_RES_BIN_DIR
             fi
         fi
         cp -v $GDAL/bin/gdalbuildvrt                $BUILD_BUNDLE_RES_BIN_DIR
+        cp -v $GDAL/bin/gdaladdo                $BUILD_BUNDLE_RES_BIN_DIR
+        cp -v $GDAL/bin/gdal_translate          $BUILD_BUNDLE_RES_BIN_DIR
+        cp -v $GDAL/bin/gdalwarp                $BUILD_BUNDLE_RES_BIN_DIR
+
         cp -v $ROUTINO_DEV_PATH/bin/planetsplitter  $BUILD_BUNDLE_RES_BIN_DIR
       else
         echo "---building with macports---"
@@ -147,9 +148,6 @@ function copyExtTools {
         cp -v $ROUTINO_DEV_PATH/bin/planetsplitter       $BUILD_BUNDLE_RES_BIN_DIR
     fi
    
-    # currently only used by QMapTool.
-    cp -v $BUILD_BIN_DIR/qmt_rgb2pct            $BUILD_BUNDLE_RES_BIN_DIR
-    cp -v $BUILD_BIN_DIR/qmt_map2jnx            $BUILD_BUNDLE_RES_BIN_DIR
 }
 
 
@@ -165,75 +163,80 @@ function archiveBundle {
 }
 
 
-if [[ "$1" == "" ]]; then
 
-    if [ ! -z `brew --prefix qt` ]; then
-        echo "unlinking qt and linking qt@5"
-        brew unlink qt
-        brew link qt@5
-    fi
 
-    echo "---extract version -----------------"
-    extractVersion
-    readRevisionHash
-    echo "---build bundle --------------------"
-    buildAppStructure
-    extendAppStructure
-    echo "---replace version string ----------"
-    updateInfoPlist
-    if [[ "$BREW_PACKAGE_BUILD" == "" ]] ; then
-        echo "---qt deploy tool ------------------"
-        qtDeploy
-    fi
-    echo "---copy libraries ------------------"
-    copyAdditionalLibraries
-    echo "---copy external files -------------"
-    copyQtTrqnslations
-    copyExternalFiles
-    copyExternalHelpFiles_QMS
-    if [ -z "$BREW_PACKAGE_BUILD"]; then
-        # copy only if built as standalone package (QMS not as a brew pkg)
-        echo "---adjust linking ------------------"
-        adjustLinking
-    fi
-    echo "---external tools ------------------"
-    copyExtTools
-    if [ -z "$BREW_PACKAGE_BUILD" ]; then
-        # copy only if built as standalone package (QMS not as a brew pkg)
-        adjustLinkingExtTools
-    fi
-    printLinkingExtTools
-    echo "------------------------------------"
+echo "---extract version -----------------"
+extractVersion
+readRevisionHash
+echo "---build bundle --------------------"
+buildAppStructure
+extendAppStructure
+echo "---replace version string ----------"
+updateInfoPlist
 
-    # Codesign the apps (on arm64 mandatory):
-    echo "${INFO}Signing app bundles${NC}"
+echo "---qt deploy tool ------------------"
+if [ "$BREW_PACKAGE_BUILD" = "" ] ; then
+    qtDeploy
+fi
 
-    # 1. remove all empty directories, otherwiese verification of signing will fail
-    find $BUILD_BUNDLE_CONTENTS_DIR -type d -empty -delete
+echo "---copy libraries ------------------"
+copyAdditionalLibraries
 
-    if [ -z "$BREW_PACKAGE_BUILD" ]; then
-        # copy only if built as standalone package (QMS not as a brew pkg)
-    # 2. sign gdalbuild (special hack), since it is an executable copied from outside into the bundle
-    # install_name_tool -add_rpath @executable_path/../Frameworks $BUILD_RELEASE_DIR/QMapShack.app/Contents/Tools/gdalbuildvrt
-    # codesign -s <Apple Dev Account> --force --deep --sign - $BUILD_RELEASE_DIR/QMapShack.app/Contents/Tools/gdalbuildvrt
-    codesign -s manfred.kern@gmail.com --force --deep --sign - $BUILD_RELEASE_DIR/QMapShack.app/Contents/Tools/gdalbuildvrt
-    # codesign  --force --deep --sign - $BUILD_RELEASE_DIR/QMapShack.app/Contents/Tools/gdalbuildvrt
-    fi
+echo "---copy translations ------------------"
+copyQtTranslations    
 
-    # 3. sign the complete app bundle
-    # codesign -s <Apple Dev Account> --force --deep --sign - $BUILD_RELEASE_DIR/QMapShack.app
-    codesign -s manfred.kern@gmail.com --force --deep --sign - $BUILD_RELEASE_DIR/QMapShack.app
-    # codesign --force --deep --sign - $BUILD_RELEASE_DIR/QMapShack.app
+echo "---external data files -------------"
+copyExternalFiles
 
-    if [ ! -z `brew --prefix qt` ]; then
-        echo "unlinking qt@5 and linking qt"
-        brew unlink qt@5
-        brew link qt
-    fi
+echo "---external help files -------------"
+copyExternalHelpFiles_QMS
+
+
+
+echo "---external tools ------------------"
+copyExtTools
+
+
+if [ -z "$BREW_PACKAGE_BUILD" ]; then
+    # copy only if built as standalone package (QMS not as a brew pkg)
+    echo "---adjust linking ------------------"
+    adjustLinking
+fi
+
+if [ -z "$BREW_PACKAGE_BUILD" ]; then
+    # copy only if built as standalone package (QMS not as a brew pkg)
+        echo "---adjustLinkingExtTools -------------"
+
+    adjustLinkingExtTools
 
 fi
 
-if [[ "$1" == "archive" ]]; then
+
+printLinkingExtTools
+echo "------------------------------------"
+
+# Codesign the apps (on arm64 mandatory):
+echo "${INFO}Signing app bundles${NC}"
+
+# 1. remove all empty directories, otherwiese verification of signing will fail
+find $BUILD_BUNDLE_CONTENTS_DIR -type d -empty -delete
+
+if [ -z "$BREW_PACKAGE_BUILD" ]; then
+    # copy only if built as standalone package (QMS not as a brew pkg)
+# 2. sign gdalbuild (special hack), since it is an executable copied from outside into the bundle
+# install_name_tool -add_rpath @executable_path/../Frameworks $BUILD_RELEASE_DIR/QMapShack.app/Contents/Tools/gdalbuildvrt
+# codesign -s <Apple Dev Account> --force --deep --sign - $BUILD_RELEASE_DIR/QMapShack.app/Contents/Tools/gdalbuildvrt
+codesign -s manfred.kern@gmail.com --force --deep --sign - $BUILD_RELEASE_DIR/QMapShack.app/Contents/Tools/gdalbuildvrt
+# codesign  --force --deep --sign - $BUILD_RELEASE_DIR/QMapShack.app/Contents/Tools/gdalbuildvrt
+fi
+
+# 3. sign the complete app bundle
+# codesign -s <Apple Dev Account> --force --deep --sign - $BUILD_RELEASE_DIR/QMapShack.app
+codesign -s manfred.kern@gmail.com --force --deep --sign - $BUILD_RELEASE_DIR/QMapShack.app
+# codesign --force --deep --sign - $BUILD_RELEASE_DIR/QMapShack.app
+
+
+if [ "$1" = "archive" ]; then
     extractVersion
     archiveBundle
 fi

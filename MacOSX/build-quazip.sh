@@ -14,20 +14,8 @@ cd $QMSDEVDIR/quazip
 mkdir build
 cd ./build
 
-if [ ! -z `brew --prefix qt` ]; then
-  echo "unlinking qt and linking qt@5"
-  brew unlink qt
-  brew link qt@5
-fi
-
-$PACKAGES_PATH/bin/cmake .. -DCMAKE_INSTALL_PREFIX=$LOCAL_ENV -DQT_VERSION_MAJOR=5 -DQUAZIP_QT_MAJOR_VERSION=5
-$PACKAGES_PATH/bin/cmake --build . -j4
+$PACKAGES_PATH/bin/cmake .. -DCMAKE_INSTALL_PREFIX=$LOCAL_ENV -DQT_VERSION_MAJOR=6 -DQUAZIP_QT_MAJOR_VERSION=6 -DCMAKE_PREFIX_PATH=$QT_DEV_PATH
+$PACKAGES_PATH/bin/cmake --build . -j"$(sysctl -n hw.ncpu)"
 $PACKAGES_PATH/bin/cmake --build . --target install
-
-if [ ! -z `brew --prefix qt` ]; then
-  echo "unlinking qt@5 and linking qt"
-  brew unlink qt@5
-  brew link qt
-fi
 
 cd $QMSDEVDIR

@@ -13,22 +13,22 @@ echo "${ATTN}-----------------${NC}"
     cd $QMSDEVDIR/gdal
     mkdir build
     cd ./build
+    
+    # Ensure local PROJ is used
+    export PKG_CONFIG_PATH="$LOCAL_ENV/lib/pkgconfig"
+    export CMAKE_PREFIX_PATH="$LOCAL_ENV:$CMAKE_PREFIX_PATH"
+    export PROJ_INCLUDE="$LOCAL_ENV/include"
+
     # Boost headers need to be in the include path
     export CPATH="$LOCAL_ENV/include:$PACKAGES_PATH/include:${CPATH}"
-    echo "CPATH = $CPATH"
     export LIBRARY_PATH="$LOCAL_ENV/lib:$PACKAGES_PATH/lib"
     export LD_LIBRARY_PATH="$LOCAL_ENV/lib:$PACKAGES_PATH/lib"
-    export PATH="$PACKAGES_PATH/opt/expat/bin:$PATH"
-
-
-    # LDFLAGS="-L$PACKAGES_PATH/opt/expat/lib"
-    # CPPFLAGS="-I$PACKAGES_PATH/opt/expat/include"
 
     GDAL=$LOCAL_ENV
 
-    $PACKAGES_PATH/bin/cmake .. -DCMAKE_PREFIX_PATH=$GDAL \
+    $PACKAGES_PATH/bin/cmake .. -DCMAKE_PREFIX_PATH="$CMAKE_PREFIX_PATH" \
                                 -DCMAKE_BUILD_TYPE=Release \
-                                -DCMAKE_INSTALL_PREFIX=$GDAL \
+                                -DCMAKE_INSTALL_PREFIX=$LOCAL_ENV \
                                 -DGDAL_SET_INSTALL_RELATIVE_RPATH=ON \
                                 -DGDAL_USE_INTERNAL_LIBS=ON \
                                 -DGDAL_USE_EXTERNAL_LIBS=OFF \
@@ -38,7 +38,7 @@ echo "${ATTN}-----------------${NC}"
                                 -DGDAL_ENABLE_DRIVER_WCS:BOOL=ON \
                                 -DGDAL_USE_TIFF=ON \
                                 -DGDAL_USE_GEOTIFF=ON \
-                                -DGDAL_USE_GEOS=ON=ON \
+                                -DGDAL_USE_GEOS=ON \
                                 -DGDAL_USE_PNG=ON \
                                 -DGDAL_USE_GIF=ON \
                                 -DGDAL_USE_ODBC=ON \
@@ -48,11 +48,12 @@ echo "${ATTN}-----------------${NC}"
                                 -DGDAL_USE_EXPAT=ON \
                                 -DGDAL_USE_HEIF=ON \
                                 -DGDAL_USE_WEBP=OFF \
-                                # -DGDAL_USE_HDF5=ON \ (Problem)
-                                # -DGDAL_USE_JPEG=ON \ (Problem)
+                                -DGDAL_ENABLE_PYTHON=OFF \
+                                -DGDAL_USE_SWIG=OFF \
+                                -DBUILD_PYTHON_BINDINGS=OFF
                             
                                                                 
                              
-    $PACKAGES_PATH/bin/cmake --build . -j4
+    $PACKAGES_PATH/bin/cmake --build . -j"$(sysctl -n hw.ncpu)"
     $PACKAGES_PATH/bin/cmake --build . --target install
     cd $QMSDEVDIR

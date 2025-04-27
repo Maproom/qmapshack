@@ -7,7 +7,7 @@ echo "${ATTN}-----------------${NC}"
 ######################################################################## 
 # build Proj
 
-PROJ_PKG=proj-9.3.0
+PROJ_PKG=proj-9.6.0
 
 cd $QMSDEVDIR
 echo "${ATTN}Building Proj ...${NC}"
@@ -18,10 +18,9 @@ cd $QMSDEVDIR/$PROJ_PKG
 mkdir build
 cd build
 $PACKAGES_PATH/bin/cmake .. -DCMAKE_INSTALL_PREFIX=$LOCAL_ENV
-$PACKAGES_PATH/bin/cmake .. -DCMAKE_INSTALL_PREFIX=$LOCAL_ENV
 $PACKAGES_PATH/bin/cmake --build . -j4
 $PACKAGES_PATH/bin/cmake --build . --target install
 
-$LOCAL_ENV/share/proj
-curl https://download.osgeo.org/proj/proj-data-1.15.tar.gz | tar xzf -
+cd $LOCAL_ENV/share/proj
+curl https://download.osgeo.org/proj/proj-data-1.21.tar.gz | tar xzf -
 cd $QMSDEVDIR

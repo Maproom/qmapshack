@@ -12,9 +12,9 @@ echo "${INFO}At the end you will be prompted for admin password for adjusting ro
 # QMapShack installed from git in QMapShack
 # Local environment created
 
-ROUTINO_PKG=routino-3.4.1
+ROUTINO_PKG=routino-3.4.2
 ROUTINO_SRC_DIR=$QMSDEVDIR/$ROUTINO_PKG
-// The following paths are needed by cmake/Modules/FindROUTINO.cmake. So do not change!
+# The following paths are needed by cmake/Modules/FindROUTINO.cmake. So do not change!
 ROUTINO_LIB_DIR=$ROUTINO_DEV_PATH/lib
 ROUTINO_INCLUDE_DIR=$ROUTINO_DEV_PATH/include
 ROUTINO_SHARE_DIR=$ROUTINO_DEV_PATH/xml
@@ -22,7 +22,7 @@ ROUTINO_BIN_DIR=$ROUTINO_DEV_PATH/bin
 
    
 function checkoutRoutino {
-    echo "${GREEN}Fetching Routino from Subversion ...${NC}"
+    echo "${GREEN}Fetching Routino ...${NC}"
     cd $QMSDEVDIR
     curl http://routino.org/download/$ROUTINO_PKG.tgz  | tar xzf -
 }
@@ -30,7 +30,22 @@ function checkoutRoutino {
 function buildRoutino {
     echo "${GREEN}Building Routino ...${NC}"
     cd $ROUTINO_SRC_DIR
+
+    # Patch Makefile.conf for macOS
+    # inspired by macports version
+    # https://github.com/macports/macports-ports/blob/master/gis/routino/files/patch-Makefile_conf.diff
     
+    echo "${GREEN}Patching Makefile.conf for macOS ...${NC}"
+    sed -i.bak \
+        -e 's|^CC=gcc|#CC=gcc|' \
+        -e 's|^CXX=g++|#CXX=g++|' \
+        -e 's|^LD=gcc|#LD=gcc|' \
+        -e 's|^CFLAGS=-std=c99|#CFLAGS=-std=c99|' \
+        -e 's|^LDFLAGS_LIB=-shared|LDFLAGS_LIB=-dynamiclib -install_name $(libdir)/$@|' \
+        -e 's|-Wl,-soname=[^ ]*||g' \
+        -e 's|-Wl,-R.|-Wl,-rpath,.|g' \
+        Makefile.conf
+
     make clean
     make CLANG=1 LDFLAGS_SONAME=""
 }
@@ -63,31 +78,9 @@ function copyRoutinoToInstallDir {
     cp -f $ROUTINO_LIB_DIR/libroutino.dylib          $ROUTINO_LIB_DIR/libroutino.a
 }
 
-if [[ "$1" == "" ]]; then
-	checkoutRoutino
-    buildRoutino
-    copyRoutinoToInstallDir
-    adjustLinking
-fi
-
-if [[ "$1" == "checkoutRoutino" ]]; then
-	checkoutRoutino
-fi
-
-
-if [[ "$1" == "buildRoutino" ]]; then
-	buildRoutino
-fi
-
-
-if [[ "$1" == "copyRoutino" ]]; then
-	copyRoutinoToInstallDir
-fi
-
-
-if [[ "$1" == "adjustLinking" ]]; then
-	adjustLinking
-fi
-
+checkoutRoutino
+buildRoutino
+copyRoutinoToInstallDir
+adjustLinking
 
 cd $QMSDEVDIR

@@ -86,11 +86,11 @@ if (APPLE)
     # set(ROUTINO_DEV_PATH ${ROUTINO_DEV_PATH} CACHE PATH "Path to directory containing routino include and lib")
     message("ROUTINO_DEV_PATH = ${ROUTINO_DEV_PATH}")
     
-    if(NOT DEFINED QuaZip-Qt5_DIR)
-        message(FATAL_ERROR "QuaZip-Qt5_DIR not set!!!")
-    endif(NOT DEFINED QuaZip-Qt5_DIR)
-    # set(QuaZip-Qt5_DIR ${QuaZip-Qt5_DIR} CACHE PATH "Path to directory containing quazip cmake config files")
-    message("QuaZip-Qt5_DIR = ${QuaZip-Qt5_DIR}")
+    if(NOT DEFINED QuaZip-Qt6_DIR)
+        message(FATAL_ERROR "QuaZip-Qt6_DIR not set!!!")
+    endif(NOT DEFINED QuaZip-Qt6_DIR)    
+    # set(QuaZip-Qt6_DIR ${QuaZip-Qt6_DIR} CACHE PATH "Path to directory containing quazip cmake config files")
+    message("QuaZip-Qt6_DIR = ${QuaZip-Qt6_DIR}")
 
     if(NOT DEFINED PROJ_DEV_PATH)
         message(FATAL_ERROR "PROJ_DEV_PATH not set!!!")
@@ -275,5 +275,3 @@ endif (UNIX AND NOT WIN32 AND NOT APPLE)
 # this is used by the uninstall target
 CONFIGURE_FILE( "${CMAKE_CURRENT_SOURCE_DIR}/cmake_uninstall.cmake.in" "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake" IMMEDIATE @ONLY)
 ADD_CUSTOM_TARGET(uninstall "${CMAKE_COMMAND}" -P "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake")
-
-

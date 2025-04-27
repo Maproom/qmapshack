@@ -60,7 +60,7 @@ CMapTMS::CMapTMS(const QString& filename, CMapDraw* parent) : IMapOnline(parent)
   }
 
   QDomDocument dom;
-  const QDomDocument::ParseResult& result = dom.setContent(&file);
+  const QDomDocument::ParseResult& result = dom.setContent(&file, QDomDocument::ParseOption::UseNamespaceProcessing);
   if (!result) {
     file.close();
     QMessageBox::critical(CMainWindow::getBestWidgetForParent(), tr("Error..."),

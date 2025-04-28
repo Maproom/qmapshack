@@ -1,0 +1,63 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd"><!-- GDBus 2.80.0 -->
+<node>
+    <interface name="org.gtk.vfs.MountTracker">
+        <method name="LookupMount">
+            <arg type="(aya{sv})" name="mount_spec" direction="in" />
+            <arg type="(sossssssbay(aya{sv})ay)" name="mount" direction="out" />
+            <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="GVFSMount"/>
+            <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="GVFSMountSpec"/>
+        </method>
+        <method name="LookupMountByFusePath">
+            <arg type="ay" name="fuse_path" direction="in" />
+            <arg type="(sossssssbay(aya{sv})ay)" name="mount" direction="out" />
+            <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="GVFSMount"/>
+        </method>
+        <method name="MountLocation">
+            <arg type="(aya{sv})" name="mount_spec" direction="in" />
+            <arg type="(so)" name="mount_source" direction="in" />
+            <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="GVFSMountSpec"/>
+            <annotation name="org.qtproject.QtDBus.QtTypeName.In1" value="GVFSMountSource"/>
+        </method>
+        <method name="ListMounts">
+            <arg type="a(sossssssbay(aya{sv})ay)" name="mounts" direction="out" />
+            <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="GVFSMountList"/>
+        </method>
+        <method name="ListMounts2">
+            <arg type="b" name="user_visible_only" direction="in" />
+            <arg type="a(sossssssbay(aya{sv})ay)" name="mounts" direction="out" />
+            <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="GVFSMountList"/>            
+        </method>
+        <method name="RegisterMount">
+            <arg type="o" name="obj_path" direction="in" />
+            <arg type="s" name="display_name" direction="in" />
+            <arg type="s" name="stable_name" direction="in" />
+            <arg type="s" name="x_content_types" direction="in" />
+            <arg type="s" name="icon" direction="in" />
+            <arg type="s" name="symbolic_icon" direction="in" />
+            <arg type="s" name="prefered_filename_encoding" direction="in" />
+            <arg type="b" name="user_visible" direction="in" />
+            <arg type="(aya{sv})" name="mount_spec" direction="in" />
+            <arg type="ay" name="default_location" direction="in" />
+            <annotation name="org.qtproject.QtDBus.QtTypeName.In8" value="GVFSMountSpec"/>
+        </method>
+        <method name="UnregisterMount">
+            <arg type="o" name="obj_path" direction="in" />
+        </method>
+        <method name="ListMountTypes">
+            <arg type="as" name="mount_types" direction="out" />
+        </method>
+        <method name="ListMountableInfo">
+            <arg type="a(ssasib)" name="mountables" direction="out" />
+            <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="GVFSMountableList"/>
+        </method>
+        <method name="RegisterFuse" />
+        <signal name="Mounted">
+            <arg type="(sossssssbay(aya{sv})ay)" name="mount" />
+            <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="GVFSMount"/>
+        </signal>
+        <signal name="Unmounted">
+            <arg type="(sossssssbay(aya{sv})ay)" name="mount" />
+            <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="GVFSMount"/>
+        </signal>
+    </interface>
+</node>

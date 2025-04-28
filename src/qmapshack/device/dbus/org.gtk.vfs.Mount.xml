@@ -1,0 +1,172 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd"><!-- GDBus 2.80.0 -->
+<node>
+    <interface name="org.gtk.vfs.Mount">
+        <method name="Unmount">
+            <arg type="s" name="dbus_id" direction="in" />
+            <arg type="o" name="obj_path" direction="in" />
+            <arg type="u" name="flags" direction="in" />
+        </method>
+        <method name="OpenForRead">
+            <arg type="ay" name="path_data" direction="in" />
+            <arg type="u" name="pid" direction="in" />
+            <arg type="h" name="fd_id" direction="out" />
+            <arg type="b" name="can_seek" direction="out" />
+        </method>
+        <method name="OpenForWrite">
+            <arg type="ay" name="path_data" direction="in" />
+            <arg type="q" name="mode" direction="in" />
+            <arg type="s" name="etag" direction="in" />
+            <arg type="b" name="make_backup" direction="in" />
+            <arg type="u" name="flags" direction="in" />
+            <arg type="u" name="pid" direction="in" />
+            <arg type="h" name="fd_id" direction="out" />
+            <arg type="b" name="can_seek" direction="out" />
+            <arg type="t" name="initial_offset" direction="out" />
+        </method>
+        <method name="OpenForWriteFlags">
+            <arg type="ay" name="path_data" direction="in" />
+            <arg type="q" name="mode" direction="in" />
+            <arg type="s" name="etag" direction="in" />
+            <arg type="b" name="make_backup" direction="in" />
+            <arg type="u" name="flags" direction="in" />
+            <arg type="u" name="pid" direction="in" />
+            <arg type="h" name="fd_id" direction="out" />
+            <arg type="u" name="flags" direction="out" />
+            <arg type="t" name="initial_offset" direction="out" />
+        </method>
+        <method name="QueryInfo">
+            <arg type="ay" name="path_data" direction="in" />
+            <arg type="s" name="attributes" direction="in" />
+            <arg type="u" name="flags" direction="in" />
+            <arg type="s" name="uri" direction="in" />
+            <arg type="a(suv)" name="info" direction="out" />
+            <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="GVFSInfoList"/>
+        </method>
+        <method name="QueryFilesystemInfo">
+            <arg type="ay" name="path_data" direction="in" />
+            <arg type="s" name="attributes" direction="in" />
+            <arg type="a(suv)" name="info" direction="out" />
+            <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="GVFSInfoList"/>
+        </method>
+        <method name="Enumerate">
+            <arg type="ay" name="path_data" direction="in" />
+            <arg type="s" name="obj_path" direction="in" />
+            <arg type="s" name="attributes" direction="in" />
+            <arg type="u" name="flags" direction="in" />
+            <arg type="s" name="uri" direction="in" />
+        </method>
+        <method name="CreateDirectoryMonitor">
+            <arg type="ay" name="path_data" direction="in" />
+            <arg type="u" name="flags" direction="in" />
+            <arg type="s" name="obj_path" direction="out" />
+        </method>
+        <method name="CreateFileMonitor">
+            <arg type="ay" name="path_data" direction="in" />
+            <arg type="u" name="flags" direction="in" />
+            <arg type="s" name="obj_path" direction="out" />
+        </method>
+        <method name="MountMountable">
+            <arg type="ay" name="path_data" direction="in" />
+            <arg type="s" name="dbus_id" direction="in" />
+            <arg type="o" name="obj_path" direction="in" />
+            <arg type="b" name="is_uri" direction="out" />
+            <arg type="ay" name="path" direction="out" />
+            <arg type="b" name="must_mount_location" direction="out" />
+            <arg type="(aya{sv})" name="mount_spec" direction="out" />
+            <annotation name="org.qtproject.QtDBus.QtTypeName.Out3" value="GVFSMountSpec"/>
+        </method>
+        <method name="UnmountMountable">
+            <arg type="ay" name="path_data" direction="in" />
+            <arg type="u" name="flags" direction="in" />
+            <arg type="s" name="dbus_id" direction="in" />
+            <arg type="o" name="obj_path" direction="in" />
+        </method>
+        <method name="EjectMountable">
+            <arg type="ay" name="path_data" direction="in" />
+            <arg type="u" name="flags" direction="in" />
+            <arg type="s" name="dbus_id" direction="in" />
+            <arg type="o" name="obj_path" direction="in" />
+        </method>
+        <method name="StartMountable">
+            <arg type="ay" name="path_data" direction="in" />
+            <arg type="s" name="dbus_id" direction="in" />
+            <arg type="o" name="obj_path" direction="in" />
+        </method>
+        <method name="StopMountable">
+            <arg type="ay" name="path_data" direction="in" />
+            <arg type="u" name="flags" direction="in" />
+            <arg type="s" name="dbus_id" direction="in" />
+            <arg type="o" name="obj_path" direction="in" />
+        </method>
+        <method name="PollMountable">
+            <arg type="ay" name="path_data" direction="in" />
+        </method>
+        <method name="SetDisplayName">
+            <arg type="ay" name="path_data" direction="in" />
+            <arg type="s" name="display_name" direction="in" />
+            <arg type="ay" name="new_path" direction="out" />
+        </method>
+        <method name="Delete">
+            <arg type="ay" name="path_data" direction="in" />
+        </method>
+        <method name="Trash">
+            <arg type="ay" name="path_data" direction="in" />
+        </method>
+        <method name="MakeDirectory">
+            <arg type="ay" name="path_data" direction="in" />
+        </method>
+        <method name="MakeSymbolicLink">
+            <arg type="ay" name="path_data" direction="in" />
+            <arg type="ay" name="symlink_value" direction="in" />
+        </method>
+        <method name="Copy">
+            <arg type="ay" name="path1_data" direction="in" />
+            <arg type="ay" name="path2_data" direction="in" />
+            <arg type="u" name="flags" direction="in" />
+            <arg type="o" name="progress_obj_path" direction="in" />
+        </method>
+        <method name="Move">
+            <arg type="ay" name="path1_data" direction="in" />
+            <arg type="ay" name="path2_data" direction="in" />
+            <arg type="u" name="flags" direction="in" />
+            <arg type="o" name="progress_obj_path" direction="in" />
+        </method>
+        <method name="Push">
+            <arg type="ay" name="path_data" direction="in" />
+            <arg type="ay" name="local_path" direction="in" />
+            <arg type="b" name="send_progress" direction="in" />
+            <arg type="u" name="flags" direction="in" />
+            <arg type="o" name="progress_obj_path" direction="in" />
+            <arg type="b" name="remove_source" direction="in" />
+        </method>
+        <method name="Pull">
+            <arg type="ay" name="path_data" direction="in" />
+            <arg type="ay" name="local_path" direction="in" />
+            <arg type="b" name="send_progress" direction="in" />
+            <arg type="u" name="flags" direction="in" />
+            <arg type="o" name="progress_obj_path" direction="in" />
+            <arg type="b" name="remove_source" direction="in" />
+        </method>
+        <method name="SetAttribute">
+            <arg type="ay" name="path_data" direction="in" />
+            <arg type="u" name="flags" direction="in" />
+            <arg type="(suv)" name="attribute" direction="in" />
+            <annotation name="org.qtproject.QtDBus.QtTypeName.In2" value="GVFSInfo"/>
+        </method>
+        <method name="QuerySettableAttributes">
+            <arg type="ay" name="path_data" direction="in" />
+            <arg type="a(suu)" name="list" direction="out" />
+            <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="GVFSAttributeInfoList"/>
+        </method>
+        <method name="QueryWritableNamespaces">
+            <arg type="ay" name="path_data" direction="in" />
+            <arg type="a(suu)" name="list" direction="out" />
+            <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="GVFSAttributeInfoList"/>
+        </method>
+        <method name="OpenIconForRead">
+            <arg type="ay" name="path_data" direction="in" />
+            <arg type="h" name="fd_id" direction="out" />
+            <arg type="b" name="can_seek" direction="out" />
+        </method>
+    </interface>
+</node>

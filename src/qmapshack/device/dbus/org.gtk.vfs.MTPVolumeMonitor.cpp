@@ -16,15 +16,16 @@
 
 **********************************************************************************************/
 
-#include "device/dbus/org.kde.kmtp.Daemon.h"
+#include "device/dbus/org.gtk.vfs.MTPVolumeMonitor.h"
 
 /*
- * Implementation of interface class OrgKdeKmtpDaemonInterface
+ * Implementation of interface class OrgGtkPrivateRemoteVolumeMonitorInterface
  */
 
-OrgKdeKmtpDaemonInterface::OrgKdeKmtpDaemonInterface(const QString &service, const QString &path,
-                                                     const QDBusConnection &connection, QObject *parent)
+OrgGtkPrivateRemoteVolumeMonitorInterface::OrgGtkPrivateRemoteVolumeMonitorInterface(const QString &service,
+                                                                                     const QString &path,
+                                                                                     const QDBusConnection &connection,
+                                                                                     QObject *parent)
     : QDBusAbstractInterface(service, path, staticInterfaceName(), connection, parent) {}
 
-OrgKdeKmtpDaemonInterface::~OrgKdeKmtpDaemonInterface() {}
-
+OrgGtkPrivateRemoteVolumeMonitorInterface::~OrgGtkPrivateRemoteVolumeMonitorInterface() {}

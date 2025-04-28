@@ -44,6 +44,9 @@ set( SRCS
     device/dbus/org.kde.kmtp.Daemon.cpp
     device/dbus/org.kde.kmtp.Device.cpp
     device/dbus/org.kde.kmtp.Storage.cpp
+    device/dbus/org.gtk.vfs.MTPVolumeMonitor.cpp
+    device/dbus/org.gtk.vfs.MountTracker.cpp
+    device/dbus/org.gtk.vfs.Mount.cpp
     device/dbus/metatypes.cpp
     gis/CGisDatabase.cpp
     gis/CGisDraw.cpp
@@ -419,6 +422,9 @@ set( HDRS
     device/dbus/org.kde.kmtp.Daemon.h
     device/dbus/org.kde.kmtp.Device.h
     device/dbus/org.kde.kmtp.Storage.h
+    device/dbus/org.gtk.vfs.MTPVolumeMonitor.h
+    device/dbus/org.gtk.vfs.MountTracker.h
+    device/dbus/org.gtk.vfs.Mount.h
     device/dbus/metatypes.h
     gis/CGisDatabase.h
     gis/CGisDraw.h

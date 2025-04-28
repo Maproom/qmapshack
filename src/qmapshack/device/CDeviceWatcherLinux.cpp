@@ -32,6 +32,23 @@
 CDeviceWatcherLinux::CDeviceWatcherLinux(CGisListWks* parent) : IDeviceWatcher(parent) {
   qDBusRegisterMetaType<KMTPFile>();
   qDBusRegisterMetaType<KMTPFileList>();
+  qDBusRegisterMetaType<GVFSMtpDrive>();
+  qDBusRegisterMetaType<GVFSMtpDriveList>();
+  qDBusRegisterMetaType<GVFSMtpVolume>();
+  qDBusRegisterMetaType<GVFSMtpVolumeList>();
+  qDBusRegisterMetaType<GVFSMtpMount>();
+  qDBusRegisterMetaType<GVFSMtpMountList>();
+  qDBusRegisterMetaType<GVFSMountSpec>();
+  qDBusRegisterMetaType<GVFSMount>();
+  qDBusRegisterMetaType<GVFSMountList>();
+  qDBusRegisterMetaType<GVFSMountable>();
+  qDBusRegisterMetaType<GVFSMountableList>();
+  qDBusRegisterMetaType<GVFSMountSource>();
+  qDBusRegisterMetaType<GVFSInfo>();
+  qDBusRegisterMetaType<GVFSInfoList>();
+  qDBusRegisterMetaType<GVFSAttributeInfo>();
+  qDBusRegisterMetaType<GVFSAttributeInfoList>();
+
   QDBusConnection::systemBus().connect("org.freedesktop.UDisks2", "/org/freedesktop/UDisks2",
                                        "org.freedesktop.DBus.ObjectManager", "InterfacesAdded", this,
                                        SLOT(slotDeviceAdded(QDBusObjectPath, QVariantMap)));
@@ -43,6 +60,22 @@ CDeviceWatcherLinux::CDeviceWatcherLinux(CGisListWks* parent) : IDeviceWatcher(p
   kmtpDaemon = new org::kde::kmtp::Daemon("org.kde.kiod6", "/modules/kmtpd", QDBusConnection::sessionBus(), this);
   connect(kmtpDaemon, &org::kde::kmtp::Daemon::devicesChanged, this, &CDeviceWatcherLinux::slotKMTPDeviceChanged);
   slotKMTPDeviceChanged();
+
+  gvfsMtpVolumeMonitor = new org::gtk::Private::RemoteVolumeMonitor(
+      "org.gtk.vfs.MTPVolumeMonitor", "/org/gtk/Private/RemoteVolumeMonitor", QDBusConnection::sessionBus(), this);
+  connect(gvfsMtpVolumeMonitor, &org::gtk::Private::RemoteVolumeMonitor::VolumeAdded, this,
+          &CDeviceWatcherLinux::slotGVFSMtpDriveAdded);
+  connect(gvfsMtpVolumeMonitor, &org::gtk::Private::RemoteVolumeMonitor::VolumeRemoved, this,
+          &CDeviceWatcherLinux::slotGVFSMtpDriveRemoved);
+
+  gvfsMountTracker = new org::gtk::vfs::MountTracker("org.gtk.vfs.Daemon", "/org/gtk/vfs/mounttracker",
+                                                     QDBusConnection::sessionBus(), this);
+  connect(gvfsMountTracker, &org::gtk::vfs::MountTracker::Mounted, this, &CDeviceWatcherLinux::slotGVFSMounted);
+  connect(gvfsMountTracker, &org::gtk::vfs::MountTracker::Unmounted, this, &CDeviceWatcherLinux::slotGVFSUnmounted);
+  const GVFSMountList& mountlist = gvfsMountTracker->ListMounts2(true).value();
+  for (const GVFSMount& mount : mountlist) {
+    slotGVFSMounted(mount);
+  }
 }
 
 CDeviceWatcherLinux::~CDeviceWatcherLinux() {}
@@ -217,8 +250,8 @@ QString CDeviceWatcherLinux::readMountPoint(const QString& path) {
 void CDeviceWatcherLinux::slotKMTPDeviceChanged() {
   // As the signal only signals a change in the device list, we need to find out
   // which device is new, which is already attached and which one is removed
-  QMap<QString, QStringList> oldKnownKMTPDevices = knownKMTPDevices;
-  knownKMTPDevices.clear();
+  QMap<QString, QStringList> oldKnownMtpDevices = knownMtpDevices;
+  knownMtpDevices.clear();
 
   // iterate over all MTP devices
   const QList<QDBusObjectPath>& devices = kmtpDaemon->listDevices().value();
@@ -226,8 +259,8 @@ void CDeviceWatcherLinux::slotKMTPDeviceChanged() {
     org::kde::kmtp::Device device("org.kde.kiod6", devicePath.path(), QDBusConnection::sessionBus(), this);
     const QString& key = device.udi();
     // skip known devices
-    if (oldKnownKMTPDevices.contains(key)) {
-      knownKMTPDevices[key] = oldKnownKMTPDevices.take(key);
+    if (oldKnownMtpDevices.contains(key)) {
+      knownMtpDevices[key] = oldKnownMtpDevices.take(key);
     } else {
       // check unknown devices for a storage with GarminDevice.xml in the path
       const QList<QDBusObjectPath>& storages = device.listStorages();
@@ -236,29 +269,66 @@ void CDeviceWatcherLinux::slotKMTPDeviceChanged() {
         const KMTPFile& fileGarminDeviceXml = storage.getFileMetadata("/GARMIN/GarminDevice.xml").value();
         if (fileGarminDeviceXml.isValid() && !fileGarminDeviceXml.isFolder()) {
           // If the device is a Garmin add each storage of the device as a single device.
-          addKMTPDevice(device, key);
+          addKMtpDevice(device, key);
           break;
         }
       }
     }
   }
 
-  // oldKnownKMTPDevices now contains all devices that need to be removed.
-  for (const QStringList& keys : std::as_const(oldKnownKMTPDevices)) {
+  // oldKnownMtpDevices now contains all devices that need to be removed.
+  for (const QStringList& keys : std::as_const(oldKnownMtpDevices)) {
     for (const QString& key : keys) {
       listWks->removeDevice(key);
     }
   }
 }
 
-void CDeviceWatcherLinux::addKMTPDevice(org::kde::kmtp::Device& device, const QString& deviceKey) {
+void CDeviceWatcherLinux::addKMtpDevice(org::kde::kmtp::Device& device, const QString& deviceKey) {
   CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
   const QList<QDBusObjectPath>& storages = device.listStorages();
   for (const QDBusObjectPath& storagePath : storages) {
     org::kde::kmtp::Storage storage("org.kde.kiod6", storagePath.path(), QDBusConnection::sessionBus(), this);
     const QString& key = QString("%1@%2").arg(storage.description(), device.udi());
     new CDeviceGarminMtp(storagePath, device.friendlyName(), key, listWks);
-    knownKMTPDevices[deviceKey] << key;
+    knownMtpDevices[deviceKey] << key;
+  }
+  emit sigChanged();
+}
+
+void CDeviceWatcherLinux::slotGVFSMtpDriveAdded(const QString& dbus_name, const QString& id, GVFSMtpVolume volume) {
+  qDebug() << "CDeviceWatcherLinux::slotGVFSMtpDriveAdded" << dbus_name << id << volume.activationUri;
+  if (volume.canMount && volume.shouldAutomount && volume.activationUri.contains("GARMIN", Qt::CaseInsensitive)) {
+    gvfsMtpVolumeMonitor->VolumeMount(id, "", 0, "");
+  }
+}
+
+void CDeviceWatcherLinux::slotGVFSMtpDriveRemoved(const QString& dbus_name, const QString& id, GVFSMtpVolume volume) {
+  qDebug() << "CDeviceWatcherLinux::slotGVFSMtpDriveRemoved" << dbus_name << id << volume.activationUri;
+}
+
+void CDeviceWatcherLinux::slotGVFSMounted(GVFSMount mount) {
+  qDebug() << "CDeviceWatcherLinux::slotGVFSMounted" << mount.dbusId << mount.objectPath << mount.fuseMountPoint;
+  QDir dir(mount.fuseMountPoint);
+  const QStringList& paths = dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
+  for (const QString& path : paths) {
+    if (dir.exists(path + "/Gamin/GarminDevice.xml") || dir.exists(path + "/GARMIN/GarminDevice.xml")) {
+      addGVFSMtpDevice(mount, paths);
+      break;
+    }
+  }
+}
+
+void CDeviceWatcherLinux::slotGVFSUnmounted(GVFSMount mount) {
+  qDebug() << "CDeviceWatcherLinux::slotGVFSUnmounted" << mount.dbusId << mount.objectPath << mount.fuseMountPoint;
+}
+
+void CDeviceWatcherLinux::addGVFSMtpDevice(const GVFSMount& mount, const QStringList& storages) {
+  CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
+  for (const QString& storagePath : storages) {
+    const QString& key = QString("%1@%2").arg(storagePath, mount.dbusId);
+    // new CDeviceGarminMtp(storagePath, device.friendlyName(), key, listWks);
+    knownMtpDevices[mount.dbusId] << key;
   }
   emit sigChanged();
 }

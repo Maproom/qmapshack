@@ -1,0 +1,181 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd"><!-- GDBus 2.80.0 -->
+<node>
+    <interface name="org.gtk.Private.RemoteVolumeMonitor">
+        <method name="IsSupported">
+            <arg type="b" name="is_supported" direction="out" />
+        </method>
+        <method name="List">
+            <arg type="a(ssssbbbbbbbbuasa{ss}sa{sv})" name="drives" direction="out" />
+            <arg type="a(ssssssbbssa{ss}sa{sv})" name="volumes" direction="out" />
+            <arg type="a(ssssssbsassa{sv})" name="mounts" direction="out" />
+            <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="GVFSMtpDriveList"/>
+            <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="GVFSMtpVolumeList"/>
+            <annotation name="org.qtproject.QtDBus.QtTypeName.Out2" value="GVFSMtpMountList"/>
+        </method>
+        <method name="CancelOperation">
+            <arg type="s" name="cancellation_id" direction="in" />
+            <arg type="b" name="was_cancelled" direction="out" />
+        </method>
+        <method name="MountUnmount">
+            <arg type="s" name="id" direction="in" />
+            <arg type="s" name="cancellation_id" direction="in" />
+            <arg type="u" name="unmount_flags" direction="in" />
+            <arg type="s" name="mount_op_id" direction="in" />
+        </method>
+        <method name="VolumeMount">
+            <arg type="s" name="id" direction="in" />
+            <arg type="s" name="cancellation_id" direction="in" />
+            <arg type="u" name="mount_flags" direction="in" />
+            <arg type="s" name="mount_op_id" direction="in" />
+        </method>
+        <method name="DriveEject">
+            <arg type="s" name="id" direction="in" />
+            <arg type="s" name="cancellation_id" direction="in" />
+            <arg type="u" name="unmount_flags" direction="in" />
+            <arg type="s" name="mount_op_id" direction="in" />
+        </method>
+        <method name="DrivePollForMedia">
+            <arg type="s" name="id" direction="in" />
+            <arg type="s" name="cancellation_id" direction="in" />
+        </method>
+        <method name="DriveStart">
+            <arg type="s" name="id" direction="in" />
+            <arg type="s" name="cancellation_id" direction="in" />
+            <arg type="u" name="flags" direction="in" />
+            <arg type="s" name="mount_op_id" direction="in" />
+        </method>
+        <method name="DriveStop">
+            <arg type="s" name="id" direction="in" />
+            <arg type="s" name="cancellation_id" direction="in" />
+            <arg type="u" name="unmount_flags" direction="in" />
+            <arg type="s" name="mount_op_id" direction="in" />
+        </method>
+        <method name="MountOpReply">
+            <arg type="s" name="mount_op_id" direction="in" />
+            <arg type="i" name="result" direction="in" />
+            <arg type="s" name="user_name" direction="in" />
+            <arg type="s" name="domain" direction="in" />
+            <arg type="s" name="encoded_password" direction="in" />
+            <arg type="i" name="password_save" direction="in" />
+            <arg type="i" name="choice" direction="in" />
+            <arg type="b" name="anonymous" direction="in" />
+        </method>
+        <method name="MountOpReply2">
+            <arg type="s" name="mount_op_id" direction="in" />
+            <arg type="i" name="result" direction="in" />
+            <arg type="s" name="user_name" direction="in" />
+            <arg type="s" name="domain" direction="in" />
+            <arg type="s" name="encoded_password" direction="in" />
+            <arg type="i" name="password_save" direction="in" />
+            <arg type="i" name="choice" direction="in" />
+            <arg type="b" name="anonymous" direction="in" />
+            <arg type="a{sv}" name="expansion" direction="in" />
+            <annotation name="org.qtproject.QtDBus.QtTypeName.In8" value="QMap&lt;QString,QDBusVariant&gt;"/>
+        </method>
+        <signal name="DriveChanged">
+            <arg type="s" name="dbus_name" />
+            <arg type="s" name="id" />
+            <arg type="(ssssbbbbbbbbuasa{ss}sa{sv})" name="drive" />
+            <annotation name="org.qtproject.QtDBus.QtTypeName.Out2" value="GVFSMtpDrive"/>
+        </signal>
+        <signal name="DriveConnected">
+            <arg type="s" name="dbus_name" />
+            <arg type="s" name="id" />
+            <arg type="(ssssbbbbbbbbuasa{ss}sa{sv})" name="drive" />
+            <annotation name="org.qtproject.QtDBus.QtTypeName.Out2" value="GVFSMtpDrive"/>
+        </signal>
+        <signal name="DriveDisconnected">
+            <arg type="s" name="dbus_name" />
+            <arg type="s" name="id" />
+            <arg type="(ssssbbbbbbbbuasa{ss}sa{sv})" name="drive" />
+            <annotation name="org.qtproject.QtDBus.QtTypeName.Out2" value="GVFSMtpDrive"/>
+        </signal>
+        <signal name="DriveEjectButton">
+            <arg type="s" name="dbus_name" />
+            <arg type="s" name="id" />
+            <arg type="(ssssbbbbbbbbuasa{ss}sa{sv})" name="drive" />
+            <annotation name="org.qtproject.QtDBus.QtTypeName.Out2" value="GVFSMtpDrive"/>
+        </signal>
+        <signal name="DriveStopButton">
+            <arg type="s" name="dbus_name" />
+            <arg type="s" name="id" />
+            <arg type="(ssssbbbbbbbbuasa{ss}sa{sv})" name="drive" />
+            <annotation name="org.qtproject.QtDBus.QtTypeName.Out2" value="GVFSMtpDrive"/>
+        </signal>
+        <signal name="VolumeChanged">
+            <arg type="s" name="dbus_name" />
+            <arg type="s" name="id" />
+            <arg type="(ssssssbbssa{ss}sa{sv})" name="volume" />
+            <annotation name="org.qtproject.QtDBus.QtTypeName.Out2" value="GVFSMtpDrive"/>
+        </signal>
+        <signal name="VolumeAdded">
+            <arg type="s" name="dbus_name" />
+            <arg type="s" name="id" />
+            <arg type="(ssssssbbssa{ss}sa{sv})" name="volume" />
+            <annotation name="org.qtproject.QtDBus.QtTypeName.Out2" value="GVFSMtpDrive"/>
+        </signal>
+        <signal name="VolumeRemoved">
+            <arg type="s" name="dbus_name" />
+            <arg type="s" name="id" />
+            <arg type="(ssssssbbssa{ss}sa{sv})" name="volume" />
+            <annotation name="org.qtproject.QtDBus.QtTypeName.Out2" value="GVFSMtpDrive"/>
+        </signal>
+        <signal name="MountChanged">
+            <arg type="s" name="dbus_name" />
+            <arg type="s" name="id" />
+            <arg type="(ssssssbsassa{sv})" name="mount" />
+            <annotation name="org.qtproject.QtDBus.QtTypeName.Out2" value="GVFSMtpMount"/>
+        </signal>
+        <signal name="MountAdded">
+            <arg type="s" name="dbus_name" />
+            <arg type="s" name="id" />
+            <arg type="(ssssssbsassa{sv})" name="mount" />
+            <annotation name="org.qtproject.QtDBus.QtTypeName.Out2" value="GVFSMtpMount"/>
+        </signal>
+        <signal name="MountPreUnmount">
+            <arg type="s" name="dbus_name" />
+            <arg type="s" name="id" />
+            <arg type="(ssssssbsassa{sv})" name="mount" />
+            <annotation name="org.qtproject.QtDBus.QtTypeName.Out2" value="GVFSMtpMount"/>
+        </signal>
+        <signal name="MountRemoved">
+            <arg type="s" name="dbus_name" />
+            <arg type="s" name="id" />
+            <arg type="(ssssssbsassa{sv})" name="mount" />
+            <annotation name="org.qtproject.QtDBus.QtTypeName.Out2" value="GVFSMtpMount"/>
+        </signal>
+        <signal name="MountOpAskPassword">
+            <arg type="s" name="dbus_name" />
+            <arg type="s" name="id" />
+            <arg type="s" name="message_to_show" />
+            <arg type="s" name="default_user" />
+            <arg type="s" name="default_domain" />
+            <arg type="u" name="flags" />
+        </signal>
+        <signal name="MountOpAskQuestion">
+            <arg type="s" name="dbus_name" />
+            <arg type="s" name="id" />
+            <arg type="s" name="message_to_show" />
+            <arg type="as" name="choices" />
+        </signal>
+        <signal name="MountOpShowProcesses">
+            <arg type="s" name="dbus_name" />
+            <arg type="s" name="id" />
+            <arg type="s" name="message_to_show" />
+            <arg type="ai" name="pid" />
+            <arg type="as" name="choices" />
+            <annotation name="org.qtproject.QtDBus.QtTypeName.Out3" value="QList&lt;uint32_t&gt;"/>
+        </signal>
+        <signal name="MountOpShowUnmountProgress">
+            <arg type="s" name="dbus_name" />
+            <arg type="s" name="id" />
+            <arg type="s" name="message_to_show" />
+            <arg type="x" name="time_left" />
+            <arg type="x" name="bytes_left" />
+        </signal>
+        <signal name="MountOpAborted">
+            <arg type="s" name="dbus_name" />
+            <arg type="s" name="id" />
+        </signal>
+    </interface>
+</node>

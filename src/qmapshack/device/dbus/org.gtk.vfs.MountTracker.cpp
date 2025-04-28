@@ -16,15 +16,14 @@
 
 **********************************************************************************************/
 
-#include "device/dbus/org.kde.kmtp.Daemon.h"
+#include "device/dbus/org.gtk.vfs.MountTracker.h"
 
 /*
- * Implementation of interface class OrgKdeKmtpDaemonInterface
+ * Implementation of interface class OrgGtkVfsMountTrackerInterface
  */
 
-OrgKdeKmtpDaemonInterface::OrgKdeKmtpDaemonInterface(const QString &service, const QString &path,
-                                                     const QDBusConnection &connection, QObject *parent)
+OrgGtkVfsMountTrackerInterface::OrgGtkVfsMountTrackerInterface(const QString &service, const QString &path,
+                                                               const QDBusConnection &connection, QObject *parent)
     : QDBusAbstractInterface(service, path, staticInterfaceName(), connection, parent) {}
 
-OrgKdeKmtpDaemonInterface::~OrgKdeKmtpDaemonInterface() {}
-
+OrgGtkVfsMountTrackerInterface::~OrgGtkVfsMountTrackerInterface() {}

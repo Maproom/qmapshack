@@ -20,8 +20,12 @@
 #define CDEVICEWATCHERLINUX_H
 
 #include "device/IDeviceWatcher.h"
+#include "device/dbus/org.gtk.vfs.MTPVolumeMonitor.h"
+#include "device/dbus/org.gtk.vfs.Mount.h"
+#include "device/dbus/org.gtk.vfs.MountTracker.h"
 #include "device/dbus/org.kde.kmtp.Daemon.h"
 #include "device/dbus/org.kde.kmtp.Device.h"
+
 class QDBusObjectPath;
 
 class CDeviceWatcherLinux : public IDeviceWatcher {
@@ -37,12 +41,22 @@ class CDeviceWatcherLinux : public IDeviceWatcher {
 
   void slotKMTPDeviceChanged();
 
+  void slotGVFSMtpDriveAdded(const QString& dbus_name, const QString& id, GVFSMtpVolume volume);
+  void slotGVFSMtpDriveRemoved(const QString& dbus_name, const QString& id, GVFSMtpVolume volume);
+
+  void slotGVFSMounted(GVFSMount mount);
+  void slotGVFSUnmounted(GVFSMount mount);
+
  private:
   QString readMountPoint(const QString& path);
-  void addKMTPDevice(org::kde::kmtp::Device& device, const QString &deviceKey);
+  void addKMtpDevice(org::kde::kmtp::Device& device, const QString &deviceKey);
+  void addGVFSMtpDevice(const GVFSMount& mount, const QStringList& storages);
 
   org::kde::kmtp::Daemon* kmtpDaemon;
-  QMap<QString, QStringList> knownKMTPDevices;
+  QMap<QString, QStringList> knownMtpDevices;
+
+  org::gtk::Private::RemoteVolumeMonitor* gvfsMtpVolumeMonitor;
+  org::gtk::vfs::MountTracker* gvfsMountTracker;
 };
 
 #endif  // CDEVICEWATCHERLINUX_H

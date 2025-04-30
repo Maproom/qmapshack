@@ -22,15 +22,19 @@
 #include <functional>
 
 #include "device/IDevice.h"
-#include "device/dbus/org.kde.kmtp.Storage.h"
 
 class QDBusObjectPath;
+class IDeviceAccess;
+class GVFSMount;
 
 class CDeviceGarminMtp : public IDevice, private QObject {
   Q_DECLARE_TR_FUNCTIONS(CDeviceGarminMtp)
  public:
   CDeviceGarminMtp(const QDBusObjectPath& objectPathStorage, const QString& model, const QString& key,
                    QTreeWidget* parent);
+
+  CDeviceGarminMtp(const GVFSMount& mount, const QString& storagePath, const QString& key, QTreeWidget* parent);
+
   virtual ~CDeviceGarminMtp() = default;
 
   bool removeFromDevice(const QString& filename);
@@ -38,27 +42,26 @@ class CDeviceGarminMtp : public IDevice, private QObject {
  protected:
   void insertCopyOfProject(IGisProject* project) override;
 
-  org::kde::kmtp::Storage* storage;
+  // org::kde::kmtp::Storage* storage;
 
  private:
-  using fn_operation = std::function<int()>;
-  bool readFileFromStorage(const QString& path, QTemporaryFile& file);
-  bool sendFileToStorage(const QString& path, QTemporaryFile& file);
-  int waitForCopyOperation(const org::kde::kmtp::Storage* storage, fn_operation operation);
+  void setup();
   void createProjectsFromFiles(QString subdirectory, QString extension);
   QString createFileName(IGisProject* project, const QString& path, const QString& suffix) const;
   QString simplifiedName(IGisProject* project) const;
   void reorderProjects(IGisProject* project);
 
+  IDeviceAccess* device;
+
   QString id;
   QString partno;
   QString description;
-  QString pathGpx = "Garmin/GPX";
-  QString pathPictures = "Garmin/JPEG";
-  QString pathSpoilers = "Garmin/GeocachePhotos";
-  QString pathActivities = "Garmin/Activities";
-  QString pathCourses = "Garmin/Courses";
-  QString pathLocations = "Garmin/Locations";
+  QString pathGpx;
+  QString pathPictures;
+  QString pathSpoilers;
+  QString pathActivities;
+  QString pathCourses;
+  QString pathLocations;
   QString pathAdventures;  // no default
   QString pathTcx;         // no default
 };

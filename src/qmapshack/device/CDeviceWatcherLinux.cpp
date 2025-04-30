@@ -309,7 +309,7 @@ void CDeviceWatcherLinux::slotGVFSMtpDriveRemoved(const QString& dbus_name, cons
 
 void CDeviceWatcherLinux::slotGVFSMounted(GVFSMount mount) {
   qDebug() << "CDeviceWatcherLinux::slotGVFSMounted" << mount.dbusId << mount.objectPath << mount.fuseMountPoint;
-  QDir dir(mount.fuseMountPoint);
+  QDir dir(mount.fuseMountPoint.constData());
   const QStringList& paths = dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
   for (const QString& path : paths) {
     if (dir.exists(path + "/Gamin/GarminDevice.xml") || dir.exists(path + "/GARMIN/GarminDevice.xml")) {
@@ -327,7 +327,7 @@ void CDeviceWatcherLinux::addGVFSMtpDevice(const GVFSMount& mount, const QString
   CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
   for (const QString& storagePath : storages) {
     const QString& key = QString("%1@%2").arg(storagePath, mount.dbusId);
-    // new CDeviceGarminMtp(storagePath, device.friendlyName(), key, listWks);
+    new CDeviceGarminMtp(mount, storagePath, key, listWks);
     knownMtpDevices[mount.dbusId] << key;
   }
   emit sigChanged();

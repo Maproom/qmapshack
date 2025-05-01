@@ -14,6 +14,7 @@ V1.XX.X
 [QMS-732] Migrate macOS build from Qt5 to Qt6
 [QMS-730] TMS/WMTS fixed accidentally removed namespace processing
 [QMS-740] Fix dbus compile issues for Windows
+[QMS-664] Fix BRouter java setup on Debian
 
 V1.17.1
 [QMS-547] Fixed: QMS freezes on zoom when activating multi-layered online maps

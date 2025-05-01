@@ -751,10 +751,10 @@ bool CRouterBRouterSetup::isLocalBRouterDefaultDir() const { return localDir == 
 void CRouterBRouterSetup::setJava(const QString& path) {
   localJavaExecutable = path;
 
-  if (tryJavaVersion({"-version"}, "[\\S]+ version \"(\\d+)(\\.\\d+)*\" .*")) {
+  if (tryJavaVersion({"-version"}, "[\\S]+ version \"(\\d+)(\\.\\d+)*(-\\S+)?\" .*")) {
     return;
   }
-  if (tryJavaVersion({"--version"}, "[\\S]+ (\\d+)(\\.\\d+)* .*")) {
+  if (tryJavaVersion({"--version"}, "[\\S]+ (\\d+)(\\.\\d+)*(-\\S+)? .*")) {
     return;
   }
 

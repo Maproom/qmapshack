@@ -409,7 +409,7 @@ void CRouterBRouterSetupWizard::updateLocalDirectory() const {
             tr("Your Java version %1 seems to be older than the required version %2.\n"
                "BRouter will probably not work as expected.\n"
                "Please check the logs if Brouter fails to start.")
-                .arg(setup->javaMajorVersion == NOINT ? tr("unknown") : QString::number(setup->javaMajorVersion))
+                .arg(setup->javaMajorVersion == NOINT ? tr("<unknown>") : QString::number(setup->javaMajorVersion))
                 .arg(setup->classMajorVersion));
       }
     } else {

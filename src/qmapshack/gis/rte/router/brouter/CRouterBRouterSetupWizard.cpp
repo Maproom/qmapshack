@@ -419,8 +419,7 @@ void CRouterBRouterSetupWizard::updateLocalDirectory() const {
     labelLocalJavaResult->setText(tr("Java Executable not found"));
     labelLocalJavaResult->setVisible(true);
   }
-  pageLocalDirectory->setComplete(status.isLocalBRouterJar && status.isValidBRouterVersion && status.isJavaValid &&
-                                  !status.isJavaOutdated);
+  pageLocalDirectory->setComplete(status.isLocalBRouterJar && status.isValidBRouterVersion && status.isJavaValid);
 }
 
 void CRouterBRouterSetupWizard::slotCreateOrUpdateLocalInstallClicked() {

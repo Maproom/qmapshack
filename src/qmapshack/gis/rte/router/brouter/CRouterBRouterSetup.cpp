@@ -583,7 +583,7 @@ CRouterBRouterLocalSetupStatus CRouterBRouterSetup::checkLocalBRouterInstallatio
   bool isJavaOutdated =
       classMajorVersion != NOINT && (javaMajorVersion == NOINT || javaMajorVersion < classMajorVersion);
 
-  if (isBRouterJar && !isJavaOutdated) {
+  if (isBRouterJar && isJavaValid) {
     QProcess cmd;
 
     cmd.setWorkingDirectory(localDir);
@@ -602,7 +602,7 @@ CRouterBRouterLocalSetupStatus CRouterBRouterSetup::checkLocalBRouterInstallatio
 
   bool isValidBRouterVersion = versionMajor != NOINT && versionMinor != NOINT && versionPatch != NOINT;
 
-  isLocalBRouterValid = isBRouterJar && isValidBRouterVersion && isJavaExisting && !isJavaOutdated;
+  isLocalBRouterValid = isValidBRouterVersion;
 
   return CRouterBRouterLocalSetupStatus(isJavaExisting, isJavaValid, isJavaOutdated, isBRouterJar, isBRouterCandidate,
                                         isValidBRouterVersion);

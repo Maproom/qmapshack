@@ -18,7 +18,10 @@
 
 #include "CDeviceAccessKMtp.h"
 
+#include <QMessageBox>
 #include <QPixmap>
+
+#include "CMainWindow.h"
 
 CDeviceAccessKMtp::CDeviceAccessKMtp(const QDBusObjectPath& objectPathStorage, QObject* parent)
     : IDeviceAccess(parent) {
@@ -29,6 +32,7 @@ CDeviceAccessKMtp::CDeviceAccessKMtp(const QDBusObjectPath& objectPathStorage, Q
   for (const KMTPFile& file : topLevelFiles) {
     if (file.isFolder() && (file.filename().toUpper() == "GARMIN")) {
       dir.setPath("/" + file.filename());
+      break;
     }
   }
 }
@@ -59,6 +63,7 @@ bool CDeviceAccessKMtp::readFileFromStorage(const QString& path, QFile& file) {
         return storage->getFileToFileDescriptor(descriptor, _path).value();
       })) {
     qWarning() << "Failed to read file" << _path;
+    file.close();
     return false;
   }
   file.close();
@@ -73,12 +78,13 @@ bool CDeviceAccessKMtp::sendFileToStorage(const QString& path, QFile& file) {
   }
 
   const QString& _path = dir.filePath(path);
-
   QDBusUnixFileDescriptor descriptor(file.handle());
   if (waitForCopyOperation(storage, [descriptor, _path, this]() {
         return storage->sendFileFromFileDescriptor(descriptor, _path).value();
       })) {
-    qWarning() << "Failed to send file" << _path;
+    QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Send to Devices..."),
+                         tr("Failed to send file \"%1\" to device.").arg(_path), QMessageBox::Ok);
+    file.close();
     return false;
   }
   file.close();
@@ -87,7 +93,14 @@ bool CDeviceAccessKMtp::sendFileToStorage(const QString& path, QFile& file) {
 
 bool CDeviceAccessKMtp::removeFileFromStorage(const QString& path) {
   const QString& _path = dir.filePath(path);
-  return storage->deleteObject(_path) == 0;
+  const auto& res = storage->deleteObject(_path);
+  if (res.isError()) {
+    QMessageBox::warning(
+        CMainWindow::getBestWidgetForParent(), tr("Delete from Devices..."),
+        tr("Failed to delete file \"%1\" from device. Reason: %2").arg(_path, res.reply().errorMessage()),
+        QMessageBox::Ok);
+  }
+  return !res.isError();
 }
 
 QStringList CDeviceAccessKMtp::listFilesOnStorage(const QString& path) {

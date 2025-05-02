@@ -57,16 +57,23 @@ CDeviceWatcherLinux::CDeviceWatcherLinux(CGisListWks* parent) : IDeviceWatcher(p
                                        "org.freedesktop.DBus.ObjectManager", "InterfacesRemoved", this,
                                        SLOT(slotDeviceRemoved(QDBusObjectPath, QStringList)));
 
-  kmtpDaemon = new org::kde::kmtp::Daemon("org.kde.kiod6", "/modules/kmtpd", QDBusConnection::sessionBus(), this);
-  connect(kmtpDaemon, &org::kde::kmtp::Daemon::devicesChanged, this, &CDeviceWatcherLinux::slotKMTPDeviceChanged);
+  kMtpDaemon = new org::kde::kmtp::Daemon("org.kde.kiod6", "/modules/kmtpd", QDBusConnection::sessionBus(), this);
+  connect(kMtpDaemon, &org::kde::kmtp::Daemon::devicesChanged, this, &CDeviceWatcherLinux::slotKMTPDeviceChanged);
   slotKMTPDeviceChanged();
 
   gvfsMtpVolumeMonitor = new org::gtk::Private::RemoteVolumeMonitor(
       "org.gtk.vfs.MTPVolumeMonitor", "/org/gtk/Private/RemoteVolumeMonitor", QDBusConnection::sessionBus(), this);
   connect(gvfsMtpVolumeMonitor, &org::gtk::Private::RemoteVolumeMonitor::VolumeAdded, this,
-          &CDeviceWatcherLinux::slotGVFSMtpDriveAdded);
+          &CDeviceWatcherLinux::slotGVFSMtpVolumeAdded);
   connect(gvfsMtpVolumeMonitor, &org::gtk::Private::RemoteVolumeMonitor::VolumeRemoved, this,
-          &CDeviceWatcherLinux::slotGVFSMtpDriveRemoved);
+          &CDeviceWatcherLinux::slotGVFSMtpVolumeRemoved);
+
+  auto reply = gvfsMtpVolumeMonitor->List();
+  reply.waitForFinished();
+  const GVFSMtpVolumeList& volumes = reply.argumentAt<1>();
+  for (const GVFSMtpVolume& volume : volumes) {
+    gvfsMtpVolumeMonitor->VolumeMount(volume.id, "", 0, "").waitForFinished();
+  }
 
   gvfsMountTracker = new org::gtk::vfs::MountTracker("org.gtk.vfs.Daemon", "/org/gtk/vfs/mounttracker",
                                                      QDBusConnection::sessionBus(), this);
@@ -254,7 +261,7 @@ void CDeviceWatcherLinux::slotKMTPDeviceChanged() {
   knownMtpDevices.clear();
 
   // iterate over all MTP devices
-  const QList<QDBusObjectPath>& devices = kmtpDaemon->listDevices().value();
+  const QList<QDBusObjectPath>& devices = kMtpDaemon->listDevices().value();
   for (const QDBusObjectPath& devicePath : devices) {
     org::kde::kmtp::Device device("org.kde.kiod6", devicePath.path(), QDBusConnection::sessionBus(), this);
     const QString& key = device.udi();
@@ -296,22 +303,21 @@ void CDeviceWatcherLinux::addKMtpDevice(org::kde::kmtp::Device& device, const QS
   emit sigChanged();
 }
 
-void CDeviceWatcherLinux::slotGVFSMtpDriveAdded(const QString& dbus_name, const QString& id, GVFSMtpVolume volume) {
-  qDebug() << "CDeviceWatcherLinux::slotGVFSMtpDriveAdded" << dbus_name << id << volume.activationUri;
+void CDeviceWatcherLinux::slotGVFSMtpVolumeAdded(const QString& dbus_name, const QString& id, GVFSMtpVolume volume) {
+  qDebug() << "CDeviceWatcherLinux::slotGVFSMtpVolumeAdded" << dbus_name << id << volume.activationUri;
   if (volume.canMount && volume.shouldAutomount && volume.activationUri.contains("GARMIN", Qt::CaseInsensitive)) {
-    gvfsMtpVolumeMonitor->VolumeMount(id, "", 0, "");
+    gvfsMtpVolumeMonitor->VolumeMount(id, "", 0, "").waitForFinished();
   }
 }
 
-void CDeviceWatcherLinux::slotGVFSMtpDriveRemoved(const QString& dbus_name, const QString& id, GVFSMtpVolume volume) {
-  qDebug() << "CDeviceWatcherLinux::slotGVFSMtpDriveRemoved" << dbus_name << id << volume.activationUri;
+void CDeviceWatcherLinux::slotGVFSMtpVolumeRemoved(const QString& dbus_name, const QString& id, GVFSMtpVolume volume) {
+  qDebug() << "CDeviceWatcherLinux::slotGVFSMtpVolumeRemoved" << dbus_name << id << volume.activationUri;
 }
 
 void CDeviceWatcherLinux::slotGVFSMounted(GVFSMount mount) {
   qDebug() << "CDeviceWatcherLinux::slotGVFSMounted" << mount.dbusId << mount.objectPath << mount.fuseMountPoint;
   QDir dir(mount.fuseMountPoint.constData());
   const QStringList& paths = dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
-  qDebug() << paths;
   for (const QString& path : paths) {
     if (dir.exists(path + "/Gamin/GarminDevice.xml") || dir.exists(path + "/GARMIN/GarminDevice.xml")) {
       addGVFSMtpDevice(mount, paths);

@@ -1,6 +1,5 @@
 V1.XX.X
-[QMS-732] Migrate macOS build from Qt5 to Qt6
-[QMS-730] TMS/WMTS fixed accidentally removed namespace processing
+[QMS-558] Support for MTP devices
 [QMS-648] Porting to Qt6
 [QMS-656] TMS/WMTS: Fix loosing layer selection when reloading maps
 [QMS-668] MacOS build adapted to new gdal version and new brew packages
@@ -12,8 +11,8 @@ V1.XX.X
 [QMS-706] Apply PNG file’s offset to user-defined waypoint icon from "External Icons" folder
 [QMS-709] Adjust square zoom levels to fit EPSG:3857 tiles and other minor fix in Proj Wizard
 [QMS-715] Remove duplicate tile map server requests for the same tile, allow HTTP(S) redirection
-
-
+[QMS-732] Migrate macOS build from Qt5 to Qt6
+[QMS-730] TMS/WMTS fixed accidentally removed namespace processing
 
 V1.17.1
 [QMS-547] Fixed: QMS freezes on zoom when activating multi-layered online maps

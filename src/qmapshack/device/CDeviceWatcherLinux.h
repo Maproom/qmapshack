@@ -41,8 +41,8 @@ class CDeviceWatcherLinux : public IDeviceWatcher {
 
   void slotKMTPDeviceChanged();
 
-  void slotGVFSMtpDriveAdded(const QString& dbus_name, const QString& id, GVFSMtpVolume volume);
-  void slotGVFSMtpDriveRemoved(const QString& dbus_name, const QString& id, GVFSMtpVolume volume);
+  void slotGVFSMtpVolumeAdded(const QString& dbus_name, const QString& id, GVFSMtpVolume volume);
+  void slotGVFSMtpVolumeRemoved(const QString& dbus_name, const QString& id, GVFSMtpVolume volume);
 
   void slotGVFSMounted(GVFSMount mount);
   void slotGVFSUnmounted(GVFSMount mount);
@@ -52,7 +52,7 @@ class CDeviceWatcherLinux : public IDeviceWatcher {
   void addKMtpDevice(org::kde::kmtp::Device& device, const QString &deviceKey);
   void addGVFSMtpDevice(const GVFSMount& mount, const QStringList& storages);
 
-  org::kde::kmtp::Daemon* kmtpDaemon;
+  org::kde::kmtp::Daemon* kMtpDaemon;
   QMap<QString, QStringList> knownMtpDevices;
 
   org::gtk::Private::RemoteVolumeMonitor* gvfsMtpVolumeMonitor;

@@ -22,17 +22,55 @@
 #include <qdir.h>
 #include <qobject.h>
 
+/**
+ * @brief The abstract (MTP) access for different systems (KDE, GTK,...)
+ */
 class IDeviceAccess : public QObject {
   Q_OBJECT
  public:
   IDeviceAccess(QObject* parent);
   virtual ~IDeviceAccess() = default;
+  /**
+   * @brief Return true if a vaild path has been found
+   *
+   * A valid path usually is a path that has a folder named Garmin.
+   *
+   */
   virtual bool foundValidStoragePath() const { return !dir.dirName().isEmpty(); }
+  /**
+   * @brief Get an icon from the storage if any
+   * @return A valid pixmap ion success or an empty one if no icon has been found.
+   */
   virtual QPixmap getIcon() = 0;
+  /**
+   * @brief A user readable description of the storage
+   */
   virtual QString decription() = 0;
+  /**
+   * @brief Read a file from the storage
+   * @param path    a path relative to the storage path
+   * @param file    the file can be opened with write access or closed.
+   * @return True on success.
+   */
   virtual bool readFileFromStorage(const QString& path, QFile& file) = 0;
+  /**
+   * @brief Send a file to the storage
+   * @param path    a path relative to the storage path
+   * @param file    the file can be opened with read access or closed.
+   * @return True on success.
+   */
   virtual bool sendFileToStorage(const QString& path, QFile& file) = 0;
+  /**
+   * @brief Remove a file from the storage
+   * @param path    a path relative to the storage path
+   * @return
+   */
   virtual bool removeFileFromStorage(const QString& path) = 0;
+  /**
+   * @brief List all files in a path on the storage
+   * @param path    a path relative to the storage path
+   * @return
+   */
   virtual QStringList listFilesOnStorage(const QString& path) = 0;
 
  protected:

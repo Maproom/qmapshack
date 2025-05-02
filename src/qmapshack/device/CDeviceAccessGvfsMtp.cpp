@@ -27,22 +27,20 @@ CDeviceAccessGvfsMtp::CDeviceAccessGvfsMtp(const GVFSMount& mount, const QString
     : IDeviceAccess(parent), _description(storagePath) {
   storage = new org::gtk::vfs::Mount(mount.dbusId, mount.objectPath.path(), QDBusConnection::sessionBus(), this);
 
-  QDir d(QDir(mount.fuseMountPoint.constData()).filePath(storagePath));
+  const QDir& d = QDir(mount.fuseMountPoint.constData()).filePath(storagePath);
 
   // Find the "GARMIN" or "Garmin" folder
-  const QStringList topLevelFiles = d.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
-  for (const QString& file : topLevelFiles) {
-    if (file.toUpper() == "GARMIN") {
-      dir.setPath(d.filePath(file));
-      pathOnDevice.setPath("/" + QDir(storagePath).filePath(file));
+  const QStringList& topLevelDirectories = d.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
+  for (const QString& directory : topLevelDirectories) {
+    if (directory.toUpper() == "GARMIN") {
+      dir.setPath(d.filePath(directory));
+      pathOnDevice.setPath("/" + QDir(storagePath).filePath(directory));
     }
   }
 }
 
 QPixmap CDeviceAccessGvfsMtp::getIcon() {
   QPixmap pixmap;
-
-  qDebug() << dir.exists("Garmintriangletm.ico") << dir.filePath("Garmintriangletm.ico");
   if (dir.exists("Garmintriangletm.ico")) {
     pixmap.load(dir.filePath("Garmintriangletm.ico"));
   }
@@ -54,7 +52,7 @@ QString CDeviceAccessGvfsMtp::decription() { return _description; }
 bool CDeviceAccessGvfsMtp::readFileFromStorage(const QString& path, QFile& file) {
   try {
     if (!dir.exists(path)) {
-      throw QString("File does not exist %1").arg(dir.filePath(path));
+      throw QString("File does not exist: %1").arg(dir.filePath(path));
     }
 
     QFile f(dir.filePath(path));

@@ -41,13 +41,13 @@ class CGpxProject : public IGisProject {
   bool canSave() const override { return true; }
 
   static bool saveAs(const QString& fn, IGisProject& project, bool strictGpx11);
-  static bool saveAs(QFile& file, const QString &filename, IGisProject& project, bool strictGpx11);
+  static bool saveAs(QFile& file, const QString& filename, IGisProject& project, bool strictGpx11);
 
   static void loadGpx(const QString& filename, CGpxProject* project);
 
  private:
   void loadGpx(const QString& filename);
-  static void loadGpx(QFile& file, const QString &filename, CGpxProject* project);
+  static void loadGpx(QFile& file, const QString& filename, CGpxProject* project);
 };
 
 #endif  // CGPXPROJECT_H

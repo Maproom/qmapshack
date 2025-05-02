@@ -42,8 +42,6 @@ CFitProject::CFitProject(const QString& filename, IDevice* parent) : IGisProject
 CFitProject::CFitProject(QFile& file, const QString& filename, IDevice* parent)
     : IGisProject(eTypeFit, filename, parent) {
   loadFitFromFile(file, false);
-  // setName(QFileInfo(filename).completeBaseName().replace("_", " "));
-  // setupName("");
 }
 
 void CFitProject::loadFitFromFile(const QString& filename, bool showErrorMsg) {

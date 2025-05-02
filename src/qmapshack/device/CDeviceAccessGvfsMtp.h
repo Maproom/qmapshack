@@ -42,6 +42,8 @@ class CDeviceAccessGvfsMtp : public IDeviceAccess {
 
  private:
   org::gtk::vfs::Mount* storage;
+  const QString _description;
+  QDir pathOnDevice;
 };
 
 #endif //CDEVICEACCESSGVFSMTP_H

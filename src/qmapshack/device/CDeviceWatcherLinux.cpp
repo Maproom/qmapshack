@@ -290,7 +290,7 @@ void CDeviceWatcherLinux::addKMtpDevice(org::kde::kmtp::Device& device, const QS
   for (const QDBusObjectPath& storagePath : storages) {
     org::kde::kmtp::Storage storage("org.kde.kiod6", storagePath.path(), QDBusConnection::sessionBus(), this);
     const QString& key = QString("%1@%2").arg(storage.description(), device.udi());
-    new CDeviceGarminMtp(storagePath, device.friendlyName(), key, listWks);
+    new CDeviceGarminMtp(storagePath, key, listWks);
     knownMtpDevices[deviceKey] << key;
   }
   emit sigChanged();
@@ -311,6 +311,7 @@ void CDeviceWatcherLinux::slotGVFSMounted(GVFSMount mount) {
   qDebug() << "CDeviceWatcherLinux::slotGVFSMounted" << mount.dbusId << mount.objectPath << mount.fuseMountPoint;
   QDir dir(mount.fuseMountPoint.constData());
   const QStringList& paths = dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
+  qDebug() << paths;
   for (const QString& path : paths) {
     if (dir.exists(path + "/Gamin/GarminDevice.xml") || dir.exists(path + "/GARMIN/GarminDevice.xml")) {
       addGVFSMtpDevice(mount, paths);
@@ -321,6 +322,14 @@ void CDeviceWatcherLinux::slotGVFSMounted(GVFSMount mount) {
 
 void CDeviceWatcherLinux::slotGVFSUnmounted(GVFSMount mount) {
   qDebug() << "CDeviceWatcherLinux::slotGVFSUnmounted" << mount.dbusId << mount.objectPath << mount.fuseMountPoint;
+  const QStringList& devices = knownMtpDevices.keys();
+  for (const QString& device : devices) {
+    const QStringList& keys = knownMtpDevices[device];
+    for (const QString& key : keys) {
+      listWks->removeDevice(key);
+    }
+    knownMtpDevices.remove(device);
+  }
 }
 
 void CDeviceWatcherLinux::addGVFSMtpDevice(const GVFSMount& mount, const QStringList& storages) {

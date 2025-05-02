@@ -31,12 +31,9 @@ CDeviceGarminMtp::CDeviceGarminMtp(const GVFSMount& mount, const QString& storag
   setup();
 }
 
-CDeviceGarminMtp::CDeviceGarminMtp(const QDBusObjectPath& objectPathStorage, const QString& model, const QString& key,
-                                   QTreeWidget* parent)
+CDeviceGarminMtp::CDeviceGarminMtp(const QDBusObjectPath& objectPathStorage, const QString& key, QTreeWidget* parent)
     : IDevice("", eTypeGarminMtp, key, parent), QObject(parent) {
   device = new CDeviceAccessKMtp(objectPathStorage, this);
-
-  setText(CGisListWks::eColumnName, QString("%1 (%2)").arg(model, device->decription()));
   setup();
 }
 
@@ -112,6 +109,8 @@ void CDeviceGarminMtp::setup() {
     // build paths for memory card storages that do not have a GarminDevice.xml
     pathGpx = "GPX";
   }
+
+  setText(CGisListWks::eColumnName, QString("%1 (%2)").arg(description, device->decription()));
 
   qDebug() << pathGpx;
   qDebug() << pathPictures;

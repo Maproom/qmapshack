@@ -30,8 +30,7 @@ class GVFSMount;
 class CDeviceGarminMtp : public IDevice, private QObject {
   Q_DECLARE_TR_FUNCTIONS(CDeviceGarminMtp)
  public:
-  CDeviceGarminMtp(const QDBusObjectPath& objectPathStorage, const QString& model, const QString& key,
-                   QTreeWidget* parent);
+  CDeviceGarminMtp(const QDBusObjectPath& objectPathStorage, const QString& key, QTreeWidget* parent);
 
   CDeviceGarminMtp(const GVFSMount& mount, const QString& storagePath, const QString& key, QTreeWidget* parent);
 
@@ -55,7 +54,7 @@ class CDeviceGarminMtp : public IDevice, private QObject {
 
   QString id;
   QString partno;
-  QString description;
+  QString description = "Garmin";
   QString pathGpx;
   QString pathPictures;
   QString pathSpoilers;

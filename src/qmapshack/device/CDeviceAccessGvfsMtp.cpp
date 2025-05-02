@@ -18,10 +18,13 @@
 
 #include "device/CDeviceAccessGvfsMtp.h"
 
+#include <QMessageBox>
 #include <QPixmap>
 
+#include "CMainWindow.h"
+
 CDeviceAccessGvfsMtp::CDeviceAccessGvfsMtp(const GVFSMount& mount, const QString& storagePath, QObject* parent)
-    : IDeviceAccess(parent) {
+    : IDeviceAccess(parent), _description(storagePath) {
   storage = new org::gtk::vfs::Mount(mount.dbusId, mount.objectPath.path(), QDBusConnection::sessionBus(), this);
 
   QDir d(QDir(mount.fuseMountPoint.constData()).filePath(storagePath));
@@ -31,6 +34,7 @@ CDeviceAccessGvfsMtp::CDeviceAccessGvfsMtp(const GVFSMount& mount, const QString
   for (const QString& file : topLevelFiles) {
     if (file.toUpper() == "GARMIN") {
       dir.setPath(d.filePath(file));
+      pathOnDevice.setPath("/" + QDir(storagePath).filePath(file));
     }
   }
 }
@@ -45,7 +49,7 @@ QPixmap CDeviceAccessGvfsMtp::getIcon() {
   return pixmap;
 }
 
-QString CDeviceAccessGvfsMtp::decription() { return {}; }
+QString CDeviceAccessGvfsMtp::decription() { return _description; }
 
 bool CDeviceAccessGvfsMtp::readFileFromStorage(const QString& path, QFile& file) {
   try {
@@ -76,9 +80,37 @@ bool CDeviceAccessGvfsMtp::readFileFromStorage(const QString& path, QFile& file)
   return true;
 }
 
-bool CDeviceAccessGvfsMtp::sendFileToStorage(const QString& path, QFile& file) { return false; }
+bool CDeviceAccessGvfsMtp::sendFileToStorage(const QString& path, QFile& file) {
+  file.flush();
+  file.close();
+  QByteArray source = file.fileName().toLocal8Bit();
+  QByteArray target = pathOnDevice.filePath(path).toLocal8Bit();
+  source.append('\0');
+  target.append('\0');
+  auto res = storage->Push(target, source, false, 0, QDBusObjectPath("/"), false);
+  res.waitForFinished();
+  if (res.isError()) {
+    QMessageBox::warning(
+        CMainWindow::getBestWidgetForParent(), tr("Send to Devices..."),
+        tr("Failed to send file \"%1\" to device. Reason: %2").arg(target.constData(), res.reply().errorMessage()),
+        QMessageBox::Ok);
+  }
+  return !res.isError();
+}
 
-bool CDeviceAccessGvfsMtp::removeFileFromStorage(const QString& path) { return false; }
+bool CDeviceAccessGvfsMtp::removeFileFromStorage(const QString& path) {
+  QByteArray target = pathOnDevice.filePath(path).toLocal8Bit();
+  target.append('\0');
+  auto res = storage->Delete(target);
+  res.waitForFinished();
+  if (res.isError()) {
+    QMessageBox::warning(
+        CMainWindow::getBestWidgetForParent(), tr("Delete from Devices..."),
+        tr("Failed to delete file \"%1\" from device. Reason: %2").arg(target.constData(), res.reply().errorMessage()),
+        QMessageBox::Ok);
+  }
+  return !res.isError();
+}
 
 QStringList CDeviceAccessGvfsMtp::listFilesOnStorage(const QString& path) {
   QDir d(dir.filePath(path));

@@ -151,6 +151,17 @@ void CKnownExtension::initClueTrustTPXv1(const IUnit& units, const QString& ns) 
        units.speedUnit, "://icons/32x32/CSrcVertSpeed.png", true, false, getExtensionValueFunc(ns % ":verticalSpeed")});
 }
 
+void CKnownExtension::initGarminFit(const IUnit& units, const QString& ns) {
+  knownExtensions.insert(ns % ":speed", {tr("Speed", "extShortName"), tr("Speed (device)", "extLongName"), -1, 0.,
+                                         NOFLOAT, units.speedFactor, units.speedUnit, "://icons/32x32/CSrcSpeed.png",
+                                         true, false, getExtensionValueFunc(ns % ":speed")});
+
+  knownExtensions.insert(
+      ns % ":distance",
+      {tr("Distance", "extShortName"), tr("Distance (device)", "extLongName"), -1, 0., NOFLOAT, units.baseFactor,
+       units.baseUnit, "://icons/32x32/CSrcDistance.png", true, false, getExtensionValueFunc(ns % ":distance")});
+}
+
 void CKnownExtension::init(const IUnit& units) {
   knownExtensions = {
       {internalSlope,
@@ -186,9 +197,9 @@ void CKnownExtension::init(const IUnit& units) {
 
   initGarminTPXv1(units, "gpxtpx");
   initGarminTPXv1(units, "tp1");
-
   initMioTPX(units);
   initClueTrustTPXv1(units, "gpxdata");
+  initGarminFit(units, "fit");
 }
 
 const CKnownExtension CKnownExtension::get(const QString& key) {

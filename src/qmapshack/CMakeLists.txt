@@ -95,6 +95,7 @@ set( SRCS
     gis/fit/defs/CFitProfile.cpp
     gis/fit/defs/CFitProfileLookup.cpp
     gis/fit/serialization.cpp
+    gis/fit2/CFit2Project.cpp
     gis/gpx/CGpxProject.cpp
     gis/gpx/serialization.cpp
     gis/ovl/CDetailsOvlArea.cpp
@@ -479,6 +480,7 @@ set( HDRS
     gis/fit/defs/fit_const.h
     gis/fit/defs/fit_enums.h
     gis/fit/defs/fit_fields.h
+    gis/fit2/CFit2Project.h
     gis/gpx/CGpxProject.h
     gis/ovl/CDetailsOvlArea.h
     gis/ovl/CGisItemOvlArea.h
@@ -964,6 +966,7 @@ include_directories(
     ${PROJ_INCLUDE_DIRS}
     ${ROUTINO_INCLUDE_DIRS}
     ${ALGLIB_INCLUDE_DIRS}
+    ../../3rdparty/GarminFitSdk/cpp
 )
 
 if(APPLE)
@@ -975,11 +978,7 @@ endif(APPLE)
 ###############################################################################################
 # Build the executable and define necessary libraries.
 ###############################################################################################
-# if(APPLE)
-    # add_executable(${APPLICATION_NAME} MACOSX_BUNDLE ${MAININP})
-# else(APPLE)
-    add_executable(${APPLICATION_NAME} WIN32 ${MAININP})
-# endif(APPLE)
+add_executable(${APPLICATION_NAME} WIN32 ${MAININP})
 
 target_compile_definitions(${APPLICATION_NAME} PUBLIC
     -DVER_MAJOR=${PROJECT_VERSION_MAJOR}
@@ -1017,6 +1016,7 @@ target_link_libraries(${APPLICATION_NAME}
     ${ROUTINO_LIBRARIES}
     ${ALGLIB_LIBRARIES}
     QuaZip::QuaZip
+    GarminFit
 )
 
 if(APPLE)

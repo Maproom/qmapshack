@@ -21,7 +21,7 @@
 #include "device/CDeviceAccessGvfsMtp.h"
 #include "device/CDeviceAccessKMtp.h"
 #include "gis/CGisListWks.h"
-#include "gis/fit/CFitProject.h"
+#include "gis/fit2/CFit2Project.h"
 #include "gis/gpx/CGpxProject.h"
 
 CDeviceGarminMtp::CDeviceGarminMtp(const GVFSMount& mount, const QString& storagePath, const QString& key,
@@ -170,7 +170,7 @@ void CDeviceGarminMtp::createProjectsFromFiles(QString subdirectory, QString ext
       if (extension == "gpx") {
         project = new CGpxProject(tempFile, d.filePath(file), this);
       } else if (extension == "fit") {
-        project = new CFitProject(tempFile, d.filePath(file), this);
+        project = new CFit2Project(tempFile, d.filePath(file), this);
       }
       if (project && !project->isValid()) {
         delete project;

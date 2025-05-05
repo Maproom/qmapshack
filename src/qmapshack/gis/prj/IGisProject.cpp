@@ -30,6 +30,7 @@
 #include "gis/CGisWorkspace.h"
 #include "gis/IGisItem.h"
 #include "gis/fit/CFitProject.h"
+#include "gis/fit2/CFit2Project.h"
 #include "gis/gpx/CGpxProject.h"
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/prj/CDetailsPrj.h"
@@ -121,7 +122,7 @@ IGisProject* IGisProject::create(const QString filename, CGisListWks* parent) {
       parent->addProject(item);
     }
   } else if (suffix == "fit") {
-    item = new CFitProject(filename, parent);
+    item = new CFit2Project(filename, parent);
   } else if (suffix == "tcx") {
     item = new CTcxProject(filename, parent);
   } else if (suffix == "sml") {

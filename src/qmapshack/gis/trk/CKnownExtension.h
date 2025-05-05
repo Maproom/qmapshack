@@ -41,6 +41,8 @@ class CKnownExtension {
 
   static void initClueTrustTPXv1(const IUnit& units, const QString& ns);
 
+  static void initGarminFit(const IUnit& units, const QString& ns);
+
   static const QString internalSlope;         //< name of internally derived slope
   static const QString internalSpeedDist;     //< name of internally derived speed over distance
   static const QString internalSpeedTime;     //< name of internally derived speed over time

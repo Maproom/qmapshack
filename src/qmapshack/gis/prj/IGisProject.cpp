@@ -784,10 +784,12 @@ void IGisProject::umount() {
 }
 
 bool IGisProject::remove() {
+#ifdef Q_OS_LINUX
   CDeviceGarminMtp* mtp = dynamic_cast<CDeviceGarminMtp*>(parent());
   if (mtp != nullptr) {
     return mtp->removeFromDevice(filename);
   }
+#endif
 
   CProjectMountLock mountLock(*this);
 

@@ -108,6 +108,8 @@ void CDeviceGarminMtp::setup() {
   } else {
     // build paths for memory card storages that do not have a GarminDevice.xml
     pathGpx = "GPX";
+    pathActivities = "Activities";
+    pathCourses = "Courses";
   }
 
   setText(CGisListWks::eColumnName, QString("%1 (%2)").arg(description, device->decription()));
@@ -123,6 +125,7 @@ void CDeviceGarminMtp::setup() {
 
   createProjectsFromFiles(pathGpx, "gpx");
   createProjectsFromFiles(pathActivities, "fit");
+  createProjectsFromFiles(pathCourses, "fit");
 }
 
 bool CDeviceGarminMtp::removeFromDevice(const QString& filename) {

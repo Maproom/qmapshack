@@ -26,8 +26,9 @@
 #include "gis/CGisListWks.h"
 #include "gis/trk/CGisItemTrk.h"
 
-const QSet<std::string> CFit2Project::knownMessages = {"file_id",  "session", "lap",         "event",
-                                                       "activity", "record",  "device_info", "file_creator"};
+const QSet<std::string> CFit2Project::knownMessages = {"file_id",  "session",     "lap",         "event",
+                                                       "activity", "record",      "device_info", "file_creator",
+                                                       "course",   "course_point"};
 
 CFit2Project::CFit2Project(QFile& file, const QString& filename, IDevice* parent)
     : IGisProject(eTypeFit, filename, parent) {
@@ -45,6 +46,7 @@ CFit2Project::CFit2Project(const QString& filename, CGisListWks* parent) : IGisP
 }
 
 void CFit2Project::loadFitFromFile(const QString& filename, bool showErrorMsg) {
+  qDebug() << "---------" << filename << "---------";
   setIcon(CGisListWks::eColumnIcon, QIcon("://icons/32x32/FitProject.png"));
   blockUpdateItems(true);
   try {
@@ -100,6 +102,8 @@ void CFit2Project::decodeFile(const QString& filename) {
   mesgBroadcaster.AddListener((fit::LapMesgListener&)*this);
   mesgBroadcaster.AddListener((fit::EventMesgListener&)*this);
   mesgBroadcaster.AddListener((fit::FileCreatorMesgListener&)*this);
+  mesgBroadcaster.AddListener((fit::CourseMesgListener&)*this);
+  mesgBroadcaster.AddListener((fit::CoursePointMesgListener&)*this);
 
   try {
     decode.Read(&file, &mesgBroadcaster, &mesgBroadcaster, nullptr);
@@ -218,11 +222,6 @@ void CFit2Project::OnMesg(fit::SessionMesg& mesg) {
     comment += tr("total distance: %1%2<br/>").arg(val, unit);
   }
 
-  if (mesg.IsEnhancedAvgSpeedValid()) {
-    IUnit::self().meter2speed(mesg.GetEnhancedAvgSpeed(), val, unit);
-    comment += tr("enhanced average speed: %1%2<br/>").arg(val, unit);
-  }
-
   if (mesg.IsEnhancedMaxSpeedValid()) {
     IUnit::self().meter2speed(mesg.GetEnhancedMaxSpeed(), val, unit);
     comment += tr("enhanced max speed: %1%2<br/>").arg(val, unit);
@@ -277,10 +276,36 @@ void CFit2Project::OnMesg(fit::LapMesg& mesg) {
   //   fit::Field* filed = mesg.GetFieldByIndex(i);
   //   qDebug() << "  " << filed->GetName();
   // }
-
   if (!segment.isEmpty()) {
     track.segs.append(segment);
     segment.pts.clear();
+  }
+  if (recordType == eRecordType::Course) {
+    QString val, unit;
+    QString comment = "<div>";
+    if (mesg.IsTotalTimerTimeValid()) {
+      IUnit::self().seconds2time(mesg.GetTotalTimerTime(), val, unit);
+      comment += tr("total timer time: %1%2<br/>").arg(val, unit);
+    }
+    if (mesg.IsTotalDistanceValid()) {
+      IUnit::self().meter2distance(mesg.GetTotalDistance(), val, unit);
+      comment += tr("total distance: %1%2<br/>").arg(val, unit);
+    }
+    if (mesg.IsEnhancedAvgSpeedValid()) {
+      IUnit::self().meter2speed(mesg.GetEnhancedAvgSpeed(), val, unit);
+      comment += tr("enhanced average speed: %1%2<br/>").arg(val, unit);
+    }
+    if (mesg.GetTotalAscent()) {
+      IUnit::self().meter2elevation(mesg.GetTotalAscent(), val, unit);
+      comment += tr("total ascent: %1%2<br/>").arg(val, unit);
+    }
+    if (mesg.GetTotalDescent()) {
+      IUnit::self().meter2elevation(mesg.GetTotalDescent(), val, unit);
+      comment += tr("total descent: %1%2<br/>").arg(val, unit);
+    }
+
+    comment += "<div>";
+    track.cmt = comment;
   }
 }
 
@@ -294,6 +319,9 @@ void CFit2Project::OnMesg(fit::EventMesg& mesg) {
       case FIT_EVENT_TYPE_STOP_ALL:
         if (!segment.isEmpty()) {
           track.segs.append(segment);
+          if (recordType == eRecordType::Course) {
+            new CGisItemTrk(track, this);
+          }
           segment.pts.clear();
         }
         break;
@@ -302,3 +330,40 @@ void CFit2Project::OnMesg(fit::EventMesg& mesg) {
 }
 
 void CFit2Project::OnMesg(fit::FileCreatorMesg& mesg) { /*qDebug() << mesg.GetName();*/ }
+
+void CFit2Project::OnMesg(fit::CourseMesg& mesg) {
+  qDebug() << mesg.GetName() << mesg.GetSport() << Qt::hex << mesg.GetCapabilities();
+  recordType = eRecordType::Course;
+  track.name = QString::fromStdWString(mesg.GetName());
+  // sport to qms activity?
+}
+
+constexpr int kNumKnownSymbols = 26;
+const QString wptIconNames[kNumKnownSymbols]{
+    "Flag, Blue",   "Summit",     "Valley",   "Water",       "Food",        "Danger",      "Left",
+    "Right",        "Straight",   "FirstAid", "4thCategory", "3rdCategory", "2ndCategory", "1stCategory",
+    "HorsCategory", "Sprint",     "LeftFork", "RightFork",   "MiddleFork",  "SlightLeft",  "SharpLeft",
+    "SlightRight",  "SharpRight", "UTurn",    "Start",       "End"};
+
+void CFit2Project::OnMesg(fit::CoursePointMesg& mesg) {
+  // qDebug() << mesg.GetName() << dateTimeFromFitToQt(mesg.GetTimestamp()) << mesg.GetType();
+  CGisItemWpt::wpt_t wpt;
+  if (mesg.IsNameValid()) {
+    wpt.name = QString::fromStdWString(mesg.GetName());
+  }
+  if (mesg.IsTimestampValid()) {
+    wpt.time = dateTimeFromFitToQt(mesg.GetTimestamp());
+  }
+  if (mesg.IsTypeValid() && mesg.GetType() < kNumKnownSymbols) {
+    wpt.sym = wptIconNames[mesg.GetType()];
+  } else {
+    wpt.sym = "City (Small)";
+  }
+  if (mesg.IsPositionLatValid() && mesg.IsPositionLongValid()) {
+    wpt.lon = semicircleToDegree(mesg.GetPositionLong());
+    wpt.lat = semicircleToDegree(mesg.GetPositionLat());
+  }
+  if ((wpt.lat >= -90) || (wpt.lat <= 90) || (wpt.lon >= -180) || (wpt.lon <= 180)) {
+    new CGisItemWpt(wpt, this);
+  }
+}

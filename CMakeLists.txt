@@ -23,6 +23,7 @@ endif()
 ###############################################################################################
 # this is not only the QMS version it will be the package version, too.
 project(QMapShack VERSION 1.17.1 LANGUAGES CXX C)
+set(CMAKE_CXX_STANDARD 11)
 
 # FOR A RELEASE:
 # remove "development" for a release

@@ -21,6 +21,8 @@
 
 #include <QtCore>
 #include <fit_activity_mesg_listener.hpp>
+#include <fit_course_mesg_listener.hpp>
+#include <fit_course_point_mesg_listener.hpp>
 #include <fit_date_time.hpp>
 #include <fit_device_info_mesg_listener.hpp>
 #include <fit_event_mesg_listener.hpp>
@@ -33,6 +35,7 @@
 
 #include "gis/prj/IGisProject.h"
 #include "gis/trk/CTrackData.h"
+#include "gis/wpt/CGisItemWpt.h"
 
 class CFit2Project : public fit::FileIdMesgListener,
                      public fit::DeviceInfoMesgListener,
@@ -43,6 +46,8 @@ class CFit2Project : public fit::FileIdMesgListener,
                      public fit::LapMesgListener,
                      public fit::EventMesgListener,
                      public fit::FileCreatorMesgListener,
+                     public fit::CourseMesgListener,
+                     public fit::CoursePointMesgListener,
                      public IGisProject {
   Q_DECLARE_TR_FUNCTIONS(CFit2Project)
  public:
@@ -70,6 +75,8 @@ class CFit2Project : public fit::FileIdMesgListener,
   void OnMesg(fit::LapMesg& mesg) override;
   void OnMesg(fit::EventMesg& mesg) override;
   void OnMesg(fit::FileCreatorMesg& mesg) override;
+  void OnMesg(fit::CourseMesg& mesg) override;
+  void OnMesg(fit::CoursePointMesg& mesg) override;
 
   inline QDateTime dateTimeFromFitToQt(FIT_DATE_TIME t, const QTimeZone& tz = QTimeZone::UTC) {
     return QDateTime::fromSecsSinceEpoch(fit::DateTime(t).GetTimeT(), tz);
@@ -78,6 +85,9 @@ class CFit2Project : public fit::FileIdMesgListener,
 
   static const QSet<std::string> knownMessages;
 
+  enum class eRecordType { Activity, Course };
+
+  eRecordType recordType{eRecordType::Activity};
   CTrackData track;
   CTrackData::trkseg_t segment;
 };

@@ -169,6 +169,16 @@ CGisItemWpt::CGisItemWpt(CFitStream& stream, IGisProject* project)
   updateDecoration(eMarkNone, eMarkNone);
 }
 
+CGisItemWpt::CGisItemWpt(const wpt_t& data, IGisProject* project)
+    : IGisItem(project, eTypeWpt, NOIDX), proximity(NOFLOAT), posScreen(NOPOINTF) {
+  wpt = data;
+  detBoundingRect();
+
+  CGisItemWpt::genKey();
+  setupHistory();
+  updateDecoration(eMarkNone, eMarkNone);
+}
+
 CGisItemWpt::~CGisItemWpt() {}
 
 IGisItem* CGisItemWpt::createClone() {

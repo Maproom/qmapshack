@@ -154,6 +154,8 @@ class CGisItemWpt : public IGisItem {
 
   CGisItemWpt(CFitStream& stream, IGisProject* project);
 
+  CGisItemWpt(const wpt_t& data, IGisProject* project);
+
   virtual ~CGisItemWpt();
 
   IGisItem* createClone() override;

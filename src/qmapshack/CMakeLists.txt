@@ -918,18 +918,6 @@ set( RCS
     resources.qrc
 )
 
-set( TRANSLATIONS
-    locale/${APPLICATION_NAME}.ts
-    locale/${APPLICATION_NAME}_ca.ts
-    locale/${APPLICATION_NAME}_cs.ts
-    locale/${APPLICATION_NAME}_de.ts
-    locale/${APPLICATION_NAME}_es.ts
-    locale/${APPLICATION_NAME}_fr.ts
-    locale/${APPLICATION_NAME}_it.ts
-    locale/${APPLICATION_NAME}_nl.ts
-    locale/${APPLICATION_NAME}_ru.ts
-)
-
 ###############################################################################################
 # Some Qt magic
 ###############################################################################################
@@ -937,14 +925,6 @@ set( TRANSLATIONS
 qt6_wrap_ui(UI_HDRS ${UIS})
 qt6_add_resources(RC_SRCS ${RCS})
 
-###############################################################################################
-# Translation related stuff
-###############################################################################################
-
-qt_add_translations(${APPLICATION_NAME}
-    TS_FILES ${TRANSLATIONS}
-    QM_FILES_OUTPUT_VARIABLE ${APPLICATION_NAME}_QM_FILES
-)
 
 ###############################################################################################
 # Build source file and include paths lists
@@ -959,6 +939,7 @@ set(MAININP
 )
 
 include_directories(
+    .
     ../common
     SYSTEM # this prevents warnings from non-QMS headers
     ${CMAKE_BINARY_DIR}
@@ -979,6 +960,37 @@ endif(APPLE)
 # Build the executable and define necessary libraries.
 ###############################################################################################
 add_executable(${APPLICATION_NAME} WIN32 ${MAININP})
+
+###############################################################################################
+# Translation related stuff
+###############################################################################################
+if(${UPDATE_TRANSLATIONS_PURGE_OBSOLETE})
+    set(UPDATE_OPTIONS -noobsolete)
+else()
+    set(UPDATE_OPTIONS )
+endif()
+if(${UPDATE_TRANSLATIONS})
+    set( TRANSLATIONS
+        locale/${APPLICATION_NAME}.ts
+        locale/${APPLICATION_NAME}_ca.ts
+        locale/${APPLICATION_NAME}_cs.ts
+        locale/${APPLICATION_NAME}_de.ts
+        locale/${APPLICATION_NAME}_es.ts
+        locale/${APPLICATION_NAME}_fr.ts
+        locale/${APPLICATION_NAME}_it.ts
+        locale/${APPLICATION_NAME}_nl.ts
+        locale/${APPLICATION_NAME}_ru.ts
+    )
+
+    qt_add_translations(${APPLICATION_NAME}
+        TS_FILES ${TRANSLATIONS}
+        QM_FILES_OUTPUT_VARIABLE ${APPLICATION_NAME}_QM_FILES
+        LUPDATE_TARGET ${APPLICATION_NAME}_lupdate
+        SOURCE_TARGETS ${APPLICATION_NAME}    
+        LUPDATE_OPTIONS ${UPDATE_OPTIONS}
+    )
+    add_dependencies(${APPLICATION_NAME} ${APPLICATION_NAME}_lupdate)
+endif()
 
 target_compile_definitions(${APPLICATION_NAME} PUBLIC
     -DVER_MAJOR=${PROJECT_VERSION_MAJOR}

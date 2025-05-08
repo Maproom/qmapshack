@@ -14,6 +14,7 @@ V1.XX.X
 [QMS-715] Remove duplicate tile map server requests for the same tile, allow HTTP(S) redirection
 [QMS-732] Migrate macOS build from Qt5 to Qt6
 [QMS-730] TMS/WMTS fixed accidentally removed namespace processing
+[QMS-738] Use Gamin's FIT SDK to support FIT files properly
 [QMS-740] Fix dbus compile issues for Windows
 [QMS-743] Fix crash when reseting a range in track profile graph
 

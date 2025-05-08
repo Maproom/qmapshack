@@ -29,7 +29,6 @@
 #include "gis/CGisListWks.h"
 #include "gis/CGisWorkspace.h"
 #include "gis/IGisItem.h"
-#include "gis/fit/CFitProject.h"
 #include "gis/fit2/CFit2Project.h"
 #include "gis/gpx/CGpxProject.h"
 #include "gis/ovl/CGisItemOvlArea.h"

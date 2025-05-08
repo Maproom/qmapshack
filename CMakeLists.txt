@@ -66,6 +66,13 @@ endif(WIN32)
 option(BUILD_FOR_LOCAL_SYSTEM "Build for local system ONLY (resulting binary might not work on other systems!)" OFF)
 
 ###############################################################################################
+# Translation options
+###############################################################################################
+option(UPDATE_TRANSLATIONS "Update translation files" ON)
+option(UPDATE_TRANSLATIONS_PURGE_OBSOLETE "Remove obsolete translations" OFF)
+
+
+###############################################################################################
 # All OS and compiler specific tweaks
 ###############################################################################################
 if (APPLE)

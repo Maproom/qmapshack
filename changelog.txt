@@ -2,6 +2,7 @@ V1.XX.X
 [QMS-558] Support for MTP devices
 [QMS-648] Porting to Qt6
 [QMS-656] TMS/WMTS: Fix loosing layer selection when reloading maps
+[QMS-664] Fix BRouter java setup on Debian
 [QMS-668] MacOS build adapted to new gdal version and new brew packages
 [QMS-675] The label colors defined in the TYP are not used
 [QMS-680] Fix: Sending multiple selected projects to device
@@ -14,7 +15,7 @@ V1.XX.X
 [QMS-732] Migrate macOS build from Qt5 to Qt6
 [QMS-730] TMS/WMTS fixed accidentally removed namespace processing
 [QMS-740] Fix dbus compile issues for Windows
-[QMS-664] Fix BRouter java setup on Debian
+[QMS-743] Fix crash when reseting a range in track profile graph
 
 V1.17.1
 [QMS-547] Fixed: QMS freezes on zoom when activating multi-layered online maps

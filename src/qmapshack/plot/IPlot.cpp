@@ -281,7 +281,7 @@ void IPlot::mouseMoveEvent(QMouseEvent* e) {
 
   if (mouseDidMove) {
     if (!scrOptRange.isNull()) {
-      delete scrOptRange;
+      scrOptRange->deleteLater();
     }
     QPoint diff = pos - posLast;
 
@@ -422,7 +422,6 @@ bool IPlot::mouseReleaseEventNormal(QMouseEvent* e) {
           As the screen option is created on the fly it has to be connected to all slots,too.
           Later, when destroyed the slots will be disconnected automatically.
        */
-      delete scrOptRange;
       scrOptRange = new CScrOptRangeTrk(pos, trk, nullptr, this);
       connect(scrOptRange->toolHidePoints, &QToolButton::clicked, this, &IPlot::slotHidePoints);
       connect(scrOptRange->toolShowPoints, &QToolButton::clicked, this, &IPlot::slotShowPoints);
@@ -457,7 +456,9 @@ bool IPlot::mouseReleaseEventNormal(QMouseEvent* e) {
 
     case eMouseClick2nd: {
       // In second click state a mouse click will reset the range selection
-      delete scrOptRange;
+      if (!scrOptRange.isNull()) {
+        scrOptRange->deleteLater();
+      }
       trk->setMode(CGisItemTrk::eModeNormal, objectName());
       idxSel1 = idxSel2 = NOIDX;
       mouseClickState = eMouseClickIdle;
@@ -1306,7 +1307,9 @@ void IPlot::slotCopy() {
 }
 
 void IPlot::slotStopRange() {
-  scrOptRange->deleteLater();
+  if (!scrOptRange.isNull()) {
+    scrOptRange->deleteLater();
+  }
   trk->setMode(CGisItemTrk::eModeNormal, objectName());
   idxSel1 = idxSel2 = NOIDX;
   mouseClickState = eMouseClickIdle;

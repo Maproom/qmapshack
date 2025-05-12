@@ -813,6 +813,20 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
     </message>
 </context>
 <context>
+    <name>CDeviceGarminArchiveMtp</name>
+    <message>
+        <location filename="../device/CDeviceGarminArchiveMtp.cpp" line="30"/>
+        <location filename="../device/CDeviceGarminArchiveMtp.cpp" line="74"/>
+        <source>Archive - expand to load</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../device/CDeviceGarminArchiveMtp.cpp" line="41"/>
+        <source>Archive - loaded</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CElevationDialog</name>
     <message>
         <location filename="../helpers/CElevationDialog.cpp" line="73"/>
@@ -3125,17 +3139,17 @@ If you choose &apos;No&apos; the respective last used waypoint icon is applied.<
 <context>
     <name>CGpxProject</name>
     <message>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="84"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="85"/>
         <source>Failed to load file %1...</source>
         <translation type="unfinished">Kan bestand %1 niet laden...</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="104"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="105"/>
         <source>Failed to open %1</source>
         <translation type="unfinished">Openen mislukt-%1</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="115"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="116"/>
         <source>Failed to read: %1
 line %2, column %3:
  %4</source>
@@ -3144,32 +3158,32 @@ lijn %2, kolom %3:
  %4</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="126"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="127"/>
         <source>Not a GPX file: %1</source>
         <translation type="unfinished">Geen GPX bestand: %1</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="245"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="246"/>
         <source>File exists ...</source>
         <translation type="unfinished">Bestand bestaat al...</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="246"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="247"/>
         <source>The file exists and it has not been created by QMapShack. If you press &apos;yes&apos; all data in this file will be lost. Even if this file contains GPX data and has been loaded by QMapShack, QMapShack might not be able to load and store all elements of this file.  Those elements will be lost. I recommend to use another file. &lt;b&gt;Do you really want to overwrite the file?&lt;/b&gt;</source>
         <translation type="unfinished">Dit bestand bestaat al en is niet in QMapShack gemaakt. Wanneer op &apos;Ja&apos; geklikt wordt zullen er gegevens verloren gaan. Alhoewel QMapShack dit GPX bestand kan openen is het mogelijk dat niet alle elementen opgeslagen kunnen worden. Geadviseerd wordt om een ander bestand te kiezen. &lt;b&gt;Moet dit bestand werkelijk overschreven worden?&lt;b/&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="357"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="358"/>
         <source>Failed to create file &apos;%1&apos;</source>
         <translation type="unfinished">Maken bestand mislukt &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="366"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="367"/>
         <source>Failed to write file &apos;%1&apos;</source>
         <translation type="unfinished">Schrijven bestand mislukt &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="375"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="376"/>
         <source>Saving GIS data failed...</source>
         <translation type="unfinished">Opslaan GIS gegevens mislukt...</translation>
     </message>
@@ -13898,18 +13912,18 @@ Tip:
         <translation type="unfinished">Track knippen...</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="507"/>
+        <location filename="../plot/IPlot.cpp" line="508"/>
         <source>Hold CTRL key for vertical zoom, only.
 Hold ALT key for horizontal zoom, only.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="652"/>
+        <location filename="../plot/IPlot.cpp" line="653"/>
         <source>No or bad data.</source>
         <translation>Geen of ontbrekende gegevens.</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="1264"/>
+        <location filename="../plot/IPlot.cpp" line="1265"/>
         <source>Select output file</source>
         <translation>Selecteer bestand</translation>
     </message>

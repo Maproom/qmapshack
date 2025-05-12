@@ -124,7 +124,7 @@ CDeviceGarmin::CDeviceGarmin(const QString& path, const QString& key, const QStr
 
   QDir dirArchive(dir.absoluteFilePath(pathGpx + "/Archive"));
   if (dirArchive.exists() && (dirArchive.entryList(QStringList("*.gpx")).count() != 0)) {
-    archive = new CDeviceGarminArchive(dir.absoluteFilePath(pathGpx + "/Archive"), this);
+    new CDeviceGarminArchive(dir.absoluteFilePath(pathGpx + "/Archive"), this);
   }
 
   createProjectsFromFiles(pathActivities, "fit");

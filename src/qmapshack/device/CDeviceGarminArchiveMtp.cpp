@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2016 Oliver Eichler <oliver.eichler@gmx.de>
+    Copyright (C) 2025 Oliver Eichler <oliver.eichler@gmx.de>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,52 +16,57 @@
 
 **********************************************************************************************/
 
-#include "device/CDeviceGarminArchive.h"
-
-#include <QtWidgets>
+#include "device/CDeviceGarminArchiveMtp.h"
 
 #include "canvas/CCanvas.h"
-#include "device/CDeviceGarmin.h"
+#include "device/CDeviceGarminMtp.h"
+#include "device/IDeviceAccess.h"
 #include "gis/CGisListWks.h"
 #include "gis/CGisWorkspace.h"
 #include "gis/gpx/CGpxProject.h"
 
-CDeviceGarminArchive::CDeviceGarminArchive(const QString& path, CDeviceGarmin* parent)
-    : IDevice(path, eTypeGarmin, parent->getKey(), parent) {
+CDeviceGarminArchiveMtp::CDeviceGarminArchiveMtp(const QString& path, IDeviceAccess* device, CDeviceGarminMtp* parent)
+    : IDevice(path, eTypeGarminMtp, parent->getKey(), parent), device(device) {
   setText(CGisListWks::eColumnName, tr("Archive - expand to load"));
   setChildIndicatorPolicy(QTreeWidgetItem::ShowIndicator);
-  connect(treeWidget(), &QTreeWidget::itemExpanded, this, &CDeviceGarminArchive::slotExpanded);
-  connect(treeWidget(), &QTreeWidget::itemCollapsed, this, &CDeviceGarminArchive::slotCollapsed);
+  connect(treeWidget(), &QTreeWidget::itemExpanded, this, &CDeviceGarminArchiveMtp::slotExpanded);
+  connect(treeWidget(), &QTreeWidget::itemCollapsed, this, &CDeviceGarminArchiveMtp::slotCollapsed);
 }
 
-void CDeviceGarminArchive::slotExpanded(QTreeWidgetItem* item) {
+void CDeviceGarminArchiveMtp::slotExpanded(QTreeWidgetItem* item) {
   if ((item != this) || (childCount() != 0)) {
     return;
   }
 
   setText(CGisListWks::eColumnName, tr("Archive - loaded"));
-
   QMutexLocker lock(&IGisItem::mutexItems);
-  CDeviceMountLock mountLock(*this);
   CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
   qDebug() << "reading files from device: " << dir.path();
-  const QStringList& entries = dir.entryList(QStringList("*.gpx"));
+  const QStringList& entries = device->listFilesOnStorage(dir.path());
   for (const QString& entry : entries) {
-    const QString& filename = dir.absoluteFilePath(entry);
-    IGisProject* project = new CGpxProject(filename, this);
+    if (!entry.endsWith(".gpx")) {
+      continue;
+    }
+
+    const QString& filename = dir.filePath(entry);
+    QTemporaryFile tempFile;
+    if (!device->readFileFromStorage(filename, tempFile)) {
+      continue;
+    }
+    tempFile.open();
+    IGisProject* project = new CGpxProject(tempFile, filename, this);
     if (!project->isValid()) {
       delete project;
     }
   }
 }
 
-void CDeviceGarminArchive::slotCollapsed(QTreeWidgetItem* item) {
+void CDeviceGarminArchiveMtp::slotCollapsed(QTreeWidgetItem* item) {
   if ((item != this) || (childCount() == 0)) {
     return;
   }
 
   QMutexLocker lock(&IGisItem::mutexItems);
-  CDeviceMountLock mountLock(*this);
   CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
 
   qDeleteAll(takeChildren());

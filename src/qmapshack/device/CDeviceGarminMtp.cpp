@@ -20,6 +20,7 @@
 
 #include "device/CDeviceAccessGvfsMtp.h"
 #include "device/CDeviceAccessKMtp.h"
+#include "device/CDeviceGarminArchiveMtp.h"
 #include "gis/CGisListWks.h"
 #include "gis/fit2/CFit2Project.h"
 #include "gis/gpx/CGpxProject.h"
@@ -126,6 +127,14 @@ void CDeviceGarminMtp::setup() {
   createProjectsFromFiles(pathGpx, "gpx");
   createProjectsFromFiles(pathActivities, "fit");
   createProjectsFromFiles(pathCourses, "fit");
+  if (!pathLocations.isEmpty()) {
+    createProjectsFromFiles(pathLocations, "fit");
+  }
+
+  if (device->listDirsOnStorage(pathGpx).contains("Archive") &&
+      !device->listFilesOnStorage(QDir(pathGpx).filePath("Archive")).isEmpty()) {
+    new CDeviceGarminArchiveMtp(QDir(pathGpx).filePath("Archive"), device, this);
+  };
 }
 
 bool CDeviceGarminMtp::removeFromDevice(const QString& filename) {

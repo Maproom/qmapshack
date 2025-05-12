@@ -39,6 +39,7 @@ class CDeviceAccessGvfsMtp : public IDeviceAccess {
   bool sendFileToStorage(const QString& path, QFile& file) override;
   bool removeFileFromStorage(const QString& path) override;
   QStringList listFilesOnStorage(const QString& path) override;
+  QStringList listDirsOnStorage(const QString& path) override;
 
  private:
   org::gtk::vfs::Mount* storage;

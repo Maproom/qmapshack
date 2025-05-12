@@ -114,6 +114,17 @@ QStringList CDeviceAccessKMtp::listFilesOnStorage(const QString& path) {
   return result;
 }
 
+QStringList CDeviceAccessKMtp::listDirsOnStorage(const QString& path) {
+  QStringList result;
+  const KMTPFileList& files = storage->getFilesAndFolders(dir.filePath(path)).value();
+  for (const KMTPFile& file : files) {
+    if (file.isFolder()) {
+      result << file.filename();
+    }
+  }
+  return result;
+}
+
 int CDeviceAccessKMtp::waitForCopyOperation(const org::kde::kmtp::Storage* storage, fn_operation operation) {
   QEventLoop loop;
   connect(storage, &org::kde::kmtp::Storage::copyProgress, &loop,

@@ -34,7 +34,7 @@ class IDevice : public QTreeWidgetItem {
   enum type_e { eTypeNone = 0, eTypeGarmin = 1, eTypeTwoNav = 2, eTypeGarminMtp = 3 };
 
   IDevice(const QString& path, type_e type, const QString& key, QTreeWidget* parent);
-  IDevice(const QString& path, type_e type, const QString& key, CDeviceGarmin* parent);
+  IDevice(const QString& path, type_e type, const QString& key, IDevice* parent);
   virtual ~IDevice();
 
   static void mount(const QString& path);

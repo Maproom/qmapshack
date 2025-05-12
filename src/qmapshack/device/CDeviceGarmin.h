@@ -59,8 +59,6 @@ class CDeviceGarmin : public IDevice {
   QString pathTcx;         // no default
 
   int cntImages = 0;
-
-  CDeviceGarminArchive* archive = nullptr;
 };
 
 #endif  // CDEVICEGARMIN_H

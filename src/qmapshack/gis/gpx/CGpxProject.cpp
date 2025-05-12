@@ -51,6 +51,7 @@ CGpxProject::CGpxProject(QFile& file, const QString& filename, IDevice* parent)
   loadGpx(file, filename, this);
   setName(QFileInfo(filename).completeBaseName().replace("_", " "));
   setupName("");
+  markAsSaved();
   blockUpdateItems(false);
 }
 

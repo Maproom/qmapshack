@@ -72,6 +72,12 @@ class IDeviceAccess : public QObject {
    * @return
    */
   virtual QStringList listFilesOnStorage(const QString& path) = 0;
+  /**
+   * @brief List all directories in a path on the storage
+   * @param path    a path relative to the storage path
+   * @return
+   */
+  virtual QStringList listDirsOnStorage(const QString& path) = 0;
 
  protected:
   QDir dir;

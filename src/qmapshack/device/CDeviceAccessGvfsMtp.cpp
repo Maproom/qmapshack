@@ -115,3 +115,9 @@ QStringList CDeviceAccessGvfsMtp::listFilesOnStorage(const QString& path) {
   const QStringList& result = d.entryList(QDir::Files);
   return result;
 }
+
+QStringList CDeviceAccessGvfsMtp::listDirsOnStorage(const QString& path) {
+  QDir d(dir.filePath(path));
+  const QStringList& result = d.entryList(QDir::Dirs);
+  return result;
+}

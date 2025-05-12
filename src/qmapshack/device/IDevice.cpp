@@ -37,7 +37,7 @@ IDevice::IDevice(const QString& path, type_e type, const QString& key, QTreeWidg
   cnt++;
 }
 
-IDevice::IDevice(const QString& path, type_e type, const QString& key, CDeviceGarmin* parent)
+IDevice::IDevice(const QString& path, type_e type, const QString& key, IDevice* parent)
     : QTreeWidgetItem(parent, type), dir(path), key(key) {
   setIcon(CGisListWks::eColumnIcon, QIcon("://icons/32x32/PathGreen.png"));
 }

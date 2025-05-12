@@ -37,6 +37,7 @@ set( SRCS
     dem/IDemProp.cpp
     device/CDeviceGarmin.cpp
     device/CDeviceGarminArchive.cpp
+    device/CDeviceGarminArchiveMtp.cpp
     device/CDeviceTwoNav.cpp
     device/IDevice.cpp
     device/IDeviceWatcher.cpp
@@ -419,6 +420,7 @@ set( HDRS
     dem/IDemProp.h
     device/CDeviceGarmin.h
     device/CDeviceGarminArchive.h
+    device/CDeviceGarminArchiveMtp.h
     device/CDeviceTwoNav.h
     device/IDevice.h
     device/IDeviceWatcher.h

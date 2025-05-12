@@ -813,6 +813,20 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
     </message>
 </context>
 <context>
+    <name>CDeviceGarminArchiveMtp</name>
+    <message>
+        <location filename="../device/CDeviceGarminArchiveMtp.cpp" line="30"/>
+        <location filename="../device/CDeviceGarminArchiveMtp.cpp" line="74"/>
+        <source>Archive - expand to load</source>
+        <translation type="unfinished">Archiv - Rozbalit k nahrání</translation>
+    </message>
+    <message>
+        <location filename="../device/CDeviceGarminArchiveMtp.cpp" line="41"/>
+        <source>Archive - loaded</source>
+        <translation type="unfinished">Archiv - Nahráno</translation>
+    </message>
+</context>
+<context>
     <name>CElevationDialog</name>
     <message>
         <location filename="../helpers/CElevationDialog.cpp" line="73"/>
@@ -3125,17 +3139,17 @@ If you choose &apos;No&apos; the respective last used waypoint icon is applied.<
 <context>
     <name>CGpxProject</name>
     <message>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="84"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="85"/>
         <source>Failed to load file %1...</source>
         <translation>Nepodařilo se nahrát soubor %1...</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="104"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="105"/>
         <source>Failed to open %1</source>
         <translation>Nepodařilo se otevřít %1</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="115"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="116"/>
         <source>Failed to read: %1
 line %2, column %3:
  %4</source>
@@ -3144,32 +3158,32 @@ line %2, column %3:
 %4</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="126"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="127"/>
         <source>Not a GPX file: %1</source>
         <translation>Není souborem GPX: %1</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="245"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="246"/>
         <source>File exists ...</source>
         <translation>Soubor existuje...</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="246"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="247"/>
         <source>The file exists and it has not been created by QMapShack. If you press &apos;yes&apos; all data in this file will be lost. Even if this file contains GPX data and has been loaded by QMapShack, QMapShack might not be able to load and store all elements of this file.  Those elements will be lost. I recommend to use another file. &lt;b&gt;Do you really want to overwrite the file?&lt;/b&gt;</source>
         <translation>Soubor existuje a nebyl vytvořen programem QMapShack. Pokud stisknete Ano, budou všechna data v tomto souboru ztracena. I když by tento soubor obsahoval data GPX a byl nahrán programem QMapShack, QMapShack nemusí být schopen nahrát a uložit všechny prvky tohoto souboru.  Tyto prvky budou ztraceny. Doporučuje se použít jiný soubor. &lt;b&gt;Opravdu chcete soubor přepsat?&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="357"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="358"/>
         <source>Failed to create file &apos;%1&apos;</source>
         <translation>Nepodařilo se vytvořit soubor &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="366"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="367"/>
         <source>Failed to write file &apos;%1&apos;</source>
         <translation>Nepodařilo se zapsat soubor &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="375"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="376"/>
         <source>Saving GIS data failed...</source>
         <translation>Nepodařilo se uložit data GIS...</translation>
     </message>
@@ -13901,19 +13915,19 @@ Tip:
         <translation type="unfinished">Rozdělit stopu...</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="507"/>
+        <location filename="../plot/IPlot.cpp" line="508"/>
         <source>Hold CTRL key for vertical zoom, only.
 Hold ALT key for horizontal zoom, only.</source>
         <translation>Pro (pouze) svislé přiblížení podržte klávesu Ctrl.
 Pro (pouze) vodorovné přiblížení podržte klávesu Alt.</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="652"/>
+        <location filename="../plot/IPlot.cpp" line="653"/>
         <source>No or bad data.</source>
         <translation>Žádná nebo špatná data.</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="1264"/>
+        <location filename="../plot/IPlot.cpp" line="1265"/>
         <source>Select output file</source>
         <translation>Vybrat výstupní soubor</translation>
     </message>

@@ -17,6 +17,7 @@ V1.XX.X
 [QMS-738] Use Gamin's FIT SDK to support FIT files properly
 [QMS-740] Fix dbus compile issues for Windows
 [QMS-743] Fix crash when reseting a range in track profile graph
+[QMS-747] Remove support for MapQuest 
 
 V1.17.1
 [QMS-547] Fixed: QMS freezes on zoom when activating multi-layered online maps

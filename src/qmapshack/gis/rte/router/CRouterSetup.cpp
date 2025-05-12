@@ -22,7 +22,6 @@
 #include <QtWidgets>
 
 #include "gis/rte/router/CRouterBRouter.h"
-#include "gis/rte/router/CRouterMapQuest.h"
 #include "gis/rte/router/CRouterRoutino.h"
 #include "helpers/CSettings.h"
 
@@ -33,11 +32,9 @@ CRouterSetup::CRouterSetup(QWidget* parent) : QWidget(parent) {
   pSelf = this;
 
   comboRouter->addItem(tr("Routino (offline)"));
-  comboRouter->addItem(tr("MapQuest (online)"));
   comboRouter->addItem(tr("BRouter (online)"));
 
   stackedWidget->addWidget(new CRouterRoutino(this));
-  stackedWidget->addWidget(new CRouterMapQuest(this));
   stackedWidget->addWidget(new CRouterBRouter(this));
 
   connect(comboRouter, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,

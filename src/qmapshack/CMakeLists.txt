@@ -112,7 +112,6 @@ set( SRCS
     gis/rte/CGisItemRte.cpp
     gis/rte/CScrOptRte.cpp
     gis/rte/router/CRouterBRouter.cpp
-    gis/rte/router/CRouterMapQuest.cpp
     gis/rte/router/CRouterOptimization.cpp
     gis/rte/router/CRouterRoutino.cpp
     gis/rte/router/CRouterSetup.cpp
@@ -496,7 +495,6 @@ set( HDRS
     gis/rte/CGisItemRte.h
     gis/rte/CScrOptRte.h
     gis/rte/router/CRouterBRouter.h
-    gis/rte/router/CRouterMapQuest.h
     gis/rte/router/CRouterOptimization.h
     gis/rte/router/CRouterRoutino.h
     gis/rte/router/CRouterSetup.h
@@ -816,7 +814,6 @@ set( UIS
     gis/rte/IDetailsRte.ui
     gis/rte/IScrOptRte.ui
     gis/rte/router/IRouterBRouter.ui
-    gis/rte/router/IRouterMapQuest.ui
     gis/rte/router/IRouterRoutino.ui
     gis/rte/router/IRouterSetup.ui
     gis/rte/router/brouter/IRouterBRouterInfo.ui

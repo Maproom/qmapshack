@@ -113,16 +113,6 @@ CGisItemRte::CGisItemRte(const SGisLine& l, const QString& name, IGisProject* pr
   updateDecoration(eMarkChanged, eMarkNone);
 }
 
-CGisItemRte::CGisItemRte(CFitStream& stream, IGisProject* project)
-    : IGisItem(project, eTypeRte, project->childCount()) {
-  // --- start read and process data ----
-  readRteFromFit(stream);
-  // --- stop read and process data ----
-
-  setupHistory();
-  deriveSecondaryData();
-  updateDecoration(eMarkNone, eMarkNone);
-}
 
 CGisItemRte::~CGisItemRte() {
   // reset user focus if focused on this track

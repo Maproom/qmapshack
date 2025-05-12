@@ -1224,144 +1224,67 @@ Podeu modificar els dos paràmetres per personalitzar el comportament del filtre
 <context>
     <name>CFit2Project</name>
     <message>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="59"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="64"/>
         <source>Failed to load file %1...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&#xa0; No s&apos;ha pogut carregar el fitxer %1...</translation>
     </message>
     <message>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="217"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="222"/>
         <source>total elapsed time: %1%2&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="222"/>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="292"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="227"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="297"/>
         <source>total distance: %1%2&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="288"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="293"/>
         <source>total timer time: %1%2&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="296"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="301"/>
         <source>enhanced average speed: %1%2&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="227"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="232"/>
         <source>enhanced max speed: %1%2&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="232"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="237"/>
         <source>enhanced min altitude: %1%2&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="237"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="242"/>
         <source>enhanced max altitude: %1%2&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="241"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="246"/>
         <source>total calories: %1kcal&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="246"/>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="300"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="251"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="305"/>
         <source>total ascent: %1%2&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="251"/>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="304"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="256"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="309"/>
         <source>total descent: %1%2&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="255"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="260"/>
         <source>number of laps: %1&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>CFitCrcState</name>
-    <message>
-        <location filename="../gis/fit/decoder/CFitCrcState.cpp" line="27"/>
-        <source>FIT decoding error : invalid CRC.</source>
-        <translation>Error descodificant el fitxer FIT: CRC invàlid.</translation>
-    </message>
-</context>
-<context>
-    <name>CFitDecoder</name>
-    <message>
-        <location filename="../gis/fit/decoder/CFitDecoder.cpp" line="115"/>
-        <source>FIT decoding error: unexpected end of file %1.</source>
-        <translation>Error descodificant el fitxer FIT: Final de fitxer inesperat %1.</translation>
-    </message>
-</context>
-<context>
-    <name>CFitFieldBuilder</name>
-    <message>
-        <location filename="../gis/fit/decoder/CFitFieldBuilder.cpp" line="63"/>
-        <source>FIT decoding error: unknown base type %1.</source>
-        <translation>Error descodificant el fitxer FIT: tipus base desconegut %1.</translation>
-    </message>
-</context>
-<context>
-    <name>CFitFieldDataState</name>
-    <message>
-        <location filename="../gis/fit/decoder/CFitFieldDataState.cpp" line="103"/>
-        <source>Missing field definition for development field.</source>
-        <translation>Manca la definició del camp pel camp desenvolupament.</translation>
-    </message>
-    <message>
-        <location filename="../gis/fit/decoder/CFitFieldDataState.cpp" line="219"/>
-        <source>FIT decoding error: invalid field def nr %1 while creating dev field profile.</source>
-        <translation>Error descodificant el fitxer FIT: Definició numèrica invàlida en el camp %1 en crear la definició del perfil del camp.</translation>
-    </message>
-</context>
-<context>
-    <name>CFitHeaderState</name>
-    <message>
-        <location filename="../gis/fit/decoder/CFitHeaderState.cpp" line="63"/>
-        <source>FIT decoding error: protocol %1 version not supported.</source>
-        <translation>Error descodificant el fitxer FIT: la versió del protocol %1 no està implementada.</translation>
-    </message>
-    <message>
-        <location filename="../gis/fit/decoder/CFitHeaderState.cpp" line="113"/>
-        <source>FIT decoding error: file header signature mismatch. File is not FIT.</source>
-        <translation>Error descodificant el fitxer FIT: la capçalera de signatura del fitxer no coincideix. No és un fitxer FIT.</translation>
-    </message>
-</context>
-<context>
-    <name>CFitProject</name>
-    <message>
-        <location filename="../gis/fit/CFitProject.cpp" line="54"/>
-        <location filename="../gis/fit/CFitProject.cpp" line="73"/>
-        <source>Failed to load file %1...</source>
-        <translation>&#xa0; No s&apos;ha pogut carregar el fitxer %1...</translation>
-    </message>
-    <message>
-        <location filename="../gis/fit/CFitProject.cpp" line="99"/>
-        <source>Failed to open FIT file %1.</source>
-        <translation>No s&apos;ha pogut obrir el fitxer FIT %1.</translation>
-    </message>
-</context>
-<context>
-    <name>CFitRecordContentState</name>
-    <message>
-        <location filename="../gis/fit/decoder/CFitRecordContentState.cpp" line="63"/>
-        <source>FIT decoding error: architecture %1 not supported.</source>
-        <translation>Error descodificant el fitxer FIT: No està implementada l&apos;arquitectura %1 .</translation>
-    </message>
-    <message>
-        <location filename="../gis/fit/decoder/CFitRecordContentState.cpp" line="100"/>
-        <source>FIT decoding error: invalid offset %1 for state &apos;record content&apos;</source>
-        <translation>Error descodificant el fitxer FIT: desplaçament no vàlid %1 en l&apos;estat &apos;contingut del registre&apos;</translation>
     </message>
 </context>
 <context>
@@ -1608,90 +1531,85 @@ Podeu modificar els dos paràmetres per personalitzar el comportament del filtre
         <translation>_Clona</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="250"/>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="1156"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="240"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="1146"/>
         <source>route</source>
         <translation>ruta</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="288"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="278"/>
         <source>track</source>
         <translation>track</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="310"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="300"/>
         <source>Changed name.</source>
         <translation>Nom canviat.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="315"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="305"/>
         <source>Changed comment</source>
         <translation>Comentari canviat</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="320"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="310"/>
         <source>Changed description</source>
         <translation>Descripció canviada</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="325"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="315"/>
         <source>Changed links</source>
         <translation>Enllaços canviats</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="338"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="328"/>
         <source>Length: %1%2</source>
         <translation>Llargada: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="346"/>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="560"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="336"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="550"/>
         <source>Time: %1%2</source>
         <translation>Temps: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="562"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="552"/>
         <source>Distance: %1%2</source>
         <translation>Distància: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="340"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="330"/>
         <source>Length: -</source>
         <translation>Llargada: -</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="348"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="338"/>
         <source>Time: -</source>
         <translation>Temps: -</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="357"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="347"/>
         <source>%1%2 %3, %4%5 %6</source>
         <translation>%1%2 %3, %4%5 %6</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="362"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="352"/>
         <source>Last time routed:&lt;br/&gt;%1</source>
         <translation>Enrutat per darrera vegada :&lt;br/&gt;%1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="365"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="355"/>
         <source>with %1</source>
         <translation>amb %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="667"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="657"/>
         <source>Changed route points.</source>
         <translation>Punts de la ruta canviats.</translation>
     </message>
 </context>
 <context>
     <name>CGisItemTrk</name>
-    <message>
-        <location filename="../gis/fit/serialization.cpp" line="238"/>
-        <source>FIT file %1 contains no GPS data.</source>
-        <translation>El fixer FIT %1 no conté dades GPS.</translation>
-    </message>
     <message>
         <location filename="../gis/tnv/serialization.cpp" line="167"/>
         <location filename="../gis/tnv/serialization.cpp" line="293"/>
@@ -1724,315 +1642,315 @@ Podeu modificar els dos paràmetres per personalitzar el comportament del filtre
         <translation>_Clona</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="307"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="294"/>
         <source>Changed trackpoints, sacrificed all previous data.</source>
         <translation>Punts del track canviats, les dades antigues s&apos;han perdut.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="416"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="403"/>
         <source>, %1-, %2-</source>
         <translation>, %1-, %2-</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="423"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="410"/>
         <source>Time: %1%2, Speed: %3%4</source>
         <translation>Temps: %1%2, Velocitat: %3%4</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="425"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="412"/>
         <source>Time: -, Speed: -</source>
         <translation>Temps: -, Velocitat: -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="432"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="419"/>
         <source>Moving: %1%2, Speed: %3%4</source>
         <translation>Moviment: %1%2, Velocitat: %3%4</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="434"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="421"/>
         <source>Moving: -, Speed: -</source>
         <translation>Moviment: -, Velocitat: -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="442"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="429"/>
         <source>Start: %1</source>
         <translation>Inici: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="444"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="431"/>
         <source>Start: -</source>
         <translation>Inici: -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="449"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="436"/>
         <source>End: %1</source>
         <translation>Final: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="451"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="438"/>
         <source>End: -</source>
         <translation>Final: -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="455"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="442"/>
         <source>Points: %1 (%2)</source>
         <translation>Punts: %1 (%2)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="459"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="446"/>
         <source>Energy Use Cycling: %L1</source>
         <translation>Energia Utilitzada En Ciclisme: %L1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="464"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="451"/>
         <source>Invalid elevations!</source>
         <translation>Elevacions invàlides!</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="469"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="456"/>
         <source>Invalid timestamps!</source>
         <translation>Marques horàries invàlides !</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="474"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="461"/>
         <source>Invalid positions!</source>
         <translation>Posicions no vàlides!</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="486"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="473"/>
         <source>Activities: %1</source>
         <translation>Activitats: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="597"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="584"/>
         <source>Index: %1</source>
         <translation>Index: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="599"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="586"/>
         <source>Index: visible %1, total %2</source>
         <translation>Índex: visible %1, total %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="612"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="599"/>
         <source>, Slope: %1%2</source>
         <translation>, Pendent: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="639"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="626"/>
         <source>... and %1 tags not displayed</source>
         <translation>... i no es mostren %1 etiquetes</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="650"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="637"/>
         <source>Distance: - (-)</source>
         <translation>Distància: - (-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="651"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="638"/>
         <source>Moving: - (-)</source>
         <translation>En moviment: - (-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1269"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1280"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1360"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1399"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1558"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2791"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1256"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1267"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1347"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1386"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1545"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2778"/>
         <source>track</source>
         <translation>track</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1482"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1469"/>
         <source>Hide point %1.</source>
         <translation>Amagar punt %1.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1484"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1471"/>
         <source>Hide points %1..%2.</source>
         <translation>Amagar punts %1..%2.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="701"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="711"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="688"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="698"/>
         <source>, %1%2</source>
         <translation>, %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="351"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1735"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="338"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1722"/>
         <source>min.</source>
         <translation>mín.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="351"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1735"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="338"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1722"/>
         <source>max.</source>
         <translation>màx.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="408"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="395"/>
         <source>Length: %1%2</source>
         <translation>Llargada: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="414"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="401"/>
         <source>, %1%2%3, %4%5%6</source>
         <translation>, %1%2%3, %4%5%6</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="479"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="466"/>
         <source>Invalid slopes!</source>
         <translation>Pendent incorrecte!</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="609"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="596"/>
         <source>Ele.: %1%2</source>
         <translation>Ele.: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="616"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="603"/>
         <source>, Speed: %1%2</source>
         <translation>, Velocitat: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="648"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="635"/>
         <source>Ascent: - (-)</source>
         <translation>Ascens: - (-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="649"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="636"/>
         <source>Descent: - (-)</source>
         <translation>Descens: - (-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="655"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="642"/>
         <source>Ascent: %1%2 (%3%)</source>
         <translation>Ascens: %1%2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="660"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="647"/>
         <source>, Descent: %1%2 (%3%)</source>
         <translation>, Descens: %1%2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="665"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="652"/>
         <source>Distance: %1%2 (%3%)</source>
         <translation>Distància: %1%2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="670"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="657"/>
         <source>, Moving: %1%2 (%3%)</source>
         <translation>, En moviment: %1%2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="692"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="679"/>
         <source>Ascent: -</source>
         <translation>Ascens: -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="693"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="680"/>
         <source>Descent: -</source>
         <translation>Descens: -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="697"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="684"/>
         <source>Ascent: %1%2</source>
         <translation>Ascens: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="707"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="694"/>
         <source>, Descent: %1%2</source>
         <translation>, Descens: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="716"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="703"/>
         <source>Distance: %1%2</source>
         <translation>Distància: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="720"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="707"/>
         <source>, Time: %1%2</source>
         <translation>, Hora: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1316"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1303"/>
         <source>Permanently removed points %1..%2</source>
         <translation>S&apos;han suprimit definitivament els punts %1..%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1327"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1314"/>
         <source>Track Point Info...</source>
         <translation>Info del Punt del Track...</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1328"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1315"/>
         <source>Enter some text to be attached to this track point:</source>
         <translation>Introduïr un text associat a aquest punt del track:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1335"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1322"/>
         <source>Add track point desc.: %1</source>
         <translation>Afegit un punt al track desc.: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1343"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1330"/>
         <source>Changed track point desc.: %1</source>
         <translation>Cambiat un punt al track desc.: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1351"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1338"/>
         <source>Removed track point desc.</source>
         <translation>Suprimit un punt al track desc.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1520"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1507"/>
         <source>Delete point %1.</source>
         <translation>Suprimeix el punt %1.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1522"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1509"/>
         <source>Delete points %1..%2.</source>
         <translation>Suprimeix els punts %1..%2.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1545"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1532"/>
         <source>Show points.</source>
         <translation>Mostrar els punts.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2170"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2157"/>
         <source>Changed name</source>
         <translation>Nom canviat</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2175"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2162"/>
         <source>Changed comment</source>
         <translation>Comentari canviat</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2180"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2167"/>
         <source>Changed description</source>
         <translation>Descripció canviada</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2185"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2172"/>
         <source>Changed links</source>
         <translation>Enllaços canviats</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2193"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2180"/>
         <source>Changed elevation of point %1 to %2 %3</source>
         <translation>Elevació dels punts %1 to %2 %3 canviada</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2216"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2203"/>
         <source>Changed activity to &apos;%1&apos; for complete track.</source>
         <translation>Activitat de tot el track canviada a &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2242"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2229"/>
         <source>Changed activity to &apos;%1&apos; for range(%2..%3).</source>
         <translation>Activitat del rang(%2..%3) canviada a &apos;%1&apos;.</translation>
     </message>
@@ -2167,442 +2085,442 @@ Podeu modificar els dos paràmetres per personalitzar el comportament del filtre
         <translation>_Clona</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="303"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="294"/>
         <source>Elevation: %1%2</source>
         <translation>Elevació: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="312"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="303"/>
         <source>Proximity: %1%2</source>
         <translation>Proximitat: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="329"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="320"/>
         <source>Last found: %1</source>
         <translation>Darrer trobat: %1</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="337"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="328"/>
         <source>Project created: %1</source>
         <translation>S&apos;ha creat el projecte: %1</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="371"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="362"/>
         <source>Created: %1</source>
         <translation>Creat: %1</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="437"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="428"/>
         <source>Changed name</source>
         <translation>Nom canviat</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="446"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="437"/>
         <source>Changed position</source>
         <translation>Posició canviada</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="451"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="442"/>
         <source>Changed elevation</source>
         <translation>Elevació canviada</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="458"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="449"/>
         <source>Removed proximity</source>
         <translation>Proximitat eliminada</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="461"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="452"/>
         <source>Changed proximity</source>
         <translation>Proximitat canviada</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="479"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="470"/>
         <source>Changed icon</source>
         <translation>Icona canviada</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="484"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="475"/>
         <source>Changed comment</source>
         <translation>Comentari canviat</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="489"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="480"/>
         <source>Changed description</source>
         <translation>Descripció canviada</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="494"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="485"/>
         <source>Changed links</source>
         <translation>Enllaços canviats</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="499"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="490"/>
         <source>Changed images</source>
         <translation>Imatges canviades</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="504"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="495"/>
         <source>Add image</source>
         <translation>Afegir imatge</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="509"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="500"/>
         <source>Changed timestamp</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="968"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="959"/>
         <source>QMS Attribute Flag</source>
         <translation>Indicador Atribut QMS</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="969"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="960"/>
         <source>Dogs</source>
         <translation>Gossos</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="970"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="961"/>
         <source>Access or parking fee</source>
         <translation>Accés o pàrquing de pagament</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="971"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="962"/>
         <source>Climbing gear</source>
         <translation>Material d&apos;escalada</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="972"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="963"/>
         <source>Boat</source>
         <translation>Vaixell</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="973"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="964"/>
         <source>Scuba gear</source>
         <translation>Material per submarinisme</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="974"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="965"/>
         <source>Recommended for kids</source>
         <translation>Recomanat per a infants</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="975"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="966"/>
         <source>Takes less than an hour</source>
         <translation>Durada inferior a una hora</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="976"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="967"/>
         <source>Scenic view</source>
         <translation>Vista panoràmica</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="977"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="968"/>
         <source>Significant hike</source>
         <translation>Caminada important</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="978"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="969"/>
         <source>Difficult climbing</source>
         <translation>Escalada difícil</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="979"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="970"/>
         <source>May require wading</source>
         <translation>Potser cal creuar un riu</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="980"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="971"/>
         <source>May require swimming</source>
         <translation>Potser cal nedar</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="981"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="972"/>
         <source>Available at all times</source>
         <translation>Disponible en tot moment</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="982"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="973"/>
         <source>Recommended at night</source>
         <translation>Recomanat de nit</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="983"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="974"/>
         <source>Available during winter</source>
         <translation>Disponible a l&apos;hivern</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="985"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="976"/>
         <source>Poison plants</source>
         <translation>Plantes verinoses</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="986"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="977"/>
         <source>Dangerous Animals</source>
         <translation>Animals perillosos</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="987"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="978"/>
         <source>Ticks</source>
         <translation>Paparres</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="988"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="979"/>
         <source>Abandoned mines</source>
         <translation>Mines abandonades</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="989"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="980"/>
         <source>Cliff / falling rocks</source>
         <translation>Penya-segat / caiguda de roques</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="990"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="981"/>
         <source>Hunting</source>
         <translation>Caça</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="991"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="982"/>
         <source>Dangerous area</source>
         <translation>Àrea perillosa</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="992"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="983"/>
         <source>Wheelchair accessible</source>
         <translation>Accés adaptat per a minusvàlids</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="993"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="984"/>
         <source>Parking available</source>
         <translation>Aparcament disponible</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="994"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="985"/>
         <source>Public transportation</source>
         <translation>Transport públic</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="995"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="986"/>
         <source>Drinking water nearby</source>
         <translation>Aigua potable a prop</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="996"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="987"/>
         <source>Public restrooms nearby</source>
         <translation>Banys públics a prop</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="997"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="988"/>
         <source>Telephone nearby</source>
         <translation>Telèfon a prop</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="998"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="989"/>
         <source>Picnic tables nearby</source>
         <translation>Taules per a menjar a prop</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="999"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="990"/>
         <source>Camping available</source>
         <translation>Possibilitat de fer càmping</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1000"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="991"/>
         <source>Bicycles</source>
         <translation>Bicicletes</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1001"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="992"/>
         <source>Motorcycles</source>
         <translation>Motos</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1002"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="993"/>
         <source>Quads</source>
         <translation>Quads</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1003"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="994"/>
         <source>Off-road vehicles</source>
         <translation>Vehicles tot terreny</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1004"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="995"/>
         <source>Snowmobiles</source>
         <translation>Motos de neu</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1005"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="996"/>
         <source>Horses</source>
         <translation>Cavalls</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1006"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="997"/>
         <source>Campfires</source>
         <translation>Lloc per a fer foc</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1007"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="998"/>
         <source>Thorns</source>
         <translation>Espines</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1008"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="999"/>
         <source>Stealth required</source>
         <translation>Cal amagarse</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1009"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1000"/>
         <source>Stroller accessible</source>
         <translation>Accessible per a cotxets</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1010"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1001"/>
         <source>Needs maintenance</source>
         <translation>Necessita manteniment</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1011"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1002"/>
         <source>Watch for livestock</source>
         <translation>Anar en compte amb el bestiar</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1012"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1003"/>
         <source>Flashlight required</source>
         <translation>Cal una llanterna</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1014"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1005"/>
         <source>Truck Driver/RV</source>
         <translation>Camioner/RV</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1015"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1006"/>
         <source>Field Puzzle</source>
         <translation>Camp Puzzle</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1016"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1007"/>
         <source>UV Light Required</source>
         <translation>Cal un llum UV</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1017"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1008"/>
         <source>Snowshoes</source>
         <translation>Botes d&apos;esquí</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1018"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1009"/>
         <source>Cross Country Skis</source>
         <translation>Esquís de fons</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1019"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1010"/>
         <source>Special Tool Required</source>
         <translation>Cal una eina especial</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1020"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1011"/>
         <source>Night Cache</source>
         <translation>Cerca Nocturna</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1021"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1012"/>
         <source>Park and Grab</source>
         <translation>Aparcament amb Serveis</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1022"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1013"/>
         <source>Abandoned Structure</source>
         <translation>Estructura abandonada</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1023"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1014"/>
         <source>Short hike (less than 1km)</source>
         <translation>Caminada curta (menys d&apos;1 km)</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1024"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1015"/>
         <source>Medium hike (1km-10km)</source>
         <translation>Caminada mitjana (1km-10km)</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1025"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1016"/>
         <source>Long Hike (+10km)</source>
         <translation>Caminada llarga (+10km)</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1026"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1017"/>
         <source>Fuel Nearby</source>
         <translation>Gasolina a prop</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1027"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1018"/>
         <source>Food Nearby</source>
         <translation>Menjar a prop</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1028"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1019"/>
         <source>Wireless Beacon</source>
         <translation>Punt WiFi</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1029"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1020"/>
         <source>Partnership cache</source>
         <translation>Cerca en equip</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1030"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1021"/>
         <source>Seasonal Access</source>
         <translation>Accés de Temporada</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1031"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1022"/>
         <source>Tourist Friendly</source>
         <translation>Turístic</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1032"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1023"/>
         <source>Tree Climbing</source>
         <translation>Grimpar a Arbres</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1033"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1024"/>
         <source>Front Yard (Private Residence)</source>
         <translation>Pati (Residència Particular)</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1034"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1025"/>
         <source>Teamwork Required</source>
         <translation>Cal treballar en equip</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1035"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1026"/>
         <source>GeoTour</source>
         <translation>GeoTour</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1054"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1045"/>
         <source> by </source>
         <translation>per</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1111"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1102"/>
         <source>waypoint</source>
         <translation>fita</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1177"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1168"/>
         <source>archived</source>
         <translation>arxivat</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1179"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1170"/>
         <source>available</source>
         <translation>disponible</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1181"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1172"/>
         <source>not available</source>
         <translation>no disponible</translation>
     </message>
@@ -6022,130 +5940,6 @@ Please check the logs if Brouter fails to start.</source>
     </message>
 </context>
 <context>
-    <name>CRouterMapQuest</name>
-    <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="35"/>
-        <source>Fastest</source>
-        <translation>Més ràpid</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="36"/>
-        <source>Shortest</source>
-        <translation>Més curt</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="37"/>
-        <source>Bicycle</source>
-        <translation>Bicicleta</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="38"/>
-        <source>Pedestrian</source>
-        <translation>Vianant</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="40"/>
-        <source>US English</source>
-        <translation>Anglés US</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="41"/>
-        <source>British English</source>
-        <translation>Angles Britànic</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="42"/>
-        <source>Danish</source>
-        <translation>Danés</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="43"/>
-        <source>Dutch</source>
-        <translation>Holandés</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="44"/>
-        <source>French</source>
-        <translation>Francés</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="45"/>
-        <source>German</source>
-        <translation>Alemany</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="46"/>
-        <source>Italian</source>
-        <translation>Italià</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="47"/>
-        <source>Norwegian</source>
-        <translation>Noruec</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="48"/>
-        <source>Spanish</source>
-        <translation>Espanyol</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="49"/>
-        <source>Swedish</source>
-        <translation>Suec</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="103"/>
-        <source>mode &quot;%1&quot;</source>
-        <translation>mode &quot;%1&quot;</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="106"/>
-        <source>no highways</source>
-        <translation>evitar autopistes</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="115"/>
-        <source>no toll roads</source>
-        <translation>evitar carreteres de peatge</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="124"/>
-        <source>no seasonal</source>
-        <translation>no estacional</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="133"/>
-        <source>no unpaved</source>
-        <translation>evitar carreteres sense asfaltar</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="142"/>
-        <source>no ferry</source>
-        <translation>no hi ha ferry</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="151"/>
-        <source>no crossing of country borders</source>
-        <translation>no creuar fronteres de països</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="273"/>
-        <source>&lt;b&gt;MapQuest&lt;/b&gt;&lt;br/&gt;Routing request sent to server. Please wait...</source>
-        <translation>&lt;b&gt;MapQuest&lt;/b&gt;&lt;br/&gt;La petició d&apos;itinerari s&apos;ha enviat al servidor. Si us plau, espereu...</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="282"/>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="313"/>
-        <source>&lt;b&gt;MapQuest&lt;/b&gt;&lt;br/&gt;Bad response from server:&lt;br/&gt;%1</source>
-        <translation>&lt;b&gt;MapQuest&lt;/b&gt;&lt;br/&gt;Resposta dolenta del servidor:&lt;br/&gt;%1</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="330"/>
-        <source>&lt;br/&gt;Calculation time: %1s</source>
-        <translation>&lt;br/&gt;Calculant el temps: %1s</translation>
-    </message>
-</context>
-<context>
     <name>CRouterOptimization</name>
     <message>
         <location filename="../gis/rte/router/CRouterOptimization.cpp" line="36"/>
@@ -6420,17 +6214,12 @@ S&apos;ignorarà la base de dades asociada &apos;%3&apos;</translation>
 <context>
     <name>CRouterSetup</name>
     <message>
-        <location filename="../gis/rte/router/CRouterSetup.cpp" line="35"/>
+        <location filename="../gis/rte/router/CRouterSetup.cpp" line="34"/>
         <source>Routino (offline)</source>
         <translation>Routino (desconnectat)</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterSetup.cpp" line="36"/>
-        <source>MapQuest (online)</source>
-        <translation>MapQuest (en línia)</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/CRouterSetup.cpp" line="37"/>
+        <location filename="../gis/rte/router/CRouterSetup.cpp" line="35"/>
         <source>BRouter (online)</source>
         <translation>BRouter (en línia)</translation>
     </message>
@@ -12012,19 +11801,6 @@ allunyament màxim en utilitzar dades DEM.</translation>
     </message>
 </context>
 <context>
-    <name>IFitDecoderState</name>
-    <message>
-        <location filename="../gis/fit/decoder/IFitDecoderState.cpp" line="28"/>
-        <source>FIT decoding error: Decoder not in correct state %1 after last data byte in file.</source>
-        <translation>Error decodificant FIT: L&apos;estat del decodificador no és correcte %1 després del darrer byte del fitxer.</translation>
-    </message>
-    <message>
-        <location filename="../gis/fit/decoder/IFitDecoderState.cpp" line="93"/>
-        <source>FIT decoding error: a development field with the field_definition_number %1 already exists.</source>
-        <translation>Error decodificant FIT: ja existeix un camp de desenvolupament amb field_definition_number %1.</translation>
-    </message>
-</context>
-<context>
     <name>IGeoSearchConfigDialog</name>
     <message>
         <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="14"/>
@@ -14784,75 +14560,6 @@ o
         <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="711"/>
         <source>Profiles Url</source>
         <translation>Perfils Url</translation>
-    </message>
-</context>
-<context>
-    <name>IRouterMapQuest</name>
-    <message>
-        <location filename="../gis/rte/router/IRouterMapQuest.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterMapQuest.h" line="130"/>
-        <source>Form</source>
-        <translation>Formulari</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/IRouterMapQuest.ui" line="37"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterMapQuest.h" line="131"/>
-        <source>Highways</source>
-        <translation>Autopistes</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/IRouterMapQuest.ui" line="44"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterMapQuest.h" line="132"/>
-        <source>Seasonal</source>
-        <translation>Estacional</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/IRouterMapQuest.ui" line="51"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterMapQuest.h" line="133"/>
-        <source>Language</source>
-        <translation>Idioma</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/IRouterMapQuest.ui" line="58"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterMapQuest.h" line="134"/>
-        <source>Country Border</source>
-        <translation>Frontera Internacional</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/IRouterMapQuest.ui" line="68"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterMapQuest.h" line="135"/>
-        <source>Profile</source>
-        <translation>Perfil</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/IRouterMapQuest.ui" line="75"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterMapQuest.h" line="136"/>
-        <source>Avoid:</source>
-        <translation>Evitar:</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/IRouterMapQuest.ui" line="82"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterMapQuest.h" line="137"/>
-        <source>Ferry</source>
-        <translation>Transbordador</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/IRouterMapQuest.ui" line="89"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterMapQuest.h" line="138"/>
-        <source>Toll Road</source>
-        <translation>Carretera de peatge</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/IRouterMapQuest.ui" line="99"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterMapQuest.h" line="139"/>
-        <source>Unpaved</source>
-        <translation>Sense asfaltar</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/IRouterMapQuest.ui" line="121"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterMapQuest.h" line="140"/>
-        <source>&lt;p&gt;Directions Courtesy of &lt;a href=&quot;http://www.mapquest.com/&quot; target=&quot;_blank&quot;&gt;MapQuest&lt;/a&gt; &lt;/p&gt;</source>
-        <translation>&lt;p&gt;Direccions Cortesia de &lt;a href=&quot;http://www.mapquest.com/&quot; target=&quot;_blank&quot;&gt;MapQuest&lt;/a&gt; &lt;/p&gt;</translation>
     </message>
 </context>
 <context>

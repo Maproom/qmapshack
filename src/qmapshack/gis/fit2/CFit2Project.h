@@ -52,6 +52,7 @@ class CFit2Project : public fit::FileIdMesgListener,
   Q_DECLARE_TR_FUNCTIONS(CFit2Project)
  public:
   CFit2Project(QFile& file, const QString& filename, IDevice* parent);
+  CFit2Project(const QString& filename, IDevice* parent);
   CFit2Project(const QString& filename, CGisListWks* parent);
   virtual ~CFit2Project() = default;
 

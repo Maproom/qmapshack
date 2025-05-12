@@ -417,16 +417,6 @@ non è una definizione valida nel sistema di coordinate:
         <source>Error...</source>
         <translation>Errore...</translation>
     </message>
-    <message>
-        <source>The value
-&apos;%1&apos;
-is not a valid coordinate system definition:
-%2</source>
-        <translation type="vanished">Il valore
-&apos;%1&apos;
-non è una definizione valida nel sistema di coordinate:
-%2</translation>
-    </message>
 </context>
 <context>
     <name>CSetupExtTools</name>
@@ -1224,10 +1214,6 @@ o
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Enter a valid projection string. Valid strings are &quot;+proj...&quot; or &quot;+init=epsg:...&quot;.</source>
-        <translation type="vanished">Immettere una stringa di proiezione valida. Le stringhe valide sono &quot;+ proj ...&quot; o &quot;+ init = epsg: ...&quot;.</translation>
-    </message>
-    <message>
         <location filename="../overlay/IOverlayRefMap.ui" line="323"/>
         <location filename="../../../build/src/qmaptool/ui_IOverlayRefMap.h" line="292"/>
         <source>Start projection wizard.</source>
@@ -1434,10 +1420,6 @@ o
 </context>
 <context>
     <name>ITimeZoneSetup</name>
-    <message>
-        <source>Setup Time Zone ...</source>
-        <translation type="vanished">Setup Time Zone ...</translation>
-    </message>
     <message>
         <location filename="../units/ITimeZoneSetup.ui" line="14"/>
         <location filename="../../../build/src/qmaptool/ui_ITimeZoneSetup.h" line="150"/>

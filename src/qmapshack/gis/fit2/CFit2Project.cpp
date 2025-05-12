@@ -40,6 +40,11 @@ CFit2Project::CFit2Project(QFile& file, const QString& filename, IDevice* parent
   setupName(QFileInfo(filename).completeBaseName().replace("_", " "));
 }
 
+CFit2Project::CFit2Project(const QString& filename, IDevice* parent) : IGisProject(eTypeFit, filename, parent) {
+  loadFitFromFile(filename, false);
+  setupName(QFileInfo(filename).completeBaseName().replace("_", " "));
+}
+
 CFit2Project::CFit2Project(const QString& filename, CGisListWks* parent) : IGisProject(eTypeFit, filename, parent) {
   loadFitFromFile(filename, false);
   setupName(QFileInfo(filename).completeBaseName().replace("_", " "));

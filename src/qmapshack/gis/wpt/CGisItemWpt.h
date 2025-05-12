@@ -36,7 +36,6 @@ class QSqlDatabase;
 class CQlgtWpt;
 class QTextEdit;
 class QDir;
-class CFitStream;
 class CGisItemWpt : public IGisItem {
   Q_DECLARE_TR_FUNCTIONS(CGisItemWpt)
  public:
@@ -151,8 +150,6 @@ class CGisItemWpt : public IGisItem {
   CGisItemWpt(const CTwoNavProject::wpt_t& tnvWpt, IGisProject* project);
 
   CGisItemWpt(const CQlgtWpt& wpt1, IGisProject* project = nullptr);
-
-  CGisItemWpt(CFitStream& stream, IGisProject* project);
 
   CGisItemWpt(const wpt_t& data, IGisProject* project);
 
@@ -307,7 +304,7 @@ class CGisItemWpt : public IGisItem {
   void setSymbol() override;
   void readGpx(const QDomNode& xml);
   void readTwoNav(const CTwoNavProject::wpt_t& tnvWpt);
-  void readWptFromFit(CFitStream& stream);
+
   void readGcExt(const QDomNode& xmlCache);
   void writeGcExt(QDomNode& xmlCache);
   void drawBubble(QPainter& p);

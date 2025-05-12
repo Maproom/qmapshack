@@ -64,26 +64,6 @@
 <context>
     <name>CDrawContextPixel</name>
     <message>
-        <source>Error...</source>
-        <translation type="vanished">Fehler...</translation>
-    </message>
-    <message>
-        <source>Failed to load file: %1</source>
-        <translation type="vanished">Datei laden fehlgeschlagen: %1</translation>
-    </message>
-    <message>
-        <source>File must be 8 bit palette or gray indexed.</source>
-        <translation type="vanished">Die Datei muss eine 8 Bit Farbpalette haben oder einen Graustufenindex.</translation>
-    </message>
-    <message>
-        <source>(color table)</source>
-        <translation type="vanished">(Farbtabelle)</translation>
-    </message>
-    <message>
-        <source>(unknown)</source>
-        <translation type="vanished">(unbekannt)</translation>
-    </message>
-    <message>
         <location filename="../canvas/CDrawContextPixel.cpp" line="63"/>
         <source>Failed to load</source>
         <translation>Не удалось загрузить</translation>
@@ -437,16 +417,6 @@ is not a valid coordinate system definition:
         <location filename="../overlay/refmap/CProjWizard.cpp" line="199"/>
         <source>Error...</source>
         <translation>Ошибка...</translation>
-    </message>
-    <message>
-        <source>The value
-&apos;%1&apos;
-is not a valid coordinate system definition:
-%2</source>
-        <translation type="vanished">Значение
-&quot;%1&quot;
-не является допустимым определением системы координат:
-%2</translation>
     </message>
 </context>
 <context>
@@ -1245,10 +1215,6 @@ or
         <translation>Введите допустимую строку проекции. Допустимыми строками являются &quot;+proj...&quot; или &quot;EPSG:...&quot;.</translation>
     </message>
     <message>
-        <source>Enter a valid projection string. Valid strings are &quot;+proj...&quot; or &quot;+init=epsg:...&quot;.</source>
-        <translation type="vanished">Введите правильную проекцию. Допустимые формы &quot;+proj=...&quot; или &quot;+init=...&quot;.</translation>
-    </message>
-    <message>
         <location filename="../overlay/IOverlayRefMap.ui" line="323"/>
         <location filename="../../../build/src/qmaptool/ui_IOverlayRefMap.h" line="292"/>
         <source>Start projection wizard.</source>
@@ -1455,10 +1421,6 @@ or
 </context>
 <context>
     <name>ITimeZoneSetup</name>
-    <message>
-        <source>Setup Time Zone ...</source>
-        <translation type="vanished">Настройка часового пояса...</translation>
-    </message>
     <message>
         <location filename="../units/ITimeZoneSetup.ui" line="14"/>
         <location filename="../../../build/src/qmaptool/ui_ITimeZoneSetup.h" line="150"/>

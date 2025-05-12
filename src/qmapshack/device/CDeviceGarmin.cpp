@@ -24,7 +24,7 @@
 #include "canvas/CCanvas.h"
 #include "device/CDeviceGarminArchive.h"
 #include "gis/CGisListWks.h"
-#include "gis/fit/CFitProject.h"
+#include "gis/fit2/CFit2Project.h"
 #include "gis/gpx/CGpxProject.h"
 #include "gis/tcx/CTcxProject.h"
 #include "gis/wpt/CGisItemWpt.h"
@@ -143,7 +143,7 @@ void CDeviceGarmin::createProjectsFromFiles(QString subdirecoty, QString fileEnd
     const QString filename = dirLoop.absoluteFilePath(entry);
     IGisProject* project = nullptr;
     if (fileEnding == "fit") {
-      project = new CFitProject(filename, this);
+      project = new CFit2Project(filename, this);
     } else if (fileEnding == "gpx") {
       project = new CGpxProject(filename, this);
     } else if (fileEnding == "tcx") {

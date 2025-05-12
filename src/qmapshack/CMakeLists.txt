@@ -73,29 +73,6 @@ set( SRCS
     gis/db/IDBFolderSql.cpp
     gis/db/IDBMysql.cpp
     gis/db/IDBSqlite.cpp
-    gis/fit/CFitProject.cpp
-    gis/fit/CFitStream.cpp
-    gis/fit/decoder/CFitByteDataTransformer.cpp
-    gis/fit/decoder/CFitCrcState.cpp
-    gis/fit/decoder/CFitDecoder.cpp
-    gis/fit/decoder/CFitDefinitionMessage.cpp
-    gis/fit/decoder/CFitDevFieldDefinition.cpp
-    gis/fit/decoder/CFitDevFieldDefinitionState.cpp
-    gis/fit/decoder/CFitField.cpp
-    gis/fit/decoder/CFitFieldBuilder.cpp
-    gis/fit/decoder/CFitFieldDataState.cpp
-    gis/fit/decoder/CFitFieldDefinition.cpp
-    gis/fit/decoder/CFitFieldDefinitionState.cpp
-    gis/fit/decoder/CFitHeaderState.cpp
-    gis/fit/decoder/CFitMessage.cpp
-    gis/fit/decoder/CFitRecordContentState.cpp
-    gis/fit/decoder/CFitRecordHeaderState.cpp
-    gis/fit/decoder/IFitDecoderState.cpp
-    gis/fit/defs/CFitBaseType.cpp
-    gis/fit/defs/CFitFieldProfile.cpp
-    gis/fit/defs/CFitProfile.cpp
-    gis/fit/defs/CFitProfileLookup.cpp
-    gis/fit/serialization.cpp
     gis/fit2/CFit2Project.cpp
     gis/gpx/CGpxProject.cpp
     gis/gpx/serialization.cpp
@@ -456,31 +433,6 @@ set( HDRS
     gis/db/IDBMysql.h
     gis/db/IDBSqlite.h
     gis/db/macros.h
-    gis/fit/CFitProject.h
-    gis/fit/CFitStream.h
-    gis/fit/decoder/CFitByteDataTransformer.h
-    gis/fit/decoder/CFitCrcState.h
-    gis/fit/decoder/CFitDecoder.h
-    gis/fit/decoder/CFitDefinitionMessage.h
-    gis/fit/decoder/CFitDevFieldDefinition.h
-    gis/fit/decoder/CFitDevFieldDefinitionState.h
-    gis/fit/decoder/CFitField.h
-    gis/fit/decoder/CFitFieldBuilder.h
-    gis/fit/decoder/CFitFieldDataState.h
-    gis/fit/decoder/CFitFieldDefinition.h
-    gis/fit/decoder/CFitFieldDefinitionState.h
-    gis/fit/decoder/CFitHeaderState.h
-    gis/fit/decoder/CFitMessage.h
-    gis/fit/decoder/CFitRecordContentState.h
-    gis/fit/decoder/CFitRecordHeaderState.h
-    gis/fit/decoder/IFitDecoderState.h
-    gis/fit/defs/CFitBaseType.h
-    gis/fit/defs/CFitFieldProfile.h
-    gis/fit/defs/CFitProfile.h
-    gis/fit/defs/CFitProfileLookup.h
-    gis/fit/defs/fit_const.h
-    gis/fit/defs/fit_enums.h
-    gis/fit/defs/fit_fields.h
     gis/fit2/CFit2Project.h
     gis/gpx/CGpxProject.h
     gis/ovl/CDetailsOvlArea.h

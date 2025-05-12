@@ -1204,143 +1204,66 @@ You can modify both parameters to customize the behavior of the filter. For the 
 <context>
     <name>CFit2Project</name>
     <message>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="59"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="64"/>
         <source>Failed to load file %1...</source>
         <translation type="unfinished">Kan bestand %1 niet laden...</translation>
     </message>
     <message>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="217"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="222"/>
         <source>total elapsed time: %1%2&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="222"/>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="292"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="227"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="297"/>
         <source>total distance: %1%2&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="288"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="293"/>
         <source>total timer time: %1%2&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="296"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="301"/>
         <source>enhanced average speed: %1%2&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="227"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="232"/>
         <source>enhanced max speed: %1%2&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="232"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="237"/>
         <source>enhanced min altitude: %1%2&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="237"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="242"/>
         <source>enhanced max altitude: %1%2&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="241"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="246"/>
         <source>total calories: %1kcal&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="246"/>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="300"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="251"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="305"/>
         <source>total ascent: %1%2&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="251"/>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="304"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="256"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="309"/>
         <source>total descent: %1%2&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="255"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="260"/>
         <source>number of laps: %1&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>CFitCrcState</name>
-    <message>
-        <location filename="../gis/fit/decoder/CFitCrcState.cpp" line="27"/>
-        <source>FIT decoding error : invalid CRC.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>CFitDecoder</name>
-    <message>
-        <location filename="../gis/fit/decoder/CFitDecoder.cpp" line="115"/>
-        <source>FIT decoding error: unexpected end of file %1.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>CFitFieldBuilder</name>
-    <message>
-        <location filename="../gis/fit/decoder/CFitFieldBuilder.cpp" line="63"/>
-        <source>FIT decoding error: unknown base type %1.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>CFitFieldDataState</name>
-    <message>
-        <location filename="../gis/fit/decoder/CFitFieldDataState.cpp" line="103"/>
-        <source>Missing field definition for development field.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/fit/decoder/CFitFieldDataState.cpp" line="219"/>
-        <source>FIT decoding error: invalid field def nr %1 while creating dev field profile.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>CFitHeaderState</name>
-    <message>
-        <location filename="../gis/fit/decoder/CFitHeaderState.cpp" line="63"/>
-        <source>FIT decoding error: protocol %1 version not supported.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/fit/decoder/CFitHeaderState.cpp" line="113"/>
-        <source>FIT decoding error: file header signature mismatch. File is not FIT.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>CFitProject</name>
-    <message>
-        <location filename="../gis/fit/CFitProject.cpp" line="54"/>
-        <location filename="../gis/fit/CFitProject.cpp" line="73"/>
-        <source>Failed to load file %1...</source>
-        <translation>Kan bestand %1 niet laden...</translation>
-    </message>
-    <message>
-        <location filename="../gis/fit/CFitProject.cpp" line="99"/>
-        <source>Failed to open FIT file %1.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>CFitRecordContentState</name>
-    <message>
-        <location filename="../gis/fit/decoder/CFitRecordContentState.cpp" line="63"/>
-        <source>FIT decoding error: architecture %1 not supported.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/fit/decoder/CFitRecordContentState.cpp" line="100"/>
-        <source>FIT decoding error: invalid offset %1 for state &apos;record content&apos;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1588,90 +1511,85 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation>_Kloon</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="250"/>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="1156"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="240"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="1146"/>
         <source>route</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="288"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="278"/>
         <source>track</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="310"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="300"/>
         <source>Changed name.</source>
         <translation>Naam aangepast.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="315"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="305"/>
         <source>Changed comment</source>
         <translation>Notitie aangepast</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="320"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="310"/>
         <source>Changed description</source>
         <translation>Beschrijving aangepast</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="325"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="315"/>
         <source>Changed links</source>
         <translation>Link aangepast</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="338"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="328"/>
         <source>Length: %1%2</source>
         <translation type="unfinished">Lengte: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="346"/>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="560"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="336"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="550"/>
         <source>Time: %1%2</source>
         <translation type="unfinished">Tijd: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="562"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="552"/>
         <source>Distance: %1%2</source>
         <translation type="unfinished">Afstand: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="340"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="330"/>
         <source>Length: -</source>
         <translation>Lengte: -</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="348"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="338"/>
         <source>Time: -</source>
         <translation>Tijd: -</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="357"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="347"/>
         <source>%1%2 %3, %4%5 %6</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="362"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="352"/>
         <source>Last time routed:&lt;br/&gt;%1</source>
         <translation>Laatste routeberekening:&lt;br/&gt;%1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="365"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="355"/>
         <source>with %1</source>
         <translation>met %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="667"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="657"/>
         <source>Changed route points.</source>
         <translation>Routepunten aangepast.</translation>
     </message>
 </context>
 <context>
     <name>CGisItemTrk</name>
-    <message>
-        <location filename="../gis/fit/serialization.cpp" line="238"/>
-        <source>FIT file %1 contains no GPS data.</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <location filename="../gis/tnv/serialization.cpp" line="167"/>
         <location filename="../gis/tnv/serialization.cpp" line="293"/>
@@ -1704,315 +1622,315 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation>_Kloon</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="307"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="294"/>
         <source>Changed trackpoints, sacrificed all previous data.</source>
         <translation>Trackpunten aangepast, vorige gegevens overschreven.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="423"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="410"/>
         <source>Time: %1%2, Speed: %3%4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="432"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="419"/>
         <source>Moving: %1%2, Speed: %3%4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="442"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="429"/>
         <source>Start: %1</source>
         <translation>Start: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="444"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="431"/>
         <source>Start: -</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="449"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="436"/>
         <source>End: %1</source>
         <translation>Einde: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="451"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="438"/>
         <source>End: -</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="455"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="442"/>
         <source>Points: %1 (%2)</source>
         <translation>Punten: %1 (%2)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="459"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="446"/>
         <source>Energy Use Cycling: %L1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="464"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="451"/>
         <source>Invalid elevations!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="469"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="456"/>
         <source>Invalid timestamps!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="474"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="461"/>
         <source>Invalid positions!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="486"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="473"/>
         <source>Activities: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="597"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="584"/>
         <source>Index: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="599"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="586"/>
         <source>Index: visible %1, total %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="612"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="599"/>
         <source>, Slope: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="639"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="626"/>
         <source>... and %1 tags not displayed</source>
         <translation>... en %1 tags niet getoont</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="650"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="637"/>
         <source>Distance: - (-)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="651"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="638"/>
         <source>Moving: - (-)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1269"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1280"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1360"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1399"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1558"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2791"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1256"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1267"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1347"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1386"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1545"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2778"/>
         <source>track</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1482"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1469"/>
         <source>Hide point %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1484"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1471"/>
         <source>Hide points %1..%2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="701"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="711"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="688"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="698"/>
         <source>, %1%2</source>
         <translation>, %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="351"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1735"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="338"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1722"/>
         <source>min.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="351"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1735"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="338"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1722"/>
         <source>max.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="408"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="395"/>
         <source>Length: %1%2</source>
         <translation type="unfinished">Lengte: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="414"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="401"/>
         <source>, %1%2%3, %4%5%6</source>
         <translation type="unfinished">, %1%2 %3, %4%5%6 {1%2%3,?}</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="416"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="403"/>
         <source>, %1-, %2-</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="425"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="412"/>
         <source>Time: -, Speed: -</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="434"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="421"/>
         <source>Moving: -, Speed: -</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="479"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="466"/>
         <source>Invalid slopes!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="609"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="596"/>
         <source>Ele.: %1%2</source>
         <translation type="unfinished">Hoogte.: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="616"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="603"/>
         <source>, Speed: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="648"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="635"/>
         <source>Ascent: - (-)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="649"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="636"/>
         <source>Descent: - (-)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="655"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="642"/>
         <source>Ascent: %1%2 (%3%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="660"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="647"/>
         <source>, Descent: %1%2 (%3%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="665"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="652"/>
         <source>Distance: %1%2 (%3%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="670"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="657"/>
         <source>, Moving: %1%2 (%3%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="692"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="679"/>
         <source>Ascent: -</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="693"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="680"/>
         <source>Descent: -</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="697"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="684"/>
         <source>Ascent: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="707"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="694"/>
         <source>, Descent: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="716"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="703"/>
         <source>Distance: %1%2</source>
         <translation type="unfinished">Afstand: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="720"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="707"/>
         <source>, Time: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1316"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1303"/>
         <source>Permanently removed points %1..%2</source>
         <translation>Permanent verwijderde punten %1..%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1327"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1314"/>
         <source>Track Point Info...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1328"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1315"/>
         <source>Enter some text to be attached to this track point:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1335"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1322"/>
         <source>Add track point desc.: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1343"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1330"/>
         <source>Changed track point desc.: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1351"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1338"/>
         <source>Removed track point desc.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1520"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1507"/>
         <source>Delete point %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1522"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1509"/>
         <source>Delete points %1..%2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1545"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1532"/>
         <source>Show points.</source>
         <translation>Toon punten.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2170"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2157"/>
         <source>Changed name</source>
         <translation>Naam aangepast</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2175"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2162"/>
         <source>Changed comment</source>
         <translation>Notitie aangepast</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2180"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2167"/>
         <source>Changed description</source>
         <translation>Beschrijving aangepast</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2185"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2172"/>
         <source>Changed links</source>
         <translation>Link aangepast</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2193"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2180"/>
         <source>Changed elevation of point %1 to %2 %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2216"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2203"/>
         <source>Changed activity to &apos;%1&apos; for complete track.</source>
         <translation>Activiteit aangepast naar &apos;%1&apos; voor gehele track.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2242"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2229"/>
         <source>Changed activity to &apos;%1&apos; for range(%2..%3).</source>
         <translation>Activiteit aangepast naar &apos;%1&apos; voor bereik(%2..%3).</translation>
     </message>
@@ -2147,442 +2065,442 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation>_Kloon</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="303"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="294"/>
         <source>Elevation: %1%2</source>
         <translation type="unfinished">Hoogte: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="312"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="303"/>
         <source>Proximity: %1%2</source>
         <translation type="unfinished">Nabijheid: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="329"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="320"/>
         <source>Last found: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="337"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="328"/>
         <source>Project created: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="371"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="362"/>
         <source>Created: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="437"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="428"/>
         <source>Changed name</source>
         <translation>Naam aangepast</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="446"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="437"/>
         <source>Changed position</source>
         <translation>Positie aangepast</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="451"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="442"/>
         <source>Changed elevation</source>
         <translation>Hoogte aangepast</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="458"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="449"/>
         <source>Removed proximity</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="461"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="452"/>
         <source>Changed proximity</source>
         <translation>Nabijheid aangepast</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="479"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="470"/>
         <source>Changed icon</source>
         <translation>Pictogram aangepast</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="484"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="475"/>
         <source>Changed comment</source>
         <translation>Notitie aangepast</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="489"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="480"/>
         <source>Changed description</source>
         <translation>Beschrijving aangepast</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="494"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="485"/>
         <source>Changed links</source>
         <translation>Link aangepast</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="499"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="490"/>
         <source>Changed images</source>
         <translation>Afbeelding aangepast</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="504"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="495"/>
         <source>Add image</source>
         <translation>Afbeelding toevoegen</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="509"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="500"/>
         <source>Changed timestamp</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="968"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="959"/>
         <source>QMS Attribute Flag</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="969"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="960"/>
         <source>Dogs</source>
         <translation>Honden</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="970"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="961"/>
         <source>Access or parking fee</source>
         <translation>Toegangs- of parkeerkosten</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="971"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="962"/>
         <source>Climbing gear</source>
         <translation>Klimuitrusting vereist</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="972"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="963"/>
         <source>Boat</source>
         <translation>Boot vereist</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="973"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="964"/>
         <source>Scuba gear</source>
         <translation>Duikuitrusting vereist</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="974"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="965"/>
         <source>Recommended for kids</source>
         <translation>Aanbevolen voor kinderen</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="975"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="966"/>
         <source>Takes less than an hour</source>
         <translation>Duurt minder dan 1 uur</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="976"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="967"/>
         <source>Scenic view</source>
         <translation>Mooi uitzicht</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="977"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="968"/>
         <source>Significant hike</source>
         <translation>Flinke wandeling</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="978"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="969"/>
         <source>Difficult climbing</source>
         <translation>Moeilijke klim</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="979"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="970"/>
         <source>May require wading</source>
         <translation>Waden kan nodig zijn</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="980"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="971"/>
         <source>May require swimming</source>
         <translation>Zwemmen kan nodig zijn</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="981"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="972"/>
         <source>Available at all times</source>
         <translation>Altijd mogelijk</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="982"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="973"/>
         <source>Recommended at night</source>
         <translation>Aanbevolen voor de nacht</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="983"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="974"/>
         <source>Available during winter</source>
         <translation>Mogelijk in de winter</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="985"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="976"/>
         <source>Poison plants</source>
         <translation>Giftige planten</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="986"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="977"/>
         <source>Dangerous Animals</source>
         <translation>Gevaarlijke dieren</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="987"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="978"/>
         <source>Ticks</source>
         <translation>Teken</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="988"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="979"/>
         <source>Abandoned mines</source>
         <translation>Verlaten mijnen</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="989"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="980"/>
         <source>Cliff / falling rocks</source>
         <translation>Afgrond / vallende stenen</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="990"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="981"/>
         <source>Hunting</source>
         <translation>Jagen</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="991"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="982"/>
         <source>Dangerous area</source>
         <translation>Gevaarlijk gebied</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="992"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="983"/>
         <source>Wheelchair accessible</source>
         <translation>Rolstoeltoegankelijk</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="993"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="984"/>
         <source>Parking available</source>
         <translation>Parkeerplaats aanwezig</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="994"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="985"/>
         <source>Public transportation</source>
         <translation>Openbaar vervoer</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="995"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="986"/>
         <source>Drinking water nearby</source>
         <translation>Drinkwater in de buurt</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="996"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="987"/>
         <source>Public restrooms nearby</source>
         <translation>Openbaar toilet in de buurt</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="997"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="988"/>
         <source>Telephone nearby</source>
         <translation>Telefoon in de buurt</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="998"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="989"/>
         <source>Picnic tables nearby</source>
         <translation>Picknicktafel in de buurt</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="999"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="990"/>
         <source>Camping available</source>
         <translation>Camping aanwezig</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1000"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="991"/>
         <source>Bicycles</source>
         <translation>Fietsen</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1001"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="992"/>
         <source>Motorcycles</source>
         <translation>Motorfietsen</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1002"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="993"/>
         <source>Quads</source>
         <translation>Quads</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1003"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="994"/>
         <source>Off-road vehicles</source>
         <translation>Terreinvoertuigen</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1004"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="995"/>
         <source>Snowmobiles</source>
         <translation>Sneeuwscooters</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1005"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="996"/>
         <source>Horses</source>
         <translation>Paarden</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1006"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="997"/>
         <source>Campfires</source>
         <translation>Kampvuur</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1007"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="998"/>
         <source>Thorns</source>
         <translation>Doorns</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1008"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="999"/>
         <source>Stealth required</source>
         <translation>Heimelijkheid geboden</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1009"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1000"/>
         <source>Stroller accessible</source>
         <translation>Toegankelijk voor wandelwagens</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1010"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1001"/>
         <source>Needs maintenance</source>
         <translation>Onderhoud nodig</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1011"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1002"/>
         <source>Watch for livestock</source>
         <translation>Oppassen voor vee</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1012"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1003"/>
         <source>Flashlight required</source>
         <translation>Zaklamp nodig</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1014"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1005"/>
         <source>Truck Driver/RV</source>
         <translation>Vrachtwagen / camper</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1015"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1006"/>
         <source>Field Puzzle</source>
         <translation>Veldpuzzel</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1016"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1007"/>
         <source>UV Light Required</source>
         <translation>UV-lamp noodzakelijk</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1017"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1008"/>
         <source>Snowshoes</source>
         <translation>Sneeuwschoenen vereist</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1018"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1009"/>
         <source>Cross Country Skis</source>
         <translation>Langlaufski&apos;s vereist</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1019"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1010"/>
         <source>Special Tool Required</source>
         <translation>Speciaal gereedschap nodig</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1020"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1011"/>
         <source>Night Cache</source>
         <translation>Nachtcache</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1021"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1012"/>
         <source>Park and Grab</source>
         <translation>Parkeer en pak</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1022"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1013"/>
         <source>Abandoned Structure</source>
         <translation>Verlaten gebouw</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1023"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1014"/>
         <source>Short hike (less than 1km)</source>
         <translation>Korte wandeling (minder dan 1 km)</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1024"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1015"/>
         <source>Medium hike (1km-10km)</source>
         <translation>Gemiddelde wandeling (1 - 10 km)</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1025"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1016"/>
         <source>Long Hike (+10km)</source>
         <translation>Lange wandeling (meer dan 10 kilometer)</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1026"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1017"/>
         <source>Fuel Nearby</source>
         <translation>Brandstof in de buurt</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1027"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1018"/>
         <source>Food Nearby</source>
         <translation>Eten vlakbij</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1028"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1019"/>
         <source>Wireless Beacon</source>
         <translation>Draadloos baken</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1029"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1020"/>
         <source>Partnership cache</source>
         <translation>Samenwerkingscache</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1030"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1021"/>
         <source>Seasonal Access</source>
         <translation>Seizoenstoegang</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1031"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1022"/>
         <source>Tourist Friendly</source>
         <translation>Toeristvriendelijk</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1032"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1023"/>
         <source>Tree Climbing</source>
         <translation>Boomklimmen vereist</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1033"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1024"/>
         <source>Front Yard (Private Residence)</source>
         <translation>Voortuin (priveterrein)</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1034"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1025"/>
         <source>Teamwork Required</source>
         <translation>Samenwerking vereist</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1035"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1026"/>
         <source>GeoTour</source>
         <translation>GeoTour</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1054"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1045"/>
         <source> by </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1111"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1102"/>
         <source>waypoint</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1177"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1168"/>
         <source>archived</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1179"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1170"/>
         <source>available</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1181"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1172"/>
         <source>not available</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5994,130 +5912,6 @@ Please check the logs if Brouter fails to start.</source>
     </message>
 </context>
 <context>
-    <name>CRouterMapQuest</name>
-    <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="35"/>
-        <source>Fastest</source>
-        <translation>Snelst</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="36"/>
-        <source>Shortest</source>
-        <translation>Kortst</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="37"/>
-        <source>Bicycle</source>
-        <translation>Fiets</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="38"/>
-        <source>Pedestrian</source>
-        <translation>Wandelen</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="40"/>
-        <source>US English</source>
-        <translation>VS Engels</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="41"/>
-        <source>British English</source>
-        <translation>Brits Engels</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="42"/>
-        <source>Danish</source>
-        <translation>Deens</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="43"/>
-        <source>Dutch</source>
-        <translation>Nederlands</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="44"/>
-        <source>French</source>
-        <translation>Frans</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="45"/>
-        <source>German</source>
-        <translation>Duits</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="46"/>
-        <source>Italian</source>
-        <translation>Italiaans</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="47"/>
-        <source>Norwegian</source>
-        <translation>Noors</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="48"/>
-        <source>Spanish</source>
-        <translation>Spaans</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="49"/>
-        <source>Swedish</source>
-        <translation>Zweeds</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="103"/>
-        <source>mode &quot;%1&quot;</source>
-        <translation>Modus &apos;%1&quot;</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="106"/>
-        <source>no highways</source>
-        <translation>geen snelwegen</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="115"/>
-        <source>no toll roads</source>
-        <translation>geen tolwegen</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="124"/>
-        <source>no seasonal</source>
-        <translation>geen seizoenswegen</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="133"/>
-        <source>no unpaved</source>
-        <translation>onverhard</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="142"/>
-        <source>no ferry</source>
-        <translation>geen veer</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="151"/>
-        <source>no crossing of country borders</source>
-        <translation>geen grensovergangen</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="273"/>
-        <source>&lt;b&gt;MapQuest&lt;/b&gt;&lt;br/&gt;Routing request sent to server. Please wait...</source>
-        <translation>&lt;b&gt;MapQuest&lt;/b&gt;&lt;br/&gt;Route aanvraag naar server gezonden. Moment geduld...</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="282"/>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="313"/>
-        <source>&lt;b&gt;MapQuest&lt;/b&gt;&lt;br/&gt;Bad response from server:&lt;br/&gt;%1</source>
-        <translation>&lt;b&gt;MapQuest&lt;/b&gt;&lt;br/&gt;Geen reactie van server:&lt;br/&gt;%1</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="330"/>
-        <source>&lt;br/&gt;Calculation time: %1s</source>
-        <translation>&lt;br/&gt;Berekenen tijd: %1s</translation>
-    </message>
-</context>
-<context>
     <name>CRouterOptimization</name>
     <message>
         <location filename="../gis/rte/router/CRouterOptimization.cpp" line="36"/>
@@ -6389,17 +6183,12 @@ The associated database &apos;%3&apos; is ignored</source>
 <context>
     <name>CRouterSetup</name>
     <message>
-        <location filename="../gis/rte/router/CRouterSetup.cpp" line="35"/>
+        <location filename="../gis/rte/router/CRouterSetup.cpp" line="34"/>
         <source>Routino (offline)</source>
         <translation>Routino (offline)</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterSetup.cpp" line="36"/>
-        <source>MapQuest (online)</source>
-        <translation>MapQuest (online)</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/CRouterSetup.cpp" line="37"/>
+        <location filename="../gis/rte/router/CRouterSetup.cpp" line="35"/>
         <source>BRouter (online)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11942,19 +11731,6 @@ zoom-out for use of the DEM data.</source>
     </message>
 </context>
 <context>
-    <name>IFitDecoderState</name>
-    <message>
-        <location filename="../gis/fit/decoder/IFitDecoderState.cpp" line="28"/>
-        <source>FIT decoding error: Decoder not in correct state %1 after last data byte in file.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/fit/decoder/IFitDecoderState.cpp" line="93"/>
-        <source>FIT decoding error: a development field with the field_definition_number %1 already exists.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>IGeoSearchConfigDialog</name>
     <message>
         <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="14"/>
@@ -14693,75 +14469,6 @@ of
         <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="711"/>
         <source>Profiles Url</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>IRouterMapQuest</name>
-    <message>
-        <location filename="../gis/rte/router/IRouterMapQuest.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterMapQuest.h" line="130"/>
-        <source>Form</source>
-        <translation>Formulier</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/IRouterMapQuest.ui" line="37"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterMapQuest.h" line="131"/>
-        <source>Highways</source>
-        <translation>Snelwegen</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/IRouterMapQuest.ui" line="44"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterMapQuest.h" line="132"/>
-        <source>Seasonal</source>
-        <translation>Seizoenswegen</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/IRouterMapQuest.ui" line="51"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterMapQuest.h" line="133"/>
-        <source>Language</source>
-        <translation>Taal</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/IRouterMapQuest.ui" line="58"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterMapQuest.h" line="134"/>
-        <source>Country Border</source>
-        <translation>Landgrenzen</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/IRouterMapQuest.ui" line="68"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterMapQuest.h" line="135"/>
-        <source>Profile</source>
-        <translation>Profiel</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/IRouterMapQuest.ui" line="75"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterMapQuest.h" line="136"/>
-        <source>Avoid:</source>
-        <translation>Vermijd:</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/IRouterMapQuest.ui" line="82"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterMapQuest.h" line="137"/>
-        <source>Ferry</source>
-        <translation>Veerboten</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/IRouterMapQuest.ui" line="89"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterMapQuest.h" line="138"/>
-        <source>Toll Road</source>
-        <translation>Tolwegen</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/IRouterMapQuest.ui" line="99"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterMapQuest.h" line="139"/>
-        <source>Unpaved</source>
-        <translation>Onverhard</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/IRouterMapQuest.ui" line="121"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterMapQuest.h" line="140"/>
-        <source>&lt;p&gt;Directions Courtesy of &lt;a href=&quot;http://www.mapquest.com/&quot; target=&quot;_blank&quot;&gt;MapQuest&lt;/a&gt; &lt;/p&gt;</source>
-        <translation>&lt;p&gt;Routebeschrijving afkomstig van &lt;a href=&quot;http://www.mapquest.com/&quot; target=&quot;_blank&quot;&gt;MapQuest&lt;/a&gt; &lt;/p&gt;</translation>
     </message>
 </context>
 <context>

@@ -28,7 +28,6 @@
 
 #include "gis/IGisItem.h"
 #include "gis/IGisLine.h"
-#include "gis/fit/CFitStream.h"
 
 class QDomNode;
 class IGisProject;
@@ -99,7 +98,6 @@ class CGisItemRte : public IGisItem, public IGisLine {
   CGisItemRte(quint64 id, QSqlDatabase& db, IGisProject* project);
   CGisItemRte(const CQlgtRoute& rte1, IGisProject* project = nullptr);
   CGisItemRte(const SGisLine& l, const QString& name, IGisProject* project, int idx);
-  CGisItemRte(CFitStream& stream, IGisProject* project);
   virtual ~CGisItemRte();
 
   IGisItem* createClone() override;
@@ -188,7 +186,6 @@ class CGisItemRte : public IGisItem, public IGisLine {
   void setElevation(qreal ele, subpt_t& subpt, qreal& lastEle);
   void setSymbol() override;
   void readRte(const QDomNode& xml, rte_t& rte);
-  void readRteFromFit(CFitStream& stream);
   void readRouteDataFromGisLine(const SGisLine& l);
   const subpt_t* getSubPtByIndex(quint32 idx);
 

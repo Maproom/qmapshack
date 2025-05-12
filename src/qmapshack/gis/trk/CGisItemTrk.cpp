@@ -227,25 +227,12 @@ CGisItemTrk::CGisItemTrk(CTrackData& trkdata, IGisProject* project)
   checkForInvalidPoints();
 }
 
-CGisItemTrk::CGisItemTrk(CFitStream& stream, IGisProject* project)
-    : IGisItem(project, eTypeTrk, project->childCount()) {
-  // --- start read and process data ----
-  setColor(penForeground.color());
-  readTrkFromFit(stream);
-  // --- stop read and process data ----
-
-  setupHistory();
-  deriveSecondaryData();
-  updateDecoration(eMarkNone, eMarkNone);
-
-  checkForInvalidPoints();
-}
 
 CGisItemTrk::~CGisItemTrk() {
   // reset user focus if focused on this track
   if (key == keyUserFocus) {
-    keyUserFocus.clear();
-  }
+  keyUserFocus.clear();
+}
 
   /*
       Delete all registered INotifyTrk as they can't exist without the item.

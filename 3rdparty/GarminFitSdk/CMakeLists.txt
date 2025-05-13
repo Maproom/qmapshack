@@ -305,7 +305,9 @@ set(FIT_HDR
 
 add_library(GarminFit STATIC ${FIT_SRC} ${FIT_HDR})
 # Geeee, this code is so sloppy written. Let's silence the warnings.
-target_compile_options(GarminFit PRIVATE -Wno-suggest-override -Wno-catch-value -Wno-unused-but-set-variable)
+if(UNIX)
+    target_compile_options(GarminFit PRIVATE -Wno-suggest-override -Wno-catch-value -Wno-unused-but-set-variable)
+endif()
 
 # add_executable(fit_decoder cpp/examples/decode/decode.cpp )
 # target_link_libraries(fit_decoder PRIVATE GarminFit)

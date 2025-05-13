@@ -18,6 +18,7 @@ V1.XX.X
 [QMS-740] Fix dbus compile issues for Windows
 [QMS-743] Fix crash when reseting a range in track profile graph
 [QMS-747] Remove support for MapQuest 
+[QMS-750] Fix QMS build error - Windows 10/MSVC
 
 V1.17.1
 [QMS-547] Fixed: QMS freezes on zoom when activating multi-layered online maps

@@ -37,7 +37,6 @@ set( SRCS
     dem/IDemProp.cpp
     device/CDeviceGarmin.cpp
     device/CDeviceGarminArchive.cpp
-    device/CDeviceGarminArchiveMtp.cpp
     device/CDeviceTwoNav.cpp
     device/IDevice.cpp
     device/IDeviceWatcher.cpp
@@ -372,6 +371,7 @@ set( SRCS
     device/CDeviceAccessKMtp.cpp
     device/CDeviceAccessGvfsMtp.cpp
     device/CDeviceGarminMtp.cpp
+    device/CDeviceGarminArchiveMtp.cpp
     device/dbus/org.kde.kmtp.Daemon.cpp
     device/dbus/org.kde.kmtp.Device.cpp
     device/dbus/org.kde.kmtp.Storage.cpp
@@ -419,7 +419,6 @@ set( HDRS
     dem/IDemProp.h
     device/CDeviceGarmin.h
     device/CDeviceGarminArchive.h
-    device/CDeviceGarminArchiveMtp.h
     device/CDeviceTwoNav.h
     device/IDevice.h
     device/IDeviceWatcher.h
@@ -761,6 +760,7 @@ set( HDRS
     device/CDeviceAccessKMtp.h
     device/CDeviceAccessGvfsMtp.h
     device/CDeviceGarminMtp.h
+    device/CDeviceGarminArchiveMtp.h
     device/IDeviceAccess.h
     device/dbus/org.kde.kmtp.Daemon.h
     device/dbus/org.kde.kmtp.Device.h

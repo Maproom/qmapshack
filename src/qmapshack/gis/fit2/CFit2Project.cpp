@@ -210,9 +210,11 @@ void CFit2Project::OnMesg(fit::SessionMesg& mesg) {
     segment.pts.clear();
   }
 
-  QString name = IUnit::datetime2string(track.segs.first().pts.first().time, IUnit::eTimeFormatShort);
+  QString name;
   if (mesg.IsStartTimeValid()) {
     name = IUnit::datetime2string(dateTimeFromFitToQt(mesg.GetStartTime()), IUnit::eTimeFormatShort);
+  } else if (!track.segs.isEmpty()) {
+    name = IUnit::datetime2string(track.segs.first().pts.first().time, IUnit::eTimeFormatShort);
   }
 
   QString comment = "<div><b>Device Statistic</b><br/>";

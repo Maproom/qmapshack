@@ -160,6 +160,11 @@ void CKnownExtension::initGarminFit(const IUnit& units, const QString& ns) {
       ns % ":distance",
       {tr("Distance", "extShortName"), tr("Distance (device)", "extLongName"), -1, 0., NOFLOAT, units.baseFactor,
        units.baseUnit, "://icons/32x32/CSrcDistance.png", true, false, getExtensionValueFunc(ns % ":distance")});
+
+  knownExtensions.insert(
+      ns % ":respiration_rate",
+      {tr("Resp. Rate", "extShortName"), tr("Respiration Rate", "extLongName"), -1, 0., NOFLOAT, 1.0, "brpm",
+       "://icons/32x32/CSrcUnknown.png", true, false, getExtensionValueFunc(ns % ":respiration_rate")});
 }
 
 void CKnownExtension::init(const IUnit& units) {

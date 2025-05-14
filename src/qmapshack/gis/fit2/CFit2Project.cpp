@@ -115,6 +115,17 @@ void CFit2Project::decodeFile(const QString& filename) {
   } catch (const fit::RuntimeException& e) {
     throw std::runtime_error((QStringLiteral("Exception decoding file: ") + e.what()).toStdString());
   }
+
+  if (!segment.isEmpty()) {
+    track.segs.append(segment);
+    segment.pts.clear();
+  }
+
+  if (!track.isEmpty()) {
+    track.name = IUnit::datetime2string(track.segs.first().pts.first().time, IUnit::eTimeFormatShort);
+    new CGisItemTrk(track, this);
+    track = CTrackData();
+  }
 }
 
 void CFit2Project::OnMesg(fit::Mesg& mesg) {
@@ -168,6 +179,10 @@ void CFit2Project::OnMesg(fit::RecordMesg& mesg) {
   if (mesg.IsDistanceValid()) {
     trkpt.extensions["fit:distance"] = mesg.GetDistance();
   }
+  if (mesg.IsEnhancedRespirationRateValid()) {
+    trkpt.extensions["fit:respiration_rate"] = mesg.GetEnhancedRespirationRate();
+  }
+
   if (mesg.IsTemperatureValid()) {
     trkpt.extensions["gpxtpx:TrackPointExtension|gpxtpx:atemp"] = mesg.GetTemperature();
   }

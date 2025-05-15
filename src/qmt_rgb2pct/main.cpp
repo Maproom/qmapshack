@@ -76,11 +76,7 @@ int main(int argc, char** argv) {
   QCoreApplication app(argc, argv);
   QCoreApplication::setApplicationName(APP_STR);
   QCoreApplication::setApplicationVersion(VER_STR);
-  if (QString(VER_SUFFIX).isEmpty()) {
-    QCoreApplication::setApplicationVersion(VER_STR);
-  } else {
-    QCoreApplication::setApplicationVersion(VER_STR "." VER_SUFFIX);
-  }
+  QCoreApplication::setApplicationVersion(VER_STR);
 
   loadTranslations();
 

@@ -36,9 +36,15 @@ target_compile_definitions(${APPLICATION_NAME} PUBLIC
     -DVER_MAJOR=${PROJECT_VERSION_MAJOR}
     -DVER_MINOR=${PROJECT_VERSION_MINOR}
     -DVER_STEP=${PROJECT_VERSION_PATCH}
-    -DVER_TWEAK=${VERSION_SUFFIX}
     -DAPPLICATION_NAME=${APPLICATION_NAME}
 )
+
+if(GIT_HASH)
+    target_compile_definitions(${APPLICATION_NAME} PUBLIC
+        -DVER_SUFFIX=${GIT_HASH}
+    )
+endif(GIT_HASH)
+
 
 #add definitions, compiler switches, etc.
 IF(UNIX)

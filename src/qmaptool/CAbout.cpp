@@ -28,12 +28,7 @@
 CAbout::CAbout(QWidget* parent) : QDialog(parent) {
   setupUi(this);
 
-  if (QString(VER_SUFFIX).isEmpty()) {
-    labelVersion->setText(VER_STR);
-  } else {
-    labelVersion->setText(VER_STR "." VER_SUFFIX);
-  }
-
+  labelVersion->setText(VER_STR);
   labelQtVersion->setText(qVersion());
   labelGDALVersion->setText(GDALVersionInfo("--version"));
   labelProj4Version->setText(proj_info().release);

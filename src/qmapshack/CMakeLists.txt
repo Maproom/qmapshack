@@ -950,11 +950,11 @@ target_compile_definitions(${APPLICATION_NAME} PUBLIC
     -DAPPLICATION_NAME=${PROJECT_NAME}
 )
 
-if(${DEVELOPMENT_VERSION})
+if(GIT_HASH)
     target_compile_definitions(${APPLICATION_NAME} PUBLIC
-        -DDEVELOPMENT
+        -DVER_SUFFIX=${GIT_HASH}
     )
-endif(${DEVELOPMENT_VERSION})
+endif(GIT_HASH)
 
 if(Qt6DBus_FOUND)
     set(DBUS_LIB Qt6::DBus)

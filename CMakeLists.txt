@@ -25,6 +25,18 @@ endif()
 project(QMapShack VERSION 1.17.1 LANGUAGES CXX C)
 set(CMAKE_CXX_STANDARD 11)
 
+find_package(Git)
+if(GIT_EXECUTABLE)
+  execute_process(
+    COMMAND ${GIT_EXECUTABLE} describe --always
+    WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}
+    OUTPUT_VARIABLE GIT_HASH
+    RESULT_VARIABLE ERROR_CODE
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+  )
+endif()
+
+
 # FOR A RELEASE:
 # remove "development" for a release
 set(DEVELOPMENT_VERSION OFF)

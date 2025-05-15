@@ -24,8 +24,11 @@
 #define _MKSTR(x) _MKSTR_1(x)
 #endif
 
+#ifdef VER_SUFFIX
+#define VER_STR _MKSTR(VER_MAJOR) "." _MKSTR(VER_MINOR) "." _MKSTR(VER_STEP) "-" _MKSTR(VER_SUFFIX)
+#else
 #define VER_STR _MKSTR(VER_MAJOR) "." _MKSTR(VER_MINOR) "." _MKSTR(VER_STEP)
-#define VER_SUFFIX _MKSTR(VER_TWEAK)
+#endif
 
 #define WHAT_STR "QMapTool, Version " VER_STR
 

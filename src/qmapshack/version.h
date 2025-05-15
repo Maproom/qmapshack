@@ -24,7 +24,12 @@
 #define _MKSTR(x) _MKSTR_1(x)
 #endif
 
+#ifdef VER_SUFFIX
+#define VER_STR _MKSTR(VER_MAJOR) "." _MKSTR(VER_MINOR) "." _MKSTR(VER_STEP) "-" _MKSTR(VER_SUFFIX)
+#else
 #define VER_STR _MKSTR(VER_MAJOR) "." _MKSTR(VER_MINOR) "." _MKSTR(VER_STEP)
+#endif
+
 #define WHAT_STR _MKSTR(APPLICATION_NAME) ", Version " VER_STR
 
 #endif  // VERSION_H

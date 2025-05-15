@@ -84,6 +84,8 @@ class CFit2Project : public fit::FileIdMesgListener,
   }
   inline qreal semicircleToDegree(qint32 semicircles) { return semicircles * (degrees / twoPow31); }
 
+  void createTrack(const QString& name, const QString& comment);
+
   static const QSet<std::string> knownMessages;
 
   enum class eRecordType { Activity, Course };

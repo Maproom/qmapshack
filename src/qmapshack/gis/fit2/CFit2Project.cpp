@@ -116,16 +116,29 @@ void CFit2Project::decodeFile(const QString& filename) {
     throw std::runtime_error((QStringLiteral("Exception decoding file: ") + e.what()).toStdString());
   }
 
+  createTrack("", "");
+}
+
+void CFit2Project::createTrack(const QString& name, const QString& comment) {
   if (!segment.isEmpty()) {
     track.segs.append(segment);
     segment.pts.clear();
   }
 
-  if (!track.isEmpty()) {
-    track.name = IUnit::datetime2string(track.segs.first().pts.first().time, IUnit::eTimeFormatShort);
-    new CGisItemTrk(track, this);
-    track = CTrackData();
+  if (track.isEmpty()) {
+    return;
   }
+
+  if (name.isEmpty()) {
+    track.name = IUnit::datetime2string(track.segs.first().pts.first().time, IUnit::eTimeFormatShort);
+  } else {
+    track.name = name;
+  }
+
+  track.cmt = comment;
+  new CGisItemTrk(track, this);
+
+  track = CTrackData();
 }
 
 void CFit2Project::OnMesg(fit::Mesg& mesg) {
@@ -220,18 +233,6 @@ void CFit2Project::OnMesg(fit::SessionMesg& mesg) {
   //   qDebug() << "  " << filed->GetName();
   // }
 
-  if (!segment.isEmpty()) {
-    track.segs.append(segment);
-    segment.pts.clear();
-  }
-
-  QString name;
-  if (mesg.IsStartTimeValid()) {
-    name = IUnit::datetime2string(dateTimeFromFitToQt(mesg.GetStartTime()), IUnit::eTimeFormatShort);
-  } else if (!track.segs.isEmpty()) {
-    name = IUnit::datetime2string(track.segs.first().pts.first().time, IUnit::eTimeFormatShort);
-  }
-
   QString comment = "<div><b>Device Statistic</b><br/>";
   QString val, unit;
   if (mesg.IsTotalElapsedTimeValid()) {
@@ -277,19 +278,14 @@ void CFit2Project::OnMesg(fit::SessionMesg& mesg) {
     comment += tr("number of laps: %1<br/>").arg(mesg.GetNumLaps());
   }
 
-  // if (mesg.IsSportValid()) {
-  //   comment += tr("sport: %1<br/>").arg(mesg.GetSport());
-  // }
-
   comment += "</div>";
 
-  if (!track.isEmpty()) {
-    track.name = name;
-    track.cmt = comment;
-    new CGisItemTrk(track, this);
+  QString name;
+  if (mesg.IsStartTimeValid()) {
+    name = IUnit::datetime2string(dateTimeFromFitToQt(mesg.GetStartTime()), IUnit::eTimeFormatShort);
   }
 
-  track = CTrackData();
+  createTrack(name, comment);
 }
 
 void CFit2Project::OnMesg(fit::LapMesg& mesg) {
@@ -339,11 +335,10 @@ void CFit2Project::OnMesg(fit::EventMesg& mesg) {
       case FIT_EVENT_TYPE_START:
       case FIT_EVENT_TYPE_STOP:
       case FIT_EVENT_TYPE_STOP_ALL:
-        if (!segment.isEmpty()) {
+        if (recordType == eRecordType::Course) {
+          createTrack("", "");
+        } else if (!segment.isEmpty()) {
           track.segs.append(segment);
-          if (recordType == eRecordType::Course) {
-            new CGisItemTrk(track, this);
-          }
           segment.pts.clear();
         }
         break;

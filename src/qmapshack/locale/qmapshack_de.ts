@@ -1247,60 +1247,60 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
         <translation>Datei %1 konnte nicht geladen werden...</translation>
     </message>
     <message>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="222"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="240"/>
         <source>total elapsed time: %1%2&lt;br/&gt;</source>
         <translation>Gesamtzeit: %1%2 &lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="227"/>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="297"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="245"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="310"/>
         <source>total distance: %1%2&lt;br/&gt;</source>
         <translation>Gesamtdistanz: %1%2&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="293"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="306"/>
         <source>total timer time: %1%2&lt;br/&gt;</source>
         <translation>Gesamtzeit Timer: %1%2&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="301"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="314"/>
         <source>enhanced average speed: %1%2&lt;br/&gt;</source>
         <translation>Verbesserte Duchschnittsgeschwindigkeit: %1%2&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="232"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="250"/>
         <source>enhanced max speed: %1%2&lt;br/&gt;</source>
         <translation>Verbesserte Maximalgeschwindigkeit: %1%2&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="237"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="255"/>
         <source>enhanced min altitude: %1%2&lt;br/&gt;</source>
         <translation>Verbesserte minimale Höhe: %1%2&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="242"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="260"/>
         <source>enhanced max altitude: %1%2&lt;br/&gt;</source>
         <translation>Verbesserte maximale Höhe: %1%2&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="246"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="264"/>
         <source>total calories: %1kcal&lt;br/&gt;</source>
         <translation>Gesamtkalorin: %1&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="251"/>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="305"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="269"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="318"/>
         <source>total ascent: %1%2&lt;br/&gt;</source>
         <translation>Gesamtanstieg: %1%2&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="256"/>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="309"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="274"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="322"/>
         <source>total descent: %1%2&lt;br/&gt;</source>
         <translation>Gesamtabstieg: %1%2&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="260"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="278"/>
         <source>number of laps: %1&lt;br/&gt;</source>
         <translation>Anzal an Runden%1&lt;br/&gt;</translation>
     </message>
@@ -3374,8 +3374,8 @@ Zeile %2, Spalte %3:
         <location filename="../gis/trk/CKnownExtension.cpp" line="103"/>
         <location filename="../gis/trk/CKnownExtension.cpp" line="144"/>
         <location filename="../gis/trk/CKnownExtension.cpp" line="155"/>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="175"/>
         <location filename="../gis/trk/CKnownExtension.cpp" line="180"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="185"/>
         <source>Speed</source>
         <comment>extShortName</comment>
         <translation>Geschw.</translation>
@@ -3430,7 +3430,7 @@ Zeile %2, Spalte %3:
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="132"/>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="185"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="190"/>
         <source>Ele.</source>
         <comment>extShortName</comment>
         <translation>Höhe</translation>
@@ -3496,55 +3496,67 @@ Zeile %2, Spalte %3:
         <translation>Distanz (Gerät)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="168"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="166"/>
+        <source>Resp. Rate</source>
+        <comment>extShortName</comment>
+        <translation>Atemfreq.</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="166"/>
+        <source>Respiration Rate</source>
+        <comment>extLongName</comment>
+        <translation>Atemfrequenz</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="173"/>
         <source>Slope</source>
         <comment>extShortName</comment>
         <translation>Neigung</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="175"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="180"/>
         <source>Speed over Distance*</source>
         <comment>extLongName</comment>
         <translation>Geschwindigkeit ü. Entfernung*</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="180"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="185"/>
         <source>Speed over Time*</source>
         <comment>extLongName</comment>
         <translation>Geschwindigkeit ü. Zeit*</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="185"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="190"/>
         <source>Elevation*</source>
         <comment>extLongName</comment>
         <translation>Höhe*</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="190"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="195"/>
         <source>Progress</source>
         <comment>extShortName</comment>
         <translation>Verlauf</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="190"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="195"/>
         <source>Progress*</source>
         <comment>extLongName</comment>
         <translation>Verlauf*</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="195"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="200"/>
         <source>Terr. Slope</source>
         <comment>extShortName</comment>
         <translation>Hangn.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="195"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="200"/>
         <source>Terrain Slope*</source>
         <comment>extLongName</comment>
         <translation>Hangneigung*</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="168"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="173"/>
         <source>Slope*</source>
         <translation>Neigung*</translation>
     </message>

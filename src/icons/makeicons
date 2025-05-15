@@ -8,9 +8,9 @@ function call_inkscape {
     echo -n "$1x$1 "    
     
     if [[ $4 = *[!\ ]* ]]; then
-        inkscape -D -w $1 -h $1 $2 --export-png=./$4/$1x$1/apps/$3 >/dev/null 2>&1
+        inkscape -D -w $1 -h $1 $2 --export-type=png --export-filename=./$4/$1x$1/apps/$3 >/dev/null 2>&1
     else
-        inkscape -D -w $1 -h $1 $2 --export-png=$1x$1/$3 >/dev/null 2>&1
+        inkscape -D -w $1 -h $1 $2 --export-type=png --export-filename=$1x$1/$3 >/dev/null 2>&1
     fi
     if [ ! $? -eq 0 ]; then
         echo -n "ERROR "

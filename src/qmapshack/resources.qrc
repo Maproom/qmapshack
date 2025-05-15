@@ -82,6 +82,7 @@
         <file>../icons/32x32/CSrcEnergy.png</file>
         <file>../icons/32x32/CSrcHR.png</file>
         <file>../icons/32x32/CSrcPower.png</file>
+        <file>../icons/32x32/CSrcRespiration.png</file>        
         <file>../icons/32x32/CSrcSeaLevelPressure.png</file>
         <file>../icons/32x32/CSrcSlope.png</file>
         <file>../icons/32x32/CSrcSolid.png</file>
@@ -366,6 +367,7 @@
         <file>../icons/48x48/CSrcElevation.png</file>
         <file>../icons/48x48/CSrcEnergy.png</file>
         <file>../icons/48x48/CSrcHR.png</file>
+        <file>../icons/48x48/CSrcRespiration.png</file>
         <file>../icons/48x48/CSrcSeaLevelPressure.png</file>
         <file>../icons/48x48/CSrcSlope.png</file>
         <file>../icons/48x48/CSrcSolid.png</file>

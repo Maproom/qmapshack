@@ -1229,60 +1229,60 @@ Se pueden modificar ambos parámetros para personalizar el comportamiento. Para 
         <translation type="unfinished">Falló al cargar archivo %1...</translation>
     </message>
     <message>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="222"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="240"/>
         <source>total elapsed time: %1%2&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="227"/>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="297"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="245"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="310"/>
         <source>total distance: %1%2&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="293"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="306"/>
         <source>total timer time: %1%2&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="301"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="314"/>
         <source>enhanced average speed: %1%2&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="232"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="250"/>
         <source>enhanced max speed: %1%2&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="237"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="255"/>
         <source>enhanced min altitude: %1%2&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="242"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="260"/>
         <source>enhanced max altitude: %1%2&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="246"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="264"/>
         <source>total calories: %1kcal&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="251"/>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="305"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="269"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="318"/>
         <source>total ascent: %1%2&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="256"/>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="309"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="274"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="322"/>
         <source>total descent: %1%2&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="260"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="278"/>
         <source>number of laps: %1&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3360,8 +3360,8 @@ línea %2, columna %3.
         <location filename="../gis/trk/CKnownExtension.cpp" line="103"/>
         <location filename="../gis/trk/CKnownExtension.cpp" line="144"/>
         <location filename="../gis/trk/CKnownExtension.cpp" line="155"/>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="175"/>
         <location filename="../gis/trk/CKnownExtension.cpp" line="180"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="185"/>
         <source>Speed</source>
         <comment>extShortName</comment>
         <translation>Vel.</translation>
@@ -3416,7 +3416,7 @@ línea %2, columna %3.
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="132"/>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="185"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="190"/>
         <source>Ele.</source>
         <comment>extShortName</comment>
         <translation>Alt.</translation>
@@ -3482,55 +3482,67 @@ línea %2, columna %3.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="168"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="166"/>
+        <source>Resp. Rate</source>
+        <comment>extShortName</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="166"/>
+        <source>Respiration Rate</source>
+        <comment>extLongName</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="173"/>
         <source>Slope</source>
         <comment>extShortName</comment>
         <translation>Pendiente</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="175"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="180"/>
         <source>Speed over Distance*</source>
         <comment>extLongName</comment>
         <translation>Velocidad por distancia*</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="180"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="185"/>
         <source>Speed over Time*</source>
         <comment>extLongName</comment>
         <translation>Velocidad por Tiempo*</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="185"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="190"/>
         <source>Elevation*</source>
         <comment>extLongName</comment>
         <translation>Altitud*</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="190"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="195"/>
         <source>Progress</source>
         <comment>extShortName</comment>
         <translation>Progreso</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="190"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="195"/>
         <source>Progress*</source>
         <comment>extLongName</comment>
         <translation>Progreso*</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="195"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="200"/>
         <source>Terr. Slope</source>
         <comment>extShortName</comment>
         <translation>Pendiente Terr</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="195"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="200"/>
         <source>Terrain Slope*</source>
         <comment>extLongName</comment>
         <translation>Pendiente del Terreno*</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="168"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="173"/>
         <source>Slope*</source>
         <translation>Pendiente*</translation>
     </message>

@@ -21,6 +21,7 @@ V1.XX.X
 [QMS-747] Remove support for MapQuest 
 [QMS-750] Fix QMS build error - Windows 10/MSVC
 [QMS-753] Fix segfault for FIT sessions without track data
+[QMS-756] Avoid: [warning] QIODevice::read (QProcess): device not open
 
 V1.17.1
 [QMS-547] Fixed: QMS freezes on zoom when activating multi-layered online maps

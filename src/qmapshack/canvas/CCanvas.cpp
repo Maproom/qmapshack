@@ -487,11 +487,13 @@ void CCanvas::reportStatus(const QString& key, const QString& msg) {
     textStatusMessages->show();
     textStatusMessages->setText(report);
 
-    qreal h;
-    h = height() - Y_OFF_STATUS - getTrackProfileSize(height()).height() - 40;
-    h = qMin(h, textStatusMessages->document()->size().height() + 10);
-    textStatusMessages->setMinimumHeight(h);
-    textStatusMessages->setMaximumHeight(h);
+    if (isVisible()) {
+      qreal h;
+      h = height() - Y_OFF_STATUS - getTrackProfileSize(height()).height() - 40;
+      h = qMin(h, textStatusMessages->document()->size().height() + 10);
+      textStatusMessages->setMinimumHeight(h);
+      textStatusMessages->setMaximumHeight(h);
+    }
   }
   update();
 }

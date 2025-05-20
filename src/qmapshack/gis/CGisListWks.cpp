@@ -744,6 +744,9 @@ void CGisListWks::slotSaveWorkspace() {
     stream.setByteOrder(QDataStream::LittleEndian);
 
     project->IGisProject::operator>>(stream);
+    if (project->getName() == "") {
+      continue;
+    }
 
     query.prepare(
         "INSERT INTO workspace (type, keyqms, name, changed, visible, data) VALUES (:type, :keyqms, :name, :changed, "

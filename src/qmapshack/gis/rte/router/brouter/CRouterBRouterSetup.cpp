@@ -765,6 +765,10 @@ bool CRouterBRouterSetup::tryJavaVersion(const QStringList& arguments, const QSt
   QProcess cmd;
   QRegularExpression re(pattern);
 
+  if (localJavaExecutable == "") {
+    return false;
+  }
+
   cmd.setWorkingDirectory(localDir);
   cmd.start(localJavaExecutable, arguments);
 

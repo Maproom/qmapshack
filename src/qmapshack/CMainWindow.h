@@ -48,14 +48,14 @@ class CMainWindow : public QMainWindow, private Ui::IMainWindow {
 
   static QWidget* getBestWidgetForParent();
 
-  QString getHomePath() { return homeDir.exists() ? homeDir.absolutePath() : ""; }
+  QString getHomePath() { return (homeDir.path() != "" && homeDir.exists()) ? homeDir.absolutePath() : ""; }
 
-  QString getMapsPath() { return homeDir.exists(mapsPath) ? homeDir.absoluteFilePath(mapsPath) : ""; }
-  QString getDemPath() { return homeDir.exists(demPath) ? homeDir.absoluteFilePath(demPath) : ""; }
-  QString getRoutinoPath() { return homeDir.exists(routinoPath) ? homeDir.absoluteFilePath(routinoPath) : ""; }
-  QString getBRouterPath() { return homeDir.exists(brouterPath) ? homeDir.absoluteFilePath(brouterPath) : ""; }
-  QString getDatabasePath() { return homeDir.exists(databasePath) ? homeDir.absoluteFilePath(databasePath) : ""; }
-  QString getGpxPath() { return homeDir.exists(gpxPath) ? homeDir.absoluteFilePath(gpxPath) : ""; }
+  QString getMapsPath() { return (homeDir.path() != "" && homeDir.exists(mapsPath)) ? homeDir.absoluteFilePath(mapsPath) : ""; }
+  QString getDemPath() { return (homeDir.path() != "" && homeDir.exists(demPath)) ? homeDir.absoluteFilePath(demPath) : ""; }
+  QString getRoutinoPath() { return (homeDir.path() != "" && homeDir.exists(routinoPath)) ? homeDir.absoluteFilePath(routinoPath) : ""; }
+  QString getBRouterPath() { return (homeDir.path() != "" && homeDir.exists(brouterPath)) ? homeDir.absoluteFilePath(brouterPath) : ""; }
+  QString getDatabasePath() { return (homeDir.path() != "" && homeDir.exists(databasePath)) ? homeDir.absoluteFilePath(databasePath) : ""; }
+  QString getGpxPath() { return (homeDir.path() != "" && homeDir.exists(gpxPath)) ? homeDir.absoluteFilePath(gpxPath) : ""; }
 
   static QString getUser();
 

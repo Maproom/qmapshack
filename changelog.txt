@@ -21,6 +21,8 @@ V1.XX.X
 [QMS-747] Remove support for MapQuest 
 [QMS-750] Fix QMS build error - Windows 10/MSVC
 [QMS-753] Fix segfault for FIT sessions without track data
+[QMS-756] Avoid: [warning] QIODevice::read (QProcess): device not open
+[QMS-757] Avoid: [warning] Empty filename passed to function
 [QMS-758] Avoid: [warning] QSqlError("19", "Unable to fetch row", "NOT NULL constraint failed: workspace.name")
 
 V1.17.1

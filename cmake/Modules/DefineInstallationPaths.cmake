@@ -93,7 +93,7 @@ endif (UNIX)
 
 if (WIN32)
   # Same same
-  SET(BIN_INSTALL_DIR .)
+  SET(BIN_INSTALL_DIR bin)
   SET(SBIN_INSTALL_DIR .)
   SET(LIB_INSTALL_DIR .)
   SET(PLUGIN_INSTALL_DIR plugins)

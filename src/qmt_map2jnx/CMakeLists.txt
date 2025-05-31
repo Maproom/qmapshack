@@ -59,4 +59,11 @@ TARGET_LINK_LIBRARIES(${APPLICATION_NAME}
 install(
     TARGETS ${APPLICATION_NAME} DESTINATION ${BIN_INSTALL_DIR}
 )
-
+if(WIN32)
+    qt_generate_deploy_app_script(
+        TARGET ${APPLICATION_NAME}
+        OUTPUT_SCRIPT deploy_script_${APPLICATION_NAME}
+        NO_UNSUPPORTED_PLATFORM_ERROR
+    )
+    install(SCRIPT ${deploy_script_${APPLICATION_NAME}})
+endif()

@@ -19,7 +19,7 @@ And change back to build_QMapShack:
 
 Dependencies
 
-* [Qt5](https://www.qt.io/) (at least 6.8)
+* [Qt6](https://www.qt.io/) (at least 6.8)
 * [GDAL](http://www.gdal.org/) (at least GDAL 3.0.0)
 * [Proj4](https://proj.org/) (at least 9.0.0)
 * [Routino](http://www.routino.org/) (at least 3.1)

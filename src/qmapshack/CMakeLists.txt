@@ -999,3 +999,11 @@ if (UNIX AND NOT WIN32 AND NOT APPLE)
     install(FILES   ${${APPLICATION_NAME}_QM_FILES}         DESTINATION     ${DATA_INSTALL_PREFIX}/${APPLICATION_NAME}/translations)
     install(FILES   ${${APPLICATION_NAME}_DESKTOP_FILES}    DESTINATION     ${XDG_APPS_DIR})
 endif (UNIX AND NOT WIN32 AND NOT APPLE)
+if(WIN32)
+    qt_generate_deploy_app_script(
+        TARGET ${APPLICATION_NAME}
+        OUTPUT_SCRIPT deploy_script_${APPLICATION_NAME}
+        NO_UNSUPPORTED_PLATFORM_ERROR
+    )
+    install(SCRIPT ${deploy_script_${APPLICATION_NAME}})
+endif()

@@ -1578,7 +1578,7 @@ void CMainWindow::slotSanityTest() {
 void CMainWindow::slotHelp() {
   if (help.isNull()) {
     help = new CHelp(IAppSetup::getPlatformInstance()->helpFile(), "qthelp://qms/doc/doc/html/DocMain.html", this);
-    addDockWidget(Qt::AllDockWidgetAreas, help);
+    addDockWidget(Qt::LeftDockWidgetArea, help);
   }
 
   help->setVisible(true);

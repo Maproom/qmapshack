@@ -919,7 +919,7 @@ void IGisItem::writeWpt(QDomElement& xml, const wpt_t& wpt, bool strictGpx11) {
   writeXml(xml, "name", wpt.name);
   writeXml(xml, "cmt", html2Dev(wpt.cmt, strictGpx11));
   writeXml(xml, "desc", html2Dev(wpt.desc, strictGpx11));
-  if (isOnDevice() != IDevice::eTypeGarmin) {
+  if ((isOnDevice() != IDevice::eTypeGarmin) || (isOnDevice() != IDevice::eTypeGarminMtp)) {
     writeXml(xml, "src", wpt.src);
   }
   writeXml(xml, "link", wpt.links);

@@ -20,7 +20,6 @@
 
 #include "CMainWindow.h"
 #include "canvas/CCanvas.h"
-#include "device/CDeviceGarmin.h"
 #include "gis/CGisListWks.h"
 #include "gis/prj/IGisProject.h"
 #include "helpers/CSelectCopyAction.h"
@@ -37,12 +36,16 @@ IDevice::IDevice(const QString& path, type_e type, const QString& key, QTreeWidg
   cnt++;
 }
 
-IDevice::IDevice(const QString& path, type_e type, const QString& key, IDevice* parent)
-    : QTreeWidgetItem(parent, type), dir(path), key(key) {
+IDevice::IDevice(const QString& path, const QString& key, IDevice* parent)
+    : QTreeWidgetItem(parent, eTypeVirtual), dir(path), key(key) {
   setIcon(CGisListWks::eColumnIcon, QIcon("://icons/32x32/PathGreen.png"));
 }
 
-IDevice::~IDevice() { cnt--; }
+IDevice::~IDevice() {
+  if (type() != eTypeVirtual) {
+    cnt--;
+  }
+}
 
 void IDevice::mount(const QString& path) {
 #ifdef HAVE_DBUS

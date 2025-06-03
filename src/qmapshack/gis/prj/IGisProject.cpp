@@ -141,7 +141,8 @@ IGisProject* IGisProject::create(const QString filename, CGisListWks* parent) {
 }
 
 QString IGisProject::html2Dev(const QString& str) {
-  return isOnDevice() == IDevice::eTypeGarmin ? IGisItem::removeHtml(str) : str;
+  return (isOnDevice() == IDevice::eTypeGarmin) || (isOnDevice() == IDevice::eTypeGarminMtp) ? IGisItem::removeHtml(str)
+                                                                                             : str;
 }
 
 bool IGisProject::askBeforClose() {

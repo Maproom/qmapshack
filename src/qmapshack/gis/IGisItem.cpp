@@ -221,7 +221,7 @@ void IGisItem::loadFromDb(quint64 id, QSqlDatabase& db) {
   QSqlQuery query(db);
   query.prepare("SELECT data, keyqms, hash FROM items WHERE id=:id");
   query.bindValue(":id", id);
-  QUERY_EXEC(return );
+  QUERY_EXEC(return);
   if (query.next()) {
     QByteArray data(query.value(0).toByteArray());
     QDataStream in(&data, QIODevice::ReadOnly);
@@ -255,7 +255,7 @@ void IGisItem::updateFromDB(quint64 id, QSqlDatabase& db) {
 
   query.prepare("SELECT hash FROM items WHERE id=:id");
   query.bindValue(":id", id);
-  QUERY_EXEC(return );
+  QUERY_EXEC(return);
 
   /*
       Test on the hash stored in the database. If the hash is
@@ -681,7 +681,9 @@ QString IGisItem::html2Dev(const QString& str, bool strictGpx11) {
     return "";
   }
 
-  return (isOnDevice() == IDevice::eTypeGarmin) || strictGpx11 ? removeHtml(str) : str;
+  return (isOnDevice() == IDevice::eTypeGarmin) || (isOnDevice() == IDevice::eTypeGarminMtp) || strictGpx11
+             ? removeHtml(str)
+             : str;
 }
 
 QString IGisItem::toLink(bool isReadOnly, const QString& href, const QString& str, const QString& key) {

@@ -27,7 +27,7 @@
 #include "gis/gpx/CGpxProject.h"
 
 CDeviceGarminArchive::CDeviceGarminArchive(const QString& path, CDeviceGarmin* parent)
-    : IDevice(path, eTypeGarmin, parent->getKey(), parent) {
+    : IDevice(path, parent->getKey(), parent) {
   setText(CGisListWks::eColumnName, tr("Archive - expand to load"));
   setChildIndicatorPolicy(QTreeWidgetItem::ShowIndicator);
   connect(treeWidget(), &QTreeWidget::itemExpanded, this, &CDeviceGarminArchive::slotExpanded);

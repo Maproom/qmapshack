@@ -26,6 +26,7 @@ V1.XX.X
 [QMS-758] Avoid: [warning] QSqlError("19", "Unable to fetch row", "NOT NULL constraint failed: workspace.name")
 [QMS-759] Avoid: [warning] QWidget::setMinimumSize: (/QTextBrowser) Negative sizes (300,-140) are not possible
 [QMS-766] Avoid: [warning] QMainWindow::addDockWidget: invalid 'area' argument
+[QMS-769] Fix: "Send to device" is not enabled/disabled properly
 
 V1.17.1
 [QMS-547] Fixed: QMS freezes on zoom when activating multi-layered online maps

@@ -21,7 +21,6 @@
 
 #include "device/IDeviceWatcher.h"
 #include "device/dbus/org.gtk.vfs.MTPVolumeMonitor.h"
-#include "device/dbus/org.gtk.vfs.Mount.h"
 #include "device/dbus/org.gtk.vfs.MountTracker.h"
 #include "device/dbus/org.kde.kmtp.Daemon.h"
 #include "device/dbus/org.kde.kmtp.Device.h"

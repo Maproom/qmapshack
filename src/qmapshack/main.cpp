@@ -51,9 +51,9 @@ int main(int argc, char** argv) {
     QFont f = p.font();
     f.setBold(true);
 
-    p.setPen(Qt::black);
+    p.setPen(Qt::white);
     p.setFont(f);
-    p.drawText(400, 395, "V " VER_STR);
+    p.drawText(550, 395, "V " VER_STR);
 
     splash = new QSplashScreen(pic);
 #ifdef Q_OS_MAC

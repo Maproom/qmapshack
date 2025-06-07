@@ -316,14 +316,16 @@ void CDeviceWatcherLinux::slotGVFSMtpVolumeRemoved(const QString& dbus_name, con
 
 void CDeviceWatcherLinux::slotGVFSMounted(GVFSMount mount) {
   qDebug() << "CDeviceWatcherLinux::slotGVFSMounted" << mount.dbusId << mount.objectPath << mount.fuseMountPoint;
-  QDir dir(mount.fuseMountPoint.constData());
-  const QStringList& paths = dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
-  for (const QString& path : paths) {
-    if (dir.exists(path + "/Garmin/GarminDevice.xml") || dir.exists(path + "/GARMIN/GarminDevice.xml")) {
-      addGVFSMtpDevice(mount, paths);
-      break;
+  QTimer::singleShot(2000, [this, mount]() {
+    QDir dir(mount.fuseMountPoint.constData());
+    const QStringList& paths = dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
+    for (const QString& path : paths) {
+      if (dir.exists(path + "/Garmin/GarminDevice.xml") || dir.exists(path + "/GARMIN/GarminDevice.xml")) {
+        addGVFSMtpDevice(mount, paths);
+        break;
+      }
     }
-  }
+  });
 }
 
 void CDeviceWatcherLinux::slotGVFSUnmounted(GVFSMount mount) {

@@ -263,7 +263,7 @@ void CRouterBRouterTilesSelect::initialize()
           CRouterBRouterTilesStatus* status = getTileStatus(tile);
 
           const QFileInfo& info = QFileInfo(dir, segment);
-          status->localDate = info.birthTime();
+          status->localDate = info.lastModified();
           status->localSize = info.size();
           status->isLocal = true;
         }
@@ -529,7 +529,7 @@ void CRouterBRouterTilesSelect::slotDownloadFinished(QNetworkReply* reply) {
           status->isOutdated = false;
           status->file->close();
           QFileInfo info(*status->file);
-          status->localDate = info.birthTime();
+          status->localDate = info.lastModified();
           status->localSize = info.size();
           clearError();
         } else {
@@ -559,14 +559,14 @@ void CRouterBRouterTilesSelect::update() {
 }
 
 void CRouterBRouterTilesSelect::updateStatus() {
-  int numCurrent(0);
-  int sizeCurrent(0);
-  int numOutdated(0);
-  int sizeOutdated(0);
-  int numOutstanding(0);
-  int sizeDownloadMax(0);
-  int sizeOutstanding(0);
-  int sizeDownloaded(0);
+  quint32 numCurrent(0);
+  quint64 sizeCurrent(0);
+  quint32 numOutdated(0);
+  quint64 sizeOutdated(0);
+  quint32 numOutstanding(0);
+  quint64 sizeDownloadMax(0);
+  quint64 sizeOutstanding(0);
+  quint64 sizeDownloaded(0);
 
   bool downloading(false);
 

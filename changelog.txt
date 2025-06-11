@@ -28,6 +28,7 @@ V1.XX.X
 [QMS-766] Avoid: [warning] QMainWindow::addDockWidget: invalid 'area' argument
 [QMS-769] Fix: "Send to device" is not enabled/disabled properly
 [QMS-775] BRouter segments download: wrong accumulated size of segments, wrong outdated segments count
+[QMS-777] BRouter segments download "Cancel" dialog not translated
 
 V1.17.1
 [QMS-547] Fixed: QMS freezes on zoom when activating multi-layered online maps

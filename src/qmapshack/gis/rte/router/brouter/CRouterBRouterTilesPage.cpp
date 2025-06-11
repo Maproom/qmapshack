@@ -56,13 +56,13 @@ bool CRouterBRouterTilesPage::raiseWarning() const {
   QMessageBox msgBox;
   msgBox.setIcon(QMessageBox::Warning);
   if (widgetLocalTilesSelect->isDownloading()) {
-    msgBox.setText("Download of routing data is in progress.");
+    msgBox.setText(tr("Download of routing data is in progress."));
   } else if (widgetLocalTilesSelect->isDownloadSelected()) {
-    msgBox.setText("You did not yet download the selected routing data.");
+    msgBox.setText(tr("You did not yet download the selected routing data."));
   } else {
     return false;
   }
-  msgBox.setInformativeText("Do you want to cancel or continue with setup");
+  msgBox.setInformativeText(tr("Do you want to cancel or continue with setup"));
   msgBox.setStandardButtons(QMessageBox::Cancel);
   QPushButton* continueButton = msgBox.addButton(tr("Continue with Setup"), QMessageBox::NoRole);
   msgBox.exec();

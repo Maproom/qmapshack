@@ -27,9 +27,10 @@ V1.XX.X
 [QMS-759] Avoid: [warning] QWidget::setMinimumSize: (/QTextBrowser) Negative sizes (300,-140) are not possible
 [QMS-766] Avoid: [warning] QMainWindow::addDockWidget: invalid 'area' argument
 [QMS-769] Fix: "Send to device" is not enabled/disabled properly
-[QMS-775] BRouter segments download: wrong accumulated size of segments, wrong outdated segments count
 [QMS-771] Adapt Fit2 Implementation
+[QMS-775] BRouter segments download: wrong accumulated size of segments, wrong outdated segments count
 [QMS-777] BRouter segments download "Cancel" dialog not translated
+[QMS-779] Avoid NaN when totalAscent or totalDescent = 0
 
 V1.17.1
 [QMS-547] Fixed: QMS freezes on zoom when activating multi-layered online maps

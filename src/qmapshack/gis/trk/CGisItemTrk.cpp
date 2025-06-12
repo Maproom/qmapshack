@@ -639,12 +639,14 @@ QString CGisItemTrk::getInfoProgress(const CTrackData::trkpt_t& pt) const {
 
   if (pt.ascent != NOFLOAT) {
     IUnit::self().meter2elevation(pt.ascent, val, unit);
-    asc = tr("Ascent: %1%2 (%3%)").arg(val, unit).arg(pt.ascent * 100 / totalAscent, 2, 'f', 0);
+    qreal slope = totalAscent ? (pt.ascent * 100 / totalAscent) : 0;
+    asc = tr("Ascent: %1%2 (%3%)").arg(val, unit).arg(slope, 2, 'f', 0);
   }
 
   if (pt.descent != NOFLOAT) {
     IUnit::self().meter2elevation(pt.descent, val, unit);
-    dsc = tr(", Descent: %1%2 (%3%)").arg(val, unit).arg(pt.descent * 100 / totalDescent, 2, 'f', 0);
+    qreal  slope = totalDescent ? (pt.descent * 100 / totalDescent) : 0;
+    dsc = tr("Descent: %1%2 (%3%)").arg(val, unit).arg(slope, 2, 'f', 0);
   }
 
   if (pt.distance != NOFLOAT) {

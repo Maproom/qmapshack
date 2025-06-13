@@ -154,7 +154,7 @@ void CTableTrk::updateData() {
     item->setText(eColNum, QString::number(trkpt.idxTotal));
 
     item->setText(eColTime, trkpt.time.isValid()
-                                ? IUnit::self().datetime2string(trkpt.time, IUnit::eTimeFormatShort,
+                                ? IUnit::self().datetime2string(trkpt.time, IUnit::eTimeFormatShortPlusSecs,
                                                                 QPointF(trkpt.lon, trkpt.lat) * DEG_TO_RAD)
                                 : "-");
 
@@ -179,12 +179,14 @@ void CTableTrk::updateData() {
     }
 
     IUnit::self().slope2string(trkpt.slope1, val, unit);
-    item->setText(eColSlope, (trkpt.slope1 != NOFLOAT) ? QString("%1%2").arg(val, unit) : "-");
+
+    item->setText(eColSlope, (trkpt.slope1 != NOFLOAT && trkpt.ele != NOINT)
+                                 ? QString("%1%2").arg(val, unit) : "-");
 
     IUnit::self().meter2elevation(trkpt.ascent, val, unit);
-    item->setText(eColAscent, tr("%1%2").arg(val, unit));
+    item->setText(eColAscent, (trkpt.ele != NOINT) ? (tr("%1%2").arg(val, unit)) : "-");
     IUnit::self().meter2elevation(trkpt.descent, val, unit);
-    item->setText(eColDescent, tr("%1%2").arg(val, unit));
+    item->setText(eColDescent, (trkpt.ele != NOINT) ? (tr("%1%2").arg(val, unit)) : "-");
 
     // position
     QString str;

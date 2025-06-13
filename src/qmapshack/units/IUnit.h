@@ -91,7 +91,7 @@ class IUnit : public QObject {
   /// parse a string for a timestamp
   static bool parseTimestamp(const QString& time, QDateTime& datetime);
 
-  enum time_format_e { eTimeFormatLong, eTimeFormatShort, eTimeFormatIso };
+  enum time_format_e { eTimeFormatLong, eTimeFormatShort, eTimeFormatShortPlusSecs, eTimeFormatIso };
   /**
      @brief Convert date time object to string using the current timezone configuration
 

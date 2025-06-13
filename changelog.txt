@@ -31,6 +31,7 @@ V1.XX.X
 [QMS-775] BRouter segments download: wrong accumulated size of segments, wrong outdated segments count
 [QMS-777] BRouter segments download "Cancel" dialog not translated
 [QMS-779] Avoid NaN when totalAscent or totalDescent = 0
+[QMS-782] Solved two issues for track point viewer
 
 V1.17.1
 [QMS-547] Fixed: QMS freezes on zoom when activating multi-layered online maps

@@ -681,9 +681,10 @@ QString IGisItem::html2Dev(const QString& str, bool strictGpx11) {
     return "";
   }
 
-  return (isOnDevice() == IDevice::eTypeGarmin) || (isOnDevice() == IDevice::eTypeGarminMtp) || strictGpx11
-             ? removeHtml(str)
-             : str;
+  return (isOnDevice() == IDevice::eTypeGarmin)
+                 || (isOnDevice() == IDevice::eTypeGarminMtp)
+                 || (isOnDevice() == IDevice::eTypeGenericMtp)
+                 || strictGpx11 ? removeHtml(str) : str;
 }
 
 QString IGisItem::toLink(bool isReadOnly, const QString& href, const QString& str, const QString& key) {

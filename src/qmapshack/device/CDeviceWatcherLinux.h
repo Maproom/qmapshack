@@ -19,6 +19,7 @@
 #ifndef CDEVICEWATCHERLINUX_H
 #define CDEVICEWATCHERLINUX_H
 
+#include "device/IDevice.h"
 #include "device/IDeviceWatcher.h"
 #include "device/dbus/org.gtk.vfs.MTPVolumeMonitor.h"
 #include "device/dbus/org.gtk.vfs.MountTracker.h"
@@ -48,8 +49,8 @@ class CDeviceWatcherLinux : public IDeviceWatcher {
 
  private:
   QString readMountPoint(const QString& path);
-  void addKMtpDevice(org::kde::kmtp::Device& device, const QString &deviceKey);
-  void addGVFSMtpDevice(const GVFSMount& mount, const QStringList& storages);
+  void addKMtpDevice(org::kde::kmtp::Device& device, const QString& deviceKey, IDevice::type_e deviceType);
+  void addGVFSMtpDevice(const GVFSMount& mount, const QStringList& storages, IDevice::type_e deviceType);
 
   org::kde::kmtp::Daemon* kMtpDaemon;
   QMap<QString, QStringList> knownMtpDevices;

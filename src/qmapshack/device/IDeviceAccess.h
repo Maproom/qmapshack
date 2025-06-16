@@ -36,12 +36,13 @@ class IDeviceAccess : public QObject {
    * A valid path usually is a path that has a folder named Garmin.
    *
    */
-  virtual bool foundValidStoragePath() const { return !dir.dirName().isEmpty(); }
+  virtual bool foundValidStoragePath() const { return !dir.absolutePath().isEmpty(); }
   /**
-   * @brief Get an icon from the storage if any
+   * @brief Get an icon from the storage if any - for generic icon path
+   * @param iconPath    a path to to the icon or empty for the GARMIN icon
    * @return A valid pixmap ion success or an empty one if no icon has been found.
    */
-  virtual QPixmap getIcon() = 0;
+  virtual QPixmap getIcon(const QString& iconPath = "") = 0;
   /**
    * @brief A user readable description of the storage
    */

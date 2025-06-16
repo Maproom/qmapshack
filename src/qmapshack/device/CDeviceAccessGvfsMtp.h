@@ -32,7 +32,7 @@ class CDeviceAccessGvfsMtp : public IDeviceAccess {
   CDeviceAccessGvfsMtp(const GVFSMount& mount, const QString& storagePath, QObject* parent);
   virtual ~CDeviceAccessGvfsMtp() = default;
 
-  QPixmap getIcon() override;
+  QPixmap getIcon(const QString& iconPath = "") override;
   QString decription() override;
 
   bool readFileFromStorage(const QString& path, QFile& file) override;
@@ -47,5 +47,4 @@ class CDeviceAccessGvfsMtp : public IDeviceAccess {
   QDir pathOnDevice;
 };
 
-#endif //CDEVICEACCESSGVFSMTP_H
-
+#endif  // CDEVICEACCESSGVFSMTP_H

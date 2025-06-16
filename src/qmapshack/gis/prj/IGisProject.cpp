@@ -24,6 +24,7 @@
 
 #include "CMainWindow.h"
 #include "device/CDeviceGarminMtp.h"
+#include "device/CDeviceGenericMtp.h"
 #include "device/IDevice.h"
 #include "gis/CGisDraw.h"
 #include "gis/CGisListWks.h"
@@ -141,8 +142,9 @@ IGisProject* IGisProject::create(const QString filename, CGisListWks* parent) {
 }
 
 QString IGisProject::html2Dev(const QString& str) {
-  return (isOnDevice() == IDevice::eTypeGarmin) || (isOnDevice() == IDevice::eTypeGarminMtp) ? IGisItem::removeHtml(str)
-                                                                                             : str;
+  return (isOnDevice() == IDevice::eTypeGarmin)
+                 || (isOnDevice() == IDevice::eTypeGarminMtp)
+                 || (isOnDevice() == IDevice::eTypeGenericMtp) ? IGisItem::removeHtml(str) : str;
 }
 
 bool IGisProject::askBeforClose() {
@@ -786,9 +788,14 @@ void IGisProject::umount() {
 
 bool IGisProject::remove() {
 #ifdef Q_OS_LINUX
-  CDeviceGarminMtp* mtp = dynamic_cast<CDeviceGarminMtp*>(parent());
-  if (mtp != nullptr) {
-    return mtp->removeFromDevice(filename);
+  CDeviceGarminMtp* mtpGarmin = dynamic_cast<CDeviceGarminMtp*>(parent());
+  if (mtpGarmin != nullptr) {
+    return mtpGarmin->removeFromDevice(filename);
+  } else {
+    CDeviceGenericMtp* mtpGeneric = dynamic_cast<CDeviceGenericMtp*>(parent());
+    if (mtpGeneric != nullptr) {
+      return mtpGeneric->removeFromDevice(filename);
+    }
   }
 #endif
 

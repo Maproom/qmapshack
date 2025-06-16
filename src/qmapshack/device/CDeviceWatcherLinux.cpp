@@ -24,7 +24,7 @@
 
 #include "canvas/CCanvas.h"
 #include "device/CDeviceGarminMtp.h"
-#include "device/IDevice.h"
+#include "device/CDeviceGenericMtp.h"
 #include "device/dbus/org.kde.kmtp.Device.h"
 #include "device/dbus/org.kde.kmtp.Storage.h"
 #include "gis/CGisListWks.h"
@@ -273,10 +273,23 @@ void CDeviceWatcherLinux::slotKMTPDeviceChanged() {
       const QList<QDBusObjectPath>& storages = device.listStorages();
       for (const QDBusObjectPath& storagePath : storages) {
         org::kde::kmtp::Storage storage("org.kde.kiod6", storagePath.path(), QDBusConnection::sessionBus(), this);
-        const KMTPFile& fileGarminDeviceXml = storage.getFileMetadata("/GARMIN/GarminDevice.xml").value();
+        // Garmin's OS on the device seems to be indifferent when it comes to upper and lower case writing.
+        // However Linux does care about it. On the devices you can find two different writings for the data
+        // path: "GARMIN" and "Garmin". Let's try to find one of them.
+        KMTPFile fileGarminDeviceXml;
+        fileGarminDeviceXml = storage.getFileMetadata("/GARMIN/GarminDevice.xml").value();
+        if (!fileGarminDeviceXml.isValid()) {
+          fileGarminDeviceXml = storage.getFileMetadata("/Garmin/GarminDevice.xml").value();
+        }
         if (fileGarminDeviceXml.isValid() && !fileGarminDeviceXml.isFolder()) {
           // If the device is a Garmin add each storage of the device as a single device.
-          addKMtpDevice(device, key);
+          addKMtpDevice(device, key, IDevice::eTypeGarminMtp);
+          break;
+        }
+        const KMTPFile& fileGenericDeviceXml = storage.getFileMetadata(CDeviceGenericMtp::kQmsMtpDeviceJson).value();
+        if (fileGenericDeviceXml.isValid() && !fileGenericDeviceXml.isFolder()) {
+          // If the device is a Generic add each storage of the device as a single device.
+          addKMtpDevice(device, key, IDevice::eTypeGenericMtp);
           break;
         }
       }
@@ -291,13 +304,21 @@ void CDeviceWatcherLinux::slotKMTPDeviceChanged() {
   }
 }
 
-void CDeviceWatcherLinux::addKMtpDevice(org::kde::kmtp::Device& device, const QString& deviceKey) {
+void CDeviceWatcherLinux::addKMtpDevice(org::kde::kmtp::Device& device, const QString& deviceKey,
+                                        IDevice::type_e deviceType) {
   CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
   const QList<QDBusObjectPath>& storages = device.listStorages();
   for (const QDBusObjectPath& storagePath : storages) {
     org::kde::kmtp::Storage storage("org.kde.kiod6", storagePath.path(), QDBusConnection::sessionBus(), this);
     const QString& key = QString("%1@%2").arg(storage.description(), device.udi());
-    new CDeviceGarminMtp(storagePath, key, listWks);
+    switch (deviceType) {
+      case IDevice::eTypeGarminMtp:
+        new CDeviceGarminMtp(storagePath, key, listWks);
+        break;
+      case IDevice::eTypeGenericMtp:
+        new CDeviceGenericMtp(storagePath, key, listWks);
+        break;
+    }
     knownMtpDevices[deviceKey] << key;
   }
   emit sigChanged();
@@ -316,12 +337,16 @@ void CDeviceWatcherLinux::slotGVFSMtpVolumeRemoved(const QString& dbus_name, con
 
 void CDeviceWatcherLinux::slotGVFSMounted(GVFSMount mount) {
   qDebug() << "CDeviceWatcherLinux::slotGVFSMounted" << mount.dbusId << mount.objectPath << mount.fuseMountPoint;
-  QTimer::singleShot(2000, [this, mount]() {
+  QTimer::singleShot(2000, this, [this, mount]() {
     QDir dir(mount.fuseMountPoint.constData());
     const QStringList& paths = dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
     for (const QString& path : paths) {
       if (dir.exists(path + "/Garmin/GarminDevice.xml") || dir.exists(path + "/GARMIN/GarminDevice.xml")) {
-        addGVFSMtpDevice(mount, paths);
+        addGVFSMtpDevice(mount, paths, IDevice::eTypeGarminMtp);
+        break;
+      } else if (dir.exists(path + "/" + CDeviceGenericMtp::kQmsMtpDeviceJson)) {  // To identiy generic non-GARMIN MTP
+                                                                                   // devices, Wahoo, smartphones, etc.
+        addGVFSMtpDevice(mount, paths, IDevice::eTypeGenericMtp);
         break;
       }
     }
@@ -340,11 +365,21 @@ void CDeviceWatcherLinux::slotGVFSUnmounted(GVFSMount mount) {
   }
 }
 
-void CDeviceWatcherLinux::addGVFSMtpDevice(const GVFSMount& mount, const QStringList& storages) {
+void CDeviceWatcherLinux::addGVFSMtpDevice(const GVFSMount& mount, const QStringList& storages,
+                                           IDevice::type_e deviceType) {
   CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
   for (const QString& storagePath : storages) {
     const QString& key = QString("%1@%2").arg(storagePath, mount.dbusId);
-    new CDeviceGarminMtp(mount, storagePath, key, listWks);
+    switch (deviceType) {
+      case IDevice::eTypeGarminMtp:
+        new CDeviceGarminMtp(mount, storagePath, key, listWks);
+        break;
+      case IDevice::eTypeGenericMtp:
+        new CDeviceGenericMtp(mount, storagePath, key, listWks);
+        break;
+      default:
+        return;
+    }
     knownMtpDevices[mount.dbusId] << key;
   }
   emit sigChanged();

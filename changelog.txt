@@ -37,6 +37,7 @@ V1.XX.X
 [QMS-791] Error determining BRouter-Web (online) version
 [QMS-793] Auto-routing with BRouter & minor fixes
 [QMS-794] Fix: Links to local files in Waypoint on-screen dialog not opening
+[QMS-797] Enhance USB MTP to support generic devices
 
 V1.17.1
 [QMS-547] Fixed: QMS freezes on zoom when activating multi-layered online maps

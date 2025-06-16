@@ -349,6 +349,7 @@ set( SRCS
     device/CDeviceAccessGvfsMtp.cpp
     device/CDeviceGarminMtp.cpp
     device/CDeviceGarminArchiveMtp.cpp
+    device/CDeviceGenericMtp.cpp
     device/dbus/org.kde.kmtp.Daemon.cpp
     device/dbus/org.kde.kmtp.Device.cpp
     device/dbus/org.kde.kmtp.Storage.cpp
@@ -713,6 +714,7 @@ set( HDRS
     device/CDeviceAccessGvfsMtp.h
     device/CDeviceGarminMtp.h
     device/CDeviceGarminArchiveMtp.h
+    device/CDeviceGenericMtp.h
     device/IDeviceAccess.h
     device/dbus/org.kde.kmtp.Daemon.h
     device/dbus/org.kde.kmtp.Device.h

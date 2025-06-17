@@ -778,9 +778,21 @@ void CGisListWks::slotLoadWorkspace() {
 
   QUERY_RUN("SELECT type, keyqms, name, changed, visible, data FROM workspace", return)
 
-  {  // open context for progress dialog
-    const int total = query.size();
+  { // open context for progress dialog
+    //Refer to https://stackoverflow.com/questions/26495049/qsqlquery-size-always-returns-1
+    qreal total = 0;
+    if (db.driver()->hasFeature(QSqlDriver::QuerySize)) {
+      total = query.size();
+    } else {
+      if(query.last())
+      {
+        total =  query.at() + 1;
+        query.first();
+        query.previous();
+      }
+    }
     PROGRESS_SETUP(tr("Loading workspace. Please wait."), 0, total, this);
+    progress.show();
     quint32 progCnt = 0;
 
     while (query.next()) {

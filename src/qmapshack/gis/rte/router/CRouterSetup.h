@@ -36,7 +36,7 @@ class CRouterSetup : public QWidget, private Ui::IRouterSetup {
 
   bool hasFastRouting();
 
-  enum router_e { RouterRoutino, RouterMapquest, RouterBRouter };
+  enum router_e { RouterRoutino, RouterBRouter };
 
   void setRouterTitle(router_e, QString title);
 

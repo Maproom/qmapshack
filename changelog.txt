@@ -33,6 +33,7 @@ V1.XX.X
 [QMS-779] Avoid NaN when totalAscent or totalDescent = 0
 [QMS-782] Solved two issues for track point viewer
 [QMS-784] Solved two issues for GNOME/Wayland, Invalid Points Dialog vs Progress Dialog
+[QMS-788] Fix: BRouter (offline) not shown in combobox
 
 V1.17.1
 [QMS-547] Fixed: QMS freezes on zoom when activating multi-layered online maps

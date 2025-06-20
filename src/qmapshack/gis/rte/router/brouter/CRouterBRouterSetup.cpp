@@ -532,7 +532,7 @@ void CRouterBRouterSetup::loadOnlineVersionFinished(QNetworkReply* reply) {
     return;
   }
   const QString gpx(reply->readAll());
-  static const QRegularExpression reVersion("^<\\?xml.+<gpx.+creator=\"(.*)\"");
+  static const QRegularExpression reVersion("^<\\?xml.+<gpx.+creator=\"([^\"]*)\".*$",QRegularExpression::DotMatchesEverythingOption|QRegularExpression::MultilineOption);
   const QRegularExpressionMatch& match = reVersion.match(gpx);
   if (match.hasMatch()) {
     parseBRouterVersion(match.captured(1));

@@ -592,7 +592,7 @@ void CRouterBRouterSetupWizard::updateOnlineDetails() const {
     labelOnlineVersion->setText(tr("BRouter-Version: not accessible"));
   } else {
     labelOnlineVersion->setText(
-        tr("BRouter-Version: %1.%2.%3").arg(setup->versionMajor).arg(setup->versionMinor).arg(setup->versionMinor));
+        tr("BRouter-Version: %1.%2.%3").arg(setup->versionMajor).arg(setup->versionMinor).arg(setup->versionPatch));
   }
   if (isError) {
     textOnlineDetails->setText(error + ": " + errorDetails);

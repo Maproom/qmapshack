@@ -26,6 +26,7 @@
 #include "gis/CGisDraw.h"
 #include "gis/GeoMath.h"
 #include "gis/IGisLine.h"
+#include "gis/rte/router/CRouterSetup.h"
 #include "gis/rte/router/CRouterOptimization.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "helpers/CDraw.h"
@@ -123,6 +124,9 @@ void IMouseEditLine::commonSetup() {
       scrOptEditLine->toolTrackRoute->setChecked(true);
       break;
   }
+
+  connect(&CRouterSetup::self(), &CRouterSetup::sigHasFastRouting, this, &IMouseEditLine::slotHasFastRouting);
+  slotHasFastRouting(CRouterSetup::self().hasFastRouting());
 
   slotMovePoint();
 }
@@ -310,6 +314,14 @@ void IMouseEditLine::slotTrackRouting() {
   canvas->reportStatus(key.item,
                        tr("<b>Track Routing</b><br/>Connect points with a line from a loaded track if possible.<br/>"));
   canvas->reportStatus("Routino", QString());
+}
+
+void IMouseEditLine::slotHasFastRouting(bool on) {
+  if (scrOptEditLine->toolAutoRoute->isChecked() && !on) {
+    scrOptEditLine->toolNoRoute->setChecked(true);
+  }
+  scrOptEditLine->toolAutoRoute->setEnabled(on);
+  scrOptEditLine->toolAutoRoute->setCheckable(on);
 }
 
 void IMouseEditLine::slotOptimize() {

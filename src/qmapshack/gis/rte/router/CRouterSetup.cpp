@@ -37,6 +37,9 @@ CRouterSetup::CRouterSetup(QWidget* parent) : QWidget(parent) {
   stackedWidget->addWidget(new CRouterRoutino(this));
   stackedWidget->addWidget(new CRouterBRouter(this));
 
+  // Force initial "currentIndexChanged" signal for auto-routing initialization
+  comboRouter->setCurrentIndex(-1);
+
   connect(comboRouter, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
           &CRouterSetup::slotSelectRouter);
 
@@ -60,8 +63,9 @@ bool CRouterSetup::hasFastRouting() {
 void CRouterSetup::slotSelectRouter(int i) {
   stackedWidget->setCurrentIndex(i);
   IRouter* router = dynamic_cast<IRouter*>(stackedWidget->currentWidget());
-  if (router != nullptr) {
+  if (router) {
     router->routerSelected();
+    emit sigHasFastRouting(hasFastRouting());
   }
 }
 
@@ -92,4 +96,7 @@ QString CRouterSetup::getOptions() {
 
 void CRouterSetup::setRouterTitle(const router_e router, const QString title) {
   comboRouter->setItemText(router, title);
+  if (comboRouter->currentIndex() == router) {
+    emit sigHasFastRouting(hasFastRouting());
+  }
 }

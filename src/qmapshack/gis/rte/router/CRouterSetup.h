@@ -40,6 +40,9 @@ class CRouterSetup : public QWidget, private Ui::IRouterSetup {
 
   void setRouterTitle(router_e, QString title);
 
+ signals:
+  void sigHasFastRouting (bool on);
+
  private slots:
   void slotSelectRouter(int i);
 

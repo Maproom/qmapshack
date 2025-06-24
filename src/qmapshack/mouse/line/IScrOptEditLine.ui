@@ -235,7 +235,7 @@
         <item>
          <widget class="QToolButton" name="toolAutoRoute">
           <property name="toolTip">
-           <string>Use auto-routing to between points. (Key: A)</string>
+           <string>Use auto-routing in between points. (Key: A)</string>
           </property>
           <property name="text">
            <string>A</string>

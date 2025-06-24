@@ -186,14 +186,11 @@ void CRouterBRouterLocal::updateLocalBRouterStatus() const {
       }
     }
 
-    brouter.checkFastRecalc->setEnabled(true);
     brouter.toolToggleBRouter->setEnabled(true);
   } else {
     brouter.labelStatus->setText(tr("not installed"));
     brouter.toolConsole->setVisible(false);
     brouter.toolToggleBRouter->setEnabled(false);
-    brouter.checkFastRecalc->setEnabled(false);
   }
   brouter.toolToggleBRouter->setVisible(true);
-  brouter.checkFastRecalc->setVisible(true);
 }

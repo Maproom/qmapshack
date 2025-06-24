@@ -101,6 +101,11 @@ class IMouseEditLine : public IMouse {
   void slotVectorRouting();
   void slotTrackRouting();
 
+  /**
+     @brief Enable/disable auto-routing
+   */
+  void slotHasFastRouting(bool on);
+
   void slotOptimize();
 
   virtual void slotAbort() = 0;

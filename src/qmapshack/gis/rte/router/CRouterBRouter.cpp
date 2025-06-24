@@ -82,8 +82,6 @@ CRouterBRouter::CRouterBRouter(QWidget* parent) : IRouter(false, parent) {
 
   cfg.beginGroup("Route/brouter");
   comboProfile->setCurrentIndex(cfg.value("profile", 0).toInt());
-  checkFastRecalc->setChecked(cfg.value("fastRecalc", false).toBool() &&
-                              (setup->installMode == CRouterBRouterSetup::eModeLocal));
   comboAlternative->setCurrentIndex(cfg.value("alternative", 0).toInt());
   cfg.endGroup();
 }
@@ -97,7 +95,6 @@ CRouterBRouter::~CRouterBRouter() {
   cfg.beginGroup("Route/brouter");
   cfg.setValue("profile", comboProfile->currentIndex());
   cfg.setValue("alternative", comboAlternative->currentIndex());
-  cfg.setValue("fastRecalc", checkFastRecalc->isChecked());
   cfg.endGroup();
 }
 
@@ -188,15 +185,14 @@ void CRouterBRouter::slotCloseStatusMsg() const {
 
 QString CRouterBRouter::getOptions() {
   return QString(tr("profile: %1, alternative: %2")
-                     .arg(comboProfile->currentData().toString())
-                     .arg(comboAlternative->currentData().toInt() + 1));
+                     .arg(comboProfile->currentText())
+                     .arg(comboAlternative->currentData().toInt()));
 }
 
 void CRouterBRouter::routerSelected() { getBRouterVersion(); }
 
 bool CRouterBRouter::hasFastRouting() {
-  return setup->installMode == CRouterBRouterSetup::eModeLocal && setup->isLocalBRouterValid &&
-         checkFastRecalc->isChecked();
+  return setup->installMode == CRouterBRouterSetup::eModeLocal && setup->isLocalBRouterValid;
 }
 
 QNetworkRequest CRouterBRouter::getRequest(const QVector<QPointF>& routePoints, const QList<IGisItem*>& nogos) const {
@@ -571,7 +567,6 @@ void CRouterBRouter::updateBRouterStatus() const {
     labelStatus->setText(tr("online"));
     toolConsole->setVisible(false);
     toolToggleBRouter->setVisible(false);
-    checkFastRecalc->setVisible(false);
     textBRouterOutput->clear();
     textBRouterOutput->setVisible(false);
   }

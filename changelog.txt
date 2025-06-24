@@ -35,6 +35,7 @@ V1.XX.X
 [QMS-784] Solved two issues for GNOME/Wayland, Invalid Points Dialog vs Progress Dialog
 [QMS-788] Fix: BRouter (offline) not shown in combobox
 [QMS-791] Error determining BRouter-Web (online) version
+[QMS-793] Auto-routing with BRouter & minor fixes
 [QMS-794] Fix: Links to local files in Waypoint on-screen dialog not opening
 
 V1.17.1

@@ -92,7 +92,7 @@ header("Update Version")
 current_version = None
 with open('CMakeLists.txt') as fp:
     for line in lines_that_start_with("project(QMapShack VERSION ", fp):
-        res = re.match('.*([0-9]+\.[0-9]+\.[0-9]).*', line)
+        res = re.match(r'.*([0-9]+\.[0-9]+\.[0-9]).*', line)
         if res:
             current_version = version.parse(res.group(1))
             break

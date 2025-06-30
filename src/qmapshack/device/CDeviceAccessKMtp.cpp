@@ -43,17 +43,9 @@ CDeviceAccessKMtp::CDeviceAccessKMtp(const QDBusObjectPath& objectPathStorage, Q
 QPixmap CDeviceAccessKMtp::getIcon(const QString& iconPath) {
   QPixmap pixmap;
   QTemporaryFile icon;
-  QString ip;
-  ip = (iconPath != "") ? iconPath : QString("Garmintriangletm.ico"); // Some GARMIN devices has .ico
-  if (readFileFromStorage(dir.filePath(ip), icon)) {
+  if (readFileFromStorage(dir.filePath(iconPath), icon)) {
     icon.open();
     pixmap.loadFromData(icon.readAll());
-  } else {
-    ip = "Garmintriangletm.icon"; // Some other GARMIN devices has .icon
-    if (readFileFromStorage(dir.filePath(ip), icon)) {
-      icon.open();
-      pixmap.loadFromData(icon.readAll());
-    }
   }
   return pixmap;
 }

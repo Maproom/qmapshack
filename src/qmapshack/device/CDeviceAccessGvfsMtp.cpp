@@ -45,15 +45,8 @@ CDeviceAccessGvfsMtp::CDeviceAccessGvfsMtp(const GVFSMount& mount, const QString
 
 QPixmap CDeviceAccessGvfsMtp::getIcon(const QString& iconPath) {
   QPixmap pixmap;
-  QString ip;
-  ip = (iconPath != "") ? iconPath : QString("Garmintriangletm.ico"); // Some GARMIN devices has .ico
-  if (dir.exists(ip)) {
-    pixmap.load(dir.filePath(ip));
-  } else {
-    ip = "Garmintriangletm.icon"; // Some other GARMIN devices has .icon
-    if (dir.exists(ip)) {
-      pixmap.load(dir.filePath(ip));
-    }
+  if (dir.exists(iconPath)) {
+    pixmap.load(dir.filePath(iconPath));
   }
   return pixmap;
 }

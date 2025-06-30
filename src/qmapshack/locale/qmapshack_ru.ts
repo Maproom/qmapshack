@@ -170,12 +170,12 @@
         <translation>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Нетерпеливые пользователи:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;GetMaps&apos;&gt;Я хочу онлайн карты.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Терпеливые пользователи:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;ShowQuickStart&apos;&gt;Путеводитель быстрого старта.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocGettingStarted#add-maps&apos;&gt;Начинать&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocInstallMapDem&apos;&gt;Установить карты &amp; DEM&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocBasicsMapDem&apos;&gt;Основы для карт и DEM.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Источники для карт&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="1020"/>
+        <location filename="../canvas/CCanvas.cpp" line="1022"/>
         <source>Map Projection...</source>
         <translation>Проекция карты...</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="1021"/>
+        <location filename="../canvas/CCanvas.cpp" line="1023"/>
         <source>Failed to setup map projection. Please configure a valid projection.</source>
         <translation>Не удалось настроить проекцию карты. Пожалуйста, настройте допустимую проекцию.</translation>
     </message>
@@ -215,7 +215,7 @@
         <translation>&lt;h2&gt;Маршрутизация&lt;/h2&gt;&lt;p&gt;QMapShack поддерживает онлайн маршрутизацию. Однако, если вы действительно хотите использовать все возможности маршрутизации, вам нужна база данных маршрутизации, хранящаяся локально. Существует два варианта.&lt;/p&gt;&lt;h3&gt;Routino&lt;/h3&gt;&lt;p&gt;Для Routino необходимо создать данные маршрутизации из файлов базы данных OpenStreetMap. QMapShack имеет встроенный построитель базы данных Routino (&lt;a href=&apos;CreateRoutino&apos;&gt;Инструмент-&gt;Создать базу данных Routino&lt;/a&gt;).&lt;/p&gt;&lt;h3&gt;BRouter&lt;/h3&gt;&lt;p&gt;Второй вариант - использовать локальную установку BRouter с локальной базой данных маршрутизации. Чтобы загрузить и установить необходимые данные, нажмите кнопку &lt;a href=&apos;BRouterSetup&apos;&gt;Настройка BRouter&lt;/a&gt;&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="971"/>
+        <location filename="../canvas/CCanvas.cpp" line="973"/>
         <source>Setup Map Background</source>
         <translation>Настройка фона карт</translation>
     </message>
@@ -743,22 +743,22 @@ To solve this conflict you can create and save a clone, force your version or dr
 <context>
     <name>CDeviceAccessGvfsMtp</name>
     <message>
-        <location filename="../device/CDeviceAccessGvfsMtp.cpp" line="92"/>
+        <location filename="../device/CDeviceAccessGvfsMtp.cpp" line="96"/>
         <source>Send to Devices...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../device/CDeviceAccessGvfsMtp.cpp" line="93"/>
+        <location filename="../device/CDeviceAccessGvfsMtp.cpp" line="97"/>
         <source>Failed to send file &quot;%1&quot; to device. Reason: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../device/CDeviceAccessGvfsMtp.cpp" line="106"/>
+        <location filename="../device/CDeviceAccessGvfsMtp.cpp" line="110"/>
         <source>Delete from Devices...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../device/CDeviceAccessGvfsMtp.cpp" line="107"/>
+        <location filename="../device/CDeviceAccessGvfsMtp.cpp" line="111"/>
         <source>Failed to delete file &quot;%1&quot; from device. Reason: %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -766,22 +766,22 @@ To solve this conflict you can create and save a clone, force your version or dr
 <context>
     <name>CDeviceAccessKMtp</name>
     <message>
-        <location filename="../device/CDeviceAccessKMtp.cpp" line="85"/>
+        <location filename="../device/CDeviceAccessKMtp.cpp" line="88"/>
         <source>Send to Devices...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../device/CDeviceAccessKMtp.cpp" line="86"/>
+        <location filename="../device/CDeviceAccessKMtp.cpp" line="89"/>
         <source>Failed to send file &quot;%1&quot; to device.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../device/CDeviceAccessKMtp.cpp" line="99"/>
+        <location filename="../device/CDeviceAccessKMtp.cpp" line="102"/>
         <source>Delete from Devices...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../device/CDeviceAccessKMtp.cpp" line="100"/>
+        <location filename="../device/CDeviceAccessKMtp.cpp" line="103"/>
         <source>Failed to delete file &quot;%1&quot; from device. Reason: %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -794,7 +794,7 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation>Изображение %1</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/serialization.cpp" line="978"/>
+        <location filename="../gis/gpx/serialization.cpp" line="980"/>
         <source>Unknown</source>
         <translation>Неизвестно</translation>
     </message>
@@ -825,6 +825,14 @@ To solve this conflict you can create and save a clone, force your version or dr
         <location filename="../device/CDeviceGarminArchiveMtp.cpp" line="41"/>
         <source>Archive - loaded</source>
         <translation type="unfinished">Архив - загружен</translation>
+    </message>
+</context>
+<context>
+    <name>CDeviceGenericMtp</name>
+    <message>
+        <location filename="../device/CDeviceGenericMtp.cpp" line="47"/>
+        <source>Unknown MTP</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1235,60 +1243,52 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation type="unfinished">Не удалось загрузить файл %1...</translation>
     </message>
     <message>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="240"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="225"/>
         <source>total elapsed time: %1%2&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="245"/>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="310"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="235"/>
         <source>total distance: %1%2&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="306"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="230"/>
         <source>total timer time: %1%2&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="314"/>
-        <source>enhanced average speed: %1%2&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="250"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="240"/>
         <source>enhanced max speed: %1%2&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="255"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="245"/>
         <source>enhanced min altitude: %1%2&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="260"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="250"/>
         <source>enhanced max altitude: %1%2&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="264"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="254"/>
         <source>total calories: %1kcal&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="269"/>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="318"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="259"/>
         <source>total ascent: %1%2&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="274"/>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="322"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="264"/>
         <source>total descent: %1%2&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/fit2/CFit2Project.cpp" line="278"/>
+        <location filename="../gis/fit2/CFit2Project.cpp" line="268"/>
         <source>number of laps: %1&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1758,40 +1758,45 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation>В движении: - (-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1256"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1267"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1347"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1386"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1545"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2778"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="649"/>
+        <source>Descent: %1%2 (%3%)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1258"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1269"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1349"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1388"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1547"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2780"/>
         <source>track</source>
         <translation>трек</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1469"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1471"/>
         <source>Hide point %1.</source>
         <translation>Скрыть точку %1.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1471"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1473"/>
         <source>Hide points %1..%2.</source>
         <translation>Скрыть точки %1..%2.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="688"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="698"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="690"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="700"/>
         <source>, %1%2</source>
         <translation>, %1%2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="338"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1722"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1724"/>
         <source>min.</source>
         <translation>мин.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="338"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1722"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1724"/>
         <source>max.</source>
         <translation>макс.</translation>
     </message>
@@ -1831,132 +1836,131 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation>Спуск: -(-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="642"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="643"/>
         <source>Ascent: %1%2 (%3%)</source>
         <translation>Подъём: %1 %2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="647"/>
         <source>, Descent: %1%2 (%3%)</source>
-        <translation>, Спуск: %1 %2 (%3%)</translation>
+        <translation type="vanished">, Спуск: %1 %2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="652"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="654"/>
         <source>Distance: %1%2 (%3%)</source>
         <translation>Расстояние: %1 %2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="657"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="659"/>
         <source>, Moving: %1%2 (%3%)</source>
         <translation>, В движении: %1%2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="679"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="681"/>
         <source>Ascent: -</source>
         <translation>Подъём: -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="680"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="682"/>
         <source>Descent: -</source>
         <translation>Спуск: -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="684"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="686"/>
         <source>Ascent: %1%2</source>
         <translation>Подъём: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="694"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="696"/>
         <source>, Descent: %1%2</source>
         <translation>, Спуск: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="703"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="705"/>
         <source>Distance: %1%2</source>
         <translation>Расстояние: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="707"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="709"/>
         <source>, Time: %1%2</source>
         <translation>, Время: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1303"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1305"/>
         <source>Permanently removed points %1..%2</source>
         <translation>Удалены безвозвратно точки %1..%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1314"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1316"/>
         <source>Track Point Info...</source>
         <translation>Информация о точках трека ...</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1315"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1317"/>
         <source>Enter some text to be attached to this track point:</source>
         <translation>Введите текст, который будет прикреплен к этой точке трека:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1322"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1324"/>
         <source>Add track point desc.: %1</source>
         <translation>Добавить описание точки трека: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1330"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1332"/>
         <source>Changed track point desc.: %1</source>
         <translation>Изменено описание точки трека: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1338"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1340"/>
         <source>Removed track point desc.</source>
         <translation>Удалено описание точки трека</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1507"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1509"/>
         <source>Delete point %1.</source>
         <translation>Удалить точку %1.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1509"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1511"/>
         <source>Delete points %1..%2.</source>
         <translation>Удалить точки %1...%2.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1532"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1534"/>
         <source>Show points.</source>
         <translation>Показать точки.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2157"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2159"/>
         <source>Changed name</source>
         <translation>Изменено имя</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2162"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2164"/>
         <source>Changed comment</source>
         <translation>Изменён комментарий</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2167"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2169"/>
         <source>Changed description</source>
         <translation>Изменено описание</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2172"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2174"/>
         <source>Changed links</source>
         <translation>Изменены ссылки</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2180"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2182"/>
         <source>Changed elevation of point %1 to %2 %3</source>
         <translation>Изменена высота точки %1 на %2 %3</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2203"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2205"/>
         <source>Changed activity to &apos;%1&apos; for complete track.</source>
         <translation>Активность изменена на &apos;%1&apos; для всего трека.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2229"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2231"/>
         <source>Changed activity to &apos;%1&apos; for range(%2..%3).</source>
         <translation>Активность изменена на &apos;%1&apos; для интервала (%2..%3).</translation>
     </message>
@@ -2802,17 +2806,17 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation>Изменить радиус близости...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1047"/>
+        <location filename="../gis/CGisListWks.cpp" line="1062"/>
         <source>Waypoints</source>
         <translation>Маршрутные точки</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1052"/>
+        <location filename="../gis/CGisListWks.cpp" line="1067"/>
         <source>Wayp. &amp; Tracks</source>
         <translation>Маршр. точки и треки</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1054"/>
+        <location filename="../gis/CGisListWks.cpp" line="1069"/>
         <source>Tracks</source>
         <translation>Треки</translation>
     </message>
@@ -2935,8 +2939,8 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation>Изменить точки области</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="970"/>
-        <location filename="../gis/CGisListWks.cpp" line="1058"/>
+        <location filename="../gis/CGisListWks.cpp" line="985"/>
+        <location filename="../gis/CGisListWks.cpp" line="1073"/>
         <source>Set Track Color</source>
         <translation>Установить цвет трека</translation>
     </message>
@@ -2946,13 +2950,13 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation>Удалить элементы...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1050"/>
+        <location filename="../gis/CGisListWks.cpp" line="1065"/>
         <source>Change Icon</source>
         <translation>Изменить пиктограмма</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1833"/>
-        <location filename="../gis/CGisListWks.cpp" line="1895"/>
+        <location filename="../gis/CGisListWks.cpp" line="1848"/>
+        <location filename="../gis/CGisListWks.cpp" line="1910"/>
         <source>&lt;b&gt;Update devices&lt;/b&gt;&lt;p&gt;Update %1&lt;br/&gt;Please wait...&lt;/p&gt;</source>
         <translation>&lt;b&gt;Обновить устройства&lt;/b&gt;&lt;p&gt;Обновить %1&lt;br/&gt;Подождите...&lt;/p&gt;</translation>
     </message>
@@ -2962,27 +2966,27 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation>Сохранение рабочей области. Подождите.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="780"/>
+        <location filename="../gis/CGisListWks.cpp" line="794"/>
         <source>Loading workspace. Please wait.</source>
         <translation>Загрузка рабочей области. Подождите.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1326"/>
+        <location filename="../gis/CGisListWks.cpp" line="1341"/>
         <source>Close all projects...</source>
         <translation>Закрыть все проекты...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1326"/>
+        <location filename="../gis/CGisListWks.cpp" line="1341"/>
         <source>This will remove all projects from the workspace.</source>
         <translation>Это удалит все проекты из рабочей области.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1349"/>
+        <location filename="../gis/CGisListWks.cpp" line="1364"/>
         <source>Delete project...</source>
         <translation>Удалить проект...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1350"/>
+        <location filename="../gis/CGisListWks.cpp" line="1365"/>
         <source>Do you really want to delete %1?</source>
         <translation>Вы действительно хотите удалить %1?</translation>
     </message>
@@ -3044,17 +3048,17 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation>Копировать элементы ...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="605"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="606"/>
         <source>Change waypoint symbols.</source>
         <translation>Изменить символы путевых точек.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="795"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="796"/>
         <source>Undefined Waypoint Symbol</source>
         <translation>Неопределенный символ путевой точки</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="796"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="797"/>
         <source>QMapShack couldn&apos;t automatically assign a waypoint icon to one of the POIs you want to convert to a waypoint.
 
 Do you want to choose an icon for each new waypoint for which no icon could be found?
@@ -3065,22 +3069,22 @@ If you choose &apos;No&apos; the respective last used waypoint icon is applied.<
 Если вы выберете &quot;Нет&quot;, то будет применена пиктограмма последней использованной путевой точки.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="859"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="860"/>
         <source>Cut Track...</source>
         <translation>Вырезать трек...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="859"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="860"/>
         <source>Do you want to delete the original track?</source>
         <translation>Желаете удалить изначальный трек?</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="1081"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="1082"/>
         <source>Enter new proximity range.</source>
         <translation>Ввести новый радиус близости.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="1082"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="1083"/>
         <source>Is no-go area</source>
         <translation>Использовать как запретную зону</translation>
     </message>
@@ -5396,65 +5400,65 @@ is not a valid coordinate system definition:
         <translation>Третья альтернатива</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="158"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="155"/>
         <source>BRouter (offline)</source>
         <translation>BRouter (без Интернета)</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="163"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="160"/>
         <source>BRouter (online)</source>
         <translation>BRouter (требуется связь с Интернетом)</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="190"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="187"/>
         <source>profile: %1, alternative: %2</source>
         <translation>Профиль: %1, альтернатива: %2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="336"/>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="462"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="332"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="458"/>
         <source>response is empty</source>
         <translation>Ответ пуст</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="388"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="384"/>
         <source>Bad response from server: %1</source>
         <translation>Плохой ответ от сервера: %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="434"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="430"/>
         <source>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Routing request sent to server. Please wait...</source>
         <translation>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Запрос маршрутизации отправлен на сервер. Пожалуйста, подождите...</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="318"/>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="437"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="314"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="433"/>
         <source>Calculate route with %1</source>
         <translation>Вычислить маршрут с %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="327"/>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="453"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="323"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="449"/>
         <source>this version of BRouter does not support more then 1 nogo-area</source>
         <translation>эта версия BRouter не поддерживает более 1 запретной зоны</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="491"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="487"/>
         <source>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Bad response from server:&lt;br/&gt;%1</source>
         <translation>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Плохой ответ от сервера:&lt;br/&gt;%1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="485"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="481"/>
         <source>&lt;br/&gt;Calculation time: %1s</source>
         <translation>&lt;br/&gt;Время расчёта: %1 сек.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="530"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="526"/>
         <source>BRouter (Version %1.%2.%3)</source>
         <translation>BRouter (Версия %1.%2.%3)</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="571"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="567"/>
         <source>online</source>
         <translation>Онлайн</translation>
     </message>
@@ -5601,7 +5605,7 @@ is not a valid coordinate system definition:
         <translation>Остановлено</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterLocal.cpp" line="192"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterLocal.cpp" line="191"/>
         <source>not installed</source>
         <translation>Не установлено</translation>
     </message>
@@ -5810,6 +5814,21 @@ Please check the logs if Brouter fails to start.</source>
 </context>
 <context>
     <name>CRouterBRouterTilesPage</name>
+    <message>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesPage.cpp" line="59"/>
+        <source>Download of routing data is in progress.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesPage.cpp" line="61"/>
+        <source>You did not yet download the selected routing data.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesPage.cpp" line="65"/>
+        <source>Do you want to cancel or continue with setup</source>
+        <translation type="unfinished"></translation>
+    </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesPage.cpp" line="67"/>
         <source>Continue with Setup</source>
@@ -8093,8 +8112,8 @@ line %2, column %3:
         <location filename="../gis/trk/CTableTrk.cpp" line="169"/>
         <location filename="../gis/trk/CTableTrk.cpp" line="172"/>
         <location filename="../gis/trk/CTableTrk.cpp" line="176"/>
-        <location filename="../gis/trk/CTableTrk.cpp" line="185"/>
         <location filename="../gis/trk/CTableTrk.cpp" line="187"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="189"/>
         <source>%1%2</source>
         <translation>%1%2</translation>
     </message>
@@ -9122,165 +9141,135 @@ line %2, column %3:
     <name>IAbout</name>
     <message>
         <location filename="../IAbout.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="339"/>
+        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="205"/>
         <source>About....</source>
         <translation>О программе....</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="55"/>
-        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="341"/>
+        <location filename="../IAbout.ui" line="30"/>
+        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="206"/>
         <source>&lt;b&gt;QMapShack&lt;/b&gt;, Version</source>
         <translation>&lt;b&gt;QMapShack&lt;/b&gt;, версия</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="62"/>
-        <location filename="../IAbout.ui" line="113"/>
-        <location filename="../IAbout.ui" line="127"/>
-        <location filename="../IAbout.ui" line="141"/>
-        <location filename="../IAbout.ui" line="155"/>
-        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="342"/>
-        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="346"/>
-        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="348"/>
-        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="350"/>
-        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="352"/>
+        <location filename="../IAbout.ui" line="37"/>
+        <location filename="../IAbout.ui" line="88"/>
+        <location filename="../IAbout.ui" line="102"/>
+        <location filename="../IAbout.ui" line="116"/>
+        <location filename="../IAbout.ui" line="130"/>
+        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="207"/>
+        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="211"/>
+        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="213"/>
+        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="215"/>
+        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="217"/>
         <source>TextLabel</source>
         <translation>Метка текста</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="106"/>
-        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="345"/>
+        <location filename="../IAbout.ui" line="81"/>
+        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="210"/>
         <source>Qt</source>
         <translation>Qt</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="120"/>
-        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="347"/>
+        <location filename="../IAbout.ui" line="95"/>
+        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="212"/>
         <source>GDAL</source>
         <translation>GDAL</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="134"/>
-        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="349"/>
+        <location filename="../IAbout.ui" line="109"/>
+        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="214"/>
         <source>Proj4</source>
         <translation>Proj4</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="148"/>
-        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="351"/>
+        <location filename="../IAbout.ui" line="123"/>
+        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="216"/>
         <source>Routino</source>
         <translation>Routino</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="179"/>
-        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="353"/>
         <source>Czech:</source>
-        <translation>Чешский:</translation>
+        <translation type="vanished">Чешский:</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="212"/>
-        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="356"/>
         <source>Pavel Fric</source>
-        <translation>Pavel Fric</translation>
+        <translation type="vanished">Pavel Fric</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="225"/>
-        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="357"/>
         <source>German:</source>
-        <translation>Немецкий:</translation>
+        <translation type="vanished">Немецкий:</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="235"/>
-        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="358"/>
         <source>Oliver Eichler</source>
-        <translation>Oliver Eichler</translation>
+        <translation type="vanished">Oliver Eichler</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="332"/>
-        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="368"/>
+        <location filename="../IAbout.ui" line="146"/>
+        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="218"/>
         <source>&lt;b&gt;Contributors to the code:&lt;/b&gt;</source>
         <translation>&lt;b&gt;Соавторы:&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="339"/>
-        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="369"/>
+        <location filename="../IAbout.ui" line="153"/>
+        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="219"/>
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="195"/>
-        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="354"/>
         <source>Dutch:</source>
-        <translation>Голландский:</translation>
+        <translation type="vanished">Голландский:</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="205"/>
-        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="355"/>
         <source>Harrie Klomp</source>
-        <translation>Harrie Klomp</translation>
+        <translation type="vanished">Harrie Klomp</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="248"/>
-        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="359"/>
         <source>French:</source>
-        <translation>Французский:</translation>
+        <translation type="vanished">Французский:</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="258"/>
-        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="360"/>
         <source>Rainer Unseld </source>
-        <translation>Rainer Unseld</translation>
+        <translation type="vanished">Rainer Unseld</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="265"/>
-        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="361"/>
         <source>Jose Luis Domingo Lopez</source>
-        <translation>Jose Luis Domingo Lopez</translation>
+        <translation type="vanished">Jose Luis Domingo Lopez</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="278"/>
-        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="362"/>
         <source>Spanish:</source>
-        <translation>Испанский:</translation>
+        <translation type="vanished">Испанский:</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="288"/>
-        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="363"/>
         <source>&lt;b&gt;Translation:&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Перевод:&lt;/b&gt;</translation>
+        <translation type="vanished">&lt;b&gt;Перевод:&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="295"/>
-        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="364"/>
         <source>Russian:</source>
-        <translation>Русский:</translation>
+        <translation type="vanished">Русский:</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="302"/>
-        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="365"/>
         <source>Wolfgang Thämelt</source>
-        <translation>Wolfgang Thämelt</translation>
+        <translation type="vanished">Wolfgang Thämelt</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="309"/>
-        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="366"/>
         <source>Italian:</source>
-        <translation>Итальянский:</translation>
+        <translation type="vanished">Итальянский:</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="316"/>
-        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="367"/>
         <source>Ivo Reano</source>
-        <translation>Ivo Reano</translation>
+        <translation type="vanished">Ivo Reano</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="356"/>
-        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="370"/>
+        <location filename="../IAbout.ui" line="170"/>
+        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="220"/>
         <source>This software is licensed under GPL3 or any later version</source>
         <translation>Это программное обеспечение лицензировано под GPL3 или любой более поздней версией</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="363"/>
-        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="371"/>
+        <location filename="../IAbout.ui" line="177"/>
+        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="221"/>
         <source>© 2017 Oliver Eichler (oliver.eichler@gmx.de)</source>
         <translation>© 2017 Oliver Eichler (oliver.eichler@gmx.de)</translation>
     </message>
@@ -10631,7 +10620,7 @@ zoom-out for use of the DEM data.</source>
 <context>
     <name>IDevice</name>
     <message>
-        <location filename="../device/IDevice.cpp" line="255"/>
+        <location filename="../device/IDevice.cpp" line="258"/>
         <source>There is another project with the same name. If you press &apos;ok&apos; it will be removed and replaced.</source>
         <translation>Существует другой проект с таким же именем. Если нажать кнопку &apos;ОК&apos;, он будет удалён и заменён.</translation>
     </message>
@@ -12118,49 +12107,49 @@ It is either a new item or it has been deleted in the database by someone else.<
         <translation>Режим &apos;только чтения&apos;...</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="705"/>
-        <location filename="../gis/IGisItem.cpp" line="738"/>
+        <location filename="../gis/IGisItem.cpp" line="708"/>
+        <location filename="../gis/IGisItem.cpp" line="741"/>
         <source>&lt;h4&gt;Description:&lt;/h4&gt;</source>
         <translation>&lt;h4&gt;Описание:&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="740"/>
+        <location filename="../gis/IGisItem.cpp" line="743"/>
         <source>&lt;p&gt;--- no description ---&lt;/p&gt;</source>
         <translation>&lt;p&gt;---нет описания---&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="921"/>
+        <location filename="../gis/IGisItem.cpp" line="924"/>
         <source>Rating: </source>
         <translation>Рейтинг:</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="925"/>
+        <location filename="../gis/IGisItem.cpp" line="928"/>
         <source>Keywords: </source>
         <translation>Ключевые слова:</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="713"/>
+        <location filename="../gis/IGisItem.cpp" line="716"/>
         <source>&lt;h4&gt;Comment:&lt;/h4&gt;</source>
         <translation>&lt;h4&gt;Комментарий:&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="721"/>
-        <location filename="../gis/IGisItem.cpp" line="748"/>
+        <location filename="../gis/IGisItem.cpp" line="724"/>
+        <location filename="../gis/IGisItem.cpp" line="751"/>
         <source>&lt;h4&gt;Links:&lt;/h4&gt;</source>
         <translation>&lt;h4&gt;Ссылки:&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="750"/>
+        <location filename="../gis/IGisItem.cpp" line="753"/>
         <source>&lt;p&gt;--- no links ---&lt;/p&gt;</source>
         <translation>&lt;p&gt;---нет ссылок---&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="855"/>
+        <location filename="../gis/IGisItem.cpp" line="858"/>
         <source>Edit name...</source>
         <translation>Изменить имя...</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="856"/>
+        <location filename="../gis/IGisItem.cpp" line="859"/>
         <source>Enter new %1 name.</source>
         <translation>Задать новое имя (%1).</translation>
     </message>
@@ -12189,70 +12178,70 @@ It is either a new item or it has been deleted in the database by someone else.<
 <context>
     <name>IGisProject</name>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="152"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="155"/>
         <source>Save project?</source>
         <translation>Сохранить проект?</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="153"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="156"/>
         <source>&lt;h3&gt;%1&lt;/h3&gt;The project was changed. Save before closing it?</source>
         <translation>&lt;h3&gt;%1&lt;/h3&gt; Проект изменён. Сохранить его перед закрытием?</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="318"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="321"/>
         <source>%1: Correlate tracks and waypoints.</source>
         <translation>%1: коррелировать треки и маршрутные точки.</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="326"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="329"/>
         <source>&lt;h3&gt;%1&lt;/h3&gt;Did that take too long for you? Do you want to skip correlation of tracks and waypoints for this project in the future?</source>
         <translation>&lt;h3&gt;%1&lt;/h3&gt; Было слишком долго? Желаете ли вы пропускать корреляцию треков и маршрутных точек для этого проекта в будущем?</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="329"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="332"/>
         <source>Canceled correlation...</source>
         <translation>Корреляция отменена ...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="368"/>
-        <location filename="../gis/prj/IGisProject.cpp" line="415"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="371"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="418"/>
         <source>Save &quot;%1&quot; to...</source>
         <translation>Сохранить &quot;%1&quot; в...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="479"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="482"/>
         <source>&lt;br/&gt;
 Filename: %1</source>
         <translation>&lt;br/&gt;
 Имя файла: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="483"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="486"/>
         <source>Waypoints: %1</source>
         <translation>Маршрутные точки: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="486"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="489"/>
         <source>Tracks: %1</source>
         <translation>Треки: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="489"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="492"/>
         <source>Routes: %1</source>
         <translation>Маршруты: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="492"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="495"/>
         <source>Areas: %1</source>
         <translation>Области: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="596"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="599"/>
         <source>Are you sure you want to delete &apos;%1&apos; from project &apos;%2&apos;?</source>
         <translation>Вы уверены что хотите удалить &apos;%1&apos; из проекта &apos;%2&apos;?</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="598"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="601"/>
         <source>Delete...</source>
         <translation>Удалить...</translation>
     </message>
@@ -13666,97 +13655,97 @@ Tip:
 <context>
     <name>IMouseEditLine</name>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="226"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="230"/>
         <source>&lt;b&gt;New Line&lt;/b&gt;&lt;br/&gt;Move the mouse and use the left mouse button to drop points. When done use the right mouse button to stop.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Новая линия&lt;/b&gt;&lt;br/&gt;Переместить мышку и использовать левую кнопку мышки, чтобы создать точки. Когда это сделано остановить с помощью правой кнопки мышки.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="255"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="259"/>
         <source>&lt;b&gt;Delete Point&lt;/b&gt;&lt;br/&gt;Move the mouse close to a point and press the left button to delete it.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Удалить точку&lt;/b&gt;&lt;br/&gt;Переместить мышку близко к точке и нажать левую кнопку, чтобы удалить её.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="264"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="268"/>
         <source>&lt;b&gt;Select Range of Points&lt;/b&gt;&lt;br/&gt;Left click on first point to start selection. Left click second point to complete selection and choose from options. Use the right mouse button to cancel.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Выбрать интервал точек&lt;/b&gt;&lt;br/&gt;Нажать левой кнопкой на первой точке, чтобы начать выбор. Нажать левой кнопкой на второй точке, чтобы завершить выбор и выбрать параметры. Использовать правую кнопку мышки для отмены.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="273"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="277"/>
         <source>&lt;b&gt;Move Point&lt;/b&gt;&lt;br/&gt;Move the mouse close to a point and press the left button to make it stick to the cursor. Move the mouse to move the point. Drop the point by a left click. Use the right mouse button to cancel.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Переместить точку&lt;/b&gt;&lt;br/&gt;Переместить мышку близко к точке и нажать левую кнопку. Точка будет прилипать к курсору, и вы можете переместить её. Использовать правую кнопку мышки для отмены.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="283"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="287"/>
         <source>&lt;b&gt;Add Point&lt;/b&gt;&lt;br/&gt;Move the mouse close to a line segment and press the left button to add a point. The point will stick to the cursor and you can move it.  Drop the point by a left click. Use the right mouse button to cancel.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Добавить точку&lt;/b&gt;&lt;br/&gt;Переместить мышку близко к сегменту линии и нажать левую кнопку, чтобы добавить точку. Точка будет прилипать к курсору, и вы можете переместить его. Отбросьте точку с помощью левой кнопки мышки. Использовать правую кнопку мышки для отмены.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="293"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="297"/>
         <source>&lt;b&gt;No Routing&lt;/b&gt;&lt;br/&gt;All points will be connected with a straight line.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Без маршрутизации&lt;/b&gt;&lt;br/&gt;Все точки будут соединены прямыми линиями.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="298"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="302"/>
         <source>&lt;b&gt;Auto Routing&lt;/b&gt;&lt;br/&gt;The current router setup is used to derive a route between points. &lt;b&gt;Note:&lt;/b&gt; The selected router must be able to route on-the-fly. Offline routers usually can do, online routers can&apos;t.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Автоматическая маршрутизация&lt;/b&gt;&lt;br/&gt;Настройка маршрутизатора используется для вычисления маршрута между точками.&lt;b&gt;Замечание&lt;/b&gt;Выбранный маршрутизатор должен быть способным вычислять маршруты налету. Оффлайновые маршрутизаторы обычно это могут, Интернет маршрутизаторы этого не могут.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="305"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="309"/>
         <source>&lt;b&gt;Vector Routing&lt;/b&gt;&lt;br/&gt;Connect points with a line from a loaded vector map if possible.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Векторная маршрутизация&lt;/b&gt;&lt;br/&gt;Если возможно соединить точки линией с загруженной векторной карты.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="311"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="315"/>
         <source>&lt;b&gt;Track Routing&lt;/b&gt;&lt;br/&gt;Connect points with a line from a loaded track if possible.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Маршрутизация с помощью трека&lt;/b&gt;&lt;br/&gt;По возможности соединить точки линией загруженного трека.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="317"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="329"/>
         <source>Started Optimization.</source>
         <translation>Оптимизация начата.</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="329"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="341"/>
         <source>Optimization failed.</source>
         <translation>Оптимизация не удалась.</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="329"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="341"/>
         <source>Note:</source>
         <translation>Замечание:</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="330"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="342"/>
         <source>The selected router must be able to route on-the-fly. Offline routers usually can do, online routers can&apos;t.</source>
         <translation>Выбранный маршрутизатор должен поддержать маршрутизацию на лету. Оффлайн маршрутизаторы обычно поддерживают, онлайн маршрутизаторы не поддерживают этого.</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="333"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="345"/>
         <source>Optimization successful.</source>
         <translation>Оптимизация удалась.</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="487"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="499"/>
         <source>&lt;b&gt;%1 Metrics&lt;/b&gt;</source>
         <translation>&lt;b&gt;%1. Метрика&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="490"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="502"/>
         <source>Distance:</source>
         <translation>Расстояние:</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="492"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="504"/>
         <source>Ascent:</source>
         <translation>Подъём:</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="494"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="506"/>
         <source>Descent:</source>
         <translation>Спуск:</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.h" line="141"/>
+        <location filename="../mouse/line/IMouseEditLine.h" line="146"/>
         <source>&lt;br/&gt;&lt;b&gt;Move the map&lt;/b&gt;&lt;br/&gt;If you keep the left mouse button pressed and move the mouse, you will move the map.&lt;br/&gt;&lt;br/&gt;</source>
         <translation>&lt;br/&gt;&lt;b&gt;Переместить карту&lt;/b&gt;&lt;br/&gt;Если удержите нажатой левую кнопку мышки и переместите мышку, вы будете перемещать карту.&lt;br/&gt;&lt;br/&gt;</translation>
     </message>
@@ -14232,101 +14221,99 @@ or
     <name>IRouterBRouter</name>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="20"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="248"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="235"/>
         <source>Form</source>
         <translation>Форма</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="43"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="249"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="236"/>
         <source>Profile</source>
         <translation>Профиль</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="50"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="250"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="237"/>
         <source>Alternative</source>
         <translation>Альтернатива</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="79"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="252"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="239"/>
         <source>display selected routing profile</source>
         <translation>Отобразить выбранный профиль маршрутизации</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="82"/>
-        <location filename="../gis/rte/router/IRouterBRouter.ui" line="143"/>
-        <location filename="../gis/rte/router/IRouterBRouter.ui" line="157"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="254"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="261"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="265"/>
+        <location filename="../gis/rte/router/IRouterBRouter.ui" line="119"/>
+        <location filename="../gis/rte/router/IRouterBRouter.ui" line="133"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="241"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="247"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="251"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouter.ui" line="102"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="255"/>
         <source>on-the-fly routing</source>
-        <translation>Маршрутизация на лету</translation>
+        <translation type="vanished">Маршрутизация на лету</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouter.ui" line="126"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="256"/>
+        <location filename="../gis/rte/router/IRouterBRouter.ui" line="102"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="242"/>
         <source>BRouter: </source>
         <translation>BRouter:</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouter.ui" line="133"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="257"/>
+        <location filename="../gis/rte/router/IRouterBRouter.ui" line="109"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="243"/>
         <source>not running</source>
         <translation>Не запущено</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouter.ui" line="140"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="259"/>
+        <location filename="../gis/rte/router/IRouterBRouter.ui" line="116"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="245"/>
         <source>start/stop BRouter</source>
         <translation>Старт / стоп BRouter</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouter.ui" line="154"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="263"/>
+        <location filename="../gis/rte/router/IRouterBRouter.ui" line="130"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="249"/>
         <source>show BRouter console</source>
         <translation>Показать консоль BRouter</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouter.ui" line="187"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="266"/>
+        <location filename="../gis/rte/router/IRouterBRouter.ui" line="163"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="252"/>
         <source>Setup</source>
         <translation>Настройка</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouter.ui" line="196"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="267"/>
+        <location filename="../gis/rte/router/IRouterBRouter.ui" line="172"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="253"/>
         <source>Caution! BRouter is listening on all ports for connections.</source>
         <translation>Осторожно! BRouter прослушивает все порты для соединений.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouter.ui" line="234"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="268"/>
+        <location filename="../gis/rte/router/IRouterBRouter.ui" line="210"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="254"/>
         <source>Dismiss</source>
         <translation>Отклонить</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouter.ui" line="256"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="269"/>
+        <location filename="../gis/rte/router/IRouterBRouter.ui" line="232"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="255"/>
         <source>&lt;p&gt;&lt;a href=&quot;http://brouter.de/brouter/&quot; target=&quot;_blank&quot;&gt;BRouter&lt;/a&gt; © &lt;a href=&quot;https://github.com/abrensch/brouter/blob/master/LICENSE&quot; target=&quot;_blank&quot;&gt;ABrensch, License GPLv3&lt;/a&gt;&lt;/p&gt;</source>
         <translation>&lt;p&gt;&lt;a href=&quot;http://brouter.de/brouter/&quot; target=&quot;_blank&quot;&gt;BRouter&lt;/a&gt; © &lt;a href=&quot;https://github.com/abrensch/brouter/blob/master/LICENSE&quot; target=&quot;_blank&quot;&gt;ABrensch, лицензия GPLv3&lt;/a&gt;&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouter.ui" line="269"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="270"/>
+        <location filename="../gis/rte/router/IRouterBRouter.ui" line="245"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="256"/>
         <source>&lt;p&gt;Directions Courtesy of &lt;a href=&quot;http://brouter.de/brouter-web/&quot; target=&quot;_blank&quot;&gt;BRouter-web&lt;/a&gt; &lt;/p&gt;</source>
         <translation>&lt;p&gt;Любезность &lt;a href=&quot;http://brouter.de/brouter-web/&quot; target=&quot;_blank&quot;&gt;BRouter-web&lt;/a&gt; &lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouter.ui" line="282"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="271"/>
+        <location filename="../gis/rte/router/IRouterBRouter.ui" line="258"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="257"/>
         <source>&lt;p&gt;Routing data &lt;a href=&quot;http://www.openstreetmap.org/copyright&quot; target=&quot;_blank&quot;&gt;© OpenStreetMap&lt;/a&gt; contributors&lt;/p&gt;</source>
         <translation>&lt;p&gt;Данные маршрутизации &lt;a href=&quot;http://www.openstreetmap.org/copyright&quot; target=&quot;_blank&quot;&gt;© OpenStreetMap&lt;/a&gt;&lt;/p&gt;</translation>
     </message>
@@ -15290,10 +15277,8 @@ or
         <translation>O</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IScrOptEditLine.ui" line="238"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="284"/>
         <source>Use auto-routing to between points. (Key: A)</source>
-        <translation>Использовать автоматическую маршрутизацию между точками. (клавиша A)</translation>
+        <translation type="vanished">Использовать автоматическую маршрутизацию между точками. (клавиша A)</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="261"/>
@@ -15334,6 +15319,12 @@ This is known as solving the Traveling Salesman Problem, however start and end a
         <translation>0</translation>
     </message>
     <message>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="238"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="284"/>
+        <source>Use auto-routing in between points. (Key: A)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="241"/>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="248"/>
         <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="286"/>
@@ -15366,13 +15357,13 @@ This is known as solving the Traveling Salesman Problem, however start and end a
     <name>IScrOptOvlArea</name>
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptOvlArea.h" line="129"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptOvlArea.h" line="130"/>
         <source>Form</source>
         <translation>Форма</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="40"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptOvlArea.h" line="131"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptOvlArea.h" line="132"/>
         <source>View details and edit.</source>
         <translation>Показать и изменить детали.</translation>
     </message>
@@ -15383,48 +15374,48 @@ This is known as solving the Traveling Salesman Problem, however start and end a
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="85"/>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="106"/>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="120"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptOvlArea.h" line="133"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptOvlArea.h" line="137"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptOvlArea.h" line="141"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptOvlArea.h" line="145"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptOvlArea.h" line="149"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptOvlArea.h" line="153"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptOvlArea.h" line="134"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptOvlArea.h" line="138"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptOvlArea.h" line="142"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptOvlArea.h" line="146"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptOvlArea.h" line="150"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptOvlArea.h" line="154"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="54"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptOvlArea.h" line="135"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptOvlArea.h" line="136"/>
         <source>Set tags and rating.</source>
         <translation>Установить теги и рейтинг.</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="68"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptOvlArea.h" line="139"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptOvlArea.h" line="140"/>
         <source>Copy area into another project.</source>
         <translation>Копировать область в другой проект.</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="82"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptOvlArea.h" line="143"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptOvlArea.h" line="144"/>
         <source>Delete area from project.</source>
         <translation>Удалить область с проекта.</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="103"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptOvlArea.h" line="147"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptOvlArea.h" line="148"/>
         <source>Edit shape of the area.</source>
         <translation>Изменить фигуру области.</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="117"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptOvlArea.h" line="151"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptOvlArea.h" line="152"/>
         <source>Toggle Nogo-Area</source>
         <translation>Переключить запретную зону</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="152"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptOvlArea.h" line="154"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptOvlArea.h" line="155"/>
         <source>TextLabel</source>
         <translation>Метка текста</translation>
     </message>
@@ -15685,13 +15676,13 @@ This is known as solving the Traveling Salesman Problem, however start and end a
     <name>IScrOptRte</name>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="176"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="177"/>
         <source>Form</source>
         <translation>Форма</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="40"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="178"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="179"/>
         <source>View details and edit.</source>
         <translation>Показать и изменить детали.</translation>
     </message>
@@ -15707,83 +15698,83 @@ This is known as solving the Traveling Salesman Problem, however start and end a
         <location filename="../gis/rte/IScrOptRte.ui" line="165"/>
         <location filename="../gis/rte/IScrOptRte.ui" line="179"/>
         <location filename="../gis/rte/IScrOptRte.ui" line="193"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="180"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="184"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="188"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="192"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="196"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="200"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="204"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="208"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="212"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="216"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="220"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="181"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="185"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="189"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="193"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="197"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="201"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="205"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="209"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="213"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="217"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="221"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="54"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="182"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="183"/>
         <source>Set tags and rating.</source>
         <translation>Установить теги и рейтинг.</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="68"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="186"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="187"/>
         <source>Copy route into another project.</source>
         <translation>Скопировать маршрут в другой проект.</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="82"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="190"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="191"/>
         <source>Delete route from project.</source>
         <translation>Удалить маршрут с проекта.</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="103"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="194"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="195"/>
         <source>Show instructions and details.</source>
         <translation>Показать инструкции и детали.</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="120"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="198"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="199"/>
         <source>Calculate route.</source>
         <translation>Вычислить маршрут.</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="134"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="202"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="203"/>
         <source>Reset route calculation.</source>
         <translation>Сбросить маршрутизацию.</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="148"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="206"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="207"/>
         <source>Move route points.</source>
         <translation>Переместить точки маршрута.</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="162"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="210"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="211"/>
         <source>Reverse Route</source>
         <translation>Обратить маршрут</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="176"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="214"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="215"/>
         <source>Convert route to track</source>
         <translation>Преобразовать маршрут в трек</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="190"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="218"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="219"/>
         <source>Toggle Nogo-Line</source>
         <translation>Переключить запретную линию</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="222"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="221"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="222"/>
         <source>TextLabel</source>
         <translation>Метка текста</translation>
     </message>
@@ -16057,81 +16048,81 @@ This is known as solving the Traveling Salesman Problem, however start and end a
     <name>IScrOptTrk</name>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="230"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="231"/>
         <source>Form</source>
         <translation>Форма</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="31"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="232"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="40"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="233"/>
         <source>View details and edit properties of track.</source>
         <translation>Показать детали и изменить свойства трека.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="34"/>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="48"/>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="62"/>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="76"/>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="97"/>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="122"/>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="141"/>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="155"/>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="169"/>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="188"/>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="202"/>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="216"/>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="230"/>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="244"/>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="258"/>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="272"/>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="289"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="234"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="238"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="242"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="246"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="250"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="262"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="271"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="275"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="279"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="288"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="292"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="296"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="300"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="304"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="308"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="312"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="316"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="43"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="57"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="71"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="85"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="106"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="131"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="150"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="164"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="178"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="197"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="211"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="225"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="239"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="253"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="267"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="281"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="298"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="235"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="239"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="243"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="247"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="251"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="263"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="272"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="276"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="280"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="289"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="293"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="297"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="301"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="305"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="309"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="313"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="317"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="45"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="236"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="54"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="237"/>
         <source>Set tags and rating.</source>
         <translation>Установить теги и рейтинг.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="59"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="240"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="68"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="241"/>
         <source>Copy track into another project.</source>
         <translation>Скопировать трек в другой проект.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="73"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="244"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="82"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="245"/>
         <source>Delete track from project.</source>
         <translation>Удалить трек с проекта.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="94"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="248"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="103"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="249"/>
         <source>Show on-screen profile and detailed information about points.</source>
         <translation>Показать на экране профиль и подробные сведения о точках.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="111"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="252"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="120"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="253"/>
         <source>Select a range of points. You can use that tool to:
 
 * Hide or show points of a track. 
@@ -16153,8 +16144,8 @@ this is the right tool. Simply select the section of bad points
 (возможно и лишь одну точку) и скройте их.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="133"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="264"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="142"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="265"/>
         <source>Edit the position of track points and use automatic routing 
 to create new track points. This is used to create new tracks 
 to plan a tour.
@@ -16170,20 +16161,20 @@ recording. Use the range tool. </source>
 Используйте для этого инструмент интервала.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="152"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="273"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="161"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="274"/>
         <source>Reverse track.</source>
         <translation>Обратить трек.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="166"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="277"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="175"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="278"/>
         <source>Combine tracks.</source>
         <translation>Объединить треки.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="180"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="281"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="189"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="282"/>
         <source>Cut track at selected point. You can use this to:
 
 * remove bad points at the start or end of the track
@@ -16198,50 +16189,50 @@ recording. Use the range tool. </source>
 </translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="199"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="290"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="208"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="291"/>
         <source>Set an activity for the complete track.</source>
         <translation>Установить активность для всего трека.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="213"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="294"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="222"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="295"/>
         <source>Add a description to the selected track point. The track point will be marked with an auto-numbered bullet. A table with all descriptions will be shown in the track details dialog and for highlighted tracks in the map view.</source>
         <translation>Добавить описание к выбранной точке трека. Точка трека будет отмечена маркером с автоматическим номером. Таблица со всеми описаниями будет показана в окне редактирования трека и для выделенных треков в виде карты.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="227"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="298"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="236"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="299"/>
         <source>Change the color of the track.</source>
         <translation>Изменить цвет трека.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="241"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="302"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="250"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="303"/>
         <source>Replace elevation by the view&apos;s DEM data.</source>
         <translation>Заменить высоты данными файлов ЦМР для вида.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="255"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="306"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="264"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="307"/>
         <source>Copy track together with all attached waypoints into another project.</source>
         <translation>Скопировать трек вместе со всеми присоединёнными маршрутными точками в другой проект.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="269"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="310"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="278"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="311"/>
         <source>Convert track to route.</source>
         <translation>Преобразовать трек в маршрут.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="286"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="314"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="295"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="315"/>
         <source>Toggle Nogo-Line</source>
         <translation>Переключить запретную линию</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="318"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="317"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="327"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="318"/>
         <source>TextLabel</source>
         <translation>Метка текста</translation>
     </message>
@@ -16250,13 +16241,13 @@ recording. Use the range tool. </source>
     <name>IScrOptWpt</name>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="20"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="232"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="233"/>
         <source>Form</source>
         <translation>Форма</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="49"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="234"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="235"/>
         <source>View details and edit.</source>
         <translation>Показать детали и изменить.</translation>
     </message>
@@ -16273,96 +16264,96 @@ recording. Use the range tool. </source>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="212"/>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="236"/>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="250"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="236"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="240"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="244"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="248"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="252"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="256"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="260"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="264"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="268"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="276"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="280"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="284"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="237"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="241"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="245"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="249"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="253"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="257"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="261"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="265"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="269"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="277"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="281"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="285"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="63"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="238"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="239"/>
         <source>Set tags and rating.</source>
         <translation>Установить теги и рейтинг.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="77"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="242"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="243"/>
         <source>Copy waypoint into another project.</source>
         <translation>Скопировать маршрутную точку в другой проект.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="91"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="246"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="247"/>
         <source>Delete waypoint from project.</source>
         <translation>Удалить маршрутную точку с проекта.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="112"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="250"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="251"/>
         <source>Show content as static bubble.</source>
         <translation>Показать содержимое в статическом пузырьке.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="129"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="254"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="255"/>
         <source>Move waypoint to a new location.</source>
         <translation>Переместить маршрутную точку в новую позицию.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="143"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="258"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="259"/>
         <source>Clone waypoint and move clone a given distance and angle.</source>
         <translation>Клонировать маршрутную точку и переместить клон на данное расстояние под указанным углом.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="157"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="262"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="263"/>
         <source>Replace elevation by the view&apos;s DEM data.</source>
         <translation>Заменить высоты данными файлов ЦМР для вида.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="178"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="266"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="267"/>
         <source>edit radius of circular area</source>
         <translation>Изменить радиус круга близости</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="209"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="274"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="275"/>
         <source>Switch between proximity and nogo-area</source>
         <translation>Переключить между кругом близости и запретной зоной</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="195"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="270"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="271"/>
         <source>Delete circle defined by waypoint</source>
         <translation>Удалить круг близости маршрутной точки</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="233"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="278"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="279"/>
         <source>Search for information about the waypoint&apos;s position on selected websites.</source>
         <translation>Поиск информации о местоположении маршрутной точки на выбранных веб-сайтах.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="247"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="282"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="283"/>
         <source>Copy position of waypoint to Clipboard.</source>
         <translation>Скопировать позицию маршрутной точки в буфер обмена</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="294"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="285"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="286"/>
         <source>TextLabel</source>
         <translation>Метка текста</translation>
     </message>
@@ -17545,18 +17536,18 @@ simply type the new time/date.</source>
 <context>
     <name>IUnit</name>
     <message>
-        <location filename="../units/IUnit.cpp" line="879"/>
-        <location filename="../units/IUnit.cpp" line="886"/>
+        <location filename="../units/IUnit.cpp" line="881"/>
+        <location filename="../units/IUnit.cpp" line="888"/>
         <source>Error</source>
         <translation>Ошибка</translation>
     </message>
     <message>
-        <location filename="../units/IUnit.cpp" line="880"/>
+        <location filename="../units/IUnit.cpp" line="882"/>
         <source>Bad position format. Must be: &quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot; or &quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot;</source>
         <translation>Неверный формат позиции. Должен быть: &quot;[С|Ю] ddd mm.sss [З|В] ddd mm.sss&quot; или &quot;[С|Ю] ddd.ddd [З|В] ddd.ddd&quot;</translation>
     </message>
     <message>
-        <location filename="../units/IUnit.cpp" line="886"/>
+        <location filename="../units/IUnit.cpp" line="888"/>
         <source>Position values out of bounds. </source>
         <translation>Значения позиции вне допустимого интервала.</translation>
     </message>

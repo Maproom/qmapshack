@@ -42,7 +42,7 @@ class IDeviceAccess : public QObject {
    * @param iconPath    a path to to the icon or empty for the GARMIN icon
    * @return A valid pixmap ion success or an empty one if no icon has been found.
    */
-  virtual QPixmap getIcon(const QString& iconPath = "") = 0;
+  virtual QPixmap getIcon(const QString& iconPath) = 0;
   /**
    * @brief A user readable description of the storage
    */

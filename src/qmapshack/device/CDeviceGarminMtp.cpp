@@ -42,8 +42,15 @@ void CDeviceGarminMtp::setup() {
   if (!device->foundValidStoragePath()) {
     return;
   }
-  // Try to read the icon from the device
-  const QPixmap& pixmap = device->getIcon();
+
+  QPixmap pixmap;
+  const QStringList& files = device->listFilesOnStorage("");
+  if (files.contains("Garmintriangletm.ico")) {
+    pixmap = device->getIcon("Garmintriangletm.ico");
+  } else if (files.contains("Garmintriangletm.icon")) {
+    pixmap = device->getIcon("Garmintriangletm.icon");
+  }
+
   if (!pixmap.isNull()) {
     setIcon(CGisListWks::eColumnIcon, pixmap);
   }

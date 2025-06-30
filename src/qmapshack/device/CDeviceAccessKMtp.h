@@ -30,7 +30,7 @@ class CDeviceAccessKMtp : public IDeviceAccess {
   CDeviceAccessKMtp(const QDBusObjectPath& objectPathStorage, QObject* parent);
   virtual ~CDeviceAccessKMtp() = default;
 
-  QPixmap getIcon(const QString& iconPath = "") override;
+  QPixmap getIcon(const QString& iconPath) override;
   QString decription() override;
 
   bool readFileFromStorage(const QString& path, QFile& file) override;

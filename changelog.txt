@@ -38,6 +38,7 @@ V1.XX.X
 [QMS-793] Auto-routing with BRouter & minor fixes
 [QMS-794] Fix: Links to local files in Waypoint on-screen dialog not opening
 [QMS-797] Enhance USB MTP to support generic devices
+[QMS-799] Fix QMS icon shown in Dash for GNOME/Wayland
 
 V1.17.1
 [QMS-547] Fixed: QMS freezes on zoom when activating multi-layered online maps

@@ -21,3 +21,4 @@ GenericName[ru]= Администрация GPS данных и карт
 Keywords=map;GPS;geocaching;waypoints;tracks;
 MimeType=application/x-gpx;
 StartupNotify=true
+StartupWMClass=org.qlandkarte.qmapshack

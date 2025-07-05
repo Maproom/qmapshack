@@ -1,3 +1,6 @@
+V1.18.1
+[QMS-803] Remove location tags for generated files
+
 V1.18.0
 [QMS-558] Support for MTP devices
 [QMS-648] Porting to Qt6

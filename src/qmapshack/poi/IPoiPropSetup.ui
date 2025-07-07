@@ -52,7 +52,7 @@
      </property>
      <column>
       <property name="text">
-       <string notr="true">Selected</string>
+       <string>Selected</string>
       </property>
      </column>
      <column>

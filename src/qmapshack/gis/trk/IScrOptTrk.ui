@@ -219,7 +219,10 @@ recording. Use the range tool. </string>
      <item>
       <widget class="QToolButton" name="toolAddInfo">
        <property name="toolTip">
-        <string>Add a description to the selected track point. The track point will be marked with an auto-numbered bullet. A table with all descriptions will be shown in the track details dialog and for highlighted tracks in the map view.</string>
+        <string extracomment="use line breaks to keep a sensible tooltip width">Add a description to the selected track point.
+The track point will be marked with an auto-numbered bullet.
+A table with all descriptions will be shown in the track details dialog
+and for highlighted tracks in the map view.</string>
        </property>
        <property name="text">
         <string>...</string>

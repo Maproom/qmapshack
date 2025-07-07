@@ -38,8 +38,8 @@ bool IMapOnline::httpsCheck(const QString& url) {
     QString msg =
         tr("This map requires OpenSSL support. However due to legal restrictions in some countries "
            "OpenSSL is not packaged with QMapShack. You can have a look at the "
-           "<a href='https://www.openssl.org/community/binaries.html'>OpenSSL Homepage</a> "
-           "for binaries. You have to copy libeay32.dll and ssleay32.dll into the QMapShack program directory.");
+           "<a href='https://github.com/openssl/openssl/wiki/Binaries'>OpenSSL Wiki</a> "
+           "for binaries. You have to copy libcrypto-3-x64.dll and libssl-3-x64.dll into the QMapShack program directory.");
     QMessageBox::critical(CMainWindow::getBestWidgetForParent(), tr("Error..."), msg, QMessageBox::Abort);
     return false;
   }

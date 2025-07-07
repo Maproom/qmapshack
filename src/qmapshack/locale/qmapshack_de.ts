@@ -16,7 +16,7 @@
     <message>
         <location filename="../CAbout.cpp" line="53"/>
         <source>(no DBUS: device detection and handling disabled)</source>
-        <translation>(kein DBUS: Keine Geräteerkennung und - verwaltung)</translation>
+        <translation>(kein DBUS: Geräteerkennung und -verwaltung deaktiviert)</translation>
     </message>
     <message>
         <location filename="../CAbout.cpp" line="58"/>
@@ -142,22 +142,22 @@
     <message>
         <location filename="../canvas/CCanvas.cpp" line="204"/>
         <source>&lt;p align=&apos;right&apos;&gt;This help will be closed the moment you activate a map.&lt;/p&gt;</source>
-        <translation>&lt;p align=&apos;right&apos;&gt;Diese Hilfe wird sobald Sie eine Karte aktiviert haben geschlossen.&lt;/p&gt;</translation>
+        <translation>&lt;p align=&apos;right&apos;&gt;Diese Hilfe wird geschlossen, sobald Sie eine Karte aktiviert haben.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="208"/>
         <source>&lt;h1&gt;Welcome&lt;/h1&gt;&lt;p&gt;Thank you for using QMapShack. QMapShack is a non-profit Open Source project. It&apos;s maintained by enthusiast and volunteers. It&apos;s very mature and useful but lacks certain amenities you might be used from &apos;free&apos; commercial software. As a matter of fact we lack the resources to provide you with a centralized and convenient download of maps, elevation data and routing data. You have to download these resources from various sites on your own. But this page might help you a bit&lt;/p&gt;</source>
-        <translation>&lt;h1&gt;Willkommen&lt;/h1&gt;&lt;p&gt;Vielen Dank, dass Sie QMapShack verwenden. QMapShack ist ein nichtkommerzielles Open Source Projekt. Es wird von Enthusiasten und Freiwilligen gepflegt. Die Entwicklung ist recht weit fortgeschritten, es fehlen aber ein paar Annehmlichkeiten, wie man sie vielleicht von kostenloser, kommerzieller Software kennt. Tatsächlich fehlen uns die Ressourcen, um einen Dienst bereitzustellen, bei dem Sie bequem Karten, Höhendaten und Routendaten herunterladen können. Sie müssen selber diese Dateien aus verschiedenen Quellen zusammentragen. Aber diese Seite hilft Ihnen dabei ein wenig.&lt;/p&gt;</translation>
+        <translation>&lt;h1&gt;Willkommen&lt;/h1&gt;&lt;p&gt;Vielen Dank, dass Sie QMapShack verwenden. QMapShack ist ein nichtkommerzielles Open Source Projekt. Es wird von Enthusiasten und Freiwilligen gepflegt. Die Entwicklung ist recht weit fortgeschritten, es fehlen aber ein paar Annehmlichkeiten, wie man sie vielleicht von kostenloser, kommerzieller Software kennt. Tatsächlich fehlen uns die Ressourcen einen Dienst bereitzustellen, bei dem Sie bequem Karten, Höhendaten und Routendaten herunterladen können. Sie müssen diese Dateien aus verschiedenen Quellen selber zusammentragen. Aber diese Seite hilft Ihnen dabei ein wenig.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="217"/>
         <source>&lt;h2&gt;Let&apos;s Start&lt;/h2&gt;&lt;p&gt;As a first step make yourself comfortable by arranging the dock widgets around this area to your personal liking. You can do this by grabbing the dock widget&apos;s title bars with your mouse (keep left button pressed on title bar) and move them where you want them. You can attach the dock widgets at the left, right, top or bottom. And you can stack them by placing them right above another dock widget. If you do not want to use the functionality of a dock widget you can close it and make QMapShack more simple for you. Also note that the tool bar is a dock widget, too. You can place it anywhere you like.&lt;/p&gt;</source>
-        <translation>&lt;h2&gt;Fangen wir an&lt;/h2&gt;&lt;p&gt;Zuallererst sollten Sie es sich bequem einrichten, indem Sie die Dock Widgets um diesen Bereich nach ihren persönlichen Vorlieben anbringen. Sie können das machen, indem Sie die Dock Widgets an der Titelleiste mit ihrer Maus anfassen (linke Maustaste auf der Titelleiste gedrückt halten) und sie dort hin verschieben, wo Sie möchten. Sie können die Dock Widgets rechts, links, oben und unten anbringen. Sie können sie stapeln, indem Sie sie über ein anderes Dock Widget schieben. Wenn sie die Funktion eines Dock Widgets nicht verwenden wollen, können Sie es schließen und so QMapShack für sich einfacher gestalten. Die Werkzeugleiste ist übrigens auch ein Dock Widget. Sie können sie überall anbringen.&lt;/p&gt;</translation>
+        <translation>&lt;h2&gt;Fangen wir an&lt;/h2&gt;&lt;p&gt;Zuallererst sollten Sie es sich bequem einrichten, indem Sie die Dock Widgets um diesen Bereich nach Ihren persönlichen Vorlieben anordnen. Sie können das machen, indem Sie die Dock Widgets an der Titelleiste mit Ihrer Maus anfassen (linke Maustaste auf der Titelleiste gedrückt halten) und sie dorthin verschieben, wohin Sie möchten. Sie können die Dock Widgets rechts, links, oben und unten platzieren. Sie können sie stapeln, indem Sie sie über ein anderes Dock Widget schieben. Wenn Sie die Funktion eines Dock Widgets nicht verwenden wollen, können Sie es schließen und so QMapShack für sich einfacher gestalten. Die Werkzeugleiste ist übrigens auch ein Dock Widget. Sie können sie überall platzieren.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="230"/>
         <source>&lt;h2&gt;The Wiki&lt;/h2&gt;&lt;p&gt;QMapShack has an extensive &lt;a href=&apos;ShowWiki&apos;&gt;Wiki&lt;/a&gt; with a lot of information about how to use it. There is a &lt;a href=&apos;ShowQuickStart&apos;&gt;Quick Start Guide&lt;/a&gt; translated into several languages. Read it and you will discover the full variety of features QMapShack offers you.&lt;/p&gt;</source>
-        <translation>&lt;h2&gt;Das Wiki&lt;/h2&gt;&lt;p&gt;Zu QMapShack gibt es ein großes  &lt;a href=&apos;ShowWiki&apos;&gt;Wiki&lt;/a&gt; mit einer Menge Information zum Gebrauch. Es gibt eine &lt;a href=&apos;ShowQuickStart&apos;&gt;Schnellstartanleitung&lt;/a&gt;, die in mehrere Sprachen übersetzt wurde. Lesen Sie sie, um zu erfahren, was QMapShack Ihnen alles zu bieten hat.&lt;/p&gt;</translation>
+        <translation>&lt;h2&gt;Das Wiki&lt;/h2&gt;&lt;p&gt;Zu QMapShack gibt es ein großes &lt;a href=&apos;ShowWiki&apos;&gt;Wiki&lt;/a&gt; mit einer Menge Information zur Bedienung. Es gibt eine &lt;a href=&apos;ShowQuickStart&apos;&gt;Schnellstartanleitung&lt;/a&gt;, die in mehrere Sprachen übersetzt wurde. Lesen Sie diese, um zu erfahren, was Ihnen QMapShack alles zu bieten hat.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="238"/>
@@ -192,24 +192,22 @@
     <message>
         <location filename="../canvas/CCanvas.cpp" line="277"/>
         <source>&lt;h2&gt;Maps!&lt;/h2&gt;&lt;p&gt;A map must always be defined by a single file that is recognized by QMapShack. This file has to be placed into one of the registered map folders (&lt;a href=&apos;MapFolders&apos;&gt;File-&gt;Setup Map Paths&lt;/a&gt;). QMapShack will find it and list it. You can reload the list of maps by doing a right click on the map list and select &apos;Reload Maps&apos; from the menu.&lt;/p&gt; &lt;p&gt;A map must be activated to be visible. Right click on the map entry and select &apos;Activate&apos; from the menu. The moment a map is activated this help will disappear. To see it again you simply add another map view (&lt;a href=&apos;NewView&apos;&gt;View-&gt;Add Map View&lt;/a&gt;).&lt;/p&gt; &lt;p&gt;To start with some online maps click on the link for &lt;a href=&apos;GetMaps&apos;&gt;impatient users&lt;/a&gt;. If you have a Garmin GPS device with non-commercial maps you can copy the *.img and *.jnx files from your device into the map folder.&lt;/p&gt; &lt;/p&gt;If you own raster maps in a format that is supported by GDAL you have to create a virtual map definition file (*.vrt), first. A *.vrt file can reference one or several other files. You can use QMapShack&apos;s built-in VRT Builder (&lt;a href=&apos;VrtBuilder&apos;&gt;Tool-&gt;VRT Builder&lt;/a&gt;) to create such a file.&lt;/p&gt;</source>
-        <translation>&lt;h2&gt;Karten!&lt;/h2&gt;&lt;p&gt;Eine Karte muss immer über eine Datei, die von QMapShack erkannt wird, definiert sein. Diese Datei muss in einem der registrierten Kartenordnern liegen (&lt;a href=&apos;MapFolders&apos;&gt;Datei-&gt;Kartenverzeichnisse angeben&lt;/a&gt;). QMapShack wird die Datei finden und auflisten. Sie können die Kartenliste erneut laden, indem Sie mit der rechten Maustaste auf die Liste klicken und &apos;Karten erneut laden&apos; auswählen.&lt;/p&gt; &lt;p&gt;Eine Karte muss aktiviert werden, um sichtbar zu sein. Klicken Sie mit der rechten Maustaste auf den Karteneintrag in der Liste und wählen Sie &apos;Aktivieren&apos; aus. Sobald Sie eine Karte aktiviert haben, wird diese Hilfe verschwinden. Um sie wieder zu sehen, öffnen Sie einfach eine weitere Kartenansicht (&lt;a href=&apos;NewView&apos;&gt;Ansicht-&gt;Kartenansicht hinzufügen&lt;/a&gt;).&lt;/p&gt; &lt;p&gt;Um mit ein paar Online Karten anzufangen, können sie auf den Link für &lt;a href=&apos;GetMaps&apos;&gt;Ungeduldige&lt;/a&gt; klicken. Wenn Sie ein Garmin mit nichtkommerziellen Karten haben,  können Sie die *.img und *.jnx Dateien von Ihrem Gerät in den Kartenordner kopieren.&lt;/p&gt; &lt;/p&gt;Wenn Sie Rasterkarten in einem Format haben, das von GDAL unterstützt wird, müssen Sie zuerst eine virtuelle Kartendefinition (*.vrt) erstellen. Eine *.vrt Datei kann auf eine oder mehrere Dateien verweisen. Sie können QMapShacks eigenen VRT Builder (&lt;a href=&apos;VrtBuilder&apos;&gt;Werkzeug-&gt;VRT Builder&lt;/a&gt;) benutzen, um eine solche Datei zu erstellen.&lt;/p&gt;
-</translation>
+        <translation>&lt;h2&gt;Karten!&lt;/h2&gt;&lt;p&gt;Eine Karte muss immer über eine Datei definiert sein, die von QMapShack erkannt wird. Diese Datei muss in einem der registrierten Kartenordner liegen (&lt;a href=&apos;MapFolders&apos;&gt;Datei-&gt;Kartenverzeichnisse angeben&lt;/a&gt;). QMapShack wird die Datei finden und auflisten. Sie können die Kartenliste erneut laden, indem Sie mit der rechten Maustaste auf die Liste klicken und &apos;Karten erneut laden&apos; auswählen.&lt;/p&gt; &lt;p&gt;Eine Karte muss aktiviert werden, um sichtbar zu sein. Klicken Sie mit der rechten Maustaste auf den Karteneintrag in der Liste und wählen Sie &apos;Aktivieren&apos; aus. Sobald Sie eine Karte aktiviert haben, verschwindet diese Hilfe. Um sie wieder zu sehen, öffnen Sie einfach eine weitere Kartenansicht (&lt;a href=&apos;NewView&apos;&gt;Ansicht-&gt;Kartenansicht hinzufügen&lt;/a&gt;).&lt;/p&gt; &lt;p&gt;Um mit ein paar Online Karten anzufangen, können sie auf den Link für &lt;a href=&apos;GetMaps&apos;&gt;Ungeduldige&lt;/a&gt; klicken. Wenn Sie ein Garmin mit nichtkommerziellen Karten haben, können Sie die *.img und *.jnx Dateien von Ihrem Gerät in den Kartenordner kopieren.&lt;/p&gt; &lt;/p&gt;Wenn Sie Rasterkarten in einem Format haben, das von GDAL unterstützt wird, müssen Sie zuerst eine virtuelle Kartendefinition (*.vrt) erstellen. Eine *.vrt Datei kann auf eine oder mehrere Dateien verweisen. Sie können QMapShacks eigenen VRT Builder (&lt;a href=&apos;VrtBuilder&apos;&gt;Werkzeug-&gt;VRT Builder&lt;/a&gt;) benutzen, um eine solche Datei zu erstellen.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="243"/>
         <source>&lt;h2&gt;Give it a home&lt;/h2&gt;&lt;p&gt;QMapShack needs a folder on your hard drive where all data is kept. Naturally this will grow very large. We recommend a folder with some subfolders:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Maps - where all maps are stored&lt;/li&gt;&lt;li&gt;DEM - where all elevation data is stored&lt;/li&gt;&lt;li&gt;POI - where all POI collections are stored&lt;/li&gt;&lt;li&gt;Routino - where routing data for the Routino offline router is stored&lt;/li&gt;&lt;li&gt;BRouter - where routing data for the BRouter offline router is stored&lt;/li&gt;&lt;li&gt;Databases - where you create databases to organize your GIS data&lt;/li&gt;&lt;li&gt;GPX - where you keep GPX files&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Do you want to create these folders right now? Give me a &lt;a  href=&apos;SetupHome&apos;&gt;path&lt;/a&gt; and QMapShack will create all sub-folder and update all settings.&lt;/p&gt;</source>
-        <translation>&lt;h2&gt;Wählen Sie ein Hauptverzeichnis&lt;/h2&gt;&lt;p&gt;QMapShack benötigt auf Ihrer Festplatte ein Verzeichnis, wo alle Daten liegen. Üblicherweise wird das sehr groß. Wir empfehlen deswegen einen Ordner mit mehreren Unterordnern:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Maps - hier liegen alle verfügbaren Karten&lt;/li&gt;&lt;li&gt;DEM - hier liegen die verfügbaren Höhendaten&lt;/li&gt;&lt;li&gt;POI - hier liegen alle Sammlungen mit Sehenswürdigkeiten&lt;/li&gt;&lt;li&gt;Routino - hier liegen die Daten für den Routino Offline Router&lt;/li&gt;&lt;li&gt;BRouter - hier liegen die Daten für den BRouter Offline Router&lt;/li&gt;&lt;li&gt;Databases - hier erstellen Sie Datenbanken, um ihre persönlichen GIS Daten zu verwalten&lt;/li&gt;&lt;li&gt;GPX - hier liegen ihre GPX Dateien&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Wollen Sie diese Ordner jetzt gleich anlegen? Geben Sie dazu einen &lt;a  href=&apos;SetupHome&apos;&gt;Pfad&lt;/a&gt; an und QMapShack wird alle Unterordnern erstellen und sich in den Grundeinstellungen merken.&lt;/p&gt;</translation>
+        <translation>&lt;h2&gt;Wählen Sie ein Hauptverzeichnis&lt;/h2&gt;&lt;p&gt;QMapShack benötigt auf Ihrer Festplatte ein Verzeichnis, in dem alle Daten liegen. Üblicherweise wird das sehr groß. Wir empfehlen deswegen einen Ordner mit mehreren Unterordnern:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Maps - hier liegen alle verfügbaren Karten&lt;/li&gt;&lt;li&gt;DEM - hier liegen die verfügbaren Höhendaten&lt;/li&gt;&lt;li&gt;POI - hier liegen alle Sammlungen mit Sehenswürdigkeiten&lt;/li&gt;&lt;li&gt;Routino - hier liegen die Daten für den Routino Offline Router&lt;/li&gt;&lt;li&gt;BRouter - hier liegen die Daten für den BRouter Offline Router&lt;/li&gt;&lt;li&gt;Databases - hier erstellen Sie Datenbanken, um Ihre persönlichen GIS Daten zu verwalten&lt;/li&gt;&lt;li&gt;GPX - hier liegen Ihre GPX Dateien&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Wollen Sie diese Ordner jetzt gleich anlegen? Geben Sie dazu einen &lt;a  href=&apos;SetupHome&apos;&gt;Pfad&lt;/a&gt; an und QMapShack wird alle Unterordner erstellen und sich in den Grundeinstellungen merken.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="307"/>
         <source>&lt;h2&gt;Your Data&lt;/h2&gt;&lt;p&gt;To load tracks and waypoints use &lt;a href=&apos;LoadData&apos;&gt;File-&gt;Load GIS Data&lt;/a&gt; from the menu. Each file will be an independent project in the workspace. You can manage your data in single files or you use a database. You can &lt;a href=&apos;CreateDB&apos;&gt;create a database&lt;/a&gt; in the database dockwidget.&lt;/p&gt;</source>
-        <translation>&lt;h2&gt;Ihre Daten&lt;/h2&gt;&lt;p&gt;Um Tracks und Wegpunkte zu laden, benützen Sie im Menü &lt;a href=&apos;LoadData&apos;&gt;Datei-&gt;GIS Daten laden&lt;/a&gt;. Jede Datei ist ein unabhängiges Projekt im Arbeitsplatz. Sie können Ihre Daten in einzelnen Dateien oder einer Datenbank verwalten. Eine &lt;a href=&apos;CreateDB&apos;&gt;Datenbank erstellen&lt;/a&gt; Sie im Datenbank Dock Widget.&lt;/p&gt;</translation>
+        <translation>&lt;h2&gt;Ihre Daten&lt;/h2&gt;&lt;p&gt;Um Tracks und Wegpunkte zu laden, benützen Sie Menü &lt;a href=&apos;LoadData&apos;&gt;Datei-&gt;GIS Daten laden&lt;/a&gt;. Jede Datei ist ein unabhängiges Projekt im Arbeitsplatz. Sie können Ihre Daten in einzelnen Dateien oder in einer Datenbank verwalten. Eine &lt;a href=&apos;CreateDB&apos;&gt;Datenbank erstellen&lt;/a&gt; Sie im Datenbank Dock Widget.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="328"/>
         <source>&lt;h2&gt;Elevation Data&lt;/h2&gt;&lt;p&gt;Elevation data (Digital Elevation Model - DEM) is used in various functions of QMapShack and is completely independent from the maps. However the same principles as for maps apply. DEM data must always be defined by a single file that is recognized by QMapShack. This file has to be placed into one of the registered DEM folders (&lt;a href=&apos;DemFolders&apos;&gt;File-&gt;Setup DEM Paths&lt;/a&gt;). QMapShack will find it and list it. You can reload the list of DEM files by doing a right click on the DEM list and select &apos;Reload DEM&apos; from the menu.&lt;/p&gt;&lt;p&gt;Similar to raster maps DEM files have to be wrapped by a *.vrt file to be recognized. A *.vrt file can reference one or several other files. Again, you can use QMapShack&apos;s built-in VRT Builder (&lt;a href=&apos;VrtBuilder&apos;&gt;Tool-&gt;VRT Builder&lt;/a&gt;) to create such a file.&lt;/p&gt;&lt;p&gt;To start with some online DEMs you can click on the link for &lt;a href=&apos;GetDems&apos;&gt;impatient users&lt;/a&gt;. But keep in mind that using online DEMs slows down QMapShack significantly.&lt;/p&gt;</source>
-        <translation>&lt;h2&gt;Höhendaten&lt;/h2&gt;&lt;p&gt;Höhendaten (Digital Elevation Model - DEM) werden für verschiedenen Funktionen in QMapShack gebraucht und sind komplett unabhängig von den Karten. Allerdings gelten die selben Regeln, wie für Karten. Höhendaten müssen immer über eine Datei, die von QMapShack erkannt wird, definiert sein. Diese Datei muss in einem der registrierten Höhendatenordnern liegen (&lt;a href=&apos;DemFolders&apos;&gt;Datei-&gt;DEM Verzeichnisse angeben&lt;/a&gt;). QMapShack wird sie finden und auflisten. Sie können die Liste erneut laden, wenn Sie mit der rechten Maustaste in die DEM Liste klicken und &apos;DEM erneut laden&apos; aus dem Menü wählen.&lt;/p&gt;&lt;p&gt;Ähnlich wie die Karten müssen DEM Dateien in einer *.vrt Datei eingebettet sein, um erkannt zu werden. Eine *.vrt Datei kann auf eine oder mehrere andere Dateien verweisen. Auch hier können Sie QMapShacks eigenen VRT Builder (&lt;a href=&apos;VrtBuilder&apos;&gt;Werkzeug-&gt;VRT Builder&lt;/a&gt;) verwenden, um solch einen Datei zu erstellen.&lt;/p&gt;&lt;p&gt; Um mit ein paar Online Höhendaten anzufangen, können Sie auf den Link für &lt;a href=&apos;GetDems&apos;&gt;Ungeduldige&lt;/a&gt; klicken. Aber bitte beachten Sie, dass Online Höhendaten QMapShack deutlich ausbremsen.&lt;/p&gt;
-</translation>
+        <translation>&lt;h2&gt;Höhendaten&lt;/h2&gt;&lt;p&gt;Höhendaten (Digital Elevation Model - DEM) werden für verschiedene Funktionen in QMapShack gebraucht und sind komplett unabhängig von den Karten. Allerdings gelten dieselben Regeln wie für Karten. Höhendaten müssen immer über eine Datei definiert sein, die von QMapShack erkannt wird. Diese Datei muss in einem der registrierten Höhendatenordner liegen (&lt;a href=&apos;DemFolders&apos;&gt;Datei-&gt;DEM Verzeichnisse angeben&lt;/a&gt;). QMapShack wird sie finden und auflisten. Sie können die Liste erneut laden, indem Sie mit der rechten Maustaste in die DEM Liste klicken und &apos;DEM erneut laden&apos; aus dem Menü wählen.&lt;/p&gt;&lt;p&gt;Ähnlich wie die Karten müssen DEM Dateien in einer *.vrt Datei eingebettet sein, um erkannt zu werden. Eine *.vrt Datei kann auf eine oder mehrere andere Dateien verweisen. Auch hier können Sie QMapShacks eigenen VRT Builder (&lt;a href=&apos;VrtBuilder&apos;&gt;Werkzeug-&gt;VRT Builder&lt;/a&gt;) verwenden, um eine solche Datei zu erstellen.&lt;/p&gt;&lt;p&gt; Um mit ein paar Online Höhendaten anzufangen, können Sie auf den Link für &lt;a href=&apos;GetDems&apos;&gt;Ungeduldige&lt;/a&gt; klicken. Aber bitte beachten Sie, dass Online Höhendaten QMapShack deutlich ausbremsen.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="350"/>
@@ -302,7 +300,7 @@
     <message>
         <location filename="../gis/db/CDBFolderMysql.cpp" line="71"/>
         <source>Error: </source>
-        <translation>Fehler:</translation>
+        <translation>Fehler: </translation>
     </message>
 </context>
 <context>
@@ -320,7 +318,7 @@
     <message>
         <location filename="../gis/db/CDBFolderSqlite.cpp" line="58"/>
         <source>Error: </source>
-        <translation>Fehler:</translation>
+        <translation>Fehler: </translation>
     </message>
 </context>
 <context>
@@ -370,7 +368,7 @@
 To solve this conflict you can create and save a clone, force your version or drop your version and take the one from the database</source>
         <translation>Das Element %1 wurde durch %2 (%3) geändert. 
 
-Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihre Version oder verwerfen diese und nehmen die Version in der Datenbank</translation>
+Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihre Version oder verwerfen diese und nehmen die Version der Datenbank</translation>
     </message>
     <message>
         <location filename="../gis/db/CDBProject.cpp" line="496"/>
@@ -397,7 +395,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <source>There was an unexpected database error:
 
 %1</source>
-        <translation>Da war ein unerwarteter Datenbankfehler:
+        <translation>Es gab einen unerwarteten Datenbankfehler:
 
 %1</translation>
     </message>
@@ -685,7 +683,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="89"/>
         <source>&lt;b&gt;Track Point Information&lt;/b&gt;&lt;br/&gt;To document your tracks you can add a short description to a track point. All points with description will be marked along the track with auto-numbered bullets.&lt;br/&gt;You can add a description by a right click on a track point in the graphs. Or you do a left click on a track point in the map view.&lt;br/&gt;With the first track point you add information to this text will be replaced by a table. Use it to edit and delete track point information.&lt;br/&gt;</source>
-        <translation>&lt;b&gt;Trackpunktinformation&lt;/b&gt;&lt;br/&gt;Sie können einem Trackpunkt eine kurze Beschreibung hinzufügen, um ihre Tracks zu dokumentieren. Alle Punkte mit einer Beschreibung werden entlang des Tracks mit automatischen Nummern versehen.&lt;br/&gt;Sie können eine Beschreibung hinzufügen, indem Sie mit der rechten Maustaste in einen der Graphen klicken. Oder Sie klicken mit der linken Maustaste auf den Trackpunkt in der Kartenansicht.&lt;br/&gt;Mit dem ersten Trackpunkt, dem Sie Information hinzufügen, wird dieser Text mit einer Tabelle ersetzt. Mit deren Hilfe können Sie die Trackpunktinformation löschen oder ändern.&lt;br/&gt;</translation>
+        <translation>&lt;b&gt;Trackpunktinformation&lt;/b&gt;&lt;br/&gt;Sie können einem Trackpunkt eine kurze Beschreibung hinzufügen, um Ihre Tracks zu dokumentieren. Alle Punkte mit einer Beschreibung werden entlang des Tracks mit automatischen Nummern versehen.&lt;br/&gt;Sie können eine Beschreibung hinzufügen, indem Sie mit der rechten Maustaste in einen der Graphen klicken. Oder Sie klicken mit der linken Maustaste auf den Trackpunkt in der Kartenansicht.&lt;br/&gt;Mit dem ersten Trackpunkt, dem Sie Information hinzufügen, wird dieser Text durch eine Tabelle ersetzt. Mit deren Hilfe können Sie die Trackpunktinformation löschen oder ändern.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="190"/>
@@ -779,7 +777,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     <message>
         <location filename="../device/CDeviceAccessKMtp.cpp" line="102"/>
         <source>Delete from Devices...</source>
-        <translation>om Gerät löschen...</translation>
+        <translation>Vom Gerät löschen...</translation>
     </message>
     <message>
         <location filename="../device/CDeviceAccessKMtp.cpp" line="103"/>
@@ -833,7 +831,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     <message>
         <location filename="../device/CDeviceGenericMtp.cpp" line="47"/>
         <source>Unknown MTP</source>
-        <translation>Unbekannt MTP</translation>
+        <translation>Unbekanntes MTP</translation>
     </message>
 </context>
 <context>
@@ -957,7 +955,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.cpp" line="48"/>
         <source>Compute the &quot;Energy Use Cycling&quot; value, store the parameter set and close this dialog.</source>
-        <translation>Berechnet den Energieverbrauch, speichert das Parameter Set und schliesst den Dialog.</translation>
+        <translation>Berechnet den Energieverbrauch, speichert das Parameter Set und schließt den Dialog.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.cpp" line="50"/>
@@ -981,7 +979,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
 &lt;p&gt;In diesem Dialog kann der Energieverbrauch beim Fahrradfahren berechnet werden.&lt;/p&gt;
 &lt;p&gt;Der Wert des Energieverbrauchs kann als Indikator für die Anstrengung einer Fahrradtour angesehen werden.&lt;/p&gt;
 &lt;p&gt;Die Tourlänge, die Geschwindigkeit und die Steigungen werden berücksichtigt.&lt;/p&gt;
-&lt;p&gt;Um den persönlichen Energieverbrauch einer Tour weiter zu spezifizieren werden zusätzliche Daten benötigt:
+&lt;p&gt;Um den persönlichen Energieverbrauch einer Tour weiter zu spezifizieren, werden zusätzliche Daten benötigt:
 &lt;ul&gt;
 &lt;li&gt;Das Gewicht des Fahrers und des Fahrrads&lt;/li&gt;
 &lt;li&gt;Die Luftdichte, Windgeschwindigkeit und die Position im Wind für die Berücksichtigung des Luftwiderstands&lt;/li&gt;
@@ -1099,7 +1097,7 @@ This filter detects loops by looking for intersections. A new track is created a
 The only input parameter is minimum loop length: this is to prevent cutting tracks in tight switchbacks, where recorded tracks can be made of tiny loops. These loops will be ignored if their lengths are smaller that the given value.</source>
         <translation>Manchmal bestehen Tracks aus Runden.
 
-Das passiert zum Beispiel bei Mountainbike-Touren, bei denen immer die selbe Forststraße verwendet wird, um auf einen höhergelegenen Ausgangspunkt zu kommen. Von diesem Punkt aus starten verschiedene Downhill-Touren und die besagte Forststraße wird wieder und wieder verwendet, um nach oben zu fahren. Im aufgezeichneten Track entstehen so mehrere Runden. Einem solchen Track mit Runden auf einem Garmin Gerät zu folgen, ist sehr unübersichtlich, weil man nicht erkennen kann, in welcher Reihenfolge die einzelnen Runden gefahren werden sollen.
+Das passiert zum Beispiel bei Mountainbike-Touren, bei denen immer dieselbe Forststraße verwendet wird, um auf einen höhergelegenen Ausgangspunkt zu kommen. Von diesem Punkt aus starten verschiedene Downhill-Touren und die besagte Forststraße wird wieder und wieder verwendet, um nach oben zu fahren. Im aufgezeichneten Track entstehen so mehrere Runden. Einem solchen Track mit Runden auf einem Garmin Gerät zu folgen, ist sehr unübersichtlich, weil man nicht erkennen kann, in welcher Reihenfolge die einzelnen Runden gefahren werden sollen.
 
 Der Zweck dieses Filters ist es den Track zu zerteilen. Die neuen Tracks beinhalten jeweils eine Runde und man behält auf dem Gerät somit die Übersicht: Man fängt mit dem ersten an und schaltet dann zum zweiten, etc...
 
@@ -1204,9 +1202,9 @@ Der einzige Parameter ist die minimale Länge einer Runde. Damit kann man verhin
         <source>Sometimes tracks have too many points to be transferred to a gps device.
 
 This filter splits the track into multiple smaller tracks.</source>
-        <translation>Manche Tracks haben zuviele Punkte um auf ein GPS Gerät übertragen zu werden.
+        <translation>Manche Tracks haben zuviele Punkte, um auf ein GPS Gerät übertragen zu werden.
 
-Dieser Filter teilt den Track in mehrere kleinere Tracks uaf.</translation>
+Dieser Filter teilt den Track in mehrere kleinere Tracks auf.</translation>
     </message>
 </context>
 <context>
@@ -1233,18 +1231,17 @@ This filter is designed to detect and hide knots satisfying these two conditions
 You can modify both parameters to customize the behavior of the filter. For the distance it is advisable to indicate a value lower than the GPS accuracy. Keep in mind that if a high distance and a low ratio are indicated, it is possible for the filter to detect a knot by mistake (for example, ranges with sharp curves (serpentines) or sections of very slow speed). </source>
         <translation>Knoten im Track entfernen:
 
-Bei Pausen zeichnen viele GPS Geräte weiter auf. Da die Genauigkeit des GPS einer gewissen Varianz unterliegt, entstehen so Punktewolken, die so etwas wie einen Knoten im Track bilden. Das führt zu Fehlern, die sich in der Statistik aufsummieren. Deswegen möchte man sie entfernen.
+Bei Pausen zeichnen viele GPS Geräte weiter auf. Da die Genauigkeit des GPS einer gewissen Varianz unterliegt, entstehen so Punktwolken, die so etwas wie einen Knoten im Track bilden. Das führt zu Fehlern, die sich in der Statistik aufsummieren. Deswegen möchte man sie entfernen.
 
 Ein typischer Knoten erfüllt zwei Kriterien:
 - Eine Reihe von Punkten ist sehr nahe beieinander.
 - Die direkte Verbindung zwischen dem ersten und dem letzten Punkt ist gering.
 
-Der Filter findet Knoten anhand dieser beiden Kriterien mit einstellbaren Variablen:
-- Abstand: Wenn eine Reihe von Punkten einen kleineren Abstand, wie den angegebenen, zueinander hat, dann könnte es ein Knoten sein und eine weitere Überprüfung anhand des Verhältnisses wird durchgeführt.
+Der Filter findet Knoten mit diesen beiden Kriterien über einstellbare Variablen:
+- Abstand: Wenn eine Reihe von Punkten einen kleineren Abstand zueinander hat als den angegebenen, dann könnte es ein Knoten sein und eine weitere Überprüfung anhand des Verhältnisses wird durchgeführt.
 - Verhältnis: Die direkte Strecke zwischen dem ersten und letzten Punkt der Reihe wird überprüft. Wenn die Strecke entlang der Punkte im Verhältnis länger ist als die direkte Verbindung, wird ein Knoten angenommen und alle Punkte werden unterdrückt.
 
-Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand sollte man einen Wert kleiner als die Genauigkeit des GPS Gerätes verwenden. Wenn man einen zu hohen Abstand und ein zu kleines Verhältnis verwendet, kann es zu Fehlentscheidungen kommen z.B. bei Strecken mit scharfen Kurven (Serpentinen) oder auf Abschnitten mit geringer Geschwindigkeit.
-</translation>
+Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand sollte man einen Wert kleiner als die Genauigkeit des GPS Gerätes verwenden. Wenn man einen zu hohen Abstand und ein zu kleines Verhältnis verwendet, kann es zu Fehlentscheidungen kommen, z.B. bei Strecken mit scharfen Kurven (Serpentinen) oder auf Abschnitten mit geringer Geschwindigkeit. </translation>
     </message>
 </context>
 <context>
@@ -1270,10 +1267,6 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
         <translation>Gesamtzeit Timer: %1%2&lt;br/&gt;</translation>
     </message>
     <message>
-        <source>enhanced average speed: %1%2&lt;br/&gt;</source>
-        <translation type="vanished">Verbesserte Duchschnittsgeschwindigkeit: %1%2&lt;br/&gt;</translation>
-    </message>
-    <message>
         <location filename="../gis/fit2/CFit2Project.cpp" line="240"/>
         <source>enhanced max speed: %1%2&lt;br/&gt;</source>
         <translation>Verbesserte Maximalgeschwindigkeit: %1%2&lt;br/&gt;</translation>
@@ -1291,7 +1284,7 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
     <message>
         <location filename="../gis/fit2/CFit2Project.cpp" line="254"/>
         <source>total calories: %1kcal&lt;br/&gt;</source>
-        <translation>Gesamtkalorin: %1&lt;br/&gt;</translation>
+        <translation>Gesamtkalorien: %1&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../gis/fit2/CFit2Project.cpp" line="259"/>
@@ -1306,7 +1299,7 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
     <message>
         <location filename="../gis/fit2/CFit2Project.cpp" line="268"/>
         <source>number of laps: %1&lt;br/&gt;</source>
-        <translation>Anzal an Runden%1&lt;br/&gt;</translation>
+        <translation>Anzahl an Runden: %1&lt;br/&gt;</translation>
     </message>
 </context>
 <context>
@@ -1403,7 +1396,7 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
         <location filename="../gis/search/CGeoSearch.cpp" line="386"/>
         <location filename="../gis/search/CGeoSearch.cpp" line="454"/>
         <source>Error: </source>
-        <translation>Fehler:</translation>
+        <translation>Fehler: </translation>
     </message>
 </context>
 <context>
@@ -1424,7 +1417,7 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
     <message>
         <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="33"/>
         <source>&lt;b&gt;Add your own service&lt;/b&gt;&lt;p&gt;To add your own service you need a name and an URL with placeholders for coordinates. Placeholders are:&lt;/p&gt;</source>
-        <translation>&lt;b&gt;Fügen Sie ihren eigenen Dienst hinzu&lt;/b&gt;&lt;p&gt;Um ihren eigenen Dienst hinzuzufügen benötigen Sie einen Namen und einen URL mit Platzhaltern. Platzhalter sind:&lt;/p&gt;</translation>
+        <translation>&lt;b&gt;Fügen Sie Ihren eigenen Dienst hinzu&lt;/b&gt;&lt;p&gt;Um Ihren eigenen Dienst hinzuzufügen, benötigen Sie einen Namen und eine URL mit Platzhaltern. Platzhalter sind:&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="38"/>
@@ -1449,12 +1442,12 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
     <message>
         <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="115"/>
         <source>Remove all services and restore default list?</source>
-        <translation>Alle Dienste entfernen und die der Grundeinstellung wiederherstellen?</translation>
+        <translation>Alle Dienste entfernen und die Grundeinstellung wiederherstellen?</translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="46"/>
         <source>&lt;p&gt;To edit a service select either it&apos;s name or URL and do a double click (alternative: press F2). You can change the default services, too. If you remove all services the default ones will be restored on the next start of QMapShack.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Um einen Dienst zu ändern, wählen Sie entweder den Namen oder den URL aus und klicken darauf doppelt (Alternative: F2 drücken). Sie können auch die Dienste der Standardeinstellung ändern. Wenn Sie alle Dienste entfernen, dann werden beim nächsten Start von QMapShack die Dienste aus der Standardeinstellung wiederhergestellt.&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Um einen Dienst zu ändern, wählen Sie entweder den Namen oder die URL aus und klicken doppelt darauf (Alternative: F2 drücken). Sie können auch die Dienste der Standardeinstellung ändern. Wenn Sie alle Dienste entfernen, dann werden die Dienste beim nächsten Start von QMapShack aus der Standardeinstellung wiederhergestellt.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="96"/>
@@ -1532,7 +1525,7 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="446"/>
         <source>Changed links</source>
-        <translation>Geänderte Verknüpfungen</translation>
+        <translation>Verknüpfungen geändert</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="454"/>
@@ -1581,7 +1574,7 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="315"/>
         <source>Changed links</source>
-        <translation>Geänderte Verknüpfungen</translation>
+        <translation>Verknüpfungen geändert</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="328"/>
@@ -1627,7 +1620,7 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="657"/>
         <source>Changed route points.</source>
-        <translation>Geänderte Routenpunkte.</translation>
+        <translation>Routenpunkte geändert.</translation>
     </message>
 </context>
 <context>
@@ -1651,7 +1644,7 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
         <location filename="../gis/tnv/serialization.cpp" line="318"/>
         <location filename="../gis/tnv/serialization.cpp" line="328"/>
         <source>Only support lon/lat WGS 84 format.</source>
-        <translation>Es wird nur lon/lat WGS 84 als Format unterstützt.</translation>
+        <translation>Als Format wird nur lon/lat WGS 84 unterstützt.</translation>
     </message>
     <message>
         <location filename="../gis/tnv/serialization.cpp" line="355"/>
@@ -1771,7 +1764,7 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="638"/>
         <source>Moving: - (-)</source>
-        <translation>Zeit in Bew.: - (-) </translation>
+        <translation>Zeit in Bew.: - (-)</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="649"/>
@@ -1796,7 +1789,7 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1473"/>
         <source>Hide points %1..%2.</source>
-        <translation>Punkte %1  %2 verbergen.</translation>
+        <translation>Punkte %1..%2 verbergen.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="690"/>
@@ -1855,10 +1848,6 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
         <location filename="../gis/trk/CGisItemTrk.cpp" line="643"/>
         <source>Ascent: %1%2 (%3%)</source>
         <translation>Anstieg: %1%2 (%3%)</translation>
-    </message>
-    <message>
-        <source>, Descent: %1%2 (%3%)</source>
-        <translation type="vanished">, Abstieg: %1%2 (%3%)</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="654"/>
@@ -1963,7 +1952,7 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="2174"/>
         <source>Changed links</source>
-        <translation>Geänderte Verknüpfungen</translation>
+        <translation>Verknüpfungen geändert</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="2182"/>
@@ -2003,7 +1992,7 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="200"/>
         <source>Added terrain slope from DEM file.</source>
-        <translation>Hangneigung aus dem Höhenmodell hinzufügen.</translation>
+        <translation>Hangneigung aus dem Höhenmodell hinzugefügt.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="223"/>
@@ -2050,7 +2039,7 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="574"/>
         <source>The filter can not be applied</source>
-        <translation>Der Filter kann nicht angewendet werden</translation>
+        <translation>Der Filter kann nicht angewandt werden</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="575"/>
@@ -2090,7 +2079,7 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="471"/>
         <source>Converted subpoints from routing to track points</source>
-        <translation>Punkte vom autom. Routing in Trackpunkte umgewandelt </translation>
+        <translation>Punkte vom autom. Routing in Trackpunkte umgewandelt</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="512"/>
@@ -2178,7 +2167,7 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="485"/>
         <source>Changed links</source>
-        <translation>Geänderte Verknüpfungen</translation>
+        <translation>Verknüpfungen geändert</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="490"/>
@@ -2443,7 +2432,7 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1010"/>
         <source>Special Tool Required</source>
-        <translation>Langlauf-Skier erforderlich</translation>
+        <translation>Spezialwerkzeug benötigt</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1011"/>
@@ -2688,7 +2677,7 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
         <location filename="../gis/CGisListDB.cpp" line="690"/>
         <location filename="../gis/CGisListDB.cpp" line="710"/>
         <source>Remove items...</source>
-        <translation>Element entfernen...</translation>
+        <translation>Elemente entfernen...</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="691"/>
@@ -2946,12 +2935,12 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
     <message>
         <location filename="../gis/CGisListWks.cpp" line="102"/>
         <source>Show on Map</source>
-        <translation>Auf der Karte anzeigen.</translation>
+        <translation>Auf der Karte anzeigen</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="104"/>
         <source>Hide from Map</source>
-        <translation>Auf der Karte ausblenden.</translation>
+        <translation>Auf der Karte ausblenden</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="129"/>
@@ -3010,7 +2999,7 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
     <message>
         <location filename="../gis/summary/CGisSummary.cpp" line="96"/>
         <source>Failed to restore all folders in the summary drop zones. Probably the folder or database has been removed. Please check summary drop zone setup.</source>
-        <translation>Es konnten nicht alle Ordner in den Sammelablagen wiederhergestellt werden. Wahrscheinlich wurden die Ordner oder die Datenbank entfernt. Bitte überprüfen Sie die Einstellungen für die Sammelablagen.</translation>
+        <translation>Nicht alle Ordner in den Sammelablagen konnten wiederhergestellt werden. Wahrscheinlich wurden die Ordner oder die Datenbank entfernt. Bitte überprüfen Sie die Einstellungen für die Sammelablagen.</translation>
     </message>
     <message>
         <location filename="../gis/summary/CGisSummary.cpp" line="100"/>
@@ -3023,7 +3012,7 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
     <message>
         <location filename="../gis/summary/CGisSummaryDropZone.cpp" line="36"/>
         <source>Drag-n-drop items from the workspace into this drop zone.</source>
-        <translation>Benützen Sie &quot;drag-n-drop&quot;, um Elemente aus dem Arbeitsplatz in die Ablage zu ziehen. </translation>
+        <translation>Benützen Sie &quot;drag-n-drop&quot;, um Elemente aus dem Arbeitsplatz in die Ablage zu ziehen.</translation>
     </message>
 </context>
 <context>
@@ -3036,7 +3025,7 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
     <message>
         <location filename="../gis/summary/CGisSummarySetup.cpp" line="97"/>
         <source>Select summary project...</source>
-        <translation>Sammelprojekte auswählen...</translation>
+        <translation>Sammelprojekt auswählen...</translation>
     </message>
 </context>
 <context>
@@ -3069,7 +3058,7 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
     <message>
         <location filename="../gis/CGisWorkspace.cpp" line="796"/>
         <source>Undefined Waypoint Symbol</source>
-        <translation>Undefiniertes Wegepunktsymbol</translation>
+        <translation>Undefiniertes Wegpunktsymbol</translation>
     </message>
     <message>
         <location filename="../gis/CGisWorkspace.cpp" line="797"/>
@@ -3079,8 +3068,8 @@ Do you want to choose an icon for each new waypoint for which no icon could be f
 If you choose &apos;No&apos; the respective last used waypoint icon is applied.</source>
         <translation>QMapShack konnte dem POI, den Sie in einen Wegpunkt umwandeln wollen, nicht automatisch ein Symbol zuordnen.
 
-Wollen Sie ein Symbol auswählen, das für jeden neuen Wegepunkt, für den kein Symbol gefunden wird, verwendet wird?
-Wenn Sie &apos;Nein&apos; wählen wird das zuletzt verwendete Symbol genommen.</translation>
+Wollen Sie ein Symbol auswählen, das für jeden neuen Wegpunkt verwendet wird, für den kein Symbol gefunden wird?
+Wenn Sie &apos;Nein&apos; wählen, wird das zuletzt verwendete Symbol genommen.</translation>
     </message>
     <message>
         <location filename="../gis/CGisWorkspace.cpp" line="860"/>
@@ -3137,7 +3126,7 @@ Zeile %2, Spalte %3:
     <message>
         <location filename="../gis/gpx/CGpxProject.cpp" line="247"/>
         <source>The file exists and it has not been created by QMapShack. If you press &apos;yes&apos; all data in this file will be lost. Even if this file contains GPX data and has been loaded by QMapShack, QMapShack might not be able to load and store all elements of this file.  Those elements will be lost. I recommend to use another file. &lt;b&gt;Do you really want to overwrite the file?&lt;/b&gt;</source>
-        <translation>Diese Datei wurde nicht mit QMapShack erstellt. Wenn Sie &apos;Ja&apos; drücken werden alle Daten dieser Datei gelöscht. Selbst wenn diese Datei GPX Daten enthält und mit QMapShack geladen wurde, können nicht alle Elemente dieser Datei durch QMapShack geladen und gespeichert werden. Diese Elemente sind verloren. Ich empfehle die Nutzung einer anderen Datei. &lt;b&gt;Wollen Sie die Datei wirklich überschreiben?&lt;/b&gt;</translation>
+        <translation>Diese Datei wurde nicht mit QMapShack erstellt. Wenn Sie &apos;Ja&apos; drücken, werden alle Daten dieser Datei gelöscht. Auch wenn diese Datei GPX Daten enthält und mit QMapShack geladen wurde, kann QMapShack möglicherweise nicht alle Elemente dieser Datei laden und wieder speichern. Diese Elemente gehen verloren. Ich empfehle eine andere Datei zu benutzen. &lt;b&gt;Wollen Sie die Datei wirklich überschreiben?&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/gpx/CGpxProject.cpp" line="358"/>
@@ -3312,7 +3301,7 @@ Zeile %2, Spalte %3:
         <location filename="../gis/trk/CKnownExtension.cpp" line="62"/>
         <source>Air Temp.</source>
         <comment>extShortName</comment>
-        <translation>Temp.</translation>
+        <translation>Lufttemp.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="62"/>
@@ -3324,7 +3313,7 @@ Zeile %2, Spalte %3:
         <location filename="../gis/trk/CKnownExtension.cpp" line="67"/>
         <source>Water Temp.</source>
         <comment>extShortName</comment>
-        <translation>Temp.</translation>
+        <translation>Wassertemp.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="67"/>
@@ -3370,13 +3359,13 @@ Zeile %2, Spalte %3:
         <location filename="../gis/trk/CKnownExtension.cpp" line="87"/>
         <source>Power</source>
         <comment>extShortName</comment>
-        <translation>Kraft</translation>
+        <translation>Leistung</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="87"/>
         <source>Power</source>
         <comment>extLongName</comment>
-        <translation>Kraft</translation>
+        <translation>Leistung</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="103"/>
@@ -3676,7 +3665,7 @@ Zeile %2, Spalte %3:
     <message>
         <location filename="../gis/suunto/CLogProject.cpp" line="170"/>
         <source>No UTC time has been found in file %1. Local computer time will be used. You can adjust time using a time filter if needed.</source>
-        <translation>In der Datei wurde keine UTC Zeit gefunden. Deswegen wird die lokale Zeit auf dem Computer verwendet. Sie können nachträglich die Zeit im Track mit einem entsprechenden Filter ändern.</translation>
+        <translation>In der Datei %1 wurde keine UTC Zeit gefunden. Deshalb wird die lokale Zeit auf dem Computer verwendet. Sie können nachträglich die Zeit im Track mit einem entsprechenden Filter ändern.</translation>
     </message>
     <message>
         <location filename="../gis/suunto/CLogProject.cpp" line="222"/>
@@ -3764,12 +3753,12 @@ Zeile %2, Spalte %3:
     <message>
         <location filename="../CMainWindow.cpp" line="1571"/>
         <source>QMapShack detected a badly installed Proj library. Please contact the package maintainer of your distribution to fix it.</source>
-        <translation>QMapShack hat eine schlecht installierte PROJ Bibliothek detectiert. Bitte wenden sie sich an ihre Distribution um den Fehler zu beheben.</translation>
+        <translation>QMapShack hat eine schlecht installierte PROJ Bibliothek gefunden. Bitte wenden sie sich an Ihre Distribution, um den Fehler zu beheben.</translation>
     </message>
     <message>
         <location filename="../CMainWindow.cpp" line="1639"/>
         <source>To link map views all map views must have the same projection and scale type. The function &apos;Link Map Views&apos; will be switched off, now.</source>
-        <translation>Um die Kartenansichten miteinander zu verbinden, müssen alle die selbe Projektion und Skalierung haben. Die Funktion &apos;Kartenansichten verbinden&apos; wird deshalb jetzt abgeschaltet.</translation>
+        <translation>Um die Kartenansichten miteinander zu verbinden, müssen alle dieselbe Projektion und Skalierung haben. Die Funktion &apos;Kartenansichten verbinden&apos; wird deshalb jetzt abgeschaltet.</translation>
     </message>
     <message>
         <location filename="../CMainWindow.cpp" line="1642"/>
@@ -4234,7 +4223,7 @@ Zeile %2, Spalte %3:
         <location filename="../map/CMapIMG.cpp" line="366"/>
         <location filename="../map/CMapIMG.cpp" line="367"/>
         <source>State park</source>
-        <translation></translation>
+        <translation>Staatspark</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="368"/>
@@ -4369,12 +4358,12 @@ Interne Typen werden wiederhergestellt.</translation>
         <location filename="../map/CMapIMG.cpp" line="504"/>
         <location filename="../map/CMapIMG.cpp" line="507"/>
         <source>Bad file format: </source>
-        <translation>Falsches Format:</translation>
+        <translation>Falsches Dateiformat: </translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="589"/>
         <source>Failed to read file structure: </source>
-        <translation>Lesen der Dateistruktur fehlgeschlagen:</translation>
+        <translation>Lesen der Dateistruktur fehlgeschlagen: </translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="621"/>
@@ -4384,17 +4373,17 @@ Interne Typen werden wiederhergestellt.</translation>
     <message>
         <location filename="../map/CMapIMG.cpp" line="626"/>
         <source>User abort: </source>
-        <translation>Benutzerabbruch:</translation>
+        <translation>Benutzerabbruch: </translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="629"/>
         <source>File is NT format. QMapShack is unable to read map files with NT format: </source>
-        <translation>Die Datei hat das NT Format. QMapShack kann dieses Format nicht lesen:</translation>
+        <translation>Die Datei hat das NT Format. QMapShack kann dieses Format nicht lesen: </translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="714"/>
         <source>File contains locked / encrypted data. Garmin does not want you to use this file with any other software than the one supplied by Garmin.</source>
-        <translation>Die Datei enthält verschlüsselte Daten. Garmin möchte nicht, dass diese Datei mit einer anderen Software, als der von Garmin bereitgestellten, benutzt wird.</translation>
+        <translation>Die Datei enthält verschlüsselte Daten. Garmin möchte nicht, dass diese Datei mit einer anderen Software als der von Garmin benutzt wird.</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="2111"/>
@@ -4457,7 +4446,7 @@ Interne Typen werden wiederhergestellt.</translation>
     <message>
         <location filename="../map/CMapPathSetup.cpp" line="44"/>
         <source>Add or remove paths containing maps. There can be multiple maps in a path but no sub-path is parsed. Supported formats are: %1</source>
-        <translation>Hinzufügen oder Entfernen von Verzeichnissen mit Karten. In einem Verzeichnis können mehrere Karten liegen. Unterverzeichnisse werden jedoch nicht durchsucht. Unterstützte Formate sind: %1 </translation>
+        <translation>Hinzufügen oder Entfernen von Verzeichnissen mit Karten. In einem Verzeichnis können mehrere Karten liegen. Unterverzeichnisse werden jedoch nicht durchsucht. Unterstützte Formate sind: %1</translation>
     </message>
     <message>
         <location filename="../map/CMapPathSetup.cpp" line="57"/>
@@ -4513,7 +4502,7 @@ Interne Typen werden wiederhergestellt.</translation>
         <location filename="../map/CMapRMAP.cpp" line="163"/>
         <location filename="../map/CMapRMAP.cpp" line="180"/>
         <source>Failed to read reference point.</source>
-        <translation>Referenzpunkte konnten nicht gelesen werden.</translation>
+        <translation>Referenzpunkt konnte nicht gelesen werden.</translation>
     </message>
     <message>
         <location filename="../map/CMapRMAP.cpp" line="202"/>
@@ -4547,7 +4536,7 @@ Zeile %2, Spalte %3:
     <message>
         <location filename="../map/CMapTMS.cpp" line="99"/>
         <source>Malformed TMS file. The layer numbers do not index the available layers. Layer numbers start from index 0.</source>
-        <translation>Ungültige TMS Datei. The Ebenennummern indizieren nicht die verfügbaren Ebenen. Ebenennummern fangen mit Index 0 an.</translation>
+        <translation>Ungültige TMS Datei. Die Ebenennummern indizieren nicht die verfügbaren Ebenen. Ebenennummern fangen bei Index 0 an.</translation>
     </message>
     <message>
         <location filename="../map/CMapTMS.cpp" line="113"/>
@@ -4730,12 +4719,12 @@ Unbekannte Struktur.</translation>
     <message>
         <location filename="../mouse/CMouseNormal.cpp" line="371"/>
         <source>Add POI %1 as Waypoint</source>
-        <translation>POI %1 als Wegepunkt hinzufügen</translation>
+        <translation>POI %1 als Wegpunkt hinzufügen</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseNormal.cpp" line="375"/>
         <source>Zoom in to add POIs as Waypoints</source>
-        <translation>Zoomen Sie näher heran, um POIs als Wegpunkte hinzuzufügen.</translation>
+        <translation>Zoomen Sie näher heran, um POIs als Wegpunkte hinzuzufügen</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseNormal.cpp" line="380"/>
@@ -5002,7 +4991,7 @@ addr:country</source>
         <location filename="../poi/CPoiItemPOI.cpp" line="204"/>
         <location filename="../poi/CPoiItemPOI.cpp" line="207"/>
         <source>Email</source>
-        <translation>Email</translation>
+        <translation>E-Mail</translation>
     </message>
     <message>
         <location filename="../poi/CPoiItemPOI.cpp" line="210"/>
@@ -5019,7 +5008,7 @@ addr:country</source>
     <message>
         <location filename="../poi/CPoiItemPOI.cpp" line="237"/>
         <source>wikimedia</source>
-        <translation>wikimedia</translation>
+        <translation>Wikimedia</translation>
     </message>
     <message>
         <location filename="../poi/CPoiItemPOI.cpp" line="240"/>
@@ -5136,7 +5125,7 @@ y: %4 m/px</translation>
 &apos;%1&apos;
 is not a valid coordinate system definition:
 %2</source>
-        <translation>Die Eingabe:
+        <translation>Die Eingabe
 &apos;%1&apos;
 ist keine gültige Koordinatensystemdefinition:
 %2</translation>
@@ -5440,7 +5429,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="430"/>
         <source>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Routing request sent to server. Please wait...</source>
-        <translation>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Routen-anfrage an den Server geschickt. Bitte warten...</translation>
+        <translation>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Routen-Anfrage an den Server geschickt. Bitte warten...</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="314"/>
@@ -5452,7 +5441,7 @@ ist keine gültige Koordinatensystemdefinition:
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="323"/>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="449"/>
         <source>this version of BRouter does not support more then 1 nogo-area</source>
-        <translation>Diese Version von BRouter unterstützt nicht mehr als ein Vermeidungsgebiet</translation>
+        <translation>Diese Version von BRouter unterstützt nicht mehr als 1 Vermeidungsgebiet</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="487"/>
@@ -5511,7 +5500,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterDownloadPage.cpp" line="152"/>
         <source>loading brouter version-data failed: %1</source>
-        <translation>Das Laden der BRouter Versionsdaten ist fehl geschlagen: %1</translation>
+        <translation>Das Laden der BRouter Versionsdaten ist fehlgeschlagen: %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterDownloadPage.cpp" line="162"/>
@@ -5521,7 +5510,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterDownloadPage.cpp" line="167"/>
         <source>Download: %1&lt;br/&gt;&lt;br/&gt;This will download and install a zip file from a download location that is not secured by any standard at all, using plain HTTP. Usually this should be HTTPS. The risk is someone redirecting the request and sending you a replacement zip with malware. There is no way for QMapShack to detect this. &lt;br/&gt;If you do not understand this or if you are in doubt, do not proceed and abort. Use the Web version of BRouter instead.</source>
-        <translation>Download: %1&lt;br/&gt;&lt;br/&gt;Sie sind dabei eine ZIP Datei aus dem Netz zu laden und zu installieren. Dies Aktion ist nach keinem Standard gesichert und benutzt nur HTTP. Es sollte aber HTTPS sein. Sie haben damit das Risiko, dass jemand die Verbindung umleitet und Ihnen eine Datei mit Schadsoftware sendet. QMapShack kann das nicht unterscheiden. &lt;br/&gt;Wenn Si das nicht verstanden haben oder im Zweifel sind, brechen Sie hier ab. Benützen Sie stattdessen die Web-Version von BRouter.</translation>
+        <translation>Download: %1&lt;br/&gt;&lt;br/&gt;Sie sind dabei eine ZIP Datei aus dem Netz zu laden und zu installieren. Diese Aktion ist nach keinem Standard gesichert und benutzt nur HTTP. Es sollte aber HTTPS sein. Damit besteht das Risiko, dass jemand die Verbindung umleitet und Ihnen eine Datei mit Schadsoftware sendet. QMapShack kann dies nicht unterscheiden. &lt;br/&gt;Falls Sie das nicht verstanden haben oder im Zweifel sind, brechen Sie hier ab und benützen stattdessen die Web-Version von BRouter.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterDownloadPage.cpp" line="179"/>
@@ -5589,7 +5578,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterLocal.cpp" line="145"/>
         <source>QMapShack communicates with BRouter via a network connection. Usually this is done on a special address that can&apos;t be reached from outside your device. However BRouter listens for connections on all available interfaces. If you are in your own private network with an active firewall, this is not much of a problem. If you are in a public network every open port is a risk as it can be used by someone else to compromise your system. We do not recommend to use the local BRouter service in this case. If you see this warning and use BRouter version &gt;= 1.4.10 you can enforce binding to local address by setting hostname to &quot;localhost&quot; and check &quot;Bind to hostname only&quot; in the setup using expert mode.</source>
-        <translation>QMapShack kommuniziert mit BRouter über eine Netzwerkverbindung. Normalerweise wird das über eine spezielle Adresse gemacht, die von außen nicht zugänglich ist. Allerdings horcht BRouter auf allen verfügbaren Netzwerkschnittstellen. Wenn Sie in ihrem eigenen privaten Netzwerk mit einer aktiven Firewall sind, ist das kein großes Problem. Wenn Sie in einem öffentlichen Netzwerk sind, stellt jeder offene Zugang ein Risiko dar, weil er von jemanden missbraucht werden kann, ihr System anzugreifen. Wir empfehlen in diesem Fall auf den lokal laufenden BRouter zu verzichten. Wenn Sie diese Warnung sehen und BRouter Version &gt;= 1.4.10 benutzen, können Sie die Benutzung der lokalen Adresse erzwingen, indem Sie den Hostnamen auf &quot;localhost&quot; setzen und in den Einstellungen im Experten Modus &quot;Nur mit dem Hostnamen verbinden&quot; auswählen.</translation>
+        <translation>QMapShack kommuniziert mit BRouter über eine Netzwerkverbindung. Normalerweise geschieht dies über eine spezielle Adresse, die nicht von außen zugänglich ist. Allerdings horcht BRouter auf allen verfügbaren Netzwerkschnittstellen. Wenn Sie in Ihrem eigenen privaten Netzwerk mit einer aktiven Firewall sind, ist das kein großes Problem. Wenn Sie aber in einem öffentlichen Netzwerk sind, stellt jeder offene Port ein Risiko dar, weil er von jemanden missbraucht werden kann um Ihr System anzugreifen. Wir empfehlen in diesem Fall auf den lokal laufenden BRouter zu verzichten. Wenn Sie diese Warnung sehen und BRouter Version &gt;= 1.4.10 benutzen, können Sie die Benutzung der lokalen Loopback-Netzwerkschnittstelle erzwingen, indem Sie den Hostnamen auf &quot;localhost&quot; setzen und in den Einstellungen im Experten Modus &quot;Nur mit dem Hostnamen verbinden&quot; auswählen.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterLocal.cpp" line="160"/>
@@ -5642,7 +5631,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="337"/>
         <source>backup: %1 to %2</source>
-        <translation>Sicherung: %1 to %2</translation>
+        <translation>Sicherung: %1 nach %2</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="339"/>
@@ -5672,7 +5661,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="661"/>
         <source>Error parsing online-config:</source>
-        <translation>Fehler beim Auswerten der Online-konfiguration:</translation>
+        <translation>Fehler beim Auswerten der Online-Konfiguration:</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="664"/>
@@ -5726,27 +5715,27 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="351"/>
         <source>is an existing BRouter version %1.%2.%3 installation</source>
-        <translation>eine eine existierende Installaton von BRouter Version %1.%2.%3</translation>
+        <translation>ist eine existierende Installation von BRouter Version %1.%2.%3</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="356"/>
         <source>seems to be an existing BRouter installation</source>
-        <translation>scheint eine existieren Installation von BRouter zu sein</translation>
+        <translation>scheint eine existierende Installation von BRouter zu sein</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="366"/>
         <source>is a valid BRouter jar-file (optionally select a different *jar file)</source>
-        <translation>ist eine gültige BRouter jar-Datein (optional wählen Sie ein andere *jar-Datei)</translation>
+        <translation>ist eine gültige BRouter jar-Datei (optional wählen Sie eine andere jar-Datei)</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="375"/>
         <source>It seems there is an existing BRouter installation but the *.jar file is not valid or outdated.</source>
-        <translation>Es scheint eine gültige BRouter Installation zu sein, aber die *jar-Datei ist nocht gültig oder veraltet.</translation>
+        <translation>Es scheint eine gültige BRouter Installation zu sein, aber die jar-Datei ist nicht gültig oder veraltet.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="384"/>
         <source>Choose a different *.jar file or create/update the installation.</source>
-        <translation>Wählen Sie eine andere *.jar-Datei oder führen Sie die Installation (erneut) aus.</translation>
+        <translation>Wählen Sie eine andere jar-Datei oder führen Sie die Installation (erneut) aus.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="392"/>
@@ -5770,7 +5759,7 @@ BRouter will probably not work as expected.
 Please check the logs if Brouter fails to start.</source>
         <translation>Ihre Java Version %1 scheint älter zu sein als die benötigte Version %2
 BRouter wird wahrscheinlich nicht wie erwartet funktionieren.
-Bitte schauen Sie in den Logs nach, wenn BRouter nicht startet.</translation>
+Bitte schauen Sie in den Logs nach, falls BRouter nicht startet.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="412"/>
@@ -5829,17 +5818,17 @@ Bitte schauen Sie in den Logs nach, wenn BRouter nicht startet.</translation>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesPage.cpp" line="59"/>
         <source>Download of routing data is in progress.</source>
-        <translation>Beim Herunterladen der Navigationsdaten.</translation>
+        <translation>Der Download der Routingdaten läuft.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesPage.cpp" line="61"/>
         <source>You did not yet download the selected routing data.</source>
-        <translation>Sie haben noch nicht die ausgewählten Navigationsdaten heruntergeladen.</translation>
+        <translation>Sie haben die ausgewählten Routingdaten noch nicht heruntergeladen.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesPage.cpp" line="65"/>
         <source>Do you want to cancel or continue with setup</source>
-        <translation>Wollen Sie die Einrichtung abbrechen oder weiter fortführen</translation>
+        <translation>Wollen Sie die Einrichtung abbrechen oder fortsetzen</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesPage.cpp" line="67"/>
@@ -5852,7 +5841,7 @@ Bitte schauen Sie in den Logs nach, wenn BRouter nicht startet.</translation>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="105"/>
         <source>available routing-data is being determined.</source>
-        <translation>verfügbare Routing-daten werden ermittelt.</translation>
+        <translation>verfügbare Routingdaten werden ermittelt.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="115"/>
@@ -5897,7 +5886,7 @@ Bitte schauen Sie in den Logs nach, wenn BRouter nicht startet.</translation>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="428"/>
         <source>segments directory does not exist: </source>
-        <translation>Das Verzeichnis für die Routingdaten existiert nicht:</translation>
+        <translation>Das Verzeichnis für die Routingdaten existiert nicht: </translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="441"/>
@@ -5930,7 +5919,7 @@ Bitte schauen Sie in den Logs nach, wenn BRouter nicht startet.</translation>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="596"/>
         <source>up-to-date: %1 (%2), outdated: %3 (%4), to be downloaded: %5 (%6)</source>
-        <translation>Aktuell: %1 (%2), Veraltet: %3 (%4), noch Herunterzuladen: %5 (%6)</translation>
+        <translation>Aktuell: %1 (%2), Veraltet: %3 (%4), Herunterzuladen: %5 (%6)</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="678"/>
@@ -5940,7 +5929,7 @@ Bitte schauen Sie in den Logs nach, wenn BRouter nicht startet.</translation>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="688"/>
         <source>no local data, online available: %1 (%2)</source>
-        <translation>lokale keine Daten. Verfügbar: %1 (%2)</translation>
+        <translation>keine lokale Daten. Verfügbar: %1 (%2)</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="681"/>
@@ -5970,7 +5959,7 @@ Bitte schauen Sie in den Logs nach, wenn BRouter nicht startet.</translation>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="691"/>
         <source>no routing-data available</source>
-        <translation>keine Routing-daten verfügbar</translation>
+        <translation>keine Routingdaten verfügbar</translation>
     </message>
 </context>
 <context>
@@ -6804,8 +6793,8 @@ Replace /dev/ttyUSB0 with the tty device of your AIS receiver</source>
 The basic idea of this GPS source is to receive a NMEA stream via Ethernet connection. You can use the Android app &quot;GPS Tether&quot; to provide a host streaming NMEA data. Your Android device must be in the same network or provide a network as a hotspot.
 For configuration you need to know your Android device&apos;s IP address or it&apos;s host name provided by a DNS. The app will tell you the address. Additionally you need the port number as configured in the app.</source>
         <translation>GPS Tether
-Die grundsätzliche Idee hinter dieser GPS Quelle ist es, NMEA Daten über eine Ethernetverbindung zu erhalten. Sie können die Android App &quot;GPS Tether&quot; verwenden, um einen Server, der NMEA Daten anbietet, zu betreiben. Ihr Android Gerät muss im selben Netzwerk sein oder ein Netzwerk als Hotspot anbieten.
-Für die Konfiguration benötigen sie die IP Adresse ihres Android Gerätes oder seinen Netzwerknamen, der von einem DNS Server angeboten wird. Die App zeigt ihnen die Adresse an. Zusätzlich benötigen Sie den Port, so wie er in der App konfiguriert wurde.</translation>
+Die grundsätzliche Idee hinter dieser GPS Quelle ist es, NMEA Daten über eine Netzwerkverbindung zu erhalten. Sie können die Android App &quot;GPS Tether&quot; verwenden, um einen Server zu betreiben, der NMEA Daten anbietet. Ihr Android Gerät muss im selben Netzwerk sein oder ein Netzwerk als Hotspot anbieten.
+Für die Konfiguration benötigen sie die IP Adresse Ihres Android Gerätes oder seinen Netzwerknamen, der von einem DNS Server angeboten wird. Die App zeigt Ihnen die Adresse an. Zusätzlich benötigen Sie den Port, so wie er in der App konfiguriert wurde.</translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/CRtGpsTetherInfo.cpp" line="395"/>
@@ -7021,7 +7010,7 @@ Für die Konfiguration benötigen sie die IP Adresse ihres Android Gerätes oder
     <message>
         <location filename="../print/CScreenshotDialog.cpp" line="35"/>
         <source>&lt;b&gt;Screenshot&lt;/b&gt;&lt;br/&gt;You can save or print a screenshot of your current map view. If the track profile is shown in it&apos;s own window it is appended to the screenshot. Check the pre-view below. </source>
-        <translation>&lt;b&gt;Bildschirmkopie&lt;/b&gt;&lt;br/&gt;Sie können eine Bildschirmkopie von ihrer aktuellen Kartenansicht speichern oder drucken. Wenn das Trackprofil in einem eigenen Fenster angezeigt wird, wird es an die Bildschirmkopie angehängt. Überprüfen Sie das mit der Vorschau.</translation>
+        <translation>&lt;b&gt;Bildschirmkopie&lt;/b&gt;&lt;br/&gt;Sie können eine Bildschirmkopie von Ihrer aktuellen Kartenansicht speichern oder drucken. Wenn das Trackprofil in einem eigenen Fenster angezeigt wird, wird es an die Bildschirmkopie angehängt. Überprüfen Sie das mit der Vorschau.</translation>
     </message>
     <message>
         <location filename="../print/CScreenshotDialog.cpp" line="57"/>
@@ -7321,7 +7310,7 @@ Für die Konfiguration benötigen sie die IP Adresse ihres Android Gerätes oder
     <message>
         <location filename="../gis/search/CSearch.cpp" line="382"/>
         <source>example: status is available</source>
-        <translation>Status ist erreichbar</translation>
+        <translation>Beispiel: Status ist erreichbar</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="383"/>
@@ -7451,7 +7440,7 @@ Für die Konfiguration benötigen sie die IP Adresse ihres Android Gerätes oder
     <message>
         <location filename="../gis/search/CSearch.cpp" line="419"/>
         <source>latest log by</source>
-        <translation>letzter log von</translation>
+        <translation>letzter Log von</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="420"/>
@@ -7611,12 +7600,12 @@ Für die Konfiguration benötigen sie die IP Adresse ihres Android Gerätes oder
     <message>
         <location filename="../gis/search/CSearch.cpp" line="468"/>
         <source>searches the translated meanings of the non-negated attributes (Those not crossed out)</source>
-        <translation>durchsucht die übersetzten Bedeutungen der nicht verneinten Attribute (die nicht durchgestrichenen).</translation>
+        <translation>durchsucht die übersetzten Bedeutungen der nicht negierten Attribute (die nicht durchgestrichenen)</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="470"/>
         <source>searches the translated meanings of the negated attributes (Those crossed out)</source>
-        <translation>durchsucht die übersetzten Bedeutungen der negierten Attribute (die durchgestrichenen).</translation>
+        <translation>durchsucht die übersetzten Bedeutungen der negierten Attribute (die durchgestrichenen)</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="471"/>
@@ -7658,7 +7647,7 @@ Für die Konfiguration benötigen sie die IP Adresse ihres Android Gerätes oder
         <location filename="../gis/search/CSearch.cpp" line="480"/>
         <source>searches the type of the latest log (Found It, Didn&apos;t find it, Owner Maintenance, Write Note...)</source>
         <translatorcomment>Da der Typ direkt aus der GPX Datei entnommen wird, wird er nicht übersetzt</translatorcomment>
-        <translation>durchsucht den typ des letzten Logs (Found It, Didn&apos;t find it, Owner Maintenance, Write Note...)</translation>
+        <translation>durchsucht den Typ des letzten Logs (Found It, Didn&apos;t find it, Owner Maintenance, Write Note...)</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="481"/>
@@ -7754,7 +7743,7 @@ Für die Konfiguration benötigen sie die IP Adresse ihres Android Gerätes oder
     <message>
         <location filename="../gis/search/CSearchExplanationDialog.cpp" line="37"/>
         <source>If only one of the two given values has a unit the unit is assumed for both</source>
-        <translation>Wenn nur einer der beiden angegebenen Werte eine Einheit hat, wird die Einheit für beide angenommen.</translation>
+        <translation>Hat nur einer der beiden angegebenen Werte eine Einheit, dann wird die Einheit für beide angenommen</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearchExplanationDialog.cpp" line="41"/>
@@ -7799,7 +7788,7 @@ Für die Konfiguration benötigen sie die IP Adresse ihres Android Gerätes oder
     <message>
         <location filename="../gis/search/CSearchExplanationDialog.cpp" line="63"/>
         <source>&apos;Date equals&apos; matches everything that is within the next 24h, if time is provided with date, if not, then everything on the day queried. Be aware that that the times are converted to UTC before comparison and you local timezone is taken for the query.</source>
-        <translation>&apos;Datum ist gleich&apos; findet, falls ein Datum mit Uhrzeit angegeben wurde, alles, was innerhalb der nächsten 24h liegt, ansonsten alles was an dem angegebenen Tag ist. Beachte, dass alle Zeiten nach UTC konvertiert werden ehe die Prüfung vorgenommen wird und für die Abfrage die eingestellte Zeitzone verwendet wird.</translation>
+        <translation>Falls ein Datum mit Uhrzeit angegeben wurde, findet &apos;Datum ist gleich&apos; alles, was innerhalb der nächsten 24h liegt, ansonsten alles, was an dem angegebenen Tag ist. Beachte, dass alle Zeiten nach UTC konvertiert werden ehe die Prüfung vorgenommen wird und dass für die Abfrage die eingestellte Zeitzone verwendet wird.</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearchExplanationDialog.cpp" line="79"/>
@@ -7832,7 +7821,7 @@ Für die Konfiguration benötigen sie die IP Adresse ihres Android Gerätes oder
     <message>
         <location filename="../gis/search/CSearchLineEdit.cpp" line="40"/>
         <source>Error parsing search</source>
-        <translation>Fehler beim parsen der Suche</translation>
+        <translation>Fehler beim Parsen der Suche</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearchLineEdit.cpp" line="41"/>
@@ -7847,7 +7836,7 @@ Für die Konfiguration benötigen sie die IP Adresse ihres Android Gerätes oder
     <message>
         <location filename="../gis/search/CSearchLineEdit.cpp" line="45"/>
         <source>Complete Text</source>
-        <translation>Vollständiger text</translation>
+        <translation>Vollständiger Text</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearchLineEdit.cpp" line="47"/>
@@ -7893,7 +7882,7 @@ Für die Konfiguration benötigen sie die IP Adresse ihres Android Gerätes oder
     <message>
         <location filename="../gis/search/CSearchLineEdit.cpp" line="166"/>
         <source>Automatically set the property, please make sure the results are correct.</source>
-        <translation>Der Parameter wurde automatisch bestimmt. Bitte überprüfen Sie, ob das Ergebnis ihrer Erwartung entspricht.</translation>
+        <translation>Die Eigenschaft wurde automatisch bestimmt. Bitte überprüfen Sie, ob das Ergebnis Ihrer Erwartung entspricht.</translation>
     </message>
 </context>
 <context>
@@ -8007,7 +7996,7 @@ Zeile %2, Spalte %3:
     <message>
         <location filename="../gis/suunto/CSmlProject.cpp" line="81"/>
         <source>Failed to open %1</source>
-        <translation>Die Datei %1 konnte nicht geöffnet werden.</translation>
+        <translation>Die Datei %1 konnte nicht geöffnet werden</translation>
     </message>
     <message>
         <location filename="../gis/suunto/CSmlProject.cpp" line="90"/>
@@ -8056,7 +8045,7 @@ Zeile %2, Spalte %3:
     <message>
         <location filename="../gis/suunto/CSmlProject.cpp" line="184"/>
         <source>No UTC time has been found in file %1. Local computer time will be used. You can adjust time using a time filter if needed.</source>
-        <translation>In der Datei wurde keine UTC Zeit gefunden. Deswegen wird die lokale Zeit auf dem Computer verwendet. Sie können nachträglich die Zeit im Track mit einem entsprechenden Filter ändern.</translation>
+        <translation>In der Datei %1 wurde keine UTC Zeit gefunden. Deshalb wird die lokale Zeit auf dem Computer verwendet. Sie können nachträglich die Zeit im Track mit einem entsprechenden Filter ändern.</translation>
     </message>
     <message>
         <location filename="../gis/suunto/CSmlProject.cpp" line="226"/>
@@ -8169,7 +8158,7 @@ Zeile %2, Spalte %3:
     <message>
         <location filename="../gis/tcx/CTcxProject.cpp" line="109"/>
         <source>Not a TCX file: %1</source>
-        <translation>Keine TCX  Datei: %1</translation>
+        <translation>Keine TCX Datei: %1</translation>
     </message>
     <message>
         <location filename="../gis/tcx/CTcxProject.cpp" line="117"/>
@@ -8189,7 +8178,7 @@ Zeile %2, Spalte %3:
     <message>
         <location filename="../gis/tcx/CTcxProject.cpp" line="339"/>
         <source>The file exists and it has not been created by QMapShack. If you press &apos;yes&apos; all data in this file will be lost. Even if this file contains data and has been loaded by QMapShack, QMapShack might not be able to load and store all elements of this file.  Those elements will be lost. I recommend to use another file. &lt;b&gt;Do you really want to overwrite the file?&lt;/b&gt;</source>
-        <translation>Die Datei existiert schon und wurde nicht mit QMapShack erstellt. Wenn Sie &apos;Ja&apos; drücken werden die ursprünglichen Daten verloren gehen. Auch wenn die Datei mit QMapShack geladen wurde. QMapShack ist möglicherweise nicht in der Lage alle Daten zu laden und wieder zu speichern. Diese Daten werden verloren gehen. Wir empfehlen eine andere Datei zu benutzen. &lt;b&gt;Wollen Sie wirklich die Datei überschreiben?&lt;/b&gt;</translation>
+        <translation>Die Datei existiert schon und wurde nicht mit QMapShack erstellt. Wenn Sie &apos;Ja&apos; drücken, werden alle Daten dieser Datei gelöscht. Auch wenn diese Datei Daten enthält und mit QMapShack geladen wurde, kann QMapShack möglicherweise nicht alle Daten dieser Datei laden und wieder speichern. Diese Daten gehen verloren. Ich empfehle eine andere Datei zu benutzen. &lt;b&gt;Wollen Sie die Datei wirklich überschreiben?&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/tcx/CTcxProject.cpp" line="379"/>
@@ -8224,7 +8213,7 @@ Zeile %2, Spalte %3:
     <message>
         <location filename="../gis/tcx/CTcxProject.cpp" line="400"/>
         <source>QMapShack does not know how track &lt;b&gt;%1&lt;/b&gt; should be saved. &lt;b&gt;Do you want to save it as a course or as an activity? &lt;/b&gt;Remember that only waypoints close enough to the track will be saved when saving as a course. Waypoints will not be saved when saving as an activity.</source>
-        <translation>QMapShack weiß nicht als was der Track &lt;b&gt;%1&lt;/b&gt; gespeichert werden soll. &lt;b&gt; Wollen Sie ihn als Kurs oder als Aktivität speichern? &lt;b&gt; Bedenken Sie, dass nur Wegpunkte die nahe genug am Track sind bei einem Kurs gespeichert werden. Wegpunkte werden bei einer Aktivität nicht gespeichert.</translation>
+        <translation>QMapShack weiß nicht wie der Track &lt;b&gt;%1&lt;/b&gt; gespeichert werden soll. &lt;b&gt; Wollen Sie ihn als Kurs oder als Aktivität speichern? &lt;b&gt; Bedenken Sie, dass bei einem Kurs nur Wegpunkte gespeichert werden, die nahe genug am Track sind. Bei einer Aktivität werden Wegpunkte nicht gespeichert.</translation>
     </message>
     <message>
         <location filename="../gis/tcx/CTcxProject.cpp" line="491"/>
@@ -8253,7 +8242,7 @@ Zeile %2, Spalte %3:
     <message>
         <location filename="../widgets/CTemplateWidget.cpp" line="39"/>
         <source>Cycling Tour Summary (built-in)</source>
-        <translation>Radtour Zusammenfassung</translation>
+        <translation>Radtour Zusammenfassung (built-in)</translation>
     </message>
     <message>
         <location filename="../widgets/CTemplateWidget.cpp" line="40"/>
@@ -8268,7 +8257,7 @@ Zeile %2, Spalte %3:
     <message>
         <location filename="../widgets/CTemplateWidget.cpp" line="43"/>
         <source>Running Summary (built-in)</source>
-        <translation>Laufen Zusammenfassung</translation>
+        <translation>Laufen Zusammenfassung (built-in)</translation>
     </message>
     <message>
         <location filename="../widgets/CTemplateWidget.cpp" line="146"/>
@@ -8347,7 +8336,7 @@ Zeile %2, Spalte %3:
         <location filename="../gis/tnv/serialization.cpp" line="534"/>
         <location filename="../gis/tnv/serialization.cpp" line="544"/>
         <source>Only support lon/lat WGS 84 format.</source>
-        <translation>Es wird nur lon/lat WGS 84 als Format unterstützt.</translation>
+        <translation>Als Format wird nur lon/lat WGS 84 unterstützt.</translation>
     </message>
     <message>
         <location filename="../gis/tnv/serialization.cpp" line="559"/>
@@ -8371,9 +8360,6 @@ Zeile %2, Spalte %3:
         <location filename="../templates/Cycling_Tour_Summary.ui" line="301"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="585"/>
         <location filename="../templates/Running_Summary.ui" line="663"/>
-        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="514"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="613"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="692"/>
         <source>Participants</source>
         <translation>Teilnehmer</translation>
     </message>
@@ -8381,9 +8367,6 @@ Zeile %2, Spalte %3:
         <location filename="../templates/Cycling_Tour_Summary.ui" line="26"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="20"/>
         <location filename="../templates/Running_Summary.ui" line="20"/>
-        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="479"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="529"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="603"/>
         <source>Weather</source>
         <translation>Wetter</translation>
     </message>
@@ -8391,9 +8374,6 @@ Zeile %2, Spalte %3:
         <location filename="../templates/Cycling_Tour_Summary.ui" line="89"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="83"/>
         <location filename="../templates/Running_Summary.ui" line="56"/>
-        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="486"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="536"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="607"/>
         <source>rain</source>
         <translation>Regen</translation>
     </message>
@@ -8401,9 +8381,6 @@ Zeile %2, Spalte %3:
         <location filename="../templates/Cycling_Tour_Summary.ui" line="32"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="26"/>
         <location filename="../templates/Running_Summary.ui" line="36"/>
-        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="480"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="530"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="605"/>
         <source>sunny</source>
         <translation>Sonne</translation>
     </message>
@@ -8411,9 +8388,6 @@ Zeile %2, Spalte %3:
         <location filename="../templates/Cycling_Tour_Summary.ui" line="119"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="113"/>
         <location filename="../templates/Running_Summary.ui" line="86"/>
-        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="489"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="539"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="610"/>
         <source>snow</source>
         <translation>Schnee</translation>
     </message>
@@ -8421,9 +8395,6 @@ Zeile %2, Spalte %3:
         <location filename="../templates/Cycling_Tour_Summary.ui" line="59"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="53"/>
         <location filename="../templates/Running_Summary.ui" line="26"/>
-        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="483"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="533"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="604"/>
         <source>clouds</source>
         <translation>Wolken</translation>
     </message>
@@ -8431,9 +8402,6 @@ Zeile %2, Spalte %3:
         <location filename="../templates/Cycling_Tour_Summary.ui" line="69"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="63"/>
         <location filename="../templates/Running_Summary.ui" line="76"/>
-        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="484"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="534"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="609"/>
         <source>windy</source>
         <translation>Wind</translation>
     </message>
@@ -8441,9 +8409,6 @@ Zeile %2, Spalte %3:
         <location filename="../templates/Cycling_Tour_Summary.ui" line="49"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="43"/>
         <location filename="../templates/Running_Summary.ui" line="123"/>
-        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="482"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="532"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="613"/>
         <source>hot</source>
         <translation>heiß</translation>
     </message>
@@ -8451,9 +8416,6 @@ Zeile %2, Spalte %3:
         <location filename="../templates/Cycling_Tour_Summary.ui" line="79"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="73"/>
         <location filename="../templates/Running_Summary.ui" line="46"/>
-        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="485"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="535"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="606"/>
         <source>warm</source>
         <translation>warm</translation>
     </message>
@@ -8461,9 +8423,6 @@ Zeile %2, Spalte %3:
         <location filename="../templates/Cycling_Tour_Summary.ui" line="109"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="103"/>
         <location filename="../templates/Running_Summary.ui" line="96"/>
-        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="488"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="538"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="611"/>
         <source>cold</source>
         <translation>kalt</translation>
     </message>
@@ -8471,9 +8430,6 @@ Zeile %2, Spalte %3:
         <location filename="../templates/Cycling_Tour_Summary.ui" line="136"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="130"/>
         <location filename="../templates/Running_Summary.ui" line="66"/>
-        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="491"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="541"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="608"/>
         <source>freezing</source>
         <translation>eiskalt</translation>
     </message>
@@ -8481,9 +8437,6 @@ Zeile %2, Spalte %3:
         <location filename="../templates/Cycling_Tour_Summary.ui" line="42"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="36"/>
         <location filename="../templates/Running_Summary.ui" line="143"/>
-        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="481"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="531"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="615"/>
         <source>foggy</source>
         <translation>neblig</translation>
     </message>
@@ -8491,9 +8444,6 @@ Zeile %2, Spalte %3:
         <location filename="../templates/Cycling_Tour_Summary.ui" line="99"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="93"/>
         <location filename="../templates/Running_Summary.ui" line="133"/>
-        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="487"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="537"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="614"/>
         <source>humid</source>
         <translation>schwül</translation>
     </message>
@@ -8501,233 +8451,180 @@ Zeile %2, Spalte %3:
         <location filename="../templates/Cycling_Tour_Summary.ui" line="152"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="153"/>
         <location filename="../templates/Running_Summary.ui" line="153"/>
-        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="492"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="542"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="616"/>
         <source>Character</source>
         <translation>Charakter</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="214"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="627"/>
         <source>trail running</source>
         <translation>Geländelauf</translation>
     </message>
     <message>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="186"/>
         <location filename="../templates/Running_Summary.ui" line="224"/>
-        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="497"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="628"/>
         <source>city/road</source>
         <translation>Stadt/Straße</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="231"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="629"/>
         <source> track</source>
         <translation>Pfad</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="238"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="630"/>
         <source>ultra long dist</source>
         <translation>sehr lang. Dist.</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="252"/>
         <location filename="../templates/Running_Summary.ui" line="252"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="558"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="632"/>
         <source>easy hiking</source>
         <translation>einfache Wanderung</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="270"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="634"/>
         <source>shoes:</source>
         <translation>Schuhe:</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="282"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="635"/>
         <source>backpack</source>
         <translation>Rucksack</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="289"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="636"/>
         <source>gloves</source>
         <translation>Handschuhe</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="296"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="637"/>
         <source>hip pack</source>
         <translation>Hüftgurt</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="303"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="638"/>
         <source>poles</source>
         <translation>Stöcke</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="324"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="641"/>
         <source>calf guard comp.</source>
-        <translation></translation>
+        <translation>Wadenbandagen</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="264"/>
         <location filename="../templates/Running_Summary.ui" line="346"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="559"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="642"/>
         <source>MIDE: Severity Environment</source>
         <translation>MIDE: Schwierigkeit Gelände</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="270"/>
         <location filename="../templates/Running_Summary.ui" line="352"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="568"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="651"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="294"/>
         <location filename="../templates/Running_Summary.ui" line="376"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="564"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="647"/>
         <source>4. Considerable risk factors</source>
         <translation>4. Erhebliche Risikofaktoren</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="310"/>
         <location filename="../templates/Running_Summary.ui" line="392"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="570"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="653"/>
         <source>MIDE: Orientation</source>
         <translation>MIDE: Orientierung</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="353"/>
         <location filename="../templates/Running_Summary.ui" line="435"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="578"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="661"/>
         <source>MIDE: Terrain underfoot</source>
         <translation>MIDE: Gelände (Weg)</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="399"/>
         <location filename="../templates/Running_Summary.ui" line="481"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="586"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="669"/>
         <source>MIDE: Effort required </source>
         <translation>MIDE: Benötigter Einsatz</translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="538"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="678"/>
         <source>IBP Index (RNG)</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="396"/>
         <location filename="../templates/Running_Summary.ui" line="565"/>
-        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="519"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="679"/>
         <source>Max. heart rate</source>
         <translation>Max. Puls</translation>
     </message>
     <message>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="408"/>
         <location filename="../templates/Running_Summary.ui" line="577"/>
-        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="520"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="680"/>
         <source>Avg. heart rate</source>
         <translation>Durchschnitt Puls</translation>
     </message>
     <message>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="420"/>
         <location filename="../templates/Running_Summary.ui" line="589"/>
-        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="521"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="681"/>
         <source>Min. heart rate</source>
         <translation>Min. Puls</translation>
     </message>
     <message>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="432"/>
         <location filename="../templates/Running_Summary.ui" line="601"/>
-        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="522"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="682"/>
         <source>Cal. consumption</source>
         <translation>Kalorienverbrauch</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="512"/>
         <location filename="../templates/Running_Summary.ui" line="615"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="603"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="683"/>
         <source>SAC scale</source>
         <translation>SAC Skala</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="524"/>
         <location filename="../templates/Running_Summary.ui" line="627"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="605"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="685"/>
         <source>T-1</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="529"/>
         <location filename="../templates/Running_Summary.ui" line="632"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="606"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="686"/>
         <source>T-2</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="534"/>
         <location filename="../templates/Running_Summary.ui" line="637"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="607"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="687"/>
         <source>T-3</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="539"/>
         <location filename="../templates/Running_Summary.ui" line="642"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="608"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="688"/>
         <source>T-4</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="544"/>
         <location filename="../templates/Running_Summary.ui" line="647"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="609"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="689"/>
         <source>T-5</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="549"/>
         <location filename="../templates/Running_Summary.ui" line="652"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="610"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="690"/>
         <source>T-6</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="224"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="554"/>
         <source>climbing</source>
         <translation>Klettern</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="238"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="556"/>
         <source>alpine</source>
         <translation>alpine Tour</translation>
     </message>
@@ -8735,9 +8632,6 @@ Zeile %2, Spalte %3:
         <location filename="../templates/Cycling_Tour_Summary.ui" line="179"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="245"/>
         <location filename="../templates/Running_Summary.ui" line="245"/>
-        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="496"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="557"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="631"/>
         <source>large ascend</source>
         <translation>langer Anstieg</translation>
     </message>
@@ -8745,15 +8639,11 @@ Zeile %2, Spalte %3:
         <location filename="../templates/Cycling_Tour_Summary.ui" line="193"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="203"/>
         <location filename="../templates/Running_Summary.ui" line="200"/>
-        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="498"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="551"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="625"/>
         <source>long distance</source>
         <translation>lange Distanz</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="231"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="555"/>
         <source>via ferrata</source>
         <translation>Klettersteig</translation>
     </message>
@@ -8761,9 +8651,6 @@ Zeile %2, Spalte %3:
         <location filename="../templates/Cycling_Tour_Summary.ui" line="129"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="123"/>
         <location filename="../templates/Running_Summary.ui" line="116"/>
-        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="490"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="540"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="612"/>
         <source>hail/soft hail</source>
         <translation>Hagel/Graupel</translation>
     </message>
@@ -8771,23 +8658,17 @@ Zeile %2, Spalte %3:
         <location filename="../templates/Cycling_Tour_Summary.ui" line="214"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="217"/>
         <location filename="../templates/Running_Summary.ui" line="193"/>
-        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="501"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="553"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="624"/>
         <source>Rating</source>
         <translation>Beurteilung</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="502"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="602"/>
         <source>ice pick</source>
         <translation>Pickel</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="481"/>
         <location filename="../templates/Running_Summary.ui" line="310"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="599"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="639"/>
         <source>crampon</source>
         <translation>Steigeisen</translation>
     </message>
@@ -8795,9 +8676,6 @@ Zeile %2, Spalte %3:
         <location filename="../templates/Cycling_Tour_Summary.ui" line="207"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="210"/>
         <location filename="../templates/Running_Summary.ui" line="207"/>
-        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="500"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="552"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="626"/>
         <source>night</source>
         <translation>Nacht</translation>
     </message>
@@ -8805,9 +8683,6 @@ Zeile %2, Spalte %3:
         <location filename="../templates/Cycling_Tour_Summary.ui" line="14"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="14"/>
         <location filename="../templates/Running_Summary.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="478"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="528"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="602"/>
         <source>Form</source>
         <translation></translation>
     </message>
@@ -8815,9 +8690,6 @@ Zeile %2, Spalte %3:
         <location filename="../templates/Cycling_Tour_Summary.ui" line="227"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="172"/>
         <location filename="../templates/Running_Summary.ui" line="165"/>
-        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="503"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="545"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="618"/>
         <source>Rating 5 stars</source>
         <translation>Beurteilung 5 Sterne</translation>
     </message>
@@ -8825,9 +8697,6 @@ Zeile %2, Spalte %3:
         <location filename="../templates/Cycling_Tour_Summary.ui" line="232"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="177"/>
         <location filename="../templates/Running_Summary.ui" line="170"/>
-        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="504"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="546"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="619"/>
         <source>Rating 4 stars</source>
         <translation>Beurteilung 4 Sterne</translation>
     </message>
@@ -8835,9 +8704,6 @@ Zeile %2, Spalte %3:
         <location filename="../templates/Cycling_Tour_Summary.ui" line="237"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="182"/>
         <location filename="../templates/Running_Summary.ui" line="175"/>
-        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="505"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="547"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="620"/>
         <source>Rating 3 stars</source>
         <translation>Beurteilung 3 Sterne</translation>
     </message>
@@ -8845,9 +8711,6 @@ Zeile %2, Spalte %3:
         <location filename="../templates/Cycling_Tour_Summary.ui" line="242"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="187"/>
         <location filename="../templates/Running_Summary.ui" line="180"/>
-        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="506"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="548"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="621"/>
         <source>Rating 2 stars</source>
         <translation>Beurteilung 2 Sterne</translation>
     </message>
@@ -8855,15 +8718,11 @@ Zeile %2, Spalte %3:
         <location filename="../templates/Cycling_Tour_Summary.ui" line="247"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="192"/>
         <location filename="../templates/Running_Summary.ui" line="185"/>
-        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="507"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="549"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="622"/>
         <source>Rating 1 star</source>
         <translation>Beurteilung 1 Sterne</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="159"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="543"/>
         <source>aborted</source>
         <translation>abgebrochen</translation>
     </message>
@@ -8871,15 +8730,11 @@ Zeile %2, Spalte %3:
         <location filename="../templates/Cycling_Tour_Summary.ui" line="261"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="444"/>
         <location filename="../templates/Running_Summary.ui" line="262"/>
-        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="509"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="594"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="633"/>
         <source>Equipment</source>
         <translation>Ausrüstung</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="474"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="598"/>
         <source>ferrata gear</source>
         <translation>Klettersteigset</translation>
     </message>
@@ -8887,191 +8742,145 @@ Zeile %2, Spalte %3:
         <location filename="../templates/Cycling_Tour_Summary.ui" line="274"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="467"/>
         <location filename="../templates/Running_Summary.ui" line="317"/>
-        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="511"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="597"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="640"/>
         <source>night gear</source>
         <translation>Nachtausrüstung</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="488"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="600"/>
         <source>snow shoes</source>
         <translation>Schneeschuhe</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="460"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="596"/>
         <source>climbing gear</source>
         <translation>Kletterausrüstung</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="453"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="595"/>
         <source>ski</source>
         <translation>Ski</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="495"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="601"/>
         <source>camping gear</source>
         <translation>Campingausrüstung</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="560"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="612"/>
         <source>IBP Index (HKG)</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="279"/>
         <location filename="../templates/Running_Summary.ui" line="361"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="561"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="644"/>
         <source>1. The environment is not risk free</source>
         <translation>1. Das Gelände ist nicht frei von Risiko</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="284"/>
         <location filename="../templates/Running_Summary.ui" line="366"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="562"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="645"/>
         <source>2. More than 1 risk factor</source>
-        <translation>2. Mehr als ein Risikofaktor</translation>
+        <translation>2. Mehr als 1 Risikofaktor</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="289"/>
         <location filename="../templates/Running_Summary.ui" line="371"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="563"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="646"/>
         <source>3. Various risk factors</source>
         <translation>3. Verschiedene Risikofaktoren</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="299"/>
         <location filename="../templates/Running_Summary.ui" line="381"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="565"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="648"/>
         <source>5. Many risk factors</source>
         <translation>5. Zahlreiche Risikofaktoren</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="322"/>
         <location filename="../templates/Running_Summary.ui" line="404"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="572"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="655"/>
         <source>1. Paths and junctions well signed</source>
         <translation>1. Wege und Kreuzungen sind gut beschildert</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="327"/>
         <location filename="../templates/Running_Summary.ui" line="409"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="573"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="656"/>
         <source>2. Footpaths or way marks which follow the route</source>
         <translation>2. Fußwege oder Markierungen die der Route folgen</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="332"/>
         <location filename="../templates/Running_Summary.ui" line="414"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="574"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="657"/>
         <source>3. Demands orientation by identification of geographic features and compass points</source>
         <translation>3. Verlangt eine Orientierung über Landmarken und Kompasspunkte</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="337"/>
         <location filename="../templates/Running_Summary.ui" line="419"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="575"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="658"/>
         <source>4. Requires advanced navigation techniques, beyond interpretation of features on the map and the ground</source>
         <translation>4. Verlangt navigatorische Fähigkeiten, die über das Interpretieren von Karten und Umgebung hinausgehen</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="342"/>
         <location filename="../templates/Running_Summary.ui" line="424"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="576"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="659"/>
         <source>5. Difficult navigation is interrupted by obstacles which must be avoided</source>
-        <translation>5. Schwierige Navigation erschwert zusätzlich durch zu vermeidende Gefahren</translation>
+        <translation>5. Schwierige Navigation, zusätzlich erschwert durch zu vermeidende Gefahren</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="368"/>
         <location filename="../templates/Running_Summary.ui" line="450"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="580"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="663"/>
         <source>1. Easy walking</source>
         <translation>1 Einfaches Gehgelände</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="373"/>
         <location filename="../templates/Running_Summary.ui" line="455"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="581"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="664"/>
         <source>2. Bridleways and well made footpaths</source>
         <translation>2. Reitwege und gute Fußwege</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="378"/>
         <location filename="../templates/Running_Summary.ui" line="460"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="582"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="665"/>
         <source>3. Rocky stairways, rough ground and screes</source>
         <translation>3. Felsige Stufen, rauer Untergrund und Platten</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="383"/>
         <location filename="../templates/Running_Summary.ui" line="465"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="583"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="666"/>
         <source>4. Contains sections where the use of hands is necessary for balance</source>
-        <translation>4. Hat Abschnitte bei denen man die Hände zur Balance benötigt</translation>
+        <translation>4. Hat Abschnitte, bei denen man die Hände zur Balance benötigt</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="388"/>
         <location filename="../templates/Running_Summary.ui" line="470"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="584"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="667"/>
         <source>5. Scrambling, pulling on hands and arms for progress</source>
-        <translation>5. Kletter, massiver Einsatz der Arme</translation>
+        <translation>5. Klettern, massiver Einsatz der Arme</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="411"/>
         <location filename="../templates/Running_Summary.ui" line="493"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="588"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="671"/>
         <source>1. Less than one hour of continuous walking</source>
         <translation>1. Kürzer als eine Stunde gehen</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="416"/>
         <location filename="../templates/Running_Summary.ui" line="498"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="589"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="672"/>
         <source>2. From 1 to 3 hours of continuous walking</source>
         <translation>2. Ein bis drei Stunden gehen</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="421"/>
         <location filename="../templates/Running_Summary.ui" line="503"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="590"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="673"/>
         <source>3. From 3 to 6 hours of continuous walking</source>
         <translation>3. Drei bis 6 Stunden gehen</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="426"/>
         <location filename="../templates/Running_Summary.ui" line="508"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="591"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="674"/>
         <source>4. From 6 to 10 hours of continuous walking</source>
         <translation>4. Sechs bis 10 Stunden gehen</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="431"/>
         <location filename="../templates/Running_Summary.ui" line="513"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="592"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="675"/>
         <source>5. More than 10 hours of continuous walking</source>
         <translation>5. Mehr als 10 Stunden gehen</translation>
     </message>
@@ -9079,69 +8888,56 @@ Zeile %2, Spalte %3:
         <location filename="../templates/Cycling_Tour_Summary.ui" line="338"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="603"/>
         <location filename="../templates/Running_Summary.ui" line="526"/>
-        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="516"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="614"/>
-        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="677"/>
         <source>Details</source>
         <translation>Details</translation>
     </message>
     <message>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="158"/>
-        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="493"/>
         <source>enduro</source>
         <translation>Ausdauer</translation>
     </message>
     <message>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="165"/>
-        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="494"/>
         <source>freeride</source>
         <translation>Freeride</translation>
     </message>
     <message>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="172"/>
-        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="495"/>
         <source>XC</source>
         <translation>XC</translation>
     </message>
     <message>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="200"/>
-        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="499"/>
         <source>downhill</source>
         <translation>Downhill</translation>
     </message>
     <message>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="267"/>
-        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="510"/>
         <source>protections</source>
         <translation>Protektoren</translation>
     </message>
     <message>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="281"/>
-        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="512"/>
         <source>E-Bike</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="288"/>
-        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="513"/>
         <source>saddlebags</source>
         <translation>Satteltaschen</translation>
     </message>
     <message>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="320"/>
-        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="515"/>
         <source>Bike</source>
         <translation>Rad</translation>
     </message>
     <message>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="352"/>
-        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="517"/>
         <source>IBP Index (BYC)</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="377"/>
-        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="518"/>
         <source>% Cycling</source>
         <translation>% Rad gefahren</translation>
     </message>
@@ -9150,13 +8946,11 @@ Zeile %2, Spalte %3:
     <name>IAbout</name>
     <message>
         <location filename="../IAbout.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="205"/>
         <source>About....</source>
         <translation>Über....</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="30"/>
-        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="206"/>
         <source>&lt;b&gt;QMapShack&lt;/b&gt;, Version</source>
         <translation></translation>
     </message>
@@ -9166,35 +8960,26 @@ Zeile %2, Spalte %3:
         <location filename="../IAbout.ui" line="102"/>
         <location filename="../IAbout.ui" line="116"/>
         <location filename="../IAbout.ui" line="130"/>
-        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="207"/>
-        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="211"/>
-        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="213"/>
-        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="215"/>
-        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="217"/>
         <source>TextLabel</source>
         <translation>Bezeichnung</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="81"/>
-        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="210"/>
         <source>Qt</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="95"/>
-        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="212"/>
         <source>GDAL</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="109"/>
-        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="214"/>
         <source>Proj4</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="123"/>
-        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="216"/>
         <source>Routino</source>
         <translation>Routino</translation>
     </message>
@@ -9224,19 +9009,16 @@ Zeile %2, Spalte %3:
     </message>
     <message>
         <location filename="../IAbout.ui" line="146"/>
-        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="218"/>
         <source>&lt;b&gt;Contributors to the code:&lt;/b&gt;</source>
         <translation>&lt;b&gt;Mitwirkende am Code:&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="153"/>
-        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="219"/>
         <source>-</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="177"/>
-        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="221"/>
         <source>© 2017 Oliver Eichler (oliver.eichler@gmx.de)</source>
         <translation></translation>
     </message>
@@ -9250,7 +9032,6 @@ Zeile %2, Spalte %3:
     </message>
     <message>
         <location filename="../IAbout.ui" line="170"/>
-        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="220"/>
         <source>This software is licensed under GPL3 or any later version</source>
         <translation>Diese Software steht unter der GPL3 Lizenz (oder spätere Versionen)</translation>
     </message>
@@ -9259,7 +9040,6 @@ Zeile %2, Spalte %3:
     <name>IActionSelect</name>
     <message>
         <location filename="../mouse/range/IActionSelect.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IActionSelect.h" line="66"/>
         <source>Form</source>
         <translation></translation>
     </message>
@@ -9268,13 +9048,11 @@ Zeile %2, Spalte %3:
     <name>ICanvasSelect</name>
     <message>
         <location filename="../canvas/ICanvasSelect.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_ICanvasSelect.h" line="71"/>
         <source>Select...</source>
         <translation>Auswählen...</translation>
     </message>
     <message>
         <location filename="../canvas/ICanvasSelect.ui" line="20"/>
-        <location filename="../../../build/src/qmapshack/ui_ICanvasSelect.h" line="72"/>
         <source>Select a view to work with</source>
         <translation>Wählen Sie eine Ansicht aus, mit der Sie arbeiten wollen</translation>
     </message>
@@ -9283,37 +9061,31 @@ Zeile %2, Spalte %3:
     <name>ICanvasSetup</name>
     <message>
         <location filename="../canvas/ICanvasSetup.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_ICanvasSetup.h" line="125"/>
         <source>Setup Map View...</source>
         <translation>Kartenansicht einstellen...</translation>
     </message>
     <message>
         <location filename="../canvas/ICanvasSetup.ui" line="22"/>
-        <location filename="../../../build/src/qmapshack/ui_ICanvasSetup.h" line="126"/>
         <source>Projection &amp; Datum</source>
         <translation>Projektion &amp; Datum</translation>
     </message>
     <message>
         <location filename="../canvas/ICanvasSetup.ui" line="32"/>
-        <location filename="../../../build/src/qmapshack/ui_ICanvasSetup.h" line="127"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../canvas/ICanvasSetup.ui" line="53"/>
-        <location filename="../../../build/src/qmapshack/ui_ICanvasSetup.h" line="128"/>
         <source>Scales</source>
         <translation>Skalierung</translation>
     </message>
     <message>
         <location filename="../canvas/ICanvasSetup.ui" line="59"/>
-        <location filename="../../../build/src/qmapshack/ui_ICanvasSetup.h" line="129"/>
         <source>Logarithmic</source>
         <translation>Logarithmisch</translation>
     </message>
     <message>
         <location filename="../canvas/ICanvasSetup.ui" line="66"/>
-        <location filename="../../../build/src/qmapshack/ui_ICanvasSetup.h" line="130"/>
         <source>Square (optimized for TMS and WMTS tiles)</source>
         <translation>Quadratisch (optimiert für TMS und WMTS Kacheln)</translation>
     </message>
@@ -9322,7 +9094,6 @@ Zeile %2, Spalte %3:
     <name>IColorChooser</name>
     <message>
         <location filename="../widgets/IColorChooser.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IColorChooser.h" line="49"/>
         <source>Dialog</source>
         <translation>Dialog</translation>
     </message>
@@ -9331,58 +9102,47 @@ Zeile %2, Spalte %3:
     <name>ICombineTrk</name>
     <message>
         <location filename="../gis/trk/ICombineTrk.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_ICombineTrk.h" line="205"/>
         <source>Combine Tracks...</source>
         <translation>Tracks verbinden...</translation>
     </message>
     <message>
         <location filename="../gis/trk/ICombineTrk.ui" line="24"/>
-        <location filename="../../../build/src/qmapshack/ui_ICombineTrk.h" line="206"/>
         <source>Available Tracks</source>
-        <translation>Vorh. Tracks</translation>
+        <translation>Vorhandene Tracks</translation>
     </message>
     <message>
         <location filename="../gis/trk/ICombineTrk.ui" line="54"/>
         <location filename="../gis/trk/ICombineTrk.ui" line="81"/>
         <location filename="../gis/trk/ICombineTrk.ui" line="139"/>
         <location filename="../gis/trk/ICombineTrk.ui" line="166"/>
-        <location filename="../../../build/src/qmapshack/ui_ICombineTrk.h" line="207"/>
-        <location filename="../../../build/src/qmapshack/ui_ICombineTrk.h" line="208"/>
-        <location filename="../../../build/src/qmapshack/ui_ICombineTrk.h" line="210"/>
-        <location filename="../../../build/src/qmapshack/ui_ICombineTrk.h" line="211"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/trk/ICombineTrk.ui" line="109"/>
-        <location filename="../../../build/src/qmapshack/ui_ICombineTrk.h" line="209"/>
         <source>Combined Tracks</source>
-        <translation>Verb. Tracks</translation>
+        <translation>Verbundene Tracks</translation>
     </message>
 </context>
 <context>
     <name>ICoordFormatSetup</name>
     <message>
         <location filename="../units/ICoordFormatSetup.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_ICoordFormatSetup.h" line="82"/>
         <source>Coordinate Format...</source>
         <translation>Koordinatenformat...</translation>
     </message>
     <message>
         <location filename="../units/ICoordFormatSetup.ui" line="36"/>
-        <location filename="../../../build/src/qmapshack/ui_ICoordFormatSetup.h" line="85"/>
         <source>N48° 53.660 E013° 31.113</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../units/ICoordFormatSetup.ui" line="29"/>
-        <location filename="../../../build/src/qmapshack/ui_ICoordFormatSetup.h" line="84"/>
         <source>N48.8943° E013.51855°</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../units/ICoordFormatSetup.ui" line="22"/>
-        <location filename="../../../build/src/qmapshack/ui_ICoordFormatSetup.h" line="83"/>
         <source>N48° 53&apos; 39.6&quot; E13° 31&apos; 6.78&quot;</source>
         <translation></translation>
     </message>
@@ -9391,15 +9151,12 @@ Zeile %2, Spalte %3:
     <name>ICreateRouteFromWpt</name>
     <message>
         <location filename="../gis/rte/ICreateRouteFromWpt.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_ICreateRouteFromWpt.h" line="101"/>
         <source>Create Route from Waypoints</source>
         <translation>Route aus Wegpunkten erstellen</translation>
     </message>
     <message>
         <location filename="../gis/rte/ICreateRouteFromWpt.ui" line="30"/>
         <location filename="../gis/rte/ICreateRouteFromWpt.ui" line="50"/>
-        <location filename="../../../build/src/qmapshack/ui_ICreateRouteFromWpt.h" line="102"/>
-        <location filename="../../../build/src/qmapshack/ui_ICreateRouteFromWpt.h" line="103"/>
         <source>...</source>
         <translation></translation>
     </message>
@@ -9408,37 +9165,31 @@ Zeile %2, Spalte %3:
     <name>ICutTrk</name>
     <message>
         <location filename="../gis/trk/ICutTrk.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_ICutTrk.h" line="139"/>
         <source>Cut Track</source>
         <translation>Track teilen</translation>
     </message>
     <message>
         <location filename="../gis/trk/ICutTrk.ui" line="20"/>
-        <location filename="../../../build/src/qmapshack/ui_ICutTrk.h" line="140"/>
         <source>Delete first part of the track and keep second one</source>
         <translation>Löscht den ersten Teil des Tracks und behält den zweiten</translation>
     </message>
     <message>
         <location filename="../gis/trk/ICutTrk.ui" line="30"/>
-        <location filename="../../../build/src/qmapshack/ui_ICutTrk.h" line="141"/>
         <source>Keep both parts of the track</source>
         <translation>Behält beide Teile des Tracks</translation>
     </message>
     <message>
         <location filename="../gis/trk/ICutTrk.ui" line="43"/>
-        <location filename="../../../build/src/qmapshack/ui_ICutTrk.h" line="142"/>
         <source>Keep first part of the track and delete second one</source>
         <translation>Behält den ersten Teil des Tracks und löscht den zweiten</translation>
     </message>
     <message>
         <location filename="../gis/trk/ICutTrk.ui" line="55"/>
-        <location filename="../../../build/src/qmapshack/ui_ICutTrk.h" line="143"/>
         <source>Cut Mode:</source>
         <translation>Teilmodus:</translation>
     </message>
     <message>
         <location filename="../gis/trk/ICutTrk.ui" line="136"/>
-        <location filename="../../../build/src/qmapshack/ui_ICutTrk.h" line="147"/>
         <source>Check this to store the result into a new track. 
 
 If you keep both parts of the track you have to create new ones. 
@@ -9452,7 +9203,6 @@ Wenn Sie nur die eine Hälfte behalten wollen, können Sie einfach die Punkte l�
     </message>
     <message>
         <location filename="../gis/trk/ICutTrk.ui" line="143"/>
-        <location filename="../../../build/src/qmapshack/ui_ICutTrk.h" line="153"/>
         <source>Create a new track</source>
         <translation>Neuen Track erstellen</translation>
     </message>
@@ -9462,7 +9212,7 @@ Wenn Sie nur die eine Hälfte behalten wollen, können Sie einfach die Punkte l�
     <message>
         <location filename="../gis/db/IDB.cpp" line="49"/>
         <source>The internal database format of &apos;%1&apos; has changed. QMapShack will migrate your database, now. After the migration the database won&apos;t be usable with older versions of QMapShack. It is recommended to backup the database first.</source>
-        <translation>Das interne Datenbankformat von &apos;%1&apos; wurde geändert. QMapShack wird ihre Datenbank nun migrieren. Nach der Migration kann die Datenbank mit älteren QMapShack Versionen nicht mehr verwendet werden. Es wird empfohlen, zuerst ein Backup der Datenbank zu erstellen.</translation>
+        <translation>Das interne Datenbankformat von &apos;%1&apos; wurde geändert. QMapShack wird Ihre Datenbank nun migrieren. Nach der Migration kann die Datenbank mit älteren QMapShack Versionen nicht mehr verwendet werden. Es wird empfohlen, zuerst ein Backup der Datenbank zu erstellen.</translation>
     </message>
     <message>
         <location filename="../gis/db/IDB.cpp" line="53"/>
@@ -9508,7 +9258,7 @@ Wenn Sie nur die eine Hälfte behalten wollen, können Sie einfach die Punkte l�
     <message>
         <location filename="../gis/db/IDB.cpp" line="75"/>
         <source>Database created by newer version of QMapShack</source>
-        <translation>Die Datenbank wurde von einer aktuelleren Version von QMapShack erstellt</translation>
+        <translation>Die Datenbank wurde von einer aktuelleren QMapShack-Version erstellt</translation>
     </message>
     <message>
         <location filename="../gis/db/IDB.cpp" line="81"/>
@@ -9556,27 +9306,22 @@ Wenn Sie nur die eine Hälfte behalten wollen, können Sie einfach die Punkte l�
     <name>IDemPathSetup</name>
     <message>
         <location filename="../dem/IDemPathSetup.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemPathSetup.h" line="142"/>
         <source>Setup DEM file paths</source>
         <translation>Pfad für DEM Dateien setzen</translation>
     </message>
     <message>
         <location filename="../dem/IDemPathSetup.ui" line="31"/>
         <location filename="../dem/IDemPathSetup.ui" line="51"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemPathSetup.h" line="143"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemPathSetup.h" line="144"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../dem/IDemPathSetup.ui" line="112"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemPathSetup.h" line="146"/>
         <source>-</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../dem/IDemPathSetup.ui" line="143"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemPathSetup.h" line="147"/>
         <source>Help! I want DEMs!
 I don&apos;t want to read the documentation!</source>
         <translation>Hilfe! Ich will DEM Daten!
@@ -9587,77 +9332,66 @@ Keine Lust die Anleitung zu lesen!</translation>
     <name>IDemPropSetup</name>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="420"/>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="54"/>
         <location filename="../dem/IDemPropSetup.ui" line="95"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="428"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="440"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="35"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="422"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Change opacity of layer&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ändert die Transparenz der Ebene&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="50"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="425"/>
         <source>Click to use the current zoom as maximum 
 zoom-in for use of the DEM data.</source>
         <translation>Anklicken, um den aktuellen Zoomlevel 
-als den Maximalen beim Heranzoomen zu verwenden.</translation>
+als Maximum beim Heranzoomen zu verwenden.</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="75"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="430"/>
         <source>Control the zoom range for which the DEM data 
 is used. Use the two buttons left and right to define 
 the actual zoom as either maximum zoom-in or zoom-out.
 </source>
         <translation>Legt den Zoombereich fest, bei dem die DEM Daten 
 benutzt werden. Benützen Sie die beiden Knöpfe links und rechts, 
-um den aktuellen Zoomlevel als Maximum beim Heraus- oder 
-Hineinzoomen zu verwenden.</translation>
+um den aktuellen Zoomlevel als Maximum 
+beim Heraus- oder Heranzoomen zu verwenden.</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="91"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="437"/>
         <source>Click to use the current zoom as maximum 
 zoom-out for use of the DEM data.</source>
         <translation>Anklicken, um den aktuellen Zoomlevel 
-als den Maximalen beim Herauszoomen zu verwenden.</translation>
+als Maximum beim Herauszoomen zu verwenden.</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="130"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="442"/>
         <source>Enable relief shading based on aspect and slope,
  and illuminated from NW.</source>
-        <translation>Ermöglicht die Reliefschattierung basierend auf Ansicht und Hangneigung
-und beleuchtet von NW.</translation>
+        <translation>Ermöglicht die Reliefschattierung basierend auf 
+Ansicht und Hangneigung, beleuchtet von NW.</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="134"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="445"/>
         <source>Hillshading</source>
         <translation>Schummerung</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="141"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="447"/>
         <source>Move to the right to raise the angle of the light.
  Light comes from NW</source>
-        <translation>Nach Rechts bewegen um den Einfallswinkel des Lichts zu erhöhen.
+        <translation>Nach rechts bewegen um den Einfallswinkel des Lichts zu erhöhen.
 Licht kommt von NW.</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="164"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="451"/>
         <source>Enable relief shading based on slope.
  The steeper, the darker.</source>
         <translation>Ermöglicht die Reliefschattierung basierend auf der Hangneigung.
@@ -9665,21 +9399,18 @@ Je steiler desto dunkler.</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="168"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="454"/>
         <source>Slope Shading</source>
         <translation>Schattierung</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="175"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="456"/>
         <source>Move to the right to increase the scale factor.
  Higher values are better for flatter areas.</source>
-        <translation>Nach Rechts bewegen um die Skalierung zu erhöhen.
+        <translation>Nach rechts bewegen um die Skalierung zu erhöhen.
 Höhere Werte sind besser für flache Gegenden.</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="212"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="460"/>
         <source>Enable color shading
  based on slope ranges.</source>
         <translation>Ermöglicht die Einfärbung
@@ -9687,13 +9418,11 @@ nach Hangneigungsbereichen.</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="216"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="463"/>
         <source>Slope </source>
         <translation>Hangneigung </translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="223"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="465"/>
         <source>Select color scheme.</source>
         <translation>Wähle Farbschema.</translation>
     </message>
@@ -9703,11 +9432,6 @@ nach Hangneigungsbereichen.</translation>
         <location filename="../dem/IDemPropSetup.ui" line="488"/>
         <location filename="../dem/IDemPropSetup.ui" line="572"/>
         <location filename="../dem/IDemPropSetup.ui" line="656"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="467"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="471"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="474"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="477"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="480"/>
         <source>°</source>
         <translation></translation>
     </message>
@@ -9717,11 +9441,6 @@ nach Hangneigungsbereichen.</translation>
         <location filename="../dem/IDemPropSetup.ui" line="491"/>
         <location filename="../dem/IDemPropSetup.ui" line="575"/>
         <location filename="../dem/IDemPropSetup.ui" line="659"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="468"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="472"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="475"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="478"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="481"/>
         <source>&gt; </source>
         <translation></translation>
     </message>
@@ -9731,51 +9450,38 @@ nach Hangneigungsbereichen.</translation>
         <location filename="../dem/IDemPropSetup.ui" line="432"/>
         <location filename="../dem/IDemPropSetup.ui" line="516"/>
         <location filename="../dem/IDemPropSetup.ui" line="600"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="469"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="470"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="473"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="476"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="479"/>
         <source>TextLabel</source>
         <translation>Bezeichnung</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="717"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="483"/>
         <source>Tint areas above the given elevation.</source>
         <translation>Gefärbte Bereiche sind über der gegebenen Höhe.</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="720"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="485"/>
         <source>Elevation Limit</source>
         <translation>Höhenbegrenzung</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="744"/>
         <location filename="../dem/IDemPropSetup.ui" line="766"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="487"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="490"/>
         <source>Lower elevation to be colored.</source>
         <translation>Untere Höhe zum Einfärben.</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="769"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="492"/>
         <source>Elevation Low</source>
         <translation>Höhe unten</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="782"/>
         <location filename="../dem/IDemPropSetup.ui" line="815"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="494"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="502"/>
         <source>Higher elevation to be colored.</source>
         <translation>Obere Höhe zum Einfärben.</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="798"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="497"/>
         <source>Enable color shading
  based on elevation.</source>
         <translation>Ermöglicht die Einfärbung 
@@ -9783,25 +9489,21 @@ nach der Höhe.</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="802"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="500"/>
         <source>Elevation Shading</source>
         <translation>Höhenfärbung</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="818"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="504"/>
         <source>Elevation High</source>
         <translation>Höhe oben</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="825"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="506"/>
         <source>Enable / Disable elevation legend.</source>
         <translation>Höhenlegende an/aus.</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="828"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="508"/>
         <source>Legend</source>
         <translation>Legende</translation>
     </message>
@@ -9810,73 +9512,61 @@ nach der Höhe.</translation>
     <name>IDemsList</name>
     <message>
         <location filename="../dem/IDemList.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="146"/>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="35"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="159"/>
         <source>Filter: Start to type and the list will be reduced to matching items.</source>
         <translation>Filter: Fangen Sie zu tippen an und die Liste wird auf passende Einträge reduziert.</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="38"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="161"/>
         <source>start typing...</source>
         <translation>mit dem Tippen anfangen...</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="128"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="163"/>
         <source>To add files with elevation data use &lt;a href=&apos;DemFolders&apos;&gt;File-&gt;Setup DEM Paths&lt;/a&gt;.</source>
-        <translation>Sie können Höhendaten mit &lt;a href=&apos;DemFolders&apos;&gt;&quot;Datei -&gt; DEM Verzeichnisse angeben&quot;&lt;/a&gt;.</translation>
+        <translation>Sie können Höhendaten mit &lt;a href=&apos;DemFolders&apos;&gt;&quot;Datei -&gt; DEM Verzeichnisse angeben&quot;&lt;/a&gt; hinzufügen.</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="141"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="164"/>
         <source>Use the context menu (right mouse button click on entry) to activate a file. Use drag-n-drop to move the activated file in the process order. </source>
-        <translation>Mit dem Kontextmenü (Klick mit rechter Maustaste auf einen Eintrag) können Sie einen Datensatz aktivieren. Um die Höhendaten in einer anderen Reihenfolge anzuzeigen, können Sie jeden Eintrag mit drag-n-drop verschieben.</translation>
+        <translation>Mit dem Kontextmenü (Klick mit rechter Maustaste auf einen Eintrag) können Sie einen Datensatz aktivieren. Um die Höhendaten in einer anderen Reihenfolge anzuzeigen, können Sie jeden Eintrag mit &quot;drag-n-drop&quot; verschieben.</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="166"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="147"/>
         <source>Activate</source>
         <translation>Aktivieren</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="175"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="148"/>
         <source>Move Up</source>
         <translation>Nach oben verschieben</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="178"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="150"/>
         <source>Hide DEM behind previous one</source>
         <translation>Versteckt DEM hinter dem vorherigen</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="187"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="152"/>
         <source>Move down</source>
         <translation>Nach unten verschieben</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="190"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="154"/>
         <source>Show DEM on top of next one</source>
         <translation>DEM überlagert das nächste</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="199"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="156"/>
         <source>Reload DEM</source>
         <translation>DEM erneut laden</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="208"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="157"/>
         <source>Clear Filter</source>
         <translation>Filter zurücksetzen</translation>
     </message>
@@ -9885,7 +9575,6 @@ nach der Höhe.</translation>
     <name>IDetailsGeoCache</name>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="20"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="419"/>
         <source>Dialog</source>
         <translation></translation>
     </message>
@@ -9906,102 +9595,72 @@ nach der Höhe.</translation>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="448"/>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="481"/>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="488"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="421"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="422"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="435"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="438"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="439"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="440"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="441"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="442"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="443"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="444"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="445"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="446"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="447"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="450"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="453"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="454"/>
         <source>-</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="168"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="429"/>
         <source>Update spoilers</source>
         <translation>Spoiler erneut laden</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="34"/>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="171"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="420"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="431"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="107"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="423"/>
         <source>Hint:</source>
         <translation>Hinweis:</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="272"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="436"/>
         <source>Owner:</source>
         <translation>Besitzer:</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="285"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="437"/>
         <source>Terrain:</source>
         <translation>Gelände:</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="422"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="448"/>
         <source>Difficulty:</source>
         <translation>Schwierigkeit:</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="435"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="449"/>
         <source>Size:</source>
         <translation>Größe:</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="461"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="451"/>
         <source>Date Hidden:</source>
         <translation>Versteckt am:</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="474"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="452"/>
         <source>Last Found:</source>
         <translation>Zuletzt gefunden am:</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="499"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="455"/>
         <source>No Attributes present</source>
         <translation>Keine Attribute vorhanden</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="85"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="426"/>
         <source>Listing</source>
         <translation>Beschreibung</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="134"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="425"/>
         <source>Visit Website</source>
         <translation>Webseite öffnen</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="144"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="427"/>
         <source>Logs</source>
         <translation>Logs</translation>
     </message>
@@ -10012,19 +9671,16 @@ nach der Höhe.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="160"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="433"/>
         <source>Pictures</source>
         <translation>Bilder</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="205"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="432"/>
         <source>TextLabel</source>
         <translation>Bezeichnung</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="231"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="434"/>
         <source>QMS</source>
         <translation></translation>
     </message>
@@ -10033,79 +9689,66 @@ nach der Höhe.</translation>
     <name>IDetailsOvlArea</name>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsOvlArea.h" line="237"/>
         <source>Dialog</source>
         <translation>Dialog</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="132"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsOvlArea.h" line="239"/>
         <source>The area was imported to QMapShack and was changed. It does not show the original data anymore. Please see history for changes. </source>
         <translation>Das Gebiet wurde in QMapShack importiert und geändert. Die ursprünglichen Daten werden nicht mehr angezeigt. Näheres siehe Änderungshistorie.</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="160"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsOvlArea.h" line="243"/>
         <source>This is a NoGo-Area</source>
         <translation>Diese Gebiet vermeiden</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="176"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsOvlArea.h" line="247"/>
         <source>Toggle read only mode. You have to open the lock to edit the item.</source>
         <translation>Den Schreibschutz ändern. Das Schloss muss offen sein um das Element zu bearbeiten.</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="179"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsOvlArea.h" line="249"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="207"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsOvlArea.h" line="250"/>
         <source>Color</source>
         <translation>Farbe</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="224"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsOvlArea.h" line="251"/>
         <source>Border width</source>
         <translation>Rahmenbreite</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="234"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsOvlArea.h" line="252"/>
         <source>Style</source>
         <translation>Stil</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="251"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsOvlArea.h" line="253"/>
         <source>Opacity</source>
         <translation>Deckkraft</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="264"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsOvlArea.h" line="254"/>
         <source>Info</source>
         <translation>Info</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="293"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsOvlArea.h" line="257"/>
         <source>Points</source>
         <translation>Punkte</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="320"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsOvlArea.h" line="256"/>
         <source>Position</source>
         <translation>Position</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="329"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsOvlArea.h" line="258"/>
         <source>Hist.</source>
         <translation>Historie</translation>
     </message>
@@ -10114,21 +9757,17 @@ nach der Höhe.</translation>
     <name>IDetailsPrj</name>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsPrj.h" line="132"/>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="50"/>
         <location filename="../gis/prj/IDetailsPrj.ui" line="57"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsPrj.h" line="134"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsPrj.h" line="135"/>
         <source>-</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="115"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsPrj.h" line="143"/>
         <source>Print diary</source>
         <translation>Tagebuch drucken</translation>
     </message>
@@ -10136,45 +9775,36 @@ nach der Höhe.</translation>
         <location filename="../gis/prj/IDetailsPrj.ui" line="94"/>
         <location filename="../gis/prj/IDetailsPrj.ui" line="118"/>
         <location filename="../gis/prj/IDetailsPrj.ui" line="138"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsPrj.h" line="141"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsPrj.h" line="145"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsPrj.h" line="149"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="71"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsPrj.h" line="136"/>
         <source>Keep order of project</source>
         <translation>Reihenfolge beibehalten</translation>
     </message>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="76"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsPrj.h" line="137"/>
         <source>Sort along track (multiple)</source>
         <translation>Sort. entl. d. Tracks (mehrfach)</translation>
     </message>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="81"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsPrj.h" line="138"/>
         <source>Sort along track (single)</source>
         <translation>Sort. entl. d. Tracks (einmalig)</translation>
     </message>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="86"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsPrj.h" line="139"/>
         <source>Track with details</source>
         <translation>Track mit Details</translation>
     </message>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="135"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsPrj.h" line="147"/>
         <source>Rebuild diary.</source>
         <translation>Tagebuch aktualisieren.</translation>
     </message>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="43"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsPrj.h" line="133"/>
         <source>Keywords:</source>
         <translation>Stichwörter:</translation>
     </message>
@@ -10183,43 +9813,36 @@ nach der Höhe.</translation>
     <name>IDetailsRte</name>
     <message>
         <location filename="../gis/rte/IDetailsRte.ui" line="36"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsRte.h" line="185"/>
         <source>Info</source>
         <translation>Info</translation>
     </message>
     <message>
         <location filename="../gis/rte/IDetailsRte.ui" line="154"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsRte.h" line="173"/>
         <source>The route was imported to QMapShack and was changed. It does not show the original data anymore. Please see history for changes. </source>
         <translation>Die Route wurde in QMapShack importiert und geändert. Die ursprünglichen Daten werden nicht mehr angezeigt. Näheres siehe Änderungshistorie.</translation>
     </message>
     <message>
         <location filename="../gis/rte/IDetailsRte.ui" line="182"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsRte.h" line="177"/>
         <source>This Route is a NoGo-Line</source>
         <translation>Diese Strecke vermeiden</translation>
     </message>
     <message>
         <location filename="../gis/rte/IDetailsRte.ui" line="233"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsRte.h" line="184"/>
         <source>-</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/rte/IDetailsRte.ui" line="198"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsRte.h" line="181"/>
         <source>Toggle read only mode. You have to open the lock to edit the item.</source>
         <translation>Den Schreibschutz ändern. Das Schloss muss offen sein um das Element zu bearbeiten.</translation>
     </message>
     <message>
         <location filename="../gis/rte/IDetailsRte.ui" line="201"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsRte.h" line="183"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/rte/IDetailsRte.ui" line="257"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsRte.h" line="186"/>
         <source>Hist.</source>
         <translation>Historie</translation>
     </message>
@@ -10228,34 +9851,28 @@ nach der Höhe.</translation>
     <name>IDetailsTrk</name>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1055"/>
         <source>Form</source>
         <translation>Diese Strecke vermeiden</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="99"/>
         <location filename="../gis/trk/IDetailsTrk.ui" line="123"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1059"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1061"/>
         <source>-
 -</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="980"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1113"/>
         <source> points</source>
         <translation> Punkte</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1214"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1124"/>
         <source>Profile</source>
         <translation>Profil</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="331"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1072"/>
         <source>Toggle read only mode. You have to open the lock to edit the item.</source>
         <translation>Den Schreibschutz ändern. Das Schloss muss offen sein um das Element zu bearbeiten.</translation>
     </message>
@@ -10278,60 +9895,36 @@ nach der Höhe.</translation>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1429"/>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1458"/>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1490"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1074"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1076"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1084"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1088"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1092"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1096"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1100"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1106"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1110"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1128"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1132"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1136"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1140"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1144"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1148"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1152"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1156"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1160"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="575"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1114"/>
         <source>Style</source>
         <translation>Stil</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="617"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1079"/>
         <source>Source</source>
         <translation>Quelle</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="822"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1101"/>
         <source>Maximum</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="943"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1111"/>
         <source>Minimum</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="624"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1080"/>
         <source>Width</source>
         <translation>Breite</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="74"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1056"/>
         <source>-
 -
 -</source>
@@ -10341,111 +9934,88 @@ nach der Höhe.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="281"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1064"/>
         <source>The track was imported to QMapShack and was changed. It does not show the original data anymore. Please see history for changes. </source>
         <translation>Der Track wurde in QMapShack importiert und geändert. Die ursprünglichen Daten werden nicht mehr angezeigt. Näheres siehe Änderungshistorie.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="309"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1068"/>
         <source>This Track is a NoGo-Line</source>
         <translation>Dieser Track ist eine NoGo-Linie</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="639"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1082"/>
         <source>Set visibility of the arrows for this particular track.</source>
-        <translation>Für diesen speziellen Track die Sichtbarkeit der Pfeile einstellen.</translation>
+        <translation>Die Sichtbarkeit der Pfeile für diesen speziellen Track einstellen.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="668"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1086"/>
         <source>Set visibility of the arrows globally for all tracks that use the global settings.</source>
-        <translation>Für alle Tracks, die die globalen Einstellungen benutze, die Sichtbarkeit der Pfeile einstellen.</translation>
+        <translation>Die Sichtbarkeit der Pfeile für alle Tracks einstellen, welche die globalen Einstellungen benutzen.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="733"/>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1232"/>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1329"/>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1426"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1090"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1126"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1138"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1150"/>
         <source>Use user defined limits that only apply to this particular track.</source>
-        <translation>Für diesen speziellen Track benutzerdefinierte Limits verwenden.</translation>
+        <translation>Benutzerdefinierte Limits für diesen speziellen Track verwenden.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="788"/>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1293"/>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1390"/>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1487"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1098"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1134"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1146"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1158"/>
         <source>Use global user defined limits.</source>
         <translation>Globale benutzerdefinierte Limits verwenden.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="829"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1102"/>
         <source>with arrows</source>
         <translation>mit Richtungspfeilen</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="858"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1104"/>
         <source>Change the line width for this particular track.</source>
         <translation>Die Linienbreite für diesen speziellen Track verändern.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="887"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1108"/>
         <source>Change the line width globally for all tracks that use the global settings.</source>
-        <translation>Für alle Tracks, die die globalen Einstellungen verwenden, die Linienbreite einstellen.</translation>
+        <translation>Die Linienbreite für alle Tracks einstellen, welche die globalen Einstellungen verwenden.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1027"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1161"/>
         <source>Graphs</source>
         <translation>Diagramme</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1519"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1165"/>
         <source>Activity</source>
         <translation>Aktivität</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1542"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1162"/>
         <source>Set Track Activity</source>
         <translation>Trackaktivität festlegen</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1585"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1164"/>
         <source>To differentiate the track statistics select an activity from the list for the complete track. Or select a part of the track to assign an activity.</source>
         <translation>Um Trackstatistiken zu differenzieren, wählen Sie für den gesamten Track eine Aktivität aus der Liste. Oder Sie wählen einen Teil des Tracks aus und weisen diesem eine Aktivität zu.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1612"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1166"/>
         <source>Points</source>
         <translation>Punkte</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="431"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1078"/>
         <source>Info</source>
         <translation>Info</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="360"/>
         <location filename="../gis/trk/IDetailsTrk.ui" line="515"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1075"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1077"/>
         <source>-</source>
         <translation></translation>
     </message>
@@ -10453,9 +10023,6 @@ nach der Höhe.</translation>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1040"/>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1060"/>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1146"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1116"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1117"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1120"/>
         <source>max.</source>
         <translation></translation>
     </message>
@@ -10463,9 +10030,6 @@ nach der Höhe.</translation>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1179"/>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1186"/>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1200"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1121"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1122"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1123"/>
         <source>min.</source>
         <translation></translation>
     </message>
@@ -10474,28 +10038,21 @@ nach der Höhe.</translation>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1261"/>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1358"/>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1455"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1094"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1130"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1142"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1154"/>
         <source>Automatic limits</source>
         <translation>Automatische Limits.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="963"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1112"/>
         <source>Color</source>
         <translation>Farbe</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1658"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1167"/>
         <source>Filter</source>
         <translation>Filter</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1695"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1168"/>
         <source>Hist.</source>
         <translation>Historie</translation>
     </message>
@@ -10504,13 +10061,11 @@ nach der Höhe.</translation>
     <name>IDetailsWpt</name>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsWpt.h" line="303"/>
         <source>Dialog</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="106"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsWpt.h" line="306"/>
         <source>Elevation:</source>
         <translation>Höhe:</translation>
     </message>
@@ -10519,22 +10074,16 @@ nach der Höhe.</translation>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="388"/>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="408"/>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="440"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsWpt.h" line="321"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsWpt.h" line="327"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsWpt.h" line="331"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsWpt.h" line="332"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="43"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsWpt.h" line="333"/>
         <source>Info</source>
         <translation>Info</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="86"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsWpt.h" line="304"/>
         <source>Position:</source>
         <translation>Position:</translation>
     </message>
@@ -10543,58 +10092,46 @@ nach der Höhe.</translation>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="119"/>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="145"/>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="374"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsWpt.h" line="305"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsWpt.h" line="307"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsWpt.h" line="309"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsWpt.h" line="323"/>
         <source>-</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="132"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsWpt.h" line="308"/>
         <source>Proximity:</source>
         <translation>Abstand:</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="277"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsWpt.h" line="311"/>
         <source>The waypoint was imported to QMapShack and was changed. It does not show the original data anymore. Please see history for changes. </source>
         <translation>Der Wegpunkt wurde in QMapShack importiert und geändert. Die ursprünglichen Daten werden nicht mehr angezeigt. Näheres siehe Änderungshistorie.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="305"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsWpt.h" line="315"/>
         <source>This Waypoint is a NoGo-Area</source>
         <translation>Dieses Gebiet vermeiden</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="321"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsWpt.h" line="319"/>
         <source>Toggle read only mode. You have to open the lock to edit the item.</source>
         <translation>Den Schreibschutz ändern. Das Schloss muss offen sein um das Element zu bearbeiten.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="459"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsWpt.h" line="334"/>
         <source>Hist.</source>
         <translation>Historie</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="385"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsWpt.h" line="325"/>
         <source>Add images.</source>
         <translation>Bilder hinzufügen.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="405"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsWpt.h" line="329"/>
         <source>Delete selected image.</source>
         <translation>Ausgewähltes Bild löschen.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="361"/>
-        <location filename="../../../build/src/qmapshack/ui_IDetailsWpt.h" line="322"/>
         <source>Date/Time:</source>
         <translation>Datum/Zeit:</translation>
     </message>
@@ -10611,31 +10148,26 @@ nach der Höhe.</translation>
     <name>IElevationDialog</name>
     <message>
         <location filename="../helpers/IElevationDialog.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IElevationDialog.h" line="95"/>
         <source>Edit elevation...</source>
         <translation>Höhe bearbeiten...</translation>
     </message>
     <message>
         <location filename="../helpers/IElevationDialog.ui" line="22"/>
-        <location filename="../../../build/src/qmapshack/ui_IElevationDialog.h" line="96"/>
         <source>Elevation</source>
         <translation>Höhe</translation>
     </message>
     <message>
         <location filename="../helpers/IElevationDialog.ui" line="32"/>
-        <location filename="../../../build/src/qmapshack/ui_IElevationDialog.h" line="97"/>
         <source>-</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../helpers/IElevationDialog.ui" line="39"/>
-        <location filename="../../../build/src/qmapshack/ui_IElevationDialog.h" line="99"/>
         <source>Get elevation from active digital elevation model.</source>
-        <translation>Höhe aus aktivem digitalen Höhenmodell entnehmen.</translation>
+        <translation>Höhe aus dem aktiven digitalen Höhenmodell entnehmen.</translation>
     </message>
     <message>
         <location filename="../helpers/IElevationDialog.ui" line="42"/>
-        <location filename="../../../build/src/qmapshack/ui_IElevationDialog.h" line="101"/>
         <source>...</source>
         <translation></translation>
     </message>
@@ -10644,43 +10176,36 @@ nach der Höhe.</translation>
     <name>IEnergyCyclingDialog</name>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="44"/>
-        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="511"/>
         <source>Set parameters to compute &quot;Energy Use Cycling&quot; for a cycling tour</source>
         <translation>Eingabe des Parameter Set für die Berechnung des Energieverbrauchs beim Fahrradfahren</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="94"/>
-        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="513"/>
         <source>Positive Pedal Force:</source>
         <translation>Positive Pedalkraft:</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="104"/>
-        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="514"/>
         <source>Gravity Slope Force:</source>
         <translation>Neigungskraft:</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="114"/>
-        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="515"/>
         <source>Frontal Area:</source>
         <translation>Windangriffsfläche:</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="127"/>
-        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="519"/>
         <source>Total Weight:</source>
         <translation>Gesamtgewicht:</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="310"/>
-        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="559"/>
         <source>&lt;p&gt;The values for the type of seat position as pre-selection for the wind frontal area in m2 and the drag coefficient (cw value).&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Vorauswahl für die Art der Sitzposition für die Definition der Windangriffsfläche in m2 und des Luftwiderstandsbeiwerts (cw-Wert).&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Vorauswahl der Art der Sitzposition für die Definition der Windangriffsfläche in m² und des Luftwiderstandsbeiwerts (cw-Wert).&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="399"/>
-        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="575"/>
         <source>&lt;p&gt;The gravity slope force is the force in Newton needed on average over all track points to overcome the slope on downhill or uphill.&lt;/p&gt;
 &lt;p&gt;When mostly downhill driving, the gravity slope force can be negative.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Die Neigungskraft ist die Kraft in Newton, die im Durchschnitt über alle Trackpunkte für die Überwindung der Neigung bei Bergab- oder -auffahrt benötigt wird.&lt;/p&gt;
@@ -10688,19 +10213,16 @@ nach der Höhe.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="413"/>
-        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="578"/>
         <source>Positive Power:</source>
         <translation>Positive Leistung:</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="443"/>
-        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="581"/>
         <source>Power:</source>
         <translation>Leistung:</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="477"/>
-        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="588"/>
         <source>&lt;p&gt;The average pedal cadence in rpm is needed to calculate the Positive Pedal Force.&lt;/p&gt;
 &lt;p&gt;Realistic values are between 50 and 100 rpm.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Die durchschnittliche Trittfrequenz in U/min wird für die Berechnung der Pedalkraft benötigt.&lt;/p&gt;
@@ -10708,7 +10230,6 @@ nach der Höhe.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="503"/>
-        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="593"/>
         <source>&lt;p&gt;The values for the wind speed in Beaufort scale for specifying the wind speed in km/h.&lt;/p&gt;
 &lt;p&gt;Positive values for headwind and negative values for tailwind.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Werte für die Windgeschwindigkeit in Beaufortskala für die Vorauswahl der Windgeschwindigkeit in km/h.&lt;/p&gt;
@@ -10716,7 +10237,6 @@ nach der Höhe.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="563"/>
-        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="611"/>
         <source>&lt;p&gt;The wind speed in km/h is taken into account when calculating the force required to overcome the air drag.&lt;/p&gt;
 &lt;p&gt;Positive values for headwind and negative values for tailwind are taken into account.&lt;/p&gt;
 &lt;p&gt;The value can be changed independently of the Beaufort scale value.&lt;/p&gt;</source>
@@ -10726,19 +10246,16 @@ nach der Höhe.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="611"/>
-        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="621"/>
         <source>&lt;p&gt;The weight of the driver in kg including clothes.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Das Gewicht des Fahrers in kg einschließlich Kleidung.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="649"/>
-        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="627"/>
         <source>Ground/Tyres:</source>
         <translation>Untergrund/Bereifung:</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="659"/>
-        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="629"/>
         <source>&lt;p&gt;The predefined selection for the type of ground surface and the tyres.&lt;/p&gt;
 &lt;p&gt;To be used to determine the rolling resistance coefficient.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Vorauswahl für den Fahrbahnuntergrund und der Bereifung für die Definition des Rollwiderstandsbeiwerts.&lt;/p&gt;</translation>
@@ -10746,38 +10263,31 @@ nach der Höhe.</translation>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="707"/>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="731"/>
-        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="639"/>
-        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="644"/>
         <source>Energy Use:</source>
         <translation>Energieverbrauch:</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="667"/>
-        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="632"/>
         <source>Rolling Coeff:</source>
         <translation>Rollwiderst. Beiw.:</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="194"/>
-        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="532"/>
         <source>Air Resistance Force:</source>
         <translation>Luftwiderstandskraft:</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="506"/>
         <source>Energy Use Cycling Parameter Set</source>
         <translation>Parameter Set für die Berechnung des Energieverbrauchs beim Fahrradfahren</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="150"/>
-        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="521"/>
         <source>&lt;p&gt;The rolling resistance force is the force in Newton required on average over all track points to overcome the rolling resistance.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Die Rollwiderstandskraft ist die Kraft in Newton, die im Durchschnitt über alle Trackpunkte für die Überwindung des Rollwiderstands benötigt wird.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="163"/>
-        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="524"/>
         <source>&lt;p&gt;The air density depends on barometric air pressure, altitude and temperature.&lt;/p&gt;
 &lt;p&gt;Examples:
 &lt;ul&gt;
@@ -10785,23 +10295,21 @@ nach der Höhe.</translation>
 &lt;li&gt;1,500 meter: 1.056kg/m3&lt;/li&gt;
 &lt;li&gt;3,000 meter: 0.905kg/m3&lt;/li&gt;
 &lt;/ul&gt;&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Die Luftdichte ist abhängig von barometrischen Luftdruck, Höhe über Normalnull und Temperatur.&lt;/p&gt;
+        <translation>&lt;p&gt;Die Luftdichte ist abhängig von barometrischem Luftdruck, Höhe über Normalnull und Temperatur.&lt;/p&gt;
 &lt;p&gt;Beispiele:
 &lt;ul&gt;
-&lt;li&gt;Meereshöhe: 1,226kg/m3&lt;/li&gt;
-&lt;li&gt;1.500 Meter: 1,056kg/m3&lt;/li&gt;
-&lt;li&gt;3.000 Meter: 0,905kg/m3&lt;/li&gt;
+&lt;li&gt;Meereshöhe: 1,226kg/m³&lt;/li&gt;
+&lt;li&gt;1.500 Meter: 1,056kg/m³&lt;/li&gt;
+&lt;li&gt;3.000 Meter: 0,905kg/m³&lt;/li&gt;
 &lt;/ul&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="207"/>
-        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="536"/>
         <source>Bike Weight:</source>
         <translation>Gewicht Fahrrad:</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="217"/>
-        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="538"/>
         <source>&lt;p&gt;The force in Newton applied to the pedal on average over all track points.&lt;/p&gt;
 &lt;p&gt;Negative forces from strong tail wind or downhill driving are not considered.&lt;/p&gt;
 &lt;p&gt;This force must be applied to the pedal by the driver.&lt;/p&gt;
@@ -10813,23 +10321,20 @@ nach der Höhe.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="233"/>
-        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="544"/>
         <source>&lt;p&gt;The wind drag coefficient (cw value) indicates the wind slip of the driver and bicycle in relation to the air (wind).&lt;/p&gt;
 &lt;p&gt;The greater this value, the more force is required to overcome the wind force.&lt;/p&gt;
 &lt;p&gt;Typical values for bicycles are between 0.2 and 1.2.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Der Luftwiderstandsbeiwert( cw-Wert) gibt die Windschlüpfigkeit von Fahrer und Fahrrad gegenüber der Luft (Wind) an.&lt;/p&gt;
+        <translation>&lt;p&gt;Der Luftwiderstandsbeiwert (cw-Wert) gibt die Windschlüpfrigkeit von Fahrer und Fahrrad gegenüber der Luft (Wind) an.&lt;/p&gt;
 &lt;p&gt;Je größer dieser Wert ist, um so mehr Kraft wird für die Überwindung der Windkraft benötigt.&lt;/p&gt;
-&lt;p&gt;Typische Werte für Fahrräder liegen zwischen 0,2 und 1.2.&lt;/p&gt;</translation>
+&lt;p&gt;Typische Werte für Fahrräder liegen zwischen 0,2 und 1,2.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="260"/>
-        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="549"/>
         <source>Pos. Power Moving Time:</source>
         <translation>Positive Bew.-Zeit:</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="270"/>
-        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="551"/>
         <source>&lt;p&gt;The air resistance force is the force in Newton required on average over all track points to overcome the air resistance.&lt;/p&gt;
 &lt;p&gt;The airstream, headwind and tailwind are taken into account.&lt;/p&gt;
 &lt;p&gt;With a strong tailwind this value can be negative.&lt;/p&gt;</source>
@@ -10839,43 +10344,36 @@ nach der Höhe.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="285"/>
-        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="556"/>
         <source>&lt;p&gt;The weight of the bicycle in kg including luggage.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Das Gewicht des Fahrrads in kg einschließlich Gepäck.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="317"/>
-        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="561"/>
         <source>Pedal Cadence:</source>
         <translation>Trittfrequenz:</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="327"/>
-        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="563"/>
         <source>&lt;p&gt;The frontal area in m2 (driver, bicycle, bags, etc.) exposed to the wind.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Die Windangriffsfläche (Frontalfläche) in m2 (Fahrer, Fahrrad, Gepäcktaschen, etc.), die dem Wind ausgesetzt ist.&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Die Windangriffsfläche (Frontalfläche) in m² (Fahrer, Fahrrad, Gepäcktaschen, etc.), die dem Wind ausgesetzt ist.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="352"/>
-        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="565"/>
         <source>Air Density:</source>
         <translation>Luftdichte:</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="362"/>
-        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="566"/>
         <source>Wind Drag Coeff:</source>
         <translation>Luftwiderst. Beiw.:</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="372"/>
-        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="568"/>
         <source>&lt;p&gt;The total weight in kg of driver and bike including clothes and luggage.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Das Gesamtgewicht in kg von Fahrer und Fahrrad inklusive Kleidung und Gepäck.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="385"/>
-        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="571"/>
         <source>&lt;p&gt;The time in moving and with positive power by the driver.&lt;/p&gt;
 &lt;p&gt;Times with negative power in strong tail wind or downhill driving are not taken into account.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Die Zeit in Bewegung und gleichzeitiger positiver Leistung durch den Fahrer.&lt;/p&gt;
@@ -10883,39 +10381,33 @@ nach der Höhe.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="423"/>
-        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="579"/>
         <source>Wind Speed km/h:</source>
         <translation>Windgeschw. km/h:</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="433"/>
-        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="580"/>
         <source>Ratio to Moving Time:</source>
         <translation>Verhält. zu Bew.-Zeit:</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="453"/>
-        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="583"/>
         <source>&lt;p&gt;The sum of the average force required for the track to overcome wind resistance, rolling resistance and slope.&lt;/p&gt;
 &lt;p&gt;This value can be negative for strong tailwind and/or downhill.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Summe der durchschnittlich benötigten Kraft für den Track für die Überwindung des Luftwiderstands, Rollwiderstands und Neigung.&lt;/p&gt;
-&lt;p&gt;Dieser Wert kann negativ bei starkem Rückenwind und/oder Bergabfahrt sein.&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Summe der durchschnittlich benötigten Kraft für den Track zur Überwindung von Luftwiderstand, Rollwiderstand und Neigung.&lt;/p&gt;
+&lt;p&gt;Dieser Wert kann bei starkem Rückenwind und/oder Bergabfahrt negativ sein.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="467"/>
-        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="586"/>
         <source>Sum Forces:</source>
         <translation>Summe Kräfte:</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="481"/>
-        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="591"/>
         <source>rpm</source>
         <translation>U/min</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="511"/>
-        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="597"/>
         <source>&lt;p&gt;The power in Watt on average over all track points.&lt;/p&gt;
 &lt;p&gt;Negative power from strong tailwind or downhill driving are taken into account.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Die Leistung in Watt im Durchschnitt über alle Trackpunkte.&lt;/p&gt;
@@ -10923,19 +10415,16 @@ nach der Höhe.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="528"/>
-        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="603"/>
         <source>Driver Weight:</source>
         <translation>Gewicht Fahrer:</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="538"/>
-        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="604"/>
         <source>Rolling Resist. Force:</source>
         <translation>Rollwiderstandskraft:</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="548"/>
-        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="606"/>
         <source>&lt;p&gt;The positive power in Watt that must be applied on average for all track points.&lt;/p&gt;
 &lt;p&gt;Negative power from strong tailwind or downhill driving are not taken into account.&lt;/p&gt;
 &lt;p&gt;This power must be applied by the driver on average for the track.&lt;/p&gt;</source>
@@ -10945,7 +10434,6 @@ nach der Höhe.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="587"/>
-        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="616"/>
         <source>&lt;p&gt;The ratio of the power moving time related to the track moving time in percent.&lt;/p&gt;
 &lt;p&gt;The lower the ratio the greater the influence of tailwind and/or downhill driving.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Das Verhältnis der positiven Bewegungszeit bezogen auf die gesamte Track Bewegungszeit in Prozent.&lt;/p&gt;
@@ -10953,19 +10441,16 @@ nach der Höhe.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="601"/>
-        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="619"/>
         <source>Position in Wind:</source>
         <translation>Position im Wind:</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="639"/>
-        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="626"/>
         <source>Wind Speed Bft:</source>
         <translation>Windgeschw. Bft:</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="677"/>
-        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="634"/>
         <source>&lt;p&gt;The rolling resistance coefficient (cr value) specifies the force used to overcome the rolling resistance.&lt;/p&gt;
 &lt;p&gt;The relevant factors are the road surface and the tyres.&lt;/p&gt;
 &lt;p&gt;The higher this value is, the more force is required to overcome the rolling resistance.&lt;/p&gt;</source>
@@ -10975,7 +10460,6 @@ nach der Höhe.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="717"/>
-        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="641"/>
         <source>&lt;p&gt;The energy use (consumption) in kJoule by transforming the positive power by the driver.&lt;/p&gt;
 &lt;p&gt;The muscle efficiency ratio ist considered by 23%.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Der Energieverbrauch in kJoule für die Umsetzung der positiven Leistung durch den Fahrer.&lt;/p&gt;
@@ -10983,7 +10467,6 @@ nach der Höhe.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="741"/>
-        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="646"/>
         <source>&lt;p&gt;The energy use (consumption) in kcal by transforming the positive power by the driver.&lt;/p&gt;
 &lt;p&gt;The muscle efficiency ratio ist considered by 23%.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Der Energieverbrauch in kcal für die Umsetzung der positiven Leistung durch den Fahrer.&lt;/p&gt;
@@ -10994,49 +10477,41 @@ nach der Höhe.</translation>
     <name>IExportDatabase</name>
     <message>
         <location filename="../gis/db/IExportDatabase.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IExportDatabase.h" line="123"/>
         <source>Export database to GPX...</source>
         <translation>Datenbank als GPX exportieren...</translation>
     </message>
     <message>
         <location filename="../gis/db/IExportDatabase.ui" line="22"/>
-        <location filename="../../../build/src/qmapshack/ui_IExportDatabase.h" line="124"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/db/IExportDatabase.ui" line="33"/>
-        <location filename="../../../build/src/qmapshack/ui_IExportDatabase.h" line="125"/>
         <source>Export Path:</source>
         <translation>Exportpfad:</translation>
     </message>
     <message>
         <location filename="../gis/db/IExportDatabase.ui" line="46"/>
-        <location filename="../../../build/src/qmapshack/ui_IExportDatabase.h" line="126"/>
         <source>-</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/db/IExportDatabase.ui" line="55"/>
-        <location filename="../../../build/src/qmapshack/ui_IExportDatabase.h" line="127"/>
         <source>GPX 1.1 without extensions</source>
         <translation>GPX 1.1 ohne Erweiterungen</translation>
     </message>
     <message>
         <location filename="../gis/db/IExportDatabase.ui" line="83"/>
-        <location filename="../../../build/src/qmapshack/ui_IExportDatabase.h" line="128"/>
         <source>Start</source>
         <translation>Starten</translation>
     </message>
     <message>
         <location filename="../gis/db/IExportDatabase.ui" line="93"/>
-        <location filename="../../../build/src/qmapshack/ui_IExportDatabase.h" line="129"/>
         <source>Abort</source>
         <translation>Abbrechen</translation>
     </message>
     <message>
         <location filename="../gis/db/IExportDatabase.ui" line="100"/>
-        <location filename="../../../build/src/qmapshack/ui_IExportDatabase.h" line="130"/>
         <source>Close</source>
         <translation>Schließen</translation>
     </message>
@@ -11045,25 +10520,21 @@ nach der Höhe.</translation>
     <name>IFilterChangeStartPoint</name>
     <message>
         <location filename="../gis/trk/filter/IFilterChangeStartPoint.ui" line="20"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterChangeStartPoint.h" line="114"/>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterChangeStartPoint.ui" line="49"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterChangeStartPoint.h" line="115"/>
         <source>Start Track at Point:</source>
         <translation>Den Track an diesem Punkt anfangen:</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterChangeStartPoint.ui" line="72"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterChangeStartPoint.h" line="116"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterChangeStartPoint.ui" line="114"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterChangeStartPoint.h" line="118"/>
         <source>&lt;b&gt;Change Start Point&lt;/b&gt;</source>
         <translation>&lt;b&gt;Anfangspunkt ändern&lt;/b&gt;</translation>
     </message>
@@ -11072,25 +10543,21 @@ nach der Höhe.</translation>
     <name>IFilterDelete</name>
     <message>
         <location filename="../gis/trk/filter/IFilterDelete.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterDelete.h" line="95"/>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterDelete.ui" line="51"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterDelete.h" line="97"/>
         <source>&lt;b&gt;Remove Track Points&lt;/b&gt;</source>
         <translation>&lt;b&gt;Trackpunkte entfernen&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterDelete.ui" line="63"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterDelete.h" line="98"/>
         <source>Remove all hidden track points permanently.</source>
         <translation>Alle ausgeblendeten Trackpunkte werden dauerhaft entfernt.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterDelete.ui" line="70"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterDelete.h" line="99"/>
         <source>...</source>
         <translation></translation>
     </message>
@@ -11099,31 +10566,26 @@ nach der Höhe.</translation>
     <name>IFilterDeleteExtension</name>
     <message>
         <location filename="../gis/trk/filter/IFilterDeleteExtension.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterDeleteExtension.h" line="120"/>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterDeleteExtension.ui" line="51"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterDeleteExtension.h" line="122"/>
         <source>&lt;b&gt;Remove Extension from all Track Points&lt;/b&gt;</source>
         <translation>&lt;b&gt;Erweiterung von allen Trackpunkten entfernen&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterDeleteExtension.ui" line="63"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterDeleteExtension.h" line="123"/>
         <source>Remove </source>
         <translation>Entfernt </translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterDeleteExtension.ui" line="83"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterDeleteExtension.h" line="124"/>
         <source>from all Track Points</source>
         <translation>von allen Trackpunkten</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterDeleteExtension.ui" line="103"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterDeleteExtension.h" line="125"/>
         <source>...</source>
         <translation></translation>
     </message>
@@ -11132,37 +10594,31 @@ nach der Höhe.</translation>
     <name>IFilterDouglasPeuker</name>
     <message>
         <location filename="../gis/trk/filter/IFilterDouglasPeuker.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterDouglasPeuker.h" line="112"/>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterDouglasPeuker.ui" line="45"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterDouglasPeuker.h" line="114"/>
         <source>&lt;b&gt;Hide Points (Douglas Peuker)&lt;/b&gt;</source>
         <translation>&lt;b&gt;Trackpunkte ausblenden (Douglas Peuker)&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterDouglasPeuker.ui" line="57"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterDouglasPeuker.h" line="115"/>
         <source>Hide track points if the distance to a line between neighboring points is less than</source>
         <translation>Trackpunkte werden ausgeblendet, wenn der Abstand zu&lt;br&gt;einer Linie zwischen benachbarten Punkten kleiner ist als</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterDouglasPeuker.ui" line="70"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterDouglasPeuker.h" line="116"/>
         <source>m</source>
         <translation> m</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterDouglasPeuker.ui" line="93"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterDouglasPeuker.h" line="118"/>
         <source>Apply filter now.</source>
         <translation>Den Filter jetzt anwenden.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterDouglasPeuker.ui" line="96"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterDouglasPeuker.h" line="120"/>
         <source>...</source>
         <translation></translation>
     </message>
@@ -11171,37 +10627,31 @@ nach der Höhe.</translation>
     <name>IFilterInterpolateElevation</name>
     <message>
         <location filename="../gis/trk/filter/IFilterInterpolateElevation.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterInterpolateElevation.h" line="131"/>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterInterpolateElevation.ui" line="51"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterInterpolateElevation.h" line="133"/>
         <source>&lt;b&gt;Interpolate Elevation Data&lt;/b&gt;</source>
         <translation>&lt;b&gt;Höhendaten interpolieren&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterInterpolateElevation.ui" line="69"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterInterpolateElevation.h" line="134"/>
         <source>Replace elevation of track points with interpolated data.</source>
         <translation>Die Höhe eines Trackpunktes durch einen interpolierten Wert ersetzen.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterInterpolateElevation.ui" line="76"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterInterpolateElevation.h" line="135"/>
         <source>Quality</source>
         <translation>Qualität</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterInterpolateElevation.ui" line="105"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterInterpolateElevation.h" line="136"/>
         <source>Preview</source>
         <translation>Vorschau</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterInterpolateElevation.ui" line="112"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterInterpolateElevation.h" line="137"/>
         <source>...</source>
         <translation></translation>
     </message>
@@ -11210,25 +10660,21 @@ nach der Höhe.</translation>
     <name>IFilterInvalid</name>
     <message>
         <location filename="../gis/trk/filter/IFilterInvalid.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterInvalid.h" line="99"/>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterInvalid.ui" line="41"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterInvalid.h" line="100"/>
         <source>Hide Invalid Points</source>
         <translation>Ungültige Punkte ausblenden</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterInvalid.ui" line="56"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterInvalid.h" line="101"/>
         <source>Hide points with invalid data.</source>
         <translation>Punkte mit ungültigen Daten ausblenden.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterInvalid.ui" line="63"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterInvalid.h" line="102"/>
         <source>...</source>
         <translation></translation>
     </message>
@@ -11237,37 +10683,31 @@ nach der Höhe.</translation>
     <name>IFilterLoopsCut</name>
     <message>
         <location filename="../gis/trk/filter/IFilterLoopsCut.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterLoopsCut.h" line="143"/>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterLoopsCut.ui" line="35"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterLoopsCut.h" line="144"/>
         <source>Cut track when loop length is greater than</source>
-        <translation>Den Track zerteilen, wenn die Schleife größer ist als</translation>
+        <translation>Den Track zerteilen, wenn die Schleife länger ist als</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterLoopsCut.ui" line="70"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterLoopsCut.h" line="146"/>
         <source>m</source>
         <translation>m</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterLoopsCut.ui" line="99"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterLoopsCut.h" line="148"/>
         <source>Apply filter now.</source>
         <translation>Den Filter jetzt anwenden.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterLoopsCut.ui" line="102"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterLoopsCut.h" line="150"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterLoopsCut.ui" line="132"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterLoopsCut.h" line="151"/>
         <source>Cut loops into separate tracks</source>
         <translation>Schleifen in einzelne Tracks zerteilen</translation>
     </message>
@@ -11276,31 +10716,26 @@ nach der Höhe.</translation>
     <name>IFilterMedian</name>
     <message>
         <location filename="../gis/trk/filter/IFilterMedian.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterMedian.h" line="116"/>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterMedian.ui" line="51"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterMedian.h" line="118"/>
         <source>&lt;b&gt;Smooth Profile (Median Method)&lt;/b&gt;</source>
         <translation>&lt;b&gt;Profil glätten (Median-Methode) &lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterMedian.ui" line="63"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterMedian.h" line="119"/>
         <source>Smooth deviation of the track points elevation with a Median filter of size </source>
         <translation>Glättet die Abweichung der Höhe von Trackpunkten mit einem Median-Filter der Größe </translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterMedian.ui" line="76"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterMedian.h" line="120"/>
         <source>points</source>
         <translation> Pkt.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterMedian.ui" line="105"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterMedian.h" line="121"/>
         <source>...</source>
         <translation></translation>
     </message>
@@ -11309,37 +10744,31 @@ nach der Höhe.</translation>
     <name>IFilterNewDate</name>
     <message>
         <location filename="../gis/trk/filter/IFilterNewDate.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterNewDate.h" line="109"/>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterNewDate.ui" line="35"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterNewDate.h" line="110"/>
         <source>&lt;b&gt;Change Time&lt;/b&gt;</source>
         <translation>&lt;b&gt;Zeit ändern&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterNewDate.ui" line="44"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterNewDate.h" line="111"/>
         <source>Change start of track to </source>
         <translation>Ändert den Trackbeginn auf </translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterNewDate.ui" line="51"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterNewDate.h" line="112"/>
         <source>dd.MM.yy HH:mm:ss</source>
         <translation>dd.MM.yy HH:mm:ss</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterNewDate.ui" line="61"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterNewDate.h" line="113"/>
         <source>-</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterNewDate.ui" line="81"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterNewDate.h" line="114"/>
         <source>...</source>
         <translation></translation>
     </message>
@@ -11348,37 +10777,31 @@ nach der Höhe.</translation>
     <name>IFilterObscureDate</name>
     <message>
         <location filename="../gis/trk/filter/IFilterObscureDate.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterObscureDate.h" line="108"/>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterObscureDate.ui" line="45"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterObscureDate.h" line="110"/>
         <source>&lt;b&gt;Obscure Timestamps&lt;/b&gt;</source>
         <translation>&lt;b&gt;Zeitstempel verschleiern&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterObscureDate.ui" line="54"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterObscureDate.h" line="111"/>
         <source>Increase timestamp by</source>
         <translation>Erhöht den Zeitstempel um </translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterObscureDate.ui" line="61"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterObscureDate.h" line="112"/>
         <source> sec.</source>
         <translation> s</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterObscureDate.ui" line="68"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterObscureDate.h" line="113"/>
         <source>with each track point. 0 sec. will remove timestamps.</source>
         <translation>für jeden Trackpunkt. 0 s entfernt alle Zeitstempel.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterObscureDate.ui" line="88"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterObscureDate.h" line="114"/>
         <source>...</source>
         <translation></translation>
     </message>
@@ -11387,31 +10810,26 @@ nach der Höhe.</translation>
     <name>IFilterOffsetElevation</name>
     <message>
         <location filename="../gis/trk/filter/IFilterOffsetElevation.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterOffsetElevation.h" line="124"/>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterOffsetElevation.ui" line="51"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterOffsetElevation.h" line="126"/>
         <source>&lt;b&gt;Offset Elevation&lt;/b&gt;</source>
         <translation>&lt;b&gt;Höhenversatz&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterOffsetElevation.ui" line="69"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterOffsetElevation.h" line="127"/>
         <source>Add offset of</source>
         <translation>Fügt einen Versatz von </translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterOffsetElevation.ui" line="95"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterOffsetElevation.h" line="128"/>
         <source>to track points elevation.</source>
         <translation>zur Höhe der Trackpunkte hinzu.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterOffsetElevation.ui" line="115"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterOffsetElevation.h" line="129"/>
         <source>...</source>
         <translation></translation>
     </message>
@@ -11420,25 +10838,21 @@ nach der Höhe.</translation>
     <name>IFilterReplaceElevation</name>
     <message>
         <location filename="../gis/trk/filter/IFilterReplaceElevation.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterReplaceElevation.h" line="108"/>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterReplaceElevation.ui" line="51"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterReplaceElevation.h" line="110"/>
         <source>&lt;b&gt;Replace Elevation Data&lt;/b&gt;</source>
         <translation>&lt;b&gt;Höhendaten ersetzen&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterReplaceElevation.ui" line="63"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterReplaceElevation.h" line="111"/>
         <source>Replace elevation of track points with the values from loaded DEM files in view</source>
         <translation>Ersetzt die Höhendaten durch Daten aus den geladenen DEM Dateien der Ansicht</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterReplaceElevation.ui" line="86"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterReplaceElevation.h" line="112"/>
         <source>...</source>
         <translation></translation>
     </message>
@@ -11447,25 +10861,21 @@ nach der Höhe.</translation>
     <name>IFilterReset</name>
     <message>
         <location filename="../gis/trk/filter/IFilterReset.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterReset.h" line="95"/>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterReset.ui" line="35"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterReset.h" line="96"/>
         <source>&lt;b&gt;Reset Hidden Track Points&lt;/b&gt;</source>
         <translation>&lt;b&gt;Ausgeblendete Trackpunkte wiederherstellen&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterReset.ui" line="47"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterReset.h" line="97"/>
         <source>Make all trackpoints visible again.</source>
         <translation>Alle Trackpunkte werden wieder sichtbar.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterReset.ui" line="54"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterReset.h" line="98"/>
         <source>...</source>
         <translation></translation>
     </message>
@@ -11474,49 +10884,41 @@ nach der Höhe.</translation>
     <name>IFilterSpeed</name>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="29"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterSpeed.h" line="179"/>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="64"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterSpeed.h" line="180"/>
         <source>&lt;b&gt;Change Speed&lt;/b&gt;</source>
         <translation>&lt;b&gt;Geschwindigkeit ändern&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="84"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterSpeed.h" line="181"/>
         <source>labelWarning</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="191"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterSpeed.h" line="188"/>
         <source>Hiking</source>
         <translation>Wandern</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="181"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterSpeed.h" line="186"/>
         <source>Constant</source>
         <translation>Konstant</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="186"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterSpeed.h" line="187"/>
         <source>Cycling</source>
         <translation>Fahrrad</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="114"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterSpeed.h" line="183"/>
         <source>Apply filter now.</source>
         <translation>Den Filter jetzt anwenden.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="117"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterSpeed.h" line="185"/>
         <source>...</source>
         <translation></translation>
     </message>
@@ -11525,19 +10927,16 @@ nach der Höhe.</translation>
     <name>IFilterSpeedConst</name>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedConst.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterSpeedConst.h" line="70"/>
         <source>Form</source>
         <translation>Diese Strecke vermeiden</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedConst.ui" line="54"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterSpeedConst.h" line="72"/>
         <source>Speed</source>
         <translation>Geschwindigkeit</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedConst.ui" line="35"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterSpeedConst.h" line="71"/>
         <source> km/h</source>
         <translation> km/h</translation>
     </message>
@@ -11546,67 +10945,56 @@ nach der Höhe.</translation>
     <name>IFilterSpeedCycle</name>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="26"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterSpeedCycle.h" line="222"/>
         <source>Form</source>
         <translation>Diese Strecke vermeiden</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="221"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterSpeedCycle.h" line="231"/>
         <source>User defined positive and negative slope values will be replaced by the minimum and maximum slope values from the track.</source>
         <translation>Benutzerdefinierte positive und negative Steigungen werden durch die minimale und maximale Steigung im Track ersetzt.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="224"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterSpeedCycle.h" line="233"/>
         <source>Set min/max slopes from Track</source>
         <translation>Min./Max. Steigung aus dem Track</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="241"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterSpeedCycle.h" line="235"/>
         <source>Max Speed</source>
         <translation>Max. Geschw.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="273"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterSpeedCycle.h" line="237"/>
         <source>Min Speed</source>
         <translation>Min. Geschw.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="189"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterSpeedCycle.h" line="228"/>
         <source>Plain Level:</source>
         <translation>Ebene:</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="283"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterSpeedCycle.h" line="238"/>
         <source>Uphill:</source>
         <translation>Bergauf:</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="231"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterSpeedCycle.h" line="234"/>
         <source>at negative Slope</source>
         <translation>bei negativer Steigung</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="166"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterSpeedCycle.h" line="227"/>
         <source>at positive Slope</source>
         <translation>bei positiver Steigung</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="293"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterSpeedCycle.h" line="239"/>
         <source>Speed at zero Slope</source>
         <translation>Geschw. ohne Steigung</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="134"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterSpeedCycle.h" line="225"/>
         <source>Downhill:</source>
         <translation>Bergab:</translation>
     </message>
@@ -11615,25 +11003,21 @@ nach der Höhe.</translation>
     <name>IFilterSpeedHike</name>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedHike.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterSpeedHike.h" line="140"/>
         <source>Form</source>
         <translation>Diese Strecke vermeiden</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedHike.ui" line="88"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterSpeedHike.h" line="141"/>
         <source>Ascending Speed</source>
         <translation>Aufstiegsgeschw.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedHike.ui" line="166"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterSpeedHike.h" line="143"/>
         <source>Descending Speed</source>
         <translation>Abstiegsgeschw.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedHike.ui" line="143"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterSpeedHike.h" line="142"/>
         <source>Speed at zero Slope</source>
         <translation>Geschw. ohne Steigung</translation>
     </message>
@@ -11642,25 +11026,21 @@ nach der Höhe.</translation>
     <name>IFilterSplitSegment</name>
     <message>
         <location filename="../gis/trk/filter/IFilterSplitSegment.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterSplitSegment.h" line="95"/>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSplitSegment.ui" line="51"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterSplitSegment.h" line="97"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Split Segments into Tracks&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Tracksegmente in Tracks umwandeln&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSplitSegment.ui" line="63"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterSplitSegment.h" line="98"/>
         <source>Creates a new track for every segment within this track.</source>
         <translation>Für jedes Segment in diesem Track wird ein neuer Track erstellt.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSplitSegment.ui" line="70"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterSplitSegment.h" line="99"/>
         <source>...</source>
         <translation></translation>
     </message>
@@ -11669,31 +11049,26 @@ nach der Höhe.</translation>
     <name>IFilterSplitTrack</name>
     <message>
         <location filename="../gis/trk/filter/IFilterSplitTrack.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterSplitTrack.h" line="143"/>
         <source>Form</source>
         <translation>Diese Strecke vermeiden</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSplitTrack.ui" line="35"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterSplitTrack.h" line="144"/>
         <source>Number of tracks</source>
         <translation>Anzahl der Tracks</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSplitTrack.ui" line="99"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterSplitTrack.h" line="148"/>
         <source>Apply filter now.</source>
         <translation>Den Filter jetzt anwenden.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSplitTrack.ui" line="102"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterSplitTrack.h" line="150"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSplitTrack.ui" line="132"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterSplitTrack.h" line="151"/>
         <source>Split track into multiple shorter tracks</source>
         <translation>Zerlege den Track in mehrere kürzere Tracks</translation>
     </message>
@@ -11702,25 +11077,21 @@ nach der Höhe.</translation>
     <name>IFilterSubPt2Pt</name>
     <message>
         <location filename="../gis/trk/filter/IFilterSubPt2Pt.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterSubPt2Pt.h" line="95"/>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSubPt2Pt.ui" line="35"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterSubPt2Pt.h" line="96"/>
         <source>&lt;b&gt;Convert track subpoints to points&lt;/b&gt;</source>
         <translation>&lt;b&gt;Zwischenpunkte in Trackpunkte umwandeln&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSubPt2Pt.ui" line="47"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterSubPt2Pt.h" line="97"/>
         <source>Convert subpoints obtained from routing to ordinary track points </source>
         <translation>Zwischenpunkte vom autom. Routing werden in echte Trackpunkte umgewandelt</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSubPt2Pt.ui" line="54"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterSubPt2Pt.h" line="98"/>
         <source>...</source>
         <translation></translation>
     </message>
@@ -11729,25 +11100,21 @@ nach der Höhe.</translation>
     <name>IFilterTerrainSlope</name>
     <message>
         <location filename="../gis/trk/filter/IFilterTerrainSlope.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterTerrainSlope.h" line="95"/>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterTerrainSlope.ui" line="51"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterTerrainSlope.h" line="97"/>
         <source>&lt;b&gt;Calculate Terrain Slope&lt;/b&gt;</source>
         <translation>&lt;b&gt;Hangneigung berechnen&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterTerrainSlope.ui" line="63"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterTerrainSlope.h" line="98"/>
         <source>Calculate slope of the terrain based on loaded DEM files.</source>
         <translation>Berechnet die Hangneigung basierend auf dem geladenen Höhenmodell.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterTerrainSlope.ui" line="70"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterTerrainSlope.h" line="99"/>
         <source>...</source>
         <translation></translation>
     </message>
@@ -11756,43 +11123,36 @@ nach der Höhe.</translation>
     <name>IFilterZeroSpeedDriftCleaner</name>
     <message>
         <location filename="../gis/trk/filter/IFilterZeroSpeedDriftCleaner.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterZeroSpeedDriftCleaner.h" line="158"/>
         <source>Form</source>
         <translation>Diese Strecke vermeiden</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterZeroSpeedDriftCleaner.ui" line="35"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterZeroSpeedDriftCleaner.h" line="159"/>
         <source>Distance</source>
         <translation>Abstand</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterZeroSpeedDriftCleaner.ui" line="70"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterZeroSpeedDriftCleaner.h" line="161"/>
         <source>m</source>
         <translation>m</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterZeroSpeedDriftCleaner.ui" line="86"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterZeroSpeedDriftCleaner.h" line="162"/>
         <source>Ratio</source>
         <translation>Verhältnis</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterZeroSpeedDriftCleaner.ui" line="119"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterZeroSpeedDriftCleaner.h" line="164"/>
         <source>Apply filter now.</source>
         <translation>Den Filter jetzt anwenden.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterZeroSpeedDriftCleaner.ui" line="122"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterZeroSpeedDriftCleaner.h" line="166"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterZeroSpeedDriftCleaner.ui" line="152"/>
-        <location filename="../../../build/src/qmapshack/ui_IFilterZeroSpeedDriftCleaner.h" line="167"/>
         <source>Hide zero speed drift knots</source>
         <translation>Pausenknödel ausblenden</translation>
     </message>
@@ -11801,54 +11161,47 @@ nach der Höhe.</translation>
     <name>IGeoSearchConfigDialog</name>
     <message>
         <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IGeoSearchConfigDialog.h" line="219"/>
         <source>Setup Geo-Search</source>
         <translation>Geosuche einstellen</translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="50"/>
-        <location filename="../../../build/src/qmapshack/ui_IGeoSearchConfigDialog.h" line="220"/>
         <source>&lt;p&gt;&lt;a href=&quot;https://nominatim.openstreetmap.org/&quot; target=&quot;_blank&quot;&gt;Nominatim&lt;/a&gt; © &lt;a href=&quot;https://openstreetmap.org/copyright&quot; target=&quot;_blank&quot;&gt;OpenStreetMap ODbL&lt;/a&gt;&lt;/p&gt;&lt;p&gt;to use please specify a valid email-address:&lt;/p&gt;
 </source>
-        <translation>&lt;p&gt;&lt;a href=&quot;https://nominatim.openstreetmap.org/&quot; target=&quot;_blank&quot;&gt;Nominatim&lt;/a&gt; © &lt;a href=&quot;https://openstreetmap.org/copyright&quot; target=&quot;_blank&quot;&gt;OpenStreetMap ODbL&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Bitte eine gültige EMail-Adresse eingeben:&lt;/p&gt;
+        <translation>&lt;p&gt;&lt;a href=&quot;https://nominatim.openstreetmap.org/&quot; target=&quot;_blank&quot;&gt;Nominatim&lt;/a&gt; © &lt;a href=&quot;https://openstreetmap.org/copyright&quot; target=&quot;_blank&quot;&gt;OpenStreetMap ODbL&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Bitte eine gültige E-Mail-Adresse eingeben:&lt;/p&gt;
 </translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="63"/>
-        <location filename="../../../build/src/qmapshack/ui_IGeoSearchConfigDialog.h" line="223"/>
         <source>please specify a valid email-address</source>
-        <translation>Bitte eine gültige EMail-Adresse eingeben.</translation>
+        <translation>Bitte eine gültige E-Mail-Adresse eingeben</translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="85"/>
-        <location filename="../../../build/src/qmapshack/ui_IGeoSearchConfigDialog.h" line="225"/>
         <source>maximum number of results (default is 10):</source>
         <translation>maximale Anzahl von Ergebnissen (voreingestellt 10):</translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="150"/>
-        <location filename="../../../build/src/qmapshack/ui_IGeoSearchConfigDialog.h" line="227"/>
         <source>&lt;p&gt;&lt;a href=&quot;http://www.geonames.org/&quot; target=&quot;_blank&quot;&gt;Geonames&lt;/a&gt; © &lt;a href=&quot;http://creativecommons.org/licenses/by/4.0/&quot; target=&quot;_blank&quot;&gt;Creative Commons Attribution 4.0 License&lt;/a&gt;&lt;/p&gt;&lt;p&gt;to use please create a geonames &lt;a href=&quot;http://www.geonames.org/login&quot; target=&quot;_blank&quot;&gt;username&lt;/a&gt;,&lt;/p&gt;&lt;p&gt;then enable &apos;Free Webservices&apos; in your &lt;a href=&quot;http://www.geonames.org/manageaccount&quot; target=&quot;_blank&quot;&gt;Account&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;enter your geonames username here:&lt;/p&gt;
 </source>
-        <translation>&lt;p&gt;&lt;a href=&quot;http://www.geonames.org/&quot; target=&quot;_blank&quot;&gt;Geonames&lt;/a&gt; © &lt;a href=&quot;http://creativecommons.org/licenses/by/4.0/&quot; target=&quot;_blank&quot;&gt;Creative Commons Attribution 4.0 License&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Bitte einen GeoNames &lt;a href=&quot;http://www.geonames.org/login&quot; target=&quot;_blank&quot;&gt;Benutzer &lt;/a&gt;anlegen&lt;/p&gt;&lt;p&gt;und dann &apos;Free Webservices&apos; in ihrem &lt;a href=&quot;http://www.geonames.org/manageaccount&quot; target=&quot;_blank&quot;&gt;Konto&lt;/a&gt; anschalten.&lt;/p&gt;&lt;p&gt;Geben Sie ihren  Benutzernamen hier ein:&lt;/p&gt;
+        <translation>&lt;p&gt;&lt;a href=&quot;http://www.geonames.org/&quot; target=&quot;_blank&quot;&gt;Geonames&lt;/a&gt; © &lt;a href=&quot;http://creativecommons.org/licenses/by/4.0/&quot; target=&quot;_blank&quot;&gt;Creative Commons Attribution 4.0 License&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Bitte einen GeoNames &lt;a href=&quot;http://www.geonames.org/login&quot; target=&quot;_blank&quot;&gt;Benutzer &lt;/a&gt;anlegen&lt;/p&gt;&lt;p&gt;und dann &apos;Free Webservices&apos; in Ihrem &lt;a href=&quot;http://www.geonames.org/manageaccount&quot; target=&quot;_blank&quot;&gt;Konto&lt;/a&gt; anschalten.&lt;/p&gt;&lt;p&gt;Geben Sie Ihren Benutzernamen hier ein:&lt;/p&gt;
 </translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="163"/>
-        <location filename="../../../build/src/qmapshack/ui_IGeoSearchConfigDialog.h" line="230"/>
         <source>enter geonames username here</source>
-        <translation>GeoNames Benutzernamen hier eingeben.</translation>
+        <translation>GeoNames Benutzernamen hier eingeben</translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="206"/>
-        <location filename="../../../build/src/qmapshack/ui_IGeoSearchConfigDialog.h" line="233"/>
         <source>&lt;p&gt;&lt;a href=&quot;https://developers.google.com/maps/documentation/geocoding/start&quot; target=&quot;_blank&quot;&gt;Google Geocoding API&lt;/a&gt; © &lt;a href=&quot;https://developers.google.com/terms&quot; target=&quot;_blank&quot;&gt;Google.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;please enter your &lt;a href=&quot;https://developers.google.com/maps/documentation/geocoding/get-api-key&quot; target=&quot;_blank&quot;&gt;Google API-Key&lt;/a&gt; here:&lt;/p&gt;
 </source>
-        <translation>&lt;p&gt;&lt;a href=&quot;https://developers.google.com/maps/documentation/geocoding/start&quot; target=&quot;_blank&quot;&gt;Google Geocoding API&lt;/a&gt; © &lt;a href=&quot;https://developers.google.com/terms&quot; target=&quot;_blank&quot;&gt;Google.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Bitte geben Sie ihren &lt;a href=&quot;https://developers.google.com/maps/documentation/geocoding/get-api-key&quot; target=&quot;_blank&quot;&gt;Google API-Key&lt;/a&gt; hier ein:&lt;/p</translation>
+        <translation>&lt;p&gt;&lt;a href=&quot;https://developers.google.com/maps/documentation/geocoding/start&quot; target=&quot;_blank&quot;&gt;Google Geocoding API&lt;/a&gt; © &lt;a href=&quot;https://developers.google.com/terms&quot; target=&quot;_blank&quot;&gt;Google.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Bitte geben Sie Ihren &lt;a href=&quot;https://developers.google.com/maps/documentation/geocoding/get-api-key&quot; target=&quot;_blank&quot;&gt;Google API-Key&lt;/a&gt; hier ein:&lt;/p&gt;
+</translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="219"/>
-        <location filename="../../../build/src/qmapshack/ui_IGeoSearchConfigDialog.h" line="236"/>
         <source>enter Google API-key here</source>
         <translation>Google API Key hier eingeben.</translation>
     </message>
@@ -11857,61 +11210,51 @@ nach der Höhe.</translation>
     <name>IGeoSearchWebConfigDialog</name>
     <message>
         <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IGeoSearchWebConfigDialog.h" line="108"/>
         <source>Configure Services...</source>
         <translation>Dienste konfigurieren...</translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="24"/>
-        <location filename="../../../build/src/qmapshack/ui_IGeoSearchWebConfigDialog.h" line="109"/>
         <source>TextLabel</source>
         <translation>Bezeichnung</translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="50"/>
-        <location filename="../../../build/src/qmapshack/ui_IGeoSearchWebConfigDialog.h" line="112"/>
         <source>Name</source>
         <translation>Name</translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="55"/>
-        <location filename="../../../build/src/qmapshack/ui_IGeoSearchWebConfigDialog.h" line="111"/>
         <source>URL</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="65"/>
-        <location filename="../../../build/src/qmapshack/ui_IGeoSearchWebConfigDialog.h" line="114"/>
         <source>Add a new web service to the list.</source>
         <translation>Eine neuen Webdienst zur Liste hinzufügen.</translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="68"/>
-        <location filename="../../../build/src/qmapshack/ui_IGeoSearchWebConfigDialog.h" line="116"/>
         <source>Add new</source>
         <translation>Neuen hinzufügen</translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="78"/>
-        <location filename="../../../build/src/qmapshack/ui_IGeoSearchWebConfigDialog.h" line="118"/>
         <source>Remove all selected services from the list.</source>
         <translation>Alle ausgewählten Dienste aus der Liste entfernen.</translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="81"/>
-        <location filename="../../../build/src/qmapshack/ui_IGeoSearchWebConfigDialog.h" line="120"/>
         <source>Delete selected</source>
         <translation>Ausgewählte löschen</translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="88"/>
-        <location filename="../../../build/src/qmapshack/ui_IGeoSearchWebConfigDialog.h" line="122"/>
         <source>Remove all services and restore default list.</source>
-        <translation>Alle Dienste entfernen und die der Grundeinstellung wiederherstellen.</translation>
+        <translation>Alle Dienste entfernen und die Grundeinstellung wiederherstellen.</translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="91"/>
-        <location filename="../../../build/src/qmapshack/ui_IGeoSearchWebConfigDialog.h" line="124"/>
         <source>Reset</source>
         <translation>Zurücksetzen</translation>
     </message>
@@ -11920,31 +11263,26 @@ nach der Höhe.</translation>
     <name>IGisDatabase</name>
     <message>
         <location filename="../gis/IGisDatabase.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IGisDatabase.h" line="107"/>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/IGisDatabase.ui" line="62"/>
-        <location filename="../../../build/src/qmapshack/ui_IGisDatabase.h" line="111"/>
         <source>Name</source>
         <translation>Name</translation>
     </message>
     <message>
         <location filename="../gis/IGisDatabase.ui" line="67"/>
-        <location filename="../../../build/src/qmapshack/ui_IGisDatabase.h" line="110"/>
         <source>Age</source>
         <translation>Alter</translation>
     </message>
     <message>
         <location filename="../gis/IGisDatabase.ui" line="112"/>
-        <location filename="../../../build/src/qmapshack/ui_IGisDatabase.h" line="113"/>
         <source>To add a database do a right click on the database list above.</source>
         <translation>Eine neue Datenbank wird über einen Rechtsklick im Fenster erstellt.</translation>
     </message>
     <message>
         <location filename="../gis/IGisDatabase.ui" line="135"/>
-        <location filename="../../../build/src/qmapshack/ui_IGisDatabase.h" line="108"/>
         <source>Show Summary Drop Zones</source>
         <translation>Sammelablagen anzeigen</translation>
     </message>
@@ -12050,7 +11388,7 @@ nach der Höhe.</translation>
         <location filename="../gis/IGisItem.cpp" line="323"/>
         <source>
 It is either a new item or it has been deleted in the database by someone else.</source>
-        <translation>Es ist entweder ein neues Symbol oder es wurde in der Datenbank gelöscht.</translation>
+        <translation>Es ist entweder ein neues Element oder es wurde in der Datenbank gelöscht.</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="328"/>
@@ -12070,7 +11408,7 @@ It is either a new item or it has been deleted in the database by someone else.<
     <message>
         <location filename="../gis/IGisItem.cpp" line="540"/>
         <source>Never ask again.</source>
-        <translation>Aufhören nachzufragen.</translation>
+        <translation>Nicht mehr nachfragen.</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="541"/>
@@ -12134,19 +11472,16 @@ It is either a new item or it has been deleted in the database by someone else.<
     <name>IGisItemRate</name>
     <message>
         <location filename="../gis/IGisItemRate.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IGisItemRate.h" line="142"/>
         <source>Rating and tags...</source>
         <translation>Schlagworte und Bewertungen...</translation>
     </message>
     <message>
         <location filename="../gis/IGisItemRate.ui" line="22"/>
-        <location filename="../../../build/src/qmapshack/ui_IGisItemRate.h" line="143"/>
         <source>Set rating:</source>
         <translation>Bewertung:</translation>
     </message>
     <message>
         <location filename="../gis/IGisItemRate.ui" line="139"/>
-        <location filename="../../../build/src/qmapshack/ui_IGisItemRate.h" line="149"/>
         <source>Separate keywords by colons:</source>
         <translation>Schlagworte mit Komma trennen:</translation>
     </message>
@@ -12226,25 +11561,21 @@ Dateiname: %1</translation>
     <name>IGisSummary</name>
     <message>
         <location filename="../gis/summary/IGisSummary.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IGisSummary.h" line="59"/>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/summary/IGisSummary.ui" line="35"/>
-        <location filename="../../../build/src/qmapshack/ui_IGisSummary.h" line="61"/>
         <source>Setup summary drop zones.</source>
         <translation>Sammelablage einrichten.</translation>
     </message>
     <message>
         <location filename="../gis/summary/IGisSummary.ui" line="38"/>
-        <location filename="../../../build/src/qmapshack/ui_IGisSummary.h" line="63"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/summary/IGisSummary.ui" line="49"/>
-        <location filename="../../../build/src/qmapshack/ui_IGisSummary.h" line="64"/>
         <source>Needs setup...</source>
         <translation>Muss noch eingerichtet werden...</translation>
     </message>
@@ -12253,19 +11584,16 @@ Dateiname: %1</translation>
     <name>IGisSummarySetup</name>
     <message>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IGisSummarySetup.h" line="314"/>
         <source>Setup summary projects...</source>
         <translation>Sammelablagen einrichten...</translation>
     </message>
     <message>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="20"/>
-        <location filename="../../../build/src/qmapshack/ui_IGisSummarySetup.h" line="315"/>
         <source>-</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="37"/>
-        <location filename="../../../build/src/qmapshack/ui_IGisSummarySetup.h" line="319"/>
         <source>Drop Zone 1</source>
         <translation>Ablage 1</translation>
     </message>
@@ -12278,14 +11606,6 @@ Dateiname: %1</translation>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="220"/>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="276"/>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="290"/>
-        <location filename="../../../build/src/qmapshack/ui_IGisSummarySetup.h" line="316"/>
-        <location filename="../../../build/src/qmapshack/ui_IGisSummarySetup.h" line="317"/>
-        <location filename="../../../build/src/qmapshack/ui_IGisSummarySetup.h" line="320"/>
-        <location filename="../../../build/src/qmapshack/ui_IGisSummarySetup.h" line="321"/>
-        <location filename="../../../build/src/qmapshack/ui_IGisSummarySetup.h" line="325"/>
-        <location filename="../../../build/src/qmapshack/ui_IGisSummarySetup.h" line="326"/>
-        <location filename="../../../build/src/qmapshack/ui_IGisSummarySetup.h" line="329"/>
-        <location filename="../../../build/src/qmapshack/ui_IGisSummarySetup.h" line="330"/>
         <source>...</source>
         <translation></translation>
     </message>
@@ -12294,28 +11614,21 @@ Dateiname: %1</translation>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="164"/>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="185"/>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="255"/>
-        <location filename="../../../build/src/qmapshack/ui_IGisSummarySetup.h" line="318"/>
-        <location filename="../../../build/src/qmapshack/ui_IGisSummarySetup.h" line="322"/>
-        <location filename="../../../build/src/qmapshack/ui_IGisSummarySetup.h" line="324"/>
-        <location filename="../../../build/src/qmapshack/ui_IGisSummarySetup.h" line="328"/>
         <source>Name</source>
         <translation>Name</translation>
     </message>
     <message>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="107"/>
-        <location filename="../../../build/src/qmapshack/ui_IGisSummarySetup.h" line="323"/>
         <source>Drop Zone 2</source>
         <translation>Ablage 2</translation>
     </message>
     <message>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="177"/>
-        <location filename="../../../build/src/qmapshack/ui_IGisSummarySetup.h" line="327"/>
         <source>Drop Zone 3</source>
         <translation>Ablage 3</translation>
     </message>
     <message>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="247"/>
-        <location filename="../../../build/src/qmapshack/ui_IGisSummarySetup.h" line="331"/>
         <source>Drop Zone 4</source>
         <translation>Ablage 4</translation>
     </message>
@@ -12324,31 +11637,26 @@ Dateiname: %1</translation>
     <name>IGisWorkspace</name>
     <message>
         <location filename="../gis/IGisWorkspace.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IGisWorkspace.h" line="93"/>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/IGisWorkspace.ui" line="43"/>
-        <location filename="../../../build/src/qmapshack/ui_IGisWorkspace.h" line="94"/>
         <source>Opacity</source>
         <translation>Transparenz</translation>
     </message>
     <message>
         <location filename="../gis/IGisWorkspace.ui" line="50"/>
-        <location filename="../../../build/src/qmapshack/ui_IGisWorkspace.h" line="96"/>
         <source>Change the opacity of all GIS Items on the map.</source>
         <translation>Ändert die Transparenz von allen GIS Elementen auf der Karte.</translation>
     </message>
     <message>
         <location filename="../gis/IGisWorkspace.ui" line="110"/>
-        <location filename="../../../build/src/qmapshack/ui_IGisWorkspace.h" line="100"/>
         <source>Rating</source>
         <translation>Beurteilung</translation>
     </message>
     <message>
         <location filename="../gis/IGisWorkspace.ui" line="115"/>
-        <location filename="../../../build/src/qmapshack/ui_IGisWorkspace.h" line="99"/>
         <source>Name</source>
         <translation>Name</translation>
     </message>
@@ -12357,19 +11665,16 @@ Dateiname: %1</translation>
     <name>IGridSetup</name>
     <message>
         <location filename="../grid/IGridSetup.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IGridSetup.h" line="151"/>
         <source>Setup Grid...</source>
         <translation>Gitter einstellen...</translation>
     </message>
     <message>
         <location filename="../grid/IGridSetup.ui" line="22"/>
-        <location filename="../../../build/src/qmapshack/ui_IGridSetup.h" line="152"/>
         <source>Projection</source>
         <translation>Projektion</translation>
     </message>
     <message>
         <location filename="../grid/IGridSetup.ui" line="37"/>
-        <location filename="../../../build/src/qmapshack/ui_IGridSetup.h" line="154"/>
         <source>restore default</source>
         <translation>Grundeinstellung wiederherstellen</translation>
     </message>
@@ -12378,34 +11683,26 @@ Dateiname: %1</translation>
         <location filename="../grid/IGridSetup.ui" line="66"/>
         <location filename="../grid/IGridSetup.ui" line="92"/>
         <location filename="../grid/IGridSetup.ui" line="146"/>
-        <location filename="../../../build/src/qmapshack/ui_IGridSetup.h" line="156"/>
-        <location filename="../../../build/src/qmapshack/ui_IGridSetup.h" line="160"/>
-        <location filename="../../../build/src/qmapshack/ui_IGridSetup.h" line="164"/>
-        <location filename="../../../build/src/qmapshack/ui_IGridSetup.h" line="169"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../grid/IGridSetup.ui" line="63"/>
-        <location filename="../../../build/src/qmapshack/ui_IGridSetup.h" line="158"/>
         <source>Get projection from current map.</source>
         <translation>Projektion aus der aktuellen Karte nehmen.</translation>
     </message>
     <message>
         <location filename="../grid/IGridSetup.ui" line="89"/>
-        <location filename="../../../build/src/qmapshack/ui_IGridSetup.h" line="162"/>
         <source>projection wizzard</source>
         <translation>Projektionshilfe</translation>
     </message>
     <message>
         <location filename="../grid/IGridSetup.ui" line="130"/>
-        <location filename="../../../build/src/qmapshack/ui_IGridSetup.h" line="165"/>
         <source>Grid color</source>
         <translation>Gitterfarbe</translation>
     </message>
     <message>
         <location filename="../grid/IGridSetup.ui" line="143"/>
-        <location filename="../../../build/src/qmapshack/ui_IGridSetup.h" line="167"/>
         <source>setup grid color</source>
         <translation>Gitterfarbe einstellen</translation>
     </message>
@@ -12414,41 +11711,33 @@ Dateiname: %1</translation>
     <name>IImportDatabase</name>
     <message>
         <location filename="../tool/IImportDatabase.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IImportDatabase.h" line="120"/>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../tool/IImportDatabase.ui" line="45"/>
-        <location filename="../../../build/src/qmapshack/ui_IImportDatabase.h" line="122"/>
         <source>Source Database:</source>
         <translation>Quelldatenbank:</translation>
     </message>
     <message>
         <location filename="../tool/IImportDatabase.ui" line="52"/>
         <location filename="../tool/IImportDatabase.ui" line="93"/>
-        <location filename="../../../build/src/qmapshack/ui_IImportDatabase.h" line="123"/>
-        <location filename="../../../build/src/qmapshack/ui_IImportDatabase.h" line="126"/>
         <source>-</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../tool/IImportDatabase.ui" line="102"/>
-        <location filename="../../../build/src/qmapshack/ui_IImportDatabase.h" line="127"/>
         <source>Start</source>
         <translation>Starten</translation>
     </message>
     <message>
         <location filename="../tool/IImportDatabase.ui" line="22"/>
         <location filename="../tool/IImportDatabase.ui" line="63"/>
-        <location filename="../../../build/src/qmapshack/ui_IImportDatabase.h" line="121"/>
-        <location filename="../../../build/src/qmapshack/ui_IImportDatabase.h" line="124"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../tool/IImportDatabase.ui" line="86"/>
-        <location filename="../../../build/src/qmapshack/ui_IImportDatabase.h" line="125"/>
         <source>Target Database:</source>
         <translation>Zieldatenbank:</translation>
     </message>
@@ -12457,13 +11746,11 @@ Dateiname: %1</translation>
     <name>IInputDialog</name>
     <message>
         <location filename="../helpers/IInputDialog.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IInputDialog.h" line="87"/>
         <source>Edit...</source>
         <translation>Bearbeiten...</translation>
     </message>
     <message>
         <location filename="../helpers/IInputDialog.ui" line="20"/>
-        <location filename="../../../build/src/qmapshack/ui_IInputDialog.h" line="88"/>
         <source>TextLabel</source>
         <translation>Bezeichnung</translation>
     </message>
@@ -12472,33 +11759,27 @@ Dateiname: %1</translation>
     <name>IInvalidTrk</name>
     <message>
         <location filename="../gis/trk/IInvalidTrk.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IInvalidTrk.h" line="127"/>
         <source>Invalid points...</source>
         <translation>Ungültige Punkte...</translation>
     </message>
     <message>
         <location filename="../gis/trk/IInvalidTrk.ui" line="28"/>
         <location filename="../gis/trk/IInvalidTrk.ui" line="44"/>
-        <location filename="../../../build/src/qmapshack/ui_IInvalidTrk.h" line="128"/>
-        <location filename="../../../build/src/qmapshack/ui_IInvalidTrk.h" line="130"/>
         <source>TextLabel</source>
         <translation>Bezeichnung</translation>
     </message>
     <message>
         <location filename="../gis/trk/IInvalidTrk.ui" line="37"/>
-        <location filename="../../../build/src/qmapshack/ui_IInvalidTrk.h" line="129"/>
         <source>Invalid points:</source>
         <translation>Ungültige Punkte:</translation>
     </message>
     <message>
         <location filename="../gis/trk/IInvalidTrk.ui" line="54"/>
-        <location filename="../../../build/src/qmapshack/ui_IInvalidTrk.h" line="131"/>
         <source>Do not ask again for this project</source>
         <translation>Für dieses Projekt nicht mehr fragen</translation>
     </message>
     <message>
         <location filename="../gis/trk/IInvalidTrk.ui" line="63"/>
-        <location filename="../../../build/src/qmapshack/ui_IInvalidTrk.h" line="132"/>
         <source>Show Details...</source>
         <translation>Zeige Details...</translation>
     </message>
@@ -12515,33 +11796,27 @@ Dateiname: %1</translation>
     <name>ILinksDialog</name>
     <message>
         <location filename="../helpers/ILinksDialog.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_ILinksDialog.h" line="95"/>
         <source>Links...</source>
         <translation>Verknüpfungen...</translation>
     </message>
     <message>
         <location filename="../helpers/ILinksDialog.ui" line="23"/>
-        <location filename="../../../build/src/qmapshack/ui_ILinksDialog.h" line="99"/>
         <source>Type</source>
         <translation>Typ</translation>
     </message>
     <message>
         <location filename="../helpers/ILinksDialog.ui" line="28"/>
-        <location filename="../../../build/src/qmapshack/ui_ILinksDialog.h" line="98"/>
         <source>Text</source>
         <translation>Text</translation>
     </message>
     <message>
         <location filename="../helpers/ILinksDialog.ui" line="33"/>
-        <location filename="../../../build/src/qmapshack/ui_ILinksDialog.h" line="97"/>
         <source>Uri</source>
         <translation>URI</translation>
     </message>
     <message>
         <location filename="../helpers/ILinksDialog.ui" line="43"/>
         <location filename="../helpers/ILinksDialog.ui" line="63"/>
-        <location filename="../../../build/src/qmapshack/ui_ILinksDialog.h" line="100"/>
-        <location filename="../../../build/src/qmapshack/ui_ILinksDialog.h" line="101"/>
         <source>...</source>
         <translation></translation>
     </message>
@@ -12550,15 +11825,12 @@ Dateiname: %1</translation>
     <name>IListTrkPts</name>
     <message>
         <location filename="../gis/trk/IListTrkPts.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IListTrkPts.h" line="56"/>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/trk/IListTrkPts.ui" line="32"/>
         <location filename="../gis/trk/IListTrkPts.ui" line="45"/>
-        <location filename="../../../build/src/qmapshack/ui_IListTrkPts.h" line="57"/>
-        <location filename="../../../build/src/qmapshack/ui_IListTrkPts.h" line="58"/>
         <source>-</source>
         <translation></translation>
     </message>
@@ -12567,651 +11839,540 @@ Dateiname: %1</translation>
     <name>IMainWindow</name>
     <message>
         <location filename="../IMainWindow.ui" line="17"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="629"/>
         <source>QMapShack</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="63"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="812"/>
         <source>File</source>
         <translation>Datei</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="82"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="813"/>
         <source>View</source>
         <translation>Ansicht</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="107"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="814"/>
         <source>Window</source>
         <translation>Fenster</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="117"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="815"/>
         <source>?</source>
         <translation>?</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="137"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="817"/>
         <source>Tool</source>
         <translation>Werkzeug</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="157"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="818"/>
         <source>Maps</source>
         <translation>Karten</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="194"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="819"/>
         <source>Dig. Elev. Model (DEM)</source>
         <translation>Dig. Höhenmodell (DEM)</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="236"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="821"/>
         <source>Toolbar</source>
         <translation>Werkzeugleiste</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="262"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="823"/>
         <source>Routing</source>
         <translation>Streckenführung</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="280"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="824"/>
         <source>Realtime</source>
         <translation>Echtzeit</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="326"/>
         <location filename="../IMainWindow.ui" line="329"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="630"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="632"/>
         <source>Add Map View</source>
         <translation>Kartenansicht hinzufügen</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="332"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="635"/>
         <source>Ctrl+T</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="347"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="637"/>
         <source>Show Scale</source>
         <translation>Maßstab</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="359"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="638"/>
         <source>Setup Map Font</source>
         <translation>Kartenfont einstellen</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="374"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="639"/>
         <source>Show Grid</source>
         <translation>Gitter</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="377"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="641"/>
         <source>Ctrl+G</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="389"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="643"/>
         <source>Setup Grid</source>
         <translation>Gitter einstellen</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="392"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="645"/>
         <source>Ctrl+Alt+G</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="407"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="647"/>
         <source>Flip Mouse Wheel</source>
         <translation>Mausrad umdrehen</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="419"/>
         <location filename="../IMainWindow.ui" line="422"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="648"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="650"/>
         <source>Setup Map Paths</source>
         <translation>Kartenverzeichnisse angeben</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="437"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="652"/>
         <source>POI Text</source>
         <translation>POI Text</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="452"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="653"/>
         <source>Night / Day</source>
         <translation>Nacht / Tag</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="470"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="656"/>
         <source>Ctrl+I</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="482"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="658"/>
         <source>Setup DEM Paths</source>
         <translation>DEM Verzeichnisse angeben</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="494"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="659"/>
         <source>About</source>
         <translation>Über</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="506"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="660"/>
         <source>Online Wiki</source>
         <translation>Online Wiki</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="1044"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="800"/>
         <source>Help</source>
         <translation>Hilfe</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="1047"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="802"/>
         <source>F1</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="518"/>
         <location filename="../IMainWindow.ui" line="521"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="661"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="663"/>
         <source>Setup Map View</source>
         <translation>Kartenansicht einstellen</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="292"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="825"/>
         <source>POI Collections</source>
         <translation>Sehenswürdigkeiten</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="467"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="654"/>
         <source>Map Tooltip</source>
         <translation>Kartentooltip</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="569"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="679"/>
         <source>Setup Timezone</source>
         <translation>Zeitzone einstellen</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="596"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="681"/>
         <source>Geosearch</source>
         <translation>Geo-Suche</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="665"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="695"/>
         <source>VRT Builder</source>
         <translation>VRT Builder</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="668"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="697"/>
         <source>GUI front end to gdalbuildvrt</source>
-        <translation>Eine graphische Benutzerschnittstelle zu gdalbuildvrt </translation>
+        <translation>Eine graphische Benutzerschnittstelle zu gdalbuildvrt</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="680"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="699"/>
         <source>Store Map View</source>
         <translation>Kartenansicht speichern</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="683"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="701"/>
         <source>Write current active map and DEM list including the properties to a file</source>
         <translation>Speichert die aktiven Karten und DEM Dateien inklusive der Eigenschaften in einer Datei</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="695"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="703"/>
         <source>Load Map View</source>
         <translation>Kartenansicht laden</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="698"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="705"/>
         <source>Restore view with active map and DEM list including the properties from a file</source>
         <translation>Stellt die aktiven Karten und DEM Dateien inklusive der Eigenschaften aus einer Datei wieder her</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="713"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="707"/>
         <source>Track Profile as Window</source>
         <translation>Trackprofil als Fenster</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="716"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="709"/>
         <source>Show the track profile in it&apos;s own window instead within the map view.</source>
         <translation>Das Trackprofil in einem eigenen Fenster anzeigen, anstatt innerhalb der Kartenansicht.</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="773"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="723"/>
         <source>Save(Print) Map</source>
         <translation>Karte speichern(drucken)</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="878"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="752"/>
         <source>Fullscreen</source>
         <translation>Vollbild</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="893"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="756"/>
         <source>Min./Max. Labels</source>
         <translation>Min./Max. Marken</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="926"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="765"/>
         <source>Track Info</source>
         <translation>Trackinformation</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="929"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="767"/>
         <source>Select what information is shown for a highlighted track.</source>
-        <translation>Wählen Sie aus welche Information für einen hervorgehobenen Track angezeigt wird.</translation>
+        <translation>Wählen Sie aus, welche Information für einen hervorgehobenen Track angezeigt wird.</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="941"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="769"/>
         <source>Track Point Info Table</source>
         <translation>Trackpunktinformationstabelle</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="944"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="771"/>
         <source>Show a legend for all track point info bullets along the track.</source>
         <translation>Zeigt eine Legende für alle Trackpunktinformationsmarken an.</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="956"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="773"/>
         <source>Track Summary</source>
         <translation>Trackzusammenfassung</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="959"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="775"/>
         <source>Show the track summary.</source>
         <translation>Zeigt die Trackzusammenfassung an.</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="971"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="777"/>
         <source>Min./Max Summary</source>
         <translation>Min./Max. Zusammenfassung</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="974"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="779"/>
         <source>Show the minimum and the maximum values of the track properties in a table.</source>
         <translation>Zeigt die minimalen und maximalen Werte der Trackeigenschaften an.</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="986"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="781"/>
         <source>Track Profile</source>
         <translation>Trackprofil</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="989"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="783"/>
         <source>Show the track profile.</source>
         <translation>Zeigt das Trackprofil an.</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="998"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="785"/>
         <source>Take Screenshot</source>
         <translation>Bildschirmkopie anfertigen</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="1001"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="787"/>
         <source>Take a screenshot from the current active map view.</source>
         <translation>Macht eine Bildschirmkopie von der aktuellen Kartenansicht.</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="1004"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="790"/>
         <source>Ctrl+Alt+P</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="1016"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="792"/>
         <source>Track Point Info</source>
         <translation>Trackpunktinformation</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="1019"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="794"/>
         <source>Mark track points with additional information by auto-numbered bullets.</source>
         <translation>Trackpunkte mit zusätzlicher Information versehen, die automatisch nummeriert wird.</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="1032"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="796"/>
         <source>Track Highlight</source>
         <translation>Track hervorheben</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="1035"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="798"/>
         <source>Mark the highlighted track with a red border.</source>
         <translation>Markiert den hervorgehobenen Track mit einer roten Umrandung.</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="1059"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="804"/>
         <source>Link Map Views</source>
         <translation>Kartenansichten verbinden</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="1062"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="806"/>
         <source>All map views move and zoom to the same point.</source>
-        <translation>Alle Kartenansichten fokusieren und zoomen auf den selben Punkt.</translation>
+        <translation>Alle Kartenansichten auf denselben Punkt fokusieren und zoomen.</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="1071"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="808"/>
         <source>Setup POI Paths</source>
         <translation>POI Verzeichnisse angeben</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="1074"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="810"/>
         <source>Setup paths to POI collections</source>
         <translation>Pfade zu Sammlungen von Sehenswürdigkeiten einstellen</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="719"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="712"/>
         <source>Ctrl+E</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="731"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="714"/>
         <source>Close</source>
         <translation>Schließen</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="734"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="716"/>
         <source>Ctrl+Q</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="746"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="718"/>
         <source>Clone Map View</source>
         <translation>Kartenansicht klonen</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="749"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="720"/>
         <source>Ctrl+Shift+T</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="761"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="722"/>
         <source>Create Routino Database</source>
         <translation>Routino Datenbank erstellen</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="776"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="725"/>
         <source>Print a selected area of the map</source>
         <translation>Einen ausgewählten Bereich der Karte drucken</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="779"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="728"/>
         <source>Ctrl+P</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="791"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="730"/>
         <source>Setup Coord. Format</source>
         <translation>Koordinatenformat einstellen</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="794"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="732"/>
         <source>Change the format coordinates are displayed</source>
         <translation>Ändert das Format der angezeigten Koordinaten</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="806"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="734"/>
         <source>Setup Map Background</source>
         <translation>Kartenhintergrund einstellen</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="818"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="735"/>
         <source>Setup Waypoint Icons</source>
         <translation>Wegpunktsymbole konfigurieren</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="821"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="737"/>
         <source>Setup path to custom icons</source>
         <translation>Pfad zu individuellen Symbolen einrichten</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="830"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="739"/>
         <source>Close Tab</source>
         <translation>Reiter schließen</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="833"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="741"/>
         <source>Ctrl+W</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="842"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="743"/>
         <source>Quickstart Help</source>
         <translation>Schnellstartanleitung</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="851"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="744"/>
         <source>Setup Toolbar</source>
         <translation>Werkzeugleiste einstellen</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="863"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="745"/>
         <source>Toggle Docks</source>
         <translation>Fenster umschalten</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="866"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="747"/>
         <source>Toggle visibility of dockable windows</source>
         <translation>Sichtbarkeit der andockbaren Fenster umschalten</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="869"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="750"/>
         <source>Ctrl+D</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="881"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="754"/>
         <source>F11</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="896"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="758"/>
         <source>Show the minimum and maximum values of the track properties along the track in the map view.</source>
         <translation>Zeigt die minimalen und maximalen Werte der Trackdaten in der Kartenansicht entlang des Tracks an.</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="899"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="761"/>
         <source>Ctrl+N</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="908"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="763"/>
         <source>Start QMapTool</source>
         <translation>QMapTool starten</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="917"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="764"/>
         <source>Change Map View Name</source>
         <translation>Namen der Kartenansicht ändern</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="250"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="822"/>
         <source>Database</source>
         <translation>Datenbank</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="126"/>
         <location filename="../IMainWindow.ui" line="227"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="816"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="820"/>
         <source>Workspace</source>
         <translation>Arbeitsplatz</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="533"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="665"/>
         <source>Load GIS Data</source>
         <translation>GIS Daten laden</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="536"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="667"/>
         <source>Load projects from file</source>
         <translation>Lade Datei als Projekt</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="539"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="670"/>
         <source>Ctrl+L</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="551"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="672"/>
         <source>Save All GIS Data</source>
         <translation>Alle GIS Daten speichern</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="554"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="674"/>
         <source>Save all projects in the workspace</source>
         <translation>Alle Projekte, die sich auf dem Arbeitsplatz befinden, speichern</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="557"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="677"/>
         <source>Ctrl+S</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="581"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="680"/>
         <source>Add empty project</source>
         <translation>Leeres Projekt hinzufügen</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="608"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="682"/>
         <source>Close all projects</source>
         <translation>Alle Projekte schließen</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="611"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="684"/>
         <source>F8</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="623"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="686"/>
         <source>Setup Units</source>
         <translation>Einheiten einstellen</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="635"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="687"/>
         <source>Setup Workspace</source>
         <translation>Arbeitsplatz konfigurieren</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="638"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="689"/>
         <source>Setup save on exit.</source>
         <translation>Speichert Einstellungen beim Beenden.</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="650"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="691"/>
         <source>Import Database from QLandkarte</source>
         <translation>Datenbankimport aus QLandkarte</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="653"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="693"/>
         <source>Import QLandkarte GT database</source>
         <translation>QLandkarte GT Datenbank importieren</translation>
     </message>
@@ -13220,73 +12381,61 @@ Dateiname: %1</translation>
     <name>IMapList</name>
     <message>
         <location filename="../map/IMapList.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="144"/>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="126"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="162"/>
         <source>Use the context menu (right mouse button click on entry) to activate a map. Use drag-n-drop to move the activated map in the draw order. </source>
-        <translation>Mit dem Kontextmenü (Klick mit rechter Maustaste auf einen Eintrag) können Sie eine Karte aktivieren. Um die Karten in einer anderen Reihenfolge anzuzeigen, können Sie jeden Eintrag mit drag-n-drop verschieben.</translation>
+        <translation>Mit dem Kontextmenü (Klick mit rechter Maustaste auf einen Eintrag) können Sie eine Karte aktivieren. Um die Karten in einer anderen Reihenfolge anzuzeigen, können Sie jeden Eintrag mit &quot;drag-n-drop&quot; verschieben.</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="35"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="157"/>
         <source>Filter: Start to type and the list will be reduced to matching items.</source>
         <translation>Filter: Fangen Sie zu tippen an und die Liste wird auf passende Einträge reduziert.</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="38"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="159"/>
         <source>start typing...</source>
         <translation>mit dem Tippen anfangen...</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="113"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="161"/>
         <source>To add maps use &lt;a href=&apos;MapFolders&apos;&gt;File-&gt;Setup Map Paths&lt;/a&gt;.</source>
         <translation>Sie können Karten mit &lt;a href=&apos;MapFolders&apos;&gt;&quot;Datei -&gt; Kartenverzeichnisse angeben&quot;&lt;/a&gt; hinzufügen.</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="151"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="145"/>
         <source>Activate</source>
         <translation>Aktivieren</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="160"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="146"/>
         <source>Move Up</source>
         <translation>Nach oben verschieben</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="163"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="148"/>
         <source>Hide map behind previous map</source>
         <translation>Versteckt die Karte hinter der vorherigen</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="172"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="150"/>
         <source>Move down</source>
         <translation>Nach unten verschieben</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="175"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="152"/>
         <source>Show map on top of next map</source>
         <translation>Die Karte überlagert die nächste</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="184"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="154"/>
         <source>Reload Maps</source>
         <translation>Karten erneut laden</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="193"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="155"/>
         <source>Clear Filter</source>
         <translation>Filter zurücksetzen</translation>
     </message>
@@ -13295,8 +12444,8 @@ Dateiname: %1</translation>
     <name>IMapOnline</name>
     <message>
         <location filename="../map/IMapOnline.cpp" line="39"/>
-        <source>This map requires OpenSSL support. However due to legal restrictions in some countries OpenSSL is not packaged with QMapShack. You can have a look at the &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;OpenSSL Homepage&lt;/a&gt; for binaries. You have to copy libeay32.dll and ssleay32.dll into the QMapShack program directory.</source>
-        <translation>Diese Karte benötigt OpenSSL. Aufgrund rechtlicher Beschränkungen in einigen Ländern, ist OpenSSL nicht Bestandteil von QMapShack. Sie können sich auf der &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;OpenSSL Homepage&lt;/a&gt; nach Binärdateien umsehen. Sie müssen die Dateien libeay32.dll and ssleay32.dll in das QMapShack Programmverzeichnis kopieren.</translation>
+        <source>This map requires OpenSSL support. However due to legal restrictions in some countries OpenSSL is not packaged with QMapShack. You can have a look at the &lt;a href=&apos;https://github.com/openssl/openssl/wiki/Binaries&apos;&gt;OpenSSL Wiki&lt;/a&gt; for binaries. You have to copy libcrypto-3-x64.dll and libssl-3-x64.dll into the QMapShack program directory.</source>
+        <translation>Diese Karte benötigt OpenSSL. Aufgrund rechtlicher Beschränkungen in einigen Ländern, ist OpenSSL nicht Bestandteil von QMapShack. Sie können sich im &lt;a href=&apos;https://github.com/openssl/openssl/wiki/Binaries&apos;&gt;OpenSSL Wiki&lt;/a&gt; nach Binärdateien umsehen. Sie müssen die Dateien libcrypto-3-x64.dll und libssl-3-x64.dll in das QMapShack Programmverzeichnis kopieren.</translation>
     </message>
     <message>
         <location filename="../map/IMapOnline.cpp" line="43"/>
@@ -13313,13 +12462,11 @@ Dateiname: %1</translation>
     <name>IMapPathSetup</name>
     <message>
         <location filename="../map/IMapPathSetup.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapPathSetup.h" line="179"/>
         <source>Setup map paths</source>
-        <translation>Kartenpfad einrichten</translation>
+        <translation>Kartenpfade einrichten</translation>
     </message>
     <message>
         <location filename="../map/IMapPathSetup.ui" line="20"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapPathSetup.h" line="180"/>
         <source>Root path of tile cache for online maps:</source>
         <translation>Hauptverzeichnis für den Kachelspeicher von Onlinekarten:</translation>
     </message>
@@ -13327,15 +12474,11 @@ Dateiname: %1</translation>
         <location filename="../map/IMapPathSetup.ui" line="36"/>
         <location filename="../map/IMapPathSetup.ui" line="73"/>
         <location filename="../map/IMapPathSetup.ui" line="93"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapPathSetup.h" line="182"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapPathSetup.h" line="183"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapPathSetup.h" line="184"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../map/IMapPathSetup.ui" line="185"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapPathSetup.h" line="187"/>
         <source>Help! I want maps!
 I don&apos;t want to read the documentation!</source>
         <translation>Hilfe! Ich will Karten!
@@ -13344,8 +12487,6 @@ Keine Lust die Anleitung zu lesen!</translation>
     <message>
         <location filename="../map/IMapPathSetup.ui" line="29"/>
         <location filename="../map/IMapPathSetup.ui" line="154"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapPathSetup.h" line="181"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapPathSetup.h" line="186"/>
         <source>-</source>
         <translation></translation>
     </message>
@@ -13354,13 +12495,11 @@ Keine Lust die Anleitung zu lesen!</translation>
     <name>IMapPropSetup</name>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapPropSetup.h" line="290"/>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="35"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapPropSetup.h" line="292"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Change opacity of map&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ändert die Transparenz der Karte&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -13369,105 +12508,87 @@ Keine Lust die Anleitung zu lesen!</translation>
         <location filename="../map/IMapPropSetup.ui" line="96"/>
         <location filename="../map/IMapPropSetup.ui" line="379"/>
         <location filename="../map/IMapPropSetup.ui" line="393"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapPropSetup.h" line="298"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapPropSetup.h" line="311"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapPropSetup.h" line="325"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapPropSetup.h" line="329"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="145"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapPropSetup.h" line="312"/>
         <source>Areas</source>
         <translation>Gebiete</translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="152"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapPropSetup.h" line="313"/>
         <source>Lines</source>
         <translation>Linien</translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="159"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapPropSetup.h" line="314"/>
         <source>Points</source>
         <translation>Punkte</translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="176"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapPropSetup.h" line="315"/>
         <source>Details</source>
         <translation>Details</translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="270"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapPropSetup.h" line="318"/>
         <source>-</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="280"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapPropSetup.h" line="319"/>
         <source>Cache Path</source>
         <translation>Speicherpfad</translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="362"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapPropSetup.h" line="320"/>
         <source>Type File:</source>
         <translation>TYP Datei:</translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="376"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapPropSetup.h" line="323"/>
         <source>Forget external type file and use internal types.</source>
         <translation>Externe TYP Datei vergessen und interne Typen verwenden.</translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="390"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapPropSetup.h" line="327"/>
         <source>Load an external type file.</source>
         <translation>Externe TYP Datei laden.</translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="233"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapPropSetup.h" line="316"/>
         <source>Cache Size (MB)</source>
         <translation>Cache (MB)</translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="50"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapPropSetup.h" line="295"/>
         <source>Click to use the current zoom as maximum 
 zoom-in to display the map.</source>
         <translation>Anklicken, um den aktuellen Zoomlevel 
-als den Maximalen beim Heranzoomen zu verwenden.</translation>
+als Maximum beim Heranzoomen zu verwenden.</translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="75"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapPropSetup.h" line="300"/>
         <source>Control the zoom range for which the map is 
 displayed. Use the two buttons left  and right 
 to define the actual zoom as either maximum 
 zoom-in or zoom-out.
 </source>
-        <translation>Legt den Zoombereich fest, bei dem die DEM Daten 
-benutzt werden. Benutzen Sie die beiden Knöpfe links und rechts, 
-um den aktuellen Zoomlevel als Maximum beim Heraus- oder 
-Hineinzoomen zu verwenden.</translation>
+        <translation>Legt den Zoombereich fest, bei dem die Karte 
+sichtbar ist. Benutzen Sie die beiden Knöpfe links und rechts, 
+um den aktuellen Zoomlevel als Maximum 
+beim Heraus- oder Heranzoomen zu verwenden.</translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="92"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapPropSetup.h" line="308"/>
         <source>Click to use the current zoom as maximum 
 zoom-out to display the map.</source>
         <translation>Anklicken, um den aktuellen Zoomlevel 
-als den Maximalen beim Herauszoomen zu verwenden.</translation>
+als Maximum beim Herauszoomen zu verwenden.</translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="253"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapPropSetup.h" line="317"/>
         <source>Expiration (Days)</source>
         <translation>Verfallzeit (Tage)</translation>
     </message>
@@ -13476,43 +12597,36 @@ als den Maximalen beim Herauszoomen zu verwenden.</translation>
     <name>IMapVrtBuilder</name>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapVrtBuilder.h" line="279"/>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="61"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapVrtBuilder.h" line="282"/>
         <source>Advanced Options</source>
         <translation>Erweiterte Optionen</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="73"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapVrtBuilder.h" line="283"/>
         <source>Source No Data (-srcnodata)</source>
         <translation>Kein Datenwert Quelle (-srcndata)</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="80"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapVrtBuilder.h" line="284"/>
         <source>Target No Data (-vrtnodata)</source>
         <translation>Kein Datenwert Zieldatei (-vrtnodata)</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="90"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapVrtBuilder.h" line="285"/>
         <source>Target Projection (-a_srs)</source>
         <translation>Projektion Zieldatei</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="97"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapVrtBuilder.h" line="286"/>
         <source>These options are for particular cases and usually you would like to leave blank.See GDAL &lt;a href=&apos;http://www.gdal.org/gdalbuildvrt.html&apos;&gt;Help&lt;/a&gt; for more information.</source>
         <translation>Diese Optionen sind für spezielle Fälle. Normalerweise werden sie leer gelassen. Für mehr Information lesen Sie die GDAL &lt;a href=&apos;http://www.gdal.org/gdalbuildvrt.html&apos;&gt;Hilfe&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="167"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapVrtBuilder.h" line="289"/>
         <source>&lt;ol&gt;
 &lt;li&gt;Select one or multiple source files.&lt;/li&gt;
 &lt;li&gt;Select a file name for the target VRT file.&lt;/li&gt;
@@ -13534,93 +12648,78 @@ Tip:
 Tipp:
 &lt;ul&gt;
 &lt;li&gt;Wenn Sie mehrere Dateien haben, verschieben Sie diese in einen Unterordner des Kartenpfades. Erstellen Sie die VRT Datei im Kartenpfad.&lt;/li&gt;
-&lt;li&gt;Benutzen Sie die erweiterten Optionen, um einen &quot;keine Daten&quot; Wert anzugeben, wenn ihre Quelldateien keinen haben und keinen rechteckigen Bereich abdecken. Gebiete ohne Karte werden dann transparent dargestellt.&lt;/li&gt;
-&lt;li&gt;Mit der &quot;-a_srs&quot; Option können sie eine Projektion/Datum vorgeben, wenn dieses in den Quellen fehlt. Damit werden die Daten aber NICHT neu projiziert.&lt;/li&gt;
+&lt;li&gt;Benutzen Sie die erweiterten Optionen, um einen &quot;keine Daten&quot; Wert anzugeben, wenn Ihre Quelldateien keinen haben und keinen rechteckigen Bereich abdecken. Gebiete ohne Karte werden dann transparent dargestellt.&lt;/li&gt;
+&lt;li&gt;Mit der &quot;-a_srs&quot; Option können Sie eine Projektion/Datum vorgeben, wenn dies in den Quellen fehlt. Damit werden die Daten aber NICHT neu projiziert.&lt;/li&gt;
 &lt;/ul&gt;</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="22"/>
         <location filename="../tool/IMapVrtBuilder.ui" line="255"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapVrtBuilder.h" line="280"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapVrtBuilder.h" line="311"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="39"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapVrtBuilder.h" line="281"/>
         <source>Select source files:</source>
         <translation>Quelldateien auswählen:</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="130"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapVrtBuilder.h" line="287"/>
         <source>User defined options</source>
         <translation>Benutzerdef. Opt.</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="193"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapVrtBuilder.h" line="302"/>
         <source>Overviews will allow you to show the map for a larger range of zooms.</source>
         <translation>Übersichtsebenen erlauben es Ihnen die Karte in einem größeren Zoombereich anzuzeigen.</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="196"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapVrtBuilder.h" line="304"/>
         <source>Create overviews for result.</source>
         <translation>Übersichtsebenen erstellen.</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="208"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapVrtBuilder.h" line="305"/>
         <source>:2</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="215"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapVrtBuilder.h" line="306"/>
         <source>:4</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="222"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapVrtBuilder.h" line="307"/>
         <source>:8</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="229"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapVrtBuilder.h" line="308"/>
         <source>:16</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="236"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapVrtBuilder.h" line="309"/>
         <source>:32</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="243"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapVrtBuilder.h" line="310"/>
         <source>:64</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="278"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapVrtBuilder.h" line="312"/>
         <source>Target Filename:</source>
         <translation>Zieldatei auswählen:</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="285"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapVrtBuilder.h" line="313"/>
         <source>-</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="294"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapVrtBuilder.h" line="314"/>
         <source>Start</source>
         <translation></translation>
     </message>
@@ -13630,27 +12729,27 @@ Tipp:
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="230"/>
         <source>&lt;b&gt;New Line&lt;/b&gt;&lt;br/&gt;Move the mouse and use the left mouse button to drop points. When done use the right mouse button to stop.&lt;br/&gt;</source>
-        <translation>&lt;b&gt;Neue Linie&lt;/b&gt;&lt;br/&gt;Erstellen Sie Punkte durch Verschieben des Mauscursors und Drücken der linken Maustaste. Mit der rechten Maustaste beenden Sie den Vorgang.&lt;br/&gt;</translation>
+        <translation>&lt;b&gt;Neue Linie&lt;/b&gt;&lt;br/&gt;Erstellen Sie Punkte durch Verschieben des Mauszeigers und Drücken der linken Maustaste. Mit der rechten Maustaste beenden Sie den Vorgang.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="259"/>
         <source>&lt;b&gt;Delete Point&lt;/b&gt;&lt;br/&gt;Move the mouse close to a point and press the left button to delete it.&lt;br/&gt;</source>
-        <translation>&lt;b&gt;Punkt löschen&lt;/b&gt;&lt;br/&gt;Bewegen Sie den Mauscursor nahe an einen Punkt und drücken Sie die linke Maustaste um ihn zu löschen. &lt;br/&gt;</translation>
+        <translation>&lt;b&gt;Punkt löschen&lt;/b&gt;&lt;br/&gt;Bewegen Sie den Mauszeiger nahe an einen Punkt und drücken die linke Maustaste, um ihn zu löschen.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="268"/>
         <source>&lt;b&gt;Select Range of Points&lt;/b&gt;&lt;br/&gt;Left click on first point to start selection. Left click second point to complete selection and choose from options. Use the right mouse button to cancel.&lt;br/&gt;</source>
-        <translation>&lt;b&gt;Punktebereich auswählen&lt;/b&gt;&lt;br/&gt;Mit der linken Maustaste wählen Sie den ersten Punkt aus. Mit einem erneuten Drücken der linken Maustaste wählen Sie den zweiten Punkt aus und dann wählen Sie eine der Optionen. Zum Abbrechen nutzen Sie die rechte Maustaste.&lt;br/&gt;</translation>
+        <translation>&lt;b&gt;Punktebereich auswählen&lt;/b&gt;&lt;br/&gt;Mit der linken Maustaste wählen Sie den ersten Punkt aus. Mit  erneutem Drücken der linken Maustaste wählen Sie den zweiten Punkt aus und wählen dann eine der Optionen. Zum Abbrechen drücken Sie die rechte Maustaste.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="277"/>
         <source>&lt;b&gt;Move Point&lt;/b&gt;&lt;br/&gt;Move the mouse close to a point and press the left button to make it stick to the cursor. Move the mouse to move the point. Drop the point by a left click. Use the right mouse button to cancel.&lt;br/&gt;</source>
-        <translation>&lt;b&gt;Punkt verschieben&lt;/b&gt;&lt;br/&gt;Bewegen Sie den Mauscursor nahe an einen Punkt und drücken die linke Maustaste, um ihn mit dem Cursor zu fangen. Verschieben Sie den Punkt mit der Maus. Setzen Sie den Punkt mit einem Linksklick. Zum Abbrechen nutzen Sie die rechte Maustaste.&lt;br/&gt;</translation>
+        <translation>&lt;b&gt;Punkt verschieben&lt;/b&gt;&lt;br/&gt;Bewegen Sie den Mauszeiger nahe an einen Punkt und drücken die linke Maustaste, um ihn mit dem Zeiger zu fangen. Verschieben Sie den Punkt mit der Maus. Fixieren Sie den Punkt mit einem Linksklick. Zum Abbrechen nutzen Sie die rechte Maustaste.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="287"/>
         <source>&lt;b&gt;Add Point&lt;/b&gt;&lt;br/&gt;Move the mouse close to a line segment and press the left button to add a point. The point will stick to the cursor and you can move it.  Drop the point by a left click. Use the right mouse button to cancel.&lt;br/&gt;</source>
-        <translation>&lt;b&gt;Punkt hinzufügen&lt;/b&gt;&lt;br/&gt;Bewegen Sie den Mauscursor nahe an ein Liniensegment und drücken Sie die linke Maustaste, um einen Punkt hinzuzufügen. Der Punkt wird durch den Cursor gefangen und kann verschoben werden. Setzen Sie den Punkt mit einem Linksklick. Zum Abbrechen nutzen Sie die rechte Maustaste.&lt;br/&gt;</translation>
+        <translation>&lt;b&gt;Punkt hinzufügen&lt;/b&gt;&lt;br/&gt;Bewegen Sie den Mauszeiger nahe an ein Liniensegment und drücken Sie die linke Maustaste, um einen Punkt hinzuzufügen. Der Punkt wird durch den Zeiger gefangen und kann verschoben werden. Fixieren Sie den Punkt mit einem Linksklick. Zum Abbrechen nutzen Sie die rechte Maustaste.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="297"/>
@@ -13720,22 +12819,19 @@ Tipp:
     <message>
         <location filename="../mouse/line/IMouseEditLine.h" line="146"/>
         <source>&lt;br/&gt;&lt;b&gt;Move the map&lt;/b&gt;&lt;br/&gt;If you keep the left mouse button pressed and move the mouse, you will move the map.&lt;br/&gt;&lt;br/&gt;</source>
-        <translation>&lt;br/&gt;&lt;b&gt;Karte verschieben&lt;/b&gt;&lt;br/&gt;Wenn Sie den linken Mausknopf gedrückt halten und die Maus bewegen, verschieben Sie die Karte.&lt;br/&gt;&lt;br/&gt;</translation>
+        <translation>&lt;br/&gt;&lt;b&gt;Karte verschieben&lt;/b&gt;&lt;br/&gt;Wenn Sie die linke Maustaste gedrückt halten und die Maus bewegen, verschieben Sie die Karte.&lt;br/&gt;&lt;br/&gt;</translation>
     </message>
 </context>
 <context>
     <name>IPhotoAlbum</name>
     <message>
         <location filename="../widgets/IPhotoAlbum.ui" line="20"/>
-        <location filename="../../../build/src/qmapshack/ui_IPhotoAlbum.h" line="82"/>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../widgets/IPhotoAlbum.ui" line="50"/>
         <location filename="../widgets/IPhotoAlbum.ui" line="77"/>
-        <location filename="../../../build/src/qmapshack/ui_IPhotoAlbum.h" line="83"/>
-        <location filename="../../../build/src/qmapshack/ui_IPhotoAlbum.h" line="85"/>
         <source>...</source>
         <translation></translation>
     </message>
@@ -13794,33 +12890,27 @@ Um nur horizontal zu zoomen, ALT Taste gedrückt halten.</translation>
     <name>IPoiList</name>
     <message>
         <location filename="../poi/IPoiList.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IPoiList.h" line="116"/>
         <source>Form</source>
-        <translation>Diese Strecke vermeiden</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../poi/IPoiList.ui" line="97"/>
-        <location filename="../../../build/src/qmapshack/ui_IPoiList.h" line="123"/>
         <source>To add POI collections use &lt;a href=&apos;PoiFolders&apos;&gt;File-&gt;Setup POI Paths&lt;/a&gt;.</source>
-        <translation>Sie können Sammlungen mit Sehenswürdigkeiten mit &lt;a href=&apos;PoiFolders&apos;&gt;&quot;Datei -&gt; POI Verzeichnis angeben&quot;&lt;/a&gt; hinzufügen.</translation>
+        <translation>Mit &lt;a href=&apos;PoiFolders&apos;&gt;&quot;Datei -&gt; POI Verzeichnis angeben&quot;&lt;/a&gt; können Sie Sammlungen mit Sehenswürdigkeiten hinzufügen.</translation>
     </message>
     <message>
         <location filename="../poi/IPoiList.ui" line="110"/>
-        <location filename="../../../build/src/qmapshack/ui_IPoiList.h" line="124"/>
         <source>Use the context menu (right mouse button click on entry) to activate a file. </source>
-        <translation>Mit dem Kontextmenü (Klick mit rechter Maustaste auf einen Eintrag) können Sie einen Datensatz aktivieren. Um die POI Dateien in einer anderen Reihenfolge anzuzeigen, können Sie jeden Eintrag mit drag-n-drop verschieben.</translation>
+        <translation>Mit dem Kontextmenü (Klick mit rechter Maustaste auf einen Eintrag) können Sie einen Datensatz aktivieren. Um die POI Dateien in einer anderen Reihenfolge anzuzeigen, können Sie jeden Eintrag mit &quot;drag-n-drop&quot; verschieben.</translation>
     </message>
     <message>
         <location filename="../poi/IPoiList.ui" line="135"/>
-        <location filename="../../../build/src/qmapshack/ui_IPoiList.h" line="117"/>
         <source>Activate</source>
         <translation>Aktivieren</translation>
     </message>
     <message>
         <location filename="../poi/IPoiList.ui" line="144"/>
         <location filename="../poi/IPoiList.ui" line="147"/>
-        <location filename="../../../build/src/qmapshack/ui_IPoiList.h" line="118"/>
-        <location filename="../../../build/src/qmapshack/ui_IPoiList.h" line="120"/>
         <source>Reload POI</source>
         <translation>POIs erneut laden</translation>
     </message>
@@ -13829,21 +12919,17 @@ Um nur horizontal zu zoomen, ALT Taste gedrückt halten.</translation>
     <name>IPoiPathSetup</name>
     <message>
         <location filename="../poi/IPoiPathSetup.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IPoiPathSetup.h" line="130"/>
         <source>Dialog</source>
         <translation>Dialog</translation>
     </message>
     <message>
         <location filename="../poi/IPoiPathSetup.ui" line="31"/>
         <location filename="../poi/IPoiPathSetup.ui" line="51"/>
-        <location filename="../../../build/src/qmapshack/ui_IPoiPathSetup.h" line="131"/>
-        <location filename="../../../build/src/qmapshack/ui_IPoiPathSetup.h" line="132"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../poi/IPoiPathSetup.ui" line="112"/>
-        <location filename="../../../build/src/qmapshack/ui_IPoiPathSetup.h" line="134"/>
         <source>-</source>
         <translation></translation>
     </message>
@@ -13852,19 +12938,21 @@ Um nur horizontal zu zoomen, ALT Taste gedrückt halten.</translation>
     <name>IPoiPropSetup</name>
     <message>
         <location filename="../poi/IPoiPropSetup.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IPoiPropSetup.h" line="63"/>
         <source>Form</source>
-        <translation>Diese Strecke vermeiden</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../poi/IPoiPropSetup.ui" line="35"/>
-        <location filename="../../../build/src/qmapshack/ui_IPoiPropSetup.h" line="65"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Change opacity of map&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ändert die Deckkraft der Karte&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
+        <location filename="../poi/IPoiPropSetup.ui" line="55"/>
+        <source>Selected</source>
+        <translation>Ausgewählt</translation>
+    </message>
+    <message>
         <location filename="../poi/IPoiPropSetup.ui" line="60"/>
-        <location filename="../../../build/src/qmapshack/ui_IPoiPropSetup.h" line="68"/>
         <source>Name</source>
         <translation>Name</translation>
     </message>
@@ -13873,19 +12961,16 @@ Um nur horizontal zu zoomen, ALT Taste gedrückt halten.</translation>
     <name>IPositionDialog</name>
     <message>
         <location filename="../helpers/IPositionDialog.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IPositionDialog.h" line="78"/>
         <source>Position ...</source>
         <translation>Position...</translation>
     </message>
     <message>
         <location filename="../helpers/IPositionDialog.ui" line="20"/>
-        <location filename="../../../build/src/qmapshack/ui_IPositionDialog.h" line="79"/>
         <source>Enter new position</source>
         <translation>Neue Position eingeben</translation>
     </message>
     <message>
         <location filename="../helpers/IPositionDialog.ui" line="30"/>
-        <location filename="../../../build/src/qmapshack/ui_IPositionDialog.h" line="80"/>
         <source>Bad position format. Must be: 
 &quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot;
 or
@@ -13901,25 +12986,21 @@ sein</translation>
     <name>IPrintDialog</name>
     <message>
         <location filename="../print/IPrintDialog.ui" line="20"/>
-        <location filename="../../../build/src/qmapshack/ui_IPrintDialog.h" line="165"/>
         <source>Print map...</source>
         <translation>Karte drucken...</translation>
     </message>
     <message>
         <location filename="../print/IPrintDialog.ui" line="79"/>
-        <location filename="../../../build/src/qmapshack/ui_IPrintDialog.h" line="168"/>
         <source>When printing online maps make sure that the map has been loaded into the cache for the extent to be printed.</source>
         <translation>Um einen Ausschnitt einer Online Karte zu drucken, müssen Sie sicherstellen, dass die Karte in den Cache geladen wurde.</translation>
     </message>
     <message>
         <location filename="../print/IPrintDialog.ui" line="60"/>
-        <location filename="../../../build/src/qmapshack/ui_IPrintDialog.h" line="167"/>
         <source>Save</source>
         <translation>Speichern</translation>
     </message>
     <message>
         <location filename="../print/IPrintDialog.ui" line="37"/>
-        <location filename="../../../build/src/qmapshack/ui_IPrintDialog.h" line="166"/>
         <source>When saving online maps make sure that the map has been loaded into the cache for the extent to be saved.</source>
         <translation>Um einen Ausschnitt einer Online Karte zu speichern, müssen Sie sicherstellen, dass die Karte in den Cache geladen wurde.</translation>
     </message>
@@ -13927,21 +13008,16 @@ sein</translation>
         <location filename="../print/IPrintDialog.ui" line="89"/>
         <location filename="../print/IPrintDialog.ui" line="102"/>
         <location filename="../print/IPrintDialog.ui" line="158"/>
-        <location filename="../../../build/src/qmapshack/ui_IPrintDialog.h" line="169"/>
-        <location filename="../../../build/src/qmapshack/ui_IPrintDialog.h" line="170"/>
-        <location filename="../../../build/src/qmapshack/ui_IPrintDialog.h" line="173"/>
         <source>TextLabel</source>
         <translation>Bezeichnung</translation>
     </message>
     <message>
         <location filename="../print/IPrintDialog.ui" line="112"/>
-        <location filename="../../../build/src/qmapshack/ui_IPrintDialog.h" line="171"/>
         <source>Draw scale on all pages</source>
         <translation>Maßstab auf allen Seiten anzeigen</translation>
     </message>
     <message>
         <location filename="../print/IPrintDialog.ui" line="125"/>
-        <location filename="../../../build/src/qmapshack/ui_IPrintDialog.h" line="172"/>
         <source>Print</source>
         <translation>Drucken</translation>
     </message>
@@ -13950,15 +13026,12 @@ sein</translation>
     <name>IProgressDialog</name>
     <message>
         <location filename="../helpers/IProgressDialog.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IProgressDialog.h" line="72"/>
         <source>Please wait...</source>
         <translation>Bitte warten...</translation>
     </message>
     <message>
         <location filename="../helpers/IProgressDialog.ui" line="20"/>
         <location filename="../helpers/IProgressDialog.ui" line="27"/>
-        <location filename="../../../build/src/qmapshack/ui_IProgressDialog.h" line="73"/>
-        <location filename="../../../build/src/qmapshack/ui_IProgressDialog.h" line="74"/>
         <source>TextLabel</source>
         <translation>Bezeichnung</translation>
     </message>
@@ -13967,67 +13040,56 @@ sein</translation>
     <name>IProjWizard</name>
     <message>
         <location filename="../grid/IProjWizard.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IProjWizard.h" line="191"/>
         <source>Proj4 Wizard</source>
         <translation>Projektionseingabehilfe</translation>
     </message>
     <message>
         <location filename="../grid/IProjWizard.ui" line="29"/>
-        <location filename="../../../build/src/qmapshack/ui_IProjWizard.h" line="192"/>
         <source>Mercator</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../grid/IProjWizard.ui" line="38"/>
-        <location filename="../../../build/src/qmapshack/ui_IProjWizard.h" line="193"/>
         <source>UTM</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../grid/IProjWizard.ui" line="45"/>
-        <location filename="../../../build/src/qmapshack/ui_IProjWizard.h" line="194"/>
         <source>zone</source>
         <translation>Zone</translation>
     </message>
     <message>
         <location filename="../grid/IProjWizard.ui" line="82"/>
-        <location filename="../../../build/src/qmapshack/ui_IProjWizard.h" line="195"/>
         <source>user defined</source>
-        <translation>Benutzer definiert</translation>
+        <translation>Benutzerdefiniert</translation>
     </message>
     <message>
         <location filename="../grid/IProjWizard.ui" line="94"/>
-        <location filename="../../../build/src/qmapshack/ui_IProjWizard.h" line="196"/>
         <source>Datum</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../grid/IProjWizard.ui" line="104"/>
-        <location filename="../../../build/src/qmapshack/ui_IProjWizard.h" line="197"/>
         <source>World Mercator (OSM)</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../grid/IProjWizard.ui" line="124"/>
-        <location filename="../../../build/src/qmapshack/ui_IProjWizard.h" line="198"/>
         <source>Result:</source>
         <translation>Ergebnis:</translation>
     </message>
     <message>
         <location filename="../grid/IProjWizard.ui" line="138"/>
-        <location filename="../../../build/src/qmapshack/ui_IProjWizard.h" line="200"/>
         <source>UPS North (North Pole)</source>
         <translation>UPS Nord (Nordpol)</translation>
     </message>
     <message>
         <location filename="../grid/IProjWizard.ui" line="145"/>
-        <location filename="../../../build/src/qmapshack/ui_IProjWizard.h" line="201"/>
         <source>UPS South (South Pole)</source>
         <translation>UPS Süd (Südpol)</translation>
     </message>
     <message>
         <location filename="../grid/IProjWizard.ui" line="152"/>
-        <location filename="../../../build/src/qmapshack/ui_IProjWizard.h" line="202"/>
         <source>Projection</source>
         <translation>Projektion</translation>
     </message>
@@ -14036,37 +13098,31 @@ sein</translation>
     <name>IProjWpt</name>
     <message>
         <location filename="../gis/wpt/IProjWpt.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IProjWpt.h" line="129"/>
         <source>Waypoint Projection</source>
         <translation>Wegpunkt Projektion</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IProjWpt.ui" line="22"/>
-        <location filename="../../../build/src/qmapshack/ui_IProjWpt.h" line="130"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/wpt/IProjWpt.ui" line="45"/>
-        <location filename="../../../build/src/qmapshack/ui_IProjWpt.h" line="131"/>
         <source>-</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/wpt/IProjWpt.ui" line="54"/>
-        <location filename="../../../build/src/qmapshack/ui_IProjWpt.h" line="132"/>
         <source>Clone waypoint and move by:</source>
         <translation>Wegpunkt kopieren und verschieben um:</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IProjWpt.ui" line="66"/>
-        <location filename="../../../build/src/qmapshack/ui_IProjWpt.h" line="133"/>
         <source>m</source>
         <translation> m</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IProjWpt.ui" line="76"/>
-        <location filename="../../../build/src/qmapshack/ui_IProjWpt.h" line="134"/>
         <source>°</source>
         <translation></translation>
     </message>
@@ -14075,118 +13131,99 @@ sein</translation>
     <name>IRangeToolSetup</name>
     <message>
         <location filename="../mouse/range/IRangeToolSetup.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IRangeToolSetup.h" line="319"/>
         <source>Setup Range Tool...</source>
         <translation>Bereichswerkzeug einstellen...</translation>
     </message>
     <message>
         <location filename="../mouse/range/IRangeToolSetup.ui" line="22"/>
-        <location filename="../../../build/src/qmapshack/ui_IRangeToolSetup.h" line="320"/>
         <source>Delete</source>
         <translation>Löschen</translation>
     </message>
     <message>
         <location filename="../mouse/range/IRangeToolSetup.ui" line="29"/>
-        <location filename="../../../build/src/qmapshack/ui_IRangeToolSetup.h" line="321"/>
         <source>Activity</source>
         <translation>Aktivität</translation>
     </message>
     <message>
         <location filename="../mouse/range/IRangeToolSetup.ui" line="99"/>
-        <location filename="../../../build/src/qmapshack/ui_IRangeToolSetup.h" line="324"/>
         <source>Show Points</source>
         <translation>Punkte anzeigen</translation>
     </message>
     <message>
         <location filename="../mouse/range/IRangeToolSetup.ui" line="106"/>
-        <location filename="../../../build/src/qmapshack/ui_IRangeToolSetup.h" line="325"/>
         <source>Hide Points</source>
         <translation>Punkte verbergen</translation>
     </message>
     <message>
         <location filename="../mouse/range/IRangeToolSetup.ui" line="138"/>
-        <location filename="../../../build/src/qmapshack/ui_IRangeToolSetup.h" line="327"/>
         <source>Copy</source>
         <translation>Kopieren</translation>
     </message>
     <message>
         <location filename="../mouse/range/IRangeToolSetup.ui" line="312"/>
-        <location filename="../../../build/src/qmapshack/ui_IRangeToolSetup.h" line="334"/>
         <source>Select one of the actions to be applied after the operations from above executed on a selection.</source>
-        <translation>Wählen Sie eine Aktion aus die nach dem Anwenden der oben genannten Funktionen ausgeführt wird.</translation>
+        <translation>Wählen Sie eine Aktion aus, die nach dem Anwenden der oben genannten Funktionen ausgeführt wird.</translation>
     </message>
     <message>
         <location filename="../mouse/range/IRangeToolSetup.ui" line="324"/>
-        <location filename="../../../build/src/qmapshack/ui_IRangeToolSetup.h" line="335"/>
         <source>Do nothing. Just keep the selection</source>
         <translation>Nichts machen. Die Auswahl wird beibehalten.</translation>
     </message>
     <message>
         <location filename="../mouse/range/IRangeToolSetup.ui" line="384"/>
-        <location filename="../../../build/src/qmapshack/ui_IRangeToolSetup.h" line="338"/>
         <source>Reset selection. User has to start a new one.</source>
-        <translation>Die Auswahl zurücksetzen. Sie können eine Neue anfangen.</translation>
+        <translation>Die Auswahl zurücksetzen. Sie können eine neue anfangen.</translation>
     </message>
     <message>
         <location filename="../mouse/range/IRangeToolSetup.ui" line="419"/>
-        <location filename="../../../build/src/qmapshack/ui_IRangeToolSetup.h" line="340"/>
         <source>Start a new selection at the end of the current one.</source>
-        <translation>Eine neue Auswahl am Ende der Aktuellen anfangen.</translation>
+        <translation>Eine neue Auswahl am Ende der aktuellen anfangen.</translation>
     </message>
     <message>
         <location filename="../mouse/range/IRangeToolSetup.ui" line="454"/>
-        <location filename="../../../build/src/qmapshack/ui_IRangeToolSetup.h" line="342"/>
         <source>Start a new selection at the start of the current one.</source>
-        <translation>Eine neue Auswahl am Anfang der Aktuellen anfangen.</translation>
+        <translation>Eine neue Auswahl am Anfang der aktuellen anfangen.</translation>
     </message>
     <message>
         <location filename="../mouse/range/IRangeToolSetup.ui" line="473"/>
-        <location filename="../../../build/src/qmapshack/ui_IRangeToolSetup.h" line="343"/>
         <source>Move map with selection focus</source>
-        <translation>Karte mit dem Focus der Auswahl verschieben.</translation>
+        <translation>Karte mit dem Fokus der Auswahl verschieben.</translation>
     </message>
 </context>
 <context>
     <name>IResolveDatabaseConflict</name>
     <message>
         <location filename="../gis/db/IResolveDatabaseConflict.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IResolveDatabaseConflict.h" line="92"/>
         <source>Database Conflict</source>
         <translation>Datenbankkonflikt</translation>
     </message>
     <message>
         <location filename="../gis/db/IResolveDatabaseConflict.ui" line="26"/>
-        <location filename="../../../build/src/qmapshack/ui_IResolveDatabaseConflict.h" line="93"/>
         <source>TextLabel</source>
         <translation>Bezeichnung</translation>
     </message>
     <message>
         <location filename="../gis/db/IResolveDatabaseConflict.ui" line="39"/>
-        <location filename="../../../build/src/qmapshack/ui_IResolveDatabaseConflict.h" line="94"/>
         <source>Remember choice for all items of this project</source>
         <translation>Die Auswahl für alle Elemente im Projekt anwenden</translation>
     </message>
     <message>
         <location filename="../gis/db/IResolveDatabaseConflict.ui" line="48"/>
-        <location filename="../../../build/src/qmapshack/ui_IResolveDatabaseConflict.h" line="95"/>
         <source>Clone &amp;&amp; Save</source>
         <translation>Klonen &amp;&amp; Speichern</translation>
     </message>
     <message>
         <location filename="../gis/db/IResolveDatabaseConflict.ui" line="55"/>
-        <location filename="../../../build/src/qmapshack/ui_IResolveDatabaseConflict.h" line="96"/>
         <source>Take Remote</source>
         <translation>Entfernte Version nehmen</translation>
     </message>
     <message>
         <location filename="../gis/db/IResolveDatabaseConflict.ui" line="62"/>
-        <location filename="../../../build/src/qmapshack/ui_IResolveDatabaseConflict.h" line="97"/>
         <source>Force Save</source>
         <translation>Speichern erzwingen</translation>
     </message>
     <message>
         <location filename="../gis/db/IResolveDatabaseConflict.ui" line="69"/>
-        <location filename="../../../build/src/qmapshack/ui_IResolveDatabaseConflict.h" line="98"/>
         <source>Abort</source>
         <translation>Abbrechen</translation>
     </message>
@@ -14195,25 +13232,21 @@ sein</translation>
     <name>IRouterBRouter</name>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="20"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="235"/>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="43"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="236"/>
         <source>Profile</source>
         <translation>Profil</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="50"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="237"/>
         <source>Alternative</source>
         <translation>Variante</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="79"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="239"/>
         <source>display selected routing profile</source>
         <translation>ausgewähltes Profil anzeigen</translation>
     </message>
@@ -14221,69 +13254,56 @@ sein</translation>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="82"/>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="119"/>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="133"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="241"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="247"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="251"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="102"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="242"/>
         <source>BRouter: </source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="109"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="243"/>
         <source>not running</source>
         <translation>nicht gestartet</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="116"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="245"/>
         <source>start/stop BRouter</source>
         <translation>BRouter starten/stoppen</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="130"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="249"/>
         <source>show BRouter console</source>
         <translation>BRouter Logausgabe anzeigen</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="163"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="252"/>
         <source>Setup</source>
         <translation>Einrichten</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="172"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="253"/>
         <source>Caution! BRouter is listening on all ports for connections.</source>
         <translation>Vorsicht! BRouter horcht auf allen verfügbaren Schnittstellen.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="210"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="254"/>
         <source>Dismiss</source>
         <translation>Ausblenden</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="232"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="255"/>
         <source>&lt;p&gt;&lt;a href=&quot;http://brouter.de/brouter/&quot; target=&quot;_blank&quot;&gt;BRouter&lt;/a&gt; © &lt;a href=&quot;https://github.com/abrensch/brouter/blob/master/LICENSE&quot; target=&quot;_blank&quot;&gt;ABrensch, License GPLv3&lt;/a&gt;&lt;/p&gt;</source>
         <translation>&lt;p&gt;&lt;a href=&quot;http://brouter.de/brouter/&quot; target=&quot;_blank&quot;&gt;BRouter&lt;/a&gt; © &lt;a href=&quot;https://github.com/abrensch/brouter/blob/master/LICENSE&quot; target=&quot;_blank&quot;&gt;ABrensch, Lizenz GPLv3&lt;/a&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="245"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="256"/>
         <source>&lt;p&gt;Directions Courtesy of &lt;a href=&quot;http://brouter.de/brouter-web/&quot; target=&quot;_blank&quot;&gt;BRouter-web&lt;/a&gt; &lt;/p&gt;</source>
         <translation>&lt;p&gt;Mit freundlicher Genehmigung von &lt;a href=&quot;http://brouter.de/brouter-web/&quot; target=&quot;_blank&quot;&gt;BRouter-web&lt;/a&gt; &lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="258"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="257"/>
         <source>&lt;p&gt;Routing data &lt;a href=&quot;http://www.openstreetmap.org/copyright&quot; target=&quot;_blank&quot;&gt;© OpenStreetMap&lt;/a&gt; contributors&lt;/p&gt;</source>
         <translation>&lt;p&gt;Routendaten &lt;a href=&quot;http://www.openstreetmap.org/copyright&quot; target=&quot;_blank&quot;&gt;© OpenStreetMap&lt;/a&gt;&lt;/p&gt;</translation>
     </message>
@@ -14292,13 +13312,11 @@ sein</translation>
     <name>IRouterBRouterInfo</name>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterInfo.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterInfo.h" line="65"/>
         <source>BRouter Profile</source>
         <translation>BRouter Profil</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterInfo.ui" line="20"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterInfo.h" line="66"/>
         <source>TextLabel</source>
         <translation>Bezeichnung</translation>
     </message>
@@ -14307,43 +13325,36 @@ sein</translation>
     <name>IRouterBRouterSetupWizard</name>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="23"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="669"/>
         <source>BRouter Setup</source>
         <translation>BRouter Einrichtung</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="51"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="670"/>
         <source>choose which BRouter to use</source>
-        <translation>bitte den zu verwendenden BRouters auswählen:</translation>
+        <translation>bitte den zu verwendenden BRouter auswählen</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="57"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="671"/>
         <source>BRouter-Web (online)</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="64"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="672"/>
         <source>local Installation</source>
         <translation>lokale Installation</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="71"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="673"/>
         <source>Expert Mode</source>
         <translation>Experten Modus</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="94"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="674"/>
         <source>local BRouter Installation directory:</source>
-        <translation>lokales BRouter Installations-Verzeichnis:</translation>
+        <translation>lokales BRouter Installationsverzeichnis:</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="106"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="676"/>
         <source>select installation directory</source>
         <translation>Installationsverzeichnis auswählen</translation>
     </message>
@@ -14355,273 +13366,223 @@ sein</translation>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="375"/>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="408"/>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="419"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="678"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="680"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="684"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="696"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="700"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="702"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="703"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="122"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="679"/>
         <source>labelLocalDirResult</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="147"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="681"/>
         <source>labelLocalBRouterResult</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="156"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="682"/>
         <source>create or update installation</source>
         <translation>Installation neu anlegen oder aktualisieren</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="180"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="683"/>
         <source>Java Executable</source>
-        <translation>ausführbares Java Programm</translation>
+        <translation>ausführbares Java-Programm</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="203"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="685"/>
         <source>labelLocalJavaResult</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="212"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="686"/>
         <source>search for installed java</source>
-        <translation>nach installiertem Java-programm suchen</translation>
+        <translation>nach installiertem Java-Programm suchen</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="282"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="690"/>
         <source>File to install</source>
         <translation>zu installierende Datei</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="291"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="691"/>
         <source>Download and Install</source>
-        <translation>Herunterladen und Installieren</translation>
+        <translation>Herunterladen und installieren</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="340"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="692"/>
         <source>available Profiles</source>
         <translation>Verfügbare Profile</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="358"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="694"/>
         <source>install profile</source>
         <translation>Profil installieren</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="372"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="698"/>
         <source>remove profile</source>
         <translation>Profil entfernen</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="390"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="701"/>
         <source>installed Profiles</source>
         <translation>Installierte Profile</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="434"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="704"/>
         <source>content of profile</source>
         <translation>Profil-Inhalt</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="500"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="708"/>
         <source>Service-URL</source>
         <translation>Adresse (URL) des Routing Service</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="490"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="707"/>
         <source>Profile-URL</source>
         <translation>Adresse (URL) der Profile</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="269"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="689"/>
         <source>select BRouter Version:</source>
         <translation>Brouter Version auswählen:</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="473"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="705"/>
         <source>BRouter-Config-URL</source>
-        <translation>BRouter Konfigurations URL</translation>
+        <translation>BRouter Konfigurations-URL</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="483"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="706"/>
         <source>load Service and Profile-URL from BRouter-Config-URL</source>
-        <translation>Service und Profil URL aus dem BRouter Konfigurations URL heraus laden</translation>
+        <translation>Service und Profil-URL über die BRouter Konfigurations-URL laden</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="510"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="709"/>
         <source>BRouter-Version</source>
         <translation>BRouter Version</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="550"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="710"/>
         <source>BRouter-Binaries URL</source>
         <translation>BRouter Installations URL</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="570"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="712"/>
         <source>Segments Url</source>
         <translation>Kartensegmente URL</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="580"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="713"/>
         <source>Hostname</source>
         <translation>Servername</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="590"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="714"/>
         <source>Port</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="614"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="716"/>
         <source>Profile directory</source>
         <translation>Profil-Verzeichnis</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="624"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="717"/>
         <source>Segments directory</source>
         <translation>Segment-Verzeichnis</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="634"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="718"/>
         <source>Custom Profiles dir</source>
         <translation>Verzeichnis für angepasste Profile</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="644"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="719"/>
         <source>Max Runtime</source>
         <translation>Maximale Laufzeit</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="654"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="720"/>
         <source>Number Threads</source>
         <translation>Anzahl Threads</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="664"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="721"/>
         <source>Java Options</source>
         <translation>Java Optionen</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="600"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="715"/>
         <source>Bind to hostname only</source>
         <translation>Nur mit dem Hostnamen verbinden</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="560"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="711"/>
         <source>Profiles Url</source>
-        <translation>Profil-Url</translation>
+        <translation>Profil-URL</translation>
     </message>
 </context>
 <context>
     <name>IRouterRoutino</name>
     <message>
         <location filename="../gis/rte/router/IRouterRoutino.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterRoutino.h" line="156"/>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterRoutino.ui" line="46"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterRoutino.h" line="157"/>
         <source>Profile</source>
         <translation>Profil</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterRoutino.ui" line="53"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterRoutino.h" line="158"/>
         <source>Mode</source>
         <translation>Modus</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterRoutino.ui" line="60"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterRoutino.h" line="159"/>
         <source>Database</source>
         <translation>Datenbank</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterRoutino.ui" line="67"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterRoutino.h" line="161"/>
         <source>Add paths with Routino database.</source>
         <translation>Fügt Pfade mit Routino Datenbanken hinzu.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterRoutino.ui" line="70"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterRoutino.h" line="163"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterRoutino.ui" line="81"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterRoutino.h" line="164"/>
         <source>Language</source>
         <translation>Sprache</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterRoutino.ui" line="148"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterRoutino.h" line="166"/>
         <source>To use offline routing you need to define paths to local routing data. Use the setup tool button to register a path. You can create your own routing data with &lt;a href=&apos;CreateRoutino&apos;&gt;Tool-&gt;Create Routino Database&lt;/a&gt;.</source>
-        <translation>Um Offline-Routing zu nutzen, müssen Sie einen Pfad zu einer lokalen Routendatenbank angeben. Benutzen Sie dazu den Knopf mit dem blauen Ordner. Sie können mit &lt;a href=&apos;CreateRoutino&apos;&gt;Werkzeug-&gt;Routino Datenbank erstellen&lt;/a&gt; eine solche Routendatenbank selber erzeugen.</translation>
+        <translation>Um Offline-Routing zu nutzen, müssen Sie einen Pfad zu einer lokalen Routendatenbank angeben. Benutzen Sie dazu den Knopf mit dem blauen Ordner. Mit &lt;a href=&apos;CreateRoutino&apos;&gt;Werkzeug-&gt;Routino Datenbank erstellen&lt;/a&gt; können Sie eine solche Routendatenbank selber erzeugen.</translation>
     </message>
 </context>
 <context>
     <name>IRouterRoutinoPathSetup</name>
     <message>
         <location filename="../gis/rte/router/routino/IRouterRoutinoPathSetup.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterRoutinoPathSetup.h" line="127"/>
         <source>Setup Routino database...</source>
         <translation>Routino Datenbank einrichten...</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/routino/IRouterRoutinoPathSetup.ui" line="27"/>
         <location filename="../gis/rte/router/routino/IRouterRoutinoPathSetup.ui" line="47"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterRoutinoPathSetup.h" line="128"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterRoutinoPathSetup.h" line="129"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/routino/IRouterRoutinoPathSetup.ui" line="99"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterRoutinoPathSetup.h" line="131"/>
         <source>-</source>
         <translation></translation>
     </message>
@@ -14630,7 +13591,6 @@ sein</translation>
     <name>IRouterSetup</name>
     <message>
         <location filename="../gis/rte/router/IRouterSetup.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IRouterSetup.h" line="64"/>
         <source>Form</source>
         <translation></translation>
     </message>
@@ -14639,51 +13599,42 @@ sein</translation>
     <name>IRoutinoDatabaseBuilder</name>
     <message>
         <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IRoutinoDatabaseBuilder.h" line="179"/>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="25"/>
         <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="63"/>
-        <location filename="../../../build/src/qmapshack/ui_IRoutinoDatabaseBuilder.h" line="180"/>
-        <location filename="../../../build/src/qmapshack/ui_IRoutinoDatabaseBuilder.h" line="183"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="42"/>
-        <location filename="../../../build/src/qmapshack/ui_IRoutinoDatabaseBuilder.h" line="181"/>
         <source>Select source files:</source>
         <translation>Quelldateien auswählen:</translation>
     </message>
     <message>
         <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="54"/>
-        <location filename="../../../build/src/qmapshack/ui_IRoutinoDatabaseBuilder.h" line="182"/>
         <source>Start</source>
         <translation>Starten</translation>
     </message>
     <message>
         <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="86"/>
-        <location filename="../../../build/src/qmapshack/ui_IRoutinoDatabaseBuilder.h" line="184"/>
         <source>Target Path:</source>
         <translation>Zielpfad:</translation>
     </message>
     <message>
         <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="93"/>
-        <location filename="../../../build/src/qmapshack/ui_IRoutinoDatabaseBuilder.h" line="185"/>
         <source>-</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="100"/>
-        <location filename="../../../build/src/qmapshack/ui_IRoutinoDatabaseBuilder.h" line="186"/>
         <source>File Prefix</source>
         <translation>Dateipräfix</translation>
     </message>
     <message>
         <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="133"/>
-        <location filename="../../../build/src/qmapshack/ui_IRoutinoDatabaseBuilder.h" line="188"/>
         <source>&lt;p&gt;To create a Routino routing database you need to download *pbf files from &lt;a href=&apos;http://download.geofabrik.de/&apos;&gt;GeoFabrik&lt;/a&gt;. The process of creating a Routino database is quite slow and the resulting files quite large. Therefore it&apos;s recommended not to download whole continents. Limit your download to those countries you really need. However as Routino can&apos;t route over several databases you have to include all countries that are touched by a cross country border route.&lt;/p&gt;
 
 &lt;ol&gt;
@@ -14692,7 +13643,7 @@ sein</translation>
 &lt;li&gt;Select a prefix. The database will be listed by this prefix.&lt;/li&gt;
 &lt;li&gt;Press &quot;Start&quot; button.&lt;/li&gt;
 &lt;/ol&gt;</source>
-        <translation>&lt;p&gt;Damit Sie eine Routingdatenbank für Routino erstellen können, müssen Sie *pbf Dateien von &lt;a href=&apos;http://download.geofabrik.de/&apos;&gt;GeoFabrik&lt;/a&gt; herunterladen. Es dauert sehr lange eine Datenbank für Routino zu erstellen und die erstellten Dateien sind sehr groß. Deswegen ist es nicht empfehlenswert ganze Kontinente herunterzuladen. Allerdings kann Routino nicht über mehrere Datenbanken routen. Deswegen sollten alle Länder, die von einer länderübergreifenden Route berührt werden, in der Datenbank dabei sein.&lt;/p&gt;
+        <translation>&lt;p&gt;Damit Sie eine Routingdatenbank für Routino erstellen können, müssen Sie *pbf Dateien von &lt;a href=&apos;http://download.geofabrik.de/&apos;&gt;GeoFabrik&lt;/a&gt; herunterladen. Es dauert sehr lange eine Datenbank für Routino zu erstellen und die erstellten Dateien sind sehr groß. Deshalb ist es nicht empfehlenswert ganze Kontinente herunterzuladen. Allerdings kann Routino nicht über mehrere Datenbanken routen. Deshalb sollte die Datenbank alle Länder enthalten, die von einer länderübergreifenden Route berührt werden.&lt;/p&gt;
 
 &lt;ol&gt;
 &lt;li&gt;Eine oder mehrere *.pbf Dateien auswählen.&lt;/li&gt;
@@ -14704,7 +13655,6 @@ sein</translation>
     </message>
     <message>
         <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="157"/>
-        <location filename="../../../build/src/qmapshack/ui_IRoutinoDatabaseBuilder.h" line="196"/>
         <source>&lt;b style = &apos;color: red&apos;&gt; Unable to find Routino&apos;s planetsplitter. Searched for &quot;planetsplitter&quot; and &quot;routino-planetsplitter&quot;.&lt;/b&gt;</source>
         <translation>&lt;b style = &apos;color: red&apos;&gt; Routinos planetsplitter konnte nicht gefunden werden. Es wurde nach &quot;planetsplitter&quot; und &quot;routino-planetsplitter&quot; gesucht.&lt;/&gt;</translation>
     </message>
@@ -14713,7 +13663,6 @@ sein</translation>
     <name>IRtAisInfo</name>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="253"/>
         <source>Form</source>
         <translation>Diese Strecke vermeiden</translation>
     </message>
@@ -14725,43 +13674,31 @@ sein</translation>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="216"/>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="230"/>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="244"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="254"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="256"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="269"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="273"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="277"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="281"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="285"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="46"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="255"/>
         <source>Port</source>
         <translation>Port</translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="89"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="257"/>
         <source>Host</source>
         <translation>Server</translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="96"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="259"/>
         <source>Automatically connect to the host.</source>
         <translation>Automatisch mit dem Server verbinden.</translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="99"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="261"/>
         <source>auto. conn.</source>
         <translation>auto. Verb.</translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="134"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="262"/>
         <source>Ships seen:</source>
         <translation>Schiffe in Sicht:</translation>
     </message>
@@ -14769,63 +13706,51 @@ sein</translation>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="141"/>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="270"/>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="293"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="263"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="286"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="291"/>
         <source>-</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="148"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="264"/>
         <source>Record by mmsi</source>
         <translation>Aufzeichnung nach MMSI</translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="155"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="265"/>
         <source>Show names</source>
         <translation>zeige Namen</translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="170"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="267"/>
         <source>Start recording.</source>
         <translation>Aufzeichnung starten.</translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="190"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="271"/>
         <source>Pause recording.</source>
         <translation>Aufzeichnung anhalten.</translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="213"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="275"/>
         <source>Convert record to track.</source>
         <translation>Aufzeichnung in einen Track umwandeln.</translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="227"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="279"/>
         <source>Reset record.</source>
         <translation>Aufzeichnung zurücksetzen.</translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="241"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="283"/>
         <source>Select record file.</source>
         <translation>Eine Datei für die Aufzeichnung auswählen.</translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="277"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="287"/>
         <source>Last update</source>
         <translation>letzte Aktualisierung</translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="284"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="289"/>
         <source>Enter a valid key.</source>
         <translation>Geben Sie einen gültigen Schlüssel ein.</translation>
     </message>
@@ -14834,7 +13759,6 @@ sein</translation>
     <name>IRtGpsTetherInfo</name>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="275"/>
         <source>Form</source>
         <translation>Diese Strecke vermeiden</translation>
     </message>
@@ -14846,67 +13770,51 @@ sein</translation>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="173"/>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="187"/>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="201"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="276"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="278"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="287"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="291"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="295"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="299"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="303"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="46"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="277"/>
         <source>Port</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="89"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="279"/>
         <source>Host</source>
         <translation>Server</translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="96"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="281"/>
         <source>Automatically connect to the host.</source>
         <translation>Automatisch mit dem Server verbinden.</translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="99"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="283"/>
         <source>auto. conn.</source>
         <translation>auto. Verb.</translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="127"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="285"/>
         <source>Start recording.</source>
         <translation>Aufzeichnung starten.</translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="147"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="289"/>
         <source>Pause recording.</source>
         <translation>Aufzeichnung anhalten.</translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="170"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="293"/>
         <source>Convert record to track.</source>
         <translation>Aufzeichnung in einen Track umwandeln.</translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="184"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="297"/>
         <source>Reset record.</source>
         <translation>Aufzeichnung zurücksetzen.</translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="198"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="301"/>
         <source>Select record file.</source>
         <translation>Eine Datei für die Aufzeichnung auswählen.</translation>
     </message>
@@ -14917,48 +13825,36 @@ sein</translation>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="253"/>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="260"/>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="297"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="304"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="306"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="307"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="309"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="310"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="315"/>
         <source>-</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="221"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="305"/>
         <source>Position</source>
         <translation>Position</translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="246"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="308"/>
         <source>Time</source>
         <translation>Zeit</translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="267"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="311"/>
         <source>Speed</source>
         <translation>Geschwindigkeit</translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="274"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="312"/>
         <source>Elevation</source>
         <translation>Höhe</translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="281"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="313"/>
         <source>Record</source>
         <translation>Aufzeichnung</translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="288"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="314"/>
         <source>center to position</source>
         <translation>auf Pos. zentr.</translation>
     </message>
@@ -14985,57 +13881,47 @@ sein</translation>
     <name>IRtOpenSkyInfo</name>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtOpenSkyInfo.h" line="160"/>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="42"/>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="63"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtOpenSkyInfo.h" line="162"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtOpenSkyInfo.h" line="165"/>
         <source>-</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="35"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtOpenSkyInfo.h" line="161"/>
         <source>Last update</source>
         <translation>letzte Aktualisierung</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="49"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtOpenSkyInfo.h" line="163"/>
         <source>Aircrafts seen:</source>
         <translation>Flugzeuge in Sicht:</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="56"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtOpenSkyInfo.h" line="164"/>
         <source>Show names</source>
         <translation>zeige Namen</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="70"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtOpenSkyInfo.h" line="166"/>
         <source>See &lt;a href=&apos;https://opensky-network.org/&apos;&gt;OpenSky&lt;/a&gt; for details.</source>
         <translation>Weitere Details &lt;a href=&apos;https://opensky-network.org/&apos;&gt;OpenSky&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="80"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtOpenSkyInfo.h" line="168"/>
         <source>Enter a valid key.</source>
         <translation>Geben Sie einen gültigen Schlüssel ein.</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="87"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtOpenSkyInfo.h" line="170"/>
         <source>Record by key</source>
         <translation>Schlüssel</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="102"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtOpenSkyInfo.h" line="172"/>
         <source>Start recording.</source>
         <translation>Aufzeichnung starten.</translation>
     </message>
@@ -15045,35 +13931,26 @@ sein</translation>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="148"/>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="162"/>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="176"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtOpenSkyInfo.h" line="174"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtOpenSkyInfo.h" line="178"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtOpenSkyInfo.h" line="182"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtOpenSkyInfo.h" line="186"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtOpenSkyInfo.h" line="190"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="122"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtOpenSkyInfo.h" line="176"/>
         <source>Pause recording.</source>
         <translation>Aufzeichnung anhalten.</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="145"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtOpenSkyInfo.h" line="180"/>
         <source>Convert record to track.</source>
         <translation>Aufzeichnung in einen Track umwandeln.</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="159"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtOpenSkyInfo.h" line="184"/>
         <source>Reset record.</source>
         <translation>Aufzeichnung zurücksetzen.</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="173"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtOpenSkyInfo.h" line="188"/>
         <source>Select record file.</source>
         <translation>Eine Datei für die Aufzeichnung auswählen.</translation>
     </message>
@@ -15105,7 +13982,6 @@ sein</translation>
     <name>IRtSelectSource</name>
     <message>
         <location filename="../realtime/IRtSelectSource.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtSelectSource.h" line="67"/>
         <source>Select a source...</source>
         <translation>Quelle auswählen...</translation>
     </message>
@@ -15114,31 +13990,26 @@ sein</translation>
     <name>IRtWorkspace</name>
     <message>
         <location filename="../realtime/IRtWorkspace.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtWorkspace.h" line="101"/>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../realtime/IRtWorkspace.ui" line="47"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtWorkspace.h" line="105"/>
         <source>Source</source>
         <translation>Quelle</translation>
     </message>
     <message>
         <location filename="../realtime/IRtWorkspace.ui" line="95"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtWorkspace.h" line="107"/>
         <source>TextLabel</source>
         <translation>Bezeichnung</translation>
     </message>
     <message>
         <location filename="../realtime/IRtWorkspace.ui" line="115"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtWorkspace.h" line="102"/>
         <source>Add Source</source>
         <translation>Quelle hinzufügen</translation>
     </message>
     <message>
         <location filename="../realtime/IRtWorkspace.ui" line="124"/>
-        <location filename="../../../build/src/qmapshack/ui_IRtWorkspace.h" line="103"/>
         <source>Delete Source</source>
         <translation>Quelle löschen</translation>
     </message>
@@ -15147,85 +14018,71 @@ sein</translation>
     <name>IScrOptEditLine</name>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="32"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="244"/>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="40"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="245"/>
         <source>Save to original</source>
         <translation>Ins Original speichern</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="47"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="246"/>
         <source>Save as new</source>
         <translation>Als neu speichern</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="54"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="247"/>
         <source>Abort</source>
         <translation>Abbrechen</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="89"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="249"/>
         <source>Move points. (Ctrl+M)</source>
         <translation>Punkte verschieben. (Strg+M)</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="99"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="253"/>
         <source>Ctrl+M</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="115"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="256"/>
         <source>Add new points. (Ctrl++)</source>
         <translation>Punkte hinzufügen. (Strg++)</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="125"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="260"/>
         <source>Ctrl++</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="138"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="263"/>
         <source>Select a range of points. (Ctrl+R)</source>
         <translation>Einen Punktebereich wählen (Strg+R)</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="148"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="267"/>
         <source>Ctrl+R</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="238"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="284"/>
         <source>Use auto-routing in between points. (Key: A)</source>
         <translation>Auto-Routing zwischen Punkten benutzen. (Taste: A)</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="284"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="298"/>
         <source>Connect points with a line from a loaded track if possible. (Key: T)</source>
         <translation>Fügt Punkte aus einem Track zur Linie hinzu. (Taste: T)</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="294"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="302"/>
         <source>T</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="310"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="305"/>
         <source>Optimizes the route by reordering the points using the router specified in the &quot;Routing&quot; tab. 
 This is known as solving the Traveling Salesman Problem, however start and end are kept fixed here</source>
         <translation>Optimiert Routen, indem die Punkte neu geordnet werden. Dabei wird der aktuell eingestellte Router verwendet.
@@ -15233,7 +14090,6 @@ Das ist auch bekannt als &quot;Handlungsreisendenproblem&quot;. Allerdings werde
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="314"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="308"/>
         <source>Optimize</source>
         <translation>Optimieren</translation>
     </message>
@@ -15245,81 +14101,58 @@ Das ist auch bekannt als &quot;Handlungsreisendenproblem&quot;. Allerdings werde
         <location filename="../mouse/line/IScrOptEditLine.ui" line="287"/>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="334"/>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="351"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="251"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="258"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="265"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="272"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="300"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="312"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="316"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="161"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="270"/>
         <source>Delete a point. (Ctrl+-)</source>
         <translation>Punkte löschen (Strg+-)</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="171"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="274"/>
         <source>Ctrl+-</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="215"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="277"/>
         <source>No auto-routing or line snapping (Key: O)</source>
         <translation>Kein Auto-Routing oder Fangen an Linie (Taste: O)</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="218"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="279"/>
         <source>0</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="225"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="281"/>
         <source>O</source>
         <translation></translation>
     </message>
     <message>
-        <source>Use auto-routing to between points. (Key: A)</source>
-        <translation type="vanished">Auto-Routing zwischen Punkten benutzen. (Taste: A)</translation>
-    </message>
-    <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="241"/>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="248"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="286"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="288"/>
         <source>A</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="261"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="291"/>
         <source>Snap line along lines of a vector map. (Key: V)</source>
         <translation>Fängt die Linie entlang Linien einer Vektorkarte. (Taste: V)</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="264"/>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="271"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="293"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="295"/>
         <source>V</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="331"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="310"/>
         <source>Undo last change</source>
         <translation>Letzte Änderung rückgängig machen</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="348"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="314"/>
         <source>Redo last change</source>
         <translation>Letzte Änderung wiederherstellen</translation>
     </message>
@@ -15328,13 +14161,11 @@ Das ist auch bekannt als &quot;Handlungsreisendenproblem&quot;. Allerdings werde
     <name>IScrOptOvlArea</name>
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptOvlArea.h" line="130"/>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="40"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptOvlArea.h" line="132"/>
         <source>View details and edit.</source>
         <translation>Details anzeigen und bearbeiten.</translation>
     </message>
@@ -15345,48 +14176,36 @@ Das ist auch bekannt als &quot;Handlungsreisendenproblem&quot;. Allerdings werde
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="85"/>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="106"/>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="120"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptOvlArea.h" line="134"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptOvlArea.h" line="138"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptOvlArea.h" line="142"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptOvlArea.h" line="146"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptOvlArea.h" line="150"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptOvlArea.h" line="154"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="54"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptOvlArea.h" line="136"/>
         <source>Set tags and rating.</source>
         <translation>Schlagworte und Bewertung setzen.</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="68"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptOvlArea.h" line="140"/>
         <source>Copy area into another project.</source>
         <translation>Gebiet in ein anderes Projekt kopieren.</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="82"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptOvlArea.h" line="144"/>
         <source>Delete area from project.</source>
         <translation>Gebiet aus einem Projekt entfernen.</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="103"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptOvlArea.h" line="148"/>
         <source>Edit shape of the area.</source>
         <translation>Form eines Gebietes ändern.</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="117"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptOvlArea.h" line="152"/>
         <source>Toggle Nogo-Area</source>
         <translation>Gebietsvermeidung umschalten</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="152"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptOvlArea.h" line="155"/>
         <source>TextLabel</source>
         <translation>Bezeichnung</translation>
     </message>
@@ -15395,27 +14214,22 @@ Das ist auch bekannt als &quot;Handlungsreisendenproblem&quot;. Allerdings werde
     <name>IScrOptPrint</name>
     <message>
         <location filename="../mouse/IScrOptPrint.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptPrint.h" line="63"/>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptPrint.ui" line="35"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptPrint.h" line="65"/>
         <source>Save selected area as image.</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptPrint.ui" line="38"/>
         <location filename="../mouse/IScrOptPrint.ui" line="58"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptPrint.h" line="67"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptPrint.h" line="71"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptPrint.ui" line="55"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptPrint.h" line="69"/>
         <source>Print selected area.</source>
         <translation>Druckt gewählten Bereich.</translation>
     </message>
@@ -15424,27 +14238,22 @@ Das ist auch bekannt als &quot;Handlungsreisendenproblem&quot;. Allerdings werde
     <name>IScrOptRangeLine</name>
     <message>
         <location filename="../mouse/line/IScrOptRangeLine.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeLine.h" line="60"/>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptRangeLine.ui" line="32"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeLine.h" line="62"/>
         <source>Delete all points between the first and last one.</source>
         <translation>Alle Punkte zwischen dem ersten und dem letzten Punkt löschen.</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptRangeLine.ui" line="35"/>
         <location filename="../mouse/line/IScrOptRangeLine.ui" line="49"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeLine.h" line="64"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeLine.h" line="68"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptRangeLine.ui" line="46"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeLine.h" line="66"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Calculate a route between the first and last selected point.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Eine Route zwischen dem ersten und dem letzten gewählten Punkt berechnen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -15453,19 +14262,16 @@ Das ist auch bekannt als &quot;Handlungsreisendenproblem&quot;. Allerdings werde
     <name>IScrOptRangeTool</name>
     <message>
         <location filename="../mouse/range/IScrOptRangeTool.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="253"/>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../mouse/range/IScrOptRangeTool.ui" line="35"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="254"/>
         <source>Action</source>
         <translation>Funktion</translation>
     </message>
     <message>
         <location filename="../mouse/range/IScrOptRangeTool.ui" line="54"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="256"/>
         <source>Hide selected track points.</source>
         <translation>Ausgewählte Trackpunkte verstecken.</translation>
     </message>
@@ -15484,110 +14290,81 @@ Das ist auch bekannt als &quot;Handlungsreisendenproblem&quot;. Allerdings werde
         <location filename="../mouse/range/IScrOptRangeTool.ui" line="265"/>
         <location filename="../mouse/range/IScrOptRangeTool.ui" line="282"/>
         <location filename="../mouse/range/IScrOptRangeTool.ui" line="302"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="258"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="262"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="266"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="270"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="274"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="278"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="282"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="287"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="291"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="295"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="299"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="303"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="307"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="311"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../mouse/range/IScrOptRangeTool.ui" line="68"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="260"/>
         <source>Show selected track points.</source>
         <translation>Ausgewählte Trackpunkte anzeigen.</translation>
     </message>
     <message>
         <location filename="../mouse/range/IScrOptRangeTool.ui" line="82"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="264"/>
         <source>Select activity for selected range.</source>
         <translation>Ein Aktivität für den Bereich auswählen.</translation>
     </message>
     <message>
         <location filename="../mouse/range/IScrOptRangeTool.ui" line="96"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="268"/>
         <source>Copy selected track points.</source>
         <translation>Die ausgewählten Trackpunkte kopieren.</translation>
     </message>
     <message>
         <location filename="../mouse/range/IScrOptRangeTool.ui" line="110"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="272"/>
         <source>Convert selected track points to route.</source>
         <translation>Konvertiere ausgewählte Punkte zu einer Route.</translation>
     </message>
     <message>
         <location filename="../mouse/range/IScrOptRangeTool.ui" line="124"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="276"/>
         <source>Delete selected track points.</source>
         <translation>Die ausgewählten Trackpunkte löschen.</translation>
     </message>
     <message>
         <location filename="../mouse/range/IScrOptRangeTool.ui" line="148"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="280"/>
         <source>Setup range tool behavior.</source>
         <translation>Das Verhalten des Bereichswerkzeuges einstellen.</translation>
     </message>
     <message>
         <location filename="../mouse/range/IScrOptRangeTool.ui" line="178"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="283"/>
         <source>Start</source>
         <translation>Start</translation>
     </message>
     <message>
         <location filename="../mouse/range/IScrOptRangeTool.ui" line="188"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="285"/>
         <source>Move start of range toward start of track. If you keep the key pressed the action is repeated. </source>
         <translation>Den Anfang der Auswahl zum Anfang des Tracks hin erweitern. Wenn Sie diese Taste gedrückt halten wird die Aktion wiederholt. </translation>
     </message>
     <message>
         <location filename="../mouse/range/IScrOptRangeTool.ui" line="208"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="289"/>
         <source>Move start of range toward end of track. If you keep the key pressed the action is repeated. </source>
         <translation>Den Anfang der Auswahl zum Ende des Tracks hin verschieben. Wenn Sie diese Taste gedrückt halten wird die Aktion wiederholt. </translation>
     </message>
     <message>
         <location filename="../mouse/range/IScrOptRangeTool.ui" line="228"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="293"/>
         <source>Start a new range right at the end of the selected range.</source>
         <translation>Eine neue Auswahl genau am Ende des ausgewählten Bereiches beginnen.</translation>
     </message>
     <message>
         <location filename="../mouse/range/IScrOptRangeTool.ui" line="245"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="297"/>
         <source>Reset selected range.</source>
         <translation>Die Auswahl zurücksetzen.</translation>
     </message>
     <message>
         <location filename="../mouse/range/IScrOptRangeTool.ui" line="262"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="301"/>
         <source>Start a new range right at the start of the selected range.</source>
         <translation>Eine neue Auswahl genau am Anfang des ausgewählten Bereiches beginnen.</translation>
     </message>
     <message>
         <location filename="../mouse/range/IScrOptRangeTool.ui" line="279"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="305"/>
         <source>Move end of range toward start of track. If you keep the key pressed the action is repeated. </source>
         <translation>Das Ende der Auswahl zum Start des Tracks hin verschieben. Wenn Sie diese Taste gedrückt halten wird die Aktion wiederholt. </translation>
     </message>
     <message>
         <location filename="../mouse/range/IScrOptRangeTool.ui" line="299"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="309"/>
         <source>Move end of range toward end of track. If you keep the key pressed the action is repeated. </source>
         <translation>Das Ende der Auswahl zum Ende des Tracks hin erweitern. Wenn Sie diese Taste gedrückt halten wird die Aktion wiederholt. </translation>
     </message>
     <message>
         <location filename="../mouse/range/IScrOptRangeTool.ui" line="316"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="312"/>
         <source>End</source>
         <translation>Ende</translation>
     </message>
@@ -15596,31 +14373,26 @@ Das ist auch bekannt als &quot;Handlungsreisendenproblem&quot;. Allerdings werde
     <name>IScrOptRangeTrk</name>
     <message>
         <location filename="../mouse/range/IScrOptRangeTrk.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTrk.h" line="106"/>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../mouse/range/IScrOptRangeTrk.ui" line="40"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTrk.h" line="108"/>
         <source>Hide all points.</source>
         <translation>Blendet alle Punkte aus.</translation>
     </message>
     <message>
         <location filename="../mouse/range/IScrOptRangeTrk.ui" line="54"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTrk.h" line="112"/>
         <source>Show all points.</source>
         <translation>Blendet alle Punkte ein.</translation>
     </message>
     <message>
         <location filename="../mouse/range/IScrOptRangeTrk.ui" line="68"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTrk.h" line="116"/>
         <source>Set an activity for the selected range.</source>
         <translation>Für den ausgewählten Bereich eine Aktivität festlegen.</translation>
     </message>
     <message>
         <location filename="../mouse/range/IScrOptRangeTrk.ui" line="82"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTrk.h" line="120"/>
         <source>Copy track points as new track.</source>
         <translation>Kopiert Trackpunkte in neuen Track.</translation>
     </message>
@@ -15629,16 +14401,11 @@ Das ist auch bekannt als &quot;Handlungsreisendenproblem&quot;. Allerdings werde
         <location filename="../mouse/range/IScrOptRangeTrk.ui" line="57"/>
         <location filename="../mouse/range/IScrOptRangeTrk.ui" line="71"/>
         <location filename="../mouse/range/IScrOptRangeTrk.ui" line="85"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTrk.h" line="110"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTrk.h" line="114"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTrk.h" line="118"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTrk.h" line="122"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../mouse/range/IScrOptRangeTrk.ui" line="117"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTrk.h" line="123"/>
         <source>TextLabel</source>
         <translation>Bezeichnung</translation>
     </message>
@@ -15647,13 +14414,11 @@ Das ist auch bekannt als &quot;Handlungsreisendenproblem&quot;. Allerdings werde
     <name>IScrOptRte</name>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="177"/>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="40"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="179"/>
         <source>View details and edit.</source>
         <translation>Details anzeigen und bearbeiten.</translation>
     </message>
@@ -15669,83 +14434,61 @@ Das ist auch bekannt als &quot;Handlungsreisendenproblem&quot;. Allerdings werde
         <location filename="../gis/rte/IScrOptRte.ui" line="165"/>
         <location filename="../gis/rte/IScrOptRte.ui" line="179"/>
         <location filename="../gis/rte/IScrOptRte.ui" line="193"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="181"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="185"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="189"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="193"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="197"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="201"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="205"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="209"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="213"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="217"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="221"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="54"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="183"/>
         <source>Set tags and rating.</source>
         <translation>Schlagworte und Bewertung setzen.</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="68"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="187"/>
         <source>Copy route into another project.</source>
         <translation>Kopiert die Route in ein anderes Projekt.</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="82"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="191"/>
         <source>Delete route from project.</source>
         <translation>Route aus einem Projekt entfernen.</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="103"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="195"/>
         <source>Show instructions and details.</source>
         <translation>Anweisungen und Details anzeigen.</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="134"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="203"/>
         <source>Reset route calculation.</source>
         <translation>Routenberechnung zurücksetzen.</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="120"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="199"/>
         <source>Calculate route.</source>
         <translation>Route berechnen.</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="148"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="207"/>
         <source>Move route points.</source>
         <translation>Routenpunkte verschieben.</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="162"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="211"/>
         <source>Reverse Route</source>
         <translation>Route umkehren</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="176"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="215"/>
         <source>Convert route to track</source>
         <translation>Die Route in einen Track umwandeln</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="190"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="219"/>
         <source>Toggle Nogo-Line</source>
         <translation>Streckenvermeidung umschalten</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="222"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="222"/>
         <source>TextLabel</source>
         <translation>Bezeichnung</translation>
     </message>
@@ -15754,97 +14497,81 @@ Das ist auch bekannt als &quot;Handlungsreisendenproblem&quot;. Allerdings werde
     <name>IScrOptRuler</name>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRuler.h" line="213"/>
         <source>Form</source>
         <translation>Diese Strecke vermeiden</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="20"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRuler.h" line="214"/>
         <source>Close</source>
         <translation>Schließen</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="34"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRuler.h" line="216"/>
         <source>Convert into a group of waypoints.</source>
         <translation>In eine Gruppe von Wegpunkten konvertieren.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="48"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRuler.h" line="220"/>
         <source>Convert into a track.</source>
         <translation>In einen Track konvertieren.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="62"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRuler.h" line="224"/>
         <source>Convert into a route.</source>
         <translation>In eine Route konvertieren.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="76"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRuler.h" line="228"/>
         <source>Convert into an area.</source>
         <translation>In ein Gebiet konvertieren.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="97"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRuler.h" line="232"/>
         <source>Show table.</source>
         <translation>Zeige die Tabelle.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="117"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRuler.h" line="236"/>
         <source>Show course of each segment.</source>
         <translation>Zeige den Kurs für jedes Segment an.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="137"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRuler.h" line="240"/>
         <source>Show ascent or descent of each segment.</source>
         <translation>Zeige den Auf- und Abstieg für jedes Segment an.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="157"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRuler.h" line="244"/>
         <source>Show angle between line segments.</source>
         <translation>Zeige den Winkel zwischen den Segmenten an.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="174"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRuler.h" line="248"/>
         <source>Show distances in high precision.</source>
         <translation>Entfernungen mit hoher Genauigkeit anzeigen.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="198"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRuler.h" line="252"/>
         <source>Change the distance in a fixed step.</source>
         <translation>Die Distanz in festen Schritten ändern.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="205"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRuler.h" line="255"/>
         <source>Change the angle in a fixed step.</source>
         <translation>Den Winkel in festen Schritten ändern.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="222"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRuler.h" line="258"/>
         <source>Reset ruler.</source>
         <translation>Lineal zurücksetzen.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="239"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRuler.h" line="262"/>
         <source>Undo</source>
         <translation>Rückgängig</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="256"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRuler.h" line="266"/>
         <source>Redo</source>
         <translation>Wiederherstellen</translation>
     </message>
@@ -15859,16 +14586,6 @@ Das ist auch bekannt als &quot;Handlungsreisendenproblem&quot;. Allerdings werde
         <location filename="../mouse/IScrOptRuler.ui" line="225"/>
         <location filename="../mouse/IScrOptRuler.ui" line="242"/>
         <location filename="../mouse/IScrOptRuler.ui" line="259"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRuler.h" line="218"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRuler.h" line="222"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRuler.h" line="226"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRuler.h" line="230"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRuler.h" line="234"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRuler.h" line="246"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRuler.h" line="250"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRuler.h" line="260"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRuler.h" line="264"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptRuler.h" line="268"/>
         <source>...</source>
         <translation></translation>
     </message>
@@ -15877,13 +14594,11 @@ Das ist auch bekannt als &quot;Handlungsreisendenproblem&quot;. Allerdings werde
     <name>IScrOptSelect</name>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="288"/>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="47"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="290"/>
         <source>Copy all selected items to a project.</source>
         <translation>Kopiert alle gewählten Elemente in ein Projekt.</translation>
     </message>
@@ -15904,112 +14619,81 @@ Das ist auch bekannt als &quot;Handlungsreisendenproblem&quot;. Allerdings werde
         <location filename="../mouse/IScrOptSelect.ui" line="304"/>
         <location filename="../mouse/IScrOptSelect.ui" line="376"/>
         <location filename="../mouse/IScrOptSelect.ui" line="399"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="292"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="296"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="300"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="304"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="308"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="312"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="316"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="320"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="324"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="328"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="332"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="336"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="340"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="344"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="348"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="352"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="61"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="294"/>
         <source>Create a route from selected waypoints.</source>
         <translation>Route aus den gewählten Wegpunkten erstellen.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="75"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="298"/>
         <source>Set proximity and no-go area option.</source>
         <translation>Abstandsalarm und Gebietsvermeidung festlegen.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="89"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="302"/>
         <source>Change the icon of all selected waypoints.</source>
         <translation>Das Symbol wird für alle ausgewählten Wegpunkte geändert.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="103"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="306"/>
         <source>Replace the elevation in all selected waypoints and tracks by values from the view&apos;s DEM data.</source>
         <translation>Ersetzt die Höhe von allen ausgewählten Wegpunkten und Tracks durch Werte aus den DEM Daten der Ansicht.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="117"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="310"/>
         <source>Combine all selected tracks to a new one.</source>
         <translation>Alle ausgewählten Tracks zusammenführen.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="131"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="314"/>
         <source>Set an activity for all selected tracks.</source>
         <translation>Für alle ausgewählten Tracks eine Aktivität festlegen.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="145"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="318"/>
         <source>Change the color of all selected tracks.</source>
         <translation>Die Farbe für alle ausgewählten Tracks ändern.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="159"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="322"/>
         <source>Delete all selected items.</source>
         <translation>Löscht alle gewählten Elemente.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="301"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="342"/>
         <source>Add POIs to selection.</source>
         <translation>Fügt POIs zur Auswahl hinzu.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="373"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="346"/>
         <source>Select all items that intersect the selected area.</source>
         <translation>Wählt alle Elemente, die den gewählten Bereich schneiden.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="396"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="350"/>
         <source>Select all items that are completely inside the selected area.</source>
         <translation>Alle Elemente auswählen, die komplett innerhalb des ausgewählten Gebietes sind.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="217"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="326"/>
         <source>Add tracks to selection.</source>
         <translation>Fügt Tracks zur Auswahl hinzu.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="238"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="330"/>
         <source>Add waypoints to selection.</source>
         <translation>Fügt Wegpunkte zur Auswahl hinzu.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="259"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="334"/>
         <source>Add routes to selection.</source>
         <translation>Fügt Routen zur Auswahl hinzu.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="280"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="338"/>
         <source>Add areas to selection.</source>
         <translation>Fügt Gebiete zur Auswahl hinzu.</translation>
     </message>
@@ -16018,49 +14702,41 @@ Das ist auch bekannt als &quot;Handlungsreisendenproblem&quot;. Allerdings werde
     <name>IScrOptTrk</name>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="231"/>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="68"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="241"/>
         <source>Copy track into another project.</source>
         <translation>Track in ein anderes Projekt kopieren.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="103"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="249"/>
         <source>Show on-screen profile and detailed information about points.</source>
         <translation>Zeigt das Profil und detaillierte Informationen der Punkte.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="40"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="233"/>
         <source>View details and edit properties of track.</source>
         <translation>Details anzeigen und Trackeigenschaften bearbeiten.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="82"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="245"/>
         <source>Delete track from project.</source>
         <translation>Track aus einem Projekt entfernen.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="161"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="274"/>
         <source>Reverse track.</source>
         <translation>Track umkehren.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="175"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="278"/>
         <source>Combine tracks.</source>
         <translation>Tracks verbinden.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="189"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="282"/>
         <source>Cut track at selected point. You can use this to:
 
 * remove bad points at the start or end of the track
@@ -16075,9 +14751,20 @@ Das ist auch bekannt als &quot;Handlungsreisendenproblem&quot;. Allerdings werde
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="208"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="291"/>
         <source>Set an activity for the complete track.</source>
         <translation>Für den ganzen Track eine Aktivität festlegen.</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="222"/>
+        <source>Add a description to the selected track point.
+The track point will be marked with an auto-numbered bullet.
+A table with all descriptions will be shown in the track details dialog
+and for highlighted tracks in the map view.</source>
+        <extracomment>use line breaks to keep a sensible tooltip width</extracomment>
+        <translation>Fügt eine Beschreibung zum ausgewählten Trackpunkt hinzu.
+Der Trackpunkt wird automatisch mit einer Nummer versehen.
+Eine Tabelle mit allen Beschreibungen wird in den Trackdetails angezeigt,
+oder für einen hervorgehobenen Track in der Kartenansicht.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="43"/>
@@ -16091,41 +14778,22 @@ Das ist auch bekannt als &quot;Handlungsreisendenproblem&quot;. Allerdings werde
         <location filename="../gis/trk/IScrOptTrk.ui" line="178"/>
         <location filename="../gis/trk/IScrOptTrk.ui" line="197"/>
         <location filename="../gis/trk/IScrOptTrk.ui" line="211"/>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="225"/>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="239"/>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="253"/>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="267"/>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="281"/>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="298"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="235"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="239"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="243"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="247"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="251"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="263"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="272"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="276"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="280"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="289"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="293"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="297"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="301"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="305"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="309"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="313"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="317"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="228"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="242"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="256"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="270"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="284"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="301"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="54"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="237"/>
         <source>Set tags and rating.</source>
         <translation>Schlagworte und Bewertung setzen.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="120"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="253"/>
         <source>Select a range of points. You can use that tool to:
 
 * Hide or show points of a track. 
@@ -16150,7 +14818,6 @@ Wählen Sie einfach den Bereich mit den fehlerhaften Punkten aus
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="142"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="265"/>
         <source>Edit the position of track points and use automatic routing 
 to create new track points. This is used to create new tracks 
 to plan a tour.
@@ -16167,44 +14834,32 @@ Punkte einer echten GPS Aufzeichnung ändern wollen.
 Benützen Sie dazu die Werkzeuge der Bereichsauswahl.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="222"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="295"/>
-        <source>Add a description to the selected track point. The track point will be marked with an auto-numbered bullet. A table with all descriptions will be shown in the track details dialog and for highlighted tracks in the map view.</source>
-        <translation>Fügt eine Beschreibung zum ausgewählten Trackpunkt hinzu. Der Trackpunkt wird mit einer automatischen Nummer versehen. Eine Tabelle mit allen Beschreibungen wird in den Trackdetails angezeigt, oder für einen hervorgehobenen Track in der Kartenansicht.</translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="236"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="299"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="239"/>
         <source>Change the color of the track.</source>
         <translation>Die Farbe für diesen Track ändern.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="250"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="303"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="253"/>
         <source>Replace elevation by the view&apos;s DEM data.</source>
         <translation>Ersetzt die Höhe durch die DEM Daten der Ansicht.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="264"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="307"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="267"/>
         <source>Copy track together with all attached waypoints into another project.</source>
-        <translation>Kopiert den Track zusammen mit allen verknüpften Wegpunkten.</translation>
+        <translation>Kopiert den Track mit allen verknüpften Wegpunkten in ein anderes Projekt.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="278"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="311"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="281"/>
         <source>Convert track to route.</source>
         <translation>Den Track in eine Route umwandeln.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="295"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="315"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="298"/>
         <source>Toggle Nogo-Line</source>
         <translation>Streckenvermeidung umschalten</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="327"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="318"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="330"/>
         <source>TextLabel</source>
         <translation>Bezeichnung</translation>
     </message>
@@ -16213,13 +14868,11 @@ Benützen Sie dazu die Werkzeuge der Bereichsauswahl.</translation>
     <name>IScrOptWpt</name>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="20"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="233"/>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="49"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="235"/>
         <source>View details and edit.</source>
         <translation>Details anzeigen und editieren.</translation>
     </message>
@@ -16236,96 +14889,71 @@ Benützen Sie dazu die Werkzeuge der Bereichsauswahl.</translation>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="212"/>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="236"/>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="250"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="237"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="241"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="245"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="249"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="253"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="257"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="261"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="265"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="269"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="277"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="281"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="285"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="63"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="239"/>
         <source>Set tags and rating.</source>
         <translation>Schlagworte und Bewertung setzen.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="77"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="243"/>
         <source>Copy waypoint into another project.</source>
         <translation>Wegpunkt in ein anderes Projekt kopieren.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="91"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="247"/>
         <source>Delete waypoint from project.</source>
         <translation>Wegpunkt aus einem Projekt entfernen.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="112"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="251"/>
         <source>Show content as static bubble.</source>
         <translation>Inhalt als statische Legende zeigen.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="129"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="255"/>
         <source>Move waypoint to a new location.</source>
         <translation>Wegpunkt an einen neuen Ort verschieben.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="143"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="259"/>
         <source>Clone waypoint and move clone a given distance and angle.</source>
         <translation>Wegpunkt klonen und um eine bestimmte Entfernung und einen bestimmten Winkel verschieben.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="157"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="263"/>
         <source>Replace elevation by the view&apos;s DEM data.</source>
         <translation>Ersetzt die Höhe durch die DEM Daten der Ansicht.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="178"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="267"/>
         <source>edit radius of circular area</source>
         <translation>Den Abstandsradius ändern</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="209"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="275"/>
         <source>Switch between proximity and nogo-area</source>
         <translation>Zwischen Abstandsalarm und Gebietsvermeidung umschalten.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="195"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="271"/>
         <source>Delete circle defined by waypoint</source>
         <translation>Den Abstandskreis entfernen.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="233"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="279"/>
         <source>Search for information about the waypoint&apos;s position on selected websites.</source>
         <translation>Auf ausgewählten Seiten im Netz nach Information über die Position des Wegpunktes suchen.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="247"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="283"/>
         <source>Copy position of waypoint to Clipboard.</source>
-        <translation>Die Koordinate des Wegpunktes kopieren.</translation>
+        <translation>Die Koordinate des Wegpunktes in die Zwischenablage kopieren.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="294"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="286"/>
         <source>TextLabel</source>
         <translation>Bezeichnung</translation>
     </message>
@@ -16334,13 +14962,11 @@ Benützen Sie dazu die Werkzeuge der Bereichsauswahl.</translation>
     <name>IScrOptWptRadius</name>
     <message>
         <location filename="../gis/wpt/IScrOptWptRadius.ui" line="20"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWptRadius.h" line="107"/>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWptRadius.ui" line="49"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWptRadius.h" line="109"/>
         <source>edit radius of circular area</source>
         <translation>Den Abstandsradius ändern.</translation>
     </message>
@@ -16348,27 +14974,21 @@ Benützen Sie dazu die Werkzeuge der Bereichsauswahl.</translation>
         <location filename="../gis/wpt/IScrOptWptRadius.ui" line="52"/>
         <location filename="../gis/wpt/IScrOptWptRadius.ui" line="66"/>
         <location filename="../gis/wpt/IScrOptWptRadius.ui" line="80"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWptRadius.h" line="111"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWptRadius.h" line="115"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWptRadius.h" line="119"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWptRadius.ui" line="77"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWptRadius.h" line="117"/>
         <source>Switch between proximity and nogo-area</source>
         <translation>Zwischen Abstandsalarm und Gebietsvermeidung umschalten.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWptRadius.ui" line="63"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWptRadius.h" line="113"/>
         <source>Delete circle defined by waypoint</source>
         <translation>Den Abstandskreis entfernen.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWptRadius.ui" line="127"/>
-        <location filename="../../../build/src/qmapshack/ui_IScrOptWptRadius.h" line="120"/>
         <source>TextLabel</source>
         <translation>Bezeichnung</translation>
     </message>
@@ -16377,27 +14997,22 @@ Benützen Sie dazu die Werkzeuge der Bereichsauswahl.</translation>
     <name>IScreenshotDialog</name>
     <message>
         <location filename="../print/IScreenshotDialog.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IScreenshotDialog.h" line="87"/>
         <source>Screenshot...</source>
         <translation>Bildschirmkopie...</translation>
     </message>
     <message>
         <location filename="../print/IScreenshotDialog.ui" line="20"/>
         <location filename="../print/IScreenshotDialog.ui" line="30"/>
-        <location filename="../../../build/src/qmapshack/ui_IScreenshotDialog.h" line="88"/>
-        <location filename="../../../build/src/qmapshack/ui_IScreenshotDialog.h" line="89"/>
         <source>TextLabel</source>
         <translation>Bezeichnung</translation>
     </message>
     <message>
         <location filename="../print/IScreenshotDialog.ui" line="55"/>
-        <location filename="../../../build/src/qmapshack/ui_IScreenshotDialog.h" line="90"/>
         <source>Save Screenshot</source>
         <translation>Bildschirmkopie speichern</translation>
     </message>
     <message>
         <location filename="../print/IScreenshotDialog.ui" line="66"/>
-        <location filename="../../../build/src/qmapshack/ui_IScreenshotDialog.h" line="91"/>
         <source>Print Screenshot</source>
         <translation>Bildschirmkopie drucken</translation>
     </message>
@@ -16406,33 +15021,28 @@ Benützen Sie dazu die Werkzeuge der Bereichsauswahl.</translation>
     <name>ISearchDatabase</name>
     <message>
         <location filename="../gis/db/ISearchDatabase.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_ISearchDatabase.h" line="97"/>
         <source>Search...</source>
         <translation>Suchen...</translation>
     </message>
     <message>
         <location filename="../gis/db/ISearchDatabase.ui" line="34"/>
-        <location filename="../../../build/src/qmapshack/ui_ISearchDatabase.h" line="99"/>
         <source>Type the word you want to search for and press the search button. 
 If you enter &apos;word&apos; a search with an exact match is done. If you enter &apos;word*&apos;, &apos;word&apos; has to be at the beginning of a string.</source>
-        <translation>Tippen Sie das Wort, das sie suchen ein und drücken Sie den &apos;Suchen&apos; Knopf.
-Wenn Sie das Wort &apos;wort&apos; eingeben, wird exakt nach dem Wort gesucht. Wenn Sie das Wort &apos;wort*&apos; eingeben, dann muss &apos;wort&apos; nur am Anfang stehen.</translation>
+        <translation>Tippen Sie das Wort ein, das Sie suchen, und drücken Sie den &apos;Suchen&apos; Knopf.
+Wenn Sie das Wort &apos;wort&apos; eingeben, wird exakt nach dem Wort gesucht. Wenn Sie das Wort &apos;wort*&apos; eingeben, dann muss das Wort mit &apos;wort&apos; beginnen.</translation>
     </message>
     <message>
         <location filename="../gis/db/ISearchDatabase.ui" line="51"/>
-        <location filename="../../../build/src/qmapshack/ui_ISearchDatabase.h" line="102"/>
         <source>Name</source>
         <translation>Name</translation>
     </message>
     <message>
         <location filename="../gis/db/ISearchDatabase.ui" line="79"/>
-        <location filename="../../../build/src/qmapshack/ui_ISearchDatabase.h" line="103"/>
         <source>Search</source>
         <translation>Suchen</translation>
     </message>
     <message>
         <location filename="../gis/db/ISearchDatabase.ui" line="86"/>
-        <location filename="../../../build/src/qmapshack/ui_ISearchDatabase.h" line="104"/>
         <source>Close</source>
         <translation>Schließen</translation>
     </message>
@@ -16441,13 +15051,11 @@ Wenn Sie das Wort &apos;wort&apos; eingeben, wird exakt nach dem Wort gesucht. W
     <name>ISearchExplanationDialog</name>
     <message>
         <location filename="../gis/search/ISearchExplanationDialog.ui" line="20"/>
-        <location filename="../../../build/src/qmapshack/ui_ISearchExplanationDialog.h" line="105"/>
         <source>Help</source>
         <translation>Hilfe</translation>
     </message>
     <message>
         <location filename="../gis/search/ISearchExplanationDialog.ui" line="44"/>
-        <location filename="../../../build/src/qmapshack/ui_ISearchExplanationDialog.h" line="106"/>
         <source>Following keywords are available for searching:</source>
         <translation>Folgende Stichwörter können zum Suchen verwendet werden:</translation>
     </message>
@@ -16456,7 +15064,6 @@ Wenn Sie das Wort &apos;wort&apos; eingeben, wird exakt nach dem Wort gesucht. W
     <name>ISelDevices</name>
     <message>
         <location filename="../gis/ISelDevices.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_ISelDevices.h" line="58"/>
         <source>Select devices...</source>
         <translation>Geräte auswählen...</translation>
     </message>
@@ -16465,7 +15072,6 @@ Wenn Sie das Wort &apos;wort&apos; eingeben, wird exakt nach dem Wort gesucht. W
     <name>ISelectActivityColor</name>
     <message>
         <location filename="../gis/trk/ISelectActivityColor.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_ISelectActivityColor.h" line="49"/>
         <source>Form</source>
         <translation></translation>
     </message>
@@ -16474,13 +15080,11 @@ Wenn Sie das Wort &apos;wort&apos; eingeben, wird exakt nach dem Wort gesucht. W
     <name>ISelectCopyAction</name>
     <message>
         <location filename="../helpers/ISelectCopyAction.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_ISelectCopyAction.h" line="169"/>
         <source>Copy item...</source>
         <translation>Element kopieren...</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectCopyAction.ui" line="91"/>
-        <location filename="../../../build/src/qmapshack/ui_ISelectCopyAction.h" line="173"/>
         <source>Replace existing item</source>
         <translation>Ersetzt vorhandenes Element</translation>
     </message>
@@ -16489,46 +15093,36 @@ Wenn Sie das Wort &apos;wort&apos; eingeben, wird exakt nach dem Wort gesucht. W
         <location filename="../helpers/ISelectCopyAction.ui" line="104"/>
         <location filename="../helpers/ISelectCopyAction.ui" line="179"/>
         <location filename="../helpers/ISelectCopyAction.ui" line="189"/>
-        <location filename="../../../build/src/qmapshack/ui_ISelectCopyAction.h" line="171"/>
-        <location filename="../../../build/src/qmapshack/ui_ISelectCopyAction.h" line="174"/>
-        <location filename="../../../build/src/qmapshack/ui_ISelectCopyAction.h" line="179"/>
-        <location filename="../../../build/src/qmapshack/ui_ISelectCopyAction.h" line="180"/>
         <source>TextLabel</source>
         <translation>Bezeichnung</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectCopyAction.ui" line="32"/>
-        <location filename="../../../build/src/qmapshack/ui_ISelectCopyAction.h" line="170"/>
         <source>Do not copy item</source>
         <translation>Element nicht kopieren</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectCopyAction.ui" line="149"/>
-        <location filename="../../../build/src/qmapshack/ui_ISelectCopyAction.h" line="177"/>
         <source>Create a clone</source>
         <translation>Einen Klon erstellen</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectCopyAction.ui" line="130"/>
-        <location filename="../../../build/src/qmapshack/ui_ISelectCopyAction.h" line="176"/>
         <source>Replace with:</source>
         <translation>Ersetzen mit:</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectCopyAction.ui" line="65"/>
-        <location filename="../../../build/src/qmapshack/ui_ISelectCopyAction.h" line="172"/>
         <source>Keep item:</source>
         <translation>Element behalten:</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectCopyAction.ui" line="162"/>
-        <location filename="../../../build/src/qmapshack/ui_ISelectCopyAction.h" line="178"/>
         <source>The clone&apos;s name will be appended with &apos;_Clone&apos;</source>
         <translation>Der Name des Klones wird mit &apos;_Klon&apos; erweitert</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectCopyAction.ui" line="123"/>
-        <location filename="../../../build/src/qmapshack/ui_ISelectCopyAction.h" line="175"/>
         <source>And for all other items, too.</source>
         <translation>Auch für alle anderen Elemente anwenden.</translation>
     </message>
@@ -16537,13 +15131,11 @@ Wenn Sie das Wort &apos;wort&apos; eingeben, wird exakt nach dem Wort gesucht. W
     <name>ISelectDBFolder</name>
     <message>
         <location filename="../gis/db/ISelectDBFolder.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_ISelectDBFolder.h" line="60"/>
         <source>Select Parent Folder...</source>
         <translation>Übergeordneten Ordner auswählen...</translation>
     </message>
     <message>
         <location filename="../gis/db/ISelectDBFolder.ui" line="26"/>
-        <location filename="../../../build/src/qmapshack/ui_ISelectDBFolder.h" line="62"/>
         <source>Name</source>
         <translation>Name</translation>
     </message>
@@ -16552,43 +15144,36 @@ Wenn Sie das Wort &apos;wort&apos; eingeben, wird exakt nach dem Wort gesucht. W
     <name>ISelectDoubleListWidget</name>
     <message>
         <location filename="../widgets/ISelectDoubleListWidget.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_ISelectDoubleListWidget.h" line="134"/>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../widgets/ISelectDoubleListWidget.ui" line="22"/>
-        <location filename="../../../build/src/qmapshack/ui_ISelectDoubleListWidget.h" line="135"/>
         <source>Available</source>
         <translation>Verfügbar</translation>
     </message>
     <message>
         <location filename="../widgets/ISelectDoubleListWidget.ui" line="46"/>
-        <location filename="../../../build/src/qmapshack/ui_ISelectDoubleListWidget.h" line="137"/>
         <source>Add to selected items</source>
         <translation>Zu den ausgewählten Einträgen hinzufügen</translation>
     </message>
     <message>
         <location filename="../widgets/ISelectDoubleListWidget.ui" line="60"/>
-        <location filename="../../../build/src/qmapshack/ui_ISelectDoubleListWidget.h" line="141"/>
         <source>Remove from selected items</source>
         <translation>Von den ausgewählten Einträgen entfernen</translation>
     </message>
     <message>
         <location filename="../widgets/ISelectDoubleListWidget.ui" line="78"/>
-        <location filename="../../../build/src/qmapshack/ui_ISelectDoubleListWidget.h" line="144"/>
         <source>Selected</source>
         <translation>Ausgewählt</translation>
     </message>
     <message>
         <location filename="../widgets/ISelectDoubleListWidget.ui" line="102"/>
-        <location filename="../../../build/src/qmapshack/ui_ISelectDoubleListWidget.h" line="146"/>
         <source>Move selected items up</source>
         <translation>Ausgewählte Einträge nach oben</translation>
     </message>
     <message>
         <location filename="../widgets/ISelectDoubleListWidget.ui" line="116"/>
-        <location filename="../../../build/src/qmapshack/ui_ISelectDoubleListWidget.h" line="150"/>
         <source>Move selected items down</source>
         <translation>Ausgewählte Einträge nach unten</translation>
     </message>
@@ -16597,10 +15182,6 @@ Wenn Sie das Wort &apos;wort&apos; eingeben, wird exakt nach dem Wort gesucht. W
         <location filename="../widgets/ISelectDoubleListWidget.ui" line="63"/>
         <location filename="../widgets/ISelectDoubleListWidget.ui" line="105"/>
         <location filename="../widgets/ISelectDoubleListWidget.ui" line="119"/>
-        <location filename="../../../build/src/qmapshack/ui_ISelectDoubleListWidget.h" line="139"/>
-        <location filename="../../../build/src/qmapshack/ui_ISelectDoubleListWidget.h" line="143"/>
-        <location filename="../../../build/src/qmapshack/ui_ISelectDoubleListWidget.h" line="148"/>
-        <location filename="../../../build/src/qmapshack/ui_ISelectDoubleListWidget.h" line="152"/>
         <source>...</source>
         <translation></translation>
     </message>
@@ -16609,43 +15190,36 @@ Wenn Sie das Wort &apos;wort&apos; eingeben, wird exakt nach dem Wort gesucht. W
     <name>ISelectProjectDialog</name>
     <message>
         <location filename="../helpers/ISelectProjectDialog.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_ISelectProjectDialog.h" line="133"/>
         <source>Select a project...</source>
         <translation>Ein Projekt auswählen...</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectProjectDialog.ui" line="20"/>
-        <location filename="../../../build/src/qmapshack/ui_ISelectProjectDialog.h" line="134"/>
         <source>Select project from list or enter new project name.</source>
         <translation>Wähle ein Projekt aus der Liste oder gib einen neuen Projektnamen ein.</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectProjectDialog.ui" line="33"/>
-        <location filename="../../../build/src/qmapshack/ui_ISelectProjectDialog.h" line="135"/>
         <source>New project&apos;s name</source>
         <translation>Neuer Projektname</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectProjectDialog.ui" line="43"/>
-        <location filename="../../../build/src/qmapshack/ui_ISelectProjectDialog.h" line="136"/>
         <source>New project is created as:</source>
         <translation>Das neue Projekt wird erstellt als:</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectProjectDialog.ui" line="93"/>
-        <location filename="../../../build/src/qmapshack/ui_ISelectProjectDialog.h" line="138"/>
         <source>*.qms</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../helpers/ISelectProjectDialog.ui" line="103"/>
-        <location filename="../../../build/src/qmapshack/ui_ISelectProjectDialog.h" line="139"/>
         <source>*.gpx</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../helpers/ISelectProjectDialog.ui" line="110"/>
-        <location filename="../../../build/src/qmapshack/ui_ISelectProjectDialog.h" line="140"/>
         <source>Database</source>
         <translation>Datenbank</translation>
     </message>
@@ -16654,31 +15228,26 @@ Wenn Sie das Wort &apos;wort&apos; eingeben, wird exakt nach dem Wort gesucht. W
     <name>ISelectSaveAction</name>
     <message>
         <location filename="../gis/db/ISelectSaveAction.ui" line="20"/>
-        <location filename="../../../build/src/qmapshack/ui_ISelectSaveAction.h" line="162"/>
         <source>Copy item...</source>
         <translation>Element kopieren...</translation>
     </message>
     <message>
         <location filename="../gis/db/ISelectSaveAction.ui" line="35"/>
-        <location filename="../../../build/src/qmapshack/ui_ISelectSaveAction.h" line="163"/>
         <source>Replace existing item</source>
         <translation>Ersetzt vorhandenes Element</translation>
     </message>
     <message>
         <location filename="../gis/db/ISelectSaveAction.ui" line="87"/>
-        <location filename="../../../build/src/qmapshack/ui_ISelectSaveAction.h" line="167"/>
         <source>Add a clone</source>
         <translation>Einen Klon hinzufügen</translation>
     </message>
     <message>
         <location filename="../gis/db/ISelectSaveAction.ui" line="100"/>
-        <location filename="../../../build/src/qmapshack/ui_ISelectSaveAction.h" line="168"/>
         <source>The clone&apos;s name will be appended with &apos;_Clone&apos;</source>
         <translation>Der Name des Klones wird mit &apos;_Klon&apos; erweitert</translation>
     </message>
     <message>
         <location filename="../gis/db/ISelectSaveAction.ui" line="171"/>
-        <location filename="../../../build/src/qmapshack/ui_ISelectSaveAction.h" line="173"/>
         <source>Replace with:</source>
         <translation>Ersetzen mit:</translation>
     </message>
@@ -16687,28 +15256,21 @@ Wenn Sie das Wort &apos;wort&apos; eingeben, wird exakt nach dem Wort gesucht. W
         <location filename="../gis/db/ISelectSaveAction.ui" line="68"/>
         <location filename="../gis/db/ISelectSaveAction.ui" line="130"/>
         <location filename="../gis/db/ISelectSaveAction.ui" line="140"/>
-        <location filename="../../../build/src/qmapshack/ui_ISelectSaveAction.h" line="164"/>
-        <location filename="../../../build/src/qmapshack/ui_ISelectSaveAction.h" line="166"/>
-        <location filename="../../../build/src/qmapshack/ui_ISelectSaveAction.h" line="171"/>
-        <location filename="../../../build/src/qmapshack/ui_ISelectSaveAction.h" line="172"/>
         <source>TextLabel</source>
         <translation>Bezeichnung</translation>
     </message>
     <message>
         <location filename="../gis/db/ISelectSaveAction.ui" line="61"/>
-        <location filename="../../../build/src/qmapshack/ui_ISelectSaveAction.h" line="165"/>
         <source>Do not replace item</source>
         <translation>Das Element nicht ersetzen</translation>
     </message>
     <message>
         <location filename="../gis/db/ISelectSaveAction.ui" line="123"/>
-        <location filename="../../../build/src/qmapshack/ui_ISelectSaveAction.h" line="170"/>
         <source>Use item:</source>
         <translation>Element verwenden:</translation>
     </message>
     <message>
         <location filename="../gis/db/ISelectSaveAction.ui" line="116"/>
-        <location filename="../../../build/src/qmapshack/ui_ISelectSaveAction.h" line="169"/>
         <source>And for all other items, too.</source>
         <translation>Auch für alle anderen Elemente anwenden.</translation>
     </message>
@@ -16717,105 +15279,87 @@ Wenn Sie das Wort &apos;wort&apos; eingeben, wird exakt nach dem Wort gesucht. W
     <name>ISetupDatabase</name>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_ISetupDatabase.h" line="291"/>
         <source>Add database...</source>
         <translation>Datenbank hinzufügen...</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="68"/>
-        <location filename="../../../build/src/qmapshack/ui_ISetupDatabase.h" line="294"/>
         <source>-</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="25"/>
-        <location filename="../../../build/src/qmapshack/ui_ISetupDatabase.h" line="292"/>
         <source>Name</source>
         <translation>Name</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="252"/>
-        <location filename="../../../build/src/qmapshack/ui_ISetupDatabase.h" line="311"/>
         <source>&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Caution!&lt;/span&gt; It is recommended to leave the password blank, as QMapShack will store it as plain text. If you don&apos;t give a password you will be asked for it on each startup.&lt;/p&gt;</source>
         <translation>&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Achtung!&lt;/span&gt; Es wird empfohlen, das Passwortfeld leer zulassen, da QMapShack dies als Klartext speichert. Wenn Sie kein Passwort vergeben, werden Sie bei jedem Start danach gefragt.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="239"/>
-        <location filename="../../../build/src/qmapshack/ui_ISetupDatabase.h" line="310"/>
         <source>Do not use a password.</source>
         <translation>Kein Passwort benutzen.</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="153"/>
-        <location filename="../../../build/src/qmapshack/ui_ISetupDatabase.h" line="304"/>
         <source>SQLite</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="115"/>
-        <location filename="../../../build/src/qmapshack/ui_ISetupDatabase.h" line="303"/>
         <source>MySQL</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="181"/>
-        <location filename="../../../build/src/qmapshack/ui_ISetupDatabase.h" line="305"/>
         <source>Server</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="193"/>
-        <location filename="../../../build/src/qmapshack/ui_ISetupDatabase.h" line="306"/>
         <source>Port</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="206"/>
-        <location filename="../../../build/src/qmapshack/ui_ISetupDatabase.h" line="307"/>
         <source>00000</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="215"/>
-        <location filename="../../../build/src/qmapshack/ui_ISetupDatabase.h" line="308"/>
         <source>User</source>
         <translation>Benutzer</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="225"/>
-        <location filename="../../../build/src/qmapshack/ui_ISetupDatabase.h" line="309"/>
         <source>Password</source>
         <translation>Passwort</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="275"/>
-        <location filename="../../../build/src/qmapshack/ui_ISetupDatabase.h" line="312"/>
         <source>&lt;b&gt;Port:&lt;/b&gt; Leave the port field empty to use the default port.</source>
         <translation>&lt;b&gt;Port:&lt;/b&gt; Um den vorgegebenen Port zu nutzen, lassen Sie das Port-Feld leer.</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="61"/>
-        <location filename="../../../build/src/qmapshack/ui_ISetupDatabase.h" line="293"/>
         <source>File:</source>
         <translation>Datei:</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="75"/>
-        <location filename="../../../build/src/qmapshack/ui_ISetupDatabase.h" line="296"/>
         <source>Add new database.</source>
         <translation>Fügt eine neue Datenbank hinzu.</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="78"/>
         <location filename="../gis/db/ISetupDatabase.ui" line="92"/>
-        <location filename="../../../build/src/qmapshack/ui_ISetupDatabase.h" line="298"/>
-        <location filename="../../../build/src/qmapshack/ui_ISetupDatabase.h" line="302"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="89"/>
-        <location filename="../../../build/src/qmapshack/ui_ISetupDatabase.h" line="300"/>
         <source>Open existing database.</source>
         <translation>Öffnet eine vorhandene Datenbank.</translation>
     </message>
@@ -16824,31 +15368,26 @@ Wenn Sie das Wort &apos;wort&apos; eingeben, wird exakt nach dem Wort gesucht. W
     <name>ISetupFolder</name>
     <message>
         <location filename="../gis/db/ISetupFolder.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_ISetupFolder.h" line="95"/>
         <source>Database Folder...</source>
         <translation>Datenbankordner...</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupFolder.ui" line="20"/>
-        <location filename="../../../build/src/qmapshack/ui_ISetupFolder.h" line="96"/>
         <source>Folder name</source>
         <translation>Ordnername</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupFolder.ui" line="30"/>
-        <location filename="../../../build/src/qmapshack/ui_ISetupFolder.h" line="97"/>
         <source>Group</source>
         <translation>Gruppe</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupFolder.ui" line="41"/>
-        <location filename="../../../build/src/qmapshack/ui_ISetupFolder.h" line="98"/>
         <source>Project</source>
         <translation>Projekt</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupFolder.ui" line="55"/>
-        <location filename="../../../build/src/qmapshack/ui_ISetupFolder.h" line="99"/>
         <source>Other</source>
         <translation>Sonstige</translation>
     </message>
@@ -16857,25 +15396,21 @@ Wenn Sie das Wort &apos;wort&apos; eingeben, wird exakt nach dem Wort gesucht. W
     <name>ISetupIconAndName</name>
     <message>
         <location filename="../gis/wpt/ISetupIconAndName.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_ISetupIconAndName.h" line="92"/>
         <source>Icon &amp; Name</source>
         <translation>Symbol &amp; Name</translation>
     </message>
     <message>
         <location filename="../gis/wpt/ISetupIconAndName.ui" line="22"/>
-        <location filename="../../../build/src/qmapshack/ui_ISetupIconAndName.h" line="93"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/wpt/ISetupIconAndName.ui" line="32"/>
-        <location filename="../../../build/src/qmapshack/ui_ISetupIconAndName.h" line="94"/>
         <source>Symbol</source>
         <translation>Symbol</translation>
     </message>
     <message>
         <location filename="../gis/wpt/ISetupIconAndName.ui" line="39"/>
-        <location filename="../../../build/src/qmapshack/ui_ISetupIconAndName.h" line="95"/>
         <source>Name</source>
         <translation>Name</translation>
     </message>
@@ -16884,43 +15419,36 @@ Wenn Sie das Wort &apos;wort&apos; eingeben, wird exakt nach dem Wort gesucht. W
     <name>ISetupWorkspace</name>
     <message>
         <location filename="../gis/db/ISetupWorkspace.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="161"/>
         <source>Setup workspace...</source>
         <translation>Arbeitsplatz konfigurieren...</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupWorkspace.ui" line="35"/>
-        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="163"/>
         <source>save workspace on exit, and every</source>
         <translation>Arbeitsplatz beim Beenden speichern, und alle</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupWorkspace.ui" line="45"/>
-        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="164"/>
         <source>minutes</source>
         <translation>Minuten</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupWorkspace.ui" line="56"/>
-        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="165"/>
         <source>listen for database changes from other instances of QMapShack. On port</source>
         <translation>Lauscht nach Datenbankänderungen anderer QMapShack Instanzen. Auf Port</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupWorkspace.ui" line="63"/>
-        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="166"/>
         <source>00000</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupWorkspace.ui" line="119"/>
-        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="168"/>
         <source>Enable device support. When enabled the device will be automatically detected when plugged in. It&apos;s file structure will be parsed and all projects will be loaded and listed. Depending on the device QMapShack will add the necessary glue logic like to link pictures with waypoints, etc.</source>
-        <translation>Geräte unterstützen. Wenn diese Option aktiv ist, wird ein Gerät, das angesteckt wird, automatisch erkannt. Die Dateistruktur wird gelesen und alle Projekte werden geladen. Abhängig vom Gerät wird QMapShack alle Daten verwalten, die zum Beispiel nötig sind, um Bilder mit Wegpunkten zu verknüpfen.</translation>
+        <translation>Geräte unterstützen. Wenn diese Option aktiv ist, wird ein Gerät automatisch erkannt, wenn es angeschlossen ist. Die Dateistruktur wird gelesen und alle Projekte werden geladen. Abhängig vom Gerät wird QMapShack alle Daten verwalten, die zum Beispiel nötig sind, um Bilder mit Wegpunkten zu verknüpfen.</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupWorkspace.ui" line="131"/>
-        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="169"/>
         <source>Show tags in workspace tree. Not recommended for small screens.</source>
         <translation>Tags im Arbeitsplatz anzeigen. Nicht zu empfehlen für kleine Bildschirme.</translation>
     </message>
@@ -16929,31 +15457,26 @@ Wenn Sie das Wort &apos;wort&apos; eingeben, wird exakt nach dem Wort gesucht. W
     <name>ITemplateWidget</name>
     <message>
         <location filename="../widgets/ITemplateWidget.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_ITemplateWidget.h" line="121"/>
         <source>Insert Template...</source>
         <translation>Vorlage einfügen...</translation>
     </message>
     <message>
         <location filename="../widgets/ITemplateWidget.ui" line="32"/>
-        <location filename="../../../build/src/qmapshack/ui_ITemplateWidget.h" line="122"/>
         <source>Templates</source>
         <translation>Vorlagen</translation>
     </message>
     <message>
         <location filename="../widgets/ITemplateWidget.ui" line="42"/>
-        <location filename="../../../build/src/qmapshack/ui_ITemplateWidget.h" line="124"/>
         <source>Select a path with your own templates.</source>
-        <translation>Wählen Sie einen Pfad mit ihren eigenen Vorlagen aus.</translation>
+        <translation>Wählen Sie einen Pfad mit Ihren eigenen Vorlagen aus.</translation>
     </message>
     <message>
         <location filename="../widgets/ITemplateWidget.ui" line="45"/>
-        <location filename="../../../build/src/qmapshack/ui_ITemplateWidget.h" line="126"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../widgets/ITemplateWidget.ui" line="77"/>
-        <location filename="../../../build/src/qmapshack/ui_ITemplateWidget.h" line="127"/>
         <source>Preview</source>
         <translation>Vorschau</translation>
     </message>
@@ -16962,343 +15485,280 @@ Wenn Sie das Wort &apos;wort&apos; eingeben, wird exakt nach dem Wort gesucht. W
     <name>ITextEditWidget</name>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="352"/>
         <source>Edit text...</source>
         <translation>Text bearbeiten...</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="45"/>
         <location filename="../widgets/ITextEditWidget.ui" line="351"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="353"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="433"/>
         <source>Undo</source>
         <translation>Rückgängig</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="354"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="355"/>
         <source>Ctrl+Z</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="58"/>
         <location filename="../widgets/ITextEditWidget.ui" line="363"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="357"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="434"/>
         <source>Redo</source>
         <translation>Wiederherstellen</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="366"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="359"/>
         <source>Ctrl+Shift+Z</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="71"/>
         <location filename="../widgets/ITextEditWidget.ui" line="375"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="361"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="435"/>
         <source>Cut</source>
         <translation>Ausschneiden</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="378"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="363"/>
         <source>Ctrl+X</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="84"/>
         <location filename="../widgets/ITextEditWidget.ui" line="387"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="365"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="436"/>
         <source>Copy</source>
         <translation>Kopieren</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="390"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="367"/>
         <source>Ctrl+C</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="97"/>
         <location filename="../widgets/ITextEditWidget.ui" line="395"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="369"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="437"/>
         <source>Paste</source>
         <translation>Einfügen</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="25"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="432"/>
         <source>Templ.</source>
         <translation>Vorl.</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="120"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="438"/>
         <source>A:L</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="133"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="439"/>
         <source>A:C</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="146"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="440"/>
         <source>A:R</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="159"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="441"/>
         <source>A:B</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="192"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="442"/>
         <source>B</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="205"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="443"/>
         <source>I</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="218"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="444"/>
         <source>U</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="238"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="445"/>
         <source>C</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="285"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="446"/>
         <source>Standard</source>
         <translation>Standard</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="290"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="447"/>
         <source>Bullet List (Disc)</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="295"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="448"/>
         <source>Bullet List (Circle)</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="300"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="449"/>
         <source>Bullet List (Square)</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="305"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="450"/>
         <source>Ordered List (Decimal)</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="310"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="451"/>
         <source>Ordered List (Alpha lower)</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="315"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="452"/>
         <source>Ordered List (Alpha upper)</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="320"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="453"/>
         <source>Ordered List (Roman lower)</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="325"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="454"/>
         <source>Ordered List (Roman upper)</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="398"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="371"/>
         <source>Ctrl+V</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="410"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="373"/>
         <source>Align Left</source>
         <translation>Linksbündig</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="413"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="375"/>
         <source>Ctrl+L</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="425"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="377"/>
         <source>Align Right</source>
         <translation>Rechtsbündig</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="428"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="379"/>
         <source>Ctrl+R</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="440"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="381"/>
         <source>Align Center</source>
         <translation>Zentriert</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="443"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="383"/>
         <source>Ctrl+E</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="455"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="385"/>
         <source>Align Block</source>
         <translation>Blocksatz</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="458"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="387"/>
         <source>Ctrl+J</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="470"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="389"/>
         <source>Underline</source>
         <translation>Unterstreichen</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="473"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="391"/>
         <source>Ctrl+U</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="485"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="393"/>
         <source>Bold</source>
         <translation>Fett</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="488"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="395"/>
         <source>Ctrl+B</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="500"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="397"/>
         <source>Italic</source>
         <translation>Kursiv</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="503"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="399"/>
         <source>Ctrl+I</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="515"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="401"/>
         <source>Plain</source>
         <translation>Schlicht</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="518"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="403"/>
         <source>Reset the text&apos;s format before pasting</source>
         <translation>Das Textformat wird entfernt bevor der Text eingefügt wird</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="523"/>
         <location filename="../widgets/ITextEditWidget.ui" line="526"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="405"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="407"/>
         <source>Select All</source>
         <translation>Alles auswählen</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="529"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="410"/>
         <source>Ctrl+A</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="534"/>
         <location filename="../widgets/ITextEditWidget.ui" line="537"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="412"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="414"/>
         <source>Delete</source>
         <translation>Löschen</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="542"/>
         <location filename="../widgets/ITextEditWidget.ui" line="545"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="416"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="418"/>
         <source>Reset Font</source>
         <translation>Font zurücksetzen</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="550"/>
         <location filename="../widgets/ITextEditWidget.ui" line="553"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="420"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="422"/>
         <source>Reset Layout</source>
         <translation>Layout zurücksetzen</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="565"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="424"/>
         <source>Normal</source>
         <translation>Normal</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="568"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="426"/>
         <source>Paste without resetting the text&apos;s format</source>
         <translation>Einfügen ohne das Format zurückzusetzen</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="577"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="428"/>
         <source>Insert From Template</source>
         <translation>Aus Vorlage einfügen</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="580"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="430"/>
         <source>Create text from template.</source>
         <translation>Text aus einer Vorlage erzeugen.</translation>
     </message>
@@ -17307,37 +15767,31 @@ Wenn Sie das Wort &apos;wort&apos; eingeben, wird exakt nach dem Wort gesucht. W
     <name>ITextEditWidgetSelMenu</name>
     <message>
         <location filename="../widgets/ITextEditWidgetSelMenu.ui" line="61"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidgetSelMenu.h" line="112"/>
         <source>B</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidgetSelMenu.ui" line="74"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidgetSelMenu.h" line="113"/>
         <source>I</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidgetSelMenu.ui" line="87"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidgetSelMenu.h" line="114"/>
         <source>U</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidgetSelMenu.ui" line="107"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidgetSelMenu.h" line="115"/>
         <source>Cut</source>
         <translation>Ausschneiden</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidgetSelMenu.ui" line="120"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidgetSelMenu.h" line="116"/>
         <source>Copy</source>
         <translation>Kopieren</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidgetSelMenu.ui" line="133"/>
-        <location filename="../../../build/src/qmapshack/ui_ITextEditWidgetSelMenu.h" line="117"/>
         <source>Paste</source>
         <translation>Einfügen</translation>
     </message>
@@ -17346,13 +15800,11 @@ Wenn Sie das Wort &apos;wort&apos; eingeben, wird exakt nach dem Wort gesucht. W
     <name>ITimeDialog</name>
     <message>
         <location filename="../helpers/ITimeDialog.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_ITimeDialog.h" line="78"/>
         <source>Edit timestamp...</source>
         <translation>Zeitmarke ändern...</translation>
     </message>
     <message>
         <location filename="../helpers/ITimeDialog.ui" line="22"/>
-        <location filename="../../../build/src/qmapshack/ui_ITimeDialog.h" line="80"/>
         <source>You can use the up, down, left and right key of 
 your keyboard to change the time/date. Or you 
 simply type the new time/date.</source>
@@ -17365,49 +15817,41 @@ einfach ein.</translation>
     <name>ITimeZoneSetup</name>
     <message>
         <location filename="../units/ITimeZoneSetup.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_ITimeZoneSetup.h" line="163"/>
         <source>Setup Timezone ...</source>
         <translation>Zeitzone einstellen...</translation>
     </message>
     <message>
         <location filename="../units/ITimeZoneSetup.ui" line="22"/>
-        <location filename="../../../build/src/qmapshack/ui_ITimeZoneSetup.h" line="164"/>
         <source>UTC</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../units/ITimeZoneSetup.ui" line="32"/>
-        <location filename="../../../build/src/qmapshack/ui_ITimeZoneSetup.h" line="165"/>
         <source>Local</source>
         <translation>Lokal</translation>
     </message>
     <message>
         <location filename="../units/ITimeZoneSetup.ui" line="42"/>
-        <location filename="../../../build/src/qmapshack/ui_ITimeZoneSetup.h" line="166"/>
         <source>Automatic</source>
         <translation>Automatisch</translation>
     </message>
     <message>
         <location filename="../units/ITimeZoneSetup.ui" line="75"/>
-        <location filename="../../../build/src/qmapshack/ui_ITimeZoneSetup.h" line="168"/>
         <source>Print date/time in </source>
         <translation>Datum/Uhrzeit in</translation>
     </message>
     <message>
         <location filename="../units/ITimeZoneSetup.ui" line="82"/>
-        <location filename="../../../build/src/qmapshack/ui_ITimeZoneSetup.h" line="169"/>
         <source>long format, or</source>
         <translation>langem Format, oder</translation>
     </message>
     <message>
         <location filename="../units/ITimeZoneSetup.ui" line="92"/>
-        <location filename="../../../build/src/qmapshack/ui_ITimeZoneSetup.h" line="170"/>
         <source>short format</source>
         <translation>kurzem Format ausgeben</translation>
     </message>
     <message>
         <location filename="../units/ITimeZoneSetup.ui" line="123"/>
-        <location filename="../../../build/src/qmapshack/ui_ITimeZoneSetup.h" line="171"/>
         <source>&lt;b&gt;Note:&lt;/b&gt; For some GUI elements changing the units will not take effect until you restart QMapShack.</source>
         <translation>&lt;b&gt;Anmerkung:&lt;/b&gt; Das Ändern der Einheiten wird bei einigen GUI-Elementen erst nach einem Neustart von QMapShack wirksam.</translation>
     </message>
@@ -17416,13 +15860,11 @@ einfach ein.</translation>
     <name>IToolBarSetupDialog</name>
     <message>
         <location filename="../helpers/IToolBarSetupDialog.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IToolBarSetupDialog.h" line="64"/>
         <source>Setup Toolbar</source>
         <translation>Werkzeugleiste einstellen</translation>
     </message>
     <message>
         <location filename="../helpers/IToolBarSetupDialog.ui" line="23"/>
-        <location filename="../../../build/src/qmapshack/ui_IToolBarSetupDialog.h" line="65"/>
         <source>Toolbar is visible in Fullscreen-mode</source>
         <translation>Werkzeugleiste ist im Vollbildmodus sichtbar</translation>
     </message>
@@ -17470,37 +15912,31 @@ einfach ein.</translation>
     <name>ITrkToRteDialog</name>
     <message>
         <location filename="../gis/trk/ITrkToRteDialog.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_ITrkToRteDialog.h" line="132"/>
         <source>Convert to Route</source>
         <translation>In eine Route umwandeln</translation>
     </message>
     <message>
         <location filename="../gis/trk/ITrkToRteDialog.ui" line="22"/>
-        <location filename="../../../build/src/qmapshack/ui_ITrkToRteDialog.h" line="133"/>
         <source>Project</source>
         <translation>Projekt</translation>
     </message>
     <message>
         <location filename="../gis/trk/ITrkToRteDialog.ui" line="36"/>
-        <location filename="../../../build/src/qmapshack/ui_ITrkToRteDialog.h" line="136"/>
         <source>Change Project</source>
         <translation>Projekt ändern</translation>
     </message>
     <message>
         <location filename="../gis/trk/ITrkToRteDialog.ui" line="50"/>
-        <location filename="../../../build/src/qmapshack/ui_ITrkToRteDialog.h" line="139"/>
         <source>Name</source>
         <translation>Name</translation>
     </message>
     <message>
         <location filename="../gis/trk/ITrkToRteDialog.ui" line="73"/>
-        <location filename="../../../build/src/qmapshack/ui_ITrkToRteDialog.h" line="141"/>
         <source>Include sub-points of tracks in converted route.</source>
         <translation>Zwischenpunkte in die konvertierte Route übernehmen.</translation>
     </message>
     <message>
         <location filename="../gis/trk/ITrkToRteDialog.ui" line="86"/>
-        <location filename="../../../build/src/qmapshack/ui_ITrkToRteDialog.h" line="142"/>
         <source>Enabling this feature leads to routes with many points. Not recommended for devices which have only limited space for saving route points.</source>
         <translation>Wenn dieses Feature benutzt wird, führt das zu Routen mit vielen Punkten. Das ist nicht für Geräte empfohlen, die nur einen begrenzten Speicherplatz für Routenpunkte haben.</translation>
     </message>
@@ -17528,61 +15964,51 @@ einfach ein.</translation>
     <name>IUnitsSetup</name>
     <message>
         <location filename="../units/IUnitsSetup.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IUnitsSetup.h" line="133"/>
         <source>Setup units...</source>
         <translation>Einheiten einrichten...</translation>
     </message>
     <message>
         <location filename="../units/IUnitsSetup.ui" line="24"/>
-        <location filename="../../../build/src/qmapshack/ui_IUnitsSetup.h" line="138"/>
         <source>Length unit</source>
         <translation>Längeneinheit</translation>
     </message>
     <message>
         <location filename="../units/IUnitsSetup.ui" line="30"/>
-        <location filename="../../../build/src/qmapshack/ui_IUnitsSetup.h" line="134"/>
         <source>Nautical</source>
         <translation>nautisch</translation>
     </message>
     <message>
         <location filename="../units/IUnitsSetup.ui" line="44"/>
-        <location filename="../../../build/src/qmapshack/ui_IUnitsSetup.h" line="136"/>
         <source>Metric</source>
         <translation>metrisch</translation>
     </message>
     <message>
         <location filename="../units/IUnitsSetup.ui" line="51"/>
-        <location filename="../../../build/src/qmapshack/ui_IUnitsSetup.h" line="137"/>
         <source>Aviation (nm, feet)</source>
         <translation>Luftfahrt (nm, feet)</translation>
     </message>
     <message>
         <location filename="../units/IUnitsSetup.ui" line="59"/>
-        <location filename="../../../build/src/qmapshack/ui_IUnitsSetup.h" line="141"/>
         <source>Slope unit</source>
         <translation>Steigung</translation>
     </message>
     <message>
         <location filename="../units/IUnitsSetup.ui" line="65"/>
-        <location filename="../../../build/src/qmapshack/ui_IUnitsSetup.h" line="139"/>
         <source>Degrees (°)</source>
         <translation>Grad (°)</translation>
     </message>
     <message>
         <location filename="../units/IUnitsSetup.ui" line="72"/>
-        <location filename="../../../build/src/qmapshack/ui_IUnitsSetup.h" line="140"/>
         <source>Percent (%)</source>
         <translation>Prozent (%)</translation>
     </message>
     <message>
         <location filename="../units/IUnitsSetup.ui" line="102"/>
-        <location filename="../../../build/src/qmapshack/ui_IUnitsSetup.h" line="142"/>
         <source>&lt;b&gt;Note:&lt;/b&gt; For some GUI elements changing the units will not take effect until you restart QMapShack.</source>
         <translation>&lt;b&gt;Anmerkung:&lt;/b&gt; Das Ändern der Einheiten wird bei einigen GUI-Elementen erst nach einem Neustart von QMapShack wirksam.</translation>
     </message>
     <message>
         <location filename="../units/IUnitsSetup.ui" line="37"/>
-        <location filename="../../../build/src/qmapshack/ui_IUnitsSetup.h" line="135"/>
         <source>Imperial</source>
         <translation>imperial</translation>
     </message>
@@ -17591,31 +16017,26 @@ einfach ein.</translation>
     <name>IWptIconDialog</name>
     <message>
         <location filename="../helpers/IWptIconDialog.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IWptIconDialog.h" line="93"/>
         <source>Icons...</source>
         <translation>Symbole...</translation>
     </message>
     <message>
         <location filename="../helpers/IWptIconDialog.ui" line="68"/>
-        <location filename="../../../build/src/qmapshack/ui_IWptIconDialog.h" line="94"/>
         <source>External Icons:</source>
         <translation>Externe Symbole:</translation>
     </message>
     <message>
         <location filename="../helpers/IWptIconDialog.ui" line="75"/>
-        <location filename="../../../build/src/qmapshack/ui_IWptIconDialog.h" line="95"/>
         <source>-</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../helpers/IWptIconDialog.ui" line="82"/>
-        <location filename="../../../build/src/qmapshack/ui_IWptIconDialog.h" line="96"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../helpers/IWptIconDialog.ui" line="95"/>
-        <location filename="../../../build/src/qmapshack/ui_IWptIconDialog.h" line="97"/>
         <source>All custom icons have to be *.bmp or *.png format.</source>
         <translation>Alle individuellen Symbole müssen im *.bmp oder *.png Format sein.</translation>
     </message>
@@ -17624,235 +16045,196 @@ einfach ein.</translation>
     <name>THikingTourSummary</name>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="363"/>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="20"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="364"/>
         <source>Participants</source>
         <translation>Teilnehmer</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="32"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="365"/>
         <source>Weather</source>
         <translation>Wetter</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="38"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="366"/>
         <source>rain</source>
         <translation>Regen</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="48"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="367"/>
         <source>sunny</source>
         <translation>Sonne</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="58"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="368"/>
         <source>snow</source>
         <translation>Schnee</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="68"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="369"/>
         <source>clouds</source>
         <translation>Wolken</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="81"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="370"/>
         <source>hot</source>
         <translation>heiß</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="91"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="371"/>
         <source>warm</source>
         <translation>warm</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="101"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="372"/>
         <source>cold</source>
         <translation>kalt</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="111"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="373"/>
         <source>freezing</source>
         <translation>eiskalt</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="121"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="374"/>
         <source>foggy</source>
         <translation>neblig</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="128"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="375"/>
         <source>windy</source>
         <translation>Wind</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="138"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="376"/>
         <source>humid</source>
         <translation>schwül</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="161"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="377"/>
         <source>hail/soft hail</source>
         <translation>Hagel/Graupel</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="171"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="378"/>
         <source>Character</source>
         <translation>Charakter</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="183"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="380"/>
         <source>Rating 5 stars</source>
         <translation>Beurteilung 5 Sterne</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="188"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="381"/>
         <source>Rating 4 stars</source>
         <translation>Beurteilung 4 Sterne</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="193"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="382"/>
         <source>Rating 3 stars</source>
         <translation>Beurteilung 3 Sterne</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="198"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="383"/>
         <source>Rating 2 stars</source>
         <translation>Beurteilung 2 Sterne</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="203"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="384"/>
         <source>Rating 1 star</source>
         <translation>Beurteilung 1 Sterne</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="211"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="386"/>
         <source>easy hiking</source>
         <translation>einfache Wanderung</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="218"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="387"/>
         <source>long distance</source>
         <translation>lange Distanz</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="225"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="388"/>
         <source>alpine</source>
         <translation>alpine Tour</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="232"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="389"/>
         <source>aborted</source>
         <translation>abgebrochen</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="239"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="390"/>
         <source>large ascend</source>
         <translation>langer Anstieg</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="249"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="391"/>
         <source>Rating</source>
         <translation>Beurteilung</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="256"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="392"/>
         <source>climbing</source>
         <translation>Klettern</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="263"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="393"/>
         <source>via ferrata</source>
         <translation>Klettersteig</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="273"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="394"/>
         <source>Equipment</source>
         <translation>Ausrüstung</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="279"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="395"/>
         <source>camping gear</source>
         <translation>Campingausrüstung</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="286"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="396"/>
         <source>ski</source>
         <translation>Ski</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="293"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="397"/>
         <source>snow shoes</source>
         <translation>Schneeschuhe</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="300"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="398"/>
         <source>climbing gear</source>
         <translation>Kletterausrüstung</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="307"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="399"/>
         <source>ferrata gear</source>
         <translation>Klettersteigset</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="314"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="400"/>
         <source>night gear</source>
         <translation>Nachtausrüstung</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="321"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="401"/>
         <source>crampon</source>
         <translation>Steigeisen</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="328"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="402"/>
         <source>ice pick</source>
         <translation>Pickel</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="338"/>
-        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="403"/>
         <source>Details</source>
         <translation>Details</translation>
     </message>

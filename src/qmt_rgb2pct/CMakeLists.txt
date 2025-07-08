@@ -72,12 +72,12 @@ if(${UPDATE_TRANSLATIONS_PURGE_OBSOLETE})
 else()
     set(UPDATE_OPTIONS )
 endif()
-if(${UPDATE_TRANSLATIONS})
-    set( TRANSLATIONS
-        locale/${APPLICATION_NAME}.ts
-        locale/${APPLICATION_NAME}_de.ts
-    )
+set( TRANSLATIONS
+    locale/${APPLICATION_NAME}.ts
+    locale/${APPLICATION_NAME}_de.ts
+)
 
+if(${UPDATE_TRANSLATIONS})
     qt_add_translations(${APPLICATION_NAME}
         TS_FILES ${TRANSLATIONS}
         QM_FILES_OUTPUT_VARIABLE ${APPLICATION_NAME}_QM_FILES
@@ -86,7 +86,17 @@ if(${UPDATE_TRANSLATIONS})
         LUPDATE_OPTIONS ${UPDATE_OPTIONS}
     )
     add_dependencies(${APPLICATION_NAME} ${APPLICATION_NAME}_lupdate)
-endif()
+else(${UPDATE_TRANSLATIONS})
+    qt_add_lrelease(
+        TS_FILES  ${TRANSLATIONS}
+        QM_FILES_OUTPUT_VARIABLE ${APPLICATION_NAME}_QM_FILES
+    )
+    qt_add_resources(${APPLICATION_NAME} "translations"
+        PREFIX "/locale"
+        BASE "${CMAKE_CURRENT_BINARY_DIR}"
+        FILES "${${APPLICATION_NAME}_QM_FILES}"
+    )
+endif(${UPDATE_TRANSLATIONS})
 
 
 target_compile_definitions(${APPLICATION_NAME} PUBLIC

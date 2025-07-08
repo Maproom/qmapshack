@@ -69,7 +69,7 @@ option(BUILD_FOR_LOCAL_SYSTEM "Build for local system ONLY (resulting binary mig
 ###############################################################################################
 # Translation options
 ###############################################################################################
-option(UPDATE_TRANSLATIONS "Update translation files" ON)
+option(UPDATE_TRANSLATIONS "Update translation files" OFF)
 option(UPDATE_TRANSLATIONS_PURGE_OBSOLETE "Remove obsolete translations" OFF)
 
 

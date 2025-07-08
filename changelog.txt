@@ -1,3 +1,6 @@
+V1.XX.X
+[QMS-807] No *.qm files when UPDATE_TRANSLATIONS=OFF
+
 V1.18.0
 [QMS-558] Support for MTP devices
 [QMS-648] Porting to Qt6

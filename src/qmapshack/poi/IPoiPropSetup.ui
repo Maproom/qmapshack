@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>244</width>
-    <height>94</height>
+    <width>350</width>
+    <height>209</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -52,7 +52,7 @@
      </property>
      <column>
       <property name="text">
-       <string>Selected</string>
+       <string notr="true"/>
       </property>
      </column>
      <column>

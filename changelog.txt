@@ -1,5 +1,6 @@
 V1.XX.X
 [QMS-807] No *.qm files when UPDATE_TRANSLATIONS=OFF
+[QMS-809] Improve POI category selection initial layout
 
 V1.18.0
 [QMS-558] Support for MTP devices

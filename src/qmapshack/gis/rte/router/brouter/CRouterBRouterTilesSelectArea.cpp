@@ -53,7 +53,7 @@ bool CRouterBRouterTilesSelectArea::event(QEvent* event) {
       currentTile = tile;
     }
 
-    QToolTip::showText(helpEvent->globalPos(), tileToolTip);
+    QToolTip::showText(helpEvent->globalPos(), tileToolTip, this);
     return true;
   }
   return QWidget::event(event);

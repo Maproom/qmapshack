@@ -815,7 +815,7 @@ void CCanvas::slotToolTip() {
     }
   }
   QPoint p = mapToGlobal(posToolTip + QPoint(32, 0));
-  QToolTip::showText(p, str);
+  QToolTip::showText(p, str, this);
 }
 
 void CCanvas::slotCheckTrackOnFocus() {

@@ -58,8 +58,10 @@ class IPoiFile : public IDrawObject {
   virtual bool getToolTip(const QPoint& px, QString& str) const = 0;
 
   static void init();
-  static const QSize& iconSize() { return _iconSize; }
-  static const QImage& iconHighlight() { return _iconHighlight; }
+  static const QSize& iconSize() { return poiSize; }
+  static const QImage& iconHighlight() { return poiHighlightScaled; }
+
+  static void setIconSize(int size);
 
  public slots:
   virtual void slotCheckedStateChanged(QTreeWidgetItem* item) = 0;
@@ -76,8 +78,9 @@ class IPoiFile : public IDrawObject {
   QPointer<IPoiProp> setup;
 
  private:
-  static QSize _iconSize;
-  static QImage _iconHighlight;
+  static QSize poiSize;
+  static QImage poiHighlight;
+  static QImage poiHighlightScaled;
 };
 
 #endif  // IPOI_H

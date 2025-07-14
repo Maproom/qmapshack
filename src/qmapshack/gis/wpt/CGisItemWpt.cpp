@@ -565,9 +565,14 @@ void CGisItemWpt::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
 
   drawBubble(p);
 
-  p.drawPixmap(posScreen - focus, icon);
+  // for accuracy reasons, it is not sufficient to upscale 22 pixel icon
+  // get scaled waypoint icon here, as size might have changed in between
+  QPointF focusScaled;
+  const QPixmap& iconScaled = CWptIconManager::self().getWptIconScaledByName(getIconName(), focusScaled);
 
-  blockedAreas << QRectF(posScreen - focus, icon.size());
+  p.drawPixmap(posScreen - focusScaled, iconScaled);
+
+  blockedAreas << QRectF(posScreen - focusScaled, iconScaled.size());
 }
 
 void CGisItemWpt::drawItem(QPainter& p, const QRectF& /*viewport*/, CGisDraw* gis) {
@@ -608,19 +613,24 @@ void CGisItemWpt::drawLabel(QPainter& p, const QPolygonF& /*viewport*/, QList<QR
     return;
   }
 
-  QPointF pt = posScreen - focus;
+  // for accuracy reasons, it is not sufficient to upscale 22 pixel icon
+  // get scaled waypoint icon here, as size might have changed in between
+  QPointF focusScaled;
+  const QPixmap& iconScaled = CWptIconManager::self().getWptIconScaledByName(getIconName(), focusScaled);
+
+  QPointF pt = posScreen - focusScaled;
 
   QRectF rect = fm.boundingRect(wpt.name);
   rect.adjust(-2, -2, 2, 2);
 
   // place label on top
-  rect.moveCenter(pt + QPointF(icon.width() / 2, -fm.height()));
+  rect.moveCenter(pt + QPointF(iconScaled.width() / 2, -fm.height()));
   if (CDraw::doesOverlap(blockedAreas, rect)) {
     // place label on bottom
-    rect.moveCenter(pt + QPointF(icon.width() / 2, +fm.height() + icon.height()));
+    rect.moveCenter(pt + QPointF(iconScaled.width() / 2, +fm.height() + icon.height()));
     if (CDraw::doesOverlap(blockedAreas, rect)) {
       // place label on right
-      rect.moveCenter(pt + QPointF(icon.width() + rect.width() / 2, +fm.height()));
+      rect.moveCenter(pt + QPointF(iconScaled.width() + rect.width() / 2, +fm.height()));
       if (CDraw::doesOverlap(blockedAreas, rect)) {
         // place label on left
         rect.moveCenter(pt + QPointF(-rect.width() / 2, +fm.height()));
@@ -644,7 +654,10 @@ void CGisItemWpt::drawHighlight(QPainter& p) {
   if (closeToRadius) {
     drawCircle(p, posScreen, radius, false, true);
   } else {
-    p.drawImage(posScreen - QPointF(31, 31), QImage("://cursors/wptHighlightRed.png"));
+    const QImage& iconHighlight = CWptIconManager::self().iconHighlight();
+    QRectF r = iconHighlight.rect();
+    r.moveCenter(posScreen);
+    p.drawImage(r, iconHighlight);
   }
 }
 

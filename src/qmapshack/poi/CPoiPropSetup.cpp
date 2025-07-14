@@ -31,7 +31,7 @@ CPoiPropSetup::CPoiPropSetup(IPoiFile* poifile, CPoiDraw* poi) : IPoiProp(poifil
 
   poifile->addTreeWidgetItems(treeWidgetCategories);
   treeWidgetCategories->sortItems(eTreeColumnDisplayName, Qt::SortOrder::AscendingOrder);
-  treeWidgetCategories->header()->setSectionResizeMode(0,QHeaderView::ResizeToContents);
+  treeWidgetCategories->header()->setSectionResizeMode(0, QHeaderView::ResizeToContents);
   treeWidgetCategories->resizeColumnToContents(1);
 
   connect(treeWidgetCategories, SIGNAL(itemChanged(QTreeWidgetItem*, int)), poifile,

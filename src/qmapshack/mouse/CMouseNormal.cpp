@@ -235,11 +235,12 @@ void CMouseNormal::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect&
     case eStateIdle:
     case eStateHooverSingle:
     case eStateHooverMultiple: {
+      const QImage& iconHighlight = IPoiFile::iconHighlight();
       for (QPointF pos : posPoiHighlight) {
         gis->convertRad2Px(pos);
-        QRectF r = IPoiFile::iconHighlight().rect();
+        QRectF r = iconHighlight.rect();
         r.moveCenter(pos);
-        p.drawImage(r, IPoiFile::iconHighlight());
+        p.drawImage(r, iconHighlight);
       }
 
       /*

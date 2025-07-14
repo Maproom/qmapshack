@@ -44,6 +44,7 @@
 #include "gis/trk/CKnownExtension.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "help/CHelp.h"
+#include "helpers/CMapIconSizesSetup.h"
 #include "helpers/CProgressDialog.h"
 #include "helpers/CSettings.h"
 #include "helpers/CToolBarConfig.h"
@@ -196,6 +197,7 @@ CMainWindow::CMainWindow() : id(QRandomGenerator::global()->generate()) {
   connect(actionShowTrackProfile, &QAction::triggered, actionProfileIsWindow, &QAction::setEnabled);
   connect(actionProfileIsWindow, &QAction::triggered, this, &CMainWindow::slotSetProfileMode);
   connect(actionSetupMapFont, &QAction::triggered, this, &CMainWindow::slotSetupMapFont);
+  connect(actionSetupMapIconSizes, &QAction::triggered, this, &CMainWindow::slotSetupMapIconSizes);
   connect(actionSetupMapBackground, &QAction::triggered, this, &CMainWindow::slotSetupMapBackground);
   connect(actionSetupGrid, &QAction::triggered, this, &CMainWindow::slotSetupGrid);
   connect(actionSetupMapPaths, &QAction::triggered, this, &CMainWindow::slotSetupMapPath);
@@ -369,6 +371,7 @@ CMainWindow::CMainWindow() : id(QRandomGenerator::global()->generate()) {
                       actionAddMapView,
                       actionShowScale,
                       actionSetupMapFont,
+                      actionSetupMapIconSizes,
                       actionShowGrid,
                       actionSetupGrid,
                       actionFlipMouseWheel,
@@ -1073,10 +1076,15 @@ void CMainWindow::slotSetupMapFont() {
   QFont f = QFontDialog::getFont(&ok, mapFont, this);
   if (ok) {
     mapFont = f;
-    QWidget* w = tabWidget->currentWidget();
-    if (w) {
-      w->update();
-    }
+    slotUpdateTabWidgets();
+  }
+}
+
+void CMainWindow::slotSetupMapIconSizes() {
+  CMapIconSizesSetup dlg(this);
+  dlg.exec();
+  if (QDialog::Accepted == dlg.result()) {
+    slotUpdateTabWidgets();
   }
 }
 

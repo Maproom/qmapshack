@@ -2,6 +2,7 @@ V1.XX.X
 [QMS-807] No *.qm files when UPDATE_TRANSLATIONS=OFF
 [QMS-809] Improve POI category selection initial layout
 [QMS-811] Fix 2 fatal tooltip errors with wayland platform
+[QMS-812] Set user defined sizes for waypoint and POI icons
 
 V1.18.0
 [QMS-558] Support for MTP devices

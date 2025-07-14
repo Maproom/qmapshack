@@ -144,6 +144,7 @@ class CMainWindow : public QMainWindow, private Ui::IMainWindow {
   void slotMousePosition(const QPointF& pos, qreal ele, qreal slope);
   void slotUpdateTabWidgets();
   void slotSetupMapFont();
+  void slotSetupMapIconSizes();
   void slotSetupMapBackground();
   void slotSetupMapPath();
   void slotSetupPoiPath();

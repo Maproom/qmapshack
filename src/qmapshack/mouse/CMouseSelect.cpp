@@ -27,6 +27,7 @@
 #include "helpers/CTryMutexLocker.h"
 #include "helpers/CWptIconManager.h"
 #include "mouse/CScrOptSelect.h"
+#include "poi/IPoiFile.h"
 #include "poi/IPoiItem.h"
 
 QMutex CMouseSelect::mutex;
@@ -158,12 +159,13 @@ void CMouseSelect::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect&
     item->drawHighlight(p);
   }
 
+  const QImage& iconHighlight = IPoiFile::iconHighlight();
   for (QPointF pos : std::as_const(posPoiHighlight)) {
     if (pos != NOPOINTF) {
       gis->convertRad2Px(pos);
-      QRectF r(0, 0, 42, 42);
+      QRectF r = iconHighlight.rect();
       r.moveCenter(pos);
-      p.drawImage(r, QImage("://cursors/poiHighlightRed.png"));
+      p.drawImage(r, iconHighlight);
     }
   }
 

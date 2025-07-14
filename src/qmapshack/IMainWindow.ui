@@ -95,6 +95,7 @@
     <addaction name="separator"/>
     <addaction name="actionFlipMouseWheel"/>
     <addaction name="actionSetupMapFont"/>
+    <addaction name="actionSetupMapIconSizes"/>
     <addaction name="actionSetupMapBackground"/>
     <addaction name="actionSetupUnits"/>
     <addaction name="actionSetupGrid"/>
@@ -1072,6 +1073,18 @@
    </property>
    <property name="toolTip">
     <string>Setup paths to POI collections</string>
+   </property>
+  </action>
+  <action name="actionSetupMapIconSizes">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/32x32/IconSize.png</normaloff>:/icons/32x32/IconSize.png</iconset>
+   </property>
+   <property name="text">
+    <string>Setup Map Icon Sizes</string>
+   </property>
+   <property name="toolTip">
+    <string>Setup Map Icon Sizes</string>
    </property>
   </action>
  </widget>

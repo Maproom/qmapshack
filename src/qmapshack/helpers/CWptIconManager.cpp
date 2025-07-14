@@ -18,7 +18,7 @@
 
 #include "helpers/CWptIconManager.h"
 
-#include <QtWidgets>
+#include <QWidget>
 
 #include "helpers/CDraw.h"
 #include "helpers/CSettings.h"
@@ -28,15 +28,23 @@
 CWptIconManager* CWptIconManager::pSelf = nullptr;
 const char* CWptIconManager::wptDefault = "://icons/waypoints/32x32/Default.png";
 
-CWptIconManager::CWptIconManager(QObject* parent) {
+CWptIconManager::CWptIconManager(QObject* parent) : wptHighlight("://cursors/wptHighlightRed.png") {
   pSelf = this;
 
   init();
+
+  SETTINGS;
+  setIconSize(cfg.value("Icons/sizeWpt", DEFAULTICONSIZE).toInt());
 }
 
-CWptIconManager::~CWptIconManager() {
-  qDebug() << "CWptIconManager::~CWptIconManager()";
-  removeNumberedBullets();
+CWptIconManager::~CWptIconManager() { removeNumberedBullets(); }
+
+const QImage& CWptIconManager::iconHighlight() { return wptHighlightScaled; }
+
+void CWptIconManager::setIconSize(int size) {
+  wptSize = size;
+  wptHighlightScaled =
+      wptHighlight.scaled(wptHighlight.size() * size / qreal(DEFAULTICONSIZE), Qt::KeepAspectRatio, Qt::SmoothTransformation);
 }
 
 void CWptIconManager::removeNumberedBullets() {
@@ -246,18 +254,42 @@ QPixmap CWptIconManager::getWptIconByName(const QString& name, QPointF& focus, Q
 
   icon = loadIcon(path);
 
-  // Limit icon size to 22 pixel max.
-  if (icon.width() > 22 || icon.height() > 22) {
-    qreal s;
-    if (icon.width() > icon.height()) {
-      s = 22.0 / icon.width();
-    } else {
-      s = 22.0 / icon.height();
-    }
-
-    focus = focus * s;
-    icon = icon.scaled(icon.size() * s, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+  // Limit icon size to "DEFAULTICONSIZE" pixel max.
+  int maxValue = qMax(icon.width(), icon.height());
+  if (maxValue > DEFAULTICONSIZE) {
+    qreal scale = qreal(DEFAULTICONSIZE) / maxValue;
+    focus = focus * scale;
+    icon = icon.scaled(icon.size() * scale, Qt::KeepAspectRatio, Qt::SmoothTransformation);
   }
+
+  return icon;
+}
+
+QPixmap CWptIconManager::getWptIconScaledByName(const QString& name, QPointF& focus) {
+  QPixmap icon;
+  QString path;
+
+  if (wptIcons.contains(name)) {
+    focus = wptIcons[name].focus;
+    path = wptIcons[name].path;
+  } else {
+    focus = wptIcons["Default"].focus;
+    path = wptIcons["Default"].path;
+  }
+
+  if (path.isEmpty()) {
+    path = wptDefault;
+  }
+
+  icon = loadIcon(path);
+
+  // First limit icon size to "DEFAULTICONSIZE" pixel max.
+  // Then apply requested icon size
+  int maxValue = qMax(icon.width(), icon.height());
+  qreal scale = maxValue > DEFAULTICONSIZE ? wptSize / qreal(maxValue) : wptSize / qreal(DEFAULTICONSIZE);
+
+  focus = focus * scale;
+  icon = icon.scaled(icon.size() * scale, Qt::KeepAspectRatio, Qt::SmoothTransformation);
 
   return icon;
 }

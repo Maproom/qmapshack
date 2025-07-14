@@ -20,24 +20,23 @@
 
 #include "poi/CPoiDraw.h"
 #include "poi/CPoiPropSetup.h"
+#include "helpers/CSettings.h"
+#include "helpers/CWptIconManager.h"
 
-constexpr int iconsize = 22;
-
-QSize IPoiFile::_iconSize = {iconsize, iconsize};
-QImage IPoiFile::_iconHighlight;
+QSize IPoiFile::poiSize;
+QImage IPoiFile::poiHighlight;
+QImage IPoiFile::poiHighlightScaled;
 
 void IPoiFile::init() {
-  // default sizes are for iconsize 22.
-  qreal sx = qreal(_iconSize.width()) * 42.0 / 22.0;
-  qreal sy = qreal(_iconSize.height()) * 42.0 / 22.0;
-  _iconHighlight =
-      QImage("://cursors/poiHighlightRed.png").scaled(sx, sy, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+  poiHighlight = QImage("://cursors/poiHighlightRed.png");
+  SETTINGS;
+  // default POI icon size is "DEFAULTICONSIZE"
+  setIconSize(cfg.value("Icons/sizePoi", DEFAULTICONSIZE).toInt());
 }
 
 IPoiFile::IPoiFile(CPoiDraw* parent)
     : IDrawObject(parent),
       poi(parent)
-
 {}
 
 IPoiProp* IPoiFile::getSetup() {
@@ -47,3 +46,10 @@ IPoiProp* IPoiFile::getSetup() {
 
   return setup;
 }
+
+void IPoiFile::setIconSize(int size) {
+  poiSize = {size, size};
+  poiHighlightScaled =
+      poiHighlight.scaled(poiHighlight.size() * size / qreal(DEFAULTICONSIZE), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+}
+

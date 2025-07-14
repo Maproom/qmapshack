@@ -28,9 +28,12 @@
 #include <QString>
 #include <QTemporaryFile>
 
+#define DEFAULTICONSIZE 22
+
 class QMenu;
 
 class CWptIconManager : public QObject {
+  Q_OBJECT
  public:
   virtual ~CWptIconManager();
   static CWptIconManager& self() { return *pSelf; }
@@ -44,7 +47,9 @@ class CWptIconManager : public QObject {
 
   void init();
   QPixmap getWptIconByName(const QString& name, QPointF& focus, QString* src = nullptr);
+  QPixmap getWptIconScaledByName(const QString& name, QPointF& focus);
   QString selectWptIcon(QWidget* parent);
+  const QImage& iconHighlight();
 
   QMenu* getWptIconMenu(const QString& title, QObject* obj, const char* slot, QWidget* parent);
 
@@ -53,6 +58,8 @@ class CWptIconManager : public QObject {
   const QMap<QString, icon_t>& getWptIcons() { return wptIcons; }
 
   QString getNumberedBullet(qint32 n);
+
+  void setIconSize(int size);
 
  private:
   friend class CMainWindow;
@@ -64,6 +71,9 @@ class CWptIconManager : public QObject {
 
   static CWptIconManager* pSelf;
   static const char* wptDefault;
+  int wptSize = 0;
+  QImage wptHighlight;
+  QImage wptHighlightScaled;
 
   QFont lastFont;
 

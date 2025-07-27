@@ -19,10 +19,11 @@
 
 #include "poi/CPoiFilePOI.h"
 
+#include <QMessageBox>
 #include <QSqlDatabase>
 #include <QSqlError>
 #include <QSqlQuery>
-#include <QtWidgets>
+#include <QWidget>
 
 #include "helpers/CDraw.h"
 #include "helpers/CTryMutexLocker.h"
@@ -34,8 +35,8 @@
 
 CPoiFilePOI::CPoiFilePOI(const QString& filename, CPoiDraw* parent)
     : IPoiFile(parent), filename(filename), loadTimer(new QTimer(this)) {
-  // Set true if the file could be open and loaded successfully
-  // If not set true the system will take care to destroy this object
+  // Set true if the file could be opened and loaded successfully
+  // If not set true, the system will take care to destroy this object
   isActivated = true;
 
   // Set up a timer to only start reloading and redrawing the map when the user has made his selections
@@ -43,12 +44,23 @@ CPoiFilePOI::CPoiFilePOI(const QString& filename, CPoiDraw* parent)
   loadTimer->setInterval(500);
   connect(loadTimer, &QTimer::timeout, poi, &CPoiDraw::emitSigCanvasUpdate);
 
+  QWidget* msgBoxParent = CMainWindow::getBestWidgetForParent();
+  bool msgBoxShow = msgBoxParent != nullptr && msgBoxParent->isVisible();
+
   // Open database here so it belongs to the right thread
   if (!QSqlDatabase::contains(filename + "_bbox")) {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", filename + "_bbox");
     db.setDatabaseName(filename);
     if (!db.open()) {
-      qDebug() << "failed to open database" << db.lastError();
+      const QString& msg = tr("Failed to open SQL database:");
+      const QString& err = db.lastError().text();
+      if (msgBoxShow) {
+	QMessageBox msgBox(QMessageBox::Warning, tr("SQL error..."), msg + "<br>" + err, QMessageBox::Ok, msgBoxParent);
+	msgBox.setTextFormat(Qt::RichText);
+	msgBox.exec();
+      } else {
+        qDebug() << msg + " " + err;
+      }
       isActivated = false;
       return;
     }
@@ -64,9 +76,35 @@ CPoiFilePOI::CPoiFilePOI(const QString& filename, CPoiDraw* parent)
     qreal height = corners[0].toDouble() - top;
     bbox = QRectF(left, top, width, height);
   } else {
-    qDebug() << "failed to retrieve bounding box of " << filename;
+    const QString& msg = tr("No valid POI file '%1'. Failed to retrieve bounding box!").arg(filename);
+    if (msgBoxShow) {
+      QMessageBox::warning(msgBoxParent, tr("POI file error..."), msg, QMessageBox::Ok);
+    } else {
+      qDebug() << msg;
+    }
     isActivated = false;
   }
+
+  if (isActivated) {
+
+    QSqlQuery query("SELECT value FROM main.metadata WHERE name='version'", QSqlDatabase::database(filename + "_bbox"));
+
+    const QString& version = query.next() ? query.value(0).toString() : "unknown";
+    if (version != "2") {
+      const QString& msg = tr("POI file '%1' is POI version %2. Only version 2 is supported!").arg(filename).arg(version);
+      const QString& hint = tr("See <a href='https://github.com/Maproom/qmapshack/wiki/DocGisItemsPOI'>Wiki</a> for more information.");
+      if (msgBoxShow) {
+	QMessageBox msgBox(QMessageBox::Warning, tr("POI file error..."), msg + "<br>" + hint, QMessageBox::Ok, msgBoxParent);
+	msgBox.setTextFormat(Qt::RichText);
+	msgBox.exec();
+      } else {
+        qDebug() << msg;
+      }
+      isActivated = false;
+    }
+
+  }
+
   // Database is no longer needed
   QSqlDatabase::removeDatabase(filename + "_bbox");
 }

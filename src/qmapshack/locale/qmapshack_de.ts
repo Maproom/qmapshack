@@ -4937,22 +4937,53 @@ Unbekannte Struktur.</translation>
 <context>
     <name>CPoiFilePOI</name>
     <message>
-        <location filename="../poi/CPoiFilePOI.cpp" line="292"/>
+        <location filename="../poi/CPoiFilePOI.cpp" line="81"/>
+        <location filename="../poi/CPoiFilePOI.cpp" line="97"/>
+        <source>POI file error...</source>
+        <translation>POI-Datei Fehler...</translation>
+    </message>
+    <message>
+        <location filename="../poi/CPoiFilePOI.cpp" line="79"/>
+        <source>No valid POI file &apos;%1&apos;. Failed to retrieve bounding box!</source>
+        <translation>Ungültige POI-Datei &apos;%1&apos;. Abfrage der Begrenzungen fehlgeschlagen!</translation>
+    </message>
+    <message>
+        <location filename="../poi/CPoiFilePOI.cpp" line="55"/>
+        <source>Failed to open SQL database:</source>
+        <translation>Fehler beim Öffnen der SQL-Datenbank:</translation>
+    </message>
+    <message>
+        <location filename="../poi/CPoiFilePOI.cpp" line="58"/>
+        <source>SQL error...</source>
+        <translation>SQL-Fehler...</translation>
+    </message>
+    <message>
+        <location filename="../poi/CPoiFilePOI.cpp" line="94"/>
+        <source>POI file &apos;%1&apos; is POI version %2. Only version 2 is supported!</source>
+        <translation>POI-Datei &apos;%1&apos; ist POI-Version %2. Nur Version 2 wird unterstützt!</translation>
+    </message>
+    <message>
+        <location filename="../poi/CPoiFilePOI.cpp" line="95"/>
+        <source>See &lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocGisItemsPOI&apos;&gt;Wiki&lt;/a&gt; for more information.</source>
+        <translation>Siehe &lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocGisItemsPOI&apos;&gt;Wiki&lt;/a&gt; für mehr Information.</translation>
+    </message>
+    <message>
+        <location filename="../poi/CPoiFilePOI.cpp" line="330"/>
         <source>Category: </source>
         <translation>Kategorie: </translation>
     </message>
     <message>
-        <location filename="../poi/CPoiFilePOI.cpp" line="297"/>
+        <location filename="../poi/CPoiFilePOI.cpp" line="335"/>
         <source>Links: </source>
         <translation>Links: </translation>
     </message>
     <message>
-        <location filename="../poi/CPoiFilePOI.cpp" line="309"/>
+        <location filename="../poi/CPoiFilePOI.cpp" line="347"/>
         <source>Zoom in to see more details.</source>
         <translation>Zoomen Sie näher, um mehr Details zu sehen.</translation>
     </message>
     <message>
-        <location filename="../poi/CPoiFilePOI.cpp" line="311"/>
+        <location filename="../poi/CPoiFilePOI.cpp" line="349"/>
         <source>POIs at this point:</source>
         <translation>POIs an diesem Punkt:</translation>
     </message>

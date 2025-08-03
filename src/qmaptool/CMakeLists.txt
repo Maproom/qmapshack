@@ -221,7 +221,10 @@ endif(APPLE)
 ###############################################################################################
 # Build the executable and define necessary libraries.
 ###############################################################################################
-add_executable(${APPLICATION_NAME} WIN32 ${MAININP})
+if(WIN32)
+    set (ICON win32icon.rc)
+endif()
+add_executable(${APPLICATION_NAME} WIN32 ${MAININP} ${ICON})
 
 ###############################################################################################
 # Translation related stuff

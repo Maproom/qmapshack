@@ -1098,7 +1098,7 @@ void IPlot::drawTags(QPainter& p) {
       continue;
     }
 
-    QPixmap icon = tag.icon.scaled(iconBarHeight, iconBarHeight, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+    QPixmap icon = tag.icon.scaled(iconBarHeight, iconBarHeight, Qt::KeepAspectRatio, Qt::SmoothTransformation);
     p.drawPixmap(ptx - icon.width() / 2, 2, icon);
 
     if (pty > bottom) {

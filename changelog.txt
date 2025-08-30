@@ -5,6 +5,7 @@ V1.XX.X
 [QMS-811] Fix 2 fatal tooltip errors with wayland platform
 [QMS-812] Set user defined sizes for waypoint and POI icons
 [QMS-820] Add app specific icon to qmapshack/qmaptool exes on platform Windows
+[QMS-824] Non-square icons unaligned, aspect ratio ignored
 
 V1.18.0
 [QMS-558] Support for MTP devices

@@ -596,18 +596,20 @@ void IGisItem::setIcon(const QPixmap& icon) {
 }
 
 void IGisItem::showIcon() {
+  const int& width = icon.width();
+  const int& height = icon.height();
+  // center icon within surrounding square
+  int size = qMax(width, height);
+  displayIcon = QPixmap(size, size);
+  displayIcon.fill(Qt::transparent);
+  QPainter painter(&displayIcon);
+  int dw = (size-width) / 2;
+  int dh = (size-height) / 2;
+  painter.drawPixmap(dw, dh, icon);
   if (isNogo()) {
-    const int& width = icon.width();
-    const int& height = icon.height();
-    displayIcon = QPixmap(width, height);
-    displayIcon.fill(Qt::transparent);
-    QPainter painter(&displayIcon);
-    painter.drawPixmap(0, 0, icon);
-    painter.drawPixmap(width * 0.4, height * 0.4,
+    painter.drawPixmap(width * 0.4 + dw, height * 0.4 + dh,
                        QPixmap("://icons/48x48/NoGo.png")
                            .scaled(width * 0.6, height * 0.6, Qt::KeepAspectRatio, Qt::SmoothTransformation));
-  } else {
-    displayIcon = icon;
   }
   QTreeWidgetItem::setIcon(CGisListWks::eColumnIcon, displayIcon);
 }

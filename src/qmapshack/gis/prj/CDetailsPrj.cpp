@@ -449,7 +449,7 @@ void CDetailsPrj::drawByGroup(QTextCursor& cursor, QList<CGisItemTrk*>& trks, QL
 
     cnt = 1;
     for (CGisItemWpt* wpt : wpts) {
-      PROGRESS(n++, return );
+      PROGRESS(n++, return);
 
       addIcon(table, eSym1, cnt, wpt->getDisplayIcon(), wpt->getKey().item, wpt->isReadOnly(), printable);
       table->cellAt(cnt, eInfo1).firstCursorPosition().insertHtml(wpt->getInfo(IGisItem::eFeatureShowName));
@@ -478,7 +478,7 @@ void CDetailsPrj::drawByGroup(QTextCursor& cursor, QList<CGisItemTrk*>& trks, QL
     cnt = 1;
 
     for (CGisItemTrk* trk : trks) {
-      PROGRESS(n++, return );
+      PROGRESS(n++, return);
 
       addIcon(table, eSym1, cnt, trk->getDisplayIcon(), trk->getKey().item, trk->isReadOnly(), printable);
 
@@ -558,8 +558,7 @@ struct wpt_info_t {
 QList<wpt_info_t> CDetailsPrj::getWptInfo(const CGisItemTrk& trk) const {
   int cnt = 1;
   const CTrackData::trkpt_t* lastTrkpt = nullptr;
-  QList<wpt_info_t> wptInfo;
-  wpt_info_t* lastWptInfo = nullptr;
+  QVector<wpt_info_t> wptInfo;
   bool hasValidTime = trk.getTimeStart().isValid();
 
   const CTrackData& t = trk.getTrackData();
@@ -616,7 +615,8 @@ QList<wpt_info_t> CDetailsPrj::getWptInfo(const CGisItemTrk& trk) const {
     info.ascent1 = trkpt.ascent;
     info.descent1 = trkpt.descent;
 
-    if (lastWptInfo != nullptr) {
+    if (wptInfo.size() > 1) {
+      wpt_info_t* lastWptInfo = &(*(wptInfo.end() - 2));
       lastWptInfo->distance2 = trkpt.distance - lastTrkpt->distance;
       lastWptInfo->elapsedSeconds2 = trkpt.elapsedSeconds - lastTrkpt->elapsedSeconds;
       lastWptInfo->ascent2 = trkpt.ascent - lastTrkpt->ascent;
@@ -629,7 +629,6 @@ QList<wpt_info_t> CDetailsPrj::getWptInfo(const CGisItemTrk& trk) const {
     info.descent3 = trk.getTotalDescent() - trkpt.descent;
 
     lastTrkpt = &trkpt;
-    lastWptInfo = &wptInfo.last();
   }
 
   return wptInfo;
@@ -740,7 +739,7 @@ void CDetailsPrj::drawByTrack(QTextCursor& cursor, QList<CGisItemTrk*>& trks, QL
 
     int cnt = 1;
     for (const wpt_info_t& info : wptInfo) {
-      PROGRESS(n++, return );
+      PROGRESS(n++, return);
 
       addIcon(table, eSym2, cnt, info.icon, info.key.item, info.isReadOnly, printable);
       table->cellAt(cnt, eInfo2).firstCursorPosition().insertHtml(getNameAndTime(info, *trk));
@@ -807,7 +806,7 @@ void CDetailsPrj::drawByDetails(QTextCursor& cursor, QList<CGisItemTrk*>& trks, 
 
     int cnt = 1;
     for (const wpt_info_t& info : wptInfo) {
-      PROGRESS(n++, return );
+      PROGRESS(n++, return);
 
       // 1st column
       addIcon(table, eSym2, cnt, info.icon, info.key.item, info.isReadOnly, printable);
@@ -868,7 +867,7 @@ void CDetailsPrj::drawArea(QTextCursor& cursor, QList<CGisItemOvlArea*>& areas, 
 
   int cnt = 1;
   for (CGisItemOvlArea* area : areas) {
-    PROGRESS(n++, return );
+    PROGRESS(n++, return);
 
     addIcon(table, eSym1, cnt, area->getDisplayIcon(), area->getKey().item, area->isReadOnly(), printable);
     table->cellAt(cnt, eInfo1).firstCursorPosition().insertHtml(area->getInfo(IGisItem::eFeatureShowName));
@@ -900,7 +899,7 @@ void CDetailsPrj::drawRoute(QTextCursor& cursor, QList<CGisItemRte*>& rtes, CPro
 
   int cnt = 1;
   for (CGisItemRte* rte : rtes) {
-    PROGRESS(n++, return );
+    PROGRESS(n++, return);
 
     addIcon(table, eSym1, cnt, rte->getDisplayIcon(), rte->getKey().item, rte->isReadOnly(), printable);
     table->cellAt(cnt, eInfo1).firstCursorPosition().insertHtml(rte->getInfo(IGisItem::eFeatureShowName));

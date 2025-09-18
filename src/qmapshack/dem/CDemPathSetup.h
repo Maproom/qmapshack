@@ -36,7 +36,6 @@ class CDemPathSetup : public QDialog, private Ui::IDemPathSetup {
   void slotAddPath();
   void slotDelPath();
   void slotItemSelectionChanged();
-  void slotDemHonk();
 
  private:
   QStringList& paths;

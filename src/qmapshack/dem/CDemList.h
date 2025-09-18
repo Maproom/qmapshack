@@ -57,9 +57,6 @@ class CDemList : public QWidget, private Ui::IDemsList {
  signals:
   void sigChanged();
 
- public slots:
-  static void slotDemHonk();
-
  private slots:
   void slotActivate();
   void slotMoveUp();

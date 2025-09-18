@@ -70,12 +70,11 @@
 #include "version.h"
 
 #ifdef Q_OS_WIN64
-#include <windows.h>
 #include <dbt.h>
 #include <guiddef.h>
 #include <initguid.h>
 #include <usbiodef.h>
-
+#include <windows.h>
 
 #include "device/CDeviceWatcherWindows.h"
 #endif  // Q_OS_WIN64
@@ -1297,12 +1296,6 @@ void CMainWindow::slotLinkActivated(const QString& link) {
       return;
     }
     list->slotMapHonk();
-  } else if (link == "GetDems") {
-    CDemList* list = dynamic_cast<CDemList*>(tabDem->currentWidget());
-    if (list == nullptr) {
-      return;
-    }
-    list->slotDemHonk();
   } else if (link == "MapFolders") {
     slotSetupMapPath();
   } else if (link == "PoiFolders") {

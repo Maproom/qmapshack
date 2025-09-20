@@ -8,6 +8,7 @@ V1.XX.X
 [QMS-824] Non-square icons unaligned, aspect ratio ignored
 [QMS-826] Fix: "to next" values missing in project diary
 [QMS-829] Broken online DEM freezes application
+[QMS-831] Fix: CMainWindow.cpp compile error on OS Windows
 
 V1.18.0
 [QMS-558] Support for MTP devices

@@ -28,10 +28,12 @@
 CMousePrint::CMousePrint(CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse) : IMouseSelect(gis, canvas, mouse) {
   cursor = QCursor(QPixmap("://cursors/cursorSave.png"), 0, 0);
 
-  canvas->reportStatus("IMouseSelect", tr("<b>Save(Print) Map</b><br/>Select a rectangular area on the map. "
-                                          "Use the primary mouse button and move the mouse. Abort by using "
-                                          "the secondary mouse button. Adjust the selection by point-click-move "
-                                          "on the corners."));
+  canvas->reportStatus("IMouseSelect", tr("<b>Save(Print) Map</b><br/>Hold down the primary mouse button "
+                                          "and select a rectangular area on the map. Adjust the selection "
+                                          "by using the markers on the corners. The buttons to print/save "
+                                          "the area are beside the selection. If they are covered by other "
+                                          "windows you have to move the map. Abort by using the secondary "
+                                          "mouse button."));
 
   CScrOptPrint* scrOptPrint;
   scrOpt = scrOptPrint = new CScrOptPrint(this);

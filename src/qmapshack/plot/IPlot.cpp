@@ -201,6 +201,7 @@ void IPlot::resetZoom() {
 
 void IPlot::paintEvent(QPaintEvent* /*e*/) {
   QPainter p(this);
+  USE_ANTI_ALIASING(p, true);
   draw(p);
 }
 

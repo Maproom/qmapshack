@@ -4779,7 +4779,7 @@ Unbekannte Struktur.</translation>
     <message>
         <location filename="../mouse/CMousePrint.cpp" line="31"/>
         <source>&lt;b&gt;Save(Print) Map&lt;/b&gt;&lt;br/&gt;Hold down the primary mouse button and select a rectangular area on the map. Adjust the selection by using the markers on the corners. The buttons to print/save the area are beside the selection. If they are covered by other windows you have to move the map. Abort by using the secondary mouse button.</source>
-        <translation type="unfinished">&lt;b&gt;Karte speichern (drucken)&lt;/b&gt;&lt;br/&gt;Halte die primäre Maustaste und gedrückt und wähle einen rechteckigen Bereich auf der Karte. Die Auswahl kann mit den Markierungen an den Ecken geändert werden. Die Schalter zum Drucken/Speichern befinden sich neben der Auswahl. Wenn die Schalter von anderen Fenstern verdeckt sind muss die Karte verschoben werden. Abbruch durch Klick auf sekundäre Maustaste.</translation>
+        <translation type="unfinished">&lt;b&gt;Karte speichern (drucken)&lt;/b&gt;&lt;br/&gt;Halte die primäre Maustaste gedrückt und wähle einen rechteckigen Bereich auf der Karte. Die Auswahl kann mit den Markierungen an den Ecken geändert werden. Die Schalter zum Drucken/Speichern befinden sich neben der Auswahl. Wenn die Schalter von anderen Fenstern verdeckt sind muss die Karte verschoben werden. Abbruch durch Klick auf sekundäre Maustaste.</translation>
     </message>
 </context>
 <context>

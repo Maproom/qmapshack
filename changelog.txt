@@ -10,6 +10,7 @@ V1.XX.X
 [QMS-829] Broken online DEM freezes application
 [QMS-831] Fix: CMainWindow.cpp compile error on OS Windows
 [QMS-834] Non-antialiased scaled track profile
+[QMS-836] Fix tip for Map save/print
 
 V1.18.0
 [QMS-558] Support for MTP devices

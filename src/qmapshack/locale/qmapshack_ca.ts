@@ -4767,7 +4767,7 @@ Estructura desconeguda.</translation>
     <name>CMousePrint</name>
     <message>
         <location filename="../mouse/CMousePrint.cpp" line="31"/>
-        <source>&lt;b&gt;Save(Print) Map&lt;/b&gt;&lt;br/&gt;Select a rectangular area on the map. Use the left mouse button and move the mouse. Abort with a right click. Adjust the selection by point-click-move on the corners.</source>
+        <source>&lt;b&gt;Save(Print) Map&lt;/b&gt;&lt;br/&gt;Hold down the primary mouse button and select a rectangular area on the map. Adjust the selection by using the markers on the corners. The buttons to print/save the area are beside the selection. If they are covered by other windows you have to move the map. Abort by using the secondary mouse button.</source>
         <translation>&lt;b&gt;Desa (Imprimeix) Mapa&lt;/b&gt;&lt;br/&gt;Selecciona una àrea rectangular en el mapa. Fes clic en el botó esquerre del ratolí i mou el ratolí. Fes clic al botó dret per interrompre. Per a ajustar la selecció apunta-fes clic-mou el ratolí a les cantonades.</translation>
     </message>
 </context>

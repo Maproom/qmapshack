@@ -81,11 +81,11 @@ void CWptIconManager::init() {
   wptIcons["Block, Red"] = icon_t("://icons/waypoints/32x32/BoxRed.png", 16, 16);
   wptIcons["Block, Blue"] = icon_t("://icons/waypoints/32x32/BoxBlue.png", 16, 16);
   wptIcons["Block, Green"] = icon_t("://icons/waypoints/32x32/BoxGreen.png", 16, 16);
-  wptIcons["Blue Diamond"] = icon_t("://icons/waypoints/32x32/DiamondBlue.png", 16, 16);
-  wptIcons["Green Diamond"] = icon_t("://icons/waypoints/32x32/DiamondGreen.png", 16, 16);
-  wptIcons["Red Diamond"] = icon_t("://icons/waypoints/32x32/DiamondRed.png", 16, 16);
+  wptIcons["Diamond, Red"] = icon_t("://icons/waypoints/32x32/DiamondRed.png", 16, 16);
+  wptIcons["Diamond, Blue"] = icon_t("://icons/waypoints/32x32/DiamondBlue.png", 16, 16);
+  wptIcons["Diamond, Green"] = icon_t("://icons/waypoints/32x32/DiamondGreen.png", 16, 16);
   wptIcons["Parking Area"] = icon_t("://icons/cache/32x32/parking.png", 16, 16);
-  wptIcons["Trailhead"] = icon_t("://icons/cache/32x32/trailhead.png", 16, 16);
+  wptIcons["Trail Head"] = icon_t("://icons/cache/32x32/trailhead.png", 16, 16);
   wptIcons["Waypoint"] = icon_t("://icons/waypoints/32x32/Waypoint.png", 16, 16);
   wptIcons["1st Category"] = icon_t("://icons/waypoints/32x32/1stCategory.png", 16, 16);
   wptIcons["2nd Category"] = icon_t("://icons/waypoints/32x32/2ndCategory.png", 16, 16);
@@ -167,7 +167,7 @@ void CWptIconManager::init() {
   wptIcons["Parking, Pay"] = icon_t("://icons/poi/SJJB/png/transport_parking_car_paid.n.32.png", 16, 16);
 
   setWptIconByName("Traditional Cache", "://icons/geocaching/icons/traditional.png");
-  setWptIconByName("Multi-cache", "://icons/geocaching/icons/multi.png");
+  setWptIconByName("Multi-Cache", "://icons/geocaching/icons/multi.png");
   setWptIconByName("Unknown Cache", "://icons/geocaching/icons/unknown.png");
   setWptIconByName("Wherigo Cache", "://icons/geocaching/icons/wherigo.png");
   setWptIconByName("Event Cache", "://icons/geocaching/icons/event.png");
@@ -175,12 +175,12 @@ void CWptIconManager::init() {
   setWptIconByName("Giga-Event Cache", "://icons/geocaching/icons/giga.png");
   setWptIconByName("Cache In Trash Out Event", "://icons/geocaching/icons/cito.png");
   setWptIconByName("Earthcache", "://icons/geocaching/icons/earth.png");
-  setWptIconByName("Letterbox Hybrid", "://icons/geocaching/icons/letterbox.png");
+  setWptIconByName("Letterbox Cache", "://icons/geocaching/icons/letterbox.png");
   setWptIconByName("Virtual Cache", "://icons/geocaching/icons/virtual.png");
   setWptIconByName("Webcam Cache", "://icons/geocaching/icons/webcam.png");
 
   setWptIconByName("gray_Traditional Cache", createGrayscale("://icons/geocaching/icons/traditional.png"));
-  setWptIconByName("gray_Multi-cache", createGrayscale("://icons/geocaching/icons/multi.png"));
+  setWptIconByName("gray_Multi-Cache", createGrayscale("://icons/geocaching/icons/multi.png"));
   setWptIconByName("gray_Unknown Cache", createGrayscale("://icons/geocaching/icons/unknown.png"));
   setWptIconByName("gray_Wherigo Cache", createGrayscale("://icons/geocaching/icons/wherigo.png"));
   setWptIconByName("gray_Event Cache", createGrayscale("://icons/geocaching/icons/event.png"));
@@ -188,7 +188,7 @@ void CWptIconManager::init() {
   setWptIconByName("gray_Giga-Event Cache", createGrayscale("://icons/geocaching/icons/giga.png"));
   setWptIconByName("gray_Cache In Trash Out Event", createGrayscale("://icons/geocaching/icons/cito.png"));
   setWptIconByName("gray_Earthcache", createGrayscale("://icons/geocaching/icons/earth.png"));
-  setWptIconByName("gray_Letterbox Hybrid", createGrayscale("://icons/geocaching/icons/letterbox.png"));
+  setWptIconByName("gray_Letterbox Cache", createGrayscale("://icons/geocaching/icons/letterbox.png"));
   setWptIconByName("gray_Virtual Cache", createGrayscale("://icons/geocaching/icons/virtual.png"));
   setWptIconByName("gray_Webcam Cache", createGrayscale("://icons/geocaching/icons/webcam.png"));
 

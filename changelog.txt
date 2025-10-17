@@ -1,3 +1,5 @@
+[QMS-841] Fix waypoint names to match the Garmin symbols
+
 V1.18.1
 [QMS-659] POI file error and version handling
 [QMS-807] No *.qm files when UPDATE_TRANSLATIONS=OFF

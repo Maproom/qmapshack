@@ -706,6 +706,9 @@
         <file>../icons/waypoints/32x32/SlightLeft.png</file>
         <file>../icons/waypoints/32x32/SlightRight.png</file>
         <file>../icons/waypoints/32x32/Sprint.png</file>
+        <file>../icons/waypoints/32x32/SquareBlue.png</file>
+        <file>../icons/waypoints/32x32/SquareGreen.png</file>
+        <file>../icons/waypoints/32x32/SquareRed.png</file>
         <file>../icons/waypoints/32x32/Start.png</file>
         <file>../icons/waypoints/32x32/Straight.png</file>
         <file>../icons/waypoints/32x32/Summit.png</file>

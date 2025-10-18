@@ -721,6 +721,9 @@
         <file>../icons/waypoints/32x32/Start.png</file>
         <file>../icons/waypoints/32x32/Straight.png</file>
         <file>../icons/waypoints/32x32/Summit.png</file>
+        <file>../icons/waypoints/32x32/TriangleBlue.png</file>
+        <file>../icons/waypoints/32x32/TriangleGreen.png</file>
+        <file>../icons/waypoints/32x32/TriangleRed.png</file>
         <file>../icons/waypoints/32x32/UTurn.png</file>
         <file>../icons/waypoints/32x32/Valley.png</file>
         <file>../icons/waypoints/32x32/Water.png</file>

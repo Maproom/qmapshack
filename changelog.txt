@@ -1,4 +1,5 @@
 [QMS-841] Fix waypoint names to match the Garmin symbols
+[QMS-843] Add waypoint icons
 
 V1.18.1
 [QMS-659] POI file error and version handling

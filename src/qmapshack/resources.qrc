@@ -698,6 +698,9 @@
         <file>../icons/waypoints/32x32/Left.png</file>
         <file>../icons/waypoints/32x32/LeftFork.png</file>
         <file>../icons/waypoints/32x32/MiddleFork.png</file>
+        <file>../icons/waypoints/32x32/OvalBlue.png</file>
+        <file>../icons/waypoints/32x32/OvalGreen.png</file>
+        <file>../icons/waypoints/32x32/OvalRed.png</file>
         <file>../icons/waypoints/32x32/PinBlue.png</file>
         <file>../icons/waypoints/32x32/PinGreen.png</file>
         <file>../icons/waypoints/32x32/PinRed.png</file>

@@ -704,6 +704,9 @@
         <file>../icons/waypoints/32x32/PinBlue.png</file>
         <file>../icons/waypoints/32x32/PinGreen.png</file>
         <file>../icons/waypoints/32x32/PinRed.png</file>
+        <file>../icons/waypoints/32x32/RectangleBlue.png</file>
+        <file>../icons/waypoints/32x32/RectangleGreen.png</file>
+        <file>../icons/waypoints/32x32/RectangleRed.png</file>
         <file>../icons/waypoints/32x32/Residence.png</file>
         <file>../icons/waypoints/32x32/Right.png</file>
         <file>../icons/waypoints/32x32/RightFork.png</file>

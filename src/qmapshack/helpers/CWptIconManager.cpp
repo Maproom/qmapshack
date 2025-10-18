@@ -72,6 +72,7 @@ void CWptIconManager::init() {
   wptIcons["City (Medium)"] = icon_t("://icons/waypoints/32x32/CityMedium.png", 16, 16);
   wptIcons["City (Small)"] = icon_t("://icons/waypoints/32x32/CitySmall.png", 16, 16);
   wptIcons["Residence"] = icon_t("://icons/waypoints/32x32/Residence.png", 16, 16);
+  wptIcons["Favorite"] = icon_t("://icons/waypoints/32x32/Favorite.png", 16, 16);
   wptIcons["Flag"] = icon_t("://icons/waypoints/32x32/FlagRed.png", 0, 32);
   wptIcons["Flag, Red"] = icon_t("://icons/waypoints/32x32/FlagRed.png", 0, 32);
   wptIcons["Flag, Blue"] = icon_t("://icons/waypoints/32x32/FlagBlue.png", 0, 32);

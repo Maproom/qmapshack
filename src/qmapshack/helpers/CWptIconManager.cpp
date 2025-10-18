@@ -72,6 +72,7 @@ void CWptIconManager::init() {
   wptIcons["City (Medium)"] = icon_t("://icons/waypoints/32x32/CityMedium.png", 16, 16);
   wptIcons["City (Small)"] = icon_t("://icons/waypoints/32x32/CitySmall.png", 16, 16);
   wptIcons["Residence"] = icon_t("://icons/waypoints/32x32/Residence.png", 16, 16);
+  wptIcons["Flag"] = icon_t("://icons/waypoints/32x32/FlagRed.png", 0, 32);
   wptIcons["Flag, Red"] = icon_t("://icons/waypoints/32x32/FlagRed.png", 0, 32);
   wptIcons["Flag, Blue"] = icon_t("://icons/waypoints/32x32/FlagBlue.png", 0, 32);
   wptIcons["Flag, Green"] = icon_t("://icons/waypoints/32x32/FlagGreen.png", 0, 32);
@@ -143,6 +144,8 @@ void CWptIconManager::init() {
   wptIcons["Number 9, Green"] = icon_t("://icons/waypoints/32x32/Number9Green.png", 16, 16);
   wptIcons["Parking Area"] = icon_t("://icons/cache/32x32/parking.png", 16, 16);
   wptIcons["Trail Head"] = icon_t("://icons/cache/32x32/trailhead.png", 16, 16);
+  wptIcons["Sad Face"] = icon_t("://icons/cache/32x32/dnf.png", 16, 16);
+  wptIcons["Contact, Smiley"] = icon_t("://icons/cache/32x32/found.png", 16, 16);
   wptIcons["Waypoint"] = icon_t("://icons/waypoints/32x32/Waypoint.png", 16, 16);
   wptIcons["1st Category"] = icon_t("://icons/waypoints/32x32/1stCategory.png", 16, 16);
   wptIcons["2nd Category"] = icon_t("://icons/waypoints/32x32/2ndCategory.png", 16, 16);
@@ -186,6 +189,7 @@ void CWptIconManager::init() {
   wptIcons["Parking Area"] = icon_t("://icons/poi/SJJB/png/transport_parking.n.32.png", 16, 16);
   wptIcons["Picnic Area"] = icon_t("://icons/poi/SJJB/png/tourist_picnic.n.32.png", 16, 16);
   wptIcons["Scenic Area"] = icon_t("://icons/poi/SJJB/png/tourist_view_point.n.32.png", 16, 16);
+  wptIcons["Skiing Area"] = icon_t("://icons/poi/SJJB/png/sport_skiing_crosscountry.n.32.png", 16, 16);
   wptIcons["Swimming Area"] = icon_t("://icons/poi/SJJB/png/sport_swimming_outdoor.n.32.png", 16, 16);
   wptIcons["Dam"] = icon_t("://icons/poi/SJJB/png/water_dam.n.32.png", 16, 16);
   wptIcons["Shopping Center"] = icon_t("://icons/poi/SJJB/png/shopping_supermarket.n.32.png", 16, 16);
@@ -211,6 +215,7 @@ void CWptIconManager::init() {
   wptIcons["Ghost Town"] = icon_t("://icons/poi/SJJB/png/tourist_ruin.n.32.png", 16, 16);
   wptIcons["Beach"] = icon_t("://icons/poi/SJJB/png/tourist_beach.n.32.png", 16, 16);
   wptIcons["Forest"] = icon_t("://icons/poi/SJJB/png/landuse_coniferous_and_deciduous.n.32.png", 16, 16);
+  wptIcons["Park"] = icon_t("://icons/poi/SJJB/png/landuse_deciduous.n.32.png", 16, 16);
   wptIcons["Airport"] = icon_t("://icons/poi/SJJB/png/transport_airport.n.32.png", 16, 16);
   wptIcons["Heliport"] = icon_t("://icons/poi/SJJB/png/transport_helicopter_pad.n.32.png", 16, 16);
   wptIcons["Tall Tower"] = icon_t("://icons/poi/SJJB/png/poi_tower_communications.n.32.png", 16, 16);
@@ -222,6 +227,12 @@ void CWptIconManager::init() {
   wptIcons["Lodge"] = icon_t("://icons/poi/SJJB/png/accommodation_shelter.n.32.png", 16, 16);
   wptIcons["Railway"] = icon_t("://icons/poi/SJJB/png/transport_train_station.n.32.png", 16, 16);
   wptIcons["Parking, Pay"] = icon_t("://icons/poi/SJJB/png/transport_parking_car_paid.n.32.png", 16, 16);
+  wptIcons["Amusement Park"] = icon_t("://icons/poi/SJJB/png/tourist_theme_park.n.32.png", 16, 16);
+  wptIcons["Golf Course"] = icon_t("://icons/poi/SJJB/png/sport_golf.n.32.png", 16, 16);
+  wptIcons["Police Station"] = icon_t("://icons/poi/SJJB/png/amenity_police.n.32.png", 16, 16);
+  wptIcons["Ski Resort"] = icon_t("://icons/poi/SJJB/png/sport_skiing_downhill.n.32.png", 16, 16);
+  wptIcons["Ice Skating"] = icon_t("://icons/poi/SJJB/png/sport_iceskating.n.32.png", 16, 16);
+  wptIcons["Marina"] = icon_t("://icons/poi/SJJB/png/transport_marina.n.32.png", 16, 16);
 
   setWptIconByName("Traditional Cache", "://icons/geocaching/icons/traditional.png");
   setWptIconByName("Multi-Cache", "://icons/geocaching/icons/multi.png");

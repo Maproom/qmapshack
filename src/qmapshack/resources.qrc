@@ -675,6 +675,9 @@
         <file>../icons/waypoints/32x32/BoxBlue.png</file>
         <file>../icons/waypoints/32x32/BoxGreen.png</file>
         <file>../icons/waypoints/32x32/BoxRed.png</file>
+        <file>../icons/waypoints/32x32/CircleBlue.png</file>
+        <file>../icons/waypoints/32x32/CircleGreen.png</file>
+        <file>../icons/waypoints/32x32/CircleRed.png</file>
         <file>../icons/waypoints/32x32/CityCapitol.png</file>
         <file>../icons/waypoints/32x32/CityLarge.png</file>
         <file>../icons/waypoints/32x32/CityMedium.png</file>

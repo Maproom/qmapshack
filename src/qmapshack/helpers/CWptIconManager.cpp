@@ -81,6 +81,9 @@ void CWptIconManager::init() {
   wptIcons["Block, Red"] = icon_t("://icons/waypoints/32x32/BoxRed.png", 16, 16);
   wptIcons["Block, Blue"] = icon_t("://icons/waypoints/32x32/BoxBlue.png", 16, 16);
   wptIcons["Block, Green"] = icon_t("://icons/waypoints/32x32/BoxGreen.png", 16, 16);
+  wptIcons["Circle, Red"] = icon_t("://icons/waypoints/32x32/CircleRed.png", 16, 16);
+  wptIcons["Circle, Blue"] = icon_t("://icons/waypoints/32x32/CircleBlue.png", 16, 16);
+  wptIcons["Circle, Green"] = icon_t("://icons/waypoints/32x32/CircleGreen.png", 16, 16);
   wptIcons["Diamond, Red"] = icon_t("://icons/waypoints/32x32/DiamondRed.png", 16, 16);
   wptIcons["Diamond, Blue"] = icon_t("://icons/waypoints/32x32/DiamondBlue.png", 16, 16);
   wptIcons["Diamond, Green"] = icon_t("://icons/waypoints/32x32/DiamondGreen.png", 16, 16);

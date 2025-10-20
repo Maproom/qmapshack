@@ -1,5 +1,6 @@
 [QMS-841] Fix waypoint names to match the Garmin symbols
 [QMS-843] Add waypoint icons
+[QMS-847] Remove duplicate Parking Area waypoint icon
 
 V1.18.1
 [QMS-659] POI file error and version handling

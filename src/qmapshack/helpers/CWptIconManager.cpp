@@ -143,7 +143,6 @@ void CWptIconManager::init() {
   wptIcons["Number 9, Red"] = icon_t("://icons/waypoints/32x32/Number9Red.png", 16, 16);
   wptIcons["Number 9, Blue"] = icon_t("://icons/waypoints/32x32/Number9Blue.png", 16, 16);
   wptIcons["Number 9, Green"] = icon_t("://icons/waypoints/32x32/Number9Green.png", 16, 16);
-  wptIcons["Parking Area"] = icon_t("://icons/cache/32x32/parking.png", 16, 16);
   wptIcons["Trail Head"] = icon_t("://icons/cache/32x32/trailhead.png", 16, 16);
   wptIcons["Sad Face"] = icon_t("://icons/cache/32x32/dnf.png", 16, 16);
   wptIcons["Contact, Smiley"] = icon_t("://icons/cache/32x32/found.png", 16, 16);

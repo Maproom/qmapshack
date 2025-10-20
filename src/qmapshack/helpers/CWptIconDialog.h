@@ -34,12 +34,15 @@ class CWptIconDialog : public QDialog, private Ui::IWptIconDialog {
   CWptIconDialog(CMainWindow* parent);
   virtual ~CWptIconDialog();
 
+ signals:
+  void sigSelectedIcon(const QString& name);
+
  private slots:
   void slotSetupPath();
+  void slotSlectedIcon(const QString& name);
 
  private:
-  void setupList(QObject* obj);
-  void setupSignals();
+  void setupExternalWptIconPath();
 
   QToolButton* button = nullptr;
   QAction* action = nullptr;

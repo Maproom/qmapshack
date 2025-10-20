@@ -225,6 +225,7 @@ class CGisListWks : public QTreeWidget {
   QAction* actionNogoArea;
   QAction* actionRteFromWpt;
   QAction* actionEditPrxWpt;
+  QAction* actionChangeIconWpt;
   QAction* actionToRoute;
 
   QAction* actionEleWptTrk;

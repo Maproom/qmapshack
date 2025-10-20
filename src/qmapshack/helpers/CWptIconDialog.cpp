@@ -27,38 +27,13 @@
 
 CWptIconDialog::CWptIconDialog(CMainWindow* parent) : QDialog(parent) {
   setupUi(this);
-  setupList(nullptr);
-  setupSignals();
+  setupExternalWptIconPath();
+
+  connect(toolPath, &QToolButton::clicked, this, &CWptIconDialog::slotSetupPath);
+  connect(widgetIconSelect, &CWptIconSelectWidget::sigSelectedIcon, this, &CWptIconDialog::slotSlectedIcon);
 }
 
-void CWptIconDialog::setupSignals() { connect(toolPath, &QToolButton::clicked, this, &CWptIconDialog::slotSetupPath); }
-
-void CWptIconDialog::setupList(QObject* obj) {
-  // listWidget->clear();
-
-  // QString currentIcon = obj == nullptr ? QString() : obj->objectName();
-  // QListWidgetItem* currentItem = nullptr;
-
-  // const QMap<QString, CWptIconManager::icon_t>& wptIcons = CWptIconManager::self().getWptIcons();
-  // QStringList keys = wptIcons.keys();
-
-  // std::sort(keys.begin(), keys.end(), sortByString);
-
-  // for (const QString& key : std::as_const(keys)) {
-  //   const QString& icon = wptIcons[key].path;
-  //   QPixmap pixmap = CWptIconManager::self().loadIcon(icon);
-
-  //   QListWidgetItem* item = new QListWidgetItem(pixmap, key, listWidget);
-  //   if (currentIcon == key) {
-  //     currentItem = item;
-  //   }
-  // }
-
-  // if (currentItem) {
-  //   listWidget->setCurrentItem(currentItem);
-  //   listWidget->scrollToItem(currentItem);
-  // }
-
+void CWptIconDialog::setupExternalWptIconPath() {
   SETTINGS;
   QString path =
       cfg.value("Paths/externalWptIcons", IAppSetup::getPlatformInstance()->userDataPath("WaypointIcons")).toString();
@@ -69,6 +44,11 @@ void CWptIconDialog::setupList(QObject* obj) {
 
 CWptIconDialog::~CWptIconDialog() {}
 
+void CWptIconDialog::slotSlectedIcon(const QString& name) {
+  emit sigSelectedIcon(name);
+  accept();
+}
+
 void CWptIconDialog::slotSetupPath() {
   QString path = labelIconPath->property("path").toString();
   path = QFileDialog::getExistingDirectory(this, tr("Path to user icons..."), path);
@@ -78,6 +58,7 @@ void CWptIconDialog::slotSetupPath() {
 
   SETTINGS;
   cfg.setValue("Paths/externalWptIcons", path);
+  setupExternalWptIconPath();
+
   CWptIconManager::self().init();
-  setupList(button == nullptr ? dynamic_cast<QObject*>(action) : dynamic_cast<QObject*>(button));
 }

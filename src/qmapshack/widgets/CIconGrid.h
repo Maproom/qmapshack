@@ -31,22 +31,28 @@ class CIconGrid : public QWidget {
 
   void updateIconList(const QString &filter);
 
+  static constexpr int kTileSize = 64;
+
  signals:
   void sigIconName(const QString &name);
+  void sigSelectedIcon(const QString &name);
 
  protected:
   void mouseMoveEvent(QMouseEvent *e) override;
+  void mousePressEvent(QMouseEvent *e) override;
   void resizeEvent(QResizeEvent *e) override;
   void paintEvent(QPaintEvent *e) override;
 
  private:
-  static constexpr int tileSize = 64;
+  void setIndexFocus(int i);
 
   QMap<QString, CWptIconManager::icon_t> icons;
 
   int indexFocus = -1;
   int rows = -1;
   int cols = -1;
+
+  QScrollArea *scrollArea;
 };
 
 #endif  // CICONGRID_H

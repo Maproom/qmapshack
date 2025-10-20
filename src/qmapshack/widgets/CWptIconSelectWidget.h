@@ -33,15 +33,19 @@ class CWptIconSelectWidget : public QWidget {
   CWptIconSelectWidget(QWidget* parent);
   virtual ~CWptIconSelectWidget() = default;
 
+ signals:
+  void sigSelectedIcon(const QString& name);
+
  private slots:
   void slotFilter(const QString& str);
+  void slotWptListChanged();
 
  private:
   QScrollArea* scrollArea;
   QBoxLayout* layout;
   QLabel* iconName;
   QLineEdit* iconFilter;
-  CIconGrid* iconSelect;
+  CIconGrid* iconGrid;
   QAction* actionClearFilter;
 };
 

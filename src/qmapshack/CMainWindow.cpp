@@ -218,7 +218,6 @@ CMainWindow::CMainWindow() : id(QRandomGenerator::global()->generate()) {
   connect(actionCreateRoutinoDatabase, &QAction::triggered, this, &CMainWindow::slotCreateRoutinoDatabase);
   connect(actionPrintMap, &QAction::triggered, this, &CMainWindow::slotPrintMap);
   connect(actionTakeScreenshot, &QAction::triggered, this, &CMainWindow::slotTakeScreenshot);
-  connect(actionSetupWaypointIcons, &QAction::triggered, this, &CMainWindow::slotSetupWptIcons);
   connect(actionCloseTab, &QAction::triggered, this, &CMainWindow::slotCloseTab);
   connect(actionToggleDocks, &QAction::triggered, this, &CMainWindow::slotToggleDocks);
   connect(actionFullScreen, &QAction::triggered, this, &CMainWindow::slotFullScreen);
@@ -412,7 +411,6 @@ CMainWindow::CMainWindow() : id(QRandomGenerator::global()->generate()) {
                       actionTakeScreenshot,
                       actionSetupCoordFormat,
                       actionSetupMapBackground,
-                      actionSetupWaypointIcons,
                       actionCloseTab,
                       actionQuickstart,
                       actionSetupToolbar,
@@ -1325,11 +1323,6 @@ void CMainWindow::slotLinkActivated(const QUrl& url) {
   slotLinkActivated(link);
 }
 
-void CMainWindow::slotSetupWptIcons() {
-  CWptIconDialog dlg(this);
-  dlg.exec();
-}
-
 void CMainWindow::slotCloseTab() {
   CCanvas* canvas = dynamic_cast<CCanvas*>(tabWidget->currentWidget());
   if (canvas == nullptr) {
@@ -1558,12 +1551,12 @@ void CMainWindow::slotSanityTest() {
     QPointF pt(11 * DEG_TO_RAD, 80 * DEG_TO_RAD);
 
     proj.transform(pt, PJ_FWD);
-    if ((qFloor(pt.x()) != 2212361) | (qFloor(pt.y()) != 907496)) {
+    if ((qFloor(pt.x()) != 2212361) || (qFloor(pt.y()) != 907496)) {
       throw QException();
     }
 
     proj.transform(pt, PJ_INV);
-    if ((qRound(pt.x() * RAD_TO_DEG) != 11) | (qRound(pt.y() * RAD_TO_DEG) != 80)) {
+    if ((qRound(pt.x() * RAD_TO_DEG) != 11) || (qRound(pt.y() * RAD_TO_DEG) != 80)) {
       throw QException();
     }
     qDebug() << "Sanity test passed.";
@@ -1644,6 +1637,10 @@ void CMainWindow::slotLinkMapViews(bool on) {
       actionLinkMapViews->setChecked(false);
       return;
     }
+  }
+
+  if (nullptr == canvas) {
+    return;
   }
 
   CCanvas* current = getVisibleCanvas();

@@ -35,11 +35,16 @@ CWptIconSelectWidget::CWptIconSelectWidget(QWidget* parent) : QWidget(parent) {
   scrollArea = new QScrollArea(this);
   scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+  scrollArea->verticalScrollBar()->setSingleStep(CIconGrid::kTileSize);
   scrollArea->setWidgetResizable(true);
-  iconSelect = new CIconGrid(scrollArea);
-  scrollArea->setWidget(iconSelect);
+  iconGrid = new CIconGrid(scrollArea);
+  scrollArea->setWidget(iconGrid);
 
   iconName = new QLabel(this);
+  QFont f = iconName->font();
+  f.setBold(true);
+  iconName->setFont(f);
+  iconName->setAlignment(Qt::AlignCenter);
 
   actionClearFilter = new QAction(this);
   actionClearFilter->setObjectName("actionClearFilter");
@@ -56,20 +61,21 @@ CWptIconSelectWidget::CWptIconSelectWidget(QWidget* parent) : QWidget(parent) {
   layout = new QBoxLayout(QBoxLayout::TopToBottom, this);
   layout->setContentsMargins(0, 0, 0, 0);
   layout->addWidget(iconFilter);
-  layout->addWidget(scrollArea);
   layout->addWidget(iconName);
+  layout->addWidget(scrollArea);
 
-  connect(iconSelect, &CIconGrid::sigIconName, iconName, &QLabel::setText);
+  connect(iconGrid, &CIconGrid::sigIconName, iconName, &QLabel::setText);
+  connect(iconGrid, &CIconGrid::sigSelectedIcon, this, &CWptIconSelectWidget::sigSelectedIcon);
   connect(iconFilter, &QLineEdit::textChanged, this, &CWptIconSelectWidget::slotFilter);
   connect(actionClearFilter, &QAction::triggered, iconFilter, &QLineEdit::clear);
+  connect(&CWptIconManager::self(), &CWptIconManager::sigChanged, this, &CWptIconSelectWidget::slotWptListChanged);
 
-  iconSelect->updateIconList(iconFilter->text());
+  iconGrid->updateIconList(iconFilter->text());
 }
 
 void CWptIconSelectWidget::slotFilter(const QString& str) {
   actionClearFilter->setIcon(str.isEmpty() ? QIcon("://icons/32x32/Filter.png") : QIcon("://icons/32x32/Cancel.png"));
-
-  iconSelect->updateIconList(iconFilter->text());
-
-  scrollArea->update();
+  iconGrid->updateIconList(iconFilter->text());
 }
+
+void CWptIconSelectWidget::slotWptListChanged() { iconGrid->updateIconList(iconFilter->text()); }

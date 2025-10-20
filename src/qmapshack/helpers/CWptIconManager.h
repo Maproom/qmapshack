@@ -51,8 +51,6 @@ class CWptIconManager : public QObject {
   QString selectWptIcon(QWidget* parent);
   const QImage& iconHighlight();
 
-  QMenu* getWptIconMenu(const QString& title, QObject* obj, const char* slot, QWidget* parent);
-
   QPixmap loadIcon(const QString& path);
 
   const QMap<QString, icon_t>& getWptIcons() { return wptIcons; }
@@ -60,6 +58,9 @@ class CWptIconManager : public QObject {
   QString getNumberedBullet(qint32 n);
 
   void setIconSize(int size);
+
+ signals:
+  void sigChanged();
 
  private:
   friend class CMainWindow;

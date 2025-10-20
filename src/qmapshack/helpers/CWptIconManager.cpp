@@ -22,6 +22,7 @@
 
 #include "helpers/CDraw.h"
 #include "helpers/CSettings.h"
+#include "helpers/CWptIconDialog.h"
 #include "misc.h"
 #include "setup/IAppSetup.h"
 
@@ -43,8 +44,8 @@ const QImage& CWptIconManager::iconHighlight() { return wptHighlightScaled; }
 
 void CWptIconManager::setIconSize(int size) {
   wptSize = size;
-  wptHighlightScaled =
-      wptHighlight.scaled(wptHighlight.size() * size / qreal(DEFAULTICONSIZE), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+  wptHighlightScaled = wptHighlight.scaled(wptHighlight.size() * size / qreal(DEFAULTICONSIZE), Qt::KeepAspectRatio,
+                                           Qt::SmoothTransformation);
 }
 
 void CWptIconManager::removeNumberedBullets() {
@@ -271,6 +272,8 @@ void CWptIconManager::init() {
     QString name = fi.completeBaseName();
     setWptIconByName(name, dirIcon.filePath(filename));
   }
+
+  emit sigChanged();
 }
 
 void CWptIconManager::setWptIconByName(const QString& name, const QString& filename) {
@@ -365,12 +368,9 @@ QPixmap CWptIconManager::getWptIconScaledByName(const QString& name, QPointF& fo
 QString CWptIconManager::selectWptIcon(QWidget* parent) {
   QString icon;
 
-  QMenu* menu = getWptIconMenu("", nullptr, "", parent);
-  QAction* action = menu->exec(QCursor::pos());
-
-  if (action != nullptr) {
-    icon = action->property("iconName").toString();
-  }
+  CWptIconDialog dlg(&CMainWindow::self());
+  connect(&dlg, &CWptIconDialog::sigSelectedIcon, this, [&icon](const QString& name) { icon = name; });
+  dlg.exec();
 
   return icon;
 }
@@ -393,27 +393,4 @@ QString CWptIconManager::getNumberedBullet(qint32 n) {
   pixmap.save(filename);
 
   return filename;
-}
-
-QMenu* CWptIconManager::getWptIconMenu(const QString& title, QObject* obj, const char* slot, QWidget* parent) {
-  QMenu* menu = new QMenu(title, parent);
-  menu->setIcon(QIcon("://icons/waypoints/32x32/PinBlue.png"));
-
-  const QMap<QString, icon_t>& wptIcons = getWptIcons();
-  QStringList keys = wptIcons.keys();
-
-  std::sort(keys.begin(), keys.end(), sortByString);
-
-  for (const QString& key : std::as_const(keys)) {
-    const QString& icon = wptIcons[key].path;
-    QPixmap pixmap = loadIcon(icon);
-
-    QAction* action = menu->addAction(pixmap, key);
-    action->setProperty("iconName", key);
-    if (obj != nullptr) {
-      QAction::connect(action, SIGNAL(triggered(bool)), obj, slot);
-    }
-  }
-
-  return menu;
 }

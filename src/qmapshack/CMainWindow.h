@@ -50,12 +50,24 @@ class CMainWindow : public QMainWindow, private Ui::IMainWindow {
 
   QString getHomePath() { return (homeDir.path() != "" && homeDir.exists()) ? homeDir.absolutePath() : ""; }
 
-  QString getMapsPath() { return (homeDir.path() != "" && homeDir.exists(mapsPath)) ? homeDir.absoluteFilePath(mapsPath) : ""; }
-  QString getDemPath() { return (homeDir.path() != "" && homeDir.exists(demPath)) ? homeDir.absoluteFilePath(demPath) : ""; }
-  QString getRoutinoPath() { return (homeDir.path() != "" && homeDir.exists(routinoPath)) ? homeDir.absoluteFilePath(routinoPath) : ""; }
-  QString getBRouterPath() { return (homeDir.path() != "" && homeDir.exists(brouterPath)) ? homeDir.absoluteFilePath(brouterPath) : ""; }
-  QString getDatabasePath() { return (homeDir.path() != "" && homeDir.exists(databasePath)) ? homeDir.absoluteFilePath(databasePath) : ""; }
-  QString getGpxPath() { return (homeDir.path() != "" && homeDir.exists(gpxPath)) ? homeDir.absoluteFilePath(gpxPath) : ""; }
+  QString getMapsPath() {
+    return (homeDir.path() != "" && homeDir.exists(mapsPath)) ? homeDir.absoluteFilePath(mapsPath) : "";
+  }
+  QString getDemPath() {
+    return (homeDir.path() != "" && homeDir.exists(demPath)) ? homeDir.absoluteFilePath(demPath) : "";
+  }
+  QString getRoutinoPath() {
+    return (homeDir.path() != "" && homeDir.exists(routinoPath)) ? homeDir.absoluteFilePath(routinoPath) : "";
+  }
+  QString getBRouterPath() {
+    return (homeDir.path() != "" && homeDir.exists(brouterPath)) ? homeDir.absoluteFilePath(brouterPath) : "";
+  }
+  QString getDatabasePath() {
+    return (homeDir.path() != "" && homeDir.exists(databasePath)) ? homeDir.absoluteFilePath(databasePath) : "";
+  }
+  QString getGpxPath() {
+    return (homeDir.path() != "" && homeDir.exists(gpxPath)) ? homeDir.absoluteFilePath(gpxPath) : "";
+  }
 
   static QString getUser();
 
@@ -163,7 +175,6 @@ class CMainWindow : public QMainWindow, private Ui::IMainWindow {
   void slotCreateRoutinoDatabase();
   void slotPrintMap();
   void slotTakeScreenshot();
-  void slotSetupWptIcons();
   void slotSanityTest();
   void slotCloseTab();
   void slotToggleDocks();

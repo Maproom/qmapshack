@@ -55,7 +55,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>23</height>
+     <height>19</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -131,7 +131,6 @@
     <addaction name="actionCloseAllProjects"/>
     <addaction name="separator"/>
     <addaction name="actionSetupWorkspace"/>
-    <addaction name="actionSetupWaypointIcons"/>
    </widget>
    <widget class="QMenu" name="menuExtra">
     <property name="title">
@@ -152,7 +151,7 @@
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QDockWidget" name="dockMaps">
    <property name="features">
-    <set>QDockWidget::DockWidgetFeatureMask</set>
+    <set>QDockWidget::DockWidgetFeature::DockWidgetFeatureMask</set>
    </property>
    <property name="windowTitle">
     <string>Maps</string>
@@ -189,7 +188,7 @@
   </widget>
   <widget class="QDockWidget" name="dockDem">
    <property name="features">
-    <set>QDockWidget::DockWidgetFeatureMask</set>
+    <set>QDockWidget::DockWidgetFeature::DockWidgetFeatureMask</set>
    </property>
    <property name="windowTitle">
     <string>Dig. Elev. Model (DEM)</string>
@@ -222,7 +221,7 @@
   </widget>
   <widget class="QDockWidget" name="dockWorkspace">
    <property name="features">
-    <set>QDockWidget::DockWidgetFeatureMask</set>
+    <set>QDockWidget::DockWidgetFeature::DockWidgetFeatureMask</set>
    </property>
    <property name="windowTitle">
     <string>Workspace</string>
@@ -245,7 +244,7 @@
   </widget>
   <widget class="QDockWidget" name="dockDatabase">
    <property name="features">
-    <set>QDockWidget::DockWidgetFeatureMask</set>
+    <set>QDockWidget::DockWidgetFeature::DockWidgetFeatureMask</set>
    </property>
    <property name="windowTitle">
     <string>Database</string>
@@ -257,7 +256,7 @@
   </widget>
   <widget class="QDockWidget" name="dockRte">
    <property name="features">
-    <set>QDockWidget::DockWidgetFeatureMask</set>
+    <set>QDockWidget::DockWidgetFeature::DockWidgetFeatureMask</set>
    </property>
    <property name="windowTitle">
     <string>Routing</string>
@@ -275,7 +274,7 @@
   </widget>
   <widget class="QDockWidget" name="dockRealtime">
    <property name="features">
-    <set>QDockWidget::DockWidgetFeatureMask</set>
+    <set>QDockWidget::DockWidgetFeature::DockWidgetFeatureMask</set>
    </property>
    <property name="windowTitle">
     <string>Realtime</string>
@@ -287,7 +286,7 @@
   </widget>
   <widget class="QDockWidget" name="dockPoi">
    <property name="features">
-    <set>QDockWidget::DockWidgetFeatureMask</set>
+    <set>QDockWidget::DockWidgetFeature::DockWidgetFeatureMask</set>
    </property>
    <property name="windowTitle">
     <string>POI Collections</string>
@@ -333,7 +332,7 @@
     <string>Ctrl+T</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionShowScale">
@@ -348,7 +347,7 @@
     <string>Show Scale</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionSetupMapFont">
@@ -360,7 +359,7 @@
     <string>Setup Map Font</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionShowGrid">
@@ -378,7 +377,7 @@
     <string>Ctrl+G</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionSetupGrid">
@@ -393,7 +392,7 @@
     <string>Ctrl+Alt+G</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionFlipMouseWheel">
@@ -408,7 +407,7 @@
     <string>Flip Mouse Wheel</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionSetupMapPaths">
@@ -423,7 +422,7 @@
     <string>Setup Map Paths</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionPOIText">
@@ -438,7 +437,7 @@
     <string>POI Text</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionNightDay">
@@ -453,7 +452,7 @@
     <string>Night / Day</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionMapToolTip">
@@ -471,7 +470,7 @@
     <string>Ctrl+I</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionSetupDEMPaths">
@@ -483,7 +482,7 @@
     <string>Setup DEM Paths</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionAbout">
@@ -495,7 +494,7 @@
     <string>About</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::AboutRole</enum>
+    <enum>QAction::MenuRole::AboutRole</enum>
    </property>
   </action>
   <action name="actionWiki">
@@ -507,7 +506,7 @@
     <string>Online Wiki</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionSetupMapView">
@@ -522,7 +521,7 @@
     <string>Setup Map View</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionLoadGISData">
@@ -540,7 +539,7 @@
     <string>Ctrl+L</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionSaveGISData">
@@ -558,7 +557,7 @@
     <string>Ctrl+S</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionSetupTimeZone">
@@ -570,7 +569,7 @@
     <string>Setup Timezone</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionAddEmptyProject">
@@ -582,7 +581,7 @@
     <string>Add empty project</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionGeoSearch">
@@ -597,7 +596,7 @@
     <string>Geosearch</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionCloseAllProjects">
@@ -612,7 +611,7 @@
     <string>F8</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionSetupUnits">
@@ -624,7 +623,7 @@
     <string>Setup Units</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionSetupWorkspace">
@@ -639,7 +638,7 @@
     <string>Setup save on exit.</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionImportDatabase">
@@ -654,7 +653,7 @@
     <string>Import QLandkarte GT database</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionVrtBuilder">
@@ -669,7 +668,7 @@
     <string>GUI front end to gdalbuildvrt</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionStoreView">
@@ -684,7 +683,7 @@
     <string>Write current active map and DEM list including the properties to a file</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionLoadView">
@@ -699,7 +698,7 @@
     <string>Restore view with active map and DEM list including the properties from a file</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionProfileIsWindow">
@@ -720,7 +719,7 @@
     <string>Ctrl+E</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionClose">
@@ -735,7 +734,7 @@
     <string>Ctrl+Q</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::QuitRole</enum>
+    <enum>QAction::MenuRole::QuitRole</enum>
    </property>
   </action>
   <action name="actionCloneMapView">
@@ -750,7 +749,7 @@
     <string>Ctrl+Shift+T</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionCreateRoutinoDatabase">
@@ -762,7 +761,7 @@
     <string>Create Routino Database</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionPrintMap">
@@ -780,7 +779,7 @@
     <string>Ctrl+P</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionSetupCoordFormat">
@@ -795,7 +794,7 @@
     <string>Change the format coordinates are displayed</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionSetupMapBackground">
@@ -807,19 +806,7 @@
     <string>Setup Map Background</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
-   </property>
-  </action>
-  <action name="actionSetupWaypointIcons">
-   <property name="icon">
-    <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/SetupWptSym.png</normaloff>:/icons/32x32/SetupWptSym.png</iconset>
-   </property>
-   <property name="text">
-    <string>Setup Waypoint Icons</string>
-   </property>
-   <property name="toolTip">
-    <string>Setup path to custom icons</string>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionCloseTab">

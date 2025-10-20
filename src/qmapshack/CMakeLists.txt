@@ -323,6 +323,7 @@ set( SRCS
     widgets/CDoubleSpinBox.cpp
     widgets/CFadingIcon.cpp
     widgets/CHistoryListWidget.cpp
+    widgets/CIconGrid.cpp
     widgets/CLineEdit.cpp
     widgets/CPhotoAlbum.cpp
     widgets/CSelectDoubleListWidget.cpp
@@ -332,6 +333,7 @@ set( SRCS
     widgets/CTextEditWidget.cpp
     widgets/CTextEditWidgetSelMenu.cpp
     widgets/CTinySpinBox.cpp
+    widgets/CWptIconSelectWidget.cpp
     ../common/help/CHelp.cpp
     ../common/help/CHelpBrowser.cpp
     ../common/help/CHelpIndex.cpp
@@ -690,6 +692,7 @@ set( HDRS
     widgets/CDoubleSpinBox.h
     widgets/CFadingIcon.h
     widgets/CHistoryListWidget.h
+    widgets/CIconGrid.h
     widgets/CLineEdit.h
     widgets/CPhotoAlbum.h
     widgets/CSelectDoubleListWidget.h
@@ -699,6 +702,7 @@ set( HDRS
     widgets/CTextEditWidget.h
     widgets/CTextEditWidgetSelMenu.h
     widgets/CTinySpinBox.h
+    widgets/CWptIconSelectWidget.h
     ../common/help/CHelp.h
     ../common/help/CHelpBrowser.h
     ../common/help/CHelpIndex.h

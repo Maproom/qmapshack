@@ -30,14 +30,7 @@
     <number>3</number>
    </property>
    <item>
-    <widget class="QListWidget" name="listWidget">
-     <property name="iconSize">
-      <size>
-       <width>22</width>
-       <height>22</height>
-      </size>
-     </property>
-    </widget>
+    <widget class="CWptIconSelectWidget" name="widgetIconSelect" native="true"/>
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
@@ -98,6 +91,14 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>CWptIconSelectWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">widgets/CWptIconSelectWidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="../resources.qrc"/>
  </resources>

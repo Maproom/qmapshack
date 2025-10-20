@@ -23,7 +23,6 @@
 #include "CMainWindow.h"
 #include "helpers/CSettings.h"
 #include "helpers/CWptIconManager.h"
-#include "misc.h"
 #include "setup/IAppSetup.h"
 
 CWptIconDialog::CWptIconDialog(CMainWindow* parent) : QDialog(parent) {
@@ -35,30 +34,30 @@ CWptIconDialog::CWptIconDialog(CMainWindow* parent) : QDialog(parent) {
 void CWptIconDialog::setupSignals() { connect(toolPath, &QToolButton::clicked, this, &CWptIconDialog::slotSetupPath); }
 
 void CWptIconDialog::setupList(QObject* obj) {
-  listWidget->clear();
+  // listWidget->clear();
 
-  QString currentIcon = obj == nullptr ? QString() : obj->objectName();
-  QListWidgetItem* currentItem = nullptr;
+  // QString currentIcon = obj == nullptr ? QString() : obj->objectName();
+  // QListWidgetItem* currentItem = nullptr;
 
-  const QMap<QString, CWptIconManager::icon_t>& wptIcons = CWptIconManager::self().getWptIcons();
-  QStringList keys = wptIcons.keys();
+  // const QMap<QString, CWptIconManager::icon_t>& wptIcons = CWptIconManager::self().getWptIcons();
+  // QStringList keys = wptIcons.keys();
 
-  std::sort(keys.begin(), keys.end(), sortByString);
+  // std::sort(keys.begin(), keys.end(), sortByString);
 
-  for (const QString& key : std::as_const(keys)) {
-    const QString& icon = wptIcons[key].path;
-    QPixmap pixmap = CWptIconManager::self().loadIcon(icon);
+  // for (const QString& key : std::as_const(keys)) {
+  //   const QString& icon = wptIcons[key].path;
+  //   QPixmap pixmap = CWptIconManager::self().loadIcon(icon);
 
-    QListWidgetItem* item = new QListWidgetItem(pixmap, key, listWidget);
-    if (currentIcon == key) {
-      currentItem = item;
-    }
-  }
+  //   QListWidgetItem* item = new QListWidgetItem(pixmap, key, listWidget);
+  //   if (currentIcon == key) {
+  //     currentItem = item;
+  //   }
+  // }
 
-  if (currentItem) {
-    listWidget->setCurrentItem(currentItem);
-    listWidget->scrollToItem(currentItem);
-  }
+  // if (currentItem) {
+  //   listWidget->setCurrentItem(currentItem);
+  //   listWidget->scrollToItem(currentItem);
+  // }
 
   SETTINGS;
   QString path =

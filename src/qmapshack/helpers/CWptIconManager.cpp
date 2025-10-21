@@ -368,10 +368,38 @@ QPixmap CWptIconManager::getWptIconScaledByName(const QString& name, QPointF& fo
 QString CWptIconManager::selectWptIcon(QWidget* parent) {
   QString icon;
 
-  CWptIconDialog dlg(&CMainWindow::self());
-  connect(&dlg, &CWptIconDialog::sigSelectedIcon, this, [&icon](const QString& name) { icon = name; });
-  dlg.exec();
+  // create a menu of the last N selected icons
+  QPointer<QMenu> menu = getWptIconMenu(parent);
 
+  // add an action that summons the wayoint icon dialog
+  QAction* more = menu->addAction(tr("more..."));
+  connect(more, &QAction::triggered, this, [&icon, this](bool) {
+    CWptIconDialog dlg(&CMainWindow::self());
+    connect(&dlg, &CWptIconDialog::sigSelectedIcon, this, [&icon](const QString& name) { icon = name; });
+    dlg.exec();
+  });
+
+  // display the menu and block until mouse click
+  QAction* action = menu->exec(QCursor::pos());
+
+  // the action pointer is null if no menu item has been clicked
+  // ignore the "more..." action
+  if (action != nullptr && action != more) {
+    icon = action->property("iconName").toString();
+  }
+
+  // prepend the list of last icons by the new icon, if any
+  if (!icon.isEmpty()) {
+    SETTINGS;
+    QStringList lastIcons = cfg.value("Icons/lastIcons", {"Waypoint"}).toStringList();
+    if (!lastIcons.contains(icon)) {
+      lastIcons.push_front(icon);
+    }
+    if (lastIcons.size() > 10) {
+      lastIcons.pop_back();
+    }
+    cfg.setValue("Icons/lastIcons", lastIcons);
+  }
   return icon;
 }
 
@@ -393,4 +421,22 @@ QString CWptIconManager::getNumberedBullet(qint32 n) {
   pixmap.save(filename);
 
   return filename;
+}
+
+QMenu* CWptIconManager::getWptIconMenu(QWidget* parent) {
+  QMenu* menu = new QMenu(parent);
+
+  SETTINGS;
+  const QStringList& lastIcons = cfg.value("Icons/lastIcons", {"Waypoint"}).toStringList();
+  const QMap<QString, icon_t>& wptIcons = getWptIcons();
+
+  for (const QString& key : lastIcons) {
+    const QString& icon = wptIcons[key].path;
+    const QPixmap& pixmap = loadIcon(icon);
+
+    QAction* action = menu->addAction(pixmap, key);
+    action->setProperty("iconName", key);
+  }
+
+  return menu;
 }

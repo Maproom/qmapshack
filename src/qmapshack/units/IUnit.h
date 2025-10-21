@@ -147,8 +147,6 @@ class IUnit : public QObject {
 
   static slope_mode_e slopeMode;
 
-  static QDateTime parseTimestamp(const QString& timetext, int& tzoffset);
-
   static tz_mode_e timeZoneMode;
   static QByteArray timeZone;
   static bool useShortFormat;

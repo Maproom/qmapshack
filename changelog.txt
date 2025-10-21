@@ -1,3 +1,5 @@
+V1.XX.X
+[QMS-672] Fix track point timestamps to QDateTime UTC conversion
 [QMS-841] Fix waypoint names to match the Garmin symbols
 [QMS-843] Add waypoint icons
 [QMS-847] Remove duplicate Parking Area waypoint icon

@@ -651,68 +651,8 @@ void IUnit::seconds2time(quint32 ttime, QString& val, QString& unit) const {
 }
 
 bool IUnit::parseTimestamp(const QString& time, QDateTime& datetime) {
-  int tzoffset;
-  datetime = parseTimestamp(time, tzoffset);
-
+  datetime = QDateTime::fromString(time, Qt::ISODateWithMs);
   return datetime.isValid();
-}
-
-QDateTime IUnit::parseTimestamp(const QString& timetext, int& tzoffset) {
-  static const QRegularExpression tzRE("[-+]\\d\\d:\\d\\d$");
-  int i;
-
-  tzoffset = 0;
-  bool applyTzOffset = false;
-
-  QString format = "yyyy-MM-dd'T'hh:mm:ss";
-
-  i = timetext.indexOf(".");
-  if (i != NOIDX) {
-    if (timetext[i + 1] == '0') {
-      format += ".zzz";
-    } else {
-      format += ".z";
-    }
-  }
-
-  // trailing "Z" explicitly declares the timestamp to be UTC
-  if (timetext.indexOf("Z") != NOIDX) {
-    format += "'Z'";
-    applyTzOffset = true;
-  } else if ((i = timetext.indexOf(tzRE)) != NOIDX) {
-    // trailing timezone offset [-+]HH:MM present
-    // This does not match the original intentions of the GPX
-    // file format but appears to be found occasionally in
-    // the wild.  Try our best parsing it.
-
-    // add the literal string to the format so fromString()
-    // will succeed
-    format += "'";
-    format += timetext.right(6);
-    format += "'";
-
-    // calculate the offset
-    int offsetHours(timetext.mid(i + 1, 2).toUInt());
-    int offsetMinutes(timetext.mid(i + 4, 2).toUInt());
-    if (timetext[i] == '-') {
-      tzoffset = -(60 * offsetHours + offsetMinutes);
-    } else {
-      tzoffset = 60 * offsetHours + offsetMinutes;
-    }
-    tzoffset *= 60;  // seconds
-    applyTzOffset = true;
-  }
-
-  QDateTime datetime = QDateTime::fromString(timetext, format);
-
-  if (applyTzOffset) {
-    datetime.setTimeZone(QTimeZone::fromSecondsAheadOfUtc(tzoffset));
-  } else {  // if timetext has no 'Z' and no [-+]HH:MM then this is local time then simply switch to UTC without
-            // applying any offset
-    datetime = datetime.toUTC();
-  }
-
-  return datetime;
 }
 
 QString IUnit::datetime2string(const QDateTime& time, time_format_e format, const QPointF& pos) {

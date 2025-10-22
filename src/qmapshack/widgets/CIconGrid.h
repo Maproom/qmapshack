@@ -29,7 +29,7 @@ class CIconGrid : public QWidget {
  public:
   CIconGrid(QScrollArea *parent);
 
-  void updateIconList(const QString &filter);
+  void updateIconList(const QString &filter, const QString &category);
 
   static constexpr int kTileSize = 64;
 

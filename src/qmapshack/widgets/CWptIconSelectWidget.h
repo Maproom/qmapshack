@@ -26,6 +26,7 @@ class QBoxLayout;
 class CIconGrid;
 class QLabel;
 class QLineEdit;
+class QComboBox;
 
 class CWptIconSelectWidget : public QWidget {
   Q_OBJECT
@@ -37,14 +38,17 @@ class CWptIconSelectWidget : public QWidget {
   void sigSelectedIcon(const QString& name);
 
  private slots:
-  void slotFilter(const QString& str);
+  void slotFilterChanged(const QString& str);
+  void slotCategoryChanged(const QString& str);
   void slotWptListChanged();
 
  private:
   QScrollArea* scrollArea;
-  QBoxLayout* layout;
+  QBoxLayout* layout1;
   QLabel* iconName;
   QLineEdit* iconFilter;
+  QComboBox* categoryFilter;
+  QBoxLayout* layout2;
   CIconGrid* iconGrid;
   QAction* actionClearFilter;
 };

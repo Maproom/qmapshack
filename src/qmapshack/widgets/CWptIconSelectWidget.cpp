@@ -19,6 +19,7 @@
 #include "CWptIconSelectWidget.h"
 
 #include <helpers/CWptIconManager.h>
+#include <qcombobox.h>
 
 #include <QBoxLayout>
 #include <QLabel>
@@ -58,24 +59,56 @@ CWptIconSelectWidget::CWptIconSelectWidget(QWidget* parent) : QWidget(parent) {
   iconFilter->setToolTip(tr("Filter: Start to type and the list will be reduced to matching items."));
   iconFilter->addAction(actionClearFilter, QLineEdit::TrailingPosition);
 
-  layout = new QBoxLayout(QBoxLayout::TopToBottom, this);
-  layout->setContentsMargins(0, 0, 0, 0);
-  layout->addWidget(iconFilter);
-  layout->addWidget(iconName);
-  layout->addWidget(scrollArea);
+  categoryFilter = new QComboBox(this);
+
+  layout1 = new QBoxLayout(QBoxLayout::TopToBottom, this);
+  layout1->setContentsMargins(0, 0, 0, 0);
+
+  layout2 = new QBoxLayout(QBoxLayout::LeftToRight, this);
+  layout2->setContentsMargins(0, 0, 0, 0);
+  layout2->addWidget(categoryFilter);
+  layout2->addWidget(iconFilter);
+
+  layout1->addLayout(layout2);
+  layout1->addWidget(iconName);
+  layout1->addWidget(scrollArea);
+
+  setLayout(layout1);
 
   connect(iconGrid, &CIconGrid::sigIconName, iconName, &QLabel::setText);
   connect(iconGrid, &CIconGrid::sigSelectedIcon, this, &CWptIconSelectWidget::sigSelectedIcon);
-  connect(iconFilter, &QLineEdit::textChanged, this, &CWptIconSelectWidget::slotFilter);
+  connect(iconFilter, &QLineEdit::textChanged, this, &CWptIconSelectWidget::slotFilterChanged);
+  connect(categoryFilter, &QComboBox::currentTextChanged, this, &CWptIconSelectWidget::slotCategoryChanged);
   connect(actionClearFilter, &QAction::triggered, iconFilter, &QLineEdit::clear);
   connect(&CWptIconManager::self(), &CWptIconManager::sigChanged, this, &CWptIconSelectWidget::slotWptListChanged);
 
-  iconGrid->updateIconList(iconFilter->text());
+  slotWptListChanged();
 }
 
-void CWptIconSelectWidget::slotFilter(const QString& str) {
+void CWptIconSelectWidget::slotFilterChanged(const QString& str) {
   actionClearFilter->setIcon(str.isEmpty() ? QIcon("://icons/32x32/Filter.png") : QIcon("://icons/32x32/Cancel.png"));
-  iconGrid->updateIconList(iconFilter->text());
+  iconGrid->updateIconList(str, categoryFilter->currentText());
 }
 
-void CWptIconSelectWidget::slotWptListChanged() { iconGrid->updateIconList(iconFilter->text()); }
+void CWptIconSelectWidget::slotCategoryChanged(const QString& str) {
+  iconGrid->updateIconList(iconFilter->text(), str);
+}
+
+void CWptIconSelectWidget::slotWptListChanged() {
+  iconFilter->clear();
+  categoryFilter->clear();
+
+  QSet<QString> categories;
+  const QList<CWptIconManager::icon_t>& icons = CWptIconManager::self().getWptIcons().values();
+  for (const CWptIconManager::icon_t& icon : icons) {
+    for (const QString& category : icon.categories) {
+      categories.insert(category);
+    }
+  }
+  categories.insert("");
+  QStringList categoriesSorted = categories.values();
+  categoriesSorted.sort();
+  categoryFilter->addItems(categoriesSorted);
+
+  iconGrid->updateIconList("", "");
+}

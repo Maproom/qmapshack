@@ -70,6 +70,11 @@ void IScrOpt::leaveEvent(QEvent* e) {
   }
 }
 
+void IScrOpt::paintEvent(QPaintEvent* e) {
+  QPainter p(this);
+  draw(p);
+}
+
 void IScrOpt::slotLinkActivated(const QString& link) {
   if (link.startsWith("http")) {
     QDesktopServices::openUrl(QUrl(link));

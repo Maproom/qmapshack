@@ -20,13 +20,12 @@
 #define ISCROPT_H
 
 #include <QMouseEvent>
-#include <QPixmap>
 #include <QPointer>
-#include <QRect>
 #include <QSemaphore>
 #include <QWidget>
 
 class IMouse;
+class QMouseEvent;
 
 #define SCR_OPT_OFFSET 15
 
@@ -54,6 +53,8 @@ class IScrOpt : public QWidget {
   void mousePressEvent(QMouseEvent* e) override { e->accept(); }
   // block mouse actions to hit the canvas
   void mouseMoveEvent(QMouseEvent* e) override { e->accept(); }
+
+  void paintEvent(QPaintEvent* e);
 
   void moveTo(const QPoint& anchor);
 

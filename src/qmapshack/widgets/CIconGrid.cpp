@@ -89,6 +89,7 @@ void CIconGrid::resizeEvent(QResizeEvent *e) {
   cols = e->size().width() / kTileSize;
   rows = ceil(icons.size() / float(cols));
   setIndexFocus(-1);
+  setMinimumWidth(cols * kTileSize);
   setMinimumHeight(rows * kTileSize);
   repaint();
 }

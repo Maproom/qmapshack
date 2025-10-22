@@ -32,6 +32,8 @@ class CIconGrid : public QWidget {
   void updateIconList(const QString &filter, const QString &category);
 
   static constexpr int kTileSize = 64;
+  static constexpr int kVisibleRows = 5;
+  static constexpr int kVisibleCols = 8;
 
  signals:
   void sigIconName(const QString &name);

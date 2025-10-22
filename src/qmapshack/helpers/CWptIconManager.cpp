@@ -346,26 +346,22 @@ void CWptIconManager::init() {
   setWptIconByName("Virtual Cache", "://icons/geocaching/icons/virtual.png", {tr("geocache")}, {});
   setWptIconByName("Webcam Cache", "://icons/geocaching/icons/webcam.png", {tr("geocache")}, {});
 
-  setWptIconByName("gray_Traditional Cache", createGrayscale("://icons/geocaching/icons/traditional.png"),
+  setWptIconByName("gray_Traditional Cache", "://icons/geocaching/icons/gray_Traditional Cache.png", {tr("geocache")},
+                   {});
+  setWptIconByName("gray_Multi-Cache", "://icons/geocaching/icons/gray_Multi-Cache.png", {tr("geocache")}, {});
+  setWptIconByName("gray_Unknown Cache", "://icons/geocaching/icons/gray_Unknown Cache.png", {tr("geocache")}, {});
+  setWptIconByName("gray_Wherigo Cache", "://icons/geocaching/icons/gray_Wherigo Cache.png", {tr("geocache")}, {});
+  setWptIconByName("gray_Event Cache", "://icons/geocaching/icons/gray_Event Cache.png", {tr("geocache")}, {});
+  setWptIconByName("gray_Mega-Event Cache", "://icons/geocaching/icons/gray_Mega-Event Cache.png", {tr("geocache")},
+                   {});
+  setWptIconByName("gray_Giga-Event Cache", "://icons/geocaching/icons/gray_Giga-Event Cache.png", {tr("geocache")},
+                   {});
+  setWptIconByName("gray_Cache In Trash Out Event", "://icons/geocaching/icons/gray_Cache In Trash Out Event.png",
                    {tr("geocache")}, {});
-  setWptIconByName("gray_Multi-Cache", createGrayscale("://icons/geocaching/icons/multi.png"), {tr("geocache")}, {});
-  setWptIconByName("gray_Unknown Cache", createGrayscale("://icons/geocaching/icons/unknown.png"), {tr("geocache")},
-                   {});
-  setWptIconByName("gray_Wherigo Cache", createGrayscale("://icons/geocaching/icons/wherigo.png"), {tr("geocache")},
-                   {});
-  setWptIconByName("gray_Event Cache", createGrayscale("://icons/geocaching/icons/event.png"), {tr("geocache")}, {});
-  setWptIconByName("gray_Mega-Event Cache", createGrayscale("://icons/geocaching/icons/mega.png"), {tr("geocache")},
-                   {});
-  setWptIconByName("gray_Giga-Event Cache", createGrayscale("://icons/geocaching/icons/giga.png"), {tr("geocache")},
-                   {});
-  setWptIconByName("gray_Cache In Trash Out Event", createGrayscale("://icons/geocaching/icons/cito.png"),
-                   {tr("geocache")}, {});
-  setWptIconByName("gray_Earthcache", createGrayscale("://icons/geocaching/icons/earth.png"), {tr("geocache")}, {});
-  setWptIconByName("gray_Letterbox Cache", createGrayscale("://icons/geocaching/icons/letterbox.png"), {tr("geocache")},
-                   {});
-  setWptIconByName("gray_Virtual Cache", createGrayscale("://icons/geocaching/icons/virtual.png"), {tr("geocache")},
-                   {});
-  setWptIconByName("gray_Webcam Cache", createGrayscale("://icons/geocaching/icons/webcam.png"), {tr("geocache")}, {});
+  setWptIconByName("gray_Earthcache", "://icons/geocaching/icons/gray_Earthcache.png", {tr("geocache")}, {});
+  setWptIconByName("gray_Letterbox Cache", "://icons/geocaching/icons/gray_Letterbox Cache.png", {tr("geocache")}, {});
+  setWptIconByName("gray_Virtual Cache", "://icons/geocaching/icons/gray_Virtual Cache.png", {tr("geocache")}, {});
+  setWptIconByName("gray_Webcam Cache", "://icons/geocaching/icons/gray_Webcam Cache.png", {tr("geocache")}, {});
 
   SETTINGS;
   QDir dirIcon(

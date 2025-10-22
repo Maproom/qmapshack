@@ -38,6 +38,9 @@ CWptIconSelectWidget::CWptIconSelectWidget(QWidget* parent) : QWidget(parent) {
   scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
   scrollArea->verticalScrollBar()->setSingleStep(CIconGrid::kTileSize);
   scrollArea->setWidgetResizable(true);
+  scrollArea->setMinimumHeight(CIconGrid::kVisibleRows * CIconGrid::kTileSize);
+  scrollArea->setMinimumWidth(CIconGrid::kVisibleCols * CIconGrid::kTileSize);
+
   iconGrid = new CIconGrid(scrollArea);
   scrollArea->setWidget(iconGrid);
 
@@ -50,7 +53,7 @@ CWptIconSelectWidget::CWptIconSelectWidget(QWidget* parent) : QWidget(parent) {
   actionClearFilter = new QAction(this);
   actionClearFilter->setObjectName("actionClearFilter");
   QIcon icon4;
-  icon4.addFile(QString::fromUtf8(":/icons/32x32/Filter.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
+  icon4.addFile(QString(":/icons/32x32/Filter.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
   actionClearFilter->setIcon(icon4);
   actionClearFilter->setText(tr("Clear Filter"));
 

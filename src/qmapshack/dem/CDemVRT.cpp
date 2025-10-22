@@ -113,7 +113,10 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent) : IDem(parent), file
   isActivated = true;
 }
 
-CDemVRT::~CDemVRT() { GDALClose(dataset); }
+CDemVRT::~CDemVRT() {
+  threadPool.waitForDone();
+  GDALClose(dataset);
+}
 
 void CDemVRT::slotNeedsRedraw() { threadPool.clear(); }
 

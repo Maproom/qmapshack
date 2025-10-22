@@ -19,6 +19,7 @@
 #ifndef CWPTICONSELECTWIDGET_H
 #define CWPTICONSELECTWIDGET_H
 
+#include <QPointer>
 #include <QWidget>
 
 class QScrollArea;
@@ -27,6 +28,7 @@ class CIconGrid;
 class QLabel;
 class QLineEdit;
 class QComboBox;
+class QCompleter;
 
 class CWptIconSelectWidget : public QWidget {
   Q_OBJECT
@@ -43,10 +45,12 @@ class CWptIconSelectWidget : public QWidget {
   void slotWptListChanged();
 
  private:
+  void updateIconList(const QString& filter, const QString& category);
   QScrollArea* scrollArea;
   QBoxLayout* layout1;
   QLabel* iconName;
   QLineEdit* iconFilter;
+  QPointer<QCompleter> iconFilterCompleter;
   QComboBox* categoryFilter;
   QBoxLayout* layout2;
   CIconGrid* iconGrid;

@@ -26,7 +26,7 @@
 
 CIconGrid::CIconGrid(QScrollArea *parent) : QWidget(parent), scrollArea(parent) { setMouseTracking(true); }
 
-void CIconGrid::updateIconList(const QString &filter, const QString &category) {
+QStringList CIconGrid::updateIconList(const QString &filter, const QString &category) {
   QMap<QString, CWptIconManager::icon_t> availableIcons;
 
   // filter by category
@@ -62,9 +62,21 @@ void CIconGrid::updateIconList(const QString &filter, const QString &category) {
     }
   }
 
+  QSet<QString> availableTags;
+  const QStringList &keys = icons.keys();
+  for (const QString &key : keys) {
+    const CWptIconManager::icon_t &icon = icons[key];
+    availableTags.insert(key);
+    for (const QString &tag : icon.tags) {
+      availableTags.insert(tag);
+    }
+  }
+
   setIndexFocus(-1);
   scrollArea->verticalScrollBar()->setValue(0);
   QCoreApplication::postEvent(this, new QResizeEvent(size(), QSize()));
+
+  return availableTags.values();
 }
 
 void CIconGrid::mouseMoveEvent(QMouseEvent *e) {

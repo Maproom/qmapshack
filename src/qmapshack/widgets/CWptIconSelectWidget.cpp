@@ -20,6 +20,7 @@
 
 #include <helpers/CWptIconManager.h>
 #include <qcombobox.h>
+#include <qcompleter.h>
 
 #include <QBoxLayout>
 #include <QLabel>
@@ -76,8 +77,6 @@ CWptIconSelectWidget::CWptIconSelectWidget(QWidget* parent) : QWidget(parent) {
   layout1->addWidget(iconName);
   layout1->addWidget(scrollArea);
 
-  setLayout(layout1);
-
   connect(iconGrid, &CIconGrid::sigIconName, iconName, &QLabel::setText);
   connect(iconGrid, &CIconGrid::sigSelectedIcon, this, &CWptIconSelectWidget::sigSelectedIcon);
   connect(iconFilter, &QLineEdit::textChanged, this, &CWptIconSelectWidget::slotFilterChanged);
@@ -90,12 +89,10 @@ CWptIconSelectWidget::CWptIconSelectWidget(QWidget* parent) : QWidget(parent) {
 
 void CWptIconSelectWidget::slotFilterChanged(const QString& str) {
   actionClearFilter->setIcon(str.isEmpty() ? QIcon("://icons/32x32/Filter.png") : QIcon("://icons/32x32/Cancel.png"));
-  iconGrid->updateIconList(str, categoryFilter->currentText());
+  updateIconList(str, categoryFilter->currentText());
 }
 
-void CWptIconSelectWidget::slotCategoryChanged(const QString& str) {
-  iconGrid->updateIconList(iconFilter->text(), str);
-}
+void CWptIconSelectWidget::slotCategoryChanged(const QString& str) { updateIconList(iconFilter->text(), str); }
 
 void CWptIconSelectWidget::slotWptListChanged() {
   iconFilter->clear();
@@ -113,5 +110,14 @@ void CWptIconSelectWidget::slotWptListChanged() {
   categoriesSorted.sort();
   categoryFilter->addItems(categoriesSorted);
 
-  iconGrid->updateIconList("", "");
+  updateIconList("", "");
+}
+void CWptIconSelectWidget::updateIconList(const QString& filter, const QString& category) {
+  const QStringList& tags = iconGrid->updateIconList(filter, category);
+
+  iconFilterCompleter = new QCompleter(tags, this);
+  iconFilterCompleter->setCaseSensitivity(Qt::CaseInsensitive);
+  iconFilterCompleter->setFilterMode(Qt::MatchContains);
+  iconFilterCompleter->setCompletionMode(QCompleter::UnfilteredPopupCompletion);
+  iconFilter->setCompleter(iconFilterCompleter);
 }

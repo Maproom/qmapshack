@@ -687,6 +687,8 @@
         <file>../icons/waypoints/32x32/DiamondBlue.png</file>
         <file>../icons/waypoints/32x32/DiamondGreen.png</file>
         <file>../icons/waypoints/32x32/DiamondRed.png</file>
+        <file>../icons/waypoints/32x32/DiverDownFlag1.png</file>
+        <file>../icons/waypoints/32x32/DiverDownFlag2.png</file>
         <file>../icons/waypoints/32x32/End.png</file>
         <file>../icons/waypoints/32x32/Favorite.png</file>
         <file>../icons/waypoints/32x32/FirstAid.png</file>
@@ -710,6 +712,7 @@
         <file>../icons/waypoints/32x32/LetterDBlue.png</file>
         <file>../icons/waypoints/32x32/LetterDGreen.png</file>
         <file>../icons/waypoints/32x32/LetterDRed.png</file>
+        <file>../icons/waypoints/32x32/ManOverboard.png</file>
         <file>../icons/waypoints/32x32/MiddleFork.png</file>
         <file>../icons/waypoints/32x32/Number0Blue.png</file>
         <file>../icons/waypoints/32x32/Number0Green.png</file>

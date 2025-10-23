@@ -473,6 +473,22 @@ void CWptIconManager::init() {
     },
 
     {
+      {16,16}, "Diver Down Flag 1", "://icons/waypoints/32x32/DiverDownFlag1.png",
+      {tr("marine")},
+      {tr("diver down flag")}
+    },
+    {
+      {16,16}, "Diver Down Flag 2", "://icons/waypoints/32x32/DiverDownFlag2.png",
+      {tr("marine")},
+      {tr("diver down flag")}
+    },
+    {
+      {16,16}, "Man Overboard", "://icons/waypoints/32x32/ManOverboard.png",
+      {tr("marine")},
+      {tr("man overboard")}
+    },
+
+    {
       {16,16}, "1st Category", "://icons/waypoints/32x32/1stCategory.png",
       {tr("cycling")},
       {tr("category")}

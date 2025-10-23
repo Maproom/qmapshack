@@ -752,6 +752,21 @@ void CWptIconManager::init() {
       {tr("bank"), tr("building")}
     },
     {
+      {16,16}, "Bank, Euro", "://icons/poi/png/bank_euro.png",
+      {tr("poi")},
+      {tr("bank"), tr("building")}
+    },
+    {
+      {16,16}, "Bank, Pound", "://icons/poi/png/bank_pound.png",
+      {tr("poi")},
+      {tr("bank"), tr("building")}
+    },
+    {
+      {16,16}, "Bank, Yen", "://icons/poi/png/bank_yen.png",
+      {tr("poi")},
+      {tr("bank"), tr("building")}
+    },
+    {
       {16,16}, "Church", "://icons/poi/SJJB/png/place_of_worship_unknown.n.32.png",
       {tr("poi")},
       {tr("church"), tr("building")}

@@ -842,9 +842,19 @@ void CWptIconManager::init() {
       {tr("ferry")}
     },
     {
+      {16,16}, "Seaplane Base", "://icons/poi/png/seaplane_base.png",
+      {tr("poi"), tr("transport"), tr("marine")},
+      {tr("seaplane")}
+    },
+    {
       {16,16}, "Ground Transportation", "://icons/poi/SJJB/png/transport_bus_stop.n.32.png",
       {tr("poi"), tr("transport")},
       {tr("transportation")}
+    },
+    {
+      {16,16}, "Funicular", "://icons/poi/png/funicular.png",
+      {tr("poi"), tr("transport")},
+      {tr("funicular")}
     },
     {
       {16,16}, "Railway", "://icons/poi/SJJB/png/transport_train_station.n.32.png",

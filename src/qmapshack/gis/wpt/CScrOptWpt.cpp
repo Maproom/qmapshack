@@ -71,78 +71,91 @@ CScrOptWpt::~CScrOptWpt() {}
 
 void CScrOptWpt::slotDelete() {
   CScrOptSemaphoreLocker lock(*this);
+  hide();
   CGisWorkspace::self().delItemByKey(key);
   close();
 }
 
 void CScrOptWpt::slotEdit() {
   CScrOptSemaphoreLocker lock(*this);
+  hide();
   CGisWorkspace::self().editItemByKey(key);
   close();
 }
 
 void CScrOptWpt::slotCopy() {
   CScrOptSemaphoreLocker lock(*this);
+  hide();
   CGisWorkspace::self().copyItemByKey(key);
   close();
 }
 
 void CScrOptWpt::slotCoordToClipboard() {
   CScrOptSemaphoreLocker lock(*this);
+  hide();
   CGisWorkspace::self().copyWptCoordByKey(key);
   close();
 }
 
 void CScrOptWpt::slotMove() {
   CScrOptSemaphoreLocker lock(*this);
+  hide();
   CGisWorkspace::self().moveWptByKey(key);
   close();
 }
 
 void CScrOptWpt::slotProj() {
   CScrOptSemaphoreLocker lock(*this);
+  hide();
   CGisWorkspace::self().projWptByKey(key);
   close();
 }
 
 void CScrOptWpt::slotBubble() {
   CScrOptSemaphoreLocker lock(*this);
+  hide();
   CGisWorkspace::self().toggleWptBubble(key);
   close();
 }
 
 void CScrOptWpt::slotDeleteRadius() {
   CScrOptSemaphoreLocker lock(*this);
+  hide();
   CGisWorkspace::self().deleteWptRadius(key);
   close();
 }
 
 void CScrOptWpt::slotNogoArea() {
   CScrOptSemaphoreLocker lock(*this);
+  hide();
   CGisWorkspace::self().toggleNogoItem(key);
   close();
 }
 
 void CScrOptWpt::slotEditRadius() {
   CScrOptSemaphoreLocker lock(*this);
+  hide();
   CGisWorkspace::self().editWptRadius(key);
   close();
 }
 
 void CScrOptWpt::slotAddElevation() {
   CScrOptSemaphoreLocker lock(*this);
+  hide();
   CGisWorkspace::self().addEleToWptTrkByKey({key});
   close();
 }
 
 void CScrOptWpt::slotSearchWeb() {
   CScrOptSemaphoreLocker lock(*this);
+  hide();
   CGisWorkspace::self().searchWebByKey(key);
   close();
 }
 
 void CScrOptWpt::slotTags() {
   CScrOptSemaphoreLocker lock(*this);
+  hide();
   CGisWorkspace::self().tagItemsByKey({key});
   close();
 }

@@ -65,66 +65,77 @@ CScrOptRte::~CScrOptRte() {}
 
 void CScrOptRte::slotEditDetails() {
   CScrOptSemaphoreLocker lock(*this);
+  hide();
   CGisWorkspace::self().editItemByKey(key);
   close();
 }
 
 void CScrOptRte::slotDelete() {
   CScrOptSemaphoreLocker lock(*this);
+  hide();
   CGisWorkspace::self().delItemByKey(key);
   close();
 }
 
 void CScrOptRte::slotCopy() {
   CScrOptSemaphoreLocker lock(*this);
+  hide();
   CGisWorkspace::self().copyItemByKey(key);
   close();
 }
 
 void CScrOptRte::slotCalc() {
   CScrOptSemaphoreLocker lock(*this);
+  hide();
   CGisWorkspace::self().calcRteByKey(key);
   close();
 }
 
 void CScrOptRte::slotReset() {
   CScrOptSemaphoreLocker lock(*this);
+  hide();
   CGisWorkspace::self().resetRteByKey(key);
   close();
 }
 
 void CScrOptRte::slotEdit() {
   CScrOptSemaphoreLocker lock(*this);
+  hide();
   CGisWorkspace::self().editRteByKey(key);
   close();
 }
 
 void CScrOptRte::slotReverse() {
   CScrOptSemaphoreLocker lock(*this);
+  hide();
   CGisWorkspace::self().reverseRteByKey(key);
   close();
 }
 
 void CScrOptRte::slotInstruction(bool on) {
   CScrOptSemaphoreLocker lock(*this);
+  hide();
   CGisWorkspace::self().focusRteByKey(on, key);
   close();
 }
 
 void CScrOptRte::slotToTrack() {
   CScrOptSemaphoreLocker lock(*this);
+  hide();
   CGisWorkspace::self().convertRouteToTrack(key);
   close();
 }
 
 void CScrOptRte::slotNogo() {
   CScrOptSemaphoreLocker lock(*this);
+  hide();
   CGisWorkspace::self().toggleNogoItem(key);
   close();
 }
 
 void CScrOptRte::slotTags() {
   CScrOptSemaphoreLocker lock(*this);
+  hide();
   CGisWorkspace::self().tagItemsByKey({key});
   close();
 }

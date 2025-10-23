@@ -55,36 +55,42 @@ CScrOptOvlArea::~CScrOptOvlArea() {}
 
 void CScrOptOvlArea::slotEditDetails() {
   CScrOptSemaphoreLocker lock(*this);
+  hide();
   CGisWorkspace::self().editItemByKey(key);
   close();
 }
 
 void CScrOptOvlArea::slotCopy() {
   CScrOptSemaphoreLocker lock(*this);
+  hide();
   CGisWorkspace::self().copyItemByKey(key);
   close();
 }
 
 void CScrOptOvlArea::slotDelete() {
   CScrOptSemaphoreLocker lock(*this);
+  hide();
   CGisWorkspace::self().delItemByKey(key);
   close();
 }
 
 void CScrOptOvlArea::slotEdit() {
   CScrOptSemaphoreLocker lock(*this);
+  hide();
   CGisWorkspace::self().editAreaByKey(key);
   close();
 }
 
 void CScrOptOvlArea::slotNogo() {
   CScrOptSemaphoreLocker lock(*this);
+  hide();
   CGisWorkspace::self().toggleNogoItem(key);
   close();
 }
 
 void CScrOptOvlArea::slotTags() {
   CScrOptSemaphoreLocker lock(*this);
+  hide();
   CGisWorkspace::self().tagItemsByKey({key});
   close();
 }

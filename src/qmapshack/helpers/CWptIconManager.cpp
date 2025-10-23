@@ -502,6 +502,11 @@ void CWptIconManager::init() {
       {tr("square")}
     },
     {
+      {16,16}, "Dog Unknown", "://icons/waypoints/32x32/DogUnknown.png",
+      {tr("markers")},
+      {tr("dog")}
+    },
+    {
       {16,16}, "Waypoint", "://icons/waypoints/32x32/Waypoint.png",
       {tr("markers")},
       {tr("waypoint"), tr("dot")}
@@ -536,6 +541,11 @@ void CWptIconManager::init() {
       {16,16}, "Restricted Area", "://icons/waypoints/32x32/RestrictedArea.png",
       {tr("marine")},
       {tr("area")}
+    },
+    {
+      {16,16}, "Beacon", "://icons/waypoints/32x32/Beacon.png",
+      {tr("marine")},
+      {tr("beacon")}
     },
     {
       {16,16}, "Coast Guard", "://icons/waypoints/32x32/CoastGuard.png",
@@ -1115,6 +1125,11 @@ void CWptIconManager::init() {
       {16,16}, "Webcam Cache", "://icons/geocaching/icons/webcam.png",
       {tr("geocache")},
       {tr("webcam cache")}
+    },
+    {
+      {16,16}, "Puzzle Cache", "://icons/waypoints/32x32/PuzzleCache.png",
+      {tr("geocache")},
+      {tr("puzzle cache")}
     },
 
     {

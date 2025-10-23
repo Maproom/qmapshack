@@ -673,6 +673,7 @@
         <file>../icons/waypoints/32x32/3rdCategory.png</file>
         <file>../icons/waypoints/32x32/4thCategory.png</file>
         <file>../icons/waypoints/32x32/BallPark.png</file>
+        <file>../icons/waypoints/32x32/Beacon.png</file>
         <file>../icons/waypoints/32x32/BoxBlue.png</file>
         <file>../icons/waypoints/32x32/BoxGreen.png</file>
         <file>../icons/waypoints/32x32/BoxRed.png</file>
@@ -695,6 +696,7 @@
         <file>../icons/waypoints/32x32/DiamondRed.png</file>
         <file>../icons/waypoints/32x32/DiverDownFlag1.png</file>
         <file>../icons/waypoints/32x32/DiverDownFlag2.png</file>
+        <file>../icons/waypoints/32x32/DogUnknown.png</file>
         <file>../icons/waypoints/32x32/DotWhite.png</file>
         <file>../icons/waypoints/32x32/End.png</file>
         <file>../icons/waypoints/32x32/Exit.png</file>
@@ -773,6 +775,7 @@
         <file>../icons/waypoints/32x32/PinGreen.png</file>
         <file>../icons/waypoints/32x32/PinRed.png</file>
         <file>../icons/waypoints/32x32/PrivateField.png</file>
+        <file>../icons/waypoints/32x32/PuzzleCache.png</file>
         <file>../icons/waypoints/32x32/RectangleBlue.png</file>
         <file>../icons/waypoints/32x32/RectangleGreen.png</file>
         <file>../icons/waypoints/32x32/RectangleRed.png</file>

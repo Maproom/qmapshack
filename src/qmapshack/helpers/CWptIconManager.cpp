@@ -457,6 +457,26 @@ void CWptIconManager::init() {
       {tr("trail head")}
     },
     {
+      {16,16}, "Ball Park", "://icons/waypoints/32x32/BallPark.png",
+      {tr("markers")},
+      {tr("circle")}
+    },
+    {
+      {16,16}, "Circle with X", "://icons/waypoints/32x32/CircleWithX.png",
+      {tr("markers")},
+      {tr("circle")}
+    },
+    {
+      {16,16}, "Private Field", "://icons/waypoints/32x32/PrivateField.png",
+      {tr("markers")},
+      {tr("circle")}
+    },
+    {
+      {16,16}, "Soft Field", "://icons/waypoints/32x32/SoftField.png",
+      {tr("markers")},
+      {tr("circle")}
+    },
+    {
       {16,16}, "Contact, Smiley", "://icons/cache/32x32/found.png",
       {tr("markers")},
       {tr("smiley")}

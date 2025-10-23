@@ -672,12 +672,14 @@
         <file>../icons/waypoints/32x32/2ndCategory.png</file>
         <file>../icons/waypoints/32x32/3rdCategory.png</file>
         <file>../icons/waypoints/32x32/4thCategory.png</file>
+        <file>../icons/waypoints/32x32/BallPark.png</file>
         <file>../icons/waypoints/32x32/BoxBlue.png</file>
         <file>../icons/waypoints/32x32/BoxGreen.png</file>
         <file>../icons/waypoints/32x32/BoxRed.png</file>
         <file>../icons/waypoints/32x32/CircleBlue.png</file>
         <file>../icons/waypoints/32x32/CircleGreen.png</file>
         <file>../icons/waypoints/32x32/CircleRed.png</file>
+        <file>../icons/waypoints/32x32/CircleWithX.png</file>
         <file>../icons/waypoints/32x32/CityCapitol.png</file>
         <file>../icons/waypoints/32x32/CityLarge.png</file>
         <file>../icons/waypoints/32x32/CityMedium.png</file>
@@ -752,6 +754,7 @@
         <file>../icons/waypoints/32x32/PinBlue.png</file>
         <file>../icons/waypoints/32x32/PinGreen.png</file>
         <file>../icons/waypoints/32x32/PinRed.png</file>
+        <file>../icons/waypoints/32x32/PrivateField.png</file>
         <file>../icons/waypoints/32x32/RectangleBlue.png</file>
         <file>../icons/waypoints/32x32/RectangleGreen.png</file>
         <file>../icons/waypoints/32x32/RectangleRed.png</file>
@@ -763,6 +766,7 @@
         <file>../icons/waypoints/32x32/SharpRight.png</file>
         <file>../icons/waypoints/32x32/SlightLeft.png</file>
         <file>../icons/waypoints/32x32/SlightRight.png</file>
+        <file>../icons/waypoints/32x32/SoftField.png</file>
         <file>../icons/waypoints/32x32/Sprint.png</file>
         <file>../icons/waypoints/32x32/SquareBlue.png</file>
         <file>../icons/waypoints/32x32/SquareGreen.png</file>

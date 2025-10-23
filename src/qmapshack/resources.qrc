@@ -674,6 +674,7 @@
         <file>../icons/waypoints/32x32/4thCategory.png</file>
         <file>../icons/waypoints/32x32/BallPark.png</file>
         <file>../icons/waypoints/32x32/Beacon.png</file>
+        <file>../icons/waypoints/32x32/BikeTrail.png</file>
         <file>../icons/waypoints/32x32/BoxBlue.png</file>
         <file>../icons/waypoints/32x32/BoxGreen.png</file>
         <file>../icons/waypoints/32x32/BoxRed.png</file>
@@ -688,6 +689,7 @@
         <file>../icons/waypoints/32x32/Civil.png</file>
         <file>../icons/waypoints/32x32/CoastGuard.png</file>
         <file>../icons/waypoints/32x32/ControlledArea.png</file>
+        <file>../icons/waypoints/32x32/Crossing.png</file>
         <file>../icons/waypoints/32x32/Danger.png</file>
         <file>../icons/waypoints/32x32/DangerArea.png</file>
         <file>../icons/waypoints/32x32/Default.png</file>

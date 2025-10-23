@@ -452,6 +452,11 @@ void CWptIconManager::init() {
       {tr("flag")}
     },
     {
+      {16,16}, "Crossing", "://icons/waypoints/32x32/Crossing.png",
+      {tr("markers")},
+      {tr("crossing")}
+    },
+    {
       {0,31}, "Flag", "://icons/waypoints/32x32/FlagRed.png",
       {tr("markers")},
       {tr("flag")}
@@ -460,6 +465,11 @@ void CWptIconManager::init() {
       {16,16}, "Trail Head", "://icons/cache/32x32/trailhead.png",
       {tr("markers")},
       {tr("trail head")}
+    },
+    {
+      {16,16}, "Bike Trail", "://icons/waypoints/32x32/BikeTrail.png",
+      {tr("markers")},
+      {tr("bike trail")}
     },
     {
       {16,16}, "Ball Park", "://icons/waypoints/32x32/BallPark.png",

@@ -24,59 +24,12 @@
 #include <QResizeEvent>
 #include <QScrollBar>
 
-CIconGrid::CIconGrid(QScrollArea *parent) : QWidget(parent), scrollArea(parent) { setMouseTracking(true); }
+CIconGrid::CIconGrid(QScrollArea *parent) : QWidget(parent) { setMouseTracking(true); }
 
-QStringList CIconGrid::updateIconList(const QString &filter, const QString &category) {
-  QMap<QString, CWptIconManager::icon_t> availableIcons;
-
-  // filter by category
-  if (category.isEmpty()) {
-    availableIcons = CWptIconManager::self().getWptIcons();
-  } else {
-    const QMap<QString, CWptIconManager::icon_t> &icons = CWptIconManager::self().getWptIcons();
-    const QStringList &keys = icons.keys();
-    for (const QString &key : keys) {
-      if (icons[key].categories.contains(category)) {
-        availableIcons[key] = icons[key];
-      }
-    }
-  }
-
-  // filter by name and tags
-  if (filter.isEmpty()) {
-    icons = availableIcons;
-  } else {
-    icons.clear();
-    const QList<QString> &keys = availableIcons.keys();
-    for (const QString &key : keys) {
-      const CWptIconManager::icon_t &icon = availableIcons[key];
-
-      if (key.contains(filter, Qt::CaseInsensitive)) {
-        icons[key] = icon;
-      } else {
-        const QStringList &tags = icon.tags;
-        if (!tags.filter(filter, Qt::CaseInsensitive).isEmpty()) {
-          icons[key] = icon;
-        }
-      }
-    }
-  }
-
-  QSet<QString> availableTags;
-  const QStringList &keys = icons.keys();
-  for (const QString &key : keys) {
-    const CWptIconManager::icon_t &icon = icons[key];
-    availableTags.insert(key);
-    for (const QString &tag : icon.tags) {
-      availableTags.insert(tag);
-    }
-  }
-
+void CIconGrid::updateIconList(const QMap<QString, CWptIconManager::icon_t> &visibleIcons) {
+  icons = visibleIcons;
   setIndexFocus(-1);
-  scrollArea->verticalScrollBar()->setValue(0);
   QCoreApplication::postEvent(this, new QResizeEvent(size(), QSize()));
-
-  return availableTags.values();
 }
 
 void CIconGrid::mouseMoveEvent(QMouseEvent *e) {

@@ -29,7 +29,7 @@ class CIconGrid : public QWidget {
  public:
   CIconGrid(QScrollArea *parent);
 
-  QStringList updateIconList(const QString &filter, const QString &category);
+  void updateIconList(const QMap<QString, CWptIconManager::icon_t> &visibleIcons);
 
   static constexpr int kTileSize = 64;
   static constexpr int kVisibleRows = 5;
@@ -53,8 +53,6 @@ class CIconGrid : public QWidget {
   int indexFocus = -1;
   int rows = -1;
   int cols = -1;
-
-  QScrollArea *scrollArea;
 };
 
 #endif  // CICONGRID_H

@@ -33,7 +33,7 @@
 
 #include "widgets/CIconGrid.h"
 
-CWptIconSelectWidget::CWptIconSelectWidget(QWidget* parent) : QWidget(parent) {
+CWptIconSelectWidget::CWptIconSelectWidget(QWidget *parent) : QWidget(parent) {
   scrollArea = new QScrollArea(this);
   scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
@@ -87,21 +87,21 @@ CWptIconSelectWidget::CWptIconSelectWidget(QWidget* parent) : QWidget(parent) {
   slotWptListChanged();
 }
 
-void CWptIconSelectWidget::slotFilterChanged(const QString& str) {
+void CWptIconSelectWidget::slotFilterChanged(const QString &str) {
   actionClearFilter->setIcon(str.isEmpty() ? QIcon("://icons/32x32/Filter.png") : QIcon("://icons/32x32/Cancel.png"));
   updateIconList(str, categoryFilter->currentText());
 }
 
-void CWptIconSelectWidget::slotCategoryChanged(const QString& str) { updateIconList(iconFilter->text(), str); }
+void CWptIconSelectWidget::slotCategoryChanged(const QString &str) { updateIconList(iconFilter->text(), str); }
 
 void CWptIconSelectWidget::slotWptListChanged() {
   iconFilter->clear();
   categoryFilter->clear();
 
   QSet<QString> categories;
-  const QList<CWptIconManager::icon_t>& icons = CWptIconManager::self().getWptIcons().values();
-  for (const CWptIconManager::icon_t& icon : icons) {
-    for (const QString& category : icon.categories) {
+  const QList<CWptIconManager::icon_t> &icons = CWptIconManager::self().getWptIcons().values();
+  for (const CWptIconManager::icon_t &icon : icons) {
+    for (const QString &category : icon.categories) {
       categories.insert(category);
     }
   }
@@ -112,12 +112,58 @@ void CWptIconSelectWidget::slotWptListChanged() {
 
   updateIconList("", "");
 }
-void CWptIconSelectWidget::updateIconList(const QString& filter, const QString& category) {
-  const QStringList& tags = iconGrid->updateIconList(filter, category);
+void CWptIconSelectWidget::updateIconList(const QString &filter, const QString &category) {
+  QMap<QString, CWptIconManager::icon_t> availableIcons;
+  QMap<QString, CWptIconManager::icon_t> visibleIcons;
 
-  iconFilterCompleter = new QCompleter(tags, this);
+  // filter by category
+  if (category.isEmpty()) {
+    availableIcons = CWptIconManager::self().getWptIcons();
+  } else {
+    const QMap<QString, CWptIconManager::icon_t> &icons = CWptIconManager::self().getWptIcons();
+    const QStringList &keys = icons.keys();
+    for (const QString &key : keys) {
+      if (icons[key].categories.contains(category)) {
+        availableIcons[key] = icons[key];
+      }
+    }
+  }
+
+  // filter by name and tags
+  if (filter.isEmpty()) {
+    visibleIcons = availableIcons;
+  } else {
+    visibleIcons.clear();
+    const QList<QString> &keys = availableIcons.keys();
+    for (const QString &key : keys) {
+      const CWptIconManager::icon_t &icon = availableIcons[key];
+
+      if (key.contains(filter, Qt::CaseInsensitive)) {
+        visibleIcons[key] = icon;
+      } else {
+        const QStringList &tags = icon.tags;
+        if (!tags.filter(filter, Qt::CaseInsensitive).isEmpty()) {
+          visibleIcons[key] = icon;
+        }
+      }
+    }
+  }
+
+  QSet<QString> availableTags;
+  const QStringList &keys = visibleIcons.keys();
+  for (const QString &key : keys) {
+    const CWptIconManager::icon_t &icon = visibleIcons[key];
+    availableTags.insert(key);
+    for (const QString &tag : icon.tags) {
+      availableTags.insert(tag);
+    }
+  }
+
+  iconFilterCompleter = new QCompleter(availableTags.values(), this);
   iconFilterCompleter->setCaseSensitivity(Qt::CaseInsensitive);
   iconFilterCompleter->setFilterMode(Qt::MatchContains);
   iconFilterCompleter->setCompletionMode(QCompleter::UnfilteredPopupCompletion);
   iconFilter->setCompleter(iconFilterCompleter);
+  iconGrid->updateIconList(visibleIcons);
+  scrollArea->verticalScrollBar()->setValue(0);
 }

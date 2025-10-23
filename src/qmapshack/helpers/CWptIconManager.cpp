@@ -447,6 +447,11 @@ void CWptIconManager::init() {
       {tr("favorite")}
     },
     {
+      {16,16}, "Civil", "://icons/waypoints/32x32/Civil.png",
+      {tr("markers")},
+      {tr("flag")}
+    },
+    {
       {0,31}, "Flag", "://icons/waypoints/32x32/FlagRed.png",
       {tr("markers")},
       {tr("flag")}
@@ -531,6 +536,11 @@ void CWptIconManager::init() {
       {16,16}, "Restricted Area", "://icons/waypoints/32x32/RestrictedArea.png",
       {tr("marine")},
       {tr("area")}
+    },
+    {
+      {16,16}, "Coast Guard", "://icons/waypoints/32x32/CoastGuard.png",
+      {tr("marine")},
+      {tr("flag")}
     },
 
     {

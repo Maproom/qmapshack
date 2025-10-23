@@ -684,6 +684,8 @@
         <file>../icons/waypoints/32x32/CityLarge.png</file>
         <file>../icons/waypoints/32x32/CityMedium.png</file>
         <file>../icons/waypoints/32x32/CitySmall.png</file>
+        <file>../icons/waypoints/32x32/Civil.png</file>
+        <file>../icons/waypoints/32x32/CoastGuard.png</file>
         <file>../icons/waypoints/32x32/ControlledArea.png</file>
         <file>../icons/waypoints/32x32/Danger.png</file>
         <file>../icons/waypoints/32x32/DangerArea.png</file>

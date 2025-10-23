@@ -487,6 +487,16 @@ void CWptIconManager::init() {
       {tr("smiley")}
     },
     {
+      {16,16}, "Dot, White", "://icons/waypoints/32x32/DotWhite.png",
+      {tr("markers")},
+      {tr("square")}
+    },
+    {
+      {16,16}, "Exit", "://icons/waypoints/32x32/Exit.png",
+      {tr("markers")},
+      {tr("square")}
+    },
+    {
       {16,16}, "Waypoint", "://icons/waypoints/32x32/Waypoint.png",
       {tr("markers")},
       {tr("waypoint"), tr("dot")}

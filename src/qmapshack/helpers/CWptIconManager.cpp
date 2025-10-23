@@ -837,6 +837,11 @@ void CWptIconManager::init() {
       {tr("marina")}
     },
     {
+      {16,16}, "Ferry", "://icons/poi/SJJB/png/transport_port.n.32.png",
+      {tr("poi"), tr("transport"), tr("marine")},
+      {tr("ferry")}
+    },
+    {
       {16,16}, "Ground Transportation", "://icons/poi/SJJB/png/transport_bus_stop.n.32.png",
       {tr("poi"), tr("transport")},
       {tr("transportation")}

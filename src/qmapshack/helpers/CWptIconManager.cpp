@@ -487,6 +487,21 @@ void CWptIconManager::init() {
       {tr("marine")},
       {tr("man overboard")}
     },
+    {
+      {16,16}, "Controlled Area", "://icons/waypoints/32x32/ControlledArea.png",
+      {tr("marine")},
+      {tr("area")}
+    },
+    {
+      {16,16}, "Danger Area", "://icons/waypoints/32x32/DangerArea.png",
+      {tr("marine")},
+      {tr("area")}
+    },
+    {
+      {16,16}, "Restricted Area", "://icons/waypoints/32x32/RestrictedArea.png",
+      {tr("marine")},
+      {tr("area")}
+    },
 
     {
       {16,16}, "1st Category", "://icons/waypoints/32x32/1stCategory.png",

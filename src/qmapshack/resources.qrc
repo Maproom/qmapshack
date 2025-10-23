@@ -682,7 +682,9 @@
         <file>../icons/waypoints/32x32/CityLarge.png</file>
         <file>../icons/waypoints/32x32/CityMedium.png</file>
         <file>../icons/waypoints/32x32/CitySmall.png</file>
+        <file>../icons/waypoints/32x32/ControlledArea.png</file>
         <file>../icons/waypoints/32x32/Danger.png</file>
+        <file>../icons/waypoints/32x32/DangerArea.png</file>
         <file>../icons/waypoints/32x32/Default.png</file>
         <file>../icons/waypoints/32x32/DiamondBlue.png</file>
         <file>../icons/waypoints/32x32/DiamondGreen.png</file>
@@ -754,6 +756,7 @@
         <file>../icons/waypoints/32x32/RectangleGreen.png</file>
         <file>../icons/waypoints/32x32/RectangleRed.png</file>
         <file>../icons/waypoints/32x32/Residence.png</file>
+        <file>../icons/waypoints/32x32/RestrictedArea.png</file>
         <file>../icons/waypoints/32x32/Right.png</file>
         <file>../icons/waypoints/32x32/RightFork.png</file>
         <file>../icons/waypoints/32x32/SharpLeft.png</file>

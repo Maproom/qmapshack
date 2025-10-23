@@ -39,11 +39,9 @@ class CWptIconManager : public QObject {
   static CWptIconManager& self() { return *pSelf; }
 
   struct icon_t {
-    icon_t() : focus(16, 16) {}
-    icon_t(const QString& path, int x, int y, const QStringList& categories, const QStringList& tags)
-        : path(path), focus(x, y), categories(categories), tags(tags) {}
+    QPoint focus = {16, 16};
+    QString name;
     QString path;
-    QPoint focus;
     QStringList categories;
     QStringList tags;
   };
@@ -54,7 +52,7 @@ class CWptIconManager : public QObject {
   QString selectWptIcon(QWidget* parent);
   const QImage& iconHighlight();
   QPixmap loadIcon(const QString& path);
-  const QMap<QString, icon_t>& getWptIcons() { return wptIcons; }
+  const QList<icon_t>& getWptIcons() { return wptIcons; }
   QString getNumberedBullet(qint32 n);
   void setIconSize(int size);
 
@@ -65,9 +63,10 @@ class CWptIconManager : public QObject {
   friend class CMainWindow;
   CWptIconManager(QObject* parent);
 
+  icon_t& findIconByName(const QString& name, bool& ok);
+
   void setWptIconByName(const QString& name, const QString& filename, const QStringList& categories,
                         const QStringList& tags);
-  void setWptIconByName(const QString& name, const QPixmap& icon, const QStringList &categories, const QStringList &tags);
   void removeNumberedBullets();
   QMenu* getWptIconMenu(QWidget* parent);
 
@@ -79,7 +78,7 @@ class CWptIconManager : public QObject {
 
   QFont lastFont;
 
-  QMap<QString, icon_t> wptIcons;
+  QList<icon_t> wptIcons;
 
   QMap<qint32, QString> mapNumberedBullets;
 

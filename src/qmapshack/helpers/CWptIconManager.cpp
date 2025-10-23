@@ -23,7 +23,6 @@
 #include "helpers/CDraw.h"
 #include "helpers/CSettings.h"
 #include "helpers/CWptIconDialog.h"
-#include "misc.h"
 #include "setup/IAppSetup.h"
 
 CWptIconManager* CWptIconManager::pSelf = nullptr;
@@ -65,303 +64,964 @@ QPixmap CWptIconManager::createGrayscale(QString path) {
 }
 
 void CWptIconManager::init() {
-  wptIcons.clear();
+  // clang-format off
+  wptIcons = {
+    {
+      {16,16}, "Default", wptDefault,
+      {tr("markers")},
+      {}
+    },
+    {
+      {16,16}, "City (Capitol)", "://icons/waypoints/32x32/CityCapitol.png",
+      {tr("markers")},
+      {tr("dot"), tr("city")}
+    },
+    {
+      {16,16}, "City (Large)", "://icons/waypoints/32x32/CityLarge.png",
+      {tr("markers")},
+      {tr("dot"), tr("city")}
+    },
+    {
+      {16,16}, "City (Medium)", "://icons/waypoints/32x32/CityMedium.png",
+      {tr("markers")},
+      {tr("dot"), tr("city")}
+    },
+    {
+      {16,16}, "City (Small)", "://icons/waypoints/32x32/CitySmall.png",
+      {tr("markers")},
+      {tr("dot"), tr("city")}
+    },
+    {
+      {0,32}, "Flag, Red", "://icons/waypoints/32x32/FlagRed.png",
+      {tr("markers")},
+      {tr("flag"), tr("red")}
+    },
+    {
+      {0,32}, "Flag, Blue", "://icons/waypoints/32x32/FlagBlue.png",
+      {tr("markers")},
+      {tr("flag"), tr("blue")}
+    },
+    {
+      {0,32}, "Flag, Green", "://icons/waypoints/32x32/FlagGreen.png",
+      {tr("markers")},
+      {tr("flag"), tr("green")}
+    },
+    {
+      {0,32}, "Pin, Red", "://icons/waypoints/32x32/PinRed.png",
+      {tr("markers")},
+      {tr("pin"), tr("red")}
+    },
+    {
+      {0,32}, "Pin, Blue", "://icons/waypoints/32x32/PinBlue.png",
+      {tr("markers")},
+      {tr("pin"), tr("blue")}
+    },
+    {
+      {0,32}, "Pin, Green", "://icons/waypoints/32x32/PinGreen.png",
+      {tr("markers")},
+      {tr("pin"), tr("green")}
+    },
+    {
+      {16,16}, "Block, Red", "://icons/waypoints/32x32/BoxRed.png",
+      {tr("markers")},
+      {tr("block"), tr("red"),tr("shape")}
+    },
+    {
+      {16,16}, "Block, Blue", "://icons/waypoints/32x32/BoxBlue.png",
+      {tr("markers")},
+      {tr("block"), tr("blue"),tr("shape")}
+    },
+    {
+      {16,16}, "Block, Green", "://icons/waypoints/32x32/BoxGreen.png",
+      {tr("markers")},
+      {tr("block"), tr("green"),tr("shape")}
+    },
+    {
+      {16,16}, "Circle, Red", "://icons/waypoints/32x32/CircleRed.png",
+      {tr("markers")},
+      {tr("circle"), tr("red"),tr("shape")}
+    },
+    {
+      {16,16}, "Circle, Blue", "://icons/waypoints/32x32/CircleBlue.png",
+      {tr("markers")},
+      {tr("circle"), tr("blue"),tr("shape")}
+    },
+    {
+      {16,16}, "Circle, Green", "://icons/waypoints/32x32/CircleGreen.png",
+      {tr("markers")},
+      {tr("circle"), tr("green"),tr("shape")}
+    },
+    {
+      {16,16}, "Diamond, Red", "://icons/waypoints/32x32/DiamondRed.png",
+      {tr("markers")},
+      {tr("diamond"), tr("red"),tr("shape")}
+    },
+    {
+      {16,16}, "Diamond, Blue", "://icons/waypoints/32x32/DiamondBlue.png",
+      {tr("markers")},
+      {tr("diamond"), tr("blue"),tr("shape")}
+    },
+    {
+      {16,16}, "Diamond, Green", "://icons/waypoints/32x32/DiamondGreen.png",
+      {tr("markers")},
+      {tr("diamond"), tr("green"),tr("shape")}
+    },
+    {
+      {16,16}, "Oval, Red", "://icons/waypoints/32x32/OvalRed.png",
+      {tr("markers")},
+      {tr("oval"), tr("red"),tr("shape")}
+    },
+    {
+      {16,16}, "Oval, Blue", "://icons/waypoints/32x32/OvalBlue.png",
+      {tr("markers")},
+      {tr("oval"), tr("blue"),tr("shape")}
+    },
+    {
+      {16,16}, "Oval, Green", "://icons/waypoints/32x32/OvalGreen.png",
+      {tr("markers")},
+      {tr("oval"), tr("green"),tr("shape")}
+    },
+    {
+      {16,16}, "Rectangle, Red", "://icons/waypoints/32x32/RectangleRed.png",
+      {tr("markers")},
+      {tr("rectangle"), tr("red"),tr("shape")}
+    },
+    {
+      {16,16}, "Rectangle, Blue", "://icons/waypoints/32x32/RectangleBlue.png",
+      {tr("markers")},
+      {tr("rectangle"), tr("blue"),tr("shape")}
+    },
+    {
+      {16,16}, "Rectangle, Green", "://icons/waypoints/32x32/RectangleGreen.png",
+      {tr("markers")},
+      {tr("rectangle"), tr("green"),tr("shape")}
+    },
+    {
+      {16,16}, "Square, Red", "://icons/waypoints/32x32/SquareRed.png",
+      {tr("markers")},
+      {tr("square"), tr("red"),tr("shape")}
+    },
+    {
+      {16,16}, "Square, Blue", "://icons/waypoints/32x32/SquareBlue.png",
+      {tr("markers")},
+      {tr("square"), tr("blue"),tr("shape")}
+    },
+    {
+      {16,16}, "Square, Green", "://icons/waypoints/32x32/SquareGreen.png",
+      {tr("markers")},
+      {tr("square"), tr("green"),tr("shape")}
+    },
+    {
+      {16,16}, "Triangle, Red", "://icons/waypoints/32x32/TriangleRed.png",
+      {tr("markers")},
+      {tr("triangle"), tr("red"),tr("shape")}
+    },
+    {
+      {16,16}, "Triangle, Blue", "://icons/waypoints/32x32/TriangleBlue.png",
+      {tr("markers")},
+      {tr("triangle"), tr("blue"),tr("shape")}
+    },
+    {
+      {16,16}, "Triangle, Green", "://icons/waypoints/32x32/TriangleGreen.png",
+      {tr("markers")},
+      {tr("triangle"), tr("green"),tr("shape")}
+    },
+    {
+      {16,16}, "Letter A, Red", "://icons/waypoints/32x32/LetterARed.png",
+      {tr("markers")},
+      {tr("letter"), tr("red"), tr("alphanumerical")}
+    },
+    {
+      {16,16}, "Letter A, Blue", "://icons/waypoints/32x32/LetterABlue.png",
+      {tr("markers")},
+      {tr("letter"), tr("blue"), tr("alphanumerical")}
+    },
+    {
+      {16,16}, "Letter A, Green", "://icons/waypoints/32x32/LetterAGreen.png",
+      {tr("markers")},
+      {tr("letter"), tr("green"), tr("alphanumerical")}
+    },
+    {
+      {16,16}, "Letter B, Red", "://icons/waypoints/32x32/LetterBRed.png",
+      {tr("markers")},
+      {tr("letter"), tr("red"), tr("alphanumerical")}
+    },
+    {
+      {16,16}, "Letter B, Blue", "://icons/waypoints/32x32/LetterBBlue.png",
+      {tr("markers")},
+      {tr("letter"), tr("blue"), tr("alphanumerical")}
+    },
+    {
+      {16,16}, "Letter B, Green", "://icons/waypoints/32x32/LetterBGreen.png",
+      {tr("markers")},
+      {tr("letter"), tr("green"), tr("alphanumerical")}
+    },
+    {
+      {16,16}, "Letter C, Red", "://icons/waypoints/32x32/LetterCRed.png",
+      {tr("markers")},
+      {tr("letter"), tr("red"), tr("alphanumerical")}
+    },
+    {
+      {16,16}, "Letter C, Blue", "://icons/waypoints/32x32/LetterCBlue.png",
+      {tr("markers")},
+      {tr("letter"), tr("blue"), tr("alphanumerical")}
+    },
+    {
+      {16,16}, "Letter C, Green", "://icons/waypoints/32x32/LetterCGreen.png",
+      {tr("markers")},
+      {tr("letter"), tr("green"), tr("alphanumerical")}
+    },
+    {
+      {16,16}, "Letter D, Red", "://icons/waypoints/32x32/LetterDRed.png",
+      {tr("markers")},
+      {tr("letter"), tr("red"), tr("alphanumerical")}
+    },
+    {
+      {16,16}, "Letter D, Blue", "://icons/waypoints/32x32/LetterDBlue.png",
+      {tr("markers")},
+      {tr("letter"), tr("blue"), tr("alphanumerical")}
+    },
+    {
+      {16,16}, "Letter D, Green", "://icons/waypoints/32x32/LetterDGreen.png",
+      {tr("markers")},
+      {tr("letter"), tr("green"), tr("alphanumerical")}
+    },
+    {
+      {16,16}, "Number 0, Red", "://icons/waypoints/32x32/Number0Red.png",
+      {tr("markers")},
+      {tr("number"), tr("red"), tr("alphanumerical")}
+    },
+    {
+      {16,16}, "Number 0, Blue", "://icons/waypoints/32x32/Number0Blue.png",
+      {tr("markers")},
+      {tr("number"), tr("blue"), tr("alphanumerical")}
+    },
+    {
+      {16,16}, "Number 0, Green", "://icons/waypoints/32x32/Number0Green.png",
+      {tr("markers")},
+      {tr("number"), tr("green"), tr("alphanumerical")}
+    },
+    {
+      {16,16}, "Number 1, Red", "://icons/waypoints/32x32/Number1Red.png",
+      {tr("markers")},
+      {tr("number"), tr("red"), tr("alphanumerical")}
+    },
+    {
+      {16,16}, "Number 1, Blue", "://icons/waypoints/32x32/Number1Blue.png",
+      {tr("markers")},
+      {tr("number"), tr("blue"), tr("alphanumerical")}
+    },
+    {
+      {16,16}, "Number 1, Green", "://icons/waypoints/32x32/Number1Green.png",
+      {tr("markers")},
+      {tr("number"), tr("green"), tr("alphanumerical")}
+    },
+    {
+      {16,16}, "Number 2, Red", "://icons/waypoints/32x32/Number2Red.png",
+      {tr("markers")},
+      {tr("number"), tr("red"), tr("alphanumerical")}
+    },
+    {
+      {16,16}, "Number 2, Blue", "://icons/waypoints/32x32/Number2Blue.png",
+      {tr("markers")},
+      {tr("number"), tr("blue"), tr("alphanumerical")}
+    },
+    {
+      {16,16}, "Number 2, Green", "://icons/waypoints/32x32/Number2Green.png",
+      {tr("markers")},
+      {tr("number"), tr("green"), tr("alphanumerical")}
+    },
+    {
+      {16,16}, "Number 3, Red", "://icons/waypoints/32x32/Number3Red.png",
+      {tr("markers")},
+      {tr("number"), tr("red"), tr("alphanumerical")}
+    },
+    {
+      {16,16}, "Number 3, Blue", "://icons/waypoints/32x32/Number3Blue.png",
+      {tr("markers")},
+      {tr("number"), tr("blue"), tr("alphanumerical")}
+    },
+    {
+      {16,16}, "Number 3, Green", "://icons/waypoints/32x32/Number3Green.png",
+      {tr("markers")},
+      {tr("number"), tr("green"), tr("alphanumerical")}
+    },
+    {
+      {16,16}, "Number 4, Red", "://icons/waypoints/32x32/Number4Red.png",
+      {tr("markers")},
+      {tr("number"), tr("red"), tr("alphanumerical")}
+    },
+    {
+      {16,16}, "Number 4, Blue", "://icons/waypoints/32x32/Number4Blue.png",
+      {tr("markers")},
+      {tr("number"), tr("blue"), tr("alphanumerical")}
+    },
+    {
+      {16,16}, "Number 4, Green", "://icons/waypoints/32x32/Number4Green.png",
+      {tr("markers")},
+      {tr("number"), tr("green"), tr("alphanumerical")}
+    },
+    {
+      {16,16}, "Number 5, Red", "://icons/waypoints/32x32/Number5Red.png",
+      {tr("markers")},
+      {tr("number"), tr("red"), tr("alphanumerical")}
+    },
+    {
+      {16,16}, "Number 5, Blue", "://icons/waypoints/32x32/Number5Blue.png",
+      {tr("markers")},
+      {tr("number"), tr("blue"), tr("alphanumerical")}
+    },
+    {
+      {16,16}, "Number 5, Green", "://icons/waypoints/32x32/Number5Green.png",
+      {tr("markers")},
+      {tr("number"), tr("green"), tr("alphanumerical")}
+    },
+    {
+      {16,16}, "Number 6, Red", "://icons/waypoints/32x32/Number6Red.png",
+      {tr("markers")},
+      {tr("number"), tr("red"), tr("alphanumerical")}
+    },
+    {
+      {16,16}, "Number 6, Blue", "://icons/waypoints/32x32/Number6Blue.png",
+      {tr("markers")},
+      {tr("number"), tr("blue"), tr("alphanumerical")}
+    },
+    {
+      {16,16}, "Number 6, Green", "://icons/waypoints/32x32/Number6Green.png",
+      {tr("markers")},
+      {tr("number"), tr("green"), tr("alphanumerical")}
+    },
+    {
+      {16,16}, "Number 7, Red", "://icons/waypoints/32x32/Number7Red.png",
+      {tr("markers")},
+      {tr("number"), tr("red"), tr("alphanumerical")}
+    },
+    {
+      {16,16}, "Number 7, Blue", "://icons/waypoints/32x32/Number7Blue.png",
+      {tr("markers")},
+      {tr("number"), tr("blue"), tr("alphanumerical")}
+    },
+    {
+      {16,16}, "Number 7, Green", "://icons/waypoints/32x32/Number7Green.png",
+      {tr("markers")},
+      {tr("number"), tr("green"), tr("alphanumerical")}
+    },
+    {
+      {16,16}, "Number 8, Red", "://icons/waypoints/32x32/Number8Red.png",
+      {tr("markers")},
+      {tr("number"), tr("red"), tr("alphanumerical")}
+    },
+    {
+      {16,16}, "Number 8, Blue", "://icons/waypoints/32x32/Number8Blue.png",
+      {tr("markers")},
+      {tr("number"), tr("blue"), tr("alphanumerical")}
+    },
+    {
+      {16,16}, "Number 8, Green", "://icons/waypoints/32x32/Number8Green.png",
+      {tr("markers")},
+      {tr("number"), tr("green"), tr("alphanumerical")}
+    },
+    {
+      {16,16}, "Number 9, Red", "://icons/waypoints/32x32/Number9Red.png",
+      {tr("markers")},
+      {tr("number"), tr("red"), tr("alphanumerical")}
+    },
+    {
+      {16,16}, "Number 9, Blue", "://icons/waypoints/32x32/Number9Blue.png",
+      {tr("markers")},
+      {tr("number"), tr("blue"), tr("alphanumerical")}
+    },
+    {
+      {16,16}, "Number 9, Green", "://icons/waypoints/32x32/Number9Green.png",
+      {tr("markers")},
+      {tr("number"), tr("green"), tr("alphanumerical")}
+    },
+    {
+      {16,16}, "Residence", "://icons/waypoints/32x32/Residence.png",
+      {tr("markers")},
+      {tr("residence"), tr("building")}
+    },
+    {
+      {16,16}, "Favorite", "://icons/waypoints/32x32/Favorite.png",
+      {tr("markers")},
+      {tr("favorite")}
+    },
+    {
+      {0,31}, "Flag", "://icons/waypoints/32x32/FlagRed.png",
+      {tr("markers")},
+      {tr("flag")}
+    },
+    {
+      {16,16}, "Trail Head", "://icons/cache/32x32/trailhead.png",
+      {tr("markers")},
+      {tr("trail head")}
+    },
+    {
+      {16,16}, "Contact, Smiley", "://icons/cache/32x32/found.png",
+      {tr("markers")},
+      {tr("smiley")}
+    },
+    {
+      {16,16}, "Sad Face", "://icons/cache/32x32/dnf.png",
+      {tr("markers")},
+      {tr("smiley")}
+    },
+    {
+      {16,16}, "Waypoint", "://icons/waypoints/32x32/Waypoint.png",
+      {tr("markers")},
+      {tr("waypoint"), tr("dot")}
+    },
 
-  wptIcons["Default"] = icon_t(wptDefault, 16, 16, {tr("markers")}, {});
-  wptIcons["City (Capitol)"] = icon_t("://icons/waypoints/32x32/CityCapitol.png", 16, 16, {tr("markers")}, {tr("dot")});
-  wptIcons["City (Large)"] = icon_t("://icons/waypoints/32x32/CityLarge.png", 16, 16, {tr("markers")}, {tr("dot")});
-  wptIcons["City (Medium)"] = icon_t("://icons/waypoints/32x32/CityMedium.png", 16, 16, {tr("markers")}, {tr("dot")});
-  wptIcons["City (Small)"] = icon_t("://icons/waypoints/32x32/CitySmall.png", 16, 16, {tr("markers")}, {tr("dot")});
-  wptIcons["Flag, Red"] = icon_t("://icons/waypoints/32x32/FlagRed.png", 0, 32, {tr("markers")}, {});
-  wptIcons["Flag, Blue"] = icon_t("://icons/waypoints/32x32/FlagBlue.png", 0, 32, {tr("markers")}, {});
-  wptIcons["Flag, Green"] = icon_t("://icons/waypoints/32x32/FlagGreen.png", 0, 32, {tr("markers")}, {});
-  wptIcons["Pin, Red"] = icon_t("://icons/waypoints/32x32/PinRed.png", 0, 32, {tr("markers")}, {});
-  wptIcons["Pin, Blue"] = icon_t("://icons/waypoints/32x32/PinBlue.png", 0, 32, {tr("markers")}, {});
-  wptIcons["Pin, Green"] = icon_t("://icons/waypoints/32x32/PinGreen.png", 0, 32, {tr("markers")}, {});
-  wptIcons["Block, Red"] = icon_t("://icons/waypoints/32x32/BoxRed.png", 16, 16, {tr("markers")}, {tr("shape")});
-  wptIcons["Block, Blue"] = icon_t("://icons/waypoints/32x32/BoxBlue.png", 16, 16, {tr("markers")}, {tr("shape")});
-  wptIcons["Block, Green"] = icon_t("://icons/waypoints/32x32/BoxGreen.png", 16, 16, {tr("markers")}, {tr("shape")});
-  wptIcons["Circle, Red"] = icon_t("://icons/waypoints/32x32/CircleRed.png", 16, 16, {tr("markers")}, {tr("shape")});
-  wptIcons["Circle, Blue"] = icon_t("://icons/waypoints/32x32/CircleBlue.png", 16, 16, {tr("markers")}, {tr("shape")});
-  wptIcons["Circle, Green"] =
-      icon_t("://icons/waypoints/32x32/CircleGreen.png", 16, 16, {tr("markers")}, {tr("shape")});
-  wptIcons["Diamond, Red"] = icon_t("://icons/waypoints/32x32/DiamondRed.png", 16, 16, {tr("markers")}, {tr("shape")});
-  wptIcons["Diamond, Blue"] =
-      icon_t("://icons/waypoints/32x32/DiamondBlue.png", 16, 16, {tr("markers")}, {tr("shape")});
-  wptIcons["Diamond, Green"] =
-      icon_t("://icons/waypoints/32x32/DiamondGreen.png", 16, 16, {tr("markers")}, {tr("shape")});
-  wptIcons["Oval, Red"] = icon_t("://icons/waypoints/32x32/OvalRed.png", 16, 16, {tr("markers")}, {tr("shape")});
-  wptIcons["Oval, Blue"] = icon_t("://icons/waypoints/32x32/OvalBlue.png", 16, 16, {tr("markers")}, {tr("shape")});
-  wptIcons["Oval, Green"] = icon_t("://icons/waypoints/32x32/OvalGreen.png", 16, 16, {tr("markers")}, {tr("shape")});
-  wptIcons["Rectangle, Red"] =
-      icon_t("://icons/waypoints/32x32/RectangleRed.png", 16, 16, {tr("markers")}, {tr("shape")});
-  wptIcons["Rectangle, Blue"] =
-      icon_t("://icons/waypoints/32x32/RectangleBlue.png", 16, 16, {tr("markers")}, {tr("shape")});
-  wptIcons["Rectangle, Green"] =
-      icon_t("://icons/waypoints/32x32/RectangleGreen.png", 16, 16, {tr("markers")}, {tr("shape")});
-  wptIcons["Square, Red"] = icon_t("://icons/waypoints/32x32/SquareRed.png", 16, 16, {tr("markers")}, {tr("shape")});
-  wptIcons["Square, Blue"] = icon_t("://icons/waypoints/32x32/SquareBlue.png", 16, 16, {tr("markers")}, {tr("shape")});
-  wptIcons["Square, Green"] =
-      icon_t("://icons/waypoints/32x32/SquareGreen.png", 16, 16, {tr("markers")}, {tr("shape")});
-  wptIcons["Triangle, Red"] =
-      icon_t("://icons/waypoints/32x32/TriangleRed.png", 16, 16, {tr("markers")}, {tr("shape")});
-  wptIcons["Triangle, Blue"] =
-      icon_t("://icons/waypoints/32x32/TriangleBlue.png", 16, 16, {tr("markers")}, {tr("shape")});
-  wptIcons["Triangle, Green"] =
-      icon_t("://icons/waypoints/32x32/TriangleGreen.png", 16, 16, {tr("markers")}, {tr("shape")});
-  wptIcons["Letter A, Red"] =
-      icon_t("://icons/waypoints/32x32/LetterARed.png", 16, 16, {tr("markers")}, {tr("alphanumerical")});
-  wptIcons["Letter A, Blue"] =
-      icon_t("://icons/waypoints/32x32/LetterABlue.png", 16, 16, {tr("markers")}, {tr("alphanumerical")});
-  wptIcons["Letter A, Green"] =
-      icon_t("://icons/waypoints/32x32/LetterAGreen.png", 16, 16, {tr("markers")}, {tr("alphanumerical")});
-  wptIcons["Letter B, Red"] =
-      icon_t("://icons/waypoints/32x32/LetterBRed.png", 16, 16, {tr("markers")}, {tr("alphanumerical")});
-  wptIcons["Letter B, Blue"] =
-      icon_t("://icons/waypoints/32x32/LetterBBlue.png", 16, 16, {tr("markers")}, {tr("alphanumerical")});
-  wptIcons["Letter B, Green"] =
-      icon_t("://icons/waypoints/32x32/LetterBGreen.png", 16, 16, {tr("markers")}, {tr("alphanumerical")});
-  wptIcons["Letter C, Red"] =
-      icon_t("://icons/waypoints/32x32/LetterCRed.png", 16, 16, {tr("markers")}, {tr("alphanumerical")});
-  wptIcons["Letter C, Blue"] =
-      icon_t("://icons/waypoints/32x32/LetterCBlue.png", 16, 16, {tr("markers")}, {tr("alphanumerical")});
-  wptIcons["Letter C, Green"] =
-      icon_t("://icons/waypoints/32x32/LetterCGreen.png", 16, 16, {tr("markers")}, {tr("alphanumerical")});
-  wptIcons["Letter D, Red"] =
-      icon_t("://icons/waypoints/32x32/LetterDRed.png", 16, 16, {tr("markers")}, {tr("alphanumerical")});
-  wptIcons["Letter D, Blue"] =
-      icon_t("://icons/waypoints/32x32/LetterDBlue.png", 16, 16, {tr("markers")}, {tr("alphanumerical")});
-  wptIcons["Letter D, Green"] =
-      icon_t("://icons/waypoints/32x32/LetterDGreen.png", 16, 16, {tr("markers")}, {tr("alphanumerical")});
-  wptIcons["Number 0, Red"] =
-      icon_t("://icons/waypoints/32x32/Number0Red.png", 16, 16, {tr("markers")}, {tr("alphanumerical")});
-  wptIcons["Number 0, Blue"] =
-      icon_t("://icons/waypoints/32x32/Number0Blue.png", 16, 16, {tr("markers")}, {tr("alphanumerical")});
-  wptIcons["Number 0, Green"] =
-      icon_t("://icons/waypoints/32x32/Number0Green.png", 16, 16, {tr("markers")}, {tr("alphanumerical")});
-  wptIcons["Number 1, Red"] =
-      icon_t("://icons/waypoints/32x32/Number1Red.png", 16, 16, {tr("markers")}, {tr("alphanumerical")});
-  wptIcons["Number 1, Blue"] =
-      icon_t("://icons/waypoints/32x32/Number1Blue.png", 16, 16, {tr("markers")}, {tr("alphanumerical")});
-  wptIcons["Number 1, Green"] =
-      icon_t("://icons/waypoints/32x32/Number1Green.png", 16, 16, {tr("markers")}, {tr("alphanumerical")});
-  wptIcons["Number 2, Red"] =
-      icon_t("://icons/waypoints/32x32/Number2Red.png", 16, 16, {tr("markers")}, {tr("alphanumerical")});
-  wptIcons["Number 2, Blue"] =
-      icon_t("://icons/waypoints/32x32/Number2Blue.png", 16, 16, {tr("markers")}, {tr("alphanumerical")});
-  wptIcons["Number 2, Green"] =
-      icon_t("://icons/waypoints/32x32/Number2Green.png", 16, 16, {tr("markers")}, {tr("alphanumerical")});
-  wptIcons["Number 3, Red"] =
-      icon_t("://icons/waypoints/32x32/Number3Red.png", 16, 16, {tr("markers")}, {tr("alphanumerical")});
-  wptIcons["Number 3, Blue"] =
-      icon_t("://icons/waypoints/32x32/Number3Blue.png", 16, 16, {tr("markers")}, {tr("alphanumerical")});
-  wptIcons["Number 3, Green"] =
-      icon_t("://icons/waypoints/32x32/Number3Green.png", 16, 16, {tr("markers")}, {tr("alphanumerical")});
-  wptIcons["Number 4, Red"] =
-      icon_t("://icons/waypoints/32x32/Number4Red.png", 16, 16, {tr("markers")}, {tr("alphanumerical")});
-  wptIcons["Number 4, Blue"] =
-      icon_t("://icons/waypoints/32x32/Number4Blue.png", 16, 16, {tr("markers")}, {tr("alphanumerical")});
-  wptIcons["Number 4, Green"] =
-      icon_t("://icons/waypoints/32x32/Number4Green.png", 16, 16, {tr("markers")}, {tr("alphanumerical")});
-  wptIcons["Number 5, Red"] =
-      icon_t("://icons/waypoints/32x32/Number5Red.png", 16, 16, {tr("markers")}, {tr("alphanumerical")});
-  wptIcons["Number 5, Blue"] =
-      icon_t("://icons/waypoints/32x32/Number5Blue.png", 16, 16, {tr("markers")}, {tr("alphanumerical")});
-  wptIcons["Number 5, Green"] =
-      icon_t("://icons/waypoints/32x32/Number5Green.png", 16, 16, {tr("markers")}, {tr("alphanumerical")});
-  wptIcons["Number 6, Red"] =
-      icon_t("://icons/waypoints/32x32/Number6Red.png", 16, 16, {tr("markers")}, {tr("alphanumerical")});
-  wptIcons["Number 6, Blue"] =
-      icon_t("://icons/waypoints/32x32/Number6Blue.png", 16, 16, {tr("markers")}, {tr("alphanumerical")});
-  wptIcons["Number 6, Green"] =
-      icon_t("://icons/waypoints/32x32/Number6Green.png", 16, 16, {tr("markers")}, {tr("alphanumerical")});
-  wptIcons["Number 7, Red"] =
-      icon_t("://icons/waypoints/32x32/Number7Red.png", 16, 16, {tr("markers")}, {tr("alphanumerical")});
-  wptIcons["Number 7, Blue"] =
-      icon_t("://icons/waypoints/32x32/Number7Blue.png", 16, 16, {tr("markers")}, {tr("alphanumerical")});
-  wptIcons["Number 7, Green"] =
-      icon_t("://icons/waypoints/32x32/Number7Green.png", 16, 16, {tr("markers")}, {tr("alphanumerical")});
-  wptIcons["Number 8, Red"] =
-      icon_t("://icons/waypoints/32x32/Number8Red.png", 16, 16, {tr("markers")}, {tr("alphanumerical")});
-  wptIcons["Number 8, Blue"] =
-      icon_t("://icons/waypoints/32x32/Number8Blue.png", 16, 16, {tr("markers")}, {tr("alphanumerical")});
-  wptIcons["Number 8, Green"] =
-      icon_t("://icons/waypoints/32x32/Number8Green.png", 16, 16, {tr("markers")}, {tr("alphanumerical")});
-  wptIcons["Number 9, Red"] =
-      icon_t("://icons/waypoints/32x32/Number9Red.png", 16, 16, {tr("markers")}, {tr("alphanumerical")});
-  wptIcons["Number 9, Blue"] =
-      icon_t("://icons/waypoints/32x32/Number9Blue.png", 16, 16, {tr("markers")}, {tr("alphanumerical")});
-  wptIcons["Number 9, Green"] =
-      icon_t("://icons/waypoints/32x32/Number9Green.png", 16, 16, {tr("markers")}, {tr("alphanumerical")});
-  wptIcons["Residence"] = icon_t("://icons/waypoints/32x32/Residence.png", 16, 16, {tr("markers")}, {tr("building")});
-  wptIcons["Favorite"] = icon_t("://icons/waypoints/32x32/Favorite.png", 16, 16, {tr("markers")}, {});
-  wptIcons["Flag"] = icon_t("://icons/waypoints/32x32/FlagRed.png", 0, 32, {tr("markers")}, {});
-  wptIcons["Trail Head"] = icon_t("://icons/cache/32x32/trailhead.png", 16, 16, {tr("markers")}, {});
-  wptIcons["Contact, Smiley"] = icon_t("://icons/cache/32x32/found.png", 16, 16, {tr("markers")}, {});
-  wptIcons["Sad Face"] = icon_t("://icons/cache/32x32/dnf.png", 16, 16, {tr("markers")}, {});
-  wptIcons["Waypoint"] = icon_t("://icons/waypoints/32x32/Waypoint.png", 16, 16, {tr("markers")}, {tr("dot")});
+    {
+      {16,16}, "1st Category", "://icons/waypoints/32x32/1stCategory.png",
+      {tr("cycling")},
+      {tr("category")}
+    },
+    {
+      {16,16}, "2nd Category", "://icons/waypoints/32x32/2ndCategory.png",
+      {tr("cycling")},
+      {tr("category")}
+    },
+    {
+      {16,16}, "3rd Category", "://icons/waypoints/32x32/3rdCategory.png",
+      {tr("cycling")},
+      {tr("category")}
+    },
+    {
+      {16,16}, "4th Category", "://icons/waypoints/32x32/4thCategory.png",
+      {tr("cycling")},
+      {tr("category")}
+    },
+    {
+      {16,16}, "Danger", "://icons/waypoints/32x32/Danger.png",
+      {tr("cycling")},
+      {tr("danger")}
+    },
+    {
+      {16,16}, "First Aid", "://icons/waypoints/32x32/FirstAid.png",
+      {tr("cycling")},
+      {tr("first aid")}
+    },
 
-  wptIcons["1st Category"] = icon_t("://icons/waypoints/32x32/1stCategory.png", 16, 16, {tr("cycling")}, {});
-  wptIcons["2nd Category"] = icon_t("://icons/waypoints/32x32/2ndCategory.png", 16, 16, {tr("cycling")}, {});
-  wptIcons["3rd Category"] = icon_t("://icons/waypoints/32x32/3rdCategory.png", 16, 16, {tr("cycling")}, {});
-  wptIcons["4th Category"] = icon_t("://icons/waypoints/32x32/4thCategory.png", 16, 16, {tr("cycling")}, {});
-  wptIcons["Danger"] = icon_t("://icons/waypoints/32x32/Danger.png", 16, 16, {tr("cycling")}, {});
-  wptIcons["First Aid"] = icon_t("://icons/waypoints/32x32/FirstAid.png", 16, 16, {tr("cycling")}, {tr("help")});
-  wptIcons["Food"] = icon_t("://icons/waypoints/32x32/Food.png", 16, 16, {tr("cycling")}, {});
-  wptIcons["Generic"] = icon_t("://icons/waypoints/32x32/Generic.png", 16, 16, {tr("cycling")}, {});
-  wptIcons["Hors Category"] = icon_t("://icons/waypoints/32x32/HorsCategory.png", 16, 16, {tr("cycling")}, {});
-  wptIcons["Left"] = icon_t("://icons/waypoints/32x32/Left.png", 16, 16, {tr("cycling")}, {});
-  wptIcons["Right"] = icon_t("://icons/waypoints/32x32/Right.png", 16, 16, {tr("cycling")}, {});
-  wptIcons["Sprint"] = icon_t("://icons/waypoints/32x32/Sprint.png", 16, 16, {tr("cycling")}, {});
-  wptIcons["Straight"] = icon_t("://icons/waypoints/32x32/Straight.png", 16, 16, {tr("cycling")}, {});
-  wptIcons["Summit"] = icon_t("://icons/waypoints/32x32/Summit.png", 16, 16, {tr("cycling")}, {tr("land")});
-  wptIcons["Valley"] = icon_t("://icons/waypoints/32x32/Valley.png", 16, 16, {tr("cycling")}, {tr("land")});
-  wptIcons["Water"] = icon_t("://icons/waypoints/32x32/Water.png", 16, 16, {tr("cycling")}, {tr("food")});
-  wptIcons["LeftFork"] = icon_t("://icons/waypoints/32x32/LeftFork.png", 16, 16, {tr("cycling")}, {});
-  wptIcons["RightFork"] = icon_t("://icons/waypoints/32x32/RightFork.png", 16, 16, {tr("cycling")}, {});
-  wptIcons["MiddleFork"] = icon_t("://icons/waypoints/32x32/MiddleFork.png", 16, 16, {tr("cycling")}, {});
-  wptIcons["SlightLeft"] = icon_t("://icons/waypoints/32x32/SlightLeft.png", 16, 16, {tr("cycling")}, {});
-  wptIcons["SharpLeft"] = icon_t("://icons/waypoints/32x32/SharpLeft.png", 16, 16, {tr("cycling")}, {});
-  wptIcons["SlightRight"] = icon_t("://icons/waypoints/32x32/SlightRight.png", 16, 16, {tr("cycling")}, {});
-  wptIcons["SharpRight"] = icon_t("://icons/waypoints/32x32/SharpRight.png", 16, 16, {tr("cycling")}, {});
-  wptIcons["UTurn"] = icon_t("://icons/waypoints/32x32/UTurn.png", 16, 16, {tr("cycling")}, {});
-  wptIcons["Start"] = icon_t("://icons/waypoints/32x32/Start.png", 16, 16, {tr("cycling")}, {});
-  wptIcons["End"] = icon_t("://icons/waypoints/32x32/End.png", 16, 16, {tr("cycling")}, {});
+    {
+      {16,16}, "Food", "://icons/waypoints/32x32/Food.png",
+      {tr("cycling")},
+      {tr("food")}
+    },
+    {
+      {16,16}, "Generic", "://icons/waypoints/32x32/Generic.png",
+      {tr("cycling")},
+      {tr("generic")}
+    },
+    {
+      {16,16}, "Hors Category", "://icons/waypoints/32x32/HorsCategory.png",
+      {tr("cycling")},
+      {tr("hors category")}
+    },
+    {
+      {16,16}, "Left", "://icons/waypoints/32x32/Left.png",
+      {tr("cycling")},
+      {tr("left")}
+    },
+    {
+      {16,16}, "Right", "://icons/waypoints/32x32/Right.png",
+      {tr("cycling")},
+      {tr("right")}
+    },
+    {
+      {16,16}, "Sprint", "://icons/waypoints/32x32/Sprint.png",
+      {tr("cycling")},
+      {tr("sprint")}
+    },
+    {
+      {16,16}, "Straight", "://icons/waypoints/32x32/Straight.png",
+      {tr("cycling")},
+      {tr("straight")}
+    },
+    {
+      {16,16}, "Summit", "://icons/waypoints/32x32/Summit.png",
+      {tr("cycling")},
+      {tr("summit")}
+    },
+    {
+      {16,16}, "Valley", "://icons/waypoints/32x32/Valley.png",
+      {tr("cycling")},
+      {tr("valley")}
+    },
+    {
+      {16,16}, "Water", "://icons/waypoints/32x32/Water.png",
+      {tr("cycling")},
+      {tr("water")}
+    },
+    {
+      {16,16}, "LeftFork", "://icons/waypoints/32x32/LeftFork.png",
+      {tr("cycling")},
+      {tr("left fork")}
+    },
+    {
+      {16,16}, "RightFork", "://icons/waypoints/32x32/RightFork.png",
+      {tr("cycling")},
+      {tr("right fork")}
+    },
+    {
+      {16,16}, "MiddleFork", "://icons/waypoints/32x32/MiddleFork.png",
+      {tr("cycling")},
+      {tr("middle fork")}
+    },
+    {
+      {16,16}, "SlightLeft", "://icons/waypoints/32x32/SlightLeft.png",
+      {tr("cycling")},
+      {tr("slight left")}
+    },
+    {
+      {16,16}, "SharpLeft", "://icons/waypoints/32x32/SharpLeft.png",
+      {tr("cycling")},
+      {tr("sharp left")}
+    },
+    {
+      {16,16}, "SlightRight", "://icons/waypoints/32x32/SlightRight.png",
+      {tr("cycling")},
+      {tr("slight right")}
+    },
+    {
+      {16,16}, "SharpRight", "://icons/waypoints/32x32/SharpRight.png",
+      {tr("cycling")},
+      {tr("sharp right")}
+    },
+    {
+      {16,16}, "UTurn", "://icons/waypoints/32x32/UTurn.png",
+      {tr("cycling")},
+      {tr("uturn")}
+    },
+    {
+      {16,16}, "Start", "://icons/waypoints/32x32/Start.png",
+      {tr("cycling")},
+      {tr("start")}
+    },
+    {
+      {16,16}, "End", "://icons/waypoints/32x32/End.png",
+      {tr("cycling")},
+      {tr("end")}
+    },
 
-  wptIcons["Bank"] = icon_t("://icons/poi/SJJB/png/money_bank.n.32.png", 16, 16, {tr("poi")}, {tr("building")});
-  wptIcons["Church"] =
-      icon_t("://icons/poi/SJJB/png/place_of_worship_unknown.n.32.png", 16, 16, {tr("poi")}, {tr("building")});
-  wptIcons["Mine"] = icon_t("://icons/poi/SJJB/png/poi_mine.n.32.png", 16, 16, {tr("poi")}, {});
-  wptIcons["Tall Tower"] =
-      icon_t("://icons/poi/SJJB/png/poi_tower_communications.n.32.png", 16, 16, {tr("poi")}, {tr("building")});
-  wptIcons["Short Tower"] =
-      icon_t("://icons/poi/SJJB/png/poi_tower_lookout.n.32.png", 16, 16, {tr("poi")}, {tr("building")});
-  wptIcons["Gas Station"] = icon_t("://icons/poi/SJJB/png/transport_fuel.n.32.png", 16, 16,
-                                   {tr("poi"), tr("transport"), tr("marine")}, {tr("building")});
-  wptIcons["Parking Area"] =
-      icon_t("://icons/poi/SJJB/png/transport_parking.n.32.png", 16, 16, {tr("poi"), tr("transport")}, {});
-  wptIcons["Parking, Pay"] =
-      icon_t("://icons/poi/SJJB/png/transport_parking_car_paid.n.32.png", 16, 16, {tr("poi"), tr("transport")}, {});
-  wptIcons["Car Rental"] =
-      icon_t("://icons/poi/SJJB/png/transport_rental_car.n.32.png", 16, 16, {tr("poi"), tr("transport")}, {});
-  wptIcons["Boat Ramp"] =
-      icon_t("://icons/poi/SJJB/png/transport_slipway.n.32.png", 16, 16, {tr("poi"), tr("marine")}, {});
-  wptIcons["Marina"] = icon_t("://icons/poi/SJJB/png/transport_marina.n.32.png", 16, 16, {tr("poi"), tr("marine")}, {});
-  wptIcons["Ground Transportation"] =
-      icon_t("://icons/poi/SJJB/png/transport_bus_stop.n.32.png", 16, 16, {tr("poi"), tr("transport")}, {});
-  wptIcons["Railway"] =
-      icon_t("://icons/poi/SJJB/png/transport_train_station.n.32.png", 16, 16, {tr("poi"), tr("transport")}, {});
-  wptIcons["Airport"] =
-      icon_t("://icons/poi/SJJB/png/transport_airport.n.32.png", 16, 16, {tr("poi"), tr("transport")}, {});
-  wptIcons["Heliport"] =
-      icon_t("://icons/poi/SJJB/png/transport_helicopter_pad.n.32.png", 16, 16, {tr("poi"), tr("transport")}, {});
-  wptIcons["Campground"] = icon_t("://icons/poi/SJJB/png/accommodation_camping.n.32.png", 16, 16,
-                                  {tr("poi"), tr("outdoors"), tr("marine"), tr("accommodation")}, {});
-  wptIcons["Lodge"] = icon_t("://icons/poi/SJJB/png/accommodation_shelter.n.32.png", 16, 16,
-                             {tr("poi"), tr("accommodation")}, {tr("building")});
-  wptIcons["Lodging"] = icon_t("://icons/poi/SJJB/png/accommodation_hotel.n.32.png", 16, 16,
-                               {tr("poi"), tr("accommodation")}, {tr("building")});
-  wptIcons["RV Park"] = icon_t("://icons/poi/SJJB/png/accommodation_caravan_park.n.32.png", 16, 16,
-                               {tr("poi"), tr("outdoors"), tr("accommodation")}, {});
-  wptIcons["Dam"] = icon_t("://icons/poi/SJJB/png/water_dam.n.32.png", 16, 16, {tr("poi")}, {tr("landmark")});
-  wptIcons["Bar"] =
-      icon_t("://icons/poi/SJJB/png/food_bar.n.32.png", 16, 16, {tr("poi")}, {tr("building"), tr("food")});
-  wptIcons["Drinking Water"] =
-      icon_t("://icons/poi/SJJB/png/food_drinkingtap.n.32.png", 16, 16, {tr("poi")}, {tr("food")});
-  wptIcons["Fast Food"] = icon_t("://icons/poi/SJJB/png/food_fastfood.n.32.png", 16, 16, {tr("poi")}, {tr("food")});
-  wptIcons["Pizza"] = icon_t("://icons/poi/SJJB/png/food_pizza.n.32.png", 16, 16, {tr("poi")}, {tr("food")});
-  wptIcons["Restaurant"] = icon_t("://icons/poi/SJJB/png/food_restaurant.n.32.png", 16, 16,
-                                  {tr("poi"), tr("transport"), tr("marine")}, {tr("building"), tr("food")});
-  wptIcons["Amusement Park"] =
-      icon_t("://icons/poi/SJJB/png/tourist_theme_park.n.32.png", 16, 16, {tr("poi")}, {tr("landmark")});
-  wptIcons["Beach"] = icon_t("://icons/poi/SJJB/png/tourist_beach.n.32.png", 16, 16, {tr("poi")}, {});
-  wptIcons["Ghost Town"] =
-      icon_t("://icons/poi/SJJB/png/tourist_ruin.n.32.png", 16, 16, {tr("poi")}, {tr("building"), tr("landmark")});
-  wptIcons["Information"] = icon_t("://icons/poi/SJJB/png/tourist_information.n.32.png", 16, 16, {tr("poi")}, {});
-  wptIcons["Live Theater"] =
-      icon_t("://icons/poi/SJJB/png/tourist_theatre.n.32.png", 16, 16, {tr("poi")}, {tr("building")});
-  wptIcons["Museum"] = icon_t("://icons/poi/SJJB/png/tourist_museum.n.32.png", 16, 16, {tr("poi")}, {tr("building")});
-  wptIcons["Picnic Area"] = icon_t("://icons/poi/SJJB/png/tourist_picnic.n.32.png", 16, 16, {tr("poi")}, {tr("food")});
-  wptIcons["Scenic Area"] = icon_t("://icons/poi/SJJB/png/tourist_view_point.n.32.png", 16, 16, {tr("poi")}, {});
-  wptIcons["Shipwreck"] =
-      icon_t("://icons/poi/SJJB/png/tourist_wreck.n.32.png", 16, 16, {tr("poi"), tr("marine")}, {tr("landmark")});
-  wptIcons["Zoo"] = icon_t("://icons/poi/SJJB/png/tourist_zoo.n.32.png", 16, 16, {tr("poi")}, {tr("landmark")});
-  wptIcons["City Hall"] =
-      icon_t("://icons/poi/SJJB/png/amenity_town_hall.n.32.png", 16, 16, {tr("poi")}, {tr("building")});
-  wptIcons["Library"] = icon_t("://icons/poi/SJJB/png/amenity_library.n.32.png", 16, 16, {tr("poi")}, {tr("building")});
-  wptIcons["Police Station"] =
-      icon_t("://icons/poi/SJJB/png/amenity_police.n.32.png", 16, 16, {tr("poi")}, {tr("building"), tr("help")});
-  wptIcons["Post Office"] =
-      icon_t("://icons/poi/SJJB/png/amenity_post_office.n.32.png", 16, 16, {tr("poi")}, {tr("building")});
-  wptIcons["Restroom"] = icon_t("://icons/poi/SJJB/png/amenity_toilets.n.32.png", 16, 16,
-                                {
-                                    tr("poi"),
-                                    tr("outdoors"),
-                                    tr("transport"),
-                                },
-                                {tr("building")});
-  wptIcons["Scales"] = icon_t("://icons/poi/SJJB/png/amenity_court.n.32.png", 16, 16, {tr("poi")}, {});
-  wptIcons["Telephone"] = icon_t("://icons/poi/SJJB/png/amenity_telephone.n.32.png", 16, 16, {tr("poi")}, {});
-  wptIcons["Medical Facility"] =
-      icon_t("://icons/poi/SJJB/png/health_hospital.n.32.png", 16, 16, {tr("poi")}, {tr("help")});
-  wptIcons["Pharmacy"] = icon_t("://icons/poi/SJJB/png/health_pharmacy.n.32.png", 16, 16, {tr("poi")}, {tr("help")});
-  wptIcons["School"] = icon_t("://icons/poi/SJJB/png/education_school.n.32.png", 16, 16, {tr("poi")}, {tr("building")});
-  wptIcons["Fitness Center"] = icon_t("://icons/poi/SJJB/png/sport_gym.n.32.png", 16, 16, {tr("poi"), tr("sport")},
-                                      {tr("building"), tr("sport")});
-  wptIcons["Golf Course"] =
-      icon_t("://icons/poi/SJJB/png/sport_golf.n.32.png", 16, 16, {tr("poi"), tr("sport")}, {tr("sport")});
-  wptIcons["Ice Skating"] =
-      icon_t("://icons/poi/SJJB/png/sport_iceskating.n.32.png", 16, 16, {tr("poi"), tr("sport")}, {tr("sport")});
-  wptIcons["Skiing Area"] = icon_t("://icons/poi/SJJB/png/sport_skiing_crosscountry.n.32.png", 16, 16,
-                                   {tr("poi"), tr("sport")}, {tr("sport")});
-  wptIcons["Ski Resort"] =
-      icon_t("://icons/poi/SJJB/png/sport_skiing_downhill.n.32.png", 16, 16, {tr("poi"), tr("sport")}, {tr("sport")});
-  wptIcons["Stadium"] =
-      icon_t("://icons/poi/SJJB/png/sport_stadium.n.32.png", 16, 16, {tr("poi"), tr("sport")}, {tr("sport")});
-  wptIcons["Swimming Area"] =
-      icon_t("://icons/poi/SJJB/png/sport_swimming_outdoor.n.32.png", 16, 16, {tr("poi"), tr("sport")}, {tr("sport")});
-  wptIcons["Car Repair"] = icon_t("://icons/poi/SJJB/png/shopping_car_repair.n.32.png", 16, 16,
-                                  {tr("poi"), tr("transport")}, {tr("building")});
-  wptIcons["Convenience Store"] =
-      icon_t("://icons/poi/SJJB/png/shopping_convenience.n.32.png", 16, 16, {tr("poi")}, {tr("building"), tr("food")});
-  wptIcons["Department Store"] = icon_t("://icons/poi/SJJB/png/shopping_department_store.n.32.png", 16, 16, {tr("poi")},
-                                        {tr("building"), tr("food")});
-  wptIcons["Shopping Center"] =
-      icon_t("://icons/poi/SJJB/png/shopping_supermarket.n.32.png", 16, 16, {tr("poi")}, {tr("building")});
-  wptIcons["Winery"] = icon_t("://icons/poi/SJJB/png/shopping_alcohol.n.32.png", 16, 16, {tr("poi")}, {tr("food")});
-  wptIcons["Forest"] =
-      icon_t("://icons/poi/SJJB/png/landuse_coniferous_and_deciduous.n.32.png", 16, 16, {tr("poi")}, {tr("land")});
-  wptIcons["Park"] = icon_t("://icons/poi/SJJB/png/landuse_deciduous.n.32.png", 16, 16, {tr("poi")}, {tr("land")});
+    {
+      {16,16}, "Bank", "://icons/poi/SJJB/png/money_bank.n.32.png",
+      {tr("poi")},
+      {tr("bank"), tr("building")}
+    },
+    {
+      {16,16}, "Church", "://icons/poi/SJJB/png/place_of_worship_unknown.n.32.png",
+      {tr("poi")},
+      {tr("church"), tr("building")}
+    },
+    {
+      {16,16}, "Mine", "://icons/poi/SJJB/png/poi_mine.n.32.png",
+      {tr("poi")},
+      {tr("mine"), tr("landmark")}
+    },
+    {
+      {16,16}, "Tall Tower", "://icons/poi/SJJB/png/poi_tower_communications.n.32.png",
+      {tr("poi")},
+      {tr("tower"), tr("landmark"), tr("building")}
+    },
+    {
+      {16,16}, "Short Tower", "://icons/poi/SJJB/png/poi_tower_lookout.n.32.png",
+      {tr("poi")},
+      {tr("tower"), tr("landmark"), tr("building")}
+    },
+    {
+      {16,16}, "Gas Station", "://icons/poi/SJJB/png/transport_fuel.n.32.png",
+      {tr("poi"), tr("transport"), tr("marine")},
+      {tr("gas station"), tr("building")}
+    },
+    {
+      {16,16}, "Parking Area", "://icons/poi/SJJB/png/transport_parking.n.32.png",
+      {tr("poi"), tr("transport")},
+      {tr("parking")}
+    },
+    {
+      {16,16}, "Parking, Pay", "://icons/poi/SJJB/png/transport_parking_car_paid.n.32.png",
+      {tr("poi"), tr("transport")},
+      {tr("parking")}
+    },
+    {
+      {16,16}, "Car Rental", "://icons/poi/SJJB/png/transport_rental_car.n.32.png",
+      {tr("poi"), tr("transport")},
+      {tr("car rental"), tr("building")}
+    },
+    {
+      {16,16}, "Boat Ramp", "://icons/poi/SJJB/png/transport_slipway.n.32.png",
+      {tr("poi"), tr("marine")},
+      {tr("boat ramp")}
+    },
+    {
+      {16,16}, "Marina", "://icons/poi/SJJB/png/transport_marina.n.32.png",
+      {tr("poi"), tr("marine")},
+      {tr("marina")}
+    },
+    {
+      {16,16}, "Ground Transportation", "://icons/poi/SJJB/png/transport_bus_stop.n.32.png",
+      {tr("poi"), tr("transport")},
+      {tr("transportation")}
+    },
+    {
+      {16,16}, "Railway", "://icons/poi/SJJB/png/transport_train_station.n.32.png",
+      {tr("poi"), tr("transport")},
+      {tr("railway")}
+    },
+    {
+      {16,16}, "Airport", "://icons/poi/SJJB/png/transport_airport.n.32.png",
+      {tr("poi"), tr("transport")},
+      {tr("airport")}
+    },
+    {
+      {16,16}, "Heliport", "://icons/poi/SJJB/png/transport_helicopter_pad.n.32.png",
+      {tr("poi"), tr("transport")},
+      {tr("heliport")}
+    },
+    {
+      {16,16}, "Campground", "://icons/poi/SJJB/png/accommodation_camping.n.32.png",
+      {tr("poi"), tr("outdoors"), tr("marine"), tr("accommodation")},
+      {tr("campground")}
+    },
+    {
+      {16,16}, "Lodge", "://icons/poi/SJJB/png/accommodation_shelter.n.32.png",
+      {tr("poi"), tr("accommodation")},
+      {tr("lodge"), tr("building")}
+    },
+    {
+      {16,16}, "Lodging", "://icons/poi/SJJB/png/accommodation_hotel.n.32.png",
+      {tr("poi"), tr("accommodation")},
+      {tr("lodging"), tr("building")}
+    },
+    {
+      {16,16}, "RV Park", "://icons/poi/SJJB/png/accommodation_caravan_park.n.32.png",
+      {tr("poi"), tr("outdoors"), tr("accommodation")},
+      {tr("rv park")}
+    },
+    {
+      {16,16}, "Dam", "://icons/poi/SJJB/png/water_dam.n.32.png",
+      {tr("poi")},
+      {tr("dam"), tr("landmark")}
+    },
+    {
+      {16,16}, "Bar", "://icons/poi/SJJB/png/food_bar.n.32.png",
+      {tr("poi")},
+      {tr("bar"), tr("building"), tr("food")}
+    },
+    {
+      {16,16}, "Drinking Water", "://icons/poi/SJJB/png/food_drinkingtap.n.32.png",
+      {tr("poi"), tr("outdoors")},
+      {tr("drinking water"), tr("food")}
+    },
+    {
+      {16,16}, "Fast Food", "://icons/poi/SJJB/png/food_fastfood.n.32.png",
+      {tr("poi")},
+      {tr("fast food"), tr("building"), tr("food")}
+    },
+    {
+      {16,16}, "Pizza", "://icons/poi/SJJB/png/food_pizza.n.32.png",
+      {tr("poi")},
+      {tr("pizza"), tr("building"), tr("food")}
+    },
+    {
+      {16,16}, "Restaurant", "://icons/poi/SJJB/png/food_restaurant.n.32.png",
+      {tr("poi"), tr("transport"), tr("marine")},
+      {tr("restaurant"), tr("building"), tr("food")}
+    },
+    {
+      {16,16}, "Amusement Park", "://icons/poi/SJJB/png/tourist_theme_park.n.32.png",
+      {tr("poi")},
+      {tr("amusement park"), tr("landmark")}
+    },
+    {
+      {16,16}, "Beach", "://icons/poi/SJJB/png/tourist_beach.n.32.png",
+      {tr("poi"), tr("outdoors")},
+      {tr("beach")}
+    },
+    {
+      {16,16}, "Ghost Town", "://icons/poi/SJJB/png/tourist_ruin.n.32.png",
+      {tr("poi")},
+      {tr("ghost town"), tr("building"), tr("landmark")}
+    },
+    {
+      {16,16}, "Information", "://icons/poi/SJJB/png/tourist_information.n.32.png",
+      {tr("poi")},
+      {tr("information")}
+    },
+    {
+      {16,16}, "Live Theater", "://icons/poi/SJJB/png/tourist_theatre.n.32.png",
+      {tr("poi")},
+      {tr("live theatre"), tr("building")}
+    },
+    {
+      {16,16}, "Museum", "://icons/poi/SJJB/png/tourist_museum.n.32.png",
+      {tr("poi")},
+      {tr("museum"), tr("building")}
+    },
+    {
+      {16,16}, "Picnic Area", "://icons/poi/SJJB/png/tourist_picnic.n.32.png",
+      {tr("poi")},
+      {tr("picnic area"), tr("food")}
+    },
+    {
+      {16,16}, "Scenic Area", "://icons/poi/SJJB/png/tourist_view_point.n.32.png",
+      {tr("poi")},
+      {tr("scenic area")}
+    },
+    {
+      {16,16}, "Shipwreck", "://icons/poi/SJJB/png/tourist_wreck.n.32.png",
+      {tr("poi"), tr("marine")},
+      {tr("scenic area"), tr("landmark")}
+    },
+    {
+      {16,16}, "Zoo", "://icons/poi/SJJB/png/tourist_zoo.n.32.png",
+      {tr("poi")},
+      {tr("zoo"), tr("landmark")}
+    },
+    {
+      {16,16}, "City Hall", "://icons/poi/SJJB/png/amenity_town_hall.n.32.png",
+      {tr("poi")},
+      {tr("city hall"), tr("building")}
+    },
+    {
+      {16,16}, "Library", "://icons/poi/SJJB/png/amenity_library.n.32.png",
+      {tr("poi")},
+      {tr("library"), tr("building")}
+    },
+    {
+      {16,16}, "Police Station", "://icons/poi/SJJB/png/amenity_police.n.32.png",
+      {tr("poi")},
+      {tr("police station"), tr("building"), tr("help")}
+    },
+    {
+      {16,16}, "Post Office", "://icons/poi/SJJB/png/amenity_post_office.n.32.png",
+      {tr("poi")},
+      {tr("post office"), tr("building")}
+    },
+    {
+      {16,16}, "Restroom", "://icons/poi/SJJB/png/amenity_toilets.n.32.png",
+      {tr("poi"), tr("outdoors"), tr("transport")},
+      {tr("restroom"), tr("building")}
+    },
+    {
+      {16,16}, "Scales", "://icons/poi/SJJB/png/amenity_court.n.32.png",
+      {tr("poi")},
+      {tr("scales"), tr("court"), tr("building")}
+    },
+    {
+      {16,16}, "Telephone", "://icons/poi/SJJB/png/amenity_telephone.n.32.png",
+      {tr("poi")},
+      {tr("telephone")}
+    },
+    {
+      {16,16}, "Medical Facility", "://icons/poi/SJJB/png/health_hospital.n.32.png",
+      {tr("poi")},
+      {tr("medical facility"), tr("hospital"), tr("help"), tr("building")}
+    },
+    {
+      {16,16}, "Pharmacy", "://icons/poi/SJJB/png/health_pharmacy.n.32.png",
+      {tr("poi")},
+      {tr("pharmacy"), tr("help"), tr("building")}
+    },
+    {
+      {16,16}, "School", "://icons/poi/SJJB/png/education_school.n.32.png",
+      {tr("poi")},
+      {tr("school"), tr("building")}
+    },
+    {
+      {16,16}, "Fitness Center", "://icons/poi/SJJB/png/sport_gym.n.32.png",
+      {tr("poi"), tr("sport")},
+      {tr("fitness center"), tr("gym"), tr("building")}
+    },
+    {
+      {16,16}, "Golf Course", "://icons/poi/SJJB/png/sport_golf.n.32.png",
+      {tr("poi"), tr("sport")},
+      {tr("golf courser")}
+    },
+    {
+      {16,16}, "Ice Skating", "://icons/poi/SJJB/png/sport_iceskating.n.32.png",
+      {tr("poi"), tr("sport")},
+      {tr("ice skating"), tr("building")}
+    },
+    {
+      {16,16}, "Skiing Area", "://icons/poi/SJJB/png/sport_skiing_crosscountry.n.32.png",
+      {tr("poi"), tr("sport")},
+      {tr("skiing area")}
+    },
+    {
+      {16,16}, "Ski Resort", "://icons/poi/SJJB/png/sport_skiing_downhill.n.32.png",
+      {tr("poi"), tr("sport")},
+      {tr("ski resort")}
+    },
+    {
+      {16,16}, "Stadium", "://icons/poi/SJJB/png/sport_stadium.n.32.png",
+      {tr("poi"), tr("sport")},
+      {tr("stadium"), tr("building"), tr("landmark")}
+    },
+    {
+      {16,16}, "Swimming Area", "://icons/poi/SJJB/png/sport_swimming_outdoor.n.32.png",
+      {tr("poi"), tr("sport")},
+      {tr("stadium")}
+    },
+    {
+      {16,16}, "Car Repair", "://icons/poi/SJJB/png/shopping_car_repair.n.32.png",
+      {tr("poi")},
+      {tr("car repair"), tr("building")}
+    },
+    {
+      {16,16}, "Convenience Store", "://icons/poi/SJJB/png/shopping_convenience.n.32.png",
+      {tr("poi")},
+      {tr("convenience store"), tr("building"), tr("food")}
+    },
+    {
+      {16,16}, "Department Store", "://icons/poi/SJJB/png/shopping_department_store.n.32.png",
+      {tr("poi")},
+      {tr("department store"), tr("building"), tr("food")}
+    },
+    {
+      {16,16}, "Shopping Center", "://icons/poi/SJJB/png/shopping_supermarket.n.32.png",
+      {tr("poi")},
+      {tr("shopping center"), tr("supermarket"), tr("building"), tr("food")}
+    },
+    {
+      {16,16}, "Winery", "://icons/poi/SJJB/png/shopping_alcohol.n.32.png",
+      {tr("poi")},
+      {tr("winery"),tr("bottle shop"), tr("building"), tr("food")}
+    },
+    {
+      {16,16}, "Forest", "://icons/poi/SJJB/png/landuse_coniferous_and_deciduous.n.32.png",
+      {tr("poi")},
+      {tr("forest"), tr("land")}
+    },
+    {
+      {16,16}, "Park", "://icons/poi/SJJB/png/landuse_deciduous.n.32.png",
+      {tr("poi")},
+      {tr("park"), tr("land")}
+    },
+    {
+      {16,16}, "Traditional Cache", "://icons/geocaching/icons/traditional.png",
+      {tr("geocache")},
+      {tr("traditional cache")}
+    },
+    {
+      {16,16}, "Multi-Cache", "://icons/geocaching/icons/multi.png",
+      {tr("geocache")},
+      {tr("multi cache")}
+    },
+    {
+      {16,16}, "Unknown Cache", "://icons/geocaching/icons/unknown.png",
+      {tr("geocache")},
+      {tr("unknown cache")}
+    },
+    {
+      {16,16}, "Wherigo Cache", "://icons/geocaching/icons/wherigo.png",
+      {tr("geocache")},
+      {tr("wherigo cache")}
+    },
+    {
+      {16,16}, "Event Cache", "://icons/geocaching/icons/event.png",
+      {tr("geocache")},
+      {tr("event cache")}
+    },
+    {
+      {16,16}, "Mega-Event Cache", "://icons/geocaching/icons/mega.png",
+      {tr("geocache")},
+      {tr("mega-event cache")}
+    },
+    {
+      {16,16}, "Giga-Event Cache", "://icons/geocaching/icons/giga.png",
+      {tr("geocache")},
+      {tr("giga-event cache")}
+    },
+    {
+      {16,16}, "Cache In Trash Out Event", "://icons/geocaching/icons/cito.png",
+      {tr("geocache")},
+      {tr("cache in trash out event")}
+    },
+    {
+      {16,16}, "Earthcache", "://icons/geocaching/icons/earth.png",
+      {tr("geocache")},
+      {tr("earthcache")}
+    },
+    {
+      {16,16}, "Letterbox Cache", "://icons/geocaching/icons/letterbox.png",
+      {tr("geocache")},
+      {tr("letterbox cache")}
+    },
+    {
+      {16,16}, "Virtual Cache", "://icons/geocaching/icons/virtual.png",
+      {tr("geocache")},
+      {tr("virtual cache")}
+    },
+    {
+      {16,16}, "Webcam Cache", "://icons/geocaching/icons/webcam.png",
+      {tr("geocache")},
+      {tr("webcam cache")}
+    },
 
-  setWptIconByName("Traditional Cache", "://icons/geocaching/icons/traditional.png", {tr("geocache")}, {});
-  setWptIconByName("Multi-Cache", "://icons/geocaching/icons/multi.png", {tr("geocache")}, {});
-  setWptIconByName("Unknown Cache", "://icons/geocaching/icons/unknown.png", {tr("geocache")}, {});
-  setWptIconByName("Wherigo Cache", "://icons/geocaching/icons/wherigo.png", {tr("geocache")}, {});
-  setWptIconByName("Event Cache", "://icons/geocaching/icons/event.png", {tr("geocache")}, {});
-  setWptIconByName("Mega-Event Cache", "://icons/geocaching/icons/mega.png", {tr("geocache")}, {});
-  setWptIconByName("Giga-Event Cache", "://icons/geocaching/icons/giga.png", {tr("geocache")}, {});
-  setWptIconByName("Cache In Trash Out Event", "://icons/geocaching/icons/cito.png", {tr("geocache")}, {});
-  setWptIconByName("Earthcache", "://icons/geocaching/icons/earth.png", {tr("geocache")}, {});
-  setWptIconByName("Letterbox Cache", "://icons/geocaching/icons/letterbox.png", {tr("geocache")}, {});
-  setWptIconByName("Virtual Cache", "://icons/geocaching/icons/virtual.png", {tr("geocache")}, {});
-  setWptIconByName("Webcam Cache", "://icons/geocaching/icons/webcam.png", {tr("geocache")}, {});
-
-  setWptIconByName("gray_Traditional Cache", "://icons/geocaching/icons/gray_Traditional Cache.png", {tr("geocache")},
-                   {});
-  setWptIconByName("gray_Multi-Cache", "://icons/geocaching/icons/gray_Multi-Cache.png", {tr("geocache")}, {});
-  setWptIconByName("gray_Unknown Cache", "://icons/geocaching/icons/gray_Unknown Cache.png", {tr("geocache")}, {});
-  setWptIconByName("gray_Wherigo Cache", "://icons/geocaching/icons/gray_Wherigo Cache.png", {tr("geocache")}, {});
-  setWptIconByName("gray_Event Cache", "://icons/geocaching/icons/gray_Event Cache.png", {tr("geocache")}, {});
-  setWptIconByName("gray_Mega-Event Cache", "://icons/geocaching/icons/gray_Mega-Event Cache.png", {tr("geocache")},
-                   {});
-  setWptIconByName("gray_Giga-Event Cache", "://icons/geocaching/icons/gray_Giga-Event Cache.png", {tr("geocache")},
-                   {});
-  setWptIconByName("gray_Cache In Trash Out Event", "://icons/geocaching/icons/gray_Cache In Trash Out Event.png",
-                   {tr("geocache")}, {});
-  setWptIconByName("gray_Earthcache", "://icons/geocaching/icons/gray_Earthcache.png", {tr("geocache")}, {});
-  setWptIconByName("gray_Letterbox Cache", "://icons/geocaching/icons/gray_Letterbox Cache.png", {tr("geocache")}, {});
-  setWptIconByName("gray_Virtual Cache", "://icons/geocaching/icons/gray_Virtual Cache.png", {tr("geocache")}, {});
-  setWptIconByName("gray_Webcam Cache", "://icons/geocaching/icons/gray_Webcam Cache.png", {tr("geocache")}, {});
+    {
+      {16,16}, "gray_Traditional Cache", "://icons/geocaching/icons/gray_Traditional Cache.png",
+      {tr("geocache")},
+      {tr("traditional cache")}
+    },
+    {
+      {16,16}, "gray_Multi-Cache", "://icons/geocaching/icons/gray_Multi-Cache.png",
+      {tr("geocache")},
+      {tr("multi cache")}
+    },
+    {
+      {16,16}, "gray_Unknown Cache", "://icons/geocaching/icons/gray_Unknown Cache.png",
+      {tr("geocache")},
+      {tr("unknown cache")}
+    },
+    {
+      {16,16}, "gray_Wherigo Cache", "://icons/geocaching/icons/gray_Wherigo Cache.png",
+      {tr("geocache")},
+      {tr("wherigo cache")}
+    },
+    {
+      {16,16}, "gray_Event Cache", "://icons/geocaching/icons/gray_Event Cache.png",
+      {tr("geocache")},
+      {tr("event cache")}
+    },
+    {
+      {16,16}, "gray_Mega-Event Cache", "://icons/geocaching/icons/gray_Mega-Event Cache.png",
+      {tr("geocache")},
+      {tr("mega-event cache")}
+    },
+    {
+      {16,16}, "gray_Giga-Event Cache", "://icons/geocaching/icons/gray_Giga-Event Cache.png",
+      {tr("geocache")},
+      {tr("giga-event cache")}
+    },
+    {
+      {16,16}, "gray_Cache In Trash Out Event", "://icons/geocaching/icons/gray_Cache In Trash Out Event.png",
+      {tr("geocache")},
+      {tr("cache in trash out event")}
+    },
+    {
+      {16,16}, "gray_Earthcache", "://icons/geocaching/icons/gray_Earthcache.png",
+      {tr("geocache")},
+      {tr("earthcache")}
+    },
+    {
+      {16,16}, "gray_Letterbox Cache", "://icons/geocaching/icons/gray_Letterbox Cache.png",
+      {tr("geocache")},
+      {tr("letterbox cache")}
+    },
+    {
+      {16,16}, "gray_Virtual Cache", "://icons/geocaching/icons/gray_Virtual Cache.png",
+      {tr("geocache")},
+      {tr("virtual cache")}
+    },
+    {
+      {16,16}, "gray_Webcam Cache", "://icons/geocaching/icons/gray_Webcam Cache.png",
+      {tr("geocache")},
+      {tr("webcam cache")}
+    },
+  };
+  // clang-format on
 
   SETTINGS;
   QDir dirIcon(
@@ -378,23 +1038,35 @@ void CWptIconManager::init() {
   emit sigChanged();
 }
 
-void CWptIconManager::setWptIconByName(const QString& name, const QString& filename, const QStringList& categories,
-                                       const QStringList& tags) {
-  QImage icon(filename);
-  wptIcons[name] = (icon.offset() == QPoint(0, 0))
-                       ? icon_t(filename, icon.width() >> 1, icon.height() >> 1, categories, tags)
-                       : icon_t(filename, icon.offset().x(), icon.offset().y(), categories, tags);
+CWptIconManager::icon_t& CWptIconManager::findIconByName(const QString& name, bool& ok) {
+  for (icon_t& icon : wptIcons) {
+    if (icon.name == name) {
+      ok = true;
+      return icon;
+    }
+  }
+  ok = false;
+  return wptIcons.front();
 }
 
-void CWptIconManager::setWptIconByName(const QString& name, const QPixmap& icon, const QStringList& categories,
+void CWptIconManager::setWptIconByName(const QString& name, const QString& filename, const QStringList& categories,
                                        const QStringList& tags) {
-  SETTINGS;
-  QDir dirIcon(
-      cfg.value("Paths/externalWptIcons", IAppSetup::getPlatformInstance()->userDataPath("WaypointIcons")).toString());
-  QString filename = dirIcon.filePath(name + ".png");
+  QImage symbol(filename);
 
-  icon.save(filename);
-  wptIcons[name] = icon_t(filename, icon.width() >> 1, icon.height() >> 1, categories, tags);
+  icon_t newIcon;
+  if (symbol.offset() == QPoint(0, 0)) {
+    newIcon = {{symbol.width() >> 1, symbol.height() >> 1}, name, filename, categories, tags};
+  } else {
+    newIcon = {{symbol.offset().x(), symbol.offset().y()}, name, filename, categories, tags};
+  }
+
+  bool ok = false;
+  icon_t& icon = findIconByName(name, ok);
+  if (ok) {
+    icon = newIcon;
+  } else {
+    wptIcons.append(newIcon);
+  }
 }
 
 QPixmap CWptIconManager::loadIcon(const QString& path) {
@@ -409,26 +1081,16 @@ QPixmap CWptIconManager::loadIcon(const QString& path) {
 }
 
 QPixmap CWptIconManager::getWptIconByName(const QString& name, QPointF& focus, QString* src) {
-  QPixmap icon;
-  QString path;
+  bool ok = false;
+  icon_t& iconRef = findIconByName(name, ok);
 
-  if (wptIcons.contains(name)) {
-    focus = wptIcons[name].focus;
-    path = wptIcons[name].path;
-  } else {
-    focus = wptIcons["Default"].focus;
-    path = wptIcons["Default"].path;
-  }
-
-  if (path.isEmpty()) {
-    path = wptDefault;
-  }
+  focus = iconRef.focus;
 
   if (src) {
-    *src = path;
+    *src = iconRef.path;
   }
 
-  icon = loadIcon(path);
+  QPixmap icon = loadIcon(iconRef.path);
 
   // Limit icon size to "DEFAULTICONSIZE" pixel max.
   int maxValue = qMax(icon.width(), icon.height());
@@ -442,22 +1104,12 @@ QPixmap CWptIconManager::getWptIconByName(const QString& name, QPointF& focus, Q
 }
 
 QPixmap CWptIconManager::getWptIconScaledByName(const QString& name, QPointF& focus) {
-  QPixmap icon;
-  QString path;
+  bool ok;
+  icon_t& iconRef = findIconByName(name, ok);
 
-  if (wptIcons.contains(name)) {
-    focus = wptIcons[name].focus;
-    path = wptIcons[name].path;
-  } else {
-    focus = wptIcons["Default"].focus;
-    path = wptIcons["Default"].path;
-  }
+  focus = iconRef.focus;
 
-  if (path.isEmpty()) {
-    path = wptDefault;
-  }
-
-  icon = loadIcon(path);
+  QPixmap icon = loadIcon(iconRef.path);
 
   // First limit icon size to "DEFAULTICONSIZE" pixel max.
   // Then apply requested icon size
@@ -533,14 +1185,16 @@ QMenu* CWptIconManager::getWptIconMenu(QWidget* parent) {
 
   SETTINGS;
   const QStringList& lastIcons = cfg.value("Icons/lastIcons", {"Waypoint"}).toStringList();
-  const QMap<QString, icon_t>& wptIcons = getWptIcons();
 
-  for (const QString& key : lastIcons) {
-    const QString& icon = wptIcons[key].path;
-    const QPixmap& pixmap = loadIcon(icon);
-
-    QAction* action = menu->addAction(pixmap, key);
-    action->setProperty("iconName", key);
+  for (const QString& name : lastIcons) {
+    bool ok = false;
+    const icon_t& icon = findIconByName(name, ok);
+    if (!ok) {
+      continue;
+    }
+    const QPixmap& pixmap = loadIcon(icon.path);
+    QAction* action = menu->addAction(pixmap, name);
+    action->setProperty("iconName", name);
   }
 
   return menu;

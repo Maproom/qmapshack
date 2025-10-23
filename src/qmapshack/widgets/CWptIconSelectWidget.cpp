@@ -68,7 +68,7 @@ CWptIconSelectWidget::CWptIconSelectWidget(QWidget *parent) : QWidget(parent) {
   layout1 = new QBoxLayout(QBoxLayout::TopToBottom, this);
   layout1->setContentsMargins(0, 0, 0, 0);
 
-  layout2 = new QBoxLayout(QBoxLayout::LeftToRight, this);
+  layout2 = new QBoxLayout(QBoxLayout::LeftToRight);
   layout2->setContentsMargins(0, 0, 0, 0);
   layout2->addWidget(categoryFilter);
   layout2->addWidget(iconFilter);
@@ -99,7 +99,7 @@ void CWptIconSelectWidget::slotWptListChanged() {
   categoryFilter->clear();
 
   QSet<QString> categories;
-  const QList<CWptIconManager::icon_t> &icons = CWptIconManager::self().getWptIcons().values();
+  const QList<CWptIconManager::icon_t> &icons = CWptIconManager::self().getWptIcons();
   for (const CWptIconManager::icon_t &icon : icons) {
     for (const QString &category : icon.categories) {
       categories.insert(category);
@@ -113,18 +113,17 @@ void CWptIconSelectWidget::slotWptListChanged() {
   updateIconList("", "");
 }
 void CWptIconSelectWidget::updateIconList(const QString &filter, const QString &category) {
-  QMap<QString, CWptIconManager::icon_t> availableIcons;
-  QMap<QString, CWptIconManager::icon_t> visibleIcons;
+  QList<CWptIconManager::icon_t> availableIcons;
+  QList<CWptIconManager::icon_t> visibleIcons;
 
   // filter by category
   if (category.isEmpty()) {
     availableIcons = CWptIconManager::self().getWptIcons();
   } else {
-    const QMap<QString, CWptIconManager::icon_t> &icons = CWptIconManager::self().getWptIcons();
-    const QStringList &keys = icons.keys();
-    for (const QString &key : keys) {
-      if (icons[key].categories.contains(category)) {
-        availableIcons[key] = icons[key];
+    const QList<CWptIconManager::icon_t> &icons = CWptIconManager::self().getWptIcons();
+    for (const CWptIconManager::icon_t &icon : icons) {
+      if (icon.categories.contains(category)) {
+        availableIcons.append(icon);
       }
     }
   }
@@ -134,26 +133,21 @@ void CWptIconSelectWidget::updateIconList(const QString &filter, const QString &
     visibleIcons = availableIcons;
   } else {
     visibleIcons.clear();
-    const QList<QString> &keys = availableIcons.keys();
-    for (const QString &key : keys) {
-      const CWptIconManager::icon_t &icon = availableIcons[key];
-
-      if (key.contains(filter, Qt::CaseInsensitive)) {
-        visibleIcons[key] = icon;
+    for (const CWptIconManager::icon_t &icon : availableIcons) {
+      if (icon.name.contains(filter, Qt::CaseInsensitive)) {
+        visibleIcons.append(icon);
       } else {
         const QStringList &tags = icon.tags;
         if (!tags.filter(filter, Qt::CaseInsensitive).isEmpty()) {
-          visibleIcons[key] = icon;
+          visibleIcons.append(icon);
         }
       }
     }
   }
 
   QSet<QString> availableTags;
-  const QStringList &keys = visibleIcons.keys();
-  for (const QString &key : keys) {
-    const CWptIconManager::icon_t &icon = visibleIcons[key];
-    availableTags.insert(key);
+  for (const CWptIconManager::icon_t &icon : visibleIcons) {
+    availableTags.insert(icon.name);
     for (const QString &tag : icon.tags) {
       availableTags.insert(tag);
     }

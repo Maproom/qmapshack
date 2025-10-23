@@ -26,7 +26,7 @@
 
 CIconGrid::CIconGrid(QScrollArea *parent) : QWidget(parent) { setMouseTracking(true); }
 
-void CIconGrid::updateIconList(const QMap<QString, CWptIconManager::icon_t> &visibleIcons) {
+void CIconGrid::updateIconList(const QList<CWptIconManager::icon_t> &visibleIcons) {
   icons = visibleIcons;
   setIndexFocus(-1);
   QCoreApplication::postEvent(this, new QResizeEvent(size(), QSize()));
@@ -44,9 +44,8 @@ void CIconGrid::mouseMoveEvent(QMouseEvent *e) {
 }
 
 void CIconGrid::mousePressEvent(QMouseEvent *e) {
-  const QList<QString> &names = icons.keys();
-  if (indexFocus != -1 && indexFocus < names.size()) {
-    emit sigSelectedIcon(names[indexFocus]);
+  if (indexFocus != -1 && indexFocus < icons.size()) {
+    emit sigSelectedIcon(icons[indexFocus].name);
   }
 }
 
@@ -68,8 +67,8 @@ void CIconGrid::paintEvent(QPaintEvent *e) {
   p.setPen(Qt::NoPen);
   p.setBrush(Qt::white);
   const QRect r(0, 0, kTileSize, kTileSize);
-  const QList<CWptIconManager::icon_t> &values = icons.values();
-  const int nIcons = values.size();
+
+  const int nIcons = icons.size();
   for (int m = 0; m < rows; m++) {
     for (int n = 0; n < cols; n++) {
       const int index = m * cols + n;
@@ -80,7 +79,7 @@ void CIconGrid::paintEvent(QPaintEvent *e) {
           p.setBrush(Qt::lightGray);
         }
         p.drawRect(r);
-        p.drawPixmap(kTileSize / 4, kTileSize / 4, QPixmap(values[index].path).scaled(kTileSize / 2, kTileSize / 2));
+        p.drawPixmap(kTileSize / 4, kTileSize / 4, QPixmap(icons[index].path).scaled(kTileSize / 2, kTileSize / 2));
         p.restore();
       }
     }
@@ -88,9 +87,8 @@ void CIconGrid::paintEvent(QPaintEvent *e) {
 }
 
 void CIconGrid::setIndexFocus(int newIndex) {
-  const QList<QString> &names = icons.keys();
-  if (newIndex != -1 && newIndex < names.size()) {
-    emit sigIconName(names[newIndex]);
+  if (newIndex != -1 && newIndex < icons.size()) {
+    emit sigIconName(icons[newIndex].name);
   } else {
     emit sigIconName("");
   }

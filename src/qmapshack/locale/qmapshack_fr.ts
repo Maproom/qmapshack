@@ -474,7 +474,7 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
         <translation>Aucune information de géoréférencement trouvée.</translation>
     </message>
     <message>
-        <location filename="../dem/CDemVRT.cpp" line="418"/>
+        <location filename="../dem/CDemVRT.cpp" line="421"/>
         <source>Ele.</source>
         <translation type="unfinished">Alt.</translation>
     </message>
@@ -2878,7 +2878,12 @@ Il est possible de personnaliser ces deux paramètres. Il est conseillé de choi
         <translation>Changer le rayon de proximité...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1062"/>
+        <location filename="../gis/CGisListWks.cpp" line="210"/>
+        <source>Change Icon...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListWks.cpp" line="1063"/>
         <source>Waypoints</source>
         <translation>Points isolés</translation>
     </message>
@@ -2938,54 +2943,53 @@ Il est possible de personnaliser ces deux paramètres. Il est conseillé de choi
         <translation>Éditer les points de la surface</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="985"/>
+        <location filename="../gis/CGisListWks.cpp" line="986"/>
         <location filename="../gis/CGisListWks.cpp" line="1073"/>
         <source>Set Track Color</source>
         <translation>Choisir la couleur de la trace</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="613"/>
+        <location filename="../gis/CGisListWks.cpp" line="615"/>
         <source>Drop items...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1065"/>
         <source>Change Icon</source>
-        <translation>Choisir l&apos;icône</translation>
+        <translation type="vanished">Choisir l&apos;icône</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="731"/>
+        <location filename="../gis/CGisListWks.cpp" line="733"/>
         <source>Saving workspace. Please wait.</source>
         <translation>Sauvegarde de l&apos;espace de travail. Patientez.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="794"/>
+        <location filename="../gis/CGisListWks.cpp" line="795"/>
         <source>Loading workspace. Please wait.</source>
         <translation>Chargement de l&apos;espace de travail. Patientez.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1341"/>
+        <location filename="../gis/CGisListWks.cpp" line="1342"/>
         <source>Close all projects...</source>
         <translation>Fermer tous les projets...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1341"/>
+        <location filename="../gis/CGisListWks.cpp" line="1342"/>
         <source>This will remove all projects from the workspace.</source>
         <translation>Ceci enlevera tous les projets de l&apos;espace de travail.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1364"/>
+        <location filename="../gis/CGisListWks.cpp" line="1365"/>
         <source>Delete project...</source>
         <translation>Supprimer le projet...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1365"/>
+        <location filename="../gis/CGisListWks.cpp" line="1366"/>
         <source>Do you really want to delete %1?</source>
         <translation>Êtes-vous sûr de vouloir supprimer %1?</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1848"/>
-        <location filename="../gis/CGisListWks.cpp" line="1910"/>
+        <location filename="../gis/CGisListWks.cpp" line="1849"/>
+        <location filename="../gis/CGisListWks.cpp" line="1911"/>
         <source>&lt;b&gt;Update devices&lt;/b&gt;&lt;p&gt;Update %1&lt;br/&gt;Please wait...&lt;/p&gt;</source>
         <translation>&lt;b&gt;Mise à jour des appareils&lt;/b&gt;&lt;p&gt;Mise à jour de %1&lt;br/&gt;Patientez...&lt;/p&gt;</translation>
     </message>
@@ -3677,84 +3681,84 @@ ligne %2, colonne %3:
 <context>
     <name>CMainWindow</name>
     <message>
-        <location filename="../CMainWindow.cpp" line="605"/>
+        <location filename="../CMainWindow.cpp" line="603"/>
         <source>Select folder...</source>
         <translation>Choisir un dossier...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="881"/>
+        <location filename="../CMainWindow.cpp" line="879"/>
         <source> (Cloned)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="909"/>
+        <location filename="../CMainWindow.cpp" line="907"/>
         <source>Use &lt;b&gt;Menu-&gt;View-&gt;Add Map View&lt;/b&gt; to open a new view. Or &lt;b&gt;Menu-&gt;File-&gt;Load Map View&lt;/b&gt; to restore a saved one. Or click &lt;a href=&apos;NewView&apos;&gt;here&lt;/a&gt;.</source>
         <translation>Utilisez &lt;b&gt;Menu-&gt;Vue-&gt;Ajouter une vue cartographique&lt;/b&gt; pour ouvrir une nouvelle vue; &lt;b&gt;Menu-&gt;Fichier-&gt;Charger une vue cartographique&lt;/b&gt; pour restaurer une vue enregistrée; ou bien cliquez &lt;a href=&apos;NewView&apos;&gt;ici&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1020"/>
+        <location filename="../CMainWindow.cpp" line="1018"/>
         <source>Ele.: %1%2</source>
         <translation>Altitude: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1030"/>
+        <location filename="../CMainWindow.cpp" line="1028"/>
         <source>Slope: %1%2</source>
         <comment>terrain</comment>
         <translation>Pente du terrain : %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1042"/>
+        <location filename="../CMainWindow.cpp" line="1040"/>
         <source>[Grid: %1]</source>
         <translation>[Grille: %1]</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1172"/>
+        <location filename="../CMainWindow.cpp" line="1170"/>
         <source>Load GIS Data...</source>
         <translation>Charger des données SIG...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1199"/>
+        <location filename="../CMainWindow.cpp" line="1197"/>
         <source>Select output file</source>
         <translation>Sélectionner le fichier de sortie</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1199"/>
-        <location filename="../CMainWindow.cpp" line="1223"/>
+        <location filename="../CMainWindow.cpp" line="1197"/>
+        <location filename="../CMainWindow.cpp" line="1221"/>
         <source>QMapShack View (*.view)</source>
         <translation>Vue QMapShack (*.view)</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1223"/>
+        <location filename="../CMainWindow.cpp" line="1221"/>
         <source>Select file to load</source>
         <translation>Sélectionner le fichier à charger</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1428"/>
+        <location filename="../CMainWindow.cpp" line="1421"/>
         <source>Rename View...</source>
         <translation>Renommer cette vue...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1428"/>
+        <location filename="../CMainWindow.cpp" line="1421"/>
         <source>Enter new name for view</source>
         <translation>Choisir un autre nom pour cette vue cartographique</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1571"/>
+        <location filename="../CMainWindow.cpp" line="1564"/>
         <source>Fatal...</source>
         <translation>Fatal...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1572"/>
+        <location filename="../CMainWindow.cpp" line="1565"/>
         <source>QMapShack detected a badly installed Proj library. Please contact the package maintainer of your distribution to fix it.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1640"/>
+        <location filename="../CMainWindow.cpp" line="1633"/>
         <source>To link map views all map views must have the same projection and scale type. The function &apos;Link Map Views&apos; will be switched off, now.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1643"/>
+        <location filename="../CMainWindow.cpp" line="1636"/>
         <source>Link Map Views...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8361,9 +8365,1179 @@ ligne %2, colonne %3:
 <context>
     <name>CWptIconDialog</name>
     <message>
-        <location filename="../helpers/CWptIconDialog.cpp" line="75"/>
+        <location filename="../helpers/CWptIconDialog.cpp" line="54"/>
         <source>Path to user icons...</source>
         <translation>Répertoire des icônes personnalisées...</translation>
+    </message>
+</context>
+<context>
+    <name>CWptIconManager</name>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="71"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="76"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="81"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="86"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="91"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="96"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="101"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="106"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="111"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="116"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="121"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="126"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="131"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="136"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="141"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="146"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="151"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="156"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="161"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="166"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="171"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="176"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="181"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="186"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="191"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="196"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="201"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="206"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="211"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="216"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="221"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="226"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="231"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="236"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="241"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="246"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="251"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="256"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="261"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="266"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="271"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="276"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="281"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="286"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="291"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="296"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="301"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="306"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="311"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="316"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="321"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="326"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="331"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="336"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="341"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="346"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="351"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="356"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="361"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="366"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="371"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="376"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="381"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="386"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="391"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="396"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="401"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="406"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="411"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="416"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="421"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="426"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="431"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="436"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="441"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="446"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="451"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="456"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="461"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="466"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="471"/>
+        <source>markers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="77"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="82"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="87"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="92"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="472"/>
+        <source>dot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="77"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="82"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="87"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="92"/>
+        <source>city</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="97"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="102"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="107"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="452"/>
+        <source>flag</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="97"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="112"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="127"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="142"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="157"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="172"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="187"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="202"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="217"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="232"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="247"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="262"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="277"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="292"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="307"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="322"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="337"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="352"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="367"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="382"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="397"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="412"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="427"/>
+        <source>red</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="102"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="117"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="132"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="147"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="162"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="177"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="192"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="207"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="222"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="237"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="252"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="267"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="282"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="297"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="312"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="327"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="342"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="357"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="372"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="387"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="402"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="417"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="432"/>
+        <source>blue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="107"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="122"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="137"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="152"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="167"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="182"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="197"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="212"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="227"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="242"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="257"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="272"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="287"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="302"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="317"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="332"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="347"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="362"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="377"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="392"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="407"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="422"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="437"/>
+        <source>green</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="112"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="117"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="122"/>
+        <source>pin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="127"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="132"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="137"/>
+        <source>block</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="127"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="132"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="137"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="142"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="147"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="152"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="157"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="162"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="167"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="172"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="177"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="182"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="187"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="192"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="197"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="202"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="207"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="212"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="217"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="222"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="227"/>
+        <source>shape</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="142"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="147"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="152"/>
+        <source>circle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="157"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="162"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="167"/>
+        <source>diamond</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="172"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="177"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="182"/>
+        <source>oval</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="187"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="192"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="197"/>
+        <source>rectangle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="202"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="207"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="212"/>
+        <source>square</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="217"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="222"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="227"/>
+        <source>triangle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="232"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="237"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="242"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="247"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="252"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="257"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="262"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="267"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="272"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="277"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="282"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="287"/>
+        <source>letter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="232"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="237"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="242"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="247"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="252"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="257"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="262"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="267"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="272"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="277"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="282"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="287"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="292"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="297"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="302"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="307"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="312"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="317"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="322"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="327"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="332"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="337"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="342"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="347"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="352"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="357"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="362"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="367"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="372"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="377"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="382"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="387"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="392"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="397"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="402"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="407"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="412"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="417"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="422"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="427"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="432"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="437"/>
+        <source>alphanumerical</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="292"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="297"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="302"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="307"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="312"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="317"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="322"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="327"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="332"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="337"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="342"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="347"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="352"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="357"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="362"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="367"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="372"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="377"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="382"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="387"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="392"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="397"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="402"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="407"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="412"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="417"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="422"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="427"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="432"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="437"/>
+        <source>number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="442"/>
+        <source>residence</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="442"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="610"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="615"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="625"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="630"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="635"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="650"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="690"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="695"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="710"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="720"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="725"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="730"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="745"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="755"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="760"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="785"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="790"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="795"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="800"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="805"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="810"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="820"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="825"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="830"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="835"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="845"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="860"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="870"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="875"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="880"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="885"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="890"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="895"/>
+        <source>building</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="447"/>
+        <source>favorite</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="457"/>
+        <source>trail head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="462"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="467"/>
+        <source>smiley</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="472"/>
+        <source>waypoint</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="477"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="482"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="487"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="492"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="497"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="502"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="508"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="513"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="518"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="523"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="528"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="533"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="538"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="543"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="548"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="553"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="558"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="563"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="568"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="573"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="578"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="583"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="588"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="593"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="598"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="603"/>
+        <source>cycling</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="478"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="483"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="488"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="493"/>
+        <source>category</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="498"/>
+        <source>danger</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="503"/>
+        <source>first aid</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="509"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="710"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="715"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="720"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="725"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="730"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="765"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="875"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="880"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="885"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="890"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="895"/>
+        <source>food</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="514"/>
+        <source>generic</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="519"/>
+        <source>hors category</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="524"/>
+        <source>left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="529"/>
+        <source>right</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="534"/>
+        <source>sprint</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="539"/>
+        <source>straight</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="544"/>
+        <source>summit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="549"/>
+        <source>valley</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="554"/>
+        <source>water</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="559"/>
+        <source>left fork</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="564"/>
+        <source>right fork</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="569"/>
+        <source>middle fork</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="574"/>
+        <source>slight left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="579"/>
+        <source>sharp left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="584"/>
+        <source>slight right</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="589"/>
+        <source>sharp right</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="594"/>
+        <source>uturn</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="599"/>
+        <source>start</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="604"/>
+        <source>end</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="609"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="614"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="619"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="624"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="629"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="634"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="639"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="644"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="649"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="654"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="659"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="664"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="669"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="674"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="679"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="684"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="689"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="694"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="699"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="704"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="709"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="714"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="719"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="724"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="729"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="734"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="739"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="744"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="749"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="754"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="759"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="764"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="769"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="774"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="779"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="784"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="789"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="794"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="799"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="804"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="809"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="814"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="819"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="824"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="829"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="834"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="839"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="844"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="849"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="854"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="859"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="864"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="869"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="874"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="879"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="884"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="889"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="894"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="899"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="904"/>
+        <source>poi</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="610"/>
+        <source>bank</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="615"/>
+        <source>church</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="620"/>
+        <source>mine</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="620"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="625"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="630"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="705"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="735"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="745"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="775"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="780"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="860"/>
+        <source>landmark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="625"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="630"/>
+        <source>tower</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="634"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="639"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="644"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="649"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="664"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="669"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="674"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="679"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="729"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="804"/>
+        <source>transport</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="634"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="654"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="659"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="684"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="729"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="774"/>
+        <source>marine</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="635"/>
+        <source>gas station</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="640"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="645"/>
+        <source>parking</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="650"/>
+        <source>car rental</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="655"/>
+        <source>boat ramp</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="660"/>
+        <source>marina</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="665"/>
+        <source>transportation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="670"/>
+        <source>railway</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="675"/>
+        <source>airport</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="680"/>
+        <source>heliport</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="684"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="699"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="714"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="739"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="804"/>
+        <source>outdoors</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="684"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="689"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="694"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="699"/>
+        <source>accommodation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="685"/>
+        <source>campground</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="690"/>
+        <source>lodge</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="695"/>
+        <source>lodging</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="700"/>
+        <source>rv park</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="705"/>
+        <source>dam</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="710"/>
+        <source>bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="715"/>
+        <source>drinking water</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="720"/>
+        <source>fast food</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="725"/>
+        <source>pizza</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="730"/>
+        <source>restaurant</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="735"/>
+        <source>amusement park</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="740"/>
+        <source>beach</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="745"/>
+        <source>ghost town</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="750"/>
+        <source>information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="755"/>
+        <source>live theatre</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="760"/>
+        <source>museum</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="765"/>
+        <source>picnic area</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="770"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="775"/>
+        <source>scenic area</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="780"/>
+        <source>zoo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="785"/>
+        <source>city hall</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="790"/>
+        <source>library</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="795"/>
+        <source>police station</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="795"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="820"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="825"/>
+        <source>help</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="800"/>
+        <source>post office</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="805"/>
+        <source>restroom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="810"/>
+        <source>scales</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="810"/>
+        <source>court</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="815"/>
+        <source>telephone</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="820"/>
+        <source>medical facility</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="820"/>
+        <source>hospital</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="825"/>
+        <source>pharmacy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="830"/>
+        <source>school</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="834"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="839"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="844"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="849"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="854"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="859"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="864"/>
+        <source>sport</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="835"/>
+        <source>fitness center</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="835"/>
+        <source>gym</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="840"/>
+        <source>golf courser</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="845"/>
+        <source>ice skating</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="850"/>
+        <source>skiing area</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="855"/>
+        <source>ski resort</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="860"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="865"/>
+        <source>stadium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="870"/>
+        <source>car repair</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="875"/>
+        <source>convenience store</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="880"/>
+        <source>department store</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="885"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="890"/>
+        <source>shopping center</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="885"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="890"/>
+        <source>supermarket</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="895"/>
+        <source>winery</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="895"/>
+        <source>bottle shop</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="900"/>
+        <source>forest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="900"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="905"/>
+        <source>land</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="905"/>
+        <source>park</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="909"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="914"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="919"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="924"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="929"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="934"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="939"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="944"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="949"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="954"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="959"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="964"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="970"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="975"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="980"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="985"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="990"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="995"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="1000"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="1005"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="1010"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="1015"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="1020"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="1025"/>
+        <source>geocache</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="910"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="971"/>
+        <source>traditional cache</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="915"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="976"/>
+        <source>multi cache</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="920"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="981"/>
+        <source>unknown cache</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="925"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="986"/>
+        <source>wherigo cache</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="930"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="991"/>
+        <source>event cache</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="935"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="996"/>
+        <source>mega-event cache</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="940"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="1001"/>
+        <source>giga-event cache</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="945"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="1006"/>
+        <source>cache in trash out event</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="950"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="1011"/>
+        <source>earthcache</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="955"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="1016"/>
+        <source>letterbox cache</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="960"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="1021"/>
+        <source>virtual cache</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="965"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="1026"/>
+        <source>webcam cache</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="1040"/>
+        <source>external</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CWptIconManager.cpp" line="1137"/>
+        <source>more...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CWptIconSelectWidget</name>
+    <message>
+        <location filename="../widgets/CWptIconSelectWidget.cpp" line="59"/>
+        <source>Clear Filter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../widgets/CWptIconSelectWidget.cpp" line="62"/>
+        <source>start typing...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../widgets/CWptIconSelectWidget.cpp" line="63"/>
+        <source>Filter: Start to type and the list will be reduced to matching items.</source>
+        <translation type="unfinished">Tapez un filtre pour limiter la liste aux éléments correspondants.</translation>
     </message>
 </context>
 <context>
@@ -9151,13 +10325,13 @@ ligne %2, colonne %3:
     <name>IAbout</name>
     <message>
         <location filename="../IAbout.ui" line="6"/>
-        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="205"/>
+        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="209"/>
         <source>About....</source>
         <translation>À propos...</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="22"/>
-        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="206"/>
+        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="210"/>
         <source>&lt;b&gt;QMapShack&lt;/b&gt;, Version</source>
         <translation>&lt;b&gt;QMapShack&lt;/b&gt;, Version</translation>
     </message>
@@ -9167,35 +10341,35 @@ ligne %2, colonne %3:
         <location filename="../IAbout.ui" line="94"/>
         <location filename="../IAbout.ui" line="108"/>
         <location filename="../IAbout.ui" line="122"/>
-        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="207"/>
         <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="211"/>
-        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="213"/>
         <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="215"/>
         <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="217"/>
+        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="219"/>
+        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="221"/>
         <source>TextLabel</source>
         <translation>Libellé</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="73"/>
-        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="210"/>
+        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="214"/>
         <source>Qt</source>
         <translation>Qt</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="87"/>
-        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="212"/>
+        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="216"/>
         <source>GDAL</source>
         <translation>GDAL</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="101"/>
-        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="214"/>
+        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="218"/>
         <source>Proj4</source>
         <translation>Proj4</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="115"/>
-        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="216"/>
+        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="220"/>
         <source>Routino</source>
         <translation>Routino</translation>
     </message>
@@ -9241,19 +10415,19 @@ ligne %2, colonne %3:
     </message>
     <message>
         <location filename="../IAbout.ui" line="138"/>
-        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="218"/>
+        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="222"/>
         <source>&lt;b&gt;Contributors to the code:&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="151"/>
-        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="219"/>
+        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="223"/>
         <source>-</source>
         <translation type="unfinished">-</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="175"/>
-        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="221"/>
+        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="225"/>
         <source>© 2017 Oliver Eichler (oliver.eichler@gmx.de)</source>
         <translation>© 2017 Oliver Eichler (oliver.eichler@gmx.de)</translation>
     </message>
@@ -9279,7 +10453,7 @@ ligne %2, colonne %3:
     </message>
     <message>
         <location filename="../IAbout.ui" line="168"/>
-        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="220"/>
+        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="224"/>
         <source>This software is licensed under GPL3 or any later version</source>
         <translation>Ce logiciel est distribué sous les termes de la licence GPL3 ou toute version ultérieure</translation>
     </message>
@@ -9585,29 +10759,28 @@ Si vous voulez conserver seulement une moitié vous pouvez simplement enlever le
     <name>IDemPathSetup</name>
     <message>
         <location filename="../dem/IDemPathSetup.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemPathSetup.h" line="142"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemPathSetup.h" line="135"/>
         <source>Setup DEM file paths</source>
         <translation>Configurer les répertoires de données d&apos;altitude (DEM)</translation>
     </message>
     <message>
         <location filename="../dem/IDemPathSetup.ui" line="31"/>
         <location filename="../dem/IDemPathSetup.ui" line="51"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemPathSetup.h" line="143"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemPathSetup.h" line="144"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemPathSetup.h" line="136"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemPathSetup.h" line="137"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
         <location filename="../dem/IDemPathSetup.ui" line="112"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemPathSetup.h" line="146"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemPathSetup.h" line="139"/>
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../../../build/src/qmapshack/ui_IDemPathSetup.h" line="147"/>
         <source>Help! I want DEMs!
 I don&apos;t want to read the documentation!</source>
-        <translation>À l&apos;aide ! Je veux des données d&apos;altitude (DEM) ! Je ne veux pas lire la documentation !</translation>
+        <translation type="vanished">À l&apos;aide ! Je veux des données d&apos;altitude (DEM) ! Je ne veux pas lire la documentation !</translation>
     </message>
 </context>
 <context>
@@ -12568,659 +13741,655 @@ Nom de fichier: %1</translation>
     <name>IMainWindow</name>
     <message>
         <location filename="../IMainWindow.ui" line="17"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="636"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="629"/>
         <source>QMapShack</source>
         <translation>QMapShack</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="63"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="823"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="812"/>
         <source>File</source>
         <translation>Fichier</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="82"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="824"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="813"/>
         <source>View</source>
         <translation>Vue</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="108"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="825"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="814"/>
         <source>Window</source>
         <translation>Fenêtre</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="118"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="826"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="815"/>
         <source>?</source>
         <translation>?</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="138"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="828"/>
+        <location filename="../IMainWindow.ui" line="137"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="817"/>
         <source>Tool</source>
         <translation>Outils</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="158"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="829"/>
+        <location filename="../IMainWindow.ui" line="157"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="818"/>
         <source>Maps</source>
         <translation>Cartes</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="195"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="830"/>
+        <location filename="../IMainWindow.ui" line="194"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="819"/>
         <source>Dig. Elev. Model (DEM)</source>
         <translation>Modèle numérique de terrain (DEM)</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="127"/>
-        <location filename="../IMainWindow.ui" line="228"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="827"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="831"/>
+        <location filename="../IMainWindow.ui" line="227"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="816"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="820"/>
         <source>Workspace</source>
         <translation>Espace de travail</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="237"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="832"/>
+        <location filename="../IMainWindow.ui" line="236"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="821"/>
         <source>Toolbar</source>
         <translation>Barre d&apos;outils</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="263"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="834"/>
+        <location filename="../IMainWindow.ui" line="262"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="823"/>
         <source>Routing</source>
         <translation>Routage</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="281"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="835"/>
+        <location filename="../IMainWindow.ui" line="280"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="824"/>
         <source>Realtime</source>
         <translation>Temps réel</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="327"/>
-        <location filename="../IMainWindow.ui" line="330"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="637"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="639"/>
+        <location filename="../IMainWindow.ui" line="326"/>
+        <location filename="../IMainWindow.ui" line="329"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="630"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="632"/>
         <source>Add Map View</source>
         <translation>Ajouter une vue cartographique</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="333"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="642"/>
+        <location filename="../IMainWindow.ui" line="332"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="635"/>
         <source>Ctrl+T</source>
         <translation>Ctrl+T</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="348"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="644"/>
+        <location filename="../IMainWindow.ui" line="347"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="637"/>
         <source>Show Scale</source>
         <translation>Afficher l&apos;échelle</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="360"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="645"/>
+        <location filename="../IMainWindow.ui" line="359"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="638"/>
         <source>Setup Map Font</source>
         <translation>Configurer la police de la carte</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="375"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="646"/>
+        <location filename="../IMainWindow.ui" line="374"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="639"/>
         <source>Show Grid</source>
         <translation>Afficher la grille</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="378"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="648"/>
+        <location filename="../IMainWindow.ui" line="377"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="641"/>
         <source>Ctrl+G</source>
         <translation>Ctrl+G</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="390"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="650"/>
+        <location filename="../IMainWindow.ui" line="389"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="643"/>
         <source>Setup Grid</source>
         <translation>Configurer la grille</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="393"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="652"/>
+        <location filename="../IMainWindow.ui" line="392"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="645"/>
         <source>Ctrl+Alt+G</source>
         <translation>Ctrl+Alt+G</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="408"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="654"/>
+        <location filename="../IMainWindow.ui" line="407"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="647"/>
         <source>Flip Mouse Wheel</source>
         <translation>Inverser le sens de la molette de souris</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="420"/>
-        <location filename="../IMainWindow.ui" line="423"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="655"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="657"/>
+        <location filename="../IMainWindow.ui" line="419"/>
+        <location filename="../IMainWindow.ui" line="422"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="648"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="650"/>
         <source>Setup Map Paths</source>
         <translation>Configurer les répertoires des cartes</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="438"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="659"/>
+        <location filename="../IMainWindow.ui" line="437"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="652"/>
         <source>POI Text</source>
         <translation>Libellés des points d&apos;interêt</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="453"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="660"/>
+        <location filename="../IMainWindow.ui" line="452"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="653"/>
         <source>Night / Day</source>
         <translation>Jour / Nuit</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="471"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="663"/>
+        <location filename="../IMainWindow.ui" line="470"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="656"/>
         <source>Ctrl+I</source>
         <translation>CTRL + I</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="483"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="665"/>
+        <location filename="../IMainWindow.ui" line="482"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="658"/>
         <source>Setup DEM Paths</source>
         <translation>Configurer les répertoires DEM</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="495"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="666"/>
+        <location filename="../IMainWindow.ui" line="494"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="659"/>
         <source>About</source>
         <translation>À propos</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="1045"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="807"/>
+        <location filename="../IMainWindow.ui" line="1032"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="796"/>
         <source>Help</source>
         <translation>Aide</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="1048"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="809"/>
+        <location filename="../IMainWindow.ui" line="1035"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="798"/>
         <source>F1</source>
         <translation>F1</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="519"/>
-        <location filename="../IMainWindow.ui" line="522"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="668"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="670"/>
+        <location filename="../IMainWindow.ui" line="518"/>
+        <location filename="../IMainWindow.ui" line="521"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="661"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="663"/>
         <source>Setup Map View</source>
         <translation>Configurer la vue cartographique</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="507"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="667"/>
+        <location filename="../IMainWindow.ui" line="506"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="660"/>
         <source>Online Wiki</source>
         <translation>Wiki en ligne</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="534"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="672"/>
+        <location filename="../IMainWindow.ui" line="533"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="665"/>
         <source>Load GIS Data</source>
         <translation>Charger des données SIG</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="537"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="674"/>
+        <location filename="../IMainWindow.ui" line="536"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="667"/>
         <source>Load projects from file</source>
         <translation>Charger un fichier projet</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="540"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="677"/>
+        <location filename="../IMainWindow.ui" line="539"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="670"/>
         <source>Ctrl+L</source>
         <translation>Ctrl+L</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="552"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="679"/>
+        <location filename="../IMainWindow.ui" line="551"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="672"/>
         <source>Save All GIS Data</source>
         <translation>Enregistrer toutes les données SIG</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="555"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="681"/>
+        <location filename="../IMainWindow.ui" line="554"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="674"/>
         <source>Save all projects in the workspace</source>
         <translation>Enregistrer tous les projets de l&apos;espace de travail</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="558"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="684"/>
+        <location filename="../IMainWindow.ui" line="557"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="677"/>
         <source>Ctrl+S</source>
         <translation>Ctrl+S</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="582"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="687"/>
+        <location filename="../IMainWindow.ui" line="581"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="680"/>
         <source>Add empty project</source>
         <translation>Ajouter un projet vide</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="597"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="688"/>
+        <location filename="../IMainWindow.ui" line="596"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="681"/>
         <source>Geosearch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="609"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="689"/>
+        <location filename="../IMainWindow.ui" line="608"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="682"/>
         <source>Close all projects</source>
         <translation>Fermer tous les projets</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="612"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="691"/>
+        <location filename="../IMainWindow.ui" line="611"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="684"/>
         <source>F8</source>
         <translation>F8</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="624"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="693"/>
+        <location filename="../IMainWindow.ui" line="623"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="686"/>
         <source>Setup Units</source>
         <translation>Configurer les unités</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="636"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="694"/>
+        <location filename="../IMainWindow.ui" line="635"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="687"/>
         <source>Setup Workspace</source>
         <translation>Configurer l&apos;espace de travail</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="639"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="696"/>
+        <location filename="../IMainWindow.ui" line="638"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="689"/>
         <source>Setup save on exit.</source>
         <translation>Sauvegarde de la configuration en quittant</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="651"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="698"/>
+        <location filename="../IMainWindow.ui" line="650"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="691"/>
         <source>Import Database from QLandkarte</source>
         <translation>Importer une base de données QLandkarte</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="654"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="700"/>
+        <location filename="../IMainWindow.ui" line="653"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="693"/>
         <source>Import QLandkarte GT database</source>
         <translation>Importer une base de données QLandkarte GT</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="666"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="702"/>
+        <location filename="../IMainWindow.ui" line="665"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="695"/>
         <source>VRT Builder</source>
         <translation>Générateur de VRT</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="669"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="704"/>
+        <location filename="../IMainWindow.ui" line="668"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="697"/>
         <source>GUI front end to gdalbuildvrt</source>
         <translation>Interface utilisateur pour gdalbuildvrt</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="681"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="706"/>
+        <location filename="../IMainWindow.ui" line="680"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="699"/>
         <source>Store Map View</source>
         <translation>Enregistrer une vue cartographique</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="684"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="708"/>
+        <location filename="../IMainWindow.ui" line="683"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="701"/>
         <source>Write current active map and DEM list including the properties to a file</source>
         <translation>Sauvegarder les cartes et calques DEM actives et leurs paramètres dans un fichier</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="696"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="710"/>
+        <location filename="../IMainWindow.ui" line="695"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="703"/>
         <source>Load Map View</source>
         <translation>Charger une vue cartographique</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="699"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="712"/>
+        <location filename="../IMainWindow.ui" line="698"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="705"/>
         <source>Restore view with active map and DEM list including the properties from a file</source>
         <translation>Rétablir une vue avec les cartes et calques DEM et leurs paramètres à partir d&apos;un fichier</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="714"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="714"/>
+        <location filename="../IMainWindow.ui" line="713"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="707"/>
         <source>Track Profile as Window</source>
         <translation>Profil de trace dans une fenêtre</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="717"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="716"/>
+        <location filename="../IMainWindow.ui" line="716"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="709"/>
         <source>Show the track profile in it&apos;s own window instead within the map view.</source>
         <translation>Montrer le profil de la trace dans une fenêtre à part plutôt que dans la vue.</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="774"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="730"/>
+        <location filename="../IMainWindow.ui" line="773"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="723"/>
         <source>Save(Print) Map</source>
         <translation>Imprimer la carte</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="879"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="759"/>
+        <location filename="../IMainWindow.ui" line="866"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="748"/>
         <source>Fullscreen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="894"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="763"/>
+        <location filename="../IMainWindow.ui" line="881"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="752"/>
         <source>Min./Max. Labels</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="927"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="772"/>
+        <location filename="../IMainWindow.ui" line="914"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="761"/>
         <source>Track Info</source>
         <translation>Informations sur la trace</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="930"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="774"/>
+        <location filename="../IMainWindow.ui" line="917"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="763"/>
         <source>Select what information is shown for a highlighted track.</source>
         <translation>Choisir quelles informations sont affichée lorsqu&apos;une trace est sélectionnée.</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="942"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="776"/>
+        <location filename="../IMainWindow.ui" line="929"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="765"/>
         <source>Track Point Info Table</source>
         <translation type="unfinished">Table des étapes</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="945"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="778"/>
+        <location filename="../IMainWindow.ui" line="932"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="767"/>
         <source>Show a legend for all track point info bullets along the track.</source>
         <translation>Afficher une légende sur les étapes des traces.</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="957"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="780"/>
+        <location filename="../IMainWindow.ui" line="944"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="769"/>
         <source>Track Summary</source>
         <translation type="unfinished">Résumé de trace</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="960"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="782"/>
+        <location filename="../IMainWindow.ui" line="947"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="771"/>
         <source>Show the track summary.</source>
         <translation>Afficher le résumé de trace.</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="972"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="784"/>
+        <location filename="../IMainWindow.ui" line="959"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="773"/>
         <source>Min./Max Summary</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="975"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="786"/>
+        <location filename="../IMainWindow.ui" line="962"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="775"/>
         <source>Show the minimum and the maximum values of the track properties in a table.</source>
         <translation>Afficher les valeur min et max des propriétés du tableau.</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="987"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="788"/>
+        <location filename="../IMainWindow.ui" line="974"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="777"/>
         <source>Track Profile</source>
         <translation>Profil de la trace</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="990"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="790"/>
+        <location filename="../IMainWindow.ui" line="977"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="779"/>
         <source>Show the track profile.</source>
         <translation>Montrer le profil de la trace.</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="999"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="792"/>
+        <location filename="../IMainWindow.ui" line="986"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="781"/>
         <source>Take Screenshot</source>
         <translation>Prendre une capture d&apos;écran</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="1002"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="794"/>
+        <location filename="../IMainWindow.ui" line="989"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="783"/>
         <source>Take a screenshot from the current active map view.</source>
         <translation>Capturer la carte telle qu&apos;elle est affichée dans la vue actuelle.</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="1005"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="797"/>
+        <location filename="../IMainWindow.ui" line="992"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="786"/>
         <source>Ctrl+Alt+P</source>
         <translation>Ctrl+Alt+P</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="1017"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="799"/>
+        <location filename="../IMainWindow.ui" line="1004"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="788"/>
         <source>Track Point Info</source>
         <translation type="unfinished">Description de l&apos;étape</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="1020"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="801"/>
+        <location filename="../IMainWindow.ui" line="1007"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="790"/>
         <source>Mark track points with additional information by auto-numbered bullets.</source>
         <translation>Afficher les points des traces ayant des informations supplémentaire (étapes) par un numéro.</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="1033"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="803"/>
+        <location filename="../IMainWindow.ui" line="1020"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="792"/>
         <source>Track Highlight</source>
         <translation>Surbrillance de trace</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="1036"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="805"/>
+        <location filename="../IMainWindow.ui" line="1023"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="794"/>
         <source>Mark the highlighted track with a red border.</source>
         <translation>Mettre la trace sélectionnée en évidence avec une bordure rouge.</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="1060"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="811"/>
+        <location filename="../IMainWindow.ui" line="1047"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="800"/>
         <source>Link Map Views</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="1063"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="813"/>
+        <location filename="../IMainWindow.ui" line="1050"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="802"/>
         <source>All map views move and zoom to the same point.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="1072"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="815"/>
+        <location filename="../IMainWindow.ui" line="1059"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="804"/>
         <source>Setup POI Paths</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="1075"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="817"/>
+        <location filename="../IMainWindow.ui" line="1062"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="806"/>
         <source>Setup paths to POI collections</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="1084"/>
-        <location filename="../IMainWindow.ui" line="1087"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="819"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="821"/>
+        <location filename="../IMainWindow.ui" line="1071"/>
+        <location filename="../IMainWindow.ui" line="1074"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="808"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="810"/>
         <source>Setup Map Icon Sizes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="720"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="719"/>
+        <location filename="../IMainWindow.ui" line="719"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="712"/>
         <source>Ctrl+E</source>
         <translation>Ctrl+E</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="293"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="836"/>
+        <location filename="../IMainWindow.ui" line="292"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="825"/>
         <source>POI Collections</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="468"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="661"/>
+        <location filename="../IMainWindow.ui" line="467"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="654"/>
         <source>Map Tooltip</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="570"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="686"/>
+        <location filename="../IMainWindow.ui" line="569"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="679"/>
         <source>Setup Timezone</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="732"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="721"/>
+        <location filename="../IMainWindow.ui" line="731"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="714"/>
         <source>Close</source>
         <translation>Fermer</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="735"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="723"/>
+        <location filename="../IMainWindow.ui" line="734"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="716"/>
         <source>Ctrl+Q</source>
         <translation>CTRL + Q</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="747"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="725"/>
+        <location filename="../IMainWindow.ui" line="746"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="718"/>
         <source>Clone Map View</source>
         <translation>Dupliquer une vue cartographique</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="750"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="727"/>
+        <location filename="../IMainWindow.ui" line="749"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="720"/>
         <source>Ctrl+Shift+T</source>
         <translation>Ctrl+Maj+T</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="762"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="729"/>
+        <location filename="../IMainWindow.ui" line="761"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="722"/>
         <source>Create Routino Database</source>
         <translation>Créer une base de données Routino</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="777"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="732"/>
+        <location filename="../IMainWindow.ui" line="776"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="725"/>
         <source>Print a selected area of the map</source>
         <translation>Imprimer une zone sélectionnée de la carte</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="780"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="735"/>
+        <location filename="../IMainWindow.ui" line="779"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="728"/>
         <source>Ctrl+P</source>
         <translation>CTRL + P</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="792"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="737"/>
+        <location filename="../IMainWindow.ui" line="791"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="730"/>
         <source>Setup Coord. Format</source>
         <translation>Choisir le format de coordonnées</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="795"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="739"/>
+        <location filename="../IMainWindow.ui" line="794"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="732"/>
         <source>Change the format coordinates are displayed</source>
         <translation>Modifier le format des coordonnées affichées</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="807"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="741"/>
+        <location filename="../IMainWindow.ui" line="806"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="734"/>
         <source>Setup Map Background</source>
         <translation>Modifier l&apos;arrière-plan de la carte</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="819"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="742"/>
         <source>Setup Waypoint Icons</source>
-        <translation>Modifier les icônes des points isolés</translation>
+        <translation type="vanished">Modifier les icônes des points isolés</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="822"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="744"/>
         <source>Setup path to custom icons</source>
-        <translation>Modifier le chemin des icônes personnalisés</translation>
+        <translation type="vanished">Modifier le chemin des icônes personnalisés</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="831"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="746"/>
+        <location filename="../IMainWindow.ui" line="818"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="735"/>
         <source>Close Tab</source>
         <translation>Fermer l&apos;onglet</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="834"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="748"/>
+        <location filename="../IMainWindow.ui" line="821"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="737"/>
         <source>Ctrl+W</source>
         <translation>CTRL + W</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="843"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="750"/>
+        <location filename="../IMainWindow.ui" line="830"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="739"/>
         <source>Quickstart Help</source>
         <translation>Aide Rapide</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="852"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="751"/>
+        <location filename="../IMainWindow.ui" line="839"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="740"/>
         <source>Setup Toolbar</source>
         <translation>Réglages barre d&apos;outils</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="864"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="752"/>
+        <location filename="../IMainWindow.ui" line="851"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="741"/>
         <source>Toggle Docks</source>
         <translation>Activer les docks</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="867"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="754"/>
+        <location filename="../IMainWindow.ui" line="854"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="743"/>
         <source>Toggle visibility of dockable windows</source>
         <translation>Activer la visibilité des fenêtres dockables</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="870"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="757"/>
+        <location filename="../IMainWindow.ui" line="857"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="746"/>
         <source>Ctrl+D</source>
         <translation>CTRL + D</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="882"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="761"/>
+        <location filename="../IMainWindow.ui" line="869"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="750"/>
         <source>F11</source>
         <translation>F11</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="897"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="765"/>
+        <location filename="../IMainWindow.ui" line="884"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="754"/>
         <source>Show the minimum and maximum values of the track properties along the track in the map view.</source>
         <translation>Afficher les valeurs min/max le long de la trace dans la vue carte.</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="900"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="768"/>
+        <location filename="../IMainWindow.ui" line="887"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="757"/>
         <source>Ctrl+N</source>
         <translation>Ctrl+N</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="909"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="770"/>
+        <location filename="../IMainWindow.ui" line="896"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="759"/>
         <source>Start QMapTool</source>
         <translation>Lancer QMapTool</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="918"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="771"/>
+        <location filename="../IMainWindow.ui" line="905"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="760"/>
         <source>Change Map View Name</source>
         <translation>Renommer la Vue</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="251"/>
-        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="833"/>
+        <location filename="../IMainWindow.ui" line="250"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="822"/>
         <source>Database</source>
         <translation>Base de données</translation>
     </message>
@@ -17555,18 +18724,18 @@ simply type the new time/date.</source>
 <context>
     <name>IUnit</name>
     <message>
-        <location filename="../units/IUnit.cpp" line="881"/>
-        <location filename="../units/IUnit.cpp" line="888"/>
+        <location filename="../units/IUnit.cpp" line="821"/>
+        <location filename="../units/IUnit.cpp" line="828"/>
         <source>Error</source>
         <translation>Erreur</translation>
     </message>
     <message>
-        <location filename="../units/IUnit.cpp" line="882"/>
+        <location filename="../units/IUnit.cpp" line="822"/>
         <source>Bad position format. Must be: &quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot; or &quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot;</source>
         <translation>Format de position incorrect. Formats valides: &quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot; ou &quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot; </translation>
     </message>
     <message>
-        <location filename="../units/IUnit.cpp" line="888"/>
+        <location filename="../units/IUnit.cpp" line="828"/>
         <source>Position values out of bounds. </source>
         <translation>Valeurs de la position hors de la plage autorisée.</translation>
     </message>
@@ -17638,31 +18807,31 @@ simply type the new time/date.</source>
     <name>IWptIconDialog</name>
     <message>
         <location filename="../helpers/IWptIconDialog.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IWptIconDialog.h" line="93"/>
+        <location filename="../../../build/src/qmapshack/ui_IWptIconDialog.h" line="92"/>
         <source>Icons...</source>
         <translation>Icônes...</translation>
     </message>
     <message>
-        <location filename="../helpers/IWptIconDialog.ui" line="68"/>
-        <location filename="../../../build/src/qmapshack/ui_IWptIconDialog.h" line="94"/>
+        <location filename="../helpers/IWptIconDialog.ui" line="61"/>
+        <location filename="../../../build/src/qmapshack/ui_IWptIconDialog.h" line="93"/>
         <source>External Icons:</source>
         <translation>Icônes externes:</translation>
     </message>
     <message>
-        <location filename="../helpers/IWptIconDialog.ui" line="75"/>
-        <location filename="../../../build/src/qmapshack/ui_IWptIconDialog.h" line="95"/>
+        <location filename="../helpers/IWptIconDialog.ui" line="68"/>
+        <location filename="../../../build/src/qmapshack/ui_IWptIconDialog.h" line="94"/>
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../helpers/IWptIconDialog.ui" line="82"/>
-        <location filename="../../../build/src/qmapshack/ui_IWptIconDialog.h" line="96"/>
+        <location filename="../helpers/IWptIconDialog.ui" line="75"/>
+        <location filename="../../../build/src/qmapshack/ui_IWptIconDialog.h" line="95"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
-        <location filename="../helpers/IWptIconDialog.ui" line="95"/>
-        <location filename="../../../build/src/qmapshack/ui_IWptIconDialog.h" line="97"/>
+        <location filename="../helpers/IWptIconDialog.ui" line="88"/>
+        <location filename="../../../build/src/qmapshack/ui_IWptIconDialog.h" line="96"/>
         <source>All custom icons have to be *.bmp or *.png format.</source>
         <translation>Les icônes personnalisés doivent être de type *.bmp ou *.png.</translation>
     </message>

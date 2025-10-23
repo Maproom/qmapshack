@@ -524,6 +524,77 @@ void CWptIconManager::init() {
     },
 
     {
+      {16,16}, "Navaid, Amber", "://icons/waypoints/32x32/NavaidAmber.png",
+      {tr("navaid")},
+      {tr("amber")}
+    },
+    {
+      {16,16}, "Navaid, Black", "://icons/waypoints/32x32/NavaidBlack.png",
+      {tr("navaid")},
+      {tr("black")}
+    },
+    {
+      {16,16}, "Navaid, Blue", "://icons/waypoints/32x32/NavaidBlue.png",
+      {tr("navaid")},
+      {tr("blue")}
+    },
+    {
+      {16,16}, "Navaid, Green", "://icons/waypoints/32x32/NavaidGreen.png",
+      {tr("navaid")},
+      {tr("green")}
+    },
+    {
+      {16,16}, "Navaid, Green/Red", "://icons/waypoints/32x32/NavaidGreenRed.png",
+      {tr("navaid")},
+      {tr("green"), tr("red")}
+    },
+    {
+      {16,16}, "Navaid, Green/White", "://icons/waypoints/32x32/NavaidGreenWhite.png",
+      {tr("navaid")},
+      {tr("green"), tr("white")}
+    },
+    {
+      {16,16}, "Navaid, Orange", "://icons/waypoints/32x32/NavaidOrange.png",
+      {tr("navaid")},
+      {tr("orange")}
+    },
+    {
+      {16,16}, "Navaid, Red", "://icons/waypoints/32x32/NavaidRed.png",
+      {tr("navaid")},
+      {tr("red")}
+    },
+    {
+      {16,16}, "Navaid, Red/Green", "://icons/waypoints/32x32/NavaidRedGreen.png",
+      {tr("navaid")},
+      {tr("red"), tr("green")}
+    },
+    {
+      {16,16}, "Navaid, Red/White", "://icons/waypoints/32x32/NavaidRedWhite.png",
+      {tr("navaid")},
+      {tr("red"), tr("white")}
+    },
+    {
+      {16,16}, "Navaid, Violet", "://icons/waypoints/32x32/NavaidViolet.png",
+      {tr("navaid")},
+      {tr("violet")}
+    },
+    {
+      {16,16}, "Navaid, White", "://icons/waypoints/32x32/NavaidWhite.png",
+      {tr("navaid")},
+      {tr("white")}
+    },
+    {
+      {16,16}, "Navaid, White/Green", "://icons/waypoints/32x32/NavaidWhiteGreen.png",
+      {tr("navaid")},
+      {tr("white"), tr("green")}
+    },
+    {
+      {16,16}, "Navaid, White/Red", "://icons/waypoints/32x32/NavaidWhiteRed.png",
+      {tr("navaid")},
+      {tr("white"), tr("red")}
+    },
+
+    {
       {16,16}, "1st Category", "://icons/waypoints/32x32/1stCategory.png",
       {tr("cycling")},
       {tr("category")}

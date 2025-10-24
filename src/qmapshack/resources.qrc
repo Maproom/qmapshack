@@ -672,6 +672,8 @@
         <file>../icons/waypoints/32x32/2ndCategory.png</file>
         <file>../icons/waypoints/32x32/3rdCategory.png</file>
         <file>../icons/waypoints/32x32/4thCategory.png</file>
+        <file>../icons/waypoints/32x32/Anchor.png</file>
+        <file>../icons/waypoints/32x32/AnchorProhibited.png</file>
         <file>../icons/waypoints/32x32/BallPark.png</file>
         <file>../icons/waypoints/32x32/Beacon.png</file>
         <file>../icons/waypoints/32x32/BikeTrail.png</file>

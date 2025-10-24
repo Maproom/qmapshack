@@ -523,6 +523,26 @@ void CWptIconManager::init() {
     },
 
     {
+      {16,16}, "Anchor", "://icons/waypoints/32x32/Anchor.png",
+      {tr("marine")},
+      {tr("anchor")}
+    },
+    {
+      {16,16}, "Anchor Prohibited", "://icons/waypoints/32x32/AnchorProhibited.png",
+      {tr("marine")},
+      {tr("anchor")}
+    },
+    {
+      {16,16}, "Beacon", "://icons/waypoints/32x32/Beacon.png",
+      {tr("marine")},
+      {tr("beacon")}
+    },
+    {
+      {16,16}, "Coast Guard", "://icons/waypoints/32x32/CoastGuard.png",
+      {tr("marine")},
+      {tr("flag")}
+    },
+    {
       {16,16}, "Diver Down Flag 1", "://icons/waypoints/32x32/DiverDownFlag1.png",
       {tr("marine")},
       {tr("diver down flag")}
@@ -551,16 +571,6 @@ void CWptIconManager::init() {
       {16,16}, "Restricted Area", "://icons/waypoints/32x32/RestrictedArea.png",
       {tr("marine")},
       {tr("area")}
-    },
-    {
-      {16,16}, "Beacon", "://icons/waypoints/32x32/Beacon.png",
-      {tr("marine")},
-      {tr("beacon")}
-    },
-    {
-      {16,16}, "Coast Guard", "://icons/waypoints/32x32/CoastGuard.png",
-      {tr("marine")},
-      {tr("flag")}
     },
 
     {

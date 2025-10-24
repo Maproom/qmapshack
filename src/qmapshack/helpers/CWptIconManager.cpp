@@ -1244,12 +1244,22 @@ void CWptIconManager::init() {
   QDir dirIcon(
       cfg.value("Paths/externalWptIcons", IAppSetup::getPlatformInstance()->userDataPath("WaypointIcons")).toString());
 
-  const QStringList& filenames = dirIcon.entryList(QString("*.bmp *.png").split(" "), QDir::Files);
-
-  for (const QString& filename : filenames) {
-    QFileInfo fi(filename);
-    QString name = fi.completeBaseName();
-    setWptIconByName(name, dirIcon.filePath(filename), {tr("external")}, {});
+  QDirIterator it(dirIcon.path(), {"*.bmp", "*.png"}, QDir::Files, QDirIterator::Subdirectories|QDirIterator::FollowSymlinks);
+  while (it.hasNext()) {
+    it.next();
+    const QString& name = QFileInfo(it.fileName()).completeBaseName();
+    const QString& path = it.filePath();
+    const QString& relpath = dirIcon.relativeFilePath(path);
+    const QStringList& items = relpath.split("/");
+    QStringList categories = {tr("external")};
+    if (items.size() > 1) {
+      categories << items.at(0).split(",");
+    }
+    QStringList tags = {};
+    if (items.size() > 2) {
+      tags << items.at(1).split(",");
+    }
+    setWptIconByName(name, path, categories, tags);
   }
 
   emit sigChanged();

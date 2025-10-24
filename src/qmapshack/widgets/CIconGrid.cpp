@@ -24,6 +24,8 @@
 #include <QResizeEvent>
 #include <QScrollBar>
 
+#include "helpers/CDraw.h"
+
 CIconGrid::CIconGrid(QScrollArea *parent) : QWidget(parent) { setMouseTracking(true); }
 
 void CIconGrid::updateIconList(const QList<CWptIconManager::icon_t> &visibleIcons) {
@@ -60,13 +62,14 @@ void CIconGrid::resizeEvent(QResizeEvent *e) {
 
 void CIconGrid::paintEvent(QPaintEvent *e) {
   QPainter p(this);
+  USE_ANTI_ALIASING(p, true);
   p.setPen(Qt::NoPen);
   p.setBrush(Qt::gray);
   p.drawRect(rect());
 
   p.setPen(Qt::NoPen);
   p.setBrush(Qt::white);
-  const QRect r(0, 0, kTileSize, kTileSize);
+  const QRect rectTile(0, 0, kTileSize, kTileSize);
 
   const int nIcons = icons.size();
   for (int m = 0; m < rows; m++) {
@@ -78,8 +81,12 @@ void CIconGrid::paintEvent(QPaintEvent *e) {
         if (index == indexFocus) {
           p.setBrush(Qt::lightGray);
         }
-        p.drawRect(r);
-        p.drawPixmap(kTileSize / 4, kTileSize / 4, QPixmap(icons[index].path).scaled(kTileSize / 2, kTileSize / 2));
+        p.drawRect(rectTile);
+        const QPixmap& icon = QPixmap(icons[index].path)
+                       .scaled(kTileSize / 2, kTileSize / 2, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+        QRect rectIcon = icon.rect();
+        rectIcon.moveCenter(rectTile.center());
+        p.drawPixmap(rectIcon, icon);
         p.restore();
       }
     }

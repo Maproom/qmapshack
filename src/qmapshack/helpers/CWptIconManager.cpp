@@ -992,6 +992,11 @@ void CWptIconManager::init() {
       {tr("library"), tr("building")}
     },
     {
+      {16,16}, "Movie Theater", "://icons/poi/png/movie_theater.png",
+      {tr("poi")},
+      {tr("movie theater"), tr("building")}
+    },
+    {
       {16,16}, "Police Station", "://icons/poi/SJJB/png/amenity_police.n.32.png",
       {tr("poi")},
       {tr("police station"), tr("building"), tr("help")}
@@ -1032,6 +1037,11 @@ void CWptIconManager::init() {
       {tr("school"), tr("building")}
     },
     {
+      {16,16}, "Bowling", "://icons/poi/png/bowling.png",
+      {tr("poi"), tr("sport")},
+      {tr("bowling")}
+    },
+    {
       {16,16}, "Fitness Center", "://icons/poi/SJJB/png/sport_gym.n.32.png",
       {tr("poi"), tr("sport")},
       {tr("fitness center"), tr("gym"), tr("building")}
@@ -1039,7 +1049,7 @@ void CWptIconManager::init() {
     {
       {16,16}, "Golf Course", "://icons/poi/SJJB/png/sport_golf.n.32.png",
       {tr("poi"), tr("sport")},
-      {tr("golf courser")}
+      {tr("golf course")}
     },
     {
       {16,16}, "Ice Skating", "://icons/poi/SJJB/png/sport_iceskating.n.32.png",

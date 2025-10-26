@@ -532,6 +532,36 @@ void CWptIconManager::init() {
       {tr("anchor")}
     },
     {
+      {16,16}, "Bell", "://icons/waypoints/32x32/Bell.png",
+      {tr("marine")},
+      {tr("bell")}
+    },
+    {
+      {16,16}, "Horn", "://icons/waypoints/32x32/Horn.png",
+      {tr("marine")},
+      {tr("horn")}
+    },
+    {
+      {16,16}, "Light", "://icons/waypoints/32x32/Light.png",
+      {tr("marine")},
+      {tr("light")}
+    },
+    {
+      {16,16}, "Skull and Crossbones", "://icons/waypoints/32x32/SkullAndCrossbones.png",
+      {tr("marine")},
+      {tr("skull and crossbones")}
+    },
+    {
+      {16,16}, "Buoy, White", "://icons/waypoints/32x32/BuoyWhite.png",
+      {tr("marine")},
+      {tr("buoy"), tr("white")}
+    },
+    {
+      {16,16}, "Radio Beacon", "://icons/waypoints/32x32/RadioBeacon.png",
+      {tr("marine")},
+      {tr("radio"), tr("beacon")}
+    },
+    {
       {16,16}, "Beacon", "://icons/waypoints/32x32/Beacon.png",
       {tr("marine")},
       {tr("beacon")}

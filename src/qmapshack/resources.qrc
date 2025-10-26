@@ -676,10 +676,12 @@
         <file>../icons/waypoints/32x32/AnchorProhibited.png</file>
         <file>../icons/waypoints/32x32/BallPark.png</file>
         <file>../icons/waypoints/32x32/Beacon.png</file>
+        <file>../icons/waypoints/32x32/Bell.png</file>
         <file>../icons/waypoints/32x32/BikeTrail.png</file>
         <file>../icons/waypoints/32x32/BoxBlue.png</file>
         <file>../icons/waypoints/32x32/BoxGreen.png</file>
         <file>../icons/waypoints/32x32/BoxRed.png</file>
+        <file>../icons/waypoints/32x32/BuoyWhite.png</file>
         <file>../icons/waypoints/32x32/CircleBlue.png</file>
         <file>../icons/waypoints/32x32/CircleGreen.png</file>
         <file>../icons/waypoints/32x32/CircleRed.png</file>
@@ -711,6 +713,7 @@
         <file>../icons/waypoints/32x32/FlagRed.png</file>
         <file>../icons/waypoints/32x32/Food.png</file>
         <file>../icons/waypoints/32x32/Generic.png</file>
+        <file>../icons/waypoints/32x32/Horn.png</file>
         <file>../icons/waypoints/32x32/HorsCategory.png</file>
         <file>../icons/waypoints/32x32/Left.png</file>
         <file>../icons/waypoints/32x32/LeftFork.png</file>
@@ -726,6 +729,7 @@
         <file>../icons/waypoints/32x32/LetterDBlue.png</file>
         <file>../icons/waypoints/32x32/LetterDGreen.png</file>
         <file>../icons/waypoints/32x32/LetterDRed.png</file>
+        <file>../icons/waypoints/32x32/Light.png</file>
         <file>../icons/waypoints/32x32/ManOverboard.png</file>
         <file>../icons/waypoints/32x32/MiddleFork.png</file>
         <file>../icons/waypoints/32x32/NavaidAmber.png</file>
@@ -780,6 +784,7 @@
         <file>../icons/waypoints/32x32/PinRed.png</file>
         <file>../icons/waypoints/32x32/PrivateField.png</file>
         <file>../icons/waypoints/32x32/PuzzleCache.png</file>
+        <file>../icons/waypoints/32x32/RadioBeacon.png</file>
         <file>../icons/waypoints/32x32/RectangleBlue.png</file>
         <file>../icons/waypoints/32x32/RectangleGreen.png</file>
         <file>../icons/waypoints/32x32/RectangleRed.png</file>
@@ -789,6 +794,7 @@
         <file>../icons/waypoints/32x32/RightFork.png</file>
         <file>../icons/waypoints/32x32/SharpLeft.png</file>
         <file>../icons/waypoints/32x32/SharpRight.png</file>
+        <file>../icons/waypoints/32x32/SkullAndCrossbones.png</file>
         <file>../icons/waypoints/32x32/SlightLeft.png</file>
         <file>../icons/waypoints/32x32/SlightRight.png</file>
         <file>../icons/waypoints/32x32/SoftField.png</file>

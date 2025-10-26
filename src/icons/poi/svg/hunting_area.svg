@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="120"
+   height="120"
+   viewBox="0 0 120 120"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.2 (ebf0e940d0, 2025-05-08)"
+   sodipodi:docname="hunting_area.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#111111"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="1.75"
+     inkscape:cx="54.571429"
+     inkscape:cy="78.857143"
+     inkscape:window-width="1920"
+     inkscape:window-height="1122"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer2" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="BoundingBox"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="opacity:0;fill:#ffffff;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"
+       id="rect1"
+       width="120"
+       height="120"
+       x="0"
+       y="0"
+       ry="0.40268457" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Symbol"
+     transform="translate(2.4200806,0.63571978)"
+     style="fill:none;stroke:#000000">
+    <rect
+       style="fill:#39ac39;stroke:#39ac39;stroke-width:2.86303;stroke-linecap:square;stroke-miterlimit:90;stroke-dasharray:none;stroke-opacity:1;fill-opacity:1"
+       id="rect5"
+       width="117.13697"
+       height="117.13697"
+       x="-0.98856586"
+       y="0.79579484"
+       rx="1.1516275"
+       ry="1.1388317"
+       inkscape:label="Background" />
+    <g
+       id="g4"
+       inkscape:label="Crosshair">
+      <circle
+         style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:2.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+         id="circle1"
+         cx="57.579918"
+         cy="59.364281"
+         r="23.774035"
+         inkscape:label="Inner" />
+      <circle
+         style="fill:none;stroke:#ffffff;fill-rule:evenodd;stroke-width:2.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+         id="path1"
+         cx="57.579918"
+         cy="59.364281"
+         r="38.784168"
+         inkscape:label="Outer" />
+      <rect
+         style="fill:none;stroke:#ffffff;stroke-width:2.01593;stroke-linecap:square;stroke-miterlimit:90;stroke-dasharray:none"
+         id="rect4-9"
+         width="42.984077"
+         height="0.48407361"
+         x="68.587883"
+         y="59.122242"
+         rx="1.5351455"
+         ry="0.42356443"
+         inkscape:label="Right" />
+      <rect
+         style="fill:none;stroke:#ffffff;stroke-width:2.01593;stroke-linecap:square;stroke-miterlimit:90;stroke-dasharray:none"
+         id="rect4"
+         width="42.984077"
+         height="0.48407361"
+         x="3.337882"
+         y="59.122242"
+         rx="1.5351455"
+         ry="0.42356443"
+         inkscape:label="Left" />
+      <rect
+         style="fill:none;stroke:#ffffff;stroke-width:2.15795;stroke-linecap:square;stroke-miterlimit:90;stroke-dasharray:none"
+         id="rect2"
+         width="0.3420566"
+         height="42.842052"
+         x="57.40889"
+         y="70.994583"
+         rx="0.18859692"
+         ry="0.2469143"
+         inkscape:label="Bottom" />
+      <rect
+         style="fill:none;stroke:#ffffff;stroke-width:2.15794;stroke-linecap:square;stroke-miterlimit:90;stroke-dasharray:none"
+         id="rect3"
+         width="0.34205592"
+         height="42.842056"
+         x="57.40889"
+         y="5.0979919"
+         rx="0.18859655"
+         ry="0.24691431"
+         inkscape:label="Top" />
+    </g>
+  </g>
+</svg>

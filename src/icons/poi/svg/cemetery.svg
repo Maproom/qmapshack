@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="120"
+   height="120"
+   viewBox="0 0 120 120"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.2 (ebf0e940d0, 2025-05-08)"
+   sodipodi:docname="cemetery.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#111111"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="1"
+     inkscape:cx="-94.5"
+     inkscape:cy="47"
+     inkscape:window-width="1920"
+     inkscape:window-height="1122"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer2" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="BoundingBox"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="opacity:0;fill:#ffffff;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"
+       id="rect1"
+       width="120"
+       height="120"
+       x="0"
+       y="0"
+       ry="0.40268457" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Symbol">
+    <rect
+       style="fill:#1a1a1a;stroke:#1a1a1a;stroke-width:24.577;stroke-linecap:square;stroke-miterlimit:90"
+       id="rect2"
+       width="95.423019"
+       height="95.423035"
+       x="12.28849"
+       y="12.28849"
+       rx="1.9004743"
+       ry="2.1592586" />
+    <g
+       id="g2"
+       inkscape:label="Gravestone"
+       transform="matrix(1.8581832,0,0,1.8581832,-50.828364,-63.469697)"
+       style="fill:#ffffff;stroke:#ffffff">
+      <rect
+         style="fill:#ffffff;stroke:#ffffff;stroke-width:1.37087;stroke-linecap:square;stroke-miterlimit:90"
+         id="rect1-9"
+         width="44.992001"
+         height="6.5108252"
+         x="37.1474"
+         y="86.196663"
+         rx="0.11725031"
+         ry="0.11209299" />
+      <rect
+         style="fill:#ffffff;stroke:#ffffff;stroke-width:1.31023;stroke-linecap:square;stroke-miterlimit:90"
+         id="rect2-1"
+         width="37.170944"
+         height="26.507484"
+         x="41.05793"
+         y="57.514931"
+         rx="0.11313031"
+         ry="0.1030929" />
+      <path
+         style="fill:#ffffff;fill-rule:evenodd;stroke:#ffffff;stroke-width:0.161819px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         id="path2"
+         sodipodi:type="arc"
+         sodipodi:cx="59.64344"
+         sodipodi:cy="57.964233"
+         sodipodi:rx="19.15963"
+         sodipodi:ry="18.383326"
+         sodipodi:start="3.1421624"
+         sodipodi:end="0"
+         sodipodi:arc-type="slice"
+         d="M 40.483814,57.95376 A 19.15963,18.383326 0 0 1 59.648898,39.580909 19.15963,18.383326 0 0 1 78.80307,57.964233 H 59.64344 Z" />
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-size:16.1438px;line-height:125%;font-family:'Bitstream Vera Sans';letter-spacing:0px;word-spacing:0px;fill:#1a1a1a;stroke:#000000;stroke-width:1.34532px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="41.06966"
+       y="62.441555"
+       id="text2"><tspan
+         sodipodi:role="line"
+         id="tspan2"
+         x="41.06966"
+         y="62.441555"
+         style="stroke-width:1.34532px">R.I.P.</tspan></text>
+  </g>
+</svg>

@@ -794,14 +794,39 @@ void CWptIconManager::init() {
       {tr("bank"), tr("building")}
     },
     {
+      {16,16}, "Bridge", "://icons/poi/png/bridge.png",
+      {tr("poi"), tr("transport")},
+      {tr("bridge")}
+    },
+    {
+      {16,16}, "Building", "://icons/poi/png/building.png",
+      {tr("poi")},
+      {tr("building")}
+    },
+    {
       {16,16}, "Church", "://icons/poi/SJJB/png/place_of_worship_unknown.n.32.png",
       {tr("poi")},
       {tr("church"), tr("building")}
     },
     {
+      {16,16}, "Cemetery", "://icons/poi/png/cemetery.png",
+      {tr("poi")},
+      {tr("cemetery")}
+    },
+    {
+      {16,16}, "Military", "://icons/poi/png/military.png",
+      {tr("poi")},
+      {tr("military")}
+    },
+    {
       {16,16}, "Mine", "://icons/poi/SJJB/png/poi_mine.n.32.png",
       {tr("poi")},
       {tr("mine"), tr("landmark")}
+    },
+    {
+      {16,16}, "Oil Field", "://icons/poi/png/oil_field.png",
+      {tr("poi")},
+      {tr("oil field")}
     },
     {
       {16,16}, "Tall Tower", "://icons/poi/SJJB/png/poi_tower_communications.n.32.png",
@@ -812,6 +837,16 @@ void CWptIconManager::init() {
       {16,16}, "Short Tower", "://icons/poi/SJJB/png/poi_tower_lookout.n.32.png",
       {tr("poi")},
       {tr("tower"), tr("landmark"), tr("building")}
+    },
+    {
+      {16,16}, "Toll Booth", "://icons/poi/png/toll_booth.png",
+      {tr("poi"), tr("transport")},
+      {tr("toll booth")}
+    },
+    {
+      {16,16}, "Tunnel", "://icons/poi/png/tunnel.png",
+      {tr("poi"), tr("transport")},
+      {tr("tunnel")}
     },
     {
       {16,16}, "Gas Station", "://icons/poi/SJJB/png/transport_fuel.n.32.png",
@@ -829,9 +864,24 @@ void CWptIconManager::init() {
       {tr("parking")}
     },
     {
+      {16,16}, "Parking, Euro", "://icons/poi/png/parking_euro.png",
+      {tr("poi"), tr("transport")},
+      {tr("parking")}
+    },
+    {
+      {16,16}, "Parking, Euro Pay", "://icons/poi/png/parking_euro_pay.png",
+      {tr("poi"), tr("transport")},
+      {tr("parking")}
+    },
+    {
       {16,16}, "Car Rental", "://icons/poi/SJJB/png/transport_rental_car.n.32.png",
       {tr("poi"), tr("transport")},
       {tr("car rental"), tr("building")}
+    },
+    {
+      {16,16}, "Truck Stop", "://icons/poi/png/truck_stop.png",
+      {tr("poi"), tr("transport")},
+      {tr("truck stop")}
     },
     {
       {16,16}, "Boat Ramp", "://icons/poi/SJJB/png/transport_slipway.n.32.png",
@@ -902,6 +952,11 @@ void CWptIconManager::init() {
       {16,16}, "Dam", "://icons/poi/SJJB/png/water_dam.n.32.png",
       {tr("poi")},
       {tr("dam"), tr("landmark")}
+    },
+    {
+      {16,16}, "Levee", "://icons/poi/png/levee.png",
+      {tr("poi")},
+      {tr("levee")}
     },
     {
       {16,16}, "Bar", "://icons/poi/SJJB/png/food_bar.n.32.png",
@@ -1009,6 +1064,11 @@ void CWptIconManager::init() {
       {tr("restroom"), tr("building")}
     },
     {
+      {16,16}, "Shower", "://icons/poi/png/shower.png",
+      {tr("poi")},
+      {tr("shower")}
+    },
+    {
       {16,16}, "Scales", "://icons/poi/SJJB/png/amenity_court.n.32.png",
       {tr("poi")},
       {tr("scales"), tr("court"), tr("building")}
@@ -1029,6 +1089,11 @@ void CWptIconManager::init() {
       {tr("pharmacy"), tr("help"), tr("building")}
     },
     {
+      {16,16}, "Hospital, Euro", "://icons/poi/png/hospital_euro.png",
+      {tr("poi")},
+      {tr("hospital euro"), tr("hospital"), tr("help"), tr("building")}
+    },
+    {
       {16,16}, "School", "://icons/poi/SJJB/png/education_school.n.32.png",
       {tr("poi")},
       {tr("school"), tr("building")}
@@ -1037,6 +1102,21 @@ void CWptIconManager::init() {
       {16,16}, "Bowling", "://icons/poi/png/bowling.png",
       {tr("poi"), tr("sport")},
       {tr("bowling")}
+    },
+    {
+      {16,16}, "Fishing Area", "://icons/poi/png/fishing_area.png",
+      {tr("poi"), tr("sport")},
+      {tr("fishing area")}
+    },
+    {
+      {16,16}, "Fishing Hot Spot Facility", "://icons/poi/png/fishing_hot_spot_facility.png",
+      {tr("poi"), tr("sport")},
+      {tr("fishing hot sport facility")}
+    },
+    {
+      {16,16}, "Hunting Area", "://icons/poi/png/hunting_area.png",
+      {tr("poi"), tr("sport")},
+      {tr("hunting area")}
     },
     {
       {16,16}, "Fitness Center", "://icons/poi/SJJB/png/sport_gym.n.32.png",

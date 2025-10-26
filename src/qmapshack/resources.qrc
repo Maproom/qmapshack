@@ -1067,15 +1067,31 @@
         <file>../icons/poi/png/accommodation_wilderness_hut_r_n32.png</file>
         <file>../icons/poi/png/amenity_leisure_park_n32.png</file>
         <file>../icons/poi/png/bowling.png</file>
+        <file>../icons/poi/png/bridge.png</file>
+        <file>../icons/poi/png/building.png</file>
+        <file>../icons/poi/png/cemetery.png</file>
+        <file>../icons/poi/png/fishing_area.png</file>
+        <file>../icons/poi/png/fishing_hot_spot_facility.png</file>
+        <file>../icons/poi/png/hospital_euro.png</file>
+        <file>../icons/poi/png/hunting_area.png</file>
+        <file>../icons/poi/png/levee.png</file>
         <file>../icons/poi/png/man_made_water_well.png</file>
+        <file>../icons/poi/png/military.png</file>
         <file>../icons/poi/png/bank_euro.png</file>
         <file>../icons/poi/png/bank_pound.png</file>
         <file>../icons/poi/png/bank_yen.png</file>
         <file>../icons/poi/png/funicular.png</file>
         <file>../icons/poi/png/movie_theater.png</file>
+        <file>../icons/poi/png/oil_field.png</file>
+        <file>../icons/poi/png/parking_euro.png</file>
+        <file>../icons/poi/png/parking_euro_pay.png</file>
         <file>../icons/poi/png/seaplane_base.png</file>
+        <file>../icons/poi/png/shower.png</file>
         <file>../icons/poi/png/sport_rock_climbing_n32.png</file>
         <file>../icons/poi/png/sport_scuba_diving_n32.png</file>
+        <file>../icons/poi/png/toll_booth.png</file>
+        <file>../icons/poi/png/truck_stop.png</file>
+        <file>../icons/poi/png/tunnel.png</file>
         <file>../icons/poi/png/water_spring_n32.png</file>
         <file>../icons/poi/png/water_waterfall_n32.png</file>
         <file>../icons/poi/SJJB/png/accommodation_alpinehut.n.32.png</file>

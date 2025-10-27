@@ -512,21 +512,6 @@ void CWptIconManager::init() {
       {tr("circle")}
     },
     {
-      {16,16}, "Circle with X", "://icons/waypoints/32x32/CircleWithX.png",
-      {tr("markers")},
-      {tr("circle")}
-    },
-    {
-      {16,16}, "Private Field", "://icons/waypoints/32x32/PrivateField.png",
-      {tr("markers")},
-      {tr("circle")}
-    },
-    {
-      {16,16}, "Soft Field", "://icons/waypoints/32x32/SoftField.png",
-      {tr("markers")},
-      {tr("circle")}
-    },
-    {
       {16,16}, "Contact, Smiley", "://icons/cache/32x32/found.png",
       {tr("markers")},
       {tr("smiley")}
@@ -635,6 +620,37 @@ void CWptIconManager::init() {
       {16,16}, "Restricted Area", "://icons/waypoints/32x32/RestrictedArea.png",
       {tr("marine")},
       {tr("area")}
+    },
+
+    {
+      {16,16}, "Circle with X", "://icons/waypoints/32x32/CircleWithX.png",
+      {tr("aerial")},
+      {tr("circle")}
+    },
+    {
+      {16,16}, "Private Field", "://icons/waypoints/32x32/PrivateField.png",
+      {tr("aerial")},
+      {tr("circle")}
+    },
+    {
+      {16,16}, "Soft Field", "://icons/waypoints/32x32/SoftField.png",
+      {tr("aerial")},
+      {tr("circle")}
+    },
+    {
+      {16,16}, "Glider Area", "://icons/waypoints/32x32/GliderArea.png",
+      {tr("aerial")},
+      {tr("glider area")}
+    },
+    {
+      {16,16}, "Ultralight Area", "://icons/waypoints/32x32/UltralightArea.png",
+      {tr("aerial")},
+      {tr("ultralight area")}
+    },
+    {
+      {16,16}, "Parachute Area", "://icons/waypoints/32x32/ParachuteArea.png",
+      {tr("aerial")},
+      {tr("parachute area")}
     },
 
     {
@@ -895,12 +911,12 @@ void CWptIconManager::init() {
     },
     {
       {16,16}, "Tall Tower", "://icons/poi/SJJB/png/poi_tower_communications.n.32.png",
-      {tr("poi")},
+      {tr("poi"), tr("aerial")},
       {tr("tower"), tr("landmark"), tr("building")}
     },
     {
       {16,16}, "Short Tower", "://icons/poi/SJJB/png/poi_tower_lookout.n.32.png",
-      {tr("poi")},
+      {tr("poi"), tr("aerial")},
       {tr("tower"), tr("landmark"), tr("building")}
     },
     {

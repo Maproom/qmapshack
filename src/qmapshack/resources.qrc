@@ -715,6 +715,7 @@
         <file>../icons/waypoints/32x32/FlagRed.png</file>
         <file>../icons/waypoints/32x32/Food.png</file>
         <file>../icons/waypoints/32x32/Generic.png</file>
+        <file>../icons/waypoints/32x32/GliderArea.png</file>
         <file>../icons/waypoints/32x32/Horn.png</file>
         <file>../icons/waypoints/32x32/HorsCategory.png</file>
         <file>../icons/waypoints/32x32/Left.png</file>
@@ -782,6 +783,7 @@
         <file>../icons/waypoints/32x32/OvalBlue.png</file>
         <file>../icons/waypoints/32x32/OvalGreen.png</file>
         <file>../icons/waypoints/32x32/OvalRed.png</file>
+        <file>../icons/waypoints/32x32/ParachuteArea.png</file>
         <file>../icons/waypoints/32x32/PinBlue.png</file>
         <file>../icons/waypoints/32x32/PinGreen.png</file>
         <file>../icons/waypoints/32x32/PinRed.png</file>
@@ -813,6 +815,7 @@
         <file>../icons/waypoints/32x32/TriangleGreen.png</file>
         <file>../icons/waypoints/32x32/TriangleRed.png</file>
         <file>../icons/waypoints/32x32/Truck.png</file>
+        <file>../icons/waypoints/32x32/UltralightArea.png</file>
         <file>../icons/waypoints/32x32/UTurn.png</file>
         <file>../icons/waypoints/32x32/Valley.png</file>
         <file>../icons/waypoints/32x32/Water.png</file>

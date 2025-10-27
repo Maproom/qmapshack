@@ -472,6 +472,41 @@ void CWptIconManager::init() {
       {tr("bike trail")}
     },
     {
+      {16,16}, "ATV", "://icons/waypoints/32x32/ATV.png",
+      {tr("markers")},
+      {tr("atv"), tr("vehicle")}
+    },
+    {
+      {16,16}, "Car", "://icons/waypoints/32x32/Car.png",
+      {tr("markers")},
+      {tr("car"), tr("vehicle")}
+    },
+    {
+      {16,16}, "Truck", "://icons/waypoints/32x32/Truck.png",
+      {tr("markers")},
+      {tr("truck"), tr("vehicle")}
+    },
+    {
+      {16,16}, "Wrecker", "://icons/waypoints/32x32/Wrecker.png",
+      {tr("markers")},
+      {tr("wrecker"), tr("vehicle")}
+    },
+    {
+      {16,16}, "Water Hydrant", "://icons/waypoints/32x32/WaterHydrant.png",
+      {tr("markers")},
+      {tr("water hydrant")}
+    },
+    {
+      {16,16}, "Mile Marker", "://icons/waypoints/32x32/MileMarker.png",
+      {tr("markers")},
+      {tr("mile marker")}
+    },
+    {
+      {16,16}, "TracBack Point", "://icons/waypoints/32x32/TracBackPoint.png",
+      {tr("markers")},
+      {tr("tracback point")}
+    },
+    {
       {16,16}, "Ball Park", "://icons/waypoints/32x32/BallPark.png",
       {tr("markers")},
       {tr("circle")}

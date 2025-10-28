@@ -532,11 +532,6 @@ void CWptIconManager::init() {
       {tr("square")}
     },
     {
-      {16,16}, "Dog Unknown", "://icons/waypoints/32x32/DogUnknown.png",
-      {tr("markers")},
-      {tr("dog")}
-    },
-    {
       {16,16}, "Waypoint", "://icons/waypoints/32x32/Waypoint.png",
       {tr("markers")},
       {tr("waypoint"), tr("dot")}
@@ -681,6 +676,102 @@ void CWptIconManager::init() {
       {16,16}, "Parachute Area", "://icons/waypoints/32x32/ParachuteArea.png",
       {tr("aerial")},
       {tr("parachute area")}
+    },
+
+    {
+      {16,16}, "Big Game", "://icons/waypoints/32x32/BigGame.png",
+      {tr("hunting")},
+      {tr("big game")}
+    },
+    {
+      {16,16}, "Blind", "://icons/waypoints/32x32/Blind.png",
+      {tr("hunting")},
+      {tr("blind")}
+    },
+    {
+      {16,16}, "Blood Trail", "://icons/waypoints/32x32/BloodTrail.png",
+      {tr("hunting")},
+      {tr("blood trail")}
+    },
+    {
+      {16,16}, "Cover", "://icons/waypoints/32x32/Cover.png",
+      {tr("hunting")},
+      {tr("cover")}
+    },
+    {
+      {16,16}, "Covey", "://icons/waypoints/32x32/Covey.png",
+      {tr("hunting")},
+      {tr("covey")}
+    },
+    {
+      {16,16}, "Food Source", "://icons/waypoints/32x32/FoodSource.png",
+      {tr("hunting")},
+      {tr("food source")}
+    },
+    {
+      {16,16}, "Furbearer", "://icons/waypoints/32x32/Furbearer.png",
+      {tr("hunting")},
+      {tr("furbearer")}
+    },
+    {
+      {16,16}, "Small Game", "://icons/waypoints/32x32/SmallGame.png",
+      {tr("hunting")},
+      {tr("small game")}
+    },
+    {
+      {16,16}, "Animal Tracks", "://icons/waypoints/32x32/AnimalTracks.png",
+      {tr("hunting")},
+      {tr("animal tracks")}
+    },
+    {
+      {16,16}, "Treed Quarry", "://icons/waypoints/32x32/TreedQuarry.png",
+      {tr("hunting")},
+      {tr("treed quarry")}
+    },
+    {
+      {16,16}, "Tree Stand", "://icons/waypoints/32x32/TreeStand.png",
+      {tr("hunting")},
+      {tr("tree stand")}
+    },
+    {
+      {16,16}, "Upland Game", "://icons/waypoints/32x32/UplandGame.png",
+      {tr("hunting")},
+      {tr("upland game")}
+    },
+    {
+      {16,16}, "Waterfowl", "://icons/waypoints/32x32/Waterfowl.png",
+      {tr("hunting")},
+      {tr("waterfowl")}
+    },
+    {
+      {16,16}, "Water Source", "://icons/waypoints/32x32/WaterSource.png",
+      {tr("hunting")},
+      {tr("water source")}
+    },
+    {
+      {16,16}, "Dog Running", "://icons/waypoints/32x32/DogRunning.png",
+      {tr("hunting")},
+      {tr("dog running")}
+    },
+    {
+      {16,16}, "Dog Pointing", "://icons/waypoints/32x32/DogPointing.png",
+      {tr("hunting")},
+      {tr("dog pointing")}
+    },
+    {
+      {16,16}, "Dog Treed", "://icons/waypoints/32x32/DogTreed.png",
+      {tr("hunting")},
+      {tr("dog treed")}
+    },
+    {
+      {16,16}, "Dog Sitting", "://icons/waypoints/32x32/DogSitting.png",
+      {tr("hunting")},
+      {tr("dog sitting")}
+    },
+    {
+      {16,16}, "Dog Unknown", "://icons/waypoints/32x32/DogUnknown.png",
+      {tr("hunting")},
+      {tr("dog unknown")}
     },
 
     {
@@ -1226,7 +1317,7 @@ void CWptIconManager::init() {
     },
     {
       {16,16}, "Hunting Area", "://icons/poi/png/hunting_area.png",
-      {tr("poi"), tr("sport")},
+      {tr("poi"), tr("sport"), tr("hunting")},
       {tr("hunting area")}
     },
     {

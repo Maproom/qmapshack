@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="120"
+   height="120"
+   viewBox="0 0 120 120"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.2 (ebf0e940d0, 2025-05-08)"
+   sodipodi:docname="DogSitting.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#111111"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="2.6339728"
+     inkscape:cx="37.395983"
+     inkscape:cy="45.178903"
+     inkscape:window-width="1920"
+     inkscape:window-height="1122"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer2" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="BoundingBox"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="opacity:0;fill:#ffffff;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"
+       id="rect1"
+       width="120"
+       height="120"
+       x="0"
+       y="0"
+       ry="0.40268457" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Symbol"
+     transform="translate(-17.313167,26.988251)"
+     style="fill:#000000;stroke:#000000">
+    <path
+       style="display:inline;fill:#000000;fill-rule:evenodd;stroke:#000000;stroke-width:1.19836px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 53.654857,80.304364 -0.132694,4.113617 c 0.17762,1.135074 -0.970108,2.711922 3.184734,2.521251 l 27.335662,0.265401 C 83.036046,83.871278 79.64813,82.26984 74.753734,81.764036 v -1.061578 l 5.54012,0.464448 c 2.488392,0.620594 3.913899,2.071339 4.942978,3.251075 l 6.104079,-0.132694 c -2.250254,-7.442262 -9.70148,-4.48258 -15.127504,-5.57329 6.333277,-4.631608 10.580823,-10.035702 7.431058,-18.179544 l 5.660447,-3.388491 c 3.084778,10.234031 2.059882,26.469717 8.936256,30.458765 l 9.023422,0.132695 c 1.21596,-2.281292 -5.22708,-4.438889 -6.85201,-8.061695 -3.763875,-8.391602 -2.133364,-24.636791 -2.304107,-35.46305 l 2.521247,-1.194273 -0.796173,7.032964 C 117.98949,33.292659 107.12872,23.544167 106.7338,8.6477906 c -0.39669,-2.3735769 0.80831,-4.4802075 2.52125,-6.5021741 3.61579,1.4926276 5.44734,1.201007 6.23678,-0.1327062 l 4.51171,-0.530789 c 3.95915,-3.2621239 6.7987,-6.6042143 5.83869,-10.217697 -3.95634,-0.5406155 -7.53122,-2.6071613 -11.14658,-4.5117003 -4.13648,-9.247518 -12.89904,-9.124099 -17.452332,-7.845966 -4.145721,1.163727 -9.13335,6.47194 -8.689046,11.1633941 5.416916,8.4393448 11.804418,10.33490846 13.957248,10.62083683 3.03097,0.40255267 1.96471,-7.13801113 1.30294,-17.38839893 3.76099,6.486727 7.90611,37.318361 -16.719861,9.4215071 -0.666647,4.9508748 -1.41066,9.1609004 -4.113618,12.0754644 C 79.573185,8.1698852 75.221525,11.445826 75.151829,15.149953 55.817091,34.954051 40.149631,55.229668 45.294927,78.181208 36.424713,80.384378 32.811314,77.806349 36.576281,66.06712 c 0.773097,-2.41051 3.610259,-3.717584 3.27805,-6.596245 v 0 c -16.094352,8.776191 -14.358481,26.691533 1.575207,25.961577 3.621164,-0.165901 7.592884,-0.08484 12.225319,-5.128088 z"
+       id="path1"
+       sodipodi:nodetypes="ccccccccccccccscccccccccscscccccsccsc"
+       inkscape:label="body" />
+    <path
+       style="fill:#000000;fill-rule:evenodd;stroke:#000000;stroke-width:1.19836px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 104.21255,48.589695 c -1.2689,1.624183 -2.56336,3.210019 -4.17996,4.312665 0.25803,6.96661 0.78372,13.93322 1.39332,20.89983 0.23603,6.02162 3.94535,9.018967 7.4974,11.544675 l 5.24155,0.398095 c 0.66507,-0.631044 0.40058,-1.64748 -0.33179,-2.45491 -3.60309,-2.205579 -6.73451,-1.284928 -8.22723,-10.018649 -0.45913,-8.221939 -0.44275,-15.968357 -1.39329,-24.681706 z"
+       id="path2"
+       sodipodi:nodetypes="cccccccc"
+       inkscape:label="leg" />
+  </g>
+</svg>

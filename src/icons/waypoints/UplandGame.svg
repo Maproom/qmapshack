@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="120"
+   height="120"
+   viewBox="0 0 120 120"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.2 (ebf0e940d0, 2025-05-08)"
+   sodipodi:docname="UplandGame.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#111111"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="1.3169864"
+     inkscape:cx="75.551275"
+     inkscape:cy="-6.0744744"
+     inkscape:window-width="1920"
+     inkscape:window-height="1122"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer2" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="BoundingBox"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="opacity:0;fill:#ffffff;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"
+       id="rect1"
+       width="120"
+       height="120"
+       x="0"
+       y="0"
+       ry="0.40268457" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Symbol"
+     transform="translate(63.823379,-35.260791)">
+    <path
+       style="display:inline;fill:#000000;fill-rule:evenodd;stroke:#000000;stroke-width:0.455115px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 32.540607,70.293813 -2.715078,8.824013 8.416751,-0.135753 v 2.850833 H 28.467988 L 4.3037643,98.394904 C -11.961453,92.234921 -30.002871,88.073158 -54.885,91.607198 l -3.393851,2.443574 c 38.273346,-0.596406 55.9828629,12.087998 77.787072,22.127908 l 0.135752,8.00949 -2.44357,2.44357 h 13.303895 l -1.900558,-2.17206 -6.380437,-0.27151 0.135752,-8.5525 C 39.447408,109.78032 45.238047,103.59104 47.695734,97.851751 51.592287,88.75235 46.213669,81.001487 43.943949,74.773697 43.776125,72.753686 47.711426,72.990394 51.003158,72.87314 49.552728,69.733174 48.20636,66.993232 44.0797,64.388512 c -2.250095,-0.204556 -3.694122,-1.053972 -7.602226,0.06788 -3.149695,2.101553 -5.32476,3.813253 -7.602226,5.565916 z"
+       id="path1"
+       sodipodi:nodetypes="cccccccccccccccscccccc"
+       inkscape:label="body" />
+    <circle
+       style="fill:#ffffff;fill-rule:evenodd;stroke:#ffffff;stroke-width:0.478463px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       id="path2"
+       cx="44.25938"
+       cy="68.883148"
+       r="1.2362309"
+       inkscape:label="eye" />
+  </g>
+</svg>

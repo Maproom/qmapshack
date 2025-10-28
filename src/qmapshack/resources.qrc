@@ -674,12 +674,16 @@
         <file>../icons/waypoints/32x32/4thCategory.png</file>
         <file>../icons/waypoints/32x32/Anchor.png</file>
         <file>../icons/waypoints/32x32/AnchorProhibited.png</file>
+        <file>../icons/waypoints/32x32/AnimalTracks.png</file>
         <file>../icons/waypoints/32x32/ATV.png</file>
         <file>../icons/waypoints/32x32/BaitAndTackle.png</file>
         <file>../icons/waypoints/32x32/BallPark.png</file>
         <file>../icons/waypoints/32x32/Beacon.png</file>
         <file>../icons/waypoints/32x32/Bell.png</file>
+        <file>../icons/waypoints/32x32/BigGame.png</file>
         <file>../icons/waypoints/32x32/BikeTrail.png</file>
+        <file>../icons/waypoints/32x32/Blind.png</file>
+        <file>../icons/waypoints/32x32/BloodTrail.png</file>
         <file>../icons/waypoints/32x32/BoxBlue.png</file>
         <file>../icons/waypoints/32x32/BoxGreen.png</file>
         <file>../icons/waypoints/32x32/BoxRed.png</file>
@@ -696,6 +700,8 @@
         <file>../icons/waypoints/32x32/Civil.png</file>
         <file>../icons/waypoints/32x32/CoastGuard.png</file>
         <file>../icons/waypoints/32x32/ControlledArea.png</file>
+        <file>../icons/waypoints/32x32/Cover.png</file>
+        <file>../icons/waypoints/32x32/Covey.png</file>
         <file>../icons/waypoints/32x32/Crossing.png</file>
         <file>../icons/waypoints/32x32/Danger.png</file>
         <file>../icons/waypoints/32x32/DangerArea.png</file>
@@ -706,6 +712,10 @@
         <file>../icons/waypoints/32x32/DiverDownFlag1.png</file>
         <file>../icons/waypoints/32x32/DiverDownFlag2.png</file>
         <file>../icons/waypoints/32x32/Dock.png</file>
+        <file>../icons/waypoints/32x32/DogPointing.png</file>
+        <file>../icons/waypoints/32x32/DogRunning.png</file>
+        <file>../icons/waypoints/32x32/DogSitting.png</file>
+        <file>../icons/waypoints/32x32/DogTreed.png</file>
         <file>../icons/waypoints/32x32/DogUnknown.png</file>
         <file>../icons/waypoints/32x32/DotWhite.png</file>
         <file>../icons/waypoints/32x32/Dropoff.png</file>
@@ -717,6 +727,8 @@
         <file>../icons/waypoints/32x32/FlagGreen.png</file>
         <file>../icons/waypoints/32x32/FlagRed.png</file>
         <file>../icons/waypoints/32x32/Food.png</file>
+        <file>../icons/waypoints/32x32/FoodSource.png</file>
+        <file>../icons/waypoints/32x32/Furbearer.png</file>
         <file>../icons/waypoints/32x32/Generic.png</file>
         <file>../icons/waypoints/32x32/Geocache.png</file>
         <file>../icons/waypoints/32x32/GeocacheFound.png</file>
@@ -808,6 +820,7 @@
         <file>../icons/waypoints/32x32/SkullAndCrossbones.png</file>
         <file>../icons/waypoints/32x32/SlightLeft.png</file>
         <file>../icons/waypoints/32x32/SlightRight.png</file>
+        <file>../icons/waypoints/32x32/SmallGame.png</file>
         <file>../icons/waypoints/32x32/SoftField.png</file>
         <file>../icons/waypoints/32x32/Sprint.png</file>
         <file>../icons/waypoints/32x32/SquareBlue.png</file>
@@ -818,15 +831,20 @@
         <file>../icons/waypoints/32x32/Stump.png</file>
         <file>../icons/waypoints/32x32/Summit.png</file>
         <file>../icons/waypoints/32x32/TracBackPoint.png</file>
+        <file>../icons/waypoints/32x32/TreedQuarry.png</file>
+        <file>../icons/waypoints/32x32/TreeStand.png</file>
         <file>../icons/waypoints/32x32/TriangleBlue.png</file>
         <file>../icons/waypoints/32x32/TriangleGreen.png</file>
         <file>../icons/waypoints/32x32/TriangleRed.png</file>
         <file>../icons/waypoints/32x32/Truck.png</file>
         <file>../icons/waypoints/32x32/UltralightArea.png</file>
+        <file>../icons/waypoints/32x32/UplandGame.png</file>
         <file>../icons/waypoints/32x32/UTurn.png</file>
         <file>../icons/waypoints/32x32/Valley.png</file>
         <file>../icons/waypoints/32x32/Water.png</file>
+        <file>../icons/waypoints/32x32/Waterfowl.png</file>
         <file>../icons/waypoints/32x32/WaterHydrant.png</file>
+        <file>../icons/waypoints/32x32/WaterSource.png</file>
         <file>../icons/waypoints/32x32/Waypoint.png</file>
         <file>../icons/waypoints/32x32/WeedBed.png</file>
         <file>../icons/waypoints/32x32/Wrecker.png</file>

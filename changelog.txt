@@ -8,6 +8,7 @@ V1.XX.X
 [QMS-851] Fix GIS item bubbles get transparent
 [QMS-855] Code cleanup: Convert waypoint icon map into a list
 [QMS-859] Add waypoint icons
+[QMS-861] Add action to clear the waypoint icon history 
 
 V1.18.1
 [QMS-659] POI file error and version handling

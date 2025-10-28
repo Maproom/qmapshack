@@ -157,6 +157,7 @@ void CWptIconSelectWidget::updateIconList(const QString &filter, const QString &
   iconFilterCompleter->setCaseSensitivity(Qt::CaseInsensitive);
   iconFilterCompleter->setFilterMode(Qt::MatchContains);
   iconFilterCompleter->setCompletionMode(QCompleter::UnfilteredPopupCompletion);
+  iconFilterCompleter->setModelSorting(QCompleter::CaseSensitivelySortedModel);
   iconFilter->setCompleter(iconFilterCompleter);
   iconGrid->updateIconList(visibleIcons);
   scrollArea->verticalScrollBar()->setValue(0);

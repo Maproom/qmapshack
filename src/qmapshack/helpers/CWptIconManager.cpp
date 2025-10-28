@@ -621,6 +621,36 @@ void CWptIconManager::init() {
       {tr("marine")},
       {tr("area")}
     },
+    {
+      {16,16}, "Reef", "://icons/waypoints/32x32/Reef.png",
+      {tr("marine")},
+      {tr("reef")}
+    },
+    {
+      {16,16}, "Weed Bed", "://icons/waypoints/32x32/WeedBed.png",
+      {tr("marine")},
+      {tr("weed bed")}
+    },
+    {
+      {16,16}, "Dropoff", "://icons/waypoints/32x32/Dropoff.png",
+      {tr("marine")},
+      {tr("dropoff")}
+    },
+    {
+      {16,16}, "Dock", "://icons/waypoints/32x32/Dock.png",
+      {tr("marine")},
+      {tr("dock")}
+    },
+    {
+      {16,16}, "Bait and Tackle", "://icons/waypoints/32x32/BaitAndTackle.png",
+      {tr("marine")},
+      {tr("bait and tackle")}
+    },
+    {
+      {16,16}, "Stump", "://icons/waypoints/32x32/Stump.png",
+      {tr("marine")},
+      {tr("stump")}
+    },
 
     {
       {16,16}, "Circle with X", "://icons/waypoints/32x32/CircleWithX.png",

@@ -715,6 +715,8 @@
         <file>../icons/waypoints/32x32/FlagRed.png</file>
         <file>../icons/waypoints/32x32/Food.png</file>
         <file>../icons/waypoints/32x32/Generic.png</file>
+        <file>../icons/waypoints/32x32/Geocache.png</file>
+        <file>../icons/waypoints/32x32/GeocacheFound.png</file>
         <file>../icons/waypoints/32x32/GliderArea.png</file>
         <file>../icons/waypoints/32x32/Horn.png</file>
         <file>../icons/waypoints/32x32/HorsCategory.png</file>

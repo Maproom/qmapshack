@@ -1269,6 +1269,22 @@ void CWptIconManager::init() {
       {tr("poi")},
       {tr("park"), tr("land")}
     },
+
+    {
+      {16,16}, "Geocache", "://icons/waypoints/32x32/Geocache.png",
+      {tr("geocache")},
+      {tr("geocache")}
+    },
+    {
+      {16,16}, "Geocache Found", "://icons/waypoints/32x32/GeocacheFound.png",
+      {tr("geocache")},
+      {tr("geocache found")}
+    },
+    {
+      {16,16}, "Puzzle Cache", "://icons/waypoints/32x32/PuzzleCache.png",
+      {tr("geocache")},
+      {tr("puzzle cache")}
+    },
     {
       {16,16}, "Traditional Cache", "://icons/geocaching/icons/traditional.png",
       {tr("geocache")},
@@ -1328,11 +1344,6 @@ void CWptIconManager::init() {
       {16,16}, "Webcam Cache", "://icons/geocaching/icons/webcam.png",
       {tr("geocache")},
       {tr("webcam cache")}
-    },
-    {
-      {16,16}, "Puzzle Cache", "://icons/waypoints/32x32/PuzzleCache.png",
-      {tr("geocache")},
-      {tr("puzzle cache")}
     },
 
     {

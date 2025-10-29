@@ -19,38 +19,14 @@
 #ifndef MISC_H
 #define MISC_H
 
-#include <QCollator>
 #include <QFile>
 #include <QMessageBox>
-#include <algorithm>
-#include <initializer_list>
 
 #include "CMainWindow.h"
 
-#define QMS_DELETE(p) \
-  delete p;           \
-  p = nullptr
-
-inline bool sortByString(const QString& str1, const QString& str2) {
-  static QCollator collator;
-  // this will set collator to natural sorting mode (instead of lexical)
-  collator.setNumericMode(true);
-  return collator.compare(str1, str2) < 0;
-}
-
-template <typename T>
-bool sortByName(T* item1, T* item2) {
-  return sortByString(item1->getName(), item2->getName());
-}
-
-template <typename T>
-bool is_in(const T& v, std::initializer_list<T> lst) {
-  return std::find(std::begin(lst), std::end(lst), v) != std::end(lst);
-}
-
 inline void openFileCheckSuccess(QIODeviceBase::OpenMode mode, QFile& file) {
   if (!file.open(mode)) {
-    QMessageBox::warning(CMainWindow::self().getBestWidgetForParent(), CMainWindow::tr("File access failed..."),
+    QMessageBox::warning(&CMainWindow::self(), CMainWindow::tr("File access failed..."),
                          CMainWindow::tr("Failed to open %1 with error %2").arg(file.fileName(), file.errorString()),
                          QMessageBox::Ok);
   }

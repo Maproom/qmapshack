@@ -33,6 +33,7 @@
 #include "map/garmin/CGarminStrTbl8.h"
 #include "map/garmin/CGarminStrTblUtf8.h"
 #include "map/garmin/CGarminTyp.h"
+#include "misc.h"
 #include "poi/IPoiItem.h"
 #include "units/IUnit.h"
 
@@ -426,7 +427,7 @@ void CMapIMG::setupTyp() {
       }
 
       CFileExt file(filename);
-      file.open(QIODevice::ReadOnly);
+      openFileCheckSuccess(QIODevice::ReadOnly, file);
 
       QByteArray array;
       readFile(file, (*subfile).parts["TYP"].offset, (*subfile).parts["TYP"].size, array);
@@ -643,8 +644,7 @@ void CMapIMG::readBasics() {
     copyright += str;
   }
 
-  qDebug() << "dimensions:\t"
-           << "N" << (maparea.bottom() * RAD_TO_DEG) << "E" << (maparea.right() * RAD_TO_DEG) << "S"
+  qDebug() << "dimensions:\t" << "N" << (maparea.bottom() * RAD_TO_DEG) << "E" << (maparea.right() * RAD_TO_DEG) << "S"
            << (maparea.top() * RAD_TO_DEG) << "W" << (maparea.left() * RAD_TO_DEG);
 }
 

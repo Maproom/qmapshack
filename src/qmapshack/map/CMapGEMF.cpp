@@ -26,9 +26,9 @@
 #include <QtGui>
 #include <QtWidgets>
 
-#include "CMainWindow.h"
 #include "helpers/CDraw.h"
 #include "map/CMapDraw.h"
+#include "misc.h"
 #include "units/IUnit.h"
 
 #define NAMEBUFLEN 1024
@@ -49,13 +49,11 @@ inline double tile2lat(int y, int z) {
 
 CMapGEMF::CMapGEMF(const QString& filename, CMapDraw* parent) : IMap(eFeatVisibility, parent), filename(filename) {
   qDebug() << "CMapGEMF: try to open " << filename;
-  proj.init(
-      "EPSG:3857",
-      "EPSG:4326");
+  proj.init("EPSG:3857", "EPSG:4326");
   qDebug() << "CMapGEMF:" << proj.getProjSrc();
 
   QFile file(filename);
-  file.open(QIODevice::ReadOnly);
+  openFileCheckSuccess(QIODevice::ReadOnly, file);
 
   QDataStream stream(&file);
   stream.setByteOrder(QDataStream::BigEndian);
@@ -118,7 +116,7 @@ CMapGEMF::CMapGEMF(const QString& filename, CMapDraw* parent) : IMap(eFeatVisibi
   }
   QString partfile = filename;
   QFile f(partfile);
-  f.open(QIODevice::ReadOnly);
+  openFileCheckSuccess(QIODevice::ReadOnly, f);
   quint32 i = 1;
   do {
     gemffile_t gf;
@@ -233,7 +231,7 @@ QImage CMapGEMF::getTile(const quint32 row, const quint32 col, const quint32 z) 
       offsetGEMF = getFilenameFromAddress(offsetGEMF, splitfile);
 
       QFile file(splitfile);
-      file.open(QIODevice::ReadOnly);
+      openFileCheckSuccess(QIODevice::ReadOnly, file);
       QDataStream dataFile(&file);
 
       dataFile.skipRawData(offsetGEMF);
@@ -248,7 +246,7 @@ QImage CMapGEMF::getTile(const quint32 row, const quint32 col, const quint32 z) 
 
       quint64 imageDataOffset = getFilenameFromAddress(imageDataAddress, splitfile);
       QFile imageFile(splitfile);
-      imageFile.open(QIODevice::ReadOnly);
+      openFileCheckSuccess(QIODevice::ReadOnly, imageFile);
       imageFile.seek(imageDataOffset);
       QByteArray imageData(size, 0);
       imageFile.read(imageData.data(), size);

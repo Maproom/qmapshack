@@ -27,6 +27,7 @@
 #include "helpers/CDraw.h"
 #include "helpers/CProgressDialog.h"
 #include "helpers/CSettings.h"
+#include "misc.h"
 
 CPrintDialog::CPrintDialog(type_e type, const QRectF& area, CCanvas* source)
     : QDialog(&CMainWindow::self()), type(type), rectSelArea(area) {
@@ -34,7 +35,7 @@ CPrintDialog::CPrintDialog(type_e type, const QRectF& area, CCanvas* source)
 
   // clone canvas by a temporary configuration file
   QTemporaryFile temp;
-  temp.open();
+  openFileCheckSuccess(QIODevice::ReadWrite, temp);
   temp.close();
 
   QSettings view(temp.fileName(), QSettings::IniFormat);

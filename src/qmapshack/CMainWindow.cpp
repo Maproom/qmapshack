@@ -54,6 +54,7 @@
 #include "map/CMapDraw.h"
 #include "map/CMapItem.h"
 #include "map/CMapList.h"
+#include "misc.h"
 #include "poi/CPoiDraw.h"
 #include "poi/CPoiFilePOI.h"
 #include "poi/CPoiList.h"
@@ -868,7 +869,7 @@ void CMainWindow::slotCloneCanvas() {
   }
 
   QTemporaryFile temp;
-  temp.open();
+  openFileCheckSuccess(QIODevice::ReadWrite, temp);
   temp.close();
 
   QSettings view(temp.fileName(), QSettings::IniFormat);

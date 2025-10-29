@@ -20,11 +20,10 @@
 
 #include <QtWidgets>
 
-#include "CMainWindow.h"
-#include "canvas/CCanvas.h"
 #include "canvas/IDrawContext.h"
 #include "items/CItemMapLayer.h"
 #include "items/CItemTreeWidget.h"
+#include "misc.h"
 
 CItemMap::CItemMap(const QString& filename) : CGdalFile(CGdalFile::eTypeProj), IItem(filename) {
   setText(CItemTreeWidget::eColumnName, QFileInfo(filename).completeBaseName());
@@ -42,7 +41,7 @@ void CItemMap::reload() {
   setToolTip(CItemTreeWidget::eColumnName, filename + "\n" + getInfo());
 
   QFile f(filename);
-  f.open(QIODevice::ReadOnly);
+  openFileCheckSuccess(QIODevice::ReadOnly, f);
   QCryptographicHash md5(QCryptographicHash::Md5);
   md5.addData(f.read(1024));
   hash = md5.result().toHex();

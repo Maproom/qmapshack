@@ -25,9 +25,11 @@
 #include "helpers/CDraw.h"
 #include "helpers/CSettings.h"
 #include "items/CItemRefMap.h"
+#include "misc.h"
 #include "overlay/refmap/CDialogRefPoint.h"
 #include "overlay/refmap/COverlayRefMapPoint.h"
 #include "overlay/refmap/CProjWizard.h"
+
 using std::bind;
 
 COverlayRefMap::COverlayRefMap(CItemRefMap* item, QStackedWidget* stackedWidget)
@@ -523,7 +525,7 @@ void COverlayRefMap::slotSaveGcp() {
   gcpFilename = filename;
 
   QFile file(filename);
-  file.open(QIODevice::WriteOnly);
+  openFileCheckSuccess(QIODevice::WriteOnly, file);
   QTextStream out(&file);
   out.setRealNumberPrecision(10);
 
@@ -556,7 +558,7 @@ void COverlayRefMap::slotLoadGcp() {
   cfg.setValue("Path/gcpInput", QFileInfo(filename).absolutePath());
 
   QFile file(filename);
-  file.open(QIODevice::ReadOnly);
+  openFileCheckSuccess(QIODevice::ReadOnly, file);
   QString line = file.readLine();
   if (line.trimmed() == "#V1.0") {
     static const QRegularExpression re1(

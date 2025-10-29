@@ -18,6 +18,8 @@
 
 #include "setup/CAppSetupMac.h"
 
+#include "misc.h"
+
 QString CAppSetupMac::relTranslationDir = "Resources/translations";  // app
 QString CAppSetupMac::relRoutinoDir = "Resources/routino";           // app
 QString CAppSetupMac::relGdalDir = "Resources/gdal";                 // app
@@ -65,7 +67,7 @@ void CAppSetupMac::initQMapShack() {
   QString fileName = QDir(getApplicationDir("Resources")).absoluteFilePath("qms-style.qss");
   qDebug() << "Stylesheet" << fileName;
   QFile styleFile(fileName);
-  styleFile.open(QFile::ReadOnly);
+  openFileCheckSuccess(QFile::ReadOnly, styleFile);
   QString style(QLatin1String(styleFile.readAll()));
   app->setStyleSheet(style);
 

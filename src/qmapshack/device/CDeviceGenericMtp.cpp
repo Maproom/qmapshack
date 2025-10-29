@@ -23,6 +23,7 @@
 #include "gis/CGisListWks.h"
 #include "gis/fit2/CFit2Project.h"
 #include "gis/gpx/CGpxProject.h"
+#include "misc.h"
 
 // Used by gvfs
 CDeviceGenericMtp::CDeviceGenericMtp(const GVFSMount& mount, const QString& storagePath, const QString& key,
@@ -100,7 +101,7 @@ void CDeviceGenericMtp::insertCopyOfProject(IGisProject* project) {
     }
 
     QTemporaryFile file;
-    file.open();  // saveAs will close the file
+    openFileCheckSuccess(QIODevice::ReadWrite, file); // saveAs will close the file
     if (!CGpxProject::saveAs(file, filename, *gpx, false)) {
       delete gpx;
       return;
@@ -128,7 +129,7 @@ void CDeviceGenericMtp::createProjectsFromFiles(const QString& subdirectory) {
       if (!device->readFileFromStorage(d.filePath(file), tempFile)) {
         return;
       }
-      tempFile.open();
+      openFileCheckSuccess(QIODevice::ReadWrite, tempFile);
       IGisProject* project = nullptr;
       if (suffix == "gpx") {
         project = new CGpxProject(tempFile, d.filePath(file), this);

@@ -9,6 +9,7 @@ V1.XX.X
 [QMS-855] Code cleanup: Convert waypoint icon map into a list
 [QMS-859] Add waypoint icons
 [QMS-861] Add action to clear the waypoint icon history 
+[QMS-863] Fixing QFILE_MAYBE_NODISCARD warnings for Qt 6.10 and more recent
 
 V1.18.1
 [QMS-659] POI file error and version handling

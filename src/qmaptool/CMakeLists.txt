@@ -81,6 +81,7 @@ set( SRCS
 )
 
 set( HDRS
+    misc.h
     CAbout.h
     canvas/CCanvas.h
     canvas/CDrawContextPixel.h

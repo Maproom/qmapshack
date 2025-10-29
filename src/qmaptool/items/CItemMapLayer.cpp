@@ -24,6 +24,7 @@
 #include "canvas/CDrawContextProj.h"
 #include "items/CItemMap.h"
 #include "items/CItemTreeWidget.h"
+#include "misc.h"
 
 CItemMapLayer::CItemMapLayer(QTreeWidget* parent)
     : IItem(""), QTreeWidgetItem(parent), vrt(QDir::temp().absoluteFilePath("QMapTool_XXXXXX.vrt")) {
@@ -33,7 +34,7 @@ CItemMapLayer::CItemMapLayer(QTreeWidget* parent)
   setIcon(CItemTreeWidget::eColumnName, QIcon("://icons/32x32/MapLayer.png"));
 
   // this is needed to create a filename
-  vrt.open();
+  openFileCheckSuccess(QIODevice::ReadWrite, vrt);
   vrt.close();
 }
 

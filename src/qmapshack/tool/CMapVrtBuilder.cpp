@@ -22,6 +22,7 @@
 
 #include "CMainWindow.h"
 #include "helpers/CSettings.h"
+#include "misc.h"
 
 CMapVrtBuilder::CMapVrtBuilder(QWidget* parent) : IToolShell(parent) {
   setupUi(this);
@@ -152,7 +153,7 @@ void CMapVrtBuilder::slotStart() {
     QFile::remove(labelTargetFilename->text());
   }
 
-  tempFile->open();
+  openFileCheckSuccess(QIODevice::ReadWrite, *tempFile);
   tempFile->resize(0);
   QTextStream stream(tempFile);
   const int N = listWidget->count();

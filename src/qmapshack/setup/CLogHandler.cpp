@@ -20,6 +20,8 @@
 
 #include <iostream>
 
+#include "misc.h"
+
 CLogHandler::CLogHandler(QString logDirectory, bool writeToFile, bool debugOutput)
     : writeToFile(writeToFile),
       debugOutput(debugOutput),
@@ -27,7 +29,7 @@ CLogHandler::CLogHandler(QString logDirectory, bool writeToFile, bool debugOutpu
       fileStream(&logFile) {
   if (writeToFile) {
     fileStream.setEncoding(QStringConverter::Utf8);
-    logFile.open(QIODevice::WriteOnly | QIODevice::Append);
+    openFileCheckSuccess(QIODevice::WriteOnly | QIODevice::Append, logFile);
   }
   qSetMessagePattern("%{time yyyy-MM-dd h:mm:ss.zzz} [%{type}] %{message}");
 }
@@ -43,8 +45,8 @@ void CLogHandler::log(QtMsgType type, const QMessageLogContext& context, const Q
 }
 
 void CLogHandler::printLoggerInfo() {
-  qDebug() << "Log configuration:"
-           << "logfile=" << logFile.fileName() << "write to file=" << writeToFile << "debug output=" << debugOutput;
+  qDebug() << "Log configuration:" << "logfile=" << logFile.fileName() << "write to file=" << writeToFile
+           << "debug output=" << debugOutput;
 }
 
 QString CLogHandler::logfileName() {

@@ -28,6 +28,7 @@
 #include "dem/IDem.h"
 #include "gis/IGisLine.h"
 #include "helpers/CSettings.h"
+#include "misc.h"
 #include "units/IUnit.h"
 
 QList<CDemDraw*> CDemDraw::dems;
@@ -139,7 +140,7 @@ void CDemDraw::buildMapList() {
 
       // calculate MD5 hash from the file's first 1024 bytes
       QFile f(dir.absoluteFilePath(filename));
-      f.open(QIODevice::ReadOnly);
+      openFileCheckSuccess(QIODevice::ReadOnly, f);
       md5.reset();
       md5.addData(f.read(1024));
       item->key = md5.result().toHex();

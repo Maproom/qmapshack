@@ -26,6 +26,7 @@
 #include "helpers/CDraw.h"
 #include "helpers/CSettings.h"
 #include "items/CItemCutMap.h"
+#include "misc.h"
 
 using std::bind;
 
@@ -228,7 +229,7 @@ void COverlayCutMap::saveShape(const QString& filename) {
   const QPolygonF& line = region;
 
   QFile file(filename);
-  file.open(QIODevice::WriteOnly);
+  openFileCheckSuccess(QIODevice::WriteOnly, file);
   QTextStream out(&file);
 
   out << "id,WKT" << Qt::endl;
@@ -260,7 +261,7 @@ void COverlayCutMap::slotLoadShape() {
   cfg.setValue("Path/shapeInput", QFileInfo(filename).absolutePath());
 
   QFile file(filename);
-  file.open(QIODevice::ReadOnly);
+  openFileCheckSuccess(QIODevice::ReadOnly, file);
   QTextStream in(&file);
 
   QString line = in.readLine().simplified();

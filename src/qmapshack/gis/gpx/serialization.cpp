@@ -27,6 +27,7 @@
 #include "gis/trk/CKnownExtension.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CWptIconManager.h"
+#include "misc.h"
 #include "version.h"
 
 const QString IGisProject::gpx_ns = "http://www.topografix.com/GPX/1/1";
@@ -919,9 +920,8 @@ void IGisItem::writeWpt(QDomElement& xml, const wpt_t& wpt, bool strictGpx11) {
   writeXml(xml, "name", wpt.name);
   writeXml(xml, "cmt", html2Dev(wpt.cmt, strictGpx11));
   writeXml(xml, "desc", html2Dev(wpt.desc, strictGpx11));
-  if ((isOnDevice() != IDevice::eTypeGarmin)
-      || (isOnDevice() != IDevice::eTypeGarminMtp)
-      || (isOnDevice() != IDevice::eTypeGenericMtp)) {
+  if ((isOnDevice() != IDevice::eTypeGarmin) || (isOnDevice() != IDevice::eTypeGarminMtp) ||
+      (isOnDevice() != IDevice::eTypeGenericMtp)) {
     writeXml(xml, "src", wpt.src);
   }
   writeXml(xml, "link", wpt.links);
@@ -1016,7 +1016,7 @@ void CDeviceGarmin::createAdventureFromProject(IGisProject* project, const QStri
 
   CDeviceMountLock mountLock(*this);
 
-  file.open(QIODevice::WriteOnly);
+  openFileCheckSuccess(QIODevice::WriteOnly, file);
   QTextStream out(&file);
   out.setEncoding(QStringConverter::Utf8);
   out << "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\" ?>" << Qt::endl;

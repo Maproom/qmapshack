@@ -30,6 +30,7 @@
 #include "map/CMapVRT.h"
 #include "map/CMapWMTS.h"
 #include "map/IMapProp.h"
+#include "misc.h"
 
 QRecursiveMutex CMapItem::mutexActiveMaps;
 
@@ -44,7 +45,7 @@ void CMapItem::setFilename(const QString& name) {
   filename = name;
 
   QFile f(filename);
-  f.open(QIODevice::ReadOnly);
+  openFileCheckSuccess(QIODevice::ReadOnly, f);
   QCryptographicHash md5(QCryptographicHash::Md5);
   md5.addData(f.read(qMin(0x1000LL, f.size())));
   key = md5.result().toHex();

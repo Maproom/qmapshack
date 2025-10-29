@@ -23,6 +23,7 @@
 #include "CMainWindow.h"
 #include "helpers/CSettings.h"
 #include "items/CItemFile.h"
+#include "misc.h"
 
 CToolPalettize::CToolPalettize(QWidget* parent) : IToolGui(parent) {
   setupUi(this);
@@ -159,7 +160,7 @@ void CToolPalettize::slotSomethingChanged() {
 }
 
 void CToolPalettize::buildCmd(QList<CShellCmd>& cmds, const IItem* iitem) {
-  inputFileList1->open();
+  openFileCheckSuccess(QIODevice::ReadWrite, *inputFileList1);
   QTextStream stream(inputFileList1);
   stream << iitem->getFilename() << Qt::endl;
   inputFileList1->close();
@@ -184,7 +185,7 @@ void CToolPalettize::buildCmdFinal(QList<CShellCmd>& cmds) {
 
   // ---- command 2..2 + N ----------------------
   if (radioCombined->isChecked()) {
-    inputFileList2->open();
+    openFileCheckSuccess(QIODevice::ReadWrite, *inputFileList2);
     QTextStream stream(inputFileList2);
 
     const int N = itemList->count();
@@ -280,7 +281,7 @@ void CToolPalettize::buildCmdFinal(QList<CShellCmd>& cmds) {
 
 void CToolPalettize::slotStart() {
   // reset file with list of input files
-  inputFileList1->open();
+  openFileCheckSuccess(QIODevice::ReadWrite, *inputFileList1);
   inputFileList1->resize(0);
   inputFileList1->close();
 

@@ -22,6 +22,7 @@
 #include <QPixmap>
 
 #include "CMainWindow.h"
+#include "misc.h"
 
 CDeviceAccessKMtp::CDeviceAccessKMtp(const QDBusObjectPath& objectPathStorage, QObject* parent)
     : IDeviceAccess(parent) {
@@ -44,7 +45,7 @@ QPixmap CDeviceAccessKMtp::getIcon(const QString& iconPath) {
   QPixmap pixmap;
   QTemporaryFile icon;
   if (readFileFromStorage(dir.filePath(iconPath), icon)) {
-    icon.open();
+    openFileCheckSuccess(QIODevice::ReadWrite, icon);
     pixmap.loadFromData(icon.readAll());
   }
   return pixmap;

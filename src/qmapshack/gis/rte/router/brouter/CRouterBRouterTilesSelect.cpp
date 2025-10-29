@@ -28,6 +28,7 @@
 #include "gis/rte/router/brouter/CRouterBRouterTilesSelectArea.h"
 #include "gis/rte/router/brouter/CRouterBRouterTilesSelectLayout.h"
 #include "gis/rte/router/brouter/CRouterBRouterTilesStatus.h"
+#include "misc.h"
 
 const QPoint CRouterBRouterTilesSelect::noTile = QPoint(INT_MIN, INT_MIN);
 const int CRouterBRouterTilesSelect::minTileLat = -180;
@@ -68,7 +69,7 @@ CRouterBRouterTilesSelect::CRouterBRouterTilesSelect(QWidget* parent) : QWidget(
   widgetSelect->show();
 
   QTemporaryFile temp;
-  temp.open();
+  openFileCheckSuccess(QIODevice::ReadWrite, temp);
   temp.close();
 
   QSettings view(temp.fileName(), QSettings::IniFormat);

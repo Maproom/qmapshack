@@ -27,6 +27,7 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CSelectCopyAction.h"
+#include "misc.h"
 #include "version.h"
 
 CTcxProject::CTcxProject(const QString& filename, CGisListWks* parent) : IGisProject(eTypeTcx, filename, parent) {
@@ -320,7 +321,7 @@ bool CTcxProject::saveAs(const QString& fn, IGisProject& project) {
   // safety check for existing files
   QFile file(_fn_);
   if (file.exists()) {
-    file.open(QIODevice::ReadOnly);
+    openFileCheckSuccess(QIODevice::ReadOnly, file);
     bool createdByQMS = false;
 
     // load file content to xml document

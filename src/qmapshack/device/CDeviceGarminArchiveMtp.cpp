@@ -24,6 +24,7 @@
 #include "gis/CGisListWks.h"
 #include "gis/CGisWorkspace.h"
 #include "gis/gpx/CGpxProject.h"
+#include "misc.h"
 
 CDeviceGarminArchiveMtp::CDeviceGarminArchiveMtp(const QString& path, IDeviceAccess* device, CDeviceGarminMtp* parent)
     : IDevice(path, parent->getKey(), parent), device(device) {
@@ -53,7 +54,7 @@ void CDeviceGarminArchiveMtp::slotExpanded(QTreeWidgetItem* item) {
     if (!device->readFileFromStorage(filename, tempFile)) {
       continue;
     }
-    tempFile.open();
+    openFileCheckSuccess(QIODevice::ReadWrite, tempFile);
     IGisProject* project = new CGpxProject(tempFile, filename, this);
     if (!project->isValid()) {
       delete project;

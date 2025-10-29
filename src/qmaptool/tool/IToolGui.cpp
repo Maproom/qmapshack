@@ -18,18 +18,18 @@
 
 #include "tool/IToolGui.h"
 
-#include "canvas/IDrawContext.h"
 #include "items/CItemListWidget.h"
 #include "items/CItemMapLayer.h"
 #include "items/CItemTreeWidget.h"
 #include "items/IItem.h"
+#include "misc.h"
 #include "shell/CShell.h"
 
 IToolGui::IToolGui(QWidget* parent) : QWidget(parent) {}
 
 QString IToolGui::createTempFile(const QString& ext) {
   QTemporaryFile* tmpFile = new QTemporaryFile(QDir::temp().absoluteFilePath("QMapTool_XXXXXX." + ext));
-  tmpFile->open();
+  openFileCheckSuccess(QIODevice::ReadWrite, *tmpFile);
   tmpFile->close();
   tmpFiles << tmpFile;
 

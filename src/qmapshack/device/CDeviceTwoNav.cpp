@@ -23,6 +23,7 @@
 #include "gis/CGisListWks.h"
 #include "gis/gpx/CGpxProject.h"
 #include "gis/tnv/CTwoNavProject.h"
+#include "misc.h"
 
 CDeviceTwoNav::CDeviceTwoNav(const QString& path, const QString& key, const QString& model, QTreeWidget* parent)
     : IDevice(path, eTypeTwoNav, key, parent) {
@@ -83,7 +84,7 @@ void CDeviceTwoNav::readReginfo(const QString& filename) {
   QString product, unittype;
   static const QRegularExpression re(QRegularExpression::anchoredPattern("(.*)=(.*)"));
   QFile file(filename);
-  file.open(QIODevice::ReadOnly);
+  openFileCheckSuccess(QIODevice::ReadOnly, file);
 
   while (!file.atEnd()) {
     QString line = file.readLine().simplified();

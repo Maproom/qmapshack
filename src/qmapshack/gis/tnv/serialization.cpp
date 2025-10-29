@@ -21,6 +21,7 @@
 #include "CMainWindow.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
+#include "misc.h"
 
 struct twonav_icon_t {
   const char* twonav;
@@ -63,11 +64,9 @@ static QStringList writeCompeTime(const QDateTime& t, bool isTrack) {
 
   if (!t.isValid()) {
     if (isTrack) {
-      result << "01-Jan-1970"
-             << "00:00:00.000";
+      result << "01-Jan-1970" << "00:00:00.000";
     } else {
-      result << "01-Jan-1970"
-             << "00:00:00";
+      result << "01-Jan-1970" << "00:00:00";
     }
     return result;
   }
@@ -268,7 +267,7 @@ bool CGisItemTrk::saveTwoNav(const QString& filename) {
           if (!IGisItem::removeHtml(comment).isEmpty()) {
             QString filenameCmt = QString("QMS_CMT%1.html").arg(wpt->getKey().item);
             QFile fileCmt(dir.absoluteFilePath(filenameCmt));
-            fileCmt.open(QIODevice::WriteOnly);
+            openFileCheckSuccess(QIODevice::WriteOnly, fileCmt);
 
             QTextStream stream(&fileCmt);
             stream << Qt::bom << comment;
@@ -462,7 +461,7 @@ void CGisItemWpt::saveTwoNav(QTextStream& out, const QDir& dir) {
   if (!IGisItem::removeHtml(comment).isEmpty()) {
     QString filenameCmt = QString("QMS_CMT%1.html").arg(getKey().item);
     QFile fileCmt(dir.absoluteFilePath(filenameCmt));
-    fileCmt.open(QIODevice::WriteOnly);
+    openFileCheckSuccess(QIODevice::WriteOnly, fileCmt);
 
     QTextStream stream(&fileCmt);
     stream << Qt::bom << comment;

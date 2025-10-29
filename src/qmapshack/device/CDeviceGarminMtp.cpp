@@ -24,6 +24,7 @@
 #include "gis/CGisListWks.h"
 #include "gis/fit2/CFit2Project.h"
 #include "gis/gpx/CGpxProject.h"
+#include "misc.h"
 
 CDeviceGarminMtp::CDeviceGarminMtp(const GVFSMount& mount, const QString& storagePath, const QString& key,
                                    QTreeWidget* parent)
@@ -59,7 +60,7 @@ void CDeviceGarminMtp::setup() {
   QTemporaryFile garminDeviceXmlFile;
   if (device->readFileFromStorage("GarminDevice.xml", garminDeviceXmlFile)) {
     QDomDocument dom;
-    garminDeviceXmlFile.open();
+    openFileCheckSuccess(QIODevice::ReadWrite, garminDeviceXmlFile);
     const QDomDocument::ParseResult& result = dom.setContent(&garminDeviceXmlFile);
     if (!result) {
       qDebug() << QString("Failed to read: %1\nline %2, column %3:\n %4")
@@ -160,7 +161,7 @@ void CDeviceGarminMtp::insertCopyOfProject(IGisProject* project) {
   }
 
   QTemporaryFile file;
-  file.open();  // saveAs will close the file
+  openFileCheckSuccess(QIODevice::ReadWrite, file);  // saveAs will close the file
   if (!CGpxProject::saveAs(file, filename, *gpx, false)) {
     delete gpx;
     return;
@@ -184,7 +185,7 @@ void CDeviceGarminMtp::createProjectsFromFiles(QString subdirectory, QString ext
       if (!device->readFileFromStorage(d.filePath(file), tempFile)) {
         return;
       }
-      tempFile.open();
+      openFileCheckSuccess(QIODevice::ReadWrite, tempFile);
       IGisProject* project = nullptr;
       if (extension == "gpx") {
         project = new CGpxProject(tempFile, d.filePath(file), this);

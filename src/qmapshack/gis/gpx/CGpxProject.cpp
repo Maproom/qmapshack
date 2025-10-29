@@ -29,6 +29,7 @@
 #include "gis/trk/CKnownExtension.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CSelectCopyAction.h"
+#include "misc.h"
 
 CGpxProject::CGpxProject(const QString& filename, CGisListWks* parent) : IGisProject(eTypeGpx, filename, parent) {
   setIcon(CGisListWks::eColumnIcon, QIcon("://icons/32x32/GpxProject.png"));
@@ -231,7 +232,7 @@ bool CGpxProject::saveAs(const QString& fn, IGisProject& project, bool strictGpx
   // safety check for existing files
   QFile file(_fn_);
   if (file.exists()) {
-    file.open(QIODevice::ReadOnly);
+    openFileCheckSuccess(QIODevice::ReadOnly, file);
     bool createdByQMS = false;
 
     // load file content to xml document

@@ -22,6 +22,7 @@
 
 #include "CMainWindow.h"
 #include "helpers/CSettings.h"
+#include "misc.h"
 #include "poi/CPoiFileItem.h"
 #include "poi/CPoiList.h"
 #include "poi/CPoiPathSetup.h"
@@ -195,7 +196,7 @@ void CPoiDraw::buildPoiList() {
 
       // calculate MD5 hash from the file's first 1024 bytes
       QFile f(dir.absoluteFilePath(filename));
-      f.open(QIODevice::ReadOnly);
+      openFileCheckSuccess(QIODevice::ReadOnly, f);
       md5.reset();
       md5.addData(f.read(1024));
       item->key = md5.result().toHex();

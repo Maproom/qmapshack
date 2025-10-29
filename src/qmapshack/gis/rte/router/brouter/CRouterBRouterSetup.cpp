@@ -26,6 +26,7 @@
 #include <QWebEnginePage>
 
 #include "helpers/CSettings.h"
+#include "misc.h"
 #include "setup/IAppSetup.h"
 
 CRouterBRouterSetup::CRouterBRouterSetup(QObject* parent) : QObject(parent) {
@@ -532,7 +533,9 @@ void CRouterBRouterSetup::loadOnlineVersionFinished(QNetworkReply* reply) {
     return;
   }
   const QString gpx(reply->readAll());
-  static const QRegularExpression reVersion("^<\\?xml.+<gpx.+creator=\"([^\"]*)\".*$",QRegularExpression::DotMatchesEverythingOption|QRegularExpression::MultilineOption);
+  static const QRegularExpression reVersion(
+      "^<\\?xml.+<gpx.+creator=\"([^\"]*)\".*$",
+      QRegularExpression::DotMatchesEverythingOption | QRegularExpression::MultilineOption);
   const QRegularExpressionMatch& match = reVersion.match(gpx);
   if (match.hasMatch()) {
     parseBRouterVersion(match.captured(1));
@@ -667,7 +670,7 @@ void CRouterBRouterSetup::displayProfileAsync(const QString& profile) {
   if (installMode == eModeLocal) {
     QFile file(getProfileDir(eModeLocal).absoluteFilePath(profile + ".brf"));
     if (file.exists()) {
-      file.open(QIODevice::ReadOnly);
+      openFileCheckSuccess(QIODevice::ReadOnly, file);
       const QByteArray& content = file.readAll();
       file.close();
       emit sigDisplayOnlineProfileFinished(profile, QString(content.data()));
@@ -705,7 +708,7 @@ void CRouterBRouterSetup::loadOnlineProfileFinished(QNetworkReply* reply) {
     const QDir& dir = getProfileDir(eModeLocal);
     const QString& filename = dir.absoluteFilePath(profile + ".brf");
     QFile file(filename);
-    file.open(QIODevice::WriteOnly);
+    openFileCheckSuccess(QIODevice::WriteOnly, file);
     file.write(content);
     file.close();
     readLocalProfiles();
@@ -725,7 +728,7 @@ void CRouterBRouterSetup::setLocalBRouterJar(const QString& path) {
     if (tmpFileName.endsWith("BRouter.class")) {
       QFile tmpFile(tmpFileName);
       char file_data[8];
-      tmpFile.open(QIODevice::ReadOnly);
+      openFileCheckSuccess(QIODevice::ReadOnly, tmpFile);
       int i = 0;
       while (!tmpFile.atEnd() && i < 8) {
         tmpFile.read(file_data + i, sizeof(char));

@@ -24,6 +24,7 @@
 #include "CMainWindow.h"
 #include "helpers/CDraw.h"
 #include "map/CMapDraw.h"
+#include "misc.h"
 #include "units/IUnit.h"
 
 CMapRMAP::CMapRMAP(const QString& filename, CMapDraw* parent) : IMap(eFeatVisibility, parent), filename(filename) {
@@ -31,7 +32,7 @@ CMapRMAP::CMapRMAP(const QString& filename, CMapDraw* parent) : IMap(eFeatVisibi
   qDebug() << "RMAP: try to open" << filename;
 
   QFile file(filename);
-  file.open(QIODevice::ReadOnly);
+  openFileCheckSuccess(QIODevice::ReadOnly, file);
   //    qDebug() << file.errorString();
 
   QDataStream stream(&file);
@@ -376,7 +377,7 @@ void CMapRMAP::draw(IDrawContext::buffer_t& buf) /* override */
   p.translate(-pp);
 
   QFile file(filename);
-  file.open(QIODevice::ReadOnly);
+  openFileCheckSuccess(QIODevice::ReadOnly, file);
 
   QDataStream stream(&file);
   stream.setByteOrder(QDataStream::LittleEndian);

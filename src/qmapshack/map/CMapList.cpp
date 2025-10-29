@@ -198,10 +198,10 @@ void CMapList::slotContextMenu(const QPoint& point) {
 
 static void saveResource(const QString& name, QDir& dir) {
   QFile resource1(QString("://map/%1").arg(name));
-  resource1.open(QIODevice::ReadOnly);
+  openFileCheckSuccess(QIODevice::ReadOnly, resource1);
 
   QFile file(dir.absoluteFilePath(name));
-  file.open(QIODevice::WriteOnly);
+  openFileCheckSuccess(QIODevice::WriteOnly, file);
   file.write(resource1.readAll());
   file.close();
 }

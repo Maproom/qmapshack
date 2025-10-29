@@ -23,6 +23,7 @@
 
 #include "helpers/CDraw.h"
 #include "map/CMapDraw.h"
+#include "misc.h"
 #include "units/IUnit.h"
 
 static void readCString(QDataStream& stream, QByteArray& ba) {
@@ -92,7 +93,7 @@ void CMapJNX::readFile(const QString& fn, qint32& productId) {
   qDebug() << fn;
 
   QFile file(fn);
-  file.open(QIODevice::ReadOnly);
+  openFileCheckSuccess(QIODevice::ReadOnly, file);
 
   QDataStream stream(&file);
   stream.setByteOrder(QDataStream::LittleEndian);
@@ -323,7 +324,7 @@ void CMapJNX::draw(IDrawContext::buffer_t& buf) /* override */
     char* pData = data.data() + 2;
 
     QFile file(mapFile.filename);
-    file.open(QIODevice::ReadOnly);
+    openFileCheckSuccess(QIODevice::ReadOnly, file);
 
     const QVector<tile_t>& tiles = mapFile.levels[level].tiles;
     const quint32 M = tiles.size();

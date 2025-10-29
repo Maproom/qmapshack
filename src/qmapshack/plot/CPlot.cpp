@@ -81,6 +81,10 @@ void CPlot::updateData() {
 }
 
 void CPlot::setMouseFocus(const CTrackData::trkpt_t* ptMouseMove) {
+  if (noOrBadData()) {
+    return;
+  }
+
   if (nullptr == ptMouseMove || getX == nullptr || getY == nullptr) {
     if (posMouse1 != NOPOINT) {
       posMouse1 = NOPOINT;

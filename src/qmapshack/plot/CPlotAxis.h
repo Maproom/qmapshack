@@ -21,6 +21,8 @@
 
 #include <QObject>
 
+#include "units/IUnit.h"
+
 class QFontMetrics;
 
 class CPlotAxis : public QObject {
@@ -69,7 +71,7 @@ class CPlotAxis : public QObject {
   virtual void getLimits(qreal& limMin, qreal& limMax, qreal& useMin, qreal& useMax);
 
   inline int val2pt(qreal val) const {
-    if (scale == 0) {
+    if (scale == 0 || scale == INFINITY || val == NOFLOAT) {
       return 0;
     }
     return qRound((val - usedMin) * scale);

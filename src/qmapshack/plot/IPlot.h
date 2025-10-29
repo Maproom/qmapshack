@@ -65,6 +65,7 @@ class IPlot : public QWidget, public INotifyTrk {
   void slotAddTrkPtInfo();
 
  protected:
+  bool noOrBadData();
   void setXTicScale(qreal scale);
   void setYLabel(const QString& str);
   void setXLabel(const QString& str);

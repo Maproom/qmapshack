@@ -513,7 +513,7 @@ void CWptIconManager::init() {
     },
     {
       {16,16}, "Contact, Smiley", "://icons/cache/32x32/found.png",
-      {tr("markers")},
+      {tr("markers"), tr("contact")},
       {tr("smiley")}
     },
     {
@@ -1526,6 +1526,122 @@ void CWptIconManager::init() {
       {16,16}, "gray_Webcam Cache", "://icons/geocaching/icons/gray_Webcam Cache.png",
       {tr("geocache")},
       {tr("webcam cache")}
+    },
+
+    {
+      {16,16}, "Contact, Afro", "://icons/waypoints/32x32/ContactAfro.png",
+      {tr("contact")},
+      {tr("afro")}
+    },
+    {
+      {16,16}, "Contact, Alien", "://icons/waypoints/32x32/ContactAlien.png",
+      {tr("contact")},
+      {tr("alien")}
+    },
+    {
+      {16,16}, "Contact, Ball Cap", "://icons/waypoints/32x32/ContactBallCap.png",
+      {tr("contact")},
+      {tr("ball cap")}
+    },
+    {
+      {16,16}, "Contact, Big Ears", "://icons/waypoints/32x32/ContactBigEars.png",
+      {tr("contact")},
+      {tr("big ears")}
+    },
+    {
+      {16,16}, "Contact, Biker", "://icons/waypoints/32x32/ContactBiker.png",
+      {tr("contact")},
+      {tr("biker")}
+    },
+    {
+      {16,16}, "Contact, Bug", "://icons/waypoints/32x32/ContactBug.png",
+      {tr("contact")},
+      {tr("bug")}
+    },
+    {
+      {16,16}, "Contact, Cat", "://icons/waypoints/32x32/ContactCat.png",
+      {tr("contact")},
+      {tr("cat")}
+    },
+    {
+      {16,16}, "Contact, Dog", "://icons/waypoints/32x32/ContactDog.png",
+      {tr("contact")},
+      {tr("dog")}
+    },
+    {
+      {16,16}, "Contact, Dreadlocks", "://icons/waypoints/32x32/ContactDreadlocks.png",
+      {tr("contact")},
+      {tr("dreadlocks")}
+    },
+    {
+      {16,16}, "Contact, Female1", "://icons/waypoints/32x32/ContactFemale1.png",
+      {tr("contact")},
+      {tr("female1")}
+    },
+    {
+      {16,16}, "Contact, Female2", "://icons/waypoints/32x32/ContactFemale2.png",
+      {tr("contact")},
+      {tr("female2")}
+    },
+    {
+      {16,16}, "Contact, Female3", "://icons/waypoints/32x32/ContactFemale3.png",
+      {tr("contact")},
+      {tr("female3")}
+    },
+    {
+      {16,16}, "Contact, Goatee", "://icons/waypoints/32x32/ContactGoatee.png",
+      {tr("contact")},
+      {tr("goatee")}
+    },
+    {
+      {16,16}, "Contact, Kung-Fu", "://icons/waypoints/32x32/ContactKungFu.png",
+      {tr("contact")},
+      {tr("kung-fu")}
+    },
+    {
+      {16,16}, "Contact, Pig", "://icons/waypoints/32x32/ContactPig.png",
+      {tr("contact")},
+      {tr("pig")}
+    },
+    {
+      {16,16}, "Contact, Pirate", "://icons/waypoints/32x32/ContactPirate.png",
+      {tr("contact")},
+      {tr("pirate")}
+    },
+    {
+      {16,16}, "Contact, Ranger", "://icons/waypoints/32x32/ContactRanger.png",
+      {tr("contact")},
+      {tr("ranger")}
+    },
+    {
+      {16,16}, "Contact, Spike", "://icons/waypoints/32x32/ContactSpike.png",
+      {tr("contact")},
+      {tr("spike")}
+    },
+    {
+      {16,16}, "Contact, Sumo", "://icons/waypoints/32x32/ContactSumo.png",
+      {tr("contact")},
+      {tr("sumo")}
+    },
+    {
+      {16,16}, "Contact, Blonde", "://icons/waypoints/32x32/ContactBlonde.png",
+      {tr("contact")},
+      {tr("blonde")}
+    },
+    {
+      {16,16}, "Contact, Clown", "://icons/waypoints/32x32/ContactClown.png",
+      {tr("contact")},
+      {tr("clown")}
+    },
+    {
+      {16,16}, "Contact, Glasses", "://icons/waypoints/32x32/ContactGlasses.png",
+      {tr("contact")},
+      {tr("glasses")}
+    },
+    {
+      {16,16}, "Contact, Panda", "://icons/waypoints/32x32/ContactPanda.png",
+      {tr("contact")},
+      {tr("panda")}
     },
   };
   // clang-format on

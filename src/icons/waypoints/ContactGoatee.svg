@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="120"
+   height="120"
+   viewBox="0 0 120 120"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.2 (ebf0e940d0, 2025-05-08)"
+   sodipodi:docname="ContactGoatee.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#111111"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="1.4142136"
+     inkscape:cx="32.173358"
+     inkscape:cy="-87.681241"
+     inkscape:window-width="1920"
+     inkscape:window-height="1122"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer2" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="BoundingBox"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="opacity:0;fill:#ffffff;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"
+       id="rect1"
+       width="120"
+       height="120"
+       x="0"
+       y="0"
+       ry="0.40268457" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Symbol"
+     transform="translate(713.8968,-1161.8665)"
+     style="fill:#000000;stroke:#000000">
+    <path
+       style="fill:#000000;fill-rule:evenodd;stroke:#000000;stroke-width:0.176124px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m -666.637,1233.8025 c 0.76846,5.3236 5.85818,12.0486 12.78819,19.3704 7.25402,-7.3247 11.61464,-13.9262 12.85088,-19.7464 0.7263,-8.6274 -6.1525,-8.6788 -13.10162,-8.6509 -8.32203,-0.456 -13.39138,1.8085 -12.53745,9.0269 z"
+       id="path1"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="beard" />
+    <path
+       style="fill:#000000;fill-rule:evenodd;stroke:#000000;stroke-width:0.176124px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m -708.76279,1197.9455 c 4.37338,6.3057 6.48004,14.0875 32.53465,14.23 7.16187,-0.261 21.70817,1.6109 22.12859,-13.8539 0.42668,-4.9842 -1.27638,-8.1264 -7.02097,-7.7732 -3.34258,-0.062 -5.76335,0.7979 -7.77321,2.0687 -6.45749,6.5609 -20.96242,13.9746 -39.86906,5.3284 z"
+       id="path2"
+       sodipodi:nodetypes="cccccc"
+       inkscape:label="moustache" />
+    <path
+       style="fill:#000000;fill-rule:evenodd;stroke:#000000;stroke-width:0.176124px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m -599.03081,1197.9455 c -4.37339,6.3058 -6.48005,14.0875 -32.53466,14.23 -7.16188,-0.261 -21.70817,1.611 -22.12859,-13.8539 -0.42668,-4.9841 1.27637,-8.1263 7.02097,-7.7732 3.34257,-0.062 5.76335,0.798 7.77321,2.0687 6.45749,6.561 20.96242,13.9746 39.86907,5.3284 z"
+       id="path2-6"
+       sodipodi:nodetypes="cccccc"
+       inkscape:label="moustache" />
+  </g>
+</svg>

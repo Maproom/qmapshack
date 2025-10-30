@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="120"
+   height="120"
+   viewBox="0 0 120 120"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.2 (ebf0e940d0, 2025-05-08)"
+   sodipodi:docname="ContactAlien.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#111111"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="2.6339728"
+     inkscape:cx="48.405968"
+     inkscape:cy="65.680254"
+     inkscape:window-width="1920"
+     inkscape:window-height="1122"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer2" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="BoundingBox"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="opacity:0;fill:#ffffff;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"
+       id="rect1"
+       width="120"
+       height="120"
+       x="0"
+       y="0"
+       ry="0.40268457" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Symbol"
+     transform="translate(24.95232,-41.472795)">
+    <path
+       style="fill:#000000;fill-rule:evenodd;stroke:#000000;stroke-width:0.56043px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 34.864094,156.2328 c 30.40323,-15.30134 41.613159,-39.08342 43.95093,-66.785776 -0.51063,-49.964109 -80.010294,-63.678245 -87.5335587,0 1.9397581,25.609736 11.0734213,49.306206 43.5826287,66.785776 z"
+       id="path1"
+       sodipodi:nodetypes="cccc"
+       inkscape:label="head" />
+    <path
+       style="fill:#ffffff;fill-rule:evenodd;stroke:#ffffff;stroke-width:0.56043px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 68.379749,92.63899 c 0.894664,11.92273 -4.869815,29.19428 -28.482168,28.48217 -1.292229,-19.97468 11.953167,-29.523792 28.482168,-28.48217 z"
+       id="path2"
+       sodipodi:nodetypes="ccc"
+       inkscape:label="eye" />
+    <path
+       style="fill:#ffffff;fill-rule:evenodd;stroke:#ffffff;stroke-width:0.56043px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 29.830607,121.12116 C 31.104924,105.44713 22.004403,91.653749 1.8395104,92.63899 0.10546398,116.01772 17.301847,121.72147 29.830607,121.12116 Z"
+       id="path3"
+       sodipodi:nodetypes="ccc"
+       inkscape:label="eye" />
+  </g>
+</svg>

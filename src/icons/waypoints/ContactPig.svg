@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="120"
+   height="120"
+   viewBox="0 0 120 120"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.2 (ebf0e940d0, 2025-05-08)"
+   sodipodi:docname="ContactPig.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#111111"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="0.93125"
+     inkscape:cx="-19.865772"
+     inkscape:cy="21.47651"
+     inkscape:window-width="1920"
+     inkscape:window-height="1122"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer2" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="BoundingBox"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="opacity:0;fill:#ffffff;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"
+       id="rect1"
+       width="120"
+       height="120"
+       x="0"
+       y="0"
+       ry="0.40268457" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Symbol"
+     transform="translate(64.152832,97.113905)">
+    <path
+       style="fill:#000000;fill-rule:evenodd;stroke:#000000;stroke-width:0.293901px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m -31.957533,-39.326901 -3.531069,16.28849 c -3.214229,40.981836 71.283877,32.2449727 62.192417,-1.48077 l -3.189356,-14.579908 c 8.49087,0.889233 25.72646,1.98989 25.400932,-28.704193 0.245895,-2.207244 0.441927,-4.27488 1.423819,-8.542915 0.840983,-2.062362 0.220934,-2.796513 -2.27811,-1.822486 -2.402915,1.016974 -4.531197,2.239923 -8.087292,2.392014 -10.714782,-0.764516 -21.380912,-1.360768 -28.533336,10.194545 -7.9438619,-3.828609 -15.7743573,-7.830593 -31.267066,-0.113905 -4.511779,-4.375073 -7.246047,-9.69563 -18.509648,-10.479308 -6.188626,0.631793 -12.227941,0.732498 -18.566597,-1.936394 -1.115734,-0.34253 -2.480332,-1.182793 -1.993349,1.680106 2.447882,6.072453 1.464306,11.715971 1.708582,17.512974 2.468467,13.528911 9.932074,22.790432 25.230073,19.59175 z"
+       id="path1"
+       sodipodi:nodetypes="ccccccccccccccc"
+       inkscape:label="outer" />
+    <ellipse
+       style="display:inline;fill:#ffffff;fill-rule:evenodd;stroke:#ffffff;stroke-width:0.38772px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       id="path2"
+       cx="-4.2373719"
+       cy="-18.039812"
+       rx="16.343666"
+       ry="12.477586"
+       inkscape:label="nose" />
+    <ellipse
+       style="fill:#000000;fill-rule:evenodd;stroke:#000000;stroke-width:0.343332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       id="path3"
+       cx="-10.39893"
+       cy="-17.999533"
+       rx="2.6332154"
+       ry="3.5191927"
+       inkscape:label="nostril" />
+    <ellipse
+       style="fill:#000000;fill-rule:evenodd;stroke:#000000;stroke-width:0.343332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       id="path3-9"
+       cx="1.9044865"
+       cy="-17.999407"
+       rx="2.6332154"
+       ry="3.5191927"
+       inkscape:label="nostril" />
+    <circle
+       style="fill:#ffffff;fill-rule:evenodd;stroke:#ffffff;stroke-width:0.307955px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       id="path4"
+       cx="-20.064137"
+       cy="-36.443962"
+       r="3.3757944"
+       inkscape:label="eye" />
+    <circle
+       style="fill:#ffffff;fill-rule:evenodd;stroke:#ffffff;stroke-width:0.307955px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       id="path4-9"
+       cx="11.849121"
+       cy="-36.444088"
+       r="3.3757944"
+       inkscape:label="eye" />
+  </g>
+</svg>

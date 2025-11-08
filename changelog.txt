@@ -1,3 +1,6 @@
+V1.XX.X
+[QMS-871] Partly fix: Routino & installation folder name with non-ASCII characters
+
 V1.18.2
 [QMS-672] Fix track point timestamps to QDateTime UTC conversion
 [QMS-841] Fix waypoint names to match the Garmin symbols

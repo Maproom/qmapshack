@@ -56,20 +56,28 @@ void CMapItem::saveConfig(QSettings& cfg) const {
   if (mapfile.isNull()) {
     return;
   }
-
-  cfg.beginGroup(key);
-  mapfile->saveConfig(cfg);
-  cfg.endGroup();
+  QFileInfo fi(filename);
+  QString configFileName = fi.absolutePath() + "/" + fi.baseName() + "." +
+                           map->getCanvas()->objectName().replace(" ", "_").toLower() + ".qmscfg";
+  QSettings mapCfg(configFileName, QSettings::IniFormat);
+  mapfile->saveConfig(mapCfg);
 }
 
 void CMapItem::loadConfig(QSettings& cfg) {
   if (mapfile.isNull()) {
     return;
   }
-
-  cfg.beginGroup(key);
-  mapfile->loadConfig(cfg);
-  cfg.endGroup();
+  QFileInfo fi(filename);
+  QString configFileName = fi.absolutePath() + "/" + fi.baseName() + "." +
+                           map->getCanvas()->objectName().replace(" ", "_").toLower() + ".qmscfg";
+  if (QFile::exists(configFileName)) {
+    QSettings mapCfg(configFileName, QSettings::IniFormat);
+    mapfile->loadConfig(mapCfg);
+  } else {
+    cfg.beginGroup(key);
+    mapfile->loadConfig(cfg);
+    cfg.endGroup();
+  }
 }
 
 void CMapItem::showChildren(bool yes) {

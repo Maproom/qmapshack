@@ -114,6 +114,8 @@ class IDrawContext : public QThread {
 
   const QPointF& getZoomFactor() const { return zoomFactor; }
 
+  const CCanvas* getCanvas() const { return canvas; }
+
   /**
      @brief Set the projection of the draw context
 

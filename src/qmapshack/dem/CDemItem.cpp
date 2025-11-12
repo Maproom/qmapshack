@@ -38,19 +38,28 @@ void CDemItem::saveConfig(QSettings& cfg) {
     return;
   }
 
-  cfg.beginGroup(key);
-  demfile->saveConfig(cfg);
-  cfg.endGroup();
+  QFileInfo fi(filename);
+  QString configFileName = fi.absolutePath() + "/" + fi.baseName() + "." +
+                           dem->getCanvas()->objectName().replace(" ", "_").toLower() + ".qmscfg";
+  QSettings mapCfg(configFileName, QSettings::IniFormat);
+  demfile->saveConfig(mapCfg);
 }
 
 void CDemItem::loadConfig(QSettings& cfg) {
   if (demfile.isNull()) {
     return;
   }
-
-  cfg.beginGroup(key);
-  demfile->loadConfig(cfg);
-  cfg.endGroup();
+  QFileInfo fi(filename);
+  QString configFileName = fi.absolutePath() + "/" + fi.baseName() + "." +
+                           dem->getCanvas()->objectName().replace(" ", "_").toLower() + ".qmscfg";
+  if (QFile::exists(configFileName)) {
+    QSettings mapCfg(configFileName, QSettings::IniFormat);
+    demfile->loadConfig(mapCfg);
+  } else {
+    cfg.beginGroup(key);
+    demfile->loadConfig(cfg);
+    cfg.endGroup();
+  }
 }
 
 void CDemItem::showChildren(bool yes) {

@@ -258,6 +258,11 @@ class CGisItemTrk : public IGisItem, public IGisLine {
    */
   void toRoute();
 
+  /**
+     @brief Convert the track to an area
+   */
+  void toArea();
+
   /** @defgroup ColorSource Stuff related to coloring tracks using data from different sources
 
       @{

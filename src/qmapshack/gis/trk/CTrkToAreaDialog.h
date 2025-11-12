@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler <oliver.eichler@gmx.de>
+    Copyright (C) 2025 Jürgen Beck <>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,47 +16,36 @@
 
 **********************************************************************************************/
 
-#ifndef CSCROPTTRK_H
-#define CSCROPTTRK_H
+#ifndef CTRKTOAREADIALOG_H
+#define CTRKTOAREADIALOG_H
 
-#include "gis/IGisItem.h"
-#include "mouse/IScrOpt.h"
-#include "ui_IScrOptTrk.h"
+#include "gis/prj/IGisProject.h"
+#include "ui_ITrkToAreaDialog.h"
 
-class CGisItemTrk;
-class IMouse;
+class QTreeWidget;
 
-class CScrOptTrk : public IScrOpt, private Ui::IScrOptTrk {
+/*
+ * Dialog Class for the track to area conversion.
+ */
+class CTrkToAreaDialog : public QDialog, private Ui::ITrkToAreaDialog {
   Q_OBJECT
  public:
-  CScrOptTrk(CGisItemTrk* trk, const QPoint& point, IMouse* parent);
-  virtual ~CScrOptTrk();
-
-  void draw(QPainter& p) override;
+  /**
+     @brief Shows the Dialog and preselects the project and area name
+   */
+  CTrkToAreaDialog(IGisProject*& project, QString& areaName);
+  virtual ~CTrkToAreaDialog();
 
  private slots:
-  void slotDelete();
-  void slotCopy();
-  void slotEditDetails();
-  void slotProfile(bool on);
-  void slotCut();
-  void slotEdit();
-  void slotReverse();
-  void slotCombine();
-  void slotRange();
-  void slotActivity();
-  void slotColor();
-  void slotCopyWithWpt();
-  void slotNogo();
-  void slotAddElevation();
-  void slotAddInfo();
-  void slotTags();
-  void slotToRoute();
-  void slotToArea();
+  void slotProject();
+  void slotAreaChanged(const QString& text);
 
  private:
-  IGisItem::key_t key;
-  QPointF anchor;
+  void setType(IGisProject::type_e& t);
+  void buttonBoxEnabled();
+
+  IGisProject*& project;
+  QString& areaName;
 };
 
-#endif  // CSCROPTTRK_H
+#endif  // CTRKTOAREADIALOG_H

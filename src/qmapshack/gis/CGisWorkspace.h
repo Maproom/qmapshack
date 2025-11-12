@@ -318,6 +318,8 @@ class CGisWorkspace : public QWidget, private Ui::IGisWorkspace {
 
   void convertTrackToRoute(const IGisItem::key_t& key);
 
+  void convertTrackToArea(const IGisItem::key_t& key);
+
   void cutTrkByKey(const IGisItem::key_t& key);
 
   void addTrkInfoByKey(const IGisItem::key_t& key);

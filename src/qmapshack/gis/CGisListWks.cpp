@@ -163,6 +163,7 @@ CGisListWks::CGisListWks(QWidget* parent) : QTreeWidget(parent) {
   actionCopyTrkWithWpt = addAction(QIcon("://icons/32x32/CopyTrkWithWpt.png"), tr("Copy Track with Waypoints"), this,
                                    &CGisListWks::slotCopyTrkWithWpt);
   actionToRoute = addAction(QIcon("://icons/32x32/Route.png"), tr("Convert to Route"), this, &CGisListWks::slotToRoute);
+  actionToArea = addAction(QIcon("://icons/32x32/Area.png"), tr("Convert to Area"), this, &CGisListWks::slotToArea);
   actionNogoTrk = addAction(QIcon("://icons/32x32/NoGo.png"), tr("Toggle Nogo-Line"), this, &CGisListWks::slotNogoItem);
   actionNogoTrk->setCheckable(true);
 
@@ -987,6 +988,7 @@ void CGisListWks::showMenuItemTrk(const QPoint& p, const IGisItem::key_t& key) {
   menu.addAction(actionEleWptTrk);
   menu.addAction(actionCopyTrkWithWpt);
   menu.addAction(actionToRoute);
+  menu.addAction(actionToArea);
   menu.addAction(actionNogoTrk);
   menu.addSeparator();
   menu.addAction(actionDelete);
@@ -2164,5 +2166,14 @@ void CGisListWks::slotToRoute() {
   CGisItemTrk* gisItem = dynamic_cast<CGisItemTrk*>(currentItem());
   if (gisItem != nullptr) {
     CGisWorkspace::self().convertTrackToRoute(gisItem->getKey());
+  }
+}
+
+void CGisListWks::slotToArea() {
+  CGisListWksEditLock lock(false, IGisItem::mutexItems);
+
+  CGisItemTrk* gisItem = dynamic_cast<CGisItemTrk*>(currentItem());
+  if (gisItem != nullptr) {
+    CGisWorkspace::self().convertTrackToArea(gisItem->getKey());
   }
 }

@@ -138,6 +138,7 @@ set( SRCS
     gis/trk/CSelectActivityColor.cpp
     gis/trk/CTableTrk.cpp
     gis/trk/CTableTrkInfo.cpp
+    gis/trk/CTrkToAreaDialog.cpp
     gis/trk/CTrkToRteDialog.cpp
     gis/trk/CTrackData.cpp
     gis/trk/filter/CFilterChangeStartPoint.cpp
@@ -500,6 +501,7 @@ set( HDRS
     gis/trk/CSelectActivityColor.h
     gis/trk/CTableTrk.h
     gis/trk/CTableTrkInfo.h
+    gis/trk/CTrkToAreaDialog.h
     gis/trk/CTrkToRteDialog.h
     gis/trk/CTrackData.h
     gis/trk/filter/CFilterChangeStartPoint.h
@@ -792,6 +794,7 @@ set( UIS
     gis/trk/IListTrkPts.ui
     gis/trk/IScrOptTrk.ui
     gis/trk/ISelectActivityColor.ui
+    gis/trk/ITrkToAreaDialog.ui
     gis/trk/ITrkToRteDialog.ui
     gis/trk/filter/IFilterChangeStartPoint.ui
     gis/trk/filter/IFilterDelete.ui

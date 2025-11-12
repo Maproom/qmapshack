@@ -28,6 +28,7 @@
 #include "gis/GeoMath.h"
 #include "gis/prj/IGisProject.h"
 #include "gis/proj_x.h"
+#include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/trk/CCutTrk.h"
 #include "gis/trk/CDetailsTrk.h"
@@ -35,6 +36,7 @@
 #include "gis/trk/CKnownExtension.h"
 #include "gis/trk/CPropertyTrk.h"
 #include "gis/trk/CScrOptTrk.h"
+#include "gis/trk/CTrkToAreaDialog.h"
 #include "gis/trk/CTrkToRteDialog.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CDraw.h"
@@ -2876,4 +2878,32 @@ void CGisItemTrk::toRoute() {
   getPolylineRangeFromData(points, idx1, idx2, saveSubPts);
 
   new CGisItemRte(points, routeName, project, NOIDX);
+}
+
+void CGisItemTrk::toArea() {
+  qint32 idx1, idx2;
+  QString areaName;
+  IGisProject* project = getParentProject();
+
+  if (nullptr == project) {
+    qCritical("CGisItemTrk::toArea no project");
+    return;
+  }
+  getMouseRange(idx1, idx2, true);
+
+  if (NOIDX == idx1) {
+    areaName = getName();
+  } else {
+    areaName = getName() + QString(" (%1-%2)").arg(idx1).arg(idx2);
+  }
+
+  CTrkToAreaDialog dlg(project, areaName);
+  if (dlg.exec() == QDialog::Rejected) {
+    return;
+  }
+
+  SGisLine points;
+  getPolylineRangeFromData(points, idx1, idx2, true);
+
+  new CGisItemOvlArea(points, areaName, project, NOIDX);
 }

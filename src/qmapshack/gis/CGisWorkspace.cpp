@@ -852,6 +852,16 @@ void CGisWorkspace::convertTrackToRoute(const IGisItem::key_t& key) {
   emit sigChanged();
 }
 
+void CGisWorkspace::convertTrackToArea(const IGisItem::key_t& key) {
+  QMutexLocker lock(&IGisItem::mutexItems);
+  CGisItemTrk* trk = dynamic_cast<CGisItemTrk*>(getItemByKey(key));
+  if (nullptr != trk) {
+    trk->toArea();
+  }
+
+  emit sigChanged();
+}
+
 void CGisWorkspace::cutTrkByKey(const IGisItem::key_t& key) {
   QMutexLocker lock(&IGisItem::mutexItems);
 

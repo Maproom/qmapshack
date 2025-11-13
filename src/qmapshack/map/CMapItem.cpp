@@ -78,6 +78,9 @@ void CMapItem::loadConfig(QSettings& cfg) {
     mapfile->loadConfig(cfg);
     cfg.endGroup();
   }
+
+  // show checkbox
+  setCheckState(0, mapfile->visible() ? Qt::Checked : Qt::Unchecked);
 }
 
 void CMapItem::showChildren(bool yes) {
@@ -109,6 +112,21 @@ void CMapItem::updateIcon() {
   QPixmap img(icons.contains(suffix) ? icons[suffix] : "://icons/32x32/Map.png");
 
   setIcon(/* col */ 0, QIcon(img));
+}
+
+void CMapItem::setVisible(Qt::CheckState state) {
+  QMutexLocker lock(&mutexActiveMaps);
+  if (!mapfile.isNull()) {
+    mapfile->setVisible(state == Qt::Checked);
+  }
+}
+
+bool CMapItem::isVisible() const {
+  QMutexLocker lock(&mutexActiveMaps);
+  if (!mapfile.isNull()) {
+    return mapfile->visible();
+  }
+  return false;
 }
 
 bool CMapItem::isActivated() {
@@ -144,6 +162,9 @@ void CMapItem::deactivate() {
   setFlags(flags() & ~Qt::ItemIsDragEnabled);
 
   map->reportStatusToCanvas(text(0), "");
+
+  // remove checkbox
+  setData(0, Qt::CheckStateRole, QVariant());
 }
 
 bool CMapItem::activate() {

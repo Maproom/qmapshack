@@ -28,7 +28,7 @@ class QMenu;
 class CMapTreeWidget : public QTreeWidget {
   Q_OBJECT
  public:
-  CMapTreeWidget(QWidget* parent) : QTreeWidget(parent) {}
+  CMapTreeWidget(QWidget* parent);
 
  signals:
   void sigChanged();

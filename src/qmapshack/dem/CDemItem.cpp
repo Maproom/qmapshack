@@ -60,6 +60,9 @@ void CDemItem::loadConfig(QSettings& cfg) {
     demfile->loadConfig(cfg);
     cfg.endGroup();
   }
+
+  // show checkbox
+  setCheckState(0, demfile->visible() ? Qt::Checked : Qt::Unchecked);
 }
 
 void CDemItem::showChildren(bool yes) {
@@ -92,6 +95,21 @@ void CDemItem::updateIcon() {
   setIcon(0, QIcon(img));
 }
 
+void CDemItem::setVisible(Qt::CheckState state) {
+  QMutexLocker lock(&mutexActiveDems);
+  if (!demfile.isNull()) {
+    demfile->setVisible(state == Qt::Checked);
+  }
+}
+
+bool CDemItem::isVisible() const {
+  QMutexLocker lock(&mutexActiveDems);
+  if (!demfile.isNull()) {
+    return demfile->visible();
+  }
+  return false;
+}
+
 bool CDemItem::isActivated() {
   QMutexLocker lock(&mutexActiveDems);
   return !demfile.isNull();
@@ -122,6 +140,9 @@ void CDemItem::deactivate() {
 
   // deny drag-n-drop again
   setFlags(flags() & ~Qt::ItemIsDragEnabled);
+
+  // remove checkbox
+  setData(0, Qt::CheckStateRole, QVariant());
 }
 
 bool CDemItem::activate() {

@@ -25,6 +25,16 @@
 #include "map/CMapItem.h"
 #include "misc.h"
 
+CMapTreeWidget::CMapTreeWidget(QWidget* parent) : QTreeWidget(parent) {
+  connect(this, &CMapTreeWidget::itemChanged, this, [this](QTreeWidgetItem* item, int) {
+    CMapItem* map = dynamic_cast<CMapItem*>(item);
+    if (map) {
+      map->setVisible(map->checkState(0));
+      emit sigChanged();
+    }
+  });
+}
+
 void CMapTreeWidget::dragEnterEvent(QDragEnterEvent* e) {
   collapseAll();
   QTreeWidget::dragEnterEvent(e);

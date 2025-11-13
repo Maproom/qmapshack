@@ -57,6 +57,12 @@ class IMap : public IDrawObject {
    */
   bool activated() const { return isActivated; }
 
+  /// @brief  true if map should be shown on canvas
+  bool visible() const { return isVisible; }
+
+  /// @brief store state of visibility internally
+  void setVisible(bool yes) { isVisible = yes; }
+
   /**
      @brief Get the map's setup widget.
 
@@ -172,6 +178,9 @@ class IMap : public IDrawObject {
      @brief True if map was loaded successfully
    */
   bool isActivated = false;
+
+  /// @brief true if map is shown on canvas
+  bool isVisible = true;
 
   /// the setup dialog. Use getSetup() for access
   QPointer<IMapProp> setup;

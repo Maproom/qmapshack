@@ -240,6 +240,10 @@ qreal CDemDraw::getElevationAt(const QPointF& pos, bool checkScale) {
           break;
         }
 
+        if (!item->isVisible()) {
+          continue;
+        }
+
         ele = item->demfile->getElevationAt(pos, checkScale);
         if (ele != NOFLOAT) {
           break;
@@ -263,6 +267,10 @@ qreal CDemDraw::getSlopeAt(const QPointF& pos, bool checkScale) {
           // it is ok to break as soon as the first map with no
           // active files is hit.
           break;
+        }
+
+        if (!item->isVisible()) {
+          continue;
         }
 
         slope = item->demfile->getSlopeAt(pos, checkScale);
@@ -303,6 +311,10 @@ void CDemDraw::drawt(buffer_t& currentBuffer) {
         // it is ok to break as soon as the first map with no
         // active files is hit.
         break;
+      }
+
+      if (!item->isVisible()) {
+        continue;
       }
 
       item->demfile->draw(currentBuffer);

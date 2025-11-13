@@ -46,6 +46,8 @@ void IMap::saveConfig(QSettings& cfg) /* override */
   if (hasFeatureTypFile()) {
     cfg.setValue("typeFile", typeFile);
   }
+
+  cfg.setValue("isVisible", isVisible);
 }
 
 void IMap::loadConfig(QSettings& cfg) /* override */
@@ -59,6 +61,8 @@ void IMap::loadConfig(QSettings& cfg) /* override */
   slotSetCacheSize(cfg.value("cacheSizeMB", getCacheSize()).toInt());
   slotSetCacheExpiration(cfg.value("cacheExpiration", getCacheExpiration()).toInt());
   slotSetTypeFile(cfg.value("typeFile", getTypeFile()).toString());
+
+  isVisible = cfg.value("isVisible", true).toBool();
 }
 
 IMapProp* IMap::getSetup() {

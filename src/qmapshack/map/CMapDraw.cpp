@@ -23,7 +23,6 @@
 
 #include "CMainWindow.h"
 #include "canvas/CCanvas.h"
-#include "helpers/CDraw.h"
 #include "helpers/CSettings.h"
 #include "map/CMapItem.h"
 #include "map/CMapList.h"
@@ -127,6 +126,10 @@ void CMapDraw::getInfo(const QPoint& px, QString& str) {
         break;
       }
 
+      if (!item->isVisible()) {
+        continue;
+      }
+
       item->getMapfile()->getInfo(px, str);
     }
   }
@@ -147,6 +150,10 @@ void CMapDraw::getToolTip(const QPoint& px, QString& str) {
         // it is ok to break as soon as the first map with no
         // active files is hit.
         break;
+      }
+
+      if (!item->isVisible()) {
+        continue;
       }
 
       item->getMapfile()->getToolTip(px, str);
@@ -171,6 +178,10 @@ IPoiItem CMapDraw::findPOICloseBy(const QPoint& px) const {
         // it is ok to break as soon as the first map with no
         // active files is hit.
         break;
+      }
+
+      if (!item->isVisible()) {
+        continue;
       }
 
       item->getMapfile()->findPOICloseBy(px, poi);
@@ -200,6 +211,10 @@ bool CMapDraw::findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint3
         // it is ok to break as soon as the first map with no
         // active files is hit.
         break;
+      }
+
+      if (!item->isVisible()) {
+        continue;
       }
 
       res = item->getMapfile()->findPolylineCloseBy(pt1, pt2, threshold, polyline);
@@ -376,6 +391,10 @@ void CMapDraw::drawt(IDrawContext::buffer_t& currentBuffer) /* override */
         // it is ok to break as soon as the first map with no
         // active files is hit.
         break;
+      }
+
+      if (!item->isVisible()) {
+        continue;
       }
 
       item->getMapfile()->draw(currentBuffer);

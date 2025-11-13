@@ -26,6 +26,16 @@
 #include "misc.h"
 #include "units/IUnit.h"
 
+CDemTreeWidget::CDemTreeWidget(QWidget* parent) : QTreeWidget(parent) {
+  connect(this, &CDemTreeWidget::itemChanged, this, [this](QTreeWidgetItem* item, int) {
+    CDemItem* dem = dynamic_cast<CDemItem*>(item);
+    if (dem) {
+      dem->setVisible(dem->checkState(0));
+      emit sigChanged();
+    }
+  });
+}
+
 void CDemTreeWidget::dragMoveEvent(QDragMoveEvent* event) {
   CDemItem* item = dynamic_cast<CDemItem*>(itemAt(event->position().toPoint()));
 

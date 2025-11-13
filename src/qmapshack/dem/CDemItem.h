@@ -42,6 +42,16 @@ class CDemItem : public QTreeWidgetItem {
    */
   static QRecursiveMutex mutexActiveDems;
 
+  /// @brief store state of visibility check box in IDem object
+  void setVisible(Qt::CheckState state);
+
+  /**
+   *  @brief Get visibility state
+   *  Do not use the item's checkState() method.
+   *  This is the single source of truth.
+   */
+  bool isVisible() const;
+
   /**
      @brief Query if dem objects are loaded
      @return True if the internal list of dem objects is not empty.

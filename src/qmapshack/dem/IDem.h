@@ -55,6 +55,12 @@ class IDem : public IDrawObject {
 
   bool activated() const { return isActivated; }
 
+  /// @brief  true if DEM should be shown on canvas and used to read data
+  bool visible() const { return isVisible; }
+
+  /// @brief store state of visibility internally
+  void setVisible(bool yes) { isVisible = yes; }
+
   /**
      @brief Get the dem's setup widget.
 
@@ -174,6 +180,9 @@ class IDem : public IDrawObject {
      @brief True if map was loaded successfully
    */
   bool isActivated = false;
+
+  /// @brief true if DEM is shown on canvas and used to read elevation data
+  bool isVisible = true;
 
   /// the setup dialog. Use getSetup() for access
   QPointer<IDemProp> setup;

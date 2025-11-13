@@ -124,6 +124,8 @@ void IDem::saveConfig(QSettings& cfg) {
   cfg.setValue("elevationShadeLimitLow", elevationShadeLimitLow);
   cfg.setValue("elevationShadeLimitHi", elevationShadeLimitHi);
   cfg.setValue("showElevationShadeScale", bShowElevationShadeScale);
+
+  cfg.setValue("isVisible", isVisible);
 }
 
 void IDem::loadConfig(QSettings& cfg) {
@@ -149,6 +151,8 @@ void IDem::loadConfig(QSettings& cfg) {
   elevationShadeLimitLow = cfg.value("elevationShadeLimitLow", 0).toInt();
   elevationShadeLimitHi = cfg.value("elevationShadeLimitHi", 0).toInt();
   bShowElevationShadeScale = cfg.value("showElevationShadeScale", bShowElevationShadeScale).toBool();
+
+  isVisible = cfg.value("isVisible", true).toBool();
 }
 
 IDemProp* IDem::getSetup() {

@@ -54,8 +54,6 @@ class IScrOpt : public QWidget {
   // block mouse actions to hit the canvas
   void mouseMoveEvent(QMouseEvent* e) override { e->accept(); }
 
-  void paintEvent(QPaintEvent* e) override;
-
   void moveTo(const QPoint& anchor);
 
   QPoint origin;

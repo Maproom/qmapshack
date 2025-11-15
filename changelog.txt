@@ -1,6 +1,7 @@
 V1.XX.X
 [QMS-869] Convert track to area
 [QMS-871] Partly fix: Routino & installation folder name with non-ASCII characters
+[QMS-876] Ghost track at right click of highlighted track
 
 V1.18.2
 [QMS-672] Fix track point timestamps to QDateTime UTC conversion

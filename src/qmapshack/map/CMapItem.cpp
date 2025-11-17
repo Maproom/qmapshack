@@ -37,6 +37,7 @@ QRecursiveMutex CMapItem::mutexActiveMaps;
 CMapItem::CMapItem(QTreeWidget* parent, CMapDraw* map) : QTreeWidgetItem(parent), map(map) {
   // it's everything but not drag-n-drop until it gets activated
   setFlags(Qt::ItemIsSelectable | Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
+  setCheckState(0, Qt::Unchecked);
 }
 
 CMapItem::~CMapItem() {}
@@ -108,18 +109,12 @@ bool CMapItem::isActivated() {
   return !mapfile.isNull();
 }
 
-bool CMapItem::toggleActivate() {
-  QMutexLocker lock(&mutexActiveMaps);
-  if (mapfile.isNull()) {
-    return activate();
-  } else {
-    deactivate();
-    return false;
-  }
-}
-
 void CMapItem::deactivate() {
   QMutexLocker lock(&mutexActiveMaps);
+
+  if (mapfile.isNull()) {
+    return;
+  }
 
   // remove mapfile setup dialog as child of this item
   showChildren(false);
@@ -136,6 +131,8 @@ void CMapItem::deactivate() {
   setFlags(flags() & ~Qt::ItemIsDragEnabled);
 
   map->reportStatusToCanvas(text(0), "");
+
+  setCheckState(0, Qt::Unchecked);
 }
 
 bool CMapItem::activate() {
@@ -195,6 +192,8 @@ bool CMapItem::activate() {
 
   // Add the mapfile setup dialog as child of this item
   showChildren(true);
+
+  setCheckState(0, Qt::Checked);
   return true;
 }
 

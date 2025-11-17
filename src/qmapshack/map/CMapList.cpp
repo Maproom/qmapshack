@@ -25,6 +25,20 @@
 #include "map/CMapItem.h"
 #include "misc.h"
 
+CMapTreeWidget::CMapTreeWidget(QWidget* parent) : QTreeWidget(parent) {
+  connect(this, &CMapTreeWidget::itemChanged, this, [this](QTreeWidgetItem* item, int) {
+    CMapItem* map = dynamic_cast<CMapItem*>(item);
+    if (map) {
+      if (map->checkState(0) == Qt::Checked && !map->isActivated()) {
+        map->activate();
+      } else if (map->checkState(0) == Qt::Unchecked && map->isActivated()) {
+        map->deactivate();
+      }
+      emit sigChanged();
+    }
+  });
+}
+
 void CMapTreeWidget::dragEnterEvent(QDragEnterEvent* e) {
   collapseAll();
   QTreeWidget::dragEnterEvent(e);
@@ -62,7 +76,6 @@ CMapList::CMapList(QWidget* parent) : QWidget(parent) {
 
   connect(treeWidget, &CMapTreeWidget::customContextMenuRequested, this, &CMapList::slotContextMenu);
   connect(treeWidget, &CMapTreeWidget::sigChanged, this, &CMapList::sigChanged);
-  connect(actionActivate, &QAction::triggered, this, &CMapList::slotActivate);
   connect(actionMoveUp, &QAction::triggered, this, &CMapList::slotMoveUp);
   connect(actionMoveDown, &QAction::triggered, this, &CMapList::slotMoveDown);
   connect(actionReloadMaps, &QAction::triggered, this, &CMapList::slotReloadMaps);
@@ -71,7 +84,6 @@ CMapList::CMapList(QWidget* parent) : QWidget(parent) {
   connect(lineFilter, &QLineEdit::textChanged, this, &CMapList::slotFilter);
 
   menu = new QMenu(this);
-  menu->addAction(actionActivate);
   menu->addAction(actionMoveUp);
   menu->addAction(actionMoveDown);
   menu->addSeparator();
@@ -122,20 +134,6 @@ void CMapList::updateHelpText() {
   }
 }
 
-void CMapList::slotActivate() {
-  CMapItem* item = dynamic_cast<CMapItem*>(treeWidget->currentItem());
-  if (nullptr == item) {
-    return;
-  }
-
-  bool activated = item->toggleActivate();
-  if (!activated) {
-    treeWidget->setCurrentItem(0);
-  }
-
-  updateHelpText();
-}
-
 void CMapList::slotMoveUp() {
   CMapItem* item = dynamic_cast<CMapItem*>(treeWidget->currentItem());
   if (item == nullptr) {
@@ -180,12 +178,8 @@ void CMapList::slotContextMenu(const QPoint& point) {
   bool itemIsSelected = nullptr != item;
   bool itemIsActivated = item ? item->isActivated() : false;
 
-  actionActivate->setEnabled(itemIsSelected);
   actionMoveUp->setEnabled(itemIsSelected);
   actionMoveDown->setEnabled(itemIsSelected);
-
-  actionActivate->setChecked(itemIsActivated);
-  actionActivate->setText(itemIsActivated ? tr("Deactivate") : tr("Activate"));
 
   if (itemIsSelected) {
     CMapItem* item1 = dynamic_cast<CMapItem*>(treeWidget->itemBelow(item));

@@ -260,7 +260,7 @@ void CMapDraw::buildMapList(const QString& filename) {
 
   QSet<QString> maps;
   CMapItem* item = createMapItem(filename, maps);
-  item->activate();
+  item->setCheckState(0, Qt::Checked);
 }
 
 void CMapDraw::buildMapList() {
@@ -332,7 +332,7 @@ void CMapDraw::restoreActiveMapsList(const QStringList& keys) {
             @Note   the item will load it's configuration upon successful activation
                     by calling loadConfigForMapItem().
          */
-        item->activate();
+        item->setCheckState(0, Qt::Checked);
         break;
       }
     }
@@ -349,7 +349,8 @@ void CMapDraw::restoreActiveMapsList(const QStringList& keys, QSettings& cfg) {
       CMapItem* item = mapList->item(i);
 
       if (item && item->getKey() == key) {
-        if (item->activate()) {
+        item->setCheckState(0, Qt::Checked);
+        if (item->isActivated()) {
           item->loadConfig(cfg);
         }
         break;

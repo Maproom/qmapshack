@@ -28,7 +28,7 @@ class QMenu;
 class CMapTreeWidget : public QTreeWidget {
   Q_OBJECT
  public:
-  CMapTreeWidget(QWidget* parent) : QTreeWidget(parent) {}
+  CMapTreeWidget(QWidget* parent);
 
  signals:
   void sigChanged();
@@ -62,7 +62,6 @@ class CMapList : public QWidget, private Ui::IMapList {
   static void slotMapHonk();
 
  private slots:
-  void slotActivate();
   void slotMoveUp();
   void slotMoveDown();
   void slotReloadMaps();

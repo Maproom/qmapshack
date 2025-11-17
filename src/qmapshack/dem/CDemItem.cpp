@@ -24,14 +24,27 @@
 #include "dem/CDemVRT.h"
 #include "dem/CDemWCS.h"
 #include "dem/IDemProp.h"
+#include "misc.h"
 
 QRecursiveMutex CDemItem::mutexActiveDems;
 
 CDemItem::CDemItem(QTreeWidget* parent, CDemDraw* dem) : QTreeWidgetItem(parent), dem(dem) {
   setFlags(Qt::ItemIsSelectable | Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
+  setCheckState(0, Qt::Unchecked);
 }
 
 CDemItem::~CDemItem() {}
+
+void CDemItem::setFilename(const QString& name) {
+  filename = name;
+
+  QFile f(filename);
+  openFileCheckSuccess(QIODevice::ReadOnly, f);
+  QCryptographicHash md5(QCryptographicHash::Md5);
+  md5.addData(f.read(qMin(0x1000LL, f.size())));
+  key = md5.result().toHex();
+  f.close();
+}
 
 void CDemItem::saveConfig(QSettings& cfg) {
   if (demfile.isNull()) {
@@ -88,18 +101,12 @@ bool CDemItem::isActivated() {
   return !demfile.isNull();
 }
 
-bool CDemItem::toggleActivate() {
-  QMutexLocker lock(&mutexActiveDems);
-  if (demfile.isNull()) {
-    return activate();
-  } else {
-    deactivate();
-    return false;
-  }
-}
-
 void CDemItem::deactivate() {
   QMutexLocker lock(&mutexActiveDems);
+  if (demfile.isNull()) {
+    return;
+  }
+
   // remove demfile setup dialog as child of this item
   showChildren(false);
 
@@ -113,6 +120,8 @@ void CDemItem::deactivate() {
 
   // deny drag-n-drop again
   setFlags(flags() & ~Qt::ItemIsDragEnabled);
+
+  setCheckState(0, Qt::Unchecked);
 }
 
 bool CDemItem::activate() {
@@ -157,6 +166,7 @@ bool CDemItem::activate() {
 
   // Add the demfile setup dialog as child of this item
   showChildren(true);
+  setCheckState(0, Qt::Checked);
   return true;
 }
 

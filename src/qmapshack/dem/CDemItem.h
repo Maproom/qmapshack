@@ -33,6 +33,8 @@ class CDemItem : public QTreeWidgetItem {
   CDemItem(QTreeWidget* parent, CDemDraw* dem);
   virtual ~CDemItem();
 
+  void setFilename(const QString& name);
+
   void saveConfig(QSettings& cfg);
   void loadConfig(QSettings& cfg);
 
@@ -47,20 +49,6 @@ class CDemItem : public QTreeWidgetItem {
      @return True if the internal list of dem objects is not empty.
    */
   bool isActivated();
-  /**
-     @brief Either loads or destroys internal map objects
-     @return True if the internal list of maps is not empty after the operation.
-   */
-  bool toggleActivate();
-  /**
-   * @brief Load all internal map objects
-   * @return Return true on success.
-   */
-  bool activate();
-  /**
-     @brief Delete all internal map objects
-   */
-  void deactivate();
   /**
      @brief Move item to top of list widget
    */
@@ -77,8 +65,22 @@ class CDemItem : public QTreeWidgetItem {
 
   QString getName() const { return text(0); }
 
+  const QString& getKey() { return key; }
+
+  QPointer<IDem>& getDemFile() { return demfile; }
+
  private:
-  friend class CDemDraw;
+  friend class CDemTreeWidget;
+  /**
+   * @brief Load all internal map objects
+   * @return Return true on success.
+   */
+  bool activate();
+  /**
+     @brief Delete all internal map objects
+   */
+  void deactivate();
+
   CDemDraw* dem;
   /**
      @brief A MD5 hash over the first 1024 bytes of the map file, to identify the map

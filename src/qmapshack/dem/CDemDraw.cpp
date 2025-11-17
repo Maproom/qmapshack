@@ -135,16 +135,8 @@ void CDemDraw::buildMapList() {
       CDemItem* item = new CDemItem(*demList, this);
 
       item->setText(0, fi.completeBaseName().replace("_", " "));
-      item->filename = dir.absoluteFilePath(filename);
+      item->setFilename(dir.absoluteFilePath(filename));
       item->updateIcon();
-
-      // calculate MD5 hash from the file's first 1024 bytes
-      QFile f(dir.absoluteFilePath(filename));
-      openFileCheckSuccess(QIODevice::ReadOnly, f);
-      md5.reset();
-      md5.addData(f.read(1024));
-      item->key = md5.result().toHex();
-      f.close();
     }
   }
 
@@ -166,9 +158,9 @@ void CDemDraw::saveActiveMapsList(QStringList& keys, QSettings& cfg) {
 
   for (int i = 0; i < demList->count(); i++) {
     CDemItem* item = demList->item(i);
-    if (item && !item->demfile.isNull()) {
+    if (item && item->isActivated()) {
       item->saveConfig(cfg);
-      keys << item->key;
+      keys << item->getKey();
     }
   }
 }
@@ -193,12 +185,12 @@ void CDemDraw::restoreActiveMapsList(const QStringList& keys) {
     for (int i = 0; i < demList->count(); i++) {
       CDemItem* item = demList->item(i);
 
-      if (item && item->key == key) {
+      if (item && item->getKey() == key) {
         /**
             @Note   the item will load it's configuration upon successful activation
                     by calling loadConfigForDemItem().
          */
-        item->activate();
+        item->setCheckState(0, Qt::Checked);
         break;
       }
     }
@@ -214,8 +206,9 @@ void CDemDraw::restoreActiveMapsList(const QStringList& keys, QSettings& cfg) {
     for (int i = 0; i < demList->count(); i++) {
       CDemItem* item = demList->item(i);
 
-      if (item && item->key == key) {
-        if (item->activate()) {
+      if (item && item->getKey() == key) {
+        item->setCheckState(0, Qt::Checked);
+        if (item->isActivated()) {
           item->loadConfig(cfg);
         }
         break;
@@ -233,14 +226,14 @@ qreal CDemDraw::getElevationAt(const QPointF& pos, bool checkScale) {
       for (int i = 0; i < demList->count(); i++) {
         CDemItem* item = demList->item(i);
 
-        if (!item || item->demfile.isNull()) {
+        if (!item || !item->isActivated()) {
           // as all active maps have to be at the top of the list
           // it is ok to break as soon as the first map with no
           // active files is hit.
           break;
         }
 
-        ele = item->demfile->getElevationAt(pos, checkScale);
+        ele = item->getDemFile()->getElevationAt(pos, checkScale);
         if (ele != NOFLOAT) {
           break;
         }
@@ -258,14 +251,14 @@ qreal CDemDraw::getSlopeAt(const QPointF& pos, bool checkScale) {
       for (int i = 0; i < demList->count(); i++) {
         CDemItem* item = demList->item(i);
 
-        if (!item || item->demfile.isNull()) {
+        if (!item || !item->isActivated()) {
           // as all active maps have to be at the top of the list
           // it is ok to break as soon as the first map with no
           // active files is hit.
           break;
         }
 
-        slope = item->demfile->getSlopeAt(pos, checkScale);
+        slope = item->getDemFile()->getSlopeAt(pos, checkScale);
         if (slope != NOFLOAT) {
           break;
         }
@@ -298,14 +291,14 @@ void CDemDraw::drawt(buffer_t& currentBuffer) {
     for (int i = 0; i < demList->count(); i++) {
       CDemItem* item = demList->item(i);
 
-      if (!item || item->demfile.isNull()) {
+      if (!item || !item->isActivated()) {
         // as all active maps have to be at the top of the list
         // it is ok to break as soon as the first map with no
         // active files is hit.
         break;
       }
 
-      item->demfile->draw(currentBuffer);
+      item->getDemFile()->draw(currentBuffer);
     }
   }
   CDemItem::mutexActiveDems.unlock();

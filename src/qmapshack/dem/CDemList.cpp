@@ -26,6 +26,20 @@
 #include "misc.h"
 #include "units/IUnit.h"
 
+CDemTreeWidget::CDemTreeWidget(QWidget* parent) : QTreeWidget(parent) {
+  connect(this, &CDemTreeWidget::itemChanged, this, [this](QTreeWidgetItem* item, int) {
+    CDemItem* dem = dynamic_cast<CDemItem*>(item);
+    if (dem) {
+      if (dem->checkState(0) == Qt::Checked && !dem->isActivated()) {
+        dem->activate();
+      } else if (dem->checkState(0) == Qt::Unchecked && dem->isActivated()) {
+        dem->deactivate();
+      }
+      emit sigChanged();
+    }
+  });
+}
+
 void CDemTreeWidget::dragMoveEvent(QDragMoveEvent* event) {
   CDemItem* item = dynamic_cast<CDemItem*>(itemAt(event->position().toPoint()));
 
@@ -59,7 +73,6 @@ CDemList::CDemList(QWidget* parent) : QWidget(parent) {
   connect(treeWidget, &CDemTreeWidget::customContextMenuRequested, this, &CDemList::slotContextMenu);
   connect(actionMoveUp, &QAction::triggered, this, &CDemList::slotMoveUp);
   connect(actionMoveDown, &QAction::triggered, this, &CDemList::slotMoveDown);
-  connect(actionActivate, &QAction::triggered, this, &CDemList::slotActivate);
   connect(actionReloadDem, &QAction::triggered, this, &CDemList::slotReloadDem);
   connect(treeWidget, &CDemTreeWidget::sigChanged, this, &CDemList::sigChanged);
   connect(labelHelpFillMapList, &QLabel::linkActivated, &CMainWindow::self(),
@@ -67,7 +80,6 @@ CDemList::CDemList(QWidget* parent) : QWidget(parent) {
   connect(lineFilter, &QLineEdit::textChanged, this, &CDemList::slotFilter);
 
   menu = new QMenu(this);
-  menu->addAction(actionActivate);
   menu->addAction(actionMoveUp);
   menu->addAction(actionMoveDown);
   menu->addSeparator();
@@ -116,20 +128,6 @@ void CDemList::updateHelpText() {
   }
 }
 
-void CDemList::slotActivate() {
-  CDemItem* item = dynamic_cast<CDemItem*>(treeWidget->currentItem());
-  if (nullptr == item) {
-    return;
-  }
-
-  bool activated = item->toggleActivate();
-  if (!activated) {
-    treeWidget->setCurrentItem(0);
-  }
-
-  updateHelpText();
-}
-
 void CDemList::slotMoveUp() {
   CDemItem* item = dynamic_cast<CDemItem*>(treeWidget->currentItem());
   if (item == nullptr) {
@@ -174,12 +172,8 @@ void CDemList::slotContextMenu(const QPoint& point) {
   bool itemIsSelected = nullptr != item;
   bool itemIsActivated = item ? item->isActivated() : false;
 
-  actionActivate->setEnabled(itemIsSelected);
   actionMoveUp->setEnabled(itemIsSelected);
   actionMoveDown->setEnabled(itemIsSelected);
-
-  actionActivate->setChecked(itemIsActivated);
-  actionActivate->setText(itemIsActivated ? tr("Deactivate") : tr("Activate"));
 
   if (itemIsSelected) {
     CDemItem* item1 = dynamic_cast<CDemItem*>(treeWidget->itemBelow(item));

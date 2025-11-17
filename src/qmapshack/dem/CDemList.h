@@ -27,7 +27,7 @@ class CDemItem;
 class CDemTreeWidget : public QTreeWidget {
   Q_OBJECT
  public:
-  CDemTreeWidget(QWidget* parent) : QTreeWidget(parent) {}
+  CDemTreeWidget(QWidget* parent);
 
  signals:
   void sigChanged();
@@ -58,7 +58,6 @@ class CDemList : public QWidget, private Ui::IDemsList {
   void sigChanged();
 
  private slots:
-  void slotActivate();
   void slotMoveUp();
   void slotMoveDown();
   void slotReloadDem();

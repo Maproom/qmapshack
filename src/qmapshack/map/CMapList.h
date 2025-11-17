@@ -35,7 +35,6 @@ class CMapTreeWidget : public QTreeWidget {
 
  protected:
   void dragEnterEvent(QDragEnterEvent* e) override;
-  void dragMoveEvent(QDragMoveEvent* e) override;
   void dropEvent(QDropEvent* e) override;
 };
 
@@ -48,12 +47,30 @@ class CMapList : public QWidget, private Ui::IMapList {
   virtual ~CMapList();
 
   void clear();
-  void sort();
   int count();
   CMapItem* item(int i);
   operator QTreeWidget*() { return treeWidget; }
 
+  /**
+   * @brief Show/hide hints depending on the map list's state
+   */
   void updateHelpText();
+
+  /**
+   * @brief Add map item to the list
+   *
+   * Add the item as top level item and set the item's widget. Connect
+   * the item's signals to properly handle changes.
+   *
+   * @param map
+   */
+  void addMap(CMapItem* map);
+
+  /**
+   * @brief Move map item to top of list
+   * @param map
+   */
+  void moveMapToTop(CMapItem* map);
 
  signals:
   void sigChanged();
@@ -64,6 +81,7 @@ class CMapList : public QWidget, private Ui::IMapList {
  private slots:
   void slotMoveUp();
   void slotMoveDown();
+  void slotRemove();
   void slotReloadMaps();
   void slotContextMenu(const QPoint& point);
   void slotFilter(const QString& str);

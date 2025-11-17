@@ -179,7 +179,7 @@ CMainWindow::CMainWindow() : id(QRandomGenerator::global()->generate()) {
   connect(actionWiki, &QAction::triggered, this, &CMainWindow::slotWiki);
   connect(actionHelp, &QAction::triggered, this, &CMainWindow::slotHelp);
   connect(actionQuickstart, &QAction::triggered, this, &CMainWindow::slotQuickstart);
-  connect(actionAddMapView, &QAction::triggered, this, [this]() { slotAddCanvas(""); });
+  connect(actionAddMapView, &QAction::triggered, this, &CMainWindow::slotAddMapView);
   connect(actionCloneMapView, &QAction::triggered, this, &CMainWindow::slotCloneCanvas);
   connect(actionShowGrid, &QAction::changed, this, [this]() { this->update(); });
   connect(actionShowScale, &QAction::changed, this, &CMainWindow::slotUpdateTabWidgets);
@@ -251,7 +251,9 @@ CMainWindow::CMainWindow() : id(QRandomGenerator::global()->generate()) {
   if (names.isEmpty()) {
     CCanvas* view = addView(QString());
     // call just to setup default values
+    cfg.beginGroup(view->objectName());
     view->loadConfig(cfg);
+    cfg.endGroup();
   }
   cfg.endGroup();  // Views
   testForNoView();
@@ -857,7 +859,6 @@ void CMainWindow::slotQuickstart() {
 void CMainWindow::slotAddCanvas(const QString& name) {
   CCanvas* view = addView(name);
   tabWidget->setCurrentWidget(view);
-
   testForNoView();
   emit sigCanvasChange();
 }
@@ -869,9 +870,6 @@ void CMainWindow::slotCloneCanvas() {
   }
 
   QTemporaryFile temp;
-  openFileCheckSuccess(QIODevice::ReadWrite, temp);
-  temp.close();
-
   QSettings view(temp.fileName(), QSettings::IniFormat);
   view.clear();
 
@@ -1650,6 +1648,23 @@ void CMainWindow::slotLinkMapViews(bool on) {
   } else {
     current->linkMapViewEnabled();
   }
+}
+
+void CMainWindow::slotAddMapView() {
+  slotAddCanvas("");
+  CCanvas* target = getVisibleCanvas();
+  if (nullptr == target) {
+    return;
+  }
+
+  SETTINGS;
+  cfg.beginGroup("Canvas");
+  cfg.beginGroup("Views");
+  cfg.beginGroup(target->objectName());
+  target->loadConfig(cfg);
+  cfg.endGroup();
+  cfg.endGroup();
+  cfg.endGroup();
 }
 
 bool CMainWindow::eventFilter(QObject* obj, QEvent* event) {

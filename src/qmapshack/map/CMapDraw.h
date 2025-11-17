@@ -38,17 +38,6 @@ class CMapDraw : public IDrawContext {
 
   void saveConfig(QSettings& cfg);
   void loadConfig(QSettings& cfg);
-  /**
-     @brief This is called most likely from the item itself to call it's loadConfig() method.
-
-     As the setup of a map is stored in the context of the view the correct groups have
-     to be set prior to call the item's loadConfig() method. However the item does not know
-     all that stuff. That is why it has to ask it's CMapDraw object to prepare the QSettings object
-     and to call loadConfig();
-
-     @param item the item to call it's loadConfig() method
-   */
-  void loadConfigForMapItem(CMapItem* item);
 
   /**
      @brief Get a full detailed info text about objects close to the given point
@@ -117,7 +106,10 @@ class CMapDraw : public IDrawContext {
   /**
      @brief Build a usable map list from a single map file
 
-     This will clear the map list and add the gven map as the only one. The map will be activated, too.
+    This will clear the map list and add the gven map as the only one.
+    The map will be activated, too.
+
+    Used for a map view like in the BRouter wizard.
 
      @param filename  the map's filename, can be a resource, too
    */
@@ -129,49 +121,57 @@ class CMapDraw : public IDrawContext {
  protected:
   void drawt(buffer_t& currentBuffer) override;
 
+ private slots:
+  void slotChanged();
+  void saveMapList();
+
  private:
   /**
      @brief Create a CMapItem from a filename
 
-     @param filename the map's filename, can be a resuource, too
-     @param maps  a set to collect the paths of all collected maps.
+     @param filename    the map's filename, can be a resuource, too
+     @param fallbackKey a fallback key used if no key can be derived from the file
 
      @return The created map item.
    */
-  CMapItem* createMapItem(const QString& filename, QSet<QString>& maps);
-  /**
-     @brief Search in paths found in mapPaths for files with supported extensions and add them to mapList.
-
-   */
-  void buildMapList();
-  /**
-     @brief Save list of active maps to configuration file
-
-     The group context will be appended by the map's key
-
-     @param keys the stored map's MD5 keys will be written to keys
-     @param cfg  configuration file with correct group context set.
-   */
-  void saveActiveMapsList(QStringList& keys, QSettings& cfg);
+  CMapItem* createMapItem(const QString& filename, const QString& fallbackKey);
 
   /**
-     @brief Open configuration before saving list
-     @param keys the stored map's MD5 keys will be written to keys
-   */
-  void saveActiveMapsList(QStringList& keys);
-  /**
-     @brief Restore list of active maps from configuration file
-     @param keys MD5 hash keys to identify the maps
-   */
-  void restoreActiveMapsList(const QStringList& keys);
+     @brief Load the list of maps including all configurations
 
-  void restoreActiveMapsList(const QStringList& keys, QSettings& cfg);
+    This will parse the map paths for map file and compare it with the
+    stored list of map keys in the config. Based on that a list of active,
+    inactive, new and missing maps is created. If possible the last configuration
+    of a map is restored.
+
+   */
+  void loadMapList(QSettings& cfg);
+
+  /**
+   * @brief Load map list with configuration from the application's settings.
+   */
+  void loadMapList();
+
+  /**
+     @brief Store the list of maps including all configurations
+
+    This will iterate of the list of maps, store their configuration
+    and store all keys in the same order as the list.
+
+   */
+  void saveMapList(QSettings& cfg);
 
   /// the treewidget holding all active and inactive map items
   CMapList* mapList;
 
-  /// the group label used in QSettings
-  QString cfgGroup;
+  /**
+   *  @brief delay timer to save config after a change
+   * 
+   * This is used to combine multiple change signals within a second
+   * and to give saving a cool down time if anything crashes on 
+   * a change.
+   */
+  QTimer* timerDelayedSave;
 
   /// the list of paths to search maps
   static QStringList mapPaths;

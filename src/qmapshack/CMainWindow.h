@@ -187,6 +187,7 @@ class CMainWindow : public QMainWindow, private Ui::IMainWindow {
   void slotHelp();
   void slotMapMoveAndZoom(int idx, const QPointF& focus);
   void slotLinkMapViews(bool on);
+  void slotAddMapView();
 
  private:
   friend int main(int argc, char** argv);

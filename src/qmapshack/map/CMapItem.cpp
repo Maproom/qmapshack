@@ -19,6 +19,7 @@
 #include "map/CMapItem.h"
 
 #include <QtGui>
+#include <QtWidgets>
 
 #include "map/CMapDraw.h"
 #include "map/CMapGEMF.h"
@@ -34,47 +35,133 @@
 
 QRecursiveMutex CMapItem::mutexActiveMaps;
 
-CMapItem::CMapItem(QTreeWidget* parent, CMapDraw* map) : QTreeWidgetItem(parent), map(map) {
-  // it's everything but not drag-n-drop until it gets activated
-  setFlags(Qt::ItemIsSelectable | Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
-  setCheckState(0, Qt::Unchecked);
+CMapItem::CMapItem(CMapDraw* map) : map(map) {
+  setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsDragEnabled);
+
+  itemWidget();
 }
 
 CMapItem::~CMapItem() {}
 
-void CMapItem::setFilename(const QString& name) {
+QWidget* CMapItem::itemWidget() {
+  if (widget.isNull()) {
+    widget = new CMapItemWidget();
+    QFileInfo fi(filename);
+    setText(fi.completeBaseName().replace("_", " "));
+
+    if (QFile::exists(filename)) {
+      if (shadowConfig.isEmpty()) {
+        setStatus(CMapItemWidget::eStatus::Unused);
+      } else {
+        setStatus(mapfile.isNull() ? CMapItemWidget::eStatus::Inactive : CMapItemWidget::eStatus::Active);
+      }
+    } else {
+      setStatus(CMapItemWidget::eStatus::Missing);
+    }
+
+    connect(widget, &CMapItemWidget::sigActivate, this, &CMapItem::slotActivate);
+    connect(widget, &CMapItemWidget::destroyed, this, [this] { emit sigUpdateWidget(this); });
+  }
+  return widget;
+}
+
+void CMapItem::slotActivate(bool yes) {
+  if (yes) {
+    activate();
+  } else {
+    deactivate();
+  }
+
+  emit sigChanged();
+}
+
+void CMapItem::setText(const QString& text) { widget->setName(text); }
+
+void CMapItem::setStatus(CMapItemWidget::eStatus status) { widget->setStatus(status); }
+
+void CMapItem::setFilename(const QString& name, const QString& fallbackKey) {
   filename = name;
 
   QFile f(filename);
-  openFileCheckSuccess(QIODevice::ReadOnly, f);
-  QCryptographicHash md5(QCryptographicHash::Md5);
-  md5.addData(f.read(qMin(0x1000LL, f.size())));
-  key = md5.result().toHex();
-  f.close();
+  if (f.exists()) {
+    openFileCheckSuccess(QIODevice::ReadOnly, f);
+    QCryptographicHash md5(QCryptographicHash::Md5);
+    md5.addData(f.read(qMin(0x1000LL, f.size())));
+    key = md5.result().toHex();
+    f.close();
+  } else {
+    key = fallbackKey;
+  }
+}
+
+void CMapItem::configToShadowConfig(const QSettings& cfg) {
+  shadowConfig.clear();
+  const QStringList& keys = cfg.childKeys();
+  for (const QString& key : keys) {
+    shadowConfig[key] = cfg.value(key);
+  }
+  shadowConfig.remove("isActive");
+  shadowConfig.remove("filename");
+}
+
+void CMapItem::shadowConfigToConfig(QSettings& cfg) const {
+  const QStringList& keys = shadowConfig.keys();
+  for (const QString& key : keys) {
+    cfg.setValue(key, shadowConfig[key]);
+  }
 }
 
 void CMapItem::saveConfig(QSettings& cfg) const {
   if (mapfile.isNull()) {
-    return;
+    cfg.beginGroup(key);
+    shadowConfigToConfig(cfg);
+    cfg.setValue("isActive", false);
+    cfg.setValue("filename", filename);
+    cfg.endGroup();
+  } else {
+    cfg.beginGroup(key);
+    mapfile->saveConfig(cfg);
+    cfg.setValue("isActive", true);
+    cfg.setValue("filename", filename);
+    cfg.endGroup();
   }
-
-  cfg.beginGroup(key);
-  mapfile->saveConfig(cfg);
-  cfg.endGroup();
 }
 
-void CMapItem::loadConfig(QSettings& cfg) {
-  if (mapfile.isNull()) {
+void CMapItem::loadConfig(QSettings& cfg, bool triggerActivation) {
+  if (!mapfile.isNull()) {
+    // map is already active, read the config
+    cfg.beginGroup(key);
+    configToShadowConfig(cfg);
+    mapfile->loadConfig(cfg);
+    cfg.endGroup();
     return;
   }
 
+  // let's see what we can do...
   cfg.beginGroup(key);
-  mapfile->loadConfig(cfg);
+  bool active = cfg.value("isActive", false).toBool();
+  configToShadowConfig(cfg);
   cfg.endGroup();
+
+  if (!QFile::exists(filename)) {
+    setStatus(CMapItemWidget::eStatus::Missing);
+    return;
+  } else if (shadowConfig.isEmpty()) {
+    setStatus(CMapItemWidget::eStatus::Unused);
+  } else {
+    setStatus(CMapItemWidget::eStatus::Inactive);
+    if (triggerActivation) {
+      // Evil hack: If you activate the map directly Qt will crash internally.
+      QTimer::singleShot(100, this, [this, active]() { slotActivate(active); });
+    }
+  }
 }
 
 void CMapItem::showChildren(bool yes) {
-  if (yes && !mapfile.isNull()) {
+  if (mapfile.isNull()) {
+    return;
+  }
+  if (yes) {
     QTreeWidget* tw = treeWidget();
 
     QTreeWidgetItem* item = new QTreeWidgetItem(this);
@@ -104,7 +191,7 @@ void CMapItem::updateIcon() {
   setIcon(/* col */ 0, QIcon(img));
 }
 
-bool CMapItem::isActivated() {
+bool CMapItem::isActivated() const {
   QMutexLocker lock(&mutexActiveMaps);
   return !mapfile.isNull();
 }
@@ -115,6 +202,12 @@ void CMapItem::deactivate() {
   if (mapfile.isNull()) {
     return;
   }
+  // save current configuration into
+  // the shadow configuration
+  QTemporaryFile file;
+  QSettings cfg(file.fileName(), QSettings::IniFormat);
+  mapfile->saveConfig(cfg);
+  configToShadowConfig(cfg);
 
   // remove mapfile setup dialog as child of this item
   showChildren(false);
@@ -124,15 +217,10 @@ void CMapItem::deactivate() {
 
   // maybe used to reflect changes in the icon
   updateIcon();
-  // move to bottom of the active map list
-  moveToBottom();
-
-  // deny drag-n-drop again
-  setFlags(flags() & ~Qt::ItemIsDragEnabled);
 
   map->reportStatusToCanvas(text(0), "");
 
-  setCheckState(0, Qt::Unchecked);
+  setStatus(CMapItemWidget::eStatus::Inactive);
 }
 
 bool CMapItem::activate() {
@@ -161,8 +249,10 @@ bool CMapItem::activate() {
   }
 
   updateIcon();
+
   // no mapfiles loaded? Bad.
   if (mapfile.isNull()) {
+    setStatus(CMapItemWidget::eStatus::Inactive);
     return false;
   }
 
@@ -170,56 +260,28 @@ bool CMapItem::activate() {
   // else delete all previous loaded maps and abort
   if (!mapfile->activated()) {
     delete mapfile;
+    setStatus(CMapItemWidget::eStatus::Inactive);
     return false;
   }
 
   setToolTip(0, mapfile->getCopyright());
 
-  // append list of active map files
-  moveToBottom();
+  // setup map with settings stored in
+  // the shadow config
+  QTemporaryFile file;
+  QSettings cfg(file.fileName(), QSettings::IniFormat);
 
-  // an active map is subject to drag-n-drop
-  setFlags(flags() | Qt::ItemIsDragEnabled);
-
-  /*
-      As the map file setup is stored in the context of the CMapDraw object
-      the configuration has to be loaded via the CMapDraw object to select
-      the correct group context in the QSetting object.
-      This call will result into a call of loadConfig() of this CMapItem
-      object.
-   */
-  map->loadConfigForMapItem(this);
+  shadowConfigToConfig(cfg);
+  mapfile->loadConfig(cfg);
+  // On first activation the shadow config is empty. (state *new*)
+  // Therfore always read back the config and store it as new
+  // shadow config
+  mapfile->saveConfig(cfg);
+  configToShadowConfig(cfg);
 
   // Add the mapfile setup dialog as child of this item
   showChildren(true);
 
-  setCheckState(0, Qt::Checked);
+  setStatus(CMapItemWidget::eStatus::Active);
   return true;
-}
-
-void CMapItem::moveToTop() {
-  QTreeWidget* w = treeWidget();
-  QMutexLocker lock(&mutexActiveMaps);
-
-  w->takeTopLevelItem(w->indexOfTopLevelItem(this));
-  w->insertTopLevelItem(0, this);
-
-  map->emitSigCanvasUpdate();
-}
-
-void CMapItem::moveToBottom() {
-  int row;
-  QTreeWidget* w = treeWidget();
-  QMutexLocker lock(&mutexActiveMaps);
-
-  w->takeTopLevelItem(w->indexOfTopLevelItem(this));
-  for (row = 0; row < w->topLevelItemCount(); row++) {
-    CMapItem* item = dynamic_cast<CMapItem*>(w->topLevelItem(row));
-    if (item && item->mapfile.isNull()) {
-      break;
-    }
-  }
-  w->insertTopLevelItem(row, this);
-
-  map->emitSigCanvasUpdate();
 }

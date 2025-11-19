@@ -272,6 +272,7 @@ QNetworkRequest CRouterBRouter::getRequest(const QVector<QPointF>& routePoints, 
   urlQuery.addQueryItem("profile", comboProfile->currentData().toString());
   urlQuery.addQueryItem("alternativeidx", comboAlternative->currentData().toString());
   urlQuery.addQueryItem("format", "gpx");
+  urlQuery.addQueryItem("timode", "8");
 
   QUrl url = setup->getServiceUrl();
   url.setQuery(urlQuery);

@@ -2,6 +2,7 @@
     Copyright (C) 2014 Oliver Eichler <oliver.eichler@gmx.de>
     Copyright (C) 2017 Norbert Truchsess <norbert.truchsess@t-online.de>
     Copyright (C) 2019 Henri Hornburg <hrnbg@t-online.de>
+    Copyright (C) 2025 Jürgen Beck <>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -767,7 +768,7 @@ const CGisItemRte::subpt_t* CGisItemRte::getSubPtByIndex(quint32 idx) {
   return nullptr;
 }
 
-void CGisItemRte::setResult(Routino_Output* route, const QString& options) {
+void CGisItemRte::setResultFromRoutino(Routino_Output* route, const QString& options) {
   QMutexLocker lock(&mutexItems);
 
   qint32 idxRtept = -1;
@@ -830,133 +831,6 @@ void CGisItemRte::setResult(Routino_Output* route, const QString& options) {
   updateHistory();
 }
 
-struct maneuver_t {
-  QStringList streets;
-  QString instruction;
-  quint32 time;
-  qreal dist;
-  qint32 bearing;
-  qint32 turn;
-};
-
-static const qint32 idx2bearing[] = {NOINT, 0, -45, 45, 180, 135, -135, -90, 90};
-
-void CGisItemRte::setResult(const QDomDocument& xml, const QString& options) {
-  QMutexLocker lock(&mutexItems);
-
-  QDateTime localtime = QDateTime::currentDateTimeUtc();
-
-  QDomElement response = xml.firstChildElement("response");
-  QDomElement route = response.firstChildElement("route");
-
-  // get time of travel
-  QDomElement xmlTime = route.firstChildElement("time");
-  rte.totalTime = xmlTime.text().toUInt();
-
-  // build list of maneuvers
-  QDomNodeList xmlLegs = route.firstChildElement("legs").elementsByTagName("leg");
-  const qint32 L = xmlLegs.size();
-
-  QList<maneuver_t> maneuvers;
-
-  for (int l = 0; l < L; l++) {
-    QDomNode xmlLeg = xmlLegs.item(l);
-    QDomNodeList xmlManeuvers = xmlLeg.firstChildElement("maneuvers").elementsByTagName("maneuver");
-    const qint32 M = xmlManeuvers.size();
-    for (int m = 0; m < M; m++) {
-      maneuvers << maneuver_t();
-      maneuver_t& maneuver = maneuvers.last();
-      QDomNode xmlManeuver = xmlManeuvers.item(m);
-      maneuver.instruction = xmlManeuver.firstChildElement("narrative").text();
-      maneuver.time = xmlManeuver.firstChildElement("time").text().toUInt();
-      maneuver.dist = xmlManeuver.firstChildElement("distance").text().toFloat();
-
-      maneuver.bearing = idx2bearing[xmlManeuver.firstChildElement("direction").text().toUInt()];
-      maneuver.turn = xmlManeuver.firstChildElement("turnType").text().toInt();
-
-      QDomNodeList xmlStreets = xmlManeuver.toElement().elementsByTagName("streets");
-      const int S = xmlStreets.size();
-      for (int s = 0; s < S; s++) {
-        QDomNode xmlStreet = xmlStreets.item(s);
-        maneuver.streets << xmlStreet.toElement().text();
-      }
-    }
-  }
-
-  QVector<subpt_t> shape;
-
-  // read the shape
-  QDomElement xmlShape = route.firstChildElement("shape");
-  QDomElement xmlShapePoints = xmlShape.firstChildElement("shapePoints");
-  QDomNodeList xmlLatLng = xmlShapePoints.elementsByTagName("latLng");
-  const qint32 N = xmlLatLng.size();
-  for (int n = 0; n < N; n++) {
-    QDomNode elem = xmlLatLng.item(n);
-    QDomElement lat = elem.firstChildElement("lat");
-    QDomElement lng = elem.firstChildElement("lng");
-
-    shape << subpt_t();
-    subpt_t& subpt = shape.last();
-    subpt.lon = lng.text().toFloat();
-    subpt.lat = lat.text().toFloat();
-  }
-
-  QVector<quint32> idxLegs;
-  QDomElement xmlLegIndexes = xmlShape.firstChildElement("legIndexes");
-  QDomNodeList xmlIndex = xmlLegIndexes.elementsByTagName("index");
-  const qint32 I = xmlIndex.size();
-  for (int i = 0; i < I; i++) {
-    QDomNode elem = xmlIndex.item(i);
-    idxLegs << elem.toElement().text().toUInt();
-  }
-
-  quint32 time = 0;
-  quint32 dist = 0;
-  QDomElement xmlManeuverIndexes = xmlShape.firstChildElement("maneuverIndexes");
-  xmlIndex = xmlManeuverIndexes.elementsByTagName("index");
-  qint32 M = xmlIndex.size();
-  for (int m = 0; m < M; m++) {
-    QDomNode elem = xmlIndex.item(m);
-    quint32 idx = elem.toElement().text().toUInt();
-    subpt_t& subpt = shape[idx];
-    maneuver_t& maneuver = maneuvers[m];
-    subpt.type = subpt_t::eTypeJunct;
-    subpt.instruction = maneuver.instruction;
-
-    subpt.time = localtime.addSecs(time);
-    time += maneuver.time;
-
-    subpt.distance = dist;
-    dist += maneuver.dist * 1000;
-
-    subpt.bearing = maneuver.bearing;
-    subpt.turn = maneuver.turn;
-
-    subpt.streets = maneuver.streets;
-  }
-
-  for (int i = 0; i < rte.pts.size() - 1; i++) {
-    quint32 idx1 = idxLegs[i];
-    quint32 idx2 = idxLegs[i + 1];
-
-    rtept_t& rtept = rte.pts[i];
-    rtept.subpts = shape.mid(idx1, idx2 - idx1 + 1);
-    rtept.fakeSubpt.lon = rtept.lon;
-    rtept.fakeSubpt.lat = rtept.lat;
-  }
-
-  rtept_t& rtept = rte.pts.last();
-  rtept.fakeSubpt.lon = rtept.lon;
-  rtept.fakeSubpt.lat = rtept.lat;
-
-  rte.totalDistance = dist;
-  rte.lastRoutedTime = QDateTime::currentDateTimeUtc();
-  rte.lastRoutedWith = "MapQuest" + options;
-
-  deriveSecondaryData();
-  updateHistory();
-}
-
 void CGisItemRte::setResultFromBRouter(const QDomDocument& xml, const QString& options) {
   QMutexLocker lock(&mutexItems);
 
@@ -968,6 +842,7 @@ void CGisItemRte::setResultFromBRouter(const QDomDocument& xml, const QString& o
   const QDomElement& xmlShapePoints = xmlShape.firstChildElement("trkseg");
   const QDomNodeList& xmlLatLng = xmlShapePoints.elementsByTagName("trkpt");
   const qint32 N = xmlLatLng.size();
+  qreal distance = 0;
   for (int n = 0; n < N; n++) {
     const QDomElement& elem = xmlLatLng.item(n).toElement();
     shape << subpt_t();
@@ -975,18 +850,26 @@ void CGisItemRte::setResultFromBRouter(const QDomDocument& xml, const QString& o
     subpt.lon = elem.attribute("lon").toFloat();
     subpt.lat = elem.attribute("lat").toFloat();
     subpt.ele = elem.firstChildElement("ele").text().toFloat();
+    if (n > 0) {
+      const subpt_t& other = shape.at(n-1);
+      distance += GPS_Math_Distance(subpt.lon * DEG_TO_RAD, subpt.lat * DEG_TO_RAD, other.lon * DEG_TO_RAD, other.lat * DEG_TO_RAD);
+    }
+    subpt.distance = distance;
   }
 
   // build list of maneuvers
+  rte.totalTime = 0;
   const QDomElement& xmlLeg = gpx.firstChildElement("rte");
   if (!xmlLeg.isNull()) {
     const QDomNodeList& xmlManeuvers = xmlLeg.elementsByTagName("rtept");
     const qint32 M = xmlManeuvers.size();
+    QDateTime time = QDateTime::currentDateTimeUtc();
     for (int m = 0; m < M; m++) {
       const QDomNode& xmlManeuver = xmlManeuvers.item(m);
       /* <rtept lat="48.322380" lon="11.601220">
           <desc>right</desc>
           <extensions>
+           <time>21</time>
            <turn>TR</turn>
            <turn-angle>45.655945</turn-angle>
            <offset>76</offset>
@@ -996,58 +879,92 @@ void CGisItemRte::setResultFromBRouter(const QDomDocument& xml, const QString& o
       subpt_t& subpt = shape[idx];
       subpt.type = subpt_t::eTypeJunct;
       subpt.instruction = xmlManeuver.firstChildElement("desc").text();
-      const QString& command = xmlManeuver.firstChildElement("extensions").firstChildElement("turn").text();  // command
-      if (command == "TU")                                                                                    // u-turn
+      const QString& command = xmlManeuver.firstChildElement("extensions").firstChildElement("turn").text();
+      // commands see at https://github.com/abrensch/brouter/blob/master/docs/features/voicehints.md
+      if (command == "C")
       {
-        subpt.bearing = 180;
-      } else if (command == "TSHL")  // turn sharp left
-      {
-        subpt.bearing = -135;
-      } else if (command == "TL")  // turn left
+        subpt.bearing = 0;
+        subpt.instruction = tr("Go straight");
+      } else if (command == "TL")
       {
         subpt.bearing = -90;
-      } else if (command == "TSLL")  // turn slight left
+        subpt.instruction = tr("Turn left");
+      } else if (command == "TSLL")
       {
         subpt.bearing = -45;
-      } else if (command == "KL")  // keep left
+        subpt.instruction = tr("Turn slightly left");
+      } else if (command == "TSHL")
       {
-        subpt.bearing = 0;
-      } else if (command == "C")  // straight
-      {
-        subpt.bearing = 0;
-      } else if (command == "KR")  // keep right
-      {
-        subpt.bearing = 0;
-      } else if (command == "TSLR")  // turn slight right
-      {
-        subpt.bearing = 45;
-      } else if (command == "TR")  // turn right
+        subpt.bearing = -135;
+        subpt.instruction = tr("Turn sharply left");
+      } else if (command == "TR")
       {
         subpt.bearing = 90;
-      } else if (command == "TSHR")  // turn sharp right
+        subpt.instruction = tr("Turn right");
+      } else if (command == "TSLR")
+      {
+        subpt.bearing = 45;
+        subpt.instruction = tr("Turn slightly right");
+      } else if (command == "TSHR")
       {
         subpt.bearing = 135;
-      } else if (command == "TRU")  // u-turn
+        subpt.instruction = tr("Turn sharply right");
+      } else if (command == "KL")
+      {
+        subpt.bearing = 0;
+        subpt.instruction = tr("Keep left");
+      } else if (command == "KR")
+      {
+        subpt.bearing = 0;
+        subpt.instruction = tr("Keep right");
+      } else if (command == "TLU")
+      {
+        subpt.bearing = -180;
+        subpt.instruction = tr("U-turn left");
+      } else if (command == "TU")
       {
         subpt.bearing = 180;
-      } else if (command.startsWith("RNDB"))  // take roundabout exit nr
+        subpt.instruction = tr("U-turn");
+      } else if (command == "TRU")
+      {
+        subpt.bearing = 180;
+        subpt.instruction = tr("U-turn right");
+      } else if (command.startsWith("RNDB"))
       {
         subpt.bearing = 0;
-      } else if (command.startsWith("RNLB"))  // take roundabout exit nr. (to the left)
+        subpt.instruction = tr("Roundabout exit %1").arg(command.last(command.size()-4));
+      } else if (command.startsWith("RNLB"))
       {
         subpt.bearing = 0;
+        subpt.instruction = tr("Roundabout left exit %1").arg(command.last(command.size()-4));
+      } else if (command == "EL")
+      {
+        subpt.bearing = 0;
+        subpt.instruction = tr("Exit left");
+      } else if (command == "ER")
+      {
+        subpt.bearing = 0;
+        subpt.instruction = tr("Exit right");
+      } else if (subpt.instruction == "start")
+      {
+        subpt.instruction = tr("Start");
+      } else if (subpt.instruction == "destination")
+      {
+        subpt.instruction = tr("Destination");
       }
-
-      subpt.turn = xmlManeuver.firstChildElement("extensions")
-                       .firstChildElement("turn-angle")
-                       .text()
-                       .toUInt();  // turn angle (degree)
+      subpt.turn = xmlManeuver.firstChildElement("extensions").firstChildElement("turn-angle").text().toInt();
+      if (subpt.turn != 0) {
+        subpt.instruction += tr(", %1 degrees").arg(subpt.turn);
+      }
+      subpt.time = time.addSecs(rte.totalTime);
+      rte.totalTime += xmlManeuver.firstChildElement("extensions").firstChildElement("time").text().toUInt();
     }
   }
 
   // match routepoints to shape
   qint32 startIdx = 0;
   qint32 minDistIdx = 0;
+
 
   for (qint32 rtIdx = 0; rtIdx < rte.pts.size() - 1; rtIdx++) {
     rtept_t& routePoint = rte.pts[rtIdx];
@@ -1072,6 +989,7 @@ void CGisItemRte::setResultFromBRouter(const QDomDocument& xml, const QString& o
 
   rtept_t& rtept = rte.pts.last();
   rtept.ele = shape[minDistIdx].ele;
+  rtept.subpts << shape.last();
   rtept.fakeSubpt.lon = rtept.lon;
   rtept.fakeSubpt.lat = rtept.lat;
   rtept.fakeSubpt.ele = rtept.ele;
@@ -1079,20 +997,24 @@ void CGisItemRte::setResultFromBRouter(const QDomDocument& xml, const QString& o
   rte.lastRoutedTime = QDateTime::currentDateTimeUtc();
   rte.lastRoutedWith = QString("BRouter %1").arg(options);
 
-  //    <!-- track-length = 9624 filtered ascend = 59 plain-ascend = -8 cost=19415 -->
+  //  <!-- track-length = 3181 filtered ascend = 70 plain-ascend = 5 cost=8491 energy=.0kwh time=16m 30s -->
   const QDomNodeList& nodes = xml.childNodes();
   for (int i = 0; i < nodes.count(); i++) {
     const QDomNode& node = nodes.at(i);
     if (node.isComment()) {
       const QString& commentTxt = node.toComment().data();
-      // ' track-length = 180864 filtered ascend = 428 plain-ascend = -172 cost=270249 '
+      // ' track-length = 3181 filtered ascend = 70 plain-ascend = 5 cost=8491 energy=.0kwh time=16m 30s '
       static const QRegularExpression rxAscDes(
-          "(\\s*track-length\\s*=\\s*)(-?\\d+)(\\s*)(filtered "
-          "ascend\\s*=\\s*-?\\d+)(\\s*)(plain-ascend\\s*=\\s*-?\\d+)(\\s*)(cost\\s*=\\s*-?\\d+)(\\s*)");
+          "(?:\\s*track-length\\s*=\\s*)(-?\\d+)(?:\\s*)"
+          "(filtered ascend\\s*=\\s*-?\\d+)(?:\\s*)"
+          "(plain-ascend\\s*=\\s*-?\\d+)(?:\\s*)"
+          "(cost\\s*=\\s*-?\\d+)(?:\\s*)(?:\\s*)"
+          "(energy\\s*=\\s*.*kwh)?(?:\\s*)",
+          QRegularExpression::CaseInsensitiveOption);
       const QRegularExpressionMatch& match = rxAscDes.match(commentTxt);
       if (match.hasMatch()) {
-        rte.totalDistance = match.captured(2).toFloat();
-        rte.cmt = QString("%1, %2, %3").arg(match.captured(4), match.captured(6), match.captured(8));
+        rte.totalDistance = match.captured(1).toFloat();
+        rte.cmt = QString("%1, %2, %3, %4").arg(match.captured(2), match.captured(3), match.captured(4), match.captured(5));
       }
       break;
     }

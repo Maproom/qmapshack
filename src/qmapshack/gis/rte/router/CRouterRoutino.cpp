@@ -387,7 +387,7 @@ void CRouterRoutino::calcRoute(const IGisItem::key_t& key) {
     delete progress;
 
     if (nullptr != route) {
-      rte->setResult(route, getOptions() + tr("<br/>Calculation time: %1s").arg(time.elapsed() / 1000.0, 0, 'f', 2));
+      rte->setResultFromRoutino(route, getOptions() + tr("<br/>Calculation time: %1s").arg(time.elapsed() / 1000.0, 0, 'f', 2));
       Routino_DeleteRoute(route);
     } else {
       if (Routino_errno != ROUTINO_ERROR_PROGRESS_ABORTED) {

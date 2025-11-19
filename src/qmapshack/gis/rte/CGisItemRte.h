@@ -173,8 +173,7 @@ class CGisItemRte : public IGisItem, public IGisLine {
 
   QPointF setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode, const QString& owner);
 
-  void setResult(Routino_Output* route, const QString& options);
-  void setResult(const QDomDocument& xml, const QString& options);
+  void setResultFromRoutino(Routino_Output* route, const QString& options);
   void setResultFromBRouter(const QDomDocument& xml, const QString& options);
 
   bool isCalculated();

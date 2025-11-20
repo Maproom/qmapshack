@@ -21,22 +21,62 @@
 
 #include <QMutex>
 #include <QPointer>
-#include <QString>
 #include <QTreeWidgetItem>
+
+#include "widgets/CMapItemWidget.h"
 
 class IDem;
 class CDemDraw;
 class QSettings;
 
-class CDemItem : public QTreeWidgetItem {
+class CDemItem : public QObject, public QTreeWidgetItem {
+  Q_OBJECT
  public:
-  CDemItem(QTreeWidget* parent, CDemDraw* dem);
+  CDemItem(CDemDraw* dem);
   virtual ~CDemItem();
 
-  void setFilename(const QString& name);
-
-  void saveConfig(QSettings& cfg);
-  void loadConfig(QSettings& cfg);
+  /**
+   * @brief Set the map's absolute filename
+   *
+   * The hash key is derived from the file's conetnt. If the file
+   * is missing the fallback key is used.
+   *
+   * @param name
+   * @param fallbackKey
+   */
+  void setFilename(const QString& name, const QString& fallbackKey);
+  /**
+   * @brief Set the map's name in the CMapItemWidget
+   * @param text
+   */
+  void setText(const QString& text);
+  /**
+   * @brief Set the status in the CMapItemWidget
+   * @param status
+   */
+  void setStatus(CMapItemWidget::eStatus status);
+  /**
+   * @brief Save the map's configuration into the given QSettings object
+   *
+   * If the map is active the configuration is read from the loaded
+   * map file object. If not the shadow config is used.
+   *
+   * @param cfg
+   */
+  void saveConfig(QSettings& cfg) const;
+  /**
+   * @brief Load the map's configuration from the given QSettings object
+   *
+   * If the map is active the map file object will read the configuration.
+   * Additionally the configuration is stored in the shadow config
+   *
+   * Depending on the configuration and availablility of a map the status
+   * is updated and the map is activated if configured.
+   *
+   * @param cfg
+   * @param triggerActivation  set true to trigger activation/deactivation according to the config
+   */
+  void loadConfig(QSettings& cfg, bool triggerActivation);
 
   /**
      @brief As the drawing thread is using the list widget to iterate of all maps to draw, all access has to be
@@ -49,12 +89,10 @@ class CDemItem : public QTreeWidgetItem {
      @return True if the internal list of dem objects is not empty.
    */
   bool isActivated();
-  /**
-     @brief Move item to top of list widget
-   */
-  void moveToTop();
-  void moveToBottom();
 
+  /**
+     @brief Set item's icon according to map type and state
+   */
   void updateIcon();
 
   /**
@@ -63,23 +101,77 @@ class CDemItem : public QTreeWidgetItem {
    */
   void showChildren(bool yes);
 
-  QString getName() const { return text(0); }
+  /**
+   * @brief Get the map's name as displayed
+   * @return
+   */
+  QString getName() const { return widget->getName(); }
 
-  const QString& getKey() { return key; }
+  /**
+   * @brief Get the map's full filename
+   * @return
+   */
+  const QString& getFilename() const { return filename; }
 
+  /**
+   * @brief Get access to the internal map file instance
+   * @return
+   */
   QPointer<IDem>& getDemFile() { return demfile; }
 
- private:
-  friend class CDemTreeWidget;
+  /**
+   * @brief Get the map's hash/key derived from the map file content
+   * @return
+   */
+  const QString& getKey() { return key; }
+
+  /**
+   * @brief Get the items activity status
+   * @return
+   */
+  CMapItemWidget::eStatus getStatus() const { return widget->getStatus(); }
+
+  /**
+   * @brief Get the tre widget item's widget.
+   *
+   * This will always return a valid pointer. If the widget
+   * has been delete by the tree widget a new one will be
+   * created on-th-fly
+   *
+   * @return
+   */
+  QWidget* itemWidget();
+
   /**
    * @brief Load all internal map objects
    * @return Return true on success.
    */
   bool activate();
+
+ signals:
+  void sigChanged();
+  // emitted if the tree widget item's widget was destroyed
+  void sigUpdateWidget(CDemItem*);
+
+ public slots:
+  void slotActivate(bool yes);
+
+ private:
+  friend class CDemTreeWidget;
   /**
      @brief Delete all internal map objects
    */
   void deactivate();
+  /**
+   * @brief Copy the config in to the shadow config
+   * @param cfg
+   */
+  void configToShadowConfig(const QSettings& cfg);
+  /**
+   * @brief Copy the shadow config into the config
+   * @param cfg
+   */
+  void shadowConfigToConfig(QSettings& cfg) const;
 
   CDemDraw* dem;
   /**
@@ -94,6 +186,18 @@ class CDemItem : public QTreeWidgetItem {
      @brief List of loaded map objects when map is activated.
    */
   QPointer<IDem> demfile;
+
+  /**
+   * @brief The map item's own widget to be shown in the tree widget
+   */
+  QPointer<CMapItemWidget> widget;
+
+  /**
+   * @brief The shadow config of the map's configuration
+   *
+   * This is used to keep the state for inactive maps (no mapfile object)
+   */
+  QMap<QString, QVariant> shadowConfig;
 };
 
 #endif  // CDEMITEM_H

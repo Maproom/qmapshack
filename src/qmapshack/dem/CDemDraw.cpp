@@ -39,29 +39,34 @@ CDemDraw::CDemDraw(CCanvas* canvas) : IDrawContext("dem", CCanvas::eRedrawDem, c
   demList = new CDemList(canvas);
   CMainWindow::self().addDemList(demList, canvas->objectName());
   connect(canvas, &CCanvas::destroyed, demList, &CDemList::deleteLater);
-  connect(demList, &CDemList::sigChanged, this, &CDemDraw::emitSigCanvasUpdate);
-
-  buildMapList();
-
+  connect(demList, &CDemList::sigChanged, this, &CDemDraw::slotChanged);
   dems << this;
+
+  timerDelayedSave = new QTimer(this);
+  timerDelayedSave->setInterval(1000);
+  timerDelayedSave->setSingleShot(true);
+  timerDelayedSave->callOnTimeout([this]() { saveDemList(); });
 }
 
 CDemDraw::~CDemDraw() { dems.removeOne(this); }
 
+void CDemDraw::slotChanged() {
+  emitSigCanvasUpdate();
+  demList->updateHelpText();
+  timerDelayedSave->start();
+}
+
 bool CDemDraw::setProjection(const QString& proj) {
-  // --- save the active maps
-  QStringList keys;
-  saveActiveMapsList(keys);
-  // --- now set the new projection
+  // --- set the new projection
   bool res = IDrawContext::setProjection(proj);
-  // --- now build the map list from scratch. This will deactivate -> activate all maps
+  // --- now build the dem list from scratch. This will deactivate -> activate all dems
   //     By that everything is restored with the new projection
-  buildMapList();
-  restoreActiveMapsList(keys);
+  loadDemList();
   return res;
 }
 
 void CDemDraw::setupDemPath() {
+  qDebug() << "CDemDraw::setupDemPath()";
   QStringList paths = demPaths;
   CDemPathSetup dlg(paths);
   if (dlg.exec() != QDialog::Accepted) {
@@ -72,6 +77,7 @@ void CDemDraw::setupDemPath() {
 }
 
 void CDemDraw::setupDemPath(const QString& path) {
+  qDebug() << "CDemDraw::setupDemPath(path)";
   QStringList paths(demPaths);
   if (!demPaths.contains(path)) {
     paths << path;
@@ -80,143 +86,184 @@ void CDemDraw::setupDemPath(const QString& path) {
 }
 
 void CDemDraw::setupDemPath(const QStringList& paths) {
+  qDebug() << "CDemDraw::setupDemPath(paths)";
   demPaths = paths;
 
   for (CDemDraw* dem : std::as_const(dems)) {
-    QStringList keys;
-    dem->saveActiveMapsList(keys);
-    dem->buildMapList();
-    dem->restoreActiveMapsList(keys);
+    dem->saveDemList();
+    dem->loadDemList();
   }
 }
 
-void CDemDraw::saveDemPath(QSettings& cfg) { cfg.setValue("demPaths", demPaths); }
+void CDemDraw::saveDemPath(QSettings& cfg) {
+  qDebug() << "CDemDraw::saveDemPath(cfg)";
+  cfg.setValue("demPaths", demPaths);
+}
 
-void CDemDraw::loadDemPath(QSettings& cfg) { demPaths = cfg.value("demPaths", demPaths).toStringList(); }
+void CDemDraw::loadDemPath(QSettings& cfg) {
+  qDebug() << "CDemDraw::loadDemPath(cfg)";
+  demPaths = cfg.value("demPaths", demPaths).toStringList();
+}
 
 void CDemDraw::saveConfig(QSettings& cfg) {
-  // store group context for later use
-  cfgGroup = cfg.group();
+  qDebug() << "CDemDraw::saveConfig(cfg)";
   // -------------------
-  QStringList keys;
-  cfg.beginGroup("dem");
-  saveActiveMapsList(keys, cfg);
-  cfg.setValue("active", keys);
+  saveDemList(cfg);
+  cfg.beginGroup("dem2");
+  cfg.setValue("zoomIndex", zoomIndex);
   cfg.endGroup();
 }
 
-void CDemDraw::loadConfig(QSettings& cfg) {
-  // store group context for later use
-  cfgGroup = cfg.group();
+void CDemDraw::loadConfig(QSettings& cfg) /* override */
+{
+  qDebug() << "CDemDraw::loadConfig(cfg)";
   // -------------------
-  cfg.beginGroup("dem");
-  if (cfgGroup.isEmpty()) {
-    restoreActiveMapsList(cfg.value("active", "").toStringList(), cfg);
-  } else {
-    restoreActiveMapsList(cfg.value("active", "").toStringList());
-  }
+  loadDemList(cfg);
+  cfg.beginGroup("dem2");
+  int idx = cfg.value("zoomIndex", zoomIndex).toInt();
+  cfg.endGroup();
 
+  zoom(idx);
+}
+
+CDemItem* CDemDraw::createDemItem(const QString& filename, const QString& fallbackKey) {
+  qDebug() << "CDemDraw::createDemItem(filename)";
+  CDemItem* item = new CDemItem(this);
+
+  QFileInfo fi(filename);
+  item->setText(fi.completeBaseName().replace("_", " "));
+  item->setFilename(filename, fallbackKey);
+  item->updateIcon();
+  return item;
+}
+
+void CDemDraw::loadDemList() {
+  qDebug() << "CDemDraw::loadDemList()";
+  SETTINGS;
+  cfg.beginGroup("Canvas");
+  cfg.beginGroup("Views");
+  cfg.beginGroup(canvas->objectName());
+  loadDemList(cfg);
+  cfg.endGroup();
+  cfg.endGroup();
   cfg.endGroup();
 }
 
-void CDemDraw::buildMapList() {
-  QCryptographicHash md5(QCryptographicHash::Md5);
-
+void CDemDraw::loadDemList(QSettings& cfg) {
+  qDebug() << "CDemDraw::loadDemList(cfg)";
   QMutexLocker lock(&CDemItem::mutexActiveDems);
   demList->clear();
 
+  // create a temp list of all dems in the paths
+  QMap<QString, CDemItem*> demsFound;
   for (const QString& path : std::as_const(demPaths)) {
     QDir dir(path);
-    // find available maps
+
+    // find available dems
     const QStringList& filenames = dir.entryList(supportedFormats, QDir::Files | QDir::Readable, QDir::Name);
     for (const QString& filename : filenames) {
-      QFileInfo fi(filename);
-
-      CDemItem* item = new CDemItem(*demList, this);
-
-      item->setText(0, fi.completeBaseName().replace("_", " "));
-      item->setFilename(dir.absoluteFilePath(filename));
-      item->updateIcon();
+      CDemItem* item = createDemItem(dir.absoluteFilePath(filename), "");
+      demsFound[item->getKey()] = item;
     }
   }
 
-  demList->sort();
+  cfg.beginGroup("dem2");
+
+  // create a list of dems in the same order as the stored keys
+  const QStringList& keysKnownDems = cfg.value("keysKnownDems", {}).toStringList();
+  for (const QString& key : keysKnownDems) {
+    CDemItem* dem = demsFound.take(key);
+
+    // We have a key but no dem found. Either the dem is missing or
+    // the dem has a new hash due to changes -> create a new dem item to investigate
+    if (dem == nullptr) {
+      cfg.beginGroup(key);
+      const QString& filename = cfg.value("filename", "").toString();
+      dem = createDemItem(filename, key);
+      cfg.endGroup();
+    }
+
+    // If the dem content changed the derived key will not match the one
+    // we expect. Delete this dem item, as it will have a reincarnation
+    // as new dem.
+    // If the dem path is not part of the dem paths list also delete
+    // the file as it is no longer part of the used dems.
+    QFileInfo fi(dem->getFilename());
+    if (key != dem->getKey() || !demPaths.contains(fi.absolutePath())) {
+      delete dem;
+      continue;
+    }
+
+    // finally load the config and add the item to the list
+    dem->loadConfig(cfg, true);
+
+    demList->addDem(dem);
+  }
+
+  cfg.endGroup();  // dem2
+
+  // let's see what's left over in the found dems list. These are all new
+  // dem items.
+  QList<CDemItem*> demsUnknown = demsFound.values();
+  std::sort(demsUnknown.begin(), demsUnknown.end(), &sortByName<CDemItem>);
+  for (CDemItem* dem : demsUnknown) {
+    dem->setStatus(CMapItemWidget::eStatus::Unused);
+    demList->addDem(dem);
+  }
+
+  // ------------- stat --------------
+  // Apply configuration data from an older version.
+  if (cfg.childGroups().contains("dem")) {
+    cfg.beginGroup("dem");
+    QStringList active = cfg.value("active", {}).toStringList();
+    std::reverse(active.begin(), active.end());
+    for (const QString& key : active) {
+      const int N = demList->count();
+      for (int n = 0; n < N; n++) {
+        CDemItem* item = demList->item(n);
+        if (item && item->getKey() == key) {
+          item->loadConfig(cfg, false);
+          demList->moveDemToTop(item);
+          // give it a longer grace time before activating it, finish the
+          // move to top.
+          QTimer::singleShot(1000, item, [item]() { item->slotActivate(true); });
+          break;
+        }
+      }
+    }
+    cfg.endGroup();
+
+  }  // ------------- stop --------------
+
   demList->updateHelpText();
 }
 
-void CDemDraw::saveActiveMapsList(QStringList& keys) {
+void CDemDraw::saveDemList() {
+  qDebug() << "CDemDraw::saveDemList()";
   SETTINGS;
-  cfg.beginGroup(cfgGroup);
-  cfg.beginGroup("dem");
-  saveActiveMapsList(keys, cfg);
+  cfg.beginGroup("Canvas");
+  cfg.beginGroup("Views");
+  cfg.beginGroup(canvas->objectName());
+  saveDemList(cfg);
+  cfg.endGroup();
   cfg.endGroup();
   cfg.endGroup();
 }
 
-void CDemDraw::saveActiveMapsList(QStringList& keys, QSettings& cfg) {
+void CDemDraw::saveDemList(QSettings& cfg) {
+  qDebug() << "CDemDraw::saveDemList(cfg)";
   QMutexLocker lock(&CDemItem::mutexActiveDems);
 
+  cfg.beginGroup("dem2");
+
+  QStringList keys;
   for (int i = 0; i < demList->count(); i++) {
     CDemItem* item = demList->item(i);
-    if (item && item->isActivated()) {
-      item->saveConfig(cfg);
-      keys << item->getKey();
-    }
+    item->saveConfig(cfg);
+    keys << item->getKey();
   }
-}
-
-void CDemDraw::loadConfigForDemItem(CDemItem* item) {
-  if (cfgGroup.isEmpty()) {
-    return;
-  }
-
-  SETTINGS;
-  cfg.beginGroup(cfgGroup);
-  cfg.beginGroup("dem");
-  item->loadConfig(cfg);
-  cfg.endGroup();
-  cfg.endGroup();
-}
-
-void CDemDraw::restoreActiveMapsList(const QStringList& keys) {
-  QMutexLocker lock(&CDemItem::mutexActiveDems);
-
-  for (const QString& key : keys) {
-    for (int i = 0; i < demList->count(); i++) {
-      CDemItem* item = demList->item(i);
-
-      if (item && item->getKey() == key) {
-        /**
-            @Note   the item will load it's configuration upon successful activation
-                    by calling loadConfigForDemItem().
-         */
-        item->setCheckState(0, Qt::Checked);
-        break;
-      }
-    }
-  }
-
-  demList->updateHelpText();
-}
-
-void CDemDraw::restoreActiveMapsList(const QStringList& keys, QSettings& cfg) {
-  QMutexLocker lock(&CDemItem::mutexActiveDems);
-
-  for (const QString& key : keys) {
-    for (int i = 0; i < demList->count(); i++) {
-      CDemItem* item = demList->item(i);
-
-      if (item && item->getKey() == key) {
-        item->setCheckState(0, Qt::Checked);
-        if (item->isActivated()) {
-          item->loadConfig(cfg);
-        }
-        break;
-      }
-    }
-  }
-
-  demList->updateHelpText();
+  cfg.setValue("keysKnownDems", keys);
+  cfg.endGroup();  // dem2
 }
 
 qreal CDemDraw::getElevationAt(const QPointF& pos, bool checkScale) {
@@ -227,10 +274,7 @@ qreal CDemDraw::getElevationAt(const QPointF& pos, bool checkScale) {
         CDemItem* item = demList->item(i);
 
         if (!item || !item->isActivated()) {
-          // as all active maps have to be at the top of the list
-          // it is ok to break as soon as the first map with no
-          // active files is hit.
-          break;
+          continue;
         }
 
         ele = item->getDemFile()->getElevationAt(pos, checkScale);
@@ -252,10 +296,7 @@ qreal CDemDraw::getSlopeAt(const QPointF& pos, bool checkScale) {
         CDemItem* item = demList->item(i);
 
         if (!item || !item->isActivated()) {
-          // as all active maps have to be at the top of the list
-          // it is ok to break as soon as the first map with no
-          // active files is hit.
-          break;
+          continue;
         }
 
         slope = item->getDemFile()->getSlopeAt(pos, checkScale);
@@ -285,17 +326,14 @@ void CDemDraw::getSlopeAt(const QPolygonF& pos, QPolygonF& slope) {
 void CDemDraw::getElevationAt(SGisLine& line) { line.updateElevation(this); }
 
 void CDemDraw::drawt(buffer_t& currentBuffer) {
-  // iterate over all active maps and call the draw method
+  // iterate over all active dems and call the draw method
   CDemItem::mutexActiveDems.lock();
   if (demList) {
     for (int i = 0; i < demList->count(); i++) {
       CDemItem* item = demList->item(i);
 
       if (!item || !item->isActivated()) {
-        // as all active maps have to be at the top of the list
-        // it is ok to break as soon as the first map with no
-        // active files is hit.
-        break;
+        continue;
       }
 
       item->getDemFile()->draw(currentBuffer);

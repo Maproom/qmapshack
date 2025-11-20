@@ -23,46 +23,27 @@
 #include "CMainWindow.h"
 #include "dem/CDemDraw.h"
 #include "dem/CDemItem.h"
-#include "misc.h"
-#include "units/IUnit.h"
 
-CDemTreeWidget::CDemTreeWidget(QWidget* parent) : QTreeWidget(parent) {
-  connect(this, &CDemTreeWidget::itemChanged, this, [this](QTreeWidgetItem* item, int) {
-    CDemItem* dem = dynamic_cast<CDemItem*>(item);
-    if (dem) {
-      if (dem->checkState(0) == Qt::Checked && !dem->isActivated()) {
-        dem->activate();
-      } else if (dem->checkState(0) == Qt::Unchecked && dem->isActivated()) {
-        dem->deactivate();
-      }
-      emit sigChanged();
-    }
-  });
+CDemTreeWidget::CDemTreeWidget(QWidget* parent) : QTreeWidget(parent) {}
+
+void CDemTreeWidget::dragEnterEvent(QDragEnterEvent* e) {
+  collapseAll();
+  QTreeWidget::dragEnterEvent(e);
 }
 
-void CDemTreeWidget::dragMoveEvent(QDragMoveEvent* event) {
-  CDemItem* item = dynamic_cast<CDemItem*>(itemAt(event->position().toPoint()));
-
-  if (item && item->isActivated()) {
-    event->setDropAction(Qt::MoveAction);
-    QTreeWidget::dragMoveEvent(event);
-  } else {
-    event->setDropAction(Qt::IgnoreAction);
-  }
-}
-
-void CDemTreeWidget::dropEvent(QDropEvent* event) {
+void CDemTreeWidget::dropEvent(QDropEvent* e) {
   CDemItem* item = dynamic_cast<CDemItem*>(currentItem());
   if (item) {
     item->showChildren(false);
   }
 
-  QTreeWidget::dropEvent(event);
+  QTreeWidget::dropEvent(e);
 
   if (item) {
     item->showChildren(true);
   }
 
+  setCurrentItem(nullptr);
   emit sigChanged();
 }
 
@@ -71,10 +52,11 @@ CDemList::CDemList(QWidget* parent) : QWidget(parent) {
   lineFilter->addAction(actionClearFilter, QLineEdit::TrailingPosition);
 
   connect(treeWidget, &CDemTreeWidget::customContextMenuRequested, this, &CDemList::slotContextMenu);
+  connect(treeWidget, &CDemTreeWidget::sigChanged, this, &CDemList::sigChanged);
   connect(actionMoveUp, &QAction::triggered, this, &CDemList::slotMoveUp);
   connect(actionMoveDown, &QAction::triggered, this, &CDemList::slotMoveDown);
+  connect(actionRemove, &QAction::triggered, this, &CDemList::slotRemove);
   connect(actionReloadDem, &QAction::triggered, this, &CDemList::slotReloadDem);
-  connect(treeWidget, &CDemTreeWidget::sigChanged, this, &CDemList::sigChanged);
   connect(labelHelpFillMapList, &QLabel::linkActivated, &CMainWindow::self(),
           static_cast<void (CMainWindow::*)(const QString&)>(&CMainWindow::slotLinkActivated));
   connect(lineFilter, &QLineEdit::textChanged, this, &CDemList::slotFilter);
@@ -83,49 +65,69 @@ CDemList::CDemList(QWidget* parent) : QWidget(parent) {
   menu->addAction(actionMoveUp);
   menu->addAction(actionMoveDown);
   menu->addSeparator();
+  menu->addAction(actionRemove);
+  menu->addSeparator();
   menu->addAction(actionReloadDem);
   menu->addAction(CMainWindow::self().getDemSetupAction());
 }
 
 CDemList::~CDemList() {}
 
-void CDemList::clear() { treeWidget->clear(); }
-
-void CDemList::sort() {
-  QList<CDemItem*> items1;
-  while (treeWidget->topLevelItemCount()) {
-    CDemItem* item = dynamic_cast<CDemItem*>(treeWidget->takeTopLevelItem(0));
-    if (item != nullptr) {
-      items1 << item;
-    }
-  }
-
-  std::sort(items1.begin(), items1.end(), &sortByName<CDemItem>);
-
-  QList<QTreeWidgetItem*> items2;
-  for (CDemItem* item : std::as_const(items1)) {
-    items2 << item;
-  }
-  treeWidget->addTopLevelItems(items2);
+void CDemList::addDem(CDemItem* dem) {
+  treeWidget->addTopLevelItem(dem);
+  treeWidget->setItemWidget(dem, 0, dem->itemWidget());
+  connect(dem, &CDemItem::sigChanged, this, &CDemList::sigChanged);
+  connect(dem, &CDemItem::sigUpdateWidget, this, [this](CDemItem* dem) {
+    // Evil hack ahead:
+    // When moving a map item in the list the item widget gets destroyed. There it has to be
+    // set again. However if you do that immediately Qt crashes internally :(
+    // Giving it a 100ms grace time seems to solve the problem.
+    // (Yes I know, a QTreeView and delgates would be the right way to do it)
+    QTimer::singleShot(100, this, [this, dem]() { treeWidget->setItemWidget(dem, 0, dem->itemWidget()); });
+  });
 }
+
+void CDemList::clear() { treeWidget->clear(); }
 
 int CDemList::count() { return treeWidget->topLevelItemCount(); }
 
 CDemItem* CDemList::item(int i) { return dynamic_cast<CDemItem*>(treeWidget->topLevelItem(i)); }
 
 void CDemList::updateHelpText() {
-  if (treeWidget->topLevelItemCount() == 0) {
+  bool haveMaps = (treeWidget->topLevelItemCount() > 0);
+
+  labelHelpFillMapList->setVisible(!haveMaps);
+
+  if (!haveMaps) {
     labelIcon->show();
-    labelHelpFillMapList->show();
     labelHelpActivateMap->hide();
   } else {
-    labelHelpFillMapList->hide();
+    bool showHelp = true;
 
-    CDemItem* item = dynamic_cast<CDemItem*>(treeWidget->topLevelItem(0));
-    bool haveActive = item && item->isActivated();
-    labelIcon->setVisible(!haveActive);
-    labelHelpActivateMap->setVisible(!haveActive);
+    const int N = treeWidget->topLevelItemCount();
+    for (int n = 0; n < N; n++) {
+      CDemItem* dem = dynamic_cast<CDemItem*>(treeWidget->topLevelItem(n));
+      if (dem == nullptr) {
+        continue;
+      }
+      if (dem->isActivated()) {
+        showHelp = false;
+      }
+    }
+    labelIcon->setVisible(showHelp);
+    labelHelpActivateMap->setVisible(showHelp);
   }
+}
+
+void CDemList::moveDemToTop(CDemItem* dem) {
+  const int index = treeWidget->indexOfTopLevelItem(dem);
+  if (index == NOIDX) {
+    return;
+  }
+  dem->showChildren(false);
+  treeWidget->takeTopLevelItem(index);
+  treeWidget->insertTopLevelItem(0, dem);
+  dem->showChildren(true);
 }
 
 void CDemList::slotMoveUp() {
@@ -166,20 +168,28 @@ void CDemList::slotMoveDown() {
   emit treeWidget->sigChanged();
 }
 
+void CDemList::slotRemove() {
+  CDemItem* item = dynamic_cast<CDemItem*>(treeWidget->currentItem());
+  if (item == nullptr) {
+    return;
+  }
+
+  int index = treeWidget->indexOfTopLevelItem(item);
+  if (index == NOIDX) {
+    return;
+  }
+
+  delete treeWidget->takeTopLevelItem(index);
+}
+
 void CDemList::slotContextMenu(const QPoint& point) {
   CDemItem* item = dynamic_cast<CDemItem*>(treeWidget->currentItem());
 
   bool itemIsSelected = nullptr != item;
-  bool itemIsActivated = item ? item->isActivated() : false;
 
-  actionMoveUp->setEnabled(itemIsSelected);
-  actionMoveDown->setEnabled(itemIsSelected);
-
-  if (itemIsSelected) {
-    CDemItem* item1 = dynamic_cast<CDemItem*>(treeWidget->itemBelow(item));
-    actionMoveUp->setEnabled(itemIsActivated && (treeWidget->itemAbove(item) != nullptr));
-    actionMoveDown->setEnabled(itemIsActivated && item1 && item1->isActivated());
-  }
+  actionMoveUp->setEnabled(itemIsSelected && (treeWidget->itemAbove(item) != 0));
+  actionMoveDown->setEnabled(itemIsSelected && (treeWidget->itemBelow(item) != 0));
+  actionRemove->setVisible(itemIsSelected && item->getStatus() == CMapItemWidget::eStatus::Missing);
 
   QPoint p = treeWidget->mapToGlobal(point);
   menu->exec(p);

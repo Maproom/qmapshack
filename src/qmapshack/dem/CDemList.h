@@ -23,6 +23,7 @@
 #include <QWidget>
 
 class CDemItem;
+class QMenu;
 
 class CDemTreeWidget : public QTreeWidget {
   Q_OBJECT
@@ -33,7 +34,7 @@ class CDemTreeWidget : public QTreeWidget {
   void sigChanged();
 
  protected:
-  void dragMoveEvent(QDragMoveEvent* event) override;
+  void dragEnterEvent(QDragEnterEvent* e) override;
   void dropEvent(QDropEvent* event) override;
 };
 
@@ -50,9 +51,26 @@ class CDemList : public QWidget, private Ui::IDemsList {
   CDemItem* item(int i);
   operator QTreeWidget*() { return treeWidget; }
 
+  /**
+   * @brief Show/hide hints depending on the DEM list's state
+   */
   void updateHelpText();
 
-  void sort();
+  /**
+   * @brief Add DEM item to the list
+   *
+   * Add the item as top level item and set the item's widget. Connect
+   * the item's signals to properly handle changes.
+   *
+   * @param dem
+   */
+  void addDem(CDemItem* dem);
+
+  /**
+   * @brief Move dem item to top of list
+   * @param dem
+   */
+  void moveDemToTop(CDemItem* dem);
 
  signals:
   void sigChanged();
@@ -60,6 +78,7 @@ class CDemList : public QWidget, private Ui::IDemsList {
  private slots:
   void slotMoveUp();
   void slotMoveDown();
+  void slotRemove();
   void slotReloadDem();
   void slotContextMenu(const QPoint& point);
   void slotFilter(const QString& str);

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>308</width>
-    <height>250</height>
+    <width>487</width>
+    <height>537</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -138,7 +138,7 @@
        <item>
         <widget class="QLabel" name="labelHelpActivateMap">
          <property name="text">
-          <string>Use the context menu (right mouse button click on entry) to activate a file. Use drag-n-drop to move the activated file in the process order. </string>
+          <string>Use the buttons to activate a DEM. Use drag-n-drop to move the DEM in the draw order. </string>
          </property>
          <property name="alignment">
           <set>Qt::AlignmentFlag::AlignJustify|Qt::AlignmentFlag::AlignVCenter</set>
@@ -193,6 +193,21 @@
    </property>
    <property name="text">
     <string>Clear Filter</string>
+   </property>
+  </action>
+  <action name="actionRemove">
+   <property name="icon">
+    <iconset resource="../resources.qrc">
+     <normaloff>:/icons/32x32/DeleteOne.png</normaloff>:/icons/32x32/DeleteOne.png</iconset>
+   </property>
+   <property name="text">
+    <string>Remove</string>
+   </property>
+   <property name="toolTip">
+    <string>Remove DEM from list</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
  </widget>

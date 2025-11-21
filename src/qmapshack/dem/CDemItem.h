@@ -49,7 +49,7 @@ class CDemItem : public QObject, public QTreeWidgetItem {
    * @brief Set the map's name in the CMapItemWidget
    * @param text
    */
-  void setText(const QString& text);
+  void setName(const QString& Name);
   /**
    * @brief Set the status in the CMapItemWidget
    * @param status
@@ -172,6 +172,15 @@ class CDemItem : public QObject, public QTreeWidgetItem {
    * @param cfg
    */
   void shadowConfigToConfig(QSettings& cfg) const;
+  /**
+   * @brief Check for map settings in the shadow config
+   *
+   * There are always to entries expected ("isActive" and "filename"). Therefor
+   * if the are two or less entries the shadow config is empty.
+   *
+   * @return
+   */
+  bool noShadowConfig() const { return shadowConfig.size() <= 2; }
 
   CDemDraw* dem;
   /**

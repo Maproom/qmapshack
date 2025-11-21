@@ -78,7 +78,10 @@ void CRtGpsTetherInfo::disconnectFromHost() {
 
 void CRtGpsTetherInfo::autoConnect(int msec) {
   if (checkAutomaticConnect->isChecked()) {
-    QTimer::singleShot(msec, this, [&]() { toolConnect->setChecked(true); });
+    QPointer<CRtGpsTetherInfo> self(this);
+    QTimer::singleShot(msec, this, [self]() {
+      if (!self.isNull()) self->toolConnect->setChecked(true);
+    });
   }
 }
 

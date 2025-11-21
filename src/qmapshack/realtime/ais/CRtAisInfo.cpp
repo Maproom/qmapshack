@@ -187,7 +187,10 @@ void CRtAisInfo::disconnectFromHost() {
 
 void CRtAisInfo::autoConnect(int msec) {
   if (checkAutomaticConnect->isChecked()) {
-    QTimer::singleShot(msec, this, [&]() { toolConnect->setChecked(true); });
+    QPointer<CRtAisInfo> self(this);
+    QTimer::singleShot(msec, this, [self]() {
+      if (!self.isNull()) self->toolConnect->setChecked(true);
+    });
   }
 }
 

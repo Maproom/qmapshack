@@ -244,7 +244,7 @@ CMapItem* CMapDraw::createMapItem(const QString& filename, const QString& fallba
   CMapItem* item = new CMapItem(this);
 
   QFileInfo fi(filename);
-  item->setText(fi.completeBaseName().replace("_", " "));
+  item->setName(fi.completeBaseName().replace("_", " "));
   item->setFilename(filename, fallbackKey);
   item->updateIcon();
   return item;
@@ -345,7 +345,10 @@ void CMapDraw::loadMapList(QSettings& cfg) {
           mapList->moveMapToTop(item);
           // give it a longer grace time before activating it, finish the
           // move to top.
-          QTimer::singleShot(1000, item, [item]() { item->slotActivate(true); });
+          QPointer<CMapItem> pItem;
+          QTimer::singleShot(1000, item, [pItem]() {
+            if (!pItem.isNull()) pItem->slotActivate(true);
+          });
           break;
         }
       }

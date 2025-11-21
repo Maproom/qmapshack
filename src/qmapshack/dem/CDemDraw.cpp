@@ -131,7 +131,7 @@ CDemItem* CDemDraw::createDemItem(const QString& filename, const QString& fallba
   CDemItem* item = new CDemItem(this);
 
   QFileInfo fi(filename);
-  item->setText(fi.completeBaseName().replace("_", " "));
+  item->setName(fi.completeBaseName().replace("_", " "));
   item->setFilename(filename, fallbackKey);
   item->updateIcon();
   return item;
@@ -226,7 +226,10 @@ void CDemDraw::loadDemList(QSettings& cfg) {
           demList->moveDemToTop(item);
           // give it a longer grace time before activating it, finish the
           // move to top.
-          QTimer::singleShot(1000, item, [item]() { item->slotActivate(true); });
+          QPointer<CDemItem> pItem(item);
+          QTimer::singleShot(1000, item, [pItem]() {
+            if (!pItem.isNull()) pItem->slotActivate(true);
+          });
           break;
         }
       }

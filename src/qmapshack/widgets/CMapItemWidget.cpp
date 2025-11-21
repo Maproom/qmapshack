@@ -29,7 +29,7 @@ CMapItemWidget::CMapItemWidget() {
 
   buttonActivate = new QToolButton(this);
   buttonActivate->setCheckable(true);
-  buttonActivate->setIcon(QIcon("://icons/32x32/ShowNone.png"));
+  buttonActivate->setIcon(QIcon(":/icons/32x32/ShowNone.png"));
 
   layout2 = new QHBoxLayout(this);
 
@@ -68,7 +68,7 @@ void CMapItemWidget::setStatus(eStatus status) {
       break;
 
     case eStatus::Missing:
-      labelStatus->setText("<font color='red'>!!!" + tr("missing") + "!!!</font>");
+      labelStatus->setText("<span style='color:red'>!!!" + tr("missing") + "!!!</span>");
       labelName->setText(mapName);
       labelName->setEnabled(false);
       buttonActivate->setChecked(false);
@@ -87,8 +87,8 @@ void CMapItemWidget::setStatus(eStatus status) {
 
 void CMapItemWidget::slotSetChecked(bool yes) {
   if (yes) {
-    buttonActivate->setIcon(QIcon("://icons/32x32/ShowAll.png"));
+    buttonActivate->setIcon(QIcon(":/icons/32x32/ShowAll.png"));
   } else {
-    buttonActivate->setIcon(QIcon("://icons/32x32/ShowNone.png"));
+    buttonActivate->setIcon(QIcon(":/icons/32x32/ShowNone.png"));
   }
 }

@@ -337,16 +337,20 @@ void CDeviceWatcherLinux::slotGVFSMtpVolumeRemoved(const QString& dbus_name, con
 
 void CDeviceWatcherLinux::slotGVFSMounted(GVFSMount mount) {
   qDebug() << "CDeviceWatcherLinux::slotGVFSMounted" << mount.dbusId << mount.objectPath << mount.fuseMountPoint;
-  QTimer::singleShot(2000, this, [this, mount]() {
+  QPointer<CDeviceWatcherLinux> self(this);
+  QTimer::singleShot(2000, this, [self, mount]() {
+    if(self.isNull()){
+      return;
+    }
     QDir dir(mount.fuseMountPoint.constData());
     const QStringList& paths = dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
     for (const QString& path : paths) {
       if (dir.exists(path + "/Garmin/GarminDevice.xml") || dir.exists(path + "/GARMIN/GarminDevice.xml")) {
-        addGVFSMtpDevice(mount, paths, IDevice::eTypeGarminMtp);
+        self->addGVFSMtpDevice(mount, paths, IDevice::eTypeGarminMtp);
         break;
       } else if (dir.exists(path + "/" + CDeviceGenericMtp::kQmsMtpDeviceJson)) {  // To identiy generic non-GARMIN MTP
                                                                                    // devices, Wahoo, smartphones, etc.
-        addGVFSMtpDevice(mount, paths, IDevice::eTypeGenericMtp);
+        self->addGVFSMtpDevice(mount, paths, IDevice::eTypeGenericMtp);
         break;
       }
     }

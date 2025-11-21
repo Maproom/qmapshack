@@ -84,7 +84,10 @@ void CMapList::addMap(CMapItem* map) {
     // set again. However if you do that immediately Qt crashes internally :(
     // Giving it a 100ms grace time seems to solve the problem.
     // (Yes I know, a QTreeView and delgates would be the right way to do it)
-    QTimer::singleShot(100, this, [this, map]() { treeWidget->setItemWidget(map, 0, map->itemWidget()); });
+    QPointer<CMapItem> pMap(map);
+    QTimer::singleShot(100, this, [this, pMap]() {
+      if (!pMap.isNull()) treeWidget->setItemWidget(pMap, 0, pMap->itemWidget());
+    });
   });
 }
 

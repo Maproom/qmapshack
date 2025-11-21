@@ -242,14 +242,14 @@ CMainWindow::CMainWindow() : id(QRandomGenerator::global()->generate()) {
   const QStringList& names = cfg.childGroups();
 
   for (const QString& name : names) {
-    CCanvas* view = addView(name);
+    CCanvas* view = createCanvas(name);
 
     cfg.beginGroup(name);
     view->loadConfig(cfg);
     cfg.endGroup();  // name
   }
   if (names.isEmpty()) {
-    CCanvas* view = addView(QString());
+    CCanvas* view = createCanvas(QString());
     // call just to setup default values
     cfg.beginGroup(view->objectName());
     view->loadConfig(cfg);
@@ -625,7 +625,7 @@ void CMainWindow::setupHomePath() {
   cfg.setValue("Paths/homePath", homeDir.absolutePath());
 }
 
-CCanvas* CMainWindow::addView(const QString& name) {
+CCanvas* CMainWindow::createCanvas(const QString& name) {
   CCanvas* view = new CCanvas(tabWidget, name);
   tabWidget->addTab(view, view->objectName());
   connect(view, &CCanvas::sigMousePosition, this, &CMainWindow::slotMousePosition);
@@ -856,11 +856,12 @@ void CMainWindow::slotQuickstart() {
   }
 }
 
-void CMainWindow::slotAddCanvas(const QString& name) {
-  CCanvas* view = addView(name);
-  tabWidget->setCurrentWidget(view);
+CCanvas* CMainWindow::addCanvas(const QString& name) {
+  CCanvas* canvas = createCanvas(name);
+  tabWidget->setCurrentWidget(canvas);
   testForNoView();
   emit sigCanvasChange();
+  return canvas;
 }
 
 void CMainWindow::slotCloneCanvas() {
@@ -875,21 +876,19 @@ void CMainWindow::slotCloneCanvas() {
 
   source->saveConfig(view);
 
-  slotAddCanvas(source->objectName() + tr(" (Cloned)"));
-
-  CCanvas* target = getVisibleCanvas();
-  if (nullptr == target) {
+  CCanvas* canvas = addCanvas(source->objectName() + tr(" (Cloned)"));
+  if (nullptr == canvas) {
     return;
   }
 
-  target->loadConfig(view);
-  target->slotTriggerCompleteUpdate(CCanvas::redraw_e::eRedrawGis);
+  canvas->loadConfig(view);
+  canvas->slotTriggerCompleteUpdate(CCanvas::redraw_e::eRedrawGis);
 
   SETTINGS;
   cfg.beginGroup("Canvas");
   cfg.beginGroup("Views");
-  cfg.beginGroup(target->objectName());
-  target->saveConfig(cfg);
+  cfg.beginGroup(canvas->objectName());
+  canvas->saveConfig(cfg);
   cfg.endGroup();
   cfg.endGroup();
   cfg.endGroup();
@@ -1225,9 +1224,7 @@ void CMainWindow::slotLoadView() {
   QSettings view(filename, QSettings::IniFormat);
 
   const QString& name = view.value("name", QString()).toString();
-  slotAddCanvas(name);
-
-  CCanvas* canvas = getVisibleCanvas();
+  CCanvas* canvas = addCanvas(name);
   if (nullptr == canvas) {
     return;
   }
@@ -1651,17 +1648,17 @@ void CMainWindow::slotLinkMapViews(bool on) {
 }
 
 void CMainWindow::slotAddMapView() {
-  slotAddCanvas("");
-  CCanvas* target = getVisibleCanvas();
-  if (nullptr == target) {
+  // call with empty name to get a unique default name
+  CCanvas* canvas = addCanvas("");
+  if (nullptr == canvas) {
     return;
   }
 
   SETTINGS;
   cfg.beginGroup("Canvas");
   cfg.beginGroup("Views");
-  cfg.beginGroup(target->objectName());
-  target->loadConfig(cfg);
+  cfg.beginGroup(canvas->objectName());
+  canvas->loadConfig(cfg);
   cfg.endGroup();
   cfg.endGroup();
   cfg.endGroup();

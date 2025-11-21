@@ -40,10 +40,10 @@ QWidget* CDemItem::itemWidget() {
   if (widget.isNull()) {
     widget = new CMapItemWidget();
     QFileInfo fi(filename);
-    setText(fi.completeBaseName().replace("_", " "));
+    setName(fi.completeBaseName().replace("_", " "));
 
     if (QFile::exists(filename)) {
-      if (shadowConfig.isEmpty()) {
+      if (noShadowConfig()) {
         setStatus(CMapItemWidget::eStatus::Unused);
       } else {
         setStatus(demfile.isNull() ? CMapItemWidget::eStatus::Inactive : CMapItemWidget::eStatus::Active);
@@ -68,7 +68,7 @@ void CDemItem::slotActivate(bool yes) {
   emit sigChanged();
 }
 
-void CDemItem::setText(const QString& text) { widget->setName(text); }
+void CDemItem::setName(const QString& name) { widget->setName(name); }
 
 void CDemItem::setStatus(CMapItemWidget::eStatus status) { widget->setStatus(status); }
 
@@ -76,8 +76,7 @@ void CDemItem::setFilename(const QString& name, const QString& fallbackKey) {
   filename = name;
 
   QFile f(filename);
-  if (f.exists()) {
-    openFileCheckSuccess(QIODevice::ReadOnly, f);
+  if (f.exists() && f.open(QIODevice::ReadOnly)) {
     QCryptographicHash md5(QCryptographicHash::Md5);
     md5.addData(f.read(qMin(1024, f.size())));
     key = md5.result().toHex();
@@ -93,8 +92,6 @@ void CDemItem::configToShadowConfig(const QSettings& cfg) {
   for (const QString& key : keys) {
     shadowConfig[key] = cfg.value(key);
   }
-  shadowConfig.remove("isActive");
-  shadowConfig.remove("filename");
 }
 
 void CDemItem::shadowConfigToConfig(QSettings& cfg) const {
@@ -105,24 +102,20 @@ void CDemItem::shadowConfigToConfig(QSettings& cfg) const {
 }
 
 void CDemItem::saveConfig(QSettings& cfg) const {
+  cfg.beginGroup(key);
   if (demfile.isNull()) {
-    cfg.beginGroup(key);
     shadowConfigToConfig(cfg);
-    cfg.setValue("isActive", false);
-    cfg.setValue("filename", filename);
-    cfg.endGroup();
   } else {
-    cfg.beginGroup(key);
     demfile->saveConfig(cfg);
     cfg.setValue("isActive", true);
-    cfg.setValue("filename", filename);
-    cfg.endGroup();
   }
+  cfg.setValue("filename", filename);
+  cfg.endGroup();
 }
 
 void CDemItem::loadConfig(QSettings& cfg, bool triggerActivation) {
   if (!demfile.isNull()) {
-    // map is already active, read the config
+    // dem is already active, read the config
     cfg.beginGroup(key);
     configToShadowConfig(cfg);
     demfile->loadConfig(cfg);
@@ -139,13 +132,16 @@ void CDemItem::loadConfig(QSettings& cfg, bool triggerActivation) {
   if (!QFile::exists(filename)) {
     setStatus(CMapItemWidget::eStatus::Missing);
     return;
-  } else if (shadowConfig.isEmpty()) {
+  } else if (noShadowConfig()) {
     setStatus(CMapItemWidget::eStatus::Unused);
   } else {
     setStatus(CMapItemWidget::eStatus::Inactive);
     if (triggerActivation) {
-      // Evil hack: If you activate the map directly Qt will crash internally.
-      QTimer::singleShot(100, this, [this, active]() { slotActivate(active); });
+      // Evil hack: If you activate the DEM directly Qt will crash internally.
+      QPointer<CDemItem> self(this);
+      QTimer::singleShot(100, this, [self, active]() {
+        if (!self.isNull()) self->slotActivate(active);
+      });
     }
   }
 }
@@ -201,10 +197,10 @@ void CDemItem::deactivate() {
   demfile->saveConfig(cfg);
   configToShadowConfig(cfg);
 
-  // remove mapfile setup dialog as child of this item
+  // remove demfile setup dialog as child of this item
   showChildren(false);
 
-  // remove mapfile object
+  // remove demfile object
   delete demfile;
 
   // maybe used to reflect changes in the icon
@@ -220,7 +216,7 @@ bool CDemItem::activate() {
 
   delete demfile;
 
-  // load map by suffix
+  // load DEM by suffix
   QFileInfo fi(filename);
   if (fi.suffix().toLower() == "vrt") {
     demfile = new CDemVRT(filename, dem);
@@ -230,14 +226,14 @@ bool CDemItem::activate() {
 
   updateIcon();
 
-  // no mapfiles loaded? Bad.
+  // no demfile loaded? Bad.
   if (demfile.isNull()) {
     setStatus(CMapItemWidget::eStatus::Inactive);
     return false;
   }
 
-  // if map is activated successfully add to the list of map files
-  // else delete all previous loaded maps and abort
+  // if DEM is activated successfully add to the list of DEM files
+  // else delete all previous loaded DEMs and abort
   if (!demfile->activated()) {
     delete demfile;
     setStatus(CMapItemWidget::eStatus::Inactive);
@@ -246,7 +242,7 @@ bool CDemItem::activate() {
 
   // setToolTip(0, demfile->getCopyright());
 
-  // setup map with settings stored in
+  // setup DEM with settings stored in
   // the shadow config
   QTemporaryFile file;
   QSettings cfg(file.fileName(), QSettings::IniFormat);
@@ -259,7 +255,7 @@ bool CDemItem::activate() {
   demfile->saveConfig(cfg);
   configToShadowConfig(cfg);
 
-  // Add the mapfile setup dialog as child of this item
+  // Add the demfile setup dialog as child of this item
   showChildren(true);
 
   setStatus(CMapItemWidget::eStatus::Active);

@@ -83,7 +83,10 @@ void CDemList::addDem(CDemItem* dem) {
     // set again. However if you do that immediately Qt crashes internally :(
     // Giving it a 100ms grace time seems to solve the problem.
     // (Yes I know, a QTreeView and delgates would be the right way to do it)
-    QTimer::singleShot(100, this, [this, dem]() { treeWidget->setItemWidget(dem, 0, dem->itemWidget()); });
+    QPointer<CDemItem> pDem(dem);
+    QTimer::singleShot(100, this, [this, pDem]() {
+      if (!pDem.isNull()) treeWidget->setItemWidget(pDem, 0, pDem->itemWidget());
+    });
   });
 }
 

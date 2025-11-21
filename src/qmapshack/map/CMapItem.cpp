@@ -47,10 +47,10 @@ QWidget* CMapItem::itemWidget() {
   if (widget.isNull()) {
     widget = new CMapItemWidget();
     QFileInfo fi(filename);
-    setText(fi.completeBaseName().replace("_", " "));
+    setName(fi.completeBaseName().replace("_", " "));
 
     if (QFile::exists(filename)) {
-      if (shadowConfig.isEmpty()) {
+      if (noShadowConfig()) {
         setStatus(CMapItemWidget::eStatus::Unused);
       } else {
         setStatus(mapfile.isNull() ? CMapItemWidget::eStatus::Inactive : CMapItemWidget::eStatus::Active);
@@ -75,7 +75,7 @@ void CMapItem::slotActivate(bool yes) {
   emit sigChanged();
 }
 
-void CMapItem::setText(const QString& text) { widget->setName(text); }
+void CMapItem::setName(const QString& name) { widget->setName(name); }
 
 void CMapItem::setStatus(CMapItemWidget::eStatus status) { widget->setStatus(status); }
 
@@ -83,8 +83,7 @@ void CMapItem::setFilename(const QString& name, const QString& fallbackKey) {
   filename = name;
 
   QFile f(filename);
-  if (f.exists()) {
-    openFileCheckSuccess(QIODevice::ReadOnly, f);
+  if (f.exists() && f.open(QIODevice::ReadOnly)) {
     QCryptographicHash md5(QCryptographicHash::Md5);
     md5.addData(f.read(qMin(0x1000LL, f.size())));
     key = md5.result().toHex();
@@ -100,8 +99,6 @@ void CMapItem::configToShadowConfig(const QSettings& cfg) {
   for (const QString& key : keys) {
     shadowConfig[key] = cfg.value(key);
   }
-  shadowConfig.remove("isActive");
-  shadowConfig.remove("filename");
 }
 
 void CMapItem::shadowConfigToConfig(QSettings& cfg) const {
@@ -112,19 +109,15 @@ void CMapItem::shadowConfigToConfig(QSettings& cfg) const {
 }
 
 void CMapItem::saveConfig(QSettings& cfg) const {
+  cfg.beginGroup(key);
   if (mapfile.isNull()) {
-    cfg.beginGroup(key);
     shadowConfigToConfig(cfg);
-    cfg.setValue("isActive", false);
-    cfg.setValue("filename", filename);
-    cfg.endGroup();
   } else {
-    cfg.beginGroup(key);
     mapfile->saveConfig(cfg);
-    cfg.setValue("isActive", true);
-    cfg.setValue("filename", filename);
-    cfg.endGroup();
+    cfg.setValue("isActive", true);      
   }
+  cfg.setValue("filename", filename);
+  cfg.endGroup(); // key
 }
 
 void CMapItem::loadConfig(QSettings& cfg, bool triggerActivation) {
@@ -146,13 +139,16 @@ void CMapItem::loadConfig(QSettings& cfg, bool triggerActivation) {
   if (!QFile::exists(filename)) {
     setStatus(CMapItemWidget::eStatus::Missing);
     return;
-  } else if (shadowConfig.isEmpty()) {
+  } else if (noShadowConfig()) {
     setStatus(CMapItemWidget::eStatus::Unused);
   } else {
     setStatus(CMapItemWidget::eStatus::Inactive);
     if (triggerActivation) {
       // Evil hack: If you activate the map directly Qt will crash internally.
-      QTimer::singleShot(100, this, [this, active]() { slotActivate(active); });
+      QPointer<CMapItem> self(this);
+      QTimer::singleShot(100, this, [self, active]() {
+        if (!self.isNull()) self->slotActivate(active);
+      });
     }
   }
 }

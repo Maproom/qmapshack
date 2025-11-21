@@ -147,7 +147,6 @@ class CMainWindow : public QMainWindow, private Ui::IMainWindow {
   void slotAbout();
   void slotWiki();
   void slotQuickstart();
-  void slotAddCanvas(const QString& name);
   void slotCloneCanvas();
   void slotTabCloseRequest(int i);
   void slotCurrentTabCanvas(int i);
@@ -199,8 +198,9 @@ class CMainWindow : public QMainWindow, private Ui::IMainWindow {
   void hideDocks();
   void displayRegular();
   void displayFullscreen();
-  CCanvas* addView(const QString& name);
+  CCanvas* createCanvas(const QString& name);
   void setupHomePath();
+  CCanvas* addCanvas(const QString& name);
 
   static CMainWindow* pSelf;
   static QDir homeDir;

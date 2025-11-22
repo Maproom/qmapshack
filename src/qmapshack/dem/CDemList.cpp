@@ -84,7 +84,7 @@ void CDemList::addDem(CDemItem* dem) {
     // Giving it a 100ms grace time seems to solve the problem.
     // (Yes I know, a QTreeView and delgates would be the right way to do it)
     QPointer<CDemItem> pDem(dem);
-    QTimer::singleShot(100, this, [this, pDem]() {
+    QTimer::singleShot(500, this, [this, pDem]() {
       if (!pDem.isNull()) treeWidget->setItemWidget(pDem, 0, pDem->itemWidget());
     });
   });

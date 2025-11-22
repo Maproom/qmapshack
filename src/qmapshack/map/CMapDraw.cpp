@@ -65,7 +65,9 @@ bool CMapDraw::setProjection(const QString& proj) /* override */
   bool res = IDrawContext::setProjection(proj);
   // --- now build the map list from scratch. This will deactivate -> activate all maps
   //     By that everything is restored with the new projection
-  loadMapList();
+  if (mapList->count()) {
+    loadMapList();
+  }
   return res;
 }
 
@@ -240,7 +242,6 @@ void CMapDraw::loadConfig(QSettings& cfg) /* override */
 }
 
 CMapItem* CMapDraw::createMapItem(const QString& filename, const QString& fallbackKey) {
-  qDebug() << "CMapDraw::createMapItem(filename)";
   CMapItem* item = new CMapItem(this);
 
   QFileInfo fi(filename);
@@ -343,12 +344,7 @@ void CMapDraw::loadMapList(QSettings& cfg) {
         if (item && item->getKey() == key) {
           item->loadConfig(cfg, false);
           mapList->moveMapToTop(item);
-          // give it a longer grace time before activating it, finish the
-          // move to top.
-          QPointer<CMapItem> pItem;
-          QTimer::singleShot(1000, item, [pItem]() {
-            if (!pItem.isNull()) pItem->slotActivate(true);
-          });
+          item->activate();
           break;
         }
       }

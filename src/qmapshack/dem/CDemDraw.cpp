@@ -61,7 +61,9 @@ bool CDemDraw::setProjection(const QString& proj) {
   bool res = IDrawContext::setProjection(proj);
   // --- now build the dem list from scratch. This will deactivate -> activate all dems
   //     By that everything is restored with the new projection
-  loadDemList();
+  if (demList->count()) {
+    loadDemList();
+  }
   return res;
 }
 
@@ -127,7 +129,6 @@ void CDemDraw::loadConfig(QSettings& cfg) /* override */
 }
 
 CDemItem* CDemDraw::createDemItem(const QString& filename, const QString& fallbackKey) {
-  qDebug() << "CDemDraw::createDemItem(filename)";
   CDemItem* item = new CDemItem(this);
 
   QFileInfo fi(filename);
@@ -224,12 +225,7 @@ void CDemDraw::loadDemList(QSettings& cfg) {
         if (item && item->getKey() == key) {
           item->loadConfig(cfg, false);
           demList->moveDemToTop(item);
-          // give it a longer grace time before activating it, finish the
-          // move to top.
-          QPointer<CDemItem> pItem(item);
-          QTimer::singleShot(1000, item, [pItem]() {
-            if (!pItem.isNull()) pItem->slotActivate(true);
-          });
+          item->activate();
           break;
         }
       }

@@ -31,7 +31,6 @@
 #include "map/CMapVRT.h"
 #include "map/CMapWMTS.h"
 #include "map/IMapProp.h"
-#include "misc.h"
 
 QRecursiveMutex CMapItem::mutexActiveMaps;
 

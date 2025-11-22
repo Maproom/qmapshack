@@ -77,7 +77,7 @@ void CProj::init(const char* crsSrc, const char* crsTar) {
     return;
   }
 
-  qDebug() << "Create projection:" << _strProjSrc << "->" << _strProjTar;
+  // qDebug() << "Create projection:" << _strProjSrc << "->" << _strProjTar;
 }
 
 bool CProj::_isLatLong(const QString& crs) const {

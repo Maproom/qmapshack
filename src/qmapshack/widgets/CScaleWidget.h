@@ -16,16 +16,16 @@
 
 **********************************************************************************************/
 
-#ifndef CSCALELABEL_H
-#define CSCALELABEL_H
+#ifndef CSCALEWIDGET_H
+#define CSCALEWIDGET_H
 
-#include <QLabel>
+#include <QWidget>
 
-class CScaleLabel : public QLabel {
+class CScaleWidget : public QWidget {
   Q_OBJECT
  public:
-  CScaleLabel(QWidget* parent);
-  virtual ~CScaleLabel() = default;
+  CScaleWidget(QWidget* parent);
+  virtual ~CScaleWidget() = default;
 
   void setValue(qreal min, qreal scale, qreal max);
 
@@ -40,4 +40,4 @@ class CScaleLabel : public QLabel {
   qreal currentScale = 0;
 };
 
-#endif  // CSCALELABEL_H
+#endif  // CSCALEWIDGET_H

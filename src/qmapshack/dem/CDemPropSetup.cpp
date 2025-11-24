@@ -36,6 +36,7 @@ CDemPropSetup::CDemPropSetup(IDem* demfile, CDemDraw* dem) : IDemProp(demfile, d
   slopeSpins[3] = spinSlope3;
   slopeSpins[4] = spinSlope4;
 
+  scale = dem->getScale();
   CDemPropSetup::slotPropertiesChanged();
 
   connect(sliderOpacity, &QSlider::valueChanged, demfile, &IDem::slotSetOpacity);
@@ -110,7 +111,7 @@ void CDemPropSetup::slotPropertiesChanged() {
   toolSetMinScale->setChecked(demfile->getMinScale() != NOFLOAT);
   toolSetMaxScale->setChecked(demfile->getMaxScale() != NOFLOAT);
 
-  labelScale->setValue(demfile->getMinScale(), scale.x(), demfile->getMaxScale());
+  widgetScale->setValue(demfile->getMinScale(), scale.x(), demfile->getMaxScale());
 
   checkHillshading->setChecked(demfile->doHillshading());
   sliderHillshading->setValue(demfile->getFactorHillshading());

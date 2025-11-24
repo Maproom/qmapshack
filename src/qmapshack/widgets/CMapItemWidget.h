@@ -62,7 +62,7 @@ class CMapItemWidget : public QWidget {
   void slotSetChecked(bool yes);
 
  private:
-  const QString type;
+  const QString typeIMap;
   eStatus status = eStatus::Unused;
   QString mapName;
   QVBoxLayout* layout1;

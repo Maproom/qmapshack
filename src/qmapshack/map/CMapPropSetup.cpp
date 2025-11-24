@@ -30,6 +30,7 @@ QPointF CMapPropSetup::scale;
 CMapPropSetup::CMapPropSetup(IMap* mapfile, CMapDraw* map) : IMapProp(mapfile, map) {
   setupUi(this);
 
+  scale = map->getScale();
   CMapPropSetup::slotPropertiesChanged();
 
   connect(sliderOpacity, &QSlider::valueChanged, mapfile, &IMap::slotSetOpacity);
@@ -84,7 +85,7 @@ void CMapPropSetup::slotPropertiesChanged() /* override */
   qreal maxScale = mapfile->getMaxScale();
   toolSetMaxScale->setChecked(maxScale != NOFLOAT);
 
-  labelScale->setValue(mapfile->getMinScale(), scale.x(), mapfile->getMaxScale());
+  widgetScale->setValue(mapfile->getMinScale(), scale.x(), mapfile->getMaxScale());
 
   // vector maps properties
   checkPolygons->setChecked(mapfile->getShowPolygons());

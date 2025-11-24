@@ -35,7 +35,7 @@
       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Change opacity of layer&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="orientation">
-      <enum>Qt::Horizontal</enum>
+      <enum>Qt::Orientation::Horizontal</enum>
      </property>
     </widget>
    </item>
@@ -70,20 +70,7 @@ zoom-in for use of the DEM data.</string>
       </widget>
      </item>
      <item>
-      <widget class="CScaleLabel" name="labelScale">
-       <property name="toolTip">
-        <string>Control the zoom range for which the DEM data 
-is used. Use the two buttons left and right to define 
-the actual zoom as either maximum zoom-in or zoom-out.
-</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="scaledContents">
-        <bool>true</bool>
-       </property>
-      </widget>
+      <widget class="CScaleWidget" name="widgetScale" native="true"/>
      </item>
      <item>
       <widget class="QToolButton" name="toolSetMaxScale">
@@ -115,7 +102,7 @@ zoom-out for use of the DEM data.</string>
    <item>
     <widget class="Line" name="line_3">
      <property name="orientation">
-      <enum>Qt::Horizontal</enum>
+      <enum>Qt::Orientation::Horizontal</enum>
      </property>
     </widget>
    </item>
@@ -154,7 +141,7 @@ zoom-out for use of the DEM data.</string>
         <number>2</number>
        </property>
        <property name="orientation">
-        <enum>Qt::Horizontal</enum>
+        <enum>Qt::Orientation::Horizontal</enum>
        </property>
       </widget>
      </item>
@@ -191,7 +178,7 @@ zoom-out for use of the DEM data.</string>
         <number>100</number>
        </property>
        <property name="orientation">
-        <enum>Qt::Horizontal</enum>
+        <enum>Qt::Orientation::Horizontal</enum>
        </property>
       </widget>
      </item>
@@ -200,7 +187,7 @@ zoom-out for use of the DEM data.</string>
    <item>
     <widget class="Line" name="line_4">
      <property name="orientation">
-      <enum>Qt::Horizontal</enum>
+      <enum>Qt::Orientation::Horizontal</enum>
      </property>
     </widget>
    </item>
@@ -223,10 +210,10 @@ zoom-out for use of the DEM data.</string>
         <string>Select color scheme.</string>
        </property>
        <property name="insertPolicy">
-        <enum>QComboBox::NoInsert</enum>
+        <enum>QComboBox::InsertPolicy::NoInsert</enum>
        </property>
        <property name="sizeAdjustPolicy">
-        <enum>QComboBox::AdjustToContents</enum>
+        <enum>QComboBox::SizeAdjustPolicy::AdjustToContents</enum>
        </property>
       </widget>
      </item>
@@ -295,7 +282,7 @@ zoom-out for use of the DEM data.</string>
         <bool>false</bool>
        </property>
        <property name="buttonSymbols">
-        <enum>QAbstractSpinBox::NoButtons</enum>
+        <enum>QAbstractSpinBox::ButtonSymbols::NoButtons</enum>
        </property>
        <property name="accelerated">
         <bool>false</bool>
@@ -398,7 +385,7 @@ zoom-out for use of the DEM data.</string>
         <bool>false</bool>
        </property>
        <property name="buttonSymbols">
-        <enum>QAbstractSpinBox::NoButtons</enum>
+        <enum>QAbstractSpinBox::ButtonSymbols::NoButtons</enum>
        </property>
        <property name="suffix">
         <string>°</string>
@@ -482,7 +469,7 @@ zoom-out for use of the DEM data.</string>
         <bool>false</bool>
        </property>
        <property name="buttonSymbols">
-        <enum>QAbstractSpinBox::NoButtons</enum>
+        <enum>QAbstractSpinBox::ButtonSymbols::NoButtons</enum>
        </property>
        <property name="suffix">
         <string>°</string>
@@ -566,7 +553,7 @@ zoom-out for use of the DEM data.</string>
         <bool>false</bool>
        </property>
        <property name="buttonSymbols">
-        <enum>QAbstractSpinBox::NoButtons</enum>
+        <enum>QAbstractSpinBox::ButtonSymbols::NoButtons</enum>
        </property>
        <property name="suffix">
         <string>°</string>
@@ -650,7 +637,7 @@ zoom-out for use of the DEM data.</string>
         <bool>false</bool>
        </property>
        <property name="buttonSymbols">
-        <enum>QAbstractSpinBox::NoButtons</enum>
+        <enum>QAbstractSpinBox::ButtonSymbols::NoButtons</enum>
        </property>
        <property name="suffix">
         <string>°</string>
@@ -668,7 +655,7 @@ zoom-out for use of the DEM data.</string>
    <item>
     <widget class="Line" name="line_2">
      <property name="orientation">
-      <enum>Qt::Horizontal</enum>
+      <enum>Qt::Orientation::Horizontal</enum>
      </property>
     </widget>
    </item>
@@ -726,7 +713,7 @@ zoom-out for use of the DEM data.</string>
    <item>
     <widget class="Line" name="line">
      <property name="orientation">
-      <enum>Qt::Horizontal</enum>
+      <enum>Qt::Orientation::Horizontal</enum>
      </property>
     </widget>
    </item>
@@ -841,9 +828,10 @@ zoom-out for use of the DEM data.</string>
  </widget>
  <customwidgets>
   <customwidget>
-   <class>CScaleLabel</class>
-   <extends>QLabel</extends>
-   <header location="global">widgets/CScaleLabel.h</header>
+   <class>CScaleWidget</class>
+   <extends>QWidget</extends>
+   <header>widgets/CScaleWidget.h</header>
+   <container>1</container>
   </customwidget>
   <customwidget>
    <class>CTinySpinBox</class>

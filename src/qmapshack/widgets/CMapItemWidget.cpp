@@ -26,29 +26,27 @@
 constexpr Qt::GlobalColor kColorOut = Qt::lightGray;
 constexpr Qt::GlobalColor kColorIn = Qt::darkGreen;
 
-class CIndicator : public QWidget {
+class CIndicator final : public QWidget {
  public:
   CIndicator(QWidget* parent) : QWidget(parent) {}
 
-  void setColor(Qt::GlobalColor c) {
+  void setColor(const QColor& c) {
     color = c;
     update();
   }
 
  protected:
   void paintEvent(QPaintEvent* e) override {
-    QPainter p;
-    p.begin(this);
+    QPainter p(this);
     USE_ANTI_ALIASING(p, true);
     p.fillRect(rect(), color);
-    p.end();
   }
 
  private:
   QColor color = Qt::lightGray;
 };
 
-CMapItemWidget::CMapItemWidget(const QString& type) : type(type) {
+CMapItemWidget::CMapItemWidget(const QString& typeIMap) : typeIMap(typeIMap) {
   labelName = new QLabel(this);
   labelName->setAttribute(Qt::WA_TransparentForMouseEvents, true);
   labelStatus = new QLabel(tr("unknown"), this);
@@ -58,11 +56,7 @@ CMapItemWidget::CMapItemWidget(const QString& type) : type(type) {
   labelStatus->setAttribute(Qt::WA_TransparentForMouseEvents, true);
 
   indicatorVisibility = new CIndicator(this);
-  indicatorVisibility->setMinimumWidth(5);
-  indicatorVisibility->setMaximumWidth(5);
-  indicatorVisibility->setMinimumHeight(20);
-  indicatorVisibility->setMaximumHeight(20);
-  indicatorVisibility->setAutoFillBackground(true);
+  indicatorVisibility->setFixedSize(5, 20);
 
   buttonActivate = new QToolButton(this);
   buttonActivate->setCheckable(true);
@@ -103,7 +97,7 @@ void CMapItemWidget::setStatus(eStatus status) {
       labelName->setText(mapName);
       labelName->setEnabled(false);
       buttonActivate->setChecked(false);
-      buttonActivate->setToolTip(tr("Activate %1").arg(type));
+      buttonActivate->setToolTip(tr("Activate %1").arg(typeIMap));
       indicatorVisibility->hide();
       break;
 
@@ -112,7 +106,7 @@ void CMapItemWidget::setStatus(eStatus status) {
       labelName->setText("<b>" + mapName + "</b>");
       labelName->setEnabled(true);
       buttonActivate->setChecked(true);
-      buttonActivate->setToolTip(tr("Deactivate %1").arg(type));
+      buttonActivate->setToolTip(tr("Deactivate %1").arg(typeIMap));
       indicatorVisibility->show();
       break;
 
@@ -121,7 +115,7 @@ void CMapItemWidget::setStatus(eStatus status) {
       labelName->setText(mapName);
       labelName->setEnabled(false);
       buttonActivate->setChecked(false);
-      buttonActivate->setToolTip(tr("Activate %1").arg(type));
+      buttonActivate->setToolTip(tr("Activate %1").arg(typeIMap));
       indicatorVisibility->hide();
       break;
 
@@ -130,7 +124,7 @@ void CMapItemWidget::setStatus(eStatus status) {
       labelName->setText(mapName);
       labelStatus->setText("-");
       buttonActivate->setChecked(false);
-      buttonActivate->setToolTip(tr("Activate %1").arg(type));
+      buttonActivate->setToolTip(tr("Activate %1").arg(typeIMap));
       indicatorVisibility->hide();
       break;
   }
@@ -152,9 +146,9 @@ void CMapItemWidget::slotScaleChanged(const QPointF& scale) {
   }
   if (map->isOutOfScale(scale)) {
     indicatorVisibility->setColor(kColorOut);
-    indicatorVisibility->setToolTip(tr("%1 is not visible at current scale").arg(type));
+    indicatorVisibility->setToolTip(tr("%1 is not visible at current scale").arg(typeIMap));
   } else {
     indicatorVisibility->setColor(kColorIn);
-    indicatorVisibility->setToolTip(tr("%1 is visible at current scale").arg(type));
+    indicatorVisibility->setToolTip(tr("%1 is visible at current scale").arg(typeIMap));
   }
 }

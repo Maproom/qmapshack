@@ -329,7 +329,7 @@ set( SRCS
     widgets/CMapItemWidget.cpp
     widgets/CPhotoAlbum.cpp
     widgets/CSelectDoubleListWidget.cpp
-    widgets/CScaleLabel.cpp
+    widgets/CScaleWidget.cpp
     widgets/CTemplateWidget.cpp
     widgets/CTextEdit.cpp
     widgets/CTextEditWidget.cpp
@@ -700,7 +700,7 @@ set( HDRS
     widgets/CMapItemWidget.h
     widgets/CPhotoAlbum.h
     widgets/CSelectDoubleListWidget.h
-    widgets/CScaleLabel.h
+    widgets/CScaleWidget.h
     widgets/CTemplateWidget.h
     widgets/CTextEdit.h
     widgets/CTextEditWidget.h

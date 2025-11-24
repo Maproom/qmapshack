@@ -38,7 +38,7 @@ CDemItem::~CDemItem() {}
 
 QWidget* CDemItem::itemWidget() {
   if (widget.isNull()) {
-    widget = new CMapItemWidget();
+    widget = new CMapItemWidget(tr("DEM"));
     QFileInfo fi(filename);
     setName(fi.completeBaseName().replace("_", " "));
 
@@ -54,6 +54,7 @@ QWidget* CDemItem::itemWidget() {
 
     connect(widget, &CMapItemWidget::sigActivate, this, &CDemItem::slotActivate);
     connect(widget, &CMapItemWidget::destroyed, this, [this] { emit sigUpdateWidget(this); });
+    connect(dem, &CDemDraw::sigScaleChanged, widget, &CMapItemWidget::slotScaleChanged);
   }
   return widget;
 }
@@ -258,6 +259,7 @@ bool CDemItem::activate() {
   // Add the demfile setup dialog as child of this item
   showChildren(true);
 
+  widget->setDrawObject(demfile, dem->getScale());
   setStatus(CMapItemWidget::eStatus::Active);
   return true;
 }

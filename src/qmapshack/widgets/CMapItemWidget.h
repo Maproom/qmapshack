@@ -21,9 +21,13 @@
 
 #include <QHBoxLayout>
 #include <QLabel>
+#include <QPointer>
 #include <QToolButton>
 #include <QVBoxLayout>
 #include <QWidget>
+
+class IDrawObject;
+class CIndicator;
 
 class CMapItemWidget : public QWidget {
   Q_OBJECT
@@ -35,7 +39,7 @@ class CMapItemWidget : public QWidget {
     Unused,
   };
 
-  CMapItemWidget();
+  CMapItemWidget(const QString& type);
   ~CMapItemWidget() override;
 
   void setName(const QString& name) {
@@ -46,20 +50,29 @@ class CMapItemWidget : public QWidget {
   void setStatus(eStatus status);
   eStatus getStatus() const { return status; }
 
+  void setDrawObject(IDrawObject* object, const QPointF& scale);
+
  signals:
   void sigActivate(bool);
+
+ public slots:
+  void slotScaleChanged(const QPointF& scale);
 
  private slots:
   void slotSetChecked(bool yes);
 
  private:
+  const QString type;
   eStatus status = eStatus::Unused;
   QString mapName;
   QVBoxLayout* layout1;
   QHBoxLayout* layout2;
   QLabel* labelName;
   QLabel* labelStatus;
+  CIndicator* indicatorVisibility;
   QToolButton* buttonActivate;
+
+  QPointer<IDrawObject> map;
 };
 
 #endif  // CMAPITEMWIDGET_H

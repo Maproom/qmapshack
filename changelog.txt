@@ -4,6 +4,7 @@ V1.XX.X
 [QMS-873] Complete rework of map and DEM handling
 [QMS-876] Ghost track at right click of highlighted track
 [QMS-878] BRouter: no route time, no turn points, no navigation instructions
+[QMS-882] Add visibility indicator to maps and DEM
 
 V1.18.2
 [QMS-672] Fix track point timestamps to QDateTime UTC conversion

@@ -84,6 +84,13 @@ class IDrawObject : public QObject {
    */
   virtual void getLayers(QListWidget& list);
 
+  /**
+     @brief Test if the given scale is out of the min/max scale
+     @param scale A scale factor for x and y axis
+     @return True if x scale is out of the min/max range
+   */
+  bool isOutOfScale(const QPointF& scale) const;
+
  public slots:
   /**
      @brief Write opacity value
@@ -98,13 +105,6 @@ class IDrawObject : public QObject {
   void sigPropertiesChanged();
 
  protected:
-  /**
-     @brief Test if the given scale is out of the min/max scale
-     @param scale A scale factor for x and y axis
-     @return True if x scale is out of the min/max range
-   */
-  bool isOutOfScale(const QPointF& scale) const;
-
   /**
      @brief Setup a map cache using cachePath, cacheSizeMB and cacheExpiration
 

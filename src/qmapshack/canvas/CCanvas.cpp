@@ -1029,7 +1029,9 @@ void CCanvas::setScales(const scales_type_e type) {
 
 CCanvas::scales_type_e CCanvas::getScalesType() { return map->getScalesType(); }
 
-qreal CCanvas::getElevationAt(const QPointF& pos) const { return dem->getElevationAt(pos); }
+qreal CCanvas::getElevationAt(const QPointF& pos, bool checkScale) const {
+  return dem->getElevationAt(pos, checkScale);
+}
 
 void CCanvas::getElevationAt(const QPolygonF& pos, QPolygonF& ele) const { return dem->getElevationAt(pos, ele); }
 

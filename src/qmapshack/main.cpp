@@ -18,7 +18,6 @@
 
 #include <QNetworkProxyFactory>
 #include <QtWidgets>
-#include <iostream>
 
 #include "CMainWindow.h"
 #include "CSingleInstanceProxy.h"

@@ -660,7 +660,7 @@ void CGisWorkspace::addEleToWptTrkByKey(const QList<IGisItem::key_t>& keys) {
       case IGisItem::eTypeWpt: {
         CGisItemWpt* wpt = dynamic_cast<CGisItemWpt*>(item);
         if (wpt != nullptr) {
-          qreal ele = canvas->getElevationAt(wpt->getPosition() * DEG_TO_RAD);
+          qreal ele = canvas->getElevationAt(wpt->getPosition() * DEG_TO_RAD, false);
           wpt->setElevation(ele == NOFLOAT ? NOINT : ele);
         }
         break;

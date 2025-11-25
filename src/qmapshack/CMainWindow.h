@@ -103,7 +103,7 @@ class CMainWindow : public QMainWindow, private Ui::IMainWindow {
      @param pos   a position in units of [rad]
      @return If no elevation value can be found for the position NOFLOAT is returned.
    */
-  qreal getElevationAt(const QPointF& pos) const;
+  qreal getElevationAt(const QPointF& pos, bool checkScale) const;
   void getElevationAt(const QPolygonF& pos, QPolygonF& ele) const;
   void getElevationAt(SGisLine& line) const;
 

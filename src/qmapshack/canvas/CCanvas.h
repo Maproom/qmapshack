@@ -82,7 +82,7 @@ class CCanvas : public QWidget {
   void setScales(const scales_type_e type);
   scales_type_e getScalesType();
 
-  qreal getElevationAt(const QPointF& pos) const;
+  qreal getElevationAt(const QPointF& pos, bool checkScale) const;
   void getElevationAt(const QPolygonF& pos, QPolygonF& ele) const;
   void getElevationAt(SGisLine& line) const;
 

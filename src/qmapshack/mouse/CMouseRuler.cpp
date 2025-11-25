@@ -155,7 +155,7 @@ void CMouseRuler::slotToWpt() {
     } else {
       first = false;
     }
-    qreal ele = canvas->getElevationAt(pt);
+    qreal ele = canvas->getElevationAt(pt, false);
     CGisItemWpt* wpt = new CGisItemWpt(pt * RAD_TO_DEG, ele, QDateTime::currentDateTimeUtc(), name, icon, project);
     wpt->updateDecoration(CGisItemWpt::eMarkChanged, CGisItemWpt::eMarkNone);
   }
@@ -294,8 +294,8 @@ void CMouseRuler::updateStatus(const QPolygonF& line) {
 
     msg += "<td align=right>" + val + unit + "</td>";
 
-    qreal ele1 = qRound(canvas->getElevationAt(pt1));
-    qreal ele2 = qRound(canvas->getElevationAt(pt2));
+    qreal ele1 = qRound(canvas->getElevationAt(pt1, false));
+    qreal ele2 = qRound(canvas->getElevationAt(pt2, false));
 
     if ((ele1 != NOFLOAT) && (ele2 != NOFLOAT)) {
       int delta = ele2 - ele1;
@@ -386,8 +386,8 @@ void CMouseRuler::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect& 
       meter2whatever(d, val, unit);
       QString str = val + unit;
 
-      qreal ele1 = canvas->getElevationAt(pt1);
-      qreal ele2 = canvas->getElevationAt(pt2);
+      qreal ele1 = canvas->getElevationAt(pt1, false);
+      qreal ele2 = canvas->getElevationAt(pt2, false);
 
       if ((ele1 != NOFLOAT) && (ele2 != NOFLOAT) && scrOptRuler->toolShowAscent->isChecked()) {
         int delta = qRound(ele2 - ele1);

@@ -749,15 +749,15 @@ void CMainWindow::resetMouse() {
   }
 }
 
-qreal CMainWindow::getElevationAt(const QPointF& pos) const {
+qreal CMainWindow::getElevationAt(const QPointF& pos, bool checkScale) const {
   CCanvas* canvas = getVisibleCanvas();
   if (canvas) {
-    return canvas->getElevationAt(pos);
+    return canvas->getElevationAt(pos, checkScale);
   } else {
     for (int i = 0; i < tabWidget->count(); i++) {
       canvas = dynamic_cast<CCanvas*>(tabWidget->widget(i));
       if (canvas) {
-        return canvas->getElevationAt(pos);
+        return canvas->getElevationAt(pos, checkScale);
       }
     }
   }

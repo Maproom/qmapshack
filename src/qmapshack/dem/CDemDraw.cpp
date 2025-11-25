@@ -311,7 +311,7 @@ qreal CDemDraw::getSlopeAt(const QPointF& pos, bool checkScale) {
 
 void CDemDraw::getElevationAt(const QPolygonF& pos, QPolygonF& ele) {
   for (int i = 0; i < pos.size(); i++) {
-    qreal tmp = getElevationAt(pos[i]);
+    qreal tmp = getElevationAt(pos[i], false);
     ele[i].ry() = (tmp == NOFLOAT) ? NOFLOAT : tmp;
   }
 }

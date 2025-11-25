@@ -37,7 +37,7 @@ class CDemDraw : public IDrawContext {
   void saveConfig(QSettings& cfg);
   void loadConfig(QSettings& cfg);
 
-  qreal getElevationAt(const QPointF& pos, bool checkScale = false);
+  qreal getElevationAt(const QPointF& pos, bool checkScale);
   void getElevationAt(const QPolygonF& pos, QPolygonF& ele);
   void getElevationAt(SGisLine& line);
   qreal getSlopeAt(const QPointF& pos, bool checkScale = false);
@@ -115,7 +115,7 @@ class CDemDraw : public IDrawContext {
   /// the list of paths to search maps
   static QStringList demPaths;
 
-	/// all existing CDemDraw instances
+  /// all existing CDemDraw instances
   static QList<CDemDraw*> dems;
 
   /// a list of supported map formats

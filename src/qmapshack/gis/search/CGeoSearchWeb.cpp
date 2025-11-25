@@ -131,7 +131,7 @@ void CGeoSearchWeb::slotSearchWeb(int serviceId, const QPointF pt) const {
   url = url.replace("%1", QString::number(pt.x(), 'g', 8));
   url = url.replace("%2", QString::number(pt.y(), 'g', 8));
 
-  qreal ele = CMainWindow::self().getElevationAt(pt);
+  qreal ele = CMainWindow::self().getElevationAt(pt, false);
   if (ele == NOFLOAT) {
     ele = 0;
   }

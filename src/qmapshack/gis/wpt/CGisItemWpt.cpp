@@ -66,7 +66,7 @@ CGisItemWpt::CGisItemWpt(const QPointF& pos, qreal ele, const QDateTime& time, c
 CGisItemWpt::CGisItemWpt(const QPointF& pos, const QString& name, const QString& icon, IGisProject* project)
     : CGisItemWpt(pos, NOFLOAT, QDateTime::currentDateTimeUtc(), name, icon, project) {
   flags = eFlagCreatedInQms | eFlagWriteAllowed;
-  qreal ele = CMainWindow::self().getElevationAt(pos * DEG_TO_RAD);
+  qreal ele = CMainWindow::self().getElevationAt(pos * DEG_TO_RAD, false);
   wpt.ele = (ele == NOFLOAT) ? NOINT : qRound(ele);
 
   detBoundingRect();
@@ -87,7 +87,7 @@ CGisItemWpt::CGisItemWpt(const QPointF& pos, const CGisItemWpt& parentWpt, IGisP
   history.events.clear();
   flags = eFlagCreatedInQms | eFlagWriteAllowed;
 
-  qreal ele = CMainWindow::self().getElevationAt(pos * DEG_TO_RAD);
+  qreal ele = CMainWindow::self().getElevationAt(pos * DEG_TO_RAD, false);
   wpt.ele = (ele == NOFLOAT) ? NOINT : qRound(ele);
 
   setNogoFlag(parentWpt.isNogo());
@@ -158,7 +158,6 @@ CGisItemWpt::CGisItemWpt(const CTwoNavProject::wpt_t& tnvWpt, IGisProject* proje
   setupHistory();
   updateDecoration(eMarkNone, eMarkNone);
 }
-
 
 CGisItemWpt::CGisItemWpt(const wpt_t& data, IGisProject* project)
     : IGisItem(project, eTypeWpt, NOIDX), proximity(NOFLOAT), posScreen(NOPOINTF) {

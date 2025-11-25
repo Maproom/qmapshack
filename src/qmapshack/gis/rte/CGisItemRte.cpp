@@ -709,6 +709,7 @@ void CGisItemRte::reset() {
   rte.totalTime = 0;
   rte.lastRoutedTime = QDateTime();
   rte.lastRoutedWith = "";
+  rte.cmt = "";
 
   deriveSecondaryData();
   updateHistory();
@@ -826,6 +827,7 @@ void CGisItemRte::setResultFromRoutino(Routino_Output* route, const QString& opt
 
   rte.lastRoutedTime = QDateTime::currentDateTimeUtc();
   rte.lastRoutedWith = "Routino, " + options;
+  rte.cmt = ""; // Cleanup possible BRouter comment
 
   deriveSecondaryData();
   updateHistory();
@@ -833,6 +835,10 @@ void CGisItemRte::setResultFromRoutino(Routino_Output* route, const QString& opt
 
 void CGisItemRte::setResultFromBRouter(const QDomDocument& xml, const QString& options) {
   QMutexLocker lock(&mutexItems);
+
+  rte.totalDistance = 0.;
+  rte.totalTime = 0;
+  rte.cmt = ""; 
 
   QVector<subpt_t> shape;
 
@@ -842,28 +848,30 @@ void CGisItemRte::setResultFromBRouter(const QDomDocument& xml, const QString& o
   const QDomElement& xmlShapePoints = xmlShape.firstChildElement("trkseg");
   const QDomNodeList& xmlLatLng = xmlShapePoints.elementsByTagName("trkpt");
   const qint32 N = xmlLatLng.size();
-  qreal distance = 0;
   for (int n = 0; n < N; n++) {
     const QDomElement& elem = xmlLatLng.item(n).toElement();
     shape << subpt_t();
     subpt_t& subpt = shape.last();
-    subpt.lon = elem.attribute("lon").toFloat();
-    subpt.lat = elem.attribute("lat").toFloat();
-    subpt.ele = elem.firstChildElement("ele").text().toFloat();
+    subpt.lon = elem.attribute("lon").toDouble();
+    subpt.lat = elem.attribute("lat").toDouble();
+    subpt.ele = elem.firstChildElement("ele").text().toDouble();
     if (n > 0) {
-      const subpt_t& other = shape.at(n-1);
-      distance += GPS_Math_Distance(subpt.lon * DEG_TO_RAD, subpt.lat * DEG_TO_RAD, other.lon * DEG_TO_RAD, other.lat * DEG_TO_RAD);
+      const subpt_t& other = shape[n-1];
+      rte.totalDistance += GPS_Math_Distance(subpt.lon * DEG_TO_RAD, subpt.lat * DEG_TO_RAD,
+                                             other.lon * DEG_TO_RAD, other.lat * DEG_TO_RAD);
     }
-    subpt.distance = distance;
+    subpt.distance = rte.totalDistance;
   }
 
   // build list of maneuvers
-  rte.totalTime = 0;
   const QDomElement& xmlLeg = gpx.firstChildElement("rte");
   if (!xmlLeg.isNull()) {
     const QDomNodeList& xmlManeuvers = xmlLeg.elementsByTagName("rtept");
     const qint32 M = xmlManeuvers.size();
-    QDateTime time = QDateTime::currentDateTimeUtc();
+    const QDateTime& time = QDateTime::currentDateTimeUtc();
+    int prevIdx = -1;
+    QString valDist, unitDist;
+    QString valTime, unitTime;
     for (int m = 0; m < M; m++) {
       const QDomNode& xmlManeuver = xmlManeuvers.item(m);
       /* <rtept lat="48.322380" lon="11.601220">
@@ -875,11 +883,12 @@ void CGisItemRte::setResultFromBRouter(const QDomDocument& xml, const QString& o
            <offset>76</offset>
           </extensions>
          </rtept> */
-      quint32 idx = xmlManeuver.firstChildElement("extensions").firstChildElement("offset").text().toUInt();
+      const QDomElement& extension = xmlManeuver.firstChildElement("extensions");
+      int idx = extension.firstChildElement("offset").text().toInt();
       subpt_t& subpt = shape[idx];
       subpt.type = subpt_t::eTypeJunct;
       subpt.instruction = xmlManeuver.firstChildElement("desc").text();
-      const QString& command = xmlManeuver.firstChildElement("extensions").firstChildElement("turn").text();
+      const QString& command = extension.firstChildElement("turn").text();
       // commands see at https://github.com/abrensch/brouter/blob/master/docs/features/voicehints.md
       if (command == "C")
       {
@@ -932,11 +941,11 @@ void CGisItemRte::setResultFromBRouter(const QDomDocument& xml, const QString& o
       } else if (command.startsWith("RNDB"))
       {
         subpt.bearing = 0;
-        subpt.instruction = tr("Roundabout exit %1").arg(command.last(command.size()-4));
+        subpt.instruction = tr("Roundabout exit %1").arg(command.mid(4));
       } else if (command.startsWith("RNLB"))
       {
         subpt.bearing = 0;
-        subpt.instruction = tr("Roundabout left exit %1").arg(command.last(command.size()-4));
+        subpt.instruction = tr("Roundabout left exit %1").arg(command.mid(4));
       } else if (command == "EL")
       {
         subpt.bearing = 0;
@@ -958,13 +967,20 @@ void CGisItemRte::setResultFromBRouter(const QDomDocument& xml, const QString& o
       }
       subpt.time = time.addSecs(rte.totalTime);
       rte.totalTime += xmlManeuver.firstChildElement("extensions").firstChildElement("time").text().toUInt();
+      if (prevIdx != -1) {
+        subpt_t& other = shape[prevIdx];
+        IUnit::self().meter2distance(subpt.distance - other.distance, valDist, unitDist);
+        IUnit::self().seconds2time(other.time.secsTo(subpt.time), valTime, unitTime);
+        other.instruction += "\n" + tr("Follow the route for %1%2 or %3%4")
+            .arg(valDist, unitDist, valTime, unitTime);
+      }
+      prevIdx = idx;
     }
   }
 
   // match routepoints to shape
   qint32 startIdx = 0;
   qint32 minDistIdx = 0;
-
 
   for (qint32 rtIdx = 0; rtIdx < rte.pts.size() - 1; rtIdx++) {
     rtept_t& routePoint = rte.pts[rtIdx];
@@ -1004,17 +1020,9 @@ void CGisItemRte::setResultFromBRouter(const QDomDocument& xml, const QString& o
     if (node.isComment()) {
       const QString& commentTxt = node.toComment().data();
       // ' track-length = 3181 filtered ascend = 70 plain-ascend = 5 cost=8491 energy=.0kwh time=16m 30s '
-      static const QRegularExpression rxAscDes(
-          "(?:\\s*track-length\\s*=\\s*)(-?\\d+)(?:\\s*)"
-          "(filtered ascend\\s*=\\s*-?\\d+)(?:\\s*)"
-          "(plain-ascend\\s*=\\s*-?\\d+)(?:\\s*)"
-          "(cost\\s*=\\s*-?\\d+)(?:\\s*)(?:\\s*)"
-          "(energy\\s*=\\s*.*kwh)?(?:\\s*)",
-          QRegularExpression::CaseInsensitiveOption);
-      const QRegularExpressionMatch& match = rxAscDes.match(commentTxt);
+      const QRegularExpressionMatch& match = QRegularExpression("(filtered.*)(?:\\s+time)").match(commentTxt);
       if (match.hasMatch()) {
-        rte.totalDistance = match.captured(1).toFloat();
-        rte.cmt = QString("%1, %2, %3, %4").arg(match.captured(2), match.captured(3), match.captured(4), match.captured(5));
+        rte.cmt = match.captured(1).replace(QRegularExpression("\\s*=\\s*"), "=");
       }
       break;
     }

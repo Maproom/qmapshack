@@ -32,6 +32,7 @@ int main(int argc, char** argv) {
   QCoreApplication::setApplicationName("QMapShack");
   QCoreApplication::setOrganizationName("QLandkarte");
   QCoreApplication::setOrganizationDomain("qlandkarte.org");
+  QCoreApplication::setApplicationVersion(VER_STR);
 
   IAppSetup* env = IAppSetup::getPlatformInstance();
   env->processArguments();

@@ -36,6 +36,26 @@ void CMapTreeWidget::dragEnterEvent(QDragEnterEvent* e) {
   QTreeWidget::dragEnterEvent(e);
 }
 
+void CMapTreeWidget::dragLeaveEvent(QDragLeaveEvent* e) {
+  CMapItem* item = dynamic_cast<CMapItem*>(currentItem());
+  if (item) {
+    item->showChildren(false);
+  }
+
+  QTreeWidget::dragLeaveEvent(e);
+
+  if (item) {
+    item->showChildren(true);
+    QPointer<CMapItem> pMap(item);
+    QTimer::singleShot(100, this, [this, pMap]() {
+      if (!pMap.isNull()) setItemWidget(pMap, 0, pMap->itemWidget());
+    });
+  }
+
+  setCurrentItem(nullptr);
+  emit sigChanged();
+}
+
 void CMapTreeWidget::dropEvent(QDropEvent* e) {
   CMapItem* item = dynamic_cast<CMapItem*>(currentItem());
   if (item) {

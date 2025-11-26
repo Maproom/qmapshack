@@ -35,6 +35,7 @@ class CMapTreeWidget : public QTreeWidget {
 
  protected:
   void dragEnterEvent(QDragEnterEvent* e) override;
+  void dragLeaveEvent(QDragLeaveEvent* e) override;
   void dropEvent(QDropEvent* e) override;
 };
 

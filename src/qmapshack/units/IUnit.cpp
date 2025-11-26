@@ -678,20 +678,21 @@ QString IUnit::datetime2string(const QDateTime& time, time_format_e format, cons
       break;
   }
 
-  QDateTime tmp = time.toTimeZone(tz);
+  const QDateTime& tmp = time.toTimeZone(tz);
+  const QLocale& locale = QLocale::system();
 
   switch (format) {
     case eTimeFormatLong:
-      return tmp.toString(QLocale().dateTimeFormat(useShortFormat ? QLocale::ShortFormat : QLocale::LongFormat));
+      return locale.toString(tmp, locale.dateTimeFormat(useShortFormat ? QLocale::ShortFormat : QLocale::LongFormat));
     case eTimeFormatShort:
-      return tmp.toString(QLocale().dateTimeFormat(QLocale::ShortFormat));
+      return locale.toString(tmp, locale.dateTimeFormat(QLocale::ShortFormat));
     case eTimeFormatShortPlusSecs:
-      return QLocale().toString(tmp, "yyyy-MM-dd hh:mm:ss");
+      return locale.toString(tmp, "yyyy-MM-dd hh:mm:ss");
     case eTimeFormatIso:
       return tmp.toString(Qt::ISODate);
   }
 
-  return tmp.toString(QLocale().dateTimeFormat(QLocale::LongFormat));
+  return locale.toString(tmp, QLocale::system().dateTimeFormat(QLocale::LongFormat));
 }
 
 QByteArray IUnit::pos2timezone(const QPointF& pos) {

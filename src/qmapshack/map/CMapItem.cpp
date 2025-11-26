@@ -58,6 +58,7 @@ QWidget* CMapItem::itemWidget() {
       setStatus(CMapItemWidget::eStatus::Missing);
     }
 
+    widget->setDrawObject(mapfile, map->getScale());
     connect(widget, &CMapItemWidget::sigActivate, this, &CMapItem::slotActivate);
     connect(widget, &CMapItemWidget::destroyed, this, [this] { emit sigUpdateWidget(this); });
     connect(map, &CMapDraw::sigScaleChanged, widget, &CMapItemWidget::slotScaleChanged);

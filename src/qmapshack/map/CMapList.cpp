@@ -27,6 +27,13 @@
 
 CMapTreeWidget::CMapTreeWidget(QWidget* parent) : QTreeWidget(parent) {}
 
+void CMapTreeWidget::restoreItemWidgetDelayed(CMapItem* map) {
+  QPointer<CMapItem> pMap(map);
+  QTimer::singleShot(100, this, [this, pMap]() {
+    if (!pMap.isNull()) setItemWidget(pMap, 0, pMap->itemWidget());
+  });
+}
+
 void CMapTreeWidget::dragEnterEvent(QDragEnterEvent* e) {
   collapseAll();
   CMapItem* item = dynamic_cast<CMapItem*>(currentItem());
@@ -46,10 +53,7 @@ void CMapTreeWidget::dragLeaveEvent(QDragLeaveEvent* e) {
 
   if (item) {
     item->showChildren(true);
-    QPointer<CMapItem> pMap(item);
-    QTimer::singleShot(100, this, [this, pMap]() {
-      if (!pMap.isNull()) setItemWidget(pMap, 0, pMap->itemWidget());
-    });
+    restoreItemWidgetDelayed(item);
   }
 
   setCurrentItem(nullptr);
@@ -66,10 +70,7 @@ void CMapTreeWidget::dropEvent(QDropEvent* e) {
 
   if (item) {
     item->showChildren(true);
-    QPointer<CMapItem> pMap(item);
-    QTimer::singleShot(100, this, [this, pMap]() {
-      if (!pMap.isNull()) setItemWidget(pMap, 0, pMap->itemWidget());
-    });
+    restoreItemWidgetDelayed(item);
   }
 
   setCurrentItem(nullptr);
@@ -150,10 +151,7 @@ void CMapList::moveMapToTop(CMapItem* map) {
   treeWidget->takeTopLevelItem(index);
   treeWidget->insertTopLevelItem(0, map);
   map->showChildren(true);
-  QPointer<CMapItem> pMap(map);
-  QTimer::singleShot(100, this, [this, pMap]() {
-    if (!pMap.isNull()) treeWidget->setItemWidget(pMap, 0, pMap->itemWidget());
-  });
+  treeWidget->restoreItemWidgetDelayed(map);
 }
 
 void CMapList::slotMoveUp() {
@@ -172,10 +170,7 @@ void CMapList::slotMoveUp() {
   treeWidget->takeTopLevelItem(index);
   treeWidget->insertTopLevelItem(index - 1, item);
   item->showChildren(true);
-  QPointer<CMapItem> pMap(item);
-  QTimer::singleShot(100, this, [this, pMap]() {
-    if (!pMap.isNull()) treeWidget->setItemWidget(pMap, 0, pMap->itemWidget());
-  });
+  treeWidget->restoreItemWidgetDelayed(item);
   treeWidget->setCurrentItem(0);
   emit treeWidget->sigChanged();
 }
@@ -196,10 +191,7 @@ void CMapList::slotMoveDown() {
   treeWidget->takeTopLevelItem(index);
   treeWidget->insertTopLevelItem(index + 1, item);
   item->showChildren(true);
-  QPointer<CMapItem> pMap(item);
-  QTimer::singleShot(100, this, [this, pMap]() {
-    if (!pMap.isNull()) treeWidget->setItemWidget(pMap, 0, pMap->itemWidget());
-  });
+  treeWidget->restoreItemWidgetDelayed(item);
   treeWidget->setCurrentItem(0);
   emit treeWidget->sigChanged();
 }

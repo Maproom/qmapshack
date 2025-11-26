@@ -51,6 +51,7 @@ QWidget* CDemItem::itemWidget() {
     } else {
       setStatus(CMapItemWidget::eStatus::Missing);
     }
+    widget->setDrawObject(demfile, dem->getScale());
 
     connect(widget, &CMapItemWidget::sigActivate, this, &CDemItem::slotActivate);
     connect(widget, &CMapItemWidget::destroyed, this, [this] { emit sigUpdateWidget(this); });

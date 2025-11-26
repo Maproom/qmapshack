@@ -30,6 +30,8 @@ class CMapTreeWidget : public QTreeWidget {
  public:
   CMapTreeWidget(QWidget* parent);
 
+  void restoreItemWidgetDelayed(CMapItem* map);
+
  signals:
   void sigChanged();
 

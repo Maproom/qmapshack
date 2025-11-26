@@ -30,6 +30,8 @@ class CDemTreeWidget : public QTreeWidget {
  public:
   CDemTreeWidget(QWidget* parent);
 
+  void restoreItemWidgetDelayed(CDemItem* map);
+
  signals:
   void sigChanged();
 

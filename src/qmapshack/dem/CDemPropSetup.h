@@ -47,6 +47,7 @@ class CDemPropSetup : public IDemProp, private Ui::IDemPropSetup {
   void slotElevationShadeHiValueChanged();
 
  private:
+  void updateCanvasAndStatus();
   CTinySpinBox* slopeSpins[SLOPE_LEVELS];
 
   static QPointF scale;

@@ -594,8 +594,9 @@ void CCanvas::mousePressEvent(QMouseEvent* e) {
 void CCanvas::mouseMoveEvent(QMouseEvent* e) {
   QPointF pos = e->pos();
   map->convertPx2Rad(pos);
-  qreal ele = dem->getElevationAt(pos, true);
-  qreal slope = dem->getSlopeAt(pos, true);
+  qreal ele = dem->getElevationAt(pos, false);
+  qreal slope = dem->getSlopeAt(pos, false);
+
   emit sigMousePosition(pos * RAD_TO_DEG, ele, slope);
 
   mouse->mouseMoveEvent(e);

@@ -39,6 +39,7 @@ class CMapPropSetup : public IMapProp, private Ui::IMapPropSetup {
   void slotClearTypeFile();
 
  private:
+  void updateCanvasAndStatus();
   static QPointF scale;
 };
 

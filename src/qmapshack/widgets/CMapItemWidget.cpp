@@ -18,7 +18,9 @@
 
 #include "widgets/CMapItemWidget.h"
 
+#include <QGraphicsOpacityEffect>
 #include <QPainter>
+#include <QToolButton>
 
 #include "canvas/IDrawObject.h"
 #include "helpers/CDraw.h"
@@ -39,7 +41,10 @@ class CIndicator final : public QWidget {
   void paintEvent(QPaintEvent* e) override {
     QPainter p(this);
     USE_ANTI_ALIASING(p, true);
-    p.fillRect(rect(), color);
+
+    p.setBrush(color);
+    p.setPen(color);
+    p.drawRoundedRect(rect(), 4, 4);
   }
 
  private:
@@ -54,6 +59,19 @@ CMapItemWidget::CMapItemWidget(const QString& typeIMap) : typeIMap(typeIMap) {
   f.setPointSize(f.pointSize() - 2);
   labelStatus->setFont(f);
   labelStatus->setAttribute(Qt::WA_TransparentForMouseEvents, true);
+
+  labelAccess = new QLabel(this);
+  labelAccess->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
+  labelAccess->setFont(f);
+
+  effectLabelAccess = new QGraphicsOpacityEffect(labelAccess);
+  labelAccess->setGraphicsEffect(effectLabelAccess);
+
+  animationLabelAccess = new QPropertyAnimation(effectLabelAccess, "opacity");
+  animationLabelAccess->setDuration(1000);
+  animationLabelAccess->setStartValue(1.0);
+  animationLabelAccess->setEndValue(0.0);
+  animationLabelAccess->setEasingCurve(QEasingCurve::OutQuad);
 
   indicatorVisibility = new CIndicator(this);
   indicatorVisibility->setFixedSize(5, 20);
@@ -74,11 +92,20 @@ CMapItemWidget::CMapItemWidget(const QString& typeIMap) : typeIMap(typeIMap) {
   layout1->addWidget(labelStatus);
 
   layout2->addLayout(layout1);
+  layout2->addWidget(labelAccess);
   layout2->addWidget(indicatorVisibility);
   layout2->addWidget(buttonActivate);
 
+  timerAccess = new QTimer(this);
+  timerAccess->setSingleShot(true);
+  timerAccess->setInterval(1000);
+
   connect(buttonActivate, &QToolButton::clicked, this, &CMapItemWidget::sigActivate);
   connect(buttonActivate, &QToolButton::toggled, this, &CMapItemWidget::slotSetChecked);
+  connect(timerAccess, &QTimer::timeout, this, [this]() {
+    animationLabelAccess->stop();
+    animationLabelAccess->start(QAbstractAnimation::KeepWhenStopped);
+  });
 }
 
 CMapItemWidget::~CMapItemWidget() { /*qDebug() << "~CMapItemWidget()" << labelName->text();*/ }
@@ -87,6 +114,12 @@ void CMapItemWidget::setDrawObject(IDrawObject* object, const QPointF& scale) {
   map = object;
   indicatorVisibility->setHidden(map.isNull());
   slotScaleChanged(scale);
+}
+
+void CMapItemWidget::setAccess(const QString& ele) {
+  labelAccess->setText(ele);
+  effectLabelAccess->setOpacity(1.0);
+  timerAccess->start();
 }
 
 void CMapItemWidget::setStatus(eStatus status) {

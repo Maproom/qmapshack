@@ -121,11 +121,13 @@ void CMapPropSetup::slotScaleChanged(const QPointF& s) {
 void CMapPropSetup::slotSetMinScale(bool checked) {
   mapfile->setMinScale(checked ? scale.x() : NOFLOAT);
   slotPropertiesChanged();
+  updateCanvasAndStatus();
 }
 
 void CMapPropSetup::slotSetMaxScale(bool checked) {
   mapfile->setMaxScale(checked ? scale.x() : NOFLOAT);
   slotPropertiesChanged();
+  updateCanvasAndStatus();
 }
 
 void CMapPropSetup::slotLoadTypeFile() {
@@ -146,4 +148,14 @@ void CMapPropSetup::slotLoadTypeFile() {
 void CMapPropSetup::slotClearTypeFile() {
   mapfile->slotSetTypeFile("");
   slotPropertiesChanged();
+}
+
+void CMapPropSetup::updateCanvasAndStatus() {
+  QPointer<CMapDraw> pMap(map);
+  QTimer::singleShot(100, this, [pMap]() {
+    if (!pMap.isNull()) {
+      emit pMap->sigScaleChanged(pMap->getScale());
+      pMap->getCanvas()->triggerCompleteUpdate(CCanvas::eRedrawMap);
+    }
+  });
 }

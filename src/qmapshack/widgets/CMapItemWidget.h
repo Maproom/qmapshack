@@ -19,15 +19,17 @@
 #ifndef CMAPITEMWIDGET_H
 #define CMAPITEMWIDGET_H
 
-#include <QHBoxLayout>
 #include <QLabel>
 #include <QPointer>
-#include <QToolButton>
-#include <QVBoxLayout>
 #include <QWidget>
 
+class QToolButton;
+class QHBoxLayout;
+class QVBoxLayout;
 class IDrawObject;
 class CIndicator;
+class QPropertyAnimation;
+class QGraphicsOpacityEffect;
 
 class CMapItemWidget : public QWidget {
   Q_OBJECT
@@ -52,6 +54,8 @@ class CMapItemWidget : public QWidget {
 
   void setDrawObject(IDrawObject* object, const QPointF& scale);
 
+  void setAccess(const QString& ele);
+
  signals:
   void sigActivate(bool);
 
@@ -69,8 +73,12 @@ class CMapItemWidget : public QWidget {
   QHBoxLayout* layout2;
   QLabel* labelName;
   QLabel* labelStatus;
+  QLabel* labelAccess;
   CIndicator* indicatorVisibility;
   QToolButton* buttonActivate;
+  QTimer* timerAccess;
+  QPropertyAnimation* animationLabelAccess;
+  QGraphicsOpacityEffect* effectLabelAccess;
 
   QPointer<IDrawObject> map;
 };

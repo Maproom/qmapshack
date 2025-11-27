@@ -148,6 +148,8 @@ class CDemItem : public QObject, public QTreeWidgetItem {
    */
   bool activate();
 
+  void setAccess(const QString& ele);
+
  signals:
   void sigChanged();
   // emitted if the tree widget item's widget was destroyed

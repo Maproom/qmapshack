@@ -23,8 +23,9 @@
 #include "helpers/CDraw.h"
 #include "units/IUnit.h"
 
-#define BAR_HEIGHT 6
-#define HOR_MARGIN 3
+constexpr int kBarHeight = 6;
+constexpr int kHorMargin = 3;
+constexpr int kIndicatorWidth = 5;
 
 CScaleWidget::CScaleWidget(QWidget* parent) : QWidget(parent) { /*setScaledContents(true);*/ }
 
@@ -46,32 +47,35 @@ void CScaleWidget::paintEvent(QPaintEvent* e) {
 
   p.fillRect(rect(), Qt::transparent);
   // draw bar background
-  const int xBar = HOR_MARGIN;
-  const int yBar = (h - BAR_HEIGHT) / 2;
+  const int xBar = kHorMargin;
+  const int yBar = (h - kBarHeight) / 2;
 
-  QRect bar(xBar, yBar, w - 2 * HOR_MARGIN, BAR_HEIGHT);
+  QRect bar(xBar, yBar, w - 2 * kHorMargin, kBarHeight);
   p.setPen(Qt::darkBlue);
   p.setBrush(Qt::white);
   p.drawRect(bar);
 
   // draw current scale range
   if ((minScale != NOFLOAT) || (maxScale != NOFLOAT)) {
-    const int x1Range = minScale != NOFLOAT ? HOR_MARGIN + qRound(bar.width() * (1 + log10(minScale)) / 5) : bar.left();
-    const int x2Range =
-        maxScale != NOFLOAT ? HOR_MARGIN + qRound(bar.width() * (1 + log10(maxScale)) / 5) : bar.right();
+    const int x1Range = minScale != NOFLOAT
+                            ? qRound(bar.width() * (1 + log10(minScale)) / 5) - qRound(kIndicatorWidth * 0.5)
+                            : bar.left();
+    const int x2Range = maxScale != NOFLOAT
+                            ? qRound(bar.width() * (1 + log10(maxScale)) / 5) + qRound(kIndicatorWidth * 0.5)
+                            : bar.right();
     const int yRange = yBar;
 
-    QRect range(x1Range, yRange, x2Range - x1Range, BAR_HEIGHT);
+    QRect range(x1Range, yRange, x2Range - x1Range, kBarHeight);
     p.setPen(Qt::NoPen);
     p.setBrush(Qt::darkGreen);
     p.drawRect(range);
   }
 
   // draw scale indicator
-  const int xInd = qRound(bar.width() * (1 + log10(currentScale)) / 5) - HOR_MARGIN;
+  const int xInd = qRound(bar.width() * (1 + log10(currentScale)) / 5) - kHorMargin;
   const int yInd = yBar - 1;
 
-  QRect ind(xInd, yInd, 5, BAR_HEIGHT + 2);
+  QRect ind(xInd, yInd, kIndicatorWidth, kBarHeight + 2);
   p.setPen(Qt::darkBlue);
   p.setBrush(Qt::NoBrush);
   p.drawRect(ind);

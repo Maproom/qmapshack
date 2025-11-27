@@ -132,6 +132,8 @@ class IDrawContext : public QThread {
 
   virtual void setScales(const CCanvas::scales_type_e type);
 
+  CCanvas* getCanvas() { return canvas; }
+
  signals:
   void sigCanvasUpdate(CCanvas::redraw_e flags);
   void sigStartThread();

@@ -264,3 +264,9 @@ bool CDemItem::activate() {
   setStatus(CMapItemWidget::eStatus::Active);
   return true;
 }
+
+void CDemItem::setAccess(const QString& ele) {
+  if (!widget.isNull()) {
+    widget->setAccess(ele);
+  }
+}

@@ -33,7 +33,7 @@ class IMapOnline : public IMap {
   Q_OBJECT
  public:
   IMapOnline(CMapDraw* parent);
-  virtual ~IMapOnline() {}
+  virtual ~IMapOnline() override;
 
  signals:
   void sigQueueChanged();

@@ -323,6 +323,7 @@ set( SRCS
     widgets/CDateTimeEditor.cpp
     widgets/CDoubleSpinBox.cpp
     widgets/CFadingIcon.cpp
+    widgets/CFadingLabel.cpp
     widgets/CHistoryListWidget.cpp
     widgets/CIconGrid.cpp
     widgets/CLedIndicator.cpp
@@ -695,6 +696,7 @@ set( HDRS
     widgets/CDateTimeEditor.h
     widgets/CDoubleSpinBox.h
     widgets/CFadingIcon.h
+    widgets/CFadingLabel.h
     widgets/CHistoryListWidget.h
     widgets/CIconGrid.h
     widgets/CLedIndicator.h

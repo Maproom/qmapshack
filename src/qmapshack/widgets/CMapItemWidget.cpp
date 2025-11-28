@@ -25,6 +25,7 @@
 #include <QVBoxLayout>
 
 #include "canvas/IDrawObject.h"
+#include "widgets/CFadingLabel.h"
 #include "widgets/CLedIndicator.h"
 
 constexpr Qt::GlobalColor kColorOut = Qt::lightGray;
@@ -39,18 +40,9 @@ CMapItemWidget::CMapItemWidget(const QString& typeIMap) : typeIMap(typeIMap) {
   labelStatus->setFont(f);
   labelStatus->setAttribute(Qt::WA_TransparentForMouseEvents, true);
 
-  labelAccess = new QLabel(this);
+  labelAccess = new CFadingLabel(this);
   labelAccess->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
   labelAccess->setFont(f);
-
-  effectLabelAccess = new QGraphicsOpacityEffect(labelAccess);
-  labelAccess->setGraphicsEffect(effectLabelAccess);
-
-  animationLabelAccess = new QPropertyAnimation(effectLabelAccess, "opacity");
-  animationLabelAccess->setDuration(1000);
-  animationLabelAccess->setStartValue(1.0);
-  animationLabelAccess->setEndValue(0.0);
-  animationLabelAccess->setEasingCurve(QEasingCurve::OutQuad);
 
   indicatorVisibility = new CLedIndicator(this);
   indicatorVisibility->setFixedSize(6, 20);
@@ -81,10 +73,7 @@ CMapItemWidget::CMapItemWidget(const QString& typeIMap) : typeIMap(typeIMap) {
 
   connect(buttonActivate, &QToolButton::clicked, this, &CMapItemWidget::sigActivate);
   connect(buttonActivate, &QToolButton::toggled, this, &CMapItemWidget::slotSetChecked);
-  connect(timerAccess, &QTimer::timeout, this, [this]() {
-    animationLabelAccess->stop();
-    animationLabelAccess->start(QAbstractAnimation::KeepWhenStopped);
-  });
+  connect(timerAccess, &QTimer::timeout, this, [this]() { labelAccess->fadeOut(1000); });
 }
 
 CMapItemWidget::~CMapItemWidget() { /*qDebug() << "~CMapItemWidget()" << labelName->text();*/ }
@@ -97,7 +86,7 @@ void CMapItemWidget::setDrawObject(IDrawObject* object, const QPointF& scale) {
 
 void CMapItemWidget::setAccess(const QString& ele) {
   labelAccess->setText(ele);
-  effectLabelAccess->setOpacity(1.0);
+  labelAccess->fadeIn(1);
   timerAccess->start();
 }
 

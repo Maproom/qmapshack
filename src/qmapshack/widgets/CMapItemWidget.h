@@ -28,8 +28,7 @@ class QHBoxLayout;
 class QVBoxLayout;
 class IDrawObject;
 class CLedIndicator;
-class QPropertyAnimation;
-class QGraphicsOpacityEffect;
+class CFadingLabel;
 
 class CMapItemWidget : public QWidget {
   Q_OBJECT
@@ -73,12 +72,10 @@ class CMapItemWidget : public QWidget {
   QHBoxLayout* layout2;
   QLabel* labelName;
   QLabel* labelStatus;
-  QLabel* labelAccess;
+  CFadingLabel* labelAccess;
   CLedIndicator* indicatorVisibility;
   QToolButton* buttonActivate;
   QTimer* timerAccess;
-  QPropertyAnimation* animationLabelAccess;
-  QGraphicsOpacityEffect* effectLabelAccess;
 
   QPointer<IDrawObject> map;
 };

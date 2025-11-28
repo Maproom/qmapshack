@@ -33,6 +33,8 @@ IMapOnline::IMapOnline(CMapDraw* parent) : IMap(eFeatVisibility | eFeatTileCache
   connect(this, &IMapOnline::sigQueueChanged, this, &IMapOnline::slotQueueChanged);
 }
 
+IMapOnline::~IMapOnline() { map->reportStatusToCanvas(name, ""); }
+
 bool IMapOnline::httpsCheck(const QString& url) {
   if (url.startsWith("https", Qt::CaseInsensitive) && !QSslSocket::supportsSsl()) {
     QString msg =

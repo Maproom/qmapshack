@@ -325,6 +325,7 @@ set( SRCS
     widgets/CFadingIcon.cpp
     widgets/CHistoryListWidget.cpp
     widgets/CIconGrid.cpp
+    widgets/CLedIndicator.cpp
     widgets/CLineEdit.cpp
     widgets/CMapItemWidget.cpp
     widgets/CPhotoAlbum.cpp
@@ -696,6 +697,7 @@ set( HDRS
     widgets/CFadingIcon.h
     widgets/CHistoryListWidget.h
     widgets/CIconGrid.h
+    widgets/CLedIndicator.h
     widgets/CLineEdit.h
     widgets/CMapItemWidget.h
     widgets/CPhotoAlbum.h

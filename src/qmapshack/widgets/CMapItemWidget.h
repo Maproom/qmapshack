@@ -27,7 +27,7 @@ class QToolButton;
 class QHBoxLayout;
 class QVBoxLayout;
 class IDrawObject;
-class CIndicator;
+class CLedIndicator;
 class QPropertyAnimation;
 class QGraphicsOpacityEffect;
 
@@ -74,7 +74,7 @@ class CMapItemWidget : public QWidget {
   QLabel* labelName;
   QLabel* labelStatus;
   QLabel* labelAccess;
-  CIndicator* indicatorVisibility;
+  CLedIndicator* indicatorVisibility;
   QToolButton* buttonActivate;
   QTimer* timerAccess;
   QPropertyAnimation* animationLabelAccess;

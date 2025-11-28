@@ -19,37 +19,16 @@
 #include "widgets/CMapItemWidget.h"
 
 #include <QGraphicsOpacityEffect>
+#include <QHBoxLayout>
 #include <QPainter>
 #include <QToolButton>
+#include <QVBoxLayout>
 
 #include "canvas/IDrawObject.h"
-#include "helpers/CDraw.h"
+#include "widgets/CLedIndicator.h"
 
 constexpr Qt::GlobalColor kColorOut = Qt::lightGray;
 constexpr Qt::GlobalColor kColorIn = Qt::darkGreen;
-
-class CIndicator final : public QWidget {
- public:
-  CIndicator(QWidget* parent) : QWidget(parent) {}
-
-  void setColor(const QColor& c) {
-    color = c;
-    update();
-  }
-
- protected:
-  void paintEvent(QPaintEvent* e) override {
-    QPainter p(this);
-    USE_ANTI_ALIASING(p, true);
-
-    p.setBrush(color);
-    p.setPen(color);
-    p.drawRoundedRect(rect(), 4, 4);
-  }
-
- private:
-  QColor color = Qt::lightGray;
-};
 
 CMapItemWidget::CMapItemWidget(const QString& typeIMap) : typeIMap(typeIMap) {
   labelName = new QLabel(this);
@@ -73,8 +52,8 @@ CMapItemWidget::CMapItemWidget(const QString& typeIMap) : typeIMap(typeIMap) {
   animationLabelAccess->setEndValue(0.0);
   animationLabelAccess->setEasingCurve(QEasingCurve::OutQuad);
 
-  indicatorVisibility = new CIndicator(this);
-  indicatorVisibility->setFixedSize(5, 20);
+  indicatorVisibility = new CLedIndicator(this);
+  indicatorVisibility->setFixedSize(6, 20);
 
   buttonActivate = new QToolButton(this);
   buttonActivate->setCheckable(true);
@@ -131,7 +110,7 @@ void CMapItemWidget::setStatus(eStatus status) {
       labelName->setEnabled(false);
       buttonActivate->setChecked(false);
       buttonActivate->setToolTip(tr("Activate %1").arg(typeIMap));
-      indicatorVisibility->hide();
+      indicatorVisibility->animateHide();
       break;
 
     case eStatus::Active:
@@ -140,7 +119,7 @@ void CMapItemWidget::setStatus(eStatus status) {
       labelName->setEnabled(true);
       buttonActivate->setChecked(true);
       buttonActivate->setToolTip(tr("Deactivate %1").arg(typeIMap));
-      indicatorVisibility->show();
+      indicatorVisibility->animateShow();
       break;
 
     case eStatus::Missing:
@@ -149,7 +128,7 @@ void CMapItemWidget::setStatus(eStatus status) {
       labelName->setEnabled(false);
       buttonActivate->setChecked(false);
       buttonActivate->setToolTip(tr("Activate %1").arg(typeIMap));
-      indicatorVisibility->hide();
+      indicatorVisibility->animateHide();
       break;
 
     case eStatus::Unused:
@@ -158,7 +137,7 @@ void CMapItemWidget::setStatus(eStatus status) {
       labelStatus->setText("-");
       buttonActivate->setChecked(false);
       buttonActivate->setToolTip(tr("Activate %1").arg(typeIMap));
-      indicatorVisibility->hide();
+      indicatorVisibility->animateHide();
       break;
   }
 

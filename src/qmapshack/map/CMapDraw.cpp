@@ -217,6 +217,7 @@ void CMapDraw::buildMapList(const QString& filename) {
   CMapItem* item = createMapItem(filename, "");
   mapList->addMap(item);
   item->activate();
+  canvas->zoom(30);
 }
 
 void CMapDraw::saveConfig(QSettings& cfg) /* override */

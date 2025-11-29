@@ -42,7 +42,6 @@ void CDemTreeWidget::dragEnterEvent(QDragEnterEvent* e) {
   QTreeWidget::dragEnterEvent(e);
 }
 void CDemTreeWidget::dragLeaveEvent(QDragLeaveEvent* e) {
-  qDebug() << "CMapTreeWidget::dragLeaveEvent";
   CDemItem* item = dynamic_cast<CDemItem*>(currentItem());
   if (item) {
     item->showChildren(false);
@@ -55,9 +54,6 @@ void CDemTreeWidget::dragLeaveEvent(QDragLeaveEvent* e) {
     QPointer<CDemItem> pMap(item);
     restoreItemWidgetDelayed(item);
   }
-
-  setCurrentItem(nullptr);
-  emit sigChanged();
 }
 
 void CDemTreeWidget::dropEvent(QDropEvent* e) {

@@ -32,6 +32,7 @@ constexpr Qt::GlobalColor kColorOut = Qt::lightGray;
 constexpr Qt::GlobalColor kColorIn = Qt::darkGreen;
 
 CMapItemWidget::CMapItemWidget(const QString& typeIMap) : typeIMap(typeIMap) {
+  setAutoFillBackground(true);
   labelName = new QLabel(this);
   labelName->setAttribute(Qt::WA_TransparentForMouseEvents, true);
   labelStatus = new QLabel(tr("unknown"), this);

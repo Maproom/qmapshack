@@ -70,7 +70,10 @@ void CDemItem::slotActivate(bool yes) {
   emit sigChanged();
 }
 
-void CDemItem::setName(const QString& name) { widget->setName(name); }
+void CDemItem::setName(const QString& name) {
+  widget->setName(name);
+  setText(0, name);
+}
 
 void CDemItem::setStatus(CMapItemWidget::eStatus status) { widget->setStatus(status); }
 

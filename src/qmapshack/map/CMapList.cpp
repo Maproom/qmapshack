@@ -55,9 +55,6 @@ void CMapTreeWidget::dragLeaveEvent(QDragLeaveEvent* e) {
     item->showChildren(true);
     restoreItemWidgetDelayed(item);
   }
-
-  setCurrentItem(nullptr);
-  emit sigChanged();
 }
 
 void CMapTreeWidget::dropEvent(QDropEvent* e) {

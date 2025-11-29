@@ -76,7 +76,10 @@ void CMapItem::slotActivate(bool yes) {
   emit sigChanged();
 }
 
-void CMapItem::setName(const QString& name) { widget->setName(name); }
+void CMapItem::setName(const QString& name) {
+  widget->setName(name);
+  setText(0, name);
+}
 
 void CMapItem::setStatus(CMapItemWidget::eStatus status) { widget->setStatus(status); }
 

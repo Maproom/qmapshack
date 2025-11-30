@@ -211,8 +211,6 @@ void CDemItem::deactivate() {
   // maybe used to reflect changes in the icon
   updateIcon();
 
-  // dem->reportStatusToCanvas(text(0), "");
-
   setStatus(CMapItemWidget::eStatus::Inactive);
 }
 

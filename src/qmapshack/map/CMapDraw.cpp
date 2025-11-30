@@ -386,7 +386,11 @@ void CMapDraw::saveMapList(QSettings& cfg) {
   cfg.endGroup();  // map2
 }
 
-void CMapDraw::reportStatusToCanvas(const QString& key, const QString& msg) { canvas->reportStatus(key, msg); }
+void CMapDraw::reportStatusToCanvas(const QString& key, const QString& msg) {
+  if (canvas) {
+    canvas->reportStatus(key, msg);
+  }
+}
 
 void CMapDraw::drawt(IDrawContext::buffer_t& currentBuffer) /* override */
 {

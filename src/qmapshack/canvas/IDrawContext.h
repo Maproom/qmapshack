@@ -168,7 +168,7 @@ class IDrawContext : public QThread {
   bool intNeedsRedraw;
 
   /// the canvas this map object is attached to
-  CCanvas* canvas;
+  QPointer<CCanvas> canvas;
 
   const CCanvas::redraw_e maskRedraw;
   /// map canvas twin buffer

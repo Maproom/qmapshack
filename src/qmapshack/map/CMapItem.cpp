@@ -218,8 +218,6 @@ void CMapItem::deactivate() {
   // maybe used to reflect changes in the icon
   updateIcon();
 
-  map->reportStatusToCanvas(text(0), "");
-
   setStatus(CMapItemWidget::eStatus::Inactive);
 }
 

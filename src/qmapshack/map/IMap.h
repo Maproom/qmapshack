@@ -160,7 +160,7 @@ class IMap : public IDrawObject {
 
  protected:
   /// the drawcontext this map belongs to
-  CMapDraw* map;
+  QPointer<CMapDraw> map;
 
   /**
       target should always be "EPSG:4326"

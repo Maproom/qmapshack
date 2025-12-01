@@ -290,7 +290,7 @@ void CRouterBRouterSetup::installLocalBRouter(QStringList& messageList) {
   const QDir targetDir(localDir);
   const QDir& targetProfileDir = getProfileDir(eModeLocal);
   const QString& srcPath = getDownloadDir().absolutePath();
-  QDirIterator srcIterator(srcPath, {"*.jar", "*.brf", "lookups.dat"}, QDir::Files, QDirIterator::Subdirectories);
+  QDirIterator srcIterator(srcPath, {"brouter*.jar", "*.brf", "lookups.dat"}, QDir::Files, QDirIterator::Subdirectories);
   QStringList jarFiles;
   while (srcIterator.hasNext()) {
     QFileInfo srcFileInfo(srcIterator.next());
@@ -310,15 +310,13 @@ void CRouterBRouterSetup::installLocalBRouter(QStringList& messageList) {
   } else {
     bool isFirst = true;
     for (const QString& jarFile : jarFiles) {
-      if (jarFile.startsWith("brouter")) {
-        if (isFirst) {
-          setLocalBRouterJar(jarFile);
-          messageList.append(tr("brouter jar-file: %1").arg(jarFile));
-          isFirst = false;
-        } else {
-          messageList.append(
-              tr("conflicting alternative jar-file %1, go back to previous page to select!").arg(jarFile));
-        }
+      if (isFirst) {
+        setLocalBRouterJar(jarFile);
+        messageList.append(tr("brouter jar-file: %1").arg(jarFile));
+        isFirst = false;
+      } else {
+        messageList.append(
+            tr("conflicting alternative jar-file %1, go back to previous page to select!").arg(jarFile));
       }
     }
   }
@@ -572,8 +570,19 @@ void CRouterBRouterSetup::parseBRouterVersion(const QString& text) {
 
 CRouterBRouterLocalSetupStatus CRouterBRouterSetup::checkLocalBRouterInstallation() {
   const QDir dir(localDir);
+  const QStringList& jarFiles = dir.entryList({"brouter*.jar"}, QDir::Files, QDir::Time | QDir::Reversed);
+
+  classMajorVersion = NOINT;
+  if (!jarFiles.isEmpty() && javaMajorVersion != NOINT) {
+    for (const QString& jarFile : jarFiles) {
+      setLocalBRouterJar(jarFile);
+      if (classMajorVersion != NOINT && (javaMajorVersion >= classMajorVersion)) {
+        break;
+      }
+    }
+  }
+
   const QFile jarFile(dir.absoluteFilePath(localBRouterJar));
-  const QStringList& jarFiles = dir.entryList({"*.jar"}, QDir::Files, QDir::NoSort);
   const QDir profileDir(dir.absoluteFilePath(localProfileDir));
   const QFile lookupFile(profileDir.absoluteFilePath("lookups.dat"));
 

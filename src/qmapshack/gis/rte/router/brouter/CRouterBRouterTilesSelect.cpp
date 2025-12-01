@@ -246,7 +246,10 @@ void CRouterBRouterTilesSelect::initialize()
       CRouterBRouterTilesStatus* status = it.value();
       status->isLocal = false;
       status->isRemote = false;
+      status->isSelected = false;
       status->isOutdated = false;
+      status->progressMax = 0;
+      status->progressVal = 0;
     }
     const QDir& dir = segmentsDir();
     if (!dir.exists()) {
@@ -375,7 +378,7 @@ void CRouterBRouterTilesSelect::afterSlotLoadOnlineTilesRequestFinishedRunJavasc
   update();
 }
 
-QString CRouterBRouterTilesSelect::formatSize(const qint64 size) {
+QString CRouterBRouterTilesSelect::formatSize(const quint64 size) {
   if (size >= 2147483648) {
     return QString("%1G").arg(size / 1073741824);
   } else if (size >= 1073741824) {
@@ -575,16 +578,21 @@ void CRouterBRouterTilesSelect::updateStatus() {
        it != tilesDownloadStatus.constEnd(); ++it) {
     const CRouterBRouterTilesStatus* status = it.value();
 
-    if (status->file != nullptr && status->progressMax > 0) {
-      numOutstanding++;
-      sizeDownloadMax += status->progressMax;
-      sizeOutstanding += status->progressMax - status->progressVal;
-      sizeDownloaded += status->progressVal;
+    if (status->file != nullptr) {
       downloading = true;
+      numOutstanding++;
+      if (status->progressMax > 0) {
+        sizeOutstanding += status->progressMax - status->progressVal;
+        sizeDownloadMax += status->progressMax;
+        sizeDownloaded += status->progressVal;
+      } else {
+        sizeOutstanding += status->remoteSize;
+      }
     } else if (status->isSelected && status->isRemote && (!status->isLocal || status->isOutdated)) {
       numOutstanding++;
       sizeOutstanding += status->remoteSize;
     }
+
     if (status->isOutdated) {
       numOutdated++;
       sizeOutdated += status->localSize;

@@ -1,3 +1,6 @@
+V1.XX.X
+[QMS-896] BRouter setup installation folder & outstanding download counter issues
+
 V1.19.0
 [QMS-869] Convert track to area
 [QMS-871] Partly fix: Routino & installation folder name with non-ASCII characters

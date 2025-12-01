@@ -42,7 +42,7 @@ class CRouterBRouterTilesSelect : public QWidget {
   void initialize();
   void cancelDownload() const;
 
-  static QString formatSize(const qint64 size);
+  static QString formatSize(const quint64 size);
   static QPoint tileFromFileName(const QString& fileName);
   static QString fileNameFromTile(const QPoint tile);
 

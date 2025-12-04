@@ -405,7 +405,9 @@ void CMapDraw::drawt(IDrawContext::buffer_t& currentBuffer) /* override */
         continue;
       }
 
+      item->setProcessing(true);
       item->getMapfile()->draw(currentBuffer);
+      item->setProcessing(false);
       seenActiveMap = true;
     }
   }

@@ -28,7 +28,7 @@ CFadingLabel::CFadingLabel(QWidget* parent) : QLabel(parent) {
   setGraphicsEffect(effect);
 
   fadeAnim = new QPropertyAnimation(effect, "opacity", this);
-  fadeAnim->setEasingCurve(QEasingCurve::InOutSine);
+  fadeAnim->setEasingCurve(QEasingCurve::InOutQuad);
 }
 
 void CFadingLabel::fadeOut(int duration) {

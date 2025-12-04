@@ -271,3 +271,9 @@ void CDemItem::setAccess(const QString& ele) {
     widget->setAccess(ele);
   }
 }
+
+void CDemItem::setProcessing(bool on) {
+  if (!widget.isNull()) {
+    widget->setProcessing(on);
+  }
+}

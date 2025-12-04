@@ -284,3 +284,9 @@ bool CMapItem::activate() {
   setStatus(CMapItemWidget::eStatus::Active);
   return true;
 }
+
+void CMapItem::setProcessing(bool on) {
+  if (!widget.isNull()) {
+    widget->setProcessing(on);
+  }
+}

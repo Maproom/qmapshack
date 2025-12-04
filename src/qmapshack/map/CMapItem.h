@@ -148,6 +148,15 @@ class CMapItem : public QObject, public QTreeWidgetItem {
    */
   bool activate();
 
+  /**
+   * @brief Indicate to the user the item is used for processing data (e.g. rendering hillshading)
+   *
+   * Should be called before and after any lengthy operation.
+   *
+   * @param on
+   */
+  void setProcessing(bool on);
+
  signals:
   void sigChanged();
   // emitted if the tree widget item's widget was destroyed

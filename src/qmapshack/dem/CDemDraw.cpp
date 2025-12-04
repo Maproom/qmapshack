@@ -339,7 +339,9 @@ void CDemDraw::drawt(buffer_t& currentBuffer) {
         continue;
       }
 
+      item->setProcessing(true);
       item->getDemFile()->draw(currentBuffer);
+      item->setProcessing(false);
     }
   }
   CDemItem::mutexActiveDems.unlock();

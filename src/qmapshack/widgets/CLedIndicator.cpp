@@ -27,13 +27,13 @@ CLedIndicator::CLedIndicator(QWidget* parent)
   // --- Color animation ---
   m_colorAnim = new QPropertyAnimation(this, "animatedColor", this);
   m_colorAnim->setDuration(250);
-  m_colorAnim->setEasingCurve(QEasingCurve::InOutSine);
+  m_colorAnim->setEasingCurve(QEasingCurve::InOutQuad);
   connect(m_colorAnim, &QPropertyAnimation::finished, this, [this]() { setAnimatedColor(m_targetColor); });
 
   // --- Opacity animation ---
   m_opacityAnim = new QPropertyAnimation(this, "opacity", this);
   m_opacityAnim->setDuration(250);
-  m_opacityAnim->setEasingCurve(QEasingCurve::InOutSine);
+  m_opacityAnim->setEasingCurve(QEasingCurve::InOutQuad);
 }
 
 QColor CLedIndicator::color() const { return m_targetColor; }
@@ -72,16 +72,34 @@ void CLedIndicator::setOpacity(qreal o) {
 // --- hide/show animations ---
 void CLedIndicator::animateHide() {
   m_opacityAnim->stop();
+  m_opacityAnim->setDuration(250);
   m_opacityAnim->setStartValue(m_opacity);
   m_opacityAnim->setEndValue(0.0);
+  m_opacityAnim->setLoopCount(1);
   m_opacityAnim->start();
 }
 
 void CLedIndicator::animateShow() {
   m_opacityAnim->stop();
+  m_opacityAnim->setDuration(250);
   m_opacityAnim->setStartValue(m_opacity);
   m_opacityAnim->setEndValue(1.0);
+  m_opacityAnim->setLoopCount(1);
   m_opacityAnim->start();
+}
+
+void CLedIndicator::animateFlash(bool on) {
+  m_opacityAnim->stop();
+  if (on) {
+    m_opacityAnim->setDuration(500);
+    m_opacityAnim->setStartValue(1.0);
+    m_opacityAnim->setEndValue(0.0);
+    m_opacityAnim->setLoopCount(-1);
+    m_opacityAnim->setDirection(QAbstractAnimation::Forward);
+    m_opacityAnim->start();
+  } else {
+    animateShow();
+  }
 }
 
 void CLedIndicator::paintEvent(QPaintEvent*) {

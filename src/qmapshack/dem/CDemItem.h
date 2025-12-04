@@ -148,7 +148,20 @@ class CDemItem : public QObject, public QTreeWidgetItem {
    */
   bool activate();
 
+  /**
+   * @brief Indicate to the user the item has been accessed by an elevtion request
+   * @param ele   The elevation from the access ass tring
+   */
   void setAccess(const QString& ele);
+
+  /**
+   * @brief Indicate to the user the item is used for processing data (e.g. rendering hillshading)
+   *
+   * Should be called before and after any lengthy operation.
+   *
+   * @param on
+   */
+  void setProcessing(bool on);
 
  signals:
   void sigChanged();

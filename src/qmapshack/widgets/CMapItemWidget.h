@@ -55,8 +55,12 @@ class CMapItemWidget : public QWidget {
 
   void setAccess(const QString& ele);
 
+  void setProcessing(bool on);
+
  signals:
   void sigActivate(bool);
+  // signal used internally to decouple threads
+  void sigSetProcessing(bool);
 
  public slots:
   void slotScaleChanged(const QPointF& scale);

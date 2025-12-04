@@ -42,6 +42,7 @@ class CLedIndicator final : public QWidget {
   // hide/show animations
   void animateHide();
   void animateShow();
+  void animateFlash(bool on);
 
   qreal opacity() const;
   void setOpacity(qreal o);

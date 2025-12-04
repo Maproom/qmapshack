@@ -75,6 +75,9 @@ CMapItemWidget::CMapItemWidget(const QString& typeIMap) : typeIMap(typeIMap) {
   connect(buttonActivate, &QToolButton::clicked, this, &CMapItemWidget::sigActivate);
   connect(buttonActivate, &QToolButton::toggled, this, &CMapItemWidget::slotSetChecked);
   connect(timerAccess, &QTimer::timeout, this, [this]() { labelAccess->fadeOut(1000); });
+
+  // cross-thread signalling. Signal is triggered by draw thread, indicator animation has to be triggered in main thread
+  connect(this, &CMapItemWidget::sigSetProcessing, this, [this](bool on) { indicatorVisibility->animateFlash(on); });
 }
 
 CMapItemWidget::~CMapItemWidget() { /*qDebug() << "~CMapItemWidget()" << labelName->text();*/ }
@@ -89,6 +92,12 @@ void CMapItemWidget::setAccess(const QString& ele) {
   labelAccess->setText(ele);
   labelAccess->fadeIn(1);
   timerAccess->start();
+}
+
+void CMapItemWidget::setProcessing(bool on) {
+  // use signal to decouple threads when setProcessing()
+  // is called from a thread not the main application thread
+  emit sigSetProcessing(on);
 }
 
 void CMapItemWidget::setStatus(eStatus status) {

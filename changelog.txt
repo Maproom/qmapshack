@@ -1,5 +1,6 @@
 V1.XX.X
 [QMS-896] BRouter setup installation folder & outstanding download counter issues
+[QMS-899] Flash active indicator of map/dem items while rendered.
 
 V1.19.0
 [QMS-869] Convert track to area

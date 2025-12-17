@@ -26,7 +26,7 @@
 
 QStack<CProgressDialog*> CProgressDialog::stackSelf;
 
-#define DELAY 1000
+#define DELAY 500
 
 CProgressDialog::CProgressDialog(const QString text, int min, int max, QWidget* parent) : QDialog(parent) {
   stackSelf.push(this);
@@ -61,6 +61,7 @@ CProgressDialog::CProgressDialog(const QString text, int min, int max, QWidget* 
     show();
   });
   timer->start(DELAY);
+  CCanvas::setOverrideCursor(Qt::ArrowCursor, "CProgressDialog");
 }
 
 CProgressDialog* CProgressDialog::self() {
@@ -75,6 +76,7 @@ CProgressDialog::~CProgressDialog() {
   if (!stackSelf.isEmpty()) {
     stackSelf.top()->goOn();
   }
+  CCanvas::restoreOverrideCursor("~CProgressDialog");
 }
 
 void CProgressDialog::pause() {
@@ -89,11 +91,9 @@ void CProgressDialog::goOn() {
   if (timer->isActive()) {
     return;
   }
-  if (timeElapsed <= DELAY) {
-    timer->start(DELAY - timeElapsed);
-  } else {
-    show();
-  }
+  // after restarting a paused timer we assume the timer would have expired in the meanwhile. Therefore start it again
+  // to expire asap.
+  timer->start(1);
 }
 
 void CProgressDialog::setAllVisible(bool yes) {
@@ -112,9 +112,7 @@ void CProgressDialog::reject() {
 }
 
 void CProgressDialog::setValue(int val) {
-  if (time.elapsed() > DELAY) {
-    QApplication::processEvents();
-  }
+  QApplication::processEvents();
   progressBar->setValue(val);
   labelTime->setText(tr("Elapsed time: %1 seconds.").arg(time.elapsed() / 1000.0, 0, 'f', 0));
 }

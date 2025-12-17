@@ -577,7 +577,6 @@ IGisProject* CGisWorkspace::copyItemsByKey(const QList<IGisItem::key_t>& keys) {
   project->blockUpdateItems(true);
   int cnt = 1;
   PROGRESS_SETUP(tr("Copy items..."), 0, keys.count(), this);
-  progress.show();
   for (const IGisItem::key_t& key : keys) {
     PROGRESS(cnt++, break);
     IGisItem* gisItem = getItemByKey(key);

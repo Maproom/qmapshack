@@ -72,7 +72,13 @@ class CGisListWksEditLock {
  public:
   CGisListWksEditLock(bool waitCursor, QRecursiveMutex& mutex) : mutex(mutex), waitCursor(waitCursor) {
     if (waitCursor) {
-      CCanvas::setOverrideCursor(Qt::WaitCursor, "CGisListWksEditLock");
+      // Only switch to wait cursor if there is no progress dialog allready started.
+      if (CProgressDialog::self() == nullptr) {
+        CCanvas::setOverrideCursor(Qt::WaitCursor, "CGisListWksEditLock");
+      } else {
+        // set to false to stop dtor from removing the wait cursor.
+        this->waitCursor = false;
+      }
     }
     mutex.lock();
   }
@@ -794,7 +800,6 @@ void CGisListWks::slotLoadWorkspace() {
       }
     }
     PROGRESS_SETUP(tr("Loading workspace. Please wait."), 0, total, this);
-    progress.show();
     quint32 progCnt = 0;
 
     while (query.next()) {

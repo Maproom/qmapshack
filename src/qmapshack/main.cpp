@@ -44,7 +44,7 @@ int main(int argc, char** argv) {
   // make sure this is the one and only instance on the system
   CSingleInstanceProxy s(qlOpts->arguments);
 
-  QSplashScreen* splash = nullptr;
+  QPointer<QSplashScreen> splash = nullptr;
   if (!qlOpts->nosplash) {
     QPixmap pic(":/pics/splash.png");
     QPainter p(&pic);
@@ -68,8 +68,12 @@ int main(int argc, char** argv) {
   w.show();
 
   if (nullptr != splash) {
-    splash->finish(&w);
-    delete splash;
+    QTimer::singleShot(1500, splash, [splash, &w]() {
+      if (!splash.isNull()) {
+        splash->finish(&w);
+        delete splash;
+      }
+    });
   }
 
   return app.exec();

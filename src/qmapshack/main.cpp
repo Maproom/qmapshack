@@ -56,6 +56,7 @@ int main(int argc, char** argv) {
     p.drawText(550, 395, "V " VER_STR);
 
     splash = new QSplashScreen(pic);
+    splash->setWindowFlags(splash->windowFlags() | Qt::WindowStaysOnTopHint);
 #ifdef Q_OS_MAC
     // remove the splash screen flag on OS-X as workaround for the reported bug
     // https://bugreports.qt.io/browse/QTBUG-49576

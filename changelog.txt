@@ -1,6 +1,7 @@
 V1.XX.X
 [QMS-896] BRouter setup installation folder & outstanding download counter issues
 [QMS-899] Flash active indicator of map/dem items while rendered.
+[QMS-906] Strange project's tree view items spacing behaviour
 [QMS-907] Fix: Bad UX with progress dialog and wait cursor
 
 V1.19.0

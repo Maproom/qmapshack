@@ -648,6 +648,11 @@ void CGisListWks::dropEvent(QDropEvent* e) {
   emit sigChanged();
 }
 
+void CGisListWks::scrollTo(const QModelIndex &index, ScrollHint hint) {
+  QTreeView::scrollTo(index, hint);
+  horizontalScrollBar()->setValue(0);
+}
+
 void CGisListWks::addProject(IGisProject* proj) {
   if (!proj->isValid()) {
     return;

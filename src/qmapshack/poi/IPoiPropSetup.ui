@@ -35,14 +35,14 @@
       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Change opacity of map&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="orientation">
-      <enum>Qt::Horizontal</enum>
+      <enum>Qt::Orientation::Horizontal</enum>
      </property>
     </widget>
    </item>
    <item>
-    <widget class="QTreeWidget" name="treeWidgetCategories">
+    <widget class="CPoiTreeWidgetCategories" name="treeWidgetCategories">
      <property name="selectionMode">
-      <enum>QAbstractItemView::SingleSelection</enum>
+      <enum>QAbstractItemView::SelectionMode::SingleSelection</enum>
      </property>
      <property name="wordWrap">
       <bool>false</bool>
@@ -64,6 +64,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>CPoiTreeWidgetCategories</class>
+   <extends>QTreeWidget</extends>
+   <header>poi/CPoiTreeWidgetCategories.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

@@ -71,6 +71,7 @@ class CGisListWks : public QTreeWidget {
  protected:
   void dragMoveEvent(QDragMoveEvent* e) override;
   void dropEvent(QDropEvent* e) override;
+  void scrollTo(const QModelIndex &index, ScrollHint hint = EnsureVisible) override;
 
  private slots:
   void slotSaveWorkspace();

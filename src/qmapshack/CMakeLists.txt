@@ -271,6 +271,7 @@ set( SRCS
     poi/CPoiList.cpp
     poi/CPoiPathSetup.cpp
     poi/CPoiPropSetup.cpp
+    poi/CPoiTreeWidgetCategories.cpp
     poi/IPoiFile.cpp
     poi/IPoiProp.cpp
     print/CPrintDialog.cpp
@@ -642,6 +643,7 @@ set( HDRS
     poi/CPoiList.h
     poi/CPoiPathSetup.h
     poi/CPoiPropSetup.h
+    poi/CPoiTreeWidgetCategories.h
     poi/IPoiFile.h
     poi/IPoiItem.h
     poi/IPoiProp.h

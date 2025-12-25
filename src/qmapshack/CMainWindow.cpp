@@ -1812,3 +1812,4 @@ void CMainWindow::closeEvent(QCloseEvent *event)
     
     event->accept();
 }
+

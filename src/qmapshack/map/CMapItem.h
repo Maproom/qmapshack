@@ -222,3 +222,4 @@ class CMapItem : public QObject, public QTreeWidgetItem {
 };
 
 #endif  // CMAPITEM_H
+

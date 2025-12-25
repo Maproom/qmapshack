@@ -44,6 +44,9 @@ class CRouterRoutino : public IRouter, private Ui::IRouterRoutino {
   static QPointer<CProgressDialog> progress;
 
   void setupPath(const QString& path);
+  
+  // NEU HINZUFÜGEN:
+  void saveConfig();  // Speichert die aktuelle Konfiguration
 
  private slots:
   void slotSetupPaths();

@@ -112,16 +112,48 @@ CRouterRoutino::CRouterRoutino(QWidget* parent) : IRouter(true, parent) {
 }
 
 CRouterRoutino::~CRouterRoutino() {
+  qDebug() << "~CRouterRoutino() - Saving configuration";
+  
   SETTINGS;
   cfg.setValue("Route/routino/paths", dbPaths);
   cfg.setValue("Route/routino/profile", comboProfile->currentIndex());
   cfg.setValue("Route/routino/language", comboLanguage->currentIndex());
   cfg.setValue("Route/routino/mode", comboMode->currentIndex());
   cfg.setValue("Route/routino/database", comboDatabase->currentIndex());
+  
+  // Explizit synchronisieren!
+  cfg.sync();
+  qDebug() << "~CRouterRoutino() - Configuration saved, paths:" << dbPaths;
 
   freeDatabaseList();
   Routino_FreeXMLProfiles();
   Routino_FreeXMLTranslations();
+}
+
+// NEUE METHODE - Für manuelles Speichern
+void CRouterRoutino::saveConfig() {
+  qDebug() << "CRouterRoutino::saveConfig() - Manually saving configuration";
+  
+  SETTINGS;
+  cfg.setValue("Route/routino/paths", dbPaths);
+  cfg.setValue("Route/routino/profile", comboProfile->currentIndex());
+  cfg.setValue("Route/routino/language", comboLanguage->currentIndex());
+  cfg.setValue("Route/routino/mode", comboMode->currentIndex());
+  cfg.setValue("Route/routino/database", comboDatabase->currentIndex());
+  cfg.sync();
+  
+  qDebug() << "CRouterRoutino::saveConfig() - Configuration saved successfully";
+}
+
+void CRouterRoutino::slotSetupPaths() {
+  CRouterRoutinoPathSetup dlg(dbPaths);
+  dlg.exec();
+
+  buildDatabaseList();
+  updateHelpText();
+  
+  // Nach Änderung der Pfade sofort speichern!
+  saveConfig();
 }
 
 QString CRouterRoutino::xlateRoutinoError(int err) {
@@ -205,14 +237,6 @@ void CRouterRoutino::setupPath(const QString& path) {
   }
 
   dbPaths << path;
-  buildDatabaseList();
-  updateHelpText();
-}
-
-void CRouterRoutino::slotSetupPaths() {
-  CRouterRoutinoPathSetup dlg(dbPaths);
-  dlg.exec();
-
   buildDatabaseList();
   updateHelpText();
 }

@@ -89,6 +89,12 @@ class CDemItem : public QObject, public QTreeWidgetItem {
      @return True if the internal list of dem objects is not empty.
    */
   bool isActivated();
+  
+/**
+  * @brief Check if the DEM is currently active
+  * @return True if the DEM is active (demfile not null)
+  */
+ bool isActive() const { return !demfile.isNull(); }
 
   /**
      @brief Set item's icon according to map type and state

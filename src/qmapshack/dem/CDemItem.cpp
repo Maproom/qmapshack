@@ -107,15 +107,22 @@ void CDemItem::shadowConfigToConfig(QSettings& cfg) const {
 }
 
 void CDemItem::saveConfig(QSettings& cfg) const {
+  qDebug() << "Saving DEM config:" << filename << "isActive:" << !demfile.isNull();
+  
   cfg.beginGroup(key);
+  
   if (demfile.isNull()) {
+    // DEM ist deaktiviert - speichere shadowConfig und setze isActive auf false
     shadowConfigToConfig(cfg);
+    cfg.setValue("isActive", false);  // WICHTIG: Explizit false setzen!
   } else {
+    // DEM ist aktiv - speichere aktuelle Config
     demfile->saveConfig(cfg);
     cfg.setValue("isActive", true);
   }
+  
   cfg.setValue("filename", filename);
-  cfg.endGroup();
+  cfg.endGroup();  // key
 }
 
 void CDemItem::loadConfig(QSettings& cfg, bool triggerActivation) {

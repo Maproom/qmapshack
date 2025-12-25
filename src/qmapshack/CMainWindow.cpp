@@ -812,8 +812,37 @@ void CMainWindow::testForNoView() {
 
 void CMainWindow::slotTabCloseRequest(int i) {
   QMutexLocker lock(&CMapItem::mutexActiveMaps);
-
-  delete tabWidget->widget(i);
+  
+  // WICHTIG: Widget-Info holen BEVOR wir es löschen!
+  QWidget* widget = tabWidget->widget(i);
+  if (!widget) {
+    return;
+  }
+  
+  CCanvas* canvas = dynamic_cast<CCanvas*>(widget);
+  
+  if (canvas) {
+    // Es ist eine Canvas-View - Config löschen
+    QString canvasName = canvas->objectName();
+    qDebug() << "Closing canvas view:" << canvasName;
+    
+    // KRITISCH: Config aus Settings entfernen!
+    SETTINGS;
+    cfg.beginGroup("Canvas");
+    cfg.beginGroup("Views");
+    cfg.remove(canvasName);  // Löscht die komplette View-Konfiguration
+    cfg.endGroup();  // Views
+    cfg.endGroup();  // Canvas
+    cfg.sync();
+    
+    qDebug() << "Canvas configuration removed:" << canvasName;
+  } else {
+    // Es ist ein anderes Widget (z.B. Track-Details)
+    qDebug() << "Closing widget:" << widget->objectName();
+  }
+  
+  // Jetzt erst das Widget löschen
+  delete widget;
 
   testForNoView();
   emit sigCanvasChange();
@@ -1812,4 +1841,3 @@ void CMainWindow::closeEvent(QCloseEvent *event)
     
     event->accept();
 }
-

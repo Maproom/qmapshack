@@ -246,3 +246,4 @@ class CMainWindow : public QMainWindow, private Ui::IMainWindow {
 };
 
 #endif  // CMAINWINDOW_H
+

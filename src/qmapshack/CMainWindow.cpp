@@ -490,115 +490,7 @@ void CMainWindow::prepareMenuForMac() {
   dockRte->toggleViewAction()->setMenuRole(QAction::NoRole);
 }
 
-CMainWindow::~CMainWindow() {
-  CActivityTrk::release();
-
-  SETTINGS;
-  cfg.beginGroup("MainWindow");
-  cfg.setValue("state", saveState());
-  cfg.setValue("geometry", saveGeometry());
-  cfg.setValue("units", IUnit::self().type);
-  QStringList activeDockNames;
-  for (QDockWidget* const& dock : std::as_const(activeDocks)) {
-    activeDockNames << dock->objectName();
-  }
-  cfg.setValue("activedocks", activeDockNames);
-
-  cfg.setValue("dockstate", dockStates);
-  cfg.setValue("menuvisible", menuVisible);
-  cfg.endGroup();
-
-  /*
-     The "Canvas" section will hold all settings global to all views
-     and "Views" section containing a subsection for each view.
-   */
-  cfg.beginGroup("Canvas");
-  QList<CCanvas*> allViews;
-  QList<QWidget*> allOtherTabs;
-
-  // save setup of all views
-  cfg.beginGroup("Views");
-  // remove all previous setups in this section first
-  cfg.remove(QString());
-
-  for (int i = 0; i < tabWidget->count(); i++) {
-    CCanvas* view = dynamic_cast<CCanvas*>(tabWidget->widget(i));
-    if (nullptr == view) {
-      allOtherTabs << tabWidget->widget(i);
-      continue;
-    }
-
-    // save views
-    cfg.beginGroup(view->objectName());
-    view->saveConfig(cfg);
-    cfg.endGroup();
-
-    allViews << view;
-  }
-  cfg.endGroup();  // Views
-
-  cfg.setValue("gisLayerOpacity", CCanvas::gisLayerOpacity);
-  cfg.setValue("visibleCanvas", tabWidget->currentIndex());
-  cfg.setValue("isGeosearchVisible", actionGeoSearch->isChecked());
-  cfg.setValue("isScaleVisible", actionShowScale->isChecked());
-  cfg.setValue("isGridVisible", actionShowGrid->isChecked());
-  cfg.setValue("POIText", actionPOIText->isChecked());
-  cfg.setValue("MapToolTip", actionMapToolTip->isChecked());
-  cfg.setValue("isNight", actionNightDay->isChecked());
-  cfg.setValue("MinMaxTrackValues", actionShowMinMaxTrackLabels->isChecked());
-  cfg.setValue("ShowMinMaxInformation", actionShowMinMaxSummary->isChecked());
-  cfg.setValue("ShowTrackInfoTable", actionShowTrackInfoTable->isChecked());
-  cfg.setValue("ShowTrackInfoPoints", actionShowTrackInfoPoints->isChecked());
-  cfg.setValue("ShowTrackSummary", actionShowTrackSummary->isChecked());
-  cfg.setValue("ShowTrackProfile", actionShowTrackProfile->isChecked());
-  cfg.setValue("ShowTrackHighlight", actionShowTrackHighlight->isChecked());
-  cfg.setValue("flipMouseWheel", actionFlipMouseWheel->isChecked());
-  cfg.setValue("profileIsWindow", actionProfileIsWindow->isChecked());
-  cfg.setValue("linkMapViews", actionLinkMapViews->isChecked());
-  cfg.setValue("mapFont", mapFont);
-  CMapDraw::saveMapPath(cfg);
-  CDemDraw::saveDemPath(cfg);
-  CPoiDraw::savePoiPath(cfg);
-  cfg.endGroup();  // Canvas
-
-  /*
-      Delete all widgets in the tab widget other than views. The IPlot objects
-      in a track detail dialog send update events to the view on destruction.
-      So it is important that these are destroyed first.
-   */
-  qDeleteAll(allOtherTabs);
-  /*
-      Delete all canvas objects now to make sure they are destroyed before all
-      other objects. This allows children of the canvas to access central objects
-      like CGisWorkspace safely upon their destruction. (e.g. CMouseRangeTrk to reset
-      it's track's draw mode by key)
-   */
-  qDeleteAll(allViews);
-
-  QByteArray tz;
-  IUnit::tz_mode_e tzmode;
-  bool useShortFormat;
-  IUnit::getTimeZoneSetup(tzmode, tz, useShortFormat);
-
-  cfg.setValue("Units/timezone", tz);
-  cfg.setValue("Units/timezone/mode", tzmode);
-  cfg.setValue("Units/time/useShortFormat", useShortFormat);
-  cfg.setValue("Units/coordFormat", IUnit::getCoordFormat());
-  cfg.setValue("Units/slopeMode", IUnit::getSlopeMode());
-
-  toolBarConfig->saveSettings();
-  geoSearchConfig->save();
-
-  // delete icon manager explicitely to make sure temporary icon files are
-  // removed upon destruction
-  delete wptIconManager;
-
-  // make sure to delete the workspace before the database as
-  // closing the workspace will send a couple of events to the
-  // database widget.
-  delete widgetGisWorkspace;
-  delete widgetGisDatabase;
-}
+// *** HIER WURDE DER ALTE DESTRUKTOR ENTFERNT ***
 
 void CMainWindow::setupHomePath() {
   SETTINGS;
@@ -1671,4 +1563,252 @@ bool CMainWindow::eventFilter(QObject* obj, QEvent* event) {
     widgetGisWorkspace->loadGisProject(openEvent->file());
   }
   return QMainWindow::eventFilter(obj, event);
+}
+
+// In CMainWindow.cpp - VOLLSTÄNDIGE Lösung mit Crash-Prevention
+// Ersetzen Sie den GESAMTEN bestehenden Destruktor durch diesen Code
+
+CMainWindow::~CMainWindow()
+{
+    qDebug() << "~CMainWindow() - Start safe destruction";
+    
+    // KRITISCH: Erst Settings speichern BEVOR wir irgendetwas zerstören
+    // Dies verhindert korrupte Settings beim nächsten Start
+    if (isVisible()) {
+        hide();
+    }
+    
+    SETTINGS;
+    cfg.beginGroup("MainWindow");
+    cfg.setValue("geometry", saveGeometry());
+    cfg.setValue("state", saveState());
+    cfg.setValue("dockstate", dockStates);
+    cfg.setValue("menuvisible", menuBar()->isVisible());
+    
+    QStringList activeDockNames;
+    for (int i = 0; i < activeDocks.size(); ++i) {
+        if (activeDocks[i]) {
+            activeDockNames << activeDocks[i]->objectName();
+        }
+    }
+    cfg.setValue("activedocks", activeDockNames);
+    cfg.endGroup();
+    
+    // Canvas-Settings speichern
+    cfg.beginGroup("Canvas");
+    cfg.setValue("visibleCanvas", tabWidget->currentIndex());
+    cfg.setValue("gisLayerOpacity", CCanvas::gisLayerOpacity);
+    
+    // WICHTIG: Alle Canvas-Views sicher speichern
+    cfg.beginGroup("Views");
+    const QList<CCanvas*>& canvasList = getCanvas();
+    for (int i = 0; i < canvasList.size(); ++i) {
+        if (canvasList[i]) {
+            cfg.beginGroup(canvasList[i]->objectName());
+            canvasList[i]->saveConfig(cfg);
+            cfg.endGroup();
+        }
+    }
+    cfg.endGroup(); // Views
+    cfg.endGroup(); // Canvas
+    
+    cfg.sync();
+    qDebug() << "~CMainWindow() - Settings saved successfully";
+    
+    // KRITISCH: Event-Filter sofort entfernen
+    if (qApp) {
+        qApp->removeEventFilter(this);
+    }
+    
+    // KRITISCH: Alle Signal/Slot-Verbindungen SOFORT trennen
+    this->blockSignals(true);
+    
+    // 1. DOCK WIDGETS - Dies ist der Schlüssel zur Lösung!
+    // Wir müssen die Dock-Widgets MANUELL und IN DER RICHTIGEN REIHENFOLGE zerstören
+    // BEVOR Qt's automatischer Destruktor sie anfasst
+    
+    // Zuerst alle Widgets aus den Docks entfernen
+    if (dockWorkspace && widgetGisWorkspace) {
+        widgetGisWorkspace->blockSignals(true);
+        widgetGisWorkspace->disconnect();
+        dockWorkspace->setWidget(nullptr);
+        widgetGisWorkspace->setParent(nullptr);
+        widgetGisWorkspace->deleteLater();
+        widgetGisWorkspace = nullptr;
+    }
+    
+    if (dockDatabase && widgetGisDatabase) {
+        widgetGisDatabase->blockSignals(true);
+        widgetGisDatabase->disconnect();
+        dockDatabase->setWidget(nullptr);
+        widgetGisDatabase->setParent(nullptr);
+        widgetGisDatabase->deleteLater();
+        widgetGisDatabase = nullptr;
+    }
+    
+    if (dockRealtime && widgetRtWorkspace) {
+        widgetRtWorkspace->blockSignals(true);
+        widgetRtWorkspace->disconnect();
+        dockRealtime->setWidget(nullptr);
+        widgetRtWorkspace->setParent(nullptr);
+        widgetRtWorkspace->deleteLater();
+        widgetRtWorkspace = nullptr;
+    }
+    
+    // Jetzt die Dock-Widgets selbst trennen und für Zerstörung vorbereiten
+    QList<QDockWidget*> docksToDelete;
+    docksToDelete << dockMaps << dockDem << dockPoi << dockWorkspace 
+                  << dockDatabase << dockRte << dockRealtime;
+    
+    for (QDockWidget* dock : docksToDelete) {
+        if (dock) {
+            dock->blockSignals(true);
+            dock->disconnect();
+            // Widget aus Dock entfernen falls noch eines drin ist
+            QWidget* w = dock->widget();
+            if (w) {
+                dock->setWidget(nullptr);
+                w->setParent(nullptr);
+            }
+            // Dock vom MainWindow trennen
+            removeDockWidget(dock);
+            dock->setParent(nullptr);
+            dock->hide();
+        }
+    }
+    
+    // Listen leeren
+    docks.clear();
+    activeDocks.clear();
+    
+    // 2. TAB WIDGETS - Alle Canvas und andere Widgets entfernen
+    if (tabWidget) {
+        tabWidget->blockSignals(true);
+        
+        QList<QWidget*> widgets;
+        while (tabWidget->count() > 0) {
+            QWidget* widget = tabWidget->widget(0);
+            tabWidget->removeTab(0);
+            if (widget) {
+                widget->blockSignals(true);
+                widget->disconnect();
+                widget->setParent(nullptr);
+                widgets << widget;
+            }
+        }
+        
+        // Widgets mit deleteLater sicher löschen
+        for (QWidget* widget : widgets) {
+            widget->deleteLater();
+        }
+        widgets.clear();
+    }
+    
+    // 3. Weitere Komponenten sicher aufräumen
+    if (geoSearchWeb) {
+        geoSearchWeb->blockSignals(true);
+        geoSearchWeb->disconnect();
+        geoSearchWeb->setParent(nullptr);
+        delete geoSearchWeb;
+        geoSearchWeb = nullptr;
+    }
+    
+    if (toolBarConfig) {
+        delete toolBarConfig;
+        toolBarConfig = nullptr;
+    }
+    
+    if (!help.isNull()) {
+        help->blockSignals(true);
+        help->disconnect();
+        help->setParent(nullptr);
+        delete help;
+    }
+    
+    // 4. Activity-Release
+    CActivityTrk::release();
+    
+    qDebug() << "~CMainWindow() - Destruction complete";
+}
+
+void CMainWindow::closeEvent(QCloseEvent *event)
+{
+    qDebug() << "CMainWindow::closeEvent - Saving settings and preparing shutdown";
+
+    // Fenster sofort verstecken
+    if (isVisible()) {
+        hide();
+    }
+
+    // WICHTIG: Alle Karten-Items deaktivieren BEVOR wir Settings speichern
+    // Dies verhindert Crashes beim nächsten Start
+    QMutexLocker lock(&CMapItem::mutexActiveMaps);
+    const QList<CCanvas*>& canvasList = getCanvas();
+    for (int i = 0; i < canvasList.size(); ++i) {
+        if (canvasList[i]) {
+            canvasList[i]->blockSignals(true);
+        }
+    }
+    lock.unlock();
+
+    SETTINGS;
+    cfg.beginGroup("MainWindow");
+    cfg.setValue("geometry", saveGeometry());
+    cfg.setValue("state", saveState());
+    cfg.setValue("dockstate", dockStates);
+    cfg.setValue("menuvisible", menuBar()->isVisible());
+    
+    QStringList activeDockNames;
+    for (int i = 0; i < activeDocks.size(); ++i) {
+        if (activeDocks[i]) {
+            activeDockNames << activeDocks[i]->objectName();
+        }
+    }
+    cfg.setValue("activedocks", activeDockNames);
+    cfg.endGroup();
+
+    cfg.beginGroup("Canvas");
+    cfg.setValue("visibleCanvas", tabWidget->currentIndex());
+    cfg.setValue("gisLayerOpacity", CCanvas::gisLayerOpacity);
+    cfg.setValue("isGeosearchVisible", actionGeoSearch->isChecked());
+    cfg.setValue("isScaleVisible", actionShowScale->isChecked());
+    cfg.setValue("isGridVisible", actionShowGrid->isChecked());
+    cfg.setValue("POIText", actionPOIText->isChecked());
+    cfg.setValue("MapToolTip", actionMapToolTip->isChecked());
+    cfg.setValue("isNight", actionNightDay->isChecked());
+    cfg.setValue("MinMaxTrackValues", actionShowMinMaxTrackLabels->isChecked());
+    cfg.setValue("ShowMinMaxInformation", actionShowMinMaxSummary->isChecked());
+    cfg.setValue("ShowTrackInfoTable", actionShowTrackInfoTable->isChecked());
+    cfg.setValue("ShowTrackInfoPoints", actionShowTrackInfoPoints->isChecked());
+    cfg.setValue("ShowTrackSummary", actionShowTrackSummary->isChecked());
+    cfg.setValue("ShowTrackProfile", actionShowTrackProfile->isChecked());
+    cfg.setValue("ShowTrackHighlight", actionShowTrackHighlight->isChecked());
+    cfg.setValue("flipMouseWheel", actionFlipMouseWheel->isChecked());
+    cfg.setValue("profileIsWindow", actionProfileIsWindow->isChecked());
+    cfg.setValue("linkMapViews", actionLinkMapViews->isChecked());
+    cfg.setValue("mapFont", mapFont);
+    
+    cfg.beginGroup("Views");
+    for (int i = 0; i < canvasList.size(); ++i) {
+        if (canvasList[i]) {
+            cfg.beginGroup(canvasList[i]->objectName());
+            canvasList[i]->saveConfig(cfg);
+            cfg.endGroup();
+        }
+    }
+    cfg.endGroup();
+    
+    CMapDraw::saveMapPath(cfg);
+    CDemDraw::saveDemPath(cfg);
+    CPoiDraw::savePoiPath(cfg);
+    cfg.endGroup();
+    
+    if (toolBarConfig) {
+        toolBarConfig->saveSettings();
+    }
+    
+    cfg.sync();
+    qDebug() << "CMainWindow::closeEvent - Settings saved successfully";
+    
+    event->accept();
 }

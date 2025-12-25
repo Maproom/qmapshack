@@ -136,6 +136,8 @@ class CMainWindow : public QMainWindow, private Ui::IMainWindow {
   void slotSetupGrid();
 
  protected:
+ // Fügen Sie diese Zeile hinzu:
+  void closeEvent(QCloseEvent *event) override;
   bool eventFilter(QObject* obj, QEvent* event) override;
 #ifdef Q_OS_WIN64
   bool nativeEvent(const QByteArray& eventType, void* message, qintptr* result);
@@ -212,6 +214,8 @@ class CMainWindow : public QMainWindow, private Ui::IMainWindow {
   static const QString databasePath;
   static const QString gpxPath;
   static const QSet<QString> paths;
+
+ Q_DISABLE_COPY(CMainWindow)
 
   /// status bar label
   QLabel* lblPosWGS84;

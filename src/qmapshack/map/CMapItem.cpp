@@ -113,13 +113,20 @@ void CMapItem::shadowConfigToConfig(QSettings& cfg) const {
 }
 
 void CMapItem::saveConfig(QSettings& cfg) const {
+  qDebug() << "Saving map config:" << filename << "isActive:" << !mapfile.isNull();
+  
   cfg.beginGroup(key);
+  
   if (mapfile.isNull()) {
+    // Karte ist deaktiviert - speichere shadowConfig und setze isActive auf false
     shadowConfigToConfig(cfg);
+    cfg.setValue("isActive", false);  // WICHTIG: Explizit false setzen!
   } else {
+    // Karte ist aktiv - speichere aktuelle Config
     mapfile->saveConfig(cfg);
     cfg.setValue("isActive", true);
   }
+  
   cfg.setValue("filename", filename);
   cfg.endGroup();  // key
 }

@@ -147,6 +147,8 @@ class CMapItem : public QObject, public QTreeWidgetItem {
    * @return Return true on success.
    */
   bool activate();
+  
+  bool isActive() const { return !mapfile.isNull(); }
 
   /**
    * @brief Indicate to the user the item is used for processing data (e.g. rendering hillshading)

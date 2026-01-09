@@ -198,6 +198,7 @@ set( SRCS
     map/CMapGEMF.cpp
     map/CMapIMG.cpp
     map/CMapItem.cpp
+    map/CMapItemDelegate.cpp
     map/CMapJNX.cpp
     map/CMapList.cpp
     map/CMapMAP.cpp
@@ -329,7 +330,6 @@ set( SRCS
     widgets/CIconGrid.cpp
     widgets/CLedIndicator.cpp
     widgets/CLineEdit.cpp
-    widgets/CMapItemWidget.cpp
     widgets/CPhotoAlbum.cpp
     widgets/CSelectDoubleListWidget.cpp
     widgets/CScaleWidget.cpp
@@ -570,6 +570,7 @@ set( HDRS
     map/CMapGEMF.h
     map/CMapIMG.h
     map/CMapItem.h
+    map/CMapItemDelegate.h
     map/CMapJNX.h
     map/CMapList.h
     map/CMapMAP.h
@@ -580,6 +581,7 @@ set( HDRS
     map/CMapVRT.h
     map/CMapWMTS.h
     map/IMap.h
+    map/IMapItem.h
     map/IMapOnline.h
     map/IMapProp.h
     map/IMapPropSetup.h
@@ -703,7 +705,6 @@ set( HDRS
     widgets/CIconGrid.h
     widgets/CLedIndicator.h
     widgets/CLineEdit.h
-    widgets/CMapItemWidget.h
     widgets/CPhotoAlbum.h
     widgets/CSelectDoubleListWidget.h
     widgets/CScaleWidget.h

@@ -325,11 +325,10 @@ void CMapDraw::loadMapList(QSettings& cfg) {
   QList<CMapItem*> mapsUnknown = mapsFound.values();
   std::sort(mapsUnknown.begin(), mapsUnknown.end(), &sortByName<CMapItem>);
   for (CMapItem* map : mapsUnknown) {
-    map->setStatus(CMapItemWidget::eStatus::Unused);
-
     QFileInfo fi(map->getFilename());
     maps << fi.completeBaseName();
     mapList->addMap(map);
+    map->setStatus(IMapItem::eStatus::Unused);
   }
 
   // ------------- stat --------------

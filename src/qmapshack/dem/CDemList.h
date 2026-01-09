@@ -30,8 +30,6 @@ class CDemTreeWidget : public QTreeWidget {
  public:
   CDemTreeWidget(QWidget* parent);
 
-  void restoreItemWidgetDelayed(CDemItem* map);
-
  signals:
   void sigChanged();
 
@@ -39,6 +37,9 @@ class CDemTreeWidget : public QTreeWidget {
   void dragEnterEvent(QDragEnterEvent* e) override;
   void dragLeaveEvent(QDragLeaveEvent* e) override;
   void dropEvent(QDropEvent* event) override;
+
+ private slots:
+  void slotUpdateItem(const QString& key);
 };
 
 #include "ui_IDemList.h"

@@ -30,8 +30,6 @@ class CMapTreeWidget : public QTreeWidget {
  public:
   CMapTreeWidget(QWidget* parent);
 
-  void restoreItemWidgetDelayed(CMapItem* map);
-
  signals:
   void sigChanged();
 
@@ -39,6 +37,8 @@ class CMapTreeWidget : public QTreeWidget {
   void dragEnterEvent(QDragEnterEvent* e) override;
   void dragLeaveEvent(QDragLeaveEvent* e) override;
   void dropEvent(QDropEvent* e) override;
+ private slots:
+  void slotUpdateItem(const QString& key);
 };
 
 #include "ui_IMapList.h"

@@ -24,43 +24,19 @@
 #include "dem/CDemVRT.h"
 #include "dem/CDemWCS.h"
 #include "dem/IDemProp.h"
+#include "map/CMapItemDelegate.h"
 #include "misc.h"
 
 QRecursiveMutex CDemItem::mutexActiveDems;
 
 CDemItem::CDemItem(CDemDraw* dem) : dem(dem) {
   setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsDragEnabled);
-
-  itemWidget();
+  connect(dem, &CDemDraw::sigScaleChanged, this, &CDemItem::slotScaleChanged);
 }
 
 CDemItem::~CDemItem() {}
 
-QWidget* CDemItem::itemWidget() {
-  if (widget.isNull()) {
-    widget = new CMapItemWidget(tr("DEM"));
-    QFileInfo fi(filename);
-    setName(fi.completeBaseName().replace("_", " "));
-
-    if (QFile::exists(filename)) {
-      if (noShadowConfig()) {
-        setStatus(CMapItemWidget::eStatus::Unused);
-      } else {
-        setStatus(demfile.isNull() ? CMapItemWidget::eStatus::Inactive : CMapItemWidget::eStatus::Active);
-      }
-    } else {
-      setStatus(CMapItemWidget::eStatus::Missing);
-    }
-    widget->setDrawObject(demfile, dem->getScale());
-
-    connect(widget, &CMapItemWidget::sigActivate, this, &CDemItem::slotActivate);
-    connect(widget, &CMapItemWidget::destroyed, this, [this] { emit sigUpdateWidget(this); });
-    connect(dem, &CDemDraw::sigScaleChanged, widget, &CMapItemWidget::slotScaleChanged);
-  }
-  return widget;
-}
-
-void CDemItem::slotActivate(bool yes) {
+void CDemItem::activate(bool yes) {
   if (yes) {
     activate();
   } else {
@@ -69,13 +45,6 @@ void CDemItem::slotActivate(bool yes) {
 
   emit sigChanged();
 }
-
-void CDemItem::setName(const QString& name) {
-  widget->setName(name);
-  setText(0, name);
-}
-
-void CDemItem::setStatus(CMapItemWidget::eStatus status) { widget->setStatus(status); }
 
 void CDemItem::setFilename(const QString& name, const QString& fallbackKey) {
   filename = name;
@@ -135,17 +104,17 @@ void CDemItem::loadConfig(QSettings& cfg, bool triggerActivation) {
   cfg.endGroup();
 
   if (!QFile::exists(filename)) {
-    setStatus(CMapItemWidget::eStatus::Missing);
+    setStatus(eStatus::Missing);
     return;
   } else if (noShadowConfig()) {
-    setStatus(CMapItemWidget::eStatus::Unused);
+    setStatus(eStatus::Unused);
   } else {
-    setStatus(CMapItemWidget::eStatus::Inactive);
+    setStatus(eStatus::Inactive);
     if (triggerActivation) {
       // Evil hack: If you activate the DEM directly Qt will crash internally.
       QPointer<CDemItem> self(this);
       QTimer::singleShot(100, this, [self, active]() {
-        if (!self.isNull()) self->slotActivate(active);
+        if (!self.isNull()) self->activate(active);
       });
     }
   }
@@ -173,12 +142,12 @@ void CDemItem::updateIcon() {
     return;
   }
 
-  QPixmap img("://icons/32x32/Map.png");
+  QPixmap img("://icons/48x48/Map.png");
   QFileInfo fi(filename);
   if (fi.suffix().toLower() == "vrt") {
-    img = QPixmap("://icons/32x32/MimeDemVRT.png");
+    img = QPixmap("://icons/48x48/MimeDemVRT.png");
   } else if (fi.suffix().toLower() == "wcs") {
-    img = QPixmap("://icons/32x32/MimeDemWCS.png");
+    img = QPixmap("://icons/48x48/MimeDemWCS.png");
   }
 
   setIcon(0, QIcon(img));
@@ -212,7 +181,7 @@ void CDemItem::deactivate() {
   // maybe used to reflect changes in the icon
   updateIcon();
 
-  setStatus(CMapItemWidget::eStatus::Inactive);
+  setStatus(eStatus::Inactive);
 }
 
 bool CDemItem::activate() {
@@ -232,7 +201,7 @@ bool CDemItem::activate() {
 
   // no demfile loaded? Bad.
   if (demfile.isNull()) {
-    setStatus(CMapItemWidget::eStatus::Inactive);
+    setStatus(eStatus::Inactive);
     return false;
   }
 
@@ -240,11 +209,9 @@ bool CDemItem::activate() {
   // else delete all previous loaded DEMs and abort
   if (!demfile->activated()) {
     delete demfile;
-    setStatus(CMapItemWidget::eStatus::Inactive);
+    setStatus(eStatus::Inactive);
     return false;
   }
-
-  // setToolTip(0, demfile->getCopyright());
 
   // setup DEM with settings stored in
   // the shadow config
@@ -263,19 +230,47 @@ bool CDemItem::activate() {
   // Add the demfile setup dialog as child of this item
   showChildren(true);
 
-  widget->setDrawObject(demfile, dem->getScale());
-  setStatus(CMapItemWidget::eStatus::Active);
+  // make sure the delegate is updated
+  setStatus(eStatus::Active);
+  slotScaleChanged(dem->getScale());
   return true;
 }
 
 void CDemItem::setAccess(const QString& ele) {
-  if (!widget.isNull()) {
-    widget->setAccess(ele);
+  const QModelIndex& index = treeWidget()->indexFromItem(this);
+  CMapItemDelegate* delegate = dynamic_cast<CMapItemDelegate*>(treeWidget()->itemDelegate());
+  if (delegate == nullptr) {
+    return;
   }
+
+  delegate->setAccess(index, ele);
 }
 
 void CDemItem::setProcessing(bool on) {
-  if (!widget.isNull()) {
-    widget->setProcessing(on);
+  const QModelIndex& index = treeWidget()->indexFromItem(this);
+  CMapItemDelegate* delegate = dynamic_cast<CMapItemDelegate*>(treeWidget()->itemDelegate());
+  if (delegate == nullptr) {
+    return;
+  }
+
+  delegate->setProcessing(index, on);
+}
+
+void CDemItem::slotScaleChanged(const QPointF& scale) {
+  if (demfile.isNull()) {
+    return;
+  }
+
+  const QModelIndex& index = treeWidget()->indexFromItem(this);
+  CMapItemDelegate* delegate = dynamic_cast<CMapItemDelegate*>(treeWidget()->itemDelegate());
+  if (delegate == nullptr) {
+    return;
+  }
+
+  outOfScale = demfile->isOutOfScale(scale);
+  if (outOfScale) {
+    delegate->setColor(index, kColorOut);
+  } else {
+    delegate->setColor(index, kColorIn);
   }
 }

@@ -23,14 +23,24 @@
 #include "CMainWindow.h"
 #include "dem/CDemDraw.h"
 #include "dem/CDemItem.h"
+#include "map/CMapItemDelegate.h"
 
-CDemTreeWidget::CDemTreeWidget(QWidget* parent) : QTreeWidget(parent) {}
+CDemTreeWidget::CDemTreeWidget(QWidget* parent) : QTreeWidget(parent) {
+  CMapItemDelegate* delegate = new CMapItemDelegate(this);
+  setItemDelegate(delegate);
+  QObject::connect(delegate, &CMapItemDelegate::sigUpdateItem, this, &CDemTreeWidget::slotUpdateItem);
+}
 
-void CDemTreeWidget::restoreItemWidgetDelayed(CDemItem* map) {
-  QPointer<CDemItem> pMap(map);
-  QTimer::singleShot(100, this, [this, pMap]() {
-    if (!pMap.isNull()) setItemWidget(pMap, 0, pMap->itemWidget());
-  });
+void CDemTreeWidget::slotUpdateItem(const QString& key) {
+  const int N = topLevelItemCount();
+  for (int n = 0; n < N; n++) {
+    CDemItem* dem = dynamic_cast<CDemItem*>(topLevelItem(n));
+    if (dem == nullptr || dem->getKey() != key) {
+      continue;
+    }
+    viewport()->update(visualItemRect(dem));
+    break;
+  }
 }
 
 void CDemTreeWidget::dragEnterEvent(QDragEnterEvent* e) {
@@ -52,7 +62,6 @@ void CDemTreeWidget::dragLeaveEvent(QDragLeaveEvent* e) {
   if (item) {
     item->showChildren(true);
     QPointer<CDemItem> pMap(item);
-    restoreItemWidgetDelayed(item);
   }
 }
 
@@ -66,7 +75,6 @@ void CDemTreeWidget::dropEvent(QDropEvent* e) {
 
   if (item) {
     item->showChildren(true);
-    restoreItemWidgetDelayed(item);
   }
 
   setCurrentItem(nullptr);
@@ -101,7 +109,6 @@ CDemList::~CDemList() {}
 
 void CDemList::addDem(CDemItem* dem) {
   treeWidget->addTopLevelItem(dem);
-  treeWidget->setItemWidget(dem, 0, dem->itemWidget());
   connect(dem, &CDemItem::sigChanged, this, &CDemList::sigChanged);
 }
 
@@ -147,7 +154,6 @@ void CDemList::moveDemToTop(CDemItem* dem) {
   treeWidget->takeTopLevelItem(index);
   treeWidget->insertTopLevelItem(0, dem);
   dem->showChildren(true);
-  treeWidget->restoreItemWidgetDelayed(dem);
 }
 
 void CDemList::slotMoveUp() {
@@ -166,7 +172,6 @@ void CDemList::slotMoveUp() {
   treeWidget->takeTopLevelItem(index);
   treeWidget->insertTopLevelItem(index - 1, item);
   item->showChildren(true);
-  treeWidget->restoreItemWidgetDelayed(item);
   treeWidget->setCurrentItem(0);
   emit treeWidget->sigChanged();
 }
@@ -187,7 +192,6 @@ void CDemList::slotMoveDown() {
   treeWidget->takeTopLevelItem(index);
   treeWidget->insertTopLevelItem(index + 1, item);
   item->showChildren(true);
-  treeWidget->restoreItemWidgetDelayed(item);
   treeWidget->setCurrentItem(0);
   emit treeWidget->sigChanged();
 }
@@ -213,13 +217,19 @@ void CDemList::slotContextMenu(const QPoint& point) {
 
   actionMoveUp->setEnabled(itemIsSelected && (treeWidget->itemAbove(item) != 0));
   actionMoveDown->setEnabled(itemIsSelected && (treeWidget->itemBelow(item) != 0));
-  actionRemove->setVisible(itemIsSelected && item->getStatus() == CMapItemWidget::eStatus::Missing);
+  actionRemove->setVisible(itemIsSelected && item->getStatus() == IMapItem::eStatus::Missing);
 
   QPoint p = treeWidget->mapToGlobal(point);
   menu->exec(p);
 }
 
-void CDemList::slotReloadDem() { CDemDraw::setupDemPath(CDemDraw::getDemPaths()); }
+void CDemList::slotReloadDem() {
+  CMapItemDelegate* delegate = dynamic_cast<CMapItemDelegate*>(treeWidget->itemDelegate());
+  if (delegate != nullptr) {
+    delegate->reset();
+  }
+  CDemDraw::setupDemPath(CDemDraw::getDemPaths());
+}
 
 void CDemList::slotFilter(const QString& str) {
   actionClearFilter->setIcon(str.isEmpty() ? QIcon("://icons/32x32/Filter.png") : QIcon("://icons/32x32/Cancel.png"));

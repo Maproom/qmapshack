@@ -23,13 +23,13 @@
 #include <QPointer>
 #include <QTreeWidgetItem>
 
-#include "widgets/CMapItemWidget.h"
+#include "map/IMapItem.h"
 
 class IDem;
 class CDemDraw;
 class QSettings;
 
-class CDemItem : public QObject, public QTreeWidgetItem {
+class CDemItem : public QObject, public IMapItem, public QTreeWidgetItem {
   Q_OBJECT
  public:
   CDemItem(CDemDraw* dem);
@@ -45,16 +45,6 @@ class CDemItem : public QObject, public QTreeWidgetItem {
    * @param fallbackKey
    */
   void setFilename(const QString& name, const QString& fallbackKey);
-  /**
-   * @brief Set the map's name in the CMapItemWidget
-   * @param text
-   */
-  void setName(const QString& Name);
-  /**
-   * @brief Set the status in the CMapItemWidget
-   * @param status
-   */
-  void setStatus(CMapItemWidget::eStatus status);
   /**
    * @brief Save the map's configuration into the given QSettings object
    *
@@ -102,12 +92,6 @@ class CDemItem : public QObject, public QTreeWidgetItem {
   void showChildren(bool yes);
 
   /**
-   * @brief Get the map's name as displayed
-   * @return
-   */
-  QString getName() const { return widget->getName(); }
-
-  /**
    * @brief Get the map's full filename
    * @return
    */
@@ -123,24 +107,13 @@ class CDemItem : public QObject, public QTreeWidgetItem {
    * @brief Get the map's hash/key derived from the map file content
    * @return
    */
-  const QString& getKey() { return key; }
+  const QString& getKey() override { return key; }
 
   /**
-   * @brief Get the items activity status
-   * @return
+   * @brief Activate or deactivate map
+   * @param yes   set true for activation and false for deactivation
    */
-  CMapItemWidget::eStatus getStatus() const { return widget->getStatus(); }
-
-  /**
-   * @brief Get the tre widget item's widget.
-   *
-   * This will always return a valid pointer. If the widget
-   * has been delete by the tree widget a new one will be
-   * created on-th-fly
-   *
-   * @return
-   */
-  QWidget* itemWidget();
+  void activate(bool yes) override;
 
   /**
    * @brief Load all internal map objects
@@ -168,8 +141,8 @@ class CDemItem : public QObject, public QTreeWidgetItem {
   // emitted if the tree widget item's widget was destroyed
   void sigUpdateWidget(CDemItem*);
 
- public slots:
-  void slotActivate(bool yes);
+ private slots:
+  void slotScaleChanged(const QPointF& scale);
 
  private:
   friend class CDemTreeWidget;
@@ -210,12 +183,6 @@ class CDemItem : public QObject, public QTreeWidgetItem {
      @brief List of loaded map objects when map is activated.
    */
   QPointer<IDem> demfile;
-
-  /**
-   * @brief The map item's own widget to be shown in the tree widget
-   */
-  QPointer<CMapItemWidget> widget;
-
   /**
    * @brief The shadow config of the map's configuration
    *

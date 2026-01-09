@@ -207,9 +207,9 @@ void CDemDraw::loadDemList(QSettings& cfg) {
   // dem items.
   QList<CDemItem*> demsUnknown = demsFound.values();
   std::sort(demsUnknown.begin(), demsUnknown.end(), &sortByName<CDemItem>);
-  for (CDemItem* dem : demsUnknown) {
-    dem->setStatus(CMapItemWidget::eStatus::Unused);
+  for (CDemItem* dem : demsUnknown) {    
     demList->addDem(dem);
+    dem->setStatus(IMapItem::eStatus::Unused);
   }
 
   // ------------- stat --------------

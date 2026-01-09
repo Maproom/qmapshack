@@ -23,15 +23,25 @@
 #include "CMainWindow.h"
 #include "map/CMapDraw.h"
 #include "map/CMapItem.h"
+#include "map/CMapItemDelegate.h"
 #include "misc.h"
 
-CMapTreeWidget::CMapTreeWidget(QWidget* parent) : QTreeWidget(parent) {}
+CMapTreeWidget::CMapTreeWidget(QWidget* parent) : QTreeWidget(parent) {
+  CMapItemDelegate* delegate = new CMapItemDelegate(this);
+  setItemDelegate(delegate);
+  QObject::connect(delegate, &CMapItemDelegate::sigUpdateItem, this, &CMapTreeWidget::slotUpdateItem);
+}
 
-void CMapTreeWidget::restoreItemWidgetDelayed(CMapItem* map) {
-  QPointer<CMapItem> pMap(map);
-  QTimer::singleShot(100, this, [this, pMap]() {
-    if (!pMap.isNull()) setItemWidget(pMap, 0, pMap->itemWidget());
-  });
+void CMapTreeWidget::slotUpdateItem(const QString& key) {
+  const int N = topLevelItemCount();
+  for (int n = 0; n < N; n++) {
+    CMapItem* map = dynamic_cast<CMapItem*>(topLevelItem(n));
+    if (map == nullptr || map->getKey() != key) {
+      continue;
+    }
+    viewport()->update(visualItemRect(map));
+    break;
+  }
 }
 
 void CMapTreeWidget::dragEnterEvent(QDragEnterEvent* e) {
@@ -53,7 +63,6 @@ void CMapTreeWidget::dragLeaveEvent(QDragLeaveEvent* e) {
 
   if (item) {
     item->showChildren(true);
-    restoreItemWidgetDelayed(item);
   }
 }
 
@@ -67,7 +76,6 @@ void CMapTreeWidget::dropEvent(QDropEvent* e) {
 
   if (item) {
     item->showChildren(true);
-    restoreItemWidgetDelayed(item);
   }
 
   setCurrentItem(nullptr);
@@ -102,7 +110,6 @@ CMapList::~CMapList() {}
 
 void CMapList::addMap(CMapItem* map) {
   treeWidget->addTopLevelItem(map);
-  treeWidget->setItemWidget(map, 0, map->itemWidget());
   connect(map, &CMapItem::sigChanged, this, &CMapList::sigChanged);
 }
 
@@ -148,7 +155,6 @@ void CMapList::moveMapToTop(CMapItem* map) {
   treeWidget->takeTopLevelItem(index);
   treeWidget->insertTopLevelItem(0, map);
   map->showChildren(true);
-  treeWidget->restoreItemWidgetDelayed(map);
 }
 
 void CMapList::slotMoveUp() {
@@ -167,7 +173,6 @@ void CMapList::slotMoveUp() {
   treeWidget->takeTopLevelItem(index);
   treeWidget->insertTopLevelItem(index - 1, item);
   item->showChildren(true);
-  treeWidget->restoreItemWidgetDelayed(item);
   treeWidget->setCurrentItem(0);
   emit treeWidget->sigChanged();
 }
@@ -188,7 +193,6 @@ void CMapList::slotMoveDown() {
   treeWidget->takeTopLevelItem(index);
   treeWidget->insertTopLevelItem(index + 1, item);
   item->showChildren(true);
-  treeWidget->restoreItemWidgetDelayed(item);
   treeWidget->setCurrentItem(0);
   emit treeWidget->sigChanged();
 }
@@ -214,7 +218,7 @@ void CMapList::slotContextMenu(const QPoint& point) {
 
   actionMoveUp->setEnabled(itemIsSelected && (treeWidget->itemAbove(item) != 0));
   actionMoveDown->setEnabled(itemIsSelected && (treeWidget->itemBelow(item) != 0));
-  actionRemove->setVisible(itemIsSelected && item->getStatus() == CMapItemWidget::eStatus::Missing);
+  actionRemove->setVisible(itemIsSelected && item->getStatus() == IMapItem::eStatus::Missing);
 
   QPoint p = treeWidget->mapToGlobal(point);
   menu->exec(p);
@@ -258,7 +262,13 @@ void CMapList::slotMapHonk() {
   }
 }
 
-void CMapList::slotReloadMaps() { CMapDraw::setupMapPath(CMapDraw::getMapPaths()); }
+void CMapList::slotReloadMaps() {
+  CMapItemDelegate* delegate = dynamic_cast<CMapItemDelegate*>(treeWidget->itemDelegate());
+  if (delegate != nullptr) {
+    delegate->reset();
+  }
+  CMapDraw::setupMapPath(CMapDraw::getMapPaths());
+}
 
 void CMapList::slotFilter(const QString& str) {
   actionClearFilter->setIcon(str.isEmpty() ? QIcon("://icons/32x32/Filter.png") : QIcon("://icons/32x32/Cancel.png"));

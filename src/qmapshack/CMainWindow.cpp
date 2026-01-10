@@ -491,6 +491,10 @@ void CMainWindow::prepareMenuForMac() {
 }
 
 CMainWindow::~CMainWindow() {
+
+  // Invalidate stylesheet to avoid crash after destruction (macOS!)
+  qApp->setStyleSheet("");
+
   CActivityTrk::release();
 
   SETTINGS;

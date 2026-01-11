@@ -225,9 +225,21 @@ CMainWindow::CMainWindow() : id(QRandomGenerator::global()->generate()) {
   connect(actionStartQMapTool, &QAction::triggered, this, &CMainWindow::slotStartQMapTool);
   connect(actionRenameView, &QAction::triggered, this, &CMainWindow::slotRenameView);
   connect(tabWidget, &QTabWidget::tabCloseRequested, this, &CMainWindow::slotTabCloseRequest);
+  connect(tabWidget, &QTabWidget::tabBarDoubleClicked, this, &CMainWindow::slotRenameView);
   connect(tabWidget, &QTabWidget::currentChanged, this, &CMainWindow::slotCurrentTabCanvas);
   connect(tabMaps, &QTabWidget::currentChanged, this, &CMainWindow::slotCurrentTabMaps);
   connect(tabDem, &QTabWidget::currentChanged, this, &CMainWindow::slotCurrentTabDem);
+  connect(tabWidget, &QTabWidget::currentChanged, this, &CMainWindow::slotCurrentTabCanvas);
+
+  // to keep tab order in sync with map, dem and poi tab widgets
+  connect(tabMaps, &QTabWidget::currentChanged, this, &CMainWindow::slotCurrentTabMaps);
+  connect(tabDem, &QTabWidget::currentChanged, this, &CMainWindow::slotCurrentTabDem);
+  connect(tabPoi, &QTabWidget::currentChanged, this, &CMainWindow::slotCurrentTabPoi);
+  connect(tabWidget->tabBar(), &QTabBar::tabMoved, this, [this](int from, int to) {
+    tabMaps->tabBar()->moveTab(from, to);
+    tabDem->tabBar()->moveTab(from, to);
+    tabPoi->tabBar()->moveTab(from, to);
+  });
 
   if (IAppSetup::getPlatformInstance()->findExecutable("qmaptool").isEmpty()) {
     actionStartQMapTool->setVisible(false);
@@ -238,8 +250,12 @@ CMainWindow::CMainWindow() : id(QRandomGenerator::global()->generate()) {
   CDemDraw::loadDemPath(cfg);
   CPoiDraw::loadPoiPath(cfg);
 
+  QStringList names = cfg.value("canvasOrder").toStringList();
+
   cfg.beginGroup("Views");
-  const QStringList& names = cfg.childGroups();
+  if (names.isEmpty()) {
+    names = cfg.childGroups();
+  }
 
   for (const QString& name : names) {
     CCanvas* view = createCanvas(name);
@@ -249,6 +265,7 @@ CMainWindow::CMainWindow() : id(QRandomGenerator::global()->generate()) {
     cfg.endGroup();  // name
   }
   if (names.isEmpty()) {
+    // keep for new installations without config
     CCanvas* view = createCanvas(QString());
     // call just to setup default values
     cfg.beginGroup(view->objectName());
@@ -256,6 +273,7 @@ CMainWindow::CMainWindow() : id(QRandomGenerator::global()->generate()) {
     cfg.endGroup();
   }
   cfg.endGroup();  // Views
+
   testForNoView();
 
   CCanvas::gisLayerOpacity = cfg.value("gisLayerOpacity", 1.0).toFloat();
@@ -491,7 +509,6 @@ void CMainWindow::prepareMenuForMac() {
 }
 
 CMainWindow::~CMainWindow() {
-
   // Invalidate stylesheet to avoid crash after destruction (macOS!)
   qApp->setStyleSheet("");
 
@@ -519,20 +536,24 @@ CMainWindow::~CMainWindow() {
   cfg.beginGroup("Canvas");
   QList<CCanvas*> allViews;
   QList<QWidget*> allOtherTabs;
+  QStringList allViewNames;
 
   // save setup of all views
   cfg.beginGroup("Views");
   // remove all previous setups in this section first
   cfg.remove(QString());
 
+  // Views
   for (int i = 0; i < tabWidget->count(); i++) {
     CCanvas* view = dynamic_cast<CCanvas*>(tabWidget->widget(i));
+
     if (nullptr == view) {
       allOtherTabs << tabWidget->widget(i);
       continue;
     }
 
     // save views
+    allViewNames << view->objectName();
     cfg.beginGroup(view->objectName());
     view->saveConfig(cfg);
     cfg.endGroup();
@@ -541,6 +562,7 @@ CMainWindow::~CMainWindow() {
   }
   cfg.endGroup();  // Views
 
+  cfg.setValue("canvasOrder", allViewNames);
   cfg.setValue("gisLayerOpacity", CCanvas::gisLayerOpacity);
   cfg.setValue("visibleCanvas", tabWidget->currentIndex());
   cfg.setValue("isGeosearchVisible", actionGeoSearch->isChecked());
@@ -1004,6 +1026,23 @@ void CMainWindow::slotCurrentTabDem(int i) {
 
   for (int n = 0; n < tabMaps->count(); n++) {
     if (compareNames(name, tabMaps->tabText(n))) {
+      tabMaps->setCurrentIndex(n);
+      break;
+    }
+  }
+}
+
+void CMainWindow::slotCurrentTabPoi(int i) {
+  QString name = tabPoi->tabText(i);
+  for (int n = 0; n < tabWidget->count(); n++) {
+    if (compareNames(name, tabWidget->tabText(n))) {
+      tabWidget->setCurrentIndex(n);
+      break;
+    }
+  }
+
+  for (int n = 0; n < tabPoi->count(); n++) {
+    if (compareNames(name, tabPoi->tabText(n))) {
       tabMaps->setCurrentIndex(n);
       break;
     }

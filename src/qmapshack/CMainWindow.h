@@ -152,6 +152,7 @@ class CMainWindow : public QMainWindow, private Ui::IMainWindow {
   void slotCurrentTabCanvas(int i);
   void slotCurrentTabMaps(int i);
   void slotCurrentTabDem(int i);
+  void slotCurrentTabPoi(int i);
   void slotMousePosition(const QPointF& pos, qreal ele, qreal slope);
   void slotUpdateTabWidgets();
   void slotSetupMapFont();

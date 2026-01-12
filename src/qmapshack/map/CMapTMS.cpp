@@ -107,6 +107,10 @@ CMapTMS::CMapTMS(const QString& filename, CMapDraw* parent) : IMapOnline(parent)
     layers[idx].minZoomLevel = minZoomLevel;
     layers[idx].maxZoomLevel = maxZoomLevel;
 
+    layers[idx].strUrl.replace("{z}", "%1", Qt::CaseInsensitive);
+    layers[idx].strUrl.replace("{x}", "%2", Qt::CaseInsensitive);
+    layers[idx].strUrl.replace("{y}", "%3", Qt::CaseInsensitive);
+
     if (xmlLayer.namedItem("Title").isElement()) {
       layers[idx].title = xmlLayer.namedItem("Title").toElement().text();
     } else {

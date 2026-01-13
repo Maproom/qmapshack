@@ -120,10 +120,11 @@ function buildAppStructure {
 
 
 function copyQtTranslations {
-    QT_TRANSLATIONS_DIR=$(find $QT_DEV_PATH -type d -name translations | head -n1)
+    QT_TRANSLATIONS_DIR=$(find -L $QT_DEV_PATH -type d -name translations | head -n1)
     for i in "${APP_LANG[@]}"
     do
-        for MOD in qtbase qtmultimedia qtquickcontrols2 qtdeclarative
+        #for MOD in qt qtbase qtmultimedia qtquickcontrols2 qtdeclarative
+        for MOD in qt
         do
             FILE="$QT_TRANSLATIONS_DIR/${MOD}_${i}.qm"
             if [ -f "$FILE" ]; then
@@ -198,7 +199,7 @@ function adjustLinking {
         # adjustLinkQt $F "$PACKAGES_PATH/"
     done
 
-    for F in `find $BUILD_BUNDLE_FRW_DIR/Qt*.framework/Versions/5 -type f -maxdepth 1`
+    for F in `find $BUILD_BUNDLE_FRW_DIR/Qt*.framework/Versions/A -type f -maxdepth 1`
     do
         adjustLinkQt $F "$PACKAGES_PATH/"
     done

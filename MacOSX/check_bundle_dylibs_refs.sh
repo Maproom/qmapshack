@@ -50,12 +50,12 @@ function printLinkingApp {
         printLinking $F
     done
 
-    for F in `find $BUILD_BUNDLE_FRW_DIR/Qt*.framework/Versions/5 -type f -maxdepth 1`
+    for F in `find $BUILD_BUNDLE_FRW_DIR/Qt*.framework/Versions/A -type f -maxdepth 1`
     do
         printLinking $F
     done
 
-    for F in `find $BUILD_BUNDLE_FRW_DIR/Qt*.framework/Versions/5/Helpers/QtWebEngineProcess.app/Contents/MacOS/QtWebEngineProcess -type f -maxdepth 1`
+    for F in `find $BUILD_BUNDLE_FRW_DIR/Qt*.framework/Versions/A/Helpers/QtWebEngineProcess.app/Contents/MacOS/QtWebEngineProcess -type f -maxdepth 1`
     do
         printLinking $F
     done
@@ -72,12 +72,12 @@ function printLinkingApp {
         checkLibraries $F
     done
 
-    for F in `find $BUILD_BUNDLE_FRW_DIR/Qt*.framework/Versions/5 -type f -maxdepth 1`
+    for F in `find $BUILD_BUNDLE_FRW_DIR/Qt*.framework/Versions/A -type f -maxdepth 1`
     do
         checkLibraries $F
     done
 
-    for F in `find $BUILD_BUNDLE_FRW_DIR/Qt*.framework/Versions/5/Helpers/QtWebEngineProcess.app/Contents/MacOS/QtWebEngineProcess -type f -maxdepth 1`
+    for F in `find $BUILD_BUNDLE_FRW_DIR/Qt*.framework/Versions/A/Helpers/QtWebEngineProcess.app/Contents/MacOS/QtWebEngineProcess -type f -maxdepth 1`
     do
         echo $F
         checkLibraries $F

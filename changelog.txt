@@ -6,6 +6,7 @@ V1.XX.X
 [QMS-907] Fix: Bad UX with progress dialog and wait cursor
 [QMS-920] Support {z}/{x}/{y} template params in TMS ServerUrl
 [QMS-922] macOS warning "no file found for translations ... (using default)."
+[QMS-924] Enhance debug output by command line and configuration path
 [QMS-927] Strange "shadow configuration" behavior
 
 V1.19.0

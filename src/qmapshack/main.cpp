@@ -21,11 +21,19 @@
 
 #include "CMainWindow.h"
 #include "CSingleInstanceProxy.h"
+#include "helpers/CSettings.h"
 #include "setup/CAppOpts.h"
 #include "setup/IAppSetup.h"
 #include "version.h"
 
 int main(int argc, char** argv) {
+  // preserve "original" argument list
+  int argCnt = argc;
+  char** argVal = new char*[argCnt];
+  for (int i = 0; i < argCnt; i++) {
+    argVal[i] = argv[i];
+  }
+
   QApplication app(argc, argv);
 
   QCoreApplication::setApplicationName("QMapShack");
@@ -36,6 +44,21 @@ int main(int argc, char** argv) {
   IAppSetup* env = IAppSetup::getPlatformInstance();
   env->processArguments();
   env->initLogHandler();
+
+  // useful debug info
+  {
+    qDebug().nospace() << "Qt versions: " << "build=" << QT_VERSION_STR << ", runtime=" << qVersion();
+    QString argList("");
+    for (int i = 1; i < argCnt; i++) {
+      argList += " \"" + QString(argVal[i]) + "\"";
+    }
+    qDebug() << "Executable path:" << QFileInfo(argVal[0]).absoluteFilePath();
+    qDebug().noquote().nospace() << "Argument list:" << argList;
+    SETTINGS;
+    qDebug() << "Configuration path:" << cfg.fileName();
+  }
+  delete[] argVal;
+
   env->initQMapShack();
 
   // setup default proxy

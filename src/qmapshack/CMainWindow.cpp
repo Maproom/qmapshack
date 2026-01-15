@@ -875,6 +875,7 @@ void CMainWindow::slotCloneCanvas() {
   }
 
   QTemporaryFile temp;
+  openFileCheckSuccess(QIODevice::ReadWrite, temp);
   QSettings view(temp.fileName(), QSettings::IniFormat);
   view.clear();
 

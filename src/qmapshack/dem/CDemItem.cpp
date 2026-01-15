@@ -198,6 +198,7 @@ void CDemItem::deactivate() {
   // save current configuration into
   // the shadow configuration
   QTemporaryFile file;
+  openFileCheckSuccess(QIODevice::ReadWrite, file);
   QSettings cfg(file.fileName(), QSettings::IniFormat);
   demfile->saveConfig(cfg);
   configToShadowConfig(cfg);
@@ -248,6 +249,7 @@ bool CDemItem::activate() {
   // setup DEM with settings stored in
   // the shadow config
   QTemporaryFile file;
+  openFileCheckSuccess(QIODevice::ReadWrite, file);
   QSettings cfg(file.fileName(), QSettings::IniFormat);
 
   shadowConfigToConfig(cfg);

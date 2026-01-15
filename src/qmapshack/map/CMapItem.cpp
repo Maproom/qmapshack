@@ -31,6 +31,7 @@
 #include "map/CMapVRT.h"
 #include "map/CMapWMTS.h"
 #include "map/IMapProp.h"
+#include "misc.h"
 
 QRecursiveMutex CMapItem::mutexActiveMaps;
 
@@ -205,6 +206,7 @@ void CMapItem::deactivate() {
   // save current configuration into
   // the shadow configuration
   QTemporaryFile file;
+  openFileCheckSuccess(QIODevice::ReadWrite, file);
   QSettings cfg(file.fileName(), QSettings::IniFormat);
   mapfile->saveConfig(cfg);
   configToShadowConfig(cfg);
@@ -267,6 +269,7 @@ bool CMapItem::activate() {
   // setup map with settings stored in
   // the shadow config
   QTemporaryFile file;
+  openFileCheckSuccess(QIODevice::ReadWrite, file);
   QSettings cfg(file.fileName(), QSettings::IniFormat);
 
   shadowConfigToConfig(cfg);

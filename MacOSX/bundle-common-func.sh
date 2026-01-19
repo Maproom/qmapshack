@@ -123,8 +123,8 @@ function copyQtTranslations {
     QT_TRANSLATIONS_DIR=$(find -L $QT_DEV_PATH -type d -name translations | head -n1)
     for i in "${APP_LANG[@]}"
     do
-        #for MOD in qt qtbase qtmultimedia qtquickcontrols2 qtdeclarative
-        for MOD in qt
+        #for MOD in qtbase qtmultimedia qtquickcontrols2 qtdeclarative
+        for MOD in qtbase
         do
             FILE="$QT_TRANSLATIONS_DIR/${MOD}_${i}.qm"
             if [ -f "$FILE" ]; then

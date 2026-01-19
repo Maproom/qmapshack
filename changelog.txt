@@ -9,6 +9,7 @@ V1.XX.X
 [QMS-924] Enhance debug output by command line and configuration path
 [QMS-927] Strange "shadow configuration" behavior
 [QMS-930] No Brouter time for routes without intermediate points
+[QMS-932] Invalid Qt basic translation files setup on Linux & macOS
 
 V1.19.0
 [QMS-869] Convert track to area

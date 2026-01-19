@@ -58,7 +58,7 @@ void CAppSetupMac::initQMapShack() {
 
   // setup translators
   QString translationPath = getApplicationDir(relTranslationDir).absolutePath();
-  prepareTranslator(translationPath, "qt_");
+  prepareTranslator(translationPath, "qtbase_");
   prepareTranslator(translationPath, "qmapshack_");
 
   // load and apply style sheet

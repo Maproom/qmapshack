@@ -57,7 +57,7 @@ void CAppSetupMac::initQMapTool() {
 
   // setup translators
   QString translationPath = getApplicationDir(relTranslationDir).absolutePath();
-  prepareTranslator(translationPath, "qt_");
+  prepareTranslator(translationPath, "qtbase_");
   prepareTranslator(translationPath, "qmaptool_");
 
   migrateDirContent(defaultCachePath());

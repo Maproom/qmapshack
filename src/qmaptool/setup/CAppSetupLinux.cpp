@@ -33,7 +33,7 @@ void CAppSetupLinux::initQMapTool() {
   QString translationPath = QCoreApplication::applicationDirPath();
   static const QRegularExpression re("bin$");
   translationPath.replace(re, "share/qmaptool/translations");
-  prepareTranslator(resourceDir, "qt_");
+  prepareTranslator(resourceDir, "qtbase_");
   prepareTranslator(translationPath, "qmaptool_");
 
   // create directories

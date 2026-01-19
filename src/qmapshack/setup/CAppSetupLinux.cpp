@@ -34,7 +34,7 @@ void CAppSetupLinux::initQMapShack() {
   QString translationPath = QCoreApplication::applicationDirPath();
   static const QRegularExpression re("bin$");
   translationPath.replace(re, "share/qmapshack/translations");
-  prepareTranslator(resourceDir, "qt_");
+  prepareTranslator(resourceDir, "qtbase_");
   prepareTranslator(translationPath, "qmapshack_");
 
   // create directories

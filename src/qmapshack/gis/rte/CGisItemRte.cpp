@@ -838,7 +838,32 @@ void CGisItemRte::setResultFromBRouter(const QDomDocument& xml, const QString& o
 
   rte.totalDistance = 0.;
   rte.totalTime = 0;
-  rte.cmt = ""; 
+  rte.cmt = "";
+
+  //  <!-- track-length = 3181 filtered ascend = 70 plain-ascend = 5 cost=8491 energy=.0kwh time=16m 30s -->
+  quint32 totalTime = 0;
+  const QDomNodeList& nodes = xml.childNodes();
+  for (int i = 0; i < nodes.count(); i++) {
+    const QDomNode& node = nodes.at(i);
+    if (node.isComment()) {
+      const QString& comment = node.toComment().data();
+      // ' track-length = 3181 filtered ascend = 70 plain-ascend = 5 cost=8491 energy=.0kwh time=16m 30s '
+      const QRegularExpressionMatch& matchCmt = QRegularExpression("(filtered.*)(?:\\s+time)").match(comment);
+      if (matchCmt.hasMatch()) {
+        rte.cmt = matchCmt.captured(1).replace(QRegularExpression("\\s*=\\s*"), "=");
+      }
+      // Currently, BRouter does not set start point's time extension for route without intermediate points.
+      // Use comment's time as workaround!
+      const QRegularExpressionMatch& matchTime =
+            QRegularExpression("time *= *(([0-9]+)(?:h ))?(([0-9]+)(?:m ))?(([0-9]+)(?:s))").match(comment);
+      if (matchTime.hasMatch()) {
+        totalTime += matchTime.captured(2).toUInt() * 3600;
+        totalTime += matchTime.captured(4).toUInt() * 60;
+        totalTime += matchTime.captured(6).toUInt();
+      }
+      break;
+    }
+  }
 
   QVector<subpt_t> shape;
 
@@ -961,12 +986,17 @@ void CGisItemRte::setResultFromBRouter(const QDomDocument& xml, const QString& o
       {
         subpt.instruction = tr("Destination");
       }
-      subpt.turn = xmlManeuver.firstChildElement("extensions").firstChildElement("turn-angle").text().toInt();
+      subpt.turn = extension.firstChildElement("turn-angle").text().toInt();
       if (subpt.turn != 0) {
         subpt.instruction += tr(", %1 degrees").arg(subpt.turn);
       }
       subpt.time = time.addSecs(rte.totalTime);
-      rte.totalTime += xmlManeuver.firstChildElement("extensions").firstChildElement("time").text().toUInt();
+      const QDomElement& timeElement = extension.firstChildElement("time");
+      if (!timeElement.isNull()) {
+        rte.totalTime += timeElement.text().toUInt();
+      } else if (m == 0) {
+        rte.totalTime = totalTime; // use time workaround for start
+      }
       if (prevIdx != -1) {
         subpt_t& other = shape[prevIdx];
         IUnit::self().meter2distance(subpt.distance - other.distance, valDist, unitDist);
@@ -1012,21 +1042,6 @@ void CGisItemRte::setResultFromBRouter(const QDomDocument& xml, const QString& o
 
   rte.lastRoutedTime = QDateTime::currentDateTimeUtc();
   rte.lastRoutedWith = QString("BRouter %1").arg(options);
-
-  //  <!-- track-length = 3181 filtered ascend = 70 plain-ascend = 5 cost=8491 energy=.0kwh time=16m 30s -->
-  const QDomNodeList& nodes = xml.childNodes();
-  for (int i = 0; i < nodes.count(); i++) {
-    const QDomNode& node = nodes.at(i);
-    if (node.isComment()) {
-      const QString& commentTxt = node.toComment().data();
-      // ' track-length = 3181 filtered ascend = 70 plain-ascend = 5 cost=8491 energy=.0kwh time=16m 30s '
-      const QRegularExpressionMatch& match = QRegularExpression("(filtered.*)(?:\\s+time)").match(commentTxt);
-      if (match.hasMatch()) {
-        rte.cmt = match.captured(1).replace(QRegularExpression("\\s*=\\s*"), "=");
-      }
-      break;
-    }
-  }
 
   deriveSecondaryData();
   updateHistory();

@@ -419,6 +419,7 @@ set( HDRS
     gis/CSelDevices.h
     gis/IGisItem.h
     gis/IGisLine.h
+    gis/IWksItem.h
     gis/db/CDBFolderGroup.h
     gis/db/CDBFolderLostFound.h
     gis/db/CDBFolderMysql.h

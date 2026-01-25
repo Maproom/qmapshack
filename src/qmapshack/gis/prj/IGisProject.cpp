@@ -68,7 +68,7 @@ const QString IGisProject::filedialogLoadFilters =
 QString IGisProject::keyUserFocus;
 
 IGisProject::IGisProject(type_e type, const QString& filename, CGisListWks* parent)
-    : QTreeWidgetItem(parent), type(type), filename(filename) {
+    : IWksItem(parent), type(type), filename(filename) {
   memset(cntItemsByType, 0, sizeof(cntItemsByType));
   setCheckState(CGisListWks::eColumnCheckBox, Qt::Checked);
 
@@ -93,7 +93,7 @@ IGisProject::IGisProject(type_e type, const QString& filename, CGisListWks* pare
 }
 
 IGisProject::IGisProject(type_e type, const QString& filename, IDevice* parent)
-    : QTreeWidgetItem(parent), type(type), filename(filename) {
+    : IWksItem(parent), type(type), filename(filename) {
   memset(cntItemsByType, 0, sizeof(cntItemsByType));
   setCheckState(CGisListWks::eColumnCheckBox, Qt::Checked);
   nameSuffix = parent->getName();
@@ -195,8 +195,6 @@ QString IGisProject::getDeviceKey() const {
 
   return "";
 }
-
-QPixmap IGisProject::getIcon() const { return icon(CGisListWks::eColumnIcon).pixmap(22, 22); }
 
 qint32 IGisProject::isOnDevice() const {
   IDevice* device = dynamic_cast<IDevice*>(parent());
@@ -448,7 +446,7 @@ void IGisProject::markAsSaved() {
   }
 }
 
-QString IGisProject::getName() const { return metadata.name; }
+const QString& IGisProject::getName() const { return metadata.name; }
 
 QString IGisProject::getNameEx() const {
   if (nameSuffix.isEmpty()) {

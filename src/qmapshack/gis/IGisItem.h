@@ -29,10 +29,10 @@
 #include <QPainter>
 #include <QString>
 #include <QStringList>
-#include <QTreeWidgetItem>
 #include <QUrl>
 #include <QVariant>
 
+#include "gis/IWksItem.h"
 #include "units/IUnit.h"
 
 class CGisDraw;
@@ -43,7 +43,7 @@ class IGisProject;
 struct searchValue_t;
 enum searchProperty_e : unsigned int;
 
-class IGisItem : public QTreeWidgetItem {
+class IGisItem : public IWksItem {
   Q_DECLARE_TR_FUNCTIONS(IGisItem)
  public:
   struct history_event_t {
@@ -231,14 +231,7 @@ class IGisItem : public QTreeWidgetItem {
    */
   void setIcon(const QPixmap& icon);
 
-  const QPixmap& getIcon() const { return icon; }
-
   const QPixmap& getDisplayIcon() const { return displayIcon; }
-  /**
-     @brief Get name of this item.
-     @return A reference to the internal string object
-   */
-  virtual const QString& getName() const = 0;
 
   /**
      @brief Get name of this item extended by the project name

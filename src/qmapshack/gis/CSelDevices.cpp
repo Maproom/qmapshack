@@ -41,7 +41,7 @@ CSelDevices::CSelDevices(IGisProject* project, QTreeWidget* wks)
     QListWidgetItem* item = new QListWidgetItem(listWidget);
     item->setText(device->getName());
     item->setData(Qt::UserRole, device->getKey());
-    item->setIcon(device->icon(CGisListWks::eColumnIcon));
+    item->setIcon(device->getIcon());
 
     IGisProject* proj = device->getProjectByKey(project->getKey());
     item->setCheckState(nullptr == proj ? Qt::Unchecked : Qt::Checked);

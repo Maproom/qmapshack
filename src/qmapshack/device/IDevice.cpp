@@ -31,13 +31,13 @@
 int IDevice::cnt = 0;
 
 IDevice::IDevice(const QString& path, type_e type, const QString& key, QTreeWidget* parent)
-    : QTreeWidgetItem(parent, type), dir(path), key(key) {
+    : IWksItem(parent, type), dir(path), key(key) {
   setIcon(CGisListWks::eColumnIcon, QIcon("://icons/32x32/Device.png"));
   cnt++;
 }
 
 IDevice::IDevice(const QString& path, const QString& key, IDevice* parent)
-    : QTreeWidgetItem(parent, eTypeVirtual), dir(path), key(key) {
+    : IWksItem(parent, eTypeVirtual), dir(path), key(key) {
   setIcon(CGisListWks::eColumnIcon, QIcon("://icons/32x32/PathGreen.png"));
 }
 
@@ -72,8 +72,6 @@ void IDevice::umount(const QString& path) {
   QDBusConnection::systemBus().call(message);
 #endif
 }
-
-QString IDevice::getName() const { return text(CGisListWks::eColumnName); }
 
 void IDevice::getItemsByPos(const QPointF& pos, QList<IGisItem*>& items) {
   const int N = childCount();

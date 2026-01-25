@@ -21,14 +21,14 @@
 #define IDEVICE_H
 
 #include <QDir>
-#include <QTreeWidgetItem>
 
 #include "gis/IGisItem.h"
+#include "gis/IWksItem.h"
 class CGisDraw;
 class CGisItemWpt;
 class CDeviceGarmin;
 
-class IDevice : public QTreeWidgetItem {
+class IDevice : public IWksItem {
   Q_DECLARE_TR_FUNCTIONS(IDevice)
  public:
   enum type_e { eTypeNone = 0, eTypeGarmin = 1, eTypeTwoNav = 2, eTypeGarminMtp = 3, eTypeVirtual = 4, eTypeGenericMtp = 5 };
@@ -45,8 +45,6 @@ class IDevice : public QTreeWidgetItem {
   void umount() { umount(key); }
 
   const QString& getKey() const { return key; }
-
-  QString getName() const;
 
   void getItemsByPos(const QPointF& pos, QList<IGisItem*>& items);
   void getItemsByArea(const QRectF& area, IGisItem::selflags_t flags, QList<IGisItem*>& items);

@@ -149,7 +149,8 @@ QString CDeviceGenericMtp::createFileName(IGisProject* project, const QString& p
 
 QString CDeviceGenericMtp::simplifiedName(IGisProject* project) const {
   static const QRegularExpression re("[^A-Za-z0-9_]");
-  return project->getName().remove(re);
+  QString tempName = project->getName();
+  return tempName.remove(re);
 }
 
 void CDeviceGenericMtp::reorderProjects(IGisProject* project) {

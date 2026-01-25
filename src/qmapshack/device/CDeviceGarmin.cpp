@@ -187,7 +187,8 @@ void CDeviceGarmin::reorderProjects(IGisProject* project) {
 
 QString CDeviceGarmin::simplifiedName(IGisProject* project) {
   static const QRegularExpression re("[^A-Za-z0-9_]");
-  return project->getName().remove(re);
+  QString simpleName = project->getName();
+  return simpleName.remove(re);
 }
 
 QString CDeviceGarmin::createFileName(IGisProject* project, const QString& path, const QString& suffix) {

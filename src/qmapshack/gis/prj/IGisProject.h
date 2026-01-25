@@ -23,9 +23,9 @@
 #include <QDebug>
 #include <QMessageBox>
 #include <QPointer>
-#include <QTreeWidgetItem>
 
 #include "gis/IGisItem.h"
+#include "gis/IWksItem.h"
 #include "gis/search/CProjectFilterItem.h"
 #include "gis/search/CSearch.h"
 #include "helpers/CSelectCopyAction.h"
@@ -37,7 +37,7 @@ class QDataStream;
 class CDetailsPrj;
 class IDevice;
 
-class IGisProject : public QTreeWidgetItem {
+class IGisProject : public IWksItem {
   Q_DECLARE_TR_FUNCTIONS(IGisProject)
  public:
   enum type_e {
@@ -47,8 +47,7 @@ class IGisProject : public QTreeWidgetItem {
     eTypeDb,
     eTypeLostFound,
     eTypeTwoNav,
-    eTypeSlf  // the Sigma Log Format
-    ,
+    eTypeSlf,  // the Sigma Log Format
     eTypeFit,
     eTypeTcx,
     eTypeSml,
@@ -192,13 +191,11 @@ class IGisProject : public QTreeWidgetItem {
    */
   QString getDeviceKey() const;
 
-  QPixmap getIcon() const;
-
   /**
      @brief Get the project's name
      @return The name from metadata.name
    */
-  QString getName() const;
+  const QString& getName() const override;
   /**
      @brief Get the project's name extended with the parent's name.
      @return The name from metadata.nam appended with either the device name or the database parent folder's name.

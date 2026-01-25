@@ -48,7 +48,7 @@ const QString IGisItem::noName = IGisItem::tr("[no name]");
 
 QVector<IGisItem::color_t> IGisItem::colorMap;
 
-IGisItem::IGisItem(IGisProject* parent, type_e typ, int idx) : QTreeWidgetItem(parent, typ) {
+IGisItem::IGisItem(IGisProject* parent, type_e typ, int idx) : IWksItem(parent, typ) {
   int n = -1;
   setFlags(QTreeWidgetItem::flags() & ~Qt::ItemIsDropEnabled);
 

@@ -4,6 +4,7 @@ V1.XX.X
 [QMS-899] Flash active indicator of map/dem items while rendered.
 [QMS-906] Strange project's tree view items spacing behaviour
 [QMS-907] Fix: Bad UX with progress dialog and wait cursor
+[QMS-918] Inconsistency with route export and reimport
 [QMS-920] Support {z}/{x}/{y} template params in TMS ServerUrl
 [QMS-922] macOS warning "no file found for translations ... (using default)."
 [QMS-924] Enhance debug output by command line and configuration path

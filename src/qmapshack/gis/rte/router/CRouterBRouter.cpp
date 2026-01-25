@@ -358,23 +358,15 @@ int CRouterBRouter::synchronousRequest(const QVector<QPointF>& points, const QLi
       const QDomNodeList& nodes = xml.childNodes();
       for (int i = 0; i < nodes.count(); i++) {
         const QDomNode& node = nodes.at(i);
-        if (!node.isComment()) {
-          continue;
-        }
-        const QString& commentTxt = node.toComment().data();
-        // ' track-length = 180864 filtered ascend = 428 plain-ascend = -172 cost=270249 '
-        static const QRegularExpression rxAscDes(
-            "(\\s*track-length\\s*=\\s*)(-?\\d+)(\\s*)(filtered "
-            "ascend\\s*=\\s*-?\\d+)(\\s*)(plain-ascend\\s*=\\s*-?\\d+)(\\s*)(cost\\s*=\\s*)(-?\\d+)(\\s*)");
-        const QRegularExpressionMatch& match = rxAscDes.match(commentTxt);
-        if (match.hasMatch()) {
-          bool ok;
-          *costs = match.captured(9).toDouble(&ok);
-          if (!ok) {
-            *costs = -1;
+        if (node.isComment()) {
+          const QString& comment = node.toComment().data();
+          // ' track-length = 3181 filtered ascend = 70 plain-ascend = 5 cost=8491 energy=.0kwh time=16m 30s '
+          const QRegularExpressionMatch& match = QRegularExpression("cost\\s*=\\s*(-?\\d+)").match(comment);
+          if (match.hasMatch()) {
+            *costs = match.captured(1).toDouble();
           }
+          break;
         }
-        break;
       }
     }
   } catch (const QString& msg) {

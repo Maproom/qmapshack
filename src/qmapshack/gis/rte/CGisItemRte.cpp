@@ -827,7 +827,6 @@ void CGisItemRte::setResultFromRoutino(Routino_Output* route, const QString& opt
 
   rte.lastRoutedTime = QDateTime::currentDateTimeUtc();
   rte.lastRoutedWith = "Routino, " + options;
-  rte.cmt = ""; // Cleanup possible BRouter comment
 
   deriveSecondaryData();
   updateHistory();
@@ -838,9 +837,7 @@ void CGisItemRte::setResultFromBRouter(const QDomDocument& xml, const QString& o
 
   rte.totalDistance = 0.;
   rte.totalTime = 0;
-  rte.cmt = "";
 
-  //  <!-- track-length = 3181 filtered ascend = 70 plain-ascend = 5 cost=8491 energy=.0kwh time=16m 30s -->
   quint32 totalTime = 0;
   const QDomNodeList& nodes = xml.childNodes();
   for (int i = 0; i < nodes.count(); i++) {
@@ -848,18 +845,14 @@ void CGisItemRte::setResultFromBRouter(const QDomDocument& xml, const QString& o
     if (node.isComment()) {
       const QString& comment = node.toComment().data();
       // ' track-length = 3181 filtered ascend = 70 plain-ascend = 5 cost=8491 energy=.0kwh time=16m 30s '
-      const QRegularExpressionMatch& matchCmt = QRegularExpression("(filtered.*)(?:\\s+time)").match(comment);
-      if (matchCmt.hasMatch()) {
-        rte.cmt = matchCmt.captured(1).replace(QRegularExpression("\\s*=\\s*"), "=");
-      }
-      // Currently, BRouter does not set start point's time extension for route without intermediate points.
-      // Use comment's time as workaround!
-      const QRegularExpressionMatch& matchTime =
-            QRegularExpression("time *= *(([0-9]+)(?:h ))?(([0-9]+)(?:m ))?(([0-9]+)(?:s))").match(comment);
-      if (matchTime.hasMatch()) {
-        totalTime += matchTime.captured(2).toUInt() * 3600;
-        totalTime += matchTime.captured(4).toUInt() * 60;
-        totalTime += matchTime.captured(6).toUInt();
+      // BRouter <= 1.7.8 does not set start point's time extension for route without intermediate points,
+      // use comment's time as workaround!
+      const QRegularExpressionMatch& match =
+            QRegularExpression("time\\s*=\\s*((\\d+)(?:h ))?((\\d+)(?:m ))?((\\d+)(?:s))").match(comment);
+      if (match.hasMatch()) {
+        totalTime += match.captured(2).toUInt() * 3600;
+        totalTime += match.captured(4).toUInt() * 60;
+        totalTime += match.captured(6).toUInt();
       }
       break;
     }

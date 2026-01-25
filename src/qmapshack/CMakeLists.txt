@@ -42,6 +42,7 @@ set( SRCS
     device/IDeviceWatcher.cpp
     gis/CGisDatabase.cpp
     gis/CGisDraw.cpp
+    gis/CWksItemDelegate.cpp
     gis/CGisItemRate.cpp
     gis/CGisListDB.cpp
     gis/CGisListWks.cpp
@@ -410,6 +411,7 @@ set( HDRS
     device/IDeviceWatcher.h
     gis/CGisDatabase.h
     gis/CGisDraw.h
+    gis/CWksItemDelegate.h
     gis/CGisItemRate.h
     gis/CGisListDB.h
     gis/CGisListWks.h

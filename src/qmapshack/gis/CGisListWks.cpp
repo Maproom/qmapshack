@@ -17,10 +17,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 **********************************************************************************************/
-
 #include "CMainWindow.h"
-#include "canvas/CCanvas.h"
-#include "gis/fit2/CFit2Project.h"
+
 #if defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD)
 #include "device/CDeviceWatcherLinux.h"
 #endif
@@ -34,8 +32,10 @@
 #include <QtSql>
 #include <QtWidgets>
 
+#include "canvas/CCanvas.h"
 #include "device/IDevice.h"
 #include "gis/CGisDatabase.h"
+#include "gis/CWksItemDelegate.h"
 #include "gis/CGisListWks.h"
 #include "gis/CGisWorkspace.h"
 #include "gis/CSelDevices.h"
@@ -45,6 +45,7 @@
 #include "gis/db/CSelectDBFolder.h"
 #include "gis/db/CSetupFolder.h"
 #include "gis/db/macros.h"
+#include "gis/fit2/CFit2Project.h"
 #include "gis/gpx/CGpxProject.h"
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/prj/IGisProject.h"
@@ -95,6 +96,9 @@ class CGisListWksEditLock {
 };
 
 CGisListWks::CGisListWks(QWidget* parent) : QTreeWidget(parent) {
+  CWksItemDelegate* delegate = new CWksItemDelegate(this);
+  setItemDelegate(delegate);
+
   db = QSqlDatabase::addDatabase("QSQLITE", "Workspace1");
   QString config = QDir(IAppSetup::getPlatformInstance()->userDataPath()).filePath("workspace.db");
   db.setDatabaseName(config);

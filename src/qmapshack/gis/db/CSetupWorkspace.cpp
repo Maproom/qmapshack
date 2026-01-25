@@ -38,8 +38,6 @@ CSetupWorkspace::CSetupWorkspace(CGisWorkspace* workspace, QWidget* parent) : QD
   checkDeviceSupport->setChecked(cfg.value("device support", true).toBool());
   cfg.endGroup();
 
-  checkShowTags->setChecked(!workspace->areTagsHidden());
-
   connect(checkSaveOnExit, &QCheckBox::toggled, spinSaveEvery, &QSpinBox::setEnabled);
 }
 
@@ -54,8 +52,6 @@ void CSetupWorkspace::accept() {
   cfg.setValue("port", linePort->text());
   cfg.setValue("device support", checkDeviceSupport->isChecked());
   cfg.endGroup();
-
-  workspace->setTagsHidden(!checkShowTags->isChecked());
 
   QMessageBox::information(this, tr("Setup database..."),
                            tr("Changes to database settings will become active after an application's restart."),

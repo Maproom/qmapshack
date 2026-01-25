@@ -387,9 +387,6 @@ class CGisWorkspace : public QWidget, private Ui::IGisWorkspace {
 
   bool findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint32 threshold, QPolygonF& polyline);
 
-  bool areTagsHidden() const;
-  void setTagsHidden(bool hidden);
-
   void tagItemsByKey(const QList<IGisItem::key_t>& keys);
 
   const CSearch& getCurrentSearch() const { return currentSearch; }

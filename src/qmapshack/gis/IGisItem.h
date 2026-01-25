@@ -578,10 +578,6 @@ class IGisItem : public IWksItem {
 
   static QVector<color_t> colorMap;
 
-  /// labeling the GisItems
-  qreal rating = 0;
-  QSet<QString> keywords;
-
  private:
   void showIcon();
 };

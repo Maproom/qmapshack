@@ -41,7 +41,7 @@ class CGisListWks : public QTreeWidget {
   CGisListWks(QWidget* parent);
   virtual ~CGisListWks();
 
-  enum column_e { eColumnRating = 1, eColumnName = 2 };
+  enum column_e { eColumnName = 2 };
 
   void setExternalMenu(QMenu* project);
   bool hasProject(IGisProject* project);

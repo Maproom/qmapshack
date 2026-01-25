@@ -42,6 +42,10 @@ class IWksItem : public QTreeWidgetItem {
 
   quint32 flagsDecoration;
   QString toolTipDecoration;
+
+  /// labeling the GisItems
+  qreal rating = 0;
+  QSet<QString> keywords;
 };
 
 #endif //IWKSITEM_H

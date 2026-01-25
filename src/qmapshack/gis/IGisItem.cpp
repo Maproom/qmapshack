@@ -330,19 +330,6 @@ void IGisItem::updateDecoration(quint32 enable, quint32 disable) {
     // str += "*";
   }
   toolTipDecoration = tt;
-
-  // Set Rating column
-  if (!keywords.isEmpty()) {
-    QTreeWidgetItem::setIcon(CGisListWks::eColumnRating, QPixmap("://icons/32x32/Tag.png"));
-    setToolTip(CGisListWks::eColumnRating, QStringList(getKeywordsSorted()).join(", "));
-  } else {
-    QTreeWidgetItem::setIcon(CGisListWks::eColumnRating, QIcon());
-  }
-  if (rating > 0) {
-    QTreeWidgetItem::setText(CGisListWks::eColumnRating, QString::number(rating));
-  } else {
-    QTreeWidgetItem::setText(CGisListWks::eColumnRating, "");
-  }
 }
 
 void IGisItem::changed(const QString& what, const QString& icon) {

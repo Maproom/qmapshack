@@ -21,8 +21,6 @@
 
 #include <QObject>
 
-class QPixmap;
-
 class CGeoSearchConfig : public QObject {
   Q_OBJECT
  public:
@@ -33,7 +31,7 @@ class CGeoSearchConfig : public QObject {
   void load();
   void save() const;
 
-  const QIcon getCurrentIcon() const;
+  const QPixmap getCurrentIcon() const;
 
  signals:
   void sigConfigChanged();

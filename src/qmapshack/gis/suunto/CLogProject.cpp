@@ -48,7 +48,7 @@ const QList<extension_t> CLogProject::extensions = {
 };
 
 CLogProject::CLogProject(const QString& filename, CGisListWks* parent) : ISuuntoProject(eTypeLog, filename, parent) {
-  setIcon(CGisListWks::eColumnIcon, QIcon("://icons/32x32/LogProject.png"));
+  icon = QPixmap("://icons/32x32/LogProject.png");
   blockUpdateItems(true);
   loadLog(filename);
   blockUpdateItems(false);

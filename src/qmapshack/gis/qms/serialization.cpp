@@ -956,9 +956,9 @@ QDataStream& IGisProject::operator<<(QDataStream& stream) {
     // Update decoration always, to set possible rating and tag markers
     if (item) {
       if (changed) {
-        item->updateDecoration(IGisItem::eMarkChanged, IGisItem::eMarkNone);
+        item->updateDecoration(IWksItem::eMarkChanged, IWksItem::eMarkNone);
       } else {
-        item->updateDecoration(IGisItem::eMarkNone, IGisItem::eMarkNone);
+        item->updateDecoration(IWksItem::eMarkNone, IWksItem::eMarkNone);
       }
     }
   }
@@ -997,7 +997,7 @@ QDataStream& IGisProject::operator>>(QDataStream& stream) const {
     stream << VER_ITEM;
     stream << quint8(item->type());
     stream << item->getHistory();
-    stream << quint8(item->data(1, Qt::UserRole).toUInt() & IGisItem::eMarkChanged);
+    stream << quint8(item->data(1, Qt::UserRole).toUInt() & IWksItem::eMarkChanged);
     stream << item->getLastDatabaseHash();
   }
   for (int i = 0; i < childCount(); i++) {
@@ -1008,7 +1008,7 @@ QDataStream& IGisProject::operator>>(QDataStream& stream) const {
     stream << VER_ITEM;
     stream << quint8(item->type());
     stream << item->getHistory();
-    stream << quint8(item->data(1, Qt::UserRole).toUInt() & IGisItem::eMarkChanged);
+    stream << quint8(item->data(1, Qt::UserRole).toUInt() & IWksItem::eMarkChanged);
     stream << item->getLastDatabaseHash();
   }
   for (int i = 0; i < childCount(); i++) {
@@ -1019,7 +1019,7 @@ QDataStream& IGisProject::operator>>(QDataStream& stream) const {
     stream << VER_ITEM;
     stream << quint8(item->type());
     stream << item->getHistory();
-    stream << quint8(item->data(1, Qt::UserRole).toUInt() & IGisItem::eMarkChanged);
+    stream << quint8(item->data(1, Qt::UserRole).toUInt() & IWksItem::eMarkChanged);
     stream << item->getLastDatabaseHash();
   }
   for (int i = 0; i < childCount(); i++) {
@@ -1030,7 +1030,7 @@ QDataStream& IGisProject::operator>>(QDataStream& stream) const {
     stream << VER_ITEM;
     stream << quint8(item->type());
     stream << item->getHistory();
-    stream << quint8(item->data(1, Qt::UserRole).toUInt() & IGisItem::eMarkChanged);
+    stream << quint8(item->data(1, Qt::UserRole).toUInt() & IWksItem::eMarkChanged);
     stream << item->getLastDatabaseHash();
   }
 

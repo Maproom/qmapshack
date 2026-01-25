@@ -31,12 +31,12 @@
 #include "gis/prj/CDetailsPrj.h"
 #include "helpers/CProgressDialog.h"
 CDBProject::CDBProject(CGisListWks* parent) : IGisProject(eTypeDb, "", parent), id(0) {
-  setIcon(CGisListWks::eColumnIcon, QIcon("://icons/32x32/DBProject.png"));
+  icon = QPixmap("://icons/32x32/DBProject.png");
 }
 
 CDBProject::CDBProject(const QString& dbName, quint64 id, CGisListWks* parent)
     : IGisProject(eTypeDb, dbName, parent), id(id) {
-  setIcon(CGisListWks::eColumnIcon, QIcon("://icons/32x32/DBProject.png"));
+  icon = QPixmap("://icons/32x32/DBProject.png");
   db = QSqlDatabase::database(dbName);
 
   QSqlQuery query(db);
@@ -127,7 +127,7 @@ CDBProject::CDBProject(const QString& filename, IDBFolder* parentFolder, CGisLis
   for (QTreeWidgetItem* item : std::as_const(items)) {
     IGisItem* gisItem = dynamic_cast<IGisItem*>(item);
     if (gisItem) {
-      gisItem->updateDecoration(IGisItem::eMarkChanged, IGisItem::eMarkNone);
+      gisItem->updateDecoration(IWksItem::eMarkChanged, IWksItem::eMarkNone);
     }
   }
 
@@ -222,7 +222,7 @@ void CDBProject::postStatus(bool updateLostFound) {
   // update item counters and track/waypoint correlation
   // updateItems(); <--- don't! this is causing a crash
   if (!changedItems) {
-    setText(CGisListWks::eColumnDecoration, autoSave ? "A" : "");
+    flagsDecoration &= ~eMarkChanged;
   }
 
   CGisDatabase::self().postEventForDb(info);
@@ -546,8 +546,8 @@ bool CDBProject::save(CSelectSaveAction::result_e action1ForAll, action_e action
         query.bindValue(":child", idItem);
         QUERY_EXEC(throw eReasonQueryFail);
       }
-      item->updateDecoration(IGisItem::eMarkNone,
-                             IGisItem::eMarkChanged | IGisItem::eMarkNotPart | IGisItem::eMarkNotInDB);
+      item->updateDecoration(IWksItem::eMarkNone,
+                             IWksItem::eMarkChanged | IWksItem::eMarkNotPart | IWksItem::eMarkNotInDB);
     } catch (reasons_e reason) {
       CProgressDialog::setAllVisible(false);
       switch (reason) {
@@ -622,7 +622,7 @@ void CDBProject::showItems(CEvtD2WShowItems* evt, action_e action2ForAll) {
       }
 
       if (success) {
-        gisItem->updateDecoration(IGisItem::eMarkNone, IGisItem::eMarkChanged);
+        gisItem->updateDecoration(IWksItem::eMarkNone, IWksItem::eMarkChanged);
       }
     }
   }
@@ -740,15 +740,15 @@ void CDBProject::update() {
         if (query2.next()) {
           // item is connected to this project
           item->updateFromDB(idItem, db);
-          item->updateDecoration(IGisItem::eMarkNone, IGisItem::eMarkChanged);
+          item->updateDecoration(IWksItem::eMarkNone, IWksItem::eMarkChanged);
         } else {
           // item is not connected to this project
           item->updateFromDB(idItem, db);
-          item->updateDecoration(IGisItem::eMarkNotPart | IGisItem::eMarkChanged, IGisItem::eMarkNone);
+          item->updateDecoration(IWksItem::eMarkNotPart | IWksItem::eMarkChanged, IWksItem::eMarkNone);
         }
       } else {
         // item is not in the database at all.
-        item->updateDecoration(IGisItem::eMarkNotInDB | IGisItem::eMarkChanged, IGisItem::eMarkNone);
+        item->updateDecoration(IWksItem::eMarkNotInDB | IWksItem::eMarkChanged, IWksItem::eMarkNone);
       }
     }
 

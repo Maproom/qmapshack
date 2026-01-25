@@ -1500,10 +1500,13 @@ void CGisListWks::slotItemDoubleClicked(QTreeWidgetItem* item, int) {
 void CGisListWks::slotItemChanged(QTreeWidgetItem* /*item*/, int column) {
   CGisListWksEditLock lock(true, IGisItem::mutexItems);
 
-  if (column == eColumnCheckBox) {
-    CGisWorkspace::self().slotWksItemSelectionReset();
-    emit sigChanged();
-  }
+  /// @todo this clears the top left selection information whenever
+  /// a project is checked or unchecked.
+
+  // if (column == eColumnCheckBox) {
+  //   CGisWorkspace::self().slotWksItemSelectionReset();
+  //   emit sigChanged();
+  // }
 }
 
 void CGisListWks::slotEditItem() {

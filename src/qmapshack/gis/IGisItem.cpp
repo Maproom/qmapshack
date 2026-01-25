@@ -304,37 +304,32 @@ void IGisItem::updateDecoration(quint32 enable, quint32 disable) {
 
   // test for lost & found folder
   if (project && project->getType() == IGisProject::eTypeLostFound) {
-    setText(CGisListWks::eColumnDecoration, QString());
-    setToolTip(CGisListWks::eColumnDecoration, QString());
     return;
   }
 
   // set marks in column 1
-  quint32 mask = data(1, Qt::UserRole).toUInt();
-  mask |= enable;
-  mask &= ~disable;
-  setData(1, Qt::UserRole, mask);
+
+  flagsDecoration |= enable;
+  flagsDecoration &= ~disable;
 
   QString tt;
-  QString str;
-  if (mask & eMarkNotPart) {
+  if (flagsDecoration & eMarkNotPart) {
     tt += tt.isEmpty() ? "" : "\n";
     tt += tr("The item is not part of the project in the database.");
     tt += tr("\nIt is either a new item or it has been deleted in the database by someone else.");
-    str += "?";
+    // str += "?";
   }
-  if (mask & eMarkNotInDB) {
+  if (flagsDecoration & eMarkNotInDB) {
     tt += tt.isEmpty() ? "" : "\n";
     tt += tr("The item is not in the database.");
-    str += "X";
+    // str += "X";
   }
-  if (mask & eMarkChanged) {
+  if (flagsDecoration & eMarkChanged) {
     tt += tt.isEmpty() ? "" : "\n";
     tt += tr("The item might need to be saved");
-    str += "*";
+    // str += "*";
   }
-  setText(CGisListWks::eColumnDecoration, str);
-  setToolTip(CGisListWks::eColumnDecoration, tt);
+  toolTipDecoration = tt;
 
   // Set Rating column
   if (!keywords.isEmpty()) {
@@ -611,7 +606,7 @@ void IGisItem::showIcon() {
                        QPixmap("://icons/48x48/NoGo.png")
                            .scaled(width * 0.6, height * 0.6, Qt::KeepAspectRatio, Qt::SmoothTransformation));
   }
-  QTreeWidgetItem::setIcon(CGisListWks::eColumnIcon, displayIcon);
+  icon = displayIcon;
 }
 
 QColor IGisItem::str2color(const QString& name) {
@@ -788,7 +783,7 @@ bool IGisItem::isVisible(const QPointF& point, const QPolygonF& viewport, CGisDr
   return tmp2.boundingRect().contains(pt);
 }
 
-bool IGisItem::isChanged() const { return text(CGisListWks::eColumnDecoration).contains('*'); }
+bool IGisItem::isChanged() const { return (flagsDecoration & eMarkChanged) != 0; }
 
 bool IGisItem::isWithin(const QRectF& area, selflags_t flags, const QPolygonF& points) {
   if (points.isEmpty()) {

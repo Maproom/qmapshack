@@ -68,7 +68,7 @@ void CDeviceGenericMtp::setup() {
     const QString& iconPath = QDir::cleanPath(rootPath.filePath(icon));
     const QPixmap& pixmap = device->getIcon(iconPath);
     if (!pixmap.isNull()) {
-      setIcon(CGisListWks::eColumnIcon, pixmap);
+      IWksItem::icon = pixmap;
     }
 
     for (const QString& path : exportPathsRelativ) {

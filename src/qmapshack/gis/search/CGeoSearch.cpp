@@ -68,14 +68,13 @@ void CGeoSearch::setIcon() {
     QPixmap displayIcon = QPixmap(48, 48);
     displayIcon.fill(Qt::transparent);
     QPainter painter(&displayIcon);
-    painter.drawPixmap(
-        0, 0,
-        searchConfig->getCurrentIcon().pixmap(32, 32).scaled(48, 48, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    painter.drawPixmap(0, 0,
+                       searchConfig->getCurrentIcon().scaled(48, 48, Qt::KeepAspectRatio, Qt::SmoothTransformation));
     painter.drawPixmap(
         22, 22, QPixmap("://icons/48x48/AddGreen.png").scaled(26, 26, Qt::KeepAspectRatio, Qt::SmoothTransformation));
-    QTreeWidgetItem::setIcon(CGisListWks::eColumnDecoration, displayIcon);
+    icon = displayIcon;
   } else {
-    QTreeWidgetItem::setIcon(CGisListWks::eColumnDecoration, searchConfig->getCurrentIcon());
+    icon = searchConfig->getCurrentIcon();
   }
 }
 
@@ -674,10 +673,11 @@ void CGeoSearch::parseNominatim(const QByteArray& data) {
 }
 
 void CGeoSearch::createErrorItem(const QString& status) {
-  itemStatus = new QTreeWidgetItem(this);
-  itemStatus->setText(CGisListWks::eColumnName, status);
-  itemStatus->setToolTip(CGisListWks::eColumnName, status);
-  itemStatus->setIcon(CGisListWks::eColumnIcon, QIcon("://icons/32x32/Error.png"));
+  /// @todo
+  // itemStatus = new QTreeWidgetItem(this);
+  // itemStatus->setText(CGisListWks::eColumnName, status);
+  // itemStatus->setToolTip(CGisListWks::eColumnName, status);
+  // itemStatus->setIcon(CGisListWks::eColumnIcon, QIcon("://icons/32x32/Error.png"));
 }
 
 void CGeoSearch::slotConfigChanged() {

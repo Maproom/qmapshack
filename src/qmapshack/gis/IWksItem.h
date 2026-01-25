@@ -27,12 +27,21 @@ class IWksItem : public QTreeWidgetItem {
   IWksItem(QTreeWidget* parent, int type = Type) : QTreeWidgetItem(parent, type) {}
   virtual ~IWksItem() = default;
 
+  enum mark_e { eMarkNone = 0, eMarkChanged = 0x00000001, eMarkNotPart = 0x00000002, eMarkNotInDB = 0x00000004 };
+
   virtual const QString& getName() const { return name; }
   virtual const QPixmap& getIcon() const { return icon; }
+  virtual const bool getVisibility() const { return visible; }
 
  protected:
   QString name;
   QPixmap icon;
+  bool visible;
+  bool autoSave = false;       ///< flag to show if auto save is on or off
+  bool autoSyncToDev = false;  ///< if set true sync the project with every device connected
+
+  quint32 flagsDecoration;
+  QString toolTipDecoration;
 };
 
 #endif //IWKSITEM_H

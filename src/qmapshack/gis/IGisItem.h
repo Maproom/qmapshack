@@ -119,8 +119,6 @@ class IGisItem : public IWksItem {
   /// never ever change these numbers. it will break binary data files
   enum type_e { eTypeWpt = 1, eTypeTrk = 2, eTypeRte = 3, eTypeOvl = 4, eTypeMax = 5 };
 
-  enum mark_e { eMarkNone = 0, eMarkChanged = 0x00000001, eMarkNotPart = 0x00000002, eMarkNotInDB = 0x00000004 };
-
   enum selection_e {
     eSelectionNone = 0,
     eSelectionExact = 0x00000001,

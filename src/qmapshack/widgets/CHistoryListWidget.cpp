@@ -83,7 +83,7 @@ void CHistoryListWidget::slotSelectionChanged() {
   }
 
   item->loadHistory(currentRow());
-  item->updateDecoration(IGisItem::eMarkChanged, IGisItem::eMarkNone);
+  item->updateDecoration(IWksItem::eMarkChanged, IWksItem::eMarkNone);
 
   emit sigChanged();
 }
@@ -112,7 +112,7 @@ void CHistoryListWidget::slotCutHistoryAfter() {
   }
 
   item->cutHistoryAfter();
-  item->updateDecoration(IGisItem::eMarkChanged, IGisItem::eMarkNone);
+  item->updateDecoration(IWksItem::eMarkChanged, IWksItem::eMarkNone);
 
   IGisProject* project = dynamic_cast<IGisProject*>(item->parent());
   if (project) {
@@ -141,7 +141,7 @@ void CHistoryListWidget::slotCutHistoryBefore() {
   }
 
   item->cutHistoryBefore();
-  item->updateDecoration(IGisItem::eMarkChanged, IGisItem::eMarkNone);
+  item->updateDecoration(IWksItem::eMarkChanged, IWksItem::eMarkNone);
 
   IGisProject* project = dynamic_cast<IGisProject*>(item->parent());
   if (project) {

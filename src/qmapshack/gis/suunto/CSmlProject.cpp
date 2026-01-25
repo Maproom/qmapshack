@@ -48,7 +48,7 @@ const QList<extension_t> CSmlProject::extensions = {
 };
 
 CSmlProject::CSmlProject(const QString& filename, CGisListWks* parent) : ISuuntoProject(eTypeSml, filename, parent) {
-  setIcon(CGisListWks::eColumnIcon, QIcon("://icons/32x32/SmlProject.png"));
+  icon = QPixmap("://icons/32x32/SmlProject.png");
   blockUpdateItems(true);
   loadSml(filename);
   blockUpdateItems(false);

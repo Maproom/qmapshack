@@ -496,10 +496,9 @@ class IGisProject : public IWksItem {
   bool noUpdate = false;
   bool noCorrelation = false;
   bool changedRoadbookMode = false;
-  bool autoSave = false;              ///< flag to show if auto save is on or off
+
   bool autoSavePending = false;       ///< flag to show if auto save event has been sent. will be reset by save()
-  bool invalidDataOk = false;         ///< if set invalid data in GIS items will not raise any dialog
-  bool autoSyncToDev = false;         ///< if set true sync the project with every device connected
+  bool invalidDataOk = false;         ///< if set invalid data in GIS items will not raise any dialog  
   bool autoSyncToDevPending = false;  ///< flag to show that a sync to device is already pending
 
   metadata_t metadata;

@@ -70,7 +70,7 @@ QString IGisProject::keyUserFocus;
 IGisProject::IGisProject(type_e type, const QString& filename, CGisListWks* parent)
     : IWksItem(parent), type(type), filename(filename) {
   memset(cntItemsByType, 0, sizeof(cntItemsByType));
-  setCheckState(CGisListWks::eColumnCheckBox, Qt::Checked);
+  visible = true;
 
   if (parent) {
     // move project up the list until there a re only projects, no devices
@@ -95,7 +95,7 @@ IGisProject::IGisProject(type_e type, const QString& filename, CGisListWks* pare
 IGisProject::IGisProject(type_e type, const QString& filename, IDevice* parent)
     : IWksItem(parent), type(type), filename(filename) {
   memset(cntItemsByType, 0, sizeof(cntItemsByType));
-  setCheckState(CGisListWks::eColumnCheckBox, Qt::Checked);
+  visible = true;
   nameSuffix = parent->getName();
 }
 
@@ -170,7 +170,7 @@ bool IGisProject::askBeforClose() {
   return res == QMessageBox::Abort;
 }
 
-bool IGisProject::isVisible() const { return checkState(CGisListWks::eColumnCheckBox) == Qt::Checked; }
+bool IGisProject::isVisible() const { return visible; }
 
 void IGisProject::genKey() const {
   if (key.isEmpty()) {
@@ -201,7 +201,7 @@ qint32 IGisProject::isOnDevice() const {
   return device != nullptr ? device->type() : IDevice::eTypeNone;
 }
 
-bool IGisProject::isChanged() const { return text(CGisListWks::eColumnDecoration).contains("*"); }
+bool IGisProject::isChanged() const { return (flagsDecoration & eMarkChanged) != 0; }
 
 void IGisProject::edit() {
   if (dlgDetails.isNull()) {
@@ -442,7 +442,7 @@ void IGisProject::markAsSaved() {
     if (nullptr == item) {
       continue;
     }
-    item->updateDecoration(IGisItem::eMarkNone, IGisItem::eMarkChanged);
+    item->updateDecoration(IWksItem::eMarkNone, IWksItem::eMarkChanged);
   }
 }
 
@@ -892,11 +892,9 @@ void IGisProject::updateDecoration() {
 }
 
 void IGisProject::updateDecoration(bool saved) {
-  QString str = autoSave ? "A" : saved ? "" : "*";
-  if (autoSyncToDev) {
-    str += "S";
+  if (saved) {
+    flagsDecoration &= ~eMarkChanged;
   }
-  setText(CGisListWks::eColumnDecoration, str);
 }
 
 void IGisProject::sortItems() {

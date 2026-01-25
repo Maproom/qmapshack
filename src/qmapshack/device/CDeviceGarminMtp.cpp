@@ -53,7 +53,7 @@ void CDeviceGarminMtp::setup() {
   }
 
   if (!pixmap.isNull()) {
-    setIcon(CGisListWks::eColumnIcon, pixmap);
+    icon = pixmap;
   }
 
   // Try to read detailed information from GarminDevice.xml

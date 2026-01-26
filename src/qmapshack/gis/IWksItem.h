@@ -29,12 +29,15 @@ class IWksItem : public QTreeWidgetItem {
 
   enum mark_e { eMarkNone = 0, eMarkChanged = 0x00000001, eMarkNotPart = 0x00000002, eMarkNotInDB = 0x00000004 };
 
+  virtual void setToolTipName(const QString& tip) { toolTipName = tip; }
+
   virtual const QString& getName() const { return name; }
   virtual const QPixmap& getIcon() const { return icon; }
   virtual const bool getVisibility() const { return visible; }
 
  protected:
   QString name;
+  QString toolTipName;
   QPixmap icon;
   bool visible;
   bool autoSave = false;       ///< flag to show if auto save is on or off

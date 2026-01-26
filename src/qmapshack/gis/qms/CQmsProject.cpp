@@ -33,7 +33,7 @@ CQmsProject::CQmsProject(const QString& filename, CGisListWks* parent) : IGisPro
   if (!file.exists() || QFileInfo(filename).suffix().toLower() != "qms") {
     IGisProject::filename.clear();
     setupName(filename);
-    setToolTip(CGisListWks::eColumnName, getInfo());
+    toolTipName = getInfo();
     valid = true;
     return;
   }
@@ -53,7 +53,7 @@ CQmsProject::CQmsProject(const QString& filename, CGisListWks* parent) : IGisPro
   markAsSaved();
 
   setupName(QFileInfo(filename).completeBaseName().replace("_", " "));
-  setToolTip(CGisListWks::eColumnName, getInfo());
+  toolTipName = getInfo();
   updateItems();
   valid = true;
 }

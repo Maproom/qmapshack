@@ -41,7 +41,7 @@ class CGisListWks : public QTreeWidget {
   CGisListWks(QWidget* parent);
   virtual ~CGisListWks();
 
-  enum column_e { eColumnName = 2 };
+  // enum column_e { eColumnName = 2 };
 
   void setExternalMenu(QMenu* project);
   bool hasProject(IGisProject* project);
@@ -65,7 +65,7 @@ class CGisListWks : public QTreeWidget {
  protected:
   void dragMoveEvent(QDragMoveEvent* e) override;
   void dropEvent(QDropEvent* e) override;
-  void scrollTo(const QModelIndex &index, ScrollHint hint = EnsureVisible) override;
+  void scrollTo(const QModelIndex& index, ScrollHint hint = EnsureVisible) override;
 
  private slots:
   void slotSaveWorkspace();

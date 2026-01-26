@@ -611,8 +611,8 @@ QDataStream& CGisItemTrk::operator<<(QDataStream& stream) {
     deriveSecondaryData();
   }
   setColor(str2color(trk.color));
-  setText(CGisListWks::eColumnName, getName());
-  setToolTip(CGisListWks::eColumnName, getInfo(IGisItem::eFeatureShowName));
+  name = getName();
+  toolTipName = getInfo(IGisItem::eFeatureShowName);
 
   checkForInvalidPoints();
   return stream;
@@ -743,8 +743,8 @@ QDataStream& CGisItemRte::operator<<(QDataStream& stream) {
 
   setSymbol();
   deriveSecondaryData();
-  setText(CGisListWks::eColumnName, getName());
-  setToolTip(CGisListWks::eColumnName, getInfo(IGisItem::eFeatureShowName));
+  name = getName();
+  toolTipName = getInfo(IGisItem::eFeatureShowName);
 
   return stream;
 }
@@ -826,8 +826,8 @@ QDataStream& CGisItemOvlArea::operator<<(QDataStream& stream) {
   deriveSecondaryData();
 
   setColor(str2color(area.color));
-  setText(CGisListWks::eColumnName, getName());
-  setToolTip(CGisListWks::eColumnName, getInfo(IGisItem::eFeatureShowName));
+  name = getName();
+  toolTipName = getInfo(IGisItem::eFeatureShowName);
 
   return stream;
 }

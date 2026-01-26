@@ -411,7 +411,7 @@ void CGisItemOvlArea::setDataFromPolyline(const SGisLine& l) {
 }
 
 void CGisItemOvlArea::setName(const QString& str) {
-  setText(CGisListWks::eColumnName, str);
+  name = str;
   area.name = str;
   changed(tr("Changed name."), "://icons/48x48/EditText.png");
 }

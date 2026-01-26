@@ -72,7 +72,7 @@ void CLogProject::loadLog(const QString& filename, CLogProject* project) {
   if (!file.exists() || QFileInfo(filename).suffix().toLower() != "log") {
     project->filename.clear();
     project->setupName(filename);
-    project->setToolTip(CGisListWks::eColumnName, project->getInfo());
+    project->setToolTipName(project->getInfo());
     project->valid = true;
     return;
   }
@@ -229,7 +229,7 @@ void CLogProject::loadLog(const QString& filename, CLogProject* project) {
 
         project->sortItems();
         project->setupName(QFileInfo(filename).completeBaseName().replace("_", " "));
-        project->setToolTip(CGisListWks::eColumnName, project->getInfo());
+        project->setToolTipName(project->getInfo());
         project->valid = true;
       }
     }

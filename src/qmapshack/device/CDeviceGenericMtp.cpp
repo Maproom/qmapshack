@@ -81,7 +81,7 @@ void CDeviceGenericMtp::setup() {
       createProjectsFromFiles(QDir::cleanPath(rootPath.filePath(path)));
     }
   }
-  setText(CGisListWks::eColumnName, QString("%1 (%2)").arg(description, device->decription()));
+  name = QString("%1 (%2)").arg(description, device->decription());
 }
 
 bool CDeviceGenericMtp::removeFromDevice(const QString& filename) {

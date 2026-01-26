@@ -292,8 +292,7 @@ QString IGisItem::getNameEx() const {
 
 void IGisItem::updateDecoration(quint32 enable, quint32 disable) {
   // update text and icon
-  setToolTip(CGisListWks::eColumnName, getInfo(IGisItem::eFeatureShowName));
-  setText(CGisListWks::eColumnName, getName());
+  setToolTipName(getInfo(IGisItem::eFeatureShowName));
   setSymbol();
 
   // update project if necessary

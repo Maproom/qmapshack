@@ -114,7 +114,6 @@ CGisItemRte::CGisItemRte(const SGisLine& l, const QString& name, IGisProject* pr
   updateDecoration(eMarkChanged, eMarkNone);
 }
 
-
 CGisItemRte::~CGisItemRte() {
   // reset user focus if focused on this track
   if (key == keyUserFocus) {
@@ -296,7 +295,7 @@ void CGisItemRte::setSymbol() {
 }
 
 void CGisItemRte::setName(const QString& str) {
-  setText(CGisListWks::eColumnName, str);
+  name = str;
   rte.name = str;
   changed(tr("Changed name."), "://icons/48x48/EditText.png");
 }
@@ -848,7 +847,7 @@ void CGisItemRte::setResultFromBRouter(const QDomDocument& xml, const QString& o
       // BRouter <= 1.7.8 does not set start point's time extension for route without intermediate points,
       // use comment's time as workaround!
       const QRegularExpressionMatch& match =
-            QRegularExpression("time\\s*=\\s*((\\d+)(?:h ))?((\\d+)(?:m ))?((\\d+)(?:s))").match(comment);
+          QRegularExpression("time\\s*=\\s*((\\d+)(?:h ))?((\\d+)(?:m ))?((\\d+)(?:s))").match(comment);
       if (match.hasMatch()) {
         totalTime += match.captured(2).toUInt() * 3600;
         totalTime += match.captured(4).toUInt() * 60;
@@ -874,9 +873,9 @@ void CGisItemRte::setResultFromBRouter(const QDomDocument& xml, const QString& o
     subpt.lat = elem.attribute("lat").toDouble();
     subpt.ele = elem.firstChildElement("ele").text().toDouble();
     if (n > 0) {
-      const subpt_t& other = shape[n-1];
-      rte.totalDistance += GPS_Math_Distance(subpt.lon * DEG_TO_RAD, subpt.lat * DEG_TO_RAD,
-                                             other.lon * DEG_TO_RAD, other.lat * DEG_TO_RAD);
+      const subpt_t& other = shape[n - 1];
+      rte.totalDistance += GPS_Math_Distance(subpt.lon * DEG_TO_RAD, subpt.lat * DEG_TO_RAD, other.lon * DEG_TO_RAD,
+                                             other.lat * DEG_TO_RAD);
     }
     subpt.distance = rte.totalDistance;
   }
@@ -908,75 +907,57 @@ void CGisItemRte::setResultFromBRouter(const QDomDocument& xml, const QString& o
       subpt.instruction = xmlManeuver.firstChildElement("desc").text();
       const QString& command = extension.firstChildElement("turn").text();
       // commands see at https://github.com/abrensch/brouter/blob/master/docs/features/voicehints.md
-      if (command == "C")
-      {
+      if (command == "C") {
         subpt.bearing = 0;
         subpt.instruction = tr("Go straight");
-      } else if (command == "TL")
-      {
+      } else if (command == "TL") {
         subpt.bearing = -90;
         subpt.instruction = tr("Turn left");
-      } else if (command == "TSLL")
-      {
+      } else if (command == "TSLL") {
         subpt.bearing = -45;
         subpt.instruction = tr("Turn slightly left");
-      } else if (command == "TSHL")
-      {
+      } else if (command == "TSHL") {
         subpt.bearing = -135;
         subpt.instruction = tr("Turn sharply left");
-      } else if (command == "TR")
-      {
+      } else if (command == "TR") {
         subpt.bearing = 90;
         subpt.instruction = tr("Turn right");
-      } else if (command == "TSLR")
-      {
+      } else if (command == "TSLR") {
         subpt.bearing = 45;
         subpt.instruction = tr("Turn slightly right");
-      } else if (command == "TSHR")
-      {
+      } else if (command == "TSHR") {
         subpt.bearing = 135;
         subpt.instruction = tr("Turn sharply right");
-      } else if (command == "KL")
-      {
+      } else if (command == "KL") {
         subpt.bearing = 0;
         subpt.instruction = tr("Keep left");
-      } else if (command == "KR")
-      {
+      } else if (command == "KR") {
         subpt.bearing = 0;
         subpt.instruction = tr("Keep right");
-      } else if (command == "TLU")
-      {
+      } else if (command == "TLU") {
         subpt.bearing = -180;
         subpt.instruction = tr("U-turn left");
-      } else if (command == "TU")
-      {
+      } else if (command == "TU") {
         subpt.bearing = 180;
         subpt.instruction = tr("U-turn");
-      } else if (command == "TRU")
-      {
+      } else if (command == "TRU") {
         subpt.bearing = 180;
         subpt.instruction = tr("U-turn right");
-      } else if (command.startsWith("RNDB"))
-      {
+      } else if (command.startsWith("RNDB")) {
         subpt.bearing = 0;
         subpt.instruction = tr("Roundabout exit %1").arg(command.mid(4));
-      } else if (command.startsWith("RNLB"))
-      {
+      } else if (command.startsWith("RNLB")) {
         subpt.bearing = 0;
         subpt.instruction = tr("Roundabout left exit %1").arg(command.mid(4));
-      } else if (command == "EL")
-      {
+      } else if (command == "EL") {
         subpt.bearing = 0;
         subpt.instruction = tr("Exit left");
-      } else if (command == "ER")
-      {
+      } else if (command == "ER") {
         subpt.bearing = 0;
         subpt.instruction = tr("Exit right");
-      } else if (subpt.instruction == "start")
-      {
+      } else if (subpt.instruction == "start") {
         subpt.instruction = tr("Start");
-      } else if (subpt.instruction == "destination")
-      {
+      } else if (subpt.instruction == "destination") {
         subpt.instruction = tr("Destination");
       }
       subpt.turn = extension.firstChildElement("turn-angle").text().toInt();
@@ -988,14 +969,13 @@ void CGisItemRte::setResultFromBRouter(const QDomDocument& xml, const QString& o
       if (!timeElement.isNull()) {
         rte.totalTime += timeElement.text().toUInt();
       } else if (m == 0) {
-        rte.totalTime = totalTime; // use time workaround for start
+        rte.totalTime = totalTime;  // use time workaround for start
       }
       if (prevIdx != -1) {
         subpt_t& other = shape[prevIdx];
         IUnit::self().meter2distance(subpt.distance - other.distance, valDist, unitDist);
         IUnit::self().seconds2time(other.time.secsTo(subpt.time), valTime, unitTime);
-        other.instruction += "\n" + tr("Follow the route for %1%2 or %3%4")
-            .arg(valDist, unitDist, valTime, unitTime);
+        other.instruction += "\n" + tr("Follow the route for %1%2 or %3%4").arg(valDist, unitDist, valTime, unitTime);
       }
       prevIdx = idx;
     }

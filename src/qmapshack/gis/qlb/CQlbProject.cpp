@@ -42,7 +42,7 @@ CQlbProject::CQlbProject(const QString& filename, CGisListWks* parent) : IGisPro
   if (!file.exists() || QFileInfo(filename).suffix().toLower() != "qlb") {
     IGisProject::filename.clear();
     setupName(filename);
-    setToolTip(CGisListWks::eColumnName, getInfo());
+    toolTipName = getInfo();
     valid = true;
     return;
   }
@@ -57,7 +57,7 @@ CQlbProject::CQlbProject(const QString& filename, CGisListWks* parent) : IGisPro
 
   markAsSaved();
   setupName(QFileInfo(filename).completeBaseName().replace("_", " "));
-  setToolTip(CGisListWks::eColumnName, getInfo());
+  toolTipName = getInfo();
   updateItems();
   valid = true;
 }

@@ -57,7 +57,7 @@ void CFit2Project::loadFitFromFile(const QString& filename, bool showErrorMsg) {
   try {
     decodeFile(filename);
     markAsSaved();
-    setToolTip(CGisListWks::eColumnName, getInfo());
+    toolTipName = getInfo();
     valid = true;
   } catch (const std::exception& e) {
     if (showErrorMsg) {
@@ -78,7 +78,7 @@ void CFit2Project::decodeFile(const QString& filename) {
   if (!QFile::exists(filename)) {
     IGisProject::filename.clear();
     setupName(filename);
-    setToolTip(CGisListWks::eColumnName, getInfo());
+    toolTipName = getInfo();
     valid = true;
     return;
   }
@@ -129,13 +129,13 @@ void CFit2Project::decodeFile(const QString& filename) {
     track.name = IUnit::datetime2string(track.segs.first().pts.first().time, IUnit::eTimeFormatShort);
   }
 
-  //Only for debugging
-  //It's visualize start and endpt for each segment as trackinfopoint
-  //qint32 i = 0;
-  //for (CTrackData::trkseg_t& segment : track.segs) {
-  //  segment.pts.first().desc = QString("Seg=%1 #=%2 First").arg(i).arg(segment.pts.count());
-  //  segment.pts.last().desc = QString("Seg=%1 #=%2 Last").arg(i).arg(segment.pts.count());
-  //}
+  // Only for debugging
+  // It's visualize start and endpt for each segment as trackinfopoint
+  // qint32 i = 0;
+  // for (CTrackData::trkseg_t& segment : track.segs) {
+  //   segment.pts.first().desc = QString("Seg=%1 #=%2 First").arg(i).arg(segment.pts.count());
+  //   segment.pts.last().desc = QString("Seg=%1 #=%2 Last").arg(i).arg(segment.pts.count());
+  // }
 
   new CGisItemTrk(track, this);
 
@@ -143,24 +143,24 @@ void CFit2Project::decodeFile(const QString& filename) {
 }
 
 void CFit2Project::OnMesg(fit::Mesg& mesg) {
-  //Currently not supported, can be used for debugging
+  // Currently not supported, can be used for debugging
 
-  //if (knownMessages.contains(mesg.GetName())) {
-  //  return;
-  //}
-  //qDebug() << "Mesg" << mesg.GetNumFields() << mesg.GetName();
-  //for (int i = 0; i < mesg.GetNumFields(); i++) {
-  //  fit::Field* field = mesg.GetFieldByIndex(i);
-  //  qDebug() << "  " << field->GetName();
-  //}
+  // if (knownMessages.contains(mesg.GetName())) {
+  //   return;
+  // }
+  // qDebug() << "Mesg" << mesg.GetNumFields() << mesg.GetName();
+  // for (int i = 0; i < mesg.GetNumFields(); i++) {
+  //   fit::Field* field = mesg.GetFieldByIndex(i);
+  //   qDebug() << "  " << field->GetName();
+  // }
 }
 
 void CFit2Project::OnMesg(fit::FileIdMesg& mesg) {
-  //Currently not supported
+  // Currently not supported
 }
 
 void CFit2Project::OnMesg(fit::DeviceInfoMesg& mesg) {
-  //Currently not supported
+  // Currently not supported
 }
 
 void CFit2Project::OnMesg(fit::RecordMesg& mesg) {
@@ -214,7 +214,7 @@ void CFit2Project::OnMesg(fit::RecordMesg& mesg) {
 }
 
 void CFit2Project::OnMesg(fit::ActivityMesg& mesg) {
-  //Currently not supported
+  // Currently not supported
 }
 
 void CFit2Project::OnMesg(fit::SessionMesg& mesg) {
@@ -273,27 +273,27 @@ void CFit2Project::OnMesg(fit::SessionMesg& mesg) {
 }
 
 void CFit2Project::OnMesg(fit::LapMesg& mesg) {
-  //Currently not supported
+  // Currently not supported
 }
 
 void CFit2Project::OnMesg(fit::EventMesg& mesg) {
   if (mesg.IsEventValid() && mesg.IsEventTypeValid()) {
     if (mesg.GetEvent() == FIT_EVENT_TIMER) {
-      switch(mesg.GetEventType()) {
+      switch (mesg.GetEventType()) {
         case FIT_EVENT_TYPE_STOP:
         case FIT_EVENT_TYPE_STOP_ALL:
           if (!segment.isEmpty()) {
             track.segs.append(segment);
             segment.pts.clear();
-        }
-        break;
+          }
+          break;
       }
     }
   }
 }
 
 void CFit2Project::OnMesg(fit::FileCreatorMesg& mesg) {
- //Currently not supported
+  // Currently not supported
 }
 
 void CFit2Project::OnMesg(fit::CourseMesg& mesg) {

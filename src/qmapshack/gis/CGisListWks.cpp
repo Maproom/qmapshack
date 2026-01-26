@@ -35,10 +35,10 @@
 #include "canvas/CCanvas.h"
 #include "device/IDevice.h"
 #include "gis/CGisDatabase.h"
-#include "gis/CWksItemDelegate.h"
 #include "gis/CGisListWks.h"
 #include "gis/CGisWorkspace.h"
 #include "gis/CSelDevices.h"
+#include "gis/CWksItemDelegate.h"
 #include "gis/IGisItem.h"
 #include "gis/db/CDBProject.h"
 #include "gis/db/CLostFoundProject.h"
@@ -652,7 +652,7 @@ void CGisListWks::dropEvent(QDropEvent* e) {
   emit sigChanged();
 }
 
-void CGisListWks::scrollTo(const QModelIndex &index, ScrollHint hint) {
+void CGisListWks::scrollTo(const QModelIndex& index, ScrollHint hint) {
   QTreeView::scrollTo(index, hint);
   horizontalScrollBar()->setValue(0);
 }
@@ -909,8 +909,7 @@ void CGisListWks::slotLoadWorkspace() {
         // but this results in a visible `the checkbox is being unchecked`, especially in case the project
         // is large and takes some time to load.
         // When done directly after construction there is no `blinking` of the check mark
-
-        project->setToolTip(eColumnName, project->getInfo());
+        project->setToolTipName(project->getInfo());
         if (changed) {
           project->setChanged();
         }
@@ -1500,7 +1499,7 @@ void CGisListWks::slotItemDoubleClicked(QTreeWidgetItem* item, int) {
 void CGisListWks::slotItemChanged(QTreeWidgetItem* /*item*/, int column) {
   CGisListWksEditLock lock(true, IGisItem::mutexItems);
 
-  /// @todo this clears the top left selection information whenever
+  /// @todo CWksItemDelegate: this clears the top left selection information whenever
   /// a project is checked or unchecked.
 
   // if (column == eColumnCheckBox) {
@@ -1863,9 +1862,8 @@ void CGisListWks::slotSyncDevWks() {
   if (project) {
     CCanvas* canvas = CMainWindow::self().getVisibleCanvas();
     if (canvas) {
-      canvas->reportStatus(
-          "device",
-          tr("<b>Update devices</b><p>Update %1<br/>Please wait...</p>").arg(device->text(CGisListWks::eColumnName)));
+      canvas->reportStatus("device",
+                           tr("<b>Update devices</b><p>Update %1<br/>Please wait...</p>").arg(device->getName()));
       canvas->update();
       qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
     }
@@ -1925,9 +1923,8 @@ void CGisListWks::syncPrjToDevices(IGisProject* project, const QSet<QString>& ke
       continue;
     }
     if (canvas) {
-      canvas->reportStatus(
-          "device",
-          tr("<b>Update devices</b><p>Update %1<br/>Please wait...</p>").arg(device->text(CGisListWks::eColumnName)));
+      canvas->reportStatus("device",
+                           tr("<b>Update devices</b><p>Update %1<br/>Please wait...</p>").arg(device->getName()));
       canvas->update();
       qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
     }

@@ -28,13 +28,14 @@ CProjectFilterItem::~CProjectFilterItem() {}
 
 void CProjectFilterItem::showLineEdit(CSearch* search) {
   if (treeWidget() != nullptr) {
+    /// @todo CWksItemDelegate:
     // new CSearchLineEdit, since destructor is called when replacing ItemWidget
     // using QPointer and checking for isNull() is not enough, since it happens after this point
-    if (!lineEdit.isNull()) {
-      lineEdit->deleteLater();
-    }
-    lineEdit = new CSearchLineEdit(treeWidget(), parent, search);
+    // if (!lineEdit.isNull()) {
+    //   lineEdit->deleteLater();
+    // }
+    // lineEdit = new CSearchLineEdit(treeWidget(), parent, search);
 
-    treeWidget()->setItemWidget(this, CGisListWks::eColumnName, lineEdit);
+    // treeWidget()->setItemWidget(this, CGisListWks::eColumnName, lineEdit);
   }
 }

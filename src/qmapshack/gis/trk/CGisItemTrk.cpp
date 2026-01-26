@@ -26,9 +26,9 @@
 #include "gis/CGisDraw.h"
 #include "gis/CGisWorkspace.h"
 #include "gis/GeoMath.h"
+#include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/prj/IGisProject.h"
 #include "gis/proj_x.h"
-#include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/trk/CCutTrk.h"
 #include "gis/trk/CDetailsTrk.h"
@@ -229,12 +229,11 @@ CGisItemTrk::CGisItemTrk(CTrackData& trkdata, IGisProject* project)
   checkForInvalidPoints();
 }
 
-
 CGisItemTrk::~CGisItemTrk() {
   // reset user focus if focused on this track
   if (key == keyUserFocus) {
-  keyUserFocus.clear();
-}
+    keyUserFocus.clear();
+  }
 
   /*
       Delete all registered INotifyTrk as they can't exist without the item.
@@ -647,7 +646,7 @@ QString CGisItemTrk::getInfoProgress(const CTrackData::trkpt_t& pt) const {
 
   if (pt.descent != NOFLOAT) {
     IUnit::self().meter2elevation(pt.descent, val, unit);
-    qreal  slope = totalDescent ? (pt.descent * 100 / totalDescent) : 0;
+    qreal slope = totalDescent ? (pt.descent * 100 / totalDescent) : 0;
     dsc = tr("Descent: %1%2 (%3%)").arg(val, unit).arg(slope, 2, 'f', 0);
   }
 
@@ -1170,7 +1169,7 @@ void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& curre
 
       if (current - lastCurrent > 100) {
         lastCurrent = current;
-        PROGRESS(current, return );
+        PROGRESS(current, return);
       }
     }
 
@@ -2156,7 +2155,7 @@ bool CGisItemTrk::setMode(mode_e m, const QString& owner) {
 }
 
 void CGisItemTrk::setName(const QString& str) {
-  setText(CGisListWks::eColumnName, str);
+  name = str;
   trk.name = str;
   changed(tr("Changed name"), "://icons/48x48/EditText.png");
 }

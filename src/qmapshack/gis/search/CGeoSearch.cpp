@@ -36,23 +36,24 @@ CGeoSearch::CGeoSearch(CGisListWks* parent)
     : IGisProject(eTypeGeoSearch, "", parent), searchConfig(&CGeoSearchConfig::self()) {
   networkAccessManager = new QNetworkAccessManager(this);
 
-  QPointF focus;
+  // QPointF focus;
 
   parent->takeTopLevelItem(parent->indexOfTopLevelItem(this));
   parent->insertTopLevelItem(0, this);
 
-  edit = new QLineEdit(parent);
+  /// @ todo
+  // edit = new QLineEdit(parent);
 
-  actSymbol = edit->addAction(CWptIconManager::self().getWptIconByName(searchConfig->symbolName, focus),
-                              QLineEdit::TrailingPosition);
-  actSymbol->setObjectName(searchConfig->symbolName);
-  connect(actSymbol, &QAction::triggered, this, &CGeoSearch::slotChangeSymbol);
+  // actSymbol = edit->addAction(CWptIconManager::self().getWptIconByName(searchConfig->symbolName, focus),
+  //                             QLineEdit::TrailingPosition);
+  // actSymbol->setObjectName(searchConfig->symbolName);
+  // connect(actSymbol, &QAction::triggered, this, &CGeoSearch::slotChangeSymbol);
 
-  QAction* actSetup = edit->addAction(QIcon("://icons/32x32/Apply.png"), QLineEdit::LeadingPosition);
-  actSetup->setToolTip(tr("Setup Search"));
-  connect(actSetup, &QAction::triggered, this, &CGeoSearch::slotSelectService);
+  // QAction* actSetup = edit->addAction(QIcon("://icons/32x32/Apply.png"), QLineEdit::LeadingPosition);
+  // actSetup->setToolTip(tr("Setup Search"));
+  // connect(actSetup, &QAction::triggered, this, &CGeoSearch::slotSelectService);
 
-  parent->setItemWidget(this, CGisListWks::eColumnName, edit);
+  // parent->setItemWidget(this, CGisListWks::eColumnName, edit);
 
   connect(edit, &QLineEdit::returnPressed, this, &CGeoSearch::slotStartSearch);
   connect(networkAccessManager, &QNetworkAccessManager::finished, this, &CGeoSearch::slotRequestFinished);
@@ -673,7 +674,7 @@ void CGeoSearch::parseNominatim(const QByteArray& data) {
 }
 
 void CGeoSearch::createErrorItem(const QString& status) {
-  /// @todo
+  /// @todo CWksItemDelegate:
   // itemStatus = new QTreeWidgetItem(this);
   // itemStatus->setText(CGisListWks::eColumnName, status);
   // itemStatus->setToolTip(CGisListWks::eColumnName, status);

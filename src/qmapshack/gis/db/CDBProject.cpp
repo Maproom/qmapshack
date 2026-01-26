@@ -79,7 +79,7 @@ CDBProject::CDBProject(const QString& dbName, quint64 id, CGisListWks* parent)
   }
 
   CDBProject::setupName(name);
-  setToolTip(CGisListWks::eColumnName, getInfo());
+  toolTipName = getInfo();
   updateItems();
 
   valid = true;
@@ -181,7 +181,7 @@ void CDBProject::setupName(const QString& defaultName) {
   if (query.next()) {
     nameSuffix = query.value(0).toString();
   }
-  setText(CGisListWks::eColumnName, getNameEx());
+  name = getNameEx();
 }
 
 void CDBProject::postStatus(bool updateLostFound) {
@@ -629,7 +629,7 @@ void CDBProject::showItems(CEvtD2WShowItems* evt, action_e action2ForAll) {
 
   sortItems();
   postStatus(false);
-  setToolTip(CGisListWks::eColumnName, getInfo());
+  toolTipName = getInfo();
 
   if (restoreDlgDetails) {
     edit();
@@ -648,7 +648,7 @@ void CDBProject::hideItems(CEvtD2WHideItems* evt) {
   }
 
   postStatus(false);
-  setToolTip(CGisListWks::eColumnName, getInfo());
+  toolTipName = getInfo();
 }
 
 void CDBProject::update() {
@@ -690,7 +690,7 @@ void CDBProject::update() {
   }
 
   setupName(name);
-  setToolTip(CGisListWks::eColumnName, getInfo());
+  toolTipName = getInfo();
 
   /*
       The further proceeding depends on the check state of the project. If the project

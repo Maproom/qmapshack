@@ -78,9 +78,8 @@ void CDeviceGarminMtp::setup() {
     partno = xmlModel.namedItem("PartNumber").toElement().text().trimmed();
 
     // update the tool tip with information from the device xml
-    setToolTip(CGisListWks::eColumnName,
-               QString("%1 (%2, V%3)")
-                   .arg(description, partno, xmlModel.namedItem("SoftwareVersion").toElement().text().trimmed()));
+    toolTipName = QString("%1 (%2, V%3)")
+                      .arg(description, partno, xmlModel.namedItem("SoftwareVersion").toElement().text().trimmed());
 
     const QDomNode& xmlMassStorageMode = xmlDevice.namedItem("MassStorageMode");
     const QDomNodeList& xmlDataTypes = xmlMassStorageMode.toElement().elementsByTagName("DataType");
@@ -121,7 +120,7 @@ void CDeviceGarminMtp::setup() {
     pathCourses = "Courses";
   }
 
-  setText(CGisListWks::eColumnName, QString("%1 (%2)").arg(description, device->decription()));
+  name = QString("%1 (%2)").arg(description, device->decription());
 
   qDebug() << pathGpx;
   qDebug() << pathPictures;

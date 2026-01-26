@@ -271,7 +271,7 @@ bool IDevice::testForExternalProject(const QString& filename) {
     const int N = childCount();
     for (int n = 0; n < N; n++) {
       QTreeWidgetItem* item = child(n);
-      if (item->text(CGisListWks::eColumnName) == fi.baseName()) {
+      if (getName() == fi.baseName()) {
         delete item;
         break;
       }

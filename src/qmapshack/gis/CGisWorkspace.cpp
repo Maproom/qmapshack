@@ -63,8 +63,6 @@ CGisWorkspace::CGisWorkspace(QMenu* menuProject, QWidget* parent) : QWidget(pare
   SETTINGS;
   treeWks->header()->restoreState(cfg.value("Workspace/treeWks/state", treeWks->header()->saveState()).toByteArray());
 
-  tags_hidden_e tagsHidden = (tags_hidden_e)cfg.value("Workspace/treeWks/tagsHidden", eTagsHiddenUnknown).toInt();
-
   CSearch::setSearchMode(
       CSearch::search_mode_e(cfg.value("Workspace/projects/filterMode", CSearch::getSearchMode()).toInt()));
   CSearch::setCaseSensitivity(

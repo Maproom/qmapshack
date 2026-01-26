@@ -142,9 +142,10 @@ IGisProject* IGisProject::create(const QString filename, CGisListWks* parent) {
 }
 
 QString IGisProject::html2Dev(const QString& str) {
-  return (isOnDevice() == IDevice::eTypeGarmin)
-                 || (isOnDevice() == IDevice::eTypeGarminMtp)
-                 || (isOnDevice() == IDevice::eTypeGenericMtp) ? IGisItem::removeHtml(str) : str;
+  return (isOnDevice() == IDevice::eTypeGarmin) || (isOnDevice() == IDevice::eTypeGarminMtp) ||
+                 (isOnDevice() == IDevice::eTypeGenericMtp)
+             ? IGisItem::removeHtml(str)
+             : str;
 }
 
 bool IGisProject::askBeforClose() {
@@ -214,7 +215,7 @@ void IGisProject::edit() {
 
 void IGisProject::setName(const QString& str) {
   metadata.name = str;
-  setText(CGisListWks::eColumnName, getNameEx());
+  name = getNameEx();
   setChanged();
 }
 
@@ -432,7 +433,7 @@ void IGisProject::setupName(const QString& defaultName) {
   if (metadata.name.isEmpty()) {
     metadata.name = defaultName;
   }
-  setText(CGisListWks::eColumnName, getName());
+  name = getName();
 }
 
 void IGisProject::markAsSaved() {
@@ -457,7 +458,7 @@ QString IGisProject::getNameEx() const {
 }
 
 QString IGisProject::getInfo() const {
-  QString str = metadata.name.isEmpty() ? text(CGisListWks::eColumnName) : metadata.name;
+  QString str = metadata.name.isEmpty() ? name : metadata.name;
   str = "<div style='font-weight: bold;'>" + str + "</div>";
 
   if (metadata.time.isValid()) {
@@ -594,8 +595,7 @@ bool IGisProject::delItemByKey(const IGisItem::key_t& key, QMessageBox::Standard
 
     if (item->getKey() == key) {
       if (last != QMessageBox::YesToAll) {
-        QString msg = tr("Are you sure you want to delete '%1' from project '%2'?")
-                          .arg(item->getName(), text(CGisListWks::eColumnName));
+        QString msg = tr("Are you sure you want to delete '%1' from project '%2'?").arg(item->getName(), name);
         last = QMessageBox::question(CMainWindow::getBestWidgetForParent(), tr("Delete..."), msg,
                                      QMessageBox::YesToAll | QMessageBox::Cancel | QMessageBox::Ok | QMessageBox::No,
                                      QMessageBox::Ok);
@@ -1028,10 +1028,11 @@ bool IGisProject::findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qi
 
 void IGisProject::gainUserFocus(bool yes) {
   if (yes) {
-    setIcon(CGisListWks::eColumnName, QIcon("://icons/32x32/Focus.png"));
+    /// @todo CWksItemDelegate:
+    // setIcon(CGisListWks::eColumnName, QIcon("://icons/32x32/Focus.png"));
     keyUserFocus = key;
   } else {
-    setIcon(CGisListWks::eColumnName, QIcon());
+    // setIcon(CGisListWks::eColumnName, QIcon());
     keyUserFocus.clear();
   }
 }

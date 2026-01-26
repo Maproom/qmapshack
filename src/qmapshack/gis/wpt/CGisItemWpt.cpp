@@ -420,9 +420,7 @@ void CGisItemWpt::setIcon() {
 void CGisItemWpt::setName(const QString& str) {
   SETTINGS;
   cfg.setValue("Waypoint/lastName", str);
-
-  setText(CGisListWks::eColumnName, str);
-
+  name = str;
   wpt.name = str;
   changed(tr("Changed name"), "://icons/48x48/EditText.png");
 }
@@ -430,9 +428,7 @@ void CGisItemWpt::setName(const QString& str) {
 void CGisItemWpt::setPosition(const QPointF& pos) {
   wpt.lon = pos.x();
   wpt.lat = pos.y();
-
   detBoundingRect();
-
   changed(tr("Changed position"), "://icons/48x48/WptMove.png");
 }
 

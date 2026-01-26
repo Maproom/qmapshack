@@ -32,7 +32,7 @@
 CDeviceGarmin::CDeviceGarmin(const QString& path, const QString& key, const QString& model,
                              const QString& garminDeviceXml, QTreeWidget* parent)
     : IDevice(path, eTypeGarmin, key, parent), cntImages(0) {
-  setText(CGisListWks::eColumnName, "Garmin");
+  name = "Garmin";
 
   QFile file(QDir(path).absoluteFilePath(garminDeviceXml));
   if (!file.open(QIODevice::ReadOnly)) {
@@ -58,8 +58,8 @@ CDeviceGarmin::CDeviceGarmin(const QString& path, const QString& key, const QStr
   description = xmlModel.namedItem("Description").toElement().text().trimmed();
   partno = xmlModel.namedItem("PartNumber").toElement().text().trimmed();
 
-  setText(CGisListWks::eColumnName, QString("%1 (%2)").arg(description, model));
-  setToolTip(CGisListWks::eColumnName, QString("%1 (%2, %3)").arg(description, partno, model));
+  name = QString("%1 (%2)").arg(description, model);
+  toolTipName = QString("%1 (%2, %3)").arg(description, partno, model);
 
   const QDomNode& xmlMassStorageMode = xmlDevice.namedItem("MassStorageMode");
   const QDomNodeList& xmlDataTypes = xmlMassStorageMode.toElement().elementsByTagName("DataType");

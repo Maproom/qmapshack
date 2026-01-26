@@ -27,8 +27,8 @@
 
 CDeviceTwoNav::CDeviceTwoNav(const QString& path, const QString& key, const QString& model, QTreeWidget* parent)
     : IDevice(path, eTypeTwoNav, key, parent) {
-  setText(CGisListWks::eColumnName, QString("TwoNav (%1)").arg(model));
-  setToolTip(CGisListWks::eColumnName, QString("TwoNav (%1)").arg(model));
+  name = QString("TwoNav (%1)").arg(model);
+  toolTipName = QString("TwoNav (%1)").arg(model);
 
   if (QFile::exists(dir.absoluteFilePath("RegInfo.ini"))) {
     readReginfo(dir.absoluteFilePath("RegInfo.ini"));
@@ -103,7 +103,7 @@ void CDeviceTwoNav::readReginfo(const QString& filename) {
   }
 
   if (!product.isEmpty() && !unittype.isEmpty()) {
-    setText(CGisListWks::eColumnName, QString("%1 (%2)").arg(product, unittype));
+    name = QString("%1 (%2)").arg(product, unittype);
   }
 }
 

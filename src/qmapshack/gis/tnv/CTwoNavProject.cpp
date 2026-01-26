@@ -36,7 +36,7 @@ CTwoNavProject::CTwoNavProject(const QString& filename, IDevice* parent) : IGisP
 
   sortItems();
   setupName(QFileInfo(filename).completeBaseName().replace("_", " "));
-  setToolTip(CGisListWks::eColumnName, getInfo());
+  toolTipName = getInfo();
   updateItems();
   valid = true;
 }
@@ -58,7 +58,7 @@ CTwoNavProject::CTwoNavProject(const QString& filename, const IGisProject* proje
 
   sortItems();
   setupName(QFileInfo(filename).completeBaseName().replace("_", " "));
-  setToolTip(CGisListWks::eColumnName, getInfo());
+  toolTipName = getInfo();
   updateItems();
   valid = true;
 }

@@ -28,7 +28,7 @@
 
 CDeviceGarminArchiveMtp::CDeviceGarminArchiveMtp(const QString& path, IDeviceAccess* device, CDeviceGarminMtp* parent)
     : IDevice(path, parent->getKey(), parent), device(device) {
-  setText(CGisListWks::eColumnName, tr("Archive - expand to load"));
+  name = tr("Archive - expand to load");
   setChildIndicatorPolicy(QTreeWidgetItem::ShowIndicator);
   connect(treeWidget(), &QTreeWidget::itemExpanded, this, &CDeviceGarminArchiveMtp::slotExpanded);
   connect(treeWidget(), &QTreeWidget::itemCollapsed, this, &CDeviceGarminArchiveMtp::slotCollapsed);
@@ -39,7 +39,7 @@ void CDeviceGarminArchiveMtp::slotExpanded(QTreeWidgetItem* item) {
     return;
   }
 
-  setText(CGisListWks::eColumnName, tr("Archive - loaded"));
+  name = tr("Archive - loaded");
   QMutexLocker lock(&IGisItem::mutexItems);
   CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
   qDebug() << "reading files from device: " << dir.path();
@@ -72,6 +72,6 @@ void CDeviceGarminArchiveMtp::slotCollapsed(QTreeWidgetItem* item) {
 
   qDeleteAll(takeChildren());
 
-  setText(CGisListWks::eColumnName, tr("Archive - expand to load"));
+  name = tr("Archive - expand to load");
   emit CGisWorkspace::self().sigChanged();
 }

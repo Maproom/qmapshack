@@ -46,7 +46,7 @@ Parameters to configure build:
 To run the complete build process:
 
 1. Create a directory and cd into this directory. This dir will be referenced as $QMSDEVDIR
-2. clone git repo https://github.com/d029940/qmapshack.git
+2. clone git repo https://github.com/Maproom/qmapshack.git
 3. Check build parameters in ./qmapshack/MacOSX/config.sh
 4. run "sh ./qmapshack/MacOSX/build-all.sh | tee log.txt"
 5. ATTENTION: manual intervention is needed for: - applying admin password while changing dylibs (Apple requirement)

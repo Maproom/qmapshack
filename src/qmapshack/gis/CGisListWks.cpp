@@ -828,21 +828,21 @@ void CGisListWks::slotLoadWorkspace() {
       switch (type) {
         case IGisProject::eTypeQms: {
           project = new CQmsProject(name, this);
-          project->setCheckState(CGisListDB::eColumnCheckbox, visible);  // (1a)
+          project->setVisibility(visible);
           *project << stream;
           break;
         }
 
         case IGisProject::eTypeQlb: {
           project = new CQlbProject(name, this);
-          project->setCheckState(CGisListDB::eColumnCheckbox, visible);  // (1a)
+          project->setVisibility(visible);
           *project << stream;
           break;
         }
 
         case IGisProject::eTypeGpx: {
           project = new CGpxProject(name, this);
-          project->setCheckState(CGisListDB::eColumnCheckbox, visible);  // (1b)
+          project->setVisibility(visible);
           *project << stream;
           break;
         }
@@ -850,7 +850,7 @@ void CGisListWks::slotLoadWorkspace() {
         case IGisProject::eTypeDb: {
           CDBProject* dbProject;
           project = dbProject = new CDBProject(this);
-          project->setCheckState(CGisListDB::eColumnCheckbox, visible);  // (1c)
+          project->setVisibility(visible);
 
           project->IGisProject::operator<<(stream);
           dbProject->restoreDBLink();
@@ -866,7 +866,7 @@ void CGisListWks::slotLoadWorkspace() {
 
         case IGisProject::eTypeSlf: {
           project = new CSlfProject(name, false);
-          project->setCheckState(CGisListDB::eColumnCheckbox, visible);  // (1d)
+          project->setVisibility(visible);
           *project << stream;
 
           // the CSlfProject does not - as the other C*Project - register itself in the list
@@ -877,28 +877,28 @@ void CGisListWks::slotLoadWorkspace() {
 
         case IGisProject::eTypeFit: {
           project = new CFit2Project(name, this);
-          project->setCheckState(CGisListDB::eColumnCheckbox, visible);
+          project->setVisibility(visible);
           *project << stream;
           break;
         }
 
         case IGisProject::eTypeTcx: {
           project = new CTcxProject(name, this);
-          project->setCheckState(CGisListDB::eColumnCheckbox, visible);
+          project->setVisibility(visible);
           *project << stream;
           break;
         }
 
         case IGisProject::eTypeSml: {
           project = new CSmlProject(name, this);
-          project->setCheckState(CGisListDB::eColumnCheckbox, visible);
+          project->setVisibility(visible);
           *project << stream;
           break;
         }
 
         case IGisProject::eTypeLog: {
           project = new CSmlProject(name, this);
-          project->setCheckState(CGisListDB::eColumnCheckbox, visible);
+          project->setVisibility(visible);
           *project << stream;
           break;
         }
@@ -1315,7 +1315,7 @@ void CGisListWks::setVisibilityOnMap(bool visible) {
   for (QTreeWidgetItem* item : items) {
     IGisProject* project = dynamic_cast<IGisProject*>(item);
     if (nullptr != project) {
-      project->setCheckState(CGisListDB::eColumnCheckbox, visible ? Qt::Checked : Qt::Unchecked);
+      project->setVisibility(visible);
     }
   }
   emit sigChanged();

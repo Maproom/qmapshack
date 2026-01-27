@@ -337,12 +337,6 @@ class IGisProject : public IWksItem {
    */
   bool isValid() const { return valid; }
 
-  /**
-     @brief Test if visibility check mark is set
-     @return True if project is visible
-   */
-  bool isVisible() const;
-
   bool isAutoSave() const { return autoSave; }
 
   /**
@@ -498,7 +492,7 @@ class IGisProject : public IWksItem {
   bool changedRoadbookMode = false;
 
   bool autoSavePending = false;       ///< flag to show if auto save event has been sent. will be reset by save()
-  bool invalidDataOk = false;         ///< if set invalid data in GIS items will not raise any dialog  
+  bool invalidDataOk = false;         ///< if set invalid data in GIS items will not raise any dialog
   bool autoSyncToDevPending = false;  ///< flag to show that a sync to device is already pending
 
   metadata_t metadata;

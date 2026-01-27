@@ -23,33 +23,36 @@
 
 class IWksItem : public QTreeWidgetItem {
  public:
-  IWksItem(QTreeWidgetItem* parent, int type = Type) : QTreeWidgetItem(parent, type) {}
-  IWksItem(QTreeWidget* parent, int type = Type) : QTreeWidgetItem(parent, type) {}
+  IWksItem(QTreeWidgetItem* parent, int type) : QTreeWidgetItem(parent, type) { qDebug() << type; }
+  IWksItem(QTreeWidget* parent, int type) : QTreeWidgetItem(parent, type) { qDebug() << type; }
   virtual ~IWksItem() = default;
 
   enum mark_e { eMarkNone = 0, eMarkChanged = 0x00000001, eMarkNotPart = 0x00000002, eMarkNotInDB = 0x00000004 };
 
   virtual void setToolTipName(const QString& tip) { toolTipName = tip; }
+  virtual void setVisibility(bool visible) { this->visible = visible; }
 
   virtual const QString& getName() const { return name; }
   virtual const QPixmap& getIcon() const { return icon; }
-  virtual const bool getVisibility() const { return visible; }
+  virtual const bool isVisible() const { return visible; }
 
  protected:
   QString name;
   QString toolTipName;
   QPixmap icon;
-  bool visible;
+
   bool autoSave = false;       ///< flag to show if auto save is on or off
   bool autoSyncToDev = false;  ///< if set true sync the project with every device connected
 
-  quint32 flagsDecoration;
+  quint32 flagsDecoration = 0;
   QString toolTipDecoration;
 
   /// labeling the GisItems
   qreal rating = 0;
   QSet<QString> keywords;
+
+ private:
+  bool visible = true;
 };
 
-#endif //IWKSITEM_H
-
+#endif  // IWKSITEM_H

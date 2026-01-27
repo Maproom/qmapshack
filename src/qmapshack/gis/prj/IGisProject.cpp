@@ -68,9 +68,8 @@ const QString IGisProject::filedialogLoadFilters =
 QString IGisProject::keyUserFocus;
 
 IGisProject::IGisProject(type_e type, const QString& filename, CGisListWks* parent)
-    : IWksItem(parent), type(type), filename(filename) {
+    : IWksItem(parent, type), type(type), filename(filename) {
   memset(cntItemsByType, 0, sizeof(cntItemsByType));
-  visible = true;
 
   if (parent) {
     // move project up the list until there a re only projects, no devices
@@ -93,9 +92,8 @@ IGisProject::IGisProject(type_e type, const QString& filename, CGisListWks* pare
 }
 
 IGisProject::IGisProject(type_e type, const QString& filename, IDevice* parent)
-    : IWksItem(parent), type(type), filename(filename) {
+    : IWksItem(parent, type), type(type), filename(filename) {
   memset(cntItemsByType, 0, sizeof(cntItemsByType));
-  visible = true;
   nameSuffix = parent->getName();
 }
 
@@ -170,8 +168,6 @@ bool IGisProject::askBeforClose() {
 
   return res == QMessageBox::Abort;
 }
-
-bool IGisProject::isVisible() const { return visible; }
 
 void IGisProject::genKey() const {
   if (key.isEmpty()) {

@@ -298,6 +298,11 @@ class IGisItem : public IWksItem {
   virtual QPointF getPointCloseBy(const QPoint& point) { return NOPOINTF; }
 
   /**
+    @brief General visibility on the map
+   */
+  using IWksItem::isVisible;
+
+  /**
      @brief Test if the item is close to a given pixel coordinate of the screen
 
      @param pos       the coordinate on the screen in pixel

@@ -18,10 +18,8 @@
 
 #include "map/CMapItemDelegate.h"
 
-#include <QApplication>
 #include <QMouseEvent>
 #include <QPainter>
-#include <QToolButton>
 #include <QToolTip>
 #include <QTreeWidget>
 #include <QVariantAnimation>
@@ -303,7 +301,7 @@ void CMapItemDelegate::paint(QPainter* p, const QStyleOptionViewItem& opt, const
 bool CMapItemDelegate::editorEvent(QEvent* event, QAbstractItemModel* model, const QStyleOptionViewItem& opt,
                                    const QModelIndex& index) {
   if (event->type() == QEvent::MouseButtonPress) {
-    auto* me = static_cast<QMouseEvent*>(event);
+    auto* me = static_cast<QMouseEvent*>(event);    
 
     auto [fontName, rectIcon, rectButton, rectIndicator, rectName, rectStatus] = getRectangles(opt, false);
 

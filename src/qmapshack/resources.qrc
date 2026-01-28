@@ -70,6 +70,8 @@
         <file>../icons/32x32/ArrowUser.png</file>
         <file>../icons/32x32/Attention.png</file>
         <file>../icons/32x32/AutoSave.png</file>
+        <file>../icons/32x32/AutoSaveA.png</file>
+        <file>../icons/32x32/AutoSaveNoA.png</file>
         <file>../icons/32x32/Bubble.png</file>
         <file>../icons/32x32/CSrcATemp.png</file>
         <file>../icons/32x32/CSrcAccel.png</file>
@@ -116,6 +118,8 @@
         <file>../icons/32x32/DeleteMultiple.png</file>
         <file>../icons/32x32/DeleteOne.png</file>
         <file>../icons/32x32/Device.png</file>
+        <file>../icons/32x32/DeviceSync.png</file>
+        <file>../icons/32x32/DeviceNoSync.png</file>
         <file>../icons/32x32/Disconnected.png</file>
         <file>../icons/32x32/Down.png</file>
         <file>../icons/32x32/EditDetails.png</file>
@@ -179,6 +183,7 @@
         <file>../icons/32x32/MySQL.png</file>
         <file>../icons/32x32/MySQLNoConn.png</file>
         <file>../icons/32x32/NightDay.png</file>
+        <file>../icons/32x32/NoAutoSave.png</file>
         <file>../icons/32x32/NoGo.png</file>
         <file>../icons/32x32/NotPossible.png</file>
         <file>../icons/32x32/O.png</file>
@@ -357,6 +362,8 @@
         <file>../icons/48x48/ArrowUser.png</file>
         <file>../icons/48x48/Attention.png</file>
         <file>../icons/48x48/AutoSave.png</file>
+        <file>../icons/48x48/AutoSaveA.png</file>
+        <file>../icons/48x48/AutoSaveNoA.png</file>
         <file>../icons/48x48/Bubble.png</file>
         <file>../icons/48x48/CSrcATemp.png</file>
         <file>../icons/48x48/CSrcAccel.png</file>
@@ -402,6 +409,8 @@
         <file>../icons/48x48/DeleteMultiple.png</file>
         <file>../icons/48x48/DeleteOne.png</file>
         <file>../icons/48x48/Device.png</file>
+        <file>../icons/48x48/DeviceSync.png</file>
+        <file>../icons/48x48/DeviceNoSync.png</file>
         <file>../icons/48x48/Disconnected.png</file>
         <file>../icons/48x48/Down.png</file>
         <file>../icons/48x48/EditDetails.png</file>
@@ -466,6 +475,7 @@
         <file>../icons/48x48/MySQL.png</file>
         <file>../icons/48x48/MySQLNoConn.png</file>
         <file>../icons/48x48/NightDay.png</file>
+        <file>../icons/48x48/NoAutoSave.png</file>
         <file>../icons/48x48/NoGo.png</file>
         <file>../icons/48x48/NotPossible.png</file>
         <file>../icons/48x48/O.png</file>

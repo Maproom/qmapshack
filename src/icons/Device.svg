@@ -2,19 +2,19 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="64px"
-   height="64px"
+   width="54"
+   height="54"
    id="svg3513"
    version="1.1"
-   inkscape:version="0.48.5 r10040"
-   sodipodi:docname="Device.svg">
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   sodipodi:docname="Device.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
   <defs
      id="defs3515">
     <marker
@@ -27,7 +27,7 @@
       <path
          inkscape:connector-curvature="0"
          id="path4038"
-         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
          style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
          transform="matrix(0.4,0,0,0.4,4,0)" />
     </marker>
@@ -41,7 +41,7 @@
       <path
          inkscape:connector-curvature="0"
          id="path4041"
-         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
          style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
          transform="matrix(-0.4,0,0,-0.4,-4,0)" />
     </marker>
@@ -54,20 +54,25 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="11"
-     inkscape:cx="-6.4610359"
-     inkscape:cy="29.321936"
+     inkscape:cx="4.1363636"
+     inkscape:cy="25.363636"
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:document-units="px"
      inkscape:grid-bbox="true"
      inkscape:window-width="1920"
-     inkscape:window-height="992"
-     inkscape:window-x="-4"
-     inkscape:window-y="-1"
-     inkscape:window-maximized="1">
+     inkscape:window-height="1022"
+     inkscape:window-x="1920"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:showpageshadow="2"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1">
     <inkscape:grid
        type="xygrid"
-       id="grid3006" />
+       id="grid3006"
+       originx="-4"
+       originy="-4" />
   </sodipodi:namedview>
   <metadata
      id="metadata3518">
@@ -77,14 +82,14 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <g
      id="layer1"
      inkscape:label="Layer 1"
-     inkscape:groupmode="layer">
+     inkscape:groupmode="layer"
+     transform="translate(-4,-4)">
     <g
        id="g2998"
        transform="translate(1,2)">
@@ -94,16 +99,16 @@
          height="50"
          width="30"
          id="rect3008"
-         style="fill:#000080;stroke:#000080;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+         style="fill:#000080;stroke:#000080;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
       <rect
          y="9"
          x="20"
          height="30"
          width="20"
          id="rect3790"
-         style="fill:#999999;fill-opacity:1;fill-rule:evenodd;stroke:#b3b3b3;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+         style="fill:#999999;fill-opacity:1;fill-rule:evenodd;stroke:#b3b3b3;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
       <g
-         transform="translate(-0.5,0)"
+         transform="translate(-0.5)"
          id="g3834">
         <g
            id="g3826">
@@ -112,27 +117,29 @@
              sodipodi:open="true"
              sodipodi:end="6.2789689"
              sodipodi:start="0"
-             d="m 32,43.5 a 1.5,1.5 0 1 1 -1.3e-5,-0.0063"
+             d="m 32,43.5 a 1.5,1.5 0 0 1 -1.498419,1.499999 1.5,1.5 0 0 1 -1.501578,-1.496837 1.5,1.5 0 0 1 1.495254,-1.503154 1.5,1.5 0 0 1 1.50473,1.493667"
              sodipodi:ry="1.5"
              sodipodi:rx="1.5"
              sodipodi:cy="43.5"
              sodipodi:cx="30.5"
              id="path3792"
-             style="fill:#999999;fill-opacity:1;fill-rule:evenodd;stroke:#b3b3b3;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
-             sodipodi:type="arc" />
+             style="fill:#999999;fill-opacity:1;fill-rule:evenodd;stroke:#b3b3b3;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+             sodipodi:type="arc"
+             sodipodi:arc-type="arc" />
           <path
              transform="translate(0,7.5)"
              sodipodi:open="true"
              sodipodi:end="6.2789689"
              sodipodi:start="0"
-             d="m 32,43.5 a 1.5,1.5 0 1 1 -1.3e-5,-0.0063"
+             d="m 32,43.5 a 1.5,1.5 0 0 1 -1.498419,1.499999 1.5,1.5 0 0 1 -1.501578,-1.496837 1.5,1.5 0 0 1 1.495254,-1.503154 1.5,1.5 0 0 1 1.50473,1.493667"
              sodipodi:ry="1.5"
              sodipodi:rx="1.5"
              sodipodi:cy="43.5"
              sodipodi:cx="30.5"
              id="path3792-5"
-             style="fill:#999999;fill-opacity:1;fill-rule:evenodd;stroke:#b3b3b3;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
-             sodipodi:type="arc" />
+             style="fill:#999999;fill-opacity:1;fill-rule:evenodd;stroke:#b3b3b3;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+             sodipodi:type="arc"
+             sodipodi:arc-type="arc" />
         </g>
         <g
            id="g3830"
@@ -142,27 +149,29 @@
              sodipodi:open="true"
              sodipodi:end="6.2789689"
              sodipodi:start="0"
-             d="m 32,43.5 a 1.5,1.5 0 1 1 -1.3e-5,-0.0063"
+             d="m 32,43.5 a 1.5,1.5 0 0 1 -1.498419,1.499999 1.5,1.5 0 0 1 -1.501578,-1.496837 1.5,1.5 0 0 1 1.495254,-1.503154 1.5,1.5 0 0 1 1.50473,1.493667"
              sodipodi:ry="1.5"
              sodipodi:rx="1.5"
              sodipodi:cy="43.5"
              sodipodi:cx="30.5"
              id="path3792-0"
-             style="fill:#999999;fill-opacity:1;fill-rule:evenodd;stroke:#b3b3b3;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
-             sodipodi:type="arc" />
+             style="fill:#999999;fill-opacity:1;fill-rule:evenodd;stroke:#b3b3b3;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+             sodipodi:type="arc"
+             sodipodi:arc-type="arc" />
           <path
              transform="translate(7.5,3)"
              sodipodi:open="true"
              sodipodi:end="6.2789689"
              sodipodi:start="0"
-             d="m 32,43.5 a 1.5,1.5 0 1 1 -1.3e-5,-0.0063"
+             d="m 32,43.5 a 1.5,1.5 0 0 1 -1.498419,1.499999 1.5,1.5 0 0 1 -1.501578,-1.496837 1.5,1.5 0 0 1 1.495254,-1.503154 1.5,1.5 0 0 1 1.50473,1.493667"
              sodipodi:ry="1.5"
              sodipodi:rx="1.5"
              sodipodi:cy="43.5"
              sodipodi:cx="30.5"
              id="path3792-7"
-             style="fill:#999999;fill-opacity:1;fill-rule:evenodd;stroke:#b3b3b3;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
-             sodipodi:type="arc" />
+             style="fill:#999999;fill-opacity:1;fill-rule:evenodd;stroke:#b3b3b3;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+             sodipodi:type="arc"
+             sodipodi:arc-type="arc" />
         </g>
       </g>
     </g>

@@ -1065,13 +1065,11 @@ void CGisItemTrk::deriveSecondaryData() {
   //    qDebug() << "totalElapsedSecondsMoving" << totalElapsedSecondsMoving;
 }
 
-void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& current) {
+void CGisItemTrk::findWaypointsCloseBy() {
   IGisProject* project = getParentProject();
   if (nullptr == project) {
     return;
   }
-
-  quint32 lastCurrent = current;
 
   bool withDoubles = project->getSortingRoadbook() != IGisProject::eSortRoadbookTrackWithoutDouble;
 
@@ -1144,7 +1142,6 @@ void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& curre
     qint32 index = NOIDX;
 
     for (const pointDP& pt : std::as_const(line)) {
-      ++current;
       qreal d = (trkwpt.x - pt.x) * (trkwpt.x - pt.x) + (trkwpt.y - pt.y) * (trkwpt.y - pt.y);
 
       if (d < WPT_FOCUS_DIST_IN) {
@@ -1165,11 +1162,6 @@ void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& curre
 
         index = NOIDX;
         minD = WPT_FOCUS_DIST_IN;
-      }
-
-      if (current - lastCurrent > 100) {
-        lastCurrent = current;
-        PROGRESS(current, return);
       }
     }
 
@@ -1207,12 +1199,14 @@ bool CGisItemTrk::isWithin(const QRectF& area, selflags_t flags) {
 void CGisItemTrk::gainUserFocus(bool yes) {
   keyUserFocus = yes ? key : key_t();
   widthInfoBox = MIN_WIDTH_INFO_BOX;
+  IWksItem::updateItem();
 }
 
 void CGisItemTrk::looseUserFocus() {
   if (keyUserFocus == key) {
     keyUserFocus.clear();
   }
+  IWksItem::updateItem();
 }
 
 void CGisItemTrk::edit() {

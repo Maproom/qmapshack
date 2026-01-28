@@ -31,8 +31,6 @@ class CDeviceGarmin;
 class IDevice : public IWksItem {
   Q_DECLARE_TR_FUNCTIONS(IDevice)
  public:
-  enum type_e { eTypeNone = 0, eTypeGarmin = 1, eTypeTwoNav = 2, eTypeGarminMtp = 3, eTypeVirtual = 4, eTypeGenericMtp = 5 };
-
   IDevice(const QString& path, type_e type, const QString& key, QTreeWidget* parent);
   IDevice(const QString& path, const QString& key, IDevice* parent);
   virtual ~IDevice();
@@ -67,6 +65,9 @@ class IDevice : public IWksItem {
   virtual void aboutToRemoveProject(IGisProject* project) {}
 
   IGisProject* getProjectByKey(const QString& key);
+
+  void gainUserFocus(bool yes) override {};
+  bool hasUserFocus() const override { return false; };
 
  protected:
   virtual void insertCopyOfProject(IGisProject* project) = 0;

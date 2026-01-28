@@ -38,7 +38,7 @@ class CGpxProject : public IGisProject {
 
   const QString getFileExtension() const override { return "gpx"; }
 
-  bool canSave() const override { return true; }
+  const bool canSave() const override { return true; }
 
   static bool saveAs(const QString& fn, IGisProject& project, bool strictGpx11);
   static bool saveAs(QFile& file, const QString& filename, IGisProject& project, bool strictGpx11);

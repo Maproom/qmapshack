@@ -22,20 +22,47 @@
 #include <QPointer>
 #include <QStyledItemDelegate>
 
-class QTreeWidget;
+class CGisListWks;
+class IWksItem;
 
 class CWksItemDelegate : public QStyledItemDelegate {
   Q_OBJECT
  public:
-  CWksItemDelegate(QTreeWidget* parent);
+  CWksItemDelegate(CGisListWks* parent);
   virtual ~CWksItemDelegate() = default;
 
   void initStyleOption(QStyleOptionViewItem* option, const QModelIndex& index) const override;
   void paint(QPainter* p, const QStyleOptionViewItem& opt, const QModelIndex& index) const override;
+  bool editorEvent(QEvent* event, QAbstractItemModel* model, const QStyleOptionViewItem& opt,
+                   const QModelIndex& index) override;
+  bool helpEvent(QHelpEvent* event, QAbstractItemView* view, const QStyleOptionViewItem& opt,
+                 const QModelIndex& index) override;
+  QSize sizeHint(const QStyleOptionViewItem& opt, const QModelIndex& index) const override;
+
+ signals:
+  void sigUpdateCanvas();
 
  private:
-  QPointer<QTreeWidget> treeWidget;
+  static inline QString trRichText(const char* msg) { return "<div>" + tr(msg) + "</div>"; }
+  IWksItem* indexToItem(const QModelIndex& index) const;
+  static std::tuple<QFont, QRect, QRect, QRect, QRect, QRect, QRect> getRectanglesProject(
+      const QStyleOptionViewItem& opt);
+  static std::tuple<QFont, QRect, QRect, QRect, QRect, QRect, QRect> getRectanglesItem(const QStyleOptionViewItem& opt);
+  static void drawToolButton(QPainter* p, const QStyleOptionViewItem& opt, const QRect& rect, const QIcon& icon,
+                             bool enabled, bool pressed);
+
+  void paintProject(QPainter* p, const QStyleOptionViewItem& opt, const QModelIndex& index, const IWksItem* item) const;
+  void paintItem(QPainter* p, const QStyleOptionViewItem& opt, const QModelIndex& index, const IWksItem* item) const;
+
+  bool mousePressProject(QMouseEvent* me, const QStyleOptionViewItem& opt, const QModelIndex& index, IWksItem* item);
+
+  bool helpEventProject(const QPoint& pos, const QPoint& posGlobal, QAbstractItemView* view,
+                        const QStyleOptionViewItem& opt, const IWksItem* item);
+
+  bool helpEventItem(const QPoint& pos, const QPoint& posGlobal, QAbstractItemView* view,
+                     const QStyleOptionViewItem& opt, const IWksItem* item);
+
+  QPointer<CGisListWks> treeWidget;
 };
 
-#endif //CGISITEMDELEGATE_H
-
+#endif  // CGISITEMDELEGATE_H

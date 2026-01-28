@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler <oliver.eichler@gmx.de>
+    Copyright (C) 2026 Oliver Eichler <oliver.eichler@gmx.de>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,24 +16,28 @@
 
 **********************************************************************************************/
 
-#ifndef CQMSPROJECT_H
-#define CQMSPROJECT_H
+#include "gis/IWksItem.h"
 
-#include "gis/prj/IGisProject.h"
+IWksItem::IWksItem(QTreeWidgetItem* parent, int type) : QTreeWidgetItem(parent, type) {}
+IWksItem::IWksItem(QTreeWidget* parent, int type) : QTreeWidgetItem(parent, type) {}
 
-class CQmsProject : public IGisProject {
-  Q_DECLARE_TR_FUNCTIONS(CQmsProject)
- public:
-  CQmsProject(const QString& filename, CGisListWks* parent);
-  virtual ~CQmsProject() = default;
+IWksItem::eBaseType IWksItem::getBaseType() const {
+  if (type() >= eTypeGarmin) {
+    return eBaseType::Device;
+  } else if (type() >= eTypeQms) {
+    return eBaseType::Project;
+  } else if (type() == eTypeGeoSearch) {
+    return eBaseType::GeoSearch;
+  } else if (type() >= eTypeWpt) {
+    return eBaseType::Item;
+  }
+  return eBaseType::Unknown;
+}
 
-  const QString getFileDialogFilter() const override { return IGisProject::filedialogFilterQMS; }
+void IWksItem::updateDecoration(quint32 enable, quint32 disable) {
+  flagsDecoration |= enable;
+  flagsDecoration &= ~disable;
+  updateItem();
+}
 
-  const QString getFileExtension() const override { return "qms"; }
-
-  const bool canSave() const override { return true; }
-
-  static bool saveAs(const QString& fn, IGisProject& project);
-};
-
-#endif  // CQMSPROJECT_H
+void IWksItem::updateItem() { treeWidget()->viewport()->update(); }

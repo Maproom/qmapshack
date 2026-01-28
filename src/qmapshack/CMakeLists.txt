@@ -50,6 +50,7 @@ set( SRCS
     gis/CSelDevices.cpp
     gis/IGisItem.cpp
     gis/IGisLine.cpp
+    gis/IWksItem.cpp
     gis/db/CDBFolderGroup.cpp
     gis/db/CDBFolderLostFound.cpp
     gis/db/CDBFolderMysql.cpp

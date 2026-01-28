@@ -42,7 +42,7 @@ CDBProject::CDBProject(const QString& dbName, quint64 id, CGisListWks* parent)
   QSqlQuery query(db);
   query.prepare("SELECT date, name, data FROM folders WHERE id=:id");
   query.bindValue(":id", id);
-  QUERY_EXEC(return );
+  QUERY_EXEC(return);
   query.next();
 
   QString date = query.value(0).toString();
@@ -69,7 +69,7 @@ CDBProject::CDBProject(const QString& dbName, quint64 id, CGisListWks* parent)
     query.prepare("UPDATE folders SET keyqms=:keyqms WHERE id=:id");
     query.bindValue(":keyqms", getKey());
     query.bindValue(":id", id);
-    QUERY_EXEC(return );
+    QUERY_EXEC(return);
   } else {
     QDataStream in(&data, QIODevice::ReadOnly);
     in.setByteOrder(QDataStream::LittleEndian);
@@ -100,7 +100,7 @@ CDBProject::CDBProject(const QString& filename, IDBFolder* parentFolder, CGisLis
   QSqlQuery query(db);
   query.prepare("SELECT id FROM folders WHERE keyqms=:keyqms");
   query.bindValue(":keyqms", prjIn->getKey());
-  QUERY_EXEC(return );
+  QUERY_EXEC(return);
   if (query.next()) {
     QMessageBox::information(
         CMainWindow::self().getBestWidgetForParent(), tr("Project already in database..."),
@@ -114,7 +114,7 @@ CDBProject::CDBProject(const QString& filename, IDBFolder* parentFolder, CGisLis
   query.prepare("UPDATE folders SET keyqms=:keyqms WHERE id=:id");
   query.bindValue(":keyqms", prjIn->getKey());
   query.bindValue(":id", id);
-  QUERY_EXEC(return );
+  QUERY_EXEC(return);
 
   // copy data
   key = prjIn->getKey();
@@ -158,7 +158,7 @@ void CDBProject::restoreDBLink() {
   QSqlQuery query(db);
   query.prepare("SELECT id FROM folders WHERE keyqms=:keyqms");
   query.bindValue(":keyqms", getKey());
-  QUERY_EXEC(return );
+  QUERY_EXEC(return);
   if (query.next()) {
     id = query.value(0).toULongLong();
     setupName("----");
@@ -222,7 +222,7 @@ void CDBProject::postStatus(bool updateLostFound) {
   // update item counters and track/waypoint correlation
   // updateItems(); <--- don't! this is causing a crash
   if (!changedItems) {
-    flagsDecoration &= ~eMarkChanged;
+    updateDecoration(eMarkNone, eMarkChanged);
   }
 
   CGisDatabase::self().postEventForDb(info);
@@ -675,7 +675,7 @@ void CDBProject::update() {
   QSqlQuery query(db);
   query.prepare("SELECT date, name, data FROM folders WHERE id=:id");
   query.bindValue(":id", getId());
-  QUERY_EXEC(return );
+  QUERY_EXEC(return);
   query.next();
 
   QString name = query.value(1).toString();
@@ -702,7 +702,7 @@ void CDBProject::update() {
     // get keys of all children attached to the project in the database
     query.prepare("SELECT id, type FROM items WHERE id IN (SELECT child FROM folder2item WHERE parent=:parent)");
     query.bindValue(":parent", getId());
-    QUERY_EXEC(return );
+    QUERY_EXEC(return);
 
     CEvtD2WShowItems* evt = new CEvtD2WShowItems(getId(), getDBName());
     evt->addItemsExclusively = true;
@@ -725,7 +725,7 @@ void CDBProject::update() {
       // update item from database
       query.prepare("SELECT id FROM items WHERE keyqms=:keyqms");
       query.bindValue(":keyqms", key.item);
-      QUERY_EXEC(return );
+      QUERY_EXEC(return);
 
       if (query.next()) {
         // item is in the database

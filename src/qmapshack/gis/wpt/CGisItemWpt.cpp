@@ -518,7 +518,10 @@ bool CGisItemWpt::isWithin(const QRectF& area, selflags_t flags) {
   return (flags & eSelectionWpt) ? area.contains(QPointF(wpt.lon, wpt.lat)) : false;
 }
 
-void CGisItemWpt::gainUserFocus(bool yes) { keyUserFocus = yes ? key : key_t(); }
+void CGisItemWpt::gainUserFocus(bool yes) {
+  keyUserFocus = yes ? key : key_t();
+  IWksItem::updateItem();
+}
 
 void CGisItemWpt::edit() {
   if (geocache.hasData) {

@@ -61,8 +61,6 @@ CGisWorkspace::CGisWorkspace(QMenu* menuProject, QWidget* parent) : QWidget(pare
   treeWks->setExternalMenu(menuProject);
 
   SETTINGS;
-  treeWks->header()->restoreState(cfg.value("Workspace/treeWks/state", treeWks->header()->saveState()).toByteArray());
-
   CSearch::setSearchMode(
       CSearch::search_mode_e(cfg.value("Workspace/projects/filterMode", CSearch::getSearchMode()).toInt()));
   CSearch::setCaseSensitivity(
@@ -78,8 +76,6 @@ CGisWorkspace::CGisWorkspace(QMenu* menuProject, QWidget* parent) : QWidget(pare
 
 CGisWorkspace::~CGisWorkspace() {
   SETTINGS;
-  cfg.setValue("Workspace/treeWks/state", treeWks->header()->saveState());
-
   cfg.setValue("Workspace/projects/filterMode", CSearch::getSearchMode());
   cfg.setValue("Workspace/projects/CaseSensitivity", CSearch::getCaseSensitivity());
   /*

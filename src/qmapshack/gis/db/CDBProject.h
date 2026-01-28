@@ -54,7 +54,7 @@ class CDBProject : public IGisProject {
    */
   void restoreDBLink();
 
-  bool canSave() const override { return true; }
+  const bool canSave() const override { return true; }
 
   bool save(CSelectSaveAction::result_e action1ForAll, action_e action2ForAll = eActionNone);
   bool save() override;

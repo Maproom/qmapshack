@@ -56,7 +56,7 @@
         <number>10</number>
        </property>
        <property name="orientation">
-        <enum>Qt::Horizontal</enum>
+        <enum>Qt::Orientation::Horizontal</enum>
        </property>
       </widget>
      </item>
@@ -68,51 +68,32 @@
    <item>
     <widget class="CGisListWks" name="treeWks">
      <property name="contextMenuPolicy">
-      <enum>Qt::CustomContextMenu</enum>
+      <enum>Qt::ContextMenuPolicy::CustomContextMenu</enum>
      </property>
      <property name="dragEnabled">
       <bool>true</bool>
      </property>
      <property name="dragDropMode">
-      <enum>QAbstractItemView::DragDrop</enum>
+      <enum>QAbstractItemView::DragDropMode::DragDrop</enum>
      </property>
      <property name="defaultDropAction">
-      <enum>Qt::CopyAction</enum>
+      <enum>Qt::DropAction::CopyAction</enum>
      </property>
      <property name="selectionMode">
-      <enum>QAbstractItemView::ExtendedSelection</enum>
-     </property>
-     <property name="iconSize">
-      <size>
-       <width>20</width>
-       <height>20</height>
-      </size>
+      <enum>QAbstractItemView::SelectionMode::ExtendedSelection</enum>
      </property>
      <property name="indentation">
       <number>14</number>
      </property>
      <property name="columnCount">
-      <number>3</number>
+      <number>1</number>
      </property>
-     <attribute name="headerMinimumSectionSize">
-      <number>50</number>
-     </attribute>
-     <attribute name="headerDefaultSectionSize">
-      <number>50</number>
+     <attribute name="headerVisible">
+      <bool>false</bool>
      </attribute>
      <column>
       <property name="text">
        <string notr="true"/>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>Rating</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>Name</string>
       </property>
      </column>
     </widget>

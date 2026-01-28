@@ -26,7 +26,7 @@
 #include "misc.h"
 
 CDeviceTwoNav::CDeviceTwoNav(const QString& path, const QString& key, const QString& model, QTreeWidget* parent)
-    : IDevice(path, eTypeTwoNav, key, parent) {
+    : IDevice(path, eTypeCompe, key, parent) {
   name = QString("TwoNav (%1)").arg(model);
   toolTipName = QString("TwoNav (%1)").arg(model);
 

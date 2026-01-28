@@ -58,7 +58,7 @@ class CFit2Project : public fit::FileIdMesgListener,
 
   const QString getFileDialogFilter() const override { return IGisProject::filedialogFilterFIT; }
   const QString getFileExtension() const override { return "fit"; }
-  bool canSave() const override { return false; }
+  const bool canSave() const override { return false; }
 
  private:
   constexpr static qreal degrees = 180.0;

@@ -40,21 +40,6 @@ class IDevice;
 class IGisProject : public IWksItem {
   Q_DECLARE_TR_FUNCTIONS(IGisProject)
  public:
-  enum type_e {
-    eTypeGeoSearch,
-    eTypeQms,
-    eTypeGpx,
-    eTypeDb,
-    eTypeLostFound,
-    eTypeTwoNav,
-    eTypeSlf,  // the Sigma Log Format
-    eTypeFit,
-    eTypeTcx,
-    eTypeSml,
-    eTypeLog,
-    eTypeQlb
-  };
-
   /// flags used to serialize trivial flags in qms file
   enum flags_e { eFlagNoCorrelation = 0x1, eFlagAutoSave = 0x2, eFlagInvalidDataOk = 0x4, eFlagAutoSyncToDev = 0x8 };
 
@@ -131,11 +116,6 @@ class IGisProject : public IWksItem {
      @brief Summon the project details dialog.
    */
   void edit();
-
-  /**
-     @brief Returns true if a project of given format can be saved, false if it cannot be saved (just as .slf atm)
-   */
-  virtual bool canSave() const { return false; }
 
   /**
      @brief Return true if saving should be skipped.
@@ -283,7 +263,7 @@ class IGisProject : public IWksItem {
 
   void switchOnCorrelation();
 
-  void setAutoSave(bool on);
+  void setAutoSave(bool on) override;
 
   void setInvalidDataOk(bool ok) {
     invalidDataOk = ok;
@@ -337,19 +317,11 @@ class IGisProject : public IWksItem {
    */
   bool isValid() const { return valid; }
 
-  bool isAutoSave() const { return autoSave; }
-
   /**
      @brief Test if this project is handled by a device
      @return The device type (IDevice::type_e). IDevice::eTypeNone if the project is not stored on a device.
    */
-  qint32 isOnDevice() const;
-
-  /**
-     @brief Test if project has been changed
-     @return True if changed.
-   */
-  bool isChanged() const;
+  const qint32 isOnDevice() const override;
 
   void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw* gis);
   void drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm,
@@ -431,20 +403,17 @@ class IGisProject : public IWksItem {
 
   bool findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint32& threshold, QPolygonF& polyline);
 
-  void gainUserFocus(bool yes);
+  void gainUserFocus(bool yes) override;
 
-  bool hasUserFocus() const { return keyUserFocus == key; }
+  bool hasUserFocus() const override { return keyUserFocus == key; }
 
   static const QString& getUserFocus() { return keyUserFocus; }
-
-  void setAutoSyncToDevice(bool yes);
-
-  bool doAutoSyncToDevice() const { return autoSyncToDev; }
 
   CProjectFilterItem* filterProject(bool filter);
   CProjectFilterItem* getProjectFilterItem() { return projectFilter; }
 
  protected:
+  using IWksItem::updateDecoration;
   void genKey() const;
   virtual void setupName(const QString& defaultName);
   void markAsSaved();
@@ -452,7 +421,7 @@ class IGisProject : public IWksItem {
   void updateItems();
   void updateItemCounters();
   void updateDecoration();
-  void updateDecoration(bool saved);
+  // void updateDecoration(bool saved);
   void sortItems();
   void sortItems(QList<IGisItem*>& items) const;
 

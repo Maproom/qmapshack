@@ -116,8 +116,8 @@ class IGisItem : public IWksItem {
     QMap<QString, QVariant> extensions;
   };
 
-  /// never ever change these numbers. it will break binary data files
-  enum type_e { eTypeWpt = 1, eTypeTrk = 2, eTypeRte = 3, eTypeOvl = 4, eTypeMax = 5 };
+  // /// never ever change these numbers. it will break binary data files
+  // enum type_e { eTypeWpt = 1, eTypeTrk = 2, eTypeRte = 3, eTypeOvl = 4, eTypeMax = 5 };
 
   enum selection_e {
     eSelectionNone = 0,
@@ -185,7 +185,7 @@ class IGisItem : public IWksItem {
      @param enable
      @param disable
    */
-  virtual void updateDecoration(quint32 enable, quint32 disable);
+  void updateDecoration(quint32 enable, quint32 disable) override;
 
   /**
      @brief Save the item's data into a GPX structure
@@ -300,7 +300,7 @@ class IGisItem : public IWksItem {
   /**
     @brief General visibility on the map
    */
-  using IWksItem::isVisible;
+  const bool isVisible() const override;
 
   /**
      @brief Test if the item is close to a given pixel coordinate of the screen
@@ -337,13 +337,7 @@ class IGisItem : public IWksItem {
      @brief Check if item is on a GPS device
      @return The device type (IDevice::type_e). IDevice::eTypeNone if the item is not stored on a device.
    */
-  qint32 isOnDevice() const;
-
-  /**
-     @brief Check if there are any pending unsaved changes
-     @return True if the are changes to be saved
-   */
-  bool isChanged() const;
+  const qint32 isOnDevice() const override;
 
   /**
      @brief Set the read only mode.
@@ -363,14 +357,12 @@ class IGisItem : public IWksItem {
                          CGisDraw* gis) = 0;
   virtual void drawHighlight(QPainter& p) = 0;
 
-  virtual void gainUserFocus(bool yes) = 0;
-
   /**
      @brief Check for user focus
 
      @return True if the item has user focus. The default implementation is always false.
    */
-  virtual bool hasUserFocus() const { return false; }
+  virtual bool hasUserFocus() const override { return false; }
 
   /**
      @brief Serialize object out of a QDataStream
@@ -563,8 +555,7 @@ class IGisItem : public IWksItem {
   quint32 flags = 0;
   /// the item's unique key
   mutable key_t key;
-  /// each item has an icon for the tree widget
-  QPixmap icon;
+
   QPixmap displayIcon;
   /// the dimensions of the item
   QRectF boundingRect;

@@ -299,7 +299,10 @@ void CGisItemOvlArea::drawHighlight(QPainter& p) {
   p.drawPolygon(polygonArea);
 }
 
-void CGisItemOvlArea::gainUserFocus(bool yes) { keyUserFocus = yes ? key : key_t(); }
+void CGisItemOvlArea::gainUserFocus(bool yes) {
+  keyUserFocus = yes ? key : key_t();
+  IWksItem::updateItem();
+}
 
 const searchValue_t CGisItemOvlArea::getValueByKeyword(searchProperty_e keyword) {
   if (keywordLambdaMap.contains(keyword)) {

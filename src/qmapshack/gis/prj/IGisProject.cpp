@@ -193,12 +193,10 @@ QString IGisProject::getDeviceKey() const {
   return "";
 }
 
-qint32 IGisProject::isOnDevice() const {
+const qint32 IGisProject::isOnDevice() const {
   IDevice* device = dynamic_cast<IDevice*>(parent());
   return device != nullptr ? device->type() : IDevice::eTypeNone;
 }
-
-bool IGisProject::isChanged() const { return (flagsDecoration & eMarkChanged) != 0; }
 
 void IGisProject::edit() {
   if (dlgDetails.isNull()) {
@@ -252,36 +250,31 @@ void IGisProject::setSortingFolder(sorting_folder_e s) {
 }
 
 void IGisProject::setChanged() {
-  if (autoSave) {
+  if (isAutoSave()) {
     if (!autoSavePending) {
       autoSavePending = true;
       CGisWorkspace::self().postEventForWks(new CEvtA2WSave(getKey()));
     }
   }
 
-  if (autoSyncToDev) {
+  if (isAutoSyncToDev()) {
     if (!autoSyncToDevPending) {
       autoSyncToDevPending = true;
       CGisWorkspace::self().postEventForWks(new CEvtA2WSync(getKey()));
     }
   }
-  updateDecoration(false);
+  updateDecoration(eMarkChanged, eMarkNone);
   updateItems();
 }
 
 void IGisProject::setAutoSave(bool on) {
   // make sure project is saved one more time to remove autoSave flag in storage
-  if (!on && autoSave) {
+  if (!on && IWksItem::isAutoSave()) {
     CGisWorkspace::self().postEventForWks(new CEvtA2WSave(getKey()));
   }
 
-  autoSave = on;
+  IWksItem::setAutoSave(on);
   setChanged();
-}
-
-void IGisProject::setAutoSyncToDevice(bool yes) {
-  autoSyncToDev = yes;
-  updateDecoration();
 }
 
 void IGisProject::switchOnCorrelation() {
@@ -310,25 +303,10 @@ void IGisProject::updateItems() {
   }
   changedRoadbookMode = false;
 
-  quint32 total = cntTrkPts * cntWpts;
-  quint32 current = 0;
-
-  PROGRESS_SETUP(tr("%1: Correlate tracks and waypoints.").arg(getName()), 0, total,
-                 CMainWindow::getBestWidgetForParent());
-
   for (int i = 0; i < childCount(); i++) {
     CGisItemTrk* trk = dynamic_cast<CGisItemTrk*>(child(i));
     if (trk) {
-      trk->findWaypointsCloseBy(progress, current);
-      if (progress.wasCanceled()) {
-        QString msg = tr("<h3>%1</h3>Did that take too long for you? Do you want to skip correlation of tracks and "
-                         "waypoints for this project in the future?")
-                          .arg(getNameEx());
-        int res = QMessageBox::question(&progress, tr("Canceled correlation..."), msg,
-                                        QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
-        noCorrelation = res == QMessageBox::Yes;
-        break;
-      }
+      trk->findWaypointsCloseBy();
     }
   }
 
@@ -387,6 +365,7 @@ bool IGisProject::saveAs(QString fn, QString filter) {
     return false;
   }
 
+  qDebug() << res << filter << getFileDialogFilter();
   if (res && filter == getFileDialogFilter()) {
     markAsSaved();
   }
@@ -433,7 +412,7 @@ void IGisProject::setupName(const QString& defaultName) {
 }
 
 void IGisProject::markAsSaved() {
-  updateDecoration(true);
+  updateDecoration(eMarkNone, eMarkChanged);
   for (int i = 0; i < childCount(); i++) {
     IGisItem* item = dynamic_cast<IGisItem*>(child(i));
     if (nullptr == item) {
@@ -884,12 +863,10 @@ void IGisProject::updateDecoration() {
       break;
     }
   }
-  updateDecoration(saved);
-}
-
-void IGisProject::updateDecoration(bool saved) {
   if (saved) {
-    flagsDecoration &= ~eMarkChanged;
+    updateDecoration(eMarkNone, eMarkChanged);
+  } else {
+    updateDecoration(eMarkChanged, eMarkNone);
   }
 }
 
@@ -1024,13 +1001,11 @@ bool IGisProject::findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qi
 
 void IGisProject::gainUserFocus(bool yes) {
   if (yes) {
-    /// @todo CWksItemDelegate:
-    // setIcon(CGisListWks::eColumnName, QIcon("://icons/32x32/Focus.png"));
     keyUserFocus = key;
   } else {
-    // setIcon(CGisListWks::eColumnName, QIcon());
     keyUserFocus.clear();
   }
+  IWksItem::updateItem();
 }
 
 CProjectFilterItem* IGisProject::filterProject(bool filter) {

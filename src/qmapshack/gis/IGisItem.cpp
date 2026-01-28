@@ -307,26 +307,21 @@ void IGisItem::updateDecoration(quint32 enable, quint32 disable) {
   }
 
   // set marks in column 1
-
-  flagsDecoration |= enable;
-  flagsDecoration &= ~disable;
+  IWksItem::updateDecoration(enable, disable);
 
   QString tt;
-  if (flagsDecoration & eMarkNotPart) {
+  if (getFlagsDecoration() & eMarkNotPart) {
     tt += tt.isEmpty() ? "" : "\n";
     tt += tr("The item is not part of the project in the database.");
     tt += tr("\nIt is either a new item or it has been deleted in the database by someone else.");
-    // str += "?";
   }
-  if (flagsDecoration & eMarkNotInDB) {
+  if (getFlagsDecoration() & eMarkNotInDB) {
     tt += tt.isEmpty() ? "" : "\n";
     tt += tr("The item is not in the database.");
-    // str += "X";
   }
-  if (flagsDecoration & eMarkChanged) {
+  if (getFlagsDecoration() & eMarkChanged) {
     tt += tt.isEmpty() ? "" : "\n";
     tt += tr("The item might need to be saved");
-    // str += "*";
   }
   toolTipDecoration = tt;
 }
@@ -491,7 +486,7 @@ bool IGisItem::isReadOnly() const { return !(flags & eFlagWriteAllowed) || isOnD
 
 bool IGisItem::isTainted() const { return flags & eFlagTainted; }
 
-qint32 IGisItem::isOnDevice() const {
+const qint32 IGisItem::isOnDevice() const {
   IGisProject* project = getParentProject();
   if (nullptr == project) {
     return false;
@@ -584,8 +579,8 @@ void IGisItem::showIcon() {
   displayIcon = QPixmap(size, size);
   displayIcon.fill(Qt::transparent);
   QPainter painter(&displayIcon);
-  int dw = (size-width) / 2;
-  int dh = (size-height) / 2;
+  int dw = (size - width) / 2;
+  int dh = (size - height) / 2;
   painter.drawPixmap(dw, dh, icon);
   if (isNogo()) {
     painter.drawPixmap(width * 0.4 + dw, height * 0.4 + dh,
@@ -664,10 +659,10 @@ QString IGisItem::html2Dev(const QString& str, bool strictGpx11) {
     return "";
   }
 
-  return (isOnDevice() == IDevice::eTypeGarmin)
-                 || (isOnDevice() == IDevice::eTypeGarminMtp)
-                 || (isOnDevice() == IDevice::eTypeGenericMtp)
-                 || strictGpx11 ? removeHtml(str) : str;
+  return (isOnDevice() == IDevice::eTypeGarmin) || (isOnDevice() == IDevice::eTypeGarminMtp) ||
+                 (isOnDevice() == IDevice::eTypeGenericMtp) || strictGpx11
+             ? removeHtml(str)
+             : str;
 }
 
 QString IGisItem::toLink(bool isReadOnly, const QString& href, const QString& str, const QString& key) {
@@ -744,6 +739,14 @@ QString IGisItem::createText(bool isReadOnly, const QString& desc, const QList<l
   return str;
 }
 
+const bool IGisItem::isVisible() const {
+  IGisProject* project = getParentProject();
+  if (project == nullptr) {
+    return false;
+  }
+  return project->isVisible();
+}
+
 bool IGisItem::isVisible(const QRectF& rect, const QPolygonF& viewport, CGisDraw* gis) {
   QPolygonF tmp1;
   tmp1 << rect.topLeft();
@@ -768,8 +771,6 @@ bool IGisItem::isVisible(const QPointF& point, const QPolygonF& viewport, CGisDr
 
   return tmp2.boundingRect().contains(pt);
 }
-
-bool IGisItem::isChanged() const { return (flagsDecoration & eMarkChanged) != 0; }
 
 bool IGisItem::isWithin(const QRectF& area, selflags_t flags, const QPolygonF& points) {
   if (points.isEmpty()) {

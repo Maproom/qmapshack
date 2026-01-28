@@ -603,11 +603,8 @@ class CGisItemTrk : public IGisItem, public IGisLine {
 
      If a waypoint correlates with a trackpoint it's key is written to
      CTrackData::trkpt_t::keyWpt.
-
-     @param progress  a progress dialog as this operation can take quite some time
-     @param current   the current progress if the operation is done for several tracks
    */
-  void findWaypointsCloseBy(CProgressDialog& progress, quint32& current);
+  void findWaypointsCloseBy();
 
   bool findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint32& threshold, QPolygonF& polyline);
 

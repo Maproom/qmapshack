@@ -55,6 +55,10 @@ class CGisListWks : public QTreeWidget {
 
   void removeDevice(const QString& key);
 
+  void setUserFocus(const QString& key, bool yes);
+
+  bool hasDeviceSupport() const { return deviceWatcher != nullptr; }
+
  public slots:
   void slotLoadWorkspace();
 

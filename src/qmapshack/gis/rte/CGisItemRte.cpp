@@ -431,12 +431,16 @@ bool CGisItemRte::isWithin(const QRectF& area, selflags_t flags) {
   return (flags & eSelectionRte) ? IGisItem::isWithin(area, flags, l) : false;
 }
 
-void CGisItemRte::gainUserFocus(bool yes) { keyUserFocus = yes ? key : key_t(); }
+void CGisItemRte::gainUserFocus(bool yes) {
+  keyUserFocus = yes ? key : key_t();
+  IWksItem::updateItem();
+}
 
 void CGisItemRte::looseUserFocus() {
   if (keyUserFocus == key) {
     keyUserFocus.clear();
   }
+  IWksItem::updateItem();
 }
 
 void CGisItemRte::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw* gis) {

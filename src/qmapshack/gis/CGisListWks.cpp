@@ -97,6 +97,7 @@ class CGisListWksEditLock {
 
 CGisListWks::CGisListWks(QWidget* parent) : QTreeWidget(parent) {
   CWksItemDelegate* delegate = new CWksItemDelegate(this);
+  connect(delegate, &CWksItemDelegate::sigUpdateCanvas, this, &CGisListWks::sigChanged);
   setItemDelegate(delegate);
 
   db = QSqlDatabase::addDatabase("QSQLITE", "Workspace1");
@@ -773,9 +774,7 @@ void CGisListWks::slotSaveWorkspace() {
     query.bindValue(":keyqms", project->getKey());
     query.bindValue(":name", project->getName());
     query.bindValue(":changed", project->isChanged());
-
-    bool visible = (project->checkState(CGisListDB::eColumnCheckbox) == Qt::Checked);
-    query.bindValue(":visible", visible);
+    query.bindValue(":visible", project->isVisible());
     query.bindValue(":data", data);
     QUERY_EXEC(continue);
   }
@@ -817,7 +816,7 @@ void CGisListWks::slotLoadWorkspace() {
       int type = query.value(0).toInt();
       QString name = query.value(2).toString();
       bool changed = query.value(3).toBool();
-      Qt::CheckState visible = query.value(4).toBool() ? Qt::Checked : Qt::Unchecked;
+      bool visible = query.value(4).toBool();
       QByteArray data = query.value(5).toByteArray();
 
       QDataStream stream(&data, QIODevice::ReadOnly);
@@ -1109,7 +1108,7 @@ void CGisListWks::slotContextMenu(const QPoint& point) {
     IGisProject* project = dynamic_cast<IGisProject*>(item);
     if (nullptr != project) {
       // as soon as we find an unchecked element, not all elements are checked (and vice versa)
-      if (project->checkState(CGisListDB::eColumnCheckbox) == Qt::Unchecked) {
+      if (project->isVisible() == false) {
         allChecked = false;
       } else {
         allUnchecked = false;
@@ -1134,6 +1133,7 @@ void CGisListWks::slotContextMenu(const QPoint& point) {
       } else {
         actionGroupSort->setEnabled(false);
         actionFilterProject->setEnabled(false);
+        actionAutoSyncToDev->setEnabled(hasDeviceSupport());
         actionSyncWksDev->setEnabled(IDevice::count());
         actionAutoSyncToDev->setVisible(false);
         actionSyncDB->setEnabled(project->getType() == IGisProject::eTypeDb);
@@ -1187,10 +1187,9 @@ void CGisListWks::slotContextMenu(const QPoint& point) {
         } else {
           actionGroupSort->setEnabled(true);
 
-          bool autoSyncToDev = project->doAutoSyncToDevice();
-          actionAutoSyncToDev->setVisible(true);
+          bool autoSyncToDev = project->isAutoSyncToDev();
+          actionAutoSyncToDev->setEnabled(hasDeviceSupport());
           actionAutoSyncToDev->setChecked(autoSyncToDev);
-
           actionSyncWksDev->setEnabled(IDevice::count() && !autoSyncToDev);
           actionSyncDB->setEnabled(project->getType() == IGisProject::eTypeDb);
 
@@ -1329,7 +1328,7 @@ static void closeProjects(const QList<QTreeWidgetItem*>& items) {
   for (QTreeWidgetItem* item : items) {
     IGisProject* project = dynamic_cast<IGisProject*>(item);
     if (nullptr != project) {
-      if (project->doAutoSyncToDevice()) {
+      if (project->isAutoSyncToDev()) {
         continue;
       }
 
@@ -1446,17 +1445,30 @@ void CGisListWks::slotAutoSaveProject(bool on) {
 void CGisListWks::slotUserFocusPrj(bool yes) {
   CGisListWksEditLock lock(false, IGisItem::mutexItems);
 
+  QString key;
+  IGisProject* project = dynamic_cast<IGisProject*>(currentItem());
+  if (project != nullptr) {
+    key = project->getKey();
+  }
+
+  setUserFocus(key, yes);
+}
+
+void CGisListWks::setUserFocus(const QString& key, bool yes) {
+  CGisListWksEditLock lock(false, IGisItem::mutexItems);
   const int N = topLevelItemCount();
+  IGisProject* projectNewFocus = nullptr;
   for (int n = 0; n < N; n++) {
     IGisProject* project = dynamic_cast<IGisProject*>(topLevelItem(n));
     if (project != nullptr) {
       project->gainUserFocus(false);
+      if (project->getKey() == key) {
+        projectNewFocus = project;
+      }
     }
   }
-
-  IGisProject* project = dynamic_cast<IGisProject*>(currentItem());
-  if (project != nullptr) {
-    project->gainUserFocus(yes);
+  if (projectNewFocus != nullptr && yes) {
+    projectNewFocus->gainUserFocus(yes);
   }
 }
 
@@ -1465,7 +1477,7 @@ void CGisListWks::slotAutoSyncProject(bool yes) {
 
   IGisProject* project = dynamic_cast<IGisProject*>(currentItem());
   if (project != nullptr) {
-    project->setAutoSyncToDevice(yes);
+    project->setAutoSyncToDev(yes);
     if (yes) {
       syncPrjToDevices(project, getAllDeviceKeys());
     }
@@ -1896,7 +1908,7 @@ void CGisListWks::slotSyncPrjToDevices() {
   const int N = topLevelItemCount();
   for (int n = 0; n < N; n++) {
     IGisProject* project = dynamic_cast<IGisProject*>(topLevelItem(n));
-    if (project && project->doAutoSyncToDevice()) {
+    if (project && project->isAutoSyncToDev()) {
       syncPrjToDevices(project, keys);
     }
   }
@@ -1929,7 +1941,11 @@ void CGisListWks::syncPrjToDevices(IGisProject* project, const QSet<QString>& ke
       qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
     }
 
+    const bool hasFocus = project->hasUserFocus();
     device->updateProject(project);
+    if (hasFocus) {
+      project->gainUserFocus(true);
+    }
   }
   if (canvas) {
     canvas->reportStatus("device", "");

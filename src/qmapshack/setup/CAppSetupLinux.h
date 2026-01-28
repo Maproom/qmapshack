@@ -32,6 +32,9 @@ class CAppSetupLinux : public IAppSetup {
   QString logDir() override;
   QString findExecutable(const QString& name) override { return QStandardPaths::findExecutable(name); }
   QString helpFile() override;
+
+ private:
+  static void closeOnSIGTERM();
 };
 
 #endif  // CAPPSETUPLINUX_H

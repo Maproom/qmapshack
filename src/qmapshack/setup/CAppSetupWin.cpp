@@ -16,10 +16,37 @@
 
 **********************************************************************************************/
 
+#include <QtSystemDetection>
+#if defined(Q_OS_WIN32)
+
 #include "CAppSetupWin.h"
+
+#include <QAbstractNativeEventFilter>
+#include <QWindow>
+
+#include "windows.h"
 
 #include "config.h"
 #include "version.h"
+
+class windowsEventFilter: public QAbstractNativeEventFilter {
+ public:
+  bool nativeEventFilter(const QByteArray& eventType, void* message, qintptr* result) override {
+    MSG *msg = static_cast<MSG *>(message);
+    if (msg->message == WM_CLOSE) {
+      HWND winId = msg->hwnd;
+      for (auto const item : qApp->topLevelWindows()) {
+        // Close application gracefully on signal WM_CLOSE
+        if (item->objectName() == "IMainWindowWindow" && (HWND)(item->winId()) == winId) {
+          qDebug() << "Closing on WM_CLOSE";
+          item->close();
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+};
 
 void CAppSetupWin::initQMapShack() {
   // setup environment variables for GDAL/Proj4
@@ -43,6 +70,9 @@ void CAppSetupWin::initQMapShack() {
   IAppSetup::path(defaultCachePath(), 0, true, "CACHE");
   IAppSetup::path(userDataPath("WaypointIcons"), 0, true, "USER DATA");
   IAppSetup::path(logDir(), 0, true, "LOG");
+
+  // catch signal WM_CLOSE
+  qApp->installNativeEventFilter(new windowsEventFilter);
 }
 
 QString CAppSetupWin::routinoPath(QString xmlFile) {
@@ -70,3 +100,5 @@ QString CAppSetupWin::helpFile() {
   QDir dirHelp(dirApp.absoluteFilePath(_MKSTR(HELPPATH)));
   return dirHelp.absoluteFilePath("QMSHelp.qhc");
 }
+
+#endif // defined(Q_OS_WIN32)

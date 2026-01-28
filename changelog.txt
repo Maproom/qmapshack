@@ -13,6 +13,7 @@ V1.XX.X
 [QMS-932] Invalid Qt basic translation files setup on Linux & macOS
 [QMS-936] Bad "Close" icon on view tabs (macOS only!)
 [QMS-939] Outdated referenced repository in file MacOSX/README.md
+[QMS-941] Request QMS to close gracefully from command line
 
 V1.19.0
 [QMS-869] Convert track to area

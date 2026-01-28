@@ -37,6 +37,7 @@ class CAppSetupMac : public IAppSetup {
   QDir getApplicationDir(QString subdir);
   void migrateDirContent(QString dest);
   void extendPath();
+  static void closeOnSIGTERM();
 
   static QString relTranslationDir;
   static QString relRoutinoDir;

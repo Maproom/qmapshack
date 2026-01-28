@@ -16,7 +16,15 @@
 
 **********************************************************************************************/
 
+#include <QtSystemDetection>
+#if defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD) || defined(__FreeBSD_kernel__) || defined(__GNU__)
+
 #include "CAppSetupLinux.h"
+
+#include <QWindow>
+
+#include "signal.h"
+#include "unistd.h"
 
 #include "config.h"
 #include "version.h"
@@ -41,6 +49,9 @@ void CAppSetupLinux::initQMapShack() {
   IAppSetup::path(defaultCachePath(), 0, true, "CACHE");
   IAppSetup::path(userDataPath("WaypointIcons"), 0, true, "USER DATA");
   IAppSetup::path(logDir(), 0, true, "LOG");
+
+  // catch signal SIGTERM
+  closeOnSIGTERM();
 }
 
 QString CAppSetupLinux::routinoPath(QString xmlFile) {
@@ -63,3 +74,20 @@ QString CAppSetupLinux::helpFile() {
   QDir dir(_MKSTR(HELPPATH));
   return dir.absoluteFilePath("QMSHelp.qhc");
 }
+
+void CAppSetupLinux::closeOnSIGTERM() {
+  sighandler_t handler = [](int sig)->void {
+    for (auto const item : qApp->topLevelWindows()) {
+      // Close application gracefully on signal SIGTERM
+      if (item->objectName() == "IMainWindowWindow") {
+        qDebug() << "Closing on SIGTERM";
+        item->close();
+        break;
+      }
+    } 
+  };
+
+  signal(SIGTERM, handler);
+}
+
+#endif // defined(Q_OS_LINUX)

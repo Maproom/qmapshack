@@ -37,7 +37,7 @@ IWksItem* CWksItemDelegate::indexToItem(const QModelIndex& index) const {
   return item;
 }
 
-std::tuple<QFont, QFont, QRect, QRect, QRect, QRect, QRect, QRect> CWksItemDelegate::getRectanglesProject(
+std::tuple<QFont, QFont, QRect, QRect, QRect, QRect, QRect, QRect, QRect> CWksItemDelegate::getRectanglesProject(
     const QStyleOptionViewItem& opt) {
   QFont fontName = opt.font;
   QFontMetrics fmName(fontName);
@@ -80,9 +80,16 @@ std::tuple<QFont, QFont, QRect, QRect, QRect, QRect, QRect, QRect> CWksItemDeleg
     r.width() - rectIcon.width() - 2 * kMargin,
     fmName.height());
 
+  const QRect& rectStatus = QRect(
+    rectIcon.right() + kMargin,
+    r.bottom() - fmStatus.height(),
+    r.width() - rectIcon.width() - rectAutoSyncDev.width() - 2 * kMargin,
+    fmStatus.height());
+
   // clang-format on
 
-  return {fontName, fontStatus, rectIcon, rectName, rectVisible, rectSave, rectActiveProject, rectAutoSyncDev};
+  return {fontName,    fontStatus, rectIcon,          rectName,       rectStatus,
+          rectVisible, rectSave,   rectActiveProject, rectAutoSyncDev};
 }
 
 std::tuple<QFont, QFont, QRect, QRect, QRect, QRect> CWksItemDelegate::getRectanglesItem(
@@ -244,9 +251,15 @@ void CWksItemDelegate::paint(QPainter* p, const QStyleOptionViewItem& opt, const
 
 void CWksItemDelegate::paintProject(QPainter* p, const QStyleOptionViewItem& opt, const QModelIndex& index,
                                     const IWksItem* item) const {
-  auto [fontName, fontStatus, rectIcon, rectName, rectVisible, rectSave, rectActiveProject, rectAutoSyncDev] =
-      getRectanglesProject(opt);
+  const IGisProject* project = dynamic_cast<const IGisProject*>(item);
+  if (project == nullptr) {
+    return;
+  }
 
+  auto [fontName, fontStatus, rectIcon, rectName, rectStatus, rectVisible, rectSave, rectActiveProject,
+        rectAutoSyncDev] = getRectanglesProject(opt);
+
+  const bool isOnDevice = item->isOnDevice() != IWksItem::eTypeNone;
   const bool isVisible = item->isVisible();
   const QColor& colorName =
       opt.palette.color(isVisible ? QPalette::Active : QPalette::Disabled,
@@ -256,16 +269,18 @@ void CWksItemDelegate::paintProject(QPainter* p, const QStyleOptionViewItem& opt
   fontName.setBold(item->hasUserFocus());
   p->setPen(colorName);
   p->setFont(fontName);
-  p->drawText(rectName.adjusted(0, -1, 0, 1), Qt::AlignLeft | Qt::AlignTop, item->getName());
+  p->drawText(rectName.adjusted(0, -1, 0, 1), Qt::AlignLeft | Qt::AlignTop,
+              isOnDevice ? project->getName() : project->getNameEx());
 
   // draw icon
   QIcon(item->getIcon()).paint(p, rectIcon, Qt::AlignCenter, item->isVisible() ? QIcon::Normal : QIcon::Disabled);
 
-  // draw tool button to activate
+  // draw tool button to toggle visibility
   drawToolButton(p, opt, rectVisible,
                  isVisible ? QIcon(":/icons/32x32/ShowAll.png") : QIcon(":/icons/32x32/ShowNone.png"), true, isVisible);
+  rectStatus.setRight(rectVisible.left() - kMargin);
 
-  if (item->isOnDevice() == IWksItem::eTypeNone) {
+  if (isOnDevice == false) {
     // draw save/ auto save button
     if (item->isChanged() && !item->isAutoSave()) {
       // show save button
@@ -280,6 +295,14 @@ void CWksItemDelegate::paintProject(QPainter* p, const QStyleOptionViewItem& opt
       }
     }
 
+    // active project
+    if (item->hasUserFocus()) {
+      drawToolButton(p, opt, rectActiveProject, QIcon(":/icons/32x32/Focus.png"), true, true);
+    } else {
+      drawToolButton(p, opt, rectActiveProject, QIcon(":/icons/32x32/Focus.png"), false, false);
+    }
+    rectStatus.setRight(rectActiveProject.left() - kMargin);
+
     // auto sync. w. dev.
     if (treeWidget->hasDeviceSupport()) {
       if (item->isAutoSyncToDev()) {
@@ -287,15 +310,33 @@ void CWksItemDelegate::paintProject(QPainter* p, const QStyleOptionViewItem& opt
       } else {
         drawToolButton(p, opt, rectAutoSyncDev, QIcon(":/icons/32x32/DeviceNoSync.png"), true, false);
       }
-    }
-
-    // active project
-    if (item->hasUserFocus()) {
-      drawToolButton(p, opt, rectActiveProject, QIcon(":/icons/32x32/Focus.png"), true, true);
-    } else {
-      drawToolButton(p, opt, rectActiveProject, QIcon(":/icons/32x32/Focus.png"), false, false);
+      rectStatus.setRight(rectAutoSyncDev.left() - kMargin);
     }
   }
+
+  QString status = project->getKeywords();
+  if (!status.isEmpty()) {
+    status += " ";
+  }
+  int cnt = project->getItemCountByType(IGisItem::eTypeTrk);
+  if (cnt) {
+    status += tr("T: %1 ").arg(cnt);
+  }
+  cnt = project->getItemCountByType(IGisItem::eTypeWpt);
+  if (cnt) {
+    status += tr("W: %1 ").arg(cnt);
+  }
+  cnt = project->getItemCountByType(IGisItem::eTypeRte);
+  if (cnt) {
+    status += tr("R: %1 ").arg(cnt);
+  }
+  cnt = project->getItemCountByType(IGisItem::eTypeOvl);
+  if (cnt) {
+    status += tr("A: %1 ").arg(cnt);
+  }
+  p->setPen(colorName);
+  p->setFont(fontStatus);
+  p->drawText(rectStatus.adjusted(0, -1, 0, 1), Qt::AlignLeft | Qt::AlignTop, status);
 }
 
 void CWksItemDelegate::paintDevice(QPainter* p, const QStyleOptionViewItem& opt, const QModelIndex& index,
@@ -397,8 +438,8 @@ bool CWksItemDelegate::editorEvent(QEvent* event, QAbstractItemModel* model, con
 
 bool CWksItemDelegate::mousePressProject(QMouseEvent* me, const QStyleOptionViewItem& opt, const QModelIndex& index,
                                          IWksItem* item) {
-  auto [fontName, fontStatus, rectIcon, rectName, rectVisible, rectSave, rectActiveProject, rectAutoSyncDev] =
-      getRectanglesProject(opt);
+  auto [fontName, fontStatus, rectIcon, rectName, rectStatus, rectVisible, rectSave, rectActiveProject,
+        rectAutoSyncDev] = getRectanglesProject(opt);
   if (rectVisible.contains(me->pos())) {
     item->setVisibility(!item->isVisible());
     emit sigUpdateCanvas();
@@ -476,8 +517,8 @@ bool CWksItemDelegate::helpEvent(QHelpEvent* event, QAbstractItemView* view, con
 bool CWksItemDelegate::helpEventProject(const QPoint& pos, const QPoint& posGlobal, QAbstractItemView* view,
                                         const QStyleOptionViewItem& opt, const IWksItem* item) {
   bool ret = false;
-  auto [fontName, fontStatus, rectIcon, rectName, rectVisible, rectSave, rectActiveProject, rectAutoSyncDev] =
-      getRectanglesProject(opt);
+  auto [fontName, fontStatus, rectIcon, rectName, rectStatus, rectVisible, rectSave, rectActiveProject,
+        rectAutoSyncDev] = getRectanglesProject(opt);
   if (rectName.contains(pos)) {
     QToolTip::showText(posGlobal, item->getToolTipName(), view);
     ret = true;

@@ -1060,7 +1060,7 @@ QMap<searchProperty_e, CGisItemRte::fSearch> CGisItemRte::initKeywordLambdaMap()
   });
   map.insert(eSearchPropertyGeneralKeywords, [](CGisItemRte* item) {
     searchValue_t searchValue;
-    searchValue.str1 = QStringList(item->getKeywords().values()).join(", ");
+    searchValue.str1 = QStringList(item->getTags().values()).join(", ");
     return searchValue;
   });
   map.insert(eSearchPropertyGeneralType, [](CGisItemRte* item) {

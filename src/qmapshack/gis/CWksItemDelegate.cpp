@@ -27,6 +27,8 @@
 #include "helpers/CDraw.h"
 
 constexpr int kMargin = 2;
+constexpr int kFontSizeDiffProject = 2;
+constexpr int kFontSizeDiffItem = 3;
 
 CWksItemDelegate::CWksItemDelegate(CGisListWks* parent) : QStyledItemDelegate(parent), treeWidget(parent) {}
 
@@ -35,15 +37,19 @@ IWksItem* CWksItemDelegate::indexToItem(const QModelIndex& index) const {
   return item;
 }
 
-std::tuple<QFont, QRect, QRect, QRect, QRect, QRect, QRect> CWksItemDelegate::getRectanglesProject(
+std::tuple<QFont, QFont, QRect, QRect, QRect, QRect, QRect, QRect> CWksItemDelegate::getRectanglesProject(
     const QStyleOptionViewItem& opt) {
   QFont fontName = opt.font;
   QFontMetrics fmName(fontName);
+
+  QFont fontStatus = opt.font;
+  fontStatus.setPointSize(fontStatus.pointSize() - kFontSizeDiffProject);
+  QFontMetrics fmStatus(fontStatus);
+
   const QRect& r = opt.rect.adjusted(kMargin, kMargin, -kMargin, -kMargin);
   const QRect& rectIcon = r.adjusted(-kMargin, -kMargin, -(r.width() - r.height()), kMargin);
 
   // clang-format off
-
   const QRect& rectAutoSyncDev = QRect(
     r.right() - 4 * (kMargin + r.height() / 2),
     r.top() + r.height() / 2 + kMargin,
@@ -70,35 +76,22 @@ std::tuple<QFont, QRect, QRect, QRect, QRect, QRect, QRect> CWksItemDelegate::ge
   // clang-format on
   const QRect& rectName = r.adjusted(rectIcon.width() + kMargin, 0, -2 * kMargin, -(r.height() - fmName.height()));
 
-  return {fontName, rectIcon, rectName, rectVisible, rectSave, rectActiveProject, rectAutoSyncDev};
+  return {fontName, fontStatus, rectIcon, rectName, rectVisible, rectSave, rectActiveProject, rectAutoSyncDev};
 }
 
-std::tuple<QFont, QRect, QRect, QRect, QRect, QRect, QRect> CWksItemDelegate::getRectanglesItem(
+std::tuple<QFont, QFont, QRect, QRect, QRect, QRect> CWksItemDelegate::getRectanglesItem(
     const QStyleOptionViewItem& opt) {
   QFont fontName = opt.font;
   QFontMetrics fmName(fontName);
+
+  QFont fontStatus = opt.font;
+  fontStatus.setPointSize(fontStatus.pointSize() - kFontSizeDiffItem);
+  QFontMetrics fmStatus(fontStatus);
+
   const QRect& r = opt.rect.adjusted(kMargin, kMargin, -kMargin, -kMargin);
   const QRect& rectIcon = r.adjusted(-kMargin, -kMargin, -(r.width() - r.height()), kMargin);
 
   // clang-format off
-  const QRect& rectNum1 = QRect(
-    r.right() - 3*kMargin - 4 * (kMargin + fmName.height()),
-    r.top(),
-    fmName.height(),
-    fmName.height());
-
-  const QRect& rectNum2 = QRect(
-    r.right() - 3*kMargin - 3 * (kMargin + fmName.height()),
-    r.top(),
-    fmName.height(),
-    fmName.height());
-
-  const QRect& rectNum3 = QRect(
-    r.right() - 3*kMargin - 2 * (kMargin + fmName.height()),
-    r.top(),
-    fmName.height(),
-    fmName.height());
-
   const QRect& rectChanged = QRect(
     r.right() - 3*kMargin - 1 * (kMargin + fmName.height() / 2),
     r.top(),
@@ -110,9 +103,16 @@ std::tuple<QFont, QRect, QRect, QRect, QRect, QRect, QRect> CWksItemDelegate::ge
     r.top(),
     rectChanged.left() - rectIcon.right() -2*kMargin,
     fmName.height());
+
+  const QRect& rectStatus = QRect(
+    rectIcon.right() + kMargin,
+    r.bottom() - fmStatus.height(),
+    r.right() - rectIcon.right() - 2*kMargin,
+    fmStatus.height()
+  );
   // clang-format on
 
-  return {fontName, rectIcon, rectName, rectChanged, rectNum3, rectNum2, rectNum1};
+  return {fontName, fontStatus, rectIcon, rectName, rectStatus, rectChanged};
 }
 
 void CWksItemDelegate::drawToolButton(QPainter* p, const QStyleOptionViewItem& opt, const QRect& rect,
@@ -141,11 +141,11 @@ QSize CWksItemDelegate::sizeHint(const QStyleOptionViewItem& opt, const QModelIn
   QFontMetrics fm1(font1);
 
   QFont font2 = opt.font;
-  font2.setPointSize(font2.pointSize() - 2);
+  font2.setPointSize(font2.pointSize() - kFontSizeDiffProject);
   QFontMetrics fm2(font2);
 
   QFont font3 = opt.font;
-  font3.setPointSize(font3.pointSize() - 3);
+  font3.setPointSize(font3.pointSize() - kFontSizeDiffItem);
   QFontMetrics fm3(font3);
 
   // qDebug() << fm1.height() << fm2.height() << (3 * kMargin + fm1.height() + fm2.height());
@@ -200,7 +200,7 @@ void CWksItemDelegate::paint(QPainter* p, const QStyleOptionViewItem& opt, const
 
 void CWksItemDelegate::paintProject(QPainter* p, const QStyleOptionViewItem& opt, const QModelIndex& index,
                                     const IWksItem* item) const {
-  auto [fontName, rectIcon, rectName, rectVisible, rectSave, rectActiveProject, rectAutoSyncDev] =
+  auto [fontName, fontStatus, rectIcon, rectName, rectVisible, rectSave, rectActiveProject, rectAutoSyncDev] =
       getRectanglesProject(opt);
 
   const bool isVisible = item->isVisible();
@@ -261,10 +261,12 @@ void CWksItemDelegate::paintProject(QPainter* p, const QStyleOptionViewItem& opt
 
 void CWksItemDelegate::paintItem(QPainter* p, const QStyleOptionViewItem& opt, const QModelIndex& index,
                                  const IWksItem* item) const {
-  auto [fontName, rectIcon, rectName, rectChanged, rectNum3, rectNum2, rectNum1] = getRectanglesItem(opt);
+  auto [fontName, fontStatus, rectIcon, rectName, rectStatus, rectChanged] = getRectanglesItem(opt);
 
+  const bool isVisible = item->isVisible();
+  const QIcon::Mode iconMode = isVisible ? QIcon::Normal : QIcon::Disabled;
   const QColor& colorName =
-      opt.palette.color(item->isVisible() ? QPalette::Active : QPalette::Disabled,
+      opt.palette.color(isVisible ? QPalette::Active : QPalette::Disabled,
                         opt.state & QStyle::State_Selected ? QPalette::BrightText : QPalette::WindowText);
 
   // draw name
@@ -275,12 +277,34 @@ void CWksItemDelegate::paintItem(QPainter* p, const QStyleOptionViewItem& opt, c
   p->drawText(rectName, Qt::AlignLeft | Qt::AlignVCenter, item->getName());
   p->setClipping(false);
 
+  // draw rating
+  qint32 rating = qRound(item->getRating());
+  if (rating != 0) {
+    QRect rectStar(rectStatus.left(), rectStatus.top(), rectStatus.height(), rectStatus.height());
+    for (int i = 0; i < qRound(item->getRating()); i++) {
+      QIcon("://icons/cache/32x32/star.png").paint(p, rectStar, Qt::AlignCenter, iconMode);
+      rectStar.translate(kMargin + rectStar.width(), 0);
+    }
+    rectStatus.setLeft(rectStar.left() + kMargin);
+  }
+
+  // draw tags
+  const QSet<QString>& tags = item->getTags();
+  if (!tags.isEmpty()) {
+    // draw tags
+    p->setFont(fontStatus);
+    p->setClipRect(rectStatus.adjusted(-1, -1, 1, 1));
+    const QString& strTags = tags.values().join(", ");
+    p->drawText(rectStatus, Qt::AlignLeft | Qt::AlignVCenter, strTags);
+    p->setClipping(false);
+  }
+
   // draw icon
-  QIcon(item->getIcon()).paint(p, rectIcon, Qt::AlignCenter, item->isVisible() ? QIcon::Normal : QIcon::Disabled);
+  QIcon(item->getIcon()).paint(p, rectIcon, Qt::AlignCenter, iconMode);
 
   // draw save/changed icon
   if (item->isChanged() && !item->isOnDevice()) {
-    QIcon(":/icons/32x32/Save.png").paint(p, rectChanged);
+    QIcon(":/icons/32x32/Save.png").paint(p, rectChanged, Qt::AlignCenter, iconMode);
   }
 }
 
@@ -306,7 +330,7 @@ bool CWksItemDelegate::editorEvent(QEvent* event, QAbstractItemModel* model, con
 
 bool CWksItemDelegate::mousePressProject(QMouseEvent* me, const QStyleOptionViewItem& opt, const QModelIndex& index,
                                          IWksItem* item) {
-  auto [fontName, rectIcon, rectName, rectVisible, rectSave, rectActiveProject, rectAutoSyncDev] =
+  auto [fontName, fontStatus, rectIcon, rectName, rectVisible, rectSave, rectActiveProject, rectAutoSyncDev] =
       getRectanglesProject(opt);
   if (rectVisible.contains(me->pos())) {
     item->setVisibility(!item->isVisible());
@@ -373,7 +397,7 @@ bool CWksItemDelegate::helpEvent(QHelpEvent* event, QAbstractItemView* view, con
 bool CWksItemDelegate::helpEventProject(const QPoint& pos, const QPoint& posGlobal, QAbstractItemView* view,
                                         const QStyleOptionViewItem& opt, const IWksItem* item) {
   bool ret = false;
-  auto [fontName, rectIcon, rectName, rectVisible, rectSave, rectActiveProject, rectAutoSyncDev] =
+  auto [fontName, fontStatus, rectIcon, rectName, rectVisible, rectSave, rectActiveProject, rectAutoSyncDev] =
       getRectanglesProject(opt);
   if (rectName.contains(pos)) {
     QToolTip::showText(posGlobal, item->getToolTipName(), view);
@@ -422,7 +446,7 @@ bool CWksItemDelegate::helpEventProject(const QPoint& pos, const QPoint& posGlob
 bool CWksItemDelegate::helpEventItem(const QPoint& pos, const QPoint& posGlobal, QAbstractItemView* view,
                                      const QStyleOptionViewItem& opt, const IWksItem* item) {
   bool ret = false;
-  auto [fontName, rectIcon, rectName, rectChanged, rectNum3, rectNum2, rectNum1] = getRectanglesItem(opt);
+  auto [fontName, fontStatus, rectIcon, rectName, rectStatus, rectChanged] = getRectanglesItem(opt);
 
   if (rectName.contains(pos)) {
     QToolTip::showText(posGlobal, item->getToolTipName(), view);

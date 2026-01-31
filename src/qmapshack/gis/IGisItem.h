@@ -505,9 +505,7 @@ class IGisItem : public IWksItem {
 
   virtual const searchValue_t getValueByKeyword(searchProperty_e keyword) = 0;
 
-  qreal getRating() const;
   void setRating(qreal rating);
-  const QSet<QString>& getKeywords() const;
   QList<QString> getKeywordsSorted() const;
   void addKeywords(const QSet<QString>& otherKeywords);
   void removeKeywords(const QSet<QString>& otherKeywords);

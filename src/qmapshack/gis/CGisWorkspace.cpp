@@ -1189,11 +1189,11 @@ void CGisWorkspace::tagItemsByKey(const QList<IGisItem::key_t>& keys) {
     IGisItem* gisItem = getItemByKey(key);
     if (gisItem != nullptr) {
       if (firstItem) {
-        commonKeywords = gisItem->getKeywords();
+        commonKeywords = gisItem->getTags();
         rating = gisItem->getRating();
         firstItem = false;
       } else {
-        commonKeywords = commonKeywords.intersect(gisItem->getKeywords());
+        commonKeywords = commonKeywords.intersect(gisItem->getTags());
       }
 
       items << gisItem;

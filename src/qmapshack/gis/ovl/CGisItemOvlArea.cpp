@@ -519,7 +519,7 @@ QMap<searchProperty_e, CGisItemOvlArea::fSearch> CGisItemOvlArea::initKeywordLam
   });
   map.insert(eSearchPropertyGeneralKeywords, [](CGisItemOvlArea* item) {
     searchValue_t searchValue;
-    searchValue.str1 = QStringList(item->getKeywords().values()).join(", ");
+    searchValue.str1 = QStringList(item->getTags().values()).join(", ");
     return searchValue;
   });
   map.insert(eSearchPropertyGeneralType, [](CGisItemOvlArea* /*item*/) {

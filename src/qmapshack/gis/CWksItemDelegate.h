@@ -45,9 +45,9 @@ class CWksItemDelegate : public QStyledItemDelegate {
  private:
   static inline QString trRichText(const char* msg) { return "<div>" + tr(msg) + "</div>"; }
   IWksItem* indexToItem(const QModelIndex& index) const;
-  static std::tuple<QFont, QRect, QRect, QRect, QRect, QRect, QRect> getRectanglesProject(
+  static std::tuple<QFont, QFont, QRect, QRect, QRect, QRect, QRect, QRect> getRectanglesProject(
       const QStyleOptionViewItem& opt);
-  static std::tuple<QFont, QRect, QRect, QRect, QRect, QRect, QRect> getRectanglesItem(const QStyleOptionViewItem& opt);
+  static std::tuple<QFont, QFont, QRect, QRect, QRect, QRect> getRectanglesItem(const QStyleOptionViewItem& opt);
   static void drawToolButton(QPainter* p, const QStyleOptionViewItem& opt, const QRect& rect, const QIcon& icon,
                              bool enabled, bool pressed);
 

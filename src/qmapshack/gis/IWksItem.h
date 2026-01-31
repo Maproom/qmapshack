@@ -68,6 +68,8 @@ class IWksItem : public QTreeWidgetItem {
   virtual const QString& getToolTipName() const { return toolTipName; }
   virtual const QString& getToolTipDecoration() const { return toolTipDecoration; }
   virtual const QPixmap& getIcon() const { return icon; }
+  virtual const QSet<QString>& getTags() const { return keywords; }
+  virtual const qreal getRating() const { return rating; }
   virtual const bool isVisible() const { return visible; }
   virtual const bool isAutoSave() const { return autoSave; }
   virtual const bool isAutoSyncToDev() const { return autoSyncToDev; }

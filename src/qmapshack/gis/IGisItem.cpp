@@ -876,14 +876,10 @@ IGisItem* IGisItem::newGisItem(quint32 type, quint64 id, QSqlDatabase& db, IGisP
   return item;
 }
 
-qreal IGisItem::getRating() const { return rating; }
-
 void IGisItem::setRating(qreal rating) {
   this->rating = rating;
   updateHistory();
 }
-
-const QSet<QString>& IGisItem::getKeywords() const { return keywords; }
 
 QList<QString> IGisItem::getKeywordsSorted() const {
   QList<QString> sortedKeywords = keywords.values();

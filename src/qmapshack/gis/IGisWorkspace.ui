@@ -70,6 +70,9 @@
      <property name="contextMenuPolicy">
       <enum>Qt::ContextMenuPolicy::CustomContextMenu</enum>
      </property>
+     <property name="horizontalScrollBarPolicy">
+      <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
+     </property>
      <property name="dragEnabled">
       <bool>true</bool>
      </property>
@@ -81,9 +84,6 @@
      </property>
      <property name="selectionMode">
       <enum>QAbstractItemView::SelectionMode::ExtendedSelection</enum>
-     </property>
-     <property name="indentation">
-      <number>14</number>
      </property>
      <property name="columnCount">
       <number>1</number>

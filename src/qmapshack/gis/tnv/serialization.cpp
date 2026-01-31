@@ -300,6 +300,9 @@ bool CGisItemTrk::readTwoNav(const QString& filename) {
 
   while (!line.isEmpty()) {
     line = in.readLine();
+    if (line.size() == 0) {
+      continue;
+    }
     switch (line[0].toLatin1()) {
       case 'B': {
         QString name = line.mid(1).simplified();
@@ -356,8 +359,8 @@ bool CGisItemTrk::readTwoNav(const QString& filename) {
           return false;
         }
 
-        QString lat = values[2].replace(QChar(186), "").replace(QChar(-3), "");
-        QString lon = values[3].replace(QChar(186), "").replace(QChar(-3), "");
+        QString lat = values[2].replace(QChar(186), "");
+        QString lon = values[3].replace(QChar(186), "");
         IUnit::strToDeg(lat + " " + lon, pt.lon, pt.lat);
 
         pt.time = readCompeTime(values[4] + " " + values[5], true);
@@ -516,6 +519,10 @@ bool CTwoNavProject::loadWpts(const QString& filename, const QDir& dir) {
   while (!line.isEmpty()) {
     line = in.readLine();
 
+    if (line.size() == 0) {
+      continue;
+    }
+
     switch (line[0].toLatin1()) {
       case 'B': {
         QString name = line.mid(1).simplified();
@@ -562,8 +569,8 @@ bool CTwoNavProject::loadWpts(const QString& filename, const QDir& dir) {
 
         wpt.name = values[1];
 
-        QString lat = values[3].replace(QChar(186), "").replace(QChar(-3), "");
-        QString lon = values[4].replace(QChar(186), "").replace(QChar(-3), "");
+        QString lat = values[3].replace(QChar(186), "");
+        QString lon = values[4].replace(QChar(186), "");
         IUnit::strToDeg(lat + " " + lon, wpt.lon, wpt.lat);
 
         wpt.time = readCompeTime(values[5] + " " + values[6], false);

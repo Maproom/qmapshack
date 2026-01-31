@@ -69,6 +69,8 @@ class IDevice : public IWksItem {
   void gainUserFocus(bool yes) override {};
   bool hasUserFocus() const override { return false; };
 
+  void setVisibility(bool visible) override;
+
  protected:
   virtual void insertCopyOfProject(IGisProject* project) = 0;
   /**

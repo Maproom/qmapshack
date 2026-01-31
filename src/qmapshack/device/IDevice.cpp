@@ -34,17 +34,30 @@ IDevice::IDevice(const QString& path, type_e type, const QString& key, QTreeWidg
     : IWksItem(parent, type), dir(path), key(key) {
   icon = QPixmap("://icons/32x32/Device.png");
   cnt++;
+  setVisibility(false);
 }
 
 IDevice::IDevice(const QString& path, const QString& key, IDevice* parent)
     : IWksItem(parent, eTypeVirtual), dir(path), key(key) {
   icon = QPixmap("://icons/32x32/PathGreen.png");
+  setVisibility(false);
 }
 
 IDevice::~IDevice() {
   if (type() != eTypeVirtual) {
     cnt--;
   }
+}
+
+void IDevice::setVisibility(bool visible) {
+  const int N = childCount();
+  for (int n = 0; n < N; n++) {
+    IGisProject* project = dynamic_cast<IGisProject*>(child(n));
+    if (project != nullptr) {
+      project->setVisibility(visible);
+    }
+  }
+  IWksItem::setVisibility(visible);
 }
 
 void IDevice::mount(const QString& path) {

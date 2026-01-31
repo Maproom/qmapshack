@@ -49,8 +49,12 @@ void CDeviceGarminArchive::slotExpanded(QTreeWidgetItem* item) {
   for (const QString& entry : entries) {
     const QString& filename = dir.absoluteFilePath(entry);
     IGisProject* project = new CGpxProject(filename, this);
-    if (!project->isValid()) {
-      delete project;
+    if (project) {
+      if (!project->isValid()) {
+        delete project;
+      } else {
+        project->setVisibility(isVisible());
+      }
     }
   }
 }

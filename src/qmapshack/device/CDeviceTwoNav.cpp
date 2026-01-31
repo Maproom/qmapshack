@@ -46,24 +46,36 @@ CDeviceTwoNav::CDeviceTwoNav(const QString& path, const QString& key, const QStr
 
   {
     IGisProject* project = new CTwoNavProject(dirData.absolutePath(), this);
-    if (!project->isValid()) {
-      delete project;
+    if (project) {
+      if (!project->isValid()) {
+        delete project;
+      } else {
+        project->setVisibility(isVisible());
+      }
     }
   }
 
   const QStringList& entriesGpx = dirData.entryList(QStringList("*.gpx"));
   for (const QString& entry : entriesGpx) {
     IGisProject* project = new CGpxProject(dirData.absoluteFilePath(entry), this);
-    if (!project->isValid()) {
-      delete project;
+    if (project) {
+      if (!project->isValid()) {
+        delete project;
+      } else {
+        project->setVisibility(isVisible());
+      }
     }
   }
 
   const QStringList& entriesDir = dirData.entryList(QDir::NoDotAndDotDot | QDir::Dirs);
   for (const QString& entry : entriesDir) {
     IGisProject* project = new CTwoNavProject(dirData.absoluteFilePath(entry), this);
-    if (!project->isValid()) {
-      delete project;
+    if (project) {
+      if (!project->isValid()) {
+        delete project;
+      } else {
+        project->setVisibility(isVisible());
+      }
     }
   }
 
@@ -72,8 +84,12 @@ CDeviceTwoNav::CDeviceTwoNav(const QString& path, const QString& key, const QStr
   const QStringList& entriesLog = dirData.entryList(QStringList("*.gpx"));
   for (const QString& entry : entriesLog) {
     IGisProject* project = new CGpxProject(dirData.absoluteFilePath(entry), this);
-    if (!project->isValid()) {
-      delete project;
+    if (project) {
+      if (!project->isValid()) {
+        delete project;
+      } else {
+        project->setVisibility(isVisible());
+      }
     }
   }
 }

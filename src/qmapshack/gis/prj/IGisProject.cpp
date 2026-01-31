@@ -99,7 +99,7 @@ IGisProject::IGisProject(type_e type, const QString& filename, IDevice* parent)
 
 IGisProject::~IGisProject() {
   delete dlgDetails;
-  if (key == keyUserFocus) {
+  if (key == keyUserFocus && isOnDevice() == IDevice::eTypeNone) {
     keyUserFocus.clear();
   }
 }

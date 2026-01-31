@@ -47,14 +47,18 @@ class CWksItemDelegate : public QStyledItemDelegate {
   IWksItem* indexToItem(const QModelIndex& index) const;
   static std::tuple<QFont, QFont, QRect, QRect, QRect, QRect, QRect, QRect> getRectanglesProject(
       const QStyleOptionViewItem& opt);
+  static std::tuple<QFont, QFont, QRect, QRect, QRect, QRect> getRectanglesDevice(const QStyleOptionViewItem& opt);
+
   static std::tuple<QFont, QFont, QRect, QRect, QRect, QRect> getRectanglesItem(const QStyleOptionViewItem& opt);
   static void drawToolButton(QPainter* p, const QStyleOptionViewItem& opt, const QRect& rect, const QIcon& icon,
                              bool enabled, bool pressed);
 
   void paintProject(QPainter* p, const QStyleOptionViewItem& opt, const QModelIndex& index, const IWksItem* item) const;
   void paintItem(QPainter* p, const QStyleOptionViewItem& opt, const QModelIndex& index, const IWksItem* item) const;
+  void paintDevice(QPainter* p, const QStyleOptionViewItem& opt, const QModelIndex& index, const IWksItem* item) const;
 
   bool mousePressProject(QMouseEvent* me, const QStyleOptionViewItem& opt, const QModelIndex& index, IWksItem* item);
+  bool mousePressDevice(QMouseEvent* me, const QStyleOptionViewItem& opt, const QModelIndex& index, IWksItem* item);
 
   bool helpEventProject(const QPoint& pos, const QPoint& posGlobal, QAbstractItemView* view,
                         const QStyleOptionViewItem& opt, const IWksItem* item);

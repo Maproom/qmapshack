@@ -191,8 +191,12 @@ void CDeviceGarminMtp::createProjectsFromFiles(QString subdirectory, QString ext
       } else if (extension == "fit") {
         project = new CFit2Project(tempFile, d.filePath(file), this);
       }
-      if (project && !project->isValid()) {
-        delete project;
+      if (project) {
+        if (!project->isValid()) {
+          delete project;
+        } else {
+          project->setVisibility(isVisible());
+        }
       }
     }
   }

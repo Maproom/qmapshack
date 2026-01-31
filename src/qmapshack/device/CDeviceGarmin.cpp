@@ -150,8 +150,12 @@ void CDeviceGarmin::createProjectsFromFiles(QString subdirecoty, QString fileEnd
       project = new CTcxProject(filename, this);
     }
 
-    if (project && !project->isValid()) {
-      delete project;
+    if (project) {
+      if (!project->isValid()) {
+        delete project;
+      } else {
+        project->setVisibility(isVisible());
+      }
     }
   }
 }

@@ -56,8 +56,12 @@ void CDeviceGarminArchiveMtp::slotExpanded(QTreeWidgetItem* item) {
     }
     openFileCheckSuccess(QIODevice::ReadWrite, tempFile);
     IGisProject* project = new CGpxProject(tempFile, filename, this);
-    if (!project->isValid()) {
-      delete project;
+    if (project) {
+      if (!project->isValid()) {
+        delete project;
+      } else {
+        project->setVisibility(isVisible());
+      }
     }
   }
 }

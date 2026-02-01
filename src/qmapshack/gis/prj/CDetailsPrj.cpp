@@ -923,9 +923,10 @@ void CDetailsPrj::slotLinkActivated(const QString& link) {
     }
     prj.setName(name);
   } else if (link == "keywords") {
+    bool ok = false;
     QString keywords = QInputDialog::getText(this, tr("Edit keywords..."), tr("Enter keywords."), QLineEdit::Normal,
-                                             prj.getKeywords());
-    if (keywords.trimmed().isEmpty()) {
+                                             prj.getKeywords(), &ok);
+    if (ok == false) {
       return;
     }
     if (keywords == tr("none")) {

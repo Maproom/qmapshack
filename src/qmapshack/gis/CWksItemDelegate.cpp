@@ -27,8 +27,10 @@
 #include "helpers/CDraw.h"
 
 constexpr int kMargin = 2;
-constexpr int kFontSizeDiffProject = 1;
+constexpr int kFontSizeDiffProject = 2;
 constexpr int kFontSizeDiffItem = 3;
+
+#define OPTION 2
 
 CWksItemDelegate::CWksItemDelegate(CGisListWks* parent) : QStyledItemDelegate(parent), treeWidget(parent) {}
 
@@ -49,30 +51,38 @@ std::tuple<QFont, QFont, QRect, QRect, QRect, QRect, QRect, QRect, QRect> CWksIt
   const QRect& r = opt.rect.adjusted(kMargin, kMargin, -kMargin, -kMargin);
   const QRect& rectIcon = r.adjusted(-kMargin, -kMargin, -(r.width() - r.height()), kMargin);
 
+#if OPTION == 1
+  const int top = r.top() + fmName.height() + kMargin;
+  const int buttonHeight = fmStatus.height();
+#elif OPTION == 2
+  const int top = r.top();
+  const int buttonHeight = fmName.height();
+#endif
+
   // clang-format off
   const QRect& rectAutoSyncDev = QRect(
-    r.right() - 4 * (kMargin + fmStatus.height()),
-    r.top() + fmName.height() + kMargin,
-    fmStatus.height(),
-    fmStatus.height());
+    r.right() - 3 * kMargin - 4 * buttonHeight,
+    top,
+    buttonHeight,
+    buttonHeight);
 
   const QRect& rectActiveProject = QRect(
-    r.right() - 3 * (kMargin + fmStatus.height()),
-    r.top() + fmName.height() + kMargin,
-    fmStatus.height(),
-    fmStatus.height());
+    r.right() - 2 * kMargin - 3 * buttonHeight,
+    top,
+    buttonHeight,
+    buttonHeight);
 
   const QRect& rectSave = QRect(
-    r.right() - 2 * (kMargin + fmStatus.height()),
-    r.top() + fmName.height() + kMargin,
-    fmStatus.height(),
-    fmStatus.height());
+    r.right() - 1 * kMargin - 2 * buttonHeight,
+    top,
+    buttonHeight,
+    buttonHeight);
 
   const QRect& rectVisible = QRect(
-    r.right() - 1 * (kMargin + fmStatus.height()),
-    r.top() + fmName.height() + kMargin,
-    fmStatus.height(),
-    fmStatus.height());
+    r.right() - 1 * buttonHeight,
+    top,
+    buttonHeight,
+    buttonHeight);
 
   const QRect& rectName =QRect(
     rectIcon.right() + kMargin,
@@ -83,7 +93,7 @@ std::tuple<QFont, QFont, QRect, QRect, QRect, QRect, QRect, QRect, QRect> CWksIt
   const QRect& rectStatus = QRect(
     rectIcon.right() + kMargin,
     r.bottom() - fmStatus.height(),
-    r.width() - rectIcon.width() - rectAutoSyncDev.width() - 2 * kMargin,
+    r.width() - rectIcon.width() - 2 * kMargin,
     fmStatus.height());
 
   // clang-format on
@@ -106,7 +116,7 @@ std::tuple<QFont, QFont, QRect, QRect, QRect, QRect> CWksItemDelegate::getRectan
 
   // clang-format off
   const QRect& rectChanged = QRect(
-    r.right() - 1 * (kMargin + fmName.height()),
+    r.right() - fmName.height(),
     r.top(),
     fmName.height(),
     fmName.height());
@@ -265,20 +275,17 @@ void CWksItemDelegate::paintProject(QPainter* p, const QStyleOptionViewItem& opt
       opt.palette.color(isVisible ? QPalette::Active : QPalette::Disabled,
                         opt.state & QStyle::State_Selected ? QPalette::BrightText : QPalette::WindowText);
 
-  // draw name
-  fontName.setBold(item->hasUserFocus());
-  p->setPen(colorName);
-  p->setFont(fontName);
-  p->drawText(rectName.adjusted(0, -1, 0, 1), Qt::AlignLeft | Qt::AlignTop,
-              isOnDevice ? project->getName() : project->getNameEx());
-
   // draw icon
   QIcon(item->getIcon()).paint(p, rectIcon, Qt::AlignCenter, item->isVisible() ? QIcon::Normal : QIcon::Disabled);
 
   // draw tool button to toggle visibility
   drawToolButton(p, opt, rectVisible,
                  isVisible ? QIcon(":/icons/32x32/ShowAll.png") : QIcon(":/icons/32x32/ShowNone.png"), true, isVisible);
+#if OPTION == 1
   rectStatus.setRight(rectVisible.left() - kMargin);
+#elif OPTION == 2
+  rectName.setRight(rectVisible.left() - kMargin);
+#endif
 
   if (isOnDevice == false) {
     // draw save/ auto save button
@@ -301,7 +308,11 @@ void CWksItemDelegate::paintProject(QPainter* p, const QStyleOptionViewItem& opt
     } else {
       drawToolButton(p, opt, rectActiveProject, QIcon(":/icons/32x32/Focus.png"), false, false);
     }
+#if OPTION == 1
     rectStatus.setRight(rectActiveProject.left() - kMargin);
+#elif OPTION == 2
+    rectName.setRight(rectActiveProject.left() - kMargin);
+#endif
 
     // auto sync. w. dev.
     if (treeWidget->hasDeviceSupport()) {
@@ -310,30 +321,42 @@ void CWksItemDelegate::paintProject(QPainter* p, const QStyleOptionViewItem& opt
       } else {
         drawToolButton(p, opt, rectAutoSyncDev, QIcon(":/icons/32x32/DeviceNoSync.png"), true, false);
       }
+#if OPTION == 1
       rectStatus.setRight(rectAutoSyncDev.left() - kMargin);
+#elif OPTION == 2
+      rectName.setRight(rectAutoSyncDev.left() - kMargin);
+#endif
     }
   }
 
-  QString status = project->getKeywords();
-  if (!status.isEmpty()) {
-    status += " ";
+  // draw name
+  fontName.setBold(item->hasUserFocus());
+  p->setPen(colorName);
+  p->setFont(fontName);
+  p->drawText(rectName.adjusted(0, -1, 0, 1), Qt::AlignLeft | Qt::AlignTop,
+              isOnDevice ? project->getName() : project->getNameEx());
+
+  QString status;
+  const QString& keywords = project->getKeywords();
+  if (!keywords.isEmpty()) {
+    status += keywords + " ";
   }
-  int cnt = project->getItemCountByType(IGisItem::eTypeTrk);
-  if (cnt) {
-    status += tr("T: %1 ").arg(cnt);
-  }
-  cnt = project->getItemCountByType(IGisItem::eTypeWpt);
-  if (cnt) {
-    status += tr("W: %1 ").arg(cnt);
-  }
-  cnt = project->getItemCountByType(IGisItem::eTypeRte);
-  if (cnt) {
-    status += tr("R: %1 ").arg(cnt);
-  }
-  cnt = project->getItemCountByType(IGisItem::eTypeOvl);
-  if (cnt) {
-    status += tr("A: %1 ").arg(cnt);
-  }
+  // int cnt = project->getItemCountByType(IGisItem::eTypeTrk);
+  // if (cnt) {
+  //   status += tr("T: %1 ").arg(cnt);
+  // }
+  // cnt = project->getItemCountByType(IGisItem::eTypeWpt);
+  // if (cnt) {
+  //   status += tr("W: %1 ").arg(cnt);
+  // }
+  // cnt = project->getItemCountByType(IGisItem::eTypeRte);
+  // if (cnt) {
+  //   status += tr("R: %1 ").arg(cnt);
+  // }
+  // cnt = project->getItemCountByType(IGisItem::eTypeOvl);
+  // if (cnt) {
+  //   status += tr("A: %1 ").arg(cnt);
+  // }
   p->setPen(colorName);
   p->setFont(fontStatus);
   p->drawText(rectStatus.adjusted(0, -1, 0, 1), Qt::AlignLeft | Qt::AlignTop, status);
@@ -400,8 +423,7 @@ void CWksItemDelegate::paintItem(QPainter* p, const QStyleOptionViewItem& opt, c
   if (!tags.isEmpty()) {
     // draw tags
     p->setFont(fontStatus);
-    const QString& strTags = tags.values().join(", ");
-    p->drawText(rectStatus.adjusted(0, -1, 0, 1), Qt::AlignLeft | Qt::AlignVCenter, strTags);
+    p->drawText(rectStatus.adjusted(0, -1, 0, 1), Qt::AlignLeft | Qt::AlignVCenter, tags.values().join(", "));
   }
 
   // draw icon
@@ -409,7 +431,8 @@ void CWksItemDelegate::paintItem(QPainter* p, const QStyleOptionViewItem& opt, c
 
   // draw save/changed icon
   if (item->isChanged() && !item->isOnDevice()) {
-    QIcon(":/icons/32x32/Save.png").paint(p, rectChanged, Qt::AlignCenter, iconMode);
+    QIcon(":/icons/32x32/Save.png")
+        .paint(p, rectChanged.adjusted(kMargin, kMargin, -kMargin, -kMargin), Qt::AlignCenter, iconMode);
   }
 }
 
@@ -519,7 +542,7 @@ bool CWksItemDelegate::helpEventProject(const QPoint& pos, const QPoint& posGlob
   bool ret = false;
   auto [fontName, fontStatus, rectIcon, rectName, rectStatus, rectVisible, rectSave, rectActiveProject,
         rectAutoSyncDev] = getRectanglesProject(opt);
-  if (rectName.contains(pos)) {
+  if (rectName.contains(pos) || rectStatus.contains(pos)) {
     QToolTip::showText(posGlobal, item->getToolTipName(), view);
     ret = true;
   } else if (rectVisible.contains(pos)) {

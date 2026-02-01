@@ -456,6 +456,10 @@ QString IGisProject::getInfo() const {
     str += tr("<br/>\nFilename: %1").arg(filename);
   }
 
+  if (!metadata.keywords.isEmpty()) {
+    str += "<br/>\n" + tr("Keywords: ") + metadata.keywords;
+  }
+
   if (cntItemsByType[IGisItem::eTypeWpt]) {
     str += "<br/>\n" + tr("Waypoints: %1").arg(cntItemsByType[IGisItem::eTypeWpt]);
   }

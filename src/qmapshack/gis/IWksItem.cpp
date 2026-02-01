@@ -40,4 +40,14 @@ void IWksItem::updateDecoration(quint32 enable, quint32 disable) {
   updateItem();
 }
 
-void IWksItem::updateItem() { treeWidget()->viewport()->update(); }
+void IWksItem::updateItem() {
+  QTreeWidget* tree = treeWidget();
+  if (tree == nullptr) {
+    return;
+  }
+  QWidget* viewport = tree->viewport();
+  if (viewport == nullptr) {
+    return;
+  }
+  viewport->update();
+}

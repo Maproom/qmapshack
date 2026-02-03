@@ -34,35 +34,23 @@
 
 CGeoSearch::CGeoSearch(CGisListWks* parent)
     : IGisProject(eTypeGeoSearch, "", parent), searchConfig(&CGeoSearchConfig::self()) {
+  setFlags(flags() | Qt::ItemIsEditable);
   networkAccessManager = new QNetworkAccessManager(this);
-
-  // QPointF focus;
 
   parent->takeTopLevelItem(parent->indexOfTopLevelItem(this));
   parent->insertTopLevelItem(0, this);
 
-  /// @ todo
-  // edit = new QLineEdit(parent);
-
-  // actSymbol = edit->addAction(CWptIconManager::self().getWptIconByName(searchConfig->symbolName, focus),
-  //                             QLineEdit::TrailingPosition);
-  // actSymbol->setObjectName(searchConfig->symbolName);
-  // connect(actSymbol, &QAction::triggered, this, &CGeoSearch::slotChangeSymbol);
-
-  // QAction* actSetup = edit->addAction(QIcon("://icons/32x32/Apply.png"), QLineEdit::LeadingPosition);
-  // actSetup->setToolTip(tr("Setup Search"));
-  // connect(actSetup, &QAction::triggered, this, &CGeoSearch::slotSelectService);
-
-  // parent->setItemWidget(this, CGisListWks::eColumnName, edit);
-
-  connect(edit, &QLineEdit::returnPressed, this, &CGeoSearch::slotStartSearch);
   connect(networkAccessManager, &QNetworkAccessManager::finished, this, &CGeoSearch::slotRequestFinished);
-  connect(searchConfig, &CGeoSearchConfig::sigConfigChanged, this, &CGeoSearch::slotConfigChanged);
 
   setIcon();
 }
 
 CGeoSearch::~CGeoSearch() {}
+
+QPixmap CGeoSearch::getWptIcon() const {
+  QPointF focus;
+  return CWptIconManager::self().getWptIconByName(searchConfig->symbolName, focus);
+}
 
 void CGeoSearch::setIcon() {
   if (searchConfig->accumulativeResults) {
@@ -79,20 +67,21 @@ void CGeoSearch::setIcon() {
   }
 }
 
-void CGeoSearch::slotChangeSymbol() {
+void CGeoSearch::changeSymbol() {
   QString iconName = CWptIconManager::self().selectWptIcon(treeWidget());
   if (!iconName.isEmpty()) {
-    QPointF focus;
-    actSymbol->setObjectName(iconName);
-    actSymbol->setIcon(CWptIconManager::self().getWptIconByName(iconName, focus));
+    searchConfig->symbolName = iconName;
+    searchConfig->emitChanged();
   }
-
-  searchConfig->symbolName = actSymbol->objectName();
-  searchConfig->emitChanged();
 }
 
-void CGeoSearch::slotSelectService() {
-  QMenu* menu = new QMenu(edit);
+void CGeoSearch::selectService(const QRect& rect) {
+  QTreeWidget* tree = treeWidget();
+  if (tree == nullptr) {
+    return;
+  }
+
+  QMenu* menu = new QMenu(tree);
 
   menu->addSection(tr("Select Service"));
 
@@ -119,7 +108,7 @@ void CGeoSearch::slotSelectService() {
   actSetup->setToolTip(tr("configure providers of geocoding search services"));
   connect(actSetup, &QAction::triggered, this, &CGeoSearch::slotSetupGeoSearch);
 
-  menu->move(edit->parentWidget()->mapToGlobal(edit->geometry().topLeft()));
+  menu->move(tree->mapToGlobal(rect.topRight()));
   menu->exec();
 }
 
@@ -146,14 +135,15 @@ void CGeoSearch::slotSetupGeoSearch() {
   dlg.exec();
 }
 
-void CGeoSearch::slotStartSearch() {
+void CGeoSearch::startSearch(const QString& address) {
   QMS_DELETE(itemStatus);
 
   if (!searchConfig->accumulativeResults) {
     qDeleteAll(takeChildren());
   }
 
-  QString addr = edit->text();
+  lastAddress = address;
+  QString addr = address;
 
   switch (searchConfig->currentService) {
     case CGeoSearchConfig::eServiceNone: {
@@ -164,25 +154,25 @@ void CGeoSearch::slotStartSearch() {
 
     case CGeoSearchConfig::eServiceGoogle: {
       requestGoogle(addr);
-      edit->setEnabled(false);
+      inputEnabled = false;
       break;
     }
 
     case CGeoSearchConfig::eServiceGeonamesSearch: {
       requestGeonamesSearch(addr);
-      edit->setEnabled(false);
+      inputEnabled = false;
       break;
     }
 
     case CGeoSearchConfig::eServiceGeonamesAddress: {
       requestGeonamesAddress(addr);
-      edit->setEnabled(false);
+      inputEnabled = false;
       break;
     }
 
     case CGeoSearchConfig::eServiceNominatim: {
       requestNominatim(addr);
-      edit->setEnabled(false);
+      inputEnabled = false;
       break;
     }
 
@@ -194,7 +184,7 @@ void CGeoSearch::slotStartSearch() {
 void CGeoSearch::slotRequestFinished(QNetworkReply* reply) {
   QMutexLocker lock2(&IGisItem::mutexItems);
 
-  edit->setEnabled(true);
+  inputEnabled = true;
 
   if (reply->error() != QNetworkReply::NoError) {
     createErrorItem(reply->errorString());
@@ -361,7 +351,7 @@ void CGeoSearch::parseGoogle(const QByteArray& data) {
         qreal lon = xmlLocation.namedItem("lng").toElement().text().toDouble();
         qreal lat = xmlLocation.namedItem("lat").toElement().text().toDouble();
 
-        new CGisItemWpt(QPointF(lon, lat), address, actSymbol->objectName(), this);
+        new CGisItemWpt(QPointF(lon, lat), address, searchConfig->symbolName, this);
       }
     }
   }
@@ -428,7 +418,7 @@ void CGeoSearch::parseGeonamesSearch(const QByteArray& data) {
           qreal lon = xmlLng.text().toDouble();
           qreal lat = xmlLat.text().toDouble();
 
-          new CGisItemWpt(QPointF(lon, lat), address, actSymbol->objectName(), this);
+          new CGisItemWpt(QPointF(lon, lat), address, searchConfig->symbolName, this);
         }
       }
     }
@@ -552,7 +542,7 @@ void CGeoSearch::parseGeonamesAddress(const QByteArray& data) {
           qreal lon = xmlLng.text().toDouble();
           qreal lat = xmlLat.text().toDouble();
 
-          new CGisItemWpt(QPointF(lon, lat), address, actSymbol->objectName(), this);
+          new CGisItemWpt(QPointF(lon, lat), address, searchConfig->symbolName, this);
         }
       }
     }
@@ -667,26 +657,27 @@ void CGeoSearch::parseNominatim(const QByteArray& data) {
           //                    isNotFirst = true;
         }
 
-        new CGisItemWpt(QPointF(lon, lat), address, actSymbol->objectName(), this);
+        new CGisItemWpt(QPointF(lon, lat), address, searchConfig->symbolName, this);
       }
     }
   }
 }
 
-void CGeoSearch::createErrorItem(const QString& status) {
-  /// @todo CWksItemDelegate:
-  // itemStatus = new QTreeWidgetItem(this);
-  // itemStatus->setText(CGisListWks::eColumnName, status);
-  // itemStatus->setToolTip(CGisListWks::eColumnName, status);
-  // itemStatus->setIcon(CGisListWks::eColumnIcon, QIcon("://icons/32x32/Error.png"));
-}
+class CGeoSearchError : public IWksItem {
+ public:
+  CGeoSearchError(const QString& status, CGeoSearch* parent) : IWksItem(parent, eTypeGeoSearchError) {
+    name = status;
+    toolTipName = status;
+    icon = QPixmap("://icons/32x32/Error.png");
+  }
+  virtual ~CGeoSearchError() = default;
+  bool hasUserFocus() const override { return false; }
+  void gainUserFocus(bool yes) override {}
+};
 
-void CGeoSearch::slotConfigChanged() {
-  QPointF focus;
-  actSymbol->setIcon(CWptIconManager::self().getWptIconByName(searchConfig->symbolName, focus));
-  actSymbol->setObjectName(searchConfig->symbolName);
-  setIcon();
-}
+void CGeoSearch::createErrorItem(const QString& status) { itemStatus = new CGeoSearchError(status, this); }
+
+void CGeoSearch::slotConfigChanged() { setIcon(); }
 
 void CGeoSearch::slotAccuResults(bool yes) {
   searchConfig->accumulativeResults = yes;

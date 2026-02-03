@@ -100,6 +100,8 @@ CGisListWks::CGisListWks(QWidget* parent) : QTreeWidget(parent) {
   connect(delegate, &CWksItemDelegate::sigUpdateCanvas, this, &CGisListWks::sigChanged);
   setItemDelegate(delegate);
 
+  setEditTriggers(QAbstractItemView::AllEditTriggers);
+
   db = QSqlDatabase::addDatabase("QSQLITE", "Workspace1");
   QString config = QDir(IAppSetup::getPlatformInstance()->userDataPath()).filePath("workspace.db");
   db.setDatabaseName(config);

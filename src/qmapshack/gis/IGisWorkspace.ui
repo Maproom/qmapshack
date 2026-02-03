@@ -85,6 +85,9 @@
      <property name="selectionMode">
       <enum>QAbstractItemView::SelectionMode::ExtendedSelection</enum>
      </property>
+     <property name="indentation">
+      <number>16</number>
+     </property>
      <property name="columnCount">
       <number>1</number>
      </property>

@@ -22,12 +22,14 @@ IWksItem::IWksItem(QTreeWidgetItem* parent, int type) : QTreeWidgetItem(parent, 
 IWksItem::IWksItem(QTreeWidget* parent, int type) : QTreeWidgetItem(parent, type) {}
 
 IWksItem::eBaseType IWksItem::getBaseType() const {
-  if (type() >= eTypeGarmin) {
+  if (type() == eTypeGeoSearch) {
+    return eBaseType::GeoSearch;
+  } else if (type() == eTypeGeoSearchError) {
+    return eBaseType::GeoSearchError;
+  } else if (type() >= eTypeGarmin) {
     return eBaseType::Device;
   } else if (type() >= eTypeQms) {
     return eBaseType::Project;
-  } else if (type() == eTypeGeoSearch) {
-    return eBaseType::GeoSearch;
   } else if (type() >= eTypeWpt) {
     return eBaseType::Item;
   }

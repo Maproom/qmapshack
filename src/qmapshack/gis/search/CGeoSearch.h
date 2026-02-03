@@ -37,13 +37,19 @@ class CGeoSearch : public QObject, public IGisProject {
   virtual ~CGeoSearch();
 
   bool skipSave() const override { return true; }
+  bool isInputEnabled() const { return inputEnabled; }
+  const bool isChanged() const override { return false; }
+
+  QPixmap getWptIcon() const;
+  const QString& getLastAddress() const { return lastAddress; }
+
+  void selectService(const QRect& rect);
+  void changeSymbol();
+  void startSearch(const QString& address);
 
  private slots:
-  void slotChangeSymbol();
-  void slotSelectService();
   void slotServiceSelected(CGeoSearchConfig::service_e service, bool checked);
-  void slotSetupGeoSearch();
-  void slotStartSearch();
+  void slotSetupGeoSearch();  
   void slotRequestFinished(QNetworkReply* reply);
   void slotConfigChanged();
   void slotAccuResults(bool yes);
@@ -65,11 +71,11 @@ class CGeoSearch : public QObject, public IGisProject {
 
   void setIcon();
 
-  QLineEdit* edit;
-  QAction* actSymbol;
   QNetworkAccessManager* networkAccessManager;
   CGeoSearchConfig* searchConfig;
   QTreeWidgetItem* itemStatus = nullptr;
+  bool inputEnabled = true;
+  QString lastAddress;
 };
 
 #endif  // CSEARCHGOOGLE_H

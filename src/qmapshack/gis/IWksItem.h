@@ -38,9 +38,6 @@ class IWksItem : public QTreeWidgetItem {
     eTypeRte = 3,
     eTypeOvl = 4,
     eTypeMax = 5,
-    // --- End: do not change these numbers. It will break binary data files ----
-    // *** special items ***
-    eTypeGeoSearch,
     // *** projects ***
     eTypeQms,
     eTypeGpx,
@@ -53,15 +50,20 @@ class IWksItem : public QTreeWidgetItem {
     eTypeSml,
     eTypeLog,
     eTypeQlb,
+    // --- End: do not change these numbers. It will break binary data files ----
     // *** devices ***
     eTypeGarmin,
     eTypeCompe,
     eTypeGarminMtp,
     eTypeVirtual,
-    eTypeGenericMtp
+    eTypeGenericMtp,
+    // *** special items ***
+    eTypeGeoSearch,
+    eTypeGeoSearchError,
+
   };
 
-  enum class eBaseType { Project, Device, Item, GeoSearch, Unknown };
+  enum class eBaseType { Project, Device, Item, GeoSearch, GeoSearchError, Unknown };
 
   eBaseType getBaseType() const;
   virtual const QString& getName() const { return name; }

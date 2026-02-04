@@ -410,7 +410,7 @@ class IGisProject : public IWksItem {
 
   static const QString& getUserFocus() { return keyUserFocus; }
 
-  CProjectFilterItem* filterProject(bool filter);
+  void filterProject(bool filter);
   CProjectFilterItem* getProjectFilterItem() { return projectFilter; }
 
  protected:
@@ -487,7 +487,7 @@ class IGisProject : public IWksItem {
   CSearch projectSearch = CSearch("");
   CSearch workspaceSearch = CSearch("");
 
-  CProjectFilterItem* projectFilter = nullptr;
+  QPointer<CProjectFilterItem> projectFilter;
 };
 Q_DECLARE_METATYPE(IGisProject*)
 

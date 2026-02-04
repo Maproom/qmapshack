@@ -30,6 +30,7 @@ class CSearchLineEdit : public QLineEdit {
  public:
   CSearchLineEdit(QWidget* parent);
   CSearchLineEdit(QWidget* parent, IGisProject* project, CSearch* search = nullptr);
+  ~CSearchLineEdit() = default;
 
  signals:
   void sigWorkspaceSearchChanged(CSearch newSearch);
@@ -45,6 +46,7 @@ class CSearchLineEdit : public QLineEdit {
   void slotClearFilter();
 
  private:
+  static inline QString trRichText(const char* msg) { return "<div>" + tr(msg) + "</div>"; }
   QAction* actionClearFilter;
   QAction* actionHelp;
   QAction* actionSetupFilter;

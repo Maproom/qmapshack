@@ -52,7 +52,8 @@ class CWksItemDelegate : public QStyledItemDelegate {
   static std::tuple<QFont, QFont, QRect, QRect, QRect, QRect, QRect, QRect, QRect> getRectanglesProject(
       const QStyleOptionViewItem& opt);
   static std::tuple<QFont, QFont, QRect, QRect, QRect, QRect> getRectanglesDevice(const QStyleOptionViewItem& opt);
-  static std::tuple<QFont, QRect, QRect, QRect, QRect, QRect> getRectanglesGeoSearch(const QStyleOptionViewItem& opt);
+  static std::tuple<QFont, QFont, QRect, QRect, QRect, QRect, QRect, QRect> getRectanglesGeoSearch(
+      const QStyleOptionViewItem& opt);
   static std::tuple<QFont, QRect, QRect> getRectanglesGeoSearchError(const QStyleOptionViewItem& opt);
 
   static std::tuple<QFont, QFont, QRect, QRect, QRect, QRect> getRectanglesItem(const QStyleOptionViewItem& opt);

@@ -63,9 +63,9 @@ CSearchLineEdit::CSearchLineEdit(QWidget* parent) : QLineEdit(parent) {
   connect(this, &CSearchLineEdit::textChanged, this, [this] { searchCreationTimer->start(1000); });
 
   setPlaceholderText(tr("start typing..."));
-  setToolTip(
-      tr("Filter: Start to type and the list will be reduced to matching items. An example would be \"date between "
-         "2010 and 2012\""));
+  setToolTip(trRichText(
+      "Filter: Start to type and the list will be reduced to matching items. An example would be \"date between "
+      "2010 and 2012\""));
 }
 
 CSearchLineEdit::CSearchLineEdit(QWidget* parent, IGisProject* project, CSearch* search) : CSearchLineEdit(parent) {
@@ -153,9 +153,11 @@ void CSearchLineEdit::slotCreateSearch(const QString& str) {
   if (currentSearch.getSyntaxError()) {
     addAction(actionError, QLineEdit::TrailingPosition);
     if (currentSearch.getSearchMode() == CSearch::eSearchModeName) {
-      actionError->setToolTip(tr("Error parsing search.") + " " + tr("Continuing with search for match in names"));
+      actionError->setToolTip(trRichText("Error parsing search.") + " " +
+                              trRichText("Continuing with search for match in names"));
     } else {
-      actionError->setToolTip(tr("Error parsing search.") + " " + tr("Continuing with search for match in full text"));
+      actionError->setToolTip(trRichText("Error parsing search.") + " " +
+                              trRichText("Continuing with search for match in full text"));
     }
   } else {
     removeAction(actionError);
@@ -163,7 +165,8 @@ void CSearchLineEdit::slotCreateSearch(const QString& str) {
 
   if (currentSearch.isAutodetectedProperty()) {
     addAction(actionAutoProperty, QLineEdit::TrailingPosition);
-    actionAutoProperty->setToolTip(tr("Automatically set the property, please make sure the results are correct."));
+    actionAutoProperty->setToolTip(
+        trRichText("Automatically set the property, please make sure the results are correct."));
   } else {
     removeAction(actionAutoProperty);
   }

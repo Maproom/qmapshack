@@ -25,7 +25,7 @@
 class IGisProject;
 class CSearch;
 
-class CProjectFilterItem : public QTreeWidgetItem {
+class CProjectFilterItem : public QObject, public QTreeWidgetItem {
  public:
   CProjectFilterItem(IGisProject* parent);
   virtual ~CProjectFilterItem();

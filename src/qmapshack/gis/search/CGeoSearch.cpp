@@ -52,6 +52,20 @@ QPixmap CGeoSearch::getWptIcon() const {
   return CWptIconManager::self().getWptIconByName(searchConfig->symbolName, focus);
 }
 
+QString CGeoSearch::getServiceName() const {
+  switch (searchConfig->currentService) {
+    case CGeoSearchConfig::service_e::eServiceGeonamesSearch:
+      return tr("Geonames Places");
+    case CGeoSearchConfig::service_e::eServiceGeonamesAddress:
+      return tr("Geonames Address");
+    case CGeoSearchConfig::service_e::eServiceNominatim:
+      return tr("OSM Nominatim");
+    case CGeoSearchConfig::service_e::eServiceGoogle:
+      return tr("Google");
+  }
+  return "";
+}
+
 void CGeoSearch::setIcon() {
   if (searchConfig->accumulativeResults) {
     QPixmap displayIcon = QPixmap(48, 48);
@@ -105,7 +119,7 @@ void CGeoSearch::selectService(const QRect& rect) {
   menu->addSeparator();
 
   QAction* actSetup = menu->addAction(QIcon("://icons/32x32/Apply.png"), tr("Configure Services"));
-  actSetup->setToolTip(tr("configure providers of geocoding search services"));
+  actSetup->setToolTip(trRichText("configure providers of geocoding search services"));
   connect(actSetup, &QAction::triggered, this, &CGeoSearch::slotSetupGeoSearch);
 
   menu->move(tree->mapToGlobal(rect.topRight()));
@@ -136,12 +150,17 @@ void CGeoSearch::slotSetupGeoSearch() {
 }
 
 void CGeoSearch::startSearch(const QString& address) {
+  if (lastAddress == address && lastService == searchConfig->currentService) {
+    return;
+  }
+
   QMS_DELETE(itemStatus);
 
   if (!searchConfig->accumulativeResults) {
     qDeleteAll(takeChildren());
   }
 
+  lastService = searchConfig->currentService;
   lastAddress = address;
   QString addr = address;
 

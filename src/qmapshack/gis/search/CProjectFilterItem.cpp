@@ -20,22 +20,21 @@
 #include <gis/CGisListWks.h>
 #include <gis/search/CSearchLineEdit.h>
 
-CProjectFilterItem::CProjectFilterItem(IGisProject* parent) : QTreeWidgetItem((QTreeWidgetItem*)parent) {
-  this->parent = parent;
-}
+CProjectFilterItem::CProjectFilterItem(IGisProject* parent) : QTreeWidgetItem(parent) { this->parent = parent; }
 
 CProjectFilterItem::~CProjectFilterItem() {}
 
 void CProjectFilterItem::showLineEdit(CSearch* search) {
   if (treeWidget() != nullptr) {
-    /// @todo CWksItemDelegate:
     // new CSearchLineEdit, since destructor is called when replacing ItemWidget
     // using QPointer and checking for isNull() is not enough, since it happens after this point
-    // if (!lineEdit.isNull()) {
-    //   lineEdit->deleteLater();
-    // }
-    // lineEdit = new CSearchLineEdit(treeWidget(), parent, search);
 
-    // treeWidget()->setItemWidget(this, CGisListWks::eColumnName, lineEdit);
+    if (!lineEdit.isNull()) {
+      disconnect(lineEdit, &QLineEdit::destroyed, this, &CProjectFilterItem::deleteLater);
+      lineEdit->deleteLater();
+    }
+    lineEdit = new CSearchLineEdit(treeWidget(), parent, search);
+    connect(lineEdit, &QLineEdit::destroyed, this, &CProjectFilterItem::deleteLater);
+    treeWidget()->setItemWidget(this, 0, lineEdit);
   }
 }

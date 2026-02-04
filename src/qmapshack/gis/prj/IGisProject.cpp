@@ -1012,7 +1012,7 @@ void IGisProject::gainUserFocus(bool yes) {
   IWksItem::updateItem();
 }
 
-CProjectFilterItem* IGisProject::filterProject(bool filter) {
+void IGisProject::filterProject(bool filter) {
   if (filter) {
     if (projectFilter == nullptr) {
       projectFilter = new CProjectFilterItem(this);
@@ -1024,9 +1024,7 @@ CProjectFilterItem* IGisProject::filterProject(bool filter) {
   } else {
     removeChild(projectFilter);
     delete projectFilter;
-    projectFilter = nullptr;
     projectSearch = CSearch("");
   }
   sortItems();
-  return projectFilter;
 }

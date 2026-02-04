@@ -46,16 +46,18 @@ class CGeoSearch : public QObject, public IGisProject {
   void selectService(const QRect& rect);
   void changeSymbol();
   void startSearch(const QString& address);
+  QString getServiceName() const;
 
  private slots:
   void slotServiceSelected(CGeoSearchConfig::service_e service, bool checked);
-  void slotSetupGeoSearch();  
+  void slotSetupGeoSearch();
   void slotRequestFinished(QNetworkReply* reply);
   void slotConfigChanged();
   void slotAccuResults(bool yes);
   void slotResetResults();
 
  private:
+  static inline QString trRichText(const char* msg) { return "<div>" + tr(msg) + "</div>"; }
   QAction* addService(CGeoSearchConfig::service_e service, const QString& name, QMenu* menu);
   void requestNominatim(QString& addr) const;
   void requestGeonamesSearch(QString& addr) const;
@@ -76,6 +78,7 @@ class CGeoSearch : public QObject, public IGisProject {
   QTreeWidgetItem* itemStatus = nullptr;
   bool inputEnabled = true;
   QString lastAddress;
+  CGeoSearchConfig::service_e lastService = CGeoSearchConfig::service_e::eServiceNone;
 };
 
 #endif  // CSEARCHGOOGLE_H

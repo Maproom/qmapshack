@@ -33,6 +33,8 @@ class CDeviceGarminArchive : public QObject, public IDevice {
   CDeviceGarminArchive(const QString& path, CDeviceGarmin* parent);
   virtual ~CDeviceGarminArchive() = default;
 
+  QString getInfo(quint32) const override { return ""; }
+
  protected:
   void insertCopyOfProject(IGisProject* project) override {}
 

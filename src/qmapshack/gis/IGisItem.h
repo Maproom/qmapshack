@@ -237,25 +237,6 @@ class IGisItem : public IWksItem {
    */
   virtual QString getNameEx() const;
 
-  enum features_e {
-    eFeatureNone = 0,
-    eFeatureShowName = 0x00000001,
-    eFeatureShowFullText = 0x00000002,
-    eFeatureShowActivity = 0x00000004,
-    eFeatureShowDateTime = 0x00000008,
-    eFeatureShowLinks = 0x00000010
-  };
-
-  /**
-     @brief Get a short string with the items properties to be displayed in tool tips or similar
-
-     @param showName          set true if the first line should be the item's name
-     @param features          a combination of features_e types
-
-     @return A string object.
-   */
-  virtual QString getInfo(quint32 features) const = 0;
-
   virtual const QString& getComment() const = 0;
   virtual const QString& getDescription() const = 0;
   virtual const QList<link_t>& getLinks() const = 0;

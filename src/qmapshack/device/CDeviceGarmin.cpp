@@ -31,7 +31,7 @@
 
 CDeviceGarmin::CDeviceGarmin(const QString& path, const QString& key, const QString& model,
                              const QString& garminDeviceXml, QTreeWidget* parent)
-    : IDevice(path, eTypeGarmin, key, parent), cntImages(0) {
+    : IDevice(path, eTypeGarmin, key, parent), model(model), cntImages(0) {
   name = "Garmin";
 
   QFile file(QDir(path).absoluteFilePath(garminDeviceXml));
@@ -59,7 +59,6 @@ CDeviceGarmin::CDeviceGarmin(const QString& path, const QString& key, const QStr
   partno = xmlModel.namedItem("PartNumber").toElement().text().trimmed();
 
   name = QString("%1 (%2)").arg(description, model);
-  toolTipName = QString("%1 (%2, %3)").arg(description, partno, model);
 
   const QDomNode& xmlMassStorageMode = xmlDevice.namedItem("MassStorageMode");
   const QDomNodeList& xmlDataTypes = xmlMassStorageMode.toElement().elementsByTagName("DataType");
@@ -134,6 +133,8 @@ CDeviceGarmin::CDeviceGarmin(const QString& path, const QString& key, const QStr
     createProjectsFromFiles(pathTcx, "tcx");
   }
 }
+
+QString CDeviceGarmin::getInfo(quint32) const { return QString("%1 (%2, %3)").arg(description, partno, model); }
 
 void CDeviceGarmin::createProjectsFromFiles(QString subdirecoty, QString fileEnding) {
   QDir dirLoop(dir.absoluteFilePath(subdirecoty));

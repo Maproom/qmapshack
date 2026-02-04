@@ -40,6 +40,8 @@ CDeviceGenericMtp::CDeviceGenericMtp(const QDBusObjectPath& objectPathStorage, c
   setup();
 }
 
+QString CDeviceGenericMtp::getInfo(quint32) const { return ""; }
+
 void CDeviceGenericMtp::setup() {
   if (!device->foundValidStoragePath()) {
     return;
@@ -101,7 +103,7 @@ void CDeviceGenericMtp::insertCopyOfProject(IGisProject* project) {
     }
 
     QTemporaryFile file;
-    openFileCheckSuccess(QIODevice::ReadWrite, file); // saveAs will close the file
+    openFileCheckSuccess(QIODevice::ReadWrite, file);  // saveAs will close the file
     if (!CGpxProject::saveAs(file, filename, *gpx, false)) {
       delete gpx;
       return;

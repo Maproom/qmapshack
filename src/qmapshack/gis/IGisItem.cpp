@@ -292,7 +292,6 @@ QString IGisItem::getNameEx() const {
 
 void IGisItem::updateDecoration(quint32 enable, quint32 disable) {
   // update text and icon
-  setToolTipName(getInfo(IGisItem::eFeatureShowName));
   setSymbol();
 
   // update project if necessary
@@ -308,22 +307,6 @@ void IGisItem::updateDecoration(quint32 enable, quint32 disable) {
 
   // set marks in column 1
   IWksItem::updateDecoration(enable, disable);
-
-  QString tt;
-  if (getFlagsDecoration() & eMarkNotPart) {
-    tt += tt.isEmpty() ? "" : "\n";
-    tt += tr("The item is not part of the project in the database.");
-    tt += tr("\nIt is either a new item or it has been deleted in the database by someone else.");
-  }
-  if (getFlagsDecoration() & eMarkNotInDB) {
-    tt += tt.isEmpty() ? "" : "\n";
-    tt += tr("The item is not in the database.");
-  }
-  if (getFlagsDecoration() & eMarkChanged) {
-    tt += tt.isEmpty() ? "" : "\n";
-    tt += tr("The item might need to be saved");
-  }
-  toolTipDecoration = tt;
 }
 
 void IGisItem::changed(const QString& what, const QString& icon) {

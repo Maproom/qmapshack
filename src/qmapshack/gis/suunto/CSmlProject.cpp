@@ -72,7 +72,6 @@ void CSmlProject::loadSml(const QString& filename, CSmlProject* project) {
   if (!file.exists() || QFileInfo(filename).suffix().toLower() != "sml") {
     project->filename.clear();
     project->setupName(filename);
-    project->setToolTipName(project->getInfo());
     project->valid = true;
     return;
   }
@@ -233,7 +232,6 @@ void CSmlProject::loadSml(const QString& filename, CSmlProject* project) {
 
         project->sortItems();
         project->setupName(QFileInfo(filename).completeBaseName().replace("_", " "));
-        project->setToolTipName(project->getInfo());
         project->valid = true;
       }
     }

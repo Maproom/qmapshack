@@ -57,7 +57,6 @@ void CFit2Project::loadFitFromFile(const QString& filename, bool showErrorMsg) {
   try {
     decodeFile(filename);
     markAsSaved();
-    toolTipName = getInfo();
     valid = true;
   } catch (const std::exception& e) {
     if (showErrorMsg) {
@@ -78,7 +77,6 @@ void CFit2Project::decodeFile(const QString& filename) {
   if (!QFile::exists(filename)) {
     IGisProject::filename.clear();
     setupName(filename);
-    toolTipName = getInfo();
     valid = true;
     return;
   }

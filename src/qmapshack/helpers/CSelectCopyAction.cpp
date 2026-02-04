@@ -46,9 +46,9 @@ CSelectCopyAction::CSelectCopyAction(const IGisProject* src, const IGisProject* 
   setupUi(this);
 
   labelIcon1->setPixmap(src->getIcon());
-  labelInfo1->setText(src->getInfo());
+  labelInfo1->setText(src->getInfo(IWksItem::eFeatureShowFullText));
   labelIcon2->setPixmap(tar->getIcon());
-  labelInfo2->setText(tar->getInfo());
+  labelInfo2->setText(tar->getInfo(IWksItem::eFeatureShowFullText));
 
   pushClone->setEnabled(false);
 

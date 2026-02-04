@@ -38,6 +38,8 @@ class CDeviceGarminMtp : public IDevice, private QObject {
 
   bool removeFromDevice(const QString& filename);
 
+  QString getInfo(quint32) const override;
+
  protected:
   void insertCopyOfProject(IGisProject* project) override;
 
@@ -55,6 +57,7 @@ class CDeviceGarminMtp : public IDevice, private QObject {
   QString id;
   QString partno;
   QString description = "Garmin";
+  QString softwareVersion;
   QString pathGpx;
   QString pathPictures;
   QString pathSpoilers;

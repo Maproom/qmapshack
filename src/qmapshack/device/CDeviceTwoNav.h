@@ -27,11 +27,13 @@ class CDeviceTwoNav : public IDevice {
   virtual ~CDeviceTwoNav();
 
   void insertCopyOfProject(IGisProject* project) override;
+  QString getInfo(quint32) const override;
 
  private:
   void readReginfo(const QString& filename);
 
   QString pathData;
+  QString model;
 };
 
 #endif  // CDEVICETWONAV_H

@@ -40,6 +40,8 @@ class CDeviceGenericMtp : public IDevice, private QObject {
 
   static constexpr const char* kQmsMtpDeviceJson = "QmsMtpDevice.json";
 
+  QString getInfo(quint32) const override;
+
  protected:
   void insertCopyOfProject(IGisProject* project) override;
 

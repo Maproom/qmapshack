@@ -55,7 +55,6 @@ CTcxProject::CTcxProject(const QString& filename, const IGisProject* project, ID
 
   blockUpdateItems(false);
   setupName(QFileInfo(filename).completeBaseName().replace("_", " "));
-  toolTipName = getInfo();
   valid = true;
 }
 
@@ -84,7 +83,6 @@ void CTcxProject::loadTcx(const QString& filename, CTcxProject* project) {
   if (!file.exists() || QFileInfo(filename).suffix().toLower() != "tcx") {
     project->filename.clear();
     project->setupName(filename);
-    project->setToolTipName(project->getInfo());
     project->valid = true;
     return;
   }
@@ -133,7 +131,6 @@ void CTcxProject::loadTcx(const QString& filename, CTcxProject* project) {
 
   project->sortItems();
   project->setupName(QFileInfo(filename).completeBaseName().replace("_", " "));
-  project->setToolTipName(project->getInfo());
   project->valid = true;
 }
 

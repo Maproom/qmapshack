@@ -65,10 +65,17 @@ class IWksItem : public QTreeWidgetItem {
 
   enum class eBaseType { Project, Device, Item, GeoSearch, GeoSearchError, Unknown };
 
+  enum features_e {
+    eFeatureNone = 0,
+    eFeatureShowName = 0x00000001,
+    eFeatureShowFullText = 0x00000002,
+    eFeatureShowActivity = 0x00000004,
+    eFeatureShowDateTime = 0x00000008,
+    eFeatureShowLinks = 0x00000010
+  };
+
   eBaseType getBaseType() const;
   virtual const QString& getName() const { return name; }
-  virtual const QString& getToolTipName() const { return toolTipName; }
-  virtual const QString& getToolTipDecoration() const { return toolTipDecoration; }
   virtual const QPixmap& getIcon() const { return icon; }
   virtual const QSet<QString>& getTags() const { return keywords; }
   virtual const qreal getRating() const { return rating; }
@@ -78,6 +85,15 @@ class IWksItem : public QTreeWidgetItem {
   virtual const qint32 isOnDevice() const { return false; }
   virtual const bool canSave() const { return false; }
   virtual bool hasUserFocus() const = 0;
+  /**
+     @brief Get a short string with the items properties to be displayed in tool tips or similar
+
+    @param showName          set true if the first line should be the item's name
+    @param features          a combination of features_e types
+
+    @return A string object.
+  */
+  virtual QString getInfo(uint32_t features) const = 0;
 
   /**
      @brief Check if there are any pending unsaved changes
@@ -86,7 +102,6 @@ class IWksItem : public QTreeWidgetItem {
   virtual const bool isChanged() const { return (flagsDecoration & eMarkChanged) != 0; }
   quint32 getFlagsDecoration() const { return flagsDecoration; }
 
-  virtual void setToolTipName(const QString& tip) { toolTipName = tip; }
   virtual void setVisibility(bool visible) {
     this->visible = visible;
     updateItem();
@@ -107,10 +122,8 @@ class IWksItem : public QTreeWidgetItem {
   virtual void updateDecoration(quint32 enable, quint32 disable);
 
   QString name;
-  QString toolTipName;
+  // QString toolTipName;
   QPixmap icon;
-
-  QString toolTipDecoration;
 
   /// labeling the GisItems
   qreal rating = 0;

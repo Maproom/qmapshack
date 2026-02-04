@@ -30,6 +30,8 @@ class CDeviceGarminArchiveMtp : public QObject, public IDevice {
   CDeviceGarminArchiveMtp(const QString& path, IDeviceAccess* device, CDeviceGarminMtp* parent);
   virtual ~CDeviceGarminArchiveMtp() = default;
 
+  QString getInfo(quint32) const override { return ""; }
+
  protected:
   void insertCopyOfProject(IGisProject* project) override {}
 
@@ -41,5 +43,4 @@ class CDeviceGarminArchiveMtp : public QObject, public IDevice {
   IDeviceAccess* device;
 };
 
-#endif //CDEVICEGARMINARCHIVEMTP_H
-
+#endif  // CDEVICEGARMINARCHIVEMTP_H

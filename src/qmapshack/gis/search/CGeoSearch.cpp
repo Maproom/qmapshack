@@ -667,12 +667,12 @@ class CGeoSearchError : public IWksItem {
  public:
   CGeoSearchError(const QString& status, CGeoSearch* parent) : IWksItem(parent, eTypeGeoSearchError) {
     name = status;
-    toolTipName = status;
     icon = QPixmap("://icons/32x32/Error.png");
   }
   virtual ~CGeoSearchError() = default;
   bool hasUserFocus() const override { return false; }
   void gainUserFocus(bool yes) override {}
+  QString getInfo(quint32) const override { return name; }
 };
 
 void CGeoSearch::createErrorItem(const QString& status) { itemStatus = new CGeoSearchError(status, this); }

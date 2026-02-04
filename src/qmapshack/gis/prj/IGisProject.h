@@ -228,7 +228,8 @@ class IGisProject : public IWksItem {
      @brief Get a short metadata summary
      @return Informational string.
    */
-  virtual QString getInfo() const;
+  QString getInfo(quint32) const override;
+
   /**
      @brief Get a temporary pointer to the item with matching key
      @param key

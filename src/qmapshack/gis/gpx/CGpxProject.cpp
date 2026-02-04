@@ -73,7 +73,6 @@ CGpxProject::CGpxProject(const QString& filename, const IGisProject* project, ID
 
   setupName(QFileInfo(filename).completeBaseName().replace("_", " "));
   blockUpdateItems(false);
-  toolTipName = getInfo();
   valid = true;
 }
 
@@ -97,7 +96,6 @@ void CGpxProject::loadGpx(const QString& filename, CGpxProject* project) {
   if (!file.exists() || QFileInfo(filename).suffix().toLower() != "gpx") {
     project->filename.clear();
     project->setupName(filename);
-    project->setToolTipName(project->getInfo());
     project->valid = true;
     return;
   }
@@ -216,7 +214,6 @@ void CGpxProject::loadGpx(QFile& file, const QString& filename, CGpxProject* pro
 
   project->sortItems();
   project->setupName(QFileInfo(filename).completeBaseName().replace("_", " "));
-  project->setToolTipName(project->getInfo());
   project->valid = true;
 }
 

@@ -127,12 +127,12 @@ CGisListWks::CGisListWks(QWidget* parent) : QTreeWidget(parent) {
       addAction(QIcon("://icons/32x32/Filter.png"), tr("Filter Project"), this, &CGisListWks::slotAddProjectFilter);
   actionFilterProject->setCheckable(true);
   actionAutoSave =
-      addAction(QIcon("://icons/32x32/AutoSave.png"), tr("Autom. Save"), this, &CGisListWks::slotAutoSaveProject);
+      addAction(QIcon("://icons/32x32/AutoSaveNoA.png"), tr("Autom. Save"), this, &CGisListWks::slotAutoSaveProject);
   actionAutoSave->setCheckable(true);
   actionUserFocusPrj =
       addAction(QIcon("://icons/32x32/Focus.png"), tr("Active Project"), this, &CGisListWks::slotUserFocusPrj);
   actionUserFocusPrj->setCheckable(true);
-  actionAutoSyncToDev = addAction(QIcon("://icons/32x32/Device.png"), tr("Autom. Sync. w. Device"), this,
+  actionAutoSyncToDev = addAction(QIcon("://icons/32x32/DeviceNoSync.png"), tr("Autom. Sync. w. Device"), this,
                                   &CGisListWks::slotAutoSyncProject);
   actionAutoSyncToDev->setCheckable(true);
 
@@ -910,7 +910,6 @@ void CGisListWks::slotLoadWorkspace() {
         // but this results in a visible `the checkbox is being unchecked`, especially in case the project
         // is large and takes some time to load.
         // When done directly after construction there is no `blinking` of the check mark
-        project->setToolTipName(project->getInfo());
         if (changed) {
           project->setChanged();
         }
@@ -1192,6 +1191,9 @@ void CGisListWks::slotContextMenu(const QPoint& point) {
           bool autoSyncToDev = project->isAutoSyncToDev();
           actionAutoSyncToDev->setEnabled(hasDeviceSupport());
           actionAutoSyncToDev->setChecked(autoSyncToDev);
+          actionAutoSyncToDev->setIcon(autoSyncToDev ? QIcon("://icons/32x32/DeviceSync.png")
+                                                     : QIcon("://icons/32x32/DeviceNoSync.png"));
+
           actionSyncWksDev->setEnabled(IDevice::count() && !autoSyncToDev);
           actionSyncDB->setEnabled(project->getType() == IGisProject::eTypeDb);
 
@@ -1215,15 +1217,18 @@ void CGisListWks::slotContextMenu(const QPoint& point) {
           actionFilterProject->setEnabled(true);
           actionFilterProject->setChecked(project->getProjectFilterItem() != nullptr);
 
-          bool hasUserFocus = project->hasUserFocus();
-
+          bool isAutoSave = project->isAutoSave();
           actionAutoSave->setVisible(true);
           actionAutoSave->setEnabled(project->canSave());
           actionAutoSave->setChecked(project->isAutoSave());
+          actionAutoSave->setIcon(isAutoSave ? QIcon("://icons/32x32/AutoSaveA.png")
+                                             : QIcon("://icons/32x32/AutoSaveNoA.png"));
+
+          bool hasUserFocus = project->hasUserFocus();
           actionUserFocusPrj->setVisible(true);
           actionUserFocusPrj->setChecked(hasUserFocus);
-          const QIcon& icon = hasUserFocus ? QIcon("://icons/32x32/Focus.png") : QIcon("://icons/32x32/UnFocus.png");
-          actionUserFocusPrj->setIcon(icon);
+          actionUserFocusPrj->setIcon(hasUserFocus ? QIcon("://icons/32x32/Focus.png")
+                                                   : QIcon("://icons/32x32/UnFocus.png"));
           actionCloseProj->setEnabled(!autoSyncToDev);
           showMenuProjectWks(p);
         }

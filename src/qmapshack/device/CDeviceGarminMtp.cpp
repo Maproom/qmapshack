@@ -39,6 +39,11 @@ CDeviceGarminMtp::CDeviceGarminMtp(const QDBusObjectPath& objectPathStorage, con
   setup();
 }
 
+QString CDeviceGarminMtp::getInfo(quint32) const {
+  // update the tool tip with information from the device xml
+  return QString("%1 (%2, V%3)").arg(description, partno, softwareVersion);
+}
+
 void CDeviceGarminMtp::setup() {
   if (!device->foundValidStoragePath()) {
     return;
@@ -77,9 +82,7 @@ void CDeviceGarminMtp::setup() {
     description = xmlModel.namedItem("Description").toElement().text().trimmed();
     partno = xmlModel.namedItem("PartNumber").toElement().text().trimmed();
 
-    // update the tool tip with information from the device xml
-    toolTipName = QString("%1 (%2, V%3)")
-                      .arg(description, partno, xmlModel.namedItem("SoftwareVersion").toElement().text().trimmed());
+    softwareVersion = xmlModel.namedItem("SoftwareVersion").toElement().text().trimmed();
 
     const QDomNode& xmlMassStorageMode = xmlDevice.namedItem("MassStorageMode");
     const QDomNodeList& xmlDataTypes = xmlMassStorageMode.toElement().elementsByTagName("DataType");

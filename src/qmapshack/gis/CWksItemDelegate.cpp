@@ -415,7 +415,8 @@ void CWksItemDelegate::paintDevice(QPainter* p, const QStyleOptionViewItem& opt,
   // draw status
   p->setPen(colorName);
   p->setFont(fontStatus);
-  p->drawText(rectStatus.adjusted(0, -1, 0, 1), Qt::AlignLeft | Qt::AlignTop, item->getToolTipName());
+  p->drawText(rectStatus.adjusted(0, -1, 0, 1), Qt::AlignLeft | Qt::AlignTop,
+              item->getInfo(IWksItem::eFeatureShowName));
 
   // draw icon
   QIcon(item->getIcon()).paint(p, rectIcon, Qt::AlignCenter, isVisible ? QIcon::Normal : QIcon::Disabled);
@@ -646,19 +647,15 @@ bool CWksItemDelegate::helpEvent(QHelpEvent* event, QAbstractItemView* view, con
 
 bool CWksItemDelegate::helpEventProject(const QPoint& pos, const QPoint& posGlobal, QAbstractItemView* view,
                                         const QStyleOptionViewItem& opt, const IWksItem* item) {
-  bool ret = false;
   auto [fontName, fontStatus, rectIcon, rectName, rectStatus, rectVisible, rectSave, rectActiveProject,
         rectAutoSyncDev] = getRectanglesProject(opt);
-  if (rectName.contains(pos) || rectStatus.contains(pos)) {
-    QToolTip::showText(posGlobal, item->getToolTipName(), view);
-    ret = true;
-  } else if (rectVisible.contains(pos)) {
+  if (rectVisible.contains(pos)) {
     if (item->isVisible()) {
       QToolTip::showText(posGlobal, trRichText("Hide project on map."), view, {}, 3000);
     } else {
       QToolTip::showText(posGlobal, trRichText("Show project on map."), view, {}, 3000);
     }
-    ret = true;
+    return true;
   } else if (rectSave.contains(pos)) {
     if (item->isChanged() && !item->isAutoSave()) {
       QToolTip::showText(posGlobal, trRichText("Save project."), view, {}, 3000);
@@ -669,14 +666,14 @@ bool CWksItemDelegate::helpEventProject(const QPoint& pos, const QPoint& posGlob
         QToolTip::showText(posGlobal, trRichText("Enable auto save."), view, {}, 3000);
       }
     }
-    ret = true;
+    return true;
   } else if (rectAutoSyncDev.contains(pos)) {
     if (item->isAutoSyncToDev()) {
       QToolTip::showText(posGlobal, trRichText("Disable automatic synchonization with device."), view, {}, 3000);
     } else {
       QToolTip::showText(posGlobal, trRichText("Enable automatic synchonization with device."), view, {}, 3000);
     }
-    ret = true;
+    return true;
   } else if (rectActiveProject.contains(pos)) {
     if (item->hasUserFocus()) {
       QToolTip::showText(
@@ -689,8 +686,12 @@ bool CWksItemDelegate::helpEventProject(const QPoint& pos, const QPoint& posGlob
           trRichText("Make this project the active one. All new items will be attached to this project automatically."),
           view, {}, 5000);
     }
+    return true;
+  } else if (rectName.contains(pos) || rectStatus.contains(pos)) {
+    QToolTip::showText(posGlobal, item->getInfo(IWksItem::eFeatureShowName), view);
+    return true;
   }
-  return ret;
+  return false;
 }
 
 bool CWksItemDelegate::helpEventItem(const QPoint& pos, const QPoint& posGlobal, QAbstractItemView* view,
@@ -699,7 +700,7 @@ bool CWksItemDelegate::helpEventItem(const QPoint& pos, const QPoint& posGlobal,
   auto [fontName, fontStatus, rectIcon, rectName, rectStatus, rectChanged] = getRectanglesItem(opt);
 
   if (rectName.contains(pos)) {
-    QToolTip::showText(posGlobal, item->getToolTipName(), view);
+    QToolTip::showText(posGlobal, item->getInfo(IWksItem::eFeatureShowName), view);
     ret = true;
   } else if (rectChanged.contains(pos)) {
     if (item->isChanged()) {
@@ -723,7 +724,7 @@ bool CWksItemDelegate::helpEventGeoSearch(const QPoint& pos, const QPoint& posGl
 
 bool CWksItemDelegate::helpEventGeoSearchError(const QPoint& pos, const QPoint& posGlobal, QAbstractItemView* view,
                                                const QStyleOptionViewItem& opt, const IWksItem* item) {
-  QToolTip::showText(posGlobal, "<div>" + item->getToolTipName() + "</div>", view);
+  QToolTip::showText(posGlobal, "<div>" + item->getInfo(IWksItem::eFeatureShowName) + "</div>", view);
   return true;
 }
 

@@ -612,7 +612,6 @@ QDataStream& CGisItemTrk::operator<<(QDataStream& stream) {
   }
   setColor(str2color(trk.color));
   name = getName();
-  toolTipName = getInfo(IGisItem::eFeatureShowName);
 
   checkForInvalidPoints();
   return stream;
@@ -744,7 +743,6 @@ QDataStream& CGisItemRte::operator<<(QDataStream& stream) {
   setSymbol();
   deriveSecondaryData();
   name = getName();
-  toolTipName = getInfo(IGisItem::eFeatureShowName);
 
   return stream;
 }
@@ -827,7 +825,6 @@ QDataStream& CGisItemOvlArea::operator<<(QDataStream& stream) {
 
   setColor(str2color(area.color));
   name = getName();
-  toolTipName = getInfo(IGisItem::eFeatureShowName);
 
   return stream;
 }

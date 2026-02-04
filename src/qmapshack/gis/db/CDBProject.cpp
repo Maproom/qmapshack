@@ -79,7 +79,6 @@ CDBProject::CDBProject(const QString& dbName, quint64 id, CGisListWks* parent)
   }
 
   CDBProject::setupName(name);
-  toolTipName = getInfo();
   updateItems();
 
   valid = true;
@@ -581,7 +580,7 @@ bool CDBProject::save(CSelectSaveAction::result_e action1ForAll, action_e action
   // update folder entry in database
   query.prepare("UPDATE folders SET name=:name, comment=:comment, data=:data, sortmode=:sortmode WHERE id=:id");
   query.bindValue(":name", getName());
-  query.bindValue(":comment", getInfo());
+  query.bindValue(":comment", getInfo(IWksItem::eFeatureShowFullText));
   query.bindValue(":data", data);
   query.bindValue(":sortmode", getSortingFolder());
   query.bindValue(":id", getId());
@@ -629,7 +628,6 @@ void CDBProject::showItems(CEvtD2WShowItems* evt, action_e action2ForAll) {
 
   sortItems();
   postStatus(false);
-  toolTipName = getInfo();
 
   if (restoreDlgDetails) {
     edit();
@@ -648,7 +646,6 @@ void CDBProject::hideItems(CEvtD2WHideItems* evt) {
   }
 
   postStatus(false);
-  toolTipName = getInfo();
 }
 
 void CDBProject::update() {
@@ -690,7 +687,6 @@ void CDBProject::update() {
   }
 
   setupName(name);
-  toolTipName = getInfo();
 
   /*
       The further proceeding depends on the check state of the project. If the project

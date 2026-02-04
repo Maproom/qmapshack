@@ -432,7 +432,7 @@ QString IGisProject::getNameEx() const {
   }
 }
 
-QString IGisProject::getInfo() const {
+QString IGisProject::getInfo(quint32) const {
   QString str = metadata.name.isEmpty() ? name : metadata.name;
   str = "<div style='font-weight: bold;'>" + str + "</div>";
 

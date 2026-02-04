@@ -74,7 +74,7 @@ void CQmsDb::addFolder2FolderRelation(quint64 parent, quint64 child) {
   query.prepare("INSERT INTO folder2folder (parent, child) VALUES (:parent, :child)");
   query.bindValue(":parent", mapFolderIDs[parent]);
   query.bindValue(":child", mapFolderIDs[child]);
-  QUERY_EXEC(return );
+  QUERY_EXEC(return);
 }
 
 void CQmsDb::addFolder2ItemRelation(quint64 parent, quint64 child) {
@@ -82,7 +82,7 @@ void CQmsDb::addFolder2ItemRelation(quint64 parent, quint64 child) {
   query.prepare("INSERT INTO folder2item (parent, child) VALUES (:parent, :child)");
   query.bindValue(":parent", mapFolderIDs[parent]);
   query.bindValue(":child", mapItemIDs[child]);
-  QUERY_EXEC(return );
+  QUERY_EXEC(return);
 }
 
 void CQmsDb::addFolder(CQlgtFolder& folder) {
@@ -98,10 +98,10 @@ void CQmsDb::addFolder(CQlgtFolder& folder) {
     query.bindValue(":type", mapFolderTypes[folder.type]);
     query.bindValue(":name", folder.name);
     query.bindValue(":locked", folder.locked);
-    QUERY_EXEC(return );
+    QUERY_EXEC(return);
 
     query.prepare("SELECT last_insert_rowid() from folders");
-    QUERY_EXEC(return );
+    QUERY_EXEC(return);
     query.next();
     quint64 id = query.value(0).toULongLong();
     if (id == 0) {
@@ -161,13 +161,13 @@ void CQmsDb::addFolder(CQlgtFolder& folder) {
   query.bindValue(":type", mapFolderTypes[folder.type]);
   query.bindValue(":keyqms", project.getKey());
   query.bindValue(":name", project.getName());
-  query.bindValue(":comment", project.getInfo());
+  query.bindValue(":comment", project.getInfo(IWksItem::eFeatureShowFullText));
   query.bindValue(":locked", folder.locked);
   query.bindValue(":data", data);
-  QUERY_EXEC(return );
+  QUERY_EXEC(return);
 
   query.prepare("SELECT last_insert_rowid() from folders");
-  QUERY_EXEC(return );
+  QUERY_EXEC(return);
   query.next();
   quint64 id = query.value(0).toULongLong();
   if (id == 0) {

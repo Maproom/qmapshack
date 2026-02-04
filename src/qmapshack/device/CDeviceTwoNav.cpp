@@ -26,9 +26,8 @@
 #include "misc.h"
 
 CDeviceTwoNav::CDeviceTwoNav(const QString& path, const QString& key, const QString& model, QTreeWidget* parent)
-    : IDevice(path, eTypeCompe, key, parent) {
+    : IDevice(path, eTypeCompe, key, parent), model(model) {
   name = QString("TwoNav (%1)").arg(model);
-  toolTipName = QString("TwoNav (%1)").arg(model);
 
   if (QFile::exists(dir.absoluteFilePath("RegInfo.ini"))) {
     readReginfo(dir.absoluteFilePath("RegInfo.ini"));
@@ -95,6 +94,8 @@ CDeviceTwoNav::CDeviceTwoNav(const QString& path, const QString& key, const QStr
 }
 
 CDeviceTwoNav::~CDeviceTwoNav() {}
+
+QString CDeviceTwoNav::getInfo(quint32) const { return QString("TwoNav (%1)").arg(model); }
 
 void CDeviceTwoNav::readReginfo(const QString& filename) {
   QString product, unittype;

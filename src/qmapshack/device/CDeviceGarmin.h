@@ -35,6 +35,7 @@ class CDeviceGarmin : public IDevice {
   void saveImages(CGisItemWpt& wpt) override;
   void loadImages(CGisItemWpt& wpt) override;
   void aboutToRemoveProject(IGisProject* project) override;
+  QString getInfo(quint32) const override;
 
  private:
   void createProjectsFromFiles(QString subdirecoty, QString fileEnding);
@@ -46,6 +47,7 @@ class CDeviceGarmin : public IDevice {
   QString createFileName(IGisProject* project, const QString& path, const QString& suffix);
   QString simplifiedName(IGisProject* project);
 
+  QString model;
   QString id;
   QString partno;
   QString description;

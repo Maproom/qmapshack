@@ -67,7 +67,7 @@
 #include "setup/IAppSetup.h"
 
 #undef DB_VERSION
-#define DB_VERSION 4
+#define DB_VERSION 5
 
 class CGisListWksEditLock {
  public:
@@ -329,6 +329,9 @@ void CGisListWks::migrateDB(int version) {
   if (version < 4) {
     migrateDB3to4();
   }
+  if (version < 5) {
+    migrateDB4to5();
+  }
 
   // save the new version to the database
   QSqlQuery query(db);
@@ -373,6 +376,39 @@ void CGisListWks::migrateDB3to4() {
   if (query.exec("CREATE TABLE userfocus ( focus TEXT )")) {
     query.prepare("INSERT INTO userfocus (focus) VALUES(:focus)");
     query.bindValue(":focus", "");
+    QUERY_EXEC();
+  }
+}
+
+void CGisListWks::migrateDB4to5() {
+  // old enum types
+  // enum type_e {
+  //   eTypeGeoSearch,   --> 0
+  //   eTypeQms,
+  //   eTypeGpx,
+  //   eTypeDb,
+  //   eTypeLostFound,
+  //   eTypeTwoNav,
+  //   eTypeSlf,
+  //   eTypeFit,
+  //   eTypeTcx,
+  //   eTypeSml,
+  //   eTypeLog,
+  //   eTypeQlb         --> 11
+  // };
+
+  IWksItem::type_e newTypes[12] = {
+      IWksItem::eTypeGeoSearch, IWksItem::eTypeQms,    IWksItem::eTypeGpx, IWksItem::eTypeDb,
+      IWksItem::eTypeLostFound, IWksItem::eTypeTwoNav, IWksItem::eTypeSlf, IWksItem::eTypeFit,
+      IWksItem::eTypeTcx,       IWksItem::eTypeSml,    IWksItem::eTypeLog, IWksItem::eTypeQlb,
+  };
+
+  QSqlQuery query(db);
+  // do it backward as the lower type numbers are in both enumerations
+  for (int typeOld = 11; typeOld >= 0; typeOld--) {
+    query.prepare("UPDATE workspace SET type=:type_new WHERE type=:type_old;");
+    query.bindValue(":type_old", typeOld);
+    query.bindValue(":type_new", newTypes[typeOld]);
     QUERY_EXEC();
   }
 }

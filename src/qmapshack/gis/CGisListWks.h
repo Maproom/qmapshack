@@ -138,6 +138,7 @@ class CGisListWks : public QTreeWidget {
   void migrateDB1to2();
   void migrateDB2to3();
   void migrateDB3to4();
+  void migrateDB4to5();
   void setVisibilityOnMap(bool visible);
   QAction* addSortAction(QObject* parent, QActionGroup* actionGroup, const QString& icon, const QString& text,
                          IGisProject::sorting_folder_e mode);

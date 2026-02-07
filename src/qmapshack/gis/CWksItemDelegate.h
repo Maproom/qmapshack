@@ -49,40 +49,43 @@ class CWksItemDelegate : public QStyledItemDelegate {
  private:
   static inline QString trRichText(const char* msg) { return "<div>" + tr(msg) + "</div>"; }
   IWksItem* indexToItem(const QModelIndex& index) const;
-  static std::tuple<QFont, QFont, QRect, QRect, QRect, QRect, QRect, QRect, QRect> getRectanglesProject(
-      const QStyleOptionViewItem& opt);
-  static std::tuple<QFont, QFont, QRect, QRect, QRect, QRect> getRectanglesDevice(const QStyleOptionViewItem& opt);
-  static std::tuple<QFont, QFont, QRect, QRect, QRect, QRect, QRect, QRect> getRectanglesGeoSearch(
-      const QStyleOptionViewItem& opt);
-  static std::tuple<QFont, QRect, QRect> getRectanglesGeoSearchError(const QStyleOptionViewItem& opt);
 
-  static std::tuple<QFont, QFont, QRect, QRect, QRect, QRect> getRectanglesItem(const QStyleOptionViewItem& opt);
+  std::tuple<QFont, QFont, QRect, QRect, QRect, QRect, QRect, QRect, QRect> getRectanglesProject(
+      const QStyleOptionViewItem& opt, const IWksItem& item) const;
+  std::tuple<QFont, QFont, QRect, QRect, QRect, QRect> getRectanglesDevice(const QStyleOptionViewItem& opt,
+                                                                           const IWksItem& item) const;
+  std::tuple<QFont, QFont, QRect, QRect, QRect, QRect, QRect, QRect> getRectanglesGeoSearch(
+      const QStyleOptionViewItem& opt) const;
+  std::tuple<QFont, QRect, QRect> getRectanglesGeoSearchError(const QStyleOptionViewItem& opt) const;
+  std::tuple<QFont, QFont, QRect, QRect, QRect, QRect> getRectanglesItem(const QStyleOptionViewItem& opt,
+                                                                         const IWksItem& item) const;
+
   static void drawToolButton(QPainter* p, const QStyleOptionViewItem& opt, const QRect& rect, const QIcon& icon,
                              bool enabled, bool pressed);
 
-  void paintProject(QPainter* p, const QStyleOptionViewItem& opt, const QModelIndex& index, const IWksItem* item) const;
-  void paintItem(QPainter* p, const QStyleOptionViewItem& opt, const QModelIndex& index, const IWksItem* item) const;
-  void paintDevice(QPainter* p, const QStyleOptionViewItem& opt, const QModelIndex& index, const IWksItem* item) const;
+  void paintProject(QPainter* p, const QStyleOptionViewItem& opt, const QModelIndex& index, const IWksItem& item) const;
+  void paintItem(QPainter* p, const QStyleOptionViewItem& opt, const QModelIndex& index, const IWksItem& item) const;
+  void paintDevice(QPainter* p, const QStyleOptionViewItem& opt, const QModelIndex& index, const IWksItem& item) const;
   void paintGeoSearch(QPainter* p, const QStyleOptionViewItem& opt, const QModelIndex& index,
-                      const IWksItem* item) const;
+                      const IWksItem& item) const;
   void paintGeoSearchError(QPainter* p, const QStyleOptionViewItem& opt, const QModelIndex& index,
-                           const IWksItem* item) const;
+                           const IWksItem& item) const;
 
-  bool mousePressProject(QMouseEvent* me, const QStyleOptionViewItem& opt, const QModelIndex& index, IWksItem* item);
-  bool mousePressDevice(QMouseEvent* me, const QStyleOptionViewItem& opt, const QModelIndex& index, IWksItem* item);
-  bool mousePressGeoSearch(QMouseEvent* me, const QStyleOptionViewItem& opt, const QModelIndex& index, IWksItem* item);
+  bool mousePressProject(QMouseEvent* me, const QStyleOptionViewItem& opt, const QModelIndex& index, IWksItem& item);
+  bool mousePressDevice(QMouseEvent* me, const QStyleOptionViewItem& opt, const QModelIndex& index, IWksItem& item);
+  bool mousePressGeoSearch(QMouseEvent* me, const QStyleOptionViewItem& opt, const QModelIndex& index, IWksItem& item);
 
   bool helpEventProject(const QPoint& pos, const QPoint& posGlobal, QAbstractItemView* view,
-                        const QStyleOptionViewItem& opt, const IWksItem* item);
+                        const QStyleOptionViewItem& opt, const IWksItem& item);
 
   bool helpEventItem(const QPoint& pos, const QPoint& posGlobal, QAbstractItemView* view,
-                     const QStyleOptionViewItem& opt, const IWksItem* item);
+                     const QStyleOptionViewItem& opt, const IWksItem& item);
 
   bool helpEventGeoSearch(const QPoint& pos, const QPoint& posGlobal, QAbstractItemView* view,
-                          const QStyleOptionViewItem& opt, const IWksItem* item);
+                          const QStyleOptionViewItem& opt, const IWksItem& item);
 
   bool helpEventGeoSearchError(const QPoint& pos, const QPoint& posGlobal, QAbstractItemView* view,
-                               const QStyleOptionViewItem& opt, const IWksItem* item);
+                               const QStyleOptionViewItem& opt, const IWksItem& item);
 
   QPointer<CGisListWks> treeWidget;
 };

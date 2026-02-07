@@ -39,69 +39,75 @@ IWksItem* CWksItemDelegate::indexToItem(const QModelIndex& index) const {
 }
 
 std::tuple<QFont, QFont, QRect, QRect, QRect, QRect, QRect, QRect, QRect> CWksItemDelegate::getRectanglesProject(
-    const QStyleOptionViewItem& opt) {
-  QFont fontName = opt.font;
-  QFontMetrics fmName(fontName);
+    const QStyleOptionViewItem& opt, const IWksItem& item) const {
+  const QFont fontName = opt.font;
+  const QFontMetrics fmName(fontName);
 
   QFont fontStatus = opt.font;
   fontStatus.setPointSize(fontStatus.pointSize() - kFontSizeDiffProject);
-  QFontMetrics fmStatus(fontStatus);
+  const QFontMetrics fmStatus(fontStatus);
 
   const QRect& r = opt.rect.adjusted(2 * kMargin, 2 * kMargin, -2 * kMargin, -2 * kMargin);
   const int buttonTop = r.top();
-  const int buttonHeight = fmName.height();
+  const int buttonWidth = fmName.height();
+  const int buttonHeight = buttonWidth;
+  const bool isOnDevice = item.isOnDevice() != IWksItem::eTypeNone;
 
-  // clang-format off
-  const QRect& rectIcon = QRect(
-    r.left(),
-    r.top(),
-    r.height(),
-    r.height());
-  
-  const QRect& rectAutoSyncDev = QRect(
-    r.right() - 3 * kMargin - 4 * buttonHeight,
-    buttonTop,
-    buttonHeight,
-    buttonHeight);
+  const QRect rectIcon(r.left(), r.top(), r.height(), r.height());
 
-  const QRect& rectActiveProject = QRect(
-    r.right() - 2 * kMargin - 3 * buttonHeight,
-    buttonTop,
-    buttonHeight,
-    buttonHeight);
+  // Set rectName initially to span the complete width. The right edge
+  // will be adjusted in the and by the last button rectangle.
+  QRect rectName(rectIcon.right() + 2 * kMargin, r.top(), r.width() - rectIcon.width(), fmName.height());
+  QRect rectVisible(r.right() - buttonWidth, buttonTop, buttonWidth, buttonHeight);
 
-  const QRect& rectSave = QRect(
-    r.right() - 1 * kMargin - 2 * buttonHeight,
-    buttonTop,
-    buttonHeight,
-    buttonHeight);
+  // Tool buttons are added left of the rectVisible, growing further left
+  // with each button. Each time a button is added, left is moved further to
+  // the left defining the left edge of the next button.
+  int left = rectVisible.left() - buttonWidth - kMargin;
 
-  const QRect& rectVisible = QRect(
-    r.right() - 1 * buttonHeight,
-    buttonTop,
-    buttonHeight,
-    buttonHeight);
+  // All tool button rectangles are initially invalid. If a tool button is need
+  // the rectangle is set to a valid rectangle at the correct position.
+  // As a consequence the code using the rectangles simply tests if they
+  // are valid. Buttons with non valid rectangles are skipped.
+  QRect rectActiveProject;
+  QRect rectSave;
+  QRect rectAutoSyncDev;
 
-  const QRect& rectName =QRect(
-    rectIcon.right() + 2*kMargin,
-    r.top(),
-    r.width() - rectIcon.width() - 4 * kMargin,
-    fmName.height());
+  if (isOnDevice == false) {
+    if (opt.state & QStyle::State_HasFocus) {
+      rectActiveProject.setRect(left, buttonTop, buttonWidth, buttonHeight);
+      left -= buttonWidth + kMargin;
+      rectSave.setRect(left, buttonTop, buttonWidth, buttonHeight);
+      left -= buttonWidth + kMargin;
 
-  const QRect& rectStatus = QRect(
-    rectIcon.right() + 2*kMargin,
-    r.bottom() - fmStatus.height(),
-    r.width() - rectIcon.width() - 4 * kMargin,
-    fmStatus.height());
+      if (treeWidget->hasDeviceSupport()) {
+        rectAutoSyncDev.setRect(left, buttonTop, buttonWidth, buttonHeight);
+        left -= buttonWidth + kMargin;
+      }
+    } else {
+      if (item.hasUserFocus()) {
+        rectActiveProject.setRect(left, buttonTop, buttonWidth, buttonHeight);
+        left -= buttonWidth + kMargin;
+      }
+      if (item.isChanged() && !item.isAutoSave()) {
+        rectSave.setRect(left, buttonTop, buttonWidth, buttonHeight);
+        left -= buttonWidth + kMargin;
+      }
+    }
+  }
+  // As rectName should span up to the right of the last button left has
+  // to be corrected by a button width.
+  rectName.setRight(left + buttonWidth - 2 * kMargin);
 
-  // clang-format on
+  const QRect rectStatus(rectIcon.right() + 2 * kMargin, r.bottom() - fmStatus.height(),
+                         r.width() - rectIcon.width() - 2 * kMargin, fmStatus.height());
 
   return {fontName,    fontStatus, rectIcon,          rectName,       rectStatus,
           rectVisible, rectSave,   rectActiveProject, rectAutoSyncDev};
 }
 
 std::tuple<QFont, QFont, QRect, QRect, QRect, QRect> CWksItemDelegate::getRectanglesItem(
-    const QStyleOptionViewItem& opt) {
+    const QStyleOptionViewItem& opt, const IWksItem& item) const {
   QFont fontName = opt.font;
   QFontMetrics fmName(fontName);
 
@@ -110,33 +116,46 @@ std::tuple<QFont, QFont, QRect, QRect, QRect, QRect> CWksItemDelegate::getRectan
   QFontMetrics fmStatus(fontStatus);
 
   const QRect& r = opt.rect.adjusted(2 * kMargin, 2 * kMargin, -2 * kMargin, -2 * kMargin);
-  const QRect& rectIcon = r.adjusted(-kMargin, -kMargin, -(r.width() - r.height()), kMargin);
+  const int buttonTop = r.top();
+  const int buttonWidth = fmName.height();
+  const int buttonHeight = buttonWidth;
 
-  // clang-format off
-  const QRect& rectChanged = QRect(
-    r.right() - fmName.height(),
-    r.top(),
-    fmName.height(),
-    fmName.height());
+  const QRect rectIcon(r.left(), r.top(), r.height(), r.height());
 
-  const QRect& rectName = QRect(
-    rectIcon.right() + kMargin,
-    r.top(),
-    r.width() - rectIcon.width() - rectChanged.width() - 2*kMargin,
-    fmName.height());
+  // Set rectName initially to span the complete width. The right edge
+  // will be adjusted in the and by the last button rectangle.
+  QRect rectName(rectIcon.right() + 2 * kMargin, r.top(), r.width() - rectIcon.width(), fmName.height());
 
-  const QRect& rectStatus = QRect(
-    rectIcon.right() + kMargin,
-    r.bottom() - fmStatus.height(),
-    r.width() - rectIcon.width() - 2*kMargin,
-    fmStatus.height());
-  // clang-format on
+  // Tool buttons are added left of the rectVisible, growing further left
+  // with each button. Each time a button is added, left is moved further to
+  // the left defining the left edge of the next button.
+  int left = r.right() - buttonWidth - kMargin;
+
+  // All tool button rectangles are initially invalid. If a tool button is need
+  // the rectangle is set to a valid rectangle at the correct position.
+  // As a consequence the code using the rectangles simply tests if they
+  // are valid. Buttons with non valid rectangles are skipped.
+  QRect rectChanged;
+
+  const CGeoSearch* search = dynamic_cast<const CGeoSearch*>(item.parent());
+  const bool isOnGeoSearch = search != nullptr;
+  if (item.isChanged() && !item.isOnDevice() && !isOnGeoSearch) {
+    rectChanged.setRect(left, buttonTop, buttonWidth, buttonHeight);
+    left -= buttonWidth + kMargin;
+  }
+
+  // As rectName should span up to the right of the last button left has
+  // to be corrected by a button width.
+  rectName.setRight(left + buttonWidth - 2 * kMargin);
+
+  const QRect rectStatus(rectIcon.right() + 2 * kMargin, r.bottom() - fmStatus.height(),
+                         r.width() - rectIcon.width() - 2 * kMargin, fmStatus.height());
 
   return {fontName, fontStatus, rectIcon, rectName, rectStatus, rectChanged};
 }
 
 std::tuple<QFont, QFont, QRect, QRect, QRect, QRect> CWksItemDelegate::getRectanglesDevice(
-    const QStyleOptionViewItem& opt) {
+    const QStyleOptionViewItem& opt, const IWksItem& item) const {
   QFont fontName = opt.font;
   QFontMetrics fmName(fontName);
 
@@ -147,31 +166,19 @@ std::tuple<QFont, QFont, QRect, QRect, QRect, QRect> CWksItemDelegate::getRectan
   const QRect& r = opt.rect.adjusted(2 * kMargin, 2 * kMargin, -2 * kMargin, -2 * kMargin);
   const QRect& rectIcon = r.adjusted(-kMargin, -kMargin, -(r.width() - r.height()), kMargin);
 
-  // clang-format off
-  const QRect& rectVisible = QRect(
-    r.right() - fmName.height(),
-    r.top(),
-    fmName.height(),
-    fmName.height());
+  const QRect rectVisible(r.right() - fmName.height(), r.top(), fmName.height(), fmName.height());
 
-  const QRect& rectName = QRect(
-    rectIcon.right() + kMargin,
-    r.top(),
-    r.width() - rectIcon.width() - rectVisible.width() - 2 * kMargin,
-    fmName.height());
+  const QRect rectName(rectIcon.right() + kMargin, r.top(),
+                       r.width() - rectIcon.width() - rectVisible.width() - 2 * kMargin, fmName.height());
 
-  const QRect& rectStatus = QRect(
-    rectIcon.right() + kMargin,
-    r.bottom() - fmStatus.height(),
-    r.width() - rectIcon.width() - 2 * kMargin,
-    fmStatus.height());
-  // clang-format on
+  const QRect rectStatus(rectIcon.right() + kMargin, r.bottom() - fmStatus.height(),
+                         r.width() - rectIcon.width() - 2 * kMargin, fmStatus.height());
 
   return {fontName, fontStatus, rectIcon, rectName, rectStatus, rectVisible};
 }
 
 std::tuple<QFont, QFont, QRect, QRect, QRect, QRect, QRect, QRect> CWksItemDelegate::getRectanglesGeoSearch(
-    const QStyleOptionViewItem& opt) {
+    const QStyleOptionViewItem& opt) const {
   const QFont fontSearch = opt.font;
   const QFontMetrics fmSearch(fontSearch);
 
@@ -181,50 +188,35 @@ std::tuple<QFont, QFont, QRect, QRect, QRect, QRect, QRect, QRect> CWksItemDeleg
 
   const QRect& r = opt.rect.adjusted(2 * kMargin, 2 * kMargin, -2 * kMargin, -2 * kMargin);
   const quint32 height = r.height() / 2;
-  // clang-format off
-  const QRect rectIcon = QRect(r.left(), r.top(), r.height(), r.height());
 
-  const QRect rectSetup = QRect(
-    rectIcon.right() + kMargin,
-    r.top(),
-    height,
-    height);
+  const QRect rectIcon(r.left(), r.top(), r.height(), r.height());
 
-  const QRect rectVisible = QRect(
-    r.right() - fmSearch.height(),
-    r.top(),
-    height,
-    height);
+  const QRect rectSetup(rectIcon.right() + kMargin, r.top(), height, height);
 
-  const QRect rectWptIcon = QRect(
-    rectVisible.left() - height - kMargin,
-    r.top(),
-    height,
-    height);
-  
-  const QRect rectLineEdit = QRect(
-    rectSetup.right() + kMargin,
-    r.top(),
-    r.width() - rectSetup.width() - rectIcon.width() - rectWptIcon.width() - rectVisible.width() - 4 * kMargin,
-    height + 4 * kMargin);
+  const QRect rectVisible(r.right() - fmSearch.height(), r.top(), height, height);
 
-  const QRect rectStatus = QRect(
-    rectSetup.right() + kMargin,
-    r.bottom() - fmStatus.height(),
-    r.width() - rectSetup.width() - rectIcon.width() - rectWptIcon.width() - rectVisible.width() - 4 * kMargin,
-    fmStatus.height());
-  // clang-format on
+  const QRect rectWptIcon(rectVisible.left() - height - kMargin, r.top(), height, height);
+
+  const QRect rectLineEdit(
+      rectSetup.right() + kMargin, r.top(),
+      r.width() - rectSetup.width() - rectIcon.width() - rectWptIcon.width() - rectVisible.width() - 4 * kMargin,
+      height + 4 * kMargin);
+
+  const QRect rectStatus(
+      rectSetup.right() + kMargin, r.bottom() - fmStatus.height(),
+      r.width() - rectSetup.width() - rectIcon.width() - rectWptIcon.width() - rectVisible.width() - 4 * kMargin,
+      fmStatus.height());
 
   return {fontSearch, fontStatus, rectIcon, rectSetup, rectLineEdit, rectStatus, rectWptIcon, rectVisible};
 }
 
-std::tuple<QFont, QRect, QRect> CWksItemDelegate::getRectanglesGeoSearchError(const QStyleOptionViewItem& opt) {
+std::tuple<QFont, QRect, QRect> CWksItemDelegate::getRectanglesGeoSearchError(const QStyleOptionViewItem& opt) const {
   const QFont font = opt.font;
 
   const QRect& r = opt.rect.adjusted(2 * kMargin, 2 * kMargin, -2 * kMargin, -2 * kMargin);
   // clang-format off
-  const QRect rectIcon = QRect(r.left(), r.top(), r.height(), r.height());
-  const QRect rectName = r.adjusted(rectIcon.width() + kMargin,0,0,0);
+  const QRect rectIcon(r.left(), r.top(), r.height(), r.height());
+  const QRect& rectName = r.adjusted(rectIcon.width() + kMargin,0,0,0);
   // clang-format on
 
   return {font, rectIcon, rectName};
@@ -284,7 +276,7 @@ void CWksItemDelegate::initStyleOption(QStyleOptionViewItem* option, const QMode
 }
 
 void CWksItemDelegate::paint(QPainter* p, const QStyleOptionViewItem& opt, const QModelIndex& index) const {
-  IWksItem* item = indexToItem(index);
+  const IWksItem* item = indexToItem(index);
   if (item == nullptr) {
     return QStyledItemDelegate::paint(p, opt, index);
   }
@@ -296,23 +288,23 @@ void CWksItemDelegate::paint(QPainter* p, const QStyleOptionViewItem& opt, const
 
   switch (item->getBaseType()) {
     case IWksItem::eBaseType::Project:
-      paintProject(p, opt, index, item);
+      paintProject(p, opt, index, *item);
       break;
 
     case IWksItem::eBaseType::Item:
-      paintItem(p, opt, index, item);
+      paintItem(p, opt, index, *item);
       break;
 
     case IWksItem::eBaseType::Device:
-      paintDevice(p, opt, index, item);
+      paintDevice(p, opt, index, *item);
       break;
 
     case IWksItem::eBaseType::GeoSearch:
-      paintGeoSearch(p, opt, index, item);
+      paintGeoSearch(p, opt, index, *item);
       break;
 
     case IWksItem::eBaseType::GeoSearchError:
-      paintGeoSearchError(p, opt, index, item);
+      paintGeoSearchError(p, opt, index, *item);
       break;
 
     default:;
@@ -326,65 +318,66 @@ void CWksItemDelegate::paint(QPainter* p, const QStyleOptionViewItem& opt, const
 }
 
 void CWksItemDelegate::paintProject(QPainter* p, const QStyleOptionViewItem& opt, const QModelIndex& index,
-                                    const IWksItem* item) const {
-  const IGisProject* project = dynamic_cast<const IGisProject*>(item);
+                                    const IWksItem& item) const {
+  const IGisProject* project = dynamic_cast<const IGisProject*>(&item);
   if (project == nullptr) {
     return;
   }
 
   auto [fontName, fontStatus, rectIcon, rectName, rectStatus, rectVisible, rectSave, rectActiveProject,
-        rectAutoSyncDev] = getRectanglesProject(opt);
+        rectAutoSyncDev] = getRectanglesProject(opt, *project);
 
-  const bool isOnDevice = item->isOnDevice() != IWksItem::eTypeNone;
-  const bool isVisible = item->isVisible();
+  const bool isOnDevice = item.isOnDevice() != IWksItem::eTypeNone;
+  const bool isVisible = item.isVisible();
   const QColor& colorName =
       opt.palette.color(isVisible ? QPalette::Active : QPalette::Disabled,
                         opt.state & QStyle::State_Selected ? QPalette::BrightText : QPalette::WindowText);
 
   // draw icon
-  QIcon(item->getIcon()).paint(p, rectIcon, Qt::AlignCenter, item->isVisible() ? QIcon::Normal : QIcon::Disabled);
+  QIcon(item.getIcon()).paint(p, rectIcon, Qt::AlignCenter, item.isVisible() ? QIcon::Normal : QIcon::Disabled);
 
   // draw tool button to toggle visibility
   drawToolButton(p, opt, rectVisible,
                  isVisible ? QIcon(":/icons/32x32/ShowAll.png") : QIcon(":/icons/32x32/ShowNone.png"), true, isVisible);
-  rectName.setRight(rectVisible.left() - 3 * kMargin);
 
-  if (isOnDevice == false) {
+  if (rectSave.isValid()) {
     // draw save/ auto save button
-    if (item->isChanged() && !item->isAutoSave()) {
+    if (item.isChanged() && !item.isAutoSave()) {
       // show save button
       drawToolButton(p, opt, rectSave, QIcon(":/icons/32x32/Save.png"), true, false);
     } else {
-      if (item->isAutoSave()) {
+      if (item.isAutoSave()) {
         // show auto save button pressed, to disable autosave
         drawToolButton(p, opt, rectSave, QIcon(":/icons/32x32/AutoSaveA.png"), true, true);
-      } else if (item->canSave()) {
+      } else if (item.canSave()) {
         // show auto save button only if project can be saved
         drawToolButton(p, opt, rectSave, QIcon(":/icons/32x32/AutoSaveNoA.png"), true, false);
       }
     }
+  }
 
-    // active project
-    if (item->hasUserFocus()) {
-      drawToolButton(p, opt, rectActiveProject, QIcon(":/icons/32x32/Focus.png"), true, true);
+  if (rectActiveProject.isValid()) {
+    if (opt.state & QStyle::State_HasFocus) {
+      drawToolButton(p, opt, rectActiveProject,
+                     item.hasUserFocus() ? QIcon(":/icons/32x32/Focus.png") : QIcon(":/icons/32x32/UnFocus.png"), true,
+                     true);
     } else {
-      drawToolButton(p, opt, rectActiveProject, QIcon(":/icons/32x32/UnFocus.png"), true, false);
+      QIcon(":/icons/32x32/Focus.png")
+          .paint(p, rectActiveProject.adjusted(2 * kMargin, 2 * kMargin, -2 * kMargin, -2 * kMargin), Qt::AlignCenter);
     }
-    rectName.setRight(rectActiveProject.left() - 3 * kMargin);
+  }
 
+  if (rectAutoSyncDev.isValid()) {
     // auto sync. w. dev.
-    if (treeWidget->hasDeviceSupport()) {
-      if (item->isAutoSyncToDev()) {
-        drawToolButton(p, opt, rectAutoSyncDev, QIcon(":/icons/32x32/DeviceSync.png"), true, true);
-      } else {
-        drawToolButton(p, opt, rectAutoSyncDev, QIcon(":/icons/32x32/DeviceNoSync.png"), true, false);
-      }
-      rectName.setRight(rectAutoSyncDev.left() - 3 * kMargin);
+    if (item.isAutoSyncToDev()) {
+      drawToolButton(p, opt, rectAutoSyncDev, QIcon(":/icons/32x32/DeviceSync.png"), true, true);
+    } else {
+      drawToolButton(p, opt, rectAutoSyncDev, QIcon(":/icons/32x32/DeviceNoSync.png"), true, false);
     }
   }
 
   // draw name
-  fontName.setBold(item->hasUserFocus());
+  fontName.setBold(item.hasUserFocus());
   p->setPen(colorName);
   p->setFont(fontName);
   p->drawText(rectName.adjusted(0, -1, 0, 1), Qt::AlignLeft | Qt::AlignTop,
@@ -401,56 +394,54 @@ void CWksItemDelegate::paintProject(QPainter* p, const QStyleOptionViewItem& opt
 }
 
 void CWksItemDelegate::paintDevice(QPainter* p, const QStyleOptionViewItem& opt, const QModelIndex& index,
-                                   const IWksItem* item) const {
-  auto [fontName, fontStatus, rectIcon, rectName, rectStatus, rectVisible] = getRectanglesDevice(opt);
+                                   const IWksItem& item) const {
+  auto [fontName, fontStatus, rectIcon, rectName, rectStatus, rectVisible] = getRectanglesDevice(opt, item);
 
-  const bool isVisible = true;
+  const bool isVisible = item.isVisible();
   const QColor& colorName =
       opt.palette.color(isVisible ? QPalette::Active : QPalette::Disabled,
                         opt.state & QStyle::State_Selected ? QPalette::BrightText : QPalette::WindowText);
 
   // draw name
-  fontName.setBold(item->hasUserFocus());
+  fontName.setBold(item.hasUserFocus());
   p->setPen(colorName);
   p->setFont(fontName);
-  p->drawText(rectName.adjusted(0, -1, 0, 1), Qt::AlignLeft | Qt::AlignTop, item->getName());
+  p->drawText(rectName.adjusted(0, -1, 0, 1), Qt::AlignLeft | Qt::AlignTop, item.getName());
 
   // draw status
   p->setPen(colorName);
   p->setFont(fontStatus);
-  p->drawText(rectStatus.adjusted(0, -1, 0, 1), Qt::AlignLeft | Qt::AlignTop,
-              item->getInfo(IWksItem::eFeatureShowName));
+  p->drawText(rectStatus.adjusted(0, -1, 0, 1), Qt::AlignLeft | Qt::AlignTop, item.getInfo(IWksItem::eFeatureShowName));
 
   // draw icon
-  QIcon(item->getIcon()).paint(p, rectIcon, Qt::AlignCenter, isVisible ? QIcon::Normal : QIcon::Disabled);
+  QIcon(item.getIcon()).paint(p, rectIcon, Qt::AlignCenter, isVisible ? QIcon::Normal : QIcon::Disabled);
 
   // draw tool button to activate
   drawToolButton(p, opt, rectVisible,
-                 item->isVisible() ? QIcon(":/icons/32x32/ShowAll.png") : QIcon(":/icons/32x32/ShowNone.png"), true,
-                 item->isVisible());
+                 isVisible ? QIcon(":/icons/32x32/ShowAll.png") : QIcon(":/icons/32x32/ShowNone.png"), true, isVisible);
 }
 
 void CWksItemDelegate::paintItem(QPainter* p, const QStyleOptionViewItem& opt, const QModelIndex& index,
-                                 const IWksItem* item) const {
-  auto [fontName, fontStatus, rectIcon, rectName, rectStatus, rectChanged] = getRectanglesItem(opt);
+                                 const IWksItem& item) const {
+  auto [fontName, fontStatus, rectIcon, rectName, rectStatus, rectChanged] = getRectanglesItem(opt, item);
 
-  const bool isVisible = item->isVisible();
+  const bool isVisible = item.isVisible();
   const QIcon::Mode iconMode = isVisible ? QIcon::Normal : QIcon::Disabled;
   const QColor& colorName =
       opt.palette.color(isVisible ? QPalette::Active : QPalette::Disabled,
                         opt.state & QStyle::State_Selected ? QPalette::BrightText : QPalette::WindowText);
 
   // draw name
-  fontName.setBold(item->hasUserFocus());
+  fontName.setBold(item.hasUserFocus());
   p->setPen(colorName);
   p->setFont(fontName);
-  p->drawText(rectName.adjusted(0, -1, 0, 1), Qt::AlignLeft | Qt::AlignTop, item->getName());
+  p->drawText(rectName.adjusted(0, -1, 0, 1), Qt::AlignLeft | Qt::AlignTop, item.getName());
 
   // draw rating
-  qint32 rating = qRound(item->getRating());
+  qint32 rating = qRound(item.getRating());
   if (rating != 0) {
     QRect rectStar(rectStatus.left(), rectStatus.top(), rectStatus.height(), rectStatus.height());
-    for (int i = 0; i < qRound(item->getRating()); i++) {
+    for (int i = 0; i < qRound(item.getRating()); i++) {
       QIcon("://icons/cache/32x32/star.png").paint(p, rectStar, Qt::AlignCenter, iconMode);
       rectStar.translate(kMargin + rectStar.width(), 0);
     }
@@ -458,7 +449,7 @@ void CWksItemDelegate::paintItem(QPainter* p, const QStyleOptionViewItem& opt, c
   }
 
   // draw tags
-  const QSet<QString>& tags = item->getTags();
+  const QSet<QString>& tags = item.getTags();
   if (!tags.isEmpty()) {
     // draw tags
     p->setFont(fontStatus);
@@ -466,12 +457,10 @@ void CWksItemDelegate::paintItem(QPainter* p, const QStyleOptionViewItem& opt, c
   }
 
   // draw icon
-  QIcon(item->getIcon()).paint(p, rectIcon, Qt::AlignCenter, iconMode);
+  QIcon(item.getIcon()).paint(p, rectIcon, Qt::AlignCenter, iconMode);
 
   // draw save/changed icon
-  const CGeoSearch* search = dynamic_cast<const CGeoSearch*>(item->parent());
-  const bool isOnGeoSearch = search != nullptr;
-  if (item->isChanged() && !item->isOnDevice() && !isOnGeoSearch) {
+  if (rectChanged.isValid()) {
     QIcon(":/icons/32x32/Save.png")
         .paint(p, rectChanged.adjusted(2 * kMargin, 2 * kMargin, -2 * kMargin, -2 * kMargin), Qt::AlignCenter,
                iconMode);
@@ -479,16 +468,16 @@ void CWksItemDelegate::paintItem(QPainter* p, const QStyleOptionViewItem& opt, c
 }
 
 void CWksItemDelegate::paintGeoSearch(QPainter* p, const QStyleOptionViewItem& opt, const QModelIndex& index,
-                                      const IWksItem* item) const {
-  const CGeoSearch* search = dynamic_cast<const CGeoSearch*>(item);
+                                      const IWksItem& item) const {
+  const CGeoSearch* search = dynamic_cast<const CGeoSearch*>(&item);
   if (search == nullptr) {
     return;
   }
   auto [fontSearch, fontStatus, rectIcon, rectSetup, rectLineEdit, rectStatus, rectWptIcon, rectVisible] =
       getRectanglesGeoSearch(opt);
-  const bool isVisible = item->isVisible();
+  const bool isVisible = item.isVisible();
 
-  QIcon(item->getIcon()).paint(p, rectIcon, Qt::AlignCenter, isVisible ? QIcon::Normal : QIcon::Disabled);
+  QIcon(item.getIcon()).paint(p, rectIcon, Qt::AlignCenter, isVisible ? QIcon::Normal : QIcon::Disabled);
   QIcon(":/icons/32x32/Apply.png").paint(p, rectSetup, Qt::AlignCenter, QIcon::Normal);
   QIcon(search->getWptIcon()).paint(p, rectWptIcon, Qt::AlignCenter, QIcon::Normal);
 
@@ -515,16 +504,16 @@ void CWksItemDelegate::paintGeoSearch(QPainter* p, const QStyleOptionViewItem& o
 }
 
 void CWksItemDelegate::paintGeoSearchError(QPainter* p, const QStyleOptionViewItem& opt, const QModelIndex& index,
-                                           const IWksItem* item) const {
+                                           const IWksItem& item) const {
   auto [font, rectIcon, rectName] = getRectanglesGeoSearchError(opt);
-  const bool isVisible = item->isVisible();
+  const bool isVisible = item.isVisible();
 
-  QIcon(item->getIcon()).paint(p, rectIcon, Qt::AlignCenter, isVisible ? QIcon::Normal : QIcon::Disabled);
+  QIcon(item.getIcon()).paint(p, rectIcon, Qt::AlignCenter, isVisible ? QIcon::Normal : QIcon::Disabled);
   const QColor& color = opt.palette.color(isVisible ? QPalette::Active : QPalette::Disabled, QPalette::WindowText);
 
   p->setPen(color);
   p->setFont(font);
-  p->drawText(rectName.adjusted(kMargin, 0, 0, 0), Qt::AlignTop | Qt::AlignLeft, item->getName());
+  p->drawText(rectName.adjusted(kMargin, 0, 0, 0), Qt::AlignTop | Qt::AlignLeft, item.getName());
 }
 
 bool CWksItemDelegate::editorEvent(QEvent* event, QAbstractItemModel* model, const QStyleOptionViewItem& opt,
@@ -539,11 +528,11 @@ bool CWksItemDelegate::editorEvent(QEvent* event, QAbstractItemModel* model, con
 
     switch (item->getBaseType()) {
       case IWksItem::eBaseType::Project:
-        return mousePressProject(me, opt, index, item);
+        return mousePressProject(me, opt, index, *item);
       case IWksItem::eBaseType::Device:
-        return mousePressDevice(me, opt, index, item);
+        return mousePressDevice(me, opt, index, *item);
       case IWksItem::eBaseType::GeoSearch:
-        return mousePressGeoSearch(me, opt, index, item);
+        return mousePressGeoSearch(me, opt, index, *item);
       default:;
     }
   }
@@ -551,19 +540,19 @@ bool CWksItemDelegate::editorEvent(QEvent* event, QAbstractItemModel* model, con
 }
 
 bool CWksItemDelegate::mousePressProject(QMouseEvent* me, const QStyleOptionViewItem& opt, const QModelIndex& index,
-                                         IWksItem* item) {
+                                         IWksItem& item) {
   auto [fontName, fontStatus, rectIcon, rectName, rectStatus, rectVisible, rectSave, rectActiveProject,
-        rectAutoSyncDev] = getRectanglesProject(opt);
+        rectAutoSyncDev] = getRectanglesProject(opt, item);
   if (rectVisible.contains(me->pos())) {
-    item->setVisibility(!item->isVisible());
+    item.setVisibility(!item.isVisible());
     emit sigUpdateCanvas();
     return true;
   } else if (rectSave.contains(me->pos())) {
-    if (item->isAutoSave()) {
-      item->setAutoSave(false);
+    if (item.isAutoSave()) {
+      item.setAutoSave(false);
     } else {
-      if (item->isChanged()) {
-        IGisProject* project = dynamic_cast<IGisProject*>(item);
+      if (item.isChanged()) {
+        IGisProject* project = dynamic_cast<IGisProject*>(&item);
         if (project == nullptr) {
           return false;
         }
@@ -573,16 +562,16 @@ bool CWksItemDelegate::mousePressProject(QMouseEvent* me, const QStyleOptionView
           project->saveAs();
         }
       } else {
-        item->setAutoSave(true);
+        item.setAutoSave(true);
       }
     }
     return true;
   } else if (rectAutoSyncDev.contains(me->pos())) {
-    item->setAutoSyncToDev(!item->isAutoSyncToDev());
+    item.setAutoSyncToDev(!item.isAutoSyncToDev());
     return true;
 
   } else if (rectActiveProject.contains(me->pos())) {
-    IGisProject* project = dynamic_cast<IGisProject*>(item);
+    IGisProject* project = dynamic_cast<IGisProject*>(&item);
     if (project == nullptr) {
       return false;
     }
@@ -594,11 +583,11 @@ bool CWksItemDelegate::mousePressProject(QMouseEvent* me, const QStyleOptionView
 }
 
 bool CWksItemDelegate::mousePressDevice(QMouseEvent* me, const QStyleOptionViewItem& opt, const QModelIndex& index,
-                                        IWksItem* item) {
-  auto [fontName, fontStatus, rectIcon, rectName, rectStatus, rectVisible] = getRectanglesDevice(opt);
+                                        IWksItem& item) {
+  auto [fontName, fontStatus, rectIcon, rectName, rectStatus, rectVisible] = getRectanglesDevice(opt, item);
 
   if (rectVisible.contains(me->pos())) {
-    item->setVisibility(!item->isVisible());
+    item.setVisibility(!item.isVisible());
     emit sigUpdateCanvas();
     return true;
   }
@@ -606,8 +595,8 @@ bool CWksItemDelegate::mousePressDevice(QMouseEvent* me, const QStyleOptionViewI
 }
 
 bool CWksItemDelegate::mousePressGeoSearch(QMouseEvent* me, const QStyleOptionViewItem& opt, const QModelIndex& index,
-                                           IWksItem* item) {
-  CGeoSearch* search = dynamic_cast<CGeoSearch*>(item);
+                                           IWksItem& item) {
+  CGeoSearch* search = dynamic_cast<CGeoSearch*>(&item);
   if (search == nullptr) {
     return false;
   }
@@ -616,7 +605,7 @@ bool CWksItemDelegate::mousePressGeoSearch(QMouseEvent* me, const QStyleOptionVi
       getRectanglesGeoSearch(opt);
 
   if (rectVisible.contains(me->pos())) {
-    item->setVisibility(!item->isVisible());
+    item.setVisibility(!item.isVisible());
     emit sigUpdateCanvas();
     return true;
   }
@@ -650,13 +639,13 @@ bool CWksItemDelegate::helpEvent(QHelpEvent* event, QAbstractItemView* view, con
   const QPoint& posGlobal = event->globalPos();
   switch (item->getBaseType()) {
     case IWksItem::eBaseType::Project:
-      return helpEventProject(pos, posGlobal, view, opt, item);
+      return helpEventProject(pos, posGlobal, view, opt, *item);
     case IWksItem::eBaseType::Item:
-      return helpEventItem(pos, posGlobal, view, opt, item);
+      return helpEventItem(pos, posGlobal, view, opt, *item);
     case IWksItem::eBaseType::GeoSearch:
-      return helpEventGeoSearch(pos, posGlobal, view, opt, item);
+      return helpEventGeoSearch(pos, posGlobal, view, opt, *item);
     case IWksItem::eBaseType::GeoSearchError:
-      return helpEventGeoSearchError(pos, posGlobal, view, opt, item);
+      return helpEventGeoSearchError(pos, posGlobal, view, opt, *item);
     default:;
   }
 
@@ -664,36 +653,36 @@ bool CWksItemDelegate::helpEvent(QHelpEvent* event, QAbstractItemView* view, con
 }
 
 bool CWksItemDelegate::helpEventProject(const QPoint& pos, const QPoint& posGlobal, QAbstractItemView* view,
-                                        const QStyleOptionViewItem& opt, const IWksItem* item) {
+                                        const QStyleOptionViewItem& opt, const IWksItem& item) {
   auto [fontName, fontStatus, rectIcon, rectName, rectStatus, rectVisible, rectSave, rectActiveProject,
-        rectAutoSyncDev] = getRectanglesProject(opt);
+        rectAutoSyncDev] = getRectanglesProject(opt, item);
   if (rectVisible.contains(pos)) {
-    if (item->isVisible()) {
+    if (item.isVisible()) {
       QToolTip::showText(posGlobal, trRichText("Hide project on map."), view, {}, 3000);
     } else {
       QToolTip::showText(posGlobal, trRichText("Show project on map."), view, {}, 3000);
     }
     return true;
   } else if (rectSave.contains(pos)) {
-    if (item->isChanged() && !item->isAutoSave()) {
+    if (item.isChanged() && !item.isAutoSave()) {
       QToolTip::showText(posGlobal, trRichText("Save project."), view, {}, 3000);
     } else {
-      if (item->isAutoSave()) {
+      if (item.isAutoSave()) {
         QToolTip::showText(posGlobal, trRichText("Disable auto save."), view, {}, 3000);
-      } else if (item->canSave()) {
+      } else if (item.canSave()) {
         QToolTip::showText(posGlobal, trRichText("Enable auto save."), view, {}, 3000);
       }
     }
     return true;
   } else if (rectAutoSyncDev.contains(pos)) {
-    if (item->isAutoSyncToDev()) {
+    if (item.isAutoSyncToDev()) {
       QToolTip::showText(posGlobal, trRichText("Disable automatic synchonization with device."), view, {}, 3000);
     } else {
       QToolTip::showText(posGlobal, trRichText("Enable automatic synchonization with device."), view, {}, 3000);
     }
     return true;
   } else if (rectActiveProject.contains(pos)) {
-    if (item->hasUserFocus()) {
+    if (item.hasUserFocus()) {
       QToolTip::showText(
           posGlobal,
           trRichText("This is the active project. All new items will be attached to this project automatically."), view,
@@ -706,22 +695,22 @@ bool CWksItemDelegate::helpEventProject(const QPoint& pos, const QPoint& posGlob
     }
     return true;
   } else if (rectName.contains(pos) || rectStatus.contains(pos)) {
-    QToolTip::showText(posGlobal, item->getInfo(IWksItem::eFeatureShowName), view);
+    QToolTip::showText(posGlobal, item.getInfo(IWksItem::eFeatureShowName), view);
     return true;
   }
   return false;
 }
 
 bool CWksItemDelegate::helpEventItem(const QPoint& pos, const QPoint& posGlobal, QAbstractItemView* view,
-                                     const QStyleOptionViewItem& opt, const IWksItem* item) {
+                                     const QStyleOptionViewItem& opt, const IWksItem& item) {
   bool ret = false;
-  auto [fontName, fontStatus, rectIcon, rectName, rectStatus, rectChanged] = getRectanglesItem(opt);
+  auto [fontName, fontStatus, rectIcon, rectName, rectStatus, rectChanged] = getRectanglesItem(opt, item);
 
   if (rectName.contains(pos)) {
-    QToolTip::showText(posGlobal, item->getInfo(IWksItem::eFeatureShowName), view);
+    QToolTip::showText(posGlobal, item.getInfo(IWksItem::eFeatureShowName), view);
     ret = true;
   } else if (rectChanged.contains(pos)) {
-    if (item->isChanged()) {
+    if (item.isChanged()) {
       QToolTip::showText(posGlobal, trRichText("Item is changed and needs to be saved."), view, {}, 3000);
       ret = true;
     }
@@ -730,7 +719,7 @@ bool CWksItemDelegate::helpEventItem(const QPoint& pos, const QPoint& posGlobal,
 }
 
 bool CWksItemDelegate::helpEventGeoSearch(const QPoint& pos, const QPoint& posGlobal, QAbstractItemView* view,
-                                          const QStyleOptionViewItem& opt, const IWksItem* item) {
+                                          const QStyleOptionViewItem& opt, const IWksItem& item) {
   auto [fontSearch, fontStatus, rectIcon, rectSetup, rectLineEdit, rectStatus, rectWptIcon, rectVisible] =
       getRectanglesGeoSearch(opt);
   if (rectSetup.contains(pos)) {
@@ -742,8 +731,8 @@ bool CWksItemDelegate::helpEventGeoSearch(const QPoint& pos, const QPoint& posGl
 }
 
 bool CWksItemDelegate::helpEventGeoSearchError(const QPoint& pos, const QPoint& posGlobal, QAbstractItemView* view,
-                                               const QStyleOptionViewItem& opt, const IWksItem* item) {
-  QToolTip::showText(posGlobal, "<div>" + item->getInfo(IWksItem::eFeatureShowName) + "</div>", view);
+                                               const QStyleOptionViewItem& opt, const IWksItem& item) {
+  QToolTip::showText(posGlobal, "<div>" + item.getInfo(IWksItem::eFeatureShowName) + "</div>", view);
   return true;
 }
 

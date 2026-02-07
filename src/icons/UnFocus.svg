@@ -32,12 +32,12 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4"
-     inkscape:cx="74.285714"
-     inkscape:cy="313.92857"
+     inkscape:zoom="0.35"
+     inkscape:cx="-608.57143"
+     inkscape:cy="267.14286"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
-     showgrid="true"
+     showgrid="false"
      inkscape:window-width="2560"
      inkscape:window-height="1368"
      inkscape:window-x="1920"
@@ -45,11 +45,7 @@
      inkscape:window-maximized="1"
      inkscape:showpageshadow="2"
      inkscape:pagecheckerboard="0"
-     inkscape:deskcolor="#d1d1d1">
-    <inkscape:grid
-       type="xygrid"
-       id="grid844" />
-  </sodipodi:namedview>
+     inkscape:deskcolor="#d1d1d1" />
   <metadata
      id="metadata2866">
     <rdf:RDF>
@@ -66,12 +62,21 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(-40.165918,-238.21404)">
-    <ellipse
-       style="fill:#cccccc;stroke:#ff0000;stroke-width:4.41353"
-       id="path923"
-       ry="239.37471"
-       rx="251.0737"
-       cy="518.57471"
-       cx="333.7384" />
+    <path
+       sodipodi:type="star"
+       style="fill:#ececec;fill-opacity:1;stroke:#000000;stroke-width:6;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="path2871"
+       sodipodi:sides="5"
+       sodipodi:cx="185.71429"
+       sodipodi:cy="423.79074"
+       sodipodi:r1="307.19269"
+       sodipodi:r2="122.87707"
+       sodipodi:arg1="-0.32175055"
+       sodipodi:arg2="0.30656798"
+       inkscape:flatsided="false"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="M 477.14287,326.64788 302.86221,460.87362 368.15902,670.93699 186.64708,546.66427 7.0427646,673.67838 69.142873,462.64788 -107.15551,331.08355 l 219.89192,-6.1513 70.64592,-208.32535 73.80057,207.22879 219.95997,2.81219 z"
+       transform="translate(148.57143,122.85714)" />
   </g>
 </svg>

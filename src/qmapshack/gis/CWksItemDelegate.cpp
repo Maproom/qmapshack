@@ -39,7 +39,7 @@ IWksItem* CWksItemDelegate::indexToItem(const QModelIndex& index) const {
 }
 
 std::tuple<QFont, QFont, QRect, QRect, QRect, QRect, QRect, QRect, QRect> CWksItemDelegate::getRectanglesProject(
-    const QStyleOptionViewItem& opt, const IWksItem& item) const {
+    const QStyleOptionViewItem& opt, IWksItem& item) const {
   const QFont fontName = opt.font;
   const QFontMetrics fmName(fontName);
 
@@ -74,7 +74,7 @@ std::tuple<QFont, QFont, QRect, QRect, QRect, QRect, QRect, QRect, QRect> CWksIt
   QRect rectAutoSyncDev;
 
   if (isOnDevice == false) {
-    if (opt.state & QStyle::State_HasFocus) {
+    if (item.holdUiFocus(opt)) {
       rectActiveProject.setRect(left, buttonTop, buttonWidth, buttonHeight);
       left -= buttonWidth + kMargin;
       rectSave.setRect(left, buttonTop, buttonWidth, buttonHeight);
@@ -276,7 +276,7 @@ void CWksItemDelegate::initStyleOption(QStyleOptionViewItem* option, const QMode
 }
 
 void CWksItemDelegate::paint(QPainter* p, const QStyleOptionViewItem& opt, const QModelIndex& index) const {
-  const IWksItem* item = indexToItem(index);
+  IWksItem* item = indexToItem(index);
   if (item == nullptr) {
     return QStyledItemDelegate::paint(p, opt, index);
   }
@@ -318,8 +318,8 @@ void CWksItemDelegate::paint(QPainter* p, const QStyleOptionViewItem& opt, const
 }
 
 void CWksItemDelegate::paintProject(QPainter* p, const QStyleOptionViewItem& opt, const QModelIndex& index,
-                                    const IWksItem& item) const {
-  const IGisProject* project = dynamic_cast<const IGisProject*>(&item);
+                                    IWksItem& item) const {
+  IGisProject* project = dynamic_cast<IGisProject*>(&item);
   if (project == nullptr) {
     return;
   }
@@ -340,12 +340,15 @@ void CWksItemDelegate::paintProject(QPainter* p, const QStyleOptionViewItem& opt
   drawToolButton(p, opt, rectVisible,
                  isVisible ? QIcon(":/icons/32x32/ShowAll.png") : QIcon(":/icons/32x32/ShowNone.png"), true, isVisible);
 
+  const float opacityOfFocusBasedItems = item.getOpacityOfFocusBasedItems();
+
   if (rectSave.isValid()) {
     // draw save/ auto save button
     if (item.isChanged() && !item.isAutoSave()) {
       // show save button
       drawToolButton(p, opt, rectSave, QIcon(":/icons/32x32/Save.png"), true, false);
     } else {
+      p->setOpacity(opacityOfFocusBasedItems);
       if (item.isAutoSave()) {
         // show auto save button pressed, to disable autosave
         drawToolButton(p, opt, rectSave, QIcon(":/icons/32x32/AutoSaveA.png"), true, true);
@@ -353,26 +356,31 @@ void CWksItemDelegate::paintProject(QPainter* p, const QStyleOptionViewItem& opt
         // show auto save button only if project can be saved
         drawToolButton(p, opt, rectSave, QIcon(":/icons/32x32/AutoSaveNoA.png"), true, false);
       }
-    }
-  }
-
-  if (rectActiveProject.isValid()) {
-    if (opt.state & QStyle::State_HasFocus) {
-      drawToolButton(p, opt, rectActiveProject,
-                     item.hasUserFocus() ? QIcon(":/icons/32x32/Focus.png") : QIcon(":/icons/32x32/UnFocus.png"), true,
-                     true);
-    } else {
-      QIcon(":/icons/32x32/Focus.png")
-          .paint(p, rectActiveProject.adjusted(2 * kMargin, 2 * kMargin, -2 * kMargin, -2 * kMargin), Qt::AlignCenter);
+      p->setOpacity(1.0);
     }
   }
 
   if (rectAutoSyncDev.isValid()) {
+    p->setOpacity(opacityOfFocusBasedItems);
     // auto sync. w. dev.
     if (item.isAutoSyncToDev()) {
       drawToolButton(p, opt, rectAutoSyncDev, QIcon(":/icons/32x32/DeviceSync.png"), true, true);
     } else {
       drawToolButton(p, opt, rectAutoSyncDev, QIcon(":/icons/32x32/DeviceNoSync.png"), true, false);
+    }
+    p->setOpacity(1.0);
+  }
+
+  if (rectActiveProject.isValid()) {
+    if (item.holdUiFocus(opt)) {
+      p->setOpacity(opacityOfFocusBasedItems);
+      drawToolButton(p, opt, rectActiveProject,
+                     item.hasUserFocus() ? QIcon(":/icons/32x32/Focus.png") : QIcon(":/icons/32x32/UnFocus.png"), true,
+                     true);
+      p->setOpacity(1.0);
+    } else {
+      QIcon(":/icons/32x32/Focus.png")
+          .paint(p, rectActiveProject.adjusted(2 * kMargin, 2 * kMargin, -2 * kMargin, -2 * kMargin), Qt::AlignCenter);
     }
   }
 
@@ -653,7 +661,7 @@ bool CWksItemDelegate::helpEvent(QHelpEvent* event, QAbstractItemView* view, con
 }
 
 bool CWksItemDelegate::helpEventProject(const QPoint& pos, const QPoint& posGlobal, QAbstractItemView* view,
-                                        const QStyleOptionViewItem& opt, const IWksItem& item) {
+                                        const QStyleOptionViewItem& opt, IWksItem& item) {
   auto [fontName, fontStatus, rectIcon, rectName, rectStatus, rectVisible, rectSave, rectActiveProject,
         rectAutoSyncDev] = getRectanglesProject(opt, item);
   if (rectVisible.contains(pos)) {

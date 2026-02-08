@@ -18,8 +18,22 @@
 
 #include "gis/IWksItem.h"
 
-IWksItem::IWksItem(QTreeWidgetItem* parent, int type) : QTreeWidgetItem(parent, type) {}
-IWksItem::IWksItem(QTreeWidget* parent, int type) : QTreeWidgetItem(parent, type) {}
+#include <QVariantAnimation>
+
+IWksItem::IWksItem(QTreeWidgetItem* parent, int type) : QTreeWidgetItem(parent, type) { setupAnimations(); }
+IWksItem::IWksItem(QTreeWidget* parent, int type) : QTreeWidgetItem(parent, type) { setupAnimations(); }
+
+void IWksItem::setupAnimations() {
+  animationOpacityOfFocusBasedItems = std::make_shared<QVariantAnimation>();
+  animationOpacityOfFocusBasedItems->setDuration(250);
+  animationOpacityOfFocusBasedItems->setEasingCurve(QEasingCurve::InOutQuad);
+
+  animationOpacityOfFocusBasedItems->connect(animationOpacityOfFocusBasedItems.get(), &QVariantAnimation::valueChanged,
+                                             [this](QVariant v) {
+                                               opacityOfFocusBasedItems = v.toFloat();
+                                               treeWidget()->viewport()->update(treeWidget()->visualItemRect(this));
+                                             });
+}
 
 IWksItem::eBaseType IWksItem::getBaseType() const {
   if (type() == eTypeGeoSearch) {
@@ -52,4 +66,19 @@ void IWksItem::updateItem() {
     return;
   }
   viewport->update();
+}
+
+bool IWksItem::holdUiFocus(const QStyleOptionViewItem& opt) {
+  bool hasFocus = (opt.state & QStyle::State_HasFocus) != 0;
+  if (hasFocus != lastFocusState) {
+    float opacity = hasFocus ? 1.0 : 0.0;
+    animationOpacityOfFocusBasedItems->stop();
+    animationOpacityOfFocusBasedItems->setStartValue(opacityOfFocusBasedItems);
+    animationOpacityOfFocusBasedItems->setEndValue(opacity);
+    animationOpacityOfFocusBasedItems->start();
+
+    lastFocusState = hasFocus;
+  }
+
+  return hasFocus || (animationOpacityOfFocusBasedItems->state() == QAbstractAnimation::Running);
 }

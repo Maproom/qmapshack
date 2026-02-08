@@ -51,7 +51,7 @@ class CWksItemDelegate : public QStyledItemDelegate {
   IWksItem* indexToItem(const QModelIndex& index) const;
 
   std::tuple<QFont, QFont, QRect, QRect, QRect, QRect, QRect, QRect, QRect> getRectanglesProject(
-      const QStyleOptionViewItem& opt, const IWksItem& item) const;
+      const QStyleOptionViewItem& opt, IWksItem& item) const;
   std::tuple<QFont, QFont, QRect, QRect, QRect, QRect> getRectanglesDevice(const QStyleOptionViewItem& opt,
                                                                            const IWksItem& item) const;
   std::tuple<QFont, QFont, QRect, QRect, QRect, QRect, QRect, QRect> getRectanglesGeoSearch(
@@ -63,7 +63,7 @@ class CWksItemDelegate : public QStyledItemDelegate {
   static void drawToolButton(QPainter* p, const QStyleOptionViewItem& opt, const QRect& rect, const QIcon& icon,
                              bool enabled, bool pressed);
 
-  void paintProject(QPainter* p, const QStyleOptionViewItem& opt, const QModelIndex& index, const IWksItem& item) const;
+  void paintProject(QPainter* p, const QStyleOptionViewItem& opt, const QModelIndex& index, IWksItem &item) const;
   void paintItem(QPainter* p, const QStyleOptionViewItem& opt, const QModelIndex& index, const IWksItem& item) const;
   void paintDevice(QPainter* p, const QStyleOptionViewItem& opt, const QModelIndex& index, const IWksItem& item) const;
   void paintGeoSearch(QPainter* p, const QStyleOptionViewItem& opt, const QModelIndex& index,
@@ -76,7 +76,7 @@ class CWksItemDelegate : public QStyledItemDelegate {
   bool mousePressGeoSearch(QMouseEvent* me, const QStyleOptionViewItem& opt, const QModelIndex& index, IWksItem& item);
 
   bool helpEventProject(const QPoint& pos, const QPoint& posGlobal, QAbstractItemView* view,
-                        const QStyleOptionViewItem& opt, const IWksItem& item);
+                        const QStyleOptionViewItem& opt, IWksItem& item);
 
   bool helpEventItem(const QPoint& pos, const QPoint& posGlobal, QAbstractItemView* view,
                      const QStyleOptionViewItem& opt, const IWksItem& item);

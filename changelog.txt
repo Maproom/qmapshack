@@ -16,6 +16,7 @@ V1.XX.X
 [QMS-939] Outdated referenced repository in file MacOSX/README.md
 [QMS-941] Request QMS to close gracefully from command line
 [QMS-945] Redesign project icons
+[QMS-946] New workspace widget design
 
 
 V1.19.0

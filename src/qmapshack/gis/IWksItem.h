@@ -20,6 +20,9 @@
 #define IWKSITEM_H
 
 #include <QTreeWidgetItem>
+#include <memory>
+
+class QVariantAnimation;
 
 class IWksItem : public QTreeWidgetItem {
  public:
@@ -118,6 +121,9 @@ class IWksItem : public QTreeWidgetItem {
   virtual void gainUserFocus(bool yes) = 0;
   void updateItem();
 
+  bool holdUiFocus(const QStyleOptionViewItem& opt);
+  float getOpacityOfFocusBasedItems() { return opacityOfFocusBasedItems; }
+
  protected:
   virtual void updateDecoration(quint32 enable, quint32 disable);
 
@@ -130,10 +136,15 @@ class IWksItem : public QTreeWidgetItem {
   QSet<QString> keywords;
 
  private:
+  void setupAnimations();
   quint32 flagsDecoration = eMarkNone;
   bool visible = true;
   bool autoSave = false;       ///< flag to show if auto save is on or off
   bool autoSyncToDev = false;  ///< if set true sync the project with every device connected
+
+  float opacityOfFocusBasedItems = 0.0;
+  bool lastFocusState = false;
+  std::shared_ptr<QVariantAnimation> animationOpacityOfFocusBasedItems;
 };
 
 #endif  // IWKSITEM_H

@@ -17,7 +17,7 @@ V1.XX.X
 [QMS-941] Request QMS to close gracefully from command line
 [QMS-945] Redesign project icons
 [QMS-946] New workspace widget design
-
+[QMS-953] Fix geo cache symbols on map
 
 V1.19.0
 [QMS-869] Convert track to area

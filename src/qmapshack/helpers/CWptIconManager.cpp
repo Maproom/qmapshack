@@ -1412,7 +1412,7 @@ void CWptIconManager::init() {
       {tr("traditional cache")}
     },
     {
-      {16,16}, "Multi-Cache", "://icons/geocaching/icons/multi.png",
+      {16,16}, "Multi-cache", "://icons/geocaching/icons/multi.png",
       {tr("geocache")},
       {tr("multi cache")}
     },
@@ -1422,9 +1422,29 @@ void CWptIconManager::init() {
       {tr("unknown cache")}
     },
     {
+      {16,16}, "Letterbox Hybrid", "://icons/geocaching/icons/letterbox.png",
+      {tr("geocache")},
+      {tr("letterbox cache")}
+    },
+    {
       {16,16}, "Wherigo Cache", "://icons/geocaching/icons/wherigo.png",
       {tr("geocache")},
       {tr("wherigo cache")}
+    },
+    {
+      {16,16}, "Earthcache", "://icons/geocaching/icons/earth.png",
+      {tr("geocache")},
+      {tr("earthcache")}
+    },
+    {
+      {16,16}, "Virtual Cache", "://icons/geocaching/icons/virtual.png",
+      {tr("geocache")},
+      {tr("virtual cache")}
+    },
+    {
+      {16,16}, "Webcam Cache", "://icons/geocaching/icons/webcam.png",
+      {tr("geocache")},
+      {tr("webcam cache")}
     },
     {
       {16,16}, "Event Cache", "://icons/geocaching/icons/event.png",
@@ -1447,33 +1467,12 @@ void CWptIconManager::init() {
       {tr("cache in trash out event")}
     },
     {
-      {16,16}, "Earthcache", "://icons/geocaching/icons/earth.png",
-      {tr("geocache")},
-      {tr("earthcache")}
-    },
-    {
-      {16,16}, "Letterbox Cache", "://icons/geocaching/icons/letterbox.png",
-      {tr("geocache")},
-      {tr("letterbox cache")}
-    },
-    {
-      {16,16}, "Virtual Cache", "://icons/geocaching/icons/virtual.png",
-      {tr("geocache")},
-      {tr("virtual cache")}
-    },
-    {
-      {16,16}, "Webcam Cache", "://icons/geocaching/icons/webcam.png",
-      {tr("geocache")},
-      {tr("webcam cache")}
-    },
-
-    {
       {16,16}, "gray_Traditional Cache", "://icons/geocaching/icons/gray_Traditional Cache.png",
       {tr("geocache")},
       {tr("traditional cache")}
     },
     {
-      {16,16}, "gray_Multi-Cache", "://icons/geocaching/icons/gray_Multi-Cache.png",
+      {16,16}, "gray_Multi-cache", "://icons/geocaching/icons/gray_Multi-Cache.png",
       {tr("geocache")},
       {tr("multi cache")}
     },

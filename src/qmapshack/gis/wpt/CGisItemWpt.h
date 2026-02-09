@@ -232,7 +232,7 @@ class CGisItemWpt : public IGisItem {
 
   qint32 getElevation() const { return wpt.ele; }
   qreal getProximity() const { return proximity; }
-  const QString& getIconName() const { return wpt.sym; }
+  const QString& getIconName() const;
   const QString& getComment() const override { return wpt.cmt; }
   const QString& getDescription() const override { return wpt.desc; }
   const geocache_t& getGeoCache() const { return geocache; }
@@ -256,7 +256,7 @@ class CGisItemWpt : public IGisItem {
   void mouseDragged(const QPoint& start, const QPoint& last, const QPoint& pos);
   void dragFinished(const QPoint& pos);
   void leftClicked(const QPoint& pos);
-  bool isGeocache() { return geocache.hasData; }
+  bool isGeocache() const { return geocache.hasData; }
 
   bool hasRadius() { return proximity < NOFLOAT; }
 

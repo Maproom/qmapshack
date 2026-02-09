@@ -25,6 +25,7 @@
 #include "gis/IWksItem.h"
 #include "gis/prj/IGisProject.h"
 #include "gis/search/CGeoSearch.h"
+#include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CDraw.h"
 
 constexpr int kMargin = 1;
@@ -464,6 +465,13 @@ void CWksItemDelegate::paintItem(QPainter* p, const QStyleOptionViewItem& opt, c
     p->drawText(rectStatus.adjusted(0, -1, 0, 1), Qt::AlignLeft | Qt::AlignTop, tags.values().join(", "));
   }
 
+  const CGisItemWpt* wpt = dynamic_cast<const CGisItemWpt*>(&item);
+  if (wpt != nullptr && wpt->isGeocache()) {
+    // draw cache name
+    p->setFont(fontStatus);
+    p->drawText(rectStatus.adjusted(0, -1, 0, 1), Qt::AlignLeft | Qt::AlignTop, wpt->getGeoCache().name);
+  }
+
   // draw icon
   QIcon(item.getIcon()).paint(p, rectIcon, Qt::AlignCenter, iconMode);
 
@@ -583,7 +591,9 @@ bool CWksItemDelegate::mousePressProject(QMouseEvent* me, const QStyleOptionView
     if (project == nullptr) {
       return false;
     }
-    treeWidget->setUserFocus(project->getKey(), !project->hasUserFocus());
+    if ((opt.state & QStyle::State_HasFocus) != 0) {
+      treeWidget->setUserFocus(project->getKey(), !project->hasUserFocus());
+    }
     return true;
   }
 

@@ -189,6 +189,14 @@ void CGisItemWpt::genKey() const {
   IGisItem::genKey();
 }
 
+const QString& CGisItemWpt::getIconName() const {
+  if (geocache.hasData) {
+    return geocache.type;
+  } else {
+    return wpt.sym;
+  }
+}
+
 QString CGisItemWpt::getLastName(const QString& name) {
   SETTINGS;
   QString lastName = name;

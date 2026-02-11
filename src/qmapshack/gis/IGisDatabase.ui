@@ -44,11 +44,19 @@
       <enum>QAbstractItemView::SelectionBehavior::SelectRows</enum>
      </property>
      <property name="indentation">
-      <number>10</number>
+      <number>16</number>
+     </property>
+     <property name="columnCount">
+      <number>1</number>
      </property>
      <attribute name="headerVisible">
       <bool>false</bool>
      </attribute>
+     <column>
+      <property name="text">
+       <string notr="true">1</string>
+      </property>
+     </column>
     </widget>
    </item>
    <item>

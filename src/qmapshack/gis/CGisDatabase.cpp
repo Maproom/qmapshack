@@ -28,9 +28,6 @@ CGisDatabase::CGisDatabase(QWidget* parent) : QWidget(parent) {
   pSelf = this;
   setupUi(this);
 
-  SETTINGS;
-  treeDB->header()->restoreState(cfg.value("Database/treeDB/state", treeDB->header()->saveState()).toByteArray());
-
   connect(treeDB, &CGisListDB::sigChanged, this, &CGisDatabase::slotHelpText);
   connect(actionShowSummaryDropZones, &QAction::toggled, widgetSummary, &CGisSummary::setVisible);
 
@@ -38,6 +35,7 @@ CGisDatabase::CGisDatabase(QWidget* parent) : QWidget(parent) {
   actions << actionShowSummaryDropZones;
   treeDB->addGlobalActions(actions);
 
+  SETTINGS;
   actionShowSummaryDropZones->setChecked(cfg.value("Database/isSummaryVisible", true).toBool());
 
   QTimer::singleShot(1, this, &CGisDatabase::slotHelpText);
@@ -45,7 +43,6 @@ CGisDatabase::CGisDatabase(QWidget* parent) : QWidget(parent) {
 
 CGisDatabase::~CGisDatabase() {
   SETTINGS;
-  cfg.setValue("Database/treeDB/state", treeDB->header()->saveState());
   cfg.setValue("Database/isSummaryVisible", actionShowSummaryDropZones->isChecked());
 }
 

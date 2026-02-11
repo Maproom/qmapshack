@@ -25,6 +25,7 @@
 #include "CMainWindow.h"
 #include "canvas/CCanvas.h"
 #include "config.h"
+#include "gis/CDBItemDelegate.h"
 #include "gis/CGisWorkspace.h"
 #include "gis/db/CDBFolderLostFound.h"
 #include "gis/db/CDBFolderMysql.h"
@@ -60,6 +61,9 @@ class CGisListDBEditLock {
 };
 
 CGisListDB::CGisListDB(QWidget* parent) : QTreeWidget(parent), socket(nullptr) {
+  CDBItemDelegate* delegate = new CDBItemDelegate(this);
+  setItemDelegate(delegate);
+
   setProperty("showItems", true);
   setProperty("showCheckBoxes", true);
   setProperty("showLostFound", true);

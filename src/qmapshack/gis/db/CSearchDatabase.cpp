@@ -21,6 +21,7 @@
 #include <QtSql>
 #include <QtWidgets>
 
+#include "gis/CDBItemDelegate.h"
 #include "gis/CGisListDB.h"
 #include "gis/CGisWorkspace.h"
 #include "gis/db/CDBFolderGroup.h"
@@ -33,6 +34,9 @@
 CSearchDatabase::CSearchDatabase(IDBFolder& dbFolder, CGisListDB* parent) : QDialog(parent), dbFolder(dbFolder) {
   setupUi(this);
 
+  CDBItemDelegate* delegate = new CDBItemDelegate(treeResult);
+  treeResult->setItemDelegate(delegate);
+
   labelName->setText(tr("Search database '%1':").arg(dbFolder.getDBName()));
 
   connect(pushSearch, &QPushButton::clicked, this, &CSearchDatabase::slotSearch);
@@ -41,28 +45,30 @@ CSearchDatabase::CSearchDatabase(IDBFolder& dbFolder, CGisListDB* parent) : QDia
 }
 
 void CSearchDatabase::slotItemChanged(QTreeWidgetItem* item, int column) {
-  if ((column != eColumnCheckbox) || internalEdit) {
+  if ((column != IDBItem::eColumn) || internalEdit) {
     return;
   }
 
   IDBFolder* folder = dynamic_cast<IDBFolder*>(item);
   if (folder != nullptr) {
-    Qt::CheckState checkState = item->checkState(column);
+    Qt::CheckState checkState = folder->getCheckState();
 
     const int N = folder->childCount();
     for (int i = 0; i < N; i++) {
       IDBFolder* childFolder = dynamic_cast<IDBFolder*>(folder->child(i));
       if (childFolder != nullptr) {
         childFolder->setCheckState(checkState);
+        slotItemChanged(childFolder, IDBItem::eColumn);
       }
 
       CDBItem* childItem = dynamic_cast<CDBItem*>(folder->child(i));
       if (childItem != nullptr) {
         childItem->setCheckState(checkState);
+        slotItemChanged(childItem, IDBItem::eColumn);
       }
     }
   } else {
-    emit sigItemChanged(item, IDBItem::eColumn);
+    emit sigItemChanged(item, column);
   }
 }
 

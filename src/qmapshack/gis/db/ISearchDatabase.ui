@@ -24,7 +24,7 @@
    <item>
     <widget class="QLineEdit" name="lineQuery">
      <property name="focusPolicy">
-      <enum>Qt::WheelFocus</enum>
+      <enum>Qt::FocusPolicy::WheelFocus</enum>
      </property>
     </widget>
    </item>
@@ -41,21 +41,9 @@ If you enter 'word' a search with an exact match is done. If you enter 'word*', 
    </item>
    <item>
     <widget class="QTreeWidget" name="treeResult">
-     <column>
-      <property name="text">
-       <string notr="true"/>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>Name</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string/>
-      </property>
-     </column>
+     <attribute name="headerVisible">
+      <bool>false</bool>
+     </attribute>
     </widget>
    </item>
    <item>
@@ -63,7 +51,7 @@ If you enter 'word' a search with an exact match is done. If you enter 'word*', 
      <item>
       <spacer name="horizontalSpacer">
        <property name="orientation">
-        <enum>Qt::Horizontal</enum>
+        <enum>Qt::Orientation::Horizontal</enum>
        </property>
        <property name="sizeHint" stdset="0">
         <size>

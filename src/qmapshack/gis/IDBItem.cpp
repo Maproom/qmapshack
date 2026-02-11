@@ -18,16 +18,14 @@
 
 #include "gis/IDBItem.h"
 
-#include "gis/CGisListDB.h"
-
 IDBItem::IDBItem(QTreeWidget* parent, int type) : QTreeWidgetItem(parent, type) {}
 IDBItem::IDBItem(QTreeWidgetItem* parent, int type) : QTreeWidgetItem(parent, type) {}
 
 void IDBItem::setCheckState(Qt::CheckState state) {
   checkState = state;
-  CGisListDB* widget = dynamic_cast<CGisListDB*>(treeWidget());
+  QTreeWidget* widget = dynamic_cast<QTreeWidget*>(treeWidget());
   if (widget != nullptr) {
-    widget->slotItemChanged(this, 0);
+    widget->viewport()->update(widget->visualItemRect(this));
   }
 }
 

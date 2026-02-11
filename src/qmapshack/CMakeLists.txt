@@ -43,6 +43,7 @@ set( SRCS
     gis/CGisDatabase.cpp
     gis/CGisDraw.cpp
     gis/CWksItemDelegate.cpp
+    gis/CDBItemDelegate.cpp
     gis/CGisItemRate.cpp
     gis/CGisListDB.cpp
     gis/CGisListWks.cpp
@@ -414,6 +415,7 @@ set( HDRS
     gis/CGisDatabase.h
     gis/CGisDraw.h
     gis/CWksItemDelegate.h
+    gis/CDBItemDelegate.h
     gis/CGisItemRate.h
     gis/CGisListDB.h
     gis/CGisListWks.h

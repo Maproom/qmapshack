@@ -1,16 +1,16 @@
 V1.XX.X
-[QMS-627] Add possibility to move views & rennaming views with doubleclick
+[QMS-627] Add possibility to move views & renaming views with double click
 [QMS-817] Mac OS X app crash on every quit
 [QMS-896] BRouter setup installation folder & outstanding download counter issues
 [QMS-899] Flash active indicator of map/dem items while rendered.
-[QMS-906] Strange project's tree view items spacing behaviour
+[QMS-906] Strange project's tree view items spacing behavior
 [QMS-907] Fix: Bad UX with progress dialog and wait cursor
 [QMS-918] Inconsistency with route export and reimport
 [QMS-920] Support {z}/{x}/{y} template params in TMS ServerUrl
 [QMS-922] macOS warning "no file found for translations ... (using default)."
 [QMS-924] Enhance debug output by command line and configuration path
 [QMS-927] Strange "shadow configuration" behavior
-[QMS-930] No Brouter time for routes without intermediate points
+[QMS-930] No BRouter time for routes without intermediate points
 [QMS-932] Invalid Qt basic translation files setup on Linux & macOS
 [QMS-936] Bad "Close" icon on view tabs (macOS only!)
 [QMS-939] Outdated referenced repository in file MacOSX/README.md
@@ -18,6 +18,7 @@ V1.XX.X
 [QMS-945] Redesign project icons
 [QMS-945] Add waypoint icons for geocache pocket queries.
 [QMS-946] New workspace widget design
+[QMS-951] New database widget design
 [QMS-953] Fix geo cache symbols on map
 
 V1.19.0

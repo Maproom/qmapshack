@@ -44,8 +44,6 @@ class CSearchDatabase : public QDialog, private Ui::ISearchDatabase {
   void slotItemChanged(QTreeWidgetItem* item, int column);
 
  private:
-  enum column_e { eColumnCheckbox = 0, eColumnName = 1, eColumnTime = 2 };
-
   void addWithParentFolders(QTreeWidget* result, IDBFolder* folder, QMap<quint64, IDBFolder*>& folders,
                             QSqlDatabase& sqlDB);
   void updateFolder(IDBFolder* folder, CEvtW2DAckInfo* evt);

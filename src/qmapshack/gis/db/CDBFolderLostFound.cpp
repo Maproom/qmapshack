@@ -26,7 +26,7 @@
 
 CDBFolderLostFound::CDBFolderLostFound(QSqlDatabase& db, QTreeWidgetItem* parent)
     : IDBFolder(true, db, eTypeLostFound, 0, parent) {
-  setToolTip(tr("All your data grouped by folders."));
+  setToolTip(tr("All your data removed from projects."));
   CDBFolderLostFound::setupFromDB();
 
   setCheckState(Qt::Unchecked);
@@ -45,7 +45,7 @@ void CDBFolderLostFound::setupFromDB() {
   QUERY_RUN(
       "SELECT id FROM items AS t1 WHERE NOT EXISTS(SELECT * FROM folder2item WHERE child=t1.id) ORDER BY t1.type, "
       "t1.name",
-      return );
+      return);
   while (query.next()) {
     quint64 id = query.value(0).toULongLong();
     new CDBItem(db, id, this);
@@ -89,7 +89,7 @@ void CDBFolderLostFound::expanding() {
 void CDBFolderLostFound::clear() {
   QSqlQuery query(db);
 
-  QUERY_RUN("DELETE FROM items WHERE id NOT IN (SELECT child from folder2item)", return )
+  QUERY_RUN("DELETE FROM items WHERE id NOT IN (SELECT child from folder2item)", return)
 
   setupFromDB();
 }

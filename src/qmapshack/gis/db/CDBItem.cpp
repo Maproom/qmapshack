@@ -20,7 +20,6 @@
 
 #include <QtSql>
 
-#include "gis/CGisListDB.h"
 #include "gis/CGisWorkspace.h"
 #include "gis/db/IDBFolder.h"
 #include "gis/db/macros.h"
@@ -29,7 +28,7 @@ CDBItem::CDBItem(QSqlDatabase& db, quint64 id, IDBFolder* parent) : IDBItem(pare
   QSqlQuery query(db);
   query.prepare("SELECT type, keyqms, icon, name, date, comment FROM items WHERE id=:id");
   query.bindValue(":id", id);
-  QUERY_EXEC(return );
+  QUERY_EXEC(return);
   if (query.next()) {
     QPixmap pixmap;
     type = query.value(0).toInt();
@@ -55,7 +54,7 @@ void CDBItem::updateAge() {
   QSqlQuery query(db);
   query.prepare("SELECT trash FROM items WHERE id=:id");
   query.bindValue(":id", id);
-  QUERY_EXEC(return );
+  QUERY_EXEC(return);
   if (!query.next()) {
     return;
   }
@@ -72,14 +71,7 @@ void CDBItem::updateAge() {
     }
 
     if (timestamp.isValid()) {
-      quint64 diff = QDateTime::currentDateTimeUtc().toSecsSinceEpoch() - timestamp.toSecsSinceEpoch();
-      if (diff < (60 * 60)) {
-        setName(tr("%1 min.").arg(diff / 60));
-      } else if (diff < (60 * 60 * 24)) {
-        setName(tr("%1 h").arg(diff / (60 * 60)));
-      } else {
-        setName(tr("%1 days").arg(diff / (60 * 60 * 24)));
-      }
+      setAge(timestamp);
     }
   }
 }

@@ -31,6 +31,7 @@ class CLostFoundProject : public CDBProject {
   virtual ~CLostFoundProject();
 
   bool save() override { return false; }
+  const bool canSave() const override { return false; }
 
   void updateFromDb();
 };

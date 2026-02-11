@@ -694,9 +694,9 @@ bool CWksItemDelegate::helpEventProject(const QPoint& pos, const QPoint& posGlob
     return true;
   } else if (rectAutoSyncDev.contains(pos)) {
     if (item.isAutoSyncToDev()) {
-      QToolTip::showText(posGlobal, trRichText("Disable automatic synchonization with device."), view, {}, 3000);
+      QToolTip::showText(posGlobal, trRichText("Disable automatic synchonization with GPS device."), view, {}, 3000);
     } else {
-      QToolTip::showText(posGlobal, trRichText("Enable automatic synchonization with device."), view, {}, 3000);
+      QToolTip::showText(posGlobal, trRichText("Enable automatic synchonization with GPS device."), view, {}, 3000);
     }
     return true;
   } else if (rectActiveProject.contains(pos)) {

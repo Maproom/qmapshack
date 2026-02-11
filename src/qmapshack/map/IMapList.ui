@@ -56,6 +56,9 @@
      <property name="verticalScrollMode">
       <enum>QAbstractItemView::ScrollMode::ScrollPerPixel</enum>
      </property>
+     <property name="indentation">
+      <number>16</number>
+     </property>
      <attribute name="headerVisible">
       <bool>false</bool>
      </attribute>

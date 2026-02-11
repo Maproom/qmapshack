@@ -306,6 +306,9 @@
         <file>../icons/32x32/ToolBar.png</file>
         <file>../icons/32x32/ToolBarSetup.png</file>
         <file>../icons/32x32/ToolTip.png</file>
+        <file>../icons/32x32/ToWksUnchecked.png</file>
+        <file>../icons/32x32/ToWksChecked.png</file>
+        <file>../icons/32x32/ToWksPartially.png</file>
         <file>../icons/32x32/Track.png</file>
         <file>../icons/32x32/TrackHighlight.png</file>
         <file>../icons/32x32/TrackInfo.png</file>
@@ -604,6 +607,9 @@
         <file>../icons/48x48/ToolBar.png</file>
         <file>../icons/48x48/ToolBarSetup.png</file>
         <file>../icons/48x48/ToolTip.png</file>
+        <file>../icons/48x48/ToWksUnchecked.png</file>
+        <file>../icons/48x48/ToWksChecked.png</file>
+        <file>../icons/48x48/ToWksPartially.png</file>
         <file>../icons/48x48/Track.png</file>
         <file>../icons/48x48/TrackHighlight.png</file>
         <file>../icons/48x48/TrackInfo.png</file>

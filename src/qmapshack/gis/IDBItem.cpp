@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler <oliver.eichler@gmx.de>
+    Copyright (C) 2026 Oliver Eichler <oliver.eichler@gmx.de>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,12 +16,22 @@
 
 **********************************************************************************************/
 
-#include "gis/db/CDBFolderProject.h"
+#include "gis/IDBItem.h"
 
-CDBFolderProject::CDBFolderProject(QSqlDatabase& db, quint64 key, QTreeWidgetItem* parent)
-    : IDBFolder(true, db, eTypeProject, key, parent) {
-  setIcon(QPixmap("://icons/32x32/PathGreen.png"));
-  setupFromDB();
+#include "gis/CGisListDB.h"
+
+IDBItem::IDBItem(QTreeWidget* parent, int type) : QTreeWidgetItem(parent, type) {}
+IDBItem::IDBItem(QTreeWidgetItem* parent, int type) : QTreeWidgetItem(parent, type) {}
+
+void IDBItem::setCheckState(Qt::CheckState state) {
+  checkState = state;
+  CGisListDB* widget = dynamic_cast<CGisListDB*>(treeWidget());
+  if (widget != nullptr) {
+    widget->slotItemChanged(this, 0);
+  }
 }
 
-CDBFolderProject::~CDBFolderProject() {}
+void IDBItem::setName(const QString& name) {
+  setText(eColumn, name);
+  this->name = name;
+}

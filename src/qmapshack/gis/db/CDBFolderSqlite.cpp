@@ -26,19 +26,19 @@
 
 CDBFolderSqlite::CDBFolderSqlite(const QString& filename, const QString& name, QTreeWidget* parent)
     : IDBFolderSql(IDB::db, parent), filename(filename) {
-  setText(CGisListDB::eColumnName, name);
+  setName(name);
   if (setupDB(filename, name, error)) {
     setupFromDB();
 
-    setIcon(CGisListDB::eColumnCheckbox, QIcon("://icons/32x32/SQLite.png"));
+    setIcon(QPixmap("://icons/32x32/SQLite.png"));
     setChildIndicatorPolicy(QTreeWidgetItem::ShowIndicator);
   } else {
     IDB::db.close();
 
-    setIcon(CGisListDB::eColumnCheckbox, QIcon("://icons/32x32/SQLiteNoConn.png"));
+    setIcon(QPixmap("://icons/32x32/SQLiteNoConn.png"));
   }
 
-  setToolTip(CGisListDB::eColumnName, getDBInfo());
+  setToolTip(getDBInfo());
 }
 
 QString CDBFolderSqlite::getDBInfo() const {

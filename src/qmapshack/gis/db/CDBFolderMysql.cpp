@@ -32,22 +32,22 @@ CDBFolderMysql::CDBFolderMysql(const QString& server, const QString& port, const
       passwd(passwd),
       noPasswd(noPasswd),
       name(name) {
-  setText(CGisListDB::eColumnName, name);
+  setName(name);
   QTimer::singleShot(200, this, &CDBFolderMysql::slotDelayedSetup);
 }
 
 void CDBFolderMysql::slotDelayedSetup() {
   if (setupDB(server, port, user, passwd, noPasswd, name, name)) {
-    setIcon(CGisListDB::eColumnCheckbox, QIcon("://icons/32x32/MySQL.png"));
+    setIcon(QPixmap("://icons/32x32/MySQL.png"));
 
     setupFromDB();
 
     setChildIndicatorPolicy(QTreeWidgetItem::ShowIndicator);
   } else {
-    setIcon(CGisListDB::eColumnCheckbox, QIcon("://icons/32x32/MySQLNoConn.png"));
+    setIcon(QPixmap("://icons/32x32/MySQLNoConn.png"));
   }
 
-  setToolTip(CGisListDB::eColumnName, getDBInfo());
+  setToolTip(getDBInfo());
 }
 
 QString CDBFolderMysql::getDBInfo() const {

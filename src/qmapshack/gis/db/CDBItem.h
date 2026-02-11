@@ -20,13 +20,14 @@
 #define CDBITEM_H
 
 #include <QCoreApplication>
-#include <QTreeWidgetItem>
 #include <QDateTime>
+
+#include "gis/IDBItem.h"
 
 class IDBFolder;
 class QSqlDatabase;
 
-class CDBItem : public QTreeWidgetItem {
+class CDBItem : public IDBItem {
   Q_DECLARE_TR_FUNCTIONS(CDBItem)
  public:
   CDBItem(QSqlDatabase& db, quint64 id, IDBFolder* parent);
@@ -46,8 +47,6 @@ class CDBItem : public QTreeWidgetItem {
      @return The string with the item key
    */
   const QString& getKey() const { return key; }
-
-  QString getName() const;
 
   /**
      @brief Send show/hide events to the workspace

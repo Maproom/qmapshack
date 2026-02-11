@@ -101,7 +101,7 @@ bool IDBFolderSql::update() {
   }
 
   takeChild(0);
-  sortChildren(CGisListDB::eColumnName, Qt::AscendingOrder);
+  sortChildren(eColumn, Qt::AscendingOrder);
   insertChild(0, folderLostFound);
 
   updateLostFound();

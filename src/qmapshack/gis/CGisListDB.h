@@ -35,8 +35,6 @@ class CGisListDB : public QTreeWidget {
   CGisListDB(QWidget* parent);
   virtual ~CGisListDB();
 
-  enum column_e { eColumnCheckbox = 0, eColumnName = 1, eColumnTime = 2 };
-
   bool hasDatabase(const QString& name);
   bool event(QEvent* e) override;
 
@@ -44,6 +42,7 @@ class CGisListDB : public QTreeWidget {
 
  public slots:
   void slotAddDatabase();
+  void slotItemChanged(QTreeWidgetItem* item, int column);
 
  signals:
   void sigChanged();
@@ -54,8 +53,7 @@ class CGisListDB : public QTreeWidget {
   void slotDelFolder();
   void slotDelLostFound();
   void slotDelLostFoundItem();
-  void slotItemExpanded(QTreeWidgetItem* item);
-  void slotItemChanged(QTreeWidgetItem* item, int column);
+  void slotItemExpanded(QTreeWidgetItem* item);  
   void slotDelDatabase();
   void slotDelItem();
   void slotUpdateDatabase();

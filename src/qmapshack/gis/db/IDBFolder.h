@@ -20,8 +20,8 @@
 #define IDBFOLDER_H
 
 #include <QSqlDatabase>
-#include <QTreeWidgetItem>
 
+#include "gis/IDBItem.h"
 #include "gis/prj/IGisProject.h"
 
 class QSqlDatabase;
@@ -32,10 +32,8 @@ class CDBItem;
 /**
  * @brief Baseclass for all folders in the database view
  */
-class IDBFolder : public QTreeWidgetItem {
+class IDBFolder : public IDBItem {
  public:
-  enum type_e { eTypeLostFound = 1, eTypeDatabase = 2, eTypeGroup = 3, eTypeProject = 4, eTypeOther = 5 };
-
   IDBFolder(bool isLoadable, QSqlDatabase& db, type_e type, quint64 id, QTreeWidgetItem* parent);
   IDBFolder(bool isLoadable, QSqlDatabase& db, type_e type, quint64 id, QTreeWidget* parent);
   virtual ~IDBFolder();
@@ -50,8 +48,7 @@ class IDBFolder : public QTreeWidgetItem {
 
   QSqlDatabase& getDb() { return db; }
 
-  QString getName() const;
-  void setName(const QString& name);
+  void storeName(const QString& name);
 
   /**
    * @brief Get the database folder that folder is stored in

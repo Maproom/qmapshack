@@ -20,17 +20,16 @@
 
 #include <QtSql>
 
-#include "gis/CGisListDB.h"
 #include "gis/CGisWorkspace.h"
 #include "gis/db/CDBItem.h"
 #include "gis/db/macros.h"
 
 CDBFolderLostFound::CDBFolderLostFound(QSqlDatabase& db, QTreeWidgetItem* parent)
     : IDBFolder(true, db, eTypeLostFound, 0, parent) {
-  setToolTip(CGisListDB::eColumnName, tr("All your data grouped by folders."));
+  setToolTip(tr("All your data grouped by folders."));
   CDBFolderLostFound::setupFromDB();
 
-  setCheckState(CGisListDB::eColumnCheckbox, Qt::Unchecked);
+  setCheckState(Qt::Unchecked);
   CEvtD2WReqInfo* evt = new CEvtD2WReqInfo(getId(), getDBName());
   CGisWorkspace::self().postEventForWks(evt);
 }
@@ -54,11 +53,11 @@ void CDBFolderLostFound::setupFromDB() {
   }
 
   if (cnt) {
-    setText(CGisListDB::eColumnName, tr("Lost & Found (%1)").arg(cnt));
-    setIcon(CGisListDB::eColumnCheckbox, QIcon("://icons/32x32/DeleteMultiple.png"));
+    setName(tr("Lost & Found (%1)").arg(cnt));
+    setIcon(QPixmap("://icons/32x32/DeleteMultiple.png"));
   } else {
-    setText(CGisListDB::eColumnName, tr("Lost & Found"));
-    setIcon(CGisListDB::eColumnCheckbox, QIcon("://icons/32x32/Empty.png"));
+    setName(tr("Lost & Found"));
+    setIcon(QPixmap("://icons/32x32/Empty.png"));
   }
 
   CEvtD2WUpdateLnF* evt = new CEvtD2WUpdateLnF(getId(), getDBName());
@@ -69,7 +68,7 @@ void CDBFolderLostFound::update(CEvtW2DAckInfo* info) {
   if (info->id != 0) {
     return;
   }
-  setCheckState(CGisListDB::eColumnCheckbox, info->checkState);
+  setCheckState(info->checkState);
 }
 
 bool CDBFolderLostFound::update() {
@@ -98,7 +97,7 @@ void CDBFolderLostFound::clear() {
 bool CDBFolderLostFound::delItem(CDBItem* item) {
   QSqlQuery query(db);
 
-  if (checkState(CGisListDB::eColumnCheckbox) == Qt::Checked) {
+  if (getCheckState() == Qt::Checked) {
     CEvtD2WHideItems* evt = new CEvtD2WHideItems(getId(), getDBName());
     evt->keys << item->getKey();
     CGisWorkspace::self().postEventForWks(evt);

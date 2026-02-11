@@ -51,6 +51,7 @@ set( SRCS
     gis/IGisItem.cpp
     gis/IGisLine.cpp
     gis/IWksItem.cpp
+    gis/IDBItem.cpp
     gis/db/CDBFolderGroup.cpp
     gis/db/CDBFolderLostFound.cpp
     gis/db/CDBFolderMysql.cpp
@@ -421,6 +422,7 @@ set( HDRS
     gis/IGisItem.h
     gis/IGisLine.h
     gis/IWksItem.h
+    gis/IDBItem.h
     gis/db/CDBFolderGroup.h
     gis/db/CDBFolderLostFound.h
     gis/db/CDBFolderMysql.h

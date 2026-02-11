@@ -41,7 +41,7 @@ CSearchDatabase::CSearchDatabase(IDBFolder& dbFolder, CGisListDB* parent) : QDia
 }
 
 void CSearchDatabase::slotItemChanged(QTreeWidgetItem* item, int column) {
-  if ((column != CGisListDB::eColumnCheckbox) || internalEdit) {
+  if ((column != eColumnCheckbox) || internalEdit) {
     return;
   }
 
@@ -53,16 +53,16 @@ void CSearchDatabase::slotItemChanged(QTreeWidgetItem* item, int column) {
     for (int i = 0; i < N; i++) {
       IDBFolder* childFolder = dynamic_cast<IDBFolder*>(folder->child(i));
       if (childFolder != nullptr) {
-        childFolder->setCheckState(CGisListDB::eColumnCheckbox, checkState);
+        childFolder->setCheckState(checkState);
       }
 
       CDBItem* childItem = dynamic_cast<CDBItem*>(folder->child(i));
       if (childItem != nullptr) {
-        childItem->setCheckState(CGisListDB::eColumnCheckbox, checkState);
+        childItem->setCheckState(checkState);
       }
     }
   } else {
-    emit sigItemChanged(item, column);
+    emit sigItemChanged(item, IDBItem::eColumn);
   }
 }
 
@@ -118,7 +118,7 @@ void CSearchDatabase::slotSearch() {
       }
 
       CDBItem* item = new CDBItem(db, itemId, folder);
-      item->setCheckState(CGisListDB::eColumnCheckbox, Qt::Unchecked);
+      item->setCheckState(Qt::Unchecked);
     }
   }
 
@@ -225,20 +225,20 @@ void CSearchDatabase::updateFolder(IDBFolder* folder, CEvtW2DAckInfo* evt) {
       nItems++;
       if (evt->keysChildren.contains(item->getKey())) {
         nChecked++;
-        item->setCheckState(CGisListDB::eColumnCheckbox, Qt::Checked);
+        item->setCheckState(Qt::Checked);
       } else {
-        item->setCheckState(CGisListDB::eColumnCheckbox, Qt::Unchecked);
+        item->setCheckState(Qt::Unchecked);
       }
     }
   }
 
   if (folder->type() > IDBFolder::eTypeGroup) {
     if (nChecked == nItems) {
-      folder->setCheckState(CGisListDB::eColumnCheckbox, Qt::Checked);
+      folder->setCheckState(Qt::Checked);
     } else if (nChecked > 0) {
-      folder->setCheckState(CGisListDB::eColumnCheckbox, Qt::PartiallyChecked);
+      folder->setCheckState(Qt::PartiallyChecked);
     } else {
-      folder->setCheckState(CGisListDB::eColumnCheckbox, Qt::Unchecked);
+      folder->setCheckState(Qt::Unchecked);
     }
   }
 }

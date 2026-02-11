@@ -197,7 +197,7 @@ void CGisListDB::saveDatabaseConfiguration() {
   for (int n = 0; n < N; n++) {
     CDBFolderSqlite* sqlite = dynamic_cast<CDBFolderSqlite*>(topLevelItem(n));
     if (sqlite) {
-      QString name = sqlite->text(CGisListDB::eColumnName);
+      QString name = sqlite->getName();
       names << name;
 
       cfg.beginGroup(name);
@@ -207,7 +207,7 @@ void CGisListDB::saveDatabaseConfiguration() {
     }
     CDBFolderMysql* mysql = dynamic_cast<CDBFolderMysql*>(topLevelItem(n));
     if (mysql) {
-      QString name = mysql->text(CGisListDB::eColumnName);
+      QString name = mysql->getName();
       names << name;
 
       cfg.beginGroup(name);
@@ -249,7 +249,7 @@ bool CGisListDB::hasDatabase(const QString& name) {
   const int N = topLevelItemCount();
   for (int i = 0; i < N; i++) {
     IDBFolderSql* folder = dynamic_cast<IDBFolderSql*>(topLevelItem(i));
-    if (folder && (folder->text(CGisListDB::eColumnName) == name)) {
+    if (folder && (folder->getName() == name)) {
       return true;
     }
   }
@@ -378,7 +378,7 @@ void CGisListDB::slotAddDatabase() {
   if (dlg.isSqlite()) {
     QString filename = dlg.getFilename();
     CDBFolderSqlite* sfolder = new CDBFolderSqlite(filename, name, this);
-    sfolder->setToolTip(eColumnName, sfolder->getDBInfo());
+    sfolder->setToolTip(sfolder->getDBInfo());
     isUsable = sfolder->isUsable();
     folder = sfolder;
   } else if (dlg.isMysql()) {
@@ -389,7 +389,7 @@ void CGisListDB::slotAddDatabase() {
     bool noPasswd = dlg.noPasswd();
 
     CDBFolderMysql* mfolder = new CDBFolderMysql(server, port, user, passwd, noPasswd, name, this);
-    mfolder->setToolTip(eColumnName, mfolder->getDBInfo());
+    mfolder->setToolTip(mfolder->getDBInfo());
     isUsable = mfolder->isUsable();
     folder = mfolder;
   } else {
@@ -411,10 +411,9 @@ void CGisListDB::slotDelDatabase() {
     return;
   }
 
-  int res = QMessageBox::question(
-      this, tr("Remove database..."),
-      tr("Do you really want to remove '%1' from the list?").arg(folder->text(CGisListDB::eColumnName)),
-      QMessageBox::Ok | QMessageBox::Abort, QMessageBox::Ok);
+  int res = QMessageBox::question(this, tr("Remove database..."),
+                                  tr("Do you really want to remove '%1' from the list?").arg(folder->getName()),
+                                  QMessageBox::Ok | QMessageBox::Abort, QMessageBox::Ok);
   if (res != QMessageBox::Ok) {
     return;
   }
@@ -671,7 +670,7 @@ void CGisListDB::slotRenameFolder() {
     QString name2 = QInputDialog::getText(this, tr("Folder name..."), tr("Rename folder:"), QLineEdit::Normal, name1);
 
     if (!name2.isEmpty() && (name1 != name2)) {
-      folder->setName(name2);
+      folder->storeName(name2);
     }
   }
 
@@ -779,8 +778,8 @@ void CGisListDB::slotDelItem() {
     }
 
     if (last != QMessageBox::YesToAll) {
-      QString msg = tr("Are you sure you want to delete '%1' from folder '%2'?")
-                        .arg(dbItem->text(CGisListDB::eColumnName), folder->text(CGisListDB::eColumnName));
+      QString msg =
+          tr("Are you sure you want to delete '%1' from folder '%2'?").arg(dbItem->getName(), folder->getName());
       last = QMessageBox::question(CMainWindow::getBestWidgetForParent(), tr("Delete..."), msg,
                                    QMessageBox::YesToAll | QMessageBox::Cancel | QMessageBox::Ok | QMessageBox::No,
                                    QMessageBox::Ok);
@@ -817,7 +816,7 @@ void CGisListDB::slotItemChanged(QTreeWidgetItem* item, int column) {
   }
   CGisListDBEditLock lock(true, this, "slotItemChanged");
 
-  if (column == CGisListDB::eColumnCheckbox) {
+  if (column == IDBItem::eColumn) {
     IDBFolder* folder = dynamic_cast<IDBFolder*>(item);
     if (folder != nullptr) {
       folder->toggle();

@@ -25,7 +25,7 @@
 #include "gis/db/IDBFolder.h"
 #include "gis/db/macros.h"
 
-CDBItem::CDBItem(QSqlDatabase& db, quint64 id, IDBFolder* parent) : QTreeWidgetItem(parent), db(db), id(id) {
+CDBItem::CDBItem(QSqlDatabase& db, quint64 id, IDBFolder* parent) : IDBItem(parent, eTypeItem), db(db), id(id) {
   QSqlQuery query(db);
   query.prepare("SELECT type, keyqms, icon, name, date, comment FROM items WHERE id=:id");
   query.bindValue(":id", id);
@@ -35,8 +35,8 @@ CDBItem::CDBItem(QSqlDatabase& db, quint64 id, IDBFolder* parent) : QTreeWidgetI
     type = query.value(0).toInt();
     key = query.value(1).toString();
     pixmap.loadFromData(query.value(2).toByteArray(), "PNG");
-    setIcon(CGisListDB::eColumnCheckbox, pixmap);
-    setText(CGisListDB::eColumnName, query.value(3).toString());
+    setIcon(pixmap);
+    setName(query.value(3).toString());
 
     date = query.value(4).toDateTime();
 
@@ -45,13 +45,11 @@ CDBItem::CDBItem(QSqlDatabase& db, quint64 id, IDBFolder* parent) : QTreeWidgetI
     if (comment.size() > 300) {
       comment = comment.left(297) + "...";
     }
-    setToolTip(CGisListDB::eColumnName, comment);
+    setToolTip(comment);
   }
 
   updateAge();
 }
-
-QString CDBItem::getName() const { return text(CGisListDB::eColumnName); }
 
 void CDBItem::updateAge() {
   QSqlQuery query(db);
@@ -76,11 +74,11 @@ void CDBItem::updateAge() {
     if (timestamp.isValid()) {
       quint64 diff = QDateTime::currentDateTimeUtc().toSecsSinceEpoch() - timestamp.toSecsSinceEpoch();
       if (diff < (60 * 60)) {
-        setText(CGisListDB::eColumnTime, tr("%1 min.").arg(diff / 60));
+        setName(tr("%1 min.").arg(diff / 60));
       } else if (diff < (60 * 60 * 24)) {
-        setText(CGisListDB::eColumnTime, tr("%1 h").arg(diff / (60 * 60)));
+        setName(tr("%1 h").arg(diff / (60 * 60)));
       } else {
-        setText(CGisListDB::eColumnTime, tr("%1 days").arg(diff / (60 * 60 * 24)));
+        setName(tr("%1 days").arg(diff / (60 * 60 * 24)));
       }
     }
   }
@@ -92,7 +90,7 @@ void CDBItem::toggle() {
     return;
   }
 
-  if (checkState(CGisListDB::eColumnCheckbox) == Qt::Checked) {
+  if (getCheckState() == Qt::Checked) {
     // make sure the project is shown on the workspace
     CEvtD2WShowFolder* evt1 = new CEvtD2WShowFolder(folder->getId(), folder->getDBName());
     CGisWorkspace::self().postEventForWks(evt1);
@@ -115,7 +113,7 @@ void CDBItem::remove() {
     return;
   }
 
-  if (checkState(CGisListDB::eColumnCheckbox) == Qt::Checked) {
+  if (getCheckState() == Qt::Checked) {
     CEvtD2WHideItems* evt = new CEvtD2WHideItems(folder->getId(), folder->getDBName());
     evt->keys << key;
     CGisWorkspace::self().postEventForWks(evt);

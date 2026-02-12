@@ -28,6 +28,7 @@
 #include "map/IMapItem.h"
 
 constexpr int kMargin = 2;
+constexpr int kFontSizeDiffItem = 2;
 
 CMapItemDelegate::CMapItemDelegate(QTreeWidget* parent) : QStyledItemDelegate(parent), treeWidget(parent) {
   // cross-thread signalling. Signal is triggered by draw thread, indicator animation has to be triggered in main thread
@@ -192,24 +193,30 @@ void CMapItemDelegate::initStyleOption(QStyleOptionViewItem* option, const QMode
   option->features &= ~QStyleOptionViewItem::HasDecoration;
 }
 
-std::tuple<QFont, QRect, QRect, QRect, QRect, QRect> CMapItemDelegate::getRectangles(const QStyleOptionViewItem& opt,
-                                                                                     bool isActive) const {
+std::tuple<QFont, QFont, QRect, QRect, QRect, QRect, QRect> CMapItemDelegate::getRectangles(
+    const QStyleOptionViewItem& opt, bool isActive) const {
   // derive fonts from opt.font
   QFont fontName = opt.font;
   fontName.setBold(isActive);
   QFontMetrics fmName(fontName);
+
+  QFont fontStatus = opt.font;
+  fontStatus.setPointSize(fontStatus.pointSize() - kFontSizeDiffItem);
+  QFontMetrics fmStatus(fontStatus);
 
   const QRect& r = opt.rect.adjusted(kMargin, kMargin, -kMargin, -kMargin);
   const QRect& rectIcon = r.adjusted(-kMargin, -kMargin, -(r.width() - r.height()), kMargin);
   const QRect& rectButton = r.adjusted(r.width() - r.height() + kMargin, kMargin, -kMargin, -kMargin);
   const QRect& rectIndicator =
       QRect(rectButton.left() - 2 * kMargin - 6, rectButton.top() + kMargin, 6, rectButton.height() - 2 * kMargin);
-  const QRect& rectName = r.adjusted(rectIcon.width() + kMargin, 0, rectIndicator.left() - r.right() - 2 * kMargin,
-                                     -(r.height() - fmName.height()));
-  const QRect& rectStatus =
-      r.adjusted(rectIcon.width() + kMargin, rectName.height(), rectIndicator.left() - r.right() - 2 * kMargin, 0);
 
-  return {fontName, rectIcon, rectButton, rectIndicator, rectName, rectStatus};
+  const QRect& rectName = r.adjusted(rectIcon.width() + kMargin, kMargin,
+                                     rectIndicator.left() - r.right() - 2 * kMargin, -(r.height() - fmName.height()));
+
+  const QRect& rectStatus = r.adjusted(rectIcon.width() + kMargin, rectName.height() + kMargin,
+                                       rectIndicator.left() - r.right() - 2 * kMargin, -kMargin);
+
+  return {fontName, fontStatus, rectIcon, rectButton, rectIndicator, rectName, rectStatus};
 }
 
 void CMapItemDelegate::paint(QPainter* p, const QStyleOptionViewItem& opt, const QModelIndex& index) const {
@@ -224,8 +231,6 @@ void CMapItemDelegate::paint(QPainter* p, const QStyleOptionViewItem& opt, const
   QStyledItemDelegate::paint(p, opt, index);
 
   const bool isActive = item->getStatus() == IMapItem::eStatus::Active;
-  QFont fontStatus = opt.font;
-  fontStatus.setPointSize(fontStatus.pointSize() - 2);
 
   // derive strings colors
   QColor colorName =
@@ -251,7 +256,7 @@ void CMapItemDelegate::paint(QPainter* p, const QStyleOptionViewItem& opt, const
   }
 
   // derive all rectangles to place visual elements
-  auto [fontName, rectIcon, rectButton, rectIndicator, rectName, rectStatus] = getRectangles(opt, isActive);
+  auto [fontName, fontStatus, rectIcon, rectButton, rectIndicator, rectName, rectStatus] = getRectangles(opt, isActive);
 
   // draw name
   p->setPen(colorName);
@@ -301,9 +306,9 @@ void CMapItemDelegate::paint(QPainter* p, const QStyleOptionViewItem& opt, const
 bool CMapItemDelegate::editorEvent(QEvent* event, QAbstractItemModel* model, const QStyleOptionViewItem& opt,
                                    const QModelIndex& index) {
   if (event->type() == QEvent::MouseButtonPress) {
-    auto* me = static_cast<QMouseEvent*>(event);    
+    auto* me = static_cast<QMouseEvent*>(event);
 
-    auto [fontName, rectIcon, rectButton, rectIndicator, rectName, rectStatus] = getRectangles(opt, false);
+    auto [fontName, fontStatus, rectIcon, rectButton, rectIndicator, rectName, rectStatus] = getRectangles(opt, false);
 
     if (rectButton.contains(me->pos())) {
       IMapItem* item = indexToItem(index);
@@ -337,7 +342,7 @@ bool CMapItemDelegate::helpEvent(QHelpEvent* event, QAbstractItemView* view, con
   }
 
   const bool isActive = item->getStatus() == IMapItem::eStatus::Active;
-  auto [fontName, rectIcon, rectButton, rectIndicator, rectName, rectStatus] = getRectangles(opt, isActive);
+  auto [fontName, fontStatus, rectIcon, rectButton, rectIndicator, rectName, rectStatus] = getRectangles(opt, isActive);
 
   if (rectButton.contains(event->pos())) {
     const QString& tip = isActive ? tr("Deactivate %1").arg(item->getName()) : tr("Activate %1").arg(item->getName());
@@ -359,6 +364,13 @@ bool CMapItemDelegate::helpEvent(QHelpEvent* event, QAbstractItemView* view, con
 }
 
 QSize CMapItemDelegate::sizeHint(const QStyleOptionViewItem& opt, const QModelIndex& idx) const {
-  Q_UNUSED(idx)
-  return {opt.rect.width(), 32};
+  QFont font1 = opt.font;
+  font1.setBold(true);
+  QFontMetrics fm1(font1);
+
+  QFont font2 = opt.font;
+  font2.setPointSize(font2.pointSize() - kFontSizeDiffItem);
+  QFontMetrics fm2(font2);
+
+  return QSize(opt.rect.width(), std::max(22, 5 * kMargin + fm1.height() + fm2.height()));
 }

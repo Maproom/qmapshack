@@ -65,8 +65,8 @@ class CMapItemDelegate : public QStyledItemDelegate {
   IMapItem* indexToItem(const QModelIndex& index) const;
   QString keyFromIndex(const QModelIndex& index) const;
 
-  std::tuple<QFont, QRect, QRect, QRect, QRect, QRect> getRectangles(const QStyleOptionViewItem& opt,
-                                                                     bool isActive) const;
+  std::tuple<QFont, QFont, QRect, QRect, QRect, QRect, QRect> getRectangles(const QStyleOptionViewItem& opt,
+                                                                            bool isActive) const;
 
   struct animations_t;
   animations_t& getAnimations(const QModelIndex& index);

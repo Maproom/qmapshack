@@ -16,6 +16,7 @@ V1.XX.X
 [QMS-939] Outdated referenced repository in file MacOSX/README.md
 [QMS-941] Request QMS to close gracefully from command line
 [QMS-945] Redesign project icons
+[QMS-945] Add waypoint icons for geocache pocket queries.
 [QMS-946] New workspace widget design
 [QMS-953] Fix geo cache symbols on map
 

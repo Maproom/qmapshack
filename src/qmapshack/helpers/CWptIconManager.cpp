@@ -1467,6 +1467,31 @@ void CWptIconManager::init() {
       {tr("cache in trash out event")}
     },
     {
+      {16,16}, "Final Location", "://icons/32x32/waypoint_final.png",
+      {tr("geocache")},
+      {tr("Final Location")}
+    },
+    {
+      {16,16}, "Physical Stage", "://icons/32x32/waypoint_physical.png",
+      {tr("geocache")},
+      {tr("Physical Stage")}
+    },
+    {
+      {16,16}, "Reference Point", "://icons/32x32/waypoint_reference.png",
+      {tr("geocache")},
+      {tr("Reference Waypoint")}
+    },
+    {
+      {16,16}, "Trailhead", "://icons/32x32/waypoint_trailhead.png",
+      {tr("geocache")},
+      {tr("Trailhead")}
+    },
+    {
+      {16,16}, "Virtual Stage", "://icons/32x32/waypoint_virtual.png",
+      {tr("geocache")},
+      {tr("Virtual Stage")}
+    },
+    {
       {16,16}, "gray_Traditional Cache", "://icons/geocaching/icons/gray_Traditional Cache.png",
       {tr("geocache")},
       {tr("traditional cache")}
@@ -1526,7 +1551,6 @@ void CWptIconManager::init() {
       {tr("geocache")},
       {tr("webcam cache")}
     },
-
     {
       {16,16}, "Contact, Afro", "://icons/waypoints/32x32/ContactAfro.png",
       {tr("contact")},
@@ -1679,6 +1703,7 @@ CWptIconManager::icon_t& CWptIconManager::findIconByName(const QString& name, bo
     }
   }
   ok = false;
+  qDebug() << name;
   return wptIcons.front();
 }
 

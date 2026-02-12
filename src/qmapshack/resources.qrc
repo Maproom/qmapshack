@@ -320,6 +320,12 @@
         <file>../icons/32x32/Up.png</file>
         <file>../icons/32x32/V.png</file>
         <file>../icons/32x32/VrtBuilder.png</file>
+        <file>../icons/32x32/waypoint_final.png</file>
+        <file>../icons/32x32/waypoint_parking.png</file>
+        <file>../icons/32x32/waypoint_physical.png</file>
+        <file>../icons/32x32/waypoint_reference.png</file>
+        <file>../icons/32x32/waypoint_trailhead.png</file>
+        <file>../icons/32x32/waypoint_virtual.png</file>
         <file>../icons/32x32/WaypointOn.png</file>
         <file>../icons/32x32/WptAvoid.png</file>
         <file>../icons/32x32/WptDelProx.png</file>
@@ -614,6 +620,12 @@
         <file>../icons/48x48/VrtBuilder.png</file>
         <file>../icons/48x48/WptAvoid.png</file>
         <file>../icons/48x48/Waypoint.png</file>
+        <file>../icons/48x48/waypoint_final.png</file>
+        <file>../icons/48x48/waypoint_parking.png</file>
+        <file>../icons/48x48/waypoint_physical.png</file>
+        <file>../icons/48x48/waypoint_reference.png</file>
+        <file>../icons/48x48/waypoint_trailhead.png</file>
+        <file>../icons/48x48/waypoint_virtual.png</file>
         <file>../icons/48x48/WaypointOn.png</file>
         <file>../icons/48x48/WptEditProx.png</file>
         <file>../icons/48x48/WptMove.png</file>

@@ -5,14 +5,28 @@ echo "${ATTN}Building GDAL ...${NC}"
 echo "${ATTN}-----------------${NC}"
 
 ######################################################################## 
-# build GDAL (experimental: now using cmake)
+# build GDAL (using cmake)
     echo "${ATTN}Building GDAL ...${NC}"
     cd $QMSDEVDIR
-    git clone -b "release/$GDAL_RELEASE" https://github.com/OSGeo/gdal.git
-# --> folder $QMSVERDIR/gdal/ created
-    cd $QMSDEVDIR/gdal
+
+    # Check for local GDAL repo
+    if [ -d gdal ] && [ -e gdal/gdal-$GDAL_RELEASE.txt ]
+    then
+      # Update existing repo
+      cd $QMSDEVDIR/gdal
+      git fetch
+      git merge
+    else
+      # Create new repo
+      rm -rf gdal 2>/dev/null
+      git clone -b "release/$GDAL_RELEASE" https://github.com/OSGeo/gdal.git
+# --> folder $QMSVERDIR/gdal created
+      cd $QMSDEVDIR/gdal
+      touch gdal-$GDAL_RELEASE.txt
+    fi
+
     mkdir build
-    cd ./build
+    cd build
     
     # Ensure local PROJ is used
     export PKG_CONFIG_PATH="$LOCAL_ENV/lib/pkgconfig"
@@ -50,6 +64,7 @@ echo "${ATTN}-----------------${NC}"
                                 -DGDAL_USE_WEBP=OFF \
                                 -DGDAL_ENABLE_PYTHON=OFF \
                                 -DGDAL_USE_SWIG=OFF \
+                                -DGDAL_USE_POPPLER=ON \
                                 -DBUILD_PYTHON_BINDINGS=OFF
                             
                                                                 

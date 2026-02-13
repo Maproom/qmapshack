@@ -66,7 +66,7 @@ fi
 # Parameters for the build
 ########################################################################
 
-# Default: Build with homebrew packages and copz the libs and bins into the bundle
+# Default: Build with homebrew packages and copy the libs and bins into the bundle
 
 # build with macports
 # if set with any value -> build with macports
@@ -165,20 +165,23 @@ if [ "$MACPORTS_BUILD" = "x" ]; then
     export PROJ_DEV_PATH=$PACKAGES_PATH/lib/proj9
     export QuaZip_Qt6_DIR=$PACKAGES_PATH/lib/cmake/QuaZip-Qt6-1.5
 else
-    # GDAL, ROUTINO, QUAZIP, PROJ are compiled from source
+    # ROUTINO, GDAL, PROJ, QUAZIP are compiled from source
+    export ROUTINO_RELEASE="3.4.3"
+    export ROUTINO_DEV_PATH=$LOCAL_ENV
     if [ "$BUILD_GDAL" = "x" ]; then
-        export GDAL_RELEASE="3.10"
+        export GDAL_RELEASE="3.12"
         export GDAL=$LOCAL_ENV
     else
         export GDAL=$PACKAGES_PATH
     fi
-    export ROUTINO_DEV_PATH=$LOCAL_ENV
     if [ "$BUILD_PROJ" = "x" ]; then
+        export PROJ_RELEASE="9.7.1"
+        export PROJ_DATA_RELEASE="1.24"
         export PROJ_DEV_PATH=$LOCAL_ENV
     else
         export PROJ_DEV_PATH=$PACKAGES_PATH
     fi
-export QuaZip_Qt6_DIR=$LOCAL_ENV/lib/cmake/QuaZip-Qt6-1.5
+    export QuaZip_Qt6_DIR=$LOCAL_ENV/lib/cmake/QuaZip-Qt6-1.5
 fi
 
 # env vars for building QMS
@@ -203,11 +206,14 @@ echo "QMS_SRC_DIR = $QMS_SRC_DIR"
 echo "SRC_OSX_DIR = $SRC_OSX_DIR"
 echo "QT_DEV_PATH = $QT_DEV_PATH"
 echo "Qt6_DIR = $Qt6_DIR"
+echo "ROUTINO_RELEASE = $ROUTINO_RELEASE"
+echo "ROUTINO_DEV_PATH = $ROUTINO_DEV_PATH"
 echo "BUILD_GDAL = $BUILD_GDAL"
 echo "GDAL = $GDAL"
 echo "GDAL_RELEASE = $GDAL_RELEASE"
-echo "ROUTINO_DEV_PATH = $ROUTINO_DEV_PATH"
 echo "BUILD_PROJ = $BUILD_PROJ"
+echo "PROJ_RELEASE = $PROJ_RELEASE"
+echo "PROJ_DATA_RELEASE = $PROJ_DATA_RELEASE"
 echo "PROJ_DEV_PATH = $PROJ_DEV_PATH"
 echo "QuaZip_Qt6_DIR = $QuaZip_Qt6_DIR"
 echo "OSX_DEPLOYMENT_TARGET = $OSX_DEPLOYMENT_TARGET"

@@ -40,10 +40,12 @@ class CAppSetupMac : public IAppSetup {
   QDir getApplicationDir(QString subdir);
   void migrateDirContent(QString dest);
   void extendPath();
+  static void closeOnSIGTERM();
 
   static const QString relTranslationDir;
-  static const QString relGdalDir;
-  static const QString relProjDir;
+  static const QString relGdalDataDir;
+  static const QString relGdalPluginsDir;
+  static const QString relProjDataDir;
   static const QString relHelpDir;
   static const QString relBinDir;
   static const QString relLogDir;

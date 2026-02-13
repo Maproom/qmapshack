@@ -12,7 +12,7 @@ echo "${INFO}At the end you will be prompted for admin password for adjusting ro
 # QMapShack installed from git in QMapShack
 # Local environment created
 
-ROUTINO_PKG=routino-3.4.2
+ROUTINO_PKG=routino-$ROUTINO_RELEASE
 ROUTINO_SRC_DIR=$QMSDEVDIR/$ROUTINO_PKG
 # The following paths are needed by cmake/Modules/FindROUTINO.cmake. So do not change!
 ROUTINO_LIB_DIR=$ROUTINO_DEV_PATH/lib
@@ -24,7 +24,10 @@ ROUTINO_BIN_DIR=$ROUTINO_DEV_PATH/bin
 function checkoutRoutino {
     echo "${GREEN}Fetching Routino ...${NC}"
     cd $QMSDEVDIR
-    curl http://routino.org/download/$ROUTINO_PKG.tgz  | tar xzf -
+    if [ ! -d $ROUTINO_PKG ]
+    then
+      curl https://routino.org/download/$ROUTINO_PKG.tgz  | tar xzf -
+    fi
 }
 
 function buildRoutino {

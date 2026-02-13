@@ -16,7 +16,7 @@
 
 **********************************************************************************************/
 
-#include "CCommandProcessor.h"
+#include "setup/CCommandProcessor.h"
 
 #include <QApplication>
 #include <QCommandLineParser>

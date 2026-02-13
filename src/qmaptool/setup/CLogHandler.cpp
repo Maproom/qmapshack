@@ -35,11 +35,7 @@ CLogHandler::CLogHandler(QString logDirectory, bool writeToFile, bool debugOutpu
 }
 
 void CLogHandler::log(QtMsgType type, const QMessageLogContext& context, const QString& msg) {
-#if QT_VERSION >= 0x050400
-  QString txt = qFormatLogMessage(type, context, msg);
-#else
-  QString txt = msg;
-#endif
+  const QString& txt = qFormatLogMessage(type, context, msg);
   printToConsole(type, txt);
   appendToFile(type, txt);
 }
@@ -74,12 +70,10 @@ void CLogHandler::printToConsole(QtMsgType type, QString formatedMsg) {
       }
       break;
 
-#if QT_VERSION >= 0x050500
     case QtInfoMsg:
       std::cout << formatedMsg.toUtf8().constData() << std::endl;
       break;
 
-#endif
     case QtWarningMsg:
       std::cerr << formatedMsg.toUtf8().constData() << std::endl;
       break;

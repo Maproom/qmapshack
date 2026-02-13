@@ -28,17 +28,18 @@
 
 #include "misc.h"
 
-QString CAppSetupMac::relTranslationDir = "Resources/translations";  // app
-QString CAppSetupMac::relRoutinoDir = "Resources/routino";           // app
-QString CAppSetupMac::relGdalDir = "Resources/gdal";                 // app
-QString CAppSetupMac::relProjDir = "Resources/proj";                 // app
-QString CAppSetupMac::relHelpDir = "Resources/help";                 // app
-QString CAppSetupMac::relBinDir = "Tools";                           // app
-QString CAppSetupMac::relLogDir = "Library/Logs";                    // home
+const QString CAppSetupMac::relTranslationDir = "Resources/translations";  // app
+const QString CAppSetupMac::relRoutinoDir     = "Resources/routino";       // app
+const QString CAppSetupMac::relGdalDataDir    = "Resources/gdal";          // app
+const QString CAppSetupMac::relGdalPluginsDir = "Resources/gdalplugins";   // app
+const QString CAppSetupMac::relProjDataDir    = "Resources/proj";          // app
+const QString CAppSetupMac::relHelpDir        = "Resources/help";          // app
+const QString CAppSetupMac::relBinDir         = "Tools";                   // app
+const QString CAppSetupMac::relLogDir         = "Library/Logs";            // home
 
 void CAppSetupMac::extendPath() {
-  QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
-  QStringList envlist = env.toStringList();
+  const QProcessEnvironment& env = QProcessEnvironment::systemEnvironment();
+  const QStringList& envlist = env.toStringList();
   QString value = "";
   for (int i = 0; i < envlist.size(); i++) {
     QString entry = envlist[i];
@@ -51,7 +52,7 @@ void CAppSetupMac::extendPath() {
       break;
     }
   }
-  QString binDir = getApplicationDir(relBinDir).absolutePath();
+  const QString& binDir = getApplicationDir(relBinDir).absolutePath();
   qDebug() << "BIN" << binDir;
   value += binDir;
   qputenv("PATH", value.toLatin1().constData());
@@ -60,23 +61,24 @@ void CAppSetupMac::extendPath() {
 void CAppSetupMac::initQMapShack() {
   extendPath();
   // setup gdal
-  QString gdalDir = getApplicationDir(relGdalDir).absolutePath();
-  QString projDir = getApplicationDir(relProjDir).absolutePath();
-  prepareGdal(gdalDir, projDir);
+  const QString& gdalDataDir = getApplicationDir(relGdalDataDir).absolutePath();
+  const QString& gdalPluginsDir = getApplicationDir(relGdalPluginsDir).absolutePath();
+  const QString& projDataDir = getApplicationDir(relProjDataDir).absolutePath();
+  prepareGdal(gdalDataDir, gdalPluginsDir, projDataDir);
 
   // setup translators
-  QString translationPath = getApplicationDir(relTranslationDir).absolutePath();
+  const QString& translationPath = getApplicationDir(relTranslationDir).absolutePath();
   prepareTranslator(translationPath, "qtbase_");
   prepareTranslator(translationPath, "qmapshack_");
 
   // load and apply style sheet
   QApplication* app = (QApplication*)QCoreApplication::instance();
 
-  QString fileName = QDir(getApplicationDir("Resources")).absoluteFilePath("qms-style.qss");
+  const QString& fileName = QDir(getApplicationDir("Resources")).absoluteFilePath("qms-style.qss");
   qDebug() << "Stylesheet" << fileName;
   QFile styleFile(fileName);
   openFileCheckSuccess(QFile::ReadOnly, styleFile);
-  QString style(QLatin1String(styleFile.readAll()));
+  const QString& style(QLatin1String(styleFile.readAll()));
   app->setStyleSheet(style);
 
   migrateDirContent(defaultCachePath());
@@ -97,26 +99,18 @@ QString CAppSetupMac::routinoPath(QString xmlFile) {
 }
 
 QString CAppSetupMac::defaultCachePath() {
-  const QStringList& standardLocations = QStandardPaths::standardLocations(QStandardPaths::CacheLocation);
-  const QString& cachePath = standardLocations.first();
+  const QString& cachePath = QStandardPaths::standardLocations(QStandardPaths::CacheLocation).at(0);
   return IAppSetup::path(cachePath, 0, false, 0);
 }
 
 QString CAppSetupMac::userDataPath(QString subdir) {
-#if QT_VERSION >= 0x050400
-  const QStringList& standardLocations = QStandardPaths::standardLocations(QStandardPaths::AppLocalDataLocation);
-  const QString& dataDir = standardLocations.first();
-#else
-  const QStringList& standardLocations = QStandardPaths::standardLocations(QStandardPaths::DataLocation);
-  const QString& dataDir = standardLocations.first();
-#endif
+  const QString& dataDir = QStandardPaths::standardLocations(QStandardPaths::AppLocalDataLocation).at(0);
   return IAppSetup::path(dataDir, subdir, false, 0);
 }
 
 QString CAppSetupMac::logDir() {
   // home location returns / (root) instead of user home...
-  const QStringList& standardLocations = QStandardPaths::standardLocations(QStandardPaths::DesktopLocation);
-  const QString& home = standardLocations.first();
+  const QString& home = QStandardPaths::standardLocations(QStandardPaths::DesktopLocation).at(0);
   QDir dir = QDir(home);
   dir.cdUp();
   return IAppSetup::path(dir.absolutePath(), relLogDir, false, 0);
@@ -163,7 +157,7 @@ void CAppSetupMac::closeOnSIGTERM() {
     for (auto const item : qApp->topLevelWindows()) {
       // Close application gracefully on signal SIGTERM
       if (item->objectName() == "IMainWindowWindow") {
-        qDebug() << "Closing on SIGTERM";
+        qDebug() << "closing on SIGTERM";
         item->close();
         break;
       }

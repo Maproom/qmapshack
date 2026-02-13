@@ -55,6 +55,7 @@ if [ -z "$MACPORTS_BUILD" ]; then
         brew install libgeotiff
         brew install libheif
         brew install geos
+		brew install poppler
     else
         brew install gdal
     fi

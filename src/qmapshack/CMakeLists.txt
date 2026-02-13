@@ -49,6 +49,7 @@ set( SRCS
     gis/CGisListWks.cpp
     gis/CGisWorkspace.cpp
     gis/CSelDevices.cpp
+    gis/CSetupWorkspace.cpp
     gis/IGisItem.cpp
     gis/IGisLine.cpp
     gis/IWksItem.cpp
@@ -69,8 +70,7 @@ set( SRCS
     gis/db/CSelectDBFolder.cpp
     gis/db/CSelectSaveAction.cpp
     gis/db/CSetupDatabase.cpp
-    gis/db/CSetupFolder.cpp
-    gis/db/CSetupWorkspace.cpp
+    gis/db/CSetupFolder.cpp    
     gis/db/IDB.cpp
     gis/db/IDBFolder.cpp
     gis/db/IDBFolderSql.cpp
@@ -421,6 +421,7 @@ set( HDRS
     gis/CGisListWks.h
     gis/CGisWorkspace.h
     gis/CSelDevices.h
+    gis/CSetupWorkspace.h
     gis/IGisItem.h
     gis/IGisLine.h
     gis/IWksItem.h
@@ -441,8 +442,7 @@ set( HDRS
     gis/db/CSelectDBFolder.h
     gis/db/CSelectSaveAction.h
     gis/db/CSetupDatabase.h
-    gis/db/CSetupFolder.h
-    gis/db/CSetupWorkspace.h
+    gis/db/CSetupFolder.h    
     gis/db/IDB.h
     gis/db/IDBFolder.h
     gis/db/IDBFolderSql.h
@@ -778,14 +778,14 @@ set( UIS
     gis/IGisItemRate.ui
     gis/IGisWorkspace.ui
     gis/ISelDevices.ui
+    gis/ISetupWorkspace.ui
     gis/db/IExportDatabase.ui
     gis/db/IResolveDatabaseConflict.ui
     gis/db/ISearchDatabase.ui
     gis/db/ISelectDBFolder.ui
     gis/db/ISelectSaveAction.ui
     gis/db/ISetupDatabase.ui
-    gis/db/ISetupFolder.ui
-    gis/db/ISetupWorkspace.ui
+    gis/db/ISetupFolder.ui    
     gis/ovl/IDetailsOvlArea.ui
     gis/ovl/IScrOptOvlArea.ui
     gis/prj/IDetailsPrj.ui

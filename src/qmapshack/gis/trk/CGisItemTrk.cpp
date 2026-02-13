@@ -40,7 +40,6 @@
 #include "gis/trk/CTrkToRteDialog.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CDraw.h"
-#include "helpers/CProgressDialog.h"
 #include "misc.h"
 
 #define DEFAULT_COLOR 4
@@ -54,7 +53,7 @@ namespace {
 // helper to declutter and draw clusters of track info points
 class cluster {
  public:
-  cluster(int number, const QRect& r) : box(r) { elements.append({number}); }
+  cluster(int number, const QRect& r) : box(r) { elements.append(number); }
   int size() const { return elements.size(); }
 
   static void addToCluster(const QRect& r, QList<cluster>& clusters, int number) {
@@ -127,6 +126,17 @@ struct trkwpt_t {
   qreal y = 0;
   IGisItem::key_t key;
 };
+
+inline constexpr int operator|(CTrackData::trkpt_t::valid_e e1, CTrackData::trkpt_t::invalid_e e2) {
+  return static_cast<std::underlying_type_t<CTrackData::trkpt_t::valid_e>>(e1) |
+         static_cast<std::underlying_type_t<CTrackData::trkpt_t::invalid_e>>(e2);
+}
+
+inline constexpr int operator|(CTrackData::trkpt_t::invalid_e e2, CTrackData::trkpt_t::valid_e e1) {
+  return static_cast<std::underlying_type_t<CTrackData::trkpt_t::invalid_e>>(e2) |
+         static_cast<std::underlying_type_t<CTrackData::trkpt_t::valid_e>>(e1);
+}
+
 }  // namespace
 
 IGisItem::key_t CGisItemTrk::keyUserFocus;

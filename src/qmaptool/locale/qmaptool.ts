@@ -589,13 +589,13 @@ Canceled by user&apos;s request.
     <name>IAbout</name>
     <message>
         <location filename="../IAbout.ui" line="14"/>
-        <location filename="../../../build/src/qmaptool/ui_IAbout.h" line="162"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IAbout.h" line="162"/>
         <source>About...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="26"/>
-        <location filename="../../../build/src/qmaptool/ui_IAbout.h" line="163"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IAbout.h" line="163"/>
         <source>&lt;b&gt;QMapTool&lt;/b&gt;, Version</source>
         <translation type="unfinished"></translation>
     </message>
@@ -604,40 +604,40 @@ Canceled by user&apos;s request.
         <location filename="../IAbout.ui" line="77"/>
         <location filename="../IAbout.ui" line="91"/>
         <location filename="../IAbout.ui" line="105"/>
-        <location filename="../../../build/src/qmaptool/ui_IAbout.h" line="164"/>
-        <location filename="../../../build/src/qmaptool/ui_IAbout.h" line="167"/>
-        <location filename="../../../build/src/qmaptool/ui_IAbout.h" line="169"/>
-        <location filename="../../../build/src/qmaptool/ui_IAbout.h" line="171"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IAbout.h" line="164"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IAbout.h" line="167"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IAbout.h" line="169"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IAbout.h" line="171"/>
         <source>TextLabel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="70"/>
-        <location filename="../../../build/src/qmaptool/ui_IAbout.h" line="166"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IAbout.h" line="166"/>
         <source>Qt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="84"/>
-        <location filename="../../../build/src/qmaptool/ui_IAbout.h" line="168"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IAbout.h" line="168"/>
         <source>GDAL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="98"/>
-        <location filename="../../../build/src/qmaptool/ui_IAbout.h" line="170"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IAbout.h" line="170"/>
         <source>Proj4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="121"/>
-        <location filename="../../../build/src/qmaptool/ui_IAbout.h" line="172"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IAbout.h" line="172"/>
         <source>This software is licensed under GPL3 or any later version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="128"/>
-        <location filename="../../../build/src/qmaptool/ui_IAbout.h" line="173"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IAbout.h" line="173"/>
         <source>© 2017 Oliver Eichler (oliver.eichler@gmx.de)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -646,31 +646,31 @@ Canceled by user&apos;s request.
     <name>ICoordFormatSetup</name>
     <message>
         <location filename="../units/ICoordFormatSetup.ui" line="14"/>
-        <location filename="../../../build/src/qmaptool/ui_ICoordFormatSetup.h" line="103"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_ICoordFormatSetup.h" line="103"/>
         <source>Coordinate Format...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../units/ICoordFormatSetup.ui" line="24"/>
-        <location filename="../../../build/src/qmaptool/ui_ICoordFormatSetup.h" line="104"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_ICoordFormatSetup.h" line="104"/>
         <source>N48° 53&apos; 39.6&quot; E13° 31&apos; 6.78&quot;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../units/ICoordFormatSetup.ui" line="31"/>
-        <location filename="../../../build/src/qmaptool/ui_ICoordFormatSetup.h" line="105"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_ICoordFormatSetup.h" line="105"/>
         <source>N48.8943° E013.51855°</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../units/ICoordFormatSetup.ui" line="38"/>
-        <location filename="../../../build/src/qmaptool/ui_ICoordFormatSetup.h" line="106"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_ICoordFormatSetup.h" line="106"/>
         <source>N48° 53.660 E013° 31.113</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../units/ICoordFormatSetup.ui" line="53"/>
-        <location filename="../../../build/src/qmaptool/ui_ICoordFormatSetup.h" line="107"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_ICoordFormatSetup.h" line="107"/>
         <source>&lt;b&gt;Note:&lt;/b&gt; For some GUI elements changing the units will not take effect until you restart QMapTool.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -679,37 +679,37 @@ Canceled by user&apos;s request.
     <name>IDialogRefPoint</name>
     <message>
         <location filename="../overlay/refmap/IDialogRefPoint.ui" line="14"/>
-        <location filename="../../../build/src/qmaptool/ui_IDialogRefPoint.h" line="115"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IDialogRefPoint.h" line="115"/>
         <source>Dialog</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../overlay/refmap/IDialogRefPoint.ui" line="25"/>
-        <location filename="../../../build/src/qmaptool/ui_IDialogRefPoint.h" line="116"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IDialogRefPoint.h" line="116"/>
         <source>Coord. Map File [pixel]</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../overlay/refmap/IDialogRefPoint.ui" line="32"/>
-        <location filename="../../../build/src/qmaptool/ui_IDialogRefPoint.h" line="117"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IDialogRefPoint.h" line="117"/>
         <source>x</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../overlay/refmap/IDialogRefPoint.ui" line="42"/>
-        <location filename="../../../build/src/qmaptool/ui_IDialogRefPoint.h" line="118"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IDialogRefPoint.h" line="118"/>
         <source>y</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../overlay/refmap/IDialogRefPoint.ui" line="49"/>
-        <location filename="../../../build/src/qmaptool/ui_IDialogRefPoint.h" line="119"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IDialogRefPoint.h" line="119"/>
         <source>Coord. lat/lon WGS84 [°]</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../overlay/refmap/IDialogRefPoint.ui" line="59"/>
-        <location filename="../../../build/src/qmaptool/ui_IDialogRefPoint.h" line="120"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IDialogRefPoint.h" line="120"/>
         <source>Bad position format. Must be: 
 &quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot;
 or
@@ -721,19 +721,19 @@ or
     <name>IGridPlacer</name>
     <message>
         <location filename="../overlay/gridtool/IGridPlacer.ui" line="14"/>
-        <location filename="../../../build/src/qmaptool/ui_IGridPlacer.h" line="190"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IGridPlacer.h" line="190"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../overlay/gridtool/IGridPlacer.ui" line="150"/>
-        <location filename="../../../build/src/qmaptool/ui_IGridPlacer.h" line="198"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IGridPlacer.h" line="198"/>
         <source>Reset</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../overlay/gridtool/IGridPlacer.ui" line="224"/>
-        <location filename="../../../build/src/qmaptool/ui_IGridPlacer.h" line="204"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IGridPlacer.h" line="204"/>
         <source>Set Area</source>
         <translation type="unfinished"></translation>
     </message>
@@ -742,13 +742,13 @@ or
     <name>IGridSelArea</name>
     <message>
         <location filename="../overlay/gridtool/IGridSelArea.ui" line="14"/>
-        <location filename="../../../build/src/qmaptool/ui_IGridSelArea.h" line="50"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IGridSelArea.h" line="50"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../overlay/gridtool/IGridSelArea.ui" line="35"/>
-        <location filename="../../../build/src/qmaptool/ui_IGridSelArea.h" line="51"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IGridSelArea.h" line="51"/>
         <source>TextLabel</source>
         <translation type="unfinished"></translation>
     </message>
@@ -757,49 +757,49 @@ or
     <name>IGridSetRef</name>
     <message>
         <location filename="../overlay/gridtool/IGridSetRef.ui" line="14"/>
-        <location filename="../../../build/src/qmaptool/ui_IGridSetRef.h" line="135"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IGridSetRef.h" line="135"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../overlay/gridtool/IGridSetRef.ui" line="35"/>
-        <location filename="../../../build/src/qmaptool/ui_IGridSetRef.h" line="136"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IGridSetRef.h" line="136"/>
         <source>Grid Projection:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../overlay/gridtool/IGridSetRef.ui" line="47"/>
-        <location filename="../../../build/src/qmaptool/ui_IGridSetRef.h" line="137"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IGridSetRef.h" line="137"/>
         <source>...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../overlay/gridtool/IGridSetRef.ui" line="60"/>
-        <location filename="../../../build/src/qmaptool/ui_IGridSetRef.h" line="138"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IGridSetRef.h" line="138"/>
         <source>TextLabel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../overlay/gridtool/IGridSetRef.ui" line="72"/>
-        <location filename="../../../build/src/qmaptool/ui_IGridSetRef.h" line="139"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IGridSetRef.h" line="139"/>
         <source>Easting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../overlay/gridtool/IGridSetRef.ui" line="82"/>
-        <location filename="../../../build/src/qmaptool/ui_IGridSetRef.h" line="140"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IGridSetRef.h" line="140"/>
         <source>Horiz. Spacing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../overlay/gridtool/IGridSetRef.ui" line="92"/>
-        <location filename="../../../build/src/qmaptool/ui_IGridSetRef.h" line="141"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IGridSetRef.h" line="141"/>
         <source>Northing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../overlay/gridtool/IGridSetRef.ui" line="102"/>
-        <location filename="../../../build/src/qmaptool/ui_IGridSetRef.h" line="142"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IGridSetRef.h" line="142"/>
         <source>Vert. Spacing</source>
         <translation type="unfinished"></translation>
     </message>
@@ -808,13 +808,13 @@ or
     <name>IItemListWidget</name>
     <message>
         <location filename="../items/IItemListWidget.ui" line="14"/>
-        <location filename="../../../build/src/qmaptool/ui_IItemListWidget.h" line="103"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IItemListWidget.h" line="103"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../items/IItemListWidget.ui" line="40"/>
-        <location filename="../../../build/src/qmaptool/ui_IItemListWidget.h" line="105"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IItemListWidget.h" line="105"/>
         <source>Add map files to list</source>
         <translation type="unfinished"></translation>
     </message>
@@ -823,28 +823,28 @@ or
         <location filename="../items/IItemListWidget.ui" line="60"/>
         <location filename="../items/IItemListWidget.ui" line="77"/>
         <location filename="../items/IItemListWidget.ui" line="94"/>
-        <location filename="../../../build/src/qmaptool/ui_IItemListWidget.h" line="107"/>
-        <location filename="../../../build/src/qmaptool/ui_IItemListWidget.h" line="111"/>
-        <location filename="../../../build/src/qmaptool/ui_IItemListWidget.h" line="115"/>
-        <location filename="../../../build/src/qmaptool/ui_IItemListWidget.h" line="119"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IItemListWidget.h" line="107"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IItemListWidget.h" line="111"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IItemListWidget.h" line="115"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IItemListWidget.h" line="119"/>
         <source>...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../items/IItemListWidget.ui" line="57"/>
-        <location filename="../../../build/src/qmaptool/ui_IItemListWidget.h" line="109"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IItemListWidget.h" line="109"/>
         <source>Remove selected file from the list.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../items/IItemListWidget.ui" line="74"/>
-        <location filename="../../../build/src/qmaptool/ui_IItemListWidget.h" line="113"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IItemListWidget.h" line="113"/>
         <source>Clear complete list of map files.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../items/IItemListWidget.ui" line="91"/>
-        <location filename="../../../build/src/qmaptool/ui_IItemListWidget.h" line="117"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IItemListWidget.h" line="117"/>
         <source>Reload the currently selected map.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -853,13 +853,13 @@ or
     <name>IItemTreeWidget</name>
     <message>
         <location filename="../items/IItemTreeWidget.ui" line="14"/>
-        <location filename="../../../build/src/qmaptool/ui_IItemTreeWidget.h" line="108"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IItemTreeWidget.h" line="108"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../items/IItemTreeWidget.ui" line="40"/>
-        <location filename="../../../build/src/qmaptool/ui_IItemTreeWidget.h" line="110"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IItemTreeWidget.h" line="110"/>
         <source>Add map files to list</source>
         <translation type="unfinished"></translation>
     </message>
@@ -868,28 +868,28 @@ or
         <location filename="../items/IItemTreeWidget.ui" line="60"/>
         <location filename="../items/IItemTreeWidget.ui" line="77"/>
         <location filename="../items/IItemTreeWidget.ui" line="94"/>
-        <location filename="../../../build/src/qmaptool/ui_IItemTreeWidget.h" line="112"/>
-        <location filename="../../../build/src/qmaptool/ui_IItemTreeWidget.h" line="116"/>
-        <location filename="../../../build/src/qmaptool/ui_IItemTreeWidget.h" line="120"/>
-        <location filename="../../../build/src/qmaptool/ui_IItemTreeWidget.h" line="124"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IItemTreeWidget.h" line="112"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IItemTreeWidget.h" line="116"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IItemTreeWidget.h" line="120"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IItemTreeWidget.h" line="124"/>
         <source>...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../items/IItemTreeWidget.ui" line="57"/>
-        <location filename="../../../build/src/qmaptool/ui_IItemTreeWidget.h" line="114"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IItemTreeWidget.h" line="114"/>
         <source>Remove selected file from the list.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../items/IItemTreeWidget.ui" line="74"/>
-        <location filename="../../../build/src/qmaptool/ui_IItemTreeWidget.h" line="118"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IItemTreeWidget.h" line="118"/>
         <source>Clear complete list of map files.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../items/IItemTreeWidget.ui" line="91"/>
-        <location filename="../../../build/src/qmaptool/ui_IItemTreeWidget.h" line="122"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IItemTreeWidget.h" line="122"/>
         <source>Reload the currently selected map.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -898,107 +898,107 @@ or
     <name>IMainWindow</name>
     <message>
         <location filename="../IMainWindow.ui" line="14"/>
-        <location filename="../../../build/src/qmaptool/ui_IMainWindow.h" line="166"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IMainWindow.h" line="166"/>
         <source>MainWindow</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="32"/>
-        <location filename="../../../build/src/qmaptool/ui_IMainWindow.h" line="189"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IMainWindow.h" line="189"/>
         <source>Setup</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="41"/>
-        <location filename="../../../build/src/qmaptool/ui_IMainWindow.h" line="190"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IMainWindow.h" line="190"/>
         <source>View</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="47"/>
-        <location filename="../../../build/src/qmaptool/ui_IMainWindow.h" line="191"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IMainWindow.h" line="191"/>
         <source>Window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="52"/>
-        <location filename="../../../build/src/qmaptool/ui_IMainWindow.h" line="192"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IMainWindow.h" line="192"/>
         <source>?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="68"/>
-        <location filename="../../../build/src/qmaptool/ui_IMainWindow.h" line="193"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IMainWindow.h" line="193"/>
         <source>Tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="101"/>
-        <location filename="../../../build/src/qmaptool/ui_IMainWindow.h" line="194"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IMainWindow.h" line="194"/>
         <source>Shell</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="120"/>
-        <location filename="../../../build/src/qmaptool/ui_IMainWindow.h" line="167"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IMainWindow.h" line="167"/>
         <source>About</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="129"/>
-        <location filename="../../../build/src/qmaptool/ui_IMainWindow.h" line="168"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IMainWindow.h" line="168"/>
         <source>Ext. Tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="132"/>
-        <location filename="../../../build/src/qmaptool/ui_IMainWindow.h" line="170"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IMainWindow.h" line="170"/>
         <source>Setup paths to external tools, like gdalwarp etc.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="144"/>
         <location filename="../IMainWindow.ui" line="147"/>
-        <location filename="../../../build/src/qmaptool/ui_IMainWindow.h" line="172"/>
-        <location filename="../../../build/src/qmaptool/ui_IMainWindow.h" line="174"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IMainWindow.h" line="172"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IMainWindow.h" line="174"/>
         <source>Flip Mouse Wheel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="156"/>
         <location filename="../IMainWindow.ui" line="159"/>
-        <location filename="../../../build/src/qmaptool/ui_IMainWindow.h" line="176"/>
-        <location filename="../../../build/src/qmaptool/ui_IMainWindow.h" line="178"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IMainWindow.h" line="176"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IMainWindow.h" line="178"/>
         <source>Setup Units</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="168"/>
-        <location filename="../../../build/src/qmaptool/ui_IMainWindow.h" line="180"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IMainWindow.h" line="180"/>
         <source>Setup Coord. Format</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="171"/>
-        <location filename="../../../build/src/qmaptool/ui_IMainWindow.h" line="182"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IMainWindow.h" line="182"/>
         <source>Change the format coordinates are displayed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="182"/>
-        <location filename="../../../build/src/qmaptool/ui_IMainWindow.h" line="184"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IMainWindow.h" line="184"/>
         <source>Show Tool Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="191"/>
-        <location filename="../../../build/src/qmaptool/ui_IMainWindow.h" line="185"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IMainWindow.h" line="185"/>
         <source>Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="194"/>
-        <location filename="../../../build/src/qmaptool/ui_IMainWindow.h" line="187"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IMainWindow.h" line="187"/>
         <source>F1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1007,19 +1007,19 @@ or
     <name>IOverlayCutMap</name>
     <message>
         <location filename="../overlay/IOverlayCutMap.ui" line="14"/>
-        <location filename="../../../build/src/qmaptool/ui_IOverlayCutMap.h" line="142"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IOverlayCutMap.h" line="142"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../overlay/IOverlayCutMap.ui" line="35"/>
-        <location filename="../../../build/src/qmaptool/ui_IOverlayCutMap.h" line="144"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IOverlayCutMap.h" line="144"/>
         <source>Just move the map and zoom.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../overlay/IOverlayCutMap.ui" line="58"/>
-        <location filename="../../../build/src/qmaptool/ui_IOverlayCutMap.h" line="148"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IOverlayCutMap.h" line="148"/>
         <source>Add point to mask.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1030,42 +1030,42 @@ or
         <location filename="../overlay/IOverlayCutMap.ui" line="137"/>
         <location filename="../overlay/IOverlayCutMap.ui" line="158"/>
         <location filename="../overlay/IOverlayCutMap.ui" line="175"/>
-        <location filename="../../../build/src/qmaptool/ui_IOverlayCutMap.h" line="150"/>
-        <location filename="../../../build/src/qmaptool/ui_IOverlayCutMap.h" line="154"/>
-        <location filename="../../../build/src/qmaptool/ui_IOverlayCutMap.h" line="158"/>
-        <location filename="../../../build/src/qmaptool/ui_IOverlayCutMap.h" line="162"/>
-        <location filename="../../../build/src/qmaptool/ui_IOverlayCutMap.h" line="166"/>
-        <location filename="../../../build/src/qmaptool/ui_IOverlayCutMap.h" line="170"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IOverlayCutMap.h" line="150"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IOverlayCutMap.h" line="154"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IOverlayCutMap.h" line="158"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IOverlayCutMap.h" line="162"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IOverlayCutMap.h" line="166"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IOverlayCutMap.h" line="170"/>
         <source>...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../overlay/IOverlayCutMap.ui" line="81"/>
-        <location filename="../../../build/src/qmaptool/ui_IOverlayCutMap.h" line="152"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IOverlayCutMap.h" line="152"/>
         <source>Move point of mask.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../overlay/IOverlayCutMap.ui" line="104"/>
-        <location filename="../../../build/src/qmaptool/ui_IOverlayCutMap.h" line="156"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IOverlayCutMap.h" line="156"/>
         <source>Remove point from mask.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../overlay/IOverlayCutMap.ui" line="134"/>
-        <location filename="../../../build/src/qmaptool/ui_IOverlayCutMap.h" line="160"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IOverlayCutMap.h" line="160"/>
         <source>Remove complete cut mask.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../overlay/IOverlayCutMap.ui" line="155"/>
-        <location filename="../../../build/src/qmaptool/ui_IOverlayCutMap.h" line="164"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IOverlayCutMap.h" line="164"/>
         <source>Load cut mask from shape file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../overlay/IOverlayCutMap.ui" line="172"/>
-        <location filename="../../../build/src/qmaptool/ui_IOverlayCutMap.h" line="168"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IOverlayCutMap.h" line="168"/>
         <source>Save cut mask to shape file.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1074,13 +1074,13 @@ or
     <name>IOverlayGridTool</name>
     <message>
         <location filename="../overlay/IOverlayGridTool.ui" line="14"/>
-        <location filename="../../../build/src/qmaptool/ui_IOverlayGridTool.h" line="142"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IOverlayGridTool.h" line="142"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../overlay/IOverlayGridTool.ui" line="145"/>
-        <location filename="../../../build/src/qmaptool/ui_IOverlayGridTool.h" line="146"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IOverlayGridTool.h" line="146"/>
         <source>do not translate</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1089,19 +1089,19 @@ or
     <name>IOverlayRefMap</name>
     <message>
         <location filename="../overlay/IOverlayRefMap.ui" line="14"/>
-        <location filename="../../../build/src/qmaptool/ui_IOverlayRefMap.h" line="241"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IOverlayRefMap.h" line="241"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../overlay/IOverlayRefMap.ui" line="40"/>
-        <location filename="../../../build/src/qmaptool/ui_IOverlayRefMap.h" line="244"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IOverlayRefMap.h" line="244"/>
         <source>Just move the map and zoom.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../overlay/IOverlayRefMap.ui" line="63"/>
-        <location filename="../../../build/src/qmaptool/ui_IOverlayRefMap.h" line="248"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IOverlayRefMap.h" line="248"/>
         <source>Add reference point.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1116,106 +1116,106 @@ or
         <location filename="../overlay/IOverlayRefMap.ui" line="217"/>
         <location filename="../overlay/IOverlayRefMap.ui" line="244"/>
         <location filename="../overlay/IOverlayRefMap.ui" line="326"/>
-        <location filename="../../../build/src/qmaptool/ui_IOverlayRefMap.h" line="250"/>
-        <location filename="../../../build/src/qmaptool/ui_IOverlayRefMap.h" line="254"/>
-        <location filename="../../../build/src/qmaptool/ui_IOverlayRefMap.h" line="258"/>
-        <location filename="../../../build/src/qmaptool/ui_IOverlayRefMap.h" line="262"/>
-        <location filename="../../../build/src/qmaptool/ui_IOverlayRefMap.h" line="266"/>
-        <location filename="../../../build/src/qmaptool/ui_IOverlayRefMap.h" line="270"/>
-        <location filename="../../../build/src/qmaptool/ui_IOverlayRefMap.h" line="274"/>
-        <location filename="../../../build/src/qmaptool/ui_IOverlayRefMap.h" line="278"/>
-        <location filename="../../../build/src/qmaptool/ui_IOverlayRefMap.h" line="282"/>
-        <location filename="../../../build/src/qmaptool/ui_IOverlayRefMap.h" line="294"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IOverlayRefMap.h" line="250"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IOverlayRefMap.h" line="254"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IOverlayRefMap.h" line="258"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IOverlayRefMap.h" line="262"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IOverlayRefMap.h" line="266"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IOverlayRefMap.h" line="270"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IOverlayRefMap.h" line="274"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IOverlayRefMap.h" line="278"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IOverlayRefMap.h" line="282"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IOverlayRefMap.h" line="294"/>
         <source>...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../overlay/IOverlayRefMap.ui" line="86"/>
-        <location filename="../../../build/src/qmaptool/ui_IOverlayRefMap.h" line="252"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IOverlayRefMap.h" line="252"/>
         <source>Move reference point.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../overlay/IOverlayRefMap.ui" line="109"/>
-        <location filename="../../../build/src/qmaptool/ui_IOverlayRefMap.h" line="256"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IOverlayRefMap.h" line="256"/>
         <source>Remove single reference point.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../overlay/IOverlayRefMap.ui" line="132"/>
-        <location filename="../../../build/src/qmaptool/ui_IOverlayRefMap.h" line="260"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IOverlayRefMap.h" line="260"/>
         <source>Move reference points with auto mode. This will pickup the next point after you moved a reference point.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../overlay/IOverlayRefMap.ui" line="162"/>
-        <location filename="../../../build/src/qmaptool/ui_IOverlayRefMap.h" line="264"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IOverlayRefMap.h" line="264"/>
         <source>Remove all reference points.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../overlay/IOverlayRefMap.ui" line="176"/>
-        <location filename="../../../build/src/qmaptool/ui_IOverlayRefMap.h" line="268"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IOverlayRefMap.h" line="268"/>
         <source>Switch to the Grid Tool.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../overlay/IOverlayRefMap.ui" line="197"/>
-        <location filename="../../../build/src/qmaptool/ui_IOverlayRefMap.h" line="272"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IOverlayRefMap.h" line="272"/>
         <source>Load reference points from GCP file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../overlay/IOverlayRefMap.ui" line="214"/>
-        <location filename="../../../build/src/qmaptool/ui_IOverlayRefMap.h" line="276"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IOverlayRefMap.h" line="276"/>
         <source>Save reference points into GCP file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../overlay/IOverlayRefMap.ui" line="241"/>
-        <location filename="../../../build/src/qmaptool/ui_IOverlayRefMap.h" line="280"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IOverlayRefMap.h" line="280"/>
         <source>Sort list of reference points.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../overlay/IOverlayRefMap.ui" line="281"/>
-        <location filename="../../../build/src/qmaptool/ui_IOverlayRefMap.h" line="285"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IOverlayRefMap.h" line="285"/>
         <source>(x, y)[pixel]</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../overlay/IOverlayRefMap.ui" line="286"/>
-        <location filename="../../../build/src/qmaptool/ui_IOverlayRefMap.h" line="284"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IOverlayRefMap.h" line="284"/>
         <source>(lat, lon)[°]</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../overlay/IOverlayRefMap.ui" line="294"/>
-        <location filename="../../../build/src/qmaptool/ui_IOverlayRefMap.h" line="286"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IOverlayRefMap.h" line="286"/>
         <source>TextLabel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../overlay/IOverlayRefMap.ui" line="304"/>
-        <location filename="../../../build/src/qmaptool/ui_IOverlayRefMap.h" line="287"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IOverlayRefMap.h" line="287"/>
         <source>Final Map Projection:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../overlay/IOverlayRefMap.ui" line="316"/>
-        <location filename="../../../build/src/qmaptool/ui_IOverlayRefMap.h" line="289"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IOverlayRefMap.h" line="289"/>
         <source>Enter a valid projection string. Valid strings are &quot;+proj...&quot; or &quot;EPSG:...&quot;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../overlay/IOverlayRefMap.ui" line="323"/>
-        <location filename="../../../build/src/qmaptool/ui_IOverlayRefMap.h" line="292"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IOverlayRefMap.h" line="292"/>
         <source>Start projection wizard.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../overlay/IOverlayRefMap.ui" line="343"/>
-        <location filename="../../../build/src/qmaptool/ui_IOverlayRefMap.h" line="242"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IOverlayRefMap.h" line="242"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1224,67 +1224,67 @@ or
     <name>IProjWizard</name>
     <message>
         <location filename="../overlay/refmap/IProjWizard.ui" line="14"/>
-        <location filename="../../../build/src/qmaptool/ui_IProjWizard.h" line="191"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IProjWizard.h" line="191"/>
         <source>Proj4 Wizard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../overlay/refmap/IProjWizard.ui" line="29"/>
-        <location filename="../../../build/src/qmaptool/ui_IProjWizard.h" line="192"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IProjWizard.h" line="192"/>
         <source>Mercator</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../overlay/refmap/IProjWizard.ui" line="38"/>
-        <location filename="../../../build/src/qmaptool/ui_IProjWizard.h" line="193"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IProjWizard.h" line="193"/>
         <source>UTM</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../overlay/refmap/IProjWizard.ui" line="45"/>
-        <location filename="../../../build/src/qmaptool/ui_IProjWizard.h" line="194"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IProjWizard.h" line="194"/>
         <source>zone</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../overlay/refmap/IProjWizard.ui" line="82"/>
-        <location filename="../../../build/src/qmaptool/ui_IProjWizard.h" line="195"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IProjWizard.h" line="195"/>
         <source>user defined</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../overlay/refmap/IProjWizard.ui" line="94"/>
-        <location filename="../../../build/src/qmaptool/ui_IProjWizard.h" line="196"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IProjWizard.h" line="196"/>
         <source>Datum</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../overlay/refmap/IProjWizard.ui" line="104"/>
-        <location filename="../../../build/src/qmaptool/ui_IProjWizard.h" line="197"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IProjWizard.h" line="197"/>
         <source>World Mercator (OSM)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../overlay/refmap/IProjWizard.ui" line="124"/>
-        <location filename="../../../build/src/qmaptool/ui_IProjWizard.h" line="198"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IProjWizard.h" line="198"/>
         <source>Result:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../overlay/refmap/IProjWizard.ui" line="138"/>
-        <location filename="../../../build/src/qmaptool/ui_IProjWizard.h" line="200"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IProjWizard.h" line="200"/>
         <source>UPS North (North Pole)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../overlay/refmap/IProjWizard.ui" line="145"/>
-        <location filename="../../../build/src/qmaptool/ui_IProjWizard.h" line="201"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IProjWizard.h" line="201"/>
         <source>UPS South (South Pole)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../overlay/refmap/IProjWizard.ui" line="152"/>
-        <location filename="../../../build/src/qmaptool/ui_IProjWizard.h" line="202"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IProjWizard.h" line="202"/>
         <source>Projection</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1293,7 +1293,7 @@ or
     <name>ISetupExtTools</name>
     <message>
         <location filename="../setup/ISetupExtTools.ui" line="14"/>
-        <location filename="../../../build/src/qmaptool/ui_ISetupExtTools.h" line="244"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_ISetupExtTools.h" line="244"/>
         <source>Setup Ext. Tools</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1304,12 +1304,12 @@ or
         <location filename="../setup/ISetupExtTools.ui" line="173"/>
         <location filename="../setup/ISetupExtTools.ui" line="194"/>
         <location filename="../setup/ISetupExtTools.ui" line="257"/>
-        <location filename="../../../build/src/qmaptool/ui_ISetupExtTools.h" line="245"/>
-        <location filename="../../../build/src/qmaptool/ui_ISetupExtTools.h" line="255"/>
-        <location filename="../../../build/src/qmaptool/ui_ISetupExtTools.h" line="264"/>
-        <location filename="../../../build/src/qmaptool/ui_ISetupExtTools.h" line="276"/>
-        <location filename="../../../build/src/qmaptool/ui_ISetupExtTools.h" line="281"/>
-        <location filename="../../../build/src/qmaptool/ui_ISetupExtTools.h" line="296"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_ISetupExtTools.h" line="245"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_ISetupExtTools.h" line="255"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_ISetupExtTools.h" line="264"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_ISetupExtTools.h" line="276"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_ISetupExtTools.h" line="281"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_ISetupExtTools.h" line="296"/>
         <source>&lt;b style=&apos;color: red;&apos;&gt;not found&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1326,42 +1326,42 @@ or
         <location filename="../setup/ISetupExtTools.ui" line="239"/>
         <location filename="../setup/ISetupExtTools.ui" line="264"/>
         <location filename="../setup/ISetupExtTools.ui" line="275"/>
-        <location filename="../../../build/src/qmaptool/ui_ISetupExtTools.h" line="249"/>
-        <location filename="../../../build/src/qmaptool/ui_ISetupExtTools.h" line="254"/>
-        <location filename="../../../build/src/qmaptool/ui_ISetupExtTools.h" line="259"/>
-        <location filename="../../../build/src/qmaptool/ui_ISetupExtTools.h" line="263"/>
-        <location filename="../../../build/src/qmaptool/ui_ISetupExtTools.h" line="270"/>
-        <location filename="../../../build/src/qmaptool/ui_ISetupExtTools.h" line="274"/>
-        <location filename="../../../build/src/qmaptool/ui_ISetupExtTools.h" line="280"/>
-        <location filename="../../../build/src/qmaptool/ui_ISetupExtTools.h" line="286"/>
-        <location filename="../../../build/src/qmaptool/ui_ISetupExtTools.h" line="290"/>
-        <location filename="../../../build/src/qmaptool/ui_ISetupExtTools.h" line="294"/>
-        <location filename="../../../build/src/qmaptool/ui_ISetupExtTools.h" line="297"/>
-        <location filename="../../../build/src/qmaptool/ui_ISetupExtTools.h" line="298"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_ISetupExtTools.h" line="249"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_ISetupExtTools.h" line="254"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_ISetupExtTools.h" line="259"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_ISetupExtTools.h" line="263"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_ISetupExtTools.h" line="270"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_ISetupExtTools.h" line="274"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_ISetupExtTools.h" line="280"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_ISetupExtTools.h" line="286"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_ISetupExtTools.h" line="290"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_ISetupExtTools.h" line="294"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_ISetupExtTools.h" line="297"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_ISetupExtTools.h" line="298"/>
         <source>...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../setup/ISetupExtTools.ui" line="112"/>
-        <location filename="../../../build/src/qmaptool/ui_ISetupExtTools.h" line="265"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_ISetupExtTools.h" line="265"/>
         <source>gdal_translate:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../setup/ISetupExtTools.ui" line="43"/>
-        <location filename="../../../build/src/qmaptool/ui_ISetupExtTools.h" line="250"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_ISetupExtTools.h" line="250"/>
         <source>gdalbuildvrt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../setup/ISetupExtTools.ui" line="166"/>
-        <location filename="../../../build/src/qmaptool/ui_ISetupExtTools.h" line="275"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_ISetupExtTools.h" line="275"/>
         <source>gdaladdo:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../setup/ISetupExtTools.ui" line="125"/>
-        <location filename="../../../build/src/qmaptool/ui_ISetupExtTools.h" line="266"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_ISetupExtTools.h" line="266"/>
         <source>gdalwarp:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1371,17 +1371,17 @@ or
         <location filename="../setup/ISetupExtTools.ui" line="180"/>
         <location filename="../setup/ISetupExtTools.ui" line="208"/>
         <location filename="../setup/ISetupExtTools.ui" line="222"/>
-        <location filename="../../../build/src/qmaptool/ui_ISetupExtTools.h" line="247"/>
-        <location filename="../../../build/src/qmaptool/ui_ISetupExtTools.h" line="268"/>
-        <location filename="../../../build/src/qmaptool/ui_ISetupExtTools.h" line="278"/>
-        <location filename="../../../build/src/qmaptool/ui_ISetupExtTools.h" line="284"/>
-        <location filename="../../../build/src/qmaptool/ui_ISetupExtTools.h" line="288"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_ISetupExtTools.h" line="247"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_ISetupExtTools.h" line="268"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_ISetupExtTools.h" line="278"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_ISetupExtTools.h" line="284"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_ISetupExtTools.h" line="288"/>
         <source>Setup user defined path.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../setup/ISetupExtTools.ui" line="201"/>
-        <location filename="../../../build/src/qmaptool/ui_ISetupExtTools.h" line="282"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_ISetupExtTools.h" line="282"/>
         <source>qmt_rgb2pct</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1391,23 +1391,23 @@ or
         <location filename="../setup/ISetupExtTools.ui" line="85"/>
         <location filename="../setup/ISetupExtTools.ui" line="146"/>
         <location filename="../setup/ISetupExtTools.ui" line="236"/>
-        <location filename="../../../build/src/qmaptool/ui_ISetupExtTools.h" line="252"/>
-        <location filename="../../../build/src/qmaptool/ui_ISetupExtTools.h" line="257"/>
-        <location filename="../../../build/src/qmaptool/ui_ISetupExtTools.h" line="261"/>
-        <location filename="../../../build/src/qmaptool/ui_ISetupExtTools.h" line="272"/>
-        <location filename="../../../build/src/qmaptool/ui_ISetupExtTools.h" line="292"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_ISetupExtTools.h" line="252"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_ISetupExtTools.h" line="257"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_ISetupExtTools.h" line="261"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_ISetupExtTools.h" line="272"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_ISetupExtTools.h" line="292"/>
         <source>Reset user defined path setup.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../setup/ISetupExtTools.ui" line="250"/>
-        <location filename="../../../build/src/qmaptool/ui_ISetupExtTools.h" line="295"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_ISetupExtTools.h" line="295"/>
         <source>qmt_map2jnx</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../setup/ISetupExtTools.ui" line="288"/>
-        <location filename="../../../build/src/qmaptool/ui_ISetupExtTools.h" line="299"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_ISetupExtTools.h" line="299"/>
         <source>&lt;b&gt;Note:&lt;/b&gt; Usually QMapTool should detect all external tools by itself. If it does not, it&apos;s a bad setup and you should fix the PATH variable of your system. You can setup the paths manually, too, if you know what you are doing. But please keep in mind that GDAL needs a proper environment setup to function properly. If it&apos;s not setup properly you might get results but these can be off grid.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1416,43 +1416,43 @@ or
     <name>ITimeZoneSetup</name>
     <message>
         <location filename="../units/ITimeZoneSetup.ui" line="14"/>
-        <location filename="../../../build/src/qmaptool/ui_ITimeZoneSetup.h" line="150"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_ITimeZoneSetup.h" line="150"/>
         <source>Setup Timezone ...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../units/ITimeZoneSetup.ui" line="22"/>
-        <location filename="../../../build/src/qmaptool/ui_ITimeZoneSetup.h" line="151"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_ITimeZoneSetup.h" line="151"/>
         <source>UTC</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../units/ITimeZoneSetup.ui" line="32"/>
-        <location filename="../../../build/src/qmaptool/ui_ITimeZoneSetup.h" line="152"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_ITimeZoneSetup.h" line="152"/>
         <source>Local</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../units/ITimeZoneSetup.ui" line="42"/>
-        <location filename="../../../build/src/qmaptool/ui_ITimeZoneSetup.h" line="153"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_ITimeZoneSetup.h" line="153"/>
         <source>Automatic</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../units/ITimeZoneSetup.ui" line="75"/>
-        <location filename="../../../build/src/qmaptool/ui_ITimeZoneSetup.h" line="155"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_ITimeZoneSetup.h" line="155"/>
         <source>Print date/time in </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../units/ITimeZoneSetup.ui" line="82"/>
-        <location filename="../../../build/src/qmaptool/ui_ITimeZoneSetup.h" line="156"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_ITimeZoneSetup.h" line="156"/>
         <source>long format, or</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../units/ITimeZoneSetup.ui" line="92"/>
-        <location filename="../../../build/src/qmaptool/ui_ITimeZoneSetup.h" line="157"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_ITimeZoneSetup.h" line="157"/>
         <source>short format</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1461,97 +1461,97 @@ or
     <name>IToolAddOverview</name>
     <message>
         <location filename="../tool/IToolAddOverview.ui" line="14"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolAddOverview.h" line="204"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolAddOverview.h" line="204"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolAddOverview.ui" line="59"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolAddOverview.h" line="205"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolAddOverview.h" line="205"/>
         <source>do not translate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolAddOverview.ui" line="119"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolAddOverview.h" line="206"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolAddOverview.h" line="206"/>
         <source>:2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolAddOverview.ui" line="126"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolAddOverview.h" line="207"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolAddOverview.h" line="207"/>
         <source>:4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolAddOverview.ui" line="133"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolAddOverview.h" line="208"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolAddOverview.h" line="208"/>
         <source>:8</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolAddOverview.ui" line="140"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolAddOverview.h" line="209"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolAddOverview.h" line="209"/>
         <source>:16</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolAddOverview.ui" line="147"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolAddOverview.h" line="210"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolAddOverview.h" line="210"/>
         <source>:32</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolAddOverview.ui" line="154"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolAddOverview.h" line="211"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolAddOverview.h" line="211"/>
         <source>:64</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolAddOverview.ui" line="164"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolAddOverview.h" line="213"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolAddOverview.h" line="213"/>
         <source>Remove all overview levels from map file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolAddOverview.ui" line="167"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolAddOverview.h" line="215"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolAddOverview.h" line="215"/>
         <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolAddOverview.ui" line="174"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolAddOverview.h" line="217"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolAddOverview.h" line="217"/>
         <source>Do not copy the overviews into the file itself. Add them as external file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolAddOverview.ui" line="177"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolAddOverview.h" line="219"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolAddOverview.h" line="219"/>
         <source>Overview as external file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolAddOverview.ui" line="207"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolAddOverview.h" line="220"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolAddOverview.h" line="220"/>
         <source>Start</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolAddOverview.ui" line="221"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolAddOverview.h" line="221"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolAddOverview.h" line="221"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolAddOverview.ui" line="232"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolAddOverview.h" line="222"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolAddOverview.h" line="222"/>
         <source>For all files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolAddOverview.ui" line="257"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolAddOverview.h" line="223"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolAddOverview.h" line="223"/>
         <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdaladdo&quot; found. Please check setup!&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1560,67 +1560,67 @@ or
     <name>IToolCutMap</name>
     <message>
         <location filename="../tool/IToolCutMap.ui" line="14"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolCutMap.h" line="203"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolCutMap.h" line="203"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolCutMap.ui" line="59"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolCutMap.h" line="204"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolCutMap.h" line="204"/>
         <source>do not translate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolCutMap.ui" line="114"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolCutMap.h" line="205"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolCutMap.h" line="205"/>
         <source>Output filename suffix</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolCutMap.ui" line="133"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolCutMap.h" line="206"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolCutMap.h" line="206"/>
         <source>_cut</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolCutMap.ui" line="148"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolCutMap.h" line="207"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolCutMap.h" line="207"/>
         <source>Create overviews for result.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolCutMap.ui" line="155"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolCutMap.h" line="208"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolCutMap.h" line="208"/>
         <source>GDAL Parameters</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolCutMap.ui" line="183"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolCutMap.h" line="209"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolCutMap.h" line="209"/>
         <source>Start</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolCutMap.ui" line="197"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolCutMap.h" line="210"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolCutMap.h" line="210"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolCutMap.ui" line="208"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolCutMap.h" line="211"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolCutMap.h" line="211"/>
         <source>For all files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolCutMap.ui" line="233"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolCutMap.h" line="212"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolCutMap.h" line="212"/>
         <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdalwarp&quot; found. Please check setup!&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolCutMap.ui" line="243"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolCutMap.h" line="213"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolCutMap.h" line="213"/>
         <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdaladdo&quot; found. Please check setup!&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1629,63 +1629,63 @@ or
     <name>IToolExport</name>
     <message>
         <location filename="../tool/IToolExport.ui" line="14"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolExport.h" line="173"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolExport.h" line="173"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolExport.ui" line="59"/>
         <location filename="../tool/IToolExport.ui" line="72"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolExport.h" line="175"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolExport.h" line="176"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolExport.h" line="175"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolExport.h" line="176"/>
         <source>do not translate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolExport.ui" line="83"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolExport.h" line="177"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolExport.h" line="177"/>
         <source>Garmin BirdsEye (*.jnx)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolExport.ui" line="88"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolExport.h" line="178"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolExport.h" line="178"/>
         <source>TwoNav Raster (*.rmap)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolExport.ui" line="101"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolExport.h" line="180"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolExport.h" line="180"/>
         <source>not implemented yet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolExport.ui" line="112"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolExport.h" line="181"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolExport.h" line="181"/>
         <source>Target File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolExport.ui" line="130"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolExport.h" line="182"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolExport.h" line="182"/>
         <source>Start</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolExport.ui" line="144"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolExport.h" line="183"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolExport.h" line="183"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolExport.ui" line="173"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolExport.h" line="184"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolExport.h" line="184"/>
         <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;qmt_map2jnx&quot; found. Please check setup!&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolExport.ui" line="184"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolExport.h" line="174"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolExport.h" line="174"/>
         <source>Target Filename</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1694,95 +1694,95 @@ or
     <name>IToolExportJnx</name>
     <message>
         <location filename="../tool/export/IToolExportJnx.ui" line="14"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolExportJnx.h" line="180"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolExportJnx.h" line="180"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/export/IToolExportJnx.ui" line="35"/>
         <location filename="../tool/export/IToolExportJnx.ui" line="81"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolExportJnx.h" line="181"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolExportJnx.h" line="186"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolExportJnx.h" line="181"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolExportJnx.h" line="186"/>
         <source>BirdsEye</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/export/IToolExportJnx.ui" line="50"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolExportJnx.h" line="182"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolExportJnx.h" line="182"/>
         <source>Product ID</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/export/IToolExportJnx.ui" line="57"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolExportJnx.h" line="183"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolExportJnx.h" line="183"/>
         <source>Copyright notice</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/export/IToolExportJnx.ui" line="64"/>
         <location filename="../tool/export/IToolExportJnx.ui" line="95"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolExportJnx.h" line="184"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolExportJnx.h" line="188"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolExportJnx.h" line="184"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolExportJnx.h" line="188"/>
         <source>None</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/export/IToolExportJnx.ui" line="71"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolExportJnx.h" line="185"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolExportJnx.h" line="185"/>
         <source>Product name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/export/IToolExportJnx.ui" line="88"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolExportJnx.h" line="187"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolExportJnx.h" line="187"/>
         <source>Description</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/export/IToolExportJnx.ui" line="105"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolExportJnx.h" line="189"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolExportJnx.h" line="189"/>
         <source>JPEG</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/export/IToolExportJnx.ui" line="133"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolExportJnx.h" line="190"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolExportJnx.h" line="190"/>
         <source>Quality</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/export/IToolExportJnx.ui" line="140"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolExportJnx.h" line="191"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolExportJnx.h" line="191"/>
         <source>Chroma subsampling</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/export/IToolExportJnx.ui" line="148"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolExportJnx.h" line="192"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolExportJnx.h" line="192"/>
         <source>411</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/export/IToolExportJnx.ui" line="153"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolExportJnx.h" line="193"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolExportJnx.h" line="193"/>
         <source>422</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/export/IToolExportJnx.ui" line="158"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolExportJnx.h" line="194"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolExportJnx.h" line="194"/>
         <source>444</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/export/IToolExportJnx.ui" line="169"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolExportJnx.h" line="196"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolExportJnx.h" line="196"/>
         <source>Device</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/export/IToolExportJnx.ui" line="184"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolExportJnx.h" line="197"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolExportJnx.h" line="197"/>
         <source>Z-Order</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1791,43 +1791,43 @@ or
     <name>IToolGDALGroupBox</name>
     <message>
         <location filename="../tool/IToolGDALGroupBox.ui" line="14"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolGDALGroupBox.h" line="167"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolGDALGroupBox.h" line="167"/>
         <source>GroupBox</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolGDALGroupBox.ui" line="17"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolGDALGroupBox.h" line="168"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolGDALGroupBox.h" line="168"/>
         <source>GDAL Parameters</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolGDALGroupBox.ui" line="50"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolGDALGroupBox.h" line="169"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolGDALGroupBox.h" line="169"/>
         <source>Resampling</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolGDALGroupBox.ui" line="84"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolGDALGroupBox.h" line="170"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolGDALGroupBox.h" line="170"/>
         <source>Compression</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolGDALGroupBox.ui" line="118"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolGDALGroupBox.h" line="171"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolGDALGroupBox.h" line="171"/>
         <source>Tiled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolGDALGroupBox.ui" line="144"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolGDALGroupBox.h" line="172"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolGDALGroupBox.h" line="172"/>
         <source>x</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolGDALGroupBox.ui" line="188"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolGDALGroupBox.h" line="173"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolGDALGroupBox.h" line="173"/>
         <source>Other:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1836,37 +1836,37 @@ or
     <name>IToolGrid</name>
     <message>
         <location filename="../tool/IToolGrid.ui" line="14"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolGrid.h" line="130"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolGrid.h" line="130"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolGrid.ui" line="56"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolGrid.h" line="132"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolGrid.h" line="132"/>
         <source>Grid Tool</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolGrid.ui" line="65"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolGrid.h" line="133"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolGrid.h" line="133"/>
         <source>do not translate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolGrid.ui" line="99"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolGrid.h" line="134"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolGrid.h" line="134"/>
         <source>Ok</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolGrid.ui" line="110"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolGrid.h" line="135"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolGrid.h" line="135"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolGrid.ui" line="134"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolGrid.h" line="136"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolGrid.h" line="136"/>
         <source>Reset</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1875,55 +1875,55 @@ or
     <name>IToolOverviewGroupBox</name>
     <message>
         <location filename="../tool/IToolOverviewGroupBox.ui" line="14"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolOverviewGroupBox.h" line="104"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolOverviewGroupBox.h" line="104"/>
         <source>GroupBox</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolOverviewGroupBox.ui" line="71"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolOverviewGroupBox.h" line="105"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolOverviewGroupBox.h" line="105"/>
         <source>:2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolOverviewGroupBox.ui" line="78"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolOverviewGroupBox.h" line="106"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolOverviewGroupBox.h" line="106"/>
         <source>:4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolOverviewGroupBox.ui" line="85"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolOverviewGroupBox.h" line="107"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolOverviewGroupBox.h" line="107"/>
         <source>:8</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolOverviewGroupBox.ui" line="92"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolOverviewGroupBox.h" line="108"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolOverviewGroupBox.h" line="108"/>
         <source>:16</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolOverviewGroupBox.ui" line="99"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolOverviewGroupBox.h" line="109"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolOverviewGroupBox.h" line="109"/>
         <source>:32</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolOverviewGroupBox.ui" line="106"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolOverviewGroupBox.h" line="110"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolOverviewGroupBox.h" line="110"/>
         <source>:64</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolOverviewGroupBox.ui" line="119"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolOverviewGroupBox.h" line="112"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolOverviewGroupBox.h" line="112"/>
         <source>Do not copy the overviews into the file itself. Add them as external file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolOverviewGroupBox.ui" line="122"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolOverviewGroupBox.h" line="114"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolOverviewGroupBox.h" line="114"/>
         <source>Overview as external file</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1932,87 +1932,87 @@ or
     <name>IToolPalettize</name>
     <message>
         <location filename="../tool/IToolPalettize.ui" line="14"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolPalettize.h" line="221"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolPalettize.h" line="221"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolPalettize.ui" line="65"/>
         <location filename="../tool/IToolPalettize.ui" line="78"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolPalettize.h" line="223"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolPalettize.h" line="224"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolPalettize.h" line="223"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolPalettize.h" line="224"/>
         <source>do not translate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolPalettize.ui" line="96"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolPalettize.h" line="225"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolPalettize.h" line="225"/>
         <source>Single files, filename suffix</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolPalettize.ui" line="109"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolPalettize.h" line="226"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolPalettize.h" line="226"/>
         <source>_8bit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolPalettize.ui" line="123"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolPalettize.h" line="227"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolPalettize.h" line="227"/>
         <source>Combined file, filename:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolPalettize.ui" line="135"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolPalettize.h" line="228"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolPalettize.h" line="228"/>
         <source>Embed result into *.vrt file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolPalettize.ui" line="142"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolPalettize.h" line="229"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolPalettize.h" line="229"/>
         <source>Create overviews for result.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolPalettize.ui" line="149"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolPalettize.h" line="230"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolPalettize.h" line="230"/>
         <source>GDAL Parameter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolPalettize.ui" line="177"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolPalettize.h" line="231"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolPalettize.h" line="231"/>
         <source>Start</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolPalettize.ui" line="191"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolPalettize.h" line="232"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolPalettize.h" line="232"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolPalettize.ui" line="220"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolPalettize.h" line="233"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolPalettize.h" line="233"/>
         <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdaladdo&quot; found. Please check setup!&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolPalettize.ui" line="230"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolPalettize.h" line="234"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolPalettize.h" line="234"/>
         <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdal_translate&quot; found. Please check setup!&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolPalettize.ui" line="240"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolPalettize.h" line="235"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolPalettize.h" line="235"/>
         <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;qmt_rgb2pct&quot; found. Please check setup!&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolPalettize.ui" line="254"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolPalettize.h" line="222"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolPalettize.h" line="222"/>
         <source>Select filename</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2021,79 +2021,79 @@ or
     <name>IToolRefMap</name>
     <message>
         <location filename="../tool/IToolRefMap.ui" line="14"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolRefMap.h" line="212"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolRefMap.h" line="212"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolRefMap.ui" line="59"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolRefMap.h" line="213"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolRefMap.h" line="213"/>
         <source>do not translate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolRefMap.ui" line="113"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolRefMap.h" line="214"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolRefMap.h" line="214"/>
         <source>Output filename suffix</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolRefMap.ui" line="132"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolRefMap.h" line="215"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolRefMap.h" line="215"/>
         <source>_ref</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolRefMap.ui" line="144"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolRefMap.h" line="216"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolRefMap.h" line="216"/>
         <source>Embed result into *.vrt file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolRefMap.ui" line="151"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolRefMap.h" line="217"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolRefMap.h" line="217"/>
         <source>Create overviews for result.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolRefMap.ui" line="158"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolRefMap.h" line="218"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolRefMap.h" line="218"/>
         <source>GDAL Parameters</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolRefMap.ui" line="186"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolRefMap.h" line="219"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolRefMap.h" line="219"/>
         <source>Start</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolRefMap.ui" line="200"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolRefMap.h" line="220"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolRefMap.h" line="220"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolRefMap.ui" line="211"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolRefMap.h" line="221"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolRefMap.h" line="221"/>
         <source>For all files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolRefMap.ui" line="236"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolRefMap.h" line="222"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolRefMap.h" line="222"/>
         <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdalwarp&quot; found. Please check setup!&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolRefMap.ui" line="246"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolRefMap.h" line="223"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolRefMap.h" line="223"/>
         <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdal_translate&quot; found. Please check setup!&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IToolRefMap.ui" line="256"/>
-        <location filename="../../../build/src/qmaptool/ui_IToolRefMap.h" line="224"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IToolRefMap.h" line="224"/>
         <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdaladdo&quot; found. Please check setup!&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2121,31 +2121,31 @@ or
     <name>IUnitsSetup</name>
     <message>
         <location filename="../units/IUnitsSetup.ui" line="14"/>
-        <location filename="../../../build/src/qmaptool/ui_IUnitsSetup.h" line="103"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IUnitsSetup.h" line="103"/>
         <source>Setup units...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../units/IUnitsSetup.ui" line="24"/>
-        <location filename="../../../build/src/qmaptool/ui_IUnitsSetup.h" line="104"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IUnitsSetup.h" line="104"/>
         <source>Nautical</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../units/IUnitsSetup.ui" line="31"/>
-        <location filename="../../../build/src/qmaptool/ui_IUnitsSetup.h" line="105"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IUnitsSetup.h" line="105"/>
         <source>Imperial</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../units/IUnitsSetup.ui" line="38"/>
-        <location filename="../../../build/src/qmaptool/ui_IUnitsSetup.h" line="106"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IUnitsSetup.h" line="106"/>
         <source>Metric</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../units/IUnitsSetup.ui" line="53"/>
-        <location filename="../../../build/src/qmaptool/ui_IUnitsSetup.h" line="107"/>
+        <location filename="../../../build/Desktop_Qt_6_10_0-Debug/src/qmaptool/ui_IUnitsSetup.h" line="107"/>
         <source>&lt;b&gt;Note:&lt;/b&gt; For some GUI elements changing the units will not take effect until you restart QMapTool.</source>
         <translation type="unfinished"></translation>
     </message>

@@ -61,7 +61,7 @@ QSize CDBItemDelegate::sizeHint(const QStyleOptionViewItem& opt, const QModelInd
   font2.setPointSize(font2.pointSize() - kFontSizeDiffItem);
   QFontMetrics fm2(font2);
 
-  return QSize(opt.rect.width(), std::max(22, 5 * kMargin + fm1.height() + fm2.height()));
+  return QSize(opt.rect.width(), std::max(22, 7 * kMargin + fm1.height() + fm2.height()));
 }
 
 static std::tuple<QFont, QFont, QRect, QRect, QRect, QRect> getRectangles(const QStyleOptionViewItem& opt,

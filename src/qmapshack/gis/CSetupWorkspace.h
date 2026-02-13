@@ -36,6 +36,9 @@ class CSetupWorkspace : public QDialog, private Ui::ISetupWorkspace {
  public slots:
   void accept() override;
 
+ private slots:
+  void slotGisDecorationsChanged();
+
  private:
   CGisWorkspace* workspace;
 };

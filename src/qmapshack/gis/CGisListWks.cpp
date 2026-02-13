@@ -460,7 +460,7 @@ void CGisListWks::dragMoveEvent(QDragMoveEvent* e) {
     CGisItemTrk* trk2 = dynamic_cast<CGisItemTrk*>(item2);
 
     if (trk1 && trk2) {
-      e->setDropAction(trk1->parent() == trk2->parent() ? Qt::MoveAction : Qt::CopyAction);
+      e->setDropAction(trk1->parent() == trk2->parent() ? Qt::IgnoreAction : Qt::CopyAction);
       QTreeWidget::dragMoveEvent(e);
       return;
     }
@@ -469,7 +469,7 @@ void CGisListWks::dragMoveEvent(QDragMoveEvent* e) {
     CGisItemWpt* wpt2 = dynamic_cast<CGisItemWpt*>(item2);
 
     if (wpt1 && wpt2) {
-      e->setDropAction(wpt1->parent() == wpt2->parent() ? Qt::MoveAction : Qt::CopyAction);
+      e->setDropAction(wpt1->parent() == wpt2->parent() ? Qt::IgnoreAction : Qt::CopyAction);
       QTreeWidget::dragMoveEvent(e);
       return;
     }
@@ -478,7 +478,7 @@ void CGisListWks::dragMoveEvent(QDragMoveEvent* e) {
     CGisItemRte* rte2 = dynamic_cast<CGisItemRte*>(item2);
 
     if (rte1 && rte2) {
-      e->setDropAction(rte1->parent() == rte2->parent() ? Qt::MoveAction : Qt::CopyAction);
+      e->setDropAction(rte1->parent() == rte2->parent() ? Qt::IgnoreAction : Qt::CopyAction);
       QTreeWidget::dragMoveEvent(e);
       return;
     }
@@ -487,7 +487,7 @@ void CGisListWks::dragMoveEvent(QDragMoveEvent* e) {
     CGisItemOvlArea* area2 = dynamic_cast<CGisItemOvlArea*>(item2);
 
     if (area1 && area2) {
-      e->setDropAction(area1->parent() == area2->parent() ? Qt::MoveAction : Qt::CopyAction);
+      e->setDropAction(area1->parent() == area2->parent() ? Qt::IgnoreAction : Qt::CopyAction);
       QTreeWidget::dragMoveEvent(e);
       return;
     }
@@ -551,7 +551,7 @@ void CGisListWks::dropEvent(QDropEvent* e) {
   CGisListWksEditLock lock(true, IGisItem::mutexItems);
 
   const QList<QTreeWidgetItem*>& items = selectedItems();
-  if (items.isEmpty()) {
+  if (items.isEmpty()) {    
     return;
   }
 

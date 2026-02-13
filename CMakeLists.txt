@@ -23,7 +23,8 @@ endif()
 ###############################################################################################
 # this is not only the QMS version it will be the package version, too.
 project(QMapShack VERSION 1.20.0 LANGUAGES CXX C)
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_C_STANDARD 99)
 
 # FOR A RELEASE:
 # remove "development" for a release
@@ -144,8 +145,8 @@ if(MSVC)
 endif(MSVC)
 
 if(UNIX)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}  -lm")
-    add_definitions(-Wall -Wpedantic -Wno-switch -Wno-strict-aliasing)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}  -lm")    
+    add_compile_options(-Wall -Wpedantic -Wno-switch -Wno-strict-aliasing -fms-extensions)
 
     # Use ASAN for development versions
     if(${DEVELOPMENT_VERSION})

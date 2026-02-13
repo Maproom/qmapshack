@@ -30,8 +30,8 @@
 #include "dem/CDemList.h"
 #include "gis/CGisDatabase.h"
 #include "gis/CGisWorkspace.h"
+#include "gis/CSetupWorkspace.h"
 #include "gis/IGisLine.h"
-#include "gis/db/CSetupWorkspace.h"
 #include "gis/prj/IGisProject.h"
 #include "gis/proj_x.h"
 #include "gis/rte/router/CRouterBRouter.h"
@@ -1174,8 +1174,9 @@ void CMainWindow::slotSetupUnits() {
 }
 
 void CMainWindow::slotSetupWorkspace() {
-  CSetupWorkspace dlg(widgetGisWorkspace, this);
-  dlg.exec();
+  CSetupWorkspace* dlg = new CSetupWorkspace(widgetGisWorkspace, this);
+  dlg->resize(0, 0);
+  dlg->show();
 }
 
 void CMainWindow::slotSetupCoordFormat() {

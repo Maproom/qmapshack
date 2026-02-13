@@ -27,7 +27,7 @@
 #include "helpers/CDraw.h"
 #include "map/IMapItem.h"
 
-constexpr int kMargin = 2;
+constexpr int kMargin = 1;
 constexpr int kFontSizeDiffItem = 2;
 
 CMapItemDelegate::CMapItemDelegate(QTreeWidget* parent) : QStyledItemDelegate(parent), treeWidget(parent) {
@@ -204,17 +204,20 @@ std::tuple<QFont, QFont, QRect, QRect, QRect, QRect, QRect> CMapItemDelegate::ge
   fontStatus.setPointSize(fontStatus.pointSize() - kFontSizeDiffItem);
   QFontMetrics fmStatus(fontStatus);
 
-  const QRect& r = opt.rect.adjusted(kMargin, kMargin, -kMargin, -kMargin);
-  const QRect& rectIcon = r.adjusted(-kMargin, -kMargin, -(r.width() - r.height()), kMargin);
-  const QRect& rectButton = r.adjusted(r.width() - r.height() + kMargin, kMargin, -kMargin, -kMargin);
-  const QRect& rectIndicator =
-      QRect(rectButton.left() - 2 * kMargin - 6, rectButton.top() + kMargin, 6, rectButton.height() - 2 * kMargin);
+  const QRect& r = opt.rect.adjusted(2 * kMargin, 2 * kMargin, -2 * kMargin, -2 * kMargin);
+  const QRect rectIcon(r.left(), r.top(), r.height(), r.height());
+  const QRect rectButton(r.right() - r.height() + 2 * kMargin, r.top() + kMargin, r.height() - 2 * kMargin,
+                         r.height() - 2 * kMargin);
+  const QRect rectIndicator(rectButton.left() - 2 * kMargin - 6, rectButton.top() + kMargin, 6,
+                            rectButton.height() - 2 * kMargin);
 
-  const QRect& rectName = r.adjusted(rectIcon.width() + kMargin, kMargin,
-                                     rectIndicator.left() - r.right() - 2 * kMargin, -(r.height() - fmName.height()));
+  const QRect rectName(rectIcon.right() + 2 * kMargin, r.top(),
+                       r.width() - rectIcon.width() - rectButton.width() - rectIndicator.width() - 5 * kMargin,
+                       fmName.height());
 
-  const QRect& rectStatus = r.adjusted(rectIcon.width() + kMargin, rectName.height() + kMargin,
-                                       rectIndicator.left() - r.right() - 2 * kMargin, -kMargin);
+  const QRect rectStatus(rectIcon.right() + 2 * kMargin, r.bottom() - fmStatus.height(),
+                         r.width() - rectIcon.width() - rectButton.width() - rectIndicator.width() - 5 * kMargin,
+                         fmStatus.height());
 
   return {fontName, fontStatus, rectIcon, rectButton, rectIndicator, rectName, rectStatus};
 }
@@ -261,14 +264,13 @@ void CMapItemDelegate::paint(QPainter* p, const QStyleOptionViewItem& opt, const
   // draw name
   p->setPen(colorName);
   p->setFont(fontName);
-  p->setClipRect(rectName.adjusted(-1, -1, 1, 1));
-  p->drawText(rectName, Qt::AlignLeft | Qt::AlignVCenter, item->getName());
+  p->drawText(rectName.adjusted(0, -1, 0, 1), Qt::AlignLeft | Qt::AlignVCenter, item->getName());
   p->setClipping(false);
 
   // draw status
   p->setPen(colorStatus);
   p->setFont(fontStatus);
-  p->drawText(rectStatus, Qt::AlignLeft | Qt::AlignVCenter, status);
+  p->drawText(rectStatus.adjusted(0, -1, 0, 1), Qt::AlignLeft | Qt::AlignVCenter, status);
 
   // draw icon
   data[keyFromIndex(index)].icon.paint(p, rectIcon);
@@ -372,5 +374,5 @@ QSize CMapItemDelegate::sizeHint(const QStyleOptionViewItem& opt, const QModelIn
   font2.setPointSize(font2.pointSize() - kFontSizeDiffItem);
   QFontMetrics fm2(font2);
 
-  return QSize(opt.rect.width(), std::max(22, 5 * kMargin + fm1.height() + fm2.height()));
+  return QSize(opt.rect.width(), std::max(22, 7 * kMargin + fm1.height() + fm2.height()));
 }

@@ -154,7 +154,7 @@ class IAppSetup : public QObject {
 
   IAppSetup(QObject* parent) : QObject(parent) { pSelf = this; }
 
-  void prepareGdal(QString gdalDir, QString projDir);
+  void prepareGdal(QString gdalDataDir, QString gdalPluginsDir, QString projDataDir);
   void prepareTranslator(QString translationPath, QString translationPrefix);
   void prepareToolPaths();
 

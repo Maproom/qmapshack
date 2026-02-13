@@ -20,7 +20,6 @@
 
 #include <gdal.h>
 
-#include "CCommandProcessor.h"
 #if defined(Q_OS_MAC)
 #include "setup/CAppSetupMac.h"
 #elif defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD) || defined(__FreeBSD_kernel__) || defined(__GNU__)
@@ -28,7 +27,7 @@
 #elif defined(Q_OS_WIN32)
 #include "setup/CAppSetupWin.h"
 #endif
-
+#include "setup/CCommandProcessor.h"
 #include "setup/CLogHandler.h"
 
 IAppSetup* IAppSetup::instance = nullptr;
@@ -48,15 +47,20 @@ IAppSetup* IAppSetup::getPlatformInstance() {
   return instance;
 }
 
-void IAppSetup::prepareGdal(QString gdalDir, QString projDir) {
-  if (!gdalDir.isEmpty()) {
-    qputenv("GDAL_DATA", gdalDir.toUtf8());
-    qDebug() << "GDAL_DATA directory set to " + gdalDir;
+void IAppSetup::prepareGdal(QString gdalDataDir, QString gdalPluginsDir, QString projDataDir) {
+  if (!gdalDataDir.isEmpty()) {
+    qputenv("GDAL_DATA", gdalDataDir.toUtf8());
+    qDebug() << "GDAL_DATA directory set to " + gdalDataDir;
   }
 
-  if (!projDir.isEmpty()) {
-    qputenv("PROJ_LIB", projDir.toUtf8());
-    qDebug() << "PROJ_LIB directory set to " + projDir;
+  if (!gdalPluginsDir.isEmpty()) {
+    qputenv("GDAL_DRIVER_PATH", gdalPluginsDir.toUtf8());
+    qDebug() << "GDAL_DRIVER_PATH directory set to " + gdalPluginsDir;
+  }
+
+  if (!projDataDir.isEmpty()) {
+    qputenv("PROJ_DATA", projDataDir.toUtf8());
+    qDebug() << "PROJ_DATA directory set to " + projDataDir;
   }
 
   GDALAllRegister();

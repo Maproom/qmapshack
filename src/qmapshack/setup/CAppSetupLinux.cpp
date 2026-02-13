@@ -19,7 +19,7 @@
 #include <QtSystemDetection>
 #if defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD) || defined(__FreeBSD_kernel__) || defined(__GNU__)
 
-#include "CAppSetupLinux.h"
+#include "setup/CAppSetupLinux.h"
 
 #include <QWindow>
 
@@ -29,16 +29,12 @@
 #include "config.h"
 #include "version.h"
 
-#ifndef _MKSTR_1
-#define _MKSTR_1(x) #x
-#define _MKSTR(x) _MKSTR_1(x)
-#endif
-
 void CAppSetupLinux::initQMapShack() {
-  prepareGdal("", "");
+  // setup gdal
+  prepareGdal("", "", "");
 
   // setup translators
-  QString resourceDir = QLibraryInfo::path(QLibraryInfo::TranslationsPath);
+  const QString& resourceDir = QLibraryInfo::path(QLibraryInfo::TranslationsPath);
   QString translationPath = QCoreApplication::applicationDirPath();
   static const QRegularExpression re("bin$");
   translationPath.replace(re, "share/qmapshack/translations");
@@ -64,7 +60,7 @@ QString CAppSetupLinux::defaultCachePath() {
 }
 
 QString CAppSetupLinux::userDataPath(QString subdir) {
-  QString path = QDir::home().absoluteFilePath(CONFIGDIR);
+  const QString& path = QDir::home().absoluteFilePath(CONFIGDIR);
   return IAppSetup::path(path, subdir, false, 0);
 }
 
@@ -80,7 +76,7 @@ void CAppSetupLinux::closeOnSIGTERM() {
     for (auto const item : qApp->topLevelWindows()) {
       // Close application gracefully on signal SIGTERM
       if (item->objectName() == "IMainWindowWindow") {
-        qDebug() << "Closing on SIGTERM";
+        qDebug() << "closing on SIGTERM";
         item->close();
         break;
       }

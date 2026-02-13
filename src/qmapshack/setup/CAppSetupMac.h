@@ -39,13 +39,14 @@ class CAppSetupMac : public IAppSetup {
   void extendPath();
   static void closeOnSIGTERM();
 
-  static QString relTranslationDir;
-  static QString relRoutinoDir;
-  static QString relGdalDir;
-  static QString relProjDir;
-  static QString relHelpDir;
-  static QString relBinDir;
-  static QString relLogDir;
+  static const QString relTranslationDir;
+  static const QString relRoutinoDir;
+  static const QString relGdalDataDir;
+  static const QString relGdalPluginsDir;
+  static const QString relProjDataDir;
+  static const QString relHelpDir;
+  static const QString relBinDir;
+  static const QString relLogDir;
 };
 
 #endif  // CAPPSETUPMAC_H

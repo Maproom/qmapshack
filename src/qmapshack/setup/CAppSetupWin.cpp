@@ -19,7 +19,7 @@
 #include <QtSystemDetection>
 #if defined(Q_OS_WIN32)
 
-#include "CAppSetupWin.h"
+#include "setup/CAppSetupWin.h"
 
 #include <QAbstractNativeEventFilter>
 #include <QWindow>
@@ -38,7 +38,7 @@ class windowsEventFilter: public QAbstractNativeEventFilter {
       for (auto const item : qApp->topLevelWindows()) {
         // Close application gracefully on signal WM_CLOSE
         if (item->objectName() == "IMainWindowWindow" && (HWND)(item->winId()) == winId) {
-          qDebug() << "Closing on WM_CLOSE";
+          qDebug() << "closing on WM_CLOSE";
           item->close();
           return true;
         }
@@ -49,16 +49,16 @@ class windowsEventFilter: public QAbstractNativeEventFilter {
 };
 
 void CAppSetupWin::initQMapShack() {
-  // setup environment variables for GDAL/Proj4
+  // setup environment variables for GDAL/PROJ
   QString apppath = QCoreApplication::applicationDirPath();
   apppath = apppath.replace("/", "\\");
-  QString gdalDir = QString("%1\\data").arg(apppath);
-  QString projDir = QString("%1\\share\\proj").arg(apppath);
+  const QString& gdalDataDir = QString("%1\\data").arg(apppath);
+  const QString& gdalPluginsDir = QString("%1\\gdalplugins").arg(apppath);
+  const QString& projDataDir = QString("%1\\share\\proj").arg(apppath);
 
-  // qunsetenv("GDAL_DRIVER_PATH");
-  IAppSetup::prepareGdal(gdalDir, projDir);
+  prepareGdal(gdalDataDir, gdalPluginsDir, projDataDir);
 
-  QString appResourceDir = QString("%1\\translations").arg(apppath).toUtf8();
+  const QString& appResourceDir = QString("%1\\translations").arg(apppath).toUtf8();
   prepareTranslator(appResourceDir, "qtbase_");
   prepareTranslator(appResourceDir, "qmapshack_");
 
@@ -87,7 +87,7 @@ QString CAppSetupWin::defaultCachePath() {
 }
 
 QString CAppSetupWin::userDataPath(QString subdir) {
-  QString path = QDir::home().absoluteFilePath(CONFIGDIR);
+  const QString& path = QDir::home().absoluteFilePath(CONFIGDIR);
   return IAppSetup::path(path, subdir, false, 0);
 }
 

@@ -16,22 +16,49 @@
 
 **********************************************************************************************/
 
+#include <QtSystemDetection>
+#if defined(Q_OS_WIN32)
+
 #include "setup/CAppSetupWin.h"
+
+#include <QAbstractNativeEventFilter>
+#include <QWindow>
+
+#include "windows.h"
 
 #include "config.h"
 #include "version.h"
 
+class windowsEventFilter: public QAbstractNativeEventFilter {
+ public:
+  bool nativeEventFilter(const QByteArray& eventType, void* message, qintptr* result) override {
+    MSG *msg = static_cast<MSG *>(message);
+    if (msg->message == WM_CLOSE) {
+      HWND winId = msg->hwnd;
+      for (auto const item : qApp->topLevelWindows()) {
+        // Close application gracefully on signal WM_CLOSE
+        if (item->objectName() == "IMainWindowWindow" && (HWND)(item->winId()) == winId) {
+          qDebug() << "closing on WM_CLOSE";
+          item->close();
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+};
+
 void CAppSetupWin::initQMapTool() {
-  // setup environment variables for GDAL/Proj4
+  // setup environment variables for GDAL/PROJ
   QString apppath = QCoreApplication::applicationDirPath();
   apppath = apppath.replace("/", "\\");
-  QString gdalDir = QString("%1\\data").arg(apppath);
-  QString projDir = QString("%1\\share\\proj").arg(apppath);
+  const QString& gdalDataDir = QString("%1\\data").arg(apppath);
+  const QString& gdalPluginsDir = QString("%1\\gdalplugins").arg(apppath);
+  const QString& projDataDir = QString("%1\\share\\proj").arg(apppath);
 
-  // qunsetenv("GDAL_DRIVER_PATH");
-  prepareGdal(gdalDir, projDir);
+  prepareGdal(gdalDataDir, gdalPluginsDir, projDataDir);
 
-  QString appResourceDir = QString("%1\\translations").arg(apppath).toUtf8();
+  const QString& appResourceDir = QString("%1\\translations").arg(apppath).toUtf8();
   prepareTranslator(appResourceDir, "qtbase_");
   prepareTranslator(appResourceDir, "qmaptool_");
 
@@ -43,6 +70,9 @@ void CAppSetupWin::initQMapTool() {
   IAppSetup::path(logDir(), 0, true, "LOG");
 
   prepareToolPaths();
+
+  // catch signal WM_CLOSE
+  qApp->installNativeEventFilter(new windowsEventFilter);
 }
 
 QString CAppSetupWin::defaultCachePath() {
@@ -50,7 +80,7 @@ QString CAppSetupWin::defaultCachePath() {
 }
 
 QString CAppSetupWin::userDataPath(QString subdir) {
-  QString path = QDir::home().absoluteFilePath(CONFIGDIR);
+  const QString& path = QDir::home().absoluteFilePath(CONFIGDIR);
   return IAppSetup::path(path, subdir, false, 0);
 }
 
@@ -63,3 +93,5 @@ QString CAppSetupWin::helpFile() {
   QDir dirHelp = QDir(dirApp.absoluteFilePath(_MKSTR(HELPPATH)));
   return dirHelp.absoluteFilePath("QMTHelp.qhc");
 }
+
+#endif // defined(Q_OS_WIN32)

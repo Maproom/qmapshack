@@ -38,7 +38,7 @@ class IAppSetup {
   virtual QString helpFile() = 0;
 
  protected:
-  void prepareGdal(QString gdalDir, QString projDir);
+  void prepareGdal(QString gdalDataDir, QString gdalPluginsDir, QString projDataDir);
   void prepareTranslator(QString translationPath, QString translationPrefix);
 
   static IAppSetup* instance;

@@ -16,20 +16,25 @@
 
 **********************************************************************************************/
 
+#include <QtSystemDetection>
+#if defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD) || defined(__FreeBSD_kernel__) || defined(__GNU__)
+
 #include "setup/CAppSetupLinux.h"
 
-#include "config.h"
+#include <QWindow>
 
-#ifndef _MKSTR_1
-#define _MKSTR_1(x) #x
-#define _MKSTR(x) _MKSTR_1(x)
-#endif
+#include "signal.h"
+#include "unistd.h"
+
+#include "config.h"
+#include "version.h"
 
 void CAppSetupLinux::initQMapTool() {
-  prepareGdal("", "");
+  // setup gdal
+  prepareGdal("", "", "");
 
   // setup translators
-  QString resourceDir = QLibraryInfo::path(QLibraryInfo::TranslationsPath);
+  const QString& resourceDir = QLibraryInfo::path(QLibraryInfo::TranslationsPath);
   QString translationPath = QCoreApplication::applicationDirPath();
   static const QRegularExpression re("bin$");
   translationPath.replace(re, "share/qmaptool/translations");
@@ -40,6 +45,9 @@ void CAppSetupLinux::initQMapTool() {
   IAppSetup::path(logDir(), 0, true, "LOG");
 
   prepareToolPaths();
+
+  // catch signal SIGTERM
+  closeOnSIGTERM();
 }
 
 QString CAppSetupLinux::defaultCachePath() {
@@ -57,3 +65,21 @@ QString CAppSetupLinux::helpFile() {
   QDir dir(_MKSTR(HELPPATH));
   return dir.absoluteFilePath("QMTHelp.qhc");
 }
+
+
+void CAppSetupLinux::closeOnSIGTERM() {
+  sighandler_t handler = [](int sig)->void {
+    for (auto const item : qApp->topLevelWindows()) {
+      // Close application gracefully on signal SIGTERM
+      if (item->objectName() == "IMainWindowWindow") {
+        qDebug() << "closing on SIGTERM";
+        item->close();
+        break;
+      }
+    }
+  };
+
+  signal(SIGTERM, handler);
+}
+
+#endif // defined(Q_OS_LINUX)

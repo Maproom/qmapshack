@@ -20,6 +20,7 @@ V1.XX.X
 [QMS-946] New workspace widget design
 [QMS-951] New database widget design
 [QMS-953] Fix geo cache symbols on map
+[QMS-955] GDAL plugin driven maps not working (Windows & macOS)
 
 V1.19.0
 [QMS-869] Convert track to area

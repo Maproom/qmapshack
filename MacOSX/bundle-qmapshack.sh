@@ -13,8 +13,8 @@ source $SRC_OSX_DIR/bundle-common-func.sh
 
 
 function extendAppStructure {
-    mkdir -p "$BUILD_BUNDLE_RES_QM_DIR"
     mkdir -p "$BUILD_BUNDLE_RES_GDAL_DIR"
+    mkdir -p "$BUILD_BUNDLE_RES_GDAL_PLUGINS_DIR"
     mkdir -p "$BUILD_BUNDLE_RES_PROJ_DIR"
     mkdir -p "$BUILD_BUNDLE_RES_ROUTINO_DIR"
     mkdir -p "$BUILD_BUNDLE_RES_HELP_DIR"
@@ -89,8 +89,10 @@ function copyExternalFiles {
         
         if [ "$BUILD_GDAL" = "x" ]; then
             cp -vP $LOCAL_ENV/share/gdal/* $BUILD_BUNDLE_RES_GDAL_DIR
+            cp -vP $LOCAL_ENV/lib/gdalplugins/* $BUILD_BUNDLE_RES_GDAL_PLUGINS_DIR
         else
             cp -vP $(brew --prefix gdal)/share/gdal/* $BUILD_BUNDLE_RES_GDAL_DIR
+            cp -vP $(brew --prefix gdal)/lib/gdalplugins/* $BUILD_BUNDLE_RES_GDAL_PLUGINS_DIR
         fi
         if [ "$BUILD_PROJ" = "x" ]; then
             cp -vP $LOCAL_ENV/share/proj/* $BUILD_BUNDLE_RES_PROJ_DIR
@@ -117,6 +119,7 @@ function copyExternalFiles {
     rm $BUILD_BUNDLE_RES_PROJ_DIR/*.txt
 }
 
+
 function copyExternalHelpFiles_QMS {
     cp -v $HELP_QMS_DIR/QMSHelp.qch $BUILD_BUNDLE_RES_HELP_DIR
     cp -v $HELP_QMS_DIR/QMSHelp.qhc $BUILD_BUNDLE_RES_HELP_DIR
@@ -132,13 +135,15 @@ function copyExtTools {
             if [ "$BUILD_PROJ" = "x" ]; then
                 cp -v $LOCAL_ENV/bin/proj             $BUILD_BUNDLE_RES_BIN_DIR
             else
-                cp -v $PACKAGES_PATH/bin/proj             $BUILD_BUNDLE_RES_BIN_DIR
+                cp -v $PACKAGES_PATH/bin/proj         $BUILD_BUNDLE_RES_BIN_DIR
             fi
         fi
-        cp -v $GDAL/bin/gdalbuildvrt                $BUILD_BUNDLE_RES_BIN_DIR
+        cp -v $GDAL/bin/gdalinfo                $BUILD_BUNDLE_RES_BIN_DIR
+        cp -v $GDAL/bin/gdalbuildvrt            $BUILD_BUNDLE_RES_BIN_DIR
         cp -v $GDAL/bin/gdaladdo                $BUILD_BUNDLE_RES_BIN_DIR
         cp -v $GDAL/bin/gdal_translate          $BUILD_BUNDLE_RES_BIN_DIR
         cp -v $GDAL/bin/gdalwarp                $BUILD_BUNDLE_RES_BIN_DIR
+        cp -v $SRC_OSX_DIR/set_gdal_shell.sh    $BUILD_BUNDLE_RES_BIN_DIR
 
         cp -v $ROUTINO_DEV_PATH/bin/planetsplitter  $BUILD_BUNDLE_RES_BIN_DIR
       else
@@ -147,7 +152,6 @@ function copyExtTools {
         cp -v $PACKAGES_PATH/bin/gdalbuildvrt            $BUILD_BUNDLE_RES_BIN_DIR
         cp -v $ROUTINO_DEV_PATH/bin/planetsplitter       $BUILD_BUNDLE_RES_BIN_DIR
     fi
-   
 }
 
 
@@ -174,24 +178,23 @@ extendAppStructure
 echo "---replace version string ----------"
 updateInfoPlist
 
-echo "---qt deploy tool ------------------"
-if [ "$BREW_PACKAGE_BUILD" = "" ] ; then
+if [ -z "$BREW_PACKAGE_BUILD" ]; then
+    # copy only if built as standalone package (QMS not as a brew pkg)
+    echo "---qt deploy tool ------------------"
     qtDeploy
 fi
 
 echo "---copy libraries ------------------"
 copyAdditionalLibraries
 
-echo "---copy translations ------------------"
-copyQtTranslations    
+echo "---copy translations ---------------"
+copyQtTranslations
 
 echo "---external data files -------------"
 copyExternalFiles
 
 echo "---external help files -------------"
 copyExternalHelpFiles_QMS
-
-
 
 echo "---external tools ------------------"
 copyExtTools
@@ -205,10 +208,8 @@ fi
 
 if [ -z "$BREW_PACKAGE_BUILD" ]; then
     # copy only if built as standalone package (QMS not as a brew pkg)
-        echo "---adjustLinkingExtTools -------------"
-
+    echo "---adjustLinkingExtTools -------------"
     adjustLinkingExtTools
-
 fi
 
 

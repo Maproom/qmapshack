@@ -26,15 +26,52 @@
 #include "help/CHelpSearch.h"
 #include "helpers/CSettings.h"
 
-CHelp::CHelp(const QString& helpfile, const QString& homepage, QWidget* parent) : QDockWidget(tr("Help"), parent) {
+static bool isFileNewer(const QString& originalPath, const QString& copyPath) {
+  QFileInfo originalInfo(originalPath);
+  QFileInfo copyInfo(copyPath);
+
+  // Ensure both files actually exist before comparing
+  if (!originalInfo.exists() || !copyInfo.exists()) {
+    return originalInfo.exists();  // If only original exists, it's "newer"
+  }
+
+  // Direct comparison of QDateTime objects
+  return originalInfo.lastModified() > copyInfo.lastModified();
+}
+
+CHelp::CHelp(const QString& sourceQhc, const QString& homepage, QWidget* parent) : QDockWidget(tr("Help"), parent) {
   setWindowFlag(Qt::Tool, true);
   setAttribute(Qt::WA_DeleteOnClose, true);
 
   splitter = new QSplitter(Qt::Horizontal, this);
 
-  qDebug() << "search help at:" << helpfile;
-  engine = new QHelpEngine(helpfile, this);
+  QFileInfo fi(sourceQhc);
+
+  const QString& userDir = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
+  QDir().mkpath(userDir);
+
+  const QString& userQhc = QDir(userDir).filePath(fi.baseName() + ".qhc");
+  const QString& sourceQch = fi.dir().filePath(fi.baseName() + ".qch");
+
+  // Copy once if it doesn't exist
+  if (isFileNewer(sourceQhc, userQhc)) {
+    QFile::copy(sourceQhc, userQhc);
+  }
+
+  qDebug() << "compressed help:" << sourceQch;
+  qDebug() << "help collection:" << userQhc;
+  engine = new QHelpEngine(userQhc, this);
   engine->setupData();
+
+  for (const QString& ns : engine->registeredDocumentations()) {
+    engine->unregisterDocumentation(ns);
+  }
+
+  if (!engine->registerDocumentation(sourceQch)) {
+    qWarning() << "failed to register" << sourceQch << "Reason:" << engine->error();
+  }
+
+  qDebug() << "Registered docs:" << engine->registeredDocumentations();
 
   index = new CHelpIndex(engine, this);
   search = new CHelpSearch(engine, this);

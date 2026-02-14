@@ -19,8 +19,9 @@ V1.XX.X
 [QMS-945] Add waypoint icons for geocache pocket queries.
 [QMS-946] New workspace widget design
 [QMS-951] New database widget design
-[QMS-953] Fix geo cache symbols on map
-[QMS-955] GDAL plugin driven maps not working (Windows & macOS)
+[QMS-953] Fix: Geo cache symbols on map
+[QMS-955] Fix: GDAL plugin driven maps not working (Windows & macOS)
+[QMS-962] Fix: Offline help's full text search index missing (Linux & macOS)
 
 V1.19.0
 [QMS-869] Convert track to area

@@ -21,6 +21,7 @@ V1.XX.X
 [QMS-951] New database widget design
 [QMS-953] Fix: Geo cache symbols on map
 [QMS-955] Fix: GDAL plugin driven maps not working (Windows & macOS)
+[QMS-961] Replace PROJ4 by PROJ wherever publicly visible
 [QMS-962] Fix: Offline help's full text search index missing (Linux & macOS)
 
 V1.19.0

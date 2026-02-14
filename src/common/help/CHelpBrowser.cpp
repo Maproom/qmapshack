@@ -37,7 +37,6 @@ void CHelpBrowser::setSource(const QUrl& url) {
 }
 
 QVariant CHelpBrowser::loadResource(int type, const QUrl& name) {
-  qDebug() << name;
   if (name.scheme() == "qthelp") {
     return QVariant(engine->fileData(name));
   } else {

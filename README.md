@@ -21,7 +21,7 @@ Dependencies
 
 * [Qt6](https://www.qt.io/) (at least 6.8)
 * [GDAL](http://www.gdal.org/) (at least GDAL 3.0.0)
-* [Proj4](https://proj.org/) (at least 9.0.0)
+* [PROJ](https://proj.org/) (at least 9.1.0)
 * [Routino](http://www.routino.org/) (at least 3.1)
 * [QuaZip](http://quazip.sourceforge.net/index.html) (Qt6 V1.x)
 * CMake/Make

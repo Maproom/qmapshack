@@ -28,11 +28,21 @@
     </message>
     <message>
         <location filename="../setup/CCommandProcessor.cpp" line="39"/>
-        <source>File with QMapTool configuration.</source>
+        <source>QMapTool application locale.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../setup/CCommandProcessor.cpp" line="39"/>
+        <source>code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../setup/CCommandProcessor.cpp" line="42"/>
+        <source>File with QMapTool configuration.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../setup/CCommandProcessor.cpp" line="42"/>
         <source>file</source>
         <translation type="unfinished"></translation>
     </message>

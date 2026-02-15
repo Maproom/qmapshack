@@ -239,16 +239,26 @@
     </message>
     <message>
         <location filename="../setup/CCommandProcessor.cpp" line="38"/>
+        <source>QMapShack application locale.</source>
+        <translation>Gebietsschema von QMapShack.</translation>
+    </message>
+    <message>
+        <location filename="../setup/CCommandProcessor.cpp" line="38"/>
+        <source>code</source>
+        <translation>Code</translation>
+    </message>
+    <message>
+        <location filename="../setup/CCommandProcessor.cpp" line="41"/>
         <source>File with QMapShack configuration.</source>
         <translation>Datei mit QMapShack Einstellungen.</translation>
     </message>
     <message>
-        <location filename="../setup/CCommandProcessor.cpp" line="38"/>
+        <location filename="../setup/CCommandProcessor.cpp" line="41"/>
         <source>file</source>
         <translation>Datei</translation>
     </message>
     <message>
-        <location filename="../setup/CCommandProcessor.cpp" line="41"/>
+        <location filename="../setup/CCommandProcessor.cpp" line="44"/>
         <source>Files for future use.</source>
         <translation>Dateien für den späteren Gebrauch.</translation>
     </message>

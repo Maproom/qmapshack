@@ -23,6 +23,7 @@ V1.XX.X
 [QMS-955] Fix: GDAL plugin driven maps not working (Windows & macOS)
 [QMS-961] Replace PROJ4 by PROJ wherever publicly visible
 [QMS-962] Fix: Offline help's full text search index missing (Linux & macOS)
+[QMS-967] Fix and extend locale handling
 
 V1.19.0
 [QMS-869] Convert track to area

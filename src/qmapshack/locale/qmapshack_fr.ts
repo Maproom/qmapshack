@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="fr">
+<TS version="2.1" language="fr_FR">
 <context>
     <name>CAbout</name>
     <message>
@@ -239,16 +239,26 @@
     </message>
     <message>
         <location filename="../setup/CCommandProcessor.cpp" line="38"/>
+        <source>QMapShack application locale.</source>
+        <translation>Localisation de QMapShack.</translation>
+    </message>
+    <message>
+        <location filename="../setup/CCommandProcessor.cpp" line="38"/>
+        <source>code</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../setup/CCommandProcessor.cpp" line="41"/>
         <source>File with QMapShack configuration.</source>
         <translation>Fichier de configuration QMS.</translation>
     </message>
     <message>
-        <location filename="../setup/CCommandProcessor.cpp" line="38"/>
+        <location filename="../setup/CCommandProcessor.cpp" line="41"/>
         <source>file</source>
         <translation>fichier</translation>
     </message>
     <message>
-        <location filename="../setup/CCommandProcessor.cpp" line="41"/>
+        <location filename="../setup/CCommandProcessor.cpp" line="44"/>
         <source>Files for future use.</source>
         <translation>Fichiers pour usage futur.</translation>
     </message>

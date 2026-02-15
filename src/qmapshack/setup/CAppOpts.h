@@ -29,11 +29,12 @@ class CAppOpts {
   const bool debug;     // -d, print debug messages
   const bool logfile;   // -f, print debug messages to logfile
   const bool nosplash;  // -n, do not display splash screen
+  const QString locale;
   const QString configfile;
   const QStringList arguments;
 
-  CAppOpts(bool doDebug, bool doLogfile, bool noSplash, const QString& config, const QStringList& args)
-      : debug(doDebug), logfile(doLogfile), nosplash(noSplash), configfile(config), arguments(args) {}
+  CAppOpts(bool doDebug, bool doLogfile, bool noSplash, const QString& locale, const QString& config, const QStringList& args)
+      : debug(doDebug), logfile(doLogfile), nosplash(noSplash), locale(locale), configfile(config), arguments(args) {}
 };
 
 extern CAppOpts* qlOpts;

@@ -35,6 +35,9 @@ CAppOpts* CCommandProcessor::processOptions(const QStringList& arguments) {
   QCommandLineOption nosplashOption(QStringList() << "n" << "no-splash", tr("Do not show splash screen."));
   parser.addOption(nosplashOption);
 
+  QCommandLineOption localeOption(QStringList() << "l" << "locale", tr("QMapShack application locale."), tr("code"));
+  parser.addOption(localeOption);
+
   QCommandLineOption configOption(QStringList() << "c" << "config", tr("File with QMapShack configuration."), tr("file"));
   parser.addOption(configOption);
 
@@ -43,5 +46,5 @@ CAppOpts* CCommandProcessor::processOptions(const QStringList& arguments) {
   parser.process(arguments);
 
   return new CAppOpts(parser.isSet(debugOption), parser.isSet(logfileOption), parser.isSet(nosplashOption),
-                      parser.value(configOption), parser.positionalArguments());
+                      parser.value(localeOption), parser.value(configOption), parser.positionalArguments());
 }

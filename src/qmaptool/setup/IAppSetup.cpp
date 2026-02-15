@@ -115,21 +115,25 @@ QString IAppSetup::path(QString path, QString subdir, bool mkdir, QString debugN
 }
 
 void IAppSetup::prepareTranslator(QString translationPath, QString translationPrefix) {
-  QString locale = QLocale::system().name();
+  QString locale = qlOpts->locale != nullptr ? qlOpts->locale : QLocale::system().name();
   QDir dir(translationPath);
-  if (!QFile::exists(dir.absoluteFilePath(translationPrefix + locale))) {
+  if (!QFile::exists(dir.absoluteFilePath(translationPrefix + locale + ".qm"))) {
     locale = locale.left(2);
   }
-  qDebug() << "locale" << locale;
+  if (QFile::exists(dir.absoluteFilePath(translationPrefix + locale + ".qm"))) {
+    qDebug() << "locale" << locale;
+  } else {
+    qDebug() << "locale" << locale << "not found (using default).";
+  }
 
   QApplication* app = (QApplication*)QCoreApplication::instance();
   QTranslator* qtTranslator = new QTranslator(app);
   if (qtTranslator->load(translationPrefix + locale, translationPath)) {
     app->installTranslator(qtTranslator);
-    qDebug() << "using file '" + translationPath + "/" + translationPrefix + locale + ".qm' for translations.";
+    qDebug() << "using file '" + qtTranslator->filePath() + "' for translations.";
   } else {
-    qWarning() << "no file found for translations '" + translationPath + "/" + translationPrefix + locale +
-                      "' (using default).";
+    qWarning() << "no translations found for file '" + translationPath + "/" + translationPrefix + locale +
+                      ".qm' (using default).";
   }
 }
 

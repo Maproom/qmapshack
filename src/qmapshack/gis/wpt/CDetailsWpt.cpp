@@ -81,6 +81,7 @@ void CDetailsWpt::setupGui() {
 
   toolIcon->setIcon(wpt.getIcon());
   toolIcon->setObjectName(wpt.getIconName());
+  toolIcon->setToolTip(tr("Select icon"));
   lineName->setReadOnly(isReadOnly);
   lineName->setText(wpt.getName());
   labelPosition->setText(IGisItem::toLink(isReadOnly, "position", strPos, ""));

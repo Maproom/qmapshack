@@ -42,16 +42,19 @@ class CWptIconSelectWidget : public QWidget {
  private slots:
   void slotFilterChanged(const QString& str);
   void slotCategoryChanged(const QString& str);
+  void slotVendorChanged(const QString& str);
   void slotWptListChanged();
 
  private:
-  void updateIconList(const QString& filter, const QString& category);
+  void updateIconList(const QString& filter, const QString& category, const QString& vendor);
+  void updateCategories(const QString& vendor, const QString& selected);
   QScrollArea* scrollArea;
   QBoxLayout* layout1;
   QLabel* iconName;
   QLineEdit* iconFilter;
   QPointer<QCompleter> iconFilterCompleter;
   QComboBox* categoryFilter;
+  QComboBox* vendorFilter;
   QBoxLayout* layout2;
   CIconGrid* iconGrid;
   QAction* actionClearFilter;

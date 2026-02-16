@@ -44,6 +44,7 @@ class CWptIconManager : public QObject {
     QString path;
     QStringList categories;
     QStringList tags;
+    QStringList vendors;
   };
 
   void init();
@@ -53,6 +54,7 @@ class CWptIconManager : public QObject {
   const QImage& iconHighlight();
   QPixmap loadIcon(const QString& path);
   const QList<icon_t>& getWptIcons() { return wptIcons; }
+  const QMap<QString, QStringList>& getVendorCategories() { return vendorCategories; }
   QString getNumberedBullet(qint32 n);
   void setIconSize(int size);
 
@@ -66,7 +68,7 @@ class CWptIconManager : public QObject {
   icon_t& findIconByName(const QString& name, bool& ok);
 
   void setWptIconByName(const QString& name, const QString& filename, const QStringList& categories,
-                        const QStringList& tags);
+                        const QStringList& tags, const QStringList& vendors);
   void removeNumberedBullets();
   QMenu* getWptIconMenu(QWidget* parent);
 
@@ -81,6 +83,7 @@ class CWptIconManager : public QObject {
   QList<icon_t> wptIcons;
 
   QMap<qint32, QString> mapNumberedBullets;
+  QMap<QString, QStringList> vendorCategories;
 
   QPixmap createGrayscale(QString path);
 };

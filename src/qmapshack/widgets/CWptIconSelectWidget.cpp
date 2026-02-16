@@ -64,6 +64,10 @@ CWptIconSelectWidget::CWptIconSelectWidget(QWidget *parent) : QWidget(parent) {
   iconFilter->addAction(actionClearFilter, QLineEdit::TrailingPosition);
 
   categoryFilter = new QComboBox(this);
+  categoryFilter->setToolTip(tr("Filter: Show only icons in selected category"));
+
+  vendorFilter = new QComboBox(this);
+  vendorFilter->setToolTip(tr("Filter: Show only icons for selected vendor"));
 
   layout1 = new QBoxLayout(QBoxLayout::TopToBottom, this);
   layout1->setContentsMargins(0, 0, 0, 0);
@@ -72,6 +76,7 @@ CWptIconSelectWidget::CWptIconSelectWidget(QWidget *parent) : QWidget(parent) {
   layout2->setContentsMargins(0, 0, 0, 0);
   layout2->addWidget(categoryFilter);
   layout2->addWidget(iconFilter);
+  layout2->addWidget(vendorFilter);
 
   layout1->addLayout(layout2);
   layout1->addWidget(iconName);
@@ -81,6 +86,7 @@ CWptIconSelectWidget::CWptIconSelectWidget(QWidget *parent) : QWidget(parent) {
   connect(iconGrid, &CIconGrid::sigSelectedIcon, this, &CWptIconSelectWidget::sigSelectedIcon);
   connect(iconFilter, &QLineEdit::textChanged, this, &CWptIconSelectWidget::slotFilterChanged);
   connect(categoryFilter, &QComboBox::currentTextChanged, this, &CWptIconSelectWidget::slotCategoryChanged);
+  connect(vendorFilter, &QComboBox::currentTextChanged, this, &CWptIconSelectWidget::slotVendorChanged);
   connect(actionClearFilter, &QAction::triggered, iconFilter, &QLineEdit::clear);
   connect(&CWptIconManager::self(), &CWptIconManager::sigChanged, this, &CWptIconSelectWidget::slotWptListChanged);
 
@@ -89,34 +95,59 @@ CWptIconSelectWidget::CWptIconSelectWidget(QWidget *parent) : QWidget(parent) {
 
 void CWptIconSelectWidget::slotFilterChanged(const QString &str) {
   actionClearFilter->setIcon(str.isEmpty() ? QIcon("://icons/32x32/Filter.png") : QIcon("://icons/32x32/Cancel.png"));
-  updateIconList(str, categoryFilter->currentText());
+  updateIconList(str, categoryFilter->currentText(), vendorFilter->currentText());
 }
 
-void CWptIconSelectWidget::slotCategoryChanged(const QString &str) { updateIconList(iconFilter->text(), str); }
+void CWptIconSelectWidget::slotCategoryChanged(const QString &str) {
+  updateIconList(iconFilter->text(), str, vendorFilter->currentText());
+}
+
+void CWptIconSelectWidget::slotVendorChanged(const QString &str) {
+  updateIconList(iconFilter->text(), categoryFilter->currentText(), str);
+
+  updateCategories(str, categoryFilter->currentText());
+}
 
 void CWptIconSelectWidget::slotWptListChanged() {
+  QStringList vendors = {"QMapShack", "Garmin"};
+
+  QString selectedVendor = vendorFilter->currentText();
+  if (selectedVendor.isEmpty()) {
+      selectedVendor = vendors[0];
+  }
+
   iconFilter->clear();
+  vendorFilter->clear();
+
+  updateCategories(selectedVendor, categoryFilter->currentText());
+
+  vendorFilter->addItems(vendors);
+
+  updateIconList("", "", "");
+}
+
+void CWptIconSelectWidget::updateCategories(const QString &vendor, const QString &selected) {
   categoryFilter->clear();
 
-  QSet<QString> categories;
-  const QList<CWptIconManager::icon_t> &icons = CWptIconManager::self().getWptIcons();
-  for (const CWptIconManager::icon_t &icon : icons) {
-    for (const QString &category : icon.categories) {
-      categories.insert(category);
-    }
+  const QMap<QString, QStringList> &vendorCategories = CWptIconManager::self().getVendorCategories();
+
+  QStringList categories;
+  if (vendorCategories.contains(vendor)) {
+    categories = vendorCategories[vendor];
   }
-  categories.insert("");
-  QStringList categoriesSorted = categories.values();
-  categoriesSorted.sort();
-  categoryFilter->addItems(categoriesSorted);
+  categories.prepend("");
+  categories.sort();
 
-  updateIconList("", "");
+  categoryFilter->addItems(categories);
+
+  if (categories.contains(selected)) {
+    categoryFilter->setCurrentText(selected);
+  }
 }
-void CWptIconSelectWidget::updateIconList(const QString &filter, const QString &category) {
-  QList<CWptIconManager::icon_t> availableIcons;
-  QList<CWptIconManager::icon_t> visibleIcons;
 
+void CWptIconSelectWidget::updateIconList(const QString &filter, const QString &category, const QString &vendor) {
   // filter by category
+  QList<CWptIconManager::icon_t> availableIcons;
   if (category.isEmpty()) {
     availableIcons = CWptIconManager::self().getWptIcons();
   } else {
@@ -128,12 +159,22 @@ void CWptIconSelectWidget::updateIconList(const QString &filter, const QString &
     }
   }
 
+  // filter by vendor
+  QString selectedVendor = vendor.isEmpty() ? "QMapShack" : vendor;
+  QList<CWptIconManager::icon_t> vendorIcons;
+  for (const CWptIconManager::icon_t &icon : availableIcons) {
+    if (icon.vendors.contains(selectedVendor)) {
+      vendorIcons.append(icon);
+    }
+  }
+
+  QList<CWptIconManager::icon_t> visibleIcons;
   // filter by name and tags
   if (filter.isEmpty()) {
-    visibleIcons = availableIcons;
+    visibleIcons = vendorIcons;
   } else {
     visibleIcons.clear();
-    for (const CWptIconManager::icon_t &icon : availableIcons) {
+    for (const CWptIconManager::icon_t &icon : vendorIcons) {
       if (icon.name.contains(filter, Qt::CaseInsensitive)) {
         visibleIcons.append(icon);
       } else {

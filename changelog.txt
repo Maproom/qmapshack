@@ -1,6 +1,7 @@
 V1.XX.X
 [QMS-945] Redesign icons for focus, autosave, sync, and DB buttons
 [QMS-971] Fix: macOS: Wrong user data paths
+[QMS-974] Add vendor list to waypoint icons
 [QMS-978] Fix: Invalid gdal "nodata" handling (QMapShack/QMapTool/qmt_map2jnx)
 
 V1.20.0

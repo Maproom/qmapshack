@@ -2,11 +2,11 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="54"
-   height="54"
+   width="64"
+   height="64"
    id="svg3513"
    version="1.1"
-   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
    sodipodi:docname="DeviceSync.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -53,16 +53,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="11"
-     inkscape:cx="7.4545455"
-     inkscape:cy="25.363636"
+     inkscape:zoom="5.5"
+     inkscape:cx="-48"
+     inkscape:cy="26.545455"
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:document-units="px"
      inkscape:grid-bbox="true"
-     inkscape:window-width="1920"
-     inkscape:window-height="1022"
-     inkscape:window-x="1920"
+     inkscape:window-width="2560"
+     inkscape:window-height="1376"
+     inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
      inkscape:showpageshadow="2"
@@ -71,8 +71,11 @@
     <inkscape:grid
        type="xygrid"
        id="grid3006"
-       originx="-4"
-       originy="-4" />
+       originx="-3.0000002"
+       originy="-3"
+       spacingy="1"
+       spacingx="1"
+       units="px" />
   </sodipodi:namedview>
   <metadata
      id="metadata3518">
@@ -89,24 +92,12 @@
      id="layer1"
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
-     transform="translate(-4,-4)">
-    <rect
-       style="fill:none;stroke:none"
-       id="rect2996"
-       width="54"
-       height="54"
-       x="4"
-       y="4" />
-    <text
-       xml:space="preserve"
-       style="font-weight:bold;font-size:42.6667px;font-family:'DejaVu Sans';-inkscape-font-specification:'DejaVu Sans Bold';fill:#000000;stroke-width:6;stroke-linecap:round"
-       x="15.666656"
-       y="46.531261"
-       id="text1469"><tspan
-         sodipodi:role="line"
-         id="tspan1467"
-         x="15.666656"
-         y="46.531261"
-         style="font-size:42.6667px">S</tspan></text>
+     transform="translate(-3.0000002,-3)">
+    <path
+       d="m 9.8403276,51.367826 c 0.1774364,5.145656 0.7984634,7.718483 2.3953914,10.912339 3.371292,6.742583 10.202593,10.380029 19.340568,10.380029 13.219012,0 21.20365,-7.807202 21.20365,-20.671341 0,-9.492847 -3.903601,-14.372348 -13.662603,-17.300049 L 26.341913,30.873922 c -3.992319,-1.242055 -5.500529,-3.016419 -5.500529,-6.653865 0,-4.790783 3.46001,-7.718484 9.315412,-7.718484 6.476428,0 9.670283,2.927701 10.468747,9.670284 H 51.094291 C 50.295827,12.864127 43.020935,5.5892344 30.511668,5.5892344 c -12.420548,0 -19.872877,7.4523286 -19.872877,19.9615956 0,5.500528 1.50821,9.759002 4.43591,12.686702 2.217955,2.306674 5.500529,3.814883 12.154394,5.677965 l 5.589247,1.596928 c 7.36361,2.129237 9.492847,3.903601 9.492847,8.073356 0,5.234374 -3.814883,8.162074 -10.557466,8.162074 -7.363611,0 -11.001057,-3.371291 -11.444648,-10.380029 z"
+       id="text1469"
+       style="font-weight:bold;font-stretch:semi-condensed;font-size:88.7182px;font-family:'Nimbus Sans Narrow';-inkscape-font-specification:'Nimbus Sans Narrow, Bold Semi-Condensed';fill:#000080;stroke-width:0;stroke-linecap:round"
+       transform="scale(1.117849,0.8945752)"
+       aria-label="S" />
   </g>
 </svg>

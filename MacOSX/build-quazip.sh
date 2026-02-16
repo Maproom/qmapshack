@@ -8,9 +8,16 @@ echo "${ATTN}-------------------${NC}"
 # build Quazip
 cd $QMSDEVDIR
 echo "${ATTN}Building Quazip ...${NC}"
-git clone https://github.com/stachenov/quazip.git quazip
-# --> folder $QMSVERDIR/quazip/ created
-cd $QMSDEVDIR/quazip
+if [ -d quazip ]
+then
+  cd $QMSDEVDIR/quazip
+  git fetch
+  git merge
+else
+  git clone https://github.com/stachenov/quazip.git quazip
+  # --> folder $QMSVERDIR/quazip/ created
+  cd $QMSDEVDIR/quazip
+fi
 mkdir build
 cd ./build
 

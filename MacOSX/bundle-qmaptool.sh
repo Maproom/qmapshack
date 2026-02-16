@@ -53,7 +53,6 @@ function copyAdditionalLibraries {
             fi
             install -m 644 `brew --prefix dbus`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
 
-            cp -v -R $QT_DEV_PATH/lib/QtQuickWidgets.framework $BUILD_BUNDLE_FRW_DIR
         fi
 
     else

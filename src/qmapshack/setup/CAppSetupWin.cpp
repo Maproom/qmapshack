@@ -68,7 +68,8 @@ void CAppSetupWin::initQMapShack() {
 
   // create directories
   IAppSetup::path(defaultCachePath(), 0, true, "CACHE");
-  IAppSetup::path(userDataPath("WaypointIcons"), 0, true, "USER DATA");
+  IAppSetup::path(userDataPath(), 0, true, "USER DATA");
+  IAppSetup::path(userDataPath("WaypointIcons"), 0, true, "ICON");
   IAppSetup::path(logDir(), 0, true, "LOG");
 
   // catch signal WM_CLOSE

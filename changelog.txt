@@ -1,3 +1,6 @@
+V1.XX.X
+[QMS-945] Redesign icons for focus, autosave, sync, and DB buttons
+
 V1.20.0
 [QMS-627] Add possibility to move views & renaming views with double click
 [QMS-817] Mac OS X app crash on every quit

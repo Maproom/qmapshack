@@ -2,11 +2,11 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="54"
-   height="54"
+   width="64"
+   height="64"
    id="svg3513"
    version="1.1"
-   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
    sodipodi:docname="AutoSaveA.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -53,16 +53,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="11"
-     inkscape:cx="7.5454545"
-     inkscape:cy="25.363636"
+     inkscape:zoom="7.7781746"
+     inkscape:cx="-4.7569002"
+     inkscape:cy="34.58395"
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:document-units="px"
      inkscape:grid-bbox="true"
-     inkscape:window-width="1920"
-     inkscape:window-height="1022"
-     inkscape:window-x="1920"
+     inkscape:window-width="2560"
+     inkscape:window-height="1376"
+     inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
      inkscape:showpageshadow="2"
@@ -71,8 +71,11 @@
     <inkscape:grid
        type="xygrid"
        id="grid3006"
-       originx="-4"
-       originy="-4" />
+       originx="-3.0000002"
+       originy="-3"
+       spacingy="1"
+       spacingx="1"
+       units="px" />
   </sodipodi:namedview>
   <metadata
      id="metadata3518">
@@ -89,24 +92,10 @@
      id="layer1"
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
-     transform="translate(-4,-4)">
-    <rect
-       style="fill:none;stroke:none"
-       id="rect2996"
-       width="54"
-       height="54"
-       x="4"
-       y="4" />
-    <text
-       xml:space="preserve"
-       style="font-weight:bold;font-size:42.6667px;font-family:'DejaVu Sans';-inkscape-font-specification:'DejaVu Sans Bold';fill:#000000;stroke-width:6;stroke-linecap:round"
-       x="15.666656"
-       y="46.531261"
-       id="text1469"><tspan
-         sodipodi:role="line"
-         id="tspan1467"
-         x="15.666656"
-         y="46.531261"
-         style="font-size:42.6667px">A</tspan></text>
+     transform="translate(-3.0000002,-3)">
+    <path
+       id="path1"
+       style="fill:#000080;fill-opacity:1;stroke:#ff0000;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+       d="M 28.11914,5 9.0000012,65 H 21.851888 L 24.727376,54.955078 H 45.272622 L 48.148112,65 H 60.999999 L 41.880861,5 H 35 Z M 35,19.070312 42.422527,45 H 27.577473 Z" />
   </g>
 </svg>

@@ -22,7 +22,7 @@ endif()
 # Define project name and version tags
 ###############################################################################################
 # this is not only the QMS version it will be the package version, too.
-project(QMapShack VERSION 1.19.0 LANGUAGES CXX C)
+project(QMapShack VERSION 1.20.0 LANGUAGES CXX C)
 set(CMAKE_CXX_STANDARD 11)
 
 # FOR A RELEASE:

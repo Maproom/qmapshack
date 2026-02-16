@@ -72,36 +72,35 @@ void CAppSetupMac::initQMapTool() {
   prepareTranslator(translationPath, "qtbase_");
   prepareTranslator(translationPath, "qmaptool_");
 
+  // create directories
+  IAppSetup::path(defaultCachePath(), 0, true, "CACHE");
+  IAppSetup::path(userDataPath(), 0, true, "USER DATA");
+  IAppSetup::path(logDir(), 0, false, "LOG");
+
   migrateDirContent(defaultCachePath());
   migrateDirContent(userDataPath());
-
-  // create directories
-  IAppSetup::path(logDir(), 0, false, "LOG");
 
   // catch signal SIGTERM
   closeOnSIGTERM();
 }
 
 QString CAppSetupMac::defaultCachePath() {
-  const QString& cachePath = QStandardPaths::standardLocations(QStandardPaths::CacheLocation).at(0);
+  const QString& cachePath = QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
   return IAppSetup::path(cachePath, 0, false, 0);
 }
 
 QString CAppSetupMac::userDataPath(QString subdir) {
-  const QString& dataDir = QStandardPaths::standardLocations(QStandardPaths::AppLocalDataLocation).at(0);
+  const QString& dataDir = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
   return IAppSetup::path(dataDir, subdir, false, 0);
 }
 
 QString CAppSetupMac::logDir() {
-  // home location returns / (root) instead of user home...
-  const QString& home = QStandardPaths::standardLocations(QStandardPaths::DesktopLocation).at(0);
-  QDir dir = QDir(home);
-  dir.cdUp();
-  return IAppSetup::path(dir.absolutePath(), relLogDir, false, 0);
+  const QString& home = QStandardPaths::writableLocation(QStandardPaths::HomeLocation);
+  return IAppSetup::path(home, relLogDir, false, 0);
 }
 
 QString CAppSetupMac::findExecutable(const QString &name) {
-  QStringList bundlePath = QStringList(QApplication::applicationDirPath() + "/../Tools");
+  const QStringList& bundlePath = QStringList(QApplication::applicationDirPath() + "/../Tools");
   QString path = QStandardPaths::findExecutable(name, bundlePath);
   if (path.isEmpty()) path = QStandardPaths::findExecutable(name);
   return path;

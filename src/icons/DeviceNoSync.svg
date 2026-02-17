@@ -6,7 +6,7 @@
    height="64"
    id="svg3513"
    version="1.1"
-   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
    sodipodi:docname="DeviceNoSync.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -54,15 +54,15 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="5.5"
-     inkscape:cx="-48"
-     inkscape:cy="26.545455"
+     inkscape:cx="-47.909091"
+     inkscape:cy="26.636364"
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:document-units="px"
      inkscape:grid-bbox="true"
-     inkscape:window-width="2560"
-     inkscape:window-height="1376"
-     inkscape:window-x="0"
+     inkscape:window-width="1920"
+     inkscape:window-height="1022"
+     inkscape:window-x="1920"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
      inkscape:showpageshadow="2"
@@ -100,7 +100,7 @@
        transform="scale(1.117849,0.8945752)"
        aria-label="S" />
     <path
-       style="fill:#ff0000;stroke:#ff0000;stroke-width:7.2;stroke-linecap:square;stroke-dasharray:none"
+       style="fill:#ff0000;stroke:#ff0000;stroke-width:12;stroke-linecap:round;stroke-dasharray:none"
        d="M 9.7762816,50.310926 60.223719,19.689074"
        id="path3623-5" />
   </g>

@@ -667,7 +667,7 @@ int main(int argc, char** argv) {
     int success = 0;
     int idx = (int)pBand->GetNoDataValue(&success);
 
-    if (success && (idx >= 0) && (idx < file.colortable.size())) {
+    if (success && (idx >= 0) && (idx < 256)) {
       file.colortable[idx] &= 0x00FFFFFF;
     }
   }

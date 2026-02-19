@@ -76,15 +76,10 @@ CMapVRT::CMapVRT(const QString& filename, CMapDraw* parent) : IMap(eFeatVisibili
 
     int success = 0;
     qreal idx = pBand->GetNoDataValue(&success);
-    if (success) {
-      if ((idx >= 0) && (idx < colortable.size())) {
-        QColor tmp(colortable[idx]);
-        tmp.setAlpha(0);
-        colortable[idx] = tmp.rgba();
-      } else {
-        qDebug() << "Index for no data value is out of bound";
-        return;
-      }
+    if (success && (idx >= 0) && (idx < colortable.size())) {
+      QColor tmp(colortable[idx]);
+      tmp.setAlpha(0);
+      colortable[idx] = tmp.rgba();
     }
   }
 

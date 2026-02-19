@@ -81,16 +81,11 @@ void CGdalFile::load(const QString& filename) {
 
     int success = 0;
     qreal idx = pBand->GetNoDataValue(&success);
-    if (success) {
-      if ((idx >= 0) && (idx < colortable.size())) {
-        QColor tmp(colortable[idx]);
-        tmp.setAlpha(0);
-        colortable[idx] = tmp.rgba();
-        hasNoData = idx;
-      } else {
-        qDebug() << "Index for no data value is out of bound";
-        return;
-      }
+    if (success && (idx >= 0) && (idx < colortable.size())) {
+      QColor tmp(colortable[idx]);
+      tmp.setAlpha(0);
+      colortable[idx] = tmp.rgba();
+      hasNoData = idx;
     }
   }
   qDebug() << "hasNoData" << hasNoData;

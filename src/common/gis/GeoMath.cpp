@@ -24,7 +24,6 @@
 #include <QtGui>
 #include <QtWidgets>
 
-#include "canvas/IDrawContext.h"
 #include "units/IUnit.h"
 
 #define PI M_PI
@@ -34,11 +33,6 @@ pointDP::pointDP() : used(true), idx(NOIDX) {}
 
 pointDP::pointDP(const qreal& x, const qreal& y, const qreal& z) : point3D(x, y, z), used(true), idx(NOIDX) {}
 
-static inline qreal distance(const QPointF& pa, const QPointF& pb) {
-  const qreal& dx = pa.x() - pb.x();
-  const qreal& dy = pa.y() - pb.y();
-  return qSqrt(dx * dx + dy * dy);
-}
 
 void GPS_Math_DegMinSec_To_Deg(bool sign, const qint32 d, const qint32 m, const qreal s, qreal& deg) {
   deg = qAbs(d) + qreal(m) / 60.0 + s / 3600;

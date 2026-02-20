@@ -265,7 +265,7 @@ bool CGisListDB::event(QEvent* e) {
     dlgSearch->event(e);
   }
 
-  switch (e->type()) {
+  switch (static_cast<event_types_e>(e->type())) {
     case eEvtW2DAckInfo: {
       CGisListDBEditLock lock(true, this, "event");
       CEvtW2DAckInfo* evt = (CEvtW2DAckInfo*)e;

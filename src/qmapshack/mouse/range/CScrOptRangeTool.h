@@ -89,7 +89,7 @@ class CScrOptRangeTool : public IScrOpt, public INotifyTrk, private Ui::IScrOptR
   eAction actionDelete = eAction::ToStart;
 
   using fAction = std::function<void()>;
-  QVector<fAction> actions{[this]() {}, [this]() { slotResetRange(); },
+  QVector<fAction> actions{[]() {}, [this]() { slotResetRange(); },
                            [this]() {
                              updateCanvas = true;
                              this->trk.newMouseRangeEnd(owner);

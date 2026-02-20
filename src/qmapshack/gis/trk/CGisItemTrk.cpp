@@ -132,11 +132,6 @@ inline constexpr int operator|(CTrackData::trkpt_t::valid_e e1, CTrackData::trkp
          static_cast<std::underlying_type_t<CTrackData::trkpt_t::invalid_e>>(e2);
 }
 
-inline constexpr int operator|(CTrackData::trkpt_t::invalid_e e2, CTrackData::trkpt_t::valid_e e1) {
-  return static_cast<std::underlying_type_t<CTrackData::trkpt_t::invalid_e>>(e2) |
-         static_cast<std::underlying_type_t<CTrackData::trkpt_t::valid_e>>(e1);
-}
-
 }  // namespace
 
 IGisItem::key_t CGisItemTrk::keyUserFocus;

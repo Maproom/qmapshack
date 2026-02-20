@@ -2002,7 +2002,7 @@ bool CGisListWks::event(QEvent* e) {
     const bool doWaitCursor = (eEvtA2WCutTrk != event_types_e(e->type()));
     CGisListWksEditLock lock(doWaitCursor, IGisItem::mutexItems);
 
-    switch (e->type()) {
+    switch (static_cast<event_types_e>(e->type())) {
       case eEvtD2WReqInfo: {
         CEvtD2WReqInfo* evt = (CEvtD2WReqInfo*)e;
         CDBProject* project = getProjectById(evt->id, evt->db);

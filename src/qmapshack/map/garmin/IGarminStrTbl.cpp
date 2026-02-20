@@ -30,7 +30,7 @@ IGarminStrTbl::IGarminStrTbl(const quint16 codepage, const quint8 mask, QObject*
   if (codepage != 0) {
     if (1250 <= codepage && codepage <= 1258) {
       char strcp[64];
-      sprintf(strcp, "Windows-%i", codepage);
+      snprintf(strcp, sizeof(strcp), "Windows-%i", codepage);
       codec = QTextCodec::codecForName(strcp);
     } else if (codepage == 950) {
       codec = QTextCodec::codecForName("Big5");

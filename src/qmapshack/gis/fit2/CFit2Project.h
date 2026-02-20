@@ -88,7 +88,6 @@ class CFit2Project : public fit::FileIdMesgListener,
 
   enum class eRecordType { Activity, Course };
 
-  eRecordType recordType{eRecordType::Activity};
   CTrackData track;
   CTrackData::trkseg_t segment;
 };

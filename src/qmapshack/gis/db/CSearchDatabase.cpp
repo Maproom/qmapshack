@@ -179,7 +179,7 @@ void CSearchDatabase::addWithParentFolders(QTreeWidget* result, IDBFolder* child
 }
 
 bool CSearchDatabase::event(QEvent* e) {
-  switch (e->type()) {
+  switch (static_cast<event_types_e>(e->type())) {
     case eEvtW2DAckInfo: {
       CEvtW2DAckInfo* evt = (CEvtW2DAckInfo*)e;
 

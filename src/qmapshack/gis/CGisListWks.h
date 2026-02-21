@@ -61,6 +61,7 @@ class CGisListWks : public QTreeWidget {
 
  public slots:
   void slotLoadWorkspace();
+  void slotCopyProject();
 
  signals:
   void sigChanged();
@@ -119,7 +120,6 @@ class CGisListWks : public QTreeWidget {
   void slotEditPrxWpt();
   void slotSyncDB();
   void slotSetSortMode(IGisProject::sorting_folder_e mode, bool checked);
-  void slotCopyProject();
   void slotSymWpt();
   void slotEleWptTrk();
   void slotAutoSaveProject(bool on);

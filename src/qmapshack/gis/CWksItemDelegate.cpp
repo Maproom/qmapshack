@@ -182,6 +182,11 @@ std::tuple<QFont, QFont, QRect, QRect, QRect, QRect, QRect, QRect, QRect> CWksIt
         left -= buttonWidth + kMargin;
       }
     }
+  } else if (isOnDevice == true) {
+    if (item.holdUiFocus(opt)) {
+      rectSave.setRect(left, buttonTop, buttonWidth, buttonHeight);
+      left -= buttonWidth + kMargin;
+    }
   }
   // As rectName should span up to the right of the last button left has
   // to be corrected by a button width.
@@ -404,19 +409,25 @@ void CWksItemDelegate::paintProject(QPainter* p, const QStyleOptionViewItem& opt
   const float opacityOfFocusBasedItems = item.getOpacityOfFocusBasedItems();
 
   if (rectSave.isValid()) {
-    // draw save/ auto save button
-    if (item.isChanged() && !item.isAutoSave()) {
-      // show save button
-      drawToolButton(p, opt, rectSave, QIcon(":/icons/32x32/Save.png"), true, false);
+    if (item.isOnDevice() == false) {
+      // draw save/ auto save button
+      if (item.isChanged() && !item.isAutoSave()) {
+        // show save button
+        drawToolButton(p, opt, rectSave, QIcon(":/icons/32x32/Save.png"), true, false);
+      } else {
+        p->setOpacity(opacityOfFocusBasedItems);
+        if (item.isAutoSave()) {
+          // show auto save button pressed, to disable autosave
+          drawToolButton(p, opt, rectSave, QIcon(":/icons/32x32/AutoSaveA.png"), true, true);
+        } else if (item.canSave()) {
+          // show auto save button only if project can be saved
+          drawToolButton(p, opt, rectSave, QIcon(":/icons/32x32/AutoSaveNoA.png"), true, false);
+        }
+        p->setOpacity(1.0);
+      }
     } else {
       p->setOpacity(opacityOfFocusBasedItems);
-      if (item.isAutoSave()) {
-        // show auto save button pressed, to disable autosave
-        drawToolButton(p, opt, rectSave, QIcon(":/icons/32x32/AutoSaveA.png"), true, true);
-      } else if (item.canSave()) {
-        // show auto save button only if project can be saved
-        drawToolButton(p, opt, rectSave, QIcon(":/icons/32x32/AutoSaveNoA.png"), true, false);
-      }
+      drawToolButton(p, opt, rectSave, QIcon(":/icons/32x32/Copy.png"), true, false);
       p->setOpacity(1.0);
     }
   }
@@ -739,22 +750,26 @@ bool CWksItemDelegate::mousePressProject(QMouseEvent* me, const QStyleOptionView
     emit sigUpdateCanvas();
     return true;
   } else if (rectSave.contains(me->pos())) {
-    if (item.isAutoSave()) {
-      item.setAutoSave(false);
-    } else {
-      if (item.isChanged()) {
-        IGisProject* project = dynamic_cast<IGisProject*>(&item);
-        if (project == nullptr) {
-          return false;
-        }
-        if (project->canSave()) {
-          project->save();
-        } else {
-          project->saveAs();
-        }
+    if (item.isOnDevice() == false) {
+      if (item.isAutoSave()) {
+        item.setAutoSave(false);
       } else {
-        item.setAutoSave(true);
+        if (item.isChanged()) {
+          IGisProject* project = dynamic_cast<IGisProject*>(&item);
+          if (project == nullptr) {
+            return false;
+          }
+          if (project->canSave()) {
+            project->save();
+          } else {
+            project->saveAs();
+          }
+        } else {
+          item.setAutoSave(true);
+        }
       }
+    } else {
+      treeWidget->slotCopyProject();
     }
     return true;
   } else if (rectAutoSyncDev.contains(me->pos())) {
@@ -857,14 +872,19 @@ bool CWksItemDelegate::helpEventProject(const QPoint& pos, const QPoint& posGlob
     }
     return true;
   } else if (rectSave.contains(pos)) {
-    if (item.isChanged() && !item.isAutoSave()) {
-      QToolTip::showText(posGlobal, toRichText(tr("Save project.")), view, {}, 3000);
-    } else {
-      if (item.isAutoSave()) {
-        QToolTip::showText(posGlobal, toRichText(tr("Disable auto save.")), view, {}, 3000);
-      } else if (item.canSave()) {
-        QToolTip::showText(posGlobal, toRichText(tr("Enable auto save.")), view, {}, 3000);
+    if (item.isOnDevice() == false) {
+      if (item.isChanged() && !item.isAutoSave()) {
+        QToolTip::showText(posGlobal, toRichText(tr("Save project.")), view, {}, 3000);
+      } else {
+        if (item.isAutoSave()) {
+          QToolTip::showText(posGlobal, toRichText(tr("Disable auto save.")), view, {}, 3000);
+        } else if (item.canSave()) {
+          QToolTip::showText(posGlobal, toRichText(tr("Enable auto save.")), view, {}, 3000);
+        }
       }
+    } else {
+      QToolTip::showText(posGlobal, toRichText(tr("Copy content of project into a project in the workspace.")), view,
+                         {}, 3000);
     }
     return true;
   } else if (rectAutoSyncDev.contains(pos)) {

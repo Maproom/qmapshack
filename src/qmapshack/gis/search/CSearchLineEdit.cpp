@@ -26,6 +26,7 @@
 #include "CSearchExplanationDialog.h"
 #include "gis/prj/IGisProject.h"
 #include "gis/search/CSearch.h"
+#include "misc.h"
 
 CSearchExplanationDialog* CSearchLineEdit::explanationDlg = nullptr;
 
@@ -63,9 +64,9 @@ CSearchLineEdit::CSearchLineEdit(QWidget* parent) : QLineEdit(parent) {
   connect(this, &CSearchLineEdit::textChanged, this, [this] { searchCreationTimer->start(1000); });
 
   setPlaceholderText(tr("start typing..."));
-  setToolTip(trRichText(
-      "Filter: Start to type and the list will be reduced to matching items. An example would be \"date between "
-      "2010 and 2012\""));
+  setToolTip(toRichText(
+      tr("Filter: Start to type and the list will be reduced to matching items. An example would be \"date between "
+         "2010 and 2012\"")));
 }
 
 CSearchLineEdit::CSearchLineEdit(QWidget* parent, IGisProject* project, CSearch* search) : CSearchLineEdit(parent) {
@@ -153,11 +154,11 @@ void CSearchLineEdit::slotCreateSearch(const QString& str) {
   if (currentSearch.getSyntaxError()) {
     addAction(actionError, QLineEdit::TrailingPosition);
     if (currentSearch.getSearchMode() == CSearch::eSearchModeName) {
-      actionError->setToolTip(trRichText("Error parsing search.") + " " +
-                              trRichText("Continuing with search for match in names"));
+      actionError->setToolTip(toRichText(tr("Error parsing search.")) + " " +
+                              toRichText(tr("Continuing with search for match in names")));
     } else {
-      actionError->setToolTip(trRichText("Error parsing search.") + " " +
-                              trRichText("Continuing with search for match in full text"));
+      actionError->setToolTip(toRichText(tr("Error parsing search.")) + " " +
+                              toRichText(tr("Continuing with search for match in full text")));
     }
   } else {
     removeAction(actionError);
@@ -166,7 +167,7 @@ void CSearchLineEdit::slotCreateSearch(const QString& str) {
   if (currentSearch.isAutodetectedProperty()) {
     addAction(actionAutoProperty, QLineEdit::TrailingPosition);
     actionAutoProperty->setToolTip(
-        trRichText("Automatically set the property, please make sure the results are correct."));
+        toRichText(tr("Automatically set the property, please make sure the results are correct.")));
   } else {
     removeAction(actionAutoProperty);
   }

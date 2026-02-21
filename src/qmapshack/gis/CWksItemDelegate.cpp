@@ -31,6 +31,7 @@
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CDraw.h"
 #include "helpers/CSettings.h"
+#include "misc.h"
 
 constexpr int kMargin = 1;
 constexpr int kFontSizeDiffProject = 2;
@@ -850,39 +851,41 @@ bool CWksItemDelegate::helpEventProject(const QPoint& pos, const QPoint& posGlob
         rectAutoSyncDev] = getRectanglesProject(opt, item);
   if (rectVisible.contains(pos)) {
     if (item.isVisible()) {
-      QToolTip::showText(posGlobal, trRichText("Hide project on map."), view, {}, 3000);
+      QToolTip::showText(posGlobal, toRichText(tr("Hide project on map.")), view, {}, 3000);
     } else {
-      QToolTip::showText(posGlobal, trRichText("Show project on map."), view, {}, 3000);
+      QToolTip::showText(posGlobal, toRichText(tr("Show project on map.")), view, {}, 3000);
     }
     return true;
   } else if (rectSave.contains(pos)) {
     if (item.isChanged() && !item.isAutoSave()) {
-      QToolTip::showText(posGlobal, trRichText("Save project."), view, {}, 3000);
+      QToolTip::showText(posGlobal, toRichText(tr("Save project.")), view, {}, 3000);
     } else {
       if (item.isAutoSave()) {
-        QToolTip::showText(posGlobal, trRichText("Disable auto save."), view, {}, 3000);
+        QToolTip::showText(posGlobal, toRichText(tr("Disable auto save.")), view, {}, 3000);
       } else if (item.canSave()) {
-        QToolTip::showText(posGlobal, trRichText("Enable auto save."), view, {}, 3000);
+        QToolTip::showText(posGlobal, toRichText(tr("Enable auto save.")), view, {}, 3000);
       }
     }
     return true;
   } else if (rectAutoSyncDev.contains(pos)) {
     if (item.isAutoSyncToDev()) {
-      QToolTip::showText(posGlobal, trRichText("Disable automatic synchonization with GPS device."), view, {}, 3000);
+      QToolTip::showText(posGlobal, toRichText(tr("Disable automatic synchonization with GPS device.")), view, {},
+                         3000);
     } else {
-      QToolTip::showText(posGlobal, trRichText("Enable automatic synchonization with GPS device."), view, {}, 3000);
+      QToolTip::showText(posGlobal, toRichText(tr("Enable automatic synchonization with GPS device.")), view, {}, 3000);
     }
     return true;
   } else if (rectActiveProject.contains(pos)) {
     if (item.hasUserFocus()) {
       QToolTip::showText(
           posGlobal,
-          trRichText("This is the active project. All new items will be attached to this project automatically."), view,
-          {}, 5000);
+          toRichText(tr("This is the active project. All new items will be attached to this project automatically.")),
+          view, {}, 5000);
     } else {
       QToolTip::showText(
           posGlobal,
-          trRichText("Make this project the active one. All new items will be attached to this project automatically."),
+          toRichText(
+              tr("Make this project the active one. All new items will be attached to this project automatically.")),
           view, {}, 5000);
     }
     return true;
@@ -893,8 +896,9 @@ bool CWksItemDelegate::helpEventProject(const QPoint& pos, const QPoint& posGlob
     if (itemStatusControl.prj.flags == 0) {
       QToolTip::showText(
           posGlobal,
-          trRichText("This is the status line. You can select additional information to be displayed in the workspace "
-                     "setup. See menu->Workspace->Setup Workspace"),
+          toRichText(
+              tr("This is the status line. You can select additional information to be displayed in the workspace "
+                 "setup. See menu->Workspace->Setup Workspace")),
           view, {}, 5000);
     } else {
       QToolTip::showText(posGlobal, item.getInfo(IWksItem::eFeatureShowName), view);
@@ -915,8 +919,9 @@ bool CWksItemDelegate::helpEventItem(const QPoint& pos, const QPoint& posGlobal,
     if (itemStatusControl.prj.flags == 0) {
       QToolTip::showText(
           posGlobal,
-          trRichText("This is the status line. You can select additional information to be displayed in the workspace "
-                     "setup. See menu->Workspace->Setup Workspace"),
+          toRichText(
+              tr("This is the status line. You can select additional information to be displayed in the workspace "
+                 "setup. See menu->Workspace->Setup Workspace")),
           view, {}, 5000);
     } else {
       QToolTip::showText(posGlobal, item.getInfo(IWksItem::eFeatureShowName), view);
@@ -924,7 +929,7 @@ bool CWksItemDelegate::helpEventItem(const QPoint& pos, const QPoint& posGlobal,
     return true;
   } else if (rectChanged.contains(pos)) {
     if (item.isChanged()) {
-      QToolTip::showText(posGlobal, trRichText("Item is changed and needs to be saved."), view, {}, 3000);
+      QToolTip::showText(posGlobal, toRichText(tr("Item is changed and needs to be saved.")), view, {}, 3000);
       return true;
     }
   }
@@ -936,7 +941,7 @@ bool CWksItemDelegate::helpEventGeoSearch(const QPoint& pos, const QPoint& posGl
   auto [fontSearch, fontStatus, rectIcon, rectSetup, rectLineEdit, rectStatus, rectWptIcon, rectVisible] =
       getRectanglesGeoSearch(opt);
   if (rectSetup.contains(pos)) {
-    QToolTip::showText(posGlobal, trRichText("Setup Search"), view, {}, 3000);
+    QToolTip::showText(posGlobal, toRichText(tr("Setup Search")), view, {}, 3000);
     return true;
   }
 

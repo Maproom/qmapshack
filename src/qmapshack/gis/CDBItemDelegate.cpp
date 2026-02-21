@@ -24,6 +24,7 @@
 
 #include "gis/IDBItem.h"
 #include "helpers/CDraw.h"
+#include "misc.h"
 
 constexpr int kMargin = 1;
 constexpr int kFontSizeDiffItem = 3;
@@ -217,13 +218,13 @@ bool CDBItemDelegate::helpEvent(QHelpEvent* event, QAbstractItemView* view, cons
   if (rectButton.contains(pos)) {
     if (item->getCheckState() == Qt::Unchecked) {
       QToolTip::showText(posGlobal,
-                         item->type() == IDBItem::eTypeItem ? trRichText("Load item into workspace.")
-                                                            : trRichText("Load project into workspace"),
+                         item->type() == IDBItem::eTypeItem ? toRichText(tr("Load item into workspace."))
+                                                            : toRichText(tr("Load project into workspace")),
                          view, {}, 3000);
     } else {
       QToolTip::showText(posGlobal,
-                         item->type() == IDBItem::eTypeItem ? trRichText("Remove item from workspace.")
-                                                            : trRichText("Remove project from workspace"),
+                         item->type() == IDBItem::eTypeItem ? toRichText(tr("Remove item from workspace."))
+                                                            : toRichText(tr("Remove project from workspace")),
                          view, {}, 3000);
     }
   } else {

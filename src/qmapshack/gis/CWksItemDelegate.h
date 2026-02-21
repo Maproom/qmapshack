@@ -138,7 +138,6 @@ class CWksItemDelegate : public QStyledItemDelegate {
   void sigUpdateCanvas();
 
  private:
-  static inline QString trRichText(const char* msg) { return "<div>" + tr(msg) + "</div>"; }
   IWksItem* indexToItem(const QModelIndex& index) const;
 
   std::tuple<QFont, QFont, QRect, QRect, QRect, QRect, QRect, QRect, QRect> getRectanglesProject(

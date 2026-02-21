@@ -57,7 +57,6 @@ class CGeoSearch : public QObject, public IGisProject {
   void slotResetResults();
 
  private:
-  static inline QString trRichText(const char* msg) { return "<div>" + tr(msg) + "</div>"; }
   QAction* addService(CGeoSearchConfig::service_e service, const QString& name, QMenu* menu);
   void requestNominatim(QString& addr) const;
   void requestGeonamesSearch(QString& addr) const;

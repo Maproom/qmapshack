@@ -119,7 +119,7 @@ void CGeoSearch::selectService(const QRect& rect) {
   menu->addSeparator();
 
   QAction* actSetup = menu->addAction(QIcon("://icons/32x32/Apply.png"), tr("Configure Services"));
-  actSetup->setToolTip(trRichText("configure providers of geocoding search services"));
+  actSetup->setToolTip(toRichText(tr("configure providers of geocoding search services")));
   connect(actSetup, &QAction::triggered, this, &CGeoSearch::slotSetupGeoSearch);
 
   menu->move(tree->mapToGlobal(rect.topRight()));

@@ -46,7 +46,6 @@ class CSearchLineEdit : public QLineEdit {
   void slotClearFilter();
 
  private:
-  static inline QString trRichText(const char* msg) { return "<div>" + tr(msg) + "</div>"; }
   QAction* actionClearFilter;
   QAction* actionHelp;
   QAction* actionSetupFilter;

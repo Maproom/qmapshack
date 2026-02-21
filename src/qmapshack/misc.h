@@ -56,4 +56,6 @@ inline void openFileCheckSuccess(QIODeviceBase::OpenMode mode, QFile& file) {
   }
 }
 
+inline QString toRichText(const QString& text) { return QString("<div>%1</div").arg(text); }
+
 #endif  // MISC_H

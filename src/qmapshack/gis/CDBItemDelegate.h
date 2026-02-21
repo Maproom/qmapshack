@@ -39,8 +39,7 @@ class CDBItemDelegate : public QStyledItemDelegate {
   bool helpEvent(QHelpEvent* event, QAbstractItemView* view, const QStyleOptionViewItem& opt,
                  const QModelIndex& index) override;
 
- private:
-  static inline QString trRichText(const char* msg) { return "<div>" + tr(msg) + "</div>"; }
+ private:  
   IDBItem* indexToItem(const QModelIndex& index) const;
   static void drawToolButton(QPainter* p, const QStyleOptionViewItem& opt, const QRect& rect, const QIcon& icon,
                              bool enabled, bool pressed);

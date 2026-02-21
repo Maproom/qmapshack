@@ -887,7 +887,7 @@ void CGisListWks::slotLoadWorkspace() {
 
         case IGisProject::eTypeDb: {
           CDBProject* dbProject;
-          project = dbProject = new CDBProject(this);
+          project = dbProject = new CDBProject(IGisProject::eTypeDb, this);
           project->setVisibility(visible);
 
           project->IGisProject::operator<<(stream);

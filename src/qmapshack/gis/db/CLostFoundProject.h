@@ -30,6 +30,7 @@ class CLostFoundProject : public CDBProject {
 
   virtual ~CLostFoundProject();
 
+  bool hasUserFocus() const override { return false; };
   bool save() override { return false; }
   const bool canSave() const override { return false; }
 

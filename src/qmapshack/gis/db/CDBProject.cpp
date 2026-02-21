@@ -30,7 +30,7 @@
 #include "gis/db/macros.h"
 #include "gis/prj/CDetailsPrj.h"
 #include "helpers/CProgressDialog.h"
-CDBProject::CDBProject(CGisListWks* parent) : IGisProject(eTypeDb, "", parent), id(0) {
+CDBProject::CDBProject(type_e type, CGisListWks* parent) : IGisProject(type, "", parent), id(0) {
   icon = QPixmap("://icons/32x32/DBProject.png");
 }
 
@@ -198,7 +198,7 @@ void CDBProject::postStatus(bool updateLostFound) {
   }
 
   // check if all items are loaded
-  if (type != eTypeLostFound) {
+  if (getType() != eTypeLostFound) {
     QSqlQuery query(db);
     query.prepare("SELECT COUNT(*) FROM folder2item WHERE parent=:parent");
     query.bindValue(":parent", getId());

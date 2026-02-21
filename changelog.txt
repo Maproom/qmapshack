@@ -5,6 +5,7 @@ V1.XX.X
 [QMS-974] Add vendor list to waypoint icons
 [QMS-978] Fix: Invalid gdal "nodata" handling (QMapShack/QMapTool/qmt_map2jnx)
 [QMS-980] Configure content and size of the items in the workspace list
+[QMS-985] Add copy button to projects on a GPS device
 
 V1.20.0
 [QMS-627] Add possibility to move views & renaming views with double click

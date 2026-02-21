@@ -537,7 +537,7 @@ void CGisWorkspace::copyItemByKey(const IGisItem::key_t& key) {
     return;
   }
 
-  IGisProject* project = selectProject(true);
+  IGisProject* project = selectProject(false);
   if (nullptr == project) {
     return;
   }
@@ -550,7 +550,7 @@ void CGisWorkspace::copyItemByKey(const IGisItem::key_t& key) {
 IGisProject* CGisWorkspace::copyItemsByKey(const QList<IGisItem::key_t>& keys) {
   QMutexLocker lock(&IGisItem::mutexItems);
 
-  IGisProject* project = selectProject(true);
+  IGisProject* project = selectProject(false);
   if (nullptr == project) {
     return nullptr;
   }

@@ -24,8 +24,7 @@
 #include "gis/CGisListWks.h"
 #include "gis/db/macros.h"
 
-CLostFoundProject::CLostFoundProject(const QString& dbName, CGisListWks* parent) : CDBProject(parent) {
-  type = eTypeLostFound;
+CLostFoundProject::CLostFoundProject(const QString& dbName, CGisListWks* parent) : CDBProject(eTypeLostFound, parent) {
   db = QSqlDatabase::database(dbName);
   icon = QPixmap("://icons/32x32/DeleteMultiple.png");
 

@@ -154,7 +154,7 @@ class IGisProject : public IWksItem {
 
      @return One of type_e
    */
-  type_e getType() const { return type; }
+  type_e getType() const { return static_cast<type_e>(type()); }
 
   /**
      @brief Get unique project key.
@@ -453,7 +453,7 @@ class IGisProject : public IWksItem {
 
   QPointer<CDetailsPrj> dlgDetails;
 
-  type_e type;
+  // type_e type;
   mutable QString key;
   QString filename;
   bool valid = false;

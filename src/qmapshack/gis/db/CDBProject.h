@@ -40,7 +40,7 @@ class CDBProject : public IGisProject {
     eActionReload = 0x10
   };
 
-  CDBProject(CGisListWks* parent);
+  CDBProject(type_e type, CGisListWks* parent);
   CDBProject(const QString& dbName, quint64 id, CGisListWks* parent);
   CDBProject(const QString& filename, IDBFolder* parentFolder, CGisListWks* parent);
   CDBProject(CQlgtFolder& folder);

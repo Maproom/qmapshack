@@ -160,7 +160,7 @@ std::tuple<QFont, QFont, QRect, QRect, QRect, QRect, QRect, QRect, QRect> CWksIt
   QRect rectSave;
   QRect rectAutoSyncDev;
 
-  if (isOnDevice == false) {
+  if (isOnDevice == false && item.type() != IWksItem::eTypeLostFound) {
     if (item.holdUiFocus(opt)) {
       rectActiveProject.setRect(left, buttonTop, buttonWidth, buttonHeight);
       left -= buttonWidth + kMargin;

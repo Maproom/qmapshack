@@ -68,7 +68,7 @@ const QString IGisProject::filedialogLoadFilters =
 QString IGisProject::keyUserFocus;
 
 IGisProject::IGisProject(type_e type, const QString& filename, CGisListWks* parent)
-    : IWksItem(parent, type), type(type), filename(filename) {
+    : IWksItem(parent, type), filename(filename) {
   memset(cntItemsByType, 0, sizeof(cntItemsByType));
 
   if (parent) {
@@ -92,7 +92,7 @@ IGisProject::IGisProject(type_e type, const QString& filename, CGisListWks* pare
 }
 
 IGisProject::IGisProject(type_e type, const QString& filename, IDevice* parent)
-    : IWksItem(parent, type), type(type), filename(filename) {
+    : IWksItem(parent, type), filename(filename) {
   memset(cntItemsByType, 0, sizeof(cntItemsByType));
   nameSuffix = parent->getName();
 }
@@ -589,7 +589,7 @@ bool IGisProject::delItemByKey(const IGisItem::key_t& key, QMessageBox::Standard
           Database projects are a bit different. Deleting an item does not really
           mean the project is changed as the item is still stored in the database.
        */
-      if (type != eTypeDb) {
+      if (getType() != eTypeDb) {
         setChanged();
       }
 

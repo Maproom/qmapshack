@@ -36,7 +36,8 @@ CSelectProjectDialog::CSelectProjectDialog(QString& key, QString& name, IGisProj
   if (parent) {
     for (int i = 0; i < parent->topLevelItemCount(); i++) {
       IGisProject* project = dynamic_cast<IGisProject*>(parent->topLevelItem(i));
-      if (nullptr == project) {
+      if (nullptr == project || project->getType() == IWksItem::eTypeGeoSearch ||
+          project->getType() == IWksItem::eTypeLostFound) {
         continue;
       }
 

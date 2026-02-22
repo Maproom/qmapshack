@@ -51,15 +51,14 @@ static void loadTranslations() {
   QString translationPath = QCoreApplication::applicationDirPath();
   static const QRegularExpression re("bin$");
   translationPath.replace(re, "share/" APP_STR "/translations");
-  prepareTranslator(resourceDir, "qt_");
+  prepareTranslator(resourceDir, "qtbase_");
   prepareTranslator(translationPath, APP_STR "_");
 #endif
 
-#ifdef Q_OS_OSX
-  // os x
+#ifdef Q_OS_MACOS
   static QString relTranslationDir = "Resources/translations";  // app
   QString translationPath = getApplicationDir(relTranslationDir).absolutePath();
-  prepareTranslator(translationPath, "qt_");
+  prepareTranslator(translationPath, "qtbase_");
   prepareTranslator(translationPath, APP_STR "_");
 #endif
 

@@ -40,6 +40,7 @@ int main(int argc, char** argv) {
   QCoreApplication::setOrganizationName("QLandkarte");
   QCoreApplication::setOrganizationDomain("qlandkarte.org");
   QCoreApplication::setApplicationVersion(VER_STR);
+  QCoreApplication::setAttribute(Qt::AA_DontShowIconsInMenus, false);
 
   IAppSetup* env = IAppSetup::getPlatformInstance();
   env->processArguments();

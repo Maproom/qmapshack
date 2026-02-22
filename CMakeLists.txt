@@ -78,7 +78,7 @@ option(UPDATE_TRANSLATIONS_PURGE_OBSOLETE "Remove obsolete translations" OFF)
 # All OS and compiler specific tweaks
 ###############################################################################################
 if (APPLE)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS_INIT} -Wall -std=c++11 -stdlib=libc++")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS_INIT} -stdlib=libc++")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -stdlib=libc++")
     SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -framework Foundation -framework DiskArbitration")
     SET(LINK_FLAGS "${LINK_FLAGS} -framework Foundation -framework DiskArbitration")

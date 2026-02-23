@@ -21,6 +21,7 @@
 
 #include <QPointer>
 #include <QStyledItemDelegate>
+#include <QtCompilerDetection>
 
 class CGisListWks;
 class IWksItem;
@@ -31,8 +32,11 @@ class CWksItemDelegate : public QStyledItemDelegate {
   CWksItemDelegate(CGisListWks* parent);
   virtual ~CWksItemDelegate() = default;
 
+#ifdef Q_CC_GNU
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wpedantic"
+#endif  // Q_CC_GNU
+
   union prj_t {
     struct {
       quint32 keywords : 1;
@@ -79,7 +83,10 @@ class CWksItemDelegate : public QStyledItemDelegate {
     };
     quint32 flags;
   };
+
+#ifdef Q_CC_GNU
 #pragma GCC diagnostic pop
+#endif  // Q_CC_GNU
 
   /**
    * @brief The control flags for the project's and GIS item's status line

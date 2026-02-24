@@ -1,4 +1,4 @@
-V1.XX.X
+V1.20.1
 [QMS-945] Redesign icons for focus, autosave, sync, and DB buttons
 [QMS-949] Fix: List no geo search or database lost & found in project selection dialog
 [QMS-971] Fix: macOS: Wrong user data paths

@@ -49,7 +49,7 @@ function buildRoutino {
         -e 's|-Wl,-R.|-Wl,-rpath,.|g' \
         Makefile.conf
 
-    make clean
+    #make clean
     make CLANG=1 LDFLAGS_SONAME=""
 }
 

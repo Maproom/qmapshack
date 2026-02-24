@@ -82,43 +82,43 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../main.cpp" line="89"/>
+        <location filename="../main.cpp" line="88"/>
         <source>
 Convert a map file with RGBA color coding to a color palette coding.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="92"/>
+        <location filename="../main.cpp" line="91"/>
         <source>Source file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="93"/>
+        <location filename="../main.cpp" line="92"/>
         <source>Target file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="96"/>
+        <location filename="../main.cpp" line="95"/>
         <source>Number of colors. (default: 255)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="97"/>
+        <location filename="../main.cpp" line="96"/>
         <source>Input palette file for color table (*.vrt)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="98"/>
+        <location filename="../main.cpp" line="97"/>
         <source>Save color table to palette file (*.vrt)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="106"/>
+        <location filename="../main.cpp" line="105"/>
         <source>There must be a source and destination file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="125"/>
+        <location filename="../main.cpp" line="124"/>
         <source>--ncolors must be an integer value less than 256</source>
         <translation type="unfinished"></translation>
     </message>

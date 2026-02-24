@@ -15,6 +15,21 @@ QToolBar > QToolButton {
     height: 24px;
 }
 
+/* QToolButton with menu: additional space for arrow button */
+QToolBar > QToolButton[popupMode="1"] {
+    padding-right: 12px;
+}
+
+/* QToolButton with menu: arrow button width */
+QToolBar > QToolButton::menu-button {
+    width: 10px;
+}
+
+/* QToolButton with menu: arrow width within arrow button */
+QToolBar > QToolButton::menu-arrow {
+    width: 8px;
+}
+
 QToolBar > QToolButton:checked {
     border: 1px solid #cdcdcd;
     background-color: #d7d7d7;

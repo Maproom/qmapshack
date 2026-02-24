@@ -1076,6 +1076,9 @@
    <property name="toolTip">
     <string>Setup Map Icon Sizes</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
   </action>
  </widget>
  <customwidgets>

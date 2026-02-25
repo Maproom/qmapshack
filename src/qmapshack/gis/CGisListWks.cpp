@@ -551,7 +551,7 @@ void CGisListWks::dropEvent(QDropEvent* e) {
   CGisListWksEditLock lock(true, IGisItem::mutexItems);
 
   const QList<QTreeWidgetItem*>& items = selectedItems();
-  if (items.isEmpty()) {    
+  if (items.isEmpty()) {
     return;
   }
 
@@ -1552,16 +1552,10 @@ void CGisListWks::slotItemDoubleClicked(QTreeWidgetItem* item, int) {
   }
 }
 
-void CGisListWks::slotItemChanged(QTreeWidgetItem* /*item*/, int column) {
+void CGisListWks::slotItemChanged(QTreeWidgetItem* /*item*/, int /*column*/) {
   CGisListWksEditLock lock(true, IGisItem::mutexItems);
-
-  /// @todo CWksItemDelegate: this clears the top left selection information whenever
-  /// a project is checked or unchecked.
-
-  // if (column == eColumnCheckBox) {
-  //   CGisWorkspace::self().slotWksItemSelectionReset();
-  //   emit sigChanged();
-  // }
+  CGisWorkspace::self().slotWksItemSelectionReset();
+  emit sigChanged();
 }
 
 void CGisListWks::slotEditItem() {

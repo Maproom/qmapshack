@@ -61,6 +61,7 @@ void IWksItem::updateItem() {
   if (tree == nullptr) {
     return;
   }
+  emit tree->itemChanged(this, 0);
   QWidget* viewport = tree->viewport();
   if (viewport == nullptr) {
     return;

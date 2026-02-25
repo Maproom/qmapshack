@@ -343,6 +343,11 @@ void IDem::slopecolor(QVector<float>& data, qreal w, qreal h, QImage& img) const
       fillWindow(data, n, m, wp2, win);
       qreal slope = slopeOfWindowInterp(win, eWinsize3x3, 0, 0);
 
+      if (slope == NOFLOAT) {
+        scan[n - 1] = 0;
+        continue;
+      }
+
       const qreal* currentSlopeStepTable = getCurrentSlopeStepTable();
 
       if (slope > currentSlopeStepTable[4]) {

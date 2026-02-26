@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2025 Oliver Eichler <oliver.eichler@gmx.de>
+    Copyright (C) 2026 Oliver Eichler <oliver.eichler@gmx.de>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,36 +16,18 @@
 
 **********************************************************************************************/
 
-#ifndef CDEVICEGARMINARCHIVEMTP_H
-#define CDEVICEGARMINARCHIVEMTP_H
+#include "helpers/CThread.h"
 
-#include <QPointer>
+CThread::CThread(CThread::fCallback worker) : worker(worker) {
+  connect(this, &CThread::finished, this, &CThread::deleteLater);
+}
 
-#include "device/IDevice.h"
+void CThread::run() { worker(); }
 
-class CDeviceGarminMtp;
-class IDeviceAccess;
-class CThread;
-
-class CDeviceGarminArchiveMtp : public QObject, public IDevice {
-  Q_OBJECT
- public:
-  CDeviceGarminArchiveMtp(const QString& path, IDeviceAccess* device, CDeviceGarminMtp* parent);
-  virtual ~CDeviceGarminArchiveMtp();
-
-  QString getInfo(quint32) const override { return ""; }
-
- protected:
-  void insertCopyOfProject(IGisProject* project) override {}
-
- private slots:
-  void slotExpanded(QTreeWidgetItem* item);
-  void slotCollapsed(QTreeWidgetItem* item);
-
- private:
-  IDeviceAccess* device;
-
-  QPointer<CThread> threadLoadData;
-};
-
-#endif  // CDEVICEGARMINARCHIVEMTP_H
+void CThread::cancel() {
+  if (isFinished()) {
+    return;
+  }
+  requestInterruption();
+  wait(5000);
+}

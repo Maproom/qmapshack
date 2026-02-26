@@ -3,6 +3,7 @@ V1.XX.X
 [QMS-992] Fix: Changing items does not update the map view
 [QMS-994] Fix: QMapTool not callable from QMapShack (macOS)
 [QMS-996] Fix: POIs not displayed (macOS)
+[QMS-998] Add progress bar to GPS devices while loading records
 
 V1.20.1
 [QMS-945] Redesign icons for focus, autosave, sync, and DB buttons

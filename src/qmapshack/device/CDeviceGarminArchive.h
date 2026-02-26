@@ -22,16 +22,18 @@
 #include <QCoreApplication>
 #include <QDir>
 #include <QObject>
+#include <QPointer>
 
 #include "device/IDevice.h"
 
 class CDeviceGarmin;
+class CThread;
 
 class CDeviceGarminArchive : public QObject, public IDevice {
   Q_OBJECT
  public:
   CDeviceGarminArchive(const QString& path, CDeviceGarmin* parent);
-  virtual ~CDeviceGarminArchive() = default;
+  virtual ~CDeviceGarminArchive();
 
   QString getInfo(quint32) const override { return ""; }
 
@@ -41,6 +43,9 @@ class CDeviceGarminArchive : public QObject, public IDevice {
  private slots:
   void slotExpanded(QTreeWidgetItem* item);
   void slotCollapsed(QTreeWidgetItem* item);
+
+ private:
+  QPointer<CThread> threadLoadData;
 };
 
 #endif  // CDEVICEGARMINARCHIVE_H

@@ -23,21 +23,28 @@
 #include "gis/CGisListWks.h"
 #include "gis/fit2/CFit2Project.h"
 #include "gis/gpx/CGpxProject.h"
+#include "helpers/CThread.h"
 #include "misc.h"
 
 // Used by gvfs
 CDeviceGenericMtp::CDeviceGenericMtp(const GVFSMount& mount, const QString& storagePath, const QString& key,
                                      QTreeWidget* parent)
-    : IDevice("", eTypeGenericMtp, key, parent), QObject(parent) {
+    : QObject(parent), IDevice("", eTypeGenericMtp, key, parent) {
   device = new CDeviceAccessGvfsMtp(mount, storagePath, this);
   setup();
 }
 
 // Used by kiod6
 CDeviceGenericMtp::CDeviceGenericMtp(const QDBusObjectPath& objectPathStorage, const QString& key, QTreeWidget* parent)
-    : IDevice("", eTypeGenericMtp, key, parent), QObject(parent) {
+    : QObject(parent), IDevice("", eTypeGenericMtp, key, parent) {
   device = new CDeviceAccessKMtp(objectPathStorage, this);
   setup();
+}
+
+CDeviceGenericMtp::~CDeviceGenericMtp() {
+  if (threadLoadData != nullptr) {
+    threadLoadData->cancel();
+  }
 }
 
 QString CDeviceGenericMtp::getInfo(quint32) const { return ""; }
@@ -73,17 +80,35 @@ void CDeviceGenericMtp::setup() {
       IWksItem::icon = pixmap;
     }
 
-    for (const QString& path : exportPathsRelativ) {
-      const QString& _path = QDir::cleanPath(rootPath.filePath(path));
-      createProjectsFromFiles(_path);
-      exportPaths << _path;
-    }
+    name = QString("%1 (%2)").arg(description, device->decription());
 
-    for (const QString& path : importPathsRelativ) {
-      createProjectsFromFiles(QDir::cleanPath(rootPath.filePath(path)));
-    }
+    threadLoadData = new CThread([this, rootPath, exportPathsRelativ, importPathsRelativ]() {
+      quint32 total = 0;
+      for (const QString& path : exportPathsRelativ) {
+        const QString& subdirectory = QDir::cleanPath(rootPath.filePath(path));
+        total += device->listFilesOnStorage(subdirectory).count();
+      }
+      for (const QString& path : importPathsRelativ) {
+        const QString& subdirectory = QDir::cleanPath(rootPath.filePath(path));
+        total += device->listFilesOnStorage(subdirectory).count();
+      }
+      quint32 count = 0;
+
+      for (const QString& path : exportPathsRelativ) {
+        const QString& _path = QDir::cleanPath(rootPath.filePath(path));
+        createProjectsFromFiles(_path, count, total);
+        exportPaths << _path;
+      }
+
+      for (const QString& path : importPathsRelativ) {
+        createProjectsFromFiles(QDir::cleanPath(rootPath.filePath(path)), count, total);
+      }
+
+      setProgress(total, total);
+    });
   }
-  name = QString("%1 (%2)").arg(description, device->decription());
+
+  threadLoadData->start();
 }
 
 bool CDeviceGenericMtp::removeFromDevice(const QString& filename) {
@@ -119,33 +144,51 @@ void CDeviceGenericMtp::insertCopyOfProject(IGisProject* project) {
   }
 }
 
-void CDeviceGenericMtp::createProjectsFromFiles(const QString& subdirectory) {
+void CDeviceGenericMtp::createProjectsFromFiles(const QString& subdirectory, quint32& count, const quint32 total) {
   static const QStringList knownSuffix = {"gpx", "fit"};
   QDir d(subdirectory);
 
   const QStringList& files = device->listFilesOnStorage(subdirectory);
   for (const QString& file : files) {
-    const QString suffix = QFileInfo(file).suffix().toLower();
-    if (knownSuffix.contains(suffix)) {
-      QTemporaryFile tempFile;
-      if (!device->readFileFromStorage(d.filePath(file), tempFile)) {
-        return;
-      }
-      openFileCheckSuccess(QIODevice::ReadWrite, tempFile);
-      IGisProject* project = nullptr;
-      if (suffix == "gpx") {
-        project = new CGpxProject(tempFile, d.filePath(file), this);
-      } else if (suffix == "fit") {
-        project = new CFit2Project(tempFile, d.filePath(file), this);
-      }
-      if (project) {
-        if (!project->isValid()) {
-          delete project;
-        } else {
-          project->setVisibility(isVisible());
-        }
-      }
+    if (QThread::currentThread()->isInterruptionRequested()) {
+      break;
     }
+
+    const QString suffix = QFileInfo(file).suffix().toLower();
+    if (!knownSuffix.contains(suffix)) {
+      continue;
+    }
+
+    setProgress(++count, total);
+
+    QMetaObject::invokeMethod(
+        this,
+        [this, suffix, d, file]() {
+          QTemporaryFile tempFile;
+          if (!device->readFileFromStorage(d.filePath(file), tempFile)) {
+            return;
+          }
+          openFileCheckSuccess(QIODevice::ReadWrite, tempFile);
+          IGisProject* project = nullptr;
+
+          try {
+            if (suffix == "gpx") {
+              project = new CGpxProject(tempFile, d.filePath(file), this);
+            } else if (suffix == "fit") {
+              project = new CFit2Project(tempFile, d.filePath(file), this);
+            }
+            if (project) {
+              if (!project->isValid()) {
+                delete project;
+              } else {
+                project->setVisibility(isVisible());
+              }
+            }
+          } catch (const QString& msg) {
+            qWarning() << msg;
+          }
+        },
+        Qt::BlockingQueuedConnection);
   }
 }
 

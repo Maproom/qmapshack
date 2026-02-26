@@ -37,6 +37,8 @@ constexpr int kMargin = 1;
 constexpr int kFontSizeDiffProject = 2;
 constexpr int kFontSizeDiffItem = 3;
 constexpr int kFontSizeInvalid = -1;
+constexpr int kProgressBarHeight = 5;
+constexpr int kProgressBarHeightHalf = 3;
 
 CWksItemDelegate::CWksItemDelegate(CGisListWks* parent) : QStyledItemDelegate(parent), treeWidget(parent) {
   SETTINGS;
@@ -253,7 +255,7 @@ std::tuple<QFont, QFont, QRect, QRect, QRect, QRect> CWksItemDelegate::getRectan
   return {fontName, fontStatus, rectIcon, rectName, rectStatus, rectChanged};
 }
 
-std::tuple<QFont, QFont, QRect, QRect, QRect, QRect> CWksItemDelegate::getRectanglesDevice(
+std::tuple<QFont, QFont, QRect, QRect, QRect, QRect, QRect> CWksItemDelegate::getRectanglesDevice(
     const QStyleOptionViewItem& opt, const IWksItem& item) const {
   QFont fontName = opt.font;
   QFontMetrics fmName(fontName);
@@ -263,14 +265,16 @@ std::tuple<QFont, QFont, QRect, QRect, QRect, QRect> CWksItemDelegate::getRectan
   QFontMetrics fmStatus(fontStatus);
 
   const QRect& r = opt.rect.adjusted(2 * kMargin, 2 * kMargin, -2 * kMargin, -2 * kMargin);
-  const QRect& rectIcon = r.adjusted(-kMargin, -kMargin, -(r.width() - r.height()), kMargin);
+  const QRect rectIcon(r.left(), r.top(), r.height(), r.height());
   const QRect rectVisible(r.right() - fmName.height(), r.top(), fmName.height(), fmName.height());
-  const QRect rectName(rectIcon.right() + kMargin, r.top(),
+  const QRect rectName(rectIcon.right() + 2 * kMargin, r.top(),
                        r.width() - rectIcon.width() - rectVisible.width() - 2 * kMargin, fmName.height());
-  const QRect rectStatus(rectIcon.right() + kMargin, r.bottom() - fmStatus.height(),
-                       r.width() - rectIcon.width() - 2 * kMargin, fmStatus.height());
+  const QRect rectStatus(rectIcon.right() + 2 * kMargin, r.bottom() - fmStatus.height(),
+                         r.width() - rectIcon.width() - 2 * kMargin, fmStatus.height());
+  const QRect rectProgress(rectIcon.right() + 4 * kMargin, r.bottom() - kProgressBarHeight,
+                           r.width() - rectIcon.width() - 8 * kMargin, kProgressBarHeight);
 
-  return {fontName, fontStatus, rectIcon, rectName, rectStatus, rectVisible};
+  return {fontName, fontStatus, rectIcon, rectName, rectStatus, rectProgress, rectVisible};
 }
 
 std::tuple<QFont, QFont, QRect, QRect, QRect, QRect, QRect, QRect> CWksItemDelegate::getRectanglesGeoSearch(
@@ -327,6 +331,16 @@ void CWksItemDelegate::drawToolButton(QPainter* p, const QStyleOptionViewItem& o
   opt.widget->style()->drawComplexControl(QStyle::CC_ToolButton, &btnOpt, p, opt.widget);
 }
 
+void CWksItemDelegate::drawProgressBar(QPainter* p, const QRect& rect, qreal progress) {
+  quint32 width = qRound(rect.width() * progress / 100.0);
+  const QLine line(rect.left(), rect.bottom() - kProgressBarHeightHalf, rect.left() + width,
+                   rect.bottom() - kProgressBarHeightHalf);
+  p->setPen(QPen(Qt::white, 5, Qt::SolidLine, Qt::RoundCap));
+  p->drawLine(line);
+  p->setPen(QPen(Qt::darkGreen, 3, Qt::SolidLine, Qt::RoundCap));
+  p->drawLine(line);
+}
+
 void CWksItemDelegate::drawRatingStars(qreal rating, QPainter* p, QIcon::Mode iconMode, QRect& rectStatus) const {
   const qint32 N = qRound(rating);
   if (rating != 0) {
@@ -339,7 +353,6 @@ void CWksItemDelegate::drawRatingStars(qreal rating, QPainter* p, QIcon::Mode ic
     rectStatus.setLeft(rectStar.left() + kMargin);
   }
 }
-
 
 void CWksItemDelegate::paint(QPainter* p, const QStyleOptionViewItem& opt, const QModelIndex& index) const {
   IWksItem* item = indexToItem(index);
@@ -520,7 +533,8 @@ void CWksItemDelegate::paintProject(QPainter* p, const QStyleOptionViewItem& opt
 
 void CWksItemDelegate::paintDevice(QPainter* p, const QStyleOptionViewItem& opt, const QModelIndex& index,
                                    const IWksItem& item) const {
-  auto [fontName, fontStatus, rectIcon, rectName, rectStatus, rectVisible] = getRectanglesDevice(opt, item);
+  auto [fontName, fontStatus, rectIcon, rectName, rectStatus, rectProgress, rectVisible] =
+      getRectanglesDevice(opt, item);
 
   const bool isVisible = item.isVisible();
   const QColor& colorName =
@@ -533,17 +547,24 @@ void CWksItemDelegate::paintDevice(QPainter* p, const QStyleOptionViewItem& opt,
   p->setFont(fontName);
   p->drawText(rectName.adjusted(0, -1, 0, 1), Qt::AlignLeft | Qt::AlignTop, item.getName());
 
-  // draw status
-  p->setPen(colorName);
-  p->setFont(fontStatus);
-  p->drawText(rectStatus.adjusted(0, -1, 0, 1), Qt::AlignLeft | Qt::AlignTop, item.getInfo(IWksItem::eFeatureShowName));
-
   // draw icon
   QIcon(item.getIcon()).paint(p, rectIcon, Qt::AlignCenter, isVisible ? QIcon::Normal : QIcon::Disabled);
 
   // draw tool button to activate
   drawToolButton(p, opt, rectVisible,
                  isVisible ? QIcon(":/icons/32x32/ShowAll.png") : QIcon(":/icons/32x32/ShowNone.png"), true, isVisible);
+
+  // draw progress bar
+  auto [hasProgress, progress] = item.getProgress();
+  if (hasProgress) {
+    drawProgressBar(p, rectStatus, progress);
+  } else {
+    // draw status
+    p->setPen(colorName);
+    p->setFont(fontStatus);
+    p->drawText(rectStatus.adjusted(0, -1, 0, 1), Qt::AlignLeft | Qt::AlignTop,
+                item.getInfo(IWksItem::eFeatureShowName));
+  }
 }
 
 void CWksItemDelegate::paintItem(QPainter* p, const QStyleOptionViewItem& opt, const QModelIndex& index,
@@ -792,7 +813,8 @@ bool CWksItemDelegate::mousePressProject(QMouseEvent* me, const QStyleOptionView
 
 bool CWksItemDelegate::mousePressDevice(QMouseEvent* me, const QStyleOptionViewItem& opt, const QModelIndex& index,
                                         IWksItem& item) {
-  auto [fontName, fontStatus, rectIcon, rectName, rectStatus, rectVisible] = getRectanglesDevice(opt, item);
+  auto [fontName, fontStatus, rectIcon, rectName, rectStatus, rectProgress, rectVisible] =
+      getRectanglesDevice(opt, item);
 
   if (rectVisible.contains(me->pos())) {
     item.setVisibility(!item.isVisible());

@@ -132,7 +132,7 @@ QStringList CDeviceAccessKMtp::listDirsOnStorage(const QString& path) {
 int CDeviceAccessKMtp::waitForCopyOperation(const org::kde::kmtp::Storage* storage, fn_operation operation) {
   QEventLoop loop;
   connect(storage, &org::kde::kmtp::Storage::copyProgress, &loop,
-          [](qulonglong sent, qulonglong total) { qDebug() << "processed size:" << sent << "of" << total; });
+          [](qulonglong sent, qulonglong total) { /*qDebug() << "processed size:" << sent << "of" << total;*/ });
   connect(storage, &org::kde::kmtp::Storage::copyFinished, &loop, &QEventLoop::exit);
 
   if (operation() == 0) {

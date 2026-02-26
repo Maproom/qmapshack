@@ -1,6 +1,7 @@
 V1.XX.X
 [QMS-990] Fix: Toolbar menu item(s) too small, "View" menu item missing (macOS)
 [QMS-992] Fix: Changing items does not update the map view
+[QMS-994] Fix: QMapTool not callable from QMapShack (macOS)
 
 V1.20.1
 [QMS-945] Redesign icons for focus, autosave, sync, and DB buttons

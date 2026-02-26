@@ -37,23 +37,11 @@ const QString CAppSetupMac::relBinDir         = "Tools";                   // ap
 const QString CAppSetupMac::relLogDir         = "Library/Logs";            // home
 
 void CAppSetupMac::extendPath() {
-  const QProcessEnvironment& env = QProcessEnvironment::systemEnvironment();
-  const QStringList& envlist = env.toStringList();
-  QString value = "";
-  for (int i = 0; i < envlist.size(); i++) {
-    QString entry = envlist[i];
-    if (entry.startsWith("PATH=")) {
-      int index = entry.indexOf("=");
-
-      if (index != -1) {
-        value = entry.right(entry.length() - (index + 1)) + ":";
-      }
-      break;
-    }
-  }
+  QString value = qEnvironmentVariable("PATH", "");
+  // append Tools path
   const QString& binDir = getApplicationDir(relBinDir).absolutePath();
-  qDebug() << "BIN" << binDir;
-  value += binDir;
+  qDebug() << "Tools path:" << binDir;
+  value += ":" + binDir;
   qputenv("PATH", value.toLatin1().constData());
 
   prepareToolPaths();

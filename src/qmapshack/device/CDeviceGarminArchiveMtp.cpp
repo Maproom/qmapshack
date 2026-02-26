@@ -18,52 +18,83 @@
 
 #include "device/CDeviceGarminArchiveMtp.h"
 
-#include "canvas/CCanvas.h"
 #include "device/CDeviceGarminMtp.h"
 #include "device/IDeviceAccess.h"
 #include "gis/CGisListWks.h"
 #include "gis/CGisWorkspace.h"
 #include "gis/gpx/CGpxProject.h"
+#include "helpers/CThread.h"
 #include "misc.h"
 
 CDeviceGarminArchiveMtp::CDeviceGarminArchiveMtp(const QString& path, IDeviceAccess* device, CDeviceGarminMtp* parent)
-    : IDevice(path, parent->getKey(), parent), device(device) {
+    : QObject(parent), IDevice(path, parent->getKey(), parent), device(device) {
   name = tr("Archive - expand to load");
   setChildIndicatorPolicy(QTreeWidgetItem::ShowIndicator);
   connect(treeWidget(), &QTreeWidget::itemExpanded, this, &CDeviceGarminArchiveMtp::slotExpanded);
   connect(treeWidget(), &QTreeWidget::itemCollapsed, this, &CDeviceGarminArchiveMtp::slotCollapsed);
 }
 
+CDeviceGarminArchiveMtp::~CDeviceGarminArchiveMtp() {
+  if (threadLoadData != nullptr) {
+    threadLoadData->cancel();
+  }
+};
+
 void CDeviceGarminArchiveMtp::slotExpanded(QTreeWidgetItem* item) {
   if ((item != this) || (childCount() != 0)) {
     return;
   }
 
-  name = tr("Archive - loaded");
-  QMutexLocker lock(&IGisItem::mutexItems);
-  CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
-  qDebug() << "reading files from device: " << dir.path();
-  const QStringList& entries = device->listFilesOnStorage(dir.path());
-  for (const QString& entry : entries) {
-    if (!entry.endsWith(".gpx")) {
-      continue;
+  name = tr("Archive - loading");
+
+  threadLoadData = new CThread([this]() {
+    qDebug() << "reading files from device: " << dir.path();
+    const QStringList& entries = device->listFilesOnStorage(dir.path());
+    const quint32 total = entries.count();
+    quint32 count = 0;
+    for (const QString& entry : entries) {
+      if (threadLoadData->isInterruptionRequested()) {
+        break;
+      }
+
+      setProgress(++count, total);
+      if (!entry.endsWith(".gpx")) {
+        continue;
+      }
+
+      QMetaObject::invokeMethod(
+          this,
+          [this, entry]() {
+            const QString& filename = dir.filePath(entry);
+            QTemporaryFile tempFile;
+            if (!device->readFileFromStorage(filename, tempFile)) {
+              return;
+            }
+            openFileCheckSuccess(QIODevice::ReadWrite, tempFile);
+
+            QMutexLocker lock(&IGisItem::mutexItems);
+            try {
+              IGisProject* project = new CGpxProject(tempFile, filename, this);
+              if (project) {
+                if (!project->isValid()) {
+                  delete project;
+                } else {
+                  project->setVisibility(isVisible());
+                }
+              }
+            } catch (const QString& msg) {
+              qWarning() << msg;
+            }
+          },
+          Qt::BlockingQueuedConnection);
     }
 
-    const QString& filename = dir.filePath(entry);
-    QTemporaryFile tempFile;
-    if (!device->readFileFromStorage(filename, tempFile)) {
-      continue;
-    }
-    openFileCheckSuccess(QIODevice::ReadWrite, tempFile);
-    IGisProject* project = new CGpxProject(tempFile, filename, this);
-    if (project) {
-      if (!project->isValid()) {
-        delete project;
-      } else {
-        project->setVisibility(isVisible());
-      }
-    }
-  }
+    QMutexLocker lock(&IGisItem::mutexItems);
+    name = tr("Archive - loaded");
+    setProgress(total, total);
+  });
+
+  threadLoadData->start();
 }
 
 void CDeviceGarminArchiveMtp::slotCollapsed(QTreeWidgetItem* item) {
@@ -71,11 +102,12 @@ void CDeviceGarminArchiveMtp::slotCollapsed(QTreeWidgetItem* item) {
     return;
   }
 
+  if (threadLoadData != nullptr) {
+    threadLoadData->cancel();
+  }
+
   QMutexLocker lock(&IGisItem::mutexItems);
-  CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
-
   qDeleteAll(takeChildren());
-
   name = tr("Archive - expand to load");
   emit CGisWorkspace::self().sigChanged();
 }

@@ -19,22 +19,23 @@
 #ifndef CDEVICEGARMINMTP_H
 #define CDEVICEGARMINMTP_H
 
-#include <functional>
+#include <QPointer>
 
 #include "device/IDevice.h"
 
 class QDBusObjectPath;
 class IDeviceAccess;
 class GVFSMount;
+class CThread;
 
-class CDeviceGarminMtp : public IDevice, private QObject {
-  Q_DECLARE_TR_FUNCTIONS(CDeviceGarminMtp)
+class CDeviceGarminMtp : public QObject, public IDevice {
+  Q_OBJECT
  public:
   CDeviceGarminMtp(const QDBusObjectPath& objectPathStorage, const QString& key, QTreeWidget* parent);
 
   CDeviceGarminMtp(const GVFSMount& mount, const QString& storagePath, const QString& key, QTreeWidget* parent);
 
-  virtual ~CDeviceGarminMtp() = default;
+  virtual ~CDeviceGarminMtp();
 
   bool removeFromDevice(const QString& filename);
 
@@ -43,11 +44,9 @@ class CDeviceGarminMtp : public IDevice, private QObject {
  protected:
   void insertCopyOfProject(IGisProject* project) override;
 
-  // org::kde::kmtp::Storage* storage;
-
  private:
   void setup();
-  void createProjectsFromFiles(QString subdirectory, QString extension);
+  void createProjectsFromFiles(QString subdirectory, QString extension, quint32& count, const quint32 total);
   QString createFileName(IGisProject* project, const QString& path, const QString& suffix) const;
   QString simplifiedName(IGisProject* project) const;
   void reorderProjects(IGisProject* project);
@@ -66,6 +65,8 @@ class CDeviceGarminMtp : public IDevice, private QObject {
   QString pathLocations;
   QString pathAdventures;  // no default
   QString pathTcx;         // no default
+
+  QPointer<CThread> threadLoadData;
 };
 
 #endif  // CDEVICEGARMINMTP_H

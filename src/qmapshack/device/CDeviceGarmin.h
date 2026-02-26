@@ -19,12 +19,15 @@
 #ifndef CDEVICEGARMIN_H
 #define CDEVICEGARMIN_H
 
+#include <QPointer>
+
 #include "device/IDevice.h"
 
 class CDeviceGarminArchive;
+class CThread;
 
-class CDeviceGarmin : public IDevice {
-  Q_DECLARE_TR_FUNCTIONS(CDeviceGarmin)
+class CDeviceGarmin : public QObject, public IDevice {
+  Q_OBJECT
  public:
   CDeviceGarmin(const QString& path, const QString& key, const QString& model, const QString& garminDeviceXml,
                 QTreeWidget* parent);
@@ -38,7 +41,7 @@ class CDeviceGarmin : public IDevice {
   QString getInfo(quint32) const override;
 
  private:
-  void createProjectsFromFiles(QString subdirecoty, QString fileEnding);
+  void createProjectsFromFiles(QString subdirecoty, QString fileEnding, quint32& count, const quint32 total);
   void createAdventureFromProject(IGisProject* project, const QString& gpxFilename);
   void insertCopyOfProjectAsGpx(IGisProject* project);
   void insertCopyOfProjectAsTcx(IGisProject* project);
@@ -61,6 +64,8 @@ class CDeviceGarmin : public IDevice {
   QString pathTcx;         // no default
 
   int cntImages = 0;
+
+  QPointer<CThread> threadLoadData;
 };
 
 #endif  // CDEVICEGARMIN_H

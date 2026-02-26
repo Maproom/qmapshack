@@ -149,8 +149,8 @@ class CWksItemDelegate : public QStyledItemDelegate {
 
   std::tuple<QFont, QFont, QRect, QRect, QRect, QRect, QRect, QRect, QRect> getRectanglesProject(
       const QStyleOptionViewItem& opt, IWksItem& item) const;
-  std::tuple<QFont, QFont, QRect, QRect, QRect, QRect> getRectanglesDevice(const QStyleOptionViewItem& opt,
-                                                                           const IWksItem& item) const;
+  std::tuple<QFont, QFont, QRect, QRect, QRect, QRect, QRect> getRectanglesDevice(const QStyleOptionViewItem& opt,
+                                                                                  const IWksItem& item) const;
   std::tuple<QFont, QFont, QRect, QRect, QRect, QRect, QRect, QRect> getRectanglesGeoSearch(
       const QStyleOptionViewItem& opt) const;
   std::tuple<QFont, QRect, QRect> getRectanglesGeoSearchError(const QStyleOptionViewItem& opt) const;
@@ -159,6 +159,8 @@ class CWksItemDelegate : public QStyledItemDelegate {
 
   static void drawToolButton(QPainter* p, const QStyleOptionViewItem& opt, const QRect& rect, const QIcon& icon,
                              bool enabled, bool pressed);
+
+  static void drawProgressBar(QPainter* p, const QRect& rect, qreal progress);
 
   void drawRatingStars(qreal rating, QPainter* p, QIcon::Mode iconMode, QRect& rectStatus) const;
 

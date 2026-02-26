@@ -28,12 +28,13 @@
 #include <QtDBus>
 #endif
 
-int IDevice::cnt = 0;
+quint32 IDevice::countDevice = 0;
+quint32 IDevice::countMount = 0;
 
 IDevice::IDevice(const QString& path, type_e type, const QString& key, QTreeWidget* parent)
     : IWksItem(parent, type), dir(path), key(key) {
   icon = QPixmap("://icons/32x32/Device.png");
-  cnt++;
+  countDevice++;
   setVisibility(false);
 }
 
@@ -45,7 +46,7 @@ IDevice::IDevice(const QString& path, const QString& key, IDevice* parent)
 
 IDevice::~IDevice() {
   if (type() != eTypeVirtual) {
-    cnt--;
+    countDevice--;
   }
 }
 
@@ -62,27 +63,39 @@ void IDevice::setVisibility(bool visible) {
 
 void IDevice::mount(const QString& path) {
 #ifdef HAVE_DBUS
+  QMutexLocker lock(&IGisItem::mutexItems);
+  if (++countMount != 1) {
+    return;
+  }
+  qDebug() << "mount" << path;
   QDBusMessage message =
       QDBusMessage::createMethodCall("org.freedesktop.UDisks2", path, "org.freedesktop.UDisks2.Filesystem", "Mount");
   QVariantMap args;
   args.insert("options", "sync");
   message << args;
-#if defined(Q_OS_FREEBSD)
-  // XXX Hunc sint race conditions - call bsdisks (UDisks2) too fast,
-  // get a malformed reply, crash.
-  QThread::sleep(1);
-#endif
-  QDBusConnection::systemBus().call(message);
+
+  const QDBusMessage& res = QDBusConnection::systemBus().call(message);
+  if (res.type() == QDBusMessage::ErrorMessage) {
+    qWarning() << res;
+  }
 #endif
 }
 
 void IDevice::umount(const QString& path) {
 #ifdef HAVE_DBUS
+  QMutexLocker lock(&IGisItem::mutexItems);
+  if (--countMount != 0) {
+    return;
+  }
+  qDebug() << "umount" << path;
   QDBusMessage message =
       QDBusMessage::createMethodCall("org.freedesktop.UDisks2", path, "org.freedesktop.UDisks2.Filesystem", "Unmount");
   QVariantMap args;
   message << args;
-  QDBusConnection::systemBus().call(message);
+  const QDBusMessage& res = QDBusConnection::systemBus().call(message);
+  if (res.type() == QDBusMessage::ErrorMessage) {
+    qWarning() << res;
+  }
 #endif
 }
 

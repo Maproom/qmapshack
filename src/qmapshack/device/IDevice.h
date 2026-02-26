@@ -37,7 +37,7 @@ class IDevice : public IWksItem {
 
   static void mount(const QString& path);
   static void umount(const QString& path);
-  static int count() { return cnt; }
+  static int count() { return countDevice; }
 
   void mount() { mount(key); }
   void umount() { umount(key); }
@@ -84,10 +84,10 @@ class IDevice : public IWksItem {
    */
   bool testForExternalProject(const QString& filename);
 
-  static int cnt;
-
   QDir dir;
   QString key;
+  static quint32 countMount;
+  static quint32 countDevice;
 };
 
 class CDeviceMountLock {

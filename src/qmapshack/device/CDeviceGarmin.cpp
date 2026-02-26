@@ -28,10 +28,11 @@
 #include "gis/gpx/CGpxProject.h"
 #include "gis/tcx/CTcxProject.h"
 #include "gis/wpt/CGisItemWpt.h"
+#include "helpers/CThread.h"
 
 CDeviceGarmin::CDeviceGarmin(const QString& path, const QString& key, const QString& model,
                              const QString& garminDeviceXml, QTreeWidget* parent)
-    : IDevice(path, eTypeGarmin, key, parent), model(model), cntImages(0) {
+    : QObject(parent), IDevice(path, eTypeGarmin, key, parent), model(model), cntImages(0) {
   name = "Garmin";
 
   QFile file(QDir(path).absoluteFilePath(garminDeviceXml));
@@ -118,50 +119,94 @@ CDeviceGarmin::CDeviceGarmin(const QString& path, const QString& key, const QStr
     dir.mkpath(pathTcx);
   }
 
-  createProjectsFromFiles(pathGpx, "gpx");
-  createProjectsFromFiles(pathGpx + "/Current", "gpx");
+  threadLoadData = new CThread([this]() {
+    CDeviceMountLock mountLock(*this);
+    quint32 total = 0;
+    total += QDir(dir.absoluteFilePath(pathGpx)).entryList(QStringList("*.gpx")).count();
+    total += QDir(dir.absoluteFilePath(pathGpx + "/Current")).entryList(QStringList("*.gpx")).count();
+    total += QDir(dir.absoluteFilePath(pathActivities)).entryList(QStringList("*.fit")).count();
+    total += QDir(dir.absoluteFilePath(pathCourses)).entryList(QStringList("*.fit")).count();
+    total += QDir(dir.absoluteFilePath(pathLocations)).entryList(QStringList("*.fit")).count();
+    if (!pathTcx.isEmpty()) {
+      total += QDir(dir.absoluteFilePath(pathTcx)).entryList(QStringList("*.tcx")).count();
+    }
+    quint32 count = 0;
 
-  QDir dirArchive(dir.absoluteFilePath(pathGpx + "/Archive"));
-  if (dirArchive.exists() && (dirArchive.entryList(QStringList("*.gpx")).count() != 0)) {
-    new CDeviceGarminArchive(dir.absoluteFilePath(pathGpx + "/Archive"), this);
-  }
+    createProjectsFromFiles(pathGpx, "gpx", count, total);
+    createProjectsFromFiles(pathGpx + "/Current", "gpx", count, total);
+    createProjectsFromFiles(pathActivities, "fit", count, total);
+    createProjectsFromFiles(pathCourses, "fit", count, total);
+    createProjectsFromFiles(pathLocations, "fit", count, total);
+    if (!pathTcx.isEmpty()) {
+      createProjectsFromFiles(pathTcx, "tcx", count, total);
+    }
 
-  createProjectsFromFiles(pathActivities, "fit");
-  createProjectsFromFiles(pathCourses, "fit");
-  createProjectsFromFiles(pathLocations, "fit");
-  if (!pathTcx.isEmpty()) {
-    createProjectsFromFiles(pathTcx, "tcx");
+    QMetaObject::invokeMethod(
+        this,
+        [this]() {
+          QMutexLocker lock(&IGisItem::mutexItems);
+          QDir dirArchive(dir.absoluteFilePath(pathGpx + "/Archive"));
+          if (dirArchive.exists() && (dirArchive.entryList(QStringList("*.gpx")).count() != 0)) {
+            new CDeviceGarminArchive(dir.absoluteFilePath(pathGpx + "/Archive"), this);
+          }
+        },
+        Qt::BlockingQueuedConnection);
+
+    setProgress(total, total);
+  });
+
+  threadLoadData->start();
+}
+
+CDeviceGarmin::~CDeviceGarmin() {
+  if (threadLoadData != nullptr) {
+    threadLoadData->cancel();
   }
 }
 
 QString CDeviceGarmin::getInfo(quint32) const { return QString("%1 (%2, %3)").arg(description, partno, model); }
 
-void CDeviceGarmin::createProjectsFromFiles(QString subdirecoty, QString fileEnding) {
+void CDeviceGarmin::createProjectsFromFiles(QString subdirecoty, QString fileEnding, quint32& count,
+                                            const quint32 total) {
   QDir dirLoop(dir.absoluteFilePath(subdirecoty));
   qDebug() << "reading files from device: " << dirLoop.path();
   const QStringList& entries = dirLoop.entryList(QStringList("*." + fileEnding));
   for (const QString& entry : entries) {
-    const QString filename = dirLoop.absoluteFilePath(entry);
-    IGisProject* project = nullptr;
-    if (fileEnding == "fit") {
-      project = new CFit2Project(filename, this);
-    } else if (fileEnding == "gpx") {
-      project = new CGpxProject(filename, this);
-    } else if (fileEnding == "tcx") {
-      project = new CTcxProject(filename, this);
+    if (threadLoadData->isInterruptionRequested()) {
+      break;
     }
 
-    if (project) {
-      if (!project->isValid()) {
-        delete project;
-      } else {
-        project->setVisibility(isVisible());
-      }
-    }
+    setProgress(++count, total);
+    const QString filename = dirLoop.absoluteFilePath(entry);
+
+    QMetaObject::invokeMethod(
+        this,
+        [this, filename, fileEnding]() {
+          QMutexLocker lock(&IGisItem::mutexItems);
+          IGisProject* project = nullptr;
+          try {
+            if (fileEnding == "fit") {
+              project = new CFit2Project(filename, this);
+            } else if (fileEnding == "gpx") {
+              project = new CGpxProject(filename, this);
+            } else if (fileEnding == "tcx") {
+              project = new CTcxProject(filename, this);
+            }
+
+            if (project) {
+              if (!project->isValid()) {
+                delete project;
+              } else {
+                project->setVisibility(isVisible());
+              }
+            }
+          } catch (const QString& msg) {
+            qWarning() << msg;
+          }
+        },
+        Qt::BlockingQueuedConnection);
   }
 }
-
-CDeviceGarmin::~CDeviceGarmin() {}
 
 void CDeviceGarmin::insertCopyOfProject(IGisProject* project) {
   if (description.startsWith("EDGE 5", Qt::CaseInsensitive)) {

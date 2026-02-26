@@ -18,21 +18,30 @@
 
 #include "gis/IWksItem.h"
 
+#include <QThread>
 #include <QVariantAnimation>
+
+#include "gis/IGisItem.h"
+
+void checkForThread() {
+  if (!QThread::isMainThread()) {
+    qFatal() << "Called from a thread other than the maiUI thread! This will not work!";
+  }
+}
 
 IWksItem::IWksItem(QTreeWidgetItem* parent, int type) : QTreeWidgetItem(parent, type) { setupAnimations(); }
 IWksItem::IWksItem(QTreeWidget* parent, int type) : QTreeWidgetItem(parent, type) { setupAnimations(); }
 
 void IWksItem::setupAnimations() {
-  animationOpacityOfFocusBasedItems = std::make_shared<QVariantAnimation>();
+  animationOpacityOfFocusBasedItems = new QVariantAnimation(treeWidget());
   animationOpacityOfFocusBasedItems->setDuration(250);
   animationOpacityOfFocusBasedItems->setEasingCurve(QEasingCurve::InOutQuad);
 
-  animationOpacityOfFocusBasedItems->connect(animationOpacityOfFocusBasedItems.get(), &QVariantAnimation::valueChanged,
-                                             [this](QVariant v) {
-                                               opacityOfFocusBasedItems = v.toFloat();
-                                               treeWidget()->viewport()->update(treeWidget()->visualItemRect(this));
-                                             });
+  QObject::connect(animationOpacityOfFocusBasedItems, &QVariantAnimation::valueChanged,
+                   animationOpacityOfFocusBasedItems, [this](QVariant v) {
+                     opacityOfFocusBasedItems = v.toFloat();
+                     treeWidget()->viewport()->update(treeWidget()->visualItemRect(this));
+                   });
 }
 
 IWksItem::eBaseType IWksItem::getBaseType() const {
@@ -51,13 +60,19 @@ IWksItem::eBaseType IWksItem::getBaseType() const {
 }
 
 void IWksItem::updateDecoration(quint32 enable, quint32 disable) {
+  checkForThread();
   flagsDecoration |= enable;
   flagsDecoration &= ~disable;
   updateItem();
 }
 
 void IWksItem::updateItem() {
-  QTreeWidget* tree = treeWidget();
+  checkForThread();
+  QPointer<QTreeWidget> tree = treeWidget();
+  if (tree == nullptr) {
+    return;
+  }
+
   if (tree == nullptr) {
     return;
   }
@@ -70,6 +85,7 @@ void IWksItem::updateItem() {
 }
 
 bool IWksItem::holdUiFocus(const QStyleOptionViewItem& opt) {
+  checkForThread();
   bool hasFocus = (opt.state & QStyle::State_HasFocus) != 0;
   if (hasFocus != lastFocusState) {
     float opacity = hasFocus ? 1.0 : 0.0;
@@ -82,4 +98,37 @@ bool IWksItem::holdUiFocus(const QStyleOptionViewItem& opt) {
   }
 
   return hasFocus || (animationOpacityOfFocusBasedItems->state() == QAbstractAnimation::Running);
+}
+
+void IWksItem::setVisibility(bool visible) {
+  checkForThread();
+  this->visible = visible;
+  updateItem();
+}
+
+void IWksItem::setAutoSave(bool on) {
+  checkForThread();
+  autoSave = on;
+  updateItem();
+}
+
+void IWksItem::setAutoSyncToDev(bool on) {
+  checkForThread();
+  autoSyncToDev = on;
+  updateItem();
+}
+
+void IWksItem::setProgress(quint32 count, quint32 total) {
+  // ok to call from any thread
+  QMutexLocker lock(&IGisItem::mutexItems);
+  countProgress = count;
+  totalProgress = total;
+  QMetaObject::invokeMethod(treeWidget(), [this]() { updateItem(); });
+}
+
+std::tuple<bool, qreal> IWksItem::getProgress() const {
+  checkForThread();
+  QMutexLocker lock(&IGisItem::mutexItems);
+  const qreal progress = (100.0 * countProgress) / totalProgress;
+  return {countProgress != totalProgress, progress};
 }

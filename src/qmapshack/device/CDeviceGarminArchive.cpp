@@ -20,43 +20,72 @@
 
 #include <QtWidgets>
 
-#include "canvas/CCanvas.h"
 #include "device/CDeviceGarmin.h"
 #include "gis/CGisListWks.h"
 #include "gis/CGisWorkspace.h"
 #include "gis/gpx/CGpxProject.h"
+#include "helpers/CThread.h"
 
 CDeviceGarminArchive::CDeviceGarminArchive(const QString& path, CDeviceGarmin* parent)
-    : IDevice(path, parent->getKey(), parent) {
+    : QObject(parent), IDevice(path, parent->getKey(), parent) {
   name = tr("Archive - expand to load");
   setChildIndicatorPolicy(QTreeWidgetItem::ShowIndicator);
   connect(treeWidget(), &QTreeWidget::itemExpanded, this, &CDeviceGarminArchive::slotExpanded);
   connect(treeWidget(), &QTreeWidget::itemCollapsed, this, &CDeviceGarminArchive::slotCollapsed);
 }
 
+CDeviceGarminArchive::~CDeviceGarminArchive() {
+  if (threadLoadData != nullptr) {
+    threadLoadData->cancel();
+  }
+};
+
 void CDeviceGarminArchive::slotExpanded(QTreeWidgetItem* item) {
   if ((item != this) || (childCount() != 0)) {
     return;
   }
 
-  name = tr("Archive - loaded");
-
-  QMutexLocker lock(&IGisItem::mutexItems);
-  CDeviceMountLock mountLock(*this);
-  CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
+  name = tr("Archive - loading");
   qDebug() << "reading files from device: " << dir.path();
-  const QStringList& entries = dir.entryList(QStringList("*.gpx"));
-  for (const QString& entry : entries) {
-    const QString& filename = dir.absoluteFilePath(entry);
-    IGisProject* project = new CGpxProject(filename, this);
-    if (project) {
-      if (!project->isValid()) {
-        delete project;
-      } else {
-        project->setVisibility(isVisible());
+
+  threadLoadData = new CThread([this]() {
+    CDeviceMountLock mountLock(*this);
+    const QStringList& entries = dir.entryList(QStringList("*.gpx"));
+
+    quint32 total = entries.count();
+    quint32 count = 0;
+
+    for (const QString& entry : entries) {
+      if (threadLoadData->isInterruptionRequested()) {
+        break;
       }
+      setProgress(++count, total);
+      const QString& filename = dir.absoluteFilePath(entry);
+      QMetaObject::invokeMethod(
+          this,
+          [this, filename]() {
+            QMutexLocker lock(&IGisItem::mutexItems);
+            try {
+              IGisProject* project = new CGpxProject(filename, this);
+              if (project) {
+                if (!project->isValid()) {
+                  delete project;
+                } else {
+                  project->setVisibility(isVisible());
+                }
+              }
+            } catch (const QString& msg) {
+              qWarning() << msg;
+            }
+          },
+          Qt::BlockingQueuedConnection);
     }
-  }
+
+    name = tr("Archive - loaded");
+    setProgress(total, total);
+  });
+
+  threadLoadData->start();
 }
 
 void CDeviceGarminArchive::slotCollapsed(QTreeWidgetItem* item) {
@@ -64,10 +93,11 @@ void CDeviceGarminArchive::slotCollapsed(QTreeWidgetItem* item) {
     return;
   }
 
-  QMutexLocker lock(&IGisItem::mutexItems);
-  CDeviceMountLock mountLock(*this);
-  CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
+  if (threadLoadData != nullptr) {
+    threadLoadData->cancel();
+  }
 
+  QMutexLocker lock(&IGisItem::mutexItems);
   qDeleteAll(takeChildren());
 
   name = tr("Archive - expand to load");

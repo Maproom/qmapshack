@@ -24,19 +24,26 @@
 #include "gis/CGisListWks.h"
 #include "gis/fit2/CFit2Project.h"
 #include "gis/gpx/CGpxProject.h"
+#include "helpers/CThread.h"
 #include "misc.h"
 
 CDeviceGarminMtp::CDeviceGarminMtp(const GVFSMount& mount, const QString& storagePath, const QString& key,
                                    QTreeWidget* parent)
-    : IDevice("", eTypeGarminMtp, key, parent), QObject(parent) {
+    : QObject(parent), IDevice("", eTypeGarminMtp, key, parent) {
   device = new CDeviceAccessGvfsMtp(mount, storagePath, this);
   setup();
 }
 
 CDeviceGarminMtp::CDeviceGarminMtp(const QDBusObjectPath& objectPathStorage, const QString& key, QTreeWidget* parent)
-    : IDevice("", eTypeGarminMtp, key, parent), QObject(parent) {
+    : QObject(parent), IDevice("", eTypeGarminMtp, key, parent) {
   device = new CDeviceAccessKMtp(objectPathStorage, this);
   setup();
+}
+
+CDeviceGarminMtp::~CDeviceGarminMtp() {
+  if (threadLoadData != nullptr) {
+    threadLoadData->cancel();
+  }
 }
 
 QString CDeviceGarminMtp::getInfo(quint32) const {
@@ -134,17 +141,38 @@ void CDeviceGarminMtp::setup() {
   qDebug() << pathAdventures;
   qDebug() << pathTcx;
 
-  createProjectsFromFiles(pathGpx, "gpx");
-  createProjectsFromFiles(pathActivities, "fit");
-  createProjectsFromFiles(pathCourses, "fit");
-  if (!pathLocations.isEmpty()) {
-    createProjectsFromFiles(pathLocations, "fit");
-  }
+  threadLoadData = new CThread([this]() {
+    quint32 total = 0;
+    total += device->listFilesOnStorage(pathGpx).count();
+    total += device->listFilesOnStorage(pathActivities).count();
+    total += device->listFilesOnStorage(pathCourses).count();
+    if (!pathLocations.isEmpty()) {
+      total += device->listFilesOnStorage(pathCourses).count();
+    }
+    quint32 count = 0;
 
-  if (device->listDirsOnStorage(pathGpx).contains("Archive") &&
-      !device->listFilesOnStorage(QDir(pathGpx).filePath("Archive")).isEmpty()) {
-    new CDeviceGarminArchiveMtp(QDir(pathGpx).filePath("Archive"), device, this);
-  };
+    createProjectsFromFiles(pathGpx, "gpx", count, total);
+    createProjectsFromFiles(pathActivities, "fit", count, total);
+    createProjectsFromFiles(pathCourses, "fit", count, total);
+    if (!pathLocations.isEmpty()) {
+      createProjectsFromFiles(pathLocations, "fit", count, total);
+    }
+
+    QMetaObject::invokeMethod(
+        this,
+        [this]() {
+          QMutexLocker lock(&IGisItem::mutexItems);
+          if (device->listDirsOnStorage(pathGpx).contains("Archive") &&
+              !device->listFilesOnStorage(QDir(pathGpx).filePath("Archive")).isEmpty()) {
+            new CDeviceGarminArchiveMtp(QDir(pathGpx).filePath("Archive"), device, this);
+          };
+        },
+        Qt::BlockingQueuedConnection);
+
+    setProgress(total, total);
+  });
+
+  threadLoadData->start();
 }
 
 bool CDeviceGarminMtp::removeFromDevice(const QString& filename) {
@@ -178,30 +206,50 @@ void CDeviceGarminMtp::insertCopyOfProject(IGisProject* project) {
   reorderProjects(gpx);
 }
 
-void CDeviceGarminMtp::createProjectsFromFiles(QString subdirectory, QString extension) {
+void CDeviceGarminMtp::createProjectsFromFiles(QString subdirectory, QString extension, quint32& count,
+                                               const quint32 total) {
   QDir d(subdirectory);
   const QStringList& files = device->listFilesOnStorage(subdirectory);
   for (const QString& file : files) {
-    if (file.endsWith(extension)) {
-      QTemporaryFile tempFile;
-      if (!device->readFileFromStorage(d.filePath(file), tempFile)) {
-        return;
-      }
-      openFileCheckSuccess(QIODevice::ReadWrite, tempFile);
-      IGisProject* project = nullptr;
-      if (extension == "gpx") {
-        project = new CGpxProject(tempFile, d.filePath(file), this);
-      } else if (extension == "fit") {
-        project = new CFit2Project(tempFile, d.filePath(file), this);
-      }
-      if (project) {
-        if (!project->isValid()) {
-          delete project;
-        } else {
-          project->setVisibility(isVisible());
-        }
-      }
+    if (QThread::currentThread()->isInterruptionRequested()) {
+      return;
     }
+
+    setProgress(++count, total);
+    if (!file.endsWith(extension)) {
+      continue;
+    }
+
+    QMetaObject::invokeMethod(
+        this,
+        [this, d, file, extension]() {
+          QTemporaryFile tempFile;
+          if (!device->readFileFromStorage(d.filePath(file), tempFile)) {
+            return;
+          }
+          openFileCheckSuccess(QIODevice::ReadWrite, tempFile);
+
+          QMutexLocker lock(&IGisItem::mutexItems);
+
+          IGisProject* project = nullptr;
+          try {
+            if (extension == "gpx") {
+              project = new CGpxProject(tempFile, d.filePath(file), this);
+            } else if (extension == "fit") {
+              project = new CFit2Project(tempFile, d.filePath(file), this);
+            }
+            if (project) {
+              if (!project->isValid()) {
+                delete project;
+              } else {
+                project->setVisibility(isVisible());
+              }
+            }
+          } catch (const QString& msg) {
+            qWarning() << msg;
+          }
+        },
+        Qt::BlockingQueuedConnection);
   }
 }
 

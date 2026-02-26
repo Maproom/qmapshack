@@ -206,8 +206,8 @@ void CFit2Project::OnMesg(fit::RecordMesg& mesg) {
   if (trkpt.isValid(CTrackData::trkpt_t::eValidPos)) {
     segment.pts.append(trkpt);
   } else {
-    qWarning() << "invalid track point in FIT record" << trkpt.time << trkpt << trkpt.ele << trkpt.extensions
-               << "- skip";
+    // qWarning() << "invalid track point in FIT record" << trkpt.time << trkpt << trkpt.ele << trkpt.extensions
+    //            << "- skip";
   }
 }
 

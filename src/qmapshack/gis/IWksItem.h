@@ -19,8 +19,8 @@
 #ifndef IWKSITEM_H
 #define IWKSITEM_H
 
+#include <QPointer>
 #include <QTreeWidgetItem>
-#include <memory>
 
 class QVariantAnimation;
 
@@ -88,12 +88,12 @@ class IWksItem : public QTreeWidgetItem {
   virtual const qint32 isOnDevice() const { return false; }
   virtual const bool canSave() const { return false; }
   virtual bool hasUserFocus() const = 0;
+  virtual std::tuple<bool, qreal> getProgress() const;
+  virtual quint32 getFlagsDecoration() const { return flagsDecoration; }
+
   /**
-     @brief Get a short string with the items properties to be displayed in tool tips or similar
-
-    @param showName          set true if the first line should be the item's name
+    @brief Get a short string with the items properties to be displayed in tool tips or similar
     @param features          a combination of features_e types
-
     @return A string object.
   */
   virtual QString getInfo(uint32_t features) const = 0;
@@ -103,32 +103,20 @@ class IWksItem : public QTreeWidgetItem {
      @return True if the are changes to be saved
    */
   virtual const bool isChanged() const { return (flagsDecoration & eMarkChanged) != 0; }
-  quint32 getFlagsDecoration() const { return flagsDecoration; }
-
-  virtual void setVisibility(bool visible) {
-    this->visible = visible;
-    updateItem();
-  }
-  virtual void setAutoSave(bool on) {
-    autoSave = on;
-    updateItem();
-  }
-  virtual void setAutoSyncToDev(bool on) {
-    autoSyncToDev = on;
-    updateItem();
-  }
-
+  virtual void setVisibility(bool visible);
+  virtual void setAutoSave(bool on);
+  virtual void setAutoSyncToDev(bool on);
+  virtual void setProgress(quint32 count, quint32 total);
   virtual void gainUserFocus(bool yes) = 0;
-  void updateItem();
-
   bool holdUiFocus(const QStyleOptionViewItem& opt);
   float getOpacityOfFocusBasedItems() { return opacityOfFocusBasedItems; }
+
+  void updateItem();
 
  protected:
   virtual void updateDecoration(quint32 enable, quint32 disable);
 
   QString name;
-  // QString toolTipName;
   QPixmap icon;
 
   /// labeling the GisItems
@@ -142,9 +130,12 @@ class IWksItem : public QTreeWidgetItem {
   bool autoSave = false;       ///< flag to show if auto save is on or off
   bool autoSyncToDev = false;  ///< if set true sync the project with every device connected
 
+  quint32 countProgress = 0;
+  quint32 totalProgress = 0;
+
   float opacityOfFocusBasedItems = 0.0;
   bool lastFocusState = false;
-  std::shared_ptr<QVariantAnimation> animationOpacityOfFocusBasedItems;
+  QPointer<QVariantAnimation> animationOpacityOfFocusBasedItems;
 };
 
 #endif  // IWKSITEM_H

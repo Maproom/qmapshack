@@ -19,7 +19,6 @@
 #include "gis/summary/CGisSummarySetup.h"
 
 #include <QtWidgets>
-#include <functional>
 
 #include "gis/db/CSelectDBFolder.h"
 #include "gis/db/IDBFolder.h"

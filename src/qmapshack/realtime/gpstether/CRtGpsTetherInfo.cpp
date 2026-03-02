@@ -25,9 +25,8 @@
 #include "CMainWindow.h"
 #include "canvas/CCanvas.h"
 #include "realtime/gpstether/CRtGpsTether.h"
+#include "realtime/gpstether/CRtGpsTetherRecord.h"
 #include "units/IUnit.h"
-
-class CRtGpsTether;
 
 CRtGpsTetherInfo::CRtGpsTetherInfo(CRtGpsTether& source, QWidget* parent) : IRtInfo(&source, parent) {
   setupUi(this);

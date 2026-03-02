@@ -19,7 +19,6 @@
 #include "mouse/CScrOptRuler.h"
 
 #include <QtWidgets>
-#include <functional>
 
 #include "canvas/CCanvas.h"
 #include "helpers/CSettings.h"

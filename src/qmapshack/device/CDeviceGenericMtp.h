@@ -19,8 +19,6 @@
 #ifndef CDEVICEGENERICMTP_H
 #define CDEVICEGENERICMTP_H
 
-#include <functional>
-
 #include "device/IDevice.h"
 
 class QDBusObjectPath;

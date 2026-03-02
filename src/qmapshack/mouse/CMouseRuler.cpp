@@ -19,7 +19,6 @@
 #include "mouse/CMouseRuler.h"
 
 #include <QtWidgets>
-#include <functional>
 
 #include "canvas/CCanvas.h"
 #include "gis/CGisDraw.h"

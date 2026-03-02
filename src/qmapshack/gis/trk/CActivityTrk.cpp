@@ -18,8 +18,6 @@
 
 #include "gis/trk/CActivityTrk.h"
 
-#include <functional>
-
 #include "gis/CGisWorkspace.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "helpers/CSettings.h"

@@ -24,7 +24,6 @@
 #include <functional>
 
 #include "realtime/IRtInfo.h"
-#include "realtime/gpstether/CRtGpsTetherRecord.h"
 #include "ui_IRtGpsTetherInfo.h"
 
 class CRtGpsTether;

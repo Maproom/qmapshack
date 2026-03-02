@@ -19,7 +19,6 @@
 #include "gis/search/CGeoSearchWeb.h"
 
 #include <QtWidgets>
-#include <functional>
 
 #include "CMainWindow.h"
 #include "gis/search/CGeoSearchWebConfigDialog.h"

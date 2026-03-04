@@ -114,10 +114,10 @@ void CPoiFilePOI::draw(IDrawContext::buffer_t& buf) {
   // This is running in it's own thread, not the main thread.
   // Use CPoiFilePOI::mutex whenever you access data shared between
   // the main thread and this thread. Do not block it more than
-  // neccessary.
+  // necessary.
 
   // do that on a regular base while you draw the buffer
-  // to abort drawing ass soon as possible if there is
+  // to abort drawing as soon as possible if there is
   // another draw request pending
   if (poi->needsRedraw()) {
     return;
@@ -165,7 +165,7 @@ void CPoiFilePOI::draw(IDrawContext::buffer_t& buf) {
         if (poi->needsRedraw()) {
           return;
         }
-        for (quint64 poiToDrawID : std::as_const(loadedPoisByArea)[categoryID][minLonM10][minLatM10]) {
+        for (quint64 poiToDrawID : std::as_const(loadedPoisByArea[categoryID][minLonM10][minLatM10])) {
           const CPoiItemPOI& poiToDraw = loadedPois[poiToDrawID];
           QPointF pt = poiToDraw.getCoordinates();
           poi->convertRad2Px(pt);
@@ -285,12 +285,12 @@ void CPoiFilePOI::findPoisIn(const QRectF& degRect, QSet<IPoiItem>& pois, QList<
     for (int minLonM10 = qFloor(degRect.left() * 10); minLonM10 <= qFloor(degRect.right() * 10); minLonM10++) {
       for (int minLatM10 = qFloor(degRect.bottom() * 10); minLatM10 <= qFloor(degRect.top() * 10); minLatM10++) {
         // Imagine the user moves the screen in an l-shape while updating the selection rectangle. It is possible that
-        // some tiles are not laded then
+        // some tiles are not loaded then
         if (!loadedPoisByArea.contains(categoryID) || !loadedPoisByArea[categoryID].contains(minLonM10) ||
             !loadedPoisByArea[categoryID][minLonM10].contains(minLatM10)) {
           loadPOIsFromFile(categoryID, minLonM10, minLatM10);
         }
-        for (quint64 poiFoundID : std::as_const(loadedPoisByArea)[categoryID][minLonM10][minLatM10]) {
+        for (quint64 poiFoundID : std::as_const(loadedPoisByArea[categoryID][minLonM10][minLatM10])) {
           const CPoiItemPOI& poiItemFound = loadedPois[poiFoundID];
           if (!copiedItems.contains(poiItemFound.getKey())) {
             // Maybe look through the whole code of selecting items from a map to avoid this conversion

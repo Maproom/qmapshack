@@ -27,25 +27,32 @@ CAppOpts* CCommandProcessor::processOptions(const QStringList& arguments) {
   parser.addHelpOption();
   parser.addVersionOption();
 
-  QCommandLineOption debugOption(QStringList() << "d" << "debug", tr("Print debug output to console."));
-  parser.addOption(debugOption);
-
-  QCommandLineOption logfileOption(QStringList() << "f" << "logfile", tr("Print debug output to logfile (temp. path)."));
-  parser.addOption(logfileOption);
-
   QCommandLineOption nosplashOption(QStringList() << "n" << "no-splash", tr("Do not show splash screen."));
   parser.addOption(nosplashOption);
 
-  QCommandLineOption localeOption(QStringList() << "l" << "locale", tr("QMapTool application locale."), tr("code"));
-  parser.addOption(localeOption);
+  QCommandLineOption debugOption(QStringList() << "d" << "debug", tr("Print debug output to console."));
+  parser.addOption(debugOption);
+
+  QCommandLineOption logfileOption(QStringList() << "f" << "logfile", tr("Print debug output to logfile."));
+  parser.addOption(logfileOption);
 
   QCommandLineOption configOption(QStringList() << "c" << "config", tr("File with QMapTool configuration."), tr("file"));
   parser.addOption(configOption);
+
+  QCommandLineOption localeOption(QStringList() << "l" << "locale", tr("Application locale."), tr("code"));
+  parser.addOption(localeOption);
+
+  QCommandLineOption fontFamilyOption(QStringList() << "font-family", tr("Application font family."), tr("name"));
+  parser.addOption(fontFamilyOption);
+
+  QCommandLineOption fontSizeOption(QStringList() << "font-size", tr("Application font size."), tr("size"));
+  parser.addOption(fontSizeOption);
 
   // parser.addPositionalArgument("files", tr("Files for future use."));
 
   parser.process(arguments);
 
-  return new CAppOpts(parser.isSet(debugOption), parser.isSet(logfileOption), parser.isSet(nosplashOption),
-                      parser.value(localeOption), parser.value(configOption), parser.positionalArguments());
+  return new CAppOpts(parser.isSet(nosplashOption), parser.isSet(debugOption), parser.isSet(logfileOption),
+                      parser.value(configOption), parser.value(localeOption),
+                      parser.value(fontFamilyOption), parser.value(fontSizeOption), parser.positionalArguments());
 }

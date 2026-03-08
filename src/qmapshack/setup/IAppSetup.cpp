@@ -18,6 +18,8 @@
 
 #include "setup/IAppSetup.h"
 
+#include <QFont>
+
 #include <gdal.h>
 
 #if defined(Q_OS_MAC)
@@ -111,4 +113,16 @@ CAppOpts* qlOpts = nullptr;
 void IAppSetup::processArguments() {
   CCommandProcessor cmdParse;
   qlOpts = cmdParse.processOptions(QCoreApplication::instance()->arguments());
+
+  // override default application font
+  QFont appFont = qApp->font();
+  if (qlOpts->fontfamily != nullptr) {
+    appFont.setFamily(qlOpts->fontfamily);
+  }
+  if (qlOpts->fontsize != nullptr) {
+    qreal fontSize = qlOpts->fontsize.toDouble();
+    if (fontSize > 0.) appFont.setPointSizeF(fontSize);
+  }
+  qApp->setFont(appFont);
+
 }

@@ -26,6 +26,7 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CLimit.h"
+#include "helpers/CThread.h"
 #include "helpers/CValue.h"
 
 #define VER_TRK quint8(7)
@@ -860,6 +861,14 @@ QDataStream& CGisItemOvlArea::operator>>(QDataStream& stream) const {
 }
 
 QDataStream& IGisProject::operator<<(QDataStream& stream) {
+  struct temp_item_data_t {
+    QString lastDatabaseHash;
+    IGisItem::history_t history;
+    quint8 changed;
+    quint8 version;
+    quint8 type;
+  };
+
   quint8 version;
   QIODevice* dev = stream.device();
   qint64 pos = dev->pos();
@@ -871,8 +880,6 @@ QDataStream& IGisProject::operator<<(QDataStream& stream) {
     dev->seek(pos);
     return stream;
   }
-
-  blockUpdateItems(true);
 
   stream >> version;
   if (filename.isEmpty()) {
@@ -913,56 +920,107 @@ QDataStream& IGisProject::operator<<(QDataStream& stream) {
     sortingFolder = (sorting_folder_e)tmp;
   }
 
+  QList<temp_item_data_t> items;
   while (!stream.atEnd()) {
-    QString lastDatabaseHash;
-    IGisItem::history_t history;
-    quint8 changed = 0;
-    quint8 version, type;
-    stream >> version;
-    stream >> type;
-    stream >> history;
+    temp_item_data_t item;
+
+    stream >> item.version;
+    stream >> item.type;
+    stream >> item.history;
     if (version > 1) {
-      stream >> changed;
+      stream >> item.changed;
     }
 
     if (version > 2) {
-      stream >> lastDatabaseHash;
+      stream >> item.lastDatabaseHash;
     }
-
-    IGisItem* item = nullptr;
-    switch (type) {
-      case IGisItem::eTypeWpt:
-        item = new CGisItemWpt(history, lastDatabaseHash, this);
-        break;
-
-      case IGisItem::eTypeTrk:
-        item = new CGisItemTrk(history, lastDatabaseHash, this);
-        break;
-
-      case IGisItem::eTypeRte:
-        item = new CGisItemRte(history, lastDatabaseHash, this);
-        break;
-
-      case IGisItem::eTypeOvl:
-        item = new CGisItemOvlArea(history, lastDatabaseHash, this);
-        break;
-
-      default:;
-    }
-
-    // Update decoration always, to set possible rating and tag markers
-    if (item) {
-      if (changed) {
-        item->updateDecoration(IWksItem::eMarkChanged, IWksItem::eMarkNone);
-      } else {
-        item->updateDecoration(IWksItem::eMarkNone, IWksItem::eMarkNone);
-      }
-    }
+    items << item;
   }
 
-  sortItems();
+  // Let the chaos start!
+  // To keep the UI responsive and to update the progress bars the load process has to be
+  // orchestrated in a thread. However all the UI dependent stuff has to be done in the main UI
+  // thread, making things very complicated. The strategy:
+  //  * Place all UI dependent stuff in a QMetaObject::invokeMethod() call
+  //  * The first thing to do when scheduled is to check for the thread has been requested to
+  //    finish. In this case return immediately.
+  //  * Wait in the thread for all QMetaObject::invokeMethod() to finish (Qt::BlockingQueuedConnection)
+  //  * After a wait (Qt::BlockingQueuedConnection) check if the thread has been requested to finish
+  //    In this case return immediately.
+  threadLoadPoject = new CThread([this, items]() {
+    const quint32 total = items.count();
+    quint32 count = 0;
 
-  blockUpdateItems(false);
+    QMetaObject::invokeMethod(
+        treeWidget(),
+        [this]() {
+          if (threadLoadPoject == nullptr || threadLoadPoject->isInterruptionRequested()) {
+            return;
+          }
+          blockUpdateItems(true);
+        },
+        Qt::BlockingQueuedConnection);
+
+    for (const temp_item_data_t& itemData : items) {
+      if (threadLoadPoject == nullptr || threadLoadPoject->isInterruptionRequested()) {
+        break;
+      }
+      setProgress(++count, total);
+      QMetaObject::invokeMethod(
+          treeWidget(),
+          [this, itemData]() {
+            if (threadLoadPoject == nullptr || threadLoadPoject->isInterruptionRequested()) {
+              return;
+            }
+            QMutexLocker lock(&IGisItem::mutexItems);
+            IGisItem* item = nullptr;
+            switch (itemData.type) {
+              case IGisItem::eTypeWpt:
+                item = new CGisItemWpt(itemData.history, itemData.lastDatabaseHash, this);
+                break;
+
+              case IGisItem::eTypeTrk:
+                item = new CGisItemTrk(itemData.history, itemData.lastDatabaseHash, this);
+                break;
+
+              case IGisItem::eTypeRte:
+                item = new CGisItemRte(itemData.history, itemData.lastDatabaseHash, this);
+                break;
+
+              case IGisItem::eTypeOvl:
+                item = new CGisItemOvlArea(itemData.history, itemData.lastDatabaseHash, this);
+                break;
+
+              default:;
+            }
+
+            // Update decoration always, to set possible rating and tag markers
+            if (item) {
+              if (itemData.changed) {
+                item->updateDecoration(IWksItem::eMarkChanged, IWksItem::eMarkNone);
+              } else {
+                item->updateDecoration(IWksItem::eMarkNone, IWksItem::eMarkNone);
+              }
+            }
+          },
+          Qt::BlockingQueuedConnection);
+    }  // end for loop
+
+    QMetaObject::invokeMethod(
+        treeWidget(),
+        [this]() {
+          if (threadLoadPoject == nullptr || threadLoadPoject->isInterruptionRequested()) {
+            return;
+          }
+          blockUpdateItems(false);
+        },
+        Qt::BlockingQueuedConnection);
+    if (threadLoadPoject == nullptr || threadLoadPoject->isInterruptionRequested()) {
+      return;
+    }
+    setProgress(total, total);
+  });
+  threadLoadPoject->start();
   return stream;
 }
 

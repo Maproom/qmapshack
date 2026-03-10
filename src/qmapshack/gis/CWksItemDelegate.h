@@ -147,7 +147,7 @@ class CWksItemDelegate : public QStyledItemDelegate {
  private:
   IWksItem* indexToItem(const QModelIndex& index) const;
 
-  std::tuple<QFont, QFont, QRect, QRect, QRect, QRect, QRect, QRect, QRect> getRectanglesProject(
+  std::tuple<QFont, QFont, QRect, QRect, QRect, QRect, QRect, QRect, QRect, QRect> getRectanglesProject(
       const QStyleOptionViewItem& opt, IWksItem& item) const;
   std::tuple<QFont, QFont, QRect, QRect, QRect, QRect, QRect> getRectanglesDevice(const QStyleOptionViewItem& opt,
                                                                                   const IWksItem& item) const;

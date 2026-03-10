@@ -2571,7 +2571,7 @@ void CGisItemTrk::updateHistory(quint32 visuals) {
 }
 
 void CGisItemTrk::updateVisuals(quint32 visuals, const QString& who) {
-  qDebug() << "CGisItemTrk::updateVisuals()" << getName() << who;
+  // qDebug() << "CGisItemTrk::updateVisuals()" << getName() << who << Qt::hex << visuals;
 
   if (!dlgDetails.isNull() && (visuals & eVisualDetails)) {
     dlgDetails->updateData();

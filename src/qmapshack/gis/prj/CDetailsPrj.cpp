@@ -1070,7 +1070,7 @@ void CDetailsPrj::slotSortMode(int idx) {
 }
 
 void CDetailsPrj::updateData() {
-  if (!prj.blockUpdateItems()) {
+  if (!prj.isNoUpdate()) {
     slotSetupGui();
   }
 }

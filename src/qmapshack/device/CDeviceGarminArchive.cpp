@@ -69,7 +69,7 @@ void CDeviceGarminArchive::slotExpanded(QTreeWidgetItem* item) {
               IGisProject* project = new CGpxProject(filename, this);
               if (project) {
                 if (!project->isValid()) {
-                  delete project;
+                  project->destroyLater();
                 } else {
                   project->setVisibility(isVisible());
                 }

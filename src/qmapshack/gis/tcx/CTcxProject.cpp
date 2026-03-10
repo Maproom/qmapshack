@@ -42,7 +42,7 @@ CTcxProject::CTcxProject(const QString& filename, const IGisProject* project, ID
     : IGisProject(eTypeGpx, filename, parent) {
   icon = QPixmap("://icons/32x32/TcxProject.png");
   *(IGisProject*)this = *project;
-  blockUpdateItems(project->blockUpdateItems());
+  blockUpdateItems(project->isNoUpdate());
 
   CSelectCopyAction::result_e res = CSelectCopyAction::eResultNone;
   const int N = project->childCount();

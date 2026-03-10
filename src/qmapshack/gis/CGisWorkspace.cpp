@@ -111,7 +111,7 @@ void CGisWorkspace::loadGisProject(const QString& filename) {
                                tr("The project \"%1\" is already in the workspace.").arg(item->getName()),
                                QMessageBox::Abort);
 
-      delete item;
+      item->destroyLater();
       item = nullptr;
     }
 

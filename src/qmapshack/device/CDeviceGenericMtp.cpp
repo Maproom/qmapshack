@@ -179,7 +179,7 @@ void CDeviceGenericMtp::createProjectsFromFiles(const QString& subdirectory, qui
             }
             if (project) {
               if (!project->isValid()) {
-                delete project;
+                project->destroyLater();
               } else {
                 project->setVisibility(isVisible());
               }

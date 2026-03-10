@@ -834,125 +834,107 @@ void CGisListWks::slotLoadWorkspace() {
 
   QUERY_RUN("SELECT type, keyqms, name, changed, visible, data FROM workspace", return)
 
-  {  // open context for progress dialog
-    // Refer to https://stackoverflow.com/questions/26495049/qsqlquery-size-always-returns-1
-    qreal total = 0;
-    if (db.driver()->hasFeature(QSqlDriver::QuerySize)) {
-      total = query.size();
-    } else {
-      if (query.last()) {
-        total = query.at() + 1;
-        query.first();
-        query.previous();
+  while (query.next()) {
+    int type = query.value(0).toInt();
+    QString name = query.value(2).toString();
+    bool changed = query.value(3).toBool();
+    bool visible = query.value(4).toBool();
+    QByteArray data = query.value(5).toByteArray();
+
+    QDataStream stream(&data, QIODevice::ReadOnly);
+    stream.setVersion(QDataStream::Qt_5_2);
+    stream.setByteOrder(QDataStream::LittleEndian);
+
+    IGisProject* project = nullptr;
+    switch (type) {
+      case IGisProject::eTypeQms: {
+        project = new CQmsProject(name, this);
+        project->setVisibility(visible);
+        *project << stream;
+        break;
+      }
+
+      case IGisProject::eTypeQlb: {
+        project = new CQlbProject(name, this);
+        project->setVisibility(visible);
+        *project << stream;
+        break;
+      }
+
+      case IGisProject::eTypeGpx: {
+        project = new CGpxProject(name, this);
+        project->setVisibility(visible);
+        *project << stream;
+        break;
+      }
+
+      case IGisProject::eTypeDb: {
+        CDBProject* dbProject;
+        project = dbProject = new CDBProject(IGisProject::eTypeDb, this);
+        project->setVisibility(visible);
+
+        project->IGisProject::operator<<(stream);
+        dbProject->restoreDBLink();
+
+        if (!project->isValid()) {
+          project->destroyLater();
+          project = nullptr;
+        } else {
+          dbProject->postStatus(false);
+        }
+        break;
+      }
+
+      case IGisProject::eTypeSlf: {
+        project = new CSlfProject(name, false);
+        project->setVisibility(visible);
+        *project << stream;
+
+        // the CSlfProject does not - as the other C*Project - register itself in the list
+        // of currently opened projects. This is done manually here.
+        addProject(project);
+        break;
+      }
+
+      case IGisProject::eTypeFit: {
+        project = new CFit2Project(name, this);
+        project->setVisibility(visible);
+        *project << stream;
+        break;
+      }
+
+      case IGisProject::eTypeTcx: {
+        project = new CTcxProject(name, this);
+        project->setVisibility(visible);
+        *project << stream;
+        break;
+      }
+
+      case IGisProject::eTypeSml: {
+        project = new CSmlProject(name, this);
+        project->setVisibility(visible);
+        *project << stream;
+        break;
+      }
+
+      case IGisProject::eTypeLog: {
+        project = new CSmlProject(name, this);
+        project->setVisibility(visible);
+        *project << stream;
+        break;
       }
     }
-    PROGRESS_SETUP(tr("Loading workspace. Please wait."), 0, total, this);
-    quint32 progCnt = 0;
 
-    while (query.next()) {
-      PROGRESS(progCnt++, return);
-
-      int type = query.value(0).toInt();
-      QString name = query.value(2).toString();
-      bool changed = query.value(3).toBool();
-      bool visible = query.value(4).toBool();
-      QByteArray data = query.value(5).toByteArray();
-
-      QDataStream stream(&data, QIODevice::ReadOnly);
-      stream.setVersion(QDataStream::Qt_5_2);
-      stream.setByteOrder(QDataStream::LittleEndian);
-
-      IGisProject* project = nullptr;
-      switch (type) {
-        case IGisProject::eTypeQms: {
-          project = new CQmsProject(name, this);
-          project->setVisibility(visible);
-          *project << stream;
-          break;
-        }
-
-        case IGisProject::eTypeQlb: {
-          project = new CQlbProject(name, this);
-          project->setVisibility(visible);
-          *project << stream;
-          break;
-        }
-
-        case IGisProject::eTypeGpx: {
-          project = new CGpxProject(name, this);
-          project->setVisibility(visible);
-          *project << stream;
-          break;
-        }
-
-        case IGisProject::eTypeDb: {
-          CDBProject* dbProject;
-          project = dbProject = new CDBProject(IGisProject::eTypeDb, this);
-          project->setVisibility(visible);
-
-          project->IGisProject::operator<<(stream);
-          dbProject->restoreDBLink();
-
-          if (!project->isValid()) {
-            delete project;
-            project = nullptr;
-          } else {
-            dbProject->postStatus(false);
-          }
-          break;
-        }
-
-        case IGisProject::eTypeSlf: {
-          project = new CSlfProject(name, false);
-          project->setVisibility(visible);
-          *project << stream;
-
-          // the CSlfProject does not - as the other C*Project - register itself in the list
-          // of currently opened projects. This is done manually here.
-          addProject(project);
-          break;
-        }
-
-        case IGisProject::eTypeFit: {
-          project = new CFit2Project(name, this);
-          project->setVisibility(visible);
-          *project << stream;
-          break;
-        }
-
-        case IGisProject::eTypeTcx: {
-          project = new CTcxProject(name, this);
-          project->setVisibility(visible);
-          *project << stream;
-          break;
-        }
-
-        case IGisProject::eTypeSml: {
-          project = new CSmlProject(name, this);
-          project->setVisibility(visible);
-          *project << stream;
-          break;
-        }
-
-        case IGisProject::eTypeLog: {
-          project = new CSmlProject(name, this);
-          project->setVisibility(visible);
-          *project << stream;
-          break;
-        }
-      }
-
-      if (nullptr != project) {
-        // Hiding the individual projects from the map (1a, 1b, 1c) could be done here within a single statement,
-        // but this results in a visible `the checkbox is being unchecked`, especially in case the project
-        // is large and takes some time to load.
-        // When done directly after construction there is no `blinking` of the check mark
-        if (changed) {
-          project->setChanged();
-        }
+    if (nullptr != project) {
+      // Hiding the individual projects from the map (1a, 1b, 1c) could be done here within a single statement,
+      // but this results in a visible `the checkbox is being unchecked`, especially in case the project
+      // is large and takes some time to load.
+      // When done directly after construction there is no `blinking` of the check mark
+      if (changed) {
+        project->setChanged();
       }
     }
-  }  // close context for progress dialog
+  }
 
   slotGeoSearch(static_cast<QAction*>(CMainWindow::self().findChild<QAction*>("actionGeoSearch"))->isChecked());
 
@@ -1383,7 +1365,7 @@ static void closeProjects(const QList<QTreeWidgetItem*>& items) {
       if (IGisProject::eTypeGeoSearch == project->getType()) {
         CMainWindow::self().findChild<QAction*>("actionGeoSearch")->setChecked(false);
       }
-      delete project;
+      project->destroyLater();
     }
   }
 }
@@ -1430,7 +1412,7 @@ void CGisListWks::slotDeleteProject() {
       }
 
       if (project->remove()) {
-        delete project;
+        project->destroyLater();
       }
     }
   }
@@ -1552,7 +1534,21 @@ void CGisListWks::slotItemDoubleClicked(QTreeWidgetItem* item, int) {
   }
 }
 
-void CGisListWks::slotItemChanged(QTreeWidgetItem* /*item*/, int /*column*/) {
+void CGisListWks::slotItemChanged(QTreeWidgetItem* item, int /*column*/) {
+  // Check if the project or the item's project is flagged for no update.
+  // First try to derive the pointer to the project
+  IGisProject* itemPrj = dynamic_cast<IGisProject*>(item);
+  if (itemPrj == nullptr) {
+    IGisItem* itemGis = dynamic_cast<IGisItem*>(item);
+    if (itemGis != nullptr) {
+      itemPrj = dynamic_cast<IGisProject*>(itemGis->parent());
+    }
+  }
+  // If successfull check for the no update flag.
+  if (itemPrj != nullptr && (itemPrj->isNoUpdate() || !itemPrj->isVisible())) {
+    return;
+  }
+
   CGisListWksEditLock lock(true, IGisItem::mutexItems);
   CGisWorkspace::self().slotWksItemSelectionReset();
   emit sigChanged();
@@ -2018,7 +2014,7 @@ bool CGisListWks::event(QEvent* e) {
             project = new CDBProject(evt->db, evt->id, this);
           }
           if (!project->isValid()) {
-            delete project;
+            project->destroyLater();
             break;
           }
           project->setWorkspaceFilter(CGisWorkspace::self().getCurrentSearch());
@@ -2031,7 +2027,10 @@ bool CGisListWks::event(QEvent* e) {
       case eEvtD2WHideFolder: {
         CEvtD2WHideFolder* evt = (CEvtD2WHideFolder*)e;
         CDBProject* project = getProjectById(evt->id, evt->db);
-        if (project && project->askBeforClose()) {
+        if (project == nullptr) {
+          break;
+        }
+        if (project->askBeforClose()) {
           /*
               Tell the DB view that we aborted to hide the folder by posting it's
               current status.
@@ -2039,7 +2038,7 @@ bool CGisListWks::event(QEvent* e) {
           project->postStatus(false);
           return false;
         }
-        delete project;
+        project->destroyLater();
 
         e->accept();
         emit sigChanged();

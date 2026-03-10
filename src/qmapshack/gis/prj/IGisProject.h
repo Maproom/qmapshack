@@ -36,6 +36,7 @@ class CGisItemWpt;
 class QDataStream;
 class CDetailsPrj;
 class IDevice;
+class CThread;
 
 class IGisProject : public IWksItem {
   Q_DECLARE_TR_FUNCTIONS(IGisProject)
@@ -93,9 +94,15 @@ class IGisProject : public IWksItem {
 
   IGisProject(type_e type, const QString& filename, CGisListWks* parent);
   IGisProject(type_e type, const QString& filename, IDevice* parent);
-  virtual ~IGisProject();
 
   static IGisProject* create(const QString filename, CGisListWks* parent);
+
+  /**
+   * @brief Delayed delete to abort any threaded operations.
+   *
+   * This is the preferred way to destroy a IGisProject instance.
+   */
+  void destroyLater();
 
   /**
      @brief Ask to save the project before it is closed.
@@ -389,12 +396,6 @@ class IGisProject : public IWksItem {
    */
   void blockUpdateItems(bool yes);
 
-  /**
-     @brief  Return state of current update block
-     @return True if updates are blocked.
-   */
-  bool blockUpdateItems() const { return noUpdate; }
-
   void setProjectFilter(const CSearch& search);
   void setWorkspaceFilter(const CSearch& search);
   void applyFilters();
@@ -413,7 +414,17 @@ class IGisProject : public IWksItem {
   void filterProject(bool filter);
   CProjectFilterItem* getProjectFilterItem() { return projectFilter; }
 
+  /**
+     @brief  Return state of current update block
+     @return True if updates are blocked.
+   */
+  bool isNoUpdate() const { return noUpdate; }
+
  protected:
+  /**
+   * @brief Do not use delete directly. Use destroyLater() instead.
+   */
+  virtual ~IGisProject();
   using IWksItem::updateDecoration;
   void genKey() const;
   virtual void setupName(const QString& defaultName);
@@ -457,7 +468,6 @@ class IGisProject : public IWksItem {
   mutable QString key;
   QString filename;
   bool valid = false;
-  bool noUpdate = false;
   bool noCorrelation = false;
   bool changedRoadbookMode = false;
 
@@ -488,6 +498,10 @@ class IGisProject : public IWksItem {
   CSearch workspaceSearch = CSearch("");
 
   QPointer<CProjectFilterItem> projectFilter;
+  QPointer<CThread> threadLoadPoject;
+
+ private:
+  bool noUpdate = false;
 };
 Q_DECLARE_METATYPE(IGisProject*)
 

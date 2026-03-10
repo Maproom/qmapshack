@@ -45,6 +45,7 @@
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CSelectCopyAction.h"
 #include "helpers/CSettings.h"
+#include "helpers/CThread.h"
 #include "misc.h"
 
 const QString IGisProject::filedialogAllSupported =
@@ -97,10 +98,28 @@ IGisProject::IGisProject(type_e type, const QString& filename, IDevice* parent)
 }
 
 IGisProject::~IGisProject() {
+  if (threadLoadPoject != nullptr) {
+    qWarning() << getName() << "threadLoadPoject is still active!";
+    threadLoadPoject->requestInterruption();
+  }
   delete dlgDetails;
   if (key == keyUserFocus && isOnDevice() == IDevice::eTypeNone) {
     keyUserFocus.clear();
   }
+}
+
+void IGisProject::destroyLater() {
+  QMutexLocker lock(&IGisItem::mutexItems);
+  if (threadLoadPoject != nullptr) {
+    threadLoadPoject->requestInterruption();
+  }
+  QMetaObject::invokeMethod(
+      &CGisWorkspace::self(),
+      [this]() {
+        QMutexLocker lock(&IGisItem::mutexItems);
+        delete this;
+      },
+      Qt::QueuedConnection);
 }
 
 IGisProject* IGisProject::create(const QString filename, CGisListWks* parent) {
@@ -284,7 +303,7 @@ void IGisProject::switchOnCorrelation() {
 }
 
 void IGisProject::updateItems() {
-  if (noUpdate) {
+  if (isNoUpdate()) {
     return;
   }
 
@@ -689,7 +708,7 @@ void IGisProject::insertCopyOfItem(IGisItem* item, int off, CSelectCopyAction::r
 }
 
 void IGisProject::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw* gis) {
-  if (!isVisible()) {
+  if (!isVisible() || isNoUpdate()) {
     return;
   }
 
@@ -708,7 +727,7 @@ void IGisProject::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
 }
 
 void IGisProject::drawItem(QPainter& p, const QRectF& viewport, CGisDraw* gis) {
-  if (!isVisible()) {
+  if (!isVisible() || isNoUpdate()) {
     return;
   }
 

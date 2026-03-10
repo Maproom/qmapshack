@@ -47,7 +47,7 @@ CDeviceTwoNav::CDeviceTwoNav(const QString& path, const QString& key, const QStr
     IGisProject* project = new CTwoNavProject(dirData.absolutePath(), this);
     if (project) {
       if (!project->isValid()) {
-        delete project;
+        project->destroyLater();
       } else {
         project->setVisibility(isVisible());
       }
@@ -59,7 +59,7 @@ CDeviceTwoNav::CDeviceTwoNav(const QString& path, const QString& key, const QStr
     IGisProject* project = new CGpxProject(dirData.absoluteFilePath(entry), this);
     if (project) {
       if (!project->isValid()) {
-        delete project;
+        project->destroyLater();
       } else {
         project->setVisibility(isVisible());
       }
@@ -71,7 +71,7 @@ CDeviceTwoNav::CDeviceTwoNav(const QString& path, const QString& key, const QStr
     IGisProject* project = new CTwoNavProject(dirData.absoluteFilePath(entry), this);
     if (project) {
       if (!project->isValid()) {
-        delete project;
+        project->destroyLater();
       } else {
         project->setVisibility(isVisible());
       }
@@ -85,7 +85,7 @@ CDeviceTwoNav::CDeviceTwoNav(const QString& path, const QString& key, const QStr
     IGisProject* project = new CGpxProject(dirData.absoluteFilePath(entry), this);
     if (project) {
       if (!project->isValid()) {
-        delete project;
+        project->destroyLater();
       } else {
         project->setVisibility(isVisible());
       }
@@ -138,13 +138,13 @@ void CDeviceTwoNav::insertCopyOfProject(IGisProject* project) {
 
   CTwoNavProject* proj = new CTwoNavProject(filename, project, this);
   if (!proj->isValid()) {
-    delete proj;
+    proj->destroyLater();
     return;
   }
 
   if (!proj->save()) {
     proj->remove();
-    delete proj;
+    proj->destroyLater();
     return;
   }
 }

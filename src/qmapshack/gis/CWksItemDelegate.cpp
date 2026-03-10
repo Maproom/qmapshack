@@ -38,7 +38,7 @@ constexpr int kFontSizeDiffProject = 2;
 constexpr int kFontSizeDiffItem = 3;
 constexpr int kFontSizeInvalid = -1;
 constexpr int kProgressBarHeight = 5;
-constexpr int kProgressBarHeightHalf = 3;
+constexpr int kProgressBarHeightHalf = 1;
 
 CWksItemDelegate::CWksItemDelegate(CGisListWks* parent) : QStyledItemDelegate(parent), treeWidget(parent) {
   SETTINGS;
@@ -128,7 +128,7 @@ QSize CWksItemDelegate::sizeHint(const QStyleOptionViewItem& opt, const QModelIn
   }
 }
 
-std::tuple<QFont, QFont, QRect, QRect, QRect, QRect, QRect, QRect, QRect> CWksItemDelegate::getRectanglesProject(
+std::tuple<QFont, QFont, QRect, QRect, QRect, QRect, QRect, QRect, QRect, QRect> CWksItemDelegate::getRectanglesProject(
     const QStyleOptionViewItem& opt, IWksItem& item) const {
   const QFont fontName = opt.font;
   const QFontMetrics fmName(fontName);
@@ -200,8 +200,11 @@ std::tuple<QFont, QFont, QRect, QRect, QRect, QRect, QRect, QRect, QRect> CWksIt
                        r.width() - rectIcon.width() - 2 * kMargin, fmStatus.height());
   }
 
-  return {fontName,    fontStatus, rectIcon,          rectName,       rectStatus,
-          rectVisible, rectSave,   rectActiveProject, rectAutoSyncDev};
+  const QRect rectProgress(rectIcon.right() + 4 * kMargin, r.bottom() - kProgressBarHeight,
+                           r.width() - rectIcon.width() - 8 * kMargin, kProgressBarHeight);
+
+  return {fontName,     fontStatus,  rectIcon, rectName,          rectStatus,
+          rectProgress, rectVisible, rectSave, rectActiveProject, rectAutoSyncDev};
 }
 
 std::tuple<QFont, QFont, QRect, QRect, QRect, QRect> CWksItemDelegate::getRectanglesItem(
@@ -403,7 +406,7 @@ void CWksItemDelegate::paintProject(QPainter* p, const QStyleOptionViewItem& opt
     return;
   }
 
-  auto [fontName, fontStatus, rectIcon, rectName, rectStatus, rectVisible, rectSave, rectActiveProject,
+  auto [fontName, fontStatus, rectIcon, rectName, rectStatus, rectProgress, rectVisible, rectSave, rectActiveProject,
         rectAutoSyncDev] = getRectanglesProject(opt, *project);
 
   const bool isOnDevice = item.isOnDevice() != IWksItem::eTypeNone;
@@ -477,7 +480,10 @@ void CWksItemDelegate::paintProject(QPainter* p, const QStyleOptionViewItem& opt
               isOnDevice ? project->getName() : project->getNameEx());
 
   // -- start ------------ status line ---------------------------------------
-  if (rectStatus.isValid()) {
+  auto [hasProgress, progress] = item.getProgress();
+  if (hasProgress) {
+    drawProgressBar(p, rectProgress, progress);
+  } else if (rectStatus.isValid()) {
     QString status;
     const QString& keywords = project->getKeywords();
     if (!keywords.isEmpty() && itemStatusControl.prj.keywords) {
@@ -557,7 +563,7 @@ void CWksItemDelegate::paintDevice(QPainter* p, const QStyleOptionViewItem& opt,
   // draw progress bar
   auto [hasProgress, progress] = item.getProgress();
   if (hasProgress) {
-    drawProgressBar(p, rectStatus, progress);
+    drawProgressBar(p, rectProgress, progress);
   } else {
     // draw status
     p->setPen(colorName);
@@ -764,7 +770,7 @@ bool CWksItemDelegate::editorEvent(QEvent* event, QAbstractItemModel* model, con
 
 bool CWksItemDelegate::mousePressProject(QMouseEvent* me, const QStyleOptionViewItem& opt, const QModelIndex& index,
                                          IWksItem& item) {
-  auto [fontName, fontStatus, rectIcon, rectName, rectStatus, rectVisible, rectSave, rectActiveProject,
+  auto [fontName, fontStatus, rectIcon, rectName, rectStatus, rectProgress, rectVisible, rectSave, rectActiveProject,
         rectAutoSyncDev] = getRectanglesProject(opt, item);
   if (rectVisible.contains(me->pos())) {
     item.setVisibility(!item.isVisible());
@@ -884,7 +890,7 @@ bool CWksItemDelegate::helpEvent(QHelpEvent* event, QAbstractItemView* view, con
 
 bool CWksItemDelegate::helpEventProject(const QPoint& pos, const QPoint& posGlobal, QAbstractItemView* view,
                                         const QStyleOptionViewItem& opt, IWksItem& item) {
-  auto [fontName, fontStatus, rectIcon, rectName, rectStatus, rectVisible, rectSave, rectActiveProject,
+  auto [fontName, fontStatus, rectIcon, rectName, rectStatus, rectProgress, rectVisible, rectSave, rectActiveProject,
         rectAutoSyncDev] = getRectanglesProject(opt, item);
   if (rectVisible.contains(pos)) {
     if (item.isVisible()) {

@@ -250,7 +250,7 @@ void IDevice::insertCopyOfProject(IGisProject* project, int& lastResult) {
     }
 
     if (project2->remove()) {
-      delete project2;
+      project2->destroyLater();
     } else {
       return;
     }
@@ -263,7 +263,7 @@ void IDevice::updateProject(IGisProject* project) {
   IGisProject* project2 = getProjectByKey(project->getKey());
   if (project2) {
     if (project2->remove()) {
-      delete project2;
+      project2->destroyLater();
     } else {
       return;
     }

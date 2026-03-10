@@ -103,6 +103,6 @@ void CGisSummaryDropZone::dropEvent(QDropEvent* e) {
     }
 
     project->save(saveActionForAll);
-    delete project;
+    project->destroyLater();
   }
 }

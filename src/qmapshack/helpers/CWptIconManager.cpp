@@ -2027,11 +2027,11 @@ void CWptIconManager::init() {
     setWptIconByName(name, path, categories, tags, vendors);
   }
 
-  for (const CWptIconManager::icon_t &icon : wptIcons) {
-    for (const QString &vendor : icon.vendors) {
-      for (const QString &category : icon.categories) {
+  for (const CWptIconManager::icon_t& icon : wptIcons) {
+    for (const QString& vendor : icon.vendors) {
+      for (const QString& category : icon.categories) {
         if (!vendorCategories.contains(vendor)) {
-          vendorCategories[vendor] = { category };
+          vendorCategories[vendor] = {category};
         } else if (!vendorCategories[vendor].contains(category)) {
           vendorCategories[vendor].append(category);
         }
@@ -2095,14 +2095,6 @@ QPixmap CWptIconManager::getWptIconByName(const QString& name, QPointF& focus, Q
   }
 
   QPixmap icon = loadIcon(iconRef.path);
-
-  // Limit icon size to "DEFAULTICONSIZE" pixel max.
-  int maxValue = qMax(icon.width(), icon.height());
-  if (maxValue > DEFAULTICONSIZE) {
-    qreal scale = qreal(DEFAULTICONSIZE) / maxValue;
-    focus = focus * scale;
-    icon = icon.scaled(icon.size() * scale, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-  }
 
   return icon;
 }

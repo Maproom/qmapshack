@@ -86,7 +86,7 @@ class CMapItemDelegate : public QStyledItemDelegate {
   };
 
   struct item_data_t {
-    QIcon icon;
+    QPixmap icon;
     animations_t animations;
   };
 

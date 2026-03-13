@@ -189,7 +189,7 @@ void CMapItemDelegate::initStyleOption(QStyleOptionViewItem* option, const QMode
   if (!data.contains(key)) {
     data.insert(key, {});
   }
-  data[key].icon = option->icon;
+  data[key].icon = option->icon.pixmap({48, 48});
   option->features &= ~QStyleOptionViewItem::HasDecoration;
 }
 
@@ -273,7 +273,9 @@ void CMapItemDelegate::paint(QPainter* p, const QStyleOptionViewItem& opt, const
   p->drawText(rectStatus.adjusted(0, -1, 0, 1), Qt::AlignLeft | Qt::AlignVCenter, status);
 
   // draw icon
-  data[keyFromIndex(index)].icon.paint(p, rectIcon);
+  const QPixmap& icon =
+      data[keyFromIndex(index)].icon.scaled(rectIcon.size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+  QIcon(icon).paint(p, rectIcon);
 
   // draw tool button to activate
   QStyleOptionToolButton btnOpt;

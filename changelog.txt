@@ -6,6 +6,7 @@ V1.XX.X
 [QMS-996] Fix: POIs not displayed (macOS)
 [QMS-998] Add progress bar to GPS devices while loading records
 [QMS-1004] Add progress bar in projects while restoring the workspace
+[QMS-1009] Fix: Workspace icon size does not follow font size
 
 V1.20.1
 [QMS-945] Redesign icons for focus, autosave, sync, and DB buttons

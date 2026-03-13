@@ -107,7 +107,8 @@ void CDBItemDelegate::paint(QPainter* p, const QStyleOptionViewItem& opt, const 
 
   auto [fontName, fontStatus, rectIcon, rectName, rectStatus, rectButton] = getRectangles(opt, *item);
 
-  QIcon(item->getIcon()).paint(p, rectIcon, Qt::AlignCenter);
+  const QPixmap& icon = item->getIcon().scaled(rectIcon.size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+  QIcon(icon).paint(p, rectIcon, Qt::AlignCenter);
 
   if (rectButton.isValid()) {
     switch (item->getCheckState()) {

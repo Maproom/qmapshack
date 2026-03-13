@@ -416,7 +416,8 @@ void CWksItemDelegate::paintProject(QPainter* p, const QStyleOptionViewItem& opt
                         opt.state & QStyle::State_Selected ? QPalette::BrightText : QPalette::WindowText);
 
   // draw icon
-  QIcon(item.getIcon()).paint(p, rectIcon, Qt::AlignCenter, item.isVisible() ? QIcon::Normal : QIcon::Disabled);
+  const QPixmap& icon = item.getIcon().scaled(rectIcon.size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+  QIcon(icon).paint(p, rectIcon, Qt::AlignCenter, item.isVisible() ? QIcon::Normal : QIcon::Disabled);
 
   // draw tool button to toggle visibility
   drawToolButton(p, opt, rectVisible,
@@ -554,7 +555,8 @@ void CWksItemDelegate::paintDevice(QPainter* p, const QStyleOptionViewItem& opt,
   p->drawText(rectName.adjusted(0, -1, 0, 1), Qt::AlignLeft | Qt::AlignTop, item.getName());
 
   // draw icon
-  QIcon(item.getIcon()).paint(p, rectIcon, Qt::AlignCenter, isVisible ? QIcon::Normal : QIcon::Disabled);
+  const QPixmap& icon = item.getIcon().scaled(rectIcon.size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+  QIcon(icon).paint(p, rectIcon, Qt::AlignCenter, isVisible ? QIcon::Normal : QIcon::Disabled);
 
   // draw tool button to activate
   drawToolButton(p, opt, rectVisible,
@@ -686,7 +688,8 @@ void CWksItemDelegate::paintItem(QPainter* p, const QStyleOptionViewItem& opt, c
   // -- stop ------------ status line ---------------------------------------
 
   // draw icon
-  QIcon(item.getIcon()).paint(p, rectIcon, Qt::AlignCenter, iconMode);
+  const QPixmap& icon = item.getIcon().scaled(rectIcon.size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+  QIcon(icon).paint(p, rectIcon, Qt::AlignCenter, iconMode);
 
   // draw save/changed icon
   if (rectChanged.isValid()) {
@@ -706,7 +709,8 @@ void CWksItemDelegate::paintGeoSearch(QPainter* p, const QStyleOptionViewItem& o
       getRectanglesGeoSearch(opt);
   const bool isVisible = item.isVisible();
 
-  QIcon(item.getIcon()).paint(p, rectIcon, Qt::AlignCenter, isVisible ? QIcon::Normal : QIcon::Disabled);
+  const QPixmap& icon = item.getIcon().scaled(rectIcon.size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+  QIcon(icon).paint(p, rectIcon, Qt::AlignCenter, isVisible ? QIcon::Normal : QIcon::Disabled);
   QIcon(":/icons/32x32/Apply.png").paint(p, rectSetup, Qt::AlignCenter, QIcon::Normal);
   QIcon(search->getWptIcon()).paint(p, rectWptIcon, Qt::AlignCenter, QIcon::Normal);
 
@@ -737,7 +741,8 @@ void CWksItemDelegate::paintGeoSearchError(QPainter* p, const QStyleOptionViewIt
   auto [font, rectIcon, rectName] = getRectanglesGeoSearchError(opt);
   const bool isVisible = item.isVisible();
 
-  QIcon(item.getIcon()).paint(p, rectIcon, Qt::AlignCenter, isVisible ? QIcon::Normal : QIcon::Disabled);
+  const QPixmap& icon = item.getIcon().scaled(rectIcon.size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+  QIcon(icon).paint(p, rectIcon, Qt::AlignCenter, isVisible ? QIcon::Normal : QIcon::Disabled);
   const QColor& color = opt.palette.color(isVisible ? QPalette::Active : QPalette::Disabled, QPalette::WindowText);
 
   p->setPen(color);

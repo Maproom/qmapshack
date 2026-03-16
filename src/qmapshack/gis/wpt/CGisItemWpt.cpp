@@ -571,7 +571,6 @@ void CGisItemWpt::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
 
   drawBubble(p);
 
-  // for accuracy reasons, it is not sufficient to upscale 22 pixel icon
   // get scaled waypoint icon here, as size might have changed in between
   QPointF focusScaled;
   const QPixmap& iconScaled = CWptIconManager::self().getWptIconScaledByName(getIconName(), focusScaled);
@@ -619,7 +618,6 @@ void CGisItemWpt::drawLabel(QPainter& p, const QPolygonF& /*viewport*/, QList<QR
     return;
   }
 
-  // for accuracy reasons, it is not sufficient to upscale 22 pixel icon
   // get scaled waypoint icon here, as size might have changed in between
   QPointF focusScaled;
   const QPixmap& iconScaled = CWptIconManager::self().getWptIconScaledByName(getIconName(), focusScaled);

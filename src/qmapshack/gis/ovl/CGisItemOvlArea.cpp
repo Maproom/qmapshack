@@ -485,7 +485,7 @@ void CGisItemOvlArea::setIcon(const QString& c) {
   QPixmap mask(icon.size());
   mask.fill(str2color(c));
   mask.setMask(icon.createMaskFromColor(Qt::transparent));
-  IGisItem::setIcon(mask.scaled(22, 22, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+  IGisItem::setIcon(mask);
 }
 
 QMap<searchProperty_e, CGisItemOvlArea::fSearch> CGisItemOvlArea::keywordLambdaMap =

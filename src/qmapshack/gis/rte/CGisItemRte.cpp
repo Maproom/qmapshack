@@ -291,7 +291,7 @@ void CGisItemRte::toTrack() {
 }
 
 void CGisItemRte::setSymbol() {
-  IGisItem::setIcon(QPixmap("://icons/48x48/Route.png").scaled(22, 22, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+  IGisItem::setIcon(QPixmap("://icons/48x48/Route.png"));
 }
 
 void CGisItemRte::setName(const QString& str) {

@@ -2256,7 +2256,7 @@ void CGisItemTrk::setIcon(const QString& iconColor) {
   QPixmap mask(icon.size());
   mask.fill(str2color(iconColor));
   mask.setMask(icon.createMaskFromColor(Qt::transparent));
-  IGisItem::setIcon(mask.scaled(22, 22, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+  IGisItem::setIcon(mask);
 }
 
 bool CGisItemTrk::setMouseFocusByDistance(qreal dist, focusmode_e fmode, const QString& owner) {

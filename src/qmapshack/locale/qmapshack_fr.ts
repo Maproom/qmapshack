@@ -354,44 +354,44 @@
 <context>
     <name>CDBItemDelegate</name>
     <message>
-        <location filename="../gis/CDBItemDelegate.cpp" line="153"/>
-        <location filename="../gis/CDBItemDelegate.cpp" line="155"/>
-        <location filename="../gis/CDBItemDelegate.cpp" line="157"/>
+        <location filename="../gis/CDBItemDelegate.cpp" line="154"/>
+        <location filename="../gis/CDBItemDelegate.cpp" line="156"/>
+        <location filename="../gis/CDBItemDelegate.cpp" line="158"/>
         <source>since: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CDBItemDelegate.cpp" line="153"/>
+        <location filename="../gis/CDBItemDelegate.cpp" line="154"/>
         <source>%1 min.</source>
         <translation type="unfinished">%1 min.</translation>
     </message>
     <message>
-        <location filename="../gis/CDBItemDelegate.cpp" line="155"/>
+        <location filename="../gis/CDBItemDelegate.cpp" line="156"/>
         <source>%1 h</source>
         <translation type="unfinished">%1 h</translation>
     </message>
     <message>
-        <location filename="../gis/CDBItemDelegate.cpp" line="157"/>
+        <location filename="../gis/CDBItemDelegate.cpp" line="158"/>
         <source>%1 days</source>
         <translation type="unfinished">%1 jours</translation>
     </message>
     <message>
-        <location filename="../gis/CDBItemDelegate.cpp" line="221"/>
+        <location filename="../gis/CDBItemDelegate.cpp" line="222"/>
         <source>Load item into workspace.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CDBItemDelegate.cpp" line="222"/>
+        <location filename="../gis/CDBItemDelegate.cpp" line="223"/>
         <source>Load project into workspace</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CDBItemDelegate.cpp" line="226"/>
+        <location filename="../gis/CDBItemDelegate.cpp" line="227"/>
         <source>Remove item from workspace.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CDBItemDelegate.cpp" line="227"/>
+        <location filename="../gis/CDBItemDelegate.cpp" line="228"/>
         <source>Remove project from workspace</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2323,357 +2323,357 @@ Il est possible de personnaliser ces deux paramètres. Il est conseillé de choi
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="978"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="976"/>
         <source>QMS Attribute Flag</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="979"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="977"/>
         <source>Dogs</source>
         <translation>Chiens</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="980"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="978"/>
         <source>Access or parking fee</source>
         <translation>Frais d&apos;accès ou de stationnement</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="981"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="979"/>
         <source>Climbing gear</source>
         <translation>Équipement d&apos;escalade nécessaire</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="982"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="980"/>
         <source>Boat</source>
         <translation>Bateau nécessaire</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="983"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="981"/>
         <source>Scuba gear</source>
         <translation>Equipement de plongée nécessaire</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="984"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="982"/>
         <source>Recommended for kids</source>
         <translation>Convient aux enfants</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="985"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="983"/>
         <source>Takes less than an hour</source>
         <translation>Prend moins d&apos;une heure</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="986"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="984"/>
         <source>Scenic view</source>
         <translation>Vue panoramique</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="987"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="985"/>
         <source>Significant hike</source>
         <translation>Randonnée conséquente</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="988"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="986"/>
         <source>Difficult climbing</source>
         <translation>Escalade difficile</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="989"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="987"/>
         <source>May require wading</source>
         <translation>Peut exiger de patauger</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="990"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="988"/>
         <source>May require swimming</source>
         <translation>Peut exiger de nager</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="991"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="989"/>
         <source>Available at all times</source>
         <translation>Accessible à toute heure</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="992"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="990"/>
         <source>Recommended at night</source>
         <translation>Recommandée de nuit</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="993"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="991"/>
         <source>Available during winter</source>
         <translation>Accessible en hiver</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="995"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="993"/>
         <source>Poison plants</source>
         <translation>Plantes vénéneuses</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="996"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="994"/>
         <source>Dangerous Animals</source>
         <translation>Animaux dangereux</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="997"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="995"/>
         <source>Ticks</source>
         <translation>Tiques</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="998"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="996"/>
         <source>Abandoned mines</source>
         <translation>Mines abandonnées</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="999"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="997"/>
         <source>Cliff / falling rocks</source>
         <translation>Falaise / Chute de roches</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1000"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="998"/>
         <source>Hunting</source>
         <translation>Chasse</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1001"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="999"/>
         <source>Dangerous area</source>
         <translation>Zone dangereuse</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1002"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1000"/>
         <source>Wheelchair accessible</source>
         <translation>Accessible en fauteuil roulant</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1003"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1001"/>
         <source>Parking available</source>
         <translation>Stationnement disponible</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1004"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1002"/>
         <source>Public transportation</source>
         <translation>Transports en commun</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1005"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1003"/>
         <source>Drinking water nearby</source>
         <translation>Eau potable à proximité</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1006"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1004"/>
         <source>Public restrooms nearby</source>
         <translation>Toilettes publiques à proximité</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1007"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1005"/>
         <source>Telephone nearby</source>
         <translation>Cabine téléphonique à proximité</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1008"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1006"/>
         <source>Picnic tables nearby</source>
         <translation>Aire de pique-nique à proximité</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1009"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1007"/>
         <source>Camping available</source>
         <translation>Camping possible</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1010"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1008"/>
         <source>Bicycles</source>
         <translation>Vélos</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1011"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1009"/>
         <source>Motorcycles</source>
         <translation>Motos</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1012"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1010"/>
         <source>Quads</source>
         <translation>Quads</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1013"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1011"/>
         <source>Off-road vehicles</source>
         <translation>Véhicules tout-terrain</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1014"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1012"/>
         <source>Snowmobiles</source>
         <translation>Motoneiges</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1015"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1013"/>
         <source>Horses</source>
         <translation>Chevaux</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1016"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1014"/>
         <source>Campfires</source>
         <translation>Feux de camp</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1017"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1015"/>
         <source>Thorns</source>
         <translation>Épines</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1018"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1016"/>
         <source>Stealth required</source>
         <translation>Discrétion oblige</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1019"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1017"/>
         <source>Stroller accessible</source>
         <translation>Accessible aux poussettes</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1020"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1018"/>
         <source>Needs maintenance</source>
         <translation>Maintenance nécessaire</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1021"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1019"/>
         <source>Watch for livestock</source>
         <translation>Gare au bétail</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1022"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1020"/>
         <source>Flashlight required</source>
         <translation>Lampe torche nécessaire</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1024"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1022"/>
         <source>Truck Driver/RV</source>
         <translation>Camion / camping-car</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1025"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1023"/>
         <source>Field Puzzle</source>
         <translation>Énigme de terrain</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1026"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1024"/>
         <source>UV Light Required</source>
         <translation>Lampe UV nécessaire</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1027"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1025"/>
         <source>Snowshoes</source>
         <translation>Raquettes de randonnée nécessaires</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1028"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1026"/>
         <source>Cross Country Skis</source>
         <translation>Skis de fond nécessaires</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1029"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1027"/>
         <source>Special Tool Required</source>
         <translation>Outil particulier nécessaire</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1030"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1028"/>
         <source>Night Cache</source>
         <translation>Cache de nuit</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1031"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1029"/>
         <source>Park and Grab</source>
         <translation>Drive-in</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1032"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1030"/>
         <source>Abandoned Structure</source>
         <translation>Structure abandonnée</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1033"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1031"/>
         <source>Short hike (less than 1km)</source>
         <translation>Courte randonnée (moins d&apos;1 km)</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1034"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1032"/>
         <source>Medium hike (1km-10km)</source>
         <translation>Moyenne randonnée (1 km - 10 km)</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1035"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1033"/>
         <source>Long Hike (+10km)</source>
         <translation>Longue randonnée (+10 km)</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1036"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1034"/>
         <source>Fuel Nearby</source>
         <translation>Station essence à proximité</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1037"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1035"/>
         <source>Food Nearby</source>
         <translation>Restaurant à proximité</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1038"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1036"/>
         <source>Wireless Beacon</source>
         <translation>Balise sans fil</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1039"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1037"/>
         <source>Partnership cache</source>
         <translation>Cache en partenariat</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1040"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1038"/>
         <source>Seasonal Access</source>
         <translation>Accès saisonnier</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1041"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1039"/>
         <source>Tourist Friendly</source>
         <translation>Convient aux touristes</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1042"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1040"/>
         <source>Tree Climbing</source>
         <translation>Escalade d&apos;arbre nécessaire</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1043"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1041"/>
         <source>Front Yard (Private Residence)</source>
         <translation>Jardin ou cour d&apos;entrée (Propriété privée)</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1044"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1042"/>
         <source>Teamwork Required</source>
         <translation>Travail d&apos;équipe requis</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1045"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1043"/>
         <source>GeoTour</source>
         <translation>GéoTour</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1064"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1062"/>
         <source> by </source>
         <translation> par </translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1121"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1119"/>
         <source>waypoint</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1187"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1185"/>
         <source>archived</source>
         <translation>archivé</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1189"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1187"/>
         <source>available</source>
         <translation>disponible</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1191"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="1189"/>
         <source>not available</source>
         <translation>indisponible</translation>
     </message>
@@ -3030,17 +3030,17 @@ Il est possible de personnaliser ces deux paramètres. Il est conseillé de choi
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1115"/>
+        <location filename="../gis/CGisListWks.cpp" line="1097"/>
         <source>Waypoints</source>
         <translation>Points isolés</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1119"/>
+        <location filename="../gis/CGisListWks.cpp" line="1101"/>
         <source>Wayp. &amp; Tracks</source>
         <translation>Points &amp; traces</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1121"/>
+        <location filename="../gis/CGisListWks.cpp" line="1103"/>
         <source>Tracks</source>
         <translation>Traces</translation>
     </message>
@@ -3090,8 +3090,8 @@ Il est possible de personnaliser ces deux paramètres. Il est conseillé de choi
         <translation>Éditer les points de la surface</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1037"/>
-        <location filename="../gis/CGisListWks.cpp" line="1125"/>
+        <location filename="../gis/CGisListWks.cpp" line="1019"/>
+        <location filename="../gis/CGisListWks.cpp" line="1107"/>
         <source>Set Track Color</source>
         <translation>Choisir la couleur de la trace</translation>
     </message>
@@ -3106,33 +3106,32 @@ Il est possible de personnaliser ces deux paramètres. Il est conseillé de choi
         <translation>Sauvegarde de l&apos;espace de travail. Patientez.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="849"/>
         <source>Loading workspace. Please wait.</source>
-        <translation>Chargement de l&apos;espace de travail. Patientez.</translation>
+        <translation type="vanished">Chargement de l&apos;espace de travail. Patientez.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1400"/>
+        <location filename="../gis/CGisListWks.cpp" line="1382"/>
         <source>Close all projects...</source>
         <translation>Fermer tous les projets...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1400"/>
+        <location filename="../gis/CGisListWks.cpp" line="1382"/>
         <source>This will remove all projects from the workspace.</source>
         <translation>Ceci enlevera tous les projets de l&apos;espace de travail.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1423"/>
+        <location filename="../gis/CGisListWks.cpp" line="1405"/>
         <source>Delete project...</source>
         <translation>Supprimer le projet...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1424"/>
+        <location filename="../gis/CGisListWks.cpp" line="1406"/>
         <source>Do you really want to delete %1?</source>
         <translation>Êtes-vous sûr de vouloir supprimer %1?</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1916"/>
-        <location filename="../gis/CGisListWks.cpp" line="1977"/>
+        <location filename="../gis/CGisListWks.cpp" line="1912"/>
+        <location filename="../gis/CGisListWks.cpp" line="1973"/>
         <source>&lt;b&gt;Update devices&lt;/b&gt;&lt;p&gt;Update %1&lt;br/&gt;Please wait...&lt;/p&gt;</source>
         <translation>&lt;b&gt;Mise à jour des appareils&lt;/b&gt;&lt;p&gt;Mise à jour de %1&lt;br/&gt;Patientez...&lt;/p&gt;</translation>
     </message>
@@ -4566,22 +4565,22 @@ Fall back to internal types.</source>
         <translation type="unfinished">-</translation>
     </message>
     <message>
-        <location filename="../map/CMapItemDelegate.cpp" line="350"/>
+        <location filename="../map/CMapItemDelegate.cpp" line="352"/>
         <source>Deactivate %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../map/CMapItemDelegate.cpp" line="350"/>
+        <location filename="../map/CMapItemDelegate.cpp" line="352"/>
         <source>Activate %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../map/CMapItemDelegate.cpp" line="354"/>
+        <location filename="../map/CMapItemDelegate.cpp" line="356"/>
         <source>%1 is not visible at current scale</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../map/CMapItemDelegate.cpp" line="355"/>
+        <location filename="../map/CMapItemDelegate.cpp" line="357"/>
         <source>%1 is visible at current scale</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5582,85 +5581,91 @@ n&apos;est pas une définition de système de coordonnées:
 <context>
     <name>CRouterBRouter</name>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="53"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="58"/>
         <source>original</source>
         <translation>principal</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="54"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="59"/>
         <source>first alternative</source>
         <translation>alternative 1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="55"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="60"/>
         <source>second alternative</source>
         <translation>alternative 2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="56"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="61"/>
         <source>third alternative</source>
         <translation>alternative 3</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="155"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="215"/>
         <source>BRouter (offline)</source>
         <translation>BRouter (hors ligne)</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="160"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="220"/>
         <source>BRouter (online)</source>
         <translation>BRouter (par internet)</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="187"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="247"/>
         <source>profile: %1, alternative: %2</source>
         <translation>profil: %1, alternative: %2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="333"/>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="451"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="437"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="672"/>
         <source>response is empty</source>
         <translation>réponse vide</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="377"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="430"/>
         <source>Bad response from server: %1</source>
         <translation>Réponse invalide du serveur: %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="423"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="598"/>
         <source>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Routing request sent to server. Please wait...</source>
         <translation>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Demande de routage envoyée au serveur. Patientez...</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="315"/>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="426"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="403"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="602"/>
         <source>Calculate route with %1</source>
         <translation>Calculer l&apos;itinéraire avec %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="324"/>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="442"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="428"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="664"/>
         <source>this version of BRouter does not support more then 1 nogo-area</source>
         <translation>cette version de BRouter ne supporte pas plus d&apos;une zone interdite</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="480"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="444"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="681"/>
+        <source>Failed to parse BRouter response (line %1): %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="710"/>
         <source>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Bad response from server:&lt;br/&gt;%1</source>
         <translation>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Réponse invalide du serveur :&lt;br/&gt;%1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="474"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="704"/>
         <source>&lt;br/&gt;Calculation time: %1s</source>
         <translation>&lt;br/&gt;Temps de calcul : %1s</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="519"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="751"/>
         <source>BRouter (Version %1.%2.%3)</source>
         <translation>BRouter (Version %1.%2.%3)</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="560"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="779"/>
         <source>online</source>
         <translation>par internet</translation>
     </message>
@@ -8541,74 +8546,74 @@ ligne %2, colonne %3:
 <context>
     <name>CWksItemDelegate</name>
     <message>
-        <location filename="../gis/CWksItemDelegate.cpp" line="719"/>
-        <location filename="../gis/CWksItemDelegate.cpp" line="1008"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="729"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="1019"/>
         <source>Enter address...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CWksItemDelegate.cpp" line="891"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="902"/>
         <source>Hide project on map.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CWksItemDelegate.cpp" line="893"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="904"/>
         <source>Show project on map.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CWksItemDelegate.cpp" line="899"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="910"/>
         <source>Save project.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CWksItemDelegate.cpp" line="902"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="913"/>
         <source>Disable auto save.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CWksItemDelegate.cpp" line="904"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="915"/>
         <source>Enable auto save.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CWksItemDelegate.cpp" line="908"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="919"/>
         <source>Copy content of project into a project in the workspace.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CWksItemDelegate.cpp" line="914"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="925"/>
         <source>Disable automatic synchonization with GPS device.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CWksItemDelegate.cpp" line="917"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="928"/>
         <source>Enable automatic synchonization with GPS device.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CWksItemDelegate.cpp" line="924"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="935"/>
         <source>This is the active project. All new items will be attached to this project automatically.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CWksItemDelegate.cpp" line="930"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="941"/>
         <source>Make this project the active one. All new items will be attached to this project automatically.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CWksItemDelegate.cpp" line="942"/>
-        <location filename="../gis/CWksItemDelegate.cpp" line="965"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="953"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="976"/>
         <source>This is the status line. You can select additional information to be displayed in the workspace setup. See menu-&gt;Workspace-&gt;Setup Workspace</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CWksItemDelegate.cpp" line="974"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="985"/>
         <source>Item is changed and needs to be saved.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CWksItemDelegate.cpp" line="986"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="997"/>
         <source>Setup Search</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9631,7 +9636,7 @@ ligne %2, colonne %3:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CWptIconManager.cpp" line="2137"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="2129"/>
         <source>More...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10648,7 +10653,7 @@ ligne %2, colonne %3:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CWptIconManager.cpp" line="2144"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="2136"/>
         <source>Clear List</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13716,60 +13721,60 @@ zoom-out for use of the DEM data.</source>
 <context>
     <name>IGisProject</name>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="153"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="172"/>
         <source>Save project?</source>
         <translation>Enregistrer le projet ?</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="154"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="173"/>
         <source>&lt;h3&gt;%1&lt;/h3&gt;The project was changed. Save before closing it?</source>
         <translation>&lt;h3&gt;%1&lt;/h3&gt;Le projet a été modifié. Sauvegarder avant de quitter ?</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="343"/>
-        <location filename="../gis/prj/IGisProject.cpp" line="391"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="362"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="410"/>
         <source>Save &quot;%1&quot; to...</source>
         <translation>Sauvegarder&quot;%1&quot; dans ...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="455"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="474"/>
         <source>&lt;br/&gt;
 Filename: %1</source>
         <translation>&lt;br/&gt;
 Nom de fichier: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="459"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="478"/>
         <source>Keywords: </source>
         <translation type="unfinished">Mots-clés:</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="463"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="482"/>
         <source>Waypoints: %1</source>
         <translation>Points isolés: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="466"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="485"/>
         <source>Tracks: %1</source>
         <translation>Traces: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="469"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="488"/>
         <source>Routes: %1</source>
         <translation>Itinéraires: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="472"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="491"/>
         <source>Areas: %1</source>
         <translation>Surfaces: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="576"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="595"/>
         <source>Are you sure you want to delete &apos;%1&apos; from project &apos;%2&apos;?</source>
         <translation>Êtes-vous sûr de vouloir supprimer %1 du projet &apos;%2&apos;?</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="577"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="596"/>
         <source>Delete...</source>
         <translation>Supprimer...</translation>
     </message>

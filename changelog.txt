@@ -7,6 +7,7 @@ V1.XX.X
 [QMS-998] Add progress bar to GPS devices while loading records
 [QMS-1004] Add progress bar in projects while restoring the workspace
 [QMS-1009] Fix: Workspace icon size does not follow font size
+[QMS-1013] Fix: Icons do not fit into on screen multiple selection circles
 
 V1.20.1
 [QMS-945] Redesign icons for focus, autosave, sync, and DB buttons

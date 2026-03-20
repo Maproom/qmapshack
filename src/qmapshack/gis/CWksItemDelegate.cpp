@@ -411,9 +411,10 @@ void CWksItemDelegate::paintProject(QPainter* p, const QStyleOptionViewItem& opt
 
   const bool isOnDevice = item.isOnDevice() != IWksItem::eTypeNone;
   const bool isVisible = item.isVisible();
+  QPalette::ColorGroup colorGroup = (opt.state & QStyle::State_HasFocus) ? QPalette::Active : QPalette::Inactive;
   const QColor& colorName =
-      opt.palette.color(isVisible ? QPalette::Active : QPalette::Disabled,
-                        opt.state & QStyle::State_Selected ? QPalette::BrightText : QPalette::WindowText);
+      opt.palette.color(isVisible ? colorGroup : QPalette::Disabled,
+                        opt.state & QStyle::State_Selected ? QPalette::HighlightedText : QPalette::WindowText);
 
   // draw icon
   const QPixmap& icon = item.getIcon().scaled(rectIcon.size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
@@ -544,9 +545,10 @@ void CWksItemDelegate::paintDevice(QPainter* p, const QStyleOptionViewItem& opt,
       getRectanglesDevice(opt, item);
 
   const bool isVisible = item.isVisible();
+  QPalette::ColorGroup colorGroup = (opt.state & QStyle::State_HasFocus) ? QPalette::Active : QPalette::Inactive;
   const QColor& colorName =
-      opt.palette.color(isVisible ? QPalette::Active : QPalette::Disabled,
-                        opt.state & QStyle::State_Selected ? QPalette::BrightText : QPalette::WindowText);
+      opt.palette.color(isVisible ? colorGroup : QPalette::Disabled,
+                        opt.state & QStyle::State_Selected ? QPalette::HighlightedText : QPalette::WindowText);
 
   // draw name
   fontName.setBold(item.hasUserFocus());
@@ -581,9 +583,10 @@ void CWksItemDelegate::paintItem(QPainter* p, const QStyleOptionViewItem& opt, c
 
   const bool isVisible = item.isVisible();
   const QIcon::Mode iconMode = isVisible ? QIcon::Normal : QIcon::Disabled;
+  QPalette::ColorGroup colorGroup = (opt.state & QStyle::State_HasFocus) ? QPalette::Active : QPalette::Inactive;
   const QColor& colorName =
-      opt.palette.color(isVisible ? QPalette::Active : QPalette::Disabled,
-                        opt.state & QStyle::State_Selected ? QPalette::BrightText : QPalette::WindowText);
+      opt.palette.color(isVisible ? colorGroup : QPalette::Disabled,
+                        opt.state & QStyle::State_Selected ? QPalette::HighlightedText : QPalette::WindowText);
 
   // draw name
   fontName.setBold(item.hasUserFocus());

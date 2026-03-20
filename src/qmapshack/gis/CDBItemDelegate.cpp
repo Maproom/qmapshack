@@ -124,22 +124,23 @@ void CDBItemDelegate::paint(QPainter* p, const QStyleOptionViewItem& opt, const 
     }
   }
 
-  QColor color = opt.palette.color(QPalette::Active,
-                                   opt.state & QStyle::State_Selected ? QPalette::BrightText : QPalette::WindowText);
+  QPalette::ColorGroup colorGroup = (opt.state & QStyle::State_HasFocus) ? QPalette::Active : QPalette::Inactive;
+  QColor color = opt.palette.color(colorGroup,
+                                   opt.state & QStyle::State_Selected ? QPalette::HighlightedText : QPalette::WindowText);
 
   IDBItem* parent = dynamic_cast<IDBItem*>(item->parent());
   if (item->type() == IDBItem::eTypeItem) {
     if (parent && parent->type() == IDBItem::eTypeLostFound) {
-      color = opt.palette.color(parent->getCheckState() != Qt::Unchecked ? QPalette::Active : QPalette::Disabled,
-                                opt.state & QStyle::State_Selected ? QPalette::BrightText : QPalette::WindowText);
+      color = opt.palette.color(parent->getCheckState() != Qt::Unchecked ? colorGroup : QPalette::Disabled,
+                                opt.state & QStyle::State_Selected ? QPalette::HighlightedText : QPalette::WindowText);
     } else {
-      color = opt.palette.color(item->getCheckState() != Qt::Unchecked ? QPalette::Active : QPalette::Disabled,
-                                opt.state & QStyle::State_Selected ? QPalette::BrightText : QPalette::WindowText);
+      color = opt.palette.color(item->getCheckState() != Qt::Unchecked ? colorGroup : QPalette::Disabled,
+                                opt.state & QStyle::State_Selected ? QPalette::HighlightedText : QPalette::WindowText);
     }
   } else if (item->type() > IDBItem::eTypeGroup) {
     fontName.setBold(item->getCheckState() != Qt::Unchecked);
-    color = opt.palette.color(item->getCheckState() != Qt::PartiallyChecked ? QPalette::Active : QPalette::Disabled,
-                              opt.state & QStyle::State_Selected ? QPalette::BrightText : QPalette::WindowText);
+    color = opt.palette.color(item->getCheckState() != Qt::PartiallyChecked ? colorGroup : QPalette::Disabled,
+                              opt.state & QStyle::State_Selected ? QPalette::HighlightedText : QPalette::WindowText);
   }
 
   p->setPen(color);

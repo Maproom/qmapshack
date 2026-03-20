@@ -84,7 +84,7 @@ void CScrOptUnclutter::addItem(IGisItem* gisItem) {
   item.hasUserFocus = gisItem->hasUserFocus();
   item.name = gisItem->getNameEx();
   item.key = gisItem->getKey();
-  item.icon = gisItem->getDisplayIcon().scaled(22,22,Qt::KeepAspectRatio,Qt::SmoothTransformation);
+  item.icon = gisItem->getDisplayIcon().scaled(22, 22, Qt::KeepAspectRatio, Qt::SmoothTransformation);
   item.area = item.icon.rect();
   item.active = item.area.adjusted(-10, -10, 10, 10);
 }

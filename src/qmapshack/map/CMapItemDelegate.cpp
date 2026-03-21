@@ -190,7 +190,8 @@ void CMapItemDelegate::initStyleOption(QStyleOptionViewItem* option, const QMode
     data.insert(key, {});
   }
   data[key].icon = option->icon.pixmap({48, 48});
-  option->features &= ~QStyleOptionViewItem::HasDecoration;
+  option->icon = QIcon();
+  option->decorationSize = QSize(0, 0);
 }
 
 std::tuple<QFont, QFont, QRect, QRect, QRect, QRect, QRect> CMapItemDelegate::getRectangles(

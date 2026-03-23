@@ -19,11 +19,14 @@
 #ifndef CMAPLIST_H
 #define CMAPLIST_H
 
+#include <QPointer>
 #include <QTreeWidget>
 #include <QWidget>
 
 class CMapItem;
 class QMenu;
+class CCanvas;
+class QTabWidget;
 
 class CMapTreeWidget : public QTreeWidget {
   Q_OBJECT
@@ -46,12 +49,40 @@ class CMapTreeWidget : public QTreeWidget {
 class CMapList : public QWidget, private Ui::IMapList {
   Q_OBJECT
  public:
-  CMapList(QWidget* parent);
+  CMapList(CCanvas* parent);
   virtual ~CMapList();
 
+  /**
+   * @brief Get the key of the canvas this list is attached to
+   * @return The key as string if a canvas is attached. If not, an empty string.
+   */
+  QString getCanvasKey() const;
+
+  /**
+   * @brief Add this map list to the given tab widget
+   * @param widget  add list to this tab widget
+   */
+  void addToTabWidget(QTabWidget* widget);
+
+  /**
+   * @brief Remove all maps from the list
+   */
   void clear();
+  /**
+   * @brief Number of maps in the list
+   * @return
+   */
   int count();
+  /**
+   * @brief Get map item at index
+   * @param i
+   * @return A pointer to the map item or nullptr if index is out of bound
+   */
   CMapItem* item(int i);
+
+  /**
+   * @brief Cast operator to get the tree widget
+   */
   operator QTreeWidget*() { return treeWidget; }
 
   /**
@@ -91,6 +122,8 @@ class CMapList : public QWidget, private Ui::IMapList {
 
  private:
   QMenu* menu;
+  QPointer<CCanvas> canvas;
+  QPointer<QTabWidget> tabWidget;
 };
 
 #endif  // CMAPLIST_H

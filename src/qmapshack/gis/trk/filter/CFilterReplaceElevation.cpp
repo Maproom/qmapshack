@@ -47,7 +47,7 @@ void CFilterReplaceElevation::updateUi() {
 
   const QList<CCanvas*>& list = CMainWindow::self().getCanvas();
   for (CCanvas* canvas : list) {
-    comboView->addItem(canvas->objectName(), QVariant::fromValue<CCanvas*>(canvas));
+    comboView->addItem(canvas->getName(), QVariant::fromValue<CCanvas*>(canvas));
   }
 
   if (!current.isEmpty()) {

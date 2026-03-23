@@ -73,9 +73,9 @@ class CMainWindow : public QMainWindow, private Ui::IMainWindow {
 
   virtual ~CMainWindow();
 
-  void addMapList(CMapList* list, const QString& name);
-  void addDemList(CDemList* list, const QString& name);
-  void addPoiList(CPoiList* list, const QString& name);
+  void addMapList(CMapList* list);
+  void addDemList(CDemList* list);
+  void addPoiList(CPoiList* list);
   void addWidgetToTab(QWidget* w);
 
   bool isScaleVisible() const;
@@ -201,7 +201,7 @@ class CMainWindow : public QMainWindow, private Ui::IMainWindow {
   void displayFullscreen();
   CCanvas* createCanvas(const QString& name);
   void setupHomePath();
-  CCanvas* addCanvas(const QString& name);
+  CCanvas* addCanvas(const QString& key);
 
   static CMainWindow* pSelf;
   static QDir homeDir;

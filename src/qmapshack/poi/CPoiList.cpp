@@ -23,7 +23,7 @@
 #include "poi/CPoiDraw.h"
 #include "poi/CPoiFileItem.h"
 
-CPoiList::CPoiList(QWidget* parent) : QWidget(parent) {
+CPoiList::CPoiList(CCanvas* parent) : QWidget(parent), canvas(parent) {
   setupUi(this);
 
   connect(treeWidget, &CPoiTreeWidget::customContextMenuRequested, this, &CPoiList::slotContextMenu);
@@ -38,6 +38,29 @@ CPoiList::CPoiList(QWidget* parent) : QWidget(parent) {
   menu->addSeparator();
   menu->addAction(actionReloadPoi);
   menu->addAction(CMainWindow::self().getPoiSetupAction());
+}
+
+QString CPoiList::getCanvasKey() const {
+  if (canvas) {
+    return canvas->getKey();
+  }
+  return "";
+}
+
+void CPoiList::addToTabWidget(QTabWidget* widget) {
+  if (canvas == nullptr) {
+    return;
+  }
+  tabWidget = widget;
+  tabWidget->addTab(this, canvas->getName());
+
+  // Those two connection only live as long as tabWidget or canvas.
+  // Therefore we do not need to check for valid pointers inside the lambdas
+  connect(canvas, &CCanvas::sigCanvasIsCurrent, tabWidget, [this]() { tabWidget->setCurrentWidget(this); });
+  connect(canvas, &CCanvas::sigNameChanged, tabWidget, [this](const CCanvas& c) {
+    const int idx = tabWidget->indexOf(this);
+    tabWidget->setTabText(idx, c.getName());
+  });
 }
 
 void CPoiList::clear() { treeWidget->clear(); }

@@ -69,23 +69,58 @@ inline QSize getTrackProfileSize(int height) {
                       : QSize(WIDTH_PROFILE_SMALL, HEIGHT_PROFILE_SMALL);
 }
 
-CCanvas::CCanvas(QWidget* parent, const QString& name) : QWidget(parent) {
-  setFocusPolicy(Qt::WheelFocus);
+QString CCanvas::generateKey(int count) {
+  uint64_t microseconds =
+      std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::system_clock::now().time_since_epoch())
+          .count();
+  const QString& tmp = QString("%1_%2").arg(count).arg(microseconds);
+  QCryptographicHash md5(QCryptographicHash::Md5);
+  md5.addData(tmp.toLatin1());
+  return "key_" + md5.result().toHex();
+}
 
-  if (name.isEmpty()) {
-    for (int count = 1;; ++count) {
-      QString name = tr("View %1").arg(count);
-      if (nullptr == CMainWindow::self().findChild<CCanvas*>(name)) {
-        setObjectName(name);
+bool checkOtherCanvasForName(const QString& name) {
+  const auto& children = CMainWindow::self().findChildren<CCanvas*>();
+  bool found = false;
+  for (const auto& child : children) {
+    if (child->getName() == name) {
+      found = true;
+      break;
+    }
+  }
+  return found;
+}
+
+CCanvas::CCanvas(QWidget* parent, const QString& storedKey) : QWidget(parent) {
+  static int count = 0;
+  count++;
+
+  if (storedKey.isEmpty()) {
+    // new canvas
+    // generate unique default name
+    for (int n = 1;; ++n) {
+      const QString& name = tr("View %1").arg(n);
+      if (checkOtherCanvasForName(name) == false) {
+        setName(name);
         break;
       }
     }
+    // generate unique key
+    _key = generateKey(count);
+  } else if (!storedKey.startsWith("key_")) {
+    // backward compatibility, the storedKey is the name
+    setName(storedKey);
+    // generate unique key
+    _key = generateKey(count);
   } else {
-    setObjectName(name);
+    // stored canvas with a valid key
+    _key = storedKey;
+    // name will be updated by config file
   }
+  setObjectName(_key);
 
+  setFocusPolicy(Qt::WheelFocus);
   setMouseTracking(true);
-
   grabGesture(Qt::PinchGesture);
 
   map = new CMapDraw(this);
@@ -392,6 +427,7 @@ void CCanvas::saveConfig(QSettings& cfg) {
   cfg.setValue("proj", map->getProjection());
   cfg.setValue("scales", map->getScalesType());
   cfg.setValue("backColor", backColor.name());
+  cfg.setValue("name", getName());
 }
 
 void CCanvas::loadConfig(QSettings& cfg) {
@@ -401,6 +437,7 @@ void CCanvas::loadConfig(QSettings& cfg) {
 
   const QString& backColorStr = cfg.value("backColor", "#FFFFBF").toString();
   backColor = QColor(backColorStr);
+  setName(cfg.value("name", getName()).toString());
 
   map->loadConfig(cfg);
   poi->loadConfig(cfg);
@@ -411,6 +448,11 @@ void CCanvas::loadConfig(QSettings& cfg) {
   for (IDrawContext* context : allContext) {
     context->zoom(map->zoom());
   }
+}
+
+void CCanvas::setName(const QString& newName) {
+  _name = newName;
+  emit sigNameChanged(*this);
 }
 
 void CCanvas::setMap(const QString& filename) { map->buildMapList(filename); }

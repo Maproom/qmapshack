@@ -51,6 +51,7 @@ void CDemTreeWidget::dragEnterEvent(QDragEnterEvent* e) {
   }
   QTreeWidget::dragEnterEvent(e);
 }
+
 void CDemTreeWidget::dragLeaveEvent(QDragLeaveEvent* e) {
   CDemItem* item = dynamic_cast<CDemItem*>(currentItem());
   if (item) {
@@ -81,7 +82,7 @@ void CDemTreeWidget::dropEvent(QDropEvent* e) {
   emit sigChanged();
 }
 
-CDemList::CDemList(QWidget* parent) : QWidget(parent) {
+CDemList::CDemList(CCanvas* parent) : QWidget(parent), canvas(parent) {
   setupUi(this);
   lineFilter->addAction(actionClearFilter, QLineEdit::TrailingPosition);
 
@@ -106,6 +107,29 @@ CDemList::CDemList(QWidget* parent) : QWidget(parent) {
 }
 
 CDemList::~CDemList() {}
+
+QString CDemList::getCanvasKey() const {
+  if (canvas) {
+    return canvas->getKey();
+  }
+  return "";
+}
+
+void CDemList::addToTabWidget(QTabWidget* widget) {
+  if (canvas == nullptr) {
+    return;
+  }
+  tabWidget = widget;
+  tabWidget->addTab(this, canvas->getName());
+
+  // Those two connection only live as long as tabWidget or canvas.
+  // Therefore we do not need to check for valid pointers inside the lambdas
+  connect(canvas, &CCanvas::sigCanvasIsCurrent, tabWidget, [this]() { tabWidget->setCurrentWidget(this); });
+  connect(canvas, &CCanvas::sigNameChanged, tabWidget, [this](const CCanvas& c) {
+    const int idx = tabWidget->indexOf(this);
+    tabWidget->setTabText(idx, c.getName());
+  });
+}
 
 void CDemList::addDem(CDemItem* dem) {
   treeWidget->addTopLevelItem(dem);

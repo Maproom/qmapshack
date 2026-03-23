@@ -71,6 +71,7 @@
 #include "version.h"
 
 #ifdef Q_OS_WIN64
+// clang-format off
 #include <windows.h>
 #include <dbt.h>
 #include <guiddef.h>
@@ -78,6 +79,7 @@
 #include <usbiodef.h>
 
 #include "device/CDeviceWatcherWindows.h"
+// clang-format on
 #endif  // Q_OS_WIN64
 
 CMainWindow* CMainWindow::pSelf = nullptr;
@@ -226,15 +228,13 @@ CMainWindow::CMainWindow() : id(QRandomGenerator::global()->generate()) {
   connect(actionRenameView, &QAction::triggered, this, &CMainWindow::slotRenameView);
   connect(tabWidget, &QTabWidget::tabCloseRequested, this, &CMainWindow::slotTabCloseRequest);
   connect(tabWidget, &QTabWidget::tabBarDoubleClicked, this, &CMainWindow::slotRenameView);
-  connect(tabWidget, &QTabWidget::currentChanged, this, &CMainWindow::slotCurrentTabCanvas);
-  connect(tabMaps, &QTabWidget::currentChanged, this, &CMainWindow::slotCurrentTabMaps);
-  connect(tabDem, &QTabWidget::currentChanged, this, &CMainWindow::slotCurrentTabDem);
-  connect(tabWidget, &QTabWidget::currentChanged, this, &CMainWindow::slotCurrentTabCanvas);
 
   // to keep tab order in sync with map, dem and poi tab widgets
+  connect(tabWidget, &QTabWidget::currentChanged, this, &CMainWindow::slotCurrentTabCanvas);
   connect(tabMaps, &QTabWidget::currentChanged, this, &CMainWindow::slotCurrentTabMaps);
   connect(tabDem, &QTabWidget::currentChanged, this, &CMainWindow::slotCurrentTabDem);
   connect(tabPoi, &QTabWidget::currentChanged, this, &CMainWindow::slotCurrentTabPoi);
+
   connect(tabWidget->tabBar(), &QTabBar::tabMoved, this, [this](int from, int to) {
     tabMaps->tabBar()->moveTab(from, to);
     tabDem->tabBar()->moveTab(from, to);
@@ -250,23 +250,22 @@ CMainWindow::CMainWindow() : id(QRandomGenerator::global()->generate()) {
   CDemDraw::loadDemPath(cfg);
   CPoiDraw::loadPoiPath(cfg);
 
-  QStringList names = cfg.value("canvasOrder").toStringList();
+  QStringList keys = cfg.value("canvasOrder").toStringList();
 
   cfg.beginGroup("Views");
-  if (names.isEmpty()) {
-    names = cfg.childGroups();
+  if (keys.isEmpty()) {
+    keys = cfg.childGroups();
   }
 
-  for (const QString& name : names) {
-    CCanvas* view = createCanvas(name);
-
-    cfg.beginGroup(name);
+  for (const QString& key : keys) {
+    CCanvas* view = createCanvas(key);
+    cfg.beginGroup(key);
     view->loadConfig(cfg);
-    cfg.endGroup();  // name
+    cfg.endGroup();  // key
   }
-  if (names.isEmpty()) {
+  if (keys.isEmpty()) {
     // keep for new installations without config
-    CCanvas* view = createCanvas(QString());
+    CCanvas* view = createCanvas("");
     // call just to setup default values
     cfg.beginGroup(view->objectName());
     view->loadConfig(cfg);
@@ -536,7 +535,7 @@ CMainWindow::~CMainWindow() {
   cfg.beginGroup("Canvas");
   QList<CCanvas*> allViews;
   QList<QWidget*> allOtherTabs;
-  QStringList allViewNames;
+  QStringList allViewKeys;
 
   // save setup of all views
   cfg.beginGroup("Views");
@@ -553,8 +552,8 @@ CMainWindow::~CMainWindow() {
     }
 
     // save views
-    allViewNames << view->objectName();
-    cfg.beginGroup(view->objectName());
+    allViewKeys << view->getKey();
+    cfg.beginGroup(view->getKey());
     view->saveConfig(cfg);
     cfg.endGroup();
 
@@ -562,7 +561,7 @@ CMainWindow::~CMainWindow() {
   }
   cfg.endGroup();  // Views
 
-  cfg.setValue("canvasOrder", allViewNames);
+  cfg.setValue("canvasOrder", allViewKeys);
   cfg.setValue("gisLayerOpacity", CCanvas::gisLayerOpacity);
   cfg.setValue("visibleCanvas", tabWidget->currentIndex());
   cfg.setValue("isGeosearchVisible", actionGeoSearch->isChecked());
@@ -651,9 +650,9 @@ void CMainWindow::setupHomePath() {
   cfg.setValue("Paths/homePath", homeDir.absolutePath());
 }
 
-CCanvas* CMainWindow::createCanvas(const QString& name) {
-  CCanvas* view = new CCanvas(tabWidget, name);
-  tabWidget->addTab(view, view->objectName());
+CCanvas* CMainWindow::createCanvas(const QString& key) {
+  CCanvas* view = new CCanvas(tabWidget, key);
+  tabWidget->addTab(view, view->getName());
   connect(view, &CCanvas::sigMousePosition, this, &CMainWindow::slotMousePosition);
   connect(view, &CCanvas::sigMoveAndZoom, this, &CMainWindow::slotMapMoveAndZoom);
   connect(actionShowTrackHighlight, &QAction::changed, view, [view] { view->slotUpdateTrackInfo(false); });
@@ -662,6 +661,11 @@ CCanvas* CMainWindow::createCanvas(const QString& name) {
   connect(actionShowTrackInfoPoints, &QAction::changed, view, [view] { view->slotUpdateTrackInfo(true); });
   connect(actionShowTrackSummary, &QAction::changed, view, [view] { view->slotUpdateTrackInfo(false); });
   connect(actionShowTrackProfile, &QAction::changed, view, [view] { view->slotUpdateTrackInfo(false); });
+
+  connect(view, &CCanvas::sigNameChanged, this, [this](const CCanvas& canvas) {
+    int idx = tabWidget->indexOf(&canvas);
+    tabWidget->setTabText(idx, canvas.getName());
+  });
 
   return view;
 }
@@ -728,11 +732,11 @@ bool CMainWindow::flipMouseWheel() const { return actionFlipMouseWheel->isChecke
 
 bool CMainWindow::profileIsWindow() const { return actionProfileIsWindow->isChecked(); }
 
-void CMainWindow::addMapList(CMapList* list, const QString& name) { tabMaps->addTab(list, name); }
+void CMainWindow::addMapList(CMapList* list) { list->addToTabWidget(tabMaps); }
 
-void CMainWindow::addDemList(CDemList* list, const QString& name) { tabDem->addTab(list, name); }
+void CMainWindow::addDemList(CDemList* list) { list->addToTabWidget(tabDem); }
 
-void CMainWindow::addPoiList(CPoiList* list, const QString& name) { tabPoi->addTab(list, name); }
+void CMainWindow::addPoiList(CPoiList* list) { list->addToTabWidget(tabPoi); }
 
 void CMainWindow::addWidgetToTab(QWidget* w) {
   if (tabWidget->indexOf(w) == NOIDX) {
@@ -882,8 +886,8 @@ void CMainWindow::slotQuickstart() {
   }
 }
 
-CCanvas* CMainWindow::addCanvas(const QString& name) {
-  CCanvas* canvas = createCanvas(name);
+CCanvas* CMainWindow::addCanvas(const QString& key) {
+  CCanvas* canvas = createCanvas(key);
   tabWidget->setCurrentWidget(canvas);
   testForNoView();
   emit sigCanvasChange();
@@ -954,33 +958,23 @@ void CMainWindow::slotTabCloseRequest(int i) {
   emit sigCanvasChange();
 }
 
-static inline bool compareNames(QString s1, QString s2) { return s1.replace("&", "") == s2.replace("&", ""); }
-
 void CMainWindow::slotCurrentTabCanvas(int i) {
-  QString name = tabWidget->tabText(i);
-  for (int n = 0; n < tabMaps->count(); n++) {
-    bool isMapView = compareNames(name, tabMaps->tabText(n));
+  CCanvas* canvas = dynamic_cast<CCanvas*>(tabWidget->widget(i));
+  if (canvas == nullptr) {
+    return;
+  }
+  emit canvas->sigCanvasIsCurrent();
 
+  for (int n = 0; n < tabMaps->count(); n++) {
+    CMapList* mapList = dynamic_cast<CMapList*>(tabMaps->widget(n));
+    if (mapList == nullptr) {
+      continue;
+    }
+    bool isMapView = canvas->getKey() == mapList->getCanvasKey();
     actionSetupGrid->setEnabled(isMapView);
     actionSetupMapBackground->setEnabled(isMapView);
     actionSetupMapView->setEnabled(isMapView);
-
     if (isMapView) {
-      tabMaps->setCurrentIndex(n);
-      break;
-    }
-  }
-
-  for (int n = 0; n < tabDem->count(); n++) {
-    if (compareNames(name, tabDem->tabText(n))) {
-      tabDem->setCurrentIndex(n);
-      break;
-    }
-  }
-
-  for (int n = 0; n < tabPoi->count(); n++) {
-    if (compareNames(name, tabPoi->tabText(n))) {
-      tabPoi->setCurrentIndex(n);
       break;
     }
   }
@@ -999,51 +993,54 @@ void CMainWindow::slotCurrentTabCanvas(int i) {
 }
 
 void CMainWindow::slotCurrentTabMaps(int i) {
-  QString name = tabMaps->tabText(i);
-  for (int n = 0; n < tabWidget->count(); n++) {
-    if (compareNames(name, tabWidget->tabText(n))) {
-      tabWidget->setCurrentIndex(n);
-      break;
-    }
+  CMapList* list = dynamic_cast<CMapList*>(tabMaps->widget(i));
+  if (list == nullptr) {
+    return;
   }
 
-  for (int n = 0; n < tabDem->count(); n++) {
-    if (compareNames(name, tabDem->tabText(n))) {
-      tabDem->setCurrentIndex(n);
+  for (int n = 0; n < tabWidget->count(); n++) {
+    CCanvas* canvas = dynamic_cast<CCanvas*>(tabWidget->widget(n));
+    if (canvas == nullptr) {
+      continue;
+    }
+    if (list->getCanvasKey() == canvas->getKey()) {
+      tabWidget->setCurrentIndex(n);
       break;
     }
   }
 }
 
 void CMainWindow::slotCurrentTabDem(int i) {
-  QString name = tabMaps->tabText(i);
-  for (int n = 0; n < tabWidget->count(); n++) {
-    if (compareNames(name, tabWidget->tabText(n))) {
-      tabWidget->setCurrentIndex(n);
-      break;
-    }
+  CDemList* list = dynamic_cast<CDemList*>(tabDem->widget(i));
+  if (list == nullptr) {
+    return;
   }
 
-  for (int n = 0; n < tabMaps->count(); n++) {
-    if (compareNames(name, tabMaps->tabText(n))) {
-      tabMaps->setCurrentIndex(n);
+  for (int n = 0; n < tabWidget->count(); n++) {
+    CCanvas* canvas = dynamic_cast<CCanvas*>(tabWidget->widget(n));
+    if (canvas == nullptr) {
+      continue;
+    }
+    if (list->getCanvasKey() == canvas->getKey()) {
+      tabWidget->setCurrentIndex(n);
       break;
     }
   }
 }
 
 void CMainWindow::slotCurrentTabPoi(int i) {
-  QString name = tabPoi->tabText(i);
-  for (int n = 0; n < tabWidget->count(); n++) {
-    if (compareNames(name, tabWidget->tabText(n))) {
-      tabWidget->setCurrentIndex(n);
-      break;
-    }
+  CPoiList* list = dynamic_cast<CPoiList*>(tabPoi->widget(i));
+  if (list == nullptr) {
+    return;
   }
 
-  for (int n = 0; n < tabPoi->count(); n++) {
-    if (compareNames(name, tabPoi->tabText(n))) {
-      tabMaps->setCurrentIndex(n);
+  for (int n = 0; n < tabWidget->count(); n++) {
+    CCanvas* canvas = dynamic_cast<CCanvas*>(tabWidget->widget(n));
+    if (canvas == nullptr) {
+      continue;
+    }
+    if (list->getCanvasKey() == canvas->getKey()) {
+      tabWidget->setCurrentIndex(n);
       break;
     }
   }
@@ -1252,7 +1249,7 @@ void CMainWindow::slotStoreView() {
   view.clear();
 
   canvas->saveConfig(view);
-  view.setValue("name", canvas->objectName());
+  view.setValue("key", canvas->objectName());
 
   path = fi.absolutePath();
   cfg.setValue("Paths/lastViewPath", path);
@@ -1266,16 +1263,30 @@ void CMainWindow::slotLoadView() {
   if (filename.isEmpty()) {
     return;
   }
-  QSettings view(filename, QSettings::IniFormat);
 
-  const QString& name = view.value("name", QString()).toString();
-  CCanvas* canvas = addCanvas(name);
+  QSettings view(filename, QSettings::IniFormat);
+  const QString& key = view.value("key", QString()).toString();
+
+  // check of view is already loaded.
+  for (int i = 0; i < tabWidget->count(); i++) {
+    CCanvas* canvas = dynamic_cast<CCanvas*>(tabWidget->widget(i));
+    if (canvas && canvas->getKey() == key) {
+      QMessageBox::information(
+          this, tr("Can not add view..."),
+          tr("The view is already loaded as '%1'. You have to close it befor loading it again.").arg(canvas->getName()),
+          QMessageBox::Abort);
+      return;
+    }
+  }
+
+  // view is unique, add it
+  CCanvas* canvas = addCanvas(key);
   if (nullptr == canvas) {
     return;
   }
-
   canvas->loadConfig(view);
 
+  // save new view in main config.
   cfg.beginGroup("Canvas");
   cfg.beginGroup("Views");
   cfg.beginGroup(canvas->objectName());
@@ -1284,6 +1295,7 @@ void CMainWindow::slotLoadView() {
   cfg.endGroup();  // "Views"
   cfg.endGroup();  // "Canvas"
 
+  // remember path of loaded view as last view's path
   QFileInfo fi(filename);
   path = fi.absolutePath();
   cfg.setValue("Paths/lastViewPath", path);
@@ -1457,17 +1469,16 @@ void CMainWindow::slotStartQMapTool() { QProcess::startDetached("qmaptool", {});
 void CMainWindow::slotGeoSearchConfigChanged() { actionGeoSearch->setIcon(geoSearchConfig->getCurrentIcon()); }
 
 void CMainWindow::slotRenameView() {
-  int idx = tabWidget->currentIndex();
-  QString name = tabWidget->tabText(idx);
+  CCanvas* canvas = dynamic_cast<CCanvas*>(tabWidget->currentWidget());
+  if (canvas == nullptr) {
+    return;
+  }
+  QString name = canvas->getName();
   name = QInputDialog::getText(this, tr("Rename View..."), tr("Enter new name for view"), QLineEdit::Normal, name);
   if (name.isEmpty()) {
     return;
   }
-  tabWidget->widget(idx)->setObjectName(name);
-  tabWidget->setTabText(idx, name);
-  tabMaps->setTabText(idx, name);
-  tabDem->setTabText(idx, name);
-  tabPoi->setTabText(idx, name);
+  canvas->setName(name);
 }
 
 void CMainWindow::displayRegular() {

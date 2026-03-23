@@ -34,7 +34,7 @@ QStringList CPoiDraw::supportedFormats = QString("*.poi").split('|');
 
 CPoiDraw::CPoiDraw(CCanvas* canvas) : IDrawContext("poi", CCanvas::eRedrawPoi, canvas) {
   poiList = new CPoiList(canvas);
-  CMainWindow::self().addPoiList(poiList, canvas->objectName());
+  CMainWindow::self().addPoiList(poiList);
   connect(canvas, &CCanvas::destroyed, poiList, &CPoiList::deleteLater);
   connect(poiList, &CPoiList::sigChanged, this, &CPoiDraw::emitSigCanvasUpdate);
 

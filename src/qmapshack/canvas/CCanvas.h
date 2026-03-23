@@ -56,7 +56,7 @@ class CTableTrkInfo;
 class CCanvas : public QWidget {
   Q_OBJECT
  public:
-  CCanvas(QWidget* parent, const QString& name);
+  CCanvas(QWidget* parent, const QString& storedKey);
   virtual ~CCanvas();
 
   static void setOverrideCursor(const QCursor& cursor, const QString& src);
@@ -81,6 +81,10 @@ class CCanvas : public QWidget {
 
   void setScales(const scales_type_e type);
   scales_type_e getScalesType();
+
+  const QString& getKey() const { return _key; }
+  const QString& getName() const { return _name; }
+  void setName(const QString& newName);
 
   qreal getElevationAt(const QPointF& pos, bool checkScale) const;
   void getElevationAt(const QPolygonF& pos, QPolygonF& ele) const;
@@ -190,6 +194,8 @@ class CCanvas : public QWidget {
   void sigZoom();
   void sigMove();
   void sigResize(const QSize& size);
+  void sigNameChanged(const CCanvas& self);
+  void sigCanvasIsCurrent();
 
  public slots:
   void slotTriggerCompleteUpdate(CCanvas::redraw_e flags);
@@ -214,6 +220,7 @@ class CCanvas : public QWidget {
   void slotToolTip();
 
  private:
+  static QString generateKey(int count);
   void drawStatusMessages(QPainter& p);
   void drawTrackStatistic(QPainter& p);
   void drawScale(QPainter& p, QRectF drawRect);
@@ -239,6 +246,11 @@ class CCanvas : public QWidget {
   bool isShowTrackInfoPoints() const;
   bool isShowTrackProfile() const;
   bool isShowTrackHighlight() const;
+
+  // only change in ctor
+  QString _key;
+  // only change via setName()
+  QString _name;
 
   bool showTrackOverlays = true;
 

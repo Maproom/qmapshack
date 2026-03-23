@@ -55,30 +55,19 @@ function buildRoutino {
 
 function adjustLinking {
     echo "${GREEN}Adjust Routino linking libs ...${NC}"
-
     install_name_tool -id $ROUTINO_LIB_DIR/libroutino.dylib $ROUTINO_LIB_DIR/libroutino.dylib    
-    install_name_tool -id $ROUTINO_LIB_DIR/routino.dylib    $ROUTINO_LIB_DIR/routino.dylib    
-    install_name_tool -id $ROUTINO_LIB_DIR/routino.a        $ROUTINO_LIB_DIR/routino.a
-    install_name_tool -id $ROUTINO_LIB_DIR/libroutino.a     $ROUTINO_LIB_DIR/libroutino.a
 }
 
 function copyRoutinoToInstallDir {
     echo "${GREEN}Copy Routino build files to install directory ...${NC}"
-    
-    
     mkdir -p $ROUTINO_SHARE_DIR
     cp -f $ROUTINO_SRC_DIR/src/libroutino.so.0.0.0       $ROUTINO_LIB_DIR/libroutino.dylib
     cp -f $ROUTINO_SRC_DIR/src/routino.h                 $ROUTINO_INCLUDE_DIR
-    cp -f $ROUTINO_SRC_DIR/xml/routino-profiles.xml       $ROUTINO_SHARE_DIR/profiles.xml
+    cp -f $ROUTINO_SRC_DIR/xml/routino-profiles.xml      $ROUTINO_SHARE_DIR/profiles.xml
     cp -f $ROUTINO_SRC_DIR/xml/routino-tagging.xml       $ROUTINO_SHARE_DIR/tagging.xml
     cp -f $ROUTINO_SRC_DIR/xml/routino-translations.xml  $ROUTINO_SHARE_DIR/translations.xml
     cp -f $ROUTINO_SRC_DIR/src/planetsplitter            $ROUTINO_BIN_DIR
     cp -f $ROUTINO_SRC_DIR/src/router                    $ROUTINO_BIN_DIR
-    
-    cp -f $ROUTINO_LIB_DIR/libroutino.dylib          $ROUTINO_LIB_DIR/routino
-    cp -f $ROUTINO_LIB_DIR/libroutino.dylib          $ROUTINO_LIB_DIR/routino.dylib   
-    cp -f $ROUTINO_LIB_DIR/libroutino.dylib          $ROUTINO_LIB_DIR/routino.a
-    cp -f $ROUTINO_LIB_DIR/libroutino.dylib          $ROUTINO_LIB_DIR/libroutino.a
 }
 
 checkoutRoutino

@@ -140,7 +140,7 @@ function copyQtTranslations {
 function qtDeploy {
     # -no-strip
     echo "MACdeployQT  $QT_DEV_PATH/ and  $BUILD_BUNDLE_DIR/"
-    $QT_DEV_PATH/bin/macdeployqt $BUILD_BUNDLE_DIR -always-overwrite -verbose=3
+    $QT_DEV_PATH/bin/macdeployqt $BUILD_BUNDLE_DIR -always-overwrite -verbose=2
 }
 
 
@@ -252,6 +252,7 @@ function adjustLinkDyLib {
              ;;
 
            # 2. adjust rpath libraries that are known to cause problems
+           #    @rpath/libproj.25.dylib referenced by libgdal*.dylib
            @rpath/libproj.25.dylib)
              echo "Fixing libproj @rpath in $F"
              sudo install_name_tool -change @rpath/libproj.25.dylib \

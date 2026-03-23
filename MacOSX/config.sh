@@ -175,7 +175,7 @@ else
         export GDAL=$PACKAGES_PATH
     fi
     if [ "$BUILD_PROJ" = "x" ]; then
-        export PROJ_RELEASE="9.7.1"
+        export PROJ_RELEASE="9.8.0"
         export PROJ_DATA_RELEASE="1.24"
         export PROJ_DEV_PATH=$LOCAL_ENV
     else

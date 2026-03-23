@@ -21,6 +21,7 @@
 
 #include "setup/CAppSetupMac.h"
 
+#include <QFont>
 #include <QWindow>
 
 #include "signal.h"
@@ -65,14 +66,23 @@ void CAppSetupMac::initQMapShack() {
   prepareTranslator(translationPath, "qmapshack_");
 
   // load and apply style sheet
-  QApplication* app = (QApplication*)QCoreApplication::instance();
-
   const QString& fileName = QDir(getApplicationDir("Resources")).absoluteFilePath("qms-style.qss");
-  qDebug() << "Stylesheet" << fileName;
   QFile styleFile(fileName);
-  openFileCheckSuccess(QFile::ReadOnly, styleFile);
-  const QString& style(QLatin1String(styleFile.readAll()));
-  app->setStyleSheet(style);
+  if (styleFile.exists()) {
+    qDebug() << "Stylesheet" << fileName;
+    // override default application font
+    const QFont& font = qApp->font();
+    openFileCheckSuccess(QFile::ReadOnly, styleFile);
+    const QString& style = QLatin1String(styleFile.readAll())
+          % "* {"
+          % "font-family: \"" % font.family() % "\";"
+          % "font-size: " % QString::number(font.pointSizeF(), 'f', 3) % "pt;"
+          % "}";
+    qApp->setStyleSheet(style);
+    styleFile.close();
+  } else {
+    qDebug() << "Stylesheet" << fileName << "not found";
+  }
 
   // create directories
   IAppSetup::path(defaultCachePath(), 0, true, "CACHE");

@@ -82,7 +82,7 @@ void CMapTreeWidget::dropEvent(QDropEvent* e) {
   emit sigChanged();
 }
 
-CMapList::CMapList(QWidget* parent) : QWidget(parent) {
+CMapList::CMapList(CCanvas* parent) : QWidget(parent), canvas(parent) {
   setupUi(this);
   lineFilter->addAction(actionClearFilter, QLineEdit::TrailingPosition);
 
@@ -107,6 +107,29 @@ CMapList::CMapList(QWidget* parent) : QWidget(parent) {
 }
 
 CMapList::~CMapList() {}
+
+QString CMapList::getCanvasKey() const {
+  if (canvas) {
+    return canvas->getKey();
+  }
+  return "";
+}
+
+void CMapList::addToTabWidget(QTabWidget* widget) {
+  if (canvas == nullptr) {
+    return;
+  }
+  tabWidget = widget;
+  tabWidget->addTab(this, canvas->getName());
+
+  // Those two connection only live as long as tabWidget or canvas.
+  // Therefore we do not need to check for valid pointers inside the lambdas
+  connect(canvas, &CCanvas::sigCanvasIsCurrent, tabWidget, [this]() { tabWidget->setCurrentWidget(this); });
+  connect(canvas, &CCanvas::sigNameChanged, tabWidget, [this](const CCanvas& c) {
+    const int idx = tabWidget->indexOf(this);
+    tabWidget->setTabText(idx, c.getName());
+  });
+}
 
 void CMapList::addMap(CMapItem* map) {
   treeWidget->addTopLevelItem(map);

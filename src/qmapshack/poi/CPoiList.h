@@ -19,9 +19,12 @@
 #ifndef CPOILIST_H
 #define CPOILIST_H
 
+#include <QPointer>
 #include <QTreeWidget>
 
 class CPoiFileItem;
+class CCanvas;
+class QTabWidget;
 
 class CPoiTreeWidget : public QTreeWidget {
   Q_OBJECT
@@ -37,8 +40,20 @@ class CPoiTreeWidget : public QTreeWidget {
 class CPoiList : public QWidget, private Ui::IPoiList {
   Q_OBJECT
  public:
-  CPoiList(QWidget* parent);
+  CPoiList(CCanvas* parent);
   virtual ~CPoiList() = default;
+
+  /**
+   * @brief Get the key of the canvas this list is attached to
+   * @return The key as string if a canvas is attached. If not, an empty string.
+   */
+  QString getCanvasKey() const;
+
+  /**
+   * @brief Add this map list to the given tab widget
+   * @param widget  add list to this tab widget
+   */
+  void addToTabWidget(QTabWidget* widget);
 
   void clear();
   int count();
@@ -58,6 +73,8 @@ class CPoiList : public QWidget, private Ui::IPoiList {
 
  private:
   QMenu* menu;
+  QPointer<CCanvas> canvas;
+  QPointer<QTabWidget> tabWidget;
 };
 
 #endif  // CPOILIST_H

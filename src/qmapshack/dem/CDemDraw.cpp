@@ -37,7 +37,7 @@ QStringList CDemDraw::supportedFormats = QString("*.vrt|*.wcs").split('|');
 
 CDemDraw::CDemDraw(CCanvas* canvas) : IDrawContext("dem", CCanvas::eRedrawDem, canvas) {
   demList = new CDemList(canvas);
-  CMainWindow::self().addDemList(demList, canvas->objectName());
+  CMainWindow::self().addDemList(demList);
   connect(canvas, &CCanvas::destroyed, demList, &CDemList::deleteLater);
   connect(demList, &CDemList::sigChanged, this, &CDemDraw::slotChanged);
   dems << this;
@@ -207,7 +207,7 @@ void CDemDraw::loadDemList(QSettings& cfg) {
   // dem items.
   QList<CDemItem*> demsUnknown = demsFound.values();
   std::sort(demsUnknown.begin(), demsUnknown.end(), &sortByName<CDemItem>);
-  for (CDemItem* dem : demsUnknown) {    
+  for (CDemItem* dem : demsUnknown) {
     demList->addDem(dem);
     dem->setStatus(IMapItem::eStatus::Unused);
   }

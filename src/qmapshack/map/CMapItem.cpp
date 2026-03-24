@@ -232,7 +232,7 @@ bool CMapItem::activate() {
     return false;
   }
 
-  setToolTip(0, mapfile->getCopyright());
+  IMapItem::toolTip = mapfile->getCopyright();
 
   // setup map with settings stored in
   // the shadow config

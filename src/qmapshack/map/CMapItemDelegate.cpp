@@ -361,8 +361,15 @@ bool CMapItemDelegate::helpEvent(QHelpEvent* event, QAbstractItemView* view, con
   } else if (rectName.contains(event->pos())) {
     const QFontMetrics fm(fontName);
     const QRect& boundingRectName = fm.boundingRect(item->getName());
+    QString toolTip;
     if (boundingRectName.width() > rectName.width()) {
-      QToolTip::showText(event->globalPos(), item->getName(), view, {}, 3000);
+      toolTip = QString("<p>%1</p>").arg(item->getName());
+    }
+    if (!item->getToolTip().isEmpty()) {
+      toolTip += QString("<p>%1</p>").arg(item->getToolTip());
+    }
+    if (!toolTip.isEmpty()) {
+      QToolTip::showText(event->globalPos(), toolTip, view, {}, 5000);
     }
   }
 

@@ -41,7 +41,14 @@ class IMapItem {
    * @brief Get the map's name as displayed
    * @return
    */
-  QString getName() const { return name; };
+  const QString& getName() const { return name; };
+
+  /**
+   * @brief Get a tool tip text for the map
+   *
+   * @return Some string or empty string
+   */
+  const QString& getToolTip() const { return toolTip; }
 
   /**
    * @brief Activate or deactivate map
@@ -78,6 +85,11 @@ class IMapItem {
    * @brief Name as displayed in the tree widget
    */
   QString name;
+
+  /**
+   * @brief Tool tip to be displayed in the tree widget
+   */
+  QString toolTip;
 
   static constexpr Qt::GlobalColor kColorOut = Qt::lightGray;
   static constexpr Qt::GlobalColor kColorIn = Qt::darkGreen;

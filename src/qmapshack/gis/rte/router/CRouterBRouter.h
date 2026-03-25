@@ -55,7 +55,6 @@ class CRouterBRouter : public IRouter, private Ui::IRouterBRouter {
 
  private slots:
   void slotVersionChanged();
-  void slotRequestFinished(QNetworkReply* reply);
   void slotCloseStatusMsg() const;
   void slotToolProfileInfoClicked() const;
   void slotDisplayError(const QString& error, const QString& details) const;
@@ -78,7 +77,7 @@ class CRouterBRouter : public IRouter, private Ui::IRouterBRouter {
 
   QNetworkAccessManager* networkAccessManager;
   QTimer* timerCloseStatusMsg;
-  bool synchronous = false;
+
   QMutex mutex;
   CRouterBRouterSetup* setup;
   CRouterSetup* routerSetup;

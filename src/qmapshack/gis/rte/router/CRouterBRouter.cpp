@@ -56,7 +56,6 @@ CRouterBRouter::CRouterBRouter(QWidget* parent) : IRouter(false, parent) {
   comboAlternative->addItem(tr("third alternative"), "3");
 
   networkAccessManager = new QNetworkAccessManager(this);
-  connect(networkAccessManager, &QNetworkAccessManager::finished, this, &CRouterBRouter::slotRequestFinished);
   connect(setup, &CRouterBRouterSetup::sigVersionChanged, this, &CRouterBRouter::slotVersionChanged);
 
   timerCloseStatusMsg = new QTimer(this);
@@ -295,29 +294,37 @@ int CRouterBRouter::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& c
 
 int CRouterBRouter::synchronousRequest(const QVector<QPointF>& points, const QList<IGisItem*>& nogos, QPolygonF& coords,
                                        qreal* costs = nullptr) {
+  qDebug() << "synchronousRequest";
   if (!mutex.tryLock()) {
+    qDebug() << "synchronousRequest failed to lock";
     // skip further on-the-fly-requests as long a previous request is still running
     return -1;
   }
+
+  qDebug() << "synchronousRequest lock";
 
   if (setup->installMode == CRouterBRouterSetup::eModeLocal && localBRouter->isBRouterNotRunning()) {
     localBRouter->startBRouter();
   }
 
-  synchronous = true;
-
-  QNetworkReply* reply = networkAccessManager->get(getRequest(points, nogos));
-
   try {
+    QNetworkReply* reply = networkAccessManager->get(getRequest(points, nogos));
+
+    auto guard = QScopeGuard([this, reply]() {
+      reply->deleteLater();
+      mutex.unlock();
+    });
+
     reply->setProperty("options", getOptions());
     reply->setProperty("time", QDateTime::currentDateTimeUtc().toMSecsSinceEpoch());
 
-    CProgressDialog progress(tr("Calculate route with %1").arg(getOptions()), 0, NOINT, nullptr);
-
+    CProgressDialog* progress = new CProgressDialog(tr("Calculate route with %1").arg(getOptions()), 0, NOINT, nullptr);
     QEventLoop eventLoop;
-    connect(&progress, &CProgressDialog::rejected, reply, &QNetworkReply::abort);
+    connect(progress, &CProgressDialog::rejected, reply, &QNetworkReply::abort);
+    connect(progress, &CProgressDialog::rejected, &eventLoop, &QEventLoop::quit);
     connect(reply, &QNetworkReply::finished, &eventLoop, &QEventLoop::quit);
-    eventLoop.exec(QEventLoop::AllEvents);
+    eventLoop.exec();
+    progress->deleteLater();
 
     const QNetworkReply::NetworkError& netErr = reply->error();
     if (netErr == QNetworkReply::RemoteHostClosedError && nogos.size() > 1 && !isMinimumVersion(1, 4, 10)) {
@@ -334,9 +341,12 @@ int CRouterBRouter::synchronousRequest(const QVector<QPointF>& points, const QLi
     }
 
     QDomDocument xml;
-    xml.setContent(res);
-    const QDomElement& xmlGpx = xml.documentElement();
+    const QDomDocument::ParseResult& xmlRes = xml.setContent(res);
+    if (!xmlRes) {
+      throw tr("Failed to parse BRouter response (line %1): %2").arg(xmlRes.errorLine).arg(xmlRes.errorMessage);
+    }
 
+    const QDomElement& xmlGpx = xml.documentElement();
     if (xmlGpx.isNull() || xmlGpx.tagName() != "gpx") {
       throw QString(res.data());
     }
@@ -372,26 +382,23 @@ int CRouterBRouter::synchronousRequest(const QVector<QPointF>& points, const QLi
   } catch (const QString& msg) {
     coords.clear();
     if (!msg.isEmpty()) {
-      reply->deleteLater();
-      mutex.unlock();
       throw tr("Bad response from server: %1").arg(msg);
     }
   }
 
-  reply->deleteLater();
   slotCloseStatusMsg();
-  mutex.unlock();
   return coords.size();
 }
 
 void CRouterBRouter::calcRoute(const IGisItem::key_t& key) {
-  mutex.lock();
+  QMutexLocker lock(&mutex);
+
   if (setup->installMode == CRouterBRouterSetup::eModeLocal && localBRouter->isBRouterNotRunning()) {
     localBRouter->startBRouter();
   }
+
   CGisItemRte* rte = dynamic_cast<CGisItemRte*>(CGisWorkspace::self().getItemByKey(key));
   if (nullptr == rte) {
-    mutex.unlock();
     return;
   }
 
@@ -407,9 +414,8 @@ void CRouterBRouter::calcRoute(const IGisItem::key_t& key) {
     points << QPointF(pt.lon, pt.lat);
   }
 
-  synchronous = false;
-
   QNetworkReply* reply = networkAccessManager->get(getRequest(points, nogos));
+  auto guard = qScopeGuard([reply]() { reply->deleteLater(); });
 
   reply->setProperty("key.item", key.item);
   reply->setProperty("key.project", key.project);
@@ -423,17 +429,13 @@ void CRouterBRouter::calcRoute(const IGisItem::key_t& key) {
     canvas->reportStatus("BRouter", tr("<b>BRouter</b><br/>Routing request sent to server. Please wait..."));
   }
 
-  progress = new CProgressDialog(tr("Calculate route with %1").arg(getOptions()), 0, NOINT, this);
-
+  QEventLoop eventLoop;
+  CProgressDialog* progress = new CProgressDialog(tr("Calculate route with %1").arg(getOptions()), 0, NOINT, this);
   connect(progress, &CProgressDialog::rejected, reply, &QNetworkReply::abort);
-}
-
-void CRouterBRouter::slotRequestFinished(QNetworkReply* reply) {
-  if (synchronous) {
-    return;
-  }
-
-  delete progress;
+  connect(progress, &CProgressDialog::rejected, &eventLoop, &QEventLoop::quit);
+  connect(reply, &QNetworkReply::finished, &eventLoop, &QEventLoop::quit);
+  eventLoop.exec();
+  progress->deleteLater();
 
   try {
     const QNetworkReply::NetworkError& netErr = reply->error();
@@ -445,8 +447,6 @@ void CRouterBRouter::slotRequestFinished(QNetworkReply* reply) {
     }
 
     const QByteArray& res = reply->readAll();
-    reply->deleteLater();
-
     if (res.isEmpty()) {
       throw tr("response is empty");
     }
@@ -454,7 +454,11 @@ void CRouterBRouter::slotRequestFinished(QNetworkReply* reply) {
     slotClearError();
 
     QDomDocument xml;
-    xml.setContent(res);
+
+    const QDomDocument::ParseResult& xmlRes = xml.setContent(res);
+    if (!xmlRes) {
+      throw tr("Failed to parse BRouter response (line %1): %2").arg(xmlRes.errorLine).arg(xmlRes.errorMessage);
+    }
 
     const QDomElement& xmlGpx = xml.documentElement();
     if (xmlGpx.isNull() || xmlGpx.tagName() != "gpx") {
@@ -480,14 +484,11 @@ void CRouterBRouter::slotRequestFinished(QNetworkReply* reply) {
         canvas->reportStatus("BRouter", tr("<b>BRouter</b><br/>Bad response from server:<br/>%1").arg(msg));
       }
       timerCloseStatusMsg->start();
-      reply->deleteLater();
-      mutex.unlock();
       return;
     }
   }
 
   slotCloseStatusMsg();
-  mutex.unlock();
 }
 
 void CRouterBRouter::slotToggleConsole() const {

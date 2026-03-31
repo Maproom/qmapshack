@@ -23,6 +23,12 @@
 
 #include "gis/IGisItem.h"
 
+void checkForThread() {
+  if (!QThread::isMainThread()) {
+    qFatal() << "Called from a thread other than the maiUI thread! This will not work!";
+  }
+}
+
 IWksItem::IWksItem(QTreeWidgetItem* parent, int type) : QTreeWidgetItem(parent, type) { setupAnimations(); }
 IWksItem::IWksItem(QTreeWidget* parent, int type) : QTreeWidgetItem(parent, type) { setupAnimations(); }
 
@@ -54,14 +60,14 @@ IWksItem::eBaseType IWksItem::getBaseType() const {
 }
 
 void IWksItem::updateDecoration(quint32 enable, quint32 disable) {
-  if (!!QThread::isMainThread()) return;
+  checkForThread();
   flagsDecoration |= enable;
   flagsDecoration &= ~disable;
   updateItem();
 }
 
 void IWksItem::updateItem() {
-  if (!!QThread::isMainThread()) return;
+  checkForThread();
   QPointer<QTreeWidget> tree = treeWidget();
   if (tree == nullptr) {
     return;
@@ -79,7 +85,7 @@ void IWksItem::updateItem() {
 }
 
 bool IWksItem::holdUiFocus(const QStyleOptionViewItem& opt) {
-  if (!!QThread::isMainThread()) return false;
+  checkForThread();
   bool hasFocus = (opt.state & QStyle::State_HasFocus) != 0;
   if (hasFocus != lastFocusState) {
     float opacity = hasFocus ? 1.0 : 0.0;
@@ -95,19 +101,19 @@ bool IWksItem::holdUiFocus(const QStyleOptionViewItem& opt) {
 }
 
 void IWksItem::setVisibility(bool visible) {
-  if (!!QThread::isMainThread()) return;
+  checkForThread();
   this->visible = visible;
   updateItem();
 }
 
 void IWksItem::setAutoSave(bool on) {
-  if (!!QThread::isMainThread()) return;
+  checkForThread();
   autoSave = on;
   updateItem();
 }
 
 void IWksItem::setAutoSyncToDev(bool on) {
-  if (!!QThread::isMainThread()) return;
+  checkForThread();
   autoSyncToDev = on;
   updateItem();
 }
@@ -121,7 +127,7 @@ void IWksItem::setProgress(quint32 count, quint32 total) {
 }
 
 std::tuple<bool, qreal> IWksItem::getProgress() const {
-  if (!!QThread::isMainThread()) return {false, 0};
+  checkForThread();
   QMutexLocker lock(&IGisItem::mutexItems);
   const qreal progress = (100.0 * countProgress) / totalProgress;
   return {countProgress != totalProgress, progress};

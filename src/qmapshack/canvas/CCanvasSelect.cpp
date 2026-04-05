@@ -26,7 +26,7 @@ CCanvasSelect::CCanvasSelect(CCanvas*& canvas, QWidget* parent) : QDialog(parent
 
   const QList<CCanvas*>& allCanvas = CMainWindow::self().getCanvas();
   for (CCanvas* c : allCanvas) {
-    comboCanvas->addItem(c->objectName(), QVariant::fromValue<CCanvas*>(c));
+    comboCanvas->addItem(c->getName(), QVariant::fromValue<CCanvas*>(c));
   }
 }
 

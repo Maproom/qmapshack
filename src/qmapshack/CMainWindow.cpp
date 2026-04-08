@@ -907,7 +907,7 @@ void CMainWindow::slotCloneCanvas() {
 
   source->saveConfig(view);
 
-  CCanvas* canvas = addCanvas(source->objectName() + tr(" (Cloned)"));
+  CCanvas* canvas = addCanvas("");
   if (nullptr == canvas) {
     return;
   }
@@ -1273,7 +1273,7 @@ void CMainWindow::slotLoadView() {
     if (canvas && canvas->getKey() == key) {
       QMessageBox::information(
           this, tr("Can not add view..."),
-          tr("The view is already loaded as '%1'. You have to close it befor loading it again.").arg(canvas->getName()),
+          tr("The view is already loaded as '%1'. You have to close it before loading it again.").arg(canvas->getName()),
           QMessageBox::Abort);
       return;
     }

@@ -45,6 +45,7 @@ class CMainWindow : public QMainWindow, private Ui::IMainWindow {
   Q_OBJECT
  public:
   static CMainWindow& self() { return *pSelf; }
+  static bool isNull() { return pSelf == nullptr; }
 
   static QWidget* getBestWidgetForParent();
 

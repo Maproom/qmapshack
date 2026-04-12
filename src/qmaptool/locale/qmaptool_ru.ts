@@ -2,6 +2,45 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="ru_RU">
 <context>
+    <name>CAppSetupLinux</name>
+    <message>
+        <location filename="../setup/CAppSetupLinux.cpp" line="108"/>
+        <source>Fatal...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../setup/CAppSetupLinux.cpp" line="109"/>
+        <source>Failed to lock file&lt;br&gt;%1&lt;br&gt;%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CAppSetupMac</name>
+    <message>
+        <location filename="../setup/CAppSetupMac.cpp" line="171"/>
+        <source>Fatal...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../setup/CAppSetupMac.cpp" line="172"/>
+        <source>Failed to lock file&lt;br&gt;%1&lt;br&gt;%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CAppSetupWin</name>
+    <message>
+        <location filename="../setup/CAppSetupWin.cpp" line="120"/>
+        <source>Fatal...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../setup/CAppSetupWin.cpp" line="121"/>
+        <source>Failed to lock file&lt;br&gt;%1&lt;br&gt;%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CCanvas</name>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="80"/>

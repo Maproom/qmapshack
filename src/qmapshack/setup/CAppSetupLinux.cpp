@@ -21,10 +21,15 @@
 
 #include "setup/CAppSetupLinux.h"
 
+#include <QMessageBox>
 #include <QWindow>
 
-#include "signal.h"
-#include "unistd.h"
+#include <errno.h>
+#include <fcntl.h>
+#include <signal.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
 
 #include "config.h"
 #include "version.h"
@@ -85,6 +90,29 @@ void CAppSetupLinux::closeOnSIGTERM() {
   };
 
   signal(SIGTERM, handler);
+}
+
+bool CAppSetupLinux::setLock() {
+  const QString& fileName = userDataPath() % "/." % qApp->applicationName() % ".lock";
+  qDebug() << "Try to lock file" << fileName << "...";
+  int fd = open(QFile::encodeName(fileName).data(), O_CREAT|O_RDWR, S_IRWXU);
+  if (fd != -1) {
+    struct flock lock;
+    memset(&lock, 0, sizeof(struct flock));
+    lock.l_type = F_WRLCK;
+    lock.l_whence = SEEK_SET;
+    if (fcntl(fd, F_SETLK, &lock) == 0) {
+      qDebug() << "... Success";
+      return true;
+    } else if (errno == EACCES || errno == EAGAIN) {
+      qDebug().noquote() << "..." << strerror(errno);
+      close(fd);
+      return false;
+    }
+  }
+  QMessageBox::critical(nullptr, tr("Fatal..."), 
+     tr("Failed to lock file<br>%1<br>%2").arg(fileName, strerror(errno)));
+  exit(-1);
 }
 
 #endif // defined(Q_OS_LINUX)

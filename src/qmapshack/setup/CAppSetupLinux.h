@@ -24,6 +24,7 @@
 #include "setup/IAppSetup.h"
 
 class CAppSetupLinux : public IAppSetup {
+  Q_DECLARE_TR_FUNCTIONS(CAppSetupLinux)
  public:
   void initQMapShack() override;
   QString routinoPath(QString xmlFile) override;
@@ -32,6 +33,7 @@ class CAppSetupLinux : public IAppSetup {
   QString logDir() override;
   QString findExecutable(const QString& name) override { return QStandardPaths::findExecutable(name); }
   QString helpFile() override;
+  bool setLock() override;
 
  private:
   static void closeOnSIGTERM();

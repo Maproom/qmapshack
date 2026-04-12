@@ -21,28 +21,37 @@
 #include <QtNetwork>
 
 #include "CMainWindow.h"
+#include "setup/IAppSetup.h"
 
 CSingleInstanceProxy::CSingleInstanceProxy(const QStringList filenames) {
-  serverName = CMainWindow::self().getUser();
+  serverName = CMainWindow::getUser();
   if (serverName != "QMapTool") {
     serverName = "QMapTool-" + serverName;
   }
 
-  QLocalSocket socket;
-  socket.connectToServer(serverName);
-  if (socket.waitForConnected(1000)) {
-    // if the connection is successful another instance
-    // is already running. In that case the list of files to
-    // open is sent to the primary instance. And this instance
-    // will be closed imediately.
-    QDataStream stream(&socket);
-    stream << filenames;
-    socket.waitForBytesWritten(3000);
+  // setting lock failed -> secondary instance
+  if (!IAppSetup::IAppSetup::self().setLock()) {
+    bool ok = false;
+    QLocalSocket socket;
+    socket.connectToServer(serverName);
+    if (socket.waitForConnected(1000)) {
+      // Another instance is already running. In that case
+      // the list of files to open is sent to the primary instance.
+      // And this secondary instance will be closed imediately.
+      QByteArray sendData;
+      QDataStream sendDataStream(&sendData, QIODevice::WriteOnly);
+      sendDataStream << filenames;
+      socket.write(sendData);
+      socket.waitForBytesWritten(3000);
 
-    // wait for confirmation
-    socket.waitForReadyRead(3000);
-    bool ok;
-    stream >> ok;
+      // wait for confirmation
+      socket.waitForReadyRead(3000);
+      QByteArray recvData = socket.readAll();
+      QDataStream recvDataStream(recvData);
+      recvDataStream >> ok;
+    }
+    socket.close();
+
     qDebug() << "Sent parameters to primary instance. Result" << ok;
     qDebug() << "There can only be one. Exit.";
     exit(0);
@@ -51,8 +60,8 @@ CSingleInstanceProxy::CSingleInstanceProxy(const QStringList filenames) {
   // Looks like we are the first instance.
   // Create a server socket and wait for other instances to connect.
   server = new QLocalServer(this);
-  connect(server, &QLocalServer::newConnection, this, &CSingleInstanceProxy::slotNewConnection);
   server->removeServer(serverName);
+  connect(server, &QLocalServer::newConnection, this, &CSingleInstanceProxy::slotNewConnection);
   if (!server->listen(serverName)) {
     qDebug() << "CSingleInstanceProxy: Failed to start single instance server socket.";
   } else {
@@ -71,20 +80,28 @@ void CSingleInstanceProxy::slotNewConnection() {
   // Each secondary instance will send a QStringList with files to open
   // The list can be empty.
   if (socket->waitForReadyRead(3000)) {
-    QStringList filenames;
-    QDataStream stream(socket);
-    stream >> filenames;
+    // main window might not yet exist
+    bool ok = !CMainWindow::isNull();
 
-    CMainWindow& w = CMainWindow::self();
-    // w.loadGISData(filenames);
+    QByteArray recvData = socket->readAll();
+    QDataStream recvDataStream(recvData);
+    QStringList filenames;
+    recvDataStream >> filenames;
 
     // confirm that files are loaded
-    stream << true;
+    QByteArray sendData;
+    QDataStream sendDataStream(&sendData, QIODevice::WriteOnly);
+    sendDataStream << ok;
+    socket->write(sendData);
     socket->waitForBytesWritten(3000);
 
-    // raise the application window to top of desktop
-    w.raise();
-    w.activateWindow();
+    if (ok) {
+      CMainWindow& w = CMainWindow::self();
+      // w.loadGISData(filenames);
+      // raise the application window to top of desktop
+      w.raise();
+      w.activateWindow();
+    }
   }
 
   socket->close();

@@ -24,6 +24,7 @@
 #include "setup/IAppSetup.h"
 
 class CAppSetupWin : public IAppSetup {
+  Q_DECLARE_TR_FUNCTIONS(CAppSetupWin)
  public:
   CAppSetupWin(QObject* parent) : IAppSetup(parent) {}
 
@@ -35,6 +36,7 @@ class CAppSetupWin : public IAppSetup {
   QString logDir() override;
   QString findExecutable(const QString& name) override;
   QString helpFile() override;
+  bool setLock() override;
 
   QByteArray path;
 };

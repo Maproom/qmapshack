@@ -22,9 +22,13 @@
 #include "setup/CAppSetupWin.h"
 
 #include <QAbstractNativeEventFilter>
+#include <QMessageBox>
 #include <QWindow>
 
-#include "windows.h"
+#include <windows.h>
+#include <winbase.h>
+#include <errhandlingapi.h>
+#include <fileapi.h>
 
 #include "config.h"
 #include "version.h"
@@ -92,6 +96,30 @@ QString CAppSetupWin::helpFile() {
   QDir dirApp = QDir(QCoreApplication::applicationDirPath());
   QDir dirHelp = QDir(dirApp.absoluteFilePath(_MKSTR(HELPPATH)));
   return dirHelp.absoluteFilePath("QMTHelp.qhc");
+}
+
+bool CAppSetupWin::setLock() {
+  const QString& fileName = userDataPath() % "/." % qApp->applicationName() % ".lock";
+  qDebug() << "Try to lock file" << fileName << "...";
+  HANDLE hd = CreateFileW((const wchar_t*)fileName.utf16(),
+              GENERIC_READ|GENERIC_WRITE, 0,
+              NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+  if (hd != INVALID_HANDLE_VALUE) {
+    qDebug() << "... Success";
+    return true;
+  }
+  DWORD errorId = GetLastError();
+  wchar_t errorMsg[256];
+  FormatMessageW(FORMAT_MESSAGE_FROM_SYSTEM|FORMAT_MESSAGE_IGNORE_INSERTS|FORMAT_MESSAGE_MAX_WIDTH_MASK,
+               NULL, errorId, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
+               errorMsg, (sizeof(errorMsg) / sizeof(wchar_t)), NULL);
+  if (errorId == ERROR_SHARING_VIOLATION) {
+    qDebug().noquote() << "..." << QString::fromUtf16((const char16_t*)errorMsg);
+    return false;
+  }
+  QMessageBox::critical(nullptr, tr("Fatal..."),
+     tr("Failed to lock file<br>%1<br>%2").arg(fileName, QString::fromUtf16((const char16_t*)errorMsg)));
+  exit(-1);
 }
 
 #endif // defined(Q_OS_WIN32)

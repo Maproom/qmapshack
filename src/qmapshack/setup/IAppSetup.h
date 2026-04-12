@@ -36,6 +36,7 @@ class IAppSetup {
   virtual QString logDir() = 0;
   virtual QString findExecutable(const QString& name) = 0;
   virtual QString helpFile() = 0;
+  virtual bool setLock() = 0;
 
  protected:
   void prepareGdal(QString gdalDataDir, QString gdalPluginsDir, QString projDataDir);

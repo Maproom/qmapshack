@@ -40,6 +40,8 @@ class IAppSetup : public QObject {
   virtual QString userDataPath(QString subdir = 0) = 0;
   virtual QString logDir() = 0;
   virtual QString findExecutable(const QString& name) = 0;
+  virtual QString helpFile() = 0;
+  virtual bool setLock() = 0;
 
   QString getGdaladdo() const {
     return QFile::exists(pathGdaladdoOverride) ? pathGdaladdoOverride : QFile::exists(pathGdaladdo) ? pathGdaladdo : "";
@@ -145,7 +147,6 @@ class IAppSetup : public QObject {
 
   bool isQmtmap2jnxOverride() const { return !pathQmtmap2jnxOverride.isEmpty(); }
 
-  virtual QString helpFile() = 0;
  signals:
   void sigSetupChanged();
 

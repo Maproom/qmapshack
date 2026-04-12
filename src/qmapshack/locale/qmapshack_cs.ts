@@ -128,6 +128,45 @@
     </message>
 </context>
 <context>
+    <name>CAppSetupLinux</name>
+    <message>
+        <location filename="../setup/CAppSetupLinux.cpp" line="113"/>
+        <source>Fatal...</source>
+        <translation type="unfinished">Kritické...</translation>
+    </message>
+    <message>
+        <location filename="../setup/CAppSetupLinux.cpp" line="114"/>
+        <source>Failed to lock file&lt;br&gt;%1&lt;br&gt;%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CAppSetupMac</name>
+    <message>
+        <location filename="../setup/CAppSetupMac.cpp" line="194"/>
+        <source>Fatal...</source>
+        <translation type="unfinished">Kritické...</translation>
+    </message>
+    <message>
+        <location filename="../setup/CAppSetupMac.cpp" line="195"/>
+        <source>Failed to lock file&lt;br&gt;%1&lt;br&gt;%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CAppSetupWin</name>
+    <message>
+        <location filename="../setup/CAppSetupWin.cpp" line="128"/>
+        <source>Fatal...</source>
+        <translation type="unfinished">Kritické...</translation>
+    </message>
+    <message>
+        <location filename="../setup/CAppSetupWin.cpp" line="129"/>
+        <source>Failed to lock file&lt;br&gt;%1&lt;br&gt;%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CCanvas</name>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="102"/>

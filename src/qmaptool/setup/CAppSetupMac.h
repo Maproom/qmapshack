@@ -24,6 +24,7 @@
 #include "setup/IAppSetup.h"
 
 class CAppSetupMac : public IAppSetup {
+  Q_DECLARE_TR_FUNCTIONS(CAppSetupMac)
  public:
   CAppSetupMac(QObject *parent) : IAppSetup(parent) {}
 
@@ -35,6 +36,7 @@ class CAppSetupMac : public IAppSetup {
   QString logDir() override;
   QString findExecutable(const QString &name) override;
   QString helpFile() override;
+  bool setLock() override;
 
  private:
   QDir getApplicationDir(QString subdir);

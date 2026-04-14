@@ -38,9 +38,18 @@ CSingleInstanceProxy::CSingleInstanceProxy(const QStringList filenames) {
       // Another instance is already running. In that case
       // the list of files to open is sent to the primary instance.
       // And this secondary instance will be closed imediately.
+
+      // send full path names 
+      QStringList paths;
+      for (const QString& filename : filenames) {
+        const QString& path = QFileInfo(filename).absoluteFilePath();
+        if (QFile(path).exists()) {
+          paths << path;
+        }
+      }
       QByteArray sendData;
       QDataStream sendDataStream(&sendData, QIODevice::WriteOnly);
-      sendDataStream << filenames;
+      sendDataStream << paths;
       socket.write(sendData);
       socket.waitForBytesWritten(3000);
 

@@ -117,6 +117,8 @@ class CMainWindow : public QMainWindow, private Ui::IMainWindow {
   CCanvas* getVisibleCanvas() const;
   QList<CCanvas*> getCanvas() const;
 
+  int getTabIndexForCanvasKey(const QString& key) const;
+
   QAction* getMapSetupAction() { return actionSetupMapPaths; }
 
   QAction* getDemSetupAction() { return actionSetupDEMPaths; }

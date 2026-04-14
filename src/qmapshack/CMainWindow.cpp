@@ -295,7 +295,7 @@ CMainWindow::CMainWindow() : id(QRandomGenerator::global()->generate()) {
   actionProfileIsWindow->setChecked(cfg.value("profileIsWindow", false).toBool());
   actionLinkMapViews->setChecked(cfg.value("linkMapViews", false).toBool());
   mapFont = cfg.value("mapFont", font()).value<QFont>();
-  tabWidget->setCurrentIndex(cfg.value("visibleCanvas", 0).toInt());
+  tabWidget->setCurrentIndex(getTabIndexForCanvasKey(cfg.value("visibleCanvas", "").toString()));
   cfg.endGroup();  // Canvas
 
   QStatusBar* status = statusBar();
@@ -563,7 +563,8 @@ CMainWindow::~CMainWindow() {
 
   cfg.setValue("canvasOrder", allViewKeys);
   cfg.setValue("gisLayerOpacity", CCanvas::gisLayerOpacity);
-  cfg.setValue("visibleCanvas", tabWidget->currentIndex());
+  const CCanvas* canvas = getVisibleCanvas();
+  cfg.setValue("visibleCanvas", canvas != nullptr ? canvas->getKey() : "");
   cfg.setValue("isGeosearchVisible", actionGeoSearch->isChecked());
   cfg.setValue("isScaleVisible", actionShowScale->isChecked());
   cfg.setValue("isGridVisible", actionShowGrid->isChecked());
@@ -750,7 +751,12 @@ void CMainWindow::addWidgetToTab(QWidget* w) {
   }
 }
 
-CCanvas* CMainWindow::getVisibleCanvas() const { return dynamic_cast<CCanvas*>(tabWidget->currentWidget()); }
+CCanvas* CMainWindow::getVisibleCanvas() const { 
+  int n = tabMaps->currentIndex();
+  CMapList* mapList = dynamic_cast<CMapList*>(tabMaps->widget(n));
+  n = mapList != nullptr ? getTabIndexForCanvasKey(mapList->getCanvasKey()) : -1;
+  return dynamic_cast<CCanvas*>(tabWidget->widget(n));
+}
 
 QList<CCanvas*> CMainWindow::getCanvas() const {
   QList<CCanvas*> result;
@@ -763,6 +769,16 @@ QList<CCanvas*> CMainWindow::getCanvas() const {
   }
 
   return result;
+}
+
+int CMainWindow::getTabIndexForCanvasKey(const QString& key) const {
+  for (int i = 0; i < tabWidget->count(); i++) {
+    CCanvas* canvas = dynamic_cast<CCanvas*>(tabWidget->widget(i));
+    if (canvas != nullptr && canvas->getKey() == key) {
+      return i;
+    }
+  }
+  return -1;
 }
 
 void CMainWindow::zoomCanvasTo(const QRectF rect) {

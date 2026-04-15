@@ -236,6 +236,22 @@ CMainWindow::CMainWindow() : id(QRandomGenerator::global()->generate()) {
   connect(tabPoi, &QTabWidget::currentChanged, this, &CMainWindow::slotCurrentTabPoi);
 
   connect(tabWidget->tabBar(), &QTabBar::tabMoved, this, [this](int from, int to) {
+    CCanvas* canvasFrom = dynamic_cast<CCanvas*>(tabWidget->widget(from));
+    if (canvasFrom == nullptr) return;
+    CCanvas* canvasTo = dynamic_cast<CCanvas*>(tabWidget->widget(to));
+    if (canvasTo == nullptr) return;
+    const QString& keyFrom = canvasFrom->getKey();
+    const QString& keyTo = canvasTo->getKey();
+    for (int i = 0; i < tabMaps->count(); i++) {
+      CMapList* mapList = dynamic_cast<CMapList*>(tabMaps->widget(i));
+      if (mapList == nullptr) {
+        continue;
+      } else if (mapList->getCanvasKey() == keyFrom) {
+        from = i;
+      } else if (mapList->getCanvasKey() == keyTo) {
+        to = i;
+      }
+    }
     tabMaps->tabBar()->moveTab(from, to);
     tabDem->tabBar()->moveTab(from, to);
     tabPoi->tabBar()->moveTab(from, to);

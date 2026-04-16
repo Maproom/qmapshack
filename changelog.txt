@@ -9,6 +9,7 @@ V1.XX.X
 [QMS-1009] Fix: Workspace icon size does not follow font size
 [QMS-1012] Fix: Delegate entries possibly hardly readable
 [QMS-1013] Fix: Icons do not fit into on screen multiple selection circles
+[QMS-1017] Fix: Map view jumping after editing track
 [QMS-1018] Fix: Warnings in CMapItemDelegate
 [QMS-1021] Dev: Add unique key to views for better identification
 [QMS-1022] Fix: Wrong view active after restart

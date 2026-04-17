@@ -5,21 +5,31 @@ echo "${ATTN}Building PROJ ...${NC}"
 echo "${ATTN}-----------------${NC}"
 
 ######################################################################## 
-# build Proj
-
-PROJ_PKG=proj-$PROJ_RELEASE
-
-cd $QMSDEVDIR
+# build PROJ
 echo "${ATTN}Building Proj ...${NC}"
-if [ ! -d $PROJ_PKG ]
-then 
-  curl https://download.osgeo.org/proj/$PROJ_PKG.tar.gz  | tar xzf -
+cd $QMSDEVDIR
+
+# Check for local PROJ repo
+if [ -d proj ] && [ -e proj/proj-$PROJ_RELEASE.txt ]
+then
+  # Update existing repo
+  cd $QMSDEVDIR/proj
+  git fetch
+  git merge
+else
+  # Create new repo
+  rm -rf proj 2>/dev/null
+  git clone -b "$PROJ_RELEASE" https://github.com/OSGeo/proj.git
+  # --> folder $QMSVERDIR/proj created
+  cd $QMSDEVDIR/proj
+  touch proj-$PROJ_RELEASE.txt
 fi
 
-# --> folder $QMSVERDIR/$PROJ_PKG/ created
-cd $QMSDEVDIR/$PROJ_PKG
 mkdir build
 cd build
+
+PROJ=$LOCAL_ENV
+
 $PACKAGES_PATH/bin/cmake .. -DCMAKE_INSTALL_PREFIX=$LOCAL_ENV
 $PACKAGES_PATH/bin/cmake --build . -j4
 $PACKAGES_PATH/bin/cmake --build . --target install
@@ -33,4 +43,5 @@ then
   curl https://download.osgeo.org/proj/$PROJ_DATA.tar.gz | tar xzf -
   touch $PROJ_DATA.txt
 fi
+
 cd $QMSDEVDIR

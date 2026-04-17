@@ -430,7 +430,8 @@ static void printProgress(int current, int total) {
   static int nLastTick = -1;
   int nThisTick = (int)(dfComplete * 40.0);
 
-  nThisTick = MIN(40, MAX(0, nThisTick));
+  // gdal >= 3.13 issue: MIN -> std::min, MAX -> std::max
+  nThisTick = std::min(40, std::max(0, nThisTick));
 
   // Have we started a new progress run?
   if (nThisTick < nLastTick && nLastTick >= 39) {

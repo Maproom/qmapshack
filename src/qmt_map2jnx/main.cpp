@@ -430,7 +430,11 @@ static void printProgress(int current, int total) {
   static int nLastTick = -1;
   int nThisTick = (int)(dfComplete * 40.0);
 
+#if GDAL_VERSION_NUM >= GDAL_COMPUTE_VERSION(3, 13, 0)
+  nThisTick = CPL_MIN(40, CPL_MAX(0, nThisTick));
+#else
   nThisTick = MIN(40, MAX(0, nThisTick));
+#endif
 
   // Have we started a new progress run?
   if (nThisTick < nLastTick && nLastTick >= 39) {

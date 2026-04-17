@@ -86,16 +86,20 @@ CRouterRoutino::CRouterRoutino(QWidget* parent) : IRouter(true, parent) {
   comboProfile->addItem(tr("Motorcycle"), "motorcycle");
   comboProfile->addItem(tr("Motorcar"), "motorcar");
   comboProfile->addItem(tr("Goods"), "goods");
+  comboProfile->addItem(tr("Heavy Goods Vehicle"), "hgv");
+  comboProfile->addItem(tr("Public Service Vehicle"), "psv");
 
   comboLanguage->addItem(tr("English"), "en");
   comboLanguage->addItem(tr("German"), "de");
   comboLanguage->addItem(tr("French"), "fr");
-  comboLanguage->addItem(tr("Hungarian"), "hu");
+  comboLanguage->addItem(tr("Italian"), "it");
+  comboLanguage->addItem(tr("Spanish"), "es");
   comboLanguage->addItem(tr("Dutch"), "nl");
+  comboLanguage->addItem(tr("Hungarian"), "hu");
   comboLanguage->addItem(tr("Russian"), "ru");
   comboLanguage->addItem(tr("Polish"), "pl");
   comboLanguage->addItem(tr("Czech"), "cs");
-  comboLanguage->addItem(tr("Spanish"), "es");
+  comboLanguage->addItem(tr("Slovak"), "sk");
 
   connect(toolSetupPaths, &QToolButton::clicked, this, &CRouterRoutino::slotSetupPaths);
 

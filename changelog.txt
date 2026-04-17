@@ -22,6 +22,7 @@ V1.XX.X
 [QMS-1040] Fix: Issue sending relative filenames from secondary to primary instance
 [QMS-1043] Fix: Inconsistent tab ordering
 [QMS-1047] Fix: GDAL >= 3.13.x: compile error, macOS: PROJ 9.8.0 issue
+[QMS-1049] Fix: Missing Routino profiles and languages
 
 V1.20.1
 [QMS-945] Redesign icons for focus, autosave, sync, and DB buttons

@@ -56,6 +56,10 @@ CRouterRoutino::CRouterRoutino(QWidget* parent) : IRouter(true, parent) {
   pSelf = this;
   setupUi(this);
 
+  const QFontMetrics& fm(comboDatabase->fontMetrics());
+  int minWidth = fm.boundingRect(QString("A").repeated(16)).width();
+  comboDatabase->setMinimumWidth(minWidth);
+
   connect(labelHelp, &QLabel::linkActivated, &CMainWindow::self(),
           static_cast<void (CMainWindow::*)(const QString&)>(&CMainWindow::slotLinkActivated));
 

@@ -63,7 +63,7 @@ CDetailsPrj::CDetailsPrj(IGisProject& prj, QWidget* parent)
 
   timerUpdateTime = new QTimer(this);
   timerUpdateTime->setSingleShot(true);
-  timerUpdateTime->setInterval(20);
+  timerUpdateTime->setInterval(500);
   connect(timerUpdateTime, &QTimer::timeout, this, &CDetailsPrj::slotSetupGui);
 
   timerUpdateTime->start();

@@ -17,6 +17,7 @@ V1.XX.X
 [QMS-1022] Fix: Wrong view active after restart
 [QMS-1024] Fix: Accessibility issue : font is too small (macOS)
 [QMS-1027] Fix: Maps: Copyright notice is missing in tool tips
+[QMS-1029] Fix: Unable to significantly change window size while editing project (Windows)
 [QMS-1031] Fix: Fatal error exporting database project
 [QMS-1034] Fix: Show view names instead of keys in Replace DEM dialog
 [QMS-1036] Fix: Prevent QMS from opening twice & corrupting sqlite db

@@ -39,9 +39,26 @@ CMapVRT::CMapVRT(const QString& filename, CMapDraw* parent) : IMap(eFeatVisibili
 
   if (nullptr == dataset) {
     QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."),
-                         tr("Failed to load file: %1").arg(filename));
+                         tr("Failed to load file:") % '\n' % filename);
     return;
   }
+
+  char** fileList = dataset->GetFileList();
+  int n = 0;
+  while (fileList[n] != nullptr) {
+    QString fileItem = QString::fromUtf8(fileList[n]);
+    if (!QFileInfo(fileItem).exists()) {
+      CSLDestroy(fileList);
+      GDALClose(dataset);
+      dataset = nullptr;
+      QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."),
+                           tr("File does not exist:") % '\n' % fileItem % '\n' %
+                           tr("referenced by file:") % '\n' % filename);
+      return;
+    }
+    n++;
+  }
+  CSLDestroy(fileList);
 
   // ------- setup color table ---------
   rasterBandCount = dataset->GetRasterCount();
@@ -52,7 +69,7 @@ CMapVRT::CMapVRT(const QString& filename, CMapDraw* parent) : IMap(eFeatVisibili
       GDALClose(dataset);
       dataset = nullptr;
       QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."),
-                           tr("Failed to load file: %1").arg(filename));
+                           tr("Failed to load file:") % '\n' % filename);
       return;
     }
 
@@ -70,7 +87,7 @@ CMapVRT::CMapVRT(const QString& filename, CMapDraw* parent) : IMap(eFeatVisibili
       GDALClose(dataset);
       dataset = nullptr;
       QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."),
-                           tr("File must be 8 bit palette or gray indexed."));
+                           tr("File must be 8 bit palette or gray indexed:") % '\n' % filename);
       return;
     }
 
@@ -102,7 +119,7 @@ CMapVRT::CMapVRT(const QString& filename, CMapDraw* parent) : IMap(eFeatVisibili
     delete dataset;
     dataset = nullptr;
     QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."),
-                         tr("No georeference information found."));
+                         tr("No georeference information found:") % '\n' % filename);
     return;
   }
 

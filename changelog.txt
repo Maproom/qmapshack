@@ -1,6 +1,7 @@
 V1.XX.X
 [QMS-670] Fix: Accessibility issue : font is too small
 [QMS-678] Fix: Database dropdown in Routing dock prevents narrowing of docks
+[QMS-702] Fix: Missing error message if file referenced by VRT does not exist
 [QMS-990] Fix: Toolbar menu item(s) too small, "View" menu item missing (macOS)
 [QMS-992] Fix: Changing items does not update the map view
 [QMS-994] Fix: QMapTool not callable from QMapShack (macOS)

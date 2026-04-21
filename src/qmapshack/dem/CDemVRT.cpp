@@ -35,15 +35,32 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent) : IDem(parent), file
   dataset = (GDALDataset*)GDALOpen(filename.toUtf8(), GA_ReadOnly);
   if (nullptr == dataset) {
     QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."),
-                         tr("Failed to load file: %1").arg(filename));
+                         tr("Failed to load file:") % '\n' % filename);
     return;
   }
+
+  char** fileList = dataset->GetFileList();
+  int n = 0;
+  while (fileList[n] != nullptr) {
+    QString fileItem = QString::fromUtf8(fileList[n]);
+    if (!QFileInfo(fileItem).exists()) {
+      CSLDestroy(fileList);
+      GDALClose(dataset);
+      dataset = nullptr;
+      QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."),
+                           tr("File does not exist:") % '\n' % fileItem % '\n' %
+                           tr("referenced by file:") % '\n' % filename);
+      return;
+    }
+    n++;
+  }
+  CSLDestroy(fileList);
 
   if (dataset->GetRasterCount() != 1) {
     GDALClose(dataset);
     dataset = nullptr;
     QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."),
-                         tr("DEM must have one band with 16bit or 32bit data."));
+                         tr("DEM must have one band with 16bit or 32bit data:") % '\n' % filename);
     return;
   }
 
@@ -52,7 +69,7 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent) : IDem(parent), file
     GDALClose(dataset);
     dataset = nullptr;
     QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."),
-                         tr("DEM must have one band with 16bit or 32bit data."));
+                         tr("DEM must have one band with 16bit or 32bit data:") % '\n' % filename);
     return;
   }
 
@@ -68,7 +85,8 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent) : IDem(parent), file
   if (!proj.isValid()) {
     GDALClose(dataset);
     dataset = nullptr;
-    QMessageBox::warning(0, tr("Error..."), tr("No georeference information found."));
+    QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."),
+                         tr("No georeference information found:") % '\n' % filename);
     return;
   }
 

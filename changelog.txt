@@ -1,4 +1,4 @@
-V1.XX.X
+V1.20.2
 [QMS-670] Fix: Accessibility issue : font is too small
 [QMS-678] Fix: Database dropdown in Routing dock prevents narrowing of docks
 [QMS-702] Fix: Missing error message if file referenced by VRT does not exist

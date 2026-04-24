@@ -26,21 +26,24 @@
 #include "ui_ISetupWorkspace.h"
 
 class CGisWorkspace;
+class CGisDatabase;
 
 class CSetupWorkspace : public QDialog, private Ui::ISetupWorkspace {
   Q_OBJECT
  public:
-  CSetupWorkspace(CGisWorkspace* workspace, QWidget* parent);
+  CSetupWorkspace(CGisWorkspace* workspace, CGisDatabase* database, QWidget* parent);
   virtual ~CSetupWorkspace();
 
  public slots:
   void accept() override;
 
  private slots:
-  void slotGisDecorationsChanged();
+  void slotGisWksDecorationsChanged();
+  void slotGisDBDecorationsChanged();
 
  private:
   CGisWorkspace* workspace;
+  CGisDatabase* database;
 };
 
 #endif  // CSETUPWORKSPACE_H

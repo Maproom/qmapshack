@@ -21,6 +21,7 @@
 #include <QtWidgets>
 
 #include "canvas/CCanvas.h"
+#include "gis/CDBItemDelegate.h"
 #include "gis/db/CDBFolderMysql.h"
 #include "gis/db/CDBFolderSqlite.h"
 #include "helpers/CSettings.h"
@@ -28,6 +29,10 @@
 CSelectDBFolder::CSelectDBFolder(QList<quint64>& ids, QString& db, QString& host, QWidget* parent)
     : QDialog(parent), ids(ids), db(db), host(host) {
   setupUi(this);
+
+  CDBItemDelegate* delegate = new CDBItemDelegate(treeWidget);
+  treeWidget->setItemDelegate(delegate);
+
   treeWidget->setProperty("showItems", false);
   treeWidget->setProperty("showCheckBoxes", false);
   setProperty("showLostFound", false);

@@ -35,6 +35,8 @@ class CGisDatabase : public QWidget, private Ui::IGisDatabase {
 
   void createDatabase();
 
+  const CGisListDB& getDBList() const { return *treeDB; }
+
  private slots:
   void slotHelpText();
 

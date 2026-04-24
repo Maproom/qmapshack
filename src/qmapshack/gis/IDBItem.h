@@ -57,12 +57,27 @@ class IDBItem : public QTreeWidgetItem {
   virtual void setCheckState(Qt::CheckState state);
   virtual Qt::CheckState getCheckState() const { return checkState; }
 
+  void setFolderCount(quint32 group, quint32 project, quint32 other);
+  std::tuple<quint32, quint32, quint32> getFolderCount() const;
+
+  void setItemCount(quint32 wpt, quint32 trk, quint32 rte, quint32 area);
+  std::tuple<quint32, quint32, quint32, quint32> getItemCount() const;
+
+  void updateItem();
+
  private:
   QDateTime ageTimestamp;
   QString name;
   QString toolTip;
   QPixmap icon;
   Qt::CheckState checkState;
+  quint32 countGroup = 0;
+  quint32 countProject = 0;
+  quint32 countOther = 0;
+  quint32 countWpt = 0;
+  quint32 countTrk = 0;
+  quint32 countRte = 0;
+  quint32 countArea = 0;
 };
 
 #endif //IDBITEM_H

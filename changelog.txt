@@ -27,6 +27,7 @@ V1.XX.X
 [QMS-1043] Fix: Inconsistent tab ordering
 [QMS-1047] Fix: GDAL >= 3.13.x: compile error, macOS: PROJ 9.8.0 issue
 [QMS-1049] Fix: Missing Routino profiles and languages
+[QMS-1055] Database tree widget: Add information to folder/item status line
 
 V1.20.1
 [QMS-945] Redesign icons for focus, autosave, sync, and DB buttons

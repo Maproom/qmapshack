@@ -23,11 +23,14 @@
 #include <QtWidgets>
 
 #include "config.h"
+#include "gis/CDBItemDelegate.h"
+#include "gis/CGisDatabase.h"
 #include "gis/CGisWorkspace.h"
 #include "gis/CWksItemDelegate.h"
 #include "helpers/CSettings.h"
 
-CSetupWorkspace::CSetupWorkspace(CGisWorkspace* workspace, QWidget* parent) : QDialog(parent), workspace(workspace) {
+CSetupWorkspace::CSetupWorkspace(CGisWorkspace* workspace, CGisDatabase* database, QWidget* parent)
+    : QDialog(parent), workspace(workspace), database(database) {
   setupUi(this);
 
   SETTINGS;
@@ -79,36 +82,69 @@ CSetupWorkspace::CSetupWorkspace(CGisWorkspace* workspace, QWidget* parent) : QD
     checkAreaTags->setChecked(itemStatusControl.area.tags);
   }
 
+  CDBItemDelegate* delegateDatabase = dynamic_cast<CDBItemDelegate*>(database->getDBList().itemDelegate());
+  if (delegateDatabase != nullptr) {
+    const CDBItemDelegate::item_status_ctrl_t& itemStatusControl = delegateDatabase->getStatusItemsControl();
+
+    const bool noProjectStatus = itemStatusControl.statusSizeFolder == -1;
+    comboFontSizeStatusDBPrj->setCurrentIndex(noProjectStatus ? 4 : itemStatusControl.statusSizeFolder);
+    groupPrj->setDisabled(noProjectStatus);
+
+    const bool noItemStatus = itemStatusControl.statusSizeItem == -1;
+    comboFontSizeStatusDBItem->setCurrentIndex(noItemStatus ? 4 : itemStatusControl.statusSizeItem);
+
+    checkDBFolderCount->setChecked(itemStatusControl.folder.countFolders);
+    checkDBItemCount->setChecked(itemStatusControl.folder.countItems);
+    checkDBItemInfoText->setChecked(itemStatusControl.item.infoText);
+  }
+
   const QList<QCheckBox*>& checkBoxesPrj = groupPrj->findChildren<QCheckBox*>();
   for (const QCheckBox* checkBox : checkBoxesPrj) {
-    connect(checkBox, &QCheckBox::toggled, this, &CSetupWorkspace::slotGisDecorationsChanged);
+    connect(checkBox, &QCheckBox::toggled, this, &CSetupWorkspace::slotGisWksDecorationsChanged);
   }
   const QList<QCheckBox*>& checkBoxesTrk = groupTrk->findChildren<QCheckBox*>();
   for (const QCheckBox* checkBox : checkBoxesTrk) {
-    connect(checkBox, &QCheckBox::toggled, this, &CSetupWorkspace::slotGisDecorationsChanged);
+    connect(checkBox, &QCheckBox::toggled, this, &CSetupWorkspace::slotGisWksDecorationsChanged);
   }
   const QList<QCheckBox*>& checkBoxesWpt = groupWpt->findChildren<QCheckBox*>();
   for (const QCheckBox* checkBox : checkBoxesWpt) {
-    connect(checkBox, &QCheckBox::toggled, this, &CSetupWorkspace::slotGisDecorationsChanged);
+    connect(checkBox, &QCheckBox::toggled, this, &CSetupWorkspace::slotGisWksDecorationsChanged);
   }
   const QList<QCheckBox*>& checkBoxesRte = groupRte->findChildren<QCheckBox*>();
   for (const QCheckBox* checkBox : checkBoxesRte) {
-    connect(checkBox, &QCheckBox::toggled, this, &CSetupWorkspace::slotGisDecorationsChanged);
+    connect(checkBox, &QCheckBox::toggled, this, &CSetupWorkspace::slotGisWksDecorationsChanged);
   }
   const QList<QCheckBox*>& checkBoxesArea = groupArea->findChildren<QCheckBox*>();
   for (const QCheckBox* checkBox : checkBoxesArea) {
-    connect(checkBox, &QCheckBox::toggled, this, &CSetupWorkspace::slotGisDecorationsChanged);
+    connect(checkBox, &QCheckBox::toggled, this, &CSetupWorkspace::slotGisWksDecorationsChanged);
   }
 
-  connect(comboFontSizeStatusPrj, &QComboBox::currentIndexChanged, this, &CSetupWorkspace::slotGisDecorationsChanged);
-  connect(comboFontSizeStatusItem, &QComboBox::currentIndexChanged, this, &CSetupWorkspace::slotGisDecorationsChanged);
+  connect(comboFontSizeStatusPrj, &QComboBox::currentIndexChanged, this,
+          &CSetupWorkspace::slotGisWksDecorationsChanged);
+  connect(comboFontSizeStatusItem, &QComboBox::currentIndexChanged, this,
+          &CSetupWorkspace::slotGisWksDecorationsChanged);
+
+  const QList<QCheckBox*>& checkBoxesDBFolder = groupDBFolder->findChildren<QCheckBox*>();
+  for (const QCheckBox* checkBox : checkBoxesDBFolder) {
+    connect(checkBox, &QCheckBox::toggled, this, &CSetupWorkspace::slotGisDBDecorationsChanged);
+  }
+
+  const QList<QCheckBox*>& checkBoxesDBItem = groupDBItem->findChildren<QCheckBox*>();
+  for (const QCheckBox* checkBox : checkBoxesDBItem) {
+    connect(checkBox, &QCheckBox::toggled, this, &CSetupWorkspace::slotGisDBDecorationsChanged);
+  }
+
+  connect(comboFontSizeStatusDBPrj, &QComboBox::currentIndexChanged, this,
+          &CSetupWorkspace::slotGisDBDecorationsChanged);
+  connect(comboFontSizeStatusDBItem, &QComboBox::currentIndexChanged, this,
+          &CSetupWorkspace::slotGisDBDecorationsChanged);
 }
 
 CSetupWorkspace::~CSetupWorkspace() {}
 
-void CSetupWorkspace::slotGisDecorationsChanged() {
-  CWksItemDelegate* delegate = dynamic_cast<CWksItemDelegate*>(workspace->getWksList().itemDelegate());
-  if (delegate == nullptr) {
+void CSetupWorkspace::slotGisWksDecorationsChanged() {
+  CWksItemDelegate* delegateWorkspace = dynamic_cast<CWksItemDelegate*>(workspace->getWksList().itemDelegate());
+  if (delegateWorkspace == nullptr) {
     return;
   }
   CWksItemDelegate::item_status_ctrl_t itemStatusControl;
@@ -148,7 +184,31 @@ void CSetupWorkspace::slotGisDecorationsChanged() {
   itemStatusControl.area.rating = checkAreaRating->isChecked();
   itemStatusControl.area.tags = checkAreaTags->isChecked();
 
-  delegate->setStatusItemsControl(itemStatusControl);
+  delegateWorkspace->setStatusItemsControl(itemStatusControl);
+}
+
+void CSetupWorkspace::slotGisDBDecorationsChanged() {
+  CDBItemDelegate* delegateDatabase = dynamic_cast<CDBItemDelegate*>(database->getDBList().itemDelegate());
+  if (delegateDatabase == nullptr) {
+    return;
+  }
+  CDBItemDelegate::item_status_ctrl_t itemStatusControl;
+
+  const int indexProject = comboFontSizeStatusDBPrj->currentIndex();
+  const bool noProjectStatus = indexProject == 4;
+  itemStatusControl.statusSizeFolder = noProjectStatus ? -1 : indexProject;
+  groupDBFolder->setDisabled(noProjectStatus);
+
+  const int indexItem = comboFontSizeStatusDBItem->currentIndex();
+  const bool noItemStatus = indexItem == 4;
+  itemStatusControl.statusSizeItem = noItemStatus ? -1 : indexItem;
+  groupDBItem->setDisabled(noItemStatus);
+
+  itemStatusControl.folder.countFolders = checkDBFolderCount->isChecked();
+  itemStatusControl.folder.countItems = checkDBItemCount->isChecked();
+  itemStatusControl.item.infoText = checkDBItemInfoText->isChecked();
+
+  delegateDatabase->setStatusItemsControl(itemStatusControl);
 }
 
 void CSetupWorkspace::accept() {

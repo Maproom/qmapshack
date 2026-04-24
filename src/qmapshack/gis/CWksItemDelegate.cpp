@@ -91,7 +91,7 @@ QSize CWksItemDelegate::sizeHint(const QStyleOptionViewItem& opt, const QModelIn
 
   QFont fontStatusPrj = opt.font;
   fontStatusPrj.setPointSize(fontName.pointSize() - itemStatusControl.statusSizePrj);
-  QFontMetrics fmStausPrj(fontStatusPrj);
+  QFontMetrics fmStatusPrj(fontStatusPrj);
 
   QFont fontStatusItem = opt.font;
   fontStatusItem.setPointSize(fontName.pointSize() - itemStatusControl.statusSizeItem);
@@ -104,7 +104,7 @@ QSize CWksItemDelegate::sizeHint(const QStyleOptionViewItem& opt, const QModelIn
   switch (item->getBaseType()) {
     case IWksItem::eBaseType::Project:
       if (itemStatusControl.statusSizePrj != kFontSizeInvalid) {
-        return QSize(opt.rect.width(), std::max(22, 7 * kMargin + fmName.height() + fmStausPrj.height()));
+        return QSize(opt.rect.width(), std::max(22, 7 * kMargin + fmName.height() + fmStatusPrj.height()));
       } else {
         return QSize(opt.rect.width(), std::max(22, 5 * kMargin + fmName.height()));
       }

@@ -48,6 +48,8 @@ class IDBFolder : public IDBItem {
 
   QSqlDatabase& getDb() { return db; }
 
+  void updateChildStatistics();
+
   void storeName(const QString& name);
 
   /**

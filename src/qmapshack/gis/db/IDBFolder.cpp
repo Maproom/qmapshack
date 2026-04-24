@@ -102,7 +102,7 @@ void IDBFolder::storeName(const QString& name) {
   query.prepare("UPDATE folders SET name=:name WHERE id=:id");
   query.bindValue(":name", name);
   query.bindValue(":id", getId());
-  QUERY_EXEC(return );
+  QUERY_EXEC(return);
 
   setupFromDB();
 }
@@ -198,7 +198,7 @@ void IDBFolder::update(CEvtW2DAckInfo* info) {
   // update text and tooltip
   query.prepare("SELECT name, comment, sortmode FROM folders WHERE id=:id");
   query.bindValue(":id", id);
-  QUERY_EXEC(return );
+  QUERY_EXEC(return);
   query.next();
 
   setName(query.value(0).toString());
@@ -211,6 +211,8 @@ void IDBFolder::update(CEvtW2DAckInfo* info) {
     qDeleteAll(takeChildren());
     addChildren(info->keysChildren, true, showItems());
   }
+
+  updateChildStatistics();
 }
 
 bool IDBFolder::update() {
@@ -319,6 +321,8 @@ bool IDBFolder::update() {
 
   // add children
   addChildren(activeChildren, false, showItems());
+
+  updateChildStatistics();
   return true;
 }
 
@@ -338,7 +342,7 @@ void IDBFolder::toggle() {
           "ORDER BY t2.id");
       query.bindValue(":id", getId());
     }
-    QUERY_EXEC(return );
+    QUERY_EXEC(return);
 
     CEvtD2WShowItems* evt2 = new CEvtD2WShowItems(getId(), getDBName());
     evt2->addItemsExclusively = true;
@@ -374,7 +378,7 @@ void IDBFolder::setupFromDB() {
   // get basic properties like name and key
   query.prepare("SELECT keyqms, name, comment, sortmode FROM folders WHERE id=:id");
   query.bindValue(":id", id);
-  QUERY_EXEC(return );
+  QUERY_EXEC(return);
   query.next();
 
   key = query.value(0).toString();
@@ -392,6 +396,65 @@ void IDBFolder::setupFromDB() {
     CEvtD2WReqInfo* evt = new CEvtD2WReqInfo(getId(), getDBName());
     CGisWorkspace::self().postEventForWks(evt);
   }
+
+  updateChildStatistics();
+}
+
+void IDBFolder::updateChildStatistics() {
+  QSqlQuery query(db);
+  query.prepare(
+      "SELECT f.type, COUNT(*) AS anzahl FROM folder2folder f2f JOIN folders f ON f.id = f2f.child WHERE f2f.parent = "
+      ":id GROUP BY f.type;");
+
+  quint32 countGroup = 0;
+  quint32 countProject = 0;
+  quint32 countOther = 0;
+  query.bindValue(":id", id);
+  QUERY_EXEC(return);
+  while (query.next()) {
+    switch (query.value(0).toInt()) {
+      case eTypeGroup:
+        countGroup = query.value(1).toInt();
+        break;
+      case eTypeProject:
+        countProject = query.value(1).toInt();
+        break;
+      case eTypeOther:
+        countOther = query.value(1).toInt();
+        break;
+      default:;
+    }
+  }
+  setFolderCount(countGroup, countProject, countOther);
+
+  query.prepare(
+      "SELECT i.type, COUNT(*) AS anzahl FROM folder2item f2i JOIN items i ON i.id = f2i.child WHERE f2i.parent = "
+      ":id GROUP BY i.type;");
+
+  quint32 countWpt = 0;
+  quint32 countTrk = 0;
+  quint32 countRte = 0;
+  quint32 countArea = 0;
+  query.bindValue(":id", id);
+  QUERY_EXEC(return);
+  while (query.next()) {
+    switch (query.value(0).toInt()) {
+      case IWksItem::eTypeWpt:
+        countWpt = query.value(1).toInt();
+        break;
+      case IWksItem::eTypeTrk:
+        countTrk = query.value(1).toInt();
+        break;
+      case IWksItem::eTypeRte:
+        countRte = query.value(1).toInt();
+        break;
+      case IWksItem::eTypeOvl:
+        countArea = query.value(1).toInt();
+        break;
+      default:;
+    }
+  }
+  setItemCount(countWpt, countTrk, countRte, countArea);
 }
 
 void IDBFolder::addChildren(const QSet<QString>& activeChildren, bool showFolders, bool showItems) {
@@ -403,7 +466,7 @@ void IDBFolder::addChildren(const QSet<QString>& activeChildren, bool showFolder
         "SELECT t1.child, t2.type FROM folder2folder AS t1, folders AS t2 WHERE t1.parent = :id AND t2.id = t1.child "
         "ORDER BY t2.id");
     query.bindValue(":id", id);
-    QUERY_EXEC(return );
+    QUERY_EXEC(return);
     while (query.next()) {
       quint64 idChild = query.value(0).toULongLong();
       quint32 typeChild = query.value(1).toInt();
@@ -421,7 +484,7 @@ void IDBFolder::addChildren(const QSet<QString>& activeChildren, bool showFolder
         "t2.type=:type ORDER BY t2.id");
     query.bindValue(":id", id);
     query.bindValue(":type", IGisItem::eTypeTrk);
-    QUERY_EXEC(return );
+    QUERY_EXEC(return);
     while (query.next()) {
       quint64 idChild = query.value(0).toULongLong();
       CDBItem* item = new CDBItem(db, idChild, nullptr);
@@ -436,7 +499,7 @@ void IDBFolder::addChildren(const QSet<QString>& activeChildren, bool showFolder
         "t2.type=:type ORDER BY t2.id");
     query.bindValue(":id", id);
     query.bindValue(":type", IGisItem::eTypeRte);
-    QUERY_EXEC(return );
+    QUERY_EXEC(return);
     while (query.next()) {
       quint64 idChild = query.value(0).toULongLong();
       CDBItem* item = new CDBItem(db, idChild, nullptr);
@@ -451,7 +514,7 @@ void IDBFolder::addChildren(const QSet<QString>& activeChildren, bool showFolder
         "t2.type=:type ORDER BY t2.id");
     query.bindValue(":id", id);
     query.bindValue(":type", IGisItem::eTypeWpt);
-    QUERY_EXEC(return );
+    QUERY_EXEC(return);
     while (query.next()) {
       quint64 idChild = query.value(0).toULongLong();
       CDBItem* item = new CDBItem(db, idChild, nullptr);
@@ -466,7 +529,7 @@ void IDBFolder::addChildren(const QSet<QString>& activeChildren, bool showFolder
         "t2.type=:type ORDER BY t2.id");
     query.bindValue(":id", id);
     query.bindValue(":type", IGisItem::eTypeOvl);
-    QUERY_EXEC(return );
+    QUERY_EXEC(return);
     while (query.next()) {
       quint64 idChild = query.value(0).toULongLong();
       CDBItem* item = new CDBItem(db, idChild, nullptr);
@@ -475,6 +538,8 @@ void IDBFolder::addChildren(const QSet<QString>& activeChildren, bool showFolder
     }
     addItemsSorted(items);
   }
+
+  updateChildStatistics();
 }
 
 void IDBFolder::remove(quint64 idParent, quint64 idFolder) {
@@ -507,6 +572,10 @@ void IDBFolder::remove(quint64 idParent, quint64 idFolder) {
     query.bindValue(":id", idFolder);
     QUERY_EXEC()
   }
+  IDBFolder* parent = dynamic_cast<IDBFolder*>(this->parent());
+  if (parent != nullptr) {
+    parent->updateChildStatistics();
+  }
 }
 
 void IDBFolder::updateItemsOnWks() {
@@ -520,7 +589,7 @@ void IDBFolder::setChildIndicator() {
   // count folders linked to this folder
   query.prepare("SELECT COUNT(*) FROM folder2folder WHERE parent=:id");
   query.bindValue(":id", id);
-  QUERY_EXEC(return );
+  QUERY_EXEC(return);
   query.next();
 
   qint32 nFolders = query.value(0).toInt();
@@ -530,7 +599,7 @@ void IDBFolder::setChildIndicator() {
     // count items linked to this folder
     query.prepare("SELECT COUNT(*) FROM folder2item WHERE parent=:id");
     query.bindValue(":id", id);
-    QUERY_EXEC(return );
+    QUERY_EXEC(return);
     query.next();
     nItems = query.value(0).toInt();
   }
@@ -549,6 +618,7 @@ void IDBFolder::addItemsSorted(QList<CDBItem*>& items) {
     addChild(item);
   }
   items.clear();
+  updateChildStatistics();
 }
 
 bool sortByTime(CDBItem* item1, CDBItem* item2) { return item1->date < item2->date; }

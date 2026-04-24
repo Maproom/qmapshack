@@ -116,4 +116,6 @@ void CDBItem::remove() {
   query.bindValue(":parent", folder->getId());
   query.bindValue(":child", id);
   QUERY_EXEC();
+
+  folder->updateChildStatistics();
 }

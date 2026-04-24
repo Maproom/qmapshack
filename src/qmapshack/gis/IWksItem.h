@@ -28,7 +28,7 @@ class IWksItem : public QTreeWidgetItem {
  public:
   IWksItem(QTreeWidgetItem* parent, int type);
   IWksItem(QTreeWidget* parent, int type);
-  virtual ~IWksItem() = default;
+  virtual ~IWksItem();
 
   enum mark_e { eMarkNone = 0, eMarkChanged = 0x00000001, eMarkNotPart = 0x00000002, eMarkNotInDB = 0x00000004 };
 

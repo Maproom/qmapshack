@@ -26,6 +26,15 @@
 IWksItem::IWksItem(QTreeWidgetItem* parent, int type) : QTreeWidgetItem(parent, type) { setupAnimations(); }
 IWksItem::IWksItem(QTreeWidget* parent, int type) : QTreeWidgetItem(parent, type) { setupAnimations(); }
 
+IWksItem::~IWksItem() {
+  // IWksItem is not a QObject. Therefore the animation's parent
+  // is the tree widget owning the IWksItem. If the IWksItem is
+  // destroyed the animation survives and might call via signal
+  // into the delete IWksItem instance. Therefore it has to be
+  // destroyed explicitly with the IWksItem.
+  delete animationOpacityOfFocusBasedItems;
+}
+
 void IWksItem::setupAnimations() {
   animationOpacityOfFocusBasedItems = new QVariantAnimation(treeWidget());
   animationOpacityOfFocusBasedItems->setDuration(250);
@@ -34,7 +43,10 @@ void IWksItem::setupAnimations() {
   QObject::connect(animationOpacityOfFocusBasedItems, &QVariantAnimation::valueChanged,
                    animationOpacityOfFocusBasedItems, [this](QVariant v) {
                      opacityOfFocusBasedItems = v.toFloat();
-                     treeWidget()->viewport()->update(treeWidget()->visualItemRect(this));
+                     QTreeWidget* widget = treeWidget();
+                     if (widget != nullptr) {
+                       widget->viewport()->update(treeWidget()->visualItemRect(this));
+                     }
                    });
 }
 

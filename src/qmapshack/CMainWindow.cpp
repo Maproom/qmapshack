@@ -1222,7 +1222,7 @@ void CMainWindow::slotSetupUnits() {
 }
 
 void CMainWindow::slotSetupWorkspace() {
-  CSetupWorkspace* dlg = new CSetupWorkspace(widgetGisWorkspace, this);
+  CSetupWorkspace* dlg = new CSetupWorkspace(widgetGisWorkspace, widgetGisDatabase, this);
   dlg->resize(0, 0);
   dlg->show();
 }

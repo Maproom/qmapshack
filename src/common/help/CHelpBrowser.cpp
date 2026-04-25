@@ -34,6 +34,7 @@ void CHelpBrowser::setSource(const QUrl& url) {
     return;
   }
   QTextBrowser::setSource(url);
+  QTextBrowser::setOpenExternalLinks(true);
 }
 
 QVariant CHelpBrowser::loadResource(int type, const QUrl& name) {

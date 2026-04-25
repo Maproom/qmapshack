@@ -1,3 +1,6 @@
+V1.XX.X
+[QMS-1059] Fix: F1 help browser does not open external links
+
 V1.20.2
 [QMS-670] Fix: Accessibility issue : font is too small
 [QMS-678] Fix: Database dropdown in Routing dock prevents narrowing of docks

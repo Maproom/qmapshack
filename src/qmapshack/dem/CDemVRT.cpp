@@ -39,22 +39,34 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent) : IDem(parent), file
     return;
   }
 
+  QString fileItem;
   char** fileList = dataset->GetFileList();
   int n = 0;
   while (fileList[n] != nullptr) {
-    QString fileItem = QString::fromUtf8(fileList[n]);
-    if (!QFileInfo(fileItem).exists()) {
-      CSLDestroy(fileList);
-      GDALClose(dataset);
-      dataset = nullptr;
-      QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."),
-                           tr("File does not exist:") % '\n' % fileItem % '\n' %
-                           tr("referenced by file:") % '\n' % filename);
-      return;
+#if defined(Q_OS_WIN32)
+    fileItem = QString::fromLocal8Bit(fileList[n]);
+    if (QFileInfo(fileItem).exists()) {
+      n++;
+      continue;
     }
-    n++;
+#endif // defined(Q_OS_WIN32)
+    fileItem = QString::fromUtf8(fileList[n]);
+    if (QFileInfo(fileItem).exists()) {
+      n++;
+      continue;
+    }
+    n = -1;
+    break;
   }
   CSLDestroy(fileList);
+  if (n < 0) {
+    GDALClose(dataset);
+    dataset = nullptr;
+    QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."),
+                           tr("File does not exist:") % '\n' % fileItem % '\n' %
+                           tr("referenced by file:") % '\n' % filename);
+    return;
+  }
 
   if (dataset->GetRasterCount() != 1) {
     GDALClose(dataset);

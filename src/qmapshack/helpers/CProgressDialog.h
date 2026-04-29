@@ -61,7 +61,7 @@ class CProgressDialog : public QDialog, private Ui::IProgressDialog {
   void pause();
   void goOn();
 
-  static QStack<CProgressDialog*> stackSelf;
+  static QStack<QPointer<CProgressDialog>> stackSelf;
   QElapsedTimer time;
   QTimer* timer;
   qint32 timeElapsed = 0;

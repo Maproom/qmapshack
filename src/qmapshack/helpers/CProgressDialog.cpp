@@ -24,7 +24,7 @@
 #include "canvas/CCanvas.h"
 #include "units/IUnit.h"
 
-QStack<CProgressDialog*> CProgressDialog::stackSelf;
+QStack<QPointer<CProgressDialog>> CProgressDialog::stackSelf;
 
 #define DELAY 500
 
@@ -55,7 +55,7 @@ CProgressDialog::CProgressDialog(const QString text, int min, int max, QWidget* 
   timer = new QTimer(this);
   timer->setSingleShot(true);
   connect(timer, &QTimer::timeout, this, [this, oldTopIndex] {
-    if (oldTopIndex > 0) {
+    if (oldTopIndex > 0 && !stackSelf[oldTopIndex].isNull()) {
       stackSelf[oldTopIndex]->pause();
     }
     show();
@@ -73,7 +73,7 @@ CProgressDialog* CProgressDialog::self() {
 
 CProgressDialog::~CProgressDialog() {
   stackSelf.pop();
-  if (!stackSelf.isEmpty()) {
+  if (!stackSelf.isEmpty() && !stackSelf.top().isNull()) {
     stackSelf.top()->goOn();
   }
   CCanvas::restoreOverrideCursor("~CProgressDialog");
@@ -97,7 +97,7 @@ void CProgressDialog::goOn() {
 }
 
 void CProgressDialog::setAllVisible(bool yes) {
-  if (stackSelf.isEmpty()) {
+  if (stackSelf.isEmpty() || stackSelf.top().isNull()) {
     return;
   }
 

@@ -2,6 +2,7 @@ V1.XX.X
 [QMS-1059] Fix: F1 help browser does not open external links
 [QMS-1061] Fix: File not found error with non-ASCII characters in path (Umlauts)
 [QMS-1064] Fix: Crash in progress dialog while optimizing a route
+[QMS-1067] Fix: Wrong encoding still appears in logfile
 
 V1.20.2
 [QMS-670] Fix: Accessibility issue : font is too small

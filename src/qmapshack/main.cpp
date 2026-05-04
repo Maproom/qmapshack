@@ -51,7 +51,7 @@ int main(int argc, char** argv) {
     qDebug().nospace() << "Qt versions: " << "build=" << QT_VERSION_STR << ", runtime=" << qVersion();
     QString argList("");
     for (int i = 1; i < argCnt; i++) {
-      argList += " \"" + QString(argVal[i]) + "\"";
+      argList += " \"" % QString::fromLocal8Bit(argVal[i]) % "\"";
     }
     qDebug() << "Executable path:" << QFileInfo(argVal[0]).absoluteFilePath();
     qDebug().noquote().nospace() << "Argument list:" << argList;

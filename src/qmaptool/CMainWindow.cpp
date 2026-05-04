@@ -114,10 +114,9 @@ CMainWindow::~CMainWindow() {
 }
 
 QString CMainWindow::getUser() {
-  QString user = getenv("USER");
+  QString user = qEnvironmentVariable("USER");
   if (user.isEmpty()) {
-    user = getenv("USERNAME");  // for windows
-
+    user = qEnvironmentVariable("USERNAME");  // for windows
     if (user.isEmpty()) {
       user = "QMapTool";
     }

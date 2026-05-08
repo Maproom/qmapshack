@@ -71,7 +71,6 @@ class CRouterBRouter : public IRouter, private Ui::IRouterBRouter {
   int synchronousRequest(const QVector<QPointF>& points, const QList<IGisItem*>& nogos, QPolygonF& coords,
                          qreal* costs);
   QNetworkRequest getRequest(const QVector<QPointF>& routePoints, const QList<IGisItem*>& nogos) const;
-  QUrl getServiceUrl() const;
 
   CRouterBRouterLocal* localBRouter;
 
@@ -81,8 +80,6 @@ class CRouterBRouter : public IRouter, private Ui::IRouterBRouter {
   QMutex mutex;
   CRouterBRouterSetup* setup;
   CRouterSetup* routerSetup;
-  CRouterBRouterInfo* info;
-  CProgressDialog* progress{nullptr};
   bool isShutdown{false};
 
   static CRouterBRouter* pSelf;

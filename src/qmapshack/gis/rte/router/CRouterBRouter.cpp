@@ -19,6 +19,7 @@
 
 #include "gis/rte/router/CRouterBRouter.h"
 
+#include <QMutex>
 #include <QtNetwork>
 #include <QtWidgets>
 
@@ -64,6 +65,7 @@ CRouterBRouter::CRouterBRouter(QWidget* parent) : IRouter(false, parent) {
   connect(timerCloseStatusMsg, &QTimer::timeout, this, &CRouterBRouter::slotCloseStatusMsg);
 
   routerSetup = dynamic_cast<CRouterSetup*>(parent);
+  Q_ASSERT(routerSetup != nullptr);
 
   connect(toolConsole, &QToolButton::clicked, this, &CRouterBRouter::slotToggleConsole);
   connect(toolToggleBRouter, &QToolButton::clicked, this, &CRouterBRouter::slotToggleBRouter);
@@ -161,11 +163,10 @@ void CRouterBRouter::updateDialog() const {
     labelCopyrightBRouterWeb->setVisible(true);
   }
   comboProfile->clear();
-  bool hasItems = false;
   const QStringList& profiles = setup->getProfiles();
+  const bool hasItems = !profiles.isEmpty();
   for (const QString& profile : profiles) {
     comboProfile->addItem(profile, profile);
-    hasItems = true;
   }
   comboProfile->setEnabled(hasItems);
   toolProfileInfo->setEnabled(hasItems);
@@ -183,9 +184,8 @@ void CRouterBRouter::slotCloseStatusMsg() const {
 }
 
 QString CRouterBRouter::getOptions() {
-  return QString(tr("profile: %1, alternative: %2")
-                     .arg(comboProfile->currentText())
-                     .arg(comboAlternative->currentData().toInt()));
+  return QString(
+      tr("profile: %1, alternative: %2").arg(comboProfile->currentText()).arg(comboAlternative->currentData().toInt()));
 }
 
 void CRouterBRouter::routerSelected() { getBRouterVersion(); }
@@ -241,12 +241,12 @@ QNetworkRequest CRouterBRouter::getRequest(const QVector<QPointF>& routePoints, 
           if (!nogoPolygons.isEmpty()) {
             nogoPolygons.append("|");
           }
-          nogoPolygons.append(QString("%1").arg(nogoPoints));
+          nogoPolygons.append(nogoPoints);
         } else {
           if (!nogoPolylines.isEmpty()) {
             nogoPolylines.append("|");
           }
-          nogoPolylines.append(QString("%1").arg(nogoPoints));
+          nogoPolylines.append(nogoPoints);
         }
         break;
       }
@@ -258,15 +258,15 @@ QNetworkRequest CRouterBRouter::getRequest(const QVector<QPointF>& routePoints, 
   }
 
   QUrlQuery urlQuery;
-  urlQuery.addQueryItem("lonlats", lonLats.toLatin1());
+  urlQuery.addQueryItem("lonlats", lonLats);
   if (!nogoStr.isEmpty()) {
-    urlQuery.addQueryItem("nogos", nogoStr.toLatin1());
+    urlQuery.addQueryItem("nogos", nogoStr);
   }
   if (!nogoPolygons.isEmpty()) {
-    urlQuery.addQueryItem("polygons", nogoPolygons.toLatin1());
+    urlQuery.addQueryItem("polygons", nogoPolygons);
   }
   if (!nogoPolylines.isEmpty()) {
-    urlQuery.addQueryItem("polylines", nogoPolylines.toLatin1());
+    urlQuery.addQueryItem("polylines", nogoPolylines);
   }
   urlQuery.addQueryItem("profile", comboProfile->currentData().toString());
   urlQuery.addQueryItem("alternativeidx", comboAlternative->currentData().toString());
@@ -289,28 +289,30 @@ int CRouterBRouter::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& c
   QList<IGisItem*> nogos;
   CGisWorkspace::self().getNogoAreas(nogos);
 
-  return synchronousRequest(points, nogos, coords, costs);
+  try {
+    return synchronousRequest(points, nogos, coords, costs);
+  } catch (const QString& msg) {
+    slotDisplayError(tr("Calculate route failed."), msg);
+    return -1;
+  }
 }
 
 int CRouterBRouter::synchronousRequest(const QVector<QPointF>& points, const QList<IGisItem*>& nogos, QPolygonF& coords,
-                                       qreal* costs = nullptr) {
-  qDebug() << "synchronousRequest";
+                                       qreal* costs) {
   if (!mutex.tryLock()) {
-    qDebug() << "synchronousRequest failed to lock";
     // skip further on-the-fly-requests as long a previous request is still running
     return -1;
   }
-
-  qDebug() << "synchronousRequest lock";
 
   if (setup->installMode == CRouterBRouterSetup::eModeLocal && localBRouter->isBRouterNotRunning()) {
     localBRouter->startBRouter();
   }
 
   try {
+    coords.clear();
     QNetworkReply* reply = networkAccessManager->get(getRequest(points, nogos));
 
-    auto guard = QScopeGuard([this, reply]() {
+    auto guard = qScopeGuard([this, reply]() {
       reply->deleteLater();
       mutex.unlock();
     });
@@ -318,7 +320,7 @@ int CRouterBRouter::synchronousRequest(const QVector<QPointF>& points, const QLi
     reply->setProperty("options", getOptions());
     reply->setProperty("time", QDateTime::currentDateTimeUtc().toMSecsSinceEpoch());
 
-    CProgressDialog* progress = new CProgressDialog(tr("Calculate route with %1").arg(getOptions()), 0, NOINT, nullptr);
+    CProgressDialog* progress = new CProgressDialog(tr("Calculate route with %1").arg(getOptions()), 0, NOINT, this);
     QEventLoop eventLoop;
     connect(progress, &CProgressDialog::rejected, reply, &QNetworkReply::abort);
     connect(progress, &CProgressDialog::rejected, &eventLoop, &QEventLoop::quit);
@@ -327,8 +329,10 @@ int CRouterBRouter::synchronousRequest(const QVector<QPointF>& points, const QLi
     progress->deleteLater();
 
     const QNetworkReply::NetworkError& netErr = reply->error();
-    if (netErr == QNetworkReply::RemoteHostClosedError && nogos.size() > 1 && !isMinimumVersion(1, 4, 10)) {
-      throw tr("this version of BRouter does not support more then 1 nogo-area");
+    if (netErr == QNetworkReply::OperationCanceledError) {
+      return -1;  // user cancelled via progress dialog — not an error
+    } else if (netErr == QNetworkReply::RemoteHostClosedError && nogos.size() > 1 && !isMinimumVersion(1, 4, 10)) {
+      throw tr("this version of BRouter does not support more than 1 nogo-area");
     } else if (netErr != QNetworkReply::NoError) {
       throw reply->errorString();
     }
@@ -359,19 +363,21 @@ int CRouterBRouter::synchronousRequest(const QVector<QPointF>& points, const QLi
       const QDomElement& elem = xmlLatLng.item(n).toElement();
       coords << QPointF();
       QPointF& point = coords.last();
-      point.setX(elem.attribute("lon").toFloat() * DEG_TO_RAD);
-      point.setY(elem.attribute("lat").toFloat() * DEG_TO_RAD);
+      point.setX(elem.attribute("lon").toDouble() * DEG_TO_RAD);
+      point.setY(elem.attribute("lat").toDouble() * DEG_TO_RAD);
     }
 
     // find costs of route (copied and adapted from CGisItemRte::setResultFromBrouter)
     if (costs != nullptr) {
+      *costs = 0;
       const QDomNodeList& nodes = xml.childNodes();
       for (int i = 0; i < nodes.count(); i++) {
         const QDomNode& node = nodes.at(i);
         if (node.isComment()) {
           const QString& comment = node.toComment().data();
           // ' track-length = 3181 filtered ascend = 70 plain-ascend = 5 cost=8491 energy=.0kwh time=16m 30s '
-          const QRegularExpressionMatch& match = QRegularExpression("cost\\s*=\\s*(-?\\d+)").match(comment);
+          static const QRegularExpression re("cost\\s*=\\s*(-?\\d+)");
+          const QRegularExpressionMatch& match = re.match(comment);
           if (match.hasMatch()) {
             *costs = match.captured(1).toDouble();
           }
@@ -417,9 +423,6 @@ void CRouterBRouter::calcRoute(const IGisItem::key_t& key) {
   QNetworkReply* reply = networkAccessManager->get(getRequest(points, nogos));
   auto guard = qScopeGuard([reply]() { reply->deleteLater(); });
 
-  reply->setProperty("key.item", key.item);
-  reply->setProperty("key.project", key.project);
-  reply->setProperty("key.device", key.device);
   reply->setProperty("options", getOptions());
   reply->setProperty("time", QDateTime::currentDateTimeUtc().toMSecsSinceEpoch());
 
@@ -439,9 +442,11 @@ void CRouterBRouter::calcRoute(const IGisItem::key_t& key) {
 
   try {
     const QNetworkReply::NetworkError& netErr = reply->error();
-    if (netErr == QNetworkReply::RemoteHostClosedError && reply->property("nogos").toInt() > 1 &&
-        !isMinimumVersion(1, 4, 10)) {
-      throw tr("this version of BRouter does not support more then 1 nogo-area");
+    if (netErr == QNetworkReply::OperationCanceledError) {
+      return;  // user cancelled via progress dialog — not an error
+    } else if (netErr == QNetworkReply::RemoteHostClosedError && nogos.size() > 1 &&
+               !isMinimumVersion(1, 4, 10)) {
+      throw tr("this version of BRouter does not support more than 1 nogo-area");
     } else if (netErr != QNetworkReply::NoError) {
       throw reply->errorString();
     }
@@ -465,10 +470,6 @@ void CRouterBRouter::calcRoute(const IGisItem::key_t& key) {
       throw QString(res.data());
     }
 
-    IGisItem::key_t key;
-    key.item = reply->property("key.item").toString();
-    key.project = reply->property("key.project").toString();
-    key.device = reply->property("key.device").toString();
     qint64 time = reply->property("time").toLongLong();
     time = QDateTime::currentDateTimeUtc().toMSecsSinceEpoch() - time;
 

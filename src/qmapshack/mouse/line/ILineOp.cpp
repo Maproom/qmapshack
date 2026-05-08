@@ -201,7 +201,7 @@ void ILineOp::startDelayedRouting() {
 }
 
 void ILineOp::slotTimeoutRouting() {
-  timerRouting->stop();
+  cancelDelayedRouting();
   finalizeOperation(idxFocus);
   canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
@@ -244,17 +244,17 @@ void ILineOp::drawLeadLine(const QPolygonF& line, QPainter& p) const {
 void ILineOp::mouseMove(const QPoint& pos) { updateLeadLines(idxFocus); }
 
 void ILineOp::leftButtonDown(const QPoint& pos) {
-  timerRouting->stop();
+  cancelDelayedRouting();
   showRoutingErrorMessage(QString());
 }
 
-void ILineOp::scaleChanged() { timerRouting->stop(); }
+void ILineOp::scaleChanged() { cancelDelayedRouting(); }
 
 void ILineOp::startMouseMove(const QPointF& point) {
   //    // as long the mouse is not taken as moving
   //    // to not trigger on-the-fly-routing
   parentHandler->startMouseMove(point.toPoint());
-  timerRouting->stop();
+  cancelDelayedRouting();
 }
 
 void ILineOp::updateLeadLines(qint32 idx) {

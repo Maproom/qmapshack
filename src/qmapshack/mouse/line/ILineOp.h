@@ -111,7 +111,7 @@ class ILineOp : public QObject {
   QPolygonF subLinePixel2;
 
  private:
-  void tryRouting(IGisLine::point_t& pt1, IGisLine::point_t& pt2) const;
+  void tryRouting(qint32 idx) const;
 
   QTimer* timerRouting;
   QTime buttonPressTime;

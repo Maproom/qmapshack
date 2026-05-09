@@ -190,7 +190,10 @@ qreal CRouterOptimization::twoOptStep(const SGisLine& oldOrder, SGisLine& newOrd
 qreal CRouterOptimization::getRealRouteCosts(const SGisLine& line, qreal costCutoff) {
   qreal costs = 0;
   for (int i = 0; i < line.length() - 1; i++) {
-    const routing_cache_item_t* route = getRoute(line[i].coord, line[i + 1].coord);
+    // Copy coords: getRoute runs an event loop that can reassign `line`, dangling the references.
+    QPointF coord1 = line[i].coord;
+    QPointF coord2 = line[i + 1].coord;
+    const routing_cache_item_t* route = getRoute(coord1, coord2);
     if (route == nullptr) {
       return -1;
     }
@@ -255,9 +258,16 @@ const CRouterOptimization::routing_cache_item_t* CRouterOptimization::getRoute(c
 
 int CRouterOptimization::fillSubPts(SGisLine& line) {
   for (int i = 0; i < line.length() - 1; i++) {
+    QPointF coord1 = line[i].coord;
+    QPointF coord2 = line[i + 1].coord;
     line[i].subpts.clear();
-    const routing_cache_item_t* route = getRoute(line[i].coord, line[i + 1].coord);
+    const routing_cache_item_t* route = getRoute(coord1, coord2);
     if (route == nullptr) {
+      return -1;
+    }
+    // Re-check bounds: getRoute runs an event loop during which the user can abort,
+    // causing line to be reassigned and potentially shrunk.
+    if (i >= line.length() - 1) {
       return -1;
     }
     for (const QPointF& point : route->route) {

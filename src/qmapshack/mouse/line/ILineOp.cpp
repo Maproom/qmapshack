@@ -315,21 +315,30 @@ void ILineOp::showRoutingErrorMessage(const QString& msg) const {
   }
 }
 
-void ILineOp::tryRouting(IGisLine::point_t& pt1, IGisLine::point_t& pt2) const {
+void ILineOp::tryRouting(qint32 idx) const {
+  // Copy coords before calcRoute: the router shows a progress dialog that runs an event loop,
+  // during which the user can abort (right-click), causing restoreFromHistory() to reallocate
+  // points and invalidate any references/pointers into it.
+  QPointF coord1 = points[idx].coord;
+  QPointF coord2 = points[idx + 1].coord;
   QPolygonF subs;
 
   try {
-    if (CRouterSetup::self().calcRoute(pt1.coord, pt2.coord, subs) >= 0) {
-      pt1.subpts.clear();
+    if (CRouterSetup::self().calcRoute(coord1, coord2, subs) >= 0) {
+      // Re-check bounds: points may have changed during calcRoute's event loop
+      if (idx >= points.size()) {
+        return;
+      }
+      points[idx].subpts.clear();
       for (const QPointF& sub : std::as_const(subs)) {
-        pt1.subpts << IGisLine::subpt_t(sub);
+        points[idx].subpts << IGisLine::subpt_t(sub);
       }
     }
     showRoutingErrorMessage(QString());
   } catch (const QString& msg) {
     showRoutingErrorMessage(msg);
   }
-  // that is a workaround for canvas loosing mouse tracking caused by CProgressDialog being modal:
+  // workaround for canvas losing mouse tracking caused by CProgressDialog being modal:
   canvas->setMouseTracking(true);
 }
 
@@ -340,11 +349,11 @@ void ILineOp::finalizeOperation(qint32 idx) {
 
   if (parentHandler->useAutoRouting()) {
     CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
-    if (idx > 0) {
-      tryRouting(points[idx - 1], points[idx]);
+    if (idx > 0 && idx < points.size()) {
+      tryRouting(idx - 1);
     }
     if (idx < (points.size() - 1)) {
-      tryRouting(points[idx], points[idx + 1]);
+      tryRouting(idx);
     }
   } else if (parentHandler->useVectorRouting() || parentHandler->useTrackRouting()) {
     if (idx > 0) {
@@ -365,6 +374,10 @@ void ILineOp::finalizeOperation(qint32 idx) {
   }
 
   // need to move the mouse away by some pixels to trigger next routing event
+  // idx may be out of bounds if points was modified during calcRoute's event loop (e.g. abort)
+  if (idx >= points.size()) {
+    return;
+  }
   startMouseMove(points[idx].pixel);
 
   parentHandler->updateStatus();

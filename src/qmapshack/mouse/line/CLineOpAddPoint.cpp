@@ -71,6 +71,12 @@ void CLineOpAddPoint::leftClick(const QPoint& pos) {
     // update subpoints of previous and this point
     slotTimeoutRouting();
 
+    // slotTimeoutRouting runs an event loop; the user may have aborted (right-click or undo)
+    // during it, which sets idxFocus = NOIDX. Bail out if that happened.
+    if (idxFocus == NOIDX) {
+      return;
+    }
+
     // if isPoint is true the line has been appended/prepended
     // in this case go on with adding another point
     if (isPoint) {

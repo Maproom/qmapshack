@@ -167,7 +167,7 @@ class CMapItem : public QObject, public IMapItem, public QTreeWidgetItem {
 
   CMapDraw* map;
   /**
-     @brief A MD5 hash over the first 1024 bytes of the map file, to identify the map
+     @brief A MD5 hash over the first 4096 bytes of the map file for identification
    */
   QString key;
   /**

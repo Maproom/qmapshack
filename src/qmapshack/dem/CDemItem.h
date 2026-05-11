@@ -172,7 +172,7 @@ class CDemItem : public QObject, public IMapItem, public QTreeWidgetItem {
 
   CDemDraw* dem;
   /**
-     @brief A MD5 hash over the first 1024 bytes of the map file, to identify the map
+     @brief A MD5 hash over the first 4096 bytes of the dem file for identification
    */
   QString key;
   /**

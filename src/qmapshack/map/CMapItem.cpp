@@ -59,7 +59,7 @@ void CMapItem::setFilename(const QString& name, const QString& fallbackKey) {
   QFile f(filename);
   if (f.exists() && f.open(QIODevice::ReadOnly)) {
     QCryptographicHash md5(QCryptographicHash::Md5);
-    md5.addData(f.read(qMin(0x1000LL, f.size())));
+    md5.addData(f.read(4096));
     key = md5.result().toHex();
     f.close();
   } else {

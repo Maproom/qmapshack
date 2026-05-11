@@ -194,11 +194,10 @@ void CPoiDraw::buildPoiList() {
       item->filename = dir.absoluteFilePath(filename);
       item->updateIcon();
 
-      // calculate MD5 hash from the file's first 1024 bytes
       QFile f(dir.absoluteFilePath(filename));
       openFileCheckSuccess(QIODevice::ReadOnly, f);
       md5.reset();
-      md5.addData(f.read(1024));
+      md5.addData(f.read(4096));
       item->key = md5.result().toHex();
       f.close();
     }

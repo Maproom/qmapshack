@@ -29,6 +29,8 @@ class CGisDraw;
 class CDemDraw;
 struct SGisLine;
 
+#define ASCENT_THRESHOLD 5
+
 class IGisLine {
  public:
   IGisLine() = default;

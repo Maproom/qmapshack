@@ -27,13 +27,13 @@
 #include "gis/trk/CGisItemTrk.h"
 
 CMouseEditTrk::CMouseEditTrk(const QPointF& point, CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse)
-    : IMouseEditLine(IGisItem::key_t(), point, true, tr("Track"), gis, canvas, mouse) {
-  startNewLine(point);
+    : IMouseEditLine(IGisItem::key_t(), point, true, IWksItem::eTypeTrk, gis, canvas, mouse) {
+  startNewLine();
   canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 
 CMouseEditTrk::CMouseEditTrk(CGisItemTrk& trk, CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse)
-    : IMouseEditLine(trk.getKey(), trk, true, tr("Track"), gis, canvas, mouse), isNewLine(false) {
+    : IMouseEditLine(trk.getKey(), trk, true, IWksItem::eTypeTrk, gis, canvas, mouse), isNewLine(false) {
   canvas->reportStatus(key.item,
                        tr("<b>Edit Track Points</b><br/>Select a function and a routing mode via the tool buttons. "
                           "Next select a point of the line. Only points marked with a large square can be changed. The "

@@ -20,8 +20,6 @@
 #ifndef IMOUSEEDITLINE_H
 #define IMOUSEEDITLINE_H
 
-#include <QDebug>
-#include <QPointer>
 #include <QPolygonF>
 
 #include "gis/IGisItem.h"
@@ -38,15 +36,13 @@ class ILineOp;
 class IMouseEditLine : public IMouse {
   Q_OBJECT
  public:
-  enum features_e { eFeatureSnapToLines = 0x01, eFeatureRouting = 0x02 };
-
   /**
      @brief Start to create a new track with given point as first track point
      @param point     the starting point
      @param gis       the draw context to use
      @param parent    the canvas to use
    */
-  IMouseEditLine(const IGisItem::key_t& key, const QPointF& point, bool enableStatus, const QString& type,
+  IMouseEditLine(const IGisItem::key_t& key, const QPointF& point, bool enableStatus, IWksItem::type_e type,
                  CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse);
   /**
      @brief Edit an existing track
@@ -54,7 +50,7 @@ class IMouseEditLine : public IMouse {
      @param gis       the draw context to use
      @param parent    the canvas to use
    */
-  IMouseEditLine(const IGisItem::key_t& key, IGisLine& src, bool enableStatus, const QString& type, CGisDraw* gis,
+  IMouseEditLine(const IGisItem::key_t& key, IGisLine& src, bool enableStatus, IWksItem::type_e type, CGisDraw* gis,
                  CCanvas* canvas, CMouseAdapter* mouse);
   virtual ~IMouseEditLine();
 
@@ -124,10 +120,7 @@ class IMouseEditLine : public IMouse {
    */
   virtual IGisLine* getGisLine() const = 0;
 
-  virtual void startNewLine(const QPointF& point);
-
-  /// shadow cursor needed to restore cursor after some actions providing their own cursor.
-  QCursor cursor1;
+  virtual void startNewLine();
 
   /// the abstract line object to edit
   SGisLine points;
@@ -159,7 +152,7 @@ class IMouseEditLine : public IMouse {
 
   bool enableStatus;
 
-  QString type;
+  IWksItem::type_e type;
 
   CRouterOptimization optimizer;
 };

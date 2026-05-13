@@ -27,13 +27,13 @@
 #include "mouse/line/CScrOptEditLine.h"
 
 CMouseEditRte::CMouseEditRte(const QPointF& point, CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse)
-    : IMouseEditLine(IGisItem::key_t(), point, true, tr("Route"), gis, canvas, mouse) {
-  startNewLine(point);
+    : IMouseEditLine(IGisItem::key_t(), point, true, IWksItem::eTypeRte, gis, canvas, mouse) {
+  startNewLine();
   canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 
 CMouseEditRte::CMouseEditRte(CGisItemRte& rte, CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse)
-    : IMouseEditLine(rte.getKey(), rte, true, tr("Route"), gis, canvas, mouse) {
+    : IMouseEditLine(rte.getKey(), rte, true, IWksItem::eTypeRte, gis, canvas, mouse) {
   canvas->reportStatus(key.item,
                        tr("<b>Edit Route Points</b><br/>Select a function and a routing mode via the tool buttons. "
                           "Next select a point of the line. Only points marked with a large square can be changed. The "

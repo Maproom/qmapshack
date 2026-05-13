@@ -26,9 +26,8 @@
 #include "gis/CGisDraw.h"
 #include "gis/GeoMath.h"
 #include "gis/IGisLine.h"
-#include "gis/rte/router/CRouterSetup.h"
 #include "gis/rte/router/CRouterOptimization.h"
-#include "gis/trk/CGisItemTrk.h"
+#include "gis/rte/router/CRouterSetup.h"
 #include "helpers/CDraw.h"
 #include "helpers/CSettings.h"
 #include "mouse/CMouseAdapter.h"
@@ -39,8 +38,8 @@
 #include "mouse/line/CScrOptEditLine.h"
 #include "units/IUnit.h"
 
-IMouseEditLine::IMouseEditLine(const IGisItem::key_t& key, const QPointF& point, bool enableStatus, const QString& type,
-                               CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse)
+IMouseEditLine::IMouseEditLine(const IGisItem::key_t& key, const QPointF& point, bool enableStatus,
+                               IWksItem::type_e type, CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse)
     : IMouse(gis, canvas, mouse), key(key), enableStatus(enableStatus), type(type) {
   commonSetup();
   scrOptEditLine->pushSaveOrig->hide();  // hide as there is no original
@@ -51,7 +50,7 @@ IMouseEditLine::IMouseEditLine(const IGisItem::key_t& key, const QPointF& point,
   storeToHistory(points);
 }
 
-IMouseEditLine::IMouseEditLine(const IGisItem::key_t& key, IGisLine& src, bool enableStatus, const QString& type,
+IMouseEditLine::IMouseEditLine(const IGisItem::key_t& key, IGisLine& src, bool enableStatus, IWksItem::type_e type,
                                CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse)
     : IMouse(gis, canvas, mouse), key(key), enableStatus(enableStatus), type(type) {
   commonSetup();
@@ -96,6 +95,14 @@ void IMouseEditLine::commonSetup() {
   connect(scrOptEditLine->toolAddPoint, &QPushButton::clicked, this, &IMouseEditLine::slotAddPoint);
   connect(scrOptEditLine->toolDeletePoint, &QPushButton::clicked, this, &IMouseEditLine::slotDeletePoint);
 
+  if (type == IWksItem::eTypeRte) {
+    scrOptEditLine->toolNoRoute->setDisabled(true);
+    scrOptEditLine->toolVectorRoute->setDisabled(true);
+    scrOptEditLine->toolTrackRoute->setDisabled(true);
+  } else if (type == IWksItem::eTypeOvl) {
+    scrOptEditLine->pushOptimize->setDisabled(true);
+  }
+
   connect(scrOptEditLine->toolNoRoute, &QPushButton::clicked, this, &IMouseEditLine::slotNoRouting);
   connect(scrOptEditLine->toolAutoRoute, &QPushButton::clicked, this, &IMouseEditLine::slotAutoRouting);
   connect(scrOptEditLine->toolVectorRoute, &QPushButton::clicked, this, &IMouseEditLine::slotVectorRouting);
@@ -133,7 +140,7 @@ void IMouseEditLine::commonSetup() {
 
 void IMouseEditLine::abortStep() {
   // at first try to abort a step within the current operation (px. stop adding a new waypoint)
-  if (!lineOp->abortStep()) {
+  if (lineOp != nullptr && !lineOp->abortStep()) {
     // if within operation nothing can be aborted, then abort the whole operation
     // this equals clicking the `abort` button
     slotAbortEx(true);
@@ -218,7 +225,7 @@ void IMouseEditLine::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRec
   lineOp->drawFg(p);
 }
 
-void IMouseEditLine::startNewLine(const QPointF& point) {
+void IMouseEditLine::startNewLine() {
   scrOptEditLine->toolAddPoint->setChecked(true);
   slotAddPoint();
 
@@ -317,11 +324,17 @@ void IMouseEditLine::slotTrackRouting() {
 }
 
 void IMouseEditLine::slotHasFastRouting(bool on) {
-  if (scrOptEditLine->toolAutoRoute->isChecked() && !on) {
-    scrOptEditLine->toolNoRoute->setChecked(true);
+  if (type == IWksItem::eTypeRte) {
+    scrOptEditLine->toolNoRoute->setEnabled(!on);
+    scrOptEditLine->toolNoRoute->setChecked(!on);
+    scrOptEditLine->toolAutoRoute->setEnabled(on);
+    scrOptEditLine->toolAutoRoute->setChecked(on);
+  } else {
+    if (scrOptEditLine->toolAutoRoute->isChecked() && !on) {
+      scrOptEditLine->toolNoRoute->setChecked(true);
+    }
+    scrOptEditLine->toolAutoRoute->setEnabled(on);
   }
-  scrOptEditLine->toolAutoRoute->setEnabled(on);
-  scrOptEditLine->toolAutoRoute->setCheckable(on);
 }
 
 void IMouseEditLine::slotOptimize() {
@@ -354,7 +367,7 @@ void IMouseEditLine::slotOptimize() {
 
 void IMouseEditLine::changeCursor() {
   cursor = lineOp->getCursor();
-  if (QApplication::overrideCursor() != 0) {
+  if (QApplication::overrideCursor() != nullptr) {
     CCanvas::changeOverrideCursor(cursor, "IMouseEditLine::changeCursor");
   }
 }
@@ -364,8 +377,8 @@ void IMouseEditLine::slotAbortEx(bool showMB) {
   bool doAbort = (idxHistory == 0) || !showMB;
   if (!doAbort) {
     doAbort = (QMessageBox::Yes ==
-               QMessageBox::question(nullptr, "Abort",
-                                     "Do you really want to abort?\nAny modifications done will be discarded.",
+               QMessageBox::question(CMainWindow::self().getBestWidgetForParent(), tr("Abort"),
+                                     tr("Do you really want to abort?\nAny modifications done will be discarded."),
                                      QMessageBox::Yes | QMessageBox::No));
   }
 
@@ -496,7 +509,12 @@ void IMouseEditLine::updateStatus() {
 
   QString msg, val, unit;
 
-  msg += tr("<b>%1 Metrics</b>").arg(type);
+  const QString& strType = type == IWksItem::eTypeRte   ? tr("Route")
+                           : type == IWksItem::eTypeTrk ? tr("Track")
+                           : type == IWksItem::eTypeOvl ? tr("Area")
+                                                        : "???";
+
+  msg += tr("<b>%1 Metrics</b>").arg(strType);
   msg += "<table>";
   IUnit::self().meter2distance(dist, val, unit);
   msg += "<tr><td>" + tr("Distance:") + "</td><td>" + QString("&nbsp;%1 %2").arg(val, unit) + "</td></tr>";

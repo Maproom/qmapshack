@@ -26,13 +26,13 @@
 #include "gis/ovl/CGisItemOvlArea.h"
 
 CMouseEditArea::CMouseEditArea(const QPointF& point, CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse)
-    : IMouseEditLine(IGisItem::key_t(), point, false, tr("Area"), gis, canvas, mouse) {
-  startNewLine(point);
+    : IMouseEditLine(IGisItem::key_t(), point, false, IWksItem::eTypeOvl, gis, canvas, mouse) {
+  startNewLine();
   canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 
 CMouseEditArea::CMouseEditArea(CGisItemOvlArea& area, CGisDraw* gis, CCanvas* canvas, CMouseAdapter* mouse)
-    : IMouseEditLine(area.getKey(), area, false, tr("Area"), gis, canvas, mouse) {
+    : IMouseEditLine(area.getKey(), area, false, IWksItem::eTypeOvl, gis, canvas, mouse) {
   canvas->reportStatus(key.item, tr("<b>Edit Area</b><br/>Select a function and a routing mode via the tool buttons. "
                                     "Next select a point of the line. Only points marked with a large square can be "
                                     "changed. The ones with a black dot are subpoints introduced by routing.<br/>") +

@@ -4,6 +4,7 @@ V1.XX.X
 [QMS-1064] Fix: Crash in progress dialog while optimizing a route
 [QMS-1067] Fix: Wrong encoding still appears in logfile
 [QMS-1071] Fix: Valid DEM file may not be loaded
+[QMS-1075] Disable "O", "V" and "T" buttons when drawing a route
 
 V1.20.2
 [QMS-670] Fix: Accessibility issue : font is too small

@@ -888,6 +888,7 @@ QDataStream& IGisProject::operator<<(QDataStream& stream) {
     QString tmp;
     stream >> tmp;
   }
+
   stream >> metadata.name;
   stream >> metadata.desc;
   stream >> metadata.author;
@@ -896,6 +897,7 @@ QDataStream& IGisProject::operator<<(QDataStream& stream) {
   stream >> metadata.time;
   stream >> metadata.keywords;
   stream >> metadata.bounds;
+
   if (version > 1) {
     stream >> key;
   }
@@ -918,6 +920,11 @@ QDataStream& IGisProject::operator<<(QDataStream& stream) {
     qint32 tmp;
     stream >> tmp;
     sortingFolder = (sorting_folder_e)tmp;
+  }
+
+  if (!isPossibleToLoad()) {
+    qDebug() << "skip restoring" << metadata.name;
+    return stream;
   }
 
   QList<temp_item_data_t> items;

@@ -52,7 +52,25 @@ class CDBProject : public IGisProject {
      Typically this is done after the project has been restored in the workspace on application's startup.
 
    */
+  /**
+   * @brief Restore database link after the project has been restored from binary storage.
+   *
+   * Looks up the project's key in the database and, if found, sets the internal database
+   * handle, folder id, and marks the project as valid. Called automatically by
+   * isPossibleToLoad() during workspace restoration.
+   */
   void restoreDBLink();
+
+  /**
+   * @brief Check whether the backing database is available before starting the load thread.
+   *
+   * Calls restoreDBLink() to verify the database connection exists and the project folder
+   * can be found. Returns false (and leaves the project invalid) if the database is not
+   * registered — e.g. when QMapShack is started with a different configuration file via -c.
+   *
+   * @return true if the database link was restored successfully, false otherwise.
+   */
+  bool isPossibleToLoad() override;
 
   const bool canSave() const override { return true; }
 

@@ -428,6 +428,20 @@ class IGisProject : public IWksItem {
   using IWksItem::updateDecoration;
   void genKey() const;
   virtual void setupName(const QString& defaultName);
+  /**
+   * @brief Check whether it is possible to load items into the project.
+   *
+   * Called by IGisProject::operator<<() after all item data has been read from the stream,
+   * but before the background load thread is started. If this returns false the thread is
+   * not started and the project remains invalid, so the caller can safely discard it.
+   *
+   * The default implementation always returns true. Derived classes that depend on external
+   * resources (e.g. a database connection) should override this to verify that those
+   * resources are available before committing to a load.
+   *
+   * @return true if loading should proceed, false to skip the load thread entirely.
+   */
+  virtual bool isPossibleToLoad() { return true; }
   void markAsSaved();
   void readMetadata(const QDomNode& xml, metadata_t& metadata);
   void updateItems();

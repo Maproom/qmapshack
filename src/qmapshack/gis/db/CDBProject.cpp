@@ -151,6 +151,11 @@ CDBProject::~CDBProject() {
   }
 }
 
+bool CDBProject::isPossibleToLoad() {
+  restoreDBLink();
+  return valid;
+}
+
 void CDBProject::restoreDBLink() {
   db = QSqlDatabase::database(filename);
 

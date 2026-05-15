@@ -874,7 +874,6 @@ void CGisListWks::slotLoadWorkspace() {
         project->setVisibility(visible);
 
         project->IGisProject::operator<<(stream);
-        dbProject->restoreDBLink();
 
         if (!project->isValid()) {
           project->destroyLater();

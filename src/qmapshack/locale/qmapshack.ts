@@ -493,46 +493,46 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="250"/>
+        <location filename="../gis/db/CDBProject.cpp" line="255"/>
         <source>The item %1 has been changed by %2 (%3). 
 
 To solve this conflict you can create and save a clone, force your version or drop your version and take the one from the database</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="495"/>
+        <location filename="../gis/db/CDBProject.cpp" line="500"/>
         <source>Missing folder...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="496"/>
+        <location filename="../gis/db/CDBProject.cpp" line="501"/>
         <source>Failed to save project. The folder has been deleted in the database.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="502"/>
+        <location filename="../gis/db/CDBProject.cpp" line="507"/>
         <source>Save ...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="554"/>
+        <location filename="../gis/db/CDBProject.cpp" line="559"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="555"/>
+        <location filename="../gis/db/CDBProject.cpp" line="560"/>
         <source>There was an unexpected database error:
 
 %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="656"/>
+        <location filename="../gis/db/CDBProject.cpp" line="661"/>
         <source>The project &apos;%1&apos; is about to update itself from the database. However there are changes not saved.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="658"/>
+        <location filename="../gis/db/CDBProject.cpp" line="663"/>
         <source>Save changes?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -554,10 +554,10 @@ To solve this conflict you can create and save a clone, force your version or dr
     <name>CDemVRT</name>
     <message>
         <location filename="../dem/CDemVRT.cpp" line="37"/>
-        <location filename="../dem/CDemVRT.cpp" line="50"/>
-        <location filename="../dem/CDemVRT.cpp" line="62"/>
-        <location filename="../dem/CDemVRT.cpp" line="71"/>
-        <location filename="../dem/CDemVRT.cpp" line="88"/>
+        <location filename="../dem/CDemVRT.cpp" line="65"/>
+        <location filename="../dem/CDemVRT.cpp" line="74"/>
+        <location filename="../dem/CDemVRT.cpp" line="83"/>
+        <location filename="../dem/CDemVRT.cpp" line="100"/>
         <source>Error...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -567,28 +567,28 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dem/CDemVRT.cpp" line="51"/>
+        <location filename="../dem/CDemVRT.cpp" line="66"/>
         <source>File does not exist:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dem/CDemVRT.cpp" line="52"/>
+        <location filename="../dem/CDemVRT.cpp" line="67"/>
         <source>referenced by file:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dem/CDemVRT.cpp" line="63"/>
-        <location filename="../dem/CDemVRT.cpp" line="72"/>
+        <location filename="../dem/CDemVRT.cpp" line="75"/>
+        <location filename="../dem/CDemVRT.cpp" line="84"/>
         <source>DEM must have one band with 16bit or 32bit data:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dem/CDemVRT.cpp" line="89"/>
+        <location filename="../dem/CDemVRT.cpp" line="101"/>
         <source>No georeference information found:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dem/CDemVRT.cpp" line="439"/>
+        <location filename="../dem/CDemVRT.cpp" line="451"/>
         <source>Ele.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3111,8 +3111,8 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1019"/>
-        <location filename="../gis/CGisListWks.cpp" line="1107"/>
+        <location filename="../gis/CGisListWks.cpp" line="1018"/>
+        <location filename="../gis/CGisListWks.cpp" line="1106"/>
         <source>Set Track Color</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3122,8 +3122,8 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1912"/>
-        <location filename="../gis/CGisListWks.cpp" line="1973"/>
+        <location filename="../gis/CGisListWks.cpp" line="1911"/>
+        <location filename="../gis/CGisListWks.cpp" line="1972"/>
         <source>&lt;b&gt;Update devices&lt;/b&gt;&lt;p&gt;Update %1&lt;br/&gt;Please wait...&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3158,37 +3158,37 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1097"/>
+        <location filename="../gis/CGisListWks.cpp" line="1096"/>
         <source>Waypoints</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1101"/>
+        <location filename="../gis/CGisListWks.cpp" line="1100"/>
         <source>Wayp. &amp; Tracks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1103"/>
+        <location filename="../gis/CGisListWks.cpp" line="1102"/>
         <source>Tracks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1382"/>
+        <location filename="../gis/CGisListWks.cpp" line="1381"/>
         <source>Close all projects...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1382"/>
+        <location filename="../gis/CGisListWks.cpp" line="1381"/>
         <source>This will remove all projects from the workspace.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1405"/>
+        <location filename="../gis/CGisListWks.cpp" line="1404"/>
         <source>Delete project...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1406"/>
+        <location filename="../gis/CGisListWks.cpp" line="1405"/>
         <source>Do you really want to delete %1?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3881,84 +3881,84 @@ line %2, column %3:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="968"/>
+        <location filename="../CMainWindow.cpp" line="967"/>
         <source>Use &lt;b&gt;Menu-&gt;View-&gt;Add Map View&lt;/b&gt; to open a new view. Or &lt;b&gt;Menu-&gt;File-&gt;Load Map View&lt;/b&gt; to restore a saved one. Or click &lt;a href=&apos;NewView&apos;&gt;here&lt;/a&gt;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1108"/>
+        <location filename="../CMainWindow.cpp" line="1107"/>
         <source>Ele.: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1118"/>
+        <location filename="../CMainWindow.cpp" line="1117"/>
         <source>Slope: %1%2</source>
         <comment>terrain</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1130"/>
+        <location filename="../CMainWindow.cpp" line="1129"/>
         <source>[Grid: %1]</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1261"/>
+        <location filename="../CMainWindow.cpp" line="1260"/>
         <source>Load GIS Data...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1288"/>
+        <location filename="../CMainWindow.cpp" line="1287"/>
         <source>Select output file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1288"/>
-        <location filename="../CMainWindow.cpp" line="1312"/>
+        <location filename="../CMainWindow.cpp" line="1287"/>
+        <location filename="../CMainWindow.cpp" line="1311"/>
         <source>QMapShack View (*.view)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1312"/>
+        <location filename="../CMainWindow.cpp" line="1311"/>
         <source>Select file to load</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1326"/>
+        <location filename="../CMainWindow.cpp" line="1325"/>
         <source>Can not add view...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1327"/>
+        <location filename="../CMainWindow.cpp" line="1326"/>
         <source>The view is already loaded as &apos;%1&apos;. You have to close it before loading it again.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1528"/>
+        <location filename="../CMainWindow.cpp" line="1527"/>
         <source>Rename View...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1528"/>
+        <location filename="../CMainWindow.cpp" line="1527"/>
         <source>Enter new name for view</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1667"/>
+        <location filename="../CMainWindow.cpp" line="1666"/>
         <source>Fatal...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1668"/>
+        <location filename="../CMainWindow.cpp" line="1667"/>
         <source>QMapShack detected a badly installed Proj library. Please contact the package maintainer of your distribution to fix it.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1736"/>
+        <location filename="../CMainWindow.cpp" line="1735"/>
         <source>To link map views all map views must have the same projection and scale type. The function &apos;Link Map Views&apos; will be switched off, now.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1739"/>
+        <location filename="../CMainWindow.cpp" line="1738"/>
         <source>Link Map Views...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4774,41 +4774,41 @@ line %2, column %3:
     <name>CMapVRT</name>
     <message>
         <location filename="../map/CMapVRT.cpp" line="41"/>
-        <location filename="../map/CMapVRT.cpp" line="54"/>
-        <location filename="../map/CMapVRT.cpp" line="71"/>
-        <location filename="../map/CMapVRT.cpp" line="89"/>
-        <location filename="../map/CMapVRT.cpp" line="121"/>
+        <location filename="../map/CMapVRT.cpp" line="69"/>
+        <location filename="../map/CMapVRT.cpp" line="83"/>
+        <location filename="../map/CMapVRT.cpp" line="101"/>
+        <location filename="../map/CMapVRT.cpp" line="133"/>
         <source>Error...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../map/CMapVRT.cpp" line="42"/>
-        <location filename="../map/CMapVRT.cpp" line="72"/>
+        <location filename="../map/CMapVRT.cpp" line="84"/>
         <source>Failed to load file:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../map/CMapVRT.cpp" line="55"/>
+        <location filename="../map/CMapVRT.cpp" line="70"/>
         <source>File does not exist:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../map/CMapVRT.cpp" line="56"/>
+        <location filename="../map/CMapVRT.cpp" line="71"/>
         <source>referenced by file:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../map/CMapVRT.cpp" line="90"/>
+        <location filename="../map/CMapVRT.cpp" line="102"/>
         <source>File must be 8 bit palette or gray indexed:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../map/CMapVRT.cpp" line="122"/>
+        <location filename="../map/CMapVRT.cpp" line="134"/>
         <source>No georeference information found:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../map/CMapVRT.cpp" line="175"/>
+        <location filename="../map/CMapVRT.cpp" line="187"/>
         <source>Failed to read: %1
 line %2, column %3:
  %4</source>
@@ -4882,12 +4882,6 @@ Unknown structure.</source>
 <context>
     <name>CMouseEditArea</name>
     <message>
-        <location filename="../mouse/CMouseEditArea.cpp" line="29"/>
-        <location filename="../mouse/CMouseEditArea.cpp" line="35"/>
-        <source>Area</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../mouse/CMouseEditArea.cpp" line="36"/>
         <source>&lt;b&gt;Edit Area&lt;/b&gt;&lt;br/&gt;Select a function and a routing mode via the tool buttons. Next select a point of the line. Only points marked with a large square can be changed. The ones with a black dot are subpoints introduced by routing.&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
@@ -4901,12 +4895,6 @@ Unknown structure.</source>
 <context>
     <name>CMouseEditRte</name>
     <message>
-        <location filename="../mouse/CMouseEditRte.cpp" line="30"/>
-        <location filename="../mouse/CMouseEditRte.cpp" line="36"/>
-        <source>Route</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../mouse/CMouseEditRte.cpp" line="38"/>
         <source>&lt;b&gt;Edit Route Points&lt;/b&gt;&lt;br/&gt;Select a function and a routing mode via the tool buttons. Next select a point of the line. Only points marked with a large square can be changed. The ones with a black dot are subpoints introduced by routing.&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
@@ -4919,12 +4907,6 @@ Unknown structure.</source>
 </context>
 <context>
     <name>CMouseEditTrk</name>
-    <message>
-        <location filename="../mouse/CMouseEditTrk.cpp" line="30"/>
-        <location filename="../mouse/CMouseEditTrk.cpp" line="36"/>
-        <source>Track</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <location filename="../mouse/CMouseEditTrk.cpp" line="38"/>
         <source>&lt;b&gt;Edit Track Points&lt;/b&gt;&lt;br/&gt;Select a function and a routing mode via the tool buttons. Next select a point of the line. Only points marked with a large square can be changed. The ones with a black dot are subpoints introduced by routing.&lt;br/&gt;</source>
@@ -5637,91 +5619,96 @@ is not a valid coordinate system definition:
 <context>
     <name>CRouterBRouter</name>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="53"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="54"/>
         <source>original</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="54"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="55"/>
         <source>first alternative</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="55"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="56"/>
         <source>second alternative</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="56"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="57"/>
         <source>third alternative</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="154"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="156"/>
         <source>BRouter (offline)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="159"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="161"/>
         <source>BRouter (online)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="186"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="188"/>
         <source>profile: %1, alternative: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="340"/>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="451"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="295"/>
+        <source>Calculate route failed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="335"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="449"/>
+        <source>this version of BRouter does not support more than 1 nogo-area</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="344"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="456"/>
         <source>response is empty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="346"/>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="460"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="350"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="465"/>
         <source>Failed to parse BRouter response (line %1): %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="385"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="391"/>
         <source>Bad response from server: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="429"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="432"/>
         <source>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Routing request sent to server. Please wait...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="321"/>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="433"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="323"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="436"/>
         <source>Calculate route with %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="331"/>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="444"/>
-        <source>this version of BRouter does not support more then 1 nogo-area</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="484"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="485"/>
         <source>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Bad response from server:&lt;br/&gt;%1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="478"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="479"/>
         <source>&lt;br/&gt;Calculation time: %1s</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="520"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="521"/>
         <source>BRouter (Version %1.%2.%3)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="561"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="562"/>
         <source>online</source>
         <translation type="unfinished"></translation>
     </message>
@@ -15884,97 +15871,123 @@ Tip:
 <context>
     <name>IMouseEditLine</name>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="230"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="237"/>
         <source>&lt;b&gt;New Line&lt;/b&gt;&lt;br/&gt;Move the mouse and use the left mouse button to drop points. When done use the right mouse button to stop.&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="259"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="266"/>
         <source>&lt;b&gt;Delete Point&lt;/b&gt;&lt;br/&gt;Move the mouse close to a point and press the left button to delete it.&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="268"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="275"/>
         <source>&lt;b&gt;Select Range of Points&lt;/b&gt;&lt;br/&gt;Left click on first point to start selection. Left click second point to complete selection and choose from options. Use the right mouse button to cancel.&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="277"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="284"/>
         <source>&lt;b&gt;Move Point&lt;/b&gt;&lt;br/&gt;Move the mouse close to a point and press the left button to make it stick to the cursor. Move the mouse to move the point. Drop the point by a left click. Use the right mouse button to cancel.&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="287"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="294"/>
         <source>&lt;b&gt;Add Point&lt;/b&gt;&lt;br/&gt;Move the mouse close to a line segment and press the left button to add a point. The point will stick to the cursor and you can move it.  Drop the point by a left click. Use the right mouse button to cancel.&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="297"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="304"/>
         <source>&lt;b&gt;No Routing&lt;/b&gt;&lt;br/&gt;All points will be connected with a straight line.&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="302"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="309"/>
         <source>&lt;b&gt;Auto Routing&lt;/b&gt;&lt;br/&gt;The current router setup is used to derive a route between points. &lt;b&gt;Note:&lt;/b&gt; The selected router must be able to route on-the-fly. Offline routers usually can do, online routers can&apos;t.&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="309"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="316"/>
         <source>&lt;b&gt;Vector Routing&lt;/b&gt;&lt;br/&gt;Connect points with a line from a loaded vector map if possible.&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="315"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="322"/>
         <source>&lt;b&gt;Track Routing&lt;/b&gt;&lt;br/&gt;Connect points with a line from a loaded track if possible.&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="329"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="342"/>
         <source>Started Optimization.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="341"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="354"/>
         <source>Optimization failed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="341"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="354"/>
         <source>Note:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="342"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="355"/>
         <source>The selected router must be able to route on-the-fly. Offline routers usually can do, online routers can&apos;t.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="345"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="358"/>
         <source>Optimization successful.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="499"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="380"/>
+        <source>Abort</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="381"/>
+        <source>Do you really want to abort?
+Any modifications done will be discarded.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="512"/>
+        <source>Route</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="513"/>
+        <source>Track</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="514"/>
+        <source>Area</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="517"/>
         <source>&lt;b&gt;%1 Metrics&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="502"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="520"/>
         <source>Distance:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="504"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="522"/>
         <source>Ascent:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="506"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="524"/>
         <source>Descent:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.h" line="146"/>
+        <location filename="../mouse/line/IMouseEditLine.h" line="139"/>
         <source>&lt;br/&gt;&lt;b&gt;Move the map&lt;/b&gt;&lt;br/&gt;If you keep the left mouse button pressed and move the mouse, you will move the map.&lt;br/&gt;&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>

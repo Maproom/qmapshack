@@ -964,6 +964,7 @@ set( TRANSLATIONS
     locale/${APPLICATION_NAME}_it.ts
     locale/${APPLICATION_NAME}_nl.ts
     locale/${APPLICATION_NAME}_ru.ts
+    locale/${APPLICATION_NAME}_hr.ts
 )
 
 if(${UPDATE_TRANSLATIONS})

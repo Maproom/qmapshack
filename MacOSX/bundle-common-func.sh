@@ -8,7 +8,7 @@ BUILD_BIN_DIR=$QMSDEVDIR/build_QMapShack/bin
 
 # vars for bundling
 set -a
-declare APP_LANG=("ca" "cs" "de" "en" "es" "fr" "nl" "ru")
+declare APP_LANG=("ca" "cs" "de" "en" "es" "fr" "nl" "ru" "hr" "it")
 APP_NAME_LOWER="$(tr [A-Z] [a-z] <<< "$APP_NAME")"
 APP_BUNDLE=$APP_NAME.app
 

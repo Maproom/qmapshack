@@ -99,6 +99,10 @@ class CPoiFileItem : public QTreeWidgetItem {
    */
   QString key;
   /**
+     @brief A MD5 hash over the first 1024 bytes, kept for backward-compatibility config lookup
+   */
+  QString shortKey;
+  /**
      @brief List of map files forming that particular map
    */
   QString filename;

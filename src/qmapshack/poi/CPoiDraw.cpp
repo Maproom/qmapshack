@@ -18,6 +18,7 @@
 
 #include "poi/CPoiDraw.h"
 
+#include <QScopeGuard>
 #include <QtWidgets>
 
 #include "CMainWindow.h"
@@ -196,10 +197,16 @@ void CPoiDraw::buildPoiList() {
 
       QFile f(dir.absoluteFilePath(filename));
       openFileCheckSuccess(QIODevice::ReadOnly, f);
-      md5.reset();
-      md5.addData(f.read(4096));
-      item->key = md5.result().toHex();
+      QByteArray header = f.read(4096);
       f.close();
+
+      md5.reset();
+      md5.addData(header.left(1024));
+      item->shortKey = md5.result().toHex();
+
+      md5.reset();
+      md5.addData(header);
+      item->key = md5.result().toHex();
     }
   }
 
@@ -248,11 +255,16 @@ void CPoiDraw::restoreActivePoisList(const QStringList& keys) {
     for (int i = 0; i < poiList->count(); i++) {
       CPoiFileItem* item = poiList->item(i);
 
-      if (item && item->key == key) {
+      if (item && (item->key == key || item->shortKey == key)) {
         /**
             @Note   the item will load it's configuration upon successful activation
                     by calling loadConfigForPoiItem().
          */
+        // If matched by short key, temporarily use it so config is read from the correct
+        // settings group; the long key is restored afterwards for future saves (migration).
+        const QString longKey = item->key;
+        if (item->key != key) item->key = key;
+        const auto restoreKey = qScopeGuard([&]() { item->key = longKey; });
         item->activate();
         break;
       }
@@ -269,7 +281,12 @@ void CPoiDraw::restoreActivePoisList(const QStringList& keys, QSettings& cfg) {
     for (int i = 0; i < poiList->count(); i++) {
       CPoiFileItem* item = poiList->item(i);
 
-      if (item && item->key == key) {
+      if (item && (item->key == key || item->shortKey == key)) {
+        // If matched by short key, temporarily use it so config is read from the correct
+        // settings group; the long key is restored afterwards for future saves (migration).
+        const QString longKey = item->key;
+        if (item->key != key) item->key = key;
+        const auto restoreKey = qScopeGuard([&]() { item->key = longKey; });
         if (item->activate()) {
           item->loadConfig(cfg);
         }

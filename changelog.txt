@@ -7,7 +7,9 @@ V1.XX.X
 [QMS-1071] Fix: Valid DEM file may not be loaded
 [QMS-1075] Disable "O", "V" and "T" buttons when drawing a route
 [QMS-1077] Fix: Restoring the workspace crashes if database projects are loaded but their database is missing
+[QMS-1079] Fix: DEM/POI hash backward compatibility
 [QMS-1080] Add *.ts file for Croatian translation
+
 
 V1.20.2
 [QMS-670] Fix: Accessibility issue : font is too small

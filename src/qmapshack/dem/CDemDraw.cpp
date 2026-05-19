@@ -178,25 +178,42 @@ void CDemDraw::loadDemList(QSettings& cfg) {
     // We have a key but no dem found. Either the dem is missing or
     // the dem has a new hash due to changes -> create a new dem item to investigate
     if (dem == nullptr) {
-      cfg.beginGroup(key);
-      const QString& filename = cfg.value("filename", "").toString();
-      dem = createDemItem(filename, key);
-      cfg.endGroup();
+      // Hash algorithm may have changed (1024→4096 bytes): search by short key
+      for (auto it = demsFound.begin(); it != demsFound.end(); ++it) {
+        if (it.value()->getShortKey() == key) {
+          dem = demsFound.take(it.key());
+          break;
+        }
+      }
+
+      if (dem == nullptr) {
+        cfg.beginGroup(key);
+        const QString& filename = cfg.value("filename", "").toString();
+        cfg.endGroup();
+        dem = createDemItem(filename, key);
+      }
     }
 
-    // If the dem content changed the derived key will not match the one
-    // we expect. Delete this dem item, as it will have a reincarnation
-    // as new dem.
-    // If the dem path is not part of the dem paths list also delete
-    // the file as it is no longer part of the used dems.
+    // If neither the long nor short key matches, the content changed.
+    // If the dem path is not part of the dem paths list also delete it.
     QFileInfo fi(dem->getFilename());
-    if (key != dem->getKey() || !demPaths.contains(fi.absolutePath())) {
+    if ((key != dem->getKey() && key != dem->getShortKey()) || !demPaths.contains(fi.absolutePath())) {
       delete dem;
       continue;
     }
 
-    // finally load the config and add the item to the list
+    // If the stored key is the old short key, temporarily use it to read the config
+    // so settings are found; the item retains its new long key for future saves (migration).
+    const QString longKey = dem->getKey();
+    if (key != longKey) {
+      dem->overrideKey(key);
+    }
     dem->loadConfig(cfg, true);
+    if (key != longKey) {
+      dem->overrideKey(longKey);
+      // Safe to restore before the async activation timer fires: activate()
+      // reads only the shadow config (populated above), never the main QSettings.
+    }
 
     demList->addDem(dem);
   }

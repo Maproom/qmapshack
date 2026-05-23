@@ -411,10 +411,13 @@ void CWksItemDelegate::paintProject(QPainter* p, const QStyleOptionViewItem& opt
 
   const bool isOnDevice = item.isOnDevice() != IWksItem::eTypeNone;
   const bool isVisible = item.isVisible();
-  QPalette::ColorGroup colorGroup = (opt.state & QStyle::State_HasFocus) ? QPalette::Active : QPalette::Inactive;
-  const QColor& colorName =
-      opt.palette.color(isVisible ? colorGroup : QPalette::Disabled,
-                        opt.state & QStyle::State_Selected ? QPalette::HighlightedText : QPalette::WindowText);
+  const bool isSelected = (opt.state & QStyle::State_Selected) != 0;
+  const bool hasFocus = (opt.state & QStyle::State_HasFocus) != 0;
+
+  // derive strings colors
+  const QPalette::ColorRole colorRole = (isSelected && hasFocus) ? QPalette::HighlightedText : QPalette::WindowText;
+  const QPalette::ColorGroup colorGroup = isVisible ? (hasFocus ? QPalette::Active : QPalette::Inactive) : QPalette::Disabled;
+  const QColor& colorName = opt.palette.color(colorGroup, colorRole);
 
   // draw icon
   const QPixmap& icon = item.getIcon().scaled(rectIcon.size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);

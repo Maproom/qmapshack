@@ -232,15 +232,17 @@ void CDBItemDelegate::paintFolder(QPainter* p, const QStyleOptionViewItem& opt, 
     }
   }
 
-  QPalette::ColorGroup colorGroup = (opt.state & QStyle::State_HasFocus) ? QPalette::Active : QPalette::Inactive;
-  QColor color = opt.palette.color(
-      colorGroup, opt.state & QStyle::State_Selected ? QPalette::HighlightedText : QPalette::WindowText);
+  const bool isSelected = (opt.state & QStyle::State_Selected) != 0;
+  const bool hasFocus = (opt.state & QStyle::State_HasFocus) != 0;
+
+  const QPalette::ColorRole colorRole = (isSelected && hasFocus) ? QPalette::HighlightedText : QPalette::WindowText;
+  QPalette::ColorGroup colorGroup = hasFocus ? QPalette::Active : QPalette::Inactive;
 
   if (item.type() > IDBItem::eTypeGroup) {
     fontName.setBold(item.getCheckState() != Qt::Unchecked);
-    color = opt.palette.color(item.getCheckState() != Qt::PartiallyChecked ? colorGroup : QPalette::Disabled,
-                              opt.state & QStyle::State_Selected ? QPalette::HighlightedText : QPalette::WindowText);
+    colorGroup = item.getCheckState() != Qt::PartiallyChecked ? colorGroup : QPalette::Disabled;
   }
+  const QColor& color = opt.palette.color(colorGroup, colorRole);
 
   p->setPen(color);
   p->setFont(fontName);
@@ -303,19 +305,20 @@ void CDBItemDelegate::paintItem(QPainter* p, const QStyleOptionViewItem& opt, co
     }
   }
 
-  QPalette::ColorGroup colorGroup = (opt.state & QStyle::State_HasFocus) ? QPalette::Active : QPalette::Inactive;
-  QColor color = opt.palette.color(
-      colorGroup, opt.state & QStyle::State_Selected ? QPalette::HighlightedText : QPalette::WindowText);
+  const bool isSelected = (opt.state & QStyle::State_Selected) != 0;
+  const bool hasFocus = (opt.state & QStyle::State_HasFocus) != 0;
+
+  const QPalette::ColorRole colorRole = (isSelected && hasFocus) ? QPalette::HighlightedText : QPalette::WindowText;
+  QPalette::ColorGroup colorGroup = hasFocus ? QPalette::Active : QPalette::Inactive;
 
   IDBItem* parent = dynamic_cast<IDBItem*>(item.parent());
 
   if (parent && parent->type() == IDBItem::eTypeLostFound) {
-    color = opt.palette.color(parent->getCheckState() != Qt::Unchecked ? colorGroup : QPalette::Disabled,
-                              opt.state & QStyle::State_Selected ? QPalette::HighlightedText : QPalette::WindowText);
+    colorGroup = parent->getCheckState() != Qt::Unchecked ? colorGroup : QPalette::Disabled;
   } else {
-    color = opt.palette.color(item.getCheckState() != Qt::Unchecked ? colorGroup : QPalette::Disabled,
-                              opt.state & QStyle::State_Selected ? QPalette::HighlightedText : QPalette::WindowText);
+    colorGroup = item.getCheckState() != Qt::Unchecked ? colorGroup : QPalette::Disabled;
   }
+  const QColor& color = opt.palette.color(colorGroup, colorRole);
 
   p->setPen(color);
   p->setFont(fontName);

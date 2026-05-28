@@ -548,10 +548,13 @@ void CWksItemDelegate::paintDevice(QPainter* p, const QStyleOptionViewItem& opt,
       getRectanglesDevice(opt, item);
 
   const bool isVisible = item.isVisible();
-  QPalette::ColorGroup colorGroup = (opt.state & QStyle::State_HasFocus) ? QPalette::Active : QPalette::Inactive;
-  const QColor& colorName =
-      opt.palette.color(isVisible ? colorGroup : QPalette::Disabled,
-                        opt.state & QStyle::State_Selected ? QPalette::HighlightedText : QPalette::WindowText);
+  const bool isSelected = (opt.state & QStyle::State_Selected) != 0;
+  const bool hasFocus = (opt.state & QStyle::State_HasFocus) != 0;
+
+  // derive strings colors
+  const QPalette::ColorRole colorRole = (isSelected && hasFocus) ? QPalette::HighlightedText : QPalette::WindowText;
+  const QPalette::ColorGroup colorGroup = isVisible ? (hasFocus ? QPalette::Active : QPalette::Inactive) : QPalette::Disabled;
+  const QColor& colorName = opt.palette.color(colorGroup, colorRole);
 
   // draw name
   fontName.setBold(item.hasUserFocus());
@@ -585,11 +588,14 @@ void CWksItemDelegate::paintItem(QPainter* p, const QStyleOptionViewItem& opt, c
   auto [fontName, fontStatus, rectIcon, rectName, rectStatus, rectChanged] = getRectanglesItem(opt, item);
 
   const bool isVisible = item.isVisible();
+  const bool isSelected = (opt.state & QStyle::State_Selected) != 0;
+  const bool hasFocus = (opt.state & QStyle::State_HasFocus) != 0;
   const QIcon::Mode iconMode = isVisible ? QIcon::Normal : QIcon::Disabled;
-  QPalette::ColorGroup colorGroup = (opt.state & QStyle::State_HasFocus) ? QPalette::Active : QPalette::Inactive;
-  const QColor& colorName =
-      opt.palette.color(isVisible ? colorGroup : QPalette::Disabled,
-                        opt.state & QStyle::State_Selected ? QPalette::HighlightedText : QPalette::WindowText);
+
+  // derive strings colors
+  const QPalette::ColorRole colorRole = (isSelected && hasFocus) ? QPalette::HighlightedText : QPalette::WindowText;
+  const QPalette::ColorGroup colorGroup = isVisible ? (hasFocus ? QPalette::Active : QPalette::Inactive) : QPalette::Disabled;
+  const QColor& colorName = opt.palette.color(colorGroup, colorRole);
 
   // draw name
   fontName.setBold(item.hasUserFocus());

@@ -707,7 +707,7 @@ void CCanvas::leaveEvent(QEvent*) {
 }
 
 void CCanvas::keyPressEvent(QKeyEvent* e) {
-  qDebug() << Qt::hex << e->key();
+  //    qDebug() << Qt::hex << e->key();
   bool doUpdate = true;
 
   switch (e->key()) {

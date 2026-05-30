@@ -9,6 +9,7 @@ V1.XX.X
 [QMS-1077] Fix: Restoring the workspace crashes if database projects are loaded but their database is missing
 [QMS-1079] Fix: DEM/POI hash backward compatibility
 [QMS-1080] Add *.ts file for Croatian translation
+[QMS-1083] Fix: Leftover segment after breaking track generation by right-click
 [QMS-1084] Fix: More delegate entries possibly hardly readable
 [QMS-1088] Fix: Mysterious debug output
 [QMS-1090] Fix: More project items of delegate entries possibly hardly readable

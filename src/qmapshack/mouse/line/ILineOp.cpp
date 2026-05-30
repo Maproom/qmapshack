@@ -325,8 +325,9 @@ void ILineOp::tryRouting(qint32 idx) const {
 
   try {
     if (CRouterSetup::self().calcRoute(coord1, coord2, subs) >= 0) {
-      // Re-check bounds: points may have changed during calcRoute's event loop
-      if (idx >= points.size()) {
+      // Re-check bounds: if the user aborted during calcRoute's event loop,
+      // points[idx+1] may no longer exist — don't write stale subpoints.
+      if (idx + 1 >= points.size()) {
         return;
       }
       points[idx].subpts.clear();

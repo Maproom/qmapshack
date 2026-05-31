@@ -35,11 +35,29 @@ CLineOpMovePoint::~CLineOpMovePoint() {}
 
 void CLineOpMovePoint::leftClick(const QPoint& pos) {
   if (movePoint) {
-    // update subpoints by triggering the routing, if any.
+    if (isRouting) {
+      return;
+    }
+
+    // Pin the drop position before routing: mouseMove during calcRoute's nested
+    // event loop drifts points[idxFocus].coord, storing the wrong position.
+    QPointF coord = pos;
+    gis->convertPx2Rad(coord);
+    points[idxFocus].coord = coord;
+
+    isRouting = true;
     slotTimeoutRouting();
-    // terminate moving the point
+    isRouting = false;
+
     movePoint = false;
-    // store new state of line to undo/redo history
+
+    if (idxFocus == NOIDX || idxFocus >= points.size()) {
+      return;
+    }
+
+    // Restore: mouseMove during the event loop may have drifted the coordinate.
+    points[idxFocus].coord = coord;
+
     parentHandler->storeToHistory(points);
   } else if (idxFocus != NOIDX) {
     QPointF coord = pos;

@@ -110,6 +110,8 @@ class ILineOp : public QObject {
   QPolygonF subLinePixel1;
   QPolygonF subLinePixel2;
 
+  bool isRouting = false;
+
  private:
   void tryRouting(qint32 idx) const;
 

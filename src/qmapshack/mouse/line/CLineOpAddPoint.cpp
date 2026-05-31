@@ -62,20 +62,31 @@ bool CLineOpAddPoint::abortStep() {
 }
 
 void CLineOpAddPoint::leftClick(const QPoint& pos) {
-  if (idxFocus == NOIDX) {
+  if (idxFocus == NOIDX || isRouting) {
     return;
   }
 
   if (addPoint) {
-    // drop the new point at current position
-    // update subpoints of previous and this point
+    QPointF coord = pos;
+    gis->convertPx2Rad(coord);
+
+    // Pin the clicked position before routing: mouseMove during calcRoute's nested
+    // event loop drifts points[idxFocus].coord away from where the user clicked,
+    // causing the endpoint to jump when the route completes (issue #1093).
+    points[idxFocus].coord = coord;
+
+    isRouting = true;
     slotTimeoutRouting();
+    isRouting = false;
 
     // slotTimeoutRouting runs an event loop; the user may have aborted (right-click or undo)
     // during it, which sets idxFocus = NOIDX. Bail out if that happened.
-    if (idxFocus == NOIDX) {
+    if (idxFocus == NOIDX || idxFocus >= points.size()) {
       return;
     }
+
+    // Restore: mouseMove during the event loop may have drifted the coordinate.
+    points[idxFocus].coord = coord;
 
     // if isPoint is true the line has been appended/prepended
     // in this case go on with adding another point
@@ -87,8 +98,6 @@ void CLineOpAddPoint::leftClick(const QPoint& pos) {
       // store current state of line to undo/redo history
       parentHandler->storeToHistory(points);
 
-      QPointF coord = pos;
-      gis->convertPx2Rad(coord);
       points.insert(idxFocus, IGisLine::point_t(coord));
     } else {
       // store current state of line to undo/redo history

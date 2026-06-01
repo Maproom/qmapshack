@@ -471,11 +471,13 @@ void IMouseEditLine::updateStatus() {
   qreal asc = 0;
   qreal dsc = 0;
   qreal dist = 0;
+  bool valid = true;
 
   qreal lastEle = points[0].ele;
   QPointF lastPos = points[0].coord;
 
   for (const IGisLine::point_t& pt1 : std::as_const(points)) {
+    if (pt1.ele == NOINT) valid = false;
     qreal delta = pt1.ele - lastEle;
     if (qAbs(delta) > ASCENT_THRESHOLD) {
       if (delta > 0) {
@@ -491,6 +493,7 @@ void IMouseEditLine::updateStatus() {
     lastPos = pt1.coord;
 
     for (const IGisLine::subpt_t& pt : pt1.subpts) {
+      if (pt.ele == NOINT) valid = false;
       delta = pt.ele - lastEle;
       if (qAbs(delta) > ASCENT_THRESHOLD) {
         if (delta > 0) {
@@ -513,15 +516,26 @@ void IMouseEditLine::updateStatus() {
                            : type == IWksItem::eTypeTrk ? tr("Track")
                            : type == IWksItem::eTypeOvl ? tr("Area")
                                                         : "???";
-
   msg += tr("<b>%1 Metrics</b>").arg(strType);
   msg += "<table>";
   IUnit::self().meter2distance(dist, val, unit);
-  msg += "<tr><td>" + tr("Distance:") + "</td><td>" + QString("&nbsp;%1 %2").arg(val, unit) + "</td></tr>";
-  IUnit::self().meter2elevation(asc, val, unit);
-  msg += "<tr><td>" + tr("Ascent:") + "</td><td>" + QString("&nbsp;%1 %2").arg(val, unit) + "</td></tr>";
-  IUnit::self().meter2elevation(dsc, val, unit);
-  msg += "<tr><td>" + tr("Descent:") + "</td><td>" + QString("&nbsp;%1 %2").arg(val, unit) + "</td></tr>";
+  msg += "<tr><td>" % tr("Distance:") % "</td><td>&nbsp;" % QString("%1 %2").arg(val, unit) % "</td></tr>";
+  msg += "<tr><td>" % tr("Ascent:") % "</td>";
+  if (valid) {
+    IUnit::self().meter2elevation(asc, val, unit);
+    msg += "<td>&nbsp;" % QString("%1 %2").arg(val, unit);
+  } else {
+    msg += "<td style='color: red;'>&nbsp;" % tr("Invalid elevations!");
+  }
+  msg += "</td></tr>";
+  msg += "<tr><td>" % tr("Descent:") % "</td>";
+  if (valid) {
+    IUnit::self().meter2elevation(dsc, val, unit);
+    msg += "<td>&nbsp;" % QString("%1 %2").arg(val, unit);
+  } else {
+    msg += "<td style='color: red;'>&nbsp;" % tr("Invalid elevations!");
+  }
+  msg += "</td></tr>";
   msg += "</table>";
 
   canvas->reportStatus("IMouseEditLine", msg);

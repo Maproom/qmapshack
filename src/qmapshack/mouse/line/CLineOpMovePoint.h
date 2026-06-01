@@ -22,6 +22,13 @@
 
 #include "mouse/line/ILineOp.h"
 
+/**
+   @brief Line operation that moves an existing point to a new position.
+
+   A left-click near a point picks it up (isDragging = true); the point then follows the cursor
+   and routing fires on each mouse-move. A second left-click drops it at the new position.
+   Right-click or abortStep() cancels and restores the original position via the undo history.
+ */
 class CLineOpMovePoint : public ILineOp {
  public:
   CLineOpMovePoint(SGisLine& points, CGisDraw* gis, CCanvas* canvas, IMouseEditLine* parent);
@@ -36,7 +43,7 @@ class CLineOpMovePoint : public ILineOp {
   bool abortStep() override;
 
  private:
-  bool isDragging = false;
+  bool isDragging = false; /**< true while a point has been picked up and follows the cursor */
 };
 
 #endif  // CLINEOPMOVEPOINT_H

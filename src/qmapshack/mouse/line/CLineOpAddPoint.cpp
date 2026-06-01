@@ -80,6 +80,7 @@ void CLineOpAddPoint::leftClick(const QPoint& pos) {
       idxFocus = NOIDX;
     }
   } else if (focusIsEndpoint) {
+    /** idxFocus points at the last existing point; advance past it so the new point is appended. */
     if (idxFocus == (points.size() - 1)) {
       idxFocus++;
     }
@@ -91,6 +92,7 @@ void CLineOpAddPoint::leftClick(const QPoint& pos) {
     points[idxFocus].subpts.clear();
     QPointF coord = pos;
     gis->convertPx2Rad(coord);
+    /** idxFocus is the segment start; advance to insert the new point after it, not before. */
     idxFocus++;
     points.insert(idxFocus, IGisLine::point_t(coord));
     isDragging = true;

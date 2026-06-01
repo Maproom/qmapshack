@@ -38,8 +38,8 @@ class CLineOpAddPoint : public ILineOp {
   bool abortStep() override;
 
  private:
-  bool addPoint = false;
-  bool isPoint = false;
+  bool isDragging = false;
+  bool focusIsEndpoint = false;
 };
 
 #endif  // CLINEOPADDPOINT_H

@@ -81,6 +81,7 @@ class ILineOp : public QObject {
   void updateLeadLines(qint32 idx);
 
   void startMouseMove(const QPointF& point);
+  bool runRoutingAndPin(const QPointF& coord);
 
   IMouseEditLine* parentHandler;
   SGisLine& points;

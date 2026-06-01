@@ -29,40 +29,29 @@
 #include "mouse/line/IMouseEditLine.h"
 
 struct segment_t {
-  segment_t() : idx11(NOIDX), idx12(NOIDX), idx21(NOIDX) {}
+  qint32 seg1Start = NOIDX;  // first index of the polyline segment nearest to pt1
+  qint32 seg1End = NOIDX;    // second index of that segment (always seg1Start + 1)
+  qint32 seg2Start = NOIDX;  // first index of the polyline segment nearest to pt2
 
-  void apply(const QPolygonF& coords, const QPolygonF& pixel, QPolygonF& segCoord, QPolygonF& segPixel,
-             IDrawContext* context) {
-    QPointF pt1 = px1;
-    QPointF pt2 = px2;
-
-    context->convertPx2Rad(pt1);
-    context->convertPx2Rad(pt2);
-
-    if (idx11 != NOIDX && idx21 != NOIDX) {
-      if (idx12 == idx21) {
-        segPixel.push_back(pixel[idx12]);
-        segCoord.push_back(coords[idx12]);
-      } else if (idx11 < idx21) {
-        for (int i = idx12; i <= idx21; i++) {
-          segPixel.push_back(pixel[i]);
-          segCoord.push_back(coords[i]);
-        }
-      } else if (idx11 > idx21) {
-        for (int i = idx11; i > idx21; i--) {
-          segPixel.push_back(pixel[i]);
-          segCoord.push_back(coords[i]);
-        }
+  void apply(const QPolygonF& coords, const QPolygonF& pixel, QPolygonF& segCoord, QPolygonF& segPixel) const {
+    if (seg1Start == NOIDX || seg2Start == NOIDX) {
+      return;
+    }
+    if (seg1End == seg2Start) {
+      segPixel.push_back(pixel[seg1End]);
+      segCoord.push_back(coords[seg1End]);
+    } else if (seg1Start < seg2Start) {
+      for (int i = seg1End; i <= seg2Start; i++) {
+        segPixel.push_back(pixel[i]);
+        segCoord.push_back(coords[i]);
+      }
+    } else {
+      for (int i = seg1Start; i > seg2Start; i--) {
+        segPixel.push_back(pixel[i]);
+        segCoord.push_back(coords[i]);
       }
     }
   }
-
-  qint32 idx11;
-  qint32 idx12;
-  qint32 idx21;
-
-  QPointF px1;
-  QPointF px2;
 };
 
 static inline qreal distance(const QPointF& pa, const QPointF& pb) {
@@ -74,17 +63,13 @@ static inline qreal distance(const QPointF& pa, const QPointF& pb) {
 void GPS_Math_SubPolyline(const QPointF& pt1, const QPointF& pt2, qint32 threshold, const QPolygonF& pixel,
                           segment_t& result) {
   PJ_UV p1, p2;
-  qreal dx, dy;   // delta x and y defined by p1 and p2
-  qreal d_p1_p2;  // distance between p1 and p2
-  qreal x, y;     // coord. (x,y) of the point on line defined by [p1,p2] close to pt
+  qreal dx, dy;
+  qreal d_p1_p2;
+  qreal x, y;
   qreal shortest1 = threshold;
   qreal shortest2 = threshold;
-  qint32 idx11 = NOIDX, idx21 = NOIDX, idx12 = NOIDX;
+  qint32 seg1Start = NOIDX, seg1End = NOIDX, seg2Start = NOIDX;
 
-  QPointF pt11;
-  QPointF pt21;
-
-  // find points on line closest to pt1 and pt2
   const qint32 len = pixel.size();
   for (qint32 i = 1; i < len; ++i) {
     p1.u = pixel[i - 1].x();
@@ -96,88 +81,66 @@ void GPS_Math_SubPolyline(const QPointF& pt1, const QPointF& pt2, qint32 thresho
     dy = p2.v - p1.v;
     d_p1_p2 = qSqrt(dx * dx + dy * dy);
 
-    // find point on line closest to pt1
-    // ratio u the tangent point will divide d_p1_p2
     qreal u = ((pt1.x() - p1.u) * dx + (pt1.y() - p1.v) * dy) / (d_p1_p2 * d_p1_p2);
 
     if (u >= 0.0 && u <= 1.0) {
       x = p1.u + u * dx;
       y = p1.v + u * dy;
-
-      qreal distance = qSqrt((x - pt1.x()) * (x - pt1.x()) + (y - pt1.y()) * (y - pt1.y()));
-
-      if (distance < shortest1) {
-        idx11 = i - 1;
-        idx12 = i;
-        pt11.setX(x);
-        pt11.setY(y);
-        shortest1 = distance;
+      qreal dist = qSqrt((x - pt1.x()) * (x - pt1.x()) + (y - pt1.y()) * (y - pt1.y()));
+      if (dist < shortest1) {
+        seg1Start = i - 1;
+        seg1End = i;
+        shortest1 = dist;
       }
     }
 
-    // find point on line closest to pt2
-    // ratio u the tangent point will divide d_p1_p2
     u = ((pt2.x() - p1.u) * dx + (pt2.y() - p1.v) * dy) / (d_p1_p2 * d_p1_p2);
 
     if (u >= 0.0 && u <= 1.0) {
       x = p1.u + u * dx;
       y = p1.v + u * dy;
-
-      qreal distance = qSqrt((x - pt2.x()) * (x - pt2.x()) + (y - pt2.y()) * (y - pt2.y()));
-
-      if (distance < shortest2) {
-        idx21 = i - 1;
-        pt21.setX(x);
-        pt21.setY(y);
-        shortest2 = distance;
+      qreal dist = qSqrt((x - pt2.x()) * (x - pt2.x()) + (y - pt2.y()) * (y - pt2.y()));
+      if (dist < shortest2) {
+        seg2Start = i - 1;
+        shortest2 = dist;
       }
     }
   }
 
-  // if 1st point can't be found test for distance to both ends
-  if (idx11 == NOIDX) {
+  // fall back to nearest endpoint if no segment projection was found
+  if (seg1Start == NOIDX) {
     QPointF px = pixel.first();
     qreal dist = distance(px, pt1);
     if (dist < (threshold << 1)) {
-      idx11 = 0;
-      idx12 = 1;
-      pt11 = px;
+      seg1Start = 0;
+      seg1End = 1;
     } else {
       px = pixel.last();
-      qreal dist = distance(px, pt1);
+      dist = distance(px, pt1);
       if (dist < (threshold << 1)) {
-        idx11 = pixel.size() - 2;
-        idx12 = pixel.size() - 1;
-        pt11 = px;
+        seg1Start = pixel.size() - 2;
+        seg1End = pixel.size() - 1;
       }
     }
   }
 
-  // if 2nd point can't be found test for distance to both ends
-  if (idx21 == NOIDX) {
+  if (seg2Start == NOIDX) {
     QPointF px = pixel.first();
     qreal dist = distance(px, pt2);
-
     if (dist < (threshold << 1)) {
-      idx21 = 0;
-      pt21 = px;
+      seg2Start = 0;
     } else {
       px = pixel.last();
-      qreal dist = distance(px, pt2);
+      dist = distance(px, pt2);
       if (dist < (threshold << 1)) {
-        idx21 = pixel.size() - 2;
-        pt21 = px;
+        seg2Start = pixel.size() - 2;
       }
     }
   }
 
-  //    qDebug() << pixel.size() << idx11 << idx12 << idx21 << pt1 << pt2 << pt11 << pt21;
-
-  result.idx11 = idx11;
-  result.idx12 = idx12;
-  result.idx21 = idx21;
-  result.px1 = pt11;
-  result.px2 = pt21;
+  result.seg1Start = seg1Start;
+  result.seg1End = seg1End;
+  result.seg2Start = seg2Start;
 }
 
 ILineOp::ILineOp(SGisLine& points, CGisDraw* gis, CCanvas* canvas, IMouseEditLine* parent)
@@ -282,7 +245,7 @@ void ILineOp::updateLeadLines(qint32 idx) {
 
         segment_t result;
         GPS_Math_SubPolyline(pt1.pixel, pt2.pixel, 10, leadLinePixel1, result);
-        result.apply(leadLineCoord1, leadLinePixel1, subLineCoord1, subLinePixel1, gis);
+        result.apply(leadLineCoord1, leadLinePixel1, subLineCoord1, subLinePixel1);
       }
     }
 
@@ -300,7 +263,7 @@ void ILineOp::updateLeadLines(qint32 idx) {
 
         segment_t result;
         GPS_Math_SubPolyline(pt1.pixel, pt2.pixel, 10, leadLinePixel2, result);
-        result.apply(leadLineCoord2, leadLinePixel2, subLineCoord2, subLinePixel2, gis);
+        result.apply(leadLineCoord2, leadLinePixel2, subLineCoord2, subLinePixel2);
       }
     }
   }
@@ -382,6 +345,19 @@ void ILineOp::finalizeOperation(qint32 idx) {
   startMouseMove(points[idx].pixel);
 
   parentHandler->updateStatus();
+}
+
+bool ILineOp::runRoutingAndPin(const QPointF& coord) {
+  points[idxFocus].coord = coord;
+  isRouting = true;
+  slotTimeoutRouting();
+  isRouting = false;
+  if (idxFocus == NOIDX || idxFocus >= points.size()) {
+    return false;
+  }
+  // restore: mouseMove during the event loop may have drifted the coordinate
+  points[idxFocus].coord = coord;
+  return true;
 }
 
 qint32 ILineOp::isCloseTo(const QPoint& pos) const {

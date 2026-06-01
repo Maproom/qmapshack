@@ -36,7 +36,7 @@ class CLineOpMovePoint : public ILineOp {
   bool abortStep() override;
 
  private:
-  bool movePoint = false;
+  bool isDragging = false;
 };
 
 #endif  // CLINEOPMOVEPOINT_H

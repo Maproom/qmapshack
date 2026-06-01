@@ -22,6 +22,14 @@
 
 #include "mouse/line/ILineOp.h"
 
+/**
+   @brief Line operation that adds new points to the line.
+
+   Three hover modes depending on what the cursor is nearest to:
+   - Hovering a mid-segment: left-click inserts a new point into that segment.
+   - Hovering the first or last point (focusIsEndpoint): left-click extends the line.
+   - Dragging (isDragging): a new point is attached to the cursor until the next left-click drops it.
+ */
 class CLineOpAddPoint : public ILineOp {
  public:
   CLineOpAddPoint(SGisLine& points, CGisDraw* gis, CCanvas* canvas, IMouseEditLine* parent);
@@ -33,13 +41,19 @@ class CLineOpAddPoint : public ILineOp {
 
   void drawFg(QPainter& p) override;
 
+  /**
+     @brief Enter dragging mode immediately, appending a new point at the end of the line.
+
+     Called when creating a brand-new line so that the first click in the editor already
+     has a point following the cursor.
+   */
   void append();
 
   bool abortStep() override;
 
  private:
-  bool isDragging = false;
-  bool focusIsEndpoint = false;
+  bool isDragging = false;      /**< true while a new point is attached to the cursor */
+  bool focusIsEndpoint = false; /**< true when the cursor is nearest to the first or last point */
 };
 
 #endif  // CLINEOPADDPOINT_H

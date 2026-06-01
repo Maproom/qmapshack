@@ -28,11 +28,18 @@
 #include "gis/rte/router/CRouterSetup.h"
 #include "mouse/line/IMouseEditLine.h"
 
+/**
+   Identifies the two polyline segments (by index) whose perpendicular projections are closest
+   to two query points pt1 and pt2, as computed by GPS_Math_SubPolyline().
+ */
 struct segment_t {
-  qint32 seg1Start = NOIDX;  // first index of the polyline segment nearest to pt1
-  qint32 seg1End = NOIDX;    // second index of that segment (always seg1Start + 1)
-  qint32 seg2Start = NOIDX;  // first index of the polyline segment nearest to pt2
+  qint32 seg1Start = NOIDX; /**< first index of the polyline segment nearest to pt1 */
+  qint32 seg1End = NOIDX;   /**< second index of that segment (always seg1Start + 1) */
+  qint32 seg2Start = NOIDX; /**< first index of the polyline segment nearest to pt2 */
 
+  /**
+     @brief Extracts the polyline vertices that lie between the two nearest segments.
+   */
   void apply(const QPolygonF& coords, const QPolygonF& pixel, QPolygonF& segCoord, QPolygonF& segPixel) const {
     if (seg1Start == NOIDX || seg2Start == NOIDX) {
       return;
@@ -60,6 +67,20 @@ static inline qreal distance(const QPointF& pa, const QPointF& pb) {
   return qSqrt(dx * dx + dy * dy);
 }
 
+/**
+   @brief Find the sub-polyline in @p pixel that lies between two query points.
+
+   For each query point, finds the segment in @p pixel whose perpendicular projection is closest
+   (within @p threshold pixels). If no perpendicular projection lands within the threshold, falls
+   back to the nearest endpoint (within 2 * @p threshold). The resulting segment indices allow
+   segment_t::apply() to extract the vertices between the two query points.
+
+   @param pt1       first query point in pixel coordinates
+   @param pt2       second query point in pixel coordinates
+   @param threshold maximum pixel distance for a segment projection to be considered
+   @param pixel     the candidate polyline in pixel coordinates
+   @param result    filled with the segment indices nearest to pt1 and pt2
+ */
 void GPS_Math_SubPolyline(const QPointF& pt1, const QPointF& pt2, qint32 threshold, const QPolygonF& pixel,
                           segment_t& result) {
   PJ_UV p1, p2;
@@ -214,8 +235,9 @@ void ILineOp::leftButtonDown(const QPoint& pos) {
 void ILineOp::scaleChanged() { cancelDelayedRouting(); }
 
 void ILineOp::startMouseMove(const QPointF& point) {
-  //    // as long the mouse is not taken as moving
-  //    // to not trigger on-the-fly-routing
+  /** After finalizeOperation() we reposition the virtual mouse cursor onto the just-placed
+      point so that the next mouse move is measured from there, preventing an immediate
+      re-trigger of on-the-fly routing before the cursor has actually moved. */
   parentHandler->startMouseMove(point.toPoint());
   cancelDelayedRouting();
 }

@@ -826,6 +826,7 @@ void IGisProject::updateItemCounters() {
   totalDescent = 0;
   totalElapsedSeconds = 0;
   totalElapsedSecondsMoving = 0;
+  trkElevationInvalid = false;
 
   QByteArray buffer;
   QDataStream stream(&buffer, QIODevice::WriteOnly);
@@ -846,6 +847,7 @@ void IGisProject::updateItemCounters() {
       totalDistance += trk->getTotalDistance();
       totalAscent += trk->getTotalAscent();
       totalDescent += trk->getTotalDescent();
+      trkElevationInvalid |= trk->isTrkElevationInvalid();
       totalElapsedSeconds += trk->getTotalElapsedSeconds();
       totalElapsedSecondsMoving += trk->getTotalElapsedSecondsMoving();
       stream << trk->getHash();

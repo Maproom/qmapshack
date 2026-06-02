@@ -264,6 +264,7 @@ class IGisProject : public IWksItem {
   qreal getTotalDistance() const { return totalDistance; }
   qreal getTotalAscent() const { return totalAscent; }
   qreal getTotalDescent() const { return totalDescent; }
+  bool isTrkElevationInvalid() const { return trkElevationInvalid; }
   qreal getTotalElapsedSeconds() const { return totalElapsedSeconds; }
   qreal getTotalElapsedSecondsMoving() const { return totalElapsedSecondsMoving; }
 
@@ -503,6 +504,7 @@ class IGisProject : public IWksItem {
   qreal totalDistance = 0;
   qreal totalAscent = 0;
   qreal totalDescent = 0;
+  bool trkElevationInvalid = false;
   quint32 totalElapsedSeconds = 0;
   quint32 totalElapsedSecondsMoving = 0;
 

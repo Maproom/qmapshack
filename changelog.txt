@@ -14,6 +14,7 @@ V1.XX.X
 [QMS-1088] Fix: Mysterious debug output
 [QMS-1090] Fix: More project items of delegate entries possibly hardly readable
 [QMS-1093] Fix: Auto-routed track segment endpoint jumps when next point is clicked before routing finishes
+[QMS-1095] Fix: Invalid track ascent/descent at track creation
 
 V1.20.2
 [QMS-670] Fix: Accessibility issue : font is too small

@@ -502,18 +502,22 @@ void CWksItemDelegate::paintProject(QPainter* p, const QStyleOptionViewItem& opt
       status += QString("%1%2%3 ").arg(QChar(0x21A6)).arg(val, unit);
     }
 
-    qreal ascent = project->getTotalAscent();
-    if (ascent < NOFLOAT && !qFuzzyIsNull(ascent) && itemStatusControl.prj.ascent) {
-      QString unit, val;
-      IUnit::self().meter2elevation(ascent, val, unit);
-      status += QString("%1%2%3 ").arg(QChar(0x2197)).arg(val, unit);
-    }
+    if (!project->isTrkElevationInvalid()) {
 
-    qreal descent = project->getTotalDescent();
-    if (descent < NOFLOAT && !qFuzzyIsNull(descent) && itemStatusControl.prj.descent) {
-      QString unit, val;
-      IUnit::self().meter2elevation(descent, val, unit);
-      status += QString("%1%2%3 ").arg(QChar(0x2198)).arg(val, unit);
+      qreal ascent = project->getTotalAscent();
+      if (ascent < NOFLOAT && !qFuzzyIsNull(ascent) && itemStatusControl.prj.ascent) {
+        QString unit, val;
+        IUnit::self().meter2elevation(ascent, val, unit);
+        status += QString("%1%2%3 ").arg(QChar(0x2197)).arg(val, unit);
+      }
+
+      qreal descent = project->getTotalDescent();
+      if (descent < NOFLOAT && !qFuzzyIsNull(descent) && itemStatusControl.prj.descent) {
+        QString unit, val;
+        IUnit::self().meter2elevation(descent, val, unit);
+        status += QString("%1%2%3 ").arg(QChar(0x2198)).arg(val, unit);
+      }
+
     }
 
     if (itemStatusControl.prj.gisStats) {
@@ -626,19 +630,24 @@ void CWksItemDelegate::paintItem(QPainter* p, const QStyleOptionViewItem& opt, c
         status += QString("%1%2%3 ").arg(QChar(0x21A6)).arg(val, unit);
       }
 
-      qreal ascent = trk->getTotalAscent();
-      if (ascent != NOFLOAT && !qFuzzyIsNull(ascent) && itemStatusControl.trk.ascent) {
-        QString unit, val;
-        IUnit::self().meter2elevation(ascent, val, unit);
-        status += QString("%1%2%3 ").arg(QChar(0x2197)).arg(val, unit);
+      if (!trk->isTrkElevationInvalid()) {
+
+        qreal ascent = trk->getTotalAscent();
+        if (ascent != NOFLOAT && !qFuzzyIsNull(ascent) && itemStatusControl.trk.ascent) {
+          QString unit, val;
+          IUnit::self().meter2elevation(ascent, val, unit);
+          status += QString("%1%2%3 ").arg(QChar(0x2197)).arg(val, unit);
+        }
+
+        qreal descent = trk->getTotalDescent();
+        if (descent != NOFLOAT && !qFuzzyIsNull(descent) && itemStatusControl.trk.descent) {
+          QString unit, val;
+          IUnit::self().meter2elevation(descent, val, unit);
+          status += QString("%1%2%3 ").arg(QChar(0x2198)).arg(val, unit);
+        }
+
       }
 
-      qreal descent = trk->getTotalDescent();
-      if (descent != NOFLOAT && !qFuzzyIsNull(descent) && itemStatusControl.trk.descent) {
-        QString unit, val;
-        IUnit::self().meter2elevation(descent, val, unit);
-        status += QString("%1%2%3 ").arg(QChar(0x2198)).arg(val, unit);
-      }
     }
 
     const CGisItemWpt* wpt = dynamic_cast<const CGisItemWpt*>(&item);

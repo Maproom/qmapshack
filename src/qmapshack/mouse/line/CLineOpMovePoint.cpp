@@ -89,6 +89,9 @@ void CLineOpMovePoint::mouseMove(const QPoint& pos) {
   ILineOp::mouseMove(pos);
 
   if (isDragging) {
+    if (isRouting) {
+      return;
+    }
     QPointF coord = pos;
     gis->convertPx2Rad(coord);
 

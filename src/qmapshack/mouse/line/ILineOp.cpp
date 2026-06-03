@@ -186,7 +186,9 @@ void ILineOp::startDelayedRouting() {
 
 void ILineOp::slotTimeoutRouting() {
   cancelDelayedRouting();
+  isRouting = true;
   finalizeOperation(idxFocus);
+  isRouting = false;
   canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 
@@ -310,9 +312,9 @@ void ILineOp::tryRouting(qint32 idx) const {
 
   try {
     if (CRouterSetup::self().calcRoute(coord1, coord2, subs) >= 0) {
-      // Re-check bounds: if the user aborted during calcRoute's event loop,
-      // points[idx+1] may no longer exist — don't write stale subpoints.
-      if (idx + 1 >= points.size()) {
+      // Re-check after calcRoute's event loop: abort (right-click) may have
+      // called restoreFromHistory(), shrinking points or changing what idx refers to.
+      if (idx + 1 >= points.size() || idxFocus == NOIDX) {
         return;
       }
       points[idx].subpts.clear();
@@ -337,6 +339,9 @@ void ILineOp::finalizeOperation(qint32 idx) {
     CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
     if (idx > 0 && idx < points.size()) {
       tryRouting(idx - 1);
+    }
+    if (idxFocus == NOIDX) {
+      return;
     }
     if (idx < (points.size() - 1)) {
       tryRouting(idx);
@@ -371,15 +376,8 @@ void ILineOp::finalizeOperation(qint32 idx) {
 
 bool ILineOp::runRoutingAndPin(const QPointF& coord) {
   points[idxFocus].coord = coord;
-  isRouting = true;
   slotTimeoutRouting();
-  isRouting = false;
-  if (idxFocus == NOIDX || idxFocus >= points.size()) {
-    return false;
-  }
-  // restore: mouseMove during the event loop may have drifted the coordinate
-  points[idxFocus].coord = coord;
-  return true;
+  return idxFocus != NOIDX && idxFocus < points.size();
 }
 
 qint32 ILineOp::isCloseTo(const QPoint& pos) const {

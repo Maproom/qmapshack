@@ -16,6 +16,7 @@ V1.XX.X
 [QMS-1093] Fix: Auto-routed track segment endpoint jumps when next point is clicked before routing finishes
 [QMS-1095] Fix: Invalid track ascent/descent at track creation
 [QMS-1097] Fix: Incomplete routing when editing track points on a faster mouse movement speed
+[QMS-1101] Fix: F1 help browser does not open doc internal links
 
 V1.20.2
 [QMS-670] Fix: Accessibility issue : font is too small

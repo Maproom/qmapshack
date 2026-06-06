@@ -3439,6 +3439,24 @@ Zeile %2, Spalte %3:
     </message>
 </context>
 <context>
+    <name>CHelpBrowser</name>
+    <message>
+        <location filename="../../common/help/CHelpBrowser.cpp" line="55"/>
+        <source>Go back one page</source>
+        <translation>Gehe eine Seite zurück</translation>
+    </message>
+    <message>
+        <location filename="../../common/help/CHelpBrowser.cpp" line="59"/>
+        <source>Go forward one page</source>
+        <translation>Gehe eine Seite vor</translation>
+    </message>
+    <message>
+        <location filename="../../common/help/CHelpBrowser.cpp" line="63"/>
+        <source>Go to initial page</source>
+        <translation>Gehe zur Startseite</translation>
+    </message>
+</context>
+<context>
     <name>CHelpIndex</name>
     <message>
         <location filename="../../common/help/CHelpIndex.cpp" line="26"/>
@@ -8680,74 +8698,74 @@ Zeile %2, Spalte %3:
 <context>
     <name>CWksItemDelegate</name>
     <message>
-        <location filename="../gis/CWksItemDelegate.cpp" line="741"/>
-        <location filename="../gis/CWksItemDelegate.cpp" line="1031"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="750"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="1040"/>
         <source>Enter address...</source>
         <translation>Adresse eingeben...</translation>
     </message>
     <message>
-        <location filename="../gis/CWksItemDelegate.cpp" line="914"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="923"/>
         <source>Hide project on map.</source>
         <translation>Projekt auf der Karte ausblenden.</translation>
     </message>
     <message>
-        <location filename="../gis/CWksItemDelegate.cpp" line="916"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="925"/>
         <source>Show project on map.</source>
         <translation>Projekt auf der Karte anzeigen.</translation>
     </message>
     <message>
-        <location filename="../gis/CWksItemDelegate.cpp" line="922"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="931"/>
         <source>Save project.</source>
         <translation>Projekt speichern.</translation>
     </message>
     <message>
-        <location filename="../gis/CWksItemDelegate.cpp" line="925"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="934"/>
         <source>Disable auto save.</source>
         <translation>Autoatisches. Speichern ausschalten.</translation>
     </message>
     <message>
-        <location filename="../gis/CWksItemDelegate.cpp" line="927"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="936"/>
         <source>Enable auto save.</source>
         <translation>Autoatisches. Speichern anschalten.</translation>
     </message>
     <message>
-        <location filename="../gis/CWksItemDelegate.cpp" line="931"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="940"/>
         <source>Copy content of project into a project in the workspace.</source>
         <translation>Kopiert den Inhalt des Projektes in ein Projekt auf dem Arbeitsplatz.</translation>
     </message>
     <message>
-        <location filename="../gis/CWksItemDelegate.cpp" line="937"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="946"/>
         <source>Disable automatic synchonization with GPS device.</source>
         <translation>Automatische Synchronization mit dem GPS Gerät ausschalten.</translation>
     </message>
     <message>
-        <location filename="../gis/CWksItemDelegate.cpp" line="940"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="949"/>
         <source>Enable automatic synchonization with GPS device.</source>
         <translation>Automatische Synchronization mit dem GPS Gerät anschalten.</translation>
     </message>
     <message>
-        <location filename="../gis/CWksItemDelegate.cpp" line="947"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="956"/>
         <source>This is the active project. All new items will be attached to this project automatically.</source>
         <translation>Das ist das aktive Projekt. Alle neuen Elemente werden automatisch diesem Projekt zugeordnet.</translation>
     </message>
     <message>
-        <location filename="../gis/CWksItemDelegate.cpp" line="953"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="962"/>
         <source>Make this project the active one. All new items will be attached to this project automatically.</source>
         <translation>Diese Projekt zum Aktiven machen. Alle neuen Elemente werden automatisch diesem Projekt zugeordnet.</translation>
     </message>
     <message>
-        <location filename="../gis/CWksItemDelegate.cpp" line="965"/>
-        <location filename="../gis/CWksItemDelegate.cpp" line="988"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="974"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="997"/>
         <source>This is the status line. You can select additional information to be displayed in the workspace setup. See menu-&gt;Workspace-&gt;Setup Workspace</source>
         <translation>Dies ist die Statuszeile. Sie können zusätzliche Informationen, die angezeigt werden sollen, in den Arbeitsplatzeinstellungen auswählen. Siehe Menü-&gt;Arbeitsplatz-&gt;Arbeitsplatz einrichten</translation>
     </message>
     <message>
-        <location filename="../gis/CWksItemDelegate.cpp" line="997"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="1006"/>
         <source>Item is changed and needs to be saved.</source>
         <translation>Das Element wurde geändert und muss gespeichert werden.</translation>
     </message>
     <message>
-        <location filename="../gis/CWksItemDelegate.cpp" line="1009"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="1018"/>
         <source>Setup Search</source>
         <translation>Suche einstellen</translation>
     </message>
@@ -14157,7 +14175,7 @@ Dateiname: %1</translation>
 <context>
     <name>ILineOp</name>
     <message>
-        <location filename="../mouse/line/ILineOp.cpp" line="299"/>
+        <location filename="../mouse/line/ILineOp.cpp" line="301"/>
         <source>Routing</source>
         <translation></translation>
     </message>

@@ -30,6 +30,7 @@ class CHelpBrowser : public QTextBrowser {
   virtual ~CHelpBrowser() = default;
 
   QVariant loadResource(int type, const QUrl& name) override;
+  void contextMenuEvent(QContextMenuEvent* event) override;
 
  public slots:
   void setSource(const QUrl& url);

@@ -26,15 +26,17 @@ CHelpBrowser::CHelpBrowser(QHelpEngine* helpEngine, QWidget* parent) : QTextBrow
           [this](const QHelpLink& document, const QString& keyword) { setSource(document.url); });
   connect(engine->searchEngine()->resultWidget(), &QHelpSearchResultWidget::requestShowLink, this,
           &CHelpBrowser::setSource);
+
+  QTextBrowser::setOpenLinks(false);
+  connect(this, &QTextBrowser::anchorClicked, this, &CHelpBrowser::setSource);
 }
 
 void CHelpBrowser::setSource(const QUrl& url) {
   if (url.scheme().startsWith("http")) {
     QDesktopServices::openUrl(url);
-    return;
+  } else {
+    QTextBrowser::setSource(url);
   }
-  QTextBrowser::setSource(url);
-  QTextBrowser::setOpenExternalLinks(true);
 }
 
 QVariant CHelpBrowser::loadResource(int type, const QUrl& name) {
@@ -43,4 +45,26 @@ QVariant CHelpBrowser::loadResource(int type, const QUrl& name) {
   } else {
     return QTextBrowser::loadResource(type, name);
   }
+}
+
+void CHelpBrowser::contextMenuEvent(QContextMenuEvent* event) {
+  QMenu* menu = createStandardContextMenu();
+
+  menu->addSeparator();
+  if (isBackwardAvailable()) {
+    menu->addAction(QIcon(":/icons/32x32/Left.png"), tr("Go back one page"),
+        Qt::CTRL | Qt::Key_Left, this, &CHelpBrowser::backward);
+  }
+  if (isForwardAvailable()) {
+    menu->addAction(QIcon(":/icons/32x32/Right.png"), tr("Go forward one page"),
+        Qt::CTRL | Qt::Key_Right, this, &CHelpBrowser::forward);
+  }
+  if (isBackwardAvailable()) {
+    menu->addAction(QIcon(":/icons/32x32/ToTop.png"), tr("Go to initial page"),
+        Qt::CTRL | Qt::Key_Up, this, &CHelpBrowser::home);
+  }
+
+  menu->exec(event->globalPos());
+
+  delete menu;
 }

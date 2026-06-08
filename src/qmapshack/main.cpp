@@ -41,6 +41,7 @@ int main(int argc, char** argv) {
   QCoreApplication::setOrganizationDomain("qlandkarte.org");
   QCoreApplication::setApplicationVersion(VER_STR);
   QCoreApplication::setAttribute(Qt::AA_DontShowIconsInMenus, false);
+  QCoreApplication::setAttribute(Qt::AA_DontShowShortcutsInContextMenus, false);
 
   IAppSetup* env = IAppSetup::getPlatformInstance();
   env->processArguments();

@@ -1,3 +1,6 @@
+V1.XX.X
+[QMS-1105] Fix: Context menu shortcuts not shown (macOS)
+
 V1.20.3
 [QMS-1059] Fix: F1 help browser does not open external links
 [QMS-1061] Fix: File not found error with non-ASCII characters in path (Umlauts)

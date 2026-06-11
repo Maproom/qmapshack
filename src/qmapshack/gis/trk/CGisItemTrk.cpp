@@ -332,16 +332,16 @@ void CGisItemTrk::unregisterVisual(INotifyTrk* visual) { registeredVisuals.remov
 
 static void addRowLimit(QString& str, const QString& name, const QString& min, const QString& max) {
   str += "<tr>";
-  str += "<td align='left'>" + name + "</td>";
-  str += "<td align='right'>" + min + "</td>";
-  str += "<td align='right'>" + max + "</td>";
+  str += "<td align='left'>" % name % "</td>";
+  str += "<td align='right'>" % min % "</td>";
+  str += "<td align='right'>" % max % "</td>";
   str += "</tr>";
 }
 
 QString CGisItemTrk::getInfoLimits() const {
   QString str = "<table width='100%'>";
 
-  str += "<tr><th align='left'></th><th align='right'>" + tr("min.") + "</th><th align='right'>" + tr("max.") +
+  str += "<tr><th align='left'></th><th align='right'>" % tr("min.") % "</th><th align='right'>" % tr("max.") %
          "</th></tr>";
 
   QStringList keys = extrema.keys();
@@ -388,7 +388,7 @@ QString CGisItemTrk::getInfo(quint32 feature) const {
       const CActivityTrk::desc_t& desc = activities.getDescriptor(acts.first());
       str += QString("<img src='%1'/>&nbsp;").arg(desc.iconSmall);
     }
-    str += "<b>" + getName() + "</b>";
+    str += "<b>" % getName() % "</b>";
   }
 
   if ((feature & eFeatureShowActivity) && (actCnt > 1)) {
@@ -404,9 +404,9 @@ QString CGisItemTrk::getInfo(quint32 feature) const {
       IUnit::self().meter2elevation(totalAscent, val1, unit1);
       IUnit::self().meter2elevation(totalDescent, val2, unit2);
 
-      str += tr(", %1%2%3, %4%5%6").arg(QChar(0x2197)).arg(val1, unit1).arg(QChar(0x2198)).arg(val2, unit2);
+      str += QString(", %1%2%3, %4%5%6").arg(QChar(0x2197)).arg(val1, unit1).arg(QChar(0x2198)).arg(val2, unit2);
     } else {
-      str += tr(", %1-, %2-").arg(QChar(0x2197)).arg(QChar(0x2198));
+      str += QString(", %1-, %2-").arg(QChar(0x2197)).arg(QChar(0x2198));
     }
     str += "<br />";
 
@@ -431,52 +431,54 @@ QString CGisItemTrk::getInfo(quint32 feature) const {
 
   str += "<br/>";
 
+  str += tr("Start") % ": ";
   if (timeIsValid && timeStart.isValid()) {
-    str += tr("Start: %1").arg(IUnit::datetime2string(timeStart, IUnit::eTimeFormatLong, boundingRect.center()));
+    str += QString("%1").arg(IUnit::datetime2string(timeStart, IUnit::eTimeFormatLong, boundingRect.center()));
   } else {
-    str += tr("Start: -");
+    str += "-";
   }
   str += "<br />";
 
+  str += tr("End") % ": ";
   if (timeIsValid && timeEnd.isValid()) {
-    str += tr("End: %1").arg(IUnit::datetime2string(timeEnd, IUnit::eTimeFormatLong, boundingRect.center()));
+    str += QString("%1").arg(IUnit::datetime2string(timeEnd, IUnit::eTimeFormatLong, boundingRect.center()));
   } else {
-    str += tr("End: -");
+    str += "-";
   }
   str += "<br />";
 
-  str += tr("Points: %1 (%2)").arg(cntVisiblePoints).arg(cntTotalPoints) + "<br />";
+  str += tr("Points: %1 (%2)").arg(cntVisiblePoints).arg(cntTotalPoints) % "<br />";
 
   qreal energyUseCycling = energyCycling.getEnergyUseCycling();
   if (energyCycling.isValid() && energyUseCycling != NOFLOAT) {
-    str += tr("Energy Use Cycling: %L1").arg(energyUseCycling, 0, 'f', 0) + "kcal<br/>";
+    str += tr("Energy Use Cycling: %L1").arg(energyUseCycling, 0, 'f', 0) % "kcal<br/>";
   }
 
   if ((allValidFlags & (CTrackData::trkpt_t::eValidEle | CTrackData::trkpt_t::eInvalidEle)) ==
       (CTrackData::trkpt_t::eValidEle | CTrackData::trkpt_t::eInvalidEle)) {
-    str += "<b style='color: red;'>" + tr("Invalid elevations!") + "</b><br/>";
+    str += "<b style='color: red;'>" % tr("Invalid elevations!") % "</b><br/>";
   }
 
   if ((allValidFlags & (CTrackData::trkpt_t::eValidTime | CTrackData::trkpt_t::eInvalidTime)) ==
       (CTrackData::trkpt_t::eValidTime | CTrackData::trkpt_t::eInvalidTime)) {
-    str += "<b style='color: red;'>" + tr("Invalid timestamps!") + "</b><br/>";
+    str += "<b style='color: red;'>" % tr("Invalid timestamps!") % "</b><br/>";
   }
 
   if ((allValidFlags & (CTrackData::trkpt_t::eValidPos | CTrackData::trkpt_t::eInvalidPos)) ==
       (CTrackData::trkpt_t::eValidPos | CTrackData::trkpt_t::eInvalidPos)) {
-    str += "<b style='color: red;'>" + tr("Invalid positions!") + "</b><br/>";
+    str += "<b style='color: red;'>" % tr("Invalid positions!") % "</b><br/>";
   }
 
   if ((allValidFlags & (CTrackData::trkpt_t::eValidSlope | CTrackData::trkpt_t::eInvalidSlope)) ==
       (CTrackData::trkpt_t::eValidSlope | CTrackData::trkpt_t::eInvalidSlope)) {
-    str += "<b style='color: red;'>" + tr("Invalid slopes!") + "</b><br/>";
+    str += "<b style='color: red;'>" % tr("Invalid slopes!") % "</b><br/>";
   }
 
   if (feature & eFeatureShowFullText) {
     QStringList actNames;
     activities.getActivityNames(actNames);
     if (!actNames.isEmpty()) {
-      str += "</div><div>" + tr("Activities: %1").arg(actNames.join(", "));
+      str += "</div><div>" % tr("Activities: %1").arg(actNames.join(", "));
     }
 
     QString desc = removeHtml(trk.desc).simplified();
@@ -499,15 +501,14 @@ QString CGisItemTrk::getInfo(quint32 feature) const {
   if ((feature & eFeatureShowLinks) && !trk.links.isEmpty()) {
     for (const link_t& link : trk.links) {
       if (link.type.isEmpty() || (link.type == "text/html")) {
-        str += "<br/>\n";
-        str += QString("<a href='%1'>%2</a>").arg(link.uri.toString(), link.text);
+        str += "<br/>\n" % QString("<a href='%1'>%2</a>").arg(link.uri.toString(), link.text);
       }
     }
   }
 
   str += getRatingKeywordInfo();
 
-  return str + "</div>";
+  return str % "</div>";
 }
 
 QString CGisItemTrk::getInfoRange() const {
@@ -533,9 +534,8 @@ QString CGisItemTrk::getInfoRange() const {
   qreal deltaTime = pt2->time.toSecsSinceEpoch() - pt1->time.toSecsSinceEpoch();
 
   const qreal distance = pt2->distance - pt1->distance;
-
   IUnit::self().meter2distance(distance, val, unit);
-  str += QString("%3 %1%2 ").arg(val, unit).arg(QChar(0x21A6));
+  str += QString("%4 %1%2 (%3%)").arg(val, unit).arg(distance * 100 / totalDistance, 2, 'f', 0).arg(QChar(0x21A6));
   if (timeIsValid) {
     quint32 t = pt2->time.toSecsSinceEpoch() - pt1->time.toSecsSinceEpoch();
     quint32 hh = t / 3600;
@@ -552,6 +552,11 @@ QString CGisItemTrk::getInfoRange() const {
     str += QString(", %3 %1%2").arg(val, unit).arg(QChar(0x21A3));
   }
   str += "\n";
+
+  if (isTrkElevationInvalid()) {
+    str += QChar(0x2197) % " -\n" % QChar(0x2198) % " -\n";
+    return str;
+  }
 
   qreal deltaAscent = pt2->ascent - pt1->ascent;
   qreal deltaDescent = pt2->descent - pt1->descent;
@@ -580,7 +585,7 @@ QString CGisItemTrk::getInfoRange() const {
     str += QString(", %1%2").arg(val, unit);
   }
 
-  return str + "\n";
+  return str % "\n";
 }
 
 QString CGisItemTrk::getInfoTrkPt(const CTrackData::trkpt_t& pt) const {
@@ -621,15 +626,15 @@ QString CGisItemTrk::getInfoTrkPt(const CTrackData::trkpt_t& pt) const {
     const CKnownExtension& ext = CKnownExtension::get(key);
     if (ext.known) {
       str +=
-          "\n" + ext.nameLongText + ": " + QString("%1%2").arg(ext.valueFunc(pt) * ext.factor, 0, 'f', 1).arg(ext.unit);
+          "\n" % ext.nameLongText % ": " % QString("%1%2").arg(ext.valueFunc(pt) * ext.factor, 0, 'f', 1).arg(ext.unit);
     } else {
       QStringList tags = key.split("|");
-      str += "\n" + tags.last() + ": " + pt.extensions[key].toString();
+      str += "\n" % tags.last() % ": " % pt.extensions[key].toString();
     }
   }
 
   if (more > 0) {
-    str += "\n" + tr("... and %1 tags not displayed").arg(more);
+    str += "\n" % tr("... and %1 tags not displayed").arg(more);
   }
 
   return str;
@@ -638,33 +643,41 @@ QString CGisItemTrk::getInfoTrkPt(const CTrackData::trkpt_t& pt) const {
 QString CGisItemTrk::getInfoProgress(const CTrackData::trkpt_t& pt) const {
   QString val, unit;
 
-  QString asc = tr("Ascent: - (-)");
-  QString dsc = tr("Descent: - (-)");
-  QString dst = tr("Distance: - (-)");
-  QString mov = tr("Moving: - (-)");
-
-  if (pt.ascent != NOFLOAT) {
+  QString asc = tr("Ascent") % ": ";
+  if (pt.ascent == NOFLOAT || isTrkElevationInvalid()) {
+    asc += "-";
+  } else {
     IUnit::self().meter2elevation(pt.ascent, val, unit);
-    qreal slope = totalAscent ? (pt.ascent * 100 / totalAscent) : 0;
-    asc = tr("Ascent: %1%2 (%3%)").arg(val, unit).arg(slope, 2, 'f', 0);
+    const qreal slope = totalAscent ? (pt.ascent * 100 / totalAscent) : 0;
+    asc += QString("%1%2 (%3%)").arg(val, unit).arg(slope, 2, 'f', 0);
   }
+  asc += ", ";
 
-  if (pt.descent != NOFLOAT) {
+  QString dsc = tr("Descent") % ": ";
+  if (pt.descent == NOFLOAT || isTrkElevationInvalid()) {
+    dsc += "-";
+  } else {
     IUnit::self().meter2elevation(pt.descent, val, unit);
-    qreal slope = totalDescent ? (pt.descent * 100 / totalDescent) : 0;
-    dsc = tr("Descent: %1%2 (%3%)").arg(val, unit).arg(slope, 2, 'f', 0);
+    const qreal slope = totalDescent ? (pt.descent * 100 / totalDescent) : 0;
+    dsc += QString("%1%2 (%3%)").arg(val, unit).arg(slope, 2, 'f', 0);
   }
 
-  if (pt.distance != NOFLOAT) {
+  QString dst = tr("Distance") % ": ";
+  if (pt.distance == NOFLOAT) {
+    dst += "-";
+  } else {
     IUnit::self().meter2distance(pt.distance, val, unit);
-    dst = tr("Distance: %1%2 (%3%)").arg(val, unit).arg(pt.distance * 100 / totalDistance, 2, 'f', 0);
+    dst += QString("%1%2 (%3%)").arg(val, unit).arg(pt.distance * 100 / totalDistance, 2, 'f', 0);
   }
+  dst += ", ";
 
-  if (pt.elapsedSeconds != NOFLOAT) {
+  QString mov = tr("Moving") % ": ";
+  if (pt.elapsedSeconds == NOFLOAT) {
+    mov += "-";
+  } else {
     IUnit::self().seconds2time(pt.elapsedSecondsMoving, val, unit);
-    mov = tr(", Moving: %1%2 (%3%)")
-              .arg(val, unit)
-              .arg(pt.elapsedSecondsMoving * 100 / totalElapsedSecondsMoving, 2, 'f', 0);
+    mov +=
+        QString("%1%2 (%3%)").arg(val, unit).arg(pt.elapsedSecondsMoving * 100 / totalElapsedSecondsMoving, 2, 'f', 0);
   }
 
   return QString("%1%2\n%3%4").arg(asc, dsc, dst, mov);
@@ -684,35 +697,45 @@ QString CGisItemTrk::getInfoRange(const CTrackData::trkpt_t& trkpt1, const CTrac
     dt = pt2.time.toSecsSinceEpoch() - pt1.time.toSecsSinceEpoch();
   }
 
-  QString asc = tr("Ascent: -");
-  QString dsc = tr("Descent: -");
-
-  if ((pt1.ascent != NOFLOAT) && (pt2.ascent != NOFLOAT)) {
-    IUnit::self().meter2elevation(pt2.ascent - pt1.ascent, val, unit);
-    asc = tr("Ascent: %1%2").arg(val, unit);
+  QString asc = tr("Ascent") % ": ";
+  if ((pt1.ascent == NOFLOAT) || (pt2.ascent == NOFLOAT) || isTrkElevationInvalid()) {
+    asc += "-";
+  } else {
+    const qreal ascent = pt2.ascent - pt1.ascent;
+    IUnit::self().meter2elevation(ascent, val, unit);
+    const qreal slope = totalAscent ? (ascent * 100 / totalAscent) : 0;
+    asc += QString("%1%2 (%3%)").arg(val, unit).arg(slope, 2, 'f', 0);
 
     if (dt != NOFLOAT) {
-      IUnit::self().meter2speed((pt2.ascent - pt1.ascent) / dt, val, unit);
-      asc += tr(", %1%2").arg(val, unit);
+      IUnit::self().meter2speed(ascent / dt, val, unit);
+      asc += QString(", %1%2").arg(val, unit);
+    }
+  }
+  asc += ", ";
+
+  QString dsc = tr("Descent") % ": ";
+  if ((pt1.descent == NOFLOAT) || (pt2.descent == NOFLOAT) || isTrkElevationInvalid()) {
+    dsc += "-";
+  } else {
+    const qreal descent = pt2.descent - pt1.descent;
+    IUnit::self().meter2elevation(descent, val, unit);
+    const qreal slope = totalDescent ? (descent * 100 / totalDescent) : 0;
+    dsc += QString("%1%2 (%3%)").arg(val, unit).arg(slope, 2, 'f', 0);
+
+    if (dt != NOFLOAT) {
+      IUnit::self().meter2speed(descent / dt, val, unit);
+      dsc += QString(", %1%2").arg(val, unit);
     }
   }
 
-  if ((pt1.descent != NOFLOAT) && (pt2.descent != NOFLOAT)) {
-    IUnit::self().meter2elevation(pt2.descent - pt1.descent, val, unit);
-    dsc = tr(", Descent: %1%2").arg(val, unit);
-
-    if (dt != NOFLOAT) {
-      IUnit::self().meter2speed((pt2.descent - pt1.descent) / dt, val, unit);
-      dsc += tr(", %1%2").arg(val, unit);
-    }
-  }
-
-  IUnit::self().meter2distance(pt2.distance - pt1.distance, val, unit);
-  QString dsttme = tr("Distance: %1%2").arg(val, unit);
+  QString dsttme = tr("Distance") % ": ";
+  const qreal distance = pt2.distance - pt1.distance;
+  IUnit::self().meter2distance(distance, val, unit);
+  dsttme += QString("%1%2 (%3%)").arg(val, unit).arg(distance * 100 / totalDistance, 2, 'f', 0);
 
   if (dt != NOFLOAT) {
     IUnit::self().seconds2time(dt, val, unit);
-    dsttme += tr(", Time: %1%2").arg(val, unit);
+    dsttme += ", " % tr("Time") % QString(": %1%2").arg(val, unit);
   }
 
   return QString("%1%2\n%3").arg(asc, dsc, dsttme);
@@ -1253,7 +1276,7 @@ bool CGisItemTrk::cut() {
         idx = 0;
       }
 
-      QString name = getName() + QString(" (%1 - %2)").arg(0).arg(idx);
+      QString name = getName() % QString(" (%1 - %2)").arg(0).arg(idx);
       IGisProject* project = nullptr;
       if (!getNameAndProject(name, project, tr("track"))) {
         return false;
@@ -1264,7 +1287,7 @@ bool CGisItemTrk::cut() {
 
     // clone second part?
     if ((mode & (CCutTrk::eModeKeepBoth | CCutTrk::eModeKeepSecond)) != 0) {
-      QString name = getName() + QString(" (%1 - %2)").arg(idxMouse).arg(cntTotalPoints - 1);
+      QString name = getName() % QString(" (%1 - %2)").arg(idxMouse).arg(cntTotalPoints - 1);
       IGisProject* project = nullptr;
       if (!getNameAndProject(name, project, tr("track"))) {
         return false;
@@ -1344,7 +1367,7 @@ bool CGisItemTrk::delTrkPtDesc(const QList<int>& idxTotal) {
 }
 
 void CGisItemTrk::reverse() {
-  QString name = getName() + "_rev";
+  QString name = getName() % "_rev";
   IGisProject* project = nullptr;
   if (!getNameAndProject(name, project, tr("track"))) {
     return;
@@ -1383,7 +1406,7 @@ void CGisItemTrk::combine(const QList<IGisItem::key_t>& keys) {
     return;
   }
 
-  QString name = getName() + " & other";
+  QString name = getName() % " & other";
   IGisProject* projectNew = nullptr;
   if (!getNameAndProject(name, projectNew, tr("track"))) {
     return;
@@ -1542,7 +1565,7 @@ void CGisItemTrk::copySelectedPoints() const {
     return;
   }
 
-  QString name = getName() + QString(" (%1 - %2)").arg(idx1).arg(idx2);
+  QString name = getName() % QString(" (%1 - %2)").arg(idx1).arg(idx2);
   IGisProject* project = nullptr;
   if (!getNameAndProject(name, project, tr("track"))) {
     return;
@@ -1721,7 +1744,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
 
 void CGisItemTrk::drawLimitLabels(limit_type_e type, const QString& label, const QPointF& pos, QPainter& p,
                                   const QFontMetricsF& fm, QList<QRectF>& blockedAreas) {
-  const QString& fullLabel = (type == eLimitTypeMin ? tr("min.") : tr("max.")) + " " + label;
+  const QString& fullLabel = (type == eLimitTypeMin ? tr("min.") : tr("max.")) % " " % label;
   QRectF rect = fm.boundingRect(fullLabel);
   rect.moveBottomLeft(pos.toPoint() + QPoint(10, -10));
   rect.adjust(-4, -2, 4, 2);
@@ -1924,7 +1947,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw* gis) {
     for (int idx = idxMin; idx < idxMax; idx++) {
       const QString& desc = trk.getTrkPtByTotalIndex(idx)->desc;
       if (!desc.isEmpty()) {
-        str += "\nInfo: " + desc;
+        str += "\nInfo: " % desc;
         break;
       }
     }
@@ -2864,7 +2887,7 @@ void CGisItemTrk::toRoute() {
   if (NOIDX == idx1) {
     routeName = getName();
   } else {
-    routeName = getName() + QString(" (%1-%2)").arg(idx1).arg(idx2);
+    routeName = getName() % QString(" (%1-%2)").arg(idx1).arg(idx2);
   }
 
   CTrkToRteDialog dlg(project, routeName, saveSubPts);
@@ -2892,7 +2915,7 @@ void CGisItemTrk::toArea() {
   if (NOIDX == idx1) {
     areaName = getName();
   } else {
-    areaName = getName() + QString(" (%1-%2)").arg(idx1).arg(idx2);
+    areaName = getName() % QString(" (%1-%2)").arg(idx1).arg(idx2);
   }
 
   CTrkToAreaDialog dlg(project, areaName);

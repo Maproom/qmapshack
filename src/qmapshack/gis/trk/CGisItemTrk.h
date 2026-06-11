@@ -182,8 +182,8 @@ class CGisItemTrk : public IGisItem, public IGisLine {
 
   /// returns "true" when trk has no time-related invalid points
   bool isTrkTimeValid() const { return (allValidFlags & CTrackData::trkpt_t::eInvalidTime) == 0; }
-  bool isTrkElevationInvalid() const { return allValidFlags & CTrackData::trkpt_t::eInvalidEle; }
-  bool isTrkSlopeInvalid() const { return allValidFlags & CTrackData::trkpt_t::eInvalidSlope; }
+  bool isTrkElevationInvalid() const { return (allValidFlags & CTrackData::trkpt_t::eInvalidEle) != 0; }
+  bool isTrkSlopeInvalid() const { return (allValidFlags & CTrackData::trkpt_t::eInvalidSlope) != 0; }
 
   QDateTime getTimestamp() const override { return getTimeStart(); }
 

@@ -123,9 +123,9 @@ The three `QStyledItemDelegate` subclasses used by the tree views share heavy du
 
 ### High value, low risk
 
-1. Replace the positional `std::tuple<QFont, QFont, QRect, ...>` returns from every `getRectangles*()`/`getRectangles()` function (all 3 files) with named structs (e.g. `ProjectLayout`, `ItemLayout`, `FolderLayout`, `MapItemLayout`). Pure mechanical refactor, biggest readability win — every call site currently destructures with `auto [a, b, c, ...]` and relies on positional ordering.
+1. ~~Replace the positional `std::tuple<QFont, QFont, QRect, ...>` returns from every `getRectangles*()`/`getRectangles()` function (all 3 files) with named structs.~~ Done: all of `CWksItemDelegate`, `CDBItemDelegate`, and `CMapItemDelegate` already return named layout structs (`ProjectLayout`, `DeviceLayout`, `ItemLayout`, `MapItemLayout`, etc.).
 2. Merge `CDBItemDelegate::getRectanglesFolder` and `getRectanglesItem` — nearly identical, differ only in the status-size field and the button-visibility condition.
-3. Extract a shared `QColor itemNameColor(opt, isVisible/isActive)` helper. The `colorRole`/`colorGroup`/`colorName` 3-line block is duplicated in `CWksItemDelegate::paintProject/paintDevice/paintItem` and in `CMapItemDelegate::paint`.
+3. ~~Extract a shared `QColor itemNameColor(opt, isVisible/isActive)` helper.~~ Done: `CDraw::itemNameColor()` in `helpers/CDraw.{h,cpp}`, used by `CWksItemDelegate::paintProject/paintDevice/paintItem` and `CMapItemDelegate::paint`.
 4. Extract a shared check-state-button switch for `CDBItemDelegate::paintFolder`/`paintItem` (identical `Qt::Unchecked/PartiallyChecked/Checked` → icon block).
 5. Extract a distance/ascent/descent status-string builder — duplicated between `CWksItemDelegate::paintProject` (project totals) and `paintItem` (track totals).
 

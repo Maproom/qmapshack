@@ -212,6 +212,9 @@ class CWksItemDelegate : public QStyledItemDelegate {
 
   static void drawProgressBar(QPainter* p, const QRect& rect, qreal progress);
 
+  static QString distanceAscentDescentStatus(qreal distance, qreal ascent, qreal descent, bool elevationInvalid,
+                                             bool showDistance, bool showAscent, bool showDescent);
+
   void drawRatingStars(qreal rating, QPainter* p, QIcon::Mode iconMode, QRect& rectStatus) const;
 
   void paintProject(QPainter* p, const QStyleOptionViewItem& opt, const QModelIndex& index, IWksItem& item) const;

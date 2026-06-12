@@ -127,7 +127,7 @@ The three `QStyledItemDelegate` subclasses used by the tree views share heavy du
 2. ~~Merge `CDBItemDelegate::getRectanglesFolder` and `getRectanglesItem`.~~ Decided: keep as-is, will not be tackled.
 3. ~~Extract a shared `QColor itemNameColor(opt, isVisible/isActive)` helper.~~ Done: `CDraw::itemNameColor()` in `helpers/CDraw.{h,cpp}`, used by `CWksItemDelegate::paintProject/paintDevice/paintItem` and `CMapItemDelegate::paint`.
 4. ~~Extract a shared check-state-button switch for `CDBItemDelegate::paintFolder`/`paintItem`.~~ Done: `CDBItemDelegate::drawCheckStateButton()` now wraps the `Qt::Unchecked/PartiallyChecked/Checked` → icon switch, used by both.
-5. Extract a distance/ascent/descent status-string builder — duplicated between `CWksItemDelegate::paintProject` (project totals) and `paintItem` (track totals).
+5. ~~Extract a distance/ascent/descent status-string builder.~~ Done: `CWksItemDelegate::distanceAscentDescentStatus()` is used by both `paintProject` (project totals) and `paintItem` (track totals).
 
 ### Medium value
 

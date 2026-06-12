@@ -344,6 +344,34 @@ void CWksItemDelegate::drawProgressBar(QPainter* p, const QRect& rect, qreal pro
   p->drawLine(line);
 }
 
+QString CWksItemDelegate::distanceAscentDescentStatus(qreal distance, qreal ascent, qreal descent,
+                                                      bool elevationInvalid, bool showDistance, bool showAscent,
+                                                      bool showDescent) {
+  QString status;
+
+  if (distance != NOFLOAT && !qFuzzyIsNull(distance) && showDistance) {
+    QString unit, val;
+    IUnit::self().meter2distance(distance, val, unit);
+    status += QString("%1%2%3 ").arg(QChar(0x21A6)).arg(val, unit);
+  }
+
+  if (!elevationInvalid) {
+    if (ascent != NOFLOAT && !qFuzzyIsNull(ascent) && showAscent) {
+      QString unit, val;
+      IUnit::self().meter2elevation(ascent, val, unit);
+      status += QString("%1%2%3 ").arg(QChar(0x2197)).arg(val, unit);
+    }
+
+    if (descent != NOFLOAT && !qFuzzyIsNull(descent) && showDescent) {
+      QString unit, val;
+      IUnit::self().meter2elevation(descent, val, unit);
+      status += QString("%1%2%3 ").arg(QChar(0x2198)).arg(val, unit);
+    }
+  }
+
+  return status;
+}
+
 void CWksItemDelegate::drawRatingStars(qreal rating, QPainter* p, QIcon::Mode iconMode, QRect& rectStatus) const {
   const qint32 N = qRound(rating);
   if (rating != 0) {
@@ -491,28 +519,10 @@ void CWksItemDelegate::paintProject(QPainter* p, const QStyleOptionViewItem& opt
       status += keywords + " ";
     }
 
-    qreal distance = project->getTotalDistance();
-    if (distance < NOFLOAT && !qFuzzyIsNull(distance) && itemStatusControl.prj.distance) {
-      QString unit, val;
-      IUnit::self().meter2distance(distance, val, unit);
-      status += QString("%1%2%3 ").arg(QChar(0x21A6)).arg(val, unit);
-    }
-
-    if (!project->isTrkElevationInvalid()) {
-      qreal ascent = project->getTotalAscent();
-      if (ascent < NOFLOAT && !qFuzzyIsNull(ascent) && itemStatusControl.prj.ascent) {
-        QString unit, val;
-        IUnit::self().meter2elevation(ascent, val, unit);
-        status += QString("%1%2%3 ").arg(QChar(0x2197)).arg(val, unit);
-      }
-
-      qreal descent = project->getTotalDescent();
-      if (descent < NOFLOAT && !qFuzzyIsNull(descent) && itemStatusControl.prj.descent) {
-        QString unit, val;
-        IUnit::self().meter2elevation(descent, val, unit);
-        status += QString("%1%2%3 ").arg(QChar(0x2198)).arg(val, unit);
-      }
-    }
+    status +=
+        distanceAscentDescentStatus(project->getTotalDistance(), project->getTotalAscent(), project->getTotalDescent(),
+                                    project->isTrkElevationInvalid(), itemStatusControl.prj.distance,
+                                    itemStatusControl.prj.ascent, itemStatusControl.prj.descent);
 
     if (itemStatusControl.prj.gisStats) {
       const IGisProject* const prj = dynamic_cast<IGisProject*>(&item);
@@ -608,28 +618,9 @@ void CWksItemDelegate::paintItem(QPainter* p, const QStyleOptionViewItem& opt, c
         }
       }
 
-      qreal distance = trk->getTotalDistance();
-      if (distance != NOFLOAT && !qFuzzyIsNull(distance) && itemStatusControl.trk.distance) {
-        QString unit, val;
-        IUnit::self().meter2distance(distance, val, unit);
-        status += QString("%1%2%3 ").arg(QChar(0x21A6)).arg(val, unit);
-      }
-
-      if (!trk->isTrkElevationInvalid()) {
-        qreal ascent = trk->getTotalAscent();
-        if (ascent != NOFLOAT && !qFuzzyIsNull(ascent) && itemStatusControl.trk.ascent) {
-          QString unit, val;
-          IUnit::self().meter2elevation(ascent, val, unit);
-          status += QString("%1%2%3 ").arg(QChar(0x2197)).arg(val, unit);
-        }
-
-        qreal descent = trk->getTotalDescent();
-        if (descent != NOFLOAT && !qFuzzyIsNull(descent) && itemStatusControl.trk.descent) {
-          QString unit, val;
-          IUnit::self().meter2elevation(descent, val, unit);
-          status += QString("%1%2%3 ").arg(QChar(0x2198)).arg(val, unit);
-        }
-      }
+      status += distanceAscentDescentStatus(trk->getTotalDistance(), trk->getTotalAscent(), trk->getTotalDescent(),
+                                            trk->isTrkElevationInvalid(), itemStatusControl.trk.distance,
+                                            itemStatusControl.trk.ascent, itemStatusControl.trk.descent);
     }
 
     const CGisItemWpt* wpt = dynamic_cast<const CGisItemWpt*>(&item);

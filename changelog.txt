@@ -2,6 +2,7 @@ V1.XX.X
 [QMS-963] Add action to move a map to the top in map list
 [QMS-1105] Fix: Context menu shortcuts not shown (macOS)
 [QMS-1111] Add percentage values to track range
+[QMS-1115] Improve performance for high resolution DEMs
 [QMS-1117] Suggest track name when converting routes
 
 V1.20.3

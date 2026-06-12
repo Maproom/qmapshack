@@ -124,15 +124,18 @@ class IDem : public IDrawObject {
   void slotShowElevationShadeScale(bool yes);
 
  protected:
-  void hillshading(QVector<float>& data, qreal w, qreal h, QImage& img) const;
+  void hillshading(QVector<float>& data, quint32 x, quint32 y, quint32 stride, quint32 w, quint32 h, QImage& img) const;
 
-  void slopeShading(QVector<float>& data, qreal w, qreal h, QImage& img) const;
+  void slopeShading(QVector<float>& data, quint32 x, quint32 y, quint32 stride, quint32 w, quint32 h,
+                    QImage& img) const;
 
-  void slopecolor(QVector<float>& data, qreal w, qreal h, QImage& img) const;
+  void slopecolor(QVector<float>& data, quint32 x, quint32 y, quint32 stride, quint32 w, quint32 h, QImage& img) const;
 
-  void elevationLimit(QVector<float>& data, qreal w, qreal h, QImage& img) const;
+  void elevationLimit(QVector<float>& data, quint32 x, quint32 y, quint32 stride, quint32 w, quint32 h,
+                      QImage& img) const;
 
-  void elevationShading(QVector<float>& data, qreal w, qreal h, QImage& img) const;
+  void elevationShading(QVector<float>& data, quint32 x, quint32 y, quint32 stride, quint32 w, quint32 h,
+                        QImage& img) const;
 
   /**
      @brief Slope in degrees based on a window. Origin is at point (1,1), counting from zero.

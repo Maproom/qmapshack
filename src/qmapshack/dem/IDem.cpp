@@ -30,39 +30,39 @@ inline T getValue(QVector<T>& data, int x, int y, int dx) {
 }
 
 template <typename T>
-inline void fillWindow(QVector<T>& data, int x, int y, int dx, T* w) {
-  w[0] = getValue(data, x - 1, y - 1, dx);
-  w[1] = getValue(data, x, y - 1, dx);
-  w[2] = getValue(data, x + 1, y - 1, dx);
-  w[3] = getValue(data, x - 1, y, dx);
-  w[4] = getValue(data, x, y, dx);
-  w[5] = getValue(data, x + 1, y, dx);
-  w[6] = getValue(data, x - 1, y + 1, dx);
-  w[7] = getValue(data, x, y + 1, dx);
-  w[8] = getValue(data, x + 1, y + 1, dx);
+inline void fillWindow(QVector<T>& data, int x, int y, int stride, T* w) {
+  w[0] = getValue(data, x - 1, y - 1, stride);
+  w[1] = getValue(data, x, y - 1, stride);
+  w[2] = getValue(data, x + 1, y - 1, stride);
+  w[3] = getValue(data, x - 1, y, stride);
+  w[4] = getValue(data, x, y, stride);
+  w[5] = getValue(data, x + 1, y, stride);
+  w[6] = getValue(data, x - 1, y + 1, stride);
+  w[7] = getValue(data, x, y + 1, stride);
+  w[8] = getValue(data, x + 1, y + 1, stride);
 }
 
 template <typename T>
-inline void fillWindow4x4(QVector<T>& data, qreal x, qreal y, int dx, T* w) {
+inline void fillWindow4x4(QVector<T>& data, qreal x, qreal y, int stride, T* w) {
   x = qFloor(x);
   y = qFloor(y);
 
-  w[0] = getValue(data, x - 1, y - 1, dx);
-  w[1] = getValue(data, x, y - 1, dx);
-  w[2] = getValue(data, x + 1, y - 1, dx);
-  w[3] = getValue(data, x + 2, y - 1, dx);
-  w[4] = getValue(data, x - 1, y, dx);
-  w[5] = getValue(data, x, y, dx);
-  w[6] = getValue(data, x + 1, y, dx);
-  w[7] = getValue(data, x + 2, y, dx);
-  w[8] = getValue(data, x - 1, y + 1, dx);
-  w[9] = getValue(data, x, y + 1, dx);
-  w[10] = getValue(data, x + 1, y + 1, dx);
-  w[11] = getValue(data, x + 2, y + 1, dx);
-  w[12] = getValue(data, x - 1, y + 2, dx);
-  w[13] = getValue(data, x, y + 2, dx);
-  w[14] = getValue(data, x + 1, y + 2, dx);
-  w[15] = getValue(data, x + 2, y + 2, dx);
+  w[0] = getValue(data, x - 1, y - 1, stride);
+  w[1] = getValue(data, x, y - 1, stride);
+  w[2] = getValue(data, x + 1, y - 1, stride);
+  w[3] = getValue(data, x + 2, y - 1, stride);
+  w[4] = getValue(data, x - 1, y, stride);
+  w[5] = getValue(data, x, y, stride);
+  w[6] = getValue(data, x + 1, y, stride);
+  w[7] = getValue(data, x + 2, y, stride);
+  w[8] = getValue(data, x - 1, y + 1, stride);
+  w[9] = getValue(data, x, y + 1, stride);
+  w[10] = getValue(data, x + 1, y + 1, stride);
+  w[11] = getValue(data, x + 2, y + 1, stride);
+  w[12] = getValue(data, x - 1, y + 2, stride);
+  w[13] = getValue(data, x, y + 2, stride);
+  w[14] = getValue(data, x + 1, y + 2, stride);
+  w[15] = getValue(data, x + 2, y + 2, stride);
 }
 
 const struct SlopePresets IDem::slopePresets[7]{
@@ -213,22 +213,21 @@ int IDem::getFactorHillshading() const {
   }
 }
 
-void IDem::hillshading(QVector<float>& data, qreal w, qreal h, QImage& img) const {
-  int wp2 = w + 2;
-
+void IDem::hillshading(QVector<float>& data, quint32 x, quint32 y, quint32 stride, quint32 w, quint32 h,
+                       QImage& img) const {
 #define ZFACT 0.125
 #define ZFACT_BY_ZFACT (ZFACT * ZFACT)
 #define SIN_ALT (qSin(45 * DEG_TO_RAD))
 #define ZFACT_COS_ALT (ZFACT * qCos(45 * DEG_TO_RAD))
 #define AZ (315 * DEG_TO_RAD)
-  for (unsigned int m = 1; m <= h; m++) {
-    unsigned char* scan = img.scanLine(m - 1);
-    for (unsigned int n = 1; n <= w; n++) {
+  for (unsigned int m = 0; m < h; m++) {
+    unsigned char* scan = img.scanLine(m);
+    for (unsigned int n = 0; n < w; n++) {
       float win[eWinsize3x3];
-      fillWindow(data, n, m, wp2, win);
+      fillWindow(data, n + x, m + y, stride, win);
 
       if (hasNoData && win[4] == noData) {
-        scan[n - 1] = 255;
+        scan[n] = 255;
         continue;
       }
 
@@ -247,37 +246,36 @@ void IDem::hillshading(QVector<float>& data, qreal w, qreal h, QImage& img) cons
         cang = 1.0 + (254.0 * cang);
       }
 
-      scan[n - 1] = cang;
+      scan[n] = cang;
     }
   }
 }
 
 int IDem::getFactorSlopeShading() const { return factorSlopeShading * 100.; }
 
-void IDem::slopeShading(QVector<float>& data, qreal w, qreal h, QImage& img) const {
-  int wp2 = w + 2;
-
-  for (unsigned int m = 1; m <= h; m++) {
-    unsigned char* scan = img.scanLine(m - 1);
-    for (unsigned int n = 1; n <= w; n++) {
+void IDem::slopeShading(QVector<float>& data, quint32 x, quint32 y, quint32 stride, quint32 w, quint32 h,
+                        QImage& img) const {
+  for (unsigned int m = 0; m < h; m++) {
+    unsigned char* scan = img.scanLine(m);
+    for (unsigned int n = 0; n < w; n++) {
       float win[eWinsize3x3];
-      fillWindow(data, n, m, wp2, win);
+      fillWindow(data, n + x, m + y, stride, win);
 
       if (hasNoData && win[4] == noData) {
-        scan[n - 1] = 0;
+        scan[n] = 0;
         continue;
       }
 
       qreal slope = slopeOfWindowInterp(win, eWinsize3x3, 0, 0);
       if (slope == NOFLOAT) {
-        scan[n - 1] = 0;
+        scan[n] = 0;
       } else {
         int alphaValue = slope * 255. / 90.     // map slope angle to alpha [0 .. 255]
                          * factorSlopeShading;  // apply slider value [0.25 .. 3.0]
         if (alphaValue > 255) {
           alphaValue = 255;
         }
-        scan[n - 1] = alphaValue;
+        scan[n] = alphaValue;
       }
     }
   }
@@ -333,48 +331,46 @@ qreal IDem::slopeOfWindowInterp(float* win2, winsize_e size, qreal x, qreal y) c
   return slope;
 }
 
-void IDem::slopecolor(QVector<float>& data, qreal w, qreal h, QImage& img) const {
-  int wp2 = w + 2;
-
-  for (unsigned int m = 1; m <= h; m++) {
-    unsigned char* scan = img.scanLine(m - 1);
-    for (unsigned int n = 1; n <= w; n++) {
+void IDem::slopecolor(QVector<float>& data, quint32 x, quint32 y, quint32 stride, quint32 w, quint32 h,
+                      QImage& img) const {
+  for (unsigned int m = 0; m < h; m++) {
+    unsigned char* scan = img.scanLine(m);
+    for (unsigned int n = 0; n < w; n++) {
       float win[eWinsize3x3];
-      fillWindow(data, n, m, wp2, win);
+      fillWindow(data, n + x, m + y, stride, win);
       qreal slope = slopeOfWindowInterp(win, eWinsize3x3, 0, 0);
 
       if (slope == NOFLOAT) {
-        scan[n - 1] = 0;
+        scan[n] = 0;
         continue;
       }
 
       const qreal* currentSlopeStepTable = getCurrentSlopeStepTable();
 
       if (slope > currentSlopeStepTable[4]) {
-        scan[n - 1] = 5;
+        scan[n] = 5;
       } else if (slope > currentSlopeStepTable[3]) {
-        scan[n - 1] = 4;
+        scan[n] = 4;
       } else if (slope > currentSlopeStepTable[2]) {
-        scan[n - 1] = 3;
+        scan[n] = 3;
       } else if (slope > currentSlopeStepTable[1]) {
-        scan[n - 1] = 2;
+        scan[n] = 2;
       } else if (slope > currentSlopeStepTable[0]) {
-        scan[n - 1] = 1;
+        scan[n] = 1;
       } else {
-        scan[n - 1] = 0;
+        scan[n] = 0;
       }
     }
   }
 }
 
-void IDem::elevationLimit(QVector<float>& data, qreal w, qreal h, QImage& img) const {
-  int wp2 = w + 2;
-
-  for (unsigned int m = 1; m <= h; m++) {
-    unsigned char* scan = img.scanLine(m - 1);
-    for (unsigned int n = 1; n <= w; n++) {
+void IDem::elevationLimit(QVector<float>& data, quint32 x, quint32 y, quint32 stride, quint32 w, quint32 h,
+                          QImage& img) const {
+  for (unsigned int m = 0; m < h; m++) {
+    unsigned char* scan = img.scanLine(m);
+    for (unsigned int n = 0; n < w; n++) {
       float win[eWinsize3x3];
-      fillWindow(data, n, m, wp2, win);
+      fillWindow(data, n + x, m + y, stride, win);
 
       // get maximum of window (_not_ mean)
       //
@@ -389,22 +385,21 @@ void IDem::elevationLimit(QVector<float>& data, qreal w, qreal h, QImage& img) c
       QString unit;     // result not used
       IUnit::self().meter2elevation(meters, elevation, unit);
       if (elevation >= getElevationLimit()) {
-        scan[n - 1] = 1;
+        scan[n] = 1;
       } else {
-        scan[n - 1] = 0;
+        scan[n] = 0;
       }
     }
   }
 }
 
-void IDem::elevationShading(QVector<float>& data, qreal w, qreal h, QImage& img) const {
-  int wp2 = w + 2;
-
-  for (unsigned int m = 1; m <= h; m++) {
-    unsigned char* scan = img.scanLine(m - 1);
-    for (unsigned int n = 1; n <= w; n++) {
+void IDem::elevationShading(QVector<float>& data, quint32 x, quint32 y, quint32 stride, quint32 w, quint32 h,
+                            QImage& img) const {
+  for (unsigned int m = 0; m < h; m++) {
+    unsigned char* scan = img.scanLine(m);
+    for (unsigned int n = 0; n < w; n++) {
       float win[eWinsize3x3];
-      fillWindow(data, n, m, wp2, win);
+      fillWindow(data, n + x, m + y, stride, win);
 
       // get maximum of window (_not_ mean)
       //
@@ -424,12 +419,12 @@ void IDem::elevationShading(QVector<float>& data, qreal w, qreal h, QImage& img)
       int limitHi = std::max(getElevationShadeLimitLow(), getElevationShadeLimitHi());
 
       if (elevation < limitLow) {
-        scan[n - 1] = 0;
+        scan[n] = 0;
       } else if (elevation < limitHi) {
         qreal relLimit = (elevation - limitLow) / (limitHi - limitLow);
-        scan[n - 1] = 1 + relLimit * 253;
+        scan[n] = 1 + relLimit * 253;
       } else {
-        scan[n - 1] = 255;
+        scan[n] = 255;
       }
     }
   }

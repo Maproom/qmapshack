@@ -143,9 +143,9 @@ The three `QStyledItemDelegate` subclasses used by the tree views share heavy du
 
 ### CMapItemDelegate-specific
 
-12. Same tuple-return pattern in `getRectangles()` — covered by #1.
-13. `drawToolButton` is duplicated a *third* time: `CWksItemDelegate` and `CDBItemDelegate` already have an identical static `drawToolButton()`; `CMapItemDelegate::paint()` inlines the same `QStyleOptionToolButton` setup instead of reusing it. Should become one free function in `helpers/CDraw.h` (already included by all three files).
-14. Layout constants (`kMargin`, `kFontSizeDiff*`, etc.) are redefined identically as `constexpr int` in all three `.cpp` files — centralize in a shared header.
+12. ~~Same tuple-return pattern in `getRectangles()` — covered by #1.~~ Done: `CMapItemDelegate::getRectangles()` already returns the named `MapItemLayout` struct.
+13. ~~`drawToolButton` is duplicated a *third* time: `CWksItemDelegate` and `CDBItemDelegate` already have an identical static `drawToolButton()`; `CMapItemDelegate::paint()` inlines the same `QStyleOptionToolButton` setup instead of reusing it. Should become one free function in `helpers/CDraw.h` (already included by all three files).~~ Done: `CDraw::drawToolButton()` now provides this, used by all three delegates; the per-class static `drawToolButton()` of `CWksItemDelegate`/`CDBItemDelegate` and the inlined version in `CMapItemDelegate::paint()` were removed.
+14. ~~Layout constants (`kMargin`, `kFontSizeDiff*`, etc.) are redefined identically as `constexpr int` in all three `.cpp` files — centralize in a shared header.~~ Partially done: `kMargin` (identical `= 1` in all three) moved to `helpers/CDraw.h`, local definitions removed. `kFontSizeDiff*`/`kFontSizeInvalid` were left alone — their values differ per file (e.g. `kFontSizeDiffItem` is 3/3/2), so merging them risked behavior changes.
 15. `CMapItemDelegate::getAnimations(index) const` silently inserts into `data` because `data` is `mutable QHash` and `operator[]` default-constructs missing keys — even the const "getter" mutates the hash. Should use `data.value(key).animations` for the const overload.
 16. `getRectangles(opt, isActive)` takes a state flag that only affects `fontName.setBold()`, not any returned rect; `editorEvent` passes a hardcoded `false` just to get `rectButton`. Consider separating state-independent layout from state-dependent fonts.
 17. Stray trailing `;` after `reset() { data.clear(); }` in the header (lint nit).

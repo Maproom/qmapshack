@@ -28,7 +28,6 @@
 #include "helpers/CSettings.h"
 #include "misc.h"
 
-constexpr int kMargin = 1;
 constexpr int kFontSizeDiffItem = 3;
 constexpr int kFontSizeInvalid = -1;
 
@@ -65,32 +64,17 @@ IDBItem* CDBItemDelegate::indexToItem(const QModelIndex& index) const {
   return item;
 }
 
-void CDBItemDelegate::drawToolButton(QPainter* p, const QStyleOptionViewItem& opt, const QRect& rect, const QIcon& icon,
-                                     bool enabled, bool pressed) {
-  QStyleOptionToolButton btnOpt;
-  btnOpt.initFrom(opt.widget);
-  btnOpt.rect = rect;
-  btnOpt.icon = icon;
-  btnOpt.iconSize = rect.adjusted(2 * kMargin, 2 * kMargin, -2 * kMargin, -2 * kMargin).size();
-  btnOpt.toolButtonStyle = Qt::ToolButtonIconOnly;
-  btnOpt.subControls = QStyle::SC_ToolButton;
-  btnOpt.activeSubControls = QStyle::SC_ToolButton;
-  btnOpt.state =
-      (enabled ? QStyle::State_Enabled : QStyle::State_None) | (pressed ? QStyle::State_Sunken : QStyle::State_Raised);
-  opt.widget->style()->drawComplexControl(QStyle::CC_ToolButton, &btnOpt, p, opt.widget);
-}
-
 void CDBItemDelegate::drawCheckStateButton(QPainter* p, const QStyleOptionViewItem& opt, const QRect& rect,
                                            Qt::CheckState state) {
   switch (state) {
     case Qt::Unchecked:
-      drawToolButton(p, opt, rect, QIcon(":/icons/32x32/ToWksUnchecked.png"), true, false);
+      CDraw::drawToolButton(p, opt, rect, QIcon(":/icons/32x32/ToWksUnchecked.png"), true, false);
       break;
     case Qt::PartiallyChecked:
-      drawToolButton(p, opt, rect, QIcon(":/icons/32x32/ToWksPartially.png"), true, true);
+      CDraw::drawToolButton(p, opt, rect, QIcon(":/icons/32x32/ToWksPartially.png"), true, true);
       break;
     case Qt::Checked:
-      drawToolButton(p, opt, rect, QIcon(":/icons/32x32/ToWksChecked.png"), true, true);
+      CDraw::drawToolButton(p, opt, rect, QIcon(":/icons/32x32/ToWksChecked.png"), true, true);
       break;
   }
 }

@@ -193,10 +193,9 @@ void CMapItemDelegate::initStyleOption(QStyleOptionViewItem* option, const QMode
   option->decorationSize = QSize(0, 0);
 }
 
-CMapItemDelegate::MapItemLayout CMapItemDelegate::getRectangles(const QStyleOptionViewItem& opt, bool isActive) const {
+CMapItemDelegate::MapItemLayout CMapItemDelegate::getRectangles(const QStyleOptionViewItem& opt) const {
   // derive fonts from opt.font
-  QFont fontName = opt.font;
-  fontName.setBold(isActive);
+  const QFont fontName = opt.font;
   QFontMetrics fmName(fontName);
 
   QFont fontStatus = opt.font;
@@ -256,7 +255,8 @@ void CMapItemDelegate::paint(QPainter* p, const QStyleOptionViewItem& opt, const
   }
 
   // derive all rectangles to place visual elements
-  const auto& layout = getRectangles(opt, isActive);
+  auto layout = getRectangles(opt);
+  layout.fontName.setBold(isActive);
 
   // draw name
   p->setPen(colorName);
@@ -301,7 +301,7 @@ bool CMapItemDelegate::editorEvent(QEvent* event, QAbstractItemModel* model, con
   if (event->type() == QEvent::MouseButtonPress) {
     auto* me = static_cast<QMouseEvent*>(event);
 
-    const auto& layout = getRectangles(opt, false);
+    const auto& layout = getRectangles(opt);
 
     if (layout.rectButton.contains(me->pos())) {
       IMapItem* item = indexToItem(index);
@@ -335,7 +335,7 @@ bool CMapItemDelegate::helpEvent(QHelpEvent* event, QAbstractItemView* view, con
   }
 
   const bool isActive = item->getStatus() == IMapItem::eStatus::Active;
-  const auto& layout = getRectangles(opt, isActive);
+  const auto& layout = getRectangles(opt);
 
   if (layout.rectButton.contains(event->pos())) {
     const QString& tip = isActive ? tr("Deactivate %1").arg(item->getName()) : tr("Activate %1").arg(item->getName());

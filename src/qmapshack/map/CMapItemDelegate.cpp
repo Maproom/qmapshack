@@ -234,14 +234,9 @@ void CMapItemDelegate::paint(QPainter* p, const QStyleOptionViewItem& opt, const
   QStyledItemDelegate::paint(p, opt, index);
 
   const bool isActive = item->getStatus() == IMapItem::eStatus::Active;
-  const bool isSelected = (opt.state & QStyle::State_Selected) != 0;
-  const bool hasFocus = (opt.state & QStyle::State_HasFocus) != 0;
 
   // derive strings colors
-  const QPalette::ColorRole colorRole = (isSelected && hasFocus) ? QPalette::HighlightedText : QPalette::WindowText;
-  const QPalette::ColorGroup colorGroup =
-      isActive ? (hasFocus ? QPalette::Active : QPalette::Inactive) : QPalette::Disabled;
-  const QColor& colorName = opt.palette.color(colorGroup, colorRole);
+  const QColor colorName = CDraw::itemNameColor(opt, isActive);
 
   QColor colorStatus = colorName;
   QString status;

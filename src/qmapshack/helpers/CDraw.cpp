@@ -190,6 +190,17 @@ void CDraw::text(const QString& str, QPainter& p, const QRect& r, const QColor& 
   p.drawText(r, Qt::AlignCenter, str);
 }
 
+QColor CDraw::itemNameColor(const QStyleOptionViewItem& opt, bool isVisible) {
+  const bool isSelected = (opt.state & QStyle::State_Selected) != 0;
+  const bool hasFocus = (opt.state & QStyle::State_HasFocus) != 0;
+
+  const QPalette::ColorRole colorRole = (isSelected && hasFocus) ? QPalette::HighlightedText : QPalette::WindowText;
+  const QPalette::ColorGroup colorGroup =
+      isVisible ? (hasFocus ? QPalette::Active : QPalette::Inactive) : QPalette::Disabled;
+
+  return opt.palette.color(colorGroup, colorRole);
+}
+
 QPoint CDraw::bubble(QPainter& p, const QRect& contentRect, const QPoint& pointerPos, const QColor& background) {
   qint32 pointerBasePos = qMax(0, pointerPos.x() - contentRect.left());
   return CDraw::bubble(p, contentRect, pointerPos, background, 20, pointerBasePos);

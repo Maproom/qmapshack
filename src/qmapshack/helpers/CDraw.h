@@ -21,8 +21,10 @@
 #define CPAINTER_H
 
 #include <QPainter>
+#include <QPalette>
 #include <QPolygonF>
 #include <QRectF>
+#include <QStyleOptionViewItem>
 
 #include "CMainWindow.h"
 inline void USE_ANTI_ALIASING(QPainter& p, bool useAntiAliasing) {
@@ -68,6 +70,16 @@ class CDraw {
   static void text(const QString& str, QPainter& p, const QPoint& center, const QColor& color,
                    const QFont& font = CMainWindow::self().getMapFont());
   static void text(const QString& str, QPainter& p, const QRect& r, const QColor& color);
+
+  /**
+     @brief Derive the color to use for an item's name and status text in a tree view
+
+     @param opt        Style option of the item, used for its selection/focus state and palette
+     @param isVisible  Whether the represented item is currently visible/active
+
+     @return The color to draw the item's name and status text with
+   */
+  static QColor itemNameColor(const QStyleOptionViewItem& opt, bool isVisible);
 
   /**
      @brief Draw a cartoon bubble

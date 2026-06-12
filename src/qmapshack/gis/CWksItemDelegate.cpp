@@ -410,14 +410,9 @@ void CWksItemDelegate::paintProject(QPainter* p, const QStyleOptionViewItem& opt
 
   const bool isOnDevice = item.isOnDevice() != IWksItem::eTypeNone;
   const bool isVisible = item.isVisible();
-  const bool isSelected = (opt.state & QStyle::State_Selected) != 0;
-  const bool hasFocus = (opt.state & QStyle::State_HasFocus) != 0;
 
   // derive strings colors
-  const QPalette::ColorRole colorRole = (isSelected && hasFocus) ? QPalette::HighlightedText : QPalette::WindowText;
-  const QPalette::ColorGroup colorGroup =
-      isVisible ? (hasFocus ? QPalette::Active : QPalette::Inactive) : QPalette::Disabled;
-  const QColor& colorName = opt.palette.color(colorGroup, colorRole);
+  const QColor colorName = CDraw::itemNameColor(opt, isVisible);
 
   // draw icon
   const QPixmap& icon = item.getIcon().scaled(layout.rectIcon.size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
@@ -550,14 +545,9 @@ void CWksItemDelegate::paintDevice(QPainter* p, const QStyleOptionViewItem& opt,
   auto layout = getRectanglesDevice(opt, item);
 
   const bool isVisible = item.isVisible();
-  const bool isSelected = (opt.state & QStyle::State_Selected) != 0;
-  const bool hasFocus = (opt.state & QStyle::State_HasFocus) != 0;
 
   // derive strings colors
-  const QPalette::ColorRole colorRole = (isSelected && hasFocus) ? QPalette::HighlightedText : QPalette::WindowText;
-  const QPalette::ColorGroup colorGroup =
-      isVisible ? (hasFocus ? QPalette::Active : QPalette::Inactive) : QPalette::Disabled;
-  const QColor& colorName = opt.palette.color(colorGroup, colorRole);
+  const QColor colorName = CDraw::itemNameColor(opt, isVisible);
 
   // draw name
   layout.fontName.setBold(item.hasUserFocus());
@@ -591,15 +581,10 @@ void CWksItemDelegate::paintItem(QPainter* p, const QStyleOptionViewItem& opt, c
   auto layout = getRectanglesItem(opt, item);
 
   const bool isVisible = item.isVisible();
-  const bool isSelected = (opt.state & QStyle::State_Selected) != 0;
-  const bool hasFocus = (opt.state & QStyle::State_HasFocus) != 0;
   const QIcon::Mode iconMode = isVisible ? QIcon::Normal : QIcon::Disabled;
 
   // derive strings colors
-  const QPalette::ColorRole colorRole = (isSelected && hasFocus) ? QPalette::HighlightedText : QPalette::WindowText;
-  const QPalette::ColorGroup colorGroup =
-      isVisible ? (hasFocus ? QPalette::Active : QPalette::Inactive) : QPalette::Disabled;
-  const QColor& colorName = opt.palette.color(colorGroup, colorRole);
+  const QColor colorName = CDraw::itemNameColor(opt, isVisible);
 
   // draw name
   layout.fontName.setBold(item.hasUserFocus());

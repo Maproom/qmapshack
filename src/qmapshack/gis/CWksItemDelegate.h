@@ -207,9 +207,6 @@ class CWksItemDelegate : public QStyledItemDelegate {
   GeoSearchErrorLayout getRectanglesGeoSearchError(const QStyleOptionViewItem& opt) const;
   ItemLayout getRectanglesItem(const QStyleOptionViewItem& opt, const IWksItem& item) const;
 
-  static void drawToolButton(QPainter* p, const QStyleOptionViewItem& opt, const QRect& rect, const QIcon& icon,
-                             bool enabled, bool pressed);
-
   static void drawProgressBar(QPainter* p, const QRect& rect, qreal progress);
 
   static QString distanceAscentDescentStatus(qreal distance, qreal ascent, qreal descent, bool elevationInvalid,

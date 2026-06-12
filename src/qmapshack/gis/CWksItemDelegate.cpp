@@ -33,7 +33,6 @@
 #include "helpers/CSettings.h"
 #include "misc.h"
 
-constexpr int kMargin = 1;
 constexpr int kFontSizeDiffProject = 2;
 constexpr int kFontSizeDiffItem = 3;
 constexpr int kFontSizeInvalid = -1;
@@ -325,20 +324,6 @@ CWksItemDelegate::GeoSearchErrorLayout CWksItemDelegate::getRectanglesGeoSearchE
 
   return {font, rectIcon, rectName};
 }
-void CWksItemDelegate::drawToolButton(QPainter* p, const QStyleOptionViewItem& opt, const QRect& rect,
-                                      const QIcon& icon, bool enabled, bool pressed) {
-  QStyleOptionToolButton btnOpt;
-  btnOpt.initFrom(opt.widget);
-  btnOpt.rect = rect;
-  btnOpt.icon = icon;
-  btnOpt.iconSize = rect.adjusted(2 * kMargin, 2 * kMargin, -2 * kMargin, -2 * kMargin).size();
-  btnOpt.toolButtonStyle = Qt::ToolButtonIconOnly;
-  btnOpt.subControls = QStyle::SC_ToolButton;
-  btnOpt.activeSubControls = QStyle::SC_ToolButton;
-  btnOpt.state =
-      (enabled ? QStyle::State_Enabled : QStyle::State_None) | (pressed ? QStyle::State_Sunken : QStyle::State_Raised);
-  opt.widget->style()->drawComplexControl(QStyle::CC_ToolButton, &btnOpt, p, opt.widget);
-}
 
 void CWksItemDelegate::drawProgressBar(QPainter* p, const QRect& rect, qreal progress) {
   quint32 width = qRound(rect.width() * progress / 100.0);
@@ -453,8 +438,9 @@ void CWksItemDelegate::paintProject(QPainter* p, const QStyleOptionViewItem& opt
   QIcon(icon).paint(p, layout.rectIcon, Qt::AlignCenter, item.isVisible() ? QIcon::Normal : QIcon::Disabled);
 
   // draw tool button to toggle visibility
-  drawToolButton(p, opt, layout.rectVisible,
-                 isVisible ? QIcon(":/icons/32x32/ShowAll.png") : QIcon(":/icons/32x32/ShowNone.png"), true, isVisible);
+  CDraw::drawToolButton(p, opt, layout.rectVisible,
+                        isVisible ? QIcon(":/icons/32x32/ShowAll.png") : QIcon(":/icons/32x32/ShowNone.png"), true,
+                        isVisible);
 
   const float opacityOfFocusBasedItems = item.getOpacityOfFocusBasedItems();
 
@@ -463,21 +449,21 @@ void CWksItemDelegate::paintProject(QPainter* p, const QStyleOptionViewItem& opt
       // draw save/ auto save button
       if (item.isChanged() && !item.isAutoSave()) {
         // show save button
-        drawToolButton(p, opt, layout.rectSave, QIcon(":/icons/32x32/Save.png"), true, false);
+        CDraw::drawToolButton(p, opt, layout.rectSave, QIcon(":/icons/32x32/Save.png"), true, false);
       } else {
         p->setOpacity(opacityOfFocusBasedItems);
         if (item.isAutoSave()) {
           // show auto save button pressed, to disable autosave
-          drawToolButton(p, opt, layout.rectSave, QIcon(":/icons/32x32/AutoSaveA.png"), true, true);
+          CDraw::drawToolButton(p, opt, layout.rectSave, QIcon(":/icons/32x32/AutoSaveA.png"), true, true);
         } else if (item.canSave()) {
           // show auto save button only if project can be saved
-          drawToolButton(p, opt, layout.rectSave, QIcon(":/icons/32x32/AutoSaveNoA.png"), true, false);
+          CDraw::drawToolButton(p, opt, layout.rectSave, QIcon(":/icons/32x32/AutoSaveNoA.png"), true, false);
         }
         p->setOpacity(1.0);
       }
     } else {
       p->setOpacity(opacityOfFocusBasedItems);
-      drawToolButton(p, opt, layout.rectSave, QIcon(":/icons/32x32/Copy.png"), true, false);
+      CDraw::drawToolButton(p, opt, layout.rectSave, QIcon(":/icons/32x32/Copy.png"), true, false);
       p->setOpacity(1.0);
     }
   }
@@ -486,9 +472,9 @@ void CWksItemDelegate::paintProject(QPainter* p, const QStyleOptionViewItem& opt
     p->setOpacity(opacityOfFocusBasedItems);
     // auto sync. w. dev.
     if (item.isAutoSyncToDev()) {
-      drawToolButton(p, opt, layout.rectAutoSyncDev, QIcon(":/icons/32x32/DeviceSync.png"), true, true);
+      CDraw::drawToolButton(p, opt, layout.rectAutoSyncDev, QIcon(":/icons/32x32/DeviceSync.png"), true, true);
     } else {
-      drawToolButton(p, opt, layout.rectAutoSyncDev, QIcon(":/icons/32x32/DeviceNoSync.png"), true, false);
+      CDraw::drawToolButton(p, opt, layout.rectAutoSyncDev, QIcon(":/icons/32x32/DeviceNoSync.png"), true, false);
     }
     p->setOpacity(1.0);
   }
@@ -496,9 +482,9 @@ void CWksItemDelegate::paintProject(QPainter* p, const QStyleOptionViewItem& opt
   if (layout.rectActiveProject.isValid()) {
     if (item.holdUiFocus(opt)) {
       p->setOpacity(opacityOfFocusBasedItems);
-      drawToolButton(p, opt, layout.rectActiveProject,
-                     item.hasUserFocus() ? QIcon(":/icons/32x32/Focus.png") : QIcon(":/icons/32x32/UnFocus.png"), true,
-                     true);
+      CDraw::drawToolButton(p, opt, layout.rectActiveProject,
+                            item.hasUserFocus() ? QIcon(":/icons/32x32/Focus.png") : QIcon(":/icons/32x32/UnFocus.png"),
+                            true, true);
       p->setOpacity(1.0);
     } else {
       QIcon(":/icons/32x32/Focus.png")
@@ -576,8 +562,9 @@ void CWksItemDelegate::paintDevice(QPainter* p, const QStyleOptionViewItem& opt,
   QIcon(icon).paint(p, layout.rectIcon, Qt::AlignCenter, isVisible ? QIcon::Normal : QIcon::Disabled);
 
   // draw tool button to activate
-  drawToolButton(p, opt, layout.rectVisible,
-                 isVisible ? QIcon(":/icons/32x32/ShowAll.png") : QIcon(":/icons/32x32/ShowNone.png"), true, isVisible);
+  CDraw::drawToolButton(p, opt, layout.rectVisible,
+                        isVisible ? QIcon(":/icons/32x32/ShowAll.png") : QIcon(":/icons/32x32/ShowNone.png"), true,
+                        isVisible);
 
   // draw progress bar
   auto [hasProgress, progress] = item.getProgress();
@@ -714,8 +701,9 @@ void CWksItemDelegate::paintGeoSearch(QPainter* p, const QStyleOptionViewItem& o
   QIcon(search->getWptIcon()).paint(p, layout.rectWptIcon, Qt::AlignCenter, QIcon::Normal);
 
   // draw tool button to activate
-  drawToolButton(p, opt, layout.rectVisible,
-                 isVisible ? QIcon(":/icons/32x32/ShowAll.png") : QIcon(":/icons/32x32/ShowNone.png"), true, isVisible);
+  CDraw::drawToolButton(p, opt, layout.rectVisible,
+                        isVisible ? QIcon(":/icons/32x32/ShowAll.png") : QIcon(":/icons/32x32/ShowNone.png"), true,
+                        isVisible);
 
   const QString& address = search->getLastAddress();
   const QColor& colorSearch = opt.palette.color(

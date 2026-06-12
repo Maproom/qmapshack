@@ -23,6 +23,8 @@
 #include <QImage>
 #include <QPainterPath>
 #include <QPointF>
+#include <QStyle>
+#include <QStyleOptionToolButton>
 #include <QtMath>
 
 QPen CDraw::penBorderBlue(QColor(10, 10, 150, 220), 2);
@@ -188,6 +190,21 @@ void CDraw::text(const QString& str, QPainter& p, const QRect& r, const QColor& 
 
   p.setPen(color);
   p.drawText(r, Qt::AlignCenter, str);
+}
+
+void CDraw::drawToolButton(QPainter* p, const QStyleOptionViewItem& opt, const QRect& rect, const QIcon& icon,
+                           bool enabled, bool pressed) {
+  QStyleOptionToolButton btnOpt;
+  btnOpt.initFrom(opt.widget);
+  btnOpt.rect = rect;
+  btnOpt.icon = icon;
+  btnOpt.iconSize = rect.adjusted(2 * kMargin, 2 * kMargin, -2 * kMargin, -2 * kMargin).size();
+  btnOpt.toolButtonStyle = Qt::ToolButtonIconOnly;
+  btnOpt.subControls = QStyle::SC_ToolButton;
+  btnOpt.activeSubControls = QStyle::SC_ToolButton;
+  btnOpt.state =
+      (enabled ? QStyle::State_Enabled : QStyle::State_None) | (pressed ? QStyle::State_Sunken : QStyle::State_Raised);
+  opt.widget->style()->drawComplexControl(QStyle::CC_ToolButton, &btnOpt, p, opt.widget);
 }
 
 QColor CDraw::itemNameColor(const QStyleOptionViewItem& opt, bool isVisible) {

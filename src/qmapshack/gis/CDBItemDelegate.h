@@ -80,8 +80,6 @@ class CDBItemDelegate : public QStyledItemDelegate {
 
  private:
   IDBItem* indexToItem(const QModelIndex& index) const;
-  static void drawToolButton(QPainter* p, const QStyleOptionViewItem& opt, const QRect& rect, const QIcon& icon,
-                             bool enabled, bool pressed);
   static void drawCheckStateButton(QPainter* p, const QStyleOptionViewItem& opt, const QRect& rect,
                                    Qt::CheckState state);
 

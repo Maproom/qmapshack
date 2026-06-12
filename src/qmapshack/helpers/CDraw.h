@@ -20,6 +20,7 @@
 #ifndef CPAINTER_H
 #define CPAINTER_H
 
+#include <QIcon>
 #include <QPainter>
 #include <QPalette>
 #include <QPolygonF>
@@ -34,6 +35,9 @@ inline void USE_ANTI_ALIASING(QPainter& p, bool useAntiAliasing) {
 
 #define RECT_RADIUS 3
 #define PAINT_ROUNDED_RECT(p, r) p.drawRoundedRect(r, RECT_RADIUS, RECT_RADIUS)
+
+/// Margin used throughout the tree-item delegates for spacing icons, tool buttons and text.
+constexpr int kMargin = 1;
 
 class CDraw {
  public:
@@ -80,6 +84,19 @@ class CDraw {
      @return The color to draw the item's name and status text with
    */
   static QColor itemNameColor(const QStyleOptionViewItem& opt, bool isVisible);
+
+  /**
+     @brief Draw a right-aligned tool button as used by the tree-item delegates
+
+     @param p        An active QPainter
+     @param opt      Style option of the item, used for its widget/palette
+     @param rect     The button's rectangle
+     @param icon     The icon to draw on the button
+     @param enabled  Whether the button is enabled
+     @param pressed  Whether the button is drawn in its pressed/sunken state
+   */
+  static void drawToolButton(QPainter* p, const QStyleOptionViewItem& opt, const QRect& rect, const QIcon& icon,
+                             bool enabled, bool pressed);
 
   /**
      @brief Draw a cartoon bubble

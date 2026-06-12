@@ -27,7 +27,6 @@
 #include "helpers/CDraw.h"
 #include "map/IMapItem.h"
 
-constexpr int kMargin = 1;
 constexpr int kFontSizeDiffItem = 2;
 
 CMapItemDelegate::CMapItemDelegate(QTreeWidget* parent) : QStyledItemDelegate(parent), treeWidget(parent) {
@@ -276,17 +275,9 @@ void CMapItemDelegate::paint(QPainter* p, const QStyleOptionViewItem& opt, const
   QIcon(icon).paint(p, layout.rectIcon);
 
   // draw tool button to activate
-  QStyleOptionToolButton btnOpt;
-  btnOpt.initFrom(opt.widget);
-  btnOpt.rect = layout.rectButton;
-  btnOpt.icon = isActive ? QIcon(":/icons/32x32/ShowAll.png") : QIcon(":/icons/32x32/ShowNone.png");
-  btnOpt.iconSize = layout.rectButton.adjusted(2 * kMargin, 2 * kMargin, 2 * -kMargin, 2 * -kMargin).size();
-  btnOpt.toolButtonStyle = Qt::ToolButtonIconOnly;
-  btnOpt.subControls = QStyle::SC_ToolButton;
-  btnOpt.activeSubControls = QStyle::SC_ToolButton;
-  btnOpt.state = (item->getStatus() != IMapItem::eStatus::Missing ? QStyle::State_Enabled : QStyle::State_None) |
-                 (isActive ? QStyle::State_Sunken : QStyle::State_Raised);
-  opt.widget->style()->drawComplexControl(QStyle::CC_ToolButton, &btnOpt, p, opt.widget);
+  CDraw::drawToolButton(p, opt, layout.rectButton,
+                        isActive ? QIcon(":/icons/32x32/ShowAll.png") : QIcon(":/icons/32x32/ShowNone.png"),
+                        item->getStatus() != IMapItem::eStatus::Missing, isActive);
 
   // draw all elements that tinker with opacity
   // draw indicator

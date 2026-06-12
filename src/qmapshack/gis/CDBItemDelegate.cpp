@@ -80,6 +80,21 @@ void CDBItemDelegate::drawToolButton(QPainter* p, const QStyleOptionViewItem& op
   opt.widget->style()->drawComplexControl(QStyle::CC_ToolButton, &btnOpt, p, opt.widget);
 }
 
+void CDBItemDelegate::drawCheckStateButton(QPainter* p, const QStyleOptionViewItem& opt, const QRect& rect,
+                                           Qt::CheckState state) {
+  switch (state) {
+    case Qt::Unchecked:
+      drawToolButton(p, opt, rect, QIcon(":/icons/32x32/ToWksUnchecked.png"), true, false);
+      break;
+    case Qt::PartiallyChecked:
+      drawToolButton(p, opt, rect, QIcon(":/icons/32x32/ToWksPartially.png"), true, true);
+      break;
+    case Qt::Checked:
+      drawToolButton(p, opt, rect, QIcon(":/icons/32x32/ToWksChecked.png"), true, true);
+      break;
+  }
+}
+
 void CDBItemDelegate::initStyleOption(QStyleOptionViewItem* option, const QModelIndex& index) const {}
 
 QSize CDBItemDelegate::sizeHint(const QStyleOptionViewItem& opt, const QModelIndex& index) const {
@@ -219,17 +234,7 @@ void CDBItemDelegate::paintFolder(QPainter* p, const QStyleOptionViewItem& opt, 
   QIcon(icon).paint(p, layout.rectIcon, Qt::AlignCenter);
 
   if (layout.rectButton.isValid()) {
-    switch (item.getCheckState()) {
-      case Qt::Unchecked:
-        drawToolButton(p, opt, layout.rectButton, QIcon(":/icons/32x32/ToWksUnchecked.png"), true, false);
-        break;
-      case Qt::PartiallyChecked:
-        drawToolButton(p, opt, layout.rectButton, QIcon(":/icons/32x32/ToWksPartially.png"), true, true);
-        break;
-      case Qt::Checked:
-        drawToolButton(p, opt, layout.rectButton, QIcon(":/icons/32x32/ToWksChecked.png"), true, true);
-        break;
-    }
+    drawCheckStateButton(p, opt, layout.rectButton, item.getCheckState());
   }
 
   const bool isSelected = (opt.state & QStyle::State_Selected) != 0;
@@ -292,17 +297,7 @@ void CDBItemDelegate::paintItem(QPainter* p, const QStyleOptionViewItem& opt, co
   QIcon(icon).paint(p, layout.rectIcon, Qt::AlignCenter);
 
   if (layout.rectButton.isValid()) {
-    switch (item.getCheckState()) {
-      case Qt::Unchecked:
-        drawToolButton(p, opt, layout.rectButton, QIcon(":/icons/32x32/ToWksUnchecked.png"), true, false);
-        break;
-      case Qt::PartiallyChecked:
-        drawToolButton(p, opt, layout.rectButton, QIcon(":/icons/32x32/ToWksPartially.png"), true, true);
-        break;
-      case Qt::Checked:
-        drawToolButton(p, opt, layout.rectButton, QIcon(":/icons/32x32/ToWksChecked.png"), true, true);
-        break;
-    }
+    drawCheckStateButton(p, opt, layout.rectButton, item.getCheckState());
   }
 
   const bool isSelected = (opt.state & QStyle::State_Selected) != 0;

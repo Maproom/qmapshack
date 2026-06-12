@@ -82,6 +82,8 @@ class CDBItemDelegate : public QStyledItemDelegate {
   IDBItem* indexToItem(const QModelIndex& index) const;
   static void drawToolButton(QPainter* p, const QStyleOptionViewItem& opt, const QRect& rect, const QIcon& icon,
                              bool enabled, bool pressed);
+  static void drawCheckStateButton(QPainter* p, const QStyleOptionViewItem& opt, const QRect& rect,
+                                   Qt::CheckState state);
 
   /// Rectangles and fonts used to paint a folder or item row
   struct ItemLayout {

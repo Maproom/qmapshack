@@ -131,15 +131,15 @@ The three `QStyledItemDelegate` subclasses used by the tree views share heavy du
 
 ### Medium value
 
-6. ~~Factor out the "right-aligned button row" layout pattern.~~ Done: local `ButtonRowCursor{left, top, size}` (anonymous namespace, `CWksItemDelegate.cpp`) with `next()` replaces the manual `left -= buttonWidth + kMargin` bookkeeping in `getRectanglesProject`/`getRectanglesItem`.
-7. (Bigger/optional) Move per-GIS-type status-line building out of `CWksItemDelegate::paintItem` (currently 4 sequential `dynamic_cast`s to `CGisItemTrk`/`CGisItemWpt`/`CGisItemRte`/`CGisItemOvlArea`) into a virtual method on `IWksItem`/subclasses.
+6. ~~Factor out the "right-aligned button row" layout pattern.~~ Done: local `button_row_cursor_t{left, top, size}` (anonymous namespace, `CWksItemDelegate.cpp`) with `next()` replaces the manual `left -= buttonWidth + kMargin` bookkeeping in `getRectanglesProject`/`getRectanglesItem`.
+7. ~~(Bigger/optional) Move per-GIS-type status-line building out of `CWksItemDelegate::paintItem` (currently 4 sequential `dynamic_cast`s to `CGisItemTrk`/`CGisItemWpt`/`CGisItemRte`/`CGisItemOvlArea`) into a virtual method on `IWksItem`/subclasses.~~ Decided: will not be tackled.
 
 ### Low risk / small fixes
 
-8. `CWksItemDelegate.h` header guard is stale: `CGISITEMDELEGATE_H` should be `CWKSITEMDELEGATE_H` (leftover from a class rename).
-9. `CDBItemDelegate::initStyleOption(...) {}` — empty override with no explanatory comment; verify whether it's intentionally suppressing base-class behavior or dead code.
-10. `CWksItemDelegate::mousePressGeoSearch` always returns `true` except when the click is over the line-edit rect — non-obvious, needs a comment.
-11. Stray blank lines inside `if` blocks around elevation ascent/descent code in `paintProject`/`paintItem` (cosmetic).
+8. ~~`CWksItemDelegate.h` header guard is stale: `CGISITEMDELEGATE_H` should be `CWKSITEMDELEGATE_H` (leftover from a class rename).~~ Done.
+9. ~~`CDBItemDelegate::initStyleOption(...) {}` — empty override with no explanatory comment; verify whether it's intentionally suppressing base-class behavior or dead code.~~ Decided: will not be tackled.
+10. ~~`CWksItemDelegate::mousePressGeoSearch` always returns `true` except when the click is over the line-edit rect — non-obvious, needs a comment.~~ Done: comment added explaining the line-edit rect is excluded so the view's default editorEvent handling can start the rename edit.
+11. ~~Stray blank lines inside `if` blocks around elevation ascent/descent code in `paintProject`/`paintItem` (cosmetic).~~ Resolved: that code was moved into `distanceAscentDescentStatus()` by #5; remaining blank lines there are normal separators.
 
 ### CMapItemDelegate-specific
 

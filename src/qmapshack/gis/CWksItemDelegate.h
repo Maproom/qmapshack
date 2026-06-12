@@ -16,8 +16,8 @@
 
 **********************************************************************************************/
 
-#ifndef CGISITEMDELEGATE_H
-#define CGISITEMDELEGATE_H
+#ifndef CWKSITEMDELEGATE_H
+#define CWKSITEMDELEGATE_H
 
 #include <QPointer>
 #include <QStyledItemDelegate>
@@ -246,4 +246,4 @@ class CWksItemDelegate : public QStyledItemDelegate {
   item_status_ctrl_t itemStatusControl;
 };
 
-#endif  // CGISITEMDELEGATE_H
+#endif  // CWKSITEMDELEGATE_H

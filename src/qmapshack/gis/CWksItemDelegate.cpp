@@ -855,6 +855,9 @@ bool CWksItemDelegate::mousePressGeoSearch(QMouseEvent* me, const QStyleOptionVi
     return true;
   }
 
+  // A click on the line edit is not consumed here, so the view's default
+  // editorEvent handling can start editing the geo search name. Clicks
+  // anywhere else on the row are consumed to suppress that default behavior.
   if (layout.rectLineEdit.contains(me->pos())) {
     return false;
   }

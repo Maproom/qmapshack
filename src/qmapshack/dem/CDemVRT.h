@@ -44,8 +44,8 @@ class CDemVRT : public IDem {
  private:
   using IDem::drawTile;
   void drawElevationShadeScale(QPainter& p) const;
-  void drawTile(const qint32 x, const qint32 y, const qint32 w, const qint32 h,
-                const qreal o1, const qreal o2, QPainter& p) const;
+  void drawTile(QVector<float>& data, quint32 x, quint32 y, quint32 dx, quint32 w, quint32 h,
+                QPolygonF l, qreal o1, qreal o2, QPainter& p) const;
 
   mutable QMutex mutex;
 

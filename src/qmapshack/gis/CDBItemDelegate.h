@@ -82,10 +82,19 @@ class CDBItemDelegate : public QStyledItemDelegate {
   IDBItem* indexToItem(const QModelIndex& index) const;
   static void drawToolButton(QPainter* p, const QStyleOptionViewItem& opt, const QRect& rect, const QIcon& icon,
                              bool enabled, bool pressed);
-  std::tuple<QFont, QFont, QRect, QRect, QRect, QRect> getRectanglesFolder(const QStyleOptionViewItem& opt,
-                                                                           const IDBItem& item) const;
-  std::tuple<QFont, QFont, QRect, QRect, QRect, QRect> getRectanglesItem(const QStyleOptionViewItem& opt,
-                                                                         const IDBItem& item) const;
+
+  /// Rectangles and fonts used to paint a folder or item row
+  struct ItemLayout {
+    QFont fontName;
+    QFont fontStatus;
+    QRect rectIcon;
+    QRect rectName;
+    QRect rectStatus;
+    QRect rectButton;
+  };
+
+  ItemLayout getRectanglesFolder(const QStyleOptionViewItem& opt, const IDBItem& item) const;
+  ItemLayout getRectanglesItem(const QStyleOptionViewItem& opt, const IDBItem& item) const;
   void paintFolder(QPainter* p, const QStyleOptionViewItem& opt, const QModelIndex& index, const IDBItem& item) const;
   void paintItem(QPainter* p, const QStyleOptionViewItem& opt, const QModelIndex& index, const IDBItem& item) const;
 

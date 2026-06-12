@@ -65,8 +65,18 @@ class CMapItemDelegate : public QStyledItemDelegate {
   IMapItem* indexToItem(const QModelIndex& index) const;
   QString keyFromIndex(const QModelIndex& index) const;
 
-  std::tuple<QFont, QFont, QRect, QRect, QRect, QRect, QRect> getRectangles(const QStyleOptionViewItem& opt,
-                                                                            bool isActive) const;
+  /// Rectangles and fonts used to paint a map item row
+  struct MapItemLayout {
+    QFont fontName;
+    QFont fontStatus;
+    QRect rectIcon;
+    QRect rectButton;
+    QRect rectIndicator;
+    QRect rectName;
+    QRect rectStatus;
+  };
+
+  MapItemLayout getRectangles(const QStyleOptionViewItem& opt, bool isActive) const;
 
   struct animations_t;
   animations_t& getAnimations(const QModelIndex& index);

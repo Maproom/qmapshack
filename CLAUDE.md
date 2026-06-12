@@ -110,3 +110,46 @@ When vector or track routing is active, `updateLeadLines()` finds the underlying
 `CRouterSetup` is a singleton (`CRouterSetup::self()`) that owns the active router and exposes `calcRoute()` to the rest of the application. It emits `sigHasFastRouting(bool)` when the router capability changes (e.g. local BRouter starts or stops); `IMouseEditLine` listens to this to enable/disable the auto-routing button.
 
 Only local BRouter supports fast (on-the-fly) routing. Online BRouter and Routino do not — they require the full route to be calculated at once via `calcRoute(const IGisItem::key_t&)`.
+
+---
+
+## Planned cleanup: tree item delegates
+
+The three `QStyledItemDelegate` subclasses used by the tree views share heavy duplication and would benefit from a cleanup pass. Not yet started.
+
+- `src/qmapshack/gis/CWksItemDelegate.{h,cpp}` (workspace tree)
+- `src/qmapshack/gis/CDBItemDelegate.{h,cpp}` (database tree)
+- `src/qmapshack/map/CMapItemDelegate.{h,cpp}` (map-item tree)
+
+### High value, low risk
+
+1. Replace the positional `std::tuple<QFont, QFont, QRect, ...>` returns from every `getRectangles*()`/`getRectangles()` function (all 3 files) with named structs (e.g. `ProjectLayout`, `ItemLayout`, `FolderLayout`, `MapItemLayout`). Pure mechanical refactor, biggest readability win — every call site currently destructures with `auto [a, b, c, ...]` and relies on positional ordering.
+2. Merge `CDBItemDelegate::getRectanglesFolder` and `getRectanglesItem` — nearly identical, differ only in the status-size field and the button-visibility condition.
+3. Extract a shared `QColor itemNameColor(opt, isVisible/isActive)` helper. The `colorRole`/`colorGroup`/`colorName` 3-line block is duplicated in `CWksItemDelegate::paintProject/paintDevice/paintItem` and in `CMapItemDelegate::paint`.
+4. Extract a shared check-state-button switch for `CDBItemDelegate::paintFolder`/`paintItem` (identical `Qt::Unchecked/PartiallyChecked/Checked` → icon block).
+5. Extract a distance/ascent/descent status-string builder — duplicated between `CWksItemDelegate::paintProject` (project totals) and `paintItem` (track totals).
+
+### Medium value
+
+6. Factor out the "right-aligned button row" layout pattern in `CWksItemDelegate::getRectanglesProject`/`getRectanglesItem` (button rects grow leftward, tracked via a `left` cursor that also clips `rectName`).
+7. (Bigger/optional) Move per-GIS-type status-line building out of `CWksItemDelegate::paintItem` (currently 4 sequential `dynamic_cast`s to `CGisItemTrk`/`CGisItemWpt`/`CGisItemRte`/`CGisItemOvlArea`) into a virtual method on `IWksItem`/subclasses.
+
+### Low risk / small fixes
+
+8. `CWksItemDelegate.h` header guard is stale: `CGISITEMDELEGATE_H` should be `CWKSITEMDELEGATE_H` (leftover from a class rename).
+9. `CDBItemDelegate::initStyleOption(...) {}` — empty override with no explanatory comment; verify whether it's intentionally suppressing base-class behavior or dead code.
+10. `CWksItemDelegate::mousePressGeoSearch` always returns `true` except when the click is over the line-edit rect — non-obvious, needs a comment.
+11. Stray blank lines inside `if` blocks around elevation ascent/descent code in `paintProject`/`paintItem` (cosmetic).
+
+### CMapItemDelegate-specific
+
+12. Same tuple-return pattern in `getRectangles()` — covered by #1.
+13. `drawToolButton` is duplicated a *third* time: `CWksItemDelegate` and `CDBItemDelegate` already have an identical static `drawToolButton()`; `CMapItemDelegate::paint()` inlines the same `QStyleOptionToolButton` setup instead of reusing it. Should become one free function in `helpers/CDraw.h` (already included by all three files).
+14. Layout constants (`kMargin`, `kFontSizeDiff*`, etc.) are redefined identically as `constexpr int` in all three `.cpp` files — centralize in a shared header.
+15. `CMapItemDelegate::getAnimations(index) const` silently inserts into `data` because `data` is `mutable QHash` and `operator[]` default-constructs missing keys — even the const "getter" mutates the hash. Should use `data.value(key).animations` for the const overload.
+16. `getRectangles(opt, isActive)` takes a state flag that only affects `fontName.setBold()`, not any returned rect; `editorEvent` passes a hardcoded `false` just to get `rectButton`. Consider separating state-independent layout from state-dependent fonts.
+17. Stray trailing `;` after `reset() { data.clear(); }` in the header (lint nit).
+
+### Cross-cutting / umbrella
+
+18. All three delegates implement the same "icon | name+status column | right-aligned tool button(s)" tree-row layout with near-identical color derivation, margin constants, and tool-button painting. A shared base class or free helper functions in `helpers/CDraw.h` covering content-rect inset, icon rect, color-from-state, and `drawToolButton` would subsume #1, #3, #13, #14 in one place. Highest-leverage if a larger refactor is in scope.

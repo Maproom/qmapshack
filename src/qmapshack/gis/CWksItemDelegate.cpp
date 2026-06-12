@@ -128,8 +128,8 @@ QSize CWksItemDelegate::sizeHint(const QStyleOptionViewItem& opt, const QModelIn
   }
 }
 
-std::tuple<QFont, QFont, QRect, QRect, QRect, QRect, QRect, QRect, QRect, QRect> CWksItemDelegate::getRectanglesProject(
-    const QStyleOptionViewItem& opt, IWksItem& item) const {
+CWksItemDelegate::ProjectLayout CWksItemDelegate::getRectanglesProject(const QStyleOptionViewItem& opt,
+                                                                       IWksItem& item) const {
   const QFont fontName = opt.font;
   const QFontMetrics fmName(fontName);
 
@@ -207,8 +207,8 @@ std::tuple<QFont, QFont, QRect, QRect, QRect, QRect, QRect, QRect, QRect, QRect>
           rectProgress, rectVisible, rectSave, rectActiveProject, rectAutoSyncDev};
 }
 
-std::tuple<QFont, QFont, QRect, QRect, QRect, QRect> CWksItemDelegate::getRectanglesItem(
-    const QStyleOptionViewItem& opt, const IWksItem& item) const {
+CWksItemDelegate::ItemLayout CWksItemDelegate::getRectanglesItem(const QStyleOptionViewItem& opt,
+                                                                 const IWksItem& item) const {
   QFont fontName = opt.font;
   QFontMetrics fmName(fontName);
 
@@ -258,8 +258,8 @@ std::tuple<QFont, QFont, QRect, QRect, QRect, QRect> CWksItemDelegate::getRectan
   return {fontName, fontStatus, rectIcon, rectName, rectStatus, rectChanged};
 }
 
-std::tuple<QFont, QFont, QRect, QRect, QRect, QRect, QRect> CWksItemDelegate::getRectanglesDevice(
-    const QStyleOptionViewItem& opt, const IWksItem& item) const {
+CWksItemDelegate::DeviceLayout CWksItemDelegate::getRectanglesDevice(const QStyleOptionViewItem& opt,
+                                                                     const IWksItem& item) const {
   QFont fontName = opt.font;
   QFontMetrics fmName(fontName);
 
@@ -280,8 +280,7 @@ std::tuple<QFont, QFont, QRect, QRect, QRect, QRect, QRect> CWksItemDelegate::ge
   return {fontName, fontStatus, rectIcon, rectName, rectStatus, rectProgress, rectVisible};
 }
 
-std::tuple<QFont, QFont, QRect, QRect, QRect, QRect, QRect, QRect> CWksItemDelegate::getRectanglesGeoSearch(
-    const QStyleOptionViewItem& opt) const {
+CWksItemDelegate::GeoSearchLayout CWksItemDelegate::getRectanglesGeoSearch(const QStyleOptionViewItem& opt) const {
   const QFont fontSearch = opt.font;
   const QFontMetrics fmSearch(fontSearch);
 
@@ -308,7 +307,8 @@ std::tuple<QFont, QFont, QRect, QRect, QRect, QRect, QRect, QRect> CWksItemDeleg
   return {fontSearch, fontStatus, rectIcon, rectSetup, rectLineEdit, rectStatus, rectWptIcon, rectVisible};
 }
 
-std::tuple<QFont, QRect, QRect> CWksItemDelegate::getRectanglesGeoSearchError(const QStyleOptionViewItem& opt) const {
+CWksItemDelegate::GeoSearchErrorLayout CWksItemDelegate::getRectanglesGeoSearchError(
+    const QStyleOptionViewItem& opt) const {
   const QFont font = opt.font;
 
   const QRect& r = opt.rect.adjusted(2 * kMargin, 2 * kMargin, -2 * kMargin, -2 * kMargin);
@@ -406,8 +406,7 @@ void CWksItemDelegate::paintProject(QPainter* p, const QStyleOptionViewItem& opt
     return;
   }
 
-  auto [fontName, fontStatus, rectIcon, rectName, rectStatus, rectProgress, rectVisible, rectSave, rectActiveProject,
-        rectAutoSyncDev] = getRectanglesProject(opt, *project);
+  auto layout = getRectanglesProject(opt, *project);
 
   const bool isOnDevice = item.isOnDevice() != IWksItem::eTypeNone;
   const bool isVisible = item.isVisible();
@@ -416,79 +415,81 @@ void CWksItemDelegate::paintProject(QPainter* p, const QStyleOptionViewItem& opt
 
   // derive strings colors
   const QPalette::ColorRole colorRole = (isSelected && hasFocus) ? QPalette::HighlightedText : QPalette::WindowText;
-  const QPalette::ColorGroup colorGroup = isVisible ? (hasFocus ? QPalette::Active : QPalette::Inactive) : QPalette::Disabled;
+  const QPalette::ColorGroup colorGroup =
+      isVisible ? (hasFocus ? QPalette::Active : QPalette::Inactive) : QPalette::Disabled;
   const QColor& colorName = opt.palette.color(colorGroup, colorRole);
 
   // draw icon
-  const QPixmap& icon = item.getIcon().scaled(rectIcon.size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
-  QIcon(icon).paint(p, rectIcon, Qt::AlignCenter, item.isVisible() ? QIcon::Normal : QIcon::Disabled);
+  const QPixmap& icon = item.getIcon().scaled(layout.rectIcon.size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+  QIcon(icon).paint(p, layout.rectIcon, Qt::AlignCenter, item.isVisible() ? QIcon::Normal : QIcon::Disabled);
 
   // draw tool button to toggle visibility
-  drawToolButton(p, opt, rectVisible,
+  drawToolButton(p, opt, layout.rectVisible,
                  isVisible ? QIcon(":/icons/32x32/ShowAll.png") : QIcon(":/icons/32x32/ShowNone.png"), true, isVisible);
 
   const float opacityOfFocusBasedItems = item.getOpacityOfFocusBasedItems();
 
-  if (rectSave.isValid()) {
+  if (layout.rectSave.isValid()) {
     if (item.isOnDevice() == false) {
       // draw save/ auto save button
       if (item.isChanged() && !item.isAutoSave()) {
         // show save button
-        drawToolButton(p, opt, rectSave, QIcon(":/icons/32x32/Save.png"), true, false);
+        drawToolButton(p, opt, layout.rectSave, QIcon(":/icons/32x32/Save.png"), true, false);
       } else {
         p->setOpacity(opacityOfFocusBasedItems);
         if (item.isAutoSave()) {
           // show auto save button pressed, to disable autosave
-          drawToolButton(p, opt, rectSave, QIcon(":/icons/32x32/AutoSaveA.png"), true, true);
+          drawToolButton(p, opt, layout.rectSave, QIcon(":/icons/32x32/AutoSaveA.png"), true, true);
         } else if (item.canSave()) {
           // show auto save button only if project can be saved
-          drawToolButton(p, opt, rectSave, QIcon(":/icons/32x32/AutoSaveNoA.png"), true, false);
+          drawToolButton(p, opt, layout.rectSave, QIcon(":/icons/32x32/AutoSaveNoA.png"), true, false);
         }
         p->setOpacity(1.0);
       }
     } else {
       p->setOpacity(opacityOfFocusBasedItems);
-      drawToolButton(p, opt, rectSave, QIcon(":/icons/32x32/Copy.png"), true, false);
+      drawToolButton(p, opt, layout.rectSave, QIcon(":/icons/32x32/Copy.png"), true, false);
       p->setOpacity(1.0);
     }
   }
 
-  if (rectAutoSyncDev.isValid()) {
+  if (layout.rectAutoSyncDev.isValid()) {
     p->setOpacity(opacityOfFocusBasedItems);
     // auto sync. w. dev.
     if (item.isAutoSyncToDev()) {
-      drawToolButton(p, opt, rectAutoSyncDev, QIcon(":/icons/32x32/DeviceSync.png"), true, true);
+      drawToolButton(p, opt, layout.rectAutoSyncDev, QIcon(":/icons/32x32/DeviceSync.png"), true, true);
     } else {
-      drawToolButton(p, opt, rectAutoSyncDev, QIcon(":/icons/32x32/DeviceNoSync.png"), true, false);
+      drawToolButton(p, opt, layout.rectAutoSyncDev, QIcon(":/icons/32x32/DeviceNoSync.png"), true, false);
     }
     p->setOpacity(1.0);
   }
 
-  if (rectActiveProject.isValid()) {
+  if (layout.rectActiveProject.isValid()) {
     if (item.holdUiFocus(opt)) {
       p->setOpacity(opacityOfFocusBasedItems);
-      drawToolButton(p, opt, rectActiveProject,
+      drawToolButton(p, opt, layout.rectActiveProject,
                      item.hasUserFocus() ? QIcon(":/icons/32x32/Focus.png") : QIcon(":/icons/32x32/UnFocus.png"), true,
                      true);
       p->setOpacity(1.0);
     } else {
       QIcon(":/icons/32x32/Focus.png")
-          .paint(p, rectActiveProject.adjusted(2 * kMargin, 2 * kMargin, -2 * kMargin, -2 * kMargin), Qt::AlignCenter);
+          .paint(p, layout.rectActiveProject.adjusted(2 * kMargin, 2 * kMargin, -2 * kMargin, -2 * kMargin),
+                 Qt::AlignCenter);
     }
   }
 
   // draw name
-  fontName.setBold(item.hasUserFocus());
+  layout.fontName.setBold(item.hasUserFocus());
   p->setPen(colorName);
-  p->setFont(fontName);
-  p->drawText(rectName.adjusted(0, -1, 0, 1), Qt::AlignLeft | Qt::AlignTop,
+  p->setFont(layout.fontName);
+  p->drawText(layout.rectName.adjusted(0, -1, 0, 1), Qt::AlignLeft | Qt::AlignTop,
               isOnDevice ? project->getName() : project->getNameEx());
 
   // -- start ------------ status line ---------------------------------------
   auto [hasProgress, progress] = item.getProgress();
   if (hasProgress) {
-    drawProgressBar(p, rectProgress, progress);
-  } else if (rectStatus.isValid()) {
+    drawProgressBar(p, layout.rectProgress, progress);
+  } else if (layout.rectStatus.isValid()) {
     QString status;
     const QString& keywords = project->getKeywords();
     if (!keywords.isEmpty() && itemStatusControl.prj.keywords) {
@@ -503,7 +504,6 @@ void CWksItemDelegate::paintProject(QPainter* p, const QStyleOptionViewItem& opt
     }
 
     if (!project->isTrkElevationInvalid()) {
-
       qreal ascent = project->getTotalAscent();
       if (ascent < NOFLOAT && !qFuzzyIsNull(ascent) && itemStatusControl.prj.ascent) {
         QString unit, val;
@@ -517,7 +517,6 @@ void CWksItemDelegate::paintProject(QPainter* p, const QStyleOptionViewItem& opt
         IUnit::self().meter2elevation(descent, val, unit);
         status += QString("%1%2%3 ").arg(QChar(0x2198)).arg(val, unit);
       }
-
     }
 
     if (itemStatusControl.prj.gisStats) {
@@ -540,16 +539,15 @@ void CWksItemDelegate::paintProject(QPainter* p, const QStyleOptionViewItem& opt
       }
     }
     p->setPen(colorName);
-    p->setFont(fontStatus);
-    p->drawText(rectStatus.adjusted(0, -1, 0, 1), Qt::AlignLeft | Qt::AlignTop, status);
+    p->setFont(layout.fontStatus);
+    p->drawText(layout.rectStatus.adjusted(0, -1, 0, 1), Qt::AlignLeft | Qt::AlignTop, status);
   }
   // -- stop ------------ status line ---------------------------------------
 }
 
 void CWksItemDelegate::paintDevice(QPainter* p, const QStyleOptionViewItem& opt, const QModelIndex& index,
                                    const IWksItem& item) const {
-  auto [fontName, fontStatus, rectIcon, rectName, rectStatus, rectProgress, rectVisible] =
-      getRectanglesDevice(opt, item);
+  auto layout = getRectanglesDevice(opt, item);
 
   const bool isVisible = item.isVisible();
   const bool isSelected = (opt.state & QStyle::State_Selected) != 0;
@@ -557,39 +555,40 @@ void CWksItemDelegate::paintDevice(QPainter* p, const QStyleOptionViewItem& opt,
 
   // derive strings colors
   const QPalette::ColorRole colorRole = (isSelected && hasFocus) ? QPalette::HighlightedText : QPalette::WindowText;
-  const QPalette::ColorGroup colorGroup = isVisible ? (hasFocus ? QPalette::Active : QPalette::Inactive) : QPalette::Disabled;
+  const QPalette::ColorGroup colorGroup =
+      isVisible ? (hasFocus ? QPalette::Active : QPalette::Inactive) : QPalette::Disabled;
   const QColor& colorName = opt.palette.color(colorGroup, colorRole);
 
   // draw name
-  fontName.setBold(item.hasUserFocus());
+  layout.fontName.setBold(item.hasUserFocus());
   p->setPen(colorName);
-  p->setFont(fontName);
-  p->drawText(rectName.adjusted(0, -1, 0, 1), Qt::AlignLeft | Qt::AlignTop, item.getName());
+  p->setFont(layout.fontName);
+  p->drawText(layout.rectName.adjusted(0, -1, 0, 1), Qt::AlignLeft | Qt::AlignTop, item.getName());
 
   // draw icon
-  const QPixmap& icon = item.getIcon().scaled(rectIcon.size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
-  QIcon(icon).paint(p, rectIcon, Qt::AlignCenter, isVisible ? QIcon::Normal : QIcon::Disabled);
+  const QPixmap& icon = item.getIcon().scaled(layout.rectIcon.size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+  QIcon(icon).paint(p, layout.rectIcon, Qt::AlignCenter, isVisible ? QIcon::Normal : QIcon::Disabled);
 
   // draw tool button to activate
-  drawToolButton(p, opt, rectVisible,
+  drawToolButton(p, opt, layout.rectVisible,
                  isVisible ? QIcon(":/icons/32x32/ShowAll.png") : QIcon(":/icons/32x32/ShowNone.png"), true, isVisible);
 
   // draw progress bar
   auto [hasProgress, progress] = item.getProgress();
   if (hasProgress) {
-    drawProgressBar(p, rectProgress, progress);
+    drawProgressBar(p, layout.rectProgress, progress);
   } else {
     // draw status
     p->setPen(colorName);
-    p->setFont(fontStatus);
-    p->drawText(rectStatus.adjusted(0, -1, 0, 1), Qt::AlignLeft | Qt::AlignTop,
+    p->setFont(layout.fontStatus);
+    p->drawText(layout.rectStatus.adjusted(0, -1, 0, 1), Qt::AlignLeft | Qt::AlignTop,
                 item.getInfo(IWksItem::eFeatureShowName));
   }
 }
 
 void CWksItemDelegate::paintItem(QPainter* p, const QStyleOptionViewItem& opt, const QModelIndex& index,
                                  const IWksItem& item) const {
-  auto [fontName, fontStatus, rectIcon, rectName, rectStatus, rectChanged] = getRectanglesItem(opt, item);
+  auto layout = getRectanglesItem(opt, item);
 
   const bool isVisible = item.isVisible();
   const bool isSelected = (opt.state & QStyle::State_Selected) != 0;
@@ -598,22 +597,23 @@ void CWksItemDelegate::paintItem(QPainter* p, const QStyleOptionViewItem& opt, c
 
   // derive strings colors
   const QPalette::ColorRole colorRole = (isSelected && hasFocus) ? QPalette::HighlightedText : QPalette::WindowText;
-  const QPalette::ColorGroup colorGroup = isVisible ? (hasFocus ? QPalette::Active : QPalette::Inactive) : QPalette::Disabled;
+  const QPalette::ColorGroup colorGroup =
+      isVisible ? (hasFocus ? QPalette::Active : QPalette::Inactive) : QPalette::Disabled;
   const QColor& colorName = opt.palette.color(colorGroup, colorRole);
 
   // draw name
-  fontName.setBold(item.hasUserFocus());
+  layout.fontName.setBold(item.hasUserFocus());
   p->setPen(colorName);
-  p->setFont(fontName);
-  p->drawText(rectName.adjusted(0, -1, 0, 1), Qt::AlignLeft | Qt::AlignTop, item.getName());
+  p->setFont(layout.fontName);
+  p->drawText(layout.rectName.adjusted(0, -1, 0, 1), Qt::AlignLeft | Qt::AlignTop, item.getName());
 
   // -- start ------------ status line ---------------------------------------
-  if (rectStatus.isValid()) {
+  if (layout.rectStatus.isValid()) {
     QString status;
     const CGisItemTrk* trk = dynamic_cast<const CGisItemTrk*>(&item);
     if (trk != nullptr && itemStatusControl.trk.flags != 0) {
       if (itemStatusControl.trk.rating) {
-        drawRatingStars(item.getRating(), p, iconMode, rectStatus);
+        drawRatingStars(item.getRating(), p, iconMode, layout.rectStatus);
       }
 
       if (itemStatusControl.trk.tags) {
@@ -631,7 +631,6 @@ void CWksItemDelegate::paintItem(QPainter* p, const QStyleOptionViewItem& opt, c
       }
 
       if (!trk->isTrkElevationInvalid()) {
-
         qreal ascent = trk->getTotalAscent();
         if (ascent != NOFLOAT && !qFuzzyIsNull(ascent) && itemStatusControl.trk.ascent) {
           QString unit, val;
@@ -645,9 +644,7 @@ void CWksItemDelegate::paintItem(QPainter* p, const QStyleOptionViewItem& opt, c
           IUnit::self().meter2elevation(descent, val, unit);
           status += QString("%1%2%3 ").arg(QChar(0x2198)).arg(val, unit);
         }
-
       }
-
     }
 
     const CGisItemWpt* wpt = dynamic_cast<const CGisItemWpt*>(&item);
@@ -656,7 +653,7 @@ void CWksItemDelegate::paintItem(QPainter* p, const QStyleOptionViewItem& opt, c
         status = wpt->getGeoCache().name;
       } else if (itemStatusControl.wpt.flags != 0) {
         if (itemStatusControl.wpt.rating) {
-          drawRatingStars(item.getRating(), p, iconMode, rectStatus);
+          drawRatingStars(item.getRating(), p, iconMode, layout.rectStatus);
         }
 
         if (itemStatusControl.wpt.tags) {
@@ -678,7 +675,7 @@ void CWksItemDelegate::paintItem(QPainter* p, const QStyleOptionViewItem& opt, c
     const CGisItemRte* rte = dynamic_cast<const CGisItemRte*>(&item);
     if (rte != nullptr && itemStatusControl.rte.flags != 0) {
       if (itemStatusControl.rte.rating) {
-        drawRatingStars(item.getRating(), p, iconMode, rectStatus);
+        drawRatingStars(item.getRating(), p, iconMode, layout.rectStatus);
       }
 
       if (itemStatusControl.rte.tags) {
@@ -692,7 +689,7 @@ void CWksItemDelegate::paintItem(QPainter* p, const QStyleOptionViewItem& opt, c
     const CGisItemOvlArea* area = dynamic_cast<const CGisItemOvlArea*>(&item);
     if (area != nullptr && itemStatusControl.area.flags != 0) {
       if (itemStatusControl.area.rating) {
-        drawRatingStars(item.getRating(), p, iconMode, rectStatus);
+        drawRatingStars(item.getRating(), p, iconMode, layout.rectStatus);
       }
 
       if (itemStatusControl.area.tags) {
@@ -703,19 +700,19 @@ void CWksItemDelegate::paintItem(QPainter* p, const QStyleOptionViewItem& opt, c
       }
     }
 
-    p->setFont(fontStatus);
-    p->drawText(rectStatus.adjusted(0, -1, 0, 1), Qt::AlignLeft | Qt::AlignTop, status);
+    p->setFont(layout.fontStatus);
+    p->drawText(layout.rectStatus.adjusted(0, -1, 0, 1), Qt::AlignLeft | Qt::AlignTop, status);
   }
   // -- stop ------------ status line ---------------------------------------
 
   // draw icon
-  const QPixmap& icon = item.getIcon().scaled(rectIcon.size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
-  QIcon(icon).paint(p, rectIcon, Qt::AlignCenter, iconMode);
+  const QPixmap& icon = item.getIcon().scaled(layout.rectIcon.size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+  QIcon(icon).paint(p, layout.rectIcon, Qt::AlignCenter, iconMode);
 
   // draw save/changed icon
-  if (rectChanged.isValid()) {
+  if (layout.rectChanged.isValid()) {
     QIcon(":/icons/32x32/Save.png")
-        .paint(p, rectChanged.adjusted(2 * kMargin, 2 * kMargin, -2 * kMargin, -2 * kMargin), Qt::AlignCenter,
+        .paint(p, layout.rectChanged.adjusted(2 * kMargin, 2 * kMargin, -2 * kMargin, -2 * kMargin), Qt::AlignCenter,
                iconMode);
   }
 }
@@ -726,17 +723,16 @@ void CWksItemDelegate::paintGeoSearch(QPainter* p, const QStyleOptionViewItem& o
   if (search == nullptr) {
     return;
   }
-  auto [fontSearch, fontStatus, rectIcon, rectSetup, rectLineEdit, rectStatus, rectWptIcon, rectVisible] =
-      getRectanglesGeoSearch(opt);
+  const auto& layout = getRectanglesGeoSearch(opt);
   const bool isVisible = item.isVisible();
 
-  const QPixmap& icon = item.getIcon().scaled(rectIcon.size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
-  QIcon(icon).paint(p, rectIcon, Qt::AlignCenter, isVisible ? QIcon::Normal : QIcon::Disabled);
-  QIcon(":/icons/32x32/Apply.png").paint(p, rectSetup, Qt::AlignCenter, QIcon::Normal);
-  QIcon(search->getWptIcon()).paint(p, rectWptIcon, Qt::AlignCenter, QIcon::Normal);
+  const QPixmap& icon = item.getIcon().scaled(layout.rectIcon.size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+  QIcon(icon).paint(p, layout.rectIcon, Qt::AlignCenter, isVisible ? QIcon::Normal : QIcon::Disabled);
+  QIcon(":/icons/32x32/Apply.png").paint(p, layout.rectSetup, Qt::AlignCenter, QIcon::Normal);
+  QIcon(search->getWptIcon()).paint(p, layout.rectWptIcon, Qt::AlignCenter, QIcon::Normal);
 
   // draw tool button to activate
-  drawToolButton(p, opt, rectVisible,
+  drawToolButton(p, opt, layout.rectVisible,
                  isVisible ? QIcon(":/icons/32x32/ShowAll.png") : QIcon(":/icons/32x32/ShowNone.png"), true, isVisible);
 
   const QString& address = search->getLastAddress();
@@ -745,30 +741,30 @@ void CWksItemDelegate::paintGeoSearch(QPainter* p, const QStyleOptionViewItem& o
       QPalette::WindowText);
 
   p->setPen(colorSearch);
-  p->setFont(fontSearch);
-  p->drawText(rectLineEdit.adjusted(kMargin, -1, 1, 0), Qt::AlignTop | Qt::AlignLeft,
+  p->setFont(layout.fontSearch);
+  p->drawText(layout.rectLineEdit.adjusted(kMargin, -1, 1, 0), Qt::AlignTop | Qt::AlignLeft,
               address.isEmpty() ? tr("Enter address...") : address);
 
   const QColor& colorStatus =
       opt.palette.color(isVisible ? QPalette::Active : QPalette::Disabled, QPalette::WindowText);
 
   p->setPen(colorStatus);
-  p->setFont(fontStatus);
-  p->drawText(rectStatus.adjusted(kMargin, -1, 0, 1), Qt::AlignTop | Qt::AlignLeft, search->getServiceName());
+  p->setFont(layout.fontStatus);
+  p->drawText(layout.rectStatus.adjusted(kMargin, -1, 0, 1), Qt::AlignTop | Qt::AlignLeft, search->getServiceName());
 }
 
 void CWksItemDelegate::paintGeoSearchError(QPainter* p, const QStyleOptionViewItem& opt, const QModelIndex& index,
                                            const IWksItem& item) const {
-  auto [font, rectIcon, rectName] = getRectanglesGeoSearchError(opt);
+  const auto& layout = getRectanglesGeoSearchError(opt);
   const bool isVisible = item.isVisible();
 
-  const QPixmap& icon = item.getIcon().scaled(rectIcon.size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
-  QIcon(icon).paint(p, rectIcon, Qt::AlignCenter, isVisible ? QIcon::Normal : QIcon::Disabled);
+  const QPixmap& icon = item.getIcon().scaled(layout.rectIcon.size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+  QIcon(icon).paint(p, layout.rectIcon, Qt::AlignCenter, isVisible ? QIcon::Normal : QIcon::Disabled);
   const QColor& color = opt.palette.color(isVisible ? QPalette::Active : QPalette::Disabled, QPalette::WindowText);
 
   p->setPen(color);
-  p->setFont(font);
-  p->drawText(rectName.adjusted(kMargin, -1, 0, 1), Qt::AlignTop | Qt::AlignLeft, item.getName());
+  p->setFont(layout.font);
+  p->drawText(layout.rectName.adjusted(kMargin, -1, 0, 1), Qt::AlignTop | Qt::AlignLeft, item.getName());
 }
 
 bool CWksItemDelegate::editorEvent(QEvent* event, QAbstractItemModel* model, const QStyleOptionViewItem& opt,
@@ -796,13 +792,12 @@ bool CWksItemDelegate::editorEvent(QEvent* event, QAbstractItemModel* model, con
 
 bool CWksItemDelegate::mousePressProject(QMouseEvent* me, const QStyleOptionViewItem& opt, const QModelIndex& index,
                                          IWksItem& item) {
-  auto [fontName, fontStatus, rectIcon, rectName, rectStatus, rectProgress, rectVisible, rectSave, rectActiveProject,
-        rectAutoSyncDev] = getRectanglesProject(opt, item);
-  if (rectVisible.contains(me->pos())) {
+  const auto& layout = getRectanglesProject(opt, item);
+  if (layout.rectVisible.contains(me->pos())) {
     item.setVisibility(!item.isVisible());
     emit sigUpdateCanvas();
     return true;
-  } else if (rectSave.contains(me->pos())) {
+  } else if (layout.rectSave.contains(me->pos())) {
     if (item.isOnDevice() == false) {
       if (item.isAutoSave()) {
         item.setAutoSave(false);
@@ -825,11 +820,11 @@ bool CWksItemDelegate::mousePressProject(QMouseEvent* me, const QStyleOptionView
       treeWidget->slotCopyProject();
     }
     return true;
-  } else if (rectAutoSyncDev.contains(me->pos())) {
+  } else if (layout.rectAutoSyncDev.contains(me->pos())) {
     item.setAutoSyncToDev(!item.isAutoSyncToDev());
     return true;
 
-  } else if (rectActiveProject.contains(me->pos())) {
+  } else if (layout.rectActiveProject.contains(me->pos())) {
     IGisProject* project = dynamic_cast<IGisProject*>(&item);
     if (project == nullptr) {
       return false;
@@ -845,10 +840,9 @@ bool CWksItemDelegate::mousePressProject(QMouseEvent* me, const QStyleOptionView
 
 bool CWksItemDelegate::mousePressDevice(QMouseEvent* me, const QStyleOptionViewItem& opt, const QModelIndex& index,
                                         IWksItem& item) {
-  auto [fontName, fontStatus, rectIcon, rectName, rectStatus, rectProgress, rectVisible] =
-      getRectanglesDevice(opt, item);
+  const auto& layout = getRectanglesDevice(opt, item);
 
-  if (rectVisible.contains(me->pos())) {
+  if (layout.rectVisible.contains(me->pos())) {
     item.setVisibility(!item.isVisible());
     emit sigUpdateCanvas();
     return true;
@@ -863,24 +857,23 @@ bool CWksItemDelegate::mousePressGeoSearch(QMouseEvent* me, const QStyleOptionVi
     return false;
   }
 
-  auto [fontSearch, fontStatus, rectIcon, rectSetup, rectLineEdit, rectStatus, rectWptIcon, rectVisible] =
-      getRectanglesGeoSearch(opt);
+  const auto& layout = getRectanglesGeoSearch(opt);
 
-  if (rectVisible.contains(me->pos())) {
+  if (layout.rectVisible.contains(me->pos())) {
     item.setVisibility(!item.isVisible());
     emit sigUpdateCanvas();
     return true;
   }
-  if (rectSetup.contains(me->pos())) {
-    search->selectService(rectSetup);
+  if (layout.rectSetup.contains(me->pos())) {
+    search->selectService(layout.rectSetup);
     return true;
   }
-  if (rectWptIcon.contains(me->pos())) {
+  if (layout.rectWptIcon.contains(me->pos())) {
     search->changeSymbol();
     return true;
   }
 
-  if (rectLineEdit.contains(me->pos())) {
+  if (layout.rectLineEdit.contains(me->pos())) {
     return false;
   }
 
@@ -916,16 +909,15 @@ bool CWksItemDelegate::helpEvent(QHelpEvent* event, QAbstractItemView* view, con
 
 bool CWksItemDelegate::helpEventProject(const QPoint& pos, const QPoint& posGlobal, QAbstractItemView* view,
                                         const QStyleOptionViewItem& opt, IWksItem& item) {
-  auto [fontName, fontStatus, rectIcon, rectName, rectStatus, rectProgress, rectVisible, rectSave, rectActiveProject,
-        rectAutoSyncDev] = getRectanglesProject(opt, item);
-  if (rectVisible.contains(pos)) {
+  const auto& layout = getRectanglesProject(opt, item);
+  if (layout.rectVisible.contains(pos)) {
     if (item.isVisible()) {
       QToolTip::showText(posGlobal, toRichText(tr("Hide project on map.")), view, {}, 3000);
     } else {
       QToolTip::showText(posGlobal, toRichText(tr("Show project on map.")), view, {}, 3000);
     }
     return true;
-  } else if (rectSave.contains(pos)) {
+  } else if (layout.rectSave.contains(pos)) {
     if (item.isOnDevice() == false) {
       if (item.isChanged() && !item.isAutoSave()) {
         QToolTip::showText(posGlobal, toRichText(tr("Save project.")), view, {}, 3000);
@@ -941,7 +933,7 @@ bool CWksItemDelegate::helpEventProject(const QPoint& pos, const QPoint& posGlob
                          {}, 3000);
     }
     return true;
-  } else if (rectAutoSyncDev.contains(pos)) {
+  } else if (layout.rectAutoSyncDev.contains(pos)) {
     if (item.isAutoSyncToDev()) {
       QToolTip::showText(posGlobal, toRichText(tr("Disable automatic synchonization with GPS device.")), view, {},
                          3000);
@@ -949,7 +941,7 @@ bool CWksItemDelegate::helpEventProject(const QPoint& pos, const QPoint& posGlob
       QToolTip::showText(posGlobal, toRichText(tr("Enable automatic synchonization with GPS device.")), view, {}, 3000);
     }
     return true;
-  } else if (rectActiveProject.contains(pos)) {
+  } else if (layout.rectActiveProject.contains(pos)) {
     if (item.hasUserFocus()) {
       QToolTip::showText(
           posGlobal,
@@ -963,10 +955,10 @@ bool CWksItemDelegate::helpEventProject(const QPoint& pos, const QPoint& posGlob
           view, {}, 5000);
     }
     return true;
-  } else if (rectName.contains(pos)) {
+  } else if (layout.rectName.contains(pos)) {
     QToolTip::showText(posGlobal, item.getInfo(IWksItem::eFeatureShowName), view);
     return true;
-  } else if (rectStatus.contains(pos)) {
+  } else if (layout.rectStatus.contains(pos)) {
     if (itemStatusControl.prj.flags == 0) {
       QToolTip::showText(
           posGlobal,
@@ -984,12 +976,12 @@ bool CWksItemDelegate::helpEventProject(const QPoint& pos, const QPoint& posGlob
 
 bool CWksItemDelegate::helpEventItem(const QPoint& pos, const QPoint& posGlobal, QAbstractItemView* view,
                                      const QStyleOptionViewItem& opt, const IWksItem& item) {
-  auto [fontName, fontStatus, rectIcon, rectName, rectStatus, rectChanged] = getRectanglesItem(opt, item);
+  const auto& layout = getRectanglesItem(opt, item);
 
-  if (rectName.contains(pos)) {
+  if (layout.rectName.contains(pos)) {
     QToolTip::showText(posGlobal, item.getInfo(IWksItem::eFeatureShowName), view);
     return true;
-  } else if (rectStatus.contains(pos)) {
+  } else if (layout.rectStatus.contains(pos)) {
     if (itemStatusControl.prj.flags == 0) {
       QToolTip::showText(
           posGlobal,
@@ -1001,7 +993,7 @@ bool CWksItemDelegate::helpEventItem(const QPoint& pos, const QPoint& posGlobal,
       QToolTip::showText(posGlobal, item.getInfo(IWksItem::eFeatureShowName), view);
     }
     return true;
-  } else if (rectChanged.contains(pos)) {
+  } else if (layout.rectChanged.contains(pos)) {
     if (item.isChanged()) {
       QToolTip::showText(posGlobal, toRichText(tr("Item is changed and needs to be saved.")), view, {}, 3000);
       return true;
@@ -1012,9 +1004,8 @@ bool CWksItemDelegate::helpEventItem(const QPoint& pos, const QPoint& posGlobal,
 
 bool CWksItemDelegate::helpEventGeoSearch(const QPoint& pos, const QPoint& posGlobal, QAbstractItemView* view,
                                           const QStyleOptionViewItem& opt, const IWksItem& item) {
-  auto [fontSearch, fontStatus, rectIcon, rectSetup, rectLineEdit, rectStatus, rectWptIcon, rectVisible] =
-      getRectanglesGeoSearch(opt);
-  if (rectSetup.contains(pos)) {
+  const auto& layout = getRectanglesGeoSearch(opt);
+  if (layout.rectSetup.contains(pos)) {
     QToolTip::showText(posGlobal, toRichText(tr("Setup Search")), view, {}, 3000);
     return true;
   }
@@ -1045,9 +1036,8 @@ QWidget* CWksItemDelegate::createEditor(QWidget* parent, const QStyleOptionViewI
 void CWksItemDelegate::updateEditorGeometry(QWidget* editor, const QStyleOptionViewItem& opt,
                                             const QModelIndex& index) const {
   if (editor->objectName() == "GeoSearch") {
-    auto [fontSearch, fontStatus, rectIcon, rectSetup, rectLineEdit, rectStatus, rectWptIcon, rectVisible] =
-        getRectanglesGeoSearch(opt);
-    editor->setGeometry(rectLineEdit.adjusted(kMargin, -2, 0, 2));
+    const auto& layout = getRectanglesGeoSearch(opt);
+    editor->setGeometry(layout.rectLineEdit.adjusted(kMargin, -2, 0, 2));
   } else {
     editor->setGeometry(opt.rect);
   }

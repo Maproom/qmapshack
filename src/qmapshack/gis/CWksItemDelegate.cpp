@@ -30,30 +30,15 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CDraw.h"
+#include "helpers/CRowBuilder.h"
 #include "helpers/CSettings.h"
 #include "misc.h"
 
 constexpr int kFontSizeDiffProject = 2;
 constexpr int kFontSizeDiffItem = 3;
-constexpr int kFontSizeInvalid = -1;
+constexpr int kFontSizeInvalid = -1;  // statusSize* sentinel: hide the status line entirely
 constexpr int kProgressBarHeight = 5;
 constexpr int kProgressBarHeightHalf = 1;
-
-namespace {
-/// Cursor laying out a row of right-aligned, equally sized tool buttons. Each call to
-/// next() returns the rect for the next button and moves left by one button width + margin.
-struct button_row_cursor_t {
-  int left;
-  int top;
-  int size;
-
-  QRect next() {
-    const QRect rect(left, top, size, size);
-    left -= size + kMargin;
-    return rect;
-  }
-};
-}  // namespace
 
 CWksItemDelegate::CWksItemDelegate(CGisListWks* parent) : QStyledItemDelegate(parent), treeWidget(parent) {
   SETTINGS;
@@ -100,43 +85,38 @@ QSize CWksItemDelegate::sizeHint(const QStyleOptionViewItem& opt, const QModelIn
     return QSize(opt.rect.width(), 22);
   }
 
-  QFont fontName = opt.font;
-  fontName.setBold(true);
-  QFontMetrics fmName(fontName);
+  const QFontMetrics fmName(opt.font);
 
   QFont fontStatusPrj = opt.font;
-  fontStatusPrj.setPointSize(fontName.pointSize() - itemStatusControl.statusSizePrj);
-  QFontMetrics fmStatusPrj(fontStatusPrj);
+  fontStatusPrj.setPointSize(opt.font.pointSize() - itemStatusControl.statusSizePrj);
+  const QFontMetrics fmStatusPrj(fontStatusPrj);
 
   QFont fontStatusItem = opt.font;
-  fontStatusItem.setPointSize(fontName.pointSize() - itemStatusControl.statusSizeItem);
-  QFontMetrics fmStatusItem(fontStatusItem);
+  fontStatusItem.setPointSize(opt.font.pointSize() - itemStatusControl.statusSizeItem);
+  const QFontMetrics fmStatusItem(fontStatusItem);
 
   QFont fontStatusOther = opt.font;
-  fontStatusOther.setPointSize(fontName.pointSize() - kFontSizeDiffProject);
-  QFontMetrics fmStatusOther(fontStatusOther);
+  fontStatusOther.setPointSize(opt.font.pointSize() - kFontSizeDiffProject);
+  const QFontMetrics fmStatusOther(fontStatusOther);
 
   switch (item->getBaseType()) {
-    case IWksItem::eBaseType::Project:
-      if (itemStatusControl.statusSizePrj != kFontSizeInvalid) {
-        return QSize(opt.rect.width(), std::max(22, 7 * kMargin + fmName.height() + fmStatusPrj.height()));
-      } else {
-        return QSize(opt.rect.width(), std::max(22, 5 * kMargin + fmName.height()));
-      }
+    case IWksItem::eBaseType::Project: {
+      const int statusH = (itemStatusControl.statusSizePrj != kFontSizeInvalid) ? fmStatusPrj.height() : 0;
+      return QSize(opt.rect.width(), std::max(22, CRowBuilder::rowHeight(kCellPad, fmName.height(), statusH)));
+    }
 
     case IWksItem::eBaseType::GeoSearch:
     case IWksItem::eBaseType::Device:
-      return QSize(opt.rect.width(), std::max(22, 7 * kMargin + fmName.height() + fmStatusOther.height()));
+      return QSize(opt.rect.width(),
+                   std::max(22, CRowBuilder::rowHeight(kCellPad, fmName.height(), fmStatusOther.height())));
 
     case IWksItem::eBaseType::GeoSearchError:
-      return QSize(opt.rect.width(), std::max(22, 5 * kMargin + fmName.height()));
+      return QSize(opt.rect.width(), std::max(22, CRowBuilder::rowHeight(kCellPad, fmName.height())));
 
-    case IWksItem::eBaseType::Item:
-      if (itemStatusControl.statusSizeItem != kFontSizeInvalid) {
-        return QSize(opt.rect.width(), std::max(22, 7 * kMargin + fmName.height() + fmStatusItem.height()));
-      } else {
-        return QSize(opt.rect.width(), std::max(22, 5 * kMargin + fmName.height()));
-      }
+    case IWksItem::eBaseType::Item: {
+      const int statusH = (itemStatusControl.statusSizeItem != kFontSizeInvalid) ? fmStatusItem.height() : 0;
+      return QSize(opt.rect.width(), std::max(22, CRowBuilder::rowHeight(kCellPad, fmName.height(), statusH)));
+    }
 
     default:;
       return QSize(opt.rect.width(), 22);
@@ -152,64 +132,48 @@ CWksItemDelegate::ProjectLayout CWksItemDelegate::getRectanglesProject(const QSt
   fontStatus.setPointSize(fontStatus.pointSize() - itemStatusControl.statusSizePrj);
   const QFontMetrics fmStatus(fontStatus);
 
-  const QRect& r = opt.rect.adjusted(2 * kMargin, 2 * kMargin, -2 * kMargin, -2 * kMargin);
-  const int buttonTop = r.top();
-  const int buttonWidth = fmName.height();
-  const int buttonHeight = buttonWidth;
   const bool isOnDevice = item.isOnDevice() != IWksItem::eTypeNone;
 
-  const QRect rectIcon(r.left(), r.top(), r.height(), r.height());
+  CRowBuilder row(opt.rect, kCellPad, kInnerGap);
+  const QRect rectIcon = row.takeLeft(row.height());
+  row.markStatusColumn();
+  const QRect rectVisible = row.takeButton(fmName.height());
 
-  // Set rectName initially to span the complete width. The right edge
-  // will be adjusted in the and by the last button rectangle.
-  QRect rectName(rectIcon.right() + 2 * kMargin, r.top(), r.width() - rectIcon.width(), fmName.height());
-  QRect rectVisible(r.right() - buttonWidth, buttonTop, buttonWidth, buttonHeight);
-
-  // Tool buttons are added left of the rectVisible, growing further left
-  // with each button.
-  button_row_cursor_t buttons{rectVisible.left() - buttonWidth - kMargin, buttonTop, buttonWidth};
-
-  // All tool button rectangles are initially invalid. If a tool button is need
-  // the rectangle is set to a valid rectangle at the correct position.
-  // As a consequence the code using the rectangles simply tests if they
-  // are valid. Buttons with non valid rectangles are skipped.
+  // All optional button rects are default-constructed (invalid). Buttons with an
+  // invalid rect are simply skipped by the paint and hit-test code.
   QRect rectActiveProject;
   QRect rectSave;
   QRect rectAutoSyncDev;
 
   if (isOnDevice == false && item.type() != IWksItem::eTypeLostFound) {
     if (item.holdUiFocus(opt)) {
-      rectActiveProject = buttons.next();
-      rectSave = buttons.next();
-
+      rectActiveProject = row.takeButton(fmName.height());
+      rectSave = row.takeButton(fmName.height());
       if (treeWidget->hasDeviceSupport()) {
-        rectAutoSyncDev = buttons.next();
+        rectAutoSyncDev = row.takeButton(fmName.height());
       }
     } else {
       if (item.hasUserFocus()) {
-        rectActiveProject = buttons.next();
+        rectActiveProject = row.takeButton(fmName.height());
       }
       if (item.isChanged() && !item.isAutoSave()) {
-        rectSave = buttons.next();
+        rectSave = row.takeButton(fmName.height());
       }
     }
   } else if (isOnDevice == true) {
     if (item.holdUiFocus(opt)) {
-      rectSave = buttons.next();
+      rectSave = row.takeButton(fmName.height());
     }
   }
-  // As rectName should span up to the right of the last button left has
-  // to be corrected by a button width.
-  rectName.setRight(buttons.left + buttonWidth - 2 * kMargin);
+
+  const QRect rectName = row.nameSlice(fmName.height());
 
   QRect rectStatus;
   if (itemStatusControl.statusSizePrj != kFontSizeInvalid) {
-    rectStatus.setRect(rectIcon.right() + 2 * kMargin, r.bottom() - fmStatus.height(),
-                       r.width() - rectIcon.width() - 2 * kMargin, fmStatus.height());
+    rectStatus = row.fullStatusSlice(fmStatus.height());
   }
 
-  const QRect rectProgress(rectIcon.right() + 4 * kMargin, r.bottom() - kProgressBarHeight,
-                           r.width() - rectIcon.width() - 8 * kMargin, kProgressBarHeight);
+  const QRect rectProgress = row.fullStatusSlice(kProgressBarHeight).adjusted(kInnerGap, 0, -kInnerGap, 0);
 
   return {fontName,     fontStatus,  rectIcon, rectName,          rectStatus,
           rectProgress, rectVisible, rectSave, rectActiveProject, rectAutoSyncDev};
@@ -217,47 +181,29 @@ CWksItemDelegate::ProjectLayout CWksItemDelegate::getRectanglesProject(const QSt
 
 CWksItemDelegate::ItemLayout CWksItemDelegate::getRectanglesItem(const QStyleOptionViewItem& opt,
                                                                  const IWksItem& item) const {
-  QFont fontName = opt.font;
-  QFontMetrics fmName(fontName);
+  const QFont fontName = opt.font;
+  const QFontMetrics fmName(fontName);
 
   QFont fontStatus = opt.font;
   fontStatus.setPointSize(fontStatus.pointSize() - itemStatusControl.statusSizeItem);
-  QFontMetrics fmStatus(fontStatus);
+  const QFontMetrics fmStatus(fontStatus);
 
-  const QRect& r = opt.rect.adjusted(2 * kMargin, 2 * kMargin, -2 * kMargin, -2 * kMargin);
-  const int buttonTop = r.top();
-  const int buttonWidth = fmName.height();
+  CRowBuilder row(opt.rect, kCellPad, kInnerGap);
+  const QRect rectIcon = row.takeLeft(row.height());
+  row.markStatusColumn();
 
-  const QRect rectIcon(r.left(), r.top(), r.height(), r.height());
-
-  // Set rectName initially to span the complete width. The right edge
-  // will be adjusted in the and by the last button rectangle.
-  QRect rectName(rectIcon.right() + 2 * kMargin, r.top(), r.width() - rectIcon.width(), fmName.height());
-
-  // Tool buttons are added left of the right edge, growing further left
-  // with each button.
-  button_row_cursor_t buttons{r.right() - buttonWidth - kMargin, buttonTop, buttonWidth};
-
-  // All tool button rectangles are initially invalid. If a tool button is need
-  // the rectangle is set to a valid rectangle at the correct position.
-  // As a consequence the code using the rectangles simply tests if they
-  // are valid. Buttons with non valid rectangles are skipped.
   QRect rectChanged;
-
   const CGeoSearch* search = dynamic_cast<const CGeoSearch*>(item.parent());
   const bool isOnGeoSearch = search != nullptr;
   if (item.isChanged() && !item.isOnDevice() && !isOnGeoSearch) {
-    rectChanged = buttons.next();
+    rectChanged = row.takeButton(fmName.height());
   }
 
-  // As rectName should span up to the right of the last button left has
-  // to be corrected by a button width.
-  rectName.setRight(buttons.left + buttonWidth - 2 * kMargin);
+  const QRect rectName = row.nameSlice(fmName.height());
 
   QRect rectStatus;
   if (itemStatusControl.statusSizeItem != kFontSizeInvalid) {
-    rectStatus = QRect(rectIcon.right() + 2 * kMargin, r.bottom() - fmStatus.height(),
-                       r.width() - rectIcon.width() - 2 * kMargin, fmStatus.height());
+    rectStatus = row.fullStatusSlice(fmStatus.height());
   }
 
   return {fontName, fontStatus, rectIcon, rectName, rectStatus, rectChanged};
@@ -265,22 +211,20 @@ CWksItemDelegate::ItemLayout CWksItemDelegate::getRectanglesItem(const QStyleOpt
 
 CWksItemDelegate::DeviceLayout CWksItemDelegate::getRectanglesDevice(const QStyleOptionViewItem& opt,
                                                                      const IWksItem& item) const {
-  QFont fontName = opt.font;
-  QFontMetrics fmName(fontName);
+  const QFont fontName = opt.font;
+  const QFontMetrics fmName(fontName);
 
   QFont fontStatus = opt.font;
   fontStatus.setPointSize(fontStatus.pointSize() - kFontSizeDiffProject);
-  QFontMetrics fmStatus(fontStatus);
+  const QFontMetrics fmStatus(fontStatus);
 
-  const QRect& r = opt.rect.adjusted(2 * kMargin, 2 * kMargin, -2 * kMargin, -2 * kMargin);
-  const QRect rectIcon(r.left(), r.top(), r.height(), r.height());
-  const QRect rectVisible(r.right() - fmName.height(), r.top(), fmName.height(), fmName.height());
-  const QRect rectName(rectIcon.right() + 2 * kMargin, r.top(),
-                       r.width() - rectIcon.width() - rectVisible.width() - 2 * kMargin, fmName.height());
-  const QRect rectStatus(rectIcon.right() + 2 * kMargin, r.bottom() - fmStatus.height(),
-                         r.width() - rectIcon.width() - 2 * kMargin, fmStatus.height());
-  const QRect rectProgress(rectIcon.right() + 4 * kMargin, r.bottom() - kProgressBarHeight,
-                           r.width() - rectIcon.width() - 8 * kMargin, kProgressBarHeight);
+  CRowBuilder row(opt.rect, kCellPad, kInnerGap);
+  const QRect rectIcon = row.takeLeft(row.height());
+  row.markStatusColumn();
+  const QRect rectVisible = row.takeButton(fmName.height());
+  const QRect rectName = row.nameSlice(fmName.height());
+  const QRect rectStatus = row.fullStatusSlice(fmStatus.height());
+  const QRect rectProgress = row.fullStatusSlice(kProgressBarHeight);
 
   return {fontName, fontStatus, rectIcon, rectName, rectStatus, rectProgress, rectVisible};
 }
@@ -293,7 +237,7 @@ CWksItemDelegate::GeoSearchLayout CWksItemDelegate::getRectanglesGeoSearch(const
   fontStatus.setPointSize(fontStatus.pointSize() - kFontSizeDiffProject);
   const QFontMetrics fmStatus(fontStatus);
 
-  const QRect& r = opt.rect.adjusted(2 * kMargin, 2 * kMargin, -2 * kMargin, -2 * kMargin);
+  const QRect& r = opt.rect.adjusted(kCellPad, kCellPad, -kCellPad, -kCellPad);
   const quint32 height = r.height() / 2;
 
   const QRect rectIcon(r.left(), r.top(), r.height(), r.height());
@@ -316,7 +260,7 @@ CWksItemDelegate::GeoSearchErrorLayout CWksItemDelegate::getRectanglesGeoSearchE
     const QStyleOptionViewItem& opt) const {
   const QFont font = opt.font;
 
-  const QRect& r = opt.rect.adjusted(2 * kMargin, 2 * kMargin, -2 * kMargin, -2 * kMargin);
+  const QRect& r = opt.rect.adjusted(kCellPad, kCellPad, -kCellPad, -kCellPad);
   // clang-format off
   const QRect rectIcon(r.left(), r.top(), r.height(), r.height());
   const QRect& rectName = r.adjusted(rectIcon.width() + kMargin,0,0,0);
@@ -340,6 +284,7 @@ QString CWksItemDelegate::distanceAscentDescentStatus(qreal distance, qreal asce
                                                       bool showDescent) {
   QString status;
 
+  // U+21A6 ↦ distance   U+2197 ↗ ascent   U+2198 ↘ descent
   if (distance != NOFLOAT && !qFuzzyIsNull(distance) && showDistance) {
     QString unit, val;
     IUnit::self().meter2distance(distance, val, unit);
@@ -372,6 +317,7 @@ void CWksItemDelegate::drawRatingStars(qreal rating, QPainter* p, QIcon::Mode ic
       QIcon("://icons/cache/32x32/star.png").paint(p, rectStar, Qt::AlignCenter, iconMode);
       rectStar.translate(kMargin + rectStar.width(), 0);
     }
+    // Advance rectStatus past the drawn stars so subsequent text starts to the right.
     rectStatus.setLeft(rectStar.left() + kMargin);
   }
 }

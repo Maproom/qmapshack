@@ -4,6 +4,39 @@ QMapShack is a Qt/C++ desktop application for planning and analysing GPS tracks,
 
 ---
 
+## Stack
+
+- **Language:** C++20
+- **GUI / framework:** Qt 6.8+
+- **Key libs:** GDAL, PROJ 8+, Routino, QuaZip-Qt6
+- **Build:** CMake 3.20+, Ninja; Debug build in `build/`; binaries in `build/bin/`
+- **Bundled 3rdparty:** alglib, Garmin FIT SDK
+
+---
+
+## Source layout
+
+```
+src/
+  qmapshack/        main app (21 subsystems)
+    canvas/         map rendering
+    gis/            tracks, routes, waypoints, DB, GPX, routing (gis/rte/router/)
+    mouse/          mouse interaction; line editing in mouse/line/
+    map/, dem/, poi/, grid/, plot/, realtime/, device/, tool/, helpers/, widgets/
+  qmaptool/         map creation tool
+  qmt_map2jnx/      utility
+  qmt_rgb2pct/      utility
+  common/           shared code
+```
+
+---
+
+## Working on recent changes
+
+When asked "what were we working on" or "what did we do last", always check `git status && git diff` first. Memory is stale; the live diff is the ground truth for in-progress work. Memory can supplement but never replace the actual diff.
+
+---
+
 ## Code style
 
 **All C++ is formatted with clang-format.** After editing any `.cpp` or `.h` file run:
@@ -113,43 +146,59 @@ Only local BRouter supports fast (on-the-fly) routing. Online BRouter and Routin
 
 ---
 
-## Planned cleanup: tree item delegates
+## Architecture: tree item delegates
 
-The three `QStyledItemDelegate` subclasses used by the tree views share heavy duplication and would benefit from a cleanup pass. Not yet started.
+The three `QStyledItemDelegate` subclasses used by the tree views:
 
 - `src/qmapshack/gis/CWksItemDelegate.{h,cpp}` (workspace tree)
 - `src/qmapshack/gis/CDBItemDelegate.{h,cpp}` (database tree)
 - `src/qmapshack/map/CMapItemDelegate.{h,cpp}` (map-item tree)
 
-### High value, low risk
+### Row layout: CRowBuilder
 
-1. ~~Replace the positional `std::tuple<QFont, QFont, QRect, ...>` returns from every `getRectangles*()`/`getRectangles()` function (all 3 files) with named structs.~~ Done: all of `CWksItemDelegate`, `CDBItemDelegate`, and `CMapItemDelegate` already return named layout structs (`ProjectLayout`, `DeviceLayout`, `ItemLayout`, `MapItemLayout`, etc.).
-2. ~~Merge `CDBItemDelegate::getRectanglesFolder` and `getRectanglesItem`.~~ Decided: keep as-is, will not be tackled.
-3. ~~Extract a shared `QColor itemNameColor(opt, isVisible/isActive)` helper.~~ Done: `CDraw::itemNameColor()` in `helpers/CDraw.{h,cpp}`, used by `CWksItemDelegate::paintProject/paintDevice/paintItem` and `CMapItemDelegate::paint`.
-4. ~~Extract a shared check-state-button switch for `CDBItemDelegate::paintFolder`/`paintItem`.~~ Done: `CDBItemDelegate::drawCheckStateButton()` now wraps the `Qt::Unchecked/PartiallyChecked/Checked` → icon switch, used by both.
-5. ~~Extract a distance/ascent/descent status-string builder.~~ Done: `CWksItemDelegate::distanceAscentDescentStatus()` is used by both `paintProject` (project totals) and `paintItem` (track totals).
+All `getRectangles*()` methods use `CRowBuilder` (`helpers/CRowBuilder.{h,cpp}`) to compute their rects. It carves a row into icon, button, and text zones without any magic-number arithmetic in the delegates.
 
-### Medium value
+**Tuning parameters** (defined in `helpers/CDraw.h`):
+- `kCellPad` — outer inset on all four sides of `opt.rect`
+- `kInnerGap` — gap between icon, text column, and each tool button
 
-6. ~~Factor out the "right-aligned button row" layout pattern.~~ Done: local `button_row_cursor_t{left, top, size}` (anonymous namespace, `CWksItemDelegate.cpp`) with `next()` replaces the manual `left -= buttonWidth + kMargin` bookkeeping in `getRectanglesProject`/`getRectanglesItem`.
-7. ~~(Bigger/optional) Move per-GIS-type status-line building out of `CWksItemDelegate::paintItem` (currently 4 sequential `dynamic_cast`s to `CGisItemTrk`/`CGisItemWpt`/`CGisItemRte`/`CGisItemOvlArea`) into a virtual method on `IWksItem`/subclasses.~~ Decided: will not be tackled.
+**Typical call sequence:**
+```cpp
+CRowBuilder row(opt.rect, kCellPad, kInnerGap);
+const QRect rectIcon   = row.takeLeft(row.height());   // square icon
+row.markStatusColumn();                                 // snapshot width for status line
+const QRect rectButton = row.takeButton(fmName.height()); // name-height square button
+const QRect rectName   = row.nameSlice(fmName.height());
+const QRect rectStatus = row.fullStatusSlice(fmStatus.height());
+```
 
-### Low risk / small fixes
+**Key methods:**
+- `takeLeft(w)` / `takeRight(w)` — carve a full-height rect, advance by `kInnerGap`
+- `takeButton(iconSize)` — carve a square button sized so `CDraw::drawToolButton` renders its icon at exactly `iconSize × iconSize` (compensates for the button's internal icon inset)
+- `markStatusColumn()` — snapshot the remaining rect before buttons are carved
+- `nameSlice(h)` — top strip of the remaining (button-narrowed) centre area
+- `statusSlice(h)` — bottom strip of the remaining (button-narrowed) centre area; use when buttons are full-height (CMap)
+- `fullStatusSlice(h)` — bottom strip of the snapshotted pre-button column; use when buttons are shorter than the row (CWks, CDB) so the status line extends under them
+- `rowHeight(cellPad, nameH, statusH)` — matching `sizeHint` height from the same parameters
 
-8. ~~`CWksItemDelegate.h` header guard is stale: `CGISITEMDELEGATE_H` should be `CWKSITEMDELEGATE_H` (leftover from a class rename).~~ Done.
-9. ~~`CDBItemDelegate::initStyleOption(...) {}` — empty override with no explanatory comment; verify whether it's intentionally suppressing base-class behavior or dead code.~~ Decided: will not be tackled.
-10. ~~`CWksItemDelegate::mousePressGeoSearch` always returns `true` except when the click is over the line-edit rect — non-obvious, needs a comment.~~ Done: comment added explaining the line-edit rect is excluded so the view's default editorEvent handling can start the rename edit.
-11. ~~Stray blank lines inside `if` blocks around elevation ascent/descent code in `paintProject`/`paintItem` (cosmetic).~~ Resolved: that code was moved into `distanceAscentDescentStatus()` by #5; remaining blank lines there are normal separators.
+**Button height convention:**
+- `CWksItemDelegate`, `CDBItemDelegate`: buttons are `takeButton(fmName.height())` — sized to the name row only; status line uses `fullStatusSlice` and spans the full width underneath
+- `CMapItemDelegate`: button is `takeRight(row.height())` — spans the full row height; status line uses `statusSlice` and is narrowed by the button
 
-### CMapItemDelegate-specific
+---
 
-12. ~~Same tuple-return pattern in `getRectangles()` — covered by #1.~~ Done: `CMapItemDelegate::getRectangles()` already returns the named `MapItemLayout` struct.
-13. ~~`drawToolButton` is duplicated a *third* time: `CWksItemDelegate` and `CDBItemDelegate` already have an identical static `drawToolButton()`; `CMapItemDelegate::paint()` inlines the same `QStyleOptionToolButton` setup instead of reusing it. Should become one free function in `helpers/CDraw.h` (already included by all three files).~~ Done: `CDraw::drawToolButton()` now provides this, used by all three delegates; the per-class static `drawToolButton()` of `CWksItemDelegate`/`CDBItemDelegate` and the inlined version in `CMapItemDelegate::paint()` were removed.
-14. ~~Layout constants (`kMargin`, `kFontSizeDiff*`, etc.) are redefined identically as `constexpr int` in all three `.cpp` files — centralize in a shared header.~~ Partially done: `kMargin` (identical `= 1` in all three) moved to `helpers/CDraw.h`, local definitions removed. `kFontSizeDiff*`/`kFontSizeInvalid` were left alone — their values differ per file (e.g. `kFontSizeDiffItem` is 3/3/2), so merging them risked behavior changes.
-15. ~~`CMapItemDelegate::getAnimations(index) const` silently inserts into `data` because `data` is `mutable QHash` and `operator[]` default-constructs missing keys — even the const "getter" mutates the hash. `paint()`/`initStyleOption()` are `const override` (Qt requirement), and `initStyleOption()` always populates `data[key]` before `paint()` calls `getAnimations()`, so this doesn't currently misbehave. The suggested fix (`data.value(key).animations`) is unsafe — it would return a reference to a member of a temporary. A real fix would need a function-local `static const animations_t` fallback; not worth it for a latent, non-triggering issue.~~
-16. ~~`getRectangles(opt, isActive)` takes a state flag that only affects `fontName.setBold()`, not any returned rect; `editorEvent` passes a hardcoded `false` just to get `rectButton`. Consider separating state-independent layout from state-dependent fonts.~~ Done: `getRectangles(opt)` now takes no state flag and returns a plain (non-bold) `fontName`; `paint()` sets `layout.fontName.setBold(isActive)` itself after the call.
-17. ~~Stray trailing `;` after `reset() { data.clear(); }` in the header (lint nit).~~ Done.
+## Memory
 
-### Cross-cutting / umbrella
+Store all project-specific learnings, feedback, and notes in this file rather than
+the auto-memory system (`~/.claude/projects/.../memory/`). Append new entries under
+the relevant existing section, or create a new `###` subsection here when nothing fits.
 
-18. All three delegates implement the same "icon | name+status column | right-aligned tool button(s)" tree-row layout with near-identical color derivation, margin constants, and tool-button painting. A shared base class or free helper functions in `helpers/CDraw.h` covering content-rect inset, icon rect, color-from-state, and `drawToolButton` would subsume #1, #3, #13, #14 in one place. Highest-leverage if a larger refactor is in scope.
+Do not run `cmake --build` or any build command — Oliver builds externally.
+
+Do not add `Co-Authored-By` lines to commit messages.
+
+### CMapItemDelegate — forward declaration pitfall
+
+`animations_t` is defined after `getAnimations()` in the private section. The forward
+declaration `struct animations_t;` before `getAnimations()` is required — do not remove it.
+

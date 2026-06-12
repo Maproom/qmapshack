@@ -40,6 +40,22 @@ constexpr int kFontSizeInvalid = -1;
 constexpr int kProgressBarHeight = 5;
 constexpr int kProgressBarHeightHalf = 1;
 
+namespace {
+/// Cursor laying out a row of right-aligned, equally sized tool buttons. Each call to
+/// next() returns the rect for the next button and moves left by one button width + margin.
+struct button_row_cursor_t {
+  int left;
+  int top;
+  int size;
+
+  QRect next() {
+    const QRect rect(left, top, size, size);
+    left -= size + kMargin;
+    return rect;
+  }
+};
+}  // namespace
+
 CWksItemDelegate::CWksItemDelegate(CGisListWks* parent) : QStyledItemDelegate(parent), treeWidget(parent) {
   SETTINGS;
   cfg.beginGroup("Workspace");
@@ -151,9 +167,8 @@ CWksItemDelegate::ProjectLayout CWksItemDelegate::getRectanglesProject(const QSt
   QRect rectVisible(r.right() - buttonWidth, buttonTop, buttonWidth, buttonHeight);
 
   // Tool buttons are added left of the rectVisible, growing further left
-  // with each button. Each time a button is added, left is moved further to
-  // the left defining the left edge of the next button.
-  int left = rectVisible.left() - buttonWidth - kMargin;
+  // with each button.
+  button_row_cursor_t buttons{rectVisible.left() - buttonWidth - kMargin, buttonTop, buttonWidth};
 
   // All tool button rectangles are initially invalid. If a tool button is need
   // the rectangle is set to a valid rectangle at the correct position.
@@ -165,34 +180,28 @@ CWksItemDelegate::ProjectLayout CWksItemDelegate::getRectanglesProject(const QSt
 
   if (isOnDevice == false && item.type() != IWksItem::eTypeLostFound) {
     if (item.holdUiFocus(opt)) {
-      rectActiveProject.setRect(left, buttonTop, buttonWidth, buttonHeight);
-      left -= buttonWidth + kMargin;
-      rectSave.setRect(left, buttonTop, buttonWidth, buttonHeight);
-      left -= buttonWidth + kMargin;
+      rectActiveProject = buttons.next();
+      rectSave = buttons.next();
 
       if (treeWidget->hasDeviceSupport()) {
-        rectAutoSyncDev.setRect(left, buttonTop, buttonWidth, buttonHeight);
-        left -= buttonWidth + kMargin;
+        rectAutoSyncDev = buttons.next();
       }
     } else {
       if (item.hasUserFocus()) {
-        rectActiveProject.setRect(left, buttonTop, buttonWidth, buttonHeight);
-        left -= buttonWidth + kMargin;
+        rectActiveProject = buttons.next();
       }
       if (item.isChanged() && !item.isAutoSave()) {
-        rectSave.setRect(left, buttonTop, buttonWidth, buttonHeight);
-        left -= buttonWidth + kMargin;
+        rectSave = buttons.next();
       }
     }
   } else if (isOnDevice == true) {
     if (item.holdUiFocus(opt)) {
-      rectSave.setRect(left, buttonTop, buttonWidth, buttonHeight);
-      left -= buttonWidth + kMargin;
+      rectSave = buttons.next();
     }
   }
   // As rectName should span up to the right of the last button left has
   // to be corrected by a button width.
-  rectName.setRight(left + buttonWidth - 2 * kMargin);
+  rectName.setRight(buttons.left + buttonWidth - 2 * kMargin);
 
   QRect rectStatus;
   if (itemStatusControl.statusSizePrj != kFontSizeInvalid) {
@@ -219,7 +228,6 @@ CWksItemDelegate::ItemLayout CWksItemDelegate::getRectanglesItem(const QStyleOpt
   const QRect& r = opt.rect.adjusted(2 * kMargin, 2 * kMargin, -2 * kMargin, -2 * kMargin);
   const int buttonTop = r.top();
   const int buttonWidth = fmName.height();
-  const int buttonHeight = buttonWidth;
 
   const QRect rectIcon(r.left(), r.top(), r.height(), r.height());
 
@@ -227,10 +235,9 @@ CWksItemDelegate::ItemLayout CWksItemDelegate::getRectanglesItem(const QStyleOpt
   // will be adjusted in the and by the last button rectangle.
   QRect rectName(rectIcon.right() + 2 * kMargin, r.top(), r.width() - rectIcon.width(), fmName.height());
 
-  // Tool buttons are added left of the rectVisible, growing further left
-  // with each button. Each time a button is added, left is moved further to
-  // the left defining the left edge of the next button.
-  int left = r.right() - buttonWidth - kMargin;
+  // Tool buttons are added left of the right edge, growing further left
+  // with each button.
+  button_row_cursor_t buttons{r.right() - buttonWidth - kMargin, buttonTop, buttonWidth};
 
   // All tool button rectangles are initially invalid. If a tool button is need
   // the rectangle is set to a valid rectangle at the correct position.
@@ -241,13 +248,12 @@ CWksItemDelegate::ItemLayout CWksItemDelegate::getRectanglesItem(const QStyleOpt
   const CGeoSearch* search = dynamic_cast<const CGeoSearch*>(item.parent());
   const bool isOnGeoSearch = search != nullptr;
   if (item.isChanged() && !item.isOnDevice() && !isOnGeoSearch) {
-    rectChanged.setRect(left, buttonTop, buttonWidth, buttonHeight);
-    left -= buttonWidth + kMargin;
+    rectChanged = buttons.next();
   }
 
   // As rectName should span up to the right of the last button left has
   // to be corrected by a button width.
-  rectName.setRight(left + buttonWidth - 2 * kMargin);
+  rectName.setRight(buttons.left + buttonWidth - 2 * kMargin);
 
   QRect rectStatus;
   if (itemStatusControl.statusSizeItem != kFontSizeInvalid) {

@@ -131,7 +131,7 @@ The three `QStyledItemDelegate` subclasses used by the tree views share heavy du
 
 ### Medium value
 
-6. Factor out the "right-aligned button row" layout pattern in `CWksItemDelegate::getRectanglesProject`/`getRectanglesItem` (button rects grow leftward, tracked via a `left` cursor that also clips `rectName`).
+6. ~~Factor out the "right-aligned button row" layout pattern.~~ Done: local `ButtonRowCursor{left, top, size}` (anonymous namespace, `CWksItemDelegate.cpp`) with `next()` replaces the manual `left -= buttonWidth + kMargin` bookkeeping in `getRectanglesProject`/`getRectanglesItem`.
 7. (Bigger/optional) Move per-GIS-type status-line building out of `CWksItemDelegate::paintItem` (currently 4 sequential `dynamic_cast`s to `CGisItemTrk`/`CGisItemWpt`/`CGisItemRte`/`CGisItemOvlArea`) into a virtual method on `IWksItem`/subclasses.
 
 ### Low risk / small fixes

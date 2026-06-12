@@ -147,15 +147,65 @@ class CWksItemDelegate : public QStyledItemDelegate {
  private:
   IWksItem* indexToItem(const QModelIndex& index) const;
 
-  std::tuple<QFont, QFont, QRect, QRect, QRect, QRect, QRect, QRect, QRect, QRect> getRectanglesProject(
-      const QStyleOptionViewItem& opt, IWksItem& item) const;
-  std::tuple<QFont, QFont, QRect, QRect, QRect, QRect, QRect> getRectanglesDevice(const QStyleOptionViewItem& opt,
-                                                                                  const IWksItem& item) const;
-  std::tuple<QFont, QFont, QRect, QRect, QRect, QRect, QRect, QRect> getRectanglesGeoSearch(
-      const QStyleOptionViewItem& opt) const;
-  std::tuple<QFont, QRect, QRect> getRectanglesGeoSearchError(const QStyleOptionViewItem& opt) const;
-  std::tuple<QFont, QFont, QRect, QRect, QRect, QRect> getRectanglesItem(const QStyleOptionViewItem& opt,
-                                                                         const IWksItem& item) const;
+  /// Rectangles and fonts used to paint a project row
+  struct ProjectLayout {
+    QFont fontName;
+    QFont fontStatus;
+    QRect rectIcon;
+    QRect rectName;
+    QRect rectStatus;
+    QRect rectProgress;
+    QRect rectVisible;
+    QRect rectSave;
+    QRect rectActiveProject;
+    QRect rectAutoSyncDev;
+  };
+
+  /// Rectangles and fonts used to paint a device row
+  struct DeviceLayout {
+    QFont fontName;
+    QFont fontStatus;
+    QRect rectIcon;
+    QRect rectName;
+    QRect rectStatus;
+    QRect rectProgress;
+    QRect rectVisible;
+  };
+
+  /// Rectangles and fonts used to paint a geo search row
+  struct GeoSearchLayout {
+    QFont fontSearch;
+    QFont fontStatus;
+    QRect rectIcon;
+    QRect rectSetup;
+    QRect rectLineEdit;
+    QRect rectStatus;
+    QRect rectWptIcon;
+    QRect rectVisible;
+  };
+
+  /// Rectangle and font used to paint a geo search error row
+  struct GeoSearchErrorLayout {
+    QFont font;
+    QRect rectIcon;
+    QRect rectName;
+  };
+
+  /// Rectangles and fonts used to paint a GIS item row
+  struct ItemLayout {
+    QFont fontName;
+    QFont fontStatus;
+    QRect rectIcon;
+    QRect rectName;
+    QRect rectStatus;
+    QRect rectChanged;
+  };
+
+  ProjectLayout getRectanglesProject(const QStyleOptionViewItem& opt, IWksItem& item) const;
+  DeviceLayout getRectanglesDevice(const QStyleOptionViewItem& opt, const IWksItem& item) const;
+  GeoSearchLayout getRectanglesGeoSearch(const QStyleOptionViewItem& opt) const;
+  GeoSearchErrorLayout getRectanglesGeoSearchError(const QStyleOptionViewItem& opt) const;
+  ItemLayout getRectanglesItem(const QStyleOptionViewItem& opt, const IWksItem& item) const;
 
   static void drawToolButton(QPainter* p, const QStyleOptionViewItem& opt, const QRect& rect, const QIcon& icon,
                              bool enabled, bool pressed);

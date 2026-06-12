@@ -194,8 +194,7 @@ void CMapItemDelegate::initStyleOption(QStyleOptionViewItem* option, const QMode
   option->decorationSize = QSize(0, 0);
 }
 
-std::tuple<QFont, QFont, QRect, QRect, QRect, QRect, QRect> CMapItemDelegate::getRectangles(
-    const QStyleOptionViewItem& opt, bool isActive) const {
+CMapItemDelegate::MapItemLayout CMapItemDelegate::getRectangles(const QStyleOptionViewItem& opt, bool isActive) const {
   // derive fonts from opt.font
   QFont fontName = opt.font;
   fontName.setBold(isActive);
@@ -240,7 +239,8 @@ void CMapItemDelegate::paint(QPainter* p, const QStyleOptionViewItem& opt, const
 
   // derive strings colors
   const QPalette::ColorRole colorRole = (isSelected && hasFocus) ? QPalette::HighlightedText : QPalette::WindowText;
-  const QPalette::ColorGroup colorGroup = isActive ? (hasFocus ? QPalette::Active : QPalette::Inactive) : QPalette::Disabled;
+  const QPalette::ColorGroup colorGroup =
+      isActive ? (hasFocus ? QPalette::Active : QPalette::Inactive) : QPalette::Disabled;
   const QColor& colorName = opt.palette.color(colorGroup, colorRole);
 
   QColor colorStatus = colorName;
@@ -262,30 +262,30 @@ void CMapItemDelegate::paint(QPainter* p, const QStyleOptionViewItem& opt, const
   }
 
   // derive all rectangles to place visual elements
-  auto [fontName, fontStatus, rectIcon, rectButton, rectIndicator, rectName, rectStatus] = getRectangles(opt, isActive);
+  const auto& layout = getRectangles(opt, isActive);
 
   // draw name
   p->setPen(colorName);
-  p->setFont(fontName);
-  p->drawText(rectName.adjusted(0, -1, 0, 1), Qt::AlignLeft | Qt::AlignVCenter, item->getName());
+  p->setFont(layout.fontName);
+  p->drawText(layout.rectName.adjusted(0, -1, 0, 1), Qt::AlignLeft | Qt::AlignVCenter, item->getName());
   p->setClipping(false);
 
   // draw status
   p->setPen(colorStatus);
-  p->setFont(fontStatus);
-  p->drawText(rectStatus.adjusted(0, -1, 0, 1), Qt::AlignLeft | Qt::AlignVCenter, status);
+  p->setFont(layout.fontStatus);
+  p->drawText(layout.rectStatus.adjusted(0, -1, 0, 1), Qt::AlignLeft | Qt::AlignVCenter, status);
 
   // draw icon
   const QPixmap& icon =
-      data[keyFromIndex(index)].icon.scaled(rectIcon.size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
-  QIcon(icon).paint(p, rectIcon);
+      data[keyFromIndex(index)].icon.scaled(layout.rectIcon.size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+  QIcon(icon).paint(p, layout.rectIcon);
 
   // draw tool button to activate
   QStyleOptionToolButton btnOpt;
   btnOpt.initFrom(opt.widget);
-  btnOpt.rect = rectButton;
+  btnOpt.rect = layout.rectButton;
   btnOpt.icon = isActive ? QIcon(":/icons/32x32/ShowAll.png") : QIcon(":/icons/32x32/ShowNone.png");
-  btnOpt.iconSize = rectButton.adjusted(2 * kMargin, 2 * kMargin, 2 * -kMargin, 2 * -kMargin).size();
+  btnOpt.iconSize = layout.rectButton.adjusted(2 * kMargin, 2 * kMargin, 2 * -kMargin, 2 * -kMargin).size();
   btnOpt.toolButtonStyle = Qt::ToolButtonIconOnly;
   btnOpt.subControls = QStyle::SC_ToolButton;
   btnOpt.activeSubControls = QStyle::SC_ToolButton;
@@ -299,13 +299,13 @@ void CMapItemDelegate::paint(QPainter* p, const QStyleOptionViewItem& opt, const
   p->setOpacity(anim.opacityIndicator);
   p->setPen(Qt::NoPen);
   p->setBrush(anim.colorIndicator);
-  p->drawRoundedRect(rectIndicator, 4, 4);
+  p->drawRoundedRect(layout.rectIndicator, 4, 4);
 
   // draw access info
   p->setPen(colorName);
   p->setOpacity(anim.opacityAccessInfo);
-  p->setFont(fontStatus);
-  p->drawText(rectStatus, Qt::AlignRight | Qt::AlignVCenter, anim.accessInfo);
+  p->setFont(layout.fontStatus);
+  p->drawText(layout.rectStatus, Qt::AlignRight | Qt::AlignVCenter, anim.accessInfo);
 
   p->restore();
 }
@@ -315,9 +315,9 @@ bool CMapItemDelegate::editorEvent(QEvent* event, QAbstractItemModel* model, con
   if (event->type() == QEvent::MouseButtonPress) {
     auto* me = static_cast<QMouseEvent*>(event);
 
-    auto [fontName, fontStatus, rectIcon, rectButton, rectIndicator, rectName, rectStatus] = getRectangles(opt, false);
+    const auto& layout = getRectangles(opt, false);
 
-    if (rectButton.contains(me->pos())) {
+    if (layout.rectButton.contains(me->pos())) {
       IMapItem* item = indexToItem(index);
       if (item == nullptr) {
         return false;
@@ -349,21 +349,21 @@ bool CMapItemDelegate::helpEvent(QHelpEvent* event, QAbstractItemView* view, con
   }
 
   const bool isActive = item->getStatus() == IMapItem::eStatus::Active;
-  auto [fontName, fontStatus, rectIcon, rectButton, rectIndicator, rectName, rectStatus] = getRectangles(opt, isActive);
+  const auto& layout = getRectangles(opt, isActive);
 
-  if (rectButton.contains(event->pos())) {
+  if (layout.rectButton.contains(event->pos())) {
     const QString& tip = isActive ? tr("Deactivate %1").arg(item->getName()) : tr("Activate %1").arg(item->getName());
     QToolTip::showText(event->globalPos(), tip, view, {}, 3000);
-  } else if (isActive && rectIndicator.contains(event->pos())) {
+  } else if (isActive && layout.rectIndicator.contains(event->pos())) {
     const bool outOfScale = item->isOutOfScale();
     const QString& tip = outOfScale ? tr("%1 is not visible at current scale").arg(item->getName())
                                     : tr("%1 is visible at current scale").arg(item->getName());
     QToolTip::showText(event->globalPos(), tip, view, {}, 3000);
-  } else if (rectName.contains(event->pos())) {
-    const QFontMetrics fm(fontName);
+  } else if (layout.rectName.contains(event->pos())) {
+    const QFontMetrics fm(layout.fontName);
     const QRect& boundingRectName = fm.boundingRect(item->getName());
     QString toolTip;
-    if (boundingRectName.width() > rectName.width()) {
+    if (boundingRectName.width() > layout.rectName.width()) {
       toolTip = QString("<p>%1</p>").arg(item->getName());
     }
     if (!item->getToolTip().isEmpty()) {

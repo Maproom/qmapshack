@@ -48,7 +48,7 @@ class CMapItemDelegate : public QStyledItemDelegate {
 
   QSize sizeHint(const QStyleOptionViewItem& opt, const QModelIndex& idx) const override;
 
-  void reset() { data.clear(); };
+  void reset() { data.clear(); }
 
  signals:
   void sigUpdateItem(const QString& key);
@@ -76,7 +76,7 @@ class CMapItemDelegate : public QStyledItemDelegate {
     QRect rectStatus;
   };
 
-  MapItemLayout getRectangles(const QStyleOptionViewItem& opt, bool isActive) const;
+  MapItemLayout getRectangles(const QStyleOptionViewItem& opt) const;
 
   struct animations_t;
   animations_t& getAnimations(const QModelIndex& index);

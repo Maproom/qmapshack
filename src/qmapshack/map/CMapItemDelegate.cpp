@@ -25,6 +25,7 @@
 #include <QVariantAnimation>
 
 #include "helpers/CDraw.h"
+#include "helpers/CRowBuilder.h"
 #include "map/IMapItem.h"
 
 constexpr int kFontSizeDiffItem = 2;
@@ -194,7 +195,6 @@ void CMapItemDelegate::initStyleOption(QStyleOptionViewItem* option, const QMode
 }
 
 CMapItemDelegate::MapItemLayout CMapItemDelegate::getRectangles(const QStyleOptionViewItem& opt) const {
-  // derive fonts from opt.font
   const QFont fontName = opt.font;
   QFontMetrics fmName(fontName);
 
@@ -202,20 +202,14 @@ CMapItemDelegate::MapItemLayout CMapItemDelegate::getRectangles(const QStyleOpti
   fontStatus.setPointSize(fontStatus.pointSize() - kFontSizeDiffItem);
   QFontMetrics fmStatus(fontStatus);
 
-  const QRect& r = opt.rect.adjusted(2 * kMargin, 2 * kMargin, -2 * kMargin, -2 * kMargin);
-  const QRect rectIcon(r.left(), r.top(), r.height(), r.height());
-  const QRect rectButton(r.right() - r.height() + 2 * kMargin, r.top() + kMargin, r.height() - 2 * kMargin,
-                         r.height() - 2 * kMargin);
-  const QRect rectIndicator(rectButton.left() - 2 * kMargin - 6, rectButton.top() + kMargin, 6,
-                            rectButton.height() - 2 * kMargin);
-
-  const QRect rectName(rectIcon.right() + 2 * kMargin, r.top(),
-                       r.width() - rectIcon.width() - rectButton.width() - rectIndicator.width() - 5 * kMargin,
-                       fmName.height());
-
-  const QRect rectStatus(rectIcon.right() + 2 * kMargin, r.bottom() - fmStatus.height(),
-                         r.width() - rectIcon.width() - rectButton.width() - rectIndicator.width() - 5 * kMargin,
-                         fmStatus.height());
+  CRowBuilder row(opt.rect, kCellPad, kInnerGap);
+  const QRect rectIcon = row.takeLeft(row.height());
+  const QRect rectButton = row.takeRight(row.height());
+  // Thin vertical indicator bar to the left of the button.
+  const QRect rawIndicatorSlot = row.takeRight(6);
+  const QRect rectIndicator = rawIndicatorSlot.adjusted(0, kMargin, 0, -kMargin);
+  const QRect rectName = row.nameSlice(fmName.height());
+  const QRect rectStatus = row.statusSlice(fmStatus.height());
 
   return {fontName, fontStatus, rectIcon, rectButton, rectIndicator, rectName, rectStatus};
 }
@@ -364,13 +358,11 @@ bool CMapItemDelegate::helpEvent(QHelpEvent* event, QAbstractItemView* view, con
 }
 
 QSize CMapItemDelegate::sizeHint(const QStyleOptionViewItem& opt, const QModelIndex& idx) const {
-  QFont font1 = opt.font;
-  font1.setBold(true);
-  QFontMetrics fm1(font1);
+  const QFontMetrics fm1(opt.font);
 
   QFont font2 = opt.font;
   font2.setPointSize(font2.pointSize() - kFontSizeDiffItem);
-  QFontMetrics fm2(font2);
+  const QFontMetrics fm2(font2);
 
-  return QSize(opt.rect.width(), std::max(22, 7 * kMargin + fm1.height() + fm2.height()));
+  return QSize(opt.rect.width(), std::max(22, CRowBuilder::rowHeight(kCellPad, fm1.height(), fm2.height())));
 }

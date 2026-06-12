@@ -25,6 +25,7 @@
 
 #include "gis/IDBItem.h"
 #include "helpers/CDraw.h"
+#include "helpers/CRowBuilder.h"
 #include "helpers/CSettings.h"
 #include "misc.h"
 
@@ -87,39 +88,33 @@ QSize CDBItemDelegate::sizeHint(const QStyleOptionViewItem& opt, const QModelInd
     return QSize(opt.rect.width(), 22);
   }
 
-  QFont fontName = opt.font;
-  fontName.setBold(true);
-  QFontMetrics fmName(fontName);
+  const QFontMetrics fmName(opt.font);
 
   QFont fontStatusFolder = opt.font;
-  fontStatusFolder.setPointSize(fontName.pointSize() - itemStatusControl.statusSizeFolder);
-  QFontMetrics fmStatusFolder(fontStatusFolder);
+  fontStatusFolder.setPointSize(opt.font.pointSize() - itemStatusControl.statusSizeFolder);
+  const QFontMetrics fmStatusFolder(fontStatusFolder);
 
   QFont fontStatusItem = opt.font;
-  fontStatusItem.setPointSize(fontName.pointSize() - itemStatusControl.statusSizeItem);
-  QFontMetrics fmStatusItem(fontStatusItem);
+  fontStatusItem.setPointSize(opt.font.pointSize() - itemStatusControl.statusSizeItem);
+  const QFontMetrics fmStatusItem(fontStatusItem);
 
   switch (item->type()) {
     case IDBItem::eTypeLostFound:
     case IDBItem::eTypeDatabase:
     case IDBItem::eTypeGroup:
     case IDBItem::eTypeProject:
-    case IDBItem::eTypeOther:
-      if (itemStatusControl.statusSizeFolder != kFontSizeInvalid) {
-        return QSize(opt.rect.width(), std::max(22, 7 * kMargin + fmName.height() + fmStatusFolder.height()));
-      } else {
-        return QSize(opt.rect.width(), std::max(22, 7 * kMargin + fmName.height()));
-      }
+    case IDBItem::eTypeOther: {
+      const int statusH = (itemStatusControl.statusSizeFolder != kFontSizeInvalid) ? fmStatusFolder.height() : 0;
+      return QSize(opt.rect.width(), std::max(22, CRowBuilder::rowHeight(kCellPad, fmName.height(), statusH)));
+    }
 
-    case IDBItem::eTypeItem:
-      if (itemStatusControl.statusSizeItem != kFontSizeInvalid) {
-        return QSize(opt.rect.width(), std::max(22, 7 * kMargin + fmName.height() + fmStatusItem.height()));
-      } else {
-        return QSize(opt.rect.width(), std::max(22, 7 * kMargin + fmName.height()));
-      }
+    case IDBItem::eTypeItem: {
+      const int statusH = (itemStatusControl.statusSizeItem != kFontSizeInvalid) ? fmStatusItem.height() : 0;
+      return QSize(opt.rect.width(), std::max(22, CRowBuilder::rowHeight(kCellPad, fmName.height(), statusH)));
+    }
   }
 
-  return QSize(opt.rect.width(), std::max(22, 7 * kMargin + fmName.height()));
+  return QSize(opt.rect.width(), std::max(22, CRowBuilder::rowHeight(kCellPad, fmName.height())));
 }
 
 CDBItemDelegate::ItemLayout CDBItemDelegate::getRectanglesFolder(const QStyleOptionViewItem& opt,
@@ -131,21 +126,20 @@ CDBItemDelegate::ItemLayout CDBItemDelegate::getRectanglesFolder(const QStyleOpt
   fontStatus.setPointSize(fontStatus.pointSize() - itemStatusControl.statusSizeFolder);
   const QFontMetrics fmStatus(fontStatus);
 
-  const quint32 heightButton = fmName.height() + 3 * kMargin;
+  CRowBuilder row(opt.rect, kCellPad, kInnerGap);
+  const QRect rectIcon = row.takeLeft(row.height());
+  row.markStatusColumn();
 
-  const QRect& r = opt.rect.adjusted(kMargin, kMargin, -kMargin, -kMargin);
-  const QRect rectIcon(r.left(), r.top(), r.height(), r.height());
   QRect rectButton;
   if (item.type() > IDBItem::eTypeGroup || item.type() == IDBItem::eTypeLostFound) {
-    rectButton.setRect(r.right() - heightButton, r.top(), heightButton, heightButton);
+    rectButton = row.takeButton(fmName.height());
   }
-  const QRect rectName(rectIcon.right() + 4 * kMargin, r.top() + kMargin,
-                       r.width() - rectIcon.width() - rectButton.width() - 6 * kMargin, fmName.height());
+
+  const QRect rectName = row.nameSlice(fmName.height());
 
   QRect rectStatus;
   if (itemStatusControl.statusSizeFolder != kFontSizeInvalid) {
-    rectStatus.setRect(rectIcon.right() + 4 * kMargin, r.bottom() - fmStatus.height() - kMargin,
-                       r.width() - rectIcon.width() - rectButton.width() - 6 * kMargin, fmName.height());
+    rectStatus = row.fullStatusSlice(fmStatus.height());
   }
 
   return {fontName, fontStatus, rectIcon, rectName, rectStatus, rectButton};
@@ -160,24 +154,21 @@ CDBItemDelegate::ItemLayout CDBItemDelegate::getRectanglesItem(const QStyleOptio
   fontStatus.setPointSize(fontStatus.pointSize() - itemStatusControl.statusSizeItem);
   const QFontMetrics fmStatus(fontStatus);
 
-  const quint32 heightButton = fmName.height() + 3 * kMargin;
+  CRowBuilder row(opt.rect, kCellPad, kInnerGap);
+  const QRect rectIcon = row.takeLeft(row.height());
+  row.markStatusColumn();
 
-  const QRect& r = opt.rect.adjusted(kMargin, kMargin, -kMargin, -kMargin);
-  const QRect rectIcon(r.left(), r.top(), r.height(), r.height());
   QRect rectButton;
-  // If the item is part of the lost-and-found folder -> no button
-  // Yeah. The logic is a bit weird.
+  // Items inside the lost-and-found folder have no load/unload button.
   if (!(item.parent() && item.parent()->type() == IDBItem::eTypeLostFound)) {
-    rectButton.setRect(r.right() - heightButton, r.top(), heightButton, heightButton);
+    rectButton = row.takeButton(fmName.height());
   }
 
-  const QRect rectName(rectIcon.right() + 4 * kMargin, r.top() + kMargin,
-                       r.width() - rectIcon.width() - rectButton.width() - 6 * kMargin, fmName.height());
+  const QRect rectName = row.nameSlice(fmName.height());
 
   QRect rectStatus;
   if (itemStatusControl.statusSizeItem != kFontSizeInvalid) {
-    rectStatus.setRect(rectIcon.right() + 4 * kMargin, r.bottom() - fmStatus.height() - kMargin,
-                       r.width() - rectIcon.width() - rectButton.width() - 6 * kMargin, fmName.height());
+    rectStatus = row.fullStatusSlice(fmStatus.height());
   }
 
   return {fontName, fontStatus, rectIcon, rectName, rectStatus, rectButton};

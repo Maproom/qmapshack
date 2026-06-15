@@ -272,7 +272,7 @@ void CGisItemRte::reverse() {
 }
 
 void CGisItemRte::toTrack() {
-  QString name;
+  QString name{getName()};
   IGisProject* project;
 
   if (!getNameAndProject(name, project, tr("track"))) {

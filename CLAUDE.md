@@ -202,23 +202,4 @@ Do not add `Co-Authored-By` lines to commit messages.
 `animations_t` is defined after `getAnimations()` in the private section. The forward
 declaration `struct animations_t;` before `getAnimations()` is required — do not remove it.
 
----
-
-## Delegate cleanup checklist (2026-06-16)
-
-Pending fixes across `CWksItemDelegate`, `CDBItemDelegate`, `CMapItemDelegate`.
-Mark each done as it is applied.
-
-| # | Done | Severity | File / location | Description |
-|---|------|----------|-----------------|-------------|
-| 1 | [x] | Bug | CWksItemDelegate.cpp:582 | `ele != NOFLOAT` duplicated; removed second guard — 0.0 is valid (sea level), `getElevation()` returns NOFLOAT for missing data |
-| 2 | [x] | Bug | CWksItemDelegate.cpp:466 | Shadow variable `prj` re-casts existing `project`; use `project` directly |
-| 3 | [x] | Scope | CWksItemDelegate.cpp:312 | `N` declared outside its only use; move inside guard; change guard to `N > 0` |
-| 4 | [x] | Scope | CWksItemDelegate.cpp:240,263,266 | N/A — `const T&` to temporary is valid C++ (lifetime extended); avoids copy for non-trivial types; `QRect` is trivial but idiom is fine |
-| 5 | [x] | Naming | CWksItemDelegate.cpp:241 | `height` → `halfHeight` in `getRectanglesGeoSearch` |
-| 6 | [x] | Style | CMapItemDelegate.cpp:199,203 | `QFontMetrics` should be `const` in `getRectangles` |
-| 7 | [x] | Naming | CMapItemDelegate.cpp:361–367 | `idx`/`fm1`/`fm2`/`font2` → `index`/`fmName`/`fmStatus`/`fontStatus` in `sizeHint` |
-| 8 | [x] | Cleanup | All three `.cpp` | `indexToItem`: remove unnecessary intermediate variable, just `return dynamic_cast<...>(...)` |
-| 9 | [x] | Duplication | CDBItemDelegate.cpp | `paintFolder`/`paintItem` share identical `isSelected`/`hasFocus`/`colorRole`/`colorGroup` block; extracted `resolveColorState()` |
-| 10 | [ ] | Duplication | CMapItemDelegate.cpp | `getAnimations`: four near-identical animation-setup blocks; extract helper |
 

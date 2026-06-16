@@ -22,6 +22,8 @@
 #include <QHash>
 #include <QPointer>
 #include <QStyledItemDelegate>
+#include <QVariant>
+#include <functional>
 
 class QTreeWidget;
 class QVariantAnimation;
@@ -120,6 +122,12 @@ class CMapItemDelegate : public QStyledItemDelegate {
   IMapItem* indexToItem(const QModelIndex& index) const;
   /** @brief Return the string key used to look up per-item data; empty string if index is invalid. */
   QString keyFromIndex(const QModelIndex& index) const;
+
+  /**
+   * @brief Lazily construct @p anim with @p duration ms and InOutQuad easing, connecting
+   *        @p onValueChanged to its valueChanged signal. No-op if @p anim is already initialised.
+   */
+  void initAnimation(QPointer<QVariantAnimation>& anim, int duration, std::function<void(QVariant)> onValueChanged);
 
   /// Rectangles and fonts used to paint a map item row
   struct MapItemLayout {

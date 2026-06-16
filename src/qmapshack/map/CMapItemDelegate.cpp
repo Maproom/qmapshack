@@ -47,53 +47,37 @@ QString CMapItemDelegate::keyFromIndex(const QModelIndex& index) const {
   return "";
 }
 
+void CMapItemDelegate::initAnimation(QPointer<QVariantAnimation>& anim, int duration,
+                                     std::function<void(QVariant)> onValueChanged) {
+  if (!anim.isNull()) {
+    return;
+  }
+  anim = new QVariantAnimation(this);
+  anim->setDuration(duration);
+  anim->setEasingCurve(QEasingCurve::InOutQuad);
+  connect(anim, &QVariantAnimation::valueChanged, this, std::move(onValueChanged));
+}
+
 CMapItemDelegate::animations_t& CMapItemDelegate::getAnimations(const QModelIndex& index) {
   const QString& key = keyFromIndex(index);
   animations_t& anim = data[key].animations;
 
-  if (anim.animColorIndicator.isNull()) {
-    anim.animColorIndicator = new QVariantAnimation(this);
-    anim.animColorIndicator->setDuration(250);
-    anim.animColorIndicator->setEasingCurve(QEasingCurve::InOutQuad);
-
-    connect(anim.animColorIndicator, &QVariantAnimation::valueChanged, this, [this, key](QVariant v) {
-      data[key].animations.colorIndicator = v.value<QColor>();
-      emit sigUpdateItem(key);
-    });
-  }
-
-  if (anim.animOpacityIndicator.isNull()) {
-    anim.animOpacityIndicator = new QVariantAnimation(this);
-    anim.animOpacityIndicator->setDuration(250);
-    anim.animOpacityIndicator->setEasingCurve(QEasingCurve::InOutQuad);
-
-    connect(anim.animOpacityIndicator, &QVariantAnimation::valueChanged, this, [this, key](QVariant v) {
-      data[key].animations.opacityIndicator = v.toFloat();
-      emit sigUpdateItem(key);
-    });
-  }
-
-  if (anim.animFlashingIndicator.isNull()) {
-    anim.animFlashingIndicator = new QVariantAnimation(this);
-    anim.animFlashingIndicator->setDuration(500);
-    anim.animFlashingIndicator->setEasingCurve(QEasingCurve::InOutQuad);
-
-    connect(anim.animFlashingIndicator, &QVariantAnimation::valueChanged, this, [this, key](QVariant v) {
-      data[key].animations.opacityIndicator = v.toFloat();
-      emit sigUpdateItem(key);
-    });
-  }
-
-  if (anim.animAccessInfo.isNull()) {
-    anim.animAccessInfo = new QVariantAnimation(this);
-    anim.animAccessInfo->setDuration(2000);
-    anim.animAccessInfo->setEasingCurve(QEasingCurve::InOutQuad);
-
-    connect(anim.animAccessInfo, &QVariantAnimation::valueChanged, this, [this, key](QVariant v) {
-      data[key].animations.opacityAccessInfo = v.toFloat();
-      emit sigUpdateItem(key);
-    });
-  }
+  initAnimation(anim.animColorIndicator, 250, [this, key](QVariant v) {
+    data[key].animations.colorIndicator = v.value<QColor>();
+    emit sigUpdateItem(key);
+  });
+  initAnimation(anim.animOpacityIndicator, 250, [this, key](QVariant v) {
+    data[key].animations.opacityIndicator = v.toFloat();
+    emit sigUpdateItem(key);
+  });
+  initAnimation(anim.animFlashingIndicator, 500, [this, key](QVariant v) {
+    data[key].animations.opacityIndicator = v.toFloat();
+    emit sigUpdateItem(key);
+  });
+  initAnimation(anim.animAccessInfo, 2000, [this, key](QVariant v) {
+    data[key].animations.opacityAccessInfo = v.toFloat();
+    emit sigUpdateItem(key);
+  });
 
   return anim;
 }

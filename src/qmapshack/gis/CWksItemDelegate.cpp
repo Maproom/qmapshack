@@ -75,8 +75,7 @@ void CWksItemDelegate::setStatusItemsControl(const item_status_ctrl_t& settings)
 }
 
 IWksItem* CWksItemDelegate::indexToItem(const QModelIndex& index) const {
-  IWksItem* item = dynamic_cast<IWksItem*>(treeWidget->itemFromIndex(index));
-  return item;
+  return dynamic_cast<IWksItem*>(treeWidget->itemFromIndex(index));
 }
 
 QSize CWksItemDelegate::sizeHint(const QStyleOptionViewItem& opt, const QModelIndex& index) const {
@@ -238,16 +237,16 @@ CWksItemDelegate::GeoSearchLayout CWksItemDelegate::getRectanglesGeoSearch(const
   const QFontMetrics fmStatus(fontStatus);
 
   const QRect& r = opt.rect.adjusted(kCellPad, kCellPad, -kCellPad, -kCellPad);
-  const quint32 height = r.height() / 2;
+  const quint32 halfHeight = r.height() / 2;
 
   const QRect rectIcon(r.left(), r.top(), r.height(), r.height());
-  const QRect rectSetup(rectIcon.right() + kMargin, r.top(), height, height);
-  const QRect rectVisible(r.right() - fmSearch.height(), r.top(), height, height);
-  const QRect rectWptIcon(rectVisible.left() - height - kMargin, r.top(), height, height);
+  const QRect rectSetup(rectIcon.right() + kMargin, r.top(), halfHeight, halfHeight);
+  const QRect rectVisible(r.right() - fmSearch.height(), r.top(), halfHeight, halfHeight);
+  const QRect rectWptIcon(rectVisible.left() - halfHeight - kMargin, r.top(), halfHeight, halfHeight);
   const QRect rectLineEdit(
       rectSetup.right() + kMargin, r.top(),
       r.width() - rectSetup.width() - rectIcon.width() - rectWptIcon.width() - rectVisible.width() - 4 * kMargin,
-      height + 4 * kMargin);
+      halfHeight + 4 * kMargin);
   const QRect rectStatus(
       rectSetup.right() + kMargin, r.bottom() - fmStatus.height(),
       r.width() - rectSetup.width() - rectIcon.width() - rectWptIcon.width() - rectVisible.width() - 4 * kMargin,
@@ -309,8 +308,7 @@ QString CWksItemDelegate::distanceAscentDescentStatus(qreal distance, qreal asce
 }
 
 void CWksItemDelegate::drawRatingStars(qreal rating, QPainter* p, QIcon::Mode iconMode, QRect& rectStatus) const {
-  const qint32 N = qRound(rating);
-  if (rating != 0) {
+  if (const qint32 N = qRound(rating); N > 0) {
     QRect rectStar(rectStatus.left() + kMargin, rectStatus.top() + kMargin, rectStatus.height() - 2 * kMargin,
                    rectStatus.height() - 2 * kMargin);
     for (int i = 0; i < N; i++) {
@@ -463,20 +461,19 @@ void CWksItemDelegate::paintProject(QPainter* p, const QStyleOptionViewItem& opt
                                     itemStatusControl.prj.ascent, itemStatusControl.prj.descent);
 
     if (itemStatusControl.prj.gisStats) {
-      const IGisProject* const prj = dynamic_cast<IGisProject*>(&item);
-      const qint32 cntTrk = prj->getItemCountByType(IGisItem::eTypeTrk);
+      const qint32 cntTrk = project->getItemCountByType(IGisItem::eTypeTrk);
       if (cntTrk != 0) {
         status += QString("T: %1 ").arg(cntTrk);
       }
-      const qint32 cntWpt = prj->getItemCountByType(IGisItem::eTypeWpt);
+      const qint32 cntWpt = project->getItemCountByType(IGisItem::eTypeWpt);
       if (cntWpt != 0) {
         status += QString("W: %1 ").arg(cntWpt);
       }
-      const qint32 cntRte = prj->getItemCountByType(IGisItem::eTypeRte);
+      const qint32 cntRte = project->getItemCountByType(IGisItem::eTypeRte);
       if (cntRte != 0) {
         status += QString("R: %1 ").arg(cntRte);
       }
-      const qint32 cntArea = prj->getItemCountByType(IGisItem::eTypeOvl);
+      const qint32 cntArea = project->getItemCountByType(IGisItem::eTypeOvl);
       if (cntArea != 0) {
         status += QString("A: %1 ").arg(cntArea);
       }
@@ -579,7 +576,7 @@ void CWksItemDelegate::paintItem(QPainter* p, const QStyleOptionViewItem& opt, c
         }
 
         qreal ele = wpt->getElevation();
-        if (ele != NOFLOAT && ele != NOFLOAT && itemStatusControl.wpt.elevation) {
+        if (ele != NOFLOAT && itemStatusControl.wpt.elevation) {
           QString unit, val;
           IUnit::self().meter2elevation(ele, val, unit);
           status += QString("%1%2 ").arg(val, unit);

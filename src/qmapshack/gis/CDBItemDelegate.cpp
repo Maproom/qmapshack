@@ -22,6 +22,7 @@
 #include <QPainter>
 #include <QTextDocument>
 #include <QToolTip>
+#include <utility>
 
 #include "gis/IDBItem.h"
 #include "helpers/CDraw.h"
@@ -77,6 +78,15 @@ void CDBItemDelegate::drawCheckStateButton(QPainter* p, const QStyleOptionViewIt
       CDraw::drawToolButton(p, opt, rect, QIcon(":/icons/32x32/ToWksChecked.png"), true, true);
       break;
   }
+}
+
+std::pair<QPalette::ColorGroup, QPalette::ColorRole> CDBItemDelegate::resolveColorState(
+    const QStyleOptionViewItem& opt) {
+  const bool isSelected = (opt.state & QStyle::State_Selected) != 0;
+  const bool hasFocus = (opt.state & QStyle::State_HasFocus) != 0;
+  const QPalette::ColorRole colorRole = (isSelected && hasFocus) ? QPalette::HighlightedText : QPalette::WindowText;
+  const QPalette::ColorGroup colorGroup = hasFocus ? QPalette::Active : QPalette::Inactive;
+  return {colorGroup, colorRole};
 }
 
 void CDBItemDelegate::initStyleOption(QStyleOptionViewItem* option, const QModelIndex& index) const {}
@@ -211,11 +221,7 @@ void CDBItemDelegate::paintFolder(QPainter* p, const QStyleOptionViewItem& opt, 
     drawCheckStateButton(p, opt, layout.rectButton, item.getCheckState());
   }
 
-  const bool isSelected = (opt.state & QStyle::State_Selected) != 0;
-  const bool hasFocus = (opt.state & QStyle::State_HasFocus) != 0;
-
-  const QPalette::ColorRole colorRole = (isSelected && hasFocus) ? QPalette::HighlightedText : QPalette::WindowText;
-  QPalette::ColorGroup colorGroup = hasFocus ? QPalette::Active : QPalette::Inactive;
+  auto [colorGroup, colorRole] = resolveColorState(opt);
 
   if (item.type() > IDBItem::eTypeGroup) {
     layout.fontName.setBold(item.getCheckState() != Qt::Unchecked);
@@ -274,11 +280,7 @@ void CDBItemDelegate::paintItem(QPainter* p, const QStyleOptionViewItem& opt, co
     drawCheckStateButton(p, opt, layout.rectButton, item.getCheckState());
   }
 
-  const bool isSelected = (opt.state & QStyle::State_Selected) != 0;
-  const bool hasFocus = (opt.state & QStyle::State_HasFocus) != 0;
-
-  const QPalette::ColorRole colorRole = (isSelected && hasFocus) ? QPalette::HighlightedText : QPalette::WindowText;
-  QPalette::ColorGroup colorGroup = hasFocus ? QPalette::Active : QPalette::Inactive;
+  auto [colorGroup, colorRole] = resolveColorState(opt);
 
   IDBItem* parent = dynamic_cast<IDBItem*>(item.parent());
 

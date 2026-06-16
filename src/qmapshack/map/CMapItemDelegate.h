@@ -95,7 +95,7 @@ class CMapItemDelegate : public QStyledItemDelegate {
   /**
    * @brief Return the row height calculated from CRowBuilder::rowHeight() with a 22 px minimum.
    */
-  QSize sizeHint(const QStyleOptionViewItem& opt, const QModelIndex& idx) const override;
+  QSize sizeHint(const QStyleOptionViewItem& opt, const QModelIndex& index) const override;
 
   /** @brief Clear all per-item cached icons and animation state. */
   void reset() { data.clear(); }

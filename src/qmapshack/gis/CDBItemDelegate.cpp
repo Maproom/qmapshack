@@ -61,8 +61,7 @@ void CDBItemDelegate::setStatusItemsControl(const item_status_ctrl_t& settings) 
 }
 
 IDBItem* CDBItemDelegate::indexToItem(const QModelIndex& index) const {
-  IDBItem* item = dynamic_cast<IDBItem*>(treeWidget->itemFromIndex(index));
-  return item;
+  return dynamic_cast<IDBItem*>(treeWidget->itemFromIndex(index));
 }
 
 void CDBItemDelegate::drawCheckStateButton(QPainter* p, const QStyleOptionViewItem& opt, const QRect& rect,

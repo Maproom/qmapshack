@@ -36,8 +36,7 @@ CMapItemDelegate::CMapItemDelegate(QTreeWidget* parent) : QStyledItemDelegate(pa
 }
 
 IMapItem* CMapItemDelegate::indexToItem(const QModelIndex& index) const {
-  IMapItem* item = dynamic_cast<IMapItem*>(treeWidget->itemFromIndex(index));
-  return item;
+  return dynamic_cast<IMapItem*>(treeWidget->itemFromIndex(index));
 }
 
 QString CMapItemDelegate::keyFromIndex(const QModelIndex& index) const {
@@ -196,11 +195,11 @@ void CMapItemDelegate::initStyleOption(QStyleOptionViewItem* option, const QMode
 
 CMapItemDelegate::MapItemLayout CMapItemDelegate::getRectangles(const QStyleOptionViewItem& opt) const {
   const QFont fontName = opt.font;
-  QFontMetrics fmName(fontName);
+  const QFontMetrics fmName(fontName);
 
   QFont fontStatus = opt.font;
   fontStatus.setPointSize(fontStatus.pointSize() - kFontSizeDiffItem);
-  QFontMetrics fmStatus(fontStatus);
+  const QFontMetrics fmStatus(fontStatus);
 
   CRowBuilder row(opt.rect, kCellPad, kInnerGap);
   const QRect rectIcon = row.takeLeft(row.height());
@@ -357,12 +356,12 @@ bool CMapItemDelegate::helpEvent(QHelpEvent* event, QAbstractItemView* view, con
   return true;
 }
 
-QSize CMapItemDelegate::sizeHint(const QStyleOptionViewItem& opt, const QModelIndex& idx) const {
-  const QFontMetrics fm1(opt.font);
+QSize CMapItemDelegate::sizeHint(const QStyleOptionViewItem& opt, const QModelIndex& index) const {
+  const QFontMetrics fmName(opt.font);
 
-  QFont font2 = opt.font;
-  font2.setPointSize(font2.pointSize() - kFontSizeDiffItem);
-  const QFontMetrics fm2(font2);
+  QFont fontStatus = opt.font;
+  fontStatus.setPointSize(fontStatus.pointSize() - kFontSizeDiffItem);
+  const QFontMetrics fmStatus(fontStatus);
 
-  return QSize(opt.rect.width(), std::max(22, CRowBuilder::rowHeight(kCellPad, fm1.height(), fm2.height())));
+  return QSize(opt.rect.width(), std::max(22, CRowBuilder::rowHeight(kCellPad, fmName.height(), fmStatus.height())));
 }

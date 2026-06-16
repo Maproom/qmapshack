@@ -50,6 +50,7 @@ IDrawContext::IDrawContext(const QString& name, CCanvas::redraw_e maskRedraw, CC
 
   zoom(5);
 
+  pixelRatio = canvas->devicePixelRatio();
   resize(canvas->size());
   connect(this, &IDrawContext::finished, canvas, static_cast<void (CCanvas::*)()>(&CCanvas::update));
   connect(this, &IDrawContext::finished, this, &IDrawContext::sigStopThread);
@@ -73,20 +74,45 @@ bool IDrawContext::resize(const QSize& size) {
   QMutexLocker lock(&mutex);
 
   lastSize = size;
-  viewWidth = size.width();
-  viewHeight = size.height();
+  resize();
+
+  return true;
+}
+
+bool IDrawContext::setPixelRatio(qreal ratio) {
+  if (pixelRatio == ratio) {
+    // nothing to do
+    return true;
+  }
+
+  if (isRunning() && !wait(100)) {
+    // blocked by thread, reschedule
+    return false;
+  }
+
+  QMutexLocker lock(&mutex);
+
+  pixelRatio = ratio;
+  resize();
+
+  return true;
+}
+
+void IDrawContext::resize() {
+  viewWidth = lastSize.width();
+  viewHeight = lastSize.height();
 
   center = QPointF(viewWidth / 2.0, viewHeight / 2.0);
-  bufWidth = viewWidth + 2 * BUFFER_BORDER;
-  bufHeight = viewHeight + 2 * BUFFER_BORDER;
+  bufWidth = viewWidth * pixelRatio + 2 * BUFFER_BORDER;
+  bufHeight = viewHeight * pixelRatio + 2 * BUFFER_BORDER;
 
   buffer[0].image = QImage(bufWidth, bufHeight, QImage::Format_ARGB32);
   buffer[0].image.fill(Qt::transparent);
+  buffer[0].image.setDevicePixelRatio(pixelRatio);
 
   buffer[1].image = QImage(bufWidth, bufHeight, QImage::Format_ARGB32);
   buffer[1].image.fill(Qt::transparent);
-
-  return true;
+  buffer[1].image.setDevicePixelRatio(pixelRatio);
 }
 
 QString IDrawContext::getProjection() const { return proj.getProjSrc(); }
@@ -170,7 +196,7 @@ void IDrawContext::zoom(int idx) {
     zoomFactor.ry() = scales[idx];
     intNeedsRedraw = true;
     emit sigNeedsRedraw();
-    emit sigScaleChanged(scale * zoomFactor);
+    emit sigScaleChanged(scale * zoomFactor / pixelRatio);
   }
   mutex.unlock();  // --------- stop serialize with thread
 }
@@ -318,7 +344,7 @@ void IDrawContext::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QPoint
   QPointF f1 = focus;
   convertRad2M(f1);
 
-  QPointF bufferScale = scale * zoomFactor;
+  QPointF bufferScale = scale * zoomFactor / pixelRatio;
 
   mutex.lock();  // --------- start serialize with thread
 
@@ -397,6 +423,7 @@ void IDrawContext::run() {
     // map render objects to buffer structure
     currentBuffer.zoomFactor = zoomFactor;
     currentBuffer.scale = scale;
+    currentBuffer.pixelRatio = pixelRatio;
     currentBuffer.ref1 = ref1;
     currentBuffer.ref2 = ref2;
     currentBuffer.ref3 = ref3;

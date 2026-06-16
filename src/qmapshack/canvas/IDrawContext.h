@@ -43,6 +43,7 @@ class IDrawContext : public QThread {
     int zoomLevels;                //< the number of zoom levels
     QPointF zoomFactor{1.0, 1.0};  //< the zoomfactor used to draw the canvas
     QPointF scale{1.0, 1.0};       //< the scale of the global viewport
+    qreal pixelRatio = 1.0;        //< device pixel ratio of the canvas
 
     QPointF ref1;   //< top left corner
     QPointF ref2;   //< top right corner
@@ -57,6 +58,14 @@ class IDrawContext : public QThread {
      @return Return false if the request could not access data because the thread is running.
    */
   bool resize(const QSize& size);
+
+  /**
+     @brief change the device pixel ratio and resize the internal buffer
+     @param ratio the new pixel ratio
+     @return Return false if the request could not access data because the thread is running.
+   */
+  bool setPixelRatio(qreal ratio);
+
   /**
      @brief Zoom in and out of the map by the scale factors defined in CMapDB::scales.
      @param in            set true to zoom in, and false to zoom out
@@ -183,6 +192,8 @@ class IDrawContext : public QThread {
 
   QSize lastSize;
 
+  qreal pixelRatio = 1.0;
+
   QPointF center;  /// the center of the viewport
 
   /**
@@ -195,6 +206,7 @@ class IDrawContext : public QThread {
   int zoomIndex = 0;
 
  private:
+  void resize();
   /// the used scales and the type of scale levels
   const qreal* scales = nullptr;
   CCanvas::scales_type_e scalesType;

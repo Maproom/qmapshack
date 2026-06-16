@@ -240,6 +240,8 @@ class CCanvas : public QWidget {
    */
   bool setDrawContextSize(const QSize& s);
 
+  bool setDrawContextPixelRatio(qreal ratio);
+
   bool isShowMinMaxSummary() const;
   bool isShowTrackSummary() const;
   bool isShowTrackInfoTable() const;

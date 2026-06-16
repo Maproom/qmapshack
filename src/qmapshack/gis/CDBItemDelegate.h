@@ -21,6 +21,7 @@
 
 #include <QPointer>
 #include <QStyledItemDelegate>
+#include <utility>
 
 class QTreeWidget;
 class IDBItem;
@@ -128,6 +129,14 @@ class CDBItemDelegate : public QStyledItemDelegate {
   /** @brief Draw the three-state load/unload button (unchecked, partially checked, checked). */
   static void drawCheckStateButton(QPainter* p, const QStyleOptionViewItem& opt, const QRect& rect,
                                    Qt::CheckState state);
+
+  /**
+   * @brief Resolve the initial color group and role from the view's selection and focus state.
+   *
+   * Returns {colorGroup, colorRole}. Callers may further adjust colorGroup based on the item's
+   * check state before passing both to QPalette::color().
+   */
+  static std::pair<QPalette::ColorGroup, QPalette::ColorRole> resolveColorState(const QStyleOptionViewItem& opt);
 
   /// Rectangles and fonts used to paint a folder or item row
   struct ItemLayout {

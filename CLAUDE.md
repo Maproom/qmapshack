@@ -219,6 +219,6 @@ Mark each done as it is applied.
 | 6 | [x] | Style | CMapItemDelegate.cpp:199,203 | `QFontMetrics` should be `const` in `getRectangles` |
 | 7 | [x] | Naming | CMapItemDelegate.cpp:361–367 | `idx`/`fm1`/`fm2`/`font2` → `index`/`fmName`/`fmStatus`/`fontStatus` in `sizeHint` |
 | 8 | [x] | Cleanup | All three `.cpp` | `indexToItem`: remove unnecessary intermediate variable, just `return dynamic_cast<...>(...)` |
-| 9 | [ ] | Duplication | CDBItemDelegate.cpp | `paintFolder`/`paintItem` share identical `isSelected`/`hasFocus`/`colorRole`/`colorGroup` block; extract helper |
+| 9 | [x] | Duplication | CDBItemDelegate.cpp | `paintFolder`/`paintItem` share identical `isSelected`/`hasFocus`/`colorRole`/`colorGroup` block; extracted `resolveColorState()` |
 | 10 | [ ] | Duplication | CMapItemDelegate.cpp | `getAnimations`: four near-identical animation-setup blocks; extract helper |
 

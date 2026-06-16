@@ -38,7 +38,7 @@ constexpr int kFontSizeDiffProject = 2;
 constexpr int kFontSizeDiffItem = 3;
 constexpr int kFontSizeInvalid = -1;  // statusSize* sentinel: hide the status line entirely
 constexpr int kProgressBarHeight = 5;
-constexpr int kProgressBarHeightHalf = 1;
+constexpr int kProgressBarBottomInset = 1;
 
 CWksItemDelegate::CWksItemDelegate(CGisListWks* parent) : QStyledItemDelegate(parent), treeWidget(parent) {
   SETTINGS;
@@ -144,7 +144,7 @@ CWksItemDelegate::ProjectLayout CWksItemDelegate::getRectanglesProject(const QSt
   QRect rectSave;
   QRect rectAutoSyncDev;
 
-  if (isOnDevice == false && item.type() != IWksItem::eTypeLostFound) {
+  if (!isOnDevice && item.type() != IWksItem::eTypeLostFound) {
     if (item.holdUiFocus(opt)) {
       rectActiveProject = row.takeButton(fmName.height());
       rectSave = row.takeButton(fmName.height());
@@ -159,7 +159,7 @@ CWksItemDelegate::ProjectLayout CWksItemDelegate::getRectanglesProject(const QSt
         rectSave = row.takeButton(fmName.height());
       }
     }
-  } else if (isOnDevice == true) {
+  } else if (isOnDevice) {
     if (item.holdUiFocus(opt)) {
       rectSave = row.takeButton(fmName.height());
     }
@@ -270,8 +270,8 @@ CWksItemDelegate::GeoSearchErrorLayout CWksItemDelegate::getRectanglesGeoSearchE
 
 void CWksItemDelegate::drawProgressBar(QPainter* p, const QRect& rect, qreal progress) {
   quint32 width = qRound(rect.width() * progress / 100.0);
-  const QLine line(rect.left(), rect.bottom() - kProgressBarHeightHalf, rect.left() + width,
-                   rect.bottom() - kProgressBarHeightHalf);
+  const QLine line(rect.left(), rect.bottom() - kProgressBarBottomInset, rect.left() + width,
+                   rect.bottom() - kProgressBarBottomInset);
   p->setPen(QPen(Qt::white, 5, Qt::SolidLine, Qt::RoundCap));
   p->drawLine(line);
   p->setPen(QPen(Qt::darkGreen, 3, Qt::SolidLine, Qt::RoundCap));
@@ -389,7 +389,7 @@ void CWksItemDelegate::paintProject(QPainter* p, const QStyleOptionViewItem& opt
   const float opacityOfFocusBasedItems = item.getOpacityOfFocusBasedItems();
 
   if (layout.rectSave.isValid()) {
-    if (item.isOnDevice() == false) {
+    if (item.isOnDevice() == IWksItem::eTypeNone) {
       // draw save/ auto save button
       if (item.isChanged() && !item.isAutoSave()) {
         // show save button
@@ -711,7 +711,7 @@ bool CWksItemDelegate::mousePressProject(QMouseEvent* me, const QStyleOptionView
     emit sigUpdateCanvas();
     return true;
   } else if (layout.rectSave.contains(me->pos())) {
-    if (item.isOnDevice() == false) {
+    if (item.isOnDevice() == IWksItem::eTypeNone) {
       if (item.isAutoSave()) {
         item.setAutoSave(false);
       } else {
@@ -834,7 +834,7 @@ bool CWksItemDelegate::helpEventProject(const QPoint& pos, const QPoint& posGlob
     }
     return true;
   } else if (layout.rectSave.contains(pos)) {
-    if (item.isOnDevice() == false) {
+    if (item.isOnDevice() == IWksItem::eTypeNone) {
       if (item.isChanged() && !item.isAutoSave()) {
         QToolTip::showText(posGlobal, toRichText(tr("Save project.")), view, {}, 3000);
       } else {
@@ -898,7 +898,8 @@ bool CWksItemDelegate::helpEventItem(const QPoint& pos, const QPoint& posGlobal,
     QToolTip::showText(posGlobal, item.getInfo(IWksItem::eFeatureShowName), view);
     return true;
   } else if (layout.rectStatus.contains(pos)) {
-    if (itemStatusControl.prj.flags == 0) {
+    if (itemStatusControl.trk.flags == 0 && itemStatusControl.wpt.flags == 0 && itemStatusControl.rte.flags == 0 &&
+        itemStatusControl.area.flags == 0) {
       QToolTip::showText(
           posGlobal,
           toRichText(

@@ -27,6 +27,8 @@
 #include <QStyleOptionToolButton>
 #include <QtMath>
 
+#include "helpers/CRowBuilder.h"
+
 QPen CDraw::penBorderBlue(QColor(10, 10, 150, 220), 2);
 QPen CDraw::penBorderGray(Qt::lightGray, 2);
 QPen CDraw::penBorderBlack(QColor(0, 0, 0, 200), 2);

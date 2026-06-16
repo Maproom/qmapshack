@@ -322,7 +322,7 @@ void CDBItemDelegate::toggleCheckState(IDBItem& item) {
   emit treeWidget->itemChanged(&item, IDBItem::eColumn);
 
   if (item.type() == IDBItem::eTypeLostFound) {
-    // Lex lost-n-found: we need to update all child items, too.
+    // For lost-and-found: we need to update all child items, too.
     const int N = item.childCount();
     QWidget* viewport = treeWidget->viewport();
     for (int n = 0; n < N; n++) {

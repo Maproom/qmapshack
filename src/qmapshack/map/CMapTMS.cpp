@@ -324,7 +324,7 @@ void CMapTMS::draw(IDrawContext::buffer_t& buf) /* override */
     }
 
     qint32 z = 20;
-    QPointF s1 = buf.scale * buf.zoomFactor;
+    QPointF s1 = buf.scale * buf.zoomFactor / buf.pixelRatio;
     qreal d = NOFLOAT;
 
     for (qint32 i = layer.minZoomLevel; i < 21; i++) {

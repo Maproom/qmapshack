@@ -343,7 +343,7 @@ void CMapRMAP::draw(IDrawContext::buffer_t& buf) /* override */
     return;
   }
 
-  level_t& level = findBestLevel(bufferScale);
+  level_t& level = findBestLevel(bufferScale / buf.pixelRatio);
 
   // convert top left and bottom right point of buffer to local coord. system
   QPointF p1 = buf.ref1;

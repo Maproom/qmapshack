@@ -1183,6 +1183,14 @@ bool CCanvas::setDrawContextSize(const QSize& s) {
   return done;
 }
 
+bool CCanvas::setDrawContextPixelRatio(qreal ratio) {
+  bool done = true;
+  for (IDrawContext* context : std::as_const(allDrawContext)) {
+    done &= context->setPixelRatio(ratio);
+  }
+  return done;
+}
+
 void CCanvas::print(QPainter& p, const QRectF& area, const QPointF& focus, bool printScale) {
   const QSize oldSize = size();
   const QSize newSize(area.size().toSize());
@@ -1233,6 +1241,15 @@ bool CCanvas::event(QEvent* event) {
       // as some mouse-events may have been lost
       mouse->afterMouseLostEvent(me);
       mouseLost = false;
+    }
+  }
+  if (event->type() == QEvent::DevicePixelRatioChange) {
+    if (!setDrawContextPixelRatio(devicePixelRatio())) {
+      // reschedule resize event because one of the draw context threads is still running
+      // and blocking the access to internal data.
+      QApplication::postEvent(this, new QEvent(QEvent::DevicePixelRatioChange));
+    } else {
+      needsRedraw = eRedrawAll;
     }
   }
   return QWidget::event(event);

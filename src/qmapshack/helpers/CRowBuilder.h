@@ -21,6 +21,13 @@
 
 #include <QRect>
 
+/// Margin used throughout the tree-item delegates for spacing icons, tool buttons and text.
+constexpr int kMargin = 1;
+/// Outer inset applied to all four sides of the item rect before layout.
+constexpr int kCellPad = 2 * kMargin;
+/// Gap inserted between the icon, text column, and each tool button.
+constexpr int kInnerGap = 2 * kMargin;
+
 /**
    @brief Lays out a standard tree-row into icon, button, and text zones.
 

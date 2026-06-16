@@ -18,8 +18,6 @@
 
 #include "helpers/CRowBuilder.h"
 
-#include "helpers/CDraw.h"
-
 CRowBuilder::CRowBuilder(const QRect& optRect, int cellPad, int innerGap)
     : r_(optRect.adjusted(cellPad, cellPad, -cellPad, -cellPad)), innerGap_(innerGap) {}
 

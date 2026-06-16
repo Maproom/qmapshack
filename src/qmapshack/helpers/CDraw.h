@@ -36,13 +36,6 @@ inline void USE_ANTI_ALIASING(QPainter& p, bool useAntiAliasing) {
 #define RECT_RADIUS 3
 #define PAINT_ROUNDED_RECT(p, r) p.drawRoundedRect(r, RECT_RADIUS, RECT_RADIUS)
 
-/// Margin used throughout the tree-item delegates for spacing icons, tool buttons and text.
-constexpr int kMargin = 1;
-/// Outer inset applied to all four sides of the item rect before layout.
-constexpr int kCellPad = 2 * kMargin;
-/// Gap inserted between the icon, text column, and each tool button.
-constexpr int kInnerGap = 2 * kMargin;
-
 class CDraw {
  public:
   static QPen penBorderBlue;

@@ -213,18 +213,18 @@ int IDem::getFactorHillshading() const {
   }
 }
 
-void IDem::hillshading(QVector<float>& data, quint32 x, quint32 y, quint32 stride, quint32 w, quint32 h,
-                       QImage& img) const {
+void IDem::hillshading(QVector<float>& data, QVector<uchar>& out, quint32 x, quint32 y, quint32 stride, quint32 w,
+                       quint32 h) const {
 #define ZFACT 0.125
 #define ZFACT_BY_ZFACT (ZFACT * ZFACT)
 #define SIN_ALT (qSin(45 * DEG_TO_RAD))
 #define ZFACT_COS_ALT (ZFACT * qCos(45 * DEG_TO_RAD))
 #define AZ (315 * DEG_TO_RAD)
   for (unsigned int m = 0; m < h; m++) {
-    unsigned char* scan = img.scanLine(m);
+    unsigned char* scan = out.data() + (m + y) * stride + x;
     for (unsigned int n = 0; n < w; n++) {
       float win[eWinsize3x3];
-      fillWindow(data, n + x, m + y, stride, win);
+      fillWindow(data, n + x + 1, m + y + 1, stride + 2, win);
 
       if (hasNoData && win[4] == noData) {
         scan[n] = 255;
@@ -253,13 +253,13 @@ void IDem::hillshading(QVector<float>& data, quint32 x, quint32 y, quint32 strid
 
 int IDem::getFactorSlopeShading() const { return factorSlopeShading * 100.; }
 
-void IDem::slopeShading(QVector<float>& data, quint32 x, quint32 y, quint32 stride, quint32 w, quint32 h,
-                        QImage& img) const {
+void IDem::slopeShading(QVector<float>& data, QVector<uchar>& out, quint32 x, quint32 y, quint32 stride, quint32 w,
+                        quint32 h) const {
   for (unsigned int m = 0; m < h; m++) {
-    unsigned char* scan = img.scanLine(m);
+    unsigned char* scan = out.data() + (m + y) * stride + x;
     for (unsigned int n = 0; n < w; n++) {
       float win[eWinsize3x3];
-      fillWindow(data, n + x, m + y, stride, win);
+      fillWindow(data, n + x + 1, m + y + 1, stride + 2, win);
 
       if (hasNoData && win[4] == noData) {
         scan[n] = 0;
@@ -331,13 +331,13 @@ qreal IDem::slopeOfWindowInterp(float* win2, winsize_e size, qreal x, qreal y) c
   return slope;
 }
 
-void IDem::slopecolor(QVector<float>& data, quint32 x, quint32 y, quint32 stride, quint32 w, quint32 h,
-                      QImage& img) const {
+void IDem::slopecolor(QVector<float>& data, QVector<uchar>& out, quint32 x, quint32 y, quint32 stride, quint32 w,
+                      quint32 h) const {
   for (unsigned int m = 0; m < h; m++) {
-    unsigned char* scan = img.scanLine(m);
+    unsigned char* scan = out.data() + (m + y) * stride + x;
     for (unsigned int n = 0; n < w; n++) {
       float win[eWinsize3x3];
-      fillWindow(data, n + x, m + y, stride, win);
+      fillWindow(data, n + x + 1, m + y + 1, stride + 2, win);
       qreal slope = slopeOfWindowInterp(win, eWinsize3x3, 0, 0);
 
       if (slope == NOFLOAT) {
@@ -364,13 +364,13 @@ void IDem::slopecolor(QVector<float>& data, quint32 x, quint32 y, quint32 stride
   }
 }
 
-void IDem::elevationLimit(QVector<float>& data, quint32 x, quint32 y, quint32 stride, quint32 w, quint32 h,
-                          QImage& img) const {
+void IDem::elevationLimit(QVector<float>& data, QVector<uchar>& out, quint32 x, quint32 y, quint32 stride, quint32 w,
+                          quint32 h) const {
   for (unsigned int m = 0; m < h; m++) {
-    unsigned char* scan = img.scanLine(m);
+    unsigned char* scan = out.data() + (m + y) * stride + x;
     for (unsigned int n = 0; n < w; n++) {
       float win[eWinsize3x3];
-      fillWindow(data, n + x, m + y, stride, win);
+      fillWindow(data, n + x + 1, m + y + 1, stride + 2, win);
 
       // get maximum of window (_not_ mean)
       //
@@ -393,13 +393,13 @@ void IDem::elevationLimit(QVector<float>& data, quint32 x, quint32 y, quint32 st
   }
 }
 
-void IDem::elevationShading(QVector<float>& data, quint32 x, quint32 y, quint32 stride, quint32 w, quint32 h,
-                            QImage& img) const {
+void IDem::elevationShading(QVector<float>& data, QVector<uchar>& out, quint32 x, quint32 y, quint32 stride, quint32 w,
+                            quint32 h) const {
   for (unsigned int m = 0; m < h; m++) {
-    unsigned char* scan = img.scanLine(m);
+    unsigned char* scan = out.data() + (m + y) * stride + x;
     for (unsigned int n = 0; n < w; n++) {
       float win[eWinsize3x3];
-      fillWindow(data, n + x, m + y, stride, win);
+      fillWindow(data, n + x + 1, m + y + 1, stride + 2, win);
 
       // get maximum of window (_not_ mean)
       //

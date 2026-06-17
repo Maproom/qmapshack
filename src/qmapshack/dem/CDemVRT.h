@@ -49,7 +49,8 @@ class CDemVRT : public IDem {
 
   QString filename;
   /// instance of GDAL dataset
-  GDALDataset* dataset;
+  GDALDataset* srcDataset = nullptr;
+  GDALDataset* dataset = nullptr;
 
   QPointF ref1;
   QPointF ref2;

@@ -338,6 +338,40 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf) {
     }
   }
 
+  quint32 w_used = w_buf - 2;
+  quint32 h_used = h_buf - 2;
+
+  QVector<uchar> outbuf(w_used * h_used);
+
+  using shadeFnPtr =
+      void (CDemVRT::*)(QVector<float>&, QVector<uchar>&, quint32, quint32, quint32, quint32, quint32) const;
+  auto computeShading = [=, this, &data, &outbuf](shadeFnPtr shadeFn) {
+    // run the shadings in paralell on equal sized chunks
+    quint32 n_x = 4;
+    quint32 n_y = 4;
+    for (quint32 i = 0; i < n_y; ++i) {
+      for (quint32 j = 0; j < n_x; ++j) {
+        if (dem->needsRedraw()) {
+          threadPool.waitForDone();
+          return false;
+        }
+
+        quint32 step_w_buf = w_used / n_x;
+        quint32 step_h_buf = h_used / n_y;
+        quint32 x_chunk = step_w_buf * j;
+        quint32 y_chunk = step_h_buf * i;
+        quint32 w_chunk = (j == n_x - 1) ? (w_used - x_chunk) : step_w_buf;
+        quint32 h_chunk = (i == n_y - 1) ? (h_used - y_chunk) : step_h_buf;
+
+        threadPool.start([=, this, &data, &outbuf]() {
+          std::invoke(shadeFn, this, data, outbuf, x_chunk, y_chunk, w_used, w_chunk, h_chunk);
+        });
+      }
+    }
+    threadPool.waitForDone();
+    return true;
+  };
+
   // get pixel offset of top left buffer corner
   QPointF pp = buf.ref1;
   dem->convertRad2Px(pp);
@@ -351,115 +385,60 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf) {
   qreal o2 = ((o1 + 0.4) >= 1.0) ? o1 : (o1 + 0.4);
   p.setOpacity(o1);
 
-  quint32 w_used = w_buf - 2;
-  quint32 h_used = h_buf - 2;
-
-  // run the shadings in paralell on equal sized chunks
-  quint32 n_x = w_buf/32;
-  quint32 n_y = h_buf/32;
-  for (quint32 i = 0; i < n_y; ++i) {
-    for (quint32 j = 0; j < n_x; ++j) {
-      if (dem->needsRedraw()) {
-        goto endloop;
-      }
-
-      // position and dimensions of this chunk in the `data` buffer...
-      quint32 step_w_buf = w_used / n_x;
-      quint32 step_h_buf = h_used / n_y;
-      quint32 x_chunk = step_w_buf * j + 1;
-      quint32 y_chunk = step_h_buf * i + 1;
-      quint32 w_chunk = (j == n_x - 1) ? (w_used + 1 - x_chunk) : step_w_buf;
-      quint32 h_chunk = (i == n_y - 1) ? (h_used + 1 - y_chunk) : step_h_buf;
-
-      // ...and in the coordinate space of the DEM
-      qreal chunk_top = y + y_chunk * buf_scale_y;
-      qreal chunk_left = x + x_chunk * buf_scale_x;
-      qreal chunk_right = chunk_left + w_chunk * buf_scale_x;
-      qreal chunk_bottom = chunk_top + h_chunk * buf_scale_y;
-      QPolygonF l(4);
-      l[0] = QPointF(chunk_left, chunk_top);
-      l[1] = QPointF(chunk_right, chunk_top);
-      l[2] = QPointF(chunk_right, chunk_bottom);
-      l[3] = QPointF(chunk_left, chunk_bottom);
-
-      threadPool.start(
-          [=, this, &data, &p]() { drawTile(data, x_chunk, y_chunk, w_buf, w_chunk, h_chunk, l, o1, o2, p); });
-    }
-  }
-endloop:
-  threadPool.waitForDone();
-
-  drawElevationShadeScale(p);
-}
-
-void CDemVRT::drawTile(QVector<float>& data, quint32 x, quint32 y, quint32 stride, quint32 w, quint32 h, QPolygonF l,
-                       qreal o1, qreal o2, QPainter& p) const {
-  l = trFwd.map(l);
-  proj.transform(l, PJ_FWD);
+  // compute the destination rect we will draw the shadings into
+  QPointF top_left = trFwd.map(QPointF(left, top));
+  QPointF bottom_right = trFwd.map(QPointF(right, bottom));
+  proj.transform(top_left, PJ_FWD);
+  proj.transform(bottom_right, PJ_FWD);
+  dem->convertRad2Px(top_left);
+  dem->convertRad2Px(bottom_right);
+  QRectF dest(top_left, bottom_right);
 
   if (doHillshading()) {
-    QPolygonF r = l;
-    QImage img(w, h, QImage::Format_Indexed8);
+    if (!computeShading(&CDemVRT::hillshading)) {
+      return;
+    }
+    QImage img(outbuf.constData(), w_used, h_used, w_used, QImage::Format_Indexed8);
     img.setColorTable(graytable);
-
-    hillshading(data, x, y, stride, w, h, img);
-
-    {
-      QMutexLocker lock(&mutex);
-      drawTile(img, r, p);
-    }
+    p.drawImage(dest, img);
   }
-
   if (doSlopeShading()) {
-    QPolygonF r = l;
-    QImage img(w, h, QImage::Format_Alpha8);
-    slopeShading(data, x, y, stride, w, h, img);
-
-    {
-      QMutexLocker lock(&mutex);
-      drawTile(img, r, p);
+    if (!computeShading(&CDemVRT::slopeShading)) {
+      return;
     }
+    QImage img(outbuf.constData(), w_used, h_used, w_used, QImage::Format_Alpha8);
+    p.drawImage(dest, img);
   }
-
   if (doSlopeColor()) {
-    QPolygonF r = l;
-    QImage img(w, h, QImage::Format_Indexed8);
+    if (!computeShading(&CDemVRT::slopecolor)) {
+      return;
+    }
+    QImage img(outbuf.constData(), w_used, h_used, w_used, QImage::Format_Indexed8);
     img.setColorTable(slopetable);
-    slopecolor(data, x, y, stride, w, h, img);
-
-    {
-      QMutexLocker lock(&mutex);
-      p.setOpacity(o2);
-      drawTile(img, r, p);
-      p.setOpacity(o1);
-    }
+    p.setOpacity(o2);
+    p.drawImage(dest, img);
+    p.setOpacity(o1);
   }
-
   if (doElevationLimit()) {
-    QPolygonF r = l;
-    QImage img(w, h, QImage::Format_Indexed8);
+    if (!computeShading(&CDemVRT::elevationLimit)) {
+      return;
+    }
+    QImage img(outbuf.constData(), w_used, h_used, w_used, QImage::Format_Indexed8);
     img.setColorTable(elevationtable);
-    elevationLimit(data, x, y, stride, w, h, img);
-
-    {
-      QMutexLocker lock(&mutex);
-      p.setOpacity(o2);
-      drawTile(img, r, p);
-      p.setOpacity(o1);
-    }
+    p.setOpacity(o2);
+    p.drawImage(dest, img);
+    p.setOpacity(o1);
   }
-
   if (doElevationShading()) {
-    QPolygonF r = l;
-    QImage img(w, h, QImage::Format_Indexed8);
-    img.setColorTable(elevationShadeTable);
-    elevationShading(data, x, y, stride, w, h, img);
-
-    {
-      QMutexLocker lock(&mutex);
-      drawTile(img, r, p);
+    if (!computeShading(&CDemVRT::elevationShading)) {
+      return;
     }
+    QImage img(outbuf.constData(), w_used, h_used, w_used, QImage::Format_Indexed8);
+    img.setColorTable(elevationShadeTable);
+    p.drawImage(dest, img);
   }
+
+  drawElevationShadeScale(p);
 }
 
 void CDemVRT::drawElevationShadeScale(QPainter& p) const {

@@ -19,7 +19,9 @@
 
 #include "dem/CDemVRT.h"
 
+#include <gdal.h>
 #include <gdal_priv.h>
+#include <gdalwarper.h>
 
 #include <QtWidgets>
 
@@ -91,12 +93,60 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent) : IDem(parent), file
   noData = pBand->GetNoDataValue(&hasNoData);
   qDebug() << "no data:" << hasNoData << noData;
 
+  // ------- setup warped VRT ---------------
+  // if the projection of the dataset is different then that of the drawing context we wrap the dataset in a virtual
+  // warped dataset to transparently resample it into the drawing contexts projection.
+  OGRSpatialReference targetSRS;
+  OGRErr rv = targetSRS.SetFromUserInput(dem->getProjection().toUtf8());
+  const OGRSpatialReference* sourceSRS = dataset->GetSpatialRef();
+  if (rv == OGRERR_NONE && sourceSRS != nullptr && !sourceSRS->IsSame(&targetSRS)) {
+    srcDataset = dataset;
+
+    GDALWarpOptions* psOptions = GDALCreateWarpOptions();
+    psOptions->pProgressArg = dem;
+    psOptions->pfnProgress = [](double dfc, const char* msg, void* arg) -> int {
+      auto dem = reinterpret_cast<CDemDraw*>(arg);
+      return !dem->needsRedraw();
+    };
+
+    dataset = GDALDataset::FromHandle(GDALAutoCreateWarpedVRT(
+        GDALDataset::ToHandle(srcDataset), nullptr, targetSRS.exportToWkt().c_str(), GRA_Bilinear, 0.1, psOptions));
+
+    GDALDestroyWarpOptions(psOptions);
+
+    if (dataset == nullptr) {
+      GDALClose(srcDataset);
+      srcDataset = nullptr;
+      QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."),
+                           tr("Failed to create Warp for:") % '\n' % filename);
+      return;
+    }
+
+    if (hasOverviews) {
+      // to make GDAL take advantage of overviews in the original dataset we need to add "virtual overviews" with the
+      // same decimation factors to the WarpedVRT so first build a list of the overviews the original dataset
+      // contains...
+      QVector<qint32> overviews(pBand->GetOverviewCount());
+      for (int i = 0; i < overviews.size(); ++i) {
+        GDALRasterBand* overview = pBand->GetOverview(i);
+        qreal decimationFactor = (qreal)pBand->GetXSize() / overview->GetXSize();
+        overviews[i] = qRound(decimationFactor);
+      }
+      // ...and attach them as virtual overview
+      CPLSetConfigOption("VRT_VIRTUAL_OVERVIEWS", "YES");
+      dataset->BuildOverviews("NONE", overviews.size(), overviews.data(), 0, nullptr, nullptr, nullptr);
+      CPLSetConfigOption("VRT_VIRTUAL_OVERVIEWS", "NO");
+    }
+  }
+
   // ------- setup projection ---------------
   proj.init(dataset->GetProjectionRef(), "EPSG:4326");
 
   if (!proj.isValid()) {
     GDALClose(dataset);
     dataset = nullptr;
+    GDALClose(srcDataset);
+    srcDataset = nullptr;
     QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."),
                          tr("No georeference information found:") % '\n' % filename);
     return;
@@ -146,6 +196,7 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent) : IDem(parent), file
 CDemVRT::~CDemVRT() {
   threadPool.waitForDone();
   GDALClose(dataset);
+  GDALClose(srcDataset);
 }
 
 void CDemVRT::slotNeedsRedraw() { threadPool.clear(); }
@@ -322,6 +373,17 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf) {
   QVector<float> data(static_cast<qsizetype>(w_buf) * h_buf);
   {
     QMutexLocker lock(&mutex);
+
+    // add a temporary GDAL error handler to filter out errors that are caused by intentionally aborted reads
+    // automatically removed at end of scope
+    CPLErrorHandlerPusher oCurrentHandler(
+        [](CPLErr eErrClass, CPLErrorNum errNo, const char* msg) {
+          if (errNo == CPLE_UserInterrupt || errNo == CPLE_AppDefined) {
+            return;
+          }
+          CPLDefaultErrorHandler(eErrClass, errNo, msg);
+        },
+        nullptr);
 
     // by requesting a different size than the size of the buffer GDAL will automatically do scaling for us and use
     // overviews

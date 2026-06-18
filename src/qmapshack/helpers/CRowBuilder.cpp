@@ -29,6 +29,12 @@ QRect CRowBuilder::takeLeft(int width) {
   return result;
 }
 
+QRect CRowBuilder::takeLeft(int width, int height) {
+  const QRect result(r_.left(), r_.top(), width, height);
+  r_.setLeft(r_.left() + width + innerGap_);
+  return result;
+}
+
 QRect CRowBuilder::takeRight(int width) {
   const QRect result(r_.right() - width, r_.top(), width, r_.height());
   r_.setRight(r_.right() - width - innerGap_);
@@ -42,11 +48,20 @@ QRect CRowBuilder::takeRight(int width, int height) {
 }
 
 QRect CRowBuilder::takeButton(int iconSize) {
+  const int size = buttonSize(iconSize);
+  return takeRight(size, size);
+}
+
+QRect CRowBuilder::takeLeftButton(int iconSize) {
+  const int size = buttonSize(iconSize);
+  return takeLeft(size, size);
+}
+
+int CRowBuilder::buttonSize(int iconSize) {
   // CDraw::drawToolButton insets its icon by kMargin on every side (left+right = 2*kMargin,
   // top+bottom = 2*kMargin), so the button rect must be (iconSize + 4*kMargin) square for
   // the icon to render at exactly iconSize×iconSize pixels.
-  const int size = iconSize + 4 * kMargin;
-  return takeRight(size, size);
+  return iconSize + 4 * kMargin;
 }
 
 QRect CRowBuilder::nameSlice(int fontHeight) const { return QRect(r_.left(), r_.top(), r_.width(), fontHeight); }

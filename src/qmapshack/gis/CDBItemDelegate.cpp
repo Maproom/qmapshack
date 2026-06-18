@@ -128,59 +128,57 @@ QSize CDBItemDelegate::sizeHint(const QStyleOptionViewItem& opt, const QModelInd
 
 CDBItemDelegate::ItemLayout CDBItemDelegate::getRectanglesFolder(const QStyleOptionViewItem& opt,
                                                                  const IDBItem& item) const {
-  const QFont fontName = opt.font;
-  const QFontMetrics fmName(fontName);
+  ItemLayout layout;
+  layout.fontName = opt.font;
+  const QFontMetrics fmName(layout.fontName);
 
-  QFont fontStatus = opt.font;
-  fontStatus.setPointSize(fontStatus.pointSize() - itemStatusControl.statusSizeFolder);
-  const QFontMetrics fmStatus(fontStatus);
+  layout.fontStatus = opt.font;
+  layout.fontStatus.setPointSize(layout.fontStatus.pointSize() - itemStatusControl.statusSizeFolder);
+  const QFontMetrics fmStatus(layout.fontStatus);
 
   CRowBuilder row(opt.rect, kCellPad, kInnerGap);
-  const QRect rectIcon = row.takeLeft(row.height());
+  layout.rectIcon = row.takeLeft(row.height());
   row.markStatusColumn();
 
-  QRect rectButton;
   if (item.type() > IDBItem::eTypeGroup || item.type() == IDBItem::eTypeLostFound) {
-    rectButton = row.takeButton(fmName.height());
+    layout.rectButton = row.takeButton(fmName.height());
   }
 
-  const QRect rectName = row.nameSlice(fmName.height());
+  layout.rectName = row.nameSlice(fmName.height());
 
-  QRect rectStatus;
   if (itemStatusControl.statusSizeFolder != kFontSizeInvalid) {
-    rectStatus = row.fullStatusSlice(fmStatus.height());
+    layout.rectStatus = row.fullStatusSlice(fmStatus.height());
   }
 
-  return {fontName, fontStatus, rectIcon, rectName, rectStatus, rectButton};
+  return layout;
 }
 
 CDBItemDelegate::ItemLayout CDBItemDelegate::getRectanglesItem(const QStyleOptionViewItem& opt,
                                                                const IDBItem& item) const {
-  const QFont fontName = opt.font;
-  const QFontMetrics fmName(fontName);
+  ItemLayout layout;
+  layout.fontName = opt.font;
+  const QFontMetrics fmName(layout.fontName);
 
-  QFont fontStatus = opt.font;
-  fontStatus.setPointSize(fontStatus.pointSize() - itemStatusControl.statusSizeItem);
-  const QFontMetrics fmStatus(fontStatus);
+  layout.fontStatus = opt.font;
+  layout.fontStatus.setPointSize(layout.fontStatus.pointSize() - itemStatusControl.statusSizeItem);
+  const QFontMetrics fmStatus(layout.fontStatus);
 
   CRowBuilder row(opt.rect, kCellPad, kInnerGap);
-  const QRect rectIcon = row.takeLeft(row.height());
+  layout.rectIcon = row.takeLeft(row.height());
   row.markStatusColumn();
 
-  QRect rectButton;
   // Items inside the lost-and-found folder have no load/unload button.
   if (!(item.parent() && item.parent()->type() == IDBItem::eTypeLostFound)) {
-    rectButton = row.takeButton(fmName.height());
+    layout.rectButton = row.takeButton(fmName.height());
   }
 
-  const QRect rectName = row.nameSlice(fmName.height());
+  layout.rectName = row.nameSlice(fmName.height());
 
-  QRect rectStatus;
   if (itemStatusControl.statusSizeItem != kFontSizeInvalid) {
-    rectStatus = row.fullStatusSlice(fmStatus.height());
+    layout.rectStatus = row.fullStatusSlice(fmStatus.height());
   }
 
-  return {fontName, fontStatus, rectIcon, rectName, rectStatus, rectButton};
+  return layout;
 }
 
 void CDBItemDelegate::paint(QPainter* p, const QStyleOptionViewItem& opt, const QModelIndex& index) const {

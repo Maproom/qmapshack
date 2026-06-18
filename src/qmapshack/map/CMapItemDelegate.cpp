@@ -178,23 +178,24 @@ void CMapItemDelegate::initStyleOption(QStyleOptionViewItem* option, const QMode
 }
 
 CMapItemDelegate::MapItemLayout CMapItemDelegate::getRectangles(const QStyleOptionViewItem& opt) const {
-  const QFont fontName = opt.font;
-  const QFontMetrics fmName(fontName);
+  MapItemLayout layout;
+  layout.fontName = opt.font;
+  const QFontMetrics fmName(layout.fontName);
 
-  QFont fontStatus = opt.font;
-  fontStatus.setPointSize(fontStatus.pointSize() - kFontSizeDiffItem);
-  const QFontMetrics fmStatus(fontStatus);
+  layout.fontStatus = opt.font;
+  layout.fontStatus.setPointSize(layout.fontStatus.pointSize() - kFontSizeDiffItem);
+  const QFontMetrics fmStatus(layout.fontStatus);
 
   CRowBuilder row(opt.rect, kCellPad, kInnerGap);
-  const QRect rectIcon = row.takeLeft(row.height());
-  const QRect rectButton = row.takeRight(row.height());
+  layout.rectIcon = row.takeLeft(row.height());
+  layout.rectButton = row.takeRight(row.height());
   // Thin vertical indicator bar to the left of the button.
   const QRect rawIndicatorSlot = row.takeRight(6);
-  const QRect rectIndicator = rawIndicatorSlot.adjusted(0, kMargin, 0, -kMargin);
-  const QRect rectName = row.nameSlice(fmName.height());
-  const QRect rectStatus = row.statusSlice(fmStatus.height());
+  layout.rectIndicator = rawIndicatorSlot.adjusted(0, kMargin, 0, -kMargin);
+  layout.rectName = row.nameSlice(fmName.height());
+  layout.rectStatus = row.statusSlice(fmStatus.height());
 
-  return {fontName, fontStatus, rectIcon, rectButton, rectIndicator, rectName, rectStatus};
+  return layout;
 }
 
 void CMapItemDelegate::paint(QPainter* p, const QStyleOptionViewItem& opt, const QModelIndex& index) const {

@@ -232,21 +232,13 @@ CWksItemDelegate::GeoSearchLayout CWksItemDelegate::getRectanglesGeoSearch(const
   layout.fontStatus.setPointSize(layout.fontStatus.pointSize() - kFontSizeDiffProject);
   const QFontMetrics fmStatus(layout.fontStatus);
 
-  const QRect& r = opt.rect.adjusted(kCellPad, kCellPad, -kCellPad, -kCellPad);
-  const quint32 halfHeight = r.height() / 2;
-
-  layout.rectIcon = QRect(r.left(), r.top(), r.height(), r.height());
-  layout.rectSetup = QRect(layout.rectIcon.right() + kMargin, r.top(), halfHeight, halfHeight);
-  layout.rectVisible = QRect(r.right() - fmSearch.height(), r.top(), halfHeight, halfHeight);
-  layout.rectWptIcon = QRect(layout.rectVisible.left() - halfHeight - kMargin, r.top(), halfHeight, halfHeight);
-  layout.rectLineEdit = QRect(layout.rectSetup.right() + kMargin, r.top(),
-                              r.width() - layout.rectSetup.width() - layout.rectIcon.width() -
-                                  layout.rectWptIcon.width() - layout.rectVisible.width() - 4 * kMargin,
-                              halfHeight + 4 * kMargin);
-  layout.rectStatus = QRect(layout.rectSetup.right() + kMargin, r.bottom() - fmStatus.height(),
-                            r.width() - layout.rectSetup.width() - layout.rectIcon.width() -
-                                layout.rectWptIcon.width() - layout.rectVisible.width() - 4 * kMargin,
-                            fmStatus.height());
+  CRowBuilder row(opt.rect, kCellPad, kInnerGap);
+  layout.rectIcon = row.takeLeft(row.height());
+  layout.rectSetup = row.takeLeftButton(fmSearch.height());
+  layout.rectVisible = row.takeButton(fmSearch.height());
+  layout.rectWptIcon = row.takeButton(fmSearch.height());
+  layout.rectLineEdit = row.nameSlice(CRowBuilder::buttonSize(fmSearch.height()));
+  layout.rectStatus = row.statusSlice(fmStatus.height());
 
   return layout;
 }

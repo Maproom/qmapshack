@@ -394,79 +394,79 @@ rijevoz</translation>
 <context>
     <name>CDBItemDelegate</name>
     <message>
-        <location filename="../gis/CDBItemDelegate.cpp" line="257"/>
+        <location filename="../gis/CDBItemDelegate.cpp" line="240"/>
         <source>Groups: %1 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CDBItemDelegate.cpp" line="260"/>
+        <location filename="../gis/CDBItemDelegate.cpp" line="243"/>
         <source>Projects: %1 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CDBItemDelegate.cpp" line="263"/>
+        <location filename="../gis/CDBItemDelegate.cpp" line="246"/>
         <source>Other: %1 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CDBItemDelegate.cpp" line="270"/>
+        <location filename="../gis/CDBItemDelegate.cpp" line="253"/>
         <source>W: %1 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CDBItemDelegate.cpp" line="273"/>
+        <location filename="../gis/CDBItemDelegate.cpp" line="256"/>
         <source>T: %1 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CDBItemDelegate.cpp" line="276"/>
+        <location filename="../gis/CDBItemDelegate.cpp" line="259"/>
         <source>R: %1 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CDBItemDelegate.cpp" line="279"/>
+        <location filename="../gis/CDBItemDelegate.cpp" line="262"/>
         <source>A: %1 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CDBItemDelegate.cpp" line="332"/>
-        <location filename="../gis/CDBItemDelegate.cpp" line="334"/>
-        <location filename="../gis/CDBItemDelegate.cpp" line="336"/>
+        <location filename="../gis/CDBItemDelegate.cpp" line="301"/>
+        <location filename="../gis/CDBItemDelegate.cpp" line="303"/>
+        <location filename="../gis/CDBItemDelegate.cpp" line="305"/>
         <source>since: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CDBItemDelegate.cpp" line="332"/>
+        <location filename="../gis/CDBItemDelegate.cpp" line="301"/>
         <source>%1 min.</source>
         <translation type="unfinished">%1 min.</translation>
     </message>
     <message>
-        <location filename="../gis/CDBItemDelegate.cpp" line="334"/>
+        <location filename="../gis/CDBItemDelegate.cpp" line="303"/>
         <source>%1 h</source>
         <translation type="unfinished">%1 h</translation>
     </message>
     <message>
-        <location filename="../gis/CDBItemDelegate.cpp" line="336"/>
+        <location filename="../gis/CDBItemDelegate.cpp" line="305"/>
         <source>%1 days</source>
         <translation type="unfinished">%1 dana</translation>
     </message>
     <message>
-        <location filename="../gis/CDBItemDelegate.cpp" line="451"/>
+        <location filename="../gis/CDBItemDelegate.cpp" line="420"/>
         <source>Load project into workspace</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CDBItemDelegate.cpp" line="453"/>
+        <location filename="../gis/CDBItemDelegate.cpp" line="422"/>
         <source>Remove project from workspace</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CDBItemDelegate.cpp" line="473"/>
+        <location filename="../gis/CDBItemDelegate.cpp" line="442"/>
         <source>Load item into workspace.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CDBItemDelegate.cpp" line="475"/>
+        <location filename="../gis/CDBItemDelegate.cpp" line="444"/>
         <source>Remove item from workspace.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1888,242 +1888,242 @@ Možeš izmijeniti oba parametra kako biste prilagodili ponašanje filtera. Za u
         <translation>Promijenjene točke traga, žrtvovani svi prethodni podaci.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="415"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="416"/>
         <source>Time: %1%2, Speed: %3%4</source>
         <translation>Vrijeme: %1%2, Brzina: %3%4</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="417"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="418"/>
         <source>Time: -, Speed: -</source>
         <translation>Vrijeme: -, Brzina: -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="424"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="425"/>
         <source>Moving: %1%2, Speed: %3%4</source>
         <translation>Kretanje: %1%2, Brzina: %3%4</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="426"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="427"/>
         <source>Moving: -, Speed: -</source>
         <translation>Kretanje: -, Brzina: -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="449"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="450"/>
         <source>Points: %1 (%2)</source>
         <translation>Točaka: %1 (%2)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="453"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="454"/>
         <source>Energy Use Cycling: %L1</source>
         <translation>Ciklus Potrošnje Energije: %L1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="458"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="459"/>
         <source>Invalid elevations!</source>
         <translation>Pogrešne elevacije!</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="463"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="464"/>
         <source>Invalid timestamps!</source>
         <translation>Pogrešne vremenske oznake!</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="468"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="469"/>
         <source>Invalid positions!</source>
         <translation>Pogrešni položaji!</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="480"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="481"/>
         <source>Activities: %1</source>
         <translation>Aktivnosti: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="594"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="595"/>
         <source>Index: %1</source>
         <translation>Indeks: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="596"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="597"/>
         <source>Index: visible %1, total %2</source>
         <translation>Indeks: vidljivo %1, ukupno %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="609"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="610"/>
         <source>, Slope: %1%2</source>
         <translation>, Nagib: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="636"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="637"/>
         <source>... and %1 tags not displayed</source>
         <translation>... i %1 oznaka nije prikazano</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="645"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="699"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="646"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="700"/>
         <source>Ascent</source>
         <translation>Uspon</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="655"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="715"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="656"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="716"/>
         <source>Descent</source>
         <translation>Silazak</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="664"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="730"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="665"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="731"/>
         <source>Distance</source>
         <translation>Udaljenost</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="673"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="674"/>
         <source>Moving</source>
         <translation>Kretanje</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="737"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="738"/>
         <source>Time</source>
         <translation>Vrijeme</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1280"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1291"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1371"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1410"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1569"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2802"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1281"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1292"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1372"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1411"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1570"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2803"/>
         <source>track</source>
         <translation>trag</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1493"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1494"/>
         <source>Hide point %1.</source>
         <translation>Sakrij točke %1.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1495"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1496"/>
         <source>Hide points %1..%2.</source>
         <translation>Sakrij točke %1..%2.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="344"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1746"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1747"/>
         <source>min.</source>
         <translation>min.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="344"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1746"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1747"/>
         <source>max.</source>
         <translation>maks.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="400"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="401"/>
         <source>Length: %1%2</source>
         <translation>Duljina: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="473"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="474"/>
         <source>Invalid slopes!</source>
         <translation>Pogrešni nagibi!</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="606"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="607"/>
         <source>Ele.: %1%2</source>
         <translation>Ele.: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="613"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="614"/>
         <source>, Speed: %1%2</source>
         <translation>, Brzina: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="433"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="434"/>
         <source>Start</source>
         <translation>Početak</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="441"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="442"/>
         <source>End</source>
         <translation>Kraj</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1327"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1328"/>
         <source>Permanently removed points %1..%2</source>
         <translation>Trajno uklonjene točke %1..%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1338"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1339"/>
         <source>Track Point Info...</source>
         <translation>Info o Točki Traga...</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1339"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1340"/>
         <source>Enter some text to be attached to this track point:</source>
         <translation>Unesi tekst koji će se priložiti ovoj točki traga:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1346"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1347"/>
         <source>Add track point desc.: %1</source>
         <translation>Dodaj opis točke traga: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1354"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1355"/>
         <source>Changed track point desc.: %1</source>
         <translation>Promijenjen opis točke traga: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1362"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1363"/>
         <source>Removed track point desc.</source>
         <translation>Uklonjen opis točke traga.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1531"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1532"/>
         <source>Delete point %1.</source>
         <translation>Izbriši točke %1.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1533"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1534"/>
         <source>Delete points %1..%2.</source>
         <translation>Izbriši točke %1..%2.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1556"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1557"/>
         <source>Show points.</source>
         <translation>Pokaži točke.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2181"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2182"/>
         <source>Changed name</source>
         <translation>Promijenjeno ime</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2186"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2187"/>
         <source>Changed comment</source>
         <translation>Promijenjen komentar</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2191"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2192"/>
         <source>Changed description</source>
         <translation>Promijenjen opis</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2196"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2197"/>
         <source>Changed links</source>
         <translation>Promijenjene poveznice</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2204"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2205"/>
         <source>Changed elevation of point %1 to %2 %3</source>
         <translation>Promijenjena elevacija točke %1 do %2 %3</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2227"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2228"/>
         <source>Changed activity to &apos;%1&apos; for complete track.</source>
         <translation>Promijenjena aktivnost u &apos;%1&apos; za cijeli trag.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2253"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2254"/>
         <source>Changed activity to &apos;%1&apos; for range(%2..%3).</source>
         <translation>Promijenjena aktivnost u &apos;%1&apos; za raspon(%2..%3).</translation>
     </message>
@@ -4586,42 +4586,42 @@ Vrati na interne tipove.</translation>
 <context>
     <name>CMapItemDelegate</name>
     <message>
-        <location filename="../map/CMapItemDelegate.cpp" line="250"/>
+        <location filename="../map/CMapItemDelegate.cpp" line="221"/>
         <source>inactive</source>
         <translation type="unfinished">neaktivno</translation>
     </message>
     <message>
-        <location filename="../map/CMapItemDelegate.cpp" line="253"/>
+        <location filename="../map/CMapItemDelegate.cpp" line="224"/>
         <source>active</source>
         <translation type="unfinished">aktivno</translation>
     </message>
     <message>
-        <location filename="../map/CMapItemDelegate.cpp" line="256"/>
+        <location filename="../map/CMapItemDelegate.cpp" line="227"/>
         <source>missing</source>
         <translation type="unfinished">nedostaje</translation>
     </message>
     <message>
-        <location filename="../map/CMapItemDelegate.cpp" line="260"/>
+        <location filename="../map/CMapItemDelegate.cpp" line="231"/>
         <source>-</source>
         <translation type="unfinished">-</translation>
     </message>
     <message>
-        <location filename="../map/CMapItemDelegate.cpp" line="355"/>
+        <location filename="../map/CMapItemDelegate.cpp" line="319"/>
         <source>Deactivate %1</source>
         <translation type="unfinished">Deaktiviraj %1</translation>
     </message>
     <message>
-        <location filename="../map/CMapItemDelegate.cpp" line="355"/>
+        <location filename="../map/CMapItemDelegate.cpp" line="319"/>
         <source>Activate %1</source>
         <translation type="unfinished">Aktiviraj %1</translation>
     </message>
     <message>
-        <location filename="../map/CMapItemDelegate.cpp" line="359"/>
+        <location filename="../map/CMapItemDelegate.cpp" line="323"/>
         <source>%1 is not visible at current scale</source>
         <translation type="unfinished">%1 nije vidljivo u trenutnoj skali</translation>
     </message>
     <message>
-        <location filename="../map/CMapItemDelegate.cpp" line="360"/>
+        <location filename="../map/CMapItemDelegate.cpp" line="324"/>
         <source>%1 is visible at current scale</source>
         <translation type="unfinished">%1 je vidljivo u trenutnoj skali</translation>
     </message>
@@ -4629,7 +4629,7 @@ Vrati na interne tipove.</translation>
 <context>
     <name>CMapList</name>
     <message>
-        <location filename="../map/CMapList.cpp" line="267"/>
+        <location filename="../map/CMapList.cpp" line="317"/>
         <source>Where do you want to store maps?</source>
         <translation>Gdje želiš pohraniti karte?</translation>
     </message>
@@ -8618,74 +8618,74 @@ red %2, kolona %3:
 <context>
     <name>CWksItemDelegate</name>
     <message>
-        <location filename="../gis/CWksItemDelegate.cpp" line="750"/>
-        <location filename="../gis/CWksItemDelegate.cpp" line="1040"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="646"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="935"/>
         <source>Enter address...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CWksItemDelegate.cpp" line="923"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="818"/>
         <source>Hide project on map.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CWksItemDelegate.cpp" line="925"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="820"/>
         <source>Show project on map.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CWksItemDelegate.cpp" line="931"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="826"/>
         <source>Save project.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CWksItemDelegate.cpp" line="934"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="829"/>
         <source>Disable auto save.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CWksItemDelegate.cpp" line="936"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="831"/>
         <source>Enable auto save.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CWksItemDelegate.cpp" line="940"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="835"/>
         <source>Copy content of project into a project in the workspace.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CWksItemDelegate.cpp" line="946"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="841"/>
         <source>Disable automatic synchonization with GPS device.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CWksItemDelegate.cpp" line="949"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="844"/>
         <source>Enable automatic synchonization with GPS device.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CWksItemDelegate.cpp" line="956"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="851"/>
         <source>This is the active project. All new items will be attached to this project automatically.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CWksItemDelegate.cpp" line="962"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="857"/>
         <source>Make this project the active one. All new items will be attached to this project automatically.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CWksItemDelegate.cpp" line="974"/>
-        <location filename="../gis/CWksItemDelegate.cpp" line="997"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="869"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="893"/>
         <source>This is the status line. You can select additional information to be displayed in the workspace setup. See menu-&gt;Workspace-&gt;Setup Workspace</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CWksItemDelegate.cpp" line="1006"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="902"/>
         <source>Item is changed and needs to be saved.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CWksItemDelegate.cpp" line="1018"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="913"/>
         <source>Setup Search</source>
         <translation type="unfinished">Postavi Pretraživanje</translation>
     </message>
@@ -11890,41 +11890,81 @@ na temelju elevacije.</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="165"/>
+        <source>Move to Top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../dem/IDemList.ui" line="168"/>
+        <source>Hide DEM behind others</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../dem/IDemList.ui" line="171"/>
+        <source>Shift+Home</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../dem/IDemList.ui" line="183"/>
         <source>Move Up</source>
         <translation>Pomakni gore</translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="168"/>
+        <location filename="../dem/IDemList.ui" line="186"/>
         <source>Hide DEM behind previous one</source>
         <translation>Sakrij DEM iza prethodnog</translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="177"/>
-        <source>Move down</source>
+        <location filename="../dem/IDemList.ui" line="189"/>
+        <source>Shift+Up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../dem/IDemList.ui" line="198"/>
+        <source>Move Down</source>
         <translation>Pomakni dolje</translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="180"/>
+        <location filename="../dem/IDemList.ui" line="201"/>
         <source>Show DEM on top of next one</source>
         <translation>Prikaži DEM iznad sljedećg</translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="189"/>
+        <location filename="../dem/IDemList.ui" line="204"/>
+        <source>Shift+Down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../dem/IDemList.ui" line="213"/>
+        <source>Move to Bottom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../dem/IDemList.ui" line="216"/>
+        <source>Show DEM on top of others</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../dem/IDemList.ui" line="219"/>
+        <source>Shift+End</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../dem/IDemList.ui" line="231"/>
         <source>Reload DEM</source>
         <translation>Ponovo učitaj DEM</translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="198"/>
+        <location filename="../dem/IDemList.ui" line="240"/>
         <source>Clear Filter</source>
         <translation>Očisti Filter</translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="207"/>
+        <location filename="../dem/IDemList.ui" line="249"/>
         <source>Remove</source>
         <translation>Ukloniti</translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="210"/>
+        <location filename="../dem/IDemList.ui" line="252"/>
         <source>Remove DEM from list</source>
         <translation>Ukloni DEM iz popisa</translation>
     </message>
@@ -14712,44 +14752,84 @@ Naziv datoteke: %1</translation>
         <translation>Pomoću gumba aktiviraj kartu. Pomoću funkcije &quot;povuci i ispusti&quot; pomiči kartu redoslijedom crtanja. </translation>
     </message>
     <message>
-        <location filename="../map/IMapList.ui" line="150"/>
+        <location filename="../map/IMapList.ui" line="153"/>
+        <source>Hide map behind others</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../map/IMapList.ui" line="168"/>
         <source>Move Up</source>
         <translation>Pomakni gore</translation>
     </message>
     <message>
-        <location filename="../map/IMapList.ui" line="153"/>
+        <location filename="../map/IMapList.ui" line="171"/>
         <source>Hide map behind previous map</source>
         <translation>Sakrij kartu iza prethodne karte</translation>
     </message>
     <message>
-        <location filename="../map/IMapList.ui" line="162"/>
-        <source>Move down</source>
+        <location filename="../map/IMapList.ui" line="174"/>
+        <source>Shift+Up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../map/IMapList.ui" line="183"/>
+        <source>Move Down</source>
         <translation>Pomakni dolje</translation>
     </message>
     <message>
-        <location filename="../map/IMapList.ui" line="165"/>
+        <location filename="../map/IMapList.ui" line="186"/>
         <source>Show map on top of next map</source>
         <translation>Prikaži kartu iznad sljedeće karte</translation>
     </message>
     <message>
-        <location filename="../map/IMapList.ui" line="174"/>
+        <location filename="../map/IMapList.ui" line="189"/>
+        <source>Shift+Down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../map/IMapList.ui" line="201"/>
+        <source>Show map on top of others</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../map/IMapList.ui" line="216"/>
         <source>Reload Maps</source>
         <translation>Ponovo učitaj Karte</translation>
     </message>
     <message>
-        <location filename="../map/IMapList.ui" line="183"/>
+        <location filename="../map/IMapList.ui" line="225"/>
         <source>Clear Filter</source>
         <translation>Očisti Filter</translation>
     </message>
     <message>
-        <location filename="../map/IMapList.ui" line="192"/>
+        <location filename="../map/IMapList.ui" line="234"/>
         <source>Remove</source>
         <translation>Ukloniti</translation>
     </message>
     <message>
-        <location filename="../map/IMapList.ui" line="195"/>
+        <location filename="../map/IMapList.ui" line="237"/>
         <source>Remove map from list</source>
         <translation>Ukloni kartu iz popisa</translation>
+    </message>
+    <message>
+        <location filename="../map/IMapList.ui" line="150"/>
+        <source>Move to Top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../map/IMapList.ui" line="156"/>
+        <source>Shift+Home</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../map/IMapList.ui" line="198"/>
+        <source>Move to Bottom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../map/IMapList.ui" line="204"/>
+        <source>Shift+End</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

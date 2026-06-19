@@ -44,6 +44,39 @@ void CMapTreeWidget::slotUpdateItem(const QString& key) {
   }
 }
 
+void CMapTreeWidget::keyPressEvent(QKeyEvent* e) {
+  const Qt::Key key = e->keyCombination().key();
+  const Qt::KeyboardModifiers mod = e->keyCombination().keyboardModifiers();
+  if ((mod != QFlags<Qt::KeyboardModifier>(Qt::ShiftModifier)) ||
+      (key != Qt::Key_Home && key != Qt::Key_End && key != Qt::Key_Up && key != Qt::Key_Down)) {
+    QTreeWidget::keyPressEvent(e);
+  } else {
+    CMapItem* map = dynamic_cast<CMapItem*>(currentItem());
+    if (map != nullptr) {
+      int from = currentIndex().row();
+      int to = -1;
+      int last = topLevelItemCount() - 1;
+      if (key == Qt::Key_Home && from > 0) {
+        to = 0;
+      } else if (key == Qt::Key_Up && from > 0) {
+        to = from - 1;
+      } else if (key == Qt::Key_Down && from < last) {
+        to = from + 1;
+      } else if (key == Qt::Key_End && from < last) {
+        to = last;
+      }
+      if (to != -1) {
+        map->showChildren(false);
+        takeTopLevelItem(from);
+        insertTopLevelItem(to, map);
+        map->showChildren(true);
+        setCurrentItem(map);
+        emit sigChanged();
+      }
+    }
+  }
+}
+
 void CMapTreeWidget::dragEnterEvent(QDragEnterEvent* e) {
   collapseAll();
   CMapItem* item = dynamic_cast<CMapItem*>(currentItem());
@@ -88,8 +121,10 @@ CMapList::CMapList(CCanvas* parent) : QWidget(parent), canvas(parent) {
 
   connect(treeWidget, &CMapTreeWidget::customContextMenuRequested, this, &CMapList::slotContextMenu);
   connect(treeWidget, &CMapTreeWidget::sigChanged, this, &CMapList::sigChanged);
+  connect(actionMoveHome, &QAction::triggered, this, &CMapList::slotMoveHome);
   connect(actionMoveUp, &QAction::triggered, this, &CMapList::slotMoveUp);
   connect(actionMoveDown, &QAction::triggered, this, &CMapList::slotMoveDown);
+  connect(actionMoveEnd, &QAction::triggered, this, &CMapList::slotMoveEnd);
   connect(actionRemove, &QAction::triggered, this, &CMapList::slotRemove);
   connect(actionReloadMaps, &QAction::triggered, this, &CMapList::slotReloadMaps);
   connect(labelHelpFillMapList, &QLabel::linkActivated, &CMainWindow::self(),
@@ -97,13 +132,16 @@ CMapList::CMapList(CCanvas* parent) : QWidget(parent), canvas(parent) {
   connect(lineFilter, &QLineEdit::textChanged, this, &CMapList::slotFilter);
 
   menu = new QMenu(this);
+  menu->addAction(actionMoveHome);
   menu->addAction(actionMoveUp);
   menu->addAction(actionMoveDown);
+  menu->addAction(actionMoveEnd);
   menu->addSeparator();
   menu->addAction(actionRemove);
   menu->addSeparator();
   menu->addAction(actionReloadMaps);
   menu->addAction(CMainWindow::self().getMapSetupAction());
+  menu->setToolTipsVisible(true);
 }
 
 CMapList::~CMapList() {}
@@ -180,44 +218,55 @@ void CMapList::moveMapToTop(CMapItem* map) {
   map->showChildren(true);
 }
 
+void CMapList::moveMapItem(CMapItem* map, const int from, const int to) {
+  map->showChildren(false);
+  treeWidget->takeTopLevelItem(from);
+  treeWidget->insertTopLevelItem(to, map);
+  map->showChildren(true);
+  treeWidget->setCurrentItem(map);
+  emit treeWidget->sigChanged();
+}
+
+void CMapList::slotMoveHome() {
+  CMapItem* item = dynamic_cast<CMapItem*>(treeWidget->currentItem());
+  if (item != nullptr) {
+    int from = treeWidget->currentIndex().row();
+    if (from > 0) {
+      moveMapItem(item, from, 0);
+    }
+  }
+}
+
 void CMapList::slotMoveUp() {
   CMapItem* item = dynamic_cast<CMapItem*>(treeWidget->currentItem());
-  if (item == nullptr) {
-    return;
+  if (item != nullptr) {
+    int from = treeWidget->currentIndex().row();
+    if (from > 0) {
+      moveMapItem(item, from, from - 1);
+    }
   }
-
-  int index = treeWidget->indexOfTopLevelItem(item);
-  if (index == NOIDX) {
-    return;
-  }
-
-  item->showChildren(false);
-  treeWidget->setItemWidget(item, 0, nullptr);
-  treeWidget->takeTopLevelItem(index);
-  treeWidget->insertTopLevelItem(index - 1, item);
-  item->showChildren(true);
-  treeWidget->setCurrentItem(0);
-  emit treeWidget->sigChanged();
 }
 
 void CMapList::slotMoveDown() {
   CMapItem* item = dynamic_cast<CMapItem*>(treeWidget->currentItem());
-  if (item == nullptr) {
-    return;
+  if (item != nullptr) {
+    int from = treeWidget->currentIndex().row();
+    int last = treeWidget->topLevelItemCount() - 1;
+    if (from < last) {
+      moveMapItem(item, from, from + 1);
+    }
   }
+}
 
-  int index = treeWidget->indexOfTopLevelItem(item);
-  if (index == NOIDX) {
-    return;
+void CMapList::slotMoveEnd() {
+  CMapItem* item = dynamic_cast<CMapItem*>(treeWidget->currentItem());
+  if (item != nullptr) {
+    int from = treeWidget->currentIndex().row();
+    int last = treeWidget->topLevelItemCount() - 1;
+    if (from < last) {
+      moveMapItem(item, from, last);
+    }
   }
-
-  item->showChildren(false);
-  treeWidget->setItemWidget(item, 0, nullptr);
-  treeWidget->takeTopLevelItem(index);
-  treeWidget->insertTopLevelItem(index + 1, item);
-  item->showChildren(true);
-  treeWidget->setCurrentItem(0);
-  emit treeWidget->sigChanged();
 }
 
 void CMapList::slotRemove() {
@@ -239,8 +288,10 @@ void CMapList::slotContextMenu(const QPoint& point) {
 
   bool itemIsSelected = nullptr != item;
 
+  actionMoveHome->setEnabled(itemIsSelected && (treeWidget->itemAbove(item) != 0));
   actionMoveUp->setEnabled(itemIsSelected && (treeWidget->itemAbove(item) != 0));
   actionMoveDown->setEnabled(itemIsSelected && (treeWidget->itemBelow(item) != 0));
+  actionMoveEnd->setEnabled(itemIsSelected && (treeWidget->itemBelow(item) != 0));
   actionRemove->setVisible(itemIsSelected && item->getStatus() == IMapItem::eStatus::Missing);
 
   QPoint p = treeWidget->mapToGlobal(point);

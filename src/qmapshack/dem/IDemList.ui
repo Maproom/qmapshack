@@ -156,6 +156,24 @@
     </layout>
    </item>
   </layout>
+  <action name="actionMoveHome">
+   <property name="icon">
+    <iconset resource="../resources.qrc">
+     <normaloff>:/icons/32x32/ToTop.png</normaloff>:/icons/32x32/ToTop.png</iconset>
+   </property>
+   <property name="text">
+    <string>Move to Top</string>
+   </property>
+   <property name="toolTip">
+    <string>Hide DEM behind others</string>
+   </property>
+   <property name="shortcut">
+    <string>Shift+Home</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::TextHeuristicRole</enum>
+   </property>
+  </action>
   <action name="actionMoveUp">
    <property name="icon">
     <iconset resource="../resources.qrc">
@@ -167,6 +185,9 @@
    <property name="toolTip">
     <string>Hide DEM behind previous one</string>
    </property>
+   <property name="shortcut">
+    <string>Shift+Up</string>
+   </property>
   </action>
   <action name="actionMoveDown">
    <property name="icon">
@@ -174,10 +195,31 @@
      <normaloff>:/icons/32x32/Down.png</normaloff>:/icons/32x32/Down.png</iconset>
    </property>
    <property name="text">
-    <string>Move down</string>
+    <string>Move Down</string>
    </property>
    <property name="toolTip">
     <string>Show DEM on top of next one</string>
+   </property>
+   <property name="shortcut">
+    <string>Shift+Down</string>
+   </property>
+  </action>
+  <action name="actionMoveEnd">
+   <property name="icon">
+    <iconset resource="../resources.qrc">
+     <normaloff>:/icons/32x32/ToBottom.png</normaloff>:/icons/32x32/ToBottom.png</iconset>
+   </property>
+   <property name="text">
+    <string>Move to Bottom</string>
+   </property>
+   <property name="toolTip">
+    <string>Show DEM on top of others</string>
+   </property>
+   <property name="shortcut">
+    <string>Shift+End</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::TextHeuristicRole</enum>
    </property>
   </action>
   <action name="actionReloadDem">

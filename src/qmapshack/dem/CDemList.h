@@ -37,6 +37,7 @@ class CDemTreeWidget : public QTreeWidget {
   void sigChanged();
 
  protected:
+  void keyPressEvent(QKeyEvent* e) override;
   void dragEnterEvent(QDragEnterEvent* e) override;
   void dragLeaveEvent(QDragLeaveEvent* e) override;
   void dropEvent(QDropEvent* event) override;
@@ -95,14 +96,24 @@ class CDemList : public QWidget, private Ui::IDemsList {
   void sigChanged();
 
  private slots:
+  void slotMoveHome();
   void slotMoveUp();
   void slotMoveDown();
+  void slotMoveEnd();
   void slotRemove();
   void slotReloadDem();
   void slotContextMenu(const QPoint& point);
   void slotFilter(const QString& str);
 
  private:
+  /**
+   * @brief Move dem item within dem list
+   * @param dem     list item
+   * @param from    from row
+   * @param to      to row
+   */
+  void moveDemItem(CDemItem* dem, const int from, const int to);
+
   QMenu* menu;
   QPointer<CCanvas> canvas;
   QPointer<QTabWidget> tabWidget;

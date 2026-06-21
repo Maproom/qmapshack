@@ -171,7 +171,7 @@
     <string>Shift+Home</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::MenuRole::TextHeuristicRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionMoveUp">
@@ -188,6 +188,9 @@
    <property name="shortcut">
     <string>Shift+Up</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
   </action>
   <action name="actionMoveDown">
    <property name="icon">
@@ -202,6 +205,9 @@
    </property>
    <property name="shortcut">
     <string>Shift+Down</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionMoveEnd">
@@ -219,7 +225,7 @@
     <string>Shift+End</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::MenuRole::TextHeuristicRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionReloadDem">
@@ -230,6 +236,9 @@
    <property name="text">
     <string>Reload DEM</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
   </action>
   <action name="actionClearFilter">
    <property name="icon">
@@ -238,6 +247,9 @@
    </property>
    <property name="text">
     <string>Clear Filter</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionRemove">

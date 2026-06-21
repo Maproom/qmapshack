@@ -35,6 +35,7 @@ class CMapTreeWidget : public QTreeWidget {
 
  signals:
   void sigChanged();
+  void sigMoveItem(CMapItem* map, int from, int to);
 
  protected:
   void keyPressEvent(QKeyEvent* e) override;

@@ -50,30 +50,29 @@ void CMapTreeWidget::keyPressEvent(QKeyEvent* e) {
   if ((mod != QFlags<Qt::KeyboardModifier>(Qt::ShiftModifier)) ||
       (key != Qt::Key_Home && key != Qt::Key_End && key != Qt::Key_Up && key != Qt::Key_Down)) {
     QTreeWidget::keyPressEvent(e);
-  } else {
-    CMapItem* map = dynamic_cast<CMapItem*>(currentItem());
-    if (map != nullptr) {
-      int from = currentIndex().row();
-      int to = -1;
-      int last = topLevelItemCount() - 1;
-      if (key == Qt::Key_Home && from > 0) {
-        to = 0;
-      } else if (key == Qt::Key_Up && from > 0) {
-        to = from - 1;
-      } else if (key == Qt::Key_Down && from < last) {
-        to = from + 1;
-      } else if (key == Qt::Key_End && from < last) {
-        to = last;
-      }
-      if (to != -1) {
-        map->showChildren(false);
-        takeTopLevelItem(from);
-        insertTopLevelItem(to, map);
-        map->showChildren(true);
-        setCurrentItem(map);
-        emit sigChanged();
-      }
-    }
+    return;
+  }
+
+  CMapItem* map = dynamic_cast<CMapItem*>(currentItem());
+  if (map == nullptr) {
+    return;
+  }
+
+  const int from = currentIndex().row();
+  const int last = topLevelItemCount() - 1;
+  int to = -1;
+  if (key == Qt::Key_Home && from > 0) {
+    to = 0;
+  } else if (key == Qt::Key_Up && from > 0) {
+    to = from - 1;
+  } else if (key == Qt::Key_Down && from < last) {
+    to = from + 1;
+  } else if (key == Qt::Key_End && from < last) {
+    to = last;
+  }
+
+  if (to != -1) {
+    emit sigMoveItem(map, from, to);
   }
 }
 
@@ -121,6 +120,7 @@ CMapList::CMapList(CCanvas* parent) : QWidget(parent), canvas(parent) {
 
   connect(treeWidget, &CMapTreeWidget::customContextMenuRequested, this, &CMapList::slotContextMenu);
   connect(treeWidget, &CMapTreeWidget::sigChanged, this, &CMapList::sigChanged);
+  connect(treeWidget, &CMapTreeWidget::sigMoveItem, this, &CMapList::moveMapItem);
   connect(actionMoveHome, &QAction::triggered, this, &CMapList::slotMoveHome);
   connect(actionMoveUp, &QAction::triggered, this, &CMapList::slotMoveUp);
   connect(actionMoveDown, &QAction::triggered, this, &CMapList::slotMoveDown);

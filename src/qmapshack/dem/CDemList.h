@@ -35,6 +35,7 @@ class CDemTreeWidget : public QTreeWidget {
 
  signals:
   void sigChanged();
+  void sigMoveItem(CDemItem* dem, int from, int to);
 
  protected:
   void keyPressEvent(QKeyEvent* e) override;

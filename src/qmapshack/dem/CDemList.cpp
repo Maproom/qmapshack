@@ -49,30 +49,29 @@ void CDemTreeWidget::keyPressEvent(QKeyEvent* e) {
   if ((mod != QFlags<Qt::KeyboardModifier>(Qt::ShiftModifier)) ||
       (key != Qt::Key_Home && key != Qt::Key_End && key != Qt::Key_Up && key != Qt::Key_Down)) {
     QTreeWidget::keyPressEvent(e);
-  } else {
-    CDemItem* dem = dynamic_cast<CDemItem*>(currentItem());
-    if (dem != nullptr) {
-      int from = currentIndex().row();
-      int to = -1;
-      int last = topLevelItemCount() - 1;
-      if (key == Qt::Key_Home && from > 0) {
-        to = 0;
-      } else if (key == Qt::Key_Up && from > 0) {
-        to = from - 1;
-      } else if (key == Qt::Key_Down && from < last) {
-        to = from + 1;
-      } else if (key == Qt::Key_End && from < last) {
-        to = last;
-      }
-      if (to != -1) {
-        dem->showChildren(false);
-        takeTopLevelItem(from);
-        insertTopLevelItem(to, dem);
-        dem->showChildren(true);
-        setCurrentItem(dem);
-        emit sigChanged();
-      }
-    }
+    return;
+  }
+
+  CDemItem* dem = dynamic_cast<CDemItem*>(currentItem());
+  if (dem == nullptr) {
+    return;
+  }
+
+  const int from = currentIndex().row();
+  const int last = topLevelItemCount() - 1;
+  int to = -1;
+  if (key == Qt::Key_Home && from > 0) {
+    to = 0;
+  } else if (key == Qt::Key_Up && from > 0) {
+    to = from - 1;
+  } else if (key == Qt::Key_Down && from < last) {
+    to = from + 1;
+  } else if (key == Qt::Key_End && from < last) {
+    to = last;
+  }
+
+  if (to != -1) {
+    emit sigMoveItem(dem, from, to);
   }
 }
 
@@ -121,6 +120,7 @@ CDemList::CDemList(CCanvas* parent) : QWidget(parent), canvas(parent) {
 
   connect(treeWidget, &CDemTreeWidget::customContextMenuRequested, this, &CDemList::slotContextMenu);
   connect(treeWidget, &CDemTreeWidget::sigChanged, this, &CDemList::sigChanged);
+  connect(treeWidget, &CDemTreeWidget::sigMoveItem, this, &CDemList::moveDemItem);
   connect(actionMoveHome, &QAction::triggered, this, &CDemList::slotMoveHome);
   connect(actionMoveUp, &QAction::triggered, this, &CDemList::slotMoveUp);
   connect(actionMoveDown, &QAction::triggered, this, &CDemList::slotMoveDown);

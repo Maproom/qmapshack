@@ -45,34 +45,21 @@ void CMapTreeWidget::slotUpdateItem(const QString& key) {
 }
 
 void CMapTreeWidget::keyPressEvent(QKeyEvent* e) {
-  const Qt::Key key = e->keyCombination().key();
-  const Qt::KeyboardModifiers mod = e->keyCombination().keyboardModifiers();
-  if ((mod != QFlags<Qt::KeyboardModifier>(Qt::ShiftModifier)) ||
-      (key != Qt::Key_Home && key != Qt::Key_End && key != Qt::Key_Up && key != Qt::Key_Down)) {
-    QTreeWidget::keyPressEvent(e);
-    return;
-  }
-
-  CMapItem* map = dynamic_cast<CMapItem*>(currentItem());
-  if (map == nullptr) {
-    return;
-  }
-
-  const int from = currentIndex().row();
-  const int last = topLevelItemCount() - 1;
-  int to = -1;
-  if (key == Qt::Key_Home && from > 0) {
-    to = 0;
-  } else if (key == Qt::Key_Up && from > 0) {
-    to = from - 1;
-  } else if (key == Qt::Key_Down && from < last) {
-    to = from + 1;
-  } else if (key == Qt::Key_End && from < last) {
-    to = last;
-  }
-
-  if (to != -1) {
-    emit sigMoveItem(map, from, to);
+  switch (e->keyCombination()) {
+    case QKeyCombination(Qt::SHIFT, Qt::Key_Home):
+      emit sigMoveHome();
+      break;
+    case QKeyCombination(Qt::SHIFT, Qt::Key_Up):
+      emit sigMoveUp();
+      break;
+    case QKeyCombination(Qt::SHIFT, Qt::Key_Down):
+      emit sigMoveDown();
+      break;
+    case QKeyCombination(Qt::SHIFT, Qt::Key_End):
+      emit sigMoveEnd();
+      break;
+    default:
+      QTreeWidget::keyPressEvent(e);
   }
 }
 
@@ -116,7 +103,10 @@ CMapList::CMapList(CCanvas* parent) : QWidget(parent), canvas(parent) {
 
   connect(treeWidget, &CMapTreeWidget::customContextMenuRequested, this, &CMapList::slotContextMenu);
   connect(treeWidget, &CMapTreeWidget::sigChanged, this, &CMapList::sigChanged);
-  connect(treeWidget, &CMapTreeWidget::sigMoveItem, this, &CMapList::moveMapItem);
+  connect(treeWidget, &CMapTreeWidget::sigMoveHome, this, &CMapList::slotMoveHome);
+  connect(treeWidget, &CMapTreeWidget::sigMoveUp, this, &CMapList::slotMoveUp);
+  connect(treeWidget, &CMapTreeWidget::sigMoveDown, this, &CMapList::slotMoveDown);
+  connect(treeWidget, &CMapTreeWidget::sigMoveEnd, this, &CMapList::slotMoveEnd);
   connect(actionMoveHome, &QAction::triggered, this, &CMapList::slotMoveHome);
   connect(actionMoveUp, &QAction::triggered, this, &CMapList::slotMoveUp);
   connect(actionMoveDown, &QAction::triggered, this, &CMapList::slotMoveDown);

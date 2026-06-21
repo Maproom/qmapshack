@@ -77,10 +77,6 @@ void CDemTreeWidget::keyPressEvent(QKeyEvent* e) {
 
 void CDemTreeWidget::dragEnterEvent(QDragEnterEvent* e) {
   collapseAll();
-  CDemItem* item = dynamic_cast<CDemItem*>(currentItem());
-  if (item) {
-    setItemWidget(item, 0, nullptr);
-  }
   QTreeWidget::dragEnterEvent(e);
 }
 
@@ -212,7 +208,6 @@ void CDemList::moveDemToTop(CDemItem* dem) {
     return;
   }
   dem->showChildren(false);
-  treeWidget->setItemWidget(dem, 0, nullptr);
   treeWidget->takeTopLevelItem(index);
   treeWidget->insertTopLevelItem(0, dem);
   dem->showChildren(true);

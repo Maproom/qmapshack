@@ -78,10 +78,6 @@ void CMapTreeWidget::keyPressEvent(QKeyEvent* e) {
 
 void CMapTreeWidget::dragEnterEvent(QDragEnterEvent* e) {
   collapseAll();
-  CMapItem* item = dynamic_cast<CMapItem*>(currentItem());
-  if (item) {
-    setItemWidget(item, 0, nullptr);
-  }
   QTreeWidget::dragEnterEvent(e);
 }
 
@@ -212,7 +208,6 @@ void CMapList::moveMapToTop(CMapItem* map) {
     return;
   }
   map->showChildren(false);
-  treeWidget->setItemWidget(map, 0, nullptr);
   treeWidget->takeTopLevelItem(index);
   treeWidget->insertTopLevelItem(0, map);
   map->showChildren(true);

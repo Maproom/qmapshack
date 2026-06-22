@@ -148,6 +148,17 @@ class IDem : public IDrawObject {
   void slotShowElevationShadeScale(bool yes);
 
  protected:
+  /**
+     @brief Per-pixel shading algorithms shared by all DEM backends.
+
+     @param data   raw elevation samples, kept 1px wider/taller than `out` on every
+                    side so each pixel's 3x3 (or 4x4) neighborhood window can be read
+                    even at the edges of the requested area. Indexed with stride+2.
+     @param out    output buffer, `w` x `h` pixels at row stride `stride`
+     @param x, y   top-left corner of the chunk to process, in `out`/`stride` coordinates
+     @param stride row stride of `out`, in pixels
+     @param w, h   size of the chunk to process
+   */
   void hillshading(const QVector<float>& data, QVector<uchar>& out, quint32 x, quint32 y, quint32 stride, quint32 w,
                    quint32 h) const;
 

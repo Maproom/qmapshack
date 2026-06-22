@@ -140,6 +140,18 @@ class IDem : public IDrawObject {
                         quint32 h) const;
 
   /**
+     @brief Bilinear interpolation between the 4 corners of a unit square.
+     @param a top-left value (x=0, y=0)
+     @param b top-right value (x=1, y=0)
+     @param c bottom-left value (x=0, y=1)
+     @param d bottom-right value (x=1, y=1)
+     @param x Fractional value (0..1) for interpolation in x
+     @param y Fractional value (0..1) for interpolation in y
+     @return  Interpolated value
+   */
+  static qreal bilinear(qreal a, qreal b, qreal c, qreal d, qreal x, qreal y);
+
+  /**
      @brief Slope in degrees based on a window. Origin is at point (1,1), counting from zero.
      @param win2  window data
      @param size  size of window (eWinsize3x3 or eWinsize4x4)

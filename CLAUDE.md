@@ -248,11 +248,10 @@ and remove the detail once fixed (or leave a one-liner if worth remembering long
 
 ### Readability / maintainability
 
-- [ ] **Duplicated bilinear-interpolation math** — `CDemVRT.cpp:234-239` (`getElevationAt`)
-  and `IDem.cpp:299-320` (4x4 branch of `slopeOfWindowInterp`) implement the same
-  `a + x(b-a) + y(c-a) + xy(a-b-c+d)` formula, written out differently each time (the
-  4x4 branch is 9 dense, easy-to-mistype lines). Extract one `bilinear(a,b,c,d,x,y)`
-  helper and reuse in both places.
+- [x] **Duplicated bilinear-interpolation math** — fixed: added
+  `static qreal IDem::bilinear(a, b, c, d, x, y)` (`IDem.h`/`IDem.cpp`) and reused it in
+  both `CDemVRT::getElevationAt` (`CDemVRT.cpp`) and the 4x4 branch of
+  `IDem::slopeOfWindowInterp` (`IDem.cpp`), replacing the 9 dense hand-expanded lines.
 
 - [ ] **Macros leak past their function** — `IDem.cpp:218-222`
   `ZFACT`, `ZFACT_BY_ZFACT`, `SIN_ALT`, `ZFACT_COS_ALT`, `AZ` are `#define`d inside

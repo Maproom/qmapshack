@@ -57,6 +57,13 @@ bool CDemVRT::allReferencedFilesExist(GDALDataset* dataset, QString& missingFile
   return allExist;
 }
 
+void CDemVRT::closeDataset(GDALDataset*& dataset) {
+  if (dataset != nullptr) {
+    GDALClose(dataset);
+    dataset = nullptr;
+  }
+}
+
 CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent) : IDem(parent), filename(filename) {
   qDebug() << "------------------------------";
   qDebug() << "VRT: try to open" << filename;
@@ -70,8 +77,7 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent) : IDem(parent), file
 
   QString missingFile;
   if (!allReferencedFilesExist(dataset, missingFile)) {
-    GDALClose(dataset);
-    dataset = nullptr;
+    closeDataset(dataset);
     QMessageBox::warning(
         CMainWindow::getBestWidgetForParent(), tr("Error..."),
         tr("File does not exist:") % '\n' % missingFile % '\n' % tr("referenced by file:") % '\n' % filename);
@@ -79,8 +85,7 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent) : IDem(parent), file
   }
 
   if (dataset->GetRasterCount() != 1) {
-    GDALClose(dataset);
-    dataset = nullptr;
+    closeDataset(dataset);
     QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."),
                          tr("DEM must have exactly one raster band:") % '\n' % filename);
     return;
@@ -88,8 +93,7 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent) : IDem(parent), file
 
   GDALRasterBand* pBand = dataset->GetRasterBand(1);
   if (nullptr == pBand) {
-    GDALClose(dataset);
-    dataset = nullptr;
+    closeDataset(dataset);
     QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."),
                          tr("DEM must have exactly one raster band:") % '\n' % filename);
     return;
@@ -98,14 +102,13 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent) : IDem(parent), file
   const GDALDataType bandType = pBand->GetRasterDataType();
   if (bandType != GDT_Int16 && bandType != GDT_UInt16 && bandType != GDT_Int32 && bandType != GDT_UInt32 &&
       bandType != GDT_Float32) {
-    GDALClose(dataset);
-    dataset = nullptr;
+    closeDataset(dataset);
     QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."),
                          tr("DEM must have one band with 16bit or 32bit data:") % '\n' % filename);
     return;
   }
 
-  hasOverviews = pBand->GetOverviewCount() != 0;
+  const bool hasOverviews = pBand->GetOverviewCount() != 0;
   qDebug() << "has overviews" << hasOverviews;
 
   noData = pBand->GetNoDataValue(&hasNoData);
@@ -130,8 +133,7 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent) : IDem(parent), file
     GDALDestroyWarpOptions(psOptions);
 
     if (dataset == nullptr) {
-      GDALClose(srcDataset);
-      srcDataset = nullptr;
+      closeDataset(srcDataset);
       QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."),
                            tr("Failed to create Warp for:") % '\n' % filename);
       return;
@@ -158,10 +160,8 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent) : IDem(parent), file
   proj.init(dataset->GetProjectionRef(), "EPSG:4326");
 
   if (!proj.isValid()) {
-    GDALClose(dataset);
-    dataset = nullptr;
-    GDALClose(srcDataset);
-    srcDataset = nullptr;
+    closeDataset(dataset);
+    closeDataset(srcDataset);
     QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."),
                          tr("No georeference information found:") % '\n' % filename);
     return;
@@ -211,8 +211,8 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent) : IDem(parent), file
 CDemVRT::~CDemVRT() {
   threadPool.waitForDone();
   QMutexLocker lock(&mutex);
-  GDALClose(dataset);
-  GDALClose(srcDataset);
+  closeDataset(dataset);
+  closeDataset(srcDataset);
 }
 
 void CDemVRT::slotNeedsRedraw() { threadPool.clear(); }

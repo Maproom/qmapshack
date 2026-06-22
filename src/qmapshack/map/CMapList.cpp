@@ -45,21 +45,17 @@ void CMapTreeWidget::slotUpdateItem(const QString& key) {
 }
 
 void CMapTreeWidget::keyPressEvent(QKeyEvent* e) {
-  switch (e->keyCombination()) {
-    case QKeyCombination(Qt::SHIFT, Qt::Key_Home):
-      emit sigMoveHome();
-      break;
-    case QKeyCombination(Qt::SHIFT, Qt::Key_Up):
-      emit sigMoveUp();
-      break;
-    case QKeyCombination(Qt::SHIFT, Qt::Key_Down):
-      emit sigMoveDown();
-      break;
-    case QKeyCombination(Qt::SHIFT, Qt::Key_End):
-      emit sigMoveEnd();
-      break;
-    default:
-      QTreeWidget::keyPressEvent(e);
+  const QKeyCombination keyCombination = e->keyCombination();
+  if (keyCombination == QKeyCombination(Qt::SHIFT, Qt::Key_Home)) {
+    emit sigMoveHome();
+  } else if (keyCombination == QKeyCombination(Qt::SHIFT, Qt::Key_Up)) {
+    emit sigMoveUp();
+  } else if (keyCombination == QKeyCombination(Qt::SHIFT, Qt::Key_Down)) {
+    emit sigMoveDown();
+  } else if (keyCombination == QKeyCombination(Qt::SHIFT, Qt::Key_End)) {
+    emit sigMoveEnd();
+  } else {
+    QTreeWidget::keyPressEvent(e);
   }
 }
 

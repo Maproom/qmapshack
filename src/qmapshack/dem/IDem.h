@@ -67,6 +67,14 @@ class IDem : public IDrawObject {
 
   bool doHillshading() const { return bHillshading; }
 
+  /**
+     @brief Get the hillshading z-factor as the slider value that produced it.
+
+     Reverses the encoding done by slotSetFactorHillshade(): a factor of 1.0 maps back
+     to 0, factors > 1 map back to themselves, and factors < 1 map back to -1/factor.
+
+     @return the slider value
+   */
   int getFactorHillshading() const;
 
   bool doSlopeShading() const { return bSlopeShading; }
@@ -109,6 +117,18 @@ class IDem : public IDrawObject {
  public slots:
   void slotSetHillshading(bool yes) { bHillshading = yes; }
 
+  /**
+     @brief Set the hillshading z-factor (vertical exaggeration) from a slider value.
+
+     One integer slider covers both >1 and <1 factors symmetrically:
+     - f == 0: neutral factor 1.0
+     - f > 0:  direct multiplier f
+     - f < 0:  fractional reduction 1/|f|
+
+     getFactorHillshading() reverses this encoding.
+
+     @param f the slider value
+   */
   void slotSetFactorHillshade(int f);
 
   void slotSetSlopeShading(bool yes) { bSlopeShading = yes; }

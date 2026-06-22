@@ -299,14 +299,15 @@ and remove the detail once fixed (or leave a one-liner if worth remembering long
 - [x] **Inconsistent cast style** — fixed: `dataset = (GDALDataset*)GDALOpen(...)` is now
   `dataset = GDALDataset::FromHandle(GDALOpen(...))`, matching the rest of the file.
 
-- [ ] **Leftover `qDebug()` spam** in the constructor (separator lines, cryptic `"FF"`/
-  `"RR"` tags for the transforms) — fires for every DEM loaded. Remove or move behind a
-  `QLoggingCategory`.
+- [~] **`qDebug()` logging in the constructor** (separator lines, `"FF"`/`"RR"` tags for
+  the transforms, etc.) — **keep as-is.** Oliver: this output is important (presumably
+  for diagnosing DEM-loading issues in the field), not leftover debug cruft. Don't
+  remove or gate it behind a `QLoggingCategory` without checking first.
 
-- [ ] **Undocumented encoding convention** — `IDem.cpp:162-170, 206-214`
-  `slotSetFactorHillshade(int)`/`getFactorHillshading()` encode UI slider values as
-  "negative → 1/|f|, 0 → neutral, positive → direct multiplier" with no comment
-  explaining why.
+- [x] **Undocumented encoding convention** — fixed: added doxygen blocks to
+  `slotSetFactorHillshade(int)`/`getFactorHillshading()` (`IDem.h`) explaining the
+  "negative → 1/|f|, 0 → neutral, positive → direct multiplier" slider encoding and that
+  the two methods reverse each other.
 
 - [ ] **Unexplained `QThread::msleep(100)`** — `CDemVRT.cpp:293`
   No comment explaining it throttles the draw thread when this DEM has nothing to

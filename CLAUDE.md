@@ -199,14 +199,32 @@ and remove the detail once fixed (or leave a one-liner if worth remembering long
   `qreal o2 = qMin(o1 + 0.4, 1.0);` instead of falling back to plain `o1` when
   `o1 + 0.4 >= 1.0`.
 
-- [ ] **Destructor closes GDAL dataset without taking `mutex`** — `CDemVRT.cpp:196-200`
-  Every other access to `dataset` (`draw()`, `getElevationAt()`, `getSlopeAt()`) locks
-  `mutex` first because GDAL isn't reentrant. Traced the call paths in `CDemList`/
-  `CDemDraw`/`IDrawContext`: there is no synchronization between deleting a DEM (e.g.
-  `CDemList::slotRemove()`) and the background draw thread, which can be mid-`draw()`
-  holding `mutex` on this exact dataset at the same time. At minimum, lock `mutex` in
-  the destructor before `GDALClose()`. Doesn't fully fix the lifetime issue (the draw
-  thread isn't told to stop before deletion) but closes the most obvious race.
+- [x] **Destructor closes GDAL dataset without taking `mutex`** — `CDemVRT.cpp:196-201`.
+  Fixed: destructor now does `QMutexLocker lock(&mutex);` before the `GDALClose()` calls,
+  matching `draw()`/`getElevationAt()`/`getSlopeAt()`.
+
+  Follow-up investigation on "can the draw thread actually be deleting-while-drawing":
+  traced `CDemDraw::drawt()` (`CDemDraw.cpp:348-365`) and `CDemItem::activate()`/
+  `deactivate()` (`CDemItem.cpp:167-243`, where `delete demfile` actually happens in
+  normal use) — both already take the static `CDemItem::mutexActiveDems`
+  (`QRecursiveMutex`), and `drawt()` holds it for its *entire* iteration over all active
+  DEMs, not just per-item. So in the exercised (de)activation path, the draw thread can
+  never be mid-`draw()` on an item while it's being destroyed — `deactivate()` blocks on
+  that mutex until `drawt()`'s current pass finishes. There's no explicit "stop the
+  thread" signal/API needed for this case; `mutexActiveDems` already serializes it. The
+  new `CDemVRT::mutex` lock in the destructor is defense-in-depth for the class's own
+  invariant, independent of callers using `mutexActiveDems` correctly.
+
+  One real gap found along the way (separate, not fixed yet): `CDemList::slotRemove()`
+  (`CDemList.cpp:253-265`) deletes a `CDemItem` directly via
+  `delete treeWidget->takeTopLevelItem(index)`, bypassing `deactivate()` and
+  `mutexActiveDems` entirely. `~CDemItem()` is empty and never touches `demfile`, so this
+  can't trigger the dataset-close race — but if the removed item ever had an active
+  `demfile`, the `CDemVRT` (parented to `CDemDraw`, not to `CDemItem`) would just leak
+  rather than crash. `actionRemove` is only enabled for `eStatus::Missing` items, which
+  per `CDemItem::loadConfig()` never reach activation, so this looks unreachable today —
+  add to the list as low-priority hardening (call `item->activate(false)` before delete)
+  if we want to be defensive.
 
 - [ ] **Bounding box from wrong corner pairs** — `CDemVRT.cpp:325-328`
   ```cpp

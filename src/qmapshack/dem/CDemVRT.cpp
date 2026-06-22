@@ -195,6 +195,7 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent) : IDem(parent), file
 
 CDemVRT::~CDemVRT() {
   threadPool.waitForDone();
+  QMutexLocker lock(&mutex);
   GDALClose(dataset);
   GDALClose(srcDataset);
 }

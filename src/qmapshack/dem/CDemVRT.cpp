@@ -307,21 +307,16 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf) {
     buf_scale_y = 1.0;
   }
 
-  // corners of the area we shall draw
-  QPointF pt1 = buf.ref1;
-  QPointF pt2 = buf.ref2;
-  QPointF pt3 = buf.ref3;
-  QPointF pt4 = buf.ref4;
-
-  proj.transform(pt1, PJ_INV);
-  proj.transform(pt2, PJ_INV);
-  proj.transform(pt3, PJ_INV);
-  proj.transform(pt4, PJ_INV);
-
-  pt1 = trInv.map(pt1);
-  pt2 = trInv.map(pt2);
-  pt3 = trInv.map(pt3);
-  pt4 = trInv.map(pt4);
+  // corners of the area we shall draw, converted from the canvas projection into the
+  // DEM's own pixel coordinate space
+  auto toDemPixel = [this](QPointF pt) {
+    proj.transform(pt, PJ_INV);
+    return trInv.map(pt);
+  };
+  const QPointF pt1 = toDemPixel(buf.ref1);
+  const QPointF pt2 = toDemPixel(buf.ref2);
+  const QPointF pt3 = toDemPixel(buf.ref3);
+  const QPointF pt4 = toDemPixel(buf.ref4);
 
   // bounds of the area to draw in the coordinate space of the DEM
   // use all four corners (not just the nominally adjacent pair) since a rotated
@@ -434,6 +429,22 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf) {
     return true;
   };
 
+  // compute one shading layer and paint it into dest at the given opacity; colorTable
+  // may be null (e.g. for the alpha-only slope shading layer)
+  auto drawShadingLayer = [=, this, &outbuf](shadeFnPtr shadeFn, QImage::Format format, const QVector<QRgb>* colorTable,
+                                             qreal opacity, QPainter& p, const QRectF& dest) {
+    if (!computeShading(shadeFn)) {
+      return false;
+    }
+    QImage img(outbuf.constData(), w_used, h_used, w_used, format);
+    if (colorTable != nullptr) {
+      img.setColorTable(*colorTable);
+    }
+    p.setOpacity(opacity);
+    p.drawImage(dest, img);
+    return true;
+  };
+
   // get pixel offset of top left buffer corner
   QPointF pp = buf.ref1;
   dem->convertRad2Px(pp);
@@ -445,7 +456,6 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf) {
 
   qreal o1 = getOpacity() / 100.0;
   qreal o2 = qMin(o1 + 0.4, 1.0);
-  p.setOpacity(o1);
 
   // compute the destination rect we will draw the shadings into
   QPointF top_left = trFwd.map(QPointF(left, top));
@@ -456,48 +466,22 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf) {
   dem->convertRad2Px(bottom_right);
   QRectF dest(top_left, bottom_right);
 
-  if (doHillshading()) {
-    if (!computeShading(&CDemVRT::hillshading)) {
-      return;
-    }
-    QImage img(outbuf.constData(), w_used, h_used, w_used, QImage::Format_Indexed8);
-    img.setColorTable(graytable);
-    p.drawImage(dest, img);
+  if (doHillshading() && !drawShadingLayer(&CDemVRT::hillshading, QImage::Format_Indexed8, &graytable, o1, p, dest)) {
+    return;
   }
-  if (doSlopeShading()) {
-    if (!computeShading(&CDemVRT::slopeShading)) {
-      return;
-    }
-    QImage img(outbuf.constData(), w_used, h_used, w_used, QImage::Format_Alpha8);
-    p.drawImage(dest, img);
+  if (doSlopeShading() && !drawShadingLayer(&CDemVRT::slopeShading, QImage::Format_Alpha8, nullptr, o1, p, dest)) {
+    return;
   }
-  if (doSlopeColor()) {
-    if (!computeShading(&CDemVRT::slopecolor)) {
-      return;
-    }
-    QImage img(outbuf.constData(), w_used, h_used, w_used, QImage::Format_Indexed8);
-    img.setColorTable(slopetable);
-    p.setOpacity(o2);
-    p.drawImage(dest, img);
-    p.setOpacity(o1);
+  if (doSlopeColor() && !drawShadingLayer(&CDemVRT::slopecolor, QImage::Format_Indexed8, &slopetable, o2, p, dest)) {
+    return;
   }
-  if (doElevationLimit()) {
-    if (!computeShading(&CDemVRT::elevationLimit)) {
-      return;
-    }
-    QImage img(outbuf.constData(), w_used, h_used, w_used, QImage::Format_Indexed8);
-    img.setColorTable(elevationtable);
-    p.setOpacity(o2);
-    p.drawImage(dest, img);
-    p.setOpacity(o1);
+  if (doElevationLimit() &&
+      !drawShadingLayer(&CDemVRT::elevationLimit, QImage::Format_Indexed8, &elevationtable, o2, p, dest)) {
+    return;
   }
-  if (doElevationShading()) {
-    if (!computeShading(&CDemVRT::elevationShading)) {
-      return;
-    }
-    QImage img(outbuf.constData(), w_used, h_used, w_used, QImage::Format_Indexed8);
-    img.setColorTable(elevationShadeTable);
-    p.drawImage(dest, img);
+  if (doElevationShading() &&
+      !drawShadingLayer(&CDemVRT::elevationShading, QImage::Format_Indexed8, &elevationShadeTable, o1, p, dest)) {
+    return;
   }
 
   drawElevationShadeScale(p);

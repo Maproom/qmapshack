@@ -51,7 +51,7 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent) : IDem(parent), file
       n++;
       continue;
     }
-#endif // defined(Q_OS_WIN32)
+#endif  // defined(Q_OS_WIN32)
     fileItem = QString::fromUtf8(fileList[n]);
     if (QFileInfo(fileItem).exists()) {
       n++;
@@ -64,9 +64,9 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent) : IDem(parent), file
   if (n < 0) {
     GDALClose(dataset);
     dataset = nullptr;
-    QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."),
-                           tr("File does not exist:") % '\n' % fileItem % '\n' %
-                           tr("referenced by file:") % '\n' % filename);
+    QMessageBox::warning(
+        CMainWindow::getBestWidgetForParent(), tr("Error..."),
+        tr("File does not exist:") % '\n' % fileItem % '\n' % tr("referenced by file:") % '\n' % filename);
     return;
   }
 
@@ -444,7 +444,7 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf) {
   p.translate(-pp);
 
   qreal o1 = getOpacity() / 100.0;
-  qreal o2 = ((o1 + 0.4) >= 1.0) ? o1 : (o1 + 0.4);
+  qreal o2 = qMin(o1 + 0.4, 1.0);
   p.setOpacity(o1);
 
   // compute the destination rect we will draw the shadings into

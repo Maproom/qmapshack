@@ -24,11 +24,18 @@
 #include "dem/CDemDraw.h"
 #include "dem/CDemPropSetup.h"
 
+// Read one sample from a row-major buffer of row width dx.
 template <typename T>
 inline T getValue(const QVector<T>& data, int x, int y, int dx) {
   return data[x + y * dx];
 }
 
+// Fill w[0..8] with the row-major 3x3 neighborhood of data centered on (x, y):
+//   w[0] w[1] w[2]      (x-1,y-1) (x,y-1) (x+1,y-1)
+//   w[3] w[4] w[5]  i.e. (x-1,y)  (x,y)   (x+1,y)
+//   w[6] w[7] w[8]      (x-1,y+1) (x,y+1) (x+1,y+1)
+// Callers pass an (x, y) that is already offset into data's 1px border (see the @param
+// data docs on IDem::hillshading() et al.), so the -1/+1 neighbors are always in bounds.
 template <typename T>
 inline void fillWindow(const QVector<T>& data, int x, int y, int stride, T* w) {
   w[0] = getValue(data, x - 1, y - 1, stride);
@@ -190,6 +197,12 @@ int IDem::getFactorHillshading() const {
   }
 }
 
+// Horn's method (the same algorithm GDAL's own "gdaldem hillshade" uses): dx/dy are a
+// Sobel-style gradient (hence the doubled middle terms), combined with a fixed light
+// source (azimuth 315° = NW, altitude 45° - only the z-factor/vertical exaggeration is
+// user-configurable, via factorHillshading) into cang, the cosine of the light's
+// incidence angle. cang is then remapped from its natural -1..1 range to the 1..254
+// output range, leaving 0 unused and 255 reserved to mark noData (transparent in graytable).
 void IDem::hillshading(const QVector<float>& data, QVector<uchar>& out, quint32 x, quint32 y, quint32 stride, quint32 w,
                        quint32 h) const {
   constexpr qreal zFactor = 0.125;
@@ -279,6 +292,10 @@ qreal IDem::slopeOfWindowInterp(float* win2, winsize_e size, qreal x, qreal y) c
       break;
 
     case eWinsize4x4:
+      // win2 is a 4x4 grid (row-major, indices 0..15); slide a bilinearly-interpolated
+      // 2x2 sample over it at every one of the resulting 3x3 window's positions, so win
+      // ends up as the 3x3 neighborhood of the fractional point (x, y) would have, had
+      // the raster actually been sampled there instead of at the nearest pixel.
       win[0] = bilinear(win2[0], win2[1], win2[4], win2[5], x, y);
       win[1] = bilinear(win2[1], win2[2], win2[5], win2[6], x, y);
       win[2] = bilinear(win2[2], win2[3], win2[6], win2[7], x, y);
@@ -296,6 +313,8 @@ qreal IDem::slopeOfWindowInterp(float* win2, winsize_e size, qreal x, qreal y) c
       return NOFLOAT;
   }
 
+  // same Sobel-style gradient as hillshading(); 8 is the kernel's total weight (1+2+1 on
+  // each side), normalizing dx/dy back to an average per-unit-distance slope
   qreal dx = ((win[0] + win[3] + win[3] + win[6]) - (win[2] + win[5] + win[5] + win[8])) / (xscale);
   qreal dy = ((win[6] + win[7] + win[7] + win[8]) - (win[0] + win[1] + win[1] + win[2])) / (yscale);
   qreal k = dx * dx + dy * dy;

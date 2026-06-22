@@ -33,26 +33,84 @@ class CDemDraw;
 class IDemProp;
 class QSettings;
 
+/// One named preset of the 5 slope-angle thresholds used by IDem::slopecolor(); see
+/// IDem::slopePresets and IDem::getCurrentSlopeStepTable().
 struct SlopePresets {
   const char* name;
   const qreal steps[5];
 };
 
+/**
+   @brief Abstract base class for a Digital Elevation Model (DEM) drawable.
+
+   IDem renders a raster elevation grid as one or more optional shading layers on top of
+   the map: hillshading, slope-angle shading (alpha or graded color), an elevation
+   threshold overlay, and a continuous elevation-color gradient with an optional legend.
+   It also answers point queries for elevation and slope (e.g. for track elevation
+   profiles).
+
+   A concrete subclass owns the actual data source (currently CDemVRT, backed by GDAL,
+   and CDemWCS, a thin specialization of it) and is responsible for:
+   - loading/opening the source and setting isActivated, proj, xsize_px/ysize_px and
+     xscale/yscale once during construction,
+   - implementing draw(), which decodes the requested view rectangle, reads the raw
+     elevation samples via the subclass's own data access, and feeds them to the
+     protected shading methods below (hillshading(), slopeShading(), slopecolor(),
+     elevationLimit(), elevationShading()),
+   - implementing getElevationAt()/getSlopeAt() for point queries.
+
+   @note The shading methods are pure per-pixel math over a caller-supplied sample
+         buffer and are const/reentrant by design: CDemVRT::draw() calls them in
+         parallel via a QThreadPool over disjoint chunks of the same output buffer, so
+         they must never mutate IDem state.
+
+   Configuration (which layers are enabled, their parameters, color tables, etc.) is
+   persisted via saveConfig()/loadConfig() and changed at runtime through the public
+   slots below, typically wired up from CDemPropSetup's UI.
+ */
 class IDem : public IDrawObject {
   Q_OBJECT
  public:
   IDem(CDemDraw* parent);
   virtual ~IDem();
 
+  /// @brief Persist the layer enable flags, their parameters and color-table selection.
   void saveConfig(QSettings& cfg) override;
 
+  /// @brief Restore what saveConfig() persisted.
   void loadConfig(QSettings& cfg) override;
 
+  /**
+     @brief Render the requested view rectangle's enabled shading layers into buf.image.
+
+     Called from the canvas's draw thread. Implementations are expected to read only the
+     part of their data source the current view covers and to be a no-op if the object
+     is out of its configured min/max scale or no shading layer is enabled.
+
+     @param buf the canvas buffer to draw into; also carries the view's corner
+                coordinates and zoom/scale factors
+   */
   virtual void draw(IDrawContext::buffer_t& buf) = 0;
 
+  /**
+     @brief Look up the elevation at a single point.
+     @param pos        position in WGS84 [rad]
+     @param checkScale if true, return NOFLOAT when the object is out of its configured
+                        min/max draw scale (see IDrawObject::isOutOfScale())
+     @return elevation in meters, or NOFLOAT if pos is outside the data source's coverage
+   */
   virtual qreal getElevationAt(const QPointF& pos, bool checkScale) = 0;
+
+  /**
+     @brief Look up the terrain slope at a single point.
+     @param pos        position in WGS84 [rad]
+     @param checkScale if true, return NOFLOAT when the object is out of its configured
+                        min/max draw scale (see IDrawObject::isOutOfScale())
+     @return slope in degrees, or NOFLOAT if pos is outside the data source's coverage
+   */
   virtual qreal getSlopeAt(const QPointF& pos, bool checkScale) = 0;
 
+  /// @brief True once the data source has been opened/loaded successfully.
   bool activated() const { return isActivated; }
 
   /**
@@ -65,6 +123,7 @@ class IDem : public IDrawObject {
    */
   virtual IDemProp* getSetup();
 
+  /// @brief True if the hillshading layer is enabled; see slotSetHillshading().
   bool doHillshading() const { return bHillshading; }
 
   /**
@@ -81,44 +140,80 @@ class IDem : public IDrawObject {
    */
   int getFactorHillshading() const;
 
+  /// @brief True if the alpha-only slope-shading layer is enabled; see slotSetSlopeShading().
   bool doSlopeShading() const { return bSlopeShading; }
 
+  /// @brief Get the slope-shading intensity as the slider value (0..100) that produced it.
   int getFactorSlopeShading() const;
 
+  /// @brief True if the graded slope-color layer is enabled; see slotSetSlopeColor().
   bool doSlopeColor() const { return bSlopeColor; }
 
+  /// @brief True if the elevation-threshold highlight layer is enabled; see slotSetElevationLimit().
   bool doElevationLimit() const { return bElevationLimit; }
 
+  /// @brief The elevation threshold (in the user's configured unit) set by setElevationLimit().
   int getElevationLimit() const { return elevationValue; }
 
+  /// @brief True if the elevation-color gradient layer is enabled; see slotSetElevationShading().
   bool doElevationShading() const { return bElevationShading; }
 
+  /// @brief Lower bound (in the user's configured unit) of the elevationShading() gradient.
   int getElevationShadeLimitLow() const { return elevationShadeLimitLow; }
 
+  /// @brief Upper bound (in the user's configured unit) of the elevationShading() gradient.
   int getElevationShadeLimitHi() const { return elevationShadeLimitHi; }
 
+  /// @brief The color table slopecolor() indexes into; see slopetable.
   const QVector<QRgb> getSlopeColorTable() const { return slopetable; }
 
+  /// @brief True if the elevationShading() legend should be drawn; see slotShowElevationShadeScale().
   bool doShowElevationShadeScale() const { return bShowElevationShadeScale; }
 
+  /// Named slope-angle-threshold presets offered alongside the custom table; selected via
+  /// setSlopeStepTable() and read back via getCurrentSlopeStepTable().
   static const struct SlopePresets slopePresets[7];
   static const size_t slopePresetCount = sizeof(IDem::slopePresets) / sizeof(IDem::slopePresets[0]);
 
+  /**
+     @brief The 5 slope-angle thresholds (in degrees) currently used by slopecolor() to
+            pick one of its 6 color bands.
+     @return slopeCustomStepTable if getSlopeStepTableIndex() == CUSTOM_SLOPE_COLORTABLE,
+             otherwise slopePresets[getSlopeStepTableIndex()].steps
+   */
   const qreal* getCurrentSlopeStepTable() const;
 
+  /// @brief Index into slopePresets, or CUSTOM_SLOPE_COLORTABLE; see setSlopeStepTable().
   int getSlopeStepTableIndex() const { return gradeSlopeColor; }
 
+  /**
+     @brief Select which slope-angle-threshold table slopecolor() uses.
+     @param idx index into slopePresets, or CUSTOM_SLOPE_COLORTABLE to use the values set
+                via setSlopeStepTableCustomValue()
+   */
   void setSlopeStepTable(int idx);
+  /// @brief Set one of the 5 thresholds of the custom slope-angle table (see CUSTOM_SLOPE_COLORTABLE).
   void setSlopeStepTableCustomValue(int idx, int val);
+  /// @brief Set the threshold used by elevationLimit(), in the user's configured unit.
   void setElevationLimit(int val);
 
+  /// @brief (Re-)build elevationShadeTable, the color gradient used by elevationShading().
   void initElevationShadeTable();
+  /// @brief Set the lower bound of the elevationShading() gradient.
   void setElevationShadeLow(int val);
+  /// @brief Set the upper bound of the elevationShading() gradient.
   void setElevationShadeHi(int val);
 
+  /// Size (in samples) of the neighborhood window slopeOfWindowInterp() operates on:
+  /// eWinsize3x3 for a window already aligned to the raster grid (used by the per-pixel
+  /// shading methods below, with x=y=0), or eWinsize4x4 for a query at an arbitrary
+  /// (non-pixel-aligned) point - e.g. CDemVRT::getSlopeAt() - where the extra ring of
+  /// neighbors lets the 3x3 window itself be bilinearly interpolated at fractional (x,y)
+  /// before the slope is computed from it.
   enum winsize_e { eWinsize3x3 = 9, eWinsize4x4 = 16 };
 
  public slots:
+  /// @brief Enable/disable the hillshading layer; see doHillshading().
   void slotSetHillshading(bool yes) { bHillshading = yes; }
 
   /**
@@ -135,21 +230,28 @@ class IDem : public IDrawObject {
    */
   void slotSetFactorHillshade(int f);
 
+  /// @brief Enable/disable the alpha-only slope-shading layer; see doSlopeShading().
   void slotSetSlopeShading(bool yes) { bSlopeShading = yes; }
 
+  /// @brief Set the slope-shading intensity from a slider value (0..100); see getFactorSlopeShading().
   void slotSetFactorSlopeShade(int f);
 
+  /// @brief Enable/disable the graded slope-color layer; see doSlopeColor().
   void slotSetSlopeColor(bool yes) { bSlopeColor = yes; }
 
+  /// @brief Enable/disable the elevation-threshold highlight layer; see doElevationLimit().
   void slotSetElevationLimit(bool yes) { bElevationLimit = yes; }
 
+  /// @brief Enable/disable the elevation-color gradient layer; see doElevationShading().
   void slotSetElevationShading(bool yes) { bElevationShading = yes; }
 
+  /// @brief Show/hide the elevationShading() legend drawn by CDemVRT::drawElevationShadeScale().
   void slotShowElevationShadeScale(bool yes);
 
  protected:
   /**
-     @brief Per-pixel shading algorithms shared by all DEM backends.
+     @brief out[px] = grayscale shading intensity (0..255, 255 = transparent noData)
+            from a simulated light source at a fixed azimuth/altitude; see graytable.
 
      @param data   raw elevation samples, kept 1px wider/taller than `out` on every
                     side so each pixel's 3x3 (or 4x4) neighborhood window can be read
@@ -158,19 +260,29 @@ class IDem : public IDrawObject {
      @param x, y   top-left corner of the chunk to process, in `out`/`stride` coordinates
      @param stride row stride of `out`, in pixels
      @param w, h   size of the chunk to process
+
+     The remaining per-pixel shading methods below (slopeShading(), slopecolor(),
+     elevationLimit(), elevationShading()) share this exact parameter shape.
    */
   void hillshading(const QVector<float>& data, QVector<uchar>& out, quint32 x, quint32 y, quint32 stride, quint32 w,
                    quint32 h) const;
 
+  /// out[px] = alpha (0 = transparent, up to 255) proportional to terrain slope and
+  /// getFactorSlopeShading(); drawn as an Alpha8 overlay with no color table.
   void slopeShading(const QVector<float>& data, QVector<uchar>& out, quint32 x, quint32 y, quint32 stride, quint32 w,
                     quint32 h) const;
 
+  /// out[px] = index 0..5 into slopetable, picking the color band for the window's slope
+  /// against getCurrentSlopeStepTable()'s 5 thresholds.
   void slopecolor(const QVector<float>& data, QVector<uchar>& out, quint32 x, quint32 y, quint32 stride, quint32 w,
                   quint32 h) const;
 
+  /// out[px] = index into elevationtable: 1 if maxElevationInWindow() >= getElevationLimit(), else 0.
   void elevationLimit(const QVector<float>& data, QVector<uchar>& out, quint32 x, quint32 y, quint32 stride, quint32 w,
                       quint32 h) const;
 
+  /// out[px] = index 0..255 into elevationShadeTable: maxElevationInWindow() mapped
+  /// linearly between getElevationShadeLimitLow() (0) and getElevationShadeLimitHi() (255).
   void elevationShading(const QVector<float>& data, QVector<uchar>& out, quint32 x, quint32 y, quint32 stride,
                         quint32 w, quint32 h) const;
 
@@ -211,6 +323,8 @@ class IDem : public IDrawObject {
    */
   qreal slopeOfWindowInterp(float* win2, winsize_e size, qreal x, qreal y) const;
 
+  /// the owning CDemDraw; provides the canvas's projection, redraw signaling and pixel
+  /// coordinate conversion that subclasses need while reading their data source
   CDemDraw* dem;
 
   /**
@@ -237,16 +351,25 @@ class IDem : public IDrawObject {
   /// the setup dialog. Use getSetup() for access
   QPointer<IDemProp> setup;
 
+  /// grayscale + transparent-at-255 color table for hillshading()'s output (Format_Indexed8)
   QVector<QRgb> graytable;
 
+  /// color gradient for elevationShading()'s output (Format_Indexed8); see initElevationShadeTable()
   QVector<QRgb> elevationShadeTable;
 
+  /// color table for slopecolor()'s output (Format_Indexed8): index 0 transparent,
+  /// 1..5 the colors for each of the 5 slope-grade bands in getCurrentSlopeStepTable()
   QVector<QRgb> slopetable;
 
+  /// color table for elevationLimit()'s output (Format_Indexed8): index 0 transparent,
+  /// index 1 the highlight color for samples at/above getElevationLimit()
   QVector<QRgb> elevationtable;
 
+  /// non-zero if the data source declares a noData value (GDAL's GetNoDataValue()
+  /// success flag; kept as int rather than bool to match that API directly)
   int hasNoData = 0;
 
+  /// the data source's noData value, in its native units; only meaningful if hasNoData is set
   double noData = 0;
 
  private:

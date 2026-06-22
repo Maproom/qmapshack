@@ -241,9 +241,10 @@ and remove the detail once fixed (or leave a one-liner if worth remembering long
   `GDT_Float32` from GDAL regardless of source type, so this is a sanity gate on
   plausible elevation encodings, not a requirement of the I/O path itself.
 
-- [ ] **`GetFileList()` not null-checked** — `CDemVRT.cpp:45-46`
-  GDAL docs allow `GetFileList()` to return `nullptr` for some drivers; `fileList[n]` is
-  dereferenced immediately with no guard. Minor/edge case.
+- [x] **`GetFileList()` not null-checked** — `CDemVRT.cpp:46-48`. Fixed: loop condition
+  is now `while (fileList != nullptr && fileList[n] != nullptr)`. A null list now leaves
+  `n == 0` (no files to verify, not an error) and falls through to the existing checks;
+  `CSLDestroy(nullptr)` is already documented-safe.
 
 ### Readability / maintainability
 

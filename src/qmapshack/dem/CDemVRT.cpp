@@ -61,7 +61,7 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent) : IDem(parent), file
   qDebug() << "------------------------------";
   qDebug() << "VRT: try to open" << filename;
 
-  dataset = (GDALDataset*)GDALOpen(filename.toUtf8(), GA_ReadOnly);
+  dataset = GDALDataset::FromHandle(GDALOpen(filename.toUtf8(), GA_ReadOnly));
   if (nullptr == dataset) {
     QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."),
                          tr("Failed to load file:") % '\n' % filename);

@@ -296,9 +296,8 @@ and remove the detail once fixed (or leave a one-liner if worth remembering long
   - `QFileInfo(missingFile).exists()` → `QFileInfo::exists(missingFile)` (static call,
     no need to construct a full `QFileInfo` just to check existence).
 
-- [ ] **Inconsistent cast style** — `CDemVRT.cpp:37`
-  `(GDALDataset*)GDALOpen(...)` uses a C-style cast while the rest of the file uses
-  `GDALDataset::FromHandle(...)`.
+- [x] **Inconsistent cast style** — fixed: `dataset = (GDALDataset*)GDALOpen(...)` is now
+  `dataset = GDALDataset::FromHandle(GDALOpen(...))`, matching the rest of the file.
 
 - [ ] **Leftover `qDebug()` spam** in the constructor (separator lines, cryptic `"FF"`/
   `"RR"` tags for the transforms) — fires for every DEM loaded. Remove or move behind a

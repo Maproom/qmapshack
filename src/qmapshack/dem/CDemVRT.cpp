@@ -36,6 +36,27 @@ int CDemVRT::progressCallback(double /*dfComplete*/, const char* /*message*/, vo
   return !drawCtx->needsRedraw();
 }
 
+bool CDemVRT::allReferencedFilesExist(GDALDataset* dataset, QString& missingFile) {
+  char** fileList = dataset->GetFileList();
+  bool allExist = true;
+  for (int n = 0; fileList != nullptr && fileList[n] != nullptr; ++n) {
+#if defined(Q_OS_WIN32)
+    missingFile = QString::fromLocal8Bit(fileList[n]);
+    if (QFileInfo::exists(missingFile)) {
+      continue;
+    }
+#endif  // defined(Q_OS_WIN32)
+    missingFile = QString::fromUtf8(fileList[n]);
+    if (QFileInfo::exists(missingFile)) {
+      continue;
+    }
+    allExist = false;
+    break;
+  }
+  CSLDestroy(fileList);
+  return allExist;
+}
+
 CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent) : IDem(parent), filename(filename) {
   qDebug() << "------------------------------";
   qDebug() << "VRT: try to open" << filename;
@@ -47,32 +68,13 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent) : IDem(parent), file
     return;
   }
 
-  QString fileItem;
-  char** fileList = dataset->GetFileList();
-  int n = 0;
-  while (fileList != nullptr && fileList[n] != nullptr) {
-#if defined(Q_OS_WIN32)
-    fileItem = QString::fromLocal8Bit(fileList[n]);
-    if (QFileInfo(fileItem).exists()) {
-      n++;
-      continue;
-    }
-#endif  // defined(Q_OS_WIN32)
-    fileItem = QString::fromUtf8(fileList[n]);
-    if (QFileInfo(fileItem).exists()) {
-      n++;
-      continue;
-    }
-    n = -1;
-    break;
-  }
-  CSLDestroy(fileList);
-  if (n < 0) {
+  QString missingFile;
+  if (!allReferencedFilesExist(dataset, missingFile)) {
     GDALClose(dataset);
     dataset = nullptr;
     QMessageBox::warning(
         CMainWindow::getBestWidgetForParent(), tr("Error..."),
-        tr("File does not exist:") % '\n' % fileItem % '\n' % tr("referenced by file:") % '\n' % filename);
+        tr("File does not exist:") % '\n' % missingFile % '\n' % tr("referenced by file:") % '\n' % filename);
     return;
   }
 
@@ -411,7 +413,7 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf) {
   QVector<uchar> outbuf(w_used * h_used);
 
   using shadeFnPtr =
-      void (CDemVRT::*)(QVector<float>&, QVector<uchar>&, quint32, quint32, quint32, quint32, quint32) const;
+      void (CDemVRT::*)(const QVector<float>&, QVector<uchar>&, quint32, quint32, quint32, quint32, quint32) const;
   auto computeShading = [=, this, &data, &outbuf](shadeFnPtr shadeFn) {
     // run the shadings in paralell on equal sized chunks
     quint32 n_x = 4;

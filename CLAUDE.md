@@ -62,6 +62,10 @@ if (condition)
 
 **Documentation comments use `/** */` doxygen blocks.** Follow the style of existing blocks (`@brief`, `@param`, `@return`). Inline member docs use `/**< */`. Plain `//` comments are for non-doxygen annotations.
 
+**Pass `QString`/complex objects (`QVector`, `QImage`, etc.) by `const&` unless the function actually mutates them.** A reference parameter that's only read should be `const T&` — it documents read-only intent and doesn't block callers from passing temporaries. Only use a plain `T&` for genuine out-parameters or objects the function mutates in place.
+
+**Prefer `QFileInfo::exists(path)` (static) over `QFileInfo(path).exists()`** when you only need an existence check — no need to construct a full `QFileInfo`.
+
 ---
 
 ## Building
@@ -276,10 +280,21 @@ and remove the detail once fixed (or leave a one-liner if worth remembering long
   `ReadRaster()`'s progress parameter instead of two identical lambdas. Local var
   renamed `drawCtx` so it no longer shadows the `IDem::dem` member.
 
-- [ ] **File-existence-check loop is hard to follow** — `CDemVRT.cpp:44-62`
-  Mixes a `#ifdef Q_OS_WIN32` fallback with an `n = -1; break;` error-signaling pattern.
-  Pull into a static helper (`allReferencedFilesExist(dataset, missingFile)`) so the
-  constructor reads as "open → validate → set up warp → set up projection."
+- [x] **File-existence-check loop is hard to follow** — fixed: extracted
+  `static bool CDemVRT::allReferencedFilesExist(dataset, missingFile)` (`CDemVRT.h`/`.cpp`),
+  replacing the `#ifdef Q_OS_WIN32` + `n = -1; break;` sentinel pattern with a plain
+  `for` loop and a `bool` return, so the constructor now reads as "open → validate file
+  list → validate raster band/type → set up warp → set up projection." Also applied two
+  related cleanups surfaced while touching this code (now general rules in
+  [Code style](#code-style)):
+  - `missingFile` stays a genuine out-param (`QString&`, correctly non-const since it's
+    written to); but the unrelated `QVector<float>& data` parameters on `hillshading()`,
+    `slopeShading()`, `slopecolor()`, `elevationLimit()`, `elevationShading()`
+    (`IDem.h`/`.cpp`) and the `getValue()`/`fillWindow()` templates were all read-only and
+    are now `const QVector<float>&`/`const QVector<T>&`. Updated `CDemVRT.cpp`'s
+    `shadeFnPtr` typedef to match.
+  - `QFileInfo(missingFile).exists()` → `QFileInfo::exists(missingFile)` (static call,
+    no need to construct a full `QFileInfo` just to check existence).
 
 - [ ] **Inconsistent cast style** — `CDemVRT.cpp:37`
   `(GDALDataset*)GDALOpen(...)` uses a C-style cast while the rest of the file uses

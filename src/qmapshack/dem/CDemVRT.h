@@ -45,6 +45,16 @@ class CDemVRT : public IDem {
   void drawElevationShadeScale(QPainter& p) const;
 
   /**
+     @brief Check that every file GDAL reports as part of the dataset (e.g. the files a
+            VRT references) actually exists on disk.
+     @param dataset     the dataset to check
+     @param missingFile set to the first referenced file that could not be found; left
+                         unchanged if all files exist
+     @return false if a referenced file is missing
+   */
+  static bool allReferencedFilesExist(GDALDataset* dataset, QString& missingFile);
+
+  /**
      @brief GDAL progress callback aborting the read once a newer redraw has been
             requested.
      @param pProgressArg the CDemDraw passed in as progress callback context

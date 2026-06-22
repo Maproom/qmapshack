@@ -488,36 +488,50 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf) {
 }
 
 void CDemVRT::drawElevationShadeScale(QPainter& p) const {
-  if (doElevationShading() && doShowElevationShadeScale()) {
-    p.save();
-
-    // heading and limits
-    p.setOpacity(1.0);
-    QRect visibleCanvasArea = CMainWindow::self().getVisibleCanvas()->rect();
-    qreal limitLow = std::min(getElevationShadeLimitLow(), getElevationShadeLimitHi());
-    qreal limitHi = std::max(getElevationShadeLimitLow(), getElevationShadeLimitHi());
-    CDraw::text(tr("Ele."), p, QPointF(visibleCanvasArea.width() - 70, 30), Qt::black);
-
-    // labels
-    int nmbOfLabels = 7;
-    int yOffset = 30;
-    for (int i = 0; i < nmbOfLabels; i++) {
-      qreal meter = i / (double)(nmbOfLabels - 1) * (limitHi - limitLow) + limitLow;
-      QString val, unit;
-      IUnit::self().meter2elevation(meter, val, unit);
-      CDraw::text(QString("%1 %2").arg(val, unit), p,
-                  QPointF(visibleCanvasArea.width() - 70, 50 + (nmbOfLabels - 1 - i) * yOffset), Qt::black);
-    }
-
-    // color bar
-    for (int i = yOffset + 10; i <= nmbOfLabels * yOffset; i++) {
-      qreal hue = 240 * (1 - (double)(i - yOffset - 10.) / (nmbOfLabels * yOffset - yOffset - 10));
-      const QColor& color = QColor::fromHsv(hue, 255, 255);
-      p.setPen(color);
-      p.drawLine(QPointF(visibleCanvasArea.width() - 30, yOffset + 10 + (nmbOfLabels * yOffset) - i),
-                 QPointF(visibleCanvasArea.width() - 15, yOffset + 10 + (nmbOfLabels * yOffset) - i));
-    }
-
-    p.restore();
+  if (!doElevationShading() || !doShowElevationShadeScale()) {
+    return;
   }
+
+  // legend layout, anchored to the top-right corner of the visible canvas
+  constexpr int kLabelCount = 7;        // number of elevation labels shown
+  constexpr int kRowHeight = 30;        // vertical spacing between label rows
+  constexpr int kTextRightMargin = 70;  // x offset of the heading/labels from the right edge
+  constexpr int kHeadingY = 30;         // y position of the "Ele." heading
+  constexpr int kFirstLabelY = 50;      // y position of the lowest-elevation label
+  constexpr int kBarTopGap = 10;        // vertical gap between the heading row and the color bar
+  constexpr int kBarLeftX = 30;         // x offset of the color bar's left edge from the right edge
+  constexpr int kBarRightX = 15;        // x offset of the color bar's right edge from the right edge
+  constexpr int kBarTop = kRowHeight + kBarTopGap;
+  constexpr int kBarBottom = kLabelCount * kRowHeight;
+
+  p.save();
+
+  // heading and limits
+  p.setOpacity(1.0);
+  QRect visibleCanvasArea = CMainWindow::self().getVisibleCanvas()->rect();
+  qreal limitLow = std::min(getElevationShadeLimitLow(), getElevationShadeLimitHi());
+  qreal limitHi = std::max(getElevationShadeLimitLow(), getElevationShadeLimitHi());
+  CDraw::text(tr("Ele."), p, QPointF(visibleCanvasArea.width() - kTextRightMargin, kHeadingY), Qt::black);
+
+  // labels, evenly spaced from limitLow (bottom) to limitHi (top)
+  for (int i = 0; i < kLabelCount; i++) {
+    qreal meter = i / (double)(kLabelCount - 1) * (limitHi - limitLow) + limitLow;
+    QString val, unit;
+    IUnit::self().meter2elevation(meter, val, unit);
+    CDraw::text(
+        QString("%1 %2").arg(val, unit), p,
+        QPointF(visibleCanvasArea.width() - kTextRightMargin, kFirstLabelY + (kLabelCount - 1 - i) * kRowHeight),
+        Qt::black);
+  }
+
+  // color bar, drawn one pixel row at a time with the hue interpolated from blue (low) to red (high)
+  for (int i = kBarTop; i <= kBarBottom; i++) {
+    qreal hue = 240 * (1 - (double)(i - kBarTop) / (kBarBottom - kBarTop));
+    const QColor& color = QColor::fromHsv(hue, 255, 255);
+    p.setPen(color);
+    p.drawLine(QPointF(visibleCanvasArea.width() - kBarLeftX, kBarTop + kBarBottom - i),
+               QPointF(visibleCanvasArea.width() - kBarRightX, kBarTop + kBarBottom - i));
+  }
+
+  p.restore();
 }

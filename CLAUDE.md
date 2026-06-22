@@ -261,13 +261,14 @@ and remove the detail once fixed (or leave a one-liner if worth remembering long
   per pixel, since the macros were re-expanded (and re-evaluated) at every use inside the
   pixel loop.
 
-- [ ] **Dead code**
-  - `fillWindow4x4()` (`IDem.cpp:45-66`) defined but never called anywhere —
-    `getSlopeAt` reads its 4x4 window directly via `RasterIO` instead.
-  - `using IDem::drawTile;` (`CDemVRT.h:45`) looks like a leftover from before the
-    "draw entire view at once" refactor (`25ee02a8`); `drawTile`/`drawTileLQ` is no
-    longer called from `CDemVRT`. Check no other `IDem` subclass needs it before
-    removing from `IDem` too.
+- [x] **Dead code** — fixed: removed both.
+  - `fillWindow4x4()` template (`IDem.cpp`) — confirmed zero call sites anywhere in the
+    repo, deleted.
+  - `using IDem::drawTile;` (`CDemVRT.h`) — confirmed `CDemVRT` is the only `IDem`
+    subclass (`CDemWCS` extends `CDemVRT`, not `IDem`) and `IDem::drawTile()` had no
+    call sites at all, so removed the `using` plus the now-unused `IDem::drawTile()`
+    declaration/definition itself. `drawTileLQ()` (`IDrawObject`) stays — it's still
+    used by the unrelated `IMap::drawTile()`.
 
 - [ ] **Duplicated GDAL progress-callback lambda** — `CDemVRT.cpp:107-110` and `392-395`,
   identical bodies. Factor into one static helper. Also: the lambda parameter is named

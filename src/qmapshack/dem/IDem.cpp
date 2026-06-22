@@ -42,29 +42,6 @@ inline void fillWindow(QVector<T>& data, int x, int y, int stride, T* w) {
   w[8] = getValue(data, x + 1, y + 1, stride);
 }
 
-template <typename T>
-inline void fillWindow4x4(QVector<T>& data, qreal x, qreal y, int stride, T* w) {
-  x = qFloor(x);
-  y = qFloor(y);
-
-  w[0] = getValue(data, x - 1, y - 1, stride);
-  w[1] = getValue(data, x, y - 1, stride);
-  w[2] = getValue(data, x + 1, y - 1, stride);
-  w[3] = getValue(data, x + 2, y - 1, stride);
-  w[4] = getValue(data, x - 1, y, stride);
-  w[5] = getValue(data, x, y, stride);
-  w[6] = getValue(data, x + 1, y, stride);
-  w[7] = getValue(data, x + 2, y, stride);
-  w[8] = getValue(data, x - 1, y + 1, stride);
-  w[9] = getValue(data, x, y + 1, stride);
-  w[10] = getValue(data, x + 1, y + 1, stride);
-  w[11] = getValue(data, x + 2, y + 1, stride);
-  w[12] = getValue(data, x - 1, y + 2, stride);
-  w[13] = getValue(data, x, y + 2, stride);
-  w[14] = getValue(data, x + 1, y + 2, stride);
-  w[15] = getValue(data, x + 2, y + 2, stride);
-}
-
 const struct SlopePresets IDem::slopePresets[7]{
     /* http://www.alpenverein.de/bergsport/sicherheit/skitouren-schneeschuh-sicher-im-schnee/dav-snowcard_aid_10619.html
      */
@@ -427,5 +404,3 @@ void IDem::elevationShading(QVector<float>& data, QVector<uchar>& out, quint32 x
 }
 
 void IDem::slotShowElevationShadeScale(bool yes) { bShowElevationShadeScale = yes; }
-
-void IDem::drawTile(QImage& img, QPolygonF& l, QPainter& p) const { drawTileLQ(img, l, p, *dem, proj); }

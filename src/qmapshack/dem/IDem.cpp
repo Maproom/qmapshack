@@ -184,9 +184,9 @@ int IDem::getFactorHillshading() const {
   if (factorHillshading == 1.0) {
     return 0;
   } else if (factorHillshading < 1) {
-    return -1.0 / factorHillshading;
+    return qRound(-1.0 / factorHillshading);
   } else {
-    return factorHillshading;
+    return qRound(factorHillshading);
   }
 }
 
@@ -229,7 +229,7 @@ void IDem::hillshading(const QVector<float>& data, QVector<uchar>& out, quint32 
   }
 }
 
-int IDem::getFactorSlopeShading() const { return factorSlopeShading * 100.; }
+int IDem::getFactorSlopeShading() const { return qRound(factorSlopeShading * 100.); }
 
 void IDem::slopeShading(const QVector<float>& data, QVector<uchar>& out, quint32 x, quint32 y, quint32 stride,
                         quint32 w, quint32 h) const {

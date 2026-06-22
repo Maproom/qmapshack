@@ -73,6 +73,10 @@ class IDem : public IDrawObject {
      Reverses the encoding done by slotSetFactorHillshade(): a factor of 1.0 maps back
      to 0, factors > 1 map back to themselves, and factors < 1 map back to -1/factor.
 
+     @note slider values -1, 0 and +1 all encode the same neutral factor 1.0, so this
+           always reports 0 for any of them. The mapping is not perfectly invertible
+           at that point; it is treated as a harmless dead zone rather than fixed.
+
      @return the slider value
    */
   int getFactorHillshading() const;

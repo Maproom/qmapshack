@@ -236,10 +236,12 @@ qreal CDemVRT::getElevationAt(const QPointF& pos, bool checkScale) {
   qreal x = pt.x() - qFloor(pt.x());
   qreal y = pt.y() - qFloor(pt.y());
 
-  mutex.lock();
-  CPLErr err = dataset->RasterIO(GF_Read, qFloor(pt.x()), qFloor(pt.y()), 2, 2, &e, 2, 2, GDT_Float32, 1, 0, 0, 0, 0);
-  mutex.unlock();
-  if (err == CE_Failure) {
+  CPLErr err;
+  {
+    QMutexLocker lock(&mutex);
+    err = dataset->RasterIO(GF_Read, qFloor(pt.x()), qFloor(pt.y()), 2, 2, &e, 2, 2, GDT_Float32, 1, 0, 0, 0, 0);
+  }
+  if (err != CE_None) {
     return NOFLOAT;
   }
 
@@ -279,14 +281,8 @@ qreal CDemVRT::getSlopeAt(const QPointF& pos, bool checkScale) {
     }
   }
 
-  for (int i = 0; i < eWinsize4x4; i++) {
-    if (hasNoData && win[i] == noData) {
-      return NOFLOAT;
-    }
-  }
-
-  qreal slope = slopeOfWindowInterp(win, eWinsize4x4, x, y);
-  return slope;
+  // slopeOfWindowInterp() already returns NOFLOAT if any sample in win is noData
+  return slopeOfWindowInterp(win, eWinsize4x4, x, y);
 }
 
 void CDemVRT::draw(IDrawContext::buffer_t& buf) {

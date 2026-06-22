@@ -171,30 +171,45 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent) : IDem(parent), file
   ysize_px = dataset->GetRasterYSize();
 
   qreal adfGeoTransform[6];
-  dataset->GetGeoTransform(adfGeoTransform);
+  if (dataset->GetGeoTransform(adfGeoTransform) != CE_None) {
+    closeDataset(dataset);
+    closeDataset(srcDataset);
+    QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."),
+                         tr("No pixel-to-map transform found:") % '\n' % filename);
+    return;
+  }
 
   xscale = adfGeoTransform[1];
   yscale = adfGeoTransform[5];
 
-  trFwd.translate(adfGeoTransform[0], adfGeoTransform[3]);
-  trFwd.scale(adfGeoTransform[1], adfGeoTransform[5]);
-
-  if (adfGeoTransform[4] != 0.0) {
-    trFwd.rotate(qAtan(adfGeoTransform[2] / adfGeoTransform[4]));
-  }
+  // Build trFwd directly from GDAL's affine matrix instead of decomposing it into
+  // translate+scale+rotate: adfGeoTransform[2]/[4] is a general shear term, not
+  // necessarily a pure rotation, so there is no single angle that reproduces it via
+  // QTransform::rotate() (which, in addition, takes degrees - qAtan() returns radians).
+  trFwd = QTransform(adfGeoTransform[1], adfGeoTransform[4], adfGeoTransform[2], adfGeoTransform[5], adfGeoTransform[0],
+                     adfGeoTransform[3]);
 
   if (proj.isSrcLatLong()) {
     xscale *= 111120;
     yscale *= 111120;
-    // convert to RAD to match internal notations
+    // Scale every element of the homogeneous matrix by DEG_TO_RAD to convert trFwd's
+    // mapped output from degrees to radians. This works because QTransform::map() never
+    // reads m13/m23/m33 as long as the transform stays non-projective (true here, since
+    // trFwd is built only from translate/scale/shear) - so scaling the whole matrix
+    // scales the mapped point without having to touch dx/dy and the linear part separately.
     trFwd = trFwd * DEG_TO_RAD;
   }
 
   trInv = trFwd.inverted();
 
-  const QPointF topLeft = trFwd.map(QPointF(0, 0));
-  const QPointF bottomRight = trFwd.map(QPointF(xsize_px, ysize_px));
-  boundingBox = QRectF(topLeft, bottomRight);
+  // use all four corners (not just the nominally adjacent pair) since a rotated or
+  // skewed geotransform can move any corner to the extreme
+  const QPointF c1 = trFwd.map(QPointF(0, 0));
+  const QPointF c2 = trFwd.map(QPointF(xsize_px, 0));
+  const QPointF c3 = trFwd.map(QPointF(xsize_px, ysize_px));
+  const QPointF c4 = trFwd.map(QPointF(0, ysize_px));
+  boundingBox = QRectF(QPointF(std::min({c1.x(), c2.x(), c3.x(), c4.x()}), std::min({c1.y(), c2.y(), c3.y(), c4.y()})),
+                       QPointF(std::max({c1.x(), c2.x(), c3.x(), c4.x()}), std::max({c1.y(), c2.y(), c3.y(), c4.y()})));
 
   qDebug() << "bounding box" << boundingBox;
   qDebug() << "FF" << trFwd;
@@ -214,29 +229,36 @@ CDemVRT::~CDemVRT() {
 
 void CDemVRT::slotNeedsRedraw() { threadPool.clear(); }
 
+bool CDemVRT::toRasterPixel(const QPointF& pos, QPointF& pixel) const {
+  QPointF pt = pos;
+  proj.transform(pt, PJ_INV);
+
+  if (!boundingBox.contains(pt)) {
+    return false;
+  }
+
+  pixel = trInv.map(pt);
+  return true;
+}
+
 qreal CDemVRT::getElevationAt(const QPointF& pos, bool checkScale) {
   if (!proj.isValid() || (checkScale && outOfScale)) {
     return NOFLOAT;
   }
 
-  float e[4];
-  QPointF pt = pos;
-
-  proj.transform(pt, PJ_INV);
-
-  if (!boundingBox.contains(pt)) {
+  QPointF pt;
+  if (!toRasterPixel(pos, pt)) {
     return NOFLOAT;
   }
-
-  pt = trInv.map(pt);
 
   qreal x = pt.x() - qFloor(pt.x());
   qreal y = pt.y() - qFloor(pt.y());
 
+  float e[4];
   CPLErr err;
   {
     QMutexLocker lock(&mutex);
-    err = dataset->RasterIO(GF_Read, qFloor(pt.x()), qFloor(pt.y()), 2, 2, &e, 2, 2, GDT_Float32, 1, 0, 0, 0, 0);
+    err = dataset->RasterIO(GF_Read, qFloor(pt.x()), qFloor(pt.y()), 2, 2, e, 2, 2, GDT_Float32, 1, 0, 0, 0, 0);
   }
   if (err != CE_None) {
     return NOFLOAT;
@@ -254,15 +276,10 @@ qreal CDemVRT::getSlopeAt(const QPointF& pos, bool checkScale) {
     return NOFLOAT;
   }
 
-  QPointF pt = pos;
-
-  proj.transform(pt, PJ_INV);
-
-  if (!boundingBox.contains(pt)) {
+  QPointF pt;
+  if (!toRasterPixel(pos, pt)) {
     return NOFLOAT;
   }
-
-  pt = trInv.map(pt);
 
   qreal x = pt.x() - qFloor(pt.x());
   qreal y = pt.y() - qFloor(pt.y());
@@ -271,8 +288,8 @@ qreal CDemVRT::getSlopeAt(const QPointF& pos, bool checkScale) {
   {
     QMutexLocker lock(&mutex);
 
-    CPLErr err = dataset->RasterIO(GF_Read, qFloor(pt.x()) - 1, qFloor(pt.y()) - 1, 4, 4, &win, 4, 4, GDT_Float32, 1, 0,
-                                   0, 0, 0);
+    CPLErr err =
+        dataset->RasterIO(GF_Read, qFloor(pt.x()) - 1, qFloor(pt.y()) - 1, 4, 4, win, 4, 4, GDT_Float32, 1, 0, 0, 0, 0);
     if (err != CE_None) {
       return NOFLOAT;
     }
@@ -527,7 +544,7 @@ void CDemVRT::drawElevationShadeScale(QPainter& p) const {
   // color bar, drawn one pixel row at a time with the hue interpolated from blue (low) to red (high)
   for (int i = kBarTop; i <= kBarBottom; i++) {
     qreal hue = 240 * (1 - (double)(i - kBarTop) / (kBarBottom - kBarTop));
-    const QColor& color = QColor::fromHsv(hue, 255, 255);
+    const QColor color = QColor::fromHsv(hue, 255, 255);
     p.setPen(color);
     p.drawLine(QPointF(visibleCanvasArea.width() - kBarLeftX, kBarTop + kBarBottom - i),
                QPointF(visibleCanvasArea.width() - kBarRightX, kBarTop + kBarBottom - i));

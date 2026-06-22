@@ -46,6 +46,16 @@ class CDemVRT : public IDem {
   void drawElevationShadeScale(QPainter& p) const;
 
   /**
+     @brief Convert a position from the canvas's WGS84 [rad] space (as passed to
+            getElevationAt()/getSlopeAt()) into this DEM's own pixel coordinate space.
+     @param pos   position in WGS84 [rad]
+     @param pixel set to the corresponding DEM pixel coordinate; left unchanged if pos is
+                  outside the DEM's bounding box
+     @return false if pos lies outside the DEM's bounding box
+   */
+  bool toRasterPixel(const QPointF& pos, QPointF& pixel) const;
+
+  /**
      @brief Check that every file GDAL reports as part of the dataset (e.g. the files a
             VRT references) actually exists on disk.
      @param dataset     the dataset to check

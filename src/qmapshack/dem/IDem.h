@@ -221,7 +221,7 @@ class IDem : public IDrawObject {
 
  private:
   bool bHillshading = false;
-  qreal factorHillshading = 0.1666666716337204;
+  qreal factorHillshading = 1.0 / 6.0;
   bool bSlopeShading = false;
   qreal factorSlopeShading = 1.0;
   bool bSlopeColor = false;

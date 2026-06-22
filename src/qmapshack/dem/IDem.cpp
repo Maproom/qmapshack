@@ -215,11 +215,12 @@ int IDem::getFactorHillshading() const {
 
 void IDem::hillshading(QVector<float>& data, QVector<uchar>& out, quint32 x, quint32 y, quint32 stride, quint32 w,
                        quint32 h) const {
-#define ZFACT 0.125
-#define ZFACT_BY_ZFACT (ZFACT * ZFACT)
-#define SIN_ALT (qSin(45 * DEG_TO_RAD))
-#define ZFACT_COS_ALT (ZFACT * qCos(45 * DEG_TO_RAD))
-#define AZ (315 * DEG_TO_RAD)
+  constexpr qreal zFactor = 0.125;
+  constexpr qreal zFactorSquared = zFactor * zFactor;
+  constexpr qreal azimuth = 315 * DEG_TO_RAD;
+  const qreal sinAltitude = qSin(45 * DEG_TO_RAD);
+  const qreal zFactorCosAltitude = zFactor * qCos(45 * DEG_TO_RAD);
+
   for (unsigned int m = 0; m < h; m++) {
     unsigned char* scan = out.data() + (m + y) * stride + x;
     for (unsigned int n = 0; n < w; n++) {
@@ -237,8 +238,8 @@ void IDem::hillshading(QVector<float>& data, QVector<uchar>& out, quint32 x, qui
           ((win[6] + win[7] + win[7] + win[8]) - (win[0] + win[1] + win[1] + win[2])) / (yscale * factorHillshading);
       qreal aspect = qAtan2(dy, dx);
       qreal xx_plus_yy = dx * dx + dy * dy;
-      qreal cang =
-          (SIN_ALT - ZFACT_COS_ALT * qSqrt(xx_plus_yy) * qSin(aspect - AZ)) / qSqrt(1 + ZFACT_BY_ZFACT * xx_plus_yy);
+      qreal cang = (sinAltitude - zFactorCosAltitude * qSqrt(xx_plus_yy) * qSin(aspect - azimuth)) /
+                   qSqrt(1 + zFactorSquared * xx_plus_yy);
 
       if (cang <= 0.0) {
         cang = 1.0;

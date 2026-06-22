@@ -253,10 +253,13 @@ and remove the detail once fixed (or leave a one-liner if worth remembering long
   both `CDemVRT::getElevationAt` (`CDemVRT.cpp`) and the 4x4 branch of
   `IDem::slopeOfWindowInterp` (`IDem.cpp`), replacing the 9 dense hand-expanded lines.
 
-- [ ] **Macros leak past their function** — `IDem.cpp:218-222`
-  `ZFACT`, `ZFACT_BY_ZFACT`, `SIN_ALT`, `ZFACT_COS_ALT`, `AZ` are `#define`d inside
-  `IDem::hillshading()` with no matching `#undef` — stay defined for the rest of the
-  translation unit. Replace with `constexpr` locals.
+- [x] **Macros leak past their function** — fixed: `ZFACT`/`ZFACT_BY_ZFACT`/`AZ` are now
+  `constexpr qreal zFactor`/`zFactorSquared`/`azimuth` (compile-time, since `DEG_TO_RAD`
+  is a literal); `SIN_ALT`/`ZFACT_COS_ALT` are `const qreal sinAltitude`/
+  `zFactorCosAltitude` (not `constexpr` — they call `qSin`/`qCos`, which aren't constexpr
+  functions). Bonus: these are now computed once per `hillshading()` call instead of once
+  per pixel, since the macros were re-expanded (and re-evaluated) at every use inside the
+  pixel loop.
 
 - [ ] **Dead code**
   - `fillWindow4x4()` (`IDem.cpp:45-66`) defined but never called anywhere —

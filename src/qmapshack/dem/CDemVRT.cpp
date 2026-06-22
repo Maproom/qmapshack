@@ -45,7 +45,7 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent) : IDem(parent), file
   QString fileItem;
   char** fileList = dataset->GetFileList();
   int n = 0;
-  while (fileList[n] != nullptr) {
+  while (fileList != nullptr && fileList[n] != nullptr) {
 #if defined(Q_OS_WIN32)
     fileItem = QString::fromLocal8Bit(fileList[n]);
     if (QFileInfo(fileItem).exists()) {

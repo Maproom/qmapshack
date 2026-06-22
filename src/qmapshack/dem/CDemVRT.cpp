@@ -243,14 +243,7 @@ qreal CDemVRT::getElevationAt(const QPointF& pos, bool checkScale) {
     return NOFLOAT;
   }
 
-  qreal b1 = e[0];
-  qreal b2 = e[1] - e[0];
-  qreal b3 = e[2] - e[0];
-  qreal b4 = e[0] - e[1] - e[2] + e[3];
-
-  qreal ele = b1 + b2 * x + b3 * y + b4 * x * y;
-
-  return ele;
+  return bilinear(e[0], e[1], e[2], e[3], x, y);
 }
 
 qreal CDemVRT::getSlopeAt(const QPointF& pos, bool checkScale) {

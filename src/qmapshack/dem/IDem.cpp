@@ -281,6 +281,10 @@ void IDem::slopeShading(QVector<float>& data, QVector<uchar>& out, quint32 x, qu
   }
 }
 
+qreal IDem::bilinear(qreal a, qreal b, qreal c, qreal d, qreal x, qreal y) {
+  return a + x * (b - a) + y * (c - a) + x * y * (a - b - c + d);
+}
+
 qreal IDem::slopeOfWindowInterp(float* win2, winsize_e size, qreal x, qreal y) const {
   for (int i = 0; i < size; i++) {
     if (hasNoData && win2[i] == noData) {
@@ -297,26 +301,17 @@ qreal IDem::slopeOfWindowInterp(float* win2, winsize_e size, qreal x, qreal y) c
       break;
 
     case eWinsize4x4:
-      win[0] =
-          win2[0] + x * (win2[1] - win2[0]) + y * (win2[4] - win2[0]) + x * y * (win2[0] - win2[1] - win2[4] + win2[5]);
-      win[1] =
-          win2[1] + x * (win2[2] - win2[1]) + y * (win2[5] - win2[1]) + x * y * (win2[1] - win2[2] - win2[5] + win2[6]);
-      win[2] =
-          win2[2] + x * (win2[3] - win2[2]) + y * (win2[6] - win2[2]) + x * y * (win2[2] - win2[3] - win2[6] + win2[7]);
+      win[0] = bilinear(win2[0], win2[1], win2[4], win2[5], x, y);
+      win[1] = bilinear(win2[1], win2[2], win2[5], win2[6], x, y);
+      win[2] = bilinear(win2[2], win2[3], win2[6], win2[7], x, y);
 
-      win[3] =
-          win2[4] + x * (win2[5] - win2[4]) + y * (win2[8] - win2[4]) + x * y * (win2[4] - win2[5] - win2[8] + win2[9]);
-      win[4] = win2[5] + x * (win2[6] - win2[5]) + y * (win2[9] - win2[5]) +
-               x * y * (win2[5] - win2[6] - win2[9] + win2[10]);
-      win[5] = win2[6] + x * (win2[7] - win2[6]) + y * (win2[10] - win2[6]) +
-               x * y * (win2[6] - win2[7] - win2[10] + win2[11]);
+      win[3] = bilinear(win2[4], win2[5], win2[8], win2[9], x, y);
+      win[4] = bilinear(win2[5], win2[6], win2[9], win2[10], x, y);
+      win[5] = bilinear(win2[6], win2[7], win2[10], win2[11], x, y);
 
-      win[6] = win2[8] + x * (win2[9] - win2[8]) + y * (win2[12] - win2[8]) +
-               x * y * (win2[8] - win2[9] - win2[12] + win2[13]);
-      win[7] = win2[9] + x * (win2[10] - win2[9]) + y * (win2[13] - win2[9]) +
-               x * y * (win2[9] - win2[10] - win2[13] + win2[14]);
-      win[8] = win2[10] + x * (win2[11] - win2[10]) + y * (win2[14] - win2[10]) +
-               x * y * (win2[10] - win2[11] - win2[14] + win2[15]);
+      win[6] = bilinear(win2[8], win2[9], win2[12], win2[13], x, y);
+      win[7] = bilinear(win2[9], win2[10], win2[13], win2[14], x, y);
+      win[8] = bilinear(win2[10], win2[11], win2[14], win2[15], x, y);
       break;
 
     default:

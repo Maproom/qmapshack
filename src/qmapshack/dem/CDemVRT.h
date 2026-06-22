@@ -61,6 +61,15 @@ class CDemVRT : public IDem {
    */
   static int progressCallback(double dfComplete, const char* message, void* pProgressArg);
 
+  /**
+     @brief Close a GDAL dataset and reset the pointer, tolerating a null dataset.
+
+     GDALClose() logs a CPL error when passed a null handle instead of just ignoring
+     it, so every call site needs this guard - which happens whenever no warped VRT
+     was needed (srcDataset stays null) or construction failed before dataset was set.
+   */
+  static void closeDataset(GDALDataset*& dataset);
+
   mutable QMutex mutex;
 
   QString filename;

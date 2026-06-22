@@ -75,12 +75,22 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent) : IDem(parent), file
     GDALClose(dataset);
     dataset = nullptr;
     QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."),
-                         tr("DEM must have one band with 16bit or 32bit data:") % '\n' % filename);
+                         tr("DEM must have exactly one raster band:") % '\n' % filename);
     return;
   }
 
   GDALRasterBand* pBand = dataset->GetRasterBand(1);
   if (nullptr == pBand) {
+    GDALClose(dataset);
+    dataset = nullptr;
+    QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."),
+                         tr("DEM must have exactly one raster band:") % '\n' % filename);
+    return;
+  }
+
+  const GDALDataType bandType = pBand->GetRasterDataType();
+  if (bandType != GDT_Int16 && bandType != GDT_UInt16 && bandType != GDT_Int32 && bandType != GDT_UInt32 &&
+      bandType != GDT_Float32) {
     GDALClose(dataset);
     dataset = nullptr;
     QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."),

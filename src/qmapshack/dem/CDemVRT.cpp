@@ -417,8 +417,12 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf) {
 
   QVector<uchar> outbuf(w_used * h_used);
 
+  // pointer to one of IDem's per-pixel shading methods (hillshading(), slopeShading(), ...)
   using shadeFnPtr =
       void (CDemVRT::*)(const QVector<float>&, QVector<uchar>&, quint32, quint32, quint32, quint32, quint32) const;
+  // run shadeFn over outbuf in parallel on a 4x4 grid of chunks, blocking until either all
+  // chunks are done (true) or a fresher redraw makes the result moot (false, with whatever
+  // work was already queued left to finish in the background)
   auto computeShading = [=, this, &data, &outbuf](shadeFnPtr shadeFn) {
     // run the shadings in paralell on equal sized chunks
     quint32 n_x = 4;
@@ -438,7 +442,7 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf) {
         quint32 h_chunk = (i == n_y - 1) ? (h_used - y_chunk) : step_h_buf;
 
         threadPool.start([=, this, &data, &outbuf]() {
-          std::invoke(shadeFn, this, data, outbuf, x_chunk, y_chunk, w_used, w_chunk, h_chunk);
+          (this->*shadeFn)(data, outbuf, x_chunk, y_chunk, w_used, w_chunk, h_chunk);
         });
       }
     }
@@ -448,8 +452,8 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf) {
 
   // compute one shading layer and paint it into dest at the given opacity; colorTable
   // may be null (e.g. for the alpha-only slope shading layer)
-  auto drawShadingLayer = [=, this, &outbuf](shadeFnPtr shadeFn, QImage::Format format, const QVector<QRgb>* colorTable,
-                                             qreal opacity, QPainter& p, const QRectF& dest) {
+  auto drawShadingLayer = [=, &outbuf](shadeFnPtr shadeFn, QImage::Format format, const QVector<QRgb>* colorTable,
+                                       qreal opacity, QPainter& p, const QRectF& dest) {
     if (!computeShading(shadeFn)) {
       return false;
     }

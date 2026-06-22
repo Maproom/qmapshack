@@ -227,11 +227,11 @@ class IDem : public IDrawObject {
   bool bSlopeColor = false;
   bool bElevationLimit = false;
   int gradeSlopeColor = 0;
-  qreal slopeCustomStepTable[5];
-  int elevationValue;
+  qreal slopeCustomStepTable[5] = {5.0, 10.0, 15.0, 20.0, 25.0};
+  int elevationValue = 0;
   bool bElevationShading = false;
-  int elevationShadeLimitLow;
-  int elevationShadeLimitHi;
+  int elevationShadeLimitLow = 0;
+  int elevationShadeLimitHi = 0;
   bool bShowElevationShadeScale = false;
 };
 

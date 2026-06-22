@@ -161,14 +161,6 @@ class IDem : public IDrawObject {
    */
   qreal slopeOfWindowInterp(float* win2, winsize_e size, qreal x, qreal y) const;
 
-  /**
-     @brief Reproject (translate, rotate, scale) tile before drawing it.
-     @param img   the tile as QImage
-     @param l     a 4 point polygon to fit the tile in
-     @param p     the QPainter used to paint the tile
-   */
-  void drawTile(QImage& img, QPolygonF& l, QPainter& p) const;
-
   CDemDraw* dem;
 
   /**

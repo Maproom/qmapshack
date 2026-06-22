@@ -42,7 +42,6 @@ class CDemVRT : public IDem {
   void slotNeedsRedraw();
 
  private:
-  using IDem::drawTile;
   void drawElevationShadeScale(QPainter& p) const;
 
   mutable QMutex mutex;

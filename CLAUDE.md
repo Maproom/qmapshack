@@ -232,11 +232,14 @@ and remove the detail once fixed (or leave a one-liner if worth remembering long
   longer move the true extreme corner outside the computed bbox. Needed `#include
   <algorithm>`.
 
-- [ ] **Error message describes a check that doesn't exist** — `CDemVRT.cpp:73-88`
-  Both "raster count != 1" and "band is null" show *"DEM must have one band with 16bit
-  or 32bit data"* — the code never actually checks bit depth anywhere. Either the check
-  was dropped at some point, or the message should just say "DEM must have exactly one
-  raster band."
+- [x] **Error message describes a check that doesn't exist** — `CDemVRT.cpp:73-98`.
+  Fixed: "raster count != 1" and "band is null" now say "DEM must have exactly one
+  raster band:"; added a real `pBand->GetRasterDataType()` check (`GDT_Int16`,
+  `GDT_UInt16`, `GDT_Int32`, `GDT_UInt32`, `GDT_Float32` — i.e. literally 16-bit or
+  32-bit, no 8-bit `Byte` and no 64-bit `Float64`) that now actually owns the original
+  "DEM must have one band with 16bit or 32bit data:" message. Reads still request
+  `GDT_Float32` from GDAL regardless of source type, so this is a sanity gate on
+  plausible elevation encodings, not a requirement of the I/O path itself.
 
 - [ ] **`GetFileList()` not null-checked** — `CDemVRT.cpp:45-46`
   GDAL docs allow `GetFileList()` to return `nullptr` for some drivers; `fileList[n]` is

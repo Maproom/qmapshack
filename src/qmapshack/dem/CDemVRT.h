@@ -44,6 +44,13 @@ class CDemVRT : public IDem {
  private:
   void drawElevationShadeScale(QPainter& p) const;
 
+  /**
+     @brief GDAL progress callback aborting the read once a newer redraw has been
+            requested.
+     @param pProgressArg the CDemDraw passed in as progress callback context
+   */
+  static int progressCallback(double dfComplete, const char* message, void* pProgressArg);
+
   mutable QMutex mutex;
 
   QString filename;

@@ -270,9 +270,11 @@ and remove the detail once fixed (or leave a one-liner if worth remembering long
     declaration/definition itself. `drawTileLQ()` (`IDrawObject`) stays — it's still
     used by the unrelated `IMap::drawTile()`.
 
-- [ ] **Duplicated GDAL progress-callback lambda** — `CDemVRT.cpp:107-110` and `392-395`,
-  identical bodies. Factor into one static helper. Also: the lambda parameter is named
-  `dem`, shadowing the `IDem::dem` member — rename for clarity.
+- [x] **Duplicated GDAL progress-callback lambda** — fixed: added
+  `static int CDemVRT::progressCallback(double, const char*, void*)` (`CDemVRT.h`/`.cpp`)
+  and pass `&CDemVRT::progressCallback` to both `GDALWarpOptions::pfnProgress` and
+  `ReadRaster()`'s progress parameter instead of two identical lambdas. Local var
+  renamed `drawCtx` so it no longer shadows the `IDem::dem` member.
 
 - [ ] **File-existence-check loop is hard to follow** — `CDemVRT.cpp:44-62`
   Mixes a `#ifdef Q_OS_WIN32` fallback with an `n = -1; break;` error-signaling pattern.

@@ -31,6 +31,11 @@
 #include "helpers/CDraw.h"
 #include "units/IUnit.h"
 
+int CDemVRT::progressCallback(double /*dfComplete*/, const char* /*message*/, void* pProgressArg) {
+  auto* drawCtx = reinterpret_cast<CDemDraw*>(pProgressArg);
+  return !drawCtx->needsRedraw();
+}
+
 CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent) : IDem(parent), filename(filename) {
   qDebug() << "------------------------------";
   qDebug() << "VRT: try to open" << filename;
@@ -115,10 +120,7 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent) : IDem(parent), file
 
     GDALWarpOptions* psOptions = GDALCreateWarpOptions();
     psOptions->pProgressArg = dem;
-    psOptions->pfnProgress = [](double dfc, const char* msg, void* arg) -> int {
-      auto dem = reinterpret_cast<CDemDraw*>(arg);
-      return !dem->needsRedraw();
-    };
+    psOptions->pfnProgress = &CDemVRT::progressCallback;
 
     dataset = GDALDataset::FromHandle(GDALAutoCreateWarpedVRT(
         GDALDataset::ToHandle(srcDataset), nullptr, targetSRS.exportToWkt().c_str(), GRA_Bilinear, 0.1, psOptions));
@@ -394,13 +396,9 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf) {
 
     // by requesting a different size than the size of the buffer GDAL will automatically do scaling for us and use
     // overviews
-    CPLErr err = dataset->GetRasterBand(1)->ReadRaster(
-        data.data(), static_cast<size_t>(w_buf) * h_buf, x, y, w_dem, h_dem, w_buf, h_buf, GRIORA_Bilinear,
-        [](double dfc, const char* msg, void* arg) -> int {
-          auto dem = reinterpret_cast<CDemDraw*>(arg);
-          return !dem->needsRedraw();
-        },
-        dem);
+    CPLErr err =
+        dataset->GetRasterBand(1)->ReadRaster(data.data(), static_cast<size_t>(w_buf) * h_buf, x, y, w_dem, h_dem,
+                                              w_buf, h_buf, GRIORA_Bilinear, &CDemVRT::progressCallback, dem);
 
     if (err != CE_None) {
       return;

@@ -25,12 +25,12 @@
 #include "dem/CDemPropSetup.h"
 
 template <typename T>
-inline T getValue(QVector<T>& data, int x, int y, int dx) {
+inline T getValue(const QVector<T>& data, int x, int y, int dx) {
   return data[x + y * dx];
 }
 
 template <typename T>
-inline void fillWindow(QVector<T>& data, int x, int y, int stride, T* w) {
+inline void fillWindow(const QVector<T>& data, int x, int y, int stride, T* w) {
   w[0] = getValue(data, x - 1, y - 1, stride);
   w[1] = getValue(data, x, y - 1, stride);
   w[2] = getValue(data, x + 1, y - 1, stride);
@@ -190,7 +190,7 @@ int IDem::getFactorHillshading() const {
   }
 }
 
-void IDem::hillshading(QVector<float>& data, QVector<uchar>& out, quint32 x, quint32 y, quint32 stride, quint32 w,
+void IDem::hillshading(const QVector<float>& data, QVector<uchar>& out, quint32 x, quint32 y, quint32 stride, quint32 w,
                        quint32 h) const {
   constexpr qreal zFactor = 0.125;
   constexpr qreal zFactorSquared = zFactor * zFactor;
@@ -231,8 +231,8 @@ void IDem::hillshading(QVector<float>& data, QVector<uchar>& out, quint32 x, qui
 
 int IDem::getFactorSlopeShading() const { return factorSlopeShading * 100.; }
 
-void IDem::slopeShading(QVector<float>& data, QVector<uchar>& out, quint32 x, quint32 y, quint32 stride, quint32 w,
-                        quint32 h) const {
+void IDem::slopeShading(const QVector<float>& data, QVector<uchar>& out, quint32 x, quint32 y, quint32 stride,
+                        quint32 w, quint32 h) const {
   for (unsigned int m = 0; m < h; m++) {
     unsigned char* scan = out.data() + (m + y) * stride + x;
     for (unsigned int n = 0; n < w; n++) {
@@ -304,7 +304,7 @@ qreal IDem::slopeOfWindowInterp(float* win2, winsize_e size, qreal x, qreal y) c
   return slope;
 }
 
-void IDem::slopecolor(QVector<float>& data, QVector<uchar>& out, quint32 x, quint32 y, quint32 stride, quint32 w,
+void IDem::slopecolor(const QVector<float>& data, QVector<uchar>& out, quint32 x, quint32 y, quint32 stride, quint32 w,
                       quint32 h) const {
   for (unsigned int m = 0; m < h; m++) {
     unsigned char* scan = out.data() + (m + y) * stride + x;
@@ -337,8 +337,8 @@ void IDem::slopecolor(QVector<float>& data, QVector<uchar>& out, quint32 x, quin
   }
 }
 
-void IDem::elevationLimit(QVector<float>& data, QVector<uchar>& out, quint32 x, quint32 y, quint32 stride, quint32 w,
-                          quint32 h) const {
+void IDem::elevationLimit(const QVector<float>& data, QVector<uchar>& out, quint32 x, quint32 y, quint32 stride,
+                          quint32 w, quint32 h) const {
   for (unsigned int m = 0; m < h; m++) {
     unsigned char* scan = out.data() + (m + y) * stride + x;
     for (unsigned int n = 0; n < w; n++) {
@@ -366,8 +366,8 @@ void IDem::elevationLimit(QVector<float>& data, QVector<uchar>& out, quint32 x, 
   }
 }
 
-void IDem::elevationShading(QVector<float>& data, QVector<uchar>& out, quint32 x, quint32 y, quint32 stride, quint32 w,
-                            quint32 h) const {
+void IDem::elevationShading(const QVector<float>& data, QVector<uchar>& out, quint32 x, quint32 y, quint32 stride,
+                            quint32 w, quint32 h) const {
   for (unsigned int m = 0; m < h; m++) {
     unsigned char* scan = out.data() + (m + y) * stride + x;
     for (unsigned int n = 0; n < w; n++) {

@@ -124,20 +124,20 @@ class IDem : public IDrawObject {
   void slotShowElevationShadeScale(bool yes);
 
  protected:
-  void hillshading(QVector<float>& data, QVector<uchar>& out, quint32 x, quint32 y, quint32 stride, quint32 w,
+  void hillshading(const QVector<float>& data, QVector<uchar>& out, quint32 x, quint32 y, quint32 stride, quint32 w,
                    quint32 h) const;
 
-  void slopeShading(QVector<float>& data, QVector<uchar>& out, quint32 x, quint32 y, quint32 stride, quint32 w,
+  void slopeShading(const QVector<float>& data, QVector<uchar>& out, quint32 x, quint32 y, quint32 stride, quint32 w,
                     quint32 h) const;
 
-  void slopecolor(QVector<float>& data, QVector<uchar>& out, quint32 x, quint32 y, quint32 stride, quint32 w,
+  void slopecolor(const QVector<float>& data, QVector<uchar>& out, quint32 x, quint32 y, quint32 stride, quint32 w,
                   quint32 h) const;
 
-  void elevationLimit(QVector<float>& data, QVector<uchar>& out, quint32 x, quint32 y, quint32 stride, quint32 w,
+  void elevationLimit(const QVector<float>& data, QVector<uchar>& out, quint32 x, quint32 y, quint32 stride, quint32 w,
                       quint32 h) const;
 
-  void elevationShading(QVector<float>& data, QVector<uchar>& out, quint32 x, quint32 y, quint32 stride, quint32 w,
-                        quint32 h) const;
+  void elevationShading(const QVector<float>& data, QVector<uchar>& out, quint32 x, quint32 y, quint32 stride,
+                        quint32 w, quint32 h) const;
 
   /**
      @brief Bilinear interpolation between the 4 corners of a unit square.

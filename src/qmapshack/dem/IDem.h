@@ -175,6 +175,21 @@ class IDem : public IDrawObject {
                         quint32 w, quint32 h) const;
 
   /**
+     @brief Elevation, in the user's configured unit, of the highest valid sample in a
+            3x3 window.
+
+     Uses the maximum rather than the mean so a single high pixel in the neighborhood is
+     enough to flag/color the whole window - keeps thin ridgelines visible at the
+     elevation-limit/elevation-shading resolution. noData samples are ignored, unless
+     the DEM has no noData value at all (hasNoData == false), in which case every sample
+     is treated as valid.
+
+     @param win 3x3 window of raw elevation samples in meters (see fillWindow())
+     @return elevation in the user's configured unit
+   */
+  qreal maxElevationInWindow(const float* win) const;
+
+  /**
      @brief Bilinear interpolation between the 4 corners of a unit square.
      @param a top-left value (x=0, y=0)
      @param b top-right value (x=1, y=0)

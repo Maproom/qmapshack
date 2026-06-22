@@ -166,7 +166,7 @@ void IDem::initElevationShadeTable() {
 
   elevationShadeTable[0] = qRgba(75, 75, 75, 255);
   for (int i = 0; i < 254; i++) {
-    const QColor& color = QColor::fromHsv(240. * (253 - i) / 253, 255, 255);
+    const QColor color = QColor::fromHsv(240. * (253 - i) / 253, 255, 255);
     elevationShadeTable[i + 1] = color.rgb();
   }
   elevationShadeTable[255] = qRgba(180, 180, 180, 255);
@@ -337,6 +337,20 @@ void IDem::slopecolor(const QVector<float>& data, QVector<uchar>& out, quint32 x
   }
 }
 
+qreal IDem::maxElevationInWindow(const float* win) const {
+  qreal meters = -2.0;
+  for (unsigned int i = 0; i < eWinsize3x3; i++) {
+    if ((!hasNoData || win[i] != noData) && win[i] > meters) {
+      meters = win[i];
+    }
+  }
+
+  qreal elevation;  // elevation in the units set by the user
+  QString unit;     // result not used
+  IUnit::self().meter2elevation(meters, elevation, unit);
+  return elevation;
+}
+
 void IDem::elevationLimit(const QVector<float>& data, QVector<uchar>& out, quint32 x, quint32 y, quint32 stride,
                           quint32 w, quint32 h) const {
   for (unsigned int m = 0; m < h; m++) {
@@ -345,56 +359,30 @@ void IDem::elevationLimit(const QVector<float>& data, QVector<uchar>& out, quint
       float win[eWinsize3x3];
       fillWindow(data, n + x + 1, m + y + 1, stride + 2, win);
 
-      // get maximum of window (_not_ mean)
-      //
-      qreal meters = -2.0;
-      for (unsigned int i = 0; i < eWinsize3x3; i++) {
-        if (win[i] != noData && win[i] > meters) {
-          meters = win[i];
-        }
-      }
-
-      qreal elevation;  // elevation in the units set by the user
-      QString unit;     // result not used
-      IUnit::self().meter2elevation(meters, elevation, unit);
-      if (elevation >= getElevationLimit()) {
-        scan[n] = 1;
-      } else {
-        scan[n] = 0;
-      }
+      const qreal elevation = maxElevationInWindow(win);
+      scan[n] = (elevation >= getElevationLimit()) ? 1 : 0;
     }
   }
 }
 
 void IDem::elevationShading(const QVector<float>& data, QVector<uchar>& out, quint32 x, quint32 y, quint32 stride,
                             quint32 w, quint32 h) const {
+  // clip set min and max values
+  const int limitLow = std::min(getElevationShadeLimitLow(), getElevationShadeLimitHi());
+  const int limitHi = std::max(getElevationShadeLimitLow(), getElevationShadeLimitHi());
+
   for (unsigned int m = 0; m < h; m++) {
     unsigned char* scan = out.data() + (m + y) * stride + x;
     for (unsigned int n = 0; n < w; n++) {
       float win[eWinsize3x3];
       fillWindow(data, n + x + 1, m + y + 1, stride + 2, win);
 
-      // get maximum of window (_not_ mean)
-      //
-      qreal meters = -2.0;
-      for (unsigned int i = 0; i < eWinsize3x3; i++) {
-        if (win[i] != noData && win[i] > meters) {
-          meters = win[i];
-        }
-      }
-
-      qreal elevation;  // elevation in the units set by the user
-      QString unit;     // result not used
-      IUnit::self().meter2elevation(meters, elevation, unit);
-
-      // calc shade of elevation based and  clip set min and max values
-      int limitLow = std::min(getElevationShadeLimitLow(), getElevationShadeLimitHi());
-      int limitHi = std::max(getElevationShadeLimitLow(), getElevationShadeLimitHi());
+      const qreal elevation = maxElevationInWindow(win);
 
       if (elevation < limitLow) {
         scan[n] = 0;
       } else if (elevation < limitHi) {
-        qreal relLimit = (elevation - limitLow) / (limitHi - limitLow);
+        const qreal relLimit = (elevation - limitLow) / (limitHi - limitLow);
         scan[n] = 1 + relLimit * 253;
       } else {
         scan[n] = 255;

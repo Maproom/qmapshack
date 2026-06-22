@@ -226,23 +226,11 @@ and remove the detail once fixed (or leave a one-liner if worth remembering long
   add to the list as low-priority hardening (call `item->activate(false)` before delete)
   if we want to be defensive.
 
-- [ ] **Bounding box from wrong corner pairs** — `CDemVRT.cpp:325-328`
-  ```cpp
-  qreal left = pt1.x() < pt4.x() ? pt1.x() : pt4.x();
-  qreal right = pt2.x() > pt3.x() ? pt2.x() : pt3.x();
-  qreal top = pt1.y() < pt2.y() ? pt1.y() : pt2.y();
-  qreal bottom = pt4.y() > pt3.y() ? pt4.y() : pt3.y();
-  ```
-  Only compares the two corners nominally on each screen edge — correct only if the
-  DEM-space transform is axis-aligned. For a rotated geotransform (`adfGeoTransform[4]
-  != 0`) or a skewing reprojection, the true min/max per axis can come from any of the
-  4 corners, so this can under-estimate the bbox and clip visible DEM content. Fix:
-  ```cpp
-  qreal left = std::min({pt1.x(), pt2.x(), pt3.x(), pt4.x()});
-  qreal right = std::max({pt1.x(), pt2.x(), pt3.x(), pt4.x()});
-  qreal top = std::min({pt1.y(), pt2.y(), pt3.y(), pt4.y()});
-  qreal bottom = std::max({pt1.y(), pt2.y(), pt3.y(), pt4.y()});
-  ```
+- [x] **Bounding box from wrong corner pairs** — `CDemVRT.cpp:326-329`. Fixed: now takes
+  `std::min`/`std::max` over all four transformed corners per axis instead of just the
+  nominally adjacent pair, so a rotated geotransform or skewing reprojection can no
+  longer move the true extreme corner outside the computed bbox. Needed `#include
+  <algorithm>`.
 
 - [ ] **Error message describes a check that doesn't exist** — `CDemVRT.cpp:73-88`
   Both "raster count != 1" and "band is null" show *"DEM must have one band with 16bit

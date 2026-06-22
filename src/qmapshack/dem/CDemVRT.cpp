@@ -24,6 +24,7 @@
 #include <gdalwarper.h>
 
 #include <QtWidgets>
+#include <algorithm>
 
 #include "CMainWindow.h"
 #include "dem/CDemDraw.h"
@@ -323,10 +324,12 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf) {
   pt4 = trInv.map(pt4);
 
   // bounds of the area to draw in the coordinate space of the DEM
-  qreal left = pt1.x() < pt4.x() ? pt1.x() : pt4.x();
-  qreal right = pt2.x() > pt3.x() ? pt2.x() : pt3.x();
-  qreal top = pt1.y() < pt2.y() ? pt1.y() : pt2.y();
-  qreal bottom = pt4.y() > pt3.y() ? pt4.y() : pt3.y();
+  // use all four corners (not just the nominally adjacent pair) since a rotated
+  // geotransform or a skewing reprojection can move any corner to the extreme
+  qreal left = std::min({pt1.x(), pt2.x(), pt3.x(), pt4.x()});
+  qreal right = std::max({pt1.x(), pt2.x(), pt3.x(), pt4.x()});
+  qreal top = std::min({pt1.y(), pt2.y(), pt3.y(), pt4.y()});
+  qreal bottom = std::max({pt1.y(), pt2.y(), pt3.y(), pt4.y()});
 
   if ((top > ysize_px) || (left > xsize_px) || (bottom < 0) || (right < 0)) {
     // current view is entirely outside the bounds of the DEM so there is nothing to draw

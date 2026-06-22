@@ -187,6 +187,107 @@ const QRect rectStatus = row.fullStatusSlice(fmStatus.height());
 
 ---
 
+## Working list: CDemVRT / IDem cleanup
+
+Found during a review of `src/qmapshack/dem/CDemVRT.{h,cpp}` and its base class
+`src/qmapshack/dem/IDem.{h,cpp}` (2026-06-22). Tackle one at a time; check off when done
+and remove the detail once fixed (or leave a one-liner if worth remembering long-term).
+
+### Bugs
+
+- [x] **Opacity boost inverted at high opacity** — `CDemVRT.cpp:447`. Fixed: now
+  `qreal o2 = qMin(o1 + 0.4, 1.0);` instead of falling back to plain `o1` when
+  `o1 + 0.4 >= 1.0`.
+
+- [ ] **Destructor closes GDAL dataset without taking `mutex`** — `CDemVRT.cpp:196-200`
+  Every other access to `dataset` (`draw()`, `getElevationAt()`, `getSlopeAt()`) locks
+  `mutex` first because GDAL isn't reentrant. Traced the call paths in `CDemList`/
+  `CDemDraw`/`IDrawContext`: there is no synchronization between deleting a DEM (e.g.
+  `CDemList::slotRemove()`) and the background draw thread, which can be mid-`draw()`
+  holding `mutex` on this exact dataset at the same time. At minimum, lock `mutex` in
+  the destructor before `GDALClose()`. Doesn't fully fix the lifetime issue (the draw
+  thread isn't told to stop before deletion) but closes the most obvious race.
+
+- [ ] **Bounding box from wrong corner pairs** — `CDemVRT.cpp:325-328`
+  ```cpp
+  qreal left = pt1.x() < pt4.x() ? pt1.x() : pt4.x();
+  qreal right = pt2.x() > pt3.x() ? pt2.x() : pt3.x();
+  qreal top = pt1.y() < pt2.y() ? pt1.y() : pt2.y();
+  qreal bottom = pt4.y() > pt3.y() ? pt4.y() : pt3.y();
+  ```
+  Only compares the two corners nominally on each screen edge — correct only if the
+  DEM-space transform is axis-aligned. For a rotated geotransform (`adfGeoTransform[4]
+  != 0`) or a skewing reprojection, the true min/max per axis can come from any of the
+  4 corners, so this can under-estimate the bbox and clip visible DEM content. Fix:
+  ```cpp
+  qreal left = std::min({pt1.x(), pt2.x(), pt3.x(), pt4.x()});
+  qreal right = std::max({pt1.x(), pt2.x(), pt3.x(), pt4.x()});
+  qreal top = std::min({pt1.y(), pt2.y(), pt3.y(), pt4.y()});
+  qreal bottom = std::max({pt1.y(), pt2.y(), pt3.y(), pt4.y()});
+  ```
+
+- [ ] **Error message describes a check that doesn't exist** — `CDemVRT.cpp:73-88`
+  Both "raster count != 1" and "band is null" show *"DEM must have one band with 16bit
+  or 32bit data"* — the code never actually checks bit depth anywhere. Either the check
+  was dropped at some point, or the message should just say "DEM must have exactly one
+  raster band."
+
+- [ ] **`GetFileList()` not null-checked** — `CDemVRT.cpp:45-46`
+  GDAL docs allow `GetFileList()` to return `nullptr` for some drivers; `fileList[n]` is
+  dereferenced immediately with no guard. Minor/edge case.
+
+### Readability / maintainability
+
+- [ ] **Duplicated bilinear-interpolation math** — `CDemVRT.cpp:234-239` (`getElevationAt`)
+  and `IDem.cpp:299-320` (4x4 branch of `slopeOfWindowInterp`) implement the same
+  `a + x(b-a) + y(c-a) + xy(a-b-c+d)` formula, written out differently each time (the
+  4x4 branch is 9 dense, easy-to-mistype lines). Extract one `bilinear(a,b,c,d,x,y)`
+  helper and reuse in both places.
+
+- [ ] **Macros leak past their function** — `IDem.cpp:218-222`
+  `ZFACT`, `ZFACT_BY_ZFACT`, `SIN_ALT`, `ZFACT_COS_ALT`, `AZ` are `#define`d inside
+  `IDem::hillshading()` with no matching `#undef` — stay defined for the rest of the
+  translation unit. Replace with `constexpr` locals.
+
+- [ ] **Dead code**
+  - `fillWindow4x4()` (`IDem.cpp:45-66`) defined but never called anywhere —
+    `getSlopeAt` reads its 4x4 window directly via `RasterIO` instead.
+  - `using IDem::drawTile;` (`CDemVRT.h:45`) looks like a leftover from before the
+    "draw entire view at once" refactor (`25ee02a8`); `drawTile`/`drawTileLQ` is no
+    longer called from `CDemVRT`. Check no other `IDem` subclass needs it before
+    removing from `IDem` too.
+
+- [ ] **Duplicated GDAL progress-callback lambda** — `CDemVRT.cpp:107-110` and `392-395`,
+  identical bodies. Factor into one static helper. Also: the lambda parameter is named
+  `dem`, shadowing the `IDem::dem` member — rename for clarity.
+
+- [ ] **File-existence-check loop is hard to follow** — `CDemVRT.cpp:44-62`
+  Mixes a `#ifdef Q_OS_WIN32` fallback with an `n = -1; break;` error-signaling pattern.
+  Pull into a static helper (`allReferencedFilesExist(dataset, missingFile)`) so the
+  constructor reads as "open → validate → set up warp → set up projection."
+
+- [ ] **Inconsistent cast style** — `CDemVRT.cpp:37`
+  `(GDALDataset*)GDALOpen(...)` uses a C-style cast while the rest of the file uses
+  `GDALDataset::FromHandle(...)`.
+
+- [ ] **Leftover `qDebug()` spam** in the constructor (separator lines, cryptic `"FF"`/
+  `"RR"` tags for the transforms) — fires for every DEM loaded. Remove or move behind a
+  `QLoggingCategory`.
+
+- [ ] **Undocumented encoding convention** — `IDem.cpp:162-170, 206-214`
+  `slotSetFactorHillshade(int)`/`getFactorHillshading()` encode UI slider values as
+  "negative → 1/|f|, 0 → neutral, positive → direct multiplier" with no comment
+  explaining why.
+
+- [ ] **Unexplained `QThread::msleep(100)`** — `CDemVRT.cpp:293`
+  No comment explaining it throttles the draw thread when this DEM has nothing to
+  contribute this frame — easy to mistake for forgotten debug code.
+
+- [ ] Minor: `factorHillshading = 0.1666666716337204` (`IDem.h:200`) is a float-rounded
+  literal of 1/6 — `1.0 / 6.0` reads better, no behavioral difference.
+
+---
+
 ## Memory
 
 Store all project-specific learnings, feedback, and notes in this file rather than

@@ -21,6 +21,7 @@
 
 #include <QMutex>
 #include <QThreadPool>
+#include <atomic>
 
 #include "dem/IDem.h"
 
@@ -77,16 +78,12 @@ class CDemVRT : public IDem {
   GDALDataset* srcDataset = nullptr;
   GDALDataset* dataset = nullptr;
 
-  QPointF ref1;
-  QPointF ref2;
-  QPointF ref3;
-  QPointF ref4;
-
   QTransform trFwd;
   QTransform trInv;
 
-  bool hasOverviews = false;
-  bool outOfScale = false;
+  /// true if the current draw scale is outside the object's min/max scale; written by
+  /// draw() (canvas thread), read by getElevationAt()/getSlopeAt() (caller's thread)
+  std::atomic<bool> outOfScale = false;
 
   QRectF boundingBox;
 

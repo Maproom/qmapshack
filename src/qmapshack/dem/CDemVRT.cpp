@@ -192,14 +192,11 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent) : IDem(parent), file
 
   trInv = trFwd.inverted();
 
-  ref1 = trFwd.map(QPointF(0, 0));
-  ref2 = trFwd.map(QPointF(xsize_px, 0));
-  ref3 = trFwd.map(QPointF(xsize_px, ysize_px));
-  ref4 = trFwd.map(QPointF(0, ysize_px));
+  const QPointF topLeft = trFwd.map(QPointF(0, 0));
+  const QPointF bottomRight = trFwd.map(QPointF(xsize_px, ysize_px));
+  boundingBox = QRectF(topLeft, bottomRight);
 
-  qDebug() << ref1 << ref2 << ref3 << ref4;
-  boundingBox = QRectF(ref1, ref3);
-
+  qDebug() << "bounding box" << boundingBox;
   qDebug() << "FF" << trFwd;
   qDebug() << "RR" << trInv;
 

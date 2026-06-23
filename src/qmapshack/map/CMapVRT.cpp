@@ -18,88 +18,54 @@
 
 #include "map/CMapVRT.h"
 
+#include <gdal.h>
 #include <gdal_priv.h>
+#include <gdalwarper.h>
 
 #include <QtWidgets>
+#include <algorithm>
 
 #include "CMainWindow.h"
 #include "helpers/CDraw.h"
 #include "map/CMapDraw.h"
-#include "units/IUnit.h"
-
-#define TILELIMIT 2500
-#define TILESIZEX 64
-#define TILESIZEY 64
 
 CMapVRT::CMapVRT(const QString& filename, CMapDraw* parent) : IMap(eFeatVisibility, parent), filename(filename) {
   qDebug() << "------------------------------";
   qDebug() << "VRT: try to open" << filename;
 
-  dataset = (GDALDataset*)GDALOpen(filename.toUtf8(), GA_ReadOnly);
-
+  dataset = GDALDataset::FromHandle(GDALOpen(filename.toUtf8(), GA_ReadOnly));
   if (nullptr == dataset) {
-    QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."),
-                         tr("Failed to load file:") % '\n' % filename);
+    fail(tr("Failed to load file:") % '\n' % filename);
     return;
   }
 
-  QString fileItem;
-  char** fileList = dataset->GetFileList();
-  int n = 0;
-  while (fileList[n] != nullptr) {
-#if defined(Q_OS_WIN32)
-    fileItem = QString::fromLocal8Bit(fileList[n]);
-    if (QFileInfo(fileItem).exists()) {
-      n++;
-      continue;
-    }
-#endif // defined(Q_OS_WIN32)
-    fileItem = QString::fromUtf8(fileList[n]);
-    if (QFileInfo(fileItem).exists()) {
-      n++;
-      continue;
-    }
-    n = -1;
-    break;
-  }
-  CSLDestroy(fileList);
-  if (n < 0) {
-    GDALClose(dataset);
-    dataset = nullptr;
-    QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."),
-                           tr("File does not exist:") % '\n' % fileItem % '\n' %
-                           tr("referenced by file:") % '\n' % filename);
+  QString missingFile;
+  if (!allReferencedFilesExist(dataset, missingFile)) {
+    fail(tr("File does not exist:") % '\n' % missingFile % '\n' % tr("referenced by file:") % '\n' % filename);
     return;
   }
 
   // ------- setup color table ---------
   rasterBandCount = dataset->GetRasterCount();
+  GDALRasterBand* pBand = dataset->GetRasterBand(1);
   if (rasterBandCount == 1) {
-    GDALRasterBand* pBand = dataset->GetRasterBand(1);
-
     if (nullptr == pBand) {
-      GDALClose(dataset);
-      dataset = nullptr;
-      QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."),
-                           tr("Failed to load file:") % '\n' % filename);
+      fail(tr("Failed to load file:") % '\n' % filename);
       return;
     }
 
     if (pBand->GetColorInterpretation() == GCI_PaletteIndex) {
       GDALColorTable* pct = pBand->GetColorTable();
-      for (int i = 0; i < pct->GetColorEntryCount(); ++i) {
+      for (qint32 i = 0; i < pct->GetColorEntryCount(); ++i) {
         const GDALColorEntry& e = *pct->GetColorEntry(i);
         colortable << qRgba(e.c1, e.c2, e.c3, e.c4);
       }
     } else if (pBand->GetColorInterpretation() == GCI_GrayIndex) {
-      for (int i = 0; i < 256; ++i) {
+      for (qint32 i = 0; i < 256; ++i) {
         colortable << qRgba(i, i, i, 255);
       }
     } else {
-      GDALClose(dataset);
-      dataset = nullptr;
-      QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."),
-                           tr("File must be 8 bit palette or gray indexed:") % '\n' % filename);
+      fail(tr("File must be 8 bit palette or gray indexed:") % '\n' % filename);
       return;
     }
 
@@ -112,58 +78,152 @@ CMapVRT::CMapVRT(const QString& filename, CMapDraw* parent) : IMap(eFeatVisibili
     }
   }
 
-  if (dataset->GetRasterCount() > 0) {
-    hasOverviews = dataset->GetRasterBand(1)->GetOverviewCount() != 0;
-  }
+  qreal masterGeoTransform[6];
+  const qreal masterPixelSizeX =
+      (pBand != nullptr && dataset->GetGeoTransform(masterGeoTransform) == CE_None) ? qAbs(masterGeoTransform[1]) : 0.0;
+  const QVector<qint32> overviewFactors =
+      (pBand != nullptr) ? collectOverviewFactors(dataset, pBand, masterPixelSizeX) : QVector<qint32>();
+  qDebug() << "overview factors" << overviewFactors;
 
-  // if the master VRT does not return a positive overview feedback
-  // test all files combined by the VRT to have overviews.
-  if (!hasOverviews) {
-    qDebug() << "extended test for overviews";
-    hasOverviews = testForOverviews(filename);
+  // single band palette/gray data is categorical: nearest neighbour avoids blending index
+  // values into meaningless colors when resampling. Multi-band true color benefits from
+  // a smoother bilinear resampling.
+  const GDALResampleAlg resampleAlg = (rasterBandCount == 1) ? GRA_NearestNeighbour : GRA_Bilinear;
+
+  // true color sources that don't already carry their own alpha band have no per-pixel way to
+  // mark "outside the source footprint" - ask the warp to synthesize a coverage-tracking
+  // destination alpha band so those areas come back transparent instead of opaque garbage.
+  // Single band palette/gray data is left alone: it already gets transparency for nodata-marked
+  // pixels via the colortable alpha tweak above, and Format_Indexed8 has no room for a separate
+  // alpha channel anyway.
+  bool hasAlphaBand = false;
+  for (qint32 b = 1; b <= rasterBandCount; ++b) {
+    const GDALColorInterp bandColour = dataset->GetRasterBand(b)->GetColorInterpretation();
+    if (bandColour == GCI_AlphaBand) {
+      hasAlphaBand = true;
+    } else if (rasterBandCount > 1 && bandColour != GCI_RedBand && bandColour != GCI_GreenBand &&
+               bandColour != GCI_BlueBand && bandColour != GCI_GrayIndex) {
+      // draw()'s ARGB32 compositing only understands Red/Green/Blue/Alpha/Gray; anything else
+      // (e.g. GCI_Undefined, or one of the YCbCr/HSL-style tags) is silently not drawn there
+      qWarning() << "CMapVRT:" << filename << "band" << b << "has unsupported color interpretation"
+                 << GDALGetColorInterpretationName(bandColour) << "- it will not be drawn";
+    }
   }
-  qDebug() << "has overviews" << hasOverviews;
+  const bool addDstAlphaBand = (rasterBandCount > 1) && !hasAlphaBand;
+
+  // ------- setup warped VRT ---------------
+  // if the projection of the dataset is different then that of the drawing context we wrap the dataset in a virtual
+  // warped dataset to transparently resample it into the drawing contexts projection.
+  OGRSpatialReference targetSRS;
+  OGRErr rv = targetSRS.SetFromUserInput(map->getProjection().toUtf8());
+  const OGRSpatialReference* sourceSRS = dataset->GetSpatialRef();
+  if (rv == OGRERR_NONE && sourceSRS != nullptr && !sourceSRS->IsSame(&targetSRS)) {
+    srcDataset = dataset;
+
+    GDALWarpOptions* psOptions = GDALCreateWarpOptions();
+    psOptions->pProgressArg = map;
+    psOptions->pfnProgress = &CMapVRT::progressCallback;
+
+    if (addDstAlphaBand) {
+      GDALWarpInitDefaultBandMapping(psOptions, rasterBandCount);
+      psOptions->nDstAlphaBand = psOptions->nBandCount + 1;
+    }
+
+    dataset = GDALDataset::FromHandle(GDALAutoCreateWarpedVRT(
+        GDALDataset::ToHandle(srcDataset), nullptr, targetSRS.exportToWkt().c_str(), resampleAlg, 0.1, psOptions));
+
+    GDALDestroyWarpOptions(psOptions);
+
+    if (dataset == nullptr) {
+      fail(tr("Failed to create Warp for:") % '\n' % filename);
+      return;
+    }
+
+    // pick up the synthetic alpha band (if any) so draw() reads/composites it like any other band
+    rasterBandCount = dataset->GetRasterCount();
+
+    if (!overviewFactors.isEmpty()) {
+      // attach them as virtual overviews so GDAL can serve a decimated read straight from
+      // whichever source file(s) actually have a matching level, instead of always warping
+      // at full resolution and only downsampling the output
+      CPLSetConfigOption("VRT_VIRTUAL_OVERVIEWS", "YES");
+      dataset->BuildOverviews("NONE", overviewFactors.size(), overviewFactors.data(), 0, nullptr, nullptr, nullptr);
+      CPLSetConfigOption("VRT_VIRTUAL_OVERVIEWS", "NO");
+    }
+  }
 
   // ------- setup projection ---------------
   proj.init(dataset->GetProjectionRef(), "EPSG:4326");
 
   if (!proj.isValid()) {
-    delete dataset;
-    dataset = nullptr;
-    QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."),
-                         tr("No georeference information found:") % '\n' % filename);
+    fail(tr("No georeference information found:") % '\n' % filename);
     return;
   }
 
   xsize_px = dataset->GetRasterXSize();
   ysize_px = dataset->GetRasterYSize();
 
+  if (xsize_px <= 0 || ysize_px <= 0) {
+    fail(tr("Raster has an invalid (zero) size:") % '\n' % filename);
+    return;
+  }
+
   qreal adfGeoTransform[6];
-  dataset->GetGeoTransform(adfGeoTransform);
+  if (dataset->GetGeoTransform(adfGeoTransform) != CE_None) {
+    fail(tr("No pixel-to-map transform found:") % '\n' % filename);
+    return;
+  }
 
   xscale = adfGeoTransform[1];
   yscale = adfGeoTransform[5];
-  xrot = adfGeoTransform[4];
-  yrot = adfGeoTransform[2];
 
-  trFwd.translate(adfGeoTransform[0], adfGeoTransform[3]);
-  trFwd.scale(adfGeoTransform[1], adfGeoTransform[5]);
-
-  if (adfGeoTransform[4] != 0.0) {
-    trFwd.rotate(qAtan(adfGeoTransform[2] / adfGeoTransform[4]));
-  }
+  // Build trFwd directly from GDAL's affine matrix instead of decomposing it into
+  // translate+scale+rotate: adfGeoTransform[2]/[4] is a general shear term, not
+  // necessarily a pure rotation, so there is no single angle that reproduces it via
+  // QTransform::rotate() (which, in addition, takes degrees - qAtan() returns radians).
+  trFwd = QTransform(adfGeoTransform[1], adfGeoTransform[4], adfGeoTransform[2], adfGeoTransform[5], adfGeoTransform[0],
+                     adfGeoTransform[3]);
 
   if (proj.isSrcLatLong()) {
-    // convert to RAD to match internal notations
+    // Scale every element of the homogeneous matrix by DEG_TO_RAD to convert trFwd's
+    // mapped output from degrees to radians. This works because QTransform::map() never
+    // reads m13/m23/m33 as long as the transform stays non-projective (true here, since
+    // trFwd is built only from translate/scale/shear) - so scaling the whole matrix
+    // scales the mapped point without having to touch dx/dy and the linear part separately.
     trFwd = trFwd * DEG_TO_RAD;
   }
 
   trInv = trFwd.inverted();
 
-  ref1 = trFwd.map(QPointF(0, 0));
-  ref2 = trFwd.map(QPointF(xsize_px, 0));
-  ref3 = trFwd.map(QPointF(xsize_px, ysize_px));
-  ref4 = trFwd.map(QPointF(0, ysize_px));
+  // ------- setup outline ---------------
+  // ref1..ref4 outline the *original* (pre-warp) raster's true footprint, not the
+  // (possibly enlarged, axis-aligned-in-target-SRS) warped VRT's pixel grid - so
+  // drawOutline() still shows the real, potentially rotated shape of the source data
+  // instead of the padded bounding box GDALAutoCreateWarpedVRT introduces.
+  GDALDataset* origDataset = (srcDataset != nullptr) ? srcDataset : dataset;
+
+  CProj projOrig;
+  projOrig.init(origDataset->GetProjectionRef(), "EPSG:4326");
+
+  qreal origGeoTransform[6];
+  origDataset->GetGeoTransform(origGeoTransform);
+
+  QTransform origTrFwd(origGeoTransform[1], origGeoTransform[4], origGeoTransform[2], origGeoTransform[5],
+                       origGeoTransform[0], origGeoTransform[3]);
+  if (projOrig.isSrcLatLong()) {
+    origTrFwd = origTrFwd * DEG_TO_RAD;
+  }
+
+  QPolygonF outline;
+  outline << origTrFwd.map(QPointF(0, 0)) << origTrFwd.map(QPointF(origDataset->GetRasterXSize(), 0))
+          << origTrFwd.map(QPointF(origDataset->GetRasterXSize(), origDataset->GetRasterYSize()))
+          << origTrFwd.map(QPointF(0, origDataset->GetRasterYSize()));
+  projOrig.transform(outline, PJ_FWD);
+
+  ref1 = outline[0];
+  ref2 = outline[1];
+  ref3 = outline[2];
+  ref4 = outline[3];
 
   qDebug() << "FF" << trFwd;
   qDebug() << "RR" << trInv;
@@ -171,92 +231,261 @@ CMapVRT::CMapVRT(const QString& filename, CMapDraw* parent) : IMap(eFeatVisibili
   isActivated = true;
 }
 
-CMapVRT::~CMapVRT() { GDALClose(dataset); }
+CMapVRT::~CMapVRT() {
+  closeDataset(dataset);
+  closeDataset(srcDataset);
+}
 
-bool CMapVRT::testForOverviews(const QString& filename) {
-  QFile file(filename);
-  if (!file.open(QIODevice::ReadOnly)) {
-    qDebug() << "Failed to open" << filename;
+int CMapVRT::progressCallback(double /*dfComplete*/, const char* /*message*/, void* pProgressArg) {
+  auto* drawCtx = reinterpret_cast<CMapDraw*>(pProgressArg);
+  return !drawCtx->needsRedraw();
+}
+
+bool CMapVRT::allReferencedFilesExist(GDALDataset* dataset, QString& missingFile) {
+  char** fileList = dataset->GetFileList();
+  bool allExist = true;
+  for (qint32 n = 0; fileList != nullptr && fileList[n] != nullptr; ++n) {
+#if defined(Q_OS_WIN32)
+    missingFile = QString::fromLocal8Bit(fileList[n]);
+    if (QFileInfo::exists(missingFile)) {
+      continue;
+    }
+#endif  // defined(Q_OS_WIN32)
+    missingFile = QString::fromUtf8(fileList[n]);
+    if (QFileInfo::exists(missingFile)) {
+      continue;
+    }
+    allExist = false;
+    break;
+  }
+  CSLDestroy(fileList);
+  return allExist;
+}
+
+QVector<qint32> CMapVRT::collectOverviewFactors(GDALDataset* dataset, GDALRasterBand* pBand, qreal pixelSizeX) {
+  QSet<qint32> factors;
+
+  if (pBand->GetOverviewCount() != 0) {
+    for (qint32 i = 0; i < pBand->GetOverviewCount(); ++i) {
+      factors << qRound((qreal)pBand->GetXSize() / pBand->GetOverview(i)->GetXSize());
+    }
+  } else if (pixelSizeX > 0) {
+    char** fileList = dataset->GetFileList();
+    for (qint32 n = 0; fileList != nullptr && fileList[n] != nullptr; ++n) {
+      GDALDatasetUniquePtr subDataset(GDALDataset::FromHandle(GDALOpen(fileList[n], GA_ReadOnly)));
+      GDALRasterBand* subBand = subDataset ? subDataset->GetRasterBand(1) : nullptr;
+      qreal subGeoTransform[6];
+      if (subBand == nullptr || subBand->GetOverviewCount() == 0 ||
+          subDataset->GetGeoTransform(subGeoTransform) != CE_None) {
+        continue;
+      }
+
+      const qreal subPixelSizeX = qAbs(subGeoTransform[1]);
+      for (qint32 i = 0; i < subBand->GetOverviewCount(); ++i) {
+        const qreal overviewPixelSizeX = subPixelSizeX * subBand->GetXSize() / subBand->GetOverview(i)->GetXSize();
+        factors << qRound(overviewPixelSizeX / pixelSizeX);
+      }
+    }
+    CSLDestroy(fileList);
+  }
+
+  QVector<qint32> result(factors.begin(), factors.end());
+  std::sort(result.begin(), result.end());
+  return result;
+}
+
+void CMapVRT::closeDataset(GDALDataset*& dataset) {
+  if (dataset != nullptr) {
+    GDALClose(dataset);
+    dataset = nullptr;
+  }
+}
+
+void CMapVRT::fail(const QString& msg) {
+  closeDataset(dataset);
+  closeDataset(srcDataset);
+  QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."), msg);
+}
+
+bool CMapVRT::computeSourceWindow(const IDrawContext::buffer_t& buf, const QPointF& bufferScale,
+                                  sourceWindow_t& window) const {
+  // use bufferScale (and therefore the zoom level) and the pixel scale of the map to calculate a downsampling
+  // factor; <1 would mean GDAL does upscaling which is pointless
+  const qreal bufScaleX = qMax(1.0, qAbs(bufferScale.x() / xscale));
+  const qreal bufScaleY = qMax(1.0, qAbs(bufferScale.y() / yscale));
+
+  // corners of the area we shall draw, converted from the canvas projection into the
+  // map's own pixel coordinate space
+  auto toMapPixel = [this](QPointF pt) {
+    proj.transform(pt, PJ_INV);
+    return trInv.map(pt);
+  };
+  const QPointF pt1 = toMapPixel(buf.ref1);
+  const QPointF pt2 = toMapPixel(buf.ref2);
+  const QPointF pt3 = toMapPixel(buf.ref3);
+  const QPointF pt4 = toMapPixel(buf.ref4);
+
+  // bounds of the area to draw in the coordinate space of the map
+  qreal left = std::min({pt1.x(), pt2.x(), pt3.x(), pt4.x()});
+  qreal right = std::max({pt1.x(), pt2.x(), pt3.x(), pt4.x()});
+  qreal top = std::min({pt1.y(), pt2.y(), pt3.y(), pt4.y()});
+  qreal bottom = std::max({pt1.y(), pt2.y(), pt3.y(), pt4.y()});
+
+  const bool intersectsMap = (top <= ysize_px) && (left <= xsize_px) && (bottom >= 0) && (right >= 0);
+  if (!intersectsMap) {
     return false;
   }
 
-  QDomDocument xml;
-  const QDomDocument::ParseResult& result = xml.setContent(&file);
-  if (!result) {
-    file.close();
-    throw tr("Failed to read: %1\nline %2, column %3:\n %4")
-        .arg(filename)
-        .arg(result.errorLine)
-        .arg(result.errorColumn)
-        .arg(result.errorMessage);
-    qDebug() << "Failed to read:" << filename << Qt::endl
-             << "line" << result.errorLine << ", column" << result.errorColumn << Qt::endl
-             << result.errorMessage;
-    return false;
-  }
-  file.close();
+  // current view intersects the bounds of the map, so clip to them
+  left = std::clamp(left, 0.0, (qreal)xsize_px);
+  top = std::clamp(top, 0.0, (qreal)ysize_px);
+  right = std::clamp(right, 0.0, (qreal)xsize_px);
+  bottom = std::clamp(bottom, 0.0, (qreal)ysize_px);
 
-  QSet<QString> files;
-  QDir basePath(QFileInfo(filename).absoluteDir());
-  const QDomElement& xmlVrt = xml.documentElement();
-
-  {
-    const QDomNodeList& xmlComplexSources = xmlVrt.elementsByTagName("ComplexSource");
-    const int N = xmlComplexSources.count();
-    for (int n = 0; n < N; ++n) {
-      const QDomNode& xmlComplexSource = xmlComplexSources.item(n);
-      const QDomNode& xmlSourceFilename = xmlComplexSource.namedItem("SourceFilename");
-      const QDomNamedNodeMap& attr = xmlSourceFilename.attributes();
-      QString subFilename = xmlSourceFilename.toElement().text();
-
-      if (attr.contains("relativeToVRT") && (attr.namedItem("relativeToVRT").nodeValue() == "1")) {
-        subFilename = basePath.absoluteFilePath(subFilename);
-      }
-
-      files << subFilename;
-    }
-  }
-
-  {
-    const QDomNodeList& xmlSimpleSources = xmlVrt.elementsByTagName("SimpleSource");
-    const int N = xmlSimpleSources.count();
-    for (int n = 0; n < N; ++n) {
-      const QDomNode& xmlSimpleSource = xmlSimpleSources.item(n);
-      const QDomNode& xmlSourceFilename = xmlSimpleSource.namedItem("SourceFilename");
-      const QDomNamedNodeMap& attr = xmlSourceFilename.attributes();
-      QString subFilename = xmlSourceFilename.toElement().text();
-
-      if (attr.contains("relativeToVRT") && (attr.namedItem("relativeToVRT").nodeValue() == "1")) {
-        subFilename = basePath.absoluteFilePath(subFilename);
-      }
-
-      files << subFilename;
-    }
-  }
-
-  if (files.isEmpty()) {
+  if ((right <= left) || (bottom <= top)) {
     return false;
   }
 
-  for (const QString& file : std::as_const(files)) {
-    using pGDALDataset = QSharedPointer<GDALDataset>;
-    pGDALDataset _dataset = pGDALDataset((GDALDataset*)GDALOpen(file.toUtf8(), GA_ReadOnly), GDALClose);
-    // _dataset will be destroyed automatically by shared pointer.
-
-    if (_dataset == nullptr) {
-      return false;
-    }
-
-    if (_dataset->GetRasterCount() > 0) {
-      if (_dataset->GetRasterBand(1)->GetOverviewCount() == 0) {
-        return false;
-      }
-    } else {
-      return false;
-    }
-  }
-
+  window.left = left;
+  window.top = top;
+  window.right = right;
+  window.bottom = bottom;
+  // dimensions of the buffer GDAL will read into; requesting a different size than the size of the source
+  // window lets GDAL do the scaling for us and use overviews
+  window.bufWidth = qMax(1, qRound((right - left) / bufScaleX));
+  window.bufHeight = qMax(1, qRound((bottom - top) / bufScaleY));
   return true;
+}
+
+QImage CMapVRT::readSourceImage(const sourceWindow_t& window) {
+  const qreal w_map = window.right - window.left;
+  const qreal h_map = window.bottom - window.top;
+  const qint32 w_buf = window.bufWidth;
+  const qint32 h_buf = window.bufHeight;
+
+  // add a temporary GDAL error handler to filter out errors that are caused by intentionally aborted reads
+  // automatically removed at end of scope
+  CPLErrorHandlerPusher oCurrentHandler(
+      [](CPLErr eErrClass, CPLErrorNum errNo, const char* msg) {
+        if (errNo == CPLE_UserInterrupt || errNo == CPLE_AppDefined) {
+          return;
+        }
+        CPLDefaultErrorHandler(eErrClass, errNo, msg);
+      },
+      nullptr);
+
+  QImage img;
+  CPLErr err = CE_Failure;
+  if (rasterBandCount == 1) {
+    // backs img's pixel buffer: QImage's own row alignment may pad bytesPerLine() beyond
+    // w_buf, so we read into a tightly packed member buffer instead (resized, not
+    // reallocated, across draw() calls) and hand it to QImage with an explicit
+    // bytesPerLine; it outlives img below since indexData is a member, not a local
+    indexData.resize(static_cast<qsizetype>(w_buf) * h_buf);
+
+    err = dataset->GetRasterBand(1)->ReadRaster(indexData.data(), static_cast<size_t>(indexData.size()), window.left,
+                                                window.top, w_map, h_map, w_buf, h_buf, GRIORA_NearestNeighbour,
+                                                &CMapVRT::progressCallback, map);
+    if (err == CE_None) {
+      img = QImage(indexData.constData(), w_buf, h_buf, w_buf, QImage::Format_Indexed8);
+      img.setColorTable(colortable);
+    }
+  } else {
+    img = QImage(w_buf, h_buf, QImage::Format_ARGB32);
+    img.fill(qRgba(255, 255, 255, 255));
+
+    bandBuf.resize(static_cast<qsizetype>(w_buf) * h_buf);
+    const QRgb testPix = qRgba(GCI_RedBand, GCI_GreenBand, GCI_BlueBand, GCI_AlphaBand);
+
+    // byte offset of channel within one ARGB32 pixel - exploits testPix's in-memory
+    // layout, where each component ends up at the offset matching its own enum value
+    // since GCI_RedBand/GreenBand/BlueBand/AlphaBand happen to be 3/4/5/6
+    auto offsetOf = [&testPix](GDALColorInterp channel) {
+      quint32 offset = 0;
+      while (offset < sizeof(testPix) && *(((const quint8*)&testPix) + offset) != channel) {
+        ++offset;
+      }
+      return offset;
+    };
+    auto copyBandInto = [&](quint32 offset) {
+      quint8* pTar = img.bits() + offset;
+      const quint8* pSrc = bandBuf.constData();
+      for (qsizetype i = 0; i < bandBuf.size(); ++i) {
+        *pTar = *pSrc;
+        pTar += sizeof(testPix);
+        pSrc += 1;
+      }
+    };
+    const quint32 offsetR = offsetOf(GCI_RedBand);
+    const quint32 offsetG = offsetOf(GCI_GreenBand);
+    const quint32 offsetB = offsetOf(GCI_BlueBand);
+
+    for (qint32 b = 1; b <= rasterBandCount; ++b) {
+      GDALRasterBand* pBand = dataset->GetRasterBand(b);
+
+      err = pBand->ReadRaster(bandBuf.data(), static_cast<size_t>(bandBuf.size()), window.left, window.top, w_map,
+                              h_map, w_buf, h_buf, GRIORA_Bilinear, &CMapVRT::progressCallback, map);
+      if (err != CE_None) {
+        break;
+      }
+
+      const GDALColorInterp pbandColour = pBand->GetColorInterpretation();
+      if (pbandColour == GCI_GrayIndex) {
+        // a lone gray channel among other bands (e.g. gray+alpha) - duplicate it into
+        // R, G and B rather than dropping it
+        copyBandInto(offsetR);
+        copyBandInto(offsetG);
+        copyBandInto(offsetB);
+      } else {
+        const quint32 offset = offsetOf(pbandColour);
+        if (offset < sizeof(testPix)) {
+          copyBandInto(offset);
+        }
+      }
+    }
+  }
+
+  return (err == CE_None) ? img : QImage();
+}
+
+void CMapVRT::drawSourceImage(QPainter& p, const sourceWindow_t& window, const QImage& img) const {
+  // Map img onto screen with the exact affine transform instead of an axis-aligned
+  // QRectF. GDAL's warp (in the ctor) already resolved any cross-projection curvature
+  // into the dataset's own pixel grid, and proj.transform(PJ_FWD) here is the exact
+  // inverse of what map->convertRad2Px() does internally to get back to this view's
+  // CRS, so the two cancel to identity. What's left is trFwd: a fixed matrix that can
+  // carry shear/rotation from a non-north-up source geotransform, composed with
+  // convertRad2Px()'s affine pan/zoom - both affine, so 3 corners fully determine the
+  // map; no curve-fitting/subdivision (as used for genuinely curved projections
+  // elsewhere) is needed.
+  auto toScreenPx = [this](QPointF pt) {
+    pt = trFwd.map(pt);
+    proj.transform(pt, PJ_FWD);
+    map->convertRad2Px(pt);
+    return pt;
+  };
+  const QPointF s0 = toScreenPx(QPointF(window.left, window.top));
+  const QPointF s1 = toScreenPx(QPointF(window.right, window.top));
+  const QPointF s3 = toScreenPx(QPointF(window.left, window.bottom));
+
+  const QTransform imgToScreen((s1.x() - s0.x()) / window.bufWidth, (s1.y() - s0.y()) / window.bufWidth,
+                               (s3.x() - s0.x()) / window.bufHeight, (s3.y() - s0.y()) / window.bufHeight, s0.x(),
+                               s0.y());
+
+  p.save();
+  p.setTransform(imgToScreen, true);
+  p.drawImage(QPointF(0, 0), img);
+  p.restore();
+}
+
+void CMapVRT::drawOutline(QPainter& p) const {
+  QPolygonF boundingBox;
+  boundingBox << ref1 << ref2 << ref3 << ref4;
+  map->convertRad2Px(boundingBox);
+
+  p.setPen(Qt::black);
+  p.setBrush(Qt::NoBrush);
+  p.drawPolygon(boundingBox);
 }
 
 void CMapVRT::draw(IDrawContext::buffer_t& buf) /* override */
@@ -265,97 +494,11 @@ void CMapVRT::draw(IDrawContext::buffer_t& buf) /* override */
     return;
   }
 
-  QPointF bufferScale = buf.scale * buf.zoomFactor;
-
-  // calculate bounding box;
-  QPointF pt1 = ref1;
-  QPointF pt2 = ref2;
-  QPointF pt3 = ref3;
-  QPointF pt4 = ref4;
-
-  proj.transform(pt1, PJ_FWD);
-  proj.transform(pt2, PJ_FWD);
-  proj.transform(pt3, PJ_FWD);
-  proj.transform(pt4, PJ_FWD);
-
-  QPolygonF boundingBox;
-  boundingBox << pt1 << pt2 << pt3 << pt4;
-  map->convertRad2Px(boundingBox);
+  const QPointF bufferScale = buf.scale * buf.zoomFactor;
 
   // get pixel offset of top left buffer corner
   QPointF pp = buf.ref1;
   map->convertRad2Px(pp);
-
-  // calculate area to read from file
-  pt1 = buf.ref1;
-  pt2 = buf.ref2;
-  pt3 = buf.ref3;
-  pt4 = buf.ref4;
-
-  proj.transform(pt1, PJ_INV);
-  proj.transform(pt2, PJ_INV);
-  proj.transform(pt3, PJ_INV);
-  proj.transform(pt4, PJ_INV);
-
-  pt1 = trInv.map(pt1);
-  pt2 = trInv.map(pt2);
-  pt3 = trInv.map(pt3);
-  pt4 = trInv.map(pt4);
-
-  qreal left, right, top, bottom;
-  left = pt1.x() < pt4.x() ? pt1.x() : pt4.x();
-  right = pt2.x() > pt3.x() ? pt2.x() : pt3.x();
-  top = pt1.y() < pt2.y() ? pt1.y() : pt2.y();
-  bottom = pt4.y() > pt3.y() ? pt4.y() : pt3.y();
-
-  if (left < 0) {
-    left = 0;
-  }
-  if (left > xsize_px) {
-    left = xsize_px;
-  }
-
-  if (top < 0) {
-    top = 0;
-  }
-  if (top > ysize_px) {
-    top = ysize_px;
-  }
-
-  if (right > xsize_px) {
-    right = xsize_px;
-  }
-  if (right < 0) {
-    right = 0;
-  }
-
-  if (bottom > ysize_px) {
-    bottom = ysize_px;
-  }
-  if (bottom < 0) {
-    bottom = 0;
-  }
-
-  qint32 imgw = TILESIZEX;
-  qint32 imgh = TILESIZEY;
-  qint32 dx = imgw;
-  qint32 dy = imgh;
-
-  // estimate number of tiles and use it as a limit if no
-  // user defined limit is given
-  qreal nTiles = ((right - left) * (bottom - top) / (dx * dy));
-  if (hasOverviews) {
-    // if there are overviews tiles can be reduced by reading
-    // with a scale factor from file. Increase amount of pixel
-    // read until tile limit is met.
-    while (nTiles > TILELIMIT) {
-      dx *= 2;
-      dy *= 2;
-      nTiles /= 4;
-    }
-  } else {
-    nTiles = getMaxScale() == NOFLOAT ? nTiles : 0;
-  }
 
   // start to draw the map
   QPainter p(&buf.image);
@@ -363,106 +506,13 @@ void CMapVRT::draw(IDrawContext::buffer_t& buf) /* override */
   p.setOpacity(getOpacity() / 100.0);
   p.translate(-pp);
 
-  //    qDebug() << imgw << dx << nTiles;
-  // limit number of tiles to keep performance
-  if (!isOutOfScale(bufferScale) && (nTiles < TILELIMIT)) {
-    for (qint32 y = top; y < bottom; y += dy) {
-      if (map->needsRedraw()) {
-        break;
-      }
-
-      for (qint32 x = left; x < right; x += dx) {
-        if (map->needsRedraw()) {
-          break;
-        }
-
-        // read tile from file
-        CPLErr err = CE_Failure;
-
-        // reduce tile size at the border of the file
-        qreal dx_used = dx;
-        qreal dy_used = dy;
-        qreal imgw_used = imgw;
-        qreal imgh_used = imgh;
-
-        if ((x + dx) > xsize_px) {
-          dx_used = xsize_px - x;
-          imgw_used = qRound(imgw * dx_used / dx) & 0xFFFFFFFC;
-        }
-        if ((y + dy) > ysize_px) {
-          dy_used = ysize_px - y;
-          imgh_used = imgh * dy_used / dy;
-        }
-
-        dx_used = qFloor(dx_used);
-        dy_used = qFloor(dy_used);
-        imgw_used = qRound(imgw_used);
-        imgh_used = qRound(imgh_used);
-
-        if (imgw_used < 1 || imgh_used < 1) {
-          continue;
-        }
-
-        QImage img;
-        if (rasterBandCount == 1) {
-          GDALRasterBand* pBand;
-          pBand = dataset->GetRasterBand(1);
-
-          img = QImage(QSize(imgw_used, imgh_used), QImage::Format_Indexed8);
-          img.setColorTable(colortable);
-
-          err = pBand->RasterIO(GF_Read, x, y, dx_used, dy_used, img.bits(), imgw_used, imgh_used, GDT_Byte, 0, 0);
-        } else {
-          img = QImage(imgw_used, imgh_used, QImage::Format_ARGB32);
-          img.fill(qRgba(255, 255, 255, 255));
-
-          QVector<quint8> buffer(imgw_used * imgh_used);
-
-          QRgb testPix = qRgba(GCI_RedBand, GCI_GreenBand, GCI_BlueBand, GCI_AlphaBand);
-
-          for (int b = 1; b <= rasterBandCount; ++b) {
-            GDALRasterBand* pBand;
-            pBand = dataset->GetRasterBand(b);
-
-            err = pBand->RasterIO(GF_Read, x, y, dx_used, dy_used, buffer.data(), imgw_used, imgh_used, GDT_Byte, 0, 0);
-
-            if (!err) {
-              int pbandColour = pBand->GetColorInterpretation();
-              unsigned int offset;
-
-              for (offset = 0; offset < sizeof(testPix) && *(((quint8*)&testPix) + offset) != pbandColour; offset++) {
-              }
-              if (offset < sizeof(testPix)) {
-                quint8* pTar = img.bits() + offset;
-                quint8* pSrc = buffer.data();
-                const int size = buffer.size();
-
-                for (int i = 0; i < size; ++i) {
-                  *pTar = *pSrc;
-                  pTar += sizeof(testPix);
-                  pSrc += 1;
-                }
-              }
-            }
-          }
-        }
-
-        if (err) {
-          continue;
-        }
-
-        QPolygonF l;
-        l << QPointF(x, y) << QPointF(x + dx_used, y) << QPointF(x + dx_used, y + dy_used) << QPointF(x, y + dy_used);
-        l = trFwd.map(l);
-
-        proj.transform(l, PJ_FWD);
-
-        drawTile(img, l, p);
-      }
+  sourceWindow_t window;
+  if (!isOutOfScale(bufferScale) && computeSourceWindow(buf, bufferScale, window)) {
+    const QImage img = readSourceImage(window);
+    if (!img.isNull()) {
+      drawSourceImage(p, window, img);
     }
   }
 
-  p.setPen(Qt::black);
-  p.setBrush(Qt::NoBrush);
-  p.drawPolygon(boundingBox);
+  drawOutline(p);
 }

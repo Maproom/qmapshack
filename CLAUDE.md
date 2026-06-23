@@ -66,6 +66,8 @@ if (condition)
 
 **Prefer `QFileInfo::exists(path)` (static) over `QFileInfo(path).exists()`** when you only need an existence check — no need to construct a full `QFileInfo`.
 
+**Prefer Qt's fixed-width typedefs over plain C++ types**: `qint32`/`quint32` over `int`/`unsigned int`, `qreal` over `double`, `qsizetype` over `size_t`/`ptrdiff_t` for sizes coming from Qt containers. Exception: when a parameter type is dictated by an external API (e.g. GDAL's `int*` out-param, or `size_t` in a `ReadRaster()` signature), match that API's type instead of casting.
+
 ---
 
 ## Building
@@ -205,5 +207,47 @@ Do not add `Co-Authored-By` lines to commit messages.
 
 `animations_t` is defined after `getAnimations()` in the private section. The forward
 declaration `struct animations_t;` before `getAnimations()` is required — do not remove it.
+
+### QImage::Format_Indexed8 + GDAL RasterIO/ReadRaster — row padding pitfall
+
+Never pass `img.bits()` directly as the destination buffer for a GDAL `RasterIO`/`ReadRaster`
+call when the image width isn't guaranteed to be a multiple of 4. Qt may pad
+`QImage::bytesPerLine()` beyond the pixel width for 1-byte-per-pixel formats (`Format_Indexed8`),
+but a GDAL read with no explicit line spacing assumes the buffer is tightly packed
+(`bytesPerLine == width`), silently corrupting/skewing every row once they diverge.
+
+The old `CMapVRT` tiling code (pre-GDAL-warp version) masked tile width with `& 0xFFFFFFFC` to
+dodge exactly this for partial edge tiles — a sign the bug is real, not theoretical. The fix
+(used by both `CDemVRT` and the current `CMapVRT`, see `map/CMapVRT.cpp`'s `draw()`): read into a
+flat `QVector<quint8>` (no padding concerns, it's just linear memory) and build the `QImage` via
+the constructor that takes an explicit `bytesPerLine` argument:
+`QImage(buf.constData(), w, h, w, QImage::Format_Indexed8)`. Multi-byte-per-pixel formats
+(`Format_ARGB32`, 4 bytes/px) aren't affected since `width * 4` is always a multiple of 4.
+
+### CMapVRT/CDemVRT warped VRT — transparency outside the source footprint
+
+`GDALAutoCreateWarpedVRT` resamples onto an axis-aligned bounding box around the (possibly
+rotated) reprojected footprint, so corners with no source coverage exist whenever the source
+isn't already axis-aligned with the target SRS. What fills those corners depends on the data path:
+
+- Single-band palette/gray (`CMapVRT`): already handled. If the source declares a nodata value,
+  GDAL falls back to using it as both src/dst nodata for the warp (we never set
+  `padfSrcNoDataReal`/`padfDstNoDataReal` ourselves), so uncovered pixels come back as that nodata
+  index — and the constructor already zeroes that index's alpha in the colortable. No source
+  nodata declared means no automatic transparency here; `Format_Indexed8` has no separate alpha
+  channel to retrofit one.
+- Multi-band RGB(A) without its own alpha band (`CMapVRT`): fixed via a synthetic destination alpha
+  band (`GDALWarpInitDefaultBandMapping` + `psOptions->nDstAlphaBand = nBandCount + 1`, mirroring
+  `gdalwarp -dstalpha`). The warp tracks per-pixel source coverage into that band automatically;
+  `rasterBandCount` is re-read from the warped dataset afterward so `draw()`'s band loop picks it
+  up like any other band. Verified with a standalone `gdalwarp`/Pillow test (rotated 3-band source,
+  `-dstalpha` on vs. off): without the alpha band, uncovered corners come back **solid black**
+  (0,0,0) - GDAL's own warp fill, not the `img.fill(white)` pre-fill in `draw()`, which gets
+  unconditionally overwritten by the per-band `ReadRaster` call regardless of coverage. With the
+  alpha band, those same corners get alpha=0 and composite-out correctly.
+- `CDemVRT`: no such handling exists. Uncovered elevation samples read back as whatever the
+  destination buffer was zero-initialized to (not `NOFLOAT`), since `getElevationAt()`/`draw()`
+  never check warp coverage explicitly. Hasn't been revisited — only matters for non-axis-aligned
+  DEM sources.
 
 

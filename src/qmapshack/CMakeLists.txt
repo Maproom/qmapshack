@@ -1069,6 +1069,7 @@ target_link_libraries(${APPLICATION_NAME} PRIVATE
     PROJ::proj
     ROUTINO::ROUTINO
     GarminFit
+    blend2d::blend2d
 )
 
 if(APPLE)

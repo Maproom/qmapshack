@@ -1068,6 +1068,7 @@ target_link_libraries(${APPLICATION_NAME} PRIVATE
     ROUTINO::ROUTINO
     QuaZip::QuaZip
     GarminFit
+    blend2d::blend2d
 )
 
 if(APPLE)

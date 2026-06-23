@@ -18,8 +18,11 @@
 
 #include "map/CMapIMG.h"
 
+#include <blend2d/blend2d.h>
+
 #include <QPainterPath>
 #include <QtWidgets>
+#include <cmath>
 
 #include "CMainWindow.h"
 #include "canvas/CCanvas.h"
@@ -114,6 +117,148 @@ static inline bool isCluttered(QVector<QRectF>& rectPois, const QRectF& rect) {
   rectPois << rect;
   return false;
 }
+
+namespace {
+/// Convert a QColor to a Blend2D non-premultiplied 0xAARRGGBB colour.
+inline BLRgba32 toBLColor(const QColor& c) { return BLRgba32(c.rgba()); }
+
+/// Build a Blend2D path from a polyline. When @p close is set the path is closed
+/// so it can be filled and its closing edge stroked (matching QPainter::drawPolygon).
+BLPath polyToPath(const QPolygonF& poly, bool close) {
+  BLPath path;
+  const int n = poly.size();
+  if (n == 0) {
+    return path;
+  }
+  path.move_to(poly[0].x(), poly[0].y());
+  for (int i = 1; i < n; ++i) {
+    path.line_to(poly[i].x(), poly[i].y());
+  }
+  if (close) {
+    path.close();
+  }
+  return path;
+}
+
+BLStrokeCap toBLCap(Qt::PenCapStyle cap) {
+  switch (cap) {
+    case Qt::SquareCap:
+      return BL_STROKE_CAP_SQUARE;
+    case Qt::RoundCap:
+      return BL_STROKE_CAP_ROUND;
+    case Qt::FlatCap:
+    default:
+      return BL_STROKE_CAP_BUTT;
+  }
+}
+
+BLStrokeJoin toBLJoin(Qt::PenJoinStyle join) {
+  switch (join) {
+    case Qt::BevelJoin:
+      return BL_STROKE_JOIN_BEVEL;
+    case Qt::RoundJoin:
+      return BL_STROKE_JOIN_ROUND;
+    case Qt::MiterJoin:
+    case Qt::SvgMiterJoin:
+    default:
+      return BL_STROKE_JOIN_MITER_BEVEL;
+  }
+}
+
+/**
+   @brief Configure a context's stroke state from a QPen.
+
+   Maps width, cap, join, colour and the simple Qt dash styles to their Blend2D
+   counterparts. Qt dash patterns are expressed in pen-width units, so they are
+   scaled by the stroke width here.
+
+   @return false for Qt::NoPen, telling the caller to skip stroking entirely.
+ */
+bool applyPen(BLContext& ctx, const QPen& pen) {
+  if (pen.style() == Qt::NoPen) {
+    return false;
+  }
+
+  const double width = pen.widthF() > 0.0 ? pen.widthF() : 1.0;
+  ctx.set_stroke_width(width);
+  ctx.set_stroke_caps(toBLCap(pen.capStyle()));
+  ctx.set_stroke_join(toBLJoin(pen.joinStyle()));
+
+  BLArray<double> dashes;
+  switch (pen.style()) {
+    case Qt::DashLine:
+      dashes.append(4.0 * width);
+      dashes.append(2.0 * width);
+      break;
+    case Qt::DotLine:
+      dashes.append(1.0 * width);
+      dashes.append(2.0 * width);
+      break;
+    case Qt::DashDotLine:
+      dashes.append(4.0 * width);
+      dashes.append(2.0 * width);
+      dashes.append(1.0 * width);
+      dashes.append(2.0 * width);
+      break;
+    case Qt::DashDotDotLine:
+      dashes.append(4.0 * width);
+      dashes.append(2.0 * width);
+      dashes.append(1.0 * width);
+      dashes.append(2.0 * width);
+      dashes.append(1.0 * width);
+      dashes.append(2.0 * width);
+      break;
+    default:  // SolidLine (and custom dashes, treated as solid)
+      break;
+  }
+  // An empty dash array clears any dash pattern left over from a previous type.
+  ctx.set_stroke_dash_array(dashes);
+  ctx.set_stroke_dash_offset(0.0);
+  ctx.set_stroke_style(toBLColor(pen.color()));
+  return true;
+}
+
+/// Blit a QImage at (@p x, @p y). Blend2D only consumes premultiplied ARGB, so a
+/// conversion is done on the fly for sources that are stored in another format.
+void blitQImage(BLContext& ctx, double x, double y, const QImage& img) {
+  if (img.isNull()) {
+    return;
+  }
+  QImage storage;
+  const QImage& src = (img.format() == QImage::Format_ARGB32_Premultiplied)
+                          ? img
+                          : (storage = img.convertToFormat(QImage::Format_ARGB32_Premultiplied));
+  BLImage bl;
+  if (bl.create_from_data(src.width(), src.height(), BL_FORMAT_PRGB32, const_cast<uchar*>(src.constBits()),
+                          src.bytesPerLine(), BL_DATA_ACCESS_READ) != BL_SUCCESS) {
+    return;
+  }
+  ctx.blit_image(BLPoint(x, y), bl);
+}
+
+/// Blit the small blue bullet used as a fallback marker for cluttered points.
+void blitBullet(BLContext& ctx, double x, double y) {
+  static const QImage bullet =
+      QImage(":/icons/8x8/bullet_blue.png").convertToFormat(QImage::Format_ARGB32_Premultiplied);
+  blitQImage(ctx, x, y, bullet);
+}
+
+/// Render a non-solid QBrush into a small premultiplied tile usable as a repeating
+/// Blend2D pattern. Texture brushes return their image directly; hatch and dense
+/// patterns are rasterised by Qt onto an 8x8 transparent tile (their period).
+QImage brushToTile(const QBrush& brush) {
+  if (brush.style() == Qt::TexturePattern) {
+    return brush.textureImage().convertToFormat(QImage::Format_ARGB32_Premultiplied);
+  }
+
+  QImage tile(8, 8, QImage::Format_ARGB32_Premultiplied);
+  tile.fill(Qt::transparent);
+  QPainter p(&tile);
+  p.fillRect(tile.rect(), brush);
+  p.end();
+  return tile;
+}
+}  // namespace
 
 CMapIMG::CMapIMG(const QString& filename, CMapDraw* parent)
     : IMap(eFeatVisibility | eFeatVectorItems | eFeatTypFile, parent),
@@ -1108,16 +1253,6 @@ void CMapIMG::draw(IDrawContext::buffer_t& buf) /* override */
     return;
   }
 
-  QPainter p(&buf.image);
-  p.setOpacity(getOpacity() / 100.0);
-  USE_ANTI_ALIASING(p, true);
-
-  QFont f = CMainWindow::self().getMapFont();
-
-  p.setFont(f);
-  p.setPen(Qt::black);
-  p.setBrush(Qt::NoBrush);
-
   quint8 bits = scale2bits(bufferScale);
 
   QVector<map_level_t>::const_iterator maplevel = maplevels.constEnd();
@@ -1150,63 +1285,81 @@ void CMapIMG::draw(IDrawContext::buffer_t& buf) /* override */
    */
   QPointF pp = buf.ref1;
   map->convertRad2Px(pp);
-  p.save();
-  p.translate(-pp);
 
-  if (map->needsRedraw()) {
-    p.restore();
-    return;
+  /*
+     The shared draw buffer is plain (non-premultiplied) ARGB32, but Blend2D only
+     renders into premultiplied ARGB. Convert the buffer in place for the duration
+     of this draw and restore the original format before returning, so the change
+     stays invisible to the rest of the map stack.
+   */
+  buf.image.convertTo(QImage::Format_ARGB32_Premultiplied);
+
+  bool ok = !map->needsRedraw();
+  {
+    BLImage blBuf;
+    if (blBuf.create_from_data(buf.image.width(), buf.image.height(), BL_FORMAT_PRGB32, buf.image.bits(),
+                               buf.image.bytesPerLine()) != BL_SUCCESS) {
+      buf.image.convertTo(QImage::Format_ARGB32);
+      return;
+    }
+
+    BLContext ctx(blBuf);
+    ctx.set_global_alpha(getOpacity() / 100.0);
+    /*
+       The buffer is allocated at device resolution (pixelRatio larger) and tagged with
+       QImage::setDevicePixelRatio(). QPainter applies that ratio implicitly, but Blend2D
+       renders into the raw pixels and knows nothing about it. Scale the context by the
+       pixel ratio so the logical coordinates produced by convertRad2Px() map to device
+       pixels exactly as the QPainter text phase (and the rest of the map stack) expect.
+     */
+    ctx.scale(buf.image.devicePixelRatio(), buf.image.devicePixelRatio());
+    ctx.translate(-pp.x(), -pp.y());
+
+    if (ok) {
+      try {
+        loadVisibleData(false, polygons, polylines, points, pois, maplevel->level, viewport, ctx);
+      } catch (const std::bad_alloc&) {
+        qWarning() << "GarminIMG: Allocation error. Abort map rendering.";
+        ok = false;
+      }
+    }
+
+    if (ok && !map->needsRedraw()) {
+      drawPolygons(ctx, polygons);
+    }
+    if (ok && !map->needsRedraw()) {
+      drawPolylines(ctx, polylines, bufferScale);
+    }
+    if (ok && !map->needsRedraw()) {
+      drawPoints(ctx, points, rectPois);
+    }
+    if (ok && !map->needsRedraw()) {
+      drawPois(ctx, pois, rectPois);
+    }
+
+    ctx.end();
   }
 
-  try {
-    loadVisibleData(false, polygons, polylines, points, pois, maplevel->level, viewport, p);
-  } catch (const std::bad_alloc&) {
-    qWarning() << "GarminIMG: Allocation error. Abort map rendering.";
-    p.restore();
-    return;
+  // Text and labels are drawn on top with QPainter (see drawText()/drawLabels()).
+  if (ok && !map->needsRedraw()) {
+    QPainter p(&buf.image);
+    p.setOpacity(getOpacity() / 100.0);
+    USE_ANTI_ALIASING(p, true);
+    p.setFont(CMainWindow::self().getMapFont());
+    p.translate(-pp);
+
+    drawText(p);
+
+    if (!map->needsRedraw()) {
+      drawLabels(p, labels);
+    }
   }
 
-  if (map->needsRedraw()) {
-    p.restore();
-    return;
-  }
-  drawPolygons(p, polygons);
-
-  if (map->needsRedraw()) {
-    p.restore();
-    return;
-  }
-  drawPolylines(p, polylines, bufferScale);
-
-  if (map->needsRedraw()) {
-    p.restore();
-    return;
-  }
-  drawPoints(p, points, rectPois);
-
-  if (map->needsRedraw()) {
-    p.restore();
-    return;
-  }
-  drawPois(p, pois, rectPois);
-
-  if (map->needsRedraw()) {
-    p.restore();
-    return;
-  }
-  drawText(p);
-
-  if (map->needsRedraw()) {
-    p.restore();
-    return;
-  }
-  drawLabels(p, labels);
-
-  p.restore();
+  buf.image.convertTo(QImage::Format_ARGB32);
 }
 
 void CMapIMG::loadVisibleData(bool fast, polytype_t& polygons, polytype_t& polylines, pointtype_t& points,
-                              pointtype_t& pois, unsigned level, const QRectF& viewport, QPainter& p) {
+                              pointtype_t& pois, unsigned level, const QRectF& viewport, BLContext& ctx) {
 #ifndef Q_OS_WIN32
   CFileExt file(filename);
   if (!file.open(QIODevice::ReadOnly)) {
@@ -1264,9 +1417,9 @@ void CMapIMG::loadVisibleData(bool fast, polytype_t& polygons, polytype_t& polyl
 
       map->convertRad2Px(poly);
 
-      p.setPen(QPen(Qt::magenta, 2));
-      p.setBrush(Qt::NoBrush);
-      p.drawPolygon(poly);
+      ctx.setStrokeWidth(2);
+      ctx.setStrokeStyle(BLRgba32(0xFFFF00FFu));  // magenta
+      ctx.strokePath(polyToPath(poly, true));
 #endif  // DEBUG_SHOW_SECTION_BORDERS
     }
 
@@ -1283,8 +1436,9 @@ void CMapIMG::loadVisibleData(bool fast, polytype_t& polygons, polytype_t& polyl
 
     QPolygonF poly;
     poly << p1 << p2 << p3 << p4;
-    p.setPen(Qt::black);
-    p.drawPolygon(poly);
+    ctx.setStrokeWidth(1);
+    ctx.setStrokeStyle(BLRgba32(0xFF000000u));  // black
+    ctx.strokePath(polyToPath(poly, true));
 #endif  // DEBUG_SHOW_SUBDIV_BORDERS
 
 #ifdef Q_OS_WIN32
@@ -1526,13 +1680,40 @@ void CMapIMG::loadSubDiv(CFileExt& file, const subdiv_desc_t& subdiv, IGarminStr
   }
 }
 
-void CMapIMG::drawPolygons(QPainter& p, polytype_t& lines) {
+void CMapIMG::drawPolygons(BLContext& ctx, polytype_t& lines) {
+  const bool night = CMainWindow::self().isNight();
+
+  // QPainter::drawPolygon fills using the odd-even rule; Blend2D defaults to non-zero.
+  ctx.set_fill_rule(BL_FILL_RULE_EVEN_ODD);
+
   const int N = polygonDrawOrder.size();
   for (int n = 0; n < N; ++n) {
     quint32 type = polygonDrawOrder[(N - 1) - n];
+    const CGarminTyp::polygon_property& property = polygonProperties[type];
+    const QBrush& brush = night ? property.brushNight : property.brushDay;
 
-    p.setPen(polygonProperties[type].pen);
-    p.setBrush(CMainWindow::self().isNight() ? polygonProperties[type].brushNight : polygonProperties[type].brushDay);
+    // Configure the fill style once per type. Solid colours map directly; texture
+    // images and hatch patterns are realised as a repeating BLPattern. The pattern's
+    // pixel data (tile) must outlive every fill that uses it, hence the outer scope.
+    QImage tile;
+    BLImage tileBL;
+    BLPattern pattern;
+    if (brush.style() == Qt::SolidPattern) {
+      ctx.set_fill_style(toBLColor(brush.color()));
+    } else {
+      tile = brushToTile(brush);
+      if (tileBL.create_from_data(tile.width(), tile.height(), BL_FORMAT_PRGB32, const_cast<uchar*>(tile.constBits()),
+                                  tile.bytesPerLine(), BL_DATA_ACCESS_READ) == BL_SUCCESS) {
+        pattern.set_image(tileBL);
+        pattern.set_extend_mode(BL_EXTEND_MODE_REPEAT);
+        ctx.set_fill_style(pattern);
+      } else {
+        ctx.set_fill_style(toBLColor(brush.color()));
+      }
+    }
+
+    const QPen& pen = property.pen;
+    const bool hasOutline = applyPen(ctx, pen);
 
     for (CGarminPolygon& line : lines) {
       if (line.type != type) {
@@ -1540,22 +1721,24 @@ void CMapIMG::drawPolygons(QPainter& p, polytype_t& lines) {
       }
 
       QPolygonF& poly = line.pixel;
-
       map->convertRad2Px(poly);
 
-      //            simplifyPolyline(line);
+      const BLPath path = polyToPath(poly, true);
+      ctx.fill_path(path);
+      if (hasOutline) {
+        ctx.stroke_path(path);
+      }
 
-      p.drawPolygon(poly);
-
-      if (!polygonProperties[type].known) {
+      if (!property.known) {
         qDebug() << "unknown polygon" << Qt::hex << type;
       }
     }
   }
 }
 
-void CMapIMG::drawPolylines(QPainter& p, polytype_t& lines, const QPointF& scale) {
+void CMapIMG::drawPolylines(BLContext& ctx, polytype_t& lines, const QPointF& scale) {
   textpaths.clear();
+  const bool night = CMainWindow::self().isNight();
   QFont font = CMainWindow::self().getMapFont();
 
   font.setPointSize(9);
@@ -1563,13 +1746,6 @@ void CMapIMG::drawPolylines(QPainter& p, polytype_t& lines, const QPointF& scale
 
   QVector<qreal> lengths;
   lengths.reserve(100);
-  /*
-      int pixmapCount = 0;
-      int borderCount = 0;
-      int normalCount = 0;
-      int imageCount = 0;
-      int deletedCount = 0;
-   */
 
   QHash<quint32, QList<quint32> > dict;
   for (int i = 0; i < lines.count(); ++i) {
@@ -1582,165 +1758,129 @@ void CMapIMG::drawPolylines(QPainter& p, polytype_t& lines, const QPointF& scale
     const quint32& type = props.key();
     const CGarminTyp::polyline_property& property = props.value();
 
-    if (dict[type].isEmpty()) {
+    const QList<quint32>& indices = dict[type];
+    if (indices.isEmpty()) {
       continue;
     }
 
     if (property.hasPixmap) {
-      const QImage& pixmap = CMainWindow::self().isNight() ? property.imgNight : property.imgDay;
+      const QImage& pixmap = night ? property.imgNight : property.imgDay;
       const qreal h = pixmap.height();
 
-      QList<quint32>::const_iterator it = dict[type].constBegin();
-      for (; it != dict[type].constEnd(); ++it) {
-        CGarminPolygon& item = lines[*it];
-        {
-          // pixmapCount++;
+      for (quint32 idx : indices) {
+        CGarminPolygon& item = lines[idx];
+        QPolygonF& poly = item.pixel;
+        const int size = poly.size();
 
-          QPolygonF& poly = item.pixel;
-          int size = poly.size();
+        if (size < 2) {
+          continue;
+        }
 
-          if (size < 2) {
+        map->convertRad2Px(poly);
+
+        lengths.resize(0);
+        lengths.reserve(size);
+
+        qreal u1 = poly[0].x();
+        qreal v1 = poly[0].y();
+        for (int i = 1; i < size; ++i) {
+          qreal u2 = poly[i].x();
+          qreal v2 = poly[i].y();
+
+          qreal segLength = qSqrt((u2 - u1) * (u2 - u1) + (v2 - v1) * (v2 - v1));
+          lengths << segLength;
+
+          u1 = u2;
+          v1 = v2;
+        }
+
+        if (scale.x() < STREETNAME_THRESHOLD && property.labelType != CGarminTyp::eNone) {
+          QFont f(font);
+          switch (property.labelType) {
+            case CGarminTyp::eSmall:
+              f.setPointSize(font.pointSize() - 2);
+              break;
+            case CGarminTyp::eLarge:
+              f.setPointSize(font.pointSize() + 2);
+              break;
+            default:;
+          }
+
+          collectText(item, poly, f, h, night ? property.colorLabelNight : property.colorLabelDay);
+        }
+
+        // Lay the pixmap along each straight segment of the polyline. The arc-length
+        // breakpoints used to coincide with the polyline vertices, so we can index
+        // the vertices directly instead of re-walking a QPainterPath.
+        for (int i = 0; i + 1 < size; ++i) {
+          const qreal segLength = lengths.at(i);
+          if (segLength < 1.0) {
             continue;
           }
 
-          map->convertRad2Px(poly);
+          const QPointF& p1 = poly[i];
+          const QPointF& p2 = poly[i + 1];
+          const double angle = std::atan2(p2.y() - p1.y(), p2.x() - p1.x());
 
-          lengths.resize(0);
-
-          //                    deletedCount += line.size();
-          //                    simplifyPolyline(line);
-          //                    deletedCount -= line.size();
-          //                    size = line.size();
-
-          lengths.reserve(size);
-
-          QPainterPath path;
-          qreal totalLength = 0;
-
-          qreal u1 = poly[0].x();
-          qreal v1 = poly[0].y();
-
-          for (int i = 1; i < size; ++i) {
-            qreal u2 = poly[i].x();
-            qreal v2 = poly[i].y();
-
-            qreal segLength = qSqrt((u2 - u1) * (u2 - u1) + (v2 - v1) * (v2 - v1));
-            totalLength += segLength;
-            lengths << segLength;
-
-            u1 = u2;
-            v1 = v2;
+          const QImage seg = img2line(pixmap, segLength);
+          BLImage segBL;
+          if (segBL.create_from_data(seg.width(), seg.height(), BL_FORMAT_PRGB32, const_cast<uchar*>(seg.constBits()),
+                                     seg.bytesPerLine(), BL_DATA_ACCESS_READ) != BL_SUCCESS) {
+            continue;
           }
 
-          if (scale.x() < STREETNAME_THRESHOLD && property.labelType != CGarminTyp::eNone) {
-            QFont f(font);
-            switch (property.labelType) {
-              case CGarminTyp::eSmall:
-                f.setPointSize(font.pointSize() - 2);
-                break;
-              case CGarminTyp::eLarge:
-                f.setPointSize(font.pointSize() + 2);
-                break;
-              default:;
-            }
-
-            collectText(item, poly, f, h,
-                        CMainWindow::self().isNight() ? property.colorLabelNight : property.colorLabelDay);
-          }
-
-          path.addPolygon(poly);
-          const int nLength = lengths.count();
-
-          qreal curLength = 0;
-          QPointF p2 = path.pointAtPercent(curLength / totalLength);
-          for (int i = 0; i < nLength; ++i) {
-            qreal segLength = lengths.at(i);
-
-            //                         qDebug() << curLength << totalLength << curLength / totalLength;
-
-            QPointF p1 = p2;
-            p2 = path.pointAtPercent((curLength + segLength) / totalLength);
-            qreal angle = qAtan((p2.y() - p1.y()) / (p2.x() - p1.x())) * 180 / M_PI;
-
-            if (p2.x() - p1.x() < 0) {
-              angle += 180;
-            }
-
-            p.save();
-            p.translate(p1);
-            p.rotate(angle);
-            p.drawImage(0, -h / 2, img2line(pixmap, segLength));
-            // imageCount++;
-
-            p.restore();
-            curLength += segLength;
-          }
+          ctx.save();
+          ctx.translate(p1.x(), p1.y());
+          ctx.rotate(angle);
+          ctx.blit_image(BLPoint(0.0, -h / 2.0), segBL);
+          ctx.restore();
         }
       }
     } else {
-      if (property.hasBorder) {
-        // draw background line 1st
-        p.setPen(CMainWindow::self().isNight() ? property.penBorderNight : property.penBorderDay);
+      // First run: the background (border) line for bordered types, otherwise the
+      // line itself. Either way the labels are collected here.
+      const QPen& pen = property.hasBorder ? (night ? property.penBorderNight : property.penBorderDay)
+                                           : (night ? property.penLineNight : property.penLineDay);
+      const bool stroke = applyPen(ctx, pen);
+      const int lineWidth = pen.width();
 
-        QList<quint32>::const_iterator it = dict[type].constBegin();
-        for (; it != dict[type].constEnd(); ++it) {
-          // borderCount++;
-          drawLine(p, lines[*it], property, font, scale);
-        }
-        // draw foreground line in a second run for nicer borders
-      } else {
-        p.setPen(CMainWindow::self().isNight() ? property.penLineNight : property.penLineDay);
-
-        QList<quint32>::const_iterator it = dict[type].constBegin();
-        for (; it != dict[type].constEnd(); ++it) {
-          // normalCount++;
-          drawLine(p, lines[*it], property, font, scale);
-        }
+      for (quint32 idx : indices) {
+        drawLine(ctx, lines[idx], stroke, lineWidth, property, font, scale);
       }
     }
   }
 
-  // 2nd run to draw foreground lines.
-  props = polylineProperties.begin();
-  for (; props != end; ++props) {
+  // 2nd run to draw the foreground lines over their borders.
+  for (props = polylineProperties.begin(); props != end; ++props) {
     const quint32& type = props.key();
     const CGarminTyp::polyline_property& property = props.value();
 
-    if (dict[type].isEmpty()) {
+    const QList<quint32>& indices = dict[type];
+    if (indices.isEmpty()) {
       continue;
     }
 
     if (property.hasBorder && !property.hasPixmap) {
-      // draw foreground line 2nd
-      p.setPen(CMainWindow::self().isNight() ? property.penLineNight : property.penLineDay);
-
-      QList<quint32>::const_iterator it = dict[type].constBegin();
-      for (; it != dict[type].constEnd(); ++it) {
-        drawLine(p, lines[*it]);
+      const QPen& pen = night ? property.penLineNight : property.penLineDay;
+      if (applyPen(ctx, pen)) {
+        for (quint32 idx : indices) {
+          drawLine(ctx, lines[idx]);
+        }
       }
     }
   }
-
-  //    qDebug() << "pixmapCount:" << pixmapCount
-  //        << "borderCount:" << borderCount
-  //        << "normalCount:" << normalCount
-  //        << "imageCount:" << imageCount
-  //        << "deletedCount:" << deletedCount;
 }
 
-void CMapIMG::drawLine(QPainter& p, CGarminPolygon& l, const CGarminTyp::polyline_property& property, const QFont& font,
-                       const QPointF& scale) {
+void CMapIMG::drawLine(BLContext& ctx, CGarminPolygon& l, bool stroke, int lineWidth,
+                       const CGarminTyp::polyline_property& property, const QFont& font, const QPointF& scale) {
   QPolygonF& poly = l.pixel;
   const int size = poly.size();
-  const int lineWidth = p.pen().width();
 
   if (size < 2) {
     return;
   }
 
   map->convertRad2Px(poly);
-
-  //    simplifyPolyline(line);
 
   if (scale.x() < STREETNAME_THRESHOLD && property.labelType != CGarminTyp::eNone) {
     QFont f(font);
@@ -1758,20 +1898,18 @@ void CMapIMG::drawLine(QPainter& p, CGarminPolygon& l, const CGarminTyp::polylin
                 CMainWindow::self().isNight() ? property.colorLabelNight : property.colorLabelDay);
   }
 
-  p.drawPolyline(poly);
+  if (stroke) {
+    ctx.stroke_path(polyToPath(poly, false));
+  }
 }
 
-void CMapIMG::drawLine(QPainter& p, const CGarminPolygon& l) {
+void CMapIMG::drawLine(BLContext& ctx, const CGarminPolygon& l) {
   const QPolygonF& poly = l.pixel;
-  const int size = poly.size();
-
-  if (size < 2) {
+  if (poly.size() < 2) {
     return;
   }
 
-  //    simplifyPolyline(poly);
-
-  p.drawPolyline(poly);
+  ctx.stroke_path(polyToPath(poly, false));
 }
 
 void CMapIMG::collectText(const CGarminPolygon& item, const QPolygonF& line, const QFont& font, qint32 lineWidth,
@@ -1830,32 +1968,30 @@ void CMapIMG::addLabel(const CGarminPoint& pt, const QRect& rect, const CGarminT
   strlbl.isNight = isNight;
 }
 
-void CMapIMG::drawPoints(QPainter& p, pointtype_t& pts, QVector<QRectF>& rectPois) {
+void CMapIMG::drawPoints(BLContext& ctx, pointtype_t& pts, QVector<QRectF>& rectPois) {
+  const bool night = CMainWindow::self().isNight();
   pointtype_t::iterator pt = pts.begin();
   while (pt != pts.end()) {
     map->convertRad2Px(pt->pos);
 
     const CGarminTyp::point_property& property = pointProperties[pt->type];
 
-    const QImage& icon = CMainWindow::self().isNight() ? property.imgNight : property.imgDay;
+    const QImage& icon = night ? property.imgNight : property.imgDay;
     const QSizeF& size = icon.size();
 
     if (isCluttered(rectPois, QRectF(pt->pos, size))) {
       if (size.width() <= 8 && size.height() <= 8) {
-        p.drawImage(pt->pos.x() - (size.width() / 2), pt->pos.y() - (size.height() / 2), icon);
+        blitQImage(ctx, pt->pos.x() - (size.width() / 2), pt->pos.y() - (size.height() / 2), icon);
       } else {
-        p.drawPixmap(pt->pos.x() - 4, pt->pos.y() - 4, QPixmap(":/icons/8x8/bullet_blue.png"));
+        blitBullet(ctx, pt->pos.x() - 4, pt->pos.y() - 4);
       }
       ++pt;
       continue;
     }
 
-    bool showLabel = true;
+    blitQImage(ctx, pt->pos.x() - (size.width() / 2), pt->pos.y() - (size.height() / 2), icon);
 
-    p.drawImage(pt->pos.x() - (size.width() / 2), pt->pos.y() - (size.height() / 2), icon);
-    showLabel = property.labelType != CGarminTyp::eNone;
-
-    if (CMainWindow::self().isPoiText() && showLabel) {
+    if (CMainWindow::self().isPoiText() && property.labelType != CGarminTyp::eNone) {
       // calculate bounding rectangle with a border of 2 px
       QRect rect = fm.boundingRect(pt->labels.join(" "));
       rect.adjust(0, 0, 4, 4);
@@ -1863,31 +1999,32 @@ void CMapIMG::drawPoints(QPainter& p, pointtype_t& pts, QVector<QRectF>& rectPoi
 
       // if no intersection was found, add label to list
       if (!intersectsWithExistingLabel(rect)) {
-        addLabel(*pt, rect, property, CMainWindow::self().isNight());
+        addLabel(*pt, rect, property, night);
       }
     }
     ++pt;
   }
 }
 
-void CMapIMG::drawPois(QPainter& p, pointtype_t& pts, QVector<QRectF>& rectPois) {
+void CMapIMG::drawPois(BLContext& ctx, pointtype_t& pts, QVector<QRectF>& rectPois) {
+  const bool night = CMainWindow::self().isNight();
   for (CGarminPoint& pt : pts) {
     map->convertRad2Px(pt.pos);
 
     const CGarminTyp::point_property& property = pointProperties[pt.type];
-    const QImage& icon = CMainWindow::self().isNight() ? property.imgNight : property.imgDay;
+    const QImage& icon = night ? property.imgNight : property.imgDay;
     const QSizeF& size = icon.size();
 
     if (isCluttered(rectPois, QRectF(pt.pos, size))) {
       if (size.width() <= 8 && size.height() <= 8) {
-        p.drawImage(pt.pos.x() - (size.width() / 2), pt.pos.y() - (size.height() / 2), icon);
+        blitQImage(ctx, pt.pos.x() - (size.width() / 2), pt.pos.y() - (size.height() / 2), icon);
       } else {
-        p.drawPixmap(pt.pos.x() - 4, pt.pos.y() - 4, QPixmap(":/icons/8x8/bullet_blue.png"));
+        blitBullet(ctx, pt.pos.x() - 4, pt.pos.y() - 4);
       }
       continue;
     }
 
-    p.drawImage(pt.pos.x() - (size.width() / 2), pt.pos.y() - (size.height() / 2), icon);
+    blitQImage(ctx, pt.pos.x() - (size.width() / 2), pt.pos.y() - (size.height() / 2), icon);
 
     if (CMainWindow::self().isPoiText()) {
       // calculate bounding rectangle with a border of 2 px
@@ -1897,7 +2034,7 @@ void CMapIMG::drawPois(QPainter& p, pointtype_t& pts, QVector<QRectF>& rectPois)
 
       // if no intersection was found, add label to list
       if (!intersectsWithExistingLabel(rect)) {
-        addLabel(pt, rect, property, CMainWindow::self().isNight());
+        addLabel(pt, rect, property, night);
       }
     }
   }

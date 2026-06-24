@@ -443,15 +443,34 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf) {
   quint32 w_used = w_buf - 2;
   quint32 h_used = h_buf - 2;
 
-  outbuf.resize(w_used * h_used);
+  // resize and wire up only the buffers for layers that are actually enabled;
+  // computeShading() skips any layer whose ShadingBuffers entry is left null
+  ShadingBuffers buffers;
+  if (doHillshading()) {
+    hillshadeBuf.resize(w_used * h_used);
+    buffers.hillshade = &hillshadeBuf;
+  }
+  if (doSlopeShading()) {
+    slopeShadeBuf.resize(w_used * h_used);
+    buffers.slopeShade = &slopeShadeBuf;
+  }
+  if (doSlopeColor()) {
+    slopeColorBuf.resize(w_used * h_used);
+    buffers.slopeColor = &slopeColorBuf;
+  }
+  if (doElevationLimit()) {
+    elevationLimitBuf.resize(w_used * h_used);
+    buffers.elevationLimit = &elevationLimitBuf;
+  }
+  if (doElevationShading()) {
+    elevationShadeBuf.resize(w_used * h_used);
+    buffers.elevationShade = &elevationShadeBuf;
+  }
 
-  // pointer to one of IDem's per-pixel shading methods (hillshading(), slopeShading(), ...)
-  using shadeFnPtr =
-      void (CDemVRT::*)(const QVector<float>&, QVector<uchar>&, quint32, quint32, quint32, quint32, quint32) const;
-  // run shadeFn over outbuf in parallel on a 4x4 grid of chunks, blocking until either all
-  // chunks are done (true) or a fresher redraw makes the result moot (false, with whatever
-  // work was already queued left to finish in the background)
-  auto computeShading = [=, this](shadeFnPtr shadeFn) {
+  // compute every enabled layer for the whole image in parallel on a 4x4 grid of chunks,
+  // blocking until either all chunks are done (true) or a fresher redraw makes the result
+  // moot (false, with whatever work was already queued left to finish in the background)
+  auto computeAllShading = [=, this]() {
     // run the shadings in paralell on equal sized chunks
     quint32 n_x = 4;
     quint32 n_y = 4;
@@ -469,28 +488,16 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf) {
         quint32 w_chunk = (j == n_x - 1) ? (w_used - x_chunk) : step_w_buf;
         quint32 h_chunk = (i == n_y - 1) ? (h_used - y_chunk) : step_h_buf;
 
-        threadPool.start([=, this]() { (this->*shadeFn)(data, outbuf, x_chunk, y_chunk, w_used, w_chunk, h_chunk); });
+        threadPool.start([=, this]() { computeShading(data, buffers, x_chunk, y_chunk, w_used, w_chunk, h_chunk); });
       }
     }
     threadPool.waitForDone();
     return true;
   };
 
-  // compute one shading layer and paint it into dest at the given opacity; colorTable
-  // may be null (e.g. for the alpha-only slope shading layer)
-  auto drawShadingLayer = [=, this](shadeFnPtr shadeFn, QImage::Format format, const QVector<QRgb>* colorTable,
-                                    qreal opacity, QPainter& p, const QRectF& dest) {
-    if (!computeShading(shadeFn)) {
-      return false;
-    }
-    QImage img(outbuf.constData(), w_used, h_used, w_used, format);
-    if (colorTable != nullptr) {
-      img.setColorTable(*colorTable);
-    }
-    p.setOpacity(opacity);
-    p.drawImage(dest, img);
-    return true;
-  };
+  if (!computeAllShading()) {
+    return;
+  }
 
   // get pixel offset of top left buffer corner
   QPointF pp = buf.ref1;
@@ -513,22 +520,32 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf) {
   dem->convertRad2Px(bottom_right);
   QRectF dest(top_left, bottom_right);
 
-  if (doHillshading() && !drawShadingLayer(&CDemVRT::hillshading, QImage::Format_Indexed8, &graytable, o1, p, dest)) {
-    return;
+  // paint one already-computed layer into dest at the given opacity; colorTable may be
+  // null (e.g. for the alpha-only slope shading layer)
+  auto paintLayer = [&](const QVector<quint8>& layerBuf, QImage::Format format, const QVector<QRgb>* colorTable,
+                        qreal opacity) {
+    QImage img(layerBuf.constData(), w_used, h_used, w_used, format);
+    if (colorTable != nullptr) {
+      img.setColorTable(*colorTable);
+    }
+    p.setOpacity(opacity);
+    p.drawImage(dest, img);
+  };
+
+  if (doHillshading()) {
+    paintLayer(hillshadeBuf, QImage::Format_Indexed8, &graytable, o1);
   }
-  if (doSlopeShading() && !drawShadingLayer(&CDemVRT::slopeShading, QImage::Format_Alpha8, nullptr, o1, p, dest)) {
-    return;
+  if (doSlopeShading()) {
+    paintLayer(slopeShadeBuf, QImage::Format_Alpha8, nullptr, o1);
   }
-  if (doSlopeColor() && !drawShadingLayer(&CDemVRT::slopecolor, QImage::Format_Indexed8, &slopetable, o2, p, dest)) {
-    return;
+  if (doSlopeColor()) {
+    paintLayer(slopeColorBuf, QImage::Format_Indexed8, &slopetable, o2);
   }
-  if (doElevationLimit() &&
-      !drawShadingLayer(&CDemVRT::elevationLimit, QImage::Format_Indexed8, &elevationtable, o2, p, dest)) {
-    return;
+  if (doElevationLimit()) {
+    paintLayer(elevationLimitBuf, QImage::Format_Indexed8, &elevationtable, o2);
   }
-  if (doElevationShading() &&
-      !drawShadingLayer(&CDemVRT::elevationShading, QImage::Format_Indexed8, &elevationShadeTable, o1, p, dest)) {
-    return;
+  if (doElevationShading()) {
+    paintLayer(elevationShadeBuf, QImage::Format_Indexed8, &elevationShadeTable, o1);
   }
 
   drawElevationShadeScale(p);

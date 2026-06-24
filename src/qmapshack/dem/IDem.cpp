@@ -35,7 +35,7 @@ inline T getValue(const QVector<T>& data, int x, int y, int dx) {
 //   w[3] w[4] w[5]  i.e. (x-1,y)  (x,y)   (x+1,y)
 //   w[6] w[7] w[8]      (x-1,y+1) (x,y+1) (x+1,y+1)
 // Callers pass an (x, y) that is already offset into data's 1px border (see the @param
-// data docs on IDem::hillshading() et al.), so the -1/+1 neighbors are always in bounds.
+// data docs on IDem::computeShading()), so the -1/+1 neighbors are always in bounds.
 template <typename T>
 inline void fillWindow(const QVector<T>& data, int x, int y, int stride, T* w) {
   w[0] = getValue(data, x - 1, y - 1, stride);
@@ -197,86 +197,120 @@ int IDem::getFactorHillshading() const {
   }
 }
 
-// Horn's method (the same algorithm GDAL's own "gdaldem hillshade" uses): dx/dy are a
-// Sobel-style gradient (hence the doubled middle terms), combined with a fixed light
-// source (azimuth 315° = NW, altitude 45° - only the z-factor/vertical exaggeration is
-// user-configurable, via factorHillshading) into cang, the cosine of the light's
-// incidence angle. cang is then remapped from its natural -1..1 range to the 1..254
-// output range, leaving 0 unused and 255 reserved to mark noData (transparent in graytable).
-void IDem::hillshading(const QVector<float>& data, QVector<uchar>& out, quint32 x, quint32 y, quint32 stride, quint32 w,
-                       quint32 h) const {
-  constexpr qreal zFactor = 0.125;
-  constexpr qreal zFactorSquared = zFactor * zFactor;
-  constexpr qreal azimuth = 315 * DEG_TO_RAD;
-  const qreal sinAltitude = qSin(45 * DEG_TO_RAD);
-  const qreal zFactorCosAltitude = zFactor * qCos(45 * DEG_TO_RAD);
-  const qreal cosAzimuth = qCos(azimuth);
-  const qreal sinAzimuth = qSin(azimuth);
-  // xscale/yscale/factorHillshading are loop-invariant; precompute the reciprocals once so
-  // the per-pixel gradient is a multiply instead of a divide.
-  const qreal invXScale = 1.0 / (xscale * factorHillshading);
-  const qreal invYScale = 1.0 / (yscale * factorHillshading);
+void IDem::computeShading(const QVector<float>& data, const ShadingBuffers& buffers, quint32 x, quint32 y,
+                          quint32 stride, quint32 w, quint32 h) const {
+  // 3 independent passes - hillshade, slopeShade+slopeColor, elevationLimit+elevationShade -
+  // each entered only if at least one of its layers is active, so "is this layer enabled"
+  // is decided once per call rather than tested inside any pixel loop. slopeOfWindowInterp()
+  // and maxElevationInWindow() are each computed at most once per pixel and shared between
+  // the two layers in their pass, rather than recomputed once per layer.
 
-  for (unsigned int m = 0; m < h; m++) {
-    unsigned char* scan = out.data() + (m + y) * stride + x;
-    for (unsigned int n = 0; n < w; n++) {
-      float win[eWinsize3x3];
-      fillWindow(data, n + x + 1, m + y + 1, stride + 2, win);
+  if (buffers.hillshade != nullptr) {
+    // Horn's method (the same algorithm GDAL's own "gdaldem hillshade" uses): dx/dy are a
+    // Sobel-style gradient (hence the doubled middle terms), combined with a fixed light
+    // source (azimuth 315° = NW, altitude 45° - only the z-factor/vertical exaggeration is
+    // user-configurable, via factorHillshading) into cang, the cosine of the light's
+    // incidence angle. cang is then remapped from its natural -1..1 range to the 1..254
+    // output range, leaving 0 unused and 255 reserved to mark noData (transparent in
+    // graytable).
+    constexpr qreal zFactor = 0.125;
+    constexpr qreal zFactorSquared = zFactor * zFactor;
+    constexpr qreal azimuth = 315 * DEG_TO_RAD;
+    const qreal sinAltitude = qSin(45 * DEG_TO_RAD);
+    const qreal zFactorCosAltitude = zFactor * qCos(45 * DEG_TO_RAD);
+    const qreal cosAzimuth = qCos(azimuth);
+    const qreal sinAzimuth = qSin(azimuth);
+    // xscale/yscale/factorHillshading are loop-invariant; precompute the reciprocals once so
+    // the per-pixel gradient is a multiply instead of a divide.
+    const qreal invXScale = 1.0 / (xscale * factorHillshading);
+    const qreal invYScale = 1.0 / (yscale * factorHillshading);
 
-      if (hasNoData && win[4] == noData) {
-        scan[n] = 255;
-        continue;
+    for (unsigned int m = 0; m < h; m++) {
+      quint8* scan = buffers.hillshade->data() + (m + y) * stride + x;
+      for (unsigned int n = 0; n < w; n++) {
+        float win[eWinsize3x3];
+        fillWindow(data, n + x + 1, m + y + 1, stride + 2, win);
+
+        if (hasNoData && win[4] == noData) {
+          scan[n] = 255;
+          continue;
+        }
+
+        qreal dx = ((win[0] + win[3] + win[3] + win[6]) - (win[2] + win[5] + win[5] + win[8])) * invXScale;
+        qreal dy = ((win[6] + win[7] + win[7] + win[8]) - (win[0] + win[1] + win[1] + win[2])) * invYScale;
+        qreal xx_plus_yy = dx * dx + dy * dy;
+        // r*sin(aspect-azimuth), with aspect=atan2(dy,dx) and r=sqrt(xx_plus_yy): expand via
+        // the angle-subtraction identity and substitute sin(aspect)=dy/r, cos(aspect)=dx/r -
+        // the r cancels algebraically, so this also covers dx=dy=0 without a singularity,
+        // while skipping atan2()/sin() entirely.
+        qreal rSinAspectMinusAzimuth = dy * cosAzimuth - dx * sinAzimuth;
+        qreal cang =
+            (sinAltitude - zFactorCosAltitude * rSinAspectMinusAzimuth) / qSqrt(1 + zFactorSquared * xx_plus_yy);
+        scan[n] = (cang <= 0.0) ? 1 : static_cast<quint8>(1.0 + 254.0 * cang);
       }
+    }
+  }
 
-      qreal dx = ((win[0] + win[3] + win[3] + win[6]) - (win[2] + win[5] + win[5] + win[8])) * invXScale;
-      qreal dy = ((win[6] + win[7] + win[7] + win[8]) - (win[0] + win[1] + win[1] + win[2])) * invYScale;
-      qreal xx_plus_yy = dx * dx + dy * dy;
-      // r*sin(aspect-azimuth), with aspect=atan2(dy,dx) and r=sqrt(xx_plus_yy): expand via
-      // the angle-subtraction identity and substitute sin(aspect)=dy/r, cos(aspect)=dx/r -
-      // the r cancels algebraically, so this also covers dx=dy=0 without a singularity,
-      // while skipping atan2()/sin() entirely.
-      qreal rSinAspectMinusAzimuth = dy * cosAzimuth - dx * sinAzimuth;
-      qreal cang = (sinAltitude - zFactorCosAltitude * rSinAspectMinusAzimuth) / qSqrt(1 + zFactorSquared * xx_plus_yy);
+  if (buffers.slopeShade != nullptr || buffers.slopeColor != nullptr) {
+    const bool wantSlopeShade = buffers.slopeShade != nullptr;
+    const bool wantSlopeColor = buffers.slopeColor != nullptr;
+    const qreal* currentSlopeStepTable = wantSlopeColor ? getCurrentSlopeStepTable() : nullptr;
 
-      if (cang <= 0.0) {
-        cang = 1.0;
-      } else {
-        cang = 1.0 + (254.0 * cang);
+    for (unsigned int m = 0; m < h; m++) {
+      quint8* shadeScan = wantSlopeShade ? buffers.slopeShade->data() + (m + y) * stride + x : nullptr;
+      quint8* colorScan = wantSlopeColor ? buffers.slopeColor->data() + (m + y) * stride + x : nullptr;
+      for (unsigned int n = 0; n < w; n++) {
+        float win[eWinsize3x3];
+        fillWindow(data, n + x + 1, m + y + 1, stride + 2, win);
+        const qreal slope = slopeOfWindowInterp(win, eWinsize3x3, 0, 0);
+
+        if (wantSlopeShade) {
+          shadeScan[n] = slopeShadeByte(slope);
+        }
+        if (wantSlopeColor) {
+          colorScan[n] = slopeColorByte(slope, currentSlopeStepTable);
+        }
       }
+    }
+  }
 
-      scan[n] = cang;
+  if (buffers.elevationLimit != nullptr || buffers.elevationShade != nullptr) {
+    const bool wantElevationLimit = buffers.elevationLimit != nullptr;
+    const bool wantElevationShade = buffers.elevationShade != nullptr;
+    const int elevationLimitLow = std::min(getElevationShadeLimitLow(), getElevationShadeLimitHi());
+    const int elevationLimitHi = std::max(getElevationShadeLimitLow(), getElevationShadeLimitHi());
+
+    for (unsigned int m = 0; m < h; m++) {
+      quint8* limitScan = wantElevationLimit ? buffers.elevationLimit->data() + (m + y) * stride + x : nullptr;
+      quint8* shadeScan = wantElevationShade ? buffers.elevationShade->data() + (m + y) * stride + x : nullptr;
+      for (unsigned int n = 0; n < w; n++) {
+        float win[eWinsize3x3];
+        fillWindow(data, n + x + 1, m + y + 1, stride + 2, win);
+        const qreal elevation = maxElevationInWindow(win);
+
+        if (wantElevationLimit) {
+          limitScan[n] = elevationLimitByte(elevation);
+        }
+        if (wantElevationShade) {
+          shadeScan[n] = elevationShadeByte(elevation, elevationLimitLow, elevationLimitHi);
+        }
+      }
     }
   }
 }
 
 int IDem::getFactorSlopeShading() const { return qRound(factorSlopeShading * 100.); }
 
-void IDem::slopeShading(const QVector<float>& data, QVector<uchar>& out, quint32 x, quint32 y, quint32 stride,
-                        quint32 w, quint32 h) const {
-  for (unsigned int m = 0; m < h; m++) {
-    unsigned char* scan = out.data() + (m + y) * stride + x;
-    for (unsigned int n = 0; n < w; n++) {
-      float win[eWinsize3x3];
-      fillWindow(data, n + x + 1, m + y + 1, stride + 2, win);
-
-      if (hasNoData && win[4] == noData) {
-        scan[n] = 0;
-        continue;
-      }
-
-      qreal slope = slopeOfWindowInterp(win, eWinsize3x3, 0, 0);
-      if (slope == NOFLOAT) {
-        scan[n] = 0;
-      } else {
-        int alphaValue = slope * 255. / 90.     // map slope angle to alpha [0 .. 255]
-                         * factorSlopeShading;  // apply slider value [0.25 .. 3.0]
-        if (alphaValue > 255) {
-          alphaValue = 255;
-        }
-        scan[n] = alphaValue;
-      }
-    }
+quint8 IDem::slopeShadeByte(qreal slope) const {
+  if (slope == NOFLOAT) {
+    return 0;
   }
+  int alphaValue = slope * 255. / 90.     // map slope angle to alpha [0 .. 255]
+                   * factorSlopeShading;  // apply slider value [0.25 .. 3.0]
+  if (alphaValue > 255) {
+    alphaValue = 255;
+  }
+  return alphaValue;
 }
 
 qreal IDem::bilinear(qreal a, qreal b, qreal c, qreal d, qreal x, qreal y) {
@@ -320,7 +354,7 @@ qreal IDem::slopeOfWindowInterp(float* win2, winsize_e size, qreal x, qreal y) c
       return NOFLOAT;
   }
 
-  // same Sobel-style gradient as hillshading(); 8 is the kernel's total weight (1+2+1 on
+  // same Sobel-style gradient as computeShading()'s hillshading branch; 8 is the kernel's total weight (1+2+1 on
   // each side), normalizing dx/dy back to an average per-unit-distance slope
   qreal dx = ((win[0] + win[3] + win[3] + win[6]) - (win[2] + win[5] + win[5] + win[8])) / (xscale);
   qreal dy = ((win[6] + win[7] + win[7] + win[8]) - (win[0] + win[1] + win[1] + win[2])) / (yscale);
@@ -330,38 +364,22 @@ qreal IDem::slopeOfWindowInterp(float* win2, winsize_e size, qreal x, qreal y) c
   return slope;
 }
 
-void IDem::slopecolor(const QVector<float>& data, QVector<uchar>& out, quint32 x, quint32 y, quint32 stride, quint32 w,
-                      quint32 h) const {
-  // invariant for the whole call (depends only on gradeSlopeColor/slopeCustomStepTable, not
-  // per-pixel state)
-  const qreal* currentSlopeStepTable = getCurrentSlopeStepTable();
-
-  for (unsigned int m = 0; m < h; m++) {
-    unsigned char* scan = out.data() + (m + y) * stride + x;
-    for (unsigned int n = 0; n < w; n++) {
-      float win[eWinsize3x3];
-      fillWindow(data, n + x + 1, m + y + 1, stride + 2, win);
-      qreal slope = slopeOfWindowInterp(win, eWinsize3x3, 0, 0);
-
-      if (slope == NOFLOAT) {
-        scan[n] = 0;
-        continue;
-      }
-
-      if (slope > currentSlopeStepTable[4]) {
-        scan[n] = 5;
-      } else if (slope > currentSlopeStepTable[3]) {
-        scan[n] = 4;
-      } else if (slope > currentSlopeStepTable[2]) {
-        scan[n] = 3;
-      } else if (slope > currentSlopeStepTable[1]) {
-        scan[n] = 2;
-      } else if (slope > currentSlopeStepTable[0]) {
-        scan[n] = 1;
-      } else {
-        scan[n] = 0;
-      }
-    }
+quint8 IDem::slopeColorByte(qreal slope, const qreal* slopeStepTable) const {
+  if (slope == NOFLOAT) {
+    return 0;
+  }
+  if (slope > slopeStepTable[4]) {
+    return 5;
+  } else if (slope > slopeStepTable[3]) {
+    return 4;
+  } else if (slope > slopeStepTable[2]) {
+    return 3;
+  } else if (slope > slopeStepTable[1]) {
+    return 2;
+  } else if (slope > slopeStepTable[0]) {
+    return 1;
+  } else {
+    return 0;
   }
 }
 
@@ -381,43 +399,16 @@ qreal IDem::maxElevationInWindow(const float* win) const {
   return (meters == NOFLOAT) ? NOFLOAT : meters * IUnit::self().elevationFactor;
 }
 
-void IDem::elevationLimit(const QVector<float>& data, QVector<uchar>& out, quint32 x, quint32 y, quint32 stride,
-                          quint32 w, quint32 h) const {
-  for (unsigned int m = 0; m < h; m++) {
-    unsigned char* scan = out.data() + (m + y) * stride + x;
-    for (unsigned int n = 0; n < w; n++) {
-      float win[eWinsize3x3];
-      fillWindow(data, n + x + 1, m + y + 1, stride + 2, win);
+quint8 IDem::elevationLimitByte(qreal elevation) const { return (elevation >= getElevationLimit()) ? 1 : 0; }
 
-      const qreal elevation = maxElevationInWindow(win);
-      scan[n] = (elevation >= getElevationLimit()) ? 1 : 0;
-    }
-  }
-}
-
-void IDem::elevationShading(const QVector<float>& data, QVector<uchar>& out, quint32 x, quint32 y, quint32 stride,
-                            quint32 w, quint32 h) const {
-  // clip set min and max values
-  const int limitLow = std::min(getElevationShadeLimitLow(), getElevationShadeLimitHi());
-  const int limitHi = std::max(getElevationShadeLimitLow(), getElevationShadeLimitHi());
-
-  for (unsigned int m = 0; m < h; m++) {
-    unsigned char* scan = out.data() + (m + y) * stride + x;
-    for (unsigned int n = 0; n < w; n++) {
-      float win[eWinsize3x3];
-      fillWindow(data, n + x + 1, m + y + 1, stride + 2, win);
-
-      const qreal elevation = maxElevationInWindow(win);
-
-      if (elevation < limitLow) {
-        scan[n] = 0;
-      } else if (elevation < limitHi) {
-        const qreal relLimit = (elevation - limitLow) / (limitHi - limitLow);
-        scan[n] = 1 + relLimit * 253;
-      } else {
-        scan[n] = 255;
-      }
-    }
+quint8 IDem::elevationShadeByte(qreal elevation, int limitLow, int limitHi) const {
+  if (elevation < limitLow) {
+    return 0;
+  } else if (elevation < limitHi) {
+    const qreal relLimit = (elevation - limitLow) / (limitHi - limitLow);
+    return 1 + relLimit * 253;
+  } else {
+    return 255;
   }
 }
 

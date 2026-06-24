@@ -33,7 +33,7 @@ class CDemDraw;
 class IDemProp;
 class QSettings;
 
-/// One named preset of the 5 slope-angle thresholds used by IDem::slopecolor(); see
+/// One named preset of the 5 slope-angle thresholds used by IDem::slopeColorByte(); see
 /// IDem::slopePresets and IDem::getCurrentSlopeStepTable().
 struct SlopePresets {
   const char* name;
@@ -54,15 +54,14 @@ struct SlopePresets {
    - loading/opening the source and setting isActivated, proj, xsize_px/ysize_px and
      xscale/yscale once during construction,
    - implementing draw(), which decodes the requested view rectangle, reads the raw
-     elevation samples via the subclass's own data access, and feeds them to the
-     protected shading methods below (hillshading(), slopeShading(), slopecolor(),
-     elevationLimit(), elevationShading()),
+     elevation samples via the subclass's own data access, and feeds them to
+     computeShading() below,
    - implementing getElevationAt()/getSlopeAt() for point queries.
 
-   @note The shading methods are pure per-pixel math over a caller-supplied sample
-         buffer and are const/reentrant by design: CDemVRT::draw() calls them in
-         parallel via a QThreadPool over disjoint chunks of the same output buffer, so
-         they must never mutate IDem state.
+   @note computeShading() computes every enabled layer for one chunk in a single pass and
+         is const/reentrant by design: CDemVRT::draw() calls it in parallel via a
+         QThreadPool over disjoint chunks of the same output buffers, so it (and the
+         per-layer kernels it calls) must never mutate IDem state.
 
    Configuration (which layers are enabled, their parameters, color tables, etc.) is
    persisted via saveConfig()/loadConfig() and changed at runtime through the public
@@ -158,16 +157,16 @@ class IDem : public IDrawObject {
   /// @brief True if the elevation-color gradient layer is enabled; see slotSetElevationShading().
   bool doElevationShading() const { return bElevationShading; }
 
-  /// @brief Lower bound (in the user's configured unit) of the elevationShading() gradient.
+  /// @brief Lower bound (in the user's configured unit) of the elevationShadeByte() gradient.
   int getElevationShadeLimitLow() const { return elevationShadeLimitLow; }
 
-  /// @brief Upper bound (in the user's configured unit) of the elevationShading() gradient.
+  /// @brief Upper bound (in the user's configured unit) of the elevationShadeByte() gradient.
   int getElevationShadeLimitHi() const { return elevationShadeLimitHi; }
 
-  /// @brief The color table slopecolor() indexes into; see slopetable.
+  /// @brief The color table slopeColorByte() indexes into; see slopetable.
   const QVector<QRgb> getSlopeColorTable() const { return slopetable; }
 
-  /// @brief True if the elevationShading() legend should be drawn; see slotShowElevationShadeScale().
+  /// @brief True if the elevation-shading legend should be drawn; see slotShowElevationShadeScale().
   bool doShowElevationShadeScale() const { return bShowElevationShadeScale; }
 
   /// Named slope-angle-threshold presets offered alongside the custom table; selected via
@@ -176,7 +175,7 @@ class IDem : public IDrawObject {
   static const size_t slopePresetCount = sizeof(IDem::slopePresets) / sizeof(IDem::slopePresets[0]);
 
   /**
-     @brief The 5 slope-angle thresholds (in degrees) currently used by slopecolor() to
+     @brief The 5 slope-angle thresholds (in degrees) currently used by slopeColorByte() to
             pick one of its 6 color bands.
      @return slopeCustomStepTable if getSlopeStepTableIndex() == CUSTOM_SLOPE_COLORTABLE,
              otherwise slopePresets[getSlopeStepTableIndex()].steps
@@ -187,21 +186,21 @@ class IDem : public IDrawObject {
   int getSlopeStepTableIndex() const { return gradeSlopeColor; }
 
   /**
-     @brief Select which slope-angle-threshold table slopecolor() uses.
+     @brief Select which slope-angle-threshold table slopeColorByte() uses.
      @param idx index into slopePresets, or CUSTOM_SLOPE_COLORTABLE to use the values set
                 via setSlopeStepTableCustomValue()
    */
   void setSlopeStepTable(int idx);
   /// @brief Set one of the 5 thresholds of the custom slope-angle table (see CUSTOM_SLOPE_COLORTABLE).
   void setSlopeStepTableCustomValue(int idx, int val);
-  /// @brief Set the threshold used by elevationLimit(), in the user's configured unit.
+  /// @brief Set the threshold used by elevationLimitByte(), in the user's configured unit.
   void setElevationLimit(int val);
 
-  /// @brief (Re-)build elevationShadeTable, the color gradient used by elevationShading().
+  /// @brief (Re-)build elevationShadeTable, the color gradient used by elevationShadeByte().
   void initElevationShadeTable();
-  /// @brief Set the lower bound of the elevationShading() gradient.
+  /// @brief Set the lower bound of the elevationShadeByte() gradient.
   void setElevationShadeLow(int val);
-  /// @brief Set the upper bound of the elevationShading() gradient.
+  /// @brief Set the upper bound of the elevationShadeByte() gradient.
   void setElevationShadeHi(int val);
 
   /// Size (in samples) of the neighborhood window slopeOfWindowInterp() operates on:
@@ -245,46 +244,42 @@ class IDem : public IDrawObject {
   /// @brief Enable/disable the elevation-color gradient layer; see doElevationShading().
   void slotSetElevationShading(bool yes) { bElevationShading = yes; }
 
-  /// @brief Show/hide the elevationShading() legend drawn by CDemVRT::drawElevationShadeScale().
+  /// @brief Show/hide the elevation-shading legend drawn by CDemVRT::drawElevationShadeScale().
   void slotShowElevationShadeScale(bool yes);
 
  protected:
+  /// Per-pixel output buffers computeShading() writes one chunk of; a null entry means
+  /// that layer is disabled, so computeShading() skips it entirely - including whichever
+  /// shared sub-computation (slope, max elevation) only that layer would have needed.
+  struct ShadingBuffers {
+    QVector<quint8>* hillshade = nullptr;
+    QVector<quint8>* slopeShade = nullptr;
+    QVector<quint8>* slopeColor = nullptr;
+    QVector<quint8>* elevationLimit = nullptr;
+    QVector<quint8>* elevationShade = nullptr;
+  };
+
   /**
-     @brief out[px] = grayscale shading intensity (0..255, 255 = transparent noData)
-            from a simulated light source at a fixed azimuth/altitude; see graytable.
+     @brief Compute every enabled shading layer for one chunk.
 
-     @param data   raw elevation samples, kept 1px wider/taller than `out` on every
-                    side so each pixel's 3x3 (or 4x4) neighborhood window can be read
-                    even at the edges of the requested area. Indexed with stride+2.
-     @param out    output buffer, `w` x `h` pixels at row stride `stride`
-     @param x, y   top-left corner of the chunk to process, in `out`/`stride` coordinates
-     @param stride row stride of `out`, in pixels
-     @param w, h   size of the chunk to process
+     Runs up to 3 independent passes over the chunk - hillshade; slopeShade+slopeColor;
+     elevationLimit+elevationShade - each entered only if at least one of its layers is
+     active in `buffers`, so "is this layer enabled" never needs testing inside a pixel
+     loop. slopeOfWindowInterp() and maxElevationInWindow() are each computed at most once
+     per pixel and shared between the two layers in their pass, rather than recomputed once
+     per layer.
 
-     The remaining per-pixel shading methods below (slopeShading(), slopecolor(),
-     elevationLimit(), elevationShading()) share this exact parameter shape.
+     @param data    raw elevation samples, kept 1px wider/taller than each output buffer on
+                     every side so each pixel's 3x3 neighborhood window can be read even at
+                     the edges of the requested area. Indexed with stride+2.
+     @param buffers which layers to compute; see ShadingBuffers
+     @param x, y    top-left corner of the chunk to process, in the output buffers'/stride
+                    coordinates
+     @param stride  row stride of each output buffer, in pixels
+     @param w, h    size of the chunk to process
    */
-  void hillshading(const QVector<float>& data, QVector<uchar>& out, quint32 x, quint32 y, quint32 stride, quint32 w,
-                   quint32 h) const;
-
-  /// out[px] = alpha (0 = transparent, up to 255) proportional to terrain slope and
-  /// getFactorSlopeShading(); drawn as an Alpha8 overlay with no color table.
-  void slopeShading(const QVector<float>& data, QVector<uchar>& out, quint32 x, quint32 y, quint32 stride, quint32 w,
-                    quint32 h) const;
-
-  /// out[px] = index 0..5 into slopetable, picking the color band for the window's slope
-  /// against getCurrentSlopeStepTable()'s 5 thresholds.
-  void slopecolor(const QVector<float>& data, QVector<uchar>& out, quint32 x, quint32 y, quint32 stride, quint32 w,
-                  quint32 h) const;
-
-  /// out[px] = index into elevationtable: 1 if maxElevationInWindow() >= getElevationLimit(), else 0.
-  void elevationLimit(const QVector<float>& data, QVector<uchar>& out, quint32 x, quint32 y, quint32 stride, quint32 w,
-                      quint32 h) const;
-
-  /// out[px] = index 0..255 into elevationShadeTable: maxElevationInWindow() mapped
-  /// linearly between getElevationShadeLimitLow() (0) and getElevationShadeLimitHi() (255).
-  void elevationShading(const QVector<float>& data, QVector<uchar>& out, quint32 x, quint32 y, quint32 stride,
-                        quint32 w, quint32 h) const;
+  void computeShading(const QVector<float>& data, const ShadingBuffers& buffers, quint32 x, quint32 y, quint32 stride,
+                      quint32 w, quint32 h) const;
 
   /**
      @brief Elevation, in the user's configured unit, of the highest valid sample in a
@@ -351,17 +346,18 @@ class IDem : public IDrawObject {
   /// the setup dialog. Use getSetup() for access
   QPointer<IDemProp> setup;
 
-  /// grayscale + transparent-at-255 color table for hillshading()'s output (Format_Indexed8)
+  /// grayscale + transparent-at-255 color table for computeShading()'s hillshading output
+  /// (Format_Indexed8)
   QVector<QRgb> graytable;
 
-  /// color gradient for elevationShading()'s output (Format_Indexed8); see initElevationShadeTable()
+  /// color gradient for elevationShadeByte()'s output (Format_Indexed8); see initElevationShadeTable()
   QVector<QRgb> elevationShadeTable;
 
-  /// color table for slopecolor()'s output (Format_Indexed8): index 0 transparent,
+  /// color table for slopeColorByte()'s output (Format_Indexed8): index 0 transparent,
   /// 1..5 the colors for each of the 5 slope-grade bands in getCurrentSlopeStepTable()
   QVector<QRgb> slopetable;
 
-  /// color table for elevationLimit()'s output (Format_Indexed8): index 0 transparent,
+  /// color table for elevationLimitByte()'s output (Format_Indexed8): index 0 transparent,
   /// index 1 the highlight color for samples at/above getElevationLimit()
   QVector<QRgb> elevationtable;
 
@@ -373,6 +369,23 @@ class IDem : public IDrawObject {
   double noData = 0;
 
  private:
+  /// out = alpha (0 = transparent, up to 255) for slope (degrees, or NOFLOAT for noData),
+  /// proportional to slope and getFactorSlopeShading(); see computeShading().
+  quint8 slopeShadeByte(qreal slope) const;
+
+  /// out = index 0..5 into slopetable for slope (degrees, or NOFLOAT for noData), picking
+  /// the color band against slopeStepTable's 5 thresholds; see computeShading().
+  quint8 slopeColorByte(qreal slope, const qreal* slopeStepTable) const;
+
+  /// out = index into elevationtable: 1 if elevation (in the user's configured unit, see
+  /// maxElevationInWindow()) >= getElevationLimit(), else 0; see computeShading().
+  quint8 elevationLimitByte(qreal elevation) const;
+
+  /// out = index 0..255 into elevationShadeTable: elevation (in the user's configured
+  /// unit, see maxElevationInWindow()) mapped linearly between limitLow (0) and limitHi
+  /// (255); see computeShading().
+  quint8 elevationShadeByte(qreal elevation, int limitLow, int limitHi) const;
+
   bool bHillshading = false;
   qreal factorHillshading = 1.0 / 6.0;
   bool bSlopeShading = false;

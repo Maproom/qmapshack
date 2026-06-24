@@ -198,6 +198,15 @@ class CDemVRT : public IDem {
   /// runs the per-chunk shading work started by draw(); cancelled by slotNeedsRedraw()
   /// when a fresher redraw has been requested
   QThreadPool threadPool;
+
+  /// draw()'s read buffer for raw elevation samples; kept as a member (resized, not
+  /// reallocated, per draw()) so repeated redraws at a stable viewport size don't churn
+  /// the heap every frame; see CMapVRT::indexData/bandBuf for the same pattern. Only ever
+  /// touched from draw() (canvas thread), so no mutex is needed.
+  QVector<float> data;
+  /// draw()'s output buffer for the per-pixel shading methods (hillshading(), ...); same
+  /// rationale as data
+  QVector<uchar> outbuf;
 };
 
 #endif  // CDEMVRT_H

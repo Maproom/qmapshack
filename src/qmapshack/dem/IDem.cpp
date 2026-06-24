@@ -210,6 +210,12 @@ void IDem::hillshading(const QVector<float>& data, QVector<uchar>& out, quint32 
   constexpr qreal azimuth = 315 * DEG_TO_RAD;
   const qreal sinAltitude = qSin(45 * DEG_TO_RAD);
   const qreal zFactorCosAltitude = zFactor * qCos(45 * DEG_TO_RAD);
+  const qreal cosAzimuth = qCos(azimuth);
+  const qreal sinAzimuth = qSin(azimuth);
+  // xscale/yscale/factorHillshading are loop-invariant; precompute the reciprocals once so
+  // the per-pixel gradient is a multiply instead of a divide.
+  const qreal invXScale = 1.0 / (xscale * factorHillshading);
+  const qreal invYScale = 1.0 / (yscale * factorHillshading);
 
   for (unsigned int m = 0; m < h; m++) {
     unsigned char* scan = out.data() + (m + y) * stride + x;
@@ -222,14 +228,15 @@ void IDem::hillshading(const QVector<float>& data, QVector<uchar>& out, quint32 
         continue;
       }
 
-      qreal dx =
-          ((win[0] + win[3] + win[3] + win[6]) - (win[2] + win[5] + win[5] + win[8])) / (xscale * factorHillshading);
-      qreal dy =
-          ((win[6] + win[7] + win[7] + win[8]) - (win[0] + win[1] + win[1] + win[2])) / (yscale * factorHillshading);
-      qreal aspect = qAtan2(dy, dx);
+      qreal dx = ((win[0] + win[3] + win[3] + win[6]) - (win[2] + win[5] + win[5] + win[8])) * invXScale;
+      qreal dy = ((win[6] + win[7] + win[7] + win[8]) - (win[0] + win[1] + win[1] + win[2])) * invYScale;
       qreal xx_plus_yy = dx * dx + dy * dy;
-      qreal cang = (sinAltitude - zFactorCosAltitude * qSqrt(xx_plus_yy) * qSin(aspect - azimuth)) /
-                   qSqrt(1 + zFactorSquared * xx_plus_yy);
+      // r*sin(aspect-azimuth), with aspect=atan2(dy,dx) and r=sqrt(xx_plus_yy): expand via
+      // the angle-subtraction identity and substitute sin(aspect)=dy/r, cos(aspect)=dx/r -
+      // the r cancels algebraically, so this also covers dx=dy=0 without a singularity,
+      // while skipping atan2()/sin() entirely.
+      qreal rSinAspectMinusAzimuth = dy * cosAzimuth - dx * sinAzimuth;
+      qreal cang = (sinAltitude - zFactorCosAltitude * rSinAspectMinusAzimuth) / qSqrt(1 + zFactorSquared * xx_plus_yy);
 
       if (cang <= 0.0) {
         cang = 1.0;
@@ -325,6 +332,10 @@ qreal IDem::slopeOfWindowInterp(float* win2, winsize_e size, qreal x, qreal y) c
 
 void IDem::slopecolor(const QVector<float>& data, QVector<uchar>& out, quint32 x, quint32 y, quint32 stride, quint32 w,
                       quint32 h) const {
+  // invariant for the whole call (depends only on gradeSlopeColor/slopeCustomStepTable, not
+  // per-pixel state)
+  const qreal* currentSlopeStepTable = getCurrentSlopeStepTable();
+
   for (unsigned int m = 0; m < h; m++) {
     unsigned char* scan = out.data() + (m + y) * stride + x;
     for (unsigned int n = 0; n < w; n++) {
@@ -336,8 +347,6 @@ void IDem::slopecolor(const QVector<float>& data, QVector<uchar>& out, quint32 x
         scan[n] = 0;
         continue;
       }
-
-      const qreal* currentSlopeStepTable = getCurrentSlopeStepTable();
 
       if (slope > currentSlopeStepTable[4]) {
         scan[n] = 5;
@@ -364,10 +373,12 @@ qreal IDem::maxElevationInWindow(const float* win) const {
     }
   }
 
-  qreal elevation;  // elevation in the units set by the user
-  QString unit;     // result not used
-  IUnit::self().meter2elevation(meters, elevation, unit);
-  return elevation;
+  // Skip IUnit::meter2elevation()'s virtual call and its QString unit assignment (which
+  // would be discarded here anyway): this runs once per output pixel across multiple
+  // threadPool threads, and unit's shared QString refcount becomes a cross-core
+  // contention point otherwise. elevationFactor is the exact scale meter2elevation()
+  // applies internally.
+  return (meters == NOFLOAT) ? NOFLOAT : meters * IUnit::self().elevationFactor;
 }
 
 void IDem::elevationLimit(const QVector<float>& data, QVector<uchar>& out, quint32 x, quint32 y, quint32 stride,

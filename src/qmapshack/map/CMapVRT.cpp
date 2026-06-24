@@ -27,6 +27,7 @@
 
 #include "CMainWindow.h"
 #include "helpers/CDraw.h"
+#include "helpers/CGdalVrtUtil.h"
 #include "map/CMapDraw.h"
 
 CMapVRT::CMapVRT(const QString& filename, CMapDraw* parent) : IMap(eFeatVisibility, parent), filename(filename) {
@@ -40,7 +41,7 @@ CMapVRT::CMapVRT(const QString& filename, CMapDraw* parent) : IMap(eFeatVisibili
   }
 
   QString missingFile;
-  if (!allReferencedFilesExist(dataset, missingFile)) {
+  if (!CGdalVrtUtil::allReferencedFilesExist(dataset, missingFile)) {
     fail(tr("File does not exist:") % '\n' % missingFile % '\n' % tr("referenced by file:") % '\n' % filename);
     return;
   }
@@ -82,7 +83,7 @@ CMapVRT::CMapVRT(const QString& filename, CMapDraw* parent) : IMap(eFeatVisibili
   const qreal masterPixelSizeX =
       (pBand != nullptr && dataset->GetGeoTransform(masterGeoTransform) == CE_None) ? qAbs(masterGeoTransform[1]) : 0.0;
   const QVector<qint32> overviewFactors =
-      (pBand != nullptr) ? collectOverviewFactors(dataset, pBand, masterPixelSizeX) : QVector<qint32>();
+      (pBand != nullptr) ? CGdalVrtUtil::collectOverviewFactors(dataset, pBand, masterPixelSizeX) : QVector<qint32>();
   qDebug() << "overview factors" << overviewFactors;
 
   // single band palette/gray data is categorical: nearest neighbour avoids blending index
@@ -122,7 +123,7 @@ CMapVRT::CMapVRT(const QString& filename, CMapDraw* parent) : IMap(eFeatVisibili
 
     GDALWarpOptions* psOptions = GDALCreateWarpOptions();
     psOptions->pProgressArg = map;
-    psOptions->pfnProgress = &CMapVRT::progressCallback;
+    psOptions->pfnProgress = &CGdalVrtUtil::progressCallback;
 
     if (addDstAlphaBand) {
       GDALWarpInitDefaultBandMapping(psOptions, rasterBandCount);
@@ -232,78 +233,13 @@ CMapVRT::CMapVRT(const QString& filename, CMapDraw* parent) : IMap(eFeatVisibili
 }
 
 CMapVRT::~CMapVRT() {
-  closeDataset(dataset);
-  closeDataset(srcDataset);
-}
-
-int CMapVRT::progressCallback(double /*dfComplete*/, const char* /*message*/, void* pProgressArg) {
-  auto* drawCtx = reinterpret_cast<CMapDraw*>(pProgressArg);
-  return !drawCtx->needsRedraw();
-}
-
-bool CMapVRT::allReferencedFilesExist(GDALDataset* dataset, QString& missingFile) {
-  char** fileList = dataset->GetFileList();
-  bool allExist = true;
-  for (qint32 n = 0; fileList != nullptr && fileList[n] != nullptr; ++n) {
-#if defined(Q_OS_WIN32)
-    missingFile = QString::fromLocal8Bit(fileList[n]);
-    if (QFileInfo::exists(missingFile)) {
-      continue;
-    }
-#endif  // defined(Q_OS_WIN32)
-    missingFile = QString::fromUtf8(fileList[n]);
-    if (QFileInfo::exists(missingFile)) {
-      continue;
-    }
-    allExist = false;
-    break;
-  }
-  CSLDestroy(fileList);
-  return allExist;
-}
-
-QVector<qint32> CMapVRT::collectOverviewFactors(GDALDataset* dataset, GDALRasterBand* pBand, qreal pixelSizeX) {
-  QSet<qint32> factors;
-
-  if (pBand->GetOverviewCount() != 0) {
-    for (qint32 i = 0; i < pBand->GetOverviewCount(); ++i) {
-      factors << qRound((qreal)pBand->GetXSize() / pBand->GetOverview(i)->GetXSize());
-    }
-  } else if (pixelSizeX > 0) {
-    char** fileList = dataset->GetFileList();
-    for (qint32 n = 0; fileList != nullptr && fileList[n] != nullptr; ++n) {
-      GDALDatasetUniquePtr subDataset(GDALDataset::FromHandle(GDALOpen(fileList[n], GA_ReadOnly)));
-      GDALRasterBand* subBand = subDataset ? subDataset->GetRasterBand(1) : nullptr;
-      qreal subGeoTransform[6];
-      if (subBand == nullptr || subBand->GetOverviewCount() == 0 ||
-          subDataset->GetGeoTransform(subGeoTransform) != CE_None) {
-        continue;
-      }
-
-      const qreal subPixelSizeX = qAbs(subGeoTransform[1]);
-      for (qint32 i = 0; i < subBand->GetOverviewCount(); ++i) {
-        const qreal overviewPixelSizeX = subPixelSizeX * subBand->GetXSize() / subBand->GetOverview(i)->GetXSize();
-        factors << qRound(overviewPixelSizeX / pixelSizeX);
-      }
-    }
-    CSLDestroy(fileList);
-  }
-
-  QVector<qint32> result(factors.begin(), factors.end());
-  std::sort(result.begin(), result.end());
-  return result;
-}
-
-void CMapVRT::closeDataset(GDALDataset*& dataset) {
-  if (dataset != nullptr) {
-    GDALClose(dataset);
-    dataset = nullptr;
-  }
+  CGdalVrtUtil::closeDataset(dataset);
+  CGdalVrtUtil::closeDataset(srcDataset);
 }
 
 void CMapVRT::fail(const QString& msg) {
-  closeDataset(dataset);
-  closeDataset(srcDataset);
+  CGdalVrtUtil::closeDataset(dataset);
+  CGdalVrtUtil::closeDataset(srcDataset);
   QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."), msg);
 }
 
@@ -385,7 +321,7 @@ QImage CMapVRT::readSourceImage(const sourceWindow_t& window) {
 
     err = dataset->GetRasterBand(1)->ReadRaster(indexData.data(), static_cast<size_t>(indexData.size()), window.left,
                                                 window.top, w_map, h_map, w_buf, h_buf, GRIORA_NearestNeighbour,
-                                                &CMapVRT::progressCallback, map);
+                                                &CGdalVrtUtil::progressCallback, map);
     if (err == CE_None) {
       img = QImage(indexData.constData(), w_buf, h_buf, w_buf, QImage::Format_Indexed8);
       img.setColorTable(colortable);
@@ -424,7 +360,7 @@ QImage CMapVRT::readSourceImage(const sourceWindow_t& window) {
       GDALRasterBand* pBand = dataset->GetRasterBand(b);
 
       err = pBand->ReadRaster(bandBuf.data(), static_cast<size_t>(bandBuf.size()), window.left, window.top, w_map,
-                              h_map, w_buf, h_buf, GRIORA_Bilinear, &CMapVRT::progressCallback, map);
+                              h_map, w_buf, h_buf, GRIORA_Bilinear, &CGdalVrtUtil::progressCallback, map);
       if (err != CE_None) {
         break;
       }

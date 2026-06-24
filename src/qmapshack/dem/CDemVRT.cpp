@@ -29,6 +29,7 @@
 #include "CMainWindow.h"
 #include "dem/CDemDraw.h"
 #include "helpers/CDraw.h"
+#include "helpers/CGdalVrtUtil.h"
 #include "units/IUnit.h"
 
 CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent) : IDem(parent), filename(filename) {
@@ -43,8 +44,8 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent) : IDem(parent), file
   }
 
   QString missingFile;
-  if (!allReferencedFilesExist(dataset, missingFile)) {
-    closeDataset(dataset);
+  if (!CGdalVrtUtil::allReferencedFilesExist(dataset, missingFile)) {
+    CGdalVrtUtil::closeDataset(dataset);
     QMessageBox::warning(
         CMainWindow::getBestWidgetForParent(), tr("Error..."),
         tr("File does not exist:") % '\n' % missingFile % '\n' % tr("referenced by file:") % '\n' % filename);
@@ -52,7 +53,7 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent) : IDem(parent), file
   }
 
   if (dataset->GetRasterCount() != 1) {
-    closeDataset(dataset);
+    CGdalVrtUtil::closeDataset(dataset);
     QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."),
                          tr("DEM must have exactly one raster band:") % '\n' % filename);
     return;
@@ -60,7 +61,7 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent) : IDem(parent), file
 
   GDALRasterBand* pBand = dataset->GetRasterBand(1);
   if (nullptr == pBand) {
-    closeDataset(dataset);
+    CGdalVrtUtil::closeDataset(dataset);
     QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."),
                          tr("DEM must have exactly one raster band:") % '\n' % filename);
     return;
@@ -69,7 +70,7 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent) : IDem(parent), file
   const GDALDataType bandType = pBand->GetRasterDataType();
   if (bandType != GDT_Int16 && bandType != GDT_UInt16 && bandType != GDT_Int32 && bandType != GDT_UInt32 &&
       bandType != GDT_Float32) {
-    closeDataset(dataset);
+    CGdalVrtUtil::closeDataset(dataset);
     QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."),
                          tr("DEM must have one band with 16bit or 32bit data:") % '\n' % filename);
     return;
@@ -78,7 +79,7 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent) : IDem(parent), file
   qreal masterGeoTransform[6];
   const qreal masterPixelSizeX =
       (dataset->GetGeoTransform(masterGeoTransform) == CE_None) ? qAbs(masterGeoTransform[1]) : 0.0;
-  const QVector<qint32> overviewFactors = collectOverviewFactors(dataset, pBand, masterPixelSizeX);
+  const QVector<qint32> overviewFactors = CGdalVrtUtil::collectOverviewFactors(dataset, pBand, masterPixelSizeX);
   qDebug() << "overview factors" << overviewFactors;
 
   noData = pBand->GetNoDataValue(&hasNoData);
@@ -95,7 +96,7 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent) : IDem(parent), file
 
     GDALWarpOptions* psOptions = GDALCreateWarpOptions();
     psOptions->pProgressArg = dem;
-    psOptions->pfnProgress = &CDemVRT::progressCallback;
+    psOptions->pfnProgress = &CGdalVrtUtil::progressCallback;
 
     dataset = GDALDataset::FromHandle(GDALAutoCreateWarpedVRT(
         GDALDataset::ToHandle(srcDataset), nullptr, targetSRS.exportToWkt().c_str(), GRA_Bilinear, 0.1, psOptions));
@@ -103,7 +104,7 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent) : IDem(parent), file
     GDALDestroyWarpOptions(psOptions);
 
     if (dataset == nullptr) {
-      closeDataset(srcDataset);
+      CGdalVrtUtil::closeDataset(srcDataset);
       QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."),
                            tr("Failed to create Warp for:") % '\n' % filename);
       return;
@@ -123,8 +124,8 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent) : IDem(parent), file
   proj.init(dataset->GetProjectionRef(), "EPSG:4326");
 
   if (!proj.isValid()) {
-    closeDataset(dataset);
-    closeDataset(srcDataset);
+    CGdalVrtUtil::closeDataset(dataset);
+    CGdalVrtUtil::closeDataset(srcDataset);
     QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."),
                          tr("No georeference information found:") % '\n' % filename);
     return;
@@ -135,8 +136,8 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent) : IDem(parent), file
 
   qreal adfGeoTransform[6];
   if (dataset->GetGeoTransform(adfGeoTransform) != CE_None) {
-    closeDataset(dataset);
-    closeDataset(srcDataset);
+    CGdalVrtUtil::closeDataset(dataset);
+    CGdalVrtUtil::closeDataset(srcDataset);
     QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."),
                          tr("No pixel-to-map transform found:") % '\n' % filename);
     return;
@@ -186,73 +187,8 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent) : IDem(parent), file
 CDemVRT::~CDemVRT() {
   threadPool.waitForDone();
   QMutexLocker lock(&mutex);
-  closeDataset(dataset);
-  closeDataset(srcDataset);
-}
-
-int CDemVRT::progressCallback(double /*dfComplete*/, const char* /*message*/, void* pProgressArg) {
-  auto* drawCtx = reinterpret_cast<CDemDraw*>(pProgressArg);
-  return !drawCtx->needsRedraw();
-}
-
-bool CDemVRT::allReferencedFilesExist(GDALDataset* dataset, QString& missingFile) {
-  char** fileList = dataset->GetFileList();
-  bool allExist = true;
-  for (int n = 0; fileList != nullptr && fileList[n] != nullptr; ++n) {
-#if defined(Q_OS_WIN32)
-    missingFile = QString::fromLocal8Bit(fileList[n]);
-    if (QFileInfo::exists(missingFile)) {
-      continue;
-    }
-#endif  // defined(Q_OS_WIN32)
-    missingFile = QString::fromUtf8(fileList[n]);
-    if (QFileInfo::exists(missingFile)) {
-      continue;
-    }
-    allExist = false;
-    break;
-  }
-  CSLDestroy(fileList);
-  return allExist;
-}
-
-QVector<qint32> CDemVRT::collectOverviewFactors(GDALDataset* dataset, GDALRasterBand* pBand, qreal pixelSizeX) {
-  QSet<qint32> factors;
-
-  if (pBand->GetOverviewCount() != 0) {
-    for (qint32 i = 0; i < pBand->GetOverviewCount(); ++i) {
-      factors << qRound((qreal)pBand->GetXSize() / pBand->GetOverview(i)->GetXSize());
-    }
-  } else if (pixelSizeX > 0) {
-    char** fileList = dataset->GetFileList();
-    for (qint32 n = 0; fileList != nullptr && fileList[n] != nullptr; ++n) {
-      GDALDatasetUniquePtr subDataset(GDALDataset::FromHandle(GDALOpen(fileList[n], GA_ReadOnly)));
-      GDALRasterBand* subBand = subDataset ? subDataset->GetRasterBand(1) : nullptr;
-      qreal subGeoTransform[6];
-      if (subBand == nullptr || subBand->GetOverviewCount() == 0 ||
-          subDataset->GetGeoTransform(subGeoTransform) != CE_None) {
-        continue;
-      }
-
-      const qreal subPixelSizeX = qAbs(subGeoTransform[1]);
-      for (qint32 i = 0; i < subBand->GetOverviewCount(); ++i) {
-        const qreal overviewPixelSizeX = subPixelSizeX * subBand->GetXSize() / subBand->GetOverview(i)->GetXSize();
-        factors << qRound(overviewPixelSizeX / pixelSizeX);
-      }
-    }
-    CSLDestroy(fileList);
-  }
-
-  QVector<qint32> result(factors.begin(), factors.end());
-  std::sort(result.begin(), result.end());
-  return result;
-}
-
-void CDemVRT::closeDataset(GDALDataset*& dataset) {
-  if (dataset != nullptr) {
-    GDALClose(dataset);
-    dataset = nullptr;
-  }
+  CGdalVrtUtil::closeDataset(dataset);
+  CGdalVrtUtil::closeDataset(srcDataset);
 }
 
 void CDemVRT::slotNeedsRedraw() { threadPool.clear(); }
@@ -433,7 +369,7 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf) {
     // overviews
     CPLErr err =
         dataset->GetRasterBand(1)->ReadRaster(data.data(), static_cast<size_t>(w_buf) * h_buf, x, y, w_dem, h_dem,
-                                              w_buf, h_buf, GRIORA_Bilinear, &CDemVRT::progressCallback, dem);
+                                              w_buf, h_buf, GRIORA_Bilinear, &CGdalVrtUtil::progressCallback, dem);
 
     if (err != CE_None) {
       return;

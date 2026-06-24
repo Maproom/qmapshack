@@ -414,7 +414,7 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf) {
     return;
   }
 
-  QVector<float> data(static_cast<qsizetype>(w_buf) * h_buf);
+  data.resize(static_cast<qsizetype>(w_buf) * h_buf);
   {
     QMutexLocker lock(&mutex);
 
@@ -443,7 +443,7 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf) {
   quint32 w_used = w_buf - 2;
   quint32 h_used = h_buf - 2;
 
-  QVector<uchar> outbuf(w_used * h_used);
+  outbuf.resize(w_used * h_used);
 
   // pointer to one of IDem's per-pixel shading methods (hillshading(), slopeShading(), ...)
   using shadeFnPtr =
@@ -451,7 +451,7 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf) {
   // run shadeFn over outbuf in parallel on a 4x4 grid of chunks, blocking until either all
   // chunks are done (true) or a fresher redraw makes the result moot (false, with whatever
   // work was already queued left to finish in the background)
-  auto computeShading = [=, this, &data, &outbuf](shadeFnPtr shadeFn) {
+  auto computeShading = [=, this](shadeFnPtr shadeFn) {
     // run the shadings in paralell on equal sized chunks
     quint32 n_x = 4;
     quint32 n_y = 4;
@@ -469,9 +469,7 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf) {
         quint32 w_chunk = (j == n_x - 1) ? (w_used - x_chunk) : step_w_buf;
         quint32 h_chunk = (i == n_y - 1) ? (h_used - y_chunk) : step_h_buf;
 
-        threadPool.start([=, this, &data, &outbuf]() {
-          (this->*shadeFn)(data, outbuf, x_chunk, y_chunk, w_used, w_chunk, h_chunk);
-        });
+        threadPool.start([=, this]() { (this->*shadeFn)(data, outbuf, x_chunk, y_chunk, w_used, w_chunk, h_chunk); });
       }
     }
     threadPool.waitForDone();
@@ -480,8 +478,8 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf) {
 
   // compute one shading layer and paint it into dest at the given opacity; colorTable
   // may be null (e.g. for the alpha-only slope shading layer)
-  auto drawShadingLayer = [=, &outbuf](shadeFnPtr shadeFn, QImage::Format format, const QVector<QRgb>* colorTable,
-                                       qreal opacity, QPainter& p, const QRectF& dest) {
+  auto drawShadingLayer = [=, this](shadeFnPtr shadeFn, QImage::Format format, const QVector<QRgb>* colorTable,
+                                    qreal opacity, QPainter& p, const QRectF& dest) {
     if (!computeShading(shadeFn)) {
       return false;
     }

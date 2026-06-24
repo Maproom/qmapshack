@@ -31,39 +31,6 @@
 #include "helpers/CDraw.h"
 #include "units/IUnit.h"
 
-int CDemVRT::progressCallback(double /*dfComplete*/, const char* /*message*/, void* pProgressArg) {
-  auto* drawCtx = reinterpret_cast<CDemDraw*>(pProgressArg);
-  return !drawCtx->needsRedraw();
-}
-
-bool CDemVRT::allReferencedFilesExist(GDALDataset* dataset, QString& missingFile) {
-  char** fileList = dataset->GetFileList();
-  bool allExist = true;
-  for (int n = 0; fileList != nullptr && fileList[n] != nullptr; ++n) {
-#if defined(Q_OS_WIN32)
-    missingFile = QString::fromLocal8Bit(fileList[n]);
-    if (QFileInfo::exists(missingFile)) {
-      continue;
-    }
-#endif  // defined(Q_OS_WIN32)
-    missingFile = QString::fromUtf8(fileList[n]);
-    if (QFileInfo::exists(missingFile)) {
-      continue;
-    }
-    allExist = false;
-    break;
-  }
-  CSLDestroy(fileList);
-  return allExist;
-}
-
-void CDemVRT::closeDataset(GDALDataset*& dataset) {
-  if (dataset != nullptr) {
-    GDALClose(dataset);
-    dataset = nullptr;
-  }
-}
-
 CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent) : IDem(parent), filename(filename) {
   qDebug() << "------------------------------";
   qDebug() << "VRT: try to open" << filename;
@@ -108,8 +75,11 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent) : IDem(parent), file
     return;
   }
 
-  const bool hasOverviews = pBand->GetOverviewCount() != 0;
-  qDebug() << "has overviews" << hasOverviews;
+  qreal masterGeoTransform[6];
+  const qreal masterPixelSizeX =
+      (dataset->GetGeoTransform(masterGeoTransform) == CE_None) ? qAbs(masterGeoTransform[1]) : 0.0;
+  const QVector<qint32> overviewFactors = collectOverviewFactors(dataset, pBand, masterPixelSizeX);
+  qDebug() << "overview factors" << overviewFactors;
 
   noData = pBand->GetNoDataValue(&hasNoData);
   qDebug() << "no data:" << hasNoData << noData;
@@ -139,19 +109,12 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent) : IDem(parent), file
       return;
     }
 
-    if (hasOverviews) {
-      // to make GDAL take advantage of overviews in the original dataset we need to add "virtual overviews" with the
-      // same decimation factors to the WarpedVRT so first build a list of the overviews the original dataset
-      // contains...
-      QVector<qint32> overviews(pBand->GetOverviewCount());
-      for (int i = 0; i < overviews.size(); ++i) {
-        GDALRasterBand* overview = pBand->GetOverview(i);
-        qreal decimationFactor = (qreal)pBand->GetXSize() / overview->GetXSize();
-        overviews[i] = qRound(decimationFactor);
-      }
-      // ...and attach them as virtual overview
+    if (!overviewFactors.isEmpty()) {
+      // attach them as virtual overviews so GDAL can serve a decimated read straight from
+      // whichever source file(s) actually have a matching level, instead of always warping
+      // at full resolution and only downsampling the output
       CPLSetConfigOption("VRT_VIRTUAL_OVERVIEWS", "YES");
-      dataset->BuildOverviews("NONE", overviews.size(), overviews.data(), 0, nullptr, nullptr, nullptr);
+      dataset->BuildOverviews("NONE", overviewFactors.size(), overviewFactors.data(), 0, nullptr, nullptr, nullptr);
       CPLSetConfigOption("VRT_VIRTUAL_OVERVIEWS", "NO");
     }
   }
@@ -225,6 +188,71 @@ CDemVRT::~CDemVRT() {
   QMutexLocker lock(&mutex);
   closeDataset(dataset);
   closeDataset(srcDataset);
+}
+
+int CDemVRT::progressCallback(double /*dfComplete*/, const char* /*message*/, void* pProgressArg) {
+  auto* drawCtx = reinterpret_cast<CDemDraw*>(pProgressArg);
+  return !drawCtx->needsRedraw();
+}
+
+bool CDemVRT::allReferencedFilesExist(GDALDataset* dataset, QString& missingFile) {
+  char** fileList = dataset->GetFileList();
+  bool allExist = true;
+  for (int n = 0; fileList != nullptr && fileList[n] != nullptr; ++n) {
+#if defined(Q_OS_WIN32)
+    missingFile = QString::fromLocal8Bit(fileList[n]);
+    if (QFileInfo::exists(missingFile)) {
+      continue;
+    }
+#endif  // defined(Q_OS_WIN32)
+    missingFile = QString::fromUtf8(fileList[n]);
+    if (QFileInfo::exists(missingFile)) {
+      continue;
+    }
+    allExist = false;
+    break;
+  }
+  CSLDestroy(fileList);
+  return allExist;
+}
+
+QVector<qint32> CDemVRT::collectOverviewFactors(GDALDataset* dataset, GDALRasterBand* pBand, qreal pixelSizeX) {
+  QSet<qint32> factors;
+
+  if (pBand->GetOverviewCount() != 0) {
+    for (qint32 i = 0; i < pBand->GetOverviewCount(); ++i) {
+      factors << qRound((qreal)pBand->GetXSize() / pBand->GetOverview(i)->GetXSize());
+    }
+  } else if (pixelSizeX > 0) {
+    char** fileList = dataset->GetFileList();
+    for (qint32 n = 0; fileList != nullptr && fileList[n] != nullptr; ++n) {
+      GDALDatasetUniquePtr subDataset(GDALDataset::FromHandle(GDALOpen(fileList[n], GA_ReadOnly)));
+      GDALRasterBand* subBand = subDataset ? subDataset->GetRasterBand(1) : nullptr;
+      qreal subGeoTransform[6];
+      if (subBand == nullptr || subBand->GetOverviewCount() == 0 ||
+          subDataset->GetGeoTransform(subGeoTransform) != CE_None) {
+        continue;
+      }
+
+      const qreal subPixelSizeX = qAbs(subGeoTransform[1]);
+      for (qint32 i = 0; i < subBand->GetOverviewCount(); ++i) {
+        const qreal overviewPixelSizeX = subPixelSizeX * subBand->GetXSize() / subBand->GetOverview(i)->GetXSize();
+        factors << qRound(overviewPixelSizeX / pixelSizeX);
+      }
+    }
+    CSLDestroy(fileList);
+  }
+
+  QVector<qint32> result(factors.begin(), factors.end());
+  std::sort(result.begin(), result.end());
+  return result;
+}
+
+void CDemVRT::closeDataset(GDALDataset*& dataset) {
+  if (dataset != nullptr) {
+    GDALClose(dataset);
+    dataset = nullptr;
+  }
 }
 
 void CDemVRT::slotNeedsRedraw() { threadPool.clear(); }

@@ -204,9 +204,16 @@ class CDemVRT : public IDem {
   /// the heap every frame; see CMapVRT::indexData/bandBuf for the same pattern. Only ever
   /// touched from draw() (canvas thread), so no mutex is needed.
   QVector<float> data;
-  /// draw()'s output buffer for the per-pixel shading methods (hillshading(), ...); same
-  /// rationale as data
-  QVector<uchar> outbuf;
+
+  /// draw()'s output buffers, one per shading layer (IDem::computeShading() computes every
+  /// enabled layer in a single pass, so they must all coexist until painted, unlike data
+  /// they can't share one buffer). Same reuse rationale as data; a layer that's never been
+  /// enabled simply stays empty.
+  QVector<quint8> hillshadeBuf;
+  QVector<quint8> slopeShadeBuf;
+  QVector<quint8> slopeColorBuf;
+  QVector<quint8> elevationLimitBuf;
+  QVector<quint8> elevationShadeBuf;
 };
 
 #endif  // CDEMVRT_H

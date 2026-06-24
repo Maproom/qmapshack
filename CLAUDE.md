@@ -252,42 +252,22 @@ isn't already axis-aligned with the target SRS. What fills those corners depends
 
 ### CDemVRT/IDem rendering-speed punch list
 
-Working through this one item at a time (tracked as session tasks #1-8). Status as of
-2026-06-24: items 1-5 done (full low-risk batch complete); items 6-8 still deferred.
+Rendering-speed pass on `CDemVRT`/`IDem` (2026-06-24, see `git log` on `CDemVRT.{h,cpp}`/
+`IDem.{h,cpp}` for the done work): removed a per-pixel virtual-call+`QString` in elevation
+shading, replaced `atan2`/`sin` with an algebraic identity in hillshading, made `draw()` reuse its
+read/output buffers across frames instead of reallocating, hoisted several loop-invariant
+per-pixel computations, and fused all 5 shading layers into 3 passes (`IDem::computeShading()`)
+instead of one `threadPool` dispatch round per layer - each pass entered only if at least one of
+its layers is active, so "is this layer enabled" is a once-per-call decision, never a per-pixel
+one.
 
-**Active batch (low-risk, do first):**
-1. **DONE.** `IDem::maxElevationInWindow()` (`IDem.cpp:359-371`, used by `elevationLimit()`/
-   `elevationShading()`, called once per output pixel) goes through `IUnit::meter2elevation()`'s
-   *virtual* call plus an unused `QString` assignment (`unit = elevationUnit`) that's discarded
-   immediately. Since shading runs across multiple `threadPool` threads in parallel, every pixel
-   bumps the same shared `QString`'s atomic refcount - real cross-core contention, not just
-   wasted work. Fix: use the public `qreal IUnit::elevationFactor` member directly, skipping the
-   virtual call and the `QString` entirely. Preserve the `NOFLOAT` passthrough.
-2. **DONE.** `IDem::hillshading()` (`IDem.cpp:206-243`) computes `aspect = atan2(dy,dx)` then
-   `sin(aspect - azimuth)` per pixel. Since `azimuth` is fixed, use the identity
-   `r*sin(aspect-azimuth) = dy*cos(azimuth) - dx*sin(azimuth)` (`r = sqrt(xx_plus_yy)` already
-   computed) to drop `atan2`/`sin` entirely - 2 multiplies instead. Verify numerically equivalent,
-   including the `dx=dy=0` degenerate case (works out to 0 either way since `r` cancels
-   algebraically).
-3. **DONE.** `CDemVRT::draw()`'s local `QVector<float> data` / `QVector<uchar> outbuf` are reallocated on
-   every single `draw()` call (every redraw/pan/zoom tick). Convert to resized-not-reallocated
-   member buffers, mirroring `CMapVRT::indexData`/`bandBuf`. Safe: `draw()` only ever runs on the
-   canvas thread (see `CDemVRT.h`'s class-level `@note`).
-4. **DONE.** `IDem::hillshading()` divides by `(xscale*factorHillshading)` / `(yscale*factorHillshading)`
-   inside the per-pixel loop though both are loop-invariant; hoist to precomputed multiplicative
-   constants before the loop.
-5. **DONE.** `IDem::slopecolor()` (`IDem.cpp:340`) calls `getCurrentSlopeStepTable()` inside the per-pixel
-   loop though it's invariant for the whole call; hoist above the loop.
+Still open: batch `getElevationAt()`/`getSlopeAt()` point queries (currently one small `RasterIO`
+call per point, e.g. per vertex of a track elevation profile) - a different code path than
+`draw()`'s map rendering, worth revisiting only if track-profile performance comes up.
 
-**Deferred (separate task later, not part of the low-risk batch):**
-6. Cache `1/xscale`, `1/yscale` for `slopeOfWindowInterp()` - smaller win, requires keeping
-   reciprocal members in sync wherever `xscale`/`yscale` are set.
-7. Fuse all enabled shading layers (hillshading/slopeShading/slopecolor/elevationLimit/
-   elevationShading) into one pass instead of one `threadPool` dispatch round per layer - biggest
-   structural win when 2+ layers are enabled, but a real architecture change (changes the shading
-   methods' call convention).
-8. Batch `getElevationAt()`/`getSlopeAt()` point queries (currently one small `RasterIO` call per
-   point, e.g. per vertex of a track elevation profile) - different code path than `draw()`'s map
-   rendering, revisit only if track-profile performance comes up.
+Skipped: caching `1/xscale`/`1/yscale` for `slopeOfWindowInterp()` - modest win, and hoisting it
+would need either a signature change touching its 3 callers or new cached members with a
+staleness trap (`xscale`/`yscale` are plain protected members assigned directly, no setter to keep
+a reciprocal in sync).
 
 

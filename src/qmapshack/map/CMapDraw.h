@@ -19,6 +19,7 @@
 #ifndef CMAPDRAW_H
 #define CMAPDRAW_H
 
+#include <QPointer>
 #include <QStringList>
 
 #include "canvas/IDrawContext.h"
@@ -28,6 +29,7 @@ class CCanvas;
 class CMapList;
 class QSettings;
 class CMapItem;
+class CMapVRT;
 struct IPoiItem;
 
 class CMapDraw : public IDrawContext {
@@ -118,6 +120,22 @@ class CMapDraw : public IDrawContext {
  signals:
   void sigActiveMapsChanged(bool noActiveMap);
 
+  /**
+     @brief Emitted (from the render thread) when a CMapVRT's render timed out while
+            overviews are missing/inadequate for the read - the fixable case. CCanvas
+            connects to this to show an advisory dialog on the GUI thread, fetching
+            whatever it needs straight off source (CMapVRT::getFilename()/
+            getOverviewAdvice()) once there, rather than dragging it all through here.
+     @param source the CMapVRT to query and to report the dialog result back to; null if
+                    it was destroyed before the queued signal got delivered
+   */
+  void sigOverviewAdvisory(QPointer<CMapVRT> source);
+
+ public slots:
+  /// @brief Relay for sigOverviewAdvisory(), called by CMapVRT (which only has the CMapDraw
+  /// pointer, not its own signal to emit from another object).
+  void emitOverviewAdvisory(QPointer<CMapVRT> source);
+
  protected:
   void drawt(buffer_t& currentBuffer) override;
 
@@ -166,9 +184,9 @@ class CMapDraw : public IDrawContext {
 
   /**
    *  @brief delay timer to save config after a change
-   * 
+   *
    * This is used to combine multiple change signals within a second
-   * and to give saving a cool down time if anything crashes on 
+   * and to give saving a cool down time if anything crashes on
    * a change.
    */
   QTimer* timerDelayedSave;

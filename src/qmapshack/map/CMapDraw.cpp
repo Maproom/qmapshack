@@ -27,6 +27,7 @@
 #include "map/CMapItem.h"
 #include "map/CMapList.h"
 #include "map/CMapPathSetup.h"
+#include "map/CMapVRT.h"
 #include "map/IMap.h"
 #include "map/cache/CDiskCache.h"
 #include "misc.h"
@@ -39,6 +40,11 @@ QStringList CMapDraw::mapPaths;
 QStringList CMapDraw::supportedFormats = QString("*.vrt|*.jnx|*.img|*.rmap|*.wmts|*.tms|*.gemf").split('|');
 
 CMapDraw::CMapDraw(CCanvas* parent) : IDrawContext("map", CCanvas::eRedrawMap, parent) {
+  // sigOverviewAdvisory crosses threads (emitted from the render thread); QPointer<CMapVRT>
+  // needs an explicit runtime registration before connect() will queue it, the compile-time
+  // Q_DECLARE_METATYPE QPointer already gets via qpointer.h isn't enough on its own
+  qRegisterMetaType<QPointer<CMapVRT>>("QPointer<CMapVRT>");
+
   mapList = new CMapList(canvas);
   CMainWindow::self().addMapList(mapList);
   connect(canvas, &CCanvas::destroyed, mapList, &CMapList::deleteLater);
@@ -52,6 +58,8 @@ CMapDraw::CMapDraw(CCanvas* parent) : IDrawContext("map", CCanvas::eRedrawMap, p
 }
 
 CMapDraw::~CMapDraw() { maps.removeOne(this); }
+
+void CMapDraw::emitOverviewAdvisory(QPointer<CMapVRT> source) { emit sigOverviewAdvisory(source); }
 
 void CMapDraw::slotChanged() {
   emitSigCanvasUpdate();

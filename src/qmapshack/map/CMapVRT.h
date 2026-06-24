@@ -19,6 +19,9 @@
 #ifndef CMAPVRT_H
 #define CMAPVRT_H
 
+#include <atomic>
+
+#include "helpers/CGdalVrtUtil.h"
 #include "map/IMap.h"
 
 class CMapDraw;
@@ -48,7 +51,23 @@ class CMapVRT : public IMap {
   CMapVRT(const QString& filename, CMapDraw* parent);
   virtual ~CMapVRT();
 
+  /// @brief Persist the overview-advisory-dialog suppression flag in addition to IMap::saveConfig().
+  void saveConfig(QSettings& cfg) override;
+
+  /// @brief Restore what saveConfig() persisted.
+  void loadConfig(QSettings& cfg) override;
+
   void draw(IDrawContext::buffer_t& buf) override;
+
+  /// @brief The path passed to the constructor; used by the overview advisory dialog.
+  const QString& getFilename() const { return filename; }
+
+  /// @brief Cached suggested-overview info for this file; used by the overview advisory dialog.
+  const CGdalVrtUtil::OverviewAdvice& getOverviewAdvice() const { return overviewAdvice; }
+
+ public slots:
+  /// @brief Set by the overview advisory dialog's "don't show again for this file" checkbox.
+  void slotSetSuppressOverviewAdvisory(bool yes) { suppressOverviewAdvisory = yes; }
 
  private:
   /// Close dataset and srcDataset (either may already be null, e.g. if construction
@@ -65,6 +84,11 @@ class CMapVRT : public IMap {
     qreal bottom;
     qint32 bufWidth;
     qint32 bufHeight;
+    /// the clamped (>=1.0) decimation factor computeSourceWindow() used to size
+    /// bufWidth/bufHeight; exposed so draw() can reuse the exact same values for its
+    /// overview-advisory needed-factor check instead of recomputing them
+    qreal bufScaleX;
+    qreal bufScaleY;
   };
 
   /**
@@ -80,11 +104,14 @@ class CMapVRT : public IMap {
 
   /**
      @brief Read window from dataset into a QImage.
-     @param window the area/resolution to read, as computed by computeSourceWindow()
+     @param window  the area/resolution to read, as computed by computeSourceWindow()
+     @param deadline shared render-timeout budget for every ReadRaster() call this draw()
+                     makes (the multi-band loop reads one band per call); deadline.timedOut
+                     is set if any of them aborts due to the timeout
      @return Format_Indexed8 image for single-band palette/gray data, Format_ARGB32 for
              multi-band; a null QImage if the GDAL read failed or was aborted
    */
-  QImage readSourceImage(const sourceWindow_t& window);
+  QImage readSourceImage(const sourceWindow_t& window, CGdalVrtUtil::ReadDeadline& deadline);
 
   /**
      @brief Composite img onto p at the screen position/orientation matching window.
@@ -143,6 +170,20 @@ class CMapVRT : public IMap {
   QTransform trFwd;
   /// trFwd inverted: maps the dataset's CRS back to this map's pixel coordinates
   QTransform trInv;
+
+  /// suggested gdaladdo command(s), computed once at construction from the dataset's own
+  /// characteristics; reused (never re-derived) whenever draw() hits the render timeout
+  CGdalVrtUtil::OverviewAdvice overviewAdvice;
+
+  /// persisted via saveConfig()/loadConfig(): true once the user checked "don't show
+  /// again" on the overview advisory dialog for this file. Written by
+  /// slotSetSuppressOverviewAdvisory()/loadConfig() (GUI thread), read by draw() (canvas
+  /// thread) - must be atomic to avoid a data race across that boundary.
+  std::atomic<bool> suppressOverviewAdvisory = false;
+
+  /// not persisted: true once the advisory has been shown for this loaded instance, so
+  /// panning/zooming a slow file doesn't reopen the dialog on every redraw
+  bool advisoryShownThisSession = false;
 };
 
 #endif  // CMAPVRT_H

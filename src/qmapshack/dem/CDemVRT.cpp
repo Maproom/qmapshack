@@ -76,11 +76,19 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent) : IDem(parent), file
     return;
   }
 
+  // dataset's own size before any reprojection below replaces it with a warped VRT;
+  // used to rescale weakestMaxFactor into the final dataset's pixel grid further down
+  const qint32 preWarpXSize = pBand->GetXSize();
+  const qint32 preWarpYSize = pBand->GetYSize();
+
   qreal masterGeoTransform[6];
   const qreal masterPixelSizeX =
       (dataset->GetGeoTransform(masterGeoTransform) == CE_None) ? qAbs(masterGeoTransform[1]) : 0.0;
-  const QVector<qint32> overviewFactors = CGdalVrtUtil::collectOverviewFactors(dataset, pBand, masterPixelSizeX);
-  qDebug() << "overview factors" << overviewFactors;
+  const CGdalVrtUtil::overview_factors_t overviewFactors =
+      CGdalVrtUtil::collectOverviewFactors(dataset, pBand, masterPixelSizeX);
+  qDebug() << "overview factors" << overviewFactors.factors;
+  // DEM data is always single-band continuous elevation, never categorical/palette
+  overviewAdvice = CGdalVrtUtil::buildOverviewAdvice(dataset, pBand, filename, /*isCategorical=*/false, overviewFactors);
 
   noData = pBand->GetNoDataValue(&hasNoData);
   qDebug() << "no data:" << hasNoData << noData;
@@ -110,12 +118,13 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent) : IDem(parent), file
       return;
     }
 
-    if (!overviewFactors.isEmpty()) {
+    if (!overviewFactors.factors.isEmpty()) {
       // attach them as virtual overviews so GDAL can serve a decimated read straight from
       // whichever source file(s) actually have a matching level, instead of always warping
       // at full resolution and only downsampling the output
       CPLSetConfigOption("VRT_VIRTUAL_OVERVIEWS", "YES");
-      dataset->BuildOverviews("NONE", overviewFactors.size(), overviewFactors.data(), 0, nullptr, nullptr, nullptr);
+      dataset->BuildOverviews("NONE", overviewFactors.factors.size(), overviewFactors.factors.data(), 0, nullptr,
+                             nullptr, nullptr);
       CPLSetConfigOption("VRT_VIRTUAL_OVERVIEWS", "NO");
     }
   }
@@ -133,6 +142,17 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent) : IDem(parent), file
 
   xsize_px = dataset->GetRasterXSize();
   ysize_px = dataset->GetRasterYSize();
+
+  // a reprojection (the warp block above) can change the dataset's own pixel density -
+  // e.g. between a projected CRS in meters and a geographic CRS in degrees, or simply a
+  // different output resolution GDAL chose - so rescale weakestMaxFactor (collected
+  // pre-warp, in the original dataset's own pixel grid) into the current dataset's pixel
+  // grid, matching what draw()'s neededFactor (derived from the current xscale/yscale) is
+  // compared against. A no-op (ratio 1.0) whenever no warp happened, since the raster
+  // size is then unchanged.
+  const qreal warpScale =
+      qMax(static_cast<qreal>(xsize_px) / preWarpXSize, static_cast<qreal>(ysize_px) / preWarpYSize);
+  overviewAdvice.weakestMaxFactor = qMax(1, qRound(overviewAdvice.weakestMaxFactor * warpScale));
 
   qreal adfGeoTransform[6];
   if (dataset->GetGeoTransform(adfGeoTransform) != CE_None) {
@@ -189,6 +209,16 @@ CDemVRT::~CDemVRT() {
   QMutexLocker lock(&mutex);
   CGdalVrtUtil::closeDataset(dataset);
   CGdalVrtUtil::closeDataset(srcDataset);
+}
+
+void CDemVRT::saveConfig(QSettings& cfg) {
+  IDem::saveConfig(cfg);
+  cfg.setValue("suppressOverviewAdvisory", suppressOverviewAdvisory.load());
+}
+
+void CDemVRT::loadConfig(QSettings& cfg) {
+  IDem::loadConfig(cfg);
+  suppressOverviewAdvisory = cfg.value("suppressOverviewAdvisory", suppressOverviewAdvisory.load()).toBool();
 }
 
 void CDemVRT::slotNeedsRedraw() { threadPool.clear(); }
@@ -350,6 +380,9 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf) {
     return;
   }
 
+  CGdalVrtUtil::ReadDeadline deadline{dem};
+  deadline.timer.start();
+
   data.resize(static_cast<qsizetype>(w_buf) * h_buf);
   {
     QMutexLocker lock(&mutex);
@@ -367,11 +400,29 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf) {
 
     // by requesting a different size than the size of the buffer GDAL will automatically do scaling for us and use
     // overviews
-    CPLErr err =
-        dataset->GetRasterBand(1)->ReadRaster(data.data(), static_cast<size_t>(w_buf) * h_buf, x, y, w_dem, h_dem,
-                                              w_buf, h_buf, GRIORA_Bilinear, &CGdalVrtUtil::progressCallback, dem);
+    CPLErr err = dataset->GetRasterBand(1)->ReadRaster(data.data(), static_cast<size_t>(w_buf) * h_buf, x, y, w_dem,
+                                                       h_dem, w_buf, h_buf, GRIORA_Bilinear,
+                                                       &CGdalVrtUtil::progressCallbackWithDeadline, &deadline);
 
     if (err != CE_None) {
+      if (deadline.timedOut) {
+        // unlike an abort caused by a fresher redraw already being queued, a timeout
+        // abort leaves nothing else asking for a follow-up redraw - without one, this
+        // layer would stay blank until some unrelated event (pan/zoom) happens to
+        // trigger a full redraw, even once the underlying slowness is fixed
+        dem->emitSigCanvasUpdate();
+
+        if (supportsOverviewAdvisory() && !suppressOverviewAdvisory && !advisoryShownThisSession) {
+          // overviews missing entirely, or the weakest referenced file's deepest overview
+          // still isn't decimated enough for what this read needed (e.g. a mosaic of files
+          // with wildly inconsistent overview depths)
+          const qreal neededFactor = qMax(buf_scale_x, buf_scale_y);
+          if (overviewAdvice.overviewsMissing || neededFactor > overviewAdvice.weakestMaxFactor) {
+            advisoryShownThisSession = true;
+            dem->emitOverviewAdvisory(this);
+          }
+        }
+      }
       return;
     }
   }

@@ -25,6 +25,10 @@ class CDemWCS : public CDemVRT {
  public:
   CDemWCS(const QString& filename, CDemDraw* parent);
   virtual ~CDemWCS() = default;
+
+ protected:
+  /// @brief A remote WCS service - building local overviews via gdaladdo doesn't apply.
+  bool supportsOverviewAdvisory() const override { return false; }
 };
 
 #endif  // CDEMWCS_H

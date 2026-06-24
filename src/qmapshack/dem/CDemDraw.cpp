@@ -25,6 +25,7 @@
 #include "dem/CDemItem.h"
 #include "dem/CDemList.h"
 #include "dem/CDemPathSetup.h"
+#include "dem/CDemVRT.h"
 #include "dem/IDem.h"
 #include "gis/IGisLine.h"
 #include "helpers/CSettings.h"
@@ -36,6 +37,11 @@ QStringList CDemDraw::demPaths;
 QStringList CDemDraw::supportedFormats = QString("*.vrt|*.wcs").split('|');
 
 CDemDraw::CDemDraw(CCanvas* canvas) : IDrawContext("dem", CCanvas::eRedrawDem, canvas) {
+  // sigOverviewAdvisory crosses threads (emitted from the render thread); QPointer<CDemVRT>
+  // needs an explicit runtime registration before connect() will queue it, the compile-time
+  // Q_DECLARE_METATYPE QPointer already gets via qpointer.h isn't enough on its own
+  qRegisterMetaType<QPointer<CDemVRT>>("QPointer<CDemVRT>");
+
   demList = new CDemList(canvas);
   CMainWindow::self().addDemList(demList);
   connect(canvas, &CCanvas::destroyed, demList, &CDemList::deleteLater);
@@ -49,6 +55,8 @@ CDemDraw::CDemDraw(CCanvas* canvas) : IDrawContext("dem", CCanvas::eRedrawDem, c
 }
 
 CDemDraw::~CDemDraw() { dems.removeOne(this); }
+
+void CDemDraw::emitOverviewAdvisory(QPointer<CDemVRT> source) { emit sigOverviewAdvisory(source); }
 
 void CDemDraw::slotChanged() {
   emitSigCanvasUpdate();

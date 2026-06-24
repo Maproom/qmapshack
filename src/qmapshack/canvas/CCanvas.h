@@ -29,8 +29,10 @@
 
 class IDrawContext;
 class CMapDraw;
+class CMapVRT;
 class CGrid;
 class CDemDraw;
+class CDemVRT;
 class CPoiDraw;
 class QGestureEvent;
 class CGisDraw;
@@ -219,7 +221,22 @@ class CCanvas : public QWidget {
  private slots:
   void slotToolTip();
 
+  /// @brief Show the overview advisory dialog for a CDemVRT that hit the render timeout
+  /// with overviews missing/inadequate; wires the dialog's "don't show again" result back
+  /// to source.
+  void slotShowDemOverviewAdvisory(QPointer<CDemVRT> source);
+
+  /// @brief Same as slotShowDemOverviewAdvisory(), for a CMapVRT.
+  void slotShowMapOverviewAdvisory(QPointer<CMapVRT> source);
+
  private:
+  /// @brief Shared implementation behind slotShowDemOverviewAdvisory()/slotShowMapOverviewAdvisory():
+  /// only the source type differs between CDemVRT/CMapVRT, both of which expose the
+  /// identical getFilename()/getOverviewAdvice()/slotSetSuppressOverviewAdvisory(bool) the
+  /// dialog needs.
+  template <class T>
+  void showOverviewAdvisory(QPointer<T> source);
+
   static QString generateKey(int count);
   void drawStatusMessages(QPainter& p);
   void drawTrackStatistic(QPainter& p);

@@ -68,6 +68,8 @@ if (condition)
 
 **Prefer Qt's fixed-width typedefs over plain C++ types**: `qint32`/`quint32` over `int`/`unsigned int`, `qreal` over `double`, `qsizetype` over `size_t`/`ptrdiff_t` for sizes coming from Qt containers. Exception: when a parameter type is dictated by an external API (e.g. GDAL's `int*` out-param, or `size_t` in a `ReadRaster()` signature), match that API's type instead of casting.
 
+**No method implementation may be placed before the ctor and dtor of that class** in a `.cpp` file. The constructor and destructor always come first, in that order; every other member function follows after both.
+
 ---
 
 ## Building
@@ -269,5 +271,47 @@ Skipped: caching `1/xscale`/`1/yscale` for `slopeOfWindowInterp()` - modest win,
 would need either a signature change touching its 3 callers or new cached members with a
 staleness trap (`xscale`/`yscale` are plain protected members assigned directly, no setter to keep
 a reciprocal in sync).
+
+### CDemVRT/CMapVRT render timeout + overview-advisory dialog
+
+Implemented 2026-06-24 (QMS-1128). `CDemVRT`/`CMapVRT::draw()` now wrap their
+`ReadRaster()` call(s) with a 10s deadline (`CGdalVrtUtil::ReadDeadline` +
+`progressCallbackWithDeadline()`, reusing the existing GDAL progress-abort hook rather
+than killing a thread). On timeout, if `CGdalVrtUtil::OverviewAdvice::overviewsMissing`
+(cached at construction from `collectOverviewFactors()`) says overviews are missing
+anywhere, and the per-file `suppressOverviewAdvisory` setting (persisted via
+`CDemVRT`/`CMapVRT::saveConfig()`/`loadConfig()`, same per-file `QSettings` group
+`CMapItem`/`CDemItem` already use) isn't set, and the dialog hasn't already been shown
+this session (`advisoryShownThisSession`) — `CDemDraw`/`CMapDraw::sigOverviewAdvisory`
+fires (render thread → GUI thread, `QPointer<CDemVRT/CMapVRT>` payload), `CCanvas`
+shows `COverviewAdvisoryDialog` (`helpers/`, non-modal) suggesting copy-pasteable
+`gdaladdo -ro -r {average|nearest} --config COMPRESS_OVERVIEW DEFLATE ...` commands
+(`CGdalVrtUtil::buildOverviewAdvice()`), one for the VRT and one for the underlying
+source file(s) (a shell loop if there are several). `-ro` always forces external
+overviews so the original raster is never altered.
+
+**"Frankenstein" mosaic gap, fixed.** Found via a real test file (3 source DEMs -
+austria.tif 10m/factors 2-64, slovenia.tif 20m/factors ~3-238, swiss_utm33.tif
+20m/factors 5-198 - mosaicked with no `<OverviewList>` of its own): every file having
+*some* overviews made `overviewsMissing` false (it's just "is the union across all
+referenced files non-empty"), so the dialog stayed suppressed even though rendering was
+genuinely slow - the real problem was inconsistent overview depths across sources, not
+an absence of overviews (austria.tif's deepest overview only reaches factor 64, far
+short of what a "fit the whole mosaic" view needs).
+
+Fix: `collectOverviewFactors()` gained a `weakestMaxFactor` out-param - the *weakest*
+referenced file's own deepest overview factor (a file with zero usable overviews counts
+as 1, native-only). `OverviewAdvice` now carries it, and `buildOverviewAdvice()` no
+longer early-returns when `overviewsMissing` is false, since vrtCommand/filesCommand may
+still be needed. `CDemVRT`/`CMapVRT::draw()` compute the *actually needed* decimation
+factor for that read (`qMax(buf_scale_x, buf_scale_y)` in CDemVRT; recomputed from
+`bufferScale`/`xscale`/`yscale` in CMapVRT, since `computeSourceWindow()` doesn't expose
+it) and trigger the advisory on `overviewsMissing || neededFactor > weakestMaxFactor`.
+
+Known remaining limitation (not addressed): this only catches "zoomed out past every
+file's deepest overview." A view whose needed factor falls in a *gap* between two
+available levels on one file (but still under that file's deepest) can still hit GDAL's
+full-resolution fallback depending on its overview-selection tolerance - not modeled
+here, would need per-level gap analysis rather than just a single weakest-deepest value.
 
 

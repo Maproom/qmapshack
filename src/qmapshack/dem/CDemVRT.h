@@ -24,6 +24,7 @@
 #include <atomic>
 
 #include "dem/IDem.h"
+#include "helpers/CGdalVrtUtil.h"
 
 class CDemDraw;
 class GDALDataset;
@@ -70,6 +71,12 @@ class CDemVRT : public IDem {
   /// Waits for any in-flight threadPool work to finish, then closes the GDAL dataset(s).
   virtual ~CDemVRT();
 
+  /// @brief Persist the overview-advisory-dialog suppression flag in addition to IDem::saveConfig().
+  void saveConfig(QSettings& cfg) override;
+
+  /// @brief Restore what saveConfig() persisted.
+  void loadConfig(QSettings& cfg) override;
+
   /**
      @brief Render the requested view rectangle's hillshading/slope/elevation layers
             into buf.image.
@@ -103,6 +110,29 @@ class CDemVRT : public IDem {
              window contains a noData value, or the read fails
    */
   qreal getSlopeAt(const QPointF& pos, bool checkScale) override;
+
+  /// @brief The path passed to the constructor; used by the overview advisory dialog.
+  const QString& getFilename() const { return filename; }
+
+  /// @brief Cached suggested-overview info for this file; used by the overview advisory dialog.
+  const CGdalVrtUtil::OverviewAdvice& getOverviewAdvice() const { return overviewAdvice; }
+
+ public slots:
+  /// @brief Set by the overview advisory dialog's "don't show again for this file" checkbox.
+  void slotSetSuppressOverviewAdvisory(bool yes) { suppressOverviewAdvisory = yes; }
+
+ protected:
+  /**
+     @brief False for sources where local overview advice doesn't apply.
+
+     CDemWCS overrides this to false: it's a remote WCS service, and "run gdaladdo on
+     this file" doesn't make sense for a network source the way it does for a local
+     file. Checked from draw() rather than the constructor - a virtual call made while
+     CDemVRT's own constructor is still running always resolves to CDemVRT's own
+     implementation, never a derived override, since the derived part of the object
+     hasn't been constructed yet.
+   */
+  virtual bool supportsOverviewAdvisory() const { return true; }
 
  private slots:
   /// Cancel any shading work still queued/running for a draw() call that is now stale.
@@ -147,6 +177,20 @@ class CDemVRT : public IDem {
   /// the dataset's extent in trFwd's output space; used by toRasterPixel() to reject
   /// queries outside dataset coverage before touching GDAL
   QRectF boundingBox;
+
+  /// suggested gdaladdo command(s), computed once at construction from the dataset's own
+  /// characteristics; reused (never re-derived) whenever draw() hits the render timeout
+  CGdalVrtUtil::OverviewAdvice overviewAdvice;
+
+  /// persisted via saveConfig()/loadConfig(): true once the user checked "don't show
+  /// again" on the overview advisory dialog for this file. Written by
+  /// slotSetSuppressOverviewAdvisory()/loadConfig() (GUI thread), read by draw() (canvas
+  /// thread) - atomic for the same reason as outOfScale above.
+  std::atomic<bool> suppressOverviewAdvisory = false;
+
+  /// not persisted: true once the advisory has been shown for this loaded instance, so
+  /// panning/zooming a slow file doesn't reopen the dialog on every redraw
+  bool advisoryShownThisSession = false;
 
   /// runs the per-chunk shading work started by draw(); cancelled by slotNeedsRedraw()
   /// when a fresher redraw has been requested

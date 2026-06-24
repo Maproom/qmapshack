@@ -19,6 +19,7 @@
 #ifndef CDEMDRAW_H
 #define CDEMDRAW_H
 
+#include <QPointer>
 #include <QStringList>
 
 #include "canvas/IDrawContext.h"
@@ -28,8 +29,10 @@ class CCanvas;
 class CDemList;
 class QSettings;
 class CDemItem;
+class CDemVRT;
 
 class CDemDraw : public IDrawContext {
+  Q_OBJECT
  public:
   CDemDraw(CCanvas* canvas);
   virtual ~CDemDraw();
@@ -57,6 +60,23 @@ class CDemDraw : public IDrawContext {
   static void saveDemPath(QSettings& cfg);
   static void loadDemPath(QSettings& cfg);
   static const QStringList& getSupportedFormats() { return supportedFormats; }
+
+ signals:
+  /**
+     @brief Emitted (from the render thread) when a CDemVRT's render timed out while
+            overviews are missing/inadequate for the read - the fixable case. CCanvas
+            connects to this to show an advisory dialog on the GUI thread, fetching
+            whatever it needs straight off source (CDemVRT::getFilename()/
+            getOverviewAdvice()) once there, rather than dragging it all through here.
+     @param source the CDemVRT to query and to report the dialog result back to; null if
+                    it was destroyed before the queued signal got delivered
+   */
+  void sigOverviewAdvisory(QPointer<CDemVRT> source);
+
+ public slots:
+  /// @brief Relay for sigOverviewAdvisory(), called by CDemVRT (which only has the CDemDraw
+  /// pointer, not its own signal to emit from another object).
+  void emitOverviewAdvisory(QPointer<CDemVRT> source);
 
  protected:
   void drawt(buffer_t& currentBuffer) override;

@@ -187,6 +187,7 @@ set( SRCS
     helpers/CLimit.cpp
     helpers/CLinksDialog.cpp
     helpers/CMapIconSizesSetup.cpp
+    helpers/COverviewAdvisoryDialog.cpp
     helpers/CPhotoViewer.cpp
     helpers/CPositionDialog.cpp
     helpers/CProgressDialog.cpp
@@ -561,6 +562,7 @@ set( HDRS
     helpers/CLimit.h
     helpers/CLinksDialog.h
     helpers/CMapIconSizesSetup.h
+    helpers/COverviewAdvisoryDialog.h
     helpers/CPhotoViewer.h
     helpers/CPositionDialog.h
     helpers/CProgressDialog.h
@@ -853,6 +855,7 @@ set( UIS
     helpers/IInputDialog.ui
     helpers/ILinksDialog.ui
     helpers/IMapIconSizesSetup.ui
+    helpers/IOverviewAdvisoryDialog.ui
     helpers/IPositionDialog.ui
     helpers/IProgressDialog.ui
     helpers/ISelectCopyAction.ui

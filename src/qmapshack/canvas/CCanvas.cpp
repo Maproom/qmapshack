@@ -24,6 +24,7 @@
 #include "CMainWindow.h"
 #include "canvas/CCanvasSetup.h"
 #include "dem/CDemDraw.h"
+#include "dem/CDemVRT.h"
 #include "gis/CGisDraw.h"
 #include "gis/CGisWorkspace.h"
 #include "gis/GeoMath.h"
@@ -33,9 +34,11 @@
 #include "grid/CGrid.h"
 #include "grid/CGridSetup.h"
 #include "helpers/CDraw.h"
+#include "helpers/COverviewAdvisoryDialog.h"
 #include "helpers/CSettings.h"
 #include "helpers/CWptIconManager.h"
 #include "map/CMapDraw.h"
+#include "map/CMapVRT.h"
 #include "mouse/CMouseAdapter.h"
 #include "mouse/CMouseEditArea.h"
 #include "mouse/CMouseEditRte.h"
@@ -185,6 +188,9 @@ CCanvas::CCanvas(QWidget* parent, const QString& storedKey) : QWidget(parent) {
 
   connect(dem, &CDemDraw::sigStartThread, demLoadIndicator, &QLabel::show);
   connect(dem, &CDemDraw::sigStopThread, demLoadIndicator, &QLabel::hide);
+
+  connect(map, &CMapDraw::sigOverviewAdvisory, this, &CCanvas::slotShowMapOverviewAdvisory);
+  connect(dem, &CDemDraw::sigOverviewAdvisory, this, &CCanvas::slotShowDemOverviewAdvisory);
 
   timerTrackOnFocus = new QTimer(this);
   timerTrackOnFocus->setSingleShot(false);
@@ -853,6 +859,25 @@ void CCanvas::slotToolTip() {
   QPoint p = mapToGlobal(posToolTip + QPoint(32, 0));
   QToolTip::showText(p, str, this);
 }
+
+template <class T>
+void CCanvas::showOverviewAdvisory(QPointer<T> source) {
+  if (source.isNull()) {
+    return;
+  }
+
+  auto* dlg = new COverviewAdvisoryDialog(source->getFilename(), source->getOverviewAdvice(), this);
+  connect(dlg, &QDialog::finished, this, [dlg, source]() {
+    if (source) {
+      source->slotSetSuppressOverviewAdvisory(dlg->suppressChecked());
+    }
+  });
+  dlg->show();
+}
+
+void CCanvas::slotShowDemOverviewAdvisory(QPointer<CDemVRT> source) { showOverviewAdvisory(source); }
+
+void CCanvas::slotShowMapOverviewAdvisory(QPointer<CMapVRT> source) { showOverviewAdvisory(source); }
 
 void CCanvas::slotCheckTrackOnFocus() {
   const IGisItem::key_t& key = CGisItemTrk::getKeyUserFocus();

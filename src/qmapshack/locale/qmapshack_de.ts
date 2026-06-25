@@ -16269,7 +16269,7 @@ Alle Änderungen werden verloren gehen.</translation>
         <location filename="../helpers/IOverviewAdvisoryDialog.ui" line="14"/>
         <location filename="../../../build/src/qmapshack/ui_IOverviewAdvisoryDialog.h" line="104"/>
         <source>Slow rendering...</source>
-        <translation type="unfinished"></translation>
+        <translation>Langsame Darstellung...</translation>
     </message>
     <message>
         <location filename="../helpers/IOverviewAdvisoryDialog.ui" line="20"/>
@@ -16293,7 +16293,7 @@ Alle Änderungen werden verloren gehen.</translation>
         <location filename="../helpers/IOverviewAdvisoryDialog.ui" line="86"/>
         <location filename="../../../build/src/qmapshack/ui_IOverviewAdvisoryDialog.h" line="109"/>
         <source>Don&apos;t show this again for this file</source>
-        <translation type="unfinished"></translation>
+        <translation>Für diese Datei nicht mehr anzeigen</translation>
     </message>
 </context>
 <context>

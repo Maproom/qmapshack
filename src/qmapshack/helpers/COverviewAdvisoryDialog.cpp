@@ -106,4 +106,6 @@ COverviewAdvisoryDialog::COverviewAdvisoryDialog(const QString& filename, const 
   plainTextFilesCommand->setPlainText(advice.filesCommand);
   labelFilesCommand->setVisible(hasFilesCommand);
   plainTextFilesCommand->setVisible(hasFilesCommand);
+
+  adjustSize();
 }

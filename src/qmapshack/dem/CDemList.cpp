@@ -45,13 +45,17 @@ void CDemTreeWidget::slotUpdateItem(const QString& key) {
 
 void CDemTreeWidget::keyPressEvent(QKeyEvent* e) {
   const QKeyCombination keyCombination = e->keyCombination();
-  if (keyCombination == QKeyCombination(Qt::SHIFT, Qt::Key_Home)) {
+  if (keyCombination == QKeyCombination(Qt::ShiftModifier, Qt::Key_Home) ||
+      keyCombination == QKeyCombination(Qt::ShiftModifier | Qt::KeypadModifier, Qt::Key_Home)) {
     emit sigMoveHome();
-  } else if (keyCombination == QKeyCombination(Qt::SHIFT, Qt::Key_Up)) {
+  } else if (keyCombination == QKeyCombination(Qt::ShiftModifier, Qt::Key_Up) ||
+             keyCombination == QKeyCombination(Qt::ShiftModifier | Qt::KeypadModifier, Qt::Key_Up)) {
     emit sigMoveUp();
-  } else if (keyCombination == QKeyCombination(Qt::SHIFT, Qt::Key_Down)) {
+  } else if (keyCombination == QKeyCombination(Qt::ShiftModifier, Qt::Key_Down) ||
+             keyCombination == QKeyCombination(Qt::ShiftModifier | Qt::KeypadModifier, Qt::Key_Down)) {
     emit sigMoveDown();
-  } else if (keyCombination == QKeyCombination(Qt::SHIFT, Qt::Key_End)) {
+  } else if (keyCombination == QKeyCombination(Qt::ShiftModifier, Qt::Key_End) ||
+             keyCombination == QKeyCombination(Qt::ShiftModifier | Qt::KeypadModifier, Qt::Key_End)) {
     emit sigMoveEnd();
   } else {
     QTreeWidget::keyPressEvent(e);

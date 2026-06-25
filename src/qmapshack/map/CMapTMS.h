@@ -47,10 +47,11 @@ class CMapTMS : public IMapOnline {
   QString createUrl(const layer_t& layer, int x, int y, int z);
 
   struct layer_t {
-    layer_t() : enabled(true), minZoomLevel(0), maxZoomLevel(0) {}
+    layer_t() : enabled(true), minZoomLevel(0), maxZoomLevel(0), tileSizePx(256) {}
     bool enabled;
     qint32 minZoomLevel;
     qint32 maxZoomLevel;
+    qint32 tileSizePx;
     QString title;
     QString strUrl;
     QString script;

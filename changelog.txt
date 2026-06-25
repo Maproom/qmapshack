@@ -6,6 +6,7 @@ V1.XX.X
 [QMS-1115] Improve performance for high resolution DEMs
 [QMS-1117] Suggest track name when converting routes
 [QMS-1125] Use GDAL's warp and scale API to draw *.vrt maps
+[QMS-1128] Enhance VRT handling for maps and DEM
 [QMS-1132] Add action to move a map to the top in map list (macOS)
 
 V1.20.3

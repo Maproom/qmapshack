@@ -28,21 +28,45 @@
 #include "helpers/CDraw.h"
 #include "map/CMapDraw.h"
 #include "map/cache/CDiskCache.h"
-#include "units/IUnit.h"
 
-inline int lon2tile(double lon, int z) { return (int)(qRound(256 * (lon + 180.0) / 360.0 * qPow(2.0, z))); }
+namespace {
+// extend of web mercator per direction in (projected) meters
+// meaning the web mercator projection goes from -C to +C in both axis
+constexpr qreal C = 20037508.34;
 
-inline int lat2tile(double lat, int z) {
-  return (int)(qRound(256 * (1.0 - log(qTan(lat * M_PI / 180.0) + 1.0 / qCos(lat * M_PI / 180.0)) / M_PI) / 2.0 *
-                      qPow(2.0, z)));
-}
+// convert from web mercator meters to tile indices
+QPoint toTile(const QPointF& p, int z) {
+  int n = (1 << z);  // n tiles across the map
+  // normalize into [0,1]
+  qreal x = (1 + p.x() / C) / 2;
+  qreal y = (1 - p.y() / C) / 2;
 
-inline double tile2lon(int x, int z) { return x / qPow(2.0, z) * 360.0 - 180; }
+  // tile that contains p
+  int x_tile = x * n;
+  int y_tile = y * n;
+  // clamp to valid range
+  x_tile = std::clamp(x_tile, 0, n - 1);
+  y_tile = std::clamp(y_tile, 0, n - 1);
 
-inline double tile2lat(int y, int z) {
-  double n = M_PI - 2.0 * M_PI * y / qPow(2.0, z);
-  return 180.0 / M_PI * qAtan(0.5 * (exp(n) - exp(-n)));
-}
+  return QPoint(x_tile, y_tile);
+};
+
+// get web mercator meters for the NW corner of a tile
+QPointF fromTile(const QPoint& p, int z) {
+  int n = (1 << z);
+  // get normalized again
+  qreal x = static_cast<qreal>(p.x()) / n;
+  qreal y = static_cast<qreal>(p.y()) / n;
+
+  return QPointF((2 * x - 1) * C, (2 * y - 1) * -C);
+};
+
+// euclidian modulo
+int eucmod(int a, int b) {
+  int r = a % b;
+  return r >= 0 ? r : r + std::abs(b);
+};
+}  // namespace
 
 CMapTMS::CMapTMS(const QString& filename, CMapDraw* parent) : IMapOnline(parent) {
   qDebug() << "------------------------------";
@@ -106,6 +130,7 @@ CMapTMS::CMapTMS(const QString& filename, CMapDraw* parent) : IMapOnline(parent)
     layers[idx].script = xmlLayer.namedItem("Script").toElement().text();
     layers[idx].minZoomLevel = minZoomLevel;
     layers[idx].maxZoomLevel = maxZoomLevel;
+    layers[idx].tileSizePx = 256;
 
     layers[idx].strUrl.replace("{z}", "%1", Qt::CaseInsensitive);
     layers[idx].strUrl.replace("{x}", "%2", Qt::CaseInsensitive);
@@ -293,89 +318,73 @@ void CMapTMS::draw(IDrawContext::buffer_t& buf) /* override */
     return;
   }
 
-  // get pixel offset of top left buffer corner
-  QPointF pp = buf.ref1;
-  map->convertRad2Px(pp);
+  // get the top-left and bottom-right corners into web mercator
+  auto r1 = buf.ref1;
+  auto r3 = buf.ref3;
+  proj.transform(r1, PJ_INV);
+  proj.transform(r3, PJ_INV);
+  QPointF pt1(r1.x(), r1.y());
+  QPointF pt2(r3.x(), r3.y());
 
   // start to draw the map
   QPainter p(&buf.image);
   USE_ANTI_ALIASING(p, true);
   p.setOpacity(getOpacity() / 100.0);
+  QPointF pp = buf.ref1;
+  map->convertRad2Px(pp);
   p.translate(-pp);
 
-  // calculate maximum viewport
-  qreal x1 = buf.ref1.x() < buf.ref4.x() ? buf.ref1.x() : buf.ref4.x();
-  qreal y1 = buf.ref1.y() > buf.ref2.y() ? buf.ref1.y() : buf.ref2.y();
-
-  qreal x2 = buf.ref2.x() > buf.ref3.x() ? buf.ref2.x() : buf.ref3.x();
-  qreal y2 = buf.ref3.y() < buf.ref4.y() ? buf.ref3.y() : buf.ref4.y();
-
-  if (x1 < -180.0 * DEG_TO_RAD) {
-    x1 = -180 * DEG_TO_RAD;
-  }
-  if (x2 > 180.0 * DEG_TO_RAD) {
-    x2 = 180 * DEG_TO_RAD;
-  }
-
-  // draw layers
-  for (const layer_t& layer : std::as_const(layers)) {
+  for (auto& layer : layers) {
     if (!layer.enabled) {
       continue;
     }
 
-    qint32 z = 20;
-    QPointF s1 = buf.scale * buf.zoomFactor / buf.pixelRatio;
-    qreal d = NOFLOAT;
-
-    for (qint32 i = layer.minZoomLevel; i < 21; i++) {
-      qreal s2 = 0.055 * (1 << i);
-      if (qAbs(s2 - s1.x()) < d) {
-        z = i;
-        d = qAbs(s2 - s1.x());
-      }
-    }
-
+    // calculate zoom level
+    qreal diff = pt2.x() - pt1.x();
+    qreal width = diff >= 0 ? diff : diff + 2 * C;
+    qint32 z = std::round(std::log2(2 * C / (width / buf.image.width() * layer.tileSizePx)));
+    z = qMax(z, layer.minZoomLevel);
     if (z > layer.maxZoomLevel) {
       continue;
     }
+    int n = (1 << z);
 
-    z = 21 - z;
+    // tile indices of the two corners and number of tiles between them
+    auto t1 = toTile(pt1, z);
+    auto t2 = toTile(pt2, z);
+    auto dim = t2 - t1;
+    dim = {eucmod(dim.x(), n), dim.y()};
 
-    qint32 row1, row2, col1, col2;
-
-    col1 = lon2tile(x1 * RAD_TO_DEG, z) / 256;
-    col2 = lon2tile(x2 * RAD_TO_DEG, z) / 256;
-    row1 = lat2tile(y1 * RAD_TO_DEG, z) / 256;
-    row2 = lat2tile(y2 * RAD_TO_DEG, z) / 256;
-
-    //        qDebug() << col1 << col2 << row1 << row2 << (col2 - col1) << (row2 - row1) << ((col2 - col1) * (row2 -
-    //        row1));
-
-    // start to request tiles. draw tiles in cache, queue urls of tile yet to be requested
-    for (qint32 row = row1; row <= row2; row++) {
-      for (qint32 col = col1; col <= col2; col++) {
-        QString url = createUrl(layer, col, row, z);
-        //                qDebug() << url;
+    for (int i = 0; i <= dim.y(); ++i) {
+      for (int j = 0; j <= dim.x(); ++j) {
+        int x = eucmod(t1.x() + j, n);
+        int y = t1.y() + i;
+        QString url = createUrl(layer, x, y, z);
 
         if (diskCache->contains(url)) {
           QImage img;
           diskCache->restore(url, img);
+          img.setDevicePixelRatio(buf.image.devicePixelRatio());
+          if (img.width() != layer.tileSizePx) {
+            // we got a tile with a different size then expected
+            // (which is normal for the first tile we get from e.g. a HiDPI source)
+            // remember it's size and request a redraw
+            layer.tileSizePx = img.width();
+            map->emitSigCanvasUpdate();
+          }
 
+          // TODO throw away drawTile and handle drawing in a sane way
+          // then we'll also get wraparound on the antimeridian
+          // (this function is ready but it's impossible with drawTile)
           QPolygonF l;
-
-          qreal xx1 = tile2lon(col, z) * DEG_TO_RAD;
-          qreal yy1 = tile2lat(row, z) * DEG_TO_RAD;
-          qreal xx2 = tile2lon(col + 1, z) * DEG_TO_RAD;
-          qreal yy2 = tile2lat(row + 1, z) * DEG_TO_RAD;
-
-          l << QPointF(xx1, yy1) << QPointF(xx2, yy1) << QPointF(xx2, yy2) << QPointF(xx1, yy2);
+          l << fromTile({x, y}, z) << fromTile({x + 1, y}, z) << fromTile({x + 1, y + 1}, z) << fromTile({x, y + 1}, z);
+          proj.transform(l, PJ_FWD);
           drawTile(img, l, p);
         } else {
           urlQueue << url;
         }
       }
     }
-
     emit sigQueueChanged();
   }
 }

@@ -46,7 +46,7 @@ class COverviewAdvisoryDialog : public QDialog, private Ui::IOverviewAdvisoryDia
                      sections (each hidden if empty)
      @param parent   passed straight to QDialog
    */
-  COverviewAdvisoryDialog(const QString& filename, const CGdalVrtUtil::OverviewAdvice& advice, QWidget* parent);
+  COverviewAdvisoryDialog(const QString& filename, const CGdalVrtUtil::overview_advice_t& advice, QWidget* parent);
 
   /// @brief True if the user checked "don't show this again for this file."
   bool suppressChecked() const { return checkSuppressAdvisory->isChecked(); }

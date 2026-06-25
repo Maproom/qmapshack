@@ -63,7 +63,7 @@ class CMapVRT : public IMap {
   const QString& getFilename() const { return filename; }
 
   /// @brief Cached suggested-overview info for this file; used by the overview advisory dialog.
-  const CGdalVrtUtil::OverviewAdvice& getOverviewAdvice() const { return overviewAdvice; }
+  const CGdalVrtUtil::overview_advice_t& getOverviewAdvice() const { return overviewAdvice; }
 
  public slots:
   /// @brief Set by the overview advisory dialog's "don't show again for this file" checkbox.
@@ -111,7 +111,7 @@ class CMapVRT : public IMap {
      @return Format_Indexed8 image for single-band palette/gray data, Format_ARGB32 for
              multi-band; a null QImage if the GDAL read failed or was aborted
    */
-  QImage readSourceImage(const sourceWindow_t& window, CGdalVrtUtil::ReadDeadline& deadline);
+  QImage readSourceImage(const sourceWindow_t& window, CGdalVrtUtil::read_deadline_t& deadline);
 
   /**
      @brief Composite img onto p at the screen position/orientation matching window.
@@ -173,7 +173,7 @@ class CMapVRT : public IMap {
 
   /// suggested gdaladdo command(s), computed once at construction from the dataset's own
   /// characteristics; reused (never re-derived) whenever draw() hits the render timeout
-  CGdalVrtUtil::OverviewAdvice overviewAdvice;
+  CGdalVrtUtil::overview_advice_t overviewAdvice;
 
   /// persisted via saveConfig()/loadConfig(): true once the user checked "don't show
   /// again" on the overview advisory dialog for this file. Written by

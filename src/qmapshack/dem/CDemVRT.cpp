@@ -32,7 +32,8 @@
 #include "helpers/CGdalVrtUtil.h"
 #include "units/IUnit.h"
 
-CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent) : IDem(parent), filename(filename) {
+CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent, bool supportsOverviewAdvisory)
+    : IDem(parent), filename(filename), supportsOverviewAdvisory(supportsOverviewAdvisory) {
   qDebug() << "------------------------------";
   qDebug() << "VRT: try to open" << filename;
 
@@ -67,12 +68,17 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent) : IDem(parent), file
     return;
   }
 
+  // Float64 included despite being implausible for real-world elevation storage: some WCS
+  // servers' DescribeCoverage responses don't pin down a concrete bit width, and GDAL's WCS
+  // driver then defaults to double. Harmless to allow - every read below requests GDT_Float32
+  // from GDAL regardless of source type, so this check is purely a plausibility gate, not a
+  // requirement of the I/O path.
   const GDALDataType bandType = pBand->GetRasterDataType();
   if (bandType != GDT_Int16 && bandType != GDT_UInt16 && bandType != GDT_Int32 && bandType != GDT_UInt32 &&
-      bandType != GDT_Float32) {
+      bandType != GDT_Float32 && bandType != GDT_Float64) {
     CGdalVrtUtil::closeDataset(dataset);
     QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."),
-                         tr("DEM must have one band with 16bit or 32bit data:") % '\n' % filename);
+                         tr("DEM must have one band with 16bit, 32bit or 64bit numeric data:") % '\n' % filename);
     return;
   }
 
@@ -81,14 +87,23 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent) : IDem(parent), file
   const qint32 preWarpXSize = pBand->GetXSize();
   const qint32 preWarpYSize = pBand->GetYSize();
 
-  qreal masterGeoTransform[6];
-  const qreal masterPixelSizeX =
-      (dataset->GetGeoTransform(masterGeoTransform) == CE_None) ? qAbs(masterGeoTransform[1]) : 0.0;
-  const CGdalVrtUtil::overview_factors_t overviewFactors =
-      CGdalVrtUtil::collectOverviewFactors(dataset, pBand, masterPixelSizeX);
-  qDebug() << "overview factors" << overviewFactors.factors;
-  // DEM data is always single-band continuous elevation, never categorical/palette
-  overviewAdvice = CGdalVrtUtil::buildOverviewAdvice(dataset, pBand, filename, /*isCategorical=*/false, overviewFactors);
+  // skipped entirely for remote sources (CDemWCS, supportsOverviewAdvisory == false): the
+  // per-file fallback inside collectOverviewFactors() calls GetFileList() then GDALOpen()
+  // on every referenced "file" - meaningless, and an extra request against the same
+  // remote endpoint, for a source with no local files to inspect. Safe to skip:
+  // overviewAdvice/overviewFactors are only ever consulted below/in draw() when
+  // supportsOverviewAdvisory is also true.
+  CGdalVrtUtil::overview_factors_t overviewFactors;
+  if (supportsOverviewAdvisory) {
+    qreal masterGeoTransform[6];
+    const qreal masterPixelSizeX =
+        (dataset->GetGeoTransform(masterGeoTransform) == CE_None) ? qAbs(masterGeoTransform[1]) : 0.0;
+    overviewFactors = CGdalVrtUtil::collectOverviewFactors(dataset, pBand, masterPixelSizeX);
+    qDebug() << "overview factors" << overviewFactors.factors;
+    // DEM data is always single-band continuous elevation, never categorical/palette
+    overviewAdvice =
+        CGdalVrtUtil::buildOverviewAdvice(dataset, pBand, filename, /*isCategorical=*/false, overviewFactors);
+  }
 
   noData = pBand->GetNoDataValue(&hasNoData);
   qDebug() << "no data:" << hasNoData << noData;
@@ -124,7 +139,7 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent) : IDem(parent), file
       // at full resolution and only downsampling the output
       CPLSetConfigOption("VRT_VIRTUAL_OVERVIEWS", "YES");
       dataset->BuildOverviews("NONE", overviewFactors.factors.size(), overviewFactors.factors.data(), 0, nullptr,
-                             nullptr, nullptr);
+                              nullptr, nullptr);
       CPLSetConfigOption("VRT_VIRTUAL_OVERVIEWS", "NO");
     }
   }
@@ -143,16 +158,18 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent) : IDem(parent), file
   xsize_px = dataset->GetRasterXSize();
   ysize_px = dataset->GetRasterYSize();
 
-  // a reprojection (the warp block above) can change the dataset's own pixel density -
-  // e.g. between a projected CRS in meters and a geographic CRS in degrees, or simply a
-  // different output resolution GDAL chose - so rescale weakestMaxFactor (collected
-  // pre-warp, in the original dataset's own pixel grid) into the current dataset's pixel
-  // grid, matching what draw()'s neededFactor (derived from the current xscale/yscale) is
-  // compared against. A no-op (ratio 1.0) whenever no warp happened, since the raster
-  // size is then unchanged.
-  const qreal warpScale =
-      qMax(static_cast<qreal>(xsize_px) / preWarpXSize, static_cast<qreal>(ysize_px) / preWarpYSize);
-  overviewAdvice.weakestMaxFactor = qMax(1, qRound(overviewAdvice.weakestMaxFactor * warpScale));
+  if (supportsOverviewAdvisory) {
+    // a reprojection (the warp block above) can change the dataset's own pixel density -
+    // e.g. between a projected CRS in meters and a geographic CRS in degrees, or simply a
+    // different output resolution GDAL chose - so rescale weakestMaxFactor (collected
+    // pre-warp, in the original dataset's own pixel grid) into the current dataset's
+    // pixel grid, matching what draw()'s neededFactor (derived from the current
+    // xscale/yscale) is compared against. A no-op (ratio 1.0) whenever no warp happened,
+    // since the raster size is then unchanged.
+    const qreal warpScale =
+        qMax(static_cast<qreal>(xsize_px) / preWarpXSize, static_cast<qreal>(ysize_px) / preWarpYSize);
+    overviewAdvice.weakestMaxFactor = qMax(1, qRound(overviewAdvice.weakestMaxFactor * warpScale));
+  }
 
   qreal adfGeoTransform[6];
   if (dataset->GetGeoTransform(adfGeoTransform) != CE_None) {
@@ -380,7 +397,7 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf) {
     return;
   }
 
-  CGdalVrtUtil::ReadDeadline deadline{dem};
+  CGdalVrtUtil::read_deadline_t deadline{dem};
   deadline.timer.start();
 
   data.resize(static_cast<qsizetype>(w_buf) * h_buf);
@@ -412,7 +429,7 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf) {
         // trigger a full redraw, even once the underlying slowness is fixed
         dem->emitSigCanvasUpdate();
 
-        if (supportsOverviewAdvisory() && !suppressOverviewAdvisory && !advisoryShownThisSession) {
+        if (supportsOverviewAdvisory && !suppressOverviewAdvisory && !advisoryShownThisSession) {
           // overviews missing entirely, or the weakest referenced file's deepest overview
           // still isn't decimated enough for what this read needed (e.g. a mosaic of files
           // with wildly inconsistent overview depths)
@@ -431,8 +448,8 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf) {
   quint32 h_used = h_buf - 2;
 
   // resize and wire up only the buffers for layers that are actually enabled;
-  // computeShading() skips any layer whose ShadingBuffers entry is left null
-  ShadingBuffers buffers;
+  // computeShading() skips any layer whose shading_buffers_t entry is left null
+  shading_buffers_t buffers;
   if (doHillshading()) {
     hillshadeBuf.resize(w_used * h_used);
     buffers.hillshade = &hillshadeBuf;

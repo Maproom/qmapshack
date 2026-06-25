@@ -65,8 +65,18 @@ class CDemVRT : public IDem {
 
      @param filename path of a file GDAL can open as a single-band raster
      @param parent    the owning CDemDraw, forwarded to IDem
+     @param supportsOverviewAdvisory false for remote sources (CDemWCS): skips collecting
+                       overview-advisory info entirely, not just showing the dialog for
+                       it, since collectOverviewFactors()'s per-file fallback calls
+                       GetFileList() then GDALOpen() on every referenced "file" -
+                       meaningless for a source with no local files to inspect. Must be a
+                       constructor parameter, not a virtual method CDemWCS overrides: a
+                       virtual call made while CDemVRT's own constructor is still running
+                       always resolves to CDemVRT's own implementation, never a derived
+                       override, since the derived part of the object hasn't been
+                       constructed yet.
    */
-  CDemVRT(const QString& filename, CDemDraw* parent);
+  CDemVRT(const QString& filename, CDemDraw* parent, bool supportsOverviewAdvisory = true);
 
   /// Waits for any in-flight threadPool work to finish, then closes the GDAL dataset(s).
   virtual ~CDemVRT();
@@ -115,24 +125,11 @@ class CDemVRT : public IDem {
   const QString& getFilename() const { return filename; }
 
   /// @brief Cached suggested-overview info for this file; used by the overview advisory dialog.
-  const CGdalVrtUtil::OverviewAdvice& getOverviewAdvice() const { return overviewAdvice; }
+  const CGdalVrtUtil::overview_advice_t& getOverviewAdvice() const { return overviewAdvice; }
 
  public slots:
   /// @brief Set by the overview advisory dialog's "don't show again for this file" checkbox.
   void slotSetSuppressOverviewAdvisory(bool yes) { suppressOverviewAdvisory = yes; }
-
- protected:
-  /**
-     @brief False for sources where local overview advice doesn't apply.
-
-     CDemWCS overrides this to false: it's a remote WCS service, and "run gdaladdo on
-     this file" doesn't make sense for a network source the way it does for a local
-     file. Checked from draw() rather than the constructor - a virtual call made while
-     CDemVRT's own constructor is still running always resolves to CDemVRT's own
-     implementation, never a derived override, since the derived part of the object
-     hasn't been constructed yet.
-   */
-  virtual bool supportsOverviewAdvisory() const { return true; }
 
  private slots:
   /// Cancel any shading work still queued/running for a draw() call that is now stale.
@@ -178,9 +175,16 @@ class CDemVRT : public IDem {
   /// queries outside dataset coverage before touching GDAL
   QRectF boundingBox;
 
+  /// false for remote sources (CDemWCS, via the constructor parameter of the same name) -
+  /// set once at construction, never changes, so draw() can read it directly instead of
+  /// through a virtual call (see the constructor's doc comment for why it has to be a
+  /// constructor parameter rather than a virtual method)
+  const bool supportsOverviewAdvisory;
+
   /// suggested gdaladdo command(s), computed once at construction from the dataset's own
-  /// characteristics; reused (never re-derived) whenever draw() hits the render timeout
-  CGdalVrtUtil::OverviewAdvice overviewAdvice;
+  /// characteristics (skipped entirely when !supportsOverviewAdvisory); reused (never
+  /// re-derived) whenever draw() hits the render timeout
+  CGdalVrtUtil::overview_advice_t overviewAdvice;
 
   /// persisted via saveConfig()/loadConfig(): true once the user checked "don't show
   /// again" on the overview advisory dialog for this file. Written by

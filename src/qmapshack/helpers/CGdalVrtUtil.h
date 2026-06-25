@@ -49,7 +49,7 @@ class CGdalVrtUtil {
   static bool allReferencedFilesExist(GDALDataset* dataset, QString& missingFile);
 
   /// @brief One referenced file's own overview levels; see overview_factors_t::perFileInfo.
-  struct FileOverviewInfo {
+  struct file_overview_info_t {
     QString path;
     /// this file's own overview decimation factors, in the dataset's pixel scale, sorted
     /// ascending; empty if it has none
@@ -72,7 +72,7 @@ class CGdalVrtUtil {
     /// one entry per referenced file (or a single entry for dataset itself, if it reports
     /// its own overviews directly) - the breakdown the advisory dialog tables, so the
     /// user can see which specific file is the weak link
-    QVector<FileOverviewInfo> perFileInfo;
+    QVector<file_overview_info_t> perFileInfo;
   };
 
   /**
@@ -122,7 +122,7 @@ class CGdalVrtUtil {
      overviewsMissing - callers decide whether to act on them per-draw(), since whether
      the *existing* overviews are deep enough depends on what that particular read needed.
    */
-  struct OverviewAdvice {
+  struct overview_advice_t {
     /// true if neither the dataset nor any file it references has overviews yet - always
     /// the "fixable by adding overviews" case
     bool overviewsMissing = false;
@@ -134,7 +134,7 @@ class CGdalVrtUtil {
     /// per-file breakdown (overview_factors_t::perFileInfo), sorted weakest-first; only
     /// meaningful (and only worth tabling in the dialog) when overviewsMissing is false -
     /// if it's true every entry is trivially maxFactor == 1
-    QVector<FileOverviewInfo> perFileInfo;
+    QVector<file_overview_info_t> perFileInfo;
     /// gdaladdo command targeting the container file itself (e.g. a .vrt mosaic); empty
     /// if filename is not itself a multi-file container
     QString vrtCommand;
@@ -166,8 +166,8 @@ class CGdalVrtUtil {
      @return advice with overviewsMissing/weakestMaxFactor/perFileInfo set accordingly and
              the relevant command(s) filled in whenever there is anything sensible to suggest
    */
-  static OverviewAdvice buildOverviewAdvice(GDALDataset* dataset, GDALRasterBand* band, const QString& filename,
-                                            bool isCategorical, overview_factors_t overviewFactors);
+  static overview_advice_t buildOverviewAdvice(GDALDataset* dataset, GDALRasterBand* band, const QString& filename,
+                                               bool isCategorical, overview_factors_t overviewFactors);
 
   /**
      @brief Suggest gdaladdo overview decimation levels for a raster of the given size.
@@ -180,11 +180,11 @@ class CGdalVrtUtil {
   static QVector<qint32> suggestOverviewLevels(qint32 xsize, qint32 ysize);
 
   /**
-     @brief Per-draw() state for progressCallbackWithDeadline(): one ReadDeadline is
+     @brief Per-draw() state for progressCallbackWithDeadline(): one read_deadline_t is
             shared by every ReadRaster() call within a single draw(), so a multi-band
             read doesn't get a fresh budget per band.
    */
-  struct ReadDeadline {
+  struct read_deadline_t {
     /// the owning CDemDraw/CMapDraw; same role as progressCallback()'s pProgressArg
     IDrawContext* drawCtx;
     /// started once, right before the first ReadRaster() call of the draw()
@@ -200,7 +200,7 @@ class CGdalVrtUtil {
      @brief Like progressCallback(), but additionally aborts once deadline->timeoutMs has
             elapsed since deadline->timer was started, recording that fact in
             deadline->timedOut.
-     @param pProgressArg a ReadDeadline*, with timer already started by the caller
+     @param pProgressArg a read_deadline_t*, with timer already started by the caller
    */
   static int progressCallbackWithDeadline(double dfComplete, const char* message, void* pProgressArg);
 };

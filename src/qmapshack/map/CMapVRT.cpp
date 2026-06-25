@@ -160,7 +160,7 @@ CMapVRT::CMapVRT(const QString& filename, CMapDraw* parent) : IMap(eFeatVisibili
       // at full resolution and only downsampling the output
       CPLSetConfigOption("VRT_VIRTUAL_OVERVIEWS", "YES");
       dataset->BuildOverviews("NONE", overviewFactors.factors.size(), overviewFactors.factors.data(), 0, nullptr,
-                             nullptr, nullptr);
+                              nullptr, nullptr);
       CPLSetConfigOption("VRT_VIRTUAL_OVERVIEWS", "NO");
     }
   }
@@ -328,7 +328,7 @@ bool CMapVRT::computeSourceWindow(const IDrawContext::buffer_t& buf, const QPoin
   return true;
 }
 
-QImage CMapVRT::readSourceImage(const sourceWindow_t& window, CGdalVrtUtil::ReadDeadline& deadline) {
+QImage CMapVRT::readSourceImage(const sourceWindow_t& window, CGdalVrtUtil::read_deadline_t& deadline) {
   const qreal w_map = window.right - window.left;
   const qreal h_map = window.bottom - window.top;
   const qint32 w_buf = window.bufWidth;
@@ -480,7 +480,7 @@ void CMapVRT::draw(IDrawContext::buffer_t& buf) /* override */
 
   sourceWindow_t window;
   if (!isOutOfScale(bufferScale) && computeSourceWindow(buf, bufferScale, window)) {
-    CGdalVrtUtil::ReadDeadline deadline{map};
+    CGdalVrtUtil::read_deadline_t deadline{map};
     deadline.timer.start();
 
     const QImage img = readSourceImage(window, deadline);

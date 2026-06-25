@@ -197,7 +197,7 @@ int IDem::getFactorHillshading() const {
   }
 }
 
-void IDem::computeShading(const QVector<float>& data, const ShadingBuffers& buffers, quint32 x, quint32 y,
+void IDem::computeShading(const QVector<float>& data, const shading_buffers_t& buffers, quint32 x, quint32 y,
                           quint32 stride, quint32 w, quint32 h) const {
   // 3 independent passes - hillshade, slopeShade+slopeColor, elevationLimit+elevationShade -
   // each entered only if at least one of its layers is active, so "is this layer enabled"

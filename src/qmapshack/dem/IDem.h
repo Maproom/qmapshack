@@ -251,7 +251,7 @@ class IDem : public IDrawObject {
   /// Per-pixel output buffers computeShading() writes one chunk of; a null entry means
   /// that layer is disabled, so computeShading() skips it entirely - including whichever
   /// shared sub-computation (slope, max elevation) only that layer would have needed.
-  struct ShadingBuffers {
+  struct shading_buffers_t {
     QVector<quint8>* hillshade = nullptr;
     QVector<quint8>* slopeShade = nullptr;
     QVector<quint8>* slopeColor = nullptr;
@@ -272,14 +272,14 @@ class IDem : public IDrawObject {
      @param data    raw elevation samples, kept 1px wider/taller than each output buffer on
                      every side so each pixel's 3x3 neighborhood window can be read even at
                      the edges of the requested area. Indexed with stride+2.
-     @param buffers which layers to compute; see ShadingBuffers
+     @param buffers which layers to compute; see shading_buffers_t
      @param x, y    top-left corner of the chunk to process, in the output buffers'/stride
                     coordinates
      @param stride  row stride of each output buffer, in pixels
      @param w, h    size of the chunk to process
    */
-  void computeShading(const QVector<float>& data, const ShadingBuffers& buffers, quint32 x, quint32 y, quint32 stride,
-                      quint32 w, quint32 h) const;
+  void computeShading(const QVector<float>& data, const shading_buffers_t& buffers, quint32 x, quint32 y,
+                      quint32 stride, quint32 w, quint32 h) const;
 
   /**
      @brief Elevation, in the user's configured unit, of the highest valid sample in a

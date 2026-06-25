@@ -99,7 +99,8 @@ void IDrawObject::drawTileLQ(const QImage& img, QPolygonF& l, QPainter& p, IDraw
   // finally translate, scale, rotate and draw tile
   p.save();
   p.translate(l[0]);
-  p.scale(w / img.width(), h / img.height());
+  auto imgSize = img.deviceIndependentSize();
+  p.scale(w / imgSize.width(), h / imgSize.height());
   p.rotate(a);
   p.drawImage(0, 0, img);
   p.restore();
@@ -107,15 +108,16 @@ void IDrawObject::drawTileLQ(const QImage& img, QPolygonF& l, QPainter& p, IDraw
 
 void IDrawObject::drawTileHQ(const QImage& img, QPolygonF& l, QPainter& p, IDrawContext& context,
                              const CProj& proj) const {
+  auto imgSize = img.deviceIndependentSize();
   // the sub-tiles need a sensible size
   // if they get too small there will be too much
   // rounding effects.
   qint32 nStepsX = 8;
   qint32 nStepsY = 8;
-  if (img.width() / nStepsX < 32) {
+  if (imgSize.width() / nStepsX < 32) {
     nStepsX = 4;
   }
-  if (img.height() / nStepsY < 32) {
+  if (imgSize.height() / nStepsY < 32) {
     nStepsY = 4;
   }
 
@@ -161,7 +163,7 @@ void IDrawObject::drawTileHQ(const QImage& img, QPolygonF& l, QPainter& p, IDraw
   // canvas using the view's projection
   context.convertRad2Px(quads);
 
-  QRectF rect(0, 0, img.width() / nStepsX, img.height() / nStepsY);
+  QRectF rect(0, 0, imgSize.width() / nStepsX, imgSize.height() / nStepsY);
   const qreal rw = rect.width();
   const qreal rh = rect.height();
 

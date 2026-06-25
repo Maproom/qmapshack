@@ -26,7 +26,7 @@ namespace {
 constexpr qsizetype cMaxRowsShown = 10;
 }  // namespace
 
-COverviewAdvisoryDialog::COverviewAdvisoryDialog(const QString& filename, const CGdalVrtUtil::OverviewAdvice& advice,
+COverviewAdvisoryDialog::COverviewAdvisoryDialog(const QString& filename, const CGdalVrtUtil::overview_advice_t& advice,
                                                  QWidget* parent)
     : QDialog(parent) {
   setupUi(this);
@@ -65,7 +65,7 @@ COverviewAdvisoryDialog::COverviewAdvisoryDialog(const QString& filename, const 
 
     const qsizetype rowCount = qMin(advice.perFileInfo.size(), cMaxRowsShown);
     for (qsizetype row = 0; row < rowCount; ++row) {
-      const CGdalVrtUtil::FileOverviewInfo& info = advice.perFileInfo[row];
+      const CGdalVrtUtil::file_overview_info_t& info = advice.perFileInfo[row];
 
       QStringList factorStrs;
       for (qint32 factor : info.factors) {

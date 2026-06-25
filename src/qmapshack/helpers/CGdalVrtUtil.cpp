@@ -50,7 +50,7 @@ bool CGdalVrtUtil::allReferencedFilesExist(GDALDataset* dataset, QString& missin
 }
 
 CGdalVrtUtil::overview_factors_t CGdalVrtUtil::collectOverviewFactors(GDALDataset* dataset, GDALRasterBand* pBand,
-                                                                       qreal pixelSizeX) {
+                                                                      qreal pixelSizeX) {
   QSet<qint32> factors;
   overview_factors_t result;
   result.weakestMaxFactor = 1;
@@ -64,7 +64,7 @@ CGdalVrtUtil::overview_factors_t CGdalVrtUtil::collectOverviewFactors(GDALDatase
     }
     std::sort(fileFactors.begin(), fileFactors.end());
     result.weakestMaxFactor = fileFactors.isEmpty() ? 1 : fileFactors.last();
-    result.perFileInfo << FileOverviewInfo{QString::fromUtf8(dataset->GetDescription()), fileFactors};
+    result.perFileInfo << file_overview_info_t{QString::fromUtf8(dataset->GetDescription()), fileFactors};
   } else if (pixelSizeX > 0) {
     // GDAL's own GetFileList() includes the dataset's own path (e.g. a VRT mosaic lists
     // itself first, before its referenced tiles) - skip that entry, it's the container,
@@ -101,7 +101,7 @@ CGdalVrtUtil::overview_factors_t CGdalVrtUtil::collectOverviewFactors(GDALDatase
       const qint32 fileMaxFactor = fileFactors.isEmpty() ? 1 : fileFactors.last();
       result.weakestMaxFactor = firstFile ? fileMaxFactor : qMin(result.weakestMaxFactor, fileMaxFactor);
       firstFile = false;
-      result.perFileInfo << FileOverviewInfo{file, fileFactors};
+      result.perFileInfo << file_overview_info_t{file, fileFactors};
     }
     CSLDestroy(fileList);
   }
@@ -133,10 +133,10 @@ QVector<qint32> CGdalVrtUtil::suggestOverviewLevels(qint32 xsize, qint32 ysize) 
   return levels;
 }
 
-CGdalVrtUtil::OverviewAdvice CGdalVrtUtil::buildOverviewAdvice(GDALDataset* dataset, GDALRasterBand* band,
-                                                               const QString& filename, bool isCategorical,
-                                                               overview_factors_t overviewFactors) {
-  OverviewAdvice advice;
+CGdalVrtUtil::overview_advice_t CGdalVrtUtil::buildOverviewAdvice(GDALDataset* dataset, GDALRasterBand* band,
+                                                                  const QString& filename, bool isCategorical,
+                                                                  overview_factors_t overviewFactors) {
+  overview_advice_t advice;
   advice.overviewsMissing = overviewFactors.factors.isEmpty();
   advice.weakestMaxFactor = overviewFactors.weakestMaxFactor;
 
@@ -147,9 +147,9 @@ CGdalVrtUtil::OverviewAdvice CGdalVrtUtil::buildOverviewAdvice(GDALDataset* data
   // negligibly once there are more than a couple of levels
   advice.estimatedOverviewBytes = basePixels * bytesPerPixel / 3;
 
-  auto maxFactor = [](const FileOverviewInfo& info) { return info.factors.isEmpty() ? 1 : info.factors.last(); };
+  auto maxFactor = [](const file_overview_info_t& info) { return info.factors.isEmpty() ? 1 : info.factors.last(); };
   std::sort(overviewFactors.perFileInfo.begin(), overviewFactors.perFileInfo.end(),
-            [&](const FileOverviewInfo& a, const FileOverviewInfo& b) { return maxFactor(a) < maxFactor(b); });
+            [&](const file_overview_info_t& a, const file_overview_info_t& b) { return maxFactor(a) < maxFactor(b); });
   advice.perFileInfo = std::move(overviewFactors.perFileInfo);
 
   const QVector<qint32> levels = suggestOverviewLevels(band->GetXSize(), band->GetYSize());
@@ -173,7 +173,7 @@ CGdalVrtUtil::OverviewAdvice CGdalVrtUtil::buildOverviewAdvice(GDALDataset* data
   // their overviews) and left the result in advice.perFileInfo above - reuse that instead
   // of calling GetFileList() a second time
   QStringList sourceFiles;
-  for (const FileOverviewInfo& info : advice.perFileInfo) {
+  for (const file_overview_info_t& info : advice.perFileInfo) {
     if (info.path != filename && !sourceFiles.contains(info.path)) {
       sourceFiles << info.path;
     }
@@ -199,7 +199,7 @@ CGdalVrtUtil::OverviewAdvice CGdalVrtUtil::buildOverviewAdvice(GDALDataset* data
 }
 
 int CGdalVrtUtil::progressCallbackWithDeadline(double /*dfComplete*/, const char* /*message*/, void* pProgressArg) {
-  auto* deadline = reinterpret_cast<ReadDeadline*>(pProgressArg);
+  auto* deadline = reinterpret_cast<read_deadline_t*>(pProgressArg);
   if (deadline->timer.hasExpired(deadline->timeoutMs)) {
     deadline->timedOut = true;
     return false;

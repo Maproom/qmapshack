@@ -19,7 +19,9 @@
 #ifndef IGARMINSTRTBL_H
 #define IGARMINSTRTBL_H
 
+#include <QCache>
 #include <QObject>
+#include <QStringList>
 
 class CFileExt;
 class QByteArray;
@@ -47,9 +49,19 @@ class IGarminStrTbl : public QObject {
     addrshift2 = shift;
   }
 
-  virtual void get(CFileExt& file, quint32 offset, type_e t, QStringList& info) = 0;
+  /**
+     @brief Look up the decoded label(s) for @p offset in section @p t.
+
+     Results are served from a bounded LRU cache; since the underlying file is
+     immutable a cache hit is always valid. On a miss the work is delegated to
+     decode() and the result is cached.
+   */
+  void get(CFileExt& file, quint32 offset, type_e t, QStringList& info);
 
  protected:
+  /// Decode the label(s) at @p offset straight from the file (the cache-miss path).
+  virtual void decode(CFileExt& file, quint32 offset, type_e t, QStringList& info) = 0;
+
   void readFile(CFileExt& file, quint32 offset, quint32 size, QByteArray& data);
   quint32 calcOffset(CFileExt& file, const quint32 offset, type_e t);
 
@@ -73,5 +85,12 @@ class IGarminStrTbl : public QObject {
   quint64 mask64;
 
   char buffer[1025];
+
+ private:
+  /// Bounded LRU cache of decoded labels, keyed by (type << 32) | offset. File
+  /// content is immutable, so a hit is always valid; QCache evicts the least
+  /// recently used entries, bounding memory while panning very large maps.
+  static constexpr qsizetype labelCacheMaxEntries = 32768;
+  QCache<quint64, QStringList> labelCache{labelCacheMaxEntries};
 };
 #endif  // IGARMINSTRTBL_H

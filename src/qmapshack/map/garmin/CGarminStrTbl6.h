@@ -25,7 +25,8 @@ class CGarminStrTbl6 : public IGarminStrTbl {
   CGarminStrTbl6(const quint16 codepage, const quint8 mask, QObject* parent);
   virtual ~CGarminStrTbl6();
 
-  void get(CFileExt& file, quint32 offset, type_e t, QStringList& info) override;
+ protected:
+  void decode(CFileExt& file, quint32 offset, type_e t, QStringList& info) override;
 
  private:
   static const char str6tbl1[];

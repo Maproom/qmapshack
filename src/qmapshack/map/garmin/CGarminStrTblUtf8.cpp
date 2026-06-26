@@ -24,7 +24,7 @@ CGarminStrTblUtf8::CGarminStrTblUtf8(const quint16 codepage, const quint8 mask, 
 
 CGarminStrTblUtf8::~CGarminStrTblUtf8() {}
 
-void CGarminStrTblUtf8::get(CFileExt& file, quint32 offset, type_e t, QStringList& labels) {
+void CGarminStrTblUtf8::decode(CFileExt& file, quint32 offset, type_e t, QStringList& labels) {
   labels.clear();
   offset = calcOffset(file, offset, t);
 

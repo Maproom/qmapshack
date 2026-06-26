@@ -95,7 +95,7 @@ void CGarminStrTbl6::fill() {
   }
 }
 
-void CGarminStrTbl6::get(CFileExt& file, quint32 offset, type_e t, QStringList& labels) {
+void CGarminStrTbl6::decode(CFileExt& file, quint32 offset, type_e t, QStringList& labels) {
   labels.clear();
 
   offset = calcOffset(file, offset, t);

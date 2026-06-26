@@ -25,7 +25,7 @@ CGarminStrTbl8::CGarminStrTbl8(const quint16 codepage, const quint8 mask, QObjec
 
 CGarminStrTbl8::~CGarminStrTbl8() {}
 
-void CGarminStrTbl8::get(CFileExt& file, quint32 offset, type_e t, QStringList& info) {
+void CGarminStrTbl8::decode(CFileExt& file, quint32 offset, type_e t, QStringList& info) {
   info.clear();
   offset = calcOffset(file, offset, t);
 

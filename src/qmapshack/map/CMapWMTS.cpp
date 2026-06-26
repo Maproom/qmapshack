@@ -383,7 +383,7 @@ void CMapWMTS::draw(IDrawContext::buffer_t& buf) /* override */
   QRectF viewport(QPointF(x1, y1) * RAD_TO_DEG, QPointF(x2, y2) * RAD_TO_DEG);
 
   // draw layers
-  for (const layer_t& layer : std::as_const(layers)) {
+  for (layer_t& layer : layers) {
     if (!layer.boundingBox.intersects(viewport) || !layer.enabled) {
       continue;
     }
@@ -410,7 +410,12 @@ void CMapWMTS::draw(IDrawContext::buffer_t& buf) /* override */
     const QStringList& keys = tileset.tilematrix.keys();
     for (const QString& key : keys) {
       const tilematrix_t& tilematrix = tileset.tilematrix[key];
-      qreal s2 = tilematrix.scale * 0.28e-3;
+      // Effective ground resolution of a served tile pixel. For spec-compliant
+      // layers tileScale is 1.0 and this is just the declared pixel span. For
+      // HiDPI servers that serve tiles larger than their TileMatrixSet declares,
+      // dividing by tileScale selects a coarser matrix so the bigger tile still
+      // maps 1:1 onto the (physical) buffer pixels.
+      qreal s2 = tilematrix.scale * 0.28e-3 / layer.tileScale;
 
       if (qAbs(s2 - s1.x()) < d) {
         tileMatrixId = key;
@@ -485,6 +490,16 @@ void CMapWMTS::draw(IDrawContext::buffer_t& buf) /* override */
         if (diskCache->contains(url)) {
           QImage img;
           diskCache->restore(url, img);
+
+          // Detect HiDPI servers that serve tiles larger (or smaller) than the
+          // TileWidth declared in their TileMatrixSet. Learn the real ratio from
+          // the fetched tile and request a redraw so a matching matrix is picked
+          // and the tile is drawn 1:1 to physical pixels (sharp, with the HiDPI
+          // text-size advantage on scaled displays).
+          if (tilematrix.tileWidth > 0 && img.width() != qRound(tilematrix.tileWidth * layer.tileScale)) {
+            layer.tileScale = qreal(img.width()) / tilematrix.tileWidth;
+            map->emitSigCanvasUpdate();
+          }
 
           QPolygonF l;
 

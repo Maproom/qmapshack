@@ -423,7 +423,6 @@ void IDrawContext::run() {
     // map render objects to buffer structure
     currentBuffer.zoomFactor = zoomFactor;
     currentBuffer.scale = scale;
-    currentBuffer.pixelRatio = pixelRatio;
     currentBuffer.ref1 = ref1;
     currentBuffer.ref2 = ref2;
     currentBuffer.ref3 = ref3;

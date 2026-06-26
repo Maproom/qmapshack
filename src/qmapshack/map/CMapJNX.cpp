@@ -287,7 +287,7 @@ void CMapJNX::draw(IDrawContext::buffer_t& buf) /* override */
       break;
     }
 
-    qint32 level = scale2level(bufferScale.x() / (5 * buf.pixelRatio), mapFile);
+    qint32 level = scale2level(bufferScale.x() / 5, mapFile);
 
     // no scalable level found, draw bounding box of map
     // derive maps corner coordinate

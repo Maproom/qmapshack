@@ -161,7 +161,7 @@ void CMapGEMF::draw(IDrawContext::buffer_t& buf) {
     x2 = 180 * DEG_TO_RAD;
   }
 
-  QPointF s1 = buf.scale * buf.zoomFactor / buf.pixelRatio;
+  QPointF s1 = buf.scale * buf.zoomFactor;
   qreal d = NOFLOAT;
   quint32 z = MAX_ZOOM_LEVEL;
 

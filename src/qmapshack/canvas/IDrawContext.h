@@ -43,7 +43,6 @@ class IDrawContext : public QThread {
     int zoomLevels;                //< the number of zoom levels
     QPointF zoomFactor{1.0, 1.0};  //< the zoomfactor used to draw the canvas
     QPointF scale{1.0, 1.0};       //< the scale of the global viewport
-    qreal pixelRatio = 1.0;        //< device pixel ratio of the canvas
 
     QPointF ref1;   //< top left corner
     QPointF ref2;   //< top right corner

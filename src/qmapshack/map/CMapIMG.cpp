@@ -123,23 +123,13 @@ namespace {
 /// Convert a QColor to a Blend2D non-premultiplied 0xAARRGGBB colour.
 inline BLRgba32 toBLColor(const QColor& c) { return BLRgba32(c.rgba()); }
 
-/// Build a Blend2D path from a polyline. When @p close is set the path is closed
-/// so it can be filled and its closing edge stroked (matching QPainter::drawPolygon).
-BLPath polyToPath(const QPolygonF& poly, bool close) {
-  BLPath path;
-  const int n = poly.size();
-  if (n == 0) {
-    return path;
-  }
-  path.move_to(poly[0].x(), poly[0].y());
-  for (int i = 1; i < n; ++i) {
-    path.line_to(poly[i].x(), poly[i].y());
-  }
-  if (close) {
-    path.close();
-  }
-  return path;
-}
+// QPointF and BLPoint are both two contiguous doubles, so a QPolygonF's storage can be
+// handed to Blend2D's bulk polygon/polyline calls without copying into a BLPath.
+static_assert(sizeof(QPointF) == sizeof(BLPoint), "QPointF must be layout-compatible with BLPoint");
+static_assert(sizeof(QPointF) == 2 * sizeof(double), "QPointF must be two doubles");
+
+/// View a QPolygonF as a contiguous array of BLPoint for Blend2D bulk geometry calls.
+inline const BLPoint* toBLPoints(const QPolygonF& poly) { return reinterpret_cast<const BLPoint*>(poly.constData()); }
 
 BLStrokeCap toBLCap(Qt::PenCapStyle cap) {
   switch (cap) {
@@ -1428,9 +1418,9 @@ void CMapIMG::loadVisibleData(bool fast, polytype_t& polygons, polytype_t& polyl
 
       map->convertRad2Px(poly);
 
-      ctx.setStrokeWidth(2);
-      ctx.setStrokeStyle(BLRgba32(0xFFFF00FFu));  // magenta
-      ctx.strokePath(polyToPath(poly, true));
+      ctx.set_stroke_width(2);
+      ctx.set_stroke_style(BLRgba32(0xFFFF00FFu));  // magenta
+      ctx.stroke_polygon(toBLPoints(poly), static_cast<size_t>(poly.size()));
 #endif  // DEBUG_SHOW_SECTION_BORDERS
     }
 
@@ -1447,9 +1437,9 @@ void CMapIMG::loadVisibleData(bool fast, polytype_t& polygons, polytype_t& polyl
 
     QPolygonF poly;
     poly << p1 << p2 << p3 << p4;
-    ctx.setStrokeWidth(1);
-    ctx.setStrokeStyle(BLRgba32(0xFF000000u));  // black
-    ctx.strokePath(polyToPath(poly, true));
+    ctx.set_stroke_width(1);
+    ctx.set_stroke_style(BLRgba32(0xFF000000u));  // black
+    ctx.stroke_polygon(toBLPoints(poly), static_cast<size_t>(poly.size()));
 #endif  // DEBUG_SHOW_SUBDIV_BORDERS
 
 #ifdef Q_OS_WIN32
@@ -1697,10 +1687,31 @@ void CMapIMG::drawPolygons(BLContext& ctx, polytype_t& lines) {
   // QPainter::drawPolygon fills using the odd-even rule; Blend2D defaults to non-zero.
   ctx.set_fill_rule(BL_FILL_RULE_EVEN_ODD);
 
-  const int N = polygonDrawOrder.size();
-  for (int n = 0; n < N; ++n) {
-    quint32 type = polygonDrawOrder[(N - 1) - n];
-    const CGarminTyp::polygon_property& property = polygonProperties[type];
+  // Bucket the polygon indices by type once, so each draw-order pass visits only the
+  // polygons of its type instead of scanning the whole list once per type.
+  QHash<quint32, QVector<qsizetype> > byType;
+  for (qsizetype i = 0; i < lines.size(); ++i) {
+    byType[lines[i].type].push_back(i);
+  }
+
+  // Fallback for types that have geometry but no matching property (magenta hatch,
+  // known == false). Static so we never mutate polygonProperties while drawing.
+  static const CGarminTyp::polygon_property unknownProperty;
+
+  for (qsizetype n = polygonDrawOrder.size() - 1; n >= 0; --n) {
+    const quint32 type = polygonDrawOrder[n];
+    const auto bucket = byType.constFind(type);
+    if (bucket == byType.constEnd()) {
+      continue;
+    }
+
+    const auto propIt = polygonProperties.constFind(type);
+    const CGarminTyp::polygon_property& property =
+        (propIt != polygonProperties.constEnd()) ? propIt.value() : unknownProperty;
+    if (!property.known) {
+      qDebug() << "unknown polygon" << Qt::hex << type;
+    }
+
     const QBrush& brush = night ? property.brushNight : property.brushDay;
 
     // Configure the fill style once per type. Solid colours map directly; texture
@@ -1723,25 +1734,19 @@ void CMapIMG::drawPolygons(BLContext& ctx, polytype_t& lines) {
       }
     }
 
-    const QPen& pen = property.pen;
-    const bool hasOutline = applyPen(ctx, pen);
+    const bool hasOutline = applyPen(ctx, property.pen);
 
-    for (CGarminPolygon& line : lines) {
-      if (line.type != type) {
-        continue;
-      }
-
-      QPolygonF& poly = line.pixel;
+    for (const qsizetype idx : *bucket) {
+      QPolygonF& poly = lines[idx].pixel;
       map->convertRad2Px(poly);
 
-      const BLPath path = polyToPath(poly, true);
-      ctx.fill_path(path);
+      // Blend2D treats a polygon as implicitly closed, matching the closed BLPath used
+      // before; stroke_polygon adds the closing edge just like QPainter::drawPolygon.
+      const BLPoint* pts = toBLPoints(poly);
+      const size_t n = static_cast<size_t>(poly.size());
+      ctx.fill_polygon(pts, n);
       if (hasOutline) {
-        ctx.stroke_path(path);
-      }
-
-      if (!property.known) {
-        qDebug() << "unknown polygon" << Qt::hex << type;
+        ctx.stroke_polygon(pts, n);
       }
     }
   }
@@ -1769,10 +1774,11 @@ void CMapIMG::drawPolylines(BLContext& ctx, polytype_t& lines, const QPointF& sc
     const quint32& type = props.key();
     const CGarminTyp::polyline_property& property = props.value();
 
-    const QList<quint32>& indices = dict[type];
-    if (indices.isEmpty()) {
+    const auto it = dict.constFind(type);
+    if (it == dict.constEnd()) {
       continue;
     }
+    const QList<quint32>& indices = *it;
 
     if (property.hasPixmap) {
       const QImage& pixmap = night ? property.imgNight : property.imgDay;
@@ -1866,10 +1872,11 @@ void CMapIMG::drawPolylines(BLContext& ctx, polytype_t& lines, const QPointF& sc
     const quint32& type = props.key();
     const CGarminTyp::polyline_property& property = props.value();
 
-    const QList<quint32>& indices = dict[type];
-    if (indices.isEmpty()) {
+    const auto it = dict.constFind(type);
+    if (it == dict.constEnd()) {
       continue;
     }
+    const QList<quint32>& indices = *it;
 
     if (property.hasBorder && !property.hasPixmap) {
       const QPen& pen = night ? property.penLineNight : property.penLineDay;
@@ -1910,7 +1917,7 @@ void CMapIMG::drawLine(BLContext& ctx, CGarminPolygon& l, bool stroke, int lineW
   }
 
   if (stroke) {
-    ctx.stroke_path(polyToPath(poly, false));
+    ctx.stroke_polyline(toBLPoints(poly), static_cast<size_t>(poly.size()));
   }
 }
 
@@ -1920,7 +1927,7 @@ void CMapIMG::drawLine(BLContext& ctx, const CGarminPolygon& l) {
     return;
   }
 
-  ctx.stroke_path(polyToPath(poly, false));
+  ctx.stroke_polyline(toBLPoints(poly), static_cast<size_t>(poly.size()));
 }
 
 void CMapIMG::collectText(const CGarminPolygon& item, const QPolygonF& line, const QFont& font, qint32 lineWidth,
@@ -1981,11 +1988,14 @@ void CMapIMG::addLabel(const CGarminPoint& pt, const QRect& rect, const CGarminT
 
 void CMapIMG::drawPoints(BLContext& ctx, pointtype_t& pts, QVector<QRectF>& rectPois) {
   const bool night = CMainWindow::self().isNight();
+  static const CGarminTyp::point_property unknownProperty;
   pointtype_t::iterator pt = pts.begin();
   while (pt != pts.end()) {
     map->convertRad2Px(pt->pos);
 
-    const CGarminTyp::point_property& property = pointProperties[pt->type];
+    const auto propIt = pointProperties.constFind(pt->type);
+    const CGarminTyp::point_property& property =
+        (propIt != pointProperties.constEnd()) ? propIt.value() : unknownProperty;
 
     const QImage& icon = night ? property.imgNight : property.imgDay;
     const QSizeF& size = icon.size();
@@ -2019,10 +2029,13 @@ void CMapIMG::drawPoints(BLContext& ctx, pointtype_t& pts, QVector<QRectF>& rect
 
 void CMapIMG::drawPois(BLContext& ctx, pointtype_t& pts, QVector<QRectF>& rectPois) {
   const bool night = CMainWindow::self().isNight();
+  static const CGarminTyp::point_property unknownProperty;
   for (CGarminPoint& pt : pts) {
     map->convertRad2Px(pt.pos);
 
-    const CGarminTyp::point_property& property = pointProperties[pt.type];
+    const auto propIt = pointProperties.constFind(pt.type);
+    const CGarminTyp::point_property& property =
+        (propIt != pointProperties.constEnd()) ? propIt.value() : unknownProperty;
     const QImage& icon = night ? property.imgNight : property.imgDay;
     const QSizeF& size = icon.size();
 

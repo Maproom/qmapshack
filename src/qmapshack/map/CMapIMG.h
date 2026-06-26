@@ -32,8 +32,8 @@ class CFileExt;
 class IGarminStrTbl;
 class BLContext;
 
-typedef QVector<CGarminPolygon> polytype_t;
-typedef QVector<CGarminPoint> pointtype_t;
+using polytype_t = QVector<CGarminPolygon>;
+using pointtype_t = QVector<CGarminPoint>;
 
 class CMapIMG : public IMap {
   Q_OBJECT
@@ -431,11 +431,7 @@ class CMapIMG : public IMap {
     bool useBaseMap;
 
     bool operator==(const map_level_t& ml) const {
-      if (ml.bits != bits || ml.level != level || ml.useBaseMap != useBaseMap) {
-        return false;
-      } else {
-        return true;
-      }
+      return ml.bits == bits && ml.level == level && ml.useBaseMap == useBaseMap;
     }
 
     static bool GreaterThan(const map_level_t& ml1, const map_level_t& ml2) { return ml1.bits < ml2.bits; }

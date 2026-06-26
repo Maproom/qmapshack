@@ -47,7 +47,8 @@
 #undef DEBUG_SHOW_SECTION_BORDERS
 #undef DEBUG_SHOW_SUBDIV_BORDERS
 
-#define STREETNAME_THRESHOLD 5.0
+/// Maximum map scale [m/px] at which street / way names are still drawn.
+constexpr qreal kStreetNameThreshold = 5.0;
 
 int CFileExt::cnt = 0;
 
@@ -598,19 +599,19 @@ void CMapIMG::readFile(CFileExt& file, quint32 offset, quint32 size, QByteArray&
   }
 
 #ifdef HOST_IS_64_BIT
-  quint64* p64 = (quint64*)data.data();
+  quint64* p64 = reinterpret_cast<quint64*>(data.data());
   for (quint32 i = 0; i < size / 8; ++i) {
     *p64++ ^= mask64;
   }
   quint32 rest = size % 8;
-  quint8* p = (quint8*)p64;
+  quint8* p = reinterpret_cast<quint8*>(p64);
 #else
-  quint32* p32 = (quint32*)data.data();
+  quint32* p32 = reinterpret_cast<quint32*>(data.data());
   for (quint32 i = 0; i < size / 4; ++i) {
     *p32++ ^= mask32;
   }
   quint32 rest = size % 4;
-  quint8* p = (quint8*)p32;
+  quint8* p = reinterpret_cast<quint8*>(p32);
 #endif
 
   for (quint32 i = 0; i < rest; ++i) {
@@ -627,7 +628,7 @@ void CMapIMG::readBasics() {
     throw exce_t(eErrOpen, tr("Failed to open: ") + filename);
   }
 
-  mask = (quint8)*file.data(0, 1);
+  mask = static_cast<quint8>(*file.data(0, 1));
 
   mask32 = mask;
   mask32 <<= 8;
@@ -644,7 +645,7 @@ void CMapIMG::readBasics() {
   // read hdr_img_t
   QByteArray imghdr;
   readFile(file, 0, sizeof(hdr_img_t), imghdr);
-  hdr_img_t* pImgHdr = (hdr_img_t*)imghdr.data();
+  hdr_img_t* pImgHdr = reinterpret_cast<hdr_img_t*>(imghdr.data());
 
   if (strncmp(pImgHdr->signature, "DSKIMG", 7) != 0) {
     throw exce_t(errFormat, tr("Bad file format: ") + filename);
@@ -662,18 +663,18 @@ void CMapIMG::readBasics() {
   // 1st read FAT
   QByteArray FATblock;
   readFile(file, sizeof(hdr_img_t), sizeof(FATblock_t), FATblock);
-  const FATblock_t* pFATBlock = (const FATblock_t*)FATblock.data();
+  const FATblock_t* pFATBlock = reinterpret_cast<const FATblock_t*>(FATblock.data());
 
   size_t dataoffset = sizeof(hdr_img_t);
 
   // skip dummy blocks at the beginning
-  while (dataoffset < (size_t)fsize) {
+  while (dataoffset < static_cast<size_t>(fsize)) {
     if (pFATBlock->flag != 0x00) {
       break;
     }
     dataoffset += sizeof(FATblock_t);
     readFile(file, quint32(dataoffset), quint32(sizeof(FATblock_t)), FATblock);
-    pFATBlock = (const FATblock_t*)FATblock.data();
+    pFATBlock = reinterpret_cast<const FATblock_t*>(FATblock.data());
   }
 
   // start of new subfile part
@@ -698,7 +699,7 @@ void CMapIMG::readBasics() {
                   set is used to get the location information.
    */
   QSet<QString> subfileNames;
-  while (dataoffset < (size_t)fsize) {
+  while (dataoffset < static_cast<size_t>(fsize)) {
     if (pFATBlock->flag != 0x01) {
       break;
     }
@@ -728,10 +729,10 @@ void CMapIMG::readBasics() {
 
     dataoffset += sizeof(FATblock_t);
     readFile(file, quint32(dataoffset), quint32(sizeof(FATblock_t)), FATblock);
-    pFATBlock = (const FATblock_t*)FATblock.data();
+    pFATBlock = reinterpret_cast<const FATblock_t*>(FATblock.data());
   }
 
-  if ((dataoffset == sizeof(hdr_img_t)) || (dataoffset >= (size_t)fsize)) {
+  if ((dataoffset == sizeof(hdr_img_t)) || (dataoffset >= static_cast<size_t>(fsize))) {
     throw exce_t(errFormat, tr("Failed to read file structure: ") + filename);
   }
 
@@ -793,9 +794,14 @@ void CMapIMG::readSubfileBasics(subfile_desc_t& subfile, CFileExt& file) {
     return;
   }
 
+  // Both parts are guaranteed to exist by the guard above; bind them once instead of
+  // repeating the map lookup for every offset computed below.
+  const subfile_part_t& trePart = subfile.parts["TRE"];
+  const subfile_part_t& rgnPart = subfile.parts["RGN"];
+
   QByteArray trehdr;
-  readFile(file, subfile.parts["TRE"].offset, sizeof(hdr_tre_t), trehdr);
-  hdr_tre_t* pTreHdr = (hdr_tre_t*)trehdr.data();
+  readFile(file, trePart.offset, sizeof(hdr_tre_t), trehdr);
+  hdr_tre_t* pTreHdr = reinterpret_cast<hdr_tre_t*>(trehdr.data());
 
   subfile.isTransparent = pTreHdr->POI_flags & 0x02;
   transparent = subfile.isTransparent ? true : transparent;
@@ -809,7 +815,7 @@ void CMapIMG::readSubfileBasics(subfile_desc_t& subfile, CFileExt& file) {
   qDebug() << "TRE2 size          :" << dec << gar_load(quint32, pTreHdr->tre2_size);
 #endif  // DEBUG_SHOW_TRE_DATA
 
-  copyrights << QString(file.data(subfile.parts["TRE"].offset + gar_load(uint16_t, pTreHdr->length), 0x7FFF));
+  copyrights << QString(file.data(trePart.offset + gar_load(uint16_t, pTreHdr->length), 0x7FFF));
 
   // read map boundaries from header
   qint32 i32;
@@ -845,9 +851,9 @@ void CMapIMG::readSubfileBasics(subfile_desc_t& subfile, CFileExt& file) {
 #endif  // DEBUG_SHOW_TRE_DATA
 
   QByteArray maplevel;
-  readFile(file, subfile.parts["TRE"].offset + gar_load(quint32, pTreHdr->tre1_offset),
-           gar_load(quint32, pTreHdr->tre1_size), maplevel);
-  const tre_map_level_t* pMapLevel = (const tre_map_level_t*)maplevel.data();
+  readFile(file, trePart.offset + gar_load(quint32, pTreHdr->tre1_offset), gar_load(quint32, pTreHdr->tre1_size),
+           maplevel);
+  const tre_map_level_t* pMapLevel = reinterpret_cast<const tre_map_level_t*>(maplevel.data());
 
   if (pTreHdr->flag & 0x80) {
     throw exce_t(errLock, tr("File contains locked / encrypted data. Garmin does not "
@@ -887,9 +893,9 @@ void CMapIMG::readSubfileBasics(subfile_desc_t& subfile, CFileExt& file) {
 
   // point to first 16 byte subdivision definition entry
   QByteArray subdiv_n;
-  readFile(file, subfile.parts["TRE"].offset + gar_load(quint32, pTreHdr->tre2_offset),
-           gar_load(quint32, pTreHdr->tre2_size), subdiv_n);
-  tre_subdiv_next_t* pSubDivN = (tre_subdiv_next_t*)subdiv_n.data();
+  readFile(file, trePart.offset + gar_load(quint32, pTreHdr->tre2_offset), gar_load(quint32, pTreHdr->tre2_size),
+           subdiv_n);
+  tre_subdiv_next_t* pSubDivN = reinterpret_cast<tre_subdiv_next_t*>(subdiv_n.data());
 
   QVector<subdiv_desc_t> subdivs;
   subdivs.resize(nsubdivs);
@@ -898,8 +904,8 @@ void CMapIMG::readSubfileBasics(subfile_desc_t& subfile, CFileExt& file) {
 
   // absolute offset of RGN data
   QByteArray rgnhdr;
-  readFile(file, subfile.parts["RGN"].offset, sizeof(hdr_rgn_t), rgnhdr);
-  hdr_rgn_t* pRgnHdr = (hdr_rgn_t*)rgnhdr.data();
+  readFile(file, rgnPart.offset, sizeof(hdr_rgn_t), rgnhdr);
+  hdr_rgn_t* pRgnHdr = reinterpret_cast<hdr_rgn_t*>(rgnhdr.data());
   quint32 rgnoff = /*subfile.parts["RGN"].offset +*/ gar_load(quint32, pRgnHdr->offset);
 
   quint32 rgnOffPolyg2 = /*subfile.parts["RGN"].offset +*/ gar_load(quint32, pRgnHdr->offset_polyg2);
@@ -1022,9 +1028,9 @@ void CMapIMG::readSubfileBasics(subfile_desc_t& subfile, CFileExt& file) {
     // rgnoff = subfile.parts["RGN"].offset;
     //          qDebug() << subdivs.count() << (pTreHdr->tre7_size / pTreHdr->tre7_rec_size) << pTreHdr->tre7_rec_size;
     QByteArray subdiv2;
-    readFile(file, subfile.parts["TRE"].offset + gar_load(quint32, pTreHdr->tre7_offset),
-             gar_load(quint32, pTreHdr->tre7_size), subdiv2);
-    tre_subdiv2_t* pSubDiv2 = (tre_subdiv2_t*)subdiv2.data();
+    readFile(file, trePart.offset + gar_load(quint32, pTreHdr->tre7_offset), gar_load(quint32, pTreHdr->tre7_size),
+             subdiv2);
+    tre_subdiv2_t* pSubDiv2 = reinterpret_cast<tre_subdiv2_t*>(subdiv2.data());
 
     //        const quint32 entries1 = gar_load(quint32, pTreHdr->tre7_size) / gar_load(quint32,
     //        pTreHdr->tre7_rec_size); const quint32 entries2 = subdivs.size();
@@ -1044,7 +1050,8 @@ void CMapIMG::readSubfileBasics(subfile_desc_t& subfile, CFileExt& file) {
     subdiv->offsetPoints2 = skipPois ? 0 : gar_load(quint32, pSubDiv2->offsetPoints) + rgnOffPoint2;
 
     ++subdiv;
-    pSubDiv2 = reinterpret_cast<tre_subdiv2_t*>((quint8*)pSubDiv2 + gar_endian(uint16_t, pTreHdr->tre7_rec_size));
+    pSubDiv2 = reinterpret_cast<tre_subdiv2_t*>(reinterpret_cast<quint8*>(pSubDiv2) +
+                                                gar_endian(uint16_t, pTreHdr->tre7_rec_size));
 
     while (subdiv != subdivs.end()) {
       //             for(int i = 0; i < pTreHdr->tre7_rec_size; ++i){
@@ -1064,7 +1071,8 @@ void CMapIMG::readSubfileBasics(subfile_desc_t& subfile, CFileExt& file) {
       subdiv_prev = subdiv;
 
       ++subdiv;
-      pSubDiv2 = reinterpret_cast<tre_subdiv2_t*>((quint8*)pSubDiv2 + gar_endian(uint16_t, pTreHdr->tre7_rec_size));
+      pSubDiv2 = reinterpret_cast<tre_subdiv2_t*>(reinterpret_cast<quint8*>(pSubDiv2) +
+                                                  gar_endian(uint16_t, pTreHdr->tre7_rec_size));
     }
 
     subdiv_prev->lengthPolygons2 = rgnOffPolyg2 + rgnLenPolyg2 - subdiv_prev->offsetPolygons2;
@@ -1109,20 +1117,23 @@ void CMapIMG::readSubfileBasics(subfile_desc_t& subfile, CFileExt& file) {
   //     pRgnHdr->length_point2);
 
   if (subfile.parts.contains("LBL")) {
-    QByteArray lblhdr;
-    readFile(file, subfile.parts["LBL"].offset, sizeof(hdr_lbl_t), lblhdr);
-    hdr_lbl_t* pLblHdr = (hdr_lbl_t*)lblhdr.data();
+    const subfile_part_t& lblPart = subfile.parts["LBL"];
 
-    quint32 offsetLbl1 = subfile.parts["LBL"].offset + gar_load(quint32, pLblHdr->lbl1_offset);
-    quint32 offsetLbl6 = subfile.parts["LBL"].offset + gar_load(quint32, pLblHdr->lbl6_offset);
+    QByteArray lblhdr;
+    readFile(file, lblPart.offset, sizeof(hdr_lbl_t), lblhdr);
+    hdr_lbl_t* pLblHdr = reinterpret_cast<hdr_lbl_t*>(lblhdr.data());
+
+    quint32 offsetLbl1 = lblPart.offset + gar_load(quint32, pLblHdr->lbl1_offset);
+    quint32 offsetLbl6 = lblPart.offset + gar_load(quint32, pLblHdr->lbl6_offset);
 
     QByteArray nethdr;
     quint32 offsetNet1 = 0;
     hdr_net_t* pNetHdr = nullptr;
     if (subfile.parts.contains("NET")) {
-      readFile(file, subfile.parts["NET"].offset, sizeof(hdr_net_t), nethdr);
-      pNetHdr = (hdr_net_t*)nethdr.data();
-      offsetNet1 = subfile.parts["NET"].offset + gar_load(quint32, pNetHdr->net1_offset);
+      const subfile_part_t& netPart = subfile.parts["NET"];
+      readFile(file, netPart.offset, sizeof(hdr_net_t), nethdr);
+      pNetHdr = reinterpret_cast<hdr_net_t*>(nethdr.data());
+      offsetNet1 = netPart.offset + gar_load(quint32, pNetHdr->net1_offset);
     }
 
     quint16 codepage = 0;
@@ -1463,12 +1474,12 @@ void CMapIMG::loadSubDiv(CFileExt& file, const subdiv_desc_t& subdiv, IGarminStr
   // fprintf(stderr, "loadSubDiv\n");
   //      qDebug() << "---------" << file.fileName() << "---------";
 
-  const quint8* pRawData = (quint8*)rgndata.data();
+  const quint8* pRawData = reinterpret_cast<const quint8*>(rgndata.constData());
 
   quint32 opnt = 0, oidx = 0, opline = 0, opgon = 0;
   quint32 objCnt = subdiv.hasIdxPoints + subdiv.hasPoints + subdiv.hasPolylines + subdiv.hasPolygons;
 
-  quint16* pOffset = (quint16*)(pRawData + subdiv.rgn_start);
+  const quint16* pOffset = reinterpret_cast<const quint16*>(pRawData + subdiv.rgn_start);
 
   // test for points
   if (subdiv.hasPoints) {
@@ -1794,7 +1805,7 @@ void CMapIMG::drawPolylines(BLContext& ctx, polytype_t& lines, const QPointF& sc
           v1 = v2;
         }
 
-        if (scale.x() < STREETNAME_THRESHOLD && property.labelType != CGarminTyp::eNone) {
+        if (scale.x() < kStreetNameThreshold && property.labelType != CGarminTyp::eNone) {
           QFont f(font);
           switch (property.labelType) {
             case CGarminTyp::eSmall:
@@ -1882,7 +1893,7 @@ void CMapIMG::drawLine(BLContext& ctx, CGarminPolygon& l, bool stroke, int lineW
 
   map->convertRad2Px(poly);
 
-  if (scale.x() < STREETNAME_THRESHOLD && property.labelType != CGarminTyp::eNone) {
+  if (scale.x() < kStreetNameThreshold && property.labelType != CGarminTyp::eNone) {
     QFont f(font);
     switch (property.labelType) {
       case CGarminTyp::eSmall:
@@ -2169,37 +2180,30 @@ void CMapIMG::getToolTip(const QPoint& px, QString& infotext) const /* override 
 {
   QString str;
 
-  QMultiMap<QString, QString> dict;
-  getInfoPoints(points, px, dict);
-  getInfoPoints(pois, px, dict);
-  getInfoPolylines(px, dict);
-
-  const QStringList& values = dict.values();
-  for (const QString& value : values) {
-    if (value == "-") {
-      continue;
-    }
-
-    if (!str.isEmpty()) {
-      str += "\n";
-    }
-    str += value;
-  }
-
-  if (str.isEmpty()) {
-    dict.clear();
-    getInfoPolygons(px, dict);
-    const QStringList& values = dict.values();
-    for (const QString& value : values) {
+  // Append every value of a dict (skipping the "-" placeholder) as newline-separated lines.
+  const auto appendValues = [&str](const QMultiMap<QString, QString>& dict) {
+    for (const QString& value : dict.values()) {
       if (value == "-") {
         continue;
       }
-
       if (!str.isEmpty()) {
         str += "\n";
       }
       str += value;
     }
+  };
+
+  QMultiMap<QString, QString> dict;
+  getInfoPoints(points, px, dict);
+  getInfoPoints(pois, px, dict);
+  getInfoPolylines(px, dict);
+  appendValues(dict);
+
+  // Fall back to polygon (area) info only when nothing closer was found.
+  if (str.isEmpty()) {
+    dict.clear();
+    getInfoPolygons(px, dict);
+    appendValues(dict);
   }
 
   if (!infotext.isEmpty() && !str.isEmpty()) {

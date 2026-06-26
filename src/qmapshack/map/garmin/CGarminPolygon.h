@@ -37,7 +37,6 @@ struct sign_info_t;
 class CGarminPolygon {
  public:
   CGarminPolygon() = default;
-  virtual ~CGarminPolygon() = default;
 
   quint32 decode(qint32 iCenterLon, qint32 iCenterLat, quint32 shift, bool line, const quint8* pData,
                  const quint8* pEnd);

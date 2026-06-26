@@ -214,6 +214,21 @@ preview curve.
 - Below ~80 nodes the basis, not the penalty, limits the curve. That is where the quality setting
   changes the result.
 
+### IGarminStrTbl label cache (the `get`/`decode` split)
+
+Profiling (Tracy) showed label decoding (`strtbl.get`) was the single largest slice of
+`loadVisibleData` — an `mmap` (via `CFileExt::data()`) plus a codepage decode **per labelled object,
+re-done every frame** even though label content is immutable. To fix that, `IGarminStrTbl::get()` is a
+**non-virtual** cache wrapper over a bounded LRU `QCache<quint64, QStringList>` (key `(type << 32) |
+offset`); on a miss it delegates to the protected pure-virtual **`decode()`** (the per-coding work,
+implemented by `CGarminStrTbl6/8/Utf8`). Do not re-merge `get`/`decode` or make `get` virtual again —
+the split exists so the cache lives in exactly one place. The cap (`labelCacheMaxEntries`) bounds
+memory when panning huge gmapsupp files; a hit needs no `mmap` at all, which also shrinks the
+per-subfile `CFileExt::free()` `munmap` loop. The cache is touched only from the draw thread
+(`get()` ← `loadSubDiv` ← `loadVisibleData` ← `draw`, all serialized), so it needs no lock.
+Tracy zones: `strtbl.get` = wrapper (hits+misses), `strtbl.decode` = misses only — compare their call
+counts to read the hit rate.
+
 ---
 
 ## Architecture: tree item delegates

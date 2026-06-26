@@ -59,6 +59,16 @@ IGarminStrTbl::IGarminStrTbl(const quint16 codepage, const quint8 mask, QObject*
 
 IGarminStrTbl::~IGarminStrTbl() {}
 
+void IGarminStrTbl::get(CFileExt& file, quint32 offset, type_e t, QStringList& info) {
+  const quint64 key = (static_cast<quint64>(t) << 32) | offset;
+  if (const QStringList* cached = labelCache.object(key)) {
+    info = *cached;
+    return;
+  }
+  decode(file, offset, t, info);
+  labelCache.insert(key, new QStringList(info));
+}
+
 void IGarminStrTbl::readFile(CFileExt& file, quint32 offset, quint32 size, QByteArray& data) {
   if (offset + size > file.size()) {
     //         throw exce_t(eErrOpen, tr("Failed to read: ") + file.filename());

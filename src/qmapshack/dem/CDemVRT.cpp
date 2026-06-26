@@ -325,8 +325,8 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf) {
   }
 
   // use bufferScale (and therefore the zoom level) and the pixel scale of the DEM to caluclate a downsampling factor
-  qreal buf_scale_x = qAbs(bufferScale.x() / xscale);
-  qreal buf_scale_y = qAbs(bufferScale.y() / yscale);
+  qreal buf_scale_x = qAbs(bufferScale.x() / xscale / buf.image.devicePixelRatio());
+  qreal buf_scale_y = qAbs(bufferScale.y() / yscale / buf.image.devicePixelRatio());
   // <1 would mean GDAL does upscaling which is pointless
   if (buf_scale_x < 1.0) {
     buf_scale_x = 1.0;

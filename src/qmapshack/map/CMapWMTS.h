@@ -60,6 +60,16 @@ class CMapWMTS : public IMapOnline {
     QRectF boundingBox;
     QString resourceURL;
     QMap<QString, limit_t> limits;
+
+    /**
+       Ratio of the actually served tile size to the TileWidth declared in the
+       TileMatrixSet. Some HiDPI servers violate the WMTS spec by reusing a
+       standard TileMatrixSet (e.g. TileWidth 256) while serving larger tiles
+       (e.g. 512px). The ratio is learned from the first fetched tile and used
+       to pick a matching (coarser) matrix so an over-sized tile still maps 1:1
+       onto the physical buffer pixels. 1.0 means the server is spec-compliant.
+     */
+    qreal tileScale = 1.0;
   };
 
   QList<layer_t> layers;

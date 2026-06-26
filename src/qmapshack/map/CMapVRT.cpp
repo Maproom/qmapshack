@@ -282,8 +282,8 @@ bool CMapVRT::computeSourceWindow(const IDrawContext::buffer_t& buf, const QPoin
                                   sourceWindow_t& window) const {
   // use bufferScale (and therefore the zoom level) and the pixel scale of the map to calculate a downsampling
   // factor; <1 would mean GDAL does upscaling which is pointless
-  window.bufScaleX = qMax(1.0, qAbs(bufferScale.x() / xscale));
-  window.bufScaleY = qMax(1.0, qAbs(bufferScale.y() / yscale));
+  window.bufScaleX = qMax(1.0, qAbs(bufferScale.x() / xscale) / buf.image.devicePixelRatio());
+  window.bufScaleY = qMax(1.0, qAbs(bufferScale.y() / yscale) / buf.image.devicePixelRatio());
 
   // corners of the area we shall draw, converted from the canvas projection into the
   // map's own pixel coordinate space

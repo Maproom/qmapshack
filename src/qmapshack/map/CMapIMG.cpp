@@ -1687,6 +1687,14 @@ void CMapIMG::drawPolygons(BLContext& ctx, polytype_t& lines) {
   // QPainter::drawPolygon fills using the odd-even rule; Blend2D defaults to non-zero.
   ctx.set_fill_rule(BL_FILL_RULE_EVEN_ODD);
 
+  // Anchor the pattern phase to a fixed geographic point so textures/hatches stay put
+  // when the map is panned. convertRad2Px() of a constant coordinate shifts by exactly
+  // the pan delta each frame, so the pattern phase (vertexPx - anchorPx) depends only on
+  // geography and zoom, not on the viewport offset. Without this the tile origin sits at
+  // user-space (0,0) — a viewport-fixed pixel — and the pattern slides under the polygons.
+  QPointF anchorPx(0.0, 0.0);  // lon/lat origin, radians
+  map->convertRad2Px(anchorPx);
+
   // Bucket the polygon indices by type once, so each draw-order pass visits only the
   // polygons of its type instead of scanning the whole list once per type.
   QHash<quint32, QVector<qsizetype> > byType;
@@ -1728,6 +1736,9 @@ void CMapIMG::drawPolygons(BLContext& ctx, polytype_t& lines) {
                                   tile.bytesPerLine(), BL_DATA_ACCESS_READ) == BL_SUCCESS) {
         pattern.set_image(tileBL);
         pattern.set_extend_mode(BL_EXTEND_MODE_REPEAT);
+        // REPEAT makes only the fractional offset matter; fmod keeps the translation small
+        // so we don't lose sub-pixel precision at high zoom.
+        pattern.translate(std::fmod(anchorPx.x(), tile.width()), std::fmod(anchorPx.y(), tile.height()));
         ctx.set_fill_style(pattern);
       } else {
         ctx.set_fill_style(toBLColor(brush.color()));

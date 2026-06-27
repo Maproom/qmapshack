@@ -172,10 +172,10 @@ class CMapIMG : public IMap {
   void drawPolylines(BLContext& ctx, polytype_t& lines, const QPointF& scale);
   void drawPoints(BLContext& ctx, pointtype_t& pts, QVector<QRectF>& rectPois);
   void drawPois(BLContext& ctx, pointtype_t& pts, QVector<QRectF>& rectPois);
-  // Text and labels stay on QPainter; Qt's font handling has no Blend2D equivalent
-  // and they are a negligible fraction of the total rendering time.
-  void drawLabels(QPainter& p, const QVector<strlbl_t>& lbls);
-  void drawText(QPainter& p);
+  // Text and labels are rendered through Blend2D as well: glyph outlines come from
+  // QRawFont (cmap-only mapping, no complex shaping) and are filled in the shared context.
+  void drawLabels(BLContext& ctx, const QVector<strlbl_t>& lbls);
+  void drawText(BLContext& ctx);
 
   void drawLine(BLContext& ctx, CGarminPolygon& l, bool stroke, int lineWidth,
                 const CGarminTyp::polyline_property& property, const QFont& font, const QPointF& scale);

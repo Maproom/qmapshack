@@ -21,6 +21,7 @@
 #include <blend2d/blend2d.h>
 
 #include <QPainterPath>
+#include <QRawFont>
 #include <QtWidgets>
 #include <algorithm>
 #include <cmath>
@@ -29,7 +30,6 @@
 #include "CMainWindow.h"
 #include "canvas/CCanvas.h"
 #include "gis/GeoMath.h"
-#include "helpers/CDraw.h"
 #include "helpers/CFileExt.h"
 #include "helpers/CProgressDialog.h"
 #include "helpers/Platform.h"
@@ -296,6 +296,82 @@ QImage brushToTile(const QBrush& brush) {
   p.fillRect(tile.rect(), brush);
   p.end();
   return tile;
+}
+
+/**
+   @brief Convert a glyph outline (QPainterPath from QRawFont) into a BLPath.
+
+   QPainterPath stores a cubic as a CurveToElement followed by two CurveToDataElements
+   and never emits quadratics, so only move/line/cubic need handling.
+ */
+BLPath qPathToBLPath(const QPainterPath& pp) {
+  BLPath path;
+  const int count = pp.elementCount();
+  for (int i = 0; i < count; ++i) {
+    const QPainterPath::Element& e = pp.elementAt(i);
+    switch (e.type) {
+      case QPainterPath::MoveToElement:
+        path.move_to(e.x, e.y);
+        break;
+      case QPainterPath::LineToElement:
+        path.line_to(e.x, e.y);
+        break;
+      case QPainterPath::CurveToElement: {
+        const QPainterPath::Element& c2 = pp.elementAt(i + 1);
+        const QPainterPath::Element& end = pp.elementAt(i + 2);
+        path.cubic_to(e.x, e.y, c2.x, c2.y, end.x, end.y);
+        i += 2;
+        break;
+      }
+      case QPainterPath::CurveToDataElement:
+        // consumed together with its CurveToElement above
+        break;
+    }
+  }
+  return path;
+}
+
+/**
+   @brief Lay @p text out left-to-right from the origin into a single BLPath.
+
+   Glyph mapping is cmap-only (no complex shaping) via QRawFont, which keeps Qt's font
+   matching while emitting outlines Blend2D can fill. The glyph origin (0,0) is the pen
+   position on the baseline, matching QPainter::drawText().
+ */
+BLPath buildTextPath(const QRawFont& raw, const QString& text) {
+  BLPath path;
+  const QList<quint32> glyphs = raw.glyphIndexesForString(text);
+  const QList<QPointF> advances = raw.advancesForGlyphIndexes(glyphs);
+  QPointF pen(0, 0);
+  for (qsizetype i = 0; i < glyphs.size(); ++i) {
+    const QPainterPath gp = raw.pathForGlyph(glyphs[i]);
+    if (!gp.isEmpty()) {
+      path.add_path(qPathToBLPath(gp), BLPoint(pen.x(), pen.y()));
+    }
+    pen += advances[i];
+  }
+  return path;
+}
+
+/**
+   @brief Fill a glyph(-run) path with the white 8-neighbour halo, then the coloured text.
+
+   Offsets are applied in the current context transform space, so a caller drawing under a
+   rotated transform gets a correctly rotated halo. The same path is reused for all nine
+   fills (tessellated once), each placed via fill_path()'s origin argument.
+ */
+void fillGlyphHalo(BLContext& ctx, const BLPath& glyphs, const BLPoint& base, BLRgba32 fill, BLRgba32 halo) {
+  ctx.set_fill_style(halo);
+  ctx.fill_path(BLPoint(base.x - 1, base.y - 1), glyphs);
+  ctx.fill_path(BLPoint(base.x, base.y - 1), glyphs);
+  ctx.fill_path(BLPoint(base.x + 1, base.y - 1), glyphs);
+  ctx.fill_path(BLPoint(base.x - 1, base.y), glyphs);
+  ctx.fill_path(BLPoint(base.x + 1, base.y), glyphs);
+  ctx.fill_path(BLPoint(base.x - 1, base.y + 1), glyphs);
+  ctx.fill_path(BLPoint(base.x, base.y + 1), glyphs);
+  ctx.fill_path(BLPoint(base.x + 1, base.y + 1), glyphs);
+  ctx.set_fill_style(fill);
+  ctx.fill_path(base, glyphs);
 }
 }  // namespace
 
@@ -1392,23 +1468,18 @@ void CMapIMG::draw(IDrawContext::buffer_t& buf) /* override */
       drawPois(ctx, pois, rectPois);
     }
 
+    // Text and labels are drawn on top, in the same Blend2D context. Glyph outlines come
+    // from QRawFont (see drawText()/drawLabels()); the context already carries the global
+    // alpha, pixel-ratio scale and -pp translation, so no separate QPainter pass is needed.
+    if (ok && !map->needsRedraw()) {
+      drawText(ctx);
+    }
+    if (ok && !map->needsRedraw()) {
+      drawLabels(ctx, labels);
+    }
+
     // In multithreaded mode the queued rasterisation completes here.
     ctx.end();
-  }
-
-  // Text and labels are drawn on top with QPainter (see drawText()/drawLabels()).
-  if (ok && !map->needsRedraw()) {
-    QPainter p(&buf.image);
-    p.setOpacity(getOpacity() / 100.0);
-    USE_ANTI_ALIASING(p, true);
-    p.setFont(CMainWindow::self().getMapFont());
-    p.translate(-pp);
-
-    drawText(p);
-
-    if (!map->needsRedraw()) {
-      drawLabels(p, labels);
-    }
   }
 
   buf.image.convertTo(QImage::Format_ARGB32);
@@ -2128,20 +2199,34 @@ void CMapIMG::drawPois(BLContext& ctx, pointtype_t& pts, QVector<QRectF>& rectPo
   }
 }
 
-void CMapIMG::drawLabels(QPainter& p, const QVector<strlbl_t>& lbls) {
+void CMapIMG::drawLabels(BLContext& ctx, const QVector<strlbl_t>& lbls) {
   QFont f = CMainWindow::self().getMapFont();
   QVector<QFont> fonts(8, f);
   fonts[CGarminTyp::eSmall].setPointSize(f.pointSize() - 2);
   fonts[CGarminTyp::eLarge].setPointSize(f.pointSize() + 2);
 
+  // One QRawFont per label type, built on first use (QRawFont::fromFont is not free).
+  QVector<QRawFont> rawFonts(fonts.size());
+  const BLRgba32 halo = toBLColor(Qt::white);
+
   for (const strlbl_t& lbl : lbls) {
-    CDraw::text(lbl.str, p, lbl.pt, lbl.isNight ? lbl.property.colorLabelNight : lbl.property.colorLabelDay,
-                fonts[lbl.property.labelType]);
+    const int type = lbl.property.labelType;
+    if (!rawFonts[type].isValid()) {
+      rawFonts[type] = QRawFont::fromFont(fonts[type]);
+    }
+
+    // Match CDraw::text()'s placement: centre the metrics bounding box on the anchor and
+    // use its top-left as the baseline-left pen origin.
+    QRect r = QFontMetrics(fonts[type]).boundingRect(lbl.str);
+    r.moveCenter(lbl.pt);
+
+    const BLPath glyphs = buildTextPath(rawFonts[type], lbl.str);
+    const BLRgba32 fill = toBLColor(lbl.isNight ? lbl.property.colorLabelNight : lbl.property.colorLabelDay);
+    fillGlyphHalo(ctx, glyphs, BLPoint(r.left(), r.top()), fill, halo);
   }
 }
 
-void CMapIMG::drawText(QPainter& p) {
-  p.setPen(Qt::black);
+void CMapIMG::drawText(BLContext& ctx) {
 
   for (const textpath_t& textpath : std::as_const(textpaths)) {
     QPainterPath path;
@@ -2171,7 +2256,11 @@ void CMapIMG::drawText(QPainter& p) {
     }
 
     fm = QFontMetricsF(font);
-    p.setFont(font);
+    // Layout still uses QFontMetricsF (above); the glyph outlines are rasterised by
+    // Blend2D from QRawFont, which keeps Qt's font matching at the same resolved size.
+    const QRawFont raw = QRawFont::fromFont(font);
+    const BLRgba32 fill = toBLColor(textpath.color);
+    const BLRgba32 halo = toBLColor(Qt::white);
 
     // adjust exact offset to first half of segment
     const QVector<qreal>& lengths = textpath.lengths;
@@ -2200,8 +2289,6 @@ void CMapIMG::drawText(QPainter& p) {
     QPointF point1 = path.pointAtPercent(percent1);
     QPointF point2 = path.pointAtPercent(percent2);
 
-    qreal angle;  //     = qAtan((point2.y() - point1.y()) / (point2.x() - point1.x())) * 180 / M_PI;
-
     // flip path if string start is E->W direction
     // this helps, sometimes, in 50 % of the cases :)
     if (point2.x() - point1.x() < 0) {
@@ -2220,33 +2307,19 @@ void CMapIMG::drawText(QPainter& p) {
       point1 = point2;
       point2 = path.pointAtPercent(percent2);
 
-      angle = qAtan((point2.y() - point1.y()) / (point2.x() - point1.x())) * 180 / M_PI;
+      // BLContext::rotate() takes radians; atan2() also resolves the quadrant the old
+      // qAtan()+180 fix-up handled by hand.
+      const qreal angle = std::atan2(point2.y() - point1.y(), point2.x() - point1.x());
 
-      if (point2.x() - point1.x() < 0) {
-        angle += 180;
-      }
+      ctx.save();
+      ctx.translate(point1.x(), point1.y());
+      ctx.rotate(angle);
+      ctx.translate(0, -(textpath.lineWidth + 2));
 
-      p.save();
-      p.translate(point1);
-      p.rotate(angle);
+      const BLPath glyphs = buildTextPath(raw, text.mid(i, 1));
+      fillGlyphHalo(ctx, glyphs, BLPoint(0, 0), fill, halo);
 
-      p.translate(0, -(textpath.lineWidth + 2));
-
-      QString str = text.mid(i, 1);
-      p.setPen(Qt::white);
-      p.drawText(-1, -1, str);
-      p.drawText(0, -1, str);
-      p.drawText(+1, -1, str);
-      p.drawText(-1, 0, str);
-      p.drawText(+1, 0, str);
-      p.drawText(-1, +1, str);
-      p.drawText(0, +1, str);
-      p.drawText(+1, +1, str);
-
-      p.setPen(textpath.color);
-      p.drawText(0, 0, str);
-
-      p.restore();
+      ctx.restore();
 
       offset += fm.size(Qt::TextSingleLine, text[i]).width();
     }

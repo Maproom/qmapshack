@@ -98,8 +98,17 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent, bool supportsOvervie
     qreal masterGeoTransform[6];
     const qreal masterPixelSizeX =
         (dataset->GetGeoTransform(masterGeoTransform) == CE_None) ? qAbs(masterGeoTransform[1]) : 0.0;
+
+    qDebug() << "OVR: branch:" << (pBand->GetOverviewCount() > 0 ? "band-level" : "per-file probe")
+             << "GetOverviewCount =" << pBand->GetOverviewCount();
+
     overviewFactors = CGdalVrtUtil::collectOverviewFactors(dataset, pBand, masterPixelSizeX);
-    qDebug() << "overview factors" << overviewFactors.factors;
+
+    for (const CGdalVrtUtil::file_overview_info_t& info : overviewFactors.perFileInfo) {
+      qDebug() << "OVR:  " << QFileInfo(info.path).fileName() << "factors:" << info.factors;
+    }
+    qDebug() << "OVR: factors =" << overviewFactors.factors << "weakestMaxFactor =" << overviewFactors.weakestMaxFactor;
+
     // DEM data is always single-band continuous elevation, never categorical/palette
     overviewAdvice =
         CGdalVrtUtil::buildOverviewAdvice(dataset, pBand, filename, /*isCategorical=*/false, overviewFactors);
@@ -132,16 +141,6 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent, bool supportsOvervie
                            tr("Failed to create Warp for:") % '\n' % filename);
       return;
     }
-
-    if (!overviewFactors.factors.isEmpty()) {
-      // attach them as virtual overviews so GDAL can serve a decimated read straight from
-      // whichever source file(s) actually have a matching level, instead of always warping
-      // at full resolution and only downsampling the output
-      CPLSetConfigOption("VRT_VIRTUAL_OVERVIEWS", "YES");
-      dataset->BuildOverviews("NONE", overviewFactors.factors.size(), overviewFactors.factors.data(), 0, nullptr,
-                              nullptr, nullptr);
-      CPLSetConfigOption("VRT_VIRTUAL_OVERVIEWS", "NO");
-    }
   }
 
   // ------- setup projection ---------------
@@ -169,6 +168,17 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent, bool supportsOvervie
     const qreal warpScale =
         qMax(static_cast<qreal>(xsize_px) / preWarpXSize, static_cast<qreal>(ysize_px) / preWarpYSize);
     overviewAdvice.weakestMaxFactor = qMax(1, qRound(overviewAdvice.weakestMaxFactor * warpScale));
+
+    const qint32 finalOvrCount = dataset->GetRasterBand(1)->GetOverviewCount();
+    qDebug() << "OVR: post-warp GetOverviewCount =" << finalOvrCount << "warpScale =" << warpScale
+             << "weakestMaxFactor =" << overviewAdvice.weakestMaxFactor;
+    if (overviewAdvice.overviewsMissing) {
+      qDebug() << "OVR: assessment: no overviews - advisory will fire on slow render";
+    } else if (finalOvrCount == 0) {
+      qDebug() << "OVR: assessment: source overviews exist but VRT lacks <OverviewList> - add it";
+    } else {
+      qDebug() << "OVR: assessment: OK, overviews up to factor" << overviewAdvice.weakestMaxFactor;
+    }
   }
 
   qreal adfGeoTransform[6];

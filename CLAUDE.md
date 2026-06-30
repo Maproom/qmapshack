@@ -283,46 +283,115 @@ would need either a signature change touching its 3 callers or new cached member
 staleness trap (`xscale`/`yscale` are plain protected members assigned directly, no setter to keep
 a reciprocal in sync).
 
-### CDemVRT/CMapVRT render timeout + overview-advisory dialog
+### CDemVRT/CMapVRT render timeout + overview-advisory dialog (QMS-1128)
 
-Implemented 2026-06-24 (QMS-1128). `CDemVRT`/`CMapVRT::draw()` now wrap their
-`ReadRaster()` call(s) with a 10s deadline (`CGdalVrtUtil::ReadDeadline` +
-`progressCallbackWithDeadline()`, reusing the existing GDAL progress-abort hook rather
-than killing a thread). On timeout, if `CGdalVrtUtil::OverviewAdvice::overviewsMissing`
-(cached at construction from `collectOverviewFactors()`) says overviews are missing
-anywhere, and the per-file `suppressOverviewAdvisory` setting (persisted via
-`CDemVRT`/`CMapVRT::saveConfig()`/`loadConfig()`, same per-file `QSettings` group
-`CMapItem`/`CDemItem` already use) isn't set, and the dialog hasn't already been shown
-this session (`advisoryShownThisSession`) — `CDemDraw`/`CMapDraw::sigOverviewAdvisory`
-fires (render thread → GUI thread, `QPointer<CDemVRT/CMapVRT>` payload), `CCanvas`
-shows `COverviewAdvisoryDialog` (`helpers/`, non-modal) suggesting copy-pasteable
-`gdaladdo -ro -r {average|nearest} --config COMPRESS_OVERVIEW DEFLATE ...` commands
-(`CGdalVrtUtil::buildOverviewAdvice()`), one for the VRT and one for the underlying
-source file(s) (a shell loop if there are several). `-ro` always forces external
-overviews so the original raster is never altered.
+Implemented 2026-06-24. `CDemVRT`/`CMapVRT::draw()` wrap their `ReadRaster()` call(s)
+with a 5s deadline (`CGdalVrtUtil::read_deadline_t` + `progressCallbackWithDeadline()`,
+reusing GDAL's progress-abort hook). On timeout, if overviews are missing or inadequate
+for the current view (`overviewAdvice.overviewsMissing || neededFactor > weakestMaxFactor`)
+and the per-file `suppressOverviewAdvisory` flag isn't set and the dialog hasn't been
+shown this session (`advisoryShownThisSession`), `CDemDraw`/`CMapDraw::sigOverviewAdvisory`
+fires (render thread → GUI thread, `QPointer<CDemVRT/CMapVRT>` payload), `CCanvas` shows
+`COverviewAdvisoryDialog` (`helpers/`, non-modal, `Qt::WA_DeleteOnClose`).
 
-**"Frankenstein" mosaic gap, fixed.** Found via a real test file (3 source DEMs -
-austria.tif 10m/factors 2-64, slovenia.tif 20m/factors ~3-238, swiss_utm33.tif
-20m/factors 5-198 - mosaicked with no `<OverviewList>` of its own): every file having
-*some* overviews made `overviewsMissing` false (it's just "is the union across all
-referenced files non-empty"), so the dialog stayed suppressed even though rendering was
-genuinely slow - the real problem was inconsistent overview depths across sources, not
-an absence of overviews (austria.tif's deepest overview only reaches factor 64, far
-short of what a "fit the whole mosaic" view needs).
+**Key classes/files:**
+- `helpers/CGdalVrtUtil.{h,cpp}` — `collectOverviewFactors()`, `buildOverviewAdvice()`,
+  `read_deadline_t`, `progressCallbackWithDeadline()`, `progressCallback()`
+- `helpers/COverviewAdvisoryDialog.{h,cpp}` + `helpers/IOverviewAdvisoryDialog.ui` — the dialog
+- `dem/CDemVRT.{h,cpp}` — DEM path; `map/CMapVRT.{h,cpp}` — map path
 
-Fix: `collectOverviewFactors()` gained a `weakestMaxFactor` out-param - the *weakest*
-referenced file's own deepest overview factor (a file with zero usable overviews counts
-as 1, native-only). `OverviewAdvice` now carries it, and `buildOverviewAdvice()` no
-longer early-returns when `overviewsMissing` is false, since vrtCommand/filesCommand may
-still be needed. `CDemVRT`/`CMapVRT::draw()` compute the *actually needed* decimation
-factor for that read (`qMax(buf_scale_x, buf_scale_y)` in CDemVRT; recomputed from
-`bufferScale`/`xscale`/`yscale` in CMapVRT, since `computeSourceWindow()` doesn't expose
-it) and trigger the advisory on `overviewsMissing || neededFactor > weakestMaxFactor`.
+**`collectOverviewFactors()` — two branches:**
+- Branch 1 (`pBand->GetOverviewCount() > 0`): reads factors from band overviews; `perFileInfo`
+  gets the dataset itself as sole entry.
+- Branch 2 (else-if, `GetOverviewCount()==0`): probes each file from `GetFileList()` via
+  `GDALOpen`, collecting per-file factors; `perFileInfo` gets one entry per source file.
 
-Known remaining limitation (not addressed): this only catches "zoomed out past every
-file's deepest overview." A view whose needed factor falls in a *gap* between two
-available levels on one file (but still under that file's deepest) can still hit GDAL's
-full-resolution fallback depending on its overview-selection tolerance - not modeled
-here, would need per-level gap analysis rather than just a single weakest-deepest value.
+**`buildOverviewAdvice()` — command generation:**
+- Uses `perFileInfo` to enumerate source files (skips filename itself).
+- For Branch 1 VRTs (perFileInfo only has the VRT), `sourceFiles` is empty → `filesCommand`
+  targets the VRT itself, `vrtCommand` is empty. **Known bug (Fix 2, pending):** should use
+  `dataset->GetFileList()` (filtered: skip VRT path, `.ovr`, `.aux.xml`) to find source TIFs
+  and target those instead.
+- For Branch 2 VRTs, `filesCommand` has one command per source file, `vrtCommand` = gdaladdo
+  on the VRT as fallback.
+- **Critical finding (2026-06-30):** gdaladdo on source TIFs alone is NOT sufficient to fix
+  slow rendering. The VRT must also have `<OverviewList>` added/updated. The current dialog
+  only shows gdaladdo commands — for mosaic VRTs (Branch 2) this is incomplete and will not
+  fix the problem. QMS-1135 must write `<OverviewList>` into the VRT XML as part of the fix.
+
+**`weakestMaxFactor`:** the weakest source file's deepest overview factor (1 if no overviews).
+Advisory fires on `overviewsMissing || neededFactor > weakestMaxFactor`. After warp creation,
+`weakestMaxFactor` is rescaled by `warpScale = max(xsize_px/preWarpXSize, ysize_px/preWarpYSize)`.
+
+**`VRT_VIRTUAL_OVERVIEWS` + `BuildOverviews("NONE")` — proven useless (2026-06-30):**
+`VRT_VIRTUAL_OVERVIEWS` registers virtual overview levels on the warped VRT, but empirical
+testing proves it does NOT route reads to source TIF overviews:
+- `mosaic.vrt` (Branch 2, sources all have overviews): post-warp GetOverviewCount=17 via
+  VRT_VIRTUAL_OVERVIEWS, but rendering was still slow (advisory fired).
+- `mosaic_ovr_test.vrt` (identical + `<OverviewList>2 4 8 16 32 64 128</OverviewList>`):
+  GetOverviewCount=7 inherited by GDALAutoCreateWarpedVRT, rendering was fast.
+- Conclusion: the only reliable mechanism is `<OverviewList>` on the source VRT so
+  `GDALAutoCreateWarpedVRT` inherits overview levels directly. VRT_VIRTUAL_OVERVIEWS can
+  be removed entirely once `<OverviewList>` editing is in place.
+**For Branch 1** (`<OverviewList>` already present): GDALAutoCreateWarpedVRT inherits
+overview levels directly — VRT_VIRTUAL_OVERVIEWS was already guarded away here (Fix 1).
+
+**GDAL callback verified:** `progressCallbackWithDeadline` IS called by `GDALWarpedVRT::IRasterIO`
+during warped reads (confirmed by the advisory firing on the dev baseline without any extra
+wiring). Do NOT add a separate warp-options progress callback — it caused a UI freeze in a
+prior attempt.
+
+**Debug instrumentation (2026-06-30):** `CDemVRT` constructor logs "OVR:" prefixed messages
+at every decision point: pre-warp `GetOverviewCount`, which branch `collectOverviewFactors`
+took, all per-file factors, generated command strings, post-warp `GetOverviewCount` (before
+and after `VRT_VIRTUAL_OVERVIEWS`), `warpScale`, final `weakestMaxFactor`, and a one-line
+assessment. Load each test VRT and grep for "OVR:" to verify behaviour.
+
+**Test cases** in `~/Downloads/dem/` (backup: `~/Downloads/dem.backup/`):
+
+| VRT | Pre-warp GetOverviewCount | Branch | Rendering |
+|-----|--------------------------|--------|-----------|
+| `mosaic.vrt` | 0 | Branch 2 (per-file probe) | Slow — VRT_VIRTUAL_OVERVIEWS doesn't help |
+| `mosaic_ovr_test.vrt` | 7 (inherited) | Branch 1 | Fast — `<OverviewList>` fix verified |
+| `mosaic_no_overviews.vrt` | 0 | Branch 2, no factors found | Slow (no overviews at all) |
+| `mosaic_own_overviews_deep.vrt` | 7 (levels 2–128) | Branch 1 | Fast |
+| `mosaic_own_overviews_shallow.vrt` | 2 (levels 2–4) | Branch 1 | Fast at low zoom, slow at high zoom |
+| `DEM_10_Österreich.vrt` | >0 (.vrt.ovr sidecar) | Branch 1 | Fast |
+
+`mosaic_ovr_test.vrt` = `mosaic.vrt` + `<OverviewList resampling="average">2 4 8 16 32 64 128</OverviewList>`,
+no gdaladdo run — proves `<OverviewList>` alone routes warped reads to source TIF overviews.
+
+Source TIFs: `austria.tif` 10m (ovr factors 2 4 8 16 32 64), `slovenia.tif` 20m (3 9 27 81 238),
+`swiss_utm33.tif` 20m (5 10 25 50 100 198). `no_ovr/` symlinks same TIFs without .ovr sidecars.
+VRTs use `<OverviewList>` XML (not .vrt.ovr sidecars) where applicable.
+
+---
+
+### QMS-1135 — In-app overview creation and proactive VRT health badge
+
+Ticket: https://github.com/Maproom/qmapshack/issues/1135
+
+**Goal:** Replace copy-pasteable command suggestions with in-app overview creation.
+Show an orange warning badge in the DEM/map tree when a VRT's overview situation is
+suboptimal — *before* a render stall. Clicking the badge opens a dialog that explains
+the situation and provides buttons to fix it.
+
+**Requirements (from ticket):**
+- DEMs: full overview pyramid makes sense (used at every zoom level)
+- Maps: only a limited overview range makes sense (they become unreadable at outer zoom
+  levels and should be switched off via QMapShack's visibility settings)
+- Prefer adding overviews to source sub-files over adding to the VRT itself
+- Overviews always as standalone sidecar files (`-ro` flag, never embedded)
+- VRTs mixing files of different resolution/overview depth should be flagged
+- Orange triangle badge in the tree; clicking it opens a dialog
+- Dialog provides a button to actually run the fix commands (via `IToolShell`/`CShell`;
+  unification of these two classes is an open design question)
+- Per-file suppression of the warning, persisted
+- Confirmation before destroying/clearing existing overviews
+
+**Current plan — phase 1 (in progress):**
+Improve the situation analysis in `CDemVRT` constructor by expanding the "OVR:" debug
+output, verify each test case behaves as expected, then build on a correct foundation.
+The dialog still shows copy-pasteable commands for now; in-app execution comes later.
 
 

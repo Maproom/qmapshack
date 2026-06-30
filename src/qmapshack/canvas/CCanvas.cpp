@@ -861,23 +861,37 @@ void CCanvas::slotToolTip() {
 }
 
 template <class T>
-void CCanvas::showOverviewAdvisory(QPointer<T> source) {
+COverviewAdvisoryDialog* CCanvas::showOverviewAdvisory(QPointer<T> source) {
   if (source.isNull()) {
-    return;
+    return nullptr;
   }
+
+  source->setAdvisoryOpen(true);
 
   auto* dlg = new COverviewAdvisoryDialog(source->getFilename(), source->getOverviewAdvice(), this);
   connect(dlg, &QDialog::finished, this, [dlg, source]() {
     if (source) {
-      source->slotSetSuppressOverviewAdvisory(dlg->suppressChecked());
+      source->setSuppressOverviewAdvisory(dlg->suppressChecked());
+      source->setAdvisoryOpen(false);
     }
   });
   dlg->show();
+  return dlg;
 }
 
-void CCanvas::slotShowDemOverviewAdvisory(QPointer<CDemVRT> source) { showOverviewAdvisory(source); }
+void CCanvas::slotShowDemOverviewAdvisory(QPointer<CDemVRT> source) {
+  if (auto* dlg = showOverviewAdvisory(source)) {
+    connect(dlg, &COverviewAdvisoryDialog::sigFixItDone, this,
+            []() { CDemDraw::setupDemPath(CDemDraw::getDemPaths()); });
+  }
+}
 
-void CCanvas::slotShowMapOverviewAdvisory(QPointer<CMapVRT> source) { showOverviewAdvisory(source); }
+void CCanvas::slotShowMapOverviewAdvisory(QPointer<CMapVRT> source) {
+  if (auto* dlg = showOverviewAdvisory(source)) {
+    connect(dlg, &COverviewAdvisoryDialog::sigFixItDone, this,
+            []() { CMapDraw::setupMapPath(CMapDraw::getMapPaths()); });
+  }
+}
 
 void CCanvas::slotCheckTrackOnFocus() {
   const IGisItem::key_t& key = CGisItemTrk::getKeyUserFocus();

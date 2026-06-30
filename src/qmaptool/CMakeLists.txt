@@ -50,8 +50,6 @@ set( SRCS
     setup/CLogHandler.cpp
     setup/CSetupExtTools.cpp
     setup/IAppSetup.cpp
-    shell/CShellCmd.cpp
-    shell/CShell.cpp
     tool/export/CToolExportJnx.cpp
     tool/CToolAddOverview.cpp
     tool/CToolBox.cpp
@@ -78,6 +76,8 @@ set( SRCS
     ../common/help/CHelpSearch.cpp
     ../common/gis/GeoMath.cpp
     ../common/gis/proj_x.cpp
+    ../common/shell/CShell.cpp
+    ../common/shell/CShellCmd.cpp
 )
 
 set( HDRS
@@ -121,8 +121,6 @@ set( HDRS
     setup/CLogHandler.h
     setup/CSetupExtTools.h
     setup/IAppSetup.h
-    shell/CShellCmd.h
-    shell/CShell.h
     tool/export/CToolExportJnx.h
     tool/CToolAddOverview.h
     tool/CToolBox.h
@@ -150,6 +148,8 @@ set( HDRS
     ../common/help/CHelpSearch.h
     ../common/gis/GeoMath.h
     ../common/gis/proj_x.h
+    ../common/shell/CShell.h
+    ../common/shell/CShellCmd.h
 )
 
 set( UIS

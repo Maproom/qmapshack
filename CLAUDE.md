@@ -356,6 +356,7 @@ assessment. Load each test VRT and grep for "OVR:" to verify behaviour.
 | `mosaic_no_overviews.vrt` | 0 | Branch 2, no factors found | Slow (no overviews at all) |
 | `mosaic_own_overviews_deep.vrt` | 7 (levels 2–128) | Branch 1 | Fast |
 | `mosaic_own_overviews_shallow.vrt` | 2 (levels 2–4) | Branch 1 | Fast at low zoom, slow at high zoom |
+| `mosaic_partial_missing_ovl.vrt` | 6 (declared via `<OverviewList>`) | Branch 1 backing check | Slow — `no_ovr/austria.tif` has no overviews; tests R5 fix |
 | `DEM_10_Österreich.vrt` | >0 (.vrt.ovr sidecar) | Branch 1 | Fast |
 
 `mosaic_ovr_test.vrt` = `mosaic.vrt` + `<OverviewList resampling="average">2 4 8 16 32 64 128</OverviewList>`,
@@ -364,6 +365,27 @@ no gdaladdo run — proves `<OverviewList>` alone routes warped reads to source 
 Source TIFs: `austria.tif` 10m (ovr factors 2 4 8 16 32 64), `slovenia.tif` 20m (3 9 27 81 238),
 `swiss_utm33.tif` 20m (5 10 25 50 100 198). `no_ovr/` symlinks same TIFs without .ovr sidecars.
 VRTs use `<OverviewList>` XML (not .vrt.ovr sidecars) where applicable.
+
+**Map test cases** in `~/Downloads/map/` (backup: `~/Downloads/map.backup/`):
+
+| VRT | Source | Branch | Rendering |
+|-----|--------|--------|-----------|
+| `Test_Dolomiten.vrt` | `Dolomiten/dolomiten3.tif` (palette, no overviews) | Branch 2 (per-file probe, no factors found) | Slow — advisory should fire |
+
+Single-band palette (8-bit indexed, `isCategorical=true`), no `<OverviewList>`, no `.ovr` sidecars. Slow fixture — intended to trigger the advisory dialog for map VRTs.
+
+**To reset test cases** (e.g. after a Fix it run builds new overviews):
+```bash
+rsync -av --exclude='austria.tif' --exclude='slovenia.tif' --exclude='swiss_utm33.tif' \
+  --exclude='mosaic_ovr_test.vrt' --exclude='MANIFEST.txt' \
+  ~/Downloads/dem.backup/ ~/Downloads/dem/
+rm -f ~/Downloads/dem/no_ovr/*.ovr
+
+rsync -av --exclude='Dolomiten/dolomiten3.tif' \
+  ~/Downloads/map.backup/ ~/Downloads/map/
+rm -f ~/Downloads/map/Dolomiten/*.ovr
+```
+`mosaic_ovr_test.vrt` is kept as-is (not in backup; manually created Branch 1 fixture).
 
 ---
 
@@ -384,18 +406,62 @@ the situation and provides buttons to fix it.
 - Overviews always as standalone sidecar files (`-ro` flag, never embedded)
 - VRTs mixing files of different resolution/overview depth should be flagged
 - Orange triangle badge in the tree; clicking it opens a dialog
-- Dialog provides a button to actually run the fix commands (via `IToolShell`/`CShell`;
-  unification of these two classes is an open design question)
+- Dialog provides a button to actually run the fix commands (via `CShell` from `src/common/shell/`)
 - Per-file suppression of the warning, persisted
 - Confirmation before destroying/clearing existing overviews
 
 **Current state (2026-06-30):**
-Dialog redesigned with two tables (current situation / after fix) and a "Fix it" button
-(placeholder debug output). `overview_advice_t` now carries `suggestedLevels`,
-`sourceFilePaths`, `vrtNeedsOverviewList`, `vrtHasOverviewList`, `isCategorical`;
-`filesCommand`/`vrtCommand` removed. `VRT_VIRTUAL_OVERVIEWS` removed from both
-`CDemVRT` and `CMapVRT` (proven useless — only `<OverviewList>` in the source VRT
-makes warped reads use source TIF overviews).
+Dialog has two tables (current situation / after fix) and a working "Fix it" button.
+`overview_advice_t` carries `suggestedLevels`, `sourceFilePaths`, `vrtNeedsOverviewList`,
+`vrtHasOverviewList`, `isCategorical`; `filesCommand`/`vrtCommand` removed.
+`VRT_VIRTUAL_OVERVIEWS` removed from `CDemVRT`/`CMapVRT` (proven useless).
+`CShell`+`CShellCmd` moved from `src/qmaptool/shell/` to `src/common/shell/` (public ctor,
+`lastJobSucceeded()` added, `makeShellVisible()` moved to `IToolGui::start()`).
+`COverviewAdvisoryDialog` embeds a `CShell` (hidden until Fix it is clicked): runs
+`gdaladdo -clean` + `gdaladdo -ro …` per source file, then edits `<OverviewList>` in the
+VRT via `QDomDocument` (`slotFixItDone()`/`editVrtXml()`).
+
+Render timeout reduced to 5 s (`CGdalVrtUtil::read_deadline_t::timeoutMs`).
+
+Confirmation dialog (`slotFixIt()`) now lists all operations (not just destructive ones);
+destructive entries ("Clean + rebuild", "Update `<OverviewList>`") highlighted in orange.
+Non-destructive entries ("Build new", "Add `<OverviewList>`") shown in plain text.
+Confirmation always shown regardless of whether any destructive ops are present.
+
+Abort while running: `closeEvent()` + `reject()` both intercepted while a job is in
+progress. Closing shows a confirmation, kills gdaladdo via `shell_->slotCancel()`, then
+in `slotFixItDone()` (called synchronously from `waitForFinished`) deletes any `.ovr`
+sidecar files written (`path + ".ovr"` for each source path) and calls `close()` directly.
+`reject()` override needed because Cancel button / Escape key call `QDialog::reject()` →
+`done()` → `hide()` → `WA_DeleteOnClose` fires via `QEvent::Hide`, bypassing `closeEvent()`.
+`canceling_` flag coordinates between `closeEvent()`/`reject()` and `slotFixItDone()`.
+`jobId_` reset to 0 at entry of `slotFixItDone()` so the abort guard is false after job
+completes — prevents spurious "abort?" box when closing the dialog after a successful fix.
+
+Reload after fix: `COverviewAdvisoryDialog` emits `sigFixItDone()` when all commands and
+`editVrtXml()` (if needed) succeed. `CCanvas::showOverviewAdvisory<T>()` (now returns
+`COverviewAdvisoryDialog*`) connects `sigFixItDone` to `CDemDraw::setupDemPath()` or
+`CMapDraw::setupMapPath()` in the two non-template slot functions.
+
+Draw suppression while dialog open: `CDemVRT`/`CMapVRT` gained `std::atomic<bool> advisoryOpen`
+and `setAdvisoryOpen(bool)` (plain public method, not a slot — not connected to any signal).
+`CCanvas::showOverviewAdvisory` calls `source->setAdvisoryOpen(true)` before `dlg->show()`
+and clears it in the `finished` lambda. In `draw()`, `emitSigCanvasUpdate()` is skipped
+when `advisoryOpen` is set (or when the advisory just fired), so both the canvas repaint
+loop and the delegate processing-animation stop the moment the dialog appears.
+Previously `setSuppressOverviewAdvisory` was named `slotSetSuppressOverviewAdvisory` and
+declared in `public slots:` — renamed since it is never connected to a signal.
+
+**Branch 1 backing-check fix (`collectOverviewFactors`):** GDAL's `GetOverviewCount()` on
+a VRT band returns > 0 when `<OverviewList>` is present in the VRT XML, even if the source
+TIF has no actual overview data. This caused the advisory to never fire for files like
+`DTM_20m_Deutschland.vrt` (has `<OverviewList>` but the `.tif` has no overviews):
+`weakestMaxFactor` was read as 128, so the timeout was attributed to something other than
+missing overviews. Fix: Branch 1 now scans `GetFileList()` for any `.ovr` sidecar or any
+source TIF with `GetOverviewCount() > 0`. If none found, falls through to Branch 2 (per-file
+probe), which correctly reports the TIF as having no overviews and triggers the advisory.
+Cases with real overviews (`.vrt.ovr` sidecar, source TIFs with embedded/sidecar overviews)
+still take Branch 1 and are unaffected.
 
 **Punch list — discuss each point before implementing:**
 
@@ -403,13 +469,9 @@ makes warped reads use source TIF overviews).
    needs a flag to cap levels for maps (ticket: maps become unreadable at outer zoom,
    user switches them off via visibility settings; full pyramid only makes sense for DEMs).
 
-2. **Implement "Fix it"** — replace debug output in `COverviewAdvisoryDialog::slotFixIt()`
-   with actual `QProcess`-based gdaladdo execution and VRT XML editing
-   (`<OverviewList>` insertion/update). Architecture: `IToolShell`/`CShell` or embedded
-   progress dialog — decide before implementing.
+2. ~~**Implement "Fix it"**~~ — done.
 
-3. **Reload after fix** — after successful execution, trigger reload of the DEM/map so
-   new overviews are picked up immediately without restarting QMapShack.
+3. ~~**Reload after fix**~~ — done: `sigFixItDone` → `setupDemPath`/`setupMapPath`.
 
 4. **Per-file suppression persisted** — `suppressOverviewAdvisory` flag exists in
    `CDemVRT`/`CMapVRT` but is in-memory only; needs `QSettings` save/restore.
@@ -421,5 +483,9 @@ makes warped reads use source TIF overviews).
    shows only the VRT's effective levels (one row), not individual source TIF levels.
    Could probe source files via `GetFileList()` + `GDALOpen` for a fuller picture.
 
-7. **CMapVRT dialog wiring** — verify advisory dialog shows correctly for map VRTs
-   (same code path, just needs testing with a real map VRT).
+7. ~~**CMapVRT dialog wiring**~~ — verified working with `Test_Dolomiten.vrt`.
+
+**External tool paths in qmapshack:** Always resolve via
+`IAppSetup::getPlatformInstance()->findExecutable("toolname")` — never hard-code a bare name.
+`CAppSetupWin` restricts `PATH` to the app directory to prevent DLL conflicts, so a bare name
+silently produces `QProcess::FailedToStart` on Windows if the binary isn't co-located with the app.

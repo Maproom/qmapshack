@@ -22,13 +22,15 @@
 #include <QDialog>
 
 #include "helpers/CGdalVrtUtil.h"
+#include "shell/CShell.h"
+#include "shell/CShellCmd.h"
 #include "ui_IOverviewAdvisoryDialog.h"
 
 /**
    @brief Advisory dialog shown when CDemVRT/CMapVRT render times out due to missing or
           inadequate overview pyramids. Shows a "current situation" table with per-file
-          overview state and an "after fix" table describing what will be done. A "Fix it"
-          button will run the fix in-app (currently placeholder debug output).
+          overview state and an "after fix" table describing what will be done. "Fix it"
+          runs gdaladdo on source files and edits <OverviewList> in the VRT in-place.
 
    Non-modal: the caller shows it with show(), not exec(), and it deletes itself on close
    (Qt::WA_DeleteOnClose).
@@ -46,14 +48,29 @@ class COverviewAdvisoryDialog : public QDialog, private Ui::IOverviewAdvisoryDia
   /// @brief True if the user checked "don't show this again for this file."
   bool suppressChecked() const { return checkSuppressAdvisory->isChecked(); }
 
+ signals:
+  /// @brief Emitted after Fix it completes successfully (gdaladdo + VRT XML edit if needed).
+  void sigFixItDone();
+
+ protected:
+  void closeEvent(QCloseEvent* e) override;
+  void reject() override;
+
  private slots:
   void slotFixIt();
+  void slotFixItDone(qint32 id);
 
  private:
+  bool isJobRunning() const { return jobId_ != 0 && shell_->isVisible() && !canceling_; }
+  QString resampleAlgorithm() const { return advice_.isPaletteIndexed ? "nearest" : "average"; }
   bool hasExistingOverviews(const QString& filePath) const;
+  bool editVrtXml();
 
   QString filename_;
   CGdalVrtUtil::overview_advice_t advice_;
+  CShell* shell_ = nullptr;
+  qint32 jobId_ = 0;
+  bool canceling_ = false;
 };
 
 #endif  // COVERVIEWADVISORYDIALOG_H

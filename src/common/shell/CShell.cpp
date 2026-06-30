@@ -20,8 +20,6 @@
 
 #include <QtWidgets>
 
-#include "CMainWindow.h"
-
 CShell* CShell::pSelf = nullptr;
 
 CShell::CShell(QWidget* parent) : QTextBrowser(parent) {
@@ -43,6 +41,10 @@ void CShell::slotError(QProcess::ProcessError error) {
       insertPlainText(QString(tr("Process cannot be started.\n")));
       insertPlainText(QString(tr("Make sure the required packages are installed, `%1` exists and is executable.\n"))
                           .arg(cmd.program()));
+      // Qt does not emit finished() for FailedToStart — signal completion explicitly so
+      // callers waiting on sigFinishedJob (e.g. COverviewAdvisoryDialog) are not left stuck.
+      jobSucceeded_ = false;
+      emit sigFinishedJob(jobId);
       break;
 
     case QProcess::Crashed:
@@ -60,7 +62,7 @@ void CShell::slotStderr() {
   setTextColor(Qt::red);
   str = cmd.readAllStandardError();
 
-  if (str[0] == '\r') {
+  if (!str.isEmpty() && str[0] == '\r') {
 #ifdef Q_OS_WIN64
     if (str.contains("\n")) {
       insertPlainText("\n");
@@ -89,7 +91,7 @@ void CShell::slotStdout() {
   setTextColor(Qt::blue);
   str = cmd.readAllStandardOutput();
 
-  if (str[0] == '\r') {
+  if (!str.isEmpty() && str[0] == '\r') {
 #ifdef Q_OS_WIN64
     if (str.contains("\n")) {
       insertPlainText("\n");
@@ -125,6 +127,7 @@ void CShell::stdErr(const QString& str) {
 
 void CShell::slotFinished(int exitCode, QProcess::ExitStatus status) {
   if (exitCode || status) {
+    jobSucceeded_ = false;
     emit sigFinishedJob(jobId);
     setTextColor(Qt::red);
     append(tr("!!! failed !!!\n"));
@@ -146,8 +149,6 @@ void CShell::slotCancel() {
 }
 
 int CShell::execute(QList<CShellCmd> cmds) {
-  CMainWindow::self().makeShellVisible();
-
   if (cmd.state() != QProcess::NotRunning) {
     return -1;
   }
@@ -163,6 +164,7 @@ int CShell::execute(QList<CShellCmd> cmds) {
 
 void CShell::nextCommand() {
   if (idxCommand >= commands.size()) {
+    jobSucceeded_ = true;
     emit sigFinishedJob(jobId);
     setTextColor(Qt::darkGreen);
     append(tr("!!! done !!!\n"));

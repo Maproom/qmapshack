@@ -28,11 +28,16 @@
 class CShell : public QTextBrowser {
   Q_OBJECT
  public:
-  static CShell& self() { return *pSelf; }
-
+  CShell(QWidget* parent);
   virtual ~CShell() = default;
 
+  static CShell& self() { return *pSelf; }
+
   int execute(QList<CShellCmd> cmds);
+
+  /// @brief True if the last completed job finished without any command failing.
+  bool lastJobSucceeded() const { return jobSucceeded_; }
+
  signals:
   void sigFinishedJob(qint32 jobId);
 
@@ -47,13 +52,14 @@ class CShell : public QTextBrowser {
   void slotError(QProcess::ProcessError error);
   virtual void slotFinished(int exitCode, QProcess::ExitStatus status);
 
- protected:
-  void nextCommand();
-
+ public:
   /// write text to stdout color channel of the text browser
   void stdOut(const QString& str);
   /// write text to stderr color channel of the text browser
   void stdErr(const QString& str);
+
+ protected:
+  void nextCommand();
 
   QProcess cmd;
 
@@ -62,9 +68,8 @@ class CShell : public QTextBrowser {
   qint32 jobId = 0;
 
  private:
-  friend class Ui_IMainWindow;
-  CShell(QWidget* parent);
   static CShell* pSelf;
+  bool jobSucceeded_ = false;
 };
 
 #endif  // CSHELL_H

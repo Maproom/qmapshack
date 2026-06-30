@@ -65,9 +65,10 @@ class CMapVRT : public IMap {
   /// @brief Cached suggested-overview info for this file; used by the overview advisory dialog.
   const CGdalVrtUtil::overview_advice_t& getOverviewAdvice() const { return overviewAdvice; }
 
- public slots:
   /// @brief Set by the overview advisory dialog's "don't show again for this file" checkbox.
-  void slotSetSuppressOverviewAdvisory(bool yes) { suppressOverviewAdvisory = yes; }
+  void setSuppressOverviewAdvisory(bool yes) { suppressOverviewAdvisory = yes; }
+  /// @brief Set true while the advisory dialog is open; suppresses draw retries during that time.
+  void setAdvisoryOpen(bool yes) { advisoryOpen = yes; }
 
  private:
   /// Close dataset and srcDataset (either may already be null, e.g. if construction
@@ -177,13 +178,18 @@ class CMapVRT : public IMap {
 
   /// persisted via saveConfig()/loadConfig(): true once the user checked "don't show
   /// again" on the overview advisory dialog for this file. Written by
-  /// slotSetSuppressOverviewAdvisory()/loadConfig() (GUI thread), read by draw() (canvas
+  /// setSuppressOverviewAdvisory()/loadConfig() (GUI thread), read by draw() (canvas
   /// thread) - must be atomic to avoid a data race across that boundary.
   std::atomic<bool> suppressOverviewAdvisory = false;
 
   /// not persisted: true once the advisory has been shown for this loaded instance, so
   /// panning/zooming a slow file doesn't reopen the dialog on every redraw
   bool advisoryShownThisSession = false;
+
+  /// set true (GUI thread) while the advisory dialog is open, cleared when it closes;
+  /// draw() (canvas thread) skips emitSigCanvasUpdate() retries while this is set so
+  /// animations stop and the render thread doesn't busyloop during the dialog
+  std::atomic<bool> advisoryOpen = false;
 };
 
 #endif  // CMAPVRT_H

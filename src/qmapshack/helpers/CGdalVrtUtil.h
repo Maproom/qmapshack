@@ -145,7 +145,7 @@ class CGdalVrtUtil {
     bool vrtHasOverviewList = false;
     /// true for single-band palette/gray data; selects nearest-neighbour resampling
     /// instead of average to avoid blending palette index values
-    bool isCategorical = false;
+    bool isPaletteIndexed = false;
     /// rough *uncompressed* size of the overview pyramid to build, in bytes; an infinite
     /// decimation pyramid sums to 1/3 of the base layer (1/4+1/16+1/64+... = 1/3);
     /// actual on-disk size is typically smaller thanks to DEFLATE compression
@@ -157,7 +157,7 @@ class CGdalVrtUtil {
      @param dataset      the (pre-warp) dataset, as just opened from filename
      @param band         dataset's band 1
      @param filename     the path passed to CDemVRT's/CMapVRT's constructor
-     @param isCategorical true for single-band palette/gray data (selects nearest
+     @param isPaletteIndexed true for single-band palette/gray data (selects nearest
                           neighbour decimation instead of average, to avoid blending
                           index values)
      @param overviewFactors collectOverviewFactors()'s result for dataset; an empty
@@ -167,7 +167,7 @@ class CGdalVrtUtil {
              the relevant command(s) filled in whenever there is anything sensible to suggest
    */
   static overview_advice_t buildOverviewAdvice(GDALDataset* dataset, GDALRasterBand* band, const QString& filename,
-                                               bool isCategorical, overview_factors_t overviewFactors);
+                                               bool isPaletteIndexed, overview_factors_t overviewFactors);
 
   /**
      @brief Suggest gdaladdo overview decimation levels for a raster of the given size.
@@ -190,7 +190,7 @@ class CGdalVrtUtil {
     /// started once, right before the first ReadRaster() call of the draw()
     QElapsedTimer timer;
     /// render timeout budget for the whole draw() call
-    qint64 timeoutMs = 10000;
+    qint64 timeoutMs = 5000;
     /// set by progressCallbackWithDeadline() once timer exceeds timeoutMs; distinguishes
     /// a timeout abort from the ordinary "a fresher redraw superseded this one" abort
     bool timedOut = false;

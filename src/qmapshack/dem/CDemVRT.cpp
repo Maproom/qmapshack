@@ -111,7 +111,7 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent, bool supportsOvervie
 
     // DEM data is always single-band continuous elevation, never categorical/palette
     overviewAdvice =
-        CGdalVrtUtil::buildOverviewAdvice(dataset, pBand, filename, /*isCategorical=*/false, overviewFactors);
+        CGdalVrtUtil::buildOverviewAdvice(dataset, pBand, filename, /*isPaletteIndexed=*/false, overviewFactors);
   }
 
   noData = pBand->GetNoDataValue(&hasNoData);
@@ -433,21 +433,11 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf) {
 
     if (err != CE_None) {
       if (deadline.timedOut) {
-        // unlike an abort caused by a fresher redraw already being queued, a timeout
-        // abort leaves nothing else asking for a follow-up redraw - without one, this
-        // layer would stay blank until some unrelated event (pan/zoom) happens to
-        // trigger a full redraw, even once the underlying slowness is fixed
-        dem->emitSigCanvasUpdate();
-
         if (supportsOverviewAdvisory && !suppressOverviewAdvisory && !advisoryShownThisSession) {
-          // overviews missing entirely, or the weakest referenced file's deepest overview
-          // still isn't decimated enough for what this read needed (e.g. a mosaic of files
-          // with wildly inconsistent overview depths)
-          const qreal neededFactor = qMax(buf_scale_x, buf_scale_y);
-          if (overviewAdvice.overviewsMissing || neededFactor > overviewAdvice.weakestMaxFactor) {
-            advisoryShownThisSession = true;
-            dem->emitOverviewAdvisory(this);
-          }
+          advisoryShownThisSession = true;
+          dem->emitOverviewAdvisory(this);
+        } else if (!advisoryOpen) {
+          dem->emitSigCanvasUpdate();
         }
       }
       return;

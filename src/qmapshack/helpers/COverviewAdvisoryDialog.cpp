@@ -18,7 +18,10 @@
 
 #include "helpers/COverviewAdvisoryDialog.h"
 
+#include <QDomDocument>
 #include <QtWidgets>
+
+#include "setup/IAppSetup.h"
 
 namespace {
 constexpr qsizetype cMaxRowsShown = 10;
@@ -195,6 +198,11 @@ COverviewAdvisoryDialog::COverviewAdvisoryDialog(const QString& filename, const 
   const QString sizeEstimate = QLocale::system().formattedDataSize(advice_.estimatedOverviewBytes);
   labelSummary->setText(summaryParts.join(", ") % tr(". Estimated disk usage: %1.").arg(sizeEstimate));
 
+  shell_ = new CShell(this);
+  shell_->setVisible(false);
+  verticalLayout->insertWidget(verticalLayout->indexOf(labelSummary), shell_);
+  connect(shell_, &CShell::sigFinishedJob, this, &COverviewAdvisoryDialog::slotFixItDone);
+
   adjustSize();
 }
 
@@ -211,57 +219,179 @@ bool COverviewAdvisoryDialog::hasExistingOverviews(const QString& filePath) cons
 }
 
 void COverviewAdvisoryDialog::slotFixIt() {
-  QStringList toClean;
-  for (const QString& path : advice_.sourceFilePaths) {
-    if (hasExistingOverviews(path)) {
-      toClean << QFileInfo(path).fileName();
-    }
-  }
-  if (advice_.vrtNeedsOverviewList && advice_.vrtHasOverviewList) {
-    toClean << QFileInfo(filename_).fileName();
+  const QString gdaladdo = IAppSetup::getPlatformInstance()->findExecutable("gdaladdo");
+  if (gdaladdo.isEmpty()) {
+    QMessageBox::warning(this, tr("gdaladdo not found"),
+                         tr("Could not locate gdaladdo. Make sure the GDAL tools are installed and on PATH."));
+    return;
   }
 
-  QStringList confirmLines;
-  if (!toClean.isEmpty()) {
-    confirmLines << tr("Existing overviews will be removed and rebuilt for:");
-    for (const QString& name : toClean) {
-      confirmLines << "  • " + name;
-    }
-  }
-  if (advice_.vrtNeedsOverviewList && !advice_.vrtHasOverviewList) {
-    confirmLines << tr("The VRT file will be modified in place:");
-    confirmLines << "  • " + QFileInfo(filename_).fileName();
-  }
-
-  if (!confirmLines.isEmpty()) {
-    const int ret = QMessageBox::question(this, tr("Confirm fix"), confirmLines.join('\n') + "\n\n" + tr("Continue?"),
-                                          QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
-    if (ret != QMessageBox::Yes) {
-      return;
-    }
-  }
-
-  // placeholder — real implementation will run gdaladdo + edit VRT
-  const QString resampleAlg = advice_.isCategorical ? "nearest" : "average";
+  const QString resampleAlg = resampleAlgorithm();
   QStringList levelArgs;
   for (qint32 level : advice_.suggestedLevels) {
     levelArgs << QString::number(level);
   }
-  const QString levelStr = levelArgs.join(' ');
 
-  qDebug() << "OVR FIX: Fix it clicked for" << filename_;
+  // confirmation dialog — list all operations; highlight destructive ones in orange
+  QString confirmHtml = "<p>" + tr("The following operations will be performed:") + "</p><table>";
   for (const QString& path : advice_.sourceFilePaths) {
+    const QString name = QFileInfo(path).fileName().toHtmlEscaped();
     if (hasExistingOverviews(path)) {
-      qDebug() << "OVR FIX:  would run: gdaladdo -clean" << path;
+      confirmHtml += "<tr><td>" + name +
+                     "&nbsp;&nbsp;</td>"
+                     "<td><span style=\"color:darkorange\">" +
+                     tr("Clean + rebuild") + "</span></td></tr>";
+    } else {
+      confirmHtml += "<tr><td>" + name + "&nbsp;&nbsp;</td><td>" + tr("Build new") + "</td></tr>";
     }
-    qDebug() << "OVR FIX:  would run: gdaladdo -ro -r" << resampleAlg << "--config COMPRESS_OVERVIEW DEFLATE" << path
-             << levelStr;
   }
   if (advice_.vrtNeedsOverviewList) {
-    const QString verb = advice_.vrtHasOverviewList ? "update" : "add";
-    qDebug() << "OVR FIX:  would" << verb
-             << "<OverviewList resampling=\"" % resampleAlg % "\">" % levelStr % "</OverviewList>" << "in" << filename_;
+    const QString vrtName = QFileInfo(filename_).fileName().toHtmlEscaped();
+    if (advice_.vrtHasOverviewList) {
+      confirmHtml += "<tr><td>" + vrtName +
+                     "&nbsp;&nbsp;</td>"
+                     "<td><span style=\"color:darkorange\">" +
+                     tr("Update &lt;OverviewList&gt;") + "</span></td></tr>";
+    } else {
+      confirmHtml += "<tr><td>" + vrtName +
+                     "&nbsp;&nbsp;</td>"
+                     "<td>" +
+                     tr("Add &lt;OverviewList&gt;") + "</td></tr>";
+    }
+  }
+  confirmHtml += "</table>";
+
+  QMessageBox msgBox(this);
+  msgBox.setWindowTitle(tr("Confirm fix"));
+  msgBox.setText(confirmHtml);
+  msgBox.setTextFormat(Qt::RichText);
+  msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+  msgBox.setDefaultButton(QMessageBox::No);
+  if (msgBox.exec() != QMessageBox::Yes) {
+    return;
   }
 
-  accept();
+  // build command queue
+  QList<CShellCmd> cmds;
+  for (const QString& path : advice_.sourceFilePaths) {
+    if (hasExistingOverviews(path)) {
+      cmds << CShellCmd(gdaladdo, {"-clean", path});
+    }
+    QStringList args = {"-ro",      "-r",       resampleAlg,         "--config", "GDAL_NUM_THREADS",
+                        "ALL_CPUS", "--config", "COMPRESS_OVERVIEW", "DEFLATE",  path};
+    args += levelArgs;
+    cmds << CShellCmd(gdaladdo, args);
+  }
+
+  // switch UI to progress mode
+  labelAfterFixTitle->setVisible(false);
+  textAfterFix->setVisible(false);
+  shell_->setVisible(true);
+  shell_->setMinimumHeight(150);
+  buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
+  buttonBox->button(QDialogButtonBox::Cancel)->setText(tr("Close"));
+  adjustSize();
+
+  jobId_ = shell_->execute(cmds);
+}
+
+void COverviewAdvisoryDialog::reject() {
+  if (isJobRunning()) {
+    close();  // routes through closeEvent(), which shows the abort confirmation
+    return;
+  }
+  QDialog::reject();
+}
+
+void COverviewAdvisoryDialog::closeEvent(QCloseEvent* e) {
+  if (isJobRunning()) {
+    const int ret = QMessageBox::question(
+        this, tr("Abort fix"), tr("Overview creation is in progress.\n\nAbort and remove any partially written files?"),
+        QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
+    if (ret != QMessageBox::Yes) {
+      e->ignore();
+      return;
+    }
+    canceling_ = true;
+    shell_->slotCancel();
+    e->ignore();
+    return;
+  }
+  QDialog::closeEvent(e);
+}
+
+void COverviewAdvisoryDialog::slotFixItDone(qint32 id) {
+  if (id != jobId_) {
+    return;
+  }
+  jobId_ = 0;
+
+  if (canceling_ || !shell_->lastJobSucceeded()) {
+    for (const QString& path : advice_.sourceFilePaths) {
+      const QString ovrPath = path + ".ovr";
+      if (QFileInfo::exists(ovrPath)) {
+        QFile::remove(ovrPath);
+        shell_->stdOut(tr("Removed %1.\n").arg(QFileInfo(ovrPath).fileName()));
+      }
+    }
+    if (canceling_) {
+      close();
+    }
+    return;
+  }
+
+  bool allGood = true;
+  if (advice_.vrtNeedsOverviewList) {
+    if (editVrtXml()) {
+      shell_->stdOut(tr("Updated %1 with <OverviewList>.\n").arg(QFileInfo(filename_).fileName()));
+    } else {
+      shell_->stdErr(tr("Failed to update %1.\n").arg(QFileInfo(filename_).fileName()));
+      allGood = false;
+    }
+  }
+
+  if (allGood) {
+    emit sigFixItDone();
+  }
+}
+
+bool COverviewAdvisoryDialog::editVrtXml() {
+  QFile file(filename_);
+  if (!file.open(QIODevice::ReadOnly)) {
+    return false;
+  }
+
+  QDomDocument doc;
+  if (!doc.setContent(&file)) {
+    file.close();
+    return false;
+  }
+  file.close();
+
+  QDomElement root = doc.documentElement();
+
+  // remove any existing <OverviewList>
+  const QDomNodeList existing = root.elementsByTagName("OverviewList");
+  for (int i = existing.count() - 1; i >= 0; --i) {
+    root.removeChild(existing.at(i));
+  }
+
+  const QString resampleAlg = resampleAlgorithm();
+  QStringList levelStrs;
+  for (qint32 level : advice_.suggestedLevels) {
+    levelStrs << QString::number(level);
+  }
+
+  QDomElement ovr = doc.createElement("OverviewList");
+  ovr.setAttribute("resampling", resampleAlg);
+  ovr.appendChild(doc.createTextNode(levelStrs.join(' ')));
+  root.insertBefore(ovr, root.firstChild());
+
+  QSaveFile saveFile(filename_);
+  if (!saveFile.open(QIODevice::WriteOnly)) {
+    return false;
+  }
+  QTextStream stream(&saveFile);
+  doc.save(stream, 2);
+  return saveFile.commit();
 }

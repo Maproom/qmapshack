@@ -55,17 +55,55 @@ CGdalVrtUtil::overview_factors_t CGdalVrtUtil::collectOverviewFactors(GDALDatase
   overview_factors_t result;
   result.weakestMaxFactor = 1;
 
+  // usePerFileFallback starts true; Branch 1 sets it false only when it confirms that
+  // the VRT's reported overviews are actually backed by data in a source file or sidecar.
+  // The fallback (Branch 2) handles both "no overviews at all" and the case where
+  // <OverviewList> is declared in the VRT XML but the source TIF has no overview data —
+  // GDAL reports GetOverviewCount() > 0 from the declaration alone, but reads then fall
+  // back to full resolution, causing the same slowness as missing overviews.
+  bool usePerFileFallback = pixelSizeX > 0;
+
   if (pBand->GetOverviewCount() != 0) {
-    QVector<qint32> fileFactors;
-    for (qint32 i = 0; i < pBand->GetOverviewCount(); ++i) {
-      const qint32 factor = qRound((qreal)pBand->GetXSize() / pBand->GetOverview(i)->GetXSize());
-      factors << factor;
-      fileFactors << factor;
+    const QString ownPath = QString::fromUtf8(dataset->GetDescription());
+    char** fileList = dataset->GetFileList();
+    // allSourcesHaveOverviews starts true; set to false as soon as any source TIF has no
+    // overview data. A VRT-level .ovr sidecar covers all tiles at once — short-circuit.
+    bool allSourcesHaveOverviews = true;
+    for (qint32 n = 0; fileList != nullptr && fileList[n] != nullptr; ++n) {
+      const QString file = QString::fromUtf8(fileList[n]);
+      if (file == ownPath) {
+        continue;
+      }
+      if (file.endsWith(".ovr", Qt::CaseInsensitive)) {
+        break;  // VRT-level sidecar covers all tiles
+      }
+      if (file.endsWith(".aux.xml", Qt::CaseInsensitive) || file.endsWith(".aux", Qt::CaseInsensitive)) {
+        continue;
+      }
+      GDALDatasetUniquePtr sub(GDALDataset::FromHandle(GDALOpen(fileList[n], GA_ReadOnly)));
+      GDALRasterBand* subBand = sub ? sub->GetRasterBand(1) : nullptr;
+      if (subBand == nullptr || subBand->GetOverviewCount() == 0) {
+        allSourcesHaveOverviews = false;
+        break;  // any source without overviews → fall through to Branch 2
+      }
     }
-    std::sort(fileFactors.begin(), fileFactors.end());
-    result.weakestMaxFactor = fileFactors.isEmpty() ? 1 : fileFactors.last();
-    result.perFileInfo << file_overview_info_t{QString::fromUtf8(dataset->GetDescription()), fileFactors};
-  } else if (pixelSizeX > 0) {
+    CSLDestroy(fileList);
+
+    if (allSourcesHaveOverviews) {
+      QVector<qint32> fileFactors;
+      for (qint32 i = 0; i < pBand->GetOverviewCount(); ++i) {
+        const qint32 factor = qRound((qreal)pBand->GetXSize() / pBand->GetOverview(i)->GetXSize());
+        factors << factor;
+        fileFactors << factor;
+      }
+      std::sort(fileFactors.begin(), fileFactors.end());
+      result.weakestMaxFactor = fileFactors.isEmpty() ? 1 : fileFactors.last();
+      result.perFileInfo << file_overview_info_t{ownPath, fileFactors};
+      usePerFileFallback = false;
+    }
+  }
+
+  if (usePerFileFallback) {
     // GDAL's own GetFileList() includes the dataset's own path (e.g. a VRT mosaic lists
     // itself first, before its referenced tiles) - skip that entry, it's the container,
     // not an independent source file, and (lacking its own overviews, or it wouldn't be
@@ -134,7 +172,7 @@ QVector<qint32> CGdalVrtUtil::suggestOverviewLevels(qint32 xsize, qint32 ysize) 
 }
 
 CGdalVrtUtil::overview_advice_t CGdalVrtUtil::buildOverviewAdvice(GDALDataset* dataset, GDALRasterBand* band,
-                                                                  const QString& filename, bool isCategorical,
+                                                                  const QString& filename, bool isPaletteIndexed,
                                                                   overview_factors_t overviewFactors) {
   overview_advice_t advice;
   advice.overviewsMissing = overviewFactors.factors.isEmpty();
@@ -157,7 +195,7 @@ CGdalVrtUtil::overview_advice_t CGdalVrtUtil::buildOverviewAdvice(GDALDataset* d
     return advice;
   }
 
-  advice.isCategorical = isCategorical;
+  advice.isPaletteIndexed = isPaletteIndexed;
 
   // derive source file list from GetFileList(), filtering out the VRT itself and sidecars
   const QString ownPath = QString::fromUtf8(dataset->GetDescription());

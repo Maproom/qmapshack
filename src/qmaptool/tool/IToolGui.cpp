@@ -18,6 +18,7 @@
 
 #include "tool/IToolGui.h"
 
+#include "CMainWindow.h"
 #include "items/CItemListWidget.h"
 #include "items/CItemMapLayer.h"
 #include "items/CItemTreeWidget.h"
@@ -65,6 +66,7 @@ void IToolGui::start(CItemTreeWidget* itemTree) {
 
   buildCmdFinal(cmds);
 
+  CMainWindow::self().makeShellVisible();
   jobId = CShell::self().execute(cmds);
 }
 
@@ -88,5 +90,6 @@ void IToolGui::start(CItemListWidget* itemList, bool allFiles) {
 
   buildCmdFinal(cmds);
 
+  CMainWindow::self().makeShellVisible();
   jobId = CShell::self().execute(cmds);
 }

@@ -33,6 +33,7 @@ class CMapVRT;
 class CGrid;
 class CDemDraw;
 class CDemVRT;
+class COverviewAdvisoryDialog;
 class CPoiDraw;
 class QGestureEvent;
 class CGisDraw;
@@ -232,10 +233,10 @@ class CCanvas : public QWidget {
  private:
   /// @brief Shared implementation behind slotShowDemOverviewAdvisory()/slotShowMapOverviewAdvisory():
   /// only the source type differs between CDemVRT/CMapVRT, both of which expose the
-  /// identical getFilename()/getOverviewAdvice()/slotSetSuppressOverviewAdvisory(bool) the
+  /// identical getFilename()/getOverviewAdvice()/setSuppressOverviewAdvisory(bool) the
   /// dialog needs.
   template <class T>
-  void showOverviewAdvisory(QPointer<T> source);
+  COverviewAdvisoryDialog* showOverviewAdvisory(QPointer<T> source);
 
   static QString generateKey(int count);
   void drawStatusMessages(QPainter& p);

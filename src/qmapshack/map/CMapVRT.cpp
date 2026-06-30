@@ -492,23 +492,12 @@ void CMapVRT::draw(IDrawContext::buffer_t& buf) /* override */
     if (!img.isNull()) {
       drawSourceImage(p, window, img);
     } else if (deadline.timedOut) {
-      // unlike an abort caused by a fresher redraw already being queued, a timeout abort
-      // leaves nothing else asking for a follow-up redraw - without one, this layer would
-      // stay blank until some unrelated event (pan/zoom) happens to trigger a full
-      // redraw, even once the underlying slowness is fixed
-      map->emitSigCanvasUpdate();
-
       if (!suppressOverviewAdvisory && !advisoryShownThisSession) {
-        // overviews missing entirely, or the weakest referenced file's deepest overview
-        // still isn't decimated enough for what this read needed (e.g. a mosaic of files
-        // with wildly inconsistent overview depths) - reuse computeSourceWindow()'s own
-        // (already-clamped) decimation factors rather than recomputing them, so this
-        // matches exactly what the read itself just asked for
-        const qreal neededFactor = qMax(window.bufScaleX, window.bufScaleY);
-        if (overviewAdvice.overviewsMissing || neededFactor > overviewAdvice.weakestMaxFactor) {
-          advisoryShownThisSession = true;
-          map->emitOverviewAdvisory(this);
-        }
+        advisoryShownThisSession = true;
+        map->emitOverviewAdvisory(this);
+        
+      } else if (!advisoryOpen) {
+        map->emitSigCanvasUpdate();
       }
     }
   }

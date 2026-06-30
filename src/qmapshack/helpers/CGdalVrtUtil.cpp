@@ -152,48 +152,36 @@ CGdalVrtUtil::overview_advice_t CGdalVrtUtil::buildOverviewAdvice(GDALDataset* d
             [&](const file_overview_info_t& a, const file_overview_info_t& b) { return maxFactor(a) < maxFactor(b); });
   advice.perFileInfo = std::move(overviewFactors.perFileInfo);
 
-  const QVector<qint32> levels = suggestOverviewLevels(band->GetXSize(), band->GetYSize());
-  if (levels.isEmpty()) {
-    // already smaller than one tile - nothing sensible to suggest
+  advice.suggestedLevels = suggestOverviewLevels(band->GetXSize(), band->GetYSize());
+  if (advice.suggestedLevels.isEmpty()) {
     return advice;
   }
 
-  const QString resampleAlg = isCategorical ? "nearest" : "average";
-  QStringList levelArgs;
-  for (qint32 level : levels) {
-    levelArgs << QString::number(level);
-  }
+  advice.isCategorical = isCategorical;
 
-  auto gdaladdoCommand = [&](const QString& path) {
-    return QString("gdaladdo -ro -r %1 --config COMPRESS_OVERVIEW DEFLATE \"%2\" %3")
-        .arg(resampleAlg, path, levelArgs.join(' '));
-  };
-
-  // collectOverviewFactors() already enumerated dataset's referenced files (to inspect
-  // their overviews) and left the result in advice.perFileInfo above - reuse that instead
-  // of calling GetFileList() a second time
-  QStringList sourceFiles;
-  for (const file_overview_info_t& info : advice.perFileInfo) {
-    if (info.path != filename && !sourceFiles.contains(info.path)) {
-      sourceFiles << info.path;
+  // derive source file list from GetFileList(), filtering out the VRT itself and sidecars
+  const QString ownPath = QString::fromUtf8(dataset->GetDescription());
+  char** fileList = dataset->GetFileList();
+  for (qint32 n = 0; fileList != nullptr && fileList[n] != nullptr; ++n) {
+    const QString file = QString::fromUtf8(fileList[n]);
+    if (file == filename || file == ownPath) {
+      continue;
+    }
+    if (file.endsWith(".ovr", Qt::CaseInsensitive) || file.endsWith(".aux.xml", Qt::CaseInsensitive) ||
+        file.endsWith(".aux", Qt::CaseInsensitive)) {
+      continue;
+    }
+    if (!advice.sourceFilePaths.contains(file)) {
+      advice.sourceFilePaths << file;
     }
   }
-
-  if (sourceFiles.isEmpty()) {
-    // filename is a plain file, not a multi-file container - one command targeting itself
-    advice.filesCommand = gdaladdoCommand(filename);
-  } else {
-    advice.vrtCommand = gdaladdoCommand(filename);
-
-    // one standalone command per line rather than a shell for-loop: pastes and runs
-    // unmodified in bash/zsh/sh, cmd.exe and PowerShell alike, with no platform-specific
-    // loop syntax to get right
-    QStringList commands;
-    for (const QString& file : sourceFiles) {
-      commands << gdaladdoCommand(file);
-    }
-    advice.filesCommand = commands.join('\n');
+  CSLDestroy(fileList);
+  if (advice.sourceFilePaths.isEmpty()) {
+    advice.sourceFilePaths << filename;
   }
+
+  advice.vrtNeedsOverviewList = filename.endsWith(".vrt", Qt::CaseInsensitive);
+  advice.vrtHasOverviewList = band->GetOverviewCount() > 0;
 
   return advice;
 }

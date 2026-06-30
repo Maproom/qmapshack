@@ -21,6 +21,7 @@
 
 #include <QElapsedTimer>
 #include <QString>
+#include <QStringList>
 #include <QVector>
 
 class GDALDataset;
@@ -112,43 +113,42 @@ class CGdalVrtUtil {
   static int progressCallback(double dfComplete, const char* message, void* pProgressArg);
 
   /**
-     @brief Advisory info on whether/how to add overviews to a slow-reading dataset.
-
-     Both commands always add `-ro` (never alter the original file(s)) and
-     `--config COMPRESS_OVERVIEW DEFLATE` (safe, lossless). vrtCommand and filesCommand
-     are mutually exclusive with the single-file case: a plain (non-container) file only
-     ever fills filesCommand, targeting itself. They are filled in whenever there is
-     anything sensible to suggest at all (see buildOverviewAdvice()), regardless of
-     overviewsMissing - callers decide whether to act on them per-draw(), since whether
-     the *existing* overviews are deep enough depends on what that particular read needed.
+     @brief Advisory info describing the current overview situation and what needs to be
+            done to fix slow rendering. Populated by buildOverviewAdvice() and consumed
+            by draw() (to decide when to fire the advisory) and COverviewAdvisoryDialog
+            (to populate the situation and fix tables).
    */
   struct overview_advice_t {
-    /// true if neither the dataset nor any file it references has overviews yet - always
-    /// the "fixable by adding overviews" case
+    /// true if neither the dataset nor any file it references has overviews yet
     bool overviewsMissing = false;
     /// the weakest referenced file's own deepest overview factor (see
     /// overview_factors_t::weakestMaxFactor); even when overviewsMissing is false, a
     /// draw() that needs more decimation than this is still hitting an inadequately
     /// prepared file and the advisory still applies
     qint32 weakestMaxFactor = 1;
-    /// per-file breakdown (overview_factors_t::perFileInfo), sorted weakest-first; only
-    /// meaningful (and only worth tabling in the dialog) when overviewsMissing is false -
-    /// if it's true every entry is trivially maxFactor == 1
+    /// per-file breakdown (overview_factors_t::perFileInfo), sorted weakest-first;
+    /// for Branch 1 (dataset reports own overviews) this is a single entry for the
+    /// dataset itself; for Branch 2 (per-file probe) one entry per source file
     QVector<file_overview_info_t> perFileInfo;
-    /// gdaladdo command targeting the container file itself (e.g. a .vrt mosaic); empty
-    /// if filename is not itself a multi-file container
-    QString vrtCommand;
-    /// gdaladdo command(s) targeting the distinct underlying source file(s): a single
-    /// command if filename is a plain file, one full standalone command per line (no
-    /// shell loop construct, so it pastes/runs unmodified in any shell on any OS) if it
-    /// is a multi-file container
-    QString filesCommand;
-    /// rough *uncompressed* size of the overview pyramid these commands would add, in
-    /// bytes; an infinite decimation pyramid sums to 1/3 of the base layer's own size
-    /// (1/4 + 1/16 + 1/64 + ... converges to 1/3), and truncating it at suggestOverviewLevels()'s
-    /// stopping point changes that negligibly for any raster with more than a couple of
-    /// levels. Actual on-disk size is usually smaller thanks to DEFLATE compression -
-    /// this is the size before that, a safe upper bound to warn the user with.
+    /// target overview decimation levels (from suggestOverviewLevels()) — what the fix
+    /// will build and what <OverviewList> will declare
+    QVector<qint32> suggestedLevels;
+    /// source files gdaladdo will run on; derived from GetFileList() with .ovr/.aux.xml
+    /// sidecars filtered out; falls back to filename itself for plain (non-VRT) rasters
+    QStringList sourceFilePaths;
+    /// true when the VRT file needs <OverviewList> added (Branch 2) or updated (Branch 1
+    /// with shallow overviews); false for plain rasters
+    bool vrtNeedsOverviewList = false;
+    /// true when the dataset already reports overviews directly (Branch 1 - it has an
+    /// <OverviewList> or a .vrt.ovr sidecar); used to distinguish "add" from "update"
+    /// and to infer that source files already have overviews (→ "replace existing")
+    bool vrtHasOverviewList = false;
+    /// true for single-band palette/gray data; selects nearest-neighbour resampling
+    /// instead of average to avoid blending palette index values
+    bool isCategorical = false;
+    /// rough *uncompressed* size of the overview pyramid to build, in bytes; an infinite
+    /// decimation pyramid sums to 1/3 of the base layer (1/4+1/16+1/64+... = 1/3);
+    /// actual on-disk size is typically smaller thanks to DEFLATE compression
     qint64 estimatedOverviewBytes = 0;
   };
 

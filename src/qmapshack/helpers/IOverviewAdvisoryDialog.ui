@@ -6,77 +6,52 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>760</width>
-    <height>640</height>
+    <width>435</width>
+    <height>560</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Slow rendering...</string>
+   <string>Slow rendering — overview pyramids</string>
+  </property>
+  <property name="sizeGripEnabled">
+   <bool>true</bool>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QLabel" name="labelMessage">
+    <widget class="QLabel" name="labelCurrentTitle">
      <property name="text">
-      <string>TextLabel</string>
-     </property>
-     <property name="wordWrap">
-      <bool>true</bool>
+      <string>&lt;b&gt;Current overview situation:&lt;/b&gt;</string>
      </property>
     </widget>
    </item>
    <item>
-    <widget class="QLabel" name="labelFileOverviews">
-     <property name="textFormat">
-      <enum>Qt::RichText</enum>
+    <widget class="QTextBrowser" name="textCurrent">
+     <property name="openLinks">
+      <bool>false</bool>
      </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="labelAfterFixTitle">
+     <property name="text">
+      <string>&lt;b&gt;After fix:&lt;/b&gt;</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QTextBrowser" name="textAfterFix">
+     <property name="openLinks">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="labelSummary">
      <property name="text">
       <string/>
      </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QLabel" name="labelVrtCommand">
-     <property name="text">
-      <string>Build overviews on the VRT file:</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QPlainTextEdit" name="plainTextVrtCommand">
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>70</height>
-      </size>
-     </property>
-     <property name="readOnly">
+     <property name="wordWrap">
       <bool>true</bool>
-     </property>
-     <property name="maximumBlockCount">
-      <number>0</number>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QLabel" name="labelFilesCommand">
-     <property name="text">
-      <string>Build overviews on the underlying source file(s):</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QPlainTextEdit" name="plainTextFilesCommand">
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>110</height>
-      </size>
-     </property>
-     <property name="readOnly">
-      <bool>true</bool>
-     </property>
-     <property name="maximumBlockCount">
-      <number>0</number>
      </property>
     </widget>
    </item>
@@ -90,10 +65,10 @@
    <item>
     <widget class="QDialogButtonBox" name="buttonBox">
      <property name="orientation">
-      <enum>Qt::Horizontal</enum>
+      <enum>Qt::Orientation::Horizontal</enum>
      </property>
      <property name="standardButtons">
-      <set>QDialogButtonBox::Ok</set>
+      <set>QDialogButtonBox::StandardButton::Cancel|QDialogButtonBox::StandardButton::Ok</set>
      </property>
     </widget>
    </item>
@@ -103,15 +78,19 @@
  <connections>
   <connection>
    <sender>buttonBox</sender>
-   <signal>accepted()</signal>
-   <receiver>IOverviewAdvisoryDialog</receiver>
-   <slot>accept()</slot>
-  </connection>
-  <connection>
-   <sender>buttonBox</sender>
    <signal>rejected()</signal>
    <receiver>IOverviewAdvisoryDialog</receiver>
    <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
   </connection>
  </connections>
 </ui>

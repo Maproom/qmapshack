@@ -389,9 +389,37 @@ the situation and provides buttons to fix it.
 - Per-file suppression of the warning, persisted
 - Confirmation before destroying/clearing existing overviews
 
-**Current plan — phase 1 (in progress):**
-Improve the situation analysis in `CDemVRT` constructor by expanding the "OVR:" debug
-output, verify each test case behaves as expected, then build on a correct foundation.
-The dialog still shows copy-pasteable commands for now; in-app execution comes later.
+**Current state (2026-06-30):**
+Dialog redesigned with two tables (current situation / after fix) and a "Fix it" button
+(placeholder debug output). `overview_advice_t` now carries `suggestedLevels`,
+`sourceFilePaths`, `vrtNeedsOverviewList`, `vrtHasOverviewList`, `isCategorical`;
+`filesCommand`/`vrtCommand` removed. `VRT_VIRTUAL_OVERVIEWS` removed from both
+`CDemVRT` and `CMapVRT` (proven useless — only `<OverviewList>` in the source VRT
+makes warped reads use source TIF overviews).
 
+**Punch list — discuss each point before implementing:**
 
+1. **DEM vs Map overview range** — `suggestOverviewLevels()` or `buildOverviewAdvice()`
+   needs a flag to cap levels for maps (ticket: maps become unreadable at outer zoom,
+   user switches them off via visibility settings; full pyramid only makes sense for DEMs).
+
+2. **Implement "Fix it"** — replace debug output in `COverviewAdvisoryDialog::slotFixIt()`
+   with actual `QProcess`-based gdaladdo execution and VRT XML editing
+   (`<OverviewList>` insertion/update). Architecture: `IToolShell`/`CShell` or embedded
+   progress dialog — decide before implementing.
+
+3. **Reload after fix** — after successful execution, trigger reload of the DEM/map so
+   new overviews are picked up immediately without restarting QMapShack.
+
+4. **Per-file suppression persisted** — `suppressOverviewAdvisory` flag exists in
+   `CDemVRT`/`CMapVRT` but is in-memory only; needs `QSettings` save/restore.
+
+5. **Orange badge in the tree** — proactive indicator before a render stall; fires on
+   load when the advisory would fire, not only after a timeout.
+
+6. **Branch 1 source file breakdown in table 1** — currently table 1 for Branch 1 VRTs
+   shows only the VRT's effective levels (one row), not individual source TIF levels.
+   Could probe source files via `GetFileList()` + `GDALOpen` for a fuller picture.
+
+7. **CMapVRT dialog wiring** — verify advisory dialog shows correctly for map VRTs
+   (same code path, just needs testing with a real map VRT).

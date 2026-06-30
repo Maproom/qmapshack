@@ -25,10 +25,10 @@
 #include "ui_IOverviewAdvisoryDialog.h"
 
 /**
-   @brief Advisory dialog shown when CDemVRT's/CMapVRT's render times out while overviews
-          are missing or inadequate for the dataset - explains the problem and offers
-          copy-pasteable gdaladdo commands (see CGdalVrtUtil::buildOverviewAdvice()) to
-          fix it.
+   @brief Advisory dialog shown when CDemVRT/CMapVRT render times out due to missing or
+          inadequate overview pyramids. Shows a "current situation" table with per-file
+          overview state and an "after fix" table describing what will be done. A "Fix it"
+          button will run the fix in-app (currently placeholder debug output).
 
    Non-modal: the caller shows it with show(), not exec(), and it deletes itself on close
    (Qt::WA_DeleteOnClose).
@@ -37,19 +37,23 @@ class COverviewAdvisoryDialog : public QDialog, private Ui::IOverviewAdvisoryDia
   Q_OBJECT
  public:
   /**
-     @param filename the slow file's path, shown in the explanatory message
-     @param advice   CDemVRT::getOverviewAdvice()/CMapVRT::getOverviewAdvice()'s cached
-                     result for filename; overviewsMissing picks the wording of the
-                     explanatory message, perFileInfo populates the table (only shown
-                     when overviewsMissing is false - if true every entry is trivially
-                     "no overview"), and vrtCommand/filesCommand fill the two command
-                     sections (each hidden if empty)
+     @param filename the slow file's path
+     @param advice   buildOverviewAdvice()'s result for filename
      @param parent   passed straight to QDialog
    */
   COverviewAdvisoryDialog(const QString& filename, const CGdalVrtUtil::overview_advice_t& advice, QWidget* parent);
 
   /// @brief True if the user checked "don't show this again for this file."
   bool suppressChecked() const { return checkSuppressAdvisory->isChecked(); }
+
+ private slots:
+  void slotFixIt();
+
+ private:
+  bool hasExistingOverviews(const QString& filePath) const;
+
+  QString filename_;
+  CGdalVrtUtil::overview_advice_t advice_;
 };
 
 #endif  // COVERVIEWADVISORYDIALOG_H

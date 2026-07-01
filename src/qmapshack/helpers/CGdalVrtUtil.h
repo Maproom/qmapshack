@@ -172,10 +172,11 @@ class CGdalVrtUtil {
   /**
      @brief Suggest gdaladdo overview decimation levels for a raster of the given size.
 
-     Doubles from 2 until the smallest overview would be about one tile (256px) across,
-     the standard "stop once an overview is about as small as a single tile" heuristic.
+     Doubles from 2 until the overview would be smaller than the primary screen's longest
+     dimension — overviews smaller than the screen are never useful (they would be upscaled).
+     Falls back to 1920px if no screen is available.
      @return sorted decimation factors, e.g. {2, 4, 8, 16}; empty if the raster is
-             already smaller than one tile
+             already smaller than the screen
    */
   static QVector<qint32> suggestOverviewLevels(qint32 xsize, qint32 ysize);
 

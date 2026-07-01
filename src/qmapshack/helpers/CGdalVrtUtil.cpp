@@ -22,6 +22,8 @@
 #include <gdal_priv.h>
 
 #include <QFileInfo>
+#include <QGuiApplication>
+#include <QScreen>
 #include <QSet>
 #include <QStringList>
 #include <algorithm>
@@ -162,9 +164,11 @@ int CGdalVrtUtil::progressCallback(double /*dfComplete*/, const char* /*message*
 }
 
 QVector<qint32> CGdalVrtUtil::suggestOverviewLevels(qint32 xsize, qint32 ysize) {
+  const QScreen* screen = QGuiApplication::primaryScreen();
+  const qint32 screenSize = screen ? qMax(screen->size().width(), screen->size().height()) : 1920;
   QVector<qint32> levels;
   qint32 factor = 2;
-  while (qMax(xsize, ysize) / factor > 256) {
+  while (qMax(xsize, ysize) / factor > screenSize) {
     levels << factor;
     factor *= 2;
   }

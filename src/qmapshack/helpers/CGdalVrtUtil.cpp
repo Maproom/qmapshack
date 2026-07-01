@@ -70,7 +70,10 @@ CGdalVrtUtil::overview_factors_t CGdalVrtUtil::collectOverviewFactors(GDALDatase
     char** fileList = dataset->GetFileList();
     // allSourcesHaveOverviews starts true; set to false as soon as any source TIF has no
     // overview data. A VRT-level .ovr sidecar covers all tiles at once — short-circuit.
+    // sourceInfo accumulates per-file factors in the same pass; moved to result.perFileInfo
+    // only when the check succeeds.
     bool allSourcesHaveOverviews = true;
+    QVector<file_overview_info_t> sourceInfo;
     for (qint32 n = 0; fileList != nullptr && fileList[n] != nullptr; ++n) {
       const QString file = QString::fromUtf8(fileList[n]);
       if (file == ownPath) {
@@ -88,19 +91,34 @@ CGdalVrtUtil::overview_factors_t CGdalVrtUtil::collectOverviewFactors(GDALDatase
         allSourcesHaveOverviews = false;
         break;  // any source without overviews → fall through to Branch 2
       }
+      QVector<qint32> fileFactors;
+      qreal subGeoTransform[6];
+      if (pixelSizeX > 0 && sub->GetGeoTransform(subGeoTransform) == CE_None) {
+        const qreal subPixelSizeX = qAbs(subGeoTransform[1]);
+        for (qint32 i = 0; i < subBand->GetOverviewCount(); ++i) {
+          const qreal ovPixelSizeX = subPixelSizeX * subBand->GetXSize() / subBand->GetOverview(i)->GetXSize();
+          fileFactors << qRound(ovPixelSizeX / pixelSizeX);
+        }
+        std::sort(fileFactors.begin(), fileFactors.end());
+      }
+      sourceInfo << file_overview_info_t{file, fileFactors};
     }
     CSLDestroy(fileList);
 
     if (allSourcesHaveOverviews) {
-      QVector<qint32> fileFactors;
+      QVector<qint32> vrtFactors;
       for (qint32 i = 0; i < pBand->GetOverviewCount(); ++i) {
         const qint32 factor = qRound((qreal)pBand->GetXSize() / pBand->GetOverview(i)->GetXSize());
         factors << factor;
-        fileFactors << factor;
+        vrtFactors << factor;
       }
-      std::sort(fileFactors.begin(), fileFactors.end());
-      result.weakestMaxFactor = fileFactors.isEmpty() ? 1 : fileFactors.last();
-      result.perFileInfo << file_overview_info_t{ownPath, fileFactors};
+      std::sort(vrtFactors.begin(), vrtFactors.end());
+      result.weakestMaxFactor = vrtFactors.isEmpty() ? 1 : vrtFactors.last();
+      if (sourceInfo.isEmpty()) {
+        result.perFileInfo << file_overview_info_t{ownPath, vrtFactors};
+      } else {
+        result.perFileInfo = std::move(sourceInfo);
+      }
       usePerFileFallback = false;
     }
   }

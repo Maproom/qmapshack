@@ -288,6 +288,13 @@ bool CDemItem::showsOverviewWarning() const {
   return demfile->showsOverviewWarning();
 }
 
+bool CDemItem::hasOverviewInfo() const {
+  if (status != eStatus::Active || demfile.isNull()) {
+    return false;
+  }
+  return demfile->hasOverviewInfo();
+}
+
 void CDemItem::triggerOverviewAdvisory() {
   if (status != eStatus::Active || demfile.isNull()) {
     return;

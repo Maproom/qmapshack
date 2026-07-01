@@ -135,6 +135,7 @@ class CDemVRT : public IDem {
   bool showsOverviewWarning() const override {
     return supportsOverviewAdvisory && !suppressOverviewAdvisory && overviewAdvice.needsAttention();
   }
+  bool hasOverviewInfo() const override { return supportsOverviewAdvisory; }
 
  private slots:
   /// Cancel any shading work still queued/running for a draw() call that is now stale.

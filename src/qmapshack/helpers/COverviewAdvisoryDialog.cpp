@@ -203,6 +203,19 @@ COverviewAdvisoryDialog::COverviewAdvisoryDialog(const QString& filename, const 
   verticalLayout->insertWidget(verticalLayout->indexOf(labelSummary), shell_);
   connect(shell_, &CShell::sigFinishedJob, this, &COverviewAdvisoryDialog::slotFixItDone);
 
+  // Opened on demand (context menu) for a file with nothing to fix: show only the
+  // current-situation table, not the fix-it machinery that would otherwise invite
+  // rebuilding overviews that are already fine.
+  if (!advice_.needsAttention()) {
+    setWindowTitle(tr("Overview info"));
+    labelAfterFixTitle->setVisible(false);
+    textAfterFix->setVisible(false);
+    labelSummary->setVisible(false);
+    checkSuppressAdvisory->setVisible(false);
+    buttonBox->button(QDialogButtonBox::Ok)->setVisible(false);
+    buttonBox->button(QDialogButtonBox::Cancel)->setText(tr("Close"));
+  }
+
   adjustSize();
 }
 

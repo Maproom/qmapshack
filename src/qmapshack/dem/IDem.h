@@ -123,6 +123,13 @@ class IDem : public IDrawObject {
   virtual bool showsOverviewWarning() const { return false; }
 
   /**
+     @brief True if this DEM has overview-pyramid info available to show on demand
+            (independent of showsOverviewWarning() - available whether or not there's
+            actually anything to fix). Always false except for CDemVRT.
+   */
+  virtual bool hasOverviewInfo() const { return false; }
+
+  /**
      @brief Get the dem's setup widget.
 
      As default an instance of CDemPropSetup is used. For other setups you have

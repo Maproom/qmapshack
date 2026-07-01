@@ -71,6 +71,7 @@ class CMapVRT : public IMap {
   void setAdvisoryOpen(bool yes) { advisoryOpen = yes; }
 
   bool showsOverviewWarning() const override { return !suppressOverviewAdvisory && overviewAdvice.needsAttention(); }
+  bool hasOverviewInfo() const override { return true; }
 
  private:
   /// Close dataset and srcDataset (either may already be null, e.g. if construction

@@ -365,6 +365,16 @@ no separate detector: per-file factors are already normalized into the VRT's own
 pixel-scale units, so the existing weakest-link check already catches a mismatched
 source that falls short of target.
 
+**On-demand info (context menu):** `IMap`/`IDem`/`IMapItem` gained `hasOverviewInfo()`
+alongside `showsOverviewWarning()` - true for any active VRT-backed item regardless of
+whether it needs attention (`CMapVRT` always true; `CDemVRT` gated on
+`supportsOverviewAdvisory`). `CMapList`/`CDemList`'s "Overview Info..." context-menu
+entry (`Table.png`) reuses `triggerOverviewAdvisory()` unconditionally, opening the same
+`COverviewAdvisoryDialog`. That dialog checks `advice.needsAttention()` itself: when
+false, it hides the "after fix" table, summary and suppress-checkbox and shows a plain
+"Close" button instead of "Fix it", so browsing a healthy file's info never invites
+rebuilding overviews that are already fine.
+
 **Test fixtures** for the detection logic live outside the repo in `~/Downloads/dem/`
 and `~/Downloads/map/` (local to this machine, not portable) - each has its own
 `README.md` describing what it covers and how to reset it; that's the source of truth,

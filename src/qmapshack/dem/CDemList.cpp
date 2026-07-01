@@ -113,6 +113,7 @@ CDemList::CDemList(CCanvas* parent) : QWidget(parent), canvas(parent) {
   connect(actionMoveEnd, &QAction::triggered, this, &CDemList::slotMoveEnd);
   connect(actionRemove, &QAction::triggered, this, &CDemList::slotRemove);
   connect(actionReloadDem, &QAction::triggered, this, &CDemList::slotReloadDem);
+  connect(actionOverviewInfo, &QAction::triggered, this, &CDemList::slotOverviewInfo);
   connect(labelHelpFillMapList, &QLabel::linkActivated, &CMainWindow::self(),
           static_cast<void (CMainWindow::*)(const QString&)>(&CMainWindow::slotLinkActivated));
   connect(lineFilter, &QLineEdit::textChanged, this, &CDemList::slotFilter);
@@ -124,6 +125,8 @@ CDemList::CDemList(CCanvas* parent) : QWidget(parent), canvas(parent) {
   menu->addAction(actionMoveEnd);
   menu->addSeparator();
   menu->addAction(actionRemove);
+  menu->addSeparator();
+  menu->addAction(actionOverviewInfo);
   menu->addSeparator();
   menu->addAction(actionReloadDem);
   menu->addAction(CMainWindow::self().getDemSetupAction());
@@ -278,9 +281,17 @@ void CDemList::slotContextMenu(const QPoint& point) {
   actionMoveDown->setEnabled(itemIsSelected && (treeWidget->itemBelow(item) != 0));
   actionMoveEnd->setEnabled(itemIsSelected && (treeWidget->itemBelow(item) != 0));
   actionRemove->setVisible(itemIsSelected && item->getStatus() == IMapItem::eStatus::Missing);
+  actionOverviewInfo->setVisible(itemIsSelected && item->hasOverviewInfo());
 
   QPoint p = treeWidget->mapToGlobal(point);
   menu->exec(p);
+}
+
+void CDemList::slotOverviewInfo() {
+  CDemItem* item = dynamic_cast<CDemItem*>(treeWidget->currentItem());
+  if (item != nullptr) {
+    item->triggerOverviewAdvisory();
+  }
 }
 
 void CDemList::slotReloadDem() {

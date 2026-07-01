@@ -28,9 +28,13 @@
 
 /**
    @brief Advisory dialog shown when CDemVRT/CMapVRT render times out due to missing or
-          inadequate overview pyramids. Shows a "current situation" table with per-file
-          overview state and an "after fix" table describing what will be done. "Fix it"
-          runs gdaladdo on source files and edits <OverviewList> in the VRT in-place.
+          inadequate overview pyramids, or opened on demand via the tree's "Overview
+          Info..." context-menu entry for any active VRT. Shows a "current situation"
+          table with per-file overview state; when advice.needsAttention() is true, also
+          shows an "after fix" table and a "Fix it" button that runs gdaladdo on source
+          files and edits <OverviewList> in the VRT in-place. When false (opened on
+          demand for a file with nothing to fix), those are hidden and only the
+          current-situation table remains, with a plain "Close" button.
 
    Non-modal: the caller shows it with show(), not exec(), and it deletes itself on close
    (Qt::WA_DeleteOnClose).

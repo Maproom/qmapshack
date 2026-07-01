@@ -74,6 +74,16 @@ class IMap : public IDrawObject {
   virtual void findPOICloseBy(const QPoint&, IPoiItem&) const {}
 
   /**
+     @brief True if this map's overview pyramid needs attention (missing or too shallow)
+            and that hasn't been suppressed for this file.
+
+     Always false except for CMapVRT, where it drives the proactive warning badge in
+     CMapItemDelegate - the same underlying advice used by the reactive advisory dialog
+     that fires on a render timeout, just queried ahead of any render.
+   */
+  virtual bool showsOverviewWarning() const { return false; }
+
+  /**
      @brief Return copyright notice if any
      @return If no copyright notice has been decoded the string will be empty
    */

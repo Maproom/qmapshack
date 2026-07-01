@@ -267,6 +267,21 @@
     <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
+  <action name="actionOverviewInfo">
+   <property name="icon">
+    <iconset resource="../resources.qrc">
+     <normaloff>:/icons/32x32/Table.png</normaloff>:/icons/32x32/Table.png</iconset>
+   </property>
+   <property name="text">
+    <string>Overview Info...</string>
+   </property>
+   <property name="toolTip">
+    <string>Show overview pyramid info for this file</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>

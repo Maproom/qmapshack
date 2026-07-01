@@ -81,8 +81,16 @@ class IMapItem {
   virtual bool showsOverviewWarning() const { return false; }
 
   /**
-   * @brief Open the overview advisory dialog for this item's active data source.
-   *        No-op unless showsOverviewWarning() is true.
+   * @brief True if the item's active data source has overview-pyramid info available to
+   *        show on demand (independent of showsOverviewWarning()), driving the "Overview
+   *        Info..." context-menu entry. Always false while the item isn't Active.
+   */
+  virtual bool hasOverviewInfo() const { return false; }
+
+  /**
+   * @brief Open the overview advisory dialog for this item's active data source. No-op
+   *        unless hasOverviewInfo() is true; shows an informational read-only view when
+   *        showsOverviewWarning() is false, the full fix-it view otherwise.
    */
   virtual void triggerOverviewAdvisory() {}
 

@@ -293,6 +293,13 @@ bool CMapItem::showsOverviewWarning() const {
   return mapfile->showsOverviewWarning();
 }
 
+bool CMapItem::hasOverviewInfo() const {
+  if (status != eStatus::Active || mapfile.isNull()) {
+    return false;
+  }
+  return mapfile->hasOverviewInfo();
+}
+
 void CMapItem::triggerOverviewAdvisory() {
   if (status != eStatus::Active || mapfile.isNull()) {
     return;

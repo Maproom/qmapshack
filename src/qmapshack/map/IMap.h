@@ -84,6 +84,13 @@ class IMap : public IDrawObject {
   virtual bool showsOverviewWarning() const { return false; }
 
   /**
+     @brief True if this map has overview-pyramid info available to show on demand
+            (independent of showsOverviewWarning() - available whether or not there's
+            actually anything to fix). Always false except for CMapVRT.
+   */
+  virtual bool hasOverviewInfo() const { return false; }
+
+  /**
      @brief Return copyright notice if any
      @return If no copyright notice has been decoded the string will be empty
    */

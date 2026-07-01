@@ -131,6 +131,7 @@ class CMapItem : public QObject, public IMapItem, public QTreeWidgetItem {
   void setProcessing(bool on);
 
   bool showsOverviewWarning() const override;
+  bool hasOverviewInfo() const override;
   void triggerOverviewAdvisory() override;
 
  signals:

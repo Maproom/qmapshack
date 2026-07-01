@@ -78,18 +78,22 @@ class CMapItemDelegate : public QStyledItemDelegate {
   void initStyleOption(QStyleOptionViewItem* option, const QModelIndex& index) const override;
 
   /**
-   * @brief Paint the map-item row: icon, name, status, activate button, indicator, access-info.
+   * @brief Paint the map-item row: icon, name, status, activate button, indicator,
+   *        access-info, and (when IMapItem::showsOverviewWarning() is true) a warning
+   *        badge over the bottom-right 2/3 of the icon.
    */
   void paint(QPainter* p, const QStyleOptionViewItem& opt, const QModelIndex& index) const override;
 
   /**
-   * @brief Handle clicks on the activate/deactivate button; returns true to consume the event.
+   * @brief Handle clicks on the activate/deactivate button and the overview-warning
+   *        badge (opens the advisory dialog); returns true to consume the event.
    */
   bool editorEvent(QEvent* event, QAbstractItemModel* model, const QStyleOptionViewItem& opt,
                    const QModelIndex& index) override;
 
   /**
-   * @brief Show tooltips for the button, indicator bar, and (when truncated) the name.
+   * @brief Show tooltips for the button, indicator bar, overview-warning badge, and
+   *        (when truncated) the name.
    */
   bool helpEvent(QHelpEvent* event, QAbstractItemView* view, const QStyleOptionViewItem& opt,
                  const QModelIndex& index) override;
@@ -142,6 +146,13 @@ class CMapItemDelegate : public QStyledItemDelegate {
 
   /** @brief Compute the layout rects from @p opt.rect using CRowBuilder. */
   MapItemLayout getRectangles(const QStyleOptionViewItem& opt) const;
+
+  /**
+   * @brief The overview-warning badge's rect: a square covering the bottom-right 2/3 of
+   *        @p rectIcon, shared by paint(), editorEvent() and helpEvent() so the painted,
+   *        clickable and tooltip-hoverable areas never drift apart.
+   */
+  static QRect overviewBadgeRect(const QRect& rectIcon);
 
   struct animations_t;  // defined below; forward-declared so getAnimations() can reference it
 

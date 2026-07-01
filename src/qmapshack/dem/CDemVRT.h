@@ -132,6 +132,10 @@ class CDemVRT : public IDem {
   /// @brief Set true while the advisory dialog is open; suppresses draw retries during that time.
   void setAdvisoryOpen(bool yes) { advisoryOpen = yes; }
 
+  bool showsOverviewWarning() const override {
+    return supportsOverviewAdvisory && !suppressOverviewAdvisory && overviewAdvice.needsAttention();
+  }
+
  private slots:
   /// Cancel any shading work still queued/running for a draw() call that is now stale.
   void slotNeedsRedraw();

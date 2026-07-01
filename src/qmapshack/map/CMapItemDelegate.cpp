@@ -27,6 +27,7 @@
 #include "helpers/CDraw.h"
 #include "helpers/CRowBuilder.h"
 #include "map/IMapItem.h"
+#include "misc.h"
 
 constexpr int kFontSizeDiffItem = 2;
 
@@ -198,6 +199,11 @@ CMapItemDelegate::MapItemLayout CMapItemDelegate::getRectangles(const QStyleOpti
   return layout;
 }
 
+QRect CMapItemDelegate::overviewBadgeRect(const QRect& rectIcon) {
+  const int size = qRound(rectIcon.width() * 2.0 / 3.0);
+  return QRect(rectIcon.right() - size + 1, rectIcon.bottom() - size + 1, size, size);
+}
+
 void CMapItemDelegate::paint(QPainter* p, const QStyleOptionViewItem& opt, const QModelIndex& index) const {
   IMapItem* item = indexToItem(index);
   if (item == nullptr) {
@@ -252,6 +258,12 @@ void CMapItemDelegate::paint(QPainter* p, const QStyleOptionViewItem& opt, const
       data[keyFromIndex(index)].icon.scaled(layout.rectIcon.size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
   QIcon(icon).paint(p, layout.rectIcon);
 
+  // draw overview-warning badge over the icon, if the item's active data source needs it
+  if (item->showsOverviewWarning()) {
+    static const QIcon overviewWarningIcon(":/icons/48x48/Attention.png");
+    overviewWarningIcon.paint(p, overviewBadgeRect(layout.rectIcon));
+  }
+
   // draw tool button to activate
   CDraw::drawToolButton(p, opt, layout.rectButton,
                         isActive ? QIcon(":/icons/32x32/ShowAll.png") : QIcon(":/icons/32x32/ShowNone.png"),
@@ -281,8 +293,13 @@ bool CMapItemDelegate::editorEvent(QEvent* event, QAbstractItemModel* model, con
 
     const auto& layout = getRectangles(opt);
 
+    IMapItem* item = indexToItem(index);
+    if (item != nullptr && item->showsOverviewWarning() && overviewBadgeRect(layout.rectIcon).contains(me->pos())) {
+      item->triggerOverviewAdvisory();
+      return true;
+    }
+
     if (layout.rectButton.contains(me->pos())) {
-      IMapItem* item = indexToItem(index);
       if (item == nullptr) {
         return false;
       }
@@ -315,14 +332,19 @@ bool CMapItemDelegate::helpEvent(QHelpEvent* event, QAbstractItemView* view, con
   const bool isActive = item->getStatus() == IMapItem::eStatus::Active;
   const auto& layout = getRectangles(opt);
 
-  if (layout.rectButton.contains(event->pos())) {
+  if (item->showsOverviewWarning() && overviewBadgeRect(layout.rectIcon).contains(event->pos())) {
+    QToolTip::showText(
+        event->globalPos(),
+        toRichText(tr("This file can be slow to draw on the map. Click here to see how to speed it up.")), view, {},
+        5000);
+  } else if (layout.rectButton.contains(event->pos())) {
     const QString& tip = isActive ? tr("Deactivate %1").arg(item->getName()) : tr("Activate %1").arg(item->getName());
-    QToolTip::showText(event->globalPos(), tip, view, {}, 3000);
+    QToolTip::showText(event->globalPos(), toRichText(tip), view, {}, 3000);
   } else if (isActive && layout.rectIndicator.contains(event->pos())) {
     const bool outOfScale = item->isOutOfScale();
     const QString& tip = outOfScale ? tr("%1 is not visible at current scale").arg(item->getName())
                                     : tr("%1 is visible at current scale").arg(item->getName());
-    QToolTip::showText(event->globalPos(), tip, view, {}, 3000);
+    QToolTip::showText(event->globalPos(), toRichText(tip), view, {}, 3000);
   } else if (layout.rectName.contains(event->pos())) {
     const QFontMetrics fm(layout.fontName);
     const QRect& boundingRectName = fm.boundingRect(item->getName());

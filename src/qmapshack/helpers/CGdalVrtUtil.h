@@ -150,6 +150,26 @@ class CGdalVrtUtil {
     /// decimation pyramid sums to 1/3 of the base layer (1/4+1/16+1/64+... = 1/3);
     /// actual on-disk size is typically smaller thanks to DEFLATE compression
     qint64 estimatedOverviewBytes = 0;
+
+    /**
+       @brief True if the overview situation is bad enough to be worth fixing: no
+              overviews anywhere, or the weakest referenced file falls short of
+              suggestedLevels' target depth. Always false when suggestedLevels is empty -
+              the raster is already smaller than the screen, so no pyramid would help
+              even if overviewsMissing is also true.
+
+       A method rather than a field baked in by buildOverviewAdvice(): callers
+       (CDemVRT/CMapVRT) rescale weakestMaxFactor into the final warped dataset's pixel
+       grid *after* buildOverviewAdvice() returns, so precomputing the answer early would
+       use the pre-rescale value. Evaluating on demand always sees the current
+       weakestMaxFactor, whichever point after construction it's called from.
+     */
+    bool needsAttention() const {
+      if (suggestedLevels.isEmpty()) {
+        return false;
+      }
+      return overviewsMissing || weakestMaxFactor < suggestedLevels.last();
+    }
   };
 
   /**

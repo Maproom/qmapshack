@@ -310,11 +310,17 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer">
     <path
-       style="fill:#ffff00;stroke:#b3b3b3;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 5,54 H 55 L 30,9 Z"
+       style="fill:none;stroke:#ffffff;stroke-width:11;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 11,54 L 49,54 Q 55,54 52.087,48.756 L 32.913,14.244 Q 30,9 27.087,14.244 L 7.913,48.756 Q 5,54 11,54 Z"
+       id="path995-halo"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccccc" />
+    <path
+       style="fill:#ffff00;stroke:#000000;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 11,54 L 49,54 Q 55,54 52.087,48.756 L 32.913,14.244 Q 30,9 27.087,14.244 L 7.913,48.756 Q 5,54 11,54 Z"
        id="path995"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cccc" />
+       sodipodi:nodetypes="cccccccc" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:34.66666794px;line-height:1.25;font-family:'Adobe Courier';-inkscape-font-specification:'Adobe Courier Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"

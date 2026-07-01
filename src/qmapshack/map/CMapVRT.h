@@ -70,6 +70,8 @@ class CMapVRT : public IMap {
   /// @brief Set true while the advisory dialog is open; suppresses draw retries during that time.
   void setAdvisoryOpen(bool yes) { advisoryOpen = yes; }
 
+  bool showsOverviewWarning() const override { return !suppressOverviewAdvisory && overviewAdvice.needsAttention(); }
+
  private:
   /// Close dataset and srcDataset (either may already be null, e.g. if construction
   /// failed before a warped VRT was needed) and show msg in an error dialog.

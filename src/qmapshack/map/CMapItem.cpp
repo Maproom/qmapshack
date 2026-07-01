@@ -285,3 +285,19 @@ void CMapItem::slotScaleChanged(const QPointF& scale) {
     delegate->setColor(index, kColorIn);
   }
 }
+
+bool CMapItem::showsOverviewWarning() const {
+  if (status != eStatus::Active || mapfile.isNull()) {
+    return false;
+  }
+  return mapfile->showsOverviewWarning();
+}
+
+void CMapItem::triggerOverviewAdvisory() {
+  if (status != eStatus::Active || mapfile.isNull()) {
+    return;
+  }
+  if (auto* vrt = dynamic_cast<CMapVRT*>(mapfile.data())) {
+    map->emitOverviewAdvisory(vrt);
+  }
+}

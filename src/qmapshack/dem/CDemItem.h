@@ -138,6 +138,9 @@ class CDemItem : public QObject, public IMapItem, public QTreeWidgetItem {
    */
   void setProcessing(bool on);
 
+  bool showsOverviewWarning() const override;
+  void triggerOverviewAdvisory() override;
+
  signals:
   void sigChanged();
   // emitted if the tree widget item's widget was destroyed

@@ -280,3 +280,19 @@ void CDemItem::slotScaleChanged(const QPointF& scale) {
     delegate->setColor(index, kColorIn);
   }
 }
+
+bool CDemItem::showsOverviewWarning() const {
+  if (status != eStatus::Active || demfile.isNull()) {
+    return false;
+  }
+  return demfile->showsOverviewWarning();
+}
+
+void CDemItem::triggerOverviewAdvisory() {
+  if (status != eStatus::Active || demfile.isNull()) {
+    return;
+  }
+  if (auto* vrt = dynamic_cast<CDemVRT*>(demfile.data())) {
+    dem->emitOverviewAdvisory(vrt);
+  }
+}

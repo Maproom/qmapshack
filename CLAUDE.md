@@ -465,9 +465,9 @@ still take Branch 1 and are unaffected.
 
 **Punch list — discuss each point before implementing:**
 
-1. **DEM vs Map overview range** — `suggestOverviewLevels()` or `buildOverviewAdvice()`
-   needs a flag to cap levels for maps (ticket: maps become unreadable at outer zoom,
-   user switches them off via visibility settings; full pyramid only makes sense for DEMs).
+1. ~~**DEM vs Map overview range**~~ — done: `suggestOverviewLevels()` stops when the
+   decimated size drops below the primary screen's longest dimension (fallback 1920px).
+   Same rule for both DEMs and maps — overviews smaller than the screen are never used.
 
 2. ~~**Implement "Fix it"**~~ — done.
 

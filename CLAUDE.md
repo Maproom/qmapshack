@@ -356,7 +356,8 @@ assessment. Load each test VRT and grep for "OVR:" to verify behaviour.
 | `mosaic_no_overviews.vrt` | 0 | Branch 2, no factors found | Slow (no overviews at all) |
 | `mosaic_own_overviews_deep.vrt` | 7 (levels 2–128) | Branch 1 | Fast |
 | `mosaic_own_overviews_shallow.vrt` | 2 (levels 2–4) | Branch 1 | Fast at low zoom, slow at high zoom |
-| `mosaic_partial_missing_ovl.vrt` | 6 (declared via `<OverviewList>`) | Branch 1 backing check | Slow — `no_ovr/austria.tif` has no overviews; tests R5 fix |
+| `mosaic_partial_missing_ovl.vrt` | 6 (declared via `<OverviewList>`) | Branch 1 backing check → Branch 2 | Slow — `no_ovr/austria.tif` has no overviews; partial missing (S9) |
+| `mosaic_all_missing_ovl.vrt` | 6 (declared via `<OverviewList>`) | Branch 1 backing check → Branch 2 | Slow — all sources in `no_ovr/`; stale `<OverviewList>` (S8/S11) |
 | `DEM_10_Österreich.vrt` | >0 (.vrt.ovr sidecar) | Branch 1 | Fast |
 
 `mosaic_ovr_test.vrt` = `mosaic.vrt` + `<OverviewList resampling="average">2 4 8 16 32 64 128</OverviewList>`,
@@ -473,8 +474,9 @@ still take Branch 1 and are unaffected.
 
 3. ~~**Reload after fix**~~ — done: `sigFixItDone` → `setupDemPath`/`setupMapPath`.
 
-4. **Per-file suppression persisted** — `suppressOverviewAdvisory` flag exists in
-   `CDemVRT`/`CMapVRT` but is in-memory only; needs `QSettings` save/restore.
+4. ~~**Per-file suppression persisted**~~ — done: `CDemVRT::saveConfig`/`loadConfig` and
+   `CMapVRT::saveConfig`/`loadConfig` persist `suppressOverviewAdvisory` via QSettings;
+   scoped per-file through `CDemItem`/`CMapItem`'s `beginGroup(key)` call.
 
 5. **Orange badge in the tree** — proactive indicator before a render stall; fires on
    load when the advisory would fire, not only after a timeout.

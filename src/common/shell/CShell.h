@@ -25,12 +25,32 @@
 
 #include "shell/CShellCmd.h"
 
+/**
+   @brief A QTextBrowser-based widget that runs a queue of external commands (CShellCmd)
+          and echoes their stdout/stderr into itself.
+
+   Compiled into both the qmapshack and qmaptool targets (src/common/), but only
+   qmaptool's IMainWindow.ui promotes a singleton instance (isSingleton=true, the
+   default) - that's what makes self() safe there. qmapshack has no such instance;
+   COverviewAdvisoryDialog is the only place qmapshack constructs a CShell, and it does
+   so with isSingleton=false specifically so it does NOT become self(). Do not call
+   CShell::self() from qmapshack code - pSelf is never set there and self() dereferences
+   it unconditionally.
+ */
 class CShell : public QTextBrowser {
   Q_OBJECT
  public:
-  CShell(QWidget* parent);
-  virtual ~CShell() = default;
+  /// @brief Construct a shell widget.
+  /// @param parent      parent widget
+  /// @param isSingleton if true (default), this instance becomes CShell::self() - matches the
+  ///                     promoted-widget instance Qt Designer's generated IMainWindow UI
+  ///                     constructs. Pass false for any other instance (e.g. one a dialog owns)
+  ///                     that must not hijack the shared singleton.
+  CShell(QWidget* parent, bool isSingleton = true);
+  ~CShell() override;
 
+  /// @brief The app-wide singleton instance. Only ever set in qmaptool (see this class's
+  ///        doc comment) - calling this from qmapshack code dereferences a null pSelf.
   static CShell& self() { return *pSelf; }
 
   int execute(QList<CShellCmd> cmds);

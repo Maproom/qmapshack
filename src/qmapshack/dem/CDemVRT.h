@@ -124,12 +124,14 @@ class CDemVRT : public IDem {
   const CGdalVrtUtil::overview_advice_t& getOverviewAdvice() const { return overviewAdvice; }
 
   /// @brief Set by the overview advisory dialog's "don't show again for this file" checkbox.
-  void setSuppressOverviewAdvisory(bool yes) { suppressOverviewAdvisory = yes; }
+  void setSuppressOverviewAdvisory(bool yes) { advisoryState.suppress = yes; }
   /// @brief Set true while the advisory dialog is open; suppresses draw retries during that time.
-  void setAdvisoryOpen(bool yes) { advisoryOpen = yes; }
+  void setAdvisoryOpen(bool yes) { advisoryState.open = yes; }
+  /// @brief True while an advisory dialog for this file is already open; guards against opening a second one.
+  bool isAdvisoryOpen() const { return advisoryState.open; }
 
   bool showsOverviewWarning() const override {
-    return supportsOverviewAdvisory && !suppressOverviewAdvisory && overviewAdvice.needsAttention();
+    return supportsOverviewAdvisory && !advisoryState.suppress && overviewAdvice.needsAttention();
   }
   bool hasOverviewInfo() const override { return supportsOverviewAdvisory; }
 
@@ -185,18 +187,9 @@ class CDemVRT : public IDem {
   /// !supportsOverviewAdvisory); reused whenever draw() hits the render timeout.
   CGdalVrtUtil::overview_advice_t overviewAdvice;
 
-  /// Persisted via saveConfig()/loadConfig(): true once the user checked "don't show
-  /// again" for this file. Written on the GUI thread, read by draw() on the canvas
-  /// thread - atomic for the same reason as outOfScale.
-  std::atomic<bool> suppressOverviewAdvisory = false;
-
-  /// Not persisted: true once the advisory has been shown for this loaded instance, so
-  /// panning/zooming a slow file doesn't reopen the dialog on every redraw.
-  bool advisoryShownThisSession = false;
-
-  /// True (GUI thread) while the advisory dialog is open. draw() (canvas thread) skips
-  /// emitSigCanvasUpdate() retries while set, so the render thread doesn't busy-loop.
-  std::atomic<bool> advisoryOpen = false;
+  /// Suppression/session/open-dialog bookkeeping for the overview advisory; identical
+  /// shape shared with CMapVRT, see CGdalVrtUtil::overview_advisory_state_t.
+  CGdalVrtUtil::overview_advisory_state_t advisoryState;
 
   /// runs the per-chunk shading work started by draw(); cancelled by slotNeedsRedraw()
   /// when a fresher redraw has been requested

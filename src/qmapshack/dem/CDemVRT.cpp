@@ -82,26 +82,16 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent, bool supportsOvervie
     return;
   }
 
-  // dataset's own size before any reprojection below replaces it with a warped VRT;
-  // used to rescale weakestMaxFactor into the final dataset's pixel grid further down
-  const qint32 preWarpXSize = pBand->GetXSize();
-  const qint32 preWarpYSize = pBand->GetYSize();
-
   // Skipped for remote sources (CDemWCS): the per-file fallback would GDALOpen() every
   // referenced "file" against the same remote endpoint - pointless with no local files.
   // Safe to skip: overviewAdvice is only read below/in draw() when
   // supportsOverviewAdvisory is true.
   if (supportsOverviewAdvisory) {
-    qreal masterGeoTransform[6];
-    const qreal masterPixelSizeX =
-        (dataset->GetGeoTransform(masterGeoTransform) == CE_None) ? qAbs(masterGeoTransform[1]) : 0.0;
-
     const QVector<qint32> suggestedLevels = CGdalVrtUtil::suggestOverviewLevels(pBand->GetXSize(), pBand->GetYSize());
 
     // DEM data is always single-band continuous elevation, never categorical/palette.
     // buildOverviewAdvice() logs its own "OVR: ..." diagnostics as it goes.
-    overviewAdvice = CGdalVrtUtil::buildOverviewAdvice(dataset, pBand, masterPixelSizeX, /*isPaletteIndexed=*/false,
-                                                       suggestedLevels);
+    overviewAdvice = CGdalVrtUtil::buildOverviewAdvice(dataset, pBand, /*isPaletteIndexed=*/false, suggestedLevels);
   }
 
   noData = pBand->GetNoDataValue(&hasNoData);
@@ -148,20 +138,11 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent, bool supportsOvervie
   ysize_px = dataset->GetRasterYSize();
 
   if (supportsOverviewAdvisory) {
-    // A reprojection above can change the dataset's own pixel density (e.g. meters vs
-    // degrees, or a different output resolution GDAL chose). Rescale the pre-warp
-    // factors into the current pixel grid, matching what draw() compares against - a
-    // no-op when no warp happened.
-    const qreal warpScale =
-        qMax(static_cast<qreal>(xsize_px) / preWarpXSize, static_cast<qreal>(ysize_px) / preWarpYSize);
-    overviewAdvice.weakestMaxFactor = qMax(1, qRound(overviewAdvice.weakestMaxFactor * warpScale));
-    for (qint32& factor : overviewAdvice.containerFactors) {
-      factor = qRound(factor * warpScale);
-    }
-    overviewAdvice.containerFactor = qRound(overviewAdvice.containerFactor * warpScale);
-
-    qDebug() << "OVR: post-warp warpScale =" << warpScale << "containerFactor =" << overviewAdvice.containerFactor
-             << "weakestMaxFactor =" << overviewAdvice.weakestMaxFactor;
+    // overviewAdvice's factors stay in the dataset's pre-warp pixel grid - the same
+    // grid suggestedLevels was computed from above - so needsAttention() compares
+    // like with like regardless of any reprojection below. A warped VRT can change the
+    // dataset's own pixel density (e.g. meters vs degrees), but that only matters for
+    // draw()'s own decimation math, not for this real/discrete overview-factor advice.
     if (overviewAdvice.needsAttention()) {
       qDebug() << "OVR: assessment: needs attention - advisory will fire on slow render";
     } else {
@@ -228,12 +209,12 @@ CDemVRT::~CDemVRT() {
 
 void CDemVRT::saveConfig(QSettings& cfg) {
   IDem::saveConfig(cfg);
-  cfg.setValue("suppressOverviewAdvisory", suppressOverviewAdvisory.load());
+  cfg.setValue("suppressOverviewAdvisory", advisoryState.suppress.load());
 }
 
 void CDemVRT::loadConfig(QSettings& cfg) {
   IDem::loadConfig(cfg);
-  suppressOverviewAdvisory = cfg.value("suppressOverviewAdvisory", suppressOverviewAdvisory.load()).toBool();
+  advisoryState.suppress = cfg.value("suppressOverviewAdvisory", advisoryState.suppress.load()).toBool();
 }
 
 void CDemVRT::slotNeedsRedraw() { threadPool.clear(); }
@@ -421,12 +402,8 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf) {
 
     if (err != CE_None) {
       if (deadline.timedOut) {
-        if (supportsOverviewAdvisory && !suppressOverviewAdvisory && !advisoryShownThisSession) {
-          advisoryShownThisSession = true;
-          dem->emitOverviewAdvisory(this);
-        } else if (!advisoryOpen) {
-          dem->emitSigCanvasUpdate();
-        }
+        CGdalVrtUtil::handleRenderTimeout(dem, this, supportsOverviewAdvisory && !advisoryState.suppress,
+                                          advisoryState);
       }
       return;
     }

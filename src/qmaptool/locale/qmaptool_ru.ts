@@ -540,47 +540,47 @@ is not a valid coordinate system definition:
 <context>
     <name>CShell</name>
     <message>
-        <location filename="../shell/CShell.cpp" line="40"/>
+        <location filename="../../common/shell/CShell.cpp" line="38"/>
         <source>Execution of external program `%1` failed: </source>
         <translation>Не удалось выполнить внешнюю программу `%1`: </translation>
     </message>
     <message>
-        <location filename="../shell/CShell.cpp" line="43"/>
+        <location filename="../../common/shell/CShell.cpp" line="41"/>
         <source>Process cannot be started.
 </source>
         <translation>Процесс не может быть запущен.
 </translation>
     </message>
     <message>
-        <location filename="../shell/CShell.cpp" line="44"/>
+        <location filename="../../common/shell/CShell.cpp" line="42"/>
         <source>Make sure the required packages are installed, `%1` exists and is executable.
 </source>
         <translation>Убедитесь, что необходимые пакеты установлены, `%1` существует и является исполняемым.
 </translation>
     </message>
     <message>
-        <location filename="../shell/CShell.cpp" line="49"/>
+        <location filename="../../common/shell/CShell.cpp" line="51"/>
         <source>External process crashed.
 </source>
         <translation>Сбой внешнего процесса.
 </translation>
     </message>
     <message>
-        <location filename="../shell/CShell.cpp" line="53"/>
+        <location filename="../../common/shell/CShell.cpp" line="55"/>
         <source>An unknown error occurred.
 </source>
         <translation>Произошла неизвестная ошибка.
 </translation>
     </message>
     <message>
-        <location filename="../shell/CShell.cpp" line="130"/>
+        <location filename="../../common/shell/CShell.cpp" line="133"/>
         <source>!!! failed !!!
 </source>
         <translation>!!! Не удалось !!!
 </translation>
     </message>
     <message>
-        <location filename="../shell/CShell.cpp" line="143"/>
+        <location filename="../../common/shell/CShell.cpp" line="146"/>
         <source>
 Canceled by user&apos;s request.
 </source>
@@ -589,7 +589,7 @@ Canceled by user&apos;s request.
 </translation>
     </message>
     <message>
-        <location filename="../shell/CShell.cpp" line="168"/>
+        <location filename="../../common/shell/CShell.cpp" line="170"/>
         <source>!!! done !!!
 </source>
         <translation>!!!Сделано!!!

@@ -66,15 +66,11 @@ class CDemVRT : public IDem {
      @param filename path of a file GDAL can open as a single-band raster
      @param parent    the owning CDemDraw, forwarded to IDem
      @param supportsOverviewAdvisory false for remote sources (CDemWCS): skips collecting
-                       overview-advisory info entirely, not just showing the dialog for
-                       it, since collectOverviewFactors()'s per-file fallback calls
-                       GetFileList() then GDALOpen() on every referenced "file" -
-                       meaningless for a source with no local files to inspect. Must be a
-                       constructor parameter, not a virtual method CDemWCS overrides: a
-                       virtual call made while CDemVRT's own constructor is still running
-                       always resolves to CDemVRT's own implementation, never a derived
-                       override, since the derived part of the object hasn't been
-                       constructed yet.
+                       overview-advisory info entirely, not just the dialog - the
+                       per-file fallback would otherwise GDALOpen() every referenced
+                       "file", pointless for a source with no local files. Passed to
+                       the constructor rather than a virtual method: virtual calls
+                       during construction never reach a derived override.
    */
   CDemVRT(const QString& filename, CDemDraw* parent, bool supportsOverviewAdvisory = true);
 
@@ -181,30 +177,25 @@ class CDemVRT : public IDem {
   /// queries outside dataset coverage before touching GDAL
   QRectF boundingBox;
 
-  /// false for remote sources (CDemWCS, via the constructor parameter of the same name) -
-  /// set once at construction, never changes, so draw() can read it directly instead of
-  /// through a virtual call (see the constructor's doc comment for why it has to be a
-  /// constructor parameter rather than a virtual method)
+  /// False for remote sources (CDemWCS) - set once at construction; see the
+  /// constructor's doc comment for why this can't be a virtual method instead.
   const bool supportsOverviewAdvisory;
 
-  /// suggested gdaladdo command(s), computed once at construction from the dataset's own
-  /// characteristics (skipped entirely when !supportsOverviewAdvisory); reused (never
-  /// re-derived) whenever draw() hits the render timeout
+  /// Suggested gdaladdo command(s), computed once at construction (skipped when
+  /// !supportsOverviewAdvisory); reused whenever draw() hits the render timeout.
   CGdalVrtUtil::overview_advice_t overviewAdvice;
 
-  /// persisted via saveConfig()/loadConfig(): true once the user checked "don't show
-  /// again" on the overview advisory dialog for this file. Written by
-  /// setSuppressOverviewAdvisory()/loadConfig() (GUI thread), read by draw() (canvas
-  /// thread) - atomic for the same reason as outOfScale above.
+  /// Persisted via saveConfig()/loadConfig(): true once the user checked "don't show
+  /// again" for this file. Written on the GUI thread, read by draw() on the canvas
+  /// thread - atomic for the same reason as outOfScale.
   std::atomic<bool> suppressOverviewAdvisory = false;
 
-  /// not persisted: true once the advisory has been shown for this loaded instance, so
-  /// panning/zooming a slow file doesn't reopen the dialog on every redraw
+  /// Not persisted: true once the advisory has been shown for this loaded instance, so
+  /// panning/zooming a slow file doesn't reopen the dialog on every redraw.
   bool advisoryShownThisSession = false;
 
-  /// set true (GUI thread) while the advisory dialog is open, cleared when it closes;
-  /// draw() (canvas thread) skips emitSigCanvasUpdate() retries while this is set so
-  /// animations stop and the render thread doesn't busyloop during the dialog
+  /// True (GUI thread) while the advisory dialog is open. draw() (canvas thread) skips
+  /// emitSigCanvasUpdate() retries while set, so the render thread doesn't busy-loop.
   std::atomic<bool> advisoryOpen = false;
 
   /// runs the per-chunk shading work started by draw(); cancelled by slotNeedsRedraw()

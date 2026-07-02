@@ -219,12 +219,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="1083"/>
+        <location filename="../canvas/CCanvas.cpp" line="1097"/>
         <source>Map Projection...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="1084"/>
+        <location filename="../canvas/CCanvas.cpp" line="1098"/>
         <source>Failed to setup map projection. Please configure a valid projection.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -254,7 +254,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="1034"/>
+        <location filename="../canvas/CCanvas.cpp" line="1048"/>
         <source>Setup Map Background</source>
         <translation type="unfinished"></translation>
     </message>
@@ -558,9 +558,9 @@ To solve this conflict you can create and save a clone, force your version or dr
         <location filename="../dem/CDemVRT.cpp" line="58"/>
         <location filename="../dem/CDemVRT.cpp" line="66"/>
         <location filename="../dem/CDemVRT.cpp" line="80"/>
-        <location filename="../dem/CDemVRT.cpp" line="131"/>
-        <location filename="../dem/CDemVRT.cpp" line="153"/>
-        <location filename="../dem/CDemVRT.cpp" line="178"/>
+        <location filename="../dem/CDemVRT.cpp" line="130"/>
+        <location filename="../dem/CDemVRT.cpp" line="142"/>
+        <location filename="../dem/CDemVRT.cpp" line="176"/>
         <source>Error...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -591,22 +591,22 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dem/CDemVRT.cpp" line="132"/>
+        <location filename="../dem/CDemVRT.cpp" line="131"/>
         <source>Failed to create Warp for:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dem/CDemVRT.cpp" line="154"/>
+        <location filename="../dem/CDemVRT.cpp" line="143"/>
         <source>No georeference information found:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dem/CDemVRT.cpp" line="179"/>
+        <location filename="../dem/CDemVRT.cpp" line="177"/>
         <source>No pixel-to-map transform found:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dem/CDemVRT.cpp" line="582"/>
+        <location filename="../dem/CDemVRT.cpp" line="570"/>
         <source>Ele.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4571,42 +4571,47 @@ Fall back to internal types.</source>
 <context>
     <name>CMapItemDelegate</name>
     <message>
-        <location filename="../map/CMapItemDelegate.cpp" line="221"/>
+        <location filename="../map/CMapItemDelegate.cpp" line="227"/>
         <source>inactive</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../map/CMapItemDelegate.cpp" line="224"/>
+        <location filename="../map/CMapItemDelegate.cpp" line="230"/>
         <source>active</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../map/CMapItemDelegate.cpp" line="227"/>
+        <location filename="../map/CMapItemDelegate.cpp" line="233"/>
         <source>missing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../map/CMapItemDelegate.cpp" line="231"/>
+        <location filename="../map/CMapItemDelegate.cpp" line="237"/>
         <source>-</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../map/CMapItemDelegate.cpp" line="319"/>
+        <location filename="../map/CMapItemDelegate.cpp" line="338"/>
+        <source>This file can be slow to draw on the map. Click here to see how to speed it up.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../map/CMapItemDelegate.cpp" line="341"/>
         <source>Deactivate %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../map/CMapItemDelegate.cpp" line="319"/>
+        <location filename="../map/CMapItemDelegate.cpp" line="341"/>
         <source>Activate %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../map/CMapItemDelegate.cpp" line="323"/>
+        <location filename="../map/CMapItemDelegate.cpp" line="345"/>
         <source>%1 is not visible at current scale</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../map/CMapItemDelegate.cpp" line="324"/>
+        <location filename="../map/CMapItemDelegate.cpp" line="346"/>
         <source>%1 is visible at current scale</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4614,7 +4619,7 @@ Fall back to internal types.</source>
 <context>
     <name>CMapList</name>
     <message>
-        <location filename="../map/CMapList.cpp" line="299"/>
+        <location filename="../map/CMapList.cpp" line="314"/>
         <source>Where do you want to store maps?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4709,31 +4714,31 @@ Fall back to internal types.</source>
 <context>
     <name>CMapTMS</name>
     <message>
-        <location filename="../map/CMapTMS.cpp" line="57"/>
-        <location filename="../map/CMapTMS.cpp" line="66"/>
-        <location filename="../map/CMapTMS.cpp" line="98"/>
+        <location filename="../map/CMapTMS.cpp" line="81"/>
+        <location filename="../map/CMapTMS.cpp" line="90"/>
+        <location filename="../map/CMapTMS.cpp" line="122"/>
         <source>Error...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../map/CMapTMS.cpp" line="57"/>
+        <location filename="../map/CMapTMS.cpp" line="81"/>
         <source>Failed to open %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../map/CMapTMS.cpp" line="67"/>
+        <location filename="../map/CMapTMS.cpp" line="91"/>
         <source>Failed to read: %1
 line %2, column %3:
  %4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../map/CMapTMS.cpp" line="99"/>
+        <location filename="../map/CMapTMS.cpp" line="123"/>
         <source>Malformed TMS file. The layer numbers do not index the available layers. Layer numbers start from index 0.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../map/CMapTMS.cpp" line="117"/>
+        <location filename="../map/CMapTMS.cpp" line="142"/>
         <source>Layer %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4741,48 +4746,53 @@ line %2, column %3:
 <context>
     <name>CMapVRT</name>
     <message>
-        <location filename="../map/CMapVRT.cpp" line="278"/>
+        <location filename="../map/CMapVRT.cpp" line="285"/>
         <source>Error...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../map/CMapVRT.cpp" line="39"/>
-        <location filename="../map/CMapVRT.cpp" line="54"/>
+        <location filename="../map/CMapVRT.cpp" line="46"/>
+        <location filename="../map/CMapVRT.cpp" line="64"/>
         <source>Failed to load file:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../map/CMapVRT.cpp" line="45"/>
+        <location filename="../map/CMapVRT.cpp" line="52"/>
         <source>File does not exist:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../map/CMapVRT.cpp" line="45"/>
+        <location filename="../map/CMapVRT.cpp" line="52"/>
         <source>referenced by file:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../map/CMapVRT.cpp" line="69"/>
+        <location filename="../map/CMapVRT.cpp" line="59"/>
+        <source>File has no raster bands:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../map/CMapVRT.cpp" line="79"/>
         <source>File must be 8 bit palette or gray indexed:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../map/CMapVRT.cpp" line="150"/>
+        <location filename="../map/CMapVRT.cpp" line="158"/>
         <source>Failed to create Warp for:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../map/CMapVRT.cpp" line="172"/>
+        <location filename="../map/CMapVRT.cpp" line="170"/>
         <source>No georeference information found:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../map/CMapVRT.cpp" line="180"/>
+        <location filename="../map/CMapVRT.cpp" line="178"/>
         <source>Raster has an invalid (zero) size:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../map/CMapVRT.cpp" line="199"/>
+        <location filename="../map/CMapVRT.cpp" line="206"/>
         <source>No pixel-to-map transform found:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5084,48 +5094,182 @@ Unknown structure.</source>
 <context>
     <name>COverviewAdvisoryDialog</name>
     <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="39"/>
-        <source>&lt;h3&gt;Rendering is slow&lt;/h3&gt;This file has no overviews (pyramids) built yet, so every redraw has to decode the data at full resolution:&lt;br&gt;&lt;b&gt;%1&lt;/b&gt;&lt;br&gt;&lt;br&gt;Building overviews once fixes this. Run one of the commands below in a terminal. This adds roughly &lt;b&gt;%2&lt;/b&gt; of disk space (uncompressed estimate - actual size will likely be smaller thanks to compression); make sure that&apos;s available first.</source>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="35"/>
+        <source>Fix it</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="47"/>
-        <source>&lt;h3&gt;Rendering is slow&lt;/h3&gt;This file has overviews, but at least one of its source files&apos; overviews isn&apos;t deep enough for the current view, so some redraws still have to decode much of the data at a finer resolution than necessary:&lt;br&gt;&lt;b&gt;%1&lt;/b&gt;&lt;br&gt;&lt;br&gt;Building deeper overviews once fixes this. Run one of the commands below in a terminal. This adds roughly &lt;b&gt;%2&lt;/b&gt; of disk space (uncompressed estimate - actual size will likely be smaller thanks to compression); make sure that&apos;s available first.&lt;br&gt;&lt;br&gt;&lt;i&gt;Note: since this file already has some overviews, the commands below add the new levels alongside the existing ones rather than replacing them, which can leave a mixed set of decimation levels. For a clean rebuild instead, run &lt;code&gt;gdaladdo -clean&lt;/code&gt; on the affected file first.&lt;/i&gt;</source>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="36"/>
+        <source>Later</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="64"/>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="45"/>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="69"/>
         <source>File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="64"/>
-        <source>Overview factors</source>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="45"/>
+        <source>Existing overview levels</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="74"/>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="45"/>
+        <source>Status</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="69"/>
+        <source>New overview levels</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="69"/>
+        <source>Action</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="75"/>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="262"/>
+        <source>Clean + rebuild</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="75"/>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="264"/>
+        <source>Build new</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="90"/>
+        <source>Update &lt;OverviewList&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="90"/>
+        <source>Add &lt;OverviewList&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="135"/>
+        <source>%1 file(s) will have new overviews built</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="138"/>
+        <source>%1 file(s) will have existing overviews cleaned and rebuilt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="142"/>
+        <source>. Estimated disk usage: %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="153"/>
+        <source>Overview info</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="159"/>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="313"/>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="189"/>
+        <source>✓ covered by .ovr</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="193"/>
+        <source>✗ None</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="197"/>
+        <source>⚠ Shallow (max %1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="200"/>
+        <source>✓ OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="208"/>
+        <source> (own .ovr)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="208"/>
+        <source> (via &lt;OverviewList&gt;)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="241"/>
+        <source>gdaladdo not found</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="242"/>
+        <source>Could not locate gdaladdo. Make sure the GDAL tools are installed and on PATH.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="255"/>
+        <source>The following operations will be performed:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="277"/>
+        <source>Update &amp;lt;OverviewList&amp;gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="279"/>
+        <source>Add &amp;lt;OverviewList&amp;gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="285"/>
+        <source>Confirm fix</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="330"/>
+        <source>Abort fix</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="330"/>
+        <source>Overview creation is in progress.
+
+Abort and remove any partially written files?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="355"/>
+        <source>Removed %1.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="367"/>
+        <source>Rebuilt %1&apos;s &lt;OverviewList&gt; from its source files.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="369"/>
+        <source>Failed to update %1.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="167"/>
         <source>none</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="84"/>
-        <source>&lt;p&gt;...and %1 more file(s) not shown.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="96"/>
-        <source>Option 1: build overviews on the VRT file:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="97"/>
-        <source>Option 2: build overviews on the underlying source file(s):</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="99"/>
-        <source>Build overviews on the underlying source file(s):</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8207,6 +8351,57 @@ For configuration you need to know your Android device&apos;s IP address or it&a
     <message>
         <location filename="../gis/CSetupWorkspace.cpp" line="225"/>
         <source>Changes to database settings will become active after an application&apos;s restart.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CShell</name>
+    <message>
+        <location filename="../../common/shell/CShell.cpp" line="38"/>
+        <source>Execution of external program `%1` failed: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../common/shell/CShell.cpp" line="41"/>
+        <source>Process cannot be started.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../common/shell/CShell.cpp" line="42"/>
+        <source>Make sure the required packages are installed, `%1` exists and is executable.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../common/shell/CShell.cpp" line="51"/>
+        <source>External process crashed.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../common/shell/CShell.cpp" line="55"/>
+        <source>An unknown error occurred.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../common/shell/CShell.cpp" line="133"/>
+        <source>!!! failed !!!
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../common/shell/CShell.cpp" line="146"/>
+        <source>
+Canceled by user&apos;s request.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../common/shell/CShell.cpp" line="170"/>
+        <source>!!! done !!!
+</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -12143,128 +12338,140 @@ zoom-out for use of the DEM data.</source>
     <name>IDemsList</name>
     <message>
         <location filename="../dem/IDemList.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="164"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="171"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="35"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="200"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="211"/>
         <source>Filter: Start to type and the list will be reduced to matching items.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="38"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="202"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="213"/>
         <source>start typing...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="131"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="204"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="215"/>
         <source>To add files with elevation data use &lt;a href=&apos;DemFolders&apos;&gt;File-&gt;Setup DEM Paths&lt;/a&gt;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="144"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="205"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="216"/>
         <source>Use the buttons to activate a DEM. Use drag-n-drop to move the DEM in the draw order. </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="165"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="165"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="172"/>
         <source>Move to Top</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="168"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="167"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="174"/>
         <source>Hide DEM behind others</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="171"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="170"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="177"/>
         <source>Shift+Home</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="183"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="172"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="179"/>
         <source>Move Up</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="186"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="174"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="181"/>
         <source>Hide DEM behind previous one</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="189"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="177"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="184"/>
         <source>Shift+Up</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="201"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="179"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="186"/>
         <source>Move Down</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="204"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="181"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="188"/>
         <source>Show DEM on top of next one</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="207"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="184"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="191"/>
         <source>Shift+Down</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="219"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="186"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="193"/>
         <source>Move to Bottom</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="222"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="188"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="195"/>
         <source>Show DEM on top of others</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="225"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="191"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="198"/>
         <source>Shift+End</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="237"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="193"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="200"/>
         <source>Reload DEM</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="249"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="194"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="201"/>
         <source>Clear Filter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="261"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="195"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="202"/>
         <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="264"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="197"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="204"/>
         <source>Remove DEM from list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../dem/IDemList.ui" line="276"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="206"/>
+        <source>Overview Info...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../dem/IDemList.ui" line="279"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="208"/>
+        <source>Show overview pyramid info for this file</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -15552,127 +15759,139 @@ Filename: %1</source>
     <name>IMapList</name>
     <message>
         <location filename="../map/IMapList.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="162"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="169"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="116"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="202"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="213"/>
         <source>To add maps use &lt;a href=&apos;MapFolders&apos;&gt;File-&gt;Setup Map Paths&lt;/a&gt;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="35"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="198"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="209"/>
         <source>Filter: Start to type and the list will be reduced to matching items.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="38"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="200"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="211"/>
         <source>start typing...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="129"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="203"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="214"/>
         <source>Use the buttons to activate a map. Use drag-n-drop to move the map in the draw order. </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="153"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="165"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="172"/>
         <source>Hide map behind others</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="168"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="170"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="177"/>
         <source>Move Up</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="171"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="172"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="179"/>
         <source>Hide map behind previous map</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="174"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="175"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="182"/>
         <source>Shift+Up</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="186"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="177"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="184"/>
         <source>Move Down</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="189"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="179"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="186"/>
         <source>Show map on top of next map</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="192"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="182"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="189"/>
         <source>Shift+Down</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="207"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="186"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="193"/>
         <source>Show map on top of others</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="222"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="191"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="198"/>
         <source>Reload Maps</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="234"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="192"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="199"/>
         <source>Clear Filter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="246"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="193"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="200"/>
         <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="249"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="195"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="202"/>
         <source>Remove map from list</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../map/IMapList.ui" line="261"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="204"/>
+        <source>Overview Info...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../map/IMapList.ui" line="264"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="206"/>
+        <source>Show overview pyramid info for this file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../map/IMapList.ui" line="150"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="163"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="170"/>
         <source>Move to Top</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="156"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="168"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="175"/>
         <source>Shift+Home</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="204"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="184"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="191"/>
         <source>Move to Bottom</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="210"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="189"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="196"/>
         <source>Shift+End</source>
         <translation type="unfinished"></translation>
     </message>
@@ -16118,31 +16337,25 @@ Any modifications done will be discarded.</source>
     <name>IOverviewAdvisoryDialog</name>
     <message>
         <location filename="../helpers/IOverviewAdvisoryDialog.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IOverviewAdvisoryDialog.h" line="104"/>
-        <source>Slow rendering...</source>
+        <location filename="../../../build/src/qmapshack/ui_IOverviewAdvisoryDialog.h" line="93"/>
+        <source>Slow rendering — overview pyramids</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/IOverviewAdvisoryDialog.ui" line="20"/>
-        <location filename="../../../build/src/qmapshack/ui_IOverviewAdvisoryDialog.h" line="105"/>
-        <source>TextLabel</source>
+        <location filename="../helpers/IOverviewAdvisoryDialog.ui" line="23"/>
+        <location filename="../../../build/src/qmapshack/ui_IOverviewAdvisoryDialog.h" line="94"/>
+        <source>&lt;b&gt;Current overview situation:&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/IOverviewAdvisoryDialog.ui" line="40"/>
-        <location filename="../../../build/src/qmapshack/ui_IOverviewAdvisoryDialog.h" line="107"/>
-        <source>Build overviews on the VRT file:</source>
+        <location filename="../helpers/IOverviewAdvisoryDialog.ui" line="37"/>
+        <location filename="../../../build/src/qmapshack/ui_IOverviewAdvisoryDialog.h" line="95"/>
+        <source>&lt;b&gt;After fix:&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/IOverviewAdvisoryDialog.ui" line="63"/>
-        <location filename="../../../build/src/qmapshack/ui_IOverviewAdvisoryDialog.h" line="108"/>
-        <source>Build overviews on the underlying source file(s):</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../helpers/IOverviewAdvisoryDialog.ui" line="86"/>
-        <location filename="../../../build/src/qmapshack/ui_IOverviewAdvisoryDialog.h" line="109"/>
+        <location filename="../helpers/IOverviewAdvisoryDialog.ui" line="61"/>
+        <location filename="../../../build/src/qmapshack/ui_IOverviewAdvisoryDialog.h" line="97"/>
         <source>Don&apos;t show this again for this file</source>
         <translation type="unfinished"></translation>
     </message>

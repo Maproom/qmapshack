@@ -539,47 +539,47 @@ non è una definizione valida nel sistema di coordinate:
 <context>
     <name>CShell</name>
     <message>
-        <location filename="../shell/CShell.cpp" line="40"/>
+        <location filename="../../common/shell/CShell.cpp" line="38"/>
         <source>Execution of external program `%1` failed: </source>
         <translation>Esecuzione del programma esterno `%1` non riuscita: </translation>
     </message>
     <message>
-        <location filename="../shell/CShell.cpp" line="43"/>
+        <location filename="../../common/shell/CShell.cpp" line="41"/>
         <source>Process cannot be started.
 </source>
         <translation>Il processo non può essere avviato.
 </translation>
     </message>
     <message>
-        <location filename="../shell/CShell.cpp" line="44"/>
+        <location filename="../../common/shell/CShell.cpp" line="42"/>
         <source>Make sure the required packages are installed, `%1` exists and is executable.
 </source>
         <translation>Assicurarsi che i pacchetti richiesti siano installati, che esista, &apos;%1&apos; e sia eseguibile.
 </translation>
     </message>
     <message>
-        <location filename="../shell/CShell.cpp" line="49"/>
+        <location filename="../../common/shell/CShell.cpp" line="51"/>
         <source>External process crashed.
 </source>
         <translation>Processo esterno bloccato.
 </translation>
     </message>
     <message>
-        <location filename="../shell/CShell.cpp" line="53"/>
+        <location filename="../../common/shell/CShell.cpp" line="55"/>
         <source>An unknown error occurred.
 </source>
         <translation>Si è verificato un errore sconosciuto.
 </translation>
     </message>
     <message>
-        <location filename="../shell/CShell.cpp" line="130"/>
+        <location filename="../../common/shell/CShell.cpp" line="133"/>
         <source>!!! failed !!!
 </source>
         <translation>!!! fallimento !!!
 </translation>
     </message>
     <message>
-        <location filename="../shell/CShell.cpp" line="143"/>
+        <location filename="../../common/shell/CShell.cpp" line="146"/>
         <source>
 Canceled by user&apos;s request.
 </source>
@@ -588,7 +588,7 @@ Annullato su richiesta dell&apos;utente.
 </translation>
     </message>
     <message>
-        <location filename="../shell/CShell.cpp" line="168"/>
+        <location filename="../../common/shell/CShell.cpp" line="170"/>
         <source>!!! done !!!
 </source>
         <translation>!!! fine !!!

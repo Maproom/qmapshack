@@ -219,12 +219,12 @@
         <translation>&lt;h2&gt;Höhendaten&lt;/h2&gt;&lt;p&gt;Höhendaten (Digital Elevation Model - DEM) werden für verschiedene Funktionen in QMapShack gebraucht und sind komplett unabhängig von den Karten. Allerdings gelten dieselben Regeln wie für Karten. Höhendaten müssen immer über eine Datei definiert sein, die von QMapShack erkannt wird. Diese Datei muss in einem der registrierten Höhendatenordner liegen (&lt;a href=&apos;DemFolders&apos;&gt;Datei-&gt;DEM Verzeichnisse angeben&lt;/a&gt;). QMapShack wird sie finden und auflisten. Sie können die Liste erneut laden, indem Sie mit der rechten Maustaste in die DEM Liste klicken und &apos;DEM erneut laden&apos; aus dem Menü wählen.&lt;/p&gt;&lt;p&gt;Ähnlich wie die Karten müssen DEM Dateien in einer *.vrt Datei eingebettet sein, um erkannt zu werden. Eine *.vrt Datei kann auf eine oder mehrere andere Dateien verweisen. Auch hier können Sie QMapShacks eigenen VRT Builder (&lt;a href=&apos;VrtBuilder&apos;&gt;Werkzeug-&gt;VRT Builder&lt;/a&gt;) verwenden, um eine solche Datei zu erstellen.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="1083"/>
+        <location filename="../canvas/CCanvas.cpp" line="1097"/>
         <source>Map Projection...</source>
         <translation>Kartenprojektion...</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="1084"/>
+        <location filename="../canvas/CCanvas.cpp" line="1098"/>
         <source>Failed to setup map projection. Please configure a valid projection.</source>
         <translation>Die Kartenprojektion wurde nicht erkannt. Bitte stellen Sie eine gültige Projektion ein.</translation>
     </message>
@@ -254,7 +254,7 @@
         <translation>&lt;h2&gt;Streckenführung (Routing)&lt;/h2&gt;&lt;p&gt;QMapShack unterstützt Online Routing Dienste. Wenn Sie aber wirklich alle Möglichkeiten einer Streckenführung nutzen wollen, brauchen Sie eine lokale Routendatenbank. Es stehen Ihnen zwei Möglichkeiten zur Verfügung.&lt;/p&gt;&lt;h3&gt;Routino&lt;/h3&gt;&lt;p&gt;Für Routino müssen Sie eine Datenbank aus der Open Street Map Datenbasis erstellen. QMapShack besitzt einen eingebauten &apos;Routino Database Creator&apos; (&lt;a href=&apos;CreateRoutino&apos;&gt;Werkzeug-&gt;Routino Datenbank erstellen&lt;/a&gt;).&lt;/p&gt;&lt;h3&gt;BRouter&lt;/h3&gt;&lt;p&gt;Die zweite Option ist eine lokale BRouter Installation mit einer lokalen Datenbank. Klicken Sie auf &lt;a href=&apos;BRouterSetup&apos;&gt;BRouter einstellen&lt;/a&gt;, um die nötigen Daten zu laden und zu installieren.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="1034"/>
+        <location filename="../canvas/CCanvas.cpp" line="1048"/>
         <source>Setup Map Background</source>
         <translation>Kartenhintergrund einstellen</translation>
     </message>
@@ -562,9 +562,9 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <location filename="../dem/CDemVRT.cpp" line="58"/>
         <location filename="../dem/CDemVRT.cpp" line="66"/>
         <location filename="../dem/CDemVRT.cpp" line="80"/>
-        <location filename="../dem/CDemVRT.cpp" line="131"/>
-        <location filename="../dem/CDemVRT.cpp" line="153"/>
-        <location filename="../dem/CDemVRT.cpp" line="178"/>
+        <location filename="../dem/CDemVRT.cpp" line="130"/>
+        <location filename="../dem/CDemVRT.cpp" line="142"/>
+        <location filename="../dem/CDemVRT.cpp" line="176"/>
         <source>Error...</source>
         <translation>Fehler...</translation>
     </message>
@@ -595,7 +595,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation>Das DEM muss ein Band mit 16-Bit, 32-Bit oder 64-Bit Daten haben:</translation>
     </message>
     <message>
-        <location filename="../dem/CDemVRT.cpp" line="132"/>
+        <location filename="../dem/CDemVRT.cpp" line="131"/>
         <source>Failed to create Warp for:</source>
         <translation>&quot;Warp&quot; konnte nicht erstellt werden:</translation>
     </message>
@@ -604,17 +604,17 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation type="vanished">DEM muss aus einem Satz mit 16 bit oder 32 bit Daten bestehen:</translation>
     </message>
     <message>
-        <location filename="../dem/CDemVRT.cpp" line="154"/>
+        <location filename="../dem/CDemVRT.cpp" line="143"/>
         <source>No georeference information found:</source>
         <translation>Keine Georeferenzierung gefunden:</translation>
     </message>
     <message>
-        <location filename="../dem/CDemVRT.cpp" line="179"/>
+        <location filename="../dem/CDemVRT.cpp" line="177"/>
         <source>No pixel-to-map transform found:</source>
         <translation>Keine Pixel-zu-Karte Tranformation gefunden:</translation>
     </message>
     <message>
-        <location filename="../dem/CDemVRT.cpp" line="582"/>
+        <location filename="../dem/CDemVRT.cpp" line="570"/>
         <source>Ele.</source>
         <translation>Höhe</translation>
     </message>
@@ -4623,42 +4623,47 @@ Interne Typen werden wiederhergestellt.</translation>
 <context>
     <name>CMapItemDelegate</name>
     <message>
-        <location filename="../map/CMapItemDelegate.cpp" line="221"/>
+        <location filename="../map/CMapItemDelegate.cpp" line="227"/>
         <source>inactive</source>
         <translation>inaktiv</translation>
     </message>
     <message>
-        <location filename="../map/CMapItemDelegate.cpp" line="224"/>
+        <location filename="../map/CMapItemDelegate.cpp" line="230"/>
         <source>active</source>
         <translation>aktiv</translation>
     </message>
     <message>
-        <location filename="../map/CMapItemDelegate.cpp" line="227"/>
+        <location filename="../map/CMapItemDelegate.cpp" line="233"/>
         <source>missing</source>
         <translation>fehlt</translation>
     </message>
     <message>
-        <location filename="../map/CMapItemDelegate.cpp" line="231"/>
+        <location filename="../map/CMapItemDelegate.cpp" line="237"/>
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../map/CMapItemDelegate.cpp" line="319"/>
+        <location filename="../map/CMapItemDelegate.cpp" line="338"/>
+        <source>This file can be slow to draw on the map. Click here to see how to speed it up.</source>
+        <translation>Diese Datei kann beim Darstellen langsam sein. Klicken Sie hier, um zu erfahren, wie sich das beschleunigen lässt.</translation>
+    </message>
+    <message>
+        <location filename="../map/CMapItemDelegate.cpp" line="341"/>
         <source>Deactivate %1</source>
         <translation>%1 deaktivieren</translation>
     </message>
     <message>
-        <location filename="../map/CMapItemDelegate.cpp" line="319"/>
+        <location filename="../map/CMapItemDelegate.cpp" line="341"/>
         <source>Activate %1</source>
         <translation>%1 aktivieren</translation>
     </message>
     <message>
-        <location filename="../map/CMapItemDelegate.cpp" line="323"/>
+        <location filename="../map/CMapItemDelegate.cpp" line="345"/>
         <source>%1 is not visible at current scale</source>
         <translation>%1 ist im aktuellen Zoomlevel nicht sichtbar</translation>
     </message>
     <message>
-        <location filename="../map/CMapItemDelegate.cpp" line="324"/>
+        <location filename="../map/CMapItemDelegate.cpp" line="346"/>
         <source>%1 is visible at current scale</source>
         <translation>%1 ist im aktuellen Zoomlevel sichtbar</translation>
     </message>
@@ -4666,7 +4671,7 @@ Interne Typen werden wiederhergestellt.</translation>
 <context>
     <name>CMapList</name>
     <message>
-        <location filename="../map/CMapList.cpp" line="299"/>
+        <location filename="../map/CMapList.cpp" line="314"/>
         <source>Where do you want to store maps?</source>
         <translation>Wo wollen Sie die Karten speichern?</translation>
     </message>
@@ -4761,19 +4766,19 @@ Interne Typen werden wiederhergestellt.</translation>
 <context>
     <name>CMapTMS</name>
     <message>
-        <location filename="../map/CMapTMS.cpp" line="57"/>
-        <location filename="../map/CMapTMS.cpp" line="66"/>
-        <location filename="../map/CMapTMS.cpp" line="98"/>
+        <location filename="../map/CMapTMS.cpp" line="81"/>
+        <location filename="../map/CMapTMS.cpp" line="90"/>
+        <location filename="../map/CMapTMS.cpp" line="122"/>
         <source>Error...</source>
         <translation>Fehler...</translation>
     </message>
     <message>
-        <location filename="../map/CMapTMS.cpp" line="57"/>
+        <location filename="../map/CMapTMS.cpp" line="81"/>
         <source>Failed to open %1</source>
         <translation>Öffnen fehlgeschlagen: %1</translation>
     </message>
     <message>
-        <location filename="../map/CMapTMS.cpp" line="67"/>
+        <location filename="../map/CMapTMS.cpp" line="91"/>
         <source>Failed to read: %1
 line %2, column %3:
  %4</source>
@@ -4782,12 +4787,12 @@ Zeile %2, Spalte %3:
 %4</translation>
     </message>
     <message>
-        <location filename="../map/CMapTMS.cpp" line="99"/>
+        <location filename="../map/CMapTMS.cpp" line="123"/>
         <source>Malformed TMS file. The layer numbers do not index the available layers. Layer numbers start from index 0.</source>
         <translation>Ungültige TMS Datei. Die Ebenennummern indizieren nicht die verfügbaren Ebenen. Ebenennummern fangen bei Index 0 an.</translation>
     </message>
     <message>
-        <location filename="../map/CMapTMS.cpp" line="117"/>
+        <location filename="../map/CMapTMS.cpp" line="142"/>
         <source>Layer %1</source>
         <translation></translation>
     </message>
@@ -4795,48 +4800,53 @@ Zeile %2, Spalte %3:
 <context>
     <name>CMapVRT</name>
     <message>
-        <location filename="../map/CMapVRT.cpp" line="278"/>
+        <location filename="../map/CMapVRT.cpp" line="285"/>
         <source>Error...</source>
         <translation>Fehler...</translation>
     </message>
     <message>
-        <location filename="../map/CMapVRT.cpp" line="39"/>
-        <location filename="../map/CMapVRT.cpp" line="54"/>
+        <location filename="../map/CMapVRT.cpp" line="46"/>
+        <location filename="../map/CMapVRT.cpp" line="64"/>
         <source>Failed to load file:</source>
         <translation>Die Datei konnte nicht geladen werden:</translation>
     </message>
     <message>
-        <location filename="../map/CMapVRT.cpp" line="45"/>
+        <location filename="../map/CMapVRT.cpp" line="52"/>
         <source>File does not exist:</source>
         <translation>Datei existiert nicht:</translation>
     </message>
     <message>
-        <location filename="../map/CMapVRT.cpp" line="45"/>
+        <location filename="../map/CMapVRT.cpp" line="52"/>
         <source>referenced by file:</source>
         <translation>referenziert von Datei:</translation>
     </message>
     <message>
-        <location filename="../map/CMapVRT.cpp" line="69"/>
+        <location filename="../map/CMapVRT.cpp" line="59"/>
+        <source>File has no raster bands:</source>
+        <translation>Die Datei hat keine Datenebenen:</translation>
+    </message>
+    <message>
+        <location filename="../map/CMapVRT.cpp" line="79"/>
         <source>File must be 8 bit palette or gray indexed:</source>
         <translation>Die Datei muss eine 8 bit Palette oder Graustufen haben:</translation>
     </message>
     <message>
-        <location filename="../map/CMapVRT.cpp" line="150"/>
+        <location filename="../map/CMapVRT.cpp" line="158"/>
         <source>Failed to create Warp for:</source>
         <translation>&quot;Warp&quot; konnte nicht erstellt werden:</translation>
     </message>
     <message>
-        <location filename="../map/CMapVRT.cpp" line="172"/>
+        <location filename="../map/CMapVRT.cpp" line="170"/>
         <source>No georeference information found:</source>
         <translation>Keine Georeferenzierung gefunden:</translation>
     </message>
     <message>
-        <location filename="../map/CMapVRT.cpp" line="180"/>
+        <location filename="../map/CMapVRT.cpp" line="178"/>
         <source>Raster has an invalid (zero) size:</source>
         <translation>Raster ein eine ungültigeGröße (oder ist leer):</translation>
     </message>
     <message>
-        <location filename="../map/CMapVRT.cpp" line="199"/>
+        <location filename="../map/CMapVRT.cpp" line="206"/>
         <source>No pixel-to-map transform found:</source>
         <translation>Keine Pixel-zu-Karte Tranformation gefunden:</translation>
     </message>
@@ -5149,49 +5159,216 @@ Unbekannte Struktur.</translation>
 <context>
     <name>COverviewAdvisoryDialog</name>
     <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="39"/>
         <source>&lt;h3&gt;Rendering is slow&lt;/h3&gt;This file has no overviews (pyramids) built yet, so every redraw has to decode the data at full resolution:&lt;br&gt;&lt;b&gt;%1&lt;/b&gt;&lt;br&gt;&lt;br&gt;Building overviews once fixes this. Run one of the commands below in a terminal. This adds roughly &lt;b&gt;%2&lt;/b&gt; of disk space (uncompressed estimate - actual size will likely be smaller thanks to compression); make sure that&apos;s available first.</source>
-        <translation>&lt;h3&gt;Darstellung ist langsam&lt;/h3&gt;Für diese Datei wurden noch keine Übersichtsebenen (Pyramiden) erstellt, daher muss bei jeder Neuberechnung die volle Auflösung dekodiert werden:&lt;br&gt;&lt;b&gt;%1&lt;/b&gt;&lt;br&gt;&lt;br&gt;Das einmalige Erstellen von Übersichtsebenen behebt das Problem. Führen Sie einen der folgenden Befehle in einem Terminal aus. Dies benötigt ca. &lt;b&gt;%2&lt;/b&gt; Speicherplatz (unkomprimierte Schätzung – die tatsächliche Größe ist durch Komprimierung wahrscheinlich geringer); stellen Sie sicher, dass dieser Speicherplatz verfügbar ist.</translation>
+        <translation type="vanished">&lt;h3&gt;Darstellung ist langsam&lt;/h3&gt;Für diese Datei wurden noch keine Übersichtsebenen (Pyramiden) erstellt, daher muss bei jeder Neuberechnung die volle Auflösung dekodiert werden:&lt;br&gt;&lt;b&gt;%1&lt;/b&gt;&lt;br&gt;&lt;br&gt;Das einmalige Erstellen von Übersichtsebenen behebt das Problem. Führen Sie einen der folgenden Befehle in einem Terminal aus. Dies benötigt ca. &lt;b&gt;%2&lt;/b&gt; Speicherplatz (unkomprimierte Schätzung – die tatsächliche Größe ist durch Komprimierung wahrscheinlich geringer); stellen Sie sicher, dass dieser Speicherplatz verfügbar ist.</translation>
     </message>
     <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="47"/>
         <source>&lt;h3&gt;Rendering is slow&lt;/h3&gt;This file has overviews, but at least one of its source files&apos; overviews isn&apos;t deep enough for the current view, so some redraws still have to decode much of the data at a finer resolution than necessary:&lt;br&gt;&lt;b&gt;%1&lt;/b&gt;&lt;br&gt;&lt;br&gt;Building deeper overviews once fixes this. Run one of the commands below in a terminal. This adds roughly &lt;b&gt;%2&lt;/b&gt; of disk space (uncompressed estimate - actual size will likely be smaller thanks to compression); make sure that&apos;s available first.&lt;br&gt;&lt;br&gt;&lt;i&gt;Note: since this file already has some overviews, the commands below add the new levels alongside the existing ones rather than replacing them, which can leave a mixed set of decimation levels. For a clean rebuild instead, run &lt;code&gt;gdaladdo -clean&lt;/code&gt; on the affected file first.&lt;/i&gt;</source>
-        <translation>&lt;h3&gt;Darstellung ist langsam&lt;/h3&gt;Diese Datei hat Übersichtsebenen, aber mindestens eine der Quelldateien hat keine ausreichend tiefen Übersichtsebenen für die aktuelle Ansicht, so dass Neuberechnungen einen größeren Teil von Daten mit einer höheren Auflösung als nötig dekodieren müssen:&lt;br&gt;&lt;b&gt;%1&lt;/b&gt;&lt;br&gt;&lt;br&gt;Das einmalige Erstellen tieferer Übersichtsebenen behebt das Problem. Führen Sie einen der folgenden Befehle in einem Terminal aus. Dies benötigt ca. &lt;b&gt;%2&lt;/b&gt; Speicherplatz (unkomprimierte Schätzung – die tatsächliche Größe ist durch Komprimierung wahrscheinlich geringer); stellen Sie sicher, dass dieser Speicherplatz verfügbar ist.&lt;br&gt;&lt;br&gt;&lt;i&gt;Hinweis: Da diese Datei bereits einige Übersichtsebenen hat, fügen die folgenden Befehle die neuen Ebenen zu den bestehenden hinzu, anstatt sie zu ersetzen. Dies kann zu einem gemischten Satz von Dezimierungsstufen führen. Für einen sauberen Neuaufbau führen Sie zunächst &lt;code&gt;gdaladdo -clean&lt;/code&gt; auf der betroffenen Datei aus.&lt;/i&gt;</translation>
+        <translation type="vanished">&lt;h3&gt;Darstellung ist langsam&lt;/h3&gt;Diese Datei hat Übersichtsebenen, aber mindestens eine der Quelldateien hat keine ausreichend tiefen Übersichtsebenen für die aktuelle Ansicht, so dass Neuberechnungen einen größeren Teil von Daten mit einer höheren Auflösung als nötig dekodieren müssen:&lt;br&gt;&lt;b&gt;%1&lt;/b&gt;&lt;br&gt;&lt;br&gt;Das einmalige Erstellen tieferer Übersichtsebenen behebt das Problem. Führen Sie einen der folgenden Befehle in einem Terminal aus. Dies benötigt ca. &lt;b&gt;%2&lt;/b&gt; Speicherplatz (unkomprimierte Schätzung – die tatsächliche Größe ist durch Komprimierung wahrscheinlich geringer); stellen Sie sicher, dass dieser Speicherplatz verfügbar ist.&lt;br&gt;&lt;br&gt;&lt;i&gt;Hinweis: Da diese Datei bereits einige Übersichtsebenen hat, fügen die folgenden Befehle die neuen Ebenen zu den bestehenden hinzu, anstatt sie zu ersetzen. Dies kann zu einem gemischten Satz von Dezimierungsstufen führen. Für einen sauberen Neuaufbau führen Sie zunächst &lt;code&gt;gdaladdo -clean&lt;/code&gt; auf der betroffenen Datei aus.&lt;/i&gt;</translation>
     </message>
     <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="64"/>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="35"/>
+        <source>Fix it</source>
+        <translation>Beheben</translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="36"/>
+        <source>Later</source>
+        <translation>Später</translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="45"/>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="69"/>
         <source>File</source>
         <translation>Datei</translation>
     </message>
     <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="64"/>
-        <source>Overview factors</source>
-        <translation>Übersichtsebenen-Faktoren</translation>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="45"/>
+        <source>Existing overview levels</source>
+        <translation>Vorhandene Übersichtsstufen</translation>
     </message>
     <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="74"/>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="45"/>
+        <source>Status</source>
+        <translation>Status</translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="69"/>
+        <source>New overview levels</source>
+        <translation>Neue Übersichtsstufen</translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="69"/>
+        <source>Action</source>
+        <translation>Aktion</translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="75"/>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="262"/>
+        <source>Clean + rebuild</source>
+        <translation>Bereinigen + neu erstellen</translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="75"/>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="264"/>
+        <source>Build new</source>
+        <translation>Neu erstellen</translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="90"/>
+        <source>Update &lt;OverviewList&gt;</source>
+        <translation>&lt;OverviewList&gt; aktualisieren</translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="90"/>
+        <source>Add &lt;OverviewList&gt;</source>
+        <translation>&lt;OverviewList&gt; hinzufügen</translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="135"/>
+        <source>%1 file(s) will have new overviews built</source>
+        <translation>Für %1 Datei(en) werden neue Übersichten erstellt</translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="138"/>
+        <source>%1 file(s) will have existing overviews cleaned and rebuilt</source>
+        <translation>Für %1 Datei(en) werden vorhandene Übersichten bereinigt und neu erstellt</translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="142"/>
+        <source>. Estimated disk usage: %1.</source>
+        <translation>. Geschätzter Speicherbedarf: %1.</translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="153"/>
+        <source>Overview info</source>
+        <translation>Übersichtsinfo</translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="159"/>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="313"/>
+        <source>Close</source>
+        <translation>Schließen</translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="189"/>
+        <source>✓ covered by .ovr</source>
+        <translation>✓ durch .ovr abgedeckt</translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="193"/>
+        <source>✗ None</source>
+        <translation>✗ Keine</translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="197"/>
+        <source>⚠ Shallow (max %1)</source>
+        <translation>⚠ Flach (max. %1)</translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="200"/>
+        <source>✓ OK</source>
+        <translation>✓ OK</translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="208"/>
+        <source> (own .ovr)</source>
+        <translation> (eigene .ovr)</translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="208"/>
+        <source> (via &lt;OverviewList&gt;)</source>
+        <translation> (über &lt;OverviewList&gt;)</translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="241"/>
+        <source>gdaladdo not found</source>
+        <translation>gdaladdo nicht gefunden</translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="242"/>
+        <source>Could not locate gdaladdo. Make sure the GDAL tools are installed and on PATH.</source>
+        <translation>gdaladdo konnte nicht gefunden werden. Stellen Sie sicher, dass die GDAL-Werkzeuge installiert und im PATH sind.</translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="255"/>
+        <source>The following operations will be performed:</source>
+        <translation>Die folgenden Aktionen werden ausgeführt:</translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="277"/>
+        <source>Update &amp;lt;OverviewList&amp;gt;</source>
+        <translation>&amp;lt;OverviewList&amp;gt; aktualisieren</translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="279"/>
+        <source>Add &amp;lt;OverviewList&amp;gt;</source>
+        <translation>&amp;lt;OverviewList&amp;gt; hinzufügen</translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="285"/>
+        <source>Confirm fix</source>
+        <translation>Aktion bestätigen</translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="330"/>
+        <source>Abort fix</source>
+        <translation>Aktion abbrechen</translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="330"/>
+        <source>Overview creation is in progress.
+
+Abort and remove any partially written files?</source>
+        <translation>Die Übersichtserstellung läuft noch.
+
+Abbrechen und bereits teilweise geschriebene Dateien entfernen?</translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="355"/>
+        <source>Removed %1.
+</source>
+        <translation>%1 entfernt.
+</translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="367"/>
+        <source>Rebuilt %1&apos;s &lt;OverviewList&gt; from its source files.
+</source>
+        <translation>&lt;OverviewList&gt; von %1 anhand der Quelldateien neu erstellt.
+</translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="369"/>
+        <source>Failed to update %1.
+</source>
+        <translation>%1 konnte nicht aktualisiert werden.
+</translation>
+    </message>
+    <message>
+        <source>Overview factors</source>
+        <translation type="vanished">Übersichtsebenen-Faktoren</translation>
+    </message>
+    <message>
+        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="167"/>
         <source>none</source>
         <translation>keine</translation>
     </message>
     <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="84"/>
         <source>&lt;p&gt;...and %1 more file(s) not shown.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;... und %1 weitere Datei(en), die nicht angezeigt werden.&lt;/p&gt;</translation>
+        <translation type="vanished">&lt;p&gt;... und %1 weitere Datei(en), die nicht angezeigt werden.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="96"/>
         <source>Option 1: build overviews on the VRT file:</source>
-        <translation>Option 1: Übersichtsebenen für die VRT-Datei erstellen:</translation>
+        <translation type="vanished">Option 1: Übersichtsebenen für die VRT-Datei erstellen:</translation>
     </message>
     <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="97"/>
         <source>Option 2: build overviews on the underlying source file(s):</source>
-        <translation>Option 2: Übersichtsebenen für die zugrunde liegenden Quelldatei(en) erstellen:</translation>
+        <translation type="vanished">Option 2: Übersichtsebenen für die zugrunde liegenden Quelldatei(en) erstellen:</translation>
     </message>
     <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="99"/>
         <source>Build overviews on the underlying source file(s):</source>
-        <translation>Übersichtsebenen für die zugrunde liegenden Quelldatei(en) erstellen:</translation>
+        <translation type="vanished">Übersichtsebenen für die zugrunde liegenden Quelldatei(en) erstellen:</translation>
     </message>
 </context>
 <context>
@@ -8290,6 +8467,60 @@ Für die Konfiguration benötigen Sie die IP Adresse Ihres Android Gerätes oder
         <location filename="../gis/CSetupWorkspace.cpp" line="225"/>
         <source>Changes to database settings will become active after an application&apos;s restart.</source>
         <translation>Änderungen in den Datenbankeinstellungen werden nach einem Programmneustart aktiv.</translation>
+    </message>
+</context>
+<context>
+    <name>CShell</name>
+    <message>
+        <location filename="../../common/shell/CShell.cpp" line="38"/>
+        <source>Execution of external program `%1` failed: </source>
+        <translation>Ausführen des externen Programms `%1` ist fehlgeschlagen: </translation>
+    </message>
+    <message>
+        <location filename="../../common/shell/CShell.cpp" line="41"/>
+        <source>Process cannot be started.
+</source>
+        <translation>Der Prozess konnte nicht gestartet werden.</translation>
+    </message>
+    <message>
+        <location filename="../../common/shell/CShell.cpp" line="42"/>
+        <source>Make sure the required packages are installed, `%1` exists and is executable.
+</source>
+        <translation>Stellen Sie sicher, dass die erforderlichen Pakete installiert sind, `%1` existiert und ausführbar ist.
+</translation>
+    </message>
+    <message>
+        <location filename="../../common/shell/CShell.cpp" line="51"/>
+        <source>External process crashed.
+</source>
+        <translation>Der externe Prozess ist abgestürzt.</translation>
+    </message>
+    <message>
+        <location filename="../../common/shell/CShell.cpp" line="55"/>
+        <source>An unknown error occurred.
+</source>
+        <translation>Ein unbekannter Fehler ist aufgetreten.</translation>
+    </message>
+    <message>
+        <location filename="../../common/shell/CShell.cpp" line="133"/>
+        <source>!!! failed !!!
+</source>
+        <translation>!!! fehlgeschlagen !!!</translation>
+    </message>
+    <message>
+        <location filename="../../common/shell/CShell.cpp" line="146"/>
+        <source>
+Canceled by user&apos;s request.
+</source>
+        <translation>
+Abgebrochen durch den Benutzer.
+</translation>
+    </message>
+    <message>
+        <location filename="../../common/shell/CShell.cpp" line="170"/>
+        <source>!!! done !!!
+</source>
+        <translation>!!! erledigt !!!</translation>
     </message>
 </context>
 <context>
@@ -12243,129 +12474,141 @@ nach der Höhe.</translation>
     <name>IDemsList</name>
     <message>
         <location filename="../dem/IDemList.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="164"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="171"/>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="35"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="200"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="211"/>
         <source>Filter: Start to type and the list will be reduced to matching items.</source>
         <translation>Filter: Fangen Sie zu tippen an und die Liste wird auf passende Einträge reduziert.</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="38"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="202"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="213"/>
         <source>start typing...</source>
         <translation>mit dem Tippen anfangen...</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="131"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="204"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="215"/>
         <source>To add files with elevation data use &lt;a href=&apos;DemFolders&apos;&gt;File-&gt;Setup DEM Paths&lt;/a&gt;.</source>
         <translation>Sie können Höhendaten mit &lt;a href=&apos;DemFolders&apos;&gt;&quot;Datei -&gt; DEM Verzeichnisse angeben&quot;&lt;/a&gt; hinzufügen.</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="144"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="205"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="216"/>
         <source>Use the buttons to activate a DEM. Use drag-n-drop to move the DEM in the draw order. </source>
         <translation>Drücken Sie die Schaltflächen, um ein DEM zu aktivieren. Verwenden Sie &quot;drag-n-drop&quot;, um das DEM in der Zeichenreihenfolge zu verschieben. </translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="165"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="165"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="172"/>
         <source>Move to Top</source>
         <translation>An den Anfang verschieben</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="168"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="167"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="174"/>
         <source>Hide DEM behind others</source>
         <translation>Versteckt DEM hinter den anderen</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="171"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="170"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="177"/>
         <source>Shift+Home</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="183"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="172"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="179"/>
         <source>Move Up</source>
         <translation>Nach oben verschieben</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="186"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="174"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="181"/>
         <source>Hide DEM behind previous one</source>
         <translation>Versteckt DEM hinter dem vorherigen</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="189"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="177"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="184"/>
         <source>Shift+Up</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="201"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="179"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="186"/>
         <source>Move Down</source>
         <translation>Nach unten verschieben</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="204"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="181"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="188"/>
         <source>Show DEM on top of next one</source>
         <translation>DEM überlagert das nächste</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="207"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="184"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="191"/>
         <source>Shift+Down</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="219"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="186"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="193"/>
         <source>Move to Bottom</source>
         <translation>An das Ende verschieben</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="222"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="188"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="195"/>
         <source>Show DEM on top of others</source>
         <translation>DEM überlagert die anderen</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="225"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="191"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="198"/>
         <source>Shift+End</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="237"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="193"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="200"/>
         <source>Reload DEM</source>
         <translation>DEM erneut laden</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="249"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="194"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="201"/>
         <source>Clear Filter</source>
         <translation>Filter zurücksetzen</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="261"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="195"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="202"/>
         <source>Remove</source>
         <translation>Löschen</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="264"/>
-        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="197"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="204"/>
         <source>Remove DEM from list</source>
         <translation>DEM aus der Liste löschen</translation>
+    </message>
+    <message>
+        <location filename="../dem/IDemList.ui" line="276"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="206"/>
+        <source>Overview Info...</source>
+        <translation>Übersichtsinfo...</translation>
+    </message>
+    <message>
+        <location filename="../dem/IDemList.ui" line="279"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="208"/>
+        <source>Show overview pyramid info for this file</source>
+        <translation>Übersichtspyramiden-Info für diese Datei anzeigen</translation>
     </message>
 </context>
 <context>
@@ -15686,127 +15929,139 @@ Dateiname: %1</translation>
     <name>IMapList</name>
     <message>
         <location filename="../map/IMapList.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="162"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="169"/>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="35"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="198"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="209"/>
         <source>Filter: Start to type and the list will be reduced to matching items.</source>
         <translation>Filter: Fangen Sie zu tippen an und die Liste wird auf passende Einträge reduziert.</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="38"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="200"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="211"/>
         <source>start typing...</source>
         <translation>mit dem Tippen anfangen...</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="116"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="202"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="213"/>
         <source>To add maps use &lt;a href=&apos;MapFolders&apos;&gt;File-&gt;Setup Map Paths&lt;/a&gt;.</source>
         <translation>Sie können Karten mit &lt;a href=&apos;MapFolders&apos;&gt;&quot;Datei -&gt; Kartenverzeichnisse angeben&quot;&lt;/a&gt; hinzufügen.</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="129"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="203"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="214"/>
         <source>Use the buttons to activate a map. Use drag-n-drop to move the map in the draw order. </source>
         <translation>Drücken Sie die Schaltflächen, um eine Karte zu aktivieren. Verwenden Sie &quot;drag-n-drop&quot;, um die Karte in der Zeichenreihenfolge zu verschieben. </translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="153"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="165"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="172"/>
         <source>Hide map behind others</source>
         <translation>Versteckt die Karte hinter den anderen</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="168"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="170"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="177"/>
         <source>Move Up</source>
         <translation>Nach oben verschieben</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="171"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="172"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="179"/>
         <source>Hide map behind previous map</source>
         <translation>Versteckt die Karte hinter der vorherigen</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="174"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="175"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="182"/>
         <source>Shift+Up</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="186"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="177"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="184"/>
         <source>Move Down</source>
         <translation>Nach unten verschieben</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="189"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="179"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="186"/>
         <source>Show map on top of next map</source>
         <translation>Die Karte überlagert die nächste</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="192"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="182"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="189"/>
         <source>Shift+Down</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="207"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="186"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="193"/>
         <source>Show map on top of others</source>
         <translation>Die Karte überlagert die anderen</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="222"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="191"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="198"/>
         <source>Reload Maps</source>
         <translation>Karten erneut laden</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="234"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="192"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="199"/>
         <source>Clear Filter</source>
         <translation>Filter zurücksetzen</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="246"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="193"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="200"/>
         <source>Remove</source>
         <translation>Löschen</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="249"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="195"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="202"/>
         <source>Remove map from list</source>
         <translation>Karte aus der Liste löschen</translation>
     </message>
     <message>
+        <location filename="../map/IMapList.ui" line="261"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="204"/>
+        <source>Overview Info...</source>
+        <translation>Übersichtsinfo...</translation>
+    </message>
+    <message>
+        <location filename="../map/IMapList.ui" line="264"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="206"/>
+        <source>Show overview pyramid info for this file</source>
+        <translation>Übersichtspyramiden-Info für diese Datei anzeigen</translation>
+    </message>
+    <message>
         <location filename="../map/IMapList.ui" line="150"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="163"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="170"/>
         <source>Move to Top</source>
         <translation>An den Anfang verschieben</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="156"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="168"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="175"/>
         <source>Shift+Home</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="204"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="184"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="191"/>
         <source>Move to Bottom</source>
         <translation>An das Ende verschieben</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="210"/>
-        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="189"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="196"/>
         <source>Shift+End</source>
         <translation></translation>
     </message>
@@ -16266,32 +16521,38 @@ Alle Änderungen werden verloren gehen.</translation>
 <context>
     <name>IOverviewAdvisoryDialog</name>
     <message>
-        <location filename="../helpers/IOverviewAdvisoryDialog.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IOverviewAdvisoryDialog.h" line="104"/>
         <source>Slow rendering...</source>
-        <translation>Langsame Darstellung...</translation>
+        <translation type="vanished">Langsame Darstellung...</translation>
     </message>
     <message>
-        <location filename="../helpers/IOverviewAdvisoryDialog.ui" line="20"/>
-        <location filename="../../../build/src/qmapshack/ui_IOverviewAdvisoryDialog.h" line="105"/>
         <source>TextLabel</source>
-        <translation type="unfinished">Bezeichnung</translation>
+        <translation type="obsolete">Bezeichnung</translation>
     </message>
     <message>
-        <location filename="../helpers/IOverviewAdvisoryDialog.ui" line="40"/>
-        <location filename="../../../build/src/qmapshack/ui_IOverviewAdvisoryDialog.h" line="107"/>
-        <source>Build overviews on the VRT file:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../helpers/IOverviewAdvisoryDialog.ui" line="63"/>
-        <location filename="../../../build/src/qmapshack/ui_IOverviewAdvisoryDialog.h" line="108"/>
         <source>Build overviews on the underlying source file(s):</source>
-        <translation>Übersichtsebenen für die zugrunde liegenden Quelldatei(en) erstellen:</translation>
+        <translation type="vanished">Übersichtsebenen für die zugrunde liegenden Quelldatei(en) erstellen:</translation>
     </message>
     <message>
-        <location filename="../helpers/IOverviewAdvisoryDialog.ui" line="86"/>
-        <location filename="../../../build/src/qmapshack/ui_IOverviewAdvisoryDialog.h" line="109"/>
+        <location filename="../helpers/IOverviewAdvisoryDialog.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IOverviewAdvisoryDialog.h" line="93"/>
+        <source>Slow rendering — overview pyramids</source>
+        <translation>Langsame Darstellung — Übersichtspyramiden</translation>
+    </message>
+    <message>
+        <location filename="../helpers/IOverviewAdvisoryDialog.ui" line="23"/>
+        <location filename="../../../build/src/qmapshack/ui_IOverviewAdvisoryDialog.h" line="94"/>
+        <source>&lt;b&gt;Current overview situation:&lt;/b&gt;</source>
+        <translation>&lt;b&gt;Aktuelle Situation der Übersichtsebenen:&lt;/b&gt;</translation>
+    </message>
+    <message>
+        <location filename="../helpers/IOverviewAdvisoryDialog.ui" line="37"/>
+        <location filename="../../../build/src/qmapshack/ui_IOverviewAdvisoryDialog.h" line="95"/>
+        <source>&lt;b&gt;After fix:&lt;/b&gt;</source>
+        <translation>&lt;b&gt;Nach der Behebung:&lt;/b&gt;</translation>
+    </message>
+    <message>
+        <location filename="../helpers/IOverviewAdvisoryDialog.ui" line="61"/>
+        <location filename="../../../build/src/qmapshack/ui_IOverviewAdvisoryDialog.h" line="97"/>
         <source>Don&apos;t show this again for this file</source>
         <translation>Für diese Datei nicht mehr anzeigen</translation>
     </message>

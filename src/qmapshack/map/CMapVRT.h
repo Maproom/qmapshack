@@ -179,19 +179,17 @@ class CMapVRT : public IMap {
   /// characteristics; reused (never re-derived) whenever draw() hits the render timeout
   CGdalVrtUtil::overview_advice_t overviewAdvice;
 
-  /// persisted via saveConfig()/loadConfig(): true once the user checked "don't show
-  /// again" on the overview advisory dialog for this file. Written by
-  /// setSuppressOverviewAdvisory()/loadConfig() (GUI thread), read by draw() (canvas
-  /// thread) - must be atomic to avoid a data race across that boundary.
+  /// Persisted via saveConfig()/loadConfig(): true once the user checked "don't show
+  /// again" for this file. Written on the GUI thread, read by draw() on the canvas
+  /// thread - must be atomic to avoid a data race across that boundary.
   std::atomic<bool> suppressOverviewAdvisory = false;
 
-  /// not persisted: true once the advisory has been shown for this loaded instance, so
-  /// panning/zooming a slow file doesn't reopen the dialog on every redraw
+  /// Not persisted: true once the advisory has been shown for this loaded instance, so
+  /// panning/zooming a slow file doesn't reopen the dialog on every redraw.
   bool advisoryShownThisSession = false;
 
-  /// set true (GUI thread) while the advisory dialog is open, cleared when it closes;
-  /// draw() (canvas thread) skips emitSigCanvasUpdate() retries while this is set so
-  /// animations stop and the render thread doesn't busyloop during the dialog
+  /// True (GUI thread) while the advisory dialog is open. draw() (canvas thread) skips
+  /// emitSigCanvasUpdate() retries while set, so the render thread doesn't busy-loop.
   std::atomic<bool> advisoryOpen = false;
 };
 

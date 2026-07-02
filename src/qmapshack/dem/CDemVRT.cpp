@@ -87,31 +87,21 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent, bool supportsOvervie
   const qint32 preWarpXSize = pBand->GetXSize();
   const qint32 preWarpYSize = pBand->GetYSize();
 
-  // skipped entirely for remote sources (CDemWCS, supportsOverviewAdvisory == false): the
-  // per-file fallback inside collectOverviewFactors() calls GetFileList() then GDALOpen()
-  // on every referenced "file" - meaningless, and an extra request against the same
-  // remote endpoint, for a source with no local files to inspect. Safe to skip:
-  // overviewAdvice/overviewFactors are only ever consulted below/in draw() when
-  // supportsOverviewAdvisory is also true.
-  CGdalVrtUtil::overview_factors_t overviewFactors;
+  // Skipped for remote sources (CDemWCS): the per-file fallback would GDALOpen() every
+  // referenced "file" against the same remote endpoint - pointless with no local files.
+  // Safe to skip: overviewAdvice is only read below/in draw() when
+  // supportsOverviewAdvisory is true.
   if (supportsOverviewAdvisory) {
     qreal masterGeoTransform[6];
     const qreal masterPixelSizeX =
         (dataset->GetGeoTransform(masterGeoTransform) == CE_None) ? qAbs(masterGeoTransform[1]) : 0.0;
 
-    qDebug() << "OVR: branch:" << (pBand->GetOverviewCount() > 0 ? "band-level" : "per-file probe")
-             << "GetOverviewCount =" << pBand->GetOverviewCount();
+    const QVector<qint32> suggestedLevels = CGdalVrtUtil::suggestOverviewLevels(pBand->GetXSize(), pBand->GetYSize());
 
-    overviewFactors = CGdalVrtUtil::collectOverviewFactors(dataset, pBand, masterPixelSizeX);
-
-    for (const CGdalVrtUtil::file_overview_info_t& info : overviewFactors.perFileInfo) {
-      qDebug() << "OVR:  " << QFileInfo(info.path).fileName() << "factors:" << info.factors;
-    }
-    qDebug() << "OVR: factors =" << overviewFactors.factors << "weakestMaxFactor =" << overviewFactors.weakestMaxFactor;
-
-    // DEM data is always single-band continuous elevation, never categorical/palette
-    overviewAdvice =
-        CGdalVrtUtil::buildOverviewAdvice(dataset, pBand, filename, /*isPaletteIndexed=*/false, overviewFactors);
+    // DEM data is always single-band continuous elevation, never categorical/palette.
+    // buildOverviewAdvice() logs its own "OVR: ..." diagnostics as it goes.
+    overviewAdvice = CGdalVrtUtil::buildOverviewAdvice(dataset, pBand, masterPixelSizeX, /*isPaletteIndexed=*/false,
+                                                       suggestedLevels);
   }
 
   noData = pBand->GetNoDataValue(&hasNoData);
@@ -158,24 +148,22 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent, bool supportsOvervie
   ysize_px = dataset->GetRasterYSize();
 
   if (supportsOverviewAdvisory) {
-    // a reprojection (the warp block above) can change the dataset's own pixel density -
-    // e.g. between a projected CRS in meters and a geographic CRS in degrees, or simply a
-    // different output resolution GDAL chose - so rescale weakestMaxFactor (collected
-    // pre-warp, in the original dataset's own pixel grid) into the current dataset's
-    // pixel grid, matching what draw()'s neededFactor (derived from the current
-    // xscale/yscale) is compared against. A no-op (ratio 1.0) whenever no warp happened,
-    // since the raster size is then unchanged.
+    // A reprojection above can change the dataset's own pixel density (e.g. meters vs
+    // degrees, or a different output resolution GDAL chose). Rescale the pre-warp
+    // factors into the current pixel grid, matching what draw() compares against - a
+    // no-op when no warp happened.
     const qreal warpScale =
         qMax(static_cast<qreal>(xsize_px) / preWarpXSize, static_cast<qreal>(ysize_px) / preWarpYSize);
     overviewAdvice.weakestMaxFactor = qMax(1, qRound(overviewAdvice.weakestMaxFactor * warpScale));
+    for (qint32& factor : overviewAdvice.containerFactors) {
+      factor = qRound(factor * warpScale);
+    }
+    overviewAdvice.containerFactor = qRound(overviewAdvice.containerFactor * warpScale);
 
-    const qint32 finalOvrCount = dataset->GetRasterBand(1)->GetOverviewCount();
-    qDebug() << "OVR: post-warp GetOverviewCount =" << finalOvrCount << "warpScale =" << warpScale
+    qDebug() << "OVR: post-warp warpScale =" << warpScale << "containerFactor =" << overviewAdvice.containerFactor
              << "weakestMaxFactor =" << overviewAdvice.weakestMaxFactor;
-    if (overviewAdvice.overviewsMissing) {
-      qDebug() << "OVR: assessment: no overviews - advisory will fire on slow render";
-    } else if (finalOvrCount == 0) {
-      qDebug() << "OVR: assessment: source overviews exist but VRT lacks <OverviewList> - add it";
+    if (overviewAdvice.needsAttention()) {
+      qDebug() << "OVR: assessment: needs attention - advisory will fire on slow render";
     } else {
       qDebug() << "OVR: assessment: OK, overviews up to factor" << overviewAdvice.weakestMaxFactor;
     }

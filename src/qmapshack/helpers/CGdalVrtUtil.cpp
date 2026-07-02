@@ -25,8 +25,6 @@
 #include <QFileInfo>
 #include <QGuiApplication>
 #include <QScreen>
-#include <QSet>
-#include <QStringList>
 #include <algorithm>
 #include <limits>
 
@@ -65,43 +63,16 @@ QVector<qint32> ownOverviewFactors(GDALRasterBand* band) {
   return result;
 }
 
-/// @brief Open path and return its own overview factors, rescaled into the container's
-///        pixel scale via its own geotransform. Empty if it has no overviews, its
-///        geotransform can't be read, or pixelSizeX is 0 (unknown).
-QVector<qint32> probeSourceFactors(const char* path, qreal pixelSizeX) {
-  QVector<qint32> result;
+/// @brief Open path and return its own overview factors (native to path's own pixel
+///        grid - see ownOverviewFactors()). Empty if it can't be opened or has none.
+///        GDAL matches overviews to the requested read resolution itself (gdalwarp's
+///        "-ovr AUTO"), so no rescaling into the container's pixel grid is needed here.
+QVector<qint32> probeSourceFactors(const char* path) {
   GDALDatasetUniquePtr sub(GDALDataset::FromHandle(GDALOpen(path, GA_ReadOnly)));
   GDALRasterBand* subBand = sub ? sub->GetRasterBand(1) : nullptr;
-  qreal subGeoTransform[6];
-  if (subBand != nullptr && subBand->GetOverviewCount() != 0 && pixelSizeX > 0 &&
-      sub->GetGeoTransform(subGeoTransform) == CE_None) {
-    const qreal subPixelSizeX = qAbs(subGeoTransform[1]);
-    for (qint32 i = 0; i < subBand->GetOverviewCount(); ++i) {
-      const qreal ovPixelSizeX = subPixelSizeX * subBand->GetXSize() / subBand->GetOverview(i)->GetXSize();
-      result << qRound(ovPixelSizeX / pixelSizeX);
-    }
-    std::sort(result.begin(), result.end());
-  }
-  return result;
+  return subBand ? ownOverviewFactors(subBand) : QVector<qint32>{};
 }
 }  // namespace
-
-QVector<qint32> CGdalVrtUtil::intersectSourceOverviewFactors(const QStringList& sourcePaths, qreal pixelSizeX) {
-  QSet<qint32> intersection;
-  bool first = true;
-  for (const QString& path : sourcePaths) {
-    const QVector<qint32> factors = probeSourceFactors(path.toUtf8().constData(), pixelSizeX);
-    if (factors.isEmpty()) {
-      return {};  // any source without a real overview means the composite can offer nothing
-    }
-    const QSet<qint32> factorSet(factors.begin(), factors.end());
-    intersection = first ? factorSet : (intersection & factorSet);
-    first = false;
-  }
-  QVector<qint32> result(intersection.begin(), intersection.end());
-  std::sort(result.begin(), result.end());
-  return result;
-}
 
 void CGdalVrtUtil::closeDataset(GDALDataset*& dataset) {
   if (dataset != nullptr) {
@@ -128,14 +99,13 @@ QVector<qint32> CGdalVrtUtil::suggestOverviewLevels(qint32 xsize, qint32 ysize, 
 }
 
 CGdalVrtUtil::overview_advice_t CGdalVrtUtil::buildOverviewAdvice(GDALDataset* dataset, GDALRasterBand* band,
-                                                                  qreal pixelSizeX, bool isPaletteIndexed,
+                                                                  bool isPaletteIndexed,
                                                                   const QVector<qint32>& suggestedLevels) {
   overview_advice_t result;
   result.suggestedLevels = suggestedLevels;
   result.isPaletteIndexed = isPaletteIndexed;
   const qint32 targetFactor = suggestedLevels.isEmpty() ? 1 : suggestedLevels.last();
-  qDebug() << "OVR: GetOverviewCount =" << band->GetOverviewCount() << "targetFactor =" << targetFactor
-           << "pixelSizeX =" << pixelSizeX;
+  qDebug() << "OVR: GetOverviewCount =" << band->GetOverviewCount() << "targetFactor =" << targetFactor;
 
   // Step 1: the container's own claim. dataset is always a VRT here (CMapVRT/CDemVRT
   // only ever open a .vrt file directly; every other raster format goes through its
@@ -199,7 +169,7 @@ CGdalVrtUtil::overview_advice_t CGdalVrtUtil::buildOverviewAdvice(GDALDataset* d
         continue;
       }
       sawAnySource = true;
-      const QVector<qint32> fileFactors = probeSourceFactors(fileList[n], pixelSizeX);
+      const QVector<qint32> fileFactors = probeSourceFactors(fileList[n]);
       if (fileFactors.isEmpty()) {
         allSourcesHaveOverviews = false;
       }

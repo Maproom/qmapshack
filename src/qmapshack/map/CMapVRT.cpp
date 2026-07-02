@@ -89,21 +89,17 @@ CMapVRT::CMapVRT(const QString& filename, CMapDraw* parent) : IMap(eFeatVisibili
     }
   }
 
-  // dataset's own size before any reprojection below replaces it with a warped VRT;
-  // used to rescale weakestMaxFactor into the final dataset's pixel grid further down
-  const qint32 preWarpXSize = pBand->GetXSize();
-  const qint32 preWarpYSize = pBand->GetYSize();
-
-  qreal masterGeoTransform[6];
-  const qreal masterPixelSizeX =
-      (dataset->GetGeoTransform(masterGeoTransform) == CE_None) ? qAbs(masterGeoTransform[1]) : 0.0;
   const QVector<qint32> suggestedLevels =
       CGdalVrtUtil::suggestOverviewLevels(pBand->GetXSize(), pBand->GetYSize(), kMaxMapOverviewFactor);
 
   // single band palette/gray data is categorical (see resampleAlg below).
   // buildOverviewAdvice() logs its own "OVR: ..." diagnostics as it goes.
-  overviewAdvice =
-      CGdalVrtUtil::buildOverviewAdvice(dataset, pBand, masterPixelSizeX, rasterBandCount == 1, suggestedLevels);
+  overviewAdvice = CGdalVrtUtil::buildOverviewAdvice(dataset, pBand, rasterBandCount == 1, suggestedLevels);
+  if (overviewAdvice.needsAttention()) {
+    qDebug() << "OVR: assessment: needs attention - advisory will fire on slow render";
+  } else {
+    qDebug() << "OVR: assessment: OK, overviews up to factor" << overviewAdvice.weakestMaxFactor;
+  }
 
   // single band palette/gray data is categorical: nearest neighbour avoids blending index
   // values into meaningless colors when resampling. Multi-band true color benefits from
@@ -179,28 +175,6 @@ CMapVRT::CMapVRT(const QString& filename, CMapDraw* parent) : IMap(eFeatVisibili
     return;
   }
 
-  if (preWarpXSize > 0 && preWarpYSize > 0) {
-    // A reprojection above can change the dataset's own pixel density (e.g. meters vs
-    // degrees, or a different output resolution GDAL chose). Rescale the pre-warp
-    // factors into the current pixel grid, matching what draw() compares against - a
-    // no-op when no warp happened.
-    const qreal warpScale =
-        qMax(static_cast<qreal>(xsize_px) / preWarpXSize, static_cast<qreal>(ysize_px) / preWarpYSize);
-    overviewAdvice.weakestMaxFactor = qMax(1, qRound(overviewAdvice.weakestMaxFactor * warpScale));
-    for (qint32& factor : overviewAdvice.containerFactors) {
-      factor = qRound(factor * warpScale);
-    }
-    overviewAdvice.containerFactor = qRound(overviewAdvice.containerFactor * warpScale);
-
-    qDebug() << "OVR: post-warp warpScale =" << warpScale << "containerFactor =" << overviewAdvice.containerFactor
-             << "weakestMaxFactor =" << overviewAdvice.weakestMaxFactor;
-    if (overviewAdvice.needsAttention()) {
-      qDebug() << "OVR: assessment: needs attention - advisory will fire on slow render";
-    } else {
-      qDebug() << "OVR: assessment: OK, overviews up to factor" << overviewAdvice.weakestMaxFactor;
-    }
-  }
-
   qreal adfGeoTransform[6];
   if (dataset->GetGeoTransform(adfGeoTransform) != CE_None) {
     fail(tr("No pixel-to-map transform found:") % '\n' % filename);
@@ -271,12 +245,12 @@ CMapVRT::~CMapVRT() {
 
 void CMapVRT::saveConfig(QSettings& cfg) {
   IMap::saveConfig(cfg);
-  cfg.setValue("suppressOverviewAdvisory", suppressOverviewAdvisory.load());
+  cfg.setValue("suppressOverviewAdvisory", advisoryState.suppress.load());
 }
 
 void CMapVRT::loadConfig(QSettings& cfg) {
   IMap::loadConfig(cfg);
-  suppressOverviewAdvisory = cfg.value("suppressOverviewAdvisory", suppressOverviewAdvisory.load()).toBool();
+  advisoryState.suppress = cfg.value("suppressOverviewAdvisory", advisoryState.suppress.load()).toBool();
 }
 
 void CMapVRT::fail(const QString& msg) {
@@ -494,13 +468,7 @@ void CMapVRT::draw(IDrawContext::buffer_t& buf) /* override */
     if (!img.isNull()) {
       drawSourceImage(p, window, img);
     } else if (deadline.timedOut) {
-      if (!suppressOverviewAdvisory && !advisoryShownThisSession) {
-        advisoryShownThisSession = true;
-        map->emitOverviewAdvisory(this);
-
-      } else if (!advisoryOpen) {
-        map->emitSigCanvasUpdate();
-      }
+      CGdalVrtUtil::handleRenderTimeout(map, this, !advisoryState.suppress, advisoryState);
     }
   }
 

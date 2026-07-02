@@ -866,9 +866,23 @@ COverviewAdvisoryDialog* CCanvas::showOverviewAdvisory(QPointer<T> source) {
     return nullptr;
   }
 
+  const QString filename = source->getFilename();
+  // Keyed on filename, not source->isAdvisoryOpen(): a reload destroys and recreates
+  // the CDemVRT/CMapVRT instance, which would reset a per-instance guard and let a
+  // second dialog open for the same file while the first one (now orphaned) is still
+  // showing. CCanvas already parents every dialog it opens (see below), so its own
+  // child list doubles as the registry - no separate bookkeeping needed.
+  for (COverviewAdvisoryDialog* open : findChildren<COverviewAdvisoryDialog*>(Qt::FindDirectChildrenOnly)) {
+    if (open->filename() == filename) {
+      open->raise();
+      open->activateWindow();
+      return nullptr;
+    }
+  }
+
   source->setAdvisoryOpen(true);
 
-  auto* dlg = new COverviewAdvisoryDialog(source->getFilename(), source->getOverviewAdvice(), this);
+  auto* dlg = new COverviewAdvisoryDialog(filename, source->getOverviewAdvice(), this);
   connect(dlg, &QDialog::finished, this, [dlg, source]() {
     if (source) {
       source->setSuppressOverviewAdvisory(dlg->suppressChecked());

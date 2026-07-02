@@ -52,6 +52,9 @@ class COverviewAdvisoryDialog : public QDialog, private Ui::IOverviewAdvisoryDia
   /// @brief True if the user checked "don't show this again for this file."
   bool suppressChecked() const { return checkSuppressAdvisory->isChecked(); }
 
+  /// @brief The file this dialog is showing advisory info for, as passed to the constructor.
+  const QString& filename() const { return filename_; }
+
  signals:
   /// @brief Emitted after Fix it completes successfully (gdaladdo on filesToFix(), plus
   ///        fixContainerOverviewList() if the container is a VRT with source files).
@@ -107,16 +110,24 @@ class COverviewAdvisoryDialog : public QDialog, private Ui::IOverviewAdvisoryDia
   QStringList filesToFix() const;
 
   /**
-     @brief Recompute filename_'s <OverviewList> from what its source files currently
-            supply, and rewrite it in place - what gdalbuildvrt would declare for a
-            fresh mosaic of these sources, without touching anything else in the VRT
-            (SRS, extents, resampling, band setup).
+     @brief Rewrite filename_'s <OverviewList> to declare advice_.suggestedLevels, without
+            touching anything else in the VRT (SRS, extents, resampling, band setup).
 
-     Deletes any stale <filename_>.ovr file first: GDAL trusts a real .ovr file over
-     anything the source files offer, so an old one left in place would keep shadowing
-     the fix (see CGdalVrtUtil::buildOverviewAdvice()).
-     @return false if filename_ or any of its sources couldn't be (re)opened, or the
-             rewritten XML couldn't be saved
+     Safe to declare the target directly (not re-probe/intersect each source's actual
+     factors): every file in filesToFix() was just rebuilt by slotFixIt() with exactly
+     advice_.suggestedLevels, and every other source was excluded from the fix because it
+     already had that many levels in its own native pyramid (see filesToFix()). So every
+     source file supports at least suggestedLevels once the fix completes.
+     fixContainerOverviewList() is only reached after CShell reports the whole gdaladdo
+     job succeeded (slotFixItDone()), so a mid-queue failure never gets here.
+
+     Deletes any stale <filename_>.ovr file only after the rewritten XML is safely
+     committed: GDAL trusts a real .ovr file over anything the source files/OverviewList
+     offer, so an old one left in place would keep shadowing the fix (see
+     CGdalVrtUtil::buildOverviewAdvice()), but deleting it before a successful commit
+     would leave filename_ worse off than before the fix on any failure below.
+     @return false if filename_ couldn't be (re)opened/parsed, or the rewritten XML
+             couldn't be saved
    */
   bool fixContainerOverviewList();
 

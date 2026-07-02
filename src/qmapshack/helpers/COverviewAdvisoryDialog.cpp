@@ -18,9 +18,6 @@
 
 #include "helpers/COverviewAdvisoryDialog.h"
 
-#include <gdal.h>
-#include <gdal_priv.h>
-
 #include <QDomDocument>
 #include <QtWidgets>
 
@@ -141,7 +138,7 @@ COverviewAdvisoryDialog::COverviewAdvisoryDialog(const QString& filename, const 
   const QString sizeEstimate = QLocale::system().formattedDataSize(advice_.estimatedOverviewBytes);
   labelSummary->setText(summaryParts.join(", ") % tr(". Estimated disk usage: %1.").arg(sizeEstimate));
 
-  shell_ = new CShell(this);
+  shell_ = new CShell(this, /*isSingleton=*/false);
   shell_->setVisible(false);
   verticalLayout->insertWidget(verticalLayout->indexOf(labelSummary), shell_);
   connect(shell_, &CShell::sigFinishedJob, this, &COverviewAdvisoryDialog::slotFixItDone);
@@ -216,8 +213,14 @@ bool COverviewAdvisoryDialog::hasExistingOverviews(const QString& filePath) cons
   }
   // No per-file entry: filePath is either the container's own row, or (see
   // hasSourceFiles()) filesToFix()'s fallback target. Either way, fall back to the
-  // container's claim.
-  return filePath == filename_ && advice_.containerFactor > 0;
+  // container's claim - containerHasOwnOvr, not just containerFactor > 0: a
+  // fallback-trusted <OverviewList> (see buildOverviewAdvice()'s step 3) makes
+  // containerFactor > 0 without there being anything physical to clean/replace, and this
+  // result also drives the "Update"/"Add <OverviewList>" wording in the after-fix
+  // preview table, which must agree with slotFixIt()'s confirmation dialog - that one
+  // already keys off containerHasOwnOvr specifically because only a real .ovr file gets
+  // deleted.
+  return filePath == filename_ && advice_.containerHasOwnOvr;
 }
 
 QStringList COverviewAdvisoryDialog::filesToFix() const {
@@ -377,35 +380,11 @@ void COverviewAdvisoryDialog::slotFixItDone(qint32 id) {
 }
 
 bool COverviewAdvisoryDialog::fixContainerOverviewList() {
-  // delete any stale .ovr file first - GDAL trusts a real .ovr file over anything the
-  // source files offer, so an old one left behind would keep shadowing the fix (see
-  // CGdalVrtUtil::buildOverviewAdvice())
-  const QString ovrPath = filename_ + ".ovr";
-  if (QFileInfo::exists(ovrPath)) {
-    QFile::remove(ovrPath);
-  }
-
-  qreal pixelSizeX = 0.0;
-  {
-    GDALDatasetUniquePtr dataset(GDALDataset::FromHandle(GDALOpen(filename_.toUtf8(), GA_ReadOnly)));
-    if (!dataset) {
-      return false;
-    }
-    qreal geoTransform[6];
-    if (dataset->GetGeoTransform(geoTransform) == CE_None) {
-      pixelSizeX = qAbs(geoTransform[1]);
-    }
-    // dataset closes here, before filename_ is reopened for writing below
-  }
-
-  QStringList sourcePaths;
-  for (const CGdalVrtUtil::file_overview_info_t& info : advice_.perFileInfo) {
-    sourcePaths << info.path;
-  }
-  // what gdalbuildvrt would declare for a fresh mosaic of these sources right now. Not
-  // advice_.suggestedLevels directly - a skipped source, or an already-adequate one
-  // with different levels, could make that claim untrue.
-  const QVector<qint32> factors = CGdalVrtUtil::intersectSourceOverviewFactors(sourcePaths, pixelSizeX);
+  // Safe to declare directly: every file in filesToFix() was just rebuilt with exactly
+  // this list (see slotFixIt()), and every other source was excluded from the fix because
+  // it already had it in its own native pyramid (see filesToFix()) - and this is only
+  // reached after CShell reports the whole gdaladdo job succeeded.
+  const QVector<qint32>& factors = advice_.suggestedLevels;
 
   QFile file(filename_);
   if (!file.open(QIODevice::ReadOnly)) {
@@ -443,5 +422,20 @@ bool COverviewAdvisoryDialog::fixContainerOverviewList() {
   }
   QTextStream stream(&saveFile);
   doc.save(stream, 2);
-  return saveFile.commit();
+  if (!saveFile.commit()) {
+    return false;
+  }
+
+  // Only now that the rewritten <OverviewList> is safely committed, drop any stale .ovr
+  // file - GDAL trusts a real .ovr file over anything the source files/OverviewList offer,
+  // so an old one left behind would keep shadowing the fix (see
+  // CGdalVrtUtil::buildOverviewAdvice()). Deleting it only after a successful commit means
+  // a failure anywhere above leaves the original, still-working state untouched instead of
+  // stripping the container's overview acceleration with nothing to show for it.
+  const QString ovrPath = filename_ + ".ovr";
+  if (QFileInfo::exists(ovrPath)) {
+    QFile::remove(ovrPath);
+  }
+
+  return true;
 }

@@ -22,8 +22,10 @@
 
 CShell* CShell::pSelf = nullptr;
 
-CShell::CShell(QWidget* parent) : QTextBrowser(parent) {
-  pSelf = this;
+CShell::CShell(QWidget* parent, bool isSingleton) : QTextBrowser(parent) {
+  if (isSingleton) {
+    pSelf = this;
+  }
 
   connect(&cmd, &QProcess::readyReadStandardError, this, &CShell::slotStderr);
   connect(&cmd, &QProcess::readyReadStandardOutput, this, &CShell::slotStdout);
@@ -31,6 +33,12 @@ CShell::CShell(QWidget* parent) : QTextBrowser(parent) {
   connect(&cmd, static_cast<void (QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished), this,
           &CShell::slotFinished);
   connect(&cmd, &QProcess::errorOccurred, this, &CShell::slotError);
+}
+
+CShell::~CShell() {
+  if (pSelf == this) {
+    pSelf = nullptr;
+  }
 }
 
 void CShell::slotError(QProcess::ProcessError error) {
@@ -145,7 +153,6 @@ void CShell::slotCancel() {
 
   stdOut(tr("\nCanceled by user's request.\n"));
   cmd.kill();
-  cmd.waitForFinished(10000);
 }
 
 int CShell::execute(QList<CShellCmd> cmds) {

@@ -37,6 +37,18 @@ class IDrawContext;
  */
 class CGdalVrtUtil {
  public:
+  /// @brief Approximate meters per degree of latitude/longitude at the equator; used to
+  ///        convert a geographic (lat/long) CRS's geotransform pixel size into real
+  ///        meters. Shared by CDemVRT/CMapVRT wherever they need real-world pixel size
+  ///        from a dataset that may be in either a projected or a geographic CRS.
+  static constexpr qreal kMetersPerDegree = 111120;
+
+  /// @brief Convert one geotransform scale element to real meters.
+  /// @param scale        e.g. adfGeoTransform[1]/[5] - degrees/pixel if isSrcLatLong,
+  ///                     meters/pixel otherwise
+  /// @param isSrcLatLong CProj::isSrcLatLong() for the same dataset
+  static qreal toMeters(qreal scale, bool isSrcLatLong) { return isSrcLatLong ? scale * kMetersPerDegree : scale; }
+
   /**
      @brief Check that every file GDAL reports as part of the dataset (e.g. the files a
             VRT references) actually exists on disk.
@@ -70,6 +82,21 @@ class CGdalVrtUtil {
                           progress callback context
    */
   static int progressCallback(double dfComplete, const char* message, void* pProgressArg);
+
+  /**
+     @brief Dataset dimensions/pixel size, purely for the informational line
+            COverviewAdvisoryDialog shows above the overview tables - not used by any of
+            the overview-factor math above.
+   */
+  struct raster_geometry_t {
+    qint32 xsizePx = 0;   /**< Raster width in pixels (post-warp - the size actually drawn from). */
+    qint32 ysizePx = 0;   /**< Raster height in pixels (post-warp). */
+    qreal pixelSizeX = 0; /**< Real-world size of one pixel along x, in meters. For a geographic
+                              (lat/long) source CRS this is an approximation (see
+                              kMetersPerDegree) - the same one CDemVRT's own xscale/yscale
+                              already use for their own, different, purpose). */
+    qreal pixelSizeY = 0; /**< Same as pixelSizeX, along y. */
+  };
 
   /**
      @brief The current overview situation and what's needed to fix slow rendering.

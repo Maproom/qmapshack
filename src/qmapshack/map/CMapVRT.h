@@ -63,12 +63,13 @@ class CMapVRT : public IMap {
   /// @brief Cached suggested-overview info for this file; used by the overview advisory dialog.
   const CGdalVrtUtil::overview_advice_t& getOverviewAdvice() const { return overviewAdvice; }
 
+  /// @brief Cached dimensions/pixel size for the overview advisory dialog's informational line.
+  const CGdalVrtUtil::raster_geometry_t& getRasterGeometry() const { return rasterGeometry; }
+
   /// @brief Set by the overview advisory dialog's "don't show again for this file" checkbox.
   void setSuppressOverviewAdvisory(bool yes) { advisoryState.suppress = yes; }
   /// @brief Set true while the advisory dialog is open; suppresses draw retries during that time.
   void setAdvisoryOpen(bool yes) { advisoryState.open = yes; }
-  /// @brief True while an advisory dialog for this file is already open; guards against opening a second one.
-  bool isAdvisoryOpen() const { return advisoryState.open; }
 
   bool showsOverviewWarning() const override { return !advisoryState.suppress && overviewAdvice.needsAttention(); }
   bool hasOverviewInfo() const override { return true; }
@@ -182,6 +183,10 @@ class CMapVRT : public IMap {
   /// Suppression/session/open-dialog bookkeeping for the overview advisory; identical
   /// shape shared with CDemVRT, see CGdalVrtUtil::overview_advisory_state_t.
   CGdalVrtUtil::overview_advisory_state_t advisoryState;
+
+  /// Cached dimensions/pixel size, computed once at construction; used by the overview
+  /// advisory dialog's informational line.
+  CGdalVrtUtil::raster_geometry_t rasterGeometry;
 };
 
 #endif  // CMAPVRT_H

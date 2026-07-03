@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="ca_ES">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="ca">
 <context>
     <name>CAbout</name>
     <message>
@@ -132,12 +130,12 @@
     <message>
         <location filename="../setup/CAppSetupLinux.cpp" line="113"/>
         <source>Fatal...</source>
-        <translation type="unfinished">Fatal...</translation>
+        <translation>Fatal...</translation>
     </message>
     <message>
         <location filename="../setup/CAppSetupLinux.cpp" line="114"/>
         <source>Failed to lock file&lt;br&gt;%1&lt;br&gt;%2</source>
-        <translation type="unfinished"></translation>
+        <translation>No s&apos;ha pogut blocar el fitxer&lt;br&gt;%1&lt;br&gt;%2</translation>
     </message>
 </context>
 <context>
@@ -145,12 +143,12 @@
     <message>
         <location filename="../setup/CAppSetupMac.cpp" line="194"/>
         <source>Fatal...</source>
-        <translation type="unfinished">Fatal...</translation>
+        <translation>Fatal...</translation>
     </message>
     <message>
         <location filename="../setup/CAppSetupMac.cpp" line="195"/>
         <source>Failed to lock file&lt;br&gt;%1&lt;br&gt;%2</source>
-        <translation type="unfinished"></translation>
+        <translation>No s&apos;ha pogut blocar el fitxer&lt;br&gt;%1&lt;br&gt;%2</translation>
     </message>
 </context>
 <context>
@@ -158,12 +156,12 @@
     <message>
         <location filename="../setup/CAppSetupWin.cpp" line="128"/>
         <source>Fatal...</source>
-        <translation type="unfinished">Fatal...</translation>
+        <translation>Fatal...</translation>
     </message>
     <message>
         <location filename="../setup/CAppSetupWin.cpp" line="129"/>
         <source>Failed to lock file&lt;br&gt;%1&lt;br&gt;%2</source>
-        <translation type="unfinished"></translation>
+        <translation>No s&apos;ha pogut blocar el fitxer&lt;br&gt;%1&lt;br&gt;%2</translation>
     </message>
 </context>
 <context>
@@ -186,7 +184,7 @@
     <message>
         <location filename="../canvas/CCanvas.cpp" line="249"/>
         <source>&lt;h1&gt;Welcome&lt;/h1&gt;&lt;p&gt;Thank you for using QMapShack. QMapShack is a non-profit Open Source project. It&apos;s maintained by enthusiast and volunteers. It&apos;s very mature and useful but lacks certain amenities you might be used from &apos;free&apos; commercial software. As a matter of fact we lack the resources to provide you with a centralized and convenient download of maps, elevation data and routing data. You have to download these resources from various sites on your own. But this page might help you a bit&lt;/p&gt;</source>
-        <translation>&lt;h1&gt;Benvinguts&lt;/h1&gt;&lt;p&gt;Gràcies per utilitzar QMapShack. QMapShack és un projecte Open Source sense ànim de lucre. El mantenen entusiastes i voluntaris. És estable i usable tot i que té certes mancances respecte del programari comercial &quot;lliure&quot;. De fet, no disposem dels recursos necessaris per a proporcionar un servei centralitzat de descàrrega de mapes, dades d&apos;elevació i dades d&apos;itineraris. Cal que descarregueu aquests recursos dels llocs que tingueu com a preferits. Aquesta plana us pot ajudar una mica.&lt;/p&gt;</translation>
+        <translation>&lt;h1&gt;Benvinguts&lt;/h1&gt;&lt;p&gt;Gràcies per utilitzar QMapShack. QMapShack és un projecte Open Source sense ànim de lucre. El mantenen entusiastes i voluntaris. És estable i usable tot i que té certes mancances respecte del programari comercial «lliure». De fet, no disposem dels recursos necessaris per a proporcionar un servei centralitzat de descàrrega de mapes, dades d&apos;altitud i dades d&apos;itineraris. Cal que descarregueu aquests recursos dels llocs que tingueu com a preferits. Aquesta plana us pot ajudar una mica.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="258"/>
@@ -211,12 +209,12 @@
     <message>
         <location filename="../canvas/CCanvas.cpp" line="358"/>
         <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Sources for DEM&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Origen per als DEM&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="365"/>
         <source>&lt;h2&gt;Elevation Data&lt;/h2&gt;&lt;p&gt;Elevation data (Digital Elevation Model - DEM) is used in various functions of QMapShack and is completely independent from the maps. However the same principles as for maps apply. DEM data must always be defined by a single file that is recognized by QMapShack. This file has to be placed into one of the registered DEM folders (&lt;a href=&apos;DemFolders&apos;&gt;File-&gt;Setup DEM Paths&lt;/a&gt;). QMapShack will find it and list it. You can reload the list of DEM files by doing a right click on the DEM list and select &apos;Reload DEM&apos; from the menu.&lt;/p&gt;&lt;p&gt;Similar to raster maps DEM files have to be wrapped by a *.vrt file to be recognized. A *.vrt file can reference one or several other files. Again, you can use QMapShack&apos;s built-in VRT Builder (&lt;a href=&apos;VrtBuilder&apos;&gt;Tool-&gt;VRT Builder&lt;/a&gt;) to create such a file.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h2&gt;Dades d&apos;Altitud&lt;/h2&gt;&lt;p&gt;QMapShack utilitza de forma àmplia les dades d&apos;Altitud (Digital Elevation Model - DEM) que són dades totalment independent dels mapes. Malgrat tot el funcionament és força similar al dels mapes. Les dades DEM han d&apos;estar enmagatzemades en un fitxer que QMapShack pugui reconeixer. Aquest fitxer ha d&apos;estar en una de les carpetes DEM (&lt;a href=&apos;DemFolders&apos;&gt;Fitxer-&gt;Configurar els Camins a DEM&lt;/a&gt;). Així QMapShack els trobarà i els podrà llistar. Es pot tornar a carregar la llista dels DEM prement el botó dret i escollint del menú la opció &apos;Tornar a Carregar DEM&apos;.&lt;/p&gt;&lt;p&gt;Igual que en els mapes raster, els fitxers DEM han d&apos;estar referenciats dins d&apos;un fitxer *.vrt per tal de ser reconeguts. Un fitxer *.vrt pot fer referència a un o més fitxers. Es pot utilitzar el Creador de VRT que incorpora QMapShack&apos;s (&lt;a href=&apos;VrtBuilder&apos;&gt;Eina-&gt;Creador de VRT&lt;/a&gt;) per a crear l&apos;esmentat fitxer.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="1083"/>
@@ -231,12 +229,12 @@
     <message>
         <location filename="../canvas/CCanvas.cpp" line="318"/>
         <source>&lt;h2&gt;Maps!&lt;/h2&gt;&lt;p&gt;A map must always be defined by a single file that is recognized by QMapShack. This file has to be placed into one of the registered map folders (&lt;a href=&apos;MapFolders&apos;&gt;File-&gt;Setup Map Paths&lt;/a&gt;). QMapShack will find it and list it. You can reload the list of maps by doing a right click on the map list and select &apos;Reload Maps&apos; from the menu.&lt;/p&gt; &lt;p&gt;A map must be activated to be visible. Right click on the map entry and select &apos;Activate&apos; from the menu. The moment a map is activated this help will disappear. To see it again you simply add another map view (&lt;a href=&apos;NewView&apos;&gt;View-&gt;Add Map View&lt;/a&gt;).&lt;/p&gt; &lt;p&gt;To start with some online maps click on the link for &lt;a href=&apos;GetMaps&apos;&gt;impatient users&lt;/a&gt;. If you have a Garmin GPS device with non-commercial maps you can copy the *.img and *.jnx files from your device into the map folder.&lt;/p&gt; &lt;/p&gt;If you own raster maps in a format that is supported by GDAL you have to create a virtual map definition file (*.vrt), first. A *.vrt file can reference one or several other files. You can use QMapShack&apos;s built-in VRT Builder (&lt;a href=&apos;VrtBuilder&apos;&gt;Tool-&gt;VRT Builder&lt;/a&gt;) to create such a file.&lt;/p&gt;</source>
-        <translation>&lt;h2&gt;Mapes!&lt;/h2&gt;&lt;p&gt;Un mapa ha d&apos;estar emmagatzemat en un fitxer que QMapShack ha de poder reconèixer. Aquest fitxer ha d&apos;estar situat en una de les carpetes de mapes definides a la configuració (&lt;a href=&apos;MapFolders&apos;&gt;Fitxer-&gt;Configurar els Camins a Mapes&lt;/a&gt;). QMapShack el buscarà allà i el mostrarà en una llista. Es pot actualitzar la llista de mapes fent clic al botó dret sobre la llista de mapes i seleccionant la opció del menú &apos;Tornar a carregar Mapes&apos;.&lt;/p&gt; &lt;p&gt;Per a veure el mapa, s&apos;ha d&apos;activar. Clic al botó dret sobre el nom del mapa i seleccionar del menú la opció &apos;Activar&apos;. Aquesta ajuda desapareixerà en el moment en que s&apos;activi el mapa. Per a tornar-la a veure afegiu una altre vista de mapa (&lt;a href=&apos;NewView&apos;&gt;Vista-&gt;Afegir Vista de Mapa&lt;/a&gt;).&lt;/p&gt; &lt;p&gt;Per començar amb algun mapa en línia podeu fer clic a l&apos;enllaç &lt;a href=&apos;GetMaps&apos;&gt;si sou un usuari sense paciència&lt;/a&gt;. Si teniu un GPS Garmin i hi teniu instal·lats mapes no-comercials, podeu copiar els fitxers *.img i els fitxers *.jnx del dispositiu a la carpeta de mapes.&lt;/p&gt; &lt;/p&gt;Si disposeu de mapes ràster que siguin compatibles amb GDAL, primer heu de crear un fitxer per a definir de forma virtual el mapa (*.vrt). Un fitxer *.vrt pot servir per a un o més fitxers. Cas de no existir aquest fitxer, es pot crear dins de QMapShack&apos;s amb el generador de VRT (&lt;a href=&apos;VrtBuilder&apos;&gt;Eina-&gt;Creador de VRT&lt;/a&gt;).&lt;/p&gt;</translation>
+        <translation>&lt;h2&gt;Mapes!&lt;/h2&gt;&lt;p&gt;Un mapa ha d&apos;estar emmagatzemat en un fitxer que QMapShack ha de poder reconèixer. Aquest fitxer ha d&apos;estar situat en una de les carpetes de mapes definides a la configuració (&lt;a href=&apos;MapFolders&apos;&gt;Fitxer-&gt;Configurar els Camins a Mapes&lt;/a&gt;). QMapShack el buscarà allà i el mostrarà en una llista. Es pot actualitzar la llista de mapes fent clic al botó dret sobre la llista de mapes i seleccionant la opció del menú &apos;Tornar a carregar Mapes&apos;.&lt;/p&gt; &lt;p&gt;Per a veure el mapa, s&apos;ha d&apos;activar. Clic al botó dret sobre el nom del mapa i seleccionar del menú la opció &apos;Activar&apos;. Aquesta ajuda desapareixerà en el moment en que s&apos;activi el mapa. Per a tornar-la a veure afegiu una altre vista de mapa (&lt;a href=&apos;NewView&apos;&gt;Vista-&gt;Afegir Vista de Mapa&lt;/a&gt;).&lt;/p&gt; &lt;p&gt;Per començar amb algun mapa en línia podeu fer clic a l&apos;enllaç &lt;a href=&apos;GetMaps&apos;&gt;si sou un usuari sense paciència&lt;/a&gt;. Si teniu un GPS Garmin i hi teniu instal·lats mapes no-comercials, podeu copiar els fitxers *.img i els fitxers *.jnx del dispositiu a la carpeta de mapes.&lt;/p&gt; &lt;/p&gt;Si disposeu de mapes ràster que siguin compatibles amb GDAL, primer heu de crear un fitxer per a definir de forma virtual el mapa (*.vrt). Un fitxer *.vrt pot servir per a un o més fitxers. Cas de no existir aquest fitxer, es pot crear dins de QMapShack&apos;s amb el creador de VRT (&lt;a href=&apos;VrtBuilder&apos;&gt;Eina-&gt;Creador de VRT&lt;/a&gt;).&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="284"/>
         <source>&lt;h2&gt;Give it a home&lt;/h2&gt;&lt;p&gt;QMapShack needs a folder on your hard drive where all data is kept. Naturally this will grow very large. We recommend a folder with some subfolders:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Maps - where all maps are stored&lt;/li&gt;&lt;li&gt;DEM - where all elevation data is stored&lt;/li&gt;&lt;li&gt;POI - where all POI collections are stored&lt;/li&gt;&lt;li&gt;Routino - where routing data for the Routino offline router is stored&lt;/li&gt;&lt;li&gt;BRouter - where routing data for the BRouter offline router is stored&lt;/li&gt;&lt;li&gt;Databases - where you create databases to organize your GIS data&lt;/li&gt;&lt;li&gt;GPX - where you keep GPX files&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Do you want to create these folders right now? Give me a &lt;a  href=&apos;SetupHome&apos;&gt;path&lt;/a&gt; and QMapShack will create all sub-folder and update all settings.&lt;/p&gt;</source>
-        <translation>&lt;h2&gt;Guarda-ho tot de forma ordenada&lt;/h2&gt;&lt;p&gt;QMapShack necessita una carpeta del disc dur on guardar totes les dades. Naturalment, creixerà molt. Recomanem crear una carpeta amb diverses sub-carpetes:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Maps - on s&apos;emmagatzemaran tots els mapes&lt;/li&gt;&lt;li&gt;DEM - on s&apos;emmagatzemaran totes les dades d&apos;alçades&lt;/li&gt;&lt;li&gt;POI - on s&apos;emmagatzemaran totes les col·leccions de Punts d&apos;Interès&lt;/li&gt;&lt;li&gt;Routino - on s&apos;emmagatzemaran tots els itineraris fora de línia de Routino&lt;/li&gt;&lt;li&gt;BRouter - on s&apos;emmagatzemaran tots els itineraris fora de línia de BRouter&lt;/li&gt;&lt;li&gt;Databases - on es crearan les bases de dades per a organitzar les dades GIS&lt;/li&gt;&lt;li&gt;GPX - on es guardaran els fitxers GPX&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Voleu crear ara aquestes carpetes? Diguem un &lt;a  href=&apos;SetupHome&apos;&gt;camí&lt;/a&gt; i QMapShack crearà totes les sub-carpetes i modificarà totes les dades de configuració.&lt;/p&gt;</translation>
+        <translation>&lt;h2&gt;Guarda-ho tot de forma ordenada&lt;/h2&gt;&lt;p&gt;QMapShack necessita una carpeta del disc dur on guardar totes les dades. Naturalment, creixerà molt. Recomanem crear una carpeta amb diverses sub-carpetes:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Maps - on s&apos;emmagatzemaran tots els mapes&lt;/li&gt;&lt;li&gt;DEM - on s&apos;emmagatzemaran totes les dades d&apos;altituds&lt;/li&gt;&lt;li&gt;POI - on s&apos;emmagatzemaran totes les col·leccions de Punts d&apos;Interès&lt;/li&gt;&lt;li&gt;Routino - on s&apos;emmagatzemaran tots els itineraris fora de línia de Routino&lt;/li&gt;&lt;li&gt;BRouter - on s&apos;emmagatzemaran tots els itineraris fora de línia de BRouter&lt;/li&gt;&lt;li&gt;Databases - on es crearan les bases de dades per a organitzar les dades GIS&lt;/li&gt;&lt;li&gt;GPX - on es guardaran els fitxers GPX&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Voleu crear ara aquestes carpetes? Diguem un &lt;a  href=&apos;SetupHome&apos;&gt;camí&lt;/a&gt; i QMapShack crearà totes les sub-carpetes i modificarà totes les dades de configuració.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="304"/>
@@ -246,7 +244,7 @@
     <message>
         <location filename="../canvas/CCanvas.cpp" line="348"/>
         <source>&lt;h2&gt;Your Data&lt;/h2&gt;&lt;p&gt;To load tracks and waypoints use &lt;a href=&apos;LoadData&apos;&gt;File-&gt;Load GIS Data&lt;/a&gt; from the menu. Each file will be an independent project in the workspace. You can manage your data in single files or you use a database. You can &lt;a href=&apos;CreateDB&apos;&gt;create a database&lt;/a&gt; in the database dockwidget.&lt;/p&gt;</source>
-        <translation>&lt;h2&gt;Les vostres Dades&lt;/h2&gt;&lt;p&gt;Per a carregar tracks i fites escull &lt;a href=&apos;LoadData&apos;&gt;Fitxer-&gt;Carregar Dades GIS&lt;/a&gt; del menú. En l&apos;espai de treball, cada fitxer estarà en un projecte diferent. Podeu gestionar les dades fitxer a fitxer o utilitzar la base de dades. Podeu &lt;a href=&apos;CreateDB&apos;&gt;crear una base de dades&lt;/a&gt; en la finestra acoblable &quot;Base de Dades&quot;.&lt;/p&gt;</translation>
+        <translation>&lt;h2&gt;Les vostres Dades&lt;/h2&gt;&lt;p&gt;Per a carregar tracks i fites escull &lt;a href=&apos;LoadData&apos;&gt;Fitxer-&gt;Carregar Dades GIS&lt;/a&gt; del menú. En l&apos;espai de treball, cada fitxer estarà en un projecte diferent. Podeu gestionar les dades fitxer a fitxer o utilitzar la base de dades. Podeu &lt;a href=&apos;CreateDB&apos;&gt;crear una base de dades&lt;/a&gt; en la finestra acoblable «Base de Dades».&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="384"/>
@@ -274,17 +272,17 @@
     <message>
         <location filename="../setup/CCommandProcessor.cpp" line="44"/>
         <source>name</source>
-        <translation type="unfinished">nom</translation>
+        <translation>nom</translation>
     </message>
     <message>
         <location filename="../setup/CCommandProcessor.cpp" line="47"/>
         <source>size</source>
-        <translation type="unfinished">mida</translation>
+        <translation>mida</translation>
     </message>
     <message>
         <location filename="../setup/CCommandProcessor.cpp" line="41"/>
         <source>code</source>
-        <translation type="unfinished"></translation>
+        <translation>codi</translation>
     </message>
     <message>
         <location filename="../setup/CCommandProcessor.cpp" line="38"/>
@@ -304,17 +302,17 @@
     <message>
         <location filename="../setup/CCommandProcessor.cpp" line="41"/>
         <source>Application locale.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aplicació local.</translation>
     </message>
     <message>
         <location filename="../setup/CCommandProcessor.cpp" line="44"/>
         <source>Application font family.</source>
-        <translation type="unfinished"></translation>
+        <translation>Família dels tipus de lletra de l&apos;Aplicació.</translation>
     </message>
     <message>
         <location filename="../setup/CCommandProcessor.cpp" line="47"/>
         <source>Application font size.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mida dels tipus de lletra de l&apos;Aplicació.</translation>
     </message>
     <message>
         <location filename="../setup/CCommandProcessor.cpp" line="50"/>
@@ -327,7 +325,7 @@
     <message>
         <location filename="../gis/rte/CCreateRouteFromWpt.cpp" line="59"/>
         <source>route</source>
-        <translation>ruta</translation>
+        <translation>itinerari</translation>
     </message>
 </context>
 <context>
@@ -335,7 +333,7 @@
     <message>
         <location filename="../gis/db/CDBFolderLostFound.cpp" line="29"/>
         <source>All your data removed from projects.</source>
-        <translation type="unfinished"></translation>
+        <translation>Totes les teves dades s&apos;han suprimit dels projectes.</translation>
     </message>
     <message>
         <location filename="../gis/db/CDBFolderLostFound.cpp" line="56"/>
@@ -397,77 +395,77 @@
         <location filename="../gis/CDBItemDelegate.cpp" line="303"/>
         <location filename="../gis/CDBItemDelegate.cpp" line="305"/>
         <source>since: </source>
-        <translation type="unfinished"></translation>
+        <translation>des de</translation>
     </message>
     <message>
         <location filename="../gis/CDBItemDelegate.cpp" line="301"/>
         <source>%1 min.</source>
-        <translation type="unfinished">%1 min.</translation>
+        <translation>%1 min.</translation>
     </message>
     <message>
         <location filename="../gis/CDBItemDelegate.cpp" line="303"/>
         <source>%1 h</source>
-        <translation type="unfinished">%1 h</translation>
+        <translation>%1 h</translation>
     </message>
     <message>
         <location filename="../gis/CDBItemDelegate.cpp" line="305"/>
         <source>%1 days</source>
-        <translation type="unfinished">%1 dia</translation>
+        <translation>%1 dies</translation>
     </message>
     <message>
         <location filename="../gis/CDBItemDelegate.cpp" line="442"/>
         <source>Load item into workspace.</source>
-        <translation type="unfinished"></translation>
+        <translation>Carrega l&apos;element a l&apos;espai de treball</translation>
     </message>
     <message>
         <location filename="../gis/CDBItemDelegate.cpp" line="420"/>
         <source>Load project into workspace</source>
-        <translation type="unfinished"></translation>
+        <translation>Carrega el projecte a l&apos;espai de treball</translation>
     </message>
     <message>
         <location filename="../gis/CDBItemDelegate.cpp" line="240"/>
         <source>Groups: %1 </source>
-        <translation type="unfinished"></translation>
+        <translation>Grups: %1 </translation>
     </message>
     <message>
         <location filename="../gis/CDBItemDelegate.cpp" line="243"/>
         <source>Projects: %1 </source>
-        <translation type="unfinished"></translation>
+        <translation>Projectes: %1 </translation>
     </message>
     <message>
         <location filename="../gis/CDBItemDelegate.cpp" line="246"/>
         <source>Other: %1 </source>
-        <translation type="unfinished"></translation>
+        <translation>Altres: %1 </translation>
     </message>
     <message>
         <location filename="../gis/CDBItemDelegate.cpp" line="253"/>
         <source>W: %1 </source>
-        <translation type="unfinished"></translation>
+        <translation>W: %1 </translation>
     </message>
     <message>
         <location filename="../gis/CDBItemDelegate.cpp" line="256"/>
         <source>T: %1 </source>
-        <translation type="unfinished"></translation>
+        <translation>T: %1 </translation>
     </message>
     <message>
         <location filename="../gis/CDBItemDelegate.cpp" line="259"/>
         <source>R: %1 </source>
-        <translation type="unfinished"></translation>
+        <translation>R: %1 </translation>
     </message>
     <message>
         <location filename="../gis/CDBItemDelegate.cpp" line="262"/>
         <source>A: %1 </source>
-        <translation type="unfinished"></translation>
+        <translation>A: %1 </translation>
     </message>
     <message>
         <location filename="../gis/CDBItemDelegate.cpp" line="444"/>
         <source>Remove item from workspace.</source>
-        <translation type="unfinished"></translation>
+        <translation>Elimina l&apos;element de l&apos;espai de treball</translation>
     </message>
     <message>
         <location filename="../gis/CDBItemDelegate.cpp" line="422"/>
         <source>Remove project from workspace</source>
-        <translation type="unfinished"></translation>
+        <translation>Elimina el projecte de l&apos;espai de treball</translation>
     </message>
 </context>
 <context>
@@ -480,7 +478,7 @@
     <message>
         <location filename="../gis/db/CDBProject.cpp" line="93"/>
         <source>Can&apos;t load file &quot;%1&quot; . It will be skipped.</source>
-        <translation>No s&apos;ha pogut carregar el fitxer &quot;%1% . S&apos;ometrà l&apos;element.</translation>
+        <translation>No s&apos;ha pogut carregar el fitxer «%1%». S&apos;ometrà l&apos;element.</translation>
     </message>
     <message>
         <location filename="../gis/db/CDBProject.cpp" line="105"/>
@@ -490,7 +488,7 @@
     <message>
         <location filename="../gis/db/CDBProject.cpp" line="106"/>
         <source>The project &quot;%1&quot; has already been imported into the database. It will be skipped.</source>
-        <translation>El projecte &quot;%1&quot; ja és a la base de dades. S&apos;ometrà l&apos;element.</translation>
+        <translation>El projecte «%1» ja és a la base de dades. S&apos;ometrà l&apos;element.</translation>
     </message>
     <message>
         <location filename="../gis/db/CDBProject.cpp" line="255"/>
@@ -581,27 +579,23 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../dem/CDemVRT.cpp" line="52"/>
         <source>referenced by file:</source>
-        <translation>referenciat per fitxer:</translation>
+        <translation>referenciat pel fitxer:</translation>
     </message>
     <message>
         <location filename="../dem/CDemVRT.cpp" line="59"/>
         <location filename="../dem/CDemVRT.cpp" line="67"/>
         <source>DEM must have exactly one raster band:</source>
-        <translation type="unfinished"></translation>
+        <translation>El DEM ha de tenir una banda del ràster exacte:</translation>
     </message>
     <message>
         <location filename="../dem/CDemVRT.cpp" line="81"/>
         <source>DEM must have one band with 16bit, 32bit or 64bit numeric data:</source>
-        <translation type="unfinished"></translation>
+        <translation>Les dades DEM han de tenir un ample de banda de 16bit, 32bit o 64bit:</translation>
     </message>
     <message>
         <location filename="../dem/CDemVRT.cpp" line="132"/>
         <source>Failed to create Warp for:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>DEM must have one band with 16bit or 32bit data:</source>
-        <translation type="vanished">Les dades DEM han de tenir un ample de banda de 16bit o 32bit:</translation>
+        <translation>Ha fallat la creació de la Deformació de:</translation>
     </message>
     <message>
         <location filename="../dem/CDemVRT.cpp" line="154"/>
@@ -611,12 +605,12 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../dem/CDemVRT.cpp" line="179"/>
         <source>No pixel-to-map transform found:</source>
-        <translation type="unfinished"></translation>
+        <translation>No s&apos;ha trobat cap transformació de píxel a mapa:</translation>
     </message>
     <message>
         <location filename="../dem/CDemVRT.cpp" line="582"/>
         <source>Ele.</source>
-        <translation type="unfinished">Ele.</translation>
+        <translation>Ele.</translation>
     </message>
 </context>
 <context>
@@ -660,7 +654,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="297"/>
         <source>No images found</source>
-        <translation>&#xa0; No s&apos;ha trobat cap imatge</translation>
+        <translation>  No s&apos;ha trobat cap imatge</translation>
     </message>
 </context>
 <context>
@@ -829,7 +823,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="89"/>
         <source>&lt;b&gt;Track Point Information&lt;/b&gt;&lt;br/&gt;To document your tracks you can add a short description to a track point. All points with description will be marked along the track with auto-numbered bullets.&lt;br/&gt;You can add a description by a right click on a track point in the graphs. Or you do a left click on a track point in the map view.&lt;br/&gt;With the first track point you add information to this text will be replaced by a table. Use it to edit and delete track point information.&lt;br/&gt;</source>
-        <translation>&lt;b&gt;Informació del Punt del Track&lt;/b&gt;&lt;br/&gt;Es pot ampliar la descripció dels tracks afegint una curta descripció a cada punt del track. Tots els punts del track amb una descripció s&apos;assenyalaran al track amb un globus auto numerat.&lt;br/&gt;Es pot afegir una descripció escollint un punt en la gràfica i prement el botó dret. O bé prement el botó esquerra sobre un punt del track en la vista de mapa.&lt;br/&gt;En posar informació sobre aquest punt apareixerà una taula. Es pot utilitzar per modificar o esborrar la informació del punt del track.&lt;br/&gt;</translation>
+        <translation>&lt;b&gt;Informació del Punt del Track&lt;/b&gt;&lt;br/&gt;Es pot ampliar la descripció dels tracks afegint una curta descripció a cada punt del track. Tots els punts del track amb una descripció s&apos;assenyalaran al track amb vinyetes auto numerade.&lt;br/&gt;Es pot afegir una descripció escollint un punt en la gràfica i prement el botó dret. O bé prement el botó esquerra sobre un punt del track en la vista de mapa.&lt;br/&gt;En posar informació sobre aquest punt apareixerà una taula. Es pot utilitzar per a modificar o esborrar la informació del punt del track.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="190"/>
@@ -864,12 +858,12 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="519"/>
         <source>Set parameters to compute &quot;Energy Use Cycling&quot; for a cycling tour</source>
-        <translation>En una sortida en bicicleta estableix els paràmetres per a calcular l&apos;&quot;Energia Utilitzada En Ciclisme&quot; </translation>
+        <translation>En una sortida en bicicleta estableix els paràmetres per a calcular l&apos;«Energia Utilitzada En Ciclisme» </translation>
     </message>
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="524"/>
         <source> - Computation needs valid time, elevation and slope data.</source>
-        <translation> - Per al Càlcul fan falta les dades d&apos;hora, elevació i pendent.</translation>
+        <translation> - Per al Càlcul fan falta les dades d&apos;hora, altitud i pendent.</translation>
     </message>
 </context>
 <context>
@@ -877,7 +871,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../gis/wpt/CDetailsWpt.cpp" line="84"/>
         <source>Select icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecciona Icona</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CDetailsWpt.cpp" line="155"/>
@@ -895,22 +889,22 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../device/CDeviceAccessGvfsMtp.cpp" line="97"/>
         <source>Send to Devices...</source>
-        <translation type="unfinished"></translation>
+        <translation>Envia als Dispositius...</translation>
     </message>
     <message>
         <location filename="../device/CDeviceAccessGvfsMtp.cpp" line="98"/>
         <source>Failed to send file &quot;%1&quot; to device. Reason: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>No s&apos;ha pogut enviar el fitxer &quot;%1&quot; al dispositiu. Motiu: %2</translation>
     </message>
     <message>
         <location filename="../device/CDeviceAccessGvfsMtp.cpp" line="111"/>
         <source>Delete from Devices...</source>
-        <translation type="unfinished"></translation>
+        <translation>Elimina dels Dispositius...</translation>
     </message>
     <message>
         <location filename="../device/CDeviceAccessGvfsMtp.cpp" line="112"/>
         <source>Failed to delete file &quot;%1&quot; from device. Reason: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>No s&apos;ha pogut eliminar el fitxer &quot;%1&quot; del dispositiu. Motiu: %2</translation>
     </message>
 </context>
 <context>
@@ -918,22 +912,22 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../device/CDeviceAccessKMtp.cpp" line="89"/>
         <source>Send to Devices...</source>
-        <translation type="unfinished"></translation>
+        <translation>Envia als Dispositius...</translation>
     </message>
     <message>
         <location filename="../device/CDeviceAccessKMtp.cpp" line="90"/>
         <source>Failed to send file &quot;%1&quot; to device.</source>
-        <translation type="unfinished"></translation>
+        <translation>No s&apos;ha pogut enviar el fitxer &quot;%1&quot; al dispositiu.</translation>
     </message>
     <message>
         <location filename="../device/CDeviceAccessKMtp.cpp" line="103"/>
         <source>Delete from Devices...</source>
-        <translation type="unfinished"></translation>
+        <translation>Elimina dels Dispositius...</translation>
     </message>
     <message>
         <location filename="../device/CDeviceAccessKMtp.cpp" line="104"/>
         <source>Failed to delete file &quot;%1&quot; from device. Reason: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>No s&apos;ha pogut eliminar el fitxer &quot;%1&quot; del dispositiu. Motiu: %2</translation>
     </message>
 </context>
 <context>
@@ -960,7 +954,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../device/CDeviceGarminArchive.cpp" line="48"/>
         <source>Archive - loading</source>
-        <translation type="unfinished"></translation>
+        <translation>Arxiu - carregant</translation>
     </message>
     <message>
         <location filename="../device/CDeviceGarminArchive.cpp" line="84"/>
@@ -974,17 +968,17 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
         <location filename="../device/CDeviceGarminArchiveMtp.cpp" line="31"/>
         <location filename="../device/CDeviceGarminArchiveMtp.cpp" line="111"/>
         <source>Archive - expand to load</source>
-        <translation type="unfinished">Arxiu - amplia per a carregar</translation>
+        <translation>Arxiu - amplia per a carregar</translation>
     </message>
     <message>
         <location filename="../device/CDeviceGarminArchiveMtp.cpp" line="48"/>
         <source>Archive - loading</source>
-        <translation type="unfinished"></translation>
+        <translation>Archive - loading</translation>
     </message>
     <message>
         <location filename="../device/CDeviceGarminArchiveMtp.cpp" line="93"/>
         <source>Archive - loaded</source>
-        <translation type="unfinished">S&apos;ha carregat l&apos;arxiu</translation>
+        <translation>S&apos;ha carregat l&apos;arxiu</translation>
     </message>
 </context>
 <context>
@@ -992,7 +986,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../device/CDeviceGenericMtp.cpp" line="57"/>
         <source>Unknown MTP</source>
-        <translation type="unfinished"></translation>
+        <translation>MTP Desconegut</translation>
     </message>
 </context>
 <context>
@@ -1000,7 +994,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../helpers/CElevationDialog.cpp" line="73"/>
         <source>No DEM data found for that point.</source>
-        <translation>No s&apos;han trobat dades DEM per aquest punt. </translation>
+        <translation>No s&apos;han trobat dades DEM per a aquest punt. </translation>
     </message>
 </context>
 <context>
@@ -1106,12 +1100,12 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.cpp" line="48"/>
         <source>Compute the &quot;Energy Use Cycling&quot; value, store the parameter set and close this dialog.</source>
-        <translation>Calcula el valor de &quot;Energia Utilitzada En Ciclisme&quot;, guarda el valor i tanca la finestra.</translation>
+        <translation>Calcula el valor de «Energia Utilitzada En Ciclisme», guarda el valor i tanca la finestra.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.cpp" line="50"/>
         <source>Compute the &quot;Energy Use Cycling&quot; value in this dialog.</source>
-        <translation>Calcula en aquest finestra el valor d&apos;&quot;Energia Utilitzada En Ciclisme&quot;.</translation>
+        <translation>Calcula en aquest finestra el valor d&apos;«Energia Utilitzada En Ciclisme».</translation>
     </message>
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.cpp" line="51"/>
@@ -1121,7 +1115,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.cpp" line="52"/>
         <source>Remove the &quot;Energy Use Cycling&quot; value from the track.</source>
-        <translation>Suprimeix del track el valor d&apos;&quot;Energia Utilitzada En Ciclisme&quot;</translation>
+        <translation>Suprimeix del track el valor d&apos;«Energia Utilitzada En Ciclisme».</translation>
     </message>
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.cpp" line="44"/>
@@ -1136,7 +1130,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.cpp" line="295"/>
         <source>&lt;p&gt;&lt;b&gt;Set Energy Use for Cycling&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Within this dialog your personal energy use (consumption) for a cycling tour can be computed.&lt;/p&gt;&lt;p&gt;The computed value of &quot;Energy Use Cycling&quot; can be see as an indicator for the exertion of a cycling tour.&lt;/p&gt;&lt;p&gt;The tour length, speed and slope values will be taken into account.&lt;/p&gt;&lt;p&gt;To individualize your personal energy use the following input data are more needed:&lt;ul&gt;&lt;li&gt;Driver and bicycle weight&lt;/li&gt;&lt;li&gt;Air density, wind speed and position to the wind to consider the wind drag resistance&lt;/li&gt;&lt;li&gt;Ground situation (tyre and ground) to consider the rolling resistance&lt;/li&gt;&lt;li&gt;Average pedal cadence for the computation of pedal force&lt;/li&gt;&lt;/ul&gt;&lt;/p&gt;&lt;p&gt;The individualize data will be defined in this dialog and more computed values will be shown here.&lt;/p&gt;&lt;p&gt;When loading older tracks or switching in history to tracks with a different parameter set compared to the previous saved parameter set, the shown parameter set in this dialog can be replaced by the previous saved parameter set.&lt;p&gt;The energy use in unit &quot;kcal&quot; will be stored in the track (qms format only) and can be remove later on when no longer needed.&lt;/p&gt;&lt;p&gt;For more information see tooltips on input and output values.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;&lt;b&gt;Estableix Energia Utilitzada En Ciclisme&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Amb aquesta funcionalitat podràs calcular l&apos;energia personal (consumida) en una sortida en bicicleta.&lt;/p&gt;&lt;p&gt;El valor calculat de Energia Utilitzada En Ciclisme es pot visualitzar com un indicador de l&apos;esforç fet en una sortida en bicicleta.&lt;/p&gt;&lt;p&gt;Per al càlcul s&apos;utilitzaran els valors de longitud de la sortida, velocitat i pendent.&lt;/p&gt;&lt;p&gt;Per a personalitzar l&apos;energia utilitzada s&apos;han d&apos;introduir les següents dades:&lt;ul&gt;&lt;li&gt;Pes del ciclista i de la bicicleta&lt;/li&gt;&lt;li&gt;Densitat de l&apos;aire, velocitat del vent i la direcció del vent per tal de tenir en compte la resistència al vent&lt;/li&gt;&lt;li&gt;Tipus de terreny (cobertes i pis) per a tenir en compte la resistència al rodament&lt;/li&gt;&lt;li&gt;La mitjana de la cadència per a tenir en compte la força de la pedalada&lt;/li&gt;&lt;/ul&gt;&lt;/p&gt;&lt;p&gt;Un cop introduïdes les dades, a la mateixa finestra es mostraran més dades calculades.&lt;/p&gt;&lt;p&gt;En carregar antics tracks o commutar entre tracks històrics amb diferents paràmetres, els paràmetres que es mostren a la finestra es podran canviar pels darrers que s&apos;hagis guardat.&lt;p&gt;L&apos;energia utilitzada representada en &quot;kcal&quot; es pot guardar al track (solament en format qms) i es pot esborrar en qualsevol moment si ja no és necessari.&lt;/p&gt;&lt;p&gt;Per a més informació podeu mirar els consells referents a valors d&apos;entrada i sortida.&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;&lt;b&gt;Estableix Energia Utilitzada En Ciclisme&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Amb aquesta funcionalitat podràs calcular l&apos;energia personal (consumida) en una sortida en bicicleta.&lt;/p&gt;&lt;p&gt;El valor calculat d&apos;«Energia Utilitzada En Ciclisme» es pot visualitzar com un indicador de l&apos;esforç fet en una sortida en bicicleta.&lt;/p&gt;&lt;p&gt;Per al càlcul s&apos;utilitzaran els valors de longitud de la sortida, velocitat i pendent.&lt;/p&gt;&lt;p&gt;Per a personalitzar l&apos;energia utilitzada s&apos;han d&apos;introduir les següents dades:&lt;ul&gt;&lt;li&gt;Pes del ciclista i de la bicicleta&lt;/li&gt;&lt;li&gt;Densitat de l&apos;aire, velocitat del vent i la direcció del vent per tal de tenir en compte la resistència al vent&lt;/li&gt;&lt;li&gt;Tipus de terreny (cobertes i pis) per a tenir en compte la resistència al rodament&lt;/li&gt;&lt;li&gt;La mitjana de la cadència per a tenir en compte la força de la pedalada&lt;/li&gt;&lt;/ul&gt;&lt;/p&gt;&lt;p&gt;Un cop introduïdes les dades, a la mateixa finestra es mostraran més dades calculades.&lt;/p&gt;&lt;p&gt;En carregar antics tracks o commutar entre tracks històrics amb diferents paràmetres, els paràmetres que es mostren a la finestra es podran canviar pels darrers que s&apos;hagis guardat.&lt;p&gt;L&apos;energia utilitzada representada en «kcal» es pot guardar al track (solament en format qms) i es pot esborrar en qualsevol moment si ja no és necessari.&lt;/p&gt;&lt;p&gt;Per a més informació podeu mirar els consells referents a valors d&apos;entrada i sortida.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/CEnergyCyclingDialog.cpp" line="315"/>
@@ -1157,7 +1151,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../gis/db/CExportDatabaseThread.cpp" line="71"/>
         <source>Failed to open database for export. &quot;%1&quot;</source>
-        <translation>Error en obrir la base de dades per exportar. &quot;%1&quot;</translation>
+        <translation>Error en obrir la base de dades per a exportar. «%1»</translation>
     </message>
     <message>
         <location filename="../gis/db/CExportDatabaseThread.cpp" line="76"/>
@@ -1245,7 +1239,7 @@ This filter detects loops by looking for intersections. A new track is created a
 The only input parameter is minimum loop length: this is to prevent cutting tracks in tight switchbacks, where recorded tracks can be made of tiny loops. These loops will be ignored if their lengths are smaller that the given value.</source>
         <translation>Algunes vegades les pistes tenen bucles.
 
-Sovint és el cas de les rutes amb bicicleta de muntanya on s&apos;utilitza la mateixa pista diverses vegades per tornar a pujar a un cim. Diversos camins de descens comencen des d&apos;aquest cim i la mateixa pista s&apos;utilitza diverses vegades per tornar. La pista gravada està feta de diversos bucles. Tanmateix, seguir una pista feta de bucles en un dispositiu Garmin és difícil, ja que és impossible saber de quina manera s&apos;han de recórrer els bucles.
+Sovint és el cas de les rutes amb bicicleta de muntanya on s&apos;utilitza la mateixa pista diverses vegades per a tornar a pujar a un cim. Diversos camins de descens comencen des d&apos;aquest cim i la mateixa pista s&apos;utilitza diverses vegades per a tornar. La pista gravada està feta de diversos bucles. Tanmateix, seguir una pista feta de bucles en un dispositiu Garmin és difícil, ja que és impossible saber de quina manera s&apos;han de recórrer els bucles.
 
 L&apos;objectiu d&apos;aquest filtre és dividir la ruta inicial en diverses pistes separades. Les pistes obtingudes no tenen bucles i són fàcils de seguir en un dispositiu Garmin: comenceu amb la part 1, al final de la part 1, canvieu a la part 2, etc.
 
@@ -1259,7 +1253,7 @@ L&apos;únic paràmetre d&apos;entrada és la longitud del bucle mínim: així s
     <message>
         <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="118"/>
         <source>Track has no or invalid elevation data. Please correct or set constant speed!</source>
-        <translation>La ruta no te dades d&apos;elevació o són invalides. Si us plau corregiu o definiu una velocitat constant.</translation>
+        <translation>La ruta no te dades d&apos;altitud o són invalides. Si us plau corregiu o definiu una velocitat constant.</translation>
     </message>
 </context>
 <context>
@@ -1343,14 +1337,16 @@ L&apos;únic paràmetre d&apos;entrada és la longitud del bucle mínim: així s
     <message>
         <location filename="../gis/trk/filter/CFilterSplitTrack.cpp" line="49"/>
         <source>Help</source>
-        <translation type="unfinished">Ajuda</translation>
+        <translation>Ajuda</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/CFilterSplitTrack.cpp" line="50"/>
         <source>Sometimes tracks have too many points to be transferred to a gps device.
 
 This filter splits the track into multiple smaller tracks.</source>
-        <translation type="unfinished"></translation>
+        <translation>A vegades els tracks tenen massa punts i no és possible transferir-lo al dispositiu gps.
+
+Aquest filtre divideix el track en diversos tracks més petits.</translation>
     </message>
 </context>
 <context>
@@ -1364,7 +1360,7 @@ This filter splits the track into multiple smaller tracks.</source>
         <location filename="../gis/trk/filter/CFilterZeroSpeedDriftCleaner.cpp" line="57"/>
         <source>Hide knots in the track:
 
-During a break many GPS devices continue to record. As the GPS accuracy has some variance the result is a cloud of points forming kind of a knot in the track. This leads to accumulated errors in the statistics. That&apos;s why you might want to remove them.
+During a break many GPS devices continue to record. As the GPS accuracy has some variance the result is a cloud of points forming kind of a knot in the track. This leads to accumulated errors in the statistics. That's why you might want to remove them.
 
 Typically a knot fulfills two conditions:
 - A series of points very close to each other.
@@ -1395,57 +1391,57 @@ Podeu modificar els dos paràmetres per personalitzar el comportament del filtre
     <message>
         <location filename="../gis/fit2/CFit2Project.cpp" line="63"/>
         <source>Failed to load file %1...</source>
-        <translation type="unfinished">&#xa0; No s&apos;ha pogut carregar el fitxer %1...</translation>
+        <translation>Error en carregar el fitxer %1...</translation>
     </message>
     <message>
         <location filename="../gis/fit2/CFit2Project.cpp" line="223"/>
         <source>total elapsed time: %1%2&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Temps transcorregut total: %1%2&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../gis/fit2/CFit2Project.cpp" line="233"/>
         <source>total distance: %1%2&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Distància total: %1%2&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../gis/fit2/CFit2Project.cpp" line="228"/>
         <source>total timer time: %1%2&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Temps total del temporitzador: %1%2&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../gis/fit2/CFit2Project.cpp" line="238"/>
         <source>enhanced max speed: %1%2&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Millora de la velocitat màxima: %1%2&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../gis/fit2/CFit2Project.cpp" line="243"/>
         <source>enhanced min altitude: %1%2&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Millora de l&apos;altitud mínima: %1%2&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../gis/fit2/CFit2Project.cpp" line="248"/>
         <source>enhanced max altitude: %1%2&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Millora de l&apos;altitud màxima: %1%2&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../gis/fit2/CFit2Project.cpp" line="252"/>
         <source>total calories: %1kcal&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>calories totals: %1kcal&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../gis/fit2/CFit2Project.cpp" line="257"/>
         <source>total ascent: %1%2&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>ascens total: %1%2&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../gis/fit2/CFit2Project.cpp" line="262"/>
         <source>total descent: %1%2&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>descens total: %1%2&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../gis/fit2/CFit2Project.cpp" line="266"/>
         <source>number of laps: %1&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre de voltes: %1&lt;br/&gt;</translation>
     </message>
 </context>
 <context>
@@ -1516,7 +1512,7 @@ Podeu modificar els dos paràmetres per personalitzar el comportament del filtre
     <message>
         <location filename="../gis/search/CGeoSearch.cpp" line="122"/>
         <source>configure providers of geocoding search services</source>
-        <translation type="unfinished"></translation>
+        <translation>configurar els proveïdors dels serveis de cerca geocoding</translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearch.cpp" line="169"/>
@@ -1562,7 +1558,7 @@ Podeu modificar els dos paràmetres per personalitzar el comportament del filtre
     <message>
         <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="33"/>
         <source>&lt;b&gt;Add your own service&lt;/b&gt;&lt;p&gt;To add your own service you need a name and an URL with placeholders for coordinates. Placeholders are:&lt;/p&gt;</source>
-        <translation>&lt;b&gt;Afegir un servei pròpi&lt;/b&gt;&lt;p&gt;Per afegir un servei pròpi necessiteu un nom i una URL amb els llocs escollits i les coordenades. Els llocs escollits són:&lt;/p&gt;</translation>
+        <translation>&lt;b&gt;Afegir un servei pròpi&lt;/b&gt;&lt;p&gt;Per a afegir un servei pròpi necessiteu un nom i una URL amb els llocs escollits i les coordenades. Els llocs escollits són:&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="38"/>
@@ -1694,7 +1690,7 @@ Podeu modificar els dos paràmetres per personalitzar el comportament del filtre
         <location filename="../gis/rte/CGisItemRte.cpp" line="240"/>
         <location filename="../gis/rte/CGisItemRte.cpp" line="1068"/>
         <source>route</source>
-        <translation>ruta</translation>
+        <translation>itinerari</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="278"/>
@@ -1740,102 +1736,102 @@ Podeu modificar els dos paràmetres per personalitzar el comportament del filtre
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="916"/>
         <source>Go straight</source>
-        <translation type="unfinished"></translation>
+        <translation>Segueix recte</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="919"/>
         <source>Turn left</source>
-        <translation type="unfinished"></translation>
+        <translation>Gira a l&apos;esquerra</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="922"/>
         <source>Turn slightly left</source>
-        <translation type="unfinished"></translation>
+        <translation>Gira lleugerament a l&apos;esquerra</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="925"/>
         <source>Turn sharply left</source>
-        <translation type="unfinished"></translation>
+        <translation>Fes un gir tancat a l&apos;esquerra</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="928"/>
         <source>Turn right</source>
-        <translation type="unfinished"></translation>
+        <translation>Gira a la dreta</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="931"/>
         <source>Turn slightly right</source>
-        <translation type="unfinished"></translation>
+        <translation>Gira lleugerament a la dreta</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="934"/>
         <source>Turn sharply right</source>
-        <translation type="unfinished"></translation>
+        <translation>Fes un gir tancat a la dreta</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="937"/>
         <source>Keep left</source>
-        <translation type="unfinished"></translation>
+        <translation>Manteniu-vos a l&apos;esquerra</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="940"/>
         <source>Keep right</source>
-        <translation type="unfinished"></translation>
+        <translation>Manteniu-vos a la dreta</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="943"/>
         <source>U-turn left</source>
-        <translation type="unfinished"></translation>
+        <translation>Canvia de sentit cap a l&apos;esquerra</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="946"/>
         <source>U-turn</source>
-        <translation type="unfinished"></translation>
+        <translation>Canvia de sentit</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="949"/>
         <source>U-turn right</source>
-        <translation type="unfinished"></translation>
+        <translation>Canvia de sentit cap a la dreta</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="952"/>
         <source>Roundabout exit %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Sortida %1 de la rotonda</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="955"/>
         <source>Roundabout left exit %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Sortida %1 esquerra de la rotonda</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="958"/>
         <source>Exit left</source>
-        <translation type="unfinished"></translation>
+        <translation>Sortida a l&apos;esquerra</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="961"/>
         <source>Exit right</source>
-        <translation type="unfinished"></translation>
+        <translation>Sortida a la dreta</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="963"/>
         <source>Start</source>
-        <translation type="unfinished">Inici</translation>
+        <translation>Inici</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="965"/>
         <source>Destination</source>
-        <translation type="unfinished"></translation>
+        <translation> Destinació</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="969"/>
         <source>, %1 degrees</source>
-        <translation type="unfinished"></translation>
+        <translation>, %1 graus</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="982"/>
         <source>Follow the route for %1%2 or %3%4</source>
-        <translation type="unfinished"></translation>
+        <translation>Seguir la ruta per %1%2 o per %3%4</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="330"/>
@@ -1997,13 +1993,12 @@ Podeu modificar els dos paràmetres per personalitzar el comportament del filtre
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="674"/>
         <source>Moving</source>
-        <translatorcomment>En moviment</translatorcomment>
-        <translation></translation>
+        <translation>Moviment</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="738"/>
         <source>Time</source>
-        <translation></translation>
+        <translation>Temps</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1281"/>
@@ -2043,6 +2038,16 @@ Podeu modificar els dos paràmetres per personalitzar el comportament del filtre
         <translation>Llargada: %1%2</translation>
     </message>
     <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="434"/>
+        <source>Start</source>
+        <translation>Inici</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="442"/>
+        <source>End</source>
+        <translation>Final</translation>
+    </message>
+    <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="474"/>
         <source>Invalid slopes!</source>
         <translation>Pendent incorrecte!</translation>
@@ -2056,16 +2061,6 @@ Podeu modificar els dos paràmetres per personalitzar el comportament del filtre
         <location filename="../gis/trk/CGisItemTrk.cpp" line="614"/>
         <source>, Speed: %1%2</source>
         <translation>, Velocitat: %1%2</translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="434"/>
-        <source>Start</source>
-        <translation>Inici</translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="442"/>
-        <source>End</source>
-        <translation>Final</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1328"/>
@@ -2150,7 +2145,7 @@ Podeu modificar els dos paràmetres per personalitzar el comportament del filtre
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="88"/>
         <source>Hide points by Douglas Peuker algorithm (%1%2)</source>
-        <translation>Utilitzar l&apos;algoritme de Douglas Peuker per amagar punts (%1%2)</translation>
+        <translation>Utilitzar l&apos;algoritme de Douglas Peuker per a amagar punts (%1%2)</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="117"/>
@@ -2180,17 +2175,17 @@ Podeu modificar els dos paràmetres per personalitzar el comportament del filtre
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="223"/>
         <source>Replaced elevation data with data from DEM files.</source>
-        <translation>Substituides les dades d&apos;elevació amb les dades dels fitxers DEM</translation>
+        <translation>Substituides les dades d&apos;altitud amb les dades dels fitxers DEM</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="239"/>
         <source>Replaced elevation data with interpolated values. (M=%1, RMSErr=%2)</source>
-        <translation>Substituides les dades d&apos;elevació amb valors interpolats. (M=%1, RMSErr=%2)</translation>
+        <translation>Substituides les dades d&apos;altitud amb valors interpolats. (M=%1, RMSErr=%2)</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="253"/>
         <source>Offset elevation data by %1%2.</source>
-        <translation>Desplaçament de les dades d&apos;elevació de %1%2.</translation>
+        <translation>Desplaçament de les dades d&apos;altitud de %1%2.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="264"/>
@@ -2252,12 +2247,12 @@ Podeu modificar els dos paràmetres per personalitzar el comportament del filtre
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="574"/>
         <source>The filter can not be applied</source>
-        <translation type="unfinished"></translation>
+        <translation>No es pot aplicar el filtre</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="575"/>
         <source>The number of points in the track must be higher than the number of tracks to split into.</source>
-        <translation type="unfinished"></translation>
+        <translation>El número de punts del track ha de ser superior al número de tracks en que es vol dividir.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="715"/>
@@ -2360,7 +2355,7 @@ Podeu modificar els dos paràmetres per personalitzar el comportament del filtre
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="503"/>
         <source>Changed timestamp</source>
-        <translation type="unfinished"></translation>
+        <translation>Marca horària canviada</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="976"/>
@@ -2390,7 +2385,7 @@ Podeu modificar els dos paràmetres per personalitzar el comportament del filtre
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="981"/>
         <source>Scuba gear</source>
-        <translation>Material per submarinisme</translation>
+        <translation>Material de submarinisme</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="982"/>
@@ -3015,7 +3010,7 @@ Podeu modificar els dos paràmetres per personalitzar el comportament del filtre
     <message>
         <location filename="../gis/CGisListWks.cpp" line="180"/>
         <source>Convert to Area</source>
-        <translation type="unfinished"></translation>
+        <translation>Convertir a Àrea</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="181"/>
@@ -3129,7 +3124,7 @@ Podeu modificar els dos paràmetres per personalitzar el comportament del filtre
     <message>
         <location filename="../gis/CGisListWks.cpp" line="225"/>
         <source>Change Icon...</source>
-        <translation type="unfinished"></translation>
+        <translation>Canvia la Icona...</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="789"/>
@@ -3216,12 +3211,12 @@ Podeu modificar els dos paràmetres per personalitzar el comportament del filtre
     <message>
         <location filename="../gis/CGisWorkspace.cpp" line="111"/>
         <source>The project &quot;%1&quot; is already in the workspace.</source>
-        <translation>El projecte &quot;%1&quot; ja és a l&apos;espai de treball.</translation>
+        <translation>El projecte «%1» ja és a l&apos;espai de treball.</translation>
     </message>
     <message>
         <location filename="../gis/CGisWorkspace.cpp" line="187"/>
         <source>&lt;b&gt;Item Selection: &lt;/b&gt;Item selected from workspace list. Click on the map to switch back to normal mouse selection behavior.</source>
-        <translation>&lt;b&gt;Selecció d&apos;Element: &lt;/b&gt;Element seleccionat de la llista d&apos;espais de treball. Feu clic en el mapa per tornar al comportament normal de selecció del ratolí.</translation>
+        <translation>&lt;b&gt;Selecció d&apos;Element: &lt;/b&gt;Element seleccionat de la llista d&apos;espais de treball. Feu clic en el mapa per a tornar al comportament normal de selecció del ratolí.</translation>
     </message>
     <message>
         <location filename="../gis/CGisWorkspace.cpp" line="562"/>
@@ -3240,7 +3235,7 @@ Podeu modificar els dos paràmetres per personalitzar el comportament del filtre
     </message>
     <message>
         <location filename="../gis/CGisWorkspace.cpp" line="779"/>
-        <source>QMapShack couldn&apos;t automatically assign a waypoint icon to one of the POIs you want to convert to a waypoint.
+        <source>QMapShack couldn't automatically assign a waypoint icon to one of the POIs you want to convert to a waypoint.
 
 Do you want to choose an icon for each new waypoint for which no icon could be found?
 If you choose &apos;No&apos; the respective last used waypoint icon is applied.</source>
@@ -3383,17 +3378,17 @@ línia %2, columna %3:
     <message>
         <location filename="../../common/help/CHelpBrowser.cpp" line="55"/>
         <source>Go back one page</source>
-        <translation type="unfinished"></translation>
+        <translation> Vés una pàgina enrere</translation>
     </message>
     <message>
         <location filename="../../common/help/CHelpBrowser.cpp" line="59"/>
         <source>Go forward one page</source>
-        <translation type="unfinished"></translation>
+        <translation> Vés una pàgina endavant</translation>
     </message>
     <message>
         <location filename="../../common/help/CHelpBrowser.cpp" line="63"/>
         <source>Go to initial page</source>
-        <translation type="unfinished"></translation>
+        <translation>Vés a la pàgina inicial</translation>
     </message>
 </context>
 <context>
@@ -3674,31 +3669,31 @@ línia %2, columna %3:
         <location filename="../gis/trk/CKnownExtension.cpp" line="155"/>
         <source>Speed (device)</source>
         <comment>extLongName</comment>
-        <translation type="unfinished"></translation>
+        <translation>Velocitat (dispositiu)</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="161"/>
         <source>Distance</source>
         <comment>extShortName</comment>
-        <translation type="unfinished">Distància</translation>
+        <translation>Distància</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="161"/>
         <source>Distance (device)</source>
         <comment>extLongName</comment>
-        <translation type="unfinished"></translation>
+        <translation>Distància (dispositiu)</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="166"/>
         <source>Resp. Rate</source>
         <comment>extShortName</comment>
-        <translation type="unfinished"></translation>
+        <translation>Freqüència Resp.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="166"/>
         <source>Respiration Rate</source>
         <comment>extLongName</comment>
-        <translation type="unfinished"></translation>
+        <translation>Freqüència Respiratòria</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="173"/>
@@ -3929,12 +3924,12 @@ línia %2, columna %3:
     <message>
         <location filename="../CMainWindow.cpp" line="1325"/>
         <source>Can not add view...</source>
-        <translation type="unfinished"></translation>
+        <translation>No es pot afegir la vista...</translation>
     </message>
     <message>
         <location filename="../CMainWindow.cpp" line="1326"/>
         <source>The view is already loaded as &apos;%1&apos;. You have to close it before loading it again.</source>
-        <translation type="unfinished"></translation>
+        <translation>La vista ja està carregada com &apos;%1&apos;. S&apos;ha de tancar abans de tornar-la a carregar.</translation>
     </message>
     <message>
         <location filename="../CMainWindow.cpp" line="1527"/>
@@ -3954,7 +3949,7 @@ línia %2, columna %3:
     <message>
         <location filename="../CMainWindow.cpp" line="1667"/>
         <source>QMapShack detected a badly installed Proj library. Please contact the package maintainer of your distribution to fix it.</source>
-        <translation>QMapShack ha detectat una biblioteca Proj mal instal·lada. Si us plau, per solucionar-ho poseu-vos en contacte amb el gestor de paquets de la vostra distribució.</translation>
+        <translation>QMapShack ha detectat una biblioteca Proj mal instal·lada. Si us plau, per a solucionar-ho poseu-vos en contacte amb el gestor de paquets de la vostra distribució.</translation>
     </message>
     <message>
         <location filename="../CMainWindow.cpp" line="1735"/>
@@ -3969,12 +3964,12 @@ línia %2, columna %3:
     <message>
         <location filename="../misc.h" line="53"/>
         <source>File access failed...</source>
-        <translation type="unfinished"></translation>
+        <translation>L&apos;accés al fitxer ha fallat...</translation>
     </message>
     <message>
         <location filename="../misc.h" line="54"/>
         <source>Failed to open %1 with error %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Error en obrir %1 error %2</translation>
     </message>
 </context>
 <context>
@@ -4610,42 +4605,42 @@ Retorn als tipus interns..</translation>
     <message>
         <location filename="../map/CMapItemDelegate.cpp" line="221"/>
         <source>inactive</source>
-        <translation type="unfinished"></translation>
+        <translation>Desactivat</translation>
     </message>
     <message>
         <location filename="../map/CMapItemDelegate.cpp" line="224"/>
         <source>active</source>
-        <translation type="unfinished"></translation>
+        <translation>actiu</translation>
     </message>
     <message>
         <location filename="../map/CMapItemDelegate.cpp" line="227"/>
         <source>missing</source>
-        <translation type="unfinished"></translation>
+        <translation>perdut</translation>
     </message>
     <message>
         <location filename="../map/CMapItemDelegate.cpp" line="231"/>
         <source>-</source>
-        <translation type="unfinished">-</translation>
+        <translation>-</translation>
     </message>
     <message>
         <location filename="../map/CMapItemDelegate.cpp" line="319"/>
         <source>Deactivate %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Desactivar %1</translation>
     </message>
     <message>
         <location filename="../map/CMapItemDelegate.cpp" line="319"/>
         <source>Activate %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Activar %1</translation>
     </message>
     <message>
         <location filename="../map/CMapItemDelegate.cpp" line="323"/>
         <source>%1 is not visible at current scale</source>
-        <translation type="unfinished"></translation>
+        <translation>a l&apos;escala actual %1 no és pot veure</translation>
     </message>
     <message>
         <location filename="../map/CMapItemDelegate.cpp" line="324"/>
         <source>%1 is visible at current scale</source>
-        <translation type="unfinished"></translation>
+        <translation>a l&apos;escala actual %1 és pot veure</translation>
     </message>
 </context>
 <context>
@@ -4769,7 +4764,7 @@ línia %2, columna %3:
     <message>
         <location filename="../map/CMapTMS.cpp" line="99"/>
         <source>Malformed TMS file. The layer numbers do not index the available layers. Layer numbers start from index 0.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fitxer TMS incorrecte. El número de capes no s&apos;adiu amb les capes disponibles. El index de capes comença amb la 0.</translation>
     </message>
     <message>
         <location filename="../map/CMapTMS.cpp" line="117"/>
@@ -4798,7 +4793,7 @@ línia %2, columna %3:
     <message>
         <location filename="../map/CMapVRT.cpp" line="45"/>
         <source>referenced by file:</source>
-        <translation>referenciat per fitxer:</translation>
+        <translation>referenciat pel fitxer:</translation>
     </message>
     <message>
         <location filename="../map/CMapVRT.cpp" line="69"/>
@@ -4808,7 +4803,7 @@ línia %2, columna %3:
     <message>
         <location filename="../map/CMapVRT.cpp" line="150"/>
         <source>Failed to create Warp for:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ha fallat la creació de la Deformació de:</translation>
     </message>
     <message>
         <location filename="../map/CMapVRT.cpp" line="172"/>
@@ -4818,20 +4813,12 @@ línia %2, columna %3:
     <message>
         <location filename="../map/CMapVRT.cpp" line="180"/>
         <source>Raster has an invalid (zero) size:</source>
-        <translation type="unfinished"></translation>
+        <translation>El raster té un tamany incorrecte (cero):</translation>
     </message>
     <message>
         <location filename="../map/CMapVRT.cpp" line="199"/>
         <source>No pixel-to-map transform found:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Failed to read: %1
-line %2, column %3:
- %4</source>
-        <translation type="vanished">Error en llegir les dades.: %1
-línia %2, columna %3:
- %4</translation>
+        <translation>No s&apos;ha trobat cap transformació de píxel a mapa:</translation>
     </message>
 </context>
 <context>
@@ -5009,7 +4996,7 @@ Estructura desconeguda.</translation>
     <message>
         <location filename="../mouse/CMousePrint.cpp" line="31"/>
         <source>&lt;b&gt;Save(Print) Map&lt;/b&gt;&lt;br/&gt;Hold down the primary mouse button and select a rectangular area on the map. Adjust the selection by using the markers on the corners. The buttons to print/save the area are beside the selection. If they are covered by other windows you have to move the map. Abort by using the secondary mouse button.</source>
-        <translation>&lt;b&gt;Desa (Imprimeix) Mapa&lt;/b&gt;&lt;br/&gt;Selecciona una àrea rectangular en el mapa. Fes clic en el botó esquerre del ratolí i mou el ratolí. Fes clic al botó dret per interrompre. Per a ajustar la selecció apunta-fes clic-mou el ratolí a les cantonades.</translation>
+        <translation>&lt;b&gt;Desar (Imprimir) Mapes&lt;/b&gt;&lt;br/&gt;Mantenir premut el botó principal del ratolí i seleccionar una àrea rectangular del mapa. Ajustar la selecció utilitzant els marcadors de les cantonades. Els botons imprimir/desar el àrea es troben al costat de la selecció.Si una altre finestra els tapa s&apos;ha de moure el mapa. Es pot interrompre prement el botó secundari del ratolí.</translation>
     </message>
 </context>
 <context>
@@ -5056,7 +5043,7 @@ Estructura desconeguda.</translation>
     <message>
         <location filename="../mouse/CMouseRuler.cpp" line="179"/>
         <source>route</source>
-        <translation>ruta</translation>
+        <translation>itinerari</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseRuler.cpp" line="190"/>
@@ -5137,47 +5124,47 @@ Estructura desconeguda.</translation>
     <message>
         <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="39"/>
         <source>&lt;h3&gt;Rendering is slow&lt;/h3&gt;This file has no overviews (pyramids) built yet, so every redraw has to decode the data at full resolution:&lt;br&gt;&lt;b&gt;%1&lt;/b&gt;&lt;br&gt;&lt;br&gt;Building overviews once fixes this. Run one of the commands below in a terminal. This adds roughly &lt;b&gt;%2&lt;/b&gt; of disk space (uncompressed estimate - actual size will likely be smaller thanks to compression); make sure that&apos;s available first.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h3&gt;La renderització és lenta&lt;/h3&gt; Aquest fitxer encara no té cap piràmide de tiles generada, aleshores cada vegada que es dibuixa s&apos;han de codificar les dades a la màxima resolució:&lt;br&gt;&lt;b&gt;%1&lt;/b&gt;&lt;br&gt;&lt;br&gt;Crear totes les vistes solucionaria el problema. En el Terminal, executa un dels comandaments de sota. Aixó ocupa aproximadament &lt;b&gt;%2&lt;/b&gt; d&apos;espai de disc (l&apos;estimació és sense compressió - un cop aplicada, la mida serà inferior); abans assegura&apos;t que disposes de l&apos;espai necessari.</translation>
     </message>
     <message>
         <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="47"/>
         <source>&lt;h3&gt;Rendering is slow&lt;/h3&gt;This file has overviews, but at least one of its source files&apos; overviews isn&apos;t deep enough for the current view, so some redraws still have to decode much of the data at a finer resolution than necessary:&lt;br&gt;&lt;b&gt;%1&lt;/b&gt;&lt;br&gt;&lt;br&gt;Building deeper overviews once fixes this. Run one of the commands below in a terminal. This adds roughly &lt;b&gt;%2&lt;/b&gt; of disk space (uncompressed estimate - actual size will likely be smaller thanks to compression); make sure that&apos;s available first.&lt;br&gt;&lt;br&gt;&lt;i&gt;Note: since this file already has some overviews, the commands below add the new levels alongside the existing ones rather than replacing them, which can leave a mixed set of decimation levels. For a clean rebuild instead, run &lt;code&gt;gdaladdo -clean&lt;/code&gt; on the affected file first.&lt;/i&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h3&gt;La renderització és lenta&lt;/h3&gt;Aquest fitxer té la piràmide de tiles generada, però com a mínim un dels fitxers origen no s&apos;ajusta a la profunditat de la vista actual, cada cop que es redibuixa s&apos;ha de codificar un volum important de dades a la resolució necessària:&lt;br&gt;&lt;b&gt;%1&lt;/b&gt;&lt;br&gt;&lt;br&gt;Generar una piràmide de tiles amb més profunditat soluciona el problema. En el Terminal, executa un dels comandaments de sota. Això ocupa aproximadament &lt;b&gt;%2&lt;/b&gt; d&apos;espai de disc (l&apos;estimació és sense compressió - un cop aplicada, la mida serà inferior); abans assegura&apos;t que disposes de l&apos;espai necessari.&lt;br&gt;&lt;br&gt;&lt;i&gt;Nota: si aquest fitxer ja té piràmides de tiles generades, els comandaments de sota no substitueixen els existents si no que n&apos;afegeixen de nous, això pot donar lloc a un conjunt heterogeni de nivells de decimació. Per a tenir un fitxer més clar i ordenat, primer executa &lt;code&gt;gdaladdo -clean&lt;/code&gt; en el fitxer afectat.&lt;/i&gt;</translation>
     </message>
     <message>
         <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="64"/>
         <source>File</source>
-        <translation type="unfinished">Fitxer</translation>
+        <translation>Fitxer</translation>
     </message>
     <message>
         <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="64"/>
         <source>Overview factors</source>
-        <translation type="unfinished"></translation>
+        <translation>Visió general dels elements</translation>
     </message>
     <message>
         <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="74"/>
         <source>none</source>
-        <translation type="unfinished">cap</translation>
+        <translation>cap</translation>
     </message>
     <message>
         <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="84"/>
         <source>&lt;p&gt;...and %1 more file(s) not shown.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;...hi ha %1 fitxer(s) més que no es mostren.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="96"/>
         <source>Option 1: build overviews on the VRT file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Option 1: genera vistes de conjunt en el fitxer VRT:</translation>
     </message>
     <message>
         <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="97"/>
         <source>Option 2: build overviews on the underlying source file(s):</source>
-        <translation type="unfinished"></translation>
+        <translation>Option 2: genera vistes de conjunt en el fitxer(s) font originals:</translation>
     </message>
     <message>
         <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="99"/>
         <source>Build overviews on the underlying source file(s):</source>
-        <translation type="unfinished"></translation>
+        <translation>Genera vistes de conjunt en el fitxer(s) font originals:</translation>
     </message>
 </context>
 <context>
@@ -5225,52 +5212,52 @@ Estructura desconeguda.</translation>
         <location filename="../poi/CPoiFilePOI.cpp" line="81"/>
         <location filename="../poi/CPoiFilePOI.cpp" line="97"/>
         <source>POI file error...</source>
-        <translation type="unfinished"></translation>
+        <translation>error en el fitxer POI...</translation>
     </message>
     <message>
         <location filename="../poi/CPoiFilePOI.cpp" line="55"/>
         <source>Failed to open SQL database:</source>
-        <translation type="unfinished"></translation>
+        <translation>Error en obrir la base de dades SQL:</translation>
     </message>
     <message>
         <location filename="../poi/CPoiFilePOI.cpp" line="58"/>
         <source>SQL error...</source>
-        <translation type="unfinished"></translation>
+        <translation>Error SQL...</translation>
     </message>
     <message>
         <location filename="../poi/CPoiFilePOI.cpp" line="79"/>
         <source>No valid POI file &apos;%1&apos;. Failed to retrieve bounding box!</source>
-        <translation type="unfinished"></translation>
+        <translation>Fitxer de Punts d&apos;Interés &apos;%1&apos; incorrecte. Error al recuperar el contingut!</translation>
     </message>
     <message>
         <location filename="../poi/CPoiFilePOI.cpp" line="94"/>
         <source>POI file &apos;%1&apos; is POI version %2. Only version 2 is supported!</source>
-        <translation type="unfinished"></translation>
+        <translation>El Punt d&apos;interès &apos;%1&apos; és un Punt d&apos;interès en versió %2. La única versió admesa és la 2!</translation>
     </message>
     <message>
         <location filename="../poi/CPoiFilePOI.cpp" line="95"/>
         <source>See &lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocGisItemsPOI&apos;&gt;Wiki&lt;/a&gt; for more information.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pot consultar la &lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocGisItemsPOI&apos;&gt;Wiki&lt;/a&gt;  per a més informació.</translation>
     </message>
     <message>
         <location filename="../poi/CPoiFilePOI.cpp" line="330"/>
         <source>Category: </source>
-        <translation type="unfinished">Categoria:</translation>
+        <translation>Categoria:</translation>
     </message>
     <message>
         <location filename="../poi/CPoiFilePOI.cpp" line="335"/>
         <source>Links: </source>
-        <translation type="unfinished">Enllaços:</translation>
+        <translation>Enllaços:</translation>
     </message>
     <message>
         <location filename="../poi/CPoiFilePOI.cpp" line="347"/>
         <source>Zoom in to see more details.</source>
-        <translation type="unfinished">Amplia per a veure amb més detall.</translation>
+        <translation>Amplia per a veure amb més detall.</translation>
     </message>
     <message>
         <location filename="../poi/CPoiFilePOI.cpp" line="349"/>
         <source>POIs at this point:</source>
-        <translation type="unfinished">Punt d&apos;Interès en aquest punt:</translation>
+        <translation>Punt d&apos;Interès en aquest punt:</translation>
     </message>
 </context>
 <context>
@@ -5280,68 +5267,68 @@ Estructura desconeguda.</translation>
         <source>addr:housenumber addr:street&lt;br&gt;
 addr:city addr:postcode&lt;br&gt;
 addr:country</source>
-        <translation type="unfinished">adr:número adr:carrer&lt;br&gt;
+        <translation>adr:número adr:carrer&lt;br&gt;
 adr:ciutat adr:codipostal&lt;br&gt;
 adr:país</translation>
     </message>
     <message>
         <location filename="../poi/CPoiItemPOI.cpp" line="136"/>
         <source>Alternative names: </source>
-        <translation type="unfinished">Noms alternatius:</translation>
+        <translation>Noms alternatius:</translation>
     </message>
     <message>
         <location filename="../poi/CPoiItemPOI.cpp" line="155"/>
         <location filename="../poi/CPoiItemPOI.cpp" line="161"/>
         <source>Phone number: </source>
-        <translation type="unfinished">Número de telèfon:</translation>
+        <translation>Número de telèfon:</translation>
     </message>
     <message>
         <location filename="../poi/CPoiItemPOI.cpp" line="167"/>
         <source>Mobile phone number: </source>
-        <translation type="unfinished">Número de telèfon mòbil:</translation>
+        <translation>Número de telèfon mòbil:</translation>
     </message>
     <message>
         <location filename="../poi/CPoiItemPOI.cpp" line="173"/>
         <source>Fax: </source>
-        <translation type="unfinished">Fax:</translation>
+        <translation>Fax:</translation>
     </message>
     <message>
         <location filename="../poi/CPoiItemPOI.cpp" line="204"/>
         <location filename="../poi/CPoiItemPOI.cpp" line="207"/>
         <source>Email</source>
-        <translation type="unfinished">Correu electrònic</translation>
+        <translation>Correu electrònic</translation>
     </message>
     <message>
         <location filename="../poi/CPoiItemPOI.cpp" line="210"/>
         <location filename="../poi/CPoiItemPOI.cpp" line="213"/>
         <location filename="../poi/CPoiItemPOI.cpp" line="216"/>
         <source>Website</source>
-        <translation type="unfinished">Lloc Web</translation>
+        <translation>Lloc Web</translation>
     </message>
     <message>
         <location filename="../poi/CPoiItemPOI.cpp" line="231"/>
         <source>OpenStreetMap</source>
-        <translation type="unfinished">OpenStreetMap</translation>
+        <translation>OpenStreetMap</translation>
     </message>
     <message>
         <location filename="../poi/CPoiItemPOI.cpp" line="237"/>
         <source>wikimedia</source>
-        <translation type="unfinished">wikimedia</translation>
+        <translation>wikimedia</translation>
     </message>
     <message>
         <location filename="../poi/CPoiItemPOI.cpp" line="240"/>
         <source>Image</source>
-        <translation type="unfinished">Imatge</translation>
+        <translation>Imatge</translation>
     </message>
     <message>
         <location filename="../poi/CPoiItemPOI.cpp" line="256"/>
         <source>Wikipedia</source>
-        <translation type="unfinished">Wikipedia</translation>
+        <translation>Wikipedia</translation>
     </message>
     <message>
         <location filename="../poi/CPoiItemPOI.cpp" line="279"/>
         <source>Wikidata</source>
-        <translation type="unfinished">Wikidata</translation>
+        <translation>Wikidata</translation>
     </message>
 </context>
 <context>
@@ -5362,7 +5349,7 @@ adr:país</translation>
     <message>
         <location filename="../poi/CPoiPathSetup.cpp" line="42"/>
         <source>Add or remove paths containing POI data. There can be multiple files in a path but no sub-path is parsed. Supported formats are: %1</source>
-        <translation>&#xa0;
+        <translation> 
 Afegir o suprimir camins a dades dels Punts d&apos;Interès. Pot haver-hi diverses fitxers en un camí, però els camins secundaris no s&apos;analitzaran. Els formats compatibles són: %1</translation>
     </message>
     <message>
@@ -5442,7 +5429,7 @@ y: %4 m/px</translation>
     <message>
         <location filename="../../common/gis/proj_x.cpp" line="153"/>
         <source>The value
-&apos;%1&apos;
+'%1'
 is not a valid coordinate system definition:
 %2</source>
         <translation>El valor
@@ -5723,12 +5710,12 @@ no és una definició de coordenada vàlida en el sistema:
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="156"/>
         <source>BRouter (offline)</source>
-        <translation>BRouter (desconnectat)</translation>
+        <translation>BRouter (dades locals)</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="161"/>
         <source>BRouter (online)</source>
-        <translation>BRouter (connectat)</translation>
+        <translation>BRouter (en línia)</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="188"/>
@@ -5738,13 +5725,13 @@ no és una definició de coordenada vàlida en el sistema:
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="295"/>
         <source>Calculate route failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ha fallat el càlcul de l&apos;itinerari.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="335"/>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="449"/>
         <source>this version of BRouter does not support more than 1 nogo-area</source>
-        <translation type="unfinished"></translation>
+        <translation>aquesta versió de BRouter no permet més d&apos;1 zona-nogo</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="344"/>
@@ -5756,7 +5743,7 @@ no és una definició de coordenada vàlida en el sistema:
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="350"/>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="465"/>
         <source>Failed to parse BRouter response (line %1): %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ha fallat l&apos;ànàlisi de la resposta de BRouter (línia %1): %2</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="391"/>
@@ -5800,98 +5787,98 @@ no és una definició de coordenada vàlida en el sistema:
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterDownloadPage.cpp" line="67"/>
         <source>no brouter-version to install selected</source>
-        <translation type="unfinished">No s&apos;ha seleccionat la versió per a instal·lar de BRouter</translation>
+        <translation>No s&apos;ha seleccionat la versió per a instal·lar de BRouter</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterDownloadPage.cpp" line="87"/>
         <source>selected %1 for download and installation</source>
-        <translation type="unfinished">%1 seleccionats per a baixar i instal·lar</translation>
+        <translation>%1 seleccionats per a baixar i instal·lar</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterDownloadPage.cpp" line="120"/>
         <location filename="../gis/rte/router/brouter/CRouterBRouterDownloadPage.cpp" line="202"/>
         <source>Network Error: %1</source>
-        <translation type="unfinished">Error de xarxa: %1</translation>
+        <translation>Error de xarxa: %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterDownloadPage.cpp" line="126"/>
         <source>Error parsing json: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>S&apos;ha produït un error en analitzar json: %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterDownloadPage.cpp" line="129"/>
         <source>Error parsing json: response is not an array: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>S&apos;ha produït un error en analitzar json: la resposta no és una matriu: %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterDownloadPage.cpp" line="148"/>
         <source>No releases found at %1</source>
-        <translation type="unfinished"></translation>
+        <translation>No s&apos;han trobat versions a %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterDownloadPage.cpp" line="152"/>
         <source>loading brouter version-data failed: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>error en carregar la versió-data de brouter: %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterDownloadPage.cpp" line="162"/>
         <source>Warning...</source>
-        <translation type="unfinished">Avís...</translation>
+        <translation>Avís...</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterDownloadPage.cpp" line="167"/>
         <source>Download: %1&lt;br/&gt;&lt;br/&gt;This will download and install a zip file from a download location that is not secured by any standard at all, using plain HTTP. Usually this should be HTTPS. The risk is someone redirecting the request and sending you a replacement zip with malware. There is no way for QMapShack to detect this. &lt;br/&gt;If you do not understand this or if you are in doubt, do not proceed and abort. Use the Web version of BRouter instead.</source>
-        <translation type="unfinished">Baixada: %1&lt;br/&gt;&lt;br/&gt;Es baixarà i s&apos;instal·larà un fitxer zip des d&apos;un servidor de baixades que no compleix cap dels estàndards de seguretat normalment acceptats, utilitza HTTP en text pla. De normal s&apos;hauria d&apos;utilitzar HTTPS. Correu el risc que algú redirigeixi la petició i baixeu un fitxer zip amb codi maliciós. QMapShack no pot detectar-ho. &lt;br/&gt;Si no enteneu l&apos;explicació o teniu cap dubte, no seguiu i cancel·leu l&apos;operació. Com a alternativa podeu utilitzar la plana Web de BRouter.</translation>
+        <translation>Baixada: %1&lt;br/&gt;&lt;br/&gt;Es baixarà i s&apos;instal·larà un fitxer zip des d&apos;un servidor de baixades que no compleix cap dels estàndards de seguretat normalment acceptats, utilitza HTTP en text pla. De normal s&apos;hauria d&apos;utilitzar HTTPS. Correu el risc que algú redirigeixi la petició i baixeu un fitxer zip amb codi maliciós. QMapShack no pot detectar-ho. &lt;br/&gt;Si no enteneu l&apos;explicació o teniu cap dubte, no seguiu i cancel·leu l&apos;operació. Com a alternativa podeu utilitzar la plana Web de BRouter.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterDownloadPage.cpp" line="179"/>
         <source>I understand the risk and wish to proceed.</source>
-        <translation type="unfinished">Entenc el risc i vull continuar.</translation>
+        <translation>Entenc el risc i vull continuar.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterDownloadPage.cpp" line="193"/>
         <source>download %1 started</source>
-        <translation type="unfinished">iniciada la baixada %1</translation>
+        <translation>iniciada la baixada %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterDownloadPage.cpp" line="207"/>
         <source>Error directory %1 does not exist</source>
-        <translation type="unfinished">Error el directori %1 no existeix</translation>
+        <translation>Error el directori %1 no existeix</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterDownloadPage.cpp" line="214"/>
         <source>Error creating file %1</source>
-        <translation type="unfinished">S&apos;ha produït un error en crear el fitxer %1</translation>
+        <translation>S&apos;ha produït un error en crear el fitxer %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterDownloadPage.cpp" line="217"/>
         <source>Error writing to file %1</source>
-        <translation type="unfinished">S&apos;ha produït un error en escriure al fitxer %1</translation>
+        <translation>S&apos;ha produït un error en escriure al fitxer %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterDownloadPage.cpp" line="221"/>
         <source>download %1 finished</source>
-        <translation type="unfinished">finalitzada la baixada %1</translation>
+        <translation>finalitzada la baixada %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterDownloadPage.cpp" line="223"/>
         <source>unzipping:</source>
-        <translation type="unfinished">descomprimint:</translation>
+        <translation>descomprimint:</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterDownloadPage.cpp" line="227"/>
         <source>installing into %1</source>
-        <translation type="unfinished"></translation>
+        <translation>instal·lant a %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterDownloadPage.cpp" line="234"/>
         <source>installation successful</source>
-        <translation type="unfinished"></translation>
+        <translation> instal·lació correcta</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterDownloadPage.cpp" line="255"/>
         <source>installation of brouter failed: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>ha fallat la instal·lació del brouter: %1</translation>
     </message>
 </context>
 <context>
@@ -5899,7 +5886,7 @@ no és una definició de coordenada vàlida en el sistema:
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterLocal.cpp" line="79"/>
         <source>Waiting for local BRouter to finish initialization</source>
-        <translation>Esperant el BRouter per acabar la instal·lació</translation>
+        <translation>Esperant el BRouter per a acabar la instal·lació</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterLocal.cpp" line="139"/>
@@ -5909,7 +5896,7 @@ no és una definició de coordenada vàlida en el sistema:
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterLocal.cpp" line="145"/>
         <source>QMapShack communicates with BRouter via a network connection. Usually this is done on a special address that can&apos;t be reached from outside your device. However BRouter listens for connections on all available interfaces. If you are in your own private network with an active firewall, this is not much of a problem. If you are in a public network every open port is a risk as it can be used by someone else to compromise your system. We do not recommend to use the local BRouter service in this case. If you see this warning and use BRouter version &gt;= 1.4.10 you can enforce binding to local address by setting hostname to &quot;localhost&quot; and check &quot;Bind to hostname only&quot; in the setup using expert mode.</source>
-        <translation>QMapShack es comunica amb BRouter mitjançant una connexió de xarxa. Normalment s&apos;utilitza una adreça especial a la qual no s&apos;hi pot accedir sinó és a través del vostre equip. BRouter també mira totes les interfícies disponibles. No hi ha cap problema si esteu connectat a la vostre xarxa privada amb un tallafoc activat. Si esteu en una xarxa publica hi ha el risc que algú intenti accedir a qualsevol dels ports del vostre equip. En aquest cas no es recomana utilitzar el BRouter en local. Si veus aquest avís i utilitzes la versió &gt;;= 1.4.10 de BRouter pots forçar la vinculació a una adreça de la xarxa local configurant l&apos;amfitrió a &quot;localhost&quot; i marcant &quot;Enllaça solament amb l&apos;ordinador central&quot; en la configuració de mode expert.</translation>
+        <translation>QMapShack es comunica amb BRouter mitjançant una connexió de xarxa. Normalment s&apos;utilitza una adreça especial a la qual no s&apos;hi pot accedir sinó és a través del vostre equip. BRouter també mira totes les interfícies disponibles. No hi ha cap problema si esteu connectat a la vostre xarxa privada amb un tallafoc activat. Si esteu en una xarxa publica hi ha el risc que algú intenti accedir a qualsevol dels ports del vostre equip. En aquest cas no es recomana utilitzar el BRouter en local. Si veus aquest avís i utilitzes la versió &gt;;= 1.4.10 de BRouter pots forçar la vinculació a una adreça de la xarxa local configurant l&apos;amfitrió a «localhost» i marcant «Enllaça solament amb l&apos;ordinador central» en la configuració de mode expert.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterLocal.cpp" line="160"/>
@@ -5947,37 +5934,37 @@ no és una definició de coordenada vàlida en el sistema:
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="309"/>
         <source>no brouter-jar found</source>
-        <translation type="unfinished"></translation>
+        <translation>no s&apos;ha trobat el brouter-jar</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="315"/>
         <source>brouter jar-file: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>brouter jar-fitxer: %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="319"/>
         <source>conflicting alternative jar-file %1, go back to previous page to select!</source>
-        <translation type="unfinished"></translation>
+        <translation>conflicte amb el fitxer-jar %1 alternatiu, torna a la plana anterior per a fer la selecció!</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="336"/>
         <source>backup: %1 to %2</source>
-        <translation type="unfinished"></translation>
+        <translation> Còpia de seguretat: %1 a %2</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="338"/>
         <source>error renaming file %1 to %2</source>
-        <translation type="unfinished"></translation>
+        <translation>error en canviar el nom del fitxer %1 a %2</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="344"/>
         <source>installed: %1 to %2</source>
-        <translation type="unfinished"></translation>
+        <translation>instal·lat: %1 a %2</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="346"/>
         <source>error copying %1 to %2</source>
-        <translation type="unfinished"></translation>
+        <translation>error copiant %1 a %2</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="625"/>
@@ -6015,7 +6002,7 @@ no és una definició de coordenada vàlida en el sistema:
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="288"/>
         <source>select BRouter jar file</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecionar el jar-fitxer BRouter</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="298"/>
@@ -6046,27 +6033,27 @@ no és una definició de coordenada vàlida en el sistema:
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="351"/>
         <source>is an existing BRouter version %1.%2.%3 installation</source>
-        <translation type="unfinished"></translation>
+        <translation>hi ha instal·lada una versió de BRouter %1.%2.%3</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="356"/>
         <source>seems to be an existing BRouter installation</source>
-        <translation type="unfinished"></translation>
+        <translation>sembla que ja hi ha un BRouter instal·lat</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="366"/>
         <source>is a valid BRouter jar-file (optionally select a different *jar file)</source>
-        <translation type="unfinished"></translation>
+        <translation>el fitxer-jar BRouter és correcte (també es podria seleccionar un fitxer *jar diferent)</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="375"/>
         <source>It seems there is an existing BRouter installation but the *.jar file is not valid or outdated.</source>
-        <translation type="unfinished"></translation>
+        <translation>sembla que ja hi ha un BRouter instal·lat, però el fitxer *.jar no és vàlid o és obsolet.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="384"/>
         <source>Choose a different *.jar file or create/update the installation.</source>
-        <translation type="unfinished"></translation>
+        <translation>Escollir un fitxer *.jar diferent o bé crea/actualitza la instal·lació.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="392"/>
@@ -6088,12 +6075,14 @@ no és una definició de coordenada vàlida en el sistema:
         <source>Your Java version %1 seems to be older than the required version %2.
 BRouter will probably not work as expected.
 Please check the logs if Brouter fails to start.</source>
-        <translation type="unfinished"></translation>
+        <translation>La versió Java %1 sembla que és antigua, es requereix la versió %2.
+És possible que BRouter no funcioni de forma correcte.
+Si us plau, comproveu els registres si Brouter no arranca.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="412"/>
         <source>&lt;unknown&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;unknown&gt;</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="416"/>
@@ -6147,17 +6136,17 @@ Please check the logs if Brouter fails to start.</source>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesPage.cpp" line="59"/>
         <source>Download of routing data is in progress.</source>
-        <translation type="unfinished"></translation>
+        <translation>S&apos;estan baixant les dades del itinerari.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesPage.cpp" line="61"/>
         <source>You did not yet download the selected routing data.</source>
-        <translation type="unfinished"></translation>
+        <translation>Encara no s&apos;han baixat les dades del itinerari seleccionat.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesPage.cpp" line="65"/>
         <source>Do you want to cancel or continue with setup</source>
-        <translation type="unfinished"></translation>
+        <translation>Cancel·lar o seguir amb la configuració</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesPage.cpp" line="67"/>
@@ -6267,7 +6256,7 @@ Please check the logs if Brouter fails to start.</source>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="483"/>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="517"/>
         <source>no open file assigned to request for %1</source>
-        <translation>no hi ha cap fitxer obert per aquesta sol·licitud %1</translation>
+        <translation>no hi ha cap fitxer obert per a aquesta sol·licitud %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="492"/>
@@ -6426,12 +6415,12 @@ Please check the logs if Brouter fails to start.</source>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="93"/>
         <source>Heavy Goods Vehicle</source>
-        <translation type="unfinished"></translation>
+        <translation>Vehicle de gran tonatge</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="94"/>
         <source>Public Service Vehicle</source>
-        <translation type="unfinished"></translation>
+        <translation>Vehicle de Servei Públic</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="99"/>
@@ -6461,7 +6450,7 @@ Please check the logs if Brouter fails to start.</source>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="147"/>
         <source>The specified database to load did not exist.</source>
-        <translation>La base de dades especificada per carregar no existeix.</translation>
+        <translation>La base de dades especificada per a carregar no existeix.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="150"/>
@@ -6546,12 +6535,12 @@ Please check the logs if Brouter fails to start.</source>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="205"/>
         <source>profile &quot;%1&quot;</source>
-        <translation>perfil &quot;%1&quot;</translation>
+        <translation>perfil «%1»</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="206"/>
         <source>, mode &quot;%1&quot;</source>
-        <translation>, mode &quot;%1&quot;</translation>
+        <translation>, mode «%1»</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="279"/>
@@ -6561,7 +6550,7 @@ Please check the logs if Brouter fails to start.</source>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="293"/>
         <source>%1
-Error in &apos;%2&apos;
+Error in '%2'
 This needs to be fixed
 The associated database &apos;%3&apos; is ignored</source>
         <translation>%1
@@ -6605,7 +6594,7 @@ S&apos;ignorarà la base de dades asociada &apos;%3&apos;</translation>
     <message>
         <location filename="../gis/rte/router/CRouterSetup.cpp" line="34"/>
         <source>Routino (offline)</source>
-        <translation>Routino (desconnectat)</translation>
+        <translation>Routino (dades locals)</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterSetup.cpp" line="35"/>
@@ -6643,82 +6632,82 @@ S&apos;ignorarà la base de dades asociada &apos;%3&apos;</translation>
     <message>
         <location filename="../realtime/ais/CRtAis.cpp" line="76"/>
         <source>&lt;b&gt;AIS&lt;/b&gt;&lt;br/&gt;Get vessel positions via AIS over TCP/IP</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;AIS&lt;/b&gt;&lt;br/&gt;Obtenir la posició del vaixell mitjançant AIS sobre TCP/IP</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAis.cpp" line="151"/>
         <source>unkn.</source>
-        <translation type="unfinished">desconegut.</translation>
+        <translation>desconegut.</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAis.cpp" line="178"/>
         <source>name:</source>
-        <translation type="unfinished"></translation>
+        <translation>nom:</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAis.cpp" line="179"/>
         <source>type:</source>
-        <translation type="unfinished"></translation>
+        <translation>tipus:</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAis.cpp" line="180"/>
         <source>callsign:</source>
-        <translation type="unfinished">senyal de trucada:</translation>
+        <translation>indicatiu:</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAis.cpp" line="181"/>
         <source>imo:</source>
-        <translation type="unfinished"></translation>
+        <translation>imo:</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAis.cpp" line="182"/>
         <source>mmsi:</source>
-        <translation type="unfinished"></translation>
+        <translation>mmsi:</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAis.cpp" line="183"/>
         <source>last contact:</source>
-        <translation type="unfinished">darrer contacte:</translation>
+        <translation>darrer contacte:</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAis.cpp" line="185"/>
         <source>longitude:</source>
-        <translation type="unfinished">longitud:</translation>
+        <translation>longitud:</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAis.cpp" line="186"/>
         <source>latitude:</source>
-        <translation type="unfinished">latitud:</translation>
+        <translation>latitud:</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAis.cpp" line="188"/>
         <source>velocity:</source>
-        <translation type="unfinished">velocitat:</translation>
+        <translation>velocitat</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAis.cpp" line="190"/>
         <source>heading:</source>
-        <translation type="unfinished">capçalera:</translation>
+        <translation> capçalera:</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAis.cpp" line="192"/>
         <source>destination:</source>
-        <translation type="unfinished"></translation>
+        <translation>destí:</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAis.cpp" line="194"/>
         <source>length:</source>
-        <translation type="unfinished"></translation>
+        <translation>llargada:</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAis.cpp" line="195"/>
         <source>width:</source>
-        <translation type="unfinished"></translation>
+        <translation>amplada:</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAis.cpp" line="197"/>
         <source>draught:</source>
-        <translation type="unfinished"></translation>
+        <translation>calat:</translation>
     </message>
 </context>
 <context>
@@ -6735,7 +6724,7 @@ S&apos;ignorarà la base de dades asociada &apos;%3&apos;</translation>
         <location filename="../realtime/ais/CRtAisInfo.h" line="131"/>
         <location filename="../realtime/ais/CRtAisInfo.h" line="132"/>
         <source>Wing in ground</source>
-        <translation type="unfinished"></translation>
+        <translation>Ala a terra</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="124"/>
@@ -6745,7 +6734,7 @@ S&apos;ignorarà la base de dades asociada &apos;%3&apos;</translation>
         <location filename="../realtime/ais/CRtAisInfo.h" line="190"/>
         <location filename="../realtime/ais/CRtAisInfo.h" line="201"/>
         <source>Hazardous category A</source>
-        <translation type="unfinished"></translation>
+        <translation>Perill nivell A</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="125"/>
@@ -6755,7 +6744,7 @@ S&apos;ignorarà la base de dades asociada &apos;%3&apos;</translation>
         <location filename="../realtime/ais/CRtAisInfo.h" line="191"/>
         <location filename="../realtime/ais/CRtAisInfo.h" line="202"/>
         <source>Hazardous category B</source>
-        <translation type="unfinished"></translation>
+        <translation>Perill nivell B</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="126"/>
@@ -6765,7 +6754,7 @@ S&apos;ignorarà la base de dades asociada &apos;%3&apos;</translation>
         <location filename="../realtime/ais/CRtAisInfo.h" line="192"/>
         <location filename="../realtime/ais/CRtAisInfo.h" line="203"/>
         <source>Hazardous category C</source>
-        <translation type="unfinished"></translation>
+        <translation>Perill nivell C</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="127"/>
@@ -6775,53 +6764,53 @@ S&apos;ignorarà la base de dades asociada &apos;%3&apos;</translation>
         <location filename="../realtime/ais/CRtAisInfo.h" line="193"/>
         <location filename="../realtime/ais/CRtAisInfo.h" line="204"/>
         <source>Hazardous category D</source>
-        <translation type="unfinished"></translation>
+        <translation>Perill nivell D</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="134"/>
         <source>Fishing</source>
-        <translation type="unfinished"></translation>
+        <translation>Pesca</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="135"/>
         <source>Towing</source>
-        <translation type="unfinished"></translation>
+        <translation>Remolc</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="136"/>
         <source>Towing, large</source>
-        <translation type="unfinished"></translation>
+        <translation>Remolc, gran</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="137"/>
         <source>Dredger</source>
-        <translation type="unfinished"></translation>
+        <translation>Draga</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="138"/>
         <source>Dive Vessel</source>
-        <translation type="unfinished"></translation>
+        <translation>Vaixell de busseig</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="139"/>
         <source>Military ops</source>
-        <translation type="unfinished"></translation>
+        <translation>Operacions militars</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="140"/>
         <source>Sailing Vessel</source>
-        <translation type="unfinished"></translation>
+        <translation>Vaixell de vela</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="141"/>
         <source>Pleasure Craft</source>
-        <translation type="unfinished"></translation>
+        <translation>Embarcacions de plaer</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="142"/>
         <location filename="../realtime/ais/CRtAisInfo.h" line="143"/>
         <source>Reserved</source>
-        <translation type="unfinished"></translation>
+        <translation>Reservat</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="145"/>
@@ -6835,53 +6824,53 @@ S&apos;ignorarà la base de dades asociada &apos;%3&apos;</translation>
         <location filename="../realtime/ais/CRtAisInfo.h" line="153"/>
         <location filename="../realtime/ais/CRtAisInfo.h" line="154"/>
         <source>High speed craft</source>
-        <translation type="unfinished"></translation>
+        <translation>Nau d&apos;alta velocitat</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="156"/>
         <source>Pilot Vessel</source>
-        <translation type="unfinished"></translation>
+        <translation>Vaixell pilot</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="157"/>
         <source>Search and Rescue</source>
-        <translation type="unfinished"></translation>
+        <translation>Cerca i rescat</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="158"/>
         <source>Tug</source>
-        <translation type="unfinished"></translation>
+        <translation>Remolcador</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="159"/>
         <source>Port Tender</source>
-        <translation type="unfinished"></translation>
+        <translation> Embarcació auxiliar del port</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="160"/>
         <source>Anti-pollution equipment</source>
-        <translation type="unfinished"></translation>
+        <translation>Equips anticontaminació</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="161"/>
         <source>Law Enforcement</source>
-        <translation type="unfinished"></translation>
+        <translation>Forces de seguretat</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="162"/>
         <location filename="../realtime/ais/CRtAisInfo.h" line="163"/>
         <source>Local Vessel</source>
-        <translation type="unfinished"></translation>
+        <translation>Vaixell local</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="164"/>
         <source>Medical Transport</source>
-        <translation type="unfinished"></translation>
+        <translation>Transport mèdic</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="165"/>
         <source>Special Craft</source>
-        <translation type="unfinished"></translation>
+        <translation>Artesania Singular</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="167"/>
@@ -6895,7 +6884,7 @@ S&apos;ignorarà la base de dades asociada &apos;%3&apos;</translation>
         <location filename="../realtime/ais/CRtAisInfo.h" line="175"/>
         <location filename="../realtime/ais/CRtAisInfo.h" line="176"/>
         <source>Passenger</source>
-        <translation type="unfinished"></translation>
+        <translation>Passatger</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="178"/>
@@ -6909,7 +6898,7 @@ S&apos;ignorarà la base de dades asociada &apos;%3&apos;</translation>
         <location filename="../realtime/ais/CRtAisInfo.h" line="186"/>
         <location filename="../realtime/ais/CRtAisInfo.h" line="187"/>
         <source>Cargo</source>
-        <translation type="unfinished"></translation>
+        <translation>Càrrega</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="189"/>
@@ -6923,7 +6912,7 @@ S&apos;ignorarà la base de dades asociada &apos;%3&apos;</translation>
         <location filename="../realtime/ais/CRtAisInfo.h" line="197"/>
         <location filename="../realtime/ais/CRtAisInfo.h" line="198"/>
         <source>Tanker</source>
-        <translation type="unfinished"></translation>
+        <translation>Petrolier</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="200"/>
@@ -6937,162 +6926,162 @@ S&apos;ignorarà la base de dades asociada &apos;%3&apos;</translation>
         <location filename="../realtime/ais/CRtAisInfo.h" line="208"/>
         <location filename="../realtime/ais/CRtAisInfo.h" line="209"/>
         <source>Other</source>
-        <translation type="unfinished">Altres</translation>
+        <translation>Altres</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="212"/>
         <source>Reference point</source>
-        <translation type="unfinished"></translation>
+        <translation>Punt de referència</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="213"/>
         <source>RACON</source>
-        <translation type="unfinished"></translation>
+        <translation>RACON</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="214"/>
         <source>Fixed structure</source>
-        <translation type="unfinished"></translation>
+        <translation>Estructura fixe</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="215"/>
         <source>Light, without sectors</source>
-        <translation type="unfinished"></translation>
+        <translation>Llum, sense sectors</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="216"/>
         <source>Light, with sectors</source>
-        <translation type="unfinished"></translation>
+        <translation>Light, amb sectors</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="217"/>
         <source>Leading Light Front</source>
-        <translation type="unfinished"></translation>
+        <translation>Llum Principal Davantera</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="218"/>
         <source>Leading Light Rear</source>
-        <translation type="unfinished"></translation>
+        <translation>Llum Principal Posterior</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="219"/>
         <source>Beacon, Cardinal N</source>
-        <translation type="unfinished"></translation>
+        <translation>Balisa, Cardinal N</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="220"/>
         <source>Beacon, Cardinal E</source>
-        <translation type="unfinished"></translation>
+        <translation>Balisa, Cardinal E</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="221"/>
         <source>Beacon, Cardinal S</source>
-        <translation type="unfinished"></translation>
+        <translation>Balisa, Cardinal S</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="222"/>
         <source>Beacon, Cardinal W</source>
-        <translation type="unfinished"></translation>
+        <translation>Balisa, Cardinal O</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="223"/>
         <source>Beacon, Port hand</source>
-        <translation type="unfinished"></translation>
+        <translation>Far, Costat esquerra</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="224"/>
         <source>Beacon, Starboard hand</source>
-        <translation type="unfinished"></translation>
+        <translation>Balisa de babor</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="225"/>
         <source>Beacon, Preferred Channel port hand</source>
-        <translation type="unfinished"></translation>
+        <translation>Balisa, Marca de Canal Preferit a Babor</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="226"/>
         <source>Beacon, Preferred Channel starboard hand</source>
-        <translation type="unfinished"></translation>
+        <translation>Balisa, Marca de Canal Preferit a Estribord</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="227"/>
         <source>Beacon, Isolated danger</source>
-        <translation type="unfinished"></translation>
+        <translation>Balisa, Perill aïllat</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="228"/>
         <source>Beacon, Safe water</source>
-        <translation type="unfinished"></translation>
+        <translation>Balisa, Aigües segures</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="229"/>
         <source>Beacon, Special mark</source>
-        <translation type="unfinished"></translation>
+        <translation>Balisa, Marca especial</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="230"/>
         <source>Cardinal Mark N</source>
-        <translation type="unfinished"></translation>
+        <translation>Marca Cardinal N</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="231"/>
         <source>Cardinal Mark E</source>
-        <translation type="unfinished"></translation>
+        <translation>Marca Cardinal E</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="232"/>
         <source>Cardinal Mark S</source>
-        <translation type="unfinished"></translation>
+        <translation>Marca Cardinal S</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="233"/>
         <source>Cardinal Mark W</source>
-        <translation type="unfinished"></translation>
+        <translation>Marca Cardinal O</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="234"/>
         <source>Port hand Mark</source>
-        <translation type="unfinished"></translation>
+        <translation>Marca de babor</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="235"/>
         <source>Starboard hand Mark</source>
-        <translation type="unfinished"></translation>
+        <translation>Marca d&apos;estribord</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="236"/>
         <source>Preferred Channel Port hand</source>
-        <translation type="unfinished"></translation>
+        <translation>Marca de Canal Preferit a Babor</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="237"/>
         <source>Preferred Channel Starboard hand</source>
-        <translation type="unfinished"></translation>
+        <translation>Marca de Canal Preferit a Estribord</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="238"/>
         <source>Isolated danger</source>
-        <translation type="unfinished"></translation>
+        <translation>Perill aïllat</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="239"/>
         <source>Safe Water</source>
-        <translation type="unfinished"></translation>
+        <translation>Aigua Potable</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="240"/>
         <source>Special Mark</source>
-        <translation type="unfinished"></translation>
+        <translation>Marca Especial</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="241"/>
         <source>Light Vessel / LANBY / Rigs</source>
-        <translation type="unfinished"></translation>
+        <translation>Vaixell Lleuger / LANBY / Plataformes</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.cpp" line="91"/>
         <source>Help</source>
-        <translation type="unfinished">Ajuda</translation>
+        <translation>Ajuda</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.cpp" line="92"/>
@@ -7102,12 +7091,17 @@ Use this to receive AIS NMEA data from a network source. This could be a publicl
 Example sharing from Linux:
 ncat -v -k -l 5631 &lt; /dev/ttyUSB0
 Replace /dev/ttyUSB0 with the tty device of your AIS receiver</source>
-        <translation type="unfinished"></translation>
+        <translation>AIS
+Es pot utilitzar per a rebre dades de la xarxa AIS NMEA. Es pot utilitzar qualsevol emissor públic que envií dades AIS en text pla, mitjançant un port TCP. En un entorn Linux es pot compartir amb un port serie utilitzant ncat. 
+
+Exemple de com compartir-ho en un entorn Linux:
+ncat -v -k -l 5631 &lt; /dev/ttyUSB0
+Substitueix /dev/ttyUSB0 amb el dispositiu tty del receptor AIS</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.cpp" line="170"/>
         <source>Error...</source>
-        <translation type="unfinished">Error...</translation>
+        <translation>Error...</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.cpp" line="317"/>
@@ -7115,12 +7109,12 @@ Replace /dev/ttyUSB0 with the tty device of your AIS receiver</source>
         <location filename="../realtime/ais/CRtAisInfo.cpp" line="401"/>
         <location filename="../realtime/ais/CRtAisInfo.cpp" line="445"/>
         <source>Unknown</source>
-        <translation type="unfinished">Desconegut</translation>
+        <translation>Desconegut</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.cpp" line="531"/>
         <source>Failed...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ha fallat ...</translation>
     </message>
 </context>
 <context>
@@ -7144,7 +7138,7 @@ Replace /dev/ttyUSB0 with the tty device of your AIS receiver</source>
 The basic idea of this GPS source is to receive a NMEA stream via Ethernet connection. You can use the Android app &quot;GPS Tether&quot; to provide a host streaming NMEA data. Your Android device must be in the same network or provide a network as a hotspot.
 For configuration you need to know your Android device&apos;s IP address or it&apos;s host name provided by a DNS. The app will tell you the address. Additionally you need the port number as configured in the app.</source>
         <translation>GPS Tether
-L&apos;objectiu d&apos;aquesta connexió GPS és rebre dades de NMEA mitjançant una connexió Ethernet. L&apos;App d&apos;Android &quot;GPS Tether&quot; permet obtenir un flux continu de dades NMEA. El dispositiu Android ha d&apos;estar connectat a la mateixa xarxa o ha de poder accedir-hi mitjançant un punt de connexió.
+L&apos;objectiu d&apos;aquesta connexió GPS és rebre dades de NMEA mitjançant una connexió Ethernet. L&apos;App d&apos;Android «GPS Tether» permet obtenir un flux continu de dades NMEA. El dispositiu Android ha d&apos;estar connectat a la mateixa xarxa o ha de poder accedir-hi mitjançant un punt de connexió.
 Per a configurar l&apos;accés s&apos;ha de saber l&apos;adreça IP del dispositiu Android o el nom que l&apos;hi dona el DNS. L&apos;App pot donar aquesta adreça. També necessiteu el número de port configurat a l&apos;App.</translation>
     </message>
     <message>
@@ -7272,7 +7266,7 @@ Per a configurar l&apos;accés s&apos;ha de saber l&apos;adreça IP del disposit
     <message>
         <location filename="../realtime/CRtWorkspace.cpp" line="64"/>
         <source>To add a realtime source do a right click on the list above. </source>
-        <translation>Fes clic amb el botó dret a la llista de sobre per afegir un temps real original.</translation>
+        <translation>Fes clic amb el botó dret a la llista de sobre per a afegir un temps real original.</translation>
     </message>
     <message>
         <location filename="../realtime/CRtWorkspace.cpp" line="223"/>
@@ -7891,7 +7885,7 @@ Per a configurar l&apos;accés s&apos;ha de saber l&apos;adreça IP del disposit
     <message>
         <location filename="../gis/search/CSearch.cpp" line="450"/>
         <source>searches the name of the item. For Geocaches this is &quot;Name - GCCode&quot;.</source>
-        <translation>cerca el nom de l&apos;element. Per a Geocerques és &quot;Nom - GCCodi&quot;.</translation>
+        <translation>cerca el nom de l&apos;element. Per a Geocerques és «Nom - GCCodi».</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearch.cpp" line="451"/>
@@ -8132,7 +8126,7 @@ Per a configurar l&apos;accés s&apos;ha de saber l&apos;adreça IP del disposit
     <message>
         <location filename="../gis/search/CSearchExplanationDialog.cpp" line="41"/>
         <source>If a search string in the short form &apos;comparison value&apos; is used the property is derived from the value and its unit: </source>
-        <translation>Si s&apos;utilitza el modus &quot;valor a comparar&quot; en la cerca d&apos;una cadena, la propietat s&apos;assigna del valor i la seva unitat:</translation>
+        <translation>Si s&apos;utilitza el modus «valor a comparar» en la cerca d&apos;una cadena, la propietat s&apos;assigna del valor i la seva unitat:</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearchExplanationDialog.cpp" line="63"/>
@@ -8200,7 +8194,7 @@ Per a configurar l&apos;accés s&apos;ha de saber l&apos;adreça IP del disposit
     <message>
         <location filename="../gis/search/CSearchLineEdit.cpp" line="68"/>
         <source>Filter: Start to type and the list will be reduced to matching items. An example would be &quot;date between 2010 and 2012&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Filtre: En començar a teclejar la llista es reduïra als elements que compleixin el criteri. Un exemple seria «data entre 2010 i 2012»</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearchLineEdit.cpp" line="80"/>
@@ -8216,22 +8210,22 @@ Per a configurar l&apos;accés s&apos;ha de saber l&apos;adreça IP del disposit
         <location filename="../gis/search/CSearchLineEdit.cpp" line="157"/>
         <location filename="../gis/search/CSearchLineEdit.cpp" line="160"/>
         <source>Error parsing search.</source>
-        <translation type="unfinished"></translation>
+        <translation>S&apos;ha produït un error en analitzar la cerca.</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearchLineEdit.cpp" line="158"/>
         <source>Continuing with search for match in names</source>
-        <translation type="unfinished"></translation>
+        <translation>Continuar amb la cerca de coincidències en els noms</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearchLineEdit.cpp" line="161"/>
         <source>Continuing with search for match in full text</source>
-        <translation type="unfinished"></translation>
+        <translation>Continuar amb la cerca de coincidències en tot el text</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearchLineEdit.cpp" line="170"/>
         <source>Automatically set the property, please make sure the results are correct.</source>
-        <translation type="unfinished"></translation>
+        <translation>Establir les propietats automàticament, assegureu-vos que els resultats siguin correctes.</translation>
     </message>
 </context>
 <context>
@@ -8452,7 +8446,7 @@ línia %2, columna %3:
     <message>
         <location filename="../gis/trk/CTableTrk.cpp" line="139"/>
         <source>Double click to edit elevation value</source>
-        <translation>Doble clic per editar el valor de l&apos;elevació</translation>
+        <translation>Doble clic per a editar el valor de l&apos;elevació</translation>
     </message>
     <message>
         <location filename="../gis/trk/CTableTrk.cpp" line="163"/>
@@ -8701,73 +8695,73 @@ línia %2, columna %3:
         <location filename="../gis/CWksItemDelegate.cpp" line="646"/>
         <location filename="../gis/CWksItemDelegate.cpp" line="935"/>
         <source>Enter address...</source>
-        <translation type="unfinished"></translation>
+        <translation>Introduïu l&apos;adreça...</translation>
     </message>
     <message>
         <location filename="../gis/CWksItemDelegate.cpp" line="818"/>
         <source>Hide project on map.</source>
-        <translation type="unfinished"></translation>
+        <translation>Amaga el projecte al mapa</translation>
     </message>
     <message>
         <location filename="../gis/CWksItemDelegate.cpp" line="820"/>
         <source>Show project on map.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra el projecte al mapa</translation>
     </message>
     <message>
         <location filename="../gis/CWksItemDelegate.cpp" line="826"/>
         <source>Save project.</source>
-        <translation type="unfinished"></translation>
+        <translation>Desar el projecte.</translation>
     </message>
     <message>
         <location filename="../gis/CWksItemDelegate.cpp" line="829"/>
         <source>Disable auto save.</source>
-        <translation type="unfinished"></translation>
+        <translation> Desactiva el desat automàtic</translation>
     </message>
     <message>
         <location filename="../gis/CWksItemDelegate.cpp" line="831"/>
         <source>Enable auto save.</source>
-        <translation type="unfinished"></translation>
+        <translation>Activa el desat automàtic</translation>
     </message>
     <message>
         <location filename="../gis/CWksItemDelegate.cpp" line="835"/>
         <source>Copy content of project into a project in the workspace.</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiar el contingut d&apos;un projecte dins d&apos;un altre que ja és a l&apos;espai de treball.</translation>
     </message>
     <message>
         <location filename="../gis/CWksItemDelegate.cpp" line="841"/>
         <source>Disable automatic synchonization with GPS device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Desactiva la sincronització automàtica del dispositiu GPS</translation>
     </message>
     <message>
         <location filename="../gis/CWksItemDelegate.cpp" line="844"/>
         <source>Enable automatic synchonization with GPS device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Activa la sincronització automàtica del dispositiu GPS</translation>
     </message>
     <message>
         <location filename="../gis/CWksItemDelegate.cpp" line="851"/>
         <source>This is the active project. All new items will be attached to this project automatically.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aquest és el projecte actiu. Tots els nous elements s&apos;afegiran automàticament a aquest projecte.</translation>
     </message>
     <message>
         <location filename="../gis/CWksItemDelegate.cpp" line="857"/>
         <source>Make this project the active one. All new items will be attached to this project automatically.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fes que aquest projecte sigui l&apos;actiu. Tots els nous elements s&apos;afegiran automàticament a aquest projecte.</translation>
     </message>
     <message>
         <location filename="../gis/CWksItemDelegate.cpp" line="869"/>
         <location filename="../gis/CWksItemDelegate.cpp" line="893"/>
         <source>This is the status line. You can select additional information to be displayed in the workspace setup. See menu-&gt;Workspace-&gt;Setup Workspace</source>
-        <translation type="unfinished"></translation>
+        <translation>Aquesta és la línia d&apos;estat. Es pot seleccionar informació addicional que es mostrarà en la configuració de l&apos;espai de treball. En el menú escull-&gt;Espai de treball-&gt;Configuració de l&apos;espai de treball</translation>
     </message>
     <message>
         <location filename="../gis/CWksItemDelegate.cpp" line="902"/>
         <source>Item is changed and needs to be saved.</source>
-        <translation type="unfinished"></translation>
+        <translation>L&apos;Element s&apos;ha modificat i cal desar-lo.</translation>
     </message>
     <message>
         <location filename="../gis/CWksItemDelegate.cpp" line="913"/>
         <source>Setup Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuració de les Cerques</translation>
     </message>
 </context>
 <context>
@@ -8876,7 +8870,7 @@ línia %2, columna %3:
         <location filename="../helpers/CWptIconManager.cpp" line="623"/>
         <location filename="../helpers/CWptIconManager.cpp" line="629"/>
         <source>markers</source>
-        <translation type="unfinished"></translation>
+        <translation>marcadors</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="78"/>
@@ -8885,7 +8879,7 @@ línia %2, columna %3:
         <location filename="../helpers/CWptIconManager.cpp" line="96"/>
         <location filename="../helpers/CWptIconManager.cpp" line="630"/>
         <source>dot</source>
-        <translation type="unfinished"></translation>
+        <translation>punt</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="78"/>
@@ -8893,7 +8887,7 @@ línia %2, columna %3:
         <location filename="../helpers/CWptIconManager.cpp" line="90"/>
         <location filename="../helpers/CWptIconManager.cpp" line="96"/>
         <source>city</source>
-        <translation type="unfinished"></translation>
+        <translation>ciutat</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="102"/>
@@ -8903,7 +8897,7 @@ línia %2, columna %3:
         <location filename="../helpers/CWptIconManager.cpp" line="540"/>
         <location filename="../helpers/CWptIconManager.cpp" line="691"/>
         <source>flag</source>
-        <translation type="unfinished"></translation>
+        <translation>bandera</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="102"/>
@@ -8935,7 +8929,7 @@ línia %2, columna %3:
         <location filename="../helpers/CWptIconManager.cpp" line="976"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1000"/>
         <source>red</source>
-        <translation type="unfinished"></translation>
+        <translation>vermell</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="108"/>
@@ -8963,7 +8957,7 @@ línia %2, columna %3:
         <location filename="../helpers/CWptIconManager.cpp" line="504"/>
         <location filename="../helpers/CWptIconManager.cpp" line="934"/>
         <source>blue</source>
-        <translation type="unfinished"></translation>
+        <translation>blau</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="114"/>
@@ -8995,21 +8989,21 @@ línia %2, columna %3:
         <location filename="../helpers/CWptIconManager.cpp" line="970"/>
         <location filename="../helpers/CWptIconManager.cpp" line="994"/>
         <source>green</source>
-        <translation type="unfinished"></translation>
+        <translation>verd</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="120"/>
         <location filename="../helpers/CWptIconManager.cpp" line="126"/>
         <location filename="../helpers/CWptIconManager.cpp" line="132"/>
         <source>pin</source>
-        <translation type="unfinished"></translation>
+        <translation>fixar</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="138"/>
         <location filename="../helpers/CWptIconManager.cpp" line="144"/>
         <location filename="../helpers/CWptIconManager.cpp" line="150"/>
         <source>block</source>
-        <translation type="unfinished"></translation>
+        <translation>bloca</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="138"/>
@@ -9034,7 +9028,7 @@ línia %2, columna %3:
         <location filename="../helpers/CWptIconManager.cpp" line="252"/>
         <location filename="../helpers/CWptIconManager.cpp" line="258"/>
         <source>shape</source>
-        <translation type="unfinished"></translation>
+        <translation>forma</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="156"/>
@@ -9045,28 +9039,28 @@ línia %2, columna %3:
         <location filename="../helpers/CWptIconManager.cpp" line="776"/>
         <location filename="../helpers/CWptIconManager.cpp" line="782"/>
         <source>circle</source>
-        <translation type="unfinished"></translation>
+        <translation>cercle</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="174"/>
         <location filename="../helpers/CWptIconManager.cpp" line="180"/>
         <location filename="../helpers/CWptIconManager.cpp" line="186"/>
         <source>diamond</source>
-        <translation type="unfinished"></translation>
+        <translation>rombe</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="192"/>
         <location filename="../helpers/CWptIconManager.cpp" line="198"/>
         <location filename="../helpers/CWptIconManager.cpp" line="204"/>
         <source>oval</source>
-        <translation type="unfinished"></translation>
+        <translation>oval</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="210"/>
         <location filename="../helpers/CWptIconManager.cpp" line="216"/>
         <location filename="../helpers/CWptIconManager.cpp" line="222"/>
         <source>rectangle</source>
-        <translation type="unfinished"></translation>
+        <translation>rectangle</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="228"/>
@@ -9075,14 +9069,14 @@ línia %2, columna %3:
         <location filename="../helpers/CWptIconManager.cpp" line="618"/>
         <location filename="../helpers/CWptIconManager.cpp" line="624"/>
         <source>square</source>
-        <translation type="unfinished"></translation>
+        <translation>quadrat</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="246"/>
         <location filename="../helpers/CWptIconManager.cpp" line="252"/>
         <location filename="../helpers/CWptIconManager.cpp" line="258"/>
         <source>triangle</source>
-        <translation type="unfinished"></translation>
+        <translation>triangle</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="264"/>
@@ -9098,7 +9092,7 @@ línia %2, columna %3:
         <location filename="../helpers/CWptIconManager.cpp" line="324"/>
         <location filename="../helpers/CWptIconManager.cpp" line="330"/>
         <source>letter</source>
-        <translation type="unfinished"></translation>
+        <translation>carta</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="264"/>
@@ -9144,7 +9138,7 @@ línia %2, columna %3:
         <location filename="../helpers/CWptIconManager.cpp" line="504"/>
         <location filename="../helpers/CWptIconManager.cpp" line="510"/>
         <source>alphanumerical</source>
-        <translation type="unfinished"></translation>
+        <translation>alfanumèric</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="336"/>
@@ -9178,12 +9172,12 @@ línia %2, columna %3:
         <location filename="../helpers/CWptIconManager.cpp" line="504"/>
         <location filename="../helpers/CWptIconManager.cpp" line="510"/>
         <source>number</source>
-        <translation type="unfinished"></translation>
+        <translation>número</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="516"/>
         <source>residence</source>
-        <translation type="unfinished"></translation>
+        <translation> residència</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="516"/>
@@ -9226,133 +9220,133 @@ línia %2, columna %3:
         <location filename="../helpers/CWptIconManager.cpp" line="1638"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1644"/>
         <source>building</source>
-        <translation type="unfinished"></translation>
+        <translation>edifici</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="522"/>
         <source>favorite</source>
-        <translation type="unfinished"></translation>
+        <translation>preferit</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="534"/>
         <source>crossing</source>
-        <translation type="unfinished"></translation>
+        <translation>cruïlla</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="546"/>
         <source>trail head</source>
-        <translation type="unfinished"></translation>
+        <translation>inici de camí</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="552"/>
         <source>bike trail</source>
-        <translation type="unfinished"></translation>
+        <translation>ruta de bicicleta</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="606"/>
         <location filename="../helpers/CWptIconManager.cpp" line="612"/>
         <source>smiley</source>
-        <translation type="unfinished"></translation>
+        <translation>somriure</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1765"/>
         <source>Final Location</source>
-        <translation type="unfinished"></translation>
+        <translation>Ubicació Final</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1771"/>
         <source>Physical Stage</source>
-        <translation type="unfinished"></translation>
+        <translation> Etapa Física</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1777"/>
         <source>Reference Waypoint</source>
-        <translation type="unfinished"></translation>
+        <translation>Fita de referència</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1783"/>
         <source>Trailhead</source>
-        <translation type="unfinished"></translation>
+        <translation> Inici del camí</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1789"/>
         <source>Virtual Stage</source>
-        <translation type="unfinished"></translation>
+        <translation>Etapa Virtual</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1868"/>
         <source>afro</source>
-        <translation type="unfinished"></translation>
+        <translation>afro</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1874"/>
         <source>alien</source>
-        <translation type="unfinished"></translation>
+        <translation>extraterrestre</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1880"/>
         <source>ball cap</source>
-        <translation type="unfinished"></translation>
+        <translation>gorra de pilota</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1886"/>
         <source>big ears</source>
-        <translation type="unfinished"></translation>
+        <translation>orelles grans</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1892"/>
         <source>biker</source>
-        <translation type="unfinished"></translation>
+        <translation>ciclista</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1898"/>
         <source>bug</source>
-        <translation type="unfinished"></translation>
+        <translation>insecte</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1904"/>
         <source>cat</source>
-        <translation type="unfinished"></translation>
+        <translation>gat</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1910"/>
         <source>dog</source>
-        <translation type="unfinished"></translation>
+        <translation>gos</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="630"/>
         <source>waypoint</source>
-        <translation type="unfinished">fita</translation>
+        <translation>fita</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="637"/>
         <location filename="../helpers/CWptIconManager.cpp" line="643"/>
         <source>anchor</source>
-        <translation type="unfinished"></translation>
+        <translation>ancora</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="679"/>
         <location filename="../helpers/CWptIconManager.cpp" line="685"/>
         <source>beacon</source>
-        <translation type="unfinished"></translation>
+        <translation>balisa</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="697"/>
         <location filename="../helpers/CWptIconManager.cpp" line="703"/>
         <source>diver down flag</source>
-        <translation type="unfinished"></translation>
+        <translation>bandera de bus a l&apos;aigua</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="709"/>
         <source>man overboard</source>
-        <translation type="unfinished"></translation>
+        <translation>home a l&apos;aigua</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="715"/>
         <location filename="../helpers/CWptIconManager.cpp" line="721"/>
         <location filename="../helpers/CWptIconManager.cpp" line="727"/>
         <source>area</source>
-        <translation type="unfinished">àrea</translation>
+        <translation>àrea</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="921"/>
@@ -9370,17 +9364,17 @@ línia %2, columna %3:
         <location filename="../helpers/CWptIconManager.cpp" line="993"/>
         <location filename="../helpers/CWptIconManager.cpp" line="999"/>
         <source>navaid</source>
-        <translation type="unfinished"></translation>
+        <translation>ajuda a la navegació</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="922"/>
         <source>amber</source>
-        <translation type="unfinished"></translation>
+        <translation>ambre</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="928"/>
         <source>black</source>
-        <translation type="unfinished"></translation>
+        <translation>negre</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="673"/>
@@ -9390,17 +9384,17 @@ línia %2, columna %3:
         <location filename="../helpers/CWptIconManager.cpp" line="994"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1000"/>
         <source>white</source>
-        <translation type="unfinished"></translation>
+        <translation>blanc</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="958"/>
         <source>orange</source>
-        <translation type="unfinished"></translation>
+        <translation>taronja</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="982"/>
         <source>violet</source>
-        <translation type="unfinished"></translation>
+        <translation>violeta</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1006"/>
@@ -9430,7 +9424,7 @@ línia %2, columna %3:
         <location filename="../helpers/CWptIconManager.cpp" line="1150"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1156"/>
         <source>cycling</source>
-        <translation type="unfinished"></translation>
+        <translation>ciclisme</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1007"/>
@@ -9438,17 +9432,17 @@ línia %2, columna %3:
         <location filename="../helpers/CWptIconManager.cpp" line="1019"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1025"/>
         <source>category</source>
-        <translation type="unfinished"></translation>
+        <translation>categoria</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1031"/>
         <source>danger</source>
-        <translation type="unfinished"></translation>
+        <translation>perill</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1037"/>
         <source>first aid</source>
-        <translation type="unfinished"></translation>
+        <translation>primers auxilis</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1043"/>
@@ -9463,102 +9457,102 @@ línia %2, columna %3:
         <location filename="../helpers/CWptIconManager.cpp" line="1638"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1644"/>
         <source>food</source>
-        <translation type="unfinished"></translation>
+        <translation>menjar</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1049"/>
         <source>generic</source>
-        <translation type="unfinished"></translation>
+        <translation>genèric</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1055"/>
         <source>hors category</source>
-        <translation type="unfinished"></translation>
+        <translation>fora de categoria</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1061"/>
         <source>left</source>
-        <translation type="unfinished"></translation>
+        <translation>esquerra</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1067"/>
         <source>right</source>
-        <translation type="unfinished"></translation>
+        <translation>dreta</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1073"/>
         <source>sprint</source>
-        <translation type="unfinished"></translation>
+        <translation>esprint</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1079"/>
         <source>straight</source>
-        <translation type="unfinished"></translation>
+        <translation>recte</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1085"/>
         <source>summit</source>
-        <translation type="unfinished"></translation>
+        <translation>cim</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1091"/>
         <source>valley</source>
-        <translation type="unfinished"></translation>
+        <translation>vall</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1097"/>
         <source>water</source>
-        <translation type="unfinished"></translation>
+        <translation>aigua</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1103"/>
         <source>left fork</source>
-        <translation type="unfinished"></translation>
+        <translation>bifurcació esquerra</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1109"/>
         <source>right fork</source>
-        <translation type="unfinished"></translation>
+        <translation>bifurcació dreta</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1115"/>
         <source>middle fork</source>
-        <translation type="unfinished"></translation>
+        <translation>bifurcació central</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1121"/>
         <source>slight left</source>
-        <translation type="unfinished"></translation>
+        <translation>una mica a l&apos;esquerra</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1127"/>
         <source>sharp left</source>
-        <translation type="unfinished"></translation>
+        <translation>ben a l&apos;esquerra</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1133"/>
         <source>slight right</source>
-        <translation type="unfinished"></translation>
+        <translation>una mica a la dreta</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1139"/>
         <source>sharp right</source>
-        <translation type="unfinished"></translation>
+        <translation>ben a la dreta</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1145"/>
         <source>uturn</source>
-        <translation type="unfinished"></translation>
+        <translation>Canvia de sentit</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1151"/>
         <source>start</source>
-        <translation type="unfinished"></translation>
+        <translation>inici</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1157"/>
         <source>end</source>
-        <translation type="unfinished"></translation>
+        <translation>final</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1163"/>
@@ -9645,7 +9639,7 @@ línia %2, columna %3:
         <location filename="../helpers/CWptIconManager.cpp" line="1649"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1655"/>
         <source>poi</source>
-        <translation type="unfinished"></translation>
+        <translation>punt d&apos;interès</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1164"/>
@@ -9653,17 +9647,17 @@ línia %2, columna %3:
         <location filename="../helpers/CWptIconManager.cpp" line="1176"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1182"/>
         <source>bank</source>
-        <translation type="unfinished"></translation>
+        <translation>banc</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1200"/>
         <source>church</source>
-        <translation type="unfinished"></translation>
+        <translation>esglesia</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1218"/>
         <source>mine</source>
-        <translation type="unfinished"></translation>
+        <translation>mina</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1218"/>
@@ -9676,13 +9670,13 @@ línia %2, columna %3:
         <location filename="../helpers/CWptIconManager.cpp" line="1470"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1608"/>
         <source>landmark</source>
-        <translation type="unfinished"></translation>
+        <translation>fita</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1230"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1236"/>
         <source>tower</source>
-        <translation type="unfinished"></translation>
+        <translation>torre</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1187"/>
@@ -9705,92 +9699,92 @@ línia %2, columna %3:
         <location filename="../helpers/CWptIconManager.cpp" line="1409"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1505"/>
         <source>transport</source>
-        <translation type="unfinished"></translation>
+        <translation>transport</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1584"/>
         <source>golf course</source>
-        <translation type="unfinished"></translation>
+        <translation>camp de golf</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1916"/>
         <source>dreadlocks</source>
-        <translation type="unfinished"></translation>
+        <translation>rastes</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1922"/>
         <source>female1</source>
-        <translation type="unfinished"></translation>
+        <translation>dona1</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1928"/>
         <source>female2</source>
-        <translation type="unfinished"></translation>
+        <translation>dona2</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1934"/>
         <source>female3</source>
-        <translation type="unfinished"></translation>
+        <translation>dona3</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1940"/>
         <source>goatee</source>
-        <translation type="unfinished"></translation>
+        <translation>perilla</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1946"/>
         <source>kung-fu</source>
-        <translation type="unfinished"></translation>
+        <translation>kung-fu</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1952"/>
         <source>pig</source>
-        <translation type="unfinished"></translation>
+        <translation>porc</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1958"/>
         <source>pirate</source>
-        <translation type="unfinished"></translation>
+        <translation>pirata</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1964"/>
         <source>ranger</source>
-        <translation type="unfinished"></translation>
+        <translation>guardabosc</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1970"/>
         <source>spike</source>
-        <translation type="unfinished"></translation>
+        <translation>eriço</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1976"/>
         <source>sumo</source>
-        <translation type="unfinished"></translation>
+        <translation>sumo</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1982"/>
         <source>blonde</source>
-        <translation type="unfinished"></translation>
+        <translation>rosa</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1988"/>
         <source>clown</source>
-        <translation type="unfinished"></translation>
+        <translation>pallasso</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1994"/>
         <source>glasses</source>
-        <translation type="unfinished"></translation>
+        <translation>ulleres</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="2000"/>
         <source>panda</source>
-        <translation type="unfinished"></translation>
+        <translation>panda</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="2129"/>
         <source>More...</source>
-        <translation type="unfinished"></translation>
+        <translation>Mes...</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="636"/>
@@ -9824,7 +9818,7 @@ línia %2, columna %3:
         <location filename="../helpers/CWptIconManager.cpp" line="1409"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1463"/>
         <source>marine</source>
-        <translation type="unfinished"></translation>
+        <translation>marina</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="84"/>
@@ -9976,12 +9970,12 @@ línia %2, columna %3:
         <location filename="../helpers/CWptIconManager.cpp" line="1663"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1669"/>
         <source>etrex</source>
-        <translation type="unfinished"></translation>
+        <translation>ètrex</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="558"/>
         <source>atv</source>
-        <translation type="unfinished"></translation>
+        <translation>vehicle tot terreny</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="558"/>
@@ -9989,37 +9983,37 @@ línia %2, columna %3:
         <location filename="../helpers/CWptIconManager.cpp" line="570"/>
         <location filename="../helpers/CWptIconManager.cpp" line="576"/>
         <source>vehicle</source>
-        <translation type="unfinished"></translation>
+        <translation>vehicle</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="564"/>
         <source>car</source>
-        <translation type="unfinished"></translation>
+        <translation>cotxe</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="570"/>
         <source>truck</source>
-        <translation type="unfinished"></translation>
+        <translation>camió</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="576"/>
         <source>wrecker</source>
-        <translation type="unfinished"></translation>
+        <translation>demolidor</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="582"/>
         <source>water hydrant</source>
-        <translation type="unfinished"></translation>
+        <translation>boca d&apos;incendi</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="588"/>
         <source>mile marker</source>
-        <translation type="unfinished"></translation>
+        <translation> senyal quilomètric</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="594"/>
         <source>tracback point</source>
-        <translation type="unfinished"></translation>
+        <translation>punt de seguiment</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="605"/>
@@ -10047,67 +10041,67 @@ línia %2, columna %3:
         <location filename="../helpers/CWptIconManager.cpp" line="1993"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1999"/>
         <source>contact</source>
-        <translation type="unfinished"></translation>
+        <translation>contacte</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="649"/>
         <source>bell</source>
-        <translation type="unfinished"></translation>
+        <translation>campana</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="655"/>
         <source>horn</source>
-        <translation type="unfinished"></translation>
+        <translation>clàxon</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="661"/>
         <source>light</source>
-        <translation type="unfinished"></translation>
+        <translation>llum</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="667"/>
         <source>skull and crossbones</source>
-        <translation type="unfinished"></translation>
+        <translation>bandera pirata</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="673"/>
         <source>buoy</source>
-        <translation type="unfinished"></translation>
+        <translation>boia</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="679"/>
         <source>radio</source>
-        <translation type="unfinished"></translation>
+        <translation>radio</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="733"/>
         <source>reef</source>
-        <translation type="unfinished"></translation>
+        <translation>escull</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="739"/>
         <source>weed bed</source>
-        <translation type="unfinished"></translation>
+        <translation>llit d&apos;herbes</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="745"/>
         <source>dropoff</source>
-        <translation type="unfinished"></translation>
+        <translation>lloc de recollida</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="751"/>
         <source>dock</source>
-        <translation type="unfinished"></translation>
+        <translation>moll</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="757"/>
         <source>bait and tackle</source>
-        <translation type="unfinished"></translation>
+        <translation>canya i esquer</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="763"/>
         <source>stump</source>
-        <translation type="unfinished"></translation>
+        <translation>tronc</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="769"/>
@@ -10119,22 +10113,22 @@ línia %2, columna %3:
         <location filename="../helpers/CWptIconManager.cpp" line="1229"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1235"/>
         <source>aerial</source>
-        <translation type="unfinished"></translation>
+        <translation>aeri</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="788"/>
         <source>glider area</source>
-        <translation type="unfinished"></translation>
+        <translation>àrea de planadors</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="794"/>
         <source>ultralight area</source>
-        <translation type="unfinished"></translation>
+        <translation>àrea d&apos;ultralleugers</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="800"/>
         <source>parachute area</source>
-        <translation type="unfinished"></translation>
+        <translation>àrea de paracaigudisme</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="806"/>
@@ -10158,137 +10152,137 @@ línia %2, columna %3:
         <location filename="../helpers/CWptIconManager.cpp" line="914"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1571"/>
         <source>hunting</source>
-        <translation type="unfinished"></translation>
+        <translation>caça</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="807"/>
         <source>big game</source>
-        <translation type="unfinished"></translation>
+        <translation>caça major</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="813"/>
         <source>blind</source>
-        <translation type="unfinished"></translation>
+        <translation>cec</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="819"/>
         <source>blood trail</source>
-        <translation type="unfinished"></translation>
+        <translation>rastre de sang</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="825"/>
         <source>cover</source>
-        <translation type="unfinished"></translation>
+        <translation>cobrir</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="831"/>
         <source>covey</source>
-        <translation type="unfinished"></translation>
+        <translation>bandada</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="837"/>
         <source>food source</source>
-        <translation type="unfinished"></translation>
+        <translation>dipòsit d&apos;aliments</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="843"/>
         <source>furbearer</source>
-        <translation type="unfinished"></translation>
+        <translation>animal de pell</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="849"/>
         <source>small game</source>
-        <translation type="unfinished"></translation>
+        <translation>caça menor</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="855"/>
         <source>animal tracks</source>
-        <translation type="unfinished"></translation>
+        <translation>rastres d&apos;animals</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="861"/>
         <source>treed quarry</source>
-        <translation type="unfinished"></translation>
+        <translation>pedrera amb arbres</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="867"/>
         <source>tree stand</source>
-        <translation type="unfinished"></translation>
+        <translation> post de caça</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="873"/>
         <source>upland game</source>
-        <translation type="unfinished"></translation>
+        <translation>caça menor al bosc</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="879"/>
         <source>waterfowl</source>
-        <translation type="unfinished"></translation>
+        <translation>ocells aquàtics</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="885"/>
         <source>water source</source>
-        <translation type="unfinished"></translation>
+        <translation>font d&apos;aigua</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="891"/>
         <source>dog running</source>
-        <translation type="unfinished"></translation>
+        <translation>gossos deslligats</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="897"/>
         <source>dog pointing</source>
-        <translation type="unfinished"></translation>
+        <translation>gos de mostra</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="903"/>
         <source>dog treed</source>
-        <translation type="unfinished"></translation>
+        <translation>gos acorralant</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="909"/>
         <source>dog sitting</source>
-        <translation type="unfinished"></translation>
+        <translation>gossera</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="915"/>
         <source>dog unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>gos desconegut</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1188"/>
         <source>bridge</source>
-        <translation type="unfinished"></translation>
+        <translation>pont</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1206"/>
         <source>cemetery</source>
-        <translation type="unfinished"></translation>
+        <translation>cementiri</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1212"/>
         <source>military</source>
-        <translation type="unfinished"></translation>
+        <translation>militar</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1224"/>
         <source>oil field</source>
-        <translation type="unfinished"></translation>
+        <translation> camp petrolífer</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1242"/>
         <source>toll booth</source>
-        <translation type="unfinished"></translation>
+        <translation>peatge</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1248"/>
         <source>tunnel</source>
-        <translation type="unfinished"></translation>
+        <translation>tunel</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1254"/>
         <source>gas station</source>
-        <translation type="unfinished"></translation>
+        <translation>benzinera</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1260"/>
@@ -10296,62 +10290,62 @@ línia %2, columna %3:
         <location filename="../helpers/CWptIconManager.cpp" line="1272"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1278"/>
         <source>parking</source>
-        <translation type="unfinished"></translation>
+        <translation>parquing</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1284"/>
         <source>car rental</source>
-        <translation type="unfinished"></translation>
+        <translation>lloguer de cotxes</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1290"/>
         <source>truck stop</source>
-        <translation type="unfinished"></translation>
+        <translation> àrea de servei</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1296"/>
         <source>boat ramp</source>
-        <translation type="unfinished"></translation>
+        <translation>rampa de varada</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1302"/>
         <source>marina</source>
-        <translation type="unfinished"></translation>
+        <translation>port</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1308"/>
         <source>ferry</source>
-        <translation type="unfinished"></translation>
+        <translation>ferry</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1314"/>
         <source>seaplane</source>
-        <translation type="unfinished"></translation>
+        <translation> hidroavió</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1320"/>
         <source>transportation</source>
-        <translation type="unfinished"></translation>
+        <translation>transport</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1326"/>
         <source>funicular</source>
-        <translation type="unfinished"></translation>
+        <translation>funicular</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1332"/>
         <source>railway</source>
-        <translation type="unfinished"></translation>
+        <translation>via de tren</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1338"/>
         <source>airport</source>
-        <translation type="unfinished"></translation>
+        <translation>aeroport</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1344"/>
         <source>heliport</source>
-        <translation type="unfinished"></translation>
+        <translation>heliport</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1349"/>
@@ -10360,7 +10354,7 @@ línia %2, columna %3:
         <location filename="../helpers/CWptIconManager.cpp" line="1421"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1505"/>
         <source>outdoors</source>
-        <translation type="unfinished"></translation>
+        <translation>a l&apos;aire lliure</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1349"/>
@@ -10368,128 +10362,128 @@ línia %2, columna %3:
         <location filename="../helpers/CWptIconManager.cpp" line="1361"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1367"/>
         <source>accommodation</source>
-        <translation type="unfinished"></translation>
+        <translation>allotjament</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1350"/>
         <source>campground</source>
-        <translation type="unfinished"></translation>
+        <translation>càmping</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1356"/>
         <source>lodge</source>
-        <translation type="unfinished"></translation>
+        <translation>refugi</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1362"/>
         <source>lodging</source>
-        <translation type="unfinished"></translation>
+        <translation>allotjament</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1368"/>
         <source>rv park</source>
-        <translation type="unfinished"></translation>
+        <translation> càmping de caravanes</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1374"/>
         <source>dam</source>
-        <translation type="unfinished"></translation>
+        <translation>presa</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1380"/>
         <source>levee</source>
-        <translation type="unfinished"></translation>
+        <translation>dic</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1386"/>
         <source>bar</source>
-        <translation type="unfinished"></translation>
+        <translation>bar</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1392"/>
         <source>drinking water</source>
-        <translation type="unfinished"></translation>
+        <translation>aigua potable</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1398"/>
         <source>fast food</source>
-        <translation type="unfinished"></translation>
+        <translation> menjar ràpid</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1404"/>
         <source>pizza</source>
-        <translation type="unfinished"></translation>
+        <translation>pizza</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1410"/>
         <source>restaurant</source>
-        <translation type="unfinished"></translation>
+        <translation>restaurant</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1416"/>
         <source>amusement park</source>
-        <translation type="unfinished"></translation>
+        <translation>parc d&apos;atraccions</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1422"/>
         <source>beach</source>
-        <translation type="unfinished"></translation>
+        <translation>platja</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1428"/>
         <source>ghost town</source>
-        <translation type="unfinished"></translation>
+        <translation>poble fantasma</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1434"/>
         <source>information</source>
-        <translation type="unfinished"></translation>
+        <translation>informació</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1440"/>
         <source>live theatre</source>
-        <translation type="unfinished"></translation>
+        <translation>teatre en viu</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1446"/>
         <source>museum</source>
-        <translation type="unfinished"></translation>
+        <translation>museu</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1452"/>
         <source>picnic area</source>
-        <translation type="unfinished"></translation>
+        <translation>àrea de picnic</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1458"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1464"/>
         <source>scenic area</source>
-        <translation type="unfinished"></translation>
+        <translation>paratge pintoresc</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1470"/>
         <source>zoo</source>
-        <translation type="unfinished"></translation>
+        <translation>zoo</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1476"/>
         <source>city hall</source>
-        <translation type="unfinished"></translation>
+        <translation>ajuntament</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1482"/>
         <source>library</source>
-        <translation type="unfinished"></translation>
+        <translation>biblioteca</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1488"/>
         <source>movie theater</source>
-        <translation type="unfinished"></translation>
+        <translation>cinema</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1494"/>
         <source>police station</source>
-        <translation type="unfinished"></translation>
+        <translation>comissaria</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1494"/>
@@ -10497,63 +10491,63 @@ línia %2, columna %3:
         <location filename="../helpers/CWptIconManager.cpp" line="1536"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1542"/>
         <source>help</source>
-        <translation type="unfinished"></translation>
+        <translation>ajuda</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1500"/>
         <source>post office</source>
-        <translation type="unfinished"></translation>
+        <translation>correus</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1506"/>
         <source>restroom</source>
-        <translation type="unfinished"></translation>
+        <translation>banys</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1512"/>
         <source>shower</source>
-        <translation type="unfinished"></translation>
+        <translation>dutxa</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1518"/>
         <source>scales</source>
-        <translation type="unfinished"></translation>
+        <translation>escales</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1518"/>
         <source>court</source>
-        <translation type="unfinished"></translation>
+        <translation>tribunal</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1524"/>
         <source>telephone</source>
-        <translation type="unfinished"></translation>
+        <translation>telèfon</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1530"/>
         <source>medical facility</source>
-        <translation type="unfinished"></translation>
+        <translation>centre mèdic</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1530"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1542"/>
         <source>hospital</source>
-        <translation type="unfinished"></translation>
+        <translation>hospital</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1536"/>
         <source>pharmacy</source>
-        <translation type="unfinished"></translation>
+        <translation>farmàcia</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1542"/>
         <source>hospital euro</source>
-        <translation type="unfinished"></translation>
+        <translation>hospital euro</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1548"/>
         <source>school</source>
-        <translation type="unfinished"></translation>
+        <translation>escola</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1553"/>
@@ -10568,109 +10562,109 @@ línia %2, columna %3:
         <location filename="../helpers/CWptIconManager.cpp" line="1607"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1613"/>
         <source>sport</source>
-        <translation type="unfinished"></translation>
+        <translation>esport</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1554"/>
         <source>bowling</source>
-        <translation type="unfinished"></translation>
+        <translation>bolera</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1560"/>
         <source>fishing area</source>
-        <translation type="unfinished"></translation>
+        <translation>àrea de pesca</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1566"/>
         <source>fishing hot sport facility</source>
-        <translation type="unfinished"></translation>
+        <translation> instal·lació de pesca molt sol·licitada</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1572"/>
         <source>hunting area</source>
-        <translation type="unfinished"></translation>
+        <translation>àrea de caça</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1578"/>
         <source>fitness center</source>
-        <translation type="unfinished"></translation>
+        <translation>gimnàs</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1578"/>
         <source>gym</source>
-        <translation type="unfinished"></translation>
+        <translation>gimnàs</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1590"/>
         <source>ice skating</source>
-        <translation type="unfinished"></translation>
+        <translation>pista de gel</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1596"/>
         <source>skiing area</source>
-        <translation type="unfinished"></translation>
+        <translation>àrea d&apos;esquí</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1602"/>
         <source>ski resort</source>
-        <translation type="unfinished"></translation>
+        <translation>estació d&apos;esquí</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1608"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1614"/>
         <source>stadium</source>
-        <translation type="unfinished"></translation>
+        <translation>estadi</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1620"/>
         <source>car repair</source>
-        <translation type="unfinished"></translation>
+        <translation>taller de reparació</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1626"/>
         <source>convenience store</source>
-        <translation type="unfinished"></translation>
+        <translation>botiga de queviures</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1632"/>
         <source>department store</source>
-        <translation type="unfinished"></translation>
+        <translation>grans magatzems</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1638"/>
         <source>shopping center</source>
-        <translation type="unfinished"></translation>
+        <translation>Centre comercial</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1638"/>
         <source>supermarket</source>
-        <translation type="unfinished"></translation>
+        <translation>supermercat</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1644"/>
         <source>winery</source>
-        <translation type="unfinished"></translation>
+        <translation>celler</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1644"/>
         <source>bottle shop</source>
-        <translation type="unfinished"></translation>
+        <translation>botiga de licors</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1650"/>
         <source>forest</source>
-        <translation type="unfinished"></translation>
+        <translation>bosc</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1650"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1656"/>
         <source>land</source>
-        <translation type="unfinished"></translation>
+        <translation>terra</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1656"/>
         <source>park</source>
-        <translation type="unfinished"></translation>
+        <translation>parc</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1662"/>
@@ -10709,105 +10703,105 @@ línia %2, columna %3:
         <location filename="../helpers/CWptIconManager.cpp" line="1854"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1860"/>
         <source>geocache</source>
-        <translation type="unfinished"></translation>
+        <translation>geocerca</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1669"/>
         <source>geocache found</source>
-        <translation type="unfinished"></translation>
+        <translation>trobat geocache</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1681"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1795"/>
         <source>traditional cache</source>
-        <translation type="unfinished"></translation>
+        <translation>amagatall típic</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1687"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1693"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1801"/>
         <source>multi cache</source>
-        <translation type="unfinished"></translation>
+        <translation>amagatall múltiple</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1699"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1807"/>
         <source>unknown cache</source>
-        <translation type="unfinished"></translation>
+        <translation>amagatall desconegut</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1705"/>
         <source>letterbox hybrid</source>
-        <translation type="unfinished"></translation>
+        <translation>bústia híbrida</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1717"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1813"/>
         <source>wherigo cache</source>
-        <translation type="unfinished"></translation>
+        <translation>amagatall on vaig</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1741"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1819"/>
         <source>event cache</source>
-        <translation type="unfinished"></translation>
+        <translation>amagatall d&apos;esdeveniments</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1747"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1825"/>
         <source>mega-event cache</source>
-        <translation type="unfinished"></translation>
+        <translation>amagatall de grans esdeveniments</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1753"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1831"/>
         <source>giga-event cache</source>
-        <translation type="unfinished"></translation>
+        <translation>amagatall de molt grans esdeveniments</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1759"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1837"/>
         <source>cache in trash out event</source>
-        <translation type="unfinished"></translation>
+        <translation>memòria cau de la paperera fora d&apos;activitat</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1723"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1843"/>
         <source>earthcache</source>
-        <translation type="unfinished"></translation>
+        <translation>amagatall terrestre</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1711"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1849"/>
         <source>letterbox cache</source>
-        <translation type="unfinished"></translation>
+        <translation>amagatall bústia</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1729"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1855"/>
         <source>virtual cache</source>
-        <translation type="unfinished"></translation>
+        <translation>amagatall virtual</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1735"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1861"/>
         <source>webcam cache</source>
-        <translation type="unfinished"></translation>
+        <translation>amagatall webcam</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1675"/>
         <source>puzzle cache</source>
-        <translation type="unfinished"></translation>
+        <translation>amagatall puzzle</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="2018"/>
         <source>external</source>
-        <translation type="unfinished"></translation>
+        <translation>extern</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="2136"/>
         <source>Clear List</source>
-        <translation type="unfinished"></translation>
+        <translation>Neteja la Llista</translation>
     </message>
 </context>
 <context>
@@ -10815,27 +10809,27 @@ línia %2, columna %3:
     <message>
         <location filename="../widgets/CWptIconSelectWidget.cpp" line="59"/>
         <source>Clear Filter</source>
-        <translation type="unfinished">Neteja el Filtre</translation>
+        <translation>Neteja el Filtre</translation>
     </message>
     <message>
         <location filename="../widgets/CWptIconSelectWidget.cpp" line="62"/>
         <source>start typing...</source>
-        <translation type="unfinished">comença a escriure ...</translation>
+        <translation>comença a escriure ...</translation>
     </message>
     <message>
         <location filename="../widgets/CWptIconSelectWidget.cpp" line="63"/>
         <source>Filter: Start to type and the list will be reduced to matching items.</source>
-        <translation type="unfinished">Filtre: Comenceu a teclejar i sols es mostraran a la llista els elements que coincideixin.</translation>
+        <translation>Filtre: Comenceu a teclejar i sols es mostraran a la llista els elements que coincideixin.</translation>
     </message>
     <message>
         <location filename="../widgets/CWptIconSelectWidget.cpp" line="67"/>
         <source>Filter: Show only icons in selected category</source>
-        <translation type="unfinished"></translation>
+        <translation>Filtre: Sols mostra les icones de la categoria seleccionada </translation>
     </message>
     <message>
         <location filename="../widgets/CWptIconSelectWidget.cpp" line="70"/>
         <source>Filter: Show only icons for selected vendor</source>
-        <translation type="unfinished"></translation>
+        <translation>Filtre: Sols mostra les icones del  proveïdor seleccionat</translation>
     </message>
 </context>
 <context>
@@ -11756,7 +11750,7 @@ línia %2, columna %3:
         <location filename="../canvas/ICanvasSetup.ui" line="66"/>
         <location filename="../../../build/src/qmapshack/ui_ICanvasSetup.h" line="130"/>
         <source>Square (optimized for TMS and WMTS tiles)</source>
-        <translation>Quadrat (optimitzat per tesel·les TMS i WMTS)</translation>
+        <translation>Quadrat (optimitzat per a tesel·les TMS i WMTS)</translation>
     </message>
 </context>
 <context>
@@ -12044,7 +12038,7 @@ amplia al màxim per a utilitzar dades DEM.</translation>
         <location filename="../dem/IDemPropSetup.ui" line="35"/>
         <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="421"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Change opacity of layer&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Canvia l&apos;opacitat de la capa&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="78"/>
@@ -12059,7 +12053,8 @@ allunyament màxim en utilitzar dades DEM.</translation>
         <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="434"/>
         <source>Enable relief shading based on aspect and slope,
  and illuminated from NW.</source>
-        <translation type="unfinished"></translation>
+        <translation>Activa l&apos;ombrejat de vessants basat en l&apos;aspecte i en el pendent,
+ i il·luminat des del NO.</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="121"/>
@@ -12072,34 +12067,38 @@ allunyament màxim en utilitzar dades DEM.</translation>
         <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="439"/>
         <source>Move to the right to raise the angle of the light.
  Light comes from NW</source>
-        <translation type="unfinished"></translation>
+        <translation>Desplaça’t cap a la dreta per augmentar l’angle de la llum.
+ La llum ve del NO</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="151"/>
         <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="443"/>
         <source>Enable relief shading based on slope.
  The steeper, the darker.</source>
-        <translation type="unfinished"></translation>
+        <translation>Activa l&apos;ombrejat de vessants basat en el pendent.
+ El més inclinat, el més fosc.</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="155"/>
         <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="446"/>
         <source>Slope Shading</source>
-        <translation type="unfinished"></translation>
+        <translation>Ombreig de Pendents</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="162"/>
         <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="448"/>
         <source>Move to the right to increase the scale factor.
  Higher values are better for flatter areas.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mou cap a la dreta per a augmenta el factor d&apos;escala.
+ Per a àrees planes són millors els valors més alts.</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="199"/>
         <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="452"/>
         <source>Enable color shading
  based on slope ranges.</source>
-        <translation type="unfinished"></translation>
+        <translation>Activa l&apos;ombreig amb colors
+ basat en les corbes de nivell.</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="203"/>
@@ -12111,7 +12110,7 @@ allunyament màxim en utilitzar dades DEM.</translation>
         <location filename="../dem/IDemPropSetup.ui" line="210"/>
         <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="457"/>
         <source>Select color scheme.</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecciona l&apos;esquema de colors.</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="291"/>
@@ -12159,7 +12158,7 @@ allunyament màxim en utilitzar dades DEM.</translation>
         <location filename="../dem/IDemPropSetup.ui" line="704"/>
         <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="475"/>
         <source>Tint areas above the given elevation.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tinta les àrees per sobre de l’altitud especificada.</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="707"/>
@@ -12173,13 +12172,13 @@ allunyament màxim en utilitzar dades DEM.</translation>
         <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="479"/>
         <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="482"/>
         <source>Lower elevation to be colored.</source>
-        <translation type="unfinished"></translation>
+        <translation>S&apos;acolorirà el punt d&apos;elevació més baix.</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="756"/>
         <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="484"/>
         <source>Elevation Low</source>
-        <translation type="unfinished"></translation>
+        <translation>Elevació Mínima</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="769"/>
@@ -12187,38 +12186,39 @@ allunyament màxim en utilitzar dades DEM.</translation>
         <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="486"/>
         <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="494"/>
         <source>Higher elevation to be colored.</source>
-        <translation type="unfinished"></translation>
+        <translation>S&apos;acolorirà el punt d&apos;elevació més alt.</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="785"/>
         <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="489"/>
         <source>Enable color shading
  based on elevation.</source>
-        <translation type="unfinished"></translation>
+        <translation>Activa l&apos;ombreig amb colors
+ basat en l&apos;elevació.</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="789"/>
         <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="492"/>
         <source>Elevation Shading</source>
-        <translation type="unfinished"></translation>
+        <translation>Ombreig de la Elevació</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="805"/>
         <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="496"/>
         <source>Elevation High</source>
-        <translation type="unfinished"></translation>
+        <translation>Elevació Màxima</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="812"/>
         <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="498"/>
         <source>Enable / Disable elevation legend.</source>
-        <translation type="unfinished"></translation>
+        <translation>Activa / Desactiva la llegenda de l&apos;elevació</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="815"/>
         <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="500"/>
         <source>Legend</source>
-        <translation type="unfinished"></translation>
+        <translation>Llegenda</translation>
     </message>
 </context>
 <context>
@@ -12245,31 +12245,31 @@ allunyament màxim en utilitzar dades DEM.</translation>
         <location filename="../dem/IDemList.ui" line="131"/>
         <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="204"/>
         <source>To add files with elevation data use &lt;a href=&apos;DemFolders&apos;&gt;File-&gt;Setup DEM Paths&lt;/a&gt;.</source>
-        <translation>Per afegir fitxers amb dades d&apos;elevació feu &lt;a href=&apos;DemFolders&apos;&gt;Fitxer-&gt;Configurar els Camins a DEM&lt;/a&gt;.</translation>
+        <translation>Per a afegir fitxers amb dades d&apos;altitud feu &lt;a href=&apos;DemFolders&apos;&gt;Fitxer-&gt;Configurar els Camins a DEM&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="144"/>
         <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="205"/>
         <source>Use the buttons to activate a DEM. Use drag-n-drop to move the DEM in the draw order. </source>
-        <translation type="unfinished"></translation>
+        <translation>Utilitza els botons per activar un DEM. Utilitzar arrossega i deixa anar per a moure el DEM en el procés de dibuix. </translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="165"/>
         <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="165"/>
         <source>Move to Top</source>
-        <translation type="unfinished"></translation>
+        <translation>Mou al Principi</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="168"/>
         <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="167"/>
         <source>Hide DEM behind others</source>
-        <translation type="unfinished"></translation>
+        <translation>Amagar DEM darrere dels altres</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="171"/>
         <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="170"/>
         <source>Shift+Home</source>
-        <translation type="unfinished"></translation>
+        <translation>Majúscules+Inici</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="183"/>
@@ -12287,13 +12287,13 @@ allunyament màxim en utilitzar dades DEM.</translation>
         <location filename="../dem/IDemList.ui" line="189"/>
         <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="177"/>
         <source>Shift+Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Majúscules+Amunt</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="201"/>
         <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="179"/>
         <source>Move Down</source>
-        <translation>Mou avall</translation>
+        <translation>Mou Avall</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="204"/>
@@ -12305,25 +12305,25 @@ allunyament màxim en utilitzar dades DEM.</translation>
         <location filename="../dem/IDemList.ui" line="207"/>
         <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="184"/>
         <source>Shift+Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Majúscules+Avall</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="219"/>
         <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="186"/>
         <source>Move to Bottom</source>
-        <translation type="unfinished"></translation>
+        <translation>Mou al Final</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="222"/>
         <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="188"/>
         <source>Show DEM on top of others</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra el DEM abans dels altres</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="225"/>
         <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="191"/>
         <source>Shift+End</source>
-        <translation type="unfinished"></translation>
+        <translation>Majúscules+Fi</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="237"/>
@@ -12341,13 +12341,13 @@ allunyament màxim en utilitzar dades DEM.</translation>
         <location filename="../dem/IDemList.ui" line="261"/>
         <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="195"/>
         <source>Remove</source>
-        <translation type="unfinished">Suprimeix</translation>
+        <translation>Suprimeix</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="264"/>
         <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="197"/>
         <source>Remove DEM from list</source>
-        <translation type="unfinished"></translation>
+        <translation>Elimina DEM de la llista</translation>
     </message>
 </context>
 <context>
@@ -12510,7 +12510,7 @@ allunyament màxim en utilitzar dades DEM.</translation>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="132"/>
         <location filename="../../../build/src/qmapshack/ui_IDetailsOvlArea.h" line="239"/>
         <source>The area was imported to QMapShack and was changed. It does not show the original data anymore. Please see history for changes. </source>
-        <translation>Aquesta àrea s&apos;ha importat a QMapShack I ha estat modificada. Ja no es poden mostrar les dades originals. Si us plau, mireu l&apos;historial per veure les modificacions. </translation>
+        <translation>Aquesta àrea s&apos;ha importat a QMapShack I ha estat modificada. Ja no es poden mostrar les dades originals. Si us plau, mireu l&apos;historial per a veure les modificacions. </translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="160"/>
@@ -12660,7 +12660,7 @@ allunyament màxim en utilitzar dades DEM.</translation>
         <location filename="../gis/rte/IDetailsRte.ui" line="154"/>
         <location filename="../../../build/src/qmapshack/ui_IDetailsRte.h" line="173"/>
         <source>The route was imported to QMapShack and was changed. It does not show the original data anymore. Please see history for changes. </source>
-        <translation>Aquesta ruta s&apos;ha importat a QMapShack i ha estat modificada. Ja no es poden mostrar les dades originals. Si us plau, mireu l&apos;historial per veure les modificacions. </translation>
+        <translation>Aquesta ruta s&apos;ha importat a QMapShack i ha estat modificada. Ja no es poden mostrar les dades originals. Si us plau, mireu l&apos;historial per a veure les modificacions. </translation>
     </message>
     <message>
         <location filename="../gis/rte/IDetailsRte.ui" line="182"/>
@@ -12857,7 +12857,7 @@ allunyament màxim en utilitzar dades DEM.</translation>
         <location filename="../gis/trk/IDetailsTrk.ui" line="281"/>
         <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1064"/>
         <source>The track was imported to QMapShack and was changed. It does not show the original data anymore. Please see history for changes. </source>
-        <translation>Aquest track s&apos;ha importat a QMapShack I ha estat modificat. Ja no es poden mostrar les dades originals. Si us plau, mireu el historial per veure les modificacions. </translation>
+        <translation>Aquest track s&apos;ha importat a QMapShack I ha estat modificat. Ja no es poden mostrar les dades originals. Si us plau, mireu el historial per a veure les modificacions. </translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="309"/>
@@ -12911,7 +12911,7 @@ allunyament màxim en utilitzar dades DEM.</translation>
         <location filename="../gis/trk/IDetailsTrk.ui" line="980"/>
         <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1113"/>
         <source> points</source>
-        <translation>punts</translation>
+        <translation> punts</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1040"/>
@@ -13116,7 +13116,7 @@ allunyament màxim en utilitzar dades DEM.</translation>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="44"/>
         <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="511"/>
         <source>Set parameters to compute &quot;Energy Use Cycling&quot; for a cycling tour</source>
-        <translation>Estableix els paràmetres per a calcular &quot;l&apos;Energia Utilitzada En Ciclisme&quot; d&apos;una sortida en bicicleta  </translation>
+        <translation>Estableix els paràmetres per a calcular l&apos;«Energia Utilitzada En Ciclisme» d&apos;una sortida en bicicleta  </translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="94"/>
@@ -13650,13 +13650,13 @@ allunyament màxim en utilitzar dades DEM.</translation>
         <location filename="../gis/trk/filter/IFilterInterpolateElevation.ui" line="51"/>
         <location filename="../../../build/src/qmapshack/ui_IFilterInterpolateElevation.h" line="133"/>
         <source>&lt;b&gt;Interpolate Elevation Data&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Interpolar Dades d&apos;Elevació&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Interpolar Dades d&apos;Altitud&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterInterpolateElevation.ui" line="69"/>
         <location filename="../../../build/src/qmapshack/ui_IFilterInterpolateElevation.h" line="134"/>
         <source>Replace elevation of track points with interpolated data.</source>
-        <translation>Substitueix l&apos;elevació dels punts del track amb dades interpolades</translation>
+        <translation>Substitueix l&apos;altitud dels punts del track amb dades interpolades</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterInterpolateElevation.ui" line="76"/>
@@ -13899,7 +13899,7 @@ allunyament màxim en utilitzar dades DEM.</translation>
         <location filename="../gis/trk/filter/IFilterReplaceElevation.ui" line="51"/>
         <location filename="../../../build/src/qmapshack/ui_IFilterReplaceElevation.h" line="110"/>
         <source>&lt;b&gt;Replace Elevation Data&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Substitueix les Dades d&apos;Elevació&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Substitueix les Dades d&apos;Altitud&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterReplaceElevation.ui" line="63"/>
@@ -14142,31 +14142,31 @@ allunyament màxim en utilitzar dades DEM.</translation>
         <location filename="../gis/trk/filter/IFilterSplitTrack.ui" line="14"/>
         <location filename="../../../build/src/qmapshack/ui_IFilterSplitTrack.h" line="143"/>
         <source>Form</source>
-        <translation type="unfinished">Formulari</translation>
+        <translation>Formulari</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSplitTrack.ui" line="35"/>
         <location filename="../../../build/src/qmapshack/ui_IFilterSplitTrack.h" line="144"/>
         <source>Number of tracks</source>
-        <translation type="unfinished"></translation>
+        <translation>Número de tracks</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSplitTrack.ui" line="99"/>
         <location filename="../../../build/src/qmapshack/ui_IFilterSplitTrack.h" line="148"/>
         <source>Apply filter now.</source>
-        <translation type="unfinished">Aplica ara el filtre.</translation>
+        <translation>Aplica ara el filtre.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSplitTrack.ui" line="102"/>
         <location filename="../../../build/src/qmapshack/ui_IFilterSplitTrack.h" line="150"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSplitTrack.ui" line="132"/>
         <location filename="../../../build/src/qmapshack/ui_IFilterSplitTrack.h" line="151"/>
         <source>Split track into multiple shorter tracks</source>
-        <translation type="unfinished"></translation>
+        <translation>Divideix el track en diversos tracks més petits</translation>
     </message>
 </context>
 <context>
@@ -14299,7 +14299,7 @@ allunyament màxim en utilitzar dades DEM.</translation>
     <message>
         <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="150"/>
         <location filename="../../../build/src/qmapshack/ui_IGeoSearchConfigDialog.h" line="227"/>
-        <source>&lt;p&gt;&lt;a href=&quot;http://www.geonames.org/&quot; target=&quot;_blank&quot;&gt;Geonames&lt;/a&gt; © &lt;a href=&quot;http://creativecommons.org/licenses/by/4.0/&quot; target=&quot;_blank&quot;&gt;Creative Commons Attribution 4.0 License&lt;/a&gt;&lt;/p&gt;&lt;p&gt;to use please create a geonames &lt;a href=&quot;http://www.geonames.org/login&quot; target=&quot;_blank&quot;&gt;username&lt;/a&gt;,&lt;/p&gt;&lt;p&gt;then enable &apos;Free Webservices&apos; in your &lt;a href=&quot;http://www.geonames.org/manageaccount&quot; target=&quot;_blank&quot;&gt;Account&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;enter your geonames username here:&lt;/p&gt;
+        <source>&lt;p&gt;&lt;a href=&quot;http://www.geonames.org/&quot; target=&quot;_blank&quot;&gt;Geonames&lt;/a&gt; © &lt;a href=&quot;http://creativecommons.org/licenses/by/4.0/&quot; target=&quot;_blank&quot;&gt;Creative Commons Attribution 4.0 License&lt;/a&gt;&lt;/p&gt;&lt;p&gt;to use please create a geonames &lt;a href=&quot;http://www.geonames.org/login&quot; target=&quot;_blank&quot;&gt;username&lt;/a&gt;,&lt;/p&gt;&lt;p&gt;then enable 'Free Webservices' in your &lt;a href=&quot;http://www.geonames.org/manageaccount&quot; target=&quot;_blank&quot;&gt;Account&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;enter your geonames username here:&lt;/p&gt;
 </source>
         <translation>&lt;p&gt;&lt;a href=&quot;http://www.geonames.org/&quot; target=&quot;_blank&quot;&gt;Geonames&lt;/a&gt; © &lt;a href=&quot;http://creativecommons.org/licenses/by/4.0/&quot; target=&quot;_blank&quot;&gt;Creative Commons Attribution 4.0 License&lt;/a&gt;&lt;/p&gt;&lt;p&gt;per a utilitzar geonames creeu, si us plau, un &lt;a href=&quot;http://www.geonames.org/login&quot; target=&quot;_blank&quot;&gt;nom d&apos;usuari&lt;/a&gt;,&lt;/p&gt;&lt;p&gt;un cop fet activeu &apos;Free Webservices&apos; en el vostre &lt;a href=&quot;http://www.geonames.org/manageaccount&quot; target=&quot;_blank&quot;&gt;Compte&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;introduir aquí el vostre nom d&apos;usuari Geonames:&lt;/p&gt;
 </translation>
@@ -14400,7 +14400,7 @@ allunyament màxim en utilitzar dades DEM.</translation>
         <location filename="../gis/IGisDatabase.ui" line="102"/>
         <location filename="../../../build/src/qmapshack/ui_IGisDatabase.h" line="111"/>
         <source>To add a database do a right click on the database list above.</source>
-        <translation>Per afegir una base de dades feu clic en el botó dret sobre la llista de bases de dades.</translation>
+        <translation>Per a afegir una base de dades feu clic en el botó dret sobre la llista de bases de dades.</translation>
     </message>
     <message>
         <location filename="../gis/IGisDatabase.ui" line="125"/>
@@ -14606,7 +14606,7 @@ allunyament màxim en utilitzar dades DEM.</translation>
         <location filename="../gis/prj/IGisProject.cpp" line="362"/>
         <location filename="../gis/prj/IGisProject.cpp" line="410"/>
         <source>Save &quot;%1&quot; to...</source>
-        <translation>Desa &quot;%1&quot; a...</translation>
+        <translation>Desa «%1» a...</translation>
     </message>
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="474"/>
@@ -14618,7 +14618,7 @@ Nom del fitxer: %1</translation>
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="478"/>
         <source>Keywords: </source>
-        <translation type="unfinished">Paraules clau:</translation>
+        <translation>Paraules clau:</translation>
     </message>
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="482"/>
@@ -15360,7 +15360,7 @@ Nom del fitxer: %1</translation>
         <location filename="../IMainWindow.ui" line="935"/>
         <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="769"/>
         <source>Show a legend for all track point info bullets along the track.</source>
-        <translation>Mostra una llegenda als globus d&apos;informació de tots els punts del track al llarg de tot el track.</translation>
+        <translation>Mostra una llegenda a les vinyetes d&apos;informació de tots els punts del track al llarg de tot el track.</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="947"/>
@@ -15426,7 +15426,7 @@ Nom del fitxer: %1</translation>
         <location filename="../IMainWindow.ui" line="1010"/>
         <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="792"/>
         <source>Mark track points with additional information by auto-numbered bullets.</source>
-        <translation>Amplia la informació dels punts del track amb globus auto numerades. </translation>
+        <translation>Amplia la informació dels punts del track amb vinyetes auto numerades. </translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="1023"/>
@@ -15470,7 +15470,7 @@ Nom del fitxer: %1</translation>
         <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="810"/>
         <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="812"/>
         <source>Setup Map Icon Sizes</source>
-        <translation type="unfinished"></translation>
+        <translation>Configura una Mida a les Icones dels Mapes</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="722"/>
@@ -15635,7 +15635,7 @@ Nom del fitxer: %1</translation>
         <location filename="../helpers/IMapIconSizesSetup.ui" line="20"/>
         <location filename="../../../build/src/qmapshack/ui_IMapIconSizesSetup.h" line="173"/>
         <source>Set Map Icon Sizes</source>
-        <translation type="unfinished"></translation>
+        <translation>Assigna una Mida a les Icones dels Mapes</translation>
     </message>
     <message>
         <location filename="../helpers/IMapIconSizesSetup.ui" line="50"/>
@@ -15643,13 +15643,13 @@ Nom del fitxer: %1</translation>
         <location filename="../../../build/src/qmapshack/ui_IMapIconSizesSetup.h" line="174"/>
         <location filename="../../../build/src/qmapshack/ui_IMapIconSizesSetup.h" line="177"/>
         <source>px</source>
-        <translation type="unfinished"></translation>
+        <translation>px</translation>
     </message>
     <message>
         <location filename="../helpers/IMapIconSizesSetup.ui" line="57"/>
         <location filename="../../../build/src/qmapshack/ui_IMapIconSizesSetup.h" line="175"/>
         <source>Waypoint Icons</source>
-        <translation type="unfinished"></translation>
+        <translation>Icones de les Fites</translation>
     </message>
     <message>
         <location filename="../helpers/IMapIconSizesSetup.ui" line="74"/>
@@ -15657,13 +15657,13 @@ Nom del fitxer: %1</translation>
         <location filename="../../../build/src/qmapshack/ui_IMapIconSizesSetup.h" line="176"/>
         <location filename="../../../build/src/qmapshack/ui_IMapIconSizesSetup.h" line="179"/>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Mida</translation>
     </message>
     <message>
         <location filename="../helpers/IMapIconSizesSetup.ui" line="91"/>
         <location filename="../../../build/src/qmapshack/ui_IMapIconSizesSetup.h" line="178"/>
         <source>POI Icons</source>
-        <translation type="unfinished"></translation>
+        <translation>Icones dels Punts d&apos;Interès</translation>
     </message>
 </context>
 <context>
@@ -15678,7 +15678,7 @@ Nom del fitxer: %1</translation>
         <location filename="../map/IMapList.ui" line="116"/>
         <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="202"/>
         <source>To add maps use &lt;a href=&apos;MapFolders&apos;&gt;File-&gt;Setup Map Paths&lt;/a&gt;.</source>
-        <translation>Per afegir mapes fes &lt;a href=&apos;MapFolders&apos;&gt;Fitxer-&gt;Configurar els Camins a Mapes&lt;/a&gt;.</translation>
+        <translation>Per a afegir mapes fes &lt;a href=&apos;MapFolders&apos;&gt;Fitxer-&gt;Configurar els Camins a Mapes&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="35"/>
@@ -15696,13 +15696,13 @@ Nom del fitxer: %1</translation>
         <location filename="../map/IMapList.ui" line="129"/>
         <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="203"/>
         <source>Use the buttons to activate a map. Use drag-n-drop to move the map in the draw order. </source>
-        <translation type="unfinished"></translation>
+        <translation>Utilitza els botons per activar un mapa. Utilitzar arrossega i deixa anar per a moure el mapa en el procés de dibuix. </translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="153"/>
         <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="165"/>
         <source>Hide map behind others</source>
-        <translation type="unfinished"></translation>
+        <translation>Amagar el mapa darrere dels altres</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="168"/>
@@ -15720,13 +15720,13 @@ Nom del fitxer: %1</translation>
         <location filename="../map/IMapList.ui" line="174"/>
         <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="175"/>
         <source>Shift+Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Majúscules+Amunt</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="186"/>
         <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="177"/>
         <source>Move Down</source>
-        <translation>Mou avall</translation>
+        <translation>Mou Avall</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="189"/>
@@ -15738,13 +15738,13 @@ Nom del fitxer: %1</translation>
         <location filename="../map/IMapList.ui" line="192"/>
         <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="182"/>
         <source>Shift+Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Majúscules+Avall</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="207"/>
         <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="186"/>
         <source>Show map on top of others</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra el mapa abans dels altres</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="222"/>
@@ -15762,37 +15762,37 @@ Nom del fitxer: %1</translation>
         <location filename="../map/IMapList.ui" line="246"/>
         <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="193"/>
         <source>Remove</source>
-        <translation type="unfinished">Suprimeix</translation>
+        <translation>Suprimeix</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="249"/>
         <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="195"/>
         <source>Remove map from list</source>
-        <translation type="unfinished"></translation>
+        <translation>Elimina el mapa de la llista</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="150"/>
         <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="163"/>
         <source>Move to Top</source>
-        <translation type="unfinished"></translation>
+        <translation>Mou al Principi</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="156"/>
         <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="168"/>
         <source>Shift+Home</source>
-        <translation type="unfinished"></translation>
+        <translation>Majúscules+Inici</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="204"/>
         <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="184"/>
         <source>Move to Bottom</source>
-        <translation type="unfinished"></translation>
+        <translation>Mou al Final</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="210"/>
         <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="189"/>
         <source>Shift+End</source>
-        <translation type="unfinished"></translation>
+        <translation>Majúscules+Fi</translation>
     </message>
 </context>
 <context>
@@ -15800,7 +15800,7 @@ Nom del fitxer: %1</translation>
     <message>
         <location filename="../map/IMapOnline.cpp" line="45"/>
         <source>This map requires OpenSSL support. However due to legal restrictions in some countries OpenSSL is not packaged with QMapShack. You can have a look at the &lt;a href=&apos;https://github.com/openssl/openssl/wiki/Binaries&apos;&gt;OpenSSL Wiki&lt;/a&gt; for binaries. You have to copy libcrypto-3-x64.dll and libssl-3-x64.dll into the QMapShack program directory.</source>
-        <translation>Aquest mapa requereix suport OpenSSL. Tanmateix donades les restriccions legals existents en alguns païssos, OpenSSL no és al paquet de QMapShack. Heu de cercar els binaris a la &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;Pàgina Wiki de OpenSSL&lt;/a&gt;. S&apos;han de copiar a la carpeta del programa QMapShack els fitxers libcrypto-3-x64.dll i libssl-3-x64.dll.</translation>
+        <translation> Aquest mapa requereix suport OpenSSL. Tanmateix donades les restriccions legals existents en alguns païssos, OpenSSL no és al paquet de QMapShack. Heu de cercar els binaris a la &lt;a href=&apos;https://github.com/openssl/openssl/wiki/Binaries&apos;&gt;Pàgina Wiki de OpenSSL&lt;/a&gt;. S&apos;han de copiar a la carpeta del programa QMapShack els fitxers libcrypto-3-x64.dll i libssl-3-x64.dll.</translation>
     </message>
     <message>
         <location filename="../map/IMapOnline.cpp" line="49"/>
@@ -16019,14 +16019,14 @@ Tip:
         <translation>&lt;ol&gt;
 &lt;li&gt;Selecciona una o múltiples fonts de fitxers *.pbf .&lt;/li&gt;
 &lt;li&gt;Selecciona un nom per al fitxer VRT destí.&lt;/li&gt;
-&lt;li&gt;Prem el botó &quot;Inicia&quot;.&lt;/li&gt;
+&lt;li&gt;Prem el botó «Inicia».&lt;/li&gt;
 &lt;/ol&gt;
 
 Consell:
 &lt;ul&gt;
 &lt;li&gt;Si tens diversos fitxers posa&apos;ls en una subcarpeta del camí a la carpeta de mapes. Crea el fitxer VRT al camí a la carpeta de mapes.&lt;/li&gt;
-&lt;li&gt;Utilitza les opcions avançades per afegir un valor &quot;sense dades&quot; si els fitxers origen no tenen dades o no tenen una forma de mapa rectangular. Les àrees sense fitxer de mapa es veuran transparents.&lt;/li&gt;
-&lt;li&gt;Les opcions &quot;-a_srs&quot; s&apos;utilitzen per assignar una Projecció/Datum si els fitxers origen no en tenen. Aquestes opcions NO re-projecten les dades.&lt;/li&gt;
+&lt;li&gt;Utilitza les opcions avançades per a afegir un valor «sense dades» si els fitxers origen no tenen dades o no tenen una forma de mapa rectangular. Les àrees sense fitxer de mapa es veuran transparents.&lt;/li&gt;
+&lt;li&gt;Les opcions «-a_srs» s&apos;utilitzen per a assignar una Projecció/Datum si els fitxers origen no en tenen. Aquestes opcions NO re-projecten les dades.&lt;/li&gt;
 &lt;/ul&gt;</translation>
     </message>
     <message>
@@ -16126,7 +16126,7 @@ Consell:
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="266"/>
         <source>&lt;b&gt;Delete Point&lt;/b&gt;&lt;br/&gt;Move the mouse close to a point and press the left button to delete it.&lt;br/&gt;</source>
-        <translation>&lt;b&gt;Suprimir punt&lt;/b&gt;&lt;br/&gt;Moure el ratolí a prop d&apos;un punt i fer clic al botó esquerra per suprimir-lo.&lt;br/&gt;</translation>
+        <translation>&lt;b&gt;Suprimir punt&lt;/b&gt;&lt;br/&gt;Moure el ratolí a prop d&apos;un punt i fer clic al botó esquerra per a suprimir-lo.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="275"/>
@@ -16191,28 +16191,29 @@ Consell:
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="380"/>
         <source>Abort</source>
-        <translation type="unfinished">Interrompre</translation>
+        <translation>Interrompre</translation>
     </message>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="381"/>
         <source>Do you really want to abort?
 Any modifications done will be discarded.</source>
-        <translation type="unfinished"></translation>
+        <translation>Esteu segurs de d&apos;interrompre?
+Es descartaran les modificacions realitzades.</translation>
     </message>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="515"/>
         <source>Route</source>
-        <translation type="unfinished">Itinerari</translation>
+        <translation>Itinerari</translation>
     </message>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="516"/>
         <source>Track</source>
-        <translation type="unfinished">Track</translation>
+        <translation>Track</translation>
     </message>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="517"/>
         <source>Area</source>
-        <translation type="unfinished">Àrea</translation>
+        <translation>Àrea</translation>
     </message>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="519"/>
@@ -16252,31 +16253,31 @@ Any modifications done will be discarded.</source>
         <location filename="../helpers/IOverviewAdvisoryDialog.ui" line="14"/>
         <location filename="../../../build/src/qmapshack/ui_IOverviewAdvisoryDialog.h" line="104"/>
         <source>Slow rendering...</source>
-        <translation type="unfinished"></translation>
+        <translation>Renderització lenta...</translation>
     </message>
     <message>
         <location filename="../helpers/IOverviewAdvisoryDialog.ui" line="20"/>
         <location filename="../../../build/src/qmapshack/ui_IOverviewAdvisoryDialog.h" line="105"/>
         <source>TextLabel</source>
-        <translation type="unfinished"></translation>
+        <translation>EtiquetaDeText</translation>
     </message>
     <message>
         <location filename="../helpers/IOverviewAdvisoryDialog.ui" line="40"/>
         <location filename="../../../build/src/qmapshack/ui_IOverviewAdvisoryDialog.h" line="107"/>
         <source>Build overviews on the VRT file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Genera vistes de conjunt en el fitxer VRT:</translation>
     </message>
     <message>
         <location filename="../helpers/IOverviewAdvisoryDialog.ui" line="63"/>
         <location filename="../../../build/src/qmapshack/ui_IOverviewAdvisoryDialog.h" line="108"/>
         <source>Build overviews on the underlying source file(s):</source>
-        <translation type="unfinished"></translation>
+        <translation>Genera vistes de conjunt en el fitxer(s) font originals:</translation>
     </message>
     <message>
         <location filename="../helpers/IOverviewAdvisoryDialog.ui" line="86"/>
         <location filename="../../../build/src/qmapshack/ui_IOverviewAdvisoryDialog.h" line="109"/>
         <source>Don&apos;t show this again for this file</source>
-        <translation type="unfinished"></translation>
+        <translation>No tornar a mostrar per a aquest fitxer</translation>
     </message>
 </context>
 <context>
@@ -16332,8 +16333,8 @@ Any modifications done will be discarded.</source>
         <location filename="../plot/IPlot.cpp" line="521"/>
         <source>Hold CTRL key for vertical zoom, only.
 Hold ALT key for horizontal zoom, only.</source>
-        <translation>Mantenir premuda la tecla CTRL només per zoom vertical.
-Mantenir premuda la tecla ALT només per zoom horitzontal.</translation>
+        <translation>Mantenir premuda la tecla CTRL només per a zoom vertical.
+Mantenir premuda la tecla ALT només per a zoom horitzontal.</translation>
     </message>
     <message>
         <location filename="../plot/IPlot.cpp" line="672"/>
@@ -16364,7 +16365,7 @@ Mantenir premuda la tecla ALT només per zoom horitzontal.</translation>
         <location filename="../poi/IPoiList.ui" line="110"/>
         <location filename="../../../build/src/qmapshack/ui_IPoiList.h" line="124"/>
         <source>Use the context menu (right mouse button click on entry) to activate a file. </source>
-        <translation>Utilitza el menú contextual (clic al botó dret del ratolí o entrada) per escollir un fitxer.</translation>
+        <translation>Utilitza el menú contextual (clic al botó dret del ratolí o entrada) per a escollir un fitxer.</translation>
     </message>
     <message>
         <location filename="../poi/IPoiList.ui" line="135"/>
@@ -16447,9 +16448,9 @@ Mantenir premuda la tecla ALT només per zoom horitzontal.</translation>
 or
 &quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot;</source>
         <translation>Format amb possicions incorrectes. Ha de ser: 
-&quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot;
+«[N|S] ddd mm.sss [W|E] ddd mm.sss»
 o
-&quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot;</translation>
+«[N|S] ddd.ddd [W|E] ddd.ddd»</translation>
     </message>
 </context>
 <context>
@@ -16828,7 +16829,7 @@ o
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="232"/>
         <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="255"/>
         <source>&lt;p&gt;&lt;a href=&quot;http://brouter.de/brouter/&quot; target=&quot;_blank&quot;&gt;BRouter&lt;/a&gt; © &lt;a href=&quot;https://github.com/abrensch/brouter/blob/master/LICENSE&quot; target=&quot;_blank&quot;&gt;ABrensch, License GPLv3&lt;/a&gt;&lt;/p&gt;</source>
-        <translation>&lt;p&gt;&lt;a href=&quot;http://brouter.de/brouter/&quot; target=&quot;_blank&quot;&gt;BRouter&lt;/a&gt; © &lt;a href=&quot;https://github.com/abrensch/brouter/blob/master/LICENSE&quot; target=&quot;_blank&quot;&gt;ABrensch, License GPLv3&lt;/a&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;&lt;a href=&quot;http://brouter.de/brouter/&quot; target=&quot;_blank&quot;&gt;BRouter&lt;/a&gt; © &lt;a href=&quot;https://github.com/abrensch/brouter/blob/master/LICENSE&quot; target=&quot;_blank&quot;&gt;ABrensch, Llicència GPLv3&lt;/a&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="245"/>
@@ -16876,7 +16877,7 @@ o
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="57"/>
         <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="671"/>
         <source>BRouter-Web (online)</source>
-        <translation>BRouter-Web (connectat)</translation>
+        <translation>BRouter-Web (en línia)</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="64"/>
@@ -16930,7 +16931,7 @@ o
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="147"/>
         <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="681"/>
         <source>labelLocalBRouterResult</source>
-        <translation type="unfinished"></translation>
+        <translation>labelLocalBRouterResult</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="156"/>
@@ -17014,7 +17015,7 @@ o
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="269"/>
         <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="689"/>
         <source>select BRouter Version:</source>
-        <translation type="unfinished"></translation>
+        <translation>selecciona la Versió de BRouter:</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="473"/>
@@ -17239,7 +17240,7 @@ o
     <message>
         <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="133"/>
         <location filename="../../../build/src/qmapshack/ui_IRoutinoDatabaseBuilder.h" line="188"/>
-        <source>&lt;p&gt;To create a Routino routing database you need to download *pbf files from &lt;a href=&apos;http://download.geofabrik.de/&apos;&gt;GeoFabrik&lt;/a&gt;. The process of creating a Routino database is quite slow and the resulting files quite large. Therefore it&apos;s recommended not to download whole continents. Limit your download to those countries you really need. However as Routino can&apos;t route over several databases you have to include all countries that are touched by a cross country border route.&lt;/p&gt;
+        <source>&lt;p&gt;To create a Routino routing database you need to download *pbf files from &lt;a href='http://download.geofabrik.de/'&gt;GeoFabrik&lt;/a&gt;. The process of creating a Routino database is quite slow and the resulting files quite large. Therefore it's recommended not to download whole continents. Limit your download to those countries you really need. However as Routino can't route over several databases you have to include all countries that are touched by a cross country border route.&lt;/p&gt;
 
 &lt;ol&gt;
 &lt;li&gt;Select one or multiple source *.pbf files.&lt;/li&gt;
@@ -17253,14 +17254,14 @@ o
 &lt;li&gt;Selecciona una o múltiples fonts de fitxers *.pbf .&lt;/li&gt;
 &lt;li&gt;Selecciona el camí de la vostre base de dades Routino.&lt;/li&gt;
 &lt;li&gt;Selecciona un prefixe. La base de dades apareixerà a la llista amb aquest prefix.&lt;/li&gt;
-&lt;li&gt;Prem el botó &quot;Inicia&quot;.&lt;/li&gt;
+&lt;li&gt;Prem el botó «Inicia».&lt;/li&gt;
 &lt;/ol&gt;</translation>
     </message>
     <message>
         <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="157"/>
         <location filename="../../../build/src/qmapshack/ui_IRoutinoDatabaseBuilder.h" line="196"/>
         <source>&lt;b style = &apos;color: red&apos;&gt; Unable to find Routino&apos;s planetsplitter. Searched for &quot;planetsplitter&quot; and &quot;routino-planetsplitter&quot;.&lt;/b&gt;</source>
-        <translation>&lt;b style = &apos;color: red&apos;&gt; No es troba l&apos;eina planetsplitter de Routino. S&apos;ha fet una cerca per &quot;planetsplitter&quot; i &quot;routino-planetsplitter&quot;.&lt;/b&gt;</translation>
+        <translation>&lt;b style = &apos;color: red&apos;&gt; No es troba l&apos;eina planetsplitter de Routino. S&apos;ha fet una cerca per a «planetsplitter» i «routino-planetsplitter».&lt;/b&gt;</translation>
     </message>
 </context>
 <context>
@@ -17269,7 +17270,7 @@ o
         <location filename="../realtime/ais/IRtAisInfo.ui" line="14"/>
         <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="253"/>
         <source>Form</source>
-        <translation type="unfinished">Formulari</translation>
+        <translation>Formulari</translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="25"/>
@@ -17287,37 +17288,37 @@ o
         <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="281"/>
         <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="285"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="46"/>
         <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="255"/>
         <source>Port</source>
-        <translation type="unfinished">Port</translation>
+        <translation>Port</translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="89"/>
         <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="257"/>
         <source>Host</source>
-        <translation type="unfinished">Amfitrió</translation>
+        <translation>Amfitrió</translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="96"/>
         <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="259"/>
         <source>Automatically connect to the host.</source>
-        <translation type="unfinished">Connectar de forma automàtica a l&apos;amfitrió.</translation>
+        <translation>Connectar de forma automàtica a l&apos;amfitrió.</translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="99"/>
         <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="261"/>
         <source>auto. conn.</source>
-        <translation type="unfinished">auto. conn.</translation>
+        <translation>auto. conn.</translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="134"/>
         <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="262"/>
         <source>Ships seen:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vaixells observats:</translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="141"/>
@@ -17327,61 +17328,61 @@ o
         <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="286"/>
         <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="291"/>
         <source>-</source>
-        <translation type="unfinished">-</translation>
+        <translation>-</translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="148"/>
         <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="264"/>
         <source>Record by mmsi</source>
-        <translation type="unfinished"></translation>
+        <translation>Registre ordenat per mmsi</translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="155"/>
         <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="265"/>
         <source>Show names</source>
-        <translation type="unfinished">Mostrar els noms</translation>
+        <translation>Mostrar els noms</translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="170"/>
         <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="267"/>
         <source>Start recording.</source>
-        <translation type="unfinished">Inicia l&apos;enregistrament.</translation>
+        <translation>Inicia l&apos;enregistrament.</translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="190"/>
         <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="271"/>
         <source>Pause recording.</source>
-        <translation type="unfinished">Fes una pausa en l&apos;enregistrament.</translation>
+        <translation>Fes una pausa en l&apos;enregistrament.</translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="213"/>
         <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="275"/>
         <source>Convert record to track.</source>
-        <translation type="unfinished">Converteix l&apos;enregistrament a track.</translation>
+        <translation>Converteix l&apos;enregistrament a track.</translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="227"/>
         <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="279"/>
         <source>Reset record.</source>
-        <translation type="unfinished"></translation>
+        <translation>Reinicia l&apos;enregistrament.</translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="241"/>
         <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="283"/>
         <source>Select record file.</source>
-        <translation type="unfinished">Selecciona el fitxer on s&apos;enregistrarà.</translation>
+        <translation>Selecciona el fitxer on s&apos;enregistrarà.</translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="277"/>
         <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="287"/>
         <source>Last update</source>
-        <translation type="unfinished">Darrera modificació</translation>
+        <translation> Darrera modificació</translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="284"/>
         <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="289"/>
         <source>Enter a valid key.</source>
-        <translation type="unfinished">Introduir una clau vàlida.</translation>
+        <translation> Introduir una clau vàlida.</translation>
     </message>
 </context>
 <context>
@@ -17532,7 +17533,7 @@ o
     <message>
         <location filename="../realtime/IRtInfo.cpp" line="53"/>
         <source>Do you really want to reset the current record?</source>
-        <translation>Estàs segur de reiniciar l&apos;enregistrament actiu? </translation>
+        <translation>Esteu segurs de reiniciar l&apos;enregistrament actiu? </translation>
     </message>
 </context>
 <context>
@@ -17637,7 +17638,7 @@ o
     <message>
         <location filename="../realtime/IRtRecord.cpp" line="40"/>
         <source>Failed to open record for reading.</source>
-        <translation>Error en obrir per lectura el registre.</translation>
+        <translation>Error en obrir per a lectura el registre.</translation>
     </message>
     <message>
         <location filename="../realtime/IRtRecord.cpp" line="56"/>
@@ -17647,7 +17648,7 @@ o
     <message>
         <location filename="../realtime/IRtRecord.cpp" line="72"/>
         <source>Failed to open record for writing.</source>
-        <translation>Error en obrir per escriptura el registre.</translation>
+        <translation>Error en obrir per a escriptura el registre.</translation>
     </message>
     <message>
         <location filename="../realtime/IRtRecord.cpp" line="84"/>
@@ -17829,7 +17830,7 @@ o
         <location filename="../mouse/line/IScrOptEditLine.ui" line="238"/>
         <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="284"/>
         <source>Use auto-routing in between points. (Key: A)</source>
-        <translation type="unfinished"></translation>
+        <translation>Utilitza auto-enrutament entre punts. (Key: A)</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="241"/>
@@ -17852,7 +17853,7 @@ o
         <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="305"/>
         <source>Optimizes the route by reordering the points using the router specified in the &quot;Routing&quot; tab. 
 This is known as solving the Traveling Salesman Problem, however start and end are kept fixed here</source>
-        <translation>Optimitza la ruta reordenant els punts segons l&apos;enrutador seleccionat en la pestanya &quot;Itineraris&quot; 
+        <translation>Optimitza la ruta reordenant els punts segons l&apos;enrutador seleccionat en la pestanya «Itineraris».
 Això és coneix com la solució al Problema del Viatjant de Comerç, però aquí el punt inicial i final es mantenen.</translation>
     </message>
     <message>
@@ -18495,7 +18496,7 @@ Això és coneix com la solució al Problema del Viatjant de Comerç, però aqu�
         <location filename="../mouse/IScrOptSelect.ui" line="103"/>
         <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="306"/>
         <source>Replace the elevation in all selected waypoints and tracks by values from the view&apos;s DEM data.</source>
-        <translation>Substitueix l&apos;elevació de totes les fines i tracks seleccionats pels valors de les dades DEM de la vista.</translation>
+        <translation>Substitueix l&apos;altitud de totes les fines i tracks seleccionats pels valors de les dades DEM de la vista.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="117"/>
@@ -18724,11 +18725,10 @@ The track point will be marked with an auto-numbered bullet.
 A table with all descriptions will be shown in the track details dialog
 and for highlighted tracks in the map view.</source>
         <extracomment>use line breaks to keep a sensible tooltip width</extracomment>
-        <translation>Afegir una descripció al punt del track seleccionat.
-Al punt del track s&apos;hi incorporarà un globus auto numerat.
-A la pantalla de detalls del track i a tots els tracks ressaltats 
-en la vista de mapa es mostrarà una taula amb 
-totes les descripcions.</translation>
+        <translation>Afegeix una descripció en el punt del track seleccionat.
+El punt s&apos;identificarà amb una vinyeta numèrica automàtica.
+En la opció de detalls del track es mostrarà una taula amb totes les descripcions
+existents en els tracks seleccionsts en la vista mapa.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="239"/>
@@ -18740,7 +18740,7 @@ totes les descripcions.</translation>
         <location filename="../gis/trk/IScrOptTrk.ui" line="253"/>
         <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="316"/>
         <source>Replace elevation by the view&apos;s DEM data.</source>
-        <translation>Substitueix l&apos;elevació amb les dades DEM de la vista.</translation>
+        <translation>Substitueix l&apos;altitud amb les dades DEM de la vista.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="267"/>
@@ -18758,7 +18758,7 @@ totes les descripcions.</translation>
         <location filename="../gis/trk/IScrOptTrk.ui" line="298"/>
         <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="328"/>
         <source>Convert track to area.</source>
-        <translation type="unfinished"></translation>
+        <translation>Convertir el track a àrea.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="315"/>
@@ -18855,7 +18855,7 @@ totes les descripcions.</translation>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="157"/>
         <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="263"/>
         <source>Replace elevation by the view&apos;s DEM data.</source>
-        <translation>Substitueix l&apos;elevació amb les dades DEM de la vista.</translation>
+        <translation>Substitueix l&apos;altitud amb les dades DEM de la vista.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="178"/>
@@ -19444,7 +19444,7 @@ Si introduïu &apos;word&apos; es fa una cerca de la paraula exacte. Si introdu�
         <location filename="../gis/ISetupWorkspace.ui" line="24"/>
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="569"/>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation>General</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="45"/>
@@ -19480,55 +19480,55 @@ Si introduïu &apos;word&apos; es fa una cerca de la paraula exacte. Si introdu�
         <location filename="../gis/ISetupWorkspace.ui" line="537"/>
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="628"/>
         <source>Database</source>
-        <translation type="unfinished"></translation>
+        <translation>Base de Dades</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="543"/>
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="608"/>
         <source>Select additional information displayed in the database item tree. Changes take effect immediately. Look at the items to fine tune your choice.</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecciona la informació addicional que es mostra en l&apos;arbre d&apos;elements de la base de dades. Els canvis tenen efecte immediatament. Mira els elements per ajustar la teva elecció.</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="555"/>
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="609"/>
         <source>Folders</source>
-        <translation type="unfinished"></translation>
+        <translation>Carpetes</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="561"/>
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="610"/>
         <source>Subfolder Count</source>
-        <translation type="unfinished"></translation>
+        <translation>Comptador de subcarpeta</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="594"/>
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="612"/>
         <source>Items</source>
-        <translation type="unfinished"></translation>
+        <translation>Elements</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="180"/>
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="570"/>
         <source>Select additional information displayed in the workspace item tree. Changes take effect immediately. Look at the items to fine tune your choice.</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecciona la informació addicional que es mostra en l&apos;arbre d&apos;elements de l&apos;espai de treball. Els canvis tenen efecte immediatament. Mira els elements per ajustar la teva elecció.</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="174"/>
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="607"/>
         <source>Workspace</source>
-        <translation type="unfinished">Espai de treball</translation>
+        <translation>Espai de treball</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="192"/>
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="571"/>
         <source>Project</source>
-        <translation type="unfinished">Projecte</translation>
+        <translation>Projecte</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="198"/>
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="572"/>
         <source>Keywords</source>
-        <translation type="unfinished"></translation>
+        <translation>Paraules clau</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="205"/>
@@ -19536,7 +19536,7 @@ Si introduïu &apos;word&apos; es fa una cerca de la paraula exacte. Si introdu�
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="573"/>
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="611"/>
         <source>Item Count</source>
-        <translation type="unfinished"></translation>
+        <translation>Comptador d&apos;Elements</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="212"/>
@@ -19544,7 +19544,7 @@ Si introduïu &apos;word&apos; es fa una cerca de la paraula exacte. Si introdu�
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="574"/>
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="594"/>
         <source>Distance</source>
-        <translation type="unfinished">Distància</translation>
+        <translation>Distància</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="219"/>
@@ -19552,7 +19552,7 @@ Si introduïu &apos;word&apos; es fa una cerca de la paraula exacte. Si introdu�
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="575"/>
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="595"/>
         <source>Ascent</source>
-        <translation type="unfinished">Ascens</translation>
+        <translation>Ascens</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="226"/>
@@ -19560,13 +19560,13 @@ Si introduïu &apos;word&apos; es fa una cerca de la paraula exacte. Si introdu�
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="576"/>
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="596"/>
         <source>Descent</source>
-        <translation type="unfinished">Descens</translation>
+        <translation>Descens</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="251"/>
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="577"/>
         <source>Font Size Status Project</source>
-        <translation type="unfinished"></translation>
+        <translation>Mida de la lletra de l&apos;Estat del Projecte</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="259"/>
@@ -19578,7 +19578,7 @@ Si introduïu &apos;word&apos; es fa una cerca de la paraula exacte. Si introdu�
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="615"/>
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="622"/>
         <source>large</source>
-        <translation type="unfinished"></translation>
+        <translation>gran</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="264"/>
@@ -19590,7 +19590,7 @@ Si introduïu &apos;word&apos; es fa una cerca de la paraula exacte. Si introdu�
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="616"/>
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="623"/>
         <source>small</source>
-        <translation type="unfinished"></translation>
+        <translation>petis</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="269"/>
@@ -19602,7 +19602,7 @@ Si introduïu &apos;word&apos; es fa una cerca de la paraula exacte. Si introdu�
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="617"/>
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="624"/>
         <source>smaller</source>
-        <translation type="unfinished"></translation>
+        <translation>més petit</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="274"/>
@@ -19614,7 +19614,7 @@ Si introduïu &apos;word&apos; es fa una cerca de la paraula exacte. Si introdu�
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="618"/>
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="625"/>
         <source>tiny</source>
-        <translation type="unfinished"></translation>
+        <translation>petit</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="279"/>
@@ -19626,7 +19626,7 @@ Si introduïu &apos;word&apos; es fa una cerca de la paraula exacte. Si introdu�
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="619"/>
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="626"/>
         <source>none</source>
-        <translation type="unfinished">cap</translation>
+        <translation>cap</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="287"/>
@@ -19634,13 +19634,13 @@ Si introduïu &apos;word&apos; es fa una cerca de la paraula exacte. Si introdu�
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="584"/>
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="621"/>
         <source>Font Size Status Item</source>
-        <translation type="unfinished"></translation>
+        <translation>Mida de la lletra de l&apos;Estat de l&apos;Element</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="355"/>
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="591"/>
         <source>Tracks</source>
-        <translation type="unfinished">Tracks</translation>
+        <translation>Tracks</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="361"/>
@@ -19652,7 +19652,7 @@ Si introduïu &apos;word&apos; es fa una cerca de la paraula exacte. Si introdu�
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="602"/>
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="605"/>
         <source>Rating</source>
-        <translation type="unfinished">Valoració</translation>
+        <translation>Valoració</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="368"/>
@@ -19664,43 +19664,43 @@ Si introduïu &apos;word&apos; es fa una cerca de la paraula exacte. Si introdu�
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="603"/>
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="606"/>
         <source>Tags</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiquetes</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="412"/>
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="597"/>
         <source>Waypoints</source>
-        <translation type="unfinished">Fites</translation>
+        <translation>Fites</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="432"/>
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="600"/>
         <source>Elevation</source>
-        <translation type="unfinished">Elevació</translation>
+        <translation>Elevació</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="455"/>
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="601"/>
         <source>Routes</source>
-        <translation type="unfinished">Itineraris</translation>
+        <translation>Itineraris</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="491"/>
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="604"/>
         <source>Areas</source>
-        <translation type="unfinished">Àrees</translation>
+        <translation>Àrees</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="600"/>
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="613"/>
         <source>Info Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Info Text</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="628"/>
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="614"/>
         <source>Font Size Status Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Mida de la lletra de l&apos;Estat de la Carpeta</translation>
     </message>
 </context>
 <context>
@@ -20126,7 +20126,7 @@ Si introduïu &apos;word&apos; es fa una cerca de la paraula exacte. Si introdu�
         <location filename="../helpers/ITimeDialog.ui" line="14"/>
         <location filename="../../../build/src/qmapshack/ui_ITimeDialog.h" line="78"/>
         <source>Edit timestamp...</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar la marca horària...</translation>
     </message>
     <message>
         <location filename="../helpers/ITimeDialog.ui" line="22"/>
@@ -20134,7 +20134,9 @@ Si introduïu &apos;word&apos; es fa una cerca de la paraula exacte. Si introdu�
         <source>You can use the up, down, left and right key of 
 your keyboard to change the time/date. Or you 
 simply type the new time/date.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pots utilitzar les tecles amunt, avall, esquerra i dreta del 
+teclat per a canviar la data/hora. O bé 
+tecleja directament la data/hora que vulguis.</translation>
     </message>
 </context>
 <context>
@@ -20221,7 +20223,7 @@ simply type the new time/date.</source>
         <location filename="../tool/IToolShell.cpp" line="44"/>
         <source>Make sure the required packages are installed, `%1` exists and is executable.
 </source>
-        <translation>&#xa0;Assegureu-vos que els paquets necessaris estan instal·lats, `%1` existeix i es pot executar.
+        <translation> Assegureu-vos que els paquets necessaris estan instal·lats, `%1` existeix i es pot executar.
 </translation>
     </message>
     <message>
@@ -20252,25 +20254,25 @@ simply type the new time/date.</source>
         <location filename="../gis/trk/ITrkToAreaDialog.ui" line="14"/>
         <location filename="../../../build/src/qmapshack/ui_ITrkToAreaDialog.h" line="101"/>
         <source>Convert to Area</source>
-        <translation type="unfinished"></translation>
+        <translation>Convertir a Àrea</translation>
     </message>
     <message>
         <location filename="../gis/trk/ITrkToAreaDialog.ui" line="25"/>
         <location filename="../../../build/src/qmapshack/ui_ITrkToAreaDialog.h" line="103"/>
         <source>Change Project</source>
-        <translation type="unfinished">Canvi de Projecte</translation>
+        <translation>Canvi de Projecte</translation>
     </message>
     <message>
         <location filename="../gis/trk/ITrkToAreaDialog.ui" line="39"/>
         <location filename="../../../build/src/qmapshack/ui_ITrkToAreaDialog.h" line="106"/>
         <source>Name</source>
-        <translation type="unfinished">Nom</translation>
+        <translation>Nom</translation>
     </message>
     <message>
         <location filename="../gis/trk/ITrkToAreaDialog.ui" line="46"/>
         <location filename="../../../build/src/qmapshack/ui_ITrkToAreaDialog.h" line="107"/>
         <source>Project</source>
-        <translation type="unfinished">Projecte</translation>
+        <translation>Projecte</translation>
     </message>
 </context>
 <context>
@@ -20309,7 +20311,7 @@ simply type the new time/date.</source>
         <location filename="../gis/trk/ITrkToRteDialog.ui" line="86"/>
         <location filename="../../../build/src/qmapshack/ui_ITrkToRteDialog.h" line="142"/>
         <source>Enabling this feature leads to routes with many points. Not recommended for devices which have only limited space for saving route points.</source>
-        <translation type="unfinished"></translation>
+        <translation>Activant aquesta opció et recomanarà itineraris amb molts punts. No es recomanable per a dispositius que tinguin un espai limitat per als punts d&apos;un itinerari.</translation>
     </message>
 </context>
 <context>
@@ -20323,7 +20325,7 @@ simply type the new time/date.</source>
     <message>
         <location filename="../units/IUnit.cpp" line="823"/>
         <source>Bad position format. Must be: &quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot; or &quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot;</source>
-        <translation>Format amb possicions incorrectes. Ha de ser: &quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot; o &quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot;</translation>
+        <translation>Format amb possicions incorrectes. Ha de ser: «[N|S] ddd mm.sss [W|E] ddd mm.sss» o «[N|S] ddd.ddd [W|E] ddd.ddd»</translation>
     </message>
     <message>
         <location filename="../units/IUnit.cpp" line="829"/>

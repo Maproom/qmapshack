@@ -200,6 +200,13 @@ CMapVRT::CMapVRT(const QString& filename, CMapDraw* parent) : IMap(eFeatVisibili
     trFwd = trFwd * DEG_TO_RAD;
   }
 
+  // Unlike CDemVRT, xscale/yscale stay in the dataset's native geotransform units (degrees
+  // for a geographic CRS) since trFwd/trInv above don't need real meters - only
+  // rasterGeometry does, so convert into locals rather than mutating xscale/yscale.
+  const qreal pixelSizeX = CGdalVrtUtil::toMeters(qAbs(xscale), proj.isSrcLatLong());
+  const qreal pixelSizeY = CGdalVrtUtil::toMeters(qAbs(yscale), proj.isSrcLatLong());
+  rasterGeometry = {xsize_px, ysize_px, pixelSizeX, pixelSizeY};
+
   trInv = trFwd.inverted();
 
   // ------- setup outline ---------------

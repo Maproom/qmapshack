@@ -22,9 +22,10 @@
 #include <QtWidgets>
 
 #include "setup/IAppSetup.h"
+#include "units/IUnit.h"
 
 COverviewAdvisoryDialog::COverviewAdvisoryDialog(const QString& filename, const CGdalVrtUtil::overview_advice_t& advice,
-                                                 QWidget* parent)
+                                                 const CGdalVrtUtil::raster_geometry_t& geometry, QWidget* parent)
     : QDialog(parent), filename_(filename), advice_(advice) {
   setupUi(this);
   setAttribute(Qt::WA_DeleteOnClose);
@@ -33,6 +34,23 @@ COverviewAdvisoryDialog::COverviewAdvisoryDialog(const QString& filename, const 
   buttonBox->button(QDialogButtonBox::Cancel)->setText(tr("Later"));
   disconnect(buttonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
   connect(buttonBox, &QDialogButtonBox::accepted, this, &COverviewAdvisoryDialog::slotFixIt);
+
+  // Respect the user's configured unit system (metric/imperial/nautical) rather than
+  // hard-coding meters - same helper the rest of the app uses for any user-facing distance.
+  const auto distStr = [](qreal meters) {
+    QString val, unit;
+    IUnit::self().meter2distance(meters, val, unit);
+    return val + " " + unit;
+  };
+  const qreal widthMeters = geometry.xsizePx * geometry.pixelSizeX;
+  const qreal heightMeters = geometry.ysizePx * geometry.pixelSizeY;
+  labelRasterInfo->setText(tr("%1 × %2 px  ·  %3/px × %4/px  ·  %5 × %6")
+                               .arg(geometry.xsizePx)
+                               .arg(geometry.ysizePx)
+                               .arg(distStr(geometry.pixelSizeX))
+                               .arg(distStr(geometry.pixelSizeY))
+                               .arg(distStr(widthMeters))
+                               .arg(distStr(heightMeters)));
 
   const qint32 suggestedMax = advice_.suggestedLevels.isEmpty() ? 1 : advice_.suggestedLevels.last();
   const QString suggestedStr = formatFactors(advice_.suggestedLevels);

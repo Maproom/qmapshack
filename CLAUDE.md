@@ -297,10 +297,12 @@ Warns when a VRT-backed map/DEM has missing/inadequate GDAL overview pyramids, a
 fix it (`gdaladdo` + rewriting `<OverviewList>`).
 
 **Key files:**
-- `helpers/CGdalVrtUtil.{h,cpp}` — `buildOverviewAdvice()`, `intersectSourceOverviewFactors()`,
-  `suggestOverviewLevels()`, `overview_advice_t`, `file_overview_info_t`, `read_deadline_t`
+- `helpers/CGdalVrtUtil.{h,cpp}` — `buildOverviewAdvice()`, `suggestOverviewLevels()`,
+  `handleRenderTimeout()`, `overview_advice_t`, `file_overview_info_t`, `raster_geometry_t`,
+  `overview_advisory_state_t`, `read_deadline_t`, `kMetersPerDegree`
 - `helpers/COverviewAdvisoryDialog.{h,cpp}` + `.ui` — the fix-it/info dialog
-- `dem/CDemVRT.{h,cpp}`, `map/CMapVRT.{h,cpp}` — own the `overviewAdvice` member
+- `dem/CDemVRT.{h,cpp}`, `map/CMapVRT.{h,cpp}` — own the `overviewAdvice`/`advisoryState`/
+  `rasterGeometry` members
 - `dem/CDemWCS.cpp` — opts out via `supportsOverviewAdvisory=false`
 - `map/IMap.h`, `dem/IDem.h`, `map/IMapItem.h`, `map/CMapItemDelegate.{h,cpp}` — badge + on-demand info
 - `map/CMapItem.cpp`, `dem/CDemItem.cpp`, `map/CMapList.cpp`, `dem/CDemList.cpp` — context-menu entry
@@ -308,11 +310,13 @@ fix it (`gdaladdo` + rewriting `<OverviewList>`).
 
 **Trigger:** `CDemVRT`/`CMapVRT::draw()` wraps `ReadRaster()` with a 5s deadline
 (`read_deadline_t` + `progressCallbackWithDeadline()`, GDAL's own progress-abort hook —
-don't add a second warp-options progress callback, it caused a UI freeze). On timeout
-with an inadequate overview situation, `sigOverviewAdvisory` fires (render thread → GUI
-thread, `QPointer<CDemVRT/CMapVRT>` payload) and `CCanvas` shows a non-modal
-`COverviewAdvisoryDialog` (`Qt::WA_DeleteOnClose`). The tree also shows a proactive badge
-on the same condition without waiting for a render to stall (see Badge below).
+don't add a second warp-options progress callback, it caused a UI freeze). On timeout,
+`CGdalVrtUtil::handleRenderTimeout()` fires the advisory (render thread → GUI thread,
+`QPointer<CDemVRT/CMapVRT>` payload) once per loaded instance per session, for any file
+that isn't suppressed - not gated on `overviewAdvice.needsAttention()`. No canvas redraw
+is requested on that branch; the dialog handles it, and normal panning/zooming resumes
+updates once it closes. The tree also shows a proactive badge on the same condition
+without waiting for a render to stall (see Badge below).
 
 **Invariant: the dataset is always a VRT.** `new CMapVRT`/`new CDemVRT` only happen for
 files with suffix `.vrt` (`CMapItem`/`CDemItem::activate()`); every other format has its
@@ -320,7 +324,7 @@ own class. `CDemWCS` subclasses `CDemVRT` with `supportsOverviewAdvisory=false`,
 code never runs for it. `buildOverviewAdvice()` relies on this — there is no "concrete
 raster format" branch.
 
-**`CGdalVrtUtil::buildOverviewAdvice(dataset, band, pixelSizeX, isPaletteIndexed, suggestedLevels)`:**
+**`CGdalVrtUtil::buildOverviewAdvice(dataset, band, isPaletteIndexed, suggestedLevels)`:**
 a read can be sped up by two independent, additive sources — the container's own
 overview, and/or the individual source file for whichever region is read (GDAL checks
 per-source regardless of what the container declares).
@@ -340,17 +344,19 @@ step-3 indirect path or `containerFactor == 0`. A `checked=false` `perFileInfo` 
 (step 2) therefore always implies `containerHasOwnOvr == true` — it's the only way to
 reach that branch.
 
-**Rescaling:** `containerFactors`/`containerFactor`/`weakestMaxFactor` are collected
-pre-warp, in the original pixel grid, then rescaled by
-`warpScale = max(xsize_px/preWarpXSize, ysize_px/preWarpYSize)` after the warp (each
-element of `containerFactors`, not just the derived scalar).
+**All factors are per-file pixel ratios, no cross-projection rescaling.**
+`containerFactors`/`file_overview_info_t::factors`/`weakestMaxFactor`/`suggestedLevels`
+are all `fullResSize / overviewSize`, read directly from each file's own band
+(`ownOverviewFactors()`/`probeSourceFactors()`) before any warp to the canvas's working
+CRS — no geotransform or target-CRS math involved. A mosaic whose sources are in
+different CRSes from the container is not a special case.
 
 **`suggestOverviewLevels(xsize, ysize, maxFactor)`:** doubles from 2 until the decimated
 size drops below the primary screen's longest dimension (fallback 1920px) or `maxFactor`
-is hit, whichever comes first. `CDemVRT` leaves `maxFactor` unbounded — elevation data
-stays numerically meaningful at any decimation. `CMapVRT` passes
-`kMaxMapOverviewFactor = 16` — a downsampled map image past ~10-20x is unreadable
-regardless of source size/resolution.
+is hit, whichever comes first. `xsize`/`ysize` are the pre-warp band's own size. `CDemVRT`
+leaves `maxFactor` unbounded — elevation data stays numerically meaningful at any
+decimation. `CMapVRT` passes `kMaxMapOverviewFactor = 16` — a downsampled map image past
+~10-20x is unreadable regardless of source size/resolution.
 
 **`<OverviewList>` mechanics:** `gdalbuildvrt` (GDAL ≥ 3.2) writes it automatically at
 build time if every source already has overviews then — it does not update
@@ -359,20 +365,19 @@ silently falling back to full-resolution reads — hence the verification above.
 supported GDAL version: 3.10.
 
 **Debug logging:** `buildOverviewAdvice()` logs its own `"OVR: ..."` lines at every
-decision point (entry state, each step's outcome, final pre-warp result); `CDemVRT`/
-`CMapVRT` additionally log the post-warp rescaled numbers and the final
-needs-attention assessment.
+decision point; `CDemVRT`/`CMapVRT` additionally log the final needs-attention
+assessment.
 
 **The "Fix it" recipe** (`COverviewAdvisoryDialog::slotFixIt()`/`slotFixItDone()`):
 1. `filesToFix()`: every source file falling short of `suggestedLevels` gets `gdaladdo`
    run on it (`-clean` first if it already has an inadequate one); adequate ones are left
-   untouched. If `perFileInfo` is empty (`!hasSourceFiles()` — a degenerate, unlikely
-   case: a VRT declaring no source files at all), `filename_` itself is the only target.
+   untouched. If `perFileInfo` is empty (`!hasSourceFiles()` — a VRT with no source files
+   at all), `filename_` itself is the only target.
 2. If there were source files, `fixContainerOverviewList()` runs afterward: deletes any
-   stale `<file>.ovr` first (a real `.ovr` always shadows a declaration, so it must go),
-   recomputes `<OverviewList>` via `intersectSourceOverviewFactors()` (re-probing every
-   source's *current* factors) and rewrites just that XML element in place — not a full
-   `gdalbuildvrt` re-invocation, which could change other VRT properties.
+   stale `<file>.ovr` first, then rewrites just the `<OverviewList>` XML element to
+   declare `advice_.suggestedLevels` directly (not a full `gdalbuildvrt` re-invocation,
+   and not a re-probe — every selected file was just rebuilt to exactly that level, every
+   other file already had it natively).
 
 **Dialog table:** the container is a row synthesized from `advice_.containerFactors`,
 graded by the same `rowStatus()` as every source-file row. A `checked=false` row's status
@@ -383,12 +388,21 @@ note above). The container row's level cell also gets a `" (own .ovr)"`/
 `htmlTh()`/`rowStatus()`/`containerOvrSourceSuffix()` are `COverviewAdvisoryDialog`
 static methods (not free functions), so they can call `tr()` directly. Watch for
 double-HTML-escaping if you add another string through `htmlTd()` — pass plain `<`/`>`,
-not pre-escaped entities.
+not pre-escaped entities. `hasExistingOverviews()`'s container-row fallback keys off
+`containerHasOwnOvr` specifically (not `containerFactor > 0`) so the "Update"/"Add
+`<OverviewList>`" wording always agrees with `slotFixIt()`'s confirmation dialog, which
+uses the same field for the same reason (only a real `.ovr` file is something to delete).
+An informational line above the tables (`labelRasterInfo`, always visible) shows the
+file's pixel dimensions, real-world pixel size, and total width/height - from
+`CDemVRT`/`CMapVRT::getRasterGeometry()` (`raster_geometry_t`, cached at construction),
+formatted via `IUnit::self().meter2distance()` so it respects the user's configured unit
+system. `raster_geometry_t::pixelSizeX/Y` are always real meters: for a geographic
+(lat/long) source CRS this is the `kMetersPerDegree` approximation - unrelated to, and
+computed independently of, the pure pixel-ratio factors above.
 
 **Badge + on-demand info:** `IMap`/`IDem::showsOverviewWarning()` (default false;
-`CMapVRT`/`CDemVRT` override as `!suppressOverviewAdvisory && overviewAdvice.needsAttention()`,
-evaluated live since `weakestMaxFactor` is rescaled after `buildOverviewAdvice()`
-returns) drives the proactive badge; `hasOverviewInfo()` (true for any active VRT-backed
+`CMapVRT`/`CDemVRT` override as `!advisoryState.suppress && overviewAdvice.needsAttention()`)
+drives the proactive badge; `hasOverviewInfo()` (true for any active VRT-backed
 item) drives the "Overview Info..." context-menu entry regardless of whether it needs
 attention. `IMapItem` mirrors both plus `triggerOverviewAdvisory()`; `CMapItem`/
 `CDemItem` gate on `status == eStatus::Active`. `CMapItemDelegate` draws the badge over
@@ -397,12 +411,17 @@ the icon's bottom-right 2/3 (`overviewBadgeRect()`, shared by `paint()`/`editorE
 `advice.needsAttention()`: false hides the fix-it machinery and shows a plain "Close"
 button, so browsing a healthy file never invites rebuilding fine overviews.
 
-**Dialog lifecycle:** `advisoryOpen` (atomic, set on the GUI thread) suppresses
+**Dialog lifecycle:** `advisoryState.open` (atomic, set on the GUI thread) suppresses
 `emitSigCanvasUpdate()` retries while the dialog is open. Both `closeEvent()` and
 `reject()` are intercepted (Cancel/Escape reach `QDialog::reject()` → `hide()` without
 `closeEvent()`) to confirm-cancel a running fix job and delete any partially-written
 `.ovr` files. `sigFixItDone()` reloads via
-`CDemDraw::setupDemPath()`/`CMapDraw::setupMapPath()`.
+`CDemDraw::setupDemPath()`/`CMapDraw::setupMapPath()`. `CCanvas::showOverviewAdvisory()`
+dedupes by *filename*, not by `CDemVRT`/`CMapVRT` instance (via `findChildren<
+COverviewAdvisoryDialog*>()` against its own child list, not a separately maintained
+registry) - a reload destroys and recreates the instance, which would otherwise reset a
+per-instance-only guard and let a second dialog open for the same file while the first
+(now orphaned) one is still showing.
 
 **Test fixtures:** `~/Downloads/dem/`, backup at `~/Downloads/dem.backup/` (restore via
 `rsync -av ~/Downloads/dem.backup/ ~/Downloads/dem/`, then check `MANIFEST.txt` for

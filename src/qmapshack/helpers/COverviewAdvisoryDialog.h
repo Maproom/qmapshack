@@ -45,9 +45,11 @@ class COverviewAdvisoryDialog : public QDialog, private Ui::IOverviewAdvisoryDia
   /**
      @param filename the slow file's path
      @param advice   buildOverviewAdvice()'s result for filename
+     @param geometry filename's dimensions/pixel size, shown as an informational line
      @param parent   passed straight to QDialog
    */
-  COverviewAdvisoryDialog(const QString& filename, const CGdalVrtUtil::overview_advice_t& advice, QWidget* parent);
+  COverviewAdvisoryDialog(const QString& filename, const CGdalVrtUtil::overview_advice_t& advice,
+                          const CGdalVrtUtil::raster_geometry_t& geometry, QWidget* parent);
 
   /// @brief True if the user checked "don't show this again for this file."
   bool suppressChecked() const { return checkSuppressAdvisory->isChecked(); }

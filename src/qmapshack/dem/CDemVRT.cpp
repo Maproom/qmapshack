@@ -159,8 +159,8 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent, bool supportsOvervie
     return;
   }
 
-  xscale = adfGeoTransform[1];
-  yscale = adfGeoTransform[5];
+  xscale = CGdalVrtUtil::toMeters(adfGeoTransform[1], proj.isSrcLatLong());
+  yscale = CGdalVrtUtil::toMeters(adfGeoTransform[5], proj.isSrcLatLong());
 
   // Build trFwd directly from GDAL's affine matrix instead of decomposing it into
   // translate+scale+rotate: adfGeoTransform[2]/[4] is a general shear term, not
@@ -170,8 +170,6 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent, bool supportsOvervie
                      adfGeoTransform[3]);
 
   if (proj.isSrcLatLong()) {
-    xscale *= 111120;
-    yscale *= 111120;
     // Scale every element of the homogeneous matrix by DEG_TO_RAD to convert trFwd's
     // mapped output from degrees to radians. This works because QTransform::map() never
     // reads m13/m23/m33 as long as the transform stays non-projective (true here, since
@@ -179,6 +177,9 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent, bool supportsOvervie
     // scales the mapped point without having to touch dx/dy and the linear part separately.
     trFwd = trFwd * DEG_TO_RAD;
   }
+
+  // xscale/yscale are already real meters-per-pixel (see CGdalVrtUtil::toMeters() above).
+  rasterGeometry = {xsize_px, ysize_px, qAbs(xscale), qAbs(yscale)};
 
   trInv = trFwd.inverted();
 

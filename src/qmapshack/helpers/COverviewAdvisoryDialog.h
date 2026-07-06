@@ -81,7 +81,8 @@ class COverviewAdvisoryDialog : public QDialog, private Ui::IOverviewAdvisoryDia
   ///        bands) - not a realistic QMapShack workflow, just handled gracefully.
   bool hasSourceFiles() const { return !advice_.perFileInfo.isEmpty(); }
 
-  /// @brief factors as a comma-separated string, or "none" if empty.
+  /// @brief A list of ints (decimation factors or overview pixel sizes) as a
+  ///        comma-separated string, or "none" if empty.
   static QString formatFactors(const QVector<qint32>& factors);
   static QString htmlTh(const QString& text);
   static QString htmlTd(const QString& text, const QString& bg);
@@ -90,18 +91,20 @@ class COverviewAdvisoryDialog : public QDialog, private Ui::IOverviewAdvisoryDia
      @brief Status text/background for one current-situation row.
 
      Shared by the container row and every source-file row, so both use the same rule
-     and can't disagree.
+     and can't disagree. `sufficient` is the precise, size-based verdict
+     (CGdalVrtUtil::buildOverviewAdvice()); `sizes` is only used for the "Shallow
+     (coarsest %1px)" label, never to derive the verdict itself.
    */
-  static QString rowStatus(bool checked, const QVector<qint32>& factors, qint32 suggestedMax, QString& bg);
+  static QString rowStatus(bool checked, const QVector<qint32>& sizes, bool sufficient, QString& bg);
 
   /**
      @brief Suffix for the container row: distinguishes a real .ovr file from a bare
             <OverviewList> declaration. A bare declaration only has read-speed value
             once every source file backs it up (see CGdalVrtUtil::buildOverviewAdvice()).
             Shown only for a VRT with source files (hasSourceFiles) and at least one
-            verified level (factors non-empty).
+            verified level (sizes non-empty).
    */
-  static QString containerOvrSourceSuffix(bool hasSourceFiles, bool hasOwnOvr, const QVector<qint32>& factors);
+  static QString containerOvrSourceSuffix(bool hasSourceFiles, bool hasOwnOvr, const QVector<qint32>& sizes);
 
   /**
      @brief The source files gdaladdo will run on:

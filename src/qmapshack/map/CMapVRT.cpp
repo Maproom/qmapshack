@@ -98,7 +98,7 @@ CMapVRT::CMapVRT(const QString& filename, CMapDraw* parent) : IMap(eFeatVisibili
   if (overviewAdvice.needsAttention()) {
     qDebug() << "OVR: assessment: needs attention - advisory will fire on slow render";
   } else {
-    qDebug() << "OVR: assessment: OK, overviews up to factor" << overviewAdvice.weakestMaxFactor;
+    qDebug() << "OVR: assessment: OK";
   }
 
   // single band palette/gray data is categorical: nearest neighbour avoids blending index

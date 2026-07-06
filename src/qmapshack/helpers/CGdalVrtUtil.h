@@ -127,13 +127,12 @@ class CGdalVrtUtil {
     qint64 estimatedOverviewBytes = 0;         /**< Rough uncompressed pyramid size in bytes (sums to 1/3 of the base
                                                     layer); real size is usually smaller thanks to compression. */
 
-    /**
-       @brief True if a read isn't already sped up everywhere by either the container's
-              own overview or (when that falls short) every individual source file's own
-              overview - worth fixing. Always false when suggestedLevels is empty (the
-              raster is already smaller than the screen).
-     */
-    bool needsAttention() const {
+    /// @brief Subfile count above which reading gets inefficient regardless of overviews.
+    static constexpr qint32 kMaxSubfileCount = 50;
+
+    /// @brief True if overviews need fixing (old needsAttention() logic). Subfile count
+    ///        is a separate, additive concern - see hasTooManySubfiles().
+    bool needsOverviewFix() const {
       if (suggestedLevels.isEmpty() || containerSufficient) {
         return false;
       }
@@ -147,6 +146,12 @@ class CGdalVrtUtil {
       }
       return false;
     }
+
+    /// @brief True if more than kMaxSubfileCount source files are referenced.
+    bool hasTooManySubfiles() const { return perFileInfo.size() > kMaxSubfileCount; }
+
+    /// @brief Drives the tree badge; true if either problem needs attention.
+    bool needsAttention() const { return needsOverviewFix() || hasTooManySubfiles(); }
   };
 
   /**

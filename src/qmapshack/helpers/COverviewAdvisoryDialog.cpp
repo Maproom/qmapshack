@@ -52,6 +52,15 @@ COverviewAdvisoryDialog::COverviewAdvisoryDialog(const QString& filename, const 
                                .arg(distStr(widthMeters))
                                .arg(distStr(heightMeters)));
 
+  if (advice_.hasTooManySubfiles()) {
+    labelSubfileWarning->setText(tr("⚠ This file references %1 source files. Reading gets inefficient past %2 - "
+                                    "consider combining them into fewer files.")
+                                     .arg(advice_.perFileInfo.size())
+                                     .arg(CGdalVrtUtil::overview_advice_t::kMaxSubfileCount));
+  } else {
+    labelSubfileWarning->setVisible(false);
+  }
+
   const QString suggestedStr = formatFactors(advice_.suggestedLevels);
 
   // ---- current situation ---- (every referenced file is shown, none truncated)
@@ -164,7 +173,7 @@ COverviewAdvisoryDialog::COverviewAdvisoryDialog(const QString& filename, const 
   // Opened on demand (context menu) for a file with nothing to fix: show only the
   // current-situation table, not the fix-it machinery that would otherwise invite
   // rebuilding overviews that are already fine.
-  if (!advice_.needsAttention()) {
+  if (!advice_.needsOverviewFix()) {
     setWindowTitle(tr("Overview info"));
     labelAfterFixTitle->setVisible(false);
     textAfterFix->setVisible(false);

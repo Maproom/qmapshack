@@ -28,6 +28,19 @@
     </widget>
    </item>
    <item>
+    <widget class="QLabel" name="labelSubfileWarning">
+     <property name="styleSheet">
+      <string notr="true">background-color:#fff3cd; padding:4px;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="QLabel" name="labelCurrentTitle">
      <property name="text">
       <string>&lt;b&gt;Current overview situation:&lt;/b&gt;</string>

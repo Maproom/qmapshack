@@ -235,7 +235,8 @@ CGdalVrtUtil::overview_advice_t CGdalVrtUtil::buildOverviewAdvice(GDALDataset* d
             [&](const file_overview_info_t& a, const file_overview_info_t& b) { return sortKey(a) < sortKey(b); });
 
   qDebug() << "OVR: pre-warp result: containerSufficient =" << result.containerSufficient
-           << "containerHasOwnOvr =" << result.containerHasOwnOvr;
+           << "containerHasOwnOvr =" << result.containerHasOwnOvr << "subfileCount =" << result.perFileInfo.size()
+           << "tooManySubfiles =" << result.hasTooManySubfiles();
 
   return result;
 }

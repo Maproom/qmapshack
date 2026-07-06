@@ -431,6 +431,18 @@ anything extra to remove). Machine-local, not in git — see auto-memory
 **Open items:** no equivalent fixture set exists yet for the map-side
 `kMaxMapOverviewFactor` cap.
 
+**Subfile-count check (independent of overviews):** `overview_advice_t::hasTooManySubfiles()`
+flags a VRT referencing more than `kMaxSubfileCount` (50) source files - reading stays slow
+no matter how good the overviews are once a mosaic has too many small pieces, since GDAL
+opens/stats every referenced source overlapping a read region. `needsAttention()` (drives the
+tree badge) is now `needsOverviewFix() || hasTooManySubfiles()`; `needsOverviewFix()` is the
+old `needsAttention()` logic and alone gates the dialog's "Fix it"/after-fix section, since
+combining source files isn't something this app can do automatically. `perFileInfo.size()` is
+the subfile count in both branches of `buildOverviewAdvice()` (checked or not), so no separate
+counter field is needed. The dialog shows a standing warning label (`labelSubfileWarning`,
+`IOverviewAdvisoryDialog.ui`) whenever `hasTooManySubfiles()` is true, telling the user to
+combine files - regardless of whether the fix-it section is also showing.
+
 **External tool paths in qmapshack:** Always resolve via
 `IAppSetup::getPlatformInstance()->findExecutable("toolname")` — never hard-code a bare name.
 `CAppSetupWin` restricts `PATH` to the app directory to prevent DLL conflicts, so a bare name

@@ -32,9 +32,11 @@
    - Shown when CDemVRT/CMapVRT's render times out, or on demand via the tree's
      "Overview Info..." context menu.
    - Always shows a "current situation" table with per-file overview state.
-   - If advice.needsAttention() is true: also shows an "after fix" table and a "Fix
+   - If advice.needsOverviewFix() is true: also shows an "after fix" table and a "Fix
      it" button (runs gdaladdo, edits <OverviewList> in place).
    - If false: only the situation table remains, with a plain "Close" button.
+   - If advice.hasTooManySubfiles() is true: an extra warning line recommends combining
+     source files, regardless of the above - this app can't do that automatically.
 
    Non-modal: shown with show(), not exec(); deletes itself on close
    (Qt::WA_DeleteOnClose).

@@ -52,29 +52,29 @@ COverviewAdvisoryDialog::COverviewAdvisoryDialog(const QString& filename, const 
                                .arg(distStr(widthMeters))
                                .arg(distStr(heightMeters)));
 
-  const qint32 suggestedMax = advice_.suggestedLevels.isEmpty() ? 1 : advice_.suggestedLevels.last();
   const QString suggestedStr = formatFactors(advice_.suggestedLevels);
 
   // ---- current situation ---- (every referenced file is shown, none truncated)
   QString currentHtml = "<table cellspacing=\"0\" cellpadding=\"0\" style=\"border-collapse:collapse\">";
-  currentHtml += "<tr>" + htmlTh(tr("File")) + htmlTh(tr("Existing overview levels")) + htmlTh(tr("Status")) + "</tr>";
+  currentHtml +=
+      "<tr>" + htmlTh(tr("File")) + htmlTh(tr("Existing overview sizes (px)")) + htmlTh(tr("Status")) + "</tr>";
 
   // the container always leads the table, graded by the same rule as every source file
   {
     QString bg;
-    const QString status = rowStatus(/*checked=*/true, advice_.containerFactors, suggestedMax, bg);
+    const QString status = rowStatus(/*checked=*/true, advice_.containerOverviewSizes, advice_.containerSufficient, bg);
     const QString levels =
-        formatFactors(advice_.containerFactors) +
-        containerOvrSourceSuffix(hasSourceFiles(), advice_.containerHasOwnOvr, advice_.containerFactors);
+        formatFactors(advice_.containerOverviewSizes) +
+        containerOvrSourceSuffix(hasSourceFiles(), advice_.containerHasOwnOvr, advice_.containerOverviewSizes);
     currentHtml +=
         "<tr>" + htmlTd(QFileInfo(filename_).fileName(), bg) + htmlTd(levels, bg) + htmlTd(status, bg) + "</tr>";
   }
 
   for (const CGdalVrtUtil::file_overview_info_t& info : advice_.perFileInfo) {
     QString bg;
-    const QString status = rowStatus(info.checked, info.factors, suggestedMax, bg);
-    currentHtml += "<tr>" + htmlTd(QFileInfo(info.path).fileName(), bg) + htmlTd(formatFactors(info.factors), bg) +
-                   htmlTd(status, bg) + "</tr>";
+    const QString status = rowStatus(info.checked, info.overviewSizes, info.sufficient, bg);
+    currentHtml += "<tr>" + htmlTd(QFileInfo(info.path).fileName(), bg) +
+                   htmlTd(formatFactors(info.overviewSizes), bg) + htmlTd(status, bg) + "</tr>";
   }
 
   currentHtml += "</table>";
@@ -197,27 +197,26 @@ QString COverviewAdvisoryDialog::htmlTd(const QString& text, const QString& bg) 
   return QString("<td style=\"padding:4px 6px; background-color:%1\">%2</td>").arg(bg, text.toHtmlEscaped());
 }
 
-QString COverviewAdvisoryDialog::rowStatus(bool checked, const QVector<qint32>& factors, qint32 suggestedMax,
-                                           QString& bg) {
+QString COverviewAdvisoryDialog::rowStatus(bool checked, const QVector<qint32>& sizes, bool sufficient, QString& bg) {
   if (!checked) {
     bg = "#d4edda";
     return tr("✓ covered by .ovr");
   }
-  if (factors.isEmpty()) {
+  if (sizes.isEmpty()) {
     bg = "#f8d7da";
     return tr("✗ None");
   }
-  if (factors.last() < suggestedMax) {
+  if (!sufficient) {
     bg = "#fff3cd";
-    return tr("⚠ Shallow (max %1)").arg(factors.last());
+    return tr("⚠ Shallow (coarsest %1px)").arg(sizes.last());
   }
   bg = "#d4edda";
   return tr("✓ OK");
 }
 
 QString COverviewAdvisoryDialog::containerOvrSourceSuffix(bool hasSourceFiles, bool hasOwnOvr,
-                                                          const QVector<qint32>& factors) {
-  if (!hasSourceFiles || factors.isEmpty()) {
+                                                          const QVector<qint32>& sizes) {
+  if (!hasSourceFiles || sizes.isEmpty()) {
     return QString();
   }
   return hasOwnOvr ? tr(" (own .ovr)") : tr(" (via <OverviewList>)");
@@ -226,15 +225,15 @@ QString COverviewAdvisoryDialog::containerOvrSourceSuffix(bool hasSourceFiles, b
 bool COverviewAdvisoryDialog::hasExistingOverviews(const QString& filePath) const {
   for (const CGdalVrtUtil::file_overview_info_t& info : advice_.perFileInfo) {
     if (info.path == filePath) {
-      return info.checked && !info.factors.isEmpty();
+      return info.checked && !info.overviewSizes.isEmpty();
     }
   }
   // No per-file entry: filePath is either the container's own row, or (see
   // hasSourceFiles()) filesToFix()'s fallback target. Either way, fall back to the
-  // container's claim - containerHasOwnOvr, not just containerFactor > 0: a
+  // container's claim - containerHasOwnOvr, not just containerSufficient: a
   // fallback-trusted <OverviewList> (see buildOverviewAdvice()'s step 3) makes
-  // containerFactor > 0 without there being anything physical to clean/replace, and this
-  // result also drives the "Update"/"Add <OverviewList>" wording in the after-fix
+  // containerSufficient true without there being anything physical to clean/replace, and
+  // this result also drives the "Update"/"Add <OverviewList>" wording in the after-fix
   // preview table, which must agree with slotFixIt()'s confirmation dialog - that one
   // already keys off containerHasOwnOvr specifically because only a real .ovr file gets
   // deleted.
@@ -246,10 +245,9 @@ QStringList COverviewAdvisoryDialog::filesToFix() const {
     // no source files - fix filename_ directly, no <OverviewList> bookkeeping
     return {filename_};
   }
-  const qint32 suggestedMax = advice_.suggestedLevels.isEmpty() ? 1 : advice_.suggestedLevels.last();
   QStringList result;
   for (const CGdalVrtUtil::file_overview_info_t& info : advice_.perFileInfo) {
-    if (info.factors.isEmpty() || info.factors.last() < suggestedMax) {
+    if (!info.sufficient) {
       result << info.path;
     }
   }
@@ -288,7 +286,7 @@ void COverviewAdvisoryDialog::slotFixIt() {
   // !hasSourceFiles() has no separate <OverviewList> step - gdaladdo above is the whole fix
   if (hasSourceFiles()) {
     const QString vrtName = QFileInfo(filename_).fileName().toHtmlEscaped();
-    // orange only when a real .ovr file exists and will be deleted - containerFactor > 0
+    // orange only when a real .ovr file exists and will be deleted - containerSufficient
     // alone isn't enough: a bare <OverviewList> verified via source files (see
     // CGdalVrtUtil::buildOverviewAdvice()) has no file to delete
     if (advice_.containerHasOwnOvr) {

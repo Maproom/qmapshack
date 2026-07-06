@@ -60,13 +60,15 @@ class CGdalVrtUtil {
   static bool allReferencedFilesExist(GDALDataset* dataset, QString& missingFile);
 
   /**
-     @brief One referenced source file's own overview levels; see
-            overview_advice_t::perFileInfo.
+     @brief One referenced source file's own overview state; see overview_advice_t::perFileInfo.
    */
   struct file_overview_info_t {
     QString path;
-    QVector<qint32> factors; /**< This file's own overview levels, sorted ascending; empty if none, or unchecked. */
-    bool checked = true;     /**< False if never probed - the container's own overview already covers it. */
+    QVector<qint32> overviewSizes; /**< This file's own overview pixel widths, sorted descending (finest
+                                        first, coarsest last); empty if none, or unchecked. */
+    bool sufficient = false;       /**< True if the coarsest entry above already meets the suggested target -
+                                        see CGdalVrtUtil.cpp's meetsTarget(). Meaningless when checked is false. */
+    bool checked = true;           /**< False if never probed - the container's own overview already covers it. */
   };
 
   /**
@@ -85,8 +87,8 @@ class CGdalVrtUtil {
 
   /**
      @brief Dataset dimensions/pixel size, purely for the informational line
-            COverviewAdvisoryDialog shows above the overview tables - not used by any of
-            the overview-factor math above.
+            COverviewAdvisoryDialog shows above the overview tables - not used by the
+            overview-advisory logic above.
    */
   struct raster_geometry_t {
     qint32 xsizePx = 0;   /**< Raster width in pixels (post-warp - the size actually drawn from). */
@@ -105,19 +107,18 @@ class CGdalVrtUtil {
      COverviewAdvisoryDialog (show the situation/fix tables).
    */
   struct overview_advice_t {
-    QVector<qint32> containerFactors; /**< The container's own verified overview levels, sorted ascending; empty
-                                           if none or unverified. Kept in full, not just the deepest level, for
-                                           display purposes. */
-    qint32 containerFactor = 0;       /**< containerFactors.last(), or 0 if empty - the decimation a read gets
-                                           everywhere via the container itself. */
-    bool containerHasOwnOvr = false;  /**< True only if containerFactor came from a real .ovr file (found via
-                                           GetFileList()); false if verified indirectly instead, or
-                                           containerFactor is 0. Meaningful only when perFileInfo is non-empty. */
-    qint32 weakestMaxFactor = 1;      /**< The best decimation any read can rely on: max(containerFactor,
-                                           weakestSourceFactor) - see buildOverviewAdvice() for why this is
-                                           exact, not an approximation. */
+    QVector<qint32> containerOverviewSizes;    /**< The container's own verified overview pixel widths, sorted
+                                                    descending (finest first, coarsest last); empty if none or
+                                                    unverified. */
+    bool containerHasOwnOvr = false;           /**< True only if containerSufficient's verdict came from a real .ovr
+                                                    file (found via GetFileList()); false if verified indirectly
+                                                    instead, or the container has no usable overview. Meaningful only
+                                                    when perFileInfo is non-empty. */
+    bool containerSufficient = false;          /**< True if the container's own (verified) overview already meets
+                                                    suggestedLevels' target everywhere - decided directly from pixel
+                                                    sizes, see CGdalVrtUtil.cpp's meetsTarget(). */
     QVector<file_overview_info_t> perFileInfo; /**< One entry per referenced source file, weakest-first; empty
-                                                    when containerFactor alone already meets suggestedLevels'
+                                                    when containerSufficient alone already meets suggestedLevels'
                                                     target - see file_overview_info_t::checked. */
     QVector<qint32> suggestedLevels;           /**< Target overview levels (from suggestOverviewLevels()) - what the fix
                                                     will build and what a rebuilt <OverviewList> will declare. */
@@ -127,15 +128,24 @@ class CGdalVrtUtil {
                                                     layer); real size is usually smaller thanks to compression. */
 
     /**
-       @brief True if weakestMaxFactor falls short of suggestedLevels' target - worth
-              fixing. Always false when suggestedLevels is empty (the raster is
-              already smaller than the screen).
+       @brief True if a read isn't already sped up everywhere by either the container's
+              own overview or (when that falls short) every individual source file's own
+              overview - worth fixing. Always false when suggestedLevels is empty (the
+              raster is already smaller than the screen).
      */
     bool needsAttention() const {
-      if (suggestedLevels.isEmpty()) {
+      if (suggestedLevels.isEmpty() || containerSufficient) {
         return false;
       }
-      return weakestMaxFactor < suggestedLevels.last();
+      if (perFileInfo.isEmpty()) {
+        return true;  // nothing - neither the container nor any source file - backs this raster
+      }
+      for (const file_overview_info_t& info : perFileInfo) {
+        if (info.checked && !info.sufficient) {
+          return true;
+        }
+      }
+      return false;
     }
   };
 

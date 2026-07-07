@@ -187,7 +187,6 @@ set( SRCS
     helpers/CLimit.cpp
     helpers/CLinksDialog.cpp
     helpers/CMapIconSizesSetup.cpp
-    helpers/COverviewAdvisoryDialog.cpp
     helpers/CPhotoViewer.cpp
     helpers/CPositionDialog.cpp
     helpers/CProgressDialog.cpp
@@ -199,6 +198,8 @@ set( SRCS
     helpers/CToolBarConfig.cpp
     helpers/CToolBarSetupDialog.cpp
     helpers/CValue.cpp
+    helpers/CVrtAdvisoryDialog.cpp
+    helpers/CVrtCombiner.cpp
     helpers/CWptIconDialog.cpp
     helpers/CWptIconManager.cpp
     main.cpp
@@ -564,7 +565,6 @@ set( HDRS
     helpers/CLimit.h
     helpers/CLinksDialog.h
     helpers/CMapIconSizesSetup.h
-    helpers/COverviewAdvisoryDialog.h
     helpers/CPhotoViewer.h
     helpers/CPositionDialog.h
     helpers/CProgressDialog.h
@@ -578,6 +578,8 @@ set( HDRS
     helpers/CToolBarConfig.h
     helpers/CToolBarSetupDialog.h
     helpers/CValue.h
+    helpers/CVrtAdvisoryDialog.h
+    helpers/CVrtCombiner.h
     helpers/CWebPage.h
     helpers/CWptIconDialog.h
     helpers/CWptIconManager.h
@@ -859,13 +861,13 @@ set( UIS
     helpers/IInputDialog.ui
     helpers/ILinksDialog.ui
     helpers/IMapIconSizesSetup.ui
-    helpers/IOverviewAdvisoryDialog.ui
     helpers/IPositionDialog.ui
     helpers/IProgressDialog.ui
     helpers/ISelectCopyAction.ui
     helpers/ISelectProjectDialog.ui
     helpers/ITimeDialog.ui
     helpers/IToolBarSetupDialog.ui
+    helpers/IVrtAdvisoryDialog.ui
     helpers/IWptIconDialog.ui
     map/IMapList.ui
     map/IMapPathSetup.ui

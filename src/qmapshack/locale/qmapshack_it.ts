@@ -216,12 +216,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="1097"/>
+        <location filename="../canvas/CCanvas.cpp" line="1114"/>
         <source>Map Projection...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="1098"/>
+        <location filename="../canvas/CCanvas.cpp" line="1115"/>
         <source>Failed to setup map projection. Please configure a valid projection.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -256,7 +256,7 @@
         <translation>&lt;h2&gt;Routing&lt;/h2&gt;&lt;p&gt;QMapShack supporta i servizi di routing online. Ma se si desidera veramente sfruttare le possibilità di routing, è necessario che il database di routing sia archiviato localmente. Sono disponibili due motori di routing offline.&lt;/p&gt;&lt;h3&gt;Routino&lt;/h3&gt;&lt;p&gt;Per Routino devi creare i dati di routing dai file del database Open Street Map. QMapShack ha un creatore di database Routino integrato (&lt;a href=&apos;CreateRoutino&apos;&gt;Strumenti-&gt;Crea un database Routino&lt;/a&gt;).&lt;/p&gt;&lt;h3&gt;BRouter&lt;/h3&gt;&lt;p&gt;Una seconda opzione è quella di utilizzare un&apos;installazione locale di BRouter con un database di routing locale. Usa il &lt;a href=&apos;BRouterSetup&apos;&gt;BRouter setup&lt;/a&gt; per scaricare e installare tutti i dati necessari.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="1048"/>
+        <location filename="../canvas/CCanvas.cpp" line="1065"/>
         <source>Setup Map Background</source>
         <translation>Impostazione sfondo mappa</translation>
     </message>
@@ -565,9 +565,9 @@ Per risolvere questo conflitto si può salvare una copia, forzare la versione o 
         <location filename="../dem/CDemVRT.cpp" line="58"/>
         <location filename="../dem/CDemVRT.cpp" line="66"/>
         <location filename="../dem/CDemVRT.cpp" line="80"/>
-        <location filename="../dem/CDemVRT.cpp" line="130"/>
-        <location filename="../dem/CDemVRT.cpp" line="142"/>
-        <location filename="../dem/CDemVRT.cpp" line="176"/>
+        <location filename="../dem/CDemVRT.cpp" line="123"/>
+        <location filename="../dem/CDemVRT.cpp" line="135"/>
+        <location filename="../dem/CDemVRT.cpp" line="160"/>
         <source>Error...</source>
         <translation>Errore...</translation>
     </message>
@@ -598,7 +598,7 @@ Per risolvere questo conflitto si può salvare una copia, forzare la versione o 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dem/CDemVRT.cpp" line="131"/>
+        <location filename="../dem/CDemVRT.cpp" line="124"/>
         <source>Failed to create Warp for:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -607,17 +607,17 @@ Per risolvere questo conflitto si può salvare una copia, forzare la versione o 
         <translation type="vanished">DEM deve avere i dati a 16 o 32 bit:</translation>
     </message>
     <message>
-        <location filename="../dem/CDemVRT.cpp" line="143"/>
+        <location filename="../dem/CDemVRT.cpp" line="136"/>
         <source>No georeference information found:</source>
         <translation>Nessuna georeferenziazione trovata:</translation>
     </message>
     <message>
-        <location filename="../dem/CDemVRT.cpp" line="177"/>
+        <location filename="../dem/CDemVRT.cpp" line="161"/>
         <source>No pixel-to-map transform found:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dem/CDemVRT.cpp" line="570"/>
+        <location filename="../dem/CDemVRT.cpp" line="551"/>
         <source>Ele.</source>
         <translation type="unfinished">Ele.</translation>
     </message>
@@ -4787,7 +4787,7 @@ linea %2, colonna %3:
 <context>
     <name>CMapVRT</name>
     <message>
-        <location filename="../map/CMapVRT.cpp" line="285"/>
+        <location filename="../map/CMapVRT.cpp" line="272"/>
         <source>Error...</source>
         <translation>Errore...</translation>
     </message>
@@ -4813,27 +4813,32 @@ linea %2, colonna %3:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../map/CMapVRT.cpp" line="79"/>
+        <location filename="../map/CMapVRT.cpp" line="73"/>
+        <source>Palette band has no color table:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../map/CMapVRT.cpp" line="85"/>
         <source>File must be 8 bit palette or gray indexed:</source>
         <translation>Il file deve avere una tavolozza a 8 bit oppure toni grigio indicizzati:</translation>
     </message>
     <message>
-        <location filename="../map/CMapVRT.cpp" line="158"/>
+        <location filename="../map/CMapVRT.cpp" line="163"/>
         <source>Failed to create Warp for:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../map/CMapVRT.cpp" line="170"/>
+        <location filename="../map/CMapVRT.cpp" line="175"/>
         <source>No georeference information found:</source>
         <translation>Nessuna georeferenziazione trovata:</translation>
     </message>
     <message>
-        <location filename="../map/CMapVRT.cpp" line="178"/>
+        <location filename="../map/CMapVRT.cpp" line="183"/>
         <source>Raster has an invalid (zero) size:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../map/CMapVRT.cpp" line="206"/>
+        <location filename="../map/CMapVRT.cpp" line="189"/>
         <source>No pixel-to-map transform found:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5147,183 +5152,16 @@ struttura sconosciuta.</translation>
 <context>
     <name>COverviewAdvisoryDialog</name>
     <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="35"/>
-        <source>Fix it</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="36"/>
-        <source>Later</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="45"/>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="69"/>
         <source>File</source>
-        <translation type="unfinished">File</translation>
+        <translation type="obsolete">File</translation>
     </message>
     <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="45"/>
-        <source>Existing overview levels</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="45"/>
-        <source>Status</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="69"/>
-        <source>New overview levels</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="69"/>
-        <source>Action</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="75"/>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="262"/>
-        <source>Clean + rebuild</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="75"/>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="264"/>
-        <source>Build new</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="90"/>
-        <source>Update &lt;OverviewList&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="90"/>
-        <source>Add &lt;OverviewList&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="135"/>
-        <source>%1 file(s) will have new overviews built</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="138"/>
-        <source>%1 file(s) will have existing overviews cleaned and rebuilt</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="142"/>
-        <source>. Estimated disk usage: %1.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="153"/>
-        <source>Overview info</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="159"/>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="313"/>
         <source>Close</source>
-        <translation type="unfinished">Chiudi</translation>
+        <translation type="obsolete">Chiudi</translation>
     </message>
     <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="189"/>
-        <source>✓ covered by .ovr</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="193"/>
-        <source>✗ None</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="197"/>
-        <source>⚠ Shallow (max %1)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="200"/>
-        <source>✓ OK</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="208"/>
-        <source> (own .ovr)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="208"/>
-        <source> (via &lt;OverviewList&gt;)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="241"/>
-        <source>gdaladdo not found</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="242"/>
-        <source>Could not locate gdaladdo. Make sure the GDAL tools are installed and on PATH.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="255"/>
-        <source>The following operations will be performed:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="277"/>
-        <source>Update &amp;lt;OverviewList&amp;gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="279"/>
-        <source>Add &amp;lt;OverviewList&amp;gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="285"/>
-        <source>Confirm fix</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="330"/>
-        <source>Abort fix</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="330"/>
-        <source>Overview creation is in progress.
-
-Abort and remove any partially written files?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="355"/>
-        <source>Removed %1.
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="367"/>
-        <source>Rebuilt %1&apos;s &lt;OverviewList&gt; from its source files.
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="369"/>
-        <source>Failed to update %1.
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="167"/>
         <source>none</source>
-        <translation type="unfinished">nessuna</translation>
+        <translation type="obsolete">nessuna</translation>
     </message>
 </context>
 <context>
@@ -8422,54 +8260,54 @@ For configuration you need to know your Android device&apos;s IP address or it&a
 <context>
     <name>CShell</name>
     <message>
-        <location filename="../../common/shell/CShell.cpp" line="38"/>
+        <location filename="../../common/shell/CShell.cpp" line="46"/>
         <source>Execution of external program `%1` failed: </source>
         <translation type="unfinished">Esecuzione del programma (esterno) &apos;%1&apos; fallito: </translation>
     </message>
     <message>
-        <location filename="../../common/shell/CShell.cpp" line="41"/>
+        <location filename="../../common/shell/CShell.cpp" line="49"/>
         <source>Process cannot be started.
 </source>
         <translation type="unfinished">Il processo non può iniziare.
 </translation>
     </message>
     <message>
-        <location filename="../../common/shell/CShell.cpp" line="42"/>
+        <location filename="../../common/shell/CShell.cpp" line="50"/>
         <source>Make sure the required packages are installed, `%1` exists and is executable.
 </source>
         <translation type="unfinished">Assicurati che il componente richiesto sia installato, `%1` e che sia eseguibile.
 </translation>
     </message>
     <message>
-        <location filename="../../common/shell/CShell.cpp" line="51"/>
+        <location filename="../../common/shell/CShell.cpp" line="59"/>
         <source>External process crashed.
 </source>
         <translation type="unfinished">Il processo esterno è rovinato.
 </translation>
     </message>
     <message>
-        <location filename="../../common/shell/CShell.cpp" line="55"/>
+        <location filename="../../common/shell/CShell.cpp" line="63"/>
         <source>An unknown error occurred.
 </source>
         <translation type="unfinished">È accaduto un errore sconosciuto.
 </translation>
     </message>
     <message>
-        <location filename="../../common/shell/CShell.cpp" line="133"/>
+        <location filename="../../common/shell/CShell.cpp" line="141"/>
         <source>!!! failed !!!
 </source>
         <translation type="unfinished">!!! non riuscito !!!
 </translation>
     </message>
     <message>
-        <location filename="../../common/shell/CShell.cpp" line="146"/>
+        <location filename="../../common/shell/CShell.cpp" line="154"/>
         <source>
 Canceled by user&apos;s request.
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../common/shell/CShell.cpp" line="170"/>
+        <location filename="../../common/shell/CShell.cpp" line="177"/>
         <source>!!! done !!!
 </source>
         <translation type="unfinished">!!! fatto !!!
@@ -8889,6 +8727,301 @@ linea %2, colonna %3:
         <location filename="../gis/tnv/serialization.cpp" line="649"/>
         <source>Failed to read data.</source>
         <translation>Impossibile leggere i dati.</translation>
+    </message>
+</context>
+<context>
+    <name>CVrtAdvisoryDialog</name>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="44"/>
+        <source>Fix overviews</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="45"/>
+        <source>Later</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="62"/>
+        <source>%1 × %2 px  ·  %3/px × %4/px  ·  %5 × %6</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="71"/>
+        <source>⚠ This file references %1 source files. Reading gets inefficient past %2 - consider combining them into fewer files.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="78"/>
+        <source>Combine files...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="94"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="118"/>
+        <source>File</source>
+        <translation type="unfinished">File</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="94"/>
+        <source>Existing overview sizes (px)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="94"/>
+        <source>Status</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="118"/>
+        <source>New overview levels</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="118"/>
+        <source>Action</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="124"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="341"/>
+        <source>Clean + rebuild</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="124"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="343"/>
+        <source>Build new</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="139"/>
+        <source>Update &lt;OverviewList&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="139"/>
+        <source>Add &lt;OverviewList&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="188"/>
+        <source>%1 file(s) will have new overviews built</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="191"/>
+        <source>%1 file(s) will have existing overviews cleaned and rebuilt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="198"/>
+        <source>Estimated disk usage: %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="198"/>
+        <source>Disk usage: %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="230"/>
+        <source>Overview info</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="232"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="420"/>
+        <source>Close</source>
+        <translation type="unfinished">Chiudi</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="242"/>
+        <source>none</source>
+        <translation type="unfinished">nessuna</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="263"/>
+        <source>✓ covered by .ovr</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="267"/>
+        <source>✗ None</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="271"/>
+        <source>⚠ Shallow (coarsest %1px)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="274"/>
+        <source>✓ OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="282"/>
+        <source> (own .ovr)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="282"/>
+        <source> (via &lt;OverviewList&gt;)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="320"/>
+        <source>gdaladdo not found</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="321"/>
+        <source>Could not locate gdaladdo. Make sure the GDAL tools are installed and on PATH.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="334"/>
+        <source>The following operations will be performed:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="356"/>
+        <source>Update &amp;lt;OverviewList&amp;gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="358"/>
+        <source>Add &amp;lt;OverviewList&amp;gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="363"/>
+        <source>Confirm fix</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="406"/>
+        <source>Removed %1.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="428"/>
+        <source>GDAL tools not found</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="429"/>
+        <source>Could not locate gdal_translate/gdalbuildvrt. Make sure the GDAL tools are installed and on PATH.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="439"/>
+        <source>Could not read the raster layout of %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="obsolete">Annulla</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="438"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="452"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="486"/>
+        <source>Combine failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="452"/>
+        <source>No data found in %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="465"/>
+        <source>This will split %1 into %2 compressed GeoTIFF(s) in %3, then rewrite %1 to reference them. The current file will be backed up as %4.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="469"/>
+        <source>%1 grid cell(s) contained no data and will be skipped.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="472"/>
+        <source>Confirm combine</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="486"/>
+        <source>Could not back up %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="536"/>
+        <source>Abort</source>
+        <translation type="unfinished">Annulla</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="537"/>
+        <source>An operation is in progress.
+
+Abort and remove any partially written files?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="585"/>
+        <source>Rebuilt %1&apos;s &lt;OverviewList&gt; from its source files.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="587"/>
+        <source>Failed to update %1.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="606"/>
+        <source>Restored %1 from backup.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="608"/>
+        <source>Failed to restore %1 from backup - %2 is still available for manual recovery.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="610"/>
+        <source>Restore failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="611"/>
+        <source>Combine failed and %1 could not be automatically restored from its backup.
+
+Rename %2 back to %1 yourself to recover the original file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="622"/>
+        <source>Combined %1 source file(s) into %2 tile(s); %3 rewritten.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="630"/>
+        <source>Combine finished</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="631"/>
+        <source>%1 has been rewritten to reference %2 merged tile(s).
+
+The %3 original source file(s) are still in %4 - delete them yourself once you&apos;ve confirmed the merged file works as expected.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -14801,60 +14934,60 @@ zoom-out for use of the DEM data.</source>
 <context>
     <name>IGisProject</name>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="172"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="177"/>
         <source>Save project?</source>
         <translation>Slavare il progetto?</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="173"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="178"/>
         <source>&lt;h3&gt;%1&lt;/h3&gt;The project was changed. Save before closing it?</source>
         <translation>&lt;h3&gt;%1&lt;/h3&gt;Il progetto è stato modificato. Salvo prima di chiuderlo?</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="362"/>
-        <location filename="../gis/prj/IGisProject.cpp" line="410"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="367"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="415"/>
         <source>Save &quot;%1&quot; to...</source>
         <translation>Salva &quot;%1&quot; in...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="474"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="479"/>
         <source>&lt;br/&gt;
 Filename: %1</source>
         <translation>&lt;br/&gt;
 Nome file: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="478"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="483"/>
         <source>Keywords: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="482"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="487"/>
         <source>Waypoints: %1</source>
         <translation>Waypoint: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="485"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="490"/>
         <source>Tracks: %1</source>
         <translation>Tracce: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="488"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="493"/>
         <source>Routes: %1</source>
         <translation>Itinerari: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="491"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="496"/>
         <source>Areas: %1</source>
         <translation>Aree: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="595"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="600"/>
         <source>Are you sure you want to delete &apos;%1&apos; from project &apos;%2&apos;?</source>
         <translation>Vuoi veramente cancellare &apos;%1&apos; dal progetto &apos;%2&apos;?</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="596"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="601"/>
         <source>Delete...</source>
         <translation>Elimina...</translation>
     </message>
@@ -16463,33 +16596,6 @@ Any modifications done will be discarded.</source>
         <location filename="../mouse/line/IMouseEditLine.h" line="139"/>
         <source>&lt;br/&gt;&lt;b&gt;Move the map&lt;/b&gt;&lt;br/&gt;If you keep the left mouse button pressed and move the mouse, you will move the map.&lt;br/&gt;&lt;br/&gt;</source>
         <translation>&lt;br/&gt;&lt;b&gt;Sposta la mappa&lt;/b&gt;&lt;br/&gt;Tenendo premuto il tasto sinistro del mouse, si sposta la mappa muovendo il mouse.&lt;br/&gt;&lt;br/&gt;</translation>
-    </message>
-</context>
-<context>
-    <name>IOverviewAdvisoryDialog</name>
-    <message>
-        <location filename="../helpers/IOverviewAdvisoryDialog.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IOverviewAdvisoryDialog.h" line="93"/>
-        <source>Slow rendering — overview pyramids</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../helpers/IOverviewAdvisoryDialog.ui" line="23"/>
-        <location filename="../../../build/src/qmapshack/ui_IOverviewAdvisoryDialog.h" line="94"/>
-        <source>&lt;b&gt;Current overview situation:&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../helpers/IOverviewAdvisoryDialog.ui" line="37"/>
-        <location filename="../../../build/src/qmapshack/ui_IOverviewAdvisoryDialog.h" line="95"/>
-        <source>&lt;b&gt;After fix:&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../helpers/IOverviewAdvisoryDialog.ui" line="61"/>
-        <location filename="../../../build/src/qmapshack/ui_IOverviewAdvisoryDialog.h" line="97"/>
-        <source>Don&apos;t show this again for this file</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -20605,6 +20711,33 @@ simply type the new time/date.</source>
         <location filename="../../../build/src/qmapshack/ui_IUnitsSetup.h" line="142"/>
         <source>&lt;b&gt;Note:&lt;/b&gt; For some GUI elements changing the units will not take effect until you restart QMapShack.</source>
         <translation>&lt;b&gt;Nota:&lt;/b&gt; Alcune caratteristiche saranno disponibili solo dopo il riavvio di QMapShack.</translation>
+    </message>
+</context>
+<context>
+    <name>IVrtAdvisoryDialog</name>
+    <message>
+        <location filename="../helpers/IVrtAdvisoryDialog.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IVrtAdvisoryDialog.h" line="108"/>
+        <source>Slow rendering — overview pyramids</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/IVrtAdvisoryDialog.ui" line="46"/>
+        <location filename="../../../build/src/qmapshack/ui_IVrtAdvisoryDialog.h" line="111"/>
+        <source>&lt;b&gt;Current overview situation:&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/IVrtAdvisoryDialog.ui" line="60"/>
+        <location filename="../../../build/src/qmapshack/ui_IVrtAdvisoryDialog.h" line="112"/>
+        <source>&lt;b&gt;After fix:&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/IVrtAdvisoryDialog.ui" line="84"/>
+        <location filename="../../../build/src/qmapshack/ui_IVrtAdvisoryDialog.h" line="114"/>
+        <source>Don&apos;t show this again for this file</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

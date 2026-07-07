@@ -67,6 +67,12 @@ CMapVRT::CMapVRT(const QString& filename, CMapDraw* parent) : IMap(eFeatVisibili
   if (rasterBandCount == 1) {
     if (pBand->GetColorInterpretation() == GCI_PaletteIndex) {
       GDALColorTable* pct = pBand->GetColorTable();
+      if (pct == nullptr) {
+        // A band can report palette interpretation yet carry no table (hand-edited VRT,
+        // some drivers) - dereferencing it below would crash.
+        fail(tr("Palette band has no color table:") % '\n' % filename);
+        return;
+      }
       for (qint32 i = 0; i < pct->GetColorEntryCount(); ++i) {
         const GDALColorEntry& e = *pct->GetColorEntry(i);
         colortable << qRgba(e.c1, e.c2, e.c3, e.c4);
@@ -95,7 +101,10 @@ CMapVRT::CMapVRT(const QString& filename, CMapDraw* parent) : IMap(eFeatVisibili
   // single band palette/gray data is categorical (see resampleAlg below).
   // buildOverviewAdvice() logs its own "OVR: ..." diagnostics as it goes.
   overviewAdvice = CGdalVrtUtil::buildOverviewAdvice(dataset, pBand, rasterBandCount == 1, suggestedLevels);
-  if (overviewAdvice.needsAttention()) {
+  // Cache the immutable attention verdict once: showsOverviewWarning() is polled per
+  // paint/hover/scroll by the tree delegate, and needsAttention() walks every source file.
+  overviewNeedsAttention = overviewAdvice.needsAttention();
+  if (overviewNeedsAttention) {
     qDebug() << "OVR: assessment: needs attention - advisory will fire on slow render";
   } else {
     qDebug() << "OVR: assessment: OK";
@@ -200,12 +209,9 @@ CMapVRT::CMapVRT(const QString& filename, CMapDraw* parent) : IMap(eFeatVisibili
     trFwd = trFwd * DEG_TO_RAD;
   }
 
-  // Unlike CDemVRT, xscale/yscale stay in the dataset's native geotransform units (degrees
-  // for a geographic CRS) since trFwd/trInv above don't need real meters - only
-  // rasterGeometry does, so convert into locals rather than mutating xscale/yscale.
-  const qreal pixelSizeX = CGdalVrtUtil::toMeters(qAbs(xscale), proj.isSrcLatLong());
-  const qreal pixelSizeY = CGdalVrtUtil::toMeters(qAbs(yscale), proj.isSrcLatLong());
-  rasterGeometry = {xsize_px, ysize_px, pixelSizeX, pixelSizeY};
+  // The dialog's resolution/size line mirrors gdalinfo, so it comes from the pre-warp
+  // source (srcDataset when warped, else dataset) - not the warped grid above.
+  rasterGeometry = CGdalVrtUtil::sourceGeometry(srcDataset != nullptr ? srcDataset : dataset);
 
   trInv = trFwd.inverted();
 
@@ -475,7 +481,7 @@ void CMapVRT::draw(IDrawContext::buffer_t& buf) /* override */
     if (!img.isNull()) {
       drawSourceImage(p, window, img);
     } else if (deadline.timedOut) {
-      CGdalVrtUtil::handleRenderTimeout(map, this, !advisoryState.suppress, advisoryState);
+      CGdalVrtUtil::handleRenderTimeout(map, this, showsOverviewWarning(), advisoryState);
     }
   }
 

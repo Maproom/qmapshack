@@ -219,12 +219,12 @@
         <translation>&lt;h2&gt;Höhendaten&lt;/h2&gt;&lt;p&gt;Höhendaten (Digital Elevation Model - DEM) werden für verschiedene Funktionen in QMapShack gebraucht und sind komplett unabhängig von den Karten. Allerdings gelten dieselben Regeln wie für Karten. Höhendaten müssen immer über eine Datei definiert sein, die von QMapShack erkannt wird. Diese Datei muss in einem der registrierten Höhendatenordner liegen (&lt;a href=&apos;DemFolders&apos;&gt;Datei-&gt;DEM Verzeichnisse angeben&lt;/a&gt;). QMapShack wird sie finden und auflisten. Sie können die Liste erneut laden, indem Sie mit der rechten Maustaste in die DEM Liste klicken und &apos;DEM erneut laden&apos; aus dem Menü wählen.&lt;/p&gt;&lt;p&gt;Ähnlich wie die Karten müssen DEM Dateien in einer *.vrt Datei eingebettet sein, um erkannt zu werden. Eine *.vrt Datei kann auf eine oder mehrere andere Dateien verweisen. Auch hier können Sie QMapShacks eigenen VRT Builder (&lt;a href=&apos;VrtBuilder&apos;&gt;Werkzeug-&gt;VRT Builder&lt;/a&gt;) verwenden, um eine solche Datei zu erstellen.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="1097"/>
+        <location filename="../canvas/CCanvas.cpp" line="1114"/>
         <source>Map Projection...</source>
         <translation>Kartenprojektion...</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="1098"/>
+        <location filename="../canvas/CCanvas.cpp" line="1115"/>
         <source>Failed to setup map projection. Please configure a valid projection.</source>
         <translation>Die Kartenprojektion wurde nicht erkannt. Bitte stellen Sie eine gültige Projektion ein.</translation>
     </message>
@@ -254,7 +254,7 @@
         <translation>&lt;h2&gt;Streckenführung (Routing)&lt;/h2&gt;&lt;p&gt;QMapShack unterstützt Online Routing Dienste. Wenn Sie aber wirklich alle Möglichkeiten einer Streckenführung nutzen wollen, brauchen Sie eine lokale Routendatenbank. Es stehen Ihnen zwei Möglichkeiten zur Verfügung.&lt;/p&gt;&lt;h3&gt;Routino&lt;/h3&gt;&lt;p&gt;Für Routino müssen Sie eine Datenbank aus der Open Street Map Datenbasis erstellen. QMapShack besitzt einen eingebauten &apos;Routino Database Creator&apos; (&lt;a href=&apos;CreateRoutino&apos;&gt;Werkzeug-&gt;Routino Datenbank erstellen&lt;/a&gt;).&lt;/p&gt;&lt;h3&gt;BRouter&lt;/h3&gt;&lt;p&gt;Die zweite Option ist eine lokale BRouter Installation mit einer lokalen Datenbank. Klicken Sie auf &lt;a href=&apos;BRouterSetup&apos;&gt;BRouter einstellen&lt;/a&gt;, um die nötigen Daten zu laden und zu installieren.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="1048"/>
+        <location filename="../canvas/CCanvas.cpp" line="1065"/>
         <source>Setup Map Background</source>
         <translation>Kartenhintergrund einstellen</translation>
     </message>
@@ -562,9 +562,9 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <location filename="../dem/CDemVRT.cpp" line="58"/>
         <location filename="../dem/CDemVRT.cpp" line="66"/>
         <location filename="../dem/CDemVRT.cpp" line="80"/>
-        <location filename="../dem/CDemVRT.cpp" line="130"/>
-        <location filename="../dem/CDemVRT.cpp" line="142"/>
-        <location filename="../dem/CDemVRT.cpp" line="176"/>
+        <location filename="../dem/CDemVRT.cpp" line="123"/>
+        <location filename="../dem/CDemVRT.cpp" line="135"/>
+        <location filename="../dem/CDemVRT.cpp" line="160"/>
         <source>Error...</source>
         <translation>Fehler...</translation>
     </message>
@@ -595,7 +595,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation>Das DEM muss ein Band mit 16-Bit, 32-Bit oder 64-Bit Daten haben:</translation>
     </message>
     <message>
-        <location filename="../dem/CDemVRT.cpp" line="131"/>
+        <location filename="../dem/CDemVRT.cpp" line="124"/>
         <source>Failed to create Warp for:</source>
         <translation>&quot;Warp&quot; konnte nicht erstellt werden:</translation>
     </message>
@@ -604,17 +604,17 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation type="vanished">DEM muss aus einem Satz mit 16 bit oder 32 bit Daten bestehen:</translation>
     </message>
     <message>
-        <location filename="../dem/CDemVRT.cpp" line="143"/>
+        <location filename="../dem/CDemVRT.cpp" line="136"/>
         <source>No georeference information found:</source>
         <translation>Keine Georeferenzierung gefunden:</translation>
     </message>
     <message>
-        <location filename="../dem/CDemVRT.cpp" line="177"/>
+        <location filename="../dem/CDemVRT.cpp" line="161"/>
         <source>No pixel-to-map transform found:</source>
         <translation>Keine Pixel-zu-Karte Tranformation gefunden:</translation>
     </message>
     <message>
-        <location filename="../dem/CDemVRT.cpp" line="570"/>
+        <location filename="../dem/CDemVRT.cpp" line="551"/>
         <source>Ele.</source>
         <translation>Höhe</translation>
     </message>
@@ -4800,7 +4800,7 @@ Zeile %2, Spalte %3:
 <context>
     <name>CMapVRT</name>
     <message>
-        <location filename="../map/CMapVRT.cpp" line="285"/>
+        <location filename="../map/CMapVRT.cpp" line="272"/>
         <source>Error...</source>
         <translation>Fehler...</translation>
     </message>
@@ -4823,30 +4823,35 @@ Zeile %2, Spalte %3:
     <message>
         <location filename="../map/CMapVRT.cpp" line="59"/>
         <source>File has no raster bands:</source>
-        <translation>Die Datei hat keine Datenebenen:</translation>
+        <translation>Die Datei hat keine Datenbänder:</translation>
     </message>
     <message>
-        <location filename="../map/CMapVRT.cpp" line="79"/>
+        <location filename="../map/CMapVRT.cpp" line="73"/>
+        <source>Palette band has no color table:</source>
+        <translation>Das Palettenband hat keine Farbtabelle:</translation>
+    </message>
+    <message>
+        <location filename="../map/CMapVRT.cpp" line="85"/>
         <source>File must be 8 bit palette or gray indexed:</source>
         <translation>Die Datei muss eine 8 bit Palette oder Graustufen haben:</translation>
     </message>
     <message>
-        <location filename="../map/CMapVRT.cpp" line="158"/>
+        <location filename="../map/CMapVRT.cpp" line="163"/>
         <source>Failed to create Warp for:</source>
         <translation>&quot;Warp&quot; konnte nicht erstellt werden:</translation>
     </message>
     <message>
-        <location filename="../map/CMapVRT.cpp" line="170"/>
+        <location filename="../map/CMapVRT.cpp" line="175"/>
         <source>No georeference information found:</source>
         <translation>Keine Georeferenzierung gefunden:</translation>
     </message>
     <message>
-        <location filename="../map/CMapVRT.cpp" line="178"/>
+        <location filename="../map/CMapVRT.cpp" line="183"/>
         <source>Raster has an invalid (zero) size:</source>
         <translation>Raster ein eine ungültigeGröße (oder ist leer):</translation>
     </message>
     <message>
-        <location filename="../map/CMapVRT.cpp" line="206"/>
+        <location filename="../map/CMapVRT.cpp" line="189"/>
         <source>No pixel-to-map transform found:</source>
         <translation>Keine Pixel-zu-Karte Tranformation gefunden:</translation>
     </message>
@@ -5167,182 +5172,145 @@ Unbekannte Struktur.</translation>
         <translation type="vanished">&lt;h3&gt;Darstellung ist langsam&lt;/h3&gt;Diese Datei hat Übersichtsebenen, aber mindestens eine der Quelldateien hat keine ausreichend tiefen Übersichtsebenen für die aktuelle Ansicht, so dass Neuberechnungen einen größeren Teil von Daten mit einer höheren Auflösung als nötig dekodieren müssen:&lt;br&gt;&lt;b&gt;%1&lt;/b&gt;&lt;br&gt;&lt;br&gt;Das einmalige Erstellen tieferer Übersichtsebenen behebt das Problem. Führen Sie einen der folgenden Befehle in einem Terminal aus. Dies benötigt ca. &lt;b&gt;%2&lt;/b&gt; Speicherplatz (unkomprimierte Schätzung – die tatsächliche Größe ist durch Komprimierung wahrscheinlich geringer); stellen Sie sicher, dass dieser Speicherplatz verfügbar ist.&lt;br&gt;&lt;br&gt;&lt;i&gt;Hinweis: Da diese Datei bereits einige Übersichtsebenen hat, fügen die folgenden Befehle die neuen Ebenen zu den bestehenden hinzu, anstatt sie zu ersetzen. Dies kann zu einem gemischten Satz von Dezimierungsstufen führen. Für einen sauberen Neuaufbau führen Sie zunächst &lt;code&gt;gdaladdo -clean&lt;/code&gt; auf der betroffenen Datei aus.&lt;/i&gt;</translation>
     </message>
     <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="35"/>
         <source>Fix it</source>
-        <translation>Beheben</translation>
+        <translation type="vanished">Beheben</translation>
     </message>
     <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="36"/>
         <source>Later</source>
-        <translation>Später</translation>
+        <translation type="vanished">Später</translation>
     </message>
     <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="45"/>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="69"/>
         <source>File</source>
-        <translation>Datei</translation>
+        <translation type="vanished">Datei</translation>
     </message>
     <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="45"/>
         <source>Existing overview levels</source>
-        <translation>Vorhandene Übersichtsstufen</translation>
+        <translation type="vanished">Vorhandene Übersichtsstufen</translation>
     </message>
     <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="45"/>
         <source>Status</source>
-        <translation>Status</translation>
+        <translation type="vanished">Status</translation>
     </message>
     <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="69"/>
         <source>New overview levels</source>
-        <translation>Neue Übersichtsstufen</translation>
+        <translation type="vanished">Neue Übersichtsstufen</translation>
     </message>
     <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="69"/>
         <source>Action</source>
-        <translation>Aktion</translation>
+        <translation type="vanished">Aktion</translation>
     </message>
     <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="75"/>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="262"/>
         <source>Clean + rebuild</source>
-        <translation>Bereinigen + neu erstellen</translation>
+        <translation type="vanished">Bereinigen + neu erstellen</translation>
     </message>
     <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="75"/>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="264"/>
         <source>Build new</source>
-        <translation>Neu erstellen</translation>
+        <translation type="vanished">Neu erstellen</translation>
     </message>
     <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="90"/>
         <source>Update &lt;OverviewList&gt;</source>
-        <translation>&lt;OverviewList&gt; aktualisieren</translation>
+        <translation type="vanished">&lt;OverviewList&gt; aktualisieren</translation>
     </message>
     <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="90"/>
         <source>Add &lt;OverviewList&gt;</source>
-        <translation>&lt;OverviewList&gt; hinzufügen</translation>
+        <translation type="vanished">&lt;OverviewList&gt; hinzufügen</translation>
     </message>
     <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="135"/>
         <source>%1 file(s) will have new overviews built</source>
-        <translation>Für %1 Datei(en) werden neue Übersichten erstellt</translation>
+        <translation type="vanished">Für %1 Datei(en) werden neue Übersichten erstellt</translation>
     </message>
     <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="138"/>
         <source>%1 file(s) will have existing overviews cleaned and rebuilt</source>
-        <translation>Für %1 Datei(en) werden vorhandene Übersichten bereinigt und neu erstellt</translation>
+        <translation type="vanished">Für %1 Datei(en) werden vorhandene Übersichten bereinigt und neu erstellt</translation>
     </message>
     <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="142"/>
         <source>. Estimated disk usage: %1.</source>
-        <translation>. Geschätzter Speicherbedarf: %1.</translation>
+        <translation type="vanished">. Geschätzter Speicherbedarf: %1.</translation>
     </message>
     <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="153"/>
         <source>Overview info</source>
-        <translation>Übersichtsinfo</translation>
+        <translation type="vanished">Übersichtsinfo</translation>
     </message>
     <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="159"/>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="313"/>
         <source>Close</source>
-        <translation>Schließen</translation>
+        <translation type="vanished">Schließen</translation>
     </message>
     <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="189"/>
         <source>✓ covered by .ovr</source>
-        <translation>✓ durch .ovr abgedeckt</translation>
+        <translation type="vanished">✓ durch .ovr abgedeckt</translation>
     </message>
     <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="193"/>
         <source>✗ None</source>
-        <translation>✗ Keine</translation>
+        <translation type="vanished">✗ Keine</translation>
     </message>
     <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="197"/>
         <source>⚠ Shallow (max %1)</source>
-        <translation>⚠ Flach (max. %1)</translation>
+        <translation type="vanished">⚠ Flach (max. %1)</translation>
     </message>
     <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="200"/>
         <source>✓ OK</source>
-        <translation>✓ OK</translation>
+        <translation type="vanished">✓ OK</translation>
     </message>
     <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="208"/>
         <source> (own .ovr)</source>
-        <translation> (eigene .ovr)</translation>
+        <translation type="vanished"> (eigene .ovr)</translation>
     </message>
     <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="208"/>
         <source> (via &lt;OverviewList&gt;)</source>
-        <translation> (über &lt;OverviewList&gt;)</translation>
+        <translation type="vanished"> (über &lt;OverviewList&gt;)</translation>
     </message>
     <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="241"/>
         <source>gdaladdo not found</source>
-        <translation>gdaladdo nicht gefunden</translation>
+        <translation type="vanished">gdaladdo nicht gefunden</translation>
     </message>
     <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="242"/>
         <source>Could not locate gdaladdo. Make sure the GDAL tools are installed and on PATH.</source>
-        <translation>gdaladdo konnte nicht gefunden werden. Stellen Sie sicher, dass die GDAL-Werkzeuge installiert und im PATH sind.</translation>
+        <translation type="vanished">gdaladdo konnte nicht gefunden werden. Stellen Sie sicher, dass die GDAL-Werkzeuge installiert und im PATH sind.</translation>
     </message>
     <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="255"/>
         <source>The following operations will be performed:</source>
-        <translation>Die folgenden Aktionen werden ausgeführt:</translation>
+        <translation type="vanished">Die folgenden Aktionen werden ausgeführt:</translation>
     </message>
     <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="277"/>
         <source>Update &amp;lt;OverviewList&amp;gt;</source>
-        <translation>&amp;lt;OverviewList&amp;gt; aktualisieren</translation>
+        <translation type="vanished">&amp;lt;OverviewList&amp;gt; aktualisieren</translation>
     </message>
     <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="279"/>
         <source>Add &amp;lt;OverviewList&amp;gt;</source>
-        <translation>&amp;lt;OverviewList&amp;gt; hinzufügen</translation>
+        <translation type="vanished">&amp;lt;OverviewList&amp;gt; hinzufügen</translation>
     </message>
     <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="285"/>
         <source>Confirm fix</source>
-        <translation>Aktion bestätigen</translation>
+        <translation type="vanished">Aktion bestätigen</translation>
     </message>
     <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="330"/>
         <source>Abort fix</source>
-        <translation>Aktion abbrechen</translation>
+        <translation type="vanished">Aktion abbrechen</translation>
     </message>
     <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="330"/>
         <source>Overview creation is in progress.
 
 Abort and remove any partially written files?</source>
-        <translation>Die Übersichtserstellung läuft noch.
+        <translation type="vanished">Die Übersichtserstellung läuft noch.
 
 Abbrechen und bereits teilweise geschriebene Dateien entfernen?</translation>
     </message>
     <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="355"/>
         <source>Removed %1.
 </source>
-        <translation>%1 entfernt.
+        <translation type="vanished">%1 entfernt.
 </translation>
     </message>
     <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="367"/>
         <source>Rebuilt %1&apos;s &lt;OverviewList&gt; from its source files.
 </source>
-        <translation>&lt;OverviewList&gt; von %1 anhand der Quelldateien neu erstellt.
+        <translation type="vanished">&lt;OverviewList&gt; von %1 anhand der Quelldateien neu erstellt.
 </translation>
     </message>
     <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="369"/>
         <source>Failed to update %1.
 </source>
-        <translation>%1 konnte nicht aktualisiert werden.
+        <translation type="vanished">%1 konnte nicht aktualisiert werden.
 </translation>
     </message>
     <message>
@@ -5350,9 +5318,8 @@ Abbrechen und bereits teilweise geschriebene Dateien entfernen?</translation>
         <translation type="vanished">Übersichtsebenen-Faktoren</translation>
     </message>
     <message>
-        <location filename="../helpers/COverviewAdvisoryDialog.cpp" line="167"/>
         <source>none</source>
-        <translation>keine</translation>
+        <translation type="vanished">keine</translation>
     </message>
     <message>
         <source>&lt;p&gt;...and %1 more file(s) not shown.&lt;/p&gt;</source>
@@ -8472,43 +8439,43 @@ Für die Konfiguration benötigen Sie die IP Adresse Ihres Android Gerätes oder
 <context>
     <name>CShell</name>
     <message>
-        <location filename="../../common/shell/CShell.cpp" line="38"/>
+        <location filename="../../common/shell/CShell.cpp" line="46"/>
         <source>Execution of external program `%1` failed: </source>
         <translation>Ausführen des externen Programms `%1` ist fehlgeschlagen: </translation>
     </message>
     <message>
-        <location filename="../../common/shell/CShell.cpp" line="41"/>
+        <location filename="../../common/shell/CShell.cpp" line="49"/>
         <source>Process cannot be started.
 </source>
         <translation>Der Prozess konnte nicht gestartet werden.</translation>
     </message>
     <message>
-        <location filename="../../common/shell/CShell.cpp" line="42"/>
+        <location filename="../../common/shell/CShell.cpp" line="50"/>
         <source>Make sure the required packages are installed, `%1` exists and is executable.
 </source>
         <translation>Stellen Sie sicher, dass die erforderlichen Pakete installiert sind, `%1` existiert und ausführbar ist.
 </translation>
     </message>
     <message>
-        <location filename="../../common/shell/CShell.cpp" line="51"/>
+        <location filename="../../common/shell/CShell.cpp" line="59"/>
         <source>External process crashed.
 </source>
         <translation>Der externe Prozess ist abgestürzt.</translation>
     </message>
     <message>
-        <location filename="../../common/shell/CShell.cpp" line="55"/>
+        <location filename="../../common/shell/CShell.cpp" line="63"/>
         <source>An unknown error occurred.
 </source>
         <translation>Ein unbekannter Fehler ist aufgetreten.</translation>
     </message>
     <message>
-        <location filename="../../common/shell/CShell.cpp" line="133"/>
+        <location filename="../../common/shell/CShell.cpp" line="141"/>
         <source>!!! failed !!!
 </source>
         <translation>!!! fehlgeschlagen !!!</translation>
     </message>
     <message>
-        <location filename="../../common/shell/CShell.cpp" line="146"/>
+        <location filename="../../common/shell/CShell.cpp" line="154"/>
         <source>
 Canceled by user&apos;s request.
 </source>
@@ -8517,7 +8484,7 @@ Abgebrochen durch den Benutzer.
 </translation>
     </message>
     <message>
-        <location filename="../../common/shell/CShell.cpp" line="170"/>
+        <location filename="../../common/shell/CShell.cpp" line="177"/>
         <source>!!! done !!!
 </source>
         <translation>!!! erledigt !!!</translation>
@@ -8936,6 +8903,341 @@ Zeile %2, Spalte %3:
         <location filename="../gis/tnv/serialization.cpp" line="649"/>
         <source>Failed to read data.</source>
         <translation>Lesen der Daten fehlgeschlagen.</translation>
+    </message>
+</context>
+<context>
+    <name>CVrtAdvisoryDialog</name>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="44"/>
+        <source>Fix overviews</source>
+        <translation>Übersichtsebenen anpassen</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="45"/>
+        <source>Later</source>
+        <translation>Später</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="62"/>
+        <source>%1 × %2 px  ·  %3/px × %4/px  ·  %5 × %6</source>
+        <translation>%1 × %2 px  ·  %3/px × %4/px  ·  %5 × %6</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="71"/>
+        <source>⚠ This file references %1 source files. Reading gets inefficient past %2 - consider combining them into fewer files.</source>
+        <translation>⚠ Diese Datei verweist auf %1 Quelldateien. Ab %2 wird das Lesen ineffizient - fassen Sie sie in weniger Dateien zusammen.</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="78"/>
+        <source>Combine files...</source>
+        <translation>Dateien zusammenführen...</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="94"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="118"/>
+        <source>File</source>
+        <translation>Datei</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="94"/>
+        <source>Existing overview sizes (px)</source>
+        <translation>Vorhandene Übersichtsgrößen (px)</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="94"/>
+        <source>Status</source>
+        <translation>Status</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="118"/>
+        <source>New overview levels</source>
+        <translation>Neue Übersichtsstufen</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="118"/>
+        <source>Action</source>
+        <translation>Aktion</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="124"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="341"/>
+        <source>Clean + rebuild</source>
+        <translation>Bereinigen + neu erstellen</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="124"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="343"/>
+        <source>Build new</source>
+        <translation>Neu erstellen</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="139"/>
+        <source>Update &lt;OverviewList&gt;</source>
+        <translation>&lt;OverviewList&gt; aktualisieren</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="139"/>
+        <source>Add &lt;OverviewList&gt;</source>
+        <translation>&lt;OverviewList&gt; hinzufügen</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="188"/>
+        <source>%1 file(s) will have new overviews built</source>
+        <translation>Für %1 Datei(en) werden neue Übersichten erstellt</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="191"/>
+        <source>%1 file(s) will have existing overviews cleaned and rebuilt</source>
+        <translation>Für %1 Datei(en) werden vorhandene Übersichten bereinigt und neu erstellt</translation>
+    </message>
+    <message>
+        <source>. Estimated disk usage: %1.</source>
+        <translation type="vanished">. Geschätzter Speicherbedarf: %1.</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="198"/>
+        <source>Estimated disk usage: %1.</source>
+        <translation>Geschätzter Speicherbedarf: %1.</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="198"/>
+        <source>Disk usage: %1.</source>
+        <translation>Speicherbedarf: %1.</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="230"/>
+        <source>Overview info</source>
+        <translation>Übersichtsinfo</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="232"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="420"/>
+        <source>Close</source>
+        <translation>Schließen</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="242"/>
+        <source>none</source>
+        <translation>Keine</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="263"/>
+        <source>✓ covered by .ovr</source>
+        <translation>✓ durch .ovr abgedeckt</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="267"/>
+        <source>✗ None</source>
+        <translation>✗ Keine</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="271"/>
+        <source>⚠ Shallow (coarsest %1px)</source>
+        <translation>⚠ Unzureichend (gröbste %1px)</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="274"/>
+        <source>✓ OK</source>
+        <translation>✓ OK</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="282"/>
+        <source> (own .ovr)</source>
+        <translation> (eigene .ovr)</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="282"/>
+        <source> (via &lt;OverviewList&gt;)</source>
+        <translation> (über &lt;OverviewList&gt;)</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="320"/>
+        <source>gdaladdo not found</source>
+        <translation>gdaladdo nicht gefunden</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="321"/>
+        <source>Could not locate gdaladdo. Make sure the GDAL tools are installed and on PATH.</source>
+        <translation>gdaladdo konnte nicht gefunden werden. Stellen Sie sicher, dass die GDAL-Werkzeuge installiert und im PATH sind.</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="334"/>
+        <source>The following operations will be performed:</source>
+        <translation>Die folgenden Aktionen werden ausgeführt:</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="356"/>
+        <source>Update &amp;lt;OverviewList&amp;gt;</source>
+        <translation>&amp;lt;OverviewList&amp;gt; aktualisieren</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="358"/>
+        <source>Add &amp;lt;OverviewList&amp;gt;</source>
+        <translation>&amp;lt;OverviewList&amp;gt; hinzufügen</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="363"/>
+        <source>Confirm fix</source>
+        <translation>Aktion bestätigen</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="406"/>
+        <source>Removed %1.
+</source>
+        <translation>%1 entfernt.
+</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="428"/>
+        <source>GDAL tools not found</source>
+        <translation>GDAL-Werkzeuge nicht gefunden</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="429"/>
+        <source>Could not locate gdal_translate/gdalbuildvrt. Make sure the GDAL tools are installed and on PATH.</source>
+        <translation>gdal_translate/gdalbuildvrt konnte nicht gefunden werden. Stellen Sie sicher, dass die GDAL-Werkzeuge installiert und im PATH sind.</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="439"/>
+        <source>Could not read the raster layout of %1.</source>
+        <translation>Das Rasterlayout von %1 konnte nicht gelesen werden.</translation>
+    </message>
+    <message>
+        <source>Opening %1...</source>
+        <translation type="vanished">%1 wird geöffnet...</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="vanished">Abbrechen</translation>
+    </message>
+    <message>
+        <source>Combine files</source>
+        <translation type="vanished">Dateien zusammenführen</translation>
+    </message>
+    <message>
+        <source>Analyzing tile %1 of %2...</source>
+        <translation type="vanished">Kachel %1 von %2 wird analysiert...</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="438"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="452"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="486"/>
+        <source>Combine failed</source>
+        <translation>Zusammenführen fehlgeschlagen</translation>
+    </message>
+    <message>
+        <source>Could not open %1.</source>
+        <translation type="vanished">%1 konnte nicht geöffnet werden.</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="452"/>
+        <source>No data found in %1.</source>
+        <translation>Keine Daten in %1 gefunden.</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="465"/>
+        <source>This will split %1 into %2 compressed GeoTIFF(s) in %3, then rewrite %1 to reference them. The current file will be backed up as %4.</source>
+        <translation>%1 wird in %2 komprimierte GeoTIFF(s) in %3 aufgeteilt, %1 wird anschließend so umgeschrieben, dass es darauf verweist. Die aktuelle Datei wird als %4 gesichert.</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="469"/>
+        <source>%1 grid cell(s) contained no data and will be skipped.</source>
+        <translation>%1 Rasterzelle(n) enthielten keine Daten und werden übersprungen.</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="472"/>
+        <source>Confirm combine</source>
+        <translation>Zusammenführen bestätigen</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="486"/>
+        <source>Could not back up %1.</source>
+        <translation>%1 konnte nicht gesichert werden.</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="536"/>
+        <source>Abort</source>
+        <translation>Abbrechen</translation>
+    </message>
+    <message>
+        <source>Still analyzing %1 for Combine.
+
+Abort?</source>
+        <translation type="vanished">%1 wird für das Zusammenführen noch analysiert.
+
+Abbrechen?</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="537"/>
+        <source>An operation is in progress.
+
+Abort and remove any partially written files?</source>
+        <translation>Eine Aktion läuft gerade.
+
+Abbrechen und teilweise geschriebene Dateien entfernen?</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="585"/>
+        <source>Rebuilt %1&apos;s &lt;OverviewList&gt; from its source files.
+</source>
+        <translation>&lt;OverviewList&gt; von %1 anhand der Quelldateien neu erstellt.
+</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="587"/>
+        <source>Failed to update %1.
+</source>
+        <translation>%1 konnte nicht aktualisiert werden.
+</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="606"/>
+        <source>Restored %1 from backup.
+</source>
+        <translation>%1 aus der Sicherung wiederhergestellt.
+</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="608"/>
+        <source>Failed to restore %1 from backup - %2 is still available for manual recovery.
+</source>
+        <translation>%1 konnte nicht aus der Sicherung wiederhergestellt werden - %2 steht weiterhin zur manuellen Wiederherstellung zur Verfügung.
+</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="610"/>
+        <source>Restore failed</source>
+        <translation>Wiederherstellung fehlgeschlagen</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="611"/>
+        <source>Combine failed and %1 could not be automatically restored from its backup.
+
+Rename %2 back to %1 yourself to recover the original file.</source>
+        <translation>Zusammenführen fehlgeschlagen, und %1 konnte nicht automatisch aus der Sicherung wiederhergestellt werden.
+
+Benennen Sie %2 selbst in %1 um, um die Originaldatei wiederherzustellen.</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="622"/>
+        <source>Combined %1 source file(s) into %2 tile(s); %3 rewritten.
+</source>
+        <translation>%1 Quelldatei(en) zu %2 Kachel(n) zusammengeführt; %3 umgeschrieben.
+</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="630"/>
+        <source>Combine finished</source>
+        <translation>Zusammenführen abgeschlossen</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="631"/>
+        <source>%1 has been rewritten to reference %2 merged tile(s).
+
+The %3 original source file(s) are still in %4 - delete them yourself once you&apos;ve confirmed the merged file works as expected.</source>
+        <translation>%1 wurde so umgeschrieben, dass es auf %2 zusammengeführte Kachel(n) verweist.
+
+Die %3 ursprünglichen Quelldatei(en) befinden sich weiterhin in %4 - löschen Sie sie selbst, sobald Sie bestätigt haben, dass die zusammengeführte Datei wie erwartet funktioniert.</translation>
     </message>
 </context>
 <context>
@@ -14852,60 +15154,60 @@ nach der Höhe.</translation>
 <context>
     <name>IGisProject</name>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="172"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="177"/>
         <source>Save project?</source>
         <translation>Projekt speichern?</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="173"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="178"/>
         <source>&lt;h3&gt;%1&lt;/h3&gt;The project was changed. Save before closing it?</source>
         <translation>&lt;h3&gt;%1&lt;/h3&gt;Das Projekt wurde geändert. Speichern, bevor es geschlossen wird?</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="362"/>
-        <location filename="../gis/prj/IGisProject.cpp" line="410"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="367"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="415"/>
         <source>Save &quot;%1&quot; to...</source>
         <translation>Speichere &quot;%1&quot; nach...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="474"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="479"/>
         <source>&lt;br/&gt;
 Filename: %1</source>
         <translation>&lt;br/&gt;
 Dateiname: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="478"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="483"/>
         <source>Keywords: </source>
         <translation>Schlagworte: </translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="482"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="487"/>
         <source>Waypoints: %1</source>
         <translation>Wegpunkte: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="485"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="490"/>
         <source>Tracks: %1</source>
         <translation>Tracks: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="488"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="493"/>
         <source>Routes: %1</source>
         <translation>Routen: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="491"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="496"/>
         <source>Areas: %1</source>
         <translation>Gebiete: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="595"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="600"/>
         <source>Are you sure you want to delete &apos;%1&apos; from project &apos;%2&apos;?</source>
         <translation>Sind Sie sicher, dass Sie &apos;%1&apos; aus dem Projekt &apos;%2&apos; löschen wollen? </translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="596"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="601"/>
         <source>Delete...</source>
         <translation>Löschen...</translation>
     </message>
@@ -16533,28 +16835,20 @@ Alle Änderungen werden verloren gehen.</translation>
         <translation type="vanished">Übersichtsebenen für die zugrunde liegenden Quelldatei(en) erstellen:</translation>
     </message>
     <message>
-        <location filename="../helpers/IOverviewAdvisoryDialog.ui" line="14"/>
-        <location filename="../../../build/src/qmapshack/ui_IOverviewAdvisoryDialog.h" line="93"/>
         <source>Slow rendering — overview pyramids</source>
-        <translation>Langsame Darstellung — Übersichtspyramiden</translation>
+        <translation type="vanished">Langsame Darstellung — Übersichtspyramiden</translation>
     </message>
     <message>
-        <location filename="../helpers/IOverviewAdvisoryDialog.ui" line="23"/>
-        <location filename="../../../build/src/qmapshack/ui_IOverviewAdvisoryDialog.h" line="94"/>
         <source>&lt;b&gt;Current overview situation:&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Aktuelle Situation der Übersichtsebenen:&lt;/b&gt;</translation>
+        <translation type="vanished">&lt;b&gt;Aktuelle Situation der Übersichtsebenen:&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../helpers/IOverviewAdvisoryDialog.ui" line="37"/>
-        <location filename="../../../build/src/qmapshack/ui_IOverviewAdvisoryDialog.h" line="95"/>
         <source>&lt;b&gt;After fix:&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Nach der Behebung:&lt;/b&gt;</translation>
+        <translation type="vanished">&lt;b&gt;Nach der Behebung:&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../helpers/IOverviewAdvisoryDialog.ui" line="61"/>
-        <location filename="../../../build/src/qmapshack/ui_IOverviewAdvisoryDialog.h" line="97"/>
         <source>Don&apos;t show this again for this file</source>
-        <translation>Für diese Datei nicht mehr anzeigen</translation>
+        <translation type="vanished">Für diese Datei nicht mehr anzeigen</translation>
     </message>
 </context>
 <context>
@@ -20671,6 +20965,33 @@ einfach ein.</translation>
         <location filename="../../../build/src/qmapshack/ui_IUnitsSetup.h" line="135"/>
         <source>Imperial</source>
         <translation>imperial</translation>
+    </message>
+</context>
+<context>
+    <name>IVrtAdvisoryDialog</name>
+    <message>
+        <location filename="../helpers/IVrtAdvisoryDialog.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IVrtAdvisoryDialog.h" line="108"/>
+        <source>Slow rendering — overview pyramids</source>
+        <translation>Langsame Darstellung — Übersichtspyramiden</translation>
+    </message>
+    <message>
+        <location filename="../helpers/IVrtAdvisoryDialog.ui" line="46"/>
+        <location filename="../../../build/src/qmapshack/ui_IVrtAdvisoryDialog.h" line="111"/>
+        <source>&lt;b&gt;Current overview situation:&lt;/b&gt;</source>
+        <translation>&lt;b&gt;Aktuelle Situation der Übersichtsebenen:&lt;/b&gt;</translation>
+    </message>
+    <message>
+        <location filename="../helpers/IVrtAdvisoryDialog.ui" line="60"/>
+        <location filename="../../../build/src/qmapshack/ui_IVrtAdvisoryDialog.h" line="112"/>
+        <source>&lt;b&gt;After fix:&lt;/b&gt;</source>
+        <translation>&lt;b&gt;Nach der Behebung:&lt;/b&gt;</translation>
+    </message>
+    <message>
+        <location filename="../helpers/IVrtAdvisoryDialog.ui" line="84"/>
+        <location filename="../../../build/src/qmapshack/ui_IVrtAdvisoryDialog.h" line="114"/>
+        <source>Don&apos;t show this again for this file</source>
+        <translation>Für diese Datei nicht mehr anzeigen</translation>
     </message>
 </context>
 <context>

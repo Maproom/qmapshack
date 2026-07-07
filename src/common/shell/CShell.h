@@ -32,7 +32,7 @@
    Compiled into both the qmapshack and qmaptool targets (src/common/), but only
    qmaptool's IMainWindow.ui promotes a singleton instance (isSingleton=true, the
    default) - that's what makes self() safe there. qmapshack has no such instance;
-   COverviewAdvisoryDialog is the only place qmapshack constructs a CShell, and it does
+   CVrtAdvisoryDialog is the only place qmapshack constructs a CShell, and it does
    so with isSingleton=false specifically so it does NOT become self(). Do not call
    CShell::self() from qmapshack code - pSelf is never set there and self() dereferences
    it unconditionally.

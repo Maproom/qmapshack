@@ -34,8 +34,8 @@
 #include "grid/CGrid.h"
 #include "grid/CGridSetup.h"
 #include "helpers/CDraw.h"
-#include "helpers/COverviewAdvisoryDialog.h"
 #include "helpers/CSettings.h"
+#include "helpers/CVrtAdvisoryDialog.h"
 #include "helpers/CWptIconManager.h"
 #include "map/CMapDraw.h"
 #include "map/CMapVRT.h"
@@ -861,7 +861,7 @@ void CCanvas::slotToolTip() {
 }
 
 template <class T>
-COverviewAdvisoryDialog* CCanvas::showOverviewAdvisory(QPointer<T> source) {
+CVrtAdvisoryDialog* CCanvas::showOverviewAdvisory(QPointer<T> source) {
   if (source.isNull()) {
     return nullptr;
   }
@@ -872,7 +872,7 @@ COverviewAdvisoryDialog* CCanvas::showOverviewAdvisory(QPointer<T> source) {
   // dialog open for the same file while the first one (now orphaned) is still showing.
   // CCanvas already parents every dialog it opens (see below), so its own child list
   // doubles as the registry - no separate bookkeeping needed.
-  for (COverviewAdvisoryDialog* open : findChildren<COverviewAdvisoryDialog*>(Qt::FindDirectChildrenOnly)) {
+  for (CVrtAdvisoryDialog* open : findChildren<CVrtAdvisoryDialog*>(Qt::FindDirectChildrenOnly)) {
     if (open->filename() == filename) {
       open->raise();
       open->activateWindow();
@@ -882,7 +882,10 @@ COverviewAdvisoryDialog* CCanvas::showOverviewAdvisory(QPointer<T> source) {
 
   source->setAdvisoryOpen(true);
 
-  auto* dlg = new COverviewAdvisoryDialog(filename, source->getOverviewAdvice(), source->getRasterGeometry(), this);
+  auto* dlg = new CVrtAdvisoryDialog(filename, source->getOverviewAdvice(), source->getRasterGeometry(), this);
+  // Reflect the current suppress state so closing the dialog (e.g. after just opening
+  // "Overview Info...") writes back the same value instead of silently clearing it.
+  dlg->setSuppressChecked(source->suppressOverviewAdvisory());
   connect(dlg, &QDialog::finished, this, [dlg, source]() {
     if (source) {
       source->setSuppressOverviewAdvisory(dlg->suppressChecked());
@@ -895,14 +898,14 @@ COverviewAdvisoryDialog* CCanvas::showOverviewAdvisory(QPointer<T> source) {
 
 void CCanvas::slotShowDemOverviewAdvisory(QPointer<CDemVRT> source) {
   if (auto* dlg = showOverviewAdvisory(source)) {
-    connect(dlg, &COverviewAdvisoryDialog::sigFixItDone, this,
+    connect(dlg, &CVrtAdvisoryDialog::sigContainerRebuilt, this,
             []() { CDemDraw::setupDemPath(CDemDraw::getDemPaths()); });
   }
 }
 
 void CCanvas::slotShowMapOverviewAdvisory(QPointer<CMapVRT> source) {
   if (auto* dlg = showOverviewAdvisory(source)) {
-    connect(dlg, &COverviewAdvisoryDialog::sigFixItDone, this,
+    connect(dlg, &CVrtAdvisoryDialog::sigContainerRebuilt, this,
             []() { CMapDraw::setupMapPath(CMapDraw::getMapPaths()); });
   }
 }

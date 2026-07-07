@@ -92,6 +92,9 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent, bool supportsOvervie
     // DEM data is always single-band continuous elevation, never categorical/palette.
     // buildOverviewAdvice() logs its own "OVR: ..." diagnostics as it goes.
     overviewAdvice = CGdalVrtUtil::buildOverviewAdvice(dataset, pBand, /*isPaletteIndexed=*/false, suggestedLevels);
+    // Cache the immutable attention verdict once: showsOverviewWarning() is polled per
+    // paint/hover/scroll by the tree delegate, and needsAttention() walks every source file.
+    overviewNeedsAttention = overviewAdvice.needsAttention();
   }
 
   noData = pBand->GetNoDataValue(&hasNoData);
@@ -143,7 +146,7 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent, bool supportsOvervie
     // like with like regardless of any reprojection below. A warped VRT can change the
     // dataset's own pixel density (e.g. meters vs degrees), but that only matters for
     // draw()'s own decimation math, not for this real/discrete overview-factor advice.
-    if (overviewAdvice.needsAttention()) {
+    if (overviewNeedsAttention) {
       qDebug() << "OVR: assessment: needs attention - advisory will fire on slow render";
     } else {
       qDebug() << "OVR: assessment: OK";
@@ -178,8 +181,9 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent, bool supportsOvervie
     trFwd = trFwd * DEG_TO_RAD;
   }
 
-  // xscale/yscale are already real meters-per-pixel (see CGdalVrtUtil::toMeters() above).
-  rasterGeometry = {xsize_px, ysize_px, qAbs(xscale), qAbs(yscale)};
+  // The dialog's resolution/size line mirrors gdalinfo, so it comes from the pre-warp
+  // source (srcDataset when warped, else dataset) - not the warped grid above.
+  rasterGeometry = CGdalVrtUtil::sourceGeometry(srcDataset != nullptr ? srcDataset : dataset);
 
   trInv = trFwd.inverted();
 
@@ -403,8 +407,7 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf) {
 
     if (err != CE_None) {
       if (deadline.timedOut) {
-        CGdalVrtUtil::handleRenderTimeout(dem, this, supportsOverviewAdvisory && !advisoryState.suppress,
-                                          advisoryState);
+        CGdalVrtUtil::handleRenderTimeout(dem, this, showsOverviewWarning(), advisoryState);
       }
       return;
     }

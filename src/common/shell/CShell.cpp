@@ -50,7 +50,7 @@ void CShell::slotError(QProcess::ProcessError error) {
       insertPlainText(QString(tr("Make sure the required packages are installed, `%1` exists and is executable.\n"))
                           .arg(cmd.program()));
       // Qt does not emit finished() for FailedToStart — signal completion explicitly so
-      // callers waiting on sigFinishedJob (e.g. COverviewAdvisoryDialog) are not left stuck.
+      // callers waiting on sigFinishedJob (e.g. CVrtAdvisoryDialog) are not left stuck.
       jobSucceeded_ = false;
       emit sigFinishedJob(jobId);
       break;

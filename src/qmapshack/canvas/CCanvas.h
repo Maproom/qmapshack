@@ -33,7 +33,7 @@ class CMapVRT;
 class CGrid;
 class CDemDraw;
 class CDemVRT;
-class COverviewAdvisoryDialog;
+class CVrtAdvisoryDialog;
 class CPoiDraw;
 class QGestureEvent;
 class CGisDraw;
@@ -236,7 +236,7 @@ class CCanvas : public QWidget {
   /// identical getFilename()/getOverviewAdvice()/setSuppressOverviewAdvisory(bool) the
   /// dialog needs.
   template <class T>
-  COverviewAdvisoryDialog* showOverviewAdvisory(QPointer<T> source);
+  CVrtAdvisoryDialog* showOverviewAdvisory(QPointer<T> source);
 
   static QString generateKey(int count);
   void drawStatusMessages(QPainter& p);

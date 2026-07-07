@@ -87,24 +87,35 @@ class CGdalVrtUtil {
 
   /**
      @brief Dataset dimensions/pixel size, purely for the informational line
-            COverviewAdvisoryDialog shows above the overview tables - not used by the
+            CVrtAdvisoryDialog shows above the overview tables - not used by the
             overview-advisory logic above.
    */
   struct raster_geometry_t {
-    qint32 xsizePx = 0;   /**< Raster width in pixels (post-warp - the size actually drawn from). */
-    qint32 ysizePx = 0;   /**< Raster height in pixels (post-warp). */
-    qreal pixelSizeX = 0; /**< Real-world size of one pixel along x, in meters. For a geographic
-                              (lat/long) source CRS this is an approximation (see
-                              kMetersPerDegree) - the same one CDemVRT's own xscale/yscale
-                              already use for their own, different, purpose). */
+    qint32 xsizePx = 0;   /**< Source raster width in pixels (pre-warp - matches gdalinfo). */
+    qint32 ysizePx = 0;   /**< Source raster height in pixels (pre-warp). */
+    qreal pixelSizeX = 0; /**< Real-world size of one source pixel along x, in meters. Exact for a
+                              projected (meter) CRS - equals gdalinfo. For a geographic (lat/long)
+                              CRS it is the kMetersPerDegree approximation (degrees have no single
+                              meter equivalent). */
     qreal pixelSizeY = 0; /**< Same as pixelSizeX, along y. */
   };
+
+  /**
+     @brief Source-file raster geometry for the advisory dialog: the pre-warp dataset's own
+            size and pixel resolution, matching gdalinfo. Reads the source's own geotransform
+            and CRS, so a projected (meter) CRS gives exact meters; a geographic CRS gives the
+            kMetersPerDegree approximation. Returns a zero-initialised geometry if the dataset
+            has no geotransform.
+     @param source the ORIGINAL (pre-warp) dataset - srcDataset if a warp was created,
+                   otherwise the dataset itself
+   */
+  static raster_geometry_t sourceGeometry(GDALDataset* source);
 
   /**
      @brief The current overview situation and what's needed to fix slow rendering.
 
      Built by buildOverviewAdvice(); used by draw() (fire the advisory) and
-     COverviewAdvisoryDialog (show the situation/fix tables).
+     CVrtAdvisoryDialog (show the situation/fix tables).
    */
   struct overview_advice_t {
     QVector<qint32> containerOverviewSizes;    /**< The container's own verified overview pixel widths, sorted
@@ -124,8 +135,11 @@ class CGdalVrtUtil {
                                                     will build and what a rebuilt <OverviewList> will declare. */
     bool isPaletteIndexed = false;             /**< True for single-band palette/gray data: selects nearest-neighbour
                                                     resampling instead of average, to avoid blending palette index values. */
-    qint64 estimatedOverviewBytes = 0;         /**< Rough uncompressed pyramid size in bytes (sums to 1/3 of the base
-                                                    layer); real size is usually smaller thanks to compression. */
+    qint64 diskUsageBytes = 0;                 /**< Total on-disk footprint (sub-files + overviews). Real summed size
+                                                    when fully qualified; sub-files x 1 2/3 when overviews are shallow,
+                                                    missing or absent - see diskUsageIsEstimate. */
+    bool diskUsageIsEstimate = false;          /**< True when diskUsageBytes is the sub-files x 1 2/3 projection
+                                                    (overviews not yet fully built), false when it is the real total. */
 
     /// @brief Subfile count above which reading gets inefficient regardless of overviews.
     static constexpr qint32 kMaxSubfileCount = 50;
@@ -180,7 +194,7 @@ class CGdalVrtUtil {
                           decimation instead of average, to avoid blending index
                           values)
      @param suggestedLevels suggestOverviewLevels()'s result for dataset's size
-     @return advice ready for COverviewAdvisoryDialog
+     @return advice ready for CVrtAdvisoryDialog
    */
   static overview_advice_t buildOverviewAdvice(GDALDataset* dataset, GDALRasterBand* band, bool isPaletteIndexed,
                                                const QVector<qint32>& suggestedLevels);
@@ -210,7 +224,7 @@ class CGdalVrtUtil {
   struct read_deadline_t {
     IDrawContext* drawCtx;   /**< The owning CDemDraw/CMapDraw; same role as progressCallback()'s pProgressArg. */
     QElapsedTimer timer;     /**< Started once, right before the first ReadRaster() call of the draw(). */
-    qint64 timeoutMs = 5000; /**< Render timeout budget for the whole draw() call. */
+    qint64 timeoutMs = 5000; /**< Render timeout budget for the whole draw() call. 5s is deliberate. */
     bool timedOut = false;   /**< Set by progressCallbackWithDeadline() once timer exceeds timeoutMs;
                                   distinguishes a timeout abort from an ordinary superseded-redraw abort. */
   };
@@ -249,21 +263,18 @@ class CGdalVrtUtil {
      (CDemDraw::emitOverviewAdvisory(QPointer<CDemVRT>) vs.
      CMapDraw::emitOverviewAdvisory(QPointer<CMapVRT>) - there is no common base call).
 
-     `eligible` deliberately does not check overviewAdvice.needsAttention(): any render
-     timeout, whatever its actual cause, is worth raising the dialog for once, since the
-     user can check the overview situation even if it turns out something else made this
-     particular render slow. It only ever fires once per loaded instance
-     (shownThisSession), and a user who finds it unhelpful (e.g. slow rendering they've
-     already accepted for an unrelated reason) can permanently suppress it via the
-     dialog's checkbox.
+     `eligible` is the source's showsOverviewWarning() (== !suppress &&
+     overviewAdvice.needsAttention()), so a timeout only raises the dialog when there is
+     actually something to fix - a render that is slow for an unrelated reason no longer
+     pops it. It fires at most once per loaded instance (shownThisSession), and the user
+     can permanently suppress it via the dialog's checkbox.
      @param drawCtx owning CDemDraw/CMapDraw - taken by value (not DrawCtxT*) since
                     CDemVRT::dem is a raw CDemDraw* but CMapVRT::map is a QPointer<CMapDraw>;
                     both support operator->(), so a template parameter deduced from
                     whichever was passed works for either without forcing one shape.
      @param source  the CDemVRT/CMapVRT that just timed out
-     @param eligible supportsOverviewAdvisory (if applicable) && !state.suppress -
-                    intentionally independent of whether overviews are actually adequate,
-                    see above
+     @param eligible source's showsOverviewWarning() - only true when overviews actually
+                    need attention and the file isn't suppressed, see above
      @param state   source's overview_advisory_state_t
    */
   template <class DrawCtxT, class SourceT>

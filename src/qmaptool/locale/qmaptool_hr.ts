@@ -531,49 +531,49 @@ is not a valid coordinate system definition:
 <context>
     <name>CShell</name>
     <message>
-        <location filename="../../common/shell/CShell.cpp" line="38"/>
+        <location filename="../../common/shell/CShell.cpp" line="46"/>
         <source>Execution of external program `%1` failed: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../common/shell/CShell.cpp" line="41"/>
+        <location filename="../../common/shell/CShell.cpp" line="49"/>
         <source>Process cannot be started.
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../common/shell/CShell.cpp" line="42"/>
+        <location filename="../../common/shell/CShell.cpp" line="50"/>
         <source>Make sure the required packages are installed, `%1` exists and is executable.
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../common/shell/CShell.cpp" line="51"/>
+        <location filename="../../common/shell/CShell.cpp" line="59"/>
         <source>External process crashed.
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../common/shell/CShell.cpp" line="55"/>
+        <location filename="../../common/shell/CShell.cpp" line="63"/>
         <source>An unknown error occurred.
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../common/shell/CShell.cpp" line="133"/>
+        <location filename="../../common/shell/CShell.cpp" line="141"/>
         <source>!!! failed !!!
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../common/shell/CShell.cpp" line="146"/>
+        <location filename="../../common/shell/CShell.cpp" line="154"/>
         <source>
 Canceled by user&apos;s request.
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../common/shell/CShell.cpp" line="170"/>
+        <location filename="../../common/shell/CShell.cpp" line="177"/>
         <source>!!! done !!!
 </source>
         <translation type="unfinished"></translation>

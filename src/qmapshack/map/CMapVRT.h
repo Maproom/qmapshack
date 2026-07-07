@@ -68,10 +68,12 @@ class CMapVRT : public IMap {
 
   /// @brief Set by the overview advisory dialog's "don't show again for this file" checkbox.
   void setSuppressOverviewAdvisory(bool yes) { advisoryState.suppress = yes; }
+  /// @brief Current "don't show again" state; seeds the dialog checkbox so an open+close round-trips.
+  bool suppressOverviewAdvisory() const { return advisoryState.suppress; }
   /// @brief Set true while the advisory dialog is open; suppresses draw retries during that time.
   void setAdvisoryOpen(bool yes) { advisoryState.open = yes; }
 
-  bool showsOverviewWarning() const override { return !advisoryState.suppress && overviewAdvice.needsAttention(); }
+  bool showsOverviewWarning() const override { return !advisoryState.suppress && overviewNeedsAttention; }
   bool hasOverviewInfo() const override { return true; }
 
  private:
@@ -179,6 +181,8 @@ class CMapVRT : public IMap {
   /// suggested gdaladdo command(s), computed once at construction from the dataset's own
   /// characteristics; reused (never re-derived) whenever draw() hits the render timeout
   CGdalVrtUtil::overview_advice_t overviewAdvice;
+  /// Cached overviewAdvice.needsAttention() - immutable after setup; polled per paint by the tree delegate.
+  bool overviewNeedsAttention = false;
 
   /// Suppression/session/open-dialog bookkeeping for the overview advisory; identical
   /// shape shared with CDemVRT, see CGdalVrtUtil::overview_advisory_state_t.

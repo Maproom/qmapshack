@@ -90,7 +90,8 @@ class IMapItem {
   /**
    * @brief Open the overview advisory dialog for this item's active data source. No-op
    *        unless hasOverviewInfo() is true; shows an informational read-only view when
-   *        showsOverviewWarning() is false, the full fix-it view otherwise.
+   *        showsOverviewWarning() is false, the full advisory view (with whichever fix
+   *        actions apply) otherwise.
    */
   virtual void triggerOverviewAdvisory() {}
 

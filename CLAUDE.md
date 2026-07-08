@@ -205,6 +205,17 @@ Do not run `cmake --build` or any build command — Oliver builds externally.
 
 Do not add `Co-Authored-By` lines to commit messages.
 
+### IDrawContext — logical vs device pixels (HiDPI)
+
+`convertRad2Px()`/`convertPx2Rad()` work in **logical** viewport pixels (built from `center` and
+`scale*zoomFactor`) so they match Qt mouse/widget coordinates. The draw **buffers** are **device**
+pixels: `bufWidth/bufHeight = viewWidth/viewHeight * pixelRatio + 2*BUFFER_BORDER`, and `draw()`
+divides the scale by `pixelRatio`. Never compare a `convertRad2Px()` result against `bufWidth`/
+`bufHeight` — they only agree at `pixelRatio == 1`. Use `viewWidth`/`viewHeight` for viewport-fit
+tests (this caused QMS-1142: zoom-to-track clipped on HiDPI). Test HiDPI paths on a normal screen
+with `QT_SCALE_FACTOR=2 build/bin/qmapshack` (add `QT_SCALE_FACTOR_ROUNDING_POLICY=PassThrough`
+for fractional factors like 1.5).
+
 ### CMapItemDelegate — forward declaration pitfall
 
 `animations_t` is defined after `getAnimations()` in the private section. The forward

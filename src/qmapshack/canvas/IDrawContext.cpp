@@ -184,8 +184,10 @@ void IDrawContext::zoom(const QRectF& rect) {
     convertRad2Px(pt1);
     convertRad2Px(pt2);
 
+    // convertRad2Px() yields logical pixels, so compare against the logical
+    // viewport size, not the device-pixel buffer (bufWidth/bufHeight scale with pixelRatio)
     QPointF pt = pt2 - pt1;
-    if (qAbs(pt.x()) < (bufWidth - 2 * BUFFER_BORDER) && (qAbs(pt.y()) < (bufHeight - 2 * BUFFER_BORDER))) {
+    if (qAbs(pt.x()) < viewWidth && qAbs(pt.y()) < viewHeight) {
       break;
     }
   }

@@ -23,6 +23,7 @@
 #include <QtWidgets>
 
 #include "CMainWindow.h"
+#include "canvas/CCanvas.h"
 #include "device/CDeviceGarminMtp.h"
 #include "device/CDeviceGenericMtp.h"
 #include "device/IDevice.h"
@@ -116,8 +117,12 @@ void IGisProject::destroyLater() {
   QMetaObject::invokeMethod(
       &CGisWorkspace::self(),
       [this]() {
-        QMutexLocker lock(&IGisItem::mutexItems);
-        delete this;
+        {
+          QMutexLocker lock(&IGisItem::mutexItems);
+          delete this;
+        }
+        // The project's items are gone only now. Redraw so they leave the map.
+        CCanvas::triggerCompleteUpdate(CCanvas::eRedrawGis);
       },
       Qt::QueuedConnection);
 }

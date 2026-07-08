@@ -54,9 +54,23 @@ IDrawContext::IDrawContext(const QString& name, CCanvas::redraw_e maskRedraw, CC
   resize(canvas->size());
   connect(this, &IDrawContext::finished, canvas, static_cast<void (CCanvas::*)()>(&CCanvas::update));
   connect(this, &IDrawContext::finished, this, &IDrawContext::sigStopThread);
+  connect(this, &IDrawContext::finished, this, &IDrawContext::slotRestartIfNeeded);
 }
 
 IDrawContext::~IDrawContext() {}
+
+void IDrawContext::slotRestartIfNeeded() {
+  mutex.lock();
+  const bool needed = intNeedsRedraw;
+  mutex.unlock();
+
+  // draw() skips start() while the thread is still running, so a redraw requested
+  // right as run() exited would be lost. Pick it up once the thread has stopped.
+  if (needed && !isRunning()) {
+    emit sigStartThread();
+    start();
+  }
+}
 
 void IDrawContext::emitSigCanvasUpdate() { emit sigCanvasUpdate(maskRedraw); }
 

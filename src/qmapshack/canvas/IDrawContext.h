@@ -152,6 +152,10 @@ class IDrawContext : public QThread {
  public slots:
   void emitSigCanvasUpdate();
 
+ private slots:
+  /// Restart the draw thread if a redraw was requested while it was exiting.
+  void slotRestartIfNeeded();
+
  protected:
   void run() override;
   /**

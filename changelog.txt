@@ -8,6 +8,7 @@ V1.XX.X
 [QMS-1125] Use GDAL's warp and scale API to draw *.vrt maps
 [QMS-1128] Enhance VRT handling for maps and DEM
 [QMS-1132] Add action to move a map to the top in map list (macOS)
+[QMS-1140] Fix: Broken TMS map zooming
 
 V1.20.3
 [QMS-1059] Fix: F1 help browser does not open external links

@@ -343,8 +343,11 @@ void CMapTMS::draw(IDrawContext::buffer_t& buf) /* override */
     qreal diff = pt2.x() - pt1.x();
     qreal width = diff >= 0 ? diff : diff + 2 * C;
     qint32 z = std::round(std::log2(2 * C / (width / buf.image.width() * layer.tileSizePx)));
-    z = qMax(z, layer.minZoomLevel);
-    if (z > layer.maxZoomLevel) {
+    // min/maxZoomLevel are inverted (1 = slippy z 20); convert to slippy levels
+    const qint32 zMax = 21 - layer.minZoomLevel;
+    const qint32 zMin = 21 - layer.maxZoomLevel;
+    z = qMin(z, zMax);
+    if (z < zMin) {
       continue;
     }
     int n = (1 << z);

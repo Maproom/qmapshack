@@ -113,6 +113,11 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent, bool supportsOvervie
     psOptions->pProgressArg = dem;
     psOptions->pfnProgress = &CGdalVrtUtil::progressCallback;
 
+    // warp resampling is CPU-bound and parallelizes across chunks; without this it runs
+    // single-threaded (matches gdalwarp -multi -wo NUM_THREADS=ALL_CPUS). The parallelism
+    // stays inside a single ReadRaster() call, so it doesn't conflict with the read mutex.
+    psOptions->papszWarpOptions = CSLSetNameValue(psOptions->papszWarpOptions, "NUM_THREADS", "ALL_CPUS");
+
     dataset = GDALDataset::FromHandle(GDALAutoCreateWarpedVRT(
         GDALDataset::ToHandle(srcDataset), nullptr, targetSRS.exportToWkt().c_str(), GRA_Bilinear, 0.1, psOptions));
 

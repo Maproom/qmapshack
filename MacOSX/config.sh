@@ -169,7 +169,7 @@ else
     export ROUTINO_RELEASE="3.4.3"
     export ROUTINO_DEV_PATH=$LOCAL_ENV
     if [ "$BUILD_GDAL" = "x" ]; then
-        export GDAL_RELEASE="3.12"
+        export GDAL_RELEASE="3.13"
         export GDAL=$LOCAL_ENV
     else
         export GDAL=$PACKAGES_PATH

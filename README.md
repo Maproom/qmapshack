@@ -54,9 +54,9 @@
 | Library | Minimum version | Purpose |
 |---|---|---|
 | [Qt6](https://www.qt.io/) | 6.8 | Core, Widgets, Network, SQL, PrintSupport, WebEngineWidgets |
-| [GDAL](https://gdal.org/) | 3.0.0 | Map and raster data I/O |
-| [PROJ](https://proj.org/) | 9.1.0 | Coordinate reference system transformations |
-| [Routino](http://www.routino.org/) | 3.1 | Offline routing |
+| [GDAL](https://gdal.org/) | 3.10.0 | Map and raster data I/O |
+| [PROJ](https://proj.org/) | 9.4.0 | Coordinate reference system transformations |
+| [Routino](http://www.routino.org/) | 3.4 | Offline routing |
 | [QuaZip](https://github.com/stachenov/quazip) | 1.x (Qt6 build) | ZIP archive support |
 | CMake | 3.20 | Build system |
 | C++20 compiler | — | GCC ≥ 10, Clang ≥ 12, MSVC 2019 |

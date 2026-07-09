@@ -18,10 +18,9 @@
 
 #include "setup/IAppSetup.h"
 
-#include <cpl_conv.h>
-#include <gdal.h>
-
 #include <QFont>
+
+#include <gdal.h>
 
 #if defined(Q_OS_MAC)
 #include "setup/CAppSetupMac.h"
@@ -67,10 +66,6 @@ void IAppSetup::prepareGdal(QString gdalDataDir, QString gdalPluginsDir, QString
   }
 
   GDALAllRegister();
-
-  // multithreaded block decompression (GTiff etc.) for direct reads, and the default
-  // thread count for the warp engine (CMapVRT/CDemVRT set NUM_THREADS explicitly too)
-  CPLSetConfigOption("GDAL_NUM_THREADS", "ALL_CPUS");
 }
 
 QString IAppSetup::path(QString path, QString subdir, bool mkdir, QString debugName) {
@@ -129,4 +124,5 @@ void IAppSetup::processArguments() {
     if (fontSize > 0.) appFont.setPointSizeF(fontSize);
   }
   qApp->setFont(appFont);
+
 }

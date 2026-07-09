@@ -18,6 +18,7 @@
 
 #include "gis/gpx/CGpxProject.h"
 
+#include <QSet>
 #include <QtWidgets>
 
 #include "CMainWindow.h"
@@ -128,6 +129,10 @@ void CGpxProject::loadGpx(QFile& file, const QString& filename, CGpxProject* pro
 
   // Read all attributes and find any registrations for actually known extensions.
   // This is used to properly detect valid .gpx files using uncommon namespaces.
+  QSet<QString> knownNamespaceUris = {gpx_ns, xsi_ns};
+  for (const namespace_decl_t& ns : extensionNamespaces()) {
+    knownNamespaceUris.insert(ns.uri);
+  }
   QDomNamedNodeMap attributes = xmlGpx.attributes();
   for (int i = 0; i < attributes.size(); ++i) {
     const QString xmlns("xmlns");
@@ -140,6 +145,10 @@ void CGpxProject::loadGpx(QFile& file, const QString& filename, CGpxProject* pro
         CKnownExtension::initGarminTPXv1(IUnit::self(), ns);
       } else if (att.value() == gpxdata_ns) {
         CKnownExtension::initClueTrustTPXv1(IUnit::self(), ns);
+      }
+
+      if (!knownNamespaceUris.contains(att.value())) {
+        project->extraNamespaces[ns] = att.value();
       }
     }
   }

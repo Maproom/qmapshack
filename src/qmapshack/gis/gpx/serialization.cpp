@@ -41,6 +41,19 @@ const QString IGisProject::gs_ns = "http://www.groundspeak.com/cache/1/0";
 const QString IGisProject::tp1_ns = "http://www.garmin.com/xmlschemas/TrackPointExtension/v1";
 const QString IGisProject::gpxdata_ns = "http://www.cluetrust.com/XML/GPXDATA/1/0";
 
+const QList<IGisProject::namespace_decl_t>& IGisProject::extensionNamespaces() {
+  static const QList<namespace_decl_t> namespaces = {
+      {"gpxx", gpxx_ns},
+      {"gpxtpx", gpxtpx_ns},
+      {"wptx1", wptx1_ns},
+      {"rmc", rmc_ns},
+      {"ql", ql_ns},
+      {"tp1", tp1_ns},
+      {"gpxdata", gpxdata_ns},
+  };
+  return namespaces;
+}
+
 static void readXml(const QDomNode& xml, const QString& tag, qint32& value) {
   if (xml.namedItem(tag).isElement()) {
     bool ok = false;
@@ -387,13 +400,13 @@ QDomNode IGisProject::writeMetadata(QDomDocument& doc, bool strictGpx11) {
 
   QString schemaLocation;
   if (!strictGpx11) {
-    gpx.setAttribute("xmlns:gpxx", gpxx_ns);
-    gpx.setAttribute("xmlns:gpxtpx", gpxtpx_ns);
-    gpx.setAttribute("xmlns:wptx1", wptx1_ns);
-    gpx.setAttribute("xmlns:rmc", rmc_ns);
-    gpx.setAttribute("xmlns:ql", ql_ns);
-    gpx.setAttribute("xmlns:tp1", tp1_ns);
-    gpx.setAttribute("xmlns:gpxdata", gpxdata_ns);
+    for (const namespace_decl_t& ns : extensionNamespaces()) {
+      gpx.setAttribute("xmlns:" + ns.prefix, ns.uri);
+    }
+
+    for (auto it = extraNamespaces.cbegin(); it != extraNamespaces.cend(); ++it) {
+      gpx.setAttribute("xmlns:" + it.key(), it.value());
+    }
 
     schemaLocation = QString() + gpx_ns + " http://www.topografix.com/GPX/1/1/gpx.xsd " + gpxx_ns +
                      " http://www.garmin.com/xmlschemas/GpxExtensionsv3.xsd " + gpxtpx_ns +

@@ -34,18 +34,11 @@ bool CGdalVrtUtil::allReferencedFilesExist(GDALDataset* dataset, QString& missin
   char** fileList = dataset->GetFileList();
   bool allExist = true;
   for (qint32 n = 0; fileList != nullptr && fileList[n] != nullptr; ++n) {
-#if defined(Q_OS_WIN32)
-    missingFile = QString::fromLocal8Bit(fileList[n]);
-    if (QFileInfo::exists(missingFile)) {
-      continue;
-    }
-#endif  // defined(Q_OS_WIN32)
     missingFile = QString::fromUtf8(fileList[n]);
-    if (QFileInfo::exists(missingFile)) {
-      continue;
+    if (!QFileInfo::exists(missingFile)) {
+      allExist = false;
+      break;
     }
-    allExist = false;
-    break;
   }
   CSLDestroy(fileList);
   return allExist;
@@ -88,12 +81,17 @@ struct probed_source_t {
   QVector<qint32> sizes;
 };
 
+/// @brief Open a path read-only. GDAL filenames are UTF-8.
+GDALDatasetUniquePtr openReadOnly(const QString& path) {
+  return GDALDatasetUniquePtr(GDALDataset::FromHandle(GDALOpen(path.toUtf8().constData(), GA_ReadOnly)));
+}
+
 /// @brief Open path and probe its own overview sizes (native to path's own pixel grid -
 ///        no rescaling into the container's pixel grid is needed; GDAL matches overviews
 ///        to the requested read resolution itself, gdalwarp's "-ovr AUTO"). Also records
 ///        the source's own width (for meetsTarget()).
-probed_source_t probeSource(const char* path) {
-  GDALDatasetUniquePtr sub(GDALDataset::FromHandle(GDALOpen(path, GA_ReadOnly)));
+probed_source_t probeSource(const QString& path) {
+  GDALDatasetUniquePtr sub = openReadOnly(path);
   GDALRasterBand* subBand = sub ? sub->GetRasterBand(1) : nullptr;
   if (subBand == nullptr) {
     return {};
@@ -219,7 +217,7 @@ CGdalVrtUtil::overview_advice_t CGdalVrtUtil::buildOverviewAdvice(GDALDataset* d
         continue;
       }
       sawAnySource = true;
-      const probed_source_t probed = probeSource(file.toUtf8().constData());
+      const probed_source_t probed = probeSource(file);
       if (probed.sizes.isEmpty()) {
         allSourcesHaveOverviews = false;
       }

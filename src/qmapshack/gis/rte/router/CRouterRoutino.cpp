@@ -32,12 +32,6 @@
 #include "helpers/CSettings.h"
 #include "setup/IAppSetup.h"
 
-#ifdef Q_OS_WIN
-#define ROUTINO_PATH_ENCODING toLocal8Bit()
-#else
-#define ROUTINO_PATH_ENCODING toUtf8()
-#endif
-
 QPointer<CProgressDialog> CRouterRoutino::progress;
 
 int ProgressFunc(double complete) {
@@ -76,7 +70,7 @@ CRouterRoutino::CRouterRoutino(QWidget* parent) : IRouter(true, parent) {
 
   int res = 0;
   IAppSetup* setup = IAppSetup::getPlatformInstance();
-  res = Routino_ParseXMLTranslations(setup->routinoPath("translations.xml").ROUTINO_PATH_ENCODING);
+  res = Routino_ParseXMLTranslations(setup->routinoPath("translations.xml").toUtf8());
   if (res) {
     QMessageBox::critical(this, "Routino...", xlateRoutinoError(Routino_errno), QMessageBox::Abort);
     return;
@@ -249,7 +243,7 @@ void CRouterRoutino::buildDatabaseList() {
 
       // qDebug() << "buildDatabase Prefix" << prefix;
 
-      Routino_Database* data = Routino_LoadDatabase(dir.absolutePath().ROUTINO_PATH_ENCODING, prefix.ROUTINO_PATH_ENCODING);
+      Routino_Database* data = Routino_LoadDatabase(dir.absolutePath().toUtf8(), prefix.toUtf8());
       qDebug() << "Loaded Routino DB" << dir.absolutePath().toUtf8().data() << "  " << prefix.toUtf8().data();
 
       if (data == nullptr) {
@@ -316,7 +310,7 @@ int CRouterRoutino::loadProfiles(const QString& profilesPath) {
   int res = 0;
   if (currentProfilesPath != profilesPath) {
     currentProfilesPath = profilesPath;
-    res = Routino_ParseXMLProfiles(profilesPath.ROUTINO_PATH_ENCODING);
+    res = Routino_ParseXMLProfiles(profilesPath.toUtf8());
   }
   return res;
 }
@@ -355,11 +349,11 @@ void CRouterRoutino::calcRoute(const IGisItem::key_t& key) {
     QString strProfile = comboProfile->currentData(Qt::UserRole).toString();
     QString strLanguage = comboLanguage->currentData(Qt::UserRole).toString();
 
-    Routino_Profile* profile = Routino_GetProfile(strProfile.ROUTINO_PATH_ENCODING);
+    Routino_Profile* profile = Routino_GetProfile(strProfile.toUtf8());
     if (profile == NULL) {
       throw tr("Required profile '%1' is not in the current profiles file.").arg(strProfile);
     }
-    Routino_Translation* translation = Routino_GetTranslation(strLanguage.ROUTINO_PATH_ENCODING);
+    Routino_Translation* translation = Routino_GetTranslation(strLanguage.toUtf8());
 
     int res = Routino_ValidateProfile(data, profile);
     if (res != 0) {
@@ -395,7 +389,8 @@ void CRouterRoutino::calcRoute(const IGisItem::key_t& key) {
     delete progress;
 
     if (nullptr != route) {
-      rte->setResultFromRoutino(route, getOptions() + tr("<br/>Calculation time: %1s").arg(time.elapsed() / 1000.0, 0, 'f', 2));
+      rte->setResultFromRoutino(
+          route, getOptions() + tr("<br/>Calculation time: %1s").arg(time.elapsed() / 1000.0, 0, 'f', 2));
       Routino_DeleteRoute(route);
     } else {
       if (Routino_errno != ROUTINO_ERROR_PROGRESS_ABORTED) {
@@ -430,11 +425,11 @@ int CRouterRoutino::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& c
     QString strProfile = comboProfile->currentData(Qt::UserRole).toString();
     QString strLanguage = comboLanguage->currentData(Qt::UserRole).toString();
 
-    Routino_Profile* profile = Routino_GetProfile(strProfile.ROUTINO_PATH_ENCODING);
+    Routino_Profile* profile = Routino_GetProfile(strProfile.toUtf8());
     if (profile == NULL) {
       throw tr("Required profile '%1' is not in the current profiles file.").arg(strProfile);
     }
-    Routino_Translation* translation = Routino_GetTranslation(strLanguage.ROUTINO_PATH_ENCODING);
+    Routino_Translation* translation = Routino_GetTranslation(strLanguage.toUtf8());
 
     int res = Routino_ValidateProfile(data, profile);
     if (res != 0) {

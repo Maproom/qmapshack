@@ -13,7 +13,7 @@ V1.XX.X
 [QMS-1140] Fix: Broken TMS map zooming
 [QMS-1141] Fix: Unchecking database item does not remove it from map
 [QMS-1142] Fix: Zoom fails to show complete track
-
+[QMS-1149] Fix: Build error on platform Windows
 
 V1.20.3
 [QMS-1059] Fix: F1 help browser does not open external links

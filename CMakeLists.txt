@@ -202,8 +202,20 @@ qt_standard_project_setup(
     I18N_TRANSLATED_LANGUAGES ca cs de es fr it nl ru
 )
 
-if(${PROJ_VERSION} VERSION_LESS 8.0.0)
-    message( SEND_ERROR "You need at least PROJ 8.0.0 or newer.")
+# Minimum dependency versions (see issue #1123). The floor is the newest release
+# available on Nov 6, 2024 (GDAL 3.10.0's date): GDAL 3.10 is a hard requirement -
+# CDemVRT uses OGRSpatialReference::exportToWkt() (GDAL 3.9) and
+# GDALRasterBand::ReadRaster() (GDAL 3.10). PROJ 9.4 predates that date and is
+# required for consistency. Qt stays at 6.8 (6.9/6.10 are newer than the cutoff, so
+# not required). Routino has no configure-time release version - only its API
+# version in routino.h - so its 3.4 floor is left to the existing runtime API check
+# (CRouterRoutino.cpp).
+if(${GDAL_VERSION} VERSION_LESS 3.10.0)
+    message( SEND_ERROR "You need at least GDAL 3.10.0 or newer.")
+endif()
+
+if(${PROJ_VERSION} VERSION_LESS 9.4.0)
+    message( SEND_ERROR "You need at least PROJ 9.4.0 or newer.")
 endif()
 
 if(USE_QT6DBus)

@@ -475,6 +475,16 @@ class IGisProject : public IWksItem {
   static const QString xsi_ns;
   static const QString gpxdata_ns;
 
+  struct namespace_decl_t {
+    QString prefix;  ///< without "xmlns:", e.g. "gpxx"
+    QString uri;
+  };
+
+  /**
+     @brief The extension namespaces (prefix + URI) writeMetadata() declares on a non-strict GPX file.
+   */
+  static const QList<namespace_decl_t>& extensionNamespaces();
+
   static QString keyUserFocus;
 
   QPointer<CDetailsPrj> dlgDetails;
@@ -491,6 +501,8 @@ class IGisProject : public IWksItem {
   bool autoSyncToDevPending = false;  ///< flag to show that a sync to device is already pending
 
   metadata_t metadata;
+  /// passthrough xmlns:* declarations (prefix -> URI) found on the loaded GPX root that are not one of the namespaces above
+  QMap<QString, QString> extraNamespaces;
   QString nameSuffix;
 
   sorting_roadbook_e sortingRoadbook = eSortRoadbookNone;

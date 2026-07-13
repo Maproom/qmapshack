@@ -447,3 +447,25 @@ handful of large, compressed/tiled GeoTIFFs instead of its many small source fil
 `IAppSetup::getPlatformInstance()->findExecutable("toolname")` — never hard-code a bare name.
 `CAppSetupWin` restricts `PATH` to the app directory to prevent DLL conflicts, so a bare name
 silently produces `QProcess::FailedToStart` on Windows if the binary isn't co-located with the app.
+
+### Follow-up (QMS-1156): convert non-UTF-8 VRT files to UTF-8 on load
+
+Since QMS-1153 (UTF-8 process manifest) + QMS-1139 (removed the encoding workarounds), GDAL
+receives filenames as UTF-8 everywhere. A guard rejects `.vrt` files whose bytes aren't valid
+UTF-8, but that dead-ends users with legacy Windows-1252/Latin-1 VRTs. Follow-up ticket QMS-1156:
+offer a confirmed, `.bak`-backed one-click conversion instead of just rejecting.
+
+Verified GDAL facts (tested on 3.12) behind the design:
+- GDAL's CPL XML parser **ignores the VRT `<?xml encoding?>` declaration** — `<SourceFilename>`
+  bytes go to `open()` verbatim. Even a correctly-declared `ISO-8859-1` VRT fails. Only raw bytes
+  matter, so a byte-level UTF-8 check has no false-rejection risk.
+- On-disk source names are UTF-8, so transcoding a Latin-1 VRT reproduces the real names.
+- GDAL doesn't hard-fail a bad path (exit 0, checksum -1, `ERROR 4` on stderr) — a quietly-broken
+  dataset, which is what feeds the missing-file advisory / endless loop.
+
+Design: transcode from candidate encodings (Windows-1252 → ISO-8859-1 → system ANSI), then
+**verify by resolution** (every `<SourceFilename>` must now exist on disk) — never a blind guess;
+first candidate that resolves all sources wins, else fall back to plain rejection. Trigger at load
+time in `CMapVRT`/`CDemVRT` construction (a non-UTF-8 VRT never constructs, so the advisory dialog
+can't be the entry point), reusing the advisory `.bak`/rewrite scaffolding. Non-platform-gated
+(failure reproduced on Linux). Also rewrite the `<?xml encoding?>` declaration to UTF-8 for hygiene.

@@ -37,6 +37,13 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent, bool supportsOvervie
   qDebug() << "------------------------------";
   qDebug() << "VRT: try to open" << filename;
 
+  if (!CGdalVrtUtil::isFileUtf8(filename)) {
+    QMessageBox::warning(
+        CMainWindow::getBestWidgetForParent(), tr("Error..."),
+        tr("File is not UTF-8 encoded and cannot be loaded. Convert it to UTF-8 first:") % '\n' % filename);
+    return;
+  }
+
   dataset = GDALDataset::FromHandle(GDALOpen(filename.toUtf8(), GA_ReadOnly));
   if (nullptr == dataset) {
     QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."),

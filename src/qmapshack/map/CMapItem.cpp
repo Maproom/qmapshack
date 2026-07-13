@@ -178,6 +178,9 @@ void CMapItem::deactivate() {
   QSettings cfg(file.fileName(), QSettings::IniFormat);
   mapfile->saveConfig(cfg);
   configToShadowConfig(cfg);
+  // Record the deactivated intent: the map's own saveConfig() writes no isActive key,
+  // so without this a reload keeps the stale on-disk isActive=true and re-activates.
+  shadowConfig["isActive"] = false;
 
   // remove mapfile setup dialog as child of this item
   showChildren(false);
@@ -220,6 +223,9 @@ bool CMapItem::activate() {
 
   // no mapfiles loaded? Bad.
   if (mapfile.isNull()) {
+    // Present file that failed to load: clear the re-arm flag so it isn't retried
+    // (and re-warned) on every restart. The missing-drive case exits earlier via QFile::exists().
+    shadowConfig["isActive"] = false;
     setStatus(IMapItem::eStatus::Inactive);
     return false;
   }
@@ -228,6 +234,7 @@ bool CMapItem::activate() {
   // else delete all previous loaded maps and abort
   if (!mapfile->activated()) {
     delete mapfile;
+    shadowConfig["isActive"] = false;
     setStatus(IMapItem::eStatus::Inactive);
     return false;
   }

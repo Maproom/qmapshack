@@ -22,18 +22,23 @@
 #include <gdal_priv.h>
 
 #include <QDebug>
+#include <QFile>
 #include <QFileInfo>
 #include <QGuiApplication>
 #include <QScreen>
+#include <QStringConverter>
 #include <QStringList>
 #include <algorithm>
 
 #include "canvas/IDrawContext.h"
 
 bool CGdalVrtUtil::allReferencedFilesExist(GDALDataset* dataset, QString& missingFile) {
-  char** fileList = dataset->GetFileList();
   bool allExist = true;
-  for (qint32 n = 0; fileList != nullptr && fileList[n] != nullptr; ++n) {
+  char** fileList = dataset->GetFileList();
+  if (fileList == nullptr) {
+    return allExist;
+  }
+  for (qint32 n = 0; fileList[n] != nullptr; ++n) {
     missingFile = QString::fromUtf8(fileList[n]);
     if (!QFileInfo::exists(missingFile)) {
       allExist = false;
@@ -42,6 +47,18 @@ bool CGdalVrtUtil::allReferencedFilesExist(GDALDataset* dataset, QString& missin
   }
   CSLDestroy(fileList);
   return allExist;
+}
+
+bool CGdalVrtUtil::isFileUtf8(const QString& filename) {
+  QFile file(filename);
+  if (!file.open(QIODevice::ReadOnly)) {
+    return true;  // unreadable: let GDALOpen() surface the failure
+  }
+  QStringDecoder decoder(QStringConverter::Utf8);
+  // Materialize into a QString: the decode is lazy and only sets hasError() once consumed.
+  const QString decoded = decoder(file.readAll());
+  Q_UNUSED(decoded)
+  return !decoder.hasError();
 }
 
 namespace {

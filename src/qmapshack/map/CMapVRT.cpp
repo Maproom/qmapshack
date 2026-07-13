@@ -41,6 +41,11 @@ CMapVRT::CMapVRT(const QString& filename, CMapDraw* parent) : IMap(eFeatVisibili
   qDebug() << "------------------------------";
   qDebug() << "VRT: try to open" << filename;
 
+  if (!CGdalVrtUtil::isFileUtf8(filename)) {
+    fail(tr("File is not UTF-8 encoded and cannot be loaded. Convert it to UTF-8 first:") % '\n' % filename);
+    return;
+  }
+
   dataset = GDALDataset::FromHandle(GDALOpen(filename.toUtf8(), GA_ReadOnly));
   if (nullptr == dataset) {
     fail(tr("Failed to load file:") % '\n' % filename);

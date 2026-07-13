@@ -177,6 +177,9 @@ void CDemItem::deactivate() {
   QSettings cfg(file.fileName(), QSettings::IniFormat);
   demfile->saveConfig(cfg);
   configToShadowConfig(cfg);
+  // Record the deactivated intent: the DEM's own saveConfig() writes no isActive key,
+  // so without this a reload keeps the stale on-disk isActive=true and re-activates.
+  shadowConfig["isActive"] = false;
 
   // remove demfile setup dialog as child of this item
   showChildren(false);
@@ -207,6 +210,9 @@ bool CDemItem::activate() {
 
   // no demfile loaded? Bad.
   if (demfile.isNull()) {
+    // Present file that failed to load: clear the re-arm flag so it isn't retried
+    // (and re-warned) on every restart. The missing-drive case exits earlier via QFile::exists().
+    shadowConfig["isActive"] = false;
     setStatus(eStatus::Inactive);
     return false;
   }
@@ -215,6 +221,7 @@ bool CDemItem::activate() {
   // else delete all previous loaded DEMs and abort
   if (!demfile->activated()) {
     delete demfile;
+    shadowConfig["isActive"] = false;
     setStatus(eStatus::Inactive);
     return false;
   }

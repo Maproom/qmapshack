@@ -11,6 +11,7 @@ V1.XX.X
 [QMS-1128] Enhance VRT handling for maps and DEM
 [QMS-1132] Add action to move a map to the top in map list (macOS)
 [QMS-1135] Add guidance to improve overviews for DEM and map VRT
+[QMS-1139] Reject non-UTF-8 encoded VRT files with a clear error message
 [QMS-1140] Fix: Broken TMS map zooming
 [QMS-1141] Fix: Unchecking database item does not remove it from map
 [QMS-1142] Fix: Zoom fails to show complete track

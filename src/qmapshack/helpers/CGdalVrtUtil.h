@@ -60,6 +60,17 @@ class CGdalVrtUtil {
   static bool allReferencedFilesExist(GDALDataset* dataset, QString& missingFile);
 
   /**
+     @brief Check that a VRT file's bytes are valid UTF-8.
+
+     GDAL passes a VRT's <SourceFilename> bytes to the OS verbatim - it ignores the XML
+     encoding declaration - so a non-UTF-8 (e.g. legacy Latin-1) VRT resolves to broken
+     paths. Rejecting it up front gives a clear message instead of a garbled
+     "file does not exist". Returns true if the file cannot be read; the caller's
+     GDALOpen() then reports that failure itself.
+   */
+  static bool isFileUtf8(const QString& filename);
+
+  /**
      @brief One referenced source file's own overview state; see overview_advice_t::perFileInfo.
    */
   struct file_overview_info_t {

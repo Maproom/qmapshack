@@ -305,12 +305,15 @@ bool CMapItemDelegate::editorEvent(QEvent* event, QAbstractItemModel* model, con
       }
       if (item->getStatus() != IMapItem::eStatus::Missing) {
         const bool activate = item->getStatus() != IMapItem::eStatus::Active;
-        if (activate) {
+        item->activate(activate);
+        // Reconcile the indicator with the real outcome: activation can fail (e.g. a
+        // rejected VRT) and leave the item inactive, so the bar must follow the final
+        // status rather than the optimistic click intent.
+        if (item->getStatus() == IMapItem::eStatus::Active) {
           showIndicator(index);
         } else {
           hideIndicator(index);
         }
-        item->activate(activate);
       }
       return true;
     }

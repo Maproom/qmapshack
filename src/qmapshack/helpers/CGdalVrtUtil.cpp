@@ -49,16 +49,55 @@ bool CGdalVrtUtil::allReferencedFilesExist(GDALDataset* dataset, QString& missin
   return allExist;
 }
 
-bool CGdalVrtUtil::isFileUtf8(const QString& filename) {
+int CGdalVrtUtil::isFileUtf8(const QString& filename) {
   QFile file(filename);
   if (!file.open(QIODevice::ReadOnly)) {
-    return true;  // unreadable: let GDALOpen() surface the failure
+    return 0;  // unreadable: let GDALOpen() surface the failure
   }
   QStringDecoder decoder(QStringConverter::Utf8);
   // Materialize into a QString: the decode is lazy and only sets hasError() once consumed.
-  const QString decoded = decoder(file.readAll());
+  const QByteArray byteArray = file.readAll();
+  const QString decoded = decoder(byteArray);
   Q_UNUSED(decoded)
-  return !decoder.hasError();
+  file.close();
+  if (!decoder.hasError()) {
+    return 0;
+  }
+  if (!QFileInfo(filename).isWritable()) {
+    // File not writable -> no transcoding possible
+    return -1;
+  }
+
+  QByteArray utf8ByteArray;
+#if defined(Q_OS_WIN32)
+  if (utf8ByteArray.isEmpty()) {
+    // Try Windows system-wide active code page (ACP)
+    const QString& codec("windows-" % QSettings("HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Nls\\CodePage",
+                                                QSettings::NativeFormat)
+                                          .value("ACP")
+                                          .toString());
+    QStringDecoder decoder(codec);
+    const QString& decoded = decoder(byteArray);
+    if (decoder.isValid() && !decoder.hasError()) {
+      utf8ByteArray = QStringEncoder(QStringEncoder::Utf8)(decoded);
+      qDebug() << "File" << filename << "is" << codec << "encoded";
+    }
+  }
+#endif  // defined(Q_OS_WIN32)
+  if (utf8ByteArray.isEmpty()) {
+    // Try next encoding (to be implemented!)
+  }
+
+  if (!utf8ByteArray.isEmpty() && file.copy(filename % ".bak") && file.open(QIODevice::WriteOnly)) {
+    // Preserve backup file .bak and replace original data by UTF-8 transcoded
+    file.write(utf8ByteArray);
+    file.close();
+    qDebug() << "File" << filename << "has been UTF-8 transcoded";
+    return 1;
+  }
+
+  // Transcoding failed
+  return -1;
 }
 
 namespace {

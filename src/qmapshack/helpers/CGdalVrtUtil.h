@@ -65,10 +65,14 @@ class CGdalVrtUtil {
      GDAL passes a VRT's <SourceFilename> bytes to the OS verbatim - it ignores the XML
      encoding declaration - so a non-UTF-8 (e.g. legacy Latin-1) VRT resolves to broken
      paths. Rejecting it up front gives a clear message instead of a garbled
-     "file does not exist". Returns true if the file cannot be read; the caller's
+     "file does not exist". Returns 0 if the file cannot be read; the caller's
      GDALOpen() then reports that failure itself.
+
+     @return -1 file is not UTF-8 and cannot be transcoded
+     @return  0 file is UTF-8 or cannot be read
+     @return +1 file is UTF-8 after being transcoded
    */
-  static bool isFileUtf8(const QString& filename);
+  static int isFileUtf8(const QString& filename);
 
   /**
      @brief One referenced source file's own overview state; see overview_advice_t::perFileInfo.

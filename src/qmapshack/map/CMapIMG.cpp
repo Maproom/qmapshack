@@ -331,47 +331,92 @@ BLPath qPathToBLPath(const QPainterPath& pp) {
   return path;
 }
 
-/**
-   @brief Lay @p text out left-to-right from the origin into a single BLPath.
+/// The coloured glyph outline plus a pre-built white halo (the glyph unioned with its eight
+/// ±1 px neighbours). Both are tessellated once and cached; drawing is then two path fills.
+struct GlyphPaths {
+  BLPath glyph;
+  BLPath halo;
+};
 
-   Glyph mapping is cmap-only (no complex shaping) via QRawFont, which keeps Qt's font
-   matching while emitting outlines Blend2D can fill. The glyph origin (0,0) is the pen
-   position on the baseline, matching QPainter::drawText().
- */
-BLPath buildTextPath(const QRawFont& raw, const QString& text) {
-  BLPath path;
-  const QList<quint32> glyphs = raw.glyphIndexesForString(text);
-  const QList<QPointF> advances = raw.advancesForGlyphIndexes(glyphs);
-  QPointF pen(0, 0);
-  for (qsizetype i = 0; i < glyphs.size(); ++i) {
-    const QPainterPath gp = raw.pathForGlyph(glyphs[i]);
-    if (!gp.isEmpty()) {
-      path.add_path(qPathToBLPath(gp), BLPoint(pen.x(), pen.y()));
-    }
-    pen += advances[i];
-  }
-  return path;
+/// A resolved QRawFont together with its per-glyph outline cache.
+struct FontGlyphs {
+  QRawFont raw;
+  QHash<quint32, GlyphPaths> glyphs;
+};
+
+/// Signature identifying a QFont for glyph-cache lookup (only attributes that affect the
+/// resolved outlines matter).
+quint64 fontKey(const QFont& f) {
+  return quint64(qHashMulti(0, f.family(), f.pointSize(), f.pixelSize(), int(f.weight()), f.italic(), f.styleName()));
 }
 
 /**
-   @brief Fill a glyph(-run) path with the white 8-neighbour halo, then the coloured text.
+   @brief Resolve @p font to a QRawFont and its glyph cache, memoised per thread.
 
-   Offsets are applied in the current context transform space, so a caller drawing under a
-   rotated transform gets a correctly rotated halo. The same path is reused for all nine
-   fills (tessellated once), each placed via fill_path()'s origin argument.
+   QRawFont::fromFont() (Qt's font matching) and the per-glyph outline extraction are the
+   expensive parts of text drawing, and both are immutable for a given font, so they are
+   cached across frames. The cache is thread-local: draw() is serialised per render thread,
+   so no locking is needed and independent canvases never share (or race on) an entry.
  */
-void fillGlyphHalo(BLContext& ctx, const BLPath& glyphs, const BLPoint& base, BLRgba32 fill, BLRgba32 halo) {
+FontGlyphs& fontGlyphsFor(const QFont& font) {
+  thread_local QHash<quint64, FontGlyphs> cache;
+  const quint64 key = fontKey(font);
+  auto it = cache.find(key);
+  if (it == cache.end()) {
+    FontGlyphs fg;
+    fg.raw = QRawFont::fromFont(font);
+    it = cache.insert(key, fg);
+  }
+  return it.value();
+}
+
+/// Fetch (building on first use) the cached outline + halo for a single glyph. The halo is
+/// the union of the glyph shifted by its eight ±1 px neighbours, filled once under non-zero
+/// winding — visually identical to eight separate offset draws but a single rasterisation.
+const GlyphPaths& glyphPathsFor(FontGlyphs& fg, quint32 glyphIndex) {
+  auto it = fg.glyphs.find(glyphIndex);
+  if (it == fg.glyphs.end()) {
+    GlyphPaths gp;
+    gp.glyph = qPathToBLPath(fg.raw.pathForGlyph(glyphIndex));
+    static const BLPoint offsets[8] = {{-1, -1}, {0, -1}, {1, -1}, {-1, 0}, {1, 0}, {-1, 1}, {0, 1}, {1, 1}};
+    for (const BLPoint& o : offsets) {
+      gp.halo.add_path(gp.glyph, o);
+    }
+    it = fg.glyphs.insert(glyphIndex, gp);
+  }
+  return it.value();
+}
+
+/**
+   @brief Lay @p text out left-to-right from the origin into cached glyph + halo paths.
+
+   Glyph mapping is cmap-only (no complex shaping) via QRawFont, which keeps Qt's font
+   matching while emitting outlines Blend2D can fill. The glyph origin (0,0) is the pen
+   position on the baseline, matching QPainter::drawText(). Per-glyph outlines come from the
+   cache, so a repeated word only tessellates each distinct glyph once.
+ */
+GlyphPaths buildTextRun(FontGlyphs& fg, const QString& text) {
+  GlyphPaths run;
+  const QList<quint32> glyphs = fg.raw.glyphIndexesForString(text);
+  const QList<QPointF> advances = fg.raw.advancesForGlyphIndexes(glyphs);
+  QPointF pen(0, 0);
+  for (qsizetype i = 0; i < glyphs.size(); ++i) {
+    const GlyphPaths& gp = glyphPathsFor(fg, glyphs[i]);
+    const BLPoint at(pen.x(), pen.y());
+    run.glyph.add_path(gp.glyph, at);
+    run.halo.add_path(gp.halo, at);
+    pen += advances[i];
+  }
+  return run;
+}
+
+/// Fill @p gp's white halo then its coloured glyph(s) at @p base — two path fills. Callers
+/// must have selected BL_FILL_RULE_NON_ZERO (the halo union relies on it).
+void fillGlyphRun(BLContext& ctx, const GlyphPaths& gp, const BLPoint& base, BLRgba32 fill, BLRgba32 halo) {
   ctx.set_fill_style(halo);
-  ctx.fill_path(BLPoint(base.x - 1, base.y - 1), glyphs);
-  ctx.fill_path(BLPoint(base.x, base.y - 1), glyphs);
-  ctx.fill_path(BLPoint(base.x + 1, base.y - 1), glyphs);
-  ctx.fill_path(BLPoint(base.x - 1, base.y), glyphs);
-  ctx.fill_path(BLPoint(base.x + 1, base.y), glyphs);
-  ctx.fill_path(BLPoint(base.x - 1, base.y + 1), glyphs);
-  ctx.fill_path(BLPoint(base.x, base.y + 1), glyphs);
-  ctx.fill_path(BLPoint(base.x + 1, base.y + 1), glyphs);
+  ctx.fill_path(base, gp.halo);
   ctx.set_fill_style(fill);
-  ctx.fill_path(base, glyphs);
+  ctx.fill_path(base, gp.glyph);
 }
 }  // namespace
 
@@ -2200,33 +2245,35 @@ void CMapIMG::drawPois(BLContext& ctx, pointtype_t& pts, QVector<QRectF>& rectPo
 }
 
 void CMapIMG::drawLabels(BLContext& ctx, const QVector<strlbl_t>& lbls) {
+  // See drawText(): non-zero winding for glyph outlines and the unioned halo.
+  ctx.set_fill_rule(BL_FILL_RULE_NON_ZERO);
+
   QFont f = CMainWindow::self().getMapFont();
   QVector<QFont> fonts(8, f);
   fonts[CGarminTyp::eSmall].setPointSize(f.pointSize() - 2);
   fonts[CGarminTyp::eLarge].setPointSize(f.pointSize() + 2);
 
-  // One QRawFont per label type, built on first use (QRawFont::fromFont is not free).
-  QVector<QRawFont> rawFonts(fonts.size());
   const BLRgba32 halo = toBLColor(Qt::white);
 
   for (const strlbl_t& lbl : lbls) {
     const int type = lbl.property.labelType;
-    if (!rawFonts[type].isValid()) {
-      rawFonts[type] = QRawFont::fromFont(fonts[type]);
-    }
+    FontGlyphs& fg = fontGlyphsFor(fonts[type]);
 
     // Match CDraw::text()'s placement: centre the metrics bounding box on the anchor and
     // use its top-left as the baseline-left pen origin.
     QRect r = QFontMetrics(fonts[type]).boundingRect(lbl.str);
     r.moveCenter(lbl.pt);
 
-    const BLPath glyphs = buildTextPath(rawFonts[type], lbl.str);
+    const GlyphPaths run = buildTextRun(fg, lbl.str);
     const BLRgba32 fill = toBLColor(lbl.isNight ? lbl.property.colorLabelNight : lbl.property.colorLabelDay);
-    fillGlyphHalo(ctx, glyphs, BLPoint(r.left(), r.top()), fill, halo);
+    fillGlyphRun(ctx, run, BLPoint(r.left(), r.top()), fill, halo);
   }
 }
 
 void CMapIMG::drawText(BLContext& ctx) {
+  // Glyph outlines want non-zero winding (drawPolygons leaves the context on even-odd), and
+  // the cached halo is a union of offset copies that only fills correctly under non-zero.
+  ctx.set_fill_rule(BL_FILL_RULE_NON_ZERO);
 
   for (const textpath_t& textpath : std::as_const(textpaths)) {
     QPainterPath path;
@@ -2256,9 +2303,11 @@ void CMapIMG::drawText(BLContext& ctx) {
     }
 
     fm = QFontMetricsF(font);
-    // Layout still uses QFontMetricsF (above); the glyph outlines are rasterised by
-    // Blend2D from QRawFont, which keeps Qt's font matching at the same resolved size.
-    const QRawFont raw = QRawFont::fromFont(font);
+    // Layout still uses QFontMetricsF (above); glyph outlines are rasterised by Blend2D from
+    // QRawFont (cached across frames), keeping Qt's font matching at the same resolved size.
+    // Glyph ids for the whole label are looked up once here rather than per character.
+    FontGlyphs& fg = fontGlyphsFor(font);
+    const QList<quint32> glyphIds = fg.raw.glyphIndexesForString(textpath.text);
     const BLRgba32 fill = toBLColor(textpath.color);
     const BLRgba32 halo = toBLColor(Qt::white);
 
@@ -2316,8 +2365,9 @@ void CMapIMG::drawText(BLContext& ctx) {
       ctx.rotate(angle);
       ctx.translate(0, -(textpath.lineWidth + 2));
 
-      const BLPath glyphs = buildTextPath(raw, text.mid(i, 1));
-      fillGlyphHalo(ctx, glyphs, BLPoint(0, 0), fill, halo);
+      if (i < glyphIds.size()) {
+        fillGlyphRun(ctx, glyphPathsFor(fg, glyphIds[i]), BLPoint(0, 0), fill, halo);
+      }
 
       ctx.restore();
 

@@ -28,7 +28,7 @@
          </property>
          <property name="icon">
           <iconset resource="../../../resources.qrc">
-           <normaloff>:/icons/32x32/Add.png</normaloff>:/icons/32x32/Add.png</iconset>
+           <normaloff>:/icons/Add.svgt</normaloff>:/icons/Add.svgt</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -48,7 +48,7 @@
          </property>
          <property name="icon">
           <iconset resource="../../../resources.qrc">
-           <normaloff>:/icons/32x32/DeleteMultiple.png</normaloff>:/icons/32x32/DeleteMultiple.png</iconset>
+           <normaloff>:/icons/DeleteMultiple.svgt</normaloff>:/icons/DeleteMultiple.svgt</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -78,18 +78,12 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QLabel" name="label">
+      <widget class="QSvgWidget" name="label">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="pixmap">
-        <pixmap resource="../../../resources.qrc">:/icons/48x48/Help.png</pixmap>
        </property>
       </widget>
      </item>
@@ -120,6 +114,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QSvgWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">QSvgWidget</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="../../../../resources.qrc"/>
  </resources>

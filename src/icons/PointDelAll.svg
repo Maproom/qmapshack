@@ -2,44 +2,19 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="64px"
-   height="64px"
+   width="57"
+   height="57.00948"
    id="svg3408"
    version="1.1"
-   inkscape:version="0.91 r13725"
-   sodipodi:docname="PointDelAll.svg">
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <style
+     id="current-color-scheme">.lead{color:#000000}</style>
   <defs
      id="defs3410" />
-  <sodipodi:namedview
-     id="base"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageopacity="0.0"
-     inkscape:pageshadow="2"
-     inkscape:zoom="5.5"
-     inkscape:cx="-19.818182"
-     inkscape:cy="32"
-     inkscape:current-layer="layer1"
-     showgrid="true"
-     inkscape:document-units="px"
-     inkscape:grid-bbox="true"
-     inkscape:window-width="1920"
-     inkscape:window-height="989"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
-     inkscape:window-maximized="1">
-    <inkscape:grid
-       type="xygrid"
-       id="grid4137" />
-  </sodipodi:namedview>
   <metadata
      id="metadata3413">
     <rdf:RDF>
@@ -54,26 +29,21 @@
   </metadata>
   <g
      id="layer1"
-     inkscape:label="Layer 1"
-     inkscape:groupmode="layer">
+     transform="translate(-4,-2.9905215)">
     <path
-       style="fill:#b3b3b3;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 5,59 0,-10 10.090909,-9.727273 0.363636,-25 9.727273,-0.181818 L 25.181818,4 44.454545,4.1818182 50,9 60,9 60,19.363636 C 60,34 60,39 60,49 l 0,10 z"
+       style="fill:#b3b3b3;fill-rule:evenodd;stroke:currentColor;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 5,59 V 49 l 10.090909,-9.727273 0.363636,-25 9.727273,-0.181818 V 4 L 44.454545,4.1818182 50,9 H 60 V 19.363636 C 60,34 60,39 60,49 v 10 z"
        id="path4139"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="ccccccccccccc" />
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:21.23931313px;line-height:125%;font-family:Sans;-inkscape-font-specification:Sans;letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="-12.47047"
-       y="71.622498"
+       class="lead" />
+    <g
+       aria-label="+"
+       transform="matrix(0.72874008,-0.72874008,0.68611569,0.68611569,0,0)"
        id="text4315"
-       sodipodi:linespacing="125%"
-       transform="matrix(0.72874008,-0.72874008,0.68611569,0.68611569,0,0)"><tspan
-         sodipodi:role="line"
-         id="tspan4317"
-         x="-12.47047"
-         y="71.622498"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:59.735569px;font-family:Sans;-inkscape-font-specification:'Sans Bold';fill:#ff0000">+</tspan></text>
+       style="line-height:0%;-inkscape-font-specification:Sans;letter-spacing:0px;word-spacing:0px;fill:#ff0000;stroke-width:1px">
+      <path
+         d="M 7.7798978,47.369844 H 19.069926 v 6.391709 H 7.7798978 V 64.991846 H 1.3881887 V 53.761553 H -9.9018396 V 47.369844 H 1.3881887 V 36.02008 h 6.3917091 z"
+         style="font-weight:bold;font-size:59.7356px;line-height:1.25;-inkscape-font-specification:'Sans Bold'"
+         id="path11" />
+    </g>
   </g>
 </svg>

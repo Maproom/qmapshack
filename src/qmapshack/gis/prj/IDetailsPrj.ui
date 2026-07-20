@@ -95,8 +95,8 @@
        </property>
        <property name="icon">
         <iconset resource="../../resources.qrc">
-         <normaloff>:/icons/32x32/UnLock.png</normaloff>
-         <normalon>:/icons/32x32/Lock.png</normalon>:/icons/32x32/UnLock.png</iconset>
+         <normaloff>:/icons/UnLock.svgt</normaloff>
+         <normalon>:/icons/Lock.svgt</normalon>:/icons/UnLock.svgt</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -119,7 +119,7 @@
        </property>
        <property name="icon">
         <iconset resource="../../resources.qrc">
-         <normaloff>:/icons/32x32/Print.png</normaloff>:/icons/32x32/Print.png</iconset>
+         <normaloff>:/icons/Print.svgt</normaloff>:/icons/Print.svgt</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -139,7 +139,7 @@
        </property>
        <property name="icon">
         <iconset resource="../../resources.qrc">
-         <normaloff>:/icons/32x32/Reset.png</normaloff>:/icons/32x32/Reset.png</iconset>
+         <normaloff>:/icons/Reset.svgt</normaloff>:/icons/Reset.svgt</iconset>
        </property>
        <property name="iconSize">
         <size>

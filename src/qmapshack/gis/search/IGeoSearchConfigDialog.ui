@@ -26,15 +26,12 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
-         <widget class="QLabel" name="labelNominatimIcon">
+         <widget class="QSvgWidget" name="labelNominatimIcon">
           <property name="sizePolicy">
-           <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
-          </property>
-          <property name="pixmap">
-           <pixmap resource="../../resources.qrc">:/icons/48x48/SearchNominatim.png</pixmap>
           </property>
          </widget>
         </item>
@@ -108,18 +105,12 @@
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_5">
           <item>
-           <widget class="QLabel" name="labelGeonamesIcon">
+           <widget class="QSvgWidget" name="labelGeonamesIcon">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="Maximum" vsizetype="Minimum">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="pixmap">
-             <pixmap resource="../../resources.qrc">:/icons/48x48/SearchGeonames.png</pixmap>
             </property>
            </widget>
           </item>
@@ -179,18 +170,12 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_3">
         <item>
-         <widget class="QLabel" name="label">
+         <widget class="QSvgWidget" name="label">
           <property name="sizePolicy">
-           <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-          <property name="pixmap">
-           <pixmap resource="../../resources.qrc">:/icons/48x48/SearchGoogle.png</pixmap>
           </property>
          </widget>
         </item>
@@ -232,6 +217,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QSvgWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">QSvgWidget</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="../../resources.qrc"/>
  </resources>

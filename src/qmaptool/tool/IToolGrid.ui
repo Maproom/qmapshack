@@ -32,21 +32,12 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
-      <widget class="QLabel" name="label_2">
+      <widget class="QSvgWidget" name="label_2">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Maximum" vsizetype="Minimum">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="pixmap">
-        <pixmap resource="../resources.qrc">:/icons/32x32/GridTool.png</pixmap>
-       </property>
-       <property name="scaledContents">
-        <bool>false</bool>
        </property>
       </widget>
      </item>
@@ -100,7 +91,7 @@
        </property>
        <property name="icon">
         <iconset resource="../resources.qrc">
-         <normaloff>:/icons/32x32/Check.png</normaloff>:/icons/32x32/Check.png</iconset>
+         <normaloff>:/icons/Check.svgt</normaloff>:/icons/Check.svgt</iconset>
        </property>
       </widget>
      </item>
@@ -111,7 +102,7 @@
        </property>
        <property name="icon">
         <iconset resource="../resources.qrc">
-         <normaloff>:/icons/32x32/Cancel.png</normaloff>:/icons/32x32/Cancel.png</iconset>
+         <normaloff>:/icons/Cancel.svgt</normaloff>:/icons/Cancel.svgt</iconset>
        </property>
       </widget>
      </item>
@@ -135,7 +126,7 @@
        </property>
        <property name="icon">
         <iconset resource="../resources.qrc">
-         <normaloff>:/icons/32x32/Reload.png</normaloff>:/icons/32x32/Reload.png</iconset>
+         <normaloff>:/icons/Reload.svgt</normaloff>:/icons/Reload.svgt</iconset>
        </property>
       </widget>
      </item>
@@ -144,6 +135,11 @@
   </layout>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>QSvgWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">QSvgWidget</header>
+  </customwidget>
   <customwidget>
    <class>COverlayGridTool</class>
    <extends>QWidget</extends>

@@ -345,7 +345,7 @@
   <action name="actionUndo">
    <property name="icon">
     <iconset resource="../resources.qrc">
-     <normaloff>:/icons/32x32/Undo.png</normaloff>:/icons/32x32/Undo.png</iconset>
+     <normaloff>:/icons/Undo.svgt</normaloff>:/icons/Undo.svgt</iconset>
    </property>
    <property name="text">
     <string>Undo</string>
@@ -357,7 +357,7 @@
   <action name="actionRedo">
    <property name="icon">
     <iconset resource="../resources.qrc">
-     <normaloff>:/icons/32x32/Redo.png</normaloff>:/icons/32x32/Redo.png</iconset>
+     <normaloff>:/icons/Redo.svgt</normaloff>:/icons/Redo.svgt</iconset>
    </property>
    <property name="text">
     <string>Redo</string>
@@ -369,7 +369,7 @@
   <action name="actionCut">
    <property name="icon">
     <iconset resource="../resources.qrc">
-     <normaloff>:/icons/32x32/Cut.png</normaloff>:/icons/32x32/Cut.png</iconset>
+     <normaloff>:/icons/Cut.svgt</normaloff>:/icons/Cut.svgt</iconset>
    </property>
    <property name="text">
     <string>Cut</string>
@@ -381,7 +381,7 @@
   <action name="actionCopy">
    <property name="icon">
     <iconset resource="../resources.qrc">
-     <normaloff>:/icons/32x32/Copy.png</normaloff>:/icons/32x32/Copy.png</iconset>
+     <normaloff>:/icons/Copy.svgt</normaloff>:/icons/Copy.svgt</iconset>
    </property>
    <property name="text">
     <string>Copy</string>
@@ -404,7 +404,7 @@
    </property>
    <property name="icon">
     <iconset resource="../resources.qrc">
-     <normaloff>:/icons/32x32/TextLeft.png</normaloff>:/icons/32x32/TextLeft.png</iconset>
+     <normaloff>:/icons/TextLeft.svgt</normaloff>:/icons/TextLeft.svgt</iconset>
    </property>
    <property name="text">
     <string>Align Left</string>
@@ -419,7 +419,7 @@
    </property>
    <property name="icon">
     <iconset resource="../resources.qrc">
-     <normaloff>:/icons/32x32/TextRight.png</normaloff>:/icons/32x32/TextRight.png</iconset>
+     <normaloff>:/icons/TextRight.svgt</normaloff>:/icons/TextRight.svgt</iconset>
    </property>
    <property name="text">
     <string>Align Right</string>
@@ -434,7 +434,7 @@
    </property>
    <property name="icon">
     <iconset resource="../resources.qrc">
-     <normaloff>:/icons/32x32/TextCenter.png</normaloff>:/icons/32x32/TextCenter.png</iconset>
+     <normaloff>:/icons/TextCenter.svgt</normaloff>:/icons/TextCenter.svgt</iconset>
    </property>
    <property name="text">
     <string>Align Center</string>
@@ -449,7 +449,7 @@
    </property>
    <property name="icon">
     <iconset resource="../resources.qrc">
-     <normaloff>:/icons/32x32/TextJustified.png</normaloff>:/icons/32x32/TextJustified.png</iconset>
+     <normaloff>:/icons/TextJustified.svgt</normaloff>:/icons/TextJustified.svgt</iconset>
    </property>
    <property name="text">
     <string>Align Block</string>
@@ -464,7 +464,7 @@
    </property>
    <property name="icon">
     <iconset resource="../resources.qrc">
-     <normaloff>:/icons/32x32/TextUnderlined.png</normaloff>:/icons/32x32/TextUnderlined.png</iconset>
+     <normaloff>:/icons/TextUnderlined.svgt</normaloff>:/icons/TextUnderlined.svgt</iconset>
    </property>
    <property name="text">
     <string>Underline</string>
@@ -479,7 +479,7 @@
    </property>
    <property name="icon">
     <iconset resource="../resources.qrc">
-     <normaloff>:/icons/32x32/TextBold.png</normaloff>:/icons/32x32/TextBold.png</iconset>
+     <normaloff>:/icons/TextBold.svgt</normaloff>:/icons/TextBold.svgt</iconset>
    </property>
    <property name="text">
     <string>Bold</string>
@@ -494,7 +494,7 @@
    </property>
    <property name="icon">
     <iconset resource="../resources.qrc">
-     <normaloff>:/icons/32x32/TextItalic.png</normaloff>:/icons/32x32/TextItalic.png</iconset>
+     <normaloff>:/icons/TextItalic.svgt</normaloff>:/icons/TextItalic.svgt</iconset>
    </property>
    <property name="text">
     <string>Italic</string>
@@ -509,7 +509,7 @@
    </property>
    <property name="icon">
     <iconset resource="../resources.qrc">
-     <normaloff>:/icons/32x32/PastePlain.png</normaloff>:/icons/32x32/PastePlain.png</iconset>
+     <normaloff>:/icons/PastePlain.svgt</normaloff>:/icons/PastePlain.svgt</iconset>
    </property>
    <property name="text">
     <string>Plain</string>
@@ -559,7 +559,7 @@
    </property>
    <property name="icon">
     <iconset resource="../resources.qrc">
-     <normaloff>:/icons/32x32/PasteNormal.png</normaloff>:/icons/32x32/PasteNormal.png</iconset>
+     <normaloff>:/icons/PasteNormal.svgt</normaloff>:/icons/PasteNormal.svgt</iconset>
    </property>
    <property name="text">
     <string>Normal</string>
@@ -571,7 +571,7 @@
   <action name="actionInsertFromTemplate">
    <property name="icon">
     <iconset resource="../resources.qrc">
-     <normaloff>:/icons/32x32/Template.png</normaloff>:/icons/32x32/Template.png</iconset>
+     <normaloff>:/icons/Template.svgt</normaloff>:/icons/Template.svgt</iconset>
    </property>
    <property name="text">
     <string>Insert From Template</string>

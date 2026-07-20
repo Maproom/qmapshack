@@ -74,18 +74,12 @@
        <number>3</number>
       </property>
       <item>
-       <widget class="QLabel" name="label_2">
+       <widget class="QSvgWidget" name="label_2">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="pixmap">
-         <pixmap resource="../resources.qrc">:/icons/48x48/Help.png</pixmap>
         </property>
        </widget>
       </item>
@@ -109,7 +103,7 @@
   <action name="actionAddSource">
    <property name="icon">
     <iconset resource="../resources.qrc">
-     <normaloff>:/icons/32x32/Add.png</normaloff>:/icons/32x32/Add.png</iconset>
+     <normaloff>:/icons/Add.svgt</normaloff>:/icons/Add.svgt</iconset>
    </property>
    <property name="text">
     <string>Add Source</string>
@@ -118,13 +112,20 @@
   <action name="actionDeleteSource">
    <property name="icon">
     <iconset resource="../resources.qrc">
-     <normaloff>:/icons/32x32/DeleteOne.png</normaloff>:/icons/32x32/DeleteOne.png</iconset>
+     <normaloff>:/icons/DeleteOne.svgt</normaloff>:/icons/DeleteOne.svgt</iconset>
    </property>
    <property name="text">
     <string>Delete Source</string>
    </property>
   </action>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QSvgWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">QSvgWidget</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="../resources.qrc"/>
  </resources>

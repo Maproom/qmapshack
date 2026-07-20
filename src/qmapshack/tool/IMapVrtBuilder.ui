@@ -23,7 +23,7 @@
        </property>
        <property name="icon">
         <iconset resource="../resources.qrc">
-         <normaloff>:/icons/32x32/PathGreen.png</normaloff>:/icons/32x32/PathGreen.png</iconset>
+         <normaloff>:/icons/PathGreen.svgt</normaloff>:/icons/PathGreen.svgt</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -137,21 +137,12 @@
    <item row="2" column="1" rowspan="2">
     <layout class="QHBoxLayout" name="horizontalLayout_3">
      <item>
-      <widget class="QLabel" name="label_7">
+      <widget class="QSvgWidget" name="label_7">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Maximum" vsizetype="Minimum">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="pixmap">
-        <pixmap resource="../resources.qrc">:/icons/48x48/Help.png</pixmap>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
        </property>
       </widget>
      </item>
@@ -256,7 +247,7 @@ Tip:
        </property>
        <property name="icon">
         <iconset resource="../resources.qrc">
-         <normaloff>:/icons/32x32/PathBlue.png</normaloff>:/icons/32x32/PathBlue.png</iconset>
+         <normaloff>:/icons/PathBlue.svgt</normaloff>:/icons/PathBlue.svgt</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -297,6 +288,13 @@ Tip:
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QSvgWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">QSvgWidget</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="../resources.qrc"/>
  </resources>

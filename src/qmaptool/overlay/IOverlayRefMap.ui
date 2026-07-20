@@ -43,8 +43,8 @@
         <string/>
        </property>
        <property name="icon">
-        <iconset resource="../../qmapshack/resources.qrc">
-         <normaloff>:/icons/32x32/MoveArrow.png</normaloff>:/icons/32x32/MoveArrow.png</iconset>
+        <iconset resource="../resources.qrc">
+         <normaloff>:/icons/MoveArrow.svgt</normaloff>:/icons/MoveArrow.svgt</iconset>
        </property>
        <property name="checkable">
         <bool>true</bool>
@@ -67,7 +67,7 @@
        </property>
        <property name="icon">
         <iconset resource="../resources.qrc">
-         <normaloff>:/icons/32x32/RefAdd.png</normaloff>:/icons/32x32/RefAdd.png</iconset>
+         <normaloff>:/icons/RefAdd.svgt</normaloff>:/icons/RefAdd.svgt</iconset>
        </property>
        <property name="checkable">
         <bool>true</bool>
@@ -90,7 +90,7 @@
        </property>
        <property name="icon">
         <iconset resource="../resources.qrc">
-         <normaloff>:/icons/32x32/RefMove.png</normaloff>:/icons/32x32/RefMove.png</iconset>
+         <normaloff>:/icons/RefMove.svgt</normaloff>:/icons/RefMove.svgt</iconset>
        </property>
        <property name="checkable">
         <bool>true</bool>
@@ -113,7 +113,7 @@
        </property>
        <property name="icon">
         <iconset resource="../resources.qrc">
-         <normaloff>:/icons/32x32/RefDel.png</normaloff>:/icons/32x32/RefDel.png</iconset>
+         <normaloff>:/icons/RefDel.svgt</normaloff>:/icons/RefDel.svgt</iconset>
        </property>
        <property name="checkable">
         <bool>true</bool>
@@ -136,7 +136,7 @@
        </property>
        <property name="icon">
         <iconset resource="../resources.qrc">
-         <normaloff>:/icons/32x32/RefMoveAuto.png</normaloff>:/icons/32x32/RefMoveAuto.png</iconset>
+         <normaloff>:/icons/RefMoveAuto.svgt</normaloff>:/icons/RefMoveAuto.svgt</iconset>
        </property>
        <property name="checkable">
         <bool>true</bool>
@@ -166,7 +166,7 @@
        </property>
        <property name="icon">
         <iconset resource="../resources.qrc">
-         <normaloff>:/icons/32x32/RefDelAll.png</normaloff>:/icons/32x32/RefDelAll.png</iconset>
+         <normaloff>:/icons/RefDelAll.svgt</normaloff>:/icons/RefDelAll.svgt</iconset>
        </property>
       </widget>
      </item>
@@ -180,7 +180,7 @@
        </property>
        <property name="icon">
         <iconset resource="../resources.qrc">
-         <normaloff>:/icons/32x32/GridTool.png</normaloff>:/icons/32x32/GridTool.png</iconset>
+         <normaloff>:/icons/GridTool.svgt</normaloff>:/icons/GridTool.svgt</iconset>
        </property>
       </widget>
      </item>
@@ -201,7 +201,7 @@
        </property>
        <property name="icon">
         <iconset resource="../resources.qrc">
-         <normaloff>:/icons/32x32/LoadGcp.png</normaloff>:/icons/32x32/LoadGcp.png</iconset>
+         <normaloff>:/icons/LoadGcp.svgt</normaloff>:/icons/LoadGcp.svgt</iconset>
        </property>
       </widget>
      </item>
@@ -218,7 +218,7 @@
        </property>
        <property name="icon">
         <iconset resource="../resources.qrc">
-         <normaloff>:/icons/32x32/SaveGcp.png</normaloff>:/icons/32x32/SaveGcp.png</iconset>
+         <normaloff>:/icons/SaveGcp.svgt</normaloff>:/icons/SaveGcp.svgt</iconset>
        </property>
       </widget>
      </item>
@@ -244,8 +244,8 @@
         <string>...</string>
        </property>
        <property name="icon">
-        <iconset resource="../../qmapshack/resources.qrc">
-         <normaloff>:/icons/32x32/Sort.png</normaloff>:/icons/32x32/Sort.png</iconset>
+        <iconset resource="../resources.qrc">
+         <normaloff>:/icons/Sort.svgt</normaloff>:/icons/Sort.svgt</iconset>
        </property>
       </widget>
      </item>
@@ -326,8 +326,8 @@
         <string>...</string>
        </property>
        <property name="icon">
-        <iconset resource="../../qmapshack/resources.qrc">
-         <normaloff>:/icons/32x32/GridWizard.png</normaloff>:/icons/32x32/GridWizard.png</iconset>
+        <iconset resource="../resources.qrc">
+         <normaloff>:/icons/GridWizard.svgt</normaloff>:/icons/GridWizard.svgt</iconset>
        </property>
       </widget>
      </item>
@@ -336,8 +336,8 @@
   </layout>
   <action name="actionDelRefPoint">
    <property name="icon">
-    <iconset resource="../../qmapshack/resources.qrc">
-     <normaloff>:/icons/32x32/DeleteMultiple.png</normaloff>:/icons/32x32/DeleteMultiple.png</iconset>
+    <iconset resource="../resources.qrc">
+     <normaloff>:/icons/DeleteMultiple.svgt</normaloff>:/icons/DeleteMultiple.svgt</iconset>
    </property>
    <property name="text">
     <string>Delete</string>
@@ -345,7 +345,6 @@
   </action>
  </widget>
  <resources>
-  <include location="../../qmapshack/resources.qrc"/>
   <include location="../resources.qrc"/>
  </resources>
  <connections/>

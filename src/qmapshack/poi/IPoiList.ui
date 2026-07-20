@@ -68,21 +68,12 @@
       <number>3</number>
      </property>
      <item>
-      <widget class="QLabel" name="labelIcon">
+      <widget class="QSvgWidget" name="labelIcon">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="pixmap">
-        <pixmap resource="../resources.qrc">:/icons/48x48/Help.png</pixmap>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignHCenter|Qt::AlignTop</set>
        </property>
       </widget>
      </item>
@@ -128,8 +119,8 @@
    </property>
    <property name="icon">
     <iconset resource="../resources.qrc">
-     <normaloff>:/icons/32x32/Check.png</normaloff>
-     <normalon>:/icons/32x32/Cancel.png</normalon>:/icons/32x32/Check.png</iconset>
+     <normaloff>:/icons/Check.svgt</normaloff>
+     <normalon>:/icons/Cancel.svgt</normalon>:/icons/Check.svgt</iconset>
    </property>
    <property name="text">
     <string>Activate</string>
@@ -138,7 +129,7 @@
   <action name="actionReloadPoi">
    <property name="icon">
     <iconset resource="../resources.qrc">
-     <normaloff>:/icons/32x32/Reset.png</normaloff>:/icons/32x32/Reset.png</iconset>
+     <normaloff>:/icons/Reset.svgt</normaloff>:/icons/Reset.svgt</iconset>
    </property>
    <property name="text">
     <string>Reload POI</string>
@@ -149,6 +140,11 @@
   </action>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>QSvgWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">QSvgWidget</header>
+  </customwidget>
   <customwidget>
    <class>CPoiTreeWidget</class>
    <extends>QTreeWidget</extends>

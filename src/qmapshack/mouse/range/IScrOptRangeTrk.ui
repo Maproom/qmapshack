@@ -44,7 +44,7 @@
        </property>
        <property name="icon">
         <iconset resource="../resources.qrc">
-         <normaloff>:/icons/32x32/PointHide.png</normaloff>:/icons/32x32/PointHide.png</iconset>
+         <normaloff>:/icons/PointHide.svgt</normaloff>:/icons/PointHide.svgt</iconset>
        </property>
       </widget>
      </item>
@@ -58,7 +58,7 @@
        </property>
        <property name="icon">
         <iconset resource="../resources.qrc">
-         <normaloff>:/icons/32x32/PointShow.png</normaloff>:/icons/32x32/PointShow.png</iconset>
+         <normaloff>:/icons/PointShow.svgt</normaloff>:/icons/PointShow.svgt</iconset>
        </property>
       </widget>
      </item>
@@ -72,7 +72,7 @@
        </property>
        <property name="icon">
         <iconset resource="../resources.qrc">
-         <normaloff>:/icons/32x32/Activity.png</normaloff>:/icons/32x32/Activity.png</iconset>
+         <normaloff>:/icons/Activity.svgt</normaloff>:/icons/Activity.svgt</iconset>
        </property>
       </widget>
      </item>
@@ -86,7 +86,7 @@
        </property>
        <property name="icon">
         <iconset resource="../resources.qrc">
-         <normaloff>:/icons/32x32/Copy.png</normaloff>:/icons/32x32/Copy.png</iconset>
+         <normaloff>:/icons/Copy.svgt</normaloff>:/icons/Copy.svgt</iconset>
        </property>
       </widget>
      </item>

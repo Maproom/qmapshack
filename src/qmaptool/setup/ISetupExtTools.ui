@@ -32,8 +32,8 @@
         <string>...</string>
        </property>
        <property name="icon">
-        <iconset resource="../../qmapshack/resources.qrc">
-         <normaloff>:/icons/32x32/PathBlue.png</normaloff>:/icons/32x32/PathBlue.png</iconset>
+        <iconset resource="../resources.qrc">
+         <normaloff>:/icons/PathBlue.svgt</normaloff>:/icons/PathBlue.svgt</iconset>
        </property>
       </widget>
      </item>
@@ -53,8 +53,8 @@
         <string>...</string>
        </property>
        <property name="icon">
-        <iconset resource="../../qmapshack/resources.qrc">
-         <normaloff>:/icons/32x32/Reset.png</normaloff>:/icons/32x32/Reset.png</iconset>
+        <iconset resource="../resources.qrc">
+         <normaloff>:/icons/Reset.svgt</normaloff>:/icons/Reset.svgt</iconset>
        </property>
       </widget>
      </item>
@@ -74,8 +74,8 @@
         <string>...</string>
        </property>
        <property name="icon">
-        <iconset resource="../../qmapshack/resources.qrc">
-         <normaloff>:/icons/32x32/Reset.png</normaloff>:/icons/32x32/Reset.png</iconset>
+        <iconset resource="../resources.qrc">
+         <normaloff>:/icons/Reset.svgt</normaloff>:/icons/Reset.svgt</iconset>
        </property>
       </widget>
      </item>
@@ -88,8 +88,8 @@
         <string>...</string>
        </property>
        <property name="icon">
-        <iconset resource="../../qmapshack/resources.qrc">
-         <normaloff>:/icons/32x32/Reset.png</normaloff>:/icons/32x32/Reset.png</iconset>
+        <iconset resource="../resources.qrc">
+         <normaloff>:/icons/Reset.svgt</normaloff>:/icons/Reset.svgt</iconset>
        </property>
       </widget>
      </item>
@@ -135,8 +135,8 @@
         <string>...</string>
        </property>
        <property name="icon">
-        <iconset resource="../../qmapshack/resources.qrc">
-         <normaloff>:/icons/32x32/PathBlue.png</normaloff>:/icons/32x32/PathBlue.png</iconset>
+        <iconset resource="../resources.qrc">
+         <normaloff>:/icons/PathBlue.svgt</normaloff>:/icons/PathBlue.svgt</iconset>
        </property>
       </widget>
      </item>
@@ -149,8 +149,8 @@
         <string>...</string>
        </property>
        <property name="icon">
-        <iconset resource="../../qmapshack/resources.qrc">
-         <normaloff>:/icons/32x32/Reset.png</normaloff>:/icons/32x32/Reset.png</iconset>
+        <iconset resource="../resources.qrc">
+         <normaloff>:/icons/Reset.svgt</normaloff>:/icons/Reset.svgt</iconset>
        </property>
       </widget>
      </item>
@@ -183,8 +183,8 @@
         <string>...</string>
        </property>
        <property name="icon">
-        <iconset resource="../../qmapshack/resources.qrc">
-         <normaloff>:/icons/32x32/PathBlue.png</normaloff>:/icons/32x32/PathBlue.png</iconset>
+        <iconset resource="../resources.qrc">
+         <normaloff>:/icons/PathBlue.svgt</normaloff>:/icons/PathBlue.svgt</iconset>
        </property>
       </widget>
      </item>
@@ -211,8 +211,8 @@
         <string>...</string>
        </property>
        <property name="icon">
-        <iconset resource="../../qmapshack/resources.qrc">
-         <normaloff>:/icons/32x32/PathBlue.png</normaloff>:/icons/32x32/PathBlue.png</iconset>
+        <iconset resource="../resources.qrc">
+         <normaloff>:/icons/PathBlue.svgt</normaloff>:/icons/PathBlue.svgt</iconset>
        </property>
       </widget>
      </item>
@@ -225,8 +225,8 @@
         <string>...</string>
        </property>
        <property name="icon">
-        <iconset resource="../../qmapshack/resources.qrc">
-         <normaloff>:/icons/32x32/PathBlue.png</normaloff>:/icons/32x32/PathBlue.png</iconset>
+        <iconset resource="../resources.qrc">
+         <normaloff>:/icons/PathBlue.svgt</normaloff>:/icons/PathBlue.svgt</iconset>
        </property>
       </widget>
      </item>
@@ -239,8 +239,8 @@
         <string>...</string>
        </property>
        <property name="icon">
-        <iconset resource="../../qmapshack/resources.qrc">
-         <normaloff>:/icons/32x32/Reset.png</normaloff>:/icons/32x32/Reset.png</iconset>
+        <iconset resource="../resources.qrc">
+         <normaloff>:/icons/Reset.svgt</normaloff>:/icons/Reset.svgt</iconset>
        </property>
       </widget>
      </item>
@@ -264,8 +264,8 @@
         <string>...</string>
        </property>
        <property name="icon">
-        <iconset resource="../../qmapshack/resources.qrc">
-         <normaloff>:/icons/32x32/PathBlue.png</normaloff>:/icons/32x32/PathBlue.png</iconset>
+        <iconset resource="../resources.qrc">
+         <normaloff>:/icons/PathBlue.svgt</normaloff>:/icons/PathBlue.svgt</iconset>
        </property>
       </widget>
      </item>
@@ -275,8 +275,8 @@
         <string>...</string>
        </property>
        <property name="icon">
-        <iconset resource="../../qmapshack/resources.qrc">
-         <normaloff>:/icons/32x32/Reset.png</normaloff>:/icons/32x32/Reset.png</iconset>
+        <iconset resource="../resources.qrc">
+         <normaloff>:/icons/Reset.svgt</normaloff>:/icons/Reset.svgt</iconset>
        </property>
       </widget>
      </item>
@@ -321,7 +321,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="../../qmapshack/resources.qrc"/>
+  <include location="../resources.qrc"/>
  </resources>
  <connections>
   <connection>

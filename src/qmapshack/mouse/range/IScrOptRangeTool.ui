@@ -58,7 +58,7 @@
           </property>
           <property name="icon">
            <iconset resource="../../resources.qrc">
-            <normaloff>:/icons/32x32/PointHide.png</normaloff>:/icons/32x32/PointHide.png</iconset>
+            <normaloff>:/icons/PointHide.svgt</normaloff>:/icons/PointHide.svgt</iconset>
           </property>
          </widget>
         </item>
@@ -72,7 +72,7 @@
           </property>
           <property name="icon">
            <iconset resource="../../resources.qrc">
-            <normaloff>:/icons/32x32/PointShow.png</normaloff>:/icons/32x32/PointShow.png</iconset>
+            <normaloff>:/icons/PointShow.svgt</normaloff>:/icons/PointShow.svgt</iconset>
           </property>
          </widget>
         </item>
@@ -86,7 +86,7 @@
           </property>
           <property name="icon">
            <iconset resource="../../resources.qrc">
-            <normaloff>:/icons/32x32/Activity.png</normaloff>:/icons/32x32/Activity.png</iconset>
+            <normaloff>:/icons/Activity.svgt</normaloff>:/icons/Activity.svgt</iconset>
           </property>
          </widget>
         </item>
@@ -100,7 +100,7 @@
           </property>
           <property name="icon">
            <iconset resource="../../resources.qrc">
-            <normaloff>:/icons/32x32/Copy.png</normaloff>:/icons/32x32/Copy.png</iconset>
+            <normaloff>:/icons/Copy.svgt</normaloff>:/icons/Copy.svgt</iconset>
           </property>
          </widget>
         </item>
@@ -114,7 +114,7 @@
           </property>
           <property name="icon">
            <iconset resource="../../resources.qrc">
-            <normaloff>:/icons/32x32/Route.png</normaloff>:/icons/32x32/Route.png</iconset>
+            <normaloff>:/icons/Route.svgt</normaloff>:/icons/Route.svgt</iconset>
           </property>
          </widget>
         </item>
@@ -128,7 +128,7 @@
           </property>
           <property name="icon">
            <iconset resource="../../resources.qrc">
-            <normaloff>:/icons/32x32/DeleteMultiple.png</normaloff>:/icons/32x32/DeleteMultiple.png</iconset>
+            <normaloff>:/icons/DeleteMultiple.svgt</normaloff>:/icons/DeleteMultiple.svgt</iconset>
           </property>
          </widget>
         </item>
@@ -152,7 +152,7 @@
        </property>
        <property name="icon">
         <iconset resource="../../resources.qrc">
-         <normaloff>:/icons/32x32/Apply.png</normaloff>:/icons/32x32/Apply.png</iconset>
+         <normaloff>:/icons/Apply.svgt</normaloff>:/icons/Apply.svgt</iconset>
        </property>
       </widget>
      </item>
@@ -192,7 +192,7 @@
        </property>
        <property name="icon">
         <iconset resource="../../resources.qrc">
-         <normaloff>:/icons/32x32/SelectStartNextPoint.png</normaloff>:/icons/32x32/SelectStartNextPoint.png</iconset>
+         <normaloff>:/icons/SelectStartNextPoint.svgt</normaloff>:/icons/SelectStartNextPoint.svgt</iconset>
        </property>
        <property name="autoRepeat">
         <bool>true</bool>
@@ -212,7 +212,7 @@
        </property>
        <property name="icon">
         <iconset resource="../../resources.qrc">
-         <normaloff>:/icons/32x32/SelectStartPrevPoint.png</normaloff>:/icons/32x32/SelectStartPrevPoint.png</iconset>
+         <normaloff>:/icons/SelectStartPrevPoint.svgt</normaloff>:/icons/SelectStartPrevPoint.svgt</iconset>
        </property>
        <property name="autoRepeat">
         <bool>true</bool>
@@ -232,7 +232,7 @@
        </property>
        <property name="icon">
         <iconset resource="../../resources.qrc">
-         <normaloff>:/icons/32x32/SelectEndPoint.png</normaloff>:/icons/32x32/SelectEndPoint.png</iconset>
+         <normaloff>:/icons/SelectEndPoint.svgt</normaloff>:/icons/SelectEndPoint.svgt</iconset>
        </property>
       </widget>
      </item>
@@ -249,7 +249,7 @@
        </property>
        <property name="icon">
         <iconset resource="../../resources.qrc">
-         <normaloff>:/icons/32x32/SelectReset.png</normaloff>:/icons/32x32/SelectReset.png</iconset>
+         <normaloff>:/icons/SelectReset.svgt</normaloff>:/icons/SelectReset.svgt</iconset>
        </property>
       </widget>
      </item>
@@ -266,7 +266,7 @@
        </property>
        <property name="icon">
         <iconset resource="../../resources.qrc">
-         <normaloff>:/icons/32x32/SelectStartPoint.png</normaloff>:/icons/32x32/SelectStartPoint.png</iconset>
+         <normaloff>:/icons/SelectStartPoint.svgt</normaloff>:/icons/SelectStartPoint.svgt</iconset>
        </property>
       </widget>
      </item>
@@ -283,7 +283,7 @@
        </property>
        <property name="icon">
         <iconset resource="../../resources.qrc">
-         <normaloff>:/icons/32x32/SelectEndPrevPoint.png</normaloff>:/icons/32x32/SelectEndPrevPoint.png</iconset>
+         <normaloff>:/icons/SelectEndPrevPoint.svgt</normaloff>:/icons/SelectEndPrevPoint.svgt</iconset>
        </property>
        <property name="autoRepeat">
         <bool>true</bool>
@@ -303,7 +303,7 @@
        </property>
        <property name="icon">
         <iconset resource="../../resources.qrc">
-         <normaloff>:/icons/32x32/SelectEndNextPoint.png</normaloff>:/icons/32x32/SelectEndNextPoint.png</iconset>
+         <normaloff>:/icons/SelectEndNextPoint.svgt</normaloff>:/icons/SelectEndNextPoint.svgt</iconset>
        </property>
        <property name="autoRepeat">
         <bool>true</bool>

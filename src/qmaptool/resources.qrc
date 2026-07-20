@@ -86,6 +86,49 @@
         <file>../icons/48x48/SetupCoordFormat.png</file>
         <file>../icons/48x48/Sort.png</file>        
         <file>../icons/48x48/UnitSetup.png</file>
+        <file alias="icons/Add.svgt">../icons/Add.svg</file>
+        <file alias="icons/AddOverview.svgt">../icons/AddOverview.svg</file>
+        <file alias="icons/Apply.svgt">../icons/Apply.svg</file>
+        <file alias="icons/Cancel.svgt">../icons/Cancel.svg</file>
+        <file alias="icons/Check.svgt">../icons/Check.svg</file>
+        <file alias="icons/CombineMap.svgt">../icons/CombineMap.svg</file>
+        <file alias="icons/CutMap.svgt">../icons/CutMap.svg</file>
+        <file alias="icons/DeleteMultiple.svgt">../icons/DeleteMultiple.svg</file>
+        <file alias="icons/DeleteOne.svgt">../icons/DeleteOne.svg</file>
+        <file alias="icons/Export.svgt">../icons/Export.svg</file>
+        <file alias="icons/FolderMap.svgt">../icons/FolderMap.svg</file>
+        <file alias="icons/GridTool.svgt">../icons/GridTool.svg</file>
+        <file alias="icons/GridWizard.svgt">../icons/GridWizard.svg</file>
+        <file alias="icons/Help.svgt">../icons/Help.svg</file>
+        <file alias="icons/Info.svgt">../icons/Info.svg</file>
+        <file alias="icons/Left.svgt">../icons/Left.svg</file>
+        <file alias="icons/LoadGcp.svgt">../icons/LoadGcp.svg</file>
+        <file alias="icons/LoadShape.svgt">../icons/LoadShape.svg</file>
+        <file alias="icons/MapLayer.svgt">../icons/MapLayer.svg</file>
+        <file alias="icons/MouseWheel.svgt">../icons/MouseWheel.svg</file>
+        <file alias="icons/MoveArrow.svgt">../icons/MoveArrow.svg</file>
+        <file alias="icons/PathBlue.svgt">../icons/PathBlue.svg</file>
+        <file alias="icons/PointAdd.svgt">../icons/PointAdd.svg</file>
+        <file alias="icons/PointDel.svgt">../icons/PointDel.svg</file>
+        <file alias="icons/PointDelAll.svgt">../icons/PointDelAll.svg</file>
+        <file alias="icons/PointMove.svgt">../icons/PointMove.svg</file>
+        <file alias="icons/QMapTool.svgt">../icons/QMapTool.svg</file>
+        <file alias="icons/Rasterize.svgt">../icons/Rasterize.svg</file>
+        <file alias="icons/RefAdd.svgt">../icons/RefAdd.svg</file>
+        <file alias="icons/RefDel.svgt">../icons/RefDel.svg</file>
+        <file alias="icons/RefDelAll.svgt">../icons/RefDelAll.svg</file>
+        <file alias="icons/RefMove.svgt">../icons/RefMove.svg</file>
+        <file alias="icons/RefMoveAuto.svgt">../icons/RefMoveAuto.svg</file>
+        <file alias="icons/ReferenceMap.svgt">../icons/ReferenceMap.svg</file>
+        <file alias="icons/Reload.svgt">../icons/Reload.svg</file>
+        <file alias="icons/Reset.svgt">../icons/Reset.svg</file>
+        <file alias="icons/Right.svgt">../icons/Right.svg</file>
+        <file alias="icons/SaveGcp.svgt">../icons/SaveGcp.svg</file>
+        <file alias="icons/SaveShape.svgt">../icons/SaveShape.svg</file>
+        <file alias="icons/SetupCoordFormat.svgt">../icons/SetupCoordFormat.svg</file>
+        <file alias="icons/Sort.svgt">../icons/Sort.svg</file>
+        <file alias="icons/ToTop.svgt">../icons/ToTop.svg</file>
+        <file alias="icons/UnitSetup.svgt">../icons/UnitSetup.svg</file>
 
         <file>pic/line_3px_horizontal.png</file>
         <file>pic/line_3px_vertical.png</file>

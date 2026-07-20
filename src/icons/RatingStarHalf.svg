@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="588.29761"
+   height="561.40143"
+   id="svg2861"
+   version="1.1"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <style
+     id="current-color-scheme">.paper-lead{fill:#cccccc;color:#000000}.lead{color:#000000}</style>
+  <defs
+     id="defs2863">
+    <linearGradient
+       gradientUnits="userSpaceOnUse"
+       y2="273.89783"
+       x2="192.59964"
+       y1="554.72021"
+       x1="-109.15551"
+       id="linearGradient5725"
+       xlink:href="#linearGradient5719" />
+    <linearGradient
+       id="linearGradient5719">
+      <stop
+         id="stop5721"
+         offset="0"
+         style="stop-color:#ffff00;stop-opacity:1" />
+      <stop
+         id="stop5723"
+         offset="1"
+         style="stop-color:#fffdd5;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <metadata
+     id="metadata2866">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1"
+     transform="translate(-39.782881,-236.05762)">
+    <g
+       transform="translate(0.36658051,-1.0761497)"
+       id="layer1-4">
+      <path
+         id="path2871"
+         style="stroke:currentColor;stroke-width:4;stroke-linejoin:round"
+         transform="translate(148.57143,122.85714)"
+         d="M 477.14287,326.64788 302.86221,460.87362 368.15902,670.93699 186.64708,546.66427 7.0427646,673.67838 69.142873,462.64788 -107.15551,331.08355 112.73641,324.93225 183.38233,116.6069 257.1829,323.83569 Z"
+         class="paper-lead" />
+    </g>
+    <g
+       transform="matrix(0.97339561,0,0,0.99909699,2.6602231,-3.9423196)"
+       id="layer1-8">
+      <path
+         id="path2871-5"
+         d="M 189.67754,550.70488 7.0427646,673.67838 69.142873,462.64788 -107.15551,331.08355 l 219.89192,-6.1513 77.71699,-203.27459 0.14624,-1.30302 z"
+         style="fill:url(#linearGradient5725);fill-opacity:1;stroke:currentColor;stroke-width:6;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         transform="translate(148.57143,122.85714)"
+         class="lead" />
+    </g>
+  </g>
+</svg>

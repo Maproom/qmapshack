@@ -2,47 +2,19 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="64"
-   height="64"
+   width="45"
+   height="45.000019"
    id="svg2"
    version="1.1"
-   inkscape:version="0.48.5 r10040"
-   sodipodi:docname="ActCar.svg">
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <style
+     id="current-color-scheme">.ink{color:#000080}.paper{color:#ffffff}</style>
   <defs
      id="defs4" />
-  <sodipodi:namedview
-     id="base"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageopacity="0.0"
-     inkscape:pageshadow="2"
-     inkscape:zoom="11.2"
-     inkscape:cx="15.11379"
-     inkscape:cy="27.618641"
-     inkscape:document-units="px"
-     inkscape:current-layer="layer1"
-     showgrid="true"
-     inkscape:window-width="1920"
-     inkscape:window-height="1010"
-     inkscape:window-x="-4"
-     inkscape:window-y="-4"
-     inkscape:window-maximized="1">
-    <inkscape:grid
-       type="xygrid"
-       id="grid2985"
-       empspacing="5"
-       visible="true"
-       enabled="true"
-       snapvisiblegridlinesonly="true" />
-  </sodipodi:namedview>
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -56,67 +28,45 @@
     </rdf:RDF>
   </metadata>
   <g
-     inkscape:label="Ebene 1"
-     inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(0,-988.3622)">
+     transform="translate(-10.5,-997.36218)">
     <g
        id="g3790"
        transform="translate(8,-2.6277674)">
       <path
-         sodipodi:open="true"
-         sodipodi:end="6.2787911"
-         sodipodi:start="0"
-         transform="translate(0,988.6177)"
-         d="M 15,41.5 C 15,42.880712 13.880712,44 12.5,44 11.119288,44 10,42.880712 10,41.5 10,40.119288 11.119288,39 12.5,39 c 1.376424,0 2.493928,1.112604 2.499976,2.489015"
-         sodipodi:ry="2.5"
-         sodipodi:rx="2.5"
-         sodipodi:cy="41.5"
-         sodipodi:cx="12.5"
          id="path2991"
-         style="fill:#000080;fill-opacity:1;stroke:#000080;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
-         sodipodi:type="arc" />
+         style="fill:currentColor;stroke:currentColor;stroke-width:4;stroke-linecap:round;stroke-linejoin:round"
+         transform="translate(0,988.6177)"
+         d="m 15,41.5 a 2.5,2.5 0 0 1 -2.497254,2.499998 2.5,2.5 0 0 1 -2.50274,-2.494505 2.5,2.5 0 0 1 2.491755,-2.505479 2.5,2.5 0 0 1 2.508215,2.489001"
+         class="ink" />
       <path
-         sodipodi:open="true"
-         sodipodi:end="6.2787911"
-         sodipodi:start="0"
-         d="M 15,41.5 C 15,42.880712 13.880712,44 12.5,44 11.119288,44 10,42.880712 10,41.5 10,40.119288 11.119288,39 12.5,39 c 1.376424,0 2.493928,1.112604 2.499976,2.489015"
-         sodipodi:ry="2.5"
-         sodipodi:rx="2.5"
-         sodipodi:cy="41.5"
-         sodipodi:cx="12.5"
          id="path2991-0"
-         style="fill:#000080;fill-opacity:1;stroke:#000080;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
-         sodipodi:type="arc"
-         transform="translate(24.000024,988.6177)" />
+         style="fill:currentColor;stroke:currentColor;stroke-width:4;stroke-linecap:round;stroke-linejoin:round"
+         transform="translate(24.000024,988.6177)"
+         d="m 15,41.5 a 2.5,2.5 0 0 1 -2.497254,2.499998 2.5,2.5 0 0 1 -2.50274,-2.494505 2.5,2.5 0 0 1 2.491755,-2.505479 2.5,2.5 0 0 1 2.508215,2.489001"
+         class="ink" />
       <path
-         sodipodi:nodetypes="cccccccccccccccc"
-         inkscape:connector-curvature="0"
          id="path3779"
          transform="translate(0,988.3622)"
-         d="m 10,22 -7,10 0,10 4,0 c 0.3852531,-2.94808 1.1917681,-3.474899 3,-5 1.513423,-0.766219 3.253592,-0.398706 5,0 2.497722,2.333333 2.024416,2.666667 3,5 l 13,0 c 0.304003,-2.397713 0,-3 2,-5 4,-1 4.733951,-0.403707 7,0 2.037552,2.676055 1.757044,3.772594 2,6 l 5,0 0,-9 -12,-5 -5,-7 z"
-         style="fill:#000080;stroke:none" />
+         d="M 10,22 3,32 v 10 h 4 c 0.3852531,-2.94808 1.1917681,-3.474899 3,-5 1.513423,-0.766219 3.253592,-0.398706 5,0 2.497722,2.333333 2.024416,2.666667 3,5 h 13 c 0.304003,-2.397713 0,-3 2,-5 4,-1 4.733951,-0.403707 7,0 2.037552,2.676055 1.757044,3.772594 2,6 h 5 V 34 L 35,29 30,22 Z"
+         style="fill:currentColor;stroke:none"
+         class="ink" />
       <path
-         sodipodi:nodetypes="ccccc"
-         inkscape:connector-curvature="0"
          id="rect3784"
-         d="m 21,24 9,0 4,7 -13,0 z"
-         style="fill:#ffffff;fill-opacity:1;stroke:none"
-         transform="translate(0,988.3622)" />
+         d="m 21,24 h 9 l 4,7 H 21 Z"
+         style="fill:currentColor;fill-opacity:1;stroke:none"
+         transform="translate(0,988.3622)"
+         class="paper" />
       <path
-         sodipodi:nodetypes="ccccc"
-         inkscape:connector-curvature="0"
          id="rect3786"
-         d="m 11,24 8,0 0,7 -11,0 z"
-         style="fill:#ffffff;fill-opacity:1;stroke:none"
-         transform="translate(0,988.3622)" />
+         d="m 11,24 h 8 v 7 H 8 Z"
+         style="fill:currentColor;fill-opacity:1;stroke:none"
+         transform="translate(0,988.3622)"
+         class="paper" />
     </g>
-    <rect
-       style="fill:none;stroke:none"
+    <path
        id="rect3797"
-       width="45"
-       height="45"
-       x="10.5"
-       y="997.36218" />
+       style="fill:none"
+       d="m 10.5,997.36218 h 45 v 45.00002 h -45 z" />
   </g>
 </svg>

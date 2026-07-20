@@ -2,47 +2,19 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="64"
-   height="64"
+   width="40"
+   height="40.109726"
    id="svg2"
    version="1.1"
-   inkscape:version="0.91 r13725"
-   sodipodi:docname="Waypoint.svg">
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <style
+     id="current-color-scheme">.ink{color:#000080}.lead{color:#000000}</style>
   <defs
      id="defs4" />
-  <sodipodi:namedview
-     id="base"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageopacity="0.0"
-     inkscape:pageshadow="2"
-     inkscape:zoom="7.9195959"
-     inkscape:cx="-22.673418"
-     inkscape:cy="22.814764"
-     inkscape:document-units="px"
-     inkscape:current-layer="layer1"
-     showgrid="true"
-     inkscape:window-width="1920"
-     inkscape:window-height="972"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
-     inkscape:window-maximized="1">
-    <inkscape:grid
-       type="xygrid"
-       id="grid2985"
-       empspacing="5"
-       visible="true"
-       enabled="true"
-       snapvisiblegridlinesonly="true" />
-  </sodipodi:namedview>
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -56,27 +28,21 @@
     </rdf:RDF>
   </metadata>
   <g
-     inkscape:label="Ebene 1"
-     inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(0,-988.36215)">
+     transform="translate(-9.9636908,-997.43264)">
     <path
-       style="fill:#000080;stroke:#000080;stroke-width:1.34993112;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       style="fill:currentColor;stroke:currentColor;stroke-width:1.34993;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="m 16.875788,998.65233 25.339695,10.78737 -28.507157,10.7873 3.167462,-21.57467"
        id="path3763"
-       inkscape:connector-curvature="0" />
+       class="ink" />
     <path
-       style="fill:#000000;stroke:#000000;stroke-width:0.71901649px;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
-       d="m 10.325373,1037.1836 3.609174,-39.39145 3.609174,0 z"
+       style="fill:currentColor;stroke:currentColor;stroke-width:0.719016px;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+       d="m 10.325373,1037.1836 3.609174,-39.39145 h 3.609174 z"
        id="path3761"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cccc" />
-    <rect
-       style="fill:none;stroke:none"
+       class="lead" />
+    <path
        id="rect3769"
-       width="40"
-       height="40"
-       x="9.9636908"
-       y="997.48792" />
+       style="fill:none"
+       d="M 9.9636908,997.48792 H 49.963691 v 39.99998 H 9.9636908 Z" />
   </g>
 </svg>

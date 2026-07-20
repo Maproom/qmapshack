@@ -20,10 +20,12 @@
 
 #include "canvas/CCanvas.h"
 #include "gis/trk/CGisItemTrk.h"
+#include "svgticon/CSvgtIcon.h"
 #include "units/IUnit.h"
 
 CFilterNewDate::CFilterNewDate(CGisItemTrk& trk, QWidget* parent) : QWidget(parent), trk(trk) {
   setupUi(this);
+  CSvgtIcon::load(label_3, "://icons/Time.svgt");
 
   IUnit::tz_mode_e mode;
   QByteArray zone;

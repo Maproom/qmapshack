@@ -21,10 +21,12 @@
 #include "canvas/CCanvas.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "helpers/CSettings.h"
+#include "svgticon/CSvgtIcon.h"
 #include "units/IUnit.h"
 
 CFilterOffsetElevation::CFilterOffsetElevation(CGisItemTrk& trk, QWidget* parent) : QWidget(parent), trk(trk) {
   setupUi(this);
+  CSvgtIcon::load(label_4, "://icons/SetEle.svgt");
 
   spinBox->setSuffix(IUnit::self().elevationUnit);
 

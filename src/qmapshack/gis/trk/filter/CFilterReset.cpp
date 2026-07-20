@@ -28,6 +28,7 @@ CFilterReset::CFilterReset(CGisItemTrk& trk, QWidget* parent)
 
 {
   setupUi(this);
+  CSvgtIcon::load(label_3, "://icons/PointHide.svgt");
 
   connect(toolApply, &QToolButton::clicked, this, &CFilterReset::slotApply);
 }

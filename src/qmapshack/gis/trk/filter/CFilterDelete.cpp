@@ -20,9 +20,11 @@
 
 #include "canvas/CCanvas.h"
 #include "gis/trk/CGisItemTrk.h"
+#include "svgticon/CSvgtIcon.h"
 
 CFilterDelete::CFilterDelete(CGisItemTrk& trk, QWidget* parent) : QWidget(parent), trk(trk) {
   setupUi(this);
+  CSvgtIcon::load(label_3, "://icons/PointHide.svgt");
 
   connect(toolApply, &QToolButton::clicked, this, &CFilterDelete::slotApply);
 }

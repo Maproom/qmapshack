@@ -22,10 +22,13 @@
 
 #include "gis/rte/CGisItemRte.h"
 #include "helpers/CLinksDialog.h"
+#include "svgticon/CSvgtIcon.h"
 #include "widgets/CTextEditWidget.h"
 
 CDetailsRte::CDetailsRte(CGisItemRte& rte, QWidget* parent) : QDialog(parent), rte(rte) {
   setupUi(this);
+  CSvgtIcon::load(labelTainted, "://icons/Tainted.svgt");
+  CSvgtIcon::load(labelNogo, "://icons/NoGo.svgt");
 
   setupGui();
 

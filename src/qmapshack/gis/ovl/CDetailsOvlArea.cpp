@@ -22,10 +22,13 @@
 
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "helpers/CLinksDialog.h"
+#include "svgticon/CSvgtIcon.h"
 #include "widgets/CTextEditWidget.h"
 
 CDetailsOvlArea::CDetailsOvlArea(CGisItemOvlArea& area, QWidget* parent) : QDialog(parent), area(area) {
   setupUi(this);
+  CSvgtIcon::load(labelTainted, "://icons/Tainted.svgt");
+  CSvgtIcon::load(labelNogo, "://icons/NoGo.svgt");
 
   QPixmap icon(64, 24);
   for (const IGisItem::color_t& color : IGisItem::getColorMap()) {

@@ -20,9 +20,11 @@
 #include "canvas/CCanvas.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
+#include "svgticon/CSvgtIcon.h"
 
 CFilterChangeStartPoint::CFilterChangeStartPoint(CGisItemTrk& trk, QWidget* parent) : QWidget(parent), trk(trk) {
   setupUi(this);
+  CSvgtIcon::load(label_3, "://icons/FilterChangeStartPoint.svgt");
   updateUi();
 
   connect(toolApply, &QToolButton::clicked, this, &CFilterChangeStartPoint::slotApply);

@@ -24,9 +24,11 @@
 #include "gis/trk/filter/CFilterSpeedCycle.h"
 #include "gis/trk/filter/CFilterSpeedHike.h"
 #include "helpers/CSettings.h"
+#include "svgticon/CSvgtIcon.h"
 
 CFilterSpeed::CFilterSpeed(CGisItemTrk& trk, QWidget* parent) : QWidget(parent), trk(trk) {
   setupUi(this);
+  CSvgtIcon::load(labelTimePix, "://icons/Time.svgt");
 
   filterConst = new CFilterSpeedConst(this);
   filterCycle = new CFilterSpeedCycle(this, trk);

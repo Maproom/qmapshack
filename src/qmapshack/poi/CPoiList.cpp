@@ -22,9 +22,11 @@
 #include "misc.h"
 #include "poi/CPoiDraw.h"
 #include "poi/CPoiFileItem.h"
+#include "svgticon/CSvgtIcon.h"
 
 CPoiList::CPoiList(CCanvas* parent) : QWidget(parent), canvas(parent) {
   setupUi(this);
+  CSvgtIcon::load(labelIcon, "://icons/Help.svgt");
 
   connect(treeWidget, &CPoiTreeWidget::customContextMenuRequested, this, &CPoiList::slotContextMenu);
   connect(actionActivate, &QAction::triggered, this, &CPoiList::slotActivate);

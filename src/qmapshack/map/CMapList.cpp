@@ -100,6 +100,7 @@ void CMapTreeWidget::dropEvent(QDropEvent* e) {
 
 CMapList::CMapList(CCanvas* parent) : QWidget(parent), canvas(parent) {
   setupUi(this);
+  CSvgtIcon::load(labelIcon, "://icons/Help.svgt");
   lineFilter->addAction(actionClearFilter, QLineEdit::TrailingPosition);
 
   connect(treeWidget, &CMapTreeWidget::customContextMenuRequested, this, &CMapList::slotContextMenu);

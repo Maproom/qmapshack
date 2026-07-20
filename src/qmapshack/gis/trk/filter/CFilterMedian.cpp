@@ -21,9 +21,11 @@
 #include "canvas/CCanvas.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "helpers/CSettings.h"
+#include "svgticon/CSvgtIcon.h"
 
 CFilterMedian::CFilterMedian(CGisItemTrk& trk, QWidget* parent) : QWidget(parent), trk(trk) {
   setupUi(this);
+  CSvgtIcon::load(label_2, "://icons/SetEle.svgt");
 
   SETTINGS;
   spinBox->setValue(cfg.value("TrackDetails/Filter/Median/points", 5).toInt());

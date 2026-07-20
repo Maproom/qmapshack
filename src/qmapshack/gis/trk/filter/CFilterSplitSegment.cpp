@@ -21,9 +21,11 @@
 
 #include "canvas/CCanvas.h"
 #include "gis/trk/CGisItemTrk.h"
+#include "svgticon/CSvgtIcon.h"
 
 CFilterSplitSegment::CFilterSplitSegment(CGisItemTrk& trk, QWidget* parent) : QWidget(parent), trk(trk) {
   setupUi(this);
+  CSvgtIcon::load(label_3, "://icons/TrkCut.svgt");
 
   connect(toolApply, &QToolButton::clicked, this, &CFilterSplitSegment::slotApply);
 }

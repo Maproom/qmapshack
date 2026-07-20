@@ -24,12 +24,14 @@
 #include "realtime/CRtDraw.h"
 #include "realtime/CRtSelectSource.h"
 #include "realtime/IRtSource.h"
+#include "svgticon/CSvgtIcon.h"
 
 CRtWorkspace* CRtWorkspace::pSelf = nullptr;
 
 CRtWorkspace::CRtWorkspace(QWidget* parent) : QWidget(parent) {
   pSelf = this;
   setupUi(this);
+  CSvgtIcon::load(label_2, "://icons/Help.svgt");
   connect(this, &CRtWorkspace::sigChanged, this, &CRtWorkspace::slotChanged);
 
   menu = new QMenu(treeWidget);

@@ -30,6 +30,7 @@ CPoiPathSetup::CPoiPathSetup(QStringList& paths)
 
 {
   setupUi(this);
+  CSvgtIcon::load(label_3, "://icons/Help.svgt");
 
   connect(toolAdd, &QToolButton::clicked, this, &CPoiPathSetup::slotAddPath);
   connect(toolDelete, &QToolButton::clicked, this, &CPoiPathSetup::slotDelPath);

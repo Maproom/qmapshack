@@ -21,12 +21,14 @@
 #include <QtWidgets>
 
 #include "helpers/CSettings.h"
+#include "svgticon/CSvgtIcon.h"
 
 CGisDatabase* CGisDatabase::pSelf = nullptr;
 
 CGisDatabase::CGisDatabase(QWidget* parent) : QWidget(parent) {
   pSelf = this;
   setupUi(this);
+  CSvgtIcon::load(labelHelp1, "://icons/Help.svgt");
 
   connect(treeDB, &CGisListDB::sigChanged, this, &CGisDatabase::slotHelpText);
   connect(actionShowSummaryDropZones, &QAction::toggled, widgetSummary, &CGisSummary::setVisible);

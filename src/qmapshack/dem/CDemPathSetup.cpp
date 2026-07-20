@@ -23,9 +23,11 @@
 #include "CMainWindow.h"
 #include "dem/CDemDraw.h"
 #include "dem/CDemList.h"
+#include "svgticon/CSvgtIcon.h"
 
 CDemPathSetup::CDemPathSetup(QStringList& paths) : QDialog(CMainWindow::getBestWidgetForParent()), paths(paths) {
   setupUi(this);
+  CSvgtIcon::load(label_3, "://icons/Help.svgt");
 
   connect(toolAdd, &QToolButton::clicked, this, &CDemPathSetup::slotAddPath);
   connect(toolDelete, &QToolButton::clicked, this, &CDemPathSetup::slotDelPath);

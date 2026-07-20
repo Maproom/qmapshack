@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include <QNetworkProxyFactory>
+#include <QtPlugin>
 #include <QtWidgets>
 
 #include "CMainWindow.h"
@@ -25,6 +26,9 @@
 #include "setup/CAppOpts.h"
 #include "setup/IAppSetup.h"
 #include "version.h"
+
+// Link in the static ".svgt" icon engine. See svgticon/CSvgtIconEnginePlugin.h.
+Q_IMPORT_PLUGIN(CSvgtIconEnginePlugin)
 
 int main(int argc, char** argv) {
   // preserve "original" argument list

@@ -1,4 +1,17 @@
 #!/bin/bash
+#
+# Regenerate the whole geocache raster set.
+#
+# Batch regeneration is correct HERE, unlike for the UI icons in the parent directory: every
+# source in this directory has a raster by intent. These are geocache symbols and the D/T rating
+# stars CDetailsGeoCache draws; it keeps its own copies so restyling UI chrome cannot change
+# geocache display. The generic item rating uses ../RatingStar.svg instead.
 
-for i in *.svg; do inkscape -D -w 32 -h 32 $i --export-png=32x32/`echo $i | sed -e 's/svg$/png/'`; done
+set -eu
+cd "$(dirname "$0")"
 
+SIZE=32
+
+for svg in *.svg; do
+    ../mkicon "$svg" "$SIZE"
+done

@@ -1,0 +1,293 @@
+#!/usr/bin/env python3
+"""Make an edited UI icon SVG renderable by Qt again, and record its hash.
+
+Called by the build (cmake/IconHygiene.cmake) for every *.svg in this directory whose hash no
+longer matches svg.sha256 -- i.e. every icon a developer has touched. An untouched tree needs
+neither this script nor inkscape.
+
+Inkscape is the authoring tool; Qt is the renderer. The two disagree on three things, and each
+one has to be baked out of the file before Qt sees it:
+
+  1. empty <flowRoot>        invisible leftover; inflates the drawing bbox that step 4 keys off,
+                             so it must go first. Blocks holding real text are kept.
+  2. <text>                  Qt would need the same fonts installed. object-to-path outlines it.
+  3. marker-*:url(...)       Qt renders <marker> but ignores markerUnits="strokeWidth" (the SVG
+                             default), so arrowheads come out at raw size instead of scaled by
+                             the path's stroke width. object-stroke-to-path bakes them in.
+  4. page != drawing         Inkscape's -D export crops to the drawing; Qt honours the page. A
+                             64x64 page around artwork in a sub-rect is why Qt drew icons small
+                             and off-centre. fit-canvas-to-selection makes page == drawing.
+
+Only the steps a file actually needs are run. That matters: object-stroke-to-path also converts
+every stroke to a filled outline, which bloats the file and costs stroke editability, so it is
+run only where a live marker reference exists.
+
+TRAP: object-stroke-to-path turns a zero-width stroke into a filled path of the whole shape --
+stroke-width:0 paints nothing before, a solid rectangle after. Such strokes are neutralised to
+stroke:none first (appearance-neutral: a zero-width stroke paints nothing either way).
+
+An icon some .ui shows via <pixmap> is skipped by step 4 only: uic maps <pixmap> to a QLabel,
+which requests no size, so the icon renders at the natural size its viewBox defines -- and
+fit-canvas would rewrite that viewBox and resize the label. <iconset> refs request a size and
+are unaffected. A <pixmap> icon without a viewBox has no natural size to preserve: that is an
+error here, not a skip -- run naturalsize.py on it.
+
+Runs inkscape under a throwaway INKSCAPE_PROFILE_DIR pinning /tools/bounding_box to *visual*,
+because fit-canvas honours that preference while -D export always uses the visual
+(stroke-inclusive) box. Mismatched, frames shift 1-2px. Your own Inkscape config is untouched.
+
+NOT byte-idempotent: re-fitting drifts the last decimal (40.069157 -> 40.069153). That is why
+the build gates on svg.sha256 rather than just running this every time.
+
+  ./svghygiene --manifest svg.sha256 Foo.svg Bar.svg   # fix these, then rewrite the manifest
+  ./svghygiene --manifest svg.sha256 --all             # fix everything (first-time bootstrap)
+  ./svghygiene --manifest svg.sha256 --record-only     # no fixing; just record current hashes
+
+Requires: python3, inkscape 1.x.
+"""
+import argparse
+import concurrent.futures
+import hashlib
+import os
+import re
+import subprocess
+import sys
+import tempfile
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+
+FLOWROOT = re.compile(r"[ \t]*<flowRoot\b.*?</flowRoot>\s*", re.S)
+FLOWPARA = re.compile(r"<flowPara[^>]*>(.*?)</flowPara>", re.S)
+STYLE = re.compile(r'style="([^"]*)"')
+# Any spelling of a zero width: bare, or with any CSS unit. "0.5px" must not match.
+ZERO_WIDTH = re.compile(r"^0(\.0+)?\s*(pt|px|mm|cm|in|pc|em|ex|%)?$")
+# One start tag with its quoted attributes; values may hold '>', so they are matched, not skipped.
+ELEMENT = re.compile(r"""<[a-zA-Z][\w:.-]*(?:\s+[\w:.-]+\s*=\s*(?:"[^"]*"|'[^']*'))*\s*/?>""", re.S)
+ATTR = re.compile(r"""([\w:.-]+)\s*=\s*(?:"([^"]*)"|'([^']*)')""")
+# Both spellings Inkscape may emit: style="marker-end:url(...)" and marker-end="url(...)".
+MARKER_REF = re.compile(r"marker-(start|mid|end)\s*[:=]\s*[\"']?url\(")
+PIXMAP_REF = re.compile(r"<pixmap[^>]*>:/icons/([^<]+)\.svg</pixmap>")
+# Attribute values may hold '>', so the root tag cannot be cut at the first one.
+ROOT_SVG = re.compile(r"<svg\b((?:[^>\"']|\"[^\"]*\"|'[^']*')*)>", re.S)
+
+
+def sha256(path):
+    h = hashlib.sha256()
+    with open(path, "rb") as f:
+        for chunk in iter(lambda: f.read(65536), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def root_tag(text):
+    """The root <svg> element's attributes, or "" if there is none."""
+    m = ROOT_SVG.search(text)
+    return m.group(1) if m else ""
+
+
+def natural_size_icons(ui_dir):
+    """{Foo.svg} for every icon a .ui shows via <pixmap>, i.e. at its natural size."""
+    names = set()
+    for root, _, files in os.walk(ui_dir):
+        for f in files:
+            if f.endswith(".ui"):
+                text = open(os.path.join(root, f), encoding="utf-8").read()
+                names |= {n + ".svg" for n in PIXMAP_REF.findall(text)}
+    return names
+
+
+def strip_empty_flowroots(text):
+    """Drop flowRoot blocks with no text. Returns (new_text, n_stripped)."""
+    n = 0
+
+    def repl(m):
+        nonlocal n
+        block = m.group(0)
+        if "".join(FLOWPARA.findall(block)).strip():
+            return block  # real text -- keep
+        n += 1
+        return ""
+
+    return FLOWROOT.sub(repl, text), n
+
+
+def style_decls(s):
+    """{property: value} from a style attribute body."""
+    decls = {}
+    for part in s.split(";"):
+        if ":" in part:
+            k, v = part.split(":", 1)
+            decls[k.strip()] = v.strip()
+    return decls
+
+
+def neutralise_zero_width_strokes(text):
+    """stroke:none on each element whose stroke-width is 0, so object-stroke-to-path cannot fill it.
+
+    Inkscape spells both stroke and stroke-width either way -- style="stroke-width:0" or
+    stroke-width="0" -- so both are read. A style declaration beats a presentation attribute, so
+    that is where the override is written. An inherited stroke is not resolved: Inkscape writes
+    the style out per element.
+    """
+    n = 0
+
+    def repl(m):
+        nonlocal n
+        tag = m.group(0)
+        attrs = {a: (q or s or "") for a, q, s in ATTR.findall(tag)}
+        style = style_decls(attrs.get("style", ""))
+        width = style.get("stroke-width", attrs.get("stroke-width"))
+        stroke = style.get("stroke", attrs.get("stroke"))
+        if width is None or not ZERO_WIDTH.match(width.strip()) or stroke in (None, "none"):
+            return tag
+        n += 1
+        style["stroke"] = "none"
+        body = 'style="' + ";".join(f"{k}:{v}" for k, v in style.items()) + '"'
+        if "style" in attrs:
+            return STYLE.sub(lambda _: body, tag, count=1)
+        return re.sub(r"\s*(/?>)$", lambda e: " " + body + e.group(1), tag, count=1)
+
+    return ELEMENT.sub(repl, text), n
+
+
+def make_profile(tmp):
+    """Throwaway inkscape profile pinning the bbox preference to visual (0)."""
+    d = os.path.join(tmp, "profile")
+    os.makedirs(d, exist_ok=True)
+    with open(os.path.join(d, "preferences.xml"), "w") as f:
+        f.write('<inkscape version="1.x" '
+                'xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape">\n'
+                '  <group id="tools" bounding_box="0"/>\n'
+                '</inkscape>\n')
+    return d
+
+
+def process(path, profile, natural):
+    """Hygiene one file in place. Returns (name, [steps applied], error_or_None)."""
+    name = os.path.basename(path)
+    try:
+        raw = open(path, encoding="utf-8").read()
+    except OSError as e:
+        return name, [], f"read failed: {e}"
+
+    steps = []
+    text = raw
+
+    text, n_flow = strip_empty_flowroots(text)
+    if n_flow:
+        steps.append(f"flowRoot x{n_flow}")
+
+    has_markers = bool(MARKER_REF.search(text))
+    if has_markers:
+        text, n_zero = neutralise_zero_width_strokes(text)
+        if n_zero:
+            steps.append(f"zero-width stroke x{n_zero}")
+
+    if text != raw:
+        open(path, "w", encoding="utf-8").write(text)
+
+    # A <pixmap> label renders at natural size; fit-canvas would rewrite the viewBox defining it.
+    fit = name not in natural
+    if not fit and "viewBox" not in root_tag(text):
+        return name, steps, "shown by a <pixmap> but has no viewBox: run naturalsize.py on it"
+
+    actions = ["select-all:all", "object-to-path"]
+    steps.append("object-to-path")
+    if has_markers:
+        actions += ["select-all:all", "object-stroke-to-path"]
+        steps.append("marker bake")
+    if fit:
+        actions += ["select-all:all", "fit-canvas-to-selection"]
+        steps.append("fit-canvas")
+    else:
+        steps.append("fit-canvas SKIPPED (<pixmap> natural size)")
+    actions += ["vacuum-defs",
+                f"export-filename:{path}", "export-plain-svg", "export-overwrite", "export-do"]
+
+    env = dict(os.environ, INKSCAPE_PROFILE_DIR=profile)
+    r = subprocess.run(["inkscape", "--actions=" + ";".join(actions), path],
+                       stdout=subprocess.DEVNULL, stderr=subprocess.PIPE, env=env)
+    if r.returncode != 0:
+        return name, steps, f"inkscape exit {r.returncode}: {r.stderr.decode()[:160]}"
+
+    # A silent no-op here would ship a Qt-unrenderable icon. Prove the marker refs are gone.
+    after = open(path, encoding="utf-8").read()
+    if MARKER_REF.search(after):
+        return name, steps, "marker references survived object-stroke-to-path"
+    return name, steps, None
+
+
+def write_manifest(manifest, svgs):
+    with open(manifest, "w", encoding="utf-8") as f:
+        f.write("# sha256 of each hygiened icon. Maintained by svghygiene; the build compares\n"
+                "# against it to spot an edited icon. Do not hand-edit.\n")
+        for s in sorted(svgs, key=os.path.basename):
+            f.write(f"{sha256(s)}  {os.path.basename(s)}\n")
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--dir", default=HERE, help="icon directory (default: this script's)")
+    ap.add_argument("--ui-dir", default=os.path.dirname(HERE),
+                    help="tree scanned for <pixmap> refs (default: the src/ above this script)")
+    ap.add_argument("--manifest", required=True, help="hash manifest to rewrite")
+    ap.add_argument("--all", action="store_true", help="process every icon, not just the listed")
+    ap.add_argument("--record-only", action="store_true", help="rewrite the manifest, fix nothing")
+    ap.add_argument("--jobs", type=int, default=os.cpu_count() or 4)
+    ap.add_argument("files", nargs="*", help="the icons to fix")
+    args = ap.parse_args()
+
+    every = sorted(os.path.join(args.dir, f)
+                   for f in os.listdir(args.dir) if f.endswith(".svg"))
+    if not every:
+        sys.exit(f"no SVGs in {args.dir}")
+
+    if args.record_only:
+        write_manifest(args.manifest, every)
+        print(f"svghygiene: recorded {len(every)} hashes in {args.manifest}")
+        return 0
+
+    targets = every if args.all else [os.path.abspath(f) for f in args.files]
+    if not targets:
+        sys.exit("nothing to do: pass files, --all or --record-only")
+
+    # Icons a .ui shows via <pixmap> render at natural size, so step 4 must leave them alone.
+    # Empty is now the normal case: those labels are QSvgWidget + load(), and cmake/IconGate.cmake
+    # rejects any new <pixmap> on an icon -- so this can only be non-empty if the gate is removed.
+    # Kept (rather than deleted with the skip it guards) so a wrong --ui-dir is still visible.
+    natural = natural_size_icons(args.ui_dir)
+    if not natural:
+        print(f"svghygiene: no <pixmap> icon refs under {args.ui_dir} -- expected; nothing to skip")
+
+    tmp = tempfile.mkdtemp(prefix="svghygiene")
+    try:
+        profile = make_profile(tmp)
+        print(f"svghygiene: {len(targets)} edited icon(s) to repair")
+        results = []
+        with concurrent.futures.ThreadPoolExecutor(max_workers=args.jobs) as ex:
+            for r in ex.map(lambda s: process(s, profile, natural), targets):
+                results.append(r)
+
+        for name, steps, err in sorted(results):
+            if not err:
+                print(f"   {name}: {', '.join(steps)}")
+
+        errors = [(n, e) for n, s, e in results if e]
+        if errors:
+            print(f"\n  FAILED ({len(errors)}):", file=sys.stderr)
+            for n, e in sorted(errors):
+                print(f"     {n}: {e}", file=sys.stderr)
+            return 1
+
+        write_manifest(args.manifest, every)
+        print(f"  OK. {len(targets)} repaired, {len(every)} hashes recorded.\n"
+              f"  The icons above were REWRITTEN in your working tree -- review and commit them\n"
+              f"  together with {os.path.basename(args.manifest)}.")
+        return 0
+    finally:
+        import shutil
+        shutil.rmtree(tmp, ignore_errors=True)
+
+
+if __name__ == "__main__":
+    sys.exit(main())

@@ -185,6 +185,8 @@ endif()
 
 
 find_package(Qt6Widgets             REQUIRED)
+find_package(Qt6Svg                 REQUIRED)
+find_package(Qt6SvgWidgets          REQUIRED)
 find_package(Qt6Xml                 REQUIRED)
 find_package(Qt6Sql                 REQUIRED)
 find_package(Qt6LinguistTools       REQUIRED)
@@ -265,6 +267,12 @@ configure_file(config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h)
 ###############################################################################################
 # Now we are ready to compile all sub-projects
 ###############################################################################################
+# Defines the icon_hygiene target the apps depend on; must precede them.
+add_subdirectory(src/icons)
+
+# Defines the svgticonengine target both apps link; must precede them.
+add_subdirectory(src/common/svgticon)
+
 if(BUILD_QMAPSHACK)
 add_subdirectory(src/qmapshack)
 endif(BUILD_QMAPSHACK)

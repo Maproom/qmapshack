@@ -78,6 +78,7 @@ set( SRCS
     ../common/gis/proj_x.cpp
     ../common/shell/CShell.cpp
     ../common/shell/CShellCmd.cpp
+    ../common/svgticon/CSvgtIcon.cpp
 )
 
 set( HDRS
@@ -150,6 +151,7 @@ set( HDRS
     ../common/gis/proj_x.h
     ../common/shell/CShell.h
     ../common/shell/CShellCmd.h
+    ../common/svgticon/CSvgtIcon.h
 )
 
 set( UIS
@@ -227,6 +229,11 @@ if(WIN32)
 endif()
 add_executable(${APPLICATION_NAME} WIN32 ${MAININP} ${ICON})
 
+# Repair any edited UI icon SVG before rcc embeds it (target defined in src/icons).
+add_dependencies(${APPLICATION_NAME} icon_hygiene)
+
+target_link_libraries(${APPLICATION_NAME} svgticonengine)
+
 ###############################################################################################
 # Translation related stuff
 ###############################################################################################
@@ -276,6 +283,8 @@ target_compile_definitions(${APPLICATION_NAME} PUBLIC
 
 target_link_libraries(${APPLICATION_NAME}
     Qt6::Widgets
+    Qt6::Svg  # for the qsvg/qsvgicon runtime plugins -- see the comment in qmapshack/CMakeLists.txt
+    Qt6::SvgWidgets  # QSvgWidget: the dpr-aware way to show a static icon
     Qt6::Network
     Qt6::Help
     ${GDAL_LIBRARIES}

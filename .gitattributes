@@ -1,0 +1,9 @@
+# Icon SVGs are hash-checked at build time by cmake/IconHygiene.cmake: file(SHA256)
+# of each working-tree .svg is compared against src/icons/svg.sha256. That only holds
+# if the checkout is byte-identical to the recorded file on every platform. Without
+# this, Windows' default core.autocrlf rewrites LF -> CRLF on checkout, every hash
+# mismatches, and the build wrongly reports every icon as "edited" and demands
+# inkscape + python3. Pin these files to LF so the bytes never change.
+*.svg                  text eol=lf
+src/icons/svg.sha256   text eol=lf
+src/icons/svghygiene   text eol=lf

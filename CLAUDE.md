@@ -446,6 +446,16 @@ makes the document invalid and renders **nothing**; lowercase `currentcolor` is 
 (QTBUG-46947); a `<style>` class beats a root `color=` (so the KDE/Breeze idiom does not mix with
 ours); Qt 6.10.0 has a `currentColor` regression fixed in 6.10.1 (QTBUG-141102).
 
+**Qt's `QSvgRenderer` also ignores a class-supplied `fill:`** (measured 6.9.2; inkscape honours
+it). A shape whose fill comes only from a `<style>` class — the two-colour `.paper-ink{fill:…;color:…}`
+form, fill from the class plus stroke via inline `currentColor` — renders its **fill black**.
+`CSvgtIconEngine::recolored()` works around it: after resolving each class's colour it inlines the
+resolved fill as a `fill="…"` presentation attribute onto the elements using that class (skipped when
+they already have an inline fill). Qt honours the inline value; a renderer that *does* apply class
+fill overrides it with the identical class value, so only Qt changes. Left unfixed this blacked out
+19 icons (search-web service icons, the dock toggles, `Database`/`Print`/`Cut`/…) — verified by
+rendering the actual `recolored()` output through `QSvgRenderer` against inkscape.
+
 **Qt renders `<marker>` but ignores `markerUnits="strokeWidth"`** (measured, Qt 6.9.2). That is
 the SVG *default* when the attribute is absent, which it always is in Inkscape output: the arrow
 is meant to scale by the referencing path's stroke width, which is why Inkscape's stock arrows

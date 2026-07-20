@@ -2,4 +2,5 @@ CMakeLists.txt.user
 .mypy_cache
 *build*
 .vscode
-.notes/
+__pycache__/
+*.pyc

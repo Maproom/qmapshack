@@ -78,6 +78,8 @@ static void addFilterGroup(QTreeWidget* widget, CGisItemTrk& trk, const QString&
 
 CDetailsTrk::CDetailsTrk(CGisItemTrk& trk) : INotifyTrk(CGisItemTrk::eVisualDetails), trk(trk) {
   setupUi(this);
+  CSvgtIcon::load(labelTainted, "://icons/Tainted.svgt");
+  CSvgtIcon::load(labelNogo, "://icons/NoGo.svgt");
   QPixmap icon(14, 14);
   const int N = IGisItem::getColorMap().count();
   for (int i = 0; i < N; ++i) {

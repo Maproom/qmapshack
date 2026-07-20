@@ -21,10 +21,12 @@
 #include <QtWidgets>
 
 #include "CMainWindow.h"
+#include "svgticon/CSvgtIcon.h"
 
 CRouterRoutinoPathSetup::CRouterRoutinoPathSetup(QStringList& paths)
     : QDialog(CMainWindow::getBestWidgetForParent()), paths(paths) {
   setupUi(this);
+  CSvgtIcon::load(label, "://icons/Help.svgt");
 
   connect(toolAdd, &QToolButton::clicked, this, &CRouterRoutinoPathSetup::slotAddPath);
   connect(toolDelete, &QToolButton::clicked, this, &CRouterRoutinoPathSetup::slotDelPath);

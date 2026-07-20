@@ -28,11 +28,14 @@
 #include "helpers/CPositionDialog.h"
 #include "helpers/CTimeDialog.h"
 #include "helpers/CWptIconManager.h"
+#include "svgticon/CSvgtIcon.h"
 #include "units/IUnit.h"
 #include "widgets/CTextEditWidget.h"
 
 CDetailsWpt::CDetailsWpt(CGisItemWpt& wpt, QWidget* parent) : QDialog(parent), wpt(wpt) {
   setupUi(this);
+  CSvgtIcon::load(labelTainted, "://icons/Tainted.svgt");
+  CSvgtIcon::load(labelNogo, "://icons/NoGo.svgt");
   photoAlbum->hide();
 
   setupGui();

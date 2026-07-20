@@ -31,6 +31,7 @@
 CEnergyCyclingDialog::CEnergyCyclingDialog(CEnergyCycling& energyCycling, QWidget* parent)
     : QDialog(parent), energyCycling(energyCycling) {
   setupUi(this);
+  CSvgtIcon::load(widgetIcon, "://icons/EnergyCycling.svgt");
 
   for (const wind_speed_t& windSpeed : windSpeeds) {
     comboWindSpeed->addItem(windSpeed.name);

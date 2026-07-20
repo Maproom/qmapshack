@@ -100,6 +100,7 @@ void CDemTreeWidget::dropEvent(QDropEvent* e) {
 
 CDemList::CDemList(CCanvas* parent) : QWidget(parent), canvas(parent) {
   setupUi(this);
+  CSvgtIcon::load(labelIcon, "://icons/Help.svgt");
   lineFilter->addAction(actionClearFilter, QLineEdit::TrailingPosition);
 
   connect(treeWidget, &CDemTreeWidget::customContextMenuRequested, this, &CDemList::slotContextMenu);

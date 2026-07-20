@@ -21,9 +21,23 @@
 #include <QtWidgets>
 
 #include "mouse/range/CScrOptRangeTool.h"
+#include "svgticon/CSvgtIcon.h"
 
 CRangeToolSetup::CRangeToolSetup(CScrOptRangeTool& parent) : QDialog(&parent), tool(parent) {
   setupUi(this);
+  CSvgtIcon::load(label_6, "://icons/SelectRange.svgt");
+  CSvgtIcon::load(label_8, "://icons/SelectEndPoint.svgt");
+  CSvgtIcon::load(label_9, "://icons/SelectStartPoint.svgt");
+  CSvgtIcon::load(label_7, "://icons/SelectReset.svgt");
+  CSvgtIcon::load(label_10, "://icons/PointHide.svgt");
+  CSvgtIcon::load(label_11, "://icons/PointShow.svgt");
+  CSvgtIcon::load(label_12, "://icons/Activity.svgt");
+  CSvgtIcon::load(label_13, "://icons/Copy.svgt");
+  CSvgtIcon::load(label_14, "://icons/DeleteMultiple.svgt");
+  CSvgtIcon::load(label_17, "://icons/SelectRange.svgt");
+  CSvgtIcon::load(label_18, "://icons/SelectReset.svgt");
+  CSvgtIcon::load(label_20, "://icons/SelectEndPoint.svgt");
+  CSvgtIcon::load(label_22, "://icons/SelectStartPoint.svgt");
 
   actionsHidePoints->setAction(tool.actionHidePoints);
   actionsShowPoints->setAction(tool.actionShowPoints);

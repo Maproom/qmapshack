@@ -21,9 +21,11 @@
 #include "canvas/CCanvas.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "helpers/CSettings.h"
+#include "svgticon/CSvgtIcon.h"
 
 CFilterObscureDate::CFilterObscureDate(CGisItemTrk& trk, QWidget* parent) : QWidget(parent), trk(trk) {
   setupUi(this);
+  CSvgtIcon::load(label_4, "://icons/Time.svgt");
 
   SETTINGS;
   spinBox->setValue(cfg.value("TrackDetails/Filter/ObscureTimestamp/delta", 0).toInt());

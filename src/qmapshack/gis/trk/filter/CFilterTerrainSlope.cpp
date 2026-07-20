@@ -20,9 +20,11 @@
 
 #include "canvas/CCanvas.h"
 #include "gis/trk/CGisItemTrk.h"
+#include "svgticon/CSvgtIcon.h"
 
 CFilterTerrainSlope::CFilterTerrainSlope(CGisItemTrk& trk, QWidget* parent) : QWidget(parent), trk(trk) {
   setupUi(this);
+  CSvgtIcon::load(label_3, "://icons/CSrcSlope.svgt");
 
   connect(toolApply, &QToolButton::clicked, this, &CFilterTerrainSlope::slotApply);
 }

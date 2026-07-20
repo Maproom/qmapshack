@@ -28,6 +28,7 @@ CFilterInvalid::CFilterInvalid(CGisItemTrk& trk, QWidget* parent)
 
 {
   setupUi(this);
+  CSvgtIcon::load(labelIcon, "://icons/PointHide.svgt");
 
   connect(toolApply, &QToolButton::clicked, this, &CFilterInvalid::slotApply);
 }

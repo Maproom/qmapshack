@@ -21,9 +21,11 @@
 #include "canvas/CCanvas.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/CKnownExtension.h"
+#include "svgticon/CSvgtIcon.h"
 
 CFilterDeleteExtension::CFilterDeleteExtension(CGisItemTrk& trk, QWidget* parent) : QWidget(parent), trk(trk) {
   setupUi(this);
+  CSvgtIcon::load(label_3, "://icons/FilterModifyExtension.svgt");
 
   updateUi();
 

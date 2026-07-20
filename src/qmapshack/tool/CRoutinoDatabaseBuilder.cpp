@@ -23,9 +23,11 @@
 #include "CMainWindow.h"
 #include "helpers/CSettings.h"
 #include "setup/IAppSetup.h"
+#include "svgticon/CSvgtIcon.h"
 
 CRoutinoDatabaseBuilder::CRoutinoDatabaseBuilder(QWidget* parent) : IToolShell(parent) {
   setupUi(this);
+  CSvgtIcon::load(label_4, "://icons/Help.svgt");
   setTextBrowser(textBrowser);
 
   setObjectName(tr("Create Routino Database"));

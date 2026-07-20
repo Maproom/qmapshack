@@ -28,6 +28,7 @@ CFilterSubPt2Pt::CFilterSubPt2Pt(CGisItemTrk& trk, QWidget* parent)
 
 {
   setupUi(this);
+  CSvgtIcon::load(label_3, "://icons/FilterSubPt2Pt.svgt");
 
   connect(toolApply, &QToolButton::clicked, this, &CFilterSubPt2Pt::slotApply);
 }

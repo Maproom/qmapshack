@@ -23,11 +23,13 @@
 #include "canvas/CCanvas.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "helpers/CSettings.h"
+#include "svgticon/CSvgtIcon.h"
 #include "units/IUnit.h"
 
 CFilterZeroSpeedDriftCleaner::CFilterZeroSpeedDriftCleaner(CGisItemTrk& trk, QWidget* parent)
     : QWidget(parent), trk(trk) {
   setupUi(this);
+  CSvgtIcon::load(label_3, "://icons/FilterZeroSpeedDriftCleaner.svgt");
 
   distance->setSuffix(IUnit::self().baseUnit);
 

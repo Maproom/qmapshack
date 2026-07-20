@@ -19,9 +19,13 @@
 #include "gis/search/CGeoSearchConfigDialog.h"
 
 #include "gis/search/CGeoSearchConfig.h"
+#include "svgticon/CSvgtIcon.h"
 
 CGeoSearchConfigDialog::CGeoSearchConfigDialog(QWidget* parent, CGeoSearchConfig* searchConfig) : QDialog(parent) {
   setupUi(this);
+  CSvgtIcon::load(labelNominatimIcon, "://icons/SearchNominatim.svgt");
+  CSvgtIcon::load(labelGeonamesIcon, "://icons/SearchGeonames.svgt");
+  CSvgtIcon::load(label, "://icons/SearchGoogle.svgt");
 
   connect(buttonBox, &QDialogButtonBox::accepted, this, &CGeoSearchConfigDialog::slotAccepted);
   connect(buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);

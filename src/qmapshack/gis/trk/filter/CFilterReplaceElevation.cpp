@@ -21,9 +21,11 @@
 #include "CMainWindow.h"
 #include "canvas/CCanvas.h"
 #include "gis/trk/CGisItemTrk.h"
+#include "svgticon/CSvgtIcon.h"
 
 CFilterReplaceElevation::CFilterReplaceElevation(CGisItemTrk& trk, QWidget* parent) : QWidget(parent), trk(trk) {
   setupUi(this);
+  CSvgtIcon::load(label_3, "://icons/SetEle.svgt");
   updateUi();
 
   connect(toolApply, &QToolButton::clicked, this, &CFilterReplaceElevation::slotApply);

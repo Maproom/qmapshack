@@ -24,9 +24,11 @@
 #include "canvas/CCanvas.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "helpers/CSettings.h"
+#include "svgticon/CSvgtIcon.h"
 
 CFilterSplitTrack::CFilterSplitTrack(CGisItemTrk& trk, QWidget* parent) : QWidget(parent), trk(trk) {
   setupUi(this);
+  CSvgtIcon::load(label_3, "://icons/FilterSplitTrack.svgt");
 
   SETTINGS;
   spinBox->setValue(cfg.value("TrackDetails/Filter/SplitTrack/nTracks").toInt());

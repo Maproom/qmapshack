@@ -21,10 +21,12 @@
 #include "canvas/CCanvas.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "helpers/CSettings.h"
+#include "svgticon/CSvgtIcon.h"
 
 CFilterInterpolateElevation::CFilterInterpolateElevation(CGisItemTrk& trk, QWidget* parent)
     : QWidget(parent), trk(trk) {
   setupUi(this);
+  CSvgtIcon::load(label_3, "://icons/SetEle.svgt");
 
   comboQuality->addItem(tr("coarse"), CGisItemTrk::eQualityCoarse);
   comboQuality->addItem(tr("medium"), CGisItemTrk::eQualityMedium);

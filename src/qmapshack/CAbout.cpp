@@ -25,10 +25,12 @@
 #include <QtWidgets>
 
 #include "contributors.h"
+#include "svgticon/CSvgtIcon.h"
 #include "version.h"
 
 CAbout::CAbout(QWidget* parent) : QDialog(parent) {
   setupUi(this);
+  CSvgtIcon::load(label, "://icons/QMapShack.svgt");
 
 #ifdef DEVELOPMENT
   labelVersion->setText(VER_STR ".develop");

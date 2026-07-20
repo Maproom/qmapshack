@@ -1,0 +1,84 @@
+#!/bin/bash
+#
+# Render ONE icon SVG to PNG at the given sizes.
+#
+#   ./mkicon Apply.svg 32 48              -> 32x32/Apply.png, 48x48/Apply.png
+#   ./mkicon waypoints/FlagRed.svg 32     -> waypoints/32x32/FlagRed.png
+#   ./mkicon --hicolor QMapShack.svg      -> qmapshack/hicolor/<N>x<N>/apps/QMapShack.png
+#
+# SVG is the default: an icon only needs a PNG if something cannot consume a QIcon --
+# a QLabel <pixmap>, an HTML <img>, or an item icon that gets serialised into the database.
+# Everything else is referenced as ":/icons/Foo.svgt" and needs no raster at all.
+#
+# This replaces the old `makeicons` scripts, which rendered *every* SVG in a directory on every
+# run. That made a raster exist for every icon whether or not anything wanted one, and it let the
+# sources drift from the rasters unnoticed for years: by the time it was measured, running it
+# would have corrupted 35 of 327 icons. Rendering one icon on purpose cannot do that.
+#
+# Verify a change with .notes/icons-tools/uidiff.py.
+
+set -u
+
+usage() {
+    sed -n '3,12p' "$0" | sed 's/^# \?//'
+    exit 2
+}
+
+fail() { echo "mkicon: $*" >&2; exit 1; }
+
+command -v inkscape >/dev/null || fail "inkscape not found"
+
+# The one true invocation. -D crops to the drawing, -w/-h force the square the icon set uses.
+# Note the sources carry no viewBox unless naturalsize.py gave them one, so -D is what makes the
+# artwork fill the frame -- see .notes/icons-task1-ui-svg-plan.md.
+render() {
+    local svg="$1" out="$2" size="$3"
+    mkdir -p "$(dirname "$out")" || fail "cannot create $(dirname "$out")"
+    inkscape -D -w "$size" -h "$size" "$svg" \
+             --export-type=png --export-filename="$out" >/dev/null 2>&1 \
+        || fail "inkscape failed on $svg at ${size}px"
+    [ -s "$out" ] || fail "inkscape wrote nothing for $svg at ${size}px"
+    echo "  ${size}x${size}  $out"
+}
+
+# The freedesktop icon theme sizes, for the two application icons only.
+HICOLOR_SIZES=(8 16 22 24 32 36 40 42 48 64 72 80 96 128 192 256 512)
+
+hicolor() {
+    local svg="$1"
+    local name; name="$(basename "$svg" .svg)"
+    local theme
+    case "$name" in
+        QMapShack) theme="qmapshack" ;;
+        QMapTool)  theme="qmaptool" ;;
+        *) fail "--hicolor is only for QMapShack.svg or QMapTool.svg, not $name" ;;
+    esac
+    local dir; dir="$(dirname "$svg")"
+    for s in "${HICOLOR_SIZES[@]}"; do
+        render "$svg" "$dir/$theme/hicolor/${s}x${s}/apps/$name.png" "$s"
+    done
+}
+
+[ $# -ge 1 ] || usage
+
+if [ "$1" = "--hicolor" ]; then
+    [ $# -eq 2 ] || usage
+    [ -f "$2" ] || fail "no such file: $2"
+    hicolor "$2"
+    exit 0
+fi
+
+[ $# -ge 2 ] || usage
+svg="$1"; shift
+[ -f "$svg" ] || fail "no such file: $svg"
+case "$svg" in *.svg) ;; *) fail "not an SVG: $svg" ;; esac
+
+dir="$(dirname "$svg")"
+name="$(basename "$svg" .svg)"
+
+for size in "$@"; do
+    case "$size" in
+        ''|*[!0-9]*) fail "not a size: $size" ;;
+    esac
+    render "$svg" "$dir/${size}x${size}/$name.png" "$size"
+done

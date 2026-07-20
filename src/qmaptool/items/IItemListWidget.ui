@@ -43,8 +43,8 @@
         <string>...</string>
        </property>
        <property name="icon">
-        <iconset resource="../../qmapshack/resources.qrc">
-         <normaloff>:/icons/32x32/PathBlue.png</normaloff>:/icons/32x32/PathBlue.png</iconset>
+        <iconset resource="../resources.qrc">
+         <normaloff>:/icons/PathBlue.svgt</normaloff>:/icons/PathBlue.svgt</iconset>
        </property>
       </widget>
      </item>
@@ -60,8 +60,8 @@
         <string>...</string>
        </property>
        <property name="icon">
-        <iconset resource="../../qmapshack/resources.qrc">
-         <normaloff>:/icons/32x32/DeleteOne.png</normaloff>:/icons/32x32/DeleteOne.png</iconset>
+        <iconset resource="../resources.qrc">
+         <normaloff>:/icons/DeleteOne.svgt</normaloff>:/icons/DeleteOne.svgt</iconset>
        </property>
       </widget>
      </item>
@@ -77,8 +77,8 @@
         <string>...</string>
        </property>
        <property name="icon">
-        <iconset resource="../../qmapshack/resources.qrc">
-         <normaloff>:/icons/32x32/DeleteMultiple.png</normaloff>:/icons/32x32/DeleteMultiple.png</iconset>
+        <iconset resource="../resources.qrc">
+         <normaloff>:/icons/DeleteMultiple.svgt</normaloff>:/icons/DeleteMultiple.svgt</iconset>
        </property>
       </widget>
      </item>
@@ -95,7 +95,7 @@
        </property>
        <property name="icon">
         <iconset resource="../resources.qrc">
-         <normaloff>:/icons/32x32/Reload.png</normaloff>:/icons/32x32/Reload.png</iconset>
+         <normaloff>:/icons/Reload.svgt</normaloff>:/icons/Reload.svgt</iconset>
        </property>
       </widget>
      </item>
@@ -120,7 +120,6 @@
   </layout>
  </widget>
  <resources>
-  <include location="../../qmapshack/resources.qrc"/>
   <include location="../resources.qrc"/>
  </resources>
  <connections/>

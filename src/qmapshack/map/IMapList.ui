@@ -87,21 +87,12 @@
       <number>3</number>
      </property>
      <item>
-      <widget class="QLabel" name="labelIcon">
+      <widget class="QSvgWidget" name="labelIcon">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="pixmap">
-        <pixmap resource="../resources.qrc">:/icons/48x48/Help.png</pixmap>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
        </property>
       </widget>
      </item>
@@ -144,7 +135,7 @@
   <action name="actionMoveHome">
    <property name="icon">
     <iconset resource="../resources.qrc">
-     <normaloff>:/icons/32x32/ToTop.png</normaloff>:/icons/32x32/ToTop.png</iconset>
+     <normaloff>:/icons/ToTop.svgt</normaloff>:/icons/ToTop.svgt</iconset>
    </property>
    <property name="text">
     <string>Move to Top</string>
@@ -162,7 +153,7 @@
   <action name="actionMoveUp">
    <property name="icon">
     <iconset resource="../resources.qrc">
-     <normaloff>:/icons/32x32/Up.png</normaloff>:/icons/32x32/Up.png</iconset>
+     <normaloff>:/icons/Up.svgt</normaloff>:/icons/Up.svgt</iconset>
    </property>
    <property name="text">
     <string>Move Up</string>
@@ -180,7 +171,7 @@
   <action name="actionMoveDown">
    <property name="icon">
     <iconset resource="../resources.qrc">
-     <normaloff>:/icons/32x32/Down.png</normaloff>:/icons/32x32/Down.png</iconset>
+     <normaloff>:/icons/Down.svgt</normaloff>:/icons/Down.svgt</iconset>
    </property>
    <property name="text">
     <string>Move Down</string>
@@ -198,7 +189,7 @@
   <action name="actionMoveEnd">
    <property name="icon">
     <iconset resource="../resources.qrc">
-     <normaloff>:/icons/32x32/ToBottom.png</normaloff>:/icons/32x32/ToBottom.png</iconset>
+     <normaloff>:/icons/ToBottom.svgt</normaloff>:/icons/ToBottom.svgt</iconset>
    </property>
    <property name="text">
     <string>Move to Bottom</string>
@@ -216,7 +207,7 @@
   <action name="actionReloadMaps">
    <property name="icon">
     <iconset resource="../resources.qrc">
-     <normaloff>:/icons/32x32/Reset.png</normaloff>:/icons/32x32/Reset.png</iconset>
+     <normaloff>:/icons/Reset.svgt</normaloff>:/icons/Reset.svgt</iconset>
    </property>
    <property name="text">
     <string>Reload Maps</string>
@@ -228,7 +219,7 @@
   <action name="actionClearFilter">
    <property name="icon">
     <iconset resource="../resources.qrc">
-     <normaloff>:/icons/32x32/Filter.png</normaloff>:/icons/32x32/Filter.png</iconset>
+     <normaloff>:/icons/Filter.svgt</normaloff>:/icons/Filter.svgt</iconset>
    </property>
    <property name="text">
     <string>Clear Filter</string>
@@ -240,7 +231,7 @@
   <action name="actionRemove">
    <property name="icon">
     <iconset resource="../resources.qrc">
-     <normaloff>:/icons/32x32/DeleteOne.png</normaloff>:/icons/32x32/DeleteOne.png</iconset>
+     <normaloff>:/icons/DeleteOne.svgt</normaloff>:/icons/DeleteOne.svgt</iconset>
    </property>
    <property name="text">
     <string>Remove</string>
@@ -255,7 +246,7 @@
   <action name="actionOverviewInfo">
    <property name="icon">
     <iconset resource="../resources.qrc">
-     <normaloff>:/icons/32x32/Table.png</normaloff>:/icons/32x32/Table.png</iconset>
+     <normaloff>:/icons/Table.svgt</normaloff>:/icons/Table.svgt</iconset>
    </property>
    <property name="text">
     <string>Overview Info...</string>
@@ -269,6 +260,11 @@
   </action>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>QSvgWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">QSvgWidget</header>
+  </customwidget>
   <customwidget>
    <class>CMapTreeWidget</class>
    <extends>QTreeWidget</extends>

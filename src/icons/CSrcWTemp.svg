@@ -2,47 +2,19 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="64"
-   height="64"
+   width="64.249138"
+   height="64.000023"
    id="svg2"
    version="1.1"
-   inkscape:version="0.91 r13725"
-   sodipodi:docname="CSrcWTemp.svg">
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <style
+     id="current-color-scheme">.ink{color:#000080}.ink-lead{fill:#000080;color:#000000}</style>
   <defs
      id="defs4" />
-  <sodipodi:namedview
-     id="base"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageopacity="0.0"
-     inkscape:pageshadow="2"
-     inkscape:zoom="5.6"
-     inkscape:cx="1.8237996"
-     inkscape:cy="59.665373"
-     inkscape:document-units="px"
-     inkscape:current-layer="layer1"
-     showgrid="true"
-     inkscape:window-width="1916"
-     inkscape:window-height="1041"
-     inkscape:window-x="0"
-     inkscape:window-y="18"
-     inkscape:window-maximized="0">
-    <inkscape:grid
-       type="xygrid"
-       id="grid2985"
-       empspacing="5"
-       visible="true"
-       enabled="true"
-       snapvisiblegridlinesonly="true" />
-  </sodipodi:namedview>
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -56,67 +28,55 @@
     </rdf:RDF>
   </metadata>
   <g
-     inkscape:label="Ebene 1"
-     inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(0,-988.36218)">
+     transform="translate(0.24914045,-988.36218)">
     <path
-       style="opacity:1;fill:#000080;fill-opacity:1;stroke:#000080;stroke-width:5.65799999;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="path4170"
-       sodipodi:type="arc"
-       sodipodi:cx="16.202591"
-       sodipodi:cy="1041.0125"
-       sodipodi:rx="9.2698154"
-       sodipodi:ry="7.55445"
-       sodipodi:start="5.8033419"
-       sodipodi:end="5.7456763"
-       sodipodi:open="true"
-       d="m 24.42554,1037.525 a 9.2698154,7.55445 0 0 1 -3.825532,10.1378 9.2698154,7.55445 0 0 1 -12.4935811,-2.9712 9.2698154,7.55445 0 0 1 3.4653201,-10.2234 9.2698154,7.55445 0 0 1 12.593492,2.6764" />
-    <rect
-       style="opacity:1;fill:#000080;fill-opacity:1;stroke:#000080;stroke-width:4.46860266;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       id="rect4172"
-       width="6.2991643"
-       height="49.531399"
-       x="13.287962"
-       y="991.8822"
-       ry="3.1495821" />
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:20px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000080;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="32.232143"
-       y="1040.9336"
-       id="text4188"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan4190"
-         x="32.232143"
-         y="1040.9336">°<tspan
-   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:20px;font-family:Sans;-inkscape-font-specification:'Sans Bold'"
-   id="tspan4210">F</tspan></tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:20px;line-height:125%;font-family:Sans;-inkscape-font-specification:'Sans Bold';letter-spacing:0px;word-spacing:0px;fill:#000080;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="21.589287"
-       y="1005.6479"
-       id="text4188-1"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan4190-3"
-         x="21.589287"
-         y="1005.6479">°C</tspan></text>
+       style="opacity:1;fill:currentColor;stroke:currentColor;stroke-width:5.658;stroke-linecap:round"
+       d="m 24.42554,1037.525 a 9.2698154,7.55445 0 0 1 -3.825532,10.1378 9.2698154,7.55445 0 0 1 -12.4935811,-2.9712 9.2698154,7.55445 0 0 1 3.4653201,-10.2234 9.2698154,7.55445 0 0 1 12.593492,2.6764"
+       class="ink" />
     <path
-       style="fill:none;fill-rule:evenodd;stroke:#000080;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4172"
+       style="opacity:1;fill:currentColor;stroke:currentColor;stroke-width:4.4686;stroke-linecap:round"
+       d="m 16.437544,991.8822 c 1.744869,0 3.149582,1.40472 3.149582,3.14958 v 43.23222 c 0,1.7449 -1.404713,3.1496 -3.149582,3.1496 -1.744868,0 -3.149582,-1.4047 -3.149582,-3.1496 v -43.23222 c 0,-1.74486 1.404714,-3.14958 3.149582,-3.14958 z"
+       class="ink" />
+    <g
+       aria-label="°F"
+       id="text4188"
+       style="line-height:0%;letter-spacing:0px;word-spacing:0px;fill:currentColor;stroke-width:1px"
+       class="ink">
+      <path
+         d="m 36.512143,1032.5936 q -1.44,0 -2.32,-0.84 -0.86,-0.86 -0.86,-2.22 0,-1.36 0.86,-2.22 0.86,-0.86 2.32,-0.86 1.42,0 2.3,0.86 0.88,0.86 0.88,2.22 0,1.36 -0.88,2.22 -0.88,0.84 -2.3,0.84 z m 0.02,-1.18 q 0.96,0 1.4,-0.52 0.46,-0.52 0.46,-1.36 0,-0.88 -0.48,-1.4 -0.46,-0.52 -1.38,-0.52 -0.98,0 -1.44,0.52 -0.46,0.52 -0.46,1.4 0,0.84 0.46,1.36 0.46,0.52 1.44,0.52 z"
+         style="font-size:20px;line-height:1.25"
+         id="path19" />
+      <path
+         d="m 45.572133,1040.9336 h -2.98 v -14.28 h 8.18 v 2.48 h -5.2 v 3.68 h 4.84 v 2.48 h -4.84 z"
+         style="font-weight:bold;font-size:20px;-inkscape-font-specification:'Sans Bold'"
+         id="path21" />
+    </g>
+    <g
+       aria-label="°C"
+       id="text4188-1"
+       style="font-weight:bold;line-height:0%;-inkscape-font-specification:'Sans Bold';letter-spacing:0px;word-spacing:0px;fill:currentColor;stroke-width:1px"
+       class="ink">
+      <path
+         d="m 25.869287,997.90789 q -1.02,0 -1.82,-0.42 -0.78,-0.44 -1.24,-1.2 -0.44,-0.76 -0.44,-1.74 0,-0.98 0.44,-1.74 0.46,-0.76 1.24,-1.2 0.8,-0.44 1.82,-0.44 1.04,0 1.82,0.44 0.78,0.42 1.22,1.18 0.44,0.76 0.44,1.76 0,0.98 -0.44,1.74 -0.44,0.76 -1.22,1.2 -0.78,0.42 -1.82,0.42 z m 0,-1.86 q 0.64,0 1.08,-0.4 0.44,-0.42 0.44,-1.1 0,-0.72 -0.44,-1.12 -0.44,-0.42 -1.08,-0.42 -0.62,0 -1.08,0.42 -0.44,0.4 -0.44,1.12 0,0.68 0.44,1.1 0.46,0.4 1.08,0.4 z"
+         style="font-size:20px;line-height:1.25"
+         id="path24" />
+      <path
+         d="m 38.009277,993.68789 q -1.74,0 -2.66,1.3 -0.92,1.3 -0.92,3.56 0,2.28001 0.84,3.54001 0.86,1.24 2.74,1.24 0.88,0 1.74,-0.2 0.88,-0.2 1.9,-0.56 v 2.54 q -0.94,0.38 -1.86,0.56 -0.92,0.18 -2.06,0.18 -2.2,0 -3.64,-0.9 -1.42,-0.92 -2.1,-2.56 -0.68,-1.66 -0.68,-3.86001 0,-2.16 0.78,-3.82 0.78,-1.66 2.26,-2.6 1.5,-0.94 3.66,-0.94 1.06,0 2.12,0.28 1.08,0.26 2.06,0.72 l -0.98,2.46 q -0.8,-0.38 -1.62,-0.66 -0.8,-0.28 -1.58,-0.28 z"
+         style="font-size:20px;line-height:1.25"
+         id="path26" />
+    </g>
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:currentColor;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="m 1.8750004,1013.6121 c 7.2206713,-11.6341 13.7257966,-8.2417 19.9999996,0 7.220672,11.6341 13.725796,8.2417 20,0 6.666667,-10.3442 13.333333,-9.1648 20,0"
        id="path4143"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cccc" />
-    <rect
-       style="opacity:1;fill:#000080;fill-opacity:0;stroke:#000000;stroke-width:0;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="ink" />
+    <path
        id="rect4142"
-       width="64"
-       height="64"
-       x="0"
-       y="988.36218"
-       ry="0" />
+       style="opacity:1;fill-opacity:0;stroke:currentColor;stroke-width:0;stroke-linecap:round"
+       d="m 0,988.36218 h 64 v 64.00002 H 0 Z"
+       class="ink-lead" />
   </g>
 </svg>

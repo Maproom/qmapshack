@@ -2,40 +2,19 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="64px"
-   height="64px"
+   width="34.999454"
+   height="34.98917"
    id="svg3513"
    version="1.1"
-   inkscape:version="0.48.4 r9939"
-   sodipodi:docname="DeleteMultiple.svg">
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <style
+     id="current-color-scheme">.paper-lead{fill:#ffffff;color:#000000}.ink-lead{fill:#000080;color:#000000}</style>
   <defs
      id="defs3515" />
-  <sodipodi:namedview
-     id="base"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageopacity="0.0"
-     inkscape:pageshadow="2"
-     inkscape:zoom="5.5"
-     inkscape:cx="32"
-     inkscape:cy="32"
-     inkscape:current-layer="layer1"
-     showgrid="true"
-     inkscape:document-units="px"
-     inkscape:grid-bbox="true"
-     inkscape:window-width="657"
-     inkscape:window-height="421"
-     inkscape:window-x="-2"
-     inkscape:window-y="0"
-     inkscape:window-maximized="0" />
   <metadata
      id="metadata3518">
     <rdf:RDF>
@@ -44,34 +23,27 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <g
      id="layer1"
-     inkscape:label="Layer 1"
-     inkscape:groupmode="layer">
+     transform="translate(-20.318458,-16.877606)">
     <g
        transform="translate(-493.74878,-107.30995)"
-       id="g3150"
-       inkscape:export-filename="/home/oeichler/Code/cpp/MapRoom/src/icons/16x16/delete.png"
-       inkscape:export-xdpi="41.129372"
-       inkscape:export-ydpi="41.129372">
-      <rect
-         transform="matrix(0.83908132,-0.54400601,0.60317551,0.79760849,0,0)"
-         ry="3.2324563e-06"
-         y="392.95706"
-         x="335.86865"
-         height="14.389285"
-         width="11.079326"
-         id="rect4004-6"
-         style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.02867186;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+       id="g3150">
       <path
-         inkscape:connector-curvature="0"
+         id="rect4004-6"
+         style="stroke:currentColor;stroke-width:1.02867;stroke-linecap:round;stroke-linejoin:round"
+         transform="matrix(0.83908132,-0.54400601,0.60317551,0.79760849,0,0)"
+         d="m 335.86866,392.95706 h 11.07931 c 10e-6,0 10e-6,0 10e-6,10e-6 v 14.38927 c 0,10e-6 0,10e-6 -10e-6,10e-6 h -11.07931 c -10e-6,0 -10e-6,0 -10e-6,-10e-6 v -14.38927 c 0,-10e-6 0,-10e-6 10e-6,-10e-6 z"
+         class="paper-lead" />
+      <path
          id="path3971-4"
-         d="m 514.55153,130.6814 7.57353,28.01102 18.91716,0 7.54018,-28.01102 -34.03087,0 z"
-         style="fill:#000080;stroke:#000000;stroke-width:0.9686141px;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1" />
+         d="m 514.55153,130.6814 7.57353,28.01102 h 18.91716 l 7.54018,-28.01102 z"
+         style="stroke:currentColor;stroke-width:0.968614px;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+         class="ink-lead" />
     </g>
   </g>
 </svg>

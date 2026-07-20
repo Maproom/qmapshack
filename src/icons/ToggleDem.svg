@@ -2,43 +2,19 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="64px"
-   height="64px"
+   width="49.27911"
+   height="51.545452"
    id="svg3462"
    version="1.1"
-   inkscape:version="0.91 r13725"
-   sodipodi:docname="ToggleDem.svg"
-   inkscape:export-filename="/home/norbert/Development/QMapShack/QMapShack_touch/src/icons/48x48/ToggleDem.png"
-   inkscape:export-xdpi="67.5"
-   inkscape:export-ydpi="67.5">
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <style
+     id="current-color-scheme">.lead{color:#000000}.paper{color:#ffffff}.paper-ink{fill:#ffffff;color:#000080}.ink{color:#000080}</style>
   <defs
      id="defs3464" />
-  <sodipodi:namedview
-     id="base"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageopacity="0.0"
-     inkscape:pageshadow="2"
-     inkscape:zoom="5.5"
-     inkscape:cx="-53.545455"
-     inkscape:cy="32"
-     inkscape:current-layer="layer1"
-     showgrid="true"
-     inkscape:document-units="px"
-     inkscape:grid-bbox="true"
-     inkscape:window-width="1366"
-     inkscape:window-height="744"
-     inkscape:window-x="0"
-     inkscape:window-y="24"
-     inkscape:window-maximized="1" />
   <metadata
      id="metadata3467">
     <rdf:RDF>
@@ -53,45 +29,35 @@
   </metadata>
   <g
      id="layer1"
-     inkscape:label="Layer 1"
-     inkscape:groupmode="layer">
-    <rect
-       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.10540044px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     transform="translate(-6.7727258,-6.4090906)">
+    <path
        id="rect3336"
-       width="29.544342"
-       height="29.544342"
-       x="20.729263"
-       y="12.790267" />
-    <rect
-       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.10540044px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="fill:none;fill-rule:evenodd;stroke:currentColor;stroke-width:1.1054px"
+       d="M 20.729263,12.790267 H 50.273605 V 42.334609 H 20.729263 Z"
+       class="lead" />
+    <path
        id="rect3338"
-       width="20.299173"
-       height="20.299173"
-       x="35.199963"
-       y="6.9617906" />
-    <rect
-       style="fill:#ffffff;fill-opacity:1"
+       style="fill:none;fill-rule:evenodd;stroke:currentColor;stroke-width:1.1054px"
+       d="M 35.199963,6.9617906 H 55.499136 V 27.260964 H 35.199963 Z"
+       class="lead" />
+    <path
        id="rect3342"
-       width="37.454121"
-       height="35.975674"
-       x="6.8615112"
-       y="20.427578" />
-    <rect
-       style="fill:#ffffff;stroke:#000080;stroke-width:0.9201774"
+       style="fill:currentColor"
+       d="M 6.8615112,20.427578 H 44.315632 V 56.403252 H 6.8615112 Z"
+       class="paper" />
+    <path
        id="rect3797"
-       width="36.807095"
-       height="36.807095"
-       x="7.2328143"
-       y="20.687361" />
+       style="stroke:currentColor;stroke-width:0.920177"
+       d="M 7.2328143,20.687361 H 44.039909 V 57.494455 H 7.2328143 Z"
+       class="paper-ink" />
     <path
        style="fill:#009cff;fill-opacity:1;stroke:none"
-       d="m 7.6983828,56.873207 0,-10.278474 4.4839922,-5.139237 4.483994,5.139237 8.967987,-15.417712 8.967986,10.278475 4.483992,-5.139237 4.483995,10.278474 0,10.278474 z"
-       id="path3799"
-       inkscape:connector-curvature="0" />
+       d="M 7.6983828,56.873207 V 46.594733 l 4.4839922,-5.139237 4.483994,5.139237 8.967987,-15.417712 8.967986,10.278475 4.483992,-5.139237 4.483995,10.278474 v 10.278474 z"
+       id="path3799" />
     <path
-       style="fill:#000080;stroke:none"
-       d="m 7.4492015,57.350787 0,-5.964057 4.5801135,0 4.580116,-5.964055 4.580115,5.964055 9.160226,-11.928112 9.160227,5.964057 4.580114,5.964055 0,5.964057 z"
+       style="fill:currentColor;stroke:none"
+       d="M 7.4492015,57.350787 V 51.38673 h 4.5801135 l 4.580116,-5.964055 4.580115,5.964055 9.160226,-11.928112 9.160227,5.964057 4.580114,5.964055 v 5.964057 z"
        id="path3815"
-       inkscape:connector-curvature="0" />
+       class="ink" />
   </g>
 </svg>

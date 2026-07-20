@@ -83,7 +83,7 @@
          </property>
          <property name="icon">
           <iconset resource="../../../resources.qrc">
-           <normaloff>:/icons/32x32/Help.png</normaloff>:/icons/32x32/Help.png</iconset>
+           <normaloff>:/icons/Help.svgt</normaloff>:/icons/Help.svgt</iconset>
          </property>
         </widget>
        </item>
@@ -120,7 +120,7 @@
        </property>
        <property name="icon">
         <iconset resource="../../../resources.qrc">
-         <normaloff>:/icons/32x32/Off.png</normaloff>:/icons/32x32/Off.png</iconset>
+         <normaloff>:/icons/Off.svgt</normaloff>:/icons/Off.svgt</iconset>
        </property>
       </widget>
      </item>
@@ -134,7 +134,7 @@
        </property>
        <property name="icon">
         <iconset resource="../../../resources.qrc">
-         <normaloff>:/icons/32x32/TextLeft.png</normaloff>:/icons/32x32/TextLeft.png</iconset>
+         <normaloff>:/icons/TextLeft.svgt</normaloff>:/icons/TextLeft.svgt</iconset>
        </property>
       </widget>
      </item>

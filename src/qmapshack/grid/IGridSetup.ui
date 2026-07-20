@@ -41,7 +41,7 @@
          </property>
          <property name="icon">
           <iconset resource="../resources.qrc">
-           <normaloff>:/icons/32x32/Reset.png</normaloff>:/icons/32x32/Reset.png</iconset>
+           <normaloff>:/icons/Reset.svgt</normaloff>:/icons/Reset.svgt</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -67,7 +67,7 @@
          </property>
          <property name="icon">
           <iconset resource="../resources.qrc">
-           <normaloff>:/icons/32x32/FromMap.png</normaloff>:/icons/32x32/FromMap.png</iconset>
+           <normaloff>:/icons/FromMap.svgt</normaloff>:/icons/FromMap.svgt</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -93,7 +93,7 @@
          </property>
          <property name="icon">
           <iconset resource="../resources.qrc">
-           <normaloff>:/icons/32x32/GridWizard.png</normaloff>:/icons/32x32/GridWizard.png</iconset>
+           <normaloff>:/icons/GridWizard.svgt</normaloff>:/icons/GridWizard.svgt</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -147,7 +147,7 @@
        </property>
        <property name="icon">
         <iconset resource="../resources.qrc">
-         <normaloff>:/icons/32x32/SelectColor.png</normaloff>:/icons/32x32/SelectColor.png</iconset>
+         <normaloff>:/icons/SelectColor.svgt</normaloff>:/icons/SelectColor.svgt</iconset>
        </property>
        <property name="iconSize">
         <size>

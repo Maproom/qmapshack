@@ -18,7 +18,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="resources.qrc">
-    <normaloff>:/icons/48x48/QMapShack.png</normaloff>:/icons/48x48/QMapShack.png</iconset>
+    <normaloff>:/icons/QMapShack.svgt</normaloff>:/icons/QMapShack.svgt</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -323,7 +323,7 @@
   <action name="actionAddMapView">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/AddMapWorkspace.png</normaloff>:/icons/32x32/AddMapWorkspace.png</iconset>
+     <normaloff>:/icons/AddMapWorkspace.svgt</normaloff>:/icons/AddMapWorkspace.svgt</iconset>
    </property>
    <property name="text">
     <string>Add Map View</string>
@@ -344,7 +344,7 @@
    </property>
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/Scale.png</normaloff>:/icons/32x32/Scale.png</iconset>
+     <normaloff>:/icons/Scale.svgt</normaloff>:/icons/Scale.svgt</iconset>
    </property>
    <property name="text">
     <string>Show Scale</string>
@@ -356,7 +356,7 @@
   <action name="actionSetupMapFont">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/Font.png</normaloff>:/icons/32x32/Font.png</iconset>
+     <normaloff>:/icons/Font.svgt</normaloff>:/icons/Font.svgt</iconset>
    </property>
    <property name="text">
     <string>Setup Map Font</string>
@@ -371,7 +371,7 @@
    </property>
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/Grid.png</normaloff>:/icons/32x32/Grid.png</iconset>
+     <normaloff>:/icons/Grid.svgt</normaloff>:/icons/Grid.svgt</iconset>
    </property>
    <property name="text">
     <string>Show Grid</string>
@@ -386,7 +386,7 @@
   <action name="actionSetupGrid">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/GridSetup.png</normaloff>:/icons/32x32/GridSetup.png</iconset>
+     <normaloff>:/icons/GridSetup.svgt</normaloff>:/icons/GridSetup.svgt</iconset>
    </property>
    <property name="text">
     <string>Setup Grid</string>
@@ -404,7 +404,7 @@
    </property>
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/MouseWheel.png</normaloff>:/icons/32x32/MouseWheel.png</iconset>
+     <normaloff>:/icons/MouseWheel.svgt</normaloff>:/icons/MouseWheel.svgt</iconset>
    </property>
    <property name="text">
     <string>Flip Mouse Wheel</string>
@@ -416,7 +416,7 @@
   <action name="actionSetupMapPaths">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/FolderMap.png</normaloff>:/icons/32x32/FolderMap.png</iconset>
+     <normaloff>:/icons/FolderMap.svgt</normaloff>:/icons/FolderMap.svgt</iconset>
    </property>
    <property name="text">
     <string>Setup Map Paths</string>
@@ -434,7 +434,7 @@
    </property>
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/POIText.png</normaloff>:/icons/32x32/POIText.png</iconset>
+     <normaloff>:/icons/POIText.svgt</normaloff>:/icons/POIText.svgt</iconset>
    </property>
    <property name="text">
     <string>POI Text</string>
@@ -449,7 +449,7 @@
    </property>
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/NightDay.png</normaloff>:/icons/32x32/NightDay.png</iconset>
+     <normaloff>:/icons/NightDay.svgt</normaloff>:/icons/NightDay.svgt</iconset>
    </property>
    <property name="text">
     <string>Night / Day</string>
@@ -464,7 +464,7 @@
    </property>
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/ToolTip.png</normaloff>:/icons/32x32/ToolTip.png</iconset>
+     <normaloff>:/icons/ToolTip.svgt</normaloff>:/icons/ToolTip.svgt</iconset>
    </property>
    <property name="text">
     <string>Map Tooltip</string>
@@ -479,7 +479,7 @@
   <action name="actionSetupDEMPaths">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/FolderDEM.png</normaloff>:/icons/32x32/FolderDEM.png</iconset>
+     <normaloff>:/icons/FolderDEM.svgt</normaloff>:/icons/FolderDEM.svgt</iconset>
    </property>
    <property name="text">
     <string>Setup DEM Paths</string>
@@ -491,7 +491,7 @@
   <action name="actionAbout">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/Info.png</normaloff>:/icons/32x32/Info.png</iconset>
+     <normaloff>:/icons/Info.svgt</normaloff>:/icons/Info.svgt</iconset>
    </property>
    <property name="text">
     <string>About</string>
@@ -503,7 +503,7 @@
   <action name="actionWiki">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/Help.png</normaloff>:/icons/32x32/Help.png</iconset>
+     <normaloff>:/icons/Help.svgt</normaloff>:/icons/Help.svgt</iconset>
    </property>
    <property name="text">
     <string>Online Wiki</string>
@@ -515,7 +515,7 @@
   <action name="actionSetupMapView">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/SetupMapWorkspace.png</normaloff>:/icons/32x32/SetupMapWorkspace.png</iconset>
+     <normaloff>:/icons/SetupMapWorkspace.svgt</normaloff>:/icons/SetupMapWorkspace.svgt</iconset>
    </property>
    <property name="text">
     <string>Setup Map View</string>
@@ -530,7 +530,7 @@
   <action name="actionLoadGISData">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/LoadGIS.png</normaloff>:/icons/32x32/LoadGIS.png</iconset>
+     <normaloff>:/icons/LoadGIS.svgt</normaloff>:/icons/LoadGIS.svgt</iconset>
    </property>
    <property name="text">
     <string>Load GIS Data</string>
@@ -548,7 +548,7 @@
   <action name="actionSaveGISData">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/SaveAllGIS.png</normaloff>:/icons/32x32/SaveAllGIS.png</iconset>
+     <normaloff>:/icons/SaveAllGIS.svgt</normaloff>:/icons/SaveAllGIS.svgt</iconset>
    </property>
    <property name="text">
     <string>Save All GIS Data</string>
@@ -566,7 +566,7 @@
   <action name="actionSetupTimeZone">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/TimeZoneSetup.png</normaloff>:/icons/32x32/TimeZoneSetup.png</iconset>
+     <normaloff>:/icons/TimeZoneSetup.svgt</normaloff>:/icons/TimeZoneSetup.svgt</iconset>
    </property>
    <property name="text">
     <string>Setup Timezone</string>
@@ -578,7 +578,7 @@
   <action name="actionAddEmptyProject">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/AddProject.png</normaloff>:/icons/32x32/AddProject.png</iconset>
+     <normaloff>:/icons/AddProject.svgt</normaloff>:/icons/AddProject.svgt</iconset>
    </property>
    <property name="text">
     <string>Add empty project</string>
@@ -593,7 +593,7 @@
    </property>
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/SearchGoogle.png</normaloff>:/icons/32x32/SearchGoogle.png</iconset>
+     <normaloff>:/icons/SearchGoogle.svgt</normaloff>:/icons/SearchGoogle.svgt</iconset>
    </property>
    <property name="text">
     <string>Geosearch</string>
@@ -605,7 +605,7 @@
   <action name="actionCloseAllProjects">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/Close.png</normaloff>:/icons/32x32/Close.png</iconset>
+     <normaloff>:/icons/Close.svgt</normaloff>:/icons/Close.svgt</iconset>
    </property>
    <property name="text">
     <string>Close all projects</string>
@@ -620,7 +620,7 @@
   <action name="actionSetupUnits">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/UnitSetup.png</normaloff>:/icons/32x32/UnitSetup.png</iconset>
+     <normaloff>:/icons/UnitSetup.svgt</normaloff>:/icons/UnitSetup.svgt</iconset>
    </property>
    <property name="text">
     <string>Setup Units</string>
@@ -632,7 +632,7 @@
   <action name="actionSetupWorkspace">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/DatabaseSetup.png</normaloff>:/icons/32x32/DatabaseSetup.png</iconset>
+     <normaloff>:/icons/DatabaseSetup.svgt</normaloff>:/icons/DatabaseSetup.svgt</iconset>
    </property>
    <property name="text">
     <string>Setup Workspace</string>
@@ -647,7 +647,7 @@
   <action name="actionImportDatabase">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/DatabaseConvert.png</normaloff>:/icons/32x32/DatabaseConvert.png</iconset>
+     <normaloff>:/icons/DatabaseConvert.svgt</normaloff>:/icons/DatabaseConvert.svgt</iconset>
    </property>
    <property name="text">
     <string>Import Database from QLandkarte</string>
@@ -662,7 +662,7 @@
   <action name="actionVrtBuilder">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/VrtBuilder.png</normaloff>:/icons/32x32/VrtBuilder.png</iconset>
+     <normaloff>:/icons/VrtBuilder.svgt</normaloff>:/icons/VrtBuilder.svgt</iconset>
    </property>
    <property name="text">
     <string>VRT Builder</string>
@@ -677,7 +677,7 @@
   <action name="actionStoreView">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/SaveView.png</normaloff>:/icons/32x32/SaveView.png</iconset>
+     <normaloff>:/icons/SaveView.svgt</normaloff>:/icons/SaveView.svgt</iconset>
    </property>
    <property name="text">
     <string>Store Map View</string>
@@ -692,7 +692,7 @@
   <action name="actionLoadView">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/LoadView.png</normaloff>:/icons/32x32/LoadView.png</iconset>
+     <normaloff>:/icons/LoadView.svgt</normaloff>:/icons/LoadView.svgt</iconset>
    </property>
    <property name="text">
     <string>Load Map View</string>
@@ -710,7 +710,7 @@
    </property>
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/ProfileToWindow.png</normaloff>:/icons/32x32/ProfileToWindow.png</iconset>
+     <normaloff>:/icons/ProfileToWindow.svgt</normaloff>:/icons/ProfileToWindow.svgt</iconset>
    </property>
    <property name="text">
     <string>Track Profile as Window</string>
@@ -728,7 +728,7 @@
   <action name="actionClose">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/Off.png</normaloff>:/icons/32x32/Off.png</iconset>
+     <normaloff>:/icons/Off.svgt</normaloff>:/icons/Off.svgt</iconset>
    </property>
    <property name="text">
     <string>Close</string>
@@ -743,7 +743,7 @@
   <action name="actionCloneMapView">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/CloneMapWorkspace.png</normaloff>:/icons/32x32/CloneMapWorkspace.png</iconset>
+     <normaloff>:/icons/CloneMapWorkspace.svgt</normaloff>:/icons/CloneMapWorkspace.svgt</iconset>
    </property>
    <property name="text">
     <string>Clone Map View</string>
@@ -758,7 +758,7 @@
   <action name="actionCreateRoutinoDatabase">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/RouteSetup.png</normaloff>:/icons/32x32/RouteSetup.png</iconset>
+     <normaloff>:/icons/RouteSetup.svgt</normaloff>:/icons/RouteSetup.svgt</iconset>
    </property>
    <property name="text">
     <string>Create Routino Database</string>
@@ -770,7 +770,7 @@
   <action name="actionPrintMap">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/PrintSave.png</normaloff>:/icons/32x32/PrintSave.png</iconset>
+     <normaloff>:/icons/PrintSave.svgt</normaloff>:/icons/PrintSave.svgt</iconset>
    </property>
    <property name="text">
     <string>Save(Print) Map</string>
@@ -788,7 +788,7 @@
   <action name="actionSetupCoordFormat">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/SetupCoordFormat.png</normaloff>:/icons/32x32/SetupCoordFormat.png</iconset>
+     <normaloff>:/icons/SetupCoordFormat.svgt</normaloff>:/icons/SetupCoordFormat.svgt</iconset>
    </property>
    <property name="text">
     <string>Setup Coord. Format</string>
@@ -803,7 +803,7 @@
   <action name="actionSetupMapBackground">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/SelectColor.png</normaloff>:/icons/32x32/SelectColor.png</iconset>
+     <normaloff>:/icons/SelectColor.svgt</normaloff>:/icons/SelectColor.svgt</iconset>
    </property>
    <property name="text">
     <string>Setup Map Background</string>
@@ -815,7 +815,7 @@
   <action name="actionCloseTab">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/Close.png</normaloff>:/icons/32x32/Close.png</iconset>
+     <normaloff>:/icons/Close.svgt</normaloff>:/icons/Close.svgt</iconset>
    </property>
    <property name="text">
     <string>Close Tab</string>
@@ -827,7 +827,7 @@
   <action name="actionQuickstart">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/Help.png</normaloff>:/icons/32x32/Help.png</iconset>
+     <normaloff>:/icons/Help.svgt</normaloff>:/icons/Help.svgt</iconset>
    </property>
    <property name="text">
     <string>Quickstart Help</string>
@@ -836,7 +836,7 @@
   <action name="actionSetupToolbar">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/ToolBarSetup.png</normaloff>:/icons/32x32/ToolBarSetup.png</iconset>
+     <normaloff>:/icons/ToolBarSetup.svgt</normaloff>:/icons/ToolBarSetup.svgt</iconset>
    </property>
    <property name="text">
     <string>Setup Toolbar</string>
@@ -848,7 +848,7 @@
    </property>
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/ToggleDocks.png</normaloff>:/icons/32x32/ToggleDocks.png</iconset>
+     <normaloff>:/icons/ToggleDocks.svgt</normaloff>:/icons/ToggleDocks.svgt</iconset>
    </property>
    <property name="text">
     <string>Toggle Docks</string>
@@ -863,7 +863,7 @@
   <action name="actionFullScreen">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/FullScreen.png</normaloff>:/icons/32x32/FullScreen.png</iconset>
+     <normaloff>:/icons/FullScreen.svgt</normaloff>:/icons/FullScreen.svgt</iconset>
    </property>
    <property name="text">
     <string>Fullscreen</string>
@@ -878,7 +878,7 @@
    </property>
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/Label.png</normaloff>:/icons/32x32/Label.png</iconset>
+     <normaloff>:/icons/Label.svgt</normaloff>:/icons/Label.svgt</iconset>
    </property>
    <property name="text">
     <string>Min./Max. Labels</string>
@@ -893,7 +893,7 @@
   <action name="actionStartQMapTool">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/QMapTool.png</normaloff>:/icons/32x32/QMapTool.png</iconset>
+     <normaloff>:/icons/QMapTool.svgt</normaloff>:/icons/QMapTool.svgt</iconset>
    </property>
    <property name="text">
     <string>Start QMapTool</string>
@@ -902,7 +902,7 @@
   <action name="actionRenameView">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/EditView.png</normaloff>:/icons/32x32/EditView.png</iconset>
+     <normaloff>:/icons/EditView.svgt</normaloff>:/icons/EditView.svgt</iconset>
    </property>
    <property name="text">
     <string>Change Map View Name</string>
@@ -911,7 +911,7 @@
   <action name="actionTrackInfo">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/48x48/TrackInfo.png</normaloff>:/icons/48x48/TrackInfo.png</iconset>
+     <normaloff>:/icons/TrackInfo.svgt</normaloff>:/icons/TrackInfo.svgt</iconset>
    </property>
    <property name="text">
     <string>Track Info</string>
@@ -926,7 +926,7 @@
    </property>
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/PointInfoTable.png</normaloff>:/icons/32x32/PointInfoTable.png</iconset>
+     <normaloff>:/icons/PointInfoTable.svgt</normaloff>:/icons/PointInfoTable.svgt</iconset>
    </property>
    <property name="text">
     <string>Track Point Info Table</string>
@@ -941,7 +941,7 @@
    </property>
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/Summary.png</normaloff>:/icons/32x32/Summary.png</iconset>
+     <normaloff>:/icons/Summary.svgt</normaloff>:/icons/Summary.svgt</iconset>
    </property>
    <property name="text">
     <string>Track Summary</string>
@@ -956,7 +956,7 @@
    </property>
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/LabelInfo.png</normaloff>:/icons/32x32/LabelInfo.png</iconset>
+     <normaloff>:/icons/LabelInfo.svgt</normaloff>:/icons/LabelInfo.svgt</iconset>
    </property>
    <property name="text">
     <string>Min./Max Summary</string>
@@ -971,7 +971,7 @@
    </property>
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/Profile.png</normaloff>:/icons/32x32/Profile.png</iconset>
+     <normaloff>:/icons/Profile.svgt</normaloff>:/icons/Profile.svgt</iconset>
    </property>
    <property name="text">
     <string>Track Profile</string>
@@ -983,7 +983,7 @@
   <action name="actionTakeScreenshot">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/Screenshot.png</normaloff>:/icons/32x32/Screenshot.png</iconset>
+     <normaloff>:/icons/Screenshot.svgt</normaloff>:/icons/Screenshot.svgt</iconset>
    </property>
    <property name="text">
     <string>Take Screenshot</string>
@@ -1001,7 +1001,7 @@
    </property>
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/PointInfo.png</normaloff>:/icons/32x32/PointInfo.png</iconset>
+     <normaloff>:/icons/PointInfo.svgt</normaloff>:/icons/PointInfo.svgt</iconset>
    </property>
    <property name="text">
     <string>Track Point Info</string>
@@ -1016,8 +1016,8 @@
    </property>
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/Track.png</normaloff>
-     <normalon>:/icons/32x32/TrackHighlight.png</normalon>:/icons/32x32/Track.png</iconset>
+     <normaloff>:/icons/Track.svgt</normaloff>
+     <normalon>:/icons/TrackHighlight.svgt</normalon>:/icons/Track.svgt</iconset>
    </property>
    <property name="text">
     <string>Track Highlight</string>
@@ -1029,7 +1029,7 @@
   <action name="actionHelp">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/Help.png</normaloff>:/icons/32x32/Help.png</iconset>
+     <normaloff>:/icons/Help.svgt</normaloff>:/icons/Help.svgt</iconset>
    </property>
    <property name="text">
     <string>Help</string>
@@ -1044,7 +1044,7 @@
    </property>
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/LinkMap.png</normaloff>:/icons/32x32/LinkMap.png</iconset>
+     <normaloff>:/icons/LinkMap.svgt</normaloff>:/icons/LinkMap.svgt</iconset>
    </property>
    <property name="text">
     <string>Link Map Views</string>
@@ -1056,7 +1056,7 @@
   <action name="actionSetupPOIPaths">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/Poi.png</normaloff>:/icons/32x32/Poi.png</iconset>
+     <normaloff>:/icons/Poi.svgt</normaloff>:/icons/Poi.svgt</iconset>
    </property>
    <property name="text">
     <string>Setup POI Paths</string>
@@ -1068,7 +1068,7 @@
   <action name="actionSetupMapIconSizes">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/IconSize.png</normaloff>:/icons/32x32/IconSize.png</iconset>
+     <normaloff>:/icons/IconSize.svgt</normaloff>:/icons/IconSize.svgt</iconset>
    </property>
    <property name="text">
     <string>Setup Map Icon Sizes</string>

@@ -39,7 +39,7 @@
      </property>
      <property name="icon">
       <iconset resource="../resources.qrc">
-       <normaloff>:/icons/32x32/MoveArrow.png</normaloff>:/icons/32x32/MoveArrow.png</iconset>
+       <normaloff>:/icons/MoveArrow.svgt</normaloff>:/icons/MoveArrow.svgt</iconset>
      </property>
      <property name="checkable">
       <bool>true</bool>
@@ -62,7 +62,7 @@
      </property>
      <property name="icon">
       <iconset resource="../resources.qrc">
-       <normaloff>:/icons/32x32/PointAdd.png</normaloff>:/icons/32x32/PointAdd.png</iconset>
+       <normaloff>:/icons/PointAdd.svgt</normaloff>:/icons/PointAdd.svgt</iconset>
      </property>
      <property name="checkable">
       <bool>true</bool>
@@ -85,7 +85,7 @@
      </property>
      <property name="icon">
       <iconset resource="../resources.qrc">
-       <normaloff>:/icons/32x32/PointMove.png</normaloff>:/icons/32x32/PointMove.png</iconset>
+       <normaloff>:/icons/PointMove.svgt</normaloff>:/icons/PointMove.svgt</iconset>
      </property>
      <property name="checkable">
       <bool>true</bool>
@@ -108,7 +108,7 @@
      </property>
      <property name="icon">
       <iconset resource="../resources.qrc">
-       <normaloff>:/icons/32x32/PointDel.png</normaloff>:/icons/32x32/PointDel.png</iconset>
+       <normaloff>:/icons/PointDel.svgt</normaloff>:/icons/PointDel.svgt</iconset>
      </property>
      <property name="checkable">
       <bool>true</bool>
@@ -138,7 +138,7 @@
      </property>
      <property name="icon">
       <iconset resource="../resources.qrc">
-       <normaloff>:/icons/32x32/PointDelAll.png</normaloff>:/icons/32x32/PointDelAll.png</iconset>
+       <normaloff>:/icons/PointDelAll.svgt</normaloff>:/icons/PointDelAll.svgt</iconset>
      </property>
     </widget>
    </item>
@@ -159,7 +159,7 @@
      </property>
      <property name="icon">
       <iconset resource="../resources.qrc">
-       <normaloff>:/icons/32x32/LoadShape.png</normaloff>:/icons/32x32/LoadShape.png</iconset>
+       <normaloff>:/icons/LoadShape.svgt</normaloff>:/icons/LoadShape.svgt</iconset>
      </property>
     </widget>
    </item>
@@ -176,7 +176,7 @@
      </property>
      <property name="icon">
       <iconset resource="../resources.qrc">
-       <normaloff>:/icons/32x32/SaveShape.png</normaloff>:/icons/32x32/SaveShape.png</iconset>
+       <normaloff>:/icons/SaveShape.svgt</normaloff>:/icons/SaveShape.svgt</iconset>
      </property>
     </widget>
    </item>

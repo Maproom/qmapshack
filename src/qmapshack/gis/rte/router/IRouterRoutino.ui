@@ -74,7 +74,7 @@
        </property>
        <property name="icon">
         <iconset resource="../../../resources.qrc">
-         <normaloff>:/icons/32x32/PathBlue.png</normaloff>:/icons/32x32/PathBlue.png</iconset>
+         <normaloff>:/icons/PathBlue.svgt</normaloff>:/icons/PathBlue.svgt</iconset>
        </property>
       </widget>
      </item>
@@ -130,18 +130,12 @@
          <number>3</number>
         </property>
         <item>
-         <widget class="QLabel" name="label_3">
+         <widget class="QSvgWidget" name="label_3">
           <property name="sizePolicy">
-           <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-          <property name="pixmap">
-           <pixmap resource="../../../resources.qrc">:/icons/48x48/Help.png</pixmap>
           </property>
          </widget>
         </item>
@@ -165,6 +159,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QSvgWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">QSvgWidget</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="../../../resources.qrc"/>
  </resources>

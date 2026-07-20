@@ -31,7 +31,7 @@
          </property>
          <property name="icon">
           <iconset resource="../../resources.qrc">
-           <normaloff>:/icons/32x32/Up.png</normaloff>:/icons/32x32/Up.png</iconset>
+           <normaloff>:/icons/Up.svgt</normaloff>:/icons/Up.svgt</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -51,7 +51,7 @@
          </property>
          <property name="icon">
           <iconset resource="../../resources.qrc">
-           <normaloff>:/icons/32x32/Down.png</normaloff>:/icons/32x32/Down.png</iconset>
+           <normaloff>:/icons/Down.svgt</normaloff>:/icons/Down.svgt</iconset>
          </property>
          <property name="iconSize">
           <size>

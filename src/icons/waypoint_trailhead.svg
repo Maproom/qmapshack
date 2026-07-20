@@ -1,6 +1,28 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 36 36" id="waypoint_trailhead">
-		<ellipse id="marker_gc" cx="17.769" cy="18.001" rx="14.011" ry="14.011" fill="#fff" stroke="#383838" stroke-width=".75"/>
-		<g transform="translate(6,6)">
-        <path fill="#f57c00" d="M11,10H5L3,8L5,6H11V3L12,2L13,3V4H19L21,6L19,8H13V10H19L21,12L19,14H13V20A2,2 0 0,1 15,22H9A2,2 0 0,1 11,20V10Z" transform="translate(2.2,2.4) scale(0.8)"/>
-    </g></svg>
-    
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 28.771999 28.771999"
+   id="waypoint_trailhead"
+   version="1.1"
+   width="28.771999"
+   height="28.771999"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <style
+     id="current-color-scheme">.paper{color:#ffffff}</style>
+  <defs
+     id="defs10" />
+  <path
+     id="marker_gc"
+     style="fill:currentColor;stroke:#383838;stroke-width:0.75"
+     d="M 28.397,14.385999 A 14.011,14.011 0 0 1 14.386,28.396999 14.011,14.011 0 0 1 0.375,14.385999 14.011,14.011 0 0 1 14.386,0.375 14.011,14.011 0 0 1 28.397,14.385999 Z"
+     class="paper" />
+  <g
+     transform="translate(2.6170006,2.3850002)"
+     id="g5">
+    <path
+       fill="#f57c00"
+       d="M 11,10 H 5 L 3,8 5,6 h 6 V 3 l 1,-1 1,1 v 1 h 6 l 2,2 -2,2 h -6 v 2 h 6 l 2,2 -2,2 h -6 v 6 a 2,2 0 0 1 2,2 H 9 a 2,2 0 0 1 2,-2 z"
+       transform="matrix(0.8,0,0,0.8,2.2,2.4)"
+       id="path3" />
+  </g>
+</svg>

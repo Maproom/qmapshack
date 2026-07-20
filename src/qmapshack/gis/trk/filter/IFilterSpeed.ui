@@ -118,7 +118,7 @@
        </property>
        <property name="icon">
         <iconset resource="../../../resources.qrc">
-         <normaloff>:/icons/32x32/Apply.png</normaloff>:/icons/32x32/Apply.png</iconset>
+         <normaloff>:/icons/Apply.svgt</normaloff>:/icons/Apply.svgt</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -217,18 +217,12 @@
       <number>0</number>
      </property>
      <item>
-      <widget class="QLabel" name="labelTimePix">
+      <widget class="QSvgWidget" name="labelTimePix">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="pixmap">
-        <pixmap resource="../../../resources.qrc">:/icons/48x48/Time.png</pixmap>
        </property>
       </widget>
      </item>
@@ -249,6 +243,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QSvgWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">QSvgWidget</header>
+  </customwidget>
+ </customwidgets>
  <tabstops>
   <tabstop>comboActivityType</tabstop>
   <tabstop>toolApply</tabstop>

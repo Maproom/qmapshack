@@ -2,44 +2,19 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="64px"
-   height="64px"
+   width="40"
+   height="40"
    id="svg3513"
    version="1.1"
-   inkscape:version="0.48.4 r9939"
-   sodipodi:docname="TextBold.svg">
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <style
+     id="current-color-scheme">.lead{color:#000000}</style>
   <defs
      id="defs3515" />
-  <sodipodi:namedview
-     id="base"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageopacity="0.0"
-     inkscape:pageshadow="2"
-     inkscape:zoom="11"
-     inkscape:cx="21.625581"
-     inkscape:cy="29.265272"
-     inkscape:current-layer="layer1"
-     showgrid="true"
-     inkscape:document-units="px"
-     inkscape:grid-bbox="true"
-     inkscape:window-width="1920"
-     inkscape:window-height="996"
-     inkscape:window-x="-2"
-     inkscape:window-y="-3"
-     inkscape:window-maximized="1">
-    <inkscape:grid
-       type="xygrid"
-       id="grid2983" />
-  </sodipodi:namedview>
   <metadata
      id="metadata3518">
     <rdf:RDF>
@@ -54,25 +29,20 @@
   </metadata>
   <g
      id="layer1"
-     inkscape:label="Layer 1"
-     inkscape:groupmode="layer">
-    <text
-       xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Bold"
-       x="18"
-       y="49"
+     transform="translate(-13.673828,-14.419922)">
+    <g
+       aria-label="B"
        id="text3010"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan3012"
-         x="18"
-         y="49">B</tspan></text>
-    <rect
-       style="fill:none;stroke:none"
+       style="font-weight:bold;line-height:0%;-inkscape-font-specification:'Sans Bold';letter-spacing:0px;word-spacing:0px">
+      <path
+         d="m 30.48,20.44 q 5.72,0 8.64,1.6 2.92,1.6 2.92,5.64 0,2.44 -1.16,4.12 -1.12,1.68 -3.24,2.04 v 0.2 q 1.44,0.28 2.6,1 1.16,0.72 1.84,2.08 0.68,1.36 0.68,3.6 0,3.88 -2.8,6.08 -2.8,2.2 -7.68,2.2 H 21.6 V 20.44 Z m 0.68,11.32 q 2.64,0 3.64,-0.84 1.04,-0.84 1.04,-2.44 0,-1.64 -1.2,-2.36 -1.2,-0.72 -3.8,-0.72 h -3.2 v 6.36 z m -3.52,4.8 V 44 h 3.96 q 2.72,0 3.8,-1.04 1.08,-1.08 1.08,-2.84 0,-1.6 -1.12,-2.56 -1.08,-1 -3.96,-1 z"
+         style="font-size:40px;line-height:1.25;fill:currentColor"
+         id="path11"
+         class="lead" />
+    </g>
+    <path
        id="rect3054"
-       width="40"
-       height="40"
-       x="13.673828"
-       y="14.419922" />
+       style="fill:none"
+       d="m 13.673828,14.419922 h 40 v 40 h -40 z" />
   </g>
 </svg>

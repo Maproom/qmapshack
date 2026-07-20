@@ -2,48 +2,19 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="64px"
-   height="64px"
+   width="57.5"
+   height="52.5"
    id="svg3513"
    version="1.1"
-   inkscape:version="0.48.5 r10040"
-   sodipodi:docname="Print.png">
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <style
+     id="current-color-scheme">.ink{color:#000080}.paper-ink{fill:#cccccc;color:#000080}.paper2-ink{fill:#ffffff;color:#000080}</style>
   <defs
      id="defs3515" />
-  <sodipodi:namedview
-     id="base"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageopacity="0.0"
-     inkscape:pageshadow="2"
-     inkscape:zoom="2.60451"
-     inkscape:cx="24.110995"
-     inkscape:cy="21.097648"
-     inkscape:current-layer="layer1"
-     showgrid="true"
-     inkscape:document-units="px"
-     inkscape:grid-bbox="true"
-     inkscape:window-width="1920"
-     inkscape:window-height="992"
-     inkscape:window-x="-4"
-     inkscape:window-y="-1"
-     inkscape:window-maximized="1">
-    <inkscape:grid
-       type="xygrid"
-       id="grid2983"
-       empspacing="5"
-       visible="true"
-       enabled="true"
-       snapvisiblegridlinesonly="true" />
-  </sodipodi:namedview>
   <metadata
      id="metadata3518">
     <rdf:RDF>
@@ -52,51 +23,42 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <g
      id="layer1"
-     inkscape:label="Layer 1"
-     inkscape:groupmode="layer">
-    <rect
-       style="fill:none;stroke:#000080;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+     transform="translate(-3.75,-2.75)">
+    <path
        id="rect3007"
-       width="55"
-       height="20"
-       x="5"
-       y="24" />
-    <rect
-       style="fill:#000080;fill-opacity:1;fill-rule:evenodd;stroke:#000080;stroke-width:2.37170815;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       style="fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round"
+       d="M 5,24 H 60 V 44 H 5 Z"
+       class="ink" />
+    <path
        id="rect3017"
-       width="35"
-       height="9"
-       x="15"
-       y="30" />
+       style="fill:currentColor;fill-rule:evenodd;stroke:currentColor;stroke-width:2.37171;stroke-linecap:round;stroke-linejoin:round"
+       d="m 15,30 h 35 v 9 H 15 Z"
+       class="ink" />
     <path
-       style="fill:#cccccc;stroke:#000080;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       d="M 15,54 50,54 45,33 20,33"
+       style="stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 15,54 H 50 L 45,33 H 20"
        id="path3013"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cccc" />
+       class="paper-ink" />
     <path
-       style="fill:none;stroke:#000080;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       style="fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="M 20,33 15,54"
        id="path3011"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc" />
+       class="ink" />
     <path
-       style="fill:#afc6e9;stroke:#000080;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
-       d="m 5,24 5,-5 45,0 5,5"
+       style="fill:#afc6e9;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 5,24 5,-5 h 45 l 5,5"
        id="path3787"
-       inkscape:connector-curvature="0" />
-    <rect
-       style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000080;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       class="ink" />
+    <path
        id="rect3015"
-       width="26"
-       height="18"
-       x="20"
-       y="4" />
+       style="fill-rule:evenodd;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round"
+       d="M 20,4 H 46 V 22 H 20 Z"
+       class="paper2-ink" />
   </g>
 </svg>

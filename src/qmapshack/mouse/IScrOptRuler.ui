@@ -38,7 +38,7 @@
      </property>
      <property name="icon">
       <iconset resource="../resources.qrc">
-       <normaloff>:/icons/waypoints/32x32/FlagBlue.png</normaloff>:/icons/waypoints/32x32/FlagBlue.png</iconset>
+       <normaloff>:/icons/waypoints/FlagBlue.svg</normaloff>:/icons/waypoints/FlagBlue.svg</iconset>
      </property>
     </widget>
    </item>
@@ -52,7 +52,7 @@
      </property>
      <property name="icon">
       <iconset resource="../resources.qrc">
-       <normaloff>:/icons/32x32/Track.png</normaloff>:/icons/32x32/Track.png</iconset>
+       <normaloff>:/icons/Track.svgt</normaloff>:/icons/Track.svgt</iconset>
      </property>
     </widget>
    </item>
@@ -66,7 +66,7 @@
      </property>
      <property name="icon">
       <iconset resource="../resources.qrc">
-       <normaloff>:/icons/32x32/Route.png</normaloff>:/icons/32x32/Route.png</iconset>
+       <normaloff>:/icons/Route.svgt</normaloff>:/icons/Route.svgt</iconset>
      </property>
     </widget>
    </item>
@@ -80,7 +80,7 @@
      </property>
      <property name="icon">
       <iconset resource="../resources.qrc">
-       <normaloff>:/icons/32x32/Area.png</normaloff>:/icons/32x32/Area.png</iconset>
+       <normaloff>:/icons/Area.svgt</normaloff>:/icons/Area.svgt</iconset>
      </property>
     </widget>
    </item>
@@ -101,7 +101,7 @@
      </property>
      <property name="icon">
       <iconset resource="../resources.qrc">
-       <normaloff>:/icons/32x32/Table.png</normaloff>:/icons/32x32/Table.png</iconset>
+       <normaloff>:/icons/Table.svgt</normaloff>:/icons/Table.svgt</iconset>
      </property>
      <property name="checkable">
       <bool>true</bool>
@@ -121,7 +121,7 @@
      </property>
      <property name="icon">
       <iconset resource="../resources.qrc">
-       <normaloff>:/icons/32x32/CSrcCourse.png</normaloff>:/icons/32x32/CSrcCourse.png</iconset>
+       <normaloff>:/icons/CSrcCourse.svgt</normaloff>:/icons/CSrcCourse.svgt</iconset>
      </property>
      <property name="checkable">
       <bool>true</bool>
@@ -141,7 +141,7 @@
      </property>
      <property name="icon">
       <iconset resource="../resources.qrc">
-       <normaloff>:/icons/32x32/CSrcAscent.png</normaloff>:/icons/32x32/CSrcAscent.png</iconset>
+       <normaloff>:/icons/CSrcAscent.svgt</normaloff>:/icons/CSrcAscent.svgt</iconset>
      </property>
      <property name="checkable">
       <bool>true</bool>
@@ -161,7 +161,7 @@
      </property>
      <property name="icon">
       <iconset resource="../resources.qrc">
-       <normaloff>:/icons/32x32/CSrcSlope.png</normaloff>:/icons/32x32/CSrcSlope.png</iconset>
+       <normaloff>:/icons/CSrcSlope.svgt</normaloff>:/icons/CSrcSlope.svgt</iconset>
      </property>
      <property name="checkable">
       <bool>true</bool>
@@ -178,7 +178,7 @@
      </property>
      <property name="icon">
       <iconset resource="../resources.qrc">
-       <normaloff>:/icons/32x32/Precision.png</normaloff>:/icons/32x32/Precision.png</iconset>
+       <normaloff>:/icons/Precision.svgt</normaloff>:/icons/Precision.svgt</iconset>
      </property>
      <property name="checkable">
       <bool>true</bool>
@@ -226,7 +226,7 @@
      </property>
      <property name="icon">
       <iconset resource="../resources.qrc">
-       <normaloff>:/icons/32x32/Reset.png</normaloff>:/icons/32x32/Reset.png</iconset>
+       <normaloff>:/icons/Reset.svgt</normaloff>:/icons/Reset.svgt</iconset>
      </property>
     </widget>
    </item>
@@ -243,7 +243,7 @@
      </property>
      <property name="icon">
       <iconset resource="../resources.qrc">
-       <normaloff>:/icons/32x32/Undo.png</normaloff>:/icons/32x32/Undo.png</iconset>
+       <normaloff>:/icons/Undo.svgt</normaloff>:/icons/Undo.svgt</iconset>
      </property>
     </widget>
    </item>
@@ -260,7 +260,7 @@
      </property>
      <property name="icon">
       <iconset resource="../resources.qrc">
-       <normaloff>:/icons/32x32/Redo.png</normaloff>:/icons/32x32/Redo.png</iconset>
+       <normaloff>:/icons/Redo.svgt</normaloff>:/icons/Redo.svgt</iconset>
      </property>
     </widget>
    </item>

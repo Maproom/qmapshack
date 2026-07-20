@@ -2,39 +2,17 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    version="1.1"
-   width="64"
-   height="64"
+   width="57.5"
+   height="57.5"
    id="svg3513"
-   inkscape:version="0.48.5 r10040"
-   sodipodi:docname="Image.svg">
-  <sodipodi:namedview
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1"
-     objecttolerance="10"
-     gridtolerance="10"
-     guidetolerance="10"
-     inkscape:pageopacity="0"
-     inkscape:pageshadow="2"
-     inkscape:window-width="641"
-     inkscape:window-height="480"
-     id="namedview16"
-     showgrid="false"
-     inkscape:zoom="3.6875"
-     inkscape:cx="32"
-     inkscape:cy="32"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
-     inkscape:window-maximized="0"
-     inkscape:current-layer="svg3513" />
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <style
+     id="current-color-scheme">.ink{color:#000080}</style>
   <defs
      id="defs3515" />
   <metadata
@@ -45,55 +23,48 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <path
-     inkscape:connector-curvature="0"
-     style="fill:none;stroke:#000080;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     style="fill:none;stroke:currentColor;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
      id="path3031"
-     d="m 5,39 55,0" />
+     d="m 1.25,36.25 h 55"
+     class="ink" />
   <path
-     inkscape:connector-curvature="0"
-     style="fill:#ffcc00;fill-opacity:1;fill-rule:evenodd;stroke:#ffcc00;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+     style="fill:#ffcc00;fill-opacity:1;fill-rule:evenodd;stroke:#ffcc00;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
      id="path3004"
-     d="M 24.153011,13.037711 A 7.5,7.5 0 1 1 23.942394,12.660006" />
+     d="M 20.403011,10.287711 A 7.5,7.5 0 1 1 20.192394,9.910006" />
   <path
-     inkscape:connector-curvature="0"
-     style="fill:#000080;fill-opacity:1;fill-rule:evenodd;stroke:#000080;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+     style="fill:currentColor;fill-opacity:1;fill-rule:evenodd;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
      id="path3006"
-     d="M 41.935341,26.691808 A 5,5 0 1 1 41.79493,26.440004" />
+     d="M 38.185341,23.941808 A 5,5 0 1 1 38.04493,23.690004"
+     class="ink" />
   <path
-     inkscape:connector-curvature="0"
-     style="fill:#000080;stroke:#000080;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     style="fill:currentColor;stroke:currentColor;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
      id="path3027"
-     d="m 35,35 0,2 -6,0 -6,13 4,0 4,-8 0,17 13,0 0,-17 4,8 4,0 -6,-13 -6,0 0,-2 z" />
-  <rect
-     style="fill:none;stroke:#000080;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
-     id="rect3029"
-     y="4"
-     x="5"
-     height="55"
-     width="55" />
+     d="m 31.25,32.25 v 2 h -6 l -6,13 h 4 l 4,-8 v 17 h 13 v -17 l 4,8 h 4 l -6,-13 h -6 v -2 z"
+     class="ink" />
   <path
-     inkscape:connector-curvature="0"
+     id="rect3029"
+     style="fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round"
+     d="m 1.25,1.25 h 55 v 55 h -55 z"
+     class="ink" />
+  <path
      style="fill:none;stroke:#ffd42a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
      id="path3033"
-     d="m 28,17 10,0" />
+     d="m 24.25,14.25 h 10" />
   <path
-     inkscape:connector-curvature="0"
      style="fill:none;stroke:#ffd42a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
      id="path3035"
-     d="m 25,24 5,6" />
+     d="m 21.25,21.25 5,6" />
   <path
-     inkscape:connector-curvature="0"
      style="fill:none;stroke:#ffd42a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
      id="path3037"
-     d="m 17,28 0,6" />
+     d="m 13.25,25.25 v 6" />
   <path
-     inkscape:connector-curvature="0"
      style="fill:none;stroke:#ffd42a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
      id="path3039"
-     d="M 10,24 6,29" />
+     d="m 6.25,21.25 -4,5" />
 </svg>

@@ -15,7 +15,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="../../resources.qrc">
-    <normaloff>:/icons/32x32/Map.png</normaloff>:/icons/32x32/Map.png</iconset>
+    <normaloff>:/icons/Map.svgt</normaloff>:/icons/Map.svgt</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <property name="spacing">
@@ -260,9 +260,9 @@
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="labelTainted">
+            <widget class="QSvgWidget" name="labelTainted">
              <property name="sizePolicy">
-              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
@@ -276,21 +276,12 @@
              <property name="toolTip">
               <string>The waypoint was imported to QMapShack and was changed. It does not show the original data anymore. Please see history for changes. </string>
              </property>
-             <property name="text">
-              <string/>
-             </property>
-             <property name="pixmap">
-              <pixmap resource="../../resources.qrc">:/icons/32x32/Tainted.png</pixmap>
-             </property>
-             <property name="scaledContents">
-              <bool>true</bool>
-             </property>
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="labelNogo">
+            <widget class="QSvgWidget" name="labelNogo">
              <property name="sizePolicy">
-              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
@@ -304,15 +295,6 @@
              <property name="toolTip">
               <string>This Waypoint is a NoGo-Area</string>
              </property>
-             <property name="text">
-              <string/>
-             </property>
-             <property name="pixmap">
-              <pixmap resource="../../resources.qrc">:/icons/32x32/NoGo.png</pixmap>
-             </property>
-             <property name="scaledContents">
-              <bool>true</bool>
-             </property>
             </widget>
            </item>
            <item>
@@ -325,8 +307,8 @@
              </property>
              <property name="icon">
               <iconset resource="../../resources.qrc">
-               <normaloff>:/icons/32x32/UnLock.png</normaloff>
-               <normalon>:/icons/32x32/Lock.png</normalon>:/icons/32x32/UnLock.png</iconset>
+               <normaloff>:/icons/UnLock.svgt</normaloff>
+               <normalon>:/icons/Lock.svgt</normalon>:/icons/UnLock.svgt</iconset>
              </property>
              <property name="iconSize">
               <size>
@@ -389,7 +371,7 @@
              </property>
              <property name="icon">
               <iconset resource="../../resources.qrc">
-               <normaloff>:/icons/32x32/AddImage.png</normaloff>:/icons/32x32/AddImage.png</iconset>
+               <normaloff>:/icons/AddImage.svgt</normaloff>:/icons/AddImage.svgt</iconset>
              </property>
              <property name="iconSize">
               <size>
@@ -409,7 +391,7 @@
              </property>
              <property name="icon">
               <iconset resource="../../resources.qrc">
-               <normaloff>:/icons/32x32/DelImage.png</normaloff>:/icons/32x32/DelImage.png</iconset>
+               <normaloff>:/icons/DelImage.svgt</normaloff>:/icons/DelImage.svgt</iconset>
              </property>
              <property name="iconSize">
               <size>
@@ -484,6 +466,11 @@
   </layout>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>QSvgWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">QSvgWidget</header>
+  </customwidget>
   <customwidget>
    <class>CHistoryListWidget</class>
    <extends>QListWidget</extends>

@@ -14,8 +14,8 @@
    <string>MainWindow</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../qmapshack/resources.qrc">
-    <normaloff>:/icons/48x48/QMapTool.png</normaloff>:/icons/48x48/QMapTool.png</iconset>
+   <iconset resource="resources.qrc">
+    <normaloff>:/icons/QMapTool.svgt</normaloff>:/icons/QMapTool.svgt</iconset>
   </property>
   <widget class="CCanvas" name="canvas"/>
   <widget class="QMenuBar" name="menubar">
@@ -113,8 +113,8 @@
   </widget>
   <action name="actionAbout">
    <property name="icon">
-    <iconset resource="../qmapshack/resources.qrc">
-     <normaloff>:/icons/32x32/Info.png</normaloff>:/icons/32x32/Info.png</iconset>
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/Info.svgt</normaloff>:/icons/Info.svgt</iconset>
    </property>
    <property name="text">
     <string>About</string>
@@ -122,8 +122,8 @@
   </action>
   <action name="actionSetupExtTools">
    <property name="icon">
-    <iconset resource="../qmapshack/resources.qrc">
-     <normaloff>:/icons/32x32/Apply.png</normaloff>:/icons/32x32/Apply.png</iconset>
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/Apply.svgt</normaloff>:/icons/Apply.svgt</iconset>
    </property>
    <property name="text">
     <string>Ext. Tools</string>
@@ -137,8 +137,8 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset resource="../qmapshack/resources.qrc">
-     <normaloff>:/icons/32x32/MouseWheel.png</normaloff>:/icons/32x32/MouseWheel.png</iconset>
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/MouseWheel.svgt</normaloff>:/icons/MouseWheel.svgt</iconset>
    </property>
    <property name="text">
     <string>Flip Mouse Wheel</string>
@@ -149,8 +149,8 @@
   </action>
   <action name="actionSetupUnits">
    <property name="icon">
-    <iconset resource="../qmapshack/resources.qrc">
-     <normaloff>:/icons/32x32/UnitSetup.png</normaloff>:/icons/32x32/UnitSetup.png</iconset>
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/UnitSetup.svgt</normaloff>:/icons/UnitSetup.svgt</iconset>
    </property>
    <property name="text">
     <string>Setup Units</string>
@@ -161,8 +161,8 @@
   </action>
   <action name="actionSetupCoordFormat">
    <property name="icon">
-    <iconset resource="../qmapshack/resources.qrc">
-     <normaloff>:/icons/32x32/SetupCoordFormat.png</normaloff>:/icons/32x32/SetupCoordFormat.png</iconset>
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/SetupCoordFormat.svgt</normaloff>:/icons/SetupCoordFormat.svgt</iconset>
    </property>
    <property name="text">
     <string>Setup Coord. Format</string>
@@ -184,8 +184,8 @@
   </action>
   <action name="actionHelp">
    <property name="icon">
-    <iconset resource="../qmapshack/resources.qrc">
-     <normaloff>:/icons/32x32/Help.png</normaloff>:/icons/32x32/Help.png</iconset>
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/Help.svgt</normaloff>:/icons/Help.svgt</iconset>
    </property>
    <property name="text">
     <string>Help</string>
@@ -215,7 +215,7 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../qmapshack/resources.qrc"/>
+  <include location="resources.qrc"/>
  </resources>
  <connections/>
 </ui>

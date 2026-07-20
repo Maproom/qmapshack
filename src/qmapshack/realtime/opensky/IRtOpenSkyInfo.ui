@@ -106,7 +106,7 @@
        </property>
        <property name="icon">
         <iconset resource="../../resources.qrc">
-         <normaloff>:/icons/32x32/Record.png</normaloff>:/icons/32x32/Record.png</iconset>
+         <normaloff>:/icons/Record.svgt</normaloff>:/icons/Record.svgt</iconset>
        </property>
        <property name="checkable">
         <bool>true</bool>
@@ -126,7 +126,7 @@
        </property>
        <property name="icon">
         <iconset resource="../../resources.qrc">
-         <normaloff>:/icons/32x32/Pause.png</normaloff>:/icons/32x32/Pause.png</iconset>
+         <normaloff>:/icons/Pause.svgt</normaloff>:/icons/Pause.svgt</iconset>
        </property>
        <property name="checkable">
         <bool>true</bool>
@@ -149,7 +149,7 @@
        </property>
        <property name="icon">
         <iconset resource="../../resources.qrc">
-         <normaloff>:/icons/32x32/Track.png</normaloff>:/icons/32x32/Track.png</iconset>
+         <normaloff>:/icons/Track.svgt</normaloff>:/icons/Track.svgt</iconset>
        </property>
       </widget>
      </item>
@@ -163,7 +163,7 @@
        </property>
        <property name="icon">
         <iconset resource="../../resources.qrc">
-         <normaloff>:/icons/32x32/Reset.png</normaloff>:/icons/32x32/Reset.png</iconset>
+         <normaloff>:/icons/Reset.svgt</normaloff>:/icons/Reset.svgt</iconset>
        </property>
       </widget>
      </item>
@@ -177,7 +177,7 @@
        </property>
        <property name="icon">
         <iconset resource="../../resources.qrc">
-         <normaloff>:/icons/32x32/PathBlue.png</normaloff>:/icons/32x32/PathBlue.png</iconset>
+         <normaloff>:/icons/PathBlue.svgt</normaloff>:/icons/PathBlue.svgt</iconset>
        </property>
       </widget>
      </item>

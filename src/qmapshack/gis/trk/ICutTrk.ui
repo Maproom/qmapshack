@@ -63,7 +63,7 @@
        </property>
        <property name="icon">
         <iconset resource="../../resources.qrc">
-         <normaloff>:/icons/32x32/CutMode1.png</normaloff>:/icons/32x32/CutMode1.png</iconset>
+         <normaloff>:/icons/CutMode1.svgt</normaloff>:/icons/CutMode1.svgt</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -83,7 +83,7 @@
        </property>
        <property name="icon">
         <iconset resource="../../resources.qrc">
-         <normaloff>:/icons/32x32/CutMode2.png</normaloff>:/icons/32x32/CutMode2.png</iconset>
+         <normaloff>:/icons/CutMode2.svgt</normaloff>:/icons/CutMode2.svgt</iconset>
        </property>
        <property name="iconSize">
         <size>

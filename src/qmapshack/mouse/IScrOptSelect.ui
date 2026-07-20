@@ -51,7 +51,7 @@
         </property>
         <property name="icon">
          <iconset resource="../resources.qrc">
-          <normaloff>:/icons/32x32/Copy.png</normaloff>:/icons/32x32/Copy.png</iconset>
+          <normaloff>:/icons/Copy.svgt</normaloff>:/icons/Copy.svgt</iconset>
         </property>
        </widget>
       </item>
@@ -65,7 +65,7 @@
         </property>
         <property name="icon">
          <iconset resource="../resources.qrc">
-          <normaloff>:/icons/32x32/Route.png</normaloff>:/icons/32x32/Route.png</iconset>
+          <normaloff>:/icons/Route.svgt</normaloff>:/icons/Route.svgt</iconset>
         </property>
        </widget>
       </item>
@@ -79,7 +79,7 @@
         </property>
         <property name="icon">
          <iconset resource="../resources.qrc">
-          <normaloff>:/icons/32x32/WptEditProx.png</normaloff>:/icons/32x32/WptEditProx.png</iconset>
+          <normaloff>:/icons/WptEditProx.svgt</normaloff>:/icons/WptEditProx.svgt</iconset>
         </property>
        </widget>
       </item>
@@ -93,7 +93,7 @@
         </property>
         <property name="icon">
          <iconset resource="../resources.qrc">
-          <normaloff>:/icons/waypoints/32x32/PinBlue.png</normaloff>:/icons/waypoints/32x32/PinBlue.png</iconset>
+          <normaloff>:/icons/waypoints/PinBlue.svg</normaloff>:/icons/waypoints/PinBlue.svg</iconset>
         </property>
        </widget>
       </item>
@@ -107,7 +107,7 @@
         </property>
         <property name="icon">
          <iconset resource="../resources.qrc">
-          <normaloff>:/icons/32x32/SetEle.png</normaloff>:/icons/32x32/SetEle.png</iconset>
+          <normaloff>:/icons/SetEle.svgt</normaloff>:/icons/SetEle.svgt</iconset>
         </property>
        </widget>
       </item>
@@ -121,7 +121,7 @@
         </property>
         <property name="icon">
          <iconset resource="../resources.qrc">
-          <normaloff>:/icons/32x32/Combine.png</normaloff>:/icons/32x32/Combine.png</iconset>
+          <normaloff>:/icons/Combine.svgt</normaloff>:/icons/Combine.svgt</iconset>
         </property>
        </widget>
       </item>
@@ -135,7 +135,7 @@
         </property>
         <property name="icon">
          <iconset resource="../resources.qrc">
-          <normaloff>:/icons/32x32/Activity.png</normaloff>:/icons/32x32/Activity.png</iconset>
+          <normaloff>:/icons/Activity.svgt</normaloff>:/icons/Activity.svgt</iconset>
         </property>
        </widget>
       </item>
@@ -149,7 +149,7 @@
         </property>
         <property name="icon">
          <iconset resource="../resources.qrc">
-          <normaloff>:/icons/32x32/SelectColor.png</normaloff>:/icons/32x32/SelectColor.png</iconset>
+          <normaloff>:/icons/SelectColor.svgt</normaloff>:/icons/SelectColor.svgt</iconset>
         </property>
        </widget>
       </item>
@@ -163,7 +163,7 @@
         </property>
         <property name="icon">
          <iconset resource="../resources.qrc">
-          <normaloff>:/icons/32x32/DeleteMultiple.png</normaloff>:/icons/32x32/DeleteMultiple.png</iconset>
+          <normaloff>:/icons/DeleteMultiple.svgt</normaloff>:/icons/DeleteMultiple.svgt</iconset>
         </property>
        </widget>
       </item>
@@ -221,8 +221,8 @@
             </property>
             <property name="icon">
              <iconset resource="../resources.qrc">
-              <normaloff>:/icons/32x32/Track.png</normaloff>
-              <normalon>:/icons/32x32/TrackOn.png</normalon>:/icons/32x32/Track.png</iconset>
+              <normaloff>:/icons/Track.svgt</normaloff>
+              <normalon>:/icons/TrackOn.svgt</normalon>:/icons/Track.svgt</iconset>
             </property>
             <property name="checkable">
              <bool>true</bool>
@@ -242,8 +242,8 @@
             </property>
             <property name="icon">
              <iconset resource="../resources.qrc">
-              <normaloff>:/icons/waypoints/32x32/FlagBlue.png</normaloff>
-              <normalon>:/icons/32x32/WaypointOn.png</normalon>:/icons/waypoints/32x32/FlagBlue.png</iconset>
+              <normaloff>:/icons/waypoints/FlagBlue.svg</normaloff>
+              <normalon>:/icons/WaypointOn.svgt</normalon>:/icons/waypoints/FlagBlue.svg</iconset>
             </property>
             <property name="checkable">
              <bool>true</bool>
@@ -263,8 +263,8 @@
             </property>
             <property name="icon">
              <iconset resource="../resources.qrc">
-              <normaloff>:/icons/32x32/Route.png</normaloff>
-              <normalon>:/icons/32x32/RouteOn.png</normalon>:/icons/32x32/Route.png</iconset>
+              <normaloff>:/icons/Route.svgt</normaloff>
+              <normalon>:/icons/RouteOn.svgt</normalon>:/icons/Route.svgt</iconset>
             </property>
             <property name="checkable">
              <bool>true</bool>
@@ -284,8 +284,8 @@
             </property>
             <property name="icon">
              <iconset resource="../resources.qrc">
-              <normaloff>:/icons/32x32/Area.png</normaloff>
-              <normalon>:/icons/32x32/AreaOn.png</normalon>:/icons/32x32/Area.png</iconset>
+              <normaloff>:/icons/Area.svgt</normaloff>
+              <normalon>:/icons/AreaOn.svgt</normalon>:/icons/Area.svgt</iconset>
             </property>
             <property name="checkable">
              <bool>true</bool>
@@ -305,8 +305,8 @@
             </property>
             <property name="icon">
              <iconset resource="../resources.qrc">
-              <normaloff>:/icons/32x32/MimePoiPOI.png</normaloff>
-              <normalon>:/icons/32x32/MimePoiPOIActive.png</normalon>:/icons/32x32/MimePoiPOI.png</iconset>
+              <normaloff>:/icons/MimePoiPOI.svgt</normaloff>
+              <normalon>:/icons/MimePoiPOIActive.svgt</normalon>:/icons/MimePoiPOI.svgt</iconset>
             </property>
             <property name="checkable">
              <bool>true</bool>
@@ -377,7 +377,7 @@
         </property>
         <property name="icon">
          <iconset resource="../resources.qrc">
-          <normaloff>:/icons/32x32/SelectIntersectArea.png</normaloff>:/icons/32x32/SelectIntersectArea.png</iconset>
+          <normaloff>:/icons/SelectIntersectArea.svgt</normaloff>:/icons/SelectIntersectArea.svgt</iconset>
         </property>
         <property name="checkable">
          <bool>true</bool>
@@ -400,7 +400,7 @@
         </property>
         <property name="icon">
          <iconset resource="../resources.qrc">
-          <normaloff>:/icons/32x32/SelectExactArea.png</normaloff>:/icons/32x32/SelectExactArea.png</iconset>
+          <normaloff>:/icons/SelectExactArea.svgt</normaloff>:/icons/SelectExactArea.svgt</iconset>
         </property>
         <property name="checkable">
          <bool>true</bool>

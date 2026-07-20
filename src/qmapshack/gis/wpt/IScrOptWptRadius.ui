@@ -53,7 +53,7 @@
        </property>
        <property name="icon">
         <iconset resource="../../resources.qrc">
-         <normaloff>:/icons/32x32/WptEditProx.png</normaloff>:/icons/32x32/WptEditProx.png</iconset>
+         <normaloff>:/icons/WptEditProx.svgt</normaloff>:/icons/WptEditProx.svgt</iconset>
        </property>
       </widget>
      </item>
@@ -67,7 +67,7 @@
        </property>
        <property name="icon">
         <iconset resource="../../resources.qrc">
-         <normaloff>:/icons/32x32/WptDelProx.png</normaloff>:/icons/32x32/WptDelProx.png</iconset>
+         <normaloff>:/icons/WptDelProx.svgt</normaloff>:/icons/WptDelProx.svgt</iconset>
        </property>
       </widget>
      </item>
@@ -81,7 +81,7 @@
        </property>
        <property name="icon">
         <iconset resource="../../resources.qrc">
-         <normaloff>:/icons/32x32/NoGo.png</normaloff>:/icons/32x32/NoGo.png</iconset>
+         <normaloff>:/icons/NoGo.svgt</normaloff>:/icons/NoGo.svgt</iconset>
        </property>
        <property name="checkable">
         <bool>true</bool>

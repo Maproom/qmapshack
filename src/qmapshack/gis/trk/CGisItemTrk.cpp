@@ -411,7 +411,7 @@ QString CGisItemTrk::getInfo(quint32 feature) const {
   if (feature & eFeatureShowName) {
     if ((actCnt == 1) && (acts.first() != CTrackData::trkpt_t::eAct20None)) {
       const CActivityTrk::desc_t& desc = activities.getDescriptor(acts.first());
-      str += QString("<img src='%1'/>&nbsp;").arg(desc.iconSmall);
+      str += QString("<img width=16 height=16 src='%1'/>&nbsp;").arg(CSvgtIcon::htmlImageSrc(desc.iconSvg));
     }
     str += "<b>" % getName() % "</b>";
   }

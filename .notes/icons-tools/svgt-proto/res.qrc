@@ -1,0 +1,8 @@
+<RCC>
+  <qresource prefix="/">
+    <!-- alias only: disk keeps .svg so inkscape/hygiene.py/mkicon still glob it;
+         only the resource path carries .svgt, which is what routes it to us. -->
+    <file alias="icons/Foo.svgt">icons/Foo.svg</file>
+    <file alias="icons/Warn.svgt">icons/Warn.svg</file>
+  </qresource>
+</RCC>

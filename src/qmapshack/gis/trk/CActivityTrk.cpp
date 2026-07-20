@@ -220,15 +220,18 @@ void CActivityTrk::printSummary(const QMap<trkact_t, summary_t>& summary, const 
   str += "<tr>";
   str += "<th></th>";
   for (const desc_t* desc : std::as_const(descs)) {
+    // The activity icon is a themable .svgt; rich text bypasses the icon engine, so bake it to
+    // a themed PNG first. width/height keep the box at 16px; %2 (the colour swatch) is a raster.
     str += QString(
                "<th align='right'>"
-               "<img src='%1'/><br/>"
+               "<img width=16 height=16 src='%1'/><br/>"
                "<img src='%2'/>"
                "</th>")
-               .arg(desc->iconSmall, desc->line);
+               .arg(CSvgtIcon::htmlImageSrc(desc->iconSvg), desc->line);
   }
   if (printNoAct) {
-    str += QString("<th align='right'><img src='://icons/16x16/ActNone.png'/></th>");
+    str += QString("<th align='right'><img width=16 height=16 src='%1'/></th>")
+               .arg(CSvgtIcon::htmlImageSrc("://icons/ActNone.svgt"));
   }
   if (printTotal) {
     str += "<th align='right'>" + tr("Total") + "</th>";

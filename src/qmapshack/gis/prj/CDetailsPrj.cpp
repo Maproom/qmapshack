@@ -429,7 +429,8 @@ void CDetailsPrj::addIcon(QTextTable* table, int col, int row, const QPixmap& ic
 
   if (!(printable || isReadOnly)) {
     table->cellAt(row, col).lastCursorPosition().insertHtml(
-        QString("<p><a href='edit?key=%1'><img src='://icons/16x16/EditDetails.png'/></a></p>").arg(key));
+        QString("<p><a href='edit?key=%1'><img width=16 height=16 src='%2'/></a></p>")
+            .arg(key, CSvgtIcon::htmlImageSrc("://icons/EditDetails.svgt")));
   }
 }
 

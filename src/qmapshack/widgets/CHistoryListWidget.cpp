@@ -64,7 +64,7 @@ void CHistoryListWidget::setupHistory(IGisItem& gisItem) {
     str += event.comment;
 
     item->setText(str);
-    item->setIcon(QIcon(event.icon));
+    item->setIcon(QIcon(IGisItem::displayIconPath(event.icon)));
     if (event.data.isEmpty()) {
       item->setFlags(item->flags() & ~Qt::ItemIsEnabled);
     }

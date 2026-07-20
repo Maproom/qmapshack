@@ -27,6 +27,21 @@
 CGeoSearchWeb* CGeoSearchWeb::pSelf = nullptr;
 const QString CGeoSearchWeb::defaultIcon = "://icons/32x32/SearchWebDefault.png";
 
+QString CGeoSearchWeb::displayIconPath(const QString& icon) {
+  // Draw the service icons from the themable vector, but do NOT migrate what is stored.
+  // The path is saved per service in the settings and rewritten on every exit, and a
+  // ".svgt" path is unreadable by a build without the icon engine -- a tester who moved
+  // back to stable would be left with a menu of blank icons. So the settings keep naming
+  // the PNG and only the drawing is resolved here. Same reasoning as
+  // IGisItem::migrateIconPath; revisit once the icon rework has settled.
+  //
+  // Only the paths this class shipped are mapped. An icon the user pointed somewhere else
+  // is drawn as given.
+  static const QRegularExpression re(R"(^:/+icons/32x32/(SearchWeb[A-Za-z]*)\.png$)");
+  const QRegularExpressionMatch m = re.match(icon);
+  return m.hasMatch() ? QStringLiteral("://icons/%1.svgt").arg(m.captured(1)) : icon;
+}
+
 CGeoSearchWeb::CGeoSearchWeb(QObject* parent) : QObject(parent) {
   pSelf = this;
 
@@ -96,18 +111,18 @@ CGeoSearchWeb::~CGeoSearchWeb() {
 
 QMenu* CGeoSearchWeb::getMenu(const QPointF& pt, QWidget* parent, bool execute) const {
   QMenu* menu = new QMenu(tr("Search Web for Position"), parent);
-  menu->setIcon(QIcon("://icons/32x32/SearchWeb.png"));
+  menu->setIcon(QIcon("://icons/SearchWeb.svgt"));
 
   QAction* action;
   int serviceId = 0;
   for (const service_t& service : services) {
-    action = menu->addAction(QIcon(service.icon), service.name);
+    action = menu->addAction(QIcon(displayIconPath(service.icon)), service.name);
     connect(action, &QAction::triggered, this, [this, serviceId, pt]() { slotSearchWeb(serviceId, pt); });
     serviceId++;
   }
 
   menu->addSeparator();
-  action = menu->addAction(QIcon("://icons/32x32/Apply.png"), tr("Configure Services"));
+  action = menu->addAction(QIcon("://icons/Apply.svgt"), tr("Configure Services"));
   connect(action, &QAction::triggered, this, &CGeoSearchWeb::slotConfigureServices);
 
   if (execute) {

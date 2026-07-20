@@ -41,6 +41,12 @@ class CGeoSearchWeb : public QObject {
   static const QString defaultIcon;
   QList<service_t> defaultServices();
 
+  /**
+     @brief Drawing path for a stored service icon: the themable ".svgt" for the icons this
+     class ships, the stored path for anything else. Never changes what is SAVED.
+   */
+  static QString displayIconPath(const QString& icon);
+
   QMenu* getMenu(const QPointF& pt, QWidget* parent, bool execute = false) const;
   void search(const QPointF& pt);
 

@@ -52,16 +52,16 @@ void CHelpBrowser::contextMenuEvent(QContextMenuEvent* event) {
 
   menu->addSeparator();
   if (isBackwardAvailable()) {
-    menu->addAction(QIcon(":/icons/32x32/Left.png"), tr("Go back one page"),
-        Qt::CTRL | Qt::Key_Left, this, &CHelpBrowser::backward);
+    menu->addAction(QIcon(":/icons/Left.svgt"), tr("Go back one page"), Qt::CTRL | Qt::Key_Left, this,
+                    &CHelpBrowser::backward);
   }
   if (isForwardAvailable()) {
-    menu->addAction(QIcon(":/icons/32x32/Right.png"), tr("Go forward one page"),
-        Qt::CTRL | Qt::Key_Right, this, &CHelpBrowser::forward);
+    menu->addAction(QIcon(":/icons/Right.svgt"), tr("Go forward one page"), Qt::CTRL | Qt::Key_Right, this,
+                    &CHelpBrowser::forward);
   }
   if (isBackwardAvailable()) {
-    menu->addAction(QIcon(":/icons/32x32/ToTop.png"), tr("Go to initial page"),
-        Qt::CTRL | Qt::Key_Up, this, &CHelpBrowser::home);
+    menu->addAction(QIcon(":/icons/ToTop.svgt"), tr("Go to initial page"), Qt::CTRL | Qt::Key_Up, this,
+                    &CHelpBrowser::home);
   }
 
   menu->exec(event->globalPos());

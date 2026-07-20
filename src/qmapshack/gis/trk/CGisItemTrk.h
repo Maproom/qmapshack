@@ -714,7 +714,7 @@ class CGisItemTrk : public IGisItem, public IGisLine {
    */
   void changed(const QString& what, const QString& icon) override;
 
-  /// setup colorIdx, color, bullet and icon
+  /// setup colorIdx, color and icon
   void setColor(const QColor& c);
   /// setup track icon by color
   void setIcon(const QString& iconColor);
@@ -798,7 +798,6 @@ class CGisItemTrk : public IGisItem, public IGisLine {
   unsigned colorIdx = 4;  //< the track line color by index
   QColor color;           //< the track line color
 
-  QPixmap bullet;        //< the trackpoint bullet icon
   QPolygonF lineSimple;  //< the current track line as screen pixel coordinates
   QPolygonF lineFull;    //< visible and invisible points
 

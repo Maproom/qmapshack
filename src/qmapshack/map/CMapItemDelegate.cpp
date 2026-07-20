@@ -173,7 +173,7 @@ void CMapItemDelegate::initStyleOption(QStyleOptionViewItem* option, const QMode
   if (!data.contains(key)) {
     data.insert(key, {});
   }
-  data[key].icon = option->icon.pixmap({48, 48});
+  data[key].icon = option->icon;
   option->icon = QIcon();
   option->decorationSize = QSize(0, 0);
 }
@@ -254,19 +254,16 @@ void CMapItemDelegate::paint(QPainter* p, const QStyleOptionViewItem& opt, const
   p->drawText(layout.rectStatus.adjusted(0, -1, 0, 1), Qt::AlignLeft | Qt::AlignVCenter, status);
 
   // draw icon
-  const QPixmap& icon =
-      data[keyFromIndex(index)].icon.scaled(layout.rectIcon.size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
-  QIcon(icon).paint(p, layout.rectIcon);
+  data[keyFromIndex(index)].icon.paint(p, layout.rectIcon);
 
   // draw overview-warning badge over the icon, if the item's active data source needs it
   if (item->showsOverviewWarning()) {
-    static const QIcon overviewWarningIcon(":/icons/48x48/Attention.png");
-    overviewWarningIcon.paint(p, overviewBadgeRect(layout.rectIcon));
+    QIcon(":/icons/Attention.svgt").paint(p, overviewBadgeRect(layout.rectIcon));
   }
 
   // draw tool button to activate
   CDraw::drawToolButton(p, opt, layout.rectButton,
-                        isActive ? QIcon(":/icons/32x32/ShowAll.png") : QIcon(":/icons/32x32/ShowNone.png"),
+                        isActive ? QIcon(":/icons/ShowAll.svgt") : QIcon(":/icons/ShowNone.svgt"),
                         item->getStatus() != IMapItem::eStatus::Missing, isActive);
 
   // draw all elements that tinker with opacity

@@ -345,42 +345,42 @@ CMainWindow::CMainWindow() : id(QRandomGenerator::global()->generate()) {
 
   QAction* actionToggleToolBar = toolBar->toggleViewAction();
   actionToggleToolBar->setObjectName("actionToggleToolBar");
-  actionToggleToolBar->setIcon(QIcon(":/icons/32x32/ToolBar.png"));
+  actionToggleToolBar->setIcon(QIcon(":/icons/ToolBar.svgt"));
   menuWindow->insertAction(actionSetupToolbar, actionToggleToolBar);
 
   QAction* actionToggleMaps = dockMaps->toggleViewAction();
   actionToggleMaps->setObjectName("actionToggleMaps");
-  actionToggleMaps->setIcon(QIcon(":/icons/32x32/ToggleMaps.png"));
+  actionToggleMaps->setIcon(QIcon(":/icons/ToggleMaps.svgt"));
   menuWindow->insertAction(actionSetupToolbar, actionToggleMaps);
 
   QAction* actionToggleDem = dockDem->toggleViewAction();
   actionToggleDem->setObjectName("actionToggleDem");
-  actionToggleDem->setIcon(QIcon(":/icons/32x32/ToggleDem.png"));
+  actionToggleDem->setIcon(QIcon(":/icons/ToggleDem.svgt"));
   menuWindow->insertAction(actionSetupToolbar, actionToggleDem);
 
   QAction* actionTogglePoi = dockPoi->toggleViewAction();
   actionTogglePoi->setObjectName("actionTogglePoi");
-  actionTogglePoi->setIcon(QIcon(":/icons/32x32/TogglePoi.png"));
+  actionTogglePoi->setIcon(QIcon(":/icons/TogglePoi.svgt"));
   menuWindow->insertAction(actionSetupToolbar, actionTogglePoi);
 
   QAction* actionToggleWorkspace = dockWorkspace->toggleViewAction();
   actionToggleWorkspace->setObjectName("actionToggleWorkspace");
-  actionToggleWorkspace->setIcon(QIcon(":/icons/32x32/ToggleGis.png"));
+  actionToggleWorkspace->setIcon(QIcon(":/icons/ToggleGis.svgt"));
   menuWindow->insertAction(actionSetupToolbar, actionToggleWorkspace);
 
   QAction* actionToggleRealtime = dockRealtime->toggleViewAction();
   actionToggleRealtime->setObjectName("actionToggleRealtime");
-  actionToggleRealtime->setIcon(QIcon(":/icons/32x32/ToggleRealTime.png"));
+  actionToggleRealtime->setIcon(QIcon(":/icons/ToggleRealTime.svgt"));
   menuWindow->insertAction(actionSetupToolbar, actionToggleRealtime);
 
   QAction* actionToggleDatabase = dockDatabase->toggleViewAction();
   actionToggleDatabase->setObjectName("actionToggleDatabase");
-  actionToggleDatabase->setIcon(QIcon(":/icons/32x32/ToggleDatabase.png"));
+  actionToggleDatabase->setIcon(QIcon(":/icons/ToggleDatabase.svgt"));
   menuWindow->insertAction(actionSetupToolbar, actionToggleDatabase);
 
   QAction* actionToggleRte = dockRte->toggleViewAction();
   actionToggleRte->setObjectName("actionToggleRte");
-  actionToggleRte->setIcon(QIcon(":/icons/32x32/ToggleRouter.png"));
+  actionToggleRte->setIcon(QIcon(":/icons/ToggleRouter.svgt"));
   menuWindow->insertAction(actionSetupToolbar, actionToggleRte);
 
   menuWindow->insertSeparator(actionSetupToolbar);
@@ -1540,7 +1540,7 @@ void CMainWindow::displayRegular() {
   if (menuVisible) {
     menuBar()->setVisible(true);
   }
-  actionFullScreen->setIcon(QIcon(":/icons/32x32/FullScreen.png"));
+  actionFullScreen->setIcon(QIcon(":/icons/FullScreen.svgt"));
   setWindowState(windowState() ^ Qt::WindowFullScreen);
 }
 
@@ -1561,7 +1561,7 @@ void CMainWindow::displayFullscreen() {
     toolBar->setVisible(false);
   }
   tabWidget->tabBar()->setVisible(false);
-  actionFullScreen->setIcon(QIcon(":/icons/32x32/RegularScreen.png"));
+  actionFullScreen->setIcon(QIcon(":/icons/RegularScreen.svgt"));
 }
 
 #ifdef Q_OS_WIN64

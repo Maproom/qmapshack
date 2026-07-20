@@ -116,7 +116,7 @@ void CPlotProfile::updateData() {
     if (wpt) {
       CPlotData::point_t tag;
       tag.point = lineEle.last();
-      tag.icon = wpt->getIcon();
+      tag.icon = wpt->getDisplayIcon();
       tag.label = wpt->getName();
       data->tags << tag;
     }

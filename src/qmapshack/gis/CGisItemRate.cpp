@@ -83,9 +83,14 @@ void CGisItemRate::ratingLabelClicked(int labelNumber) {
 }
 
 void CGisItemRate::updateStars() {
-  pushButtonR1->setIcon(QPixmap(rating < 1 ? "://icons/cache/32x32/star_empty.png" : "://icons/cache/32x32/star.png"));
-  pushButtonR2->setIcon(QPixmap(rating < 2 ? "://icons/cache/32x32/star_empty.png" : "://icons/cache/32x32/star.png"));
-  pushButtonR3->setIcon(QPixmap(rating < 3 ? "://icons/cache/32x32/star_empty.png" : "://icons/cache/32x32/star.png"));
-  pushButtonR4->setIcon(QPixmap(rating < 4 ? "://icons/cache/32x32/star_empty.png" : "://icons/cache/32x32/star.png"));
-  pushButtonR5->setIcon(QPixmap(rating < 5 ? "://icons/cache/32x32/star_empty.png" : "://icons/cache/32x32/star.png"));
+  // The generic item rating uses the UI copies. The geocache D/T rating in CDetailsGeoCache
+  // keeps its own stars under icons/cache/, so restyling chrome cannot touch geocache display.
+  const QIcon starEmpty("://icons/RatingStarEmpty.svgt");
+  const QIcon starFull("://icons/RatingStar.svgt");
+
+  pushButtonR1->setIcon(rating < 1 ? starEmpty : starFull);
+  pushButtonR2->setIcon(rating < 2 ? starEmpty : starFull);
+  pushButtonR3->setIcon(rating < 3 ? starEmpty : starFull);
+  pushButtonR4->setIcon(rating < 4 ? starEmpty : starFull);
+  pushButtonR5->setIcon(rating < 5 ? starEmpty : starFull);
 }

@@ -290,29 +290,27 @@ void CGisItemRte::toTrack() {
   new CGisItemTrk(line, name, project, -1);
 }
 
-void CGisItemRte::setSymbol() {
-  IGisItem::setIcon(QPixmap("://icons/48x48/Route.png"));
-}
+void CGisItemRte::setSymbol() { IGisItem::setIcon(QPixmap("://icons/48x48/Route.png")); }
 
 void CGisItemRte::setName(const QString& str) {
   name = str;
   rte.name = str;
-  changed(tr("Changed name."), "://icons/48x48/EditText.png");
+  changed(tr("Changed name."), "://icons/EditText.svgt");
 }
 
 void CGisItemRte::setComment(const QString& str) {
   rte.cmt = str;
-  changed(tr("Changed comment"), "://icons/48x48/EditText.png");
+  changed(tr("Changed comment"), "://icons/EditText.svgt");
 }
 
 void CGisItemRte::setDescription(const QString& str) {
   rte.desc = str;
-  changed(tr("Changed description"), "://icons/48x48/EditText.png");
+  changed(tr("Changed description"), "://icons/EditText.svgt");
 }
 
 void CGisItemRte::setLinks(const QList<link_t>& links) {
   rte.links = links;
-  changed(tr("Changed links"), "://icons/48x48/Link.png");
+  changed(tr("Changed links"), "://icons/Link.svgt");
 }
 
 QString CGisItemRte::getInfo(quint32 feature) const {
@@ -658,7 +656,7 @@ void CGisItemRte::setDataFromPolyline(const SGisLine& l) {
   // Therefore the new entry must be in place else the updated route
   // is stored in the previous entry as well.
   flags |= eFlagTainted;
-  changed(tr("Changed route points."), "://icons/48x48/LineMove.png");
+  changed(tr("Changed route points."), "://icons/LineMove.svgt");
 
   readRouteDataFromGisLine(l);
 }

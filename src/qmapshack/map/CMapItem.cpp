@@ -148,16 +148,14 @@ void CMapItem::updateIcon() {
     return;
   }
 
-  static QHash<QString, QString> icons{
-      {"rmap", "://icons/48x48/MimeRMAP.png"}, {"jnx", "://icons/48x48/MimeJNX.png"},
-      {"vrt", "://icons/48x48/MimeVRT.png"},   {"img", "://icons/48x48/MimeIMG.png"},
-      {"map", "://icons/48x48/MimeMAP.png"},   {"wmts", "://icons/48x48/MimeWMTS.png"},
-      {"tms", "://icons/48x48/MimeTMS.png"},   {"gemf", "://icons/48x48/MimeGEMF.png"}};
+  static QHash<QString, QString> icons{{"rmap", "://icons/MimeRMAP.svgt"}, {"jnx", "://icons/MimeJNX.svgt"},
+                                       {"vrt", "://icons/MimeVRT.svgt"},   {"img", "://icons/MimeIMG.svgt"},
+                                       {"map", "://icons/MimeMAP.svgt"},   {"wmts", "://icons/MimeWMTS.svgt"},
+                                       {"tms", "://icons/MimeTMS.svgt"},   {"gemf", "://icons/MimeGEMF.svgt"}};
 
   const QString& suffix = QFileInfo(filename).suffix().toLower();
-  QPixmap img(icons.contains(suffix) ? icons[suffix] : "://icons/48x48/Map.png");
 
-  setIcon(/* col */ 0, QIcon(img));
+  setIcon(/* col */ 0, QIcon(icons.contains(suffix) ? icons[suffix] : "://icons/Map.svgt"));
 }
 
 bool CMapItem::isActivated() const {

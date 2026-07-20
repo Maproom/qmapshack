@@ -22,6 +22,7 @@
 
 #include "CMainWindow.h"
 #include "poi/CPoiDraw.h"
+#include "svgticon/CSvgtIcon.h"
 
 CPoiPathSetup::CPoiPathSetup(QStringList& paths)
     : QDialog(CMainWindow::getBestWidgetForParent()),

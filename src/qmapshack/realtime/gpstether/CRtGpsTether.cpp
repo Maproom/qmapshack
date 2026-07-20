@@ -27,7 +27,7 @@
 
 #define GPS_TETHER "GPS Tether"
 
-const QString CRtGpsTether::strIcon("://icons/48x48/Gps.png");
+const QString CRtGpsTether::strIcon("://icons/Gps.svgt");
 
 CRtGpsTether::CRtGpsTether(QTreeWidget* parent) : IRtSource(eTypeGpsTether, false, parent) {
   setIcon(eColumnIcon, QIcon(strIcon));

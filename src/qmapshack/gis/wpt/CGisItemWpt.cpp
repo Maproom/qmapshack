@@ -430,29 +430,29 @@ void CGisItemWpt::setName(const QString& str) {
   cfg.setValue("Waypoint/lastName", str);
   name = str;
   wpt.name = str;
-  changed(tr("Changed name"), "://icons/48x48/EditText.png");
+  changed(tr("Changed name"), "://icons/EditText.svgt");
 }
 
 void CGisItemWpt::setPosition(const QPointF& pos) {
   wpt.lon = pos.x();
   wpt.lat = pos.y();
   detBoundingRect();
-  changed(tr("Changed position"), "://icons/48x48/WptMove.png");
+  changed(tr("Changed position"), "://icons/WptMove.svgt");
 }
 
 void CGisItemWpt::setElevation(qint32 val) {
   wpt.ele = val;
-  changed(tr("Changed elevation"), "://icons/48x48/SetEle.png");
+  changed(tr("Changed elevation"), "://icons/SetEle.svgt");
 }
 
 void CGisItemWpt::setProximity(qreal val) {
   if (val == NOFLOAT) {
     proximity = NOFLOAT;
     setNogoFlag(false);
-    changed(tr("Removed proximity"), "://icons/48x48/WptDelProx.png");
+    changed(tr("Removed proximity"), "://icons/WptDelProx.svgt");
   } else {
     proximity = qRound(val);
-    changed(tr("Changed proximity"), "://icons/48x48/WptEditProx.png");
+    changed(tr("Changed proximity"), "://icons/WptEditProx.svgt");
   }
 
   detBoundingRect();
@@ -475,32 +475,32 @@ void CGisItemWpt::setIcon(const QString& name) {
 
 void CGisItemWpt::setComment(const QString& str) {
   wpt.cmt = str;
-  changed(tr("Changed comment"), "://icons/48x48/EditText.png");
+  changed(tr("Changed comment"), "://icons/EditText.svgt");
 }
 
 void CGisItemWpt::setDescription(const QString& str) {
   wpt.desc = str;
-  changed(tr("Changed description"), "://icons/48x48/EditText.png");
+  changed(tr("Changed description"), "://icons/EditText.svgt");
 }
 
 void CGisItemWpt::setLinks(const QList<link_t>& links) {
   wpt.links = links;
-  changed(tr("Changed links"), "://icons/48x48/Link.png");
+  changed(tr("Changed links"), "://icons/Link.svgt");
 }
 
 void CGisItemWpt::setImages(const QList<image_t>& imgs) {
   images = imgs;
-  changed(tr("Changed images"), "://icons/48x48/Image.png");
+  changed(tr("Changed images"), "://icons/Image.svgt");
 }
 
 void CGisItemWpt::addImage(const image_t& img) {
   images.append(img);
-  changed(tr("Add image"), "://icons/48x48/Image.png");
+  changed(tr("Add image"), "://icons/Image.svgt");
 }
 
 void CGisItemWpt::setTimestamp(const QDateTime& datetime) {
   wpt.time = datetime;
-  changed(tr("Changed timestamp"), "://icons/48x48/Time.png");
+  changed(tr("Changed timestamp"), "://icons/Time.svgt");
 }
 
 bool CGisItemWpt::isCloseTo(const QPointF& pos) {
@@ -602,9 +602,9 @@ void CGisItemWpt::drawItem(QPainter& p, const QRectF& /*viewport*/, CGisDraw* gi
     p.drawRoundedRect(rectBubbleEdit.adjusted(-2, -2, 2, 2), RECT_RADIUS, RECT_RADIUS);
     p.drawRoundedRect(rectBubbleSize.adjusted(-2, -2, 2, 2), RECT_RADIUS, RECT_RADIUS);
 
-    p.drawPixmap(rectBubbleMove, QPixmap("://icons/32x32/MoveArrow.png"));
-    p.drawPixmap(rectBubbleEdit, QPixmap("://icons/32x32/EditDetails.png"));
-    p.drawPixmap(rectBubbleSize, QPixmap("://icons/32x32/SizeArrow.png"));
+    QIcon("://icons/MoveArrow.svgt").paint(&p, rectBubbleMove);
+    QIcon("://icons/EditDetails.svgt").paint(&p, rectBubbleEdit);
+    QIcon("://icons/SizeArrow.svgt").paint(&p, rectBubbleSize);
   }
 }
 
@@ -631,7 +631,7 @@ void CGisItemWpt::drawLabel(QPainter& p, const QPolygonF& /*viewport*/, QList<QR
   rect.moveCenter(pt + QPointF(iconScaled.width() / 2, -fm.height()));
   if (CDraw::doesOverlap(blockedAreas, rect)) {
     // place label on bottom
-    rect.moveCenter(pt + QPointF(iconScaled.width() / 2, +fm.height() + icon.height()));
+    rect.moveCenter(pt + QPointF(iconScaled.width() / 2, +fm.height() + getDisplayIcon().height()));
     if (CDraw::doesOverlap(blockedAreas, rect)) {
       // place label on right
       rect.moveCenter(pt + QPointF(iconScaled.width() + rect.width() / 2, +fm.height()));

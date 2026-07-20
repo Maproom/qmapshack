@@ -33,7 +33,7 @@
 #include "qlgt/IQlgtOverlay.h"
 
 CQlbProject::CQlbProject(const QString& filename, CGisListWks* parent) : IGisProject(eTypeQlb, filename, parent) {
-  icon = QPixmap("://icons/32x32/QlbProject.png");
+  icon = QIcon("://icons/QlbProject.svgt");
 
   // create file instance
   QFile file(filename);

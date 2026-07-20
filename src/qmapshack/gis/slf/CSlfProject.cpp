@@ -26,7 +26,7 @@
 
 CSlfProject::CSlfProject(const QString& filename, bool readFile)
     : IGisProject(eTypeSlf, filename, (CGisListWks*)nullptr) {
-  icon = QPixmap("://icons/32x32/SlfProject.png");
+  icon = QIcon("://icons/SlfProject.svgt");
   blockUpdateItems(true);
 
   valid = true;

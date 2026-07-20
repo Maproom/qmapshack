@@ -106,7 +106,7 @@ void CRtAisInfo::slotConnect(bool yes) {
     lineHost->setEnabled(false);
     spinPort->setEnabled(false);
     socket->connectToHost(lineHost->text(), spinPort->value());
-    toolConnect->setIcon(QIcon("://icons/32x32/Connecting.png"));
+    toolConnect->setIcon(QIcon("://icons/Connecting.svgt"));
   } else {
     timer->stop();
     disconnectFromHost();
@@ -118,14 +118,14 @@ void CRtAisInfo::slotConnect(bool yes) {
 void CRtAisInfo::slotConnected() {
   timer->start();
   toolConnect->setChecked(true);
-  toolConnect->setIcon(QIcon("://icons/32x32/Connected.png"));
+  toolConnect->setIcon(QIcon("://icons/Connected.svgt"));
 }
 
 void CRtAisInfo::slotDisconnected() {
   lineHost->setEnabled(true);
   spinPort->setEnabled(true);
   toolConnect->setChecked(false);
-  toolConnect->setIcon(QIcon("://icons/32x32/Disconnected.png"));
+  toolConnect->setIcon(QIcon("://icons/Disconnected.svgt"));
 
   slotUpdate();
 

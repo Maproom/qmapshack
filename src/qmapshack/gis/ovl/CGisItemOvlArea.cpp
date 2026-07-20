@@ -409,44 +409,44 @@ void CGisItemOvlArea::setDataFromPolyline(const SGisLine& l) {
 
   flags |= eFlagTainted;
 
-  changed(tr("Changed area shape."), "://icons/48x48/AreaMove.png");
+  changed(tr("Changed area shape."), "://icons/AreaMove.svgt");
   updateDecoration(eMarkChanged, eMarkNone);
 }
 
 void CGisItemOvlArea::setName(const QString& str) {
   name = str;
   area.name = str;
-  changed(tr("Changed name."), "://icons/48x48/EditText.png");
+  changed(tr("Changed name."), "://icons/EditText.svgt");
 }
 
 void CGisItemOvlArea::setWidth(qint32 w) {
   area.width = w;
-  changed(tr("Changed border width."), "://icons/48x48/TextBold.png");
+  changed(tr("Changed border width."), "://icons/TextBold.svgt");
 }
 
 void CGisItemOvlArea::setStyle(qint32 s) {
   area.style = s;
-  changed(tr("Changed fill pattern."), "://icons/48x48/Pattern.png");
+  changed(tr("Changed fill pattern."), "://icons/Pattern.svgt");
 }
 
 void CGisItemOvlArea::setOpacity(bool yes) {
   area.opacity = yes;
-  changed(tr("Changed opacity."), "://icons/48x48/Opacity.png");
+  changed(tr("Changed opacity."), "://icons/Opacity.svgt");
 }
 
 void CGisItemOvlArea::setComment(const QString& str) {
   area.cmt = str;
-  changed(tr("Changed comment."), "://icons/48x48/EditText.png");
+  changed(tr("Changed comment."), "://icons/EditText.svgt");
 }
 
 void CGisItemOvlArea::setDescription(const QString& str) {
   area.desc = str;
-  changed(tr("Changed description."), "://icons/48x48/EditText.png");
+  changed(tr("Changed description."), "://icons/EditText.svgt");
 }
 
 void CGisItemOvlArea::setLinks(const QList<link_t>& links) {
   area.links = links;
-  changed(tr("Changed links"), "://icons/48x48/Link.png");
+  changed(tr("Changed links"), "://icons/Link.svgt");
 }
 
 void CGisItemOvlArea::setColor(int idx) {
@@ -454,7 +454,7 @@ void CGisItemOvlArea::setColor(int idx) {
     return;
   }
   setColor(colorMap[idx].color);
-  changed(tr("Changed color"), "://icons/48x48/SelectColor.png");
+  changed(tr("Changed color"), "://icons/SelectColor.svgt");
 }
 
 void CGisItemOvlArea::setColor(const QColor& c) {
@@ -464,7 +464,6 @@ void CGisItemOvlArea::setColor(const QColor& c) {
     if (colorMap[n].color == c) {
       colorIdx = n;
       color = colorMap[n].color;
-      bullet = QPixmap(colorMap[n].bullet);
       break;
     }
   }
@@ -472,7 +471,6 @@ void CGisItemOvlArea::setColor(const QColor& c) {
   if (n == colorMap.size()) {
     colorIdx = DEFAULT_COLOR;
     color = colorMap[DEFAULT_COLOR].color;
-    bullet = QPixmap(colorMap[DEFAULT_COLOR].bullet);
   }
 
   setIcon(color.name());

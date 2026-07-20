@@ -63,8 +63,7 @@ class CActivityTrk {
   struct desc_t {
     trkact_t activity;
     QString name;
-    QString iconLarge;
-    QString iconSmall;
+    QString iconSvg; /**< every consumer: menus, rich text, the plot, QSvgWidget, history events */
     QColor color;
     QString line;
   };

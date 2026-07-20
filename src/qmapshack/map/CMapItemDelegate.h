@@ -20,6 +20,7 @@
 #define CMAPITEMDELEGATE_H
 
 #include <QHash>
+#include <QIcon>
 #include <QPointer>
 #include <QStyledItemDelegate>
 #include <QVariant>
@@ -178,7 +179,7 @@ class CMapItemDelegate : public QStyledItemDelegate {
 
   /** @brief Cached icon pixmap and animation state for one map item. */
   struct item_data_t {
-    QPixmap icon; /**< 48×48 pixmap captured by initStyleOption(); drawn by paint(). */
+    QIcon icon; /**< Icon captured by initStyleOption(); drawn at row size by paint() for HiDPI. */
     animations_t animations;
   };
 

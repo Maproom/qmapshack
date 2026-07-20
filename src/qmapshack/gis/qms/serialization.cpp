@@ -139,6 +139,8 @@ QDataStream& operator>>(QDataStream& stream, IGisItem::history_event_t& e) {
   stream >> version;
   stream >> e.time;
   stream >> e.icon;
+  // covers .qms and the database: IGisItem::loadFromDb() streams the history through here too
+  e.icon = IGisItem::migrateIconPath(e.icon);
   stream >> e.comment;
   stream >> e.data;
   if (version > 1) {

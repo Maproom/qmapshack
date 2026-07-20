@@ -26,7 +26,7 @@
 
 CLostFoundProject::CLostFoundProject(const QString& dbName, CGisListWks* parent) : CDBProject(eTypeLostFound, parent) {
   db = QSqlDatabase::database(dbName);
-  icon = QPixmap("://icons/32x32/DeleteMultiple.png");
+  icon = QIcon("://icons/DeleteMultiple.svgt");
 
   filename = dbName;
   metadata.name = tr("Lost & Found");
@@ -45,7 +45,7 @@ void CLostFoundProject::updateFromDb() {
   QUERY_RUN(
       "SELECT id, type FROM items AS t1 WHERE NOT EXISTS(SELECT * FROM folder2item WHERE child=t1.id) ORDER BY "
       "t1.type, t1.name",
-      return )
+      return)
 
   while (query.next()) {
     quint64 id = query.value(0).toULongLong();

@@ -19,6 +19,7 @@
 #ifndef IWKSITEM_H
 #define IWKSITEM_H
 
+#include <QIcon>
 #include <QPointer>
 #include <QTreeWidgetItem>
 
@@ -79,7 +80,7 @@ class IWksItem : public QTreeWidgetItem {
 
   eBaseType getBaseType() const;
   virtual const QString& getName() const { return name; }
-  virtual const QPixmap& getIcon() const { return icon; }
+  virtual const QIcon& getIcon() const { return icon; }
   virtual const QSet<QString>& getTags() const { return keywords; }
   virtual const qreal getRating() const { return rating; }
   virtual const bool isVisible() const { return visible; }
@@ -117,7 +118,7 @@ class IWksItem : public QTreeWidgetItem {
   virtual void updateDecoration(quint32 enable, quint32 disable);
 
   QString name;
-  QPixmap icon;
+  QIcon icon;
 
   /// labeling the GisItems
   qreal rating = 0;

@@ -51,12 +51,8 @@ CWptIconSelectWidget::CWptIconSelectWidget(QWidget *parent) : QWidget(parent) {
   iconName->setFont(f);
   iconName->setAlignment(Qt::AlignCenter);
 
-  actionClearFilter = new QAction(this);
+  actionClearFilter = new QAction(QIcon(":/icons/Filter.svgt"), tr("Clear Filter"), this);
   actionClearFilter->setObjectName("actionClearFilter");
-  QIcon icon4;
-  icon4.addFile(QString(":/icons/32x32/Filter.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
-  actionClearFilter->setIcon(icon4);
-  actionClearFilter->setText(tr("Clear Filter"));
 
   iconFilter = new QLineEdit(this);
   iconFilter->setPlaceholderText(tr("start typing..."));
@@ -94,7 +90,7 @@ CWptIconSelectWidget::CWptIconSelectWidget(QWidget *parent) : QWidget(parent) {
 }
 
 void CWptIconSelectWidget::slotFilterChanged(const QString &str) {
-  actionClearFilter->setIcon(str.isEmpty() ? QIcon("://icons/32x32/Filter.png") : QIcon("://icons/32x32/Cancel.png"));
+  actionClearFilter->setIcon(str.isEmpty() ? QIcon("://icons/Filter.svgt") : QIcon("://icons/Cancel.svgt"));
   updateIconList(str, categoryFilter->currentText(), vendorFilter->currentText());
 }
 
@@ -113,7 +109,7 @@ void CWptIconSelectWidget::slotWptListChanged() {
 
   QString selectedVendor = vendorFilter->currentText();
   if (selectedVendor.isEmpty()) {
-      selectedVendor = vendors[0];
+    selectedVendor = vendors[0];
   }
 
   iconFilter->clear();

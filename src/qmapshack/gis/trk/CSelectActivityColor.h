@@ -26,7 +26,7 @@
 
 #include "gis/trk/CGisItemTrk.h"
 
-class QLabel;
+class QSvgWidget;
 class QToolButton;
 
 class CSelectActivityColor : public QWidget, public INotifyTrk, private Ui::ISelectActivityColor {
@@ -46,7 +46,7 @@ class CSelectActivityColor : public QWidget, public INotifyTrk, private Ui::ISel
 
  private:
   CGisItemTrk* trk = nullptr;
-  QList<QLabel*> allActLabels;
+  QList<QSvgWidget*> allActLabels;
   QList<QToolButton*> allActColors;
 };
 

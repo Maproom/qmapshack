@@ -33,14 +33,14 @@
 #include "misc.h"
 
 CGpxProject::CGpxProject(const QString& filename, CGisListWks* parent) : IGisProject(eTypeGpx, filename, parent) {
-  icon = QPixmap("://icons/32x32/GpxProject.png");
+  icon = QIcon("://icons/GpxProject.svgt");
   blockUpdateItems(true);
   loadGpx(filename);
   blockUpdateItems(false);
 }
 
 CGpxProject::CGpxProject(const QString& filename, IDevice* parent) : IGisProject(eTypeGpx, filename, parent) {
-  icon = QPixmap("://icons/32x32/GpxProject.png");
+  icon = QIcon("://icons/GpxProject.svgt");
   blockUpdateItems(true);
   loadGpx(filename);
   blockUpdateItems(false);
@@ -48,7 +48,7 @@ CGpxProject::CGpxProject(const QString& filename, IDevice* parent) : IGisProject
 
 CGpxProject::CGpxProject(QFile& file, const QString& filename, IDevice* parent)
     : IGisProject(eTypeGpx, filename, parent) {
-  icon = QPixmap("://icons/32x32/GpxProject.png");
+  icon = QIcon("://icons/GpxProject.svgt");
   blockUpdateItems(true);
   loadGpx(file, filename, this);
   setName(QFileInfo(filename).completeBaseName().replace("_", " "));
@@ -59,7 +59,7 @@ CGpxProject::CGpxProject(QFile& file, const QString& filename, IDevice* parent)
 
 CGpxProject::CGpxProject(const QString& filename, const IGisProject* project, IDevice* parent)
     : IGisProject(eTypeGpx, filename, parent) {
-  icon = QPixmap("://icons/32x32/GpxProject.png");
+  icon = QIcon("://icons/GpxProject.svgt");
   *(IGisProject*)this = *project;
   blockUpdateItems(project->isNoUpdate());
 

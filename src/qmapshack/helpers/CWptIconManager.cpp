@@ -2126,14 +2126,14 @@ QString CWptIconManager::selectWptIcon(QWidget* parent) {
 
   // add an action that summons the wayoint icon dialog
   menu->addSeparator();
-  QAction* more = menu->addAction(QIcon(":/icons/32x32/SetupWptSym.png"), tr("More..."));
+  QAction* more = menu->addAction(QIcon(":/icons/SetupWptSym.svgt"), tr("More..."));
   connect(more, &QAction::triggered, this, [&icon, this](bool) {
     CWptIconDialog dlg(&CMainWindow::self());
     connect(&dlg, &CWptIconDialog::sigSelectedIcon, this, [&icon](const QString& name) { icon = name; });
     dlg.exec();
   });
 
-  QAction* clear = menu->addAction(QIcon(":/icons/32x32/Cancel.png"), tr("Clear List"));
+  QAction* clear = menu->addAction(QIcon(":/icons/Cancel.svgt"), tr("Clear List"));
   connect(clear, &QAction::triggered, this, [](bool) {
     SETTINGS;
     cfg.setValue("Icons/lastIcons", {"Waypoint"});

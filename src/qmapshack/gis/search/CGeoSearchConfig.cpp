@@ -65,26 +65,26 @@ void CGeoSearchConfig::save() const {
   cfg.endGroup();
 }
 
-const QPixmap CGeoSearchConfig::getCurrentIcon() const {
+const QIcon CGeoSearchConfig::getCurrentIcon() const {
   switch (currentService) {
     case CGeoSearchConfig::eServiceNominatim: {
-      return QPixmap("://icons/32x32/SearchNominatim.png");
+      return QIcon("://icons/SearchNominatim.svgt");
       break;
     }
 
     case CGeoSearchConfig::eServiceGeonamesSearch:
     case CGeoSearchConfig::eServiceGeonamesAddress: {
-      return QPixmap("://icons/32x32/SearchGeonames.png");
+      return QIcon("://icons/SearchGeonames.svgt");
       break;
     }
 
     case CGeoSearchConfig::eServiceGoogle: {
-      return QPixmap("://icons/32x32/SearchGoogle.png");
+      return QIcon("://icons/SearchGoogle.svgt");
       break;
     }
 
     default:
-      return QPixmap("://icons/32x32/Zoom.png");
+      return QIcon("://icons/Zoom.svgt");
   }
 }
 

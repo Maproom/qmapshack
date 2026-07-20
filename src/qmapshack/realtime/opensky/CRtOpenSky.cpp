@@ -26,7 +26,7 @@
 #include "realtime/CRtDraw.h"
 #include "realtime/opensky/CRtOpenSkyInfo.h"
 
-const QString CRtOpenSky::strIcon("://icons/48x48/OpenSky.png");
+const QString CRtOpenSky::strIcon("://icons/OpenSky.svgt");
 
 CRtOpenSky::CRtOpenSky(QTreeWidget* parent) : IRtSource(eTypeOpenSky, true, parent) {
   setIcon(eColumnIcon, QIcon(strIcon));
@@ -178,10 +178,10 @@ void CRtOpenSky::fastDraw(QPainter& p, const QRectF& viewport, CRtDraw* rt) {
     text += "<tr><td>" + tr("key:") + "</td><td>" + aircraft.key + "</td></tr>";
     text += "<tr><td>" + tr("callsign:") + "</td><td>" + aircraft.callsign + "</td></tr>";
     text += "<tr><td>" + tr("origin country:") + "</td><td>" + aircraft.originCountry + "</td></tr>";
-    text += "<tr><td>" + tr("time position:") + "</td><td>" + QDateTime::fromSecsSinceEpoch(aircraft.timePosition).toString() +
-            "</td></tr>";
-    text += "<tr><td>" + tr("last contact:") + "</td><td>" + QDateTime::fromSecsSinceEpoch(aircraft.lastContact).toString() +
-            "</td></tr>";
+    text += "<tr><td>" + tr("time position:") + "</td><td>" +
+            QDateTime::fromSecsSinceEpoch(aircraft.timePosition).toString() + "</td></tr>";
+    text += "<tr><td>" + tr("last contact:") + "</td><td>" +
+            QDateTime::fromSecsSinceEpoch(aircraft.lastContact).toString() + "</td></tr>";
     text += "<tr><td>" + tr("longitude:") + "</td><td>" + QString::number(aircraft.longitude) + "°</td></tr>";
     text += "<tr><td>" + tr("latitude:") + "</td><td>" + QString::number(aircraft.latitude) + "°</td></tr>";
     text += "<tr><td>" + tr("geo. alt.:") + "</td><td>" + QString::number(aircraft.geoAltitude) + "m</td></tr>";

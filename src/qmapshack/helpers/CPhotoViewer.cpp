@@ -110,16 +110,16 @@ void CPhotoViewer::paintEvent(QPaintEvent* e) {
     p.setPen(Qt::NoPen);
     p.setBrush(QColor(255, 255, 255, 128));
     p.drawRect(rectNext);
-    p.drawPixmap(rectNext.left(), rectNext.bottom() - 32, 32, 32, QPixmap("://icons/32x32/Right.png"));
+    QIcon("://icons/Right.svgt").paint(&p, QRect(rectNext.left(), rectNext.bottom() - 32, 32, 32));
   }
   if (idx != 0) {
     p.setPen(Qt::NoPen);
     p.setBrush(QColor(255, 255, 255, 128));
     p.drawRect(rectPrev);
-    p.drawPixmap(rectPrev.left(), rectPrev.bottom() - 32, 32, 32, QPixmap("://icons/32x32/Left.png"));
+    QIcon("://icons/Left.svgt").paint(&p, QRect(rectPrev.left(), rectPrev.bottom() - 32, 32, 32));
   }
 
-  p.drawPixmap(rectClose, QPixmap("://icons/32x32/Close.png"));
+  QIcon("://icons/Close.svgt").paint(&p, rectClose);
 }
 
 void CPhotoViewer::tryIdxStep(int delta) {

@@ -63,19 +63,19 @@ CMainWindow::CMainWindow() {
   toolStack->addWidget(toolBox);
 
   toolAddOverview = new CToolAddOverview(toolBox);
-  toolBox->addItem(toolAddOverview, QIcon("://icons/32x32/AddOverview.png"), toolAddOverview->objectName());
+  toolBox->addItem(toolAddOverview, QIcon("://icons/AddOverview.svgt"), toolAddOverview->objectName());
 
   toolCutMap = new CToolCutMap(toolBox);
-  toolBox->addItem(toolCutMap, QIcon("://icons/32x32/CutMap.png"), toolCutMap->objectName());
+  toolBox->addItem(toolCutMap, QIcon("://icons/CutMap.svgt"), toolCutMap->objectName());
 
   toolRefMap = new CToolRefMap(toolBox);
-  toolBox->addItem(toolRefMap, QIcon("://icons/32x32/ReferenceMap.png"), toolRefMap->objectName());
+  toolBox->addItem(toolRefMap, QIcon("://icons/ReferenceMap.svgt"), toolRefMap->objectName());
 
   toolPalettize = new CToolPalettize(toolBox);
-  toolBox->addItem(toolPalettize, QIcon("://icons/32x32/Rasterize.png"), toolPalettize->objectName());
+  toolBox->addItem(toolPalettize, QIcon("://icons/Rasterize.svgt"), toolPalettize->objectName());
 
   toolExport = new CToolExport(toolBox);
-  toolBox->addItem(toolExport, QIcon("://icons/32x32/Export.png"), toolExport->objectName());
+  toolBox->addItem(toolExport, QIcon("://icons/Export.svgt"), toolExport->objectName());
 
   toolGrid = new CToolGrid(this);
   toolStack->addWidget(toolGrid);

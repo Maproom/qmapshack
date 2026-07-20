@@ -20,7 +20,7 @@
 
 CDBFolderProject::CDBFolderProject(QSqlDatabase& db, quint64 key, QTreeWidgetItem* parent)
     : IDBFolder(true, db, eTypeProject, key, parent) {
-  setIcon(QPixmap("://icons/32x32/PathGreen.png"));
+  setIcon(QIcon("://icons/PathGreen.svgt"));
   setupFromDB();
 }
 

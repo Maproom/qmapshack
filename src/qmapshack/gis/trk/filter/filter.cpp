@@ -85,7 +85,7 @@ void CGisItemTrk::filterReducePoints(qreal dist) {
   deriveSecondaryData();
   QString val, unit;
   IUnit::self().meter2distance(dist, val, unit);
-  changed(tr("Hide points by Douglas Peuker algorithm (%1%2)").arg(val, unit), "://icons/48x48/PointHide.png");
+  changed(tr("Hide points by Douglas Peuker algorithm (%1%2)").arg(val, unit), "://icons/PointHide.svgt");
 }
 
 void CGisItemTrk::filterRemoveInvalidPoints() {
@@ -114,7 +114,7 @@ void CGisItemTrk::filterRemoveInvalidPoints() {
   }
 
   deriveSecondaryData();
-  changed(tr("Permanently removed points with invalid data."), "://icons/48x48/PointHide.png");
+  changed(tr("Permanently removed points with invalid data."), "://icons/PointHide.svgt");
 }
 
 void CGisItemTrk::filterReset() {
@@ -122,7 +122,7 @@ void CGisItemTrk::filterReset() {
     pt.unsetFlag(CTrackData::trkpt_t::eFlagHidden);
   }
   deriveSecondaryData();
-  changed(tr("Reset all hidden track points to visible"), "://icons/48x48/PointHide.png");
+  changed(tr("Reset all hidden track points to visible"), "://icons/PointHide.svgt");
 }
 
 void CGisItemTrk::filterDelete() {
@@ -147,7 +147,7 @@ void CGisItemTrk::filterDelete() {
   }
 
   deriveSecondaryData();
-  changed(tr("Permanently removed all hidden track points"), "://icons/48x48/PointHide.png");
+  changed(tr("Permanently removed all hidden track points"), "://icons/PointHide.svgt");
 }
 
 void CGisItemTrk::filterSmoothProfile(int points) {
@@ -178,7 +178,7 @@ void CGisItemTrk::filterSmoothProfile(int points) {
     pt.ele = ele2[cnt++];
   }
   deriveSecondaryData();
-  changed(tr("Smoothed profile with a Median filter of size %1").arg(points), "://icons/48x48/SetEle.png");
+  changed(tr("Smoothed profile with a Median filter of size %1").arg(points), "://icons/SetEle.svgt");
 }
 
 void CGisItemTrk::filterTerrainSlope() {
@@ -197,7 +197,7 @@ void CGisItemTrk::filterTerrainSlope() {
   }
 
   deriveSecondaryData();
-  changed(tr("Added terrain slope from DEM file."), "://icons/48x48/CSrcSlope.png");
+  changed(tr("Added terrain slope from DEM file."), "://icons/CSrcSlope.svgt");
 }
 
 void CGisItemTrk::filterReplaceElevation(CCanvas* canvas) {
@@ -220,7 +220,7 @@ void CGisItemTrk::filterReplaceElevation(CCanvas* canvas) {
   }
 
   deriveSecondaryData();
-  changed(tr("Replaced elevation data with data from DEM files."), "://icons/48x48/SetEle.png");
+  changed(tr("Replaced elevation data with data from DEM files."), "://icons/SetEle.svgt");
 }
 
 void CGisItemTrk::filterInterpolateElevation() {
@@ -237,7 +237,7 @@ void CGisItemTrk::filterInterpolateElevation() {
   deriveSecondaryData();
   changed(
       tr("Replaced elevation data with interpolated values. (M=%1, RMSErr=%2)").arg(interp.m).arg(interp.rep.rmserror),
-      "://icons/48x48/SetEle.png");
+      "://icons/SetEle.svgt");
 }
 
 void CGisItemTrk::filterOffsetElevation(int offset) {
@@ -250,7 +250,7 @@ void CGisItemTrk::filterOffsetElevation(int offset) {
   QString val, unit;
   IUnit::self().meter2elevation(offset, val, unit);
   deriveSecondaryData();
-  changed(tr("Offset elevation data by %1%2.").arg(val, unit), "://icons/48x48/SetEle.png");
+  changed(tr("Offset elevation data by %1%2.").arg(val, unit), "://icons/SetEle.svgt");
 }
 
 void CGisItemTrk::filterNewDate(const QDateTime& date) {
@@ -261,7 +261,7 @@ void CGisItemTrk::filterNewDate(const QDateTime& date) {
   }
 
   deriveSecondaryData();
-  changed(tr("Changed start of track to %1.").arg(date.toString()), "://icons/48x48/Time.png");
+  changed(tr("Changed start of track to %1.").arg(date.toString()), "://icons/Time.svgt");
 }
 
 void CGisItemTrk::filterObscureDate(int delta) {
@@ -271,7 +271,7 @@ void CGisItemTrk::filterObscureDate(int delta) {
     }
 
     deriveSecondaryData();
-    changed(tr("Remove timestamps."), "://icons/48x48/Time.png");
+    changed(tr("Remove timestamps."), "://icons/Time.svgt");
   } else {
     QDateTime timestamp = timeStart;
     if (!timestamp.isValid()) {
@@ -284,7 +284,7 @@ void CGisItemTrk::filterObscureDate(int delta) {
     }
 
     deriveSecondaryData();
-    changed(tr("Set artificial timestamps with delta of %1 sec.").arg(delta), "://icons/48x48/Time.png");
+    changed(tr("Set artificial timestamps with delta of %1 sec.").arg(delta), "://icons/Time.svgt");
   }
 }
 
@@ -307,7 +307,7 @@ void CGisItemTrk::filterSpeed(qreal speed)  // Constant speed
   deriveSecondaryData();
   QString val, unit;
   IUnit::self().meter2speed(speed, val, unit);
-  changed(tr("Changed speed to %1%2.").arg(val, unit), "://icons/48x48/Time.png");
+  changed(tr("Changed speed to %1%2.").arg(val, unit), "://icons/Time.svgt");
 }
 
 void CGisItemTrk::filterSpeed(const CFilterSpeedCycle::cycling_type_t& cyclingType) {
@@ -357,7 +357,7 @@ void CGisItemTrk::filterSpeed(const CFilterSpeedCycle::cycling_type_t& cyclingTy
   QString val, unit;
   IUnit::self().meter2speed(totalDistance / totalElapsedSecondsMoving, val, unit);
   changed(tr("Changed average moving cycling speed with profile '%3' to %1%2.").arg(val, unit, cyclingType.name),
-          "://icons/48x48/Time.png");
+          "://icons/Time.svgt");
 }
 
 void CGisItemTrk::filterSpeed(const CFilterSpeedHike::hiking_type_t& hikingType) {
@@ -421,7 +421,7 @@ void CGisItemTrk::filterSpeed(const CFilterSpeedHike::hiking_type_t& hikingType)
   QString val, unit;
   IUnit::self().meter2speed(totalDistance / totalElapsedSecondsMoving, val, unit);
   changed(tr("Changed average moving hiking speed with profile '%3' to %1%2.").arg(val, unit, hikingType.name),
-          "://icons/48x48/Time.png");
+          "://icons/Time.svgt");
 }
 
 void CGisItemTrk::filterGetSlopeLimits(qreal& minSlope, qreal& maxSlope) const {
@@ -458,8 +458,7 @@ void CGisItemTrk::filterDeleteExtension(const QString& extStr) {
   propHandler->setupData();
 
   const CKnownExtension& ext = CKnownExtension::get(extStr);
-  changed(tr("Removed extension %1 from all Track Points").arg(ext.nameLongText),
-          "://icons/48x48/FilterModifyExtension.png");
+  changed(tr("Removed extension %1 from all Track Points").arg(ext.nameLongText), "://icons/FilterModifyExtension.svgt");
 }
 
 void CGisItemTrk::filterSubPt2Pt() {
@@ -468,7 +467,7 @@ void CGisItemTrk::filterSubPt2Pt() {
   }
   propHandler->setupData();
 
-  changed(tr("Converted subpoints from routing to track points"), "://icons/48x48/FilterSubPt2Pt.png");
+  changed(tr("Converted subpoints from routing to track points"), "://icons/FilterSubPt2Pt.svgt");
 }
 
 void CGisItemTrk::filterChangeStartPoint(qint32 idxNewStartPoint, const QString& wptName) {
@@ -509,7 +508,7 @@ void CGisItemTrk::filterChangeStartPoint(qint32 idxNewStartPoint, const QString&
 
   deriveSecondaryData();
 
-  changed(tr("Start Point moved to: ") + wptName.toLatin1(), "://icons/48x48/FilterChangeStartPoint.png");
+  changed(tr("Start Point moved to: ") + wptName.toLatin1(), "://icons/FilterChangeStartPoint.svgt");
 }
 
 void CGisItemTrk::filterLoopsCut(qreal minLoopLength) {
@@ -713,5 +712,5 @@ void CGisItemTrk::filterZeroSpeedDriftCleaner(qreal distance, qreal ratio) {
   IUnit::self().meter2distance(distance, val, unit);
   changed(
       tr("Hide zero speed drift knots with a distance criteria of (%1%2) and ratio of (%3)").arg(val, unit).arg(ratio),
-      "://icons/48x48/FilterZeroSpeedDriftCleaner.png");
+      "://icons/FilterZeroSpeedDriftCleaner.svgt");
 }

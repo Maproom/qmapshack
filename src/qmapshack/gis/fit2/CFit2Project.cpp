@@ -52,7 +52,7 @@ CFit2Project::CFit2Project(const QString& filename, CGisListWks* parent) : IGisP
 
 void CFit2Project::loadFitFromFile(const QString& filename, bool showErrorMsg) {
   qDebug() << "---------" << filename << "---------";
-  icon = QPixmap("://icons/32x32/FitProject.png");
+  icon = QIcon("://icons/FitProject.svgt");
   blockUpdateItems(true);
   try {
     decodeFile(filename);

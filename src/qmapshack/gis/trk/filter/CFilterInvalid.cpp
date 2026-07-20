@@ -20,6 +20,7 @@
 
 #include "canvas/CCanvas.h"
 #include "gis/trk/CGisItemTrk.h"
+#include "svgticon/CSvgtIcon.h"
 
 CFilterInvalid::CFilterInvalid(CGisItemTrk& trk, QWidget* parent)
     : QWidget(parent),

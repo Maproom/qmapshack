@@ -24,7 +24,7 @@
 #include "gis/CGisListWks.h"
 
 CQmsProject::CQmsProject(const QString& filename, CGisListWks* parent) : IGisProject(eTypeQms, filename, parent) {
-  icon = QPixmap("://icons/32x32/QmsProject.png");
+  icon = QIcon("://icons/QmsProject.svgt");
 
   // create file instance
   QFile file(filename);

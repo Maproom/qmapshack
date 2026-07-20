@@ -48,6 +48,7 @@
 #include "helpers/Signals.h"
 #include "plot/CPlot.h"
 #include "plot/CPlotProfile.h"
+#include "svgticon/CSvgtIcon.h"
 #include "units/IUnit.h"
 #include "widgets/CTextEditWidget.h"
 
@@ -187,17 +188,17 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk) : INotifyTrk(CGisItemTrk::eVisualDeta
   // this will the largest minimum width of all filter widgets
   qint32 minWidth = 0;
   addFilterGroup<CFilterDouglasPeuker, CFilterZeroSpeedDriftCleaner, CFilterInvalid, CFilterReset, CFilterDelete>(
-      treeFilter, trk, tr("Reduce visible track points"), "://icons/48x48/PointHide.png", minWidth);
+      treeFilter, trk, tr("Reduce visible track points"), "://icons/PointHide.svgt", minWidth);
 
   addFilterGroup<CFilterMedian, CFilterInterpolateElevation, CFilterReplaceElevation, CFilterOffsetElevation>(
-      treeFilter, trk, tr("Change elevation of track points"), "://icons/48x48/SetEle.png", minWidth);
+      treeFilter, trk, tr("Change elevation of track points"), "://icons/SetEle.svgt", minWidth);
 
   addFilterGroup<CFilterNewDate, CFilterObscureDate, CFilterSpeed>(
-      treeFilter, trk, tr("Change timestamp of track points"), "://icons/48x48/Time.png", minWidth);
+      treeFilter, trk, tr("Change timestamp of track points"), "://icons/Time.svgt", minWidth);
 
   addFilterGroup<CFilterDeleteExtension, CFilterSplitSegment, CFilterSubPt2Pt, CFilterTerrainSlope,
-                 CFilterChangeStartPoint, CFilterLoopsCut, CFilterSplitTrack>(
-      treeFilter, trk, tr("Miscellaneous"), "://icons/48x48/CSrcUnknown.png", minWidth);
+                 CFilterChangeStartPoint, CFilterLoopsCut, CFilterSplitTrack>(treeFilter, trk, tr("Miscellaneous"),
+                                                                              "://icons/CSrcUnknown.svgt", minWidth);
 
   // limit tree widget horizontal size to the filter widget with the largest minimum size
   treeFilter->setMinimumWidth(minWidth + treeFilter->indentation());
@@ -441,8 +442,8 @@ void CDetailsTrk::updateData() {
 
   comboColorSource->clear();
   // the first entry `solid color`, it is always available
-  comboColorSource->addItem(QIcon("://icons/32x32/CSrcSolid.png"), tr("Color"));
-  comboColorSource->addItem(QIcon("://icons/32x32/Activity.png"), tr("Activity"), "activity");
+  comboColorSource->addItem(QIcon("://icons/CSrcSolid.svgt"), tr("Color"));
+  comboColorSource->addItem(QIcon("://icons/Activity.svgt"), tr("Activity"), "activity");
   const QList<QString>& keys = trk.getExistingDataSources();
   for (const QString& key : keys) {
     const CKnownExtension& ext = CKnownExtension::get(key);

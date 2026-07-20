@@ -124,39 +124,23 @@ IGisItem::~IGisItem() {}
 
 void IGisItem::init() {
   colorMap = {
-      {"Black", tr("Black"), QColor(Qt::black), "://icons/8x8/bullet_black.png", "://icons/lines/line_black.png"},
-      {"DarkRed", tr("Dark Red"), QColor(Qt::darkRed), QString("://icons/8x8/bullet_dark_red.png"),
-       QString("://icons/lines/line_dark_red.png")},
-      {"DarkGreen", tr("Dark Green"), QColor(Qt::darkGreen), QString("://icons/8x8/bullet_dark_green.png"),
-       QString("://icons/lines/line_dark_green.png")},
-      {"DarkYellow", tr("Dark Yellow"), QColor(Qt::darkYellow), QString("://icons/8x8/bullet_dark_yellow.png"),
-       QString("://icons/lines/line_dark_yellow.png")},
-      {"DarkBlue", tr("Dark Blue"), QColor(Qt::darkBlue), QString("://icons/8x8/bullet_dark_blue.png"),
-       QString("://icons/lines/line_dark_blue.png")},
-      {"DarkMagenta", tr("Dark Magenta"), QColor(Qt::darkMagenta), QString("://icons/8x8/bullet_dark_magenta.png"),
-       QString("://icons/lines/line_dark_magenta.png")},
-      {"DarkCyan", tr("Dark Cyan"), QColor(Qt::darkCyan), QString("://icons/8x8/bullet_dark_cyan.png"),
-       QString("://icons/lines/line_dark_cyan.png")},
-      {"LightGray", tr("Light Gray"), QColor(Qt::lightGray), QString("://icons/8x8/bullet_gray.png"),
-       QString("://icons/lines/line_gray.png")},
-      {"DarkGray", tr("Dark Gray"), QColor(Qt::darkGray), QString("://icons/8x8/bullet_dark_gray.png"),
-       QString("://icons/lines/line_dark_gray.png")},
-      {"Red", tr("Red"), QColor(Qt::red), QString("://icons/8x8/bullet_red.png"),
-       QString("://icons/lines/line_red.png")},
-      {"Green", tr("Green"), QColor(Qt::green), QString("://icons/8x8/bullet_green.png"),
-       QString("://icons/lines/line_green.png")},
-      {"Yellow", tr("Yellow"), QColor(Qt::yellow), QString("://icons/8x8/bullet_yellow.png"),
-       QString("://icons/lines/line_yellow.png")},
-      {"Blue", tr("Blue"), QColor(Qt::blue), QString("://icons/8x8/bullet_blue.png"),
-       QString("://icons/lines/line_blue.png")},
-      {"Magenta", tr("Magenta"), QColor(Qt::magenta), QString("://icons/8x8/bullet_magenta.png"),
-       QString("://icons/lines/line_magenta.png")},
-      {"Cyan", tr("Cyan"), QColor(Qt::cyan), QString("://icons/8x8/bullet_cyan.png"),
-       QString("://icons/lines/line_cyan.png")},
-      {"White", tr("White"), QColor(Qt::white), QString("://icons/8x8/bullet_white.png"),
-       QString("://icons/lines/line_white.png")},
-      {"Transparent", tr("Transparent"), QColor(Qt::transparent), QString(),
-       QString("://icons/lines/line_transparent.png")}};
+      {"Black", tr("Black"), QColor(Qt::black), "://icons/lines/line_black.png"},
+      {"DarkRed", tr("Dark Red"), QColor(Qt::darkRed), QString("://icons/lines/line_dark_red.png")},
+      {"DarkGreen", tr("Dark Green"), QColor(Qt::darkGreen), QString("://icons/lines/line_dark_green.png")},
+      {"DarkYellow", tr("Dark Yellow"), QColor(Qt::darkYellow), QString("://icons/lines/line_dark_yellow.png")},
+      {"DarkBlue", tr("Dark Blue"), QColor(Qt::darkBlue), QString("://icons/lines/line_dark_blue.png")},
+      {"DarkMagenta", tr("Dark Magenta"), QColor(Qt::darkMagenta), QString("://icons/lines/line_dark_magenta.png")},
+      {"DarkCyan", tr("Dark Cyan"), QColor(Qt::darkCyan), QString("://icons/lines/line_dark_cyan.png")},
+      {"LightGray", tr("Light Gray"), QColor(Qt::lightGray), QString("://icons/lines/line_gray.png")},
+      {"DarkGray", tr("Dark Gray"), QColor(Qt::darkGray), QString("://icons/lines/line_dark_gray.png")},
+      {"Red", tr("Red"), QColor(Qt::red), QString("://icons/lines/line_red.png")},
+      {"Green", tr("Green"), QColor(Qt::green), QString("://icons/lines/line_green.png")},
+      {"Yellow", tr("Yellow"), QColor(Qt::yellow), QString("://icons/lines/line_yellow.png")},
+      {"Blue", tr("Blue"), QColor(Qt::blue), QString("://icons/lines/line_blue.png")},
+      {"Magenta", tr("Magenta"), QColor(Qt::magenta), QString("://icons/lines/line_magenta.png")},
+      {"Cyan", tr("Cyan"), QColor(Qt::cyan), QString("://icons/lines/line_cyan.png")},
+      {"White", tr("White"), QColor(Qt::white), QString("://icons/lines/line_white.png")},
+      {"Transparent", tr("Transparent"), QColor(Qt::transparent), QString("://icons/lines/line_transparent.png")}};
 }
 
 qint32 IGisItem::selectColor(QWidget* parent) {
@@ -178,7 +162,7 @@ qint32 IGisItem::selectColor(QWidget* parent) {
 
 QMenu* IGisItem::getColorMenu(const QString& title, QObject* obj, const char* slot, QWidget* parent) {
   QMenu* menu = new QMenu(title, parent);
-  menu->setIcon(QIcon("://icons/32x32/SelectColor.png"));
+  menu->setIcon(QIcon("://icons/SelectColor.svgt"));
 
   QAction* action;
   for (qint32 i = 0; i < IGisItem::colorMap.size(); i++) {
@@ -379,7 +363,7 @@ void IGisItem::setupHistory() {
     history_event_t& event = history.events.last();
     event.time = QDateTime::currentDateTimeUtc();
     event.comment = tr("Initial version.");
-    event.icon = "://icons/48x48/Start.png";
+    event.icon = "://icons/Start.svgt";
   }
 
   // search for the first item with data
@@ -550,13 +534,17 @@ const QString& IGisItem::getLastDatabaseHash() {
 void IGisItem::setLastDatabaseHash(quint64 id, QSqlDatabase& db) { lastDatabaseHash = getHash(); }
 
 void IGisItem::setIcon(const QPixmap& icon) {
-  this->icon = icon;
+  // Stash the raw pixmap in displayIcon; showIcon() composes the framed icon from it.
+  displayIcon = icon;
   showIcon();
 }
 
 void IGisItem::showIcon() {
-  const int& width = icon.width();
-  const int& height = icon.height();
+  // displayIcon holds the raw pixmap on entry -- composing from a previous composite would bake
+  // the nogo badge in for good. The copy survives the displayIcon reassignment below (COW).
+  const QPixmap base = displayIcon;
+  const int width = base.width();
+  const int height = base.height();
   // center icon within surrounding square
   int size = qMax(width, height);
   displayIcon = QPixmap(size, size);
@@ -564,13 +552,13 @@ void IGisItem::showIcon() {
   QPainter painter(&displayIcon);
   int dw = (size - width) / 2;
   int dh = (size - height) / 2;
-  painter.drawPixmap(dw, dh, icon);
+  painter.drawPixmap(dw, dh, base);
   if (isNogo()) {
     painter.drawPixmap(width * 0.4 + dw, height * 0.4 + dh,
                        QPixmap("://icons/48x48/NoGo.png")
                            .scaled(width * 0.6, height * 0.6, Qt::KeepAspectRatio, Qt::SmoothTransformation));
   }
-  icon = displayIcon;
+  icon = QIcon(displayIcon);
 }
 
 QColor IGisItem::str2color(const QString& name) {
@@ -793,8 +781,7 @@ void IGisItem::setNogo(bool yes) {
     }
   }
   if (changed) {
-    showIcon();
-    updateHistory();
+    updateHistory();  // updateDecoration() re-seeds the icon, badge included
   }
 }
 

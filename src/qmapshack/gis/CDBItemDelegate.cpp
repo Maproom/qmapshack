@@ -25,6 +25,7 @@
 #include <utility>
 
 #include "gis/IDBItem.h"
+#include "gis/db/CDBItem.h"
 #include "helpers/CDraw.h"
 #include "helpers/CRowBuilder.h"
 #include "helpers/CSettings.h"
@@ -69,13 +70,13 @@ void CDBItemDelegate::drawCheckStateButton(QPainter* p, const QStyleOptionViewIt
                                            Qt::CheckState state) {
   switch (state) {
     case Qt::Unchecked:
-      CDraw::drawToolButton(p, opt, rect, QIcon(":/icons/32x32/ToWksUnchecked.png"), true, false);
+      CDraw::drawToolButton(p, opt, rect, QIcon(":/icons/ToWksUnchecked.svgt"), true, false);
       break;
     case Qt::PartiallyChecked:
-      CDraw::drawToolButton(p, opt, rect, QIcon(":/icons/32x32/ToWksPartially.png"), true, true);
+      CDraw::drawToolButton(p, opt, rect, QIcon(":/icons/ToWksPartially.svgt"), true, true);
       break;
     case Qt::Checked:
-      CDraw::drawToolButton(p, opt, rect, QIcon(":/icons/32x32/ToWksChecked.png"), true, true);
+      CDraw::drawToolButton(p, opt, rect, QIcon(":/icons/ToWksChecked.svgt"), true, true);
       break;
   }
 }
@@ -212,8 +213,7 @@ void CDBItemDelegate::paintFolder(QPainter* p, const QStyleOptionViewItem& opt, 
                                   const IDBItem& item) const {
   auto layout = getRectanglesFolder(opt, item);
 
-  const QPixmap& icon = item.getIcon().scaled(layout.rectIcon.size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
-  QIcon(icon).paint(p, layout.rectIcon, Qt::AlignCenter);
+  item.getIcon().paint(p, layout.rectIcon, Qt::AlignCenter);
 
   if (layout.rectButton.isValid()) {
     drawCheckStateButton(p, opt, layout.rectButton, item.getCheckState());
@@ -269,9 +269,15 @@ void CDBItemDelegate::paintFolder(QPainter* p, const QStyleOptionViewItem& opt, 
 
 void CDBItemDelegate::paintItem(QPainter* p, const QStyleOptionViewItem& opt, const QModelIndex& index,
                                 const IDBItem& item) const {
+  const CDBItem* dbItem = dynamic_cast<const CDBItem*>(&item);
+  if (dbItem == nullptr) {
+    return;
+  }
   const auto& layout = getRectanglesItem(opt, item);
 
-  const QPixmap& icon = item.getIcon().scaled(layout.rectIcon.size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+  // GIS data-item icon comes from the DB blob (raster): stretch it, QIcon will not upscale one.
+  const QPixmap icon =
+      dbItem->getDisplayIcon().scaled(layout.rectIcon.size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
   QIcon(icon).paint(p, layout.rectIcon, Qt::AlignCenter);
 
   if (layout.rectButton.isValid()) {

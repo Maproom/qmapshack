@@ -21,6 +21,7 @@
 
 #include <QCoreApplication>
 #include <QDateTime>
+#include <QIcon>
 #include <QTreeWidgetItem>
 
 class IDBFolder;
@@ -29,7 +30,7 @@ class IDBItem : public QTreeWidgetItem {
  public:
   IDBItem(QTreeWidget* parent, int type);
   IDBItem(QTreeWidgetItem* parent, int type);
-  virtual ~IDBItem() {};
+  virtual ~IDBItem(){};
 
   enum column_e { eColumn };
 
@@ -51,8 +52,8 @@ class IDBItem : public QTreeWidgetItem {
   virtual void setToolTip(const QString& tip) { toolTip = tip; }
   virtual const QString& getToolTip() const { return toolTip; }
 
-  virtual void setIcon(const QPixmap& icon) { this->icon = icon; }
-  virtual const QPixmap& getIcon() const { return icon; }
+  virtual void setIcon(const QIcon& icon) { this->icon = icon; }
+  virtual const QIcon& getIcon() const { return icon; }
 
   virtual void setCheckState(Qt::CheckState state);
   virtual Qt::CheckState getCheckState() const { return checkState; }
@@ -69,7 +70,7 @@ class IDBItem : public QTreeWidgetItem {
   QDateTime ageTimestamp;
   QString name;
   QString toolTip;
-  QPixmap icon;
+  QIcon icon;
   Qt::CheckState checkState;
   quint32 countGroup = 0;
   quint32 countProject = 0;
@@ -80,5 +81,4 @@ class IDBItem : public QTreeWidgetItem {
   quint32 countArea = 0;
 };
 
-#endif //IDBITEM_H
-
+#endif  // IDBITEM_H

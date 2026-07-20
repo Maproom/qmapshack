@@ -172,7 +172,7 @@ CGisItemTrk::CGisItemTrk(const CQlgtTrack& trk1, IGisProject* project)
     history_event_t& event = history.events.last();
     event.time = QDateTime::currentDateTimeUtc();
     event.comment = tr("Copy flag information from QLandkarte GT track");
-    event.icon = "://icons/48x48/PointHide.png";
+    event.icon = "://icons/PointHide.svgt";
 
     QDataStream stream(&event.data, QIODevice::WriteOnly);
     stream.setByteOrder(QDataStream::LittleEndian);

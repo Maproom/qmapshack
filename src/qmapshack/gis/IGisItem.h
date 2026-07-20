@@ -478,7 +478,6 @@ class IGisItem : public IWksItem {
     QString name;
     QString label;
     QColor color;
-    QString bullet;
     QString line;
   };
 

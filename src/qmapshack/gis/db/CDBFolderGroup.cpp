@@ -20,7 +20,7 @@
 
 CDBFolderGroup::CDBFolderGroup(QSqlDatabase& db, quint64 key, QTreeWidgetItem* parent)
     : IDBFolder(false, db, eTypeGroup, key, parent) {
-  setIcon(QPixmap("://icons/32x32/PathBlue.png"));
+  setIcon(QIcon("://icons/PathBlue.svgt"));
   setupFromDB();
 }
 

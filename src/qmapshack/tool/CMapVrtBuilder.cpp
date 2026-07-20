@@ -88,7 +88,7 @@ void CMapVrtBuilder::slotSelectSourceFiles() {
 
   listWidget->clear();
   for (const QString& file : files) {
-    new QListWidgetItem(QIcon("://icons/32x32/Map.png"), file, listWidget);
+    new QListWidgetItem(QIcon("://icons/Map.svgt"), file, listWidget);
   }
 
   enableStartButton();

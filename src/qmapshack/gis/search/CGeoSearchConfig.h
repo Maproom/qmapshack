@@ -19,6 +19,7 @@
 #ifndef CGEOSEARCHCONFIG_H
 #define CGEOSEARCHCONFIG_H
 
+#include <QIcon>
 #include <QObject>
 
 class CGeoSearchConfig : public QObject {
@@ -31,7 +32,7 @@ class CGeoSearchConfig : public QObject {
   void load();
   void save() const;
 
-  const QPixmap getCurrentIcon() const;
+  const QIcon getCurrentIcon() const;
 
  signals:
   void sigConfigChanged();

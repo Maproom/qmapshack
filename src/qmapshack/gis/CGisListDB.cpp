@@ -112,36 +112,36 @@ CGisListDB::CGisListDB(QWidget* parent) : QTreeWidget(parent), socket(nullptr) {
 
   menuNone = new QMenu(this);
   actionAddDatabase =
-      menuNone->addAction(QIcon("://icons/32x32/Add.png"), tr("Add Database"), this, &CGisListDB::slotAddDatabase);
+      menuNone->addAction(QIcon("://icons/Add.svgt"), tr("Add Database"), this, &CGisListDB::slotAddDatabase);
 
   menuFolder = new QMenu(this);
   actionAddFolder =
-      menuFolder->addAction(QIcon("://icons/32x32/Add.png"), tr("Add Folder"), this, &CGisListDB::slotAddFolder);
+      menuFolder->addAction(QIcon("://icons/Add.svgt"), tr("Add Folder"), this, &CGisListDB::slotAddFolder);
   actionRenameFolder =
-      menuFolder->addAction(QIcon("://icons/32x32/A.png"), tr("Rename Folder"), this, &CGisListDB::slotRenameFolder);
+      menuFolder->addAction(QIcon("://icons/A.svgt"), tr("Rename Folder"), this, &CGisListDB::slotRenameFolder);
   actionCopyFolder =
-      menuFolder->addAction(QIcon("://icons/32x32/Copy.png"), tr("Copy Folder"), this, &CGisListDB::slotCopyFolder);
+      menuFolder->addAction(QIcon("://icons/Copy.svgt"), tr("Copy Folder"), this, &CGisListDB::slotCopyFolder);
   actionMoveFolder =
-      menuFolder->addAction(QIcon("://icons/32x32/Move.png"), tr("Move Folder"), this, &CGisListDB::slotMoveFolder);
-  actionDelFolder = menuFolder->addAction(QIcon("://icons/32x32/DeleteOne.png"), tr("Delete Folder"), this,
-                                          &CGisListDB::slotDelFolder);
+      menuFolder->addAction(QIcon("://icons/Move.svgt"), tr("Move Folder"), this, &CGisListDB::slotMoveFolder);
+  actionDelFolder =
+      menuFolder->addAction(QIcon("://icons/DeleteOne.svgt"), tr("Delete Folder"), this, &CGisListDB::slotDelFolder);
   menuFolder->addSeparator();
-  actionImport = menuFolder->addAction(QIcon("://icons/32x32/LoadGIS.png"), tr("Import from Files..."), this,
-                                       &CGisListDB::slotImport);
-  actionExportToGpx = menuFolder->addAction(QIcon("://icons/32x32/SaveGIS.png"), tr("Export to GPX..."), this,
-                                            &CGisListDB::slotExportToGpx);
+  actionImport =
+      menuFolder->addAction(QIcon("://icons/LoadGIS.svgt"), tr("Import from Files..."), this, &CGisListDB::slotImport);
+  actionExportToGpx =
+      menuFolder->addAction(QIcon("://icons/SaveGIS.svgt"), tr("Export to GPX..."), this, &CGisListDB::slotExportToGpx);
 
   menuItem = new QMenu(this);
   actionDelItem =
-      menuItem->addAction(QIcon("://icons/32x32/DeleteOne.png"), tr("Delete Item"), this, &CGisListDB::slotDelItem);
+      menuItem->addAction(QIcon("://icons/DeleteOne.svgt"), tr("Delete Item"), this, &CGisListDB::slotDelItem);
 
   menuDatabase = new QMenu(this);
   menuDatabase->addAction(actionAddFolder);
-  actionSearch = menuDatabase->addAction(QIcon("://icons/32x32/Zoom.png"), tr("Search Database"), this,
-                                         &CGisListDB::slotSearchDatabase);
-  actionUpdate = menuDatabase->addAction(QIcon("://icons/32x32/DatabaseSync.png"), tr("Sync. with Database"), this,
+  actionSearch =
+      menuDatabase->addAction(QIcon("://icons/Zoom.svgt"), tr("Search Database"), this, &CGisListDB::slotSearchDatabase);
+  actionUpdate = menuDatabase->addAction(QIcon("://icons/DatabaseSync.svgt"), tr("Sync. with Database"), this,
                                          &CGisListDB::slotUpdateDatabase);
-  actionDelDatabase = menuDatabase->addAction(QIcon("://icons/32x32/DeleteOne.png"), tr("Remove Database"), this,
+  actionDelDatabase = menuDatabase->addAction(QIcon("://icons/DeleteOne.svgt"), tr("Remove Database"), this,
                                               &CGisListDB::slotDelDatabase);
   menuDatabase->addSeparator();
   menuDatabase->addAction(actionImport);
@@ -149,10 +149,10 @@ CGisListDB::CGisListDB(QWidget* parent) : QTreeWidget(parent), socket(nullptr) {
 
   menuLostFound = new QMenu(this);
   actionDelLostFound =
-      menuLostFound->addAction(QIcon("://icons/32x32/Empty.png"), tr("Empty"), this, &CGisListDB::slotDelLostFound);
+      menuLostFound->addAction(QIcon("://icons/Empty.svgt"), tr("Empty"), this, &CGisListDB::slotDelLostFound);
 
   menuLostFoundItem = new QMenu(this);
-  actionDelLostFoundItem = menuLostFoundItem->addAction(QIcon("://icons/32x32/DeleteOne.png"), tr("Delete Item"), this,
+  actionDelLostFoundItem = menuLostFoundItem->addAction(QIcon("://icons/DeleteOne.svgt"), tr("Delete Item"), this,
                                                         &CGisListDB::slotDelLostFoundItem);
 
   connect(this, &CGisListDB::customContextMenuRequested, this, &CGisListDB::slotContextMenu);

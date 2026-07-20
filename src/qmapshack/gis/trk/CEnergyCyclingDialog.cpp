@@ -21,6 +21,7 @@
 
 #include "CMainWindow.h"
 #include "gis/trk/CEnergyCycling.h"
+#include "svgticon/CSvgtIcon.h"
 
 /** @brief Constructor - Initiate the dialog GUI
 

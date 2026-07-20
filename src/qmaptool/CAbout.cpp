@@ -27,6 +27,7 @@
 
 CAbout::CAbout(QWidget* parent) : QDialog(parent) {
   setupUi(this);
+  label_4->load(QString("://icons/QMapTool.svgt"));
 
   if (QString(VER_SUFFIX).isEmpty()) {
     labelVersion->setText(VER_STR);

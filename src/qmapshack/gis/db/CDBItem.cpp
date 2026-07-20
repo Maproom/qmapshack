@@ -30,11 +30,9 @@ CDBItem::CDBItem(QSqlDatabase& db, quint64 id, IDBFolder* parent) : IDBItem(pare
   query.bindValue(":id", id);
   QUERY_EXEC(return);
   if (query.next()) {
-    QPixmap pixmap;
     type = query.value(0).toInt();
     key = query.value(1).toString();
-    pixmap.loadFromData(query.value(2).toByteArray(), "PNG");
-    setIcon(pixmap);
+    displayIcon.loadFromData(query.value(2).toByteArray(), "PNG");
     setName(query.value(3).toString());
 
     date = query.value(4).toDateTime();

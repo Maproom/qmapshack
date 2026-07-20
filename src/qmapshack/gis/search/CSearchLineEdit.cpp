@@ -35,11 +35,11 @@ CSearchLineEdit::CSearchLineEdit(QWidget* parent) : QLineEdit(parent) {
   searchCreationTimer->setSingleShot(true);
   connect(searchCreationTimer, &QTimer::timeout, this, [this] { slotCreateSearch(text()); });
 
-  actionClearFilter = new QAction(QIcon(":/icons/32x32/Filter.png"), tr("Clear Filter"), this);
-  actionHelp = new QAction(QIcon(":/icons/32x32/CSrcUnknown.png"), tr("Open Help Window"), this);
-  actionSetupFilter = new QAction(QIcon(":/icons/32x32/Apply.png"), tr("Setup Filter"), this);
-  actionError = new QAction(QIcon(":/icons/32x32/Attention.png"), tr("Error parsing search"), this);
-  actionAutoProperty = new QAction(QIcon(":/icons/32x32/Hint.png"), tr("Auto selected property"), this);
+  actionClearFilter = new QAction(QIcon(":/icons/Filter.svgt"), tr("Clear Filter"), this);
+  actionHelp = new QAction(QIcon(":/icons/CSrcUnknown.svgt"), tr("Open Help Window"), this);
+  actionSetupFilter = new QAction(QIcon(":/icons/Apply.svgt"), tr("Setup Filter"), this);
+  actionError = new QAction(QIcon(":/icons/Attention.svgt"), tr("Error parsing search"), this);
+  actionAutoProperty = new QAction(QIcon(":/icons/Hint.svgt"), tr("Auto selected property"), this);
 
   actionNameOnly = new QAction(tr("Name Only"), this);
   actionNameOnly->setCheckable(true);
@@ -147,7 +147,7 @@ void CSearchLineEdit::slotCaseSensitive(bool yes) {
 }
 
 void CSearchLineEdit::slotCreateSearch(const QString& str) {
-  actionClearFilter->setIcon(str.isEmpty() ? QIcon("://icons/32x32/Filter.png") : QIcon("://icons/32x32/Cancel.png"));
+  actionClearFilter->setIcon(str.isEmpty() ? QIcon("://icons/Filter.svgt") : QIcon("://icons/Cancel.svgt"));
   CSearch currentSearch(str);
 
   // test whether syntax errors occured and show error

@@ -36,6 +36,7 @@
 #include "helpers/Signals.h"
 #include "plot/CPlotProfile.h"
 #include "plot/CPlotTrack.h"
+#include "svgticon/CSvgtIcon.h"
 #include "widgets/CTextEditWidget.h"
 
 CDetailsPrj::CDetailsPrj(IGisProject& prj, QWidget* parent)

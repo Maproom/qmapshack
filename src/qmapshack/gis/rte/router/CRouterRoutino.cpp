@@ -31,6 +31,7 @@
 #include "helpers/CProgressDialog.h"
 #include "helpers/CSettings.h"
 #include "setup/IAppSetup.h"
+#include "svgticon/CSvgtIcon.h"
 
 QPointer<CProgressDialog> CRouterRoutino::progress;
 

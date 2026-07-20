@@ -32,6 +32,10 @@
 #include "misc.h"
 #include "version.h"
 
+// the "accumulative results" icon is composed, so it cannot scale like the plain SVG one does.
+// Build it large enough that every cell it lands in only ever downscales.
+#define COMPOSED_SIZE 128
+
 CGeoSearch::CGeoSearch(CGisListWks* parent)
     : IGisProject(eTypeGeoSearch, "", parent), searchConfig(&CGeoSearchConfig::self()) {
   setFlags(flags() | Qt::ItemIsEditable);
@@ -68,14 +72,19 @@ QString CGeoSearch::getServiceName() const {
 
 void CGeoSearch::setIcon() {
   if (searchConfig->accumulativeResults) {
-    QPixmap displayIcon = QPixmap(48, 48);
+    // A composition is a raster whatever its sources are, so it is built once at COMPOSED_SIZE --
+    // well above any cell it lands in -- and downscaled from there. The proportions are the
+    // original 48px ones scaled up.
+    const int badge = COMPOSED_SIZE * 26 / 48;
+    const int offset = COMPOSED_SIZE * 22 / 48;
+
+    QPixmap displayIcon(COMPOSED_SIZE, COMPOSED_SIZE);
     displayIcon.fill(Qt::transparent);
+
     QPainter painter(&displayIcon);
-    painter.drawPixmap(0, 0,
-                       searchConfig->getCurrentIcon().scaled(48, 48, Qt::KeepAspectRatio, Qt::SmoothTransformation));
-    painter.drawPixmap(
-        22, 22, QPixmap("://icons/48x48/AddGreen.png").scaled(26, 26, Qt::KeepAspectRatio, Qt::SmoothTransformation));
-    icon = displayIcon;
+    searchConfig->getCurrentIcon().paint(&painter, QRect(0, 0, COMPOSED_SIZE, COMPOSED_SIZE));
+    QIcon("://icons/AddGreen.svgt").paint(&painter, QRect(offset, offset, badge, badge));
+    icon = QIcon(displayIcon);
   } else {
     icon = searchConfig->getCurrentIcon();
   }
@@ -107,18 +116,18 @@ void CGeoSearch::selectService(const QRect& rect) {
   actionGroup->addAction(addService(CGeoSearchConfig::eServiceGoogle, tr("Google"), menu));
 
   menu->addSeparator();
-  QAction* actAccu = menu->addAction(QIcon("://icons/32x32/AddGreen.png"), tr("Accumulative Results"));
+  QAction* actAccu = menu->addAction(QIcon("://icons/AddGreen.svgt"), tr("Accumulative Results"));
   actAccu->setCheckable(true);
   actAccu->setChecked(searchConfig->accumulativeResults);
   connect(actAccu, &QAction::triggered, this, &CGeoSearch::slotAccuResults);
 
-  QAction* actReset = menu->addAction(QIcon("://icons/32x32/Reset.png"), tr("Reset Results"));
+  QAction* actReset = menu->addAction(QIcon("://icons/Reset.svgt"), tr("Reset Results"));
   actReset->setEnabled(childCount() != 0);
   connect(actReset, &QAction::triggered, this, &CGeoSearch::slotResetResults);
 
   menu->addSeparator();
 
-  QAction* actSetup = menu->addAction(QIcon("://icons/32x32/Apply.png"), tr("Configure Services"));
+  QAction* actSetup = menu->addAction(QIcon("://icons/Apply.svgt"), tr("Configure Services"));
   actSetup->setToolTip(toRichText(tr("configure providers of geocoding search services")));
   connect(actSetup, &QAction::triggered, this, &CGeoSearch::slotSetupGeoSearch);
 
@@ -686,7 +695,7 @@ class CGeoSearchError : public IWksItem {
  public:
   CGeoSearchError(const QString& status, CGeoSearch* parent) : IWksItem(parent, eTypeGeoSearchError) {
     name = status;
-    icon = QPixmap("://icons/32x32/Error.png");
+    icon = QIcon("://icons/Error.svgt");
   }
   virtual ~CGeoSearchError() = default;
   bool hasUserFocus() const override { return false; }

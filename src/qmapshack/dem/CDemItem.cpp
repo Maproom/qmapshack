@@ -148,15 +148,15 @@ void CDemItem::updateIcon() {
     return;
   }
 
-  QPixmap img("://icons/48x48/Map.png");
+  QString iconPath = "://icons/Map.svgt";
   QFileInfo fi(filename);
   if (fi.suffix().toLower() == "vrt") {
-    img = QPixmap("://icons/48x48/MimeDemVRT.png");
+    iconPath = "://icons/MimeDemVRT.svgt";
   } else if (fi.suffix().toLower() == "wcs") {
-    img = QPixmap("://icons/48x48/MimeDemWCS.png");
+    iconPath = "://icons/MimeDemWCS.svgt";
   }
 
-  setIcon(0, QIcon(img));
+  setIcon(0, QIcon(iconPath));
 }
 
 bool CDemItem::isActivated() {

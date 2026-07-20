@@ -20,6 +20,7 @@
 #include "plot/IPlot.h"
 
 #include <QKeyEvent>
+#include <QSvgRenderer>
 #include <QtWidgets>
 
 #include "CMainWindow.h"
@@ -75,15 +76,14 @@ IPlot::IPlot(CGisItemTrk* trk, CPlotData::axistype_e type, mode_e mode, QWidget*
   }
 
   menu = new QMenu(this);
-  actionResetZoom = menu->addAction(QIcon("://icons/32x32/Zoom.png"), tr("Reset Zoom"), this, &IPlot::slotResetZoom);
-  actionStopRange =
-      menu->addAction(QIcon("://icons/32x32/SelectReset.png"), tr("Reset Range"), this, &IPlot::slotStopRange);
-  actionPrint = menu->addAction(QIcon("://icons/32x32/Save.png"), tr("Save..."), this, &IPlot::slotSave);
+  actionResetZoom = menu->addAction(QIcon("://icons/Zoom.svgt"), tr("Reset Zoom"), this, &IPlot::slotResetZoom);
+  actionStopRange = menu->addAction(QIcon("://icons/SelectReset.svgt"), tr("Reset Range"), this, &IPlot::slotStopRange);
+  actionPrint = menu->addAction(QIcon("://icons/Save.svgt"), tr("Save..."), this, &IPlot::slotSave);
   menu->addSeparator();
-  actionAddWpt = menu->addAction(QIcon("://icons/32x32/AddWpt.png"), tr("Add Waypoint"), this, &IPlot::slotAddWpt);
-  actionAddTrkPtInfo = menu->addAction(QIcon("://icons/32x32/AddPointInfo.png"), tr("Add Trackpoint Info"), this,
-                                       &IPlot::slotAddTrkPtInfo);
-  actionCutTrk = menu->addAction(QIcon("://icons/32x32/TrkCut.png"), tr("Cut Track..."), this, &IPlot::slotCutTrk);
+  actionAddWpt = menu->addAction(QIcon("://icons/AddWpt.svgt"), tr("Add Waypoint"), this, &IPlot::slotAddWpt);
+  actionAddTrkPtInfo =
+      menu->addAction(QIcon("://icons/AddPointInfo.svgt"), tr("Add Trackpoint Info"), this, &IPlot::slotAddTrkPtInfo);
+  actionCutTrk = menu->addAction(QIcon("://icons/TrkCut.svgt"), tr("Cut Track..."), this, &IPlot::slotCutTrk);
 
   connect(this, &IPlot::customContextMenuRequested, this, &IPlot::slotContextMenu);
 }
@@ -1226,7 +1226,9 @@ void IPlot::drawActivities(QPainter& p) {
       p.drawRoundedRect(rectIconFrame, RECT_RADIUS, RECT_RADIUS);
 
       rectIcon.moveCenter(QPoint(c, icon_frame / 2 + color_width));
-      p.drawPixmap(rectIcon, QPixmap(desc.iconSmall));
+      // renders through the painter's transform, so the icon follows whatever resolution the
+      // plot buffer is drawn at
+      QSvgRenderer(desc.iconSvg).render(&p, rectIcon);
     }
 
     p.setPen(QPen(Qt::darkGreen, 1));

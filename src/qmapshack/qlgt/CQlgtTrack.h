@@ -229,7 +229,6 @@ class CQlgtTrack : public QObject, public IItem {
   /// the track line color
   QColor color;
 
-  QPixmap bullet;
   /// the track line color by index
   unsigned colorIdx = 0;
   /// the track points

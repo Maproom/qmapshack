@@ -54,10 +54,10 @@ void CDBFolderLostFound::setupFromDB() {
 
   if (cnt) {
     setName(tr("Lost & Found (%1)").arg(cnt));
-    setIcon(QPixmap("://icons/32x32/DeleteMultiple.png"));
+    setIcon(QIcon("://icons/DeleteMultiple.svgt"));
   } else {
     setName(tr("Lost & Found"));
-    setIcon(QPixmap("://icons/32x32/Empty.png"));
+    setIcon(QIcon("://icons/Empty.svgt"));
   }
 
   CEvtD2WUpdateLnF* evt = new CEvtD2WUpdateLnF(getId(), getDBName());

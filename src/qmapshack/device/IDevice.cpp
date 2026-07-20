@@ -33,14 +33,14 @@ quint32 IDevice::countMount = 0;
 
 IDevice::IDevice(const QString& path, type_e type, const QString& key, QTreeWidget* parent)
     : IWksItem(parent, type), dir(path), key(key) {
-  icon = QPixmap("://icons/32x32/Device.png");
+  icon = QIcon("://icons/Device.svgt");
   countDevice++;
   setVisibility(false);
 }
 
 IDevice::IDevice(const QString& path, const QString& key, IDevice* parent)
     : IWksItem(parent, eTypeVirtual), dir(path), key(key) {
-  icon = QPixmap("://icons/32x32/PathGreen.png");
+  icon = QIcon("://icons/PathGreen.svgt");
   setVisibility(false);
 }
 

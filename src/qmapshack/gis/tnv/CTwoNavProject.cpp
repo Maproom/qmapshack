@@ -30,7 +30,7 @@
 #include "helpers/CSettings.h"
 
 CTwoNavProject::CTwoNavProject(const QString& filename, IDevice* parent) : IGisProject(eTypeTwoNav, filename, parent) {
-  icon = QPixmap("://icons/32x32/2NavProject.png");
+  icon = QIcon("://icons/2NavProject.svgt");
 
   load(filename);
 
@@ -42,7 +42,7 @@ CTwoNavProject::CTwoNavProject(const QString& filename, IDevice* parent) : IGisP
 
 CTwoNavProject::CTwoNavProject(const QString& filename, const IGisProject* project, IDevice* parent)
     : IGisProject(eTypeTwoNav, filename, parent) {
-  icon = QPixmap("://icons/32x32/2NavProject.png");
+  icon = QIcon("://icons/2NavProject.svgt");
 
   *(IGisProject*)this = *project;
 

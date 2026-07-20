@@ -38,13 +38,13 @@ CDBFolderMysql::CDBFolderMysql(const QString& server, const QString& port, const
 
 void CDBFolderMysql::slotDelayedSetup() {
   if (setupDB(server, port, user, passwd, noPasswd, name, name)) {
-    setIcon(QPixmap("://icons/32x32/MySQL.png"));
+    setIcon(QIcon("://icons/MySQL.svgt"));
 
     setupFromDB();
 
     setChildIndicatorPolicy(QTreeWidgetItem::ShowIndicator);
   } else {
-    setIcon(QPixmap("://icons/32x32/MySQLNoConn.png"));
+    setIcon(QIcon("://icons/MySQLNoConn.svgt"));
   }
 
   setToolTip(getDBInfo());
@@ -91,5 +91,5 @@ void CDBFolderMysql::copyFolder(quint64 child, quint64 parent)  // override;
       "folder2folder WHERE parent=:parent AND child=:child)");
   query.bindValue(":parent", parent);
   query.bindValue(":child", child);
-  QUERY_EXEC(return );
+  QUERY_EXEC(return);
 }

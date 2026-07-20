@@ -68,13 +68,8 @@ void CPoiFileItem::updateIcon() {
     return;
   }
 
-  QPixmap img("://icons/32x32/Poi.png");
-  QFileInfo fi(filename);
-  if (fi.suffix().toLower() == "poi") {
-    img = QPixmap("://icons/32x32/MimePoiPOI.png");
-  }
-
-  setIcon(0, QIcon(img));
+  const QString& suffix = QFileInfo(filename).suffix().toLower();
+  setIcon(/* col */ 0, QIcon(suffix == "poi" ? "://icons/MimePoiPOI.svgt" : "://icons/Poi.svgt"));
 }
 
 bool CPoiFileItem::isActivated() {

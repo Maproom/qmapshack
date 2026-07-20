@@ -24,6 +24,7 @@
 #include "dem/CDemDraw.h"
 #include "dem/CDemItem.h"
 #include "map/CMapItemDelegate.h"
+#include "svgticon/CSvgtIcon.h"
 
 CDemTreeWidget::CDemTreeWidget(QWidget* parent) : QTreeWidget(parent) {
   CMapItemDelegate* delegate = new CMapItemDelegate(this);
@@ -303,7 +304,7 @@ void CDemList::slotReloadDem() {
 }
 
 void CDemList::slotFilter(const QString& str) {
-  actionClearFilter->setIcon(str.isEmpty() ? QIcon("://icons/32x32/Filter.png") : QIcon("://icons/32x32/Cancel.png"));
+  actionClearFilter->setIcon(str.isEmpty() ? QIcon("://icons/Filter.svgt") : QIcon("://icons/Cancel.svgt"));
 
   const int N = treeWidget->topLevelItemCount();
 

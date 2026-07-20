@@ -18,6 +18,7 @@
 
 #include "gis/trk/CSelectActivityColor.h"
 
+#include <QSvgWidget>
 #include <QtWidgets>
 
 CSelectActivityColor::CSelectActivityColor(QWidget* parent)
@@ -62,10 +63,9 @@ void CSelectActivityColor::updateData() {
     }
     const CActivityTrk::desc_t& desc = CActivityTrk::getDescriptor(trkact_t(i));
 
-    QLabel* label = new QLabel(this);
-    label->setMinimumSize(16, 16);
-    label->setMaximumSize(16, 16);
-    label->setPixmap(desc.iconSmall);
+    QSvgWidget* label = new QSvgWidget(this);
+    label->setFixedSize(16, 16);
+    label->load(desc.iconSvg);
     label->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Maximum);
     horizontalLayout->addWidget(label);
 

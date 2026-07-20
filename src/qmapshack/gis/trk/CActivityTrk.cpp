@@ -21,15 +21,16 @@
 #include "gis/CGisWorkspace.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "helpers/CSettings.h"
+#include "svgticon/CSvgtIcon.h"
 #include "units/IUnit.h"
 
 QVector<CActivityTrk::desc_t> CActivityTrk::actDescriptor;
 
-#define DESCRIPTOR_ENTRY(name, icon, enumAct, colorIdx)                                 \
-  {                                                                                     \
-    CTrackData::trkpt_t::enumAct, name, "://icons/48x48/" icon, "://icons/16x16/" icon, \
-        IGisItem::getColorMap()[qMin(colorIdx, IGisItem::eColorTransparent)].color,     \
-        IGisItem::getColorMap()[qMin(colorIdx, IGisItem::eColorTransparent)].line       \
+#define DESCRIPTOR_ENTRY(name, icon, enumAct, colorIdx)                             \
+  {                                                                                 \
+    CTrackData::trkpt_t::enumAct, name, "://icons/" icon ".svgt",                   \
+        IGisItem::getColorMap()[qMin(colorIdx, IGisItem::eColorTransparent)].color, \
+        IGisItem::getColorMap()[qMin(colorIdx, IGisItem::eColorTransparent)].line   \
   }
 
 CActivityTrk::desc_t CActivityTrk::dummyDesc;
@@ -37,18 +38,18 @@ CActivityTrk::desc_t CActivityTrk::dummyDesc;
 CActivityTrk::CActivityTrk(CGisItemTrk* trk) : trk(trk) {}
 
 void CActivityTrk::init() {
-  dummyDesc = DESCRIPTOR_ENTRY("-", "ActNone.png", eAct20None, IGisItem::eColorTransparent);
+  dummyDesc = DESCRIPTOR_ENTRY("-", "ActNone", eAct20None, IGisItem::eColorTransparent);
 
-  actDescriptor = {DESCRIPTOR_ENTRY(tr("Foot"), "ActFoot.png", eAct20Foot, IGisItem::eColorBlack),
-                   DESCRIPTOR_ENTRY(tr("Bicycle"), "ActCycle.png", eAct20Cycle, IGisItem::eColorDarkRed),
-                   DESCRIPTOR_ENTRY(tr("Motor Bike"), "ActBike.png", eAct20Bike, IGisItem::eColorDarkGreen),
-                   DESCRIPTOR_ENTRY(tr("Car"), "ActCar.png", eAct20Car, IGisItem::eColorDarkYellow),
-                   DESCRIPTOR_ENTRY(tr("Cable Car"), "ActCable.png", eAct20Cable, IGisItem::eColorDarkBlue),
-                   DESCRIPTOR_ENTRY(tr("Swim"), "ActSwim.png", eAct20Swim, IGisItem::eColorDarkMagenta),
-                   DESCRIPTOR_ENTRY(tr("Ship"), "ActShip.png", eAct20Ship, IGisItem::eColorDarkCyan),
-                   DESCRIPTOR_ENTRY(tr("Aeronautic"), "ActAero.png", eAct20Aero, IGisItem::eColorLightGray),
-                   DESCRIPTOR_ENTRY(tr("Ski/Winter"), "ActSki.png", eAct20Ski, IGisItem::eColorDarkGray),
-                   DESCRIPTOR_ENTRY(tr("Public Transport"), "ActTrain.png", eAct20Train, IGisItem::eColorRed)};
+  actDescriptor = {DESCRIPTOR_ENTRY(tr("Foot"), "ActFoot", eAct20Foot, IGisItem::eColorBlack),
+                   DESCRIPTOR_ENTRY(tr("Bicycle"), "ActCycle", eAct20Cycle, IGisItem::eColorDarkRed),
+                   DESCRIPTOR_ENTRY(tr("Motor Bike"), "ActBike", eAct20Bike, IGisItem::eColorDarkGreen),
+                   DESCRIPTOR_ENTRY(tr("Car"), "ActCar", eAct20Car, IGisItem::eColorDarkYellow),
+                   DESCRIPTOR_ENTRY(tr("Cable Car"), "ActCable", eAct20Cable, IGisItem::eColorDarkBlue),
+                   DESCRIPTOR_ENTRY(tr("Swim"), "ActSwim", eAct20Swim, IGisItem::eColorDarkMagenta),
+                   DESCRIPTOR_ENTRY(tr("Ship"), "ActShip", eAct20Ship, IGisItem::eColorDarkCyan),
+                   DESCRIPTOR_ENTRY(tr("Aeronautic"), "ActAero", eAct20Aero, IGisItem::eColorLightGray),
+                   DESCRIPTOR_ENTRY(tr("Ski/Winter"), "ActSki", eAct20Ski, IGisItem::eColorDarkGray),
+                   DESCRIPTOR_ENTRY(tr("Public Transport"), "ActTrain", eAct20Train, IGisItem::eColorRed)};
 
   SETTINGS;
   cfg.beginGroup("Activities");
@@ -81,15 +82,15 @@ QMenu* CActivityTrk::getMenu(const IGisItem::key_t& key, QWidget* parent, bool e
 
 QMenu* CActivityTrk::getMenu(const QList<IGisItem::key_t>& keys, QWidget* parent, bool execute) {
   QMenu* menu = new QMenu(tr("Set Track Activity"), parent);
-  menu->setIcon(QIcon("://icons/32x32/Activity.png"));
+  menu->setIcon(QIcon("://icons/Activity.svgt"));
   QAction* act;
 
-  act = menu->addAction(QIcon("://icons/32x32/ActNone.png"), tr("No Activity"));
+  act = menu->addAction(QIcon("://icons/ActNone.svgt"), tr("No Activity"));
   auto func = [keys]() { CGisWorkspace::self().slotActivityTrkByKey(keys, CTrackData::trkpt_t::eAct20None); };
   QAction::connect(act, &QAction::triggered, &CGisWorkspace::self(), func);
 
   for (const desc_t& desc : std::as_const(actDescriptor)) {
-    act = menu->addAction(QIcon(desc.iconLarge), desc.name);
+    act = menu->addAction(QIcon(desc.iconSvg), desc.name);
     auto func = [keys, desc]() { CGisWorkspace::self().slotActivityTrkByKey(keys, desc.activity); };
     QAction::connect(act, &QAction::triggered, &CGisWorkspace::self(), func);
   }

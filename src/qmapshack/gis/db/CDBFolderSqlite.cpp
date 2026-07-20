@@ -30,12 +30,12 @@ CDBFolderSqlite::CDBFolderSqlite(const QString& filename, const QString& name, Q
   if (setupDB(filename, name, error)) {
     setupFromDB();
 
-    setIcon(QPixmap("://icons/32x32/SQLite.png"));
+    setIcon(QIcon("://icons/SQLite.svgt"));
     setChildIndicatorPolicy(QTreeWidgetItem::ShowIndicator);
   } else {
     IDB::db.close();
 
-    setIcon(QPixmap("://icons/32x32/SQLiteNoConn.png"));
+    setIcon(QIcon("://icons/SQLiteNoConn.svgt"));
   }
 
   setToolTip(getDBInfo());
@@ -77,5 +77,5 @@ void CDBFolderSqlite::copyFolder(quint64 child, quint64 parent)  // override;
       "folder2folder WHERE parent=:parent AND child=:child)");
   query.bindValue(":parent", parent);
   query.bindValue(":child", child);
-  QUERY_EXEC(return );
+  QUERY_EXEC(return);
 }

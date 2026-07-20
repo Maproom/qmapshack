@@ -225,7 +225,7 @@ bool CGisItemTrk::saveTwoNav(const QString& filename) {
         CGisItemWpt* wpt = dynamic_cast<CGisItemWpt*>(project->getItemByKey(trkpt.keyWpt));
         if (wpt) {
           QString iconName = wpt->getIconName();
-          QPixmap icon = wpt->getIcon();
+          QPixmap icon = wpt->getDisplayIcon();
           icon = icon.scaledToWidth(15, Qt::SmoothTransformation);
           iconName = iconQlGt2TwoNav(iconName);
           iconName = iconName.replace(" ", "_");

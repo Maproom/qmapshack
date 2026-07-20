@@ -31,7 +31,7 @@ CItemMapLayer::CItemMapLayer(QTreeWidget* parent)
   drawContext = new CDrawContextProj(CMainWindow::self().getCanvas(), parent);
 
   setText(CItemTreeWidget::eColumnName, tr("Layer"));
-  setIcon(CItemTreeWidget::eColumnName, QIcon("://icons/32x32/MapLayer.png"));
+  setIcon(CItemTreeWidget::eColumnName, QIcon("://icons/MapLayer.svgt"));
 
   // this is needed to create a filename
   openFileCheckSuccess(QIODevice::ReadWrite, vrt);

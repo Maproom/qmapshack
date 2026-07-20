@@ -45,9 +45,9 @@ CSelectCopyAction::CSelectCopyAction(const IGisProject* src, const IGisProject* 
     : QDialog(parent), result(eResultNone) {
   setupUi(this);
 
-  labelIcon1->setPixmap(src->getIcon());
+  labelIcon1->setPixmap(src->getIcon().pixmap(32, 32));
   labelInfo1->setText(src->getInfo(IWksItem::eFeatureShowFullText));
-  labelIcon2->setPixmap(tar->getIcon());
+  labelIcon2->setPixmap(tar->getIcon().pixmap(32, 32));
   labelInfo2->setText(tar->getInfo(IWksItem::eFeatureShowFullText));
 
   pushClone->setEnabled(false);

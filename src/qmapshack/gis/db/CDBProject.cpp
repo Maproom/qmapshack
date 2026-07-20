@@ -31,12 +31,12 @@
 #include "gis/prj/CDetailsPrj.h"
 #include "helpers/CProgressDialog.h"
 CDBProject::CDBProject(type_e type, CGisListWks* parent) : IGisProject(type, "", parent), id(0) {
-  icon = QPixmap("://icons/32x32/DBProject.png");
+  icon = QIcon("://icons/DBProject.svgt");
 }
 
 CDBProject::CDBProject(const QString& dbName, quint64 id, CGisListWks* parent)
     : IGisProject(eTypeDb, dbName, parent), id(id) {
-  icon = QPixmap("://icons/32x32/DBProject.png");
+  icon = QIcon("://icons/DBProject.svgt");
   db = QSqlDatabase::database(dbName);
 
   QSqlQuery query(db);

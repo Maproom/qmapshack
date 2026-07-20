@@ -148,8 +148,6 @@ class CGisItemOvlArea : public IGisItem, public IGisLine {
 
   /// the track line color
   QColor color;
-  /// the trackpoint bullet icon
-  QPixmap bullet;
   /// the track line color by index
   unsigned colorIdx = 0;
 

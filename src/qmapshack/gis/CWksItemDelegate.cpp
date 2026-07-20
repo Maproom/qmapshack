@@ -298,8 +298,10 @@ void CWksItemDelegate::drawRatingStars(qreal rating, QPainter* p, QIcon::Mode ic
   if (const qint32 N = qRound(rating); N > 0) {
     QRect rectStar(rectStatus.left() + kMargin, rectStatus.top() + kMargin, rectStatus.height() - 2 * kMargin,
                    rectStatus.height() - 2 * kMargin);
+    // Local, not static: a static would pin the colour scheme live at first paint.
+    const QIcon star("://icons/RatingStar.svgt");
     for (int i = 0; i < N; i++) {
-      QIcon("://icons/cache/32x32/star.png").paint(p, rectStar, Qt::AlignCenter, iconMode);
+      star.paint(p, rectStar, Qt::AlignCenter, iconMode);
       rectStar.translate(kMargin + rectStar.width(), 0);
     }
     // Advance rectStatus past the drawn stars so subsequent text starts to the right.
@@ -365,13 +367,11 @@ void CWksItemDelegate::paintProject(QPainter* p, const QStyleOptionViewItem& opt
   const QColor colorName = CDraw::itemNameColor(opt, isVisible);
 
   // draw icon
-  const QPixmap& icon = item.getIcon().scaled(layout.rectIcon.size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
-  QIcon(icon).paint(p, layout.rectIcon, Qt::AlignCenter, item.isVisible() ? QIcon::Normal : QIcon::Disabled);
+  item.getIcon().paint(p, layout.rectIcon, Qt::AlignCenter, item.isVisible() ? QIcon::Normal : QIcon::Disabled);
 
   // draw tool button to toggle visibility
   CDraw::drawToolButton(p, opt, layout.rectVisible,
-                        isVisible ? QIcon(":/icons/32x32/ShowAll.png") : QIcon(":/icons/32x32/ShowNone.png"), true,
-                        isVisible);
+                        isVisible ? QIcon(":/icons/ShowAll.svgt") : QIcon(":/icons/ShowNone.svgt"), true, isVisible);
 
   const float opacityOfFocusBasedItems = item.getOpacityOfFocusBasedItems();
 
@@ -380,21 +380,21 @@ void CWksItemDelegate::paintProject(QPainter* p, const QStyleOptionViewItem& opt
       // draw save/ auto save button
       if (item.isChanged() && !item.isAutoSave()) {
         // show save button
-        CDraw::drawToolButton(p, opt, layout.rectSave, QIcon(":/icons/32x32/Save.png"), true, false);
+        CDraw::drawToolButton(p, opt, layout.rectSave, QIcon(":/icons/Save.svgt"), true, false);
       } else {
         p->setOpacity(opacityOfFocusBasedItems);
         if (item.isAutoSave()) {
           // show auto save button pressed, to disable autosave
-          CDraw::drawToolButton(p, opt, layout.rectSave, QIcon(":/icons/32x32/AutoSaveA.png"), true, true);
+          CDraw::drawToolButton(p, opt, layout.rectSave, QIcon(":/icons/AutoSaveA.svgt"), true, true);
         } else if (item.canSave()) {
           // show auto save button only if project can be saved
-          CDraw::drawToolButton(p, opt, layout.rectSave, QIcon(":/icons/32x32/AutoSaveNoA.png"), true, false);
+          CDraw::drawToolButton(p, opt, layout.rectSave, QIcon(":/icons/AutoSaveNoA.svgt"), true, false);
         }
         p->setOpacity(1.0);
       }
     } else {
       p->setOpacity(opacityOfFocusBasedItems);
-      CDraw::drawToolButton(p, opt, layout.rectSave, QIcon(":/icons/32x32/Copy.png"), true, false);
+      CDraw::drawToolButton(p, opt, layout.rectSave, QIcon(":/icons/Copy.svgt"), true, false);
       p->setOpacity(1.0);
     }
   }
@@ -403,9 +403,9 @@ void CWksItemDelegate::paintProject(QPainter* p, const QStyleOptionViewItem& opt
     p->setOpacity(opacityOfFocusBasedItems);
     // auto sync. w. dev.
     if (item.isAutoSyncToDev()) {
-      CDraw::drawToolButton(p, opt, layout.rectAutoSyncDev, QIcon(":/icons/32x32/DeviceSync.png"), true, true);
+      CDraw::drawToolButton(p, opt, layout.rectAutoSyncDev, QIcon(":/icons/DeviceSync.svgt"), true, true);
     } else {
-      CDraw::drawToolButton(p, opt, layout.rectAutoSyncDev, QIcon(":/icons/32x32/DeviceNoSync.png"), true, false);
+      CDraw::drawToolButton(p, opt, layout.rectAutoSyncDev, QIcon(":/icons/DeviceNoSync.svgt"), true, false);
     }
     p->setOpacity(1.0);
   }
@@ -414,11 +414,11 @@ void CWksItemDelegate::paintProject(QPainter* p, const QStyleOptionViewItem& opt
     if (item.holdUiFocus(opt)) {
       p->setOpacity(opacityOfFocusBasedItems);
       CDraw::drawToolButton(p, opt, layout.rectActiveProject,
-                            item.hasUserFocus() ? QIcon(":/icons/32x32/Focus.png") : QIcon(":/icons/32x32/UnFocus.png"),
-                            true, true);
+                            item.hasUserFocus() ? QIcon(":/icons/Focus.svgt") : QIcon(":/icons/UnFocus.svgt"), true,
+                            true);
       p->setOpacity(1.0);
     } else {
-      QIcon(":/icons/32x32/Focus.png")
+      QIcon(":/icons/Focus.svgt")
           .paint(p, layout.rectActiveProject.adjusted(2 * kMargin, 2 * kMargin, -2 * kMargin, -2 * kMargin),
                  Qt::AlignCenter);
     }
@@ -488,13 +488,20 @@ void CWksItemDelegate::paintDevice(QPainter* p, const QStyleOptionViewItem& opt,
   p->drawText(layout.rectName.adjusted(0, -1, 0, 1), Qt::AlignLeft | Qt::AlignTop, item.getName());
 
   // draw icon
-  const QPixmap& icon = item.getIcon().scaled(layout.rectIcon.size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
-  QIcon(icon).paint(p, layout.rectIcon, Qt::AlignCenter, isVisible ? QIcon::Normal : QIcon::Disabled);
+  // MTP devices supply a raster icon read off the device; QIcon will not upscale one, so stretch it to fill.
+  const QIcon::Mode iconMode = isVisible ? QIcon::Normal : QIcon::Disabled;
+  const QIcon& deviceIcon = item.getIcon();
+  if (deviceIcon.actualSize(layout.rectIcon.size()) == layout.rectIcon.size()) {
+    deviceIcon.paint(p, layout.rectIcon, Qt::AlignCenter, iconMode);
+  } else {
+    const QPixmap icon = deviceIcon.pixmap(deviceIcon.actualSize(QSize(1024, 1024)))
+                             .scaled(layout.rectIcon.size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+    QIcon(icon).paint(p, layout.rectIcon, Qt::AlignCenter, iconMode);
+  }
 
   // draw tool button to activate
   CDraw::drawToolButton(p, opt, layout.rectVisible,
-                        isVisible ? QIcon(":/icons/32x32/ShowAll.png") : QIcon(":/icons/32x32/ShowNone.png"), true,
-                        isVisible);
+                        isVisible ? QIcon(":/icons/ShowAll.svgt") : QIcon(":/icons/ShowNone.svgt"), true, isVisible);
 
   // draw progress bar
   auto [hasProgress, progress] = item.getProgress();
@@ -605,12 +612,15 @@ void CWksItemDelegate::paintItem(QPainter* p, const QStyleOptionViewItem& opt, c
   // -- stop ------------ status line ---------------------------------------
 
   // draw icon
-  const QPixmap& icon = item.getIcon().scaled(layout.rectIcon.size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+  // GIS item icons stay raster (Task 2): pull the pixmap from the QIcon and stretch it, as before.
+  const QIcon& itemIcon = item.getIcon();
+  const QPixmap icon = itemIcon.pixmap(itemIcon.actualSize(QSize(1024, 1024)))
+                           .scaled(layout.rectIcon.size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
   QIcon(icon).paint(p, layout.rectIcon, Qt::AlignCenter, iconMode);
 
   // draw save/changed icon
   if (layout.rectChanged.isValid()) {
-    QIcon(":/icons/32x32/Save.png")
+    QIcon(":/icons/Save.svgt")
         .paint(p, layout.rectChanged.adjusted(2 * kMargin, 2 * kMargin, -2 * kMargin, -2 * kMargin), Qt::AlignCenter,
                iconMode);
   }
@@ -625,15 +635,23 @@ void CWksItemDelegate::paintGeoSearch(QPainter* p, const QStyleOptionViewItem& o
   const auto& layout = getRectanglesGeoSearch(opt);
   const bool isVisible = item.isVisible();
 
-  const QPixmap& icon = item.getIcon().scaled(layout.rectIcon.size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
-  QIcon(icon).paint(p, layout.rectIcon, Qt::AlignCenter, isVisible ? QIcon::Normal : QIcon::Disabled);
-  QIcon(":/icons/32x32/Apply.png").paint(p, layout.rectSetup, Qt::AlignCenter, QIcon::Normal);
+  // The icon is either SVG (plain service) or a composed raster ("accumulative results"), so ask
+  // whether it can fill the cell rather than assume -- same test as paintDevice.
+  const QIcon::Mode searchMode = isVisible ? QIcon::Normal : QIcon::Disabled;
+  const QIcon& searchIcon = item.getIcon();
+  if (searchIcon.actualSize(layout.rectIcon.size()) == layout.rectIcon.size()) {
+    searchIcon.paint(p, layout.rectIcon, Qt::AlignCenter, searchMode);
+  } else {
+    const QPixmap icon = searchIcon.pixmap(searchIcon.actualSize(QSize(1024, 1024)))
+                             .scaled(layout.rectIcon.size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+    QIcon(icon).paint(p, layout.rectIcon, Qt::AlignCenter, searchMode);
+  }
+  QIcon(":/icons/Apply.svgt").paint(p, layout.rectSetup, Qt::AlignCenter, QIcon::Normal);
   QIcon(search->getWptIcon()).paint(p, layout.rectWptIcon, Qt::AlignCenter, QIcon::Normal);
 
   // draw tool button to activate
   CDraw::drawToolButton(p, opt, layout.rectVisible,
-                        isVisible ? QIcon(":/icons/32x32/ShowAll.png") : QIcon(":/icons/32x32/ShowNone.png"), true,
-                        isVisible);
+                        isVisible ? QIcon(":/icons/ShowAll.svgt") : QIcon(":/icons/ShowNone.svgt"), true, isVisible);
 
   const QString& address = search->getLastAddress();
   const QColor& colorSearch = opt.palette.color(
@@ -658,8 +676,7 @@ void CWksItemDelegate::paintGeoSearchError(QPainter* p, const QStyleOptionViewIt
   const auto& layout = getRectanglesGeoSearchError(opt);
   const bool isVisible = item.isVisible();
 
-  const QPixmap& icon = item.getIcon().scaled(layout.rectIcon.size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
-  QIcon(icon).paint(p, layout.rectIcon, Qt::AlignCenter, isVisible ? QIcon::Normal : QIcon::Disabled);
+  item.getIcon().paint(p, layout.rectIcon, Qt::AlignCenter, isVisible ? QIcon::Normal : QIcon::Disabled);
   const QColor& color = opt.palette.color(isVisible ? QPalette::Active : QPalette::Disabled, QPalette::WindowText);
 
   p->setPen(color);

@@ -40,7 +40,7 @@ CTcxProject::CTcxProject(const QString& filename, IDevice* parent) : IGisProject
 
 CTcxProject::CTcxProject(const QString& filename, const IGisProject* project, IDevice* parent)
     : IGisProject(eTypeGpx, filename, parent) {
-  icon = QPixmap("://icons/32x32/TcxProject.png");
+  icon = QIcon("://icons/TcxProject.svgt");
   *(IGisProject*)this = *project;
   blockUpdateItems(project->isNoUpdate());
 
@@ -59,7 +59,7 @@ CTcxProject::CTcxProject(const QString& filename, const IGisProject* project, ID
 }
 
 void CTcxProject::setup() {
-  icon = QPixmap("://icons/32x32/TcxProject.png");
+  icon = QIcon("://icons/TcxProject.svgt");
   blockUpdateItems(true);
   loadTcx(filename);
   blockUpdateItems(false);

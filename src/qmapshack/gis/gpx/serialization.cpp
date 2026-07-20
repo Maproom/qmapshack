@@ -43,13 +43,8 @@ const QString IGisProject::gpxdata_ns = "http://www.cluetrust.com/XML/GPXDATA/1/
 
 const QList<IGisProject::namespace_decl_t>& IGisProject::extensionNamespaces() {
   static const QList<namespace_decl_t> namespaces = {
-      {"gpxx", gpxx_ns},
-      {"gpxtpx", gpxtpx_ns},
-      {"wptx1", wptx1_ns},
-      {"rmc", rmc_ns},
-      {"ql", ql_ns},
-      {"tp1", tp1_ns},
-      {"gpxdata", gpxdata_ns},
+      {"gpxx", gpxx_ns}, {"gpxtpx", gpxtpx_ns}, {"wptx1", wptx1_ns},     {"rmc", rmc_ns},
+      {"ql", ql_ns},     {"tp1", tp1_ns},       {"gpxdata", gpxdata_ns},
   };
   return namespaces;
 }
@@ -152,6 +147,7 @@ static void readXml(const QDomNode& xml, IGisItem::history_t& history) {
       const QDomNode& xmlEntry = xmlEntries.item(n);
       IGisItem::history_event_t entry;
       readXml(xmlEntry, "ql:icon", entry.icon);
+      entry.icon = IGisItem::migrateIconPath(entry.icon);
       readXml(xmlEntry, "ql:time", entry.time);
       readXml(xmlEntry, "ql:comment", entry.comment);
 

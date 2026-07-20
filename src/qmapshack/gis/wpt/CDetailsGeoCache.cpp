@@ -19,6 +19,7 @@
 
 #include "gis/wpt/CDetailsGeoCache.h"
 
+#include <QSvgWidget>
 #include <QtNetwork>
 #include <QtWidgets>
 
@@ -27,6 +28,22 @@
 
 #define HTTP_ATTR_WHAT QNetworkRequest::Attribute(QNetworkRequest::User + 1)
 #define HTTP_ATTR_INFO QNetworkRequest::Attribute(QNetworkRequest::User + 2)
+
+/** @brief Show a rating as a row of stars
+
+   Star i is empty below i-0.5, half below i, full above.
+
+   @param stars  the row, in ascending order
+   @param rating 0..stars.count()
+ */
+static void setRating(const QVector<QSvgWidget*>& stars, qreal rating) {
+  for (int i = 0; i < stars.count(); i++) {
+    const qreal full = i + 1;
+    stars[i]->load(rating < full - 0.5 ? QString("://icons/RatingStarEmpty.svgt")
+                   : rating < full     ? QString("://icons/RatingStarHalf.svgt")
+                                       : QString("://icons/RatingStar.svgt"));
+  }
+}
 
 CDetailsGeoCache::CDetailsGeoCache(CGisItemWpt& wpt, QWidget* parent) : QDialog(parent), wpt(wpt) {
   setupUi(this);
@@ -59,48 +76,13 @@ CDetailsGeoCache::CDetailsGeoCache(CGisItemWpt& wpt, QWidget* parent) : QDialog(
   labelHiddenDate->setText(wpt.getTimestamp().date().toString(format));
   // Last found is set below to only loop logs once
 
-  qreal d = geocache.difficulty;
-  labelD1->setPixmap(QPixmap(d < 0.5   ? "://icons/cache/32x32/star_empty.png"
-                             : d < 1.0 ? "://icons/cache/32x32/halfstar.png"
-                                       : "://icons/cache/32x32/star.png")
-                         .scaled(16, 16, Qt::KeepAspectRatio, Qt::SmoothTransformation));
-  labelD2->setPixmap(QPixmap(d < 1.5   ? "://icons/cache/32x32/star_empty.png"
-                             : d < 2.0 ? "://icons/cache/32x32/halfstar.png"
-                                       : "://icons/cache/32x32/star.png")
-                         .scaled(16, 16, Qt::KeepAspectRatio, Qt::SmoothTransformation));
-  labelD3->setPixmap(QPixmap(d < 2.5   ? "://icons/cache/32x32/star_empty.png"
-                             : d < 3.0 ? "://icons/cache/32x32/halfstar.png"
-                                       : "://icons/cache/32x32/star.png")
-                         .scaled(16, 16, Qt::KeepAspectRatio, Qt::SmoothTransformation));
-  labelD4->setPixmap(QPixmap(d < 3.5   ? "://icons/cache/32x32/star_empty.png"
-                             : d < 4.0 ? "://icons/cache/32x32/halfstar.png"
-                                       : "://icons/cache/32x32/star.png")
-                         .scaled(16, 16, Qt::KeepAspectRatio, Qt::SmoothTransformation));
-  labelD5->setPixmap(QPixmap(d < 4.5   ? "://icons/cache/32x32/star_empty.png"
-                             : d < 5.0 ? "://icons/cache/32x32/halfstar.png"
-                                       : "://icons/cache/32x32/star.png")
-                         .scaled(16, 16, Qt::KeepAspectRatio, Qt::SmoothTransformation));
-  qreal t = geocache.terrain;
-  labelT1->setPixmap(QPixmap(t < 0.5   ? "://icons/cache/32x32/star_empty.png"
-                             : t < 1.0 ? "://icons/cache/32x32/halfstar.png"
-                                       : "://icons/cache/32x32/star.png")
-                         .scaled(16, 16, Qt::KeepAspectRatio, Qt::SmoothTransformation));
-  labelT2->setPixmap(QPixmap(t < 1.5   ? "://icons/cache/32x32/star_empty.png"
-                             : t < 2.0 ? "://icons/cache/32x32/halfstar.png"
-                                       : "://icons/cache/32x32/star.png")
-                         .scaled(16, 16, Qt::KeepAspectRatio, Qt::SmoothTransformation));
-  labelT3->setPixmap(QPixmap(t < 2.5   ? "://icons/cache/32x32/star_empty.png"
-                             : t < 3.0 ? "://icons/cache/32x32/halfstar.png"
-                                       : "://icons/cache/32x32/star.png")
-                         .scaled(16, 16, Qt::KeepAspectRatio, Qt::SmoothTransformation));
-  labelT4->setPixmap(QPixmap(t < 3.5   ? "://icons/cache/32x32/star_empty.png"
-                             : t < 4.0 ? "://icons/cache/32x32/halfstar.png"
-                                       : "://icons/cache/32x32/star.png")
-                         .scaled(16, 16, Qt::KeepAspectRatio, Qt::SmoothTransformation));
-  labelT5->setPixmap(QPixmap(t < 4.5   ? "://icons/cache/32x32/star_empty.png"
-                             : t < 5.0 ? "://icons/cache/32x32/halfstar.png"
-                                       : "://icons/cache/32x32/star.png")
-                         .scaled(16, 16, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+  // The star SVGs are ~1.048 wide, and QSvgWidget stretches them square. That is deliberate:
+  // the PNGs they replace were already square, so this keeps the look. Do not "fix" it with
+  // KeepAspectRatio.
+  const QVector<QSvgWidget*> starsD = {labelD1, labelD2, labelD3, labelD4, labelD5};
+  const QVector<QSvgWidget*> starsT = {labelT1, labelT2, labelT3, labelT4, labelT5};
+  setRating(starsD, geocache.difficulty);
+  setRating(starsT, geocache.terrain);
 
   checkHint->setEnabled(!geocache.hint.isEmpty());
   labelHint->setText(geocache.hint.isEmpty() ? tr("none") : tr("???"));

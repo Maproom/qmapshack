@@ -21,6 +21,7 @@
 
 #include <QCoreApplication>
 #include <QDateTime>
+#include <QPixmap>
 
 #include "gis/IDBItem.h"
 
@@ -63,6 +64,12 @@ class CDBItem : public IDBItem {
    */
   void updateAge();
 
+  /**
+     @brief Get the icon read from the database blob
+     @return The raster icon; unlike the folders' icon it is no QIcon, as QIcon will not upscale it
+   */
+  const QPixmap& getDisplayIcon() const { return displayIcon; }
+
  private:
   friend bool sortByTime(CDBItem* item1, CDBItem* item2);
   QSqlDatabase& db;
@@ -71,6 +78,7 @@ class CDBItem : public IDBItem {
   int type = 0;
   QString key;
   QDateTime date;
+  QPixmap displayIcon;
 };
 
 #endif  // CDBITEM_H

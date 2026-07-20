@@ -31,6 +31,7 @@
 
 CToolGrid::CToolGrid(QWidget* parent) : QWidget(parent) {
   setupUi(this);
+  label_2->load(QString("://icons/GridTool.svgt"));
   labelHelp->setText(
       tr("By placing 4 reference points at the corners of a grid "
          "square and referencing them by their top left corner, "

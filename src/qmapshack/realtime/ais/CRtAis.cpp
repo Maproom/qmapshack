@@ -26,7 +26,7 @@
 #include "realtime/CRtDraw.h"
 #include "realtime/ais/CRtAisInfo.h"
 
-const QString CRtAis::strIcon("://icons/48x48/ActShip.png");
+const QString CRtAis::strIcon("://icons/ActShip.svgt");
 
 CRtAis::CRtAis(QTreeWidget* parent) : IRtSource(eTypeAis, true, parent) {
   setIcon(eColumnIcon, QIcon(strIcon));
@@ -180,8 +180,8 @@ void CRtAis::fastDraw(QPainter& p, const QRectF& viewport, CRtDraw* rt) {
     if (!ship.callsign.isEmpty()) text += "<tr><td>" + tr("callsign:") + "</td><td>" + ship.callsign + "</td></tr>";
     if (!ship.imo.isEmpty()) text += "<tr><td>" + tr("imo:") + "</td><td>" + ship.imo + "</td></tr>";
     if (!ship.mmsi.isEmpty()) text += "<tr><td>" + tr("mmsi:") + "</td><td>" + ship.mmsi + "</td></tr>";
-    text += "<tr><td>" + tr("last contact:") + "</td><td>" + QDateTime::fromSecsSinceEpoch(ship.timePosition).toString() +
-            "</td></tr>";
+    text += "<tr><td>" + tr("last contact:") + "</td><td>" +
+            QDateTime::fromSecsSinceEpoch(ship.timePosition).toString() + "</td></tr>";
     text += "<tr><td>" + tr("longitude:") + "</td><td>" + QString::number(ship.longitude) + "°</td></tr>";
     text += "<tr><td>" + tr("latitude:") + "</td><td>" + QString::number(ship.latitude) + "°</td></tr>";
     if (ship.velocity >= 0.1)

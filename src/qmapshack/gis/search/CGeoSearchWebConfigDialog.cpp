@@ -59,7 +59,7 @@ void CGeoSearchWebConfigDialog::setupTreeWidget() {
   for (const CGeoSearchWeb::service_t& service : std::as_const(services)) {
     QTreeWidgetItem* item = new QTreeWidgetItem(treeServices);
     item->setText(0, service.name);
-    item->setIcon(0, QIcon(service.icon));
+    item->setIcon(0, QIcon(CGeoSearchWeb::displayIconPath(service.icon)));
     item->setData(0, Qt::UserRole, service.icon);
     item->setText(1, service.url);
     item->setFlags(item->flags() | Qt::ItemIsEditable);
@@ -94,7 +94,7 @@ void CGeoSearchWebConfigDialog::slotSelectionChanged() {
 void CGeoSearchWebConfigDialog::slotAddNew() {
   QTreeWidgetItem* item = new QTreeWidgetItem(treeServices);
   item->setText(0, tr("enter name and URL"));
-  item->setIcon(0, QIcon(CGeoSearchWeb::defaultIcon));
+  item->setIcon(0, QIcon(CGeoSearchWeb::displayIconPath(CGeoSearchWeb::defaultIcon)));
   item->setData(0, Qt::UserRole, CGeoSearchWeb::defaultIcon);
   item->setFlags(item->flags() | Qt::ItemIsEditable);
 

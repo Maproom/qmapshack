@@ -624,6 +624,41 @@ QString IGisItem::removeHtml(const QString& str) {
   return html.toPlainText();
 }
 
+QString IGisItem::migrateIconPath(const QString& path) {
+  // While the SVG icon rework is in progress the icon resources still change, so history events
+  // keep rendering the 48x48 PNG rather than being migrated to a format that could still move
+  // and then get baked into saved files (a ".svgt" or flat ".svg" path is unreadable by other
+  // or older builds). Map any icons/<name>.{png,svg,svgt} to the 48x48 PNG, which is always
+  // present; a stray SVG path from an earlier test build heals to PNG on the next save. Revisit
+  // this once the icon rework has settled and the final on-disk form is decided.
+  static const QRegularExpression re("^:+/*icons/(?:48x48/)?([A-Za-z0-9_]+)\\.(?:png|svg|svgt)$");
+
+  const QRegularExpressionMatch match = re.match(path);
+  if (!match.hasMatch()) {
+    return path;
+  }
+
+  const QString png = QString("://icons/48x48/%1.png").arg(match.captured(1));
+  return QFile::exists(png) ? png : path;
+}
+
+QString IGisItem::displayIconPath(const QString& path) {
+  // Resolve to the themable vector for DRAWING only; migrateIconPath() still decides what is
+  // written, and keeps the portable PNG there. Same split as CGeoSearchWeb::displayIconPath.
+  //
+  // A history event written before the icon rework names a PNG, and one created in this session
+  // already names a ".svgt", so both forms are accepted and normalised to the same drawing.
+  static const QRegularExpression re("^:+/*icons/(?:48x48/)?([A-Za-z0-9_]+)\\.(?:png|svg|svgt)$");
+
+  const QRegularExpressionMatch match = re.match(path);
+  if (!match.hasMatch()) {
+    return path;
+  }
+
+  const QString svgt = QString("://icons/%1.svgt").arg(match.captured(1));
+  return QFile::exists(svgt) ? svgt : path;
+}
+
 QString IGisItem::html2Dev(const QString& str, bool strictGpx11) {
   // device or not, an empty text should never be enclosed in HTML tags
   if (removeHtml(str).simplified().isEmpty()) {

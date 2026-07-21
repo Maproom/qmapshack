@@ -18,6 +18,7 @@
 
 #include "CSvgtIconEngine.h"
 
+#include <QApplication>
 #include <QFile>
 #include <QGuiApplication>
 #include <QPainter>
@@ -25,6 +26,8 @@
 #include <QPixmap>
 #include <QPixmapCache>
 #include <QRegularExpression>
+#include <QStyle>
+#include <QStyleOption>
 #include <QSvgRenderer>
 
 QColor CSvgtIconEngine::roleColor(Role role) {
@@ -37,9 +40,9 @@ QColor CSvgtIconEngine::roleColor(Role role) {
   // theme-defined blue elsewhere. That made the icon set's brand colour whatever the desktop
   // happened to call a hyperlink.
   //
-  // Deliberately independent of QIcon::Mode. Qt's own QSvgIconEngine returns the same pixmap for
-  // Normal, Disabled and Selected as well (measured identical); the disabled and selected
-  // appearance is applied by QStyle::generatedIconPixmap on top of what an engine returns.
+  // The role colours are deliberately independent of QIcon::Mode: Disabled/Selected are not a
+  // different colour scheme but a grey/tint applied to the rendered Normal pixmap. renderPixmap()
+  // does that via QStyle::generatedIconPixmap(), the same way Qt's own QSvgIconEngine does.
   const bool dark = QGuiApplication::palette().color(QPalette::Window).lightness() < 128;
   switch (role) {
     case Role::Ink:
@@ -200,13 +203,14 @@ QPixmap CSvgtIconEngine::renderPixmap(const QSize& size, QIcon::Mode mode, QIcon
   const QColor mark = roleColor(Role::Mark);
   const QSize deviceSize = size * scale;
 
-  // Cache key names the resolved file and every theme colour, so a palette change misses
-  // and re-renders -- and On and Off never share an entry.
-  const QString cacheKey = QStringLiteral("svgt:%1:%2x%3@%4:%5/%6/%7/%8")
+  // Cache key names the resolved file, the mode, and every theme colour, so a palette change or a
+  // Disabled/Normal difference misses and re-renders -- and On and Off never share an entry.
+  const QString cacheKey = QStringLiteral("svgt:%1:%2x%3@%4:m%5:%6/%7/%8/%9")
                                .arg(fileName)
                                .arg(deviceSize.width())
                                .arg(deviceSize.height())
                                .arg(scale)
+                               .arg(int(mode))
                                .arg(ink.name(), paper.name(), lead.name(), mark.name());
 
   QPixmap pm;
@@ -231,6 +235,19 @@ QPixmap CSvgtIconEngine::renderPixmap(const QSize& size, QIcon::Mode mode, QIcon
     renderer.render(&p);
   }
   pm.setDevicePixelRatio(scale);
+
+  // Bake in the disabled/selected look. A custom QIconEngine must do this itself -- nothing above
+  // the engine re-applies it; Qt's own QSvgIconEngine greys/tints here too, via the same call.
+  if (mode != QIcon::Normal) {
+    if (QStyle* style = QApplication::style()) {
+      QStyleOption opt;
+      opt.palette = QGuiApplication::palette();
+      const QPixmap generated = style->generatedIconPixmap(mode, pm, &opt);
+      if (!generated.isNull()) {
+        pm = generated;
+      }
+    }
+  }
 
   QPixmapCache::insert(cacheKey, pm);
   return pm;

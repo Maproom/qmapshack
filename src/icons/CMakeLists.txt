@@ -3,7 +3,8 @@
 #
 # An icon saved from Inkscape is not necessarily one Qt can draw: they disagree about markers,
 # text and the page box (see svghygiene). So every icon that has been edited is repaired before
-# it reaches rcc.
+# it reaches rcc. The same step also regenerates the icon's committed PNG pair from the fixed SVG
+# (so they cannot drift) and warns when an icon carries no dark-theme markup.
 #
 # python3 + inkscape are needed ONLY for that repair, i.e. only when an icon has actually been
 # edited. The check itself is file(SHA256) in plain CMake, so a tree with untouched icons -- a

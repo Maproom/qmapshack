@@ -345,14 +345,20 @@ who reads a path. Do not "tidy" these.
 
 | population | stored in | migrated on read? |
 |---|---|---|
-| `history_event_t::icon` | `.qms` (`gis/qms/serialization.cpp:128/141`), `.gpx` (`gis/gpx/serialization.cpp:261/154`), DB `data` column | **yes** — `IGisItem::migrateIconPath()` |
+| `history_event_t::icon` | `.qms` (`gis/qms/serialization.cpp:129/144`), `.gpx` (`gis/gpx/serialization.cpp:258/150`), DB `data` column | **on-disk PNG, in-memory `.svgt`** — `savedIconPath()` / `displayIconPath()` |
 | `getInfo()` HTML (`<img src>`) | DB `comment` column | no — see the TODO below |
 
-**`migrateIconPath()` is the pattern to copy.** It rewrites a `48x48/*.png` history path to its SVG
-as the record is read: nothing is marked changed (the event hash covers `event.data`, not the icon),
-so the list is uniform immediately and the corrected path reaches disk only if the item is saved for
-some other reason. A path with no registered SVG is returned untouched, so an un-converted icon
-still renders. Both call sites are reads — the `QDataStream` operator covers `.qms` *and* the DB.
+**Two transforms at the serialization boundary — this is the final design, not interim.** The
+on-disk form of a history icon is the portable 48x48 PNG (permanently); the in-memory form is the
+themable `.svgt`. `displayIconPath()` resolves PNG→`.svgt` on load, `savedIconPath()` converts
+`.svgt`→PNG on save. So history events live as `.svgt` in memory — new events are created that way,
+54 `changed()` callers pass `.svgt` literals — and follow the light/dark theme, while every saved
+file stays PNG and readable by any build, including older ones and ones without the icon engine
+(a `.svgt` path renders blank there). Neither transform marks the item changed (the event hash
+covers `event.data`, not the icon). A path with no registered counterpart passes through untouched,
+so a stray `.svg`/`.svgt` from an old build heals to PNG on the next save. The `QDataStream` operator
+covers `.qms` *and* the DB; `.gpx` is separate. **Portability rests on no history PNG ever being
+pruned** (every PNG is generated from its SVG) — see "No icon PNG is ever pruned" above.
 
 **TODO — the `comment` column** still holds `<img src='://icons/16x16/*.png'>` from `getInfo()`, so
 old DB rows render the old icon until re-saved. Same fix shape, but it is HTML in a column rather

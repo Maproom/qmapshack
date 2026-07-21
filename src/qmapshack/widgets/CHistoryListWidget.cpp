@@ -64,6 +64,8 @@ void CHistoryListWidget::setupHistory(IGisItem& gisItem) {
     str += event.comment;
 
     item->setText(str);
+    // event.icon already holds the ".svgt" after load; displayIconPath() is a redundant safety net
+    // for a raw PNG that somehow never went through the loader.
     item->setIcon(QIcon(IGisItem::displayIconPath(event.icon)));
     if (event.data.isEmpty()) {
       item->setFlags(item->flags() & ~Qt::ItemIsEnabled);

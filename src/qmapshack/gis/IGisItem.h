@@ -417,27 +417,26 @@ class IGisItem : public IWksItem {
    */
   static QString removeHtml(const QString& str);
   /**
-     @brief Normalise a history event's icon path to the 48x48 PNG, for the duration of the icon rework
+     @brief On-disk path for a history event's icon: always the portable 48x48 PNG.
 
-     A history event stores the path the icon had when it was written. While the SVG icon rework
-     is in progress the icon resources still change, so history icons are kept on the always
-     present 48x48 PNG rather than migrated to a format that could still move and then leak into
-     saved files (an in-memory ".svgt" or flat ".svg" path is unreadable by other or older
-     builds). Any icons/<name>.{png,svg,svgt} maps to the 48x48 PNG; unknown paths are returned
-     unchanged. Revisit once the icon rework has settled.
+     History icons persist as a 48x48 PNG, permanently and by design. The PNG is always present and
+     readable by any build -- including older ones and ones without the themable icon engine, where
+     a ".svgt"/".svg" path renders blank. The live in-memory form is the themable ".svgt"
+     (displayIconPath()); this converts it back to the PNG at save time. Any icons/<name>.{png,svg,svgt}
+     maps to the PNG; an unknown path passes through, so a stray ".svg"/".svgt" from an old build heals
+     to PNG on the next save.
 
-     @param path the stored path
-     @return the 48x48 PNG path, or path if there is no registered PNG for it
+     @param path the in-memory icon path
+     @return the 48x48 PNG path to persist, or path unchanged when no PNG is registered for it
    */
-  static QString migrateIconPath(const QString& path);
+  static QString savedIconPath(const QString& path);
 
   /**
-     @brief Drawing path for a stored history icon: the themable ".svgt", if one exists.
+     @brief In-memory and drawing path for a history event's icon: the themable ".svgt".
 
-     The counterpart to migrateIconPath(): that one decides what is SAVED and deliberately keeps
-     the themed form out of the file, this one decides what is DRAWN. Resolving here rather than
-     on load means a history list follows the theme while the saved path stays the portable PNG,
-     so a file written by this build is still readable by one without the icon engine.
+     The counterpart to savedIconPath(). Applied on load, so history events live as ".svgt" in memory
+     and follow the light/dark theme; savedIconPath() converts back to the portable PNG on save. A PNG
+     from an old file and a ".svgt" created this session both normalise to the ".svgt".
 
      @param path the stored path
      @return the ".svgt" path, or path unchanged when no themable icon is registered for it

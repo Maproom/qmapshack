@@ -147,7 +147,7 @@ static void readXml(const QDomNode& xml, IGisItem::history_t& history) {
       const QDomNode& xmlEntry = xmlEntries.item(n);
       IGisItem::history_event_t entry;
       readXml(xmlEntry, "ql:icon", entry.icon);
-      entry.icon = IGisItem::migrateIconPath(entry.icon);
+      entry.icon = IGisItem::displayIconPath(entry.icon);
       readXml(xmlEntry, "ql:time", entry.time);
       readXml(xmlEntry, "ql:comment", entry.comment);
 
@@ -254,7 +254,8 @@ static void writeXml(QDomNode& xml, const IGisItem::history_t& history) {
       const IGisItem::history_event_t& event = history.events[i];
       QDomElement xmlEvent = xml.ownerDocument().createElement("ql:event");
       xmlHistory.appendChild(xmlEvent);
-      writeXml(xmlEvent, "ql:icon", event.icon);
+      // persist the portable PNG; the live in-memory path is the themable ".svgt"
+      writeXml(xmlEvent, "ql:icon", IGisItem::savedIconPath(event.icon));
       writeXml(xmlEvent, "ql:time", event.time);
       writeXml(xmlEvent, "ql:comment", event.comment);
     }

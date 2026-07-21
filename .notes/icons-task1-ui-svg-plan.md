@@ -745,12 +745,12 @@ The engine and the `.svg`→`.svgt` cutover are in the tree (qmapshack only).
   registered as `.svgt` and its 135 refs cut over. **`waypoints/*.svg` (FlagBlue/PinBlue) still on
   `.svg`** — that pair needs the black-ink markup (no default root `color=`) and stays deferred to
   the waypoint-chrome step.
-- **`migrateIconPath()` neutralised for the duration:** it now maps any history-event
-  icons/<name>.{png,svg,svgt} to the always-present 48x48 **PNG** rather than migrating into the
-  in-flux themed form. Stable/master has no `migrateIconPath`, so no released build ever wrote a
-  `.svg`/`.svgt` history path — every real file stores 48x48 PNG. This keeps the dev branch from
-  baking a `.svgt` path (unreadable elsewhere) into saved files. **Revisit once the on-disk form
-  is final.**
+- **History icon on-disk form — DECIDED (final), the PNG stays forever.** `migrateIconPath()` was
+  renamed `savedIconPath()` and now runs on **save** (`.svgt`→48x48 PNG); `displayIconPath()` runs
+  on **load** (PNG→`.svgt`). So the in-memory form is the themable `.svgt` (new events are created
+  that way) and the on-disk form is always the portable 48x48 PNG — readable by any build, including
+  ones without the icon engine. Backward compatibility rests on no history PNG ever being pruned.
+  This closes the earlier leak where session-created events wrote `.svgt` straight to disk.
 - **Markup — first batch applied.** `themesvg.py --write` marked up **279** sources with
   `currentColor` + `.ink`/`.paper` classes; **21 opt-out** (`palette.py:OPTOUT`, imported so it is
   one source of truth); 30 nothing to theme. Light look unchanged (`--verify`: 300 identical / 0
@@ -1069,7 +1069,8 @@ in the real app now: build, then `QMS_ICON_INK=palette|fixed` + a dark desktop.
    `NoGo`(30) `NotPossible`(27) `RouteOn`(22) `AddRte`(20), all `#ff0000`->`#ff5555`. Decide the
    reds before `palette.py --write`; it changes the light render, so re-baseline rather than gate.
 5. **Share the engine with qmaptool**, then drop the plain-`.svg` dual-reg copies; do the 2
-   `waypoints/*.svg` (black ink, no default `color=`); revisit `migrateIconPath` for the final form.
+   `waypoints/*.svg` (black ink, no default `color=`). (`migrateIconPath` final-form question is
+   settled — now `savedIconPath()` on save / `displayIconPath()` on load; see the DECIDED note above.)
    **Move `CSvgtIcon` with it** — qmaptool's 2 `QSvgWidget` sites are still unthemed for the same
    reason, and the helper should be shared rather than copied.
 6. **Audit for other non-`QIcon` paths.** `QSvgWidget` was an unlisted member of the "does not go
@@ -1168,9 +1169,10 @@ they are the same question asked in three places.
    back to stable still has a working menu. `defaultIcon`/`defaultServices()` deliberately
    still name the PNG so nothing ever persists a ".svgt".
 
-2. **History events** — `IGisItem::migrateIconPath()`. Maps any `icons/<name>.{png,svg,svgt}`
-   to the always-present 48x48 PNG rather than migrating into the in-flux themed form. A
-   stray SVG path from an earlier test build heals to PNG on the next save.
+2. **History events** — **DECIDED (final).** On-disk form is the portable 48x48 PNG forever;
+   in-memory form is the themable `.svgt`. `savedIconPath()` converts `.svgt`→PNG on save,
+   `displayIconPath()` converts PNG→`.svgt` on load. A stray `.svg`/`.svgt` from an earlier
+   build heals to PNG on the next save. Rests on no history PNG ever being pruned.
 
 3. **GIS items in the database** — `CDBProject.cpp` writes `item->getDisplayIcon()` as PNG
    BYTES (`:294`, `:338`, `:389`), read back by `CDBItem.cpp:35`. This one is not a path: the

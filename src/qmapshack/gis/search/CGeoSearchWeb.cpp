@@ -32,8 +32,8 @@ QString CGeoSearchWeb::displayIconPath(const QString& icon) {
   // The path is saved per service in the settings and rewritten on every exit, and a
   // ".svgt" path is unreadable by a build without the icon engine -- a tester who moved
   // back to stable would be left with a menu of blank icons. So the settings keep naming
-  // the PNG and only the drawing is resolved here. Same reasoning as
-  // IGisItem::migrateIconPath; revisit once the icon rework has settled.
+  // the PNG and only the drawing is resolved here. Same portable-PNG-on-disk reasoning as
+  // IGisItem::savedIconPath; revisit once the icon rework has settled.
   //
   // Only the paths this class shipped are mapped. An icon the user pointed somewhere else
   // is drawn as given.

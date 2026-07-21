@@ -624,13 +624,11 @@ QString IGisItem::removeHtml(const QString& str) {
   return html.toPlainText();
 }
 
-QString IGisItem::migrateIconPath(const QString& path) {
-  // While the SVG icon rework is in progress the icon resources still change, so history events
-  // keep rendering the 48x48 PNG rather than being migrated to a format that could still move
-  // and then get baked into saved files (a ".svgt" or flat ".svg" path is unreadable by other
-  // or older builds). Map any icons/<name>.{png,svg,svgt} to the 48x48 PNG, which is always
-  // present; a stray SVG path from an earlier test build heals to PNG on the next save. Revisit
-  // this once the icon rework has settled and the final on-disk form is decided.
+QString IGisItem::savedIconPath(const QString& path) {
+  // The on-disk form of a history icon is the portable 48x48 PNG, permanently. It is always present
+  // and readable by any build, unlike the themable ".svgt" live form which renders blank without the
+  // icon engine. Map any icons/<name>.{png,svg,svgt} to the PNG at save time; an unknown path passes
+  // through, so a stray ".svg"/".svgt" from an old build heals to PNG on the next save.
   static const QRegularExpression re("^:+/*icons/(?:48x48/)?([A-Za-z0-9_]+)\\.(?:png|svg|svgt)$");
 
   const QRegularExpressionMatch match = re.match(path);
@@ -643,11 +641,9 @@ QString IGisItem::migrateIconPath(const QString& path) {
 }
 
 QString IGisItem::displayIconPath(const QString& path) {
-  // Resolve to the themable vector for DRAWING only; migrateIconPath() still decides what is
-  // written, and keeps the portable PNG there. Same split as CGeoSearchWeb::displayIconPath.
-  //
-  // A history event written before the icon rework names a PNG, and one created in this session
-  // already names a ".svgt", so both forms are accepted and normalised to the same drawing.
+  // Resolve the portable PNG on-disk form to the themable ".svgt" live form. Applied on load, so
+  // history events live as ".svgt" in memory and follow the theme; savedIconPath() converts back to
+  // PNG on save. A PNG from an old file and a ".svgt" from this session both normalise to the ".svgt".
   static const QRegularExpression re("^:+/*icons/(?:48x48/)?([A-Za-z0-9_]+)\\.(?:png|svg|svgt)$");
 
   const QRegularExpressionMatch match = re.match(path);

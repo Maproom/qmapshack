@@ -125,7 +125,8 @@ QDataStream& operator>>(QDataStream& stream, IGisItem::wpt_t& wpt) {
 QDataStream& operator<<(QDataStream& stream, const IGisItem::history_event_t& e) {
   stream << VER_HIST_EVT;
   stream << e.time;
-  stream << e.icon;
+  // persist the portable PNG; the live in-memory path is the themable ".svgt"
+  stream << IGisItem::savedIconPath(e.icon);
   stream << e.comment;
   stream << e.data;
   stream << e.hash;
@@ -140,7 +141,7 @@ QDataStream& operator>>(QDataStream& stream, IGisItem::history_event_t& e) {
   stream >> e.time;
   stream >> e.icon;
   // covers .qms and the database: IGisItem::loadFromDb() streams the history through here too
-  e.icon = IGisItem::migrateIconPath(e.icon);
+  e.icon = IGisItem::displayIconPath(e.icon);
   stream >> e.comment;
   stream >> e.data;
   if (version > 1) {

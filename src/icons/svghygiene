@@ -43,6 +43,12 @@ the build gates on svg.sha256 rather than just running this every time.
   ./svghygiene --manifest svg.sha256 --all             # fix everything (first-time bootstrap)
   ./svghygiene --manifest svg.sha256 --record-only     # no fixing; just record current hashes
 
+For each icon it repairs it also regenerates the committed PNG raster(s) from the fixed SVG (via
+mkicon), so the SVG/PNG pair cannot drift; existing sizes are updated, a brand-new icon gets the
+default 32/48 pair. And it warns when a repaired icon carries no dark-theme markup (a
+current-color-scheme block / currentColor) -- one that renders in its authored colours only until
+roles are assigned with .notes/icons-tools/themesvg.py.
+
 Requires: python3, inkscape 1.x.
 """
 import argparse
@@ -69,6 +75,12 @@ MARKER_REF = re.compile(r"marker-(start|mid|end)\s*[:=]\s*[\"']?url\(")
 PIXMAP_REF = re.compile(r"<pixmap[^>]*>:/icons/([^<]+)\.svg</pixmap>")
 # Attribute values may hold '>', so the root tag cannot be cut at the first one.
 ROOT_SVG = re.compile(r"<svg\b((?:[^>\"']|\"[^\"]*\"|'[^']*')*)>", re.S)
+
+MKICON = os.path.join(HERE, "mkicon")
+# An icon follows the theme if it carries the current-color-scheme block or a currentColor fill.
+THEME_MARK = re.compile(r'id="current-color-scheme"|currentColor', re.I)
+SIZE_DIR = re.compile(r"(\d+)x(\d+)")
+ACT_ICON = re.compile(r"Act[A-Z]")
 
 
 def sha256(path):
@@ -162,13 +174,42 @@ def make_profile(tmp):
     return d
 
 
+def existing_png_sizes(icon_dir, stem):
+    """Sizes N for which <icon_dir>/NxN/<stem>.png already exists."""
+    sizes = []
+    for entry in os.listdir(icon_dir):
+        m = SIZE_DIR.fullmatch(entry)
+        if m and m.group(1) == m.group(2) and os.path.isfile(os.path.join(icon_dir, entry, stem + ".png")):
+            sizes.append(int(m.group(1)))
+    return sorted(sizes)
+
+
+def render_pngs(path):
+    """Regenerate this icon's committed PNG raster(s) from the (already hygiened) SVG so they cannot
+    drift from the source. Updates whatever NxN/<stem>.png already exist; a brand-new icon with none
+    gets the default 32/48 pair (plus 16 for an Act* activity icon, the one family that ships 16).
+    Returns (sizes, error_or_None). PNGs are secondary -- the apps draw the ".svgt" -- so a failure
+    here is a warning, not a build stopper.
+    """
+    icon_dir = os.path.dirname(path)
+    stem = os.path.basename(path)[:-4]
+    sizes = existing_png_sizes(icon_dir, stem)
+    if not sizes:
+        sizes = [16, 32, 48] if ACT_ICON.match(stem) else [32, 48]
+    r = subprocess.run([MKICON, path, *[str(s) for s in sizes]],
+                       stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
+    if r.returncode != 0:
+        return sizes, f"mkicon failed: {r.stderr.decode()[:160]}"
+    return sizes, None
+
+
 def process(path, profile, natural):
     """Hygiene one file in place. Returns (name, [steps applied], error_or_None)."""
     name = os.path.basename(path)
     try:
         raw = open(path, encoding="utf-8").read()
     except OSError as e:
-        return name, [], f"read failed: {e}"
+        return name, [], f"read failed: {e}", True, None
 
     steps = []
     text = raw
@@ -189,7 +230,7 @@ def process(path, profile, natural):
     # A <pixmap> label renders at natural size; fit-canvas would rewrite the viewBox defining it.
     fit = name not in natural
     if not fit and "viewBox" not in root_tag(text):
-        return name, steps, "shown by a <pixmap> but has no viewBox: run naturalsize.py on it"
+        return name, steps, "shown by a <pixmap> but has no viewBox: run naturalsize.py on it", True, None
 
     actions = ["select-all:all", "object-to-path"]
     steps.append("object-to-path")
@@ -208,13 +249,22 @@ def process(path, profile, natural):
     r = subprocess.run(["inkscape", "--actions=" + ";".join(actions), path],
                        stdout=subprocess.DEVNULL, stderr=subprocess.PIPE, env=env)
     if r.returncode != 0:
-        return name, steps, f"inkscape exit {r.returncode}: {r.stderr.decode()[:160]}"
+        return name, steps, f"inkscape exit {r.returncode}: {r.stderr.decode()[:160]}", True, None
 
     # A silent no-op here would ship a Qt-unrenderable icon. Prove the marker refs are gone.
     after = open(path, encoding="utf-8").read()
     if MARKER_REF.search(after):
-        return name, steps, "marker references survived object-stroke-to-path"
-    return name, steps, None
+        return name, steps, "marker references survived object-stroke-to-path", True, None
+
+    # Keep the committed PNG raster(s) in step with the repaired SVG. The apps draw the ".svgt"
+    # and never read these, but <pixmap> labels, rich-text <img> and the history/DB icon caches
+    # still consume PNGs -- and a stale PNG is exactly the drift this gate exists to prevent.
+    sizes, png_err = render_pngs(path)
+    if sizes:
+        steps.append("png " + "/".join(f"{s}x{s}" for s in sizes))
+
+    themed = bool(THEME_MARK.search(after))
+    return name, steps, None, themed, png_err
 
 
 def write_manifest(manifest, svgs):
@@ -268,11 +318,13 @@ def main():
             for r in ex.map(lambda s: process(s, profile, natural), targets):
                 results.append(r)
 
-        for name, steps, err in sorted(results):
+        for name, steps, err, themed, png_err in sorted(results):
             if not err:
                 print(f"   {name}: {', '.join(steps)}")
+                if png_err:
+                    print(f"     ! {name}: {png_err} (SVG is fixed; PNG left stale)", file=sys.stderr)
 
-        errors = [(n, e) for n, s, e in results if e]
+        errors = [(n, e) for n, s, e, t, pe in results if e]
         if errors:
             print(f"\n  FAILED ({len(errors)}):", file=sys.stderr)
             for n, e in sorted(errors):
@@ -281,8 +333,15 @@ def main():
 
         write_manifest(args.manifest, every)
         print(f"  OK. {len(targets)} repaired, {len(every)} hashes recorded.\n"
-              f"  The icons above were REWRITTEN in your working tree -- review and commit them\n"
-              f"  together with {os.path.basename(args.manifest)}.")
+              f"  The icons above (SVG + regenerated PNGs) were written to your working tree --\n"
+              f"  review and commit them together with {os.path.basename(args.manifest)}.")
+
+        unthemed = sorted(n for n, s, e, t, pe in results if not e and not t)
+        if unthemed:
+            print(f"\n  NOTE: {len(unthemed)} icon(s) carry no dark-theme markup and render in their\n"
+                  f"  authored colours only (no light/dark theming): {', '.join(unthemed)}\n"
+                  f"  If any should follow the theme, assign roles with .notes/icons-tools/themesvg.py.\n"
+                  f"  Icons meant to stay fixed-colour (Mime*, warning/semantic) need nothing.")
         return 0
     finally:
         import shutil

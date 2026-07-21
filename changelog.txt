@@ -17,6 +17,8 @@ V1.XX.X
 [QMS-1142] Fix: Zoom fails to show complete track
 [QMS-1149] Fix: Build error on platform Windows
 [QMS-1153] Force QMS executables to run using UTF-8 code page on Windows too
+[QMS-1163] Render UI icons as SVG for crisp HiDPI
+[QMS-1164] Support light and dark color schemes for UI icons
 
 V1.20.3
 [QMS-1059] Fix: F1 help browser does not open external links

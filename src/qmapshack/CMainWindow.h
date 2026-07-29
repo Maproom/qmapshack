@@ -36,6 +36,7 @@ class CRtWorkspace;
 class CCanvas;
 class CGeoSearchConfig;
 class CToolBarConfig;
+class CShortcutConfig;
 class CGeoSearchWeb;
 struct SGisLine;
 class CWptIconManager;
@@ -169,6 +170,7 @@ class CMainWindow : public QMainWindow, private Ui::IMainWindow {
   void slotSetupWorkspace();
   void slotSetupCoordFormat();
   void slotSetupToolbar();
+  void slotSetupShortcuts();
   void slotImportDatabase();
   void slotLoadGISData();
   void slotBuildVrt();
@@ -230,6 +232,7 @@ class CMainWindow : public QMainWindow, private Ui::IMainWindow {
   CRtWorkspace* widgetRtWorkspace;
 
   CToolBarConfig* toolBarConfig;
+  CShortcutConfig* shortcutConfig;
   CGeoSearchConfig* geoSearchConfig;
 
   CGeoSearchWeb* geoSearchWeb;

@@ -47,6 +47,8 @@
 #include "helpers/CMapIconSizesSetup.h"
 #include "helpers/CProgressDialog.h"
 #include "helpers/CSettings.h"
+#include "helpers/CShortcutConfig.h"
+#include "helpers/CShortcutSetupDialog.h"
 #include "helpers/CToolBarConfig.h"
 #include "helpers/CToolBarSetupDialog.h"
 #include "helpers/CWptIconDialog.h"
@@ -211,6 +213,7 @@ CMainWindow::CMainWindow() : id(QRandomGenerator::global()->generate()) {
   connect(actionSetupWorkspace, &QAction::triggered, this, &CMainWindow::slotSetupWorkspace);
   connect(actionSetupCoordFormat, &QAction::triggered, this, &CMainWindow::slotSetupCoordFormat);
   connect(actionSetupToolbar, &QAction::triggered, this, &CMainWindow::slotSetupToolbar);
+  connect(actionSetupShortcuts, &QAction::triggered, this, &CMainWindow::slotSetupShortcuts);
   connect(actionImportDatabase, &QAction::triggered, this, &CMainWindow::slotImportDatabase);
   connect(actionSaveGISData, &QAction::triggered, widgetGisWorkspace, &CGisWorkspace::slotSaveAll);
   connect(actionLoadGISData, &QAction::triggered, this, &CMainWindow::slotLoadGISData);
@@ -462,7 +465,8 @@ CMainWindow::CMainWindow() : id(QRandomGenerator::global()->generate()) {
                       actionFullScreen,
                       actionStartQMapTool,
                       actionRenameView,
-                      actionLinkMapViews};
+                      actionLinkMapViews,
+                      actionSetupShortcuts};
 
   QAction* separator1 = new QAction("---------------", this);
   separator1->setSeparator(true);
@@ -493,6 +497,9 @@ CMainWindow::CMainWindow() : id(QRandomGenerator::global()->generate()) {
 
   toolBarConfig = new CToolBarConfig(this, toolBar, availableActions, defaultActions);
   toolBarConfig->loadSettings();
+
+  shortcutConfig = new CShortcutConfig(this, availableActions);
+  shortcutConfig->loadSettings();
 
   geoSearchConfig = new CGeoSearchConfig(this);
   connect(geoSearchConfig, &CGeoSearchConfig::sigConfigChanged, this, &CMainWindow::slotGeoSearchConfigChanged);
@@ -766,7 +773,7 @@ void CMainWindow::addWidgetToTab(QWidget* w) {
   }
 }
 
-CCanvas* CMainWindow::getVisibleCanvas() const { 
+CCanvas* CMainWindow::getVisibleCanvas() const {
   int n = tabMaps->currentIndex();
   CMapList* mapList = dynamic_cast<CMapList*>(tabMaps->widget(n));
   n = mapList != nullptr ? getTabIndexForCanvasKey(mapList->getCanvasKey()) : -1;
@@ -1234,6 +1241,17 @@ void CMainWindow::slotSetupCoordFormat() {
 void CMainWindow::slotSetupToolbar() {
   CToolBarSetupDialog dlg(this, toolBarConfig);
   dlg.exec();
+}
+
+void CMainWindow::slotSetupShortcuts() {
+  CShortcutSetupDialog dlg(this, shortcutConfig);
+  if (dlg.exec() == QDialog::Accepted) {
+    for (QAction* const& action : shortcutConfig->configurableActions()) {
+      if (!action->shortcuts().isEmpty()) {
+        addAction(action);
+      }
+    }
+  }
 }
 
 void CMainWindow::slotImportDatabase() {

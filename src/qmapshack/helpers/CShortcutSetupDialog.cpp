@@ -81,13 +81,20 @@ void CShortcutSetupDialog::slotFilterChanged(const QString& text) {
 void CShortcutSetupDialog::slotCurrentItemChanged(QTreeWidgetItem* current) { updateEditor(current); }
 
 void CShortcutSetupDialog::slotApplyEditor() {
+  if (applyingShortcut) {
+    return;
+  }
+  applyingShortcut = true;
+
   QTreeWidgetItem* item = treeActions->currentItem();
   if (item == nullptr) {
+    applyingShortcut = false;
     return;
   }
 
   const QKeySequence shortcut = keySequenceEdit->keySequence();
   if (shortcut == itemShortcut(item)) {
+    applyingShortcut = false;
     return;
   }
 
@@ -102,11 +109,13 @@ void CShortcutSetupDialog::slotApplyEditor() {
       setItemShortcut(conflict, QKeySequence());
     } else {
       updateEditor(item);
+      applyingShortcut = false;
       return;
     }
   }
 
   setItemShortcut(item, shortcut);
+  applyingShortcut = false;
 }
 
 QAction* CShortcutSetupDialog::itemAction(const QTreeWidgetItem* const item) const {

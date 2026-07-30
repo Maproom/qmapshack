@@ -33,5 +33,7 @@ class CShortcutSetupDialog : public QDialog, private Ui::IShortcutSetupDialog {
   void updateEditor(const QTreeWidgetItem* const item);
 
   CShortcutConfig* config;
+  /// guards against slotApplyEditor() re-entering itself
+  bool applyingShortcut = false;
 };
 #endif  // CSHORTCUTSETUPDIALOG_H

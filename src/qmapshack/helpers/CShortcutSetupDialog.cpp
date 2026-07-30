@@ -76,6 +76,11 @@ void CShortcutSetupDialog::slotFilterChanged(const QString& text) {
                        item->text(eColumnShortcut).contains(text, Qt::CaseInsensitive);
     item->setHidden(!match);
   }
+
+  QTreeWidgetItem* current = treeActions->currentItem();
+  if (current != nullptr && current->isHidden()) {
+    treeActions->setCurrentItem(nullptr);
+  }
 }
 
 void CShortcutSetupDialog::slotCurrentItemChanged(QTreeWidgetItem* current) { updateEditor(current); }

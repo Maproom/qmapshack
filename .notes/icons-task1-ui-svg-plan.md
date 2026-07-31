@@ -99,8 +99,10 @@ edited** icon, runs `svghygiene` to:
 
 An untouched tree needs neither python nor inkscape; a *changed* icon with them missing **fails the
 build loudly**. `svghygiene` rewrites the SVG + PNGs in the working tree — review and commit them
-with the updated `svg.sha256`. The build does **not** assign theme roles (manual `themesvg.py`; role
-choice can't be inferred). `cmake/IconGate.cmake` is a separate target that fails the build on
+with the updated `svg.sha256`. The build **does** assign theme roles: `svghygiene` calls
+`src/icons/tools/themesvg.py` (with `reframe.py` and `palette.py`) on every icon it repairs, so the
+roles are derived from the house colours rather than chosen by hand. `cmake/IconGate.cmake` is a
+separate target that fails the build on
 `QPixmap`-on-SVG misuse.
 
 ## Open — 7b only

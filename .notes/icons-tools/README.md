@@ -3,6 +3,11 @@
 Ad-hoc measurement tools written for the icon analysis. **Not part of the build.** Kept so the
 measurements can be re-run and the conclusions re-checked rather than taken on trust.
 
+**Moved out:** `reframe.py`, `palette.py` and `themesvg.py` are now called by `svghygiene` on every
+build, and `colorstat.py`, `roleab.py` and `contactsheet.py` import or accompany them — all six live
+in `src/icons/tools/`. The build cannot depend on a notes folder. Rows for them below describe what
+they do, not where they are.
+
 | tool | backs | task |
 |---|---|---|
 | `hygiene.py` | **does** the phase-2 repair: strips empty flowRoot, outlines text, fits the canvas | 1 |

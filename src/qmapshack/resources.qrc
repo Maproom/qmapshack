@@ -226,7 +226,7 @@
         <file>../icons/32x32/Right.png</file>
         <file>../icons/32x32/Route.png</file>
         <file>../icons/32x32/RouteOn.png</file>
-        <file>../icons/32x32/RouteSetup.png</file>
+        <file>../icons/32x32/RoutinoDatabase.png</file>
         <file>../icons/32x32/RteInstr.png</file>
         <file>../icons/32x32/Screenshot.png</file>
         <file>../icons/32x32/SQLite.png</file>
@@ -527,7 +527,7 @@
         <file>../icons/48x48/Right.png</file>
         <file>../icons/48x48/Route.png</file>
         <file>../icons/48x48/RouteOn.png</file>
-        <file>../icons/48x48/RouteSetup.png</file>
+        <file>../icons/48x48/RoutinoDatabase.png</file>
         <file>../icons/48x48/RteInstr.png</file>
         <file>../icons/48x48/Screenshot.png</file>
         <file>../icons/48x48/SQLite.png</file>
@@ -1638,7 +1638,7 @@
         <file alias="icons/Right.svgt">../icons/Right.svg</file>
         <file alias="icons/Route.svgt">../icons/Route.svg</file>
         <file alias="icons/RouteOn.svgt">../icons/RouteOn.svg</file>
-        <file alias="icons/RouteSetup.svgt">../icons/RouteSetup.svg</file>
+        <file alias="icons/RoutinoDatabase.svgt">../icons/RoutinoDatabase.svg</file>
         <file alias="icons/RteInstr.svgt">../icons/RteInstr.svg</file>
         <file alias="icons/SQLite.svgt">../icons/SQLite.svg</file>
         <file alias="icons/SQLiteNoConn.svgt">../icons/SQLiteNoConn.svg</file>

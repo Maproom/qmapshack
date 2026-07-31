@@ -758,7 +758,7 @@
   <action name="actionCreateRoutinoDatabase">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/RouteSetup.svgt</normaloff>:/icons/RouteSetup.svgt</iconset>
+     <normaloff>:/icons/RoutinoDatabase.svgt</normaloff>:/icons/RoutinoDatabase.svgt</iconset>
    </property>
    <property name="text">
     <string>Create Routino Database</string>

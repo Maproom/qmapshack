@@ -8,15 +8,26 @@ neither this script nor inkscape.
 Inkscape is the authoring tool; Qt is the renderer. The two disagree on three things, and each
 one has to be baked out of the file before Qt sees it:
 
-  1. empty <flowRoot>        invisible leftover; inflates the drawing bbox that step 4 keys off,
-                             so it must go first. Blocks holding real text are kept.
+  1. empty <flowRoot>        invisible leftover that inflates the drawing bbox; dropped first.
+                             Blocks holding real text are kept.
   2. <text>                  Qt would need the same fonts installed. object-to-path outlines it.
   3. marker-*:url(...)       Qt renders <marker> but ignores markerUnits="strokeWidth" (the SVG
                              default), so arrowheads come out at raw size instead of scaled by
                              the path's stroke width. object-stroke-to-path bakes them in.
-  4. page != drawing         Inkscape's -D export crops to the drawing; Qt honours the page. A
-                             64x64 page around artwork in a sub-rect is why Qt drew icons small
-                             and off-centre. fit-canvas-to-selection makes page == drawing.
+
+It then brings the icon to the style guide (README_ICON.md), so a developer only has to draw:
+
+  4. artboard               tools/reframe.py -- uniform 0 0 64 64 box. It owns the page, which
+                            is why fit-canvas-to-selection was retired here in Phase 4.
+  5. palette                tools/palette.py -- one value per hue, each legible on both grounds.
+  6. theme roles            tools/themesvg.py -- ink/paper/lead/mark markup derived from the
+                            house colours, so the icon follows light/dark. Skipped for a name in
+                            palette.OPTOUT, which is instead stripped back to literal colours.
+
+All three are idempotent: an icon already to spec comes out byte-identical, so this cannot thrash
+a tree. Order is load-bearing -- the artboard is set BEFORE the inkscape pass (its wrapper
+survives the export), the colour work AFTER it, because the plain-svg export flattens CSS back
+onto the elements and an inline fill would then shadow the themed class.
 
 Only the steps a file actually needs are run. That matters: object-stroke-to-path also converts
 every stroke to a filled outline, which bloats the file and costs stroke editability, so it is
@@ -26,18 +37,8 @@ TRAP: object-stroke-to-path turns a zero-width stroke into a filled path of the 
 stroke-width:0 paints nothing before, a solid rectangle after. Such strokes are neutralised to
 stroke:none first (appearance-neutral: a zero-width stroke paints nothing either way).
 
-An icon some .ui shows via <pixmap> is skipped by step 4 only: uic maps <pixmap> to a QLabel,
-which requests no size, so the icon renders at the natural size its viewBox defines -- and
-fit-canvas would rewrite that viewBox and resize the label. <iconset> refs request a size and
-are unaffected. A <pixmap> icon without a viewBox has no natural size to preserve: that is an
-error here, not a skip -- run naturalsize.py on it.
-
-Runs inkscape under a throwaway INKSCAPE_PROFILE_DIR pinning /tools/bounding_box to *visual*,
-because fit-canvas honours that preference while -D export always uses the visual
-(stroke-inclusive) box. Mismatched, frames shift 1-2px. Your own Inkscape config is untouched.
-
-NOT byte-idempotent: re-fitting drifts the last decimal (40.069157 -> 40.069153). That is why
-the build gates on svg.sha256 rather than just running this every time.
+NOT byte-idempotent: inkscape re-serialises the file on every pass (attribute order, decimals).
+That is why the build gates on svg.sha256 and only runs this on an icon whose hash has changed.
 
   ./svghygiene --manifest svg.sha256 Foo.svg Bar.svg   # fix these, then rewrite the manifest
   ./svghygiene --manifest svg.sha256 --all             # fix everything (first-time bootstrap)
@@ -45,9 +46,8 @@ the build gates on svg.sha256 rather than just running this every time.
 
 For each icon it repairs it also regenerates the committed PNG raster(s) from the fixed SVG (via
 mkicon), so the SVG/PNG pair cannot drift; existing sizes are updated, a brand-new icon gets the
-default 32/48 pair. And it warns when a repaired icon carries no dark-theme markup (a
-current-color-scheme block / currentColor) -- one that renders in its authored colours only until
-roles are assigned with .notes/icons-tools/themesvg.py.
+default 32/48 pair. And it warns when a repaired icon still carries no dark-theme markup, which
+now means the artwork uses none of the house colours there was anything to derive a role from.
 
 Requires: python3, inkscape 1.x.
 """
@@ -62,6 +62,14 @@ import tempfile
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 
+# The unification rules (artboard, palette, theme roles) are applied here, not left to the
+# developer: an icon is normalised on the build that follows the edit, the same way its markers
+# and thin strokes are. Each of the three is idempotent, so an untouched icon is byte-stable.
+sys.path.insert(0, os.path.join(HERE, "tools"))
+import palette  # noqa: E402
+import reframe  # noqa: E402
+import themesvg  # noqa: E402
+
 FLOWROOT = re.compile(r"[ \t]*<flowRoot\b.*?</flowRoot>\s*", re.S)
 FLOWPARA = re.compile(r"<flowPara[^>]*>(.*?)</flowPara>", re.S)
 STYLE = re.compile(r'style="([^"]*)"')
@@ -72,13 +80,18 @@ ELEMENT = re.compile(r"""<[a-zA-Z][\w:.-]*(?:\s+[\w:.-]+\s*=\s*(?:"[^"]*"|'[^']*
 ATTR = re.compile(r"""([\w:.-]+)\s*=\s*(?:"([^"]*)"|'([^']*)')""")
 # Both spellings Inkscape may emit: style="marker-end:url(...)" and marker-end="url(...)".
 MARKER_REF = re.compile(r"marker-(start|mid|end)\s*[:=]\s*[\"']?url\(")
-PIXMAP_REF = re.compile(r"<pixmap[^>]*>:/icons/([^<]+)\.svg</pixmap>")
-# Attribute values may hold '>', so the root tag cannot be cut at the first one.
-ROOT_SVG = re.compile(r"<svg\b((?:[^>\"']|\"[^\"]*\"|'[^']*')*)>", re.S)
 
 MKICON = os.path.join(HERE, "mkicon")
 # An icon follows the theme if it carries the current-color-scheme block or a currentColor fill.
 THEME_MARK = re.compile(r'id="current-color-scheme"|currentColor', re.I)
+
+# Minimum painted-stroke width, in 64-artboard units. Below this a theme-following
+# (currentColor) line washes out on the dark ground -- the reframe scales strokes with the
+# drawing, so the true width is declared * the wrapper scale (reframe.py).
+STROKE_FLOOR = 2.5
+WRAP_SCALE = re.compile(r'scale\(([0-9.]+)\)"')
+STROKE_CURRENT = re.compile(r'stroke\s*[:=]\s*"?\s*currentColor', re.I)
+STROKE_W = re.compile(r'stroke-width(\s*:\s*|=")([0-9.]+)([a-z%]*)')
 SIZE_DIR = re.compile(r"(\d+)x(\d+)")
 ACT_ICON = re.compile(r"Act[A-Z]")
 
@@ -89,23 +102,6 @@ def sha256(path):
         for chunk in iter(lambda: f.read(65536), b""):
             h.update(chunk)
     return h.hexdigest()
-
-
-def root_tag(text):
-    """The root <svg> element's attributes, or "" if there is none."""
-    m = ROOT_SVG.search(text)
-    return m.group(1) if m else ""
-
-
-def natural_size_icons(ui_dir):
-    """{Foo.svg} for every icon a .ui shows via <pixmap>, i.e. at its natural size."""
-    names = set()
-    for root, _, files in os.walk(ui_dir):
-        for f in files:
-            if f.endswith(".ui"):
-                text = open(os.path.join(root, f), encoding="utf-8").read()
-                names |= {n + ".svg" for n in PIXMAP_REF.findall(text)}
-    return names
 
 
 def strip_empty_flowroots(text):
@@ -203,15 +199,107 @@ def render_pngs(path):
     return sizes, None
 
 
-def process(path, profile, natural):
+def raise_thin_strokes(text):
+    """Raise any currentColor stroke below STROKE_FLOOR up to it (up-only). Returns (text, n).
+
+    Only theme-following (currentColor) strokes are floored: those are the ones that theme
+    to a light ink and vanish on the dark ground. Literal-coloured strokes -- semantic marks
+    and the whole self-backgrounded / fixed-appearance (OPTOUT) set -- are left untouched,
+    so this needs no OPTOUT list. Width is the declared value times the reframe wrapper scale.
+    """
+    m = WRAP_SCALE.search(text)
+    scale = float(m.group(1)) if m else 1.0
+    minw = STROKE_FLOOR / scale
+    n = 0
+
+    def per_element(em):
+        nonlocal n
+        tag = em.group(0)
+        if not STROKE_CURRENT.search(tag):
+            return tag
+
+        def bump(wm):
+            nonlocal n
+            if 0 < float(wm.group(2)) < minw:
+                n += 1
+                return f"stroke-width{wm.group(1)}{minw:.4f}"  # separator (: or =") kept; unit dropped
+            return wm.group(0)
+
+        return STROKE_W.sub(bump, tag)
+
+    return ELEMENT.sub(per_element, text), n
+
+
+def normalise_artboard(path, steps, env, tmp):
+    """Style-guide step 1: the fixed 0 0 64 64 artboard. Returns error_or_None.
+
+    Runs BEFORE the inkscape pass -- the reframe wrapper is a plain <g transform>, verified to
+    survive object-to-path and the plain-svg export unchanged. Writes in place, and costs no
+    inkscape call at all when the icon is already framed.
+    """
+    _, scale, err = reframe.one(path, env, True, tmp)
+    if err and err.startswith("ERROR"):
+        return f"reframe: {err}"
+    if scale is not None:
+        steps.append(f"reframe x{scale:.3f}")
+    return None
+
+
+def normalise_colour(text, stem, steps):
+    """Style-guide steps 2-3: canonical palette, then the ink/paper/lead/mark theme markup.
+
+    Runs AFTER the inkscape pass, and must: inkscape's plain-svg export flattens CSS back onto
+    the elements, so a class-supplied `fill` reappears as an inline one. An inline fill beats the
+    class for the engine too (CSvgtIconEngine skips an element that already has one), which would
+    silently leave the shape unthemed -- exactly the two-colour .paper-ink form. Theming last
+    keeps the markup as written.
+
+    The thin-stroke floor rides along here because it measures `currentColor` strokes, which do
+    not exist until the roles above are assigned.
+    """
+    # A fixed-appearance icon keeps its literal colours; it is only stripped of markup a previous
+    # pass left behind, so that adding a name to OPTOUT actually un-themes it.
+    if stem in palette.OPTOUT:
+        bare = themesvg.bare(text)
+        if bare != text:
+            steps.append("un-themed (opt-out)")
+        text = bare
+    else:
+        # Palette first: the roles are derived from the literal colours, so those have to be the
+        # canonical ones before anything is derived from them.
+        hued = palette.normalise(text, accents=stem not in palette.KEEP_BLUE)
+        if hued != text:
+            steps.append("palette")
+            text = hued
+        themed, tokens = themesvg.theme(text, keep=themesvg.keep_for(stem))
+        if themed is not None and themed != text:
+            steps.append(f"theme roles x{len(tokens)}")
+            text = themed
+
+    text, n_thin = raise_thin_strokes(text)
+    if n_thin:
+        steps.append(f"thin-stroke floor x{n_thin}")
+    return text
+
+
+def process(path, profile, tmp):
     """Hygiene one file in place. Returns (name, [steps applied], error_or_None)."""
     name = os.path.basename(path)
+    steps = []
+    env = dict(os.environ, INKSCAPE_PROFILE_DIR=profile)
+
+    try:
+        err = normalise_artboard(path, steps, env, tmp)
+    except Exception as e:  # noqa: BLE001 -- report against this icon, never abort the batch
+        err = f"reframe failed: {e}"
+    if err:
+        return name, steps, err, True, None
+
     try:
         raw = open(path, encoding="utf-8").read()
     except OSError as e:
         return name, [], f"read failed: {e}", True, None
 
-    steps = []
     text = raw
 
     text, n_flow = strip_empty_flowroots(text)
@@ -227,25 +315,18 @@ def process(path, profile, natural):
     if text != raw:
         open(path, "w", encoding="utf-8").write(text)
 
-    # A <pixmap> label renders at natural size; fit-canvas would rewrite the viewBox defining it.
-    fit = name not in natural
-    if not fit and "viewBox" not in root_tag(text):
-        return name, steps, "shown by a <pixmap> but has no viewBox: run naturalsize.py on it", True, None
-
+    # The page is NOT re-fit. Every icon carries the fixed 0 0 64 64 artboard set by
+    # reframe.py; fit-canvas-to-selection would rewrite it back to the drawing bbox and
+    # undo the reframe. Retired in Phase 4 (.notes/icons-unify-plan.md) -- reframe.py now
+    # owns the page, this script only repairs the drawing for Qt.
     actions = ["select-all:all", "object-to-path"]
     steps.append("object-to-path")
     if has_markers:
         actions += ["select-all:all", "object-stroke-to-path"]
         steps.append("marker bake")
-    if fit:
-        actions += ["select-all:all", "fit-canvas-to-selection"]
-        steps.append("fit-canvas")
-    else:
-        steps.append("fit-canvas SKIPPED (<pixmap> natural size)")
     actions += ["vacuum-defs",
                 f"export-filename:{path}", "export-plain-svg", "export-overwrite", "export-do"]
 
-    env = dict(os.environ, INKSCAPE_PROFILE_DIR=profile)
     r = subprocess.run(["inkscape", "--actions=" + ";".join(actions), path],
                        stdout=subprocess.DEVNULL, stderr=subprocess.PIPE, env=env)
     if r.returncode != 0:
@@ -255,6 +336,14 @@ def process(path, profile, natural):
     after = open(path, encoding="utf-8").read()
     if MARKER_REF.search(after):
         return name, steps, "marker references survived object-stroke-to-path", True, None
+
+    try:
+        coloured = normalise_colour(after, name[:-4], steps)
+    except Exception as e:  # noqa: BLE001 -- report against this icon, never abort the batch
+        return name, steps, f"colour normalise failed: {e}", True, None
+    if coloured != after:
+        open(path, "w", encoding="utf-8").write(coloured)
+        after = coloured
 
     # Keep the committed PNG raster(s) in step with the repaired SVG. The apps draw the ".svgt"
     # and never read these, but <pixmap> labels, rich-text <img> and the history/DB icon caches
@@ -278,8 +367,6 @@ def write_manifest(manifest, svgs):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--dir", default=HERE, help="icon directory (default: this script's)")
-    ap.add_argument("--ui-dir", default=os.path.dirname(HERE),
-                    help="tree scanned for <pixmap> refs (default: the src/ above this script)")
     ap.add_argument("--manifest", required=True, help="hash manifest to rewrite")
     ap.add_argument("--all", action="store_true", help="process every icon, not just the listed")
     ap.add_argument("--record-only", action="store_true", help="rewrite the manifest, fix nothing")
@@ -301,21 +388,13 @@ def main():
     if not targets:
         sys.exit("nothing to do: pass files, --all or --record-only")
 
-    # Icons a .ui shows via <pixmap> render at natural size, so step 4 must leave them alone.
-    # Empty is now the normal case: those labels are QSvgWidget + load(), and cmake/IconGate.cmake
-    # rejects any new <pixmap> on an icon -- so this can only be non-empty if the gate is removed.
-    # Kept (rather than deleted with the skip it guards) so a wrong --ui-dir is still visible.
-    natural = natural_size_icons(args.ui_dir)
-    if not natural:
-        print(f"svghygiene: no <pixmap> icon refs under {args.ui_dir} -- expected; nothing to skip")
-
     tmp = tempfile.mkdtemp(prefix="svghygiene")
     try:
         profile = make_profile(tmp)
         print(f"svghygiene: {len(targets)} edited icon(s) to repair")
         results = []
         with concurrent.futures.ThreadPoolExecutor(max_workers=args.jobs) as ex:
-            for r in ex.map(lambda s: process(s, profile, natural), targets):
+            for r in ex.map(lambda s: process(s, profile, tmp), targets):
                 results.append(r)
 
         for name, steps, err, themed, png_err in sorted(results):
@@ -338,10 +417,11 @@ def main():
 
         unthemed = sorted(n for n, s, e, t, pe in results if not e and not t)
         if unthemed:
-            print(f"\n  NOTE: {len(unthemed)} icon(s) carry no dark-theme markup and render in their\n"
-                  f"  authored colours only (no light/dark theming): {', '.join(unthemed)}\n"
-                  f"  If any should follow the theme, assign roles with .notes/icons-tools/themesvg.py.\n"
-                  f"  Icons meant to stay fixed-colour (Mime*, warning/semantic) need nothing.")
+            print(f"\n  NOTE: {len(unthemed)} icon(s) render in their authored colours only, with no\n"
+                  f"  light/dark theming: {', '.join(unthemed)}\n"
+                  f"  Roles are assigned from the house colours, so this means the icon uses none of\n"
+                  f"  them. If it should follow the theme, redraw it in #000080 / #000000 / #ffffff /\n"
+                  f"  #0000ff (see README_ICON.md). Fixed-colour icons (Mime*, warning/semantic) need nothing.")
         return 0
     finally:
         import shutil

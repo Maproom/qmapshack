@@ -107,7 +107,7 @@ def reachable(c):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--dir", default="src/icons")
+    ap.add_argument("--dir", default=os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
     ap.add_argument("--threshold", type=float, default=48.0,
                     help="RGB distance that still counts as the same colour (default 48)")
     ap.add_argument("--unreachable", action="store_true",

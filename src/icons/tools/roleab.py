@@ -150,7 +150,7 @@ taking a role &mdash; those need naming, not theming. The hue count only orders 
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--dir", default="src/icons")
+    ap.add_argument("--dir", default=os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
     ap.add_argument("--color", default="#0000ff", help="the candidate colour, still literal in the sources")
     ap.add_argument("--own", default="#66aaff", help="what it becomes on dark if it gets its own role")
     ap.add_argument("--out", default="/tmp/roleab.html")

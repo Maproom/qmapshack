@@ -2,59 +2,65 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="40.000004"
-   height="40.000004"
    id="svg3513"
    version="1.1"
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:dc="http://purl.org/dc/elements/1.1/">
-  <style
-     id="current-color-scheme">.mark{color:#0000ff}.lead{color:#000000}</style>
   <defs
-     id="defs3515" />
-  <metadata
-     id="metadata3518">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
+     id="defs17" />
   <g
-     id="layer1"
-     transform="translate(-11.599013,-9.4999972)">
+     transform="translate(-0.0000,-0.0000) scale(1.600000)"
+     id="g12">
+    <style id="current-color-scheme">.mark{color:#5555ff}.lead{color:#000000}</style>
+    <defs
+       id="defs3515" />
+    <metadata
+       id="metadata3518">
+      <rdf:RDF>
+        <cc:Work
+           rdf:about="">
+          <dc:format>image/svg+xml</dc:format>
+          <dc:type
+             rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+          <dc:title />
+        </cc:Work>
+      </rdf:RDF>
+    </metadata>
     <g
-       id="g3029">
+       id="layer1"
+       transform="translate(-11.599013,-9.4999972)">
       <g
-         transform="translate(3.9999971)"
-         id="g3024">
+         id="g3029">
+        <g
+           transform="translate(3.9999971)"
+           id="g3024">
+          <path
+             style="fill:currentColor;stroke:currentColor;stroke-width:1.5625;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             d="M 25.452924,20.082225 37.356669,25.47591 23.964955,30.86956 25.452924,20.082225"
+             id="path3763"
+             class="mark" />
+          <path
+             style="fill:currentColor;stroke:currentColor;stroke-width:1.5625;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+             d="m 22.375757,39.34786 1.695469,-19.695725 h 1.69547 z"
+             id="path3761"
+             class="lead" />
+          <path
+             id="rect3769"
+             style="fill:none"
+             d="m 22.205851,19.500017 h 18.790668 v 20 H 22.205851 Z" />
+        </g>
         <path
-           style="fill:currentColor;stroke:currentColor;stroke-width:0.654241;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           d="M 25.452924,20.082225 37.356669,25.47591 23.964955,30.86956 25.452924,20.082225"
-           id="path3763"
-           class="mark" />
-        <path
-           style="fill:currentColor;stroke:currentColor;stroke-width:0.34847px;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
-           d="m 22.375757,39.34786 1.695469,-19.695725 h 1.69547 z"
-           id="path3761"
-           class="lead" />
-        <path
-           id="rect3769"
-           style="fill:none"
-           d="m 22.205851,19.500017 h 18.790668 v 20 H 22.205851 Z" />
+           id="path3019"
+           style="fill:none;stroke:#ff5555;stroke-width:3;stroke-linecap:round;stroke-linejoin:round"
+           transform="matrix(0.93023255,0,0,0.93023256,119.97111,7.1744175)"
+           d="M -75,24 A 20,20 0 0 1 -94.978918,43.999989 20,20 0 0 1 -114.99996,24.042164 20,20 0 0 1 -95.063246,4.0001 20,20 0 0 1 -75.000178,23.915672" />
       </g>
-      <path
-         id="path3019"
-         style="fill:none;stroke:#ff0000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round"
-         transform="matrix(0.93023255,0,0,0.93023256,119.97111,7.1744175)"
-         d="M -75,24 A 20,20 0 0 1 -94.978918,43.999989 20,20 0 0 1 -114.99996,24.042164 20,20 0 0 1 -95.063246,4.0001 20,20 0 0 1 -75.000178,23.915672" />
     </g>
   </g>
 </svg>

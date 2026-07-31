@@ -2,38 +2,44 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="34.034798"
-   height="34.338646"
    id="svg3513"
    version="1.1"
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:dc="http://purl.org/dc/elements/1.1/">
-  <style
-     id="current-color-scheme">.ink-lead{fill:#000080;color:#000000}</style>
   <defs
-     id="defs3515" />
-  <metadata
-     id="metadata3518">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
+     id="defs12" />
   <g
-     id="layer1"
-     transform="translate(-8.6189661,-11.557938)">
-    <path
-       style="stroke:currentColor;stroke-width:1.56961;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 32.593244,12.342743 v 19.11558 h 9.27585 L 25.717674,45.111803 9.4036336,31.458323 h 9.2758504 v -19.11558 h 13.91376"
-       id="path3052-9"
-       class="ink-lead" />
+     transform="translate(0.2831,-0.0000) scale(1.863792)"
+     id="g7">
+    <style id="current-color-scheme">.ink-lead{fill:#000080;color:#000000}</style>
+    <defs
+       id="defs3515" />
+    <metadata
+       id="metadata3518">
+      <rdf:RDF>
+        <cc:Work
+           rdf:about="">
+          <dc:format>image/svg+xml</dc:format>
+          <dc:type
+             rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+          <dc:title />
+        </cc:Work>
+      </rdf:RDF>
+    </metadata>
+    <g
+       id="layer1"
+       transform="translate(-8.6189661,-11.557938)">
+      <path
+         style="stroke:currentColor;stroke-width:1.56961;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 32.593244,12.342743 v 19.11558 h 9.27585 L 25.717674,45.111803 9.4036336,31.458323 h 9.2758504 v -19.11558 h 13.91376"
+         id="path3052-9"
+         class="ink-lead" />
+    </g>
   </g>
 </svg>

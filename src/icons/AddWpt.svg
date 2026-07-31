@@ -2,58 +2,64 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="40"
-   height="40.110466"
    id="svg3513"
    version="1.1"
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:dc="http://purl.org/dc/elements/1.1/">
-  <style
-     id="current-color-scheme">.lead{color:#000000}.paper{color:#ffffff}</style>
   <defs
-     id="defs3515" />
-  <metadata
-     id="metadata3518">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
+     id="defs17" />
   <g
-     id="layer1"
-     transform="translate(-10.181817,-12.853858)">
+     transform="translate(0.0882,0.0000) scale(1.595592)"
+     id="g12">
+    <style id="current-color-scheme">.lead{color:#000000}.paper{color:#ffffff}</style>
+    <defs
+       id="defs3515" />
+    <metadata
+       id="metadata3518">
+      <rdf:RDF>
+        <cc:Work
+           rdf:about="">
+          <dc:format>image/svg+xml</dc:format>
+          <dc:type
+             rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+          <dc:title />
+        </cc:Work>
+      </rdf:RDF>
+    </metadata>
     <g
-       id="g3057">
-      <path
-         id="rect2996"
-         style="fill:none;fill-rule:evenodd"
-         d="m 10.181817,12.909091 h 40 v 40 h -40 z" />
+       id="layer1"
+       transform="translate(-10.181817,-12.853858)">
       <g
-         transform="translate(7.6363638,-19.818182)"
-         id="g2992">
+         id="g3057">
         <path
-           style="fill:#ff0000;stroke:#ff0000;stroke-width:1.34993;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           d="m 10.447631,33.891728 25.339695,10.78737 -28.5071566,10.7873 3.1674616,-21.57467"
-           id="path3763" />
-        <path
-           style="fill:currentColor;stroke:currentColor;stroke-width:0.719016px;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
-           d="M 3.8972165,72.422998 7.5063904,33.031548 H 11.115564 Z"
-           id="path3761"
-           class="lead" />
+           id="rect2996"
+           style="fill:none;fill-rule:evenodd"
+           d="m 10.181817,12.909091 h 40 v 40 h -40 z" />
+        <g
+           transform="translate(7.6363638,-19.818182)"
+           id="g2992">
+          <path
+             style="fill:#ff5555;stroke:#ff5555;stroke-width:1.34993;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             d="m 10.447631,33.891728 25.339695,10.78737 -28.5071566,10.7873 3.1674616,-21.57467"
+             id="path3763" />
+          <path
+             style="fill:currentColor;stroke:currentColor;stroke-width:1.5668;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+             d="M 3.8972165,72.422998 7.5063904,33.031548 H 11.115564 Z"
+             id="path3761"
+             class="lead" />
+        </g>
       </g>
+      <path
+         style="fill:#55d400;fill-opacity:1;fill-rule:nonzero;stroke:currentColor;stroke-width:1.5668;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 30.456378,45.891398 6.809525,5e-6 v 6.798361 h 5.831836 v -6.798366 h 6.809518 v -5.854147 h -6.809518 l -6e-6,-6.798366 h -5.83183 l -5e-6,6.798371 -6.80952,-5e-6 z"
+         id="rect3117-7"
+         class="paper" />
     </g>
-    <path
-       style="fill:#008000;fill-opacity:1;fill-rule:nonzero;stroke:currentColor;stroke-width:0.549121;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 30.456378,45.891398 6.809525,5e-6 v 6.798361 h 5.831836 v -6.798366 h 6.809518 v -5.854147 h -6.809518 l -6e-6,-6.798366 h -5.83183 l -5e-6,6.798371 -6.80952,-5e-6 z"
-       id="rect3117-7"
-       class="paper" />
   </g>
 </svg>

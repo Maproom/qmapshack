@@ -2,62 +2,62 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="49.27911"
-   height="51.545452"
    id="svg3462"
    version="1.1"
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:dc="http://purl.org/dc/elements/1.1/">
-  <style
-     id="current-color-scheme">.lead{color:#000000}.paper{color:#ffffff}.paper-ink{fill:#ffffff;color:#000080}.ink{color:#000080}</style>
   <defs
-     id="defs3464" />
-  <metadata
-     id="metadata3467">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
+     id="defs17" />
   <g
-     id="layer1"
-     transform="translate(-6.7727258,-6.4090906)">
-    <path
-       id="rect3336"
-       style="fill:none;fill-rule:evenodd;stroke:currentColor;stroke-width:1.1054px"
-       d="M 20.729263,12.790267 H 50.273605 V 42.334609 H 20.729263 Z"
-       class="lead" />
-    <path
-       id="rect3338"
-       style="fill:none;fill-rule:evenodd;stroke:currentColor;stroke-width:1.1054px"
-       d="M 35.199963,6.9617906 H 55.499136 V 27.260964 H 35.199963 Z"
-       class="lead" />
-    <path
-       id="rect3342"
-       style="fill:currentColor"
-       d="M 6.8615112,20.427578 H 44.315632 V 56.403252 H 6.8615112 Z"
-       class="paper" />
-    <path
-       id="rect3797"
-       style="stroke:currentColor;stroke-width:0.920177"
-       d="M 7.2328143,20.687361 H 44.039909 V 57.494455 H 7.2328143 Z"
-       class="paper-ink" />
-    <path
-       style="fill:#009cff;fill-opacity:1;stroke:none"
-       d="M 7.6983828,56.873207 V 46.594733 l 4.4839922,-5.139237 4.483994,5.139237 8.967987,-15.417712 8.967986,10.278475 4.483992,-5.139237 4.483995,10.278474 v 10.278474 z"
-       id="path3799" />
-    <path
-       style="fill:currentColor;stroke:none"
-       d="M 7.4492015,57.350787 V 51.38673 h 4.5801135 l 4.580116,-5.964055 4.580115,5.964055 9.160226,-11.928112 9.160227,5.964057 4.580114,5.964055 v 5.964057 z"
-       id="path3815"
-       class="ink" />
+     transform="translate(1.4070,-0.0000) scale(1.241621)"
+     id="g12">
+    <defs
+       id="defs3464" />
+    <metadata
+       id="metadata3467">
+      <rdf:RDF>
+        <cc:Work
+           rdf:about="">
+          <dc:format>image/svg+xml</dc:format>
+          <dc:type
+             rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+          <dc:title />
+        </cc:Work>
+      </rdf:RDF>
+    </metadata>
+    <g
+       id="layer1"
+       transform="translate(-6.7727258,-6.4090906)">
+      <path
+         id="rect3336"
+         style="fill:none;fill-rule:evenodd;stroke:#808080;stroke-width:2.0135"
+         d="M 20.729263,12.790267 H 50.273605 V 42.334609 H 20.729263 Z" />
+      <path
+         id="rect3338"
+         style="fill:none;fill-rule:evenodd;stroke:#808080;stroke-width:2.0135"
+         d="M 35.199963,6.9617906 H 55.499136 V 27.260964 H 35.199963 Z" />
+      <path
+         id="rect3342"
+         style="fill:#ffffff"
+         d="M 6.8615112,20.427578 H 44.315632 V 56.403252 H 6.8615112 Z" />
+      <path
+         id="rect3797"
+         style="stroke:#000080;stroke-width:2.0135;fill:#ffffff"
+         d="M 7.2328143,20.687361 H 44.039909 V 57.494455 H 7.2328143 Z" />
+      <path
+         style="fill:#009cff;fill-opacity:1;stroke:none"
+         d="M 7.6983828,56.873207 V 46.594733 l 4.4839922,-5.139237 4.483994,5.139237 8.967987,-15.417712 8.967986,10.278475 4.483992,-5.139237 4.483995,10.278474 v 10.278474 z"
+         id="path3799" />
+      <path
+         style="fill:#000080;stroke:none"
+         d="M 7.4492015,57.350787 V 51.38673 h 4.5801135 l 4.580116,-5.964055 4.580115,5.964055 9.160226,-11.928112 9.160227,5.964057 4.580114,5.964055 v 5.964057 z"
+         id="path3815" />
+    </g>
   </g>
 </svg>

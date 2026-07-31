@@ -2,67 +2,73 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="48.945946"
-   height="48.945946"
    id="svg3513"
    version="1.1"
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:dc="http://purl.org/dc/elements/1.1/">
-  <style
-     id="current-color-scheme">.ink{color:#000080}</style>
   <defs
-     id="defs3515" />
-  <metadata
-     id="metadata3518">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
+     id="defs18" />
   <g
-     id="layer1"
-     transform="translate(-5.5125546,-4.304213)">
+     transform="translate(0.0000,0.0000) scale(1.307566)"
+     id="g13">
+    <style id="current-color-scheme">.ink{color:#000080}</style>
+    <defs
+       id="defs3515" />
+    <metadata
+       id="metadata3518">
+      <rdf:RDF>
+        <cc:Work
+           rdf:about="">
+          <dc:format>image/svg+xml</dc:format>
+          <dc:type
+             rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+          <dc:title />
+        </cc:Work>
+      </rdf:RDF>
+    </metadata>
     <g
-       id="g4180"
-       transform="matrix(0.72857875,0,0,0.72552921,9.9573398,5.9307114)"
-       style="stroke-width:4.12625;stroke-miterlimit:4;stroke-dasharray:none">
+       id="layer1"
+       transform="translate(-5.5125546,-4.304213)">
+      <g
+         id="g4180"
+         transform="matrix(0.72857875,0,0,0.72552921,9.9573398,5.9307114)"
+         style="stroke-width:4.12625;stroke-miterlimit:4;stroke-dasharray:none">
+        <path
+           id="path4202"
+           d="M 5,24 V 9"
+           style="fill:none;fill-rule:evenodd;stroke:currentColor;stroke-width:4.12625;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           class="ink" />
+        <path
+           id="path4204"
+           d="M 5,9 H 20"
+           style="fill:none;fill-rule:evenodd;stroke:currentColor;stroke-width:4.12625;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           class="ink" />
+        <path
+           id="path4206"
+           d="M 35,9 H 50 V 24"
+           style="fill:none;fill-rule:evenodd;stroke:currentColor;stroke-width:4.12625;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           class="ink" />
+        <path
+           id="path4208"
+           d="M 5,39 V 54 H 20"
+           style="fill:none;fill-rule:evenodd;stroke:currentColor;stroke-width:4.12625;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           class="ink" />
+        <path
+           id="path4210"
+           d="M 35,54 H 50 V 39"
+           style="fill:none;fill-rule:evenodd;stroke:currentColor;stroke-width:4.12625;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           class="ink" />
+      </g>
       <path
-         id="path4202"
-         d="M 5,24 V 9"
-         style="fill:none;fill-rule:evenodd;stroke:currentColor;stroke-width:4.12625;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         class="ink" />
-      <path
-         id="path4204"
-         d="M 5,9 H 20"
-         style="fill:none;fill-rule:evenodd;stroke:currentColor;stroke-width:4.12625;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         class="ink" />
-      <path
-         id="path4206"
-         d="M 35,9 H 50 V 24"
-         style="fill:none;fill-rule:evenodd;stroke:currentColor;stroke-width:4.12625;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         class="ink" />
-      <path
-         id="path4208"
-         d="M 5,39 V 54 H 20"
-         style="fill:none;fill-rule:evenodd;stroke:currentColor;stroke-width:4.12625;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         class="ink" />
-      <path
-         id="path4210"
-         d="M 35,54 H 50 V 39"
-         style="fill:none;fill-rule:evenodd;stroke:currentColor;stroke-width:4.12625;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         class="ink" />
+         id="rect4179"
+         style="fill:none;stroke:#808080;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:24, 6, 3, 6"
+         d="M 7.0125546,5.804213 H 52.9585 V 51.750159 H 7.0125546 Z" />
     </g>
-    <path
-       id="rect4179"
-       style="fill:none;stroke:#808080;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:24, 6, 3, 6"
-       d="M 7.0125546,5.804213 H 52.9585 V 51.750159 H 7.0125546 Z" />
   </g>
 </svg>

@@ -2,73 +2,79 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="61.669857"
-   height="62"
    id="svg3020"
    version="1.1"
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:dc="http://purl.org/dc/elements/1.1/">
-  <style
-     id="current-color-scheme">.lead{color:#000000}.ink{color:#000080}.paper{color:#ffffff}.paper-ink{fill:#ffffff;color:#000080}</style>
   <defs
-     id="defs3022" />
-  <metadata
-     id="metadata3025">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
+     id="defs20" />
   <g
-     id="layer1"
-     transform="translate(-1.5002163,-0.5)">
+     transform="translate(0.1704,0.0000) scale(1.032258)"
+     id="g15">
+    <style id="current-color-scheme">.lead{color:#000000}.ink{color:#000080}.paper{color:#ffffff}.paper-ink{fill:#ffffff;color:#000080}</style>
+    <defs
+       id="defs3022" />
+    <metadata
+       id="metadata3025">
+      <rdf:RDF>
+        <cc:Work
+           rdf:about="">
+          <dc:format>image/svg+xml</dc:format>
+          <dc:type
+             rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+          <dc:title />
+        </cc:Work>
+      </rdf:RDF>
+    </metadata>
     <g
-       id="g4174"
-       style="fill:none;stroke:currentColor"
-       class="lead">
-      <path
-         id="path4172"
-         style="fill:none;fill-rule:evenodd;stroke:currentColor;stroke-width:7;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         d="M 55,14 V 4 H 5 L 20.000064,33.995982 5,59 H 55 V 49"
-         class="lead" />
-    </g>
-    <g
-       id="g4181"
-       transform="translate(82.819882,4.0658639)">
+       id="layer1"
+       transform="translate(-1.5002163,-0.5)">
       <g
-         transform="translate(-70.017021,-3.7009707)"
-         id="g3019">
+         id="g4174"
+         style="fill:none;stroke:currentColor"
+         class="lead">
         <path
-           id="rect4156-1"
-           style="fill:none;stroke:currentColor;stroke-width:0;stroke-linecap:round;stroke-linejoin:round"
-           d="m 11.625697,11.454543 h 37.47588 v 40 h -37.47588 z"
-           class="ink" />
+           id="path4172"
+           style="fill:none;fill-rule:evenodd;stroke:currentColor;stroke-width:7;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="M 55,14 V 4 H 5 L 20.000064,33.995982 5,59 H 55 V 49"
+           class="lead" />
+      </g>
+      <g
+         id="g4181"
+         transform="translate(82.819882,4.0658639)">
         <g
-           id="g3012">
+           transform="translate(-70.017021,-3.7009707)"
+           id="g3019">
           <path
-             d="m 12.578659,31.869715 c 5.995718,9.867863 18.720945,12.923577 28.422579,6.82512 2.822568,-1.774263 5.18323,-4.214229 6.882092,-7.113257 M 12.843943,31.039361 c 5.995719,-9.867863 18.720945,-12.923577 28.422579,-6.82512 2.822568,1.774263 5.18323,4.214228 6.882092,7.113257"
-             style="fill:currentColor;stroke:currentColor;stroke-width:4.4372;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-             id="path4129-7-3-9"
-             class="paper" />
-          <path
-             d="m 12.578658,31.869715 c 5.995718,9.867863 18.720946,12.923577 28.42258,6.82512 2.822568,-1.774263 5.18323,-4.214229 6.882092,-7.113257 M 12.843942,31.039361 c 5.995719,-9.867863 18.720946,-12.923577 28.42258,-6.82512 2.822568,1.774263 5.18323,4.214228 6.882092,7.113257"
-             style="stroke:currentColor;stroke-width:2.03561;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1"
-             id="path4129-7-3"
-             class="paper-ink" />
-          <path
-             id="path4149-5"
-             style="fill:currentColor;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"
-             transform="matrix(0.89711754,0,0,0.95224119,-306.05544,0.63780763)"
-             d="m 379.43534,30.05399 a 5,5 0 0 1 -2.06344,6.709796 5,5 0 0 1 -6.73885,-1.966497 5,5 0 0 1 1.86914,-6.766497 5,5 0 0 1 6.79274,1.771394"
+             id="rect4156-1"
+             style="fill:none;stroke:currentColor;stroke-width:0;stroke-linecap:round;stroke-linejoin:round"
+             d="m 11.625697,11.454543 h 37.47588 v 40 h -37.47588 z"
              class="ink" />
+          <g
+             id="g3012">
+            <path
+               d="m 12.578659,31.869715 c 5.995718,9.867863 18.720945,12.923577 28.422579,6.82512 2.822568,-1.774263 5.18323,-4.214229 6.882092,-7.113257 M 12.843943,31.039361 c 5.995719,-9.867863 18.720945,-12.923577 28.422579,-6.82512 2.822568,1.774263 5.18323,4.214228 6.882092,7.113257"
+               style="fill:currentColor;stroke:currentColor;stroke-width:4.4372;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+               id="path4129-7-3-9"
+               class="paper" />
+            <path
+               d="m 12.578658,31.869715 c 5.995718,9.867863 18.720946,12.923577 28.42258,6.82512 2.822568,-1.774263 5.18323,-4.214229 6.882092,-7.113257 M 12.843942,31.039361 c 5.995719,-9.867863 18.720946,-12.923577 28.42258,-6.82512 2.822568,1.774263 5.18323,4.214228 6.882092,7.113257"
+               style="stroke:currentColor;stroke-width:2.4219;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1"
+               id="path4129-7-3"
+               class="paper-ink" />
+            <path
+               id="path4149-5"
+               style="fill:currentColor;stroke:currentColor;stroke-width:2.4219;stroke-linecap:round;stroke-linejoin:round"
+               transform="matrix(0.89711754,0,0,0.95224119,-306.05544,0.63780763)"
+               d="m 379.43534,30.05399 a 5,5 0 0 1 -2.06344,6.709796 5,5 0 0 1 -6.73885,-1.966497 5,5 0 0 1 1.86914,-6.766497 5,5 0 0 1 6.79274,1.771394"
+               class="ink" />
+          </g>
         </g>
       </g>
     </g>

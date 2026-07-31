@@ -2,47 +2,53 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="41"
-   height="41"
    id="svg2985"
    version="1.1"
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:dc="http://purl.org/dc/elements/1.1/">
-  <style
-     id="current-color-scheme">.paper-ink{fill:#ffffff;color:#000080}.ink{color:#000080}</style>
   <defs
-     id="defs2987" />
-  <metadata
-     id="metadata2990">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
+     id="defs14" />
   <g
-     id="layer1"
-     transform="translate(-0.891613,-10.100393)">
-    <path
-       id="rect3797"
-       style="stroke:currentColor"
-       d="m 1.391613,10.600393 h 40 v 40 h -40 z"
-       class="paper-ink" />
-    <path
-       style="fill:#009cff;fill-opacity:1;stroke:none"
-       d="M 1.8975662,49.925253 V 38.755152 L 6.7705313,33.170101 11.643498,38.755152 21.389431,22 l 9.745932,11.170101 4.872965,-5.58505 4.872967,11.170101 v 11.170101 z"
-       id="path3799" />
-    <path
-       style="fill:currentColor;stroke:none"
-       d="M 1.6267696,50.444261 V 43.96284 h 4.977424 L 11.58162,37.481421 16.559046,43.96284 26.513896,31 l 9.954849,6.481421 4.977424,6.481419 v 6.481421 z"
-       id="path3815"
-       class="ink" />
+     transform="translate(0.0000,0.0000) scale(1.560976)"
+     id="g9">
+    <style id="current-color-scheme">.paper-ink{fill:#ffffff;color:#000080}.ink{color:#000080}</style>
+    <defs
+       id="defs2987" />
+    <metadata
+       id="metadata2990">
+      <rdf:RDF>
+        <cc:Work
+           rdf:about="">
+          <dc:format>image/svg+xml</dc:format>
+          <dc:type
+             rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+          <dc:title />
+        </cc:Work>
+      </rdf:RDF>
+    </metadata>
+    <g
+       id="layer1"
+       transform="translate(-0.891613,-10.100393)">
+      <path
+         id="rect3797"
+         style="stroke:currentColor"
+         d="m 1.391613,10.600393 h 40 v 40 h -40 z"
+         class="paper-ink" />
+      <path
+         style="fill:#009cff;fill-opacity:1;stroke:none"
+         d="M 1.8975662,49.925253 V 38.755152 L 6.7705313,33.170101 11.643498,38.755152 21.389431,22 l 9.745932,11.170101 4.872965,-5.58505 4.872967,11.170101 v 11.170101 z"
+         id="path3799" />
+      <path
+         style="fill:currentColor;stroke:none"
+         d="M 1.6267696,50.444261 V 43.96284 h 4.977424 L 11.58162,37.481421 16.559046,43.96284 26.513896,31 l 9.954849,6.481421 4.977424,6.481419 v 6.481421 z"
+         id="path3815"
+         class="ink" />
+    </g>
   </g>
 </svg>

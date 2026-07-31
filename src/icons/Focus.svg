@@ -2,38 +2,44 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="64.006569"
-   height="64.000069"
    id="svg2861"
    version="1.1"
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:dc="http://purl.org/dc/elements/1.1/">
-  <style
-     id="current-color-scheme">.lead{color:#000000}</style>
   <defs
-     id="defs2863" />
-  <metadata
-     id="metadata2866">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
+     id="defs12" />
   <g
-     id="layer1"
-     transform="translate(-40.162634,-238.21401)">
-    <path
-       id="path3"
-       style="fill:#ffee00;stroke:currentColor;stroke-width:16.9196;stroke-linecap:round;stroke-linejoin:bevel;paint-order:fill markers stroke"
-       transform="matrix(0.11522688,0.00459613,-0.00437361,0.12108898,34.488841,332.00848)"
-       d="M 485.51357,-271.99004 312.9292,-377.69284 149.18857,-258.7498 196.3864,-455.55125 32.666215,-574.52243 l 201.754225,-15.92718 62.556,-192.47127 77.49314,186.95791 202.38192,0.0174 -153.86084,131.47352 z"
-       class="lead" />
+     transform="translate(0.0000,0.0033) scale(0.999897)"
+     id="g7">
+    <style id="current-color-scheme">.lead{color:#000000}</style>
+    <defs
+       id="defs2863" />
+    <metadata
+       id="metadata2866">
+      <rdf:RDF>
+        <cc:Work
+           rdf:about="">
+          <dc:format>image/svg+xml</dc:format>
+          <dc:type
+             rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        </cc:Work>
+      </rdf:RDF>
+    </metadata>
+    <g
+       id="layer1"
+       transform="translate(-40.162634,-238.21401)">
+      <path
+         id="path3"
+         style="fill:#ffee00;stroke:currentColor;stroke-width:16.9196;stroke-linecap:round;stroke-linejoin:bevel;paint-order:fill markers stroke"
+         transform="matrix(0.11522688,0.00459613,-0.00437361,0.12108898,34.488841,332.00848)"
+         d="M 485.51357,-271.99004 312.9292,-377.69284 149.18857,-258.7498 196.3864,-455.55125 32.666215,-574.52243 l 201.754225,-15.92718 62.556,-192.47127 77.49314,186.95791 202.38192,0.0174 -153.86084,131.47352 z"
+         class="lead" />
+    </g>
   </g>
 </svg>

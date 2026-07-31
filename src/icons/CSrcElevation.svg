@@ -2,43 +2,49 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="44.114742"
-   height="43.915951"
    id="svg2"
    version="1.1"
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:dc="http://purl.org/dc/elements/1.1/">
-  <style
-     id="current-color-scheme">.ink{color:#000080}.lead{color:#000000}</style>
   <defs
-     id="defs4" />
-  <metadata
-     id="metadata7">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
+     id="defs13" />
   <g
-     id="layer1"
-     transform="translate(-9.4701805,-993.42145)">
-    <path
-       style="fill:none;fill-rule:evenodd;stroke:currentColor;stroke-width:3.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 9.9999995,1028.5446 9.1651535,-0.021 0.282301,-14.3233 16.138483,0.083 0.01264,14.1449 17.97285,0.1386"
-       id="path4137"
-       class="ink" />
-    <path
-       id="rect4135"
-       style="opacity:1;fill:currentColor;fill-opacity:0;stroke-width:2"
-       d="M 9.4701805,993.42145 H 53.386181 v 43.91595 H 9.4701805 Z"
-       class="lead" />
+     transform="translate(0.0000,0.1441) scale(1.450764)"
+     id="g8">
+    <style id="current-color-scheme">.ink{color:#000080}.lead{color:#000000}</style>
+    <defs
+       id="defs4" />
+    <metadata
+       id="metadata7">
+      <rdf:RDF>
+        <cc:Work
+           rdf:about="">
+          <dc:format>image/svg+xml</dc:format>
+          <dc:type
+             rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+          <dc:title />
+        </cc:Work>
+      </rdf:RDF>
+    </metadata>
+    <g
+       id="layer1"
+       transform="translate(-9.4701805,-993.42145)">
+      <path
+         style="fill:none;fill-rule:evenodd;stroke:currentColor;stroke-width:3.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 9.9999995,1028.5446 9.1651535,-0.021 0.282301,-14.3233 16.138483,0.083 0.01264,14.1449 17.97285,0.1386"
+         id="path4137"
+         class="ink" />
+      <path
+         id="rect4135"
+         style="opacity:1;fill:currentColor;fill-opacity:0;stroke-width:2"
+         d="M 9.4701805,993.42145 H 53.386181 v 43.91595 H 9.4701805 Z"
+         class="lead" />
+    </g>
   </g>
 </svg>

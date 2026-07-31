@@ -1,70 +1,76 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
-   width="47.999996"
-   height="47.999996"
    background="#FFFFFF"
    version="1.1"
    id="svg29"
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:dc="http://purl.org/dc/elements/1.1/">
-  <style
-     id="current-color-scheme">.ink{color:#000080}.paper-ink{fill:#ffffff;color:#000080}</style>
-  <metadata
-     id="metadata35">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
   <defs
-     id="defs33" />
-  <path
-     id="rect4567"
-     style="opacity:1;fill:currentColor;stroke:currentColor;stroke-width:1.77778;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:6.28571;paint-order:fill markers stroke"
-     d="M 0.88889003,0.88889003 H 47.111108 V 47.111108 H 0.88889003 Z"
-     class="ink" />
+     id="defs19" />
   <g
-     type="COMPO"
-     id="c_1"
-     transform="translate(-1.2040007e-6,-1232)" />
-  <g
-     id="layer1" />
-  <path
-     id="path1035"
-     style="opacity:1;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:6.28571;paint-order:fill markers stroke"
-     d="M 44.047225,23.999999 A 20.047226,20.047226 0 0 1 23.999999,44.047225 20.047226,20.047226 0 0 1 3.9527728,23.999999 20.047226,20.047226 0 0 1 23.999999,3.9527728 20.047226,20.047226 0 0 1 44.047225,23.999999 Z"
-     class="paper-ink" />
-  <path
-     id="path1035-6"
-     style="opacity:1;stroke:currentColor;stroke-width:1.9912;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:6.28571;paint-order:fill markers stroke"
-     d="M 36.004401,23.999999 A 12.004402,20.004402 0 0 1 23.999999,44.004401 12.004402,20.004402 0 0 1 11.995597,23.999999 12.004402,20.004402 0 0 1 23.999999,3.9955966 12.004402,20.004402 0 0 1 36.004401,23.999999 Z"
-     class="paper-ink" />
-  <path
-     style="fill-opacity:1;stroke:currentColor;stroke-width:1.84045;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:6.28571;stroke-dasharray:none;stroke-opacity:1"
-     d="M 3.9786988,23.999999 H 44.021299"
-     id="path1052"
-     class="paper-ink" />
-  <path
-     style="fill-opacity:1;stroke:currentColor;stroke-width:1.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:6.28571;stroke-dasharray:none;stroke-opacity:1"
-     d="M 23.999999,4.7152686 V 43.284729"
-     id="path1064"
-     class="paper-ink" />
-  <path
-     style="fill-opacity:1;stroke:currentColor;stroke-width:1.86357;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:6.28571;stroke-dasharray:none;stroke-opacity:1"
-     d="M 5.9999988,14.890573 H 41.999999"
-     id="path1076"
-     class="paper-ink" />
-  <path
-     style="fill-opacity:1;stroke:currentColor;stroke-width:1.89224;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:6.28571;stroke-dasharray:none;stroke-opacity:1"
-     d="M 5.9999988,33.095089 H 41.999999"
-     id="path1093"
-     class="paper-ink" />
+     transform="translate(-0.0000,-0.0000) scale(1.333333)"
+     id="g14">
+    <style id="current-color-scheme">.ink{color:#000080}.paper-ink{fill:#ffffff;color:#000080}</style>
+    <metadata
+       id="metadata35">
+      <rdf:RDF>
+        <cc:Work
+           rdf:about="">
+          <dc:format>image/svg+xml</dc:format>
+          <dc:type
+             rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+          <dc:title />
+        </cc:Work>
+      </rdf:RDF>
+    </metadata>
+    <defs
+       id="defs33" />
+    <path
+       id="rect4567"
+       style="opacity:1;fill:currentColor;stroke:currentColor;stroke-width:1.8750;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:6.28571;paint-order:fill markers stroke"
+       d="M 0.88889003,0.88889003 H 47.111108 V 47.111108 H 0.88889003 Z"
+       class="ink" />
+    <g
+       type="COMPO"
+       id="c_1"
+       transform="translate(-1.2040007e-6,-1232)" />
+    <g
+       id="layer1" />
+    <path
+       id="path1035"
+       style="opacity:1;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:6.28571;paint-order:fill markers stroke"
+       d="M 44.047225,23.999999 A 20.047226,20.047226 0 0 1 23.999999,44.047225 20.047226,20.047226 0 0 1 3.9527728,23.999999 20.047226,20.047226 0 0 1 23.999999,3.9527728 20.047226,20.047226 0 0 1 44.047225,23.999999 Z"
+       class="paper-ink" />
+    <path
+       id="path1035-6"
+       style="opacity:1;stroke:currentColor;stroke-width:1.9912;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:6.28571;paint-order:fill markers stroke"
+       d="M 36.004401,23.999999 A 12.004402,20.004402 0 0 1 23.999999,44.004401 12.004402,20.004402 0 0 1 11.995597,23.999999 12.004402,20.004402 0 0 1 23.999999,3.9955966 12.004402,20.004402 0 0 1 36.004401,23.999999 Z"
+       class="paper-ink" />
+    <path
+       style="fill-opacity:1;stroke:currentColor;stroke-width:1.8750;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:6.28571;stroke-dasharray:none;stroke-opacity:1"
+       d="M 3.9786988,23.999999 H 44.021299"
+       id="path1052"
+       class="paper-ink" />
+    <path
+       style="fill-opacity:1;stroke:currentColor;stroke-width:1.8750;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:6.28571;stroke-dasharray:none;stroke-opacity:1"
+       d="M 23.999999,4.7152686 V 43.284729"
+       id="path1064"
+       class="paper-ink" />
+    <path
+       style="fill-opacity:1;stroke:currentColor;stroke-width:1.8750;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:6.28571;stroke-dasharray:none;stroke-opacity:1"
+       d="M 5.9999988,14.890573 H 41.999999"
+       id="path1076"
+       class="paper-ink" />
+    <path
+       style="fill-opacity:1;stroke:currentColor;stroke-width:1.89224;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:6.28571;stroke-dasharray:none;stroke-opacity:1"
+       d="M 5.9999988,33.095089 H 41.999999"
+       id="path1093"
+       class="paper-ink" />
+  </g>
 </svg>

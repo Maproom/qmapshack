@@ -2,80 +2,86 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="54"
-   height="54"
    id="svg3513"
    version="1.1"
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:dc="http://purl.org/dc/elements/1.1/">
-  <style
-     id="current-color-scheme">.ink{color:#000080}</style>
   <defs
-     id="defs3515" />
-  <metadata
-     id="metadata3518">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
+     id="defs22" />
   <g
-     id="layer1"
-     transform="translate(-4,-4)">
+     transform="translate(0.0000,0.0000) scale(1.185185)"
+     id="g17">
+    <style id="current-color-scheme">.ink{color:#000080}</style>
+    <defs
+       id="defs3515" />
+    <metadata
+       id="metadata3518">
+      <rdf:RDF>
+        <cc:Work
+           rdf:about="">
+          <dc:format>image/svg+xml</dc:format>
+          <dc:type
+             rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        </cc:Work>
+      </rdf:RDF>
+    </metadata>
     <g
-       id="g2998"
-       transform="translate(1,2)">
-      <path
-         id="rect3008"
-         style="fill:currentColor;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"
-         d="M 15,4 H 45 V 54 H 15 Z"
-         class="ink" />
-      <path
-         id="rect3790"
-         style="fill:#999999;fill-rule:evenodd;stroke:#b3b3b3;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"
-         d="M 20,9 H 40 V 39 H 20 Z" />
+       id="layer1"
+       transform="translate(-4,-4)">
       <g
-         transform="translate(-0.5)"
-         id="g3834">
+         id="g2998"
+         transform="translate(1,2)">
+        <path
+           id="rect3008"
+           style="fill:currentColor;stroke:currentColor;stroke-width:2.1094;stroke-linecap:round;stroke-linejoin:round"
+           d="M 15,4 H 45 V 54 H 15 Z"
+           class="ink" />
+        <path
+           id="rect3790"
+           style="fill:#999999;fill-rule:evenodd;stroke:#b3b3b3;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"
+           d="M 20,9 H 40 V 39 H 20 Z" />
         <g
-           id="g3826">
-          <path
-             id="path3792"
-             style="fill:#999999;fill-rule:evenodd;stroke:#b3b3b3;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"
-             transform="translate(0,0.5)"
-             d="m 32,43.5 a 1.5,1.5 0 0 1 -1.498419,1.499999 1.5,1.5 0 0 1 -1.501578,-1.496837 1.5,1.5 0 0 1 1.495254,-1.503154 1.5,1.5 0 0 1 1.50473,1.493667" />
-          <path
-             id="path3792-5"
-             style="fill:#999999;fill-rule:evenodd;stroke:#b3b3b3;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"
-             transform="translate(0,7.5)"
-             d="m 32,43.5 a 1.5,1.5 0 0 1 -1.498419,1.499999 1.5,1.5 0 0 1 -1.501578,-1.496837 1.5,1.5 0 0 1 1.495254,-1.503154 1.5,1.5 0 0 1 1.50473,1.493667" />
-        </g>
-        <g
-           id="g3830"
-           transform="translate(0,1)">
-          <path
-             id="path3792-0"
-             style="fill:#999999;fill-rule:evenodd;stroke:#b3b3b3;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"
-             transform="translate(-7.5,3)"
-             d="m 32,43.5 a 1.5,1.5 0 0 1 -1.498419,1.499999 1.5,1.5 0 0 1 -1.501578,-1.496837 1.5,1.5 0 0 1 1.495254,-1.503154 1.5,1.5 0 0 1 1.50473,1.493667" />
-          <path
-             id="path3792-7"
-             style="fill:#999999;fill-rule:evenodd;stroke:#b3b3b3;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"
-             transform="translate(7.5,3)"
-             d="m 32,43.5 a 1.5,1.5 0 0 1 -1.498419,1.499999 1.5,1.5 0 0 1 -1.501578,-1.496837 1.5,1.5 0 0 1 1.495254,-1.503154 1.5,1.5 0 0 1 1.50473,1.493667" />
+           transform="translate(-0.5)"
+           id="g3834">
+          <g
+             id="g3826">
+            <path
+               id="path3792"
+               style="fill:#999999;fill-rule:evenodd;stroke:#b3b3b3;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"
+               transform="translate(0,0.5)"
+               d="m 32,43.5 a 1.5,1.5 0 0 1 -1.498419,1.499999 1.5,1.5 0 0 1 -1.501578,-1.496837 1.5,1.5 0 0 1 1.495254,-1.503154 1.5,1.5 0 0 1 1.50473,1.493667" />
+            <path
+               id="path3792-5"
+               style="fill:#999999;fill-rule:evenodd;stroke:#b3b3b3;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"
+               transform="translate(0,7.5)"
+               d="m 32,43.5 a 1.5,1.5 0 0 1 -1.498419,1.499999 1.5,1.5 0 0 1 -1.501578,-1.496837 1.5,1.5 0 0 1 1.495254,-1.503154 1.5,1.5 0 0 1 1.50473,1.493667" />
+          </g>
+          <g
+             id="g3830"
+             transform="translate(0,1)">
+            <path
+               id="path3792-0"
+               style="fill:#999999;fill-rule:evenodd;stroke:#b3b3b3;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"
+               transform="translate(-7.5,3)"
+               d="m 32,43.5 a 1.5,1.5 0 0 1 -1.498419,1.499999 1.5,1.5 0 0 1 -1.501578,-1.496837 1.5,1.5 0 0 1 1.495254,-1.503154 1.5,1.5 0 0 1 1.50473,1.493667" />
+            <path
+               id="path3792-7"
+               style="fill:#999999;fill-rule:evenodd;stroke:#b3b3b3;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"
+               transform="translate(7.5,3)"
+               d="m 32,43.5 a 1.5,1.5 0 0 1 -1.498419,1.499999 1.5,1.5 0 0 1 -1.501578,-1.496837 1.5,1.5 0 0 1 1.495254,-1.503154 1.5,1.5 0 0 1 1.50473,1.493667" />
+          </g>
         </g>
       </g>
+      <path
+         id="rect2996"
+         style="fill:none"
+         d="M 4,4 H 58 V 58 H 4 Z" />
     </g>
-    <path
-       id="rect2996"
-       style="fill:none"
-       d="M 4,4 H 58 V 58 H 4 Z" />
   </g>
 </svg>

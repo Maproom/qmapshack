@@ -1,68 +1,74 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
-   width="48.000004"
-   height="48.000004"
    background="#FFFFFF"
    version="1.1"
    id="svg29"
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:dc="http://purl.org/dc/elements/1.1/">
-  <style
-     id="current-color-scheme">.ink{color:#000080}.paper-ink{fill:#ffffff;color:#000080}.lead-ink{fill:#000000;color:#000080}</style>
-  <metadata
-     id="metadata35">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
   <defs
-     id="defs33" />
-  <path
-     id="rect4567"
-     style="opacity:1;fill:currentColor;stroke:currentColor;stroke-width:1.20018;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:20;paint-order:fill markers stroke"
-     d="M 0.60009003,0.60009003 H 47.399914 V 47.399914 H 0.60009003 Z"
-     class="ink" />
+     id="defs18" />
   <g
-     type="COMPO"
-     id="c_1"
-     transform="translate(1.054844e-6,-1232)" />
-  <g
-     id="layer1" />
-  <path
-     id="rect911"
-     style="opacity:1;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;paint-order:fill markers stroke"
-     d="M 18.710092,8.6270095 H 29.289909 V 46.526862 H 18.710092 Z"
-     class="paper-ink" />
-  <path
-     id="rect909"
-     style="opacity:1;stroke:currentColor;stroke-width:1.41958;stroke-linecap:round;stroke-linejoin:round;paint-order:fill markers stroke"
-     d="M 12.932422,13.420364 H 35.06758 c 2.299971,0 4.151572,1.851602 4.151572,4.151573 v 12.856128 c 0,2.299971 -1.851601,4.151573 -4.151572,4.151573 H 12.932422 c -2.299971,0 -4.1515724,-1.851602 -4.1515724,-4.151573 V 17.571937 c 0,-2.299971 1.8516014,-4.151573 4.1515724,-4.151573 z"
-     class="paper-ink" />
-  <g
-     transform="matrix(0.06448234,0,0,0.06366477,0.80234321,-9.0915273)"
-     type="COMPO"
-     id="c_12"
-     style="stroke:currentColor;stroke-width:44.2156;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-     class="ink">
+     transform="translate(-0.0000,-0.0000) scale(1.333333)"
+     id="g13">
+    <style id="current-color-scheme">.ink{color:#000080}.paper-ink{fill:#ffffff;color:#000080}.lead-ink{fill:#000000;color:#000080}</style>
+    <metadata
+       id="metadata35">
+      <rdf:RDF>
+        <cc:Work
+           rdf:about="">
+          <dc:format>image/svg+xml</dc:format>
+          <dc:type
+             rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+          <dc:title />
+        </cc:Work>
+      </rdf:RDF>
+    </metadata>
+    <defs
+       id="defs33" />
     <path
-       style="fill-opacity:0;stroke:currentColor;stroke-width:44.2156;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       rough-pts="328.98087,408.0924 301.31787,419.7776 277.87195,437.89758 259.75192,461.34344 248.06677,489.0064 243.9253,519.7777 248.06677,550.5489 259.75195,578.2119 277.87195,601.65784 301.31784,619.7778 328.98087,631.463 359.7521,635.6045 390.52332,631.463 418.1863,619.77783 441.63226,601.65784 459.75226,578.21185 471.43744,550.5489 475.57892,519.7777 471.43744,489.00647 459.75238,461.3435 441.6324,437.89752 418.1863,419.77753 390.5233,408.0924 359.7521,403.95093 "
-       id="h_94"
-       d="m 328.9809,408.0924 c -49.0032,13.4969 -85.0556,58.42585 -85.0556,111.6853 0,63.9114 51.91543,115.8268 115.8268,115.8268 63.91138,0 115.82682,-51.9154 115.82682,-115.8268 0,-63.91137 -51.91544,-115.82677 -115.82682,-115.82677 -10.65188,0 -20.97054,1.44207 -30.7712,4.14147"
-       path-type="area"
-       class="lead-ink" />
+       id="rect4567"
+       style="opacity:1;fill:currentColor;stroke:currentColor;stroke-width:1.8750;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:20;paint-order:fill markers stroke"
+       d="M 0.60009003,0.60009003 H 47.399914 V 47.399914 H 0.60009003 Z"
+       class="ink" />
+    <g
+       type="COMPO"
+       id="c_1"
+       transform="translate(1.054844e-6,-1232)" />
+    <g
+       id="layer1" />
     <path
-       id="b_0"
-       style="fill:none;stroke-linecap:round;stroke-linejoin:round"
-       d="m 475.5789,519.77771 a 115.8268,115.8268 0 0 1 -115.82679,115.8268 115.8268,115.8268 0 0 1 -115.8268,-115.8268 115.8268,115.8268 0 0 1 115.8268,-115.8268 115.8268,115.8268 0 0 1 115.82679,115.8268 z" />
+       id="rect911"
+       style="opacity:1;stroke:currentColor;stroke-width:1.8750;stroke-linecap:round;stroke-linejoin:round;paint-order:fill markers stroke"
+       d="M 18.710092,8.6270095 H 29.289909 V 46.526862 H 18.710092 Z"
+       class="paper-ink" />
+    <path
+       id="rect909"
+       style="opacity:1;stroke:currentColor;stroke-width:1.8750;stroke-linecap:round;stroke-linejoin:round;paint-order:fill markers stroke"
+       d="M 12.932422,13.420364 H 35.06758 c 2.299971,0 4.151572,1.851602 4.151572,4.151573 v 12.856128 c 0,2.299971 -1.851601,4.151573 -4.151572,4.151573 H 12.932422 c -2.299971,0 -4.1515724,-1.851602 -4.1515724,-4.151573 V 17.571937 c 0,-2.299971 1.8516014,-4.151573 4.1515724,-4.151573 z"
+       class="paper-ink" />
+    <g
+       transform="matrix(0.06448234,0,0,0.06366477,0.80234321,-9.0915273)"
+       type="COMPO"
+       id="c_12"
+       style="stroke:currentColor;stroke-width:44.2156;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       class="ink">
+      <path
+         style="fill-opacity:0;stroke:currentColor;stroke-width:44.2156;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         rough-pts="328.98087,408.0924 301.31787,419.7776 277.87195,437.89758 259.75192,461.34344 248.06677,489.0064 243.9253,519.7777 248.06677,550.5489 259.75195,578.2119 277.87195,601.65784 301.31784,619.7778 328.98087,631.463 359.7521,635.6045 390.52332,631.463 418.1863,619.77783 441.63226,601.65784 459.75226,578.21185 471.43744,550.5489 475.57892,519.7777 471.43744,489.00647 459.75238,461.3435 441.6324,437.89752 418.1863,419.77753 390.5233,408.0924 359.7521,403.95093 "
+         id="h_94"
+         d="m 328.9809,408.0924 c -49.0032,13.4969 -85.0556,58.42585 -85.0556,111.6853 0,63.9114 51.91543,115.8268 115.8268,115.8268 63.91138,0 115.82682,-51.9154 115.82682,-115.8268 0,-63.91137 -51.91544,-115.82677 -115.82682,-115.82677 -10.65188,0 -20.97054,1.44207 -30.7712,4.14147"
+         path-type="area"
+         class="lead-ink" />
+      <path
+         id="b_0"
+         style="fill:none;stroke-linecap:round;stroke-linejoin:round"
+         d="m 475.5789,519.77771 a 115.8268,115.8268 0 0 1 -115.82679,115.8268 115.8268,115.8268 0 0 1 -115.8268,-115.8268 115.8268,115.8268 0 0 1 115.8268,-115.8268 115.8268,115.8268 0 0 1 115.82679,115.8268 z" />
+    </g>
   </g>
 </svg>

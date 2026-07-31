@@ -2,74 +2,80 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="41"
-   height="41.899609"
    id="svg2985"
    version="1.1"
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:dc="http://purl.org/dc/elements/1.1/">
-  <style
-     id="current-color-scheme">.paper{color:#ffffff}.ink{color:#000080}</style>
   <defs
-     id="defs2987" />
-  <metadata
-     id="metadata2990">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
+     id="defs19" />
   <g
-     id="layer1"
-     transform="translate(-0.5,-10.600393)">
-    <path
-       id="rect3797"
-       style="fill:currentColor"
-       d="m 1,10.600393 h 40 v 40 H 1 Z"
-       class="paper" />
-    <path
-       style="fill:currentColor;stroke:none"
-       d="m 0.9999999,50.351934 v -7.34353 H 5.9999991 L 11,35.664876 l 5.000002,7.343528 9.999999,-14.687058 10,7.34353 L 41,43.008404 v 7.34353 z"
-       id="path3815"
-       class="ink" />
-    <path
-       id="path3778"
-       style="fill:none;stroke:currentColor;stroke-width:1.55;stroke-linecap:round;stroke-linejoin:round"
-       transform="matrix(1.2903225,0,0,1.2903226,-28.248385,-9.935484)"
-       d="m 26.000002,23.50341 a 2.5,2.5 0 0 1 2.494661,-2.503404 2.5,2.5 0 0 1 2.505326,2.49273 2.5,2.5 0 0 1 -2.490799,2.507247 2.5,2.5 0 0 1 -2.509165,-2.488866"
-       class="ink" />
+     transform="translate(0.6871,0.0000) scale(1.527461)"
+     id="g14">
+    <style id="current-color-scheme">.paper{color:#ffffff}.ink{color:#000080}</style>
+    <defs
+       id="defs2987" />
+    <metadata
+       id="metadata2990">
+      <rdf:RDF>
+        <cc:Work
+           rdf:about="">
+          <dc:format>image/svg+xml</dc:format>
+          <dc:type
+             rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+          <dc:title />
+        </cc:Work>
+      </rdf:RDF>
+    </metadata>
     <g
-       id="g3010"
-       style="stroke-width:2.47347;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none"
-       transform="matrix(0.8,0,0,0.817256,2.3722955,5.6764896)">
+       id="layer1"
+       transform="translate(-0.5,-10.600393)">
       <path
-         id="path3780"
-         d="m 42.909632,13.999999 -8,8"
-         style="fill:currentColor;stroke:currentColor;stroke-width:2.47347;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="rect3797"
+         style="fill:currentColor"
+         d="m 1,10.600393 h 40 v 40 H 1 Z"
+         class="paper" />
+      <path
+         style="fill:currentColor;stroke:none"
+         d="m 0.9999999,50.351934 v -7.34353 H 5.9999991 L 11,35.664876 l 5.000002,7.343528 9.999999,-14.687058 10,7.34353 L 41,43.008404 v 7.34353 z"
+         id="path3815"
          class="ink" />
       <path
-         id="path3782"
-         d="m 34.909632,13.999999 8,8"
-         style="fill:currentColor;stroke:currentColor;stroke-width:2.47347;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="path3778"
+         style="fill:none;stroke:currentColor;stroke-width:1.6367;stroke-linecap:round;stroke-linejoin:round"
+         transform="matrix(1.2903225,0,0,1.2903226,-28.248385,-9.935484)"
+         d="m 26.000002,23.50341 a 2.5,2.5 0 0 1 2.494661,-2.503404 2.5,2.5 0 0 1 2.505326,2.49273 2.5,2.5 0 0 1 -2.490799,2.507247 2.5,2.5 0 0 1 -2.509165,-2.488866"
+         class="ink" />
+      <g
+         id="g3010"
+         style="stroke-width:2.47347;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none"
+         transform="matrix(0.8,0,0,0.817256,2.3722955,5.6764896)">
+        <path
+           id="path3780"
+           d="m 42.909632,13.999999 -8,8"
+           style="fill:currentColor;stroke:currentColor;stroke-width:2.47347;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           class="ink" />
+        <path
+           id="path3782"
+           d="m 34.909632,13.999999 8,8"
+           style="fill:currentColor;stroke:currentColor;stroke-width:2.47347;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           class="ink" />
+      </g>
+      <path
+         id="rect2991"
+         style="fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round"
+         d="M 1,12 H 41 V 52 H 1 Z"
+         class="ink" />
+      <path
+         style="fill:currentColor;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 16.025807,24 h 10"
+         id="path2990"
          class="ink" />
     </g>
-    <path
-       id="rect2991"
-       style="fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round"
-       d="M 1,12 H 41 V 52 H 1 Z"
-       class="ink" />
-    <path
-       style="fill:currentColor;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 16.025807,24 h 10"
-       id="path2990"
-       class="ink" />
   </g>
 </svg>

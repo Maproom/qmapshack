@@ -1,46 +1,52 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
-   width="47.992886"
-   height="47.992886"
    background="#FFFFFF"
    version="1.1"
    id="svg29"
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:dc="http://purl.org/dc/elements/1.1/">
-  <style
-     id="current-color-scheme">.ink{color:#000080}.paper{color:#ffffff}</style>
-  <metadata
-     id="metadata35">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
   <defs
-     id="defs33" />
-  <path
-     id="rect4567"
-     style="opacity:1;fill:currentColor;stroke:currentColor;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:20;paint-order:fill markers stroke"
-     d="M 0.60000002,0.60000002 H 47.392885 V 47.392885 H 0.60000002 Z"
-     class="ink" />
+     id="defs14" />
   <g
-     type="COMPO"
-     id="c_1"
-     transform="translate(-0.05658597,-1232.1399)" />
-  <g
-     id="layer1"
-     transform="translate(-0.05658597,-0.13991917)" />
-  <path
-     style="fill:currentColor;fill-opacity:0.941176;stroke:none;stroke-width:1.02066px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-     d="M 1.4952293,46.250892 V 32.207447 L 6.6416336,23.060742 22.319751,39.651714 13.549357,26.191879 25.819815,11.761846 l 6.633255,6.740193 -5.458282,7.878586 11.449113,-9.57324 7.934172,7.92225 V 46.360081 H 1.3780734"
-     id="path2266"
-     class="paper" />
+     transform="translate(0.0000,0.0000) scale(1.333531)"
+     id="g9">
+    <style id="current-color-scheme">.ink{color:#000080}.paper{color:#ffffff}</style>
+    <metadata
+       id="metadata35">
+      <rdf:RDF>
+        <cc:Work
+           rdf:about="">
+          <dc:format>image/svg+xml</dc:format>
+          <dc:type
+             rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+          <dc:title />
+        </cc:Work>
+      </rdf:RDF>
+    </metadata>
+    <defs
+       id="defs33" />
+    <path
+       id="rect4567"
+       style="opacity:1;fill:currentColor;stroke:currentColor;stroke-width:1.8747;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:20;paint-order:fill markers stroke"
+       d="M 0.60000002,0.60000002 H 47.392885 V 47.392885 H 0.60000002 Z"
+       class="ink" />
+    <g
+       type="COMPO"
+       id="c_1"
+       transform="translate(-0.05658597,-1232.1399)" />
+    <g
+       id="layer1"
+       transform="translate(-0.05658597,-0.13991917)" />
+    <path
+       style="fill:currentColor;fill-opacity:0.941176;stroke:none;stroke-width:1.02066px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 1.4952293,46.250892 V 32.207447 L 6.6416336,23.060742 22.319751,39.651714 13.549357,26.191879 25.819815,11.761846 l 6.633255,6.740193 -5.458282,7.878586 11.449113,-9.57324 7.934172,7.92225 V 46.360081 H 1.3780734"
+       id="path2266"
+       class="paper" />
+  </g>
 </svg>

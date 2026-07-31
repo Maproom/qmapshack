@@ -2,82 +2,88 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="40"
-   height="40"
    id="svg3513"
    version="1.1"
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:dc="http://purl.org/dc/elements/1.1/">
-  <style
-     id="current-color-scheme">.ink-lead{fill:#000080;color:#000000}.lead{color:#000000}</style>
   <defs
-     id="defs3515" />
-  <metadata
-     id="metadata3518">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
+     id="defs22" />
   <g
-     id="layer1"
-     transform="translate(-11.272725,-13.999998)">
+     transform="translate(0.0000,0.0000) scale(1.600000)"
+     id="g17">
+    <style id="current-color-scheme">.ink-lead{fill:#000080;color:#000000}.lead{color:#000000}</style>
+    <defs
+       id="defs3515" />
+    <metadata
+       id="metadata3518">
+      <rdf:RDF>
+        <cc:Work
+           rdf:about="">
+          <dc:format>image/svg+xml</dc:format>
+          <dc:type
+             rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+          <dc:title />
+        </cc:Work>
+      </rdf:RDF>
+    </metadata>
     <g
-       id="g338">
-      <path
-         id="rect4151"
-         style="fill:none"
-         d="m 11.272725,13.999998 h 40 v 40 h -40 z" />
+       id="layer1"
+       transform="translate(-11.272725,-13.999998)">
       <g
-         id="g267">
+         id="g338">
         <path
-           style="stroke:currentColor;stroke-width:2.1996;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           d="M 17.29422,49.40437 28.47703,16.95553 45.25123,33.17995 H 22.88562"
-           id="path3325"
-           class="ink-lead" />
-        <path
-           style="stroke:currentColor;stroke-width:0.364801px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-           d="m 40.308356,46.81617 2.616007,-2.543564 2.616005,2.543564 v -7.630687 h -7.848016 l 2.616004,2.543563 -5.232009,5.087124 -2.616006,-2.543564 v 7.630688 h 7.848015 l -2.616004,-2.54356 z"
-           id="path2996"
-           class="ink-lead" />
-      </g>
-    </g>
-    <g
-       transform="translate(-324.71757,-203.39786)"
-       id="g3357"
-       style="display:none">
-      <g
-         transform="translate(-9.5898438e-6,-0.82004497)"
-         id="g3352">
-        <path
-           style="stroke:currentColor;stroke-width:2.1996;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           d="m 342.0118,253.62227 11.18281,-32.44884 16.7742,16.22442 H 347.6032"
-           id="path3325-3"
-           class="ink-lead" />
+           id="rect4151"
+           style="fill:none"
+           d="m 11.272725,13.999998 h 40 v 40 h -40 z" />
         <g
-           aria-label="T"
-           transform="scale(1.1269651,0.88733893)"
-           id="text3177-7-9"
-           style="line-height:0%;font-family:'Droid Sans';-inkscape-font-specification:'Droid Sans';letter-spacing:0px;word-spacing:0px">
+           id="g267">
           <path
-             d="m 322.01001,288.91122 h -3.26491 v -12.71367 h -4.19465 v -2.72436 h 11.6542 v 2.72436 h -4.19464 z"
-             style="font-weight:bold;font-size:21.6219px;line-height:125%;font-family:Utopia;-inkscape-font-specification:'Utopia Bold';fill:currentColor"
-             id="path24"
-             class="lead" />
+             style="stroke:currentColor;stroke-width:2.1996;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             d="M 17.29422,49.40437 28.47703,16.95553 45.25123,33.17995 H 22.88562"
+             id="path3325"
+             class="ink-lead" />
+          <path
+             style="stroke:currentColor;stroke-width:1.5625;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+             d="m 40.308356,46.81617 2.616007,-2.543564 2.616005,2.543564 v -7.630687 h -7.848016 l 2.616004,2.543563 -5.232009,5.087124 -2.616006,-2.543564 v 7.630688 h 7.848015 l -2.616004,-2.54356 z"
+             id="path2996"
+             class="ink-lead" />
         </g>
       </g>
-      <path
-         id="rect4151-6"
-         style="fill:none"
-         d="m 335.9903,217.39786 h 40 v 40 h -40 z" />
+      <g
+         transform="translate(-324.71757,-203.39786)"
+         id="g3357"
+         style="display:none">
+        <g
+           transform="translate(-9.5898438e-6,-0.82004497)"
+           id="g3352">
+          <path
+             style="stroke:currentColor;stroke-width:2.1996;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             d="m 342.0118,253.62227 11.18281,-32.44884 16.7742,16.22442 H 347.6032"
+             id="path3325-3"
+             class="ink-lead" />
+          <g
+             aria-label="T"
+             transform="scale(1.1269651,0.88733893)"
+             id="text3177-7-9"
+             style="line-height:0%;font-family:'Droid Sans';-inkscape-font-specification:'Droid Sans';letter-spacing:0px;word-spacing:0px">
+            <path
+               d="m 322.01001,288.91122 h -3.26491 v -12.71367 h -4.19465 v -2.72436 h 11.6542 v 2.72436 h -4.19464 z"
+               style="font-weight:bold;font-size:21.6219px;line-height:125%;font-family:Utopia;-inkscape-font-specification:'Utopia Bold';fill:currentColor"
+               id="path24"
+               class="lead" />
+          </g>
+        </g>
+        <path
+           id="rect4151-6"
+           style="fill:none"
+           d="m 335.9903,217.39786 h 40 v 40 h -40 z" />
+      </g>
     </g>
   </g>
 </svg>

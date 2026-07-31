@@ -2,47 +2,53 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="61.48579"
-   height="63.489178"
    id="svg2"
    version="1.1"
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:dc="http://purl.org/dc/elements/1.1/">
-  <style
-     id="current-color-scheme">.ink{color:#000080}.paper{color:#ffffff}</style>
   <defs
-     id="defs4" />
-  <metadata
-     id="metadata7">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
+     id="defs14" />
   <g
-     id="layer1"
-     transform="translate(-1.539822,-989.00345)">
+     transform="translate(1.0098,0.0000) scale(1.008045)"
+     id="g9">
+    <style id="current-color-scheme">.ink{color:#000080}.paper{color:#ffffff}</style>
+    <defs
+       id="defs4" />
+    <metadata
+       id="metadata7">
+      <rdf:RDF>
+        <cc:Work
+           rdf:about="">
+          <dc:format>image/svg+xml</dc:format>
+          <dc:type
+             rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+          <dc:title />
+        </cc:Work>
+      </rdf:RDF>
+    </metadata>
     <g
-       id="g4594"
-       transform="matrix(1.8321266,0,0,1.0760874,-25.942077,-79.941076)">
-      <path
-         id="path4661"
-         d="m 35,993.36218 c -6,21.00002 10,18.00002 9,38.00002 1,-1 0.07758,-3.0776 4,-7 -2.282872,4.5657 4,8 -2.448622,19.8886 C 44.01654,1047.0805 39,1052.3622 33,1052.3622 c -12,0 -16,-15 -16,-22 0,-9 2,-11 -2,-18 3,1 5.172633,1.2762 9,4.4488 2,-6.4488 1,-8.4488 11,-23.44882 z"
-         style="fill:currentColor;fill-opacity:1;stroke:none;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         class="ink" />
-      <path
-         id="path4661-0"
-         d="m 35,1017.8622 c -5,14.5 6,13.5 6,21.5 0,6 -1.879845,10.752 -8,11 -6,0 -9,-7.5 -9,-11 -0.739778,-10.187 2,-13 11,-21.5 z"
-         style="fill:currentColor;fill-opacity:1;stroke:none;stroke-width:0.4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         class="paper" />
+       id="layer1"
+       transform="translate(-1.539822,-989.00345)">
+      <g
+         id="g4594"
+         transform="matrix(1.8321266,0,0,1.0760874,-25.942077,-79.941076)">
+        <path
+           id="path4661"
+           d="m 35,993.36218 c -6,21.00002 10,18.00002 9,38.00002 1,-1 0.07758,-3.0776 4,-7 -2.282872,4.5657 4,8 -2.448622,19.8886 C 44.01654,1047.0805 39,1052.3622 33,1052.3622 c -12,0 -16,-15 -16,-22 0,-9 2,-11 -2,-18 3,1 5.172633,1.2762 9,4.4488 2,-6.4488 1,-8.4488 11,-23.44882 z"
+           style="fill:currentColor;fill-opacity:1;stroke:none;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           class="ink" />
+        <path
+           id="path4661-0"
+           d="m 35,1017.8622 c -5,14.5 6,13.5 6,21.5 0,6 -1.879845,10.752 -8,11 -6,0 -9,-7.5 -9,-11 -0.739778,-10.187 2,-13 11,-21.5 z"
+           style="fill:currentColor;fill-opacity:1;stroke:none;stroke-width:0.4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           class="paper" />
+      </g>
     </g>
   </g>
 </svg>

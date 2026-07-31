@@ -2,44 +2,50 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="34.681808"
-   height="34.99984"
    id="svg3513"
    version="1.1"
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:dc="http://purl.org/dc/elements/1.1/">
-  <style
-     id="current-color-scheme">.ink-lead{fill:#000080;color:#000000}</style>
   <defs
-     id="defs3515" />
-  <metadata
-     id="metadata3518">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
+     id="defs13" />
   <g
-     id="layer1"
-     transform="translate(-19.545454,-10.136443)">
-    <path
-       style="stroke:currentColor;stroke-width:1.01765;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 35.00882,20.354429 h 4.550623 v -9.70925 l 14.15901,16.90607 -14.15901,17.0763 v -9.70925 H 35.00882 v -14.56387"
-       id="path3052-5"
-       class="ink-lead" />
-    <path
-       id="path3008"
-       style="fill-rule:evenodd;stroke:currentColor"
-       transform="matrix(0.90909091,0,0,0.90909091,1.8181818,-0.09090876)"
-       d="m 31,30.5 a 5.5,5.5 0 0 1 -5.494202,5.499997 5.5,5.5 0 0 1 -5.505786,-5.488402 5.5,5.5 0 0 1 5.482595,-5.511567 5.5,5.5 0 0 1 5.517344,5.476782"
-       class="ink-lead" />
+     transform="translate(0.2907,-0.0000) scale(1.828582)"
+     id="g8">
+    <style id="current-color-scheme">.ink-lead{fill:#000080;color:#000000}</style>
+    <defs
+       id="defs3515" />
+    <metadata
+       id="metadata3518">
+      <rdf:RDF>
+        <cc:Work
+           rdf:about="">
+          <dc:format>image/svg+xml</dc:format>
+          <dc:type
+             rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+          <dc:title />
+        </cc:Work>
+      </rdf:RDF>
+    </metadata>
+    <g
+       id="layer1"
+       transform="translate(-19.545454,-10.136443)">
+      <path
+         style="stroke:currentColor;stroke-width:1.3672;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 35.00882,20.354429 h 4.550623 v -9.70925 l 14.15901,16.90607 -14.15901,17.0763 v -9.70925 H 35.00882 v -14.56387"
+         id="path3052-5"
+         class="ink-lead" />
+      <path
+         id="path3008"
+         style="fill-rule:evenodd;stroke:currentColor"
+         transform="matrix(0.90909091,0,0,0.90909091,1.8181818,-0.09090876)"
+         d="m 31,30.5 a 5.5,5.5 0 0 1 -5.494202,5.499997 5.5,5.5 0 0 1 -5.505786,-5.488402 5.5,5.5 0 0 1 5.482595,-5.511567 5.5,5.5 0 0 1 5.517344,5.476782"
+         class="ink-lead" />
+    </g>
   </g>
 </svg>

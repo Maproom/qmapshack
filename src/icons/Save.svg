@@ -2,57 +2,63 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="40"
-   height="39.999954"
    id="svg2"
    version="1.1"
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:dc="http://purl.org/dc/elements/1.1/">
-  <style
-     id="current-color-scheme">.ink-mark{fill:#000080;color:#0000ff}.paper-mark{fill:#cccccc;color:#0000ff}.paper2-mark{fill:#ececec;color:#0000ff}</style>
   <defs
-     id="defs4" />
-  <metadata
-     id="metadata7">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
+     id="defs16" />
   <g
-     id="layer1"
-     transform="translate(-11.995041,-997.79733)">
+     transform="translate(0.0000,0.0000) scale(1.600000)"
+     id="g11">
+    <style id="current-color-scheme">.ink-mark{fill:#000080;color:#5555ff}.paper-mark{fill:#cccccc;color:#5555ff}.paper2-mark{fill:#ececec;color:#5555ff}</style>
+    <defs
+       id="defs4" />
+    <metadata
+       id="metadata7">
+      <rdf:RDF>
+        <cc:Work
+           rdf:about="">
+          <dc:format>image/svg+xml</dc:format>
+          <dc:type
+             rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+          <dc:title />
+        </cc:Work>
+      </rdf:RDF>
+    </metadata>
     <g
-       id="g4549"
-       transform="matrix(1.3333333,0,0,1.3333335,78.423613,-333.00436)">
-      <path
-         id="rect3366-5"
-         style="stroke:currentColor;stroke-width:0;stroke-linecap:round;stroke-linejoin:round"
-         d="m -49.82143,998.10114 h 30 v 29.99996 h -30 z"
-         class="ink-mark" />
-      <path
-         id="rect4136-7"
-         style="stroke:currentColor;stroke-width:0;stroke-linecap:round;stroke-linejoin:round"
-         d="m -44.464287,1017.6011 h 19.5 v 10.5 h -19.5 z"
-         class="paper-mark" />
-      <path
-         id="rect4138-5"
-         style="stroke:currentColor;stroke-width:0;stroke-linecap:round;stroke-linejoin:round"
-         d="m -40.067711,1020.2748 h 3.853426 v 5.0856 h -3.853426 z"
-         class="ink-mark" />
-      <path
-         id="rect4145-7"
-         style="stroke:currentColor;stroke-width:0;stroke-linecap:round;stroke-linejoin:round"
-         d="m -45.793831,1000.1259 h 21.9448 v 14.0508 h -21.9448 z"
-         class="paper2-mark" />
+       id="layer1"
+       transform="translate(-11.995041,-997.79733)">
+      <g
+         id="g4549"
+         transform="matrix(1.3333333,0,0,1.3333335,78.423613,-333.00436)">
+        <path
+           id="rect3366-5"
+           style="stroke:currentColor;stroke-width:0;stroke-linecap:round;stroke-linejoin:round"
+           d="m -49.82143,998.10114 h 30 v 29.99996 h -30 z"
+           class="ink-mark" />
+        <path
+           id="rect4136-7"
+           style="stroke:currentColor;stroke-width:0;stroke-linecap:round;stroke-linejoin:round"
+           d="m -44.464287,1017.6011 h 19.5 v 10.5 h -19.5 z"
+           class="paper-mark" />
+        <path
+           id="rect4138-5"
+           style="stroke:currentColor;stroke-width:0;stroke-linecap:round;stroke-linejoin:round"
+           d="m -40.067711,1020.2748 h 3.853426 v 5.0856 h -3.853426 z"
+           class="ink-mark" />
+        <path
+           id="rect4145-7"
+           style="stroke:currentColor;stroke-width:0;stroke-linecap:round;stroke-linejoin:round"
+           d="m -45.793831,1000.1259 h 21.9448 v 14.0508 h -21.9448 z"
+           class="paper2-mark" />
+      </g>
     </g>
   </g>
 </svg>

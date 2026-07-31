@@ -2,47 +2,53 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="58.513855"
-   height="58.770519"
    id="svg2"
    version="1.1"
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:dc="http://purl.org/dc/elements/1.1/">
-  <style
-     id="current-color-scheme">.ink{color:#000080}</style>
   <defs
-     id="defs4" />
-  <metadata
-     id="metadata7">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
+     id="defs14" />
   <g
-     id="layer1"
-     transform="translate(-2.7470193,-990.84218)">
-    <path
-       id="rect4136"
-       style="opacity:1;fill:none;stroke-width:5.49369;stroke-linecap:round"
-       d="M 2.7470193,991.11139 H 61.260874 v 58.50131 H 2.7470193 Z" />
+     transform="translate(0.1397,-0.0000) scale(1.088982)"
+     id="g9">
+    <style id="current-color-scheme">.ink{color:#000080}</style>
+    <defs
+       id="defs4" />
+    <metadata
+       id="metadata7">
+      <rdf:RDF>
+        <cc:Work
+           rdf:about="">
+          <dc:format>image/svg+xml</dc:format>
+          <dc:type
+             rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+          <dc:title />
+        </cc:Work>
+      </rdf:RDF>
+    </metadata>
     <g
-       aria-label="?"
-       id="text4137"
-       style="line-height:0%;font-family:'Asana Math';-inkscape-font-specification:'Asana Math';letter-spacing:0px;word-spacing:0px;fill:currentColor;stroke-width:1px"
-       class="ink">
+       id="layer1"
+       transform="translate(-2.7470193,-990.84218)">
       <path
-         d="m 26.84,1026.0422 c 0,2.4 1.12,4.32 3.52,5.84 l 1.68,-1.12 c -1.28,-1.52 -1.76,-2.56 -1.76,-3.84 0,-2.64 1.04,-4 7.52,-9.84 6.8,-6.24 8.8,-9.36 8.8,-13.92 0,-6.96002 -6.32,-12.32002 -14.56,-12.32002 -3.52,0 -6.32,0.72 -10.56,2.8 l -3.04,9.04002 2.32,0.64 1.6,-3.84002 c 0.88,-2.16 3.36,-3.36 6.96,-3.36 5.76,0 9.84,3.6 9.84,8.72002 0,8.24 -12.32,14 -12.32,21.2 z m 4,11.44 c -2.4,0 -4.56,2.24 -4.56,4.64 0,2.4 2.16,4.64 4.48,4.64 2.56,0 4.8,-2.16 4.8,-4.64 0,-2.4 -2.24,-4.64 -4.72,-4.64 z"
-         style="font-size:80px;line-height:1.25"
-         id="path12" />
+         id="rect4136"
+         style="opacity:1;fill:none;stroke-width:5.49369;stroke-linecap:round"
+         d="M 2.7470193,991.11139 H 61.260874 v 58.50131 H 2.7470193 Z" />
+      <g
+         aria-label="?"
+         id="text4137"
+         style="line-height:0%;font-family:'Asana Math';-inkscape-font-specification:'Asana Math';letter-spacing:0px;word-spacing:0px;fill:currentColor;stroke-width:1px"
+         class="ink">
+        <path
+           d="m 26.84,1026.0422 c 0,2.4 1.12,4.32 3.52,5.84 l 1.68,-1.12 c -1.28,-1.52 -1.76,-2.56 -1.76,-3.84 0,-2.64 1.04,-4 7.52,-9.84 6.8,-6.24 8.8,-9.36 8.8,-13.92 0,-6.96002 -6.32,-12.32002 -14.56,-12.32002 -3.52,0 -6.32,0.72 -10.56,2.8 l -3.04,9.04002 2.32,0.64 1.6,-3.84002 c 0.88,-2.16 3.36,-3.36 6.96,-3.36 5.76,0 9.84,3.6 9.84,8.72002 0,8.24 -12.32,14 -12.32,21.2 z m 4,11.44 c -2.4,0 -4.56,2.24 -4.56,4.64 0,2.4 2.16,4.64 4.48,4.64 2.56,0 4.8,-2.16 4.8,-4.64 0,-2.4 -2.24,-4.64 -4.72,-4.64 z"
+           style="font-size:80px;line-height:1.25"
+           id="path12" />
+      </g>
     </g>
   </g>
 </svg>

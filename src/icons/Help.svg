@@ -2,53 +2,58 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   viewBox="0 0 40.261303 40.26131"
-   width="48.000004"
-   height="48.000011"
    id="svg3513"
    version="1.1"
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:dc="http://purl.org/dc/elements/1.1/">
-  <style
-     id="current-color-scheme">.ink-lead{fill:#000080;color:#000000}.paper{color:#ececec}</style>
   <defs
-     id="defs3515" />
-  <metadata
-     id="metadata3518">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
+     id="defs15" />
   <g
-     id="layer1"
-     transform="translate(-11.505717,-9.8693431)">
+     transform="translate(-0.0000,-0.0000) scale(1.589616)"
+     id="g10">
+    <style id="current-color-scheme">.ink-lead{fill:#000080;color:#000000}.paper{color:#ececec}</style>
+    <defs
+       id="defs3515" />
+    <metadata
+       id="metadata3518">
+      <rdf:RDF>
+        <cc:Work
+           rdf:about="">
+          <dc:format>image/svg+xml</dc:format>
+          <dc:type
+             rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+          <dc:title />
+        </cc:Work>
+      </rdf:RDF>
+    </metadata>
     <g
-       transform="translate(-479.28961,-211.16258)"
-       id="g4143">
-      <path
-         id="path3351"
-         style="stroke:currentColor;stroke-width:1.35374;stroke-linecap:round;stroke-linejoin:round"
-         transform="matrix(0.73869422,0,0,0.73869422,360.4243,6.9034532)"
-         d="m 230.31496,317.12598 a 26.574802,26.574802 0 0 1 -26.5748,26.5748 26.574802,26.574802 0 0 1 -26.5748,-26.5748 26.574802,26.574802 0 0 1 26.5748,-26.57481 26.574802,26.574802 0 0 1 26.5748,26.57481 z"
-         class="ink-lead" />
+       id="layer1"
+       transform="translate(-11.505717,-9.8693431)">
       <g
-         aria-label="?"
-         id="text3353"
-         style="line-height:0%;font-family:'Droid Sans';-inkscape-font-specification:'Droid Sans';letter-spacing:0px;word-spacing:0px;fill:currentColor"
-         class="paper">
+         transform="translate(-479.28961,-211.16258)"
+         id="g4143">
         <path
-           d="m 507.43925,244.46133 q 0,-2 0.84,-3.36 0.84,-1.36 2.88,-2.84 1.8,-1.28 2.56,-2.2 0.8,-0.96 0.8,-2.24 0,-1.28 -0.96,-1.92 -0.92,-0.68 -2.6,-0.68 -1.68,0 -3.32,0.52 -1.64,0.52 -3.36,1.4 l -2.12,-4.28 q 1.96,-1.08 4.24,-1.76 2.28,-0.68 5,-0.68 4.16,0 6.44,2 2.32,2 2.32,5.08 0,1.64 -0.52,2.84 -0.52,1.2 -1.56,2.24 -1.04,1 -2.6,2.16 -1.16,0.84 -1.8,1.44 -0.64,0.6 -0.88,1.16 -0.2,0.56 -0.2,1.4 v 1.16 h -5.16 z m -0.64,8.12 q 0,-1.84 1,-2.56 1,-0.76 2.44,-0.76 1.4,0 2.4,0.76 1,0.72 1,2.56 0,1.76 -1,2.56 -1,0.76 -2.4,0.76 -1.44,0 -2.44,-0.76 -1,-0.8 -1,-2.56 z"
-           style="font-weight:bold;font-size:40px;line-height:125%;-inkscape-font-specification:'Droid Sans Bold'"
-           id="path16" />
+           id="path3351"
+           style="stroke:currentColor;stroke-width:1.5727;stroke-linecap:round;stroke-linejoin:round"
+           transform="matrix(0.73869422,0,0,0.73869422,360.4243,6.9034532)"
+           d="m 230.31496,317.12598 a 26.574802,26.574802 0 0 1 -26.5748,26.5748 26.574802,26.574802 0 0 1 -26.5748,-26.5748 26.574802,26.574802 0 0 1 26.5748,-26.57481 26.574802,26.574802 0 0 1 26.5748,26.57481 z"
+           class="ink-lead" />
+        <g
+           aria-label="?"
+           id="text3353"
+           style="line-height:0%;font-family:'Droid Sans';-inkscape-font-specification:'Droid Sans';letter-spacing:0px;word-spacing:0px;fill:currentColor"
+           class="paper">
+          <path
+             d="m 507.43925,244.46133 q 0,-2 0.84,-3.36 0.84,-1.36 2.88,-2.84 1.8,-1.28 2.56,-2.2 0.8,-0.96 0.8,-2.24 0,-1.28 -0.96,-1.92 -0.92,-0.68 -2.6,-0.68 -1.68,0 -3.32,0.52 -1.64,0.52 -3.36,1.4 l -2.12,-4.28 q 1.96,-1.08 4.24,-1.76 2.28,-0.68 5,-0.68 4.16,0 6.44,2 2.32,2 2.32,5.08 0,1.64 -0.52,2.84 -0.52,1.2 -1.56,2.24 -1.04,1 -2.6,2.16 -1.16,0.84 -1.8,1.44 -0.64,0.6 -0.88,1.16 -0.2,0.56 -0.2,1.4 v 1.16 h -5.16 z m -0.64,8.12 q 0,-1.84 1,-2.56 1,-0.76 2.44,-0.76 1.4,0 2.4,0.76 1,0.72 1,2.56 0,1.76 -1,2.56 -1,0.76 -2.4,0.76 -1.44,0 -2.44,-0.76 -1,-0.8 -1,-2.56 z"
+             style="font-weight:bold;font-size:40px;line-height:125%;-inkscape-font-specification:'Droid Sans Bold'"
+             id="path16" />
+        </g>
       </g>
     </g>
   </g>

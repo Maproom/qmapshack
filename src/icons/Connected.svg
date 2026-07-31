@@ -2,85 +2,91 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="63.161243"
-   height="63.16124"
    id="svg3513"
    version="1.1"
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:dc="http://purl.org/dc/elements/1.1/">
-  <style
-     id="current-color-scheme">.ink{color:#000080}</style>
   <defs
-     id="defs3515" />
-  <metadata
-     id="metadata3518">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
+     id="defs22" />
   <g
-     id="layer1"
-     transform="translate(-0.5133792,-0.50431225)">
+     transform="translate(-0.0000,-0.0000) scale(1.013280)"
+     id="g17">
+    <style id="current-color-scheme">.ink{color:#000080}</style>
+    <defs
+       id="defs3515" />
+    <metadata
+       id="metadata3518">
+      <rdf:RDF>
+        <cc:Work
+           rdf:about="">
+          <dc:format>image/svg+xml</dc:format>
+          <dc:type
+             rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+          <dc:title />
+        </cc:Work>
+      </rdf:RDF>
+    </metadata>
     <g
-       id="g1029"
-       transform="translate(-0.75,1)">
+       id="layer1"
+       transform="translate(-0.5133792,-0.50431225)">
       <g
-         id="g1017">
+         id="g1029"
+         transform="translate(-0.75,1)">
         <g
-           id="g977">
-          <path
-             id="rect851"
-             style="fill:currentColor;stroke:currentColor;stroke-linecap:round;stroke-linejoin:bevel"
-             transform="rotate(135)"
-             d="m 27.917894,-50.204582 h 10 v 10 h -10 z"
-             class="ink" />
-          <path
-             id="path841"
-             d="M 46.606602,45.606603 18.32233,17.322331 l -6.997871,6.997871 -0.0732,0.0732 0.0014,0.0014 A 20,20 0 0 0 6.059828,43.657916 20,20 0 0 0 20.207488,57.852533 20,20 0 0 0 39.534153,52.67629 l 0.0014,0.0014 0.02624,-0.02624 z"
-             style="fill:currentColor;stroke:currentColor;stroke-width:1;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none"
-             class="ink" />
-          <path
-             id="rect896"
-             style="fill:currentColor;stroke:currentColor;stroke-linecap:round;stroke-linejoin:bevel"
-             transform="rotate(135)"
-             d="m -3.0821059,-70.204582 h 4.00000002 v 50 H -3.0821059 Z"
-             class="ink" />
+           id="g1017">
+          <g
+             id="g977">
+            <path
+               id="rect851"
+               style="fill:currentColor;stroke:currentColor;stroke-linecap:round;stroke-linejoin:bevel"
+               transform="rotate(135)"
+               d="m 27.917894,-50.204582 h 10 v 10 h -10 z"
+               class="ink" />
+            <path
+               id="path841"
+               d="M 46.606602,45.606603 18.32233,17.322331 l -6.997871,6.997871 -0.0732,0.0732 0.0014,0.0014 A 20,20 0 0 0 6.059828,43.657916 20,20 0 0 0 20.207488,57.852533 20,20 0 0 0 39.534153,52.67629 l 0.0014,0.0014 0.02624,-0.02624 z"
+               style="fill:currentColor;stroke:currentColor;stroke-width:2.4672;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none"
+               class="ink" />
+            <path
+               id="rect896"
+               style="fill:currentColor;stroke:currentColor;stroke-linecap:round;stroke-linejoin:bevel"
+               transform="rotate(135)"
+               d="m -3.0821059,-70.204582 h 4.00000002 v 50 H -3.0821059 Z"
+               class="ink" />
+          </g>
+          <g
+             transform="rotate(180,32.844,31.084933)"
+             id="g977-3">
+            <path
+               id="rect851-6"
+               style="fill:currentColor;stroke:currentColor;stroke-linecap:round;stroke-linejoin:bevel"
+               transform="rotate(135)"
+               d="m 27.917894,-50.204582 h 10 v 10 h -10 z"
+               class="ink" />
+            <path
+               id="path841-7"
+               d="M 46.606602,45.606603 18.32233,17.322331 l -6.997871,6.997871 -0.0732,0.0732 0.0014,0.0014 A 20,20 0 0 0 6.059828,43.657916 20,20 0 0 0 20.207488,57.852533 20,20 0 0 0 39.534153,52.67629 l 0.0014,0.0014 0.02624,-0.02624 z"
+               style="fill:currentColor;stroke:currentColor;stroke-width:2.4672;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none"
+               class="ink" />
+            <path
+               id="rect896-5"
+               style="fill:currentColor;stroke:currentColor;stroke-linecap:round;stroke-linejoin:bevel"
+               transform="rotate(135)"
+               d="m -3.0821059,-70.204582 h 4.00000002 v 50 H -3.0821059 Z"
+               class="ink" />
+          </g>
         </g>
-        <g
-           transform="rotate(180,32.844,31.084933)"
-           id="g977-3">
-          <path
-             id="rect851-6"
-             style="fill:currentColor;stroke:currentColor;stroke-linecap:round;stroke-linejoin:bevel"
-             transform="rotate(135)"
-             d="m 27.917894,-50.204582 h 10 v 10 h -10 z"
-             class="ink" />
-          <path
-             id="path841-7"
-             d="M 46.606602,45.606603 18.32233,17.322331 l -6.997871,6.997871 -0.0732,0.0732 0.0014,0.0014 A 20,20 0 0 0 6.059828,43.657916 20,20 0 0 0 20.207488,57.852533 20,20 0 0 0 39.534153,52.67629 l 0.0014,0.0014 0.02624,-0.02624 z"
-             style="fill:currentColor;stroke:currentColor;stroke-width:1;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none"
-             class="ink" />
-          <path
-             id="rect896-5"
-             style="fill:currentColor;stroke:currentColor;stroke-linecap:round;stroke-linejoin:bevel"
-             transform="rotate(135)"
-             d="m -3.0821059,-70.204582 h 4.00000002 v 50 H -3.0821059 Z"
-             class="ink" />
-        </g>
+        <path
+           id="path3016"
+           d="m 37.93023,20.959849 1.408093,4.599818 7.304196,3.238115 -14.126086,1.945239 9.199636,2.816183 -22.670589,7.650813 9.262083,-8.119774 -5.084653,-2.065564 z"
+           style="fill:#ffff00;stroke:none" />
       </g>
-      <path
-         id="path3016"
-         d="m 37.93023,20.959849 1.408093,4.599818 7.304196,3.238115 -14.126086,1.945239 9.199636,2.816183 -22.670589,7.650813 9.262083,-8.119774 -5.084653,-2.065564 z"
-         style="fill:#ffff00;stroke:none" />
     </g>
   </g>
 </svg>

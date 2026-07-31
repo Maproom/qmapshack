@@ -2,90 +2,96 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="64"
-   height="64"
    id="svg3513"
    version="1.1"
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:dc="http://purl.org/dc/elements/1.1/">
-  <style
-     id="current-color-scheme">.ink-lead{fill:#000080;color:#000000}.paper-lead{fill:#ffffff;color:#000000}.ink{color:#000080}</style>
   <defs
-     id="defs3515" />
-  <metadata
-     id="metadata3518">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
+     id="defs23" />
   <g
-     id="layer1">
-    <path
-       id="rect4284"
-       style="opacity:1;fill:none;stroke-width:10;stroke-linecap:square;stroke-linejoin:round"
-       d="M 0,0 H 64 V 64 H 0 Z" />
-    <path
-       id="rect4325"
-       style="stroke:currentColor;stroke-linecap:round;stroke-linejoin:round"
-       d="M 6.5454545,1.8181819 H 61.545455 V 12.818182 H 6.5454545 Z"
-       class="ink-lead" />
-    <path
-       id="rect4327"
-       style="stroke:currentColor;stroke-linecap:round;stroke-linejoin:round"
-       d="M 6.5454545,13 H 61.545455 v 8 H 6.5454545 Z"
-       class="paper-lead" />
-    <path
-       id="rect4327-9"
-       style="stroke:currentColor;stroke-linecap:round;stroke-linejoin:round"
-       d="M 6.5454545,21 H 61.545455 v 8 H 6.5454545 Z"
-       class="paper-lead" />
-    <path
-       id="rect4327-1"
-       style="stroke:currentColor;stroke-linecap:round;stroke-linejoin:round"
-       d="M 6.5454545,29 H 61.545455 v 8 H 6.5454545 Z"
-       class="paper-lead" />
-    <path
-       id="rect4327-5"
-       style="stroke:currentColor;stroke-linecap:round;stroke-linejoin:round"
-       d="M 6.5454545,37 H 61.545455 v 8 H 6.5454545 Z"
-       class="paper-lead" />
-    <path
-       id="rect4327-0"
-       style="stroke:currentColor;stroke-linecap:round;stroke-linejoin:round"
-       d="M 6.5454545,45 H 61.545455 v 8 H 6.5454545 Z"
-       class="paper-lead" />
+     transform="translate(0.0000,0.0000) scale(1.000000)"
+     id="g18">
+    <style id="current-color-scheme">.ink-lead{fill:#000080;color:#000000}.paper-lead{fill:#ffffff;color:#000000}.ink{color:#000080}</style>
+    <defs
+       id="defs3515" />
+    <metadata
+       id="metadata3518">
+      <rdf:RDF>
+        <cc:Work
+           rdf:about="">
+          <dc:format>image/svg+xml</dc:format>
+          <dc:type
+             rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+          <dc:title />
+        </cc:Work>
+      </rdf:RDF>
+    </metadata>
     <g
-       id="g4362"
-       transform="translate(20)">
+       id="layer1">
       <path
-         id="path4300-7"
-         d="M 13.798528,48.863636 V 19.227273"
-         style="fill:none;fill-rule:evenodd;stroke:currentColor;stroke-width:6;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         class="ink" />
+         id="rect4284"
+         style="opacity:1;fill:none;stroke-width:10;stroke-linecap:square;stroke-linejoin:round"
+         d="M 0,0 H 64 V 64 H 0 Z" />
+      <path
+         id="rect4325"
+         style="stroke:currentColor;stroke-linecap:round;stroke-linejoin:round"
+         d="M 6.5454545,1.8181819 H 61.545455 V 12.818182 H 6.5454545 Z"
+         class="ink-lead" />
+      <path
+         id="rect4327"
+         style="stroke:currentColor;stroke-linecap:round;stroke-linejoin:round"
+         d="M 6.5454545,13 H 61.545455 v 8 H 6.5454545 Z"
+         class="paper-lead" />
+      <path
+         id="rect4327-9"
+         style="stroke:currentColor;stroke-linecap:round;stroke-linejoin:round"
+         d="M 6.5454545,21 H 61.545455 v 8 H 6.5454545 Z"
+         class="paper-lead" />
+      <path
+         id="rect4327-1"
+         style="stroke:currentColor;stroke-linecap:round;stroke-linejoin:round"
+         d="M 6.5454545,29 H 61.545455 v 8 H 6.5454545 Z"
+         class="paper-lead" />
+      <path
+         id="rect4327-5"
+         style="stroke:currentColor;stroke-linecap:round;stroke-linejoin:round"
+         d="M 6.5454545,37 H 61.545455 v 8 H 6.5454545 Z"
+         class="paper-lead" />
+      <path
+         id="rect4327-0"
+         style="stroke:currentColor;stroke-linecap:round;stroke-linejoin:round"
+         d="M 6.5454545,45 H 61.545455 v 8 H 6.5454545 Z"
+         class="paper-lead" />
       <g
-         transform="matrix(3.3008074,0,0,-2.403378,-19.300455,80.083141)"
-         style="fill:currentColor;stroke:currentColor"
-         id="g4303-3"
-         class="ink">
+         id="g4362"
+         transform="translate(20)">
         <path
-           style="fill:currentColor;fill-rule:evenodd;stroke:currentColor;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-           d="m 7,14 3,-5 3,5"
-           id="path4299-6"
+           id="path4300-7"
+           d="M 13.798528,48.863636 V 19.227273"
+           style="fill:none;fill-rule:evenodd;stroke:currentColor;stroke-width:6;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
            class="ink" />
-        <path
-           style="fill:currentColor;fill-rule:evenodd;stroke:currentColor;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-           d="M 13,14 H 7"
-           id="path4301-7"
-           class="ink" />
+        <g
+           transform="matrix(3.3008074,0,0,-2.403378,-19.300455,80.083141)"
+           style="fill:currentColor;stroke:currentColor"
+           id="g4303-3"
+           class="ink">
+          <path
+             style="fill:currentColor;fill-rule:evenodd;stroke:currentColor;stroke-width:2.5000;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+             d="m 7,14 3,-5 3,5"
+             id="path4299-6"
+             class="ink" />
+          <path
+             style="fill:currentColor;fill-rule:evenodd;stroke:currentColor;stroke-width:2.5000;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+             d="M 13,14 H 7"
+             id="path4301-7"
+             class="ink" />
+        </g>
       </g>
     </g>
   </g>

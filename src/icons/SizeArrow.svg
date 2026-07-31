@@ -2,38 +2,44 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="36.355339"
-   height="36.355339"
    id="svg3513"
    version="1.1"
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:dc="http://purl.org/dc/elements/1.1/">
-  <style
-     id="current-color-scheme">.ink-lead{fill:#000080;color:#000000}</style>
   <defs
-     id="defs3515" />
-  <metadata
-     id="metadata3518">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
+     id="defs12" />
   <g
-     id="layer1"
-     transform="translate(-11.82233,-10.82233)">
-    <path
-       style="stroke:currentColor;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="M 33.535534,25.464466 26.464466,18.393398 33.535534,11.32233 H 12.32233 v 21.213204 l 7.071068,-7.071068 14.142136,14.142136 -7.071068,7.071068 H 47.67767 V 25.464466 l -7.071068,7.071068 z"
-       id="path2996"
-       class="ink-lead" />
+     transform="translate(0.0000,0.0000) scale(1.760404)"
+     id="g7">
+    <style id="current-color-scheme">.ink-lead{fill:#000080;color:#000000}</style>
+    <defs
+       id="defs3515" />
+    <metadata
+       id="metadata3518">
+      <rdf:RDF>
+        <cc:Work
+           rdf:about="">
+          <dc:format>image/svg+xml</dc:format>
+          <dc:type
+             rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+          <dc:title />
+        </cc:Work>
+      </rdf:RDF>
+    </metadata>
+    <g
+       id="layer1"
+       transform="translate(-11.82233,-10.82233)">
+      <path
+         style="stroke:currentColor;stroke-width:1.4201;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="M 33.535534,25.464466 26.464466,18.393398 33.535534,11.32233 H 12.32233 v 21.213204 l 7.071068,-7.071068 14.142136,14.142136 -7.071068,7.071068 H 47.67767 V 25.464466 l -7.071068,7.071068 z"
+         id="path2996"
+         class="ink-lead" />
+    </g>
   </g>
 </svg>

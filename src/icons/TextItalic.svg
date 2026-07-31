@@ -2,47 +2,53 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="40"
-   height="40"
    id="svg3513"
    version="1.1"
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:dc="http://purl.org/dc/elements/1.1/">
-  <style
-     id="current-color-scheme">.lead{color:#000000}</style>
   <defs
-     id="defs3515" />
-  <metadata
-     id="metadata3518">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
+     id="defs14" />
   <g
-     id="layer1"
-     transform="translate(-8,-11)">
-    <path
-       id="rect3054"
-       style="fill:none;fill-rule:evenodd;stroke-linecap:round;stroke-linejoin:round"
-       d="M 8,11 H 48 V 51 H 8 Z" />
+     transform="translate(0.0000,0.0000) scale(1.600000)"
+     id="g9">
+    <style id="current-color-scheme">.lead{color:#000000}</style>
+    <defs
+       id="defs3515" />
+    <metadata
+       id="metadata3518">
+      <rdf:RDF>
+        <cc:Work
+           rdf:about="">
+          <dc:format>image/svg+xml</dc:format>
+          <dc:type
+             rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+          <dc:title />
+        </cc:Work>
+      </rdf:RDF>
+    </metadata>
     <g
-       aria-label="I"
-       id="text3010"
-       style="font-weight:bold;line-height:0%;-inkscape-font-specification:'Sans Bold';letter-spacing:0px;word-spacing:0px">
+       id="layer1"
+       transform="translate(-8,-11)">
       <path
-         d="m 21.301562,45.580078 0.400001,-1.96 3.399999,-0.8 4.880001,-23.04 -3.040001,-0.76 0.400001,-2 h 10 l -0.4,2 -3.44,0.76 -4.880001,23.04 3.080001,0.8 -0.4,1.96 z"
-         style="font-style:italic;font-weight:normal;font-size:40px;line-height:1.25;-inkscape-font-specification:'Sans Italic';fill:currentColor"
-         id="path12"
-         class="lead" />
+         id="rect3054"
+         style="fill:none;fill-rule:evenodd;stroke-linecap:round;stroke-linejoin:round"
+         d="M 8,11 H 48 V 51 H 8 Z" />
+      <g
+         aria-label="I"
+         id="text3010"
+         style="font-weight:bold;line-height:0%;-inkscape-font-specification:'Sans Bold';letter-spacing:0px;word-spacing:0px">
+        <path
+           d="m 21.301562,45.580078 0.400001,-1.96 3.399999,-0.8 4.880001,-23.04 -3.040001,-0.76 0.400001,-2 h 10 l -0.4,2 -3.44,0.76 -4.880001,23.04 3.080001,0.8 -0.4,1.96 z"
+           style="font-style:italic;font-weight:normal;font-size:40px;line-height:1.25;-inkscape-font-specification:'Sans Italic';fill:currentColor"
+           id="path12"
+           class="lead" />
+      </g>
     </g>
   </g>
 </svg>

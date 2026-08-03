@@ -78,6 +78,7 @@ set( SRCS
     ../common/gis/proj_x.cpp
     ../common/shell/CShell.cpp
     ../common/shell/CShellCmd.cpp
+    ../common/theme/CQmsStyle.cpp
     ../common/theme/CUiTheme.cpp
     ../common/svgticon/CSvgtIcon.cpp
 )
@@ -152,6 +153,7 @@ set( HDRS
     ../common/gis/proj_x.h
     ../common/shell/CShell.h
     ../common/shell/CShellCmd.h
+    ../common/theme/CQmsStyle.h
     ../common/theme/CUiTheme.h
     ../common/svgticon/CSvgtIcon.h
 )

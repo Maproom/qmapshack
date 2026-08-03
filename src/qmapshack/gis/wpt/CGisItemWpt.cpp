@@ -40,6 +40,7 @@
 #include "helpers/CWptIconManager.h"
 #include "mouse/IMouse.h"
 #include "poi/IPoiItem.h"
+#include "theme/CUiTheme.h"
 #include "units/IUnit.h"
 
 IGisItem::key_t CGisItemWpt::keyUserFocus;
@@ -593,11 +594,11 @@ void CGisItemWpt::drawItem(QPainter& p, const QRectF& /*viewport*/, CGisDraw* gi
     barTop.adjust(1, 1, -1, 0);
 
     p.setPen(Qt::NoPen);
-    p.setBrush(QColor(200, 200, 255, 150));
+    p.setBrush(CUiTheme::isDark() ? QColor(90, 90, 140, 150) : QColor(200, 200, 255, 150));
     p.drawRect(barTop);
     p.drawRect(barBottom);
 
-    p.setBrush(Qt::white);
+    p.setBrush(CDraw::bubbleBackground());
     p.drawRoundedRect(rectBubbleMove.adjusted(-2, -2, 2, 2), RECT_RADIUS, RECT_RADIUS);
     p.drawRoundedRect(rectBubbleEdit.adjusted(-2, -2, 2, 2), RECT_RADIUS, RECT_RADIUS);
     p.drawRoundedRect(rectBubbleSize.adjusted(-2, -2, 2, 2), RECT_RADIUS, RECT_RADIUS);
@@ -696,13 +697,12 @@ void CGisItemWpt::drawBubble(QPainter& p) {
 
   QPolygonF frame = makePolyline(posScreen, rectBubble);
   p.setPen(CDraw::penBorderGray);
-  p.setBrush(CDraw::brushBackWhite);
+  p.setBrush(CDraw::bubbleBackground());
   p.drawPolygon(frame);
 
   p.save();
   p.translate(posBubble);
-  p.setPen(Qt::black);
-  doc.drawContents(&p);
+  CDraw::drawBubbleText(p, doc);
   p.restore();
 }
 

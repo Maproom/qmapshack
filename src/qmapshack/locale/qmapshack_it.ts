@@ -144,12 +144,12 @@
 <context>
     <name>CAppSetupMac</name>
     <message>
-        <location filename="../setup/CAppSetupMac.cpp" line="194"/>
+        <location filename="../setup/CAppSetupMac.cpp" line="175"/>
         <source>Fatal...</source>
         <translation type="unfinished">Fatale...</translation>
     </message>
     <message>
-        <location filename="../setup/CAppSetupMac.cpp" line="195"/>
+        <location filename="../setup/CAppSetupMac.cpp" line="176"/>
         <source>Failed to lock file&lt;br&gt;%1&lt;br&gt;%2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -216,12 +216,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="1114"/>
+        <location filename="../canvas/CCanvas.cpp" line="1125"/>
         <source>Map Projection...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="1115"/>
+        <location filename="../canvas/CCanvas.cpp" line="1126"/>
         <source>Failed to setup map projection. Please configure a valid projection.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -256,7 +256,7 @@
         <translation>&lt;h2&gt;Routing&lt;/h2&gt;&lt;p&gt;QMapShack supporta i servizi di routing online. Ma se si desidera veramente sfruttare le possibilità di routing, è necessario che il database di routing sia archiviato localmente. Sono disponibili due motori di routing offline.&lt;/p&gt;&lt;h3&gt;Routino&lt;/h3&gt;&lt;p&gt;Per Routino devi creare i dati di routing dai file del database Open Street Map. QMapShack ha un creatore di database Routino integrato (&lt;a href=&apos;CreateRoutino&apos;&gt;Strumenti-&gt;Crea un database Routino&lt;/a&gt;).&lt;/p&gt;&lt;h3&gt;BRouter&lt;/h3&gt;&lt;p&gt;Una seconda opzione è quella di utilizzare un&apos;installazione locale di BRouter con un database di routing locale. Usa il &lt;a href=&apos;BRouterSetup&apos;&gt;BRouter setup&lt;/a&gt; per scaricare e installare tutti i dati necessari.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="1065"/>
+        <location filename="../canvas/CCanvas.cpp" line="1076"/>
         <source>Setup Map Background</source>
         <translation>Impostazione sfondo mappa</translation>
     </message>
@@ -685,150 +685,150 @@ Per risolvere questo conflitto si può salvare una copia, forzare la versione o 
         <translation>Correlazione in corso...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="259"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="940"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="260"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="941"/>
         <source>none</source>
         <translation>nessuna</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="328"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="329"/>
         <source>Build diary...</source>
         <translation>Diario in costruzione...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="380"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="381"/>
         <source>&lt;b&gt;Summary over all tracks in project&lt;/b&gt;&lt;br/&gt;</source>
         <translation>&lt;b&gt;Riepilogo di tutte le tracce nel progetto&lt;/b&gt;&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="411"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="412"/>
         <source>&lt;b&gt;Summary over all waypoints in project&lt;/b&gt;&lt;br/&gt;</source>
         <translation>&lt;b&gt;Riepilogo di tutti i waypoint nel progetto&lt;/b&gt;&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="414"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="415"/>
         <source> x Geocache, consisting of: &lt;br/&gt;</source>
         <translation> x Geocache, costituito da: &lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="456"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="484"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="745"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="813"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="874"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="906"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="457"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="485"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="746"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="814"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="875"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="907"/>
         <source>Info</source>
         <translation>Informazioni</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="457"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="485"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="747"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="875"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="907"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="458"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="486"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="748"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="876"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="908"/>
         <source>Comment</source>
         <translation>Commento</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="448"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="449"/>
         <source>Waypoints</source>
         <translation type="unfinished">Waypoints</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="476"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="477"/>
         <source>Tracks</source>
         <translation type="unfinished">Tracce</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="606"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="607"/>
         <source>Elevation: %1%2</source>
         <translation>Elevazione: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="611"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="612"/>
         <source>Created: %1</source>
         <translation>Creato: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="650"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="651"/>
         <source>Arrival: </source>
         <translation>Arrivo: </translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="662"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="663"/>
         <source>From Start</source>
         <translation>Dalla partenza</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="662"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="663"/>
         <source>To Next</source>
         <translation>Al successivo</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="663"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="664"/>
         <source>To End</source>
         <translation>Alla fine</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="666"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="667"/>
         <source>Distance: </source>
         <translation>Distanza: </translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="676"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="677"/>
         <source>Time: </source>
         <translation>Tempo: </translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="686"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="687"/>
         <source>Ascent: </source>
         <translation>Ascesa: </translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="696"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="697"/>
         <source>Descent: </source>
         <translation>Discesa: </translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="746"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="814"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="747"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="815"/>
         <source>Statistics</source>
         <translation>Statistiche</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="866"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="867"/>
         <source>Areas</source>
         <translation type="unfinished">Aree</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="898"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="899"/>
         <source>Routes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="927"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="950"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="928"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="951"/>
         <source>Edit name...</source>
         <translation>Modifica nome...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="927"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="950"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="928"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="951"/>
         <source>Enter new project name.</source>
         <translation>Nuvo nome del progetto.</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="935"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="936"/>
         <source>Edit keywords...</source>
         <translation>Modifica le parole chiave...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="935"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="936"/>
         <source>Enter keywords.</source>
         <translation>Inserisci le parole chiave.</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="1047"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="1048"/>
         <source>Print Diary</source>
         <translation>Stampa il diario</translation>
     </message>
@@ -1266,7 +1266,7 @@ L&apos;unico parametro di input è la lunghezza minima del loop: questo serve a 
 <context>
     <name>CFilterSpeed</name>
     <message>
-        <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="122"/>
+        <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="121"/>
         <source>Track has no or invalid elevation data. Please correct or set constant speed!</source>
         <translation>La traccia non ha dati di elevazione. Correggere o impostare una velocità (costante)!</translation>
     </message>
@@ -2019,7 +2019,7 @@ Questo filtro è progettato per rilevare e nascondere i nodi che soddisfano ques
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1398"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1437"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1596"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2836"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2841"/>
         <source>track</source>
         <translation>traccia</translation>
     </message>
@@ -2121,37 +2121,37 @@ Questo filtro è progettato per rilevare e nascondere i nodi che soddisfano ques
         <translation>Visualizza punti (nascosti).</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2216"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2221"/>
         <source>Changed name</source>
         <translation>Nome cambiato</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2221"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2226"/>
         <source>Changed comment</source>
         <translation>Cambiato commento</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2226"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2231"/>
         <source>Changed description</source>
         <translation>Cambiata descrizione</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2231"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2236"/>
         <source>Changed links</source>
         <translation>Cambiato collegamento</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2239"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2244"/>
         <source>Changed elevation of point %1 to %2 %3</source>
         <translation>Cambiata l&apos;elevazione dei punti da %1 a %2 %3</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2262"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2267"/>
         <source>Changed activity to &apos;%1&apos; for complete track.</source>
         <translation>Cambiata l&apos;attività a &apos;%1&apos; tracce complete.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2288"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2293"/>
         <source>Changed activity to &apos;%1&apos; for range(%2..%3).</source>
         <translation>Cambiata l&apos;attività a &apos;%1&apos; nell&apos;intervallo (%2..%3).</translation>
     </message>
@@ -2281,92 +2281,92 @@ Questo filtro è progettato per rilevare e nascondere i nodi che soddisfano ques
 <context>
     <name>CGisItemWpt</name>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="108"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="109"/>
         <source>_Clone</source>
         <translation>_Clone</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="301"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="302"/>
         <source>Elevation: %1%2</source>
         <translation>Elevazione: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="310"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="311"/>
         <source>Proximity: %1%2</source>
         <translation>Vicinanza: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="327"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="328"/>
         <source>Last found: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="335"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="336"/>
         <source>Project created: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="369"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="370"/>
         <source>Created: %1</source>
         <translation>Creato: %1</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="433"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="434"/>
         <source>Changed name</source>
         <translation>Cambiato nome</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="440"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="441"/>
         <source>Changed position</source>
         <translation>Posizione cambiata</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="445"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="446"/>
         <source>Changed elevation</source>
         <translation>Elevazione cambiata</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="452"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="453"/>
         <source>Removed proximity</source>
         <translation>Vicinanza rimossa</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="455"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="456"/>
         <source>Changed proximity</source>
         <translation>Vicinanza cambiata</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="473"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="474"/>
         <source>Changed icon</source>
         <translation>Cambiata Icona</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="478"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="479"/>
         <source>Changed comment</source>
         <translation>Cambiato commento</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="483"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="484"/>
         <source>Changed description</source>
         <translation>Cambiata descrizione</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="488"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="489"/>
         <source>Changed links</source>
         <translation>Cambiato collegamento</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="493"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="494"/>
         <source>Changed images</source>
         <translation>Cambiata immagine</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="498"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="499"/>
         <source>Add image</source>
         <translation>Aggiungi immagine</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="503"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="504"/>
         <source>Changed timestamp</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3389,17 +3389,17 @@ linea %2, colonna %3:
 <context>
     <name>CHelpBrowser</name>
     <message>
-        <location filename="../../common/help/CHelpBrowser.cpp" line="68"/>
+        <location filename="../../common/help/CHelpBrowser.cpp" line="73"/>
         <source>Go back one page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../common/help/CHelpBrowser.cpp" line="72"/>
+        <location filename="../../common/help/CHelpBrowser.cpp" line="77"/>
         <source>Go forward one page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../common/help/CHelpBrowser.cpp" line="76"/>
+        <location filename="../../common/help/CHelpBrowser.cpp" line="81"/>
         <source>Go to initial page</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3765,52 +3765,52 @@ linea %2, colonna %3:
 <context>
     <name>CListTrkPts</name>
     <message>
-        <location filename="../gis/trk/CListTrkPts.cpp" line="84"/>
+        <location filename="../gis/trk/CListTrkPts.cpp" line="85"/>
         <source>Range Info:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CListTrkPts.cpp" line="112"/>
+        <location filename="../gis/trk/CListTrkPts.cpp" line="113"/>
         <source>Time</source>
         <translation type="unfinished">Tempo</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CListTrkPts.cpp" line="113"/>
+        <location filename="../gis/trk/CListTrkPts.cpp" line="114"/>
         <source>Ele.</source>
         <translation type="unfinished">Ele.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CListTrkPts.cpp" line="113"/>
+        <location filename="../gis/trk/CListTrkPts.cpp" line="114"/>
         <source>Delta</source>
         <translation type="unfinished">Delta</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CListTrkPts.cpp" line="114"/>
+        <location filename="../gis/trk/CListTrkPts.cpp" line="115"/>
         <source>Dist.</source>
         <translation type="unfinished">Dist.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CListTrkPts.cpp" line="114"/>
+        <location filename="../gis/trk/CListTrkPts.cpp" line="115"/>
         <source>Speed</source>
         <translation type="unfinished">Velocità</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CListTrkPts.cpp" line="115"/>
+        <location filename="../gis/trk/CListTrkPts.cpp" line="116"/>
         <source>Slope</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CListTrkPts.cpp" line="115"/>
+        <location filename="../gis/trk/CListTrkPts.cpp" line="116"/>
         <source>Ascent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CListTrkPts.cpp" line="116"/>
+        <location filename="../gis/trk/CListTrkPts.cpp" line="117"/>
         <source>Descent</source>
         <translation type="unfinished">Discesa</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CListTrkPts.cpp" line="116"/>
+        <location filename="../gis/trk/CListTrkPts.cpp" line="117"/>
         <source>Position</source>
         <translation type="unfinished">Posizione</translation>
     </message>
@@ -3888,89 +3888,89 @@ linea %2, colonna %3:
 <context>
     <name>CMainWindow</name>
     <message>
-        <location filename="../CMainWindow.cpp" line="648"/>
+        <location filename="../CMainWindow.cpp" line="668"/>
         <source>Select folder...</source>
         <translation>Seleziona cartella...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="967"/>
+        <location filename="../CMainWindow.cpp" line="987"/>
         <source>Use &lt;b&gt;Menu-&gt;View-&gt;Add Map View&lt;/b&gt; to open a new view. Or &lt;b&gt;Menu-&gt;File-&gt;Load Map View&lt;/b&gt; to restore a saved one. Or click &lt;a href=&apos;NewView&apos;&gt;here&lt;/a&gt;.</source>
         <translation>Usa &lt;b&gt;Menù-&gt;Vista-&gt;Aggiungi Vista&lt;/b&gt; per aprirne una nuova. O &lt;b&gt;Menù-&gt;File-&gt;Leggi Vista salvata&lt;/b&gt; per caricarne una salvata. O clicca &lt;a href=&apos;NewView&apos;&gt;quì&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1107"/>
+        <location filename="../CMainWindow.cpp" line="1127"/>
         <source>Ele.: %1%2</source>
         <translation>Ele.: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1117"/>
+        <location filename="../CMainWindow.cpp" line="1137"/>
         <source>Slope: %1%2</source>
         <comment>terrain</comment>
         <translation>Pendenza: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1129"/>
+        <location filename="../CMainWindow.cpp" line="1149"/>
         <source>[Grid: %1]</source>
         <translation>[Griglia: %1]</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1260"/>
+        <location filename="../CMainWindow.cpp" line="1291"/>
         <source>Load GIS Data...</source>
         <translation>Caricamento dati GIS...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1287"/>
+        <location filename="../CMainWindow.cpp" line="1318"/>
         <source>Select output file</source>
         <translation>Selezione il file destinazione</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1287"/>
-        <location filename="../CMainWindow.cpp" line="1311"/>
+        <location filename="../CMainWindow.cpp" line="1318"/>
+        <location filename="../CMainWindow.cpp" line="1342"/>
         <source>QMapShack View (*.view)</source>
         <translation>QMapShack Vista (*.view)</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1311"/>
+        <location filename="../CMainWindow.cpp" line="1342"/>
         <source>Select file to load</source>
         <translation>Seleziona il file da caricare</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1325"/>
+        <location filename="../CMainWindow.cpp" line="1355"/>
         <source>Can not add view...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1326"/>
+        <location filename="../CMainWindow.cpp" line="1356"/>
         <source>The view is already loaded as &apos;%1&apos;. You have to close it before loading it again.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1527"/>
+        <location filename="../CMainWindow.cpp" line="1558"/>
         <source>Rename View...</source>
         <translation>Rinomina Vista...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1527"/>
+        <location filename="../CMainWindow.cpp" line="1558"/>
         <source>Enter new name for view</source>
         <translation>Nuovo nome della Vista</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1666"/>
+        <location filename="../CMainWindow.cpp" line="1697"/>
         <source>Fatal...</source>
         <translation>Fatale...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1667"/>
+        <location filename="../CMainWindow.cpp" line="1698"/>
         <source>QMapShack detected a badly installed Proj library. Please contact the package maintainer of your distribution to fix it.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1735"/>
+        <location filename="../CMainWindow.cpp" line="1766"/>
         <source>To link map views all map views must have the same projection and scale type. The function &apos;Link Map Views&apos; will be switched off, now.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1738"/>
+        <location filename="../CMainWindow.cpp" line="1769"/>
         <source>Link Map Views...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8328,12 +8328,12 @@ Canceled by user&apos;s request.
 <context>
     <name>CShortcutSetupDialog</name>
     <message>
-        <location filename="../helpers/CShortcutSetupDialog.cpp" line="97"/>
+        <location filename="../helpers/CShortcutSetupDialog.cpp" line="126"/>
         <source>Shortcut already in use</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CShortcutSetupDialog.cpp" line="98"/>
+        <location filename="../helpers/CShortcutSetupDialog.cpp" line="127"/>
         <source>The shortcut &apos;%1&apos; is already assigned to &apos;%2&apos;. Do you want to reassign it to &apos;%3&apos;?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8463,62 +8463,62 @@ linea %2, colonna %3:
 <context>
     <name>CTableTrk</name>
     <message>
-        <location filename="../gis/trk/CTableTrk.cpp" line="89"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="90"/>
         <source>Time</source>
         <translation>Tempo</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CTableTrk.cpp" line="90"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="91"/>
         <source>Ele.</source>
         <translation>Ele.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CTableTrk.cpp" line="91"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="92"/>
         <source>Delta</source>
         <translation>Delta</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CTableTrk.cpp" line="92"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="93"/>
         <source>Dist.</source>
         <translation>Dist.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CTableTrk.cpp" line="93"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="94"/>
         <source>Speed</source>
         <translation>Velocità</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CTableTrk.cpp" line="94"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="95"/>
         <source>Slope</source>
         <translation>Pendenza</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CTableTrk.cpp" line="95"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="96"/>
         <source>Ascent</source>
         <translation>Salita</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CTableTrk.cpp" line="96"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="97"/>
         <source>Descent</source>
         <translation>Discesa</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CTableTrk.cpp" line="97"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="98"/>
         <source>Position</source>
         <translation>Posizione</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CTableTrk.cpp" line="139"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="153"/>
         <source>Double click to edit elevation value</source>
         <translation>Doppio clic per modificare il valore dell&apos;elevazione</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CTableTrk.cpp" line="163"/>
-        <location filename="../gis/trk/CTableTrk.cpp" line="169"/>
-        <location filename="../gis/trk/CTableTrk.cpp" line="172"/>
-        <location filename="../gis/trk/CTableTrk.cpp" line="176"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="181"/>
         <location filename="../gis/trk/CTableTrk.cpp" line="187"/>
-        <location filename="../gis/trk/CTableTrk.cpp" line="189"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="190"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="194"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="204"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="206"/>
         <source>%1%2</source>
         <translation>%1%2</translation>
     </message>
@@ -12209,82 +12209,82 @@ zoom-out for use of the DEM data.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dem/IDemPropSetup.ui" line="291"/>
-        <location filename="../dem/IDemPropSetup.ui" line="391"/>
-        <location filename="../dem/IDemPropSetup.ui" line="475"/>
-        <location filename="../dem/IDemPropSetup.ui" line="559"/>
-        <location filename="../dem/IDemPropSetup.ui" line="643"/>
+        <location filename="../dem/IDemPropSetup.ui" line="280"/>
+        <location filename="../dem/IDemPropSetup.ui" line="369"/>
+        <location filename="../dem/IDemPropSetup.ui" line="442"/>
+        <location filename="../dem/IDemPropSetup.ui" line="515"/>
+        <location filename="../dem/IDemPropSetup.ui" line="588"/>
         <source>°</source>
         <translation>°</translation>
     </message>
     <message>
-        <location filename="../dem/IDemPropSetup.ui" line="294"/>
-        <location filename="../dem/IDemPropSetup.ui" line="394"/>
-        <location filename="../dem/IDemPropSetup.ui" line="478"/>
-        <location filename="../dem/IDemPropSetup.ui" line="562"/>
-        <location filename="../dem/IDemPropSetup.ui" line="646"/>
+        <location filename="../dem/IDemPropSetup.ui" line="283"/>
+        <location filename="../dem/IDemPropSetup.ui" line="372"/>
+        <location filename="../dem/IDemPropSetup.ui" line="445"/>
+        <location filename="../dem/IDemPropSetup.ui" line="518"/>
+        <location filename="../dem/IDemPropSetup.ui" line="591"/>
         <source>&gt; </source>
         <translation>&gt; </translation>
     </message>
     <message>
-        <location filename="../dem/IDemPropSetup.ui" line="316"/>
-        <location filename="../dem/IDemPropSetup.ui" line="335"/>
-        <location filename="../dem/IDemPropSetup.ui" line="419"/>
-        <location filename="../dem/IDemPropSetup.ui" line="503"/>
-        <location filename="../dem/IDemPropSetup.ui" line="587"/>
+        <location filename="../dem/IDemPropSetup.ui" line="305"/>
+        <location filename="../dem/IDemPropSetup.ui" line="324"/>
+        <location filename="../dem/IDemPropSetup.ui" line="397"/>
+        <location filename="../dem/IDemPropSetup.ui" line="470"/>
+        <location filename="../dem/IDemPropSetup.ui" line="543"/>
         <source>TextLabel</source>
         <translation>Valore</translation>
     </message>
     <message>
-        <location filename="../dem/IDemPropSetup.ui" line="704"/>
+        <location filename="../dem/IDemPropSetup.ui" line="649"/>
         <source>Tint areas above the given elevation.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dem/IDemPropSetup.ui" line="707"/>
+        <location filename="../dem/IDemPropSetup.ui" line="652"/>
         <source>Elevation Limit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dem/IDemPropSetup.ui" line="731"/>
-        <location filename="../dem/IDemPropSetup.ui" line="753"/>
+        <location filename="../dem/IDemPropSetup.ui" line="676"/>
+        <location filename="../dem/IDemPropSetup.ui" line="698"/>
         <source>Lower elevation to be colored.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dem/IDemPropSetup.ui" line="756"/>
+        <location filename="../dem/IDemPropSetup.ui" line="701"/>
         <source>Elevation Low</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dem/IDemPropSetup.ui" line="769"/>
-        <location filename="../dem/IDemPropSetup.ui" line="802"/>
+        <location filename="../dem/IDemPropSetup.ui" line="714"/>
+        <location filename="../dem/IDemPropSetup.ui" line="747"/>
         <source>Higher elevation to be colored.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dem/IDemPropSetup.ui" line="785"/>
+        <location filename="../dem/IDemPropSetup.ui" line="730"/>
         <source>Enable color shading
  based on elevation.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dem/IDemPropSetup.ui" line="789"/>
+        <location filename="../dem/IDemPropSetup.ui" line="734"/>
         <source>Elevation Shading</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dem/IDemPropSetup.ui" line="805"/>
+        <location filename="../dem/IDemPropSetup.ui" line="750"/>
         <source>Elevation High</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dem/IDemPropSetup.ui" line="812"/>
+        <location filename="../dem/IDemPropSetup.ui" line="757"/>
         <source>Enable / Disable elevation legend.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dem/IDemPropSetup.ui" line="815"/>
+        <location filename="../dem/IDemPropSetup.ui" line="760"/>
         <source>Legend</source>
         <translation type="unfinished"></translation>
     </message>
@@ -14635,527 +14635,527 @@ Nome file: %1</translation>
         <translation>Finestra</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="121"/>
+        <location filename="../IMainWindow.ui" line="122"/>
         <source>?</source>
         <translation>?</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="140"/>
+        <location filename="../IMainWindow.ui" line="141"/>
         <source>Tool</source>
         <translation>Strumenti</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="160"/>
+        <location filename="../IMainWindow.ui" line="161"/>
         <source>Maps</source>
         <translation>Mappe</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="197"/>
+        <location filename="../IMainWindow.ui" line="198"/>
         <source>Dig. Elev. Model (DEM)</source>
         <translation>Dig. Elev. Model (DEM)</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="130"/>
-        <location filename="../IMainWindow.ui" line="230"/>
+        <location filename="../IMainWindow.ui" line="131"/>
+        <location filename="../IMainWindow.ui" line="231"/>
         <source>Workspace</source>
         <translation>Spazio di lavoro</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="239"/>
+        <location filename="../IMainWindow.ui" line="240"/>
         <source>Toolbar</source>
         <translation>Barra strumenti</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="265"/>
+        <location filename="../IMainWindow.ui" line="266"/>
         <source>Routing</source>
         <translation>Routing</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="283"/>
+        <location filename="../IMainWindow.ui" line="284"/>
         <source>Realtime</source>
         <translation>Tempo reale</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="329"/>
-        <location filename="../IMainWindow.ui" line="332"/>
+        <location filename="../IMainWindow.ui" line="330"/>
+        <location filename="../IMainWindow.ui" line="333"/>
         <source>Add Map View</source>
         <translation>Aggiungi vista mappa</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="335"/>
+        <location filename="../IMainWindow.ui" line="336"/>
         <source>Ctrl+T</source>
         <translation>Ctrl+T</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="350"/>
+        <location filename="../IMainWindow.ui" line="351"/>
         <source>Show Scale</source>
         <translation>Visualizza scala</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="362"/>
+        <location filename="../IMainWindow.ui" line="363"/>
         <source>Setup Map Font</source>
         <translation>Modifica caratteri (mappa)</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="377"/>
+        <location filename="../IMainWindow.ui" line="378"/>
         <source>Show Grid</source>
         <translation>Visualizza griglia</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="380"/>
+        <location filename="../IMainWindow.ui" line="381"/>
         <source>Ctrl+G</source>
         <translation>Ctrl+G</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="392"/>
+        <location filename="../IMainWindow.ui" line="393"/>
         <source>Setup Grid</source>
         <translation>Modifica griglia</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="395"/>
+        <location filename="../IMainWindow.ui" line="396"/>
         <source>Ctrl+Alt+G</source>
         <translation>Ctrl+Alt+G</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="410"/>
+        <location filename="../IMainWindow.ui" line="411"/>
         <source>Flip Mouse Wheel</source>
         <translation>Uso rotella mouse</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="422"/>
-        <location filename="../IMainWindow.ui" line="425"/>
+        <location filename="../IMainWindow.ui" line="423"/>
+        <location filename="../IMainWindow.ui" line="426"/>
         <source>Setup Map Paths</source>
         <translation>Percorso mappe</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="440"/>
+        <location filename="../IMainWindow.ui" line="441"/>
         <source>POI Text</source>
         <translation>Testo POI</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="455"/>
+        <location filename="../IMainWindow.ui" line="456"/>
         <source>Night / Day</source>
         <translation>Notte/giorno</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="473"/>
+        <location filename="../IMainWindow.ui" line="474"/>
         <source>Ctrl+I</source>
         <translation>Ctrl+I</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="485"/>
+        <location filename="../IMainWindow.ui" line="486"/>
         <source>Setup DEM Paths</source>
         <translation>Percorso dei file DEM</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="497"/>
+        <location filename="../IMainWindow.ui" line="498"/>
         <source>About</source>
         <translation>Informazioni su</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="1035"/>
+        <location filename="../IMainWindow.ui" line="1048"/>
         <source>Help</source>
         <translation>Guida</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="1038"/>
+        <location filename="../IMainWindow.ui" line="1051"/>
         <source>F1</source>
         <translation>F1</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="521"/>
-        <location filename="../IMainWindow.ui" line="524"/>
+        <location filename="../IMainWindow.ui" line="522"/>
+        <location filename="../IMainWindow.ui" line="525"/>
         <source>Setup Map View</source>
         <translation>Modifica vista mappa</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="509"/>
+        <location filename="../IMainWindow.ui" line="510"/>
         <source>Online Wiki</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="536"/>
+        <location filename="../IMainWindow.ui" line="537"/>
         <source>Load GIS Data</source>
         <translation>Caricamento dati GIS</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="539"/>
+        <location filename="../IMainWindow.ui" line="540"/>
         <source>Load projects from file</source>
         <translation>Caricamento progetto dal file</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="542"/>
+        <location filename="../IMainWindow.ui" line="543"/>
         <source>Ctrl+L</source>
         <translation>Ctrl+L</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="554"/>
+        <location filename="../IMainWindow.ui" line="555"/>
         <source>Save All GIS Data</source>
         <translation>Salva i dati GIS</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="557"/>
+        <location filename="../IMainWindow.ui" line="558"/>
         <source>Save all projects in the workspace</source>
         <translation>Salva tutti i progetti nello spazio di lavoro</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="560"/>
+        <location filename="../IMainWindow.ui" line="561"/>
         <source>Ctrl+S</source>
         <translation>Ctrl+S</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="584"/>
+        <location filename="../IMainWindow.ui" line="585"/>
         <source>Add empty project</source>
         <translation>Aggiungi progetto vuoto</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="599"/>
+        <location filename="../IMainWindow.ui" line="600"/>
         <source>Geosearch</source>
         <translation>Ricerca geografica</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="611"/>
+        <location filename="../IMainWindow.ui" line="612"/>
         <source>Close all projects</source>
         <translation>Chiudi tutti i progetti</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="614"/>
+        <location filename="../IMainWindow.ui" line="615"/>
         <source>F8</source>
         <translation>F8</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="626"/>
+        <location filename="../IMainWindow.ui" line="627"/>
         <source>Setup Units</source>
         <translation>Modifica unità di misura</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="638"/>
+        <location filename="../IMainWindow.ui" line="639"/>
         <source>Setup Workspace</source>
         <translation>Modifica spazio di lavoro</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="641"/>
+        <location filename="../IMainWindow.ui" line="642"/>
         <source>Setup save on exit.</source>
         <translation>Le modifiche saranno salvate all&apos;uscita.</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="653"/>
+        <location filename="../IMainWindow.ui" line="654"/>
         <source>Import Database from QLandkarte</source>
         <translation>Importa database da QLandkarte</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="656"/>
+        <location filename="../IMainWindow.ui" line="657"/>
         <source>Import QLandkarte GT database</source>
         <translation>Importa Database QLandkarte GT</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="668"/>
+        <location filename="../IMainWindow.ui" line="669"/>
         <source>VRT Builder</source>
         <translation>Costruttore di VRT</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="671"/>
+        <location filename="../IMainWindow.ui" line="672"/>
         <source>GUI front end to gdalbuildvrt</source>
         <translation>Interfaccia per gdalbuildvrt</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="683"/>
+        <location filename="../IMainWindow.ui" line="684"/>
         <source>Store Map View</source>
         <translation>Salva vista mappa</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="686"/>
+        <location filename="../IMainWindow.ui" line="687"/>
         <source>Write current active map and DEM list including the properties to a file</source>
         <translation>Scrivi la mappa corrente e il DEM includendo le proprietà in un file</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="698"/>
+        <location filename="../IMainWindow.ui" line="699"/>
         <source>Load Map View</source>
         <translation>Carica la vista mappa</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="701"/>
+        <location filename="../IMainWindow.ui" line="702"/>
         <source>Restore view with active map and DEM list including the properties from a file</source>
         <translation>Ricarica la mappa corrente e il DEM da un file</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="716"/>
+        <location filename="../IMainWindow.ui" line="717"/>
         <source>Track Profile as Window</source>
         <translation>Profilo traccia come finestra</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="719"/>
+        <location filename="../IMainWindow.ui" line="720"/>
         <source>Show the track profile in it&apos;s own window instead within the map view.</source>
         <translation>Mostra il profilo della traccia in una propria finestra invece che all&apos;interno della Vista.</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="776"/>
+        <location filename="../IMainWindow.ui" line="777"/>
         <source>Save(Print) Map</source>
         <translation>Salva (stampa) mappa</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="848"/>
+        <location filename="../IMainWindow.ui" line="852"/>
         <source>Setup Keyboard Shortcuts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="851"/>
+        <location filename="../IMainWindow.ui" line="855"/>
         <source>Assign keyboard shortcuts to actions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="869"/>
+        <location filename="../IMainWindow.ui" line="882"/>
         <source>Fullscreen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="884"/>
+        <location filename="../IMainWindow.ui" line="897"/>
         <source>Min./Max. Labels</source>
         <translation>Etichette Min/Max</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="917"/>
+        <location filename="../IMainWindow.ui" line="930"/>
         <source>Track Info</source>
         <translation>Informazioni sulla traccia</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="920"/>
+        <location filename="../IMainWindow.ui" line="933"/>
         <source>Select what information is shown for a highlighted track.</source>
         <translation>Seleziona quali informazioni vengono visualizzate per la traccia evidenziata.</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="932"/>
+        <location filename="../IMainWindow.ui" line="945"/>
         <source>Track Point Info Table</source>
         <translation>Tabella info sui punti traccia</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="935"/>
+        <location filename="../IMainWindow.ui" line="948"/>
         <source>Show a legend for all track point info bullets along the track.</source>
         <translation>Mostra una legenda per tutti i punti elenco dei punti traccia lungo il percorso.</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="947"/>
+        <location filename="../IMainWindow.ui" line="960"/>
         <source>Track Summary</source>
         <translation>Riepilogo traccia</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="950"/>
+        <location filename="../IMainWindow.ui" line="963"/>
         <source>Show the track summary.</source>
         <translation>Mostra il riepilogo traccia.</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="962"/>
+        <location filename="../IMainWindow.ui" line="975"/>
         <source>Min./Max Summary</source>
         <translation>Riepilogo min/max</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="965"/>
+        <location filename="../IMainWindow.ui" line="978"/>
         <source>Show the minimum and the maximum values of the track properties in a table.</source>
         <translation>Mostra i valori minimo e massimo delle proprietà della traccia in una tabella.</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="977"/>
+        <location filename="../IMainWindow.ui" line="990"/>
         <source>Track Profile</source>
         <translation>Profilo traccia</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="980"/>
+        <location filename="../IMainWindow.ui" line="993"/>
         <source>Show the track profile.</source>
         <translation>Mostra il profilo traccia.</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="989"/>
+        <location filename="../IMainWindow.ui" line="1002"/>
         <source>Take Screenshot</source>
         <translation>Cattura schermata</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="992"/>
+        <location filename="../IMainWindow.ui" line="1005"/>
         <source>Take a screenshot from the current active map view.</source>
         <translation>Cattura una schermata dalla Vista corrente.</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="995"/>
+        <location filename="../IMainWindow.ui" line="1008"/>
         <source>Ctrl+Alt+P</source>
         <translation>Ctrl+Alt+P</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="1007"/>
+        <location filename="../IMainWindow.ui" line="1020"/>
         <source>Track Point Info</source>
         <translation>Info sui punti traccia</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="1010"/>
+        <location filename="../IMainWindow.ui" line="1023"/>
         <source>Mark track points with additional information by auto-numbered bullets.</source>
         <translation>Contrassegna i punti traccia con informazioni aggiuntive mediante punti elenco numerati automaticamente.</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="1023"/>
+        <location filename="../IMainWindow.ui" line="1036"/>
         <source>Track Highlight</source>
         <translation>Evidenzia la traccia</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="1026"/>
+        <location filename="../IMainWindow.ui" line="1039"/>
         <source>Mark the highlighted track with a red border.</source>
         <translation>Contrassegna la traccia evidenziata con un bordo rosso.</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="1050"/>
+        <location filename="../IMainWindow.ui" line="1063"/>
         <source>Link Map Views</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="1053"/>
+        <location filename="../IMainWindow.ui" line="1066"/>
         <source>All map views move and zoom to the same point.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="1062"/>
+        <location filename="../IMainWindow.ui" line="1075"/>
         <source>Setup POI Paths</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="1065"/>
+        <location filename="../IMainWindow.ui" line="1078"/>
         <source>Setup paths to POI collections</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="1074"/>
-        <location filename="../IMainWindow.ui" line="1077"/>
+        <location filename="../IMainWindow.ui" line="1087"/>
+        <location filename="../IMainWindow.ui" line="1090"/>
         <source>Setup Map Icon Sizes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="722"/>
+        <location filename="../IMainWindow.ui" line="723"/>
         <source>Ctrl+E</source>
         <translation>Ctrl+E</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="295"/>
+        <location filename="../IMainWindow.ui" line="296"/>
         <source>POI Collections</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="470"/>
+        <location filename="../IMainWindow.ui" line="471"/>
         <source>Map Tooltip</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="572"/>
+        <location filename="../IMainWindow.ui" line="573"/>
         <source>Setup Timezone</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="734"/>
+        <location filename="../IMainWindow.ui" line="735"/>
         <source>Close</source>
         <translation>Chiudi</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="737"/>
+        <location filename="../IMainWindow.ui" line="738"/>
         <source>Ctrl+Q</source>
         <translation>Ctrl+Q</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="749"/>
+        <location filename="../IMainWindow.ui" line="750"/>
         <source>Clone Map View</source>
         <translation>Crea una copia della vista</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="752"/>
+        <location filename="../IMainWindow.ui" line="753"/>
         <source>Ctrl+Shift+T</source>
         <translation>Ctrl+Shift+T</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="764"/>
+        <location filename="../IMainWindow.ui" line="765"/>
         <source>Create Routino Database</source>
         <translation>Crea un database Routino</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="779"/>
+        <location filename="../IMainWindow.ui" line="780"/>
         <source>Print a selected area of the map</source>
         <translation>Stampa un&apos;area selezionata</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="782"/>
+        <location filename="../IMainWindow.ui" line="783"/>
         <source>Ctrl+P</source>
         <translation>Ctrl+P</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="794"/>
+        <location filename="../IMainWindow.ui" line="795"/>
         <source>Setup Coord. Format</source>
         <translation>modifica formato coord.</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="797"/>
+        <location filename="../IMainWindow.ui" line="798"/>
         <source>Change the format coordinates are displayed</source>
         <translation>Cambia il formato delle coordinate visualizzate</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="809"/>
+        <location filename="../IMainWindow.ui" line="810"/>
         <source>Setup Map Background</source>
         <translation>Modifica lo sfondo della mappa</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="821"/>
+        <location filename="../IMainWindow.ui" line="822"/>
         <source>Close Tab</source>
         <translation>Chiudi scheda</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="824"/>
+        <location filename="../IMainWindow.ui" line="825"/>
         <source>Ctrl+W</source>
         <translation>Ctrl+W</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="833"/>
+        <location filename="../IMainWindow.ui" line="834"/>
         <source>Quickstart Help</source>
         <translation>Guida rapida</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="842"/>
+        <location filename="../IMainWindow.ui" line="843"/>
         <source>Setup Toolbar</source>
         <translation>Modifica barra strumenti</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="854"/>
+        <location filename="../IMainWindow.ui" line="867"/>
         <source>Toggle Docks</source>
         <translation>Attiva/disattiva riquadri</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="857"/>
+        <location filename="../IMainWindow.ui" line="870"/>
         <source>Toggle visibility of dockable windows</source>
         <translation>Attiva/disattiva la visibilità dei riquadri</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="860"/>
+        <location filename="../IMainWindow.ui" line="873"/>
         <source>Ctrl+D</source>
         <translation>Ctrl+D</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="872"/>
+        <location filename="../IMainWindow.ui" line="885"/>
         <source>F11</source>
         <translation>F11</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="887"/>
+        <location filename="../IMainWindow.ui" line="900"/>
         <source>Show the minimum and maximum values of the track properties along the track in the map view.</source>
         <translation>Mostra i valori minimi e massimi delle proprietà della traccia nella mappa.</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="890"/>
+        <location filename="../IMainWindow.ui" line="903"/>
         <source>Ctrl+N</source>
         <translation>Ctrl+N</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="899"/>
+        <location filename="../IMainWindow.ui" line="912"/>
         <source>Start QMapTool</source>
         <translation>Avvia QMapTool</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="908"/>
+        <location filename="../IMainWindow.ui" line="921"/>
         <source>Change Map View Name</source>
         <translation>Cambia il nome della Vista</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="253"/>
+        <location filename="../IMainWindow.ui" line="254"/>
         <source>Database</source>
         <translation>Database</translation>
     </message>

@@ -1,6 +1,7 @@
 # QMapShack — Claude project notes
 
-QMapShack is a Qt/C++ desktop application for planning and analysing GPS tracks, routes, and waypoints. It loads map tiles, vector maps, and DEM data, and supports online and offline routing engines.
+Qt/C++ desktop app for planning and analysing GPS tracks, routes and waypoints. Loads map tiles,
+vector maps and DEM data; supports online and offline routing engines.
 
 ---
 
@@ -9,8 +10,9 @@ QMapShack is a Qt/C++ desktop application for planning and analysing GPS tracks,
 - **Language:** C++20
 - **GUI / framework:** Qt 6.8+
 - **Key libs:** GDAL, PROJ 8+, Routino, QuaZip-Qt6
-- **Build:** CMake 3.20+, Ninja; Debug build in `build/`; binaries in `build/bin/`
+- **Build:** CMake 3.20+, Ninja; Debug build in `build/`, binaries in `build/bin/`
 - **Bundled 3rdparty:** alglib, Garmin FIT SDK
+- **Minimum GDAL:** 3.10
 
 ---
 
@@ -31,86 +33,52 @@ src/
 
 ---
 
-## Working on recent changes
+## Working rules
 
-When asked "what were we working on" or "what did we do last", always check `git status && git diff` first. Memory is stale; the live diff is the ground truth for in-progress work. Memory can supplement but never replace the actual diff.
+- **Never build.** No `cmake --build`, `ninja` or `make` — not even to verify an edit. Make the
+  change, run `clang-format`, report, stop. If a compile is genuinely needed to be sure, say so.
+  For reference, the user runs `cmake --build build --target qmapshack -j$(nproc)`.
+- **Never commit or push** without being asked for that specific change.
+- **No `Co-Authored-By` lines** in commit messages.
+- For "what were we working on", read `git status && git diff` first — the live diff is ground
+  truth, notes are not.
+- Store project learnings in this file, not in the auto-memory system. Append under the matching
+  section or add a new `###`. Keep it to forward-usable facts; git holds the history.
 
 ---
 
-## Tree icons are `QIcon`
-
-`IWksItem::icon` and `IDBItem::icon` are `QIcon` and `getIcon()` returns `const QIcon&`, so the
-delegates render at device resolution and non-GIS tree icons stay crisp on HiDPI.
-
-GIS items (wpt/trk/rte/area) stay raster — `paintItem` pulls the pixmap back out of the `QIcon` and
-stretches it.
-
-**Two delegate paths cannot assume the icon can fill the cell, and both branch on `actualSize`:**
-`paintDevice` (MTP subclasses overwrite the SVG with a raster read off the device) and
-`paintGeoSearch` (`CGeoSearch::setIcon()` composes a raster when "accumulative results" is on). Do
-not collapse either to a bare `QIcon::paint`, and do not add a stretch back: `actualSize(rect) ==
-rect` answers it, and `QIcon` downscales rasters fine. `paintProject`/`paintGeoSearchError` are
-genuinely SVG and paint direct.
-
-**`IDBItem::icon` holds folder icons only.** The DB blob raster lives on `CDBItem` as its own
-`QPixmap displayIcon` (`getDisplayIcon()`), so `CDBItemDelegate::paintItem` stretches it directly.
-Do not re-add a `setIcon(const QPixmap&)` overload on `IDBItem`.
-
 ## Code style
 
-**All C++ is formatted with clang-format.** After editing any `.cpp` or `.h` file run:
+**All C++ is formatted with clang-format.** After editing any `.cpp` or `.h`:
 
 ```bash
 clang-format -i <file> [<file> ...]
 ```
 
-The style is defined in `.clang-format` in the project root (Google base, 120-column limit).
+Style is `.clang-format` in the project root (Google base, 120 columns). Always accept its output —
+never revert or hand-tune it, and keep reformat hunks it makes on unrelated pre-existing drift.
 
-**Always accept clang-format's output — never revert or hand-tune it.** A run may reformat lines
-unrelated to the edit (pre-existing drift); keep those hunks and do not ask about them.
-
-**Every control-flow block requires braces**, even single-liner bodies:
-
-```cpp
-// correct
-if (condition) {
-  doSomething();
-}
-
-// wrong — never do this
-if (condition)
-  doSomething();
-```
-
-**Documentation comments use `/** */` doxygen blocks.** Follow the style of existing blocks (`@brief`, `@param`, `@return`). Inline member docs use `/**< */`. Plain `//` comments are for non-doxygen annotations.
-
-**Keep comments crisp and short — state only the fact needed to understand what the code does, not prose.** Prefer one terse line over a multi-sentence paragraph. Explain the non-obvious *why* (a subtle invariant, a workaround, a gotcha); don't narrate what the code plainly says or restate it at length.
-
-**Pass `QString`/complex objects (`QVector`, `QImage`, etc.) by `const&` unless the function actually mutates them.** A reference parameter that's only read should be `const T&` — it documents read-only intent and doesn't block callers from passing temporaries. Only use a plain `T&` for genuine out-parameters or objects the function mutates in place.
-
-**Prefer `QFileInfo::exists(path)` (static) over `QFileInfo(path).exists()`** when you only need an existence check — no need to construct a full `QFileInfo`.
-
-**Prefer Qt's fixed-width typedefs over plain C++ types**: `qint32`/`quint32` over `int`/`unsigned int`, `qreal` over `double`, `qsizetype` over `size_t`/`ptrdiff_t` for sizes coming from Qt containers. Exception: when a parameter type is dictated by an external API (e.g. GDAL's `int*` out-param, or `size_t` in a `ReadRaster()` signature), match that API's type instead of casting.
-
-**No method implementation may be placed before the ctor and dtor of that class** in a `.cpp` file. The constructor and destructor always come first, in that order; every other member function follows after both.
-
----
-
-## Building
-
-```bash
-cmake --build build --target qmapshack -j$(nproc)
-```
-
-The build directory is `build/` in the project root.
+- **Every control-flow block requires braces**, including single-statement bodies.
+- **Doc comments are `/** */` doxygen blocks** (`@brief`, `@param`, `@return`); inline member docs
+  are `/**< */`; plain `//` for non-doxygen annotations.
+- **Comments state the fact needed to understand the code — one terse line.** Explain a non-obvious
+  invariant, workaround or gotcha; never narrate what the code already says, and never the
+  ticket/bug/PR history behind it.
+- **Pass `QString` and complex objects (`QVector`, `QImage`, …) by `const&`** unless the function
+  mutates them. Plain `T&` is for genuine out-parameters only.
+- **Prefer static `QFileInfo::exists(path)`** over `QFileInfo(path).exists()` for a bare existence
+  check.
+- **Prefer Qt fixed-width typedefs**: `qint32`/`quint32`, `qreal`, `qsizetype` for Qt container
+  sizes. Exception: match an external API's own types (GDAL's `int*` out-param, `size_t` in
+  `ReadRaster()`).
+- **Constructor and destructor come first in a `.cpp`**, in that order; every other member function
+  follows both.
 
 ---
 
 ## Architecture: mouse/line editor
 
-The interactive line editor (for tracks, routes, and areas) lives in `src/qmapshack/mouse/line/`.
-
-### Class hierarchy
+`src/qmapshack/mouse/line/`.
 
 ```
 IMouseEditLine          – owns the point list (SGisLine), undo/redo history,
@@ -126,32 +94,31 @@ ILineOp                 – base for one interactive editing operation
 └── CLineOpSelectRange  – select a range of points for bulk operations
 ```
 
-`IMouseEditLine` delegates all mouse events to the active `ILineOp`. Switching the toolbar button deletes the current op and creates a new one.
+`IMouseEditLine` delegates all mouse events to the active `ILineOp`. Switching the toolbar button
+deletes the current op and creates a new one.
 
-### Routing event-loop re-entrancy hazard
+### Routing event-loop re-entrancy — the subsystem's key invariant
 
-**This is the most important invariant in the subsystem.**
+`CRouterSetup::calcRoute()` shows a `CProgressDialog` running a nested `QEventLoop`. The full Qt
+event pipeline stays live while it spins, so during routing:
 
-`CRouterSetup::calcRoute()` shows a `CProgressDialog` that runs a nested Qt event loop (`QEventLoop::exec()`). While that loop is spinning, the full Qt event pipeline is live — mouse moves, button clicks, and right-clicks all fire normally.
+- `mouseMove()` fires and drifts `points[idxFocus].coord` to the cursor.
+- A right-click reaches `abortStep()` → `restoreFromHistory()`, which reallocates `points` and
+  invalidates every saved index or pointer into it.
+- A left-click can re-enter `leftClick()`.
 
-Consequences for `ILineOp` subclasses:
-- `mouseMove()` fires during routing, drifting `points[idxFocus].coord` to the current cursor position.
-- A right-click calls `abortStep()` → `restoreFromHistory()`, which reallocates the `points` vector and invalidates any saved indices or pointers into it.
-- A further left-click can re-enter `leftClick()` while routing is already running.
+**Any `ILineOp` that triggers routing must go through `runRoutingAndPin(coord)` and check its
+return value.** It:
 
-**The guard is `runRoutingAndPin(coord)`** (defined in `ILineOp`):
-1. Pins `points[idxFocus].coord = coord` before routing so the position is locked.
-2. Sets `isRouting = true` — subclasses check this at the top of `leftClick()` to block re-entrant clicks.
-3. Calls `slotTimeoutRouting()` (which calls `finalizeOperation()` → `tryRouting()`).
-4. After the event loop returns, checks `idxFocus` and `points.size()` for validity (abort during routing leaves both in an unknown state).
-5. Restores `points[idxFocus].coord = coord` to undo any drift from step 1.
-6. Returns `false` if the operation was aborted (caller must return immediately).
-
-Any future `ILineOp` subclass that triggers routing **must** use `runRoutingAndPin()` and check its return value.
+1. Pins `points[idxFocus].coord = coord` before routing.
+2. Sets `isRouting = true` — subclasses test this at the top of `leftClick()` to block re-entry.
+3. Calls `slotTimeoutRouting()` → `finalizeOperation()` → `tryRouting()`.
+4. Re-validates `idxFocus` against `points.size()` after the loop returns (an abort leaves both
+   unknown).
+5. Restores `points[idxFocus].coord = coord`, undoing any drift.
+6. Returns `false` if aborted — the caller must return immediately.
 
 ### CLineOpAddPoint state
-
-Two flags drive the three hover modes:
 
 | `isDragging` | `focusIsEndpoint` | Meaning |
 |---|---|---|
@@ -161,119 +128,281 @@ Two flags drive the three hover modes:
 
 ### Lead lines vs sub lines (vector/track routing)
 
-When vector or track routing is active, `updateLeadLines()` finds the underlying map/track polyline nearest to the active point and stores it in `leadLineCoord1/2` (geographic) and `leadLinePixel1/2` (screen). `GPS_Math_SubPolyline()` then finds which segment of that polyline lies between the two adjacent line points and stores the result in `subLineCoord1/2` / `subLinePixel1/2`. The sub-line is what actually becomes the routed sub-segment on drop.
+With vector or track routing active, `updateLeadLines()` finds the map/track polyline nearest the
+active point → `leadLineCoord1/2` (geographic) and `leadLinePixel1/2` (screen).
+`GPS_Math_SubPolyline()` then extracts the segment lying between the two adjacent line points →
+`subLineCoord1/2` / `subLinePixel1/2`. The sub-line is what becomes the routed sub-segment on drop.
 
 ---
 
 ## Architecture: routers
 
-`IRouter` is the abstract base. The two concrete routers are:
+`IRouter` is the abstract base:
 
-- **`CRouterRoutino`** — offline routing using Routino databases.
-- **`CRouterBRouter`** — routing via BRouter, either as a local process (`CRouterBRouterLocal`) or via its online HTTP API.
+- **`CRouterRoutino`** — offline routing from Routino databases.
+- **`CRouterBRouter`** — BRouter, either a local process (`CRouterBRouterLocal`) or the online HTTP
+  API.
 
-`CRouterSetup` is a singleton (`CRouterSetup::self()`) that owns the active router and exposes `calcRoute()` to the rest of the application. It emits `sigHasFastRouting(bool)` when the router capability changes (e.g. local BRouter starts or stops); `IMouseEditLine` listens to this to enable/disable the auto-routing button.
+`CRouterSetup::self()` is a singleton owning the active router and exposing `calcRoute()`. It emits
+`sigHasFastRouting(bool)` when the router capability changes; `IMouseEditLine` listens and
+enables/disables the auto-routing button.
 
-Only local BRouter supports fast (on-the-fly) routing. Online BRouter and Routino do not — they require the full route to be calculated at once via `calcRoute(const IGisItem::key_t&)`.
+Only local BRouter supports fast (on-the-fly) routing. Online BRouter and Routino need the whole
+route at once via `calcRoute(const IGisItem::key_t&)`.
 
 ---
 
 ## Architecture: tree item delegates
 
-The three `QStyledItemDelegate` subclasses used by the tree views:
-
-- `src/qmapshack/gis/CWksItemDelegate.{h,cpp}` (workspace tree)
-- `src/qmapshack/gis/CDBItemDelegate.{h,cpp}` (database tree)
-- `src/qmapshack/map/CMapItemDelegate.{h,cpp}` (map-item tree)
+- `gis/CWksItemDelegate.{h,cpp}` — workspace tree
+- `gis/CDBItemDelegate.{h,cpp}` — database tree
+- `map/CMapItemDelegate.{h,cpp}` — map-item tree
 
 ### Row layout: CRowBuilder
 
-All `getRectangles*()` methods use `CRowBuilder` (`helpers/CRowBuilder.{h,cpp}`) to compute their rects. It carves a row into icon, button, and text zones without any magic-number arithmetic in the delegates.
+Every `getRectangles*()` uses `CRowBuilder` (`helpers/CRowBuilder.{h,cpp}`) to carve a row into
+icon, button and text zones — no magic-number arithmetic in the delegates.
 
-**Tuning parameters** (defined in `helpers/CDraw.h`):
-- `kCellPad` — outer inset on all four sides of `opt.rect`
-- `kInnerGap` — gap between icon, text column, and each tool button
+Tuning parameters live in `helpers/CDraw.h`: `kCellPad` (outer inset on all four sides of
+`opt.rect`) and `kInnerGap` (gap between icon, text column and each button).
 
-**Typical call sequence:**
 ```cpp
 CRowBuilder row(opt.rect, kCellPad, kInnerGap);
-const QRect rectIcon   = row.takeLeft(row.height());   // square icon
-row.markStatusColumn();                                 // snapshot width for status line
+const QRect rectIcon   = row.takeLeft(row.height());      // square icon
+row.markStatusColumn();                                   // snapshot width for status line
 const QRect rectButton = row.takeButton(fmName.height()); // name-height square button
 const QRect rectName   = row.nameSlice(fmName.height());
 const QRect rectStatus = row.fullStatusSlice(fmStatus.height());
 ```
 
-**Key methods:**
 - `takeLeft(w)` / `takeRight(w)` — carve a full-height rect, advance by `kInnerGap`
-- `takeButton(iconSize)` — carve a square button sized so `CDraw::drawToolButton` renders its icon at exactly `iconSize × iconSize` (compensates for the button's internal icon inset)
+- `takeButton(iconSize)` — square button sized so `CDraw::drawToolButton` renders its icon at
+  exactly `iconSize × iconSize` (compensates the button's internal icon inset)
 - `markStatusColumn()` — snapshot the remaining rect before buttons are carved
-- `nameSlice(h)` — top strip of the remaining (button-narrowed) centre area
-- `statusSlice(h)` — bottom strip of the remaining (button-narrowed) centre area; use when buttons are full-height (CMap)
-- `fullStatusSlice(h)` — bottom strip of the snapshotted pre-button column; use when buttons are shorter than the row (CWks, CDB) so the status line extends under them
-- `rowHeight(cellPad, nameH, statusH)` — matching `sizeHint` height from the same parameters
+- `nameSlice(h)` / `statusSlice(h)` — top / bottom strip of the button-narrowed centre area
+- `fullStatusSlice(h)` — bottom strip of the *pre-button* column, so the status line runs under the
+  buttons
+- `rowHeight(cellPad, nameH, statusH)` — matching `sizeHint` height
 
-**Button height convention:**
-- `CWksItemDelegate`, `CDBItemDelegate`: buttons are `takeButton(fmName.height())` — sized to the name row only; status line uses `fullStatusSlice` and spans the full width underneath
-- `CMapItemDelegate`: button is `takeRight(row.height())` — spans the full row height; status line uses `statusSlice` and is narrowed by the button
+**Button height convention:** `CWksItemDelegate` and `CDBItemDelegate` use
+`takeButton(fmName.height())` (name row only) with `fullStatusSlice`; `CMapItemDelegate` uses
+`takeRight(row.height())` (full row height) with `statusSlice`.
+
+### CMapItemDelegate forward declaration
+
+`animations_t` is defined after `getAnimations()` in the private section, so the
+`struct animations_t;` forward declaration above `getAnimations()` is required. Do not remove it.
 
 ---
 
-## Memory
+## Tree icons are `QIcon`
 
-Store all project-specific learnings, feedback, and notes in this file rather than
-the auto-memory system (`~/.claude/projects/.../memory/`). Append new entries under
-the relevant existing section, or create a new `###` subsection here when nothing fits.
+`IWksItem::icon` and `IDBItem::icon` are `QIcon`, and `getIcon()` returns `const QIcon&`, so
+delegates render at device resolution and non-GIS tree icons stay crisp on HiDPI. GIS items
+(wpt/trk/rte/area) stay raster — `paintItem` pulls the pixmap out of the `QIcon` and stretches it.
 
-Do not run `cmake --build` or any build command — Oliver builds externally.
+**Two delegate paths cannot assume the icon fills the cell and both branch on `actualSize`:**
+`paintDevice` (MTP subclasses overwrite the SVG with a raster read off the device) and
+`paintGeoSearch` (`CGeoSearch::setIcon()` composes a raster when "accumulative results" is on).
+Never collapse either to a bare `QIcon::paint` and never add a stretch back —
+`actualSize(rect) == rect` answers "can this icon fill the cell", and `QIcon` downscales rasters
+fine. `paintProject` / `paintGeoSearchError` are genuinely SVG and paint direct.
 
-Do not add `Co-Authored-By` lines to commit messages.
+**`IDBItem::icon` holds folder icons only.** The DB blob raster lives on `CDBItem` as its own
+`QPixmap displayIcon` (`getDisplayIcon()`), which `CDBItemDelegate::paintItem` stretches directly.
+Do not re-add a `setIcon(const QPixmap&)` overload on `IDBItem`.
 
-### Rich text colours — `CUiTheme`
+---
+
+## Colour scheme — `CUiTheme`
 
 `CUiTheme` (`src/common/theme/`) is the only source of status colours for rich text, label
 stylesheets and `setTextColor()`. Roles `Neutral/Ok/Warn/Error/Info/Code`, each a fixed light/dark
-pair, light arm as authored. Tune there, never per site.
+pair. Tune there, never per site.
 
-- **Set both colours or neither.** A hardcoded background inherits the palette's text colour and
-  inverts on dark. Normal text takes palette colours.
-- Pick the entry point by what the widget *is*:
-  - permanently a status message, only shown and hidden → `markLabel(label, role)`
-  - a value that is *sometimes* a status → `span()`/`spanBold()`, so the colour travels with the
-    string (`CSetupExtTools`, where one label alternates between "not found" and a path)
-  - fills a background (table cell, banner) → `css()`
-  - text on the widget's own background → `cssForeground()`/`foreground()`
-- Never bake a colour into a `tr()` string or a `.ui` `<string>` — the translation carries it.
-- `paletteIsDark()` is `inline` in `CUiTheme.h` so `CSvgtIconEngine::roleColor()` can share it with
-  nothing to link; the plugin needs only `target_include_directories(svgticonengine PRIVATE ..)`.
-  Every consumer of the light/dark split uses it — a second copy of the threshold drifts silently.
-- Re-render on a scheme switch from `QEvent::ApplicationPaletteChange || QEvent::PaletteChange`
-  (`CSvgtIcon`, `CHelpBrowser`, `CListTrkPts`), not from `QStyleHints::colorSchemeChanged`: the
-  colours resolve through `QGuiApplication::palette()`, and a palette event is delivered *because*
-  that palette changed. A widget may get both events, so a re-render can run twice per switch.
-- Printing: `const CUiTheme::ForceLight paperColours(printable)` in `CDetailsPrj::draw()`, beside
-  the two palette branches it completes. It does not touch `QPalette`, so palette colours still
-  need their own paper branch.
+### Choosing the entry point
+
+| The widget… | Use |
+|---|---|
+| is permanently a status message, only shown/hidden | `markLabel(label, role)` |
+| is a value that is *sometimes* a status | `span()` / `spanBold()`, so the colour travels with the string |
+| fills a background (table cell, banner) | `css()` |
+| draws text on its own background | `cssForeground()` / `foreground()` |
+| is a row or cell in an item view | `setForeground()` / `setBackground()` |
+
+Set **both** colours or neither — a hardcoded background inherits the palette's text colour and
+inverts on dark. Set **nothing** on a plain item-view row so it keeps the palette. Grey out with
+`QPalette::Disabled, QPalette::Text`, never `Qt::gray`. Never bake a colour into a `tr()` string or
+a `.ui` `<string>`; the translation carries it.
+
+### Following a live scheme switch — `changeEvent()`
+
+Two measured facts (Qt 6.10.2) set the whole design:
+
+- **`QEvent::PaletteChange` reaches every widget, at every nesting depth, exactly once.** So a
+  widget that holds scheme-derived content rebuilds it in its own `changeEvent()` and needs nothing
+  central to drive it. (`ApplicationPaletteChange` is the one that arrives only on the application
+  object — that difference is what makes `CThemeRefresher` a filter, not a `changeEvent`.)
+- **A themed colour is baked in when the content is set** — into a `QTextCharFormat`, a style
+  sheet, a `QPalette`, a rendered pixmap — and the source is dropped. `QTextDocument::toHtml()`
+  returns the baked colour, not the markup it came from, so `setHtml(toHtml())` repairs nothing.
+  Only re-running whatever produced the content works.
+
+So the rule is Qt's own, and it costs one override in the class that owns the content:
+
+```cpp
+void CFilterSpeed::changeEvent(QEvent* e) {
+  QWidget::changeEvent(e);
+  if (CUiTheme::isPaletteChange(e)) {
+    updateUi();  // whatever already regenerates this widget's content
+  }
+}
+```
+
+- **Regenerate, do not patch.** The producer is normally a method that already exists
+  (`updateData()`, `buildHelpText()`, `renderThemedContent()`), and re-running it fixes the palette
+  colours (links) and the themed markup (`CUiTheme::span`) in one pass. That is why no rich-text
+  widget subclass is needed: every browser in the tree has an owner that regenerates it.
+- **Do not run something re-entrant from the handler.** `CDetailsPrj` restarts its timer because
+  `slotSetupGui()` drives a nested event loop; `CGridPlacer` checks `points` is populated first.
+- **A handler that answers with `setPalette()`/`setFont()` needs a re-entrancy guard** — both
+  re-deliver the event to the same widget (measured: one `updateStyle()` emits two `FontChange`s).
+  `CLineEdit`/`CTinySpinBox` use `applyingStyle`.
+- **Do not hand a themed string to something that stores it.** Pass the role and resolve at render
+  time: `CCanvas::reportStatus(key, role, msg)` keeps the role unresolved in `statusMessages`.
+- A themed colour that is only *returned* (`getInfo()`, a tooltip string) is fine — a tooltip is
+  built fresh each time, and the widget that displays stored markup is what regenerates.
+- **`CThemeRefresher` covers the two cases a `QLabel` cannot fix for itself**: a `markLabel()` role
+  (the style sheet holds the resolved colour, so the role is recorded on the label and applied
+  again) and a baked anchor colour (the label's own text is re-applied). Both are automatic, so a
+  `markLabel()` caller needs no `changeEvent()`. `installThemeRefresh()` belongs in `main.cpp`,
+  beside `CQmsStyle::install()`, once per application — qmaptool needs it too. Do not extend the
+  sweep further; anything else belongs in the owning widget's `changeEvent()`.
+
+Everything below is why a given surface needs rebuilding at all:
+
+- **Never cache a themed colour in a member.** Resolve in the apply path. A cached one is stuck on
+  the scheme it was built under and looks correct until the user switches.
+- **A brush put on an item view's item is resolved once** and outlives a scheme switch, so the view
+  must rebuild the affected rows (`CTableTrk`). Plain rows around them switch on their own, which
+  makes the mismatch easy to miss.
+- **Every map layer paints into a buffer rebuilt only on demand**, so nothing themed on the canvas
+  follows a switch by itself. `CCanvas::changeEvent` forces `slotTriggerCompleteUpdate(eRedrawAll)`
+  — per canvas, not the static `triggerCompleteUpdate()`, which reaches only the visible one.
+- **A `QTextBrowser` cannot be repaired generically.** `setHtml(toHtml())` re-parses the baked
+  colour and changes nothing; the original markup has to be supplied again. Subclassing does not
+  help either — `QTextEdit::setHtml()` is not virtual, so an override would only shadow it.
+- **`setPalette()` freezes only the roles in the palette's resolve mask.** Build a fresh `QPalette`
+  and set just the role you own; every other role keeps following the application palette.
+  `setPalette(QPalette())` clears the override. A copy of `palette()` carries `resolveMask 0` and is
+  a harmless no-op — the freeze comes from the `setColor()`, not the copy. `QFont` behaves the same
+  — express an underline or weight as a bare `QFont` with only that attribute set.
+- **A `.ui` `<palette>` override lands before the constructor body runs** and freezes the same way.
+  `alpha="0"` on `Base`/`Window` is the transparent-field idiom and is fine; an opaque colour in any
+  group is not.
+- **`setPalette()` replaces the widget's own override, it does not merge into it** — including the
+  one `setupUi()` applied. So a widget that sets its own palette cannot take any role from a `.ui`
+  `<palette>`: `CLineEdit` owns the transparent `Base`/`Window` itself, and the `<palette>` blocks
+  on `lineName` in the four `IDetails*.ui` are inert leftovers.
+- **`setTextColor()` is deliberately outside the rule.** It colours the text appended after it,
+  which is the shell-transcript idiom: those lines keep the scheme they were written in on purpose
+  (`CShell`, `IToolShell`, and the tool/BRouter output browsers).
+
+### Checked-state cues — `CQmsStyle`
+
+`CQmsStyle` (`src/common/theme/`) is a `QProxyStyle` installed by `CQmsStyle::install()` from both
+`main.cpp`. It marks the checked state of toggle tool buttons (`PE_PanelButtonTool` + `State_On`)
+and checkable menu items (`CE_MenuItem`), which every style draws too faintly to read on a dark
+palette.
+
+- **Paint a themed cue in a style, never in a style sheet.** A style resolves at paint time, so it
+  follows the palette, cannot go stale and needs no opt-in. An app style sheet using `palette()`
+  resolves once, re-polishes every widget on re-apply, and that re-polish echoes another palette
+  event.
+- **`install()` re-creates the active style by name** — `setStyle()` deletes the style it replaces,
+  so the running one cannot be the base. That is what preserves `-style` / `QT_STYLE_OVERRIDE`.
+- **Paint the menu tint before delegating to the base**, or it dims the text it marks; `CE_MenuItem`
+  fills the row only when selected. Checked rows also go bold, so the cue is not colour alone.
+- **Never fill a checked button with `Highlight`** — `ink` drops to ~1.3:1 on it. A border over the
+  untouched face keeps ~4.9:1.
+- **Menus resist style sheets:** Qt ignores `QMenu::item:checked`, and `QMenu::indicator` needs an
+  `image:`, which for a `.svgt` bypasses `CSvgtIconEngine` and renders black.
+
+### Canvas and printing
+
+- **An info bubble on the canvas is chrome, not map surface — it follows the palette.** Background
+  `CDraw::bubbleBackground()` (`QPalette::Window`), rich text `CDraw::drawBubbleText()`.
+  `CDraw::bubble()` applies the background itself and takes no colour; `CDraw::infoPanel()` is the
+  pointer-less panel (doc + frame + text in one call, leaving the painter translated).
+  `QTextDocument::drawContents()` ignores the painter's pen and takes plain text from
+  `QPalette::Text`, so it cannot be used here. Anchors take `QPalette::Link` at `setHtml()` time and
+  a `PaintContext` cannot override it — a bubble that is not palette-backed needs an `a { color: }`
+  default style sheet set *before* the markup is parsed.
+- **An `IScrOpt` overlay draws its sheet with `CDraw::bubbleBackground()`, resolved in `draw()`** —
+  the table and `.svgt` toolbar icons on it follow the palette, so a white sheet strands them.
+- **`CDraw::text()` haloes in white.** That is for text over map tiles, where the halo is what makes
+  any colour readable; on a solid themed bubble it glows. Paint there with a plain `drawText()` and
+  `CMainWindow::self().getMapFont()` (`CGisItemTrk::drawLimitLabels`).
+- **Printing:** `const CUiTheme::CForceLight paperColours(printable)` in `CDetailsPrj::draw()`,
+  beside the two palette branches it completes. It does not touch `QPalette`, so palette colours
+  still need their own paper branch.
 - `QTextBrowser` applies a `<link>`ed stylesheet (`loadResource`, `StyleSheetResource`), so
   `CHelpBrowser::loadResource()` appends a themed `code, pre` rule to whatever the packaged help
-  ships. That CSS lives outside this repo; `Role::Code`'s light arm is picked to match its `code`
-  background, so light mode renders unchanged.
-- Untouched on purpose: `CShell`/`IToolShell` colour each line as it is appended, so lines already
-  in the log keep the scheme they were written in; `IPlot`'s plot sheet, the halo
-  under `CWksItemDelegate`'s progress bar and `CIconGrid`'s tiles are white by design.
+  ships. That CSS lives outside this repo; `Role::Code`'s light arm matches its `code` background,
+  so light mode renders unchanged.
+- `paletteIsDark()` is `inline` in `CUiTheme.h` so `CSvgtIconEngine::roleColor()` can share it with
+  nothing to link (the plugin needs only `target_include_directories(svgticonengine PRIVATE ..)`).
+  It is for that plugin and for `CUiTheme::isDark()` alone — **app code branches on
+  `CUiTheme::isDark()`**, which is the same test plus the `CForceLight` override. Never write a
+  third copy of the threshold; it drifts silently.
 
-### IDrawContext — logical vs device pixels (HiDPI)
+### Deliberately light — do not "fix"
 
-`convertRad2Px()`/`convertPx2Rad()` work in **logical** viewport pixels (built from `center` and
+- **`IPlot`'s sheet is white in every theme.** `eModeNormal` and `eModeSimple` both
+  `fillRect(rect(), Qt::white)`; waypoint icons are painted straight onto it and are unthemable
+  raster symbols authored for a light ground. A themed panel around a white plot is intended
+  (`CScrOptRangeTool`).
+- `CShell`/`IToolShell` colour each line as it is appended, so lines already in the log keep the
+  scheme they were written in.
+- The halo under `CWksItemDelegate`'s progress bar and `CIconGrid`'s tiles are white by design.
+- `CIconGrid`, `CScrOptUnclutter`, `CPrintDialog`, the qmaptool overlays and `CMapIMG` are
+  self-consistent light surfaces. `CDetailsOvlArea`'s white brush-style swatches are the neutral
+  ground a pattern preview wants.
+- **A hardcoded colour is a defect only once its contrast fails against both arms.** A mid-grey such
+  as `Qt::darkGray` clears `#efefef` and `#353535` alike, and white is a legitimate neutral ground
+  for a swatch or preview tile. Work out both grounds before filing one.
+
+### Exercising a live scheme switch
+
+`plasma-apply-colorscheme BreezeDark` with the app running, and `QT_QPA_PLATFORMTHEME` unset — on
+`qt5ct` the Qt 6 platform theme never loads and no scheme change reaches the app.
+
+Good probe: a DEM property panel with "Enable color shading" on and the grades combo at its **last**
+entry, where the slope spins go read-write and underlined in `Role::eInfo`. The panel is cached on
+the DEM (`IDem::getSetup()`), so it holds a stale scheme until the DEM is unloaded.
+
+---
+
+## IDrawContext — logical vs device pixels (HiDPI)
+
+`convertRad2Px()` / `convertPx2Rad()` work in **logical** viewport pixels (built from `center` and
 `scale*zoomFactor`) so they match Qt mouse/widget coordinates. The draw **buffers** are **device**
 pixels: `bufWidth/bufHeight = viewWidth/viewHeight * pixelRatio + 2*BUFFER_BORDER`, and `draw()`
-divides the scale by `pixelRatio`. Never compare a `convertRad2Px()` result against `bufWidth`/
-`bufHeight` — they only agree at `pixelRatio == 1`. Use `viewWidth`/`viewHeight` for viewport-fit
-tests (this caused QMS-1142: zoom-to-track clipped on HiDPI). Test HiDPI paths on a normal screen
-with `QT_SCALE_FACTOR=2 build/bin/qmapshack` (add `QT_SCALE_FACTOR_ROUNDING_POLICY=PassThrough`
-for fractional factors like 1.5).
+divides the scale by `pixelRatio`.
 
-### Icons — hold a `QIcon`, never a `QPixmap`
+**Never compare a `convertRad2Px()` result against `bufWidth`/`bufHeight`** — they agree only at
+`pixelRatio == 1`. Use `viewWidth`/`viewHeight` for viewport-fit tests.
+
+Test HiDPI paths on a normal screen with `QT_SCALE_FACTOR=2 build/bin/qmapshack`, adding
+`QT_SCALE_FACTOR_ROUNDING_POLICY=PassThrough` for fractional factors like 1.5.
+
+---
+
+## Icons
+
+Developer howto: `README_ICON.md`.
+
+### Hold a `QIcon`, never a `QPixmap`
 
 A `QPixmap` is one raster frozen at the dpr it was built at: it cannot serve a larger request and
 cannot follow a window to another screen, whatever the source format.
@@ -282,23 +411,37 @@ cannot follow a window to another screen, whatever the source format.
   `:/icons/Foo.svgt` and let the paint path ask for the size.
 - Static icon in a dialog: `QSvgWidget` + `CSvgtIcon::load()`. Qt ships no widget that displays a
   `QIcon`, and `uic` bakes a `<pixmap>` into `QPixmap(path)` before any widget sees the path.
-- Rich text `<img>`: `CSvgtIcon::htmlImageSrc()`, and always give both `width` and `height` —
-  without them there is no HiDPI path.
+- Rich text `<img>`: `CSvgtIcon::htmlImageSrc()`, always with both `width` and `height` — without
+  them there is no HiDPI path.
 - Canvas rasters (waypoints, POI, cache) are data, not icons.
-- Never `static` a paint-path icon — a static pins the colour scheme live at first paint and hides
-  the icon from a path-shaped grep. There are none in the tree; keep it that way.
-- `actualSize(rect) == rect` is the test for "can this icon fill the cell".
+- **Never `static` a paint-path icon** — it pins the colour scheme live at first paint and hides the
+  icon from a path-shaped grep. There are none in the tree; keep it that way.
 
-`cmake/IconGate.cmake` fails the build on the regex-detectable violations. It deliberately cannot
-see `QIcon(pixmapVariable)` or a `.pixmap(w,h)` missing its dpr.
+`cmake/IconGate.cmake` fails the build on regex-detectable violations. It deliberately cannot see
+`QIcon(pixmapVariable)` or a `.pixmap(w,h)` missing its dpr.
 
-**Left alone deliberately — do not "finish" these:** the three `.pixmap(w,h)` calls with no dpr
-(`CSelectCopyAction.cpp:48/50`, `CInvalidTrk.cpp:34`); `IGridPlacer.ui`'s `line_3px_*` black PNGs;
-`CGeoSearchWeb`'s service icons, where the stored path is user data and `defaultIcon` equality is
-the "is this user-added" test — converting needs a settings migration plus an `isUserDefined` flag
-first, or "Restore default list" erases the user's own services.
+**Left alone deliberately — do not "finish" these:** the three `.pixmap(w,h)` calls with no dpr in
+`CSelectCopyAction`/`CInvalidTrk`; `IGridPlacer.ui`'s `line_3px_*` black PNGs; `CGeoSearchWeb`'s
+service icons, where the stored path is user data and `defaultIcon` equality is the "is this
+user-added" test — converting needs a settings migration plus an `isUserDefined` flag first, or
+"Restore default list" erases the user's own services.
 
-### Icons — nothing that stores an icon path may be pruned
+### SVG line endings are pinned to LF
+
+`.gitattributes` pins `*.svg`, `src/icons/svg.sha256` and `src/icons/svghygiene` to `text eol=lf`
+because `cmake/IconHygiene.cmake` compares `file(SHA256)` of each **working-tree** `.svg` against
+`src/icons/svg.sha256`. One CR changes the hash, and the build reports every icon as edited and
+demands inkscape + python3.
+
+**A blob committed with CRs cannot be cleaned by `checkout`/`restore`.** `eol=lf` normalises on the
+way *in*, never on the way out, so the CRs land in the working tree while diff normalises the file
+back — those paths report as modified forever, and any merge that touches them refuses to start
+before doing anything. Only a commit carrying LF blobs fixes it.
+
+When the local branch is a strict ancestor of the incoming one and the only dirt is that CR churn,
+the merge is a fast-forward blocked by nothing real: `git reset --hard <remote>/<branch>`.
+
+### Nothing that stores an icon path may be pruned
 
 No icon PNG is ever pruned and no dead qrc entry is removed. Two populations store a *path*, not a
 picture, so a pruned PNG is a blank icon in somebody's existing file:
@@ -314,32 +457,29 @@ stays readable by a build without the icon engine, where a `.svgt` path renders 
 
 The `comment` column keeps its PNG paths — it exists for full-text search and is never rendered.
 
-### Icons — drawing rules that no tool catches
-
-Developer howto: `README_ICON.md`.
+### Drawing rules no tool catches
 
 - **Draw structural line-art in `ink`.** Qt greys a disabled icon by lightness only, so an icon
-  drawn just in `lead`/`paper` looks identical enabled and disabled on dark. Keep `lead` for a
+  drawn only in `lead`/`paper` looks identical enabled and disabled on dark. Keep `lead` for a
   secondary outline. (`RatingStarEmpty`/`UnFocus` stay grey because grey *is* their meaning.)
 - **Never give a shape's stroke the same role as its fill.** It renders invisible and every tool
   passes, because each colour is individually valid. Only a render shows it.
-- **The letter or shape carries the meaning; colour is never the only cue** — `SQLite`/`MySQL` use
-  a bold initial on the cylinder face plus a brand-colour cap, not colour alone.
-- **Negation uses the set's own mark**, a red `#ff5555` disc with a `paper` slash, as `NotPossible`.
+- **The letter or shape carries the meaning; colour is never the only cue** — `SQLite`/`MySQL` use a
+  bold initial on the cylinder face plus a brand-colour cap.
+- **Negation uses the set's own mark**: a red `#ff5555` disc with a `paper` slash, as `NotPossible`.
 - **Bake lettering to paths** (`inkscape --actions "select-all;object-to-path"`), then strip the
-  group's inline `style` back to `fill:currentColor`. The conversion resolves the class's `color`
+  group's inline `style` back to `fill:currentColor` — the conversion resolves the class's `color`
   inline, and an inline value shadows the themed class. Never ship live `<text>`.
 - A family (`Act*`, `Add*`, `Mime*`) shares stroke weight, corner radius and optical size.
 
-### Icons — Qt renderer traps the pipeline works around
+### Qt renderer traps the pipeline works around
 
 Qt has no SVG recolouring API, so `CSvgtIconEngine` rewrites the SVG text and loads via
-`QSvgRenderer(QByteArray)`. Qt's renderer *does* resolve `currentColor` — only the setter is
-missing. The traps that shape the pipeline:
+`QSvgRenderer(QByteArray)`. Qt's renderer *does* resolve `currentColor` — only the setter is missing.
 
-- `currentColor` with no `color` set renders **black** (in Qt and inkscape); a **duplicate**
-  `color=` renders **nothing**; lowercase `currentcolor` is black (QTBUG-46947); a `<style>` class
-  beats a root `color=`, so the KDE/Breeze idiom does not mix with ours.
+- `currentColor` with no `color` set renders **black** (Qt and inkscape); a **duplicate** `color=`
+  renders **nothing**; lowercase `currentcolor` is black (QTBUG-46947); a `<style>` class beats a
+  root `color=`, so the KDE/Breeze idiom does not mix with ours.
 - `QSvgRenderer` **ignores a class-supplied `fill:`**. `recolored()` inlines the resolved fill as a
   presentation attribute; without it 19 icons render black.
 - Qt ignores `markerUnits="strokeWidth"`, so `svghygiene` bakes markers into geometry. Set
@@ -352,301 +492,280 @@ Dark `ink` is `#9999ff`: it must stay legible on `paper` `#353535` at 4.5:1 whil
 `lead` `#e0e0e0` (120 icons paint both) and `mark` `#66aaff` (19 icons paint both). That rules out
 the azure family — a "more vibrant blue" means a more saturated navy, not a different blue.
 
-### Icons — waypoints are data, not chrome
+### Waypoints are data, not chrome
 
 `src/icons/waypoints/` is named by the GPX `<sym>` vocabulary shared with Garmin and its exact look
 is a frozen contract, so it **stays PNG on the canvas**: SVG would hand rendering to whichever Qt
 the user has, and a Qt antialiasing change could silently restyle accepted iconography. External
-user icons are PNG/BMP forever (`CWptIconManager.cpp:2010`), so the raster path must exist anyway.
-Dark theming does not apply — they sit on map tiles, not the UI palette.
+user icons are PNG/BMP forever (`CWptIconManager`), so the raster path must exist anyway. Dark
+theming does not apply — they sit on map tiles, not the UI palette.
 
 A waypoint symbol used as **UI chrome** (menu action, tool button) is under none of that and uses
 the SVG. Only `FlagBlue.svg` and `PinBlue.svg` are registered; add others as UI needs them.
 
-Gate any waypoint change with `src/icons/tools/wptdiff.py --size 96`, which must report
+Gate any waypoint change with `src/icons/tools/wptdiff.py --size 96` — it must report
 `visible (>8) == 0`.
 
 **`icon_t::focus` is absolute pixels of the loaded raster**, hardcoded against 32. Any resolution
 change breaks every anchor until focus is stored relative (0..1) — a prerequisite for touching
-waypoint resolution at all. Two getters exist: `getWptIconScaledByName` holds `focus = focus *
-scale`, `getWptIconByName` does not. `focus` is serialized but overwritten on every load via
+waypoint resolution at all. `getWptIconScaledByName` holds `focus = focus * scale`;
+`getWptIconByName` does not. `focus` is serialized but overwritten on every load via
 `deriveSecondaryData()`, so a relative-focus change needs no migration.
-
-### TODO — POI icons (SJJB) can be converted
-
-POIs are not waypoints: no canvas freeze applies. 303 SVGs already ship under
-`src/icons/poi/SJJB/svg/<category>/` and 249 of the 250 referenced PNGs have a counterpart, but
-none are in `resources.qrc`. They are SJJB templates carrying a placeholder fill `#111111` that
-their build recolours per category, so the colour has to be recovered per icon from the shipped
-PNGs (16 categories, 6 of them with 2–3 variants).
-
-Work: register ~250 SVGs, add a recolour step, change `CPoiIconCategory`'s `QPixmap` members to
-paths plus ~302 literals in `CPoiFilePOI_TagMap.cpp` — the path *shape* changes, so that needs a
-lookup table, not a regex — and a render cache keyed by (icon, size, dpr). The cache is a win
-regardless: `CPoiFilePOI.cpp:204` `.scaled()`s a pixmap per POI per repaint.
-
-Gate it or do not do it: render each recoloured SVG at 32, diff against its shipped PNG, require
-`visible (>8) == 0`. A diff that measures **colour** reports ~240 false failures.
-
-Two defects found while scoping: `CPoiFilePOI_TagMap.cpp:118` asks for
-`health_pharmacy_dispencing` (a typo; the SVG is `pharmacy_dispensing`), and one SVG embeds a
-raster that is not in the tree (`pastedpic_10102008_233747.png`).
 
 ### GIS item icons — serialization stores sym/colour, not the icon
 
-`.qms`/DB persist the **symbol name** (`wpt.sym`, `serialization.cpp:86`) and the **colour**
-(`trk.color`/`area.color`, `:614`/`:827`) — never a rendered icon. The icon is re-derived on load:
-waypoint via `getWptIconByName(sym)`, track/area by loading `Track.png`/`Area.png` as a shape mask
-and filling it with the data colour. The rendered pixmaps in the DB `items.icon` BLOB and `.qms`
-`history_event_t.icon` are output caches, not sources of truth. **Serialization does not constrain
-the source format** — do not repeat the belief that it does.
+`.qms`/DB persist the **symbol name** (`wpt.sym`) and the **colour** (`trk.color`/`area.color`),
+never a rendered icon. The icon is re-derived on load: waypoint via `getWptIconByName(sym)`,
+track/area by loading `Track.png`/`Area.png` as a shape mask and filling it with the data colour.
+The rendered pixmaps in the DB `items.icon` BLOB and `.qms` `history_event_t.icon` are output
+caches. **Serialization does not constrain the source format.**
 
-So only the waypoint symbol is a genuinely frozen raster, and for the canvas-freeze reason above.
-**Tracks and areas can be SVG**: their PNG is used only as a silhouette mask
-(`createMaskFromColor`), so an SVG rendered at the target size gives a crisp mask and the same data
-colour. `QIcon` will not upscale a raster, so such a change must render the SVG at size rather than
-wrap the old 32px PNG.
+So only the waypoint symbol is a genuinely frozen raster. **Tracks and areas can be SVG**: their PNG
+is only a silhouette mask (`createMaskFromColor`), so an SVG rendered at the target size gives a
+crisp mask and the same data colour. `QIcon` will not upscale a raster, so such a change must render
+the SVG at size rather than wrap the old 32px PNG.
 
-### CMapItemDelegate — forward declaration pitfall
+---
 
-`animations_t` is defined after `getAnimations()` in the private section. The forward
-declaration `struct animations_t;` before `getAnimations()` is required — do not remove it.
+## GDAL
 
-### QImage::Format_Indexed8 + GDAL RasterIO/ReadRaster — row padding pitfall
+### `QImage::Format_Indexed8` + `RasterIO`/`ReadRaster` — row padding
 
-Never pass `img.bits()` directly as the destination buffer for a GDAL `RasterIO`/`ReadRaster`
-call when the image width isn't guaranteed to be a multiple of 4. Qt may pad
-`QImage::bytesPerLine()` beyond the pixel width for 1-byte-per-pixel formats (`Format_Indexed8`),
-but a GDAL read with no explicit line spacing assumes the buffer is tightly packed
-(`bytesPerLine == width`), silently corrupting/skewing every row once they diverge.
+**Never pass `img.bits()` as the destination buffer** when the width isn't guaranteed to be a
+multiple of 4. Qt may pad `QImage::bytesPerLine()` beyond the pixel width for 1-byte-per-pixel
+formats, but a GDAL read with no explicit line spacing assumes a tightly packed buffer
+(`bytesPerLine == width`), silently skewing every row once they diverge.
 
-The old `CMapVRT` tiling code (pre-GDAL-warp version) masked tile width with `& 0xFFFFFFFC` to
-dodge exactly this for partial edge tiles — a sign the bug is real, not theoretical. The fix
-(used by both `CDemVRT` and the current `CMapVRT`, see `map/CMapVRT.cpp`'s `draw()`): read into a
-flat `QVector<quint8>` (no padding concerns, it's just linear memory) and build the `QImage` via
-the constructor that takes an explicit `bytesPerLine` argument:
-`QImage(buf.constData(), w, h, w, QImage::Format_Indexed8)`. Multi-byte-per-pixel formats
-(`Format_ARGB32`, 4 bytes/px) aren't affected since `width * 4` is always a multiple of 4.
+Read into a flat `QVector<quint8>` and build the image with the explicit-stride constructor:
+`QImage(buf.constData(), w, h, w, QImage::Format_Indexed8)` — as `CDemVRT` and `CMapVRT::draw()` do.
+Multi-byte formats (`Format_ARGB32`) are unaffected since `width * 4` is always a multiple of 4.
 
-### CMapVRT/CDemVRT warped VRT — transparency outside the source footprint
+### Warped VRT — transparency outside the source footprint
 
-`GDALAutoCreateWarpedVRT` resamples onto an axis-aligned bounding box around the (possibly
-rotated) reprojected footprint, so corners with no source coverage exist whenever the source
-isn't already axis-aligned with the target SRS. What fills those corners depends on the data path:
+`GDALAutoCreateWarpedVRT` resamples onto an axis-aligned bounding box around the reprojected
+footprint, so corners with no source coverage exist whenever the source isn't already axis-aligned
+with the target SRS. What fills them depends on the path:
 
-- Single-band palette/gray (`CMapVRT`): already handled. If the source declares a nodata value,
-  GDAL falls back to using it as both src/dst nodata for the warp (we never set
-  `padfSrcNoDataReal`/`padfDstNoDataReal` ourselves), so uncovered pixels come back as that nodata
-  index — and the constructor already zeroes that index's alpha in the colortable. No source
-  nodata declared means no automatic transparency here; `Format_Indexed8` has no separate alpha
-  channel to retrofit one.
-- Multi-band RGB(A) without its own alpha band (`CMapVRT`): fixed via a synthetic destination alpha
-  band (`GDALWarpInitDefaultBandMapping` + `psOptions->nDstAlphaBand = nBandCount + 1`, mirroring
-  `gdalwarp -dstalpha`). The warp tracks per-pixel source coverage into that band automatically;
-  `rasterBandCount` is re-read from the warped dataset afterward so `draw()`'s band loop picks it
-  up like any other band. Verified with a standalone `gdalwarp`/Pillow test (rotated 3-band source,
-  `-dstalpha` on vs. off): without the alpha band, uncovered corners come back **solid black**
-  (0,0,0) - GDAL's own warp fill, not the `img.fill(white)` pre-fill in `draw()`, which gets
-  unconditionally overwritten by the per-band `ReadRaster` call regardless of coverage. With the
-  alpha band, those same corners get alpha=0 and composite-out correctly.
-- `CDemVRT`: no such handling exists. Uncovered elevation samples read back as whatever the
-  destination buffer was zero-initialized to (not `NOFLOAT`), since `getElevationAt()`/`draw()`
-  never check warp coverage explicitly. Hasn't been revisited — only matters for non-axis-aligned
-  DEM sources.
+- **Single-band palette/gray (`CMapVRT`)** — handled. If the source declares a nodata value, GDAL
+  uses it as both src/dst nodata (we never set `padfSrcNoDataReal`/`padfDstNoDataReal`), so
+  uncovered pixels come back as that index and the constructor zeroes its alpha in the colortable.
+  With no source nodata there is no automatic transparency; `Format_Indexed8` has no alpha channel
+  to retrofit one.
+- **Multi-band RGB(A) without its own alpha band (`CMapVRT`)** — handled by a synthetic destination
+  alpha band (`GDALWarpInitDefaultBandMapping` + `psOptions->nDstAlphaBand = nBandCount + 1`,
+  mirroring `gdalwarp -dstalpha`). The warp tracks per-pixel source coverage into it;
+  `rasterBandCount` is re-read from the warped dataset afterwards so `draw()`'s band loop picks it
+  up. Without it, uncovered corners come back solid black — GDAL's own warp fill, which
+  unconditionally overwrites the `img.fill(white)` pre-fill in `draw()`.
+- **`CDemVRT`** — no handling. Uncovered elevation samples read back as whatever the destination
+  buffer was zero-initialised to (not `NOFLOAT`); `getElevationAt()`/`draw()` never check warp
+  coverage. Only matters for non-axis-aligned DEM sources. **Open.**
 
-### CDemVRT/IDem rendering-speed punch list
+### Blank hillshade when zoomed out
 
-Rendering-speed pass on `CDemVRT`/`IDem` (2026-06-24, see `git log` on `CDemVRT.{h,cpp}`/
-`IDem.{h,cpp}` for the done work): removed a per-pixel virtual-call+`QString` in elevation
-shading, replaced `atan2`/`sin` with an algebraic identity in hillshading, made `draw()` reuse its
-read/output buffers across frames instead of reallocating, hoisted several loop-invariant
-per-pixel computations, and fused all 5 shading layers into 3 passes (`IDem::computeShading()`)
-instead of one `threadPool` dispatch round per layer - each pass entered only if at least one of
-its layers is active, so "is this layer enabled" is a once-per-call decision, never a per-pixel
-one.
+Symptom: hillshading renders at close zoom but is blank far out. `CDemVRT::draw()` reads via
+`ReadRaster()` with automatic overview selection, so at high `buf_scale` GDAL can pick a corrupt or
+all-NoData overview level and return an all-NoData buffer.
 
-Still open: batch `getElevationAt()`/`getSlopeAt()` point queries (currently one small `RasterIO`
-call per point, e.g. per vertex of a track elevation profile) - a different code path than
-`draw()`'s map rendering, worth revisiting only if track-profile performance comes up.
+Check overview integrity *before* suspecting `CDemVRT.cpp`/`IDem.cpp`:
+`gdallocationinfo -valonly -overview <N> <vrt> <x> <y>` at several sample points. Fix by rebuilding
+the `.ovr` — delete the old one, then `gdaladdo -ro -r average <vrt> <factors>`.
 
-Skipped: caching `1/xscale`/`1/yscale` for `slopeOfWindowInterp()` - modest win, and hoisting it
-would need either a signature change touching its 3 callers or new cached members with a
-staleness trap (`xscale`/`yscale` are plain protected members assigned directly, no setter to keep
-a reciprocal in sync).
+### External tool paths
 
-### DEM overview corruption — blank hillshade when zoomed out
+Always resolve via `IAppSetup::getPlatformInstance()->findExecutable("toolname")`, never a bare
+name. `CAppSetupWin` restricts `PATH` to the app directory to prevent DLL conflicts, so a bare name
+silently yields `QProcess::FailedToStart` on Windows if the binary isn't co-located with the app.
 
-Symptom: hillshading renders at close zoom but is blank far out. Cause: `CDemVRT::draw()` reads
-via `ReadRaster()` with automatic overview selection, so at high `buf_scale` GDAL can pick a
-corrupt/all-NoData overview level and return an all-NoData buffer. Check overview integrity
-*before* suspecting `CDemVRT.cpp`/`IDem.cpp`: `gdallocationinfo -valonly -overview <N> <vrt> <x>
-<y>` at several sample points. Fix by rebuilding the `.ovr` (`gdaladdo -ro -r average <vrt>
-<factors>`, deleting the old `.ovr` first). Hit once on `Bayern_DGM1.vrt` (factor-16 overview
-was all `-9999`).
+---
 
-### Overview-advisory system: render-timeout dialog + proactive tree badge
+## Overview-advisory system
 
-Warns when a VRT-backed map/DEM has missing/inadequate GDAL overview pyramids, or too
-many source files, and can fix both.
+Warns when a VRT-backed map/DEM has missing or inadequate GDAL overview pyramids, or too many
+source files, and can fix both.
 
-**Key files:**
+**Files:**
 - `helpers/CGdalVrtUtil.{h,cpp}` — `buildOverviewAdvice()`, `suggestOverviewLevels()`,
   `handleRenderTimeout()`, `overview_advice_t`, `file_overview_info_t`, `raster_geometry_t`,
   `overview_advisory_state_t`, `read_deadline_t`, `kMetersPerDegree`
 - `helpers/CVrtAdvisoryDialog.{h,cpp}` + `.ui` — the fix/info/combine dialog
-- `helpers/CVrtCombiner.{h,cpp}` — the "Combine files..." grid-split/footprint logic
+- `helpers/CVrtCombiner.{h,cpp}` — "Combine files..." grid-split/footprint logic
 - `dem/CDemVRT.{h,cpp}`, `map/CMapVRT.{h,cpp}` — own `overviewAdvice`/`advisoryState`/`rasterGeometry`
 - `dem/CDemWCS.cpp` — opts out via `supportsOverviewAdvisory=false`
 - `map/IMap.h`, `dem/IDem.h`, `map/IMapItem.h`, `map/CMapItemDelegate.{h,cpp}` — badge + on-demand info
 - `map/CMapItem.cpp`, `dem/CDemItem.cpp`, `map/CMapList.cpp`, `dem/CDemList.cpp` — context-menu entry
-- `canvas/CCanvas.cpp` — owns/shows the dialog
+- `canvas/CCanvas.cpp` — owns and shows the dialog
 
-**Invariant: the dataset is always a VRT.** `new CMapVRT`/`new CDemVRT` only happen for
-files with suffix `.vrt`; every other format has its own class. `CDemWCS` opts out via
-`supportsOverviewAdvisory=false`. `buildOverviewAdvice()` relies on this — no "concrete
-raster format" branch exists.
+**Invariant: the dataset is always a VRT.** `new CMapVRT`/`new CDemVRT` happen only for `.vrt`
+files; every other format has its own class, and `CDemWCS` opts out. `buildOverviewAdvice()` relies
+on this — there is no "concrete raster format" branch.
 
-**Invariant: `overviewAdvice`, tile count and overview state are immutable per instance.**
-Any DEM/map list change — including a successful Fix/Combine (`sigContainerRebuilt` →
-`setupDemPath`/`setupMapPath`) — destroys the `CDemVRT`/`CMapVRT` and creates a new one with
-freshly-built advice; nothing updates it in place. `overviewNeedsAttention` caches
-`needsAttention()` at setup so the tree delegate's per-paint badge poll (`showsOverviewWarning()`)
-is O(1) instead of walking `perFileInfo`.
+**Invariant: `overviewAdvice`, tile count and overview state are immutable per instance.** Any
+DEM/map list change — including a successful Fix/Combine (`sigContainerRebuilt` →
+`setupDemPath`/`setupMapPath`) — destroys the instance and creates a new one with fresh advice;
+nothing updates it in place. `overviewNeedsAttention` caches `needsAttention()` at setup so the
+delegate's per-paint badge poll (`showsOverviewWarning()`) is O(1) instead of walking `perFileInfo`.
 
-**Trigger:** `CDemVRT`/`CMapVRT::draw()` wraps `ReadRaster()` with a 5s deadline
-(`read_deadline_t` + GDAL's own progress-abort hook — don't add a second warp-options
-progress callback, it caused a UI freeze). On timeout, `handleRenderTimeout()` fires the
-advisory (render thread → GUI thread) once per loaded instance per session, but only when
-`showsOverviewWarning()` (`!suppress && needsAttention()`) — the same condition as the
-proactive tree badge, so a render slow for an unrelated reason no longer pops it.
+**Trigger:** `draw()` wraps `ReadRaster()` with a 5 s deadline (`read_deadline_t` + GDAL's own
+progress-abort hook — do not add a second warp-options progress callback, it froze the UI). On
+timeout `handleRenderTimeout()` fires the advisory (render thread → GUI thread) once per loaded
+instance per session, and only when `showsOverviewWarning()` (`!suppress && needsAttention()`) — the
+same condition as the proactive tree badge.
 
-**The advisory dialog is application-modal** (`setModal(true)`): while it is open the
-map/DEM it is about must not be read. A pan's `draw()` or a mouse-move's `getElevationAt()`
-racing a Fix/Combine file rewrite (external gdaladdo/gdalbuildvrt process — the in-process
-dataset mutex can't guard it) crashes GDAL. Modal blocks user input; a background redraw
-from a sibling layer during a job is a known residual (not guarded).
+**The dialog is application-modal** (`setModal(true)`): while it is open the map/DEM it is about
+must not be read. A pan's `draw()` or a mouse-move's `getElevationAt()` racing a Fix/Combine file
+rewrite (an external gdaladdo/gdalbuildvrt process — the in-process dataset mutex cannot guard it)
+crashes GDAL. Modal blocks user input; a background redraw from a sibling layer during a job is a
+known unguarded residual.
 
-**`buildOverviewAdvice(dataset, band, isPaletteIndexed, suggestedLevels)`:** a read can be
-sped up by two additive sources — the container's own overview, and/or each source
-file's own overview for whichever region is read.
-1. Container's claim is trusted immediately only if a real `.ovr` file is in
-   `GetFileList()`; a bare `<OverviewList>` is not trusted yet.
-2. If the verified container factor already meets `targetFactor`, every source file is
-   skipped (`perFileInfo` still lists them, `checked=false`).
-3. Otherwise every source is probed. An unverified `<OverviewList>` becomes trusted if
-   every source turns out to have its own overview; otherwise discarded.
+### `buildOverviewAdvice(dataset, band, isPaletteIndexed, suggestedLevels)`
+
+A read can be sped up by two additive sources: the container's own overview, and each source file's
+own overview for the region read.
+
+1. The container's claim is trusted immediately only if a real `.ovr` file is in `GetFileList()`; a
+   bare `<OverviewList>` is not trusted yet.
+2. If the verified container factor already meets `targetFactor`, every source file is skipped
+   (`perFileInfo` still lists them, `checked=false`).
+3. Otherwise every source is probed. An unverified `<OverviewList>` becomes trusted if *every*
+   source turns out to have its own overview; otherwise it is discarded.
 4. `weakestMaxFactor = max(containerFactor, weakestSourceFactor)`.
 
-`containerHasOwnOvr` is `true` only via step 1; a `checked=false` entry (step 2) always
-implies `containerHasOwnOvr == true`.
+`containerHasOwnOvr` is true only via step 1; a `checked=false` entry always implies
+`containerHasOwnOvr == true`.
 
-**Factors are per-file pixel ratios (`fullResSize / overviewSize`)**, read from each
-file's own band before any warp — no geotransform/CRS math involved, even when sources
-and container differ in CRS.
+**Factors are per-file pixel ratios (`fullResSize / overviewSize`)**, read from each file's own band
+before any warp — no geotransform/CRS math, even when sources and container differ in CRS.
 
-**`suggestOverviewLevels(xsize, ysize, maxFactor)`:** doubles from 2 until the decimated
-size drops below the primary screen's longest dimension (fallback 1920px) or `maxFactor`.
-`CDemVRT` leaves `maxFactor` unbounded; `CMapVRT` caps at `kMaxMapOverviewFactor = 16`.
+**`suggestOverviewLevels(xsize, ysize, maxFactor)`** doubles from 2 until the decimated size drops
+below the primary screen's longest dimension (fallback 1920 px) or `maxFactor`. `CDemVRT` leaves
+`maxFactor` unbounded; `CMapVRT` caps at `kMaxMapOverviewFactor = 16`.
 
-**`<OverviewList>` mechanics:** `gdalbuildvrt` (GDAL ≥ 3.2) writes it automatically only
-at build time, not retroactively. GDAL won't complain about a declared factor with no
-backing data — silently falls back to full-resolution reads, hence the verification
-above. Minimum supported GDAL version: 3.10.
+**`<OverviewList>` mechanics:** `gdalbuildvrt` (GDAL ≥ 3.2) writes it automatically at build time
+only, never retroactively. GDAL does not complain about a declared factor with no backing data — it
+silently falls back to full-resolution reads, hence the verification above.
 
-**"Fix overviews"** (`slotFixOverviews()`/`finishFixOverviews()`):
-1. `filesToFix()` runs `gdaladdo` on every source short of `suggestedLevels` (or on
-   `filename_` itself if there are no source files). Recipe: `-r` (nearest for palette,
-   average else), `COMPRESS_OVERVIEW=DEFLATE`, plus `PREDICTOR_OVERVIEW=2` for non-palette
-   data (matches the source predictor → ~2-3× smaller `.ovr`; harmful on palette indices).
-   `.ovr` block size is inherited from each source automatically by GDAL — no need to set it.
-2. `fixContainerOverviewList()` then rewrites just the `<OverviewList>` element to
-   `advice_.suggestedLevels` (no full `gdalbuildvrt` re-run, no re-probe).
+### "Fix overviews"
 
-**Disk usage (`diskUsageBytes`/`diskUsageIsEstimate`):** the dataset's real on-disk footprint,
-summed with `QFileInfo` over `GetFileList()` plus each source's `.ovr`/`.aux.xml` sidecars
-(GetFileList omits *source* sidecars, includes only the container's own). Fully qualified →
-exact total (precise); shallow/missing/no overviews → sub-files × 5/3 (estimate). The dialog
-formats it with `QLocale::DataSizeSIFormat` to match `du --si` (not the 1024-based IEC default).
+`slotFixOverviews()` / `finishFixOverviews()`:
 
-**Dialog table:** container is a synthesized row, graded by the same `rowStatus()` as
-source rows. `htmlTd()`/etc. are static methods (not free functions) so they can call
-`tr()`; pass plain `<`/`>` into them, they escape it themselves. `hasExistingOverviews()`'s
-container fallback keys off `containerHasOwnOvr` (not `containerFactor > 0`) so the
-"Update"/"Add `<OverviewList>`" wording agrees with the fix confirmation dialog.
-`raster_geometry_t` comes from `CGdalVrtUtil::sourceGeometry(pre-warp source)` — the source
-file's own size/resolution, matching `gdalinfo` (exact meters for a projected CRS,
-`kMetersPerDegree` approximation for geographic). Not the warped grid: reading the warped
-geotransform gave wrong pixel sizes (e.g. +26% for a UTM source drawn in EPSG:4326).
+1. `filesToFix()` runs `gdaladdo` on every source short of `suggestedLevels` (or on `filename_`
+   itself if there are no source files). Recipe: `-r` (nearest for palette, average otherwise),
+   `COMPRESS_OVERVIEW=DEFLATE`, plus `PREDICTOR_OVERVIEW=2` for non-palette data — matches the
+   source predictor for a ~2–3× smaller `.ovr`, harmful on palette indices. `.ovr` block size is
+   inherited from each source automatically.
+2. `fixContainerOverviewList()` rewrites just the `<OverviewList>` element to
+   `advice_.suggestedLevels` — no full `gdalbuildvrt` re-run, no re-probe.
 
-**Badge + on-demand info:** `showsOverviewWarning()` (`!suppress && needsAttention()`)
-drives the tree badge; `hasOverviewInfo()` drives the "Overview Info..." context-menu
-entry regardless of attention state. `CMapItemDelegate::overviewBadgeRect()` is shared by
-`paint()`/`editorEvent()`/`helpEvent()` so painted/clickable/tooltip areas can't drift.
+### "Combine files..." (`CVrtCombiner`)
 
-**Dialog lifecycle:** `advisoryState.open` suppresses `emitSigCanvasUpdate()` retries
-while open. `closeEvent()`/`reject()` both confirm-cancel a running job and clean up
-partial output. `sigContainerRebuilt()` reloads via `setupDemPath()`/`setupMapPath()`.
-`CCanvas::showOverviewAdvisory()` dedupes by *filename* via
-`findChildren<CVrtAdvisoryDialog*>()`, not a separate registry.
+Rewrites the container VRT to reference a handful of large compressed/tiled GeoTIFFs instead of many
+small sources.
 
-**Subfile-count check (independent of overviews):** `hasTooManySubfiles()` flags a VRT
-with more than `kMaxSubfileCount` (50) source files — GDAL opens/stats every referenced
-source overlapping a read region, so reading stays slow regardless of overviews.
-`needsAttention()` is `needsOverviewFix() || hasTooManySubfiles()`; the two problems have
-independent fixes ("Fix overviews" vs. "Combine files...") and independent gating.
+- **Splits the container's own resolved raster**, not the source files — `computeGrid()` cuts a plain
+  pixel-window grid (`pixel_window_t`, row/col-tagged). The merge step is a pure crop
+  (`gdal_translate -srcwin`), no resampling.
+- **Layout comes from the VRT XML, no pixel reads.** `readVrtLayout()` parses `<VRTDataset
+  rasterXSize/rasterYSize>` and every source's `<DstRect>` footprint. `tightenToFootprints()` crops
+  each cell to the bbox of the footprints overlapping it, or drops it (`empty()`) if none does.
+  Resolves in ms even for a huge VRT, so it runs inline on the GUI thread — no background scan,
+  `CThread` or `QProgressDialog`.
+- `kMaxOutputTiles` (40) and `kMaxPixelsPerTile` (150,000,000) are **tuning placeholders**, not
+  settled values — they need real tuning against a large VRT.
+- `slotCombineFiles()` reads the layout, computes and tightens the grid, confirms with the user,
+  backs `filename_` up to `filename_ + ".bak"`, runs one `gdal_translate -srcwin` per tile into the
+  *source files'* directory (`group_r<row>_c<col>.tif` — which can differ from the VRT's own
+  directory), then one `gdalbuildvrt -overwrite`. Compression `COMPRESS=DEFLATE`/`PREDICTOR=2` (not
+  ZSTD — not a mandatory GDAL dependency), `TILED=YES`, `BLOCKXSIZE`/`BLOCKYSIZE=512`,
+  `BIGTIFF=IF_SAFER`.
+- `JobKind` (`FixOverviews`/`Combine`) dispatches `slotJobFinished()` to `finishFixOverviews()` /
+  `finishCombine()`; both emit `sigContainerRebuilt()` on success.
+- **Non-destructive:** original sources are never deleted. On cancel/failure `filename_` is restored
+  from `.bak` (only the final `gdalbuildvrt -overwrite` touches it) and partial tiles are removed.
+- **Limitations:** footprint tightening trims only the nodata border *between* sources, not nodata
+  inside one; re-running Combine with a different grid size can leave stale `group_rX_cY.tif` files.
 
-**"Combine files..." (`CVrtCombiner`):** rewrites the container VRT to reference a
-handful of large, compressed/tiled GeoTIFFs instead of its many small source files.
-- **Splits the container's own resolved raster**, not the source files — `computeGrid()`
-  cuts a plain pixel-window grid (`pixel_window_t`, row/col-tagged). The merge step is a
-  pure crop (`gdal_translate -srcwin`), no resampling.
-- **Layout comes from the VRT XML, no pixel reads.** `readVrtLayout()` parses
-  `<VRTDataset rasterXSize/rasterYSize>` and every source's `<DstRect>` footprint.
-  `tightenToFootprints()` crops each cell to the bbox of the footprints overlapping it, or
-  drops it (`empty()`) if none does. Resolves in ms even for a huge VRT, so it runs inline
-  on the GUI thread — no background scan, `CThread`, or `QProgressDialog`. (An earlier
-  design read pixels with `GRIORA_Average` to find nodata; that read the whole multi-GB
-  dataset — the `<DstRect>`s already say where the data is.)
-- `kMaxOutputTiles` (40) / `kMaxPixelsPerTile` (150,000,000) are **tuning placeholders**,
-  not settled values — need real tuning against a large VRT once exercised for real.
-- `slotCombineFiles()` reads the layout, computes+tightens the grid, confirms with the
-  user, backs up `filename_` to `filename_ + ".bak"`, runs one `gdal_translate -srcwin`
-  per tile into the *source files'* directory (`group_r<row>_c<col>.tif` — can differ
-  from the VRT's own directory), then one `gdalbuildvrt -overwrite`. Compression:
-  `COMPRESS=DEFLATE`/`PREDICTOR=2` (not ZSTD — not a mandatory GDAL dependency),
-  `TILED=YES`, `BLOCKXSIZE`/`BLOCKYSIZE=512`, `BIGTIFF=IF_SAFER`.
-- `JobKind` (`FixOverviews`/`Combine`) dispatches `slotJobFinished()` to
-  `finishFixOverviews()`/`finishCombine()`; both emit `sigContainerRebuilt()` on success.
-- **Non-destructive:** original source files are never deleted. On cancel/failure,
-  `filename_` is restored from `.bak` (only the final `gdalbuildvrt -overwrite` touches
-  it, so a kill there is the only way it ends up truncated) and partial tiles are removed.
-- **Known limitations:** footprint tightening trims only the nodata border between source
-  tiles, not nodata *inside* a source; re-running Combine with a different grid size can
-  leave stale `group_rX_cY.tif` files.
+### Subfile count, disk usage, dialog
 
-**External tool paths in qmapshack:** Always resolve via
-`IAppSetup::getPlatformInstance()->findExecutable("toolname")` — never hard-code a bare name.
-`CAppSetupWin` restricts `PATH` to the app directory to prevent DLL conflicts, so a bare name
-silently produces `QProcess::FailedToStart` on Windows if the binary isn't co-located with the app.
+- **Subfile-count check** (independent of overviews): `hasTooManySubfiles()` flags a VRT with more
+  than `kMaxSubfileCount` (50) sources — GDAL opens and stats every source overlapping a read
+  region, so reads stay slow regardless of overviews. `needsAttention()` is
+  `needsOverviewFix() || hasTooManySubfiles()`; the two problems have independent fixes and
+  independent gating.
+- **Disk usage** (`diskUsageBytes`/`diskUsageIsEstimate`): the real on-disk footprint, summed with
+  `QFileInfo` over `GetFileList()` plus each source's `.ovr`/`.aux.xml` sidecars (`GetFileList`
+  omits *source* sidecars, includes only the container's own). Fully qualified → exact; shallow,
+  missing or no overviews → sub-files × 5/3, flagged as an estimate. Formatted with
+  `QLocale::DataSizeSIFormat` to match `du --si`, not the 1024-based IEC default.
+- **Dialog table:** the container is a synthesized row graded by the same `rowStatus()` as source
+  rows. `htmlTd()` and friends are static methods (not free functions) so they can call `tr()`; pass
+  plain `<`/`>` into them, they escape it themselves. `hasExistingOverviews()`'s container fallback
+  keys off `containerHasOwnOvr` (not `containerFactor > 0`) so the "Update" / "Add `<OverviewList>`"
+  wording agrees with the fix confirmation dialog.
+- `raster_geometry_t` comes from `CGdalVrtUtil::sourceGeometry(pre-warp source)` — the source file's
+  own size and resolution, matching `gdalinfo` (exact metres for a projected CRS,
+  `kMetersPerDegree` approximation for geographic). **Not the warped grid**: reading the warped
+  geotransform gives wrong pixel sizes (+26% for a UTM source drawn in EPSG:4326).
+- **Badge and info:** `showsOverviewWarning()` (`!suppress && needsAttention()`) drives the tree
+  badge; `hasOverviewInfo()` drives the "Overview Info..." context-menu entry regardless of
+  attention state. `CMapItemDelegate::overviewBadgeRect()` is shared by
+  `paint()`/`editorEvent()`/`helpEvent()` so painted, clickable and tooltip areas cannot drift.
+- **Lifecycle:** `advisoryState.open` suppresses `emitSigCanvasUpdate()` retries while the dialog is
+  open. `closeEvent()`/`reject()` both confirm-cancel a running job and clean up partial output.
+  `CCanvas::showOverviewAdvisory()` dedupes by *filename* via
+  `findChildren<CVrtAdvisoryDialog*>()`, not a separate registry.
 
-### Follow-up (QMS-1156): convert non-UTF-8 VRT files to UTF-8 on load
+---
 
-Since QMS-1153 (UTF-8 process manifest) + QMS-1139 (removed the encoding workarounds), GDAL
-receives filenames as UTF-8 everywhere. A guard rejects `.vrt` files whose bytes aren't valid
-UTF-8, but that dead-ends users with legacy Windows-1252/Latin-1 VRTs. Follow-up ticket QMS-1156:
-offer a confirmed, `.bak`-backed one-click conversion instead of just rejecting.
+## Open work
 
-Verified GDAL facts (tested on 3.12) behind the design:
-- GDAL's CPL XML parser **ignores the VRT `<?xml encoding?>` declaration** — `<SourceFilename>`
-  bytes go to `open()` verbatim. Even a correctly-declared `ISO-8859-1` VRT fails. Only raw bytes
-  matter, so a byte-level UTF-8 check has no false-rejection risk.
+### QMS-1156 — convert non-UTF-8 VRT files to UTF-8 on load
+
+GDAL receives filenames as UTF-8 everywhere. A guard rejects `.vrt` files whose bytes aren't valid
+UTF-8, which dead-ends users with legacy Windows-1252/Latin-1 VRTs. Offer a confirmed, `.bak`-backed
+one-click conversion instead.
+
+GDAL facts behind the design (tested on 3.12):
+- The CPL XML parser **ignores the VRT `<?xml encoding?>` declaration** — `<SourceFilename>` bytes go
+  to `open()` verbatim, so even a correctly-declared `ISO-8859-1` VRT fails. Only raw bytes matter,
+  so a byte-level UTF-8 check has no false-rejection risk.
 - On-disk source names are UTF-8, so transcoding a Latin-1 VRT reproduces the real names.
-- GDAL doesn't hard-fail a bad path (exit 0, checksum -1, `ERROR 4` on stderr) — a quietly-broken
-  dataset, which is what feeds the missing-file advisory / endless loop.
+- GDAL does not hard-fail a bad path: exit 0, checksum -1, `ERROR 4` on stderr — a quietly broken
+  dataset, which is what feeds the missing-file advisory.
 
-Design: transcode from candidate encodings (Windows-1252 → ISO-8859-1 → system ANSI), then
-**verify by resolution** (every `<SourceFilename>` must now exist on disk) — never a blind guess;
-first candidate that resolves all sources wins, else fall back to plain rejection. Trigger at load
-time in `CMapVRT`/`CDemVRT` construction (a non-UTF-8 VRT never constructs, so the advisory dialog
-can't be the entry point), reusing the advisory `.bak`/rewrite scaffolding. Non-platform-gated
-(failure reproduced on Linux). Also rewrite the `<?xml encoding?>` declaration to UTF-8 for hygiene.
+Design: transcode from candidate encodings (Windows-1252 → ISO-8859-1 → system ANSI), then **verify
+by resolution** — every `<SourceFilename>` must now exist on disk. First candidate that resolves all
+sources wins, else fall back to plain rejection. Trigger at load time in `CMapVRT`/`CDemVRT`
+construction (a non-UTF-8 VRT never constructs, so the advisory dialog cannot be the entry point),
+reusing the advisory `.bak`/rewrite scaffolding. Not platform-gated — it reproduces on Linux. Also
+rewrite the `<?xml encoding?>` declaration to UTF-8.
+
+### POI icons (SJJB) can be converted to SVG
+
+POIs are not waypoints — no canvas freeze applies. 303 SVGs already ship under
+`src/icons/poi/SJJB/svg/<category>/` and 249 of the 250 referenced PNGs have a counterpart, but none
+are in `resources.qrc`. They are SJJB templates carrying a placeholder fill `#111111` that their
+build recolours per category, so the colour must be recovered per icon from the shipped PNGs
+(16 categories, 6 with 2–3 variants).
+
+Work: register ~250 SVGs, add a recolour step, change `CPoiIconCategory`'s `QPixmap` members to
+paths plus ~302 literals in `CPoiFilePOI_TagMap.cpp` — the path *shape* changes, so that needs a
+lookup table, not a regex — and a render cache keyed by (icon, size, dpr). The cache is a win
+regardless: `CPoiFilePOI` currently `.scaled()`s a pixmap per POI per repaint.
+
+Gate it or do not do it: render each recoloured SVG at 32, diff against its shipped PNG, require
+`visible (>8) == 0`. A diff that measures **colour** reports ~240 false failures.
+
+Two defects found while scoping: `CPoiFilePOI_TagMap.cpp` asks for `health_pharmacy_dispencing`
+(a typo; the SVG is `pharmacy_dispensing`), and one SVG embeds a raster that is not in the tree
+(`pastedpic_10102008_233747.png`).
+
+### `CDemVRT`/`IDem` rendering speed
+
+- **Open:** batch `getElevationAt()`/`getSlopeAt()` point queries. Each is one small `RasterIO` call
+  per point (e.g. per vertex of a track elevation profile) — a different path from `draw()`'s map
+  rendering. Worth revisiting only if track-profile performance comes up.
+- **Deliberately skipped:** caching `1/xscale`/`1/yscale` for `slopeOfWindowInterp()`. Modest win,
+  and hoisting needs either a signature change touching its three callers or new cached members with
+  a staleness trap — `xscale`/`yscale` are plain protected members assigned directly, with no setter
+  to keep a reciprocal in sync.

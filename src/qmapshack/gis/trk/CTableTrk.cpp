@@ -23,6 +23,7 @@
 #include "gis/proj_x.h"
 #include "helpers/CElevationDialog.h"
 #include "helpers/CSettings.h"
+#include "theme/CUiTheme.h"
 #include "units/IUnit.h"
 
 CTableTrk::CTableTrk(QWidget* parent) : QTreeWidget(parent), INotifyTrk(CGisItemTrk::eVisualTrkTable) {
@@ -112,6 +113,14 @@ void CTableTrk::setTrack(CGisItemTrk* track) {
   adjustSize();
 }
 
+void CTableTrk::changeEvent(QEvent* e) {
+  QTreeWidget::changeEvent(e);
+  // the invalid and hidden rows carry a resolved colour, so they have to be rebuilt
+  if (CUiTheme::isPaletteChange(e)) {
+    updateData();
+  }
+}
+
 void CTableTrk::updateData() {
   if (trk == nullptr) {
     return;
@@ -120,6 +129,10 @@ void CTableTrk::updateData() {
   // use all valid flags as invalid mask. By that only
   // invalid flags for properties with valid points count
   quint32 invalidMask = (trk->getAllValidFlags() & CTrackData::trkpt_t::eValidMask) << 16;
+
+  const QColor colorInvalidBack = CUiTheme::background(CUiTheme::Role::eError);
+  const QColor colorInvalidText = CUiTheme::foreground(CUiTheme::Role::eError);
+  const QColor colorHiddenText = palette().color(QPalette::Disabled, QPalette::Text);
 
   QList<QTreeWidgetItem*> items;
   const CTrackData& t = trk->getTrackData();
@@ -139,16 +152,20 @@ void CTableTrk::updateData() {
       item->setToolTip(eColEle, tr("Double click to edit elevation value"));
     }
 
-    QBrush bg = item->background(0);
-    if (trkpt.isInvalid(CTrackData::trkpt_t::invalid_e(invalidMask)) && !trkpt.isHidden()) {
-      bg = QColor(255, 100, 100);
+    const bool isInvalid = trkpt.isInvalid(CTrackData::trkpt_t::invalid_e(invalidMask)) && !trkpt.isHidden();
+    if (isInvalid) {
       item->setData(eColNum, Qt::UserRole, quint32(invalidMask));
     }
 
-    QBrush fg(trkpt.isHidden() ? Qt::gray : Qt::black);
+    // Both colours or neither, and nothing at all for a plain row: an override the palette does
+    // not follow inverts on a dark scheme.
     for (int i = 0; i < eColMax; i++) {
-      item->setBackground(i, bg);
-      item->setForeground(i, fg);
+      if (isInvalid) {
+        item->setBackground(i, colorInvalidBack);
+        item->setForeground(i, colorInvalidText);
+      } else if (trkpt.isHidden()) {
+        item->setForeground(i, colorHiddenText);
+      }
     }
 
     item->setText(eColNum, QString::number(trkpt.idxTotal));

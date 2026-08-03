@@ -298,8 +298,7 @@ void ILineOp::showRoutingErrorMessage(const QString& msg) const {
   if (msg.isEmpty()) {
     canvas->reportStatus("Routino", QString());
   } else {
-    canvas->reportStatus("Routino",
-                         CUiTheme::span(CUiTheme::Role::eError, QString("<b>%1</b><br />%2").arg(tr("Routing"), msg)));
+    canvas->reportStatus("Routino", CUiTheme::Role::eError, QString("<b>%1</b><br />%2").arg(tr("Routing"), msg));
   }
 }
 

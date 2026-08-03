@@ -111,20 +111,32 @@ class CUiTheme {
 
      For a label that is always a status message and only gets shown or hidden. A label that
      merely shows a status value sometimes has to carry the colour in its text - use span().
+
+     Call it once; the label records @p role and installThemeRefresh() re-applies it on a colour
+     scheme change, so the caller needs no changeEvent() of its own.
    */
   static void markLabel(QLabel* label, Role role);
 
   /**
-     @brief True when @p event announces a palette change.
+     @brief True when @p event announces a palette change. Test a changeEvent() with this.
 
-     Both event types have to be tested: which one arrives depends on the Qt version.
+     Both event types have to be tested: which one arrives depends on the Qt version. Qt delivers
+     PaletteChange to every widget, at every nesting depth, exactly once - so a widget that holds
+     content derived from the scheme rebuilds it here, and needs nothing central to drive it.
    */
   static bool isPaletteChange(const QEvent* event);
 
   /**
-     @brief Keep widgets that resolve the palette only once following it. Call once at startup.
+     @brief Repair what a QLabel cannot repair for itself. Call once from main(), per application.
 
-     Covers the rich-text link colours a QLabel resolves only once.
+     Covers the two things a QLabel bakes in and never revisits: a markLabel() role, and the anchor
+     colour of rich text. Qt re-resolves unstyled document text against the palette when it draws,
+     but an anchor gets an explicit colour at parse time and QLabel does not re-parse; re-applying
+     the label's own text is the repair.
+
+     A QTextBrowser cannot be repaired this way - toHtml() returns the baked colour rather than the
+     source - so whoever produced its content rebuilds it from its own changeEvent(). The checked
+     state of buttons and menu items is drawn by CQmsStyle and needs nothing here.
    */
   static void installThemeRefresh();
 };

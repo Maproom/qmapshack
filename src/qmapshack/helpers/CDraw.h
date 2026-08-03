@@ -26,6 +26,7 @@
 #include <QPolygonF>
 #include <QRectF>
 #include <QStyleOptionViewItem>
+#include <QTextDocument>
 
 #include "CMainWindow.h"
 inline void USE_ANTI_ALIASING(QPainter& p, bool useAntiAliasing) {
@@ -42,8 +43,6 @@ class CDraw {
   static QPen penBorderGray;
   static QPen penBorderBlack;
   static QPen penBorderRed;
-  static QBrush brushBackWhite;
-  static QBrush brushBackYellow;
   static QBrush brushBackSemiBlue;
 
   /**
@@ -103,18 +102,19 @@ class CDraw {
      lead to incorrect drawing, especially if pointerBaseWidth is large. If is larger than 1, a value in pixels is
      assumed.
 
+     The bubble is filled with bubbleBackground().
+
      @param p                 An active QPainter
      @param contentRect       The area the actual content will be in
      @param pointerPos        The position of the pointer's head
-     @param background        The color of the background
      @param pointerBaseWidth  The width of the pointer
      @param pointerBasePos    The (relative) location of the pointer (in percent / pixels)
      @param pen               The border color
 
      @return Top left corner of content rectangle.
    */
-  static QPoint bubble(QPainter& p, const QRect& contentRect, const QPoint& pointerPos, const QColor& background,
-                       int pointerBaseWidth, float pointerBasePos, const QPen& pen = penBorderGray);
+  static QPoint bubble(QPainter& p, const QRect& contentRect, const QPoint& pointerPos, int pointerBaseWidth,
+                       float pointerBasePos, const QPen& pen = penBorderGray);
 
   /**
      @brief Draw a cartoon bubble
@@ -124,11 +124,32 @@ class CDraw {
      @param p                 An active QPainter
      @param contentRect       The area the actual content will be in
      @param pointerPos        The position of the pointer's head
-     @param background        The color of the background
 
      @return Top left corner of content rectangle.
    */
-  static QPoint bubble(QPainter& p, const QRect& contentRect, const QPoint& pointerPos, const QColor& background);
+  static QPoint bubble(QPainter& p, const QRect& contentRect, const QPoint& pointerPos);
+
+  /** @brief Background of an info bubble on the canvas. Pair it with drawBubbleText(). */
+  static QColor bubbleBackground();
+
+  /**
+     @brief Draw @p doc as the content of an info bubble
+
+     @param p    An active QPainter, translated to the text's top left corner
+     @param doc  The document to draw
+   */
+  static void drawBubbleText(QPainter& p, QTextDocument& doc);
+
+  /**
+     @brief Draw @p html as a pointer-less info panel placed to the right of @p anchor
+
+     Leaves @p p translated to the panel's text origin, so call it between save() and restore().
+
+     @param p       An active QPainter
+     @param html    The panel's content
+     @param anchor  The point the panel is placed next to
+   */
+  static void infoPanel(QPainter& p, const QString& html, const QPointF& anchor);
 
   static bool doesOverlap(const QList<QRectF>& blockedAreas, const QRectF& rect);
 

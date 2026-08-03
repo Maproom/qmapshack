@@ -63,8 +63,6 @@ class IScrOpt : public QWidget {
 
   friend class CScrOptSemaphoreLocker;
   QSemaphore semaphore{1};
-
-  QColor backgroundColor;
 };
 
 #endif  // ISCROPT_H

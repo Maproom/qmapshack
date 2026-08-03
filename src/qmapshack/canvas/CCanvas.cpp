@@ -55,6 +55,7 @@
 #include "poi/CPoiDraw.h"
 #include "poi/IPoiItem.h"
 #include "realtime/CRtDraw.h"
+#include "theme/CUiTheme.h"
 #include "units/IUnit.h"
 #include "widgets/CColorLegend.h"
 
@@ -507,18 +508,26 @@ void CCanvas::setMousePrint() { mouse->setDelegate(new CMousePrint(gis, this, mo
 
 void CCanvas::setMouseSelect() { mouse->setDelegate(new CMouseSelect(gis, this, mouse)); }
 
-void CCanvas::reportStatus(const QString& key, const QString& msg) {
+void CCanvas::reportStatus(const QString& key, const QString& msg) { setStatus(key, msg, std::nullopt); }
+
+void CCanvas::reportStatus(const QString& key, CUiTheme::Role role, const QString& msg) { setStatus(key, msg, role); }
+
+void CCanvas::setStatus(const QString& key, const QString& msg, std::optional<CUiTheme::Role> role) {
   if (msg.isEmpty()) {
     statusMessages.remove(key);
   } else {
-    statusMessages[key] = msg;
+    statusMessages[key] = {msg, role};
   }
+  renderStatusMessages();
+}
 
+void CCanvas::renderStatusMessages() {
   QString report;
   QStringList keys = statusMessages.keys();
   keys.sort();
   for (const QString& key : std::as_const(keys)) {
-    report += statusMessages[key] + "\n";
+    const status_message_t& entry = statusMessages[key];
+    report += (entry.role ? CUiTheme::span(*entry.role, entry.msg) : entry.msg) + "\n";
   }
 
   if (report.isEmpty()) {
@@ -537,6 +546,20 @@ void CCanvas::reportStatus(const QString& key, const QString& msg) {
     }
   }
   update();
+}
+
+void CCanvas::changeEvent(QEvent* e) {
+  QWidget::changeEvent(e);
+
+  if (CUiTheme::isPaletteChange(e)) {
+    // A QTextBrowser bakes its link colours in at parse time and toHtml() returns the baked value,
+    // so both panels have to be built again from their markup.
+    buildHelpText();
+    renderStatusMessages();
+    // Every map layer paints into a buffer that is only rebuilt on demand, so nothing themed on
+    // the map follows a scheme switch until something else invalidates it.
+    slotTriggerCompleteUpdate(eRedrawAll);
+  }
 }
 
 void CCanvas::resizeEvent(QResizeEvent* e) {
@@ -770,6 +793,10 @@ void CCanvas::drawStatusMessages(QPainter& p) {
 }
 
 void CCanvas::drawTrackStatistic(QPainter& p) {
+  if (!labelTrackStatistic->isVisible() && !labelTrackInfo->isVisible()) {
+    return;
+  }
+
   p.save();
   p.setPen(CDraw::penBorderGray);
   p.setBrush(labelTrackStatistic->palette().color(labelTrackStatistic->backgroundRole()));

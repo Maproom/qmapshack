@@ -195,21 +195,7 @@ void CRtOpenSky::fastDraw(QPainter& p, const QRectF& viewport, CRtDraw* rt) {
     text += "<tr><td>" + tr("position source:") + "</td><td>" + QString::number(aircraft.positionSource) + "</td></tr>";
     text += "</table>";
 
-    QTextDocument doc;
-    doc.setHtml(text);
-    doc.setTextWidth(300);
-    QRectF rectText(QPointF(0, 0), doc.size());
-
-    rectText.moveTopLeft(aircraft.point + QPointF(32, 0));
-    QRectF rectFrame = rectText.adjusted(-5, -5, 5, 5);
-
-    p.setPen(CDraw::penBorderGray);
-    p.setBrush(CDraw::brushBackWhite);
-    PAINT_ROUNDED_RECT(p, rectFrame);
-
-    p.translate(rectText.topLeft());
-    p.setPen(Qt::black);
-    doc.drawContents(&p);
+    CDraw::infoPanel(p, text, aircraft.point);
 
     p.restore();
   }

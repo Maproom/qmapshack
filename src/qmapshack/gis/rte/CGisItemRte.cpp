@@ -563,11 +563,11 @@ void CGisItemRte::drawItem(QPainter& p, const QRectF& /*viewport*/, CGisDraw* gi
     rectText.moveBottomLeft(anchor.toPoint() + QPoint(-50, -50));
 
     p.setFont(f);
-    CDraw::bubble(p, rectText, anchor.toPoint(), w.palette().color(QPalette::Window), 18 /* px */, 21 /* px */);
+    CDraw::bubble(p, rectText, anchor.toPoint(), 18 /* px */, 21 /* px */);
 
     p.save();
     p.translate(5, 5);
-    p.setPen(w.palette().color(QPalette::WindowText));
+    p.setPen(QGuiApplication::palette().color(QPalette::WindowText));
     p.drawText(rectText, str);
     p.restore();
   }

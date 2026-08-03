@@ -262,17 +262,6 @@ zoom-out for use of the DEM data.</string>
            </brush>
           </colorrole>
          </inactive>
-         <disabled>
-          <colorrole role="Base">
-           <brush brushstyle="SolidPattern">
-            <color alpha="255">
-             <red>239</red>
-             <green>235</green>
-             <blue>231</blue>
-            </color>
-           </brush>
-          </colorrole>
-         </disabled>
         </palette>
        </property>
        <property name="wrapping">
@@ -368,17 +357,6 @@ zoom-out for use of the DEM data.</string>
            </brush>
           </colorrole>
          </inactive>
-         <disabled>
-          <colorrole role="Base">
-           <brush brushstyle="SolidPattern">
-            <color alpha="255">
-             <red>239</red>
-             <green>235</green>
-             <blue>231</blue>
-            </color>
-           </brush>
-          </colorrole>
-         </disabled>
         </palette>
        </property>
        <property name="frame">
@@ -452,17 +430,6 @@ zoom-out for use of the DEM data.</string>
            </brush>
           </colorrole>
          </inactive>
-         <disabled>
-          <colorrole role="Base">
-           <brush brushstyle="SolidPattern">
-            <color alpha="255">
-             <red>239</red>
-             <green>235</green>
-             <blue>231</blue>
-            </color>
-           </brush>
-          </colorrole>
-         </disabled>
         </palette>
        </property>
        <property name="frame">
@@ -536,17 +503,6 @@ zoom-out for use of the DEM data.</string>
            </brush>
           </colorrole>
          </inactive>
-         <disabled>
-          <colorrole role="Base">
-           <brush brushstyle="SolidPattern">
-            <color alpha="255">
-             <red>239</red>
-             <green>235</green>
-             <blue>231</blue>
-            </color>
-           </brush>
-          </colorrole>
-         </disabled>
         </palette>
        </property>
        <property name="frame">
@@ -620,17 +576,6 @@ zoom-out for use of the DEM data.</string>
            </brush>
           </colorrole>
          </inactive>
-         <disabled>
-          <colorrole role="Base">
-           <brush brushstyle="SolidPattern">
-            <color alpha="255">
-             <red>239</red>
-             <green>235</green>
-             <blue>231</blue>
-            </color>
-           </brush>
-          </colorrole>
-         </disabled>
         </palette>
        </property>
        <property name="frame">

@@ -20,7 +20,7 @@ import sys
 
 # CSvgtIconEngine::roleColor -- the fixed light/dark pair per role. Light == authored.
 ENGINE_LIGHT = {"paper": "#ffffff", "lead": "#000000", "mark": "#0000ff", "ink": "#000080"}
-ENGINE_DARK = {"paper": "#353535", "lead": "#e0e0e0", "mark": "#66aaff", "ink": "#ccccff"}
+ENGINE_DARK = {"paper": "#353535", "lead": "#e0e0e0", "mark": "#66aaff", "ink": "#9999ff"}
 
 SCHEME_RE = re.compile(r'(<style\b[^>]*\bid="current-color-scheme"[^>]*>)(.*?)(</style>)', re.S)
 RULE_RE = re.compile(r"\.([A-Za-z0-9_-]+)\s*\{([^}]*)\}")
@@ -168,7 +168,7 @@ let size=32,sort="name",query="",flags={};
 try{flags=JSON.parse(localStorage.getItem(KEY)||"{}")}catch(e){flags={}}
 const grid=document.getElementById("grid"),countEl=document.getElementById("count"),
       reportBtn=document.getElementById("report"),clearBtn=document.getElementById("clearbar");
-document.getElementById("sub").textContent=DATA.length+" icons · dark column = engine-themed (#ccccff / #353535 / #e0e0e0 / #66aaff)";
+document.getElementById("sub").textContent=DATA.length+" icons · dark column = engine-themed (#9999ff / #353535 / #e0e0e0 / #66aaff)";
 
 function save(){try{localStorage.setItem(KEY,JSON.stringify(flags))}catch(e){}
   const n=Object.keys(flags).length;reportBtn.disabled=!n;reportBtn.textContent=n?"Copy comments ("+n+")":"Copy comments";

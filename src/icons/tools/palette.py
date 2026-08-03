@@ -58,8 +58,6 @@ OPTOUT = {
     "waypoint_trailhead", "waypoint_virtual",
     # Brand logos: navy map on a white card, kept identical in both themes.
     "QMapShack", "QMapTool",
-    # Detailed object icons that theming breaks (cylinder + wordmark washes out on dark).
-    "MySQLNoConn",
     # Speech-bubble lines sit on the icon's own fixed yellow bubble, not the app ground, so a
     # themed `lead` flips them light. They were pinned literal black per-element; once the build
     # applies the roles itself that pin is overwritten on every edit, so the icon has to be

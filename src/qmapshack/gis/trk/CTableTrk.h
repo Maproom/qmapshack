@@ -54,6 +54,9 @@ class CTableTrk : public QTreeWidget, public INotifyTrk {
   void showNextInvalid();
   void showPrevInvalid();
 
+ protected:
+  void changeEvent(QEvent* e) override;
+
  private slots:
   void slotItemSelectionChanged();
   void slotItemDoubleClicked(QTreeWidgetItem* item, int column);

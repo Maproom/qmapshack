@@ -25,6 +25,8 @@
 #include "helpers/CSettings.h"
 #include "setup/CAppOpts.h"
 #include "setup/IAppSetup.h"
+#include "theme/CQmsStyle.h"
+#include "theme/CUiTheme.h"
 #include "version.h"
 
 // Link in the static ".svgt" icon engine. See svgticon/CSvgtIconEnginePlugin.h.
@@ -39,6 +41,8 @@ int main(int argc, char** argv) {
   }
 
   QApplication app(argc, argv);
+  CQmsStyle::install();
+  CUiTheme::installThemeRefresh();
 
   QCoreApplication::setApplicationName("QMapShack");
   QCoreApplication::setOrganizationName("QLandkarte");

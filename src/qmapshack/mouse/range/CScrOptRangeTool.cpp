@@ -136,8 +136,10 @@ void CScrOptRangeTool::slotCanvasResize(const QSize& sizeCanvas) {
 }
 
 void CScrOptRangeTool::draw(QPainter& p) {
+  // Same sheet colour as every other IScrOpt bubble - the table and the toolbar icons on it
+  // resolve against the palette, so a hardcoded white one leaves them unreadable on dark.
   p.setPen(CDraw::penBorderGray);
-  p.setBrush(CDraw::brushBackWhite);
+  p.setBrush(CDraw::bubbleBackground());
   p.drawRoundedRect(geometry(), RECT_RADIUS, RECT_RADIUS);
 }
 

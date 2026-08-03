@@ -25,7 +25,6 @@
 #include "mouse/IMouse.h"
 
 IScrOpt::IScrOpt(IMouse* mouse) : QWidget(mouse == nullptr ? nullptr : mouse->getCanvas()), mouse(mouse) {
-  backgroundColor = palette().color(QPalette::Window);
   setAttribute(Qt::WA_DeleteOnClose);
   setFocusPolicy(Qt::WheelFocus);
 }

@@ -18,15 +18,17 @@
 
 #include "helpers/CMapIconSizesSetup.h"
 
+#include <QEvent>
 #include <QPushButton>
 #include <QSlider>
 
 #include "helpers/CSettings.h"
 #include "helpers/CWptIconManager.h"
 #include "poi/IPoiFile.h"
+#include "theme/CUiTheme.h"
 
 CMapIconSizesSetup::CMapIconSizesSetup(QWidget* parent)
-    : QDialog(parent), imageWpt("://icons/48x48/Waypoint.png"), imagePoi("://icons/48x48/Poi.png") {
+    : QDialog(parent), iconWpt(":/icons/Waypoint.svgt"), iconPoi(":/icons/Poi.svgt") {
   setupUi(this);
 
   int labelSize = qMax(sliderWpt->maximum(), sliderPoi->maximum()) + 2;
@@ -47,6 +49,16 @@ CMapIconSizesSetup::CMapIconSizesSetup(QWidget* parent)
 }
 
 CMapIconSizesSetup::~CMapIconSizesSetup() {}
+
+void CMapIconSizesSetup::changeEvent(QEvent* e) {
+  QDialog::changeEvent(e);
+
+  // the previews are pixmaps rendered from a themed icon, so they hold the scheme they were built in
+  if (CUiTheme::isPaletteChange(e)) {
+    slotSetIconSizeWpt(sliderWpt->value());
+    slotSetIconSizePoi(sliderPoi->value());
+  }
+}
 
 void CMapIconSizesSetup::accept() {
   int done = QDialog::Rejected;
@@ -69,12 +81,12 @@ void CMapIconSizesSetup::accept() {
 
 void CMapIconSizesSetup::slotSetIconSizeWpt(int size) {
   valueWpt->setNum(size);
-  labelWpt->setPixmap(QPixmap::fromImage(imageWpt.scaled(size, size, Qt::KeepAspectRatio, Qt::SmoothTransformation)));
+  labelWpt->setPixmap(iconWpt.pixmap(QSize(size, size), labelWpt->devicePixelRatio()));
 }
 
 void CMapIconSizesSetup::slotSetIconSizePoi(int size) {
   valuePoi->setNum(size);
-  labelPoi->setPixmap(QPixmap::fromImage(imagePoi.scaled(size, size, Qt::KeepAspectRatio, Qt::SmoothTransformation)));
+  labelPoi->setPixmap(iconPoi.pixmap(QSize(size, size), labelPoi->devicePixelRatio()));
 }
 
 void CMapIconSizesSetup::slotResetClicked(bool checked) {

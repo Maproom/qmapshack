@@ -38,4 +38,4 @@ CScrOptRangeLine::CScrOptRangeLine(const QPointF& point, IMouse* mouse, QWidget*
 
 CScrOptRangeLine::~CScrOptRangeLine() {}
 
-void CScrOptRangeLine::draw(QPainter& p) { CDraw::bubble(p, geometry(), origin, backgroundColor); }
+void CScrOptRangeLine::draw(QPainter& p) { CDraw::bubble(p, geometry(), origin); }

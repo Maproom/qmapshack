@@ -19,7 +19,9 @@
 
 #include "helpers/CDraw.h"
 
+#include <QAbstractTextDocumentLayout>
 #include <QDebug>
+#include <QGuiApplication>
 #include <QImage>
 #include <QPainterPath>
 #include <QPointF>
@@ -33,8 +35,6 @@ QPen CDraw::penBorderBlue(QColor(10, 10, 150, 220), 2);
 QPen CDraw::penBorderGray(Qt::lightGray, 2);
 QPen CDraw::penBorderBlack(QColor(0, 0, 0, 200), 2);
 QPen CDraw::penBorderRed(Qt::red, 2);
-QBrush CDraw::brushBackWhite(QColor(255, 255, 255, 255));
-QBrush CDraw::brushBackYellow(QColor(0xff, 0xff, 0xcc, 0xE0));
 QBrush CDraw::brushBackSemiBlue(QColor(127, 127, 255, 127));
 
 QImage CDraw::createBasicArrow(const QBrush& brush, qreal scale) {
@@ -220,13 +220,13 @@ QColor CDraw::itemNameColor(const QStyleOptionViewItem& opt, bool isVisible) {
   return opt.palette.color(colorGroup, colorRole);
 }
 
-QPoint CDraw::bubble(QPainter& p, const QRect& contentRect, const QPoint& pointerPos, const QColor& background) {
+QPoint CDraw::bubble(QPainter& p, const QRect& contentRect, const QPoint& pointerPos) {
   qint32 pointerBasePos = qMax(0, pointerPos.x() - contentRect.left());
-  return CDraw::bubble(p, contentRect, pointerPos, background, 20, pointerBasePos);
+  return CDraw::bubble(p, contentRect, pointerPos, 20, pointerBasePos);
 }
 
-QPoint CDraw::bubble(QPainter& p, const QRect& contentRect, const QPoint& pointerPos, const QColor& background,
-                     int pointerBaseWidth, float pointerBasePos, const QPen& pen) {
+QPoint CDraw::bubble(QPainter& p, const QRect& contentRect, const QPoint& pointerPos, int pointerBaseWidth,
+                     float pointerBasePos, const QPen& pen) {
   QPainterPath bubblePath;
   bubblePath.addRoundedRect(contentRect, RECT_RADIUS, RECT_RADIUS);
 
@@ -255,10 +255,35 @@ QPoint CDraw::bubble(QPainter& p, const QRect& contentRect, const QPoint& pointe
   }
 
   p.setPen(pen);
-  p.setBrush(background);
+  p.setBrush(bubbleBackground());
   p.drawPolygon(bubblePath.toFillPolygon());
 
   return contentRect.topLeft();
+}
+
+QColor CDraw::bubbleBackground() { return QGuiApplication::palette().color(QPalette::Window); }
+
+void CDraw::drawBubbleText(QPainter& p, QTextDocument& doc) {
+  // drawContents() ignores the pen and takes plain text from QPalette::Text, not WindowText
+  QAbstractTextDocumentLayout::PaintContext ctx;
+  ctx.palette.setColor(QPalette::Text, QGuiApplication::palette().color(QPalette::WindowText));
+  doc.documentLayout()->draw(&p, ctx);
+}
+
+void CDraw::infoPanel(QPainter& p, const QString& html, const QPointF& anchor) {
+  QTextDocument doc;
+  doc.setHtml(html);
+  doc.setTextWidth(300);
+
+  QRectF rectText(QPointF(0, 0), doc.size());
+  rectText.moveTopLeft(anchor + QPointF(32, 0));
+
+  p.setPen(penBorderGray);
+  p.setBrush(bubbleBackground());
+  PAINT_ROUNDED_RECT(p, rectText.adjusted(-5, -5, 5, 5));
+
+  p.translate(rectText.topLeft());
+  drawBubbleText(p, doc);
 }
 
 bool CDraw::doesOverlap(const QList<QRectF>& blockedAreas, const QRectF& rect) {

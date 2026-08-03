@@ -20,6 +20,7 @@
 #define CMAPICONSIZESSETUP_H
 
 #include <QDialog>
+#include <QIcon>
 
 #include "ui_IMapIconSizesSetup.h"
 
@@ -32,14 +33,17 @@ class CMapIconSizesSetup : public QDialog, private Ui::IMapIconSizesSetup {
  public slots:
   void accept() override;
 
+ protected:
+  void changeEvent(QEvent* e) override;
+
  private slots:
   void slotSetIconSizeWpt(int size);
   void slotSetIconSizePoi(int size);
   void slotResetClicked(bool checked);
 
  private:
-  QImage imageWpt;
-  QImage imagePoi;
+  QIcon iconWpt;
+  QIcon iconPoi;
 };
 
 #endif  // CMAPICONSIZESSETUP_H

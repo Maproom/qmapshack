@@ -342,7 +342,7 @@ void CWksItemDelegate::paint(QPainter* p, const QStyleOptionViewItem& opt, const
       break;
 
     default:;
-      p->setPen(Qt::black);
+      p->setPen(CDraw::itemNameColor(opt, item->isVisible()));
       p->setBrush(Qt::NoBrush);
       p->drawRect(opt.rect);
       p->drawText(opt.rect, item->getName());

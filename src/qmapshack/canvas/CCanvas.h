@@ -24,8 +24,10 @@
 #include <QPainter>
 #include <QPointer>
 #include <QWidget>
+#include <optional>
 
 #include "gis/IGisItem.h"
+#include "theme/CUiTheme.h"
 
 class IDrawContext;
 class CMapDraw;
@@ -157,6 +159,14 @@ class CCanvas : public QWidget {
   void reportStatus(const QString& key, const QString& msg);
 
   /**
+     @brief reportStatus() for a message that carries a status colour.
+
+     Pass @p role instead of wrapping @p msg in CUiTheme::span() - the colour is applied when the
+     panel is rendered, so the message follows a colour scheme change.
+   */
+  void reportStatus(const QString& key, CUiTheme::Role role, const QString& msg);
+
+  /**
      @brief Find a matching street polyline
 
      The polyline must be close enough in terms of pixel to point 1 and 2. "Close enough" is defined by
@@ -208,6 +218,7 @@ class CCanvas : public QWidget {
  protected:
   bool event(QEvent*) override;
   bool gestureEvent(QGestureEvent* e);
+  void changeEvent(QEvent* e) override;
   void resizeEvent(QResizeEvent* e) override;
   void paintEvent(QPaintEvent* e) override;
   void mousePressEvent(QMouseEvent* e) override;
@@ -324,8 +335,17 @@ class CCanvas : public QWidget {
 
   QLabel* labelTrackInfo;
 
+  /** @brief A status panel entry. The role stays unresolved so the panel can be re-rendered. */
+  struct status_message_t {
+    QString msg;
+    std::optional<CUiTheme::Role> role;
+  };
+
+  void setStatus(const QString& key, const QString& msg, std::optional<CUiTheme::Role> role);
+  void renderStatusMessages();
+
   QTextBrowser* textStatusMessages;
-  QMap<QString, QString> statusMessages;
+  QMap<QString, status_message_t> statusMessages;
 
   QMutex mousePressMutex;
   bool mouseLost = false;

@@ -26,20 +26,29 @@
 namespace {
 bool forceLight = false;
 
-/**
-   @brief Re-resolve QPalette::Link in @p root and every rich-text label below it.
+/** @brief Role a markLabel() label was marked with, so the sweep can resolve it again. */
+constexpr char kThemeRoleProperty[] = "qmsThemeRole";
 
-   Qt resolves unstyled document text against the palette when it draws, but an anchor gets an
-   explicit colour baked into its char format at parse time, and QLabel does not re-parse on a
-   palette change. Re-applying the text is the repair; QLabel ignores setText() with an unchanged
-   string, hence the clear-and-restore.
+/**
+   @brief Re-resolve the two things a QLabel bakes in, in @p root and every label below it.
+
+   - A markLabel() role: the style sheet carries the resolved colour, so it is applied again.
+   - An anchor colour: Qt resolves unstyled document text against the palette when it draws, but
+     an anchor gets an explicit colour baked into its char format at parse time and QLabel does
+     not re-parse. Re-applying the text is the repair, and QLabel ignores setText() with an
+     unchanged string, hence the clear-and-restore.
  */
-void refreshLinkColors(QWidget* root) {
+void refreshThemedLabels(QWidget* root) {
   QList<QLabel*> labels = root->findChildren<QLabel*>();
   if (QLabel* const asLabel = qobject_cast<QLabel*>(root); asLabel != nullptr) {
     labels << asLabel;  // findChildren() does not include the root itself
   }
   for (QLabel* const label : labels) {
+    const QVariant role = label->property(kThemeRoleProperty);
+    if (role.isValid()) {
+      CUiTheme::markLabel(label, static_cast<CUiTheme::Role>(role.toInt()));
+    }
+
     const QString text = label->text();
     if (!text.contains("<a ", Qt::CaseInsensitive)) {
       continue;
@@ -49,24 +58,39 @@ void refreshLinkColors(QWidget* root) {
   }
 }
 
-/** @brief Every repair a scheme change needs. Add new ones here, not to the event filter. */
-void refreshThemedWidgets(QWidget* root) { refreshLinkColors(root); }
+/**
+   @brief Repairs the one thing a widget cannot repair for itself: a QLabel's baked link colour.
 
-/** @brief Drives refreshThemedWidgets(). A filter: changeEvent() never sees ApplicationPaletteChange. */
+   Everything else a scheme change leaves stale belongs in that widget's own changeEvent() - Qt
+   delivers PaletteChange to every widget at every depth. This exists because a plain QLabel has
+   no such handler and nothing regenerates its markup.
+
+   A filter, because changeEvent() never sees ApplicationPaletteChange; that one arrives once, on
+   the application, which is why the sweep is queued rather than run per widget.
+ */
 class CThemeRefresher : public QObject {
  public:
   explicit CThemeRefresher(QObject* parent) : QObject(parent) {}
 
  protected:
   bool eventFilter(QObject* watched, QEvent* event) override {
-    if (event->type() == QEvent::ApplicationPaletteChange) {
-      const QList<QWidget*> windows = QApplication::topLevelWidgets();
-      for (QWidget* const window : windows) {
-        refreshThemedWidgets(window);
-      }
+    if (event->type() == QEvent::ApplicationPaletteChange && !pending) {
+      pending = true;
+      QMetaObject::invokeMethod(this, [this]() { refresh(); }, Qt::QueuedConnection);
     }
     return QObject::eventFilter(watched, event);
   }
+
+ private:
+  void refresh() {
+    pending = false;
+    const QList<QWidget*> windows = QApplication::topLevelWidgets();
+    for (QWidget* const window : windows) {
+      refreshThemedLabels(window);
+    }
+  }
+
+  bool pending = false;
 };
 }  // namespace
 
@@ -136,6 +160,8 @@ QString CUiTheme::span(Role role, const QString& text) {
 QString CUiTheme::spanBold(Role role, const QString& text) { return span(role, "<b>" + text + "</b>"); }
 
 void CUiTheme::markLabel(QLabel* label, Role role) {
+  // The style sheet resolves the colour once. Record the role so the sweep can redo this.
+  label->setProperty(kThemeRoleProperty, static_cast<int>(role));
   label->setStyleSheet(cssForeground(role) + "; font-weight:bold;");
 }
 

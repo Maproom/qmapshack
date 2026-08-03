@@ -63,7 +63,6 @@
 #include "print/CScreenshotDialog.h"
 #include "realtime/CRtWorkspace.h"
 #include "setup/IAppSetup.h"
-#include "theme/CUiTheme.h"
 #include "tool/CImportDatabase.h"
 #include "tool/CMapVrtBuilder.h"
 #include "tool/CRoutinoDatabaseBuilder.h"
@@ -108,7 +107,6 @@ CMainWindow::CMainWindow() : id(QRandomGenerator::global()->generate()) {
   setupUi(this);
 
   qApp->installEventFilter(this);
-  CUiTheme::installThemeRefresh();
 
 #ifdef DEVELOPMENT
   setWindowTitle(WHAT_STR ".develop");

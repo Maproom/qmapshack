@@ -221,5 +221,5 @@ void CScrOptTrk::draw(QPainter& p) {
   }
   item->drawHighlight(p);
 
-  CDraw::bubble(p, geometry(), anchor.toPoint(), backgroundColor);
+  CDraw::bubble(p, geometry(), anchor.toPoint());
 }

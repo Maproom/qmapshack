@@ -15,7 +15,7 @@
 # sources drift from the rasters unnoticed for years: by the time it was measured, running it
 # would have corrupted 35 of 327 icons. Rendering one icon on purpose cannot do that.
 #
-# Verify a change with .notes/icons-tools/uidiff.py.
+# Verify a change on the contact sheet: tools/contactsheet.py --out /tmp/icons.html
 
 set -u
 
@@ -29,8 +29,7 @@ fail() { echo "mkicon: $*" >&2; exit 1; }
 command -v inkscape >/dev/null || fail "inkscape not found"
 
 # The one true invocation. -D crops to the drawing, -w/-h force the square the icon set uses.
-# Note the sources carry no viewBox unless naturalsize.py gave them one, so -D is what makes the
-# artwork fill the frame -- see .notes/icons-task1-ui-svg-plan.md.
+# -D crops to the drawing, so the artwork fills the frame regardless of the page box.
 render() {
     local svg="$1" out="$2" size="$3"
     mkdir -p "$(dirname "$out")" || fail "cannot create $(dirname "$out")"

@@ -317,8 +317,7 @@ def process(path, profile, tmp):
 
     # The page is NOT re-fit. Every icon carries the fixed 0 0 64 64 artboard set by
     # reframe.py; fit-canvas-to-selection would rewrite it back to the drawing bbox and
-    # undo the reframe. Retired in Phase 4 (.notes/icons-unify-plan.md) -- reframe.py now
-    # owns the page, this script only repairs the drawing for Qt.
+    # undo the reframe. reframe.py owns the page; this script only repairs the drawing for Qt.
     actions = ["select-all:all", "object-to-path"]
     steps.append("object-to-path")
     if has_markers:

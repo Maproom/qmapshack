@@ -69,4 +69,8 @@ one raster and the build rejects them.
 
 ```bash
 src/icons/tools/contactsheet.py --out /tmp/icons.html   # whole set, light and dark
+src/icons/tools/colorstat.py --dir src/icons            # colours that will never theme
 ```
+
+`colorstat.py` catches a near miss for a house value — `#000081` instead of `#000080` — which
+keeps its literal fill and so stays navy on dark whatever the theme does.

@@ -193,7 +193,7 @@ def class_for(decls, tokens, rules):
     The two-declaration form is the two-colour element: an element has a single
     `color`, so a themed fill and a differently themed stroke cannot both be
     currentColor. The fill is served from the class and `color` feeds an inline
-    stroke="currentColor". Verified in Qt and inkscape -- strokecheck.cpp.
+    stroke="currentColor". Verified in Qt and inkscape.
     """
     name = "-".join(token_for(c, tokens) for _, c in decls)
     rules[name] = decls

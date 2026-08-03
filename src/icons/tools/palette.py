@@ -29,18 +29,10 @@ import os
 import re
 import sys
 
-# The 21 icons that carry their OWN coloured background (Mime*/*Project/Off/
-# ToWksUnchecked). Their content sits on THEIR background, not the app's, so
-# neither theming nor accent normalisation applies -- MimeDemWCS is #326480 with
-# white content; flip the content and you get black on mid-blue. Derived from
-# `bgaudit.py --dir src/icons`, keeping every non-neutral background colour.
-#
-# MimeIMG was MISSED by that derivation: its tile is #000080, and a navy background
-# reads as neutral, so the "non-neutral" test dropped it while its 9 siblings stayed.
-# Themed, its tile went light and its white content went dark -- inverted from the rest
-# of the family. The family is identifiable by geometry, not colour: every Mime tile is
-# opaque=99.7% ring=95.2% in bgaudit. The navy SOLIDS at ring=98.4% (Export, ReferenceMap)
-# are objects, not tiles, and stay themed. (QMapShack/QMapTool are opted out below as brand logos.)
+# Icons that carry their OWN coloured background (Mime*/*Project/Off/ToWksUnchecked). Their
+# content sits on THEIR background, not the app's, so neither theming nor accent normalisation
+# applies. The family is identified by geometry, not colour -- MimeIMG's tile is navy and belongs
+# here, while the navy SOLIDS (Export, ReferenceMap) are objects, not tiles, and stay themed.
 OPTOUT = {
     "2NavProject", "DBProject", "FitProject", "GpxProject", "LogProject",
     "MimeDemVRT", "MimeDemWCS", "MimeGEMF", "MimeIMG", "MimeJNX", "MimeMAP", "MimeRMAP",

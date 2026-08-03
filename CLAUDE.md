@@ -330,7 +330,7 @@ Dark theming does not apply — they sit on map tiles, not the UI palette.
 A waypoint symbol used as **UI chrome** (menu action, tool button) is under none of that and uses
 the SVG. Only `FlagBlue.svg` and `PinBlue.svg` are registered; add others as UI needs them.
 
-Gate any waypoint change with `.notes/icons-tools/wptdiff.py --size 96`, which must report
+Gate any waypoint change with `src/icons/tools/wptdiff.py --size 96`, which must report
 `visible (>8) == 0`.
 
 **`icon_t::focus` is absolute pixels of the loaded raster**, hardcoded against 32. Any resolution

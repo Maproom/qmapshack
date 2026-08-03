@@ -5,9 +5,9 @@
 # Batch regeneration is correct HERE, unlike for the UI icons in the parent directory: every
 # source in this directory has a raster by intent. The set's appearance is a frozen contract --
 # the GPX <sym> vocabulary shared with Garmin -- and inkscape stays the renderer so the look
-# cannot drift with the Qt version. See .notes/icons-task2-waypoint-resolution-plan.md.
+# cannot drift with the Qt version. See .notes/waypoint-icon-resolution-plan.md.
 #
-# Verify with .notes/icons-tools/wptdiff.py: it must report 0 visibly changed.
+# Verify with ../tools/wptdiff.py: it must report 0 visibly changed.
 
 set -eu
 cd "$(dirname "$0")"

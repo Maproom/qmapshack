@@ -672,160 +672,160 @@ Para resolver este conflicto puedes crear una copia y guardarla , forzar tu vers
 <context>
     <name>CDetailsPrj</name>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="253"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="934"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="259"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="940"/>
         <source>none</source>
         <translation>ninguna</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="322"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="328"/>
         <source>Build diary...</source>
         <translation>Creando diario...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="405"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="411"/>
         <source>&lt;b&gt;Summary over all waypoints in project&lt;/b&gt;&lt;br/&gt;</source>
         <translation>&lt;b&gt;Resumen de los waypoints&lt;/b&gt;&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="408"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="414"/>
         <source> x Geocache, consisting of: &lt;br/&gt;</source>
         <translation> x Geocache, consiste en: &lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="450"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="478"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="739"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="807"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="868"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="900"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="456"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="484"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="745"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="813"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="874"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="906"/>
         <source>Info</source>
         <translation>Información</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="451"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="479"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="741"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="869"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="901"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="457"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="485"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="747"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="875"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="907"/>
         <source>Comment</source>
         <translation>Comentario</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="600"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="606"/>
         <source>Elevation: %1%2</source>
         <translation>Altitud: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="605"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="611"/>
         <source>Created: %1</source>
         <translation>Creado: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="644"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="650"/>
         <source>Arrival: </source>
         <translation>Llegada: </translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="656"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="662"/>
         <source>From Start</source>
         <translation>Desde el inicio</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="656"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="662"/>
         <source>To Next</source>
         <translation>Al siguiente</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="657"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="663"/>
         <source>To End</source>
         <translation>Al Final</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="670"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="676"/>
         <source>Time: </source>
         <translation>Tiempo: </translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="680"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="686"/>
         <source>Ascent: </source>
         <translation>Ascenso: </translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="690"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="696"/>
         <source>Descent: </source>
         <translation>Descenso: </translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="740"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="808"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="746"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="814"/>
         <source>Statistics</source>
         <translation>Estadísticas</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="860"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="866"/>
         <source>Areas</source>
         <translation>Áreas</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="892"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="898"/>
         <source>Routes</source>
         <translation>Rutas</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="120"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="121"/>
         <source>You want to sort waypoints along a track, but you switched off track and waypoint correlation. Do you want to switch it on again?</source>
         <translation>Quieres ordenar los waypoints a lo largo de un track, pero ha desactivado la correlación de track y waypoint. ¿Quieres volver a activarlo?</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="123"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="124"/>
         <source>Correlation...</source>
         <translation>Correlación...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="374"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="380"/>
         <source>&lt;b&gt;Summary over all tracks in project&lt;/b&gt;&lt;br/&gt;</source>
         <translation>&lt;b&gt;Resumen de los tracks del proyecto&lt;/b&gt;&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="442"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="448"/>
         <source>Waypoints</source>
         <translation>Waypoints</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="470"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="476"/>
         <source>Tracks</source>
         <translation>Tracks</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="660"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="666"/>
         <source>Distance: </source>
         <translation>Distancia: </translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="921"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="944"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="927"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="950"/>
         <source>Edit name...</source>
         <translation>Editar nombre...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="921"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="944"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="927"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="950"/>
         <source>Enter new project name.</source>
         <translation>Introducir nuevo nombre de proyecto.</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="929"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="935"/>
         <source>Edit keywords...</source>
         <translation>Editar etiquetas...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="929"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="935"/>
         <source>Enter keywords.</source>
         <translation>Introducir etiquetas.</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="1041"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="1047"/>
         <source>Print Diary</source>
         <translation>Imprimir Diario</translation>
     </message>
@@ -8729,12 +8729,12 @@ línea %2, columna %3.
 <context>
     <name>CTextEditWidget</name>
     <message>
-        <location filename="../widgets/CTextEditWidget.cpp" line="69"/>
+        <location filename="../widgets/CTextEditWidget.cpp" line="70"/>
         <source>&amp;Color...</source>
         <translation>&amp;Color...</translation>
     </message>
     <message>
-        <location filename="../widgets/CTextEditWidget.cpp" line="116"/>
+        <location filename="../widgets/CTextEditWidget.cpp" line="125"/>
         <source>Reset format</source>
         <translation>Restablecer formato</translation>
     </message>
@@ -18866,27 +18866,37 @@ Si se introduce la &apos;palabra&apos; entre apostrofes se busca una coincidenci
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="550"/>
+        <source>Reset Text Color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../widgets/ITextEditWidget.ui" line="553"/>
+        <source>Drop the text color and follow the color scheme again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../widgets/ITextEditWidget.ui" line="558"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="561"/>
         <source>Reset Layout</source>
         <translation>Restablecer diseño</translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidget.ui" line="565"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="573"/>
         <source>Normal</source>
         <translation>Normal</translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidget.ui" line="568"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="576"/>
         <source>Paste without resetting the text&apos;s format</source>
         <translation>Pegar sin restablecer el formato del texto</translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidget.ui" line="577"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="585"/>
         <source>Insert From Template</source>
         <translation>Insertar desde una plantilla</translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidget.ui" line="580"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="588"/>
         <source>Create text from template.</source>
         <translation>Crear texto usando una plantilla.</translation>
     </message>

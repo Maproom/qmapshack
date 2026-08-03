@@ -40,27 +40,27 @@ class CTextEditWidget : public QDialog, private Ui::ITextEditWidget {
   bool event(QEvent* event) override;
 
  private slots:
-  void textBold();
-  void textUnderline();
-  void textItalic();
-  void textStyle(int styleIndex);
-  void textColor();
-  void textAlign(QAction* a);
-  void resetFont();
-  void resetLayout();
+  void slotTextBold();
+  void slotTextUnderline();
+  void slotTextItalic();
+  void slotTextStyle(int styleIndex);
+  void slotTextColor();
+  void slotTextAlign(QAction* a);
+  void slotResetFont();
+  void slotResetLayout();
 
-  void currentCharFormatChanged(const QTextCharFormat& format);
-  void cursorPositionChanged();
-  void selectionChanged();
-  void clipboardDataChanged();
+  void slotCurrentCharFormatChanged(const QTextCharFormat& format);
+  void slotCursorPositionChanged();
+  void slotSelectionChanged();
+  void slotClipboardDataChanged();
 
-  void customContextMenuRequested();
-  void pasteMode(QAction* action);
-  void deleteSelected();
+  void slotCustomContextMenuRequested();
+  void slotPasteMode(QAction* action);
+  void slotDeleteSelected();
 
-  void textEditScrolled();
+  void slotTextEditScrolled();
 
-  void insertFromTemplate();
+  void slotInsertFromTemplate();
 
  private:
   void mergeFormatOnWordOrSelection(const QTextCharFormat& format);

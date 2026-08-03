@@ -180,8 +180,7 @@ void CTableTrk::updateData() {
 
     IUnit::self().slope2string(trkpt.slope1, val, unit);
 
-    item->setText(eColSlope, (trkpt.slope1 != NOFLOAT && trkpt.ele != NOINT)
-                                 ? QString("%1%2").arg(val, unit) : "-");
+    item->setText(eColSlope, (trkpt.slope1 != NOFLOAT && trkpt.ele != NOINT) ? QString("%1%2").arg(val, unit) : "-");
 
     IUnit::self().meter2elevation(trkpt.ascent, val, unit);
     item->setText(eColAscent, (trkpt.ele != NOINT) ? (tr("%1%2").arg(val, unit)) : "-");

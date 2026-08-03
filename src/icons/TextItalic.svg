@@ -17,7 +17,7 @@
   <g
      transform="translate(0.0000,0.0000) scale(1.600000)"
      id="g9">
-    <style id="current-color-scheme">.lead{color:#000000}</style>
+    <style id="current-color-scheme">.ink{color:#000080}</style>
     <defs
        id="defs3515" />
     <metadata
@@ -47,7 +47,7 @@
            d="m 21.301562,45.580078 0.400001,-1.96 3.399999,-0.8 4.880001,-23.04 -3.040001,-0.76 0.400001,-2 h 10 l -0.4,2 -3.44,0.76 -4.880001,23.04 3.080001,0.8 -0.4,1.96 z"
            style="font-style:italic;font-weight:normal;font-size:40px;line-height:1.25;-inkscape-font-specification:'Sans Italic';fill:currentColor"
            id="path12"
-           class="lead" />
+           class="ink" />
       </g>
     </g>
   </g>

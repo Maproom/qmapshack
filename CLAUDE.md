@@ -315,7 +315,7 @@ missing. The traps that shape the pipeline:
   platforms are confirmed OK.
 - Qt 6.10.0 has a `currentColor` regression, fixed in 6.10.1 (QTBUG-141102).
 
-Dark `ink` is `#ccccff`: it must stay legible on `paper` `#353535` at 4.5:1 while staying clear of
+Dark `ink` is `#9999ff`: it must stay legible on `paper` `#353535` at 4.5:1 while staying clear of
 `lead` `#e0e0e0` (120 icons paint both) and `mark` `#66aaff` (19 icons paint both). That rules out
 the azure family — a "more vibrant blue" means a more saturated navy, not a different blue.
 

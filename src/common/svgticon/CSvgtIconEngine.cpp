@@ -35,6 +35,10 @@ QColor CSvgtIconEngine::roleColor(Role role) {
   // the colours the SVGs are authored in, so light mode renders as drawn; the dark arm is the
   // hand-picked counterpart. Tune here, not per icon.
   //
+  // Dark ink stays on the navy hue rather than moving to a brighter azure: 19 icons paint ink and
+  // mark together, and an azure ink lands within dE 10 of mark. Keep it clear of both mark and
+  // lead, which 120 icons paint alongside ink.
+  //
   // Following the palette instead was tried and rejected: no palette role carries navy, so ink
   // had to land on QPalette::Link -- #0000ff on a stock light theme, and an arbitrary
   // theme-defined blue elsewhere. That made the icon set's brand colour whatever the desktop
@@ -46,7 +50,7 @@ QColor CSvgtIconEngine::roleColor(Role role) {
   const bool dark = QGuiApplication::palette().color(QPalette::Window).lightness() < 128;
   switch (role) {
     case Role::Ink:
-      return dark ? QColor(0xcc, 0xcc, 0xff) : QColor(0x00, 0x00, 0x80);
+      return dark ? QColor(0x99, 0x99, 0xff) : QColor(0x00, 0x00, 0x80);
     case Role::Paper:
       return dark ? QColor(0x35, 0x35, 0x35) : QColor(0xff, 0xff, 0xff);
     case Role::Lead:
@@ -181,8 +185,8 @@ void CSvgtIconEngine::addFile(const QString& fileName, const QSize&, QIcon::Mode
 QString CSvgtIconEngine::sourceFor(QIcon::Mode mode, QIcon::State state) const {
   // Exact match first, then widen: state matters more than mode, because state selects a
   // DIFFERENT drawing (Lock vs UnLock) while mode only asks for a variation of one.
-  for (const int key : {slot(mode, state), slot(QIcon::Normal, state), slot(mode, QIcon::Off),
-                        slot(QIcon::Normal, QIcon::Off)}) {
+  for (const int key :
+       {slot(mode, state), slot(QIcon::Normal, state), slot(mode, QIcon::Off), slot(QIcon::Normal, QIcon::Off)}) {
     const auto it = sources.constFind(key);
     if (it != sources.constEnd()) {
       return it.value();

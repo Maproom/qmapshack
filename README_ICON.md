@@ -11,7 +11,7 @@ Draw with these four colours and the icon follows the light/dark theme by itself
 
 | draw with | is | on dark |
 |---|---|---|
-| `#000080` navy | the drawing | `#ccccff` |
+| `#000080` navy | the drawing | `#9999ff` |
 | `#000000` black | secondary outlines | `#e0e0e0` |
 | `#ffffff` white | ground / negative space | `#353535` |
 | `#0000ff` blue | accent on the acted-on element | `#66aaff` |

@@ -29,7 +29,7 @@ from palette import OPTOUT  # noqa: E402
 from themesvg import TAG_RE, get_attr, norm, style_to_dict  # noqa: E402
 
 DARK = "#353535"
-INK = "#ccccff"
+INK = "#9999ff"
 LEAD = "#e0e0e0"  # the shipped `lead`, so the sheet shows icons as they now render
 
 STRIP = (

@@ -17,7 +17,7 @@
   <g
      transform="translate(0.1553,0.0000) scale(1.589142)"
      id="g11">
-    <style id="current-color-scheme">.paper{color:#f9f9f9}.paper-lead{fill:#f9f9f9;color:#000000}</style>
+    <style id="current-color-scheme">.paper{color:#ffffff}.paper-ink{fill:#ffffff;color:#000080}</style>
     <defs
        id="defs2987" />
     <metadata
@@ -44,22 +44,22 @@
            id="path4482"
            d="M 37,13 H 4 L 3.95902,25.924265 h 11.493177 l 10.2,8.264183 v -8.264183 h 11.373006 z"
            style="stroke:currentColor;stroke-width:1.5732;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           class="paper-lead" />
+           class="paper-ink" />
         <path
            id="path4484"
            d="M 6.952197,16.007245 H 34.118414"
            style="stroke:currentColor;stroke-width:1.5732;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           class="paper-lead" />
+           class="paper-ink" />
         <path
            id="path4486"
            d="M 6.952197,19.007245 H 34.118414"
            style="stroke:currentColor;stroke-width:1.5732;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           class="paper-lead" />
+           class="paper-ink" />
         <path
            id="path4488"
            d="M 6.952197,22.007245 H 34.118414"
            style="stroke:currentColor;stroke-width:1.5732;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           class="paper-lead" />
+           class="paper-ink" />
       </g>
     </g>
   </g>

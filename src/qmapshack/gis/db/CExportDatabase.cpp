@@ -23,6 +23,7 @@
 #include "CMainWindow.h"
 #include "gis/db/CExportDatabaseThread.h"
 #include "helpers/CSettings.h"
+#include "theme/CUiTheme.h"
 
 CExportDatabase::CExportDatabase(quint64 id, QSqlDatabase& db, QWidget* parent) : QDialog(parent) {
   setupUi(this);
@@ -64,12 +65,12 @@ void CExportDatabase::closeEvent(QCloseEvent* e) {
 }
 
 void CExportDatabase::slotStdout(const QString& str) {
-  textBrowser->setTextColor(Qt::black);
+  textBrowser->setTextColor(textBrowser->palette().color(QPalette::Text));
   textBrowser->append(str);
 }
 
 void CExportDatabase::slotStderr(const QString& str) {
-  textBrowser->setTextColor(Qt::red);
+  textBrowser->setTextColor(CUiTheme::foreground(CUiTheme::Role::eError));
   textBrowser->append(str);
 }
 

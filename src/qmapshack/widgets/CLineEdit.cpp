@@ -20,45 +20,55 @@
 
 #include <QtWidgets>
 
-void CLineEdit::initialize() {
-  initialized = true;
+#include "theme/CUiTheme.h"
 
-  QFont f = font();
-  f.setBold(true);
-  f.setPointSize(f.pointSize() + 1);
-  setFont(f);
-
-  paletteEdit = QPalette(palette());
-  paletteRO = QPalette(palette());
-  paletteRW = QPalette(palette());
-  paletteRW.setColor(QPalette::Text, QColor(0, 0, 255));
-
-  fontNoUnderline = QFont(font());
-  fontUnderline = QFont(font());
-  fontUnderline.setUnderline(true);
-}
+CLineEdit::CLineEdit(QWidget* parent) : QLineEdit(parent) { updateStyle(); }
 
 void CLineEdit::updateStyle() {
-  if (!initialized) {
-    initialize();
-  }
+  applyingStyle = true;
 
-  if (isReadOnly()) {
-    setPalette(paletteRO);
-    setFont(fontNoUnderline);
-  } else if (hasFocus()) {
-    setPalette(paletteEdit);
-    setFont(fontNoUnderline);
-  } else {
-    setPalette(paletteRW);
-    setFont(fontUnderline);
+  // A default-constructed font resolves to nothing, so clearing first makes font() report what is
+  // inherited. The point size has to be read after that: taken from our own previous override the
+  // bump would compound on every pass.
+  setFont(QFont());
+
+  const bool editable = !isReadOnly() && !hasFocus();
+  const int inheritedPointSize = font().pointSize();
+
+  QFont f;
+  f.setBold(true);
+  if (inheritedPointSize > 0) {  // -1 for a font sized in pixels
+    f.setPointSize(inheritedPointSize + 1);
   }
+  f.setUnderline(editable);
+  setFont(f);
+
+  // The field has to read as a label, so Base and Window are transparent in every colour group and
+  // the panel behind it shows through. It belongs here and not in a .ui <palette>: setPalette()
+  // replaces the widget's override wholesale, so anything the designer set would be dropped on the
+  // first state change. Only these roles and Text are frozen; every other role keeps following the
+  // application palette.
+  QPalette pal;
+  for (const QPalette::ColorGroup group : {QPalette::Active, QPalette::Inactive, QPalette::Disabled}) {
+    pal.setBrush(group, QPalette::Base, Qt::transparent);
+    pal.setBrush(group, QPalette::Window, Qt::transparent);
+  }
+  if (editable) {
+    pal.setColor(QPalette::Text, CUiTheme::foreground(CUiTheme::Role::eInfo));
+  }
+  setPalette(pal);
+
+  applyingStyle = false;
 }
 
-CLineEdit::CLineEdit(QWidget* parent) : QLineEdit(parent) {
-  // initialization has to be done deferred,
-  // as the correct palette is set after construction
-  initialized = false;
+void CLineEdit::changeEvent(QEvent* event) {
+  QLineEdit::changeEvent(event);
+
+  // setPalette()/setFont() in updateStyle() re-enter with the same event - hence the guard.
+  // FontChange matters as well: the point size is derived from the inherited font.
+  if (!applyingStyle && (CUiTheme::isPaletteChange(event) || event->type() == QEvent::FontChange)) {
+    updateStyle();
+  }
 }
 
 void CLineEdit::setReadOnly(bool r) {

@@ -26,6 +26,7 @@
 #include "canvas/CCanvas.h"
 #include "realtime/gpstether/CRtGpsTether.h"
 #include "realtime/gpstether/CRtGpsTetherRecord.h"
+#include "theme/CUiTheme.h"
 #include "units/IUnit.h"
 
 CRtGpsTetherInfo::CRtGpsTetherInfo(CRtGpsTether& source, QWidget* parent) : IRtInfo(&source, parent) {
@@ -50,7 +51,7 @@ CRtGpsTetherInfo::CRtGpsTetherInfo(CRtGpsTether& source, QWidget* parent) : IRtI
   timer->setInterval(1000);
   connect(timer, &QTimer::timeout, this, &CRtGpsTetherInfo::slotUpdate);
 
-  labelStatus->setText("-");
+  updateStatusLabel();
 
   dict["GSV"] = [&](const QStringList& t) { nmeaGSV(t); };
   dict["GSA"] = [&](const QStringList& t) { nmeaGSA(t); };
@@ -137,8 +138,22 @@ qreal CRtGpsTetherInfo::getHeading() const {
   return NOFLOAT;
 }
 
+void CRtGpsTetherInfo::changeEvent(QEvent* e) {
+  IRtInfo::changeEvent(e);
+
+  // the error carries a themed colour in its markup
+  if (CUiTheme::isPaletteChange(e)) {
+    updateStatusLabel();
+  }
+}
+
+void CRtGpsTetherInfo::updateStatusLabel() {
+  labelStatus->setText(errorMessage.isEmpty() ? "-" : CUiTheme::spanBold(CUiTheme::Role::eError, errorMessage));
+}
+
 void CRtGpsTetherInfo::slotConnect(bool yes) {
-  labelStatus->setText("-");
+  errorMessage.clear();
+  updateStatusLabel();
 
   if (yes) {
     lineHost->setEnabled(false);
@@ -176,7 +191,8 @@ void CRtGpsTetherInfo::slotDisconnected() {
 
 void CRtGpsTetherInfo::slotError(QAbstractSocket::SocketError /*socketError*/) {
   slotDisconnected();
-  labelStatus->setText("<b style='color: red;'>" + socket->errorString() + "</b>");
+  errorMessage = socket->errorString().toHtmlEscaped();
+  updateStatusLabel();
 }
 
 void CRtGpsTetherInfo::slotReadyRead() {

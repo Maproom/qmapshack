@@ -24,9 +24,11 @@
 #include "helpers/CSettings.h"
 #include "setup/IAppSetup.h"
 #include "svgticon/CSvgtIcon.h"
+#include "theme/CUiTheme.h"
 
 CRoutinoDatabaseBuilder::CRoutinoDatabaseBuilder(QWidget* parent) : IToolShell(parent) {
   setupUi(this);
+  CUiTheme::markLabel(labelError, CUiTheme::Role::eError);
   CSvgtIcon::load(label_4, "://icons/Help.svgt");
   setTextBrowser(textBrowser);
 
@@ -139,7 +141,7 @@ void CRoutinoDatabaseBuilder::slotStart() {
 
 void CRoutinoDatabaseBuilder::finished(int exitCode, QProcess::ExitStatus status) {
   if (last) {
-    textBrowser->setTextColor(Qt::darkGreen);
+    textBrowser->setTextColor(CUiTheme::foreground(CUiTheme::Role::eOk));
     textBrowser->append(tr("!!! done !!!\n"));
     pushStart->setEnabled(true);
     return;

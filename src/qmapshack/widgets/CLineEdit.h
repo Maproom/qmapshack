@@ -20,31 +20,22 @@
 
     By default, a readonly CLineEdit looks like an ordinary label, whereas a non-readonly
     CLineEdit contains blue, underlined text. As soon as the non-readonly widget receives
-    the focus, the color is changed to black, the underline disappears and the modifiable text
-    is selected.
+    the focus, the color falls back to the palette, the underline disappears and the modifiable
+    text is selected.
  */
 
 #ifndef CLINEEDIT_H
 #define CLINEEDIT_H
 
-#include <QFont>
 #include <QLineEdit>
-#include <QPalette>
 
 class CLineEdit : public QLineEdit {
   Q_OBJECT
 
  private:
-  bool initialized;
+  /** @brief True while updateStyle() applies its palette and font, to break the event feedback */
+  bool applyingStyle = false;
 
-  QPalette paletteEdit;
-  QPalette paletteRO;
-  QPalette paletteRW;
-
-  QFont fontNoUnderline;
-  QFont fontUnderline;
-
-  void initialize();
   void updateStyle();
 
  public slots:
@@ -56,6 +47,7 @@ class CLineEdit : public QLineEdit {
   void setReadOnly(bool r);
 
  protected:
+  void changeEvent(QEvent* event) override;
   void focusInEvent(QFocusEvent* event) override;
   void focusOutEvent(QFocusEvent* event) override;
 };

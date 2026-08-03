@@ -23,6 +23,7 @@
 
 #include "gis/CGisListDB.h"
 #include "gis/db/macros.h"
+#include "theme/CUiTheme.h"
 
 CDBFolderSqlite::CDBFolderSqlite(const QString& filename, const QString& name, QTreeWidget* parent)
     : IDBFolderSql(IDB::db, parent), filename(filename) {
@@ -52,10 +53,10 @@ QString CDBFolderSqlite::getDBInfo() const {
   }
 #endif
 
-  str += tr("File: ") + QString("<i>%1</i>").arg(path);
+  str += tr("File: ") + QString("<i>%1</i>").arg(path.toHtmlEscaped());
 
   if (!isUsable()) {
-    str += "<br />" + tr("Error: ") + QString("<span style=\"color:#f00; font-weight:bold;\">%1</span>").arg(error);
+    str += "<br />" + tr("Error: ") + CUiTheme::spanBold(CUiTheme::Role::eError, error.toHtmlEscaped());
   }
 
   return str;

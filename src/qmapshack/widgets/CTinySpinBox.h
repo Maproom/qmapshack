@@ -20,32 +20,23 @@
            on screen.
 
     By default, a readonly CTinySpinBox looks like an ordinary label, whereas a non-readonly
-    CTinySpinBox contains blue, underlined text. As soon as the non-readonly widget receives
-    the focus, the color is changed to black, the underline disappears and the modifiable text
-    is selected.
+    CTinySpinBox contains underlined text in the Info colour. As soon as the non-readonly widget
+    receives the focus, the text falls back to the palette, the underline disappears and the
+    modifiable text is selected.
  */
 
 #ifndef CTINYSPINBOX_H
 #define CTINYSPINBOX_H
 
-#include <QFont>
-#include <QPalette>
 #include <QSpinBox>
 
 class CTinySpinBox : public QSpinBox {
   Q_OBJECT
 
  private:
-  bool initialized;
+  /** @brief True while updateStyle() applies its palette and font, to break the event feedback */
+  bool applyingStyle = false;
 
-  QPalette paletteEdit;
-  QPalette paletteRO;
-  QPalette paletteRW;
-
-  QFont fontNoUnderline;
-  QFont fontUnderline;
-
-  void initialize();
   void updateStyle();
 
  public slots:
@@ -61,6 +52,7 @@ class CTinySpinBox : public QSpinBox {
   void stepBy(int steps) override;
 
  protected:
+  void changeEvent(QEvent* event) override;
   void focusInEvent(QFocusEvent* event) override;
   void focusOutEvent(QFocusEvent* event) override;
 };

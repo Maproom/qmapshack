@@ -36,6 +36,7 @@
 #include "mouse/line/CLineOpMovePoint.h"
 #include "mouse/line/CLineOpSelectRange.h"
 #include "mouse/line/CScrOptEditLine.h"
+#include "theme/CUiTheme.h"
 #include "units/IUnit.h"
 
 IMouseEditLine::IMouseEditLine(const IGisItem::key_t& key, const QPointF& point, bool enableStatus,
@@ -525,7 +526,7 @@ void IMouseEditLine::updateStatus() {
     IUnit::self().meter2elevation(asc, val, unit);
     msg += "<td>&nbsp;" % QString("%1 %2").arg(val, unit);
   } else {
-    msg += "<td style='color: red;'>&nbsp;" % tr("Invalid elevations!");
+    msg += "<td style='" % CUiTheme::cssForeground(CUiTheme::Role::eError) % "'>&nbsp;" % tr("Invalid elevations!");
   }
   msg += "</td></tr>";
   msg += "<tr><td>" % tr("Descent:") % "</td>";
@@ -533,7 +534,7 @@ void IMouseEditLine::updateStatus() {
     IUnit::self().meter2elevation(dsc, val, unit);
     msg += "<td>&nbsp;" % QString("%1 %2").arg(val, unit);
   } else {
-    msg += "<td style='color: red;'>&nbsp;" % tr("Invalid elevations!");
+    msg += "<td style='" % CUiTheme::cssForeground(CUiTheme::Role::eError) % "'>&nbsp;" % tr("Invalid elevations!");
   }
   msg += "</td></tr>";
   msg += "</table>";

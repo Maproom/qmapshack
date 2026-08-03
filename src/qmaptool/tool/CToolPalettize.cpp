@@ -24,10 +24,15 @@
 #include "helpers/CSettings.h"
 #include "items/CItemFile.h"
 #include "misc.h"
+#include "theme/CUiTheme.h"
 
 CToolPalettize::CToolPalettize(QWidget* parent) : IToolGui(parent) {
   setupUi(this);
   setObjectName(tr("Add Color Palette"));
+
+  for (QLabel* label : {labelNoGdaladdo, labelNoGdaltranslate, labelNoQmtrgb2pct}) {
+    CUiTheme::markLabel(label, CUiTheme::Role::eError);
+  }
 
   groupGDALParameters->enableParts(CToolGDALGroupBox::ePartCompress | CToolGDALGroupBox::ePartTiled);
 

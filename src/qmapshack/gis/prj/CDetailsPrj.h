@@ -49,6 +49,7 @@ class CDetailsPrj : public QWidget, public INotifyTrk, private Ui::IDetailsPrj {
   void setMouseClickFocus(const CTrackData::trkpt_t* pt) override {}
 
  protected:
+  void changeEvent(QEvent* e) override;
   void resizeEvent(QResizeEvent* e) override;
 
  private slots:

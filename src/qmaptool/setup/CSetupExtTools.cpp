@@ -21,6 +21,7 @@
 #include <QtWidgets>
 
 #include "setup/IAppSetup.h"
+#include "theme/CUiTheme.h"
 
 using std::bind;
 
@@ -58,12 +59,14 @@ void CSetupExtTools::setupGui() {
   const QString& qmtrgb2pct = setup.getQmtrgb2pct();
   const QString& qmtmap2jnx = setup.getQmtmap2jnx();
 
-  labelPathGdaladdo->setText(gdaladdo.isEmpty() ? tr("<b style='color: red;'>not found</b>") : gdaladdo);
-  labelPathGdaltranslate->setText(gdaltranslate.isEmpty() ? tr("<b style='color: red;'>not found</b>") : gdaltranslate);
-  labelPathGdalwarp->setText(gdalwarp.isEmpty() ? tr("<b style='color: red;'>not found</b>") : gdalwarp);
-  labelPathGdalbuildvrt->setText(gdalbuildvrt.isEmpty() ? tr("<b style='color: red;'>not found</b>") : gdalbuildvrt);
-  labelPathQmtrgb2pct->setText(qmtrgb2pct.isEmpty() ? tr("<b style='color: red;'>not found</b>") : qmtrgb2pct);
-  labelPathQmtmap2jnx->setText(qmtmap2jnx.isEmpty() ? tr("<b style='color: red;'>not found</b>") : qmtmap2jnx);
+  const QString notFound = CUiTheme::spanBold(CUiTheme::Role::eError, tr("not found"));
+
+  labelPathGdaladdo->setText(gdaladdo.isEmpty() ? notFound : gdaladdo);
+  labelPathGdaltranslate->setText(gdaltranslate.isEmpty() ? notFound : gdaltranslate);
+  labelPathGdalwarp->setText(gdalwarp.isEmpty() ? notFound : gdalwarp);
+  labelPathGdalbuildvrt->setText(gdalbuildvrt.isEmpty() ? notFound : gdalbuildvrt);
+  labelPathQmtrgb2pct->setText(qmtrgb2pct.isEmpty() ? notFound : qmtrgb2pct);
+  labelPathQmtmap2jnx->setText(qmtmap2jnx.isEmpty() ? notFound : qmtmap2jnx);
 
   toolResetGdaladdo->setEnabled(setup.isGdaladdoOverride());
   toolResetGdaltranslate->setEnabled(setup.isGdaltranslateOverride());

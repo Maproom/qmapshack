@@ -63,6 +63,9 @@ class CGridPlacer : public QWidget, private Ui::IGridPlacer {
   void slotSetPoint(qint32 i, bool on);
   void slotSetArea();
 
+ protected:
+  void changeEvent(QEvent* e) override;
+
  private:
   void updateStatus();
   CItemRefMap* item = nullptr;

@@ -254,7 +254,7 @@
    <item>
     <widget class="QLabel" name="labelNoGdaladdo">
      <property name="text">
-      <string>&lt;b style='color: red;'&gt;No &quot;gdaladdo&quot; found. Please check setup!&lt;/b&gt;</string>
+      <string>No &quot;gdaladdo&quot; found. Please check setup!</string>
      </property>
      <property name="wordWrap">
       <bool>true</bool>

@@ -30,6 +30,8 @@
 #include <QStyleOption>
 #include <QSvgRenderer>
 
+#include "theme/CUiTheme.h"
+
 QColor CSvgtIconEngine::roleColor(Role role) {
   // A fixed light/dark scheme, chosen by whether the palette is dark. The light arm is exactly
   // the colours the SVGs are authored in, so light mode renders as drawn; the dark arm is the
@@ -47,7 +49,7 @@ QColor CSvgtIconEngine::roleColor(Role role) {
   // The role colours are deliberately independent of QIcon::Mode: Disabled/Selected are not a
   // different colour scheme but a grey/tint applied to the rendered Normal pixmap. renderPixmap()
   // does that via QStyle::generatedIconPixmap(), the same way Qt's own QSvgIconEngine does.
-  const bool dark = QGuiApplication::palette().color(QPalette::Window).lightness() < 128;
+  const bool dark = paletteIsDark();
   switch (role) {
     case Role::Ink:
       return dark ? QColor(0x99, 0x99, 0xff) : QColor(0x00, 0x00, 0x80);

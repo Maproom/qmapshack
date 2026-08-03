@@ -145,7 +145,7 @@
      <item>
       <widget class="QLabel" name="labelError">
        <property name="text">
-        <string>&lt;b style = 'color: red'&gt; Unable to find Routino's planetsplitter. Searched for &quot;planetsplitter&quot; and &quot;routino-planetsplitter&quot;.&lt;/b&gt;</string>
+        <string>Unable to find Routino's planetsplitter. Searched for "planetsplitter" and "routino-planetsplitter".</string>
        </property>
        <property name="wordWrap">
         <bool>true</bool>

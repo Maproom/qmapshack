@@ -24,6 +24,7 @@
 #include "canvas/IDrawContext.h"
 #include "items/CItemRefMap.h"
 #include "overlay/gridtool/CGridPoint.h"
+#include "theme/CUiTheme.h"
 using std::bind;
 
 CGridPlacer::CGridPlacer(QWidget* parent) : QWidget(parent) {
@@ -59,6 +60,16 @@ void CGridPlacer::registerItem(CItemRefMap* item) {
     }
 
     radioPoint1->setChecked(true);
+  }
+}
+
+void CGridPlacer::changeEvent(QEvent* e) {
+  QWidget::changeEvent(e);
+
+  // the status lines carry a themed colour in their markup; points only exists once an item is
+  // registered, and updateStatus() indexes it
+  if (CUiTheme::isPaletteChange(e) && !points.isEmpty()) {
+    updateStatus();
   }
 }
 
@@ -132,15 +143,15 @@ void CGridPlacer::updateStatus() {
     statusIsOk = false;
     labelStatusPoint1->setText(tr("Point 1 - not set"));
   } else {
-    labelStatusPoint1->setText("<b style='color: green'>" + tr("Point 1 - ok") + "</b>");
+    labelStatusPoint1->setText(CUiTheme::spanBold(CUiTheme::Role::eOk, tr("Point 1 - ok")));
 
     if ((pt2 != NOPOINTF) && (pt2.x() < pt1.x())) {
       statusIsOk = false;
-      labelStatusPoint1->setText("<b style='color: red'>" + tr("Point 1 - bad") + "</b>");
+      labelStatusPoint1->setText(CUiTheme::spanBold(CUiTheme::Role::eError, tr("Point 1 - bad")));
     }
     if ((pt4 != NOPOINTF) && (pt4.y() < pt1.y())) {
       statusIsOk = false;
-      labelStatusPoint1->setText("<b style='color: red'>" + tr("Point 1 - bad") + "</b>");
+      labelStatusPoint1->setText(CUiTheme::spanBold(CUiTheme::Role::eError, tr("Point 1 - bad")));
     }
   }
 
@@ -148,15 +159,15 @@ void CGridPlacer::updateStatus() {
     statusIsOk = false;
     labelStatusPoint2->setText(tr("Point 2 - not set"));
   } else {
-    labelStatusPoint2->setText("<b style='color: green'>" + tr("Point 2 - ok") + "</b>");
+    labelStatusPoint2->setText(CUiTheme::spanBold(CUiTheme::Role::eOk, tr("Point 2 - ok")));
 
     if ((pt1 != NOPOINTF) && (pt1.x() > pt2.x())) {
       statusIsOk = false;
-      labelStatusPoint2->setText("<b style='color: red'>" + tr("Point 2 - bad") + "</b>");
+      labelStatusPoint2->setText(CUiTheme::spanBold(CUiTheme::Role::eError, tr("Point 2 - bad")));
     }
     if ((pt3 != NOPOINTF) && (pt3.y() < pt2.y())) {
       statusIsOk = false;
-      labelStatusPoint2->setText("<b style='color: red'>" + tr("Point 2 - bad") + "</b>");
+      labelStatusPoint2->setText(CUiTheme::spanBold(CUiTheme::Role::eError, tr("Point 2 - bad")));
     }
   }
 
@@ -164,15 +175,15 @@ void CGridPlacer::updateStatus() {
     statusIsOk = false;
     labelStatusPoint3->setText(tr("Point 3 - not set"));
   } else {
-    labelStatusPoint3->setText("<b style='color: green'>" + tr("Point 3 - ok") + "</b>");
+    labelStatusPoint3->setText(CUiTheme::spanBold(CUiTheme::Role::eOk, tr("Point 3 - ok")));
 
     if ((pt4 != NOPOINTF) && (pt4.x() > pt3.x())) {
       statusIsOk = false;
-      labelStatusPoint3->setText("<b style='color: red'>" + tr("Point 3 - bad") + "</b>");
+      labelStatusPoint3->setText(CUiTheme::spanBold(CUiTheme::Role::eError, tr("Point 3 - bad")));
     }
     if ((pt2 != NOPOINTF) && (pt2.y() > pt3.y())) {
       statusIsOk = false;
-      labelStatusPoint3->setText("<b style='color: red'>" + tr("Point 3 - bad") + "</b>");
+      labelStatusPoint3->setText(CUiTheme::spanBold(CUiTheme::Role::eError, tr("Point 3 - bad")));
     }
   }
 
@@ -180,15 +191,15 @@ void CGridPlacer::updateStatus() {
     statusIsOk = false;
     labelStatusPoint4->setText(tr("Point 4 - not set"));
   } else {
-    labelStatusPoint4->setText("<b style='color: green'>" + tr("Point 4 - ok") + "</b>");
+    labelStatusPoint4->setText(CUiTheme::spanBold(CUiTheme::Role::eOk, tr("Point 4 - ok")));
 
     if ((pt3 != NOPOINTF) && (pt3.x() < pt4.x())) {
       statusIsOk = false;
-      labelStatusPoint4->setText("<b style='color: red'>" + tr("Point 4 - bad") + "</b>");
+      labelStatusPoint4->setText(CUiTheme::spanBold(CUiTheme::Role::eError, tr("Point 4 - bad")));
     }
     if ((pt1 != NOPOINTF) && (pt1.y() > pt4.y())) {
       statusIsOk = false;
-      labelStatusPoint4->setText("<b style='color: red'>" + tr("Point 4 - bad") + "</b>");
+      labelStatusPoint4->setText(CUiTheme::spanBold(CUiTheme::Role::eError, tr("Point 4 - bad")));
     }
   }
 

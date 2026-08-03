@@ -23,10 +23,13 @@
 #include "helpers/CSettings.h"
 #include "items/CItemFile.h"
 #include "setup/IAppSetup.h"
+#include "theme/CUiTheme.h"
 
 CToolAddOverview::CToolAddOverview(QWidget* parent) : IToolGui(parent) {
   setupUi(this);
   setObjectName(tr("Add Overviews"));
+
+  CUiTheme::markLabel(labelNoGdaladdo, CUiTheme::Role::eError);
 
   labelHelp->setText(
       tr("Raster map files consume quite some memory if a larger area is displayed. "

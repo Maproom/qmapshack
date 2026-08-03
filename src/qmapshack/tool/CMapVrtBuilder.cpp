@@ -24,6 +24,7 @@
 #include "helpers/CSettings.h"
 #include "misc.h"
 #include "svgticon/CSvgtIcon.h"
+#include "theme/CUiTheme.h"
 
 CMapVrtBuilder::CMapVrtBuilder(QWidget* parent) : IToolShell(parent) {
   setupUi(this);
@@ -197,7 +198,7 @@ void CMapVrtBuilder::finished(int exitCode, QProcess::ExitStatus status) {
     last = true;
     return;
   }
-  textBrowser->setTextColor(Qt::darkGreen);
+  textBrowser->setTextColor(CUiTheme::foreground(CUiTheme::Role::eOk));
   textBrowser->append(tr("!!! done !!!\n"));
   pushStart->setEnabled(true);
 }

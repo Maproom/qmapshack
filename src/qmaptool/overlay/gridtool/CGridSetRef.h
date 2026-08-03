@@ -19,6 +19,7 @@
 #ifndef CGRIDSETREF_H
 #define CGRIDSETREF_H
 
+#include "theme/CUiTheme.h"
 #include "ui_IGridSetRef.h"
 
 class QSettings;
@@ -58,7 +59,9 @@ class CGridSetRef : public QWidget, private Ui::IGridSetRef {
   void markWidget(T* w, bool isOk) {
     QPalette pal = T(this).palette();
     if (!isOk) {
-      pal.setColor(QPalette::Base, 0xffffaa7f);
+      // both colours: a Base override alone keeps the palette's text colour, which inverts on dark
+      pal.setColor(QPalette::Base, CUiTheme::background(CUiTheme::Role::eError));
+      pal.setColor(QPalette::Text, CUiTheme::foreground(CUiTheme::Role::eError));
     }
     w->setPalette(pal);
   }

@@ -20,6 +20,8 @@
 
 #include <QTimer>
 
+#include "theme/CUiTheme.h"
+
 CRouterBRouterToolShell::CRouterBRouterToolShell(QTextBrowser* textBrowser, QWidget* parent) : IToolShell(parent) {
   setTextBrowser(textBrowser);
   connect(&cmd, &QProcess::stateChanged, this, &CRouterBRouterToolShell::slotStateChanged);
@@ -67,10 +69,10 @@ void CRouterBRouterToolShell::slotError(const QProcess::ProcessError error) {
 
 void CRouterBRouterToolShell::finished(const int exitCode, const QProcess::ExitStatus status) {
   if (status == QProcess::ExitStatus::NormalExit) {
-    text->setTextColor(Qt::darkGreen);
+    text->setTextColor(CUiTheme::foreground(CUiTheme::Role::eOk));
     text->append(tr("!!! done !!!\n"));
   } else {
-    text->setTextColor(Qt::darkRed);
+    text->setTextColor(CUiTheme::foreground(CUiTheme::Role::eError));
     text->append(tr("!!! failed !!!\n"));
   }
 }

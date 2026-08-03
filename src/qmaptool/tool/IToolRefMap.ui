@@ -233,7 +233,7 @@
    <item>
     <widget class="QLabel" name="labelNoGdalwarp">
      <property name="text">
-      <string>&lt;b style='color: red;'&gt;No &quot;gdalwarp&quot; found. Please check setup!&lt;/b&gt;</string>
+      <string>No &quot;gdalwarp&quot; found. Please check setup!</string>
      </property>
      <property name="wordWrap">
       <bool>true</bool>
@@ -243,7 +243,7 @@
    <item>
     <widget class="QLabel" name="labelNoGdalTranslate">
      <property name="text">
-      <string>&lt;b style='color: red;'&gt;No &quot;gdal_translate&quot; found. Please check setup!&lt;/b&gt;</string>
+      <string>No &quot;gdal_translate&quot; found. Please check setup!</string>
      </property>
      <property name="wordWrap">
       <bool>true</bool>
@@ -253,7 +253,7 @@
    <item>
     <widget class="QLabel" name="labelNoGdaladdo">
      <property name="text">
-      <string>&lt;b style='color: red;'&gt;No &quot;gdaladdo&quot; found. Please check setup!&lt;/b&gt;</string>
+      <string>No &quot;gdaladdo&quot; found. Please check setup!</string>
      </property>
      <property name="wordWrap">
       <bool>true</bool>

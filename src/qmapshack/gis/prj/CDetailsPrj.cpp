@@ -37,6 +37,7 @@
 #include "plot/CPlotProfile.h"
 #include "plot/CPlotTrack.h"
 #include "svgticon/CSvgtIcon.h"
+#include "theme/CUiTheme.h"
 #include "widgets/CTextEditWidget.h"
 
 CDetailsPrj::CDetailsPrj(IGisProject& prj, QWidget* parent)
@@ -68,6 +69,17 @@ CDetailsPrj::CDetailsPrj(IGisProject& prj, QWidget* parent)
   connect(timerUpdateTime, &QTimer::timeout, this, &CDetailsPrj::slotSetupGui);
 
   timerUpdateTime->start();
+}
+
+void CDetailsPrj::changeEvent(QEvent* e) {
+  QWidget::changeEvent(e);
+
+  // The document holds palette colours in its frame formats and themed markup from getInfo(), and
+  // a QTextBrowser cannot rebuild either from its own content. Go through the timer: slotSetupGui()
+  // runs a progress dialog with a nested event loop and must not run from an event handler.
+  if (CUiTheme::isPaletteChange(e)) {
+    timerUpdateTime->start();
+  }
 }
 
 CDetailsPrj::~CDetailsPrj() {
@@ -193,7 +205,13 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable) {
   fmtFrameStandard.setBottomMargin(5);
   fmtFrameStandard.setWidth(w - 2 * ROOT_FRAME_MARGIN);
 
-  fmtFrameTrackSummary.setBackground(palette().color(QPalette::Window));
+  // Paper is always ink on white, whatever the screen scheme is. The guard covers the themed
+  // colours in the item HTML (getInfo()), the two branches the ones taken from the palette.
+  const CUiTheme::CForceLight paperColours(printable);
+  const QColor colorLine = printable ? QColor(Qt::black) : palette().color(QPalette::WindowText);
+  const QColor colorSummaryBack = printable ? QColor(Qt::white) : palette().color(QPalette::Window);
+
+  fmtFrameTrackSummary.setBackground(colorSummaryBack);
   fmtFrameTrackSummary.setBorder(1);
   fmtFrameTrackSummary.setPadding(10);
 
@@ -210,7 +228,7 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable) {
 
   fmtTableStandard.setBorder(1);
   fmtTableStandard.setBorderCollapse(false);
-  fmtTableStandard.setBorderBrush(Qt::black);
+  fmtTableStandard.setBorderBrush(colorLine);
   fmtTableStandard.setCellPadding(4);
   fmtTableStandard.setCellSpacing(0);
   fmtTableStandard.setHeaderRowCount(1);

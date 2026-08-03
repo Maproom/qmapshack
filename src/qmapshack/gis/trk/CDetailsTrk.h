@@ -42,6 +42,9 @@ class CDetailsTrk : public QWidget, public INotifyTrk, private Ui::IDetailsTrk {
  public slots:
   void updateData() override;
 
+ protected:
+  void changeEvent(QEvent* e) override;
+
  private slots:
   void slotNameChanged(const QString& name);
   void slotNameChangeFinished();

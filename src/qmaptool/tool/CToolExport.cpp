@@ -23,10 +23,13 @@
 #include "CMainWindow.h"
 #include "helpers/CSettings.h"
 #include "items/CItemMap.h"
+#include "theme/CUiTheme.h"
 
 CToolExport::CToolExport(QWidget* parent) : IToolGui(parent) {
   setupUi(this);
   setObjectName(tr("Export Maps"));
+
+  CUiTheme::markLabel(labelNoMap2jnx, CUiTheme::Role::eError);
   lineTragetFile->addAction(actionTargetFilename, QLineEdit::TrailingPosition);
 
   labelHelp->setText(

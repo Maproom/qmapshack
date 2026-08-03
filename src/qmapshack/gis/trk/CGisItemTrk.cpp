@@ -42,6 +42,7 @@
 #include "helpers/CDraw.h"
 #include "misc.h"
 #include "svgticon/CSvgtIcon.h"
+#include "theme/CUiTheme.h"
 
 #define DEFAULT_COLOR 4
 #define MIN_DIST_CLOSE_TO 10
@@ -481,22 +482,22 @@ QString CGisItemTrk::getInfo(quint32 feature) const {
 
   if ((allValidFlags & (CTrackData::trkpt_t::eValidEle | CTrackData::trkpt_t::eInvalidEle)) ==
       (CTrackData::trkpt_t::eValidEle | CTrackData::trkpt_t::eInvalidEle)) {
-    str += "<b style='color: red;'>" % tr("Invalid elevations!") % "</b><br/>";
+    str += CUiTheme::spanBold(CUiTheme::Role::eError, tr("Invalid elevations!")) % "<br/>";
   }
 
   if ((allValidFlags & (CTrackData::trkpt_t::eValidTime | CTrackData::trkpt_t::eInvalidTime)) ==
       (CTrackData::trkpt_t::eValidTime | CTrackData::trkpt_t::eInvalidTime)) {
-    str += "<b style='color: red;'>" % tr("Invalid timestamps!") % "</b><br/>";
+    str += CUiTheme::spanBold(CUiTheme::Role::eError, tr("Invalid timestamps!")) % "<br/>";
   }
 
   if ((allValidFlags & (CTrackData::trkpt_t::eValidPos | CTrackData::trkpt_t::eInvalidPos)) ==
       (CTrackData::trkpt_t::eValidPos | CTrackData::trkpt_t::eInvalidPos)) {
-    str += "<b style='color: red;'>" % tr("Invalid positions!") % "</b><br/>";
+    str += CUiTheme::spanBold(CUiTheme::Role::eError, tr("Invalid positions!")) % "<br/>";
   }
 
   if ((allValidFlags & (CTrackData::trkpt_t::eValidSlope | CTrackData::trkpt_t::eInvalidSlope)) ==
       (CTrackData::trkpt_t::eValidSlope | CTrackData::trkpt_t::eInvalidSlope)) {
-    str += "<b style='color: red;'>" % tr("Invalid slopes!") % "</b><br/>";
+    str += CUiTheme::spanBold(CUiTheme::Role::eError, tr("Invalid slopes!")) % "<br/>";
   }
 
   if (feature & eFeatureShowFullText) {

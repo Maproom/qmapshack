@@ -86,6 +86,50 @@ CVrtAdvisoryDialog::CVrtAdvisoryDialog(const QString& filename, const CGdalVrtUt
     labelSubfileWarning->setVisible(false);
   }
 
+  renderThemedContent();
+
+  shell_ = new CShell(this, /*isSingleton=*/false);
+  shell_->setVisible(false);
+  verticalLayout->insertWidget(verticalLayout->indexOf(labelSummary), shell_);
+  connect(shell_, &CShell::sigFinishedJob, this, &CVrtAdvisoryDialog::slotJobFinished);
+
+  // Nothing to fix: hide the fix-overviews machinery regardless of hasTooManySubfiles().
+  // labelSummary stays visible - its disk-usage estimate is informational at any time.
+  if (!advice_.needsOverviewFix()) {
+    labelAfterFixTitle->setVisible(false);
+    textAfterFix->setVisible(false);
+    buttonBox->button(QDialogButtonBox::Ok)->setVisible(false);
+  }
+
+  // Nothing to do at all (no overview fix, no subfile problem): plain "Overview info" +
+  // "Close" treatment. A VRT with only the subfile problem keeps the normal wording since
+  // it still has the Combine button to offer.
+  if (!advice_.needsOverviewFix() && !advice_.hasTooManySubfiles()) {
+    setWindowTitle(tr("Overview info"));
+    checkSuppressAdvisory->setVisible(false);
+    buttonBox->button(QDialogButtonBox::Cancel)->setText(tr("Close"));
+  }
+
+  // Force the deferred layout update to run before adjustSize() queries sizeHint.
+  verticalLayout->activate();
+  adjustSize();
+}
+
+void CVrtAdvisoryDialog::changeEvent(QEvent* e) {
+  QDialog::changeEvent(e);
+
+  // Every table cell and the warning line carry a status colour, and a QTextBrowser cannot rebuild
+  // one from the content it already holds.
+  if (CUiTheme::isPaletteChange(e)) {
+    renderThemedContent();
+  }
+}
+
+void CVrtAdvisoryDialog::renderThemedContent() {
+  if (advice_.hasTooManySubfiles()) {
+    labelSubfileWarning->setStyleSheet(CUiTheme::css(CUiTheme::Role::eWarn) + "; padding:4px;");
+  }
+
   const QString suggestedStr = formatFactors(advice_.suggestedLevels);
 
   // ---- current situation ---- (every referenced file is shown, none truncated)
@@ -95,20 +139,21 @@ CVrtAdvisoryDialog::CVrtAdvisoryDialog(const QString& filename, const CGdalVrtUt
 
   // the container always leads the table, graded by the same rule as every source file
   {
-    QString bg;
-    const QString status = rowStatus(/*checked=*/true, advice_.containerOverviewSizes, advice_.containerSufficient, bg);
+    CUiTheme::Role role = CUiTheme::Role::eNeutral;
+    const QString status =
+        rowStatus(/*checked=*/true, advice_.containerOverviewSizes, advice_.containerSufficient, role);
     const QString levels =
         formatFactors(advice_.containerOverviewSizes) +
         containerOvrSourceSuffix(hasSourceFiles(), advice_.containerHasOwnOvr, advice_.containerOverviewSizes);
     currentHtml +=
-        "<tr>" + htmlTd(QFileInfo(filename_).fileName(), bg) + htmlTd(levels, bg) + htmlTd(status, bg) + "</tr>";
+        "<tr>" + htmlTd(QFileInfo(filename_).fileName(), role) + htmlTd(levels, role) + htmlTd(status, role) + "</tr>";
   }
 
   for (const CGdalVrtUtil::file_overview_info_t& info : advice_.perFileInfo) {
-    QString bg;
-    const QString status = rowStatus(info.checked, info.overviewSizes, info.sufficient, bg);
-    currentHtml += "<tr>" + htmlTd(QFileInfo(info.path).fileName(), bg) +
-                   htmlTd(formatFactors(info.overviewSizes), bg) + htmlTd(status, bg) + "</tr>";
+    CUiTheme::Role role = CUiTheme::Role::eNeutral;
+    const QString status = rowStatus(info.checked, info.overviewSizes, info.sufficient, role);
+    currentHtml += "<tr>" + htmlTd(QFileInfo(info.path).fileName(), role) +
+                   htmlTd(formatFactors(info.overviewSizes), role) + htmlTd(status, role) + "</tr>";
   }
 
   currentHtml += "</table>";
@@ -122,8 +167,8 @@ CVrtAdvisoryDialog::CVrtAdvisoryDialog(const QString& filename, const CGdalVrtUt
     const QString name = QFileInfo(path).fileName();
     const bool replacing = hasExistingOverviews(path);
     const QString action = replacing ? tr("Clean + rebuild") : tr("Build new");
-    const QString bg = replacing ? "#fff3cd" : "#d4edda";
-    afterFixHtml += "<tr>" + htmlTd(name, bg) + htmlTd(suggestedStr, bg) + htmlTd(action, bg) + "</tr>";
+    const CUiTheme::Role role = replacing ? CUiTheme::Role::eWarn : CUiTheme::Role::eOk;
+    afterFixHtml += "<tr>" + htmlTd(name, role) + htmlTd(suggestedStr, role) + htmlTd(action, role) + "</tr>";
   }
 
   // Only a VRT with source files needs this extra row (see hasSourceFiles() - the
@@ -137,8 +182,8 @@ CVrtAdvisoryDialog::CVrtAdvisoryDialog(const QString& filename, const CGdalVrtUt
     // plain "<"/">" here - htmlTd() escapes the whole string itself, so a pre-escaped
     // entity would show up literally as "&lt;OverviewList&gt;"
     const QString action = replacing ? tr("Update <OverviewList>") : tr("Add <OverviewList>");
-    const QString bg = replacing ? "#fff3cd" : "#d4edda";
-    afterFixHtml += "<tr>" + htmlTd(vrtName, bg) + htmlTd(suggestedStr, bg) + htmlTd(action, bg) + "</tr>";
+    const CUiTheme::Role role = replacing ? CUiTheme::Role::eWarn : CUiTheme::Role::eOk;
+    afterFixHtml += "<tr>" + htmlTd(vrtName, role) + htmlTd(suggestedStr, role) + htmlTd(action, role) + "</tr>";
   }
 
   afterFixHtml += "</table>";
@@ -209,32 +254,6 @@ CVrtAdvisoryDialog::CVrtAdvisoryDialog(const QString& filename, const CGdalVrtUt
   ensureWrappedHeight(labelRasterInfo);
   ensureWrappedHeight(labelSubfileWarning);
   ensureWrappedHeight(labelSummary);
-
-  shell_ = new CShell(this, /*isSingleton=*/false);
-  shell_->setVisible(false);
-  verticalLayout->insertWidget(verticalLayout->indexOf(labelSummary), shell_);
-  connect(shell_, &CShell::sigFinishedJob, this, &CVrtAdvisoryDialog::slotJobFinished);
-
-  // Nothing to fix: hide the fix-overviews machinery regardless of hasTooManySubfiles().
-  // labelSummary stays visible - its disk-usage estimate is informational at any time.
-  if (!advice_.needsOverviewFix()) {
-    labelAfterFixTitle->setVisible(false);
-    textAfterFix->setVisible(false);
-    buttonBox->button(QDialogButtonBox::Ok)->setVisible(false);
-  }
-
-  // Nothing to do at all (no overview fix, no subfile problem): plain "Overview info" +
-  // "Close" treatment. A VRT with only the subfile problem keeps the normal wording since
-  // it still has the Combine button to offer.
-  if (!advice_.needsOverviewFix() && !advice_.hasTooManySubfiles()) {
-    setWindowTitle(tr("Overview info"));
-    checkSuppressAdvisory->setVisible(false);
-    buttonBox->button(QDialogButtonBox::Cancel)->setText(tr("Close"));
-  }
-
-  // Force the deferred layout update to run before adjustSize() queries sizeHint.
-  verticalLayout->activate();
-  adjustSize();
 }
 
 QString CVrtAdvisoryDialog::formatFactors(const QVector<qint32>& factors) {
@@ -249,28 +268,29 @@ QString CVrtAdvisoryDialog::formatFactors(const QVector<qint32>& factors) {
 }
 
 QString CVrtAdvisoryDialog::htmlTh(const QString& text) {
-  return QString("<th style=\"text-align:left; padding:4px 6px; background-color:#e0e0e0\">%1</th>")
-      .arg(text.toHtmlEscaped());
+  return QString("<th style=\"text-align:left; padding:4px 6px; %1\">%2</th>")
+      .arg(CUiTheme::css(CUiTheme::Role::eNeutral), text.toHtmlEscaped());
 }
 
-QString CVrtAdvisoryDialog::htmlTd(const QString& text, const QString& bg) {
-  return QString("<td style=\"padding:4px 6px; background-color:%1\">%2</td>").arg(bg, text.toHtmlEscaped());
+QString CVrtAdvisoryDialog::htmlTd(const QString& text, CUiTheme::Role role) {
+  return QString("<td style=\"padding:4px 6px; %1\">%2</td>").arg(CUiTheme::css(role), text.toHtmlEscaped());
 }
 
-QString CVrtAdvisoryDialog::rowStatus(bool checked, const QVector<qint32>& sizes, bool sufficient, QString& bg) {
+QString CVrtAdvisoryDialog::rowStatus(bool checked, const QVector<qint32>& sizes, bool sufficient,
+                                      CUiTheme::Role& role) {
   if (!checked) {
-    bg = "#d4edda";
+    role = CUiTheme::Role::eOk;
     return tr("✓ covered by .ovr");
   }
   if (sizes.isEmpty()) {
-    bg = "#f8d7da";
+    role = CUiTheme::Role::eError;
     return tr("✗ None");
   }
   if (!sufficient) {
-    bg = "#fff3cd";
+    role = CUiTheme::Role::eWarn;
     return tr("⚠ Shallow (coarsest %1px)").arg(sizes.last());
   }
-  bg = "#d4edda";
+  role = CUiTheme::Role::eOk;
   return tr("✓ OK");
 }
 
@@ -335,10 +355,8 @@ void CVrtAdvisoryDialog::slotFixOverviews() {
   for (const QString& path : toFix) {
     const QString name = QFileInfo(path).fileName().toHtmlEscaped();
     if (hasExistingOverviews(path)) {
-      confirmHtml += "<tr><td>" + name +
-                     "&nbsp;&nbsp;</td>"
-                     "<td><span style=\"color:darkorange\">" +
-                     tr("Clean + rebuild") + "</span></td></tr>";
+      confirmHtml += "<tr><td>" + name + "&nbsp;&nbsp;</td><td>" +
+                     CUiTheme::span(CUiTheme::Role::eWarn, tr("Clean + rebuild")) + "</td></tr>";
     } else {
       confirmHtml += "<tr><td>" + name + "&nbsp;&nbsp;</td><td>" + tr("Build new") + "</td></tr>";
     }
@@ -350,10 +368,8 @@ void CVrtAdvisoryDialog::slotFixOverviews() {
     // alone isn't enough: a bare <OverviewList> verified via source files (see
     // CGdalVrtUtil::buildOverviewAdvice()) has no file to delete
     if (advice_.containerHasOwnOvr) {
-      confirmHtml += "<tr><td>" + vrtName +
-                     "&nbsp;&nbsp;</td>"
-                     "<td><span style=\"color:darkorange\">" +
-                     tr("Update &lt;OverviewList&gt;") + "</span></td></tr>";
+      confirmHtml += "<tr><td>" + vrtName + "&nbsp;&nbsp;</td><td>" +
+                     CUiTheme::span(CUiTheme::Role::eWarn, tr("Update &lt;OverviewList&gt;")) + "</td></tr>";
     } else {
       confirmHtml += "<tr><td>" + vrtName + "&nbsp;&nbsp;</td><td>" + tr("Add &lt;OverviewList&gt;") + "</td></tr>";
     }

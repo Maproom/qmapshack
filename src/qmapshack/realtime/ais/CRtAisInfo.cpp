@@ -24,6 +24,7 @@
 #include "CMainWindow.h"
 #include "realtime/ais/CRtAis.h"
 #include "realtime/ais/CRtAisRecord.h"
+#include "theme/CUiTheme.h"
 
 CRtAisInfo::CRtAisInfo(CRtAis& source, QWidget* parent) : IRtInfo(&source, parent) {
   setupUi(this);
@@ -49,7 +50,7 @@ CRtAisInfo::CRtAisInfo(CRtAis& source, QWidget* parent) : IRtInfo(&source, paren
   timer->setInterval(1000);
   connect(timer, &QTimer::timeout, this, &CRtAisInfo::slotUpdate);
 
-  labelStatus->setText("-");
+  updateStatusLabel();
 
   nmeaDict["VDM"] = [&](const QStringList& t) { nmeaVDM(t); };
 
@@ -99,8 +100,22 @@ void CRtAisInfo::slotHelp() const {
                               "Replace /dev/ttyUSB0 with the tty device of your AIS receiver"));
 }
 
+void CRtAisInfo::changeEvent(QEvent* e) {
+  IRtInfo::changeEvent(e);
+
+  // the error carries a themed colour in its markup
+  if (CUiTheme::isPaletteChange(e)) {
+    updateStatusLabel();
+  }
+}
+
+void CRtAisInfo::updateStatusLabel() {
+  labelStatus->setText(errorMessage.isEmpty() ? "-" : CUiTheme::spanBold(CUiTheme::Role::eError, errorMessage));
+}
+
 void CRtAisInfo::slotConnect(bool yes) {
-  labelStatus->setText("-");
+  errorMessage.clear();
+  updateStatusLabel();
 
   if (yes) {
     lineHost->setEnabled(false);
@@ -134,7 +149,8 @@ void CRtAisInfo::slotDisconnected() {
 
 void CRtAisInfo::slotError(QAbstractSocket::SocketError /*socketError*/) {
   slotDisconnected();
-  labelStatus->setText("<b style='color: red;'>" + socket->errorString() + "</b>");
+  errorMessage = socket->errorString().toHtmlEscaped();
+  updateStatusLabel();
 }
 
 void CRtAisInfo::slotReadyRead() {

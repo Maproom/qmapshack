@@ -19,7 +19,7 @@
      <item row="3" column="1">
       <widget class="QLabel" name="labelPathGdalbuildvrt">
        <property name="text">
-        <string>&lt;b style='color: red;'&gt;not found&lt;/b&gt;</string>
+        <string>not found</string>
        </property>
       </widget>
      </item>
@@ -61,7 +61,7 @@
      <item row="4" column="1">
       <widget class="QLabel" name="labelPathQmtrgb2pct">
        <property name="text">
-        <string>&lt;b style='color: red;'&gt;not found&lt;/b&gt;</string>
+        <string>not found</string>
        </property>
       </widget>
      </item>
@@ -96,7 +96,7 @@
      <item row="1" column="1">
       <widget class="QLabel" name="labelPathGdaltranslate">
        <property name="text">
-        <string>&lt;b style='color: red;'&gt;not found&lt;/b&gt;</string>
+        <string>not found</string>
        </property>
       </widget>
      </item>
@@ -170,7 +170,7 @@
      <item row="0" column="1">
       <widget class="QLabel" name="labelPathGdaladdo">
        <property name="text">
-        <string>&lt;b style='color: red;'&gt;not found&lt;/b&gt;</string>
+        <string>not found</string>
        </property>
       </widget>
      </item>
@@ -191,7 +191,7 @@
      <item row="2" column="1">
       <widget class="QLabel" name="labelPathGdalwarp">
        <property name="text">
-        <string>&lt;b style='color: red;'&gt;not found&lt;/b&gt;</string>
+        <string>not found</string>
        </property>
       </widget>
      </item>
@@ -254,7 +254,7 @@
      <item row="5" column="1">
       <widget class="QLabel" name="labelPathQmtmap2jnx">
        <property name="text">
-        <string>&lt;b style='color: red;'&gt;not found&lt;/b&gt;</string>
+        <string>not found</string>
        </property>
       </widget>
      </item>

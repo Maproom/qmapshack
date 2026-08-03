@@ -264,6 +264,12 @@ class CRtAisInfo : public IRtInfo, private Ui::IRtAisInfo {
   void aisAidToNavigation(const QByteArray& data);
   void aisStatic(const QByteArray& data);
 
+  void changeEvent(QEvent* e) override;
+  void updateStatusLabel();
+
+  /** @brief Last socket error, empty when there is none. Unformatted, so it can be re-themed. */
+  QString errorMessage;
+
   QTcpSocket* socket;
   QTimer* timer;
 

@@ -70,6 +70,12 @@ class CRtGpsTetherInfo : public IRtInfo, private Ui::IRtGpsTetherInfo {
   void startRecord(const QString& filename) override;
   void fillTrackData(CTrackData& data) override;
 
+  void changeEvent(QEvent* e) override;
+  void updateStatusLabel();
+
+  /** @brief Last socket error, empty when there is none. Unformatted, so it can be re-themed. */
+  QString errorMessage;
+
   QTcpSocket* socket;
   QTimer* timer;
 

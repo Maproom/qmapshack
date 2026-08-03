@@ -23,10 +23,15 @@
 #include "helpers/CSettings.h"
 #include "items/CItemCutMap.h"
 #include "setup/IAppSetup.h"
+#include "theme/CUiTheme.h"
 
 CToolCutMap::CToolCutMap(QWidget* parent) : IToolGui(parent) {
   setupUi(this);
   setObjectName(tr("Cut Map"));
+
+  for (QLabel* label : {labelNoGdalwarp, labelNoGdaladdo}) {
+    CUiTheme::markLabel(label, CUiTheme::Role::eError);
+  }
 
   labelHelp->setText(
       tr("Paper maps usually have a border you don't want to have. To combine "

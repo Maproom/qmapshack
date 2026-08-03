@@ -20,40 +20,37 @@
 
 #include <QtWidgets>
 
-void CTinySpinBox::initialize() {
-  initialized = true;
+#include "theme/CUiTheme.h"
 
-  paletteEdit = QPalette(palette());
-  paletteRO = QPalette(palette());
-  paletteRW = QPalette(palette());
-  paletteRW.setColor(QPalette::Text, QColor(0, 0, 255));
-
-  fontNoUnderline = QFont(font());
-  fontUnderline = QFont(font());
-  fontUnderline.setUnderline(true);
-}
+CTinySpinBox::CTinySpinBox(QWidget* parent) : QSpinBox(parent) {}
 
 void CTinySpinBox::updateStyle() {
-  if (!initialized) {
-    initialize();
+  applyingStyle = true;
+
+  if (isReadOnly() || hasFocus()) {
+    // a default-constructed palette/font resolves to nothing, so both fall back to inheritance
+    setPalette(QPalette());
+    setFont(QFont());
+  } else {
+    QPalette pal;
+    pal.setColor(QPalette::Text, CUiTheme::foreground(CUiTheme::Role::eInfo));
+    setPalette(pal);
+
+    QFont f;
+    f.setUnderline(true);
+    setFont(f);
   }
 
-  if (isReadOnly()) {
-    setPalette(paletteRO);
-    setFont(fontNoUnderline);
-  } else if (hasFocus()) {
-    setPalette(paletteEdit);
-    setFont(fontNoUnderline);
-  } else {
-    setPalette(paletteRW);
-    setFont(fontUnderline);
-  }
+  applyingStyle = false;
 }
 
-CTinySpinBox::CTinySpinBox(QWidget* parent) : QSpinBox(parent) {
-  // initialization has to be done deferred,
-  // as the correct palette is set after construction
-  initialized = false;
+void CTinySpinBox::changeEvent(QEvent* event) {
+  QSpinBox::changeEvent(event);
+
+  // setPalette() in updateStyle() re-enters with the same event - hence the guard.
+  if (!applyingStyle && CUiTheme::isPaletteChange(event)) {
+    updateStyle();
+  }
 }
 
 void CTinySpinBox::stepBy(int steps) {

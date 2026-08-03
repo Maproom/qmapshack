@@ -20,6 +20,8 @@
 
 #include <QtWidgets>
 
+#include "theme/CUiTheme.h"
+
 IToolShell::IToolShell(QWidget* parent) : QWidget(parent) {
   connect(&cmd, &QProcess::readyReadStandardError, this, &IToolShell::slotStderr);
   connect(&cmd, &QProcess::readyReadStandardOutput, this, &IToolShell::slotStdout);
@@ -35,7 +37,7 @@ void IToolShell::slotError(QProcess::ProcessError error) {
   if (text.isNull()) {
     return;
   }
-  text->setTextColor(Qt::red);
+  text->setTextColor(CUiTheme::foreground(CUiTheme::Role::eError));
   text->insertPlainText(QString(tr("Execution of external program `%1` failed: ")).arg(cmd.program()));
   switch (error) {
     case QProcess::FailedToStart:
@@ -61,7 +63,7 @@ void IToolShell::slotStderr() {
   }
 
   QString str;
-  text->setTextColor(Qt::red);
+  text->setTextColor(CUiTheme::foreground(CUiTheme::Role::eError));
   str = cmd.readAllStandardError();
 
   if (str[0] == '\r') {
@@ -94,7 +96,7 @@ void IToolShell::slotStdout() {
   }
 
   QString str;
-  text->setTextColor(Qt::blue);
+  text->setTextColor(CUiTheme::foreground(CUiTheme::Role::eInfo));
   str = cmd.readAllStandardOutput();
 
   if (str[0] == '\r') {
@@ -126,7 +128,7 @@ void IToolShell::stdOut(const QString& str) {
     return;
   }
 
-  text->setTextColor(Qt::black);
+  text->setTextColor(text->palette().color(QPalette::Text));
   text->append(str);
 }
 
@@ -135,14 +137,14 @@ void IToolShell::stdErr(const QString& str) {
     return;
   }
 
-  text->setTextColor(Qt::red);
+  text->setTextColor(CUiTheme::foreground(CUiTheme::Role::eError));
   text->append(str);
 }
 
 void IToolShell::slotFinished(int exitCode, QProcess::ExitStatus status) {
   if (exitCode || status) {
     if (!text.isNull()) {
-      text->setTextColor(Qt::red);
+      text->setTextColor(CUiTheme::foreground(CUiTheme::Role::eError));
       text->append(tr("!!! failed !!!\n"));
     }
     return;

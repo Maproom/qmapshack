@@ -229,6 +229,39 @@ Do not run `cmake --build` or any build command — Oliver builds externally.
 
 Do not add `Co-Authored-By` lines to commit messages.
 
+### Rich text colours — `CUiTheme`
+
+`CUiTheme` (`src/common/theme/`) is the only source of status colours for rich text, label
+stylesheets and `setTextColor()`. Roles `Neutral/Ok/Warn/Error/Info/Code`, each a fixed light/dark
+pair, light arm as authored. Tune there, never per site.
+
+- **Set both colours or neither.** A hardcoded background inherits the palette's text colour and
+  inverts on dark. Normal text takes palette colours.
+- Pick the entry point by what the widget *is*:
+  - permanently a status message, only shown and hidden → `markLabel(label, role)`
+  - a value that is *sometimes* a status → `span()`/`spanBold()`, so the colour travels with the
+    string (`CSetupExtTools`, where one label alternates between "not found" and a path)
+  - fills a background (table cell, banner) → `css()`
+  - text on the widget's own background → `cssForeground()`/`foreground()`
+- Never bake a colour into a `tr()` string or a `.ui` `<string>` — the translation carries it.
+- `paletteIsDark()` is `inline` in `CUiTheme.h` so `CSvgtIconEngine::roleColor()` can share it with
+  nothing to link; the plugin needs only `target_include_directories(svgticonengine PRIVATE ..)`.
+  Every consumer of the light/dark split uses it — a second copy of the threshold drifts silently.
+- Re-render on a scheme switch from `QEvent::ApplicationPaletteChange || QEvent::PaletteChange`
+  (`CSvgtIcon`, `CHelpBrowser`, `CListTrkPts`), not from `QStyleHints::colorSchemeChanged`: the
+  colours resolve through `QGuiApplication::palette()`, and a palette event is delivered *because*
+  that palette changed. A widget may get both events, so a re-render can run twice per switch.
+- Printing: `const CUiTheme::ForceLight paperColours(printable)` in `CDetailsPrj::draw()`, beside
+  the two palette branches it completes. It does not touch `QPalette`, so palette colours still
+  need their own paper branch.
+- `QTextBrowser` applies a `<link>`ed stylesheet (`loadResource`, `StyleSheetResource`), so
+  `CHelpBrowser::loadResource()` appends a themed `code, pre` rule to whatever the packaged help
+  ships. That CSS lives outside this repo; `Role::Code`'s light arm is picked to match its `code`
+  background, so light mode renders unchanged.
+- Untouched on purpose: `CShell`/`IToolShell` colour each line as it is appended, so lines already
+  in the log keep the scheme they were written in; `IPlot`'s plot sheet, the halo
+  under `CWksItemDelegate`'s progress bar and `CIconGrid`'s tiles are white by design.
+
 ### IDrawContext — logical vs device pixels (HiDPI)
 
 `convertRad2Px()`/`convertPx2Rad()` work in **logical** viewport pixels (built from `center` and

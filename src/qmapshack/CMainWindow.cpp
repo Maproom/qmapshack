@@ -63,6 +63,7 @@
 #include "print/CScreenshotDialog.h"
 #include "realtime/CRtWorkspace.h"
 #include "setup/IAppSetup.h"
+#include "theme/CUiTheme.h"
 #include "tool/CImportDatabase.h"
 #include "tool/CMapVrtBuilder.h"
 #include "tool/CRoutinoDatabaseBuilder.h"
@@ -107,6 +108,7 @@ CMainWindow::CMainWindow() : id(QRandomGenerator::global()->generate()) {
   setupUi(this);
 
   qApp->installEventFilter(this);
+  CUiTheme::installThemeRefresh();
 
 #ifdef DEVELOPMENT
   setWindowTitle(WHAT_STR ".develop");
@@ -354,8 +356,8 @@ CMainWindow::CMainWindow() : id(QRandomGenerator::global()->generate()) {
     toolBar->setFixedHeight(38);
     toolBar->setIconSize(QSize(24, 24));
     toolBar->setStyleSheet("QToolBar { spacing: 2px; }");
-  } 
-#endif // defined(Q_OS_MAC)
+  }
+#endif  // defined(Q_OS_MAC)
 
   QAction* actionToggleToolBar = toolBar->toggleViewAction();
   actionToggleToolBar->setObjectName("actionToggleToolBar");

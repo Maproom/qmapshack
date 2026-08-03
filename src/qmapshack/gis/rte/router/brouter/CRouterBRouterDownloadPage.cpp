@@ -31,6 +31,7 @@
 #include <QPushButton>
 
 #include "gis/rte/router/brouter/CRouterBRouterSetup.h"
+#include "theme/CUiTheme.h"
 
 CRouterBRouterReleaseItem::CRouterBRouterReleaseItem(const QString& _name, const QString& _description,
                                                      const QString& _url)
@@ -148,7 +149,7 @@ void CRouterBRouterDownloadPage::localBRouterVersionsLoadFinished(QNetworkReply*
       throw tr("No releases found at %1").arg(setup->expertBinariesUrl);
     }
   } catch (const QString& msg) {
-    textLocalInstall->setTextColor(Qt::red);
+    textLocalInstall->setTextColor(CUiTheme::foreground(CUiTheme::Role::eError));
     textLocalInstall->append(tr("loading brouter version-data failed: %1").arg(msg));
   }
   updateModel();
@@ -189,7 +190,7 @@ void CRouterBRouterDownloadPage::slotLocalDownloadButtonClicked() const {
   textVersionDetails->setVisible(false);
   textLocalInstall->clear();
   textLocalInstall->setVisible(true);
-  textLocalInstall->setTextColor(Qt::darkGreen);
+  textLocalInstall->setTextColor(CUiTheme::foreground(CUiTheme::Role::eOk));
   textLocalInstall->append(tr("download %1 started").arg(downloadUrl.toString()));
   QNetworkReply* reply = networkAccessManager->get(QNetworkRequest(downloadUrl));
   reply->setProperty("requestType", eRequestDownload);
@@ -217,7 +218,7 @@ void CRouterBRouterDownloadPage::localBRouterDownloadFinished(QNetworkReply* rep
         throw tr("Error writing to file %1").arg(outfile.fileName());
       }
       outfile.close();
-      textLocalInstall->setTextColor(Qt::darkGreen);
+      textLocalInstall->setTextColor(CUiTheme::foreground(CUiTheme::Role::eOk));
       textLocalInstall->append(tr("download %1 finished").arg(outfile.fileName()));
       const QStringList& unzippedNames = JlCompress::extractDir(outfile.fileName(), downloadDir.path());
       textLocalInstall->append(tr("unzipping:"));
@@ -251,7 +252,7 @@ void CRouterBRouterDownloadPage::localBRouterDownloadFinished(QNetworkReply* rep
       throw msg;
     }
   } catch (const QString& msg) {
-    textLocalInstall->setTextColor(Qt::red);
+    textLocalInstall->setTextColor(CUiTheme::foreground(CUiTheme::Role::eError));
     textLocalInstall->append(tr("installation of brouter failed: %1").arg(msg));
   }
 }

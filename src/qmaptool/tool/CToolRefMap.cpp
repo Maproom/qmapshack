@@ -26,10 +26,15 @@
 #include "overlay/refmap/COverlayRefMapPoint.h"
 #include "setup/IAppSetup.h"
 #include "shell/CShell.h"
+#include "theme/CUiTheme.h"
 
 CToolRefMap::CToolRefMap(QWidget* parent) : IToolGui(parent) {
   setupUi(this);
   setObjectName(tr("Reference Map"));
+
+  for (QLabel* label : {labelNoGdalwarp, labelNoGdalTranslate, labelNoGdaladdo}) {
+    CUiTheme::markLabel(label, CUiTheme::Role::eError);
+  }
 
   labelHelp->setText(
       tr("A scan of a paper map can be converted to a referenced raster map if "

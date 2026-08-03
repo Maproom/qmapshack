@@ -25,6 +25,7 @@
 #include "helpers/CVrtCombiner.h"
 #include "shell/CShell.h"
 #include "shell/CShellCmd.h"
+#include "theme/CUiTheme.h"
 #include "ui_IVrtAdvisoryDialog.h"
 
 class QPushButton;
@@ -75,6 +76,7 @@ class CVrtAdvisoryDialog : public QDialog, private Ui::IVrtAdvisoryDialog {
   void sigContainerRebuilt();
 
  protected:
+  void changeEvent(QEvent* e) override;
   void closeEvent(QCloseEvent* e) override;
   void reject() override;
 
@@ -87,6 +89,9 @@ class CVrtAdvisoryDialog : public QDialog, private Ui::IVrtAdvisoryDialog {
   enum class JobKind { None, FixOverviews, Combine };
 
   bool isJobRunning() const { return jobId_ != 0 && shell_->isVisible() && !canceling_; }
+
+  /// @brief Build the two status tables and the summary. Re-run on a colour scheme change.
+  void renderThemedContent();
 
   QString resampleAlgorithm() const { return advice_.isPaletteIndexed ? "nearest" : "average"; }
   bool hasExistingOverviews(const QString& filePath) const;
@@ -101,17 +106,17 @@ class CVrtAdvisoryDialog : public QDialog, private Ui::IVrtAdvisoryDialog {
   ///        comma-separated string, or "none" if empty.
   static QString formatFactors(const QVector<qint32>& factors);
   static QString htmlTh(const QString& text);
-  static QString htmlTd(const QString& text, const QString& bg);
+  static QString htmlTd(const QString& text, CUiTheme::Role role);
 
   /**
-     @brief Status text/background for one current-situation row.
+     @brief Status text/role for one current-situation row.
 
      Shared by the container row and every source-file row, so both use the same rule
      and can't disagree. `sufficient` is the precise, size-based verdict
      (CGdalVrtUtil::buildOverviewAdvice()); `sizes` is only used for the "Shallow
      (coarsest %1px)" label, never to derive the verdict itself.
    */
-  static QString rowStatus(bool checked, const QVector<qint32>& sizes, bool sufficient, QString& bg);
+  static QString rowStatus(bool checked, const QVector<qint32>& sizes, bool sufficient, CUiTheme::Role& role);
 
   /**
      @brief Suffix for the container row: distinguishes a real .ovr file from a bare

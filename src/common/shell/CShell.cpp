@@ -20,6 +20,8 @@
 
 #include <QtWidgets>
 
+#include "theme/CUiTheme.h"
+
 CShell* CShell::pSelf = nullptr;
 
 CShell::CShell(QWidget* parent, bool isSingleton) : QTextBrowser(parent) {
@@ -42,7 +44,7 @@ CShell::~CShell() {
 }
 
 void CShell::slotError(QProcess::ProcessError error) {
-  setTextColor(Qt::red);
+  setTextColor(CUiTheme::foreground(CUiTheme::Role::eError));
   insertPlainText(QString(tr("Execution of external program `%1` failed: ")).arg(cmd.program()));
   switch (error) {
     case QProcess::FailedToStart:
@@ -67,7 +69,7 @@ void CShell::slotError(QProcess::ProcessError error) {
 
 void CShell::slotStderr() {
   QString str;
-  setTextColor(Qt::red);
+  setTextColor(CUiTheme::foreground(CUiTheme::Role::eError));
   str = cmd.readAllStandardError();
 
   if (!str.isEmpty() && str[0] == '\r') {
@@ -96,7 +98,7 @@ void CShell::slotStderr() {
 
 void CShell::slotStdout() {
   QString str;
-  setTextColor(Qt::blue);
+  setTextColor(CUiTheme::foreground(CUiTheme::Role::eInfo));
   str = cmd.readAllStandardOutput();
 
   if (!str.isEmpty() && str[0] == '\r') {
@@ -124,12 +126,12 @@ void CShell::slotStdout() {
 }
 
 void CShell::stdOut(const QString& str) {
-  setTextColor(Qt::black);
+  setTextColor(palette().color(QPalette::Text));
   append(str);
 }
 
 void CShell::stdErr(const QString& str) {
-  setTextColor(Qt::red);
+  setTextColor(CUiTheme::foreground(CUiTheme::Role::eError));
   append(str);
 }
 
@@ -137,7 +139,7 @@ void CShell::slotFinished(int exitCode, QProcess::ExitStatus status) {
   if (exitCode || status) {
     jobSucceeded_ = false;
     emit sigFinishedJob(jobId);
-    setTextColor(Qt::red);
+    setTextColor(CUiTheme::foreground(CUiTheme::Role::eError));
     append(tr("!!! failed !!!\n"));
     return;
   }
@@ -173,7 +175,7 @@ void CShell::nextCommand() {
   if (idxCommand >= commands.size()) {
     jobSucceeded_ = true;
     emit sigFinishedJob(jobId);
-    setTextColor(Qt::darkGreen);
+    setTextColor(CUiTheme::foreground(CUiTheme::Role::eOk));
     append(tr("!!! done !!!\n"));
     return;
   }

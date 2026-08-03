@@ -25,6 +25,7 @@
 #include "gis/trk/filter/CFilterSpeedHike.h"
 #include "helpers/CSettings.h"
 #include "svgticon/CSvgtIcon.h"
+#include "theme/CUiTheme.h"
 
 CFilterSpeed::CFilterSpeed(CGisItemTrk& trk, QWidget* parent) : QWidget(parent), trk(trk) {
   setupUi(this);
@@ -62,6 +63,15 @@ CFilterSpeed::CFilterSpeed(CGisItemTrk& trk, QWidget* parent) : QWidget(parent),
   cfg.endGroup();  // Hike
 
   cfg.endGroup();  // TrackDetails/Filter/Speed
+}
+
+void CFilterSpeed::changeEvent(QEvent* e) {
+  QWidget::changeEvent(e);
+
+  // labelWarning carries a themed colour in its markup
+  if (CUiTheme::isPaletteChange(e)) {
+    updateUi();
+  }
 }
 
 CFilterSpeed::~CFilterSpeed() {
@@ -115,9 +125,10 @@ void CFilterSpeed::slotSetActivityType(int type) {
 
 void CFilterSpeed::updateUi() {
   if (trk.isTrkElevationInvalid() && comboActivityType->currentIndex() > 0) {
-    QString str =
-        QString("<b style='color: red;'>" +
-                tr("Track has no or invalid elevation data. Please correct or set constant speed!") + "</b><br/>");
+    const QString str =
+        CUiTheme::spanBold(CUiTheme::Role::eError,
+                           tr("Track has no or invalid elevation data. Please correct or set constant speed!")) +
+        "<br/>";
     labelWarning->setText(str);
     filterCycle->setEnabled(false);
     filterHike->setEnabled(false);

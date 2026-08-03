@@ -32,6 +32,9 @@ class CHelpBrowser : public QTextBrowser {
   QVariant loadResource(int type, const QUrl& name) override;
   void contextMenuEvent(QContextMenuEvent* event) override;
 
+  /// @brief Reload on a palette switch - the themed colours are baked into the page.
+  void changeEvent(QEvent* e) override;
+
  public slots:
   void setSource(const QUrl& url);
 

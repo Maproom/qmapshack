@@ -49,6 +49,7 @@
 #include "plot/CPlot.h"
 #include "plot/CPlotProfile.h"
 #include "svgticon/CSvgtIcon.h"
+#include "theme/CUiTheme.h"
 #include "units/IUnit.h"
 #include "widgets/CTextEditWidget.h"
 
@@ -206,6 +207,16 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk) : INotifyTrk(CGisItemTrk::eVisualDeta
   treeFilter->setMinimumWidth(minWidth + treeFilter->indentation());
 
   slotShowPlots();
+}
+
+void CDetailsTrk::changeEvent(QEvent* e) {
+  QWidget::changeEvent(e);
+
+  // rebuilds the comment browser, the getInfo() markup in labelInfo and the themed tooltip, none
+  // of which can be repaired from the content they already hold
+  if (CUiTheme::isPaletteChange(e)) {
+    updateData();
+  }
 }
 
 CDetailsTrk::~CDetailsTrk() {
@@ -524,7 +535,8 @@ void CDetailsTrk::updateData() {
     toolSetEnergyCycling->setEnabled(true);
   } else {
     toolSetEnergyCycling->setEnabled(false);
-    tooltip += "<b style='color: red;'>" + tr(" - Computation needs valid time, elevation and slope data.") + "</b>";
+    tooltip +=
+        CUiTheme::spanBold(CUiTheme::Role::eError, tr(" - Computation needs valid time, elevation and slope data."));
   }
   toolSetEnergyCycling->setToolTip(tooltip);
 

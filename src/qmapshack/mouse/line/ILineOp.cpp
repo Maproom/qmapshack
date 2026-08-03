@@ -27,6 +27,7 @@
 #include "gis/GeoMath.h"
 #include "gis/rte/router/CRouterSetup.h"
 #include "mouse/line/IMouseEditLine.h"
+#include "theme/CUiTheme.h"
 
 /**
    Identifies the two polyline segments (by index) whose perpendicular projections are closest
@@ -298,7 +299,7 @@ void ILineOp::showRoutingErrorMessage(const QString& msg) const {
     canvas->reportStatus("Routino", QString());
   } else {
     canvas->reportStatus("Routino",
-                         QString("<span style='color: red;'><b>%1</b><br />%2</span>").arg(tr("Routing"), msg));
+                         CUiTheme::span(CUiTheme::Role::eError, QString("<b>%1</b><br />%2").arg(tr("Routing"), msg)));
   }
 }
 

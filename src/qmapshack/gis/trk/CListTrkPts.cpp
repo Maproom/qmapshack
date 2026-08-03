@@ -18,7 +18,12 @@
 
 #include "gis/trk/CListTrkPts.h"
 
+#include <QEvent>
+#include <QPalette>
+#include <QStringList>
+
 #include "CMainWindow.h"
+#include "theme/CUiTheme.h"
 
 CListTrkPts::CListTrkPts(QWidget* parent) : QWidget(parent), INotifyTrk(CGisItemTrk::eVisualTrkTable) {
   setupUi(this);
@@ -45,6 +50,13 @@ void CListTrkPts::setTrack(CGisItemTrk* track) {
 
   if (trk != nullptr) {
     trk->registerVisual(this);
+    updateData();
+  }
+}
+
+void CListTrkPts::changeEvent(QEvent* e) {
+  QWidget::changeEvent(e);
+  if (CUiTheme::isPaletteChange(e)) {
     updateData();
   }
 }
@@ -94,7 +106,8 @@ void CListTrkPts::setMouseFocus(qint32 idx) {
   QTextStream stream(&table);
 
   stream << "<!doctype html>" << "<html>" << "<head>" << "<style>" << "td {padding-left: 3px; padding-right: 3px;}"
-         << "th {background: gray; padding-left: 3px; padding-right: 3px;}" << "</style>" << "</head>" << "<body>";
+         << "th {" << CUiTheme::css(CUiTheme::Role::eNeutral) << "; padding-left: 3px; padding-right: 3px;}"
+         << "</style>" << "</head>" << "<body>";
 
   stream << "<table>" << "<tr>" << "<th align=left>" << "#" << "</th>" << "<th align=left>" << tr("Time") << "</th>"
          << "<th align=left>" << tr("Ele.") << "</th>" << "<th align=left>" << tr("Delta") << "</th>"
@@ -120,13 +133,21 @@ void CListTrkPts::setMouseRangeFocus(const CTrackData::trkpt_t* pt1, const CTrac
 }
 
 void CListTrkPts::addTableRow(bool focus, const CTrackData::trkpt_t& trkpt, bool isInRange, QTextStream& stream) {
-  QString color = trkpt.isHidden() ? "gray" : "black";
-  QString bgFocus = focus ? "#e6e6e6" : "white";
-  QString bgInRange = isInRange ? "#55ff7f" : "white";
+  // Both colours or neither: a row that sets only its background inherits the palette's text
+  // colour, which inverts with the colour scheme. An unstyled row keeps the palette's pair.
+  QStringList style;
+  if (focus) {
+    style << CUiTheme::css(CUiTheme::Role::eNeutral);
+  }
+  if (trkpt.isHidden()) {
+    // last, so it also dims a focused row
+    style << "color: " + palette().color(QPalette::Disabled, QPalette::Text).name();
+  }
 
-  stream << "<tr style='" << "color: " << color << ";" << "background: " << bgFocus << ";" << "'>";
+  stream << "<tr style='" << style.join("; ") << "'>";
 
-  stream << "<td style='background: " << bgInRange << ";'>" << QString::number(trkpt.idxTotal) << "</td>";
+  stream << "<td style='" << (isInRange ? CUiTheme::css(CUiTheme::Role::eOk) : QString()) << "'>"
+         << QString::number(trkpt.idxTotal) << "</td>";
 
   stream << "<td>"
          << (trkpt.time.isValid() ? IUnit::self().datetime2string(trkpt.time, IUnit::eTimeFormatShort,

@@ -38,6 +38,10 @@ class CListTrkPts : public QWidget, public INotifyTrk, private Ui::IListTrkPts {
   void setMouseRangeFocus(const CTrackData::trkpt_t* pt1, const CTrackData::trkpt_t* pt2) override;
   void setMouseClickFocus(const CTrackData::trkpt_t* pt) override {}
 
+ protected:
+  /// @brief Rebuild the table on a colour-scheme switch - its themed colours are baked into the HTML.
+  void changeEvent(QEvent* e) override;
+
  private:
   void setMouseFocus(qint32 idx);
   void addTableRow(bool focus, const CTrackData::trkpt_t& trkpt, bool isInRange, QTextStream& stream);

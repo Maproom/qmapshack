@@ -23,6 +23,7 @@
 
 #include "CMainWindow.h"
 #include "gis/rte/router/brouter/CRouterBRouterSetup.h"
+#include "theme/CUiTheme.h"
 
 CRouterBRouterSetupWizard::CRouterBRouterSetupWizard() : QWizard(CMainWindow::getBestWidgetForParent()) {
   setupUi(this);
@@ -404,7 +405,7 @@ void CRouterBRouterSetupWizard::updateLocalDirectory() const {
       labelLocalJavaResult->setText(tr("seems to be a valid Java-executable"));
       if (status.isJavaOutdated) {
         textLocalDirectory->setVisible(true);
-        textLocalDirectory->setTextColor(Qt::red);
+        textLocalDirectory->setTextColor(CUiTheme::foreground(CUiTheme::Role::eError));
         textLocalDirectory->setText(
             tr("Your Java version %1 seems to be older than the required version %2.\n"
                "BRouter will probably not work as expected.\n"
@@ -434,7 +435,7 @@ void CRouterBRouterSetupWizard::slotCreateOrUpdateLocalInstallClicked() {
     next();
   } catch (const QString& msg) {
     textLocalDirectory->setVisible(true);
-    textLocalDirectory->setTextColor(Qt::red);
+    textLocalDirectory->setTextColor(CUiTheme::foreground(CUiTheme::Role::eError));
     textLocalDirectory->append(msg);
   }
 }

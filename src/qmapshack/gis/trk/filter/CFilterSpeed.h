@@ -36,6 +36,9 @@ class CFilterSpeed : public QWidget, private Ui::IFilterSpeed {
 
   void updateUi();
 
+ protected:
+  void changeEvent(QEvent* e) override;
+
  private slots:
   void slotApply();
   void slotSetActivityType(int type);

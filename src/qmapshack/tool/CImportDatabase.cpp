@@ -23,6 +23,7 @@
 #include "CMainWindow.h"
 #include "helpers/CSettings.h"
 #include "qlgt/CQlgtDb.h"
+#include "theme/CUiTheme.h"
 
 CImportDatabase::CImportDatabase(QWidget* parent) : QWidget(parent) {
   setupUi(this);
@@ -53,12 +54,12 @@ CImportDatabase::~CImportDatabase() {
 }
 
 void CImportDatabase::stdOut(const QString& str) {
-  textBrowser->setTextColor(Qt::black);
+  textBrowser->setTextColor(textBrowser->palette().color(QPalette::Text));
   textBrowser->append(str);
 }
 
 void CImportDatabase::stdErr(const QString& str) {
-  textBrowser->setTextColor(Qt::red);
+  textBrowser->setTextColor(CUiTheme::foreground(CUiTheme::Role::eError));
   textBrowser->append(str);
 }
 

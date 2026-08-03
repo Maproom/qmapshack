@@ -137,8 +137,7 @@ void CToolCutMap::buildCmd(QList<CShellCmd>& cmds, const IItem* iitem) {
   if (context->getRasterBandCount() == 1) {
     if (!context->getNoData()) {
       // --- use no data value for destination, too ---
-      args << "-dstnodata"
-           << "255";
+      args << "-dstnodata" << "255";
     }
   } else if (context->getRasterBandCount() == 3) {
     // --- add alpha channel to files with just RGB ---

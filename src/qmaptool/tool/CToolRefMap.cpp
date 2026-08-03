@@ -169,8 +169,7 @@ void CToolRefMap::buildCmd(QList<CShellCmd>& cmds, const IItem* iitem) {
   if (context->getRasterBandCount() == 1) {
     if (!context->getNoData()) {
       // --- use no data value for destination, too ---
-      args << "-dstnodata"
-           << "255";
+      args << "-dstnodata" << "255";
     }
   } else if (context->getRasterBandCount() == 3) {
     // --- add alpha channel to files with just RGB ---
@@ -188,10 +187,7 @@ void CToolRefMap::buildCmd(QList<CShellCmd>& cmds, const IItem* iitem) {
 
   args = groupGDALParameters->getArgs();
   if (args.isEmpty()) {
-    args << "-co"
-         << "tiled=yes"
-         << "-co"
-         << "compress=deflate";
+    args << "-co" << "tiled=yes" << "-co" << "compress=deflate";
   }
   args << tmpname2 << outFilename;
   cmds << CShellCmd(IAppSetup::self().getGdaltranslate(), args);

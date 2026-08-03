@@ -1350,10 +1350,10 @@ void CMainWindow::slotLoadView() {
   for (int i = 0; i < tabWidget->count(); i++) {
     CCanvas* canvas = dynamic_cast<CCanvas*>(tabWidget->widget(i));
     if (canvas && canvas->getKey() == key) {
-      QMessageBox::information(
-          this, tr("Can not add view..."),
-          tr("The view is already loaded as '%1'. You have to close it before loading it again.").arg(canvas->getName()),
-          QMessageBox::Abort);
+      QMessageBox::information(this, tr("Can not add view..."),
+                               tr("The view is already loaded as '%1'. You have to close it before loading it again.")
+                                   .arg(canvas->getName()),
+                               QMessageBox::Abort);
       return;
     }
   }

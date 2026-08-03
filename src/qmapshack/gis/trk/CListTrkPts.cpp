@@ -93,40 +93,21 @@ void CListTrkPts::setMouseFocus(qint32 idx) {
   QString table;
   QTextStream stream(&table);
 
-  stream << "<!doctype html>"
-         << "<html>"
-         << "<head>"
-         << "<style>"
-         << "td {padding-left: 3px; padding-right: 3px;}"
-         << "th {background: gray; padding-left: 3px; padding-right: 3px;}"
-         << "</style>"
-         << "</head>"
-         << "<body>";
+  stream << "<!doctype html>" << "<html>" << "<head>" << "<style>" << "td {padding-left: 3px; padding-right: 3px;}"
+         << "th {background: gray; padding-left: 3px; padding-right: 3px;}" << "</style>" << "</head>" << "<body>";
 
-  stream << "<table>"
-         << "<tr>"
-         << "<th align=left>"
-         << "#"
-         << "</th>"
-         << "<th align=left>" << tr("Time") << "</th>"
-         << "<th align=left>" << tr("Ele.") << "</th>"
-         << "<th align=left>" << tr("Delta") << "</th>"
-         << "<th align=left>" << tr("Dist.") << "</th>"
-         << "<th align=left>" << tr("Speed") << "</th>"
-         << "<th align=left>" << tr("Slope") << "</th>"
-         << "<th align=left>" << tr("Ascent") << "</th>"
-         << "<th align=left>" << tr("Descent") << "</th>"
-         << "<th align=left>" << tr("Position") << "</th>"
-         << "</tr>";
+  stream << "<table>" << "<tr>" << "<th align=left>" << "#" << "</th>" << "<th align=left>" << tr("Time") << "</th>"
+         << "<th align=left>" << tr("Ele.") << "</th>" << "<th align=left>" << tr("Delta") << "</th>"
+         << "<th align=left>" << tr("Dist.") << "</th>" << "<th align=left>" << tr("Speed") << "</th>"
+         << "<th align=left>" << tr("Slope") << "</th>" << "<th align=left>" << tr("Ascent") << "</th>"
+         << "<th align=left>" << tr("Descent") << "</th>" << "<th align=left>" << tr("Position") << "</th>" << "</tr>";
 
   for (qint32 i = idxBeg; i <= idxEnd; i++) {
     bool isInRange = idx1 <= i && i <= idx2;
     addTableRow(i == idxFocus, *data.getTrkPtByTotalIndex(i), isInRange, stream);
   }
 
-  stream << "</table>"
-         << "</body>"
-         << "</html>";
+  stream << "</table>" << "</body>" << "</html>";
 
   labelTable->setText(table);
 }
@@ -143,10 +124,7 @@ void CListTrkPts::addTableRow(bool focus, const CTrackData::trkpt_t& trkpt, bool
   QString bgFocus = focus ? "#e6e6e6" : "white";
   QString bgInRange = isInRange ? "#55ff7f" : "white";
 
-  stream << "<tr style='"
-         << "color: " << color << ";"
-         << "background: " << bgFocus << ";"
-         << "'>";
+  stream << "<tr style='" << "color: " << color << ";" << "background: " << bgFocus << ";" << "'>";
 
   stream << "<td style='background: " << bgInRange << ";'>" << QString::number(trkpt.idxTotal) << "</td>";
 

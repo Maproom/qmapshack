@@ -47,6 +47,9 @@ class CTextEditWidget : public QDialog, private Ui::ITextEditWidget {
   void slotTextColor();
   void slotTextAlign(QAction* a);
   void slotResetFont();
+
+  /// @brief Drop the text colour so it follows the palette again.
+  void slotResetColor();
   void slotResetLayout();
 
   void slotCurrentCharFormatChanged(const QTextCharFormat& format);
@@ -63,8 +66,14 @@ class CTextEditWidget : public QDialog, private Ui::ITextEditWidget {
   void slotInsertFromTemplate();
 
  private:
+  /// @brief Apply @p format to the selection, or to the word under the cursor if there is none.
   void mergeFormatOnWordOrSelection(const QTextCharFormat& format);
   void fontChanged(const QFont& f);
+
+  /// @brief The colour @p fmt sets explicitly, or an invalid colour when it sets none.
+  static QColor explicitColor(const QTextCharFormat& fmt);
+
+  /// @brief Update the colour button's swatch. An invalid @p c means "no colour set".
   void colorChanged(const QColor& c);
   void alignmentChanged(Qt::Alignment a);
   void updateSelectionWindow();

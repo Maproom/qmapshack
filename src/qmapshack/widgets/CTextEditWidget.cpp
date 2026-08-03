@@ -27,6 +27,9 @@
 #include "widgets/CTemplateWidget.h"
 #include "widgets/CTextEditWidgetSelMenu.h"
 
+/// edge length of the colour button's swatch, in logical pixels
+static constexpr qint32 kSwatchSize = 16;
+
 CTextEditWidget::CTextEditWidget(const QString& html, QWidget* parent) : QDialog(parent) {
   SETTINGS;
 
@@ -64,11 +67,16 @@ CTextEditWidget::CTextEditWidget(const QString& html, QWidget* parent) : QDialog
 
   defaultFont = textEdit->font();
 
-  QPixmap pix(24, 24);
-  pix.fill(Qt::black);
-  actionTextColor = new QAction(pix, tr("&Color..."), this);
+  actionTextColor = new QAction(tr("&Color..."), this);
   connect(actionTextColor, &QAction::triggered, this, &CTextEditWidget::slotTextColor);
   toolColor->setDefaultAction(actionTextColor);
+
+  // Reset sits next to the button that sets the colour; a plain click still picks one.
+  QMenu* menuColor = new QMenu(this);
+  menuColor->addAction(actionTextColor);
+  menuColor->addAction(actionResetColor);
+  toolColor->setMenu(menuColor);
+  toolColor->setPopupMode(QToolButton::MenuButtonPopup);
 
   connect(comboStyle, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), this,
           &CTextEditWidget::slotTextStyle);
@@ -86,7 +94,7 @@ CTextEditWidget::CTextEditWidget(const QString& html, QWidget* parent) : QDialog
   textEdit->setFocus();
 
   fontChanged(textEdit->font());
-  colorChanged(textEdit->textColor());
+  colorChanged(explicitColor(textEdit->currentCharFormat()));
   alignmentChanged(textEdit->alignment());
 
   toolInsertFromTemplate->setDefaultAction(actionInsertFromTemplate);
@@ -118,10 +126,12 @@ CTextEditWidget::CTextEditWidget(const QString& html, QWidget* parent) : QDialog
   {
     menuTextEdit->addMenu(removeFormat);
     removeFormat->addAction(actionResetFont);
+    removeFormat->addAction(actionResetColor);
     removeFormat->addAction(actionResetLayout);
   }
 
   connect(actionResetFont, &QAction::triggered, this, &CTextEditWidget::slotResetFont);
+  connect(actionResetColor, &QAction::triggered, this, &CTextEditWidget::slotResetColor);
   connect(actionResetLayout, &QAction::triggered, this, &CTextEditWidget::slotResetLayout);
 
   menuTextEdit->addAction(actionSelectAll);
@@ -255,8 +265,7 @@ void CTextEditWidget::slotResetFont() {
   fmt.setFontUnderline(false);
   fmt.setFontWeight(QFont::Normal);
   fmt.setFontItalic(false);
-  fmt.setForeground(QColor());
-
+  // setCharFormat() replaces the format, so omitting setForeground() is what drops the colour.
   fmt.setFont(defaultFont);
   fmt.setFontPointSize(defaultFont.pointSizeF());
 
@@ -270,14 +279,63 @@ void CTextEditWidget::slotResetFont() {
   colorChanged(QColor());
 }
 
+void CTextEditWidget::slotResetColor() {
+  // Same reach as slotResetFont() next to it in the menu, and as picking a colour.
+  QTextCursor cursor = textEdit->textCursor();
+  if (!cursor.hasSelection()) {
+    cursor.select(QTextCursor::WordUnderCursor);
+  }
+
+  const qint32 start = cursor.selectionStart();
+  const qint32 end = cursor.selectionEnd();
+
+  QTextDocument* doc = textEdit->document();
+
+  // Collect first, edit afterwards: clearing a fragment's colour can merge it with its
+  // neighbours, which would invalidate the iterator mid-walk.
+  QList<QPair<qint32, qint32>> ranges;
+  for (QTextBlock block = doc->findBlock(start); block.isValid() && block.position() < end; block = block.next()) {
+    for (QTextBlock::iterator it = block.begin(); !it.atEnd(); ++it) {
+      const QTextFragment fragment = it.fragment();
+      if (!fragment.isValid() || !fragment.charFormat().hasProperty(QTextFormat::ForegroundBrush)) {
+        continue;
+      }
+      const qint32 from = qMax(fragment.position(), start);
+      const qint32 to = qMin(fragment.position() + fragment.length(), end);
+      if (from < to) {
+        ranges << qMakePair(from, to);
+      }
+    }
+  }
+
+  // Replace, not merge - a merge cannot remove a property - and per run, or the runs get flattened.
+  QTextCursor edit(doc);
+  edit.beginEditBlock();
+  for (const QPair<qint32, qint32>& range : std::as_const(ranges)) {
+    edit.setPosition(range.first);
+    edit.setPosition(range.second, QTextCursor::KeepAnchor);
+    QTextCharFormat fmt = edit.charFormat();
+    fmt.clearForeground();
+    edit.setCharFormat(fmt);
+  }
+  edit.endEditBlock();
+
+  colorChanged(QColor());
+}
+
 void CTextEditWidget::slotTextColor() {
-  QColor col = QColorDialog::getColor(textEdit->textColor(), this);
+  // Open on what the text renders in, which for an unset foreground is the palette colour.
+  const QColor& current = explicitColor(textEdit->currentCharFormat());
+  const QColor col =
+      QColorDialog::getColor(current.isValid() ? current : textEdit->palette().color(QPalette::Text), this);
   if (!col.isValid()) {
     return;
   }
+
   QTextCharFormat fmt;
   fmt.setForeground(col);
   mergeFormatOnWordOrSelection(fmt);
+
   colorChanged(col);
 }
 
@@ -296,9 +354,24 @@ void CTextEditWidget::fontChanged(const QFont& f) {
   actionTextUnderline->setChecked(f.underline());
 }
 
+QColor CTextEditWidget::explicitColor(const QTextCharFormat& fmt) {
+  return fmt.hasProperty(QTextFormat::ForegroundBrush) ? fmt.foreground().color() : QColor();
+}
+
 void CTextEditWidget::colorChanged(const QColor& c) {
-  QPixmap pix(16, 16);
-  pix.fill(c);
+  // An unset foreground renders in the palette colour, not black.
+  const QColor& color = c.isValid() ? c : textEdit->palette().color(QPalette::Text);
+
+  const qreal dpr = devicePixelRatioF();
+  QPixmap pix(QSize(kSwatchSize, kSwatchSize) * dpr);
+  pix.setDevicePixelRatio(dpr);
+  pix.fill(color);
+
+  // Outline, so a swatch close to the toolbar colour is still a swatch.
+  QPainter p(&pix);
+  p.setPen(palette().color(QPalette::WindowText));
+  p.drawRect(QRect(0, 0, kSwatchSize - 1, kSwatchSize - 1));
+
   actionTextColor->setIcon(pix);
 }
 
@@ -316,7 +389,7 @@ void CTextEditWidget::alignmentChanged(Qt::Alignment a) {
 
 void CTextEditWidget::slotCurrentCharFormatChanged(const QTextCharFormat& format) {
   fontChanged(format.font());
-  colorChanged(format.foreground().color());
+  colorChanged(explicitColor(format));
 }
 
 void CTextEditWidget::slotCursorPositionChanged() {

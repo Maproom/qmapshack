@@ -545,6 +545,14 @@
     <string>Reset Font</string>
    </property>
   </action>
+  <action name="actionResetColor">
+   <property name="text">
+    <string>Reset Text Color</string>
+   </property>
+   <property name="toolTip">
+    <string>Drop the text color and follow the color scheme again</string>
+   </property>
+  </action>
   <action name="actionResetLayout">
    <property name="text">
     <string>Reset Layout</string>

@@ -844,6 +844,10 @@
    </property>
   </action>
   <action name="actionSetupShortcuts">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/SetupShortcuts.svgt</normaloff>:/icons/SetupShortcuts.svgt</iconset>
+   </property>
    <property name="text">
     <string>Setup Keyboard Shortcuts</string>
    </property>

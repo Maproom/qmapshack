@@ -2,70 +2,77 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="35.001659"
-   height="35.060249"
    id="svg3016"
    version="1.1"
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:dc="http://purl.org/dc/elements/1.1/">
   <defs
-     id="defs3018" />
-  <metadata
-     id="metadata3021">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
+     id="defs20" />
   <g
-     id="layer1"
-     transform="translate(-7.4082624,-7.3789655)">
+     transform="translate(0.0535,-0.0000) scale(1.825426)"
+     id="g15">
+    <defs
+       id="defs3018" />
+    <metadata
+       id="metadata3021">
+      <rdf:RDF>
+        <cc:Work
+           rdf:about="">
+          <dc:format>image/svg+xml</dc:format>
+          <dc:type
+             rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+          <dc:title />
+        </cc:Work>
+      </rdf:RDF>
+    </metadata>
     <g
-       id="g3106">
-      <path
-         id="rect3167-8-3"
-         style="fill:#ffffff;stroke:#806600;stroke-width:1.87166;stroke-linecap:round;stroke-linejoin:round"
-         d="M 8.3440924,8.3147955 H 41.47409 V 41.503386 H 8.3440924 Z" />
-      <path
-         id="rect3241-2"
-         style="fill:#ffffff"
-         d="M 9.5032488,31.437569 H 40.250656 c 0,0 10e-7,0 10e-7,1e-6 v 9.039842 c 0,0 -10e-7,10e-7 -10e-7,10e-7 H 9.5032488 c -9e-7,0 -1.5e-6,-10e-7 -1.5e-6,-10e-7 V 31.43757 c 0,-1e-6 6e-7,-1e-6 1.5e-6,-1e-6 z" />
+       id="layer1"
+       transform="translate(-7.4082624,-7.3789655)">
       <g
-         transform="matrix(1,0,0,0.81614708,-64.181818,17.486738)"
-         id="g3143">
+         id="g3106">
         <path
-           style="fill:#d4aa00;stroke:none"
-           d="M 74.899665,15.998024 V 6.108696 l 3.543307,-4.944664 3.543307,4.944664 7.086615,-14.833992 7.086614,9.889328 3.543307,-4.944664 3.543305,9.889328 v 9.889328 z"
-           id="path3799" />
+           id="rect3167-8-3"
+           style="fill:#ffffff;stroke:#806600;stroke-width:1.87166;stroke-linecap:round;stroke-linejoin:round"
+           d="M 8.3440924,8.3147955 H 41.47409 V 41.503386 H 8.3440924 Z" />
         <path
-           style="fill:#806600;stroke:none"
-           d="M 74.935697,15.930083 V 9.879047 h 3.543307 l 3.543307,-6.051034 3.543308,6.051034 7.086614,-12.102069 7.086614,6.051035 3.543303,6.051034 v 6.051036 z"
-           id="path3815" />
-      </g>
-      <g
-         aria-label="VRT"
-         id="text3207-3"
-         style="line-height:0%;letter-spacing:0px;word-spacing:0px;fill:#806600">
-        <path
-           d="m 20.510657,32.462516 -2.43,7.14 h -1.65 l -2.42,-7.14 h 1.53 l 1.34,4.25 q 0.04,0.11 0.11,0.41 0.08,0.29 0.16,0.62 0.08,0.32 0.11,0.54 0.03,-0.22 0.1,-0.54 0.08,-0.33 0.16,-0.62 0.08,-0.3 0.11,-0.41 l 1.35,-4.25 z"
-           style="font-weight:bold;font-size:10px;line-height:125%;-inkscape-font-specification:'Sans Bold'"
-           id="path17" />
-        <path
-           d="m 23.490653,32.462516 q 1.46,0 2.15,0.53 0.7,0.53 0.7,1.61 0,0.49 -0.19,0.86 -0.18,0.36 -0.49,0.62 -0.3,0.25 -0.65,0.41 l 2.1,3.11 h -1.68 l -1.7,-2.74 h -0.81 v 2.74 h -1.51 v -7.14 z m -0.11,1.24 h -0.46 v 1.93 h 0.49 q 0.75,0 1.07,-0.25 0.33,-0.25 0.33,-0.74 0,-0.51 -0.35,-0.72 -0.34,-0.22 -1.08,-0.22 z"
-           style="font-weight:bold;font-size:10px;line-height:125%;-inkscape-font-specification:'Sans Bold'"
-           id="path19" />
-        <path
-           d="m 30.760652,39.602516 h -1.51 v -5.88 h -1.94 v -1.26 h 5.39 v 1.26 h -1.94 z"
-           style="font-weight:bold;font-size:10px;line-height:125%;-inkscape-font-specification:'Sans Bold'"
-           id="path21" />
+           id="rect3241-2"
+           style="fill:#ffffff"
+           d="M 9.5032488,31.437569 H 40.250656 c 0,0 10e-7,0 10e-7,1e-6 v 9.039842 c 0,0 -10e-7,10e-7 -10e-7,10e-7 H 9.5032488 c -9e-7,0 -1.5e-6,-10e-7 -1.5e-6,-10e-7 V 31.43757 c 0,-1e-6 6e-7,-1e-6 1.5e-6,-1e-6 z" />
+        <g
+           transform="matrix(1,0,0,0.81614708,-64.181818,17.486738)"
+           id="g3143">
+          <path
+             style="fill:#d4aa00;stroke:none"
+             d="M 74.899665,15.998024 V 6.108696 l 3.543307,-4.944664 3.543307,4.944664 7.086615,-14.833992 7.086614,9.889328 3.543307,-4.944664 3.543305,9.889328 v 9.889328 z"
+             id="path3799" />
+          <path
+             style="fill:#806600;stroke:none"
+             d="M 74.935697,15.930083 V 9.879047 h 3.543307 l 3.543307,-6.051034 3.543308,6.051034 7.086614,-12.102069 7.086614,6.051035 3.543303,6.051034 v 6.051036 z"
+             id="path3815" />
+        </g>
+        <g
+           aria-label="VRT"
+           id="text3207-3"
+           style="line-height:0%;letter-spacing:0px;word-spacing:0px;fill:#806600">
+          <path
+             d="m 20.510657,32.462516 -2.43,7.14 h -1.65 l -2.42,-7.14 h 1.53 l 1.34,4.25 q 0.04,0.11 0.11,0.41 0.08,0.29 0.16,0.62 0.08,0.32 0.11,0.54 0.03,-0.22 0.1,-0.54 0.08,-0.33 0.16,-0.62 0.08,-0.3 0.11,-0.41 l 1.35,-4.25 z"
+             style="font-weight:bold;font-size:10px;line-height:125%;-inkscape-font-specification:'Sans Bold'"
+             id="path17" />
+          <path
+             d="m 23.490653,32.462516 q 1.46,0 2.15,0.53 0.7,0.53 0.7,1.61 0,0.49 -0.19,0.86 -0.18,0.36 -0.49,0.62 -0.3,0.25 -0.65,0.41 l 2.1,3.11 h -1.68 l -1.7,-2.74 h -0.81 v 2.74 h -1.51 v -7.14 z m -0.11,1.24 h -0.46 v 1.93 h 0.49 q 0.75,0 1.07,-0.25 0.33,-0.25 0.33,-0.74 0,-0.51 -0.35,-0.72 -0.34,-0.22 -1.08,-0.22 z"
+             style="font-weight:bold;font-size:10px;line-height:125%;-inkscape-font-specification:'Sans Bold'"
+             id="path19" />
+          <path
+             d="m 30.760652,39.602516 h -1.51 v -5.88 h -1.94 v -1.26 h 5.39 v 1.26 h -1.94 z"
+             style="font-weight:bold;font-size:10px;line-height:125%;-inkscape-font-specification:'Sans Bold'"
+             id="path21" />
+        </g>
       </g>
     </g>
   </g>

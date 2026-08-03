@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   version="1.1"
+   id="svg1"
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><style id="current-color-scheme">.paper-ink{fill:#ffffff;color:#000080}.paper{color:#ffffff}.ink{color:#000080}</style>
+  <defs
+     id="defs19" />
+  <g
+     transform="translate(-4.8814,-3.7966) scale(1.084746)"
+     id="g14">
+    <defs
+       id="defs1" />
+    <g
+       id="layer1">
+      <path
+         id="db-bottom"
+         style="stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round"
+         d="M 9,38 a 15,5 0 1 0 30,0 a 15,5 0 1 0 -30,0 Z" class="paper-ink"/>
+      <path
+         id="db-body"
+         style="fill:currentColor;stroke:none"
+         d="M 9,10 H 39 V 38 H 9 Z" class="paper"/>
+      <path
+         id="db-sides"
+         style="fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round"
+         d="M 9,10 V 38 M 39,10 V 38" class="ink"/>
+      <path
+         id="db-band1"
+         style="fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round"
+         d="M 9,19 A 15,5 0 0 0 39,19" class="ink"/>
+      <path
+         id="db-band2"
+         style="fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round"
+         d="M 9,28.5 A 15,5 0 0 0 39,28.5" class="ink"/>
+      <path
+         id="db-top"
+         style="stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round"
+         d="M 9,10 a 15,5 0 1 0 30,0 a 15,5 0 1 0 -30,0 Z" class="paper-ink"/>
+      <path
+         id="rte-edges"
+         style="fill:none;stroke:currentColor;stroke-width:4;stroke-linecap:round;stroke-linejoin:round"
+         d="M 55,38 L 36,46 L 55,57" class="ink"/>
+      <path
+         id="rte-node-mid"
+         style="fill:#ff5555;stroke:none"
+         d="M 30.5,46 a 5.5,5.5 0 1 0 11,0 a 5.5,5.5 0 1 0 -11,0 Z" />
+      <path
+         id="rte-node-top"
+         style="fill:#ff5555;stroke:none"
+         d="M 49.5,38 a 5.5,5.5 0 1 0 11,0 a 5.5,5.5 0 1 0 -11,0 Z" />
+      <path
+         id="rte-node-bottom"
+         style="fill:#ff5555;stroke:none"
+         d="M 49.5,57 a 5.5,5.5 0 1 0 11,0 a 5.5,5.5 0 1 0 -11,0 Z" />
+    </g>
+  </g>
+</svg>

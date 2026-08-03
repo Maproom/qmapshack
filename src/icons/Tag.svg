@@ -1,63 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-
 <svg
-   width="59.217896"
-   height="44.900974"
-   id="svg2985"
    version="1.1"
+   id="svgTag"
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:dc="http://purl.org/dc/elements/1.1/">
-  <style
-     id="current-color-scheme">.paper-ink{fill:#f9f9f9;color:#000080}.paper-lead{fill:#f9f9f9;color:#000000}.lead{color:#000000}</style>
+   xmlns:svg="http://www.w3.org/2000/svg">
   <defs
-     id="defs2987" />
-  <metadata
-     id="metadata2990">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
+     id="defs13" />
   <g
-     id="layer1"
-     transform="translate(-1.993676,-12.847267)">
+     transform="translate(-3.9535,-12.8834) scale(1.263077)"
+     id="g8">
+    <style id="current-color-scheme">.paper-ink{fill:#ffffff;color:#000080}</style>
     <g
-       id="g828"
-       transform="rotate(-41.979556,45.229484,33.409585)">
+       id="layer1">
       <path
-         id="path4482"
-         d="M 48.350357,9.5416652 H 9.526827 L 9.4786152,33 H 48.380007 c 7.236569,-7.445075 9.36314,-15.154146 -0.02965,-23.4583348 z"
-         style="stroke:currentColor;stroke-width:1.46129;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         class="paper-ink" />
+         class="paper-ink"
+         style="stroke:currentColor;stroke-width:4;stroke-linecap:round;stroke-linejoin:round"
+         d="M 5.13,36.24 L 29.17,12.20 L 46.14,17.86 L 51.80,34.83 L 27.76,58.87 Z"
+         id="path3" />
       <path
-         id="path4484"
-         d="M 13,15 H 44.960256"
-         style="stroke:currentColor;stroke-width:1.46129;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         class="paper-lead" />
-      <path
-         id="path4486"
-         d="M 13,20.445184 H 44.960256"
-         style="stroke:currentColor;stroke-width:1.46129;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         class="paper-lead" />
-      <path
-         id="path4488"
-         d="M 13,25.890368 H 44.960256"
-         style="stroke:currentColor;stroke-width:1.46129;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         class="paper-lead" />
+         class="paper-ink"
+         style="stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round"
+         d="M 18.51,40.49 a 5,5 0 1 0 10,0 a 5,5 0 1 0 -10,0 Z"
+         id="path5" />
     </g>
-    <path
-       style="fill:none;stroke:currentColor;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 44,17 c 1.11136,-1.288773 2.79822,-2.061568 4.5,-2.061568 1.70178,0 3.38864,0.772795 4.5,2.061568 0.833913,0.967035 1.333782,2.174803 1.736184,3.386678 C 55.138586,21.598552 55.459669,22.843017 56,24 c 1.017842,2.179452 2.820548,3.982158 5,5"
-       id="path838"
-       class="lead" />
   </g>
 </svg>

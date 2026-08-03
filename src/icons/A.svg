@@ -2,47 +2,53 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="40"
-   height="40"
    id="svg3513"
    version="1.1"
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:dc="http://purl.org/dc/elements/1.1/">
-  <style
-     id="current-color-scheme">.ink{color:#000080}</style>
   <defs
-     id="defs3515" />
-  <metadata
-     id="metadata3518">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
+     id="defs14" />
   <g
-     id="layer1"
-     transform="translate(-14.562678,-10.727273)">
+     transform="translate(0.0000,0.0000) scale(1.600000)"
+     id="g9">
+    <style id="current-color-scheme">.ink{color:#000080}</style>
+    <defs
+       id="defs3515" />
+    <metadata
+       id="metadata3518">
+      <rdf:RDF>
+        <cc:Work
+           rdf:about="">
+          <dc:format>image/svg+xml</dc:format>
+          <dc:type
+             rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+          <dc:title />
+        </cc:Work>
+      </rdf:RDF>
+    </metadata>
     <g
-       aria-label="A"
-       id="text3002"
-       style="font-weight:bold;line-height:0%;-inkscape-font-specification:'Sans Bold';letter-spacing:0px;word-spacing:0px;fill:currentColor"
-       class="ink">
+       id="layer1"
+       transform="translate(-14.562678,-10.727273)">
+      <g
+         aria-label="A"
+         id="text3002"
+         style="font-weight:bold;line-height:0%;-inkscape-font-specification:'Sans Bold';letter-spacing:0px;word-spacing:0px;fill:currentColor"
+         class="ink">
+        <path
+           d="m 40.164162,45.30735 -2.08,-6.8 h -10.4 l -2.08,6.8 h -6.52 l 10.08,-28.68 h 7.4 l 10.12,28.68 z m -5.6,-18.52 q -0.2,-0.68 -0.52,-1.72 -0.32,-1.04 -0.64,-2.12 -0.32,-1.08 -0.52,-1.88 -0.2,0.8 -0.56,2 -0.32,1.16 -0.64,2.24 -0.28,1.04 -0.44,1.48 l -2.04,6.64 h 7.44 z"
+           style="font-size:40px;line-height:1.25"
+           id="path10" />
+      </g>
       <path
-         d="m 40.164162,45.30735 -2.08,-6.8 h -10.4 l -2.08,6.8 h -6.52 l 10.08,-28.68 h 7.4 l 10.12,28.68 z m -5.6,-18.52 q -0.2,-0.68 -0.52,-1.72 -0.32,-1.04 -0.64,-2.12 -0.32,-1.08 -0.52,-1.88 -0.2,0.8 -0.56,2 -0.32,1.16 -0.64,2.24 -0.28,1.04 -0.44,1.48 l -2.04,6.64 h 7.44 z"
-         style="font-size:40px;line-height:1.25"
-         id="path10" />
+         id="rect3002"
+         style="fill:none"
+         d="m 14.562678,10.727273 h 40 v 40 h -40 z" />
     </g>
-    <path
-       id="rect3002"
-       style="fill:none"
-       d="m 14.562678,10.727273 h 40 v 40 h -40 z" />
   </g>
 </svg>

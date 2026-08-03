@@ -2,78 +2,84 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="63.843723"
-   height="63.895134"
    id="svg3020"
    version="1.1"
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:dc="http://purl.org/dc/elements/1.1/">
-  <style
-     id="current-color-scheme">.ink-lead{fill:#000080;color:#000000}.lead-paper{fill:#000000;color:#ffffff}.lead{color:#000000}.paper{color:#ffffff}.ink{color:#000080}.paper-ink{fill:#ffffff;color:#000080}</style>
   <defs
-     id="defs3022" />
-  <metadata
-     id="metadata3025">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
+     id="defs21" />
   <g
-     id="layer1"
-     transform="translate(0.08673891,0.28962763)">
+     transform="translate(0.0257,-0.0000) scale(1.001642)"
+     id="g16">
+    <style id="current-color-scheme">.ink-lead{fill:#000080;color:#000000}.lead-paper{fill:#000000;color:#ffffff}.lead{color:#000000}.paper{color:#ffffff}.ink{color:#000080}.paper-ink{fill:#ffffff;color:#000080}</style>
+    <defs
+       id="defs3022" />
+    <metadata
+       id="metadata3025">
+      <rdf:RDF>
+        <cc:Work
+           rdf:about="">
+          <dc:format>image/svg+xml</dc:format>
+          <dc:type
+             rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+          <dc:title />
+        </cc:Work>
+      </rdf:RDF>
+    </metadata>
     <g
-       id="g890"
-       transform="matrix(0.78257521,0,0,0.85975189,1.0871239,10.457271)">
+       id="layer1"
+       transform="translate(0.08673891,0.28962763)">
       <g
-         id="g850">
-        <path
-           id="rect841"
-           style="stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round"
-           d="M 0,-6 H 60 V 29 H 0 Z"
-           class="ink-lead" />
-        <path
-           id="path843"
-           style="stroke:currentColor;stroke-width:4;stroke-linecap:round;stroke-linejoin:round"
-           d="M 40.004119,4.0033933 A 10,10 0 0 1 41.359694,18.079463 10,10 0 0 1 27.283805,19.436916 10,10 0 0 1 25.924475,5.3612082 10,10 0 0 1 40.000001,4"
-           class="lead-paper" />
-        <path
-           id="rect845"
-           style="fill:currentColor;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round"
-           d="m 5,-11 h 10 v 5 H 5 Z"
-           class="lead" />
-      </g>
-      <g
-         id="g827"
-         transform="matrix(1.2531758,0,0,1.2531758,16.96261,-2.6634808)">
-        <path
-           id="path4129-7-3-9"
-           style="fill:currentColor;stroke:currentColor;stroke-width:4.4372;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           d="m 12.578659,31.869715 c 5.995718,9.867863 18.720945,12.923577 28.422579,6.82512 2.822568,-1.774263 5.18323,-4.214229 6.882092,-7.113257 M 12.843943,31.039361 c 5.995719,-9.867863 18.720945,-12.923577 28.422579,-6.82512 2.822568,1.774263 5.18323,4.214228 6.882092,7.113257"
-           class="paper" />
-        <path
-           id="rect4156-1"
-           style="fill:none;stroke:currentColor;stroke-width:0;stroke-linecap:round;stroke-linejoin:round"
-           d="m 11.625697,11.454543 h 37.47588 v 40 h -37.47588 z"
-           class="ink" />
-        <path
-           id="path4129-7-3-2"
-           style="stroke:currentColor;stroke-width:2.03561;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1"
-           d="m 12.578658,31.869715 c 5.995718,9.867863 18.720946,12.923577 28.42258,6.82512 2.822568,-1.774263 5.18323,-4.214229 6.882092,-7.113257 M 12.843942,31.039361 c 5.995719,-9.867863 18.720946,-12.923577 28.42258,-6.82512 2.822568,1.774263 5.18323,4.214228 6.882092,7.113257"
-           class="paper-ink" />
-        <path
-           id="path4149-5-9"
-           style="fill:currentColor;stroke:currentColor;stroke-width:1.84854;stroke-linecap:round;stroke-linejoin:round"
-           d="m 34.34266,29.256454 a 4.4855876,4.7612062 0 0 1 -1.851153,6.389344 4.4855876,4.7612062 0 0 1 -6.045537,-1.872579 4.4855876,4.7612062 0 0 1 1.676838,-6.443337 4.4855876,4.7612062 0 0 1 6.093886,1.686795"
-           class="ink" />
+         id="g890"
+         transform="matrix(0.78257521,0,0,0.85975189,1.0871239,10.457271)">
+        <g
+           id="g850">
+          <path
+             id="rect841"
+             style="stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round"
+             d="M 0,-6 H 60 V 29 H 0 Z"
+             class="ink-lead" />
+          <path
+             id="path843"
+             style="stroke:currentColor;stroke-width:4;stroke-linecap:round;stroke-linejoin:round"
+             d="M 40.004119,4.0033933 A 10,10 0 0 1 41.359694,18.079463 10,10 0 0 1 27.283805,19.436916 10,10 0 0 1 25.924475,5.3612082 10,10 0 0 1 40.000001,4"
+             class="lead-paper" />
+          <path
+             id="rect845"
+             style="fill:currentColor;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round"
+             d="m 5,-11 h 10 v 5 H 5 Z"
+             class="lead" />
+        </g>
+        <g
+           id="g827"
+           transform="matrix(1.2531758,0,0,1.2531758,16.96261,-2.6634808)">
+          <path
+             id="path4129-7-3-9"
+             style="fill:currentColor;stroke:currentColor;stroke-width:4.4372;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             d="m 12.578659,31.869715 c 5.995718,9.867863 18.720945,12.923577 28.422579,6.82512 2.822568,-1.774263 5.18323,-4.214229 6.882092,-7.113257 M 12.843943,31.039361 c 5.995719,-9.867863 18.720945,-12.923577 28.422579,-6.82512 2.822568,1.774263 5.18323,4.214228 6.882092,7.113257"
+             class="paper" />
+          <path
+             id="rect4156-1"
+             style="fill:none;stroke:currentColor;stroke-width:0;stroke-linecap:round;stroke-linejoin:round"
+             d="m 11.625697,11.454543 h 37.47588 v 40 h -37.47588 z"
+             class="ink" />
+          <path
+             id="path4129-7-3-2"
+             style="stroke:currentColor;stroke-width:2.4959;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1"
+             d="m 12.578658,31.869715 c 5.995718,9.867863 18.720946,12.923577 28.42258,6.82512 2.822568,-1.774263 5.18323,-4.214229 6.882092,-7.113257 M 12.843942,31.039361 c 5.995719,-9.867863 18.720946,-12.923577 28.42258,-6.82512 2.822568,1.774263 5.18323,4.214228 6.882092,7.113257"
+             class="paper-ink" />
+          <path
+             id="path4149-5-9"
+             style="fill:currentColor;stroke:currentColor;stroke-width:2.4959;stroke-linecap:round;stroke-linejoin:round"
+             d="m 34.34266,29.256454 a 4.4855876,4.7612062 0 0 1 -1.851153,6.389344 4.4855876,4.7612062 0 0 1 -6.045537,-1.872579 4.4855876,4.7612062 0 0 1 1.676838,-6.443337 4.4855876,4.7612062 0 0 1 6.093886,1.686795"
+             class="ink" />
+        </g>
       </g>
     </g>
   </g>

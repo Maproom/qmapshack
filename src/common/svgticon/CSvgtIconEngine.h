@@ -39,7 +39,6 @@
    the palette instead was tried and rejected -- see roleColor().
 
    Reached only through the ".svgt" suffix via CSvgtIconEnginePlugin, never referenced directly.
-   See .notes/icons-task1-ui-svg-plan.md, phase 7a.
  */
 class CSvgtIconEngine : public QIconEngine {
  public:

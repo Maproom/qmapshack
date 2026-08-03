@@ -18,9 +18,8 @@ constraint, mechanised.
 
 Requires: inkscape (1.x), python3-pil.
 
-WHY THIS IS NOT svgdiff.cpp: svgdiff renders with QSvgRenderer and diffs SVG-vs-PNG at a
-hardcoded 32px. Task 2 never renders SVG in Qt at all — it needs inkscape-PNG vs inkscape-PNG
-across resolutions. Different renderer, different inputs, different metric.
+Renders with inkscape and compares inkscape-PNG against the shipped PNG, because that is how
+the waypoint set is produced -- a Qt-rendered comparison would measure the wrong pipeline.
 """
 import argparse
 import glob
@@ -35,7 +34,7 @@ try:
 except ImportError:
     sys.exit("need python3-pil")
 
-WPT = "/home/oeichler/projects/qmapshack/src/icons/waypoints"
+WPT = os.path.join(os.path.dirname(os.path.abspath(__file__)), os.pardir, "waypoints")
 
 
 def premultiply(img):

@@ -2,113 +2,119 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="40.949829"
-   height="36.803368"
    id="svg3377"
    version="1.1"
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:dc="http://purl.org/dc/elements/1.1/">
-  <style
-     id="current-color-scheme">.ink{color:#000080}.ink-lead{fill:#000080;color:#000000}.paper{color:#ececec}</style>
   <defs
-     id="defs3379" />
-  <metadata
-     id="metadata3382">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
+     id="defs28" />
   <g
-     id="layer1"
-     transform="translate(-18.505701,-23.319305)">
+     transform="translate(-0.0000,3.2402) scale(1.562889)"
+     id="g23">
+    <style id="current-color-scheme">.ink{color:#000080}.ink-lead{fill:#000080;color:#000000}.paper{color:#ececec}</style>
+    <defs
+       id="defs3379" />
+    <metadata
+       id="metadata3382">
+      <rdf:RDF>
+        <cc:Work
+           rdf:about="">
+          <dc:format>image/svg+xml</dc:format>
+          <dc:type
+             rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+          <dc:title />
+        </cc:Work>
+      </rdf:RDF>
+    </metadata>
     <g
-       id="g3937"
-       transform="matrix(0.29823762,0,0,0.37495918,-81.04968,9.6482502)"
-       style="fill:currentColor"
-       class="ink">
+       id="layer1"
+       transform="translate(-18.505701,-23.319305)">
       <g
-         transform="rotate(-45,422.94291,75.666204)"
-         id="g3863"
+         id="g3937"
+         transform="matrix(0.29823762,0,0,0.37495918,-81.04968,9.6482502)"
          style="fill:currentColor"
          class="ink">
-        <path
-           id="path3091"
-           transform="matrix(2.8638155,0,0,0.95340127,-777.28343,4.421604)"
-           d="m 416.9824,87.362205 a 7,7 0 0 1 6.07773,3.496442 7,7 0 0 1 -0.003,7.0117 7,7 0 0 1 -6.08041,3.491803 L 417,94.362183 Z" />
-        <path
-           id="path3093"
-           transform="matrix(2.1833386,0,0,1.0380416,-476.38942,-0.97014023)"
-           d="m 407.02766,98.362027 a 4,6.5 0 0 1 -3.48505,-3.231014 4,6.5 0 0 1 -0.006,-6.520058 4,6.5 0 0 1 3.47881,-3.248726 L 407,91.862183 Z" />
+        <g
+           transform="rotate(-45,422.94291,75.666204)"
+           id="g3863"
+           style="fill:currentColor"
+           class="ink">
+          <path
+             id="path3091"
+             transform="matrix(2.8638155,0,0,0.95340127,-777.28343,4.421604)"
+             d="m 416.9824,87.362205 a 7,7 0 0 1 6.07773,3.496442 7,7 0 0 1 -0.003,7.0117 7,7 0 0 1 -6.08041,3.491803 L 417,94.362183 Z" />
+          <path
+             id="path3093"
+             transform="matrix(2.1833386,0,0,1.0380416,-476.38942,-0.97014023)"
+             d="m 407.02766,98.362027 a 4,6.5 0 0 1 -3.48505,-3.231014 4,6.5 0 0 1 -0.006,-6.520058 4,6.5 0 0 1 3.47881,-3.248726 L 407,91.862183 Z" />
+        </g>
+        <g
+           transform="rotate(-45,433.20713,45.620283)"
+           id="g3863-7"
+           style="fill:currentColor"
+           class="ink">
+          <path
+             id="path3091-3"
+             transform="matrix(2.8638155,0,0,0.95340127,-777.28343,4.421604)"
+             d="m 416.9824,87.362205 a 7,7 0 0 1 6.07773,3.496442 7,7 0 0 1 -0.003,7.0117 7,7 0 0 1 -6.08041,3.491803 L 417,94.362183 Z" />
+          <path
+             id="path3093-5"
+             transform="matrix(2.1833386,0,0,1.0380416,-476.38942,-0.97014023)"
+             d="m 407.02766,98.362027 a 4,6.5 0 0 1 -3.48505,-3.231014 4,6.5 0 0 1 -0.006,-6.520058 4,6.5 0 0 1 3.47881,-3.248726 L 407,91.862183 Z" />
+        </g>
+        <g
+           transform="rotate(-45,459.02393,92.112711)"
+           id="g3863-8"
+           style="fill:currentColor"
+           class="ink">
+          <path
+             id="path3091-7"
+             transform="matrix(2.8638155,0,0,0.95340127,-777.28343,4.421604)"
+             d="m 416.9824,87.362205 a 7,7 0 0 1 6.07773,3.496442 7,7 0 0 1 -0.003,7.0117 7,7 0 0 1 -6.08041,3.491803 L 417,94.362183 Z" />
+          <path
+             id="path3093-6"
+             transform="matrix(2.1833386,0,0,1.0380416,-476.38942,-0.97014023)"
+             d="m 407.02766,98.362027 a 4,6.5 0 0 1 -3.48505,-3.231014 4,6.5 0 0 1 -0.006,-6.520058 4,6.5 0 0 1 3.47881,-3.248726 L 407,91.862183 Z" />
+        </g>
+        <g
+           transform="rotate(-45,445.0965,121.01198)"
+           id="g3863-1"
+           style="fill:currentColor"
+           class="ink">
+          <path
+             id="path3091-0"
+             transform="matrix(2.8638155,0,0,0.95340127,-777.28343,4.421604)"
+             d="m 416.9824,87.362205 a 7,7 0 0 1 6.07773,3.496442 7,7 0 0 1 -0.003,7.0117 7,7 0 0 1 -6.08041,3.491803 L 417,94.362183 Z" />
+          <path
+             id="path3093-61"
+             transform="matrix(2.1833386,0,0,1.0380416,-476.38942,-0.97014023)"
+             d="m 407.02766,98.362027 a 4,6.5 0 0 1 -3.48505,-3.231014 4,6.5 0 0 1 -0.006,-6.520058 4,6.5 0 0 1 3.47881,-3.248726 L 407,91.862183 Z" />
+        </g>
       </g>
       <g
-         transform="rotate(-45,433.20713,45.620283)"
-         id="g3863-7"
-         style="fill:currentColor"
-         class="ink">
+         transform="matrix(0.62100165,0,0,0.62077344,11.360634,17.192679)"
+         id="g834">
         <path
-           id="path3091-3"
-           transform="matrix(2.8638155,0,0,0.95340127,-777.28343,4.421604)"
-           d="m 416.9824,87.362205 a 7,7 0 0 1 6.07773,3.496442 7,7 0 0 1 -0.003,7.0117 7,7 0 0 1 -6.08041,3.491803 L 417,94.362183 Z" />
-        <path
-           id="path3093-5"
-           transform="matrix(2.1833386,0,0,1.0380416,-476.38942,-0.97014023)"
-           d="m 407.02766,98.362027 a 4,6.5 0 0 1 -3.48505,-3.231014 4,6.5 0 0 1 -0.006,-6.520058 4,6.5 0 0 1 3.47881,-3.248726 L 407,91.862183 Z" />
-      </g>
-      <g
-         transform="rotate(-45,459.02393,92.112711)"
-         id="g3863-8"
-         style="fill:currentColor"
-         class="ink">
-        <path
-           id="path3091-7"
-           transform="matrix(2.8638155,0,0,0.95340127,-777.28343,4.421604)"
-           d="m 416.9824,87.362205 a 7,7 0 0 1 6.07773,3.496442 7,7 0 0 1 -0.003,7.0117 7,7 0 0 1 -6.08041,3.491803 L 417,94.362183 Z" />
-        <path
-           id="path3093-6"
-           transform="matrix(2.1833386,0,0,1.0380416,-476.38942,-0.97014023)"
-           d="m 407.02766,98.362027 a 4,6.5 0 0 1 -3.48505,-3.231014 4,6.5 0 0 1 -0.006,-6.520058 4,6.5 0 0 1 3.47881,-3.248726 L 407,91.862183 Z" />
-      </g>
-      <g
-         transform="rotate(-45,445.0965,121.01198)"
-         id="g3863-1"
-         style="fill:currentColor"
-         class="ink">
-        <path
-           id="path3091-0"
-           transform="matrix(2.8638155,0,0,0.95340127,-777.28343,4.421604)"
-           d="m 416.9824,87.362205 a 7,7 0 0 1 6.07773,3.496442 7,7 0 0 1 -0.003,7.0117 7,7 0 0 1 -6.08041,3.491803 L 417,94.362183 Z" />
-        <path
-           id="path3093-61"
-           transform="matrix(2.1833386,0,0,1.0380416,-476.38942,-0.97014023)"
-           d="m 407.02766,98.362027 a 4,6.5 0 0 1 -3.48505,-3.231014 4,6.5 0 0 1 -0.006,-6.520058 4,6.5 0 0 1 3.47881,-3.248726 L 407,91.862183 Z" />
-      </g>
-    </g>
-    <g
-       transform="matrix(0.62100165,0,0,0.62077344,11.360634,17.192679)"
-       id="g834">
-      <path
-         id="path3351"
-         style="stroke:currentColor;stroke-linecap:round;stroke-linejoin:round"
-         d="M 51.267021,29.999996 A 19.630653,19.630653 0 0 1 31.636368,49.63065 19.630653,19.630653 0 0 1 12.005714,29.999996 19.630653,19.630653 0 0 1 31.636368,10.369343 19.630653,19.630653 0 0 1 51.267021,29.999996 Z"
-         class="ink-lead" />
-      <g
-         aria-label="i"
-         id="text3353"
-         style="line-height:0%;font-family:'Droid Sans';-inkscape-font-specification:'Droid Sans';letter-spacing:0px;word-spacing:0px;fill:currentColor"
-         class="paper">
-        <path
-           d="m 30.715352,15.000387 q 1.32,0 2.28,0.64 0.96,0.6 0.96,2.28 0,1.64 -0.96,2.28 -0.96,0.64 -2.28,0.64 -1.36,0 -2.32,-0.64 -0.92,-0.64 -0.92,-2.28 0,-1.68 0.92,-2.28 0.96,-0.64 2.32,-0.64 z m 2.96,8.56 v 21.84 h -5.96 v -21.84 z"
-           style="font-weight:bold;font-size:40px;line-height:125%;font-family:'Droid Serif';-inkscape-font-specification:'Droid Serif Bold'"
-           id="path34" />
+           id="path3351"
+           style="stroke:currentColor;stroke-linecap:round;stroke-linejoin:round"
+           d="M 51.267021,29.999996 A 19.630653,19.630653 0 0 1 31.636368,49.63065 19.630653,19.630653 0 0 1 12.005714,29.999996 19.630653,19.630653 0 0 1 31.636368,10.369343 19.630653,19.630653 0 0 1 51.267021,29.999996 Z"
+           class="ink-lead" />
+        <g
+           aria-label="i"
+           id="text3353"
+           style="line-height:0%;font-family:'Droid Sans';-inkscape-font-specification:'Droid Sans';letter-spacing:0px;word-spacing:0px;fill:currentColor"
+           class="paper">
+          <path
+             d="m 30.715352,15.000387 q 1.32,0 2.28,0.64 0.96,0.6 0.96,2.28 0,1.64 -0.96,2.28 -0.96,0.64 -2.28,0.64 -1.36,0 -2.32,-0.64 -0.92,-0.64 -0.92,-2.28 0,-1.68 0.92,-2.28 0.96,-0.64 2.32,-0.64 z m 2.96,8.56 v 21.84 h -5.96 v -21.84 z"
+             style="font-weight:bold;font-size:40px;line-height:125%;font-family:'Droid Serif';-inkscape-font-specification:'Droid Serif Bold'"
+             id="path34" />
+        </g>
       </g>
     </g>
   </g>

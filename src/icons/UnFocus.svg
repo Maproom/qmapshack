@@ -2,38 +2,42 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="590.29724"
-   height="563.07043"
    id="svg2861"
    version="1.1"
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:dc="http://purl.org/dc/elements/1.1/">
-  <style
-     id="current-color-scheme">.paper-lead{fill:#ececec;color:#000000}</style>
   <defs
-     id="defs2863" />
-  <metadata
-     id="metadata2866">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
+     id="defs11" />
   <g
-     id="layer1"
-     transform="translate(-38.416491,-236.46465)">
-    <path
-       id="path2871"
-       style="stroke:currentColor;stroke-width:6;stroke-linejoin:round"
-       transform="translate(148.57143,122.85714)"
-       d="M 477.14287,326.64788 302.86221,460.87362 368.15902,670.93699 186.64708,546.66427 7.0427646,673.67838 69.142873,462.64788 -107.15551,331.08355 112.73641,324.93225 183.38233,116.6069 257.1829,323.83569 Z"
-       class="paper-lead" />
+     transform="translate(0.0000,1.4760) scale(0.108420)"
+     id="g6">
+    <defs
+       id="defs2863" />
+    <metadata
+       id="metadata2866">
+      <rdf:RDF>
+        <cc:Work
+           rdf:about="">
+          <dc:format>image/svg+xml</dc:format>
+          <dc:type
+             rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        </cc:Work>
+      </rdf:RDF>
+    </metadata>
+    <g
+       id="layer1"
+       transform="translate(-38.416491,-236.46465)">
+      <path
+         id="path2871"
+         style="fill:#ececec;stroke:#000000;stroke-width:6;stroke-linejoin:round"
+         transform="translate(148.57143,122.85714)"
+         d="M 477.14287,326.64788 302.86221,460.87362 368.15902,670.93699 186.64708,546.66427 7.0427646,673.67838 69.142873,462.64788 -107.15551,331.08355 112.73641,324.93225 183.38233,116.6069 257.1829,323.83569 Z" />
+    </g>
   </g>
 </svg>

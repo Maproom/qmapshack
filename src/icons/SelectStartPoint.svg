@@ -2,77 +2,82 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   viewBox="0 0 61.0668 53.522771"
-   width="32"
-   height="29.95826"
    id="svg3513"
    version="1.1"
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:dc="http://purl.org/dc/elements/1.1/">
-  <style
-     id="current-color-scheme">.mark{color:#0000ff}.ink{color:#000080}</style>
   <defs
-     id="defs3515" />
-  <metadata
-     id="metadata3518">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
+     id="defs19" />
   <g
-     id="layer1"
-     transform="translate(-1.4560204,-5.1007308)">
+     transform="translate(0.0000,3.9532) scale(1.048033)"
+     id="g14">
+    <style id="current-color-scheme">.mark{color:#5555ff}.ink{color:#000080}</style>
+    <defs
+       id="defs3515" />
+    <metadata
+       id="metadata3518">
+      <rdf:RDF>
+        <cc:Work
+           rdf:about="">
+          <dc:format>image/svg+xml</dc:format>
+          <dc:type
+             rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+          <dc:title />
+        </cc:Work>
+      </rdf:RDF>
+    </metadata>
     <g
-       id="g986">
-      <path
-         id="path14175"
-         d="m 53.113731,51.075344 h -42"
-         style="fill:#00ff00;fill-opacity:1;stroke:currentColor;stroke-width:6;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         class="mark" />
-      <path
-         id="path12704"
-         style="fill:#00ff00;stroke:currentColor;stroke-linecap:round;paint-order:fill markers stroke"
-         transform="scale(-1,1)"
-         d="m -44.022823,50.893528 a 9,9 0 0 1 -9,9 9,9 0 0 1 -9,-9 9,9 0 0 1 9,-9 9,9 0 0 1 9,9 z"
-         class="ink" />
-      <path
-         id="path12704-1"
-         style="fill:#00ff00;stroke:currentColor;stroke-linecap:round;paint-order:fill markers stroke"
-         transform="scale(-1,1)"
-         d="m -23.086666,50.947353 a 9,9 0 0 1 -9,9 9,9 0 0 1 -9,-9 9,9 0 0 1 9,-9 9,9 0 0 1 9,9 z"
-         class="ink" />
-      <path
-         id="path12704-2"
-         style="fill:#00ff00;stroke:currentColor;stroke-linecap:round;paint-order:fill markers stroke"
-         transform="scale(-1,1)"
-         d="m -1.9560204,50.937431 a 9,9 0 0 1 -8.9999996,9 9,9 0 0 1 -9,-9 9,9 0 0 1 9,-9 9,9 0 0 1 8.9999996,9 z"
-         class="ink" />
-    </g>
-    <g
-       id="g988"
-       transform="matrix(-0.92000392,0,0,0.82853335,61.722504,0.33321082)"
-       style="fill:currentColor;stroke:currentColor"
-       class="ink">
-      <path
-         transform="matrix(1.0816327,0,0,1.118787,-4.6530612,-1.2072502)"
-         id="path1121"
-         d="M 8,27 C 20.001143,18.665873 32.001143,10.332539 40.166936,10.165711 48.332728,9.9988832 52.666475,17.999646 57,26"
-         style="fill:currentColor;fill-opacity:0;stroke:currentColor;stroke-width:11.8176;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         class="ink" />
-      <path
-         id="path984"
-         d="M 45.43535,28.564679 63,19 63.782354,41.346989 Z"
-         style="fill:currentColor;stroke:currentColor;stroke-width:1px;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
-         class="ink" />
+       id="layer1"
+       transform="translate(-1.4560204,-5.1007308)">
+      <g
+         id="g986">
+        <path
+           id="path14175"
+           d="m 53.113731,51.075344 h -42"
+           style="fill:#55d400;fill-opacity:1;stroke:currentColor;stroke-width:6;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           class="mark" />
+        <path
+           id="path12704"
+           style="fill:#55d400;stroke:currentColor;stroke-linecap:round;paint-order:fill markers stroke"
+           transform="scale(-1,1)"
+           d="m -44.022823,50.893528 a 9,9 0 0 1 -9,9 9,9 0 0 1 -9,-9 9,9 0 0 1 9,-9 9,9 0 0 1 9,9 z"
+           class="ink" />
+        <path
+           id="path12704-1"
+           style="fill:#55d400;stroke:currentColor;stroke-linecap:round;paint-order:fill markers stroke"
+           transform="scale(-1,1)"
+           d="m -23.086666,50.947353 a 9,9 0 0 1 -9,9 9,9 0 0 1 -9,-9 9,9 0 0 1 9,-9 9,9 0 0 1 9,9 z"
+           class="ink" />
+        <path
+           id="path12704-2"
+           style="fill:#55d400;stroke:currentColor;stroke-linecap:round;paint-order:fill markers stroke"
+           transform="scale(-1,1)"
+           d="m -1.9560204,50.937431 a 9,9 0 0 1 -8.9999996,9 9,9 0 0 1 -9,-9 9,9 0 0 1 9,-9 9,9 0 0 1 8.9999996,9 z"
+           class="ink" />
+      </g>
+      <g
+         id="g988"
+         transform="matrix(-0.92000392,0,0,0.82853335,61.722504,0.33321082)"
+         style="fill:currentColor;stroke:currentColor"
+         class="ink">
+        <path
+           transform="matrix(1.0816327,0,0,1.118787,-4.6530612,-1.2072502)"
+           id="path1121"
+           d="M 8,27 C 20.001143,18.665873 32.001143,10.332539 40.166936,10.165711 48.332728,9.9988832 52.666475,17.999646 57,26"
+           style="fill:currentColor;fill-opacity:0;stroke:currentColor;stroke-width:11.8176;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           class="ink" />
+        <path
+           id="path984"
+           d="M 45.43535,28.564679 63,19 63.782354,41.346989 Z"
+           style="fill:currentColor;stroke:currentColor;stroke-width:2.3854;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+           class="ink" />
+      </g>
     </g>
   </g>
 </svg>

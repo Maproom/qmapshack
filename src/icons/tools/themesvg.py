@@ -49,7 +49,10 @@ PAPER = {"#ffffff", "#ececec", "#f9f9f9", "#cccccc"}
 LEAD = {"#000000"}
 # A second, brighter blue that coexists with navy in 23 of its 31 icons -- folding it
 # into `ink` would collapse that distinction. Used to mark the element being acted on.
-MARK = {"#0000ff"}
+# Both spellings: palette.py normalises #0000ff -> #5555ff, and svghygiene runs that BEFORE
+# this transform, so an icon reaching here carries the accent value. Recognising only the
+# pre-normalisation one silently dropped the role on 29 icons and left them literal blue.
+MARK = {"#0000ff", "#5555ff"}
 
 STYLE_ID = "current-color-scheme"
 
@@ -190,7 +193,7 @@ def class_for(decls, tokens, rules):
     The two-declaration form is the two-colour element: an element has a single
     `color`, so a themed fill and a differently themed stroke cannot both be
     currentColor. The fill is served from the class and `color` feeds an inline
-    stroke="currentColor". Verified in Qt and inkscape -- strokecheck.cpp.
+    stroke="currentColor". Verified in Qt and inkscape.
     """
     name = "-".join(token_for(c, tokens) for _, c in decls)
     rules[name] = decls
@@ -547,7 +550,7 @@ def verify_one(args):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--dir", default="src/icons")
+    ap.add_argument("--dir", default=os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
     ap.add_argument("--write", action="store_true", help="rewrite in place")
     ap.add_argument("--verify", action="store_true",
                     help="prove the light render does not move (renders every icon twice)")

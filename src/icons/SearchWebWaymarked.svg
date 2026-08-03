@@ -1,63 +1,69 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
-   width="47.999996"
-   height="47.999996"
    background="#FFFFFF"
    version="1.1"
    id="svg29"
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:dc="http://purl.org/dc/elements/1.1/">
-  <style
-     id="current-color-scheme">.ink{color:#000080}.paper-ink{fill:#ffffff;color:#000080}</style>
-  <metadata
-     id="metadata35">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
   <defs
-     id="defs33" />
-  <path
-     id="rect4567"
-     style="opacity:1;fill:currentColor;stroke:currentColor;stroke-width:1.20711;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:20;paint-order:fill markers stroke"
-     d="M 0.60355502,0.60355502 H 47.39644 V 47.39644 H 0.60355502 Z"
-     class="ink" />
+     id="defs17" />
   <g
-     type="COMPO"
-     id="c_1"
-     transform="translate(-0.05303097,-1232.1364)" />
-  <g
-     id="layer1"
-     transform="translate(-0.05303097,-0.13636417)">
+     transform="translate(0.0000,0.0000) scale(1.333333)"
+     id="g12">
+    <style id="current-color-scheme">.ink{color:#000080}.paper-ink{fill:#ffffff;color:#000080}</style>
+    <metadata
+       id="metadata35">
+      <rdf:RDF>
+        <cc:Work
+           rdf:about="">
+          <dc:format>image/svg+xml</dc:format>
+          <dc:type
+             rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+          <dc:title />
+        </cc:Work>
+      </rdf:RDF>
+    </metadata>
+    <defs
+       id="defs33" />
     <path
-       id="rect4632"
-       style="opacity:1;stroke:currentColor;stroke-width:1.17861;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:20;paint-order:fill markers stroke"
-       d="m 21.481426,4.5788898 h 5.037146 V 47.468081 h -5.037146 z"
-       class="paper-ink" />
+       id="rect4567"
+       style="opacity:1;fill:currentColor;stroke:currentColor;stroke-width:1.8750;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:20;paint-order:fill markers stroke"
+       d="M 0.60355502,0.60355502 H 47.39644 V 47.39644 H 0.60355502 Z"
+       class="ink" />
     <g
-       id="g4636"
-       transform="matrix(0.85860176,0,0,-1.687129,10.176126,49.804545)"
-       style="stroke:currentColor;stroke-width:1.17275;stroke-miterlimit:20;stroke-dasharray:none;stroke-opacity:1"
-       class="ink">
+       type="COMPO"
+       id="c_1"
+       transform="translate(-0.05303097,-1232.1364)" />
+    <g
+       id="layer1"
+       transform="translate(-0.05303097,-0.13636417)">
       <path
-         style="fill-opacity:1;stroke:currentColor;stroke-width:1.17275;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:20;stroke-dasharray:none;stroke-opacity:1"
-         d="m 8.3655919,11.455579 v 6.017713 l 20.4728031,0.05025 8.71688,-3.175713 -9.190365,-2.878163 z"
-         id="path4591"
+         id="rect4632"
+         style="opacity:1;stroke:currentColor;stroke-width:1.8750;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:20;paint-order:fill markers stroke"
+         d="m 21.481426,4.5788898 h 5.037146 V 47.468081 h -5.037146 z"
          class="paper-ink" />
-      <path
-         style="fill-opacity:1;stroke:currentColor;stroke-width:1.17275;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:20;stroke-dasharray:none;stroke-opacity:1"
-         d="m 23.834793,23.515803 0.0011,-6.017713 -20.4727932,-0.05409 -8.717476,3.174078 9.189825,2.879887 z"
-         id="path4591-8"
-         class="paper-ink" />
+      <g
+         id="g4636"
+         transform="matrix(0.85860176,0,0,-1.687129,10.176126,49.804545)"
+         style="stroke:currentColor;stroke-width:1.8750;stroke-miterlimit:20;stroke-dasharray:none;stroke-opacity:1"
+         class="ink">
+        <path
+           style="fill-opacity:1;stroke:currentColor;stroke-width:1.8750;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:20;stroke-dasharray:none;stroke-opacity:1"
+           d="m 8.3655919,11.455579 v 6.017713 l 20.4728031,0.05025 8.71688,-3.175713 -9.190365,-2.878163 z"
+           id="path4591"
+           class="paper-ink" />
+        <path
+           style="fill-opacity:1;stroke:currentColor;stroke-width:1.8750;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:20;stroke-dasharray:none;stroke-opacity:1"
+           d="m 23.834793,23.515803 0.0011,-6.017713 -20.4727932,-0.05409 -8.717476,3.174078 9.189825,2.879887 z"
+           id="path4591-8"
+           class="paper-ink" />
+      </g>
     </g>
   </g>
 </svg>

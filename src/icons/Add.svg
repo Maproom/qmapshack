@@ -2,38 +2,44 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="37.963402"
-   height="37.930843"
    id="svg3513"
    version="1.1"
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:dc="http://purl.org/dc/elements/1.1/">
-  <style
-     id="current-color-scheme">.ink-lead{fill:#000080;color:#000000}</style>
   <defs
-     id="defs3515" />
-  <metadata
-     id="metadata3518">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
+     id="defs12" />
   <g
-     id="layer1"
-     transform="translate(-18.654663,-15.034578)">
-    <path
-       style="fill-opacity:1;fill-rule:nonzero;stroke:currentColor;stroke-width:1.04188;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 19.175603,39.551252 12.925791,1e-5 v 12.89322 h 11.06995 v -12.89323 h 12.92578 V 28.448749 h -12.92578 l -10e-6,-12.893231 h -11.06994 l -10e-6,12.893241 -12.925781,-10e-6 z"
-       id="rect3117-7"
-       class="ink-lead" />
+     transform="translate(0.0000,0.0275) scale(1.685834)"
+     id="g7">
+    <style id="current-color-scheme">.ink-lead{fill:#000080;color:#000000}</style>
+    <defs
+       id="defs3515" />
+    <metadata
+       id="metadata3518">
+      <rdf:RDF>
+        <cc:Work
+           rdf:about="">
+          <dc:format>image/svg+xml</dc:format>
+          <dc:type
+             rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+          <dc:title />
+        </cc:Work>
+      </rdf:RDF>
+    </metadata>
+    <g
+       id="layer1"
+       transform="translate(-18.654663,-15.034578)">
+      <path
+         style="fill-opacity:1;fill-rule:nonzero;stroke:currentColor;stroke-width:1.4829;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 19.175603,39.551252 12.925791,1e-5 v 12.89322 h 11.06995 v -12.89323 h 12.92578 V 28.448749 h -12.92578 l -10e-6,-12.893231 h -11.06994 l -10e-6,12.893241 -12.925781,-10e-6 z"
+         id="rect3117-7"
+         class="ink-lead" />
+    </g>
   </g>
 </svg>

@@ -2,48 +2,55 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="57.057713"
-   height="53.377998"
    id="svg3513"
    version="1.1"
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:dc="http://purl.org/dc/elements/1.1/">
   <defs
-     id="defs3515" />
-  <metadata
-     id="metadata3518">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
+     id="defs14" />
   <g
-     id="layer1"
-     transform="translate(-1.4711438,-6.122)">
-    <path
-       style="fill:none;stroke:#ffffff;stroke-width:11;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 11,54 h 38 q 6,0 3.087,-5.244 L 32.913,14.244 Q 30,9 27.087,14.244 L 7.913,48.756 Q 5,54 11,54 Z"
-       id="path995-halo" />
-    <path
-       style="fill:#ffff00;stroke:#000000;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 11,54 h 38 q 6,0 3.087,-5.244 L 32.913,14.244 Q 30,9 27.087,14.244 L 7.913,48.756 Q 5,54 11,54 Z"
-       id="path995" />
+     transform="translate(-0.0000,2.0637) scale(1.121672)"
+     id="g9">
+    <defs
+       id="defs3515" />
+    <metadata
+       id="metadata3518">
+      <rdf:RDF>
+        <cc:Work
+           rdf:about="">
+          <dc:format>image/svg+xml</dc:format>
+          <dc:type
+             rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+          <dc:title />
+        </cc:Work>
+      </rdf:RDF>
+    </metadata>
     <g
-       aria-label="!"
-       id="text999"
-       style="font-weight:bold;font-size:34.6667px;line-height:1.25;font-family:'Adobe Courier';-inkscape-font-specification:'Adobe Courier Bold';letter-spacing:0px;word-spacing:0px">
+       id="layer1"
+       transform="translate(-1.4711438,-6.122)">
       <path
-         d="M 32.094631,39.429283 H 27.969294 L 27.102626,22.893268 h 5.858672 z m -5.061338,5.789338 q 0,-1.594668 0.866667,-2.218668 0.866668,-0.658667 2.114669,-0.658667 1.213334,0 2.080002,0.658667 0.866667,0.624 0.866667,2.218668 0,1.525335 -0.866667,2.218669 -0.866668,0.658667 -2.080002,0.658667 -1.248001,0 -2.114669,-0.658667 -0.866667,-0.693334 -0.866667,-2.218669 z"
-         style="font-family:'Droid Sans';-inkscape-font-specification:'Droid Sans Bold';fill:#000000"
-         id="path48" />
+         style="fill:none;stroke:#ffffff;stroke-width:11;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 11,54 h 38 q 6,0 3.087,-5.244 L 32.913,14.244 Q 30,9 27.087,14.244 L 7.913,48.756 Q 5,54 11,54 Z"
+         id="path995-halo" />
+      <path
+         style="fill:#ffff00;stroke:#000000;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 11,54 h 38 q 6,0 3.087,-5.244 L 32.913,14.244 Q 30,9 27.087,14.244 L 7.913,48.756 Q 5,54 11,54 Z"
+         id="path995" />
+      <g
+         aria-label="!"
+         id="text999"
+         style="font-weight:bold;font-size:34.6667px;line-height:1.25;font-family:'Adobe Courier';-inkscape-font-specification:'Adobe Courier Bold';letter-spacing:0px;word-spacing:0px">
+        <path
+           d="M 32.094631,39.429283 H 27.969294 L 27.102626,22.893268 h 5.858672 z m -5.061338,5.789338 q 0,-1.594668 0.866667,-2.218668 0.866668,-0.658667 2.114669,-0.658667 1.213334,0 2.080002,0.658667 0.866667,0.624 0.866667,2.218668 0,1.525335 -0.866667,2.218669 -0.866668,0.658667 -2.080002,0.658667 -1.248001,0 -2.114669,-0.658667 -0.866667,-0.693334 -0.866667,-2.218669 z"
+           style="font-family:'Droid Sans';-inkscape-font-specification:'Droid Sans Bold';fill:#000000"
+           id="path48" />
+      </g>
     </g>
   </g>
 </svg>

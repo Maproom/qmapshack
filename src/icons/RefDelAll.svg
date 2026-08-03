@@ -2,87 +2,93 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="67"
-   height="67"
    id="svg3408"
    version="1.1"
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:dc="http://purl.org/dc/elements/1.1/">
-  <style
-     id="current-color-scheme">.paper-ink{fill:#ffffff;color:#000080}.lead{color:#000000}</style>
   <defs
-     id="defs3410" />
-  <metadata
-     id="metadata3413">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
+     id="defs22" />
   <g
-     id="layer1"
-     transform="translate(1,2)">
-    <path
-       id="rect4141"
-       style="stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"
-       d="M 0,-1 H 65 V 64 H 0 Z"
-       class="paper-ink" />
-    <path
-       style="fill:none;fill-rule:evenodd;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 15,4 V 24"
-       id="path4145"
-       class="lead" />
-    <path
-       style="fill:none;fill-rule:evenodd;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 5,14 H 25"
-       id="path4147"
-       class="lead" />
-    <path
-       style="fill:none;fill-rule:evenodd;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 50,4 V 24"
-       id="path4149"
-       class="lead" />
-    <path
-       style="fill:none;fill-rule:evenodd;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 40,14 H 60"
-       id="path4151"
-       class="lead" />
-    <path
-       style="fill:none;fill-rule:evenodd;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 15,39 V 59"
-       id="path4153"
-       class="lead" />
-    <path
-       style="fill:none;fill-rule:evenodd;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 5,49 H 25"
-       id="path4155"
-       class="lead" />
-    <path
-       style="fill:none;fill-rule:evenodd;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 50,39 V 59"
-       id="path4157"
-       class="lead" />
-    <path
-       style="fill:none;fill-rule:evenodd;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 40,49 H 60"
-       id="path4159"
-       class="lead" />
+     transform="translate(0.0000,0.0000) scale(0.955224)"
+     id="g17">
+    <style id="current-color-scheme">.paper-ink{fill:#ffffff;color:#000080}.lead{color:#000000}</style>
+    <defs
+       id="defs3410" />
+    <metadata
+       id="metadata3413">
+      <rdf:RDF>
+        <cc:Work
+           rdf:about="">
+          <dc:format>image/svg+xml</dc:format>
+          <dc:type
+             rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+          <dc:title />
+        </cc:Work>
+      </rdf:RDF>
+    </metadata>
     <g
-       transform="matrix(0.72874008,-0.72874008,0.68611569,0.68611569,-18,18.818182)"
-       style="font-style:normal;font-weight:normal;font-size:21.2393px;line-height:125%;font-family:Sans;-inkscape-font-specification:Sans;letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       id="text4315">
+       id="layer1"
+       transform="translate(1,2)">
       <path
-         d="M 30.975139,42.020849 H 41.5047 v 7.612785 H 30.975139 V 61.534079 H 22.954005 V 49.633634 H 12.395277 V 42.020849 H 22.954005 V 30.616256 h 8.021134 z"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:59.7356px;font-family:Sans;-inkscape-font-specification:'Sans Bold';fill:#ff0000"
-         id="path5145" />
+         id="rect4141"
+         style="stroke:currentColor;stroke-width:2.6172;stroke-linecap:round;stroke-linejoin:round"
+         d="M 0,-1 H 65 V 64 H 0 Z"
+         class="paper-ink" />
+      <path
+         style="fill:none;fill-rule:evenodd;stroke:currentColor;stroke-width:2.6172;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="M 15,4 V 24"
+         id="path4145"
+         class="lead" />
+      <path
+         style="fill:none;fill-rule:evenodd;stroke:currentColor;stroke-width:2.6172;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="M 5,14 H 25"
+         id="path4147"
+         class="lead" />
+      <path
+         style="fill:none;fill-rule:evenodd;stroke:currentColor;stroke-width:2.6172;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="M 50,4 V 24"
+         id="path4149"
+         class="lead" />
+      <path
+         style="fill:none;fill-rule:evenodd;stroke:currentColor;stroke-width:2.6172;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="M 40,14 H 60"
+         id="path4151"
+         class="lead" />
+      <path
+         style="fill:none;fill-rule:evenodd;stroke:currentColor;stroke-width:2.6172;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="M 15,39 V 59"
+         id="path4153"
+         class="lead" />
+      <path
+         style="fill:none;fill-rule:evenodd;stroke:currentColor;stroke-width:2.6172;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="M 5,49 H 25"
+         id="path4155"
+         class="lead" />
+      <path
+         style="fill:none;fill-rule:evenodd;stroke:currentColor;stroke-width:2.6172;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="M 50,39 V 59"
+         id="path4157"
+         class="lead" />
+      <path
+         style="fill:none;fill-rule:evenodd;stroke:currentColor;stroke-width:2.6172;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="M 40,49 H 60"
+         id="path4159"
+         class="lead" />
+      <g
+         transform="matrix(0.72874008,-0.72874008,0.68611569,0.68611569,-18,18.818182)"
+         style="font-style:normal;font-weight:normal;font-size:21.2393px;line-height:125%;font-family:Sans;-inkscape-font-specification:Sans;letter-spacing:0px;word-spacing:0px;fill:#ff5555;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         id="text4315">
+        <path
+           d="M 30.975139,42.020849 H 41.5047 v 7.612785 H 30.975139 V 61.534079 H 22.954005 V 49.633634 H 12.395277 V 42.020849 H 22.954005 V 30.616256 h 8.021134 z"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:59.7356px;font-family:Sans;-inkscape-font-specification:'Sans Bold';fill:#ff5555"
+           id="path5145" />
+      </g>
     </g>
   </g>
 </svg>

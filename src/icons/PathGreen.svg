@@ -2,43 +2,50 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="40"
-   height="40"
    id="svg3376"
    version="1.1"
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:dc="http://purl.org/dc/elements/1.1/">
   <defs
-     id="defs3378" />
-  <metadata
-     id="metadata3381">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
+     id="defs13" />
   <g
-     id="layer1"
-     transform="translate(-4.3097157,-9.4960203)">
-    <path
-       id="rect3793"
-       style="fill:none;fill-rule:evenodd"
-       d="M 4.3097157,9.4960203 H 44.309716 V 49.49602 H 4.3097157 Z" />
-    <path
-       style="fill:#668000;fill-opacity:1;stroke:#668000;stroke-width:0.852633px;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
-       d="m 6.4920945,14.865472 -1.7391304,4.180157 v 25.08094 H 39.535573 v -25.08094 h -20 l -1.73913,-4.180157 z"
-       id="path3014" />
-    <path
-       style="fill:#445500;stroke:#445500;stroke-width:0.852633px;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
-       d="M 4.7529641,44.126569 9.1007902,23.225785 H 43.883399 l -4.347826,20.900784 z"
-       id="path3016" />
+     transform="translate(0.0000,0.0000) scale(1.600000)"
+     id="g8">
+    <defs
+       id="defs3378" />
+    <metadata
+       id="metadata3381">
+      <rdf:RDF>
+        <cc:Work
+           rdf:about="">
+          <dc:format>image/svg+xml</dc:format>
+          <dc:type
+             rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+          <dc:title />
+        </cc:Work>
+      </rdf:RDF>
+    </metadata>
+    <g
+       id="layer1"
+       transform="translate(-4.3097157,-9.4960203)">
+      <path
+         id="rect3793"
+         style="fill:none;fill-rule:evenodd"
+         d="M 4.3097157,9.4960203 H 44.309716 V 49.49602 H 4.3097157 Z" />
+      <path
+         style="fill:#55d400;fill-opacity:1;stroke:#55d400;stroke-width:0.852633px;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+         d="m 6.4920945,14.865472 -1.7391304,4.180157 v 25.08094 H 39.535573 v -25.08094 h -20 l -1.73913,-4.180157 z"
+         id="path3014" />
+      <path
+         style="fill:#445500;stroke:#445500;stroke-width:0.852633px;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+         d="M 4.7529641,44.126569 9.1007902,23.225785 H 43.883399 l -4.347826,20.900784 z"
+         id="path3016" />
+    </g>
   </g>
 </svg>

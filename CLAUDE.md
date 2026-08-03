@@ -40,43 +40,21 @@ When asked "what were we working on" or "what did we do last", always check `git
 ## Tree icons are `QIcon`
 
 `IWksItem::icon` and `IDBItem::icon` are `QIcon` and `getIcon()` returns `const QIcon&`, so the
-delegates render at device resolution (`QIcon::paint(rect)`) and non-GIS tree icons stay crisp on
-HiDPI. Their sources are SVG: all ~11 project types, both device icons, geo-search error, the 7
-`CDBFolder*` types, and `CMapItem`/`CDemItem` (which do not rasterize to a 48 px cache).
+delegates render at device resolution and non-GIS tree icons stay crisp on HiDPI.
 
-**GIS items (wpt/trk/rte/area) stay raster** — Task 2 owns them. `paintItem` in `CWksItemDelegate`
-and `CDBItemDelegate` pulls the pixmap back out of the `QIcon` and stretches it.
+GIS items (wpt/trk/rte/area) stay raster — `paintItem` pulls the pixmap back out of the `QIcon` and
+stretches it.
 
 **Two delegate paths cannot assume the icon can fill the cell, and both branch on `actualSize`:**
 `paintDevice` (MTP subclasses overwrite the SVG with a raster read off the device) and
-`paintGeoSearch` (`CGeoSearchConfig::getCurrentIcon()` returns an SVG-backed `QIcon`, but
-`CGeoSearch::setIcon()` *composes* a raster when "accumulative results" is on). Do not collapse
-either to a bare `QIcon::paint`, and do not add a stretch back: `actualSize(rect) == rect` answers
-it, and a raster larger than the cell needs no stretch — `QIcon` downscales rasters fine.
-`paintProject`/`paintGeoSearchError` are genuinely SVG and paint direct.
+`paintGeoSearch` (`CGeoSearch::setIcon()` composes a raster when "accumulative results" is on). Do
+not collapse either to a bare `QIcon::paint`, and do not add a stretch back: `actualSize(rect) ==
+rect` answers it, and `QIcon` downscales rasters fine. `paintProject`/`paintGeoSearchError` are
+genuinely SVG and paint direct.
 
 **`IDBItem::icon` holds folder icons only.** The DB blob raster lives on `CDBItem` as its own
 `QPixmap displayIcon` (`getDisplayIcon()`), so `CDBItemDelegate::paintItem` stretches it directly.
-Do not re-add a `setIcon(const QPixmap&)` overload on `IDBItem`: it existed only so the delegate
-could unwrap the pixmap straight back out via an `actualSize(1024, 1024)` guess. `IGisItem::showIcon()`
-composes from the raw pixmap stashed in `displayIcon` (a COW copy); `displayIcon` stays a `QPixmap`
-for the DB blob.
-
-Why this is safe despite serialization (it stores sym/colour, not the icon): see "GIS item icons —
-serialization…" below.
-
-**Do not persist a themable icon.** Three places write icons to disk and none persist the `.svgt`
-form — a `.svgt` path is unreadable by a build without the icon engine, and a rendered icon freezes
-the theme it was drawn in. Two store the portable PNG path and resolve to `.svgt` on load/draw: web
-search services (`CGeoSearchWeb::displayIconPath`, at draw time) and history events
-(`IGisItem::savedIconPath` on save / `displayIconPath` on load, pinned to the 48x48 PNG). The third,
-the database, stores the display icon as PNG **bytes** (`CDBProject.cpp`) — and that is **correct by
-design, not an open question**: a GIS item icon is not themable in the first place (it encodes the
-item's user-selected colour, or a user-supplied PNG/BMP waypoint symbol), so it must not follow
-light/dark. This serialization is unchanged from `dev` and must stay that way — **do not route GIS
-item icons through the theme engine.** See ".notes/icons-task1-ui-svg-plan.md", "Persistence".
-
----
+Do not re-add a `setIcon(const QPixmap&)` overload on `IDBItem`.
 
 ## Code style
 
@@ -264,323 +242,137 @@ for fractional factors like 1.5).
 
 ### Icons — hold a `QIcon`, never a `QPixmap`
 
-**The format is not the lever; the rasterization hook is.** A `QPixmap` is one raster frozen at the
-dpr live when it was built: it cannot serve a larger request, and cannot follow a window to another
-screen — whatever the source format. Measured (Qt 6.9.2): a `QPixmap` of an SVG reports
-`actualSize` 35, the same file as a `QIcon` reports 1024.
+A `QPixmap` is one raster frozen at the dpr it was built at: it cannot serve a larger request and
+cannot follow a window to another screen, whatever the source format.
 
-- **Anything taking a `QIcon`** — buttons, actions, tree/list items, a Designer `<iconset>`:
-  reference `:/icons/Foo.svg` and let the paint path ask for the size. Crisp at any dpr, no hook.
-- **A static icon in a dialog** — `QSvgWidget` + `load()`. Qt ships no widget that displays a
+- Anything taking a `QIcon` (buttons, actions, tree/list items, a Designer `<iconset>`): reference
+  `:/icons/Foo.svgt` and let the paint path ask for the size.
+- Static icon in a dialog: `QSvgWidget` + `CSvgtIcon::load()`. Qt ships no widget that displays a
   `QIcon`, and `uic` bakes a `<pixmap>` into `QPixmap(path)` before any widget sees the path.
-- **Canvas rasters** (waypoints, POI, cache) are data, not icons — Task 2 owns them.
-- **Rich text `<img src=>`** — see below; `width`/`height` is the trigger.
+- Rich text `<img>`: `CSvgtIcon::htmlImageSrc()`, and always give both `width` and `height` —
+  without them there is no HiDPI path.
+- Canvas rasters (waypoints, POI, cache) are data, not icons.
+- Never `static` a paint-path icon — a static pins the colour scheme live at first paint and hides
+  the icon from a path-shaped grep. There are none in the tree; keep it that way.
+- `actualSize(rect) == rect` is the test for "can this icon fill the cell".
 
-`cmake/IconGate.cmake` fails the build on the three regex-detectable violations. It deliberately
-cannot see `QIcon(pixmapVariable)` or a `.pixmap(w,h)` missing its dpr — catching those would mean
-false-flagging every `QIcon(path)`.
+`cmake/IconGate.cmake` fails the build on the regex-detectable violations. It deliberately cannot
+see `QIcon(pixmapVariable)` or a `.pixmap(w,h)` missing its dpr.
 
-**Known, left alone (Oliver): three `.pixmap(w,h)` calls with no dpr.** `CSelectCopyAction.cpp:48/50`
-(project icons — `getIcon()` is already an SVG-backed `QIcon`, and `.pixmap(32, 32)` discards that on
-the last line) and `CInvalidTrk.cpp:34` (`QStyle::standardIcon`). `QSvgWidget` cannot take these:
-they hold a `QIcon`, not a path. `pixmap(size, devicePixelRatioF())` fixes the blur but is wrong
-twice over — in a ctor the widget has no window yet, so the ratio falls back to the primary screen,
-and it goes stale if the dialog moves screens. Doing them properly wants a small `QIcon`-painting
-widget. Three modal-dialog icons did not justify it; that is the whole reason, and it does not
-generalise. `CSelectCopyAction.cpp:31/33` is a different thing — `getDisplayIcon()` is a `QPixmap`
-by Task 2's design.
+**Left alone deliberately — do not "finish" these:** the three `.pixmap(w,h)` calls with no dpr
+(`CSelectCopyAction.cpp:48/50`, `CInvalidTrk.cpp:34`); `IGridPlacer.ui`'s `line_3px_*` black PNGs;
+`CGeoSearchWeb`'s service icons, where the stored path is user data and `defaultIcon` equality is
+the "is this user-added" test — converting needs a settings migration plus an `isUserDefined` flag
+first, or "Restore default list" erases the user's own services.
 
-A `QLabel` `<pixmap>` or an HTML `<img>` is **not** a reason to keep a PNG — that belief is why
-blurry icons kept coming back.
+### Icons — nothing that stores an icon path may be pruned
 
-#### Rich text `<img>` — needs `width`/`height`
+No icon PNG is ever pruned and no dead qrc entry is removed. Two populations store a *path*, not a
+picture, so a pruned PNG is a blank icon in somebody's existing file:
 
-Rich text rasterizes an image once at natural size then scales to `width × height × dpr`, so a bare
-`<img>` (no `width`/`height`) has **no HiDPI path** — always give both. Use an inline themed PNG via
-`CSvgtIcon::htmlImageSrc()`; SVG is chosen despite a soft dpr-1 downscale because it is the **only
-themeable option** (Qt has no recolour API). `@Nx` sibling support is per-class: rich text and
-`QIcon` honour it (QIcon gated on the app's *live* dpr), `QPixmap`/`QImageReader` never do.
+| population | stored in |
+|---|---|
+| `history_event_t::icon` | `.qms`, `.gpx`, DB `data` column |
+| `getInfo()` HTML `<img src>` | DB `comment` column |
 
-**`getInfo()` output is persisted**, so an `<img>` path in it is a data format, not just markup:
-`CDBProject.cpp:297/341` writes it to the DB `comment` column, `CDBItem.cpp:29/41` reads it back and
-re-renders it, and `CDBFolderSqlite.cpp:65` full-text indexes it. Changing a path leaves old rows on
-the old icon (mixed until re-saved) and means the `16x16` PNGs must stay registered forever — the
-same shape as the history-event icons.
+History icons are **PNG on disk, `.svgt` in memory**: `displayIconPath()` resolves PNG→`.svgt` on
+load, `savedIconPath()` converts back on save, and neither marks the item changed. A saved file
+stays readable by a build without the icon engine, where a `.svgt` path renders blank.
 
-**No icon PNG is ever pruned, and no dead qrc entry is removed** (Oliver). For the two populations
-below the reason is **correctness** — they store an icon *path*, not a picture, so a pruned PNG is a
-blank icon in somebody's existing file, which makes the no-prune rule load-bearing rather
-than merely cautious. For everything else — the ~79 qmaptool entries nothing references, the 14
-bullet PNGs the `colorMap[].bullet` removal orphaned, the `48x48`/`32x32` rasters whose call sites
-became SVG — the reason is simply that a few KB of qrc is not worth the chance of being wrong about
-who reads a path. Do not "tidy" these.
+The `comment` column keeps its PNG paths — it exists for full-text search and is never rendered.
 
-| population | stored in | migrated on read? |
-|---|---|---|
-| `history_event_t::icon` | `.qms` (`gis/qms/serialization.cpp:129/144`), `.gpx` (`gis/gpx/serialization.cpp:258/150`), DB `data` column | **on-disk PNG, in-memory `.svgt`** — `savedIconPath()` / `displayIconPath()` |
-| `getInfo()` HTML (`<img src>`) | DB `comment` column | no — intended, see note below |
+### Icons — drawing rules that no tool catches
 
-**Two transforms at the serialization boundary — this is the final design, not interim.** The
-on-disk form of a history icon is the portable 48x48 PNG (permanently); the in-memory form is the
-themable `.svgt`. `displayIconPath()` resolves PNG→`.svgt` on load, `savedIconPath()` converts
-`.svgt`→PNG on save. So history events live as `.svgt` in memory — new events are created that way,
-54 `changed()` callers pass `.svgt` literals — and follow the light/dark theme, while every saved
-file stays PNG and readable by any build, including older ones and ones without the icon engine
-(a `.svgt` path renders blank there). Neither transform marks the item changed (the event hash
-covers `event.data`, not the icon). A path with no registered counterpart passes through untouched,
-so a stray `.svg`/`.svgt` from an old build heals to PNG on the next save. The `QDataStream` operator
-covers `.qms` *and* the DB; `.gpx` is separate. **Portability rests on no history PNG ever being
-pruned** (every PNG is generated from its SVG) — see "No icon PNG is ever pruned" above.
+Developer howto: `README_ICON.md`.
 
-**The `comment` column keeps its `<img src='://icons/16x16/*.png'>` from `getInfo()` — intended
-(Oliver), do not migrate it.** The column exists for full-text search (`CDBFolderSqlite.cpp:65`,
-`MATCH`), which never renders the markup, so the stored PNG path is inert; live views regenerate
-themed inline icons via `CSvgtIcon::htmlImageSrc()`. The stored PNG path is portable and readable by
-any build. Not a path we transform.
+- **Draw structural line-art in `ink`.** Qt greys a disabled icon by lightness only, so an icon
+  drawn just in `lead`/`paper` looks identical enabled and disabled on dark. Keep `lead` for a
+  secondary outline. (`RatingStarEmpty`/`UnFocus` stay grey because grey *is* their meaning.)
+- **Never give a shape's stroke the same role as its fill.** It renders invisible and every tool
+  passes, because each colour is individually valid. Only a render shows it.
+- **The letter or shape carries the meaning; colour is never the only cue** — `SQLite`/`MySQL` use
+  a bold initial on the cylinder face plus a brand-colour cap, not colour alone.
+- **Negation uses the set's own mark**, a red `#ff5555` disc with a `paper` slash, as `NotPossible`.
+- **Bake lettering to paths** (`inkscape --actions "select-all;object-to-path"`), then strip the
+  group's inline `style` back to `fill:currentColor`. The conversion resolves the class's `color`
+  inline, and an inline value shadows the themed class. Never ship live `<text>`.
+- A family (`Act*`, `Add*`, `Mime*`) shares stroke weight, corner radius and optical size.
 
-**`IGridPlacer.ui`'s `line_3px_*` rules stay as they are — decided (Oliver), reason not recorded.**
-The four `QLabel`s are hardcoded black 100×3 / 3×100 PNGs, so dark mode gives 1.26:1 contrast.
-`QFrame::HLine`/`VLine` would theme itself from the palette and drop both assets, but draws a 1px
-etched line against their 3px. Proposed on that basis and declined; the dark-mode contrast is known
-and accepted.
+### Icons — Qt renderer traps the pipeline works around
 
-**`CGeoSearchWeb`'s service icons stay PNG — decided, do not "finish" this menu.** The submenu is
-knowingly half-converted: chrome is SVG, the service table stays `://icons/32x32/SearchWeb*.png`.
-The path is *user data* — the dtor writes it to QSettings and the ctor rebuilds `services` from it,
-so editing `defaultServices()` reaches new installs only. And `defaultIcon` equality is the
-"is this user-added" test in `CGeoSearchWebConfigDialog::slotReset()`: with a stored PNG path and an
-SVG `defaultIcon`, "Restore default list" **erases the user's own services**. Converting needs a
-settings migration plus an `isUserDefined` flag so identity stops riding on the icon string; Oliver's
-call is that a uniformly blurry submenu beats that risk. (The erase path is read from the source, not
-reproduced — confirm with a hand-added service before relying on it for anything but this decision.)
+Qt has no SVG recolouring API, so `CSvgtIconEngine` rewrites the SVG text and loads via
+`QSvgRenderer(QByteArray)`. Qt's renderer *does* resolve `currentColor` — only the setter is
+missing. The traps that shape the pipeline:
 
-**Editing/adding a UI icon: edit the SVG and build.** The `icon_hygiene` target (each app depends on
-it, runs before `rcc`) hashes every `src/icons/*.svg` against `svg.sha256`; for a changed one it runs
-`svghygiene`, which makes it Qt-renderable and regenerates its PNG pair via `mkicon`. Review and
-commit the rewritten SVG + PNGs + `svg.sha256`. An untouched tree needs no python/inkscape; a changed
-icon with them missing fails the build. It does **not** assign dark-theme roles — do that with
-`themesvg.py`; it warns when an icon lacks them. Detail: `.notes/icons-task1-ui-svg-plan.md`.
+- `currentColor` with no `color` set renders **black** (in Qt and inkscape); a **duplicate**
+  `color=` renders **nothing**; lowercase `currentcolor` is black (QTBUG-46947); a `<style>` class
+  beats a root `color=`, so the KDE/Breeze idiom does not mix with ours.
+- `QSvgRenderer` **ignores a class-supplied `fill:`**. `recolored()` inlines the resolved fill as a
+  presentation attribute; without it 19 icons render black.
+- Qt ignores `markerUnits="strokeWidth"`, so `svghygiene` bakes markers into geometry. Set
+  `stroke:none` wherever `stroke-width` is 0 **first**, or the shape becomes a filled block.
+- `QIcon(":/x.svg")` needs both `imageformats/qsvg` and `iconengines/qsvgicon` deployed; all three
+  platforms are confirmed OK.
+- Qt 6.10.0 has a `currentColor` regression, fixed in 6.10.1 (QTBUG-141102).
 
-`mkicon` renders one svg→PNG by hand (`./mkicon Apply.svg 32 48`; `--hicolor` for the app icons).
-`waypoints/makeicons` and `cache/makeicons` are batch wrappers — correct there because those sets are
-frozen-appearance PNG by design.
+Dark `ink` is `#9999ff`: it must stay legible on `paper` `#353535` at 4.5:1 while staying clear of
+`lead` `#e0e0e0` (120 icons paint both) and `mark` `#66aaff` (19 icons paint both). That rules out
+the azure family — a "more vibrant blue" means a more saturated navy, not a different blue.
 
-**`hygiene.py`'s green run is not proof of repair outside `src/icons`.** Its skip rule is "has a
-`viewBox` ⇒ already fitted by `naturalsize.py`", which holds in `src/icons` and misfires elsewhere:
-an Inkscape **A4 page** carries a viewBox too. Measured on `src/qmapshack/pics/` — both files are
-210×297mm pages, and `hygiene.py` fits `compass.svg` (no viewBox) to 47.5×48.3mm while **silently
-skipping** `DockWidgets.svg` (viewBox `0 0 744.09 1052.36`, i.e. A4 in px), then prints
-*"2 files processed, 0 failures"*. Point it outside `src/icons` and it needs a real guard —
-compare the viewBox to the drawing bbox rather than test for its presence.
+### Icons — waypoints are data, not chrome
 
-### Icons — why the SVGs don't render in Qt (the `-D` / missing-viewBox trap)
+`src/icons/waypoints/` is named by the GPX `<sym>` vocabulary shared with Garmin and its exact look
+is a frozen contract, so it **stays PNG on the canvas**: SVG would hand rendering to whichever Qt
+the user has, and a Qt antialiasing change could silently restyle accepted iconography. External
+user icons are PNG/BMP forever (`CWptIconManager.cpp:2010`), so the raster path must exist anyway.
+Dark theming does not apply — they sit on map tiles, not the UI palette.
 
-**Do not retry "just load the SVGs directly" before reading this.** It has been tried and it
-fails for a non-obvious reason that is *not* a Qt limitation.
+A waypoint symbol used as **UI chrome** (menu action, tool button) is under none of that and uses
+the SVG. Only `FlagBlue.svg` and `PinBlue.svg` are registered; add others as UI needs them.
 
-`makeicons` exports with `inkscape -D`, which crops to the **drawing's bounding box** and ignores
-the page. Independently, **314 of 325 `src/icons/*.svg` have no `viewBox`** — they declare a
-64×64 page while the artwork sits in an arbitrary sub-rect. So Inkscape crops tight and the PNG
-fills the frame; Qt honours the page and draws the artwork small and off-centre.
+Gate any waypoint change with `src/icons/tools/wptdiff.py --size 96`, which must report
+`visible (>8) == 0`.
 
-Measured with `QSvgRenderer` at 32px vs the shipped PNGs (324 icons — the 325th,
-`SelectEndPoint.svg.2020_04_11_11_11_42.0.svg`, is a committed Inkscape autosave backup and
-should just be deleted): **151 severe today → 19 after fitting each canvas to its drawing → 1
-after also converting text to paths.** The sources are the problem, not the renderer.
+**`icon_t::focus` is absolute pixels of the loaded raster**, hardcoded against 32. Any resolution
+change breaks every anchor until focus is stored relative (0..1) — a prerequisite for touching
+waypoint resolution at all. Two getters exist: `getWptIconScaledByName` holds `focus = focus *
+scale`, `getWptIconByName` does not. `focus` is serialized but overwritten on every load via
+`deriveSecondaryData()`, so a relative-focus change needs no migration.
 
-Also: **23 files carry an empty `<flowRoot>`** (Inkscape flowed-text box, zero content) whose only
-effect is inflating the drawing bbox — `object-to-path` does not remove it, strip it first. 94
-files reference fonts by name that may not exist on a user's machine.
+### TODO — POI icons (SJJB) can be converted
 
-**`QIcon(":/x.svg")` needs two runtime plugins**, and they are not interchangeable:
-`imageformats/qsvg` alone gives one fixed raster at the SVG's natural size (scaled from there —
-blurry), while `iconengines/qsvgicon` renders at any requested size. Both must be deployed or the
-HiDPI benefit silently disappears. **All three platforms are confirmed OK** — Linux via the distro
-packages, macOS via `macdeployqt` auto-detection, Windows confirmed by Oliver. Do not re-open this
-from `msvc_64/copyfiles.bat`: it copies `qsvg.dll`, never mentions `iconengines`, and is dead
-anyway (all-Qt5, untouched since 2022) — the live Windows packaging lives outside the repo.
+POIs are not waypoints: no canvas freeze applies. 303 SVGs already ship under
+`src/icons/poi/SJJB/svg/<category>/` and 249 of the 250 referenced PNGs have a counterpart, but
+none are in `resources.qrc`. They are SJJB templates carrying a placeholder fill `#111111` that
+their build recolours per category, so the colour has to be recovered per icon from the shipped
+PNGs (16 categories, 6 of them with 2–3 variants).
 
-**Qt has no SVG recolouring API** (verified against Qt 6.9.2 and 6.10.0): `QSvgRenderer` exposes
-no `setCurrentColor` and no palette, and neither does `QIcon`. Dark-mode icon theming requires
-rewriting the SVG text ourselves and loading via `QSvgRenderer(const QByteArray&)`.
+Work: register ~250 SVGs, add a recolour step, change `CPoiIconCategory`'s `QPixmap` members to
+paths plus ~302 literals in `CPoiFilePOI_TagMap.cpp` — the path *shape* changes, so that needs a
+lookup table, not a regex — and a render cache keyed by (icon, size, dpr). The cache is a win
+regardless: `CPoiFilePOI.cpp:204` `.scaled()`s a pixmap per POI per repaint.
 
-**But Qt's renderer DOES resolve `currentColor`** — measured on 6.9.2 via `.notes/icons-tools/
-ccheck.cpp`; the widespread "QtSvg ignores currentColor" claim is false. Only the *setter* is
-missing, so "rewrite the bytes" means setting one root `color=` attribute, not parsing paths.
-**A fill that is not `currentColor` is untouched**, so semantic red/green need no carve-out.
-This is the basis of the theme engine — read `.notes/icons-task1-ui-svg-plan.md` before touching icon theming.
-Traps: `currentColor` with no `color` set renders **black** (in Qt *and* inkscape, so a themed
-source without a root default silently exports black PNGs from `mkicon`); a **duplicate** `color=`
-makes the document invalid and renders **nothing**; lowercase `currentcolor` is black
-(QTBUG-46947); a `<style>` class beats a root `color=` (so the KDE/Breeze idiom does not mix with
-ours); Qt 6.10.0 has a `currentColor` regression fixed in 6.10.1 (QTBUG-141102).
+Gate it or do not do it: render each recoloured SVG at 32, diff against its shipped PNG, require
+`visible (>8) == 0`. A diff that measures **colour** reports ~240 false failures.
 
-**Qt's `QSvgRenderer` also ignores a class-supplied `fill:`** (measured 6.9.2; inkscape honours
-it). A shape whose fill comes only from a `<style>` class — the two-colour `.paper-ink{fill:…;color:…}`
-form, fill from the class plus stroke via inline `currentColor` — renders its **fill black**.
-`CSvgtIconEngine::recolored()` works around it: after resolving each class's colour it inlines the
-resolved fill as a `fill="…"` presentation attribute onto the elements using that class (skipped when
-they already have an inline fill). Qt honours the inline value; a renderer that *does* apply class
-fill overrides it with the identical class value, so only Qt changes. Left unfixed this blacked out
-19 icons (search-web service icons, the dock toggles, `Database`/`Print`/`Cut`/…) — verified by
-rendering the actual `recolored()` output through `QSvgRenderer` against inkscape.
+Two defects found while scoping: `CPoiFilePOI_TagMap.cpp:118` asks for
+`health_pharmacy_dispencing` (a typo; the SVG is `pharmacy_dispensing`), and one SVG embeds a
+raster that is not in the tree (`pastedpic_10102008_233747.png`).
 
-**Qt renders `<marker>` but ignores `markerUnits="strokeWidth"`** (the SVG default, always what
-Inkscape emits), so an arrowhead that should scale with the path's stroke width is drawn at raw
-size — a Qt bug (Inkscape/browsers are correct; `userSpaceOnUse` with a baked scale doesn't help).
-**Fix: bake markers into geometry** with inkscape `object-stroke-to-path` (not `object-to-path`,
-which ignores markers), then `vacuum-defs` to drop the orphaned defs. Done for all UI icons; 0 live
-refs. **Trap:** `object-stroke-to-path` turns a zero-width stroke into a filled path of the whole
-shape (a black square) — set `stroke:none` wherever `stroke-width` is 0 **before** converting.
+### GIS item icons — serialization stores sym/colour, not the icon
 
-**Grep for `marker-*:url(...)`, not `<marker`** — a def is not a use (67 icons had a marker def,
-only 11 referenced one). Both are cleaned: **0 marker defs, 0 live refs** in `src/icons/*.svg`.
-Dead Inkscape defs are worth `vacuum-defs`-ing on sight — they were over half the bytes of files
-carrying them.
+`.qms`/DB persist the **symbol name** (`wpt.sym`, `serialization.cpp:86`) and the **colour**
+(`trk.color`/`area.color`, `:614`/`:827`) — never a rendered icon. The icon is re-derived on load:
+waypoint via `getWptIconByName(sym)`, track/area by loading `Track.png`/`Area.png` as a shape mask
+and filling it with the data colour. The rendered pixmaps in the DB `items.icon` BLOB and `.qms`
+`history_event_t.icon` are output caches, not sources of truth. **Serialization does not constrain
+the source format** — do not repeat the belief that it does.
 
-**The two icon gates are not interchangeable.** `uidiff.py` renders with **inkscape**, so it
-answers "is the artwork still the same" and is blind to every Qt bug on this list. `svgdiff`
-renders with **Qt**, and is the only one that sees them. The marker fix needs both: `uidiff` must
-stay 329/329 identical (it did), `svgdiff` proves the win (visible 2 -> 0). A meanDiff is also a
-poor detector here — an arrowhead is a small share of an icon's area, so the worst offender
-(`AreaMove`) scored only 7.4 while being obviously wrong to a human. Look at the render.
-
-**`QIcon` already caches rasterization internally** (cached SVG ≈ PNG), so there is no icon cache
-worth building. Constructing a `QIcon` per paint costs a little, but **do not `static` a paint-path
-icon** — a static pins the colour scheme live at first paint (defeating theming) and hides the icon
-from a path-shaped `QIcon("` grep (`QIcon iconShowAll("...")` is invisible, and that is how a
-delegate icon gets silently left on PNG — it happened, and `cmake/IconGate.cmake` can't see it
-either). There are no `static` icons in the tree; keep it that way. If a repaint ever proves hot,
-key a cache by *name + colour scheme* so a theme change invalidates it.
-
-**`actualSize(rect) == rect` is the test for "can this icon fill the cell"** (measured, Qt 6.9.2):
-an SVG-backed `QIcon` returns the requested size at any size, a raster clamps to its natural size
-once the request exceeds it (32px source: `actualSize(43)` -> 32). Use it where an icon member may
-hold either format — a raster already *larger* than the cell still reports a fill and needs no
-stretch, since `QIcon` downscales rasters fine (fact 2 is about *up*scaling only).
-
-### Icons — UI icons and waypoint icons are two separate tracks
-
-Decided with Oliver. They are different asset classes and get **opposite** treatment. **Read the
-full plans before touching either:** `.notes/icons-task1-ui-svg-plan.md` and
-`.notes/icons-task2-waypoint-resolution-plan.md`. Measurement tools in `.notes/icons-tools/`.
-
-- **UI icons** (`src/icons/*.svg`) are decoration: they sit on the UI palette, may change freely,
-  and are the ones unreadable on dark schemes. They become SVG. **Task 1 done; 7a theming done**
-  (engine + full ink/paper/lead/mark markup, navy-on-dark 0, both apps confirmed in light and dark).
-  Only **7b artistic overhaul** (needs an artist) remains. Dark mode was never a background problem —
-  the issue was the house navy `#000080` as the *drawing* colour, now themed.
-- **Waypoint icons** (`src/icons/waypoints/`) are **data**: drawn on map tiles (so dark-mode
-  theming does not apply — they must stay readable over any map), named by the GPX `<sym>`
-  vocabulary shared with Garmin, and their **exact look is a frozen contract** (Oliver: "commonly
-  accepted and expected"). **They stay PNG on the canvas.**
-
-  **But the freeze is about map rendering, not about the file.** A waypoint symbol used as *UI
-  chrome* — a menu action, a tool button — is under none of that constraint and should use the
-  SVG (decided with Oliver). Four such sites exist and are now SVG: `CGisListWks.cpp` ("Change
-  Icon..."), `IScrOptRuler.ui`, and two in `IScrOptSelect.ui` — one of which had been pairing
-  `WaypointOn.svg` (on) with `FlagBlue.png` (off) inside a single iconset. Only `FlagBlue.svg` and
-  `PinBlue.svg` are registered in `resources.qrc`; add others as UI actually needs them, rather
-  than registering all 203.
-
-  The 203 sources were **not** hygiened by task 1 (which only covered `src/icons/*.svg`). Fixed:
-  `hygiene.py --dir src/icons/waypoints` repaired the **24 that had no `viewBox`** (the other 179
-  were already sized and are skipped — re-hygiening would strip their viewBox). It fits the canvas
-  to the drawing rather than adding a viewBox, so those 24 still have none and that is correct —
-  grep `viewBox` and you will still count 24, which is not a sign it failed; `svgdiff` is the
-  check. They were exactly the unrenderable ones: mean diff vs their PNG **38.7 → ~0.2**, versus
-  2.8 for the 179. Before
-  the fix `PinBlue`/`FlagBlue` drew ~⅓ too small and offset, so registering a waypoint SVG without
-  hygiene ships the very bug PR #1159 was reported for. Gate any such change with
-  `wptdiff.py --size 96` — it must stay **123/61/19/0**; `makeicons` exports with `-D`, which
-  crops to the drawing and ignores the page hygiene rewrites, so the shipped PNGs do not move.
-
-Why waypoints stay raster — the constraint is itself the argument: SVG would hand rendering from
-Inkscape to Qt, so appearance would become a function of whichever Qt version the user has, and a
-Qt antialiasing change could silently restyle accepted iconography. PNG freezes the look under a
-renderer we control. Also: external user icons are PNG/BMP forever
-(`CWptIconManager.cpp:2010`), so the raster path must exist regardless — SVG would add a second
-path, not remove one. And SVG is not smaller: the 203 waypoint SVGs are **737,383 bytes** on
-disk vs **157,873 bytes** of shipped 32px PNG (`cat * | wc -c` — never `du`, it rounds each tiny
-file up to a 4K block and so measures the filesystem, not the data).
-
-The waypoints' real defect is resolution, not format: source is 32px, the size slider is 16..48
-(`IMapIconSizesSetup.ui`), and the canvas is dpr-aware — so at the **default** 22 on a HiDPI
-screen they are already upscaled (needs 44 device px, has 32). Fix is 96px in
-`waypoints/makeicons`, which changes nothing visually — **reproduce with
-`.notes/icons-tools/wptdiff.py --size 96`**, which must report `visible (>8) == 0` (currently
-123 identical / 61 antialiasing / 19 minor / **0 visible**).
-
-**`icon_t::focus` is absolute pixels of the *loaded* raster** — hardcoded against 32 for the
-built-in table (314× `{16,16}`, 6× `{0,32}` for flag/pin tips, 1× `{0,31}` for `"Flag"`, **which
-Oliver confirmed is a bug to fix**), but derived from `QImage::offset()` or the image centre for
-external user icons of any size (`CWptIconManager.cpp:2056-2074`). Any resolution change silently
-breaks every anchor until focus is stored relative (0..1). That refactor is a prerequisite for
-touching waypoint resolution at all — and note there are **two** getters:
-`getWptIconScaledByName` is the one holding `focus = focus * scale` (`:2115`), not
-`getWptIconByName`.
-
-`focus` **is** written to `.qms` and to the DB `data` column (`gis/qms/serialization.cpp:406`),
-but it is **overwritten on every load** — the stream operator itself calls `deriveSecondaryData()`
-(`serialization.cpp:745`), which runs `updateIcon()` per point (`CGisItemRte.cpp:206`). The bytes
-are write-only, so a relative-focus change needs **no migration**. Both directions of this have
-been got wrong; see the Task 2 plan before concluding anything about it.
-
-### TODO — POI icons (SJJB) can be converted; the SVGs are already in the tree
-
-**POIs are not waypoints** (Oliver): no canvas-freeze applies, so this is a real win, parked only
-for size. Do not re-derive the following — it is measured.
-
-**The sources are shipped and nobody registered them.** 303 SVGs under `src/icons/poi/SJJB/svg/
-<category>/`; **249 of the 250** referenced PNGs have a counterpart; **0** are in `resources.qrc`,
-which is why "there are no SVGs for these" is the natural belief. Qt renders their geometry
-**exactly** — the shipped PNG and a 32px render of the SVG agree on opaque pixel count to within
-antialiasing.
-
-**Only the fill differs.** The SVGs are SJJB templates with a placeholder `#111111`; their build
-recolours per category. Swap the paths and you get a map of near-black icons. The colour is
-recoverable from the shipped PNGs (16 categories, 10 consistent, 6 with 2–3 variants — so per-icon
-extraction is safer than per-category). Recolouring means rewriting the fill and loading via
-`QSvgRenderer(QByteArray)` — the same mechanism phase 7a needs anyway.
-
-**The work:** register ~250 SVGs · a recolour step · change `CPoiIconCategory`'s `QPixmap baseIcon`
-and `QMap<QString, QPixmap> subCategories` to paths, plus ~302 literals in `CPoiFilePOI_TagMap.cpp`
-(scripted, but the path *shape* changes — `png/<cat>_<stem>.n.32.png` → `svg/<cat>/<stem>.svg` —
-so it needs a lookup table, not a regex) · a render cache keyed by (icon, size, dpr).
-
-**The cache is a speed win regardless of icons:** `CPoiFilePOI.cpp:204` currently `.scaled()`s a
-pixmap **per POI per repaint**.
-
-**Two defects found while scoping:** `CPoiFilePOI_TagMap.cpp:118` asks for
-`health_pharmacy_dispencing` — a typo; the SVG is `pharmacy_dispensing`. And one SVG embeds a
-raster that is not in the tree (`pastedpic_10102008_233747.png`), so it will not render.
-
-**Gate it or do not do it:** render each recoloured SVG at 32, diff against its shipped PNG, require
-`visible (>8) == 0` — the mechanised version of "appearance must not change", as `wptdiff.py` does
-for waypoints. **A diff that measures colour will report ~240 false failures** (the placeholder fill);
-that mistake has already been made once.
-
-### GIS item icons — serialization stores sym/colour, not the icon (so "must be raster" is wrong)
-
-Do not repeat the belief that GIS item icons must stay PNG because they are serialized. What the
-`.qms`/DB persist is the **symbol name** (waypoint `wpt.sym`, `serialization.cpp:86`) and the
-**colour** (track/area `trk.color`/`area.color`, `:614`/`:827`) — never a rendered icon. The icon
-is **re-derived on load**: waypoint via `getWptIconByName(sym)` (`CGisItemWpt.cpp:424`); track/area
-by loading `Track.png`/`Area.png` **as a shape mask** and filling it with the data colour
-(`CGisItemTrk::setIcon` / `CGisItemOvlArea::setIcon`, `createMaskFromColor(Qt::transparent)`).
-
-A rendered pixmap is stored only in two **output caches**, neither a source of truth: the DB
-`items.icon` BLOB (`getDisplayIcon().save(PNG)`, `CDBProject.cpp:283`, for quick DB-tree access) and
-`.qms` `history_event_t.icon` (undo/redo snapshots). A cache holds output — render an SVG to a
-pixmap and `save(PNG)` identically — so **serialization does not constrain the source format.**
-
-Consequence: only the **waypoint** symbol is a genuinely frozen raster (canvas-freeze reason, not
-serialization). **Tracks and areas can be SVG** — the PNG is used only as a silhouette mask, so an
-SVG rendered at the target size gives a crisp mask and the same data colour (and beats today's
-1-bit `createMaskFromColor` edges). Converting them belongs to **Task 2**, which now owns all
-GIS-item icons; the full mechanism is in `.notes/icons-task2-waypoint-resolution-plan.md` under
-"GIS item icons: what is actually serialized". The one real constraint: `QIcon` will not upscale a
-raster (`qtfacts` fact 2), so the fix renders the SVG at size — it does not wrap the old 32px PNG.
+So only the waypoint symbol is a genuinely frozen raster, and for the canvas-freeze reason above.
+**Tracks and areas can be SVG**: their PNG is used only as a silhouette mask
+(`createMaskFromColor`), so an SVG rendered at the target size gives a crisp mask and the same data
+colour. `QIcon` will not upscale a raster, so such a change must render the SVG at size rather than
+wrap the old 32px PNG.
 
 ### CMapItemDelegate — forward declaration pitfall
 

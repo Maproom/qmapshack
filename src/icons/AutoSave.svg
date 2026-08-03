@@ -2,70 +2,76 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="30.000002"
-   height="29.999962"
    id="svg2"
    version="1.1"
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:dc="http://purl.org/dc/elements/1.1/">
-  <style
-     id="current-color-scheme">.ink-mark{fill:#000080;color:#0000ff}.paper-mark{fill:#cccccc;color:#0000ff}.paper2-mark{fill:#ececec;color:#0000ff}.lead{color:#000000}</style>
   <defs
-     id="defs4" />
-  <metadata
-     id="metadata7">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
+     id="defs19" />
   <g
-     id="layer1"
-     transform="translate(-7e-7,-982.28662)">
+     transform="translate(0.0000,0.0000) scale(2.133333)"
+     id="g14">
+    <style id="current-color-scheme">.ink-mark{fill:#000080;color:#5555ff}.paper-mark{fill:#cccccc;color:#5555ff}.paper2-mark{fill:#ececec;color:#5555ff}.lead{color:#000000}</style>
+    <defs
+       id="defs4" />
+    <metadata
+       id="metadata7">
+      <rdf:RDF>
+        <cc:Work
+           rdf:about="">
+          <dc:format>image/svg+xml</dc:format>
+          <dc:type
+             rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        </cc:Work>
+      </rdf:RDF>
+    </metadata>
     <g
-       id="g3353"
-       transform="translate(-6.9642858,-12.421664)">
+       id="layer1"
+       transform="translate(-7e-7,-982.28662)">
       <g
-         id="g4549"
-         transform="translate(56.785717,-3.3928571)">
-        <path
-           id="rect3366-5"
-           style="stroke:currentColor;stroke-width:0;stroke-linecap:round;stroke-linejoin:round"
-           d="m -49.82143,998.10114 h 30 v 29.99996 h -30 z"
-           class="ink-mark" />
-        <path
-           id="rect4136-7"
-           style="stroke:currentColor;stroke-width:0;stroke-linecap:round;stroke-linejoin:round"
-           d="m -44.464287,1017.6011 h 19.5 v 10.5 h -19.5 z"
-           class="paper-mark" />
-        <path
-           id="rect4138-5"
-           style="stroke:currentColor;stroke-width:0;stroke-linecap:round;stroke-linejoin:round"
-           d="m -40.067711,1020.2748 h 3.853426 v 5.0856 h -3.853426 z"
-           class="ink-mark" />
-        <path
-           id="rect4145-7"
-           style="stroke:currentColor;stroke-width:0;stroke-linecap:round;stroke-linejoin:round"
-           d="m -45.793831,1000.1259 h 21.9448 v 14.0508 h -21.9448 z"
-           class="paper2-mark" />
-      </g>
-      <g
-         aria-label="A"
-         transform="scale(0.98285402,1.0174451)"
-         id="text4183"
-         style="font-size:6.31111px;line-height:0%;-inkscape-font-specification:Sans;letter-spacing:0px;word-spacing:0px;stroke-width:1px">
-        <path
-           d="m 22.864346,992.55695 -0.820445,-2.68223 h -4.102228 l -0.820446,2.68223 h -2.571781 l 3.976006,-11.31269 h 2.918893 l 3.991783,11.31269 z m -2.208891,-7.30513 q -0.07889,-0.26822 -0.205112,-0.67844 -0.126222,-0.41022 -0.252445,-0.83622 -0.126222,-0.426 -0.205111,-0.74156 -0.07889,0.31556 -0.220889,0.78889 -0.126223,0.45756 -0.252445,0.88356 -0.110445,0.41022 -0.173556,0.58377 l -0.804668,2.61912 H 21.4759 Z"
-           style="font-weight:bold;font-size:15.7778px;line-height:1.25;-inkscape-font-specification:'Sans Bold';fill:currentColor"
-           id="path20"
-           class="lead" />
+         id="g3353"
+         transform="translate(-6.9642858,-12.421664)">
+        <g
+           id="g4549"
+           transform="translate(56.785717,-3.3928571)">
+          <path
+             id="rect3366-5"
+             style="stroke:currentColor;stroke-width:0;stroke-linecap:round;stroke-linejoin:round"
+             d="m -49.82143,998.10114 h 30 v 29.99996 h -30 z"
+             class="ink-mark" />
+          <path
+             id="rect4136-7"
+             style="stroke:currentColor;stroke-width:0;stroke-linecap:round;stroke-linejoin:round"
+             d="m -44.464287,1017.6011 h 19.5 v 10.5 h -19.5 z"
+             class="paper-mark" />
+          <path
+             id="rect4138-5"
+             style="stroke:currentColor;stroke-width:0;stroke-linecap:round;stroke-linejoin:round"
+             d="m -40.067711,1020.2748 h 3.853426 v 5.0856 h -3.853426 z"
+             class="ink-mark" />
+          <path
+             id="rect4145-7"
+             style="stroke:currentColor;stroke-width:0;stroke-linecap:round;stroke-linejoin:round"
+             d="m -45.793831,1000.1259 h 21.9448 v 14.0508 h -21.9448 z"
+             class="paper2-mark" />
+        </g>
+        <g
+           aria-label="A"
+           transform="scale(0.98285402,1.0174451)"
+           id="text4183"
+           style="font-size:6.31111px;line-height:0%;-inkscape-font-specification:Sans;letter-spacing:0px;word-spacing:0px;stroke-width:1px">
+          <path
+             d="m 22.864346,992.55695 -0.820445,-2.68223 h -4.102228 l -0.820446,2.68223 h -2.571781 l 3.976006,-11.31269 h 2.918893 l 3.991783,11.31269 z m -2.208891,-7.30513 q -0.07889,-0.26822 -0.205112,-0.67844 -0.126222,-0.41022 -0.252445,-0.83622 -0.126222,-0.426 -0.205111,-0.74156 -0.07889,0.31556 -0.220889,0.78889 -0.126223,0.45756 -0.252445,0.88356 -0.110445,0.41022 -0.173556,0.58377 l -0.804668,2.61912 H 21.4759 Z"
+             style="font-weight:bold;font-size:15.7778px;line-height:1.25;-inkscape-font-specification:'Sans Bold';fill:currentColor"
+             id="path20"
+             class="lead" />
+        </g>
       </g>
     </g>
   </g>

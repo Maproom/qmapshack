@@ -2,42 +2,48 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="51.007133"
-   height="64.307686"
    id="svg3513"
    version="1.1"
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:dc="http://purl.org/dc/elements/1.1/">
-  <style
-     id="current-color-scheme">.ink-lead{fill:#000080;color:#000000}</style>
   <defs
-     id="defs3515" />
-  <metadata
-     id="metadata3518">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
+     id="defs13" />
   <g
-     id="layer1"
-     transform="translate(-6.6744168,0.07727638)">
-    <path
-       id="path4140"
-       style="opacity:1;fill:none;stroke:#ff0000;stroke-width:3.9349;stroke-linecap:round"
-       d="M 44.366884,17.523773 A 15.633598,15.633598 0 0 1 28.749794,33.157363 15.633598,15.633598 0 0 1 13.099722,17.556789 15.633598,15.633598 0 0 1 28.683762,1.8902533 15.633598,15.633598 0 0 1 44.366745,17.457742" />
-    <path
-       style="stroke:currentColor;stroke-width:1.41163px;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
-       d="m 7.3802102,22.702198 11.0374298,40.8224 h 27.569289 l 10.988826,-40.8224 z"
-       id="path3971-4"
-       class="ink-lead" />
+     transform="translate(6.6185,0.0000) scale(0.995215)"
+     id="g8">
+    <style id="current-color-scheme">.ink-lead{fill:#000080;color:#000000}</style>
+    <defs
+       id="defs3515" />
+    <metadata
+       id="metadata3518">
+      <rdf:RDF>
+        <cc:Work
+           rdf:about="">
+          <dc:format>image/svg+xml</dc:format>
+          <dc:type
+             rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+          <dc:title />
+        </cc:Work>
+      </rdf:RDF>
+    </metadata>
+    <g
+       id="layer1"
+       transform="translate(-6.6744168,0.07727638)">
+      <path
+         id="path4140"
+         style="opacity:1;fill:none;stroke:#ff5555;stroke-width:3.9349;stroke-linecap:round"
+         d="M 44.366884,17.523773 A 15.633598,15.633598 0 0 1 28.749794,33.157363 15.633598,15.633598 0 0 1 13.099722,17.556789 15.633598,15.633598 0 0 1 28.683762,1.8902533 15.633598,15.633598 0 0 1 44.366745,17.457742" />
+      <path
+         style="stroke:currentColor;stroke-width:2.5120;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+         d="m 7.3802102,22.702198 11.0374298,40.8224 h 27.569289 l 10.988826,-40.8224 z"
+         id="path3971-4"
+         class="ink-lead" />
+    </g>
   </g>
 </svg>

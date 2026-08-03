@@ -2,58 +2,58 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="43.684849"
-   height="43.230301"
    id="svg3513"
    version="1.1"
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:dc="http://purl.org/dc/elements/1.1/">
-  <style
-     id="current-color-scheme">.paper{color:#ffffff}.ink{color:#000080}.ink-lead{fill:#000080;color:#000000}</style>
+   xmlns:dc="http://purl.org/dc/elements/1.1/"><style id="current-color-scheme">.paper{color:#ffffff}.paper-ink{fill:#ffffff;color:#000080}.ink-lead{fill:#000080;color:#000000}</style>
   <defs
-     id="defs3515" />
-  <metadata
-     id="metadata3518">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
+     id="defs16" />
   <g
-     id="layer1"
-     transform="translate(-12.566664,-7.9303045)">
-    <path
-       id="rect3828-0-5"
-       style="fill:currentColor;fill-rule:evenodd;stroke:currentColor;stroke-width:5;stroke-linecap:round;stroke-linejoin:round"
-       d="m 15.066664,14.430304 h 24.230301 v 34.2303 H 15.066664 Z"
-       class="paper" />
-    <path
-       id="rect3828-0"
-       style="fill:#80b3ff;fill-rule:evenodd;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round"
-       d="m 15.430301,14.430304 h 24.230301 v 34.2303 H 15.430301 Z"
-       class="ink" />
-    <path
-       id="rect3860"
-       style="fill-rule:evenodd;stroke:currentColor;stroke-width:1.93218;stroke-linecap:round;stroke-linejoin:round"
-       d="m 21,40 h 14 v 4 H 21 Z"
-       class="ink-lead" />
-    <path
-       id="rect3828"
-       style="fill:#80b3ff;fill-rule:evenodd;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round"
-       d="M 30.521212,9.4303045 H 54.751513 V 43.660605 H 30.521212 Z"
-       class="ink" />
-    <path
-       style="fill-opacity:1;fill-rule:nonzero;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 35.835634,35 4.76171,3e-6 v 4.753904 h 4.07804 V 35 h 4.761706 v -4.093642 h -4.761706 l -3e-6,-4.753907 h -4.078037 l -4e-6,4.753912 -4.761706,-5e-6 z"
-       id="rect3117-7"
-       class="ink-lead" />
+     transform="translate(0.0000,0.3329) scale(1.465040)"
+     id="g11">
+    <defs
+       id="defs3515" />
+    <metadata
+       id="metadata3518">
+      <rdf:RDF>
+        <cc:Work
+           rdf:about="">
+          <dc:format>image/svg+xml</dc:format>
+          <dc:type
+             rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+          <dc:title />
+        </cc:Work>
+      </rdf:RDF>
+    </metadata>
+    <g
+       id="layer1"
+       transform="translate(-12.566664,-7.9303045)">
+      <path
+         id="rect3828-0-5"
+         style="fill:currentColor;fill-rule:evenodd;stroke:currentColor;stroke-width:5;stroke-linecap:round;stroke-linejoin:round"
+         d="m 15.066664,14.430304 h 24.230301 v 34.2303 H 15.066664 Z" class="paper"/>
+      <path
+         id="rect3828-0"
+         style="fill-rule:evenodd;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round"
+         d="m 15.430301,14.430304 h 24.230301 v 34.2303 H 15.430301 Z" class="paper-ink"/>
+      <path
+         id="rect3860"
+         style="fill-rule:evenodd;stroke:currentColor;stroke-width:1.93218;stroke-linecap:round;stroke-linejoin:round"
+         d="m 21,40 h 14 v 4 H 21 Z" class="ink-lead"/>
+      <path
+         id="rect3828"
+         style="fill-rule:evenodd;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round"
+         d="M 30.521212,9.4303045 H 54.751513 V 43.660605 H 30.521212 Z" class="paper-ink"/>
+      <path
+         style="fill-opacity:1;fill-rule:nonzero;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 35.835634,35 4.76171,3e-6 v 4.753904 h 4.07804 V 35 h 4.761706 v -4.093642 h -4.761706 l -3e-6,-4.753907 h -4.078037 l -4e-6,4.753912 -4.761706,-5e-6 z"
+         id="rect3117-7" class="ink-lead"/>
+    </g>
   </g>
 </svg>

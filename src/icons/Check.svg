@@ -2,38 +2,44 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="34.999504"
-   height="34.999516"
    id="svg3354"
    version="1.1"
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:dc="http://purl.org/dc/elements/1.1/">
-  <style
-     id="current-color-scheme">.ink-lead{fill:#000080;color:#000000}</style>
   <defs
-     id="defs3356" />
-  <metadata
-     id="metadata3359">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
+     id="defs12" />
   <g
-     id="layer1"
-     transform="translate(-20.31836,-22.50044)">
-    <path
-       style="stroke:currentColor;stroke-width:1.233px;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
-       d="m 20.934682,34.372155 13.5068,11.255697 20.2602,-22.511364 -20.2602,33.767024 z"
-       id="path3828"
-       class="ink-lead" />
+     transform="translate(-0.0000,0.0000) scale(1.828598)"
+     id="g7">
+    <style id="current-color-scheme">.ink-lead{fill:#000080;color:#000000}</style>
+    <defs
+       id="defs3356" />
+    <metadata
+       id="metadata3359">
+      <rdf:RDF>
+        <cc:Work
+           rdf:about="">
+          <dc:format>image/svg+xml</dc:format>
+          <dc:type
+             rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+          <dc:title />
+        </cc:Work>
+      </rdf:RDF>
+    </metadata>
+    <g
+       id="layer1"
+       transform="translate(-20.31836,-22.50044)">
+      <path
+         style="stroke:currentColor;stroke-width:1.3672;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+         d="m 20.934682,34.372155 13.5068,11.255697 20.2602,-22.511364 -20.2602,33.767024 z"
+         id="path3828"
+         class="ink-lead" />
+    </g>
   </g>
 </svg>

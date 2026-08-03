@@ -2,48 +2,54 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="56"
-   height="51"
    id="svg3369"
    version="1.1"
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:dc="http://purl.org/dc/elements/1.1/">
-  <style
-     id="current-color-scheme">.ink{color:#000080}.ink-lead{fill:#000080;color:#000000}</style>
   <defs
-     id="defs3371" />
-  <metadata
-     id="metadata3374">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
+     id="defs14" />
   <g
-     id="layer1"
-     transform="translate(-4.5,-8.5)">
+     transform="translate(0.0000,2.8571) scale(1.142857)"
+     id="g9">
+    <style id="current-color-scheme">.ink{color:#000080}.ink-lead{fill:#000080;color:#000000}</style>
+    <defs
+       id="defs3371" />
+    <metadata
+       id="metadata3374">
+      <rdf:RDF>
+        <cc:Work
+           rdf:about="">
+          <dc:format>image/svg+xml</dc:format>
+          <dc:type
+             rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+          <dc:title />
+        </cc:Work>
+      </rdf:RDF>
+    </metadata>
     <g
-       id="g4159"
-       style="fill:currentColor"
-       class="ink">
-      <path
-         id="path4155"
-         d="M 5,9 H 60 V 19 L 40,39"
-         style="fill-rule:evenodd;stroke:currentColor;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         class="ink-lead" />
-      <path
-         id="path4157"
-         d="M 40,39 V 59 H 25 V 39 L 5,19 V 9"
-         style="fill-rule:evenodd;stroke:currentColor;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         class="ink-lead" />
+       id="layer1"
+       transform="translate(-4.5,-8.5)">
+      <g
+         id="g4159"
+         style="fill:currentColor"
+         class="ink">
+        <path
+           id="path4155"
+           d="M 5,9 H 60 V 19 L 40,39"
+           style="fill-rule:evenodd;stroke:currentColor;stroke-width:2.1875;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           class="ink-lead" />
+        <path
+           id="path4157"
+           d="M 40,39 V 59 H 25 V 39 L 5,19 V 9"
+           style="fill-rule:evenodd;stroke:currentColor;stroke-width:2.1875;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           class="ink-lead" />
+      </g>
     </g>
   </g>
 </svg>

@@ -454,12 +454,27 @@ QAction* CGisListWks::addSortAction(const char* id, QObject* parent, QActionGrou
   QAction* action = new QAction(QIcon(icon), text, parent);
   action->setObjectName(QString::fromLatin1(id));
   action->setCheckable(true);
+  QWidget::addAction(action);
 
   connect(action, &QAction::toggled, this, [this, mode](bool checked) { slotSetSortMode(mode, checked); });
 
   actionGroup->addAction(action);
 
   return action;
+}
+
+QList<QAction*> CGisListWks::shortcutActions() const {
+  return {actionEditPrj,       actionCopyPrj,       actionShowOnMap,     actionHideFrMap,    actionSortByTime,
+          actionSortByName,    actionSortByRating,  actionFilterProject, actionAutoSave,     actionUserFocusPrj,
+          actionAutoSyncToDev, actionSave,          actionSaveAs,        actionSaveAsStrict, actionSyncWksDev,
+          actionSyncDB,        actionCloseProj,     actionSyncDevWks,    actionDelProj,      actionEditDetails,
+          actionTagItem,       actionCopyItem,      actionDelete,        actionFocusTrk,     actionRangeTrk,
+          actionEditTrk,       actionReverseTrk,    actionCombineTrk,    actionEleWptTrk,    actionCopyTrkWithWpt,
+          actionToRoute,       actionToArea,        actionNogoTrk,       actionBubbleWpt,    actionMoveWpt,
+          actionProjWpt,       actionEditRadiusWpt, actionDelRadiusWpt,  actionNogoWpt,      actionCopyCoordWpt,
+          actionFocusRte,      actionCalcRte,       actionResetRte,      actionEditRte,      actionReverseRte,
+          actionRte2Trk,       actionNogoRte,       actionEditArea,      actionNogoArea,     actionRteFromWpt,
+          actionEditPrxWpt,    actionChangeIconWpt};
 }
 
 void CGisListWks::dragMoveEvent(QDragMoveEvent* e) {

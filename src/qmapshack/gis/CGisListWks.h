@@ -69,6 +69,9 @@ class CGisListWks : public QTreeWidget {
   /** @return true once slotLoadWorkspace() has run, whether it restored a project or not */
   bool isWorkspaceLoaded() const { return workspaceLoaded; }
 
+  /// all context-menu actions of this widget, for keyboard shortcut configuration
+  QList<QAction*> shortcutActions() const;
+
  public slots:
   void slotLoadWorkspace();
   void slotCopyProject();
@@ -159,6 +162,9 @@ class CGisListWks : public QTreeWidget {
   QAction* addAction(const char* id, const QIcon& icon, const QString& name, QObject* parent, Func slot) {
     QAction* action = new QAction(icon, name, parent);
     action->setObjectName(QString::fromLatin1(id));
+    // register with the widget so a user-assigned shortcut can actually trigger it,
+    // independent of the transient context menu the action is also shown in
+    QWidget::addAction(action);
     connect(action, &QAction::triggered, this, slot);
     return action;
   }

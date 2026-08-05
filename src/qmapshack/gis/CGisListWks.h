@@ -59,6 +59,9 @@ class CGisListWks : public QTreeWidget {
 
   bool hasDeviceSupport() const { return deviceWatcher != nullptr; }
 
+  /// all context-menu actions of this widget, for keyboard shortcut configuration
+  QList<QAction*> shortcutActions() const;
+
  public slots:
   void slotLoadWorkspace();
   void slotCopyProject();
@@ -140,12 +143,16 @@ class CGisListWks : public QTreeWidget {
   void migrateDB3to4();
   void migrateDB4to5();
   void setVisibilityOnMap(bool visible);
-  QAction* addSortAction(QObject* parent, QActionGroup* actionGroup, const QString& icon, const QString& text,
-                         IGisProject::sorting_folder_e mode);
+  QAction* addSortAction(const QString& objName, QObject* parent, QActionGroup* actionGroup, const QString& icon,
+                         const QString& text, IGisProject::sorting_folder_e mode);
 
   template <typename Func>
-  QAction* addAction(const QIcon& icon, const QString& name, QObject* parent, Func slot) {
+  QAction* addAction(const QString& objName, const QIcon& icon, const QString& name, QObject* parent, Func slot) {
     QAction* action = new QAction(icon, name, parent);
+    action->setObjectName(objName);
+    // register with the widget so a user-assigned shortcut can actually trigger it,
+    // independent of the transient context menu the action is also shown in
+    QWidget::addAction(action);
     connect(action, &QAction::triggered, this, slot);
     return action;
   }

@@ -510,7 +510,9 @@ CMainWindow::CMainWindow() : id(QRandomGenerator::global()->generate()) {
   toolBarConfig = new CToolBarConfig(this, toolBar, availableActions, defaultActions);
   toolBarConfig->loadSettings();
 
-  shortcutConfig = new CShortcutConfig(this, availableActions);
+  QList<QAction*> shortcutableActions = availableActions;
+  shortcutableActions << widgetGisWorkspace->getWksList().shortcutActions();
+  shortcutConfig = new CShortcutConfig(this, shortcutableActions);
   shortcutConfig->loadSettings();
 
   geoSearchConfig = new CGeoSearchConfig(this);

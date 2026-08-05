@@ -110,10 +110,6 @@ CGisListWks::CGisListWks(QWidget* parent) : QTreeWidget(parent) {
   configDB();
 
   // workspace project related actions
-  actionEditPrj =
-      addAction("actionEditPrj", QIcon("://icons/EditDetails.svgt"), tr("Edit.."), this, &CGisListWks::slotEditPrj);
-  actionCopyPrj =
-      addAction("actionCopyPrj", QIcon("://icons/Copy.svgt"), tr("Copy to..."), this, &CGisListWks::slotCopyProject);
   actionShowOnMap = addAction("actionShowOnMap", QIcon("://icons/ShowAll.svgt"), tr("Show on Map"), this,
                               &CGisListWks::slotShowOnMap);
   actionHideFrMap = addAction("actionHideFrMap", QIcon("://icons/ShowNone.svgt"), tr("Hide from Map"), this,
@@ -154,18 +150,19 @@ CGisListWks::CGisListWks(QWidget* parent) : QTreeWidget(parent) {
   // device project related actions
   actionSyncDevWks = addAction("actionSyncDevWks", QIcon("://icons/Device.svgt"), tr("Update Project on Device"), this,
                                &CGisListWks::slotSyncDevWks);
-  actionDelProj =
-      addAction("actionDelProj", QIcon("://icons/DeleteOne.svgt"), tr("Delete"), this, &CGisListWks::slotDeleteProject);
 
   // common to all items actions
   actionEditDetails = addAction("actionEditDetails", QIcon("://icons/EditDetails.svgt"), tr("Edit..."), this,
                                 &CGisListWks::slotEditItem);
+  connect(actionEditDetails, &QAction::triggered, this, &CGisListWks::slotEditPrj);
   actionTagItem =
       addAction("actionTagItem", QIcon("://icons/Tag.svgt"), tr("Set Tags"), this, &CGisListWks::slotTagItem);
   actionCopyItem =
       addAction("actionCopyItem", QIcon("://icons/Copy.svgt"), tr("Copy to..."), this, &CGisListWks::slotCopyItem);
+  connect(actionCopyItem, &QAction::triggered, this, &CGisListWks::slotCopyProject);
   actionDelete =
       addAction("actionDelete", QIcon("://icons/DeleteOne.svgt"), tr("Delete"), this, &CGisListWks::slotDeleteItem);
+  connect(actionDelete, &QAction::triggered, this, &CGisListWks::slotDeleteProject);
 
   // track related actions
   actionFocusTrk = addAction("actionFocusTrk", QIcon("://icons/TrkProfile.svgt"), tr("Track Information"), this,
@@ -203,9 +200,6 @@ CGisListWks::CGisListWks(QWidget* parent) : QTreeWidget(parent) {
                                   &CGisListWks::slotEditRadiusWpt);
   actionDelRadiusWpt = addAction("actionDelRadiusWpt", QIcon("://icons/WptDelProx.svgt"), tr("Delete Radius"), this,
                                  &CGisListWks::slotDelRadiusWpt);
-  actionNogoWpt =
-      addAction("actionNogoWpt", QIcon("://icons/NoGo.svgt"), tr("Toggle Nogo-Area"), this, &CGisListWks::slotNogoItem);
-  actionNogoWpt->setCheckable(true);
   actionCopyCoordWpt = addAction("actionCopyCoordWpt", QIcon("://icons/CopyCoord.svgt"), tr("Copy position"), this,
                                  &CGisListWks::slotCopyCoordWpt);
 
@@ -223,9 +217,6 @@ CGisListWks::CGisListWks(QWidget* parent) : QTreeWidget(parent) {
                                &CGisListWks::slotReverseRte);
   actionRte2Trk =
       addAction("actionRte2Trk", QIcon("://icons/Track.svgt"), tr("Convert to Track"), this, &CGisListWks::slotRte2Trk);
-  actionNogoRte =
-      addAction("actionNogoRte", QIcon("://icons/NoGo.svgt"), tr("Toggle Nogo-Line"), this, &CGisListWks::slotNogoItem);
-  actionNogoRte->setCheckable(true);
 
   // area related actions
   actionEditArea = addAction("actionEditArea", QIcon("://icons/AreaMove.svgt"), tr("Edit Area Points"), this,
@@ -457,16 +448,15 @@ QAction* CGisListWks::addSortAction(const QString& objName, QObject* parent, QAc
 }
 
 QList<QAction*> CGisListWks::shortcutActions() const {
-  return {actionEditPrj,       actionCopyPrj,       actionShowOnMap,     actionHideFrMap,    actionSortByTime,
-          actionSortByName,    actionSortByRating,  actionFilterProject, actionAutoSave,     actionUserFocusPrj,
-          actionAutoSyncToDev, actionSave,          actionSaveAs,        actionSaveAsStrict, actionSyncWksDev,
-          actionSyncDB,        actionCloseProj,     actionSyncDevWks,    actionDelProj,      actionEditDetails,
-          actionTagItem,       actionCopyItem,      actionDelete,        actionFocusTrk,     actionRangeTrk,
-          actionEditTrk,       actionReverseTrk,    actionCombineTrk,    actionEleWptTrk,    actionCopyTrkWithWpt,
-          actionToRoute,       actionToArea,        actionNogoTrk,       actionBubbleWpt,    actionMoveWpt,
-          actionProjWpt,       actionEditRadiusWpt, actionDelRadiusWpt,  actionNogoWpt,      actionCopyCoordWpt,
-          actionFocusRte,      actionCalcRte,       actionResetRte,      actionEditRte,      actionReverseRte,
-          actionRte2Trk,       actionNogoRte,       actionEditArea,      actionNogoArea,     actionRteFromWpt,
+  return {actionShowOnMap,     actionHideFrMap,      actionSortByTime,   actionSortByName,    actionSortByRating,
+          actionFilterProject, actionAutoSave,       actionUserFocusPrj, actionAutoSyncToDev, actionSave,
+          actionSaveAs,        actionSaveAsStrict,   actionSyncWksDev,   actionSyncDB,        actionCloseProj,
+          actionSyncDevWks,    actionEditDetails,    actionTagItem,      actionCopyItem,      actionDelete,
+          actionFocusTrk,      actionRangeTrk,       actionEditTrk,      actionReverseTrk,    actionCombineTrk,
+          actionEleWptTrk,     actionCopyTrkWithWpt, actionToRoute,      actionToArea,        actionNogoTrk,
+          actionBubbleWpt,     actionMoveWpt,        actionProjWpt,      actionEditRadiusWpt, actionDelRadiusWpt,
+          actionCopyCoordWpt,  actionFocusRte,       actionCalcRte,      actionResetRte,      actionEditRte,
+          actionReverseRte,    actionRte2Trk,        actionEditArea,     actionNogoArea,      actionRteFromWpt,
           actionEditPrxWpt,    actionChangeIconWpt};
 }
 
@@ -989,8 +979,8 @@ void CGisListWks::slotLoadWorkspace() {
 
 void CGisListWks::showMenuProjectWks(const QPoint& p) {
   QMenu menu(this);
-  menu.addAction(actionEditPrj);
-  menu.addAction(actionCopyPrj);
+  menu.addAction(actionEditDetails);
+  menu.addAction(actionCopyItem);
   menu.addAction(actionShowOnMap);
   menu.addAction(actionHideFrMap);
   menu.addSeparator();
@@ -1016,14 +1006,14 @@ void CGisListWks::showMenuProjectWks(const QPoint& p) {
 
 void CGisListWks::showMenuProjectDev(const QPoint& p) {
   QMenu menu(this);
-  menu.addAction(actionEditPrj);
-  menu.addAction(actionCopyPrj);
+  menu.addAction(actionEditDetails);
+  menu.addAction(actionCopyItem);
   menu.addAction(actionShowOnMap);
   menu.addAction(actionHideFrMap);
   menu.addSeparator();
   menu.addAction(actionSyncDevWks);
   menu.addSeparator();
-  menu.addAction(actionDelProj);
+  menu.addAction(actionDelete);
   menu.exec(p);
 }
 
@@ -1075,7 +1065,7 @@ void CGisListWks::showMenuItemWpt(const QPoint& p, CGisItemWpt* wpt) {
   menu.addSeparator();
   menu.addAction(actionEditRadiusWpt);
   menu.addAction(actionDelRadiusWpt);
-  menu.addAction(actionNogoWpt);
+  menu.addAction(actionNogoArea);
   menu.addSeparator();
   menu.addMenu(CGeoSearchWeb::self().getMenu(wpt->getPosition(), &menu));
   menu.addAction(actionCopyCoordWpt);
@@ -1098,7 +1088,7 @@ void CGisListWks::showMenuItemRte(const QPoint& p) {
   menu.addAction(actionEditRte);
   menu.addAction(actionReverseRte);
   menu.addAction(actionRte2Trk);
-  menu.addAction(actionNogoRte);
+  menu.addAction(actionNogoTrk);
   menu.addSeparator();
   menu.addAction(actionDelete);
   menu.exec(p);
@@ -1327,8 +1317,8 @@ void CGisListWks::slotContextMenu(const QPoint& point) {
           actionEditRadiusWpt->setEnabled(isProjectVisible);
           bool radius = wpt->hasRadius();
           actionDelRadiusWpt->setEnabled(isProjectVisible && radius);
-          actionNogoWpt->setEnabled(isProjectVisible && radius);
-          actionNogoWpt->setChecked(radius && wpt->isNogo());
+          actionNogoArea->setEnabled(isProjectVisible && radius);
+          actionNogoArea->setChecked(radius && wpt->isNogo());
           actionMoveWpt->setEnabled(isProjectVisible && !isOnDevice);
           actionProjWpt->setDisabled(isOnDevice);
           showMenuItemWpt(p, wpt);
@@ -1345,8 +1335,8 @@ void CGisListWks::slotContextMenu(const QPoint& point) {
           actionFocusRte->setEnabled(isProjectVisible && rte->isCalculated());
           actionCalcRte->setEnabled(isProjectVisible);
           actionEditRte->setEnabled(isProjectVisible);
-          actionNogoRte->setEnabled(isProjectVisible);
-          actionNogoRte->setChecked(gisItem->isNogo());
+          actionNogoTrk->setEnabled(isProjectVisible);
+          actionNogoTrk->setChecked(gisItem->isNogo());
           actionResetRte->setEnabled(isProjectVisible);
           showMenuItemRte(p);
           break;

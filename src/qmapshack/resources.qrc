@@ -1677,6 +1677,7 @@
         <file alias="icons/SetEle.svgt">../icons/SetEle.svg</file>
         <file alias="icons/SetupCoordFormat.svgt">../icons/SetupCoordFormat.svg</file>
         <file alias="icons/SetupMapWorkspace.svgt">../icons/SetupMapWorkspace.svg</file>
+        <file alias="icons/SetupShortcuts.svgt">../icons/SetupShortcuts.svg</file>
         <file alias="icons/SetupSummary.svgt">../icons/SetupSummary.svg</file>
         <file alias="icons/SetupWptSym.svgt">../icons/SetupWptSym.svg</file>
         <file alias="icons/ShowAll.svgt">../icons/ShowAll.svg</file>

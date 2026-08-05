@@ -115,6 +115,7 @@
     <addaction name="actionToggleDocks"/>
     <addaction name="separator"/>
     <addaction name="actionSetupToolbar"/>
+    <addaction name="actionSetupShortcuts"/>
    </widget>
    <widget class="QMenu" name="menu">
     <property name="title">
@@ -840,6 +841,18 @@
    </property>
    <property name="text">
     <string>Setup Toolbar</string>
+   </property>
+  </action>
+  <action name="actionSetupShortcuts">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/SetupShortcuts.svgt</normaloff>:/icons/SetupShortcuts.svgt</iconset>
+   </property>
+   <property name="text">
+    <string>Setup Keyboard Shortcuts</string>
+   </property>
+   <property name="toolTip">
+    <string>Assign keyboard shortcuts to actions</string>
    </property>
   </action>
   <action name="actionToggleDocks">

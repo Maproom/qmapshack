@@ -193,6 +193,8 @@ set( SRCS
     helpers/CRowBuilder.cpp
     helpers/CSelectCopyAction.cpp
     helpers/CSelectProjectDialog.cpp
+    helpers/CShortcutConfig.cpp
+    helpers/CShortcutSetupDialog.cpp
     helpers/CThread.cpp
     helpers/CTimeDialog.cpp
     helpers/CToolBarConfig.cpp
@@ -573,6 +575,8 @@ set( HDRS
     helpers/CSelectCopyAction.h
     helpers/CSelectProjectDialog.h
     helpers/CSettings.h
+    helpers/CShortcutConfig.h
+    helpers/CShortcutSetupDialog.h
     helpers/CThread.h
     helpers/CTryMutexLocker.h
     helpers/CTimeDialog.h
@@ -867,6 +871,7 @@ set( UIS
     helpers/IProgressDialog.ui
     helpers/ISelectCopyAction.ui
     helpers/ISelectProjectDialog.ui
+    helpers/IShortcutSetupDialog.ui
     helpers/ITimeDialog.ui
     helpers/IToolBarSetupDialog.ui
     helpers/IVrtAdvisoryDialog.ui

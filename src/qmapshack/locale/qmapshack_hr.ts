@@ -8320,6 +8320,19 @@ Canceled by user&apos;s request.
     </message>
 </context>
 <context>
+    <name>CShortcutSetupDialog</name>
+    <message>
+        <location filename="../helpers/CShortcutSetupDialog.cpp" line="97"/>
+        <source>Shortcut already in use</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/CShortcutSetupDialog.cpp" line="98"/>
+        <source>The shortcut &apos;%1&apos; is already assigned to &apos;%2&apos;. Do you want to reassign it to &apos;%3&apos;?</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CSlfProject</name>
     <message>
         <location filename="../gis/slf/CSlfProject.cpp" line="37"/>
@@ -15650,6 +15663,16 @@ Naziv datoteke: %1</translation>
         <translation>Spremi(Ispiši) Kartu</translation>
     </message>
     <message>
+        <location filename="../IMainWindow.ui" line="848"/>
+        <source>Setup Keyboard Shortcuts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../IMainWindow.ui" line="851"/>
+        <source>Assign keyboard shortcuts to actions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../IMainWindow.ui" line="869"/>
         <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="750"/>
         <source>Fullscreen</source>
@@ -19995,6 +20018,39 @@ Ako unesete &apos;riječ&apos;, pretraga se vrši s točnim podudaranjem. Ako un
         <location filename="../gis/ISetupWorkspace.ui" line="628"/>
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="614"/>
         <source>Font Size Status Folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>IShortcutSetupDialog</name>
+    <message>
+        <location filename="../helpers/IShortcutSetupDialog.ui" line="14"/>
+        <source>Setup Keyboard Shortcuts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/IShortcutSetupDialog.ui" line="20"/>
+        <source>Filter actions...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/IShortcutSetupDialog.ui" line="40"/>
+        <source>Action</source>
+        <translation type="unfinished">Akcija</translation>
+    </message>
+    <message>
+        <location filename="../helpers/IShortcutSetupDialog.ui" line="45"/>
+        <source>Shortcut</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/IShortcutSetupDialog.ui" line="55"/>
+        <source>Shortcut:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/IShortcutSetupDialog.ui" line="65"/>
+        <source>Reset to Default</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

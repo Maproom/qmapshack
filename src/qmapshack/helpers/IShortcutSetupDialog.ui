@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>IShortcutSetupDialog</class>
+ <widget class="QDialog" name="IShortcutSetupDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>620</width>
+    <height>560</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Setup Keyboard Shortcuts</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLineEdit" name="lineFilter">
+     <property name="placeholderText">
+      <string>Filter actions...</string>
+     </property>
+     <property name="clearButtonEnabled">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QTreeWidget" name="treeActions">
+     <property name="rootIsDecorated">
+      <bool>false</bool>
+     </property>
+     <property name="uniformRowHeights">
+      <bool>true</bool>
+     </property>
+     <property name="allColumnsShowFocus">
+      <bool>true</bool>
+     </property>
+     <column>
+      <property name="text">
+       <string>Action</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Shortcut</string>
+      </property>
+     </column>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLabel" name="labelShortcut">
+       <property name="text">
+        <string>Shortcut:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QKeySequenceEdit" name="keySequenceEdit"/>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushDefault">
+       <property name="text">
+        <string>Reset to Default</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok|QDialogButtonBox::RestoreDefaults</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>IShortcutSetupDialog</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>309</x>
+     <y>537</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>309</x>
+     <y>279</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>IShortcutSetupDialog</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>309</x>
+     <y>537</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>309</x>
+     <y>279</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

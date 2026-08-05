@@ -37,6 +37,11 @@
      </property>
      <column>
       <property name="text">
+       <string>Category</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
        <string>Action</string>
       </property>
      </column>

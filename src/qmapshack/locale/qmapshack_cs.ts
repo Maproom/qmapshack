@@ -2892,9 +2892,8 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation>Uložit</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="117"/>
         <source>Edit..</source>
-        <translation>Upravit...</translation>
+        <translation type="vanished">Upravit...</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="155"/>
@@ -2999,8 +2998,38 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1061"/>
-        <location filename="../gis/CGisListWks.cpp" line="1150"/>
+        <location filename="../gis/CGisListWks.cpp" line="241"/>
+        <source>Workspace: Project</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListWks.cpp" line="245"/>
+        <source>Workspace: Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListWks.cpp" line="246"/>
+        <source>Workspace: Track</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListWks.cpp" line="249"/>
+        <source>Workspace: Waypoint</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListWks.cpp" line="252"/>
+        <source>Workspace: Route</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListWks.cpp" line="254"/>
+        <source>Workspace: Area</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListWks.cpp" line="1004"/>
+        <location filename="../gis/CGisListWks.cpp" line="1092"/>
         <source>Set Track Color</source>
         <translation>Nastavit barvu stopy</translation>
     </message>
@@ -8551,6 +8580,12 @@ Canceled by user&apos;s request.
 </context>
 <context>
     <name>CShortcutSetupDialog</name>
+    <message>
+        <location filename="../helpers/CShortcutSetupDialog.cpp" line="134"/>
+        <location filename="../helpers/CShortcutSetupDialog.cpp" line="137"/>
+        <source>%1 (%2)</source>
+        <translation type="unfinished"></translation>
+    </message>
     <message>
         <location filename="../helpers/CShortcutSetupDialog.cpp" line="126"/>
         <source>Shortcut already in use</source>
@@ -20820,6 +20855,11 @@ Pokud zadáte &apos;slovo&apos;, provede se hledání přesné shody. Pokud zad�
         <location filename="../helpers/IShortcutSetupDialog.ui" line="20"/>
         <location filename="../../../build/src/qmapshack/ui_IShortcutSetupDialog.h" line="98"/>
         <source>Filter actions...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/IShortcutSetupDialog.ui" line="40"/>
+        <source>Category</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

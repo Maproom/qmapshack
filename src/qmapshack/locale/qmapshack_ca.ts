@@ -2909,9 +2909,8 @@ Podeu modificar els dos paràmetres per personalitzar el comportament del filtre
 <context>
     <name>CGisListWks</name>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="117"/>
         <source>Edit..</source>
-        <translation>Edita...</translation>
+        <translation type="vanished">Edita...</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="120"/>
@@ -3170,6 +3169,37 @@ Podeu modificar els dos paràmetres per personalitzar el comportament del filtre
         <translation>Canvia la Icona...</translation>
     </message>
     <message>
+        <location filename="../gis/CGisListWks.cpp" line="241"/>
+        <source>Workspace: Project</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListWks.cpp" line="245"/>
+        <source>Workspace: Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListWks.cpp" line="246"/>
+        <source>Workspace: Track</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListWks.cpp" line="249"/>
+        <source>Workspace: Waypoint</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListWks.cpp" line="252"/>
+        <source>Workspace: Route</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListWks.cpp" line="254"/>
+        <source>Workspace: Area</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListWks.cpp" line="775"/>
         <source>Saving workspace. Please wait.</source>
         <translation type="vanished">S&apos;està desant l&apos;espai de treball. Espera.</translation>
     </message>
@@ -8587,6 +8617,12 @@ Cancel·lat a petició de l&apos;usuari.
 </context>
 <context>
     <name>CShortcutSetupDialog</name>
+    <message>
+        <location filename="../helpers/CShortcutSetupDialog.cpp" line="134"/>
+        <location filename="../helpers/CShortcutSetupDialog.cpp" line="137"/>
+        <source>%1 (%2)</source>
+        <translation type="unfinished"></translation>
+    </message>
     <message>
         <location filename="../helpers/CShortcutSetupDialog.cpp" line="126"/>
         <source>Shortcut already in use</source>
@@ -20930,6 +20966,11 @@ Si introduïu &apos;word&apos; es fa una cerca de la paraula exacte. Si introdu�
         <location filename="../../../build/src/qmapshack/ui_IShortcutSetupDialog.h" line="98"/>
         <source>Filter actions...</source>
         <translation>Filtrar accions...</translation>
+    </message>
+    <message>
+        <location filename="../helpers/IShortcutSetupDialog.ui" line="40"/>
+        <source>Category</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../helpers/IShortcutSetupDialog.ui" line="40"/>

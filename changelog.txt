@@ -21,6 +21,7 @@ V1.XX.X
 [QMS-1164] Support light and dark color schemes for UI icons
 [QMS-1165] Unify UI icon style and improve dark mode legibility
 [QMS-1166] Allow configuring custom keyboard shortcuts
+[QMS-1173] Fix: QMS on macOS is not dark mode aware
 
 V1.20.3
 [QMS-1059] Fix: F1 help browser does not open external links

@@ -70,25 +70,6 @@ void CAppSetupMac::initQMapShack() {
   prepareTranslator(translationPath, "qtbase_");
   prepareTranslator(translationPath, "qmapshack_");
 
-  // load and apply style sheet
-  const QString& fileName = QDir(getApplicationDir("Resources")).absoluteFilePath("qms-style.qss");
-  QFile styleFile(fileName);
-  if (styleFile.exists()) {
-    qDebug() << "Stylesheet" << fileName;
-    // override default application font
-    const QFont& font = qApp->font();
-    openFileCheckSuccess(QFile::ReadOnly, styleFile);
-    const QString& style = QLatin1String(styleFile.readAll())
-          % "* {"
-          % "font-family: \"" % font.family() % "\";"
-          % "font-size: " % QString::number(font.pointSizeF(), 'f', 3) % "pt;"
-          % "}";
-    qApp->setStyleSheet(style);
-    styleFile.close();
-  } else {
-    qDebug() << "Stylesheet" << fileName << "not found";
-  }
-
   // create directories
   IAppSetup::path(defaultCachePath(), 0, true, "CACHE");
   IAppSetup::path(userDataPath(), 0, true, "USER DATA");

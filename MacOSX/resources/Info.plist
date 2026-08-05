@@ -36,6 +36,6 @@
 			<string>$PATH:PACKAGES_PATH/bin</string>
 		</dict>
 		<key>NSRequiresAquaSystemAppearance</key>
-		<string>true</string>
+		<string>false</string>
 	</dict>
 </plist>

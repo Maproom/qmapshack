@@ -346,6 +346,17 @@ CMainWindow::CMainWindow() : id(QRandomGenerator::global()->generate()) {
     connect(dock, &QDockWidget::topLevelChanged, this, &CMainWindow::slotDockFloating);
   }
 
+#if defined(Q_OS_MAC)
+  if (QString::compare(qApp->style()->name(), "macOS", Qt::CaseInsensitive) == 0) {
+    // we must get rid of style sheet file due to dark mode awareness:
+    // adjust toolbar height and icon size of default style "macOS"
+    // to toolbar height and icon size of style "Fusion" instead
+    toolBar->setFixedHeight(38);
+    toolBar->setIconSize(QSize(24, 24));
+    toolBar->setStyleSheet("QToolBar { spacing: 2px; }");
+  } 
+#endif // defined(Q_OS_MAC)
+
   QAction* actionToggleToolBar = toolBar->toggleViewAction();
   actionToggleToolBar->setObjectName("actionToggleToolBar");
   actionToggleToolBar->setIcon(QIcon(":/icons/ToolBar.svgt"));

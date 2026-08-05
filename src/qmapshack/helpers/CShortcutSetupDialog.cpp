@@ -19,6 +19,7 @@
 
 #include <QAction>
 #include <QHeaderView>
+#include <QMenu>
 #include <QMessageBox>
 #include <QSignalBlocker>
 
@@ -37,11 +38,15 @@ CShortcutSetupDialog::CShortcutSetupDialog(QWidget* const& parent, CShortcutConf
     QTreeWidgetItem* item = new QTreeWidgetItem(treeActions);
     item->setIcon(eColumnAction, action->icon());
     item->setText(eColumnAction, action->iconText());
+    item->setText(eColumnCategory, actionCategory(action));
     item->setToolTip(eColumnAction, action->toolTip());
     item->setData(eColumnAction, Qt::UserRole, QVariant::fromValue(action));
     setItemShortcut(item, action->shortcut());
   }
   treeActions->sortItems(eColumnAction, Qt::AscendingOrder);
+  treeActions->sortItems(eColumnCategory, Qt::AscendingOrder);
+  treeActions->setSortingEnabled(true);
+  treeActions->header()->setSectionResizeMode(eColumnCategory, QHeaderView::ResizeToContents);
   treeActions->header()->setSectionResizeMode(eColumnAction, QHeaderView::Stretch);
   treeActions->header()->setSectionResizeMode(eColumnShortcut, QHeaderView::ResizeToContents);
   treeActions->header()->setStretchLastSection(false);
@@ -90,6 +95,7 @@ void CShortcutSetupDialog::slotFilterChanged(const QString& text) {
   for (qint32 i = 0; i < treeActions->topLevelItemCount(); i++) {
     QTreeWidgetItem* item = treeActions->topLevelItem(i);
     const bool match = item->text(eColumnAction).contains(text, Qt::CaseInsensitive) ||
+                       item->text(eColumnCategory).contains(text, Qt::CaseInsensitive) ||
                        item->text(eColumnShortcut).contains(text, Qt::CaseInsensitive);
     item->setHidden(!match);
   }
@@ -122,10 +128,17 @@ void CShortcutSetupDialog::slotApplyEditor() {
 
   QTreeWidgetItem* conflict = findConflict(shortcut, item);
   if (conflict != nullptr) {
+    const QString conflictLabel =
+        conflict->text(eColumnCategory).isEmpty()
+            ? conflict->text(eColumnAction)
+            : tr("%1 (%2)").arg(conflict->text(eColumnAction), conflict->text(eColumnCategory));
+    const QString itemLabel = item->text(eColumnCategory).isEmpty()
+                                  ? item->text(eColumnAction)
+                                  : tr("%1 (%2)").arg(item->text(eColumnAction), item->text(eColumnCategory));
     const QMessageBox::StandardButton answer = QMessageBox::question(
         this, tr("Shortcut already in use"),
         tr("The shortcut '%1' is already assigned to '%2'. Do you want to reassign it to '%3'?")
-            .arg(shortcut.toString(QKeySequence::NativeText), conflict->text(eColumnAction), item->text(eColumnAction)),
+            .arg(shortcut.toString(QKeySequence::NativeText), conflictLabel, itemLabel),
         QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
     if (answer == QMessageBox::Yes) {
       setItemShortcut(conflict, QKeySequence());
@@ -176,4 +189,21 @@ void CShortcutSetupDialog::updateEditor(const QTreeWidgetItem* const item) {
   keySequenceEdit->setEnabled(item != nullptr);
   pushDefault->setEnabled(item != nullptr);
   keySequenceEdit->setKeySequence(item != nullptr ? itemShortcut(item) : QKeySequence());
+}
+
+QString CShortcutSetupDialog::actionCategory(const QAction* const action) const {
+  const QVariant tagged = action->property("shortcutCategory");
+  if (tagged.isValid()) {
+    return tagged.toString();
+  }
+  // fall back to the title of the QMenu the action was added to via the .ui file
+  for (QObject* const object : action->associatedObjects()) {
+    const QMenu* const menu = qobject_cast<const QMenu*>(object);
+    if (menu != nullptr) {
+      QString title = menu->title();
+      title.remove('&');
+      return title;
+    }
+  }
+  return QString();
 }

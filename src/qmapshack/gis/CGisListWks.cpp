@@ -233,6 +233,26 @@ CGisListWks::CGisListWks(QWidget* parent) : QTreeWidget(parent) {
   actionChangeIconWpt = addAction("actionChangeIconWpt", QIcon("://icons/waypoints/PinBlue.svg"), tr("Change Icon..."),
                                   this, &CGisListWks::slotSymWpt);
 
+  const auto tagCategory = [](const QString& category, std::initializer_list<QAction*> actions) {
+    for (QAction* const action : actions) {
+      action->setProperty("shortcutCategory", category);
+    }
+  };
+  tagCategory(tr("Workspace: Project"),
+              {actionShowOnMap, actionHideFrMap, actionSortByTime, actionSortByName, actionSortByRating,
+               actionFilterProject, actionAutoSave, actionUserFocusPrj, actionAutoSyncToDev, actionSave, actionSaveAs,
+               actionSaveAsStrict, actionSyncWksDev, actionSyncDB, actionCloseProj, actionSyncDevWks});
+  tagCategory(tr("Workspace: Item"), {actionEditDetails, actionTagItem, actionCopyItem, actionDelete});
+  tagCategory(tr("Workspace: Track"),
+              {actionFocusTrk, actionRangeTrk, actionEditTrk, actionReverseTrk, actionCombineTrk, actionEleWptTrk,
+               actionCopyTrkWithWpt, actionToRoute, actionToArea, actionNogoTrk});
+  tagCategory(tr("Workspace: Waypoint"),
+              {actionBubbleWpt, actionMoveWpt, actionProjWpt, actionEditRadiusWpt, actionDelRadiusWpt,
+               actionCopyCoordWpt, actionRteFromWpt, actionEditPrxWpt, actionChangeIconWpt});
+  tagCategory(tr("Workspace: Route"),
+              {actionFocusRte, actionCalcRte, actionResetRte, actionEditRte, actionReverseRte, actionRte2Trk});
+  tagCategory(tr("Workspace: Area"), {actionEditArea, actionNogoArea});
+
   connect(qApp, &QApplication::aboutToQuit, this, &CGisListWks::slotSaveWorkspace);
   connect(this, &CGisListWks::customContextMenuRequested, this, &CGisListWks::slotContextMenu);
   connect(this, &CGisListWks::itemDoubleClicked, this, &CGisListWks::slotItemDoubleClicked);

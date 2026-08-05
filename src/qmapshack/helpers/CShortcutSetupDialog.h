@@ -41,13 +41,14 @@ class CShortcutSetupDialog : public QDialog, private Ui::IShortcutSetupDialog {
   void slotApplyEditor();
 
  private:
-  enum columns_e { eColumnAction = 0, eColumnShortcut = 1 };
+  enum columns_e { eColumnCategory = 0, eColumnAction = 1, eColumnShortcut = 2 };
 
   QAction* itemAction(const QTreeWidgetItem* const item) const;
   QKeySequence itemShortcut(const QTreeWidgetItem* const item) const;
   void setItemShortcut(QTreeWidgetItem* const item, const QKeySequence& shortcut);
   QTreeWidgetItem* findConflict(const QKeySequence& shortcut, const QTreeWidgetItem* const skip) const;
   void updateEditor(const QTreeWidgetItem* const item);
+  QString actionCategory(const QAction* const action) const;
 
   CShortcutConfig* config;
   /// guards against slotApplyEditor() re-entering itself

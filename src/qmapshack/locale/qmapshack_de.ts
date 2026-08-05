@@ -2912,9 +2912,8 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
         <translation>Speichern</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="113"/>
         <source>Edit..</source>
-        <translation>Bearbeiten..</translation>
+        <translation type="vanished">Bearbeiten..</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="120"/>
@@ -3078,6 +3077,36 @@ Sie könne beide Parameter ändern, um den Filter anzupassen. Für den Abstand s
         <location filename="../gis/CGisListWks.cpp" line="211"/>
         <source>Change Icon...</source>
         <translation>Symbol ändern...</translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListWks.cpp" line="241"/>
+        <source>Workspace: Project</source>
+        <translation>Arbeitsplatz: Projekt</translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListWks.cpp" line="245"/>
+        <source>Workspace: Item</source>
+        <translation>Arbeitsplatz: Element</translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListWks.cpp" line="246"/>
+        <source>Workspace: Track</source>
+        <translation>Arbeitsplatz: Track</translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListWks.cpp" line="249"/>
+        <source>Workspace: Waypoint</source>
+        <translation>Arbeitsplatz: Wegpunkt</translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListWks.cpp" line="252"/>
+        <source>Workspace: Route</source>
+        <translation>Arbeitsplatz: Route</translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListWks.cpp" line="254"/>
+        <source>Workspace: Area</source>
+        <translation>Arbeitsplatz: Gebiet</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="652"/>
@@ -8519,6 +8548,12 @@ Abgebrochen durch den Benutzer.
 </context>
 <context>
     <name>CShortcutSetupDialog</name>
+    <message>
+        <location filename="../helpers/CShortcutSetupDialog.cpp" line="134"/>
+        <location filename="../helpers/CShortcutSetupDialog.cpp" line="137"/>
+        <source>%1 (%2)</source>
+        <translation>%1 (%2)</translation>
+    </message>
     <message>
         <location filename="../helpers/CShortcutSetupDialog.cpp" line="126"/>
         <source>Shortcut already in use</source>
@@ -18786,6 +18821,11 @@ Wenn Sie das Wort &apos;wort&apos; eingeben, wird exakt nach dem Wort gesucht. W
         <location filename="../helpers/IShortcutSetupDialog.ui" line="20"/>
         <source>Filter actions...</source>
         <translation>Aktionen filtern...</translation>
+    </message>
+    <message>
+        <location filename="../helpers/IShortcutSetupDialog.ui" line="40"/>
+        <source>Category</source>
+        <translation>Kategorie</translation>
     </message>
     <message>
         <location filename="../helpers/IShortcutSetupDialog.ui" line="40"/>

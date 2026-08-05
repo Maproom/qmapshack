@@ -2899,9 +2899,8 @@ You can modify both parameters to customize the behavior of the filter. For the 
 <context>
     <name>CGisListWks</name>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="113"/>
         <source>Edit..</source>
-        <translation>Изменить..</translation>
+        <translation type="vanished">Изменить..</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="115"/>
@@ -3022,6 +3021,36 @@ You can modify both parameters to customize the behavior of the filter. For the 
     <message>
         <location filename="../gis/CGisListWks.cpp" line="211"/>
         <source>Change Icon...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListWks.cpp" line="241"/>
+        <source>Workspace: Project</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListWks.cpp" line="245"/>
+        <source>Workspace: Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListWks.cpp" line="246"/>
+        <source>Workspace: Track</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListWks.cpp" line="249"/>
+        <source>Workspace: Waypoint</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListWks.cpp" line="252"/>
+        <source>Workspace: Route</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListWks.cpp" line="254"/>
+        <source>Workspace: Area</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8352,6 +8381,12 @@ Canceled by user&apos;s request.
 </context>
 <context>
     <name>CShortcutSetupDialog</name>
+    <message>
+        <location filename="../helpers/CShortcutSetupDialog.cpp" line="134"/>
+        <location filename="../helpers/CShortcutSetupDialog.cpp" line="137"/>
+        <source>%1 (%2)</source>
+        <translation type="unfinished"></translation>
+    </message>
     <message>
         <location filename="../helpers/CShortcutSetupDialog.cpp" line="126"/>
         <source>Shortcut already in use</source>
@@ -18559,6 +18594,11 @@ If you enter &apos;word&apos; a search with an exact match is done. If you enter
     <message>
         <location filename="../helpers/IShortcutSetupDialog.ui" line="20"/>
         <source>Filter actions...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/IShortcutSetupDialog.ui" line="40"/>
+        <source>Category</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

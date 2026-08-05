@@ -206,8 +206,6 @@ class CGisListWks : public QTreeWidget {
   QAction* actionAutoSave;
   QAction* actionUserFocusPrj;
   QAction* actionAutoSyncToDev;
-  QAction* actionCopyPrj;
-  QAction* actionEditPrj;
   QAction* actionCloseProj;
   QAction* actionShowOnMap;
   QAction* actionHideFrMap;
@@ -217,7 +215,6 @@ class CGisListWks : public QTreeWidget {
   QAction* actionSortByName;
   QAction* actionSortByRating;
   QAction* actionFilterProject;
-  QAction* actionDelProj;
   QAction* actionSyncDevWks;
   QAction* actionEditDetails;
   QAction* actionTagItem;
@@ -225,7 +222,6 @@ class CGisListWks : public QTreeWidget {
   QAction* actionDelete;
   QAction* actionBubbleWpt;
   QAction* actionDelRadiusWpt;
-  QAction* actionNogoWpt;
   QAction* actionEditRadiusWpt;
   QAction* actionProjWpt;
   QAction* actionMoveWpt;
@@ -241,7 +237,6 @@ class CGisListWks : public QTreeWidget {
   QAction* actionCalcRte;
   QAction* actionResetRte;
   QAction* actionEditRte;
-  QAction* actionNogoRte;
   QAction* actionReverseRte;
   QAction* actionRte2Trk;
   QAction* actionEditArea;

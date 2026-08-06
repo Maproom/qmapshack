@@ -239,16 +239,16 @@ CGisListWks::CGisListWks(QWidget* parent) : QTreeWidget(parent) {
               {actionShowOnMap, actionHideFrMap, actionSortByTime, actionSortByName, actionSortByRating,
                actionFilterProject, actionAutoSave, actionUserFocusPrj, actionAutoSyncToDev, actionSave, actionSaveAs,
                actionSaveAsStrict, actionSyncWksDev, actionSyncDB, actionCloseProj, actionSyncDevWks});
-  tagCategory(tr("Workspace: Item"), {actionEditDetails, actionTagItem, actionCopyItem, actionDelete});
-  tagCategory(tr("Workspace: Track"),
-              {actionFocusTrk, actionRangeTrk, actionEditTrk, actionReverseTrk, actionCombineTrk, actionEleWptTrk,
-               actionCopyTrkWithWpt, actionToRoute, actionToArea, actionNogoTrk});
+  tagCategory(tr("Workspace: Item"), {actionEditDetails, actionTagItem, actionCopyItem, actionDelete, actionNogoTrk,
+                                      actionNogoArea, actionEleWptTrk});
+  tagCategory(tr("Workspace: Track"), {actionFocusTrk, actionRangeTrk, actionEditTrk, actionReverseTrk,
+                                       actionCombineTrk, actionCopyTrkWithWpt, actionToRoute, actionToArea});
   tagCategory(tr("Workspace: Waypoint"),
               {actionBubbleWpt, actionMoveWpt, actionProjWpt, actionEditRadiusWpt, actionDelRadiusWpt,
                actionCopyCoordWpt, actionRteFromWpt, actionEditPrxWpt, actionChangeIconWpt});
   tagCategory(tr("Workspace: Route"),
               {actionFocusRte, actionCalcRte, actionResetRte, actionEditRte, actionReverseRte, actionRte2Trk});
-  tagCategory(tr("Workspace: Area"), {actionEditArea, actionNogoArea});
+  tagCategory(tr("Workspace: Area"), {actionEditArea});
 
   connect(qApp, &QApplication::aboutToQuit, this, &CGisListWks::slotSaveWorkspace);
   connect(this, &CGisListWks::customContextMenuRequested, this, &CGisListWks::slotContextMenu);

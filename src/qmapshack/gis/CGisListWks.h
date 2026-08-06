@@ -89,8 +89,10 @@ class CGisListWks : public QTreeWidget {
   void slotItemDoubleClicked(QTreeWidgetItem* item, int);
   void slotItemChanged(QTreeWidgetItem* item, int column);
   void slotEditItem();
+  void slotEdit();
   void slotTagItem();
   void slotDeleteItem();
+  void slotDelete();
   void slotBubbleWpt();
   void slotNogoItem();
   void slotDelRadiusWpt();
@@ -117,6 +119,7 @@ class CGisListWks : public QTreeWidget {
   void slotCloseAllProjects();
   void slotGeoSearch(bool on);
   void slotCopyItem();
+  void slotCopy();
   void slotSyncWksDev();
   void slotSyncDevWks();
   void slotRteFromWpt();

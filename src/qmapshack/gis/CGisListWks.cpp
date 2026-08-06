@@ -152,17 +152,14 @@ CGisListWks::CGisListWks(QWidget* parent) : QTreeWidget(parent) {
                                &CGisListWks::slotSyncDevWks);
 
   // common to all items actions
-  actionEditDetails = addAction("actionEditDetails", QIcon("://icons/EditDetails.svgt"), tr("Edit..."), this,
-                                &CGisListWks::slotEditItem);
-  connect(actionEditDetails, &QAction::triggered, this, &CGisListWks::slotEditPrj);
+  actionEditDetails =
+      addAction("actionEditDetails", QIcon("://icons/EditDetails.svgt"), tr("Edit..."), this, &CGisListWks::slotEdit);
   actionTagItem =
       addAction("actionTagItem", QIcon("://icons/Tag.svgt"), tr("Set Tags"), this, &CGisListWks::slotTagItem);
   actionCopyItem =
-      addAction("actionCopyItem", QIcon("://icons/Copy.svgt"), tr("Copy to..."), this, &CGisListWks::slotCopyItem);
-  connect(actionCopyItem, &QAction::triggered, this, &CGisListWks::slotCopyProject);
+      addAction("actionCopyItem", QIcon("://icons/Copy.svgt"), tr("Copy to..."), this, &CGisListWks::slotCopy);
   actionDelete =
-      addAction("actionDelete", QIcon("://icons/DeleteOne.svgt"), tr("Delete"), this, &CGisListWks::slotDeleteItem);
-  connect(actionDelete, &QAction::triggered, this, &CGisListWks::slotDeleteProject);
+      addAction("actionDelete", QIcon("://icons/DeleteOne.svgt"), tr("Delete"), this, &CGisListWks::slotDelete);
 
   // track related actions
   actionFocusTrk = addAction("actionFocusTrk", QIcon("://icons/TrkProfile.svgt"), tr("Track Information"), this,
@@ -1604,6 +1601,14 @@ void CGisListWks::slotEditItem() {
   }
 }
 
+void CGisListWks::slotEdit() {
+  if (dynamic_cast<IGisProject*>(currentItem()) != nullptr) {
+    slotEditPrj();
+  } else {
+    slotEditItem();
+  }
+}
+
 void CGisListWks::slotTagItem() {
   CGisListWksEditLock lock(false, IGisItem::mutexItems);
   CGisWorkspace::self().tagItemsByKey(selectedItems2Keys<IGisItem>());
@@ -1612,6 +1617,14 @@ void CGisListWks::slotTagItem() {
 void CGisListWks::slotDeleteItem() {
   CGisListWksEditLock lock(false, IGisItem::mutexItems);
   CGisWorkspace::self().delItemsByKey(selectedItems2Keys<IGisItem>());
+}
+
+void CGisListWks::slotDelete() {
+  if (dynamic_cast<IGisProject*>(currentItem()) != nullptr) {
+    slotDeleteProject();
+  } else {
+    slotDeleteItem();
+  }
 }
 
 void CGisListWks::slotCopyItem() {
@@ -1627,6 +1640,14 @@ void CGisListWks::slotCopyItem() {
    * again. This is always safe.
    */
   CGisWorkspace::self().copyItemsByKey(selectedItems2Keys<IGisItem>());
+}
+
+void CGisListWks::slotCopy() {
+  if (dynamic_cast<IGisProject*>(currentItem()) != nullptr) {
+    slotCopyProject();
+  } else {
+    slotCopyItem();
+  }
 }
 
 void CGisListWks::slotProjWpt() {

@@ -19,19 +19,11 @@
 
 #include "helpers/CDraw.h"
 
-#include <QDebug>
 #include <QImage>
-#include <QPainterPath>
 #include <QPointF>
 #include <QtMath>
 
 #include "canvas/CCanvas.h"
-
-QPen CDraw::penBorderBlue(QColor(10, 10, 150, 220), 2);
-QPen CDraw::penBorderGray(Qt::lightGray, 2);
-QPen CDraw::penBorderBlack(QColor(0, 0, 0, 200), 2);
-QBrush CDraw::brushBackWhite(QColor(255, 255, 255, 255));
-QBrush CDraw::brushBackYellow(QColor(0xff, 0xff, 0xcc, 0xE0));
 
 QImage CDraw::createBasicArrow(const QBrush& brush, qreal scale) {
   QImage arrow(21 * scale, 16 * scale, QImage::Format_ARGB32);
@@ -145,43 +137,6 @@ void CDraw::text(const QString& str, QPainter& p, const QRect& r, const QColor& 
 
   p.setPen(color);
   p.drawText(r, Qt::AlignCenter, str);
-}
-
-QPoint CDraw::bubble(QPainter& p, const QRect& contentRect, const QPoint& pointerPos, int pointerBaseWidth,
-                     float pointerBasePos) {
-  QPainterPath bubblePath;
-  bubblePath.addRoundedRect(contentRect, RECT_RADIUS, RECT_RADIUS);
-
-  // draw the arrow
-  int pointerBaseCenterX = (pointerBasePos <= 1) ? contentRect.left() + (pointerBasePos * contentRect.width())
-                                                 : contentRect.left() + (int)pointerBasePos;
-
-  int pointerHeight = 0;
-  if (pointerPos.y() < contentRect.top()) {
-    pointerHeight = contentRect.top() - pointerPos.y() + 1;
-  } else if (pointerPos.y() > contentRect.bottom()) {
-    pointerHeight = contentRect.bottom() - pointerPos.y() - 1;
-  } else {
-    qDebug() << "cannot calculate pointerHeight/pointerBaseCenterX due to invalid parameters";
-  }
-
-  if (0 != pointerHeight) {
-    QPolygonF pointerPoly;
-    pointerPoly << pointerPos << QPointF(pointerBaseCenterX - pointerBaseWidth / 2, pointerPos.y() + pointerHeight)
-                << QPointF(pointerBaseCenterX + pointerBaseWidth / 2, pointerPos.y() + pointerHeight) << pointerPos;
-
-    QPainterPath pointerPath;
-    pointerPath.addPolygon(pointerPoly);
-
-    bubblePath = bubblePath.united(pointerPath);
-  }
-
-  p.setPen(CDraw::penBorderGray);
-  p.setBrush(CDraw::brushBackWhite);
-
-  p.drawPolygon(bubblePath.toFillPolygon());
-
-  return contentRect.topLeft();
 }
 
 void CDraw::drawCrossHairDot(QPainter& p, const QPointF& pt) {

@@ -464,18 +464,7 @@ QAction* CGisListWks::addSortAction(const QString& objName, QObject* parent, QAc
   return action;
 }
 
-QList<QAction*> CGisListWks::shortcutActions() const {
-  return {actionShowOnMap,     actionHideFrMap,      actionSortByTime,   actionSortByName,    actionSortByRating,
-          actionFilterProject, actionAutoSave,       actionUserFocusPrj, actionAutoSyncToDev, actionSave,
-          actionSaveAs,        actionSaveAsStrict,   actionSyncWksDev,   actionSyncDB,        actionCloseProj,
-          actionSyncDevWks,    actionEditDetails,    actionTagItem,      actionCopyItem,      actionDelete,
-          actionFocusTrk,      actionRangeTrk,       actionEditTrk,      actionReverseTrk,    actionCombineTrk,
-          actionEleWptTrk,     actionCopyTrkWithWpt, actionToRoute,      actionToArea,        actionNogoTrk,
-          actionBubbleWpt,     actionMoveWpt,        actionProjWpt,      actionEditRadiusWpt, actionDelRadiusWpt,
-          actionCopyCoordWpt,  actionFocusRte,       actionCalcRte,      actionResetRte,      actionEditRte,
-          actionReverseRte,    actionRte2Trk,        actionEditArea,     actionNogoArea,      actionRteFromWpt,
-          actionEditPrxWpt,    actionChangeIconWpt};
-}
+QList<QAction*> CGisListWks::shortcutActions() const { return actions(); }
 
 void CGisListWks::dragMoveEvent(QDragMoveEvent* e) {
   CGisListWksEditLock lock(true, IGisItem::mutexItems);

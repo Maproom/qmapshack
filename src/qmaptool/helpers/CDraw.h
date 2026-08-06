@@ -35,12 +35,6 @@ inline void USE_ANTI_ALIASING(QPainter& p, bool useAntiAliasing) {
 
 class CDraw {
  public:
-  static QPen penBorderBlue;
-  static QPen penBorderGray;
-  static QPen penBorderBlack;
-  static QBrush brushBackWhite;
-  static QBrush brushBackYellow;
-
   /**
      @brief Draw arrows along a line
 
@@ -63,23 +57,6 @@ class CDraw {
   static void text(const QString& str, QPainter& p, const QPoint& center, const QColor& color,
                    const QFont& font = CMainWindow::self().getMapFont());
   static void text(const QString& str, QPainter& p, const QRect& r, const QColor& color);
-
-  /**
-     @brief Draw a cartoon bubble
-
-     `pointerBasePos` denotes the position of the pointer's base, where 0 is `at the very left of the content`, and 1 is
-     `at the very right`. Be careful with small values (near 0) or large values (near 1) for pointerBasePos, this might
-     lead to incorrect drawing, especially if pointerBaseWidth is large. If is larger than 1, a value in pixels is
-     assumed.
-
-     @param p                 An active QPainter
-     @param contentRect       The area the actual content will be in
-     @param pointerPos        The position of the pointer's head
-     @param pointerBaseWidth  The width of the pointer
-     @param pointerBasePos    The (relative) location of the pointer (in percent / pixels)
-   */
-  static QPoint bubble(QPainter& p, const QRect& contentRect, const QPoint& pointerPos, int pointerBaseWidth = 20,
-                       float pointerBasePos = .5f);
 
   static void drawCrossHairDot(QPainter& p, const QPointF& pt);
 

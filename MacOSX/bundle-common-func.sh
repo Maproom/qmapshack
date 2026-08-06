@@ -101,7 +101,6 @@ function buildAppStructure {
      done
 
     cp -v $SRC_RESOURCES_DIR/$APP_NAME.icns $BUILD_BUNDLE_RES_DIR
-    cp -v $SRC_RESOURCES_DIR/*.qss $BUILD_BUNDLE_RES_DIR
     # inject PATH of PACKAGES_PATH, so that external tools can be run from the app bundles
     sed  "s|PACKAGES_PATH|$PACKAGES_PATH|" $SRC_RESOURCES_DIR/Info.plist > $QMSDEVDIR/Info.plist
     mv $QMSDEVDIR/Info.plist $BUILD_BUNDLE_CONTENTS_DIR

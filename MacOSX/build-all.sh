@@ -90,17 +90,3 @@ cd $QMSDEVDIR
 # Bundling QMapShack and QMapTool
 source $SRC_OSX_DIR/bundle-all.sh
 cd $QMSDEVDIR
-
-######################################################################## 
-# Last remark - Dark Mode
-
-# If the system is running in dark mode, then buttons which appear on top of a map are not visible (e.g. while adjusting a track)
-# These buttons are not dark-mode enabled.
-# Solution:
-# echo "${CLR_BAD}Remark: QMapShack cannot show buttons on the map in dark mode.${NC}"
-# Add the following key to the "info.plist" file, i.e. completely opting out from dark mode
-# <key>NSRequiresAquaSystemAppearance</key> <string>true</string>
-# The "info.plist" file can be found in the bundle of the app under the "Contents" folder
-# echo "${INFO}QMapShack can ignore dark mode by adding the following key to the \"info.plist\" file.${NC}"
-# echo "${INFO}<key>NSRequiresAquaSystemAppearance</key> <string>true</string>${NC}"
-# echo "${INFO}The \"info.plist\" file can be found in the bundle of the app under the \"Contents\" folder,${NC}"

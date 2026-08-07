@@ -170,92 +170,92 @@ rijevoz</translation>
 <context>
     <name>CCanvas</name>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="105"/>
+        <location filename="../canvas/CCanvas.cpp" line="106"/>
         <source>View %1</source>
         <translation>Pogled %1</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="240"/>
+        <location filename="../canvas/CCanvas.cpp" line="241"/>
         <source>None selected</source>
         <translation>Nije odabrano</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="245"/>
+        <location filename="../canvas/CCanvas.cpp" line="246"/>
         <source>&lt;p align=&apos;right&apos;&gt;This help will be closed the moment you activate a map.&lt;/p&gt;</source>
         <translation>&lt;p align=&apos;right&apos;&gt;Ova pomoć će se zatvoriti u trenutku kada aktiviraš kartu.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="249"/>
+        <location filename="../canvas/CCanvas.cpp" line="250"/>
         <source>&lt;h1&gt;Welcome&lt;/h1&gt;&lt;p&gt;Thank you for using QMapShack. QMapShack is a non-profit Open Source project. It&apos;s maintained by enthusiast and volunteers. It&apos;s very mature and useful but lacks certain amenities you might be used from &apos;free&apos; commercial software. As a matter of fact we lack the resources to provide you with a centralized and convenient download of maps, elevation data and routing data. You have to download these resources from various sites on your own. But this page might help you a bit&lt;/p&gt;</source>
         <translation>&lt;h1&gt;Dobrodošli&lt;/h1&gt;&lt;p&gt;Hvala vam što koristiš QMapShack. QMapShack je neprofitni projekt otvorenog koda. Održavaju ga entuzijasti i volonteri. Vrlo je zreo i koristan, ali mu nedostaju određene pogodnosti koje bi mogao koristiti od &apos;besplatnog&apos; komercijalnog softvera. Zapravo, nedostaju nam resursi koji bi ti omogućili centralizirano i praktično preuzimanje karata, podataka o nadmorskoj visini i podataka o usmjeravanju. Moraš sam preuzeti ove resurse s raznih stranica. Ali ova stranica bi vam mogla malo pomoći&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="258"/>
+        <location filename="../canvas/CCanvas.cpp" line="259"/>
         <source>&lt;h2&gt;Let&apos;s Start&lt;/h2&gt;&lt;p&gt;As a first step make yourself comfortable by arranging the dock widgets around this area to your personal liking. You can do this by grabbing the dock widget&apos;s title bars with your mouse (keep left button pressed on title bar) and move them where you want them. You can attach the dock widgets at the left, right, top or bottom. And you can stack them by placing them right above another dock widget. If you do not want to use the functionality of a dock widget you can close it and make QMapShack more simple for you. Also note that the tool bar is a dock widget, too. You can place it anywhere you like.&lt;/p&gt;</source>
         <translation>&lt;h2&gt;Počnimo&lt;/h2&gt;&lt;p&gt;Kao prvi korak, rasporedi si widgete za dock oko ovog područja prema tvojim željama. To možeš učiniti tako da mišem uhvatiš naslovne trake widgeta za dock (drži pritisnutu lijevu tipku miša na naslovnoj traci) i pomakni ih gdje god želiš. Widgete za dock možeš pričvrstiti lijevo, desno, gore ili dolje. Možeš ih i složiti tako da ih postaviš točno iznad drugog widgeta za dock. Ako ne želiš koristiti funkcionalnost widgeta za dock, možeš ga zatvoriti i pojednostavniti QMapShack. Također imaj na umu da je alatna traka također widget za dock. Možeš je postaviti bilo gdje.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="271"/>
+        <location filename="../canvas/CCanvas.cpp" line="272"/>
         <source>&lt;h2&gt;The Wiki&lt;/h2&gt;&lt;p&gt;QMapShack has an extensive &lt;a href=&apos;ShowWiki&apos;&gt;Wiki&lt;/a&gt; with a lot of information about how to use it. There is a &lt;a href=&apos;ShowQuickStart&apos;&gt;Quick Start Guide&lt;/a&gt; translated into several languages. Read it and you will discover the full variety of features QMapShack offers you.&lt;/p&gt;</source>
         <translation>&lt;h2&gt;Wiki&lt;/h2&gt;&lt;p&gt;QMapShack ima opsežan &lt;a href=&apos;ShowWiki&apos;&gt;Wiki&lt;/a&gt; s mnogo informacija o tome kako ga koristiti. Postoji &lt;a href=&apos;ShowQuickStart&apos;&gt;Vodič za brzi početak&lt;/a&gt; preveden na nekoliko jezika. Pročitaj ga i otkrit ćeš sve značajke koje ti QMapShack nudi.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="279"/>
+        <location filename="../canvas/CCanvas.cpp" line="280"/>
         <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Current home:&lt;br/&gt;%1&lt;/p&gt;</source>
         <translation>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Trenutni dom:&lt;br/&gt;%1&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="341"/>
+        <location filename="../canvas/CCanvas.cpp" line="342"/>
         <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocGisDatabase&apos;&gt;Databases&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/AdvProjects&apos;&gt;Databases &amp; Projects&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
         <translation>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocGisDatabase&apos;&gt;Baze podataka&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/AdvProjects&apos;&gt;Baze podataka i projekti&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="358"/>
+        <location filename="../canvas/CCanvas.cpp" line="359"/>
         <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Sources for DEM&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
         <translation>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Izvori za DEM&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="365"/>
+        <location filename="../canvas/CCanvas.cpp" line="366"/>
         <source>&lt;h2&gt;Elevation Data&lt;/h2&gt;&lt;p&gt;Elevation data (Digital Elevation Model - DEM) is used in various functions of QMapShack and is completely independent from the maps. However the same principles as for maps apply. DEM data must always be defined by a single file that is recognized by QMapShack. This file has to be placed into one of the registered DEM folders (&lt;a href=&apos;DemFolders&apos;&gt;File-&gt;Setup DEM Paths&lt;/a&gt;). QMapShack will find it and list it. You can reload the list of DEM files by doing a right click on the DEM list and select &apos;Reload DEM&apos; from the menu.&lt;/p&gt;&lt;p&gt;Similar to raster maps DEM files have to be wrapped by a *.vrt file to be recognized. A *.vrt file can reference one or several other files. Again, you can use QMapShack&apos;s built-in VRT Builder (&lt;a href=&apos;VrtBuilder&apos;&gt;Tool-&gt;VRT Builder&lt;/a&gt;) to create such a file.&lt;/p&gt;</source>
         <translation>&lt;h2&gt;Podaci o Elevaciji&lt;/h2&gt;&lt;p&gt;Podaci o elevaciji (Digitalni Elevacijski Model - DEM) koriste se u raznim funkcijama QMapShacka i potpuno su neovisni o kartama. Međutim, primjenjuju se ista načela kao i za karte. DEM podaci uvijek moraju biti definirani jednom datotekom koju QMapShack prepoznaje. Ova datoteka mora biti smještena u jednu od registriranih DEM mapa (&lt;a href=&apos;DemFolders&apos;&gt;Datoteka-&gt;Postavi DEM staze&lt;/a&gt;). QMapShack će je pronaći i prikazati na popisu. Popis DEM datoteka možeš ponovno učitati desnim klikom na DEM popis i odabirom opcije &apos;Ponovno učitavanje DEM&apos; iz izbornika.&lt;/p&gt;&lt;p&gt;Slično rasterskim kartama, DEM datoteke moraju biti omotane datotekom *.vrt da bi se prepoznale. Datoteka *.vrt može referencirati jednu ili više drugih datoteka. Ponovno, možeš koristiti ugrađeni VRT Graditelj programa QMapShack (&lt;a href=&apos;VrtBuilder&apos;&gt;Alat-&gt;VRT Graditelj&lt;/a&gt;) za izradu takve datoteke.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="1125"/>
+        <location filename="../canvas/CCanvas.cpp" line="1141"/>
         <source>Map Projection...</source>
         <translation>Projekcija Karte...</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="1126"/>
+        <location filename="../canvas/CCanvas.cpp" line="1142"/>
         <source>Failed to setup map projection. Please configure a valid projection.</source>
         <translation>Postavljanje projekcije karte nije uspjelo. Konfigurirajte valjanu projekciju.</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="318"/>
+        <location filename="../canvas/CCanvas.cpp" line="319"/>
         <source>&lt;h2&gt;Maps!&lt;/h2&gt;&lt;p&gt;A map must always be defined by a single file that is recognized by QMapShack. This file has to be placed into one of the registered map folders (&lt;a href=&apos;MapFolders&apos;&gt;File-&gt;Setup Map Paths&lt;/a&gt;). QMapShack will find it and list it. You can reload the list of maps by doing a right click on the map list and select &apos;Reload Maps&apos; from the menu.&lt;/p&gt; &lt;p&gt;A map must be activated to be visible. Right click on the map entry and select &apos;Activate&apos; from the menu. The moment a map is activated this help will disappear. To see it again you simply add another map view (&lt;a href=&apos;NewView&apos;&gt;View-&gt;Add Map View&lt;/a&gt;).&lt;/p&gt; &lt;p&gt;To start with some online maps click on the link for &lt;a href=&apos;GetMaps&apos;&gt;impatient users&lt;/a&gt;. If you have a Garmin GPS device with non-commercial maps you can copy the *.img and *.jnx files from your device into the map folder.&lt;/p&gt; &lt;/p&gt;If you own raster maps in a format that is supported by GDAL you have to create a virtual map definition file (*.vrt), first. A *.vrt file can reference one or several other files. You can use QMapShack&apos;s built-in VRT Builder (&lt;a href=&apos;VrtBuilder&apos;&gt;Tool-&gt;VRT Builder&lt;/a&gt;) to create such a file.&lt;/p&gt;</source>
         <translation>&lt;h2&gt;Karte!&lt;/h2&gt;&lt;p&gt;Karta uvijek mora biti definirana jednom datotekom koju QMapShack prepoznaje. Ova datoteka mora biti smještena u jednu od registriranih mapa karata (&lt;a href=&apos;MapFolders&apos;&gt;Datoteka-&gt;Postavi Staze Karte&lt;/a&gt;). QMapShack će je pronaći i prikazati na popisu. Popis karata možeš ponovno učitati desnim klikom na popis karata i odabirom &apos;Ponovno učitavanje karata&apos; iz izbornika.&lt;/p&gt; &lt;p&gt;Karta mora biti aktivirana da bi bila vidljiva. Desnim klikom na unos karte odaberite &apos;Aktiviraj&apos; iz izbornika. Čim se karta aktivira, ova pomoć će nestati. Da biste je ponovno vidjeli, jednostavno dodaj još jedan pogled karte (&lt;a href=&apos;NewView&apos;&gt;Pogled-&gt;Dodaj Pogled Karte&lt;/a&gt;).&lt;/p&gt; &lt;p&gt;Za početak rada s nekim online kartama klikni na poveznicu za &lt;a href=&apos;GetMaps&apos;&gt;nestrpljive korisnike&lt;/a&gt;. Ako imaš Garmin GPS uređaj s nekomercijalnim kartama, možeš kopirati datoteke *.img i *.jnx s uređaja u mapu s kartama.&lt;/p&gt; &lt;/p&gt;Ako posjedujete rasterske karte u formatu koji podržava GDAL, prvo moraš stvoriti datoteku definicije virtualne karte (*.vrt). Datoteka *.vrt može referencirati jednu ili više drugih datoteka. Za stvaranje takve datoteke možeš koristiti ugrađeni VRT Graditelj programa QMapShack (&lt;a href=&apos;VrtBuilder&apos;&gt;Alat-&gt;VRT Graditelj&lt;/a&gt;).&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="284"/>
+        <location filename="../canvas/CCanvas.cpp" line="285"/>
         <source>&lt;h2&gt;Give it a home&lt;/h2&gt;&lt;p&gt;QMapShack needs a folder on your hard drive where all data is kept. Naturally this will grow very large. We recommend a folder with some subfolders:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Maps - where all maps are stored&lt;/li&gt;&lt;li&gt;DEM - where all elevation data is stored&lt;/li&gt;&lt;li&gt;POI - where all POI collections are stored&lt;/li&gt;&lt;li&gt;Routino - where routing data for the Routino offline router is stored&lt;/li&gt;&lt;li&gt;BRouter - where routing data for the BRouter offline router is stored&lt;/li&gt;&lt;li&gt;Databases - where you create databases to organize your GIS data&lt;/li&gt;&lt;li&gt;GPX - where you keep GPX files&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Do you want to create these folders right now? Give me a &lt;a  href=&apos;SetupHome&apos;&gt;path&lt;/a&gt; and QMapShack will create all sub-folder and update all settings.&lt;/p&gt;</source>
         <translation>&lt;h2&gt;Dajte mu dom&lt;/h2&gt;&lt;p&gt;QMapShack treba mapu na tvojem tvrdom disku u kojoj se čuvaju svi podaci. Naravno, ona će jako narasti. Preporučujemo mapu s nekoliko podmapa:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Karte - gdje se pohranjuju sve karte&lt;/li&gt;&lt;li&gt;DEM - gdje se pohranjuju svi podaci o nadmorskoj visini&lt;/li&gt;&lt;li&gt;POI - gdje se pohranjuju sve kolekcije POI&lt;/li&gt;&lt;li&gt;Routino - gdje se pohranjuju podaci o rutiranju za Routino offline rutiranje&lt;/li&gt;&lt;li&gt;BRouter - gdje se pohranjuju podaci o rutiranju za BRouter offline ruter&lt;/li&gt;&lt;li&gt;Baze podataka - gdje stvaraš baze podataka za organiziranje svojih GIS podataka&lt;/li&gt;&lt;li&gt;GPX - gdje pohranjuješ GPX datoteke&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Želiš li odmah stvoriti ove mape? Daj mi &lt;a href=&apos;SetupHome&apos;&gt;stazu&lt;/a&gt; i QMapShack će stvoriti sve podmape i ažurirati sve postavke.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="304"/>
+        <location filename="../canvas/CCanvas.cpp" line="305"/>
         <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Impatient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;GetMaps&apos;&gt;I want some online maps.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Patient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;ShowQuickStart&apos;&gt;Quick Start Guide.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocGettingStarted#add-maps&apos;&gt;Getting Started.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocInstallMapDem&apos;&gt;Install Maps &amp; DEM&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocBasicsMapDem&apos;&gt;Basics Maps &amp; DEM.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Sources for Maps&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
         <translation>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Nestrpljivi korisnici:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;GetMaps&apos;&gt;Želim neke online karte.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Strpljivi korisnici:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;ShowQuickStart&apos;&gt;Vodič za brzi početak.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocGettingStarted#add-maps&apos;&gt;Početak rada.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocInstallMapDem&apos;&gt;Instaliraj karte i DEM&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocBasicsMapDem&apos;&gt;Osnovni podaci o kartama i DEM-u.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Izvori za karte&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="348"/>
+        <location filename="../canvas/CCanvas.cpp" line="349"/>
         <source>&lt;h2&gt;Your Data&lt;/h2&gt;&lt;p&gt;To load tracks and waypoints use &lt;a href=&apos;LoadData&apos;&gt;File-&gt;Load GIS Data&lt;/a&gt; from the menu. Each file will be an independent project in the workspace. You can manage your data in single files or you use a database. You can &lt;a href=&apos;CreateDB&apos;&gt;create a database&lt;/a&gt; in the database dockwidget.&lt;/p&gt;</source>
         <translation>&lt;h2&gt;Tvoji podaci&lt;/h2&gt;&lt;p&gt;Za učitavanje tragova i putnih točaka upotrijebi &lt;a href=&apos;LoadData&apos;&gt;Datoteka-&gt;Učitaj GIS Podatke&lt;/a&gt; iz izbornika. Svaka datoteka bit će neovisni projekt u radnom prostoru. Možeš upravljati svojim podacima u pojedinačnim datotekama ili koristiti bazu podataka. Možeš &lt;a href=&apos;CreateDB&apos;&gt;stvoriti bazu podataka&lt;/a&gt; u dockwidgetu baze podataka.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="384"/>
+        <location filename="../canvas/CCanvas.cpp" line="385"/>
         <source>&lt;h2&gt;Routing&lt;/h2&gt;&lt;p&gt;QMapShack supports online routing services. But if you really want to make use of the routing possibilities you need the routing database stored locally. There are two offline routing engines available.&lt;/p&gt;&lt;h3&gt;Routino&lt;/h3&gt;&lt;p&gt;For Routino you have to create routing data from the Open Street Map database files. QMapShack has a built-in Routino Database Creator (&lt;a href=&apos;CreateRoutino&apos;&gt;Tool-&gt;Create Routino Database&lt;/a&gt;).&lt;/p&gt;&lt;h3&gt;BRouter&lt;/h3&gt;&lt;p&gt;A second option is to use a local BRouter installation with a local routing database. Use the &lt;a href=&apos;BRouterSetup&apos;&gt;BRouter setup&lt;/a&gt; to download and install all necessary data.&lt;/p&gt;</source>
         <translation>&lt;h2&gt;Rutiranje&lt;/h2&gt;&lt;p&gt;QMapShack podržava online usluge rutiranja. Ali ako zaista želiš iskoristiti mogućnosti rutiranja, potrebna ti je baza podataka za rutiranje pohranjena lokalno. Dostupna su dva offline programa za rutiranje.&lt;/p&gt;&lt;h3&gt;Routino&lt;/h3&gt;&lt;p&gt;Za Routino moraš stvoriti podatke za rutirnje iz datoteka baze podataka Open Street Map. QMapShack ima ugrađeni alat za stvaranje Routino baze podataka (&lt;a href=&apos;CreateRoutino&apos;&gt;Alat-&gt;Stvori Routino bazu&lt;/a&gt;).&lt;/p&gt;&lt;h3&gt;BRouter&lt;/h3&gt;&lt;p&gt;Druga je mogućnost korištenje lokalne instalacije BRoutera s lokalnom bazom podataka za rutiranje. Koristi &lt;a href=&apos;BRouterSetup&apos;&gt;BRouter instalaciju&lt;/a&gt; za preuzimanje i instalaciju svih potrebnih podataka.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="1076"/>
+        <location filename="../canvas/CCanvas.cpp" line="1092"/>
         <source>Setup Map Background</source>
         <translation>Postavi Pozadinu Karte</translation>
     </message>
@@ -263,62 +263,78 @@ rijevoz</translation>
 <context>
     <name>CCommandProcessor</name>
     <message>
-        <location filename="../setup/CCommandProcessor.cpp" line="32"/>
+        <location filename="../setup/CCommandProcessor.cpp" line="33"/>
         <source>Print debug output to console.</source>
         <translation>Ispis debug izlaza u konzolu.</translation>
     </message>
     <message>
-        <location filename="../setup/CCommandProcessor.cpp" line="29"/>
+        <location filename="../setup/CCommandProcessor.cpp" line="30"/>
         <source>Do not show splash screen.</source>
         <translation>Ne prikazuj početni ekran.</translation>
     </message>
     <message>
-        <location filename="../setup/CCommandProcessor.cpp" line="35"/>
+        <location filename="../setup/CCommandProcessor.cpp" line="36"/>
         <source>Print debug output to logfile.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setup/CCommandProcessor.cpp" line="38"/>
+        <location filename="../setup/CCommandProcessor.cpp" line="39"/>
         <source>File with QMapShack configuration.</source>
         <translation>Datoteka s QMapShack konfiguracijom.</translation>
     </message>
     <message>
-        <location filename="../setup/CCommandProcessor.cpp" line="38"/>
+        <location filename="../setup/CCommandProcessor.cpp" line="40"/>
         <source>file</source>
         <translation>datoteka</translation>
     </message>
     <message>
-        <location filename="../setup/CCommandProcessor.cpp" line="41"/>
+        <location filename="../setup/CCommandProcessor.cpp" line="43"/>
         <source>Application locale.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setup/CCommandProcessor.cpp" line="41"/>
+        <location filename="../setup/CCommandProcessor.cpp" line="43"/>
         <source>code</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setup/CCommandProcessor.cpp" line="44"/>
+        <location filename="../setup/CCommandProcessor.cpp" line="46"/>
         <source>Application font family.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setup/CCommandProcessor.cpp" line="44"/>
+        <location filename="../setup/CCommandProcessor.cpp" line="46"/>
+        <location filename="../setup/CCommandProcessor.cpp" line="55"/>
         <source>name</source>
         <translation type="unfinished">ime</translation>
     </message>
     <message>
-        <location filename="../setup/CCommandProcessor.cpp" line="47"/>
+        <location filename="../setup/CCommandProcessor.cpp" line="49"/>
         <source>Application font size.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setup/CCommandProcessor.cpp" line="47"/>
+        <location filename="../setup/CCommandProcessor.cpp" line="49"/>
         <source>size</source>
         <translation type="unfinished">veličina</translation>
     </message>
     <message>
-        <location filename="../setup/CCommandProcessor.cpp" line="50"/>
+        <location filename="../setup/CCommandProcessor.cpp" line="53"/>
+        <source>Qt style.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../setup/CCommandProcessor.cpp" line="53"/>
+        <source>Available:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../setup/CCommandProcessor.cpp" line="54"/>
+        <source>Recommended:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../setup/CCommandProcessor.cpp" line="58"/>
         <source>Files for future use.</source>
         <translation>Datoteke za buduću upotrebu.</translation>
     </message>
@@ -669,160 +685,160 @@ Da bi riješio ovaj sukob, možeš stvoriti i spremiti klon, nametnuti svoju ver
 <context>
     <name>CDetailsPrj</name>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="121"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="132"/>
         <source>You want to sort waypoints along a track, but you switched off track and waypoint correlation. Do you want to switch it on again?</source>
         <translation>Želiš sortirati točke puta duž trase, ali si isključio korelaciju trase i točke puta. Želiš li je ponovno uključiti?</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="124"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="135"/>
         <source>Correlation...</source>
         <translation>Korelacija...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="260"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="941"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="271"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="952"/>
         <source>none</source>
         <translation>nijedan</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="329"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="340"/>
         <source>Build diary...</source>
         <translation>Izradi dnevnik...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="381"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="392"/>
         <source>&lt;b&gt;Summary over all tracks in project&lt;/b&gt;&lt;br/&gt;</source>
         <translation>&lt;b&gt;Sažetak svih tragova u projektu&lt;/b&gt;&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="412"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="423"/>
         <source>&lt;b&gt;Summary over all waypoints in project&lt;/b&gt;&lt;br/&gt;</source>
         <translation>&lt;b&gt;Sažetak svih međutočaka u projektu&lt;/b&gt;&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="415"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="426"/>
         <source> x Geocache, consisting of: &lt;br/&gt;</source>
         <translation> x Geocache, koji se sastoji od: &lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="457"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="485"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="746"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="814"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="875"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="907"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="468"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="496"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="757"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="825"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="886"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="918"/>
         <source>Info</source>
         <translation>Informacija</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="458"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="486"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="748"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="876"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="908"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="469"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="497"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="759"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="887"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="919"/>
         <source>Comment</source>
         <translation>Komentar</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="449"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="460"/>
         <source>Waypoints</source>
         <translation>Međutočke</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="477"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="488"/>
         <source>Tracks</source>
         <translation>Tragovi</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="607"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="618"/>
         <source>Elevation: %1%2</source>
         <translation>Elevacija: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="612"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="623"/>
         <source>Created: %1</source>
         <translation>Kreirano: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="651"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="662"/>
         <source>Arrival: </source>
         <translation>Dolazak: </translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="663"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="674"/>
         <source>From Start</source>
         <translation>Od Početka</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="663"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="674"/>
         <source>To Next</source>
         <translation>Do Sljedeće</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="664"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="675"/>
         <source>To End</source>
         <translation>Do Kraja</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="667"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="678"/>
         <source>Distance: </source>
         <translation>Udaljenost: </translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="677"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="688"/>
         <source>Time: </source>
         <translation>Vrijeme: </translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="687"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="698"/>
         <source>Ascent: </source>
         <translation>Uspon: </translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="697"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="708"/>
         <source>Descent: </source>
         <translation>Silazak: </translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="747"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="815"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="758"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="826"/>
         <source>Statistics</source>
         <translation>Statistika</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="867"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="878"/>
         <source>Areas</source>
         <translation>Područja</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="899"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="910"/>
         <source>Routes</source>
         <translation>Rute</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="928"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="951"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="939"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="962"/>
         <source>Edit name...</source>
         <translation>Uredi ime...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="928"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="951"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="939"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="962"/>
         <source>Enter new project name.</source>
         <translation>Unesi novo ime projekta.</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="936"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="947"/>
         <source>Edit keywords...</source>
         <translation>Uredi ključne riječi...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="936"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="947"/>
         <source>Enter keywords.</source>
         <translation>Unesi ključne riječi.</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="1048"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="1059"/>
         <source>Print Diary</source>
         <translation>Ispis Dnevnika</translation>
     </message>
@@ -855,22 +871,22 @@ Da bi riješio ovaj sukob, možeš stvoriti i spremiti klon, nametnuti svoju ver
         <translation>Razno</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="448"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="458"/>
         <source>Color</source>
         <translation>Boja</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="449"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="459"/>
         <source>Activity</source>
         <translation>Aktivnost</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="523"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="533"/>
         <source>Set parameters to compute &quot;Energy Use Cycling&quot; for a cycling tour</source>
         <translation>Postavi parametre za izračun &quot;Potrošnje energije biciklom&quot; za biciklističku turu</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="529"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="539"/>
         <source> - Computation needs valid time, elevation and slope data.</source>
         <translation> - Izračun zahtijeva valjane podatke o vremenu, nadmorskoj visini i nagibu.</translation>
     </message>
@@ -1260,7 +1276,7 @@ Jedini ulazni parametar je minimalna duljina petlje: to je kako bi se spriječil
 <context>
     <name>CFilterSpeed</name>
     <message>
-        <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="121"/>
+        <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="130"/>
         <source>Track has no or invalid elevation data. Please correct or set constant speed!</source>
         <translation>Trag nema ili ima nevažeće podatke o nadmorskoj visini. Ispravite ili postavite konstantnu brzinu!</translation>
     </message>
@@ -2015,7 +2031,7 @@ Možeš izmijeniti oba parametra kako biste prilagodili ponašanje filtera. Za u
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1398"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1437"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1596"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2841"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2838"/>
         <source>track</source>
         <translation>trag</translation>
     </message>
@@ -2117,37 +2133,37 @@ Možeš izmijeniti oba parametra kako biste prilagodili ponašanje filtera. Za u
         <translation>Pokaži točke.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2221"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2218"/>
         <source>Changed name</source>
         <translation>Promijenjeno ime</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2226"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2223"/>
         <source>Changed comment</source>
         <translation>Promijenjen komentar</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2231"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2228"/>
         <source>Changed description</source>
         <translation>Promijenjen opis</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2236"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2233"/>
         <source>Changed links</source>
         <translation>Promijenjene poveznice</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2244"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2241"/>
         <source>Changed elevation of point %1 to %2 %3</source>
         <translation>Promijenjena elevacija točke %1 do %2 %3</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2267"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2264"/>
         <source>Changed activity to &apos;%1&apos; for complete track.</source>
         <translation>Promijenjena aktivnost u &apos;%1&apos; za cijeli trag.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2293"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2290"/>
         <source>Changed activity to &apos;%1&apos; for range(%2..%3).</source>
         <translation>Promijenjena aktivnost u &apos;%1&apos; za raspon(%2..%3).</translation>
     </message>
@@ -3383,17 +3399,17 @@ line %2, column %3:
 <context>
     <name>CHelpBrowser</name>
     <message>
-        <location filename="../../common/help/CHelpBrowser.cpp" line="73"/>
+        <location filename="../../common/help/CHelpBrowser.cpp" line="72"/>
         <source>Go back one page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../common/help/CHelpBrowser.cpp" line="77"/>
+        <location filename="../../common/help/CHelpBrowser.cpp" line="76"/>
         <source>Go forward one page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../common/help/CHelpBrowser.cpp" line="81"/>
+        <location filename="../../common/help/CHelpBrowser.cpp" line="80"/>
         <source>Go to initial page</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3759,52 +3775,52 @@ line %2, column %3:
 <context>
     <name>CListTrkPts</name>
     <message>
-        <location filename="../gis/trk/CListTrkPts.cpp" line="85"/>
+        <location filename="../gis/trk/CListTrkPts.cpp" line="84"/>
         <source>Range Info:</source>
         <translation>Info o Rasponu:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CListTrkPts.cpp" line="113"/>
+        <location filename="../gis/trk/CListTrkPts.cpp" line="112"/>
         <source>Time</source>
         <translation>Vrijeme</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CListTrkPts.cpp" line="114"/>
+        <location filename="../gis/trk/CListTrkPts.cpp" line="113"/>
         <source>Ele.</source>
         <translation>Ele.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CListTrkPts.cpp" line="114"/>
+        <location filename="../gis/trk/CListTrkPts.cpp" line="113"/>
         <source>Delta</source>
         <translation>Razlika</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CListTrkPts.cpp" line="115"/>
+        <location filename="../gis/trk/CListTrkPts.cpp" line="114"/>
         <source>Dist.</source>
         <translation>Udalj.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CListTrkPts.cpp" line="115"/>
+        <location filename="../gis/trk/CListTrkPts.cpp" line="114"/>
         <source>Speed</source>
         <translation>Brzina</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CListTrkPts.cpp" line="116"/>
+        <location filename="../gis/trk/CListTrkPts.cpp" line="115"/>
         <source>Slope</source>
         <translation>Nagib</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CListTrkPts.cpp" line="116"/>
+        <location filename="../gis/trk/CListTrkPts.cpp" line="115"/>
         <source>Ascent</source>
         <translation>Uspon</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CListTrkPts.cpp" line="117"/>
+        <location filename="../gis/trk/CListTrkPts.cpp" line="116"/>
         <source>Descent</source>
         <translation>Silazak</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CListTrkPts.cpp" line="117"/>
+        <location filename="../gis/trk/CListTrkPts.cpp" line="116"/>
         <source>Position</source>
         <translation>Položaj</translation>
     </message>
@@ -3882,89 +3898,89 @@ red %2, kolona %3:
 <context>
     <name>CMainWindow</name>
     <message>
-        <location filename="../CMainWindow.cpp" line="668"/>
+        <location filename="../CMainWindow.cpp" line="666"/>
         <source>Select folder...</source>
         <translation>Odaberi mapu...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="987"/>
+        <location filename="../CMainWindow.cpp" line="985"/>
         <source>Use &lt;b&gt;Menu-&gt;View-&gt;Add Map View&lt;/b&gt; to open a new view. Or &lt;b&gt;Menu-&gt;File-&gt;Load Map View&lt;/b&gt; to restore a saved one. Or click &lt;a href=&apos;NewView&apos;&gt;here&lt;/a&gt;.</source>
         <translation>Koristi &lt;b&gt;Izbornik-&gt;Pogled-&gt;Dodaj Pogled Karte&lt;/b&gt; za otvaranje novog pogleda. Ili &lt;b&gt;Izbornik-&gt;Datoteka-&gt;Učitaj Pogled Karte&lt;/b&gt; za vraćanje spremljenog. Ili klikni &lt;a href=&apos;NoviPogled&apos;&gt;ovdje&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1127"/>
+        <location filename="../CMainWindow.cpp" line="1125"/>
         <source>Ele.: %1%2</source>
         <translation>Ele.: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1137"/>
+        <location filename="../CMainWindow.cpp" line="1135"/>
         <source>Slope: %1%2</source>
         <comment>terrain</comment>
         <translation>Nagib: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1149"/>
+        <location filename="../CMainWindow.cpp" line="1147"/>
         <source>[Grid: %1]</source>
         <translation>[Rešetka: %1]</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1291"/>
+        <location filename="../CMainWindow.cpp" line="1289"/>
         <source>Load GIS Data...</source>
         <translation>Učitaj GIS Podatke...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1318"/>
+        <location filename="../CMainWindow.cpp" line="1316"/>
         <source>Select output file</source>
         <translation>Odaberi izlaznu datoteku</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1318"/>
-        <location filename="../CMainWindow.cpp" line="1342"/>
+        <location filename="../CMainWindow.cpp" line="1316"/>
+        <location filename="../CMainWindow.cpp" line="1340"/>
         <source>QMapShack View (*.view)</source>
         <translation>QMapShack pogled (*.view)</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1342"/>
+        <location filename="../CMainWindow.cpp" line="1340"/>
         <source>Select file to load</source>
         <translation>Odaberi datoteku za učitavanje</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1355"/>
+        <location filename="../CMainWindow.cpp" line="1353"/>
         <source>Can not add view...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1356"/>
+        <location filename="../CMainWindow.cpp" line="1354"/>
         <source>The view is already loaded as &apos;%1&apos;. You have to close it before loading it again.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1558"/>
+        <location filename="../CMainWindow.cpp" line="1556"/>
         <source>Rename View...</source>
         <translation>Preimenuj Pogled</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1558"/>
+        <location filename="../CMainWindow.cpp" line="1556"/>
         <source>Enter new name for view</source>
         <translation>Unesi ime novog pogleda</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1697"/>
+        <location filename="../CMainWindow.cpp" line="1695"/>
         <source>Fatal...</source>
         <translation>Kobno...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1698"/>
+        <location filename="../CMainWindow.cpp" line="1696"/>
         <source>QMapShack detected a badly installed Proj library. Please contact the package maintainer of your distribution to fix it.</source>
         <translation>QMapShack je otkrio loše instaliranu Proj biblioteku. Molim kontaktiraj održavatelja paketa tvoje distribucije kako bi je popravio.</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1766"/>
+        <location filename="../CMainWindow.cpp" line="1764"/>
         <source>To link map views all map views must have the same projection and scale type. The function &apos;Link Map Views&apos; will be switched off, now.</source>
         <translation>Za povezivanje pregleda karte svi pregledi karte moraju imati istu projekciju i vrstu mjerila. Funkcija &apos;Poveži pregled karte&apos; sada će biti isključena.</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1769"/>
+        <location filename="../CMainWindow.cpp" line="1767"/>
         <source>Link Map Views...</source>
         <translation>Poveži Preglede Karte...</translation>
     </message>
@@ -7097,20 +7113,20 @@ Replace /dev/ttyUSB0 with the tty device of your AIS receiver</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../realtime/ais/CRtAisInfo.cpp" line="171"/>
+        <location filename="../realtime/ais/CRtAisInfo.cpp" line="186"/>
         <source>Error...</source>
         <translation>Pogreška...</translation>
     </message>
     <message>
-        <location filename="../realtime/ais/CRtAisInfo.cpp" line="318"/>
-        <location filename="../realtime/ais/CRtAisInfo.cpp" line="362"/>
-        <location filename="../realtime/ais/CRtAisInfo.cpp" line="402"/>
-        <location filename="../realtime/ais/CRtAisInfo.cpp" line="446"/>
+        <location filename="../realtime/ais/CRtAisInfo.cpp" line="333"/>
+        <location filename="../realtime/ais/CRtAisInfo.cpp" line="377"/>
+        <location filename="../realtime/ais/CRtAisInfo.cpp" line="417"/>
+        <location filename="../realtime/ais/CRtAisInfo.cpp" line="461"/>
         <source>Unknown</source>
         <translation>Nepoznato</translation>
     </message>
     <message>
-        <location filename="../realtime/ais/CRtAisInfo.cpp" line="532"/>
+        <location filename="../realtime/ais/CRtAisInfo.cpp" line="547"/>
         <source>Failed...</source>
         <translation>Neuspješno ...</translation>
     </message>
@@ -7140,7 +7156,7 @@ Osnovna ideja ovog GPS izvora je primanje NMEA streama putem Ethernet veze. Mož
 Za konfiguraciju trebaš znati IP adresu svog Android uređaja ili naziv hosta koji mu daje DNS. Aplikacija će ti reći adresu. Osim toga, potreban ti je broj porta kako je konfigurirano u aplikaciji.</translation>
     </message>
     <message>
-        <location filename="../realtime/gpstether/CRtGpsTetherInfo.cpp" line="398"/>
+        <location filename="../realtime/gpstether/CRtGpsTetherInfo.cpp" line="413"/>
         <source>Failed...</source>
         <translation>Neuspješno ...</translation>
     </message>
@@ -8513,17 +8529,17 @@ red %2, kolona %3:
         <translation>Položaj</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CTableTrk.cpp" line="153"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="152"/>
         <source>Double click to edit elevation value</source>
         <translation>Dvaput klikni za uređivanje vrijednosti nadmorske visine</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CTableTrk.cpp" line="181"/>
-        <location filename="../gis/trk/CTableTrk.cpp" line="187"/>
-        <location filename="../gis/trk/CTableTrk.cpp" line="190"/>
-        <location filename="../gis/trk/CTableTrk.cpp" line="194"/>
-        <location filename="../gis/trk/CTableTrk.cpp" line="204"/>
-        <location filename="../gis/trk/CTableTrk.cpp" line="206"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="180"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="186"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="189"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="193"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="203"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="205"/>
         <source>%1%2</source>
         <translation>%1%2</translation>
     </message>
@@ -8776,177 +8792,177 @@ red %2, kolona %3:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="72"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="71"/>
         <source>⚠ This file references %1 source files. Reading gets inefficient past %2 - consider combining them into fewer files.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="79"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="78"/>
         <source>Combine files...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="95"/>
-        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="120"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="138"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="163"/>
         <source>File</source>
         <translation type="unfinished">Datoteka</translation>
     </message>
     <message>
-        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="95"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="138"/>
         <source>Existing overview sizes (px)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="95"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="138"/>
         <source>Status</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="120"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="163"/>
         <source>New overview levels</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="120"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="163"/>
         <source>Action</source>
         <translation type="unfinished">Akcija</translation>
     </message>
     <message>
-        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="126"/>
-        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="342"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="169"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="359"/>
         <source>Clean + rebuild</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="126"/>
-        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="344"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="169"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="361"/>
         <source>Build new</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="141"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="184"/>
         <source>Update &lt;OverviewList&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="141"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="184"/>
         <source>Add &lt;OverviewList&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="190"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="233"/>
         <source>%1 file(s) will have new overviews built</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="193"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="236"/>
         <source>%1 file(s) will have existing overviews cleaned and rebuilt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="200"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="243"/>
         <source>Estimated disk usage: %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="200"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="243"/>
         <source>Disk usage: %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="232"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="108"/>
         <source>Overview info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="234"/>
-        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="419"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="110"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="436"/>
         <source>Close</source>
         <translation type="unfinished">Zatvori</translation>
     </message>
     <message>
-        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="244"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="261"/>
         <source>none</source>
         <translation type="unfinished">nijedan</translation>
     </message>
     <message>
-        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="266"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="283"/>
         <source>✓ covered by .ovr</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="270"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="287"/>
         <source>✗ None</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="274"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="291"/>
         <source>⚠ Shallow (coarsest %1px)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="277"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="294"/>
         <source>✓ OK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="285"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="302"/>
         <source> (own .ovr)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="285"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="302"/>
         <source> (via &lt;OverviewList&gt;)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="323"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="340"/>
         <source>gdaladdo not found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="324"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="341"/>
         <source>Could not locate gdaladdo. Make sure the GDAL tools are installed and on PATH.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="337"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="354"/>
         <source>The following operations will be performed:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="355"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="372"/>
         <source>Update &amp;lt;OverviewList&amp;gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="357"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="374"/>
         <source>Add &amp;lt;OverviewList&amp;gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="362"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="379"/>
         <source>Confirm fix</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="405"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="422"/>
         <source>Removed %1.
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="427"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="444"/>
         <source>GDAL tools not found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="428"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="445"/>
         <source>Could not locate gdal_translate/gdalbuildvrt. Make sure the GDAL tools are installed and on PATH.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="438"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="455"/>
         <source>Could not read the raster layout of %1.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8955,98 +8971,98 @@ red %2, kolona %3:
         <translation type="obsolete">Odustani</translation>
     </message>
     <message>
-        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="437"/>
-        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="451"/>
-        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="485"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="454"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="468"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="502"/>
         <source>Combine failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="451"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="468"/>
         <source>No data found in %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="464"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="481"/>
         <source>This will split %1 into %2 compressed GeoTIFF(s) in %3, then rewrite %1 to reference them. The current file will be backed up as %4.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="468"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="485"/>
         <source>%1 grid cell(s) contained no data and will be skipped.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="471"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="488"/>
         <source>Confirm combine</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="485"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="502"/>
         <source>Could not back up %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="535"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="552"/>
         <source>Abort</source>
         <translation type="unfinished">Prekid</translation>
     </message>
     <message>
-        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="536"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="553"/>
         <source>An operation is in progress.
 
 Abort and remove any partially written files?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="584"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="601"/>
         <source>Rebuilt %1&apos;s &lt;OverviewList&gt; from its source files.
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="586"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="603"/>
         <source>Failed to update %1.
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="605"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="622"/>
         <source>Restored %1 from backup.
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="607"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="624"/>
         <source>Failed to restore %1 from backup - %2 is still available for manual recovery.
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="609"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="626"/>
         <source>Restore failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="610"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="627"/>
         <source>Combine failed and %1 could not be automatically restored from its backup.
 
 Rename %2 back to %1 yourself to recover the original file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="621"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="638"/>
         <source>Combined %1 source file(s) into %2 tile(s); %3 rewritten.
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="629"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="646"/>
         <source>Combine finished</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="630"/>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="647"/>
         <source>%1 has been rewritten to reference %2 merged tile(s).
 
 The %3 original source file(s) are still in %4 - delete them yourself once you&apos;ve confirmed the merged file works as expected.</source>
@@ -14545,7 +14561,7 @@ Naziv datoteke: %1</translation>
 <context>
     <name>ILineOp</name>
     <message>
-        <location filename="../mouse/line/ILineOp.cpp" line="302"/>
+        <location filename="../mouse/line/ILineOp.cpp" line="301"/>
         <source>Routing</source>
         <translation>Rutiranje</translation>
     </message>

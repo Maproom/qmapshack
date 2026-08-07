@@ -66,7 +66,7 @@
         <translation>Не показывайте заставку.</translation>
     </message>
     <message>
-        <location filename="../setup/CCommandProcessor.cpp" line="42"/>
+        <location filename="../setup/CCommandProcessor.cpp" line="43"/>
         <source>code</source>
         <translation type="unfinished"></translation>
     </message>
@@ -76,33 +76,49 @@
         <translation>Файл с конфигурацией QMapTool.</translation>
     </message>
     <message>
-        <location filename="../setup/CCommandProcessor.cpp" line="39"/>
+        <location filename="../setup/CCommandProcessor.cpp" line="40"/>
         <source>file</source>
         <translation>файл</translation>
     </message>
     <message>
-        <location filename="../setup/CCommandProcessor.cpp" line="42"/>
+        <location filename="../setup/CCommandProcessor.cpp" line="43"/>
         <source>Application locale.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setup/CCommandProcessor.cpp" line="45"/>
+        <location filename="../setup/CCommandProcessor.cpp" line="46"/>
         <source>Application font family.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setup/CCommandProcessor.cpp" line="45"/>
+        <location filename="../setup/CCommandProcessor.cpp" line="46"/>
+        <location filename="../setup/CCommandProcessor.cpp" line="55"/>
         <source>name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setup/CCommandProcessor.cpp" line="48"/>
+        <location filename="../setup/CCommandProcessor.cpp" line="49"/>
         <source>Application font size.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setup/CCommandProcessor.cpp" line="48"/>
+        <location filename="../setup/CCommandProcessor.cpp" line="49"/>
         <source>size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../setup/CCommandProcessor.cpp" line="53"/>
+        <source>Qt style.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../setup/CCommandProcessor.cpp" line="53"/>
+        <source>Available:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../setup/CCommandProcessor.cpp" line="54"/>
+        <source>Recommended:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -195,66 +211,66 @@
         <translation>Выберите угол и поместите маркер в соответствующую точку сетки на карте. Все 4 угла должны быть установлены.</translation>
     </message>
     <message>
-        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="134"/>
+        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="144"/>
         <source>Point 1 - not set</source>
         <translation>Пункт 1 - не установлен</translation>
     </message>
     <message>
-        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="136"/>
+        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="146"/>
         <source>Point 1 - ok</source>
         <translation>Пункт 1 - ок</translation>
     </message>
     <message>
-        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="140"/>
-        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="144"/>
+        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="150"/>
+        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="154"/>
         <source>Point 1 - bad</source>
         <translation>пункт 1 неверный</translation>
     </message>
     <message>
-        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="152"/>
+        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="162"/>
         <source>Point 2 - ok</source>
         <translation>Пункт 2 - ок</translation>
     </message>
     <message>
-        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="156"/>
-        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="160"/>
+        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="166"/>
+        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="170"/>
         <source>Point 2 - bad</source>
         <translation>пункт 2 неверный</translation>
     </message>
     <message>
-        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="168"/>
+        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="178"/>
         <source>Point 3 - ok</source>
         <translation>Пункт 3 - ок</translation>
     </message>
     <message>
-        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="172"/>
-        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="176"/>
+        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="182"/>
+        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="186"/>
         <source>Point 3 - bad</source>
         <translation>пункт 3 неверный</translation>
     </message>
     <message>
-        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="184"/>
+        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="194"/>
         <source>Point 4 - ok</source>
         <translation>Пункт 4 - ок</translation>
     </message>
     <message>
-        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="188"/>
-        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="192"/>
+        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="198"/>
+        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="202"/>
         <source>Point 4 - bad</source>
         <translation>пункт 4 неверный</translation>
     </message>
     <message>
-        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="150"/>
+        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="160"/>
         <source>Point 2 - not set</source>
         <translation>Пункт 2 - не установлен</translation>
     </message>
     <message>
-        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="166"/>
+        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="176"/>
         <source>Point 3 - not set</source>
         <translation>Пункт 3 - не установлен</translation>
     </message>
     <message>
-        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="182"/>
+        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="192"/>
         <source>Point 4 - not set</source>
         <translation>Пункт 4 - не установлен</translation>
     </message>
@@ -301,17 +317,17 @@
 <context>
     <name>CHelpBrowser</name>
     <message>
-        <location filename="../../common/help/CHelpBrowser.cpp" line="68"/>
+        <location filename="../../common/help/CHelpBrowser.cpp" line="72"/>
         <source>Go back one page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../common/help/CHelpBrowser.cpp" line="72"/>
+        <location filename="../../common/help/CHelpBrowser.cpp" line="76"/>
         <source>Go forward one page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../common/help/CHelpBrowser.cpp" line="76"/>
+        <location filename="../../common/help/CHelpBrowser.cpp" line="80"/>
         <source>Go to initial page</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1277,7 +1293,7 @@ or
     </message>
     <message>
         <source>&lt;b style=&apos;color: red;&apos;&gt;not found&lt;/b&gt;</source>
-        <translation type="vanished">&lt;b style=&apos;color: red;&apos;&gt;не найдено&lt;/b&gt;</translation>
+        <translation>&lt;b style=&apos;color: red;&apos;&gt;не найдено&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../setup/ISetupExtTools.ui" line="32"/>
@@ -1481,7 +1497,7 @@ or
     </message>
     <message>
         <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdaladdo&quot; found. Please check setup!&lt;/b&gt;</source>
-        <translation type="vanished">&lt;b style=&apos;color: red;&apos;&gt;&quot;gdaladdo&quot; не найдено. Пожалуйста, проверьте настройки!&lt;/b&gt;</translation>
+        <translation>&lt;b style=&apos;color: red;&apos;&gt;&quot;gdaladdo&quot; не найдено. Пожалуйста, проверьте настройки!&lt;/b&gt;</translation>
     </message>
 </context>
 <context>
@@ -1543,11 +1559,11 @@ or
     </message>
     <message>
         <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdalwarp&quot; found. Please check setup!&lt;/b&gt;</source>
-        <translation type="vanished">&lt;b style=&apos;color: red;&apos;&gt;&quot;gdalwarp&quot; не найдено. Пожалуйста, проверьте настройки!&lt;/b&gt;</translation>
+        <translation>&lt;b style=&apos;color: red;&apos;&gt;&quot;gdalwarp&quot; не найдено. Пожалуйста, проверьте настройки!&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdaladdo&quot; found. Please check setup!&lt;/b&gt;</source>
-        <translation type="vanished">&lt;b style=&apos;color: red;&apos;&gt;&quot;gdaladdo&quot; не найдено. Пожалуйста, проверьте настройки!&lt;/b&gt;</translation>
+        <translation>&lt;b style=&apos;color: red;&apos;&gt;&quot;gdaladdo&quot; не найдено. Пожалуйста, проверьте настройки!&lt;/b&gt;</translation>
     </message>
 </context>
 <context>
@@ -1600,7 +1616,7 @@ or
     </message>
     <message>
         <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;qmt_map2jnx&quot; found. Please check setup!&lt;/b&gt;</source>
-        <translation type="vanished">&lt;b style=&apos;color: red;&apos;&gt;&quot;qmt_map2jnx&quot; не найдено. Пожалуйста, проверьте настройки!&lt;/b&gt;</translation>
+        <translation>&lt;b style=&apos;color: red;&apos;&gt;&quot;qmt_map2jnx&quot; не найдено. Пожалуйста, проверьте настройки!&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../tool/IToolExport.ui" line="184"/>
@@ -1877,15 +1893,15 @@ or
     </message>
     <message>
         <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdaladdo&quot; found. Please check setup!&lt;/b&gt;</source>
-        <translation type="vanished">&lt;b style=&apos;color: red;&apos;&gt;&quot;gdaladdo&quot; не найдено. Пожалуйста, проверьте настройки!&lt;/b&gt;</translation>
+        <translation>&lt;b style=&apos;color: red;&apos;&gt;&quot;gdaladdo&quot; не найдено. Пожалуйста, проверьте настройки!&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdal_translate&quot; found. Please check setup!&lt;/b&gt;</source>
-        <translation type="vanished">&lt;b style=&apos;color: red;&apos;&gt;&quot;gdal_translate&quot; не найдено. Пожалуйста, проверьте настройки!&lt;/b&gt;</translation>
+        <translation>&lt;b style=&apos;color: red;&apos;&gt;&quot;gdal_translate&quot; не найдено. Пожалуйста, проверьте настройки!&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;qmt_rgb2pct&quot; found. Please check setup!&lt;/b&gt;</source>
-        <translation type="vanished">&lt;b style=&apos;color: red;&apos;&gt;&quot;qmt_rgb2pct&quot; не найдено. Пожалуйста, проверьте настройки!&lt;/b&gt;</translation>
+        <translation>&lt;b style=&apos;color: red;&apos;&gt;&quot;qmt_rgb2pct&quot; не найдено. Пожалуйста, проверьте настройки!&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../tool/IToolPalettize.ui" line="254"/>
@@ -1962,15 +1978,15 @@ or
     </message>
     <message>
         <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdalwarp&quot; found. Please check setup!&lt;/b&gt;</source>
-        <translation type="vanished">&lt;b style=&apos;color: red;&apos;&gt;&quot;gdalwarp&quot; не найдено. Пожалуйста, проверьте настройки!&lt;/b&gt;</translation>
+        <translation>&lt;b style=&apos;color: red;&apos;&gt;&quot;gdalwarp&quot; не найдено. Пожалуйста, проверьте настройки!&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdal_translate&quot; found. Please check setup!&lt;/b&gt;</source>
-        <translation type="vanished">&lt;b style=&apos;color: red;&apos;&gt;&quot;gdal_translate&quot; не найдено. Пожалуйста, проверьте настройки!&lt;/b&gt;</translation>
+        <translation>&lt;b style=&apos;color: red;&apos;&gt;&quot;gdal_translate&quot; не найдено. Пожалуйста, проверьте настройки!&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdaladdo&quot; found. Please check setup!&lt;/b&gt;</source>
-        <translation type="vanished">&lt;b style=&apos;color: red;&apos;&gt;&quot;gdaladdo&quot; не найдено. Пожалуйста, проверьте настройки!&lt;/b&gt;</translation>
+        <translation>&lt;b style=&apos;color: red;&apos;&gt;&quot;gdaladdo&quot; не найдено. Пожалуйста, проверьте настройки!&lt;/b&gt;</translation>
     </message>
 </context>
 <context>

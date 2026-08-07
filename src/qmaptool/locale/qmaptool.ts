@@ -61,7 +61,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setup/CCommandProcessor.cpp" line="42"/>
+        <location filename="../setup/CCommandProcessor.cpp" line="43"/>
         <source>code</source>
         <translation type="unfinished"></translation>
     </message>
@@ -76,33 +76,49 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setup/CCommandProcessor.cpp" line="39"/>
+        <location filename="../setup/CCommandProcessor.cpp" line="40"/>
         <source>file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setup/CCommandProcessor.cpp" line="42"/>
+        <location filename="../setup/CCommandProcessor.cpp" line="43"/>
         <source>Application locale.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setup/CCommandProcessor.cpp" line="45"/>
+        <location filename="../setup/CCommandProcessor.cpp" line="46"/>
         <source>Application font family.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setup/CCommandProcessor.cpp" line="45"/>
+        <location filename="../setup/CCommandProcessor.cpp" line="46"/>
+        <location filename="../setup/CCommandProcessor.cpp" line="55"/>
         <source>name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setup/CCommandProcessor.cpp" line="48"/>
+        <location filename="../setup/CCommandProcessor.cpp" line="49"/>
         <source>Application font size.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setup/CCommandProcessor.cpp" line="48"/>
+        <location filename="../setup/CCommandProcessor.cpp" line="49"/>
         <source>size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../setup/CCommandProcessor.cpp" line="53"/>
+        <source>Qt style.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../setup/CCommandProcessor.cpp" line="53"/>
+        <source>Available:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../setup/CCommandProcessor.cpp" line="54"/>
+        <source>Recommended:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -195,66 +211,66 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="134"/>
+        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="144"/>
         <source>Point 1 - not set</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="136"/>
+        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="146"/>
         <source>Point 1 - ok</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="140"/>
-        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="144"/>
+        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="150"/>
+        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="154"/>
         <source>Point 1 - bad</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="152"/>
+        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="162"/>
         <source>Point 2 - ok</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="156"/>
-        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="160"/>
+        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="166"/>
+        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="170"/>
         <source>Point 2 - bad</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="168"/>
+        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="178"/>
         <source>Point 3 - ok</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="172"/>
-        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="176"/>
+        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="182"/>
+        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="186"/>
         <source>Point 3 - bad</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="184"/>
+        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="194"/>
         <source>Point 4 - ok</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="188"/>
-        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="192"/>
+        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="198"/>
+        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="202"/>
         <source>Point 4 - bad</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="150"/>
+        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="160"/>
         <source>Point 2 - not set</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="166"/>
+        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="176"/>
         <source>Point 3 - not set</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="182"/>
+        <location filename="../overlay/gridtool/CGridPlacer.cpp" line="192"/>
         <source>Point 4 - not set</source>
         <translation type="unfinished"></translation>
     </message>
@@ -301,17 +317,17 @@
 <context>
     <name>CHelpBrowser</name>
     <message>
-        <location filename="../../common/help/CHelpBrowser.cpp" line="68"/>
+        <location filename="../../common/help/CHelpBrowser.cpp" line="72"/>
         <source>Go back one page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../common/help/CHelpBrowser.cpp" line="72"/>
+        <location filename="../../common/help/CHelpBrowser.cpp" line="76"/>
         <source>Go forward one page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../common/help/CHelpBrowser.cpp" line="76"/>
+        <location filename="../../common/help/CHelpBrowser.cpp" line="80"/>
         <source>Go to initial page</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1330,6 +1346,10 @@ or
         <source>&lt;b&gt;Note:&lt;/b&gt; Usually QMapTool should detect all external tools by itself. If it does not, it&apos;s a bad setup and you should fix the PATH variable of your system. You can setup the paths manually, too, if you know what you are doing. But please keep in mind that GDAL needs a proper environment setup to function properly. If it&apos;s not setup properly you might get results but these can be off grid.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>&lt;b style=&apos;color: red;&apos;&gt;not found&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ITimeZoneSetup</name>
@@ -1451,6 +1471,10 @@ or
         <source>No &quot;gdaladdo&quot; found. Please check setup!</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdaladdo&quot; found. Please check setup!&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>IToolCutMap</name>
@@ -1509,6 +1533,14 @@ or
         <source>No &quot;gdaladdo&quot; found. Please check setup!</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdalwarp&quot; found. Please check setup!&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdaladdo&quot; found. Please check setup!&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>IToolExport</name>
@@ -1561,6 +1593,10 @@ or
     <message>
         <location filename="../tool/IToolExport.ui" line="184"/>
         <source>Target Filename</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;qmt_map2jnx&quot; found. Please check setup!&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1836,6 +1872,18 @@ or
         <source>Select filename</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdaladdo&quot; found. Please check setup!&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdal_translate&quot; found. Please check setup!&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;qmt_rgb2pct&quot; found. Please check setup!&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>IToolRefMap</name>
@@ -1902,6 +1950,18 @@ or
     <message>
         <location filename="../tool/IToolRefMap.ui" line="256"/>
         <source>No &quot;gdaladdo&quot; found. Please check setup!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdalwarp&quot; found. Please check setup!&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdal_translate&quot; found. Please check setup!&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdaladdo&quot; found. Please check setup!&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

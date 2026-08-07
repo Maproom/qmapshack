@@ -67,6 +67,7 @@ int main(int argc, char** argv) {
     qDebug() << "Configuration path:" << cfg.fileName();
   }
   delete[] argVal;
+  qDebug() << "Qt style:" << qApp->style()->name();
 
   env.initQMapTool();
 

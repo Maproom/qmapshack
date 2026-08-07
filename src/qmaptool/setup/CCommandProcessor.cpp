@@ -20,7 +20,7 @@
 
 #include <QApplication>
 #include <QCommandLineParser>
-#include <iostream>
+#include <QStyleFactory>
 
 CAppOpts* CCommandProcessor::processOptions(const QStringList& arguments) {
   QCommandLineParser parser;
@@ -36,7 +36,8 @@ CAppOpts* CCommandProcessor::processOptions(const QStringList& arguments) {
   QCommandLineOption logfileOption(QStringList() << "f" << "logfile", tr("Print debug output to logfile."));
   parser.addOption(logfileOption);
 
-  QCommandLineOption configOption(QStringList() << "c" << "config", tr("File with QMapTool configuration."), tr("file"));
+  QCommandLineOption configOption(QStringList() << "c" << "config", tr("File with QMapTool configuration."),
+                                  tr("file"));
   parser.addOption(configOption);
 
   QCommandLineOption localeOption(QStringList() << "l" << "locale", tr("Application locale."), tr("code"));
@@ -48,11 +49,17 @@ CAppOpts* CCommandProcessor::processOptions(const QStringList& arguments) {
   QCommandLineOption fontSizeOption(QStringList() << "font-size", tr("Application font size."), tr("size"));
   parser.addOption(fontSizeOption);
 
+  QCommandLineOption styleOption(QStringList() << "style",
+                                 tr("Qt style.") % "\n" % tr("Available:") % " " % QStyleFactory::keys().join(", ") %
+                                     "\n" % tr("Recommended:") % " Fusion",
+                                 tr("name"));
+  parser.addOption(styleOption);
+
   // parser.addPositionalArgument("files", tr("Files for future use."));
 
   parser.process(arguments);
 
   return new CAppOpts(parser.isSet(nosplashOption), parser.isSet(debugOption), parser.isSet(logfileOption),
-                      parser.value(configOption), parser.value(localeOption),
-                      parser.value(fontFamilyOption), parser.value(fontSizeOption), parser.positionalArguments());
+                      parser.value(configOption), parser.value(localeOption), parser.value(fontFamilyOption),
+                      parser.value(fontSizeOption), parser.positionalArguments());
 }

@@ -23,6 +23,7 @@ V1.XX.X
 [QMS-1166] Allow configuring custom keyboard shortcuts
 [QMS-1171] Fix: Formatted text is rendered badly in dark theme
 [QMS-1173] Fix: QMS on macOS is not dark mode aware
+[QMS-1177] Show "style" option in QMS usage
 
 V1.20.3
 [QMS-1059] Fix: F1 help browser does not open external links

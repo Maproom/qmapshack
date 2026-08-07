@@ -204,7 +204,7 @@ find_package(QuaZip-Qt6             REQUIRED)
 find_package(ALGLIB                         ) # optional as we can use our local version
 
 qt_standard_project_setup(
-    I18N_TRANSLATED_LANGUAGES ca cs de es fr it nl ru
+    I18N_TRANSLATED_LANGUAGES ca cs de es fr hr it nl ru
 )
 
 # Minimum dependency versions (see issue #1123). The floor is the newest release

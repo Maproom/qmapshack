@@ -250,9 +250,9 @@ set( TRANSLATIONS
     locale/${APPLICATION_NAME}.ts
     locale/${APPLICATION_NAME}_de.ts
     locale/${APPLICATION_NAME}_es.ts
+    locale/${APPLICATION_NAME}_hr.ts
     locale/${APPLICATION_NAME}_it.ts
     locale/${APPLICATION_NAME}_ru.ts
-    locale/${APPLICATION_NAME}_hr.ts
 )
 
 if(${UPDATE_TRANSLATIONS})

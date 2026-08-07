@@ -85,6 +85,15 @@ sudo cmake --install .
 
 Use `ccmake .` or `cmake-gui .` in the build directory to review optional build settings before compiling.
 
+Alternatively, use the shipped CMake presets — no manual build directory, no options to remember:
+
+```bash
+cmake --preset linux-debug
+cmake --build --preset linux-debug --target qmapshack -j$(nproc)
+```
+
+See [README_PRESETS.md](README_PRESETS.md) for the full list of presets and how to add your own.
+
 **Updating:**
 
 ```bash

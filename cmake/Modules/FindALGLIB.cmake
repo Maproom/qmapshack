@@ -1,74 +1,36 @@
-# - Try to find ALGLIB
-# Once done this will define
+# Find ALGLIB.
 #
-#  ALGLIB_FOUND - system has ALGLIB
-#  ALGLIB_INCLUDE_DIRS - the ALGLIB include directory
-#  ALGLIB_LIBRARIES - Link these to use ALGLIB
-#  ALGLIB_DEFINITIONS - Compiler switches required for using ALGLIB
+#  ALGLIB_FOUND    - ALGLIB was found
+#  ALGLIB::ALGLIB  - imported target carrying the library and its include directory
+#
+#  Optional: 3rdparty/alglib defines the same target when no system copy is found.
 #
 #  Copyright (c) 2009 Andreas Schneider <mail@cynapses.org>
 #
 #  Redistribution and use is allowed according to the terms of the New
 #  BSD license.
 #  For details see the accompanying COPYING-CMAKE-SCRIPTS file.
-#
 
+# The sources include <interpolation.h> unqualified, so the suffix directory itself is the
+# include directory.
+find_path(ALGLIB_INCLUDE_DIR
+    NAMES interpolation.h
+    PATH_SUFFIXES alglib libalglib
+)
 
-if (ALGLIB_LIBRARIES AND ALGLIB_INCLUDE_DIRS)
-  # in cache already
-  set(ALGLIB_FOUND TRUE)
-else (ALGLIB_LIBRARIES AND ALGLIB_INCLUDE_DIRS)
+find_library(ALGLIB_LIBRARY NAMES alglib)
 
-  find_path(ALGLIB_INCLUDE_DIR
-    NAMES
-        interpolation.h
-    PATHS
-        /usr/include
-        /usr/local/include
-        /opt/local/include
-        /sw/include
-        ${CMAKE_INSTALL_PREFIX}/include
-    PATH_SUFFIXES
-        alglib
-        libalglib
-  )
-  mark_as_advanced(ALGLIB_INCLUDE_DIR)
+include(FindPackageHandleStandardArgs)
+find_package_handle_standard_args(ALGLIB
+    REQUIRED_VARS ALGLIB_LIBRARY ALGLIB_INCLUDE_DIR
+)
 
-  find_library(ALGLIB_LIBRARY
-    NAMES
-        alglib
-    PATHS
-        /usr/lib64
-        /usr/lib
-        /usr/local/lib
-        /opt/local/lib
-        /sw/lib
-        ${CMAKE_INSTALL_PREFIX}/lib
-  )
-  mark_as_advanced(ALGLIB_LIBRARY)
+if(ALGLIB_FOUND AND NOT TARGET ALGLIB::ALGLIB)
+    add_library(ALGLIB::ALGLIB UNKNOWN IMPORTED)
+    set_target_properties(ALGLIB::ALGLIB PROPERTIES
+        IMPORTED_LOCATION "${ALGLIB_LIBRARY}"
+        INTERFACE_INCLUDE_DIRECTORIES "${ALGLIB_INCLUDE_DIR}"
+    )
+endif()
 
-  set(ALGLIB_INCLUDE_DIRS
-    ${ALGLIB_INCLUDE_DIR}
-  )
-
-  set(ALGLIB_LIBRARIES
-    ${ALGLIB_LIBRARY}
-  )
-
-  if (ALGLIB_INCLUDE_DIRS AND ALGLIB_LIBRARIES)
-     set(ALGLIB_FOUND TRUE)
-  endif (ALGLIB_INCLUDE_DIRS AND ALGLIB_LIBRARIES)
-
-  if (ALGLIB_FOUND)
-    if (NOT ALGLIB_FIND_QUIETLY)
-      message(STATUS "Found ALGLIB: ${ALGLIB_LIBRARIES}")
-    endif (NOT ALGLIB_FIND_QUIETLY)
-  else (ALGLIB_FOUND)
-      message(STATUS "Could not find ALGLIB using internal code.")
-  endif (ALGLIB_FOUND)
-
-  # show the PROJ_INCLUDE_DIRS and PROJ_LIBRARIES variables only in the advanced view
-  mark_as_advanced(ALGLIB_INCLUDE_DIRS ALGLIB_LIBRARIES)
-
-endif (ALGLIB_LIBRARIES AND ALGLIB_INCLUDE_DIRS)
-
+mark_as_advanced(ALGLIB_INCLUDE_DIR ALGLIB_LIBRARY)

@@ -44,6 +44,53 @@ src/
   truth, notes are not.
 - Store project learnings in this file, not in the auto-memory system. Append under the matching
   section or add a new `###`. Keep it to forward-usable facts; git holds the history.
+- Multi-session plans and specs go in the tracked `.notes/` directory, named `<topic>-plan.md`,
+  with a pointer from `## Open work` here. Never invent another location.
+- **This checkout (`~/projects/qmapshack`, remote `kiozen/qmapshack`) is where work happens.**
+  `~/projects/qmapshack_master` tracks `Maproom/qmapshack` and is for reference only — never
+  branch or edit there.
+
+---
+
+## Build system
+
+Target-scoped CMake. Nothing is set at directory scope except the MSVC options below.
+
+- **Never touch the translation block's gating.** `UPDATE_TRANSLATIONS` off means no lupdate target
+  exists at all, so no build can rewrite the tracked `.ts` files; the catalogs are refreshed only
+  when translation work is deliberately finished. Qt's always-present `update_translations` target
+  is not a substitute. The `/locale` resource in the `else` branch stays too: every translator loads
+  `.qm` from a filesystem path, so nothing reads it, but `qt_add_resources(<app> ...)` is what makes
+  the `.qm` files inputs of the *application* target. Drop it and `--target qmapshack` stops
+  producing the catalogs the packaging scripts copy out of `<build>/src/<app>/`.
+- **`qms_options`** is the INTERFACE target carrying the project's warning set. First-party targets
+  link it `PRIVATE`; bundled 3rdparty must not. Add flags through `qms_add_flag_if_supported()`.
+- **`target_link_libraries` is keyword form everywhere.** Plain and keyword signatures cannot be
+  mixed on one target, so a new call must say `PRIVATE`.
+- **Dependencies are imported targets**: `GDAL::GDAL`, `PROJ::proj`, `JPEG::JPEG`,
+  `ROUTINO::ROUTINO`, `ALGLIB::ALGLIB`, `QuaZip::QuaZip`. `ALGLIB::ALGLIB` comes from
+  `FindALGLIB.cmake` for a system copy, or from `3rdparty/alglib`'s alias when none is found.
+  `ROUTINO_XML_PATH` stays a plain variable — qmapshack passes it as a define.
+- **Defines are per target**: `HELPPATH` on qmapshack and qmaptool, `ROUTINO_XML_PATH` and
+  `HAVE_DBUS` on qmapshack. Global on purpose: `_CRT_SECURE_NO_WARNINGS`, `/MP` and `/utf-8` under
+  MSVC, which the bundled FIT SDK needs, and `-march=native`.
+- **Install paths** come from `GNUInstallDirs` on UNIX and stay relative to the application
+  directory on Windows, where `CAppSetupWin` resolves `HELPPATH` against it. Six cache variables
+  survive so a packager can override them. `HTML_INSTALL_DIR` is `share/doc/HTML`, not
+  `CMAKE_INSTALL_DOCDIR` — changing it moves the installed help.
+- **`CMAKE_RUNTIME_OUTPUT_DIRECTORY` pins the four per-config variables too**, or a multi-config
+  generator appends `Release/` and the macOS and Windows packaging scripts stop finding the binaries.
+- **`ConfigureChecks.cmake` probes through the C++ compiler.** The project enables no C language, so
+  `check_include_file` / `check_symbol_exists` hard-fail; use the `_cxx` variants.
+- **`CMAKE_AUTOUIC` is OFF** — the `.ui` files are listed explicitly and go through `qt_wrap_ui`.
+  `qt_standard_project_setup()` sits directly after `find_package(Qt6 ...)` because it flips
+  AUTOMOC/AUTOUIC and appends to `CMAKE_INSTALL_RPATH`.
+- **`Qt6::Core5Compat` is required, not legacy.** `QTextCodec` decodes the Garmin codepages
+  (`CGarminTyp.cpp`, `IGarminStrTbl.cpp`) that `QStringDecoder` cannot.
+- **`CMAKE_CXX_EXTENSIONS` is left ON** — the UNIX warning set passes `-fms-extensions`.
+- `CMakePresets.json` holds three usable Linux presets; the Windows and macOS entries are untested
+  stubs and the platform blocks in `CMakeLists.txt` still drive those builds. The developer-facing
+  howto is `README_PRESETS.md`, linked from the README's Linux build section.
 
 ---
 
@@ -718,6 +765,25 @@ small sources.
 ---
 
 ## Open work
+
+Two analysed-but-unstarted designs live in `.notes/`, each wanting its own branch:
+`QMS-1135-overview-restore-plan.md` (transactional rollback when a *Fix overviews* job is cancelled)
+and `waypoint-icon-resolution-plan.md` (32 → 96 px waypoint icons, gated on storing `icon_t::focus`
+relative). De-freeze either by pointing at the file.
+
+### CMake — remaining
+
+- Retire the platform blocks: the hardcoded `C:\...` cache defaults and the macOS
+  `QT_DEV_PATH`/`ROUTINO_DEV_PATH`/… `FATAL_ERROR` gauntlet can move into `CMakePresets.json`, and
+  `MacOSX/build-QMS.sh` and the msvc batch files can call `--preset`. Needs someone who can test
+  both release paths.
+- Shared `qms_common` library: ten files under `src/common/` are compiled once per app. Blocker is
+  `src/common/help/CHelp.cpp`'s `"helpers/CSettings.h"`, which resolves per-app; the two copies are
+  byte-identical, so moving that header to `src/common/helpers/` unblocks it.
+- Confirm on their own platforms that these removals were inert: macOS `LINK_FLAGS`, the
+  `-framework` entries in `CMAKE_C_FLAGS` and the three framework include dirs; Windows
+  qmt_map2jnx's `Win32/` include dir. `msvc_64/cmake/{FindGDAL,FindPROJ,FindJPEG}.cmake` can go if
+  the gisinternals GDAL ships `GDALConfig.cmake`.
 
 ### QMS-1156 — convert non-UTF-8 VRT files to UTF-8 on load
 

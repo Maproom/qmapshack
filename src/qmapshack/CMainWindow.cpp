@@ -347,7 +347,8 @@ CMainWindow::CMainWindow() : id(QRandomGenerator::global()->generate()) {
   }
 
 #if defined(Q_OS_MAC)
-  if (QString::compare(qApp->style()->name(), "macOS", Qt::CaseInsensitive) == 0) {
+  const QProxyStyle* qmsStyle = (QProxyStyle*)qApp->style();
+  if (QString::compare(qmsStyle->baseStyle()->name(), "macOS", Qt::CaseInsensitive) == 0) {
     // we must get rid of style sheet file due to dark mode awareness:
     // adjust toolbar height and icon size of default style "macOS"
     // to toolbar height and icon size of style "Fusion" instead

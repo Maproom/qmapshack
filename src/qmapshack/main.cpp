@@ -58,9 +58,11 @@ int main(int argc, char** argv) {
   // useful debug info
   {
     qDebug().nospace() << "Qt versions: " << "build=" << QT_VERSION_STR << ", runtime=" << qVersion();
+    const QProxyStyle* qmsStyle = (QProxyStyle*)qApp->style();
+    qDebug() << "Qt style:" << qmsStyle->baseStyle()->name();
     QString argList("");
     for (int i = 1; i < argCnt; i++) {
-      argList += " \"" % QString::fromLocal8Bit(argVal[i]) % "\"";
+      argList += " \"" % QString::fromUtf8(argVal[i]) % "\"";
     }
     qDebug() << "Executable path:" << QFileInfo(argVal[0]).absoluteFilePath();
     qDebug().noquote().nospace() << "Argument list:" << argList;
@@ -68,7 +70,6 @@ int main(int argc, char** argv) {
     qDebug() << "Configuration path:" << cfg.fileName();
   }
   delete[] argVal;
-  qDebug() << "Qt style:" << qApp->style()->name();
 
   env->initQMapShack();
 

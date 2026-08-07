@@ -22,7 +22,9 @@
 
 #include <QPainterPath>
 #include <QtWidgets>
+#include <algorithm>
 #include <cmath>
+#include <thread>
 
 #include "CMainWindow.h"
 #include "canvas/CCanvas.h"
@@ -85,25 +87,41 @@ static inline bool isCompletelyOutside(const QPolygonF& poly, const QRectF& view
   return !viewport.intersects(ref);
 }
 
-static inline QImage img2line(const QImage& img, int width) {
+// Build a copy of @p img tiled horizontally to @p width pixels as an *owning*
+// premultiplied BLImage. Unlike a create_from_data() view, the result owns its pixels,
+// so Blend2D keeps them alive until the queued blit is rasterised — required once the
+// rendering context renders asynchronously/multithreaded. Returns an empty image on
+// failure.
+static inline BLImage img2line(const QImage& img, int width) {
   Q_ASSERT(img.format() == QImage::Format_ARGB32_Premultiplied);
 
-  QImage newImage(width, img.height(), QImage::Format_ARGB32_Premultiplied);
+  BLImage newImage;
+  const int height = img.height();
+  if (width < 1 || height < 1 || newImage.create(width, height, BL_FORMAT_PRGB32) != BL_SUCCESS) {
+    return newImage;
+  }
 
-  const int bpl_src = img.bytesPerLine();
-  const int bpl_dst = newImage.bytesPerLine();
-  const uchar* _srcBits = img.bits();
-  uchar* _dstBits = newImage.bits();
+  BLImageData dst;
+  if (newImage.make_mutable(&dst) != BL_SUCCESS) {
+    return BLImage();
+  }
 
-  for (int i = 0; i < img.height(); i++) {
-    const uchar* srcBits = _srcBits + bpl_src * i;
-    uchar* dstBits = _dstBits + bpl_dst * i;
+  const qsizetype bpl_src = img.bytesPerLine();
+  const qsizetype bpl_dst = static_cast<qsizetype>(dst.stride);
+  const qsizetype rowBytes = static_cast<qsizetype>(width) * 4;  // tightly packed destination row (ARGB32)
+  const uchar* const srcBase = img.bits();
+  uchar* const dstBase = static_cast<uchar*>(dst.pixel_data);
 
-    int bytesToCopy = bpl_dst;
+  for (int i = 0; i < height; ++i) {
+    const uchar* srcBits = srcBase + bpl_src * i;
+    uchar* dstBits = dstBase + bpl_dst * i;
+
+    qsizetype bytesToCopy = rowBytes;
     while (bytesToCopy > 0) {
-      memcpy(dstBits, srcBits, qMin(bytesToCopy, bpl_src));
-      dstBits += bpl_src;
-      bytesToCopy -= bpl_src;
+      const qsizetype chunk = qMin(bytesToCopy, bpl_src);
+      memcpy(dstBits, srcBits, static_cast<size_t>(chunk));
+      dstBits += chunk;
+      bytesToCopy -= chunk;
     }
   }
   return newImage;
@@ -209,19 +227,49 @@ bool applyPen(BLContext& ctx, const QPen& pen) {
   return true;
 }
 
-/// Blit a QImage at (@p x, @p y). Blend2D only consumes premultiplied ARGB, so a
-/// conversion is done on the fly for sources that are stored in another format.
-void blitQImage(BLContext& ctx, double x, double y, const QImage& img) {
+/// Deep-copy a QImage into an *owning* premultiplied BLImage. A create_from_data()
+/// view merely aliases the QImage's pixels, which dangle once the (often temporary)
+/// source dies — fatal under Blend2D's deferred/multithreaded rendering, where the
+/// blit is rasterised after the call returns. An owning BLImage is refcounted and is
+/// kept alive by Blend2D (and by BLPattern) until the queued command completes.
+/// Non-premultiplied inputs are converted on the fly. Returns an empty image on failure.
+BLImage toOwnedBLImage(const QImage& img) {
+  BLImage out;
   if (img.isNull()) {
-    return;
+    return out;
   }
+
   QImage storage;
   const QImage& src = (img.format() == QImage::Format_ARGB32_Premultiplied)
                           ? img
                           : (storage = img.convertToFormat(QImage::Format_ARGB32_Premultiplied));
-  BLImage bl;
-  if (bl.create_from_data(src.width(), src.height(), BL_FORMAT_PRGB32, const_cast<uchar*>(src.constBits()),
-                          src.bytesPerLine(), BL_DATA_ACCESS_READ) != BL_SUCCESS) {
+
+  if (out.create(src.width(), src.height(), BL_FORMAT_PRGB32) != BL_SUCCESS) {
+    return out;
+  }
+
+  BLImageData dst;
+  if (out.make_mutable(&dst) != BL_SUCCESS) {
+    return BLImage();
+  }
+
+  const qsizetype bpl_src = src.bytesPerLine();
+  const qsizetype bpl_dst = static_cast<qsizetype>(dst.stride);
+  const qsizetype rowBytes = qMin(bpl_src, bpl_dst);
+  const uchar* const s = src.constBits();
+  uchar* const d = static_cast<uchar*>(dst.pixel_data);
+  for (int y = 0; y < src.height(); ++y) {
+    memcpy(d + bpl_dst * y, s + bpl_src * y, static_cast<size_t>(rowBytes));
+  }
+  return out;
+}
+
+/// Blit a QImage at (@p x, @p y). The source is deep-copied into an owning BLImage so
+/// it survives Blend2D's deferred execution; the copy also handles non-premultiplied
+/// inputs on the fly.
+void blitQImage(BLContext& ctx, double x, double y, const QImage& img) {
+  const BLImage bl = toOwnedBLImage(img);
+  if (bl.is_empty()) {
     return;
   }
   ctx.blit_image(BLPoint(x, y), bl);
@@ -1304,7 +1352,13 @@ void CMapIMG::draw(IDrawContext::buffer_t& buf) /* override */
       return;
     }
 
-    BLContext ctx(blBuf);
+    // use Blend2Ds parallel renderer
+    BLContextCreateInfo cci{};
+    cci.thread_count = std::min(std::thread::hardware_concurrency(), 4u);  // gains quickly diminish >4
+    // Render synchronously rather than erroring if the thread pool can't be acquired.
+    cci.flags = BL_CONTEXT_CREATE_FLAG_FALLBACK_TO_SYNC;
+
+    BLContext ctx(blBuf, cci);
     ctx.set_global_alpha(getOpacity() / 100.0);
     /*
        The buffer is allocated at device resolution (pixelRatio larger) and tagged with
@@ -1338,6 +1392,7 @@ void CMapIMG::draw(IDrawContext::buffer_t& buf) /* override */
       drawPois(ctx, pois, rectPois);
     }
 
+    // In multithreaded mode the queued rasterisation completes here.
     ctx.end();
   }
 
@@ -1725,15 +1780,15 @@ void CMapIMG::drawPolygons(BLContext& ctx, polytype_t& lines) {
     // Configure the fill style once per type. Solid colours map directly; texture
     // images and hatch patterns are realised as a repeating BLPattern. The pattern's
     // pixel data (tile) must outlive every fill that uses it, hence the outer scope.
-    QImage tile;
-    BLImage tileBL;
     BLPattern pattern;
     if (brush.style() == Qt::SolidPattern) {
       ctx.set_fill_style(toBLColor(brush.color()));
     } else {
-      tile = brushToTile(brush);
-      if (tileBL.create_from_data(tile.width(), tile.height(), BL_FORMAT_PRGB32, const_cast<uchar*>(tile.constBits()),
-                                  tile.bytesPerLine(), BL_DATA_ACCESS_READ) == BL_SUCCESS) {
+      const QImage tile = brushToTile(brush);
+      // Owning copy so the pattern's pixels outlive this per-type scope and any
+      // deferred fills that reference it (see toOwnedBLImage()).
+      const BLImage tileBL = toOwnedBLImage(tile);
+      if (!tileBL.is_empty()) {
         pattern.set_image(tileBL);
         pattern.set_extend_mode(BL_EXTEND_MODE_REPEAT);
         // REPEAT makes only the fractional offset matter; fmod keeps the translation small
@@ -1850,17 +1905,15 @@ void CMapIMG::drawPolylines(BLContext& ctx, polytype_t& lines, const QPointF& sc
           const QPointF& p2 = poly[i + 1];
           const double angle = std::atan2(p2.y() - p1.y(), p2.x() - p1.x());
 
-          const QImage seg = img2line(pixmap, segLength);
-          BLImage segBL;
-          if (segBL.create_from_data(seg.width(), seg.height(), BL_FORMAT_PRGB32, const_cast<uchar*>(seg.constBits()),
-                                     seg.bytesPerLine(), BL_DATA_ACCESS_READ) != BL_SUCCESS) {
+          const BLImage seg = img2line(pixmap, static_cast<int>(segLength));
+          if (seg.is_empty()) {
             continue;
           }
 
           ctx.save();
           ctx.translate(p1.x(), p1.y());
           ctx.rotate(angle);
-          ctx.blit_image(BLPoint(0.0, -h / 2.0), segBL);
+          ctx.blit_image(BLPoint(0.0, -h / 2.0), seg);
           ctx.restore();
         }
       }

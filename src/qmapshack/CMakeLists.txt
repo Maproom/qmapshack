@@ -1,7 +1,5 @@
 # Find includes in corresponding build directories
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
-# Instruct CMake to run moc automatically when needed.
-set(CMAKE_AUTOMOC ON)
 
 
 ###############################################################################################
@@ -9,9 +7,6 @@ set(CMAKE_AUTOMOC ON)
 ###############################################################################################
 
 STRING(TOLOWER ${PROJECT_NAME} APPLICATION_NAME)
-
-# and other funny defines -> maybe config.h is a better place for that
-add_definitions(-DROUTINO_XML_PATH=${ROUTINO_XML_PATH})
 
 ###############################################################################################
 # All source files needed to compile
@@ -231,7 +226,6 @@ set( SRCS
     map/garmin/CGarminTyp.cpp
     map/garmin/IGarminStrTbl.cpp
     map/mapsforge/types.cpp
-    misc.h
     mouse/CMouseAdapter.cpp
     mouse/CMouseDummy.cpp
     mouse/CMouseEditArea.cpp
@@ -405,6 +399,7 @@ set( HDRS
     CMainWindow.h
     CSingleInstanceProxy.h
     contributors.h
+    misc.h
     canvas/CCanvas.h
     canvas/CCanvasSetup.h
     canvas/CCanvasSelect.h
@@ -928,8 +923,8 @@ set( RCS
 # Some Qt magic
 ###############################################################################################
 
-qt6_wrap_ui(UI_HDRS ${UIS})
-qt6_add_resources(RC_SRCS ${RCS})
+qt_wrap_ui(UI_HDRS ${UIS})
+qt_add_resources(RC_SRCS ${RCS})
 
 
 ###############################################################################################
@@ -943,23 +938,6 @@ set(MAININP
     ${${APPLICATION_NAME}_DESKTOP_FILES}
 )
 
-include_directories(
-    .
-    ../common
-    SYSTEM # this prevents warnings from non-QMS headers
-    ${CMAKE_BINARY_DIR}
-    ${GDAL_INCLUDE_DIRS}
-    ${PROJ_INCLUDE_DIRS}
-    ${ROUTINO_INCLUDE_DIRS}
-    ${ALGLIB_INCLUDE_DIRS}
-    ../../3rdparty/GarminFitSdk/cpp
-)
-
-if(APPLE)
-     include_directories(/System/Library/Frameworks/Foundation.framework)
-     include_directories(/System/Library/Frameworks/DiskArbitration.framework)
-endif(APPLE)
-
 
 ###############################################################################################
 # Build the executable and define necessary libraries.
@@ -967,17 +945,22 @@ endif(APPLE)
 if(WIN32)
     set (ICON win32icon.rc)
 endif()
-add_executable(${APPLICATION_NAME} WIN32 ${MAININP} ${ICON})
+qt_add_executable(${APPLICATION_NAME} WIN32 ${MAININP} ${ICON})
+
+target_include_directories(${APPLICATION_NAME} PRIVATE . ../common)
+# SYSTEM prevents warnings from non-QMS headers.
+target_include_directories(${APPLICATION_NAME} SYSTEM PRIVATE
+    ${PROJECT_BINARY_DIR}
+    ../../3rdparty/GarminFitSdk/cpp
+)
 
 # Repair any edited UI icon SVG before rcc embeds it (target defined in src/icons).
 add_dependencies(${APPLICATION_NAME} icon_hygiene)
 
-target_link_libraries(${APPLICATION_NAME} svgticonengine)
-
 ###############################################################################################
 # Translation related stuff
 ###############################################################################################
-if(${UPDATE_TRANSLATIONS_PURGE_OBSOLETE})
+if(UPDATE_TRANSLATIONS_PURGE_OBSOLETE)
     set(UPDATE_OPTIONS -noobsolete)
 else()
     set(UPDATE_OPTIONS )
@@ -996,19 +979,23 @@ set( TRANSLATIONS
     locale/${APPLICATION_NAME}_ru.ts
 )
 
-if(${UPDATE_TRANSLATIONS})
-
+# lupdate rewrites the tracked .ts files, so it stays behind UPDATE_TRANSLATIONS. With the option
+# off no lupdate target exists at all and no build can touch the catalogs.
+#
+# The resource in the else branch is what makes the .qm files inputs of the application target, so
+# building that target alone still produces them.
+if(UPDATE_TRANSLATIONS)
     qt_add_translations(${APPLICATION_NAME}
         TS_FILES ${TRANSLATIONS}
         QM_FILES_OUTPUT_VARIABLE ${APPLICATION_NAME}_QM_FILES
         LUPDATE_TARGET ${APPLICATION_NAME}_lupdate
-        SOURCE_TARGETS ${APPLICATION_NAME}    
+        SOURCE_TARGETS ${APPLICATION_NAME}
         LUPDATE_OPTIONS ${UPDATE_OPTIONS}
     )
     add_dependencies(${APPLICATION_NAME} ${APPLICATION_NAME}_lupdate)
-else(${UPDATE_TRANSLATIONS})
+else()
     qt_add_lrelease(
-        TS_FILES  ${TRANSLATIONS}
+        TS_FILES ${TRANSLATIONS}
         QM_FILES_OUTPUT_VARIABLE ${APPLICATION_NAME}_QM_FILES
     )
     qt_add_resources(${APPLICATION_NAME} "translations"
@@ -1016,24 +1003,28 @@ else(${UPDATE_TRANSLATIONS})
         BASE "${CMAKE_CURRENT_BINARY_DIR}"
         FILES "${${APPLICATION_NAME}_QM_FILES}"
     )
-endif(${UPDATE_TRANSLATIONS})
+endif()
 
 
 ###############################################################################################
 # Compile definitions
 ###############################################################################################
-target_compile_definitions(${APPLICATION_NAME} PUBLIC
-    -DVER_MAJOR=${PROJECT_VERSION_MAJOR}
-    -DVER_MINOR=${PROJECT_VERSION_MINOR}
-    -DVER_STEP=${PROJECT_VERSION_PATCH}
-    -DAPPLICATION_NAME=${PROJECT_NAME}
+target_compile_definitions(${APPLICATION_NAME} PRIVATE
+    VER_MAJOR=${PROJECT_VERSION_MAJOR}
+    VER_MINOR=${PROJECT_VERSION_MINOR}
+    VER_STEP=${PROJECT_VERSION_PATCH}
+    APPLICATION_NAME=${PROJECT_NAME}
+    "HELPPATH=${HTML_INSTALL_DIR}"
+    "ROUTINO_XML_PATH=${ROUTINO_XML_PATH}"
 )
 
-if(${DEVELOPMENT_VERSION})
-    target_compile_definitions(${APPLICATION_NAME} PUBLIC
-        -DDEVELOPMENT
-    )
-endif(${DEVELOPMENT_VERSION})
+if(Qt6DBus_FOUND)
+    target_compile_definitions(${APPLICATION_NAME} PRIVATE HAVE_DBUS)
+endif()
+
+if(DEVELOPMENT_VERSION)
+    target_compile_definitions(${APPLICATION_NAME} PRIVATE DEVELOPMENT)
+endif()
 
 ###############################################################################################
 # Libraries
@@ -1044,7 +1035,9 @@ else(Qt6DBus_FOUND)
     set(DBUS_LIB)
 endif(Qt6DBus_FOUND)
 
-target_link_libraries(${APPLICATION_NAME}
+target_link_libraries(${APPLICATION_NAME} PRIVATE
+    qms_options
+    svgticonengine
     Qt6::Widgets
     # Nothing includes a QtSvg header: QIcon(":/x.svg") is served by the qsvg image plugin and
     # the qsvgicon icon engine, both loaded at runtime. Linking the module is what makes
@@ -1068,16 +1061,16 @@ target_link_libraries(${APPLICATION_NAME}
     Qt6::Help
     Qt6::Core5Compat
     ${DBUS_LIB}
-    ${GDAL_LIBRARIES}
-    ${PROJ_LIBRARIES}
-    ${ROUTINO_LIBRARIES}
-    ${ALGLIB_LIBRARIES}
+    GDAL::GDAL
+    PROJ::proj
+    ROUTINO::ROUTINO
+    ALGLIB::ALGLIB
     QuaZip::QuaZip
     GarminFit
 )
 
 if(APPLE)
-     target_link_libraries(${APPLICATION_NAME}
+     target_link_libraries(${APPLICATION_NAME} PRIVATE
      ${Foundation_LIBRARY}
      ${DiskArbitration_LIBRARY}
     )
@@ -1087,7 +1080,7 @@ endif(APPLE)
 ###############################################################################################
 # Install target related stuff
 ###############################################################################################
-install(TARGETS     ${APPLICATION_NAME}                     DESTINATION     ${BIN_INSTALL_DIR})
+install(TARGETS     ${APPLICATION_NAME}                     RUNTIME DESTINATION     ${BIN_INSTALL_DIR})
 
 if (UNIX AND NOT WIN32 AND NOT APPLE)
     install(FILES   ${${APPLICATION_NAME}_QM_FILES}         DESTINATION     ${DATA_INSTALL_PREFIX}/${APPLICATION_NAME}/translations)

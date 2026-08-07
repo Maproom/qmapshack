@@ -21,4 +21,4 @@ target_include_directories(svgticonengine PRIVATE ..)
 
 # Qt6::Widgets is needed for QStyle::generatedIconPixmap(), which bakes the disabled/selected
 # look into a rendered icon. Both apps that link this plugin are Widgets apps anyway.
-target_link_libraries(svgticonengine PRIVATE Qt6::Gui Qt6::Svg Qt6::Widgets)
+target_link_libraries(svgticonengine PRIVATE qms_options Qt6::Gui Qt6::Svg Qt6::Widgets)

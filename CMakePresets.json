@@ -1,0 +1,79 @@
+{
+  "version": 3,
+  "cmakeMinimumRequired": { "major": 3, "minor": 21, "patch": 0 },
+  "configurePresets": [
+    {
+      "name": "base",
+      "hidden": true,
+      "binaryDir": "${sourceDir}/build/${presetName}",
+      "generator": "Ninja"
+    },
+    {
+      "name": "linux-debug",
+      "inherits": "base",
+      "displayName": "Linux debug",
+      "condition": { "type": "equals", "lhs": "${hostSystemName}", "rhs": "Linux" },
+      "cacheVariables": { "CMAKE_BUILD_TYPE": "Debug" }
+    },
+    {
+      "name": "linux-release",
+      "inherits": "base",
+      "displayName": "Linux release with debug info",
+      "condition": { "type": "equals", "lhs": "${hostSystemName}", "rhs": "Linux" },
+      "cacheVariables": { "CMAKE_BUILD_TYPE": "RelWithDebInfo" }
+    },
+    {
+      "name": "linux-asan",
+      "inherits": "base",
+      "displayName": "Linux debug with ASAN",
+      "description": "DEVELOPMENT_VERSION also defines DEVELOPMENT and requires an ASAN-capable compiler.",
+      "condition": { "type": "equals", "lhs": "${hostSystemName}", "rhs": "Linux" },
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "DEVELOPMENT_VERSION": "ON"
+      }
+    },
+    {
+      "name": "windows-msvc",
+      "displayName": "Windows MSVC 2022 x64",
+      "description": "Edit the paths to match the local dependency tree, or override them in CMakeUserPresets.json.",
+      "binaryDir": "${sourceDir}/build/${presetName}",
+      "generator": "Visual Studio 17 2022",
+      "architecture": "x64",
+      "condition": { "type": "equals", "lhs": "${hostSystemName}", "rhs": "Windows" },
+      "cacheVariables": {
+        "QT_DEV_PATH": "C:/Qt/6.8.0/msvc2022_64",
+        "GDAL_DEV_PATH": "C:/GDAL",
+        "PROJ_DEV_PATH": "C:/PROJ",
+        "ROUTINO_DEV_PATH": "C:/routino",
+        "JPEG_DEV_PATH": "C:/JPEG",
+        "ZLIB_ROOT": "C:/zlib",
+        "QuaZip-Qt6_DIR": "C:/quazip"
+      }
+    },
+    {
+      "name": "macos",
+      "displayName": "macOS release",
+      "description": "Reads the same environment MacOSX/config.sh exports. Source it before configuring.",
+      "binaryDir": "${sourceDir}/build/${presetName}",
+      "generator": "Unix Makefiles",
+      "condition": { "type": "equals", "lhs": "${hostSystemName}", "rhs": "Darwin" },
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_MACOSX_RPATH": "ON",
+        "CMAKE_OSX_DEPLOYMENT_TARGET": "$env{OSX_DEPLOYMENT_TARGET}",
+        "QT_DEV_PATH": "$env{QT_DEV_PATH}",
+        "GDAL_DEV_PATH": "$env{GDAL}",
+        "PROJ_DEV_PATH": "$env{PROJ_DEV_PATH}",
+        "ROUTINO_DEV_PATH": "$env{ROUTINO_DEV_PATH}"
+      }
+    }
+  ],
+  "buildPresets": [
+    { "name": "linux-debug", "configurePreset": "linux-debug" },
+    { "name": "linux-release", "configurePreset": "linux-release" },
+    { "name": "linux-asan", "configurePreset": "linux-asan" },
+    { "name": "windows-msvc", "configurePreset": "windows-msvc", "configuration": "Release" },
+    { "name": "macos", "configurePreset": "macos" }
+  ]
+}

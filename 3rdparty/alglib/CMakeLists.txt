@@ -49,4 +49,8 @@ set(alg_HDRS
 # The target to build
 # -------------------
 add_library(alg STATIC ${alg_SRCS} ${alg_HDRS})
+target_include_directories(alg PUBLIC src)
+
+# Same name as FindALGLIB's, so consumers link one target whichever copy is in use.
+add_library(ALGLIB::ALGLIB ALIAS alg)
 

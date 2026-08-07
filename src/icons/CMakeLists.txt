@@ -32,8 +32,8 @@ add_custom_command(
         -DMANIFEST=${ICON_MANIFEST}
         -DHYGIENE=${ICON_DIR}/svghygiene
         -DSTAMP=${ICON_HYGIENE_STAMP}
-        -P ${CMAKE_SOURCE_DIR}/cmake/IconHygiene.cmake
-    DEPENDS ${ICON_SVGS} ${ICON_MANIFEST} ${CMAKE_SOURCE_DIR}/cmake/IconHygiene.cmake
+        -P ${PROJECT_SOURCE_DIR}/cmake/IconHygiene.cmake
+    DEPENDS ${ICON_SVGS} ${ICON_MANIFEST} ${PROJECT_SOURCE_DIR}/cmake/IconHygiene.cmake
     COMMENT "Checking UI icon SVGs"
     VERBATIM
 )
@@ -48,8 +48,8 @@ add_custom_target(icon_hygiene DEPENDS ${ICON_HYGIENE_STAMP})
 
 add_custom_target(icon_gate ALL
     COMMAND ${CMAKE_COMMAND}
-        -DSRC_DIR=${CMAKE_SOURCE_DIR}/src
-        -P ${CMAKE_SOURCE_DIR}/cmake/IconGate.cmake
+        -DSRC_DIR=${PROJECT_SOURCE_DIR}/src
+        -P ${PROJECT_SOURCE_DIR}/cmake/IconGate.cmake
     COMMENT "Checking icon references"
     VERBATIM
 )

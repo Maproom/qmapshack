@@ -1,105 +1,27 @@
-if (UNIX)
+# Installation layout.
+#
+# UNIX follows GNUInstallDirs and installs to absolute paths, which HTML_INSTALL_DIR needs: it is
+# also compiled in as HELPPATH and CAppSetupLinux opens it directly.
+#
+# Windows installs relative to the application directory, because CAppSetupWin resolves HELPPATH
+# against it. GNUInstallDirs does not describe that layout, so it is spelled out.
+#
+# Every path is a cache entry so a packager can override it.
 
-  STRING(TOLOWER ${PROJECT_NAME} _PROJECT_NAME)
+include(GNUInstallDirs)
 
-  # Suffix for Linux
-  SET(LIB_SUFFIX
-    CACHE STRING "Define suffix of directory name (32/64)"
-  )
-
-  SET(EXEC_INSTALL_PREFIX
-    "${CMAKE_INSTALL_PREFIX}"
-    CACHE PATH  "Base directory for executables and libraries"
-  )
-  SET(SHARE_INSTALL_PREFIX
-    "${CMAKE_INSTALL_PREFIX}/share"
-    CACHE PATH "Base directory for files which go to share/"
-  )
-  SET(DATA_INSTALL_PREFIX
-    "${SHARE_INSTALL_PREFIX}/"
-    CACHE PATH "The parent directory where applications can install their data"
-  )
-
-  # The following are directories where stuff will be installed to
-  SET(BIN_INSTALL_DIR
-    "${EXEC_INSTALL_PREFIX}/bin"
-    CACHE PATH "The ${_PROJECT_NAME} binary install dir (default prefix/bin)"
-  )
-  SET(SBIN_INSTALL_DIR
-    "${EXEC_INSTALL_PREFIX}/sbin"
-    CACHE PATH "The ${_PROJECT_NAME} sbin install dir (default prefix/sbin)"
-  )
-  SET(LIB_INSTALL_DIR
-    "${EXEC_INSTALL_PREFIX}/lib${LIB_SUFFIX}"
-    CACHE PATH "The subdirectory relative to the install prefix where libraries will be installed (default is prefix/lib)"
-  )
-  SET(LIBEXEC_INSTALL_DIR
-    "${EXEC_INSTALL_PREFIX}/libexec"
-    CACHE PATH "The subdirectory relative to the install prefix where libraries will be installed (default is prefix/libexec)"
-  )
-  SET(PLUGIN_INSTALL_DIR
-    "${LIB_INSTALL_DIR}/${_PROJECT_NAME}"
-    CACHE PATH "The subdirectory relative to the install prefix where plugins will be installed (default is prefix/lib/${_PROJECT_NAME})"
-  )
-  SET(INCLUDE_INSTALL_DIR
-    "${CMAKE_INSTALL_PREFIX}/include"
-    CACHE PATH "The subdirectory to the header prefix (default prefix/include)"
-  )
-
-  SET(DATA_INSTALL_DIR
-    "${DATA_INSTALL_PREFIX}"
-    CACHE PATH "The parent directory where applications can install their data (default prefix/share/${_PROJECT_NAME})"
-  )
-  SET(HTML_INSTALL_DIR
-    "${DATA_INSTALL_PREFIX}/doc/HTML"
-    CACHE PATH "The HTML install dir for documentation (default data/doc/html)"
-  )
-  SET(ICON_INSTALL_DIR
-    "${DATA_INSTALL_PREFIX}/icons"
-    CACHE PATH "The icon install dir (default data/icons/)"
-  )
-  SET(SOUND_INSTALL_DIR
-    "${DATA_INSTALL_PREFIX}/sounds"
-    CACHE PATH "The install dir for sound files (default data/sounds)"
-  )
-
-  SET(LOCALE_INSTALL_DIR
-    "${SHARE_INSTALL_PREFIX}/locale"
-    CACHE PATH "The install dir for translations (default prefix/share/locale)"
-  )
-
-  SET(XDG_APPS_DIR
-    "${SHARE_INSTALL_PREFIX}/applications/"
-    CACHE PATH "The XDG apps dir"
-  )
-  SET(XDG_DIRECTORY_DIR
-    "${SHARE_INSTALL_PREFIX}/desktop-directories"
-    CACHE PATH "The XDG directory"
-  )
-
-  SET(SYSCONF_INSTALL_DIR
-    "${EXEC_INSTALL_PREFIX}/etc"
-    CACHE PATH "The ${_PROJECT_NAME} sysconfig install dir (default prefix/etc)"
-  )
-  SET(MAN_INSTALL_DIR
-    "${SHARE_INSTALL_PREFIX}/man"
-    CACHE PATH "The ${_PROJECT_NAME} man install dir (default prefix/man)"
-  )
-  SET(INFO_INSTALL_DIR
-    "${SHARE_INSTALL_PREFIX}/info"
-    CACHE PATH "The ${_PROJECT_NAME} info install dir (default prefix/info)"
-  )
-endif (UNIX)
-
-if (WIN32)
-  # Same same
-  SET(BIN_INSTALL_DIR bin)
-  SET(SBIN_INSTALL_DIR .)
-  SET(LIB_INSTALL_DIR .)
-  SET(PLUGIN_INSTALL_DIR plugins)
-  SET(HTML_INSTALL_DIR doc/HTML)
-  SET(ICON_INSTALL_DIR .)
-  SET(SOUND_INSTALL_DIR .)
-  SET(LOCALE_INSTALL_DIR lang)
-endif (WIN32)
-
+if(WIN32)
+    set(BIN_INSTALL_DIR     "bin"       CACHE PATH "Where the binaries go")
+    set(DATA_INSTALL_PREFIX "."         CACHE PATH "Parent directory for application data")
+    set(HTML_INSTALL_DIR    "doc/HTML"  CACHE PATH "Where the offline help goes")
+    set(ICON_INSTALL_DIR    "."         CACHE PATH "Where the icon theme goes")
+    set(XDG_APPS_DIR        "."         CACHE PATH "Where the .desktop files go")
+    set(MAN_INSTALL_DIR     "man"       CACHE PATH "Where the man pages go")
+else()
+    set(BIN_INSTALL_DIR     "${CMAKE_INSTALL_FULL_BINDIR}"                  CACHE PATH "Where the binaries go")
+    set(DATA_INSTALL_PREFIX "${CMAKE_INSTALL_FULL_DATAROOTDIR}"             CACHE PATH "Parent directory for application data")
+    set(HTML_INSTALL_DIR    "${CMAKE_INSTALL_FULL_DATAROOTDIR}/doc/HTML"    CACHE PATH "Where the offline help goes")
+    set(ICON_INSTALL_DIR    "${CMAKE_INSTALL_FULL_DATAROOTDIR}/icons"       CACHE PATH "Where the icon theme goes")
+    set(XDG_APPS_DIR        "${CMAKE_INSTALL_FULL_DATAROOTDIR}/applications" CACHE PATH "Where the .desktop files go")
+    set(MAN_INSTALL_DIR     "${CMAKE_INSTALL_FULL_MANDIR}"                  CACHE PATH "Where the man pages go")
+endif()

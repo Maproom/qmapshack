@@ -21,18 +21,29 @@ Planning:
 * Cut/copy/combine/reverse tracks
 * Various filter to enhance tracks
 
+Routing:
+* Offline routing with Routino
+* Offline routing with a local BRouter process
+* Online routing via the BRouter web service
+* Route optimization
+
 GPS Devices:
 * Support for newer Garmin devices
 * Support for TwoNav devices
 * Project oriented data organization on devices
 * Synchronize your project with several devices attached 
 
+User Interface:
+* Multiple canvases in one workspace
+* HiDPI support
+* Light and dark color schemes
+* Configurable keyboard shortcuts
+
 System:
 * License GPL3+
-* Runs on all *nix systems as well as on Windows
-  Probably on OS X, too, but so far no one volunteers to 
-  maintain a binary.
-* GUI has been translated to Czech, French, German and Spanish
-* Wiki documentation is English 
+* Runs on all *nix systems as well as on Windows and macOS
+* GUI has been translated to Catalan, Croatian, Czech, Dutch, French,
+  German, Italian, Russian and Spanish
+* Wiki documentation is English
 * Needs Qt6, GDAL, PROJ installed
 * For device support on Linux DBus and UDisk2 must be installed

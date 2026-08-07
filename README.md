@@ -21,7 +21,7 @@
 - **Database** — Project-oriented data model with persistent database storage, diary support, and structured folder organisation.
 - **GPS devices** — Read/write support for modern Garmin and TwoNav devices; project-oriented synchronisation.
 - **Analysis** — Track profile graphs, elevation, speed, slope, and heart rate analysis; realtime data display.
-- **Interface** — Multi-canvas workspace; available in English, German, French, Spanish, Czech, Italian, Dutch, Catalan, and Russian.
+- **Interface** — Multi-canvas workspace with HiDPI support, light and dark colour schemes, and configurable keyboard shortcuts; available in English, German, French, Spanish, Czech, Italian, Dutch, Catalan, Croatian, and Russian.
 
 ---
 
@@ -31,16 +31,16 @@
 
 **Windows** — 64-bit installer available on the [releases page](https://github.com/Maproom/qmapshack/releases).
 
-**macOS** — Binary bundle (Intel, macOS 14 Sonoma or later) on the [releases page](https://github.com/Maproom/qmapshack/releases).
+**macOS** — Binary bundle on the [releases page](https://github.com/Maproom/qmapshack/releases).
 
 **Linux — distribution packages:**
 
 | Distribution | Package |
 |---|---|
 | Debian | [packages.debian.org](https://packages.debian.org/testing/qmapshack) |
-| Ubuntu | [packages.ubuntu.com](https://packages.ubuntu.com/xenial/qmapshack) |
+| Ubuntu | [packages.ubuntu.com](https://packages.ubuntu.com/search?keywords=qmapshack) |
 | openSUSE | [software.opensuse.org](https://software.opensuse.org/package/qmapshack) |
-| Arch Linux | [archlinux.org](https://archlinux.org/packages/community/x86_64/qmapshack) / [AUR (dev)](https://aur.archlinux.org/packages/qmapshack-git) |
+| Arch Linux | [archlinux.org](https://archlinux.org/packages/extra/x86_64/qmapshack/) / [AUR (dev)](https://aur.archlinux.org/packages/qmapshack-git) |
 | Other (deb, rpm, …) | [pkgs.org](https://pkgs.org/download/qmapshack) |
 
 **Linux — AppImages** for Fedora, openSUSE, and Ubuntu are available from the [QMapShack AppImage project](https://github.com/kkarsten62/QMapShack.AppImage/releases). See the [AppImage wiki page](https://github.com/Maproom/qmapshack/wiki/DocQMSAppImage) for details.
@@ -53,13 +53,15 @@
 
 | Library | Minimum version | Purpose |
 |---|---|---|
-| [Qt6](https://www.qt.io/) | 6.8 | Core, Widgets, Network, SQL, PrintSupport, WebEngineWidgets |
+| [Qt6](https://www.qt.io/) | 6.8 | Core, Widgets, Svg, SvgWidgets, Xml, Sql, Network, PrintSupport, WebEngineWidgets, Qml, UiTools, Help, LinguistTools |
 | [GDAL](https://gdal.org/) | 3.10.0 | Map and raster data I/O |
 | [PROJ](https://proj.org/) | 9.4.0 | Coordinate reference system transformations |
 | [Routino](http://www.routino.org/) | 3.4 | Offline routing |
 | [QuaZip](https://github.com/stachenov/quazip) | 1.x (Qt6 build) | ZIP archive support |
+| libjpeg | — | JNX and JPEG raster support |
+| [ALGLIB](https://www.alglib.net/) | — | Optional; a bundled copy is used when not found |
 | CMake | 3.20 | Build system |
-| C++20 compiler | — | GCC ≥ 10, Clang ≥ 12, MSVC 2019 |
+| C++20 compiler | — | GCC ≥ 10, Clang ≥ 12, MSVC 2022 |
 
 Install dependencies via your distribution's package manager and make sure the **development packages** (`-dev` / `-devel`) are included. On Linux, device support additionally requires **DBus** and **UDisk2**.
 
@@ -93,7 +95,7 @@ cd ../build_QMapShack && cmake --build . --target qmapshack -j$(nproc)
 <details>
 <summary><strong>macOS</strong></summary>
 
-The macOS build uses Homebrew (recommended) or MacPorts. A scripted environment handles all dependencies.
+The macOS build uses Homebrew (recommended) or MacPorts. A scripted environment handles all dependencies. The bundle targets macOS 12 or later and is built for the architecture of the build host (Intel or Apple Silicon).
 
 ```bash
 mkdir ~/QMSBuild && cd ~/QMSBuild
@@ -111,7 +113,7 @@ Finished app bundles appear in the `release/` subdirectory. See [MacOSX/README.m
 <details>
 <summary><strong>Windows</strong></summary>
 
-Windows builds use MSVC 2019 (64-bit). Build scripts and step-by-step instructions are in the `msvc_64/` directory and on the [wiki](https://github.com/Maproom/qmapshack/wiki/BuildWindowsVisualStudio).
+Windows builds use MSVC 2022 (64-bit). Build scripts and step-by-step instructions are in the `msvc_64/` directory and on the [wiki](https://github.com/Maproom/qmapshack/wiki/BuildWindowsVisualStudio).
 
 </details>
 

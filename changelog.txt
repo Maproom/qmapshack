@@ -9,6 +9,7 @@ V1.XX.X
 [QMS-1123] Build error on platform Linux Ubuntu 24.04.4
 [QMS-1125] Use GDAL's warp and scale API to draw *.vrt maps
 [QMS-1128] Enhance VRT handling for maps and DEM
+[QMS-1130] Improve performance of IMG renderer + Fix: patterned areas shifting when panning
 [QMS-1132] Add action to move a map to the top in map list (macOS)
 [QMS-1135] Add guidance to improve overviews for DEM and map VRT
 [QMS-1139] Reject non-UTF-8 encoded VRT files with a clear error message

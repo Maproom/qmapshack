@@ -1,91 +1,37 @@
-# - Try to find LIBJPEG
-# Once done this will define
+# Find libjpeg. Windows only - this module is on CMAKE_MODULE_PATH under WIN32 alone and shadows
+# CMake's own FindJPEG, which does not know the JPEG_DEV_PATH layout.
 #
-#  JPEG_FOUND - system has LIBJPEG
-#  JPEG_INCLUDE_DIRS - the LIBJPEG include directory
-#  JPEG_LIBRARIES - Link these to use LIBJPEG
-#  JPEG_DEFINITIONS - Compiler switches required for using LIBJPEG
+#  JPEG_FOUND  - libjpeg was found
+#  JPEG::JPEG  - imported target carrying the library and its include directory
 #
 #  Copyright (c) 2009 Andreas Schneider <mail@cynapses.org>
 #
 #  Redistribution and use is allowed according to the terms of the New
 #  BSD license.
 #  For details see the accompanying COPYING-CMAKE-SCRIPTS file.
-#
 
-# NOTE: For Windows, please adapt the path (currently E:/qlgt/tools/libjpeg/win32)
-#   to your local installation directory
+find_path(JPEG_INCLUDE_DIR
+    NAMES jpeglib.h
+    HINTS ${JPEG_DEV_PATH}/include
+)
 
-if (JPEG_LIBRARIES AND JPEG_INCLUDE_DIRS)
-  # in cache already
-  set(JPEG_FOUND TRUE)
-else (JPEG_LIBRARIES AND JPEG_INCLUDE_DIRS)
+# LIBJPEG_LIBRARY, not JPEG_LIBRARY: the name predates this module and packagers set it by hand.
+find_library(LIBJPEG_LIBRARY
+    NAMES libjpeg jpeg
+    HINTS ${JPEG_DEV_PATH}/lib
+)
 
-  find_path(JPEG_INCLUDE_DIR
-    NAMES
-      jpeglib.h
-    PATHS
-if(WIN32)
-        ${JPEG_DEV_PATH}/include
-endif(WIN32)
-        /usr/include
-        /usr/local/include
-        /opt/local/include
-        /sw/include
-        ${CMAKE_SOURCE_DIR}/Win32/JPEG/include
-  )
-  mark_as_advanced(JPEG_INCLUDE_DIR)
+include(FindPackageHandleStandardArgs)
+find_package_handle_standard_args(JPEG
+    REQUIRED_VARS LIBJPEG_LIBRARY JPEG_INCLUDE_DIR
+)
 
-  find_library(LIBJPEG_LIBRARY
-    NAMES
-if (WIN32)
-        libjpeg
-else (WIN32)
-        jpeg
-endif (WIN32)
-    PATHS
-if(WIN32)
-        ${JPEG_DEV_PATH}/lib
-endif(WIN32)
-        /usr/lib
-        /usr/local/lib
-        /opt/local/lib
-        /sw/lib
-        ${CMAKE_SOURCE_DIR}/Win32/JPEG/lib
-  )
-  mark_as_advanced(LIBJPEG_LIBRARY)
-
-  if (LIBJPEG_LIBRARY)
-    set(LIBJPEG_FOUND TRUE)
-  endif (LIBJPEG_LIBRARY)
-
-  set(JPEG_INCLUDE_DIRS
-    ${JPEG_INCLUDE_DIR}
-  )
-
-  if (LIBJPEG_FOUND)
-    set(JPEG_LIBRARIES
-      ${JPEG_LIBRARIES}
-      ${LIBJPEG_LIBRARY}
+if(JPEG_FOUND AND NOT TARGET JPEG::JPEG)
+    add_library(JPEG::JPEG UNKNOWN IMPORTED)
+    set_target_properties(JPEG::JPEG PROPERTIES
+        IMPORTED_LOCATION "${LIBJPEG_LIBRARY}"
+        INTERFACE_INCLUDE_DIRECTORIES "${JPEG_INCLUDE_DIR}"
     )
-  endif (LIBJPEG_FOUND)
+endif()
 
-  if (JPEG_INCLUDE_DIRS AND JPEG_LIBRARIES)
-     set(JPEG_FOUND TRUE)
-  endif (JPEG_INCLUDE_DIRS AND JPEG_LIBRARIES)
-
-  if (JPEG_FOUND)
-    if (NOT JPEG_FIND_QUIETLY)
-      message(STATUS "Found LIBJPEG: ${JPEG_LIBRARIES}")
-    endif (NOT JPEG_FIND_QUIETLY)
-  else (JPEG_FOUND)
-    if (JPEG_FIND_REQUIRED)
-      message(FATAL_ERROR "Could not find LIBJPEG")
-    endif (JPEG_FIND_REQUIRED)
-  endif (JPEG_FOUND)
-
-  # show the JPEG_INCLUDE_DIRS and JPEG_LIBRARIES variables only in the advanced view
-  mark_as_advanced(JPEG_INCLUDE_DIRS JPEG_LIBRARIES)
-
-endif (JPEG_LIBRARIES AND JPEG_INCLUDE_DIRS)
-
+mark_as_advanced(JPEG_INCLUDE_DIR LIBJPEG_LIBRARY)

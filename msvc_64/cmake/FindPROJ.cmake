@@ -1,100 +1,53 @@
-# - Try to find PROJ
-# Once done this will define
+# Find PROJ. Windows only - this module is on CMAKE_MODULE_PATH under WIN32 alone and shadows
+# the PROJ config package, which the binary distributions do not ship.
 #
-#  PROJ_FOUND - system has PROJ
-#  PROJ_INCLUDE_DIRS - the PROJ include directory
-#  PROJ_LIBRARIES - Link these to use PROJ
-#  PROJ_DEFINITIONS - Compiler switches required for using PROJ
+#  PROJ_FOUND    - PROJ was found
+#  PROJ_VERSION  - version read from proj.h
+#  PROJ::proj    - imported target carrying the library and its include directory
 #
 #  Copyright (c) 2009 Andreas Schneider <mail@cynapses.org>
 #
 #  Redistribution and use is allowed according to the terms of the New
 #  BSD license.
 #  For details see the accompanying COPYING-CMAKE-SCRIPTS file.
-#
 
+find_path(PROJ_INCLUDE_DIR
+    NAMES proj.h
+    HINTS ${PROJ_DEV_PATH}/include
+    PATH_SUFFIXES proj4
+)
 
-if (PROJ_LIBRARIES AND PROJ_INCLUDE_DIRS)
-  # in cache already
-  set(PROJ_FOUND TRUE)
-else (PROJ_LIBRARIES AND PROJ_INCLUDE_DIRS)
+# LIBPROJ_LIBRARY, not PROJ_LIBRARY: the name predates this module and packagers set it by hand.
+# The proj_6_* names cover older binary distributions that carried the version in the file name.
+find_library(LIBPROJ_LIBRARY
+    NAMES proj proj_6_0 proj_6_1 proj_6_2 proj_6_3
+    HINTS ${PROJ_DEV_PATH}/lib
+)
 
-  find_path(PROJ_INCLUDE_DIR
-    NAMES
-      proj.h
-    PATHS
-if(WIN32)
-      ${PROJ_DEV_PATH}/include
-endif(WIN32)
-        /usr/include
-        /usr/local/include
-        /opt/local/include
-        /sw/include
-        ${CMAKE_INSTALL_PREFIX}/include
-        ${CMAKE_SOURCE_DIR}/Win32/GDAL/include
-    PATH_SUFFIXES
-        proj4
+if(PROJ_INCLUDE_DIR AND EXISTS "${PROJ_INCLUDE_DIR}/proj.h")
+    file(READ "${PROJ_INCLUDE_DIR}/proj.h" _proj_h)
+    string(REGEX REPLACE "^.*PROJ_VERSION_MAJOR +([0-9]+).*$" "\\1" _proj_version_major "${_proj_h}")
+    string(REGEX REPLACE "^.*PROJ_VERSION_MINOR +([0-9]+).*$" "\\1" _proj_version_minor "${_proj_h}")
+    string(REGEX REPLACE "^.*PROJ_VERSION_PATCH +([0-9]+).*$" "\\1" _proj_version_patch "${_proj_h}")
+    set(PROJ_VERSION "${_proj_version_major}.${_proj_version_minor}.${_proj_version_patch}")
+    unset(_proj_h)
+    unset(_proj_version_major)
+    unset(_proj_version_minor)
+    unset(_proj_version_patch)
+endif()
 
-  )
-  #mark_as_advanced(PROJ_INCLUDE_DIR)
+include(FindPackageHandleStandardArgs)
+find_package_handle_standard_args(PROJ
+    REQUIRED_VARS LIBPROJ_LIBRARY PROJ_INCLUDE_DIR
+    VERSION_VAR PROJ_VERSION
+)
 
-  find_library(LIBPROJ_LIBRARY
-    NAMES
-        proj
-        proj_6_0
-        proj_6_1
-        proj_6_2
-        proj_6_3
-    PATHS
-if(WIN32)
-      ${PROJ_DEV_PATH}/lib
-endif(WIN32)
-        /usr/lib
-        /usr/local/lib
-        /opt/local/lib
-        /sw/lib
-        ${CMAKE_INSTALL_PREFIX}/lib
-        ${CMAKE_SOURCE_DIR}/Win32/GDAL/lib
-  )
-  #mark_as_advanced(LIBPROJ_LIBRARY)
-
-  if (LIBPROJ_LIBRARY)
-    set(LIBPROJ_FOUND TRUE)
-  endif (LIBPROJ_LIBRARY)
-
-  set(PROJ_INCLUDE_DIRS
-    ${PROJ_INCLUDE_DIR}
-  )
-
-  if (LIBPROJ_FOUND)
-    set(PROJ_LIBRARIES
-      ${PROJ_LIBRARIES}
-      ${LIBPROJ_LIBRARY}
+if(PROJ_FOUND AND NOT TARGET PROJ::proj)
+    add_library(PROJ::proj UNKNOWN IMPORTED)
+    set_target_properties(PROJ::proj PROPERTIES
+        IMPORTED_LOCATION "${LIBPROJ_LIBRARY}"
+        INTERFACE_INCLUDE_DIRECTORIES "${PROJ_INCLUDE_DIR}"
     )
-  endif (LIBPROJ_FOUND)
+endif()
 
-  if (PROJ_INCLUDE_DIRS AND PROJ_LIBRARIES)
-     set(PROJ_FOUND TRUE)
-     file(READ "${PROJ_INCLUDE_DIR}/proj.h" PROJ_H_CONTENTS)
-     string(REGEX REPLACE "^.*PROJ_VERSION_MAJOR +([0-9]+).*$" "\\1" PROJ_VERSION_MAJOR "${PROJ_H_CONTENTS}")
-     string(REGEX REPLACE "^.*PROJ_VERSION_MINOR +([0-9]+).*$" "\\1" PROJ_VERSION_MINOR "${PROJ_H_CONTENTS}")
-     string(REGEX REPLACE "^.*PROJ_VERSION_PATCH +([0-9]+).*$" "\\1" PROJ_VERSION_PATCH "${PROJ_H_CONTENTS}")
-     unset(PROJ_H_CONTENTS)
-     set(PROJ_VERSION "${PROJ_VERSION_MAJOR}.${PROJ_VERSION_MINOR}.${PROJ_VERSION_PATCH}")
-  endif (PROJ_INCLUDE_DIRS AND PROJ_LIBRARIES)
-
-  if (PROJ_FOUND)
-    if (NOT PROJ_FIND_QUIETLY)
-      message(STATUS "Found PROJ: ${PROJ_LIBRARIES}")
-    endif (NOT PROJ_FIND_QUIETLY)
-  else (PROJ_FOUND)
-    if (PROJ_FIND_REQUIRED)
-      message(FATAL_ERROR "Could not find PROJ")
-    endif (PROJ_FIND_REQUIRED)
-  endif (PROJ_FOUND)
-
-  # show the PROJ_INCLUDE_DIRS and PROJ_LIBRARIES variables only in the advanced view
-  #mark_as_advanced(PROJ_INCLUDE_DIRS PROJ_LIBRARIES)
-
-endif (PROJ_LIBRARIES AND PROJ_INCLUDE_DIRS)
-
+# Deliberately not mark_as_advanced: on Windows both are routinely set by hand in ccmake.

@@ -1,99 +1,53 @@
-# - Try to find GDAL
-# Once done this will define
+# Find GDAL. Windows only - this module is on CMAKE_MODULE_PATH under WIN32 alone and shadows
+# CMake's own FindGDAL, which does not know the GDAL_DEV_PATH layout.
 #
-#  GDAL_FOUND - system has GDAL
-#  GDAL_INCLUDE_DIRS - the GDAL include directory
-#  GDAL_LIBRARIES - Link these to use GDAL
-#  GDAL_DEFINITIONS - Compiler switches required for using GDAL
+#  GDAL_FOUND    - GDAL was found
+#  GDAL_VERSION  - version read from gdal_version.h
+#  GDAL::GDAL    - imported target carrying the library and its include directory
 #
 #  Copyright (c) 2006 Andreas Schneider <mail@cynapses.org>
 #
 #  Redistribution and use is allowed according to the terms of the New
 #  BSD license.
 #  For details see the accompanying COPYING-CMAKE-SCRIPTS file.
-#
 
-
-if (GDAL_LIBRARIES AND GDAL_INCLUDE_DIRS)
-  # in cache already
-  set(GDAL_FOUND TRUE)
-else (GDAL_LIBRARIES AND GDAL_INCLUDE_DIRS)
-  find_path(GDAL_INCLUDE_DIR
-    NAMES
-      gdal.h
-    PATHS
-if(WIN32)	
-      ${GDAL_DEV_PATH}/include
-endif(WIN32)
-        /usr/include
-        /usr/local/include
-        /opt/local/include
-        /sw/include
-        ${CMAKE_INSTALL_PREFIX}/include
-        /usr/include/gdal
-        /usr/local/include/gdal
-        /opt/local/include/gdal
-        /sw/include/gdal
-        ${CMAKE_INSTALL_PREFIX}/include/gdal
-        ${CMAKE_SOURCE_DIR}/Win32/GDAL/include
-    PATH_SUFFIXES
-        gdal
-  )
-
-  # debian uses version suffixes
-  # add suffix evey new release
-  find_library(GDAL_LIBRARY
-    NAMES
-        gdal
-        gdal1.3.2
-        gdal1.4.0
-        gdal1.5.0
-        gdal1.6.0
-        gdal1.7.0
-	gdal1.8.0
-        gdal
-        gdal_i
-    PATHS
-if(WIN32)	
-      ${GDAL_DEV_PATH}/lib
-endif(WIN32)
-      /usr/lib
-      /usr/local/lib
-      /opt/local/lib
-      /sw/lib
-      ${CMAKE_INSTALL_PREFIX}/lib
-      ${CMAKE_SOURCE_DIR}/Win32/GDAL/lib
-  )
-
-  set(GDAL_INCLUDE_DIRS
-    ${GDAL_INCLUDE_DIR}
-  )
-  set(GDAL_LIBRARIES
-    ${GDAL_LIBRARY}
+# The cache variable names match CMake's own FindGDAL, so a packager can override them the same way.
+find_path(GDAL_INCLUDE_DIR
+    NAMES gdal.h
+    HINTS ${GDAL_DEV_PATH}/include
+    PATH_SUFFIXES gdal
 )
 
-  if (GDAL_INCLUDE_DIRS AND GDAL_LIBRARIES)
-     set(GDAL_FOUND TRUE)
-     file(READ "${GDAL_INCLUDE_DIR}/gdal_version.h" GDAL_H_CONTENTS)
-     string(REGEX REPLACE "^.*GDAL_VERSION_MAJOR +([0-9]+).*$" "\\1" GDAL_VERSION_MAJOR "${GDAL_H_CONTENTS}")
-     string(REGEX REPLACE "^.*GDAL_VERSION_MINOR +([0-9]+).*$" "\\1" GDAL_VERSION_MINOR "${GDAL_H_CONTENTS}")
-     string(REGEX REPLACE "^.*GDAL_VERSION_REV +([0-9]+).*$" "\\1" GDAL_VERSION_REV "${GDAL_H_CONTENTS}")
-     unset(GDAL_H_CONTENTS)
-     set(GDAL_VERSION "${GDAL_VERSION_MAJOR}.${GDAL_VERSION_MINOR}.${GDAL_VERSION_REV}")
-  endif (GDAL_INCLUDE_DIRS AND GDAL_LIBRARIES)
+# gdal_i is the import library the GISInternals binary distribution ships.
+find_library(GDAL_LIBRARY
+    NAMES gdal gdal_i
+    HINTS ${GDAL_DEV_PATH}/lib
+)
 
-  if (GDAL_FOUND)
-    if (NOT GDAL_FIND_QUIETLY)
-      message(STATUS "Found GDAL: ${GDAL_LIBRARIES}")
-    endif (NOT GDAL_FIND_QUIETLY)
-  else (GDAL_FOUND)
-    if (GDAL_FIND_REQUIRED)
-      message(FATAL_ERROR "Could not find GDAL")
-    endif (GDAL_FIND_REQUIRED)
-  endif (GDAL_FOUND)
+if(GDAL_INCLUDE_DIR AND EXISTS "${GDAL_INCLUDE_DIR}/gdal_version.h")
+    file(READ "${GDAL_INCLUDE_DIR}/gdal_version.h" _gdal_version_h)
+    string(REGEX REPLACE "^.*GDAL_VERSION_MAJOR +([0-9]+).*$" "\\1" _gdal_version_major "${_gdal_version_h}")
+    string(REGEX REPLACE "^.*GDAL_VERSION_MINOR +([0-9]+).*$" "\\1" _gdal_version_minor "${_gdal_version_h}")
+    string(REGEX REPLACE "^.*GDAL_VERSION_REV +([0-9]+).*$" "\\1" _gdal_version_rev "${_gdal_version_h}")
+    set(GDAL_VERSION "${_gdal_version_major}.${_gdal_version_minor}.${_gdal_version_rev}")
+    unset(_gdal_version_h)
+    unset(_gdal_version_major)
+    unset(_gdal_version_minor)
+    unset(_gdal_version_rev)
+endif()
 
-  # show the GDAL_INCLUDE_DIRS and GDAL_LIBRARIES variables only in the advanced view
-  mark_as_advanced(GDAL_INCLUDE_DIRS GDAL_LIBRARIES)
+include(FindPackageHandleStandardArgs)
+find_package_handle_standard_args(GDAL
+    REQUIRED_VARS GDAL_LIBRARY GDAL_INCLUDE_DIR
+    VERSION_VAR GDAL_VERSION
+)
 
-endif (GDAL_LIBRARIES AND GDAL_INCLUDE_DIRS)
+if(GDAL_FOUND AND NOT TARGET GDAL::GDAL)
+    add_library(GDAL::GDAL UNKNOWN IMPORTED)
+    set_target_properties(GDAL::GDAL PROPERTIES
+        IMPORTED_LOCATION "${GDAL_LIBRARY}"
+        INTERFACE_INCLUDE_DIRECTORIES "${GDAL_INCLUDE_DIR}"
+    )
+endif()
 
+# Deliberately not mark_as_advanced: on Windows both are routinely set by hand in ccmake.

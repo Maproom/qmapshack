@@ -30,12 +30,11 @@ if(WIN32)
     list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/msvc_64/cmake)
 endif()
 
-# all binaries are collected in the ./bin directory
+# All binaries are collected in the ./bin directory. A multi-config generator appends the
+# configuration to it, which is what msvc_64/CopyFilesGis.bat reads and what keeps a .pdb with the
+# .exe it belongs to. Single-config generators ignore the per-config variables, so Linux and the
+# macOS release build get a flat bin whatever the build type.
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/bin)
-# A multi-config generator would otherwise append a per-config subdirectory.
-foreach(config IN ITEMS DEBUG RELEASE RELWITHDEBINFO MINSIZEREL)
-    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_${config} ${PROJECT_BINARY_DIR}/bin)
-endforeach()
 
 # Position independent code is needed for the static icon engine plugin.
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)

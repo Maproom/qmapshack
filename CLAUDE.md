@@ -76,8 +76,14 @@ Target-scoped CMake. Nothing is set at directory scope except the MSVC options b
   directory on Windows, where `CAppSetupWin` resolves `HELPPATH` against it. Six cache variables
   survive so a packager can override them. `HTML_INSTALL_DIR` is `share/doc/HTML`, not
   `CMAKE_INSTALL_DOCDIR` — changing it moves the installed help.
-- **`CMAKE_RUNTIME_OUTPUT_DIRECTORY` pins the four per-config variables too**, or a multi-config
-  generator appends `Release/` and the macOS and Windows packaging scripts stop finding the binaries.
+- **`CMAKE_RUNTIME_OUTPUT_DIRECTORY` is set, the four per-config variables are deliberately not.**
+  They are the only thing a multi-config generator consults for its `$<CONFIG>` suffix, so pinning
+  them collapses every configuration into one `bin`, which leaves a `.pdb` from the previous
+  configuration beside a mismatched `.exe` and makes the build report the other config's binary as
+  up to date. `msvc_64/CopyFilesGis.bat` reads `bin\Release\` and wants the suffix. Single-config
+  generators resolve the per-config variable to the same path as the plain one, so Linux and the
+  macOS release path (`build-QMS.sh` uses `Unix Makefiles`; its Xcode branch is marked BROKEN and
+  exits before bundling) are flat whatever the build type.
 - **`ConfigureChecks.cmake` probes through the C++ compiler.** The project enables no C language, so
   `check_include_file` / `check_symbol_exists` hard-fail; use the `_cxx` variants.
 - **`CMAKE_AUTOUIC` is OFF** — the `.ui` files are listed explicitly and go through `qt_wrap_ui`.
@@ -519,6 +525,16 @@ before doing anything. Only a commit carrying LF blobs fixes it.
 
 When the local branch is a strict ancestor of the incoming one and the only dirt is that CR churn,
 the merge is a fast-forward blocked by nothing real: `git reset --hard <remote>/<branch>`.
+
+The same trap runs the other way for `*.bat`/`*.cmd` (`text eol=crlf`): a blob committed with CRLF
+before the attribute existed reports permanently modified, because git normalises the working-tree
+copy to LF and compares against the CRLF blob. `git checkout` and `git stash` — including
+`rebase --autostash`, which leaves a half-built `.git/rebase-merge/` behind when it fails — cannot
+clear it. To rebase without committing anything, put `<path> -text` in `.git/info/attributes`
+(local, untracked, beats the tracked `.gitattributes`), rebase, delete it, then
+`rm <path> && git checkout -- <path>` so the file is re-materialised with the attribute's endings.
+`git ls-files --eol '*.bat'` lists the offenders: `i/crlf` is a blob still awaiting
+`git add --renormalize`. `msvc_64/build_routino.bat` is one.
 
 ### Nothing that stores an icon path may be pruned
 

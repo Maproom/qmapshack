@@ -34,12 +34,9 @@
       }
     },
     {
-      "name": "windows-msvc",
-      "displayName": "Windows MSVC 2022 x64",
-      "description": "Edit the paths to match the local dependency tree, or override them in CMakeUserPresets.json.",
-      "binaryDir": "${sourceDir}/build/${presetName}",
-      "generator": "Visual Studio 17 2022",
-      "architecture": "x64",
+      "name": "windows-base",
+      "hidden": true,
+      "inherits": "base",
       "condition": { "type": "equals", "lhs": "${hostSystemName}", "rhs": "Windows" },
       "cacheVariables": {
         "QT_DEV_PATH": "C:/Qt/6.8.0/msvc2022_64",
@@ -48,6 +45,14 @@
         "ROUTINO_DEV_PATH": "C:/routino",
         "JPEG_DEV_PATH": "C:/JPEG"
       }
+    },
+    {
+      "name": "windows-msvc",
+      "inherits": "windows-base",
+      "displayName": "Windows MSVC 2022 x64",
+      "description": "Edit the paths to match the local dependency tree, or override them in CMakeUserPresets.json. Inherit windows-base instead of this preset to keep the paths but pick another generator - architecture is set here because Ninja rejects it.",
+      "generator": "Visual Studio 17 2022",
+      "architecture": "x64"
     },
     {
       "name": "macos",

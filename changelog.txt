@@ -26,6 +26,7 @@ V1.XX.X
 [QMS-1177] Show "style" option in QMS usage
 [QMS-1179] Modernize the CMake build
 [QMS-1182] Fix: Name of Qt style passed to QMS gets lost
+[QMS-1186] Fix: Windows executables are no longer UTF-8 aware
 
 V1.20.3
 [QMS-1059] Fix: F1 help browser does not open external links

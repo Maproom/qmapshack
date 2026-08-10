@@ -143,7 +143,7 @@ if(MSVC)
     add_compile_options(/MP /utf-8)
     # Add manifest to run exe with code page UTF-8
     set(MANIFEST "${PROJECT_SOURCE_DIR}/msvc_64/codepage.UTF8.manifest")
-    add_link_options(/MANIFESTINPUT:${MANIFEST})
+    add_link_options(/MANIFEST:EMBED /MANIFESTINPUT:${MANIFEST})
 endif(MSVC)
 
 if(UNIX)

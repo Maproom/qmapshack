@@ -125,7 +125,10 @@ QString CMainWindow::getUser() {
   return user;
 }
 
-void CMainWindow::prepareMenuForMac() { dockTools->toggleViewAction()->setMenuRole(QAction::NoRole); }
+void CMainWindow::prepareMenuForMac() {
+  dockTools->toggleViewAction()->setMenuRole(QAction::NoRole);
+  dockShell->toggleViewAction()->setMenuRole(QAction::NoRole);
+}
 
 void CMainWindow::makeShellVisible() { dockShell->show(); }
 

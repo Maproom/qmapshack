@@ -574,6 +574,14 @@ the SVG at size rather than wrap the old 32px PNG.
 
 ---
 
+## Dock widgets
+
+`QDockWidget::setFeatures()` disables `toggleViewAction()` unless `DockWidgetClosable` is in the set,
+so a docker missing that flag has a permanently greyed-out *Window* menu entry — and a floating one
+loses its close button too. Every docker in both apps must keep `DockWidgetClosable`.
+
+---
+
 ## GDAL
 
 ### `QImage::Format_Indexed8` + `RasterIO`/`ReadRaster` — row padding

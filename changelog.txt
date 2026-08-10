@@ -26,6 +26,7 @@ V1.XX.X
 [QMS-1177] Show "style" option in QMS usage
 [QMS-1179] Modernize the CMake build
 [QMS-1182] Fix: Name of Qt style passed to QMS gets lost
+[QMS-1185] Fix: Tools docker cannot be shown again in QMapTool
 [QMS-1186] Fix: Windows executables are no longer UTF-8 aware
 [QMS-1190] Drop the alglib dependency in favour of an own elevation smoothing spline
 [QMS-1193] Drop the QuaZip dependency in favour of GDAL's /vsizip/ filesystem

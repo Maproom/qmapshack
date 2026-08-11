@@ -33,6 +33,7 @@
 #include "helpers/CFileExt.h"
 #include "helpers/CProgressDialog.h"
 #include "helpers/Platform.h"
+#include "map/Blend2dUtil.h"
 #include "map/CMapDraw.h"
 #include "map/garmin/CGarminStrTbl6.h"
 #include "map/garmin/CGarminStrTbl8.h"
@@ -92,12 +93,12 @@ static inline bool isCompletelyOutside(const QPolygonF& poly, const QRectF& view
 // so Blend2D keeps them alive until the queued blit is rasterised — required once the
 // rendering context renders asynchronously/multithreaded. Returns an empty image on
 // failure.
-static inline BLImage img2line(const QImage& img, int width) {
-  Q_ASSERT(img.format() == QImage::Format_ARGB32_Premultiplied);
-
+static inline BLImage img2line(const BLImage& img, int width) {
+  BLImageData src;
   BLImage newImage;
   const int height = img.height();
-  if (width < 1 || height < 1 || newImage.create(width, height, BL_FORMAT_PRGB32) != BL_SUCCESS) {
+  if (width < 1 || height < 1 || img.get_data(&src) != BL_SUCCESS ||
+      newImage.create(width, height, BL_FORMAT_PRGB32) != BL_SUCCESS) {
     return newImage;
   }
 
@@ -106,10 +107,13 @@ static inline BLImage img2line(const QImage& img, int width) {
     return BLImage();
   }
 
-  const qsizetype bpl_src = img.bytesPerLine();
+  // A BLImage row may be padded, so stepping rows and copying one tile are two different
+  // lengths - unlike QImage's ARGB32 bytesPerLine(), which is always exactly width * 4.
+  const qsizetype bpl_src = static_cast<qsizetype>(src.stride);
+  const qsizetype tileBytes = static_cast<qsizetype>(img.width()) * 4;
   const qsizetype bpl_dst = static_cast<qsizetype>(dst.stride);
   const qsizetype rowBytes = static_cast<qsizetype>(width) * 4;  // tightly packed destination row (ARGB32)
-  const uchar* const srcBase = img.bits();
+  const uchar* const srcBase = static_cast<const uchar*>(src.pixel_data);
   uchar* const dstBase = static_cast<uchar*>(dst.pixel_data);
 
   for (int i = 0; i < height; ++i) {
@@ -118,7 +122,7 @@ static inline BLImage img2line(const QImage& img, int width) {
 
     qsizetype bytesToCopy = rowBytes;
     while (bytesToCopy > 0) {
-      const qsizetype chunk = qMin(bytesToCopy, bpl_src);
+      const qsizetype chunk = qMin(bytesToCopy, tileBytes);
       memcpy(dstBits, srcBits, static_cast<size_t>(chunk));
       dstBits += chunk;
       bytesToCopy -= chunk;
@@ -227,59 +231,19 @@ bool applyPen(BLContext& ctx, const QPen& pen) {
   return true;
 }
 
-/// Deep-copy a QImage into an *owning* premultiplied BLImage. A create_from_data()
-/// view merely aliases the QImage's pixels, which dangle once the (often temporary)
-/// source dies — fatal under Blend2D's deferred/multithreaded rendering, where the
-/// blit is rasterised after the call returns. An owning BLImage is refcounted and is
-/// kept alive by Blend2D (and by BLPattern) until the queued command completes.
-/// Non-premultiplied inputs are converted on the fly. Returns an empty image on failure.
-BLImage toOwnedBLImage(const QImage& img) {
-  BLImage out;
-  if (img.isNull()) {
-    return out;
-  }
-
-  QImage storage;
-  const QImage& src = (img.format() == QImage::Format_ARGB32_Premultiplied)
-                          ? img
-                          : (storage = img.convertToFormat(QImage::Format_ARGB32_Premultiplied));
-
-  if (out.create(src.width(), src.height(), BL_FORMAT_PRGB32) != BL_SUCCESS) {
-    return out;
-  }
-
-  BLImageData dst;
-  if (out.make_mutable(&dst) != BL_SUCCESS) {
-    return BLImage();
-  }
-
-  const qsizetype bpl_src = src.bytesPerLine();
-  const qsizetype bpl_dst = static_cast<qsizetype>(dst.stride);
-  const qsizetype rowBytes = qMin(bpl_src, bpl_dst);
-  const uchar* const s = src.constBits();
-  uchar* const d = static_cast<uchar*>(dst.pixel_data);
-  for (int y = 0; y < src.height(); ++y) {
-    memcpy(d + bpl_dst * y, s + bpl_src * y, static_cast<size_t>(rowBytes));
-  }
-  return out;
-}
-
-/// Blit a QImage at (@p x, @p y). The source is deep-copied into an owning BLImage so
-/// it survives Blend2D's deferred execution; the copy also handles non-premultiplied
-/// inputs on the fly.
-void blitQImage(BLContext& ctx, double x, double y, const QImage& img) {
-  const BLImage bl = toOwnedBLImage(img);
-  if (bl.is_empty()) {
+/// Blit an icon owned by a CGarminTyp property. Nothing is copied: BLImage is refcounted,
+/// so Blend2D keeps the property's pixels alive until the deferred blit is rasterised.
+void blitIcon(BLContext& ctx, double x, double y, const BLImage& img) {
+  if (img.is_empty()) {
     return;
   }
-  ctx.blit_image(BLPoint(x, y), bl);
+  ctx.blit_image(BLPoint(x, y), img);
 }
 
 /// Blit the small blue bullet used as a fallback marker for cluttered points.
 void blitBullet(BLContext& ctx, double x, double y) {
-  static const QImage bullet =
-      QImage(":/icons/8x8/bullet_blue.png").convertToFormat(QImage::Format_ARGB32_Premultiplied);
-  blitQImage(ctx, x, y, bullet);
+  static const BLImage bullet = toOwnedBLImage(QImage(":/icons/8x8/bullet_blue.png"));
+  blitIcon(ctx, x, y, bullet);
 }
 
 /// Render a non-solid QBrush into a small premultiplied tile usable as a repeating
@@ -1963,7 +1927,7 @@ void CMapIMG::drawPolylines(BLContext& ctx, polytype_t& lines, const QPointF& sc
     const QList<quint32>& indices = *it;
 
     if (property.hasPixmap) {
-      const QImage& pixmap = night ? property.imgNight : property.imgDay;
+      const BLImage& pixmap = night ? property.imgNight : property.imgDay;
       const qreal h = pixmap.height();
 
       for (quint32 idx : indices) {
@@ -2177,12 +2141,12 @@ void CMapIMG::drawPoints(BLContext& ctx, pointtype_t& pts, QVector<QRectF>& rect
     const CGarminTyp::point_property& property =
         (propIt != pointProperties.constEnd()) ? propIt.value() : unknownProperty;
 
-    const QImage& icon = night ? property.imgNight : property.imgDay;
-    const QSizeF& size = icon.size();
+    const BLImage& icon = night ? property.imgNight : property.imgDay;
+    const QSizeF size(icon.width(), icon.height());
 
     if (isCluttered(rectPois, QRectF(pt->pos, size))) {
       if (size.width() <= 8 && size.height() <= 8) {
-        blitQImage(ctx, pt->pos.x() - (size.width() / 2), pt->pos.y() - (size.height() / 2), icon);
+        blitIcon(ctx, pt->pos.x() - (size.width() / 2), pt->pos.y() - (size.height() / 2), icon);
       } else {
         blitBullet(ctx, pt->pos.x() - 4, pt->pos.y() - 4);
       }
@@ -2190,7 +2154,7 @@ void CMapIMG::drawPoints(BLContext& ctx, pointtype_t& pts, QVector<QRectF>& rect
       continue;
     }
 
-    blitQImage(ctx, pt->pos.x() - (size.width() / 2), pt->pos.y() - (size.height() / 2), icon);
+    blitIcon(ctx, pt->pos.x() - (size.width() / 2), pt->pos.y() - (size.height() / 2), icon);
 
     if (CMainWindow::self().isPoiText() && property.labelType != CGarminTyp::eNone) {
       // calculate bounding rectangle with a border of 2 px
@@ -2216,19 +2180,19 @@ void CMapIMG::drawPois(BLContext& ctx, pointtype_t& pts, QVector<QRectF>& rectPo
     const auto propIt = pointProperties.constFind(pt.type);
     const CGarminTyp::point_property& property =
         (propIt != pointProperties.constEnd()) ? propIt.value() : unknownProperty;
-    const QImage& icon = night ? property.imgNight : property.imgDay;
-    const QSizeF& size = icon.size();
+    const BLImage& icon = night ? property.imgNight : property.imgDay;
+    const QSizeF size(icon.width(), icon.height());
 
     if (isCluttered(rectPois, QRectF(pt.pos, size))) {
       if (size.width() <= 8 && size.height() <= 8) {
-        blitQImage(ctx, pt.pos.x() - (size.width() / 2), pt.pos.y() - (size.height() / 2), icon);
+        blitIcon(ctx, pt.pos.x() - (size.width() / 2), pt.pos.y() - (size.height() / 2), icon);
       } else {
         blitBullet(ctx, pt.pos.x() - 4, pt.pos.y() - 4);
       }
       continue;
     }
 
-    blitQImage(ctx, pt.pos.x() - (size.width() / 2), pt.pos.y() - (size.height() / 2), icon);
+    blitIcon(ctx, pt.pos.x() - (size.width() / 2), pt.pos.y() - (size.height() / 2), icon);
 
     if (CMainWindow::self().isPoiText()) {
       // calculate bounding rectangle with a border of 2 px

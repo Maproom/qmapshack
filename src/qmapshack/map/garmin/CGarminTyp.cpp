@@ -29,6 +29,7 @@
 #include <QtCore>
 
 #include "CMainWindow.h"
+#include "map/Blend2dUtil.h"
 #include "units/IUnit.h"
 
 #undef DBG
@@ -515,6 +516,8 @@ bool CGarminTyp::parsePolyline(QDataStream& in, QMap<quint32, polyline_property>
     quint8 ctyp, rows;
     quint8 r, g, b;
     quint8 langcode;
+    QImage pixmapDay;
+    QImage pixmapNight;
 
     in.device()->seek(sectPolylines.arrayOffset + (sectPolylines.arrayModulo * element));
 
@@ -565,8 +568,8 @@ bool CGarminTyp::parsePolyline(QDataStream& in, QMap<quint32, polyline_property>
           in >> b >> g >> r;
           xpm.setColor(0, qRgb(r, g, b));
           decodeBitmap(in, xpm, 32, rows, 1);
-          property.imgDay = xpm;
-          property.imgNight = xpm;
+          pixmapDay = xpm;
+          pixmapNight = xpm;
           property.hasPixmap = true;
           property.known = true;
         } else {
@@ -604,8 +607,8 @@ bool CGarminTyp::parsePolyline(QDataStream& in, QMap<quint32, polyline_property>
           xpm2.setColor(0, qRgb(r, g, b));
           decodeBitmap(in, xpm1, 32, rows, 1);
           memcpy(xpm2.bits(), xpm1.bits(), (32 * rows));
-          property.imgDay = xpm1;
-          property.imgNight = xpm2;
+          pixmapDay = xpm1;
+          pixmapNight = xpm2;
           property.hasPixmap = true;
           property.known = true;
         } else {
@@ -643,8 +646,8 @@ bool CGarminTyp::parsePolyline(QDataStream& in, QMap<quint32, polyline_property>
           xpm2.setColor(0, qRgb(r, g, b));
           decodeBitmap(in, xpm1, 32, rows, 1);
           memcpy(xpm2.bits(), xpm1.bits(), (32 * rows));
-          property.imgDay = xpm1;
-          property.imgNight = xpm2;
+          pixmapDay = xpm1;
+          pixmapNight = xpm2;
           property.hasPixmap = true;
           property.known = true;
         } else {
@@ -682,8 +685,8 @@ bool CGarminTyp::parsePolyline(QDataStream& in, QMap<quint32, polyline_property>
           xpm2.setColor(0, qRgba(255, 255, 255, 0));
           decodeBitmap(in, xpm1, 32, rows, 1);
           memcpy(xpm2.bits(), xpm1.bits(), (32 * rows));
-          property.imgDay = xpm1;
-          property.imgNight = xpm2;
+          pixmapDay = xpm1;
+          pixmapNight = xpm2;
           property.hasPixmap = true;
           property.known = true;
         } else {
@@ -712,8 +715,8 @@ bool CGarminTyp::parsePolyline(QDataStream& in, QMap<quint32, polyline_property>
           xpm.setColor(1, qRgb(r, g, b));
           xpm.setColor(0, qRgba(255, 255, 255, 0));
           decodeBitmap(in, xpm, 32, rows, 1);
-          property.imgDay = xpm;
-          property.imgNight = xpm;
+          pixmapDay = xpm;
+          pixmapNight = xpm;
           property.hasPixmap = true;
           property.known = true;
         } else {
@@ -745,8 +748,8 @@ bool CGarminTyp::parsePolyline(QDataStream& in, QMap<quint32, polyline_property>
           xpm2.setColor(0, qRgba(255, 255, 255, 0));
           decodeBitmap(in, xpm1, 32, rows, 1);
           memcpy(xpm2.bits(), xpm1.bits(), (32 * rows));
-          property.imgDay = xpm1;
-          property.imgNight = xpm2;
+          pixmapDay = xpm1;
+          pixmapNight = xpm2;
           property.hasPixmap = true;
           property.known = true;
         } else {
@@ -779,8 +782,6 @@ bool CGarminTyp::parsePolyline(QDataStream& in, QMap<quint32, polyline_property>
         continue;
     }
 
-    property.imgDay = property.imgDay.convertToFormat(QImage::Format_ARGB32_Premultiplied);
-    property.imgNight = property.imgNight.convertToFormat(QImage::Format_ARGB32_Premultiplied);
     if (hasLocalization) {
       qint16 len;
       quint8 n = 1;
@@ -838,9 +839,11 @@ bool CGarminTyp::parsePolyline(QDataStream& in, QMap<quint32, polyline_property>
 #endif
     }
 
-    if (property.hasPixmap) {
-      property.imgDay = property.imgDay.mirrored(false, true);
-      property.imgNight = property.imgNight.mirrored(false, true);
+    // Skip an element that left the pixmaps empty: a previous element of the same type may
+    // already have filled the property, and flipping/converting that again would corrupt it.
+    if (property.hasPixmap && !pixmapDay.isNull()) {
+      property.imgDay = toOwnedBLImage(pixmapDay.mirrored(false, true));
+      property.imgNight = toOwnedBLImage(pixmapNight.mirrored(false, true));
     }
   }
   return true;
@@ -1069,7 +1072,8 @@ bool CGarminTyp::parsePoint(QDataStream& in, QMap<quint32, point_property>& poin
       continue;
     } else {
       decodeBitmap(in, imgDay, w, h, bpp);
-      property.imgDay = imgDay;
+      // Snapshot now: the night variant below re-colours this very bitmap.
+      property.imgDay = toOwnedBLImage(imgDay);
     }
 
     if (t8_1 == 0x03) {
@@ -1081,7 +1085,7 @@ bool CGarminTyp::parsePoint(QDataStream& in, QMap<quint32, point_property>& poin
         continue;
       }
       decodeBitmap(in, imgNight, w, h, bpp);
-      points[typ].imgNight = imgNight;
+      property.imgNight = toOwnedBLImage(imgNight);
     } else if (t8_1 == 0x02) {
       in >> ncolors >> ctyp;
       if (!decodeBppAndBytes(ncolors, w, ctyp, bpp, wbytes)) {
@@ -1090,9 +1094,11 @@ bool CGarminTyp::parsePoint(QDataStream& in, QMap<quint32, point_property>& poin
       if (!decodeColorTable(in, imgDay, ncolors, 1 << bpp, ctyp == 0x20)) {
         continue;
       }
-      property.imgNight = imgDay;
+      // imgDay now carries the night colour table, so this needs its own conversion.
+      property.imgNight = toOwnedBLImage(imgDay);
     } else {
-      property.imgNight = imgDay;
+      // Identical to the day icon: share the pixels instead of converting twice.
+      property.imgNight = property.imgDay;
     }
 
     if (hasLocalization) {

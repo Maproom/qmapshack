@@ -592,6 +592,7 @@ set( HDRS
     helpers/Platform.h
     helpers/Signals.h
     helpers/Tristate.h
+    map/Blend2dUtil.h
     map/CMapDraw.h
     map/CMapGEMF.h
     map/CMapIMG.h

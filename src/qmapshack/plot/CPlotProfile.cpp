@@ -18,8 +18,6 @@
 
 #include "plot/CPlotProfile.h"
 
-#include <interpolation.h>
-
 #include "CMainWindow.h"
 #include "gis/proj_x.h"
 #include "gis/trk/CGisItemTrk.h"

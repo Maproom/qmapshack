@@ -207,7 +207,6 @@ find_package(PROJ                   REQUIRED)
 find_package(JPEG                   REQUIRED)
 find_package(ROUTINO                REQUIRED)
 find_package(QuaZip-Qt6             REQUIRED)
-find_package(ALGLIB                         ) # optional as we can use our local version
 
 # Minimum dependency versions (see issue #1123). The floor is the newest release
 # available on Nov 6, 2024 (GDAL 3.10.0's date): GDAL 3.10 is a hard requirement -
@@ -236,11 +235,6 @@ if(APPLE)
      find_library(Foundation_LIBRARY Foundation)
 endif(APPLE)
 
-
-# The bundled copy defines ALGLIB::ALGLIB itself, so either source is linked the same way.
-if(NOT ALGLIB_FOUND AND BUILD_QMAPSHACK)
-    add_subdirectory(3rdparty/alglib)
-endif()
 
 ###############################################################################################
 # Create library from Garmin's FIT SDK

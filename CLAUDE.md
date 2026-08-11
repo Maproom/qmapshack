@@ -11,7 +11,7 @@ vector maps and DEM data; supports online and offline routing engines.
 - **GUI / framework:** Qt 6.8+
 - **Key libs:** GDAL, PROJ 8+, Routino, QuaZip-Qt6
 - **Build:** CMake 3.20+, Ninja; Debug build in `build/`, binaries in `build/bin/`
-- **Bundled 3rdparty:** alglib, Garmin FIT SDK
+- **Bundled 3rdparty:** Garmin FIT SDK
 - **Minimum GDAL:** 3.10
 
 ---
@@ -68,9 +68,8 @@ Target-scoped CMake. Nothing is set at directory scope except the MSVC options b
 - **`target_link_libraries` is keyword form everywhere.** Plain and keyword signatures cannot be
   mixed on one target, so a new call must say `PRIVATE`.
 - **Dependencies are imported targets**: `GDAL::GDAL`, `PROJ::proj`, `JPEG::JPEG`,
-  `ROUTINO::ROUTINO`, `ALGLIB::ALGLIB`, `QuaZip::QuaZip`. `ALGLIB::ALGLIB` comes from
-  `FindALGLIB.cmake` for a system copy, or from `3rdparty/alglib`'s alias when none is found.
-  `ROUTINO_XML_PATH` stays a plain variable — qmapshack passes it as a define.
+  `ROUTINO::ROUTINO`, `QuaZip::QuaZip`. `ROUTINO_XML_PATH` stays a plain variable — qmapshack
+  passes it as a define.
 - **Defines are per target**: `HELPPATH` on qmapshack and qmaptool, `ROUTINO_XML_PATH` and
   `HAVE_DBUS` on qmapshack. Global on purpose: `_CRT_SECURE_NO_WARNINGS`, `/MP` and `/utf-8` under
   MSVC, which the bundled FIT SDK needs, and `-march=native`.
@@ -196,6 +195,25 @@ enables/disables the auto-routing button.
 
 Only local BRouter supports fast (on-the-fly) routing. Online BRouter and Routino need the whole
 route at once via `calcRoute(const IGisItem::key_t&)`.
+
+---
+
+## Elevation smoothing — `CSmoothingSpline`
+
+`helpers/CSmoothingSpline.{h,cpp}`, a penalized regression spline over equidistant nodes. Used only
+by `CGisItemTrk::interp`, which feeds the "Interpolate elevation" filter and `CPlotProfile`'s
+preview curve.
+
+- **`m` counts nodes, not basis functions**: m − 1 spans, m + 2 coefficients.
+- **The penalty is `D2'D2`, the second difference of the coefficients.** The exact curvature Gram
+  matrix `∫B''_i B''_j` fits measurably worse — do not swap it in.
+- **`lambda` is normalized against `trace(B'B)` and `numSpans^3`**, so it is independent of the point
+  count, the node count and the units of x and y. The tuned value is `kElevationSmoothing` in
+  `CGisItemTrk.cpp`; doubling it roughly doubles the smoothing.
+- **Only points with `ele != NOINT` enter the fit**, appended in order — indexing the input arrays by
+  `idxVisible` leaves holes for points without elevation.
+- Below ~80 nodes the basis, not the penalty, limits the curve. That is where the quality setting
+  changes the result.
 
 ---
 

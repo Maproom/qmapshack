@@ -732,6 +732,8 @@ void CCanvas::leaveEvent(QEvent*) {
     CCanvas::restoreOverrideCursor("leaveEvent");
   }
 
+  timerToolTip->stop();
+
   setMouseTracking(false);
 }
 

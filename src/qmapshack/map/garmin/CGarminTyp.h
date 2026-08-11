@@ -19,6 +19,8 @@
 #ifndef CGARMINTYP_H
 #define CGARMINTYP_H
 
+#include <blend2d/blend2d.h>
+
 #include <QtGui>
 
 class QTextCodec;
@@ -84,8 +86,8 @@ class CGarminTyp {
     QPen penBorderNight;
 
     bool hasPixmap;
-    QImage imgDay;
-    QImage imgNight;
+    BLImage imgDay;
+    BLImage imgNight;
 
     QMap<int, QString> strings;
     label_type_e labelType;
@@ -142,8 +144,8 @@ class CGarminTyp {
 
   struct point_property {
     point_property() : labelType(eStandard) {}
-    QImage imgDay;
-    QImage imgNight;
+    BLImage imgDay;
+    BLImage imgNight;
 
     QMap<int, QString> strings;
     label_type_e labelType;

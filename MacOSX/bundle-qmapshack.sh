@@ -27,7 +27,6 @@ function copyAdditionalLibraries {
 
         echo "---building with homebrew---"
         cp -v    $ROUTINO_DEV_PATH/lib/libroutino* $BUILD_BUNDLE_FRW_DIR
-        install -m 644 $LOCAL_ENV/lib/libquazip*.dylib $BUILD_BUNDLE_FRW_DIR
 
         if [ -z "$BREW_PACKAGE_BUILD" ]; then
             # copy only if built as standalone package (QMS not as a brew pkg)
@@ -63,7 +62,6 @@ function copyAdditionalLibraries {
         echo "---building with macports---"
         echo "---copy additional libs into bundle ------------------"
         port contents routino | grep $PACKAGES_PATH/lib/libgroutino | xargs -I{} cp -vP {} $BUILD_BUNDLE_FRW_DIR
-        port contents quazip1 | grep $PACKAGES_PATH/lib/libquazip1 | xargs -I{} cp -vP {} $BUILD_BUNDLE_FRW_DIR
         port contents gdal | grep $GDAL/lib/libgdal | xargs -I{} cp -vP {} $BUILD_BUNDLE_FRW_DIR
 
         cp -v -R $QT_DEV_PATH/lib/QtOpenGL.framework $BUILD_BUNDLE_FRW_DIR

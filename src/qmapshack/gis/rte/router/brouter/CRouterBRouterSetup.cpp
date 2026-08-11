@@ -18,13 +18,12 @@
 
 #include "gis/rte/router/brouter/CRouterBRouterSetup.h"
 
-#include <JlCompress.h>
-
 #include <QJSEngine>
 #include <QMessageBox>
 #include <QNetworkReply>
 #include <QWebEnginePage>
 
+#include "helpers/CGdalZip.h"
 #include "helpers/CSettings.h"
 #include "misc.h"
 #include "setup/IAppSetup.h"
@@ -290,7 +289,8 @@ void CRouterBRouterSetup::installLocalBRouter(QStringList& messageList) {
   const QDir targetDir(localDir);
   const QDir& targetProfileDir = getProfileDir(eModeLocal);
   const QString& srcPath = getDownloadDir().absolutePath();
-  QDirIterator srcIterator(srcPath, {"brouter*.jar", "*.brf", "lookups.dat"}, QDir::Files, QDirIterator::Subdirectories);
+  QDirIterator srcIterator(srcPath, {"brouter*.jar", "*.brf", "lookups.dat"}, QDir::Files,
+                           QDirIterator::Subdirectories);
   QStringList jarFiles;
   while (srcIterator.hasNext()) {
     QFileInfo srcFileInfo(srcIterator.next());
@@ -315,8 +315,7 @@ void CRouterBRouterSetup::installLocalBRouter(QStringList& messageList) {
         messageList.append(tr("brouter jar-file: %1").arg(jarFile));
         isFirst = false;
       } else {
-        messageList.append(
-            tr("conflicting alternative jar-file %1, go back to previous page to select!").arg(jarFile));
+        messageList.append(tr("conflicting alternative jar-file %1, go back to previous page to select!").arg(jarFile));
       }
     }
   }
@@ -729,33 +728,20 @@ void CRouterBRouterSetup::loadOnlineProfileFinished(QNetworkReply* reply) {
 
 void CRouterBRouterSetup::setLocalBRouterJar(const QString& path) {
   localBRouterJar = path;
-  const QString& jarFileName = QDir(localDir).absoluteFilePath(localBRouterJar);
-  const QStringList& classFiles = JlCompress::getFileList(jarFileName).filter(QRegularExpression(".*BRouter\\.class"));
-  if (!classFiles.isEmpty()) {
-    const QString& tmpFileName =
-        JlCompress::extractFile(jarFileName, classFiles.first(), getDownloadDir().absoluteFilePath("BRouter.class"));
-    if (tmpFileName.endsWith("BRouter.class")) {
-      QFile tmpFile(tmpFileName);
-      char file_data[8];
-      openFileCheckSuccess(QIODevice::ReadOnly, tmpFile);
-      int i = 0;
-      while (!tmpFile.atEnd() && i < 8) {
-        tmpFile.read(file_data + i, sizeof(char));
-        i++;
-      }
-      tmpFile.close();
-      if (i == 8) {
-        unsigned char magic[4] = {0xca, 0xfe, 0xba, 0xbe};
-        if (memcmp(&file_data, magic, 4) == 0) {
-          classMajorVersion = file_data[7] - 0x2c;
-          QFile::remove(tmpFileName);
-          return;
-        }
-      }
-      QFile::remove(tmpFileName);
-    }
-  }
   classMajorVersion = NOINT;
+
+  const QString& jarFileName = QDir(localDir).absoluteFilePath(localBRouterJar);
+  const QStringList& classFiles = CGdalZip::fileList(jarFileName).filter(QRegularExpression(".*BRouter\\.class"));
+  if (classFiles.isEmpty()) {
+    return;
+  }
+
+  // a class file starts with the magic 0xcafebabe, then the minor and the major version
+  const QByteArray& header = CGdalZip::readFile(jarFileName, classFiles.first());
+  const char magic[4] = {char(0xca), char(0xfe), char(0xba), char(0xbe)};
+  if (header.size() >= 8 && memcmp(header.constData(), magic, sizeof(magic)) == 0) {
+    classMajorVersion = header[7] - 0x2c;
+  }
 }
 
 bool CRouterBRouterSetup::isLocalBRouterDefaultDir() const { return localDir == defaultLocalDir; }

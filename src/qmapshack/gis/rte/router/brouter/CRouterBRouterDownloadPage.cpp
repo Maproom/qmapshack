@@ -18,8 +18,6 @@
 
 #include "gis/rte/router/brouter/CRouterBRouterDownloadPage.h"
 
-#include <JlCompress.h>
-
 #include <QCheckBox>
 #include <QDir>
 #include <QJsonArray>
@@ -31,6 +29,7 @@
 #include <QPushButton>
 
 #include "gis/rte/router/brouter/CRouterBRouterSetup.h"
+#include "helpers/CGdalZip.h"
 #include "theme/CUiTheme.h"
 
 CRouterBRouterReleaseItem::CRouterBRouterReleaseItem(const QString& _name, const QString& _description,
@@ -220,7 +219,10 @@ void CRouterBRouterDownloadPage::localBRouterDownloadFinished(QNetworkReply* rep
       outfile.close();
       textLocalInstall->setTextColor(CUiTheme::foreground(CUiTheme::Role::eOk));
       textLocalInstall->append(tr("download %1 finished").arg(outfile.fileName()));
-      const QStringList& unzippedNames = JlCompress::extractDir(outfile.fileName(), downloadDir.path());
+      const QStringList& unzippedNames = CGdalZip::extractAll(outfile.fileName(), downloadDir.path());
+      if (unzippedNames.isEmpty()) {
+        throw tr("Error unzipping %1").arg(outfile.fileName());
+      }
       textLocalInstall->append(tr("unzipping:"));
       for (const QString& unzipped : unzippedNames) {
         textLocalInstall->append(unzipped);

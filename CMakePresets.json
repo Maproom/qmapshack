@@ -46,9 +46,7 @@
         "GDAL_DEV_PATH": "C:/GDAL",
         "PROJ_DEV_PATH": "C:/PROJ",
         "ROUTINO_DEV_PATH": "C:/routino",
-        "JPEG_DEV_PATH": "C:/JPEG",
-        "ZLIB_ROOT": "C:/zlib",
-        "QuaZip-Qt6_DIR": "C:/quazip"
+        "JPEG_DEV_PATH": "C:/JPEG"
       }
     },
     {

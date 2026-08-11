@@ -163,9 +163,8 @@ if [ "$MACPORTS_BUILD" = "x" ]; then
     export GDAL=$PACKAGES_PATH
     export ROUTINO_DEV_PATH=$PACKAGES_PATH
     export PROJ_DEV_PATH=$PACKAGES_PATH/lib/proj9
-    export QuaZip_Qt6_DIR=$PACKAGES_PATH/lib/cmake/QuaZip-Qt6-1.5
 else
-    # ROUTINO, GDAL, PROJ, QUAZIP are compiled from source
+    # ROUTINO, GDAL, PROJ are compiled from source
     export ROUTINO_RELEASE="3.4.3"
     export ROUTINO_DEV_PATH=$LOCAL_ENV
     if [ "$BUILD_GDAL" = "x" ]; then
@@ -181,7 +180,6 @@ else
     else
         export PROJ_DEV_PATH=$PACKAGES_PATH
     fi
-    export QuaZip_Qt6_DIR=$LOCAL_ENV/lib/cmake/QuaZip-Qt6-1.5
 fi
 
 # env vars for building QMS
@@ -215,7 +213,6 @@ echo "BUILD_PROJ = $BUILD_PROJ"
 echo "PROJ_RELEASE = $PROJ_RELEASE"
 echo "PROJ_DATA_RELEASE = $PROJ_DATA_RELEASE"
 echo "PROJ_DEV_PATH = $PROJ_DEV_PATH"
-echo "QuaZip_Qt6_DIR = $QuaZip_Qt6_DIR"
 echo "OSX_DEPLOYMENT_TARGET = $OSX_DEPLOYMENT_TARGET"
 echo "-------------------------------------"
 echo ${NC}

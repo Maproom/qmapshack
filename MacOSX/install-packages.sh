@@ -78,8 +78,6 @@ else
      # qt5
     sudo port install qt5
     sudo port install qt5-qtwebengine
-    # if quazip is not compiled from source
-    sudo port install quazip1
     # if routino is not compiled from source
     sudo port install routino
     # if gdal is not compiled from source

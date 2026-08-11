@@ -96,12 +96,6 @@ if (APPLE)
     # set(ROUTINO_DEV_PATH ${ROUTINO_DEV_PATH} CACHE PATH "Path to directory containing routino include and lib")
     message("ROUTINO_DEV_PATH = ${ROUTINO_DEV_PATH}")
     
-    if(NOT DEFINED QuaZip-Qt6_DIR)
-        message(FATAL_ERROR "QuaZip-Qt6_DIR not set!!!")
-    endif(NOT DEFINED QuaZip-Qt6_DIR)    
-    # set(QuaZip-Qt6_DIR ${QuaZip-Qt6_DIR} CACHE PATH "Path to directory containing quazip cmake config files")
-    message("QuaZip-Qt6_DIR = ${QuaZip-Qt6_DIR}")
-
     if(NOT DEFINED PROJ_DEV_PATH)
         message(FATAL_ERROR "PROJ_DEV_PATH not set!!!")
     endif(NOT DEFINED PROJ_DEV_PATH)
@@ -124,15 +118,12 @@ if(WIN32)
     set(GDAL_DEV_PATH "C:\\GDAL" CACHE PATH "Path to directory containing GDAL include and lib, e.g. M:\\lib\\GDAL")
     set(PROJ_DEV_PATH "C:\\PROJ" CACHE PATH "Path to directory containing PROJ include and lib, e.g. M:\\lib\\PROJ")
     set(ROUTINO_DEV_PATH "C:\\routino" CACHE PATH "Path to directory containing routino include and lib, e.g. M:\\lib\\routino")
-    set(QuaZip-Qt6_DIR "C:\\quazip" CACHE PATH "Path to directory containing quazip cmake config files, e.g. M:\\lib2022\\QUAZIP\\lib\\cmake\\QuaZip-Qt6-1.5")
     set(JPEG_DEV_PATH "C:\\JPEG" CACHE PATH "Path to directory containing JPEG include and lib, e.g. M:\\lib\\JPEG")
     list(APPEND CMAKE_PREFIX_PATH ${QT_DEV_PATH})
     if(POLICY CMP0074)
         #policy for <PackageName>_ROOT variables - see https://cmake.org/cmake/help/latest/policy/CMP0074.html
         cmake_policy(SET CMP0074 NEW)
-    endif()	
-    set(ZLIB_ROOT "C:\\zlib" CACHE PATH "Path to directory containing ZLIB, e.g. M:\\lib2022\\zlib")
-    set(ZLIB_LIBRARY "C:\\zlib\\lib\\zlibwapi.lib" CACHE FILEPATH "Path to directory containing ZLIB library, e.g. M:\\lib2022\\zlib\\lib\\zlibwapi.lib")
+    endif()
 endif(WIN32)
 
 if(MSVC)
@@ -206,7 +197,6 @@ find_package(GDAL                   REQUIRED)
 find_package(PROJ                   REQUIRED)
 find_package(JPEG                   REQUIRED)
 find_package(ROUTINO                REQUIRED)
-find_package(QuaZip-Qt6             REQUIRED)
 
 # Minimum dependency versions (see issue #1123). The floor is the newest release
 # available on Nov 6, 2024 (GDAL 3.10.0's date): GDAL 3.10 is a hard requirement -

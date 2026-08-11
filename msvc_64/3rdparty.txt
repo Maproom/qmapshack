@@ -62,6 +62,3 @@ QMS depends on the 3rd party software listed below:
 
 12.) sqlite
   The source code can be downloaded from https://www.sqlite.org/download.html
-
-13.) QuaZIP
-  The source code can be downloaded from https://stachenov.github.io/quazip/

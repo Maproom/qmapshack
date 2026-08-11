@@ -33,6 +33,7 @@ V1.XX.X
 [QMS-1193] Drop the QuaZip dependency in favour of GDAL's /vsizip/ filesystem
 [QMS-1195] Extend .gitattributes file by additional file types
 [QMS-1197] Fix: Splash screen not floating on Sway
+[QMS-1199] Fix: Map tooltip showing up after mouse left the canvas
 
 V1.20.3
 [QMS-1059] Fix: F1 help browser does not open external links

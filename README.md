@@ -59,7 +59,6 @@
 | [Routino](http://www.routino.org/) | 3.4 | Offline routing |
 | [QuaZip](https://github.com/stachenov/quazip) | 1.x (Qt6 build) | ZIP archive support |
 | libjpeg | — | JNX and JPEG raster support |
-| [ALGLIB](https://www.alglib.net/) | — | Optional; a bundled copy is used when not found |
 | CMake | 3.20 | Build system |
 | C++20 compiler | — | GCC ≥ 10, Clang ≥ 12, MSVC 2022 |
 

@@ -235,9 +235,10 @@ void CGisItemTrk::filterInterpolateElevation() {
 
   interp.valid = false;
   deriveSecondaryData();
-  changed(
-      tr("Replaced elevation data with interpolated values. (M=%1, RMSErr=%2)").arg(interp.m).arg(interp.rep.rmserror),
-      "://icons/SetEle.svgt");
+  changed(tr("Replaced elevation data with interpolated values. (M=%1, RMSErr=%2)")
+              .arg(interp.m)
+              .arg(interp.spline.rmsError()),
+          "://icons/SetEle.svgt");
 }
 
 void CGisItemTrk::filterOffsetElevation(int offset) {
@@ -458,7 +459,8 @@ void CGisItemTrk::filterDeleteExtension(const QString& extStr) {
   propHandler->setupData();
 
   const CKnownExtension& ext = CKnownExtension::get(extStr);
-  changed(tr("Removed extension %1 from all Track Points").arg(ext.nameLongText), "://icons/FilterModifyExtension.svgt");
+  changed(tr("Removed extension %1 from all Track Points").arg(ext.nameLongText),
+          "://icons/FilterModifyExtension.svgt");
 }
 
 void CGisItemTrk::filterSubPt2Pt() {

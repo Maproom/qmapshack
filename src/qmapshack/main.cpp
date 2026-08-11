@@ -92,6 +92,7 @@ int main(int argc, char** argv) {
 
     splash = new QSplashScreen(pic);
     splash->setWindowFlags(splash->windowFlags() | Qt::WindowStaysOnTopHint);
+    splash->setFixedSize(pic.size());
 #ifdef Q_OS_MAC
     // remove the splash screen flag on OS-X as workaround for the reported bug
     // https://bugreports.qt.io/browse/QTBUG-49576

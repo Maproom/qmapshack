@@ -7,3 +7,13 @@
 *.svg                  text eol=lf
 src/icons/svg.sha256   text eol=lf
 src/icons/svghygiene   text eol=lf
+#
+# Linux scripts should use lf
+*.sh   text eol=lf
+#
+# Windows scripts should use cllf
+*.bat  text eol=crlf
+*.cmd  text eol=crlf
+#
+# Markdown files should use lf
+*.md   text eol=lf

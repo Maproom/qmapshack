@@ -6,7 +6,6 @@ The root directory of the local build environment must be empty and referenced a
 This directory contains sub-directories while building:
 
 - routino\*/ (for building routino)
-- quazip/ (for building quazip)
 - proj\*/ (for building proj)
 - gdal/ (for building gdal)
 - local/ (contains all the files and dirs installed by packages locally built)
@@ -17,7 +16,6 @@ This directory contains sub-directories while building:
 Local packages to be build are:
 
 - routino
-- quazip
 - gdal if BUILD_GDAL="x" in config.sh
 - proj if BUILD_PROJ="x" in config.sh
 
@@ -72,7 +70,6 @@ Scripts for building partial steps in the build process
 
 - install-brew-packages.sh: installs homebrew (if needed) and packages for the build process
   package files are also copied to local environment
-- build-quazip.sh: builds Quazip
 - build-routino.sh: builds Routino
 - build-gdal.sh: builds GDAL
 - build-proj.sh: builds PROJ

@@ -81,9 +81,6 @@ copy %QMSI_MGW6_PATH%\libwinpthread-1.dll
 copy %QMSI_MGW6_PATH%\zlib1.dll
 xcopy %QMSI_ROUT_PATH%\xml routino-xml /s /i
 
-rem Copy QuaZip --------------------------------------------------------
-copy %QMSI_QUAZIP_PATH%\bin\quazip1-qt5.dll
-
 rem Copy MSVC Redistributables -------------------------------------
 copy %QMSI_VCREDIST_PATH%\VC_redist.x64.exe
 

@@ -9,7 +9,7 @@ vector maps and DEM data; supports online and offline routing engines.
 
 - **Language:** C++20
 - **GUI / framework:** Qt 6.8+
-- **Key libs:** GDAL, PROJ 8+, Routino, QuaZip-Qt6
+- **Key libs:** GDAL, PROJ 8+, Routino
 - **Build:** CMake 3.20+, Ninja; Debug build in `build/`, binaries in `build/bin/`
 - **Bundled 3rdparty:** Garmin FIT SDK
 - **Minimum GDAL:** 3.10
@@ -68,8 +68,7 @@ Target-scoped CMake. Nothing is set at directory scope except the MSVC options b
 - **`target_link_libraries` is keyword form everywhere.** Plain and keyword signatures cannot be
   mixed on one target, so a new call must say `PRIVATE`.
 - **Dependencies are imported targets**: `GDAL::GDAL`, `PROJ::proj`, `JPEG::JPEG`,
-  `ROUTINO::ROUTINO`, `QuaZip::QuaZip`. `ROUTINO_XML_PATH` stays a plain variable — qmapshack
-  passes it as a define.
+  `ROUTINO::ROUTINO`. `ROUTINO_XML_PATH` stays a plain variable — qmapshack passes it as a define.
 - **Defines are per target**: `HELPPATH` on qmapshack and qmaptool, `ROUTINO_XML_PATH` and
   `HAVE_DBUS` on qmapshack. Global on purpose: `_CRT_SECURE_NO_WARNINGS`, `/MP` and `/utf-8` under
   MSVC, which the bundled FIT SDK needs, and `-march=native`.
@@ -641,6 +640,17 @@ the `.ovr` — delete the old one, then `gdaladdo -ro -r average <vrt> <factors>
 Always resolve via `IAppSetup::getPlatformInstance()->findExecutable("toolname")`, never a bare
 name. `CAppSetupWin` restricts `PATH` to the app directory to prevent DLL conflicts, so a bare name
 silently yields `QProcess::FailedToStart` on Windows if the binary isn't co-located with the app.
+
+### ZIP archives — `CGdalZip`
+
+`helpers/CGdalZip.{h,cpp}` reads ZIP archives through GDAL's `/vsizip/`. No ZIP library is needed.
+Used by the BRouter installer only.
+
+- **Address an archive as `/vsizip/{<absolute path>}/<entry>`.** The braces bypass GDAL's list of
+  accepted archive suffixes, which lacks `.jar`.
+- `VSIReadDirRecursive()` marks directories with a trailing slash; `fileList()` drops them.
+- `extractAll()` writes plain files, no permissions and no symlinks, and rejects entries pointing
+  outside the destination.
 
 ---
 

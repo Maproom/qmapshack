@@ -9,7 +9,6 @@ set QMSI_VCREDIST_PATH="M:\deploy_2017"
 set QMSI_GDAL_PATH="M:\lib2017\gdal_330"
 set QMSI_PROJ_PATH="M:\lib2017\PROJ8"
 set QMSI_ROUT_PATH="M:\src\routino_pkg"
-set QMSI_QUAZIP_PATH="M:\lib2017\QUAZIP_1"
 set QMSI_ZLIB_PATH="M:\lib2017\zlib"
 set QMSI_CURL_PATH="M:\lib2017\cURL"
 set QMSI_SQLI_PATH="M:\lib2017\sqlite"
@@ -115,8 +114,6 @@ copy %QMSI_MGW6_PATH%\libz-1.dll
 xcopy %QMSI_ROUT_PATH%\xml routino-xml /s /i
 rem section 2.2.6) MySql/MariaDB
 copy %QMSI_MSQL_PATH%\libmysql.dll
-rem section 2.2.7) QuaZip
-copy %QMSI_QUAZIP_PATH%\bin\quazip1-qt5.dll
 rem section 2.2.8) zlib
 copy %QMSI_ZLIB_PATH%\bin\zlibwapi.dll
 rem section 2.2.9) cURL

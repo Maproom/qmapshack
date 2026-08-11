@@ -49,14 +49,6 @@ source $SRC_OSX_DIR/build-otoolrecursive.sh
 cd $QMSDEVDIR
 
 ######################################################################## 
-# build Quazip
-if [ -z "$MACPORTS_BUILD" ]; then
-    cd $QMSDEVDIR
-    source $SRC_OSX_DIR/build-quazip.sh
-    cd $QMSDEVDIR
-fi
-
-######################################################################## 
 # build Proj
 if [ -z "$MACPORTS_BUILD" ]; then
    if [ "$BUILD_PROJ" = "x" ]; then

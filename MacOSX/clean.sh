@@ -13,7 +13,6 @@ echo "${ATTN}Installed macports are listed in $QMSDEVDIR/portsdiff*.diff${NC}"
 
 rm -rf $QMSDEVDIR/local
 rm -rf $QMSDEVDIR/otoolrecursive
-rm -rf $QMSDEVDIR/quazip
 rm -rf $QMSDEVDIR/gdal
 rm -rf $QMSDEVDIR/routino*
 rm -rf $QMSDEVDIR/proj*

@@ -102,7 +102,7 @@ Inherit from a shipped preset and override only what differs:
 
 Then use `cmake --preset my-debug` / `cmake --build --preset my-debug` as before. This is also the
 right place for the Windows dependency paths (`QT_DEV_PATH`, `GDAL_DEV_PATH`, `PROJ_DEV_PATH`,
-`ROUTINO_DEV_PATH`, `JPEG_DEV_PATH`, `ZLIB_ROOT`, `QuaZip-Qt6_DIR`) — inherit `windows-msvc` and
+`ROUTINO_DEV_PATH`, `JPEG_DEV_PATH`) — inherit `windows-msvc` and
 override them rather than editing the tracked defaults.
 
 ## IDE support

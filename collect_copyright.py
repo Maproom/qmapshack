@@ -8,7 +8,7 @@ names = set()
 
 def find_copyright(filename):
     """ parse files for copyrights"""
-    regex = re.compile(r"Copyright \(C\)\s*[0-9-]*\s(.*)\s\<.*")
+    regex = re.compile(r"Copyright \(C\)\s*[0-9-]*\s+(.*?)\s*(?:<.*)?$")
     with open(filename) as file:
         lines = file.readlines()
         for line in lines:

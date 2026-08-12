@@ -952,6 +952,12 @@ if(WIN32)
 endif()
 qt_add_executable(${APPLICATION_NAME} WIN32 ${MAININP} ${ICON})
 
+# CWptIconManager::init() is one huge initializer list. GCC's variable tracking exceeds its size
+# limit on it and notes that it retries without -fvar-tracking-assignments. Drop the pass for that
+# file; the coarser debug info costs nothing on a plain table of icon definitions.
+set_source_files_properties(helpers/CWptIconManager.cpp PROPERTIES
+    COMPILE_OPTIONS $<$<CXX_COMPILER_ID:GNU>:-fno-var-tracking-assignments>)
+
 target_include_directories(${APPLICATION_NAME} PRIVATE . ../common)
 # SYSTEM prevents warnings from non-QMS headers.
 target_include_directories(${APPLICATION_NAME} SYSTEM PRIVATE

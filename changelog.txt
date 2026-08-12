@@ -34,6 +34,7 @@ V1.XX.X
 [QMS-1195] Extend .gitattributes file by additional file types
 [QMS-1197] Fix: Splash screen not floating on Sway
 [QMS-1199] Fix: Map tooltip showing up after mouse left the canvas
+[QMS-1201] Fix: Checked state of tool buttons and menu items lost while the window is inactive
 
 V1.20.3
 [QMS-1059] Fix: F1 help browser does not open external links

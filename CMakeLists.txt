@@ -230,6 +230,10 @@ include(FetchContent)
 ###############################################################################################
 # Get Blend2D and it's dependency AsmJit
 ###############################################################################################
+# Both are cloned by FetchContent. Fail here with a clear message instead of deep inside the
+# populate sub-build if git is not on the PATH. Set GIT_EXECUTABLE if it is elsewhere.
+find_package(Git REQUIRED)
+
 # asmjit does not do official releases so pinned it to what was HEAD at time of writing this
 set(ASMJIT_GIT_TAG  "0bd5787b54b575ed94bf32ac452153b34385c514" CACHE STRING "AsmJit git revision to fetch")
 # blend2d does releases but not set git tags; the commit set here referese to release v0.21.2

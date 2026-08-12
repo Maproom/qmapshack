@@ -408,6 +408,12 @@ palette.
   so the running one cannot be the base. That is what preserves `-style` / `QT_STYLE_OVERRIDE`.
 - **Paint the menu tint before delegating to the base**, or it dims the text it marks; `CE_MenuItem`
   fills the row only when selected. Checked rows also go bold, so the cue is not colour alone.
+- **Resolve a cue's colour through `cueColorGroup()`, never the palette's current group.** The
+  current group turns `Inactive` while the window is not the active one, and KDE's
+  `[ColorEffects:Inactive] ChangeSelectionColor` mutes `Highlight` to near the button face there
+  (measured `#1b4155` on `#292c30`), so a cue drawn with the one-argument `color()` overload
+  disappears whenever the app loses focus. A cue marks state, not focus, so `Active` is pinned and
+  only the disabled dimming is kept.
 - **Never fill a checked button with `Highlight`** — `ink` drops to ~1.3:1 on it. A border over the
   untouched face keeps ~4.9:1.
 - **Menus resist style sheets:** Qt ignores `QMenu::item:checked`, and `QMenu::indicator` needs an

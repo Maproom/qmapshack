@@ -28,6 +28,20 @@ constexpr qint32 kButtonBorderWidth = 2;
 constexpr qint32 kMenuBarWidth = 4;
 /** @brief Tint of a checked menu row. Painted under the content, so it does not dim the text. */
 constexpr qint32 kMenuTintAlpha = 90;
+
+/**
+ * @brief Palette group a checked-state cue resolves Highlight in.
+ *
+ * The palette's current group turns Inactive while the window is not the active one, where
+ * Highlight is muted to near the widget's own face and the cue disappears. A cue marks state, not
+ * focus, so Active is pinned and only the disabled dimming is kept.
+ *
+ * @param option style option being drawn
+ * @return QPalette::Active, or QPalette::Disabled for a disabled widget
+ */
+QPalette::ColorGroup cueColorGroup(const QStyleOption* option) {
+  return (option->state & QStyle::State_Enabled) ? QPalette::Active : QPalette::Disabled;
+}
 }  // namespace
 
 CQmsStyle::CQmsStyle(QStyle* base) : QProxyStyle(base) {}
@@ -46,7 +60,7 @@ void CQmsStyle::drawPrimitive(PrimitiveElement element, const QStyleOption* opti
     return;
   }
 
-  QPen pen(option->palette.color(QPalette::Highlight));
+  QPen pen(option->palette.color(cueColorGroup(option), QPalette::Highlight));
   pen.setWidth(kButtonBorderWidth);
 
   painter->save();
@@ -66,7 +80,7 @@ void CQmsStyle::drawControl(ControlElement element, const QStyleOption* option, 
     return;
   }
 
-  const QColor highlight = item->palette.color(QPalette::Highlight);
+  const QColor highlight = item->palette.color(cueColorGroup(item), QPalette::Highlight);
 
   painter->save();
 

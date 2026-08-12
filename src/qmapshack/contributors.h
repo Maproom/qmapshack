@@ -13,5 +13,5 @@ constexpr auto contributors = ""
 "Norbert Truchsess, "
 "Oliver Eichler, "
 "Peter Schumann, "
-"Robert Siebeck, "
+"Robert Siebeck"
 "";

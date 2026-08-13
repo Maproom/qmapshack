@@ -1977,8 +1977,12 @@ void CGisListWks::slotSyncDevWks() {
 void CGisListWks::slotAddProjectFilter() {
   CGisListWksEditLock lock(true, IGisItem::mutexItems);
 
-  // Since we only allow one Item to be selected at a time
-  IGisProject* project = dynamic_cast<IGisProject*>(selectedItems()[0]);
+  const QList<QTreeWidgetItem*>& items = selectedItems();
+  if (items.count() != 1) {
+    return;
+  }
+
+  IGisProject* project = dynamic_cast<IGisProject*>(items.first());
   if (project != nullptr) {
     project->filterProject(actionFilterProject->isChecked());
   }

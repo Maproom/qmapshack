@@ -141,7 +141,7 @@ Quick starts are also available in
 ## Contributing
 
 - **Bug reports & feature requests:** [GitHub Issues](https://github.com/Maproom/qmapshack/issues) — please use the provided issue templates.
-- **Code contributions:** Pull requests target the `dev` branch. See the [coding guideline](https://github.com/Maproom/qmapshack/wiki/DeveloperCodingGuideline) and [commit guide](https://github.com/Maproom/qmapshack/wiki/DeveloperCommitCode) on the wiki.
+- **Code contributions:** Pull requests target the `dev` branch. Read [README_CODING.md](README_CODING.md) first, then the [commit guide](https://github.com/Maproom/qmapshack/wiki/DeveloperCommitCode) on the wiki.
 - **Translations:** See [Add translations](https://github.com/Maproom/qmapshack/wiki/DeveloperTranslate) on the wiki.
 - **Documentation:** Wiki contributions are welcome — see [Developing Documentation](https://github.com/Maproom/qmapshack/wiki/DevelopingDocumentation).
 

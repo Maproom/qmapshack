@@ -1,9 +1,8 @@
 # Contributing Code
 
-If this is your first contribution to the project
-please have a look at the following Wiki Pages:
+If this is your first contribution to the project please have a look at:
 
-* [Coding Guideline](https://github.com/Maproom/qmapshack/wiki/DeveloperCodingGuideline)
+* [Coding Guideline](../README_CODING.md) — in this repository, and the only version of it
 * [Commit Code](https://github.com/Maproom/qmapshack/wiki/DeveloperCommitCode)
 * [FAQ about using templates](https://github.com/Maproom/qmapshack/wiki/DocFaqProjectSite)
 

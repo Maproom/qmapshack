@@ -22,6 +22,7 @@
 #include <QMenu>
 #include <QMessageBox>
 #include <QSignalBlocker>
+#include <utility>
 
 #include "helpers/CShortcutConfig.h"
 
@@ -43,6 +44,7 @@ CShortcutSetupDialog::CShortcutSetupDialog(QWidget* const& parent, CShortcutConf
     item->setData(eColumnAction, Qt::UserRole, QVariant::fromValue(action));
     setItemShortcut(item, action->shortcut());
   }
+  // QTreeModel sorts stably, so sorting by action first leaves it as the tiebreak within a category
   treeActions->sortItems(eColumnAction, Qt::AscendingOrder);
   treeActions->sortItems(eColumnCategory, Qt::AscendingOrder);
   treeActions->setSortingEnabled(true);
@@ -83,8 +85,12 @@ void CShortcutSetupDialog::accept() {
 
 void CShortcutSetupDialog::slotButtonClicked(QAbstractButton* button) {
   if (buttonBox->buttonRole(button) == QDialogButtonBox::ResetRole) {
+    QList<QTreeWidgetItem*> items;
     for (qint32 i = 0; i < treeActions->topLevelItemCount(); i++) {
-      QTreeWidgetItem* item = treeActions->topLevelItem(i);
+      items << treeActions->topLevelItem(i);
+    }
+
+    for (QTreeWidgetItem* const item : std::as_const(items)) {
       setItemShortcut(item, config->defaultShortcut(itemAction(item)));
     }
     updateEditor(treeActions->currentItem());
@@ -128,17 +134,10 @@ void CShortcutSetupDialog::slotApplyEditor() {
 
   QTreeWidgetItem* conflict = findConflict(shortcut, item);
   if (conflict != nullptr) {
-    const QString conflictLabel =
-        conflict->text(eColumnCategory).isEmpty()
-            ? conflict->text(eColumnAction)
-            : tr("%1 (%2)").arg(conflict->text(eColumnAction), conflict->text(eColumnCategory));
-    const QString itemLabel = item->text(eColumnCategory).isEmpty()
-                                  ? item->text(eColumnAction)
-                                  : tr("%1 (%2)").arg(item->text(eColumnAction), item->text(eColumnCategory));
     const QMessageBox::StandardButton answer = QMessageBox::question(
         this, tr("Shortcut already in use"),
         tr("The shortcut '%1' is already assigned to '%2'. Do you want to reassign it to '%3'?")
-            .arg(shortcut.toString(QKeySequence::NativeText), conflictLabel, itemLabel),
+            .arg(shortcut.toString(QKeySequence::NativeText), itemLabel(conflict), itemLabel(item)),
         QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
     if (answer == QMessageBox::Yes) {
       setItemShortcut(conflict, QKeySequence());
@@ -155,6 +154,12 @@ void CShortcutSetupDialog::slotApplyEditor() {
 
 QAction* CShortcutSetupDialog::itemAction(const QTreeWidgetItem* const item) const {
   return item->data(eColumnAction, Qt::UserRole).value<QAction*>();
+}
+
+QString CShortcutSetupDialog::itemLabel(const QTreeWidgetItem* const item) const {
+  const QString& category = item->text(eColumnCategory);
+  const QString& action = item->text(eColumnAction);
+  return category.isEmpty() ? action : tr("%1 (%2)").arg(action, category);
 }
 
 QKeySequence CShortcutSetupDialog::itemShortcut(const QTreeWidgetItem* const item) const {

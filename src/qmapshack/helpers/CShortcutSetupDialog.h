@@ -44,6 +44,7 @@ class CShortcutSetupDialog : public QDialog, private Ui::IShortcutSetupDialog {
   enum columns_e { eColumnCategory = 0, eColumnAction = 1, eColumnShortcut = 2 };
 
   QAction* itemAction(const QTreeWidgetItem* const item) const;
+  QString itemLabel(const QTreeWidgetItem* const item) const;
   QKeySequence itemShortcut(const QTreeWidgetItem* const item) const;
   void setItemShortcut(QTreeWidgetItem* const item, const QKeySequence& shortcut);
   QTreeWidgetItem* findConflict(const QKeySequence& shortcut, const QTreeWidgetItem* const skip) const;

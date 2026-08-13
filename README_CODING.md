@@ -5,6 +5,24 @@ Nobody likes coding rules, but they keep the code readable and reviewable. Pleas
 **If you read only one section, read the first one.** The eight rules in it are not about taste — each
 one is a defect that ships.
 
+**[Rules that break the user interface](#rules-that-break-the-user-interface)** —
+[1. Colours](#1-never-write-a-colour-into-ui-code) ·
+[2. Scheme switch](#2-rebuild-themed-content-when-the-scheme-changes) ·
+[3. Stored colours](#3-never-store-a-themed-colour) ·
+[4. `QIcon` over `QPixmap`](#4-hold-a-qicon-never-a-qpixmap) ·
+[5. Icon files](#5-never-delete-an-icon-file-or-a-qrc-entry) ·
+[6. `tr()`](#6-put-every-user-facing-string-in-tr-with-placeholders) ·
+[7. Logical vs device pixels](#7-do-not-mix-logical-and-device-pixels) ·
+[8. Dock widgets](#8-a-dock-widget-keeps-dockwidgetclosable)
+
+[Formatting](#formatting) ·
+[Naming](#naming) ·
+[Language rules](#language-rules) ·
+[Object lifetime](#object-lifetime) ·
+[Qt idioms](#qt-idioms) ·
+[Header files](#header-files) ·
+[Before you open a pull request](#before-you-open-a-pull-request)
+
 ---
 
 ## Rules that break the user interface

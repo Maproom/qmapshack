@@ -487,6 +487,26 @@ divides the scale by `pixelRatio`.
 Test HiDPI paths on a normal screen with `QT_SCALE_FACTOR=2 build/bin/qmapshack`, adding
 `QT_SCALE_FACTOR_ROUNDING_POLICY=PassThrough` for fractional factors like 1.5.
 
+### Applying a new viewport size
+
+A draw thread holds a reference to its buffer with the mutex unlocked, so the buffers cannot be
+rebuilt while it runs and a resize has to be deferred. `CCanvas::slotUpdateDrawContextViewport()` is
+the only path that applies size and pixel ratio, and three rules keep it honest:
+
+- **Never pass a size captured earlier.** It reads `size()`/`devicePixelRatio()` at apply time. A
+  retry runs long after the event that scheduled it, and a queued resize event for an intermediate
+  geometry is delivered *after* the synchronously sent event for the final one — the Windows
+  fullscreen → maximized sequence does exactly that.
+- **All or nothing** (`canResize()` before `resize()`). A partially applied resize leaves the layers
+  with different viewports, which shows as map content no longer matching the GIS overlay.
+- **`paintEvent()` reconciles.** A context left behind would never be noticed otherwise: a canvas
+  shown again at an unchanged geometry gets no resize event, so the divergence would survive panning,
+  zooming and view switches until the user drags a splitter.
+
+Retries come from `timerViewport` and from each context's `finished`. `print()` is the one caller
+that changes the size to something other than the canvas' own, so it must `waitForDrawContexts()`
+before *and* after — its second `draw()` pass restarts the threads.
+
 ---
 
 ## Icons

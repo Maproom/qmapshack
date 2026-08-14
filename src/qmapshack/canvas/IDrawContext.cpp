@@ -80,8 +80,8 @@ bool IDrawContext::resize(const QSize& size) {
     return true;
   }
 
-  if (isRunning() && !wait(100)) {
-    // blocked by thread, reschedule
+  if (isRunning()) {
+    // blocked by thread, the canvas retries
     return false;
   }
 
@@ -99,8 +99,8 @@ bool IDrawContext::setPixelRatio(qreal ratio) {
     return true;
   }
 
-  if (isRunning() && !wait(100)) {
-    // blocked by thread, reschedule
+  if (isRunning()) {
+    // blocked by thread, the canvas retries
     return false;
   }
 

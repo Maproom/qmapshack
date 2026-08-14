@@ -233,6 +233,17 @@ class CCanvas : public QWidget {
  private slots:
   void slotToolTip();
 
+  /**
+     @brief Apply the canvas' current size and device pixel ratio to all draw context objects
+
+     Always reads the current geometry instead of taking it from an event: a retry runs long after
+     the event that scheduled it, and the canvas may have been resized again meanwhile.
+
+     If a draw thread blocks the request the retry timer takes over and nothing is applied, so the
+     layers cannot end up disagreeing about the viewport.
+   */
+  void slotUpdateDrawContextViewport();
+
   /// @brief Show the overview advisory dialog for a CDemVRT that hit the render timeout
   /// with overviews missing/inadequate; wires the dialog's "don't show again" result back
   /// to source.
@@ -259,17 +270,23 @@ class CCanvas : public QWidget {
   }
   void setZoom(bool in, redraw_e& needsRedraw);
   void setSizeTrackProfile();
+  /// @brief True if every draw context is built for the canvas' current size and pixel ratio
+  bool drawContextViewportIsCurrent() const;
+
   /**
-     @brief Resize all registered drwa context objects
+     @brief Resize all registered draw context objects
 
      @param s     the new size
 
-     @return Return false if one of the draw conext could not be resized
+     @return Return false if one of the draw contexts could not be resized
              because it's thread is running and blocking access to the data
    */
   bool setDrawContextSize(const QSize& s);
 
   bool setDrawContextPixelRatio(qreal ratio);
+
+  /// @brief Block until no draw thread is running and the buffers can be rebuilt
+  void waitForDrawContexts();
 
   bool isShowMinMaxSummary() const;
   bool isShowTrackSummary() const;
@@ -295,6 +312,9 @@ class CCanvas : public QWidget {
   CGrid* grid;                        //< the grid attached to this canvas
 
   QList<IDrawContext*> allDrawContext;
+
+  /// retry timer for a viewport update a running draw thread refused
+  QTimer* timerViewport;
 
   /// the current point of focus (usually the canvas center)
   QPointF posFocus{0.209439510239, 0.855211333477};

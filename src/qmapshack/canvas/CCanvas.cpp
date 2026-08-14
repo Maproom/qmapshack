@@ -137,6 +137,16 @@ CCanvas::CCanvas(QWidget* parent, const QString& storedKey) : QWidget(parent) {
   // map has to be first!
   allDrawContext << map << poi << dem << gis << rt;
 
+  timerViewport = new QTimer(this);
+  timerViewport->setSingleShot(true);
+  timerViewport->setInterval(50);
+  connect(timerViewport, &QTimer::timeout, this, &CCanvas::slotUpdateDrawContextViewport);
+
+  // a thread that has stopped no longer blocks its buffers, so a pending viewport update can be applied
+  for (IDrawContext* context : std::as_const(allDrawContext)) {
+    connect(context, &IDrawContext::finished, this, &CCanvas::slotUpdateDrawContextViewport);
+  }
+
   mouse = new CMouseAdapter(this);
   mouse->setDelegate(new CMouseNormal(gis, this, mouse));
 
@@ -215,9 +225,7 @@ CCanvas::~CCanvas() {
   for (IDrawContext* context : std::as_const(allDrawContext)) {
     context->quit();
   }
-  for (IDrawContext* context : std::as_const(allDrawContext)) {
-    context->wait();
-  }
+  waitForDrawContexts();
 
   /*
       Some mouse objects call methods from their canvas on destruction.
@@ -563,14 +571,8 @@ void CCanvas::changeEvent(QEvent* e) {
 }
 
 void CCanvas::resizeEvent(QResizeEvent* e) {
-  if (!setDrawContextSize(e->size())) {
-    // reschedule resize event because one of the draw context threads is still running
-    // and blocking the access to internal data.
-    QApplication::postEvent(this, new QResizeEvent(e->size(), e->oldSize()));
-    return;
-  }
+  slotUpdateDrawContextViewport();
 
-  needsRedraw = eRedrawAll;
   QWidget::resizeEvent(e);
 
   const QRect& r = rect();
@@ -601,6 +603,13 @@ void CCanvas::resizeEvent(QResizeEvent* e) {
 void CCanvas::paintEvent(QPaintEvent*) {
   if (!isVisible()) {
     return;
+  }
+
+  // A viewport update refused by a running draw thread is retried by timerViewport, but nothing else
+  // would ever notice a context left behind: a canvas that is shown again at an unchanged geometry
+  // gets no resize event.
+  if (!timerViewport->isActive() && !drawContextViewportIsCurrent()) {
+    timerViewport->start();
   }
 
   QPainter p;
@@ -1260,26 +1269,69 @@ void CCanvas::showProfile(bool yes) {
   }
 }
 
-bool CCanvas::setDrawContextSize(const QSize& s) {
-  bool done = true;
-  for (IDrawContext* context : std::as_const(allDrawContext)) {
-    done &= context->resize(s);
+void CCanvas::slotUpdateDrawContextViewport() {
+  if (drawContextViewportIsCurrent()) {
+    timerViewport->stop();
+    return;
   }
-  return done;
+
+  if (!setDrawContextPixelRatio(devicePixelRatio()) || !setDrawContextSize(size())) {
+    timerViewport->start();
+    return;
+  }
+
+  timerViewport->stop();
+  slotTriggerCompleteUpdate(eRedrawAll);
+}
+
+bool CCanvas::drawContextViewportIsCurrent() const {
+  const QSize& s = size();
+  const qreal ratio = devicePixelRatio();
+
+  for (IDrawContext* context : std::as_const(allDrawContext)) {
+    if ((context->getSize() != s) || (context->getPixelRatio() != ratio)) {
+      return false;
+    }
+  }
+  return true;
+}
+
+bool CCanvas::setDrawContextSize(const QSize& s) {
+  // all or nothing: a partial resize leaves the layers with different viewports, which shows as
+  // map content that no longer matches the GIS overlay
+  for (IDrawContext* context : std::as_const(allDrawContext)) {
+    if (!context->canResize(s)) {
+      return false;
+    }
+  }
+  for (IDrawContext* context : std::as_const(allDrawContext)) {
+    context->resize(s);
+  }
+  return true;
 }
 
 bool CCanvas::setDrawContextPixelRatio(qreal ratio) {
-  bool done = true;
   for (IDrawContext* context : std::as_const(allDrawContext)) {
-    done &= context->setPixelRatio(ratio);
+    if (!context->canSetPixelRatio(ratio)) {
+      return false;
+    }
   }
-  return done;
+  for (IDrawContext* context : std::as_const(allDrawContext)) {
+    context->setPixelRatio(ratio);
+  }
+  return true;
+}
+
+void CCanvas::waitForDrawContexts() {
+  for (IDrawContext* context : std::as_const(allDrawContext)) {
+    context->wait();
+  }
 }
 
 void CCanvas::print(QPainter& p, const QRectF& area, const QPointF& focus, bool printScale) {
-  const QSize oldSize = size();
   const QSize newSize(area.size().toSize());
 
+  waitForDrawContexts();
   setDrawContextSize(newSize);
 
   // ----- start to draw thread based content -----
@@ -1292,9 +1344,7 @@ void CCanvas::print(QPainter& p, const QRectF& area, const QPointF& focus, bool 
     context->draw(p, redraw, focus);
   }
 
-  for (IDrawContext* context : std::as_const(allDrawContext)) {
-    context->wait();
-  }
+  waitForDrawContexts();
 
   for (IDrawContext* context : std::as_const(allDrawContext)) {
     context->draw(p, redraw, focus);
@@ -1313,7 +1363,10 @@ void CCanvas::print(QPainter& p, const QRectF& area, const QPointF& focus, bool 
     drawScale(p, r);
   }
 
-  setDrawContextSize(oldSize);
+  // the second draw() above restarted the threads, so the canvas' own size cannot be restored
+  // before they have stopped again
+  waitForDrawContexts();
+  slotUpdateDrawContextViewport();
 }
 
 bool CCanvas::event(QEvent* event) {
@@ -1329,13 +1382,7 @@ bool CCanvas::event(QEvent* event) {
     }
   }
   if (event->type() == QEvent::DevicePixelRatioChange) {
-    if (!setDrawContextPixelRatio(devicePixelRatio())) {
-      // reschedule resize event because one of the draw context threads is still running
-      // and blocking the access to internal data.
-      QApplication::postEvent(this, new QEvent(QEvent::DevicePixelRatioChange));
-    } else {
-      needsRedraw = eRedrawAll;
-    }
+    slotUpdateDrawContextViewport();
   }
   return QWidget::event(event);
 }

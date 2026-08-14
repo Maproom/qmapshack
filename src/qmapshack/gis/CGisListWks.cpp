@@ -1574,7 +1574,7 @@ void CGisListWks::slotDeleteProject() {
         CCanvasCursorLock cursorLock(Qt::ArrowCursor, __func__);
         int res = QMessageBox::question(CMainWindow::getBestWidgetForParent(), tr("Delete project..."),
                                         tr("Do you really want to delete %1?").arg(project->getFilename()),
-                                        QMessageBox::Ok | QMessageBox::No, QMessageBox::Ok);
+                                        QMessageBox::Ok | QMessageBox::No, QMessageBox::No);
 
         if (res != QMessageBox::Ok) {
           continue;

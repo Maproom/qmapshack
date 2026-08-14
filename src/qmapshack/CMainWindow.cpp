@@ -1571,7 +1571,11 @@ void CMainWindow::displayRegular() {
     menuBar()->setVisible(true);
   }
   actionFullScreen->setIcon(QIcon(":/icons/FullScreen.svgt"));
+  // Windows leaves fullscreen by un-maximizing, applying the saved normal geometry and re-maximizing,
+  // all synchronously. Suppress the repaint at that intermediate size.
+  setUpdatesEnabled(false);
   setWindowState(windowState() ^ Qt::WindowFullScreen);
+  setUpdatesEnabled(true);
 }
 
 void CMainWindow::displayFullscreen() {

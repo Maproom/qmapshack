@@ -23,6 +23,7 @@
 #include <QPointer>
 #include <QSqlDatabase>
 #include <QTreeWidget>
+#include <initializer_list>
 
 #include "gis/prj/IGisProject.h"
 #include "gis/trk/CTrackData.h"
@@ -148,6 +149,65 @@ class CGisListWks : public QTreeWidget {
   void slotToArea();
 
  private:
+  /** @brief The context menu matching the current selection, as decided by updateActionState() */
+  enum menu_e {
+    eMenuNone,
+    eMenuProjectWks,
+    eMenuProjectDev,
+    eMenuProjectTrash,
+    eMenuItemTrk,
+    eMenuItemWpt,
+    eMenuItemRte,
+    eMenuItemOvl,
+    eMenuItemMulti
+  };
+
+  /**
+     @brief Bring all actions in sync with the current selection
+
+     @return the context menu for the selection
+   */
+  menu_e updateActionState();
+
+  /** @brief What the selection holds, which decides what an action can apply to */
+  enum selection_e { eSelectionNone, eSelectionProjects, eSelectionItems, eSelectionMixed };
+
+  selection_e selectionType() const;
+
+  /** @brief The selected items an action applies to: all of them, or those of the open context menu's kind */
+  QList<QTreeWidgetItem*> actionItems() const;
+
+  /** @brief The one selected item, or nullptr if the selection does not hold exactly one */
+  QTreeWidgetItem* singleSelectedItem() const;
+
+  /** @brief True if any selected item lives on a device */
+  bool hasSelectedItemOnDevice() const;
+
+  /** @brief Disable every action, then enable the listed ones */
+  void enableActionsOnly(const std::initializer_list<QAction*>& enabled);
+
+  /**
+     @brief The actions for a project
+   */
+  QList<QAction*> projectActions() const;
+
+  /**
+     @brief The projects an action applies to
+
+     Either the selected projects, or the projects the selected items belong to
+   */
+  QList<IGisProject*> targetProjects() const;
+
+  /** @brief The one project an action applies to, or nullptr if the selection does not resolve to exactly one */
+  IGisProject* singleTargetProject() const;
+
+  /**
+     @brief Bring the project actions in sync with the projects they would act on
+
+     @return the project menu those projects ask for
+   */
+  menu_e updateProjectActions(const QList<IGisProject*>& projects);
+
   void configDB();
   void initDB();
   void migrateDB(int version);
@@ -188,7 +248,7 @@ class CGisListWks : public QTreeWidget {
   template <typename T>
   QList<IGisItem::key_t> selectedItems2Keys() const {
     QList<IGisItem::key_t> keys;
-    const QList<QTreeWidgetItem*>& items = selectedItems();
+    const QList<QTreeWidgetItem*>& items = actionItems();
     for (const QTreeWidgetItem* item : items) {
       const T* gisItem = dynamic_cast<const T*>(item);
       if (nullptr != gisItem) {
@@ -253,6 +313,9 @@ class CGisListWks : public QTreeWidget {
   QAction* actionEleWptTrk;
 
   QMenu* menuNone = nullptr;
+
+  enum menu_scope_e { eMenuScopeAll, eMenuScopeProjects, eMenuScopeItems };
+  menu_scope_e menuScope = eMenuScopeAll;
 
   QPointer<CGeoSearch> geoSearch;
 

@@ -65,6 +65,22 @@ class IDrawContext : public QThread {
    */
   bool setPixelRatio(qreal ratio);
 
+  /// @brief The canvas size the buffers are built for. Lags behind the canvas while a resize is pending.
+  const QSize& getSize() const { return lastSize; }
+
+  qreal getPixelRatio() const { return pixelRatio; }
+
+  /**
+     @brief Test if resize() would be able to rebuild the buffers right now
+
+     The thread draws on a buffer with the mutex unlocked, so the buffers must not be
+     reallocated while it runs.
+   */
+  bool canResize(const QSize& size) const { return lastSize == size || !isRunning(); }
+
+  /// @brief canResize() for setPixelRatio()
+  bool canSetPixelRatio(qreal ratio) const { return pixelRatio == ratio || !isRunning(); }
+
   /**
      @brief Zoom in and out of the map by the scale factors defined in CMapDB::scales.
      @param in            set true to zoom in, and false to zoom out

@@ -111,144 +111,128 @@ CGisListWks::CGisListWks(QWidget* parent) : QTreeWidget(parent) {
 
   // workspace project related actions
   actionShowOnMap = addAction("actionShowOnMap", QIcon("://icons/ShowAll.svgt"), tr("Show on Map"), this,
-                              &CGisListWks::slotShowOnMap);
+                              &CGisListWks::slotShowOnMap, eCategoryProject);
   actionHideFrMap = addAction("actionHideFrMap", QIcon("://icons/ShowNone.svgt"), tr("Hide from Map"), this,
-                              &CGisListWks::slotHideFrMap);
+                              &CGisListWks::slotHideFrMap, eCategoryProject);
   actionGroupSort = new QActionGroup(this);
   actionGroupSort->setExclusive(true);
   actionSortByTime = addSortAction("actionSortByTime", this, actionGroupSort, "://icons/Time.svgt", tr("Sort by Time"),
-                                   IGisProject::eSortFolderTime);
+                                   IGisProject::eSortFolderTime, eCategoryProject);
   actionSortByName = addSortAction("actionSortByName", this, actionGroupSort, "://icons/SortName.svgt",
-                                   tr("Sort by Name"), IGisProject::eSortFolderName);
+                                   tr("Sort by Name"), IGisProject::eSortFolderName, eCategoryProject);
   actionSortByRating = addSortAction("actionSortByRating", this, actionGroupSort, "://icons/Tag.svgt",
-                                     tr("Sort by Rating"), IGisProject::eSortFolderRating);
+                                     tr("Sort by Rating"), IGisProject::eSortFolderRating, eCategoryProject);
   actionFilterProject = addAction("actionFilterProject", QIcon("://icons/Filter.svgt"), tr("Filter Project"), this,
-                                  &CGisListWks::slotAddProjectFilter);
+                                  &CGisListWks::slotAddProjectFilter, eCategoryProject);
   actionFilterProject->setCheckable(true);
   actionAutoSave = addAction("actionAutoSave", QIcon("://icons/AutoSaveNoA.svgt"), tr("Autom. Save"), this,
-                             &CGisListWks::slotAutoSaveProject);
+                             &CGisListWks::slotAutoSaveProject, eCategoryProject);
   actionAutoSave->setCheckable(true);
   actionUserFocusPrj = addAction("actionUserFocusPrj", QIcon("://icons/Focus.svgt"), tr("Active Project"), this,
-                                 &CGisListWks::slotUserFocusPrj);
+                                 &CGisListWks::slotUserFocusPrj, eCategoryProject);
   actionUserFocusPrj->setCheckable(true);
-  actionAutoSyncToDev = addAction("actionAutoSyncToDev", QIcon("://icons/DeviceNoSync.svgt"),
-                                  tr("Autom. Sync. w. Device"), this, &CGisListWks::slotAutoSyncProject);
+  actionAutoSyncToDev =
+      addAction("actionAutoSyncToDev", QIcon("://icons/DeviceNoSync.svgt"), tr("Autom. Sync. w. Device"), this,
+                &CGisListWks::slotAutoSyncProject, eCategoryProject);
   actionAutoSyncToDev->setCheckable(true);
 
-  actionSave = addAction("actionSave", QIcon("://icons/SaveGIS.svgt"), tr("Save"), this, &CGisListWks::slotSaveProject);
+  actionSave = addAction("actionSave", QIcon("://icons/SaveGIS.svgt"), tr("Save"), this, &CGisListWks::slotSaveProject,
+                         eCategoryProject);
   actionSaveAs = addAction("actionSaveAs", QIcon("://icons/SaveGISAs.svgt"), tr("Save as..."), this,
-                           &CGisListWks::slotSaveAsProject);
-  actionSaveAsStrict = addAction("actionSaveAsStrict", QIcon("://icons/SaveGISAsGpx11.svgt"),
-                                 tr("Save as GPX 1.1 w/o ext..."), this, &CGisListWks::slotSaveAsStrictGpx11Project);
+                           &CGisListWks::slotSaveAsProject, eCategoryProject);
+  actionSaveAsStrict =
+      addAction("actionSaveAsStrict", QIcon("://icons/SaveGISAsGpx11.svgt"), tr("Save as GPX 1.1 w/o ext..."), this,
+                &CGisListWks::slotSaveAsStrictGpx11Project, eCategoryProject);
   actionSyncWksDev = addAction("actionSyncWksDev", QIcon("://icons/Device.svgt"), tr("Send to Devices"), this,
-                               &CGisListWks::slotSyncWksDev);
+                               &CGisListWks::slotSyncWksDev, eCategoryProject);
   actionSyncDB = addAction("actionSyncDB", QIcon("://icons/DatabaseSync.svgt"), tr("Sync. with Database"), this,
-                           &CGisListWks::slotSyncDB);
-  actionCloseProj =
-      addAction("actionCloseProj", QIcon("://icons/Close.svgt"), tr("Close"), this, &CGisListWks::slotCloseProject);
+                           &CGisListWks::slotSyncDB, eCategoryProject);
+  actionCloseProj = addAction("actionCloseProj", QIcon("://icons/Close.svgt"), tr("Close"), this,
+                              &CGisListWks::slotCloseProject, eCategoryProject);
 
   // device project related actions
   actionSyncDevWks = addAction("actionSyncDevWks", QIcon("://icons/Device.svgt"), tr("Update Project on Device"), this,
-                               &CGisListWks::slotSyncDevWks);
+                               &CGisListWks::slotSyncDevWks, eCategoryProject);
 
   // common to all items actions
-  actionEditDetails =
-      addAction("actionEditDetails", QIcon("://icons/EditDetails.svgt"), tr("Edit..."), this, &CGisListWks::slotEdit);
-  actionTagItem =
-      addAction("actionTagItem", QIcon("://icons/Tag.svgt"), tr("Set Tags"), this, &CGisListWks::slotTagItem);
-  actionCopyItem =
-      addAction("actionCopyItem", QIcon("://icons/Copy.svgt"), tr("Copy to..."), this, &CGisListWks::slotCopy);
-  actionDelete =
-      addAction("actionDelete", QIcon("://icons/DeleteOne.svgt"), tr("Delete"), this, &CGisListWks::slotDelete);
+  actionEditDetails = addAction("actionEditDetails", QIcon("://icons/EditDetails.svgt"), tr("Edit..."), this,
+                                &CGisListWks::slotEdit, eCategoryItem);
+  actionTagItem = addAction("actionTagItem", QIcon("://icons/Tag.svgt"), tr("Set Tags"), this,
+                            &CGisListWks::slotTagItem, eCategoryItem);
+  actionCopyItem = addAction("actionCopyItem", QIcon("://icons/Copy.svgt"), tr("Copy to..."), this,
+                             &CGisListWks::slotCopy, eCategoryItem);
+  actionDelete = addAction("actionDelete", QIcon("://icons/DeleteOne.svgt"), tr("Delete"), this,
+                           &CGisListWks::slotDelete, eCategoryItem);
 
   // track related actions
   actionFocusTrk = addAction("actionFocusTrk", QIcon("://icons/TrkProfile.svgt"), tr("Track Information"), this,
-                             &CGisListWks::slotFocusTrk);
+                             &CGisListWks::slotFocusTrk, eCategoryTrack);
   actionFocusTrk->setCheckable(true);
   actionRangeTrk = addAction("actionRangeTrk", QIcon("://icons/SelectRange.svgt"), tr("Select Range"), this,
-                             &CGisListWks::slotRangeTrk);
+                             &CGisListWks::slotRangeTrk, eCategoryTrack);
   actionEditTrk = addAction("actionEditTrk", QIcon("://icons/LineMove.svgt"), tr("Edit Track Points"), this,
-                            &CGisListWks::slotEditTrk);
+                            &CGisListWks::slotEditTrk, eCategoryTrack);
   actionReverseTrk = addAction("actionReverseTrk", QIcon("://icons/Reverse.svgt"), tr("Reverse Track"), this,
-                               &CGisListWks::slotReverseTrk);
+                               &CGisListWks::slotReverseTrk, eCategoryTrack);
   actionCombineTrk = addAction("actionCombineTrk", QIcon("://icons/Combine.svgt"), tr("Combine Tracks"), this,
-                               &CGisListWks::slotCombineTrk);
+                               &CGisListWks::slotCombineTrk, eCategoryTrack);
   actionEleWptTrk = addAction("actionEleWptTrk", QIcon("://icons/SetEle.svgt"), tr("Replace Elevation by DEM"), this,
-                              &CGisListWks::slotEleWptTrk);
-  actionCopyTrkWithWpt = addAction("actionCopyTrkWithWpt", QIcon("://icons/CopyTrkWithWpt.svgt"),
-                                   tr("Copy Track with Waypoints"), this, &CGisListWks::slotCopyTrkWithWpt);
-  actionToRoute =
-      addAction("actionToRoute", QIcon("://icons/Route.svgt"), tr("Convert to Route"), this, &CGisListWks::slotToRoute);
-  actionToArea =
-      addAction("actionToArea", QIcon("://icons/Area.svgt"), tr("Convert to Area"), this, &CGisListWks::slotToArea);
-  actionNogoTrk =
-      addAction("actionNogoTrk", QIcon("://icons/NoGo.svgt"), tr("Toggle Nogo-Line"), this, &CGisListWks::slotNogoItem);
+                              &CGisListWks::slotEleWptTrk, eCategoryItem);
+  actionCopyTrkWithWpt =
+      addAction("actionCopyTrkWithWpt", QIcon("://icons/CopyTrkWithWpt.svgt"), tr("Copy Track with Waypoints"), this,
+                &CGisListWks::slotCopyTrkWithWpt, eCategoryTrack);
+  actionToRoute = addAction("actionToRoute", QIcon("://icons/Route.svgt"), tr("Convert to Route"), this,
+                            &CGisListWks::slotToRoute, eCategoryTrack);
+  actionToArea = addAction("actionToArea", QIcon("://icons/Area.svgt"), tr("Convert to Area"), this,
+                           &CGisListWks::slotToArea, eCategoryTrack);
+  actionNogoTrk = addAction("actionNogoTrk", QIcon("://icons/NoGo.svgt"), tr("Toggle Nogo-Line"), this,
+                            &CGisListWks::slotNogoItem, eCategoryItem);
   actionNogoTrk->setCheckable(true);
 
   // waypoint related actions
-  actionBubbleWpt =
-      addAction("actionBubbleWpt", QIcon("://icons/Bubble.svgt"), tr("Show Bubble"), this, &CGisListWks::slotBubbleWpt);
+  actionBubbleWpt = addAction("actionBubbleWpt", QIcon("://icons/Bubble.svgt"), tr("Show Bubble"), this,
+                              &CGisListWks::slotBubbleWpt, eCategoryWaypoint);
   actionBubbleWpt->setCheckable(true);
-  actionMoveWpt =
-      addAction("actionMoveWpt", QIcon("://icons/WptMove.svgt"), tr("Move Waypoint"), this, &CGisListWks::slotMoveWpt);
+  actionMoveWpt = addAction("actionMoveWpt", QIcon("://icons/WptMove.svgt"), tr("Move Waypoint"), this,
+                            &CGisListWks::slotMoveWpt, eCategoryWaypoint);
   actionProjWpt = addAction("actionProjWpt", QIcon("://icons/WptProj.svgt"), tr("Proj. Waypoint..."), this,
-                            &CGisListWks::slotProjWpt);
+                            &CGisListWks::slotProjWpt, eCategoryWaypoint);
   actionEditRadiusWpt = addAction("actionEditRadiusWpt", QIcon("://icons/WptEditProx.svgt"), tr("Change Radius"), this,
-                                  &CGisListWks::slotEditRadiusWpt);
+                                  &CGisListWks::slotEditRadiusWpt, eCategoryWaypoint);
   actionDelRadiusWpt = addAction("actionDelRadiusWpt", QIcon("://icons/WptDelProx.svgt"), tr("Delete Radius"), this,
-                                 &CGisListWks::slotDelRadiusWpt);
+                                 &CGisListWks::slotDelRadiusWpt, eCategoryWaypoint);
   actionCopyCoordWpt = addAction("actionCopyCoordWpt", QIcon("://icons/CopyCoord.svgt"), tr("Copy position"), this,
-                                 &CGisListWks::slotCopyCoordWpt);
+                                 &CGisListWks::slotCopyCoordWpt, eCategoryWaypoint);
 
   // route related actions
   actionFocusRte = addAction("actionFocusRte", QIcon("://icons/RteInstr.svgt"), tr("Route Instructions"), this,
-                             &CGisListWks::slotFocusRte);
+                             &CGisListWks::slotFocusRte, eCategoryRoute);
   actionFocusRte->setCheckable(true);
-  actionCalcRte =
-      addAction("actionCalcRte", QIcon("://icons/Apply.svgt"), tr("Calculate Route"), this, &CGisListWks::slotCalcRte);
-  actionResetRte =
-      addAction("actionResetRte", QIcon("://icons/Reset.svgt"), tr("Reset Route"), this, &CGisListWks::slotResetRte);
-  actionEditRte =
-      addAction("actionEditRte", QIcon("://icons/LineMove.svgt"), tr("Edit Route"), this, &CGisListWks::slotEditRte);
+  actionCalcRte = addAction("actionCalcRte", QIcon("://icons/Apply.svgt"), tr("Calculate Route"), this,
+                            &CGisListWks::slotCalcRte, eCategoryRoute);
+  actionResetRte = addAction("actionResetRte", QIcon("://icons/Reset.svgt"), tr("Reset Route"), this,
+                             &CGisListWks::slotResetRte, eCategoryRoute);
+  actionEditRte = addAction("actionEditRte", QIcon("://icons/LineMove.svgt"), tr("Edit Route"), this,
+                            &CGisListWks::slotEditRte, eCategoryRoute);
   actionReverseRte = addAction("actionReverseRte", QIcon("://icons/Reverse.svgt"), tr("Reverse Route"), this,
-                               &CGisListWks::slotReverseRte);
-  actionRte2Trk =
-      addAction("actionRte2Trk", QIcon("://icons/Track.svgt"), tr("Convert to Track"), this, &CGisListWks::slotRte2Trk);
+                               &CGisListWks::slotReverseRte, eCategoryRoute);
+  actionRte2Trk = addAction("actionRte2Trk", QIcon("://icons/Track.svgt"), tr("Convert to Track"), this,
+                            &CGisListWks::slotRte2Trk, eCategoryRoute);
 
   // area related actions
   actionEditArea = addAction("actionEditArea", QIcon("://icons/AreaMove.svgt"), tr("Edit Area Points"), this,
-                             &CGisListWks::slotEditArea);
+                             &CGisListWks::slotEditArea, eCategoryArea);
   actionNogoArea = addAction("actionNogoArea", QIcon("://icons/NoGo.svgt"), tr("Toggle Nogo-Area"), this,
-                             &CGisListWks::slotNogoItem);
+                             &CGisListWks::slotNogoItem, eCategoryItem);
   actionNogoArea->setCheckable(true);
 
   // several GIS items related actions
   actionRteFromWpt = addAction("actionRteFromWpt", QIcon("://icons/Route.svgt"), tr("Create Route..."), this,
-                               &CGisListWks::slotRteFromWpt);
+                               &CGisListWks::slotRteFromWpt, eCategoryWaypoint);
   actionEditPrxWpt = addAction("actionEditPrxWpt", QIcon("://icons/WptEditProx.svgt"), tr("Change Proximity..."), this,
-                               &CGisListWks::slotEditPrxWpt);
+                               &CGisListWks::slotEditPrxWpt, eCategoryWaypoint);
   actionChangeIconWpt = addAction("actionChangeIconWpt", QIcon("://icons/waypoints/PinBlue.svg"), tr("Change Icon..."),
-                                  this, &CGisListWks::slotSymWpt);
-
-  const auto tagCategory = [](const QString& category, std::initializer_list<QAction*> actions) {
-    for (QAction* const action : actions) {
-      action->setProperty("shortcutCategory", category);
-    }
-  };
-  tagCategory(tr("Workspace: Project"),
-              {actionShowOnMap, actionHideFrMap, actionSortByTime, actionSortByName, actionSortByRating,
-               actionFilterProject, actionAutoSave, actionUserFocusPrj, actionAutoSyncToDev, actionSave, actionSaveAs,
-               actionSaveAsStrict, actionSyncWksDev, actionSyncDB, actionCloseProj, actionSyncDevWks});
-  tagCategory(tr("Workspace: Item"), {actionEditDetails, actionTagItem, actionCopyItem, actionDelete, actionNogoTrk,
-                                      actionNogoArea, actionEleWptTrk});
-  tagCategory(tr("Workspace: Track"), {actionFocusTrk, actionRangeTrk, actionEditTrk, actionReverseTrk,
-                                       actionCombineTrk, actionCopyTrkWithWpt, actionToRoute, actionToArea});
-  tagCategory(tr("Workspace: Waypoint"),
-              {actionBubbleWpt, actionMoveWpt, actionProjWpt, actionEditRadiusWpt, actionDelRadiusWpt,
-               actionCopyCoordWpt, actionRteFromWpt, actionEditPrxWpt, actionChangeIconWpt});
-  tagCategory(tr("Workspace: Route"),
-              {actionFocusRte, actionCalcRte, actionResetRte, actionEditRte, actionReverseRte, actionRte2Trk});
-  tagCategory(tr("Workspace: Area"), {actionEditArea});
+                                  this, &CGisListWks::slotSymWpt, eCategoryWaypoint);
 
   connect(qApp, &QApplication::aboutToQuit, this, &CGisListWks::slotSaveWorkspace);
   connect(this, &CGisListWks::customContextMenuRequested, this, &CGisListWks::slotContextMenu);
@@ -455,7 +439,8 @@ void CGisListWks::setExternalMenu(QMenu* project) {
 }
 
 QAction* CGisListWks::addSortAction(const QString& objName, QObject* parent, QActionGroup* actionGroup,
-                                    const QString& icon, const QString& text, IGisProject::sorting_folder_e mode) {
+                                    const QString& icon, const QString& text, IGisProject::sorting_folder_e mode,
+                                    category_e category) {
   QAction* action = new QAction(QIcon(icon), text, parent);
   action->setObjectName(objName);
   action->setCheckable(true);
@@ -464,8 +449,32 @@ QAction* CGisListWks::addSortAction(const QString& objName, QObject* parent, QAc
   connect(action, &QAction::toggled, this, [this, mode](bool checked) { slotSetSortMode(mode, checked); });
 
   actionGroup->addAction(action);
+  tagCategory(action, category);
 
   return action;
+}
+
+QString CGisListWks::categoryName(category_e category) const {
+  switch (category) {
+    case eCategoryProject:
+      return tr("Workspace: Project");
+    case eCategoryItem:
+      return tr("Workspace: Item");
+    case eCategoryTrack:
+      return tr("Workspace: Track");
+    case eCategoryWaypoint:
+      return tr("Workspace: Waypoint");
+    case eCategoryRoute:
+      return tr("Workspace: Route");
+    case eCategoryArea:
+      return tr("Workspace: Area");
+  }
+  return QString();
+}
+
+void CGisListWks::tagCategory(QAction* action, category_e category) {
+  action->setProperty("shortcutCategory", categoryName(category));
+  categoryActions[category] << action;
 }
 
 QList<QAction*> CGisListWks::shortcutActions() const { return actions(); }
@@ -1180,12 +1189,23 @@ void CGisListWks::enableActionsOnly(const std::initializer_list<QAction*>& enabl
   }
 }
 
-QList<QAction*> CGisListWks::projectActions() const {
-  return {actionShowOnMap,     actionHideFrMap,     actionSortByTime,   actionSortByName,
-          actionSortByRating,  actionFilterProject, actionAutoSave,     actionUserFocusPrj,
-          actionSave,          actionSaveAs,        actionSaveAsStrict, actionSyncWksDev,
-          actionAutoSyncToDev, actionSyncDB,        actionCloseProj,    actionSyncDevWks};
+void CGisListWks::disableActionsOutside(const std::initializer_list<category_e>& categories) {
+  QSet<category_e> keep(categories);
+  keep << eCategoryProject;
+
+  for (auto it = categoryActions.constBegin(); it != categoryActions.constEnd(); ++it) {
+    if (keep.contains(it.key())) {
+      continue;
+    }
+
+    const QList<QAction*>& actionsOfCategory = it.value();
+    for (QAction* action : actionsOfCategory) {
+      action->setEnabled(false);
+    }
+  }
 }
+
+QList<QAction*> CGisListWks::projectActions() const { return categoryActions.value(eCategoryProject); }
 
 QList<IGisProject*> CGisListWks::targetProjects() const {
   QList<IGisProject*> projects;
@@ -1263,7 +1283,7 @@ CGisListWks::menu_e CGisListWks::updateProjectActions(const QList<IGisProject*>&
   actionHideFrMap->setEnabled(!allUnchecked);
 
   if (allOnDevice) {
-    actionSyncDevWks->setEnabled(true);
+    actionSyncDevWks->setEnabled(projects.count() == 1);
     return eMenuProjectDev;
   }
 
@@ -1291,7 +1311,11 @@ CGisListWks::menu_e CGisListWks::updateProjectActions(const QList<IGisProject*>&
   actionSyncWksDev->setEnabled(IDevice::count() && !autoSyncToDev);
   actionCloseProj->setEnabled(!autoSyncToDev);
 
-  actionGroupSort->setEnabled(true);
+  const QList<QAction*>& sortActions = actionGroupSort->actions();
+  for (QAction* action : sortActions) {
+    action->setEnabled(true);
+  }
+
   blockSorting = true;
   switch (firstProject->getSortingFolder()) {
     case IGisProject::eSortFolderName:
@@ -1330,7 +1354,6 @@ CGisListWks::menu_e CGisListWks::updateActionState() {
     action->setVisible(true);
     action->setEnabled(true);
   }
-  actionGroupSort->setEnabled(true);
 
   // a selection mixing projects and items has no common operation
   const selection_e selection = selectionType();
@@ -1342,15 +1365,10 @@ CGisListWks::menu_e CGisListWks::updateActionState() {
   const menu_e projectMenu = updateProjectActions(targetProjects());
 
   if (selection == eSelectionProjects) {
-    const QList<QAction*>& projectOnly = projectActions();
-    for (QAction* action : allActions) {
-      if (!projectOnly.contains(action)) {
-        action->setEnabled(false);
-      }
-    }
+    disableActionsOutside({});
 
     if (projectMenu != eMenuProjectTrash) {
-      actionEditDetails->setEnabled(true);
+      actionEditDetails->setEnabled(singleSelectedItem() != nullptr);
       actionCopyItem->setEnabled(true);
       actionDelete->setEnabled(projectMenu == eMenuProjectDev);
     }
@@ -1360,6 +1378,11 @@ CGisListWks::menu_e CGisListWks::updateActionState() {
 
   const QList<QTreeWidgetItem*>& items = selectedItems();
   if (items.count() > 1) {
+    disableActionsOutside({eCategoryItem});
+    actionEditDetails->setEnabled(false);
+    actionNogoTrk->setEnabled(false);
+    actionNogoArea->setEnabled(false);
+
     const QList<IGisItem::key_t>& keysTrk = selectedItems2Keys<CGisItemTrk>();
     const QList<IGisItem::key_t>& keysWpt = selectedItems2Keys<CGisItemWpt>();
 
@@ -1387,6 +1410,9 @@ CGisListWks::menu_e CGisListWks::updateActionState() {
           break;
         }
 
+        disableActionsOutside({eCategoryItem, eCategoryTrack});
+        actionNogoArea->setEnabled(false);
+
         if (parentProject != nullptr) {
           actionCombineTrk->setEnabled(parentProject->getItemCountByType(IGisItem::eTypeTrk) > 1);
         } else {
@@ -1409,6 +1435,10 @@ CGisListWks::menu_e CGisListWks::updateActionState() {
           break;
         }
 
+        disableActionsOutside({eCategoryItem, eCategoryWaypoint});
+        actionNogoTrk->setEnabled(false);
+        actionRteFromWpt->setEnabled(false);
+
         actionBubbleWpt->setChecked(wpt->hasBubble());
         actionBubbleWpt->setEnabled(isProjectVisible);
         actionEditRadiusWpt->setEnabled(isProjectVisible);
@@ -1427,6 +1457,10 @@ CGisListWks::menu_e CGisListWks::updateActionState() {
           break;
         }
 
+        disableActionsOutside({eCategoryItem, eCategoryRoute});
+        actionNogoArea->setEnabled(false);
+        actionEleWptTrk->setEnabled(false);
+
         actionFocusRte->setChecked(rte->hasUserFocus());
         actionFocusRte->setEnabled(isProjectVisible && rte->isCalculated());
         actionCalcRte->setEnabled(isProjectVisible);
@@ -1438,6 +1472,10 @@ CGisListWks::menu_e CGisListWks::updateActionState() {
       }
 
       case IGisItem::eTypeOvl:
+        disableActionsOutside({eCategoryItem, eCategoryArea});
+        actionNogoTrk->setEnabled(false);
+        actionEleWptTrk->setEnabled(false);
+
         actionEditArea->setEnabled(isProjectVisible && !isOnDevice);
         actionNogoArea->setEnabled(isProjectVisible);
         actionNogoArea->setChecked(gisItem->isNogo());

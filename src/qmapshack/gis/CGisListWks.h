@@ -20,6 +20,7 @@
 #ifndef CGISLISTWKS_H
 #define CGISLISTWKS_H
 
+#include <QMap>
 #include <QPointer>
 #include <QSqlDatabase>
 #include <QTreeWidget>
@@ -169,6 +170,12 @@ class CGisListWks : public QTreeWidget {
    */
   menu_e updateActionState();
 
+  /** @brief Category of an action */
+  enum category_e { eCategoryProject, eCategoryItem, eCategoryTrack, eCategoryWaypoint, eCategoryRoute, eCategoryArea };
+
+  /** @brief The translated name for a category */
+  QString categoryName(category_e category) const;
+
   /** @brief What the selection holds, which decides what an action can apply to */
   enum selection_e { eSelectionNone, eSelectionProjects, eSelectionItems, eSelectionMixed };
 
@@ -187,8 +194,11 @@ class CGisListWks : public QTreeWidget {
   void enableActionsOnly(const std::initializer_list<QAction*>& enabled);
 
   /**
-     @brief The actions for a project
+     @brief Disable every action outside the given categories
    */
+  void disableActionsOutside(const std::initializer_list<category_e>& categories);
+
+  /** @brief The actions for a project */
   QList<QAction*> projectActions() const;
 
   /**
@@ -218,19 +228,24 @@ class CGisListWks : public QTreeWidget {
   void setVisibilityOnMap(bool visible);
   /// @param id  the objectName: the member's name
   QAction* addSortAction(const char* id, QObject* parent, QActionGroup* actionGroup, const QString& icon,
-                         const QString& text, IGisProject::sorting_folder_e mode);
+                         const QString& text, IGisProject::sorting_folder_e mode, category_e category);
 
   /// @param id  the objectName: the member's name
   template <typename Func>
-  QAction* addAction(const char* id, const QIcon& icon, const QString& name, QObject* parent, Func slot) {
+  QAction* addAction(const char* id, const QIcon& icon, const QString& name, QObject* parent, Func slot,
+                     category_e category) {
     QAction* action = new QAction(icon, name, parent);
     action->setObjectName(QString::fromLatin1(id));
     // register with the widget so a user-assigned shortcut can actually trigger it,
     // independent of the transient context menu the action is also shown in
     QWidget::addAction(action);
     connect(action, &QAction::triggered, this, slot);
+    tagCategory(action, category);
     return action;
   }
+
+  /** @brief Record the action's category, for the shortcut setup dialog and for categoryActions */
+  void tagCategory(QAction* action, category_e category);
 
   void showMenuProjectWks(const QPoint& p);
   void showMenuProjectDev(const QPoint& p);
@@ -261,6 +276,8 @@ class CGisListWks : public QTreeWidget {
   QSqlDatabase db;
   /** @brief Set by setDatabasePath(); empty for the user's own. */
   static QString databasePathOverride;
+
+  QMap<category_e, QList<QAction*>> categoryActions;
 
   QActionGroup* actionGroupSort;
   QAction* actionSave;

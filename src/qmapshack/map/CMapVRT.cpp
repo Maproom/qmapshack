@@ -33,7 +33,7 @@
 // Unlike DEM data (still numerically meaningful however far it's decimated - just
 // smoother terrain), a map image downsampled past roughly 10-20x becomes an unreadable
 // pixel mishmash, however large or high-resolution the source is. Caps
-// suggestOverviewLevels()'s screen-size-based stopping rule, which alone would keep
+// the screen-size-based stopping rule for suggested levels, which alone would keep
 // doubling far past that point for a large enough source (e.g. all of Bavaria at 1m/px).
 constexpr qint32 kMaxMapOverviewFactor = 16;
 
@@ -100,20 +100,8 @@ CMapVRT::CMapVRT(const QString& filename, CMapDraw* parent) : IMap(eFeatVisibili
     }
   }
 
-  const QVector<qint32> suggestedLevels =
-      CGdalVrtUtil::suggestOverviewLevels(pBand->GetXSize(), pBand->GetYSize(), kMaxMapOverviewFactor);
-
   // single band palette/gray data is categorical (see resampleAlg below).
-  // buildOverviewAdvice() logs its own "OVR: ..." diagnostics as it goes.
-  overviewAdvice = CGdalVrtUtil::buildOverviewAdvice(dataset, pBand, rasterBandCount == 1, suggestedLevels);
-  // Cache the immutable attention verdict once: showsOverviewWarning() is polled per
-  // paint/hover/scroll by the tree delegate, and needsAttention() walks every source file.
-  overviewNeedsAttention = overviewAdvice.needsAttention();
-  if (overviewNeedsAttention) {
-    qDebug() << "OVR: assessment: needs attention - advisory will fire on slow render";
-  } else {
-    qDebug() << "OVR: assessment: OK";
-  }
+  advisory.probe(dataset, pBand, rasterBandCount == 1, kMaxMapOverviewFactor);
 
   // single band palette/gray data is categorical: nearest neighbour avoids blending index
   // values into meaningless colors when resampling. Multi-band true color benefits from
@@ -216,7 +204,7 @@ CMapVRT::CMapVRT(const QString& filename, CMapDraw* parent) : IMap(eFeatVisibili
 
   // The dialog's resolution/size line mirrors gdalinfo, so it comes from the pre-warp
   // source (srcDataset when warped, else dataset) - not the warped grid above.
-  rasterGeometry = CGdalVrtUtil::sourceGeometry(srcDataset != nullptr ? srcDataset : dataset);
+  advisory.setGeometry(srcDataset != nullptr ? srcDataset : dataset);
 
   trInv = trFwd.inverted();
 
@@ -263,12 +251,12 @@ CMapVRT::~CMapVRT() {
 
 void CMapVRT::saveConfig(QSettings& cfg) {
   IMap::saveConfig(cfg);
-  cfg.setValue("suppressOverviewAdvisory", advisoryState.suppress.load());
+  advisory.save(cfg);
 }
 
 void CMapVRT::loadConfig(QSettings& cfg) {
   IMap::loadConfig(cfg);
-  advisoryState.suppress = cfg.value("suppressOverviewAdvisory", advisoryState.suppress.load()).toBool();
+  advisory.load(cfg);
 }
 
 void CMapVRT::fail(const QString& msg) {
@@ -327,7 +315,7 @@ bool CMapVRT::computeSourceWindow(const IDrawContext::buffer_t& buf, const QPoin
   return true;
 }
 
-QImage CMapVRT::readSourceImage(const sourceWindow_t& window, CGdalVrtUtil::read_deadline_t& deadline) {
+QImage CMapVRT::readSourceImage(const sourceWindow_t& window, COverviewAdvisory::read_deadline_t& deadline) {
   const qreal w_map = window.right - window.left;
   const qreal h_map = window.bottom - window.top;
   const qint32 w_buf = window.bufWidth;
@@ -355,7 +343,7 @@ QImage CMapVRT::readSourceImage(const sourceWindow_t& window, CGdalVrtUtil::read
 
     err = dataset->GetRasterBand(1)->ReadRaster(indexData.data(), static_cast<size_t>(indexData.size()), window.left,
                                                 window.top, w_map, h_map, w_buf, h_buf, GRIORA_NearestNeighbour,
-                                                &CGdalVrtUtil::progressCallbackWithDeadline, &deadline);
+                                                &COverviewAdvisory::progressCallbackWithDeadline, &deadline);
     if (err == CE_None) {
       img = QImage(indexData.constData(), w_buf, h_buf, w_buf, QImage::Format_Indexed8);
       img.setColorTable(colortable);
@@ -395,7 +383,7 @@ QImage CMapVRT::readSourceImage(const sourceWindow_t& window, CGdalVrtUtil::read
 
       err =
           pBand->ReadRaster(bandBuf.data(), static_cast<size_t>(bandBuf.size()), window.left, window.top, w_map, h_map,
-                            w_buf, h_buf, GRIORA_Bilinear, &CGdalVrtUtil::progressCallbackWithDeadline, &deadline);
+                            w_buf, h_buf, GRIORA_Bilinear, &COverviewAdvisory::progressCallbackWithDeadline, &deadline);
       if (err != CE_None) {
         break;
       }
@@ -479,14 +467,14 @@ void CMapVRT::draw(IDrawContext::buffer_t& buf) /* override */
 
   sourceWindow_t window;
   if (!isOutOfScale(bufferScale) && computeSourceWindow(buf, bufferScale, window)) {
-    CGdalVrtUtil::read_deadline_t deadline{map};
+    COverviewAdvisory::read_deadline_t deadline{map};
     deadline.timer.start();
 
     const QImage img = readSourceImage(window, deadline);
     if (!img.isNull()) {
       drawSourceImage(p, window, img);
     } else if (deadline.timedOut) {
-      CGdalVrtUtil::handleRenderTimeout(map, this, showsOverviewWarning(), advisoryState);
+      advisory.onRenderTimeout(map, this);
     }
   }
 

@@ -255,7 +255,7 @@ class CCanvas : public QWidget {
  private:
   /// @brief Shared implementation behind slotShowDemOverviewAdvisory()/slotShowMapOverviewAdvisory():
   /// only the source type differs between CDemVRT/CMapVRT, both of which expose the
-  /// identical getFilename()/getOverviewAdvice()/setSuppressOverviewAdvisory(bool) the
+  /// identical getFilename()/getOverviewAdvisory() the
   /// dialog needs.
   template <class T>
   CVrtAdvisoryDialog* showOverviewAdvisory(QPointer<T> source);

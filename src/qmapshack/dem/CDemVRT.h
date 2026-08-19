@@ -24,7 +24,7 @@
 #include <atomic>
 
 #include "dem/IDem.h"
-#include "helpers/CGdalVrtUtil.h"
+#include "helpers/COverviewAdvisory.h"
 
 class CDemDraw;
 class GDALDataset;
@@ -120,23 +120,12 @@ class CDemVRT : public IDem {
   /// @brief The path passed to the constructor; used by the overview advisory dialog.
   const QString& getFilename() const { return filename; }
 
-  /// @brief Cached suggested-overview info for this file; used by the overview advisory dialog.
-  const CGdalVrtUtil::overview_advice_t& getOverviewAdvice() const { return overviewAdvice; }
+  /// @brief The overview advisory for this file - measured state plus session policy.
+  COverviewAdvisory& getOverviewAdvisory() { return advisory; }
+  const COverviewAdvisory& getOverviewAdvisory() const { return advisory; }
 
-  /// @brief Cached dimensions/pixel size for the overview advisory dialog's informational line.
-  const CGdalVrtUtil::raster_geometry_t& getRasterGeometry() const { return rasterGeometry; }
-
-  /// @brief Set by the overview advisory dialog's "don't show again for this file" checkbox.
-  void setSuppressOverviewAdvisory(bool yes) { advisoryState.suppress = yes; }
-  /// @brief Current "don't show again" state; seeds the dialog checkbox so an open+close round-trips.
-  bool suppressOverviewAdvisory() const { return advisoryState.suppress; }
-  /// @brief Set true while the advisory dialog is open; suppresses draw retries during that time.
-  void setAdvisoryOpen(bool yes) { advisoryState.open = yes; }
-
-  bool showsOverviewWarning() const override {
-    return supportsOverviewAdvisory && !advisoryState.suppress && overviewNeedsAttention;
-  }
-  bool hasOverviewInfo() const override { return supportsOverviewAdvisory; }
+  bool showsOverviewWarning() const override { return advisory.showsWarning(); }
+  bool hasOverviewInfo() const override { return advisory.isEnabled(); }
 
  private slots:
   /// Cancel any shading work still queued/running for a draw() call that is now stale.
@@ -182,23 +171,9 @@ class CDemVRT : public IDem {
   /// queries outside dataset coverage before touching GDAL
   QRectF boundingBox;
 
-  /// False for remote sources (CDemWCS) - set once at construction; see the
-  /// constructor's doc comment for why this can't be a virtual method instead.
-  const bool supportsOverviewAdvisory;
-
-  /// Suggested gdaladdo command(s), computed once at construction (skipped when
-  /// !supportsOverviewAdvisory); reused whenever draw() hits the render timeout.
-  CGdalVrtUtil::overview_advice_t overviewAdvice;
-  /// Cached overviewAdvice.needsAttention() - immutable after setup; polled per paint by the tree delegate.
-  bool overviewNeedsAttention = false;
-
-  /// Suppression/session/open-dialog bookkeeping for the overview advisory; identical
-  /// shape shared with CMapVRT, see CGdalVrtUtil::overview_advisory_state_t.
-  CGdalVrtUtil::overview_advisory_state_t advisoryState;
-
-  /// Cached dimensions/pixel size, computed once at construction; used by the overview
-  /// advisory dialog's informational line.
-  CGdalVrtUtil::raster_geometry_t rasterGeometry;
+  /// Probed once at construction; disabled for remote sources (CDemWCS) - see the
+  /// constructor's doc comment for why that can't be a virtual method instead.
+  COverviewAdvisory advisory;
 
   /// runs the per-chunk shading work started by draw(); cancelled by slotNeedsRedraw()
   /// when a fresher redraw has been requested

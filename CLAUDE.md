@@ -725,32 +725,39 @@ Warns when a VRT-backed map/DEM has missing or inadequate GDAL overview pyramids
 source files, and can fix both.
 
 **Files:**
-- `helpers/CGdalVrtUtil.{h,cpp}` — `buildOverviewAdvice()`, `suggestOverviewLevels()`,
-  `handleRenderTimeout()`, `overview_advice_t`, `file_overview_info_t`, `raster_geometry_t`,
-  `overview_advisory_state_t`, `read_deadline_t`, `kMetersPerDegree`
+- `helpers/COverviewAdvisory.{h,cpp}` — the whole concept: `advice_t`, `file_info_t`,
+  `geometry_t`, `read_deadline_t`, `probe()`, `setGeometry()`, `onRenderTimeout()`, suppression
+- `helpers/CGdalVrtUtil.{h,cpp}` — small GDAL conveniences only (`closeDataset()`, `isFileUtf8()`,
+  `allReferencedFilesExist()`, `toMeters()`, `progressCallback()`). Nothing advisory lives here
 - `helpers/CVrtAdvisoryDialog.{h,cpp}` + `.ui` — the fix/info/combine dialog
 - `helpers/CVrtCombiner.{h,cpp}` — "Combine files..." grid-split/footprint logic
-- `dem/CDemVRT.{h,cpp}`, `map/CMapVRT.{h,cpp}` — own `overviewAdvice`/`advisoryState`/`rasterGeometry`
-- `dem/CDemWCS.cpp` — opts out via `supportsOverviewAdvisory=false`
+- `dem/CDemVRT.{h,cpp}`, `map/CMapVRT.{h,cpp}` — each hold one `COverviewAdvisory advisory` and no
+  advisory state of their own
+- `dem/CDemWCS.cpp` — opts out via `advisory.setEnabled(false)`
 - `map/IMap.h`, `dem/IDem.h`, `map/IMapItem.h`, `map/CMapItemDelegate.{h,cpp}` — badge + on-demand info
 - `map/CMapItem.cpp`, `dem/CDemItem.cpp`, `map/CMapList.cpp`, `dem/CDemList.cpp` — context-menu entry
 - `canvas/CCanvas.cpp` — owns and shows the dialog
 
 **Invariant: the dataset is always a VRT.** `new CMapVRT`/`new CDemVRT` happen only for `.vrt`
-files; every other format has its own class, and `CDemWCS` opts out. `buildOverviewAdvice()` relies
-on this — there is no "concrete raster format" branch.
+files; every other format has its own class, and `CDemWCS` opts out. `probe()` relies on this —
+there is no "concrete raster format" branch.
 
-**Invariant: `overviewAdvice`, tile count and overview state are immutable per instance.** Any
-DEM/map list change — including a successful Fix/Combine (`sigContainerRebuilt` →
-`setupDemPath`/`setupMapPath`) — destroys the instance and creates a new one with fresh advice;
-nothing updates it in place. `overviewNeedsAttention` caches `needsAttention()` at setup so the
-delegate's per-paint badge poll (`showsOverviewWarning()`) is O(1) instead of walking `perFileInfo`.
+**Invariant: the advice is immutable per instance.** Any DEM/map list change — including a
+successful Fix/Combine (`sigContainerRebuilt` → `setupDemPath`/`setupMapPath`) — destroys the
+instance and creates a new one that probes again; nothing updates in place. `probe()` caches
+`needsAttention()` so the delegate's per-paint badge poll (`showsWarning()`) is O(1) instead of
+walking `perFileInfo`.
 
 **Trigger:** `draw()` wraps `ReadRaster()` with a 5 s deadline (`read_deadline_t` + GDAL's own
 progress-abort hook — do not add a second warp-options progress callback, it froze the UI). On
-timeout `handleRenderTimeout()` fires the advisory (render thread → GUI thread) once per loaded
-instance per session, and only when `showsOverviewWarning()` (`!suppress && needsAttention()`) — the
-same condition as the proactive tree badge.
+timeout `onRenderTimeout()` fires the advisory (render thread → GUI thread) once per loaded
+instance per session, and only when `showsWarning()` — the same condition as the proactive tree
+badge.
+
+**Never request a redraw from a timeout path.** The view is unchanged, so the retry hits the same
+deadline and retries again — `emitSigCanvasUpdate()` → `slotTriggerCompleteUpdate()` → `update()` →
+draw thread, unthrottled. On a dataset that stays slow that is an unbounded loop, seen as a
+never-finishing calculation with a blinking layer bar.
 
 **The dialog is application-modal** (`setModal(true)`): while it is open the map/DEM it is about
 must not be read. A pan's `draw()` or a mouse-move's `getElevationAt()` racing a Fix/Combine file
@@ -758,7 +765,7 @@ rewrite (an external gdaladdo/gdalbuildvrt process — the in-process dataset mu
 crashes GDAL. Modal blocks user input; a background redraw from a sibling layer during a job is a
 known unguarded residual.
 
-### `buildOverviewAdvice(dataset, band, isPaletteIndexed, suggestedLevels)`
+### `COverviewAdvisory::probe(dataset, band, isPaletteIndexed, maxFactor)`
 
 A read can be sped up by two additive sources: the container's own overview, and each source file's
 own overview for the region read.
@@ -777,25 +784,48 @@ own overview for the region read.
 **Factors are per-file pixel ratios (`fullResSize / overviewSize`)**, read from each file's own band
 before any warp — no geotransform/CRS math, even when sources and container differ in CRS.
 
-**`suggestOverviewLevels(xsize, ysize, maxFactor)`** doubles from 2 until the decimated size drops
-below the primary screen's longest dimension (fallback 1920 px) or `maxFactor`. `CDemVRT` leaves
-`maxFactor` unbounded; `CMapVRT` caps at `kMaxMapOverviewFactor = 16`.
+### A "source file" is a leaf raster, not what `GetFileList()` returns
 
-**`<OverviewList>` mechanics:** `gdalbuildvrt` (GDAL ≥ 3.2) writes it automatically at build time
-only, never retroactively. GDAL does not complain about a declared factor with no backing data — it
-silently falls back to full-resolution reads, hence the verification above.
+`GetFileList()` reports **one level only**. Sources with heterogeneous projections are commonly
+wrapped one `gdalwarp -of VRT` each and then `gdalbuildvrt`-ed, so the container's sources are
+themselves VRTs. `collectLeafSources()` follows those down to the real rasters; `perFileInfo`,
+`filesToFix()`, the subfile count and the disk-usage sum all run on the leaves.
+
+Measured on GDAL 3.12:
+
+- **`gdaladdo` on a warped VRT builds nothing.** It ignores `-ro`, writes `<OverviewList>` into the
+  `.vrt` itself and exits 0 in ~40 ms. Those overviews are resampled from the source on the fly, so
+  reads still hit the full-resolution leaf — and `probeSource()` reads the declaration back as
+  sufficient, clearing the badge for good. On a **plain** VRT the same command builds a real
+  `.vrt.ovr`.
+- **A warped VRT needs no `<OverviewList>` of its own** — it reports its source's overviews. Never
+  add a step that writes one into an intermediate VRT.
+- Leaf `.ovr` is the only thing that matters. 10000×10000 warped source, full extent into a 1200 px
+  buffer: 1.20 s bare, 0.41 s with the fake `<OverviewList>` alone, 0.03 s with a real leaf `.ovr`.
+
+A nested VRT with its **own** `.ovr` is a leaf — real data, the rule step 1 applies to the container.
+Nesting alone is not a defect: a VRT-of-VRTs over leaves with overviews is the fastest layout above,
+so never warn on the nesting itself.
+
+`isVrtFile()` asks `GDALIdentifyDriver()` (header sniff, ~5 µs), not the file extension.
 
 ### "Fix overviews"
 
+`fixPlan()` is the single source for the after-fix table, the summary counts, the confirmation
+dialog, the gdaladdo queue and the failure cleanup. It returns `{path, action}` steps —
+`BuildNew`/`CleanRebuild` on a source raster, `AddList`/`UpdateList` on the container. Never derive
+any of those five from `perFileInfo` again; that is how they drift apart.
+
 `slotFixOverviews()` / `finishFixOverviews()`:
 
-1. `filesToFix()` runs `gdaladdo` on every source short of `suggestedLevels` (or on `filename_`
-   itself if there are no source files). Recipe: `-r` (nearest for palette, average otherwise),
+1. `gdaladdo` runs on every source short of `suggestedLevels` (or on `filename_` itself if there are
+   no source files). Recipe: `-r` (nearest for palette, average otherwise),
    `COMPRESS_OVERVIEW=DEFLATE`, plus `PREDICTOR_OVERVIEW=2` for non-palette data — matches the
    source predictor for a ~2–3× smaller `.ovr`, harmful on palette indices. `.ovr` block size is
    inherited from each source automatically.
 2. `fixContainerOverviewList()` rewrites just the `<OverviewList>` element to
-   `advice_.suggestedLevels` — no full `gdalbuildvrt` re-run, no re-probe.
+   `advice_.suggestedLevels` — no full `gdalbuildvrt` re-run, no re-probe. Container steps carry no
+   command; they are this XML edit.
 
 ### "Combine files..." (`CVrtCombiner`)
 
@@ -818,6 +848,10 @@ small sources.
   directory), then one `gdalbuildvrt -overwrite`. Compression `COMPRESS=DEFLATE`/`PREDICTOR=2` (not
   ZSTD — not a mandatory GDAL dependency), `TILED=YES`, `BLOCKXSIZE`/`BLOCKYSIZE=512`,
   `BIGTIFF=IF_SAFER`.
+- **Offered only when every source sits in one directory** (`sharedSourceDir()`). Tiles are written
+  beside the sources and the container is rewritten to reference them, so sources spread over
+  several directories have no right answer — the button is withdrawn and the warning says why.
+  *Fix overviews* has no such limit: each `.ovr` lands beside its own source wherever that is.
 - `JobKind` (`FixOverviews`/`Combine`) dispatches `slotJobFinished()` to `finishFixOverviews()` /
   `finishCombine()`; both emit `sigContainerRebuilt()` on success.
 - **Non-destructive:** original sources are never deleted. On cancel/failure `filename_` is restored
@@ -842,6 +876,14 @@ small sources.
   plain `<`/`>` into them, they escape it themselves. `hasExistingOverviews()`'s container fallback
   keys off `containerHasOwnOvr` (not `containerFactor > 0`) so the "Update" / "Add `<OverviewList>`"
   wording agrees with the fix confirmation dialog.
+- **Table sizing:** `sizeTableBrowser()` sizes every table browser, capped at `kMaxTableWidth` (900)
+  and `kMaxTableHeight` (250); past either the browser scrolls and the dialog keeps its size. Pass
+  it the narrow-tag HTML: `idealWidth()` on the `width="100%"` variant returns the widget width, not
+  the content. Row counts include the header row, plus the container's synthesized row for the
+  current-state table.
+- **Confirmations:** the fix plan goes through `confirmList()` (`QDialog` + `QTextBrowser` +
+  `QDialogButtonBox`) because a `QMessageBox` cannot scroll its text. `confirmYesNo()` is a
+  `QMessageBox` and takes plain text only.
 - `raster_geometry_t` comes from `CGdalVrtUtil::sourceGeometry(pre-warp source)` — the source file's
   own size and resolution, matching `gdalinfo` (exact metres for a projected CRS,
   `kMetersPerDegree` approximation for geographic). **Not the warped grid**: reading the warped
@@ -850,10 +892,12 @@ small sources.
   badge; `hasOverviewInfo()` drives the "Overview Info..." context-menu entry regardless of
   attention state. `CMapItemDelegate::overviewBadgeRect()` is shared by
   `paint()`/`editorEvent()`/`helpEvent()` so painted, clickable and tooltip areas cannot drift.
-- **Lifecycle:** `advisoryState.open` suppresses `emitSigCanvasUpdate()` retries while the dialog is
-  open. `closeEvent()`/`reject()` both confirm-cancel a running job and clean up partial output.
-  `CCanvas::showOverviewAdvisory()` dedupes by *filename* via
-  `findChildren<CVrtAdvisoryDialog*>()`, not a separate registry.
+- **Lifecycle:** `closeEvent()`/`reject()` both confirm-cancel a running job and clean up partial
+  output. `CCanvas::showOverviewAdvisory()` allows **one advisory at a time, application-wide** —
+  the dialog is `show()`n, not `exec()`d, so the event loop keeps running and modality blocks only
+  user input, never a queued `sigOverviewAdvisory` from another layer's render timeout. It searches
+  from `CMainWindow`, not the canvas, because a second canvas parents its own dialogs. A dropped
+  advisory keeps its tree badge, so the file stays reachable through *Overview Info…*.
 
 ---
 

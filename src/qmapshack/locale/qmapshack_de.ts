@@ -8969,6 +8969,11 @@ Zeile %2, Spalte %3:
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="78"/>
+        <source>The source files are spread over several directories, so they cannot be combined - there is no one place the merged files would belong.</source>
+        <translation>Die Quelldateien liegen in mehreren Verzeichnissen und können daher nicht zusammengeführt werden - es gibt keinen eindeutigen Ort für die zusammengeführten Dateien.</translation>
+    </message>
+    <message>
+        <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="78"/>
         <source>Combine files...</source>
         <translation>Dateien zusammenführen...</translation>
     </message>

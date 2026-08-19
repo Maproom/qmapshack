@@ -905,29 +905,33 @@ CVrtAdvisoryDialog* CCanvas::showOverviewAdvisory(QPointer<T> source) {
   }
 
   const QString filename = source->getFilename();
-  // Keyed on filename, not a flag on source: a reload destroys and recreates the
-  // CDemVRT/CMapVRT instance, which would reset any per-instance guard and let a second
-  // dialog open for the same file while the first one (now orphaned) is still showing.
-  // CCanvas already parents every dialog it opens (see below), so its own child list
-  // doubles as the registry - no separate bookkeeping needed.
-  for (CVrtAdvisoryDialog* open : findChildren<CVrtAdvisoryDialog*>(Qt::FindDirectChildrenOnly)) {
+  // One advisory at a time, application-wide. The dialog is modal but show()n, so the event
+  // loop keeps running: modality blocks user input, not a queued sigOverviewAdvisory from
+  // another layer's render timeout, which would stack a second modal dialog on top. Searched
+  // from the main window, not this canvas, because a second canvas parents its own dialogs.
+  // Keyed on the dialog list rather than a flag on source: a reload destroys and recreates
+  // the CDemVRT/CMapVRT, which would reset any per-instance guard.
+  const QList<CVrtAdvisoryDialog*> openDialogs = CMainWindow::self().findChildren<CVrtAdvisoryDialog*>();
+  for (CVrtAdvisoryDialog* open : openDialogs) {
     if (open->filename() == filename) {
       open->raise();
       open->activateWindow();
-      return nullptr;
+      break;
     }
   }
+  if (!openDialogs.isEmpty()) {
+    // A source whose advisory is dropped here keeps its tree badge, so it stays reachable
+    // through "Overview Info...".
+    return nullptr;
+  }
 
-  source->setAdvisoryOpen(true);
-
-  auto* dlg = new CVrtAdvisoryDialog(filename, source->getOverviewAdvice(), source->getRasterGeometry(), this);
-  // Reflect the current suppress state so closing the dialog (e.g. after just opening
-  // "Overview Info...") writes back the same value instead of silently clearing it.
-  dlg->setSuppressChecked(source->suppressOverviewAdvisory());
+  const COverviewAdvisory& advisory = source->getOverviewAdvisory();
+  auto* dlg = new CVrtAdvisoryDialog(filename, advisory.advice(), advisory.geometry(), advisory.suppressed(), this);
+  // The source owning the advisory is destroyed by the reload a successful Fix/Combine
+  // triggers, while this dialog is still open - hence the QPointer and the copies above.
   connect(dlg, &QDialog::finished, this, [dlg, source]() {
     if (source) {
-      source->setSuppressOverviewAdvisory(dlg->suppressChecked());
-      source->setAdvisoryOpen(false);
+      source->getOverviewAdvisory().setSuppressed(dlg->suppressChecked());
     }
   });
   dlg->show();

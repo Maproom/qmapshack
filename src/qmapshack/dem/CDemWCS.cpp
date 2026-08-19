@@ -19,7 +19,7 @@
 #include "dem/CDemWCS.h"
 
 // A remote WCS service - building local overviews via gdaladdo doesn't apply, and
-// buildOverviewAdvice() would otherwise issue extra GDALOpen() calls against this same
+// Probing would otherwise issue extra GDALOpen() calls against this same
 // remote endpoint mid-construction (see CDemVRT's constructor doc comment).
 CDemWCS::CDemWCS(const QString& filename, CDemDraw* parent)
     : CDemVRT(filename, parent, /*supportsOverviewAdvisory=*/false) {}

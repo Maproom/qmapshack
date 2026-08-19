@@ -125,7 +125,7 @@ class CMapDraw : public IDrawContext {
             overviews are missing/inadequate for the read - the fixable case. CCanvas
             connects to this to show an advisory dialog on the GUI thread, fetching
             whatever it needs straight off source (CMapVRT::getFilename()/
-            getOverviewAdvice()) once there, rather than dragging it all through here.
+            getOverviewAdvisory()) once there, rather than dragging it all through here.
      @param source the CMapVRT to query and to report the dialog result back to; null if
                     it was destroyed before the queued signal got delivered
    */

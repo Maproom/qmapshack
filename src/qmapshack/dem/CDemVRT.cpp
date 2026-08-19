@@ -33,7 +33,11 @@
 #include "units/IUnit.h"
 
 CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent, bool supportsOverviewAdvisory)
-    : IDem(parent), filename(filename), supportsOverviewAdvisory(supportsOverviewAdvisory) {
+    : IDem(parent), filename(filename) {
+  // Off for remote sources (CDemWCS): probing would GDALOpen() the same remote endpoint
+  // once per referenced "file".
+  advisory.setEnabled(supportsOverviewAdvisory);
+
   qDebug() << "------------------------------";
   qDebug() << "VRT: try to open" << filename;
 
@@ -89,20 +93,9 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent, bool supportsOvervie
     return;
   }
 
-  // Skipped for remote sources (CDemWCS): the per-file fallback would GDALOpen() every
-  // referenced "file" against the same remote endpoint - pointless with no local files.
-  // Safe to skip: overviewAdvice is only read below/in draw() when
-  // supportsOverviewAdvisory is true.
-  if (supportsOverviewAdvisory) {
-    const QVector<qint32> suggestedLevels = CGdalVrtUtil::suggestOverviewLevels(pBand->GetXSize(), pBand->GetYSize());
-
-    // DEM data is always single-band continuous elevation, never categorical/palette.
-    // buildOverviewAdvice() logs its own "OVR: ..." diagnostics as it goes.
-    overviewAdvice = CGdalVrtUtil::buildOverviewAdvice(dataset, pBand, /*isPaletteIndexed=*/false, suggestedLevels);
-    // Cache the immutable attention verdict once: showsOverviewWarning() is polled per
-    // paint/hover/scroll by the tree delegate, and needsAttention() walks every source file.
-    overviewNeedsAttention = overviewAdvice.needsAttention();
-  }
+  // DEM data is always single-band continuous elevation, never categorical/palette, and
+  // stays meaningful at any decimation - so no cap on the deepest suggested level.
+  advisory.probe(dataset, pBand, /*isPaletteIndexed=*/false);
 
   noData = pBand->GetNoDataValue(&hasNoData);
   qDebug() << "no data:" << hasNoData << noData;
@@ -147,19 +140,6 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent, bool supportsOvervie
   xsize_px = dataset->GetRasterXSize();
   ysize_px = dataset->GetRasterYSize();
 
-  if (supportsOverviewAdvisory) {
-    // overviewAdvice's factors stay in the dataset's pre-warp pixel grid - the same
-    // grid suggestedLevels was computed from above - so needsAttention() compares
-    // like with like regardless of any reprojection below. A warped VRT can change the
-    // dataset's own pixel density (e.g. meters vs degrees), but that only matters for
-    // draw()'s own decimation math, not for this real/discrete overview-factor advice.
-    if (overviewNeedsAttention) {
-      qDebug() << "OVR: assessment: needs attention - advisory will fire on slow render";
-    } else {
-      qDebug() << "OVR: assessment: OK";
-    }
-  }
-
   qreal adfGeoTransform[6];
   if (dataset->GetGeoTransform(adfGeoTransform) != CE_None) {
     CGdalVrtUtil::closeDataset(dataset);
@@ -190,7 +170,7 @@ CDemVRT::CDemVRT(const QString& filename, CDemDraw* parent, bool supportsOvervie
 
   // The dialog's resolution/size line mirrors gdalinfo, so it comes from the pre-warp
   // source (srcDataset when warped, else dataset) - not the warped grid above.
-  rasterGeometry = CGdalVrtUtil::sourceGeometry(srcDataset != nullptr ? srcDataset : dataset);
+  advisory.setGeometry(srcDataset != nullptr ? srcDataset : dataset);
 
   trInv = trFwd.inverted();
 
@@ -221,12 +201,12 @@ CDemVRT::~CDemVRT() {
 
 void CDemVRT::saveConfig(QSettings& cfg) {
   IDem::saveConfig(cfg);
-  cfg.setValue("suppressOverviewAdvisory", advisoryState.suppress.load());
+  advisory.save(cfg);
 }
 
 void CDemVRT::loadConfig(QSettings& cfg) {
   IDem::loadConfig(cfg);
-  advisoryState.suppress = cfg.value("suppressOverviewAdvisory", advisoryState.suppress.load()).toBool();
+  advisory.load(cfg);
 }
 
 void CDemVRT::slotNeedsRedraw() { threadPool.clear(); }
@@ -388,7 +368,7 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf) {
     return;
   }
 
-  CGdalVrtUtil::read_deadline_t deadline{dem};
+  COverviewAdvisory::read_deadline_t deadline{dem};
   deadline.timer.start();
 
   data.resize(static_cast<qsizetype>(w_buf) * h_buf);
@@ -410,11 +390,11 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf) {
     // overviews
     CPLErr err = dataset->GetRasterBand(1)->ReadRaster(data.data(), static_cast<size_t>(w_buf) * h_buf, x, y, w_dem,
                                                        h_dem, w_buf, h_buf, GRIORA_Bilinear,
-                                                       &CGdalVrtUtil::progressCallbackWithDeadline, &deadline);
+                                                       &COverviewAdvisory::progressCallbackWithDeadline, &deadline);
 
     if (err != CE_None) {
       if (deadline.timedOut) {
-        CGdalVrtUtil::handleRenderTimeout(dem, this, showsOverviewWarning(), advisoryState);
+        advisory.onRenderTimeout(dem, this);
       }
       return;
     }

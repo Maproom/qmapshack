@@ -19,7 +19,7 @@
 #ifndef CMAPVRT_H
 #define CMAPVRT_H
 
-#include "helpers/CGdalVrtUtil.h"
+#include "helpers/COverviewAdvisory.h"
 #include "map/IMap.h"
 
 class CMapDraw;
@@ -60,21 +60,12 @@ class CMapVRT : public IMap {
   /// @brief The path passed to the constructor; used by the overview advisory dialog.
   const QString& getFilename() const { return filename; }
 
-  /// @brief Cached suggested-overview info for this file; used by the overview advisory dialog.
-  const CGdalVrtUtil::overview_advice_t& getOverviewAdvice() const { return overviewAdvice; }
+  /// @brief The overview advisory for this file - measured state plus session policy.
+  COverviewAdvisory& getOverviewAdvisory() { return advisory; }
+  const COverviewAdvisory& getOverviewAdvisory() const { return advisory; }
 
-  /// @brief Cached dimensions/pixel size for the overview advisory dialog's informational line.
-  const CGdalVrtUtil::raster_geometry_t& getRasterGeometry() const { return rasterGeometry; }
-
-  /// @brief Set by the overview advisory dialog's "don't show again for this file" checkbox.
-  void setSuppressOverviewAdvisory(bool yes) { advisoryState.suppress = yes; }
-  /// @brief Current "don't show again" state; seeds the dialog checkbox so an open+close round-trips.
-  bool suppressOverviewAdvisory() const { return advisoryState.suppress; }
-  /// @brief Set true while the advisory dialog is open; suppresses draw retries during that time.
-  void setAdvisoryOpen(bool yes) { advisoryState.open = yes; }
-
-  bool showsOverviewWarning() const override { return !advisoryState.suppress && overviewNeedsAttention; }
-  bool hasOverviewInfo() const override { return true; }
+  bool showsOverviewWarning() const override { return advisory.showsWarning(); }
+  bool hasOverviewInfo() const override { return advisory.isEnabled(); }
 
  private:
   /// Close dataset and srcDataset (either may already be null, e.g. if construction
@@ -118,7 +109,7 @@ class CMapVRT : public IMap {
      @return Format_Indexed8 image for single-band palette/gray data, Format_ARGB32 for
              multi-band; a null QImage if the GDAL read failed or was aborted
    */
-  QImage readSourceImage(const sourceWindow_t& window, CGdalVrtUtil::read_deadline_t& deadline);
+  QImage readSourceImage(const sourceWindow_t& window, COverviewAdvisory::read_deadline_t& deadline);
 
   /**
      @brief Composite img onto p at the screen position/orientation matching window.
@@ -178,19 +169,8 @@ class CMapVRT : public IMap {
   /// trFwd inverted: maps the dataset's CRS back to this map's pixel coordinates
   QTransform trInv;
 
-  /// suggested gdaladdo command(s), computed once at construction from the dataset's own
-  /// characteristics; reused (never re-derived) whenever draw() hits the render timeout
-  CGdalVrtUtil::overview_advice_t overviewAdvice;
-  /// Cached overviewAdvice.needsAttention() - immutable after setup; polled per paint by the tree delegate.
-  bool overviewNeedsAttention = false;
-
-  /// Suppression/session/open-dialog bookkeeping for the overview advisory; identical
-  /// shape shared with CDemVRT, see CGdalVrtUtil::overview_advisory_state_t.
-  CGdalVrtUtil::overview_advisory_state_t advisoryState;
-
-  /// Cached dimensions/pixel size, computed once at construction; used by the overview
-  /// advisory dialog's informational line.
-  CGdalVrtUtil::raster_geometry_t rasterGeometry;
+  /// Probed once at construction from the dataset's own characteristics; never re-derived.
+  COverviewAdvisory advisory;
 };
 
 #endif  // CMAPVRT_H

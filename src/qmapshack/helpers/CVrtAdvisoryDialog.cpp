@@ -25,11 +25,12 @@
 #include "setup/IAppSetup.h"
 #include "units/IUnit.h"
 
-CVrtAdvisoryDialog::CVrtAdvisoryDialog(const QString& filename, const CGdalVrtUtil::overview_advice_t& advice,
-                                       const CGdalVrtUtil::raster_geometry_t& geometry, QWidget* parent)
+CVrtAdvisoryDialog::CVrtAdvisoryDialog(const QString& filename, const COverviewAdvisory::advice_t& advice,
+                                       const COverviewAdvisory::geometry_t& geometry, bool suppressed, QWidget* parent)
     : QDialog(parent), filename_(filename), advice_(advice) {
   setupUi(this);
   setAttribute(Qt::WA_DeleteOnClose);
+  checkSuppressAdvisory->setChecked(suppressed);
 
   // Application-modal: the map/DEM this dialog is about stays live otherwise, so panning
   // (draw()) or a mouse-move (getElevationAt()) would read the very files a Fix/Combine job
@@ -68,11 +69,19 @@ CVrtAdvisoryDialog::CVrtAdvisoryDialog(const QString& filename, const CGdalVrtUt
                                .arg(distStr(heightMeters)));
 
   if (advice_.hasTooManySubfiles()) {
-    labelSubfileWarning->setText(tr("⚠ This file references %1 source files. Reading gets inefficient past %2 - "
-                                    "consider combining them into fewer files.")
-                                     .arg(advice_.perFileInfo.size())
-                                     .arg(CGdalVrtUtil::overview_advice_t::kMaxSubfileCount));
-    if (hasSourceFiles()) {
+    QString warning = tr("⚠ This file references %1 source files. Reading gets inefficient past %2 - "
+                         "consider combining them into fewer files.")
+                          .arg(advice_.perFileInfo.size())
+                          .arg(COverviewAdvisory::advice_t::kMaxSubfileCount);
+    const bool canCombine = hasSourceFiles() && !sharedSourceDir().isEmpty();
+    if (hasSourceFiles() && !canCombine) {
+      // Withdrawn rather than offered with a guessed target - see sharedSourceDir().
+      warning += " " + tr("The source files are spread over several directories, so they cannot be combined - "
+                          "there is no one place the merged files would belong.");
+    }
+    labelSubfileWarning->setText(warning);
+
+    if (canCombine) {
       // Placed under its own warning, not in buttonBox with "Fix overviews" - the two
       // actions fix unrelated problems.
       buttonCombine_ = new QPushButton(tr("Combine files..."));
@@ -149,7 +158,7 @@ void CVrtAdvisoryDialog::renderThemedContent() {
         "<tr>" + htmlTd(QFileInfo(filename_).fileName(), role) + htmlTd(levels, role) + htmlTd(status, role) + "</tr>";
   }
 
-  for (const CGdalVrtUtil::file_overview_info_t& info : advice_.perFileInfo) {
+  for (const COverviewAdvisory::file_info_t& info : advice_.perFileInfo) {
     CUiTheme::Role role = CUiTheme::Role::eNeutral;
     const QString status = rowStatus(info.checked, info.overviewSizes, info.sufficient, role);
     currentHtml += "<tr>" + htmlTd(QFileInfo(info.path).fileName(), role) +
@@ -162,40 +171,16 @@ void CVrtAdvisoryDialog::renderThemedContent() {
   QString afterFixHtml = "<table cellspacing=\"0\" cellpadding=\"0\" style=\"border-collapse:collapse\">";
   afterFixHtml += "<tr>" + htmlTh(tr("File")) + htmlTh(tr("New overview levels")) + htmlTh(tr("Action")) + "</tr>";
 
-  const QStringList toFix = filesToFix();
-  for (const QString& path : toFix) {
-    const QString name = QFileInfo(path).fileName();
-    const bool replacing = hasExistingOverviews(path);
-    const QString action = replacing ? tr("Clean + rebuild") : tr("Build new");
-    const CUiTheme::Role role = replacing ? CUiTheme::Role::eWarn : CUiTheme::Role::eOk;
-    afterFixHtml += "<tr>" + htmlTd(name, role) + htmlTd(suggestedStr, role) + htmlTd(action, role) + "</tr>";
-  }
-
-  // Only a VRT with source files needs this extra row (see hasSourceFiles() - the
-  // false case is already covered above). Unlike the rows above:
-  // - this never builds overview pixel data on filename_ itself
-  // - it only records, in the VRT's XML, which levels the source files provide
-  // so the wording below says "Update"/"Add", not "Build new"/"Clean + rebuild".
-  if (hasSourceFiles()) {
-    const QString vrtName = QFileInfo(filename_).fileName();
-    const bool replacing = hasExistingOverviews(filename_);
-    // plain "<"/">" here - htmlTd() escapes the whole string itself, so a pre-escaped
-    // entity would show up literally as "&lt;OverviewList&gt;"
-    const QString action = replacing ? tr("Update <OverviewList>") : tr("Add <OverviewList>");
-    const CUiTheme::Role role = replacing ? CUiTheme::Role::eWarn : CUiTheme::Role::eOk;
-    afterFixHtml += "<tr>" + htmlTd(vrtName, role) + htmlTd(suggestedStr, role) + htmlTd(action, role) + "</tr>";
+  const QVector<fix_step_t> plan = fixPlan();
+  for (const fix_step_t& step : plan) {
+    // plain "<"/">" - htmlTd() escapes the whole string itself
+    const QString action = actionText(step.action);
+    const CUiTheme::Role role = step.replacesExisting() ? CUiTheme::Role::eWarn : CUiTheme::Role::eOk;
+    afterFixHtml += "<tr>" + htmlTd(QFileInfo(step.path).fileName(), role) + htmlTd(suggestedStr, role) +
+                    htmlTd(action, role) + "</tr>";
   }
 
   afterFixHtml += "</table>";
-
-  // Measure each table's natural width using a temporary document (before any width="100%"),
-  // then set the browsers to that width so the table fills them without white space.
-  const auto idealWidth = [](const QString& html) {
-    QTextDocument doc;
-    doc.setHtml(html);
-    return qRound(doc.idealWidth());
-  };
-  const int bw = qMax(idealWidth(currentHtml), idealWidth(afterFixHtml));
 
   const QString narrowTag = "<table cellspacing=\"0\" cellpadding=\"0\" style=\"border-collapse:collapse\">";
   const QString fullTag =
@@ -203,31 +188,23 @@ void CVrtAdvisoryDialog::renderThemedContent() {
   textCurrent->setHtml(QString(currentHtml).replace(narrowTag, fullTag));
   textAfterFix->setHtml(QString(afterFixHtml).replace(narrowTag, fullTag));
 
-  const int browserW = bw + textCurrent->frameWidth() * 2 + style()->pixelMetric(QStyle::PM_ScrollBarExtent);
+  // Row counts include the header row; the container has one row of its own on top.
+  sizeTableBrowser(textCurrent, currentHtml, 2 + advice_.perFileInfo.size());
+  sizeTableBrowser(textAfterFix, afterFixHtml, 1 + plan.size());
+
+  // The two sections sit above each other, so they take the wider one's width.
+  const int browserW = qMax(textCurrent->minimumWidth(), textAfterFix->minimumWidth());
   textCurrent->setMinimumWidth(browserW);
   textAfterFix->setMinimumWidth(browserW);
 
-  // row height: cell padding (4px top + 4px bottom) + font height + 2px for borders.
-  // Never truncated - tall tables scroll within the fixed-height browser below instead
-  // of growing the dialog.
-  const int rowH = fontMetrics().height() + 10;
-  const qsizetype currentDataRows = 1 + advice_.perFileInfo.size();  // +1 for the container's own row
-  textCurrent->setFixedHeight(qMin(static_cast<int>(1 + currentDataRows) * rowH + 8, 250));
-
-  const qsizetype afterDataRows = static_cast<qsizetype>(toFix.size()) + (hasSourceFiles() ? 1 : 0);
-  textAfterFix->setFixedHeight(qMin(static_cast<int>(1 + afterDataRows) * rowH + 8, 250));
-
   // ---- summary ----
-  // Only describe build/replace work when overviews actually need fixing. A fully
-  // qualified VRT has nothing to build (filesToFix() still names filename_ for the
-  // no-source case), so the label then carries the disk-usage figure alone.
+  // Only describe build/replace work when overviews actually need fixing; otherwise the
+  // label carries the disk-usage figure alone.
   QStringList summaryParts;
   if (advice_.needsOverviewFix()) {
-    const qint32 replaceCount =
-        static_cast<qint32>(
-            std::count_if(toFix.begin(), toFix.end(), [this](const QString& p) { return hasExistingOverviews(p); })) +
-        (hasSourceFiles() && hasExistingOverviews(filename_) ? 1 : 0);
-    const qint32 buildCount = static_cast<qint32>(toFix.size()) + (hasSourceFiles() ? 1 : 0) - replaceCount;
+    const qint32 replaceCount = static_cast<qint32>(
+        std::count_if(plan.begin(), plan.end(), [](const fix_step_t& s) { return s.replacesExisting(); }));
+    const qint32 buildCount = static_cast<qint32>(plan.size()) - replaceCount;
 
     if (buildCount > 0) {
       summaryParts << tr("%1 file(s) will have new overviews built").arg(buildCount);
@@ -302,36 +279,54 @@ QString CVrtAdvisoryDialog::containerOvrSourceSuffix(bool hasSourceFiles, bool h
   return hasOwnOvr ? tr(" (own .ovr)") : tr(" (via <OverviewList>)");
 }
 
-bool CVrtAdvisoryDialog::hasExistingOverviews(const QString& filePath) const {
-  for (const CGdalVrtUtil::file_overview_info_t& info : advice_.perFileInfo) {
-    if (info.path == filePath) {
-      return info.checked && !info.overviewSizes.isEmpty();
-    }
+QString CVrtAdvisoryDialog::actionText(fix_step_t::Action action) {
+  switch (action) {
+    case fix_step_t::BuildNew:
+      return tr("Build new");
+    case fix_step_t::CleanRebuild:
+      return tr("Clean + rebuild");
+    case fix_step_t::AddList:
+      return tr("Add <OverviewList>");
+    case fix_step_t::UpdateList:
+      return tr("Update <OverviewList>");
   }
-  // No per-file entry: filePath is either the container's own row, or (see
-  // hasSourceFiles()) filesToFix()'s fallback target. Either way, fall back to the
-  // container's claim - containerHasOwnOvr, not just containerSufficient: a
-  // fallback-trusted <OverviewList> (see buildOverviewAdvice()'s step 3) makes
-  // containerSufficient true without there being anything physical to clean/replace, and
-  // this result also drives the "Update"/"Add <OverviewList>" wording in the after-fix
-  // preview table, which must agree with slotFixOverviews()'s confirmation dialog - that
-  // one already keys off containerHasOwnOvr specifically because only a real .ovr file
-  // gets deleted.
-  return filePath == filename_ && advice_.containerHasOwnOvr;
+  return QString();
 }
 
-QStringList CVrtAdvisoryDialog::filesToFix() const {
+QVector<CVrtAdvisoryDialog::fix_step_t> CVrtAdvisoryDialog::fixPlan() const {
+  QVector<fix_step_t> plan;
+
   if (!hasSourceFiles()) {
-    // no source files - fix filename_ directly, no <OverviewList> bookkeeping
-    return {filename_};
+    // No sources: gdaladdo runs on the container itself and that is the whole fix - there
+    // is no <OverviewList> to record anything in.
+    plan << fix_step_t{filename_, advice_.containerHasOwnOvr ? fix_step_t::CleanRebuild : fix_step_t::BuildNew};
+    return plan;
   }
-  QStringList result;
-  for (const CGdalVrtUtil::file_overview_info_t& info : advice_.perFileInfo) {
-    if (!info.sufficient) {
-      result << info.path;
+
+  for (const COverviewAdvisory::file_info_t& info : advice_.perFileInfo) {
+    if (info.sufficient) {
+      continue;  // adequate on its own - left alone
+    }
+    const bool hasOwn = info.checked && !info.overviewSizes.isEmpty();
+    plan << fix_step_t{info.path, hasOwn ? fix_step_t::CleanRebuild : fix_step_t::BuildNew};
+  }
+
+  // Only a real .ovr file gets deleted; a bare <OverviewList> has nothing to clean.
+  plan << fix_step_t{filename_, advice_.containerHasOwnOvr ? fix_step_t::UpdateList : fix_step_t::AddList};
+  return plan;
+}
+
+QString CVrtAdvisoryDialog::sharedSourceDir() const {
+  QString dir;
+  for (const COverviewAdvisory::file_info_t& info : advice_.perFileInfo) {
+    const QString candidate = QFileInfo(info.path).absolutePath();
+    if (dir.isEmpty()) {
+      dir = candidate;
+    } else if (dir != candidate) {
+      return QString();
     }
   }
-  return result;
+  return dir;
 }
 
 void CVrtAdvisoryDialog::slotFixOverviews() {
@@ -348,54 +343,37 @@ void CVrtAdvisoryDialog::slotFixOverviews() {
     levelArgs << QString::number(level);
   }
 
-  const QStringList toFix = filesToFix();
+  const QVector<fix_step_t> plan = fixPlan();
 
-  // confirmation dialog — list all operations; highlight destructive ones in orange
-  QString confirmHtml = "<p>" + tr("The following operations will be performed:") + "</p><table>";
-  for (const QString& path : toFix) {
-    const QString name = QFileInfo(path).fileName().toHtmlEscaped();
-    if (hasExistingOverviews(path)) {
-      confirmHtml += "<tr><td>" + name + "&nbsp;&nbsp;</td><td>" +
-                     CUiTheme::span(CUiTheme::Role::eWarn, tr("Clean + rebuild")) + "</td></tr>";
-    } else {
-      confirmHtml += "<tr><td>" + name + "&nbsp;&nbsp;</td><td>" + tr("Build new") + "</td></tr>";
-    }
+  // confirmation list - destructive steps in orange
+  QString rowsHtml;
+  for (const fix_step_t& step : plan) {
+    const QString name = QFileInfo(step.path).fileName().toHtmlEscaped();
+    const QString action = actionText(step.action).toHtmlEscaped();
+    rowsHtml += "<tr><td>" + name + "&nbsp;&nbsp;</td><td>" +
+                (step.replacesExisting() ? CUiTheme::span(CUiTheme::Role::eWarn, action) : action) + "</td></tr>";
   }
-  // !hasSourceFiles() has no separate <OverviewList> step - gdaladdo above is the whole fix
-  if (hasSourceFiles()) {
-    const QString vrtName = QFileInfo(filename_).fileName().toHtmlEscaped();
-    // orange only when a real .ovr file exists and will be deleted - containerSufficient
-    // alone isn't enough: a bare <OverviewList> verified via source files (see
-    // CGdalVrtUtil::buildOverviewAdvice()) has no file to delete
-    if (advice_.containerHasOwnOvr) {
-      confirmHtml += "<tr><td>" + vrtName + "&nbsp;&nbsp;</td><td>" +
-                     CUiTheme::span(CUiTheme::Role::eWarn, tr("Update &lt;OverviewList&gt;")) + "</td></tr>";
-    } else {
-      confirmHtml += "<tr><td>" + vrtName + "&nbsp;&nbsp;</td><td>" + tr("Add &lt;OverviewList&gt;") + "</td></tr>";
-    }
-  }
-  confirmHtml += "</table>";
 
-  if (!confirmYesNo(tr("Confirm fix"), confirmHtml, Qt::RichText)) {
+  if (!confirmList(tr("Confirm fix"), tr("The following operations will be performed:"), rowsHtml, plan.size())) {
     return;
   }
 
-  // build command queue — only files that actually fall short get touched; a source file
-  // that's already adequate on its own is left alone
   QList<CShellCmd> cmds;
-  for (const QString& path : toFix) {
-    if (hasExistingOverviews(path)) {
-      cmds << CShellCmd(gdaladdo, {"-clean", path});
+  for (const fix_step_t& step : plan) {
+    if (step.isContainerStep()) {
+      continue;  // XML-only, done by fixContainerOverviewList() once the queue succeeds
+    }
+    if (step.action == fix_step_t::CleanRebuild) {
+      cmds << CShellCmd(gdaladdo, {"-clean", step.path});
     }
     QStringList args = {"-ro",      "-r",       resampleAlg,         "--config", "GDAL_NUM_THREADS",
                         "ALL_CPUS", "--config", "COMPRESS_OVERVIEW", "DEFLATE"};
     // Match the source's horizontal predictor so DEFLATE can difference continuous data
-    // (DEM/RGB), shrinking overviews ~2-3x. Skip it for palette/index rasters, where
-    // differencing index values hurts compression.
+    // (DEM/RGB), shrinking overviews ~2-3x. Harmful on palette indices.
     if (!advice_.isPaletteIndexed) {
       args << "--config" << "PREDICTOR_OVERVIEW" << "2";
     }
-    args << path;
+    args << step.path;
     args += levelArgs;
     cmds << CShellCmd(gdaladdo, args);
   }
@@ -405,11 +383,50 @@ void CVrtAdvisoryDialog::slotFixOverviews() {
   jobId_ = shell_->execute(cmds);
 }
 
-bool CVrtAdvisoryDialog::confirmYesNo(const QString& title, const QString& text, Qt::TextFormat format) {
+bool CVrtAdvisoryDialog::confirmList(const QString& title, const QString& lead, const QString& rowsHtml,
+                                     qsizetype rowCount) {
+  QDialog dlg(this);
+  dlg.setWindowTitle(title);
+  auto* layout = new QVBoxLayout(&dlg);
+
+  auto* label = new QLabel(lead, &dlg);
+  label->setWordWrap(true);
+  layout->addWidget(label);
+
+  // A QMessageBox cannot scroll its text, so a long list pushes the buttons off screen.
+  const QString html = "<table cellspacing=\"0\" cellpadding=\"0\">" + rowsHtml + "</table>";
+  auto* view = new QTextBrowser(&dlg);
+  view->setHtml(html);
+  sizeTableBrowser(view, html, rowCount);
+  layout->addWidget(view);
+
+  auto* buttons = new QDialogButtonBox(QDialogButtonBox::Yes | QDialogButtonBox::No, &dlg);
+  buttons->button(QDialogButtonBox::No)->setDefault(true);
+  connect(buttons, &QDialogButtonBox::accepted, &dlg, &QDialog::accept);
+  connect(buttons, &QDialogButtonBox::rejected, &dlg, &QDialog::reject);
+  layout->addWidget(buttons);
+
+  return dlg.exec() == QDialog::Accepted;
+}
+
+void CVrtAdvisoryDialog::sizeTableBrowser(QTextBrowser* view, const QString& html, qsizetype rowCount) const {
+  // Measure the table's natural width on a temporary document - view's own html may already
+  // carry width="100%", which measures as the current widget width, not the content.
+  QTextDocument doc;
+  doc.setHtml(html);
+  const int width =
+      qRound(doc.idealWidth()) + view->frameWidth() * 2 + style()->pixelMetric(QStyle::PM_ScrollBarExtent);
+  view->setMinimumWidth(qMin(width, kMaxTableWidth));
+
+  // row height: cell padding (4px top + 4px bottom) + font height + 2px for borders.
+  const int rowH = fontMetrics().height() + 10;
+  view->setFixedHeight(qMin(static_cast<int>(rowCount) * rowH + 8, kMaxTableHeight));
+}
+
+bool CVrtAdvisoryDialog::confirmYesNo(const QString& title, const QString& text) {
   QMessageBox msgBox(this);
   msgBox.setWindowTitle(title);
   msgBox.setText(text);
-  msgBox.setTextFormat(format);
   msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
   msgBox.setDefaultButton(QMessageBox::No);
   return msgBox.exec() == QMessageBox::Yes;
@@ -472,8 +489,8 @@ void CVrtAdvisoryDialog::slotCombineFiles() {
   const qint32 gridSize = static_cast<qint32>(grid.size());
 
   // New tiles belong in the source files' own directory, which can differ from the VRT's.
-  // perFileInfo is never empty here - slotCombineFiles() requires hasSourceFiles().
-  const QString sourceDir = QFileInfo(advice_.perFileInfo.first().path).absolutePath();
+  // Never empty here - the button only exists when all sources share one directory.
+  const QString sourceDir = sharedSourceDir();
 
   const qint32 droppedCount = gridSize - static_cast<qint32>(tiles.size());
   const QString vrtName = QFileInfo(filename_).fileName();
@@ -588,8 +605,10 @@ void CVrtAdvisoryDialog::slotJobFinished(qint32 id) {
 void CVrtAdvisoryDialog::finishFixOverviews() {
   if (canceling_ || !shell_->lastJobSucceeded()) {
     QStringList ovrPaths;
-    for (const QString& path : filesToFix()) {
-      ovrPaths << path + ".ovr";
+    for (const fix_step_t& step : fixPlan()) {
+      if (!step.isContainerStep()) {
+        ovrPaths << step.path + ".ovr";
+      }
     }
     removeIfExists(ovrPaths);
     return;
@@ -650,7 +669,7 @@ void CVrtAdvisoryDialog::finishCombine() {
                                .arg(QFileInfo(filename_).fileName())
                                .arg(tileCount)
                                .arg(advice_.perFileInfo.size())
-                               .arg(QFileInfo(advice_.perFileInfo.first().path).absolutePath()));
+                               .arg(sharedSourceDir()));
 
   emit sigContainerRebuilt();
 }
@@ -705,7 +724,7 @@ bool CVrtAdvisoryDialog::fixContainerOverviewList() {
   // Only now that the rewritten <OverviewList> is safely committed, drop any stale .ovr
   // file - GDAL trusts a real .ovr file over anything the source files/OverviewList offer,
   // so an old one left behind would keep shadowing the fix (see
-  // CGdalVrtUtil::buildOverviewAdvice()). Deleting it only after a successful commit means
+  // COverviewAdvisory::probe()). Deleting it only after a successful commit means
   // a failure anywhere above leaves the original, still-working state untouched instead of
   // stripping the container's overview acceleration with nothing to show for it.
   const QString ovrPath = filename_ + ".ovr";

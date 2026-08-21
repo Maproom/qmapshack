@@ -50,12 +50,13 @@ if [ -z "$MACPORTS_BUILD" ]; then
         brew install libkml
         brew install minizip
         brew install uriparser
-        brew install unixodbc
-        brew install libtiff
-        brew install libgeotiff
-        brew install libheif
-        brew install geos
-		brew install poppler
+        brew install libtiff    # required by libproj, libpoppler
+        brew install jpeg-turbo # required by libtiff
+        brew install unixodbc   # required by libgdal
+        brew install libheif    # required by libgdal
+        brew install geos       # required by libgdal
+        brew install zstd       # required by libgdal
+        brew install poppler    # required by libgdal
     else
         brew install gdal
     fi

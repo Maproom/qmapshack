@@ -50,11 +50,7 @@ $PACKAGES_PATH/bin/cmake .. -DCMAKE_PREFIX_PATH="$CMAKE_PREFIX_PATH" \
                             -DGDAL_USE_CURL=ON \
                             -DGDAL_ENABLE_DRIVER_WMS:BOOL=ON \
                             -DGDAL_ENABLE_DRIVER_WCS:BOOL=ON \
-                            -DGDAL_USE_TIFF=ON \
-                            -DGDAL_USE_GEOTIFF=ON \
                             -DGDAL_USE_GEOS=ON \
-                            -DGDAL_USE_PNG=ON \
-                            -DGDAL_USE_GIF=ON \
                             -DGDAL_USE_ODBC=ON \
                             -DGDAL_USE_PCRE2=ON \
                             -DGDAL_USE_ICONV=ON \
@@ -62,9 +58,8 @@ $PACKAGES_PATH/bin/cmake .. -DCMAKE_PREFIX_PATH="$CMAKE_PREFIX_PATH" \
                             -DGDAL_USE_EXPAT=ON \
                             -DGDAL_USE_HEIF=ON \
                             -DGDAL_USE_WEBP=OFF \
-                            -DGDAL_ENABLE_PYTHON=OFF \
-                            -DGDAL_USE_SWIG=OFF \
                             -DGDAL_USE_POPPLER=ON \
+                            -DGDAL_USE_ZSTD=ON \
                             -DBUILD_PYTHON_BINDINGS=OFF
 
 $PACKAGES_PATH/bin/cmake --build . -j"$(sysctl -n hw.ncpu)"

@@ -9105,12 +9105,12 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
     </message>
     <message>
         <location filename="../gis/CWksItemDelegate.cpp" line="858"/>
-        <source>Disable automatic synchonization with GPS device.</source>
+        <source>Disable automatic synchronization with GPS device.</source>
         <translation>Desactiva la sincronització automàtica del dispositiu GPS</translation>
     </message>
     <message>
         <location filename="../gis/CWksItemDelegate.cpp" line="861"/>
-        <source>Enable automatic synchonization with GPS device.</source>
+        <source>Enable automatic synchronization with GPS device.</source>
         <translation>Activa la sincronització automàtica del dispositiu GPS</translation>
     </message>
     <message>

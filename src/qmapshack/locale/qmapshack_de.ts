@@ -9325,12 +9325,12 @@ Die %3 ursprünglichen Quelldatei(en) befinden sich weiterhin in %4 - löschen S
     </message>
     <message>
         <location filename="../gis/CWksItemDelegate.cpp" line="858"/>
-        <source>Disable automatic synchonization with GPS device.</source>
+        <source>Disable automatic synchronization with GPS device.</source>
         <translation>Automatische Synchronization mit dem GPS Gerät ausschalten.</translation>
     </message>
     <message>
         <location filename="../gis/CWksItemDelegate.cpp" line="861"/>
-        <source>Enable automatic synchonization with GPS device.</source>
+        <source>Enable automatic synchronization with GPS device.</source>
         <translation>Automatische Synchronization mit dem GPS Gerät anschalten.</translation>
     </message>
     <message>

@@ -1,4 +1,4 @@
-V1.XX.X
+V1.21.0
 [QMS-585] Preserve extra XML namespaces in GPX files
 [QMS-902] Add HiDPI support
 [QMS-963] Add action to move a map to the top in map list

@@ -60,6 +60,7 @@ $PACKAGES_PATH/bin/cmake .. -DCMAKE_PREFIX_PATH="$CMAKE_PREFIX_PATH" \
                             -DGDAL_USE_WEBP=OFF \
                             -DGDAL_USE_POPPLER=ON \
                             -DGDAL_USE_ZSTD=ON \
+                            -DGDAL_USE_SQLITE3=ON \
                             -DBUILD_PYTHON_BINDINGS=OFF
 
 $PACKAGES_PATH/bin/cmake --build . -j"$(sysctl -n hw.ncpu)"

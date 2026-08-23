@@ -320,17 +320,17 @@
     <message>
         <location filename="../setup/CCommandProcessor.cpp" line="53"/>
         <source>Qt style.</source>
-        <translation type="unfinished"></translation>
+        <translation>Estil Qt</translation>
     </message>
     <message>
         <location filename="../setup/CCommandProcessor.cpp" line="53"/>
         <source>Available:</source>
-        <translation type="unfinished"></translation>
+        <translation>Disponible:</translation>
     </message>
     <message>
         <location filename="../setup/CCommandProcessor.cpp" line="54"/>
         <source>Recommended:</source>
-        <translation type="unfinished"></translation>
+        <translation>Recomanat:</translation>
     </message>
     <message>
         <location filename="../setup/CCommandProcessor.cpp" line="58"/>
@@ -588,7 +588,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../dem/CDemVRT.cpp" line="43"/>
         <source>File is not UTF-8 encoded and cannot be loaded. Convert it to UTF-8 first:</source>
-        <translation type="unfinished"></translation>
+        <translation>El fitxer no està codificat amb UTF-8, no es pot carregar. Abans de res, convertir-lo a UTF-8:</translation>
     </message>
     <message>
         <location filename="../dem/CDemVRT.cpp" line="50"/>
@@ -678,7 +678,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="279"/>
         <source>No images found</source>
-        <translation>&#xa0; No s&apos;ha trobat cap imatge</translation>
+        <translation>  No s&apos;ha trobat cap imatge</translation>
     </message>
 </context>
 <context>
@@ -1384,7 +1384,7 @@ Aquest filtre divideix el track en diversos tracks més petits.</translation>
         <location filename="../gis/trk/filter/CFilterZeroSpeedDriftCleaner.cpp" line="59"/>
         <source>Hide knots in the track:
 
-During a break many GPS devices continue to record. As the GPS accuracy has some variance the result is a cloud of points forming kind of a knot in the track. This leads to accumulated errors in the statistics. That&apos;s why you might want to remove them.
+During a break many GPS devices continue to record. As the GPS accuracy has some variance the result is a cloud of points forming kind of a knot in the track. This leads to accumulated errors in the statistics. That's why you might want to remove them.
 
 Typically a knot fulfills two conditions:
 - A series of points very close to each other.
@@ -3259,7 +3259,7 @@ Podeu modificar els dos paràmetres per personalitzar el comportament del filtre
     </message>
     <message>
         <location filename="../gis/CGisWorkspace.cpp" line="779"/>
-        <source>QMapShack couldn&apos;t automatically assign a waypoint icon to one of the POIs you want to convert to a waypoint.
+        <source>QMapShack couldn't automatically assign a waypoint icon to one of the POIs you want to convert to a waypoint.
 
 Do you want to choose an icon for each new waypoint for which no icon could be found?
 If you choose &apos;No&apos; the respective last used waypoint icon is applied.</source>
@@ -4649,7 +4649,7 @@ Retorn als tipus interns..</translation>
     <message>
         <location filename="../map/CMapItemDelegate.cpp" line="338"/>
         <source>This file can be slow to draw on the map. Click here to see how to speed it up.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dibuixar aquest fitxer al mapa pot ser molt lent. Fes clic aquí per saber com accelerar el procés.</translation>
     </message>
     <message>
         <location filename="../map/CMapItemDelegate.cpp" line="341"/>
@@ -4817,7 +4817,7 @@ línia %2, columna %3:
     <message>
         <location filename="../map/CMapVRT.cpp" line="45"/>
         <source>File is not UTF-8 encoded and cannot be loaded. Convert it to UTF-8 first:</source>
-        <translation type="unfinished"></translation>
+        <translation>El fitxer no està codificat amb UTF-8, no es pot carregar. Abans de res, convertir-lo a UTF-8:</translation>
     </message>
     <message>
         <location filename="../map/CMapVRT.cpp" line="57"/>
@@ -4832,12 +4832,12 @@ línia %2, columna %3:
     <message>
         <location filename="../map/CMapVRT.cpp" line="64"/>
         <source>File has no raster bands:</source>
-        <translation type="unfinished"></translation>
+        <translation>Aquest fitxer no té bandes ràster:</translation>
     </message>
     <message>
         <location filename="../map/CMapVRT.cpp" line="78"/>
         <source>Palette band has no color table:</source>
-        <translation type="unfinished"></translation>
+        <translation>La banda de paleta no té taula de colors:</translation>
     </message>
     <message>
         <location filename="../map/CMapVRT.cpp" line="90"/>
@@ -5164,21 +5164,6 @@ Estructura desconeguda.</translation>
     </message>
 </context>
 <context>
-    <name>COverviewAdvisoryDialog</name>
-    <message>
-        <source>File</source>
-        <translation type="obsolete">Fitxer</translation>
-    </message>
-    <message>
-        <source>Action</source>
-        <translation type="obsolete">Acció</translation>
-    </message>
-    <message>
-        <source>none</source>
-        <translation type="obsolete">cap</translation>
-    </message>
-</context>
-<context>
     <name>CPhotoAlbum</name>
     <message>
         <location filename="../widgets/CPhotoAlbum.cpp" line="65"/>
@@ -5360,7 +5345,7 @@ adr:país</translation>
     <message>
         <location filename="../poi/CPoiPathSetup.cpp" line="44"/>
         <source>Add or remove paths containing POI data. There can be multiple files in a path but no sub-path is parsed. Supported formats are: %1</source>
-        <translation>&#xa0;
+        <translation> 
 Afegir o suprimir camins a dades dels Punts d&apos;Interès. Pot haver-hi diverses fitxers en un camí, però els camins secundaris no s&apos;analitzaran. Els formats compatibles són: %1</translation>
     </message>
     <message>
@@ -5440,7 +5425,7 @@ y: %4 m/px</translation>
     <message>
         <location filename="../../common/gis/proj_x.cpp" line="153"/>
         <source>The value
-&apos;%1&apos;
+'%1'
 is not a valid coordinate system definition:
 %2</source>
         <translation>El valor
@@ -6561,7 +6546,7 @@ Si us plau, comproveu els registres si Brouter no arranca.</translation>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="289"/>
         <source>%1
-Error in &apos;%2&apos;
+Error in '%2'
 This needs to be fixed
 The associated database &apos;%3&apos; is ignored</source>
         <translation>%1
@@ -8290,55 +8275,57 @@ Per a configurar l&apos;accés s&apos;ha de saber l&apos;adreça IP del disposit
     <message>
         <location filename="../../common/shell/CShell.cpp" line="48"/>
         <source>Execution of external program `%1` failed: </source>
-        <translation type="unfinished">Error en l&apos;execució del programa extern `%1`:</translation>
+        <translation>Error en l&apos;execució del programa extern `%1`: </translation>
     </message>
     <message>
         <location filename="../../common/shell/CShell.cpp" line="51"/>
         <source>Process cannot be started.
 </source>
-        <translation type="unfinished">El procés no es pot iniciar.
+        <translation>El procés no es pot iniciar.
 </translation>
     </message>
     <message>
         <location filename="../../common/shell/CShell.cpp" line="52"/>
         <source>Make sure the required packages are installed, `%1` exists and is executable.
 </source>
-        <translation type="unfinished">&#xa0;Assegureu-vos que els paquets necessaris estan instal·lats, `%1` existeix i es pot executar.
+        <translation> Assegureu-vos que els paquets necessaris estan instal·lats, `%1` existeix i es pot executar.
 </translation>
     </message>
     <message>
         <location filename="../../common/shell/CShell.cpp" line="61"/>
         <source>External process crashed.
 </source>
-        <translation type="unfinished">El procés extern ha fallat.
+        <translation>El procés extern ha fallat.
 </translation>
     </message>
     <message>
         <location filename="../../common/shell/CShell.cpp" line="65"/>
         <source>An unknown error occurred.
 </source>
-        <translation type="unfinished">S&apos;ha produït un error desconegut.
+        <translation>S&apos;ha produït un error desconegut.
 </translation>
     </message>
     <message>
         <location filename="../../common/shell/CShell.cpp" line="143"/>
         <source>!!! failed !!!
 </source>
-        <translation type="unfinished">¡¡¡ ha fallat !!!
+        <translation>¡¡¡ ha fallat !!!
 </translation>
     </message>
     <message>
         <location filename="../../common/shell/CShell.cpp" line="156"/>
         <source>
-Canceled by user&apos;s request.
+Canceled by user's request.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+Cancel·lat a petició de l&apos;usuari.
+</translation>
     </message>
     <message>
         <location filename="../../common/shell/CShell.cpp" line="179"/>
         <source>!!! done !!!
 </source>
-        <translation type="unfinished">¡¡¡ fet !!!
+        <translation>¡¡¡ fet !!!
 </translation>
     </message>
 </context>
@@ -8347,12 +8334,12 @@ Canceled by user&apos;s request.
     <message>
         <location filename="../helpers/CShortcutSetupDialog.cpp" line="126"/>
         <source>Shortcut already in use</source>
-        <translation type="unfinished"></translation>
+        <translation>Drecera ja en ús</translation>
     </message>
     <message>
         <location filename="../helpers/CShortcutSetupDialog.cpp" line="127"/>
         <source>The shortcut &apos;%1&apos; is already assigned to &apos;%2&apos;. Do you want to reassign it to &apos;%3&apos;?</source>
-        <translation type="unfinished"></translation>
+        <translation>La drecera &apos;%1&apos; està assignada a &apos;%2&apos;. Voleu La voleu reassignar a &apos;%3&apos;?</translation>
     </message>
 </context>
 <context>
@@ -8775,294 +8762,302 @@ línia %2, columna %3:
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="44"/>
         <source>Fix overviews</source>
-        <translation type="unfinished"></translation>
+        <translation>Corregir la vista general</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="45"/>
         <source>Later</source>
-        <translation type="unfinished"></translation>
+        <translation>Més tard</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="62"/>
         <source>%1 × %2 px  ·  %3/px × %4/px  ·  %5 × %6</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 × %2 px  ·  %3/px × %4/px  ·  %5 × %6</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="71"/>
         <source>⚠ This file references %1 source files. Reading gets inefficient past %2 - consider combining them into fewer files.</source>
-        <translation type="unfinished"></translation>
+        <translation>⚠ Aquest fitxer fa referència a %1 fitxers origen. La seva lectura es ineficient un cop se&apos;n han llegit %2 - valoreu la possibilitat de combinar-los en menys fitxers.</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="78"/>
         <source>Combine files...</source>
-        <translation type="unfinished"></translation>
+        <translation>Unir fitxers...</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="138"/>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="163"/>
         <source>File</source>
-        <translation type="unfinished">Fitxer</translation>
+        <translation>Fitxer</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="138"/>
         <source>Existing overview sizes (px)</source>
-        <translation type="unfinished"></translation>
+        <translation>Mida de les vistes generals existents (px)</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="138"/>
         <source>Status</source>
-        <translation type="unfinished"></translation>
+        <translation>Estat</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="163"/>
         <source>New overview levels</source>
-        <translation type="unfinished"></translation>
+        <translation>Nous nivells de la vista general</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="163"/>
         <source>Action</source>
-        <translation type="unfinished">Acció</translation>
+        <translation>Acció</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="169"/>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="359"/>
         <source>Clean + rebuild</source>
-        <translation type="unfinished"></translation>
+        <translation>Neteja + reconstrueix</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="169"/>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="361"/>
         <source>Build new</source>
-        <translation type="unfinished"></translation>
+        <translation>Crear-ne un nou</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="184"/>
         <source>Update &lt;OverviewList&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Actualitza &lt;OverviewList&gt;</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="184"/>
         <source>Add &lt;OverviewList&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Afegir &lt;OverviewList&gt;</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="233"/>
         <source>%1 file(s) will have new overviews built</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 fitxer(s) té noves vistes generals disponibles</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="236"/>
         <source>%1 file(s) will have existing overviews cleaned and rebuilt</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 fitxer(s) tenen vistes generals netes i reconstruides</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="243"/>
         <source>Estimated disk usage: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Estimació de l&apos;ús del disc: %1.</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="243"/>
         <source>Disk usage: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ús del disc: %1.</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="108"/>
         <source>Overview info</source>
-        <translation type="unfinished"></translation>
+        <translation>Informació General</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="110"/>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="436"/>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Tanca</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="261"/>
         <source>none</source>
-        <translation type="unfinished">cap</translation>
+        <translation>cap</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="283"/>
         <source>✓ covered by .ovr</source>
-        <translation type="unfinished"></translation>
+        <translation>✓ cobert per .ovr</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="287"/>
         <source>✗ None</source>
-        <translation type="unfinished"></translation>
+        <translation>✗ Cap</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="291"/>
         <source>⚠ Shallow (coarsest %1px)</source>
-        <translation type="unfinished"></translation>
+        <translation>⚠ Superficie (gruix %1px)</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="294"/>
         <source>✓ OK</source>
-        <translation type="unfinished"></translation>
+        <translation>✓ OK</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="302"/>
         <source> (own .ovr)</source>
-        <translation type="unfinished"></translation>
+        <translation> (own .ovr)</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="302"/>
         <source> (via &lt;OverviewList&gt;)</source>
-        <translation type="unfinished"></translation>
+        <translation> (via &lt;OverviewList&gt;)</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="340"/>
         <source>gdaladdo not found</source>
-        <translation type="unfinished"></translation>
+        <translation>No s&apos;ha trobat gdaladdo</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="341"/>
         <source>Could not locate gdaladdo. Make sure the GDAL tools are installed and on PATH.</source>
-        <translation type="unfinished"></translation>
+        <translation>No s&apos;ha pogut localitzar gdaladdo. Assegureu-vos que totes les eines GDAL estan instal·lades i amb el CAMÍ ben definit.</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="354"/>
         <source>The following operations will be performed:</source>
-        <translation type="unfinished"></translation>
+        <translation>S&apos;executaran les següents operacions:</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="372"/>
         <source>Update &amp;lt;OverviewList&amp;gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Actualitza &amp;lt;LlistaVistaGeneral&amp;gt;</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="374"/>
         <source>Add &amp;lt;OverviewList&amp;gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Afegir &amp;lt;LlistaVistaGeneral&amp;gt;</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="379"/>
         <source>Confirm fix</source>
-        <translation type="unfinished"></translation>
+        <translation>Confirma la correcció</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="422"/>
         <source>Removed %1.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Suprimit %1.
+</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="444"/>
         <source>GDAL tools not found</source>
-        <translation type="unfinished"></translation>
+        <translation>No s&apos;han trobat les eines GDAL</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="445"/>
         <source>Could not locate gdal_translate/gdalbuildvrt. Make sure the GDAL tools are installed and on PATH.</source>
-        <translation type="unfinished"></translation>
+        <translation>No s&apos;ha pogut localitzar gdal_translate/gdalbuildvrt. Assegureu-vos que totes les eines GDAL estan instal·lades i amb el CAMÍ ben definit.</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="455"/>
         <source>Could not read the raster layout of %1.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="obsolete">Cancel·la</translation>
+        <translation>No es pot llegir la capa raster de %1.</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="454"/>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="468"/>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="502"/>
         <source>Combine failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Ha fallat la unió</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="468"/>
         <source>No data found in %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>No s&apos;han trobat dades a %1.</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="481"/>
         <source>This will split %1 into %2 compressed GeoTIFF(s) in %3, then rewrite %1 to reference them. The current file will be backed up as %4.</source>
-        <translation type="unfinished"></translation>
+        <translation>Es dividirà %1 en %2 GeoTIFF(s) comprimits a %3, es reescriurà a %1 fent referència a l&apos;original. Es farà una còpia de seguretat del fitxer actual a %4.</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="485"/>
         <source>%1 grid cell(s) contained no data and will be skipped.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 cel·la(es) de la quadricula no contenen dades i s&apos;ometran.</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="488"/>
         <source>Confirm combine</source>
-        <translation type="unfinished"></translation>
+        <translation>Confirma la unió</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="502"/>
         <source>Could not back up %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>No s&apos;ha pogut fer la còpia de seguretat de %1.</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="552"/>
         <source>Abort</source>
-        <translation type="unfinished">Interrompre</translation>
+        <translation>Interrompre</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="553"/>
         <source>An operation is in progress.
 
 Abort and remove any partially written files?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ja hi ha una operació en curs.
+
+Vols interrompre i eliminar els fitxers incomplerts?</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="601"/>
-        <source>Rebuilt %1&apos;s &lt;OverviewList&gt; from its source files.
+        <source>Rebuilt %1's &lt;OverviewList&gt; from its source files.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Reconstruït %1&apos;s &lt;OverviewList&gt; des dels fitxers origen.
+</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="603"/>
         <source>Failed to update %1.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Error en modificar %1.
+</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="622"/>
         <source>Restored %1 from backup.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Restauració %1 de la còpia de seguretat.
+</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="624"/>
         <source>Failed to restore %1 from backup - %2 is still available for manual recovery.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Error en restaurar %1 des de la còpia de seguretat - %2 encara es pot recuperar de forma manual.
+</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="626"/>
         <source>Restore failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Ha fallat la restauració</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="627"/>
         <source>Combine failed and %1 could not be automatically restored from its backup.
 
 Rename %2 back to %1 yourself to recover the original file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ha fallat la unió i %1 no es pot restaurar de forma automàtica des de la seva còpia de seguretat.
+
+Per a recuperar el fitxer original, reanomenar de forma manual %2 amb el nom %1.</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="638"/>
         <source>Combined %1 source file(s) into %2 tile(s); %3 rewritten.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Units %1 fitxer(s) origen en %2 tesel·la(es); %3 reescrits.
+</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="646"/>
         <source>Combine finished</source>
-        <translation type="unfinished"></translation>
+        <translation>Ha finalitzat la unió</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="647"/>
         <source>%1 has been rewritten to reference %2 merged tile(s).
 
 The %3 original source file(s) are still in %4 - delete them yourself once you&apos;ve confirmed the merged file works as expected.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 s&apos;ha reescrit per fer referència a %2 tessel·la(es) fusionades.
+
+El fitxer(s) original %3 encara existeix com a %4 - es podrà esborrar manualment un cop s&apos;hagi confirmat que la fusió ha funcionat tal com s&apos;esperava.</translation>
     </message>
 </context>
 <context>
@@ -12422,12 +12417,12 @@ allunyament màxim en utilitzar dades DEM.</translation>
     <message>
         <location filename="../dem/IDemList.ui" line="267"/>
         <source>Overview Info...</source>
-        <translation type="unfinished"></translation>
+        <translation>Informació General...</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="270"/>
         <source>Show overview pyramid info for this file</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra la vista general piramidal d&apos;aquest fitxer</translation>
     </message>
 </context>
 <context>
@@ -14034,7 +14029,7 @@ allunyament màxim en utilitzar dades DEM.</translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="141"/>
-        <source>&lt;p&gt;&lt;a href=&quot;http://www.geonames.org/&quot; target=&quot;_blank&quot;&gt;Geonames&lt;/a&gt; © &lt;a href=&quot;http://creativecommons.org/licenses/by/4.0/&quot; target=&quot;_blank&quot;&gt;Creative Commons Attribution 4.0 License&lt;/a&gt;&lt;/p&gt;&lt;p&gt;to use please create a geonames &lt;a href=&quot;http://www.geonames.org/login&quot; target=&quot;_blank&quot;&gt;username&lt;/a&gt;,&lt;/p&gt;&lt;p&gt;then enable &apos;Free Webservices&apos; in your &lt;a href=&quot;http://www.geonames.org/manageaccount&quot; target=&quot;_blank&quot;&gt;Account&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;enter your geonames username here:&lt;/p&gt;
+        <source>&lt;p&gt;&lt;a href=&quot;http://www.geonames.org/&quot; target=&quot;_blank&quot;&gt;Geonames&lt;/a&gt; © &lt;a href=&quot;http://creativecommons.org/licenses/by/4.0/&quot; target=&quot;_blank&quot;&gt;Creative Commons Attribution 4.0 License&lt;/a&gt;&lt;/p&gt;&lt;p&gt;to use please create a geonames &lt;a href=&quot;http://www.geonames.org/login&quot; target=&quot;_blank&quot;&gt;username&lt;/a&gt;,&lt;/p&gt;&lt;p&gt;then enable 'Free Webservices' in your &lt;a href=&quot;http://www.geonames.org/manageaccount&quot; target=&quot;_blank&quot;&gt;Account&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;enter your geonames username here:&lt;/p&gt;
 </source>
         <translation>&lt;p&gt;&lt;a href=&quot;http://www.geonames.org/&quot; target=&quot;_blank&quot;&gt;Geonames&lt;/a&gt; © &lt;a href=&quot;http://creativecommons.org/licenses/by/4.0/&quot; target=&quot;_blank&quot;&gt;Creative Commons Attribution 4.0 License&lt;/a&gt;&lt;/p&gt;&lt;p&gt;per a utilitzar geonames creeu, si us plau, un &lt;a href=&quot;http://www.geonames.org/login&quot; target=&quot;_blank&quot;&gt;nom d&apos;usuari&lt;/a&gt;,&lt;/p&gt;&lt;p&gt;un cop fet activeu &apos;Free Webservices&apos; en el vostre &lt;a href=&quot;http://www.geonames.org/manageaccount&quot; target=&quot;_blank&quot;&gt;Compte&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;introduir aquí el vostre nom d&apos;usuari Geonames:&lt;/p&gt;
 </translation>
@@ -14924,12 +14919,12 @@ Nom del fitxer: %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="852"/>
         <source>Setup Keyboard Shortcuts</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurar les Dreceres del Teclat</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="855"/>
         <source>Assign keyboard shortcuts to actions</source>
-        <translation type="unfinished"></translation>
+        <translation>Assignar dreceres de teclat a accions</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="882"/>
@@ -15303,12 +15298,12 @@ Nom del fitxer: %1</translation>
     <message>
         <location filename="../map/IMapList.ui" line="252"/>
         <source>Overview Info...</source>
-        <translation type="unfinished"></translation>
+        <translation>Informació General...</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="255"/>
         <source>Show overview pyramid info for this file</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra la vista general piramidal d&apos;aquest fitxer</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="141"/>
@@ -15336,7 +15331,7 @@ Nom del fitxer: %1</translation>
     <message>
         <location filename="../map/IMapOnline.cpp" line="45"/>
         <source>This map requires OpenSSL support. However due to legal restrictions in some countries OpenSSL is not packaged with QMapShack. You can have a look at the &lt;a href=&apos;https://github.com/openssl/openssl/wiki/Binaries&apos;&gt;OpenSSL Wiki&lt;/a&gt; for binaries. You have to copy libcrypto-3-x64.dll and libssl-3-x64.dll into the QMapShack program directory.</source>
-        <translation>&#xa0;Aquest mapa requereix suport OpenSSL. Tanmateix donades les restriccions legals existents en alguns païssos, OpenSSL no és al paquet de QMapShack. Heu de cercar els binaris a la &lt;a href=&apos;https://github.com/openssl/openssl/wiki/Binaries&apos;&gt;Pàgina Wiki de OpenSSL&lt;/a&gt;. S&apos;han de copiar a la carpeta del programa QMapShack els fitxers libcrypto-3-x64.dll i libssl-3-x64.dll.</translation>
+        <translation> Aquest mapa requereix suport OpenSSL. Tanmateix donades les restriccions legals existents en alguns païssos, OpenSSL no és al paquet de QMapShack. Heu de cercar els binaris a la &lt;a href=&apos;https://github.com/openssl/openssl/wiki/Binaries&apos;&gt;Pàgina Wiki de OpenSSL&lt;/a&gt;. S&apos;han de copiar a la carpeta del programa QMapShack els fitxers libcrypto-3-x64.dll i libssl-3-x64.dll.</translation>
     </message>
     <message>
         <location filename="../map/IMapOnline.cpp" line="49"/>
@@ -16541,7 +16536,7 @@ o
     </message>
     <message>
         <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="124"/>
-        <source>&lt;p&gt;To create a Routino routing database you need to download *pbf files from &lt;a href=&apos;http://download.geofabrik.de/&apos;&gt;GeoFabrik&lt;/a&gt;. The process of creating a Routino database is quite slow and the resulting files quite large. Therefore it&apos;s recommended not to download whole continents. Limit your download to those countries you really need. However as Routino can&apos;t route over several databases you have to include all countries that are touched by a cross country border route.&lt;/p&gt;
+        <source>&lt;p&gt;To create a Routino routing database you need to download *pbf files from &lt;a href='http://download.geofabrik.de/'&gt;GeoFabrik&lt;/a&gt;. The process of creating a Routino database is quite slow and the resulting files quite large. Therefore it's recommended not to download whole continents. Limit your download to those countries you really need. However as Routino can't route over several databases you have to include all countries that are touched by a cross country border route.&lt;/p&gt;
 
 &lt;ol&gt;
 &lt;li&gt;Select one or multiple source *.pbf files.&lt;/li&gt;
@@ -16561,11 +16556,7 @@ o
     <message>
         <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="148"/>
         <source>Unable to find Routino&apos;s planetsplitter. Searched for &quot;planetsplitter&quot; and &quot;routino-planetsplitter&quot;.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;b style = &apos;color: red&apos;&gt; Unable to find Routino&apos;s planetsplitter. Searched for &quot;planetsplitter&quot; and &quot;routino-planetsplitter&quot;.&lt;/b&gt;</source>
-        <translation type="vanished">&lt;b style = &apos;color: red&apos;&gt; No es troba l&apos;eina planetsplitter de Routino. S&apos;ha fet una cerca per a «planetsplitter» i «routino-planetsplitter».&lt;/b&gt;</translation>
+        <translation>No es troba l&apos;eina planetsplitter de Routino. S&apos;ha fet una cerca per a «planetsplitter» i «routino-planetsplitter».</translation>
     </message>
 </context>
 <context>
@@ -17707,7 +17698,7 @@ d&apos;un track gravat amb un GPS. Utilitzar l&apos;eina interval. </translation
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="175"/>
         <source>Combine tracks.</source>
-        <translation>Combinar tracks.</translation>
+        <translation>Unir tracks.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="189"/>
@@ -18532,32 +18523,32 @@ Si introduïu &apos;word&apos; es fa una cerca de la paraula exacte. Si introdu�
     <message>
         <location filename="../helpers/IShortcutSetupDialog.ui" line="14"/>
         <source>Setup Keyboard Shortcuts</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurar les Dreceres del Teclat</translation>
     </message>
     <message>
         <location filename="../helpers/IShortcutSetupDialog.ui" line="20"/>
         <source>Filter actions...</source>
-        <translation type="unfinished"></translation>
+        <translation>Filtrar accions...</translation>
     </message>
     <message>
         <location filename="../helpers/IShortcutSetupDialog.ui" line="40"/>
         <source>Action</source>
-        <translation type="unfinished">Acció</translation>
+        <translation>Acció</translation>
     </message>
     <message>
         <location filename="../helpers/IShortcutSetupDialog.ui" line="45"/>
         <source>Shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation>Drecera</translation>
     </message>
     <message>
         <location filename="../helpers/IShortcutSetupDialog.ui" line="55"/>
         <source>Shortcut:</source>
-        <translation type="unfinished"></translation>
+        <translation>Drecera:</translation>
     </message>
     <message>
         <location filename="../helpers/IShortcutSetupDialog.ui" line="65"/>
         <source>Reset to Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Reinicia als Valors per Defecte </translation>
     </message>
 </context>
 <context>
@@ -18846,12 +18837,12 @@ Si introduïu &apos;word&apos; es fa una cerca de la paraula exacte. Si introdu�
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="550"/>
         <source>Reset Text Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Reinicia el Color del Text</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="553"/>
         <source>Drop the text color and follow the color scheme again</source>
-        <translation type="unfinished"></translation>
+        <translation>Elimina el color del text i torna a escollir-ne un altre del esquema </translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="558"/>
@@ -19004,7 +18995,7 @@ tecleja directament la data/hora que vulguis.</translation>
         <location filename="../tool/IToolShell.cpp" line="46"/>
         <source>Make sure the required packages are installed, `%1` exists and is executable.
 </source>
-        <translation>&#xa0;Assegureu-vos que els paquets necessaris estan instal·lats, `%1` existeix i es pot executar.
+        <translation> Assegureu-vos que els paquets necessaris estan instal·lats, `%1` existeix i es pot executar.
 </translation>
     </message>
     <message>
@@ -19162,22 +19153,22 @@ tecleja directament la data/hora que vulguis.</translation>
     <message>
         <location filename="../helpers/IVrtAdvisoryDialog.ui" line="14"/>
         <source>Slow rendering — overview pyramids</source>
-        <translation type="unfinished"></translation>
+        <translation>Renderitzat lent — vista general piramidal</translation>
     </message>
     <message>
         <location filename="../helpers/IVrtAdvisoryDialog.ui" line="43"/>
         <source>&lt;b&gt;Current overview situation:&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Estat de l&apos;actual vista general:&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../helpers/IVrtAdvisoryDialog.ui" line="57"/>
         <source>&lt;b&gt;After fix:&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Un cop corregit:&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../helpers/IVrtAdvisoryDialog.ui" line="81"/>
         <source>Don&apos;t show this again for this file</source>
-        <translation type="unfinished"></translation>
+        <translation>No tornar a mostrar per a aquest fitxer</translation>
     </message>
 </context>
 <context>

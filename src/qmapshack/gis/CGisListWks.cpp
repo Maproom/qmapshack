@@ -139,7 +139,8 @@ CGisListWks::CGisListWks(QWidget* parent) : QTreeWidget(parent) {
   actionSaveAs = addAction(QIcon("://icons/SaveGISAs.svgt"), tr("Save as..."), this, &CGisListWks::slotSaveAsProject);
   actionSaveAsStrict = addAction(QIcon("://icons/SaveGISAsGpx11.svgt"), tr("Save as GPX 1.1 w/o ext..."), this,
                                  &CGisListWks::slotSaveAsStrictGpx11Project);
-  actionSyncWksDev = addAction(QIcon("://icons/Device.svgt"), tr("Send to Devices"), this, &CGisListWks::slotSyncWksDev);
+  actionSyncWksDev =
+      addAction(QIcon("://icons/Device.svgt"), tr("Send to Devices"), this, &CGisListWks::slotSyncWksDev);
   actionSyncDB =
       addAction(QIcon("://icons/DatabaseSync.svgt"), tr("Sync. with Database"), this, &CGisListWks::slotSyncDB);
   actionCloseProj = addAction(QIcon("://icons/Close.svgt"), tr("Close"), this, &CGisListWks::slotCloseProject);
@@ -162,7 +163,8 @@ CGisListWks::CGisListWks(QWidget* parent) : QTreeWidget(parent) {
   actionRangeTrk = addAction(QIcon("://icons/SelectRange.svgt"), tr("Select Range"), this, &CGisListWks::slotRangeTrk);
   actionEditTrk = addAction(QIcon("://icons/LineMove.svgt"), tr("Edit Track Points"), this, &CGisListWks::slotEditTrk);
   actionReverseTrk = addAction(QIcon("://icons/Reverse.svgt"), tr("Reverse Track"), this, &CGisListWks::slotReverseTrk);
-  actionCombineTrk = addAction(QIcon("://icons/Combine.svgt"), tr("Combine Tracks"), this, &CGisListWks::slotCombineTrk);
+  actionCombineTrk =
+      addAction(QIcon("://icons/Combine.svgt"), tr("Combine Tracks"), this, &CGisListWks::slotCombineTrk);
   actionEleWptTrk =
       addAction(QIcon("://icons/SetEle.svgt"), tr("Replace Elevation by DEM"), this, &CGisListWks::slotEleWptTrk);
   actionCopyTrkWithWpt = addAction(QIcon("://icons/CopyTrkWithWpt.svgt"), tr("Copy Track with Waypoints"), this,
@@ -766,17 +768,19 @@ void CGisListWks::slotSaveWorkspace() {
     return;
   }
 
-  QSqlQuery query(db);
-  QUERY_RUN("DELETE FROM workspace", return)
-
   qDebug() << "slotSaveWorkspace()";
 
+  // No progress dialog and no other event loop spinning in here: this runs from
+  // QApplication::aboutToQuit, where processEvents() delivers a still queued quit event and
+  // re-enters QCoreApplication::exit().
+  db.transaction();
+
+  QSqlQuery query(db);
+  QUERY_RUN("DELETE FROM workspace", db.rollback(); return)
+
+  bool complete = true;
   const int total = topLevelItemCount();
-  PROGRESS_SETUP(tr("Saving workspace. Please wait."), 0, total, this);
-
   for (int i = 0; i < total; i++) {
-    PROGRESS(i, return);
-
     IGisProject* project = dynamic_cast<IGisProject*>(topLevelItem(i));
     if (nullptr == project) {
       continue;
@@ -801,12 +805,22 @@ void CGisListWks::slotSaveWorkspace() {
     query.bindValue(":changed", project->isChanged());
     query.bindValue(":visible", project->isVisible());
     query.bindValue(":data", data);
-    QUERY_EXEC(continue);
+    QUERY_EXEC(complete = false; continue);
   }
 
   query.prepare("UPDATE userfocus set focus=:focus");
   query.bindValue(":focus", IGisProject::getUserFocus());
   QUERY_EXEC();
+
+  // The delete and the re-insert must land together, else an abort leaves the workspace empty.
+  // A rollback keeps the previously saved workspace, which beats storing an incomplete one.
+  if (!complete) {
+    qWarning() << "Workspace incompletely written. Keeping the previously saved one.";
+    db.rollback();
+  } else if (!db.commit()) {
+    qWarning() << "Failed to commit workspace:" << db.lastError();
+    db.rollback();
+  }
 
   if (saveEvery) {
     QTimer::singleShot(saveEvery * 60000, this, &CGisListWks::slotSaveWorkspace);

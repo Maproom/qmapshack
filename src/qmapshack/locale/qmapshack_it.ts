@@ -2896,10 +2896,9 @@ Questo filtro è progettato per rilevare e nascondere i nodi che soddisfano ques
 <context>
     <name>CGisListWks</name>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="113"/>
         <source>Edit..</source>
         <translatorcomment>L&apos;originale con .. mi sembra errato</translatorcomment>
-        <translation>Modifica...</translation>
+        <translation type="vanished">Modifica...</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="115"/>
@@ -3155,6 +3154,36 @@ Questo filtro è progettato per rilevare e nascondere i nodi che soddisfano ques
         <location filename="../gis/CGisListWks.cpp" line="202"/>
         <source>Edit Area Points</source>
         <translation>Modifica punti dell&apos;area</translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListWks.cpp" line="241"/>
+        <source>Workspace: Project</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListWks.cpp" line="245"/>
+        <source>Workspace: Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListWks.cpp" line="246"/>
+        <source>Workspace: Track</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListWks.cpp" line="249"/>
+        <source>Workspace: Waypoint</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListWks.cpp" line="252"/>
+        <source>Workspace: Route</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListWks.cpp" line="254"/>
+        <source>Workspace: Area</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="1004"/>
@@ -8343,6 +8372,12 @@ Canceled by user&apos;s request.
 </context>
 <context>
     <name>CShortcutSetupDialog</name>
+    <message>
+        <location filename="../helpers/CShortcutSetupDialog.cpp" line="134"/>
+        <location filename="../helpers/CShortcutSetupDialog.cpp" line="137"/>
+        <source>%1 (%2)</source>
+        <translation type="unfinished"></translation>
+    </message>
     <message>
         <location filename="../helpers/CShortcutSetupDialog.cpp" line="126"/>
         <source>Shortcut already in use</source>
@@ -18529,6 +18564,11 @@ Una parola viene cercata come corrispondenza (come fosse &apos;*qualcosacosa*&ap
     <message>
         <location filename="../helpers/IShortcutSetupDialog.ui" line="20"/>
         <source>Filter actions...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helpers/IShortcutSetupDialog.ui" line="40"/>
+        <source>Category</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

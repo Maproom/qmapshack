@@ -20,9 +20,11 @@
 #ifndef CGISLISTWKS_H
 #define CGISLISTWKS_H
 
+#include <QMap>
 #include <QPointer>
 #include <QSqlDatabase>
 #include <QTreeWidget>
+#include <initializer_list>
 
 #include "gis/prj/IGisProject.h"
 #include "gis/trk/CTrackData.h"
@@ -59,6 +61,9 @@ class CGisListWks : public QTreeWidget {
 
   bool hasDeviceSupport() const { return deviceWatcher != nullptr; }
 
+  /// all context-menu actions of this widget, for keyboard shortcut configuration
+  QList<QAction*> shortcutActions() const;
+
  public slots:
   void slotLoadWorkspace();
   void slotCopyProject();
@@ -86,8 +91,10 @@ class CGisListWks : public QTreeWidget {
   void slotItemDoubleClicked(QTreeWidgetItem* item, int);
   void slotItemChanged(QTreeWidgetItem* item, int column);
   void slotEditItem();
+  void slotEdit();
   void slotTagItem();
   void slotDeleteItem();
+  void slotDelete();
   void slotBubbleWpt();
   void slotNogoItem();
   void slotDelRadiusWpt();
@@ -114,6 +121,7 @@ class CGisListWks : public QTreeWidget {
   void slotCloseAllProjects();
   void slotGeoSearch(bool on);
   void slotCopyItem();
+  void slotCopy();
   void slotSyncWksDev();
   void slotSyncDevWks();
   void slotRteFromWpt();
@@ -132,6 +140,68 @@ class CGisListWks : public QTreeWidget {
   void slotToArea();
 
  private:
+  /** @brief The context menu matching the current selection, as decided by updateActionState() */
+  enum menu_e {
+    eMenuNone,
+    eMenuProjectWks,
+    eMenuProjectDev,
+    eMenuProjectTrash,
+    eMenuItemTrk,
+    eMenuItemWpt,
+    eMenuItemRte,
+    eMenuItemOvl,
+    eMenuItemMulti
+  };
+
+  /**
+     @brief Bring all actions in sync with the current selection
+
+     @return the context menu for the selection
+   */
+  menu_e updateActionState();
+
+  /** @brief Category of an action */
+  enum category_e { eCategoryProject, eCategoryItem, eCategoryTrack, eCategoryWaypoint, eCategoryRoute, eCategoryArea };
+
+  /** @brief The translated name for a category */
+  QString categoryName(category_e category) const;
+
+  /** @brief What the selection holds, which decides what an action can apply to */
+  enum selection_e { eSelectionNone, eSelectionProjects, eSelectionItems, eSelectionMixed };
+
+  selection_e selectionType() const;
+
+  /** @brief The one selected item, or nullptr if the selection does not hold exactly one */
+  QTreeWidgetItem* singleSelectedItem() const;
+
+  /** @brief Disable every action, then enable the listed ones */
+  void enableActionsOnly(const std::initializer_list<QAction*>& enabled);
+
+  /**
+     @brief Disable every action outside the given categories
+   */
+  void disableActionsOutside(const std::initializer_list<category_e>& categories);
+
+  /** @brief The actions for a project */
+  QList<QAction*> projectActions() const;
+
+  /**
+     @brief The projects an action applies to
+
+     Either the selected projects, or the projects the selected items belong to
+   */
+  QList<IGisProject*> targetProjects() const;
+
+  /** @brief The one project an action applies to, or nullptr if the selection does not resolve to exactly one */
+  IGisProject* singleTargetProject() const;
+
+  /**
+     @brief Bring the project actions in sync with the projects they would act on
+
+     @return the project menu those projects ask for
+   */
+  menu_e updateProjectActions(const QList<IGisProject*>& projects);
+
   void configDB();
   void initDB();
   void migrateDB(int version);
@@ -140,15 +210,24 @@ class CGisListWks : public QTreeWidget {
   void migrateDB3to4();
   void migrateDB4to5();
   void setVisibilityOnMap(bool visible);
-  QAction* addSortAction(QObject* parent, QActionGroup* actionGroup, const QString& icon, const QString& text,
-                         IGisProject::sorting_folder_e mode);
+  QAction* addSortAction(const QString& objName, QObject* parent, QActionGroup* actionGroup, const QString& icon,
+                         const QString& text, IGisProject::sorting_folder_e mode, category_e category);
 
   template <typename Func>
-  QAction* addAction(const QIcon& icon, const QString& name, QObject* parent, Func slot) {
+  QAction* addAction(const QString& objName, const QIcon& icon, const QString& name, QObject* parent, Func slot,
+                     category_e category) {
     QAction* action = new QAction(icon, name, parent);
+    action->setObjectName(objName);
+    // register with the widget so a user-assigned shortcut can actually trigger it,
+    // independent of the transient context menu the action is also shown in
+    QWidget::addAction(action);
     connect(action, &QAction::triggered, this, slot);
+    tagCategory(action, category);
     return action;
   }
+
+  /** @brief Record the action's category, for the shortcut setup dialog and for categoryActions */
+  void tagCategory(QAction* action, category_e category);
 
   void showMenuProjectWks(const QPoint& p);
   void showMenuProjectDev(const QPoint& p);
@@ -177,6 +256,8 @@ class CGisListWks : public QTreeWidget {
 
   QSqlDatabase db;
 
+  QMap<category_e, QList<QAction*>> categoryActions;
+
   QActionGroup* actionGroupSort;
   QAction* actionSave;
   QAction* actionSaveAs;
@@ -184,8 +265,6 @@ class CGisListWks : public QTreeWidget {
   QAction* actionAutoSave;
   QAction* actionUserFocusPrj;
   QAction* actionAutoSyncToDev;
-  QAction* actionCopyPrj;
-  QAction* actionEditPrj;
   QAction* actionCloseProj;
   QAction* actionShowOnMap;
   QAction* actionHideFrMap;
@@ -195,7 +274,6 @@ class CGisListWks : public QTreeWidget {
   QAction* actionSortByName;
   QAction* actionSortByRating;
   QAction* actionFilterProject;
-  QAction* actionDelProj;
   QAction* actionSyncDevWks;
   QAction* actionEditDetails;
   QAction* actionTagItem;
@@ -203,7 +281,6 @@ class CGisListWks : public QTreeWidget {
   QAction* actionDelete;
   QAction* actionBubbleWpt;
   QAction* actionDelRadiusWpt;
-  QAction* actionNogoWpt;
   QAction* actionEditRadiusWpt;
   QAction* actionProjWpt;
   QAction* actionMoveWpt;
@@ -219,7 +296,6 @@ class CGisListWks : public QTreeWidget {
   QAction* actionCalcRte;
   QAction* actionResetRte;
   QAction* actionEditRte;
-  QAction* actionNogoRte;
   QAction* actionReverseRte;
   QAction* actionRte2Trk;
   QAction* actionEditArea;

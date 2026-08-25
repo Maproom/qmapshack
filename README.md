@@ -77,9 +77,13 @@ git clone https://github.com/Maproom/qmapshack.git QMapShack
 cd QMapShack && git checkout dev && cd ..
 mkdir build_QMapShack && cd build_QMapShack
 cmake ../QMapShack
-cmake --build . --target qmapshack -j$(nproc)
+cmake --build . -j$(nproc)
 sudo cmake --install .
 ```
+
+This builds and installs `qmapshack`, `qmaptool`, `qmt_rgb2pct` and `qmt_map2jnx`. Configure with
+`-DBUILD_QMAPTOOL=OFF` to leave out the three QMapTool binaries, or build a single binary with
+`--target qmapshack` — note that `cmake --install` then fails on the binaries that were not built.
 
 Use `ccmake .` or `cmake-gui .` in the build directory to review optional build settings before compiling.
 
@@ -87,7 +91,7 @@ Alternatively, use the shipped CMake presets — no manual build directory, no o
 
 ```bash
 cmake --preset linux-debug
-cmake --build --preset linux-debug --target qmapshack -j$(nproc)
+cmake --build --preset linux-debug -j$(nproc)
 ```
 
 See [README_PRESETS.md](README_PRESETS.md) for the full list of presets and how to add your own.
@@ -96,7 +100,7 @@ See [README_PRESETS.md](README_PRESETS.md) for the full list of presets and how 
 
 ```bash
 cd QMapShack && git pull
-cd ../build_QMapShack && cmake --build . --target qmapshack -j$(nproc)
+cd ../build_QMapShack && cmake --build . -j$(nproc)
 ```
 
 <details>

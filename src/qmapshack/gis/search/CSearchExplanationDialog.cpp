@@ -71,8 +71,8 @@ CSearchExplanationDialog::CSearchExplanationDialog(QWidget* parent) {
   explanation += "</ul>";
   explanation += tr("<p>You can write dates in the following formats:</p>");
   explanation += "<ul>";
-  explanation += "<li>" + QLocale::system().dateTimeFormat(QLocale::LongFormat) + "</li>";
-  explanation += "<li>" + QLocale::system().dateTimeFormat(QLocale::ShortFormat) + "</li>";
+  explanation += "<li>" + QLocale().dateTimeFormat(QLocale::LongFormat) + "</li>";
+  explanation += "<li>" + QLocale().dateTimeFormat(QLocale::ShortFormat) + "</li>";
   explanation += "<li>" + QLocale::c().dateTimeFormat(QLocale::LongFormat) + "</li>";
   explanation += "<li>" + QLocale::c().dateTimeFormat(QLocale::ShortFormat) + "</li>";
   explanation += "</ul>";

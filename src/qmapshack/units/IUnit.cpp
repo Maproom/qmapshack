@@ -679,7 +679,9 @@ QString IUnit::datetime2string(const QDateTime& time, time_format_e format, cons
   }
 
   const QDateTime& tmp = time.toTimeZone(tz);
-  const QLocale& locale = QLocale::system();
+  // QLocale(), not QLocale::system(): --locale has to reach the timestamps too. Without the option
+  // the default locale is the system one, so nothing changes for a normal run.
+  const QLocale& locale = QLocale();
 
   switch (format) {
     case eTimeFormatLong:
@@ -692,7 +694,7 @@ QString IUnit::datetime2string(const QDateTime& time, time_format_e format, cons
       return tmp.toString(Qt::ISODate);
   }
 
-  return locale.toString(tmp, QLocale::system().dateTimeFormat(QLocale::LongFormat));
+  return locale.toString(tmp, locale.dateTimeFormat(QLocale::LongFormat));
 }
 
 QByteArray IUnit::pos2timezone(const QPointF& pos) {

@@ -85,11 +85,11 @@ CSearch::CSearch(QString searchstring) : searchText(searchstring) {
 
     // Try if it is a time. Do so first, since this is the most exclusive
     const static QList<QString> timeFormats = {
-        QLocale::system().timeFormat(QLocale::LongFormat), QLocale::system().timeFormat(QLocale::ShortFormat),
+        QLocale().timeFormat(QLocale::LongFormat), QLocale().timeFormat(QLocale::ShortFormat),
         QLocale::c().timeFormat(QLocale::LongFormat), QLocale::c().timeFormat(QLocale::ShortFormat)};
 
     for (const QString& tf : timeFormats) {
-      const QTime& time1a = QLocale::system().toTime(filterValueStringFirstPart, tf);
+      const QTime& time1a = QLocale().toTime(filterValueStringFirstPart, tf);
       if (time1a.isValid()) {
         filterValue.value1 = time1a.msecsSinceStartOfDay() / 1000;
         filterValue.str1 = "SsE";
@@ -102,7 +102,7 @@ CSearch::CSearch(QString searchstring) : searchText(searchstring) {
       }
 
       if (time1a.isValid() || time1b.isValid()) {
-        const QTime& time2a = QLocale::system().toTime(filterValueStringSecondPart, tf);
+        const QTime& time2a = QLocale().toTime(filterValueStringSecondPart, tf);
         if (time2a.isValid()) {
           filterValue.value2 = time2a.msecsSinceStartOfDay() / 1000;
           filterValue.str2 = "SsE";
@@ -120,13 +120,13 @@ CSearch::CSearch(QString searchstring) : searchText(searchstring) {
     if (filterValue.toString().isEmpty()) {
       // Try if it is a date
       const static QList<QString> dateFormats = {
-          QLocale::system().dateTimeFormat(QLocale::LongFormat), QLocale::system().dateTimeFormat(QLocale::ShortFormat),
-          QLocale::c().dateTimeFormat(QLocale::LongFormat),      QLocale::c().dateTimeFormat(QLocale::ShortFormat),
-          QLocale::system().dateFormat(QLocale::LongFormat),     QLocale::system().dateFormat(QLocale::ShortFormat),
-          QLocale::c().dateFormat(QLocale::LongFormat),          QLocale::c().dateFormat(QLocale::ShortFormat)};
+          QLocale().dateTimeFormat(QLocale::LongFormat),    QLocale().dateTimeFormat(QLocale::ShortFormat),
+          QLocale::c().dateTimeFormat(QLocale::LongFormat), QLocale::c().dateTimeFormat(QLocale::ShortFormat),
+          QLocale().dateFormat(QLocale::LongFormat),        QLocale().dateFormat(QLocale::ShortFormat),
+          QLocale::c().dateFormat(QLocale::LongFormat),     QLocale::c().dateFormat(QLocale::ShortFormat)};
 
       for (const QString& df : dateFormats) {
-        const QDateTime& time1a = QLocale::system().toDateTime(filterValueStringFirstPart, df);
+        const QDateTime& time1a = QLocale().toDateTime(filterValueStringFirstPart, df);
         if (time1a.isValid()) {
           filterValue.value1 = time1a.toSecsSinceEpoch();
           filterValue.str1 = "SsE";
@@ -139,7 +139,7 @@ CSearch::CSearch(QString searchstring) : searchText(searchstring) {
         }
 
         if (time1a.isValid() || time1b.isValid()) {
-          const QDateTime& time2a = QLocale::system().toDateTime(filterValueStringSecondPart, df);
+          const QDateTime& time2a = QLocale().toDateTime(filterValueStringSecondPart, df);
           if (time2a.isValid()) {
             filterValue.value2 = time2a.toSecsSinceEpoch();
             filterValue.str2 = "SsE";

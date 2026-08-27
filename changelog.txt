@@ -2,6 +2,7 @@ V1.XX.X
 [QMS-1212] Update macOS build scripts
 [QMS-1215] Support MBTiles maps via GDAL's VRT driver on macOS
 [QMS-1221] Fix: Crash on exit leaves the workspace empty
+[QMS-1223] Fix: Crash when a map view is closed right after it was opened
 
 V1.21.0
 [QMS-585] Preserve extra XML namespaces in GPX files

@@ -215,7 +215,7 @@ void CVrtAdvisoryDialog::renderThemedContent() {
   }
 
   // SI (base-1000) so the figure matches `du --si`, not the 1024-based IEC default.
-  const QString sizeStr = QLocale::system().formattedDataSize(advice_.diskUsageBytes, 2, QLocale::DataSizeSIFormat);
+  const QString sizeStr = QLocale().formattedDataSize(advice_.diskUsageBytes, 2, QLocale::DataSizeSIFormat);
   const QString usage =
       advice_.diskUsageIsEstimate ? tr("Estimated disk usage: %1.").arg(sizeStr) : tr("Disk usage: %1.").arg(sizeStr);
   // With nothing to fix there are no build/replace parts, so state the usage on its own.

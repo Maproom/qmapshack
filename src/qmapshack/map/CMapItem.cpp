@@ -201,6 +201,11 @@ void CMapItem::deactivate() {
 bool CMapItem::activate() {
   QMutexLocker lock(&mutexActiveMaps);
 
+  // Activating an already active map has to take the setup widget out of the tree first. It belongs
+  // to the map file object, and setItemWidget() registered it with the view: deleting it while the
+  // view still holds it leaves a dangling index widget, which the next layout hides. deactivate()
+  // does this; activate() has to as well, or a second activation corrupts the view.
+  showChildren(false);
   delete mapfile;
 
   // load map by suffix

@@ -21,6 +21,7 @@
 #include <QtWidgets>
 
 #include "CMainWindow.h"
+#include "misc.h"
 #include "poi/CPoiDraw.h"
 #include "svgticon/CSvgtIcon.h"
 
@@ -52,23 +53,29 @@ void CPoiPathSetup::slotItemSelectionChanged() {
 }
 
 void CPoiPathSetup::accept() {
-  paths.clear();
-  for (int i = 0; i < listWidget->count(); i++) {
-    QListWidgetItem* item = listWidget->item(i);
-    paths << item->text();
-  }
+  paths = currentPaths();
 
   QDialog::accept();
 }
 
-void CPoiPathSetup::slotAddPath() {
-  QString path = QFileDialog::getExistingDirectory(this, tr("Select POI file path..."), QDir::homePath());
-  if (!path.isEmpty()) {
-    if (!paths.contains(path)) {
-      QListWidgetItem* item = new QListWidgetItem(listWidget);
-      item->setText(path);
-    }
+QStringList CPoiPathSetup::currentPaths() const {
+  QStringList paths;
+  for (int i = 0; i < listWidget->count(); i++) {
+    paths << listWidget->item(i)->text();
   }
+  return paths;
+}
+
+void CPoiPathSetup::slotAddPath() {
+  // keep the path as the user picked it, only cleaned. Comparing resolves it later on.
+  const QString& path =
+      cleanPath(QFileDialog::getExistingDirectory(this, tr("Select POI file path..."), QDir::homePath()));
+  if (path.isEmpty() || containsPath(currentPaths(), path)) {
+    return;
+  }
+
+  QListWidgetItem* item = new QListWidgetItem(listWidget);
+  item->setText(path);
 }
 
 void CPoiPathSetup::slotDelPath() {

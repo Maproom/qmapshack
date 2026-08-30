@@ -40,6 +40,12 @@ class CMapPathSetup : public QDialog, private Ui::IMapPathSetup {
   void slotMapHonk();
 
  private:
+  /**
+   * @brief Get the paths currently listed in the dialog
+   * @return
+   */
+  QStringList currentPaths() const;
+
   QStringList& paths;
   QString& pathCache;
 };

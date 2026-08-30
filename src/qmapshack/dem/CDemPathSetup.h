@@ -38,6 +38,12 @@ class CDemPathSetup : public QDialog, private Ui::IDemPathSetup {
   void slotItemSelectionChanged();
 
  private:
+  /**
+   * @brief Get the paths currently listed in the dialog
+   * @return
+   */
+  QStringList currentPaths() const;
+
   QStringList& paths;
 };
 

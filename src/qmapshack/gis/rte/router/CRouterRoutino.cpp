@@ -30,6 +30,7 @@
 #include "gis/rte/router/routino/CRouterRoutinoPathSetup.h"
 #include "helpers/CProgressDialog.h"
 #include "helpers/CSettings.h"
+#include "misc.h"
 #include "setup/IAppSetup.h"
 #include "svgticon/CSvgtIcon.h"
 
@@ -204,11 +205,11 @@ QString CRouterRoutino::getOptions() {
 }
 
 void CRouterRoutino::setupPath(const QString& path) {
-  if (dbPaths.contains(path)) {
+  if (path.isEmpty() || containsPath(dbPaths, path)) {
     return;
   }
 
-  dbPaths << path;
+  dbPaths << cleanPath(path);
   buildDatabaseList();
   updateHelpText();
 }

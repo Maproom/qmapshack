@@ -21,6 +21,7 @@
 #include <QtWidgets>
 
 #include "CMainWindow.h"
+#include "misc.h"
 #include "svgticon/CSvgtIcon.h"
 
 CRouterRoutinoPathSetup::CRouterRoutinoPathSetup(QStringList& paths)
@@ -49,12 +50,24 @@ void CRouterRoutinoPathSetup::slotItemSelectionChanged() {
   toolDelete->setEnabled(!items.isEmpty());
 }
 
-void CRouterRoutinoPathSetup::slotAddPath() {
-  QString path = QFileDialog::getExistingDirectory(this, tr("Select routing data file path..."), QDir::homePath());
-  if (!path.isEmpty()) {
-    QListWidgetItem* item = new QListWidgetItem(listWidget);
-    item->setText(path);
+QStringList CRouterRoutinoPathSetup::currentPaths() const {
+  QStringList paths;
+  for (int i = 0; i < listWidget->count(); i++) {
+    paths << listWidget->item(i)->text();
   }
+  return paths;
+}
+
+void CRouterRoutinoPathSetup::slotAddPath() {
+  // keep the path as the user picked it, only cleaned. Comparing resolves it later on.
+  const QString& path =
+      cleanPath(QFileDialog::getExistingDirectory(this, tr("Select routing data file path..."), QDir::homePath()));
+  if (path.isEmpty() || containsPath(currentPaths(), path)) {
+    return;
+  }
+
+  QListWidgetItem* item = new QListWidgetItem(listWidget);
+  item->setText(path);
 }
 
 void CRouterRoutinoPathSetup::slotDelPath() {
@@ -63,11 +76,7 @@ void CRouterRoutinoPathSetup::slotDelPath() {
 }
 
 void CRouterRoutinoPathSetup::accept() {
-  paths.clear();
-  for (int i = 0; i < listWidget->count(); i++) {
-    QListWidgetItem* item = listWidget->item(i);
-    paths << item->text();
-  }
+  paths = currentPaths();
 
   QDialog::accept();
 }

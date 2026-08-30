@@ -96,8 +96,8 @@ void CMapDraw::setupMapPath() {
 void CMapDraw::setupMapPath(const QString& path) {
   qDebug() << "CMapDraw::setupMapPath(path)";
   QStringList paths(mapPaths);
-  if (!mapPaths.contains(path)) {
-    paths << path;
+  if (!containsPath(mapPaths, path)) {
+    paths << cleanPath(path);
   }
   setupMapPath(paths);
 }
@@ -277,6 +277,14 @@ void CMapDraw::loadMapList(QSettings& cfg) {
   QMutexLocker lock(&CMapItem::mutexActiveMaps);
   mapList->clear();
 
+  // A map belongs to a registered path if both resolve to the same directory. Resolve the
+  // registered paths right here: a path that could not be resolved when it was read from the
+  // configuration must not lose its maps once it is back.
+  QSet<QString> registeredPaths;
+  for (const QString& path : std::as_const(mapPaths)) {
+    registeredPaths << resolvedPath(path);
+  }
+
   // create a temp list of all maps in the paths
   QMap<QString, CMapItem*> mapsFound;
   for (const QString& path : std::as_const(mapPaths)) {
@@ -314,7 +322,7 @@ void CMapDraw::loadMapList(QSettings& cfg) {
     // If the map path is not part of the map paths list also delete
     // the file as it is no longer part of the used maps.
     QFileInfo fi(map->getFilename());
-    if (key != map->getKey() || !mapPaths.contains(fi.absolutePath())) {
+    if (key != map->getKey() || !registeredPaths.contains(resolvedPath(fi.absolutePath()))) {
       delete map;
       continue;
     }

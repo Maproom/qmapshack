@@ -23,6 +23,7 @@
 #include "CMainWindow.h"
 #include "map/CMapDraw.h"
 #include "map/CMapList.h"
+#include "misc.h"
 #include "svgticon/CSvgtIcon.h"
 
 CMapPathSetup::CMapPathSetup(QStringList& paths, QString& pathCache)
@@ -55,14 +56,23 @@ void CMapPathSetup::slotItemSelectionChanged() {
   toolDelete->setEnabled(!items.isEmpty());
 }
 
-void CMapPathSetup::slotAddPath() {
-  QString path = QFileDialog::getExistingDirectory(this, tr("Select map path..."), QDir::homePath());
-  if (!path.isEmpty()) {
-    if (!paths.contains(path)) {
-      QListWidgetItem* item = new QListWidgetItem(listWidget);
-      item->setText(path);
-    }
+QStringList CMapPathSetup::currentPaths() const {
+  QStringList paths;
+  for (int i = 0; i < listWidget->count(); i++) {
+    paths << listWidget->item(i)->text();
   }
+  return paths;
+}
+
+void CMapPathSetup::slotAddPath() {
+  // keep the path as the user picked it, only cleaned. Comparing resolves it later on.
+  const QString& path = cleanPath(QFileDialog::getExistingDirectory(this, tr("Select map path..."), QDir::homePath()));
+  if (path.isEmpty() || containsPath(currentPaths(), path)) {
+    return;
+  }
+
+  QListWidgetItem* item = new QListWidgetItem(listWidget);
+  item->setText(path);
 }
 
 void CMapPathSetup::slotDelPath() {
@@ -85,11 +95,7 @@ void CMapPathSetup::slotMapHonk() {
 }
 
 void CMapPathSetup::accept() {
-  paths.clear();
-  for (int i = 0; i < listWidget->count(); i++) {
-    QListWidgetItem* item = listWidget->item(i);
-    paths << item->text();
-  }
+  paths = currentPaths();
 
   pathCache = QDir(labelCacheRoot->text()).absolutePath();
 

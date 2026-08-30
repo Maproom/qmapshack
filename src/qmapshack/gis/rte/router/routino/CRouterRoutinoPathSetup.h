@@ -38,6 +38,12 @@ class CRouterRoutinoPathSetup : public QDialog, private Ui::IRouterRoutinoPathSe
   void slotItemSelectionChanged();
 
  private:
+  /**
+   * @brief Get the paths currently listed in the dialog
+   * @return
+   */
+  QStringList currentPaths() const;
+
   QStringList& paths;
 };
 

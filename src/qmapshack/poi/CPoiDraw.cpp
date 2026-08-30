@@ -97,8 +97,8 @@ void CPoiDraw::setupPoiPath() {
 
 void CPoiDraw::setupPoiPath(const QString& path) {
   QStringList paths(poiPaths);
-  if (!poiPaths.contains(path)) {
-    paths << path;
+  if (!containsPath(poiPaths, path)) {
+    paths << cleanPath(path);
   }
   setupPoiPath(paths);
 }

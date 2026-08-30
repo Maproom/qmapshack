@@ -20,7 +20,9 @@
 #define MISC_H
 
 #include <QCollator>
+#include <QDir>
 #include <QFile>
+#include <QFileInfo>
 #include <QMessageBox>
 #include <algorithm>
 #include <initializer_list>
@@ -57,5 +59,56 @@ inline void openFileCheckSuccess(QIODeviceBase::OpenMode mode, QFile& file) {
 }
 
 inline QString toRichText(const QString& text) { return QString("<div>%1</div").arg(text); }
+
+/**
+   @brief Bring a path into the form used for storage and display
+
+   Removes a trailing slash, redundant separators and "." / ".." elements. The path stays
+   the one the user picked. A symbolic link is not resolved, so a registered path remains
+   recognizable and keeps pointing through the link.
+
+   @param path  the path to clean
+   @return the cleaned path
+ */
+inline QString cleanPath(const QString& path) { return path.isEmpty() ? path : QDir::cleanPath(path); }
+
+/**
+   @brief Bring a path into the form used for comparison
+
+   A path picked with QFileDialog and the same path built from a directory listing can
+   denote one directory and still differ as strings: by a trailing slash, by a symbolic
+   link (`/var` vs. `/private/var` on macOS) or by their Unicode normalization (NFC vs. NFD
+   on macOS). Resolving both sides removes all three differences.
+
+   A path that does not exist - an unplugged drive - cannot be resolved and is only cleaned.
+   Both sides of a comparison have to be resolved at the same time therefore. Else a path
+   that became resolvable in between will no longer match.
+
+   @param path  the path to resolve
+   @return the resolved path, or the cleaned path if it does not exist (yet)
+ */
+inline QString resolvedPath(const QString& path) {
+  if (path.isEmpty()) {
+    return path;
+  }
+  const QString& resolved = QFileInfo(path).canonicalFilePath();
+  return resolved.isEmpty() ? QDir::cleanPath(path) : resolved;
+}
+
+/**
+   @brief Test if a path is registered already
+
+   Paths are compared by their resolved form. Thus a path and a symbolic link to it count
+   as the same registration and the directory's content is not listed twice.
+
+   @param paths  the registered paths
+   @param path   the path to look for
+   @return true if path denotes one of the registered paths
+ */
+inline bool containsPath(const QStringList& paths, const QString& path) {
+  const QString& resolved = resolvedPath(path);
+  return std::any_of(paths.begin(), paths.end(),
+                     [&resolved](const QString& other) { return resolvedPath(other) == resolved; });
+}
 
 #endif  // MISC_H

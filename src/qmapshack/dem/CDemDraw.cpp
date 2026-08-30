@@ -89,8 +89,8 @@ void CDemDraw::setupDemPath() {
 void CDemDraw::setupDemPath(const QString& path) {
   qDebug() << "CDemDraw::setupDemPath(path)";
   QStringList paths(demPaths);
-  if (!demPaths.contains(path)) {
-    paths << path;
+  if (!containsPath(demPaths, path)) {
+    paths << cleanPath(path);
   }
   setupDemPath(paths);
 }
@@ -163,6 +163,14 @@ void CDemDraw::loadDemList(QSettings& cfg) {
   QMutexLocker lock(&CDemItem::mutexActiveDems);
   demList->clear();
 
+  // A DEM belongs to a registered path if both resolve to the same directory. Resolve the
+  // registered paths right here: a path that could not be resolved when it was read from the
+  // configuration must not lose its DEM once it is back.
+  QSet<QString> registeredPaths;
+  for (const QString& path : std::as_const(demPaths)) {
+    registeredPaths << resolvedPath(path);
+  }
+
   // create a temp list of all dems in the paths
   QMap<QString, CDemItem*> demsFound;
   for (const QString& path : std::as_const(demPaths)) {
@@ -205,7 +213,8 @@ void CDemDraw::loadDemList(QSettings& cfg) {
     // If neither the long nor short key matches, the content changed.
     // If the dem path is not part of the dem paths list also delete it.
     QFileInfo fi(dem->getFilename());
-    if ((key != dem->getKey() && key != dem->getShortKey()) || !demPaths.contains(fi.absolutePath())) {
+    if ((key != dem->getKey() && key != dem->getShortKey()) ||
+        !registeredPaths.contains(resolvedPath(fi.absolutePath()))) {
       delete dem;
       continue;
     }

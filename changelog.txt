@@ -5,6 +5,7 @@ V1.XX.X
 [QMS-1223] Fix: Crash when a map view is closed right after it was opened
 [QMS-1224] Fix: --locale switches the strings but not date and number formats
 [QMS-1227] Fix: Crash after activating a map that is already active
+[QMS-1229] Fix: Invalid and/or inaccurate elevation shading
 [QMS-1230] Fix: Configured DEM and MAPS are not preserved after a restart
 
 V1.21.0

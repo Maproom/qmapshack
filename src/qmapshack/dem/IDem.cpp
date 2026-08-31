@@ -384,7 +384,7 @@ quint8 IDem::slopeColorByte(qreal slope, const qreal* slopeStepTable) const {
 }
 
 qreal IDem::maxElevationInWindow(const float* win) const {
-  qreal meters = -2.0;
+  qreal meters = -12000.0; // lowest point on earth
   for (unsigned int i = 0; i < eWinsize3x3; i++) {
     if ((!hasNoData || win[i] != noData) && win[i] > meters) {
       meters = win[i];
@@ -402,11 +402,11 @@ qreal IDem::maxElevationInWindow(const float* win) const {
 quint8 IDem::elevationLimitByte(qreal elevation) const { return (elevation >= getElevationLimit()) ? 1 : 0; }
 
 quint8 IDem::elevationShadeByte(qreal elevation, int limitLow, int limitHi) const {
-  if (elevation < limitLow) {
+  if (elevation <= limitLow + 0.01) {
     return 0;
   } else if (elevation < limitHi) {
     const qreal relLimit = (elevation - limitLow) / (limitHi - limitLow);
-    return 1 + relLimit * 253;
+    return 1 + qRound(relLimit * 253);
   } else {
     return 255;
   }

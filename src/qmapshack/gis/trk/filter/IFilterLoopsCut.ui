@@ -34,6 +34,9 @@
      <property name="text">
       <string>Cut track when loop length is greater than</string>
      </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
     </widget>
    </item>
    <item row="1" column="0" rowspan="3">

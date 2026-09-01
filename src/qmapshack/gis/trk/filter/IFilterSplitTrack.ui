@@ -131,6 +131,9 @@
        <property name="text">
         <string>Split track into multiple shorter tracks</string>
        </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
       </widget>
      </item>
      <item>

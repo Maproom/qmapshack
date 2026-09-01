@@ -58,7 +58,9 @@ template <typename filter>
 static void addFilters(QTreeWidgetItem* itemGroup, CGisItemTrk& trk, qint32& minWidth) {
   QTreeWidgetItem* item = new QTreeWidgetItem(itemGroup);
   itemGroup->treeWidget()->setItemWidget(item, /* column = */ 0, new filter(trk, itemGroup->treeWidget()));
-  minWidth = qMax(minWidth, itemGroup->treeWidget()->itemWidget(item, 0)->sizeHint().width());
+  // minimumSizeHint, never sizeHint: a wrapped label prefers a wide two-line box but needs only its
+  // widest word, and a hard minimum derived from the preference is what pins the whole window.
+  minWidth = qMax(minWidth, itemGroup->treeWidget()->itemWidget(item, 0)->minimumSizeHint().width());
 }
 
 template <typename filter1, typename filter2, typename... remainingFilters>
@@ -206,7 +208,40 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk) : INotifyTrk(CGisItemTrk::eVisualDeta
   // limit tree widget horizontal size to the filter widget with the largest minimum size
   treeFilter->setMinimumWidth(minWidth + treeFilter->indentation());
 
+  // The rows are as high as their width makes them, so they have to be measured again whenever it
+  // changes. The viewport is what carries the width; the tree itself also counts its frame.
+  treeFilter->viewport()->installEventFilter(this);
+
   slotShowPlots();
+}
+
+void CDetailsTrk::updateFilterRowHeights() {
+  // A group per row of addFilterGroup(), a filter per row below it. Nothing else is in this tree.
+  for (int g = 0; g < treeFilter->topLevelItemCount(); g++) {
+    QTreeWidgetItem* group = treeFilter->topLevelItem(g);
+
+    for (int f = 0; f < group->childCount(); f++) {
+      QTreeWidgetItem* item = group->child(f);
+      const QWidget* filter = treeFilter->itemWidget(item, 0);
+      if (nullptr == filter) {
+        continue;
+      }
+
+      const int height =
+          filter->hasHeightForWidth() ? filter->heightForWidth(filter->width()) : filter->sizeHint().height();
+      // Only on a change: setSizeHint schedules a layout, and a layout is what got us here.
+      if (item->sizeHint(0).height() != height) {
+        item->setSizeHint(0, QSize(0, height));
+      }
+    }
+  }
+}
+
+bool CDetailsTrk::eventFilter(QObject* watched, QEvent* event) {
+  if (watched == treeFilter->viewport() && QEvent::Resize == event->type()) {
+    updateFilterRowHeights();
+  }
+  return QWidget::eventFilter(watched, event);
 }
 
 void CDetailsTrk::changeEvent(QEvent* e) {

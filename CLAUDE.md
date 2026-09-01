@@ -656,6 +656,33 @@ loses its close button too. Every docker in both apps must keep `DockWidgetClosa
 
 ---
 
+## Minimum sizes — a preference is not a requirement
+
+Qt enforces `minimumSizeHint()` on a window with a layout, so anything that inflates it decides the
+smallest the main window can be. The track details page once pinned it to 1648x717 — unusable on a
+1366x768 screen — through four separate places that read a *preferred* width as a *required* one.
+All four are easy to write again:
+
+- **A `QLabel` without `wordWrap` reports its whole unwrapped string as a minimum.** With `wordWrap`
+  it reports its widest word — 436 → 52 for one filter label. Qt 6 turns `hasHeightForWidth()` on by
+  itself there; the `setSizePolicy()` line usually recommended alongside is measured to change
+  nothing. Give any label holding a sentence `wordWrap`, especially one whose text is set at runtime
+  or translated: `labelInfo`'s minimum used to move with the interface language.
+- **`QSplitter` sizes a child through `qSmartMinSize()`**, which takes `qMax(sizeHint,
+  minimumSizeHint)` unless the child's size policy carries a `ShrinkFlag`. `MinimumExpanding` and
+  `Minimum` have none, so the child's preferred width becomes a hard floor — 222 px of the details
+  page. Use `Expanding` or `Preferred` for a splitter child that may shrink.
+- **A `QTreeWidget` row is as high as the item's size hint, which does not follow the width.** A
+  wrapped label in an item widget is clipped as the tree narrows; recompute the item size hints from
+  `heightForWidth()` on resize, as `CDetailsTrk::updateFilterRowHeights()` does.
+- **A combo box beside a field frame adds both widths.** Stacking it above cost the speed filters
+  nothing and saved 190 px.
+
+Measure before believing any of this of a given widget: walk the tree printing `minimumSizeHint()`,
+and remember that a `sizeHint()` is what the widget *wants*.
+
+---
+
 ## GDAL
 
 ### `QImage::Format_Indexed8` + `RasterIO`/`ReadRaster` — row padding
@@ -903,10 +930,13 @@ small sources.
 
 ## Open work
 
-Two analysed-but-unstarted designs live in `.notes/`, each wanting its own branch:
-`QMS-1135-overview-restore-plan.md` (transactional rollback when a *Fix overviews* job is cancelled)
-and `waypoint-icon-resolution-plan.md` (32 → 96 px waypoint icons, gated on storing `icon_t::focus`
-relative). De-freeze either by pointing at the file.
+Analysed designs live in `.notes/`, each wanting its own branch. De-freeze one by pointing at the
+file.
+
+- `QMS-1135-overview-restore-plan.md` — transactional rollback when a *Fix overviews* job is
+  cancelled.
+- `waypoint-icon-resolution-plan.md` — 32 → 96 px waypoint icons, gated on storing `icon_t::focus`
+  relative.
 
 ### CMake — remaining
 

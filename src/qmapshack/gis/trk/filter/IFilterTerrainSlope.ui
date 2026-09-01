@@ -56,6 +56,9 @@
        <property name="text">
         <string>Calculate slope of the terrain based on loaded DEM files.</string>
        </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
       </widget>
      </item>
      <item>

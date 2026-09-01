@@ -67,6 +67,9 @@
        <property name="text">
         <string>with each track point. 0 sec. will remove timestamps.</string>
        </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
       </widget>
      </item>
      <item>

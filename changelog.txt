@@ -7,6 +7,7 @@ V1.XX.X
 [QMS-1227] Fix: Crash after activating a map that is already active
 [QMS-1229] Fix: Invalid and/or inaccurate elevation shading
 [QMS-1230] Fix: Configured DEM and MAPS are not preserved after a restart
+[QMS-1234] Reduce the minimum window size of the track details page
 
 V1.21.0
 [QMS-585] Preserve extra XML namespaces in GPX files

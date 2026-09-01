@@ -56,6 +56,9 @@
        <property name="text">
         <string>Remove all hidden track points permanently.</string>
        </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
       </widget>
      </item>
      <item>

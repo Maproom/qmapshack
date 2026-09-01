@@ -44,6 +44,17 @@ class CDetailsTrk : public QWidget, public INotifyTrk, private Ui::IDetailsTrk {
 
  protected:
   void changeEvent(QEvent* e) override;
+  bool eventFilter(QObject* watched, QEvent* event) override;
+
+ private:
+  /**
+     @brief Give every filter row the height its width needs.
+
+     A filter is an item widget, and a tree row is as high as the item's size hint says - which does
+     not follow the width. A wrapped label needs another line each time the tree gets narrower, so
+     without this the text is cut off at the bottom of its row.
+   */
+  void updateFilterRowHeights();
 
  private slots:
   void slotNameChanged(const QString& name);

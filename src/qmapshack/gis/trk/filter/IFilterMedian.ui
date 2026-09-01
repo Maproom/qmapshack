@@ -56,6 +56,9 @@
        <property name="text">
         <string>Smooth deviation of the track points elevation with a Median filter of size </string>
        </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
       </widget>
      </item>
      <item>

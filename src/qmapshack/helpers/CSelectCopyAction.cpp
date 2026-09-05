@@ -29,9 +29,9 @@ CSelectCopyAction::CSelectCopyAction(const IGisItem* src, const IGisItem* tar, Q
   setupUi(this);
 
   labelIcon1->setPixmap(src->getDisplayIcon());
-  labelInfo1->setText(src->getInfo(IGisItem::eFeatureShowName));
+  labelInfo1->setText(src->getInfo(IGisItem::eFeatureShowName | IGisItem::eFeatureShowIcon));
   labelIcon2->setPixmap(tar->getDisplayIcon());
-  labelInfo2->setText(tar->getInfo(IGisItem::eFeatureShowName));
+  labelInfo2->setText(tar->getInfo(IGisItem::eFeatureShowName | IGisItem::eFeatureShowIcon));
 
   connect(pushCopy, &QPushButton::clicked, this, [this]() { slotSelectResult(eResultCopy); });
   connect(pushSkip, &QPushButton::clicked, this, [this]() { slotSelectResult(eResultSkip); });

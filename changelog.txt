@@ -1,4 +1,4 @@
-V1.XX.X
+V1.21.1
 [QMS-1212] Update macOS build scripts
 [QMS-1215] Support MBTiles maps via GDAL's VRT driver on macOS
 [QMS-1221] Fix: Crash on exit leaves the workspace empty

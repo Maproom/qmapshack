@@ -8,7 +8,7 @@ cmake_minimum_required(VERSION 3.20.0)
 # Define project name and version tags
 ###############################################################################################
 # this is not only the QMS version it will be the package version, too.
-project(QMapShack VERSION 1.21.0 LANGUAGES CXX)
+project(QMapShack VERSION 1.21.1 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # CMAKE_CXX_EXTENSIONS is left at its default ON: the UNIX warning set asks for -fms-extensions,

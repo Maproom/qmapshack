@@ -18,11 +18,42 @@
 
 #include "gis/db/CDBItem.h"
 
+#include <QRegularExpression>
 #include <QtSql>
 
 #include "gis/CGisWorkspace.h"
 #include "gis/db/IDBFolder.h"
 #include "gis/db/macros.h"
+
+namespace {
+/**
+   @brief Cut a stored item comment down to tool tip size
+
+   The comment is the item's info as HTML. Cutting it on character level can end inside a tag and
+   QTextDocument will swallow everything behind an unterminated one, leaving an empty tool tip and an
+   empty status line in the delegate. Embedded images are the worst case: a base64 data URI eats the
+   whole budget on its own. Drop images first - the tool tip is a text summary - then cut back to the
+   last complete tag.
+
+   @param comment  The comment as read from the database
+   @return The comment ready to be used as tool tip
+ */
+QString shortenComment(QString comment) {
+  static const QRegularExpression reImage("<img[^>]*>", QRegularExpression::CaseInsensitiveOption);
+  comment.remove(reImage);
+
+  if (comment.size() > 300) {
+    comment.truncate(297);
+    const qsizetype idxOpen = comment.lastIndexOf('<');
+    if (idxOpen > comment.lastIndexOf('>')) {
+      comment.truncate(idxOpen);
+    }
+    comment += "...";
+  }
+
+  return comment;
+}
+}  // namespace
 
 CDBItem::CDBItem(QSqlDatabase& db, quint64 id, IDBFolder* parent) : IDBItem(parent, eTypeItem), db(db), id(id) {
   QSqlQuery query(db);
@@ -37,12 +68,7 @@ CDBItem::CDBItem(QSqlDatabase& db, quint64 id, IDBFolder* parent) : IDBItem(pare
 
     date = query.value(4).toDateTime();
 
-    // limit comment to 300 characters
-    QString comment = query.value(5).toString();
-    if (comment.size() > 300) {
-      comment = comment.left(297) + "...";
-    }
-    setToolTip(comment);
+    setToolTip(shortenComment(query.value(5).toString()));
   }
 
   updateAge();

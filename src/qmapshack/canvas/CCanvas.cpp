@@ -1007,7 +1007,7 @@ void CCanvas::slotUpdateTrackInfo(bool updateVisuals) {
 
     QString text;
     if (isShowTrackSummary()) {
-      text += trk->getInfo(IGisItem::eFeatureShowName | IGisItem::eFeatureShowActivity);
+      text += trk->getInfo(IGisItem::eFeatureShowName | IGisItem::eFeatureShowActivity | IGisItem::eFeatureShowIcon);
     }
 
     if (isShowMinMaxSummary()) {

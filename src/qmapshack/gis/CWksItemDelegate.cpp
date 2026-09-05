@@ -899,7 +899,7 @@ bool CWksItemDelegate::helpEventItem(const QPoint& pos, const QPoint& posGlobal,
   const auto& layout = getRectanglesItem(opt, item);
 
   if (layout.rectName.contains(pos)) {
-    QToolTip::showText(posGlobal, item.getInfo(IWksItem::eFeatureShowName), view);
+    QToolTip::showText(posGlobal, item.getInfo(IWksItem::eFeatureShowName | IWksItem::eFeatureShowIcon), view);
     return true;
   } else if (layout.rectStatus.contains(pos)) {
     if (itemStatusControl.trk.flags == 0 && itemStatusControl.wpt.flags == 0 && itemStatusControl.rte.flags == 0 &&
@@ -911,7 +911,7 @@ bool CWksItemDelegate::helpEventItem(const QPoint& pos, const QPoint& posGlobal,
                  "setup. See menu->Workspace->Setup Workspace")),
           view, {}, 5000);
     } else {
-      QToolTip::showText(posGlobal, item.getInfo(IWksItem::eFeatureShowName), view);
+      QToolTip::showText(posGlobal, item.getInfo(IWksItem::eFeatureShowName | IWksItem::eFeatureShowIcon), view);
     }
     return true;
   } else if (layout.rectChanged.contains(pos)) {

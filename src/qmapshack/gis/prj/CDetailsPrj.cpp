@@ -509,7 +509,8 @@ void CDetailsPrj::drawByGroup(QTextCursor& cursor, QList<CGisItemTrk*>& trks, QL
       if (w1 < 300) {
         table->cellAt(cnt, eInfo1)
             .firstCursorPosition()
-            .insertHtml(trk->getInfo(IGisItem::eFeatureShowName | IGisItem::eFeatureShowActivity));
+            .insertHtml(
+                trk->getInfo(IGisItem::eFeatureShowName | IGisItem::eFeatureShowActivity | IGisItem::eFeatureShowIcon));
 
         QTextTable* table1 = table->cellAt(cnt, eInfo1).lastCursorPosition().insertTable(1, 2, fmtTableInfo);
 
@@ -524,7 +525,7 @@ void CDetailsPrj::drawByGroup(QTextCursor& cursor, QList<CGisItemTrk*>& trks, QL
         QTextTable* table1 = table->cellAt(cnt, eInfo1).firstCursorPosition().insertTable(1, 3, fmtTableInfo);
 
         table1->cellAt(0, 0).firstCursorPosition().insertHtml(
-            trk->getInfo(IGisItem::eFeatureShowName | IGisItem::eFeatureShowActivity));
+            trk->getInfo(IGisItem::eFeatureShowName | IGisItem::eFeatureShowActivity | IGisItem::eFeatureShowIcon));
 
         QImage profile(w1, h1, QImage::Format_ARGB32);
         getTrackProfile(trk, nullptr, profile);
@@ -783,7 +784,8 @@ void CDetailsPrj::drawByTrack(QTextCursor& cursor, QList<CGisItemTrk*>& trks, QL
     addIcon(table, eSym1, cnt, trk->getDisplayIcon(), trk->getKey().item, trk->isReadOnly(), printable);
     table->cellAt(cnt, eInfo2)
         .firstCursorPosition()
-        .insertHtml(trk->getInfo(IGisItem::eFeatureShowName | IGisItem::eFeatureShowActivity));
+        .insertHtml(
+            trk->getInfo(IGisItem::eFeatureShowName | IGisItem::eFeatureShowActivity | IGisItem::eFeatureShowIcon));
 
     QTextTable* table1 = table->cellAt(cnt, eData2).lastCursorPosition().insertTable(1, 2, fmtTableInfo);
 
@@ -858,7 +860,8 @@ void CDetailsPrj::drawByDetails(QTextCursor& cursor, QList<CGisItemTrk*>& trks, 
     addIcon(table, eSym1, cnt, trk->getDisplayIcon(), trk->getKey().item, trk->isReadOnly(), printable);
     table->cellAt(cnt, eInfo2)
         .firstCursorPosition()
-        .insertHtml(trk->getInfo(IGisItem::eFeatureShowName | IGisItem::eFeatureShowActivity));
+        .insertHtml(
+            trk->getInfo(IGisItem::eFeatureShowName | IGisItem::eFeatureShowActivity | IGisItem::eFeatureShowIcon));
 
     table->mergeCells(cnt, eData2, 1, 2);
     table->cellAt(cnt, eData2)

@@ -5,3 +5,6 @@ CMakeLists.txt.user
 __pycache__/
 *.pyc
 CMakeUserPresets.json
+
+# A documentation run's own tile cache and workspace database, wherever --shoot points.
+**/_cache/

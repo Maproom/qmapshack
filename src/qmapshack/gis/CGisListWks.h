@@ -41,6 +41,9 @@ class CGisListWks : public QTreeWidget {
   CGisListWks(QWidget* parent);
   virtual ~CGisListWks();
 
+  /** @brief Use another workspace database than the user's own. Before CMainWindow. */
+  static void setDatabasePath(const QString& path);
+
   // enum column_e { eColumnName = 2 };
 
   void setExternalMenu(QMenu* project);
@@ -180,6 +183,8 @@ class CGisListWks : public QTreeWidget {
   }
 
   QSqlDatabase db;
+  /** @brief Set by setDatabasePath(); empty for the user's own. */
+  static QString databasePathOverride;
 
   QActionGroup* actionGroupSort;
   QAction* actionSave;

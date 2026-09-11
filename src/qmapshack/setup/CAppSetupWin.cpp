@@ -27,6 +27,7 @@
 #include <QAbstractNativeEventFilter>
 #include <QMessageBox>
 #include <QWindow>
+#include <cstdio>
 
 #include "config.h"
 #include "setup/CAppSetupWin.h"
@@ -50,6 +51,25 @@ class windowsEventFilter : public QAbstractNativeEventFilter {
     return false;
   }
 };
+
+void CAppSetupWin::attachParentConsole(int argc, char** argv) {
+  // Raw arguments: runs before QApplication, whose plugin failures must reach the console.
+  bool wanted = false;
+  for (int i = 1; i < argc && !wanted; i++) {
+    const QByteArray arg(argv[i]);
+    wanted = arg.startsWith("--shoot") || arg.startsWith("--doc");
+  }
+  if (wanted && AttachConsole(ATTACH_PARENT_PROCESS)) {
+    // A state process inherits these handles. NUL on failure, because freopen() has closed the
+    // stream by then and writing to a closed one loses every later message silently.
+    if (nullptr == freopen("CONOUT$", "w", stdout)) {
+      freopen("NUL", "w", stdout);
+    }
+    if (nullptr == freopen("CONOUT$", "w", stderr)) {
+      freopen("NUL", "w", stderr);
+    }
+  }
+}
 
 void CAppSetupWin::initQMapShack() {
   // setup environment variables for GDAL/PROJ

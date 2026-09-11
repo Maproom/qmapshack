@@ -50,6 +50,11 @@ IAppSetup* IAppSetup::getPlatformInstance() {
   return instance;
 }
 
+void IAppSetup::attachParentConsole(int argc, char** argv) {
+  Q_UNUSED(argc)
+  Q_UNUSED(argv)
+}
+
 void IAppSetup::exportLocaleEnv(int argc, char** argv) {
   for (int i = 1; i < argc; ++i) {
     const QString& arg = QString::fromLocal8Bit(argv[i]);

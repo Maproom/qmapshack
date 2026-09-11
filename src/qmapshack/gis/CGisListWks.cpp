@@ -104,7 +104,9 @@ CGisListWks::CGisListWks(QWidget* parent) : QTreeWidget(parent) {
   header()->setSectionResizeMode(0, QHeaderView::Stretch);
 
   db = QSqlDatabase::addDatabase("QSQLITE", "Workspace1");
-  QString config = QDir(IAppSetup::getPlatformInstance()->userDataPath()).filePath("workspace.db");
+  const QString& config = databasePathOverride.isEmpty()
+                              ? QDir(IAppSetup::getPlatformInstance()->userDataPath()).filePath("workspace.db")
+                              : databasePathOverride;
   db.setDatabaseName(config);
   db.open();
   configDB();
@@ -247,6 +249,10 @@ CGisListWks::CGisListWks(QWidget* parent) : QTreeWidget(parent) {
 }
 
 CGisListWks::~CGisListWks() {}
+
+QString CGisListWks::databasePathOverride;
+
+void CGisListWks::setDatabasePath(const QString& path) { databasePathOverride = path; }
 
 void CGisListWks::configDB() {
   QSqlQuery query(db);

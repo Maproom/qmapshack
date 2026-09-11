@@ -33,14 +33,27 @@ class CQmsStyle : public QProxyStyle {
   /** @brief Wrap the active style, keeping whatever -style or QT_STYLE_OVERRIDE selected. */
   static void install();
 
+  /**
+     @brief Answer the hints a platform theme owns from a fixed value, so on and off screen render alike.
+
+     SH_DialogButtonBox_ButtonsHaveIcons is the only one that differs.
+   */
+  static void pinThemeIndependentHints();
+
   void drawPrimitive(PrimitiveElement element, const QStyleOption* option, QPainter* painter,
                      const QWidget* widget) const override;
 
   void drawControl(ControlElement element, const QStyleOption* option, QPainter* painter,
                    const QWidget* widget) const override;
 
+  int styleHint(StyleHint hint, const QStyleOption* option, const QWidget* widget,
+                QStyleHintReturn* returnData) const override;
+
  private:
   explicit CQmsStyle(QStyle* base);
+
+  /** @brief Set by pinThemeIndependentHints(). */
+  static bool pinnedHints;
 };
 
 #endif  // CQMSSTYLE_H

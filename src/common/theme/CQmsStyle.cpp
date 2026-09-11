@@ -46,10 +46,23 @@ QPalette::ColorGroup cueColorGroup(const QStyleOption* option) {
 
 CQmsStyle::CQmsStyle(QStyle* base) : QProxyStyle(base) {}
 
+bool CQmsStyle::pinnedHints = false;
+
 void CQmsStyle::install() {
   // Re-create the active style by name: setStyle() deletes the style it replaces, so the running
   // one cannot be handed over as the base. Doing it this way keeps the user's -style choice.
   QApplication::setStyle(new CQmsStyle(QStyleFactory::create(QApplication::style()->objectName())));
+}
+
+void CQmsStyle::pinThemeIndependentHints() { pinnedHints = true; }
+
+int CQmsStyle::styleHint(StyleHint hint, const QStyleOption* option, const QWidget* widget,
+                         QStyleHintReturn* returnData) const {
+  // A desktop theme says yes, the offscreen platform has no theme.
+  if (pinnedHints && SH_DialogButtonBox_ButtonsHaveIcons == hint) {
+    return 0;
+  }
+  return QProxyStyle::styleHint(hint, option, widget, returnData);
 }
 
 void CQmsStyle::drawPrimitive(PrimitiveElement element, const QStyleOption* option, QPainter* painter,

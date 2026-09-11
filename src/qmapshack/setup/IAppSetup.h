@@ -25,6 +25,10 @@
 class IAppSetup {
  public:
   static IAppSetup* getPlatformInstance();
+
+  /** @brief Attach to the parent's console for a documentation run. Before QApplication; Windows only. */
+  virtual void attachParentConsole(int argc, char** argv);
+
   virtual void initQMapShack() = 0;
   void initLogHandler();
   void processArguments();

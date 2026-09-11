@@ -828,6 +828,14 @@ not isolate it — `defaultCachePath()` is `~/.QMapShack` regardless — so any 
 must call `CMapDraw::setCacheRoot()` before the first map list load or it destroys the user's tile
 cache.
 
+`Canvas/cachePath` in the configuration wins over that setter, and always: `saveMapPath()` stores the
+key on **every** exit, so only a configuration that has never been written falls back to the pinned
+value. `setCacheRoot()` therefore protects startup alone — the stretch before `CMainWindow` reads the
+configuration — and what the run then uses is whatever `--config` carries. A documentation run without
+`--config` is refused for that reason (`CShotEntry::prepare()`), because it would also write the
+user's settings from `~CMainWindow`, beside an open QMapShack that no longer stops a second
+instance.
+
 ### The map list outlives its `CMapDraw`
 
 `CMapDraw`'s constructor parents `mapList` to the canvas but disposes of it with
@@ -1132,20 +1140,46 @@ file.
 - `doc-image-publish-plan.md` — a `shots.py publish` that commits only the pictures a recipe change
   actually moved, so a writer's run stops rewriting every PNG with their machine's rendering.
 
-**The documentation subsystem is developer-only.** `shoot/` is compiled and `Qt6::Test` linked only
-under `-DQMS_DOC_MODE=ON`; `main.cpp` compiles its two call sites out with the same define, so
-`--shoot` and `--doc` are inert in a user's binary. A doc run needs the source tree and a build
-tree configured with it.
+**The documentation subsystem is developer-only**, behind `-DQMS_DOC_MODE=ON`. A doc run needs the
+source tree and a build tree configured with it.
+
+**No source tests `QMS_DOC_MODE`** — `grep -rn QMS_DOC_MODE src/` finds `src/qmapshack/CMakeLists.txt`
+and nothing else. The option picks which
+implementation of a header is compiled: `shoot/CShotEntry.cpp` and `shoot/CShotOptions.cpp`, or
+`shoot/CShotEntryStub.cpp` and `shoot/CShotOptionsStub.cpp`, which answer "no documentation run" and
+define no switch. So a user's binary rejects `--shoot`, `--doc` and `--color-scheme` through
+`QCommandLineParser`'s own error instead of accepting a switch that does nothing, and `main.cpp`,
+`CCommandProcessor` and `CAppOpts` carry no preprocessor branch.
+
+`CShotEntry` is all `main.cpp` knows: `isDocRun()` and `prepare()`. `prepare()` runs before
+`CMainWindow` and is what makes a run harmless and machine-independent — the tile cache root, the
+workspace database, `CUiTheme::pinColorScheme()`, `CQmsStyle::pinThemeIndependentHints()`, the icon
+theme cleared, and the bundled `src/fonts/` families registered, which the offscreen platform on
+Windows has none of. `CShotOptions` owns the eleven switches, defined and read in one place, and reaches everything as the
+single `CAppOpts::doc` member. `--config` is mandatory for such a run; `prepare()` returns false
+without it and `main()` exits.
+
+The bundled fonts live in `shoot/fonts.qrc`, compiled only with the subsystem, so a user's binary
+carries none of them.
+
+A doc run also skips the splash screen and `CSingleInstanceProxy`, which would hand the arguments to
+an already running QMapShack and exit.
 
 `QMS-1217-documentation-images.md` is the one plan. §1-§8 are the design, §9 the evidence - measured
 on this checkout, do not re-derive it and do not doubt it without a new measurement - §10 what the
 demo does not do, §11 the sub-tickets the feature branch is built from. It replaces the three
 layered plans that came before it.
 
-**Nothing of this subsystem is on this branch yet.** It is being built ticket by ticket, #1245 to
-#1257 (#1247 is what creates the test page); everything described below is the demo on
-`QMS-1217_demo` and the facts it established. A statement here is a requirement, not a description
-of code you will find.
+**One branch, one commit per sub-ticket.** Everything from #1245 to #1257 is developed on `QMS-1217`,
+which is based on `dev`; a sub-ticket gets a commit there, never a branch of its own. "Reviewable and
+mergeable on its own" in §11 means the commit, not a branch — and a branch per sub-ticket does not
+work anyway: its `CLAUDE.md` and `.notes` edits belong to text only the feature branch has.
+
+**The subsystem is being built ticket by ticket**, #1245 to #1257 (#1247 is what creates the test
+page). Landed: #1245, the hermetic run — the option, the switches, the two entry points, the
+redirections and the pinning; nothing renders yet. Everything else described below is still the demo
+on `QMS-1217_demo` and the facts it established, and a statement about it is a requirement, not a
+description of code you will find.
 
 What is on `QMS-1217_demo` is a **throwaway demo** of that design. The port names the writer's
 session `shots.py take <page>` and the headless one `shots.py replay`; the demo calls them `doc` and

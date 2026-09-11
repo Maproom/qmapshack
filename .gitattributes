@@ -17,3 +17,6 @@ src/icons/svghygiene   text eol=lf
 #
 # Markdown files should use lf
 *.md   text eol=lf
+
+# Fonts are binary; never let an eol attribute near them.
+*.ttf  binary

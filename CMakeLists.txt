@@ -167,6 +167,10 @@ qms_add_flag_if_supported(-Woverloaded-virtual)
 ###############################################################################################
 # Find all required packages and setup internal variables
 ###############################################################################################
+# Developer only: the subsystem drives the application through synthesized input to take the pictures
+# the help pages use. No source tests the option - it selects which file is compiled.
+option(QMS_DOC_MODE "Build the documentation and screenshot subsystem (developer only)" OFF)
+
 # Core5Compat provides QTextCodec, which decodes the Garmin codepages QStringConverter cannot.
 find_package(Qt6 6.8 REQUIRED COMPONENTS
     Concurrent

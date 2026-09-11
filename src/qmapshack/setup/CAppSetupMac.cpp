@@ -19,12 +19,6 @@
 #include <QtSystemDetection>
 #if defined(Q_OS_MAC)
 
-#include "setup/CAppSetupMac.h"
-
-#include <QFont>
-#include <QMessageBox>
-#include <QWindow>
-
 #include <fcntl.h>
 #include <signal.h>
 #include <stdlib.h>
@@ -32,16 +26,21 @@
 #include <sys/errno.h>
 #include <unistd.h>
 
+#include <QFont>
+#include <QMessageBox>
+#include <QWindow>
+
 #include "misc.h"
+#include "setup/CAppSetupMac.h"
 
 const QString CAppSetupMac::relTranslationDir = "Resources/translations";  // app
-const QString CAppSetupMac::relRoutinoDir     = "Resources/routino";       // app
-const QString CAppSetupMac::relGdalDataDir    = "Resources/gdal";          // app
+const QString CAppSetupMac::relRoutinoDir = "Resources/routino";           // app
+const QString CAppSetupMac::relGdalDataDir = "Resources/gdal";             // app
 const QString CAppSetupMac::relGdalPluginsDir = "Resources/gdalplugins";   // app
-const QString CAppSetupMac::relProjDataDir    = "Resources/proj";          // app
-const QString CAppSetupMac::relHelpDir        = "Resources/help";          // app
-const QString CAppSetupMac::relBinDir         = "Tools";                   // app
-const QString CAppSetupMac::relLogDir         = "Library/Logs";            // home
+const QString CAppSetupMac::relProjDataDir = "Resources/proj";             // app
+const QString CAppSetupMac::relHelpDir = "Resources/help";                 // app
+const QString CAppSetupMac::relBinDir = "Tools";                           // app
+const QString CAppSetupMac::relLogDir = "Library/Logs";                    // home
 
 void CAppSetupMac::extendPath() {
   QString value = qEnvironmentVariable("PATH", "");
@@ -67,8 +66,7 @@ void CAppSetupMac::initQMapShack() {
 
   // setup translators
   const QString& translationPath = getApplicationDir(relTranslationDir).absolutePath();
-  prepareTranslator(translationPath, "qtbase_");
-  prepareTranslator(translationPath, "qmapshack_");
+  prepareTranslators(translationPath, "qmapshack_", translationPath);
 
   // create directories
   IAppSetup::path(defaultCachePath(), 0, true, "CACHE");
@@ -140,7 +138,7 @@ QString CAppSetupMac::helpFile() {
 }
 
 void CAppSetupMac::closeOnSIGTERM() {
-  sig_t handler = [](int sig)->void {
+  sig_t handler = [](int sig) -> void {
     for (auto const item : qApp->topLevelWindows()) {
       // Close application gracefully on signal SIGTERM
       if (item->objectName() == "IMainWindowWindow") {
@@ -157,7 +155,7 @@ void CAppSetupMac::closeOnSIGTERM() {
 bool CAppSetupMac::setLock() {
   const QString& fileName = userDataPath() % "/.lock";
   qDebug() << "Try to lock file" << fileName << "...";
-  int fd = open(QFile::encodeName(fileName).data(), O_CREAT|O_RDWR, S_IRWXU);
+  int fd = open(QFile::encodeName(fileName).data(), O_CREAT | O_RDWR, S_IRWXU);
   if (fd != -1) {
     struct flock lock;
     memset(&lock, 0, sizeof(struct flock));
@@ -172,9 +170,8 @@ bool CAppSetupMac::setLock() {
       return false;
     }
   }
-  QMessageBox::critical(nullptr, tr("Fatal..."),
-     tr("Failed to lock file<br>%1<br>%2").arg(fileName, strerror(errno)));
+  QMessageBox::critical(nullptr, tr("Fatal..."), tr("Failed to lock file<br>%1<br>%2").arg(fileName, strerror(errno)));
   exit(-1);
 }
 
-#endif // defined(Q_OS_MAC)
+#endif  // defined(Q_OS_MAC)

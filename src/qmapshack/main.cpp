@@ -33,6 +33,8 @@
 Q_IMPORT_PLUGIN(CSvgtIconEnginePlugin)
 
 int main(int argc, char** argv) {
+  IAppSetup::exportLocaleEnv(argc, argv);
+
   // preserve "original" argument list
   int argCnt = argc;
   char** argVal = new char*[argCnt];

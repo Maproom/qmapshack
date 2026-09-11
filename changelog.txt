@@ -1,3 +1,6 @@
+V1.XX.X
+[QMS-1242] Fix: Qt's strings are translated for languages QMapShack is not translated to
+
 V1.21.1
 [QMS-1212] Update macOS build scripts
 [QMS-1215] Support MBTiles maps via GDAL's VRT driver on macOS

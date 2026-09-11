@@ -96,6 +96,38 @@ Target-scoped CMake. Nothing is set at directory scope except the MSVC options b
   stubs and the platform blocks in `CMakeLists.txt` still drive those builds. The developer-facing
   howto is `README_PRESETS.md`, linked from the README's Linux build section.
 
+### Translator loading
+
+`IAppSetup::prepareTranslators(appPath, appPrefix, qtPath)` installs both catalogs, and the
+application catalog is the gate: no `<appPrefix><locale>.qm` means the GUI is English *including*
+Qt's own strings. Skipping `qtbase_<locale>.qm` is not enough for that - a desktop environment
+installs a Qt catalog for the system locale itself, from the platform plugin, before the application
+touches a translator (measured on KDE: a bare `QApplication` with no translator installed answers
+`translate("QPlatformTheme", "Cancel")` with `Abbrechen`, and `QT_QPA_PLATFORM=offscreen` turns it
+back into `Cancel`). So the untranslated branch installs `CSourceTextTranslator`, which answers every
+lookup with the source text: translators are asked newest first and a non-null answer ends the
+lookup, so it wins over the desktop's. `QCoreApplication::translate()` applies `replacePercentN()` to
+the result afterwards, so `%n` still works. It exists twice, once per app. `qmt_rgb2pct` keeps its
+own unguarded two-liner - it is a command line tool.
+
+Not every string in the window goes through those catalogs. A desktop integration translates its own
+contributions with catalogs of its own, picked by `LANGUAGE` and loaded while the platform plugin
+comes up - on KDE the standard button labels come from `KStandardGuiItem` in
+`/usr/share/locale/<lang>/LC_MESSAGES/kwidgetsaddons6_qt.qm`, which no Qt or QMapShack catalog covers,
+so `--locale it` alone leaves them German on a German desktop (measured). `IAppSetup::exportLocaleEnv()`
+therefore runs as the first statement of `main()`, before `QApplication`, and puts a `--locale` value
+into `LANGUAGE`. It has to parse argv by hand - `CCommandProcessor` needs an application instance,
+which is already too late.
+
+Running from the build tree never finds the application catalog: `applicationDirPath` is
+`<build>/bin`, so the path resolves to `<build>/share/<app>/translations` while the `.qm` files are
+built into `<build>/src/<app>/`. A build-tree run is therefore always English.
+
+**`QTranslator::load()`'s return value is no existence test.** It strips `_<suffix>` and `.<suffix>`
+off the name until something loads, so `load("qmapshack_pl", dir)` succeeds with the installed,
+untranslated `qmapshack.qm` (measured, Qt 6.10.2). Test with `QFileInfo::exists()` on the exact
+name, and pass the full `<prefix><locale>.qm` to `load()`.
+
 ---
 
 ## Code style

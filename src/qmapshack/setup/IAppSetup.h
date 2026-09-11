@@ -22,13 +22,25 @@
 #include <QApplication>
 #include <QtCore>
 
-
 class IAppSetup {
  public:
   static IAppSetup* getPlatformInstance();
   virtual void initQMapShack() = 0;
   void initLogHandler();
   void processArguments();
+
+  /**
+     @brief Export a `--locale` option to the environment
+
+     Desktop integrations translate their own contributions to the GUI - on KDE the standard button
+     labels - through catalogs they pick by `LANGUAGE`, and they load them while the platform plugin
+     comes up, inside the `QApplication` constructor. So this has to run before it, from `main()`, or
+     `--locale` leaves those strings in the desktop's language.
+
+     @param argc the argument count as passed to `main()`
+     @param argv the argument list as passed to `main()`
+   */
+  static void exportLocaleEnv(int argc, char** argv);
 
   virtual QString routinoPath(QString xmlFile) = 0;
   virtual QString defaultCachePath() = 0;
@@ -40,7 +52,16 @@ class IAppSetup {
 
  protected:
   void prepareGdal(QString gdalDataDir, QString gdalPluginsDir, QString projDataDir);
-  void prepareTranslator(QString translationPath, QString translationPrefix);
+  /**
+     @brief Install the Qt and application translators for the effective locale
+
+     The application catalog decides: without one for the locale Qt's catalog is not loaded either.
+
+     @param appPath the directory holding the application's `.qm` files
+     @param appPrefix the application catalog prefix including the trailing underscore
+     @param qtPath the directory holding Qt's `.qm` files
+   */
+  void prepareTranslators(const QString& appPath, const QString& appPrefix, const QString& qtPath);
 
   static IAppSetup* instance;
 

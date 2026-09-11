@@ -18,9 +18,9 @@
 
 #include "setup/IAppSetup.h"
 
-#include <QFont>
-
 #include <gdal.h>
+
+#include <QFont>
 
 #if defined(Q_OS_MAC)
 #include "setup/CAppSetupMac.h"
@@ -29,10 +29,9 @@
 #elif defined(Q_OS_WIN32)
 #include "setup/CAppSetupWin.h"
 #endif
+#include "helpers/CSettings.h"
 #include "setup/CCommandProcessor.h"
 #include "setup/CLogHandler.h"
-
-#include "helpers/CSettings.h"
 
 IAppSetup* IAppSetup::pSelf = nullptr;
 
@@ -82,6 +81,30 @@ void IAppSetup::prepareToolPaths() {
   pathQmtmap2jnxOverride = cfg.value("ExtTools/pathQmtmap2jnxOverride", pathQmtmap2jnxOverride).toString();
 }
 
+void IAppSetup::exportLocaleEnv(int argc, char** argv) {
+  for (int i = 1; i < argc; ++i) {
+    const QString& arg = QString::fromLocal8Bit(argv[i]);
+    QString value;
+    if (arg.startsWith("--locale")) {
+      value = arg.mid(8);
+    } else if (arg.startsWith("-l")) {
+      value = arg.mid(2);
+    } else {
+      continue;
+    }
+
+    if (value.startsWith('=')) {
+      value = value.mid(1);
+    } else if (value.isEmpty() && i + 1 < argc) {
+      value = QString::fromLocal8Bit(argv[i + 1]);
+    }
+    if (!value.isEmpty()) {
+      qputenv("LANGUAGE", value.toLocal8Bit());
+    }
+    return;
+  }
+}
+
 void IAppSetup::prepareGdal(QString gdalDataDir, QString gdalPluginsDir, QString projDataDir) {
   if (!gdalDataDir.isEmpty()) {
     qputenv("GDAL_DATA", gdalDataDir.toUtf8());
@@ -116,27 +139,82 @@ QString IAppSetup::path(QString path, QString subdir, bool mkdir, QString debugN
   return pathDir.absolutePath();
 }
 
-void IAppSetup::prepareTranslator(QString translationPath, QString translationPrefix) {
-  QString locale = qlOpts->locale != nullptr ? qlOpts->locale : QLocale::system().name();
-  QDir dir(translationPath);
-  if (!QFile::exists(dir.absoluteFilePath(translationPrefix + locale + ".qm"))) {
-    locale = locale.left(2);
+namespace {
+/**
+   @brief Find the locale a catalog is installed for
+
+   `QTranslator::load()` is no test for this: it strips the `_<locale>` suffix and falls back to the
+   untranslated source catalog.
+
+   @param dir the directory holding the `.qm` files
+   @param prefix the catalog prefix including the trailing underscore
+   @param locale the locale name to look for, e.g. `de_DE`
+   @return the locale the catalog is named after, or an empty string if there is none
+ */
+QString findCatalogLocale(const QString& dir, const QString& prefix, const QString& locale) {
+  const QDir catalogDir(dir);
+  if (QFileInfo::exists(catalogDir.absoluteFilePath(prefix + locale + ".qm"))) {
+    return locale;
   }
-  if (QFile::exists(dir.absoluteFilePath(translationPrefix + locale + ".qm"))) {
-    qDebug() << "locale" << locale;
+  const QString& language = locale.left(2);
+  if (QFileInfo::exists(catalogDir.absoluteFilePath(prefix + language + ".qm"))) {
+    return language;
+  }
+  return QString();
+}
+
+/**
+   @brief Translator answering every lookup with the untranslated source text
+
+   Translators are asked newest first and a non-null answer ends the lookup, so this one overrides
+   the Qt catalog a desktop environment installs on the application's behalf (measured: KDE hands out
+   `qtbase_de.qm` from the platform plugin, before the application touches a translator).
+ */
+class CSourceTextTranslator : public QTranslator {
+ public:
+  CSourceTextTranslator(QObject* parent) : QTranslator(parent) {}
+
+  bool isEmpty() const override { return false; }
+
+  QString translate(const char* context, const char* sourceText, const char* disambiguation, int n) const override {
+    Q_UNUSED(context);
+    Q_UNUSED(disambiguation);
+    Q_UNUSED(n);
+    return QString::fromUtf8(sourceText);
+  }
+};
+
+void installCatalog(const QString& dir, const QString& prefix, const QString& locale) {
+  QCoreApplication* app = QCoreApplication::instance();
+  QTranslator* translator = new QTranslator(app);
+  if (translator->load(prefix + locale + ".qm", dir)) {
+    app->installTranslator(translator);
+    qDebug() << "using file '" + translator->filePath() + "' for translations.";
   } else {
-    qDebug() << "locale" << locale << "not found (using default).";
+    delete translator;
+    qWarning() << "no translations found for file '" + dir + "/" + prefix + locale + ".qm' (using default).";
+  }
+}
+}  // namespace
+
+void IAppSetup::prepareTranslators(const QString& appPath, const QString& appPrefix, const QString& qtPath) {
+  const QString& wanted = qlOpts->locale != nullptr ? qlOpts->locale : QLocale::system().name();
+  const QString& locale = findCatalogLocale(appPath, appPrefix, wanted);
+  if (locale.isEmpty()) {
+    // Force English everywhere, not just in the strings the application owns: a desktop environment
+    // installs a Qt catalog for the system locale on its own, which would leave the GUI in two
+    // languages.
+    qDebug() << "locale" << wanted << "not found (using default).";
+    QCoreApplication::instance()->installTranslator(new CSourceTextTranslator(QCoreApplication::instance()));
+    return;
   }
 
-  QApplication* app = (QApplication*)QCoreApplication::instance();
-  QTranslator* qtTranslator = new QTranslator(app);
-  if (qtTranslator->load(translationPrefix + locale, translationPath)) {
-    app->installTranslator(qtTranslator);
-    qDebug() << "using file '" + qtTranslator->filePath() + "' for translations.";
-  } else {
-    qWarning() << "no translations found for file '" + translationPath + "/" + translationPrefix + locale +
-                      ".qm' (using default).";
+  qDebug() << "locale" << locale;
+  const QString& qtLocale = findCatalogLocale(qtPath, "qtbase_", locale);
+  if (!qtLocale.isEmpty()) {
+    installCatalog(qtPath, "qtbase_", qtLocale);
   }
+  installCatalog(appPath, appPrefix, locale);
 }
 
 void IAppSetup::initLogHandler() { CLogHandler::initLogHandler(logDir(), qlOpts->logfile, qlOpts->debug); }

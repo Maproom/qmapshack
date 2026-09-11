@@ -19,11 +19,6 @@
 #include <QtSystemDetection>
 #if defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD) || defined(__FreeBSD_kernel__) || defined(__GNU__)
 
-#include "setup/CAppSetupLinux.h"
-
-#include <QMessageBox>
-#include <QWindow>
-
 #include <errno.h>
 #include <fcntl.h>
 #include <signal.h>
@@ -31,7 +26,11 @@
 #include <string.h>
 #include <unistd.h>
 
+#include <QMessageBox>
+#include <QWindow>
+
 #include "config.h"
+#include "setup/CAppSetupLinux.h"
 #include "version.h"
 
 void CAppSetupLinux::initQMapTool() {
@@ -43,8 +42,7 @@ void CAppSetupLinux::initQMapTool() {
   QString translationPath = QCoreApplication::applicationDirPath();
   static const QRegularExpression re("bin$");
   translationPath.replace(re, "share/qmaptool/translations");
-  prepareTranslator(resourceDir, "qtbase_");
-  prepareTranslator(translationPath, "qmaptool_");
+  prepareTranslators(translationPath, "qmaptool_", resourceDir);
 
   // create directories
   IAppSetup::path(logDir(), 0, true, "LOG");
@@ -71,9 +69,8 @@ QString CAppSetupLinux::helpFile() {
   return dir.absoluteFilePath("QMTHelp.qhc");
 }
 
-
 void CAppSetupLinux::closeOnSIGTERM() {
-  sighandler_t handler = [](int sig)->void {
+  sighandler_t handler = [](int sig) -> void {
     for (auto const item : qApp->topLevelWindows()) {
       // Close application gracefully on signal SIGTERM
       if (item->objectName() == "IMainWindowWindow") {
@@ -90,7 +87,7 @@ void CAppSetupLinux::closeOnSIGTERM() {
 bool CAppSetupLinux::setLock() {
   const QString& fileName = userDataPath() % "/." % qApp->applicationName() % ".lock";
   qDebug() << "Try to lock file" << fileName << "...";
-  int fd = open(QFile::encodeName(fileName).data(), O_CREAT|O_RDWR, S_IRWXU);
+  int fd = open(QFile::encodeName(fileName).data(), O_CREAT | O_RDWR, S_IRWXU);
   if (fd != -1) {
     struct flock lock;
     memset(&lock, 0, sizeof(struct flock));
@@ -105,9 +102,8 @@ bool CAppSetupLinux::setLock() {
       return false;
     }
   }
-  QMessageBox::critical(nullptr, tr("Fatal..."),
-     tr("Failed to lock file<br>%1<br>%2").arg(fileName, strerror(errno)));
+  QMessageBox::critical(nullptr, tr("Fatal..."), tr("Failed to lock file<br>%1<br>%2").arg(fileName, strerror(errno)));
   exit(-1);
 }
 
-#endif // defined(Q_OS_LINUX)
+#endif  // defined(Q_OS_LINUX)

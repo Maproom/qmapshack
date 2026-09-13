@@ -31,7 +31,7 @@ CLogHandler::CLogHandler(QString logDirectory, bool writeToFile, bool debugOutpu
     fileStream.setEncoding(QStringConverter::Utf8);
     openFileCheckSuccess(QIODevice::WriteOnly | QIODevice::Append, logFile);
   }
-  qSetMessagePattern("%{time yyyy-MM-dd h:mm:ss.zzz} [%{type}] %{message}");
+  qSetMessagePattern("%{time yyyy-MM-dd hh:mm:ss.zzz} [%{type}] %{message}");
 }
 
 void CLogHandler::log(QtMsgType type, const QMessageLogContext& context, const QString& msg) {

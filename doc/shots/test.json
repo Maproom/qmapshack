@@ -1,0 +1,41 @@
+{
+    "shots": [
+        {
+            "id": "test/menu-project",
+            "widget": "menuProject"
+        },
+        {
+            "id": "test/main-window",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "id": "test/workspace-filter",
+            "set": {
+                "lineFilter.text": "track"
+            },
+            "size": [
+                1200,
+                800
+            ],
+            "widget": "dockWorkspace"
+        },
+        {
+            "id": "test/toolbar",
+            "rect": [
+                0,
+                24,
+                680,
+                36
+            ],
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        }
+    ]
+}

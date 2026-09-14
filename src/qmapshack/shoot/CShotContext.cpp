@@ -18,20 +18,37 @@
 
 #include "shoot/CShotContext.h"
 
+#include <QDebug>
+#include <QImage>
+
 #include "shoot/CShotWriter.h"
 
 CShotContext::CShotContext(const CShotWriter& writer) : writer(writer) {}
 
-void CShotContext::begin(const QString& id) {
+void CShotContext::begin(const QString& id, const QRect& rect) {
   this->id = id;
-  frameNo = 0;
+  this->rect = rect;
 }
 
-bool CShotContext::shot(QWidget* w, const QSize& size) {
-  return !writer.write(CShotWriter::render(w, size), id).isEmpty();
-}
+bool CShotContext::shot(QWidget* w, const QSize& size) { return emitPicture(w, size, id); }
 
-bool CShotContext::frame(QWidget* w, const QSize& size) {
-  const QString& stem = QString("%1.%2").arg(id).arg(frameNo++, 4, 10, QChar('0'));
-  return !writer.write(CShotWriter::render(w, size), stem).isEmpty();
+bool CShotContext::emitPicture(QWidget* w, const QSize& size, const QString& stem) const {
+  const QImage& image = CShotWriter::render(w, size);
+  if (image.isNull()) {
+    qWarning() << "shoot:" << stem << "has no picture";
+    return false;
+  }
+  // resize() silently stops at the minimum size.
+  if (size.isValid() && image.size() != size) {
+    qWarning() << "shoot:" << stem << "asks for" << size << "and the picture is" << image.size();
+    return false;
+  }
+  if (!rect.isValid()) {
+    return !writer.write(image, stem).isEmpty();
+  }
+  if (!image.rect().contains(rect)) {
+    qWarning() << "shoot:" << stem << "keeps" << rect << "which is not inside" << image.rect();
+    return false;
+  }
+  return !writer.write(image.copy(rect), stem).isEmpty();
 }

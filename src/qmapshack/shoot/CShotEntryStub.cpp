@@ -24,3 +24,5 @@ bool CShotEntry::isDocRun(const CAppOpts&) { return false; }
 void CShotEntry::pinEnvironment(int, char**) {}
 
 bool CShotEntry::prepare(const CAppOpts&) { return true; }
+
+std::optional<qint32> CShotEntry::run(const CAppOpts&, CMainWindow&) { return std::nullopt; }

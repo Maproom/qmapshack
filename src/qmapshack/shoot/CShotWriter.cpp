@@ -117,9 +117,11 @@ bool CShotWriter::settleStable(QWidget* w) {
 
 QImage CShotWriter::render(QWidget* w, const QSize& size) {
   settle(w);
-  // Grow to the hint, never below the size the widget already has.
-  w->resize(size.isValid() ? size : w->size().expandedTo(w->sizeHint()));
-  settle(w);
+  // A child keeps its layout size; resizing it would outlive the shot.
+  if (w->isWindow()) {
+    w->resize(size.isValid() ? size : w->size().expandedTo(w->sizeHint()));
+    settle(w);
+  }
 
   const bool hasCanvas = nullptr != qobject_cast<CCanvas*>(w) || nullptr != w->findChild<CCanvas*>();
   if (hasCanvas && !settleStable(w)) {

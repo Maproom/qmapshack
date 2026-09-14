@@ -1206,6 +1206,8 @@ void CCanvas::zoom(int index) {
   slotTriggerCompleteUpdate(eRedrawAll);
 }
 
+int CCanvas::getZoomIndex() const { return map->zoom(); }
+
 bool CCanvas::findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint32 threshold, QPolygonF& polyline) {
   return map->findPolylineCloseBy(pt1, pt2, threshold, polyline);
 }

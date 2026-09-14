@@ -35,6 +35,9 @@ class IMapOnline : public IMap {
   IMapOnline(CMapDraw* parent);
   virtual ~IMapOnline() override;
 
+  qint32 pendingTiles() override;
+  qint32 failedTiles() override;
+
  signals:
   void sigQueueChanged();
 
@@ -55,6 +58,8 @@ class IMapOnline : public IMap {
   /// access manager to request tiles
   QNetworkAccessManager* accessManager = nullptr;
   QList<QString> urlPending;
+  /// tiles the last draw() painted as a hole; reset and counted by the subclass' draw()
+  qint32 tilesFailed = 0;
 
   bool lastRequest = false;
   QElapsedTimer timeLastUpdate;

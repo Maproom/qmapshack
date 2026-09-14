@@ -508,6 +508,9 @@ carries the token twice, which is why each command above is written the way it i
   writer's screen (`--doc-screen`, `panel->screen()->name()`), not a stored position. Measured on
   three screens: asked for `DVI-I-1-1` / `DVI-I-2-2` / `HDMI-1`, the frame came out at x=2320 / 400
   / 4240, always 1119x769.
+- **`processEvents(flags, ms)` does not wait.** It strips `WaitForMoreEvents` and returns as soon as
+  nothing is pending (qcoreapplication.cpp, Qt 6.10.2), so a loop built on it spins. Waiting for
+  something that arrives over the network is a `QEventLoop` quit by a timer.
 - **A decorated window belongs to the window manager until it is mapped.** The panel's geometry has
   to be applied one event loop after it is shown - this desktop answered the constructor's 460x760
   with 1200x996. Once only, so a writer's own resizing survives.
@@ -533,6 +536,48 @@ carries the token twice, which is why each command above is written the way it i
   canvas is identical to itself, so a build with a cold cache and no network produces blank maps
   quickly and quietly. What it catches is a map still arriving, not one that never does. A check
   that the map area is not one flat colour would close it.
+- **No pending tiles is not a drawn map.** `CMapTMS::draw()` clears its queue when a redraw starts
+  and the canvas paints the previous buffer until the draw thread swaps it, so completeness is
+  `CCanvas::isDrawComplete()`: no redraw outstanding, no context running, then no pending tile.
+  In that order - `CMapDraw::drawt()` holds `CMapItem::mutexActiveMaps` for its whole run.
+- **A hidden canvas never completes.** `paintEvent()` returns before it clears `needsRedraw`, so
+  it renders blank. A canvas not `isVisibleTo(w)` is not in the picture and is skipped; one that is
+  but is not `isVisible()` (a `w` never shown) refuses the picture.
+- **Completeness is asked before the render.** Checked after it, a draw finishing during the render
+  is vouched for: with draws slowed to 1.5 s and the load indicator GIFs stopped, 3 of 3 accepted
+  pictures carried the load indicator over the finished map (its hide is queued behind `finished`);
+  checked before, 0 of 3. The animated GIF masks this at normal speed - 12 frames of 100 ms make two
+  renders during a draw differ. A resize refused by a running draw is part of the check too
+  (`drawContextViewportIsCurrent()`): with the window alternating 1200x800 / 1000x700 under the same
+  slowed draws, 9 of 9 shots after a shrink were wrong without it, 0 of 18 with it.
+- **A requested size is not the size a main window picture gets.** 1000x700 came out 1000x753, the
+  window's minimum winning silently, so `shootOne()` (#1247) has to compare the result with `size` and
+  count a mismatch. And the same size differs by resize history: 1200x800 reached again after
+  1000x753 lays the right dock column out 1 px higher than the run's first 1200x800 (2026-09-14).
+  On a never-written configuration, 1200x800 set straight after `show()` rendered 796x796 (2 of 2);
+  with a 500 ms event loop before `show()`, 1200x800 (2 of 2).
+- **Measured for the hidden-canvas refusal (2026-09-14)**, through a temporary hook in `main.cpp`: a
+  main window never shown was accepted as a 1200x800 picture whose canvas never painted with the
+  old visibility filter, and is refused with the `isVisibleTo()` one; shown with the canvas in front
+  and with a page added through `addWidgetToTab()` in front, both are accepted either way.
+- **A failed tile stays a hole until its `CDiskCache` is replaced.** An error and an undecodable
+  reply both store a null image, which the cache answers with a transparent dummy and never requests
+  again, so a per-reply failure count goes stale and a reset per draw would miss it. `restore()`
+  reports the hole and each `draw()` counts what it painted: `failedTiles()` is the last buffer's.
+  The tile size a HiDPI source teaches (`tileSizePx`, `tileScale`) is learned from real tiles only:
+  the 256 px dummy on a 512 px source flipped it on every draw and redrew forever. Measured on a local
+  512 px TMS server missing one tile per zoom level: 20 s timeout before, refused with 1 hole in 0.5 s
+  after, identical requests (2026-09-14). WMTS not run.
+  A cache file that does not load is the same hole: stored as the dummy, it is counted on every draw
+  (measured 2026-09-14: one garbage tile file, 4 of 4 shots refused; before, 4 of 4 accepted).
+- **A main window destroyed while shown crashes.** `~QWidget` closes it, the docks emit
+  `visibilityChanged` into `CMainWindow::slotDockVisibilityChanged()`, whose `docks` member is
+  already gone (gdb, 2026-09-14). A run that leaves `exec()` calls `close()` on the window first.
+- **Measured for #1246 (2026-09-14):** a 1200x800 main window and its canvas render byte-identically
+  twice in one process and across a cold-cache and a warm-cache process; an unreachable tile server
+  is refused with no picture written; a local server failing one zoom level: refused there, accepted
+  at another zoom, refused again back at the first without a new request; nothing under the user's
+  data directories changed.
 - **The `.qm` catalogs are unreachable in a build tree.** `prepareTranslator()` resolves a filesystem
   path that is empty there, while all nine files are already embedded under `:/locale`.
 

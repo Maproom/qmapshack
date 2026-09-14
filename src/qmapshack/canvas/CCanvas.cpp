@@ -1332,6 +1332,22 @@ void CCanvas::waitForDrawContexts() {
   }
 }
 
+bool CCanvas::isDrawComplete() const {
+  // A viewport a running draw refused is still pending on timerViewport.
+  if (eRedrawNone != needsRedraw || !drawContextViewportIsCurrent()) {
+    return false;
+  }
+  for (IDrawContext* context : std::as_const(allDrawContext)) {
+    if (context->isRunning() || context->needsRedraw()) {
+      return false;
+    }
+  }
+  // Only once idle: CMapDraw::drawt() holds the map list mutex.
+  return 0 == map->pendingTiles();
+}
+
+qint32 CCanvas::failedTiles() const { return map->failedTiles(); }
+
 void CCanvas::print(QPainter& p, const QRectF& area, const QPointF& focus, bool printScale) {
   const QSize newSize(area.size().toSize());
 

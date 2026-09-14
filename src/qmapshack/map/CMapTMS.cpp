@@ -307,6 +307,7 @@ void CMapTMS::draw(IDrawContext::buffer_t& buf) /* override */
 
   timeLastUpdate.start();
   urlQueue.clear();
+  tilesFailed = 0;
 
   if (map->needsRedraw()) {
     return;
@@ -366,9 +367,13 @@ void CMapTMS::draw(IDrawContext::buffer_t& buf) /* override */
 
         if (diskCache->contains(url)) {
           QImage img;
-          diskCache->restore(url, img);
+          const bool isTile = diskCache->restore(url, img);
+          if (!isTile) {
+            tilesFailed++;
+          }
           img.setDevicePixelRatio(buf.image.devicePixelRatio());
-          if (img.width() != layer.tileSizePx) {
+          // A hole is the cache's 256 px dummy, not the source's tile size.
+          if (isTile && img.width() != layer.tileSizePx) {
             // we got a tile with a different size then expected
             // (which is normal for the first tile we get from e.g. a HiDPI source)
             // remember it's size and request a redraw

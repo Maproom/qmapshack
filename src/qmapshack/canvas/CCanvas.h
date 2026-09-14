@@ -182,6 +182,12 @@ class CCanvas : public QWidget {
 
   void print(QPainter& p, const QRectF& area, const QPointF& focus, bool printScale = true);
 
+  /** @return false while a layer draws or has work outstanding, or a map waits for tiles */
+  bool isDrawComplete() const;
+
+  /** @return tiles the active maps drew as a hole; call after isDrawComplete(), or it blocks */
+  qint32 failedTiles() const;
+
   /**
      @brief Set a single map file to be shown on the canvas
 

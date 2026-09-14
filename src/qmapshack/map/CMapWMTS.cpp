@@ -345,6 +345,7 @@ void CMapWMTS::draw(IDrawContext::buffer_t& buf) /* override */
 
   timeLastUpdate.start();
   urlQueue.clear();
+  tilesFailed = 0;
 
   if (map->needsRedraw()) {
     return;
@@ -489,14 +490,17 @@ void CMapWMTS::draw(IDrawContext::buffer_t& buf) /* override */
 
         if (diskCache->contains(url)) {
           QImage img;
-          diskCache->restore(url, img);
+          const bool isTile = diskCache->restore(url, img);
+          if (!isTile) {
+            tilesFailed++;
+          }
 
           // Detect HiDPI servers that serve tiles larger (or smaller) than the
           // TileWidth declared in their TileMatrixSet. Learn the real ratio from
           // the fetched tile and request a redraw so a matching matrix is picked
           // and the tile is drawn 1:1 to physical pixels (sharp, with the HiDPI
-          // text-size advantage on scaled displays).
-          if (tilematrix.tileWidth > 0 && img.width() != qRound(tilematrix.tileWidth * layer.tileScale)) {
+          // text-size advantage on scaled displays). A hole is the cache's 256 px dummy.
+          if (isTile && tilematrix.tileWidth > 0 && img.width() != qRound(tilematrix.tileWidth * layer.tileScale)) {
             layer.tileScale = qreal(img.width()) / tilematrix.tileWidth;
             map->emitSigCanvasUpdate();
           }

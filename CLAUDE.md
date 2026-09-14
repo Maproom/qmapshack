@@ -1177,7 +1177,8 @@ work anyway: its `CLAUDE.md` and `.notes` edits belong to text only the feature 
 
 **The subsystem is being built ticket by ticket**, #1245 to #1257 (#1247 is what creates the test
 page). Landed: #1245, the hermetic run — the option, the switches, the two entry points, the
-redirections and the pinning; nothing renders yet. Everything else described below is still the demo
+redirections and the pinning. #1246, the render path — `CShotWriter`, `CShotContext` and tile
+completeness; nothing calls it until #1247's `shootOne()`. Everything else described below is still the demo
 on `QMS-1217_demo` and the facts it established, and a statement about it is a requirement, not a
 description of code you will find.
 
@@ -1467,6 +1468,56 @@ does not paint its whole rect; rendering into an `ARGB32` image gives one to eve
 a third of every PNG for pixels that were all opaque. `renderAtDpr1()` scans the result and
 converts to `RGB32` when nothing used the alpha. Image weight is not cosmetic — every picture ships
 inside the `.qch` that every user downloads.
+
+**A map is complete when `CCanvas::isDrawComplete()` says so, not when no tile is pending.**
+`CMapTMS::draw()` clears its queue as a redraw starts and the canvas paints the previous buffer until
+the draw thread swaps it, so the test is: no redraw outstanding, no draw context running, and only
+then `CMapDraw::pendingTiles()` — `drawt()` holds `CMapItem::mutexActiveMaps` for its whole run, so
+asking first blocks the GUI thread. A hidden canvas' `paintEvent()` returns before clearing
+`needsRedraw`, so it never completes and renders blank. `settleStable()` skips a canvas that is not
+`isVisibleTo(w)` - a canvas tab behind a details page is not in the picture - and refuses one that is
+but is not `isVisible()`, which is a `w` that was never shown: with no canvas left to wait on, two
+blank renders agree and were accepted.
+
+**`settleStable()` asks `isDrawComplete()` before it renders, never after.** A draw that finishes
+during the render leaves a picture the later check vouches for. Measured with every draw slowed to
+1.5 s and the load indicator GIFs stopped: the old order accepted the finished map with the load
+indicator still on it in 3 of 3 runs — `sigStopThread` hides it through the queued `finished` — the new
+order in 0 of 3. At normal speed the animated GIF (12 frames of 100 ms) makes two renders during a draw
+differ, which hides the defect without closing it. `isDrawComplete()` also requires
+`drawContextViewportIsCurrent()`: a resize a running draw refused asks for no redraw until
+`timerViewport` or `finished` applies it. Measured the same way with the window alternating
+1200x800 / 1000x700: without that condition 9 of 9 shots after a shrink carried the load indicator over
+the previous size's buffer, with it 0 of 18 differed from the normal-speed reference.
+
+**A main window picture depends on the resize history, not only on its size.** Asked for 1000x700 it
+came out 1000x753 — the window's minimum wins without a word — and 1200x800 reached again after that
+lays the right dock column out 1 px higher than the first 1200x800 of the run. On a configuration that
+was never written, a window resized to 1200x800 straight after `show()` rendered 796x796 in 2 of 2
+runs, and 1200x800 in 2 of 2 with a 500 ms event loop before `show()` (offscreen, 2026-09-14).
+
+**A failed tile stays a hole until its `CDiskCache` is replaced.** An error and an undecodable reply
+both store a null image, which the cache answers from memory with a transparent dummy and never
+requests again. **Keep that dummy in `cache`:** without it `contains()` is false, the next draw
+queues the tile again, and a server that keeps failing loops through the reply's
+`emitSigCanvasUpdate()` for ever (read from the code, not measured). A cache file that does not load becomes the same dummy, or its null image would set
+`tileSizePx` to 0 and the next draw divides by it. `CDiskCache::restore()` returns false for it, and `CMapTMS::draw()` /
+`CMapWMTS::draw()` reset and count those per draw, so `failedTiles()` is the holes in the last
+buffer, never a lifetime total; `settleStable()` refuses a picture with any. The dummy is 256 px, so
+`CMapTMS` learns `tileSizePx` and `CMapWMTS` learns `tileScale` only from a restored real tile: learned
+from a hole, a 512 px source with one missing tile flips the value on every draw and requests a redraw
+each time, which a shot sees as a 20 s timeout instead of holes. Measured on a local 512 px TMS
+server missing one tile per zoom level, same requests either way: learning from holes timed out after
+20 s, learning from real tiles refused the picture with 1 hole after 0.5 s. The WMTS path is the same
+condition and was not run.
+
+**`processEvents(flags, ms)` does not wait** — it returns as soon as nothing is pending (Qt 6.10.2).
+Waiting for tiles is a `QEventLoop` quit by a `QTimer`.
+
+**Close the main window before leaving `exec()`.** Destroying it while shown makes `~QWidget` hide
+the docks, whose `visibilityChanged` reaches `CMainWindow::slotDockVisibilityChanged()` after its
+`docks` member is gone: SIGSEGV on exit (gdb, 2026-09-14). The SIGTERM handler closes first and exits
+cleanly.
 
 **`(base)` is a state, so it has to be restorable.** `CShotDocMode` captures the arrangement and
 the view once the fixture is up and replays that for the base row; selecting it used to fall into

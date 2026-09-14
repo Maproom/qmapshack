@@ -1102,10 +1102,14 @@ endif(Qt6DBus_FOUND)
 # Both branches implement the same two headers.
 if(QMS_DOC_MODE)
     target_sources(${APPLICATION_NAME} PRIVATE
+        shoot/CShotContext.cpp
+        shoot/CShotContext.h
         shoot/CShotEntry.cpp
         shoot/CShotEntry.h
         shoot/CShotOptions.cpp
         shoot/CShotOptions.h
+        shoot/CShotWriter.cpp
+        shoot/CShotWriter.h
     )
 else()
     target_sources(${APPLICATION_NAME} PRIVATE

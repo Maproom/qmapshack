@@ -23,6 +23,7 @@
 #include <QHash>
 #include <QImage>
 #include <QMutex>
+#include <QSet>
 
 class QTimer;
 
@@ -33,7 +34,8 @@ class CDiskCache : public QObject {
   virtual ~CDiskCache() = default;
 
   void store(const QString& key, QImage& img);
-  void restore(const QString& key, QImage& img);
+  /** @return false when @p img is a hole: a tile stored without a picture, or a file that did not load */
+  bool restore(const QString& key, QImage& img);
   bool contains(const QString& key) const;
 
   static void cleanupRemovedMaps(const QSet<QString>& maps);
@@ -53,6 +55,8 @@ class CDiskCache : public QObject {
   QHash<QString, QString> table;
   /// hash table to cache loaded images in memory
   QHash<QString, QImage> cache;
+  /// hashes whose cache entry is the dummy
+  QSet<QString> failed;
 
   QTimer* timer;
 

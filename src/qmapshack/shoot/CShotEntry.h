@@ -20,8 +20,10 @@
 #define CSHOTENTRY_H
 
 #include <QString>
+#include <optional>
 
 class CAppOpts;
+class CMainWindow;
 
 /** @brief All main() knows about the documentation subsystem; the stub build answers false and does nothing. */
 class CShotEntry {
@@ -45,6 +47,9 @@ class CShotEntry {
      @return false when the run must not start
    */
   static bool prepare(const CAppOpts& opts);
+
+  /** @return the exit code of a `--shoot` run (failures, capped at 255), nothing for any other run */
+  static std::optional<qint32> run(const CAppOpts& opts, CMainWindow& window);
 
  private:
   /** @return the workspace database path, empty when @p dir could not be created */

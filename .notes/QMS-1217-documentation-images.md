@@ -554,12 +554,24 @@ carries the token twice, which is why each command above is written the way it i
   window's minimum winning silently, so `shootOne()` (#1247) has to compare the result with `size` and
   count a mismatch. And the same size differs by resize history: 1200x800 reached again after
   1000x753 lays the right dock column out 1 px higher than the run's first 1200x800 (2026-09-14).
-  On a never-written configuration, 1200x800 set straight after `show()` rendered 796x796 (2 of 2);
-  with a 500 ms event loop before `show()`, 1200x800 (2 of 2).
+  A configuration with no `MainWindow/geometry` maximizes the window 500 ms after the constructor
+  (`showMaximized`); `CShotRunner` waits 1000 ms before the first shot.
 - **Measured for the hidden-canvas refusal (2026-09-14)**, through a temporary hook in `main.cpp`: a
   main window never shown was accepted as a 1200x800 picture whose canvas never painted with the
   old visibility filter, and is refused with the `isVisibleTo()` one; shown with the canvas in front
   and with a page added through `addWidgetToTab()` in front, both are accepted either way.
+- **Measured for #1247 (2026-09-14):** `doc/shots/test.json`, four widget shots, renders
+  byte-identically on two fresh configurations and after a clean rebuild; a page of twelve defective
+  shots - renamed widget, unknown key, undeclared property, missing child, a size below the window's
+  minimum, a rect outside the picture, no size, an exposure, a scenario, a duplicate id, the wrong
+  window, a malformed size - exits 12 and writes nothing; 332 widgets of the main window address and
+  resolve back; `applyView()` reads back exactly and refuses zoom 9999; nothing under `~/.QMapShack`
+  or `~/.config/QLandkarte` changed.
+  Only a window is resized: `test/workspace-filter` resized to its hint came out 355x240 where the
+  window has the dock 355x125, and the next main window picture still showed it over the Database
+  dock; resized only as a window, 355x125 and no trace. A `set` is put back after its shot: the main
+  window before and after `test/workspace-filter` is byte-identical. A `size` on a widget another
+  window lays out is refused - read from the code, not run.
 - **A failed tile stays a hole until its `CDiskCache` is replaced.** An error and an undecodable
   reply both store a null image, which the cache answers with a transparent dummy and never requests
   again, so a per-reply failure count goes stale and a reset per draw would miss it. `restore()`
@@ -708,7 +720,7 @@ ticket of its own, because none of them needs the framework to be reviewable:
 | # | Sub-ticket | Scope | Done when |
 |---|---|---|---|
 | 1 | **Hermetic run** (#1245) | `--shoot`/`--doc` switch parsing under `QMS_DOC_MODE`, no `--shoot-task` - `--color-scheme` gated with the rest, which the demo leaves open - the bundled font, `pinColorScheme()`, `CQmsStyle::pinThemeIndependentHints()`, the console attach in `pinEnvironment()`, cache root and workspace database redirection. `--config`, `--locale` and `QLocale::setDefault()` are already on `dev` and are no part of it | the application starts headless against a scratch configuration and touches nothing under `~/.QMapShack` |
-| 2 | **Render path** (#1246) | `CShotWriter` (settle, settleStable, resize-to-hint, dpr 1, PNG), `CShotContext`; tile completeness through `IMap::pendingTiles()`/`failedTiles()` and its `IMapOnline` / `CMapDraw` / `CCanvas` aggregation | one widget renders to a file, twice, byte-identically; a streaming map is never photographed half drawn |
+| 2 | **Render path** (#1246) | `CShotWriter` (settle, settleStable, a window resized to its hint, dpr 1, PNG), `CShotContext`; tile completeness through `IMap::pendingTiles()`/`failedTiles()` and its `IMapOnline` / `CMapDraw` / `CCanvas` aggregation | one widget renders to a file, twice, byte-identically; a streaming map is never photographed half drawn |
 | 3 | **Shot file and `shootOne()`** (#1247) | the JSON schema of §2, `addressOf()`/`resolve()` symmetric, `set`, `size`, `rect`, `view` as a centre plus a zoom level (`CCanvas::getPosFocus()`/`getZoomIndex()`), the failure counting | a page of plain widget shots renders; a renamed widget fails loudly |
 | 4 | **Exposure catalog** (#1248) | `CShotRegistry`, `SHOT_EXPOSE`, keyed by `typeid`; the `scratch<T>()`/`spare<T>()`/`live<T>()` helpers. No `private`→`protected` form change is needed - the demo has none | a throwaway shot file with one entry per exposure renders all of them |
 | 5 | **Fixture** (#1249) | `CShotFixture` plus a **committed** example project and an **offline** map extract; DEM and POI directories; a database, without which `CDBItemDelegate`'s vocabulary cannot be recorded | a run needs no network and no writer's data |

@@ -1151,7 +1151,7 @@ define no switch. So a user's binary rejects `--shoot`, `--doc` and `--color-sch
 `QCommandLineParser`'s own error instead of accepting a switch that does nothing, and `main.cpp`,
 `CCommandProcessor` and `CAppOpts` carry no preprocessor branch.
 
-`CShotEntry` is all `main.cpp` knows: `isDocRun()` and `prepare()`. `prepare()` runs before
+`CShotEntry` is all `main.cpp` knows: `isDocRun()`, `prepare()` and `run()`. `prepare()` runs before
 `CMainWindow` and is what makes a run harmless and machine-independent — the tile cache root, the
 workspace database, `CUiTheme::pinColorScheme()`, `CQmsStyle::pinThemeIndependentHints()`, the icon
 theme cleared, and the bundled `src/fonts/` families registered, which the offscreen platform on
@@ -1178,7 +1178,8 @@ work anyway: its `CLAUDE.md` and `.notes` edits belong to text only the feature 
 **The subsystem is being built ticket by ticket**, #1245 to #1257 (#1247 is what creates the test
 page). Landed: #1245, the hermetic run — the option, the switches, the two entry points, the
 redirections and the pinning. #1246, the render path — `CShotWriter`, `CShotContext` and tile
-completeness; nothing calls it until #1247's `shootOne()`. Everything else described below is still the demo
+completeness. #1247, the shot file — `CShotPage` (addressing, `set`, `size`, `rect`, the `view`
+functions), `CShotRunner` behind `--shoot`, and `doc/pages/test.md` with widget shots. Everything else described below is still the demo
 on `QMS-1217_demo` and the facts it established, and a statement about it is a requirement, not a
 description of code you will find.
 
@@ -1492,9 +1493,38 @@ the previous size's buffer, with it 0 of 18 differed from the normal-speed refer
 
 **A main window picture depends on the resize history, not only on its size.** Asked for 1000x700 it
 came out 1000x753 — the window's minimum wins without a word — and 1200x800 reached again after that
-lays the right dock column out 1 px higher than the first 1200x800 of the run. On a configuration that
-was never written, a window resized to 1200x800 straight after `show()` rendered 796x796 in 2 of 2
-runs, and 1200x800 in 2 of 2 with a 500 ms event loop before `show()` (offscreen, 2026-09-14).
+lays the right dock column out 1 px higher than the first 1200x800 of the run. So a picture is a
+function of the configuration: two runs on fresh configurations are byte-identical, and a run on the
+configuration the previous one wrote back differs in that column (2026-09-14).
+
+**`CShotWriter::render()` resizes a window, never a widget inside one.** A child is photographed at
+the size its layout gave it; resizing it to its size hint showed the Workspace dock 355x240 where the
+window has it 355x125, and the parent's layout is not re-applied, so the next main window picture at
+the same size still had it covering the Database dock (2026-09-14).
+
+**A configuration with no `MainWindow/geometry` maximizes the window 500 ms after `CMainWindow`'s
+constructor** (`showMaximized`), over any size set before. `CShotRunner` waits 1000 ms before the
+first shot; with it 3 of 3 fresh-configuration runs rendered 1200x800. A resize straight after
+`show()` came out 796x796, which fits that timer; not isolated.
+
+**A shot's `set` is put back after the picture**, newest first and also when the shot fails, so a
+full run shows every later shot as `--only` shows it alone. Measured: the main window after
+`test/workspace-filter` is byte-identical to the one before.
+
+**A `size` is applied to the main window or a window itself, and refused anywhere else.** A widget
+another window lays out - a dialog's child, a floating dock's content - would come out without it (read
+from the code, not measured).
+
+**`setProperty()` on a name the class does not declare adds a dynamic property and answers false**,
+so reading it back finds the value. `driveProperty()` checks `indexOfProperty()` first.
+
+**`addressOf()` answers `std::optional`**: an empty string is the root, nothing is a widget outside
+it, which `resolve()` would otherwise turn into the main window. On a fresh main window 332 widgets
+address and resolve back to themselves. `CCanvas::zoom()` clamps a level past the last (9999 came
+back 30), so `applyView()` reads the view back.
+
+**`--only` is not a path glob** (`NonPathWildcardConversion`): `*` crosses the `/` between page and
+name, as `fnmatch` does. Quote it in a shell.
 
 **A failed tile stays a hole until its `CDiskCache` is replaced.** An error and an undecodable reply
 both store a null image, which the cache answers from memory with a transparent dummy and never

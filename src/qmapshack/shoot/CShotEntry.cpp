@@ -18,17 +18,31 @@
 
 #include "shoot/CShotEntry.h"
 
+#include <QApplication>
 #include <QDir>
 #include <QFileInfo>
 #include <QFontDatabase>
 
+#include "CMainWindow.h"
 #include "gis/CGisListWks.h"
 #include "map/CMapDraw.h"
 #include "setup/CAppOpts.h"
+#include "shoot/CShotRunner.h"
 #include "theme/CQmsStyle.h"
 #include "theme/CUiTheme.h"
 
 bool CShotEntry::isDocRun(const CAppOpts& opts) { return !opts.doc.shootDir.isEmpty() || !opts.doc.docDir.isEmpty(); }
+
+std::optional<qint32> CShotEntry::run(const CAppOpts& opts, CMainWindow& window) {
+  if (opts.doc.shootDir.isEmpty()) {
+    return std::nullopt;
+  }
+
+  CShotRunner* runner = new CShotRunner(opts.doc, &window);
+  runner->start();
+  QApplication::exec();
+  return qMin(runner->getFailures(), 255);
+}
 
 void CShotEntry::pinEnvironment(int argc, char** argv) {
   for (int i = 1; i < argc; ++i) {

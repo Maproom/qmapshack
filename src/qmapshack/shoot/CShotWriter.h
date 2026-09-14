@@ -42,8 +42,8 @@ class CShotWriter {
   /**
      @brief Settle, size and render @p w at dpr 1.
 
-     @param size  explicit size, or an invalid size to grow the widget to its sizeHint
-     @return a null image when a map in the picture is incomplete
+     @param size  a window's size, invalid for its sizeHint; ignored for a non-window widget
+     @return a null image when a map is incomplete
    */
   static QImage render(QWidget* w, const QSize& size);
 

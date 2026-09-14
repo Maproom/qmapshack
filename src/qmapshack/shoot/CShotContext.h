@@ -19,6 +19,7 @@
 #ifndef CSHOTCONTEXT_H
 #define CSHOTCONTEXT_H
 
+#include <QRect>
 #include <QSize>
 #include <QString>
 
@@ -32,19 +33,26 @@ class CShotContext {
  public:
   explicit CShotContext(const CShotWriter& writer);
 
-  /** @brief Start the pictures of shot @p id; restarts the frame count. */
-  void begin(const QString& id);
+  /**
+     @brief Start shot @p id.
 
-  /** @return false when no picture was written */
+     @param rect  the crop of every picture, invalid for none
+   */
+  void begin(const QString& id, const QRect& rect = QRect());
+
+  /**
+     @param size  a window's size, invalid for its sizeHint; ignored for a non-window widget
+     @return false when no picture was written
+   */
   bool shot(QWidget* w, const QSize& size = QSize());
 
-  /** @brief The next picture of the sequence `<id>.0000`, `<id>.0001`, ...; false when none was written. */
-  bool frame(QWidget* w, const QSize& size = QSize());
-
  private:
+  /** @return false when the picture is refused and nothing was written */
+  bool emitPicture(QWidget* w, const QSize& size, const QString& stem) const;
+
   const CShotWriter& writer;
   QString id;
-  qint32 frameNo = 0;
+  QRect rect;
 };
 
 #endif  // CSHOTCONTEXT_H

@@ -19,3 +19,7 @@ A menu is photographed without being opened.
 ## A region of the window
 
 ![](../images/test/toolbar.png)
+
+## A dialog built from nothing
+
+![](../images/test/units-setup.png)

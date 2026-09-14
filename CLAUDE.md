@@ -38,6 +38,8 @@ src/
 - **Never build.** No `cmake --build`, `ninja` or `make` — not even to verify an edit. Make the
   change, run `clang-format`, report, stop. For reference, the user runs
   `cmake --build build --target qmapshack -j$(nproc)`.
+- **Check the facts before changing anything.** Read the code, the demo, the ticket or a measurement
+  first; no guessing, no assumption. What could not be checked is said to be unchecked.
 - **Run it before reporting it.** The build is the user's, but verifying is not: run
   `build/bin/qmapshack` headlessly through `doc/tools/shots.py` (on this checkout: `chapter`,
   `build`) with `-o <scratch>` so nothing in the tree is touched, read the images it produced, and
@@ -1179,9 +1181,11 @@ work anyway: its `CLAUDE.md` and `.notes` edits belong to text only the feature 
 page). Landed: #1245, the hermetic run — the option, the switches, the two entry points, the
 redirections and the pinning. #1246, the render path — `CShotWriter`, `CShotContext` and tile
 completeness. #1247, the shot file — `CShotPage` (addressing, `set`, `size`, `rect`, the `view`
-functions), `CShotRunner` behind `--shoot`, and `doc/pages/test.md` with widget shots. Everything else described below is still the demo
-on `QMS-1217_demo` and the facts it established, and a statement about it is a requirement, not a
-description of code you will find.
+functions), `CShotRunner` behind `--shoot`, and `doc/pages/test.md` with widget shots. #1248, the
+exposure catalog — `CShotRegistry`, `SHOT_EXPOSE` and the 35 entries of `CShotExposures.cpp` that
+need no fixture item. Everything else described below is still the demo on `QMS-1217_demo` and the
+facts it established, and a statement about it is a requirement, not a description of code you will
+find.
 
 What is on `QMS-1217_demo` is a **throwaway demo** of that design. The port names the writer's
 session `shots.py take <page>` and the headless one `shots.py replay`; the demo calls them `doc` and
@@ -1566,6 +1570,27 @@ palette is the one that matters here, because `paletteIsDark()` reads it and `CU
 the main window opens too, and one centred under it could be neither reached, closed nor moved out
 from under — the application had to be killed. A parented `Qt::Tool` already floats above its own
 window.
+
+**An exposure is built by `shootOne()` and deleted when the shot returns**, after the values its `set`
+drove are put back. Its `TYPE` must declare `Q_OBJECT` - `SHOT_EXPOSE` does not compile otherwise,
+through `QtPrivate::HasQ_OBJECT_Macro` - and what the factory built is compared with
+`TYPE::staticMetaObject`; a mismatch refuses the widget. Without `Q_OBJECT` a dialog's meta object
+is `QDialog`'s, which is why five dialogs got one. A second `SHOT_EXPOSE` with a taken id is refused
+and counted as a failure in every `--shoot` run.
+
+**A value a dialog keeps a reference to is a static of its own factory, set again for every
+build.** Shared per type, `SetupFolder` left its folder name behind and `MapPathSetup` showed it as
+the cache root when taken later in the same run. Measured 2026-09-14: the 35 exposures forward and
+in reverse order are byte-identical. The
+exposures that need a fixture item are not in the catalog yet; they come with `CShotFixture` (#1249).
+`CSelectProjectDialog` is built without the workspace tree, which is its form for naming a new
+project.
+
+**Some exposures show the machine, not the application.** Measured 2026-09-14: `CAbout` prints the
+Qt, GDAL, PROJ and Routino versions it runs against; `CWptIconDialog` shows `Paths/externalWptIcons`,
+which falls back to `userDataPath("WaypointIcons")` under the user's home; `CSetupDatabase` says
+whether the QMYSQL driver is installed; `CPhotoViewer` calls `showMaximized()` in its constructor and
+comes out 796x796 offscreen. Byte-identical on one machine, not across machines.
 
 **Every comma in a `SHOT_EXPOSE` lambda must sit inside parentheses.** Only parens
 protect a macro argument — a brace list (`x = {1, 2}`) or a template argument (`f<T, 1>()`) at

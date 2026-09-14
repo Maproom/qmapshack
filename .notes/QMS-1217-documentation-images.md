@@ -170,9 +170,10 @@ qmapshack --doc <repo> --doc-page <ch>                 the launcher: the panel, 
 **The exposure catalog is the only C++ that grows.** `CShotExposures.cpp`, 52 entries, because a
 constructor's arguments cannot be data. Only 9 of the 61 dialogs take nothing but a parent; the rest
 want a fixture item, a singleton alive inside `CMainWindow`, or a result the dialog writes back
-through a reference - the last kind gets a `scratch<T>()` static that outlives the shot. An entry is
-one line and is paid once per class, never per image. Keyed by `typeid`, not the meta object: three
-exposed dialogs have no `Q_OBJECT` and would all report their base class name.
+through a reference - the last kind gets a static of its own factory, set again for every build, so
+no shot sees a value another one left behind. An entry is one line and is paid once per class, never
+per image. The built widget is checked against `TYPE::staticMetaObject`, so every exposed class
+declares `Q_OBJECT`; `SHOT_EXPOSE` does not compile for one that does not.
 
 All 52 entries are `QDialog` subclasses; 52 of the tree's 61 are exposed. The nine that are not:
 `CDetailsGeoCache`, `CDetailsOvlArea`, `CDetailsRte` and `CDetailsWpt`, which a scenario reaches
@@ -572,6 +573,20 @@ carries the token twice, which is why each command above is written the way it i
   dock; resized only as a window, 355x125 and no trace. A `set` is put back after its shot: the main
   window before and after `test/workspace-filter` is byte-identical. A `size` on a widget another
   window lays out is refused - read from the code, not run.
+- **Measured for #1248 (2026-09-14):** 35 exposures - the 52 of the demo less the 17 that need a
+  fixture item - render, and two runs are byte-identical; a shot naming an unknown exposure fails and
+  lists the 35 names sorted; `exposure` with `widget` fails; a second registration of `About` fails
+  the run while the first still builds; an entry declaring `CUnitsSetup` and building `CAbout` is
+  refused. On this branch there are 60 `QDialog` subclasses, not 61 (the demo's 61st is
+  `CShotDocPanel`), and 5 exposed dialogs have no `Q_OBJECT`, not 3: `CAbout`,
+  `CGeoSearchConfigDialog`, `CResolveDatabaseConflict`, `CTimeZoneSetup`, `CUnitsSetup`. Machine
+  dependent content: `CAbout`'s library versions, `CWptIconDialog`'s icon path under the home
+  directory, `CSetupDatabase`'s QMYSQL availability, `CPhotoViewer`'s `showMaximized()`.
+  `CAbout`, `CUnitsSetup`, `CTimeZoneSetup`, `CGeoSearchConfigDialog` and `CResolveDatabaseConflict`
+  got `Q_OBJECT`, so the registry checks `staticMetaObject`, not `typeid`; an entry whose class has
+  none fails to compile. Each factory owns the values its dialog keeps a reference to: shared per
+  type, `MapPathSetup` showed the folder name `SetupFolder` set; the 35 in reverse order are
+  byte-identical to the 35 in order.
 - **A failed tile stays a hole until its `CDiskCache` is replaced.** An error and an undecodable
   reply both store a null image, which the cache answers with a transparent dummy and never requests
   again, so a per-reply failure count goes stale and a reset per draw would miss it. `restore()`
@@ -722,7 +737,7 @@ ticket of its own, because none of them needs the framework to be reviewable:
 | 1 | **Hermetic run** (#1245) | `--shoot`/`--doc` switch parsing under `QMS_DOC_MODE`, no `--shoot-task` - `--color-scheme` gated with the rest, which the demo leaves open - the bundled font, `pinColorScheme()`, `CQmsStyle::pinThemeIndependentHints()`, the console attach in `pinEnvironment()`, cache root and workspace database redirection. `--config`, `--locale` and `QLocale::setDefault()` are already on `dev` and are no part of it | the application starts headless against a scratch configuration and touches nothing under `~/.QMapShack` |
 | 2 | **Render path** (#1246) | `CShotWriter` (settle, settleStable, a window resized to its hint, dpr 1, PNG), `CShotContext`; tile completeness through `IMap::pendingTiles()`/`failedTiles()` and its `IMapOnline` / `CMapDraw` / `CCanvas` aggregation | one widget renders to a file, twice, byte-identically; a streaming map is never photographed half drawn |
 | 3 | **Shot file and `shootOne()`** (#1247) | the JSON schema of §2, `addressOf()`/`resolve()` symmetric, `set`, `size`, `rect`, `view` as a centre plus a zoom level (`CCanvas::getPosFocus()`/`getZoomIndex()`), the failure counting | a page of plain widget shots renders; a renamed widget fails loudly |
-| 4 | **Exposure catalog** (#1248) | `CShotRegistry`, `SHOT_EXPOSE`, keyed by `typeid`; the `scratch<T>()`/`spare<T>()`/`live<T>()` helpers. No `private`→`protected` form change is needed - the demo has none | a throwaway shot file with one entry per exposure renders all of them |
+| 4 | **Exposure catalog** (#1248) | `CShotRegistry`, `SHOT_EXPOSE`, the class checked against `staticMetaObject` with `Q_OBJECT` added where it was missing; values a dialog keeps a reference to owned by its factory; `live<T>()`. No `private`→`protected` form change is needed - the demo has none | a throwaway shot file with one entry per exposure renders all of them |
 | 5 | **Fixture** (#1249) | `CShotFixture` plus a **committed** example project and an **offline** map extract; DEM and POI directories; a database, without which `CDBItemDelegate`'s vocabulary cannot be recorded | a run needs no network and no writer's data |
 | 6 | **shots.py** (#1250) | `compose`, `take`, `replay`, `unused`; the pinned command line and environment; one process per scenario; the leak guard - snapshot `~/.QMapShack` and the user's `workspace.db`, run, diff - which #1245 tested with a throwaway script | `shots.py replay` replays every committed shot, and reports a run that wrote outside the scratch tree |
 | 7 | **Recorder: vocabulary** (#1251) | the event filter, `pressIsStep()`, the step table of §4, `driveProperty()` | a recording of a menu, a control and a row is stored and reads as meaning |

@@ -1106,10 +1106,13 @@ if(QMS_DOC_MODE)
         shoot/CShotContext.h
         shoot/CShotEntry.cpp
         shoot/CShotEntry.h
+        shoot/CShotExposures.cpp
         shoot/CShotOptions.cpp
         shoot/CShotOptions.h
         shoot/CShotPage.cpp
         shoot/CShotPage.h
+        shoot/CShotRegistry.cpp
+        shoot/CShotRegistry.h
         shoot/CShotRunner.cpp
         shoot/CShotRunner.h
         shoot/CShotWriter.cpp

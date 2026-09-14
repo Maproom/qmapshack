@@ -31,11 +31,13 @@
 #include <QVariant>
 #include <QWidget>
 #include <cmath>
+#include <memory>
 
 #include "CMainWindow.h"
 #include "canvas/CCanvas.h"
 #include "gis/proj_x.h"
 #include "shoot/CShotContext.h"
+#include "shoot/CShotRegistry.h"
 #include "shoot/CShotWriter.h"
 
 namespace {
@@ -206,11 +208,6 @@ qint32 CShotPage::shootOne(const QJsonObject& shot, CShotContext& ctx) {
     qWarning() << "shoot:" << id << "has a set that is not an object:" << shot["set"];
     failures++;
   }
-  if (shot.contains("exposure")) {
-    qWarning() << "shoot:" << id << "wants the exposure" << shot["exposure"].toString()
-               << "and this build has no exposure catalog";
-    failures++;
-  }
   if (shot.contains("scenario")) {
     qWarning() << "shoot:" << id << "wants the scenario" << shot["scenario"].toString()
                << "and this build cannot replay one";
@@ -221,11 +218,33 @@ qint32 CShotPage::shootOne(const QJsonObject& shot, CShotContext& ctx) {
   }
 
   QWidget* main = CMainWindow::isNull() ? nullptr : &CMainWindow::self();
-  const QString& address = shot["widget"].toString();
-  QWidget* widget = address.isEmpty() ? topmost(main) : resolve(main, address);
-  if (nullptr == widget) {
-    qWarning() << "shoot:" << id << "finds no widget at" << address;
-    return 1;
+  // Outlives the restore of `set` values below.
+  std::unique_ptr<QWidget> exposure;
+  QWidget* widget = nullptr;
+  if (shot.contains("exposure")) {
+    const QString& name = shot["exposure"].toString();
+    if (shot.contains("widget")) {
+      qWarning() << "shoot:" << id << "has both the exposure" << name << "and a widget";
+      return 1;
+    }
+    if (!CShotRegistry::self().exposureNames().contains(name)) {
+      qWarning() << "shoot:" << id << "wants the exposure" << name
+                 << "- the ones there are:" << CShotRegistry::self().exposureNames();
+      return 1;
+    }
+    exposure.reset(CShotRegistry::self().buildExposure(name, ctx, CMainWindow::getBestWidgetForParent()));
+    if (nullptr == exposure) {
+      qWarning() << "shoot:" << id << "cannot build the exposure" << name;
+      return 1;
+    }
+    widget = exposure.get();
+  } else {
+    const QString& address = shot["widget"].toString();
+    widget = address.isEmpty() ? topmost(main) : resolve(main, address);
+    if (nullptr == widget) {
+      qWarning() << "shoot:" << id << "finds no widget at" << address;
+      return 1;
+    }
   }
 
   // Guards against photographing the window behind a dialog that failed to open.
@@ -324,6 +343,12 @@ qint32 CShotPage::run(const QString& file, CShotContext& ctx, const QString& onl
       only.isEmpty() ? QString("*") : only, QRegularExpression::NonPathWildcardConversion));
 
   qint32 failures = 0;
+  const QStringList& duplicates = CShotRegistry::self().duplicates();
+  for (const QString& name : duplicates) {
+    qWarning() << "shoot: the exposure" << name << "is registered more than once";
+    failures++;
+  }
+
   qint32 taken = 0;
   QSet<QString> ids;
   QList<QJsonObject> toTake;

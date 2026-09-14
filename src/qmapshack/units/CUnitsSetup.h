@@ -23,6 +23,7 @@
 #include "ui_IUnitsSetup.h"
 
 class CUnitsSetup : public QDialog, private Ui::IUnitsSetup {
+  Q_OBJECT
  public:
   CUnitsSetup(QWidget* parent);
   virtual ~CUnitsSetup() = default;

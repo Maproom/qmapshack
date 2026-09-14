@@ -24,7 +24,7 @@
 #include "ui_IAbout.h"
 
 class CAbout : public QDialog, private Ui::IAbout {
-  Q_DECLARE_TR_FUNCTIONS(CAbout)
+  Q_OBJECT
  public:
   CAbout(QWidget* parent);
   virtual ~CAbout();

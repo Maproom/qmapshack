@@ -24,6 +24,7 @@
 #include "ui_ITimeZoneSetup.h"
 
 class CTimeZoneSetup : public QDialog, private Ui::ITimeZoneSetup {
+  Q_OBJECT
  public:
   CTimeZoneSetup(QWidget* parent);
   virtual ~CTimeZoneSetup();

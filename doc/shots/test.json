@@ -36,6 +36,10 @@
                 800
             ],
             "widget": ""
+        },
+        {
+            "exposure": "UnitsSetup",
+            "id": "test/units-setup"
         }
     ]
 }

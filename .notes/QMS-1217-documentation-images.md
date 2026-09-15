@@ -5,7 +5,8 @@ Issue: Maproom/qmapshack#1217. Related: discussion #1209 (documentation rework).
 Goal: every image in the user documentation is build output, regenerable by one command.
 
 Status: a throwaway demo on branch `QMS-1217_demo`. It renders a real page, a writer can use it,
-and a scenario is recorded rather than registered. The fixture is not built.
+and a scenario is recorded rather than registered. The fixture data is committed on `QMS-1217`;
+`CShotFixture` does not load it yet.
 
 This file replaces `QMS-1217-screenshot-framework-plan.md`,
 `QMS-1217-doc-mode-two-process-plan.md` and `shot-input-replay-plan.md`. They were three layers of
@@ -610,19 +611,25 @@ carries the token twice, which is why each command above is written the way it i
 
 ## 10. What the demo does not do
 
-1. **The fixture is half built.** The GIS data is synthesized in memory (`CShotFixture`): a
-   `CQmsProject` with one track, waypoint, route and area, at a fixed epoch. Committed is only the
-   map, `doc/shots/fixture/maps/osm.tms`, activated by `CShotFixture::build()` because a canvas with
-   no active map covers itself with the welcome help. A DEM is a matter of putting files in
-   `doc/shots/fixture/dem/`, not of touching code.
+1. **The demo's fixture is synthesized in memory** (`CShotFixture`): a `CQmsProject` with one
+   track, waypoint, route and area, at a fixed epoch, on the online `osm.tms`. Every change to that
+   data is C++: a ticket, a PR and a rebuild before the writer can carry on.
 
-   Missing: a committed example project, so a page can add its own data. **This is what puts a
-   developer in the writer's loop** - today every change to the example data is C++: a ticket, a PR
-   and a rebuild before the writer can carry on.
+   The branch commits the data instead (#1249), each directory with a `SOURCE.md` naming source,
+   licence and the commands that made it:
 
-   **The map is online, and that is a compromise**, not the offline raster #1209 asked for: a run
-   needs a network the first time and byte-stability now also depends on the tile server. An offline
-   extract of the fixture area replaces it without touching a line of code.
+   | `doc/shots/fixture/` | What |
+   |---|---|
+   | `projects/Example.qms` | project "Example": Track, Waypoint, Route, Area |
+   | `database/Example.db` | SQLite: group "Projects", project "Einstein" |
+   | `maps/bev_km50.vrt` | BEV KM50-R, 10 × 10 km around Example, offline, drawn over `osm.tms` |
+   | `maps/osm.tms` | OpenStreetMap, online |
+   | `dem/tirol_dgm5m.vrt` | Land Tirol 5 m, both projects, nodata 0 beyond the border |
+   | `poi/tannheimer_tal.poi` | OpenStreetMap POIs, mapsforge version 2, both projects |
+
+   **OSM stays online under the offline map**, so a first run needs a network for its tiles and a
+   run with a filled cache needs none. A run opens a copy of the database, never the committed file:
+   opening one migrates it, and a migration asks with a message box a headless run cannot answer.
 2. **Cross-machine determinism is unproven and deliberately not pursued.** One machine is
    byte-stable, and the two halves that failed in the field - the font and the device pixel ratio -
    are fixed. Nothing has compared two machines and nothing needs to: see the non-goal below.
@@ -738,15 +745,21 @@ ticket of its own, because none of them needs the framework to be reviewable:
 | 2 | **Render path** (#1246) | `CShotWriter` (settle, settleStable, a window resized to its hint, dpr 1, PNG), `CShotContext`; tile completeness through `IMap::pendingTiles()`/`failedTiles()` and its `IMapOnline` / `CMapDraw` / `CCanvas` aggregation | one widget renders to a file, twice, byte-identically; a streaming map is never photographed half drawn |
 | 3 | **Shot file and `shootOne()`** (#1247) | the JSON schema of §2, `addressOf()`/`resolve()` symmetric, `set`, `size`, `rect`, `view` as a centre plus a zoom level (`CCanvas::getPosFocus()`/`getZoomIndex()`), the failure counting | a page of plain widget shots renders; a renamed widget fails loudly |
 | 4 | **Exposure catalog** (#1248) | `CShotRegistry`, `SHOT_EXPOSE`, the class checked against `staticMetaObject` with `Q_OBJECT` added where it was missing; values a dialog keeps a reference to owned by its factory; `live<T>()`. No `private`→`protected` form change is needed - the demo has none | a throwaway shot file with one entry per exposure renders all of them |
-| 5 | **Fixture** (#1249) | `CShotFixture` plus a **committed** example project and an **offline** map extract; DEM and POI directories; a database, without which `CDBItemDelegate`'s vocabulary cannot be recorded | a run needs no network and no writer's data |
+| 5 | **Fixture** (#1249) | `CShotFixture` loading the committed data of §10.1: `Example.qms` into the workspace with `project()`/`trk()`/`wpt()`/`rte()`/`area()` resolved from it; both maps on, `bev_km50` over `osm`; the DEM on with hillshading; the POI file; a copy of `Example.db`. Paths reach the run through `--config`. The 17 exposures that need a fixture item | the 17 exposures build; the database tree shows Example/Projects/Einstein from the copy; no writer's data is read; a first run needs a network for the OSM tiles, a run with a filled cache none |
 | 6 | **shots.py** (#1250) | `compose`, `take`, `replay`, `unused`; the pinned command line and environment; one process per scenario; the leak guard - snapshot `~/.QMapShack` and the user's `workspace.db`, run, diff - which #1245 tested with a throwaway script | `shots.py replay` replays every committed shot, and reports a run that wrote outside the scratch tree |
 | 7 | **Recorder: vocabulary** (#1251) | the event filter, `pressIsStep()`, the step table of §4, `driveProperty()` | a recording of a menu, a control and a row is stored and reads as meaning |
-| 8 | **Recorder: adapters** (#1252) | canvas, `IPlot`, `CIconGrid`, and the painted row buttons of all three item delegates - workspace, maps, database; the menu-owner `objectName` audit | each adapter verified end to end against a throwaway page |
+| 8 | **Recorder: adapters** (#1252) | canvas, `IPlot`, `CIconGrid`, and the painted row buttons of all three item delegates - workspace, maps, database; the menu-owner `objectName` audit | each adapter verified end to end against a throwaway page; a recorded scenario that expands a database folder and toggles a row's check state replays |
 | 9 | **Replay** (#1253) | the queue, `clear()` before and after (`CMouseNormal::clearScreenOption()`, `CCanvas::resetMouse()` and the `DeferredDelete` it needs, public `waitForDrawContexts()`), the click path, hit verification, the `tab`-last rule | a page with a scenario reproduces byte-identically, three times in one process |
 | 10 | **Launcher, panel, channel** (#1254) | the session and every file operation, `childArguments()`, the panel's buttons and statuses, `setBusy`, `mayClose()`, `endSession()`, the `QLocalServer` named `qms-doc-<pid>` | the panel comes up, starts and replaces a state process, and asks before closing over unpublished pictures |
 | 11 | **State process and F9** (#1257) | one scenario held up, `Ctrl+Shift+F9`, the keep/throw preview, the region picker, `portableGeometry()`/`namesAPlace()`, `settingsDrift()` | a writer records a scenario and tags a picture without touching a file |
 | 12 | **Writer-facing labels** (#1255) | names, not addresses, in `chooseLivePart()`; `qt_`-prefixed internals not offered | the step list reads in the writer's words |
 | 13 | **Drop the menu split** (#1256) | delete `CGisListWks::buildMenuItemTrk()`, which the replay queue made pointless, and cover a stack-local menu with a shot instead | a shot of the track context menu replays; nothing calls a `buildMenuXxx()` |
+
+**Naming, to settle with Oliver before the branch closes.** The switch prefixes name the driver, not
+what a switch does: `--shoot-scenario` filters which shots a build takes, `--doc-scenario` is the
+state a process comes up in and what marks it as the state process. The `shots.py` verbs (`take`,
+`replay`) do not match the switches (`--doc`, `--shoot`) either. Review every switch, verb and class
+name together, once nothing more is added.
 
 **Review focus, per area.** What is worth a reviewer's attention is not spread evenly:
 
@@ -777,8 +790,8 @@ again.
 
 - The documentation toolchain, page structure and hosting (#1209), beyond the constraints Sphinx
   imposes here.
-- Pictures of online map *services* as documentation subjects. The fixture map is itself online
-  today, which is a compromise on this rule, not an exception to it.
+- Pictures of online map *services* as documentation subjects. The fixture's OSM map under the
+  offline one is online, which is a compromise on this rule, not an exception to it.
 - Retranslating a live `CMainWindow`.
 - Making ffmpeg a build dependency.
 - Icons. Inline icon glyphs in the documentation are `.svgt` renders, not screenshots - a small

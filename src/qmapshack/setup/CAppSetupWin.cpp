@@ -52,6 +52,18 @@ class windowsEventFilter : public QAbstractNativeEventFilter {
   }
 };
 
+namespace {
+/** @return true when the parent handed this stream a pipe or a file */
+bool isHandedOver(DWORD stream) {
+  const HANDLE handle = GetStdHandle(stream);
+  if (nullptr == handle || INVALID_HANDLE_VALUE == handle) {
+    return false;
+  }
+  const DWORD type = GetFileType(handle);
+  return FILE_TYPE_PIPE == type || FILE_TYPE_DISK == type;
+}
+}  // namespace
+
 void CAppSetupWin::attachParentConsole(int argc, char** argv) {
   // Raw arguments: runs before QApplication, whose plugin failures must reach the console.
   bool wanted = false;
@@ -59,15 +71,23 @@ void CAppSetupWin::attachParentConsole(int argc, char** argv) {
     const QByteArray arg(argv[i]);
     wanted = arg.startsWith("--shoot") || arg.startsWith("--doc");
   }
-  if (wanted && AttachConsole(ATTACH_PARENT_PROCESS)) {
-    // A state process inherits these handles. NUL on failure, because freopen() has closed the
-    // stream by then and writing to a closed one loses every later message silently.
-    if (nullptr == freopen("CONOUT$", "w", stdout)) {
-      freopen("NUL", "w", stdout);
-    }
-    if (nullptr == freopen("CONOUT$", "w", stderr)) {
-      freopen("NUL", "w", stderr);
-    }
+  if (!wanted) {
+    return;
+  }
+
+  // Before attaching: a handed-over pipe must be kept.
+  const bool stdoutHandedOver = isHandedOver(STD_OUTPUT_HANDLE);
+  const bool stderrHandedOver = isHandedOver(STD_ERROR_HANDLE);
+  if ((stdoutHandedOver && stderrHandedOver) || !AttachConsole(ATTACH_PARENT_PROCESS)) {
+    return;
+  }
+
+  // NUL on failure: freopen() has closed the stream already.
+  if (!stdoutHandedOver && nullptr == freopen("CONOUT$", "w", stdout)) {
+    freopen("NUL", "w", stdout);
+  }
+  if (!stderrHandedOver && nullptr == freopen("CONOUT$", "w", stderr)) {
+    freopen("NUL", "w", stderr);
   }
 }
 

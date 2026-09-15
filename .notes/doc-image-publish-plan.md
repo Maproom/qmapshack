@@ -1,6 +1,7 @@
 # PLAN — publish only the pictures that really changed
 
-**Status:** implemented. The writer decides; the tool compares nothing.
+**Status:** implemented in the demo; on `QMS-1217` it comes with the panel (#1254). The writer decides;
+the tool compares nothing.
 
 **Scope:** `doc/tools/shots.py` (a `publish` command), `src/qmapshack/shoot/CShotDocPanel.cpp`
 (a fourth button), `CShotDocLauncher` (it already runs `shots.py` and owns the file operations).
@@ -9,7 +10,7 @@
 
 ## The defect
 
-`shots.py chapter|build` writes every picture of a chapter on every run. The bytes depend on the
+Rendering into `doc/images/` writes every picture of a page on every run. The bytes depend on the
 machine, so every writer's run rewrites every PNG and git records a change that is not one. Over a
 few hundred pictures that grows the repository without a single documented thing having changed.
 
@@ -89,7 +90,7 @@ Nothing stores the flag: a row is changed exactly while a work copy exists for i
 |---|---|---|---|
 | `doc/images/` | `publish`, nothing else | — | yes |
 | `doc/images/_work/` | the session, when a picture is taken | by `publish`, then emptied | no |
-| `doc/images/_check/` | `shots.py chapter` / `build` | never | no |
+| `doc/images/_check/` | `shots.py replay` | never | no |
 
 The third is what keeps *Take all again* from marking every row: it answers whether each shot still
 replays, which is a different question from whether a picture should change, and it must not leave

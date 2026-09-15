@@ -34,10 +34,7 @@ class CShotEntry {
   /**
      @brief Set QT_QPA_PLATFORMTHEME=generic so on-screen and headless runs render alike. Before QApplication.
 
-     Qt takes icons and a few style hints from the platform theme, so the same dialog renders Breeze
-     on a KDE desktop and Qt's own icons headless. QT_QPA_PLATFORMTHEME=generic makes both render the
-     same bytes, and Qt reads it while QApplication is constructed - hence here, before the command
-     line has been parsed.
+     Not on Windows, which has no desktop theme.
    */
   static void pinEnvironment(int argc, char** argv);
 

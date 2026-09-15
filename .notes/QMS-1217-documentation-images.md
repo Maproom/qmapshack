@@ -6,7 +6,7 @@ Goal: every image in the user documentation is build output, regenerable by one 
 
 Status: a throwaway demo on branch `QMS-1217_demo`. It renders a real page, a writer can use it,
 and a scenario is recorded rather than registered. On `QMS-1217` the fixture data is committed and
-`CShotFixture` loads it (#1249).
+`CShotFixture` loads it (#1249); `shots.py replay` and `unused` run the pages headless (#1250).
 
 This file replaces `QMS-1217-screenshot-framework-plan.md`,
 `QMS-1217-doc-mode-two-process-plan.md` and `shot-input-replay-plan.md`. They were three layers of
@@ -349,6 +349,7 @@ platforms rule out a shell script.
 | `compose <page> [--scenario <name>] --out <ini>` | the one composer of a run's configuration; the launcher's only way in, hidden from `--help` |
 | `replay [--only GLOB]` | replay every shot and report the ones that no longer replay, one process per scenario; `GLOB` is an id glob - `test/*` one page, `test/menu-project` one picture |
 | `unused [--delete]` | pictures and shot entries no page references any more |
+| `publish` | copy the pictures a writer retook from `doc/images/_work/` into `doc/images/` and empty `_work/`; no render, no comparison |
 
 There is no `list`, `inspect` or `explore`: they were developer probes for authoring exposures and
 nothing in a build depends on them. With them the `--shoot-task` switch goes as well - `--shoot`
@@ -358,14 +359,24 @@ It composes the run's configuration into a scratch copy - the scenario's own fil
 it has none - so a writer's session cannot drift what a build renders. The launcher runs the same
 `compose` before starting a state process, so the writer's session and the build cannot disagree.
 
-**What the tool owns is injected per run, never stored**: `Canvas/{mapPath,demPaths,poiPaths}` from
-`doc/shots/fixture/`, absolute and therefore uncommittable, and `Database/saveOnExit=false` -
-without it a run saves its workspace and the next one loads the demo project twice.
+**What the tool owns is injected per run, never stored**: `Canvas/{cachePath,mapPath,demPaths,poiPaths}` and
+`Route/routino\paths` from `doc/shots/fixture/`, absolute and therefore uncommittable, a
+`Database/Entries` pointing at a scratch copy of `database/Example.db`, and
+`Database/saveOnExit=false` - without it a run saves its workspace and `CShotFixture` refuses the
+next one. The cached tiles' modification times are refreshed before a run.
 
 It pins `-style Fusion`, `--font-family DejaVu Sans`, `--font-size 10`, `--color-scheme light`,
-`--locale en` with `LC_ALL`/`LANG`, `-platform-theme generic`, `TZ=UTC` and an unset
-`QT_SCALE_FACTOR`, and prints which configuration file it read. Every task writes a JSON report
-beside the images, so nothing parses stdout.
+`--locale en` with `LC_ALL`/`LANG`/`LANGUAGE`, `TZ=UTC` and Qt's whole scaling family unset, and with
+`-v` prints which configuration file it read. `QT_QPA_PLATFORMTHEME=generic` is the application's own
+pin (`CShotEntry::pinEnvironment()`), not set on Windows. What a run says about a picture
+is the `shoot:` warnings on stderr - every one names its shot - and the exit code, which is the
+failure count; the application writes no report.
+
+`replay` refuses to start while another QMapShack runs: the leak guard compares the user's cache and
+settings before and after a run, and a session of the writer's own writes there too. A running
+QMapShack holds a lock on `<user data>/.QMapShack.lock` (`.lock` on macOS) - an `fcntl` write lock on
+unix, an exclusive open on Windows - which a documentation run never takes; the tool tests that lock
+and never creates the file. The tool needs Python 3.9 and nothing outside its standard library.
 
 `diff` and `update` are deliberately absent: they mean nothing until the output is byte-stable.
 
@@ -672,7 +683,10 @@ carries the token twice, which is why each command above is written the way it i
 8. **`-platform offscreen` does not deploy on Windows**, and is not meant to: `msvc_64/copyfiles.bat:75`
    and `CopyFilesGis.bat:57` copy `qwindows.dll` alone, and a packaged build has `QMS_DOC_MODE` off
    and rejects `--shoot` anyway. A Windows doc run is a developer's build tree; that it finds Qt's
-   own offscreen plugin there is unconfirmed and belongs to whoever next builds on Windows.
+   own offscreen plugin there is unconfirmed and belongs to whoever next builds on Windows. So is the
+   platform theme: `CShotEntry::pinEnvironment()` leaves `QT_QPA_PLATFORMTHEME` alone on Windows,
+   because a Windows demo run with `generic` exited 3221225477 (discussion #1209). That the exclusion
+   is enough is unconfirmed until a Windows run.
 9. **The colour scheme is pinned, light.** `--color-scheme light|dark` (`pinColorScheme()` in `CShotEntry.cpp`)
    replaces the application palette and sets the style hint. Two levers because neither is enough
    alone: `QPlatformTheme::requestColorScheme()` has an empty default implementation, so the style
@@ -754,11 +768,11 @@ ticket of its own, because none of them needs the framework to be reviewable:
 | 3 | **Shot file and `shootOne()`** (#1247) | the JSON schema of §2, `addressOf()`/`resolve()` symmetric, `set`, `size`, `rect`, `view` as a centre plus a zoom level (`CCanvas::getPosFocus()`/`getZoomIndex()`), the failure counting | a page of plain widget shots renders; a renamed widget fails loudly |
 | 4 | **Exposure catalog** (#1248) | `CShotRegistry`, `SHOT_EXPOSE`, the class checked against `staticMetaObject` with `Q_OBJECT` added where it was missing; values a dialog keeps a reference to owned by its factory; `live<T>()`. No `private`→`protected` form change is needed - the demo has none | a throwaway shot file with one entry per exposure renders all of them |
 | 5 | **Fixture** (#1249) | `CShotFixture` loading the committed data of §10.1: `Example.qms` into the workspace with `project()`/`trk()`/`wpt()`/`rte()`/`area()` resolved from it; both maps on, `bev_km50` over `osm`; the DEM on with hillshading; the POI file; the Routino database; a copy of `Example.db`. Paths reach the run through `--config`. The 16 exposures that need a fixture item; `CPrintDialog` is not exposed | the 16 exposures build; the database dock lists Example from the copy, its expanded folders belong to a scenario; no writer's data is read; a first run needs a network for the OSM tiles, a run with a filled cache none |
-| 6 | **shots.py** (#1250) | `compose`, `take`, `replay`, `unused`; the pinned command line and environment; one process per scenario; the leak guard - snapshot `~/.QMapShack` and the user's `workspace.db`, run, diff - which #1245 tested with a throwaway script; the cached tiles' modification times refreshed before a run, because `CDiskCache` deletes tiles older than `cacheExpiration` every 20 s and an offline run then has holes | `shots.py replay` replays every committed shot, and reports a run that wrote outside the scratch tree |
+| 6 | **shots.py** (#1250) | `compose`, `replay`, `unused`; the pinned command line and environment; one process per scenario; `compose` injects the fixture paths, `Route/routino\paths` and a scratch copy of `Example.db`; the leak guard inside `replay` - list `~/.QMapShack` and the user's settings before and after, a changed file fails the run; the cached tiles' modification times refreshed before a run, because `CDiskCache` deletes tiles older than `cacheExpiration` every 20 s and an offline run then has holes | `shots.py replay` replays every committed shot, and reports a run that wrote outside the scratch tree |
 | 7 | **Recorder: vocabulary** (#1251) | the event filter, `pressIsStep()`, the step table of §4, `driveProperty()` | a recording of a menu, a control and a row is stored and reads as meaning |
 | 8 | **Recorder: adapters** (#1252) | canvas, `IPlot`, `CIconGrid`, and the painted row buttons of all three item delegates - workspace, maps, database; the menu-owner `objectName` audit | each adapter verified end to end against a throwaway page; a recorded scenario that expands a database folder and toggles a row's check state replays |
 | 9 | **Replay** (#1253) | the queue, `clear()` before and after (`CMouseNormal::clearScreenOption()`, `CCanvas::resetMouse()` and the `DeferredDelete` it needs, public `waitForDrawContexts()`), the click path, hit verification, the `tab`-last rule | a page with a scenario reproduces byte-identically, three times in one process |
-| 10 | **Launcher, panel, channel** (#1254) | the session and every file operation, `childArguments()`, the panel's buttons and statuses, `setBusy`, `mayClose()`, `endSession()`, the `QLocalServer` named `qms-doc-<pid>` | the panel comes up, starts and replaces a state process, and asks before closing over unpublished pictures |
+| 10 | **Launcher, panel, channel** (#1254) | `shots.py take` and `shots.py publish`; the session and every file operation, `childArguments()`, the panel's buttons and statuses, `setBusy`, `mayClose()`, `endSession()`, the `QLocalServer` named `qms-doc-<pid>` | the panel comes up, starts and replaces a state process, and asks before closing over unpublished pictures; `publish` puts the retaken pictures into `doc/images/` and empties `_work/` |
 | 11 | **State process and F9** (#1257) | one scenario held up, `Ctrl+Shift+F9`, the keep/throw preview, the region picker, `portableGeometry()`/`namesAPlace()`, `settingsDrift()` | a writer records a scenario and tags a picture without touching a file |
 | 12 | **Writer-facing labels** (#1255) | names, not addresses, in `chooseLivePart()`; `qt_`-prefixed internals not offered | the step list reads in the writer's words |
 | 13 | **Drop the menu split** (#1256) | delete `CGisListWks::buildMenuItemTrk()`, which the replay queue made pointless, and cover a stack-local menu with a shot instead | a shot of the track context menu replays; nothing calls a `buildMenuXxx()` |

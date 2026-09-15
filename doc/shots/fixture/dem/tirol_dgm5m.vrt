@@ -1,0 +1,17 @@
+<VRTDataset rasterXSize="2660" rasterYSize="2060">
+  <SRS dataAxisToSRSAxisMapping="2,1">PROJCS["MGI / Austria GK West",GEOGCS["MGI",DATUM["Militar-Geographische_Institut",SPHEROID["Bessel 1841",6377397.155,299.1528128,AUTHORITY["EPSG","7004"]],AUTHORITY["EPSG","6312"]],PRIMEM["Greenwich",0,AUTHORITY["EPSG","8901"]],UNIT["degree",0.0174532925199433,AUTHORITY["EPSG","9122"]],AUTHORITY["EPSG","4312"]],PROJECTION["Transverse_Mercator"],PARAMETER["latitude_of_origin",0],PARAMETER["central_meridian",10.3333333333333],PARAMETER["scale_factor",1],PARAMETER["false_easting",0],PARAMETER["false_northing",-5000000],UNIT["metre",1,AUTHORITY["EPSG","9001"]],AXIS["Northing",NORTH],AXIS["Easting",EAST],AUTHORITY["EPSG","31254"]]</SRS>
+  <GeoTransform>  9.5000000000000000e+03,  5.0000000000000000e+00,  0.0000000000000000e+00,  2.6960000000000000e+05,  0.0000000000000000e+00, -5.0000000000000000e+00</GeoTransform>
+  <VRTRasterBand dataType="Float32" band="1">
+    <NoDataValue>0</NoDataValue>
+    <ColorInterp>Gray</ColorInterp>
+    <ComplexSource>
+      <SourceFilename relativeToVRT="1">tirol_dgm5m.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2660" RasterYSize="2060" DataType="Float32" BlockXSize="256" BlockYSize="256" />
+      <SrcRect xOff="0" yOff="0" xSize="2660" ySize="2060" />
+      <DstRect xOff="0" yOff="0" xSize="2660" ySize="2060" />
+      <NODATA>0</NODATA>
+    </ComplexSource>
+  </VRTRasterBand>
+  <OverviewList resampling="nearest">2 4 8</OverviewList>
+</VRTDataset>

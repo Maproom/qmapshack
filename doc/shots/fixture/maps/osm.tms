@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The map every documentation shot is taken on. Online, so a run needs a network; the tiles are
+     cached under the run's own cache root and a second run is offline. -->
+<TMS>
+  <Title>OpenStreetMap</Title>
+  <Copyright>© OpenStreetMap contributors</Copyright>
+  <MinZoomLevel>1</MinZoomLevel>
+  <MaxZoomLevel>18</MaxZoomLevel>
+  <Layer idx="0">
+    <Title>OpenStreetMap</Title>
+    <ServerUrl>https://tile.openstreetmap.org/{z}/{x}/{y}.png</ServerUrl>
+  </Layer>
+  <RawHeader>
+    <Value name="User-Agent">QMapShack documentation shots (https://github.com/Maproom/qmapshack)</Value>
+  </RawHeader>
+</TMS>

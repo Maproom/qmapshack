@@ -1184,7 +1184,8 @@ completeness. #1247, the shot file — `CShotPage` (addressing, `set`, `size`, `
 functions), `CShotRunner` behind `--shoot`, and `doc/pages/test.md` with widget shots. #1248, the
 exposure catalog — `CShotRegistry`, `SHOT_EXPOSE` and the 35 entries of `CShotExposures.cpp` that
 need no fixture item. #1249, the fixture — the data under `doc/shots/fixture/`, `CShotFixture`, and the
-16 exposures that build from a fixture item. Everything else described below is still the demo on
+16 exposures that build from a fixture item. #1250, `doc/tools/shots.py` — `replay`, `unused` and the
+hidden `compose`. Everything else described below is still the demo on
 `QMS-1217_demo` and the facts it established, and a statement about it is a requirement, not a
 description of code you will find.
 
@@ -1227,17 +1228,17 @@ custom-painted widget.
 **The fixture is committed data, `doc/shots/fixture/`** (§10.1 of the plan). `CShotFixture::load()`
 loads `projects/Example.qms` from the `fixture/` directory beside the page's shot file, waits for
 `IGisProject::isLoading()` to end - the items are created by a thread through the event loop - and
-hands the first track, waypoint, route and area to `CShotContext`.
+hands the first track, waypoint, route and area to `CShotContext`. Everything else is configuration:
+`fixture/shots.ini` is the base, and `shots.py compose` adds the absolute `Canvas/cachePath`,
+`mapPath`, `demPaths`, `poiPaths`, `Route/routino\paths` and a `Database/Entries` pointing at a
+scratch copy of `database/Example.db`.
 
 **The workspace restore runs about 1100 ms after `CMainWindow`'s constructor** (`slotLateInit()` at
 100 ms schedules `slotLoadWorkspace()` 1000 ms later), so it can land inside a fixture load, and it
 does not check for a project already there. `CShotFixture::load()` waits for
 `CGisListWks::isWorkspaceLoaded()` first and refuses a workspace that already holds `Example.qms`: with
 `Database/saveOnExit` on, a second run otherwise shows the project twice (measured), or
-`loadGisProject()` stops at its "already in the workspace" message box. Everything else is configuration:
-`fixture/shots.ini` is the base, and a run's copy gets the absolute `Canvas/mapPath`, `demPaths`,
-`poiPaths`, `Route/routino/paths` and a `Database/Entries` pointing at a scratch copy of
-`database/Example.db` injected by whoever starts the run.
+`loadGisProject()` stops at its "already in the workspace" message box.
 
 **A map or DEM is activated from the configuration only with more than two keys.**
 `CMapItem::noShadowConfig()` and `CDemItem::noShadowConfig()` answer `shadowConfig.size() <= 2`, so an
@@ -1260,6 +1261,44 @@ and a taller routing dock in `database` and `main-window`, and identical picture
 **Two states no configuration can set** (read from the code): which POI categories are checked lives
 only in `CPoiFilePOI::categoryActivated`, so an active POI file draws nothing until one is checked;
 and nothing stores the database tree's expanded folders. Both belong to a recorded scenario.
+
+**`doc/tools/shots.py` starts every headless run** (#1250): one process per page and scenario group,
+rendered into `doc/images/_check`, pinned command line and environment, a scratch directory as the
+working directory, and a run killed after 600 s. It needs Python 3.9 and only the standard library
+(run with `/usr/bin/python3.9`).
+
+- **What a run says** is its `shoot:` warnings on stderr, its exit code - the failure count - and
+  whether `<out>/<id>.png` exists afterwards; stale pictures of the group are deleted first. `qDebug`
+  lines reach stdout only with `-d`, which `-v` adds.
+- **The user's directories come from the application.** A documentation run without `--config` is
+  refused with exit 1 before `CMainWindow` exists, and with `-d` it has printed `"CACHE" path` and
+  `"USER DATA" path` by then - including on macOS, where Qt's `<APPNAME>` is not documented
+  precisely. The platform setup creates both directories if they are missing.
+- **A running QMapShack is detected by its lock**, not a process list: `USER DATA/.QMapShack.lock`
+  (`.lock` on macOS), an `fcntl` write lock on unix and an exclusive open on Windows, taken by
+  `CSingleInstanceProxy`, which a documentation run never constructs (`main.cpp`). `replay` refuses to
+  start while it is held, and never creates the file.
+- **The leak guard** compares every file and directory below both directories, modification time and
+  size, before and after each run; a change fails the run and names the path.
+- **An INI written for QSettings** keeps Qt's key form - `routino\paths`, `Entries\Example\filename` -
+  and every path with forward slashes, because a backslash in a value is an escape. Every path value is
+  quoted: unquoted, a comma splits it into a list and a semicolon starts a comment (measured with
+  Qt 5). Quoted, a checkout under `Jürgen, a;b` replays every picture identically with Qt 6.10.2
+  (measured).
+- **A shot file is rewritten as `json.dumps(indent=4, sort_keys=True, ensure_ascii=False)` plus a
+  newline**: byte-identical to what `QJsonDocument::Indented` wrote for `test.json` (measured). An
+  empty list or object is not measured.
+- **Windows gets no platform theme pin.** `CShotEntry::pinEnvironment()` sets
+  `QT_QPA_PLATFORMTHEME=generic` for `--shoot` and `--doc` runs except on Windows, and `shots.py`
+  leaves it to the application. In discussion #1209 a Windows demo run with the pin exited 3221225477
+  (access violation); the demo commit that left Windows out (`92c19ead`, rebased away) ran, and it
+  changed more than the pin. Windows has no desktop theme for the pin to keep out, and the offscreen
+  platform ignores the variable anyway. Not run on Windows from this branch; macOS keeps the pin,
+  unmeasured.
+- **The application writes UTF-8** (`CLogHandler`), so `shots.py` decodes its output as UTF-8, not in
+  the console's code page; a misread home directory would leave the leak guard watching nothing and
+  the lock check finding no file. The probe creates both directories, so a reported path that does
+  not exist stops `replay`.
 
 The hooks are small except one: `xValueAt` 6 lines, `pointOfXValue` 7, `iconAt` 4, `rectOfIcon` 11,
 and `CWksItemDelegate::buttonAt` 50 + `pressButton` 73, which have no caller outside `shoot/`.
@@ -1465,8 +1504,10 @@ exposures.
 - **A Windows build owns no console.** `qt_add_executable(${APPLICATION_NAME} WIN32 ...)` links it for
   the GUI subsystem, so everything `CLogHandler` writes to `std::cout`/`std::cerr` is dropped and a
   `QCommandLineParser` error arrives as a message box. `IAppSetup::processArguments()` calls
-  `AttachConsole(ATTACH_PARENT_PROCESS)` for a `--shoot`/`--doc` run and reopens both streams on
-  `CONOUT$`, so the shell that started it gets the output and the state process inherits the handles.
+  `AttachConsole(ATTACH_PARENT_PROCESS)` for a `--shoot`/`--doc` run and reopens a stream on `CONOUT$`
+  only when its standard handle is not already a pipe or a disk file, so the shell that started it
+  gets the output, `shots.py` keeps the pipes it hands over, and the state process inherits the
+  handles. The handle test is untested on Windows.
   Anything a documentation run has to tell the writer is a dialog, never only a log line.
 - **Never search `PATH` for the interpreter.** `shots.py` hands its own `sys.executable` over as
   `--doc-python`, and `CShotDocLauncher` runs `shots.py compose` with that. `python3` on Windows is

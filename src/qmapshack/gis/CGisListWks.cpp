@@ -29,6 +29,7 @@
 #include "device/CDeviceWatcherMac.h"
 #endif
 #include <QApplication>
+#include <QScopeGuard>
 #include <QtSql>
 #include <QtWidgets>
 
@@ -835,6 +836,7 @@ void CGisListWks::slotSaveWorkspace() {
 
 void CGisListWks::slotLoadWorkspace() {
   CGisListWksEditLock lock(true, IGisItem::mutexItems);
+  const auto markLoaded = qScopeGuard([this]() { workspaceLoaded = true; });
 
   QSqlQuery query(db);
 

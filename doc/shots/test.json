@@ -40,6 +40,78 @@
         {
             "exposure": "UnitsSetup",
             "id": "test/units-setup"
+        },
+        {
+            "id": "test/database",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": "dockDatabase"
+        },
+        {
+            "exposure": "ProjWpt",
+            "id": "test/proj-wpt"
+        },
+        {
+            "exposure": "InvalidTrk",
+            "id": "test/invalid-trk"
+        },
+        {
+            "exposure": "EnergyCyclingDialog",
+            "id": "test/energy-cycling"
+        },
+        {
+            "exposure": "CombineTrk",
+            "id": "test/combine-trk"
+        },
+        {
+            "exposure": "CreateRouteFromWpt",
+            "id": "test/create-route-from-wpt"
+        },
+        {
+            "exposure": "SelectCopyAction",
+            "id": "test/select-copy-action"
+        },
+        {
+            "exposure": "SelectSaveAction",
+            "id": "test/select-save-action"
+        },
+        {
+            "exposure": "ResolveDatabaseConflict",
+            "id": "test/resolve-database-conflict"
+        },
+        {
+            "exposure": "SelDevices",
+            "id": "test/sel-devices"
+        },
+        {
+            "exposure": "TrkToRteDialog",
+            "id": "test/trk-to-rte"
+        },
+        {
+            "exposure": "TrkToAreaDialog",
+            "id": "test/trk-to-area"
+        },
+        {
+            "exposure": "TimeDialog",
+            "id": "test/time-dialog"
+        },
+        {
+            "exposure": "PositionDialog",
+            "id": "test/position-dialog"
+        },
+        {
+            "exposure": "ElevationDialog",
+            "id": "test/elevation-dialog"
+        },
+        {
+            "exposure": "InputDialog",
+            "id": "test/input-dialog"
+        },
+        {
+            "exposure": "SetupIconAndName",
+            "id": "test/setup-icon-and-name"
         }
     ]
 }

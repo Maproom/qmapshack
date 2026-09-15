@@ -21,9 +21,29 @@
 #include <QDebug>
 #include <QImage>
 
+#include "gis/ovl/CGisItemOvlArea.h"
+#include "gis/rte/CGisItemRte.h"
+#include "gis/trk/CGisItemTrk.h"
+#include "gis/wpt/CGisItemWpt.h"
 #include "shoot/CShotWriter.h"
 
 CShotContext::CShotContext(const CShotWriter& writer) : writer(writer) {}
+
+QList<IGisItem::key_t> CShotContext::keys() const {
+  QList<IGisItem::key_t> keys;
+  const QList<IGisItem*> items = {fixture.trk, fixture.wpt, fixture.rte, fixture.area};
+  for (IGisItem* item : items) {
+    if (nullptr != item) {
+      keys << item->getKey();
+    }
+  }
+  return keys;
+}
+
+void CShotContext::setFixture(IGisProject* project, CGisItemTrk* trk, CGisItemWpt* wpt, CGisItemRte* rte,
+                              CGisItemOvlArea* area) {
+  fixture = {project, trk, wpt, rte, area};
+}
 
 void CShotContext::begin(const QString& id, const QRect& rect) {
   this->id = id;

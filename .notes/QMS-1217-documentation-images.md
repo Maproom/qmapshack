@@ -5,8 +5,8 @@ Issue: Maproom/qmapshack#1217. Related: discussion #1209 (documentation rework).
 Goal: every image in the user documentation is build output, regenerable by one command.
 
 Status: a throwaway demo on branch `QMS-1217_demo`. It renders a real page, a writer can use it,
-and a scenario is recorded rather than registered. The fixture data is committed on `QMS-1217`;
-`CShotFixture` does not load it yet.
+and a scenario is recorded rather than registered. On `QMS-1217` the fixture data is committed and
+`CShotFixture` loads it (#1249).
 
 This file replaces `QMS-1217-screenshot-framework-plan.md`,
 `QMS-1217-doc-mode-two-process-plan.md` and `shot-input-replay-plan.md`. They were three layers of
@@ -626,6 +626,7 @@ carries the token twice, which is why each command above is written the way it i
    | `maps/osm.tms` | OpenStreetMap, online |
    | `dem/tirol_dgm5m.vrt` | Land Tirol 5 m, both projects, nodata 0 beyond the border |
    | `poi/tannheimer_tal.poi` | OpenStreetMap POIs, mapsforge version 2, both projects |
+   | `routino/tannheimer_tal-*.mem` | Routino database from OpenStreetMap, the DEM's extent |
 
    **OSM stays online under the offline map**, so a first run needs a network for its tiles and a
    run with a filled cache needs none. A run opens a copy of the database, never the committed file:
@@ -677,6 +678,13 @@ carries the token twice, which is why each command above is written the way it i
    alone: `QPlatformTheme::requestColorScheme()` has an empty default implementation, so the style
    hint does nothing on X11, and `QStyle::standardPalette()` asks the platform theme for the very
    scheme being pinned away. `dark` is one constant in `shots.py` away.
+10. **An unreachable network changes the right dock column.** Measured 2026-09-15: the test page from
+    the same tile cache, once with the network and once behind an unreachable proxy, differs in
+    `database` and `main-window` only - the database dock 35 px shorter, the routing dock taller. The
+    copied workspace database is not the cause, and BRouter's version check is not sent at startup
+    while Routino is the selected router. Which widget reacts is not found.
+11. **BRouter has no fixture.** Routino has a database of the DEM's extent; BRouter needs data of its
+    own before its dock and dialogs are documentation subjects.
 
 **Open, and to decide before the naming is fixed:** whether the documentation carries a dark set at
 all and how the scheme enters the file name; whether a picture of a message box is in scope; whether
@@ -745,8 +753,8 @@ ticket of its own, because none of them needs the framework to be reviewable:
 | 2 | **Render path** (#1246) | `CShotWriter` (settle, settleStable, a window resized to its hint, dpr 1, PNG), `CShotContext`; tile completeness through `IMap::pendingTiles()`/`failedTiles()` and its `IMapOnline` / `CMapDraw` / `CCanvas` aggregation | one widget renders to a file, twice, byte-identically; a streaming map is never photographed half drawn |
 | 3 | **Shot file and `shootOne()`** (#1247) | the JSON schema of §2, `addressOf()`/`resolve()` symmetric, `set`, `size`, `rect`, `view` as a centre plus a zoom level (`CCanvas::getPosFocus()`/`getZoomIndex()`), the failure counting | a page of plain widget shots renders; a renamed widget fails loudly |
 | 4 | **Exposure catalog** (#1248) | `CShotRegistry`, `SHOT_EXPOSE`, the class checked against `staticMetaObject` with `Q_OBJECT` added where it was missing; values a dialog keeps a reference to owned by its factory; `live<T>()`. No `private`→`protected` form change is needed - the demo has none | a throwaway shot file with one entry per exposure renders all of them |
-| 5 | **Fixture** (#1249) | `CShotFixture` loading the committed data of §10.1: `Example.qms` into the workspace with `project()`/`trk()`/`wpt()`/`rte()`/`area()` resolved from it; both maps on, `bev_km50` over `osm`; the DEM on with hillshading; the POI file; a copy of `Example.db`. Paths reach the run through `--config`. The 17 exposures that need a fixture item | the 17 exposures build; the database tree shows Example/Projects/Einstein from the copy; no writer's data is read; a first run needs a network for the OSM tiles, a run with a filled cache none |
-| 6 | **shots.py** (#1250) | `compose`, `take`, `replay`, `unused`; the pinned command line and environment; one process per scenario; the leak guard - snapshot `~/.QMapShack` and the user's `workspace.db`, run, diff - which #1245 tested with a throwaway script | `shots.py replay` replays every committed shot, and reports a run that wrote outside the scratch tree |
+| 5 | **Fixture** (#1249) | `CShotFixture` loading the committed data of §10.1: `Example.qms` into the workspace with `project()`/`trk()`/`wpt()`/`rte()`/`area()` resolved from it; both maps on, `bev_km50` over `osm`; the DEM on with hillshading; the POI file; the Routino database; a copy of `Example.db`. Paths reach the run through `--config`. The 16 exposures that need a fixture item; `CPrintDialog` is not exposed | the 16 exposures build; the database dock lists Example from the copy, its expanded folders belong to a scenario; no writer's data is read; a first run needs a network for the OSM tiles, a run with a filled cache none |
+| 6 | **shots.py** (#1250) | `compose`, `take`, `replay`, `unused`; the pinned command line and environment; one process per scenario; the leak guard - snapshot `~/.QMapShack` and the user's `workspace.db`, run, diff - which #1245 tested with a throwaway script; the cached tiles' modification times refreshed before a run, because `CDiskCache` deletes tiles older than `cacheExpiration` every 20 s and an offline run then has holes | `shots.py replay` replays every committed shot, and reports a run that wrote outside the scratch tree |
 | 7 | **Recorder: vocabulary** (#1251) | the event filter, `pressIsStep()`, the step table of §4, `driveProperty()` | a recording of a menu, a control and a row is stored and reads as meaning |
 | 8 | **Recorder: adapters** (#1252) | canvas, `IPlot`, `CIconGrid`, and the painted row buttons of all three item delegates - workspace, maps, database; the menu-owner `objectName` audit | each adapter verified end to end against a throwaway page; a recorded scenario that expands a database folder and toggles a row's check state replays |
 | 9 | **Replay** (#1253) | the queue, `clear()` before and after (`CMouseNormal::clearScreenOption()`, `CCanvas::resetMouse()` and the `DeferredDelete` it needs, public `waitForDrawContexts()`), the click path, hit verification, the `tab`-last rule | a page with a scenario reproduces byte-identically, three times in one process |

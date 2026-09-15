@@ -23,3 +23,26 @@ A menu is photographed without being opened.
 ## A dialog built from nothing
 
 ![](../images/test/units-setup.png)
+
+## The fixture database
+
+![](../images/test/database.png)
+
+## Dialogs built from a fixture item
+
+![](../images/test/proj-wpt.png)
+![](../images/test/invalid-trk.png)
+![](../images/test/energy-cycling.png)
+![](../images/test/combine-trk.png)
+![](../images/test/create-route-from-wpt.png)
+![](../images/test/select-copy-action.png)
+![](../images/test/select-save-action.png)
+![](../images/test/resolve-database-conflict.png)
+![](../images/test/sel-devices.png)
+![](../images/test/trk-to-rte.png)
+![](../images/test/trk-to-area.png)
+![](../images/test/time-dialog.png)
+![](../images/test/position-dialog.png)
+![](../images/test/elevation-dialog.png)
+![](../images/test/input-dialog.png)
+![](../images/test/setup-icon-and-name.png)

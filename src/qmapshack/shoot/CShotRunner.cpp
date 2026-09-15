@@ -20,16 +20,19 @@
 
 #include <QApplication>
 #include <QDebug>
+#include <QDir>
 #include <QEventLoop>
+#include <QFileInfo>
 #include <QTimer>
 #include <QWidget>
 
 #include "shoot/CShotContext.h"
+#include "shoot/CShotFixture.h"
 #include "shoot/CShotPage.h"
 #include "shoot/CShotWriter.h"
 
 namespace {
-/** CMainWindow starts its workspace after 100 ms and maximizes a window with no stored geometry after 500 ms. */
+/** CMainWindow maximizes a window with no stored geometry after 500 ms. */
 constexpr qint32 kStartupMs = 1000;
 }  // namespace
 
@@ -54,7 +57,9 @@ void CShotRunner::slotRun() {
   } else {
     const CShotWriter writer(outDir);
     CShotContext ctx(writer);
-    failures = CShotPage::run(target, ctx, only, scenario);
+    // A page's shot file sits beside the fixture directory.
+    failures = CShotFixture::load(QFileInfo(target).absoluteDir().absoluteFilePath("fixture"), ctx);
+    failures += CShotPage::run(target, ctx, only, scenario);
   }
 
   // Destroying the main window while shown crashes in its docks' visibilityChanged.

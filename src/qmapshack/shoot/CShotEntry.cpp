@@ -45,6 +45,11 @@ std::optional<qint32> CShotEntry::run(const CAppOpts& opts, CMainWindow& window)
 }
 
 void CShotEntry::pinEnvironment(int argc, char** argv) {
+#ifdef Q_OS_WIN
+  // `generic` crashes the QApplication constructor on Windows.
+  Q_UNUSED(argc)
+  Q_UNUSED(argv)
+#else
   for (int i = 1; i < argc; ++i) {
     const QByteArray arg(argv[i]);
     if (arg.startsWith("--shoot") || arg.startsWith("--doc")) {
@@ -52,6 +57,7 @@ void CShotEntry::pinEnvironment(int argc, char** argv) {
       return;
     }
   }
+#endif
 }
 
 bool CShotEntry::prepare(const CAppOpts& opts) {

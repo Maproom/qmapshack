@@ -8,3 +8,5 @@ CMakeUserPresets.json
 
 # A documentation run's own tile cache and workspace database, wherever --shoot points.
 **/_cache/
+# Where shots.py replay renders; only publishing writes doc/images.
+doc/images/_check/

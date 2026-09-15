@@ -19,14 +19,13 @@
 /**
    The exposure catalog: how to build each widget class a shot photographs without opening it.
 
-   Not exposed: CExportDatabase and CSearchDatabase need a database with content, CRangeToolSetup exists
-   only in the range mouse mode, CTemplateWidget is not user-facing, and the four CDetails* dialogs are
-   opened by a recorded scenario. The dialogs that need a fixture item come with the fixture.
+   Not exposed: CExportDatabase, CSearchDatabase (need database content), CRangeToolSetup (range mode only),
+   CTemplateWidget (not user-facing), CDetails* (opened by scenarios), CPrintDialog (its canvas does not paint unshown).
 
-   A value a dialog keeps a reference to is a static of its own factory and set again for every build,
-   so no build sees what another one left behind.
+   A value a dialog holds by reference is a static of its factory, reset on every build.
  */
 
+#include <QCoreApplication>
 #include <QImage>
 #include <QLineEdit>
 #include <QPainter>
@@ -42,10 +41,16 @@
 #include "gis/CGisItemRate.h"
 #include "gis/CGisListDB.h"
 #include "gis/CGisWorkspace.h"
+#include "gis/CSelDevices.h"
 #include "gis/CSetupWorkspace.h"
+#include "gis/db/CDBProject.h"
+#include "gis/db/CResolveDatabaseConflict.h"
 #include "gis/db/CSelectDBFolder.h"
+#include "gis/db/CSelectSaveAction.h"
 #include "gis/db/CSetupDatabase.h"
 #include "gis/db/CSetupFolder.h"
+#include "gis/prj/IGisProject.h"
+#include "gis/rte/CCreateRouteFromWpt.h"
 #include "gis/rte/router/brouter/CRouterBRouterInfo.h"
 #include "gis/rte/router/routino/CRouterRoutinoPathSetup.h"
 #include "gis/search/CGeoSearchConfig.h"
@@ -54,19 +59,32 @@
 #include "gis/search/CSearchExplanationDialog.h"
 #include "gis/summary/CGisSummary.h"
 #include "gis/summary/CGisSummarySetup.h"
+#include "gis/trk/CCombineTrk.h"
 #include "gis/trk/CCutTrk.h"
+#include "gis/trk/CEnergyCyclingDialog.h"
+#include "gis/trk/CGisItemTrk.h"
+#include "gis/trk/CInvalidTrk.h"
+#include "gis/trk/CTrkToAreaDialog.h"
+#include "gis/trk/CTrkToRteDialog.h"
 #include "gis/wpt/CGisItemWpt.h"
+#include "gis/wpt/CProjWpt.h"
+#include "gis/wpt/CSetupIconAndName.h"
 #include "grid/CGrid.h"
 #include "grid/CGridSetup.h"
 #include "grid/CProjWizard.h"
+#include "helpers/CElevationDialog.h"
+#include "helpers/CInputDialog.h"
 #include "helpers/CLinksDialog.h"
 #include "helpers/CMapIconSizesSetup.h"
 #include "helpers/COverviewAdvisory.h"
 #include "helpers/CPhotoViewer.h"
+#include "helpers/CPositionDialog.h"
 #include "helpers/CProgressDialog.h"
+#include "helpers/CSelectCopyAction.h"
 #include "helpers/CSelectProjectDialog.h"
 #include "helpers/CShortcutConfig.h"
 #include "helpers/CShortcutSetupDialog.h"
+#include "helpers/CTimeDialog.h"
 #include "helpers/CToolBarConfig.h"
 #include "helpers/CToolBarSetupDialog.h"
 #include "helpers/CVrtAdvisoryDialog.h"
@@ -77,10 +95,12 @@
 #include "print/CScreenshotDialog.h"
 #include "realtime/CRtSelectSource.h"
 #include "realtime/CRtWorkspace.h"
+#include "shoot/CShotContext.h"
 #include "shoot/CShotRegistry.h"
 #include "units/CCoordFormatSetup.h"
 #include "units/CTimeZoneSetup.h"
 #include "units/CUnitsSetup.h"
+#include "units/IUnit.h"
 #include "widgets/CTextEditWidget.h"
 
 namespace {
@@ -178,6 +198,119 @@ SHOT_EXPOSE("ProgressDialog", "Progress of a long operation", CProgressDialog,
 SHOT_EXPOSE("TextEditWidget", "Rich text editor for descriptions and comments", CTextEditWidget,
             [](CShotContext&, QWidget* p) -> QWidget* {
               return new CTextEditWidget(QObject::tr("<b>A description</b><p>Text, links and images.</p>"), p);
+            });
+
+// --- takes a fixture item ----------------------------------------------------------------------
+
+SHOT_EXPOSE("ProjWpt", "Project a waypoint by bearing and distance", CProjWpt,
+            [](CShotContext& ctx, QWidget* p) -> QWidget* {
+              return (nullptr == ctx.wpt()) ? nullptr : new CProjWpt(*ctx.wpt(), p);
+            });
+SHOT_EXPOSE("InvalidTrk", "Invalid track point report", CInvalidTrk, [](CShotContext& ctx, QWidget* p) -> QWidget* {
+  return (nullptr == ctx.trk()) ? nullptr : new CInvalidTrk(*ctx.trk(), p);
+});
+SHOT_EXPOSE("EnergyCyclingDialog", "Cycling energy and power parameters", CEnergyCyclingDialog,
+            [](CShotContext& ctx, QWidget* p) -> QWidget* {
+              return (nullptr == ctx.trk()) ? nullptr : new CEnergyCyclingDialog(ctx.trk()->getEnergyCycling(), p);
+            });
+SHOT_EXPOSE("CombineTrk", "Combine several tracks into one", CCombineTrk,
+            [](CShotContext& ctx, QWidget* p) -> QWidget* {
+              return new CCombineTrk(ctx.keys(), QList<IGisItem::key_t>(), p);
+            });
+SHOT_EXPOSE("CreateRouteFromWpt", "Build a route from waypoints", CCreateRouteFromWpt,
+            [](CShotContext& ctx, QWidget* p) -> QWidget* { return new CCreateRouteFromWpt(ctx.keys(), p); });
+SHOT_EXPOSE("SelectCopyAction", "What to do with an item that is already there", CSelectCopyAction,
+            [](CShotContext& ctx, QWidget* p) -> QWidget* {
+              const IGisItem* trk = ctx.trk();
+              return (nullptr == trk) ? nullptr : new CSelectCopyAction(trk, trk, p);
+            });
+SHOT_EXPOSE("SelectSaveAction", "What to save when database and workspace differ", CSelectSaveAction,
+            [](CShotContext& ctx, QWidget* p) -> QWidget* {
+              const IGisItem* trk = ctx.trk();
+              return (nullptr == trk) ? nullptr : new CSelectSaveAction(trk, trk, p);
+            });
+SHOT_EXPOSE("ResolveDatabaseConflict", "Which side of a database conflict wins", CResolveDatabaseConflict,
+            [](CShotContext& ctx, QWidget* p) -> QWidget* {
+              static CDBProject::action_e actionForAll;
+              actionForAll = CDBProject::eActionNone;
+              CGisItemTrk* trk = ctx.trk();
+              if (nullptr == trk) {
+                return nullptr;
+              }
+              const QString& msg =
+                  QCoreApplication::translate("CDBProject",
+                                              "The item %1 has been changed by %2 (%3). \n\n"
+                                              "To solve this conflict you can create and save a clone, force your "
+                                              "version or drop your version and take the one from the database")
+                      .arg(trk->getNameEx(), "fuzzybear", trk->getTimestamp().toString("yyyy-MM-dd hh:mm:ss"));
+              return new CResolveDatabaseConflict(msg, trk, actionForAll, p);
+            });
+SHOT_EXPOSE("SelDevices", "Which device to copy a project to", CSelDevices,
+            [](CShotContext& ctx, QWidget*) -> QWidget* {
+              IGisProject* project = ctx.project();
+              return (nullptr == project) ? nullptr : new CSelDevices(project, project->treeWidget());
+            });
+SHOT_EXPOSE("TrkToRteDialog", "Turn a track into a route", CTrkToRteDialog,
+            [](CShotContext& ctx, QWidget*) -> QWidget* {
+              static IGisProject* project = nullptr;
+              static QString name;
+              static bool saveSubPoints = false;
+              if (nullptr == ctx.project() || nullptr == ctx.trk()) {
+                return nullptr;
+              }
+              project = ctx.project();
+              name = ctx.trk()->getName();
+              return new CTrkToRteDialog(project, name, saveSubPoints);
+            });
+SHOT_EXPOSE("TrkToAreaDialog", "Turn a track into an area", CTrkToAreaDialog,
+            [](CShotContext& ctx, QWidget*) -> QWidget* {
+              static IGisProject* project = nullptr;
+              static QString name;
+              if (nullptr == ctx.project() || nullptr == ctx.trk()) {
+                return nullptr;
+              }
+              project = ctx.project();
+              name = ctx.trk()->getName();
+              return new CTrkToAreaDialog(project, name);
+            });
+SHOT_EXPOSE("TimeDialog", "Edit a timestamp", CTimeDialog, [](CShotContext& ctx, QWidget* p) -> QWidget* {
+  return (nullptr == ctx.wpt()) ? nullptr : new CTimeDialog(p, ctx.wpt()->getTimestamp());
+});
+SHOT_EXPOSE("PositionDialog", "Edit a position", CPositionDialog, [](CShotContext& ctx, QWidget* p) -> QWidget* {
+  static QPointF pos;
+  if (nullptr == ctx.wpt()) {
+    return nullptr;
+  }
+  pos = ctx.wpt()->getPosition();
+  return new CPositionDialog(p, pos);
+});
+SHOT_EXPOSE("ElevationDialog", "Edit an elevation", CElevationDialog, [](CShotContext& ctx, QWidget* p) -> QWidget* {
+  static QVariant value;
+  if (nullptr == ctx.wpt()) {
+    return nullptr;
+  }
+  value = ctx.wpt()->getElevation();
+  return new CElevationDialog(p, value, QVariant(NOINT), ctx.wpt()->getPosition());
+});
+SHOT_EXPOSE("InputDialog", "Edit a single value", CInputDialog, [](CShotContext& ctx, QWidget* p) -> QWidget* {
+  static QVariant value;
+  if (nullptr == ctx.wpt()) {
+    return nullptr;
+  }
+  value = ctx.wpt()->getProximity() * IUnit::self().baseFactor;
+  return new CInputDialog(p, QCoreApplication::translate("CDetailsWpt", "Enter new proximity range."), value,
+                          QVariant(NOFLOAT), IUnit::self().baseUnit);
+});
+SHOT_EXPOSE("SetupIconAndName", "Icon and name of a waypoint", CSetupIconAndName,
+            [](CShotContext& ctx, QWidget* p) -> QWidget* {
+              static QString icon;
+              static QString name;
+              if (nullptr == ctx.wpt()) {
+                return nullptr;
+              }
+              icon = ctx.wpt()->getIconName();
+              name = ctx.wpt()->getName();
+              return new CSetupIconAndName(icon, name, p);
             });
 
 // --- takes data no fixture holds --------------------------------------------------------------

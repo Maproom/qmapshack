@@ -1183,9 +1183,10 @@ redirections and the pinning. #1246, the render path — `CShotWriter`, `CShotCo
 completeness. #1247, the shot file — `CShotPage` (addressing, `set`, `size`, `rect`, the `view`
 functions), `CShotRunner` behind `--shoot`, and `doc/pages/test.md` with widget shots. #1248, the
 exposure catalog — `CShotRegistry`, `SHOT_EXPOSE` and the 35 entries of `CShotExposures.cpp` that
-need no fixture item. Everything else described below is still the demo on `QMS-1217_demo` and the
-facts it established, and a statement about it is a requirement, not a description of code you will
-find.
+need no fixture item. #1249, the fixture — the data under `doc/shots/fixture/`, `CShotFixture`, and the
+16 exposures that build from a fixture item. Everything else described below is still the demo on
+`QMS-1217_demo` and the facts it established, and a statement about it is a requirement, not a
+description of code you will find.
 
 What is on `QMS-1217_demo` is a **throwaway demo** of that design. The port names the writer's
 session `shots.py take <page>` and the headless one `shots.py replay`; the demo calls them `doc` and
@@ -1223,8 +1224,42 @@ absent is the workspace). Three are left - `CDateTimeEditor`, `CPhotoViewer`,
 `CRouterBRouterTilesSelectArea` - and the list grows only when somebody writes a new
 custom-painted widget.
 
-**The fixture has no database**, so nothing in a documentation run has a `CDBItemDelegate` row: that
-vocabulary cannot be exercised until `CShotFixture` builds one.
+**The fixture is committed data, `doc/shots/fixture/`** (§10.1 of the plan). `CShotFixture::load()`
+loads `projects/Example.qms` from the `fixture/` directory beside the page's shot file, waits for
+`IGisProject::isLoading()` to end - the items are created by a thread through the event loop - and
+hands the first track, waypoint, route and area to `CShotContext`.
+
+**The workspace restore runs about 1100 ms after `CMainWindow`'s constructor** (`slotLateInit()` at
+100 ms schedules `slotLoadWorkspace()` 1000 ms later), so it can land inside a fixture load, and it
+does not check for a project already there. `CShotFixture::load()` waits for
+`CGisListWks::isWorkspaceLoaded()` first and refuses a workspace that already holds `Example.qms`: with
+`Database/saveOnExit` on, a second run otherwise shows the project twice (measured), or
+`loadGisProject()` stops at its "already in the workspace" message box. Everything else is configuration:
+`fixture/shots.ini` is the base, and a run's copy gets the absolute `Canvas/mapPath`, `demPaths`,
+`poiPaths`, `Route/routino/paths` and a `Database/Entries` pointing at a scratch copy of
+`database/Example.db` injected by whoever starts the run.
+
+**A map or DEM is activated from the configuration only with more than two keys.**
+`CMapItem::noShadowConfig()` and `CDemItem::noShadowConfig()` answer `shadowConfig.size() <= 2`, so an
+entry holding `isActive` alone comes up unused and `activate()` is never called. The base carries
+what `IDrawObject::saveConfig()` writes as well - `opacity`, `minScale`, `maxScale` - and the tile
+cache keys for `osm.tms`.
+
+**The DEM is drawn over the maps and the POIs** (`CCanvas.cpp` paints map, POI, DEM, GIS), at its own
+opacity: at 100 the relief hides the map entirely (measured). The base uses 20.
+
+**A tile cache expires while a run is using it.** `CDiskCache` deletes tile files whose modification
+time is more than `cacheExpiration` days old (1-14 in the map setup) from a 20 s timer; a deleted tile
+is requested again, and without a network it is a hole that refuses the picture. A run on a cache
+older than that refreshes the files' modification times first.
+
+**Whether the network is reachable changes the right dock column** (measured, cause not found): the
+same test page from the same tile cache, behind an unreachable proxy, gives a shorter database dock
+and a taller routing dock in `database` and `main-window`, and identical pictures everywhere else.
+
+**Two states no configuration can set** (read from the code): which POI categories are checked lives
+only in `CPoiFilePOI::categoryActivated`, so an active POI file draws nothing until one is checked;
+and nothing stores the database tree's expanded folders. Both belong to a recorded scenario.
 
 The hooks are small except one: `xValueAt` 6 lines, `pointOfXValue` 7, `iconAt` 4, `rectOfIcon` 11,
 and `CWksItemDelegate::buttonAt` 50 + `pressButton` 73, which have no caller outside `shoot/`.
@@ -1581,10 +1616,14 @@ and counted as a failure in every `--shoot` run.
 **A value a dialog keeps a reference to is a static of its own factory, set again for every
 build.** Shared per type, `SetupFolder` left its folder name behind and `MapPathSetup` showed it as
 the cache root when taken later in the same run. Measured 2026-09-14: the 35 exposures forward and
-in reverse order are byte-identical. The
-exposures that need a fixture item are not in the catalog yet; they come with `CShotFixture` (#1249).
+in reverse order are byte-identical.
 `CSelectProjectDialog` is built without the workspace tree, which is its form for naming a new
 project.
+
+**A fixture exposure gets what the application's own call site passes** - `CInputDialog` asks for a
+waypoint's proximity as `CDetailsWpt` does, the route and area dialogs are named after the track as
+`CGisItemTrk::toRoute()` names them. 16 of them build from the fixture. `CPrintDialog` is not exposed:
+it shows a canvas of its own inside a dialog that is never shown, and a hidden canvas is refused.
 
 **Some exposures show the machine, not the application.** Measured 2026-09-14: `CAbout` prints the
 Qt, GDAL, PROJ and Routino versions it runs against; `CWptIconDialog` shows `Paths/externalWptIcons`,

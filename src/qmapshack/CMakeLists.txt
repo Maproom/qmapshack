@@ -1107,6 +1107,8 @@ if(QMS_DOC_MODE)
         shoot/CShotEntry.cpp
         shoot/CShotEntry.h
         shoot/CShotExposures.cpp
+        shoot/CShotFixture.cpp
+        shoot/CShotFixture.h
         shoot/CShotOptions.cpp
         shoot/CShotOptions.h
         shoot/CShotPage.cpp

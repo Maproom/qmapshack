@@ -238,6 +238,7 @@ option either; what Squish does is what this does, in the size this project need
 | `QTabBar::currentChanged` within the tab widget; `tabCloseRequested` | `set currentIndex`; `close` | `setCurrentIndex()`; `tabCloseRequested` |
 | `QHeaderView::sectionClicked` | `click` + `section` | a click on the section; sort indicator |
 | `QAbstractItemView::clicked`, `doubleClicked`, `expanded`, `collapsed` | `select`, `dclick`, `expand`, `collapse` + `row` + place in it | a click there / `setExpanded()`; current row |
+| a delegate's `sigButtonPressed` | `click` or `dclick` + `row` + `button` [+ `mouse`] | a click where `buttonRect()` puts the button; the signal |
 | a menu shown for a context menu request | `menu` + `row` or place | the pointer onto the place, a right click |
 | a menu shown by a tool button, a menu bar entry or a submenu entry | `openmenu` + `widget` or `action` [+ `menu` name] | `showMenu()`; a click on the bar's or the open menu's entry; the menu shown |
 | a key press no step came of | `keypress` + key, text, modifiers | the key into its widget |
@@ -248,22 +249,23 @@ place in the widget, `CIconGrid` by the icon's name. A press to its release is o
 `dclick`, ordered at the press, with the release as a pixel offset - a drag moves the content - and
 `held` by the clock when it was held past `CMouseAdapter::clickTimeout`. A hover is one `move`,
 amended. A `wheel` keeps both deltas and the modifiers. Replay checks `hit` and that the point
-reaches the surface. The painted row buttons of the item delegates are not recorded yet (#1252).
+reaches the surface. A row button of the three item delegates is a `click` with `row` and `button`,
+reported by the delegate's `sigButtonPressed` and replayed as a click where `buttonRect()` puts it now.
 
 **A menu entry is addressed by its action's `objectName`, never its text**, which is translated.
 Every menu owner names its actions after the member they are assigned to; a menu built from data
 takes a stable prefix plus an untranslated key: `actionActivity_<act20_e>`,
 `actionColor_<GPX colour name>`, `actionWptIcon_<sym>`, `actionSearchWeb_<index>`,
-`actionAddPoi_<POI name>`. A new `addAction` needs the same.
+`actionAddPoi_<POI file base name>_<id in the file>`, or `actionAddPoi_<name>_<lat>_<lon>` for a map's POI, which has no id. A new `addAction` needs the same.
 
 Done: `CGisListWks` (52), `CGisListDB` (14), `CMouseNormal` (10), `CSearchLineEdit` (8),
-`CGeoSearch` (7), `IPlot` (6), `CGeoSearchWeb`, `CActivityTrk`, `CTableTrkInfo`,
+`CGeoSearch` (7), `IPlot` (6), `CHelpBrowser` (3), `CGeoSearchWeb`, `CActivityTrk`, `CTableTrkInfo`,
 `CHistoryListWidget`, `CWptIconManager` (3), `CPlotProfile`, `CTemplateWidget`, `CTextEditWidget`,
 `IGisItem`.
 
 **`CShotSelfTest` is what shows it works** (`shots.py selftest`): each case performs input through the
 window system while recording, compares the steps, replays them and compares the state the replay
-leaves with the one the recording left. 63 cases; the replay runs its steps as the scenario queue will, the next
+leaves with the one the recording left. 88 cases; the replay runs its steps as the scenario queue will, the next
 one scheduled before a step runs, so a step that opens a menu with `exec()` gets its pick delivered from inside it. The contract the vocabulary is held to - finite,
 tested, reported where it ends, and every recording replayed before it is saved (#1257) - is in
 `QMS-1251-recorder-signals-plan.md`.
@@ -776,7 +778,7 @@ ticket of its own, because none of them needs the framework to be reviewable:
 | 5 | **Fixture** (#1249) | `CShotFixture` loading the committed data of §10.1: `Example.qms` into the workspace with `project()`/`trk()`/`wpt()`/`rte()`/`area()` resolved from it; both maps on, `bev_km50` over `osm`; the DEM on with hillshading; the POI file; the Routino database; a copy of `Example.db`. Paths reach the run through `--config`. The 16 exposures that need a fixture item; `CPrintDialog` is not exposed | the 16 exposures build; the database dock lists Example from the copy, its expanded folders belong to a scenario; no writer's data is read; a first run needs a network for the OSM tiles, a run with a filled cache none |
 | 6 | **shots.py** (#1250) | `compose`, `replay`, `unused`; the pinned command line and environment; one process per scenario; `compose` injects the fixture paths, `Route/routino\paths` and a scratch copy of `Example.db`; the leak guard inside `replay` - list `~/.QMapShack` and the user's settings before and after, a changed file fails the run; the cached tiles' modification times refreshed before a run, because `CDiskCache` deletes tiles older than `cacheExpiration` every 20 s and an offline run then has holes | `shots.py replay` replays every committed shot, and reports a run that wrote outside the scratch tree |
 | 7 | **Recorder: vocabulary** (#1251) | the input frame (`CShotApplication::notify()`), `IShotHandler` and the handler per class, the step table of §4, `key`, the map, the plot and the icon grid as raw input; `stop()` returns JSON, writing it into the shot file is #1257 | `shots.py selftest` - `CShotSelfTest`, committed with the subsystem - records real input and compares every step, and replays what it records back into the same state |
-| 8 | **Recorder: the painted row buttons** (#1252) | the buttons of all three item delegates - workspace, maps, database - which are painted into the row and are no widgets: a `sigButtonPressed(index, button)` and a `pressButton()` in `CWksItemDelegate`, `CMapItemDelegate` and `CDBItemDelegate`, and the handler that records and replays through them; the menu-owner `objectName` audit. The canvas, `IPlot` and `CIconGrid` are done in #1251 | a case in `CShotSelfTest` per delegate; a recorded scenario that expands a database folder and toggles a row's check state replays |
+| 8 | **Recorder: the painted row buttons** (#1252) | the buttons of all three item delegates - workspace, maps, database - which are painted into the row and are no widgets: a `sigButtonPressed(index, button)` and a `buttonRect()` in `CWksItemDelegate`, `CMapItemDelegate` and `CDBItemDelegate`, and the handler that records them and replays them as input; the menu-owner `objectName` audit. The canvas, `IPlot` and `CIconGrid` are done in #1251 | a case in `CShotSelfTest` per delegate; a recorded scenario that expands a database folder and toggles a row's check state replays |
 | 9 | **Replay** (#1253) | the queue that performs a recording, calling `IShotHandler::replay()` per step - the handlers already carry their own half, what is missing is what drives them: the scheduling that survives a modal loop, `clear()` before and after (`CMouseNormal::clearScreenOption()`, `CCanvas::resetMouse()` and the `DeferredDelete` it needs, public `waitForDrawContexts()`), the `tab`-last rule, and a scenario's steps read out of the shot file | a page with a scenario reproduces byte-identically, three times in one process |
 | 10 | **Launcher, panel, channel** (#1254) | `shots.py take` and `shots.py publish`; the session and every file operation but writing the base configuration and a recording, `childArguments()`, the panel's buttons and statuses, `setBusy`, `mayClose()`, `endSession()`, the `QLocalServer` named `qms-doc-<pid>` | the panel comes up, starts and replaces a state process, and asks before closing over unpublished pictures; `publish` puts the retaken pictures into `doc/images/` and empties `_work/` |
 | 11 | **State process and F9** (#1257) | one scenario held up, writing a recording into the shot file only after it replays to the state it was recorded in, `Ctrl+Shift+F9`, the keep/throw preview, the region picker, `portableGeometry()`/`namesAPlace()`, `settingsDrift()` | a writer records a scenario and tags a picture without touching a file |
@@ -795,13 +797,8 @@ name together, once nothing more is added.
   crash, not by reading.
 - **3, 7, 8** - `addressOf()` and `resolve()` must stay symmetric, and every new address kind needs
   both halves in the same commit.
-- **8** - the two places where the demo rewrites shipped behaviour rather than adding to it, both to
-  be reviewed line by line and not taken over: extracting `pressButton()` out of the three delegates
-  inverted `eSave`'s nesting, turned `eActiveProject`'s focus test into a parameter, let a null item
-  on the activate button fall through to `QStyledItemDelegate::editorEvent()`, and made a database
-  row's double click report the check-state button; and `IPlot` lost its `objectName` outright, so a
-  plot built in code is addressed positionally - keeping the name beside `ownerTag` is the
-  alternative, and nothing has checked what else looks a plot up by name.
+- **8** - the delegates' press handling is unchanged apart from one `emit` beside each action; a
+  replay goes through that same path as input, so there is no second way to press a button to review.
 - **3, 9** - the demo reaches the workspace tree through a non-const `CGisWorkspace::getWksList()`,
   which hands every caller write access to serve one. A narrower accessor is preferred.
 - **9** - ordering and idempotence. The bugs here do not look like bugs: they look like a picture of

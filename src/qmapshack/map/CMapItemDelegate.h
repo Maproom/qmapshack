@@ -49,6 +49,18 @@ class CMapItemDelegate : public QStyledItemDelegate {
  public:
   CMapItemDelegate(QTreeWidget* parent);
 
+  /** @brief The buttons painted into a row. */
+  enum class button_e {
+    eNone,
+    eActivate, /**< activate or deactivate the map */
+    eOverview, /**< the overview warning badge, which opens the overview advisory */
+  };
+  Q_ENUM(button_e)
+
+  /** @return where @p button is painted in row @p index, invalid when the row does not show it; @p opt as editorEvent()
+   * gets it */
+  QRect buttonRect(const QStyleOptionViewItem& opt, const QModelIndex& index, button_e button) const;
+
   /**
    * @brief Smoothly animate the indicator bar to a new color.
    *
@@ -108,6 +120,8 @@ class CMapItemDelegate : public QStyledItemDelegate {
   void reset() { data.clear(); }
 
  signals:
+  /** A press on @p button of row @p index acted. */
+  void sigButtonPressed(const QModelIndex& index, CMapItemDelegate::button_e button);
   /** Emitted whenever animation state changes so the view repaints the affected item. */
   void sigUpdateItem(const QString& key);
   /** Internal: relays setProcessing() calls from non-main threads to slotSetProcessing(). */

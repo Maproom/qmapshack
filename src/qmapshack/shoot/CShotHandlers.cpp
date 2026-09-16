@@ -41,11 +41,14 @@
 #include <QMainWindow>
 #include <QMenu>
 #include <QMenuBar>
+#include <QMetaEnum>
 #include <QMouseEvent>
+#include <QPersistentModelIndex>
 #include <QScrollBar>
 #include <QSet>
 #include <QSpinBox>
 #include <QSplitter>
+#include <QStyleOptionViewItem>
 #include <QTabBar>
 #include <QTabWidget>
 #include <QToolButton>
@@ -53,15 +56,22 @@
 #include <QTreeWidget>
 #include <QWheelEvent>
 #include <functional>
+#include <memory>
 #include <numeric>
 #include <optional>
 
 #include "CMainWindow.h"
 #include "canvas/CCanvas.h"
+#include "dem/CDemList.h"
+#include "gis/CDBItemDelegate.h"
+#include "gis/CGisListDB.h"
 #include "gis/CGisListWks.h"
 #include "gis/CGisWorkspace.h"
+#include "gis/CWksItemDelegate.h"
 #include "gis/IGisItem.h"
 #include "gis/proj_x.h"
+#include "map/CMapItemDelegate.h"
+#include "map/CMapList.h"
 #include "mouse/CMouseAdapter.h"
 #include "plot/IPlot.h"
 #include "shoot/CShotAddress.h"
@@ -142,6 +152,31 @@ QJsonArray fractionIn(const QRect& rect, const QPoint& pos) {
 }
 
 // ---- how a step spells buttons and modifiers
+
+/** @return @p button as a step names it: the enumerator without its `e`, `eAutoSyncDev` as `autoSyncDev` */
+template <typename Button>
+QString rowButtonName(Button button) {
+  const char* key = QMetaEnum::fromType<Button>().valueToKey(qint32(button));
+  if (Button::eNone == button || nullptr == key) {
+    return QString();
+  }
+  QString name = QString::fromLatin1(key + 1);
+  name[0] = name[0].toLower();
+  return name;
+}
+
+/** @return the row button a step calls @p name, eNone for a name no button has */
+template <typename Button>
+Button rowButtonByName(const QString& name) {
+  const QMetaEnum meta = QMetaEnum::fromType<Button>();
+  for (qint32 i = 0; i < meta.keyCount(); i++) {
+    const Button button = Button(meta.value(i));
+    if (Button::eNone != button && rowButtonName(button) == name) {
+      return button;
+    }
+  }
+  return Button::eNone;
+}
 
 QString buttonName(Qt::MouseButton button) {
   switch (button) {
@@ -874,6 +909,32 @@ class CHeaderViewHandler : public IShotHandler {
   }
 };
 
+/** Sees a press on a widget before the widget does. */
+class CPressWatch : public QObject {
+ public:
+  /** @brief Watch @p viewport for @p recorder; gone with whichever of the two goes first. */
+  static void install(QObject* recorder, QWidget* viewport, const std::function<void(const QMouseEvent*)>& pressed) {
+    CPressWatch* watch = new CPressWatch(recorder, pressed);
+    viewport->installEventFilter(watch);
+    QObject::connect(viewport, &QObject::destroyed, watch, [watch]() { delete watch; });
+  }
+
+ private:
+  CPressWatch(QObject* parent, const std::function<void(const QMouseEvent*)>& pressed)
+      : QObject(parent), pressed(pressed) {}
+
+ protected:
+  bool eventFilter(QObject* watched, QEvent* event) override {
+    if (QEvent::MouseButtonPress == event->type() || QEvent::MouseButtonDblClick == event->type()) {
+      pressed(static_cast<const QMouseEvent*>(event));
+    }
+    return QObject::eventFilter(watched, event);
+  }
+
+ private:
+  std::function<void(const QMouseEvent*)> pressed;
+};
+
 /** An item view, by the row acted on and the place in it. */
 class CItemViewHandler : public IShotHandler {
  public:
@@ -891,17 +952,28 @@ class CItemViewHandler : public IShotHandler {
         return;
       }
     }
+    // The row double clicked, until the next press: when the delegate takes a double click, its release still emits
+    // `clicked`.
+    const std::shared_ptr<QPersistentModelIndex> doubled = std::make_shared<QPersistentModelIndex>();
+    CPressWatch::install(&recorder, view->viewport(),
+                         [doubled](const QMouseEvent*) { *doubled = QPersistentModelIndex(); });
+
     // Emitted for any button; the right one is the `menu` step.
-    QObject::connect(view, &QAbstractItemView::clicked, &recorder, [this, view, &recorder](const QModelIndex& index) {
-      if (Qt::LeftButton == CShotApplication::frame().button) {
-        recordRow(view, index, recorder, "select");
-      }
-    });
+    QObject::connect(view, &QAbstractItemView::clicked, &recorder,
+                     [this, view, doubled, &recorder](const QModelIndex& index) {
+                       if (doubled->isValid() && *doubled == index) {
+                         return;
+                       }
+                       if (Qt::LeftButton == CShotApplication::frame().button) {
+                         recordRow(view, index, recorder, "select");
+                       }
+                     });
     QObject::connect(view, &QAbstractItemView::doubleClicked, &recorder,
-                     [this, view, &recorder](const QModelIndex& index) {
+                     [this, view, doubled, &recorder](const QModelIndex& index) {
                        if (Qt::LeftButton != CShotApplication::frame().button) {
                          return;
                        }
+                       *doubled = index;
                        // The pair's first click is part of the double click.
                        const QString& row = rowOf(view, index);
                        recorder.retractLast(view, [row](const QJsonObject& step, bool) {
@@ -1069,8 +1141,218 @@ class CItemViewHandler : public IShotHandler {
   }
 };
 
+/**
+   @return the option a view hands its delegate's editorEvent(), rebuilt because initViewItemOption() is protected; the
+           delegates read only rect, font and focus
+ */
+QStyleOptionViewItem delegateOptionOf(const QAbstractItemView* view, const QModelIndex& index) {
+  QStyleOptionViewItem opt;
+  opt.initFrom(view);
+  opt.font = view->font();
+  opt.rect = view->visualRect(index);
+  opt.state &= ~QStyle::State_HasFocus;
+  if (index == view->currentIndex()) {
+    opt.state |= QStyle::State_HasFocus;
+  }
+  return opt;
+}
+
+/**
+   A tree whose delegate paints buttons into its rows: `sigButtonPressed` is a `click` with row and button name, and
+   replaces the row's `select`. Replayed as a click on the button's current rect, checked by the signal.
+ */
+template <typename Delegate>
+class CRowButtonHandler : public CItemViewHandler {
+ public:
+  void watch(QObject* object, CShotRecorder& recorder) const override {
+    CItemViewHandler::watch(object, recorder);
+    QTreeWidget* tree = static_cast<QTreeWidget*>(object);
+    Delegate* delegate = qobject_cast<Delegate*>(tree->itemDelegate());
+    if (nullptr == delegate) {
+      return;
+    }
+
+    // Named before the delegate acts, which can rename or remove the row. Kept until the next press: the release
+    // still emits `clicked`.
+    const std::shared_ptr<press_t> press = std::make_shared<press_t>();
+    const key_t key(&recorder, tree);
+    presses().insert(key, press);
+    QObject::connect(tree, &QObject::destroyed, &recorder, [key]() { presses().remove(key); });
+    QObject::connect(&recorder, &QObject::destroyed, [key]() { presses().remove(key); });
+    CPressWatch::install(&recorder, tree->viewport(), [this, tree, press](const QMouseEvent* event) {
+      const QModelIndex& index = tree->indexAt(event->position().toPoint());
+      // The second press of a double click arrives only as the double click.
+      if (QEvent::MouseButtonDblClick == event->type() && press->took && press->index == index) {
+        press->doubled = true;
+        return;
+      }
+      press->index = index;
+      press->row = rowOf(tree, index);
+      press->button = event->button();
+      press->name.clear();
+      press->took = false;
+      press->doubled = false;
+    });
+
+    QObject::connect(
+        delegate, &Delegate::sigButtonPressed, &recorder,
+        [tree, press, &recorder](const QModelIndex& index, typename Delegate::button_e button) {
+          // Compared, never dereferenced: the row may be gone.
+          if (press->index != index) {
+            return;
+          }
+          press->took = true;
+          press->name = rowButtonName(button);
+          const std::optional<QString>& address = recorder.address(tree);
+          if (!address.has_value()) {
+            return;
+          }
+          if (press->row.isEmpty()) {
+            qWarning() << "shoot: a row of" << tree->metaObject()->className() << "has no name, its button"
+                       << rowButtonName(button) << "is not recorded";
+            return;
+          }
+          QJsonObject step{
+              {"do", "click"}, {"widget", *address}, {"row", press->row}, {"button", rowButtonName(button)}};
+          // A delegate acts on a press of any mouse button.
+          if (Qt::LeftButton != press->button) {
+            step["mouse"] = buttonName(press->button);
+          }
+          recorder.record(tree, step);
+        });
+    // After the view handler's connection, so its `select` exists to retract.
+    QObject::connect(tree, &QAbstractItemView::clicked, &recorder,
+                     [this, tree, press, &recorder](const QModelIndex& index) {
+                       // Left set for a following double click.
+                       if (!press->took || press->index != index) {
+                         return;
+                       }
+                       const QString& row = rowOf(tree, index);
+                       recorder.retractLast(tree, [row](const QJsonObject& step, bool sameFrame) {
+                         return sameFrame && "select" == step["do"].toString() && row == step["row"].toString();
+                       });
+                     });
+    // A double click on a button is one step, replacing the row's `dclick` and the button's `click`.
+    QObject::connect(
+        tree, &QAbstractItemView::doubleClicked, &recorder, [this, tree, press, &recorder](const QModelIndex& index) {
+          if (!press->doubled || press->index != index) {
+            return;
+          }
+          press->doubled = false;
+          const QString& row = rowOf(tree, index);
+          recorder.retractLast(tree, [row](const QJsonObject& step, bool sameFrame) {
+            return sameFrame && "dclick" == step["do"].toString() && row == step["row"].toString();
+          });
+          const QString name = press->name;
+          const QString pressedRow = press->row;
+          const bool retracted = recorder.retractLast(tree, [name, pressedRow](const QJsonObject& step, bool) {
+            return "click" == step["do"].toString() && name == step["button"].toString() &&
+                   pressedRow == step["row"].toString();
+          });
+          const std::optional<QString>& address = recorder.address(tree);
+          if (!retracted || !address.has_value()) {
+            return;
+          }
+          QJsonObject step{{"do", "dclick"}, {"widget", *address}, {"row", pressedRow}, {"button", name}};
+          if (Qt::LeftButton != press->button) {
+            step["mouse"] = buttonName(press->button);
+          }
+          recorder.record(tree, step);
+        });
+  }
+
+  /** No `menu` step for a right press on a row button: the button step replays it. */
+  QJsonObject contextMenu(QWidget* target, const QPoint& pos, const CShotRecorder& recorder) const override {
+    const std::shared_ptr<press_t>& press = presses().value(key_t(&recorder, target));
+    const QEvent::Type input = CShotApplication::inputFrame().type;
+    if (nullptr != press && press->took && Qt::RightButton == press->button &&
+        (QEvent::MouseButtonPress == input || QEvent::MouseButtonRelease == input)) {
+      return QJsonObject();
+    }
+    return CItemViewHandler::contextMenu(target, pos, recorder);
+  }
+
+  qint32 replay(const QJsonObject& step, QObject* target) const override {
+    if (!step.contains("button")) {
+      return CItemViewHandler::replay(step, target);
+    }
+    QTreeWidget* tree = static_cast<QTreeWidget*>(target);
+    if (const qint32 failed = failUnlessUsable(tree, step); 0 != failed) {
+      return failed;
+    }
+    Delegate* delegate = qobject_cast<Delegate*>(tree->itemDelegate());
+    if (nullptr == delegate) {
+      return fail("the view paints no row buttons: " + compact(step));
+    }
+    const typename Delegate::button_e button = rowButtonByName<typename Delegate::button_e>(step["button"].toString());
+    if (Delegate::button_e::eNone == button) {
+      return fail("no row button has that name: " + compact(step));
+    }
+    QTreeWidgetItem* item = itemOf(tree, step["row"].toString());
+    if (nullptr == item) {
+      return fail("the view has no such row: " + compact(step));
+    }
+
+    // Measured after the scroll.
+    tree->scrollToItem(item);
+    const QModelIndex& index = tree->indexAt(tree->visualItemRect(item).center());
+    const QRect& rect = delegate->buttonRect(delegateOptionOf(tree, index), index, button);
+    if (!rect.isValid()) {
+      return fail("the row does not show the button now: " + compact(step));
+    }
+    if (const qint32 failed = failUnlessReached(tree->viewport(), rect.center(), step); 0 != failed) {
+      return failed;
+    }
+
+    const Qt::MouseButton mouse = step.contains("mouse") ? buttonOf(step["mouse"].toString()) : Qt::LeftButton;
+    if (Qt::NoButton == mouse) {
+      return fail("the step names no mouse button: " + compact(step));
+    }
+    if (Qt::RightButton == mouse) {
+      // A context menu goes to the widget last entered.
+      CShotSynth::arrive(tree->viewport(), rect.center());
+    }
+
+    bool pressed = false;
+    const QPersistentModelIndex wanted(index);
+    const QMetaObject::Connection connection =
+        QObject::connect(delegate, &Delegate::sigButtonPressed,
+                         [&pressed, wanted, button](const QModelIndex& at, typename Delegate::button_e which) {
+                           pressed = pressed || (wanted == at && button == which);
+                         });
+    CShotSynth::mouse(("dclick" == step["do"].toString()) ? QTest::MouseDClick : QTest::MouseClick, tree->viewport(),
+                      mouse, Qt::NoModifier, rect.center());
+    QObject::disconnect(connection);
+    return pressed ? 0 : fail("the button did not act: " + compact(step));
+  }
+
+ protected:
+  /** @return the row @p row names in @p tree, nullptr when there is none */
+  virtual QTreeWidgetItem* itemOf(const QTreeWidget* tree, const QString& row) const = 0;
+
+ private:
+  /** The last press on a tree, read before the delegate acted. */
+  struct press_t {
+    QPersistentModelIndex index;
+    QString row;
+    Qt::MouseButton button = Qt::NoButton;
+    QString name;         /**< the button that acted */
+    bool took = false;    /**< a row button acted */
+    bool doubled = false; /**< a double click followed on the same row */
+  };
+
+  /** Per recorder and tree. */
+  using key_t = QPair<const CShotRecorder*, const QObject*>;
+
+  /** @return each watched tree's last press */
+  static QHash<key_t, std::shared_ptr<press_t>>& presses() {
+    static QHash<key_t, std::shared_ptr<press_t>> byTree;
+    return byTree;
+  }
+};
+
 /** The workspace, whose rows are named by item path. */
-class CWksListHandler : public CItemViewHandler {
+class CWksListHandler : public CRowButtonHandler<CWksItemDelegate> {
  public:
   const QMetaObject* handles() const override { return &CGisListWks::staticMetaObject; }
 
@@ -1098,6 +1380,46 @@ class CWksListHandler : public CItemViewHandler {
     }
     list->scrollToItem(item, QAbstractItemView::PositionAtTop);
     return true;
+  }
+
+  QTreeWidgetItem* itemOf(const QTreeWidget* tree, const QString& row) const override {
+    return CShotAddress::resolveItemPath(*static_cast<const CGisListWks*>(tree), row);
+  }
+};
+
+/** The database, map and DEM trees, whose rows are named by their text. */
+template <typename Tree, typename Delegate>
+class CNamedRowsHandler : public CRowButtonHandler<Delegate> {
+ public:
+  const QMetaObject* handles() const override { return &Tree::staticMetaObject; }
+
+ protected:
+  QString rowOf(const QAbstractItemView* view, const QModelIndex& index) const override {
+    if (!index.isValid()) {
+      return QString();
+    }
+    const QTreeWidget* tree = static_cast<const QTreeWidget*>(view);
+    return CShotAddress::namePathOf(tree->itemAt(view->visualRect(index).center()));
+  }
+
+  QRect rectOf(const QAbstractItemView* view, const QString& row) const override {
+    const QTreeWidget* tree = static_cast<const QTreeWidget*>(view);
+    QTreeWidgetItem* item = CShotAddress::resolveNamePath(*tree, row);
+    return (nullptr == item) ? QRect() : tree->visualItemRect(item);
+  }
+
+  bool scrollToTop(QAbstractItemView* view, const QString& row) const override {
+    QTreeWidget* tree = static_cast<QTreeWidget*>(view);
+    QTreeWidgetItem* item = CShotAddress::resolveNamePath(*tree, row);
+    if (nullptr == item) {
+      return false;
+    }
+    tree->scrollToItem(item, QAbstractItemView::PositionAtTop);
+    return true;
+  }
+
+  QTreeWidgetItem* itemOf(const QTreeWidget* tree, const QString& row) const override {
+    return CShotAddress::resolveNamePath(*tree, row);
   }
 };
 
@@ -1517,12 +1839,15 @@ const QHash<const QMetaObject*, const IShotHandler*>& handlers() {
   static const CHeaderViewHandler header;
   static const CItemViewHandler view;
   static const CWksListHandler wks;
+  static const CNamedRowsHandler<CGisListDB, CDBItemDelegate> database;
+  static const CNamedRowsHandler<CMapTreeWidget, CMapItemDelegate> maps;
+  static const CNamedRowsHandler<CDemTreeWidget, CMapItemDelegate> dems;
   static const CCanvasHandler canvas;
   static const CPlotHandler plot;
   static const CIconGridHandler grid;
-  static const QList<const IShotHandler*> all = {&action,     &button,   &group,  &combo,    &edit, &spin,
-                                                 &doubleSpin, &dateTime, &slider, &splitter, &dock, &tabs,
-                                                 &header,     &view,     &wks,    &canvas,   &plot, &grid};
+  static const QList<const IShotHandler*> all = {&action,   &button,   &group,    &combo, &edit,   &spin,   &doubleSpin,
+                                                 &dateTime, &slider,   &splitter, &dock,  &tabs,   &header, &view,
+                                                 &wks,      &database, &maps,     &dems,  &canvas, &plot,   &grid};
 
   static QHash<const QMetaObject*, const IShotHandler*> byClass;
   if (byClass.isEmpty()) {

@@ -27,9 +27,14 @@
 #include <QTreeWidgetItem>
 #include <QWidget>
 
+#include "dem/CDemList.h"
+#include "gis/CGisListDB.h"
 #include "gis/CGisListWks.h"
+#include "gis/IDBItem.h"
 #include "gis/IWksItem.h"
 #include "gis/prj/IGisProject.h"
+#include "map/CMapList.h"
+#include "map/IMapItem.h"
 
 namespace {
 /** @return the direct children of @p parent of exactly this class, in construction order */
@@ -68,6 +73,14 @@ QString typeTag(const QTreeWidgetItem* item) {
 QString nameOf(const QTreeWidgetItem* item) {
   const IWksItem* wks = dynamic_cast<const IWksItem*>(item);
   return (nullptr == wks) ? QString() : wks->getName();
+}
+
+QString rowNameOf(const QTreeWidgetItem* item) {
+  if (const IDBItem* db = dynamic_cast<const IDBItem*>(item); nullptr != db) {
+    return db->getName();
+  }
+  const IMapItem* map = dynamic_cast<const IMapItem*>(item);
+  return (nullptr == map) ? QString() : map->getName();
 }
 
 /** @return the first item below @p parent, depth first, with this type tag and name */
@@ -173,6 +186,48 @@ QTreeWidgetItem* CShotAddress::resolveItemPath(const CGisListWks& list, const QS
 
   const QString& rest = path.section('/', 1);
   return rest.contains(':') ? findItem(project, rest.section(':', 0, 0), rest.section(':', 1)) : nullptr;
+}
+
+QString CShotAddress::namePathOf(const QTreeWidgetItem* item) {
+  const QTreeWidget* tree = (nullptr == item) ? nullptr : item->treeWidget();
+  if (nullptr == dynamic_cast<const CGisListDB*>(tree) && nullptr == dynamic_cast<const CMapTreeWidget*>(tree) &&
+      nullptr == dynamic_cast<const CDemTreeWidget*>(tree)) {
+    return QString();
+  }
+
+  QStringList names;
+  for (const QTreeWidgetItem* row = item; nullptr != row; row = row->parent()) {
+    const QString& name = rowNameOf(row);
+    if (name.isEmpty()) {
+      return QString();
+    }
+    names.prepend(name);
+  }
+  const QString& path = names.join('/');
+  // A '/' in a name, or a name used twice below the same parent, finds another row.
+  return (resolveNamePath(*tree, path) == item) ? path : QString();
+}
+
+QTreeWidgetItem* CShotAddress::resolveNamePath(const QTreeWidget& tree, const QString& path) {
+  if (path.isEmpty()) {
+    return nullptr;
+  }
+
+  QTreeWidgetItem* row = tree.invisibleRootItem();
+  const QStringList& names = path.split('/');
+  for (const QString& name : names) {
+    QTreeWidgetItem* found = nullptr;
+    for (int i = 0; i < row->childCount() && nullptr == found; i++) {
+      if (rowNameOf(row->child(i)) == name) {
+        found = row->child(i);
+      }
+    }
+    if (nullptr == found) {
+      return nullptr;
+    }
+    row = found;
+  }
+  return row;
 }
 
 QString CShotAddress::rowPathOf(const QModelIndex& index) {

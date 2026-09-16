@@ -27,6 +27,7 @@ class CGisListWks;
 class QAbstractItemModel;
 class QAbstractItemView;
 class QPoint;
+class QTreeWidget;
 class QTreeWidgetItem;
 class QWidget;
 
@@ -53,6 +54,16 @@ QString itemPathOf(const QTreeWidgetItem* item);
 
 /** @return the workspace item @p path names, or nullptr */
 QTreeWidgetItem* resolveItemPath(const CGisListWks& list, const QString& path);
+
+/**
+   @brief The path of a database or map tree row: names from the top level down, `Example/Projects`.
+
+   @return empty for a row of another tree, or when the path would not resolve to it
+ */
+QString namePathOf(const QTreeWidgetItem* item);
+
+/** @return the row of @p tree @p path names, or nullptr */
+QTreeWidgetItem* resolveNamePath(const QTreeWidget& tree, const QString& path);
 
 /** @return the row numbers from the top level down and the column, `0/2:1` */
 QString rowPathOf(const QModelIndex& index);

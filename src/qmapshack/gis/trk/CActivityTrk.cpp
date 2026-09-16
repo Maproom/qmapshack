@@ -86,11 +86,14 @@ QMenu* CActivityTrk::getMenu(const QList<IGisItem::key_t>& keys, QWidget* parent
   QAction* act;
 
   act = menu->addAction(QIcon("://icons/ActNone.svgt"), tr("No Activity"));
+  act->setObjectName("actionActivity_" + QString::number(CTrackData::trkpt_t::eAct20None));
   auto func = [keys]() { CGisWorkspace::self().slotActivityTrkByKey(keys, CTrackData::trkpt_t::eAct20None); };
   QAction::connect(act, &QAction::triggered, &CGisWorkspace::self(), func);
 
   for (const desc_t& desc : std::as_const(actDescriptor)) {
     act = menu->addAction(QIcon(desc.iconSvg), desc.name);
+    // The act20_e value; the name is translated.
+    act->setObjectName("actionActivity_" + QString::number(desc.activity));
     auto func = [keys, desc]() { CGisWorkspace::self().slotActivityTrkByKey(keys, desc.activity); };
     QAction::connect(act, &QAction::triggered, &CGisWorkspace::self(), func);
   }

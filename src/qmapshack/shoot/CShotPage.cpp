@@ -28,6 +28,8 @@
 #include <QRegularExpression>
 #include <QSet>
 #include <QSize>
+#include <QSplitter>
+#include <QTabWidget>
 #include <QVariant>
 #include <QWidget>
 #include <cmath>
@@ -36,6 +38,7 @@
 #include "CMainWindow.h"
 #include "canvas/CCanvas.h"
 #include "gis/proj_x.h"
+#include "shoot/CShotAddress.h"
 #include "shoot/CShotContext.h"
 #include "shoot/CShotRegistry.h"
 #include "shoot/CShotWriter.h"
@@ -46,20 +49,17 @@ const QSet<QString> kShotKeys = {"exposure", "id", "note", "rect", "scenario", "
 /** Coordinates of two views closer than this are the same place [°]. */
 constexpr qreal kViewEpsilon = 1e-9;
 
-/** @return the direct children of @p parent of exactly this class, in construction order */
-QList<QWidget*> childrenOfClass(const QWidget* parent, const QString& className) {
-  QList<QWidget*> matches;
-  const QList<QWidget*>& children = parent->findChildren<QWidget*>(Qt::FindDirectChildrenOnly);
-  for (QWidget* child : children) {
-    if (QString::fromLatin1(child->metaObject()->className()) == className) {
-      matches << child;
+/** @return the central tab widget holding the canvases, nullptr when there is no canvas */
+QTabWidget* centralTabs(const CMainWindow& main) {
+  const QList<CCanvas*>& canvases = main.getCanvas();
+  for (QWidget* w = canvases.isEmpty() ? nullptr : canvases.first()->parentWidget(); nullptr != w;
+       w = w->parentWidget()) {
+    if (QTabWidget* tabs = qobject_cast<QTabWidget*>(w); nullptr != tabs) {
+      return tabs;
     }
   }
-  return matches;
+  return nullptr;
 }
-
-/** @return true for a name that parses back as a single address part */
-bool isAddressName(const QString& name) { return !name.isEmpty() && !name.contains('/') && !name.contains('#'); }
 
 /** @return the active popup, else the active modal dialog, else @p main */
 QWidget* topmost(QWidget* main) {
@@ -95,56 +95,6 @@ bool readRect(const QJsonObject& shot, QRect& rect) {
 }
 }  // namespace
 
-std::optional<QString> CShotPage::addressOf(const QWidget* root, const QWidget* widget) {
-  if (nullptr == root || nullptr == widget) {
-    return std::nullopt;
-  }
-  if (widget == root) {
-    return QString();
-  }
-
-  const QString& name = widget->objectName();
-  if (isAddressName(name) && root->findChild<QWidget*>(name) == widget) {
-    return name;
-  }
-
-  const QWidget* parent = widget->parentWidget();
-  if (nullptr == parent) {
-    return std::nullopt;
-  }
-  const std::optional<QString>& prefix = addressOf(root, parent);
-  if (!prefix.has_value()) {
-    return std::nullopt;
-  }
-
-  const QString& className = QString::fromLatin1(widget->metaObject()->className());
-  const qsizetype index = childrenOfClass(parent, className).indexOf(const_cast<QWidget*>(widget));
-  const QString& part = QString("%1#%2").arg(className).arg(index);
-  return prefix->isEmpty() ? part : (*prefix + "/" + part);
-}
-
-QWidget* CShotPage::resolve(QWidget* root, const QString& address) {
-  QWidget* current = root;
-  if (nullptr == root || address.isEmpty()) {
-    return current;
-  }
-
-  const QStringList& parts = address.split('/');
-  for (const QString& part : parts) {
-    if (nullptr == current) {
-      break;
-    }
-    if (part.contains('#')) {
-      bool ok = false;
-      const qint32 index = part.section('#', 1).toInt(&ok);
-      current = ok ? childrenOfClass(current, part.section('#', 0, 0)).value(index, nullptr) : nullptr;
-    } else {
-      current = current->findChild<QWidget*>(part);
-    }
-  }
-  return current;
-}
-
 bool CShotPage::driveProperty(QObject* target, const QString& property, const QVariant& value) {
   const QByteArray& name = property.toLatin1();
   // setProperty() on a name the class has not got adds a dynamic property and answers false.
@@ -161,6 +111,27 @@ bool CShotPage::driveProperty(QObject* target, const QString& property, const QV
 QJsonObject CShotPage::viewOf(const CCanvas* canvas) {
   const QPointF& focus = canvas->getPosFocus() * RAD_TO_DEG;
   return QJsonObject{{"do", "view"}, {"lat", focus.y()}, {"lon", focus.x()}, {"zoom", canvas->getZoomIndex()}};
+}
+
+QJsonObject CShotPage::layoutOf(const CMainWindow& main) {
+  QJsonObject action{{"do", "layout"}, {"state", QString::fromLatin1(main.saveState().toBase64())}};
+  if (const QTabWidget* tabs = centralTabs(main); nullptr != tabs) {
+    action["tab"] = tabs->currentIndex();
+  }
+
+  // saveState() covers dockers and toolbars and nothing inside the central widget.
+  QJsonObject splitters;
+  const QList<QSplitter*>& all = main.findChildren<QSplitter*>();
+  for (const QSplitter* splitter : all) {
+    const std::optional<QString>& address = CShotAddress::addressOf(&main, splitter);
+    if (address.has_value() && !address->isEmpty()) {
+      splitters[*address] = QString::fromLatin1(splitter->saveState().toBase64());
+    }
+  }
+  if (!splitters.isEmpty()) {
+    action["splitters"] = splitters;
+  }
+  return action;
 }
 
 bool CShotPage::applyView(CCanvas* canvas, const QJsonObject& view) {
@@ -240,7 +211,7 @@ qint32 CShotPage::shootOne(const QJsonObject& shot, CShotContext& ctx) {
     widget = exposure.get();
   } else {
     const QString& address = shot["widget"].toString();
-    widget = address.isEmpty() ? topmost(main) : resolve(main, address);
+    widget = address.isEmpty() ? topmost(main) : CShotAddress::resolve(main, address);
     if (nullptr == widget) {
       qWarning() << "shoot:" << id << "finds no widget at" << address;
       return 1;
@@ -290,7 +261,7 @@ qint32 CShotPage::shootOne(const QJsonObject& shot, CShotContext& ctx) {
     const QString& target = (dot < 0) ? QString() : it.key().left(dot);
     const QString& property = it.key().mid(dot + 1);
     const QByteArray& name = property.toLatin1();
-    QObject* driven = resolve(widget, target);
+    QObject* driven = CShotAddress::resolve(widget, target);
     if (nullptr == driven) {
       qWarning() << "shoot:" << id << "has no" << target << "to set" << property << "on";
       failures++;

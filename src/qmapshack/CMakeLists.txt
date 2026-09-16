@@ -1102,6 +1102,10 @@ endif(Qt6DBus_FOUND)
 # Both branches implement the same two headers.
 if(QMS_DOC_MODE)
     target_sources(${APPLICATION_NAME} PRIVATE
+        shoot/CShotAddress.cpp
+        shoot/CShotAddress.h
+        shoot/CShotApplication.cpp
+        shoot/CShotApplication.h
         shoot/CShotContext.cpp
         shoot/CShotContext.h
         shoot/CShotEntry.cpp
@@ -1109,17 +1113,35 @@ if(QMS_DOC_MODE)
         shoot/CShotExposures.cpp
         shoot/CShotFixture.cpp
         shoot/CShotFixture.h
+        shoot/CShotHandlers.cpp
+        shoot/CShotHandlers.h
+        shoot/CShotInput.cpp
+        shoot/CShotInput.h
         shoot/CShotOptions.cpp
         shoot/CShotOptions.h
         shoot/CShotPage.cpp
         shoot/CShotPage.h
+        shoot/CShotRecorder.cpp
+        shoot/CShotRecorder.h
         shoot/CShotRegistry.cpp
         shoot/CShotRegistry.h
         shoot/CShotRunner.cpp
         shoot/CShotRunner.h
+        shoot/CShotSelfTest.cpp
+        shoot/CShotSelfTest.h
+        shoot/CShotStep.cpp
+        shoot/CShotStep.h
+        shoot/CShotSynth.cpp
+        shoot/CShotSynth.h
+        shoot/CShotWarnings.cpp
+        shoot/CShotWarnings.h
         shoot/CShotWriter.cpp
         shoot/CShotWriter.h
+        shoot/IShotHandler.cpp
+        shoot/IShotHandler.h
     )
+    # QTest synthesizes input through QWindowSystemInterface; the private one injects a keyboard context menu.
+    target_link_libraries(${APPLICATION_NAME} PRIVATE Qt6::Test Qt6::GuiPrivate)
 else()
     target_sources(${APPLICATION_NAME} PRIVATE
         shoot/CShotEntry.h

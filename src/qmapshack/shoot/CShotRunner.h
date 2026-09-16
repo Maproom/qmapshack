@@ -47,6 +47,7 @@ class CShotRunner : public QObject {
   QString target;
   QString only;
   QString scenario;
+  bool selfTest = false;
   qint32 failures = 0;
 };
 

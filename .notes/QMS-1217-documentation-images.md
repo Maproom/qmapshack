@@ -123,12 +123,21 @@ src/qmapshack/shoot/
   CShotRegistry     the exposed widget classes; SHOT_EXPOSE
   CShotContext      the live application and the fixture by role; shot() and frame()
   CShotWriter       settle, resize, grab, PNG
-  CShotPage         the JSON shot file: addressing, item paths, store, shootOne, run
-  CShotRecorder     records what the writer performs, and replays it
+  CShotPage         the JSON shot file: store, shootOne, run; the layout and view steps
+  CShotAddress      widget addresses, workspace item paths, row paths and hits, each with its resolver
+  CShotInput        what typing leaves in an input, and which inputs a replay cannot reach
+  CShotStep         the steps a recording is made of, spelled in one place
+  CShotApplication  the QApplication of a doc run: the frame around one user input being delivered
+  CShotSynth        input through the window system, as a user's own: what replay performs steps with
+  CShotRecorder     collects the steps the handlers make, in the order of the inputs that caused them
+  IShotHandler      everything a recording knows about one class: its signal, its step, its replay
+  CShotHandlers     the registry, keyed by QMetaObject; the handler of every class that is recorded
+  CShotSelfTest     the recorder's own cases: real input in, steps compared, steps replayed
   CShotFixture      the example project
   CShotRunner       --shoot tasks; writes a JSON report beside the images
-  CShotDocLauncher  the writer's session: the panel and every file operation
-  CShotDocMode      the state process: F9, the shot dialogs, the channel
+  CShotDocLauncher  the writer's session: the panel and every file operation but two
+  CShotDocMode      the state process: F9, the shot dialogs, the channel, writing a recording and
+                    the base configuration
   CShotDocPanel     the writer's panel
 ```
 
@@ -150,8 +159,9 @@ qmapshack --doc <repo> --doc-page <ch>                 the launcher: the panel, 
 ```
 
 - The launcher owns the session - which page, which scenario, which picture, what a retake
-  changed - and does every operation that is a file operation: the base question, the recording's
-  name, delete, rebind, and removing what no page references. Its main window is constructed and
+  changed - and does every file operation but two: rename, delete, rebind, reset, publish and
+  removing what no page references. It asks the base question and a recording's name; the state
+  process writes the base configuration and the recording. Its main window is constructed and
   never shown; `CMainWindow::self()` is what initialises `IUnit`, `CWptIconManager`,
   `CGisWorkspace` and eight more singletons the panel's data goes through.
 - The state process is disposable. It comes up in one scenario, replays it, and stays for as long
@@ -192,60 +202,53 @@ A rename is caught by `shots.py replay` failing loudly, not by the compiler - `"
 
 ## 4. Recording
 
-`CShotRecorder` watches through one event filter. What is stored is **addressed input**, not a state
-diff: a click is a click whatever it lands on, so the vocabulary is indexed by Qt and not by
-QMapShack's features. The adapters that keep a recording readable are a list of Qt classes and do
-not grow with the application.
+A recording is **the state it started in and every change after it, as steps**. `CShotRecorder::start()`
+takes `layout` and `view`; nothing is taken at `stop()`, where a change would be applied twice.
+
+- **One clock.** `CShotApplication::notify()` numbers a frame around each spontaneous input event,
+  closed when the delivery returns, nested loops included. Steps are sorted by frame: the
+  application's slot runs before the recorder's connection, so what is done in a dialog a slot
+  opened is recorded first and carries the higher number.
+- **The input went to the control.** A step is kept only when the input being delivered went to the
+  control that made it - for an action, to a widget it sits in. Everything else is the application's
+  answer, which replaying the input repeats.
+- **One handler per class.** `IShotHandler` holds a class's signals, the step each is, and the
+  replay; `CShotHandlers` keys them by `QMetaObject`, nearest class above wins, and dispatches a
+  step to the handler of what it resolves to.
+- **Nothing lost silently.** A key press no handler made a step of is a `keypress` step; a press on
+  a class nothing covers is reported once.
 
 Writers cannot write code, so the recorder is not optional. Squish is not GPL, so it is not an
-option either.
+option either; what Squish does is what this does, in the size this project needs.
 
-| action | payload | replays as |
+| Qt says, while the input goes to it | step | replayed as, then checked |
 |---|---|---|
-| `layout` | `saveState()` + the central tab index | `restoreState()`, tab last |
-| `view` | centre in degrees + zoom index | `zoom(index)` + `moveMap()` |
-| `select`, `expand` | item name path | the workspace list |
-| `set` | widget address, property, value | `driveProperty()` |
-| `click` | widget address + `at` fraction + `hit`, or a vocabulary of its own | `QTest::mouseClick` |
-| `dclick` | item path, or widget address + position | plain click, then `QTest::mouseDClick` |
-| `trigger` | action objectName | `QAction::trigger()` |
-| `menu` | widget address + item path or position | `QContextMenuEvent` to the viewport |
-| `key` | widget address + key sequence | `QTest::keyClick`/`keyClicks` |
+| `QAction::triggered` | `trigger` action [+ `widget` when the name is not unique] [+ `checked`] | a click on its entry when its menu is open, else `trigger()`; checked state |
+| `QAbstractButton::clicked` | `click` [+ `checked`] | `click()`; checked state |
+| `QGroupBox::clicked` | `click` + `checked` | Space on the group box; checked state |
+| `QComboBox::activated` | `set currentIndex` | `setCurrentIndex()`, `activated`, `textActivated` |
+| a line edit's, a spin box's or an editable combo's text edited, a completion picked | `key` final text [+ `enter`] | select all, Backspace, typed, Enter; the text |
+| the focus leaving an edited input | `endedit` | the focus cleared if still there |
+| `QSpinBox`/`QDoubleSpinBox` value signal (stepped, wheel) | `key` final text | as typing |
+| `QDateTimeEdit::dateTimeChanged` | `set dateTime` | `setDateTime()`; the value |
+| `QAbstractSlider::valueChanged` | `set value`; a scroll area's bar `set share` | `setValue()`; the value |
+| an item view's scroll bars, wheel or drag | `scroll` + top `row` [+ `x` share] | `scrollTo(PositionAtTop)`; the top row |
+| `QSplitter::splitterMoved` | `set sizes`, shares | `setSizes()` scaled; within a pixel |
+| `QDockWidget` floated, docked, moved | `arrange`, `saveState()` | `restoreState()`; floating and area |
+| `QTabBar::currentChanged` within the tab widget; `tabCloseRequested` | `set currentIndex`; `close` | `setCurrentIndex()`; `tabCloseRequested` |
+| `QHeaderView::sectionClicked` | `click` + `section` | a click on the section; sort indicator |
+| `QAbstractItemView::clicked`, `doubleClicked`, `expanded`, `collapsed` | `select`, `dclick`, `expand`, `collapse` + `row` + place in it | a click there / `setExpanded()`; current row |
+| a menu shown for a context menu request | `menu` + `row` or place | the pointer onto the place, a right click |
+| a menu shown by a tool button, a menu bar entry or a submenu entry | `openmenu` + `widget` or `action` [+ `menu` name] | `showMenu()`; a click on the bar's or the open menu's entry; the menu shown |
+| a key press no step came of | `keypress` + key, text, modifiers | the key into its widget |
 
-`layout` and `view` are taken whole when the writer stops, and put in front. That is the replay
-order too: the arrangement decides how big the canvas is, the view decides what it looks at, and
-only then does a geographic point mean the pixel the writer clicked.
-
-**Address, never a global pixel.** A position is only ever stored relative to an addressed widget,
-and only for widgets with no vocabulary of their own.
-
-**A position is never stored alone.** It carries what it hit, and replay verifies the hit before
-acting; a miss is a counted failure, not a picture of the wrong state. A widget metric moving 2 px
-between Linux and Windows is measured, and on a 17 px delegate button that is enough to miss.
-
-**A widget that names what it was hit on is recorded by that name.**
-
-| widget | recorded as |
-|---|---|
-| canvas | `click` with lat/lon, plus the item path when exactly one thing is under it |
-| `IPlot` | `click` with `x`, the axis' own value - metres on a linear axis, seconds on a time one |
-| `CIconGrid` | `click` with `icon`, the `<sym>` name |
-| workspace row buttons | `click` with `item` + `button`, the delegate's own button names |
-
-The row buttons are painted into the row and carry no widget, so the press never reaches the filter
-as anything but a point in the viewport; before the adapter such a click was recorded as the
-selection it also produced and the toggle was silently lost. A replay reaches `pressButton()`
-directly rather than a point.
-
-**An `IScrOpt` overlay is a child widget of the canvas, not the map.** Only `CCanvas` itself is a
-geographic point; a press on `toolRange` or any other screen-option button is an ordinary addressed
-widget press.
-
-**A press is a step only when what it landed on acts on a click** (`pressIsStep()`): a button, a tab
-bar, a combo box, a header, or an item view row that exists. A splitter handle, a dock title, a
-scroll bar, a menu bar, a label and the empty space under the last row are not. It is a whitelist,
-so a widget nobody has taught the recorder about records nothing - recoverable, where a wrong click
-is a picture of the wrong state.
+**A surface is recorded as its input** (`CSurfaceHandler`) - a gesture another step comes in the middle of as `press`, `move` and `release` with pixel offsets from the press: `CCanvas` in degrees with the item under
+the point as `hit`, `IPlot` by the x value it reads there (`xValueAt()`, the plot's own rule), else a
+place in the widget, `CIconGrid` by the icon's name. A press to its release is one `click`, `drag` or
+`dclick`, ordered at the press, with the release as a pixel offset - a drag moves the content - and
+`held` by the clock when it was held past `CMouseAdapter::clickTimeout`. A hover is one `move`,
+amended. A `wheel` keeps both deltas and the modifiers. Replay checks `hit` and that the point
+reaches the surface. The painted row buttons of the item delegates are not recorded yet (#1252).
 
 **A menu entry is addressed by its action's `objectName`, never its text**, which is translated.
 Every menu owner names its actions after the member they are assigned to; a menu built from data
@@ -258,28 +261,31 @@ Done: `CGisListWks` (52), `CGisListDB` (14), `CMouseNormal` (10), `CSearchLineEd
 `CHistoryListWidget`, `CWptIconManager` (3), `CPlotProfile`, `CTemplateWidget`, `CTextEditWidget`,
 `IGisItem`.
 
-**A recording always starts from the base**, so a scenario is a whole state and never a difference
-from another scenario that is not stored with it.
+**`CShotSelfTest` is what shows it works** (`shots.py selftest`): each case performs input through the
+window system while recording, compares the steps, replays them and compares the state the replay
+leaves with the one the recording left. 63 cases; the replay runs its steps as the scenario queue will, the next
+one scheduled before a step runs, so a step that opens a menu with `exec()` gets its pick delivered from inside it. The contract the vocabulary is held to - finite,
+tested, reported where it ends, and every recording replayed before it is saved (#1257) - is in
+`QMS-1251-recorder-signals-plan.md`.
 
-**Where a recording stops:**
+**Not recorded:** a window closed by its title bar - Qt 6 closes a widget through `QWindow::close()`,
+the same spontaneous close as the application's own; re-docking a floating dock through its window
+frame; a main window separator dragged (reported); typing into an item view's cell editor.
 
-- A hover, a tooltip, a half-finished drag.
-- A modal dialog opened during a recording: its `exec()` is a nested event loop a headless run
-  cannot get out of, so such a widget is photographed through the exposure catalog instead.
-- Whether a recording should be re-recordable in place. Today a changed scenario is a new recording
-  under the same name.
+**A recording never runs while a replay does**: replayed input is delivered like a user's own.
 
 ## 5. Replay
 
-`CShotRecorder::replay()` is a queue: each step schedules the next from the event loop instead of a
-`for` loop calling them in sequence. That is what lets a step enter a modal dialog, a popup menu or
+Replay is a queue: each step schedules the next from the event loop instead of a `for` loop calling
+them in sequence, and performs it through `IShotHandler::replay()` of the class the step's target
+belongs to - the same handler that recorded it. That is what lets a step enter a modal dialog, a popup menu or
 a nested progress loop while the steps after it still run, and it is what made the exposure catalog
 unnecessary for anything reachable through the UI.
 
 - **The picture is taken as the scenario's last step, never after it.** A step that opened a modal
   dialog is still inside its `exec()` there; by the time `replay()` returns the dialog is gone and
   the picture would be of the window behind it.
-- **A replay starts from nothing, not from what is on screen.** `replay()` calls `clear()` before
+- **A replay starts from nothing, not from what is on screen.** The queue calls `clear()` before
   its first step. A step is not idempotent - a second click on a selected range takes the range
   away - and documentation mode replays a scenario it is already holding: once for a picture, twice
   more for a rectangle.
@@ -297,8 +303,8 @@ unnecessary for anything reachable through the UI.
   without a word.
 - **Every step waits for a condition**, never for a duration: `CShotWriter::settle()`,
   `settleStable()`, `CCanvas::waitForDrawContexts()`.
-- **`driveProperty()` reads the value back.** `setProperty()` answers whether the property exists,
-  never whether the value took.
+- **A handler that sets instead of clicking reads the value back**, because `setProperty()` and its
+  kin answer whether the property exists, never whether the value took (`CShotPage::driveProperty()`).
 
 ## 6. The writer's loop
 
@@ -477,10 +483,10 @@ carries the token twice, which is why each command above is written the way it i
 
 ### Qt behaviour that cost a day each
 
-- **`QTest::mouseMove()` on a widget with no button down only calls `QCursor::setPos()`** and leaves
-  the move to the window system (qtestmouse.h, Qt 6.10.2). The offscreen platform answers that at
-  once and X11 does not, so a headless build saw the hover before the click and the writer's own
-  session never did. A replayed move is sent as a `QMouseEvent` (`moveMouseTo()`).
+- **QTest's `QWidget` functions are no real input.** Built without `QTEST_QPA_MOUSE_HANDLING` they
+  call `notify()` on the widget and skip the window's routing, and a move with no button down is only
+  `QCursor::setPos()` (qtestmouse.h, Qt 6.10.2). Its `QWindow` functions go through
+  `QWindowSystemInterface`; `CShotSynth` is built on those, for replay and for `CShotSelfTest`.
 - **`processEvents()` does not deliver `DeferredDelete`** - the event loop that posted it does, on
   its way out, and `settle()` never leaves one. Anything whose destructor is the state change has to
   ask: `sendPostedEvents(nullptr, QEvent::DeferredDelete)`. `CCanvas::resetMouse()` is such a case;
@@ -726,7 +732,7 @@ shot id and the offending name, never silently rendered.
 
 **The test page is the harness.** #1247 creates `doc/pages/test.md` and `doc/shots/test.json` with
 widget shots, because nothing in it can be checked without them; it grows with exposure shots
-(#1248), the ones that need the fixture (#1249), recorded scenarios (#1251, #1252, #1253) and a
+(#1248), the ones that need the fixture (#1249), recorded scenarios (#1252, #1253) and a
 context menu (#1256). After every sub-ticket, `shots.py replay --only test/*` still produces the
 pictures it could before that ticket, and the last one reproduces all of them.
 
@@ -769,11 +775,11 @@ ticket of its own, because none of them needs the framework to be reviewable:
 | 4 | **Exposure catalog** (#1248) | `CShotRegistry`, `SHOT_EXPOSE`, the class checked against `staticMetaObject` with `Q_OBJECT` added where it was missing; values a dialog keeps a reference to owned by its factory; `live<T>()`. No `private`→`protected` form change is needed - the demo has none | a throwaway shot file with one entry per exposure renders all of them |
 | 5 | **Fixture** (#1249) | `CShotFixture` loading the committed data of §10.1: `Example.qms` into the workspace with `project()`/`trk()`/`wpt()`/`rte()`/`area()` resolved from it; both maps on, `bev_km50` over `osm`; the DEM on with hillshading; the POI file; the Routino database; a copy of `Example.db`. Paths reach the run through `--config`. The 16 exposures that need a fixture item; `CPrintDialog` is not exposed | the 16 exposures build; the database dock lists Example from the copy, its expanded folders belong to a scenario; no writer's data is read; a first run needs a network for the OSM tiles, a run with a filled cache none |
 | 6 | **shots.py** (#1250) | `compose`, `replay`, `unused`; the pinned command line and environment; one process per scenario; `compose` injects the fixture paths, `Route/routino\paths` and a scratch copy of `Example.db`; the leak guard inside `replay` - list `~/.QMapShack` and the user's settings before and after, a changed file fails the run; the cached tiles' modification times refreshed before a run, because `CDiskCache` deletes tiles older than `cacheExpiration` every 20 s and an offline run then has holes | `shots.py replay` replays every committed shot, and reports a run that wrote outside the scratch tree |
-| 7 | **Recorder: vocabulary** (#1251) | the event filter, `pressIsStep()`, the step table of §4, `driveProperty()` | a recording of a menu, a control and a row is stored and reads as meaning |
-| 8 | **Recorder: adapters** (#1252) | canvas, `IPlot`, `CIconGrid`, and the painted row buttons of all three item delegates - workspace, maps, database; the menu-owner `objectName` audit | each adapter verified end to end against a throwaway page; a recorded scenario that expands a database folder and toggles a row's check state replays |
-| 9 | **Replay** (#1253) | the queue, `clear()` before and after (`CMouseNormal::clearScreenOption()`, `CCanvas::resetMouse()` and the `DeferredDelete` it needs, public `waitForDrawContexts()`), the click path, hit verification, the `tab`-last rule | a page with a scenario reproduces byte-identically, three times in one process |
-| 10 | **Launcher, panel, channel** (#1254) | `shots.py take` and `shots.py publish`; the session and every file operation, `childArguments()`, the panel's buttons and statuses, `setBusy`, `mayClose()`, `endSession()`, the `QLocalServer` named `qms-doc-<pid>` | the panel comes up, starts and replaces a state process, and asks before closing over unpublished pictures; `publish` puts the retaken pictures into `doc/images/` and empties `_work/` |
-| 11 | **State process and F9** (#1257) | one scenario held up, `Ctrl+Shift+F9`, the keep/throw preview, the region picker, `portableGeometry()`/`namesAPlace()`, `settingsDrift()` | a writer records a scenario and tags a picture without touching a file |
+| 7 | **Recorder: vocabulary** (#1251) | the input frame (`CShotApplication::notify()`), `IShotHandler` and the handler per class, the step table of §4, `key`, the map, the plot and the icon grid as raw input; `stop()` returns JSON, writing it into the shot file is #1257 | `shots.py selftest` - `CShotSelfTest`, committed with the subsystem - records real input and compares every step, and replays what it records back into the same state |
+| 8 | **Recorder: the painted row buttons** (#1252) | the buttons of all three item delegates - workspace, maps, database - which are painted into the row and are no widgets: a `sigButtonPressed(index, button)` and a `pressButton()` in `CWksItemDelegate`, `CMapItemDelegate` and `CDBItemDelegate`, and the handler that records and replays through them; the menu-owner `objectName` audit. The canvas, `IPlot` and `CIconGrid` are done in #1251 | a case in `CShotSelfTest` per delegate; a recorded scenario that expands a database folder and toggles a row's check state replays |
+| 9 | **Replay** (#1253) | the queue that performs a recording, calling `IShotHandler::replay()` per step - the handlers already carry their own half, what is missing is what drives them: the scheduling that survives a modal loop, `clear()` before and after (`CMouseNormal::clearScreenOption()`, `CCanvas::resetMouse()` and the `DeferredDelete` it needs, public `waitForDrawContexts()`), the `tab`-last rule, and a scenario's steps read out of the shot file | a page with a scenario reproduces byte-identically, three times in one process |
+| 10 | **Launcher, panel, channel** (#1254) | `shots.py take` and `shots.py publish`; the session and every file operation but writing the base configuration and a recording, `childArguments()`, the panel's buttons and statuses, `setBusy`, `mayClose()`, `endSession()`, the `QLocalServer` named `qms-doc-<pid>` | the panel comes up, starts and replaces a state process, and asks before closing over unpublished pictures; `publish` puts the retaken pictures into `doc/images/` and empties `_work/` |
+| 11 | **State process and F9** (#1257) | one scenario held up, writing a recording into the shot file only after it replays to the state it was recorded in, `Ctrl+Shift+F9`, the keep/throw preview, the region picker, `portableGeometry()`/`namesAPlace()`, `settingsDrift()` | a writer records a scenario and tags a picture without touching a file |
 | 12 | **Writer-facing labels** (#1255) | names, not addresses, in `chooseLivePart()`; `qt_`-prefixed internals not offered | the step list reads in the writer's words |
 | 13 | **Drop the menu split** (#1256) | delete `CGisListWks::buildMenuItemTrk()`, which the replay queue made pointless, and cover a stack-local menu with a shot instead | a shot of the track context menu replays; nothing calls a `buildMenuXxx()` |
 

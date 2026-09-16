@@ -21,6 +21,8 @@
 #include <QDebug>
 #include <QImage>
 
+#include "CMainWindow.h"
+#include "gis/CGisWorkspace.h"
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/trk/CGisItemTrk.h"
@@ -28,6 +30,17 @@
 #include "shoot/CShotWriter.h"
 
 CShotContext::CShotContext(const CShotWriter& writer) : writer(writer) {}
+
+CMainWindow* CShotContext::mainWindow() const { return CMainWindow::isNull() ? nullptr : &CMainWindow::self(); }
+
+CCanvas* CShotContext::canvas() const {
+  const CMainWindow* main = mainWindow();
+  return (nullptr == main) ? nullptr : main->getVisibleCanvas();
+}
+
+const CGisListWks* CShotContext::wksList() const {
+  return (nullptr == mainWindow()) ? nullptr : &CGisWorkspace::self().getWksList();
+}
 
 QList<IGisItem::key_t> CShotContext::keys() const {
   QList<IGisItem::key_t> keys;

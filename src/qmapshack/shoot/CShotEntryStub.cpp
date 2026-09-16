@@ -16,12 +16,18 @@
 
 **********************************************************************************************/
 
+#include <QApplication>
+
 #include "shoot/CShotEntry.h"
 
 /// A build without the documentation subsystem.
 bool CShotEntry::isDocRun(const CAppOpts&) { return false; }
 
 void CShotEntry::pinEnvironment(int, char**) {}
+
+std::unique_ptr<QApplication> CShotEntry::createApplication(int& argc, char** argv) {
+  return std::make_unique<QApplication>(argc, argv);
+}
 
 bool CShotEntry::prepare(const CAppOpts&) { return true; }
 

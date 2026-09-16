@@ -48,6 +48,16 @@ class IPlot : public QWidget, public INotifyTrk {
 
   using INotifyTrk::setMouseFocus;
 
+  /**
+     @brief The x axis value a click at @p pos reads: [m] on a linear axis, [s] on a time axis.
+
+     @return NOFLOAT where a click reads no value
+   */
+  qreal xValueAt(const QPoint& pos) const;
+
+  /** @return where a click reads @p value, NOPOINT when the value is off the visible axis */
+  QPoint pointOfXValue(qreal value) const;
+
  signals:
   void sigMouseClickState(int);
 
@@ -113,9 +123,11 @@ class IPlot : public QWidget, public INotifyTrk {
   void drawTagLabels(QPainter& p);
   void drawActivities(QPainter& p);
 
-  bool graphAreaContainsMousePos(QPoint& pos);
+  bool graphAreaContainsMousePos(QPoint& pos) const;
 
   static int cnt;
+  /** Owner id for the track's mouse focus and range mode; unique per plot. */
+  QString ownerTag;
 
   // different draw modes
   mode_e mode;

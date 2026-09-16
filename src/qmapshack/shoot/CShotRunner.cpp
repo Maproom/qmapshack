@@ -29,6 +29,7 @@
 #include "shoot/CShotContext.h"
 #include "shoot/CShotFixture.h"
 #include "shoot/CShotPage.h"
+#include "shoot/CShotSelfTest.h"
 #include "shoot/CShotWriter.h"
 
 namespace {
@@ -42,7 +43,8 @@ CShotRunner::CShotRunner(const CShotOptions::opts_t& opts, QWidget* window)
       outDir(opts.shootDir),
       target(opts.shootTarget),
       only(opts.shootOnly),
-      scenario(opts.shootScenario) {}
+      scenario(opts.shootScenario),
+      selfTest(opts.shootSelfTest) {}
 
 void CShotRunner::start() { QTimer::singleShot(0, this, &CShotRunner::slotRun); }
 
@@ -59,7 +61,13 @@ void CShotRunner::slotRun() {
     CShotContext ctx(writer);
     // A page's shot file sits beside the fixture directory.
     failures = CShotFixture::load(QFileInfo(target).absoluteDir().absoluteFilePath("fixture"), ctx);
-    failures += CShotPage::run(target, ctx, only, scenario);
+    if (!selfTest) {
+      failures += CShotPage::run(target, ctx, only, scenario);
+    } else if (0 == failures) {
+      failures += CShotSelfTest::run(ctx);
+    } else {
+      qWarning() << "shoot: the self test does not run: its fixture did not load";
+    }
   }
 
   // Destroying the main window while shown crashes in its docks' visibilityChanged.

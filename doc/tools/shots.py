@@ -417,6 +417,65 @@ def cmd_replay(args):
         sys.exit(f"{len(broken)} page(s) did not replay")
 
 
+def cmd_selftest(args):
+    """The recorder's own cases, in one application with the fixture loaded.
+    """
+    binary = find_binary(args.binary)
+    cache, user_data = user_paths(binary)
+    if another_instance_runs(user_data):
+        sys.exit("QMapShack is running. Close it first: it writes where the leak guard looks.")
+
+    page_file = SHOTS_DIR / f"{args.page}.json"
+    if not page_file.is_file():
+        sys.exit(f"no shot file {page_file}: the self test loads the fixture beside one")
+
+    out = Path(args.out).resolve()
+    out.mkdir(parents=True, exist_ok=True)
+    CACHE_DIR.mkdir(parents=True, exist_ok=True)
+    refresh_tile_cache()
+
+    with tempfile.TemporaryDirectory(prefix="qms-selftest-") as scratch:
+        config = Path(scratch) / "shots.ini"
+        compose_config(page_file.stem, None, config)
+        cmd = [str(binary), "-platform", "offscreen", "-style", STYLE, "--no-splash", "--config", str(config),
+               "--font-family", FONT_FAMILY, "--font-size", FONT_SIZE, "--color-scheme", COLOR_SCHEME,
+               "--locale", LOCALE, "--shoot", str(out), "--shoot-target", str(page_file), "--shoot-selftest"]
+        if args.verbose:
+            cmd.append("-d")
+            print("      " + " ".join(cmd), file=sys.stderr)
+
+        process = subprocess.Popen(cmd, env=pinned_env(), cwd=scratch, stdout=None if args.verbose else subprocess.DEVNULL,
+                                   stderr=subprocess.PIPE, encoding="utf-8", errors="replace")
+        timed_out = threading.Event()
+
+        def kill():
+            timed_out.set()
+            process.kill()
+
+        watchdog = threading.Timer(RUN_TIMEOUT_S, kill)
+        watchdog.daemon = True
+        watchdog.start()
+        try:
+            for line in process.stderr:
+                if args.verbose:
+                    sys.stderr.write(line)
+                if "shoot: PASS" in line or "shoot: FAIL" in line or "shoot: self test" in line:
+                    print("  " + line.split("shoot: ", 1)[1].rstrip())
+            code = process.wait()
+        except BaseException:
+            process.kill()
+            process.wait()
+            raise
+        finally:
+            watchdog.cancel()
+
+    if timed_out.is_set():
+        sys.exit(f"the self test did not finish within {RUN_TIMEOUT_S}s - a case opened something nothing closes")
+    if code != 0:
+        sys.exit(f"{code} case(s) failed")
+    print("every case passes")
+
+
 def cmd_unused(args):
     used = page_references()
     out = Path(args.out).resolve()
@@ -485,6 +544,10 @@ def main():
     replay = commands.add_parser("replay", help="replay every shot and report the ones that do not come out")
     replay.add_argument("--only", metavar="GLOB", help="shot ids: test/* is one page, test/menu-project one picture")
     replay.set_defaults(func=cmd_replay)
+
+    selftest = commands.add_parser("selftest", help="the recorder's own cases: record real input, compare the steps")
+    selftest.add_argument("--page", default="test", help="the shot file whose fixture is loaded (default: %(default)s)")
+    selftest.set_defaults(func=cmd_selftest)
 
     unused = commands.add_parser("unused", help="shots and pictures no page references")
     unused.add_argument("--delete", action="store_true", help="remove them")

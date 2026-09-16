@@ -1,9 +1,9 @@
 # QMS-1251 — the recorder
 
-Status 2026-09-16: implemented in the working tree, not committed. `shots.py selftest`: 78 of 78;
-`shots.py replay`: 22 pictures. The design is `QMS-1217-documentation-images.md` §4; the facts it rests
-on are the recorder bullets in `CLAUDE.md`. Left to other tickets: the painted row buttons (#1252) and
-the queue that performs a scenario (#1253).
+Status 2026-09-16: #1251 committed; the painted row buttons (#1252) in the working tree.
+`shots.py selftest`: 88 of 88; `shots.py replay`: 22 pictures, unchanged. The design is
+`QMS-1217-documentation-images.md` §4; the facts it rests on are the recorder bullets in `CLAUDE.md`. Left
+to another ticket: the queue that performs a scenario (#1253).
 
 ## The contract
 

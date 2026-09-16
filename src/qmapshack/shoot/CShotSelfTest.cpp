@@ -49,9 +49,11 @@
 #include <QSlider>
 #include <QSpinBox>
 #include <QSplitter>
+#include <QStyle>
 #include <QStyleHints>
 #include <QStyleOptionGroupBox>
 #include <QStyleOptionToolButton>
+#include <QStyleOptionViewItem>
 #include <QTabBar>
 #include <QTabWidget>
 #include <QTimer>
@@ -65,12 +67,29 @@
 
 #include "CMainWindow.h"
 #include "canvas/CCanvas.h"
+#include "dem/CDemList.h"
+#include "gis/CDBItemDelegate.h"
+#include "gis/CGisListDB.h"
 #include "gis/CGisListWks.h"
 #include "gis/CGisWorkspace.h"
+#include "gis/CWksItemDelegate.h"
+#include "gis/IDBItem.h"
+#include "gis/IWksItem.h"
 #include "gis/proj_x.h"
+#include "gis/search/CGeoSearch.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "helpers/CWptIconManager.h"
+#include "map/CMapItemDelegate.h"
+#include "map/CMapList.h"
+#include "map/IMapItem.h"
+#include "mouse/CMouseNormal.h"
 #include "plot/CPlotProfile.h"
+#include "poi/CPoiCategory.h"
+#include "poi/CPoiFileItem.h"
+#include "poi/CPoiList.h"
+#include "poi/CPoiPropSetup.h"
+#include "poi/IPoiFile.h"
+#include "poi/IPoiItem.h"
 #include "shoot/CShotAddress.h"
 #include "shoot/CShotApplication.h"
 #include "shoot/CShotContext.h"
@@ -1788,6 +1807,366 @@ qint32 CShotSelfTest::run(CShotContext& ctx) {
            }
            return picked.join(' ');
          }});
+
+  // ---- the painted row buttons
+
+  // The option is built as QAbstractItemViewPrivate::sendDelegateEvent() builds it (Qt 6.10.2); an independent copy, so
+  // a recording that misses the button fails.
+  auto buttonPoint = [](QTreeWidget* tree, QTreeWidgetItem* item,
+                        const std::function<QRect(const QStyleOptionViewItem&, const QModelIndex&)>& rectOf) {
+    tree->scrollToItem(item);
+    const QRect& row = tree->visualItemRect(item);
+    const QModelIndex& index = tree->indexAt(row.center());
+    QStyleOptionViewItem opt;
+    opt.initFrom(tree);
+    opt.font = tree->font();
+    opt.rect = row;
+    opt.state &= ~QStyle::State_HasFocus;
+    if (index == tree->currentIndex()) {
+      opt.state |= QStyle::State_HasFocus;
+    }
+    const QRect& rect = rectOf(opt, index);
+    if (!rect.isValid()) {
+      qWarning() << "shoot: the case finds no button on the row";
+    }
+    return rect.center();
+  };
+  // Show the tree's tab page and dock; which one is visible is the layout's business.
+  auto bringUp = [](QWidget* w) {
+    for (QWidget* above = w->parentWidget(); nullptr != above; above = above->parentWidget()) {
+      if (QTabWidget* tabs = qobject_cast<QTabWidget*>(above); nullptr != tabs) {
+        for (QWidget* page = w; nullptr != page && page != tabs; page = page->parentWidget()) {
+          if (tabs->indexOf(page) >= 0) {
+            tabs->setCurrentWidget(page);
+          }
+        }
+      } else if (QDockWidget* dock = qobject_cast<QDockWidget*>(above); nullptr != dock) {
+        dock->show();
+        dock->raise();
+      }
+    }
+    QTest::qWait(100);
+  };
+
+  CWksItemDelegate* wksDelegate = qobject_cast<CWksItemDelegate*>(wks->itemDelegate());
+  IWksItem* wksProject = dynamic_cast<IWksItem*>(project);
+  if (nullptr == wksDelegate || nullptr == wksProject) {
+    verdict("the workspace paints its row buttons with CWksItemDelegate", false);
+  } else {
+    auto visiblePoint = [&, wksDelegate]() {
+      return buttonPoint(wks, project, [wksDelegate](const QStyleOptionViewItem& opt, const QModelIndex& index) {
+        return wksDelegate->buttonRect(opt, index, CWksItemDelegate::button_e::eVisible);
+      });
+    };
+    auto resetWks = [wks, wksProject]() {
+      wks->setCurrentItem(nullptr);
+      wksProject->setVisibility(true);
+    };
+
+    check({"a workspace row's button is the row and the button, not a select",
+           {QString(R"({"button":"visible","do":"click","row":"%1","widget":"treeWks"})").arg(projectPath)},
+           resetWks,
+           [&, visiblePoint]() { click(wks->viewport(), visiblePoint()); },
+           [wksProject]() { return QString::number(wksProject->isVisible()); }});
+
+    check({"a click on the row after a click on its button is a select",
+           {QString(R"({"button":"visible","do":"click","row":"%1","widget":"treeWks"})").arg(projectPath),
+            QString(R"({"do":"select","row":"%1","widget":"treeWks"})").arg(projectPath)},
+           resetWks,
+           [&, visiblePoint]() {
+             click(wks->viewport(), visiblePoint());
+             settle(200);
+             click(wks->viewport(), wks->visualItemRect(project).center());
+           },
+           [wks, wksProject]() {
+             const QString& current =
+                 (nullptr == wks->currentItem()) ? QString() : CShotAddress::itemPathOf(wks->currentItem());
+             return QString("%1 %2").arg(wksProject->isVisible()).arg(current);
+           }});
+    check(
+        {"a double click on a row button is one step, and collapses the row as any double click does",
+         {QString(R"({"button":"visible","do":"dclick","row":"%1","widget":"treeWks"})").arg(projectPath),
+          QString(R"({"do":"collapse","row":"%1","widget":"treeWks"})").arg(projectPath)},
+         [resetWks, project]() {
+           resetWks();
+           project->setExpanded(true);
+         },
+         [&, visiblePoint]() {
+           CShotSynth::mouse(QTest::MouseDClick, wks->viewport(), Qt::LeftButton, Qt::NoModifier, visiblePoint());
+           settle(300);
+         },
+         [wksProject, project]() { return QString("%1 %2").arg(wksProject->isVisible()).arg(project->isExpanded()); }});
+
+    check({.name = "a right button press on a row button is that button, and its menu no step of its own",
+           .wanted = {QString(R"({"button":"visible","do":"click","mouse":"right","row":"%1","widget":"treeWks"})")
+                          .arg(projectPath)},
+           .reset = resetWks,
+           .perform =
+               [&, visiblePoint]() {
+                 click(wks->viewport(), visiblePoint(), Qt::RightButton);
+                 settle(300);
+               },
+           .state = [wksProject, &menus]() { return QString("%1 %2").arg(wksProject->isVisible()).arg(menus.shown); },
+           .closesMenus = true});
+    resetWks();
+  }
+
+  CGisListDB* db = main->findChild<CGisListDB*>();
+  CDBItemDelegate* dbDelegate = (nullptr == db) ? nullptr : qobject_cast<CDBItemDelegate*>(db->itemDelegate());
+  const QString dbPath = "Example";
+  const QString groupPath = dbPath + "/Projects";
+  const QString projectRowPath = groupPath + "/Einstein";
+  if (nullptr == dbDelegate || nullptr == CShotAddress::resolveNamePath(*db, dbPath)) {
+    verdict("the database tree lists the fixture's database Example", false);
+  } else {
+    names.insert("%DB%", CShotAddress::addressOf(main, db).value_or(QString()));
+    auto dbRow = [db](const QString& path) { return dynamic_cast<IDBItem*>(CShotAddress::resolveNamePath(*db, path)); };
+    // Unloaded as the button does it, which the database tree reacts to.
+    auto uncheck = [db](IDBItem* item) {
+      if (nullptr != item && Qt::Unchecked != item->getCheckState()) {
+        item->setCheckState(Qt::Unchecked);
+        emit db->itemChanged(item, IDBItem::eColumn);
+      }
+    };
+    auto checkStatePoint = [&, dbDelegate](IDBItem* item) {
+      return buttonPoint(db, item, [dbDelegate](const QStyleOptionViewItem& opt, const QModelIndex& index) {
+        return dbDelegate->buttonRect(opt, index, CDBItemDelegate::button_e::eCheckState);
+      });
+    };
+    auto resetDb = [&, db]() {
+      bringUp(db);
+      db->setCurrentItem(nullptr);
+      if (IDBItem* top = dbRow(dbPath); nullptr != top) {
+        top->setExpanded(true);
+      }
+      if (IDBItem* group = dbRow(groupPath); nullptr != group) {
+        group->setExpanded(true);
+        uncheck(dbRow(projectRowPath));
+        group->setExpanded(false);
+      }
+      settle(300);
+    };
+
+    check({"a database folder expanded and a project's check state toggled",
+           {QString(R"({"do":"expand","row":"%1","widget":"%DB%"})").arg(groupPath),
+            QString(R"({"button":"checkState","do":"click","row":"%1","widget":"%DB%"})").arg(projectRowPath)},
+           resetDb,
+           [&, db]() {
+             const QRect& rect = db->visualItemRect(dbRow(groupPath));
+             click(db->viewport(), QPoint(rect.left() - 8, rect.center().y()));
+             settle(500);
+             click(db->viewport(), checkStatePoint(dbRow(projectRowPath)));
+             settle(500);
+           },
+           [&]() {
+             const IDBItem* group = dbRow(groupPath);
+             const IDBItem* einstein = dbRow(projectRowPath);
+             return QString("%1 %2")
+                 .arg((nullptr == group) ? -1 : qint32(group->isExpanded()))
+                 .arg((nullptr == einstein) ? -1 : qint32(einstein->getCheckState()));
+           }});
+
+    // The first item the database lists for the project.
+    auto resetItem = [&, db]() {
+      resetDb();
+      if (IDBItem* group = dbRow(groupPath); nullptr != group) {
+        group->setExpanded(true);
+      }
+      if (IDBItem* einstein = dbRow(projectRowPath); nullptr != einstein) {
+        einstein->setExpanded(true);
+        settle(300);
+        if (einstein->childCount() > 0) {
+          uncheck(dynamic_cast<IDBItem*>(einstein->child(0)));
+          names.insert("%DBITEM%", CShotAddress::namePathOf(einstein->child(0)));
+        }
+      }
+      settle(300);
+    };
+    auto itemRow = [&]() {
+      IDBItem* einstein = dbRow(projectRowPath);
+      return (nullptr == einstein || 0 == einstein->childCount()) ? nullptr
+                                                                  : dynamic_cast<IDBItem*>(einstein->child(0));
+    };
+    check({"a double click on a database item is a double click, not its button",
+           {R"({"do":"dclick","row":"%DBITEM%","widget":"%DB%"})"},
+           resetItem,
+           [&, db]() {
+             IDBItem* item = itemRow();
+             if (nullptr == item) {
+               return;
+             }
+             db->scrollToItem(item);
+             CShotSynth::mouse(QTest::MouseDClick, db->viewport(), Qt::LeftButton, Qt::NoModifier,
+                               db->visualItemRect(item).center());
+             settle(500);
+           },
+           [&]() {
+             const IDBItem* item = itemRow();
+             return (nullptr == item) ? QString() : QString::number(item->getCheckState());
+           }});
+    check({"a double click on a database item's button is one step",
+           {R"({"button":"checkState","do":"dclick","row":"%DBITEM%","widget":"%DB%"})"},
+           resetItem,
+           [&, db]() {
+             IDBItem* item = itemRow();
+             if (nullptr == item) {
+               return;
+             }
+             CShotSynth::mouse(QTest::MouseDClick, db->viewport(), Qt::LeftButton, Qt::NoModifier,
+                               checkStatePoint(item));
+             settle(500);
+           },
+           [&]() {
+             const IDBItem* item = itemRow();
+             return (nullptr == item) ? QString() : QString::number(item->getCheckState());
+           }});
+    resetItem();
+    resetDb();
+    if (IDBItem* einstein = dbRow(projectRowPath); nullptr != einstein) {
+      einstein->setExpanded(false);
+    }
+  }
+
+  CMapTreeWidget* maps = main->findChild<CMapTreeWidget*>();
+  CMapItemDelegate* mapDelegate = (nullptr == maps) ? nullptr : qobject_cast<CMapItemDelegate*>(maps->itemDelegate());
+  const QString mapName =
+      (nullptr == maps || 0 == maps->topLevelItemCount()) ? QString() : CShotAddress::namePathOf(maps->topLevelItem(0));
+  if (nullptr == mapDelegate || mapName.isEmpty()) {
+    verdict("the map tree lists a map with a name of its own", false);
+  } else {
+    names.insert("%MAPROW%", mapName);
+    auto mapRow = [maps, mapName]() { return CShotAddress::resolveNamePath(*maps, mapName); };
+    auto resetMaps = [&, maps]() {
+      bringUp(maps);
+      // An objectName addresses only while unique, so it is read when the case runs.
+      names.insert("%MAPS%", CShotAddress::addressOf(main, maps).value_or(QString()));
+      maps->setCurrentItem(nullptr);
+      if (IMapItem* map = dynamic_cast<IMapItem*>(mapRow());
+          nullptr != map && IMapItem::eStatus::Active != map->getStatus()) {
+        map->activate(true);
+      }
+      settle(300);
+    };
+    check({"a map row's activate button is the row and the button",
+           {R"({"button":"activate","do":"click","row":"%MAPROW%","widget":"%MAPS%"})"},
+           resetMaps,
+           [&, maps, mapDelegate]() {
+             const QPoint& at =
+                 buttonPoint(maps, mapRow(), [mapDelegate](const QStyleOptionViewItem& opt, const QModelIndex& index) {
+                   return mapDelegate->buttonRect(opt, index, CMapItemDelegate::button_e::eActivate);
+                 });
+             click(maps->viewport(), at);
+             settle(300);
+           },
+           [&]() {
+             const IMapItem* map = dynamic_cast<IMapItem*>(mapRow());
+             return (nullptr == map) ? QString() : QString::number(qint32(map->getStatus()));
+           }});
+    resetMaps();
+  }
+
+  CDemTreeWidget* dems = main->findChild<CDemTreeWidget*>();
+  CMapItemDelegate* demDelegate = (nullptr == dems) ? nullptr : qobject_cast<CMapItemDelegate*>(dems->itemDelegate());
+  const QString demName =
+      (nullptr == dems || 0 == dems->topLevelItemCount()) ? QString() : CShotAddress::namePathOf(dems->topLevelItem(0));
+  if (nullptr == demDelegate || demName.isEmpty()) {
+    verdict("the DEM tree lists a DEM with a name of its own", false);
+  } else {
+    names.insert("%DEMROW%", demName);
+    auto demRow = [dems, demName]() { return CShotAddress::resolveNamePath(*dems, demName); };
+    auto resetDems = [&, dems]() {
+      bringUp(dems);
+      names.insert("%DEMS%", CShotAddress::addressOf(main, dems).value_or(QString()));
+      dems->setCurrentItem(nullptr);
+      if (IMapItem* dem = dynamic_cast<IMapItem*>(demRow());
+          nullptr != dem && IMapItem::eStatus::Active != dem->getStatus()) {
+        dem->activate(true);
+      }
+      settle(300);
+    };
+    check({"a DEM row's activate button is the row and the button",
+           {R"({"button":"activate","do":"click","row":"%DEMROW%","widget":"%DEMS%"})"},
+           resetDems,
+           [&, dems, demDelegate]() {
+             const QPoint& at =
+                 buttonPoint(dems, demRow(), [demDelegate](const QStyleOptionViewItem& opt, const QModelIndex& index) {
+                   return demDelegate->buttonRect(opt, index, CMapItemDelegate::button_e::eActivate);
+                 });
+             click(dems->viewport(), at);
+             settle(300);
+           },
+           [&]() {
+             const IMapItem* dem = dynamic_cast<IMapItem*>(demRow());
+             return (nullptr == dem) ? QString() : QString::number(qint32(dem->getStatus()));
+           }});
+    resetDems();
+  }
+
+  // ---- menus a row button opens
+
+  {
+    // A leftover menu shares action names with the next, which is then addressed by position.
+    QMetaObject::invokeMethod(wks, "slotGeoSearch", Q_ARG(bool, true));
+    CGeoSearch* search = nullptr;
+    for (qint32 i = 0; i < wks->topLevelItemCount() && nullptr == search; i++) {
+      search = dynamic_cast<CGeoSearch*>(wks->topLevelItem(i));
+    }
+    if (nullptr == search) {
+      verdict("the geo search's menus are gone once they close", false, "no geo search in the workspace");
+    } else {
+      auto menusOfTree = [wks]() { return wks->findChildren<QMenu*>(Qt::FindDirectChildrenOnly).size(); };
+      const qsizetype before = menusOfTree();
+      menuCloser.start();
+      for (qint32 i = 0; i < 2; i++) {
+        search->selectService(QRect());
+        search->changeSymbol();
+      }
+      menuCloser.stop();
+      const qsizetype after = menusOfTree();
+      verdict("the geo search's menus are gone once they close", before == after,
+              QString("%1 menus below the workspace before, %2 after").arg(before).arg(after));
+    }
+    QMetaObject::invokeMethod(wks, "slotGeoSearch", Q_ARG(bool, false));
+  }
+
+  // ---- POIs in the map's context menu
+
+  {
+    // The fixture has several routes called Memory within metres, two at one position, in category 321.
+    CPoiList* poiList = main->findChild<CPoiList*>();
+    IPoiFile* poiFile = (nullptr == poiList || 0 == poiList->count() || nullptr == poiList->item(0))
+                            ? nullptr
+                            : poiList->item(0)->getPoifile().data();
+    if (nullptr == poiFile) {
+      verdict("POIs close by with one name get menu entries of their own", false, "the fixture has no POI file");
+    } else {
+      QTreeWidget categories;
+      CPoiCategory category("climbing", 321, &categories);
+      category.setCheckState(CPoiPropSetup::eTreeColumnCheckbox, Qt::Checked);
+      poiFile->slotCheckedStateChanged(&category);
+
+      QSet<IPoiItem> pois;
+      QList<QPointF> highlight;
+      poiFile->findPoisIn(QRectF(QPointF(10.6190, 47.5005), QPointF(10.6210, 47.4985)), pois, highlight);
+      QSet<QString> actionNames;
+      qint32 memories = 0;
+      for (const IPoiItem& poi : std::as_const(pois)) {
+        if ("Memory" == poi.name) {
+          memories++;
+          actionNames.insert(CMouseNormal::poiActionName(poi));
+        }
+      }
+      category.setCheckState(CPoiPropSetup::eTreeColumnCheckbox, Qt::Unchecked);
+      poiFile->slotCheckedStateChanged(&category);
+
+      verdict("POIs close by with one name get menu entries of their own",
+              memories > 1 && actionNames.size() == memories,
+              QString("%1 POIs called Memory, %2 names: %3")
+                  .arg(memories)
+                  .arg(actionNames.size())
+                  .arg(QStringList(actionNames.begin(), actionNames.end()).join(' ')));
+    }
+  }
 
   qApp->removeEventFilter(&menus);
   resetPlot();

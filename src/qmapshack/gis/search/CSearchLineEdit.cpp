@@ -48,6 +48,15 @@ CSearchLineEdit::CSearchLineEdit(QWidget* parent) : QLineEdit(parent) {
   actionCaseSensitive = new QAction(tr("Case Sensitive"), this);
   actionCaseSensitive->setCheckable(true);
 
+  actionClearFilter->setObjectName("actionClearFilter");
+  actionHelp->setObjectName("actionHelp");
+  actionSetupFilter->setObjectName("actionSetupFilter");
+  actionError->setObjectName("actionError");
+  actionAutoProperty->setObjectName("actionAutoProperty");
+  actionNameOnly->setObjectName("actionNameOnly");
+  actionCompleteText->setObjectName("actionCompleteText");
+  actionCaseSensitive->setObjectName("actionCaseSensitive");
+
   addAction(actionClearFilter, QLineEdit::TrailingPosition);
   addAction(actionHelp, QLineEdit::TrailingPosition);
   addAction(actionSetupFilter, QLineEdit::LeadingPosition);

@@ -34,6 +34,8 @@ struct IPoiItem {
   QString icon;
   QList<IGisItem::link_t> links;
   quint32 ele = NOINT;
+  quint64 key = 0; /**< the POI's id in its file, 0 for a map's POI */
+  QString file;    /**< that file: base name and the start of its key, the same on every machine; empty without a key */
 };
 
 inline bool operator==(const IPoiItem& poi1, const IPoiItem& poi2) {

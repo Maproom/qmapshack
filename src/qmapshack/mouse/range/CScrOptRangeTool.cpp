@@ -53,6 +53,7 @@ CScrOptRangeTool::CScrOptRangeTool(CGisItemTrk& trk, CMouseRangeTrk* mouse, CCan
 
   plot = new CPlot(&trk, trk.limitsGraphRange, IPlot::eModeSimple, this);
   plot->setObjectName(owner);
+  plot->setOwnerTag(owner);
   plot->setMinimumHeight(50);
   plot->setup(trk.getPropertyHandler()->propBySource("ql:ele"));
   plot->updateData();

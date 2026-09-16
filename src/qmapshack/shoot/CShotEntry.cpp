@@ -18,18 +18,111 @@
 
 #include "shoot/CShotEntry.h"
 
+#include <QtSystemDetection>
+#if defined(Q_OS_WIN32)
+// The only Win32 include: MSVC needs windows.h ahead of every other Win32 header.
+#include <windows.h>
+
+#include <cstdio>
+#endif
+
 #include <QApplication>
 #include <QDir>
 #include <QFileInfo>
 #include <QFontDatabase>
+#include <QPalette>
+#include <QStyleHints>
 
 #include "CMainWindow.h"
 #include "gis/CGisListWks.h"
 #include "map/CMapDraw.h"
 #include "setup/CAppOpts.h"
+#include "shoot/CShotApplication.h"
 #include "shoot/CShotRunner.h"
 #include "theme/CQmsStyle.h"
-#include "theme/CUiTheme.h"
+
+namespace {
+#if defined(Q_OS_WIN32)
+/** @return true when the parent handed this stream a pipe or a file */
+bool isHandedOver(DWORD stream) {
+  const HANDLE handle = GetStdHandle(stream);
+  if (nullptr == handle || INVALID_HANDLE_VALUE == handle) {
+    return false;
+  }
+  const DWORD type = GetFileType(handle);
+  return FILE_TYPE_PIPE == type || FILE_TYPE_DISK == type;
+}
+
+/** @brief Attach a GUI-subsystem build to the parent's console, keeping streams handed over as pipe or file. */
+void attachParentConsole() {
+  // Before attaching: a handed-over pipe must be kept.
+  const bool stdoutHandedOver = isHandedOver(STD_OUTPUT_HANDLE);
+  const bool stderrHandedOver = isHandedOver(STD_ERROR_HANDLE);
+  if ((stdoutHandedOver && stderrHandedOver) || !AttachConsole(ATTACH_PARENT_PROCESS)) {
+    return;
+  }
+
+  // NUL on failure: freopen() has closed the stream already.
+  if (!stdoutHandedOver && nullptr == freopen("CONOUT$", "w", stdout)) {
+    freopen("NUL", "w", stdout);
+  }
+  if (!stderrHandedOver && nullptr == freopen("CONOUT$", "w", stderr)) {
+    freopen("NUL", "w", stderr);
+  }
+}
+#endif
+
+/** @brief Replace the application palette with Fusion's light or dark one, whatever the desktop is set to. */
+void pinColorScheme(bool dark) {
+  QGuiApplication::styleHints()->setColorScheme(dark ? Qt::ColorScheme::Dark : Qt::ColorScheme::Light);
+
+  // Fusion's palette; QStyle::standardPalette() would ask the platform theme for the scheme.
+  const QColor windowText = dark ? QColor(240, 240, 240) : QColor(Qt::black);
+  const QColor button = dark ? QColor(50, 50, 50) : QColor(239, 239, 239);
+  const QColor light = button.lighter(150);
+  const QColor mid = button.darker(130);
+  const QColor shade = button.darker(150);
+  const QColor base = dark ? button.darker(140) : QColor(Qt::white);
+  const QColor highlight(48, 140, 198);
+  const QColor disabledText = dark ? QColor(130, 130, 130) : QColor(190, 190, 190);
+  const QColor shadow = shade.darker(135);
+  QColor placeholder = windowText;
+  placeholder.setAlpha(128);
+
+  // The seven-colour ctor takes Window, which paletteIsDark() reads, from `button`.
+  QPalette palette(windowText, button, light, shade, mid, windowText, base);
+  palette.setBrush(QPalette::Midlight, mid.lighter(110));
+  palette.setBrush(QPalette::Button, button);
+  palette.setBrush(QPalette::Shadow, shadow);
+  palette.setBrush(QPalette::HighlightedText, dark ? windowText : QColor(Qt::white));
+  // The seven-colour ctor takes BrightText from `light`, too dark on a dark window.
+  palette.setBrush(QPalette::BrightText, QColor(Qt::white));
+  palette.setBrush(QPalette::PlaceholderText, placeholder);
+
+  palette.setBrush(QPalette::Disabled, QPalette::Text, disabledText);
+  palette.setBrush(QPalette::Disabled, QPalette::WindowText, disabledText);
+  palette.setBrush(QPalette::Disabled, QPalette::ButtonText, disabledText);
+  palette.setBrush(QPalette::Disabled, QPalette::Base, button);
+  // Light arm: Fusion's literal. Dark arm derived, the literal is a near-white edge there.
+  palette.setBrush(QPalette::Disabled, QPalette::Dark, dark ? shade.lighter(120) : QColor(209, 209, 209).darker(110));
+  palette.setBrush(QPalette::Disabled, QPalette::Shadow, shadow.lighter(150));
+
+  const QColor disabledHighlight(145, 145, 145);
+  palette.setBrush(QPalette::Active, QPalette::Highlight, highlight);
+  palette.setBrush(QPalette::Inactive, QPalette::Highlight, highlight);
+  palette.setBrush(QPalette::Disabled, QPalette::Highlight, disabledHighlight);
+  palette.setBrush(QPalette::Active, QPalette::Accent, highlight);
+  palette.setBrush(QPalette::Inactive, QPalette::Accent, highlight);
+  palette.setBrush(QPalette::Disabled, QPalette::Accent, disabledHighlight);
+
+  // Qt::blue, the default, is unreadable on a dark window.
+  if (dark) {
+    palette.setBrush(QPalette::Link, highlight);
+  }
+
+  QApplication::setPalette(palette);
+}
+}  // namespace
 
 bool CShotEntry::isDocRun(const CAppOpts& opts) { return !opts.doc.shootDir.isEmpty() || !opts.doc.docDir.isEmpty(); }
 
@@ -44,19 +137,32 @@ std::optional<qint32> CShotEntry::run(const CAppOpts& opts, CMainWindow& window)
   return qMin(runner->getFailures(), 255);
 }
 
-void CShotEntry::pinEnvironment(int argc, char** argv) {
-#ifdef Q_OS_WIN
-  // `generic` crashes the QApplication constructor on Windows.
-  Q_UNUSED(argc)
-  Q_UNUSED(argv)
-#else
+bool CShotEntry::isDocArgv(int argc, char** argv) {
   for (int i = 1; i < argc; ++i) {
     const QByteArray arg(argv[i]);
     if (arg.startsWith("--shoot") || arg.startsWith("--doc")) {
-      qputenv("QT_QPA_PLATFORMTHEME", "generic");
-      return;
+      return true;
     }
   }
+  return false;
+}
+
+std::unique_ptr<QApplication> CShotEntry::createApplication(int& argc, char** argv) {
+  if (isDocArgv(argc, argv)) {
+    return std::make_unique<CShotApplication>(argc, argv);
+  }
+  return std::make_unique<QApplication>(argc, argv);
+}
+
+void CShotEntry::pinEnvironment(int argc, char** argv) {
+  if (!isDocArgv(argc, argv)) {
+    return;
+  }
+#if defined(Q_OS_WIN32)
+  // `generic` crashes the QApplication constructor on Windows.
+  attachParentConsole();
+#else
+  qputenv("QT_QPA_PLATFORMTHEME", "generic");
 #endif
 }
 
@@ -78,6 +184,8 @@ bool CShotEntry::prepare(const CAppOpts& opts) {
   }
 
   qDebug() << "documentation run: platform theme" << qgetenv("QT_QPA_PLATFORMTHEME");
+  // -d traces every user input frame.
+  CShotApplication::setTrace(opts.debug);
   pinAppearance(opts.doc.colorScheme);
   registerFonts();
 
@@ -127,7 +235,7 @@ void CShotEntry::pinAppearance(const QString& colorScheme) {
     return;
   }
   if ("light" == colorScheme || "dark" == colorScheme) {
-    CUiTheme::pinColorScheme("dark" == colorScheme);
+    pinColorScheme("dark" == colorScheme);
     qDebug() << "documentation run: colour scheme pinned to" << colorScheme;
   } else {
     qWarning() << "unknown --color-scheme" << colorScheme << "- expected light or dark";

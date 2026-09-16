@@ -21,9 +21,9 @@
 
 #include <QJsonObject>
 #include <QString>
-#include <optional>
 
 class CCanvas;
+class CMainWindow;
 class CShotContext;
 class QObject;
 class QVariant;
@@ -34,28 +34,18 @@ namespace CShotPage {
 /** The --shoot-scenario value for shots outside any scenario. */
 inline const QString kBaseScenario = QStringLiteral("-");
 
-/**
-   @brief How a shot names a widget below @p root.
-
-   The objectName when it finds this very widget from @p root; otherwise the class and its position
-   among the parent's direct children of that class, below the parent's address: `IMapList/QMenu#0`.
-
-   @return an empty string for @p root itself, nothing for a widget that cannot be addressed
- */
-std::optional<QString> addressOf(const QWidget* root, const QWidget* widget);
-
-/** @return the widget @p address names below @p root, or nullptr */
-QWidget* resolve(QWidget* root, const QString& address);
-
-/**
-   @brief Set a property and read it back.
-
-   setProperty() answers whether the property exists, never whether the value took.
- */
+/** @brief Set a property and read it back: setProperty() does not say whether the value took. */
 bool driveProperty(QObject* target, const QString& property, const QVariant& value);
 
 /** @return the canvas' view as a `view` step: the centre in degrees and the zoom level */
 QJsonObject viewOf(const CCanvas* canvas);
+
+/**
+   @brief The window arrangement as a `layout` step.
+
+   No saveGeometry(): the window size belongs to the shot's `size` alone.
+ */
+QJsonObject layoutOf(const CMainWindow& main);
 
 /** @return false when the canvas did not take @p view */
 bool applyView(CCanvas* canvas, const QJsonObject& view);

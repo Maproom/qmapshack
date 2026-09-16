@@ -38,22 +38,14 @@ src/
 - **Never build.** No `cmake --build`, `ninja` or `make` — not even to verify an edit. Make the
   change, run `clang-format`, report, stop. For reference, the user runs
   `cmake --build build --target qmapshack -j$(nproc)`.
-- **Check the facts before changing anything.** Read the code, the demo, the ticket or a measurement
-  first; no guessing, no assumption. What could not be checked is said to be unchecked.
-- **Run it before reporting it.** The build is the user's, but verifying is not: run
-  `build/bin/qmapshack` headlessly through `doc/tools/shots.py` (on this checkout: `chapter`,
-  `build`) with `-o <scratch>` so nothing in the tree is touched, read the images it produced, and
-  check the JSON and INI files a feature wrote. A claim that something works names the command that
-  showed it. If nothing was run, say so and name the check that would settle it.
-- **Syntax-check what you changed before saying it is done.** `.notes/syntax-check.sh <file.cpp>...`
-  runs `c++ -fsyntax-only` with the flags the build uses: no object file, no linking, nothing
-  written, and it catches the shadowing and stale-identifier mistakes that otherwise reach the user
-  as a failed build. Not a substitute for the build — moc, AUTOUIC and linking are not covered. It
-  reads the Qt prefix out of `build/CMakeCache.txt`, because checking against whatever Qt the system
-  ships reports everything newer than that as missing — `QStyleHints::setColorScheme` and
-  `QPalette::Accent` both came back as non-existent while it pointed at the distribution's Qt 6.4.
-  It also fails when a Win32 SDK header precedes `<windows.h>`: no `#if defined(Q_OS_WIN32)` block
-  is compiled here, so that break reaches the user's build unchecked.
+- **Check the facts before changing anything**: code, ticket or measurement first. Say what could
+  not be checked.
+- **Run it before reporting it.** Verify headlessly with `doc/tools/shots.py` (`-o <scratch> replay`,
+  `selftest`), read the images and the JSON/INI written. Name the command that showed it, or say
+  nothing was run and what would settle it.
+- **Syntax-check changed files**: `.notes/syntax-check.sh <file.cpp>...` (each file's command from
+  `ninja -t compdb` with `-fsyntax-only`; a header is checked through a `.cpp`). Catches shadowing and stale identifiers; not
+  moc, AUTOUIC, linking, or anything inside `#if defined(Q_OS_WIN32)`.
 - **Never commit or push** without being asked for that specific change.
 - **No `Co-Authored-By` lines** in commit messages.
 - For "what were we working on", read `git status && git diff` first — the live diff is ground
@@ -79,45 +71,20 @@ Target-scoped CMake. Nothing is set at directory scope except the MSVC options b
   `.qm` from a filesystem path, so nothing reads it, but `qt_add_resources(<app> ...)` is what makes
   the `.qm` files inputs of the *application* target. Drop it and `--target qmapshack` stops
   producing the catalogs the packaging scripts copy out of `<build>/src/<app>/`.
-- **The `.qm` catalogs are unreachable in a build tree.** `prepareTranslator()` resolves a filesystem
-  path only (`<appdir>/../share/qmapshack/translations` on Linux), which exists after `install`, so an
-  uninstalled run is always English. All nine catalogs *are* in the binary under `:/locale` — verify
-  with `strings -a -e l build/bin/qmapshack | grep qmapshack_de.qm`. A `:/locale` fallback in
-  `prepareTranslator()` is what would make an uninstalled run translatable.
-- **A dialog's standard buttons come from the platform theme, not from a `.qm`.** Measured on
-  X11/KDE with Qt 6.10.2: with `KDEPlasmaPlatformTheme6` loaded they read
-  `&OK | &Schließen | &Abbrechen` whatever `--locale` says and whichever `qtbase_*.qm` is installed
-  - `QPlatformTheme::standardButtonText()` answers out of the desktop's own translations, and it
-  adds the mnemonics the generic theme leaves off. It follows `LANGUAGE`/`LC_MESSAGES`, and
-  `QT_QPA_PLATFORMTHEME=` empty does not switch it off: Qt then detects `kde` from
-  `XDG_CURRENT_DESKTOP`. `QT_QPA_PLATFORMTHEME=generic` does. **The offscreen platform loads no
-  theme at all and ignores that variable**, so a headless run never has a theme and an on-screen one
-  always does - which is what made a writer's session and the build it feeds disagree. `shots.py`
-  pins `QT_QPA_PLATFORMTHEME=generic` and `LANGUAGE` for both, and the seven `test` images are
-  byte-identical with and without that pin.
-- **What is left of the theme is pinned in the application, because the environment cannot do it.**
-  An unknown `QT_QPA_PLATFORMTHEME` does not suppress the desktop's own theme - Qt falls through to
-  the integration's `themeNames()` and loads `kde` anyway - so a session cannot be told to have no
-  theme. Measured instead (Qt 6.10.2, Fusion, generic theme against no theme): of 130 style hints,
-  every class font, the palette and five standard icons, **exactly one differs**,
-  `SH_DialogButtonBox_ButtonsHaveIcons`, plus `QIcon::themeName()` (`hicolor` against empty).
-  `CQmsStyle::pinThemeIndependentHints()` answers that hint 0 and `CShotEntry::prepare()` clears the
-  icon theme, for `--shoot` and `--doc` alike. Verified by rendering the same dialog into a QImage
-  under both platforms: identical MD5 with the pin, different without it. Anything else that turns
-  out to differ belongs in that one hint override, never in a per-symptom patch.
-- **Qt's catalog must follow the application's, and `QTranslator::load()` cannot say whether it
-  does** (QMS-#1242). Qt's catalogs live in `QLibraryInfo::TranslationsPath` and are always
-  installed, the application's only after `install` and only for nine languages, so an ungated run
-  mixes Qt's translated strings into an English window. `QMS-1217_demo` gates on
-  `prepareTranslator()`'s return value, which is not a test: measured with the installed 1.21.1,
-  `load("qmapshack_pl", dir)` drops the `_pl` and succeeds with `qmapshack.qm` — 33 bytes, the
-  untranslated source catalog, installed whatever the language — so `qtbase_pl.qm` is loaded anyway.
-  Only a build tree, where the directory does not exist, comes out English. The gate has to test
-  that a file for the resolved language exists. Standard buttons are not what this is about - see
-  above.
-- **`QLocale::system()` follows `LANGUAGE`, not only `LANG`.** Measured: `LANGUAGE=de` with
-  `LC_ALL=LANG=en_US.UTF-8` is `de_DE`. A run that must not depend on the desktop passes `--locale`;
-  `shots.py` does.
+- **All nine `.qm` catalogs are in the binary under `:/locale`**
+  (`strings -a -e l build/bin/qmapshack | grep qmapshack_de.qm`), but `prepareTranslator()` reads
+  only the filesystem, so a build-tree run is English. A `:/locale` fallback would fix that.
+- **Standard dialog buttons are translated by the platform theme, not a `.qm`**, following
+  `LANGUAGE`/`LC_MESSAGES`. `QT_QPA_PLATFORMTHEME=` (empty) still loads `kde` via
+  `XDG_CURRENT_DESKTOP`; `generic` does not. Offscreen loads no theme and ignores the variable.
+- **An unknown `QT_QPA_PLATFORMTHEME` still loads the desktop's theme**, so the rest is pinned in
+  the application. Generic theme vs none (Qt 6.10.2, Fusion) differs only in
+  `SH_DialogButtonBox_ButtonsHaveIcons` and `QIcon::themeName()`:
+  `CQmsStyle::pinThemeIndependentHints()` answers the hint 0 and `CShotEntry::prepare()` clears the
+  icon theme. Any further difference goes into that override, never a per-symptom patch.
+- **`QLocale::system()` follows `LANGUAGE`, not only `LANG`.** A desktop-independent run passes
+  `--locale`.
+- **Stack smashing at startup after a checkout:** stale objects; `ninja -C build -t clean qmapshack`.
 - **`qms_options`** is the INTERFACE target carrying the project's warning set. First-party targets
   link it `PRIVATE`; bundled 3rdparty must not. Add flags through `qms_add_flag_if_supported()`.
 - **`target_link_libraries` is keyword form everywhere.** Plain and keyword signatures cannot be
@@ -478,10 +445,10 @@ Do not re-add a `setIcon(const QPixmap&)` overload on `IDBItem`.
 stylesheets and `setTextColor()`. Roles `Neutral/Ok/Warn/Error/Info/Code`, each a fixed light/dark
 pair. Tune there, never per site.
 
-`CUiTheme::pinColorScheme(bool)` is the other way in: it replaces the application palette outright
-so a run's output cannot depend on the desktop's scheme. Not a scope like `CForceLight`, not
-undoable, and once only, before the first window — see the documentation-run notes under *Open
-work*.
+`--color-scheme` (`pinColorScheme()` in `CShotEntry.cpp`) replaces the application palette with Fusion's so
+output cannot depend on the desktop. Once, before the first window; not a scope, not undoable. The palette is what
+matters (`paletteIsDark()` reads it): `setColorScheme()` is inert on X11 and `standardPalette()`
+asks the platform theme.
 
 ### Choosing the entry point
 
@@ -828,29 +795,29 @@ the SVG at size rather than wrap the old 32px PNG.
 
 ## Tile cache
 
-`CDiskCache::cleanupRemovedMaps()`, reached from `CMapDraw::loadMapList()`, **deletes the cache
-directory of every map the current configuration does not know about**. `--config <fresh ini>` does
-not isolate it — `defaultCachePath()` is `~/.QMapShack` regardless — so any headless or scripted run
-must call `CMapDraw::setCacheRoot()` before the first map list load or it destroys the user's tile
-cache.
+`CDiskCache::cleanupRemovedMaps()` (from `CMapDraw::loadMapList()`) **deletes the cache directory of
+every map the configuration does not know**, and `defaultCachePath()` ignores `--config`. A scripted
+run must call `CMapDraw::setCacheRoot()` and `CGisListWks::setDatabasePath()` before `CMainWindow`,
+or it prunes the user's tiles and empties their workspace.
 
-`Canvas/cachePath` in the configuration wins over that setter, and always: `saveMapPath()` stores the
-key on **every** exit, so only a configuration that has never been written falls back to the pinned
-value. `setCacheRoot()` therefore protects startup alone — the stretch before `CMainWindow` reads the
-configuration — and what the run then uses is whatever `--config` carries. A documentation run without
-`--config` is refused for that reason (`CShotEntry::prepare()`), because it would also write the
-user's settings from `~CMainWindow`, beside an open QMapShack that no longer stops a second
-instance.
+That root covers startup only: `Canvas/cachePath` in the configuration wins afterwards
+(`saveMapPath()` writes it on every exit). `shots.py` injects it so session and replay share one
+cache. A doc run without `--config` is refused (`CShotEntry::prepare()`): it would write the user's
+settings.
+
+**A failed tile is a hole until the `CDiskCache` is replaced.** A failed or undecodable reply, or a
+cache file that does not load, stays in `cache` as the 256 px transparent dummy. Keep it there:
+without it `contains()` is false and a failing server redraws forever; a null image would set
+`tileSizePx` to 0. `restore()` returns false for a hole, `CMapTMS`/`CMapWMTS::draw()` count holes
+per draw (`failedTiles()`), and learn `tileSizePx`/`tileScale` only from real tiles — learned from a
+hole, a 512 px source flips it every draw.
 
 ### The map list outlives its `CMapDraw`
 
-`CMapDraw`'s constructor parents `mapList` to the canvas but disposes of it with
-`connect(canvas, &CCanvas::destroyed, mapList, &CMapList::deleteLater)`, while `CMapDraw` itself is
-a child of the canvas and dies with it. So between the canvas going away and the next event loop
-turn, every `CMapItem` is alive with a dangling `CMapDraw* map`. Anything a `CMapItem` queues must
-therefore watch its owner, not only itself — `loadConfig()`'s 100 ms deferred activation carries a
-`QPointer<CMapDraw>` for exactly this. A canvas that lives less than that delay, such as the one
-`CPrintDialog` builds, hits it.
+`mapList` is parented to the canvas but deleted via `CCanvas::destroyed` → `deleteLater`, while
+`CMapDraw` dies with the canvas, so until the next event loop turn every `CMapItem` holds a dangling
+`CMapDraw* map`. Anything a `CMapItem` queues must watch its owner — `loadConfig()`'s 100 ms deferred
+activation carries a `QPointer<CMapDraw>`. `CPrintDialog`'s short-lived canvas hits it.
 
 ---
 
@@ -1143,636 +1110,275 @@ file.
   cancelled.
 - `waypoint-icon-resolution-plan.md` — 32 → 96 px waypoint icons, gated on storing `icon_t::focus`
   relative.
-- `doc-image-publish-plan.md` — a `shots.py publish` that commits only the pictures a recipe change
-  actually moved, so a writer's run stops rewriting every PNG with their machine's rendering.
-- `QMS-1251-recorder-signals-plan.md` — the recorder, rebuilt on Qt's user-interaction signals and on
-  a frame around each input delivery. Steps 1 to 5 are done; what is left of it is the painted row
-  buttons (#1252) and the replay queue (#1253). `doc/tools/shots.py selftest` is what shows the
-  recorder works.
+- `doc-image-publish-plan.md` — `shots.py publish`: commit only the pictures a recipe change moved.
+- `QMS-1251-recorder-signals-plan.md` — the recorder; left: the replay queue (#1253).
+  `shots.py selftest` verifies it.
 
-**The documentation subsystem is developer-only**, behind `-DQMS_DOC_MODE=ON`. A doc run needs the
-source tree and a build tree configured with it.
+### Documentation subsystem (QMS-1217)
 
-**No source tests `QMS_DOC_MODE`** — `grep -rn QMS_DOC_MODE src/` finds `src/qmapshack/CMakeLists.txt`
-and nothing else. The option picks which
-implementation of a header is compiled: `shoot/CShotEntry.cpp` and `shoot/CShotOptions.cpp`, or
-`shoot/CShotEntryStub.cpp` and `shoot/CShotOptionsStub.cpp`, which answer "no documentation run" and
-define no switch. So a user's binary rejects `--shoot`, `--doc` and `--color-scheme` through
-`QCommandLineParser`'s own error instead of accepting a switch that does nothing, and `main.cpp`,
-`CCommandProcessor` and `CAppOpts` carry no preprocessor branch.
+`.notes/QMS-1217-documentation-images.md` is the one plan: §1-§8 design, §9 evidence (measured, do
+not re-derive), §10 what the demo does not do, §11 the sub-tickets.
 
-`CShotEntry` is all `main.cpp` knows: `isDocRun()`, `prepare()` and `run()`. `prepare()` runs before
-`CMainWindow` and is what makes a run harmless and machine-independent — the tile cache root, the
-workspace database, `CUiTheme::pinColorScheme()`, `CQmsStyle::pinThemeIndependentHints()`, the icon
-theme cleared, and the bundled `src/fonts/` families registered, which the offscreen platform on
-Windows has none of. `CShotOptions` owns the twelve switches, defined and read in one place, and reaches everything as the
-single `CAppOpts::doc` member. `--config` is mandatory for such a run; `prepare()` returns false
-without it and `main()` exits.
-
-The bundled fonts live in `shoot/fonts.qrc`, compiled only with the subsystem, so a user's binary
-carries none of them.
-
-A doc run also skips the splash screen and `CSingleInstanceProxy`, which would hand the arguments to
-an already running QMapShack and exit.
-
-`QMS-1217-documentation-images.md` is the one plan. §1-§8 are the design, §9 the evidence - measured
-on this checkout, do not re-derive it and do not doubt it without a new measurement - §10 what the
-demo does not do, §11 the sub-tickets the feature branch is built from. It replaces the three
-layered plans that came before it.
-
-**One branch, one commit per sub-ticket.** Everything from #1245 to #1257 is developed on `QMS-1217`,
-which is based on `dev`; a sub-ticket gets a commit there, never a branch of its own. "Reviewable and
-mergeable on its own" in §11 means the commit, not a branch — and a branch per sub-ticket does not
-work anyway: its `CLAUDE.md` and `.notes` edits belong to text only the feature branch has.
-
-**The subsystem is being built ticket by ticket**, #1245 to #1257 (#1247 is what creates the test
-page). Landed: #1245, the hermetic run — the option, the switches, the two entry points, the
-redirections and the pinning. #1246, the render path — `CShotWriter`, `CShotContext` and tile
-completeness. #1247, the shot file — `CShotPage` (addressing, `set`, `size`, `rect`, the `view`
-functions), `CShotRunner` behind `--shoot`, and `doc/pages/test.md` with widget shots. #1248, the
-exposure catalog — `CShotRegistry`, `SHOT_EXPOSE` and the 35 entries of `CShotExposures.cpp` that
-need no fixture item. #1249, the fixture — the data under `doc/shots/fixture/`, `CShotFixture`, and the
-16 exposures that build from a fixture item. #1250, `doc/tools/shots.py` — `replay`, `unused` and the
-hidden `compose`. #1251, the recorder — `CShotApplication`'s input frame, `IShotHandler` and the
-handler per class, the map, the plot and the icon grid as raw input, and `CShotSelfTest` behind
-`shots.py selftest`. Everything else described below is still the demo on `QMS-1217_demo` and the
-facts it established, and a statement about it is a requirement, not a description of code you will
-find.
-
-What is on `QMS-1217_demo` is a **throwaway demo** of that design. The port names the writer's
-session `shots.py take <page>` and the headless one `shots.py replay`; the demo calls them `doc` and
-`chapter|build`. Everything but the exposure catalog is data:
+**One branch, one commit per sub-ticket.** #1245-#1257 are commits on `QMS-1217` (based on `dev`),
+never branches of their own. #1245-#1252 exist: hermetic run, render path, shot file, exposure
+catalog, fixture, `shots.py`, recorder, row buttons. Documentation mode (the writer's session) is
+still only the throwaway demo on `QMS-1217_demo`; statements about it below are requirements. The
+demo's `doc` / `chapter|build` are `shots.py take <page>` / `shots.py replay` here.
 
 ```
-doc/pages/<page>.md            what says a picture exists - the only source of shot names
+doc/pages/<page>.md            the only source of shot names
 doc/shots/<page>.json          the shots and the recorded scenarios
 doc/shots/<page>/<name>.ini    one scenario's whole configuration
-doc/shots/fixture/shots.ini       the base a page opens on
+doc/shots/fixture/shots.ini    the base a page opens on
 ```
 
-- **A scenario is recorded, not registered.** `CShotRecorder` stores the `layout` and `view` it
-  started in (the centre and the zoom level, never a rectangle: `zoomTo()` snaps and everything on
-  the map moves) and every change as a step. `IShotRecipe` and `RecipesChapter.cpp` are gone;
-  `SHOT_EXPOSE` stays.
+#### Build and entry
 
-### What the recorder costs the application - counted 2026-09-08
+- **Developer-only, behind `-DQMS_DOC_MODE=ON`.** No source tests the option: CMake compiles
+  `shoot/CShotEntry.cpp`/`CShotOptions.cpp` or the `*Stub.cpp` pair, and `shoot/fonts.qrc` only
+  with it. A user's binary rejects `--shoot`, `--doc`, `--color-scheme` and companions through
+  `QCommandLineParser`; `main.cpp`, `CCommandProcessor` and `CAppOpts` carry no `#if`.
+  `src/qmaptool/setup/` never had the switches.
+- **`CShotEntry` is all `main.cpp` knows**: `pinEnvironment()`, `createApplication()`, `isDocRun()`,
+  `prepare()`, `run()`. `CShotOptions` defines and reads every switch; they reach the app as
+  `CAppOpts::doc`, empty without the subsystem.
+- **`prepare()` runs before `CMainWindow`** and sets the cache root, the workspace database
+  (`CGisListWks::setDatabasePath()`), the colour scheme (`pinColorScheme()`),
+  `CQmsStyle::pinThemeIndependentHints()`, clears the icon theme and registers the bundled DejaVu
+  fonts (offscreen on Windows has no font database). It fails without `--config`, and `main()`
+  exits 1.
+- **A doc run skips the splash and `CSingleInstanceProxy`**, which would hand the arguments to a
+  running QMapShack and exit.
+- **`pinEnvironment()` sets `QT_QPA_PLATFORMTHEME=generic` except on Windows**, where a demo run
+  with it crashed (access violation) and there is no desktop theme to keep out. macOS unmeasured.
+- **A Windows build owns no console** (GUI subsystem). `pinEnvironment()`, first thing in `main()`,
+  attaches to the parent's console for `--shoot`/`--doc` and reopens a stream on `CONOUT$` only if its
+  handle is not already a pipe or file. Untested on Windows. Anything the writer must
+  see is a dialog, never only a log line.
 
-The question this answers is whether the framework's knowledge of particular widgets is finite.
-Half of it is; the other half is not, and the unbounded half is the cheap-looking one.
+#### Rendering (`CShotWriter`)
 
-**Finite: the click vocabulary.** A position means nothing in a widget that paints its own content, so four of them
-are addressed in their own terms - `CCanvas` (a geographic point), `IPlot` (`xValueAt()` /
-`pointOfXValue()`), `CIconGrid` (`iconAt()` / `rectOfIcon()`), all three done, and
-`CWksItemDelegate` (`buttonAt()` / `pressButton()`), which is #1252. The whole population is nine and every member can be named: six widgets override
-both `paintEvent` and a mouse handler - the three above plus `CDateTimeEditor`, `CPhotoViewer` and
-`CRouterBRouterTilesSelectArea` - and three delegates paint clickable areas, `CWksItemDelegate` plus
-`CDBItemDelegate` and `CMapItemDelegate`, whose overview badge is clicked through `editorEvent()`.
-Two of the five were covered on 2026-09-08 - `CMapItemDelegate` (`activate`, `overview`) and
-`CDBItemDelegate` (`checkState`), each with the same `button_e` / `buttonName()` / `buttonAt()` /
-`pressButton()` / `sigButtonPressed` shape the workspace delegate has. Their rows carry no type tag,
-so a name path is the whole address and the step names its tree (`"tree": "maps"` / `"database"`;
-absent is the workspace). Three are left - `CDateTimeEditor`, `CPhotoViewer`,
-`CRouterBRouterTilesSelectArea` - and the list grows only when somebody writes a new
-custom-painted widget.
+- **Render at dpr 1, never `QWidget::grab()`**, which uses the widget's ratio. A canvas stays the
+  exception: `IDrawContext` sizes its buffers by the widget's ratio, so a HiDPI map is resampled.
+- **An opaque picture carries no alpha**: `renderAtDpr1()` converts to `RGB32` when no pixel uses
+  it. Picture weight ships in every user's `.qch`.
+- **Resize a window, never a widget inside one**: a child resized to its hint stays that size and
+  the parent's layout is not re-applied.
+- **A map is complete when `CCanvas::isDrawComplete()` says so**: no redraw outstanding,
+  `drawContextViewportIsCurrent()`, no context running, and only then
+  `CMapDraw::pendingTiles()` — `drawt()` holds `CMapItem::mutexActiveMaps` for its whole run.
+- **`settleStable()` asks `isDrawComplete()` before it renders, never after**, or a draw finishing
+  mid-render passes with the load indicator in it. It skips a canvas not `isVisibleTo(w)` and
+  refuses one that is but not `isVisible()` (a hidden canvas never clears `needsRedraw`). It also
+  refuses a picture with any `failedTiles()`.
+- **`processEvents(flags, ms)` does not wait**; wait with a `QEventLoop` quit by a `QTimer`.
+- **A main window picture depends on its resize history**: a window's minimum silently wins, and
+  returning to a size can shift the right dock column by 1 px. Two runs on fresh configurations are
+  byte-identical.
+- **No `MainWindow/geometry` maximizes the window 500 ms after construction**; `CShotEntry::run()`
+  waits 1000 ms before the first shot.
+- **`-platform offscreen` takes no parameters**; resize the window instead of pinning a screen size.
+- **Close the main window before leaving `exec()`**: destroying it while shown hides the docks after
+  `CMainWindow::docks` is gone (SIGSEGV on exit).
 
-**The fixture is committed data, `doc/shots/fixture/`** (§10.1 of the plan). `CShotFixture::load()`
-loads `projects/Example.qms` from the `fixture/` directory beside the page's shot file, waits for
-`IGisProject::isLoading()` to end - the items are created by a thread through the event loop - and
-hands the first track, waypoint, route and area to `CShotContext`. Everything else is configuration:
-`fixture/shots.ini` is the base, and `shots.py compose` adds the absolute `Canvas/cachePath`,
-`mapPath`, `demPaths`, `poiPaths`, `Route/routino\paths` and a `Database/Entries` pointing at a
-scratch copy of `database/Example.db`.
+#### Shot files and exposures (`CShotPage`, `CShotRegistry`)
 
-**The workspace restore runs about 1100 ms after `CMainWindow`'s constructor** (`slotLateInit()` at
-100 ms schedules `slotLoadWorkspace()` 1000 ms later), so it can land inside a fixture load, and it
-does not check for a project already there. `CShotFixture::load()` waits for
-`CGisListWks::isWorkspaceLoaded()` first and refuses a workspace that already holds `Example.qms`: with
-`Database/saveOnExit` on, a second run otherwise shows the project twice (measured), or
-`loadGisProject()` stops at its "already in the workspace" message box.
+- **A window's size has one record, the shot's `size`**, applied to the main window or a window
+  only; a shot the main window sizes must give one (exposures exempt). `layout` holds `saveState()`,
+  the tab and every splitter's state, never `saveGeometry()`; a `geometry` in it warns and is
+  ignored. `shootOne()` resizes before `restoreState()`, because dock extents are pixels.
+- **The `tab` index and splitter states are applied after every other step**: pages a step opens
+  do not exist while `restoreState()` runs, and `QTabWidget` drops an index past its last page.
+- **A `set` goes through `driveProperty()`**, which checks `indexOfProperty()` (an undeclared name
+  becomes a dynamic property) and reads the value back. It is put back after the picture, newest
+  first, also on failure.
+- **`addressOf()` returns `std::optional`**: empty string is the main window, nothing is outside it.
+  `CCanvas::zoom()` clamps, so `applyView()` reads the view back. A view is centre plus zoom level,
+  never a rectangle (`zoomTo()` snaps).
+- **An objectName stops being an address once a second widget takes it** (the map tree becomes
+  `IMapList/CMapTreeWidget#0`). `sliderOpacity`/`label_3` exist in the workspace dock and in every
+  map row, so the workspace slider is `IGisWorkspace/QSlider#0`. `key_` names are no addresses:
+  `CCanvas::generateKey()` hashes the clock.
+- **`--only` is not a path glob**: `*` crosses `/`. Quote it.
+- **An exposure is built by `shootOne()` and deleted when the shot returns.** Its `TYPE` needs
+  `Q_OBJECT` or `SHOT_EXPOSE` does not compile; the built widget is checked against
+  `TYPE::staticMetaObject`. A duplicate id fails every `--shoot` run.
+- **Every comma in a `SHOT_EXPOSE` lambda must sit inside parentheses**; a brace list or template
+  argument splits the macro. Move such a value into a helper in the anonymous namespace.
+- **A value a dialog keeps a reference to is a static of its own factory, reset per build**; shared
+  per type it leaks into the next exposure.
+- **A fixture exposure gets what its real call site passes** (`CInputDialog` as `CDetailsWpt` asks,
+  route/area dialogs named after the track). `CSelectProjectDialog` is built without the workspace
+  tree. `CPrintDialog` is not exposed: its canvas is hidden and refused.
+- **Some exposures show the machine**: `CAbout` (library versions), `CWptIconDialog`
+  (`Paths/externalWptIcons`), `CSetupDatabase` (QMYSQL driver), `CPhotoViewer` (`showMaximized()`).
+- **No `details` step**: a track's or project's `edit()` adds a tab, so the recorded input that
+  opens it is the record; every other `edit()` is a modal `exec()` and belongs to the catalog.
 
-**A map or DEM is activated from the configuration only with more than two keys.**
-`CMapItem::noShadowConfig()` and `CDemItem::noShadowConfig()` answer `shadowConfig.size() <= 2`, so an
-entry holding `isActive` alone comes up unused and `activate()` is never called. The base carries
-what `IDrawObject::saveConfig()` writes as well - `opacity`, `minScale`, `maxScale` - and the tile
-cache keys for `osm.tms`.
+#### Fixture (`doc/shots/fixture/`, `CShotFixture`)
 
-**The DEM is drawn over the maps and the POIs** (`CCanvas.cpp` paints map, POI, DEM, GIS), at its own
-opacity: at 100 the relief hides the map entirely (measured). The base uses 20.
+- **Plain git, not LFS:** keep rasters cropped and compressed.
+- **`CShotFixture::load()`** loads `projects/Example.qms` beside the page's shot file, waits for
+  `CGisListWks::isWorkspaceLoaded()` (the restore runs ~1100 ms after `CMainWindow` and does not
+  check duplicates) and `IGisProject::isLoading()`, refuses a workspace already holding the project,
+  and hands the first trk/wpt/rte/area to `CShotContext`.
+- **`shots.py compose`** adds to `fixture/shots.ini` the absolute `Canvas/cachePath`, `mapPath`,
+  `demPaths`, `poiPaths`, `Route/routino\paths` and a `Database/Entries` on a scratch copy of
+  `database/Example.db`, plus `Database/saveOnExit=false`. A scenario `.ini` is a whole
+  configuration, never a patch; settings are read in constructors, so one process per scenario.
+- **A map or DEM activates from the configuration only with more than two keys**
+  (`noShadowConfig()`): store `opacity`, `minScale`, `maxScale` with `isActive`.
+- **The DEM draws over maps and POIs**; the base uses opacity 20.
+- **Tile files expire during a run** (`cacheExpiration`, 20 s timer) and come back as holes
+  offline; refresh modification times on an old cache first.
+- **Network reachability changes the right dock column** (database vs routing dock height), cause
+  unknown.
+- **No configuration sets checked POI categories** (`CPoiFilePOI::categoryActivated`) or the
+  database tree's expanded folders; a scenario records them.
 
-**A tile cache expires while a run is using it.** `CDiskCache` deletes tile files whose modification
-time is more than `cacheExpiration` days old (1-14 in the map setup) from a 20 s timer; a deleted tile
-is requested again, and without a network it is a hole that refuses the picture. A run on a cache
-older than that refreshes the files' modification times first.
+#### `doc/tools/shots.py`
 
-**Whether the network is reachable changes the right dock column** (measured, cause not found): the
-same test page from the same tile cache, behind an unreachable proxy, gives a shorter database dock
-and a taller routing dock in `database` and `main-window`, and identical pictures everywhere else.
+- **Starts every headless run**: `replay`, `selftest`, `unused`, hidden `compose`. Python 3.9,
+  standard library only. One process per page and scenario group into `doc/images/_check` (or
+  `-o`), pinned command line and environment (`QT_QPA_PLATFORMTHEME=generic`, `LANGUAGE`,
+  `--locale`), scratch working directory, killed after 600 s.
+- **A run's result** is its `shoot:` warnings on stderr, its exit code (failure count, capped at
+  123; 124 is a step that never returned, `CShotReplay::kDeadlineExitCode`) and whether
+  `<out>/<id>.png` exists; stale pictures are deleted first. `-v` adds `-d`: `qDebug` lines,
+  including one per input frame.
+- **`selftest`** (`--shoot-selftest`, `CShotSelfTest`) takes no pictures: it drives the app through
+  `CShotSynth`, compares the recorded steps, replays them and compares the state. Exit code = failed
+  cases.
+- **Directories come from the application** (`-d` prints `"CACHE"` and `"USER DATA"`). A running
+  QMapShack is detected by `USER DATA/.QMapShack.lock` (`.lock` on macOS); `replay` refuses while it
+  is held and never creates it. The leak guard compares mtime and size of everything below both
+  directories before and after each run.
+- **INI for QSettings**: Qt key form (`routino\paths`), forward slashes, every path quoted (comma
+  splits, semicolon comments).
+- **A shot file is written as `json.dumps(indent=4, sort_keys=True, ensure_ascii=False)` plus a
+  newline**, identical to `QJsonDocument::Indented`.
+- **Output is UTF-8** (`CLogHandler`); decode it as such, not in the console code page.
 
-**Two states no configuration can set** (read from the code): which POI categories are checked lives
-only in `CPoiFilePOI::categoryActivated`, so an active POI file draws nothing until one is checked;
-and nothing stores the database tree's expanded folders. Both belong to a recorded scenario.
+#### Recorder (`CShotRecorder`, `CShotApplication`, `IShotHandler`, `CShotHandlers`)
 
-**`doc/tools/shots.py` starts every headless run** (#1250): one process per page and scenario group,
-rendered into `doc/images/_check`, pinned command line and environment, a scratch directory as the
-working directory, and a run killed after 600 s. It needs Python 3.9 and only the standard library
-(run with `/usr/bin/python3.9`).
-
-- **What a run says** is its `shoot:` warnings on stderr, its exit code - the failure count - and
-  whether `<out>/<id>.png` exists afterwards; stale pictures of the group are deleted first. `qDebug`
-  lines reach stdout only with `-d`, which `-v` adds - including one line per input frame opened and
-  closed, which is how a recording's order is read.
-- **`shots.py selftest` runs the recorder's own cases** in one process with the fixture loaded
-  (`--shoot-selftest`, `CShotSelfTest`). It takes no pictures: the recorder turns what a writer does
-  into steps and no shot file exercises that, so it drives the application through the window system
-  (`CShotSynth`), compares every step, replays them and compares the state the replay leaves with the
-  one the recording left. The exit code is the number of failed cases.
-- **The user's directories come from the application.** A documentation run without `--config` is
-  refused with exit 1 before `CMainWindow` exists, and with `-d` it has printed `"CACHE" path` and
-  `"USER DATA" path` by then - including on macOS, where Qt's `<APPNAME>` is not documented
-  precisely. The platform setup creates both directories if they are missing.
-- **A running QMapShack is detected by its lock**, not a process list: `USER DATA/.QMapShack.lock`
-  (`.lock` on macOS), an `fcntl` write lock on unix and an exclusive open on Windows, taken by
-  `CSingleInstanceProxy`, which a documentation run never constructs (`main.cpp`). `replay` refuses to
-  start while it is held, and never creates the file.
-- **The leak guard** compares every file and directory below both directories, modification time and
-  size, before and after each run; a change fails the run and names the path.
-- **An INI written for QSettings** keeps Qt's key form - `routino\paths`, `Entries\Example\filename` -
-  and every path with forward slashes, because a backslash in a value is an escape. Every path value is
-  quoted: unquoted, a comma splits it into a list and a semicolon starts a comment (measured with
-  Qt 5). Quoted, a checkout under `Jürgen, a;b` replays every picture identically with Qt 6.10.2
-  (measured).
-- **A shot file is rewritten as `json.dumps(indent=4, sort_keys=True, ensure_ascii=False)` plus a
-  newline**: byte-identical to what `QJsonDocument::Indented` wrote for `test.json` (measured). An
-  empty list or object is not measured.
-- **Windows gets no platform theme pin.** `CShotEntry::pinEnvironment()` sets
-  `QT_QPA_PLATFORMTHEME=generic` for `--shoot` and `--doc` runs except on Windows, and `shots.py`
-  leaves it to the application. In discussion #1209 a Windows demo run with the pin exited 3221225477
-  (access violation); the demo commit that left Windows out (`92c19ead`, rebased away) ran, and it
-  changed more than the pin. Windows has no desktop theme for the pin to keep out, and the offscreen
-  platform ignores the variable anyway. Not run on Windows from this branch; macOS keeps the pin,
-  unmeasured.
-- **The application writes UTF-8** (`CLogHandler`), so `shots.py` decodes its output as UTF-8, not in
-  the console's code page; a misread home directory would leave the leak guard watching nothing and
-  the lock check finding no file. The probe creates both directories, so a reported path that does
-  not exist stops `replay`.
-
-The hooks are small except one: `xValueAt` 6 lines, `pointOfXValue` 7, `iconAt` 4, `rectOfIcon` 11,
-and `CWksItemDelegate::buttonAt` 50 + `pressButton` 73, which have no caller outside `shoot/`.
-
-**Not finite: `objectName` on actions.** A menu entry is addressed by its action's `objectName`, so
-the documentation work added 112 of those - 56 directly, 52 through `CGisListWks`' own
-`addAction()`/`addSortAction()` and 4 through `CGeoSearch::addService()`, against 90 in the whole
-application - and every menu entry written from now on needs one. Nothing fails when it is
-forgotten: the recorder warns and drops the step, and the picture comes out of a state nobody asked
-for. This is the tax that does not stop, and it is not bounded by the number of such widgets.
-
-**For scale:** the documentation branch's app-side footprint, `shoot/` and the translations
-excluded, is 55 files, +1306/-307 - and most of it is not vocabulary at all, but the bundled fonts a
-headless run needs, the colour-scheme pinning, the command line options, and the cache and database
-paths a run must set before it prunes the user's own.
-
-`shoot/` itself knows eleven application classes, not four: the four above, `CMouseNormal` and
-`CGisItemTrk` in `clear()`, `IWksItem` and `IGisProject` for tree paths, `CCanvas` again in
-`CShotWriter` for the draw threads, and `CMapList` / `CMapDraw` / `CGrid` in the fixture and the
-exposures.
-- **The window's size has exactly one record: the shot's `size`.** `layout` carries `saveState()`
-  and the tab, never `saveGeometry()`. `shootOne()` resizes the window before the scenario runs and
-  `restoreState()` distributes the dock extents into it - that order is required, because those
-  extents are pixels. Everything the scenario produces is measured against that size: where the map
-  is centred, where an item's options are anchored, and what a stored rectangle frames. A shot the
-  main window sizes - the window itself or anything inside it - must say how big it was, or it is a
-  counted failure; an exposure is exempt. A `layout` that still carries a `geometry` warns and is
-  ignored.
-- **Documentation mode is two processes.** `qmapshack --doc <repo> --doc-page <ch>` is the
-  launcher: it owns the panel, reads the shot file, and does every file operation except writing
-  the base configuration and a recording, which the state process does. It starts a second process
-  with `--doc-scenario <name|->` for the state the writer works in, and throws it away when they
-  pick another. Nothing is ever taken back down, which is what `reset()` could not do: the
-  application's state is not enumerable, so a list of things to put back is never complete.
-- **The launcher's main window is constructed and never shown.** `CMainWindow::self()` initialises
-  `IUnit`, `CWptIconManager`, `CGisWorkspace` and eight more singletons the panel's data goes
-  through. `CShotEntry::showsMainWindow()` is what main.cpp asks.
-- **The supervisor owns the session, the state process owns nothing.** Which page, which
-  scenario, which picture, what a retake changed - all of it lives in the process that is never
-  photographed and never dies. Every dialog a panel button leads to opens there too: the base
-  question, the recording's name, delete, rebind, and removing what no page references. The state process reports and obeys, and its
-  only dialogs are the ones F9 opens about the widget the writer is pointing at.
-- **Closing either window ends the session.** The state process quits when its application window
-  closes; the supervisor quits when the state ends without it having asked for that (`killing`), and
-  when its panel is closed. A state process whose channel drops quits too, so a killed supervisor
-  leaves no orphan holding a window.
-- **The state process re-applies `MainWindow/geometry` after the fixture is up.** What `CMainWindow`
-  restores in its constructor is a size the docks then grow past, so a base stored at 1200x876 came
-  back 120 pixels taller and a writer could not make a size stick. Applied again once the layout is
-  populated, base -> scenario -> base returns the same window to the pixel.
-- **What `saveGeometry()` records is machine-specific, so `portableGeometry()` takes it out.** The
-  record carries the screen the window was on and that screen's width, and `restoreGeometry()`
-  drops the whole record - size included - when the width it is replayed against differs by more
-  than a quarter (Qt 6.10.2, measured: `factor < 0.8 || factor > 1.25` returns false and applies
-  nothing). A width of 0 is what Qt 5.3 and earlier wrote and takes the branch that only rejects a
-  window wider than one and a half screens, so a base stored on one machine still sizes the window
-  on the next. The position stays: `QWidgetPrivate::checkRestoredGeometry()` moves a window that
-  would land off screen back onto it, and shrinks one that does not fit. Both `storeBaseConfig()`
-  and `storeScenarioConfig()` go through it; the three tracked `.ini` files were rewritten once.
-- **Where the window sits is the writer's screen, not a stored position.** `saveGeometry()` records a
-  position on the whole desktop, so on a multi-screen desk a state process landed wherever that
-  pointed - away from the panel, and again on every scenario change. The launcher reads
-  `panel->screen()->name()` at each start and hands it over as `--doc-screen`;
-  `CShotDocMode::moveToWritersScreen()` centres the window there once the fixture is up, keeping its
-  size. Measured on three screens: asked for `DVI-I-1-1` / `DVI-I-2-2` / `HDMI-1`, the frame came out
-  at x=2320 / 400 / 4240, always 1119x769.
-- **Starting a state takes about seven seconds**, because it is a whole application. The panel says
-  so and refuses input while it happens (`setBusy`); without that the writer clicks again and the
-  clicks queue up behind a process that is still coming up.
-- **The panel's geometry is applied one event loop after it is shown.** A decorated window belongs
-  to the window manager until it is mapped, and this desktop answered the constructor's 460x760 with
-  1200x996. Once only, so a writer's own resizing survives.
-- **The two talk over a `QLocalSocket`**, named `--doc-channel`. Launcher to state: `region`,
-  `update`, `retake`, `record`, `stop`, `sync`. State to launcher: `status`, `ready`, `tagged`,
-  `changed`, `recording`, `recorded`. `Ctrl+Shift+F9` stays in the state process - it owns the
-  window the writer is pointing at.
-- **`shots.py compose <page> [--scenario <name>] --out <ini>` is the one composer.** The launcher
-  runs it before starting a state process, so the writer's session and the build cannot drift apart.
-  A scenario's `.ini` is a whole configuration, never a patch on the base.
-- **Never make the panel refuse to close.** It did, to keep the writer from losing it, and that
-  turned `qApp->quit()` - which `QGuiApplication` answers with `closeAllWindows()` - into a quit that
-  never happened. The panel is the launcher's only window; closing it ends the session.
-- **A recording always starts from the base**, so a scenario is a whole state and never a difference
-  from another scenario that is not stored with it.
-- **`(base)` is a row, not a scenario.** A shot taken in it has no `scenario` key, and
-  `--shoot-scenario -` is how a build asks for that group. Nothing stores it, so it cannot go stale.
-- **A scenario's `.ini` is a whole configuration, never a patch**, and the base is a starting point,
-  not a layer under it - otherwise restoring a base would move pictures already taken. Settings are
-  read in constructors, so `shots.py` runs **one process per scenario**.
-- **What the tool owns is injected per run, never stored**: `Canvas/{mapPath,demPaths,poiPaths}` from
-  `doc/shots/fixture/`, and `Database/saveOnExit=false` - without it a run saves its workspace and
-  the next one loads the demo project again.
-- **Losing or changing a shot's scenario reduces the entry to its bare `id` and deletes the image**:
-  a widget address and a rectangle frame something else in another state.
-- **There is no `details` step**; `db342e266` dropped it together with the `CDetails*` exposures
-  when input recording arrived. A track's and a project's `edit()` adds a page to the central tab
-  widget and leaves it there, so the recorded double click or menu entry that opens it is the whole
-  record. Every other `edit()` runs a modal `exec()`, and those belong to the exposure catalog.
-- **The arrangement's `tab` index is applied after every other step**, because a page a step opens
-  does not exist while `restoreState()` runs - and `QTabWidget` drops an index past its last page
-  without a word.
-- **`CShotPage::driveProperty()` is how a `set` reaches a widget.** `setProperty()` answers
-  whether the property exists, never whether the value took, so the value is read back.
-- **A menu entry is addressed by its action's `objectName`, never its text**, which is translated.
-  Every menu owner names its actions after the member they are assigned to; a menu built from data
-  takes a stable prefix plus an untranslated key (`actionActivity_<act20_e>`,
-  `actionColor_<GPX colour name>`, `actionWptIcon_<sym>`). A new `addAction` needs the same.
-- **A scenario is never performed on top of itself** (`CShotContext::liveScenario()`). Documentation
-  mode holds one state up for the writer, and both shot paths - `CShotPage::shootOne()` and
-  `takeRegion()` - used to perform it again to be sure the build starts where the writer does. A
-  step is not idempotent, so the second pass ran the plot's click cycle from `eMouseClick2nd`: the
-  range was cleared and the picture came out of a state nobody had seen. The state process records
-  which scenario it is in; a shot of that one performs nothing and photographs what is there, and
-  `replay()` with no steps clears nothing either. A build sets no live scenario and performs every
-  one, because there the application has just been cleared.
-- **A picture of the running application is taken before any question is asked.** `CWksItemDelegate`
-  draws a project's device-sync, active-project and setup buttons at
-  `IWksItem::getOpacityOfFocusBasedItems()`, which `holdUiFocus()` fades 0 -> 1 only while the
-  option carries `State_HasFocus`, so a row has five buttons for the writer and two in a picture
-  taken without focus. **Focus cannot be restored.** Measured on X11 with Qt 6.10.2: while another
-  window is up the application has no focus at all - `hasFocus()` false, `focusWidget()` and
-  `activeWindow()` null - `setFocus()` on a widget of an inactive window changes nothing, and
-  whether the focus returns when that window closes is the window manager's decision and differed
-  between two runs of the same test. The panel is a second process, so the application window is
-  already inactive whenever the writer is using it. So `tag()` renders every part the writer could
-  mean (`livePartsAt()`) at the key press and writes out the one they pick; the questions come
-  after and cannot change what was taken. `CShotRegionPicker` takes `Qt::NoFocus` and reads Escape
-  through an application filter for the same reason. A `select` step and a shot's own `select` do
-  call `setFocus()` beside `setCurrentItem()` - that is what makes the headless build's rows look
-  like the writer's.
-- **`settle()` ends every running animation of finite length.** An animation runs on real elapsed
-  time, so no number of event loop passes finishes one: the fade above takes 250 ms and a picture
-  caught it at zero. An endless animation (`duration() == -1`) is a pulse with no end to put it at
-  and is left alone.
-- **A row button's signal cannot be a `Qt::UniqueConnection`** (#1252, demo). The flag needs a
-  pointer to a member function and refuses a lambda - "unique connections require a pointer to member
-  function of a QObject subclass" - so the connect failed outright and no row button of any tree was
-  ever recorded. Connect once per object and remember that you did, as `CShotRecorder::watched`
-  does.
-- **A scenario's `layout` carries every splitter's `saveState()` too**, keyed by the same address as
-  everything else, and it is applied last with the tab - a details page's splitters do not exist
-  while the arrangement is restored. `QMainWindow::saveState()` covers dockers and toolbars and
-  nothing inside the central widget, and 32 classes write their own geometry in their destructor,
-  which has not run when a scenario is stored. So the scenario says it itself and depends on no
-  settings file. Without it a details page came back at default proportions, which also inflated
-  its `minimumSizeHint()` and pushed the window 309 px wider than the scenario asked for.
-- **A recording is its start state and every change as a step.** `CShotRecorder::start()` takes
-  `layout` and `view`; nothing is taken at `stop()`, where a change would be applied twice.
-- **`notify()` is the only hook that wraps a whole delivery** - filters, handler, slots, nested
-  loops - so `CShotApplication` numbers a frame around each spontaneous input event, and the
-  recording is sorted by frame: the application's slot runs before the recorder's connection, so a
-  step inside a dialog a slot opened is recorded first and carries the higher number. A doc run's
-  `QApplication` comes from `CShotEntry::createApplication()`; `main.cpp` constructs none.
+- **A recording is its start state (`layout`, `view`) plus every change as a step**; nothing is
+  taken at `stop()`. It always starts from the base.
+- **`notify()` wraps a whole delivery**, so `CShotApplication` numbers a frame around each
+  spontaneous input and the recording is sorted by frame: a step inside a dialog a slot opened is
+  recorded first but carries the higher number. The doc run's `QApplication` comes from
+  `CShotEntry::createApplication()`.
 - **A step is kept only when the input went to the control that made it**
-  (`CShotRecorder::inputReached()`), for an action to a widget it sits in (`associatedObjects()`).
-  Measured on the real input path: a slot's `action->trigger()` fires inside the button's frame, and
-  Enter in a dialog clicks the default button inside the line edit's frame - the application's
-  answer, which replaying the input repeats.
-- **One handler per class** (`IShotHandler`, `CShotHandlers`, keyed by `QMetaObject`, nearest class
-  above wins); adding a class is adding a handler. `CShotHandlers::replay()` resolves a step's
-  target and dispatches. A connection is made once per object and outlives a recording: twice
-  connected, a handler records twice.
-- **A key press no handler made a step of is recorded as itself** (`keypress`): Escape in a dialog,
-  Return on a check box, arrows in a list, typing into a widget with no handler. Qt delivers a
-  matched shortcut's key press first and the `Shortcut` event after it, so the key is held back
-  until the next frame and dropped when the shortcut made a step.
-- **Editing that ends because the focus left is a step of its own** (`endedit`,
-  `CShotRecorder::recordOutcome()`) at the input that moved the focus: a replayed button click or
-  trigger moves none. Replay clears the focus only where it still is.
-- **Record the intent, replay the input, check the outcome.** A checkable button or action records
-  `checked` and replay checks it. A combo box is `set currentIndex`, replayed with `activated` and
-  `textActivated`. Typing is `key` with the final text, replayed select-all, Backspace, type, Enter.
-  A spin box is followed through its line edit's `textEdited` - a key can change the text but not
-  the value - and the subclass's value signal, because `updateEdit()` writes a stepped value behind a
-  `QSignalBlocker`. A date edit is `set dateTime`. A tab bar is `currentChanged` within the tab
-  widget - `tabBarClicked` fires for any button - and a close retracts the switch it caused. A dock
-  moved is `arrange`, `QMainWindow::saveState()`: only that says where in an area it went. While
-  floating, `dockWidgetArea()` still answers the area it came from; QMapShack's docks have vertical
-  title bars.
+  (`inputReached()`; for an action, a widget it sits in). A signal fired while input went elsewhere
+  is the application's answer, which replaying that input repeats.
+- **One handler per class**, keyed by `QMetaObject`, nearest base wins. Connect once per object
+  (`CShotRecorder::watched`); `Qt::UniqueConnection` refuses a lambda. Handler state that outlives a
+  call is keyed by recorder too.
+- **Record the intent, replay the input, check the outcome.** Checkables record `checked`; a combo
+  is `set currentIndex` replayed with `activated`/`textActivated`; typing is `key` with the final
+  text (select-all, Backspace, type, Enter); a spin box follows its line edit's `textEdited` plus
+  the value signal (`updateEdit()` writes behind a `QSignalBlocker`); a date edit is `set dateTime`;
+  a tab is `currentChanged`, counted for input in the tab bar and for Ctrl+Tab in a page only (a
+  switch after a click in a page is the application's answer; a close retracts the switch it
+  caused); a moved dock is `arrange` with
+  `QMainWindow::saveState()` (`dockWidgetArea()` lies while floating).
+- **A key press no handler made a step of is `keypress`**, held until the next frame because a
+  matched `Shortcut` arrives after its key press; a button clicks at Space's release, so judge there.
+  A mouse move does not end it: Space held while the pointer moved was a `keypress` and a `click`.
+- **Editing ended by focus loss is `endedit`** (`recordOutcome()`) at the input that moved focus.
 - **A surface is recorded as its input** (`CSurfaceHandler`): press to release is one `click`,
-  `drag` or `dclick`, ordered at the press, with the press in the surface's units (degrees and the
-  item under it, the plot's x value, the icon's name) and the release as a pixel offset, because a
-  drag moves the content. `held` is measured by the clock as `CMouseAdapter` does; QTest's event
-  timestamps are made up. A hover is one `move` amended until the next event. No `menu` step: the
-  right click asks again.
-- **A gesture ends when an event on its surface shows its button up, not only at its release**: a
-  menu the press opens takes the release (a plot's context menu opens on the press). At `stop()` a
-  gesture whose button is up is kept; one still held is dropped with a warning.
-- **Whether a line edit is a cell editor is decided when it is typed into.** A widget a view puts
-  into a row - a project's filter box, `CProjectFilterItem::showLineEdit()` - gets its row after it
-  is shown, so a decision taken when it is watched finds another row.
-- **A double click takes back the click before it past hover steps**: the pointer moves a pixel
-  between the two clicks, and that move is a step after the first click.
-- **A pick in an open menu is replayed as a click on its entry, not `trigger()`**: the waypoint
-  icon menu (`CWptIconManager`) and `IGisItem::selectColor()` read what `exec()` returns and connect
-  nothing to the entries, and closing the menu makes `exec()` return `nullptr`. `QMenu` closes on a
-  press unless the pointer moved since it opened - beyond `startDragDistance` or more than 6 moves
-  (`QMenu::mousePressEvent()`, Qt 6.10) - so the pointer arrives in 8 moves (`CShotSynth::arrive()`).
-- **A completer's popup has no parent**, so a completion picked in it counts as input to the line
-  edit through `CShotRecorder::amend(..., alsoThrough)`. Replayed typing hides it: left open it takes
-  the next click. A combo box's completer has no popup until it first shows one.
-- **A button clicks at the release of Space**, so a key press that made no step is judged at its
-  release too.
-- **A gesture something else happens in the middle of is `press`, `move`, that, `move`, `release`.**
-  A wheel turned or a key pressed while a surface's button is down, ordered after a whole `click` or
-  `drag`, replays wrongly: `CMouseAdapter::wheelEvent()` sets `ignoreClick`, so press-wheel-release on
-  the track opens no screen options, and a replayed `click` does (measured). Moves and the release in
-  it are pixel offsets from the press: a dragged map moves along under the pointer, so degrees there
-  point elsewhere on replay (measured, a few pixels short). A double click stays one step.
-- **The Menu key is a context menu request the platform plugin makes**, queued before the key
-  itself (`qxcbkeyboard.cpp`, `qwaylandinputdevice.cpp`); offscreen makes none. The key is no step,
-  and the self test injects the request through `QWindowSystemInterface` (`Qt6::GuiPrivate`).
-- **Enter picking a completion goes to the completer's popup**, which hands it on: `returnPressed`
-  fires, so it is the `key` step's `enter`. Keys the popup takes are the focus widget's.
-- **`openmenu` is a menu a tool button, a menu bar entry or a submenu entry opened.** A tool button
-  opens `menu()` or its default action's (`QToolButtonPrivate::popupTimerDone()`), a delayed popup and
-  a hovered submenu from a timer, outside any frame: such a step is ordered at the last frame. A menu
-  bar's menu and a submenu are named by the menu's `objectName`; one without is reported.
-- **Touch input is reported, not recorded.** A touch Qt's widgets leave unaccepted comes back as
-  mouse events with `source() != Qt::MouseEventNotSynthesized`; a surface ignores those, or a pinch
-  would be a `drag`. `QTest::touchEvent(QWidget*)` commits to the widget's `windowHandle()`, null
-  for a child: address the window and map the points through the child (qtestsupport_widgets.cpp,
-  Qt 6.10.2).
-- **The wheel over a list goes to its viewport, not its scroll bar.** An item view records a scroll
-  as the row at its top (`scroll`, replayed `scrollTo(PositionAtTop)`); another scroll area's bar as a
-  share of its range. A scroll a key made is the key's.
-- **The main window's address is the empty one** and resolves back to it.
-- **`QAction::trigger()` does nothing on a disabled action**, and `IPlot` enables its menu's actions
-  only while that menu is open; a replayed `trigger` on a disabled action fails instead.
-- **Replay and `CShotSelfTest` use `CShotSynth`, never QTest's `QWidget` functions.** Built without
-  `QTEST_QPA_MOUSE_HANDLING` those call `notify()` on the widget and skip the window's routing - the
-  widget under the point, grabs, popups, double-click synthesis, focus, the global button and
-  modifier state - and a move with no button is only `QCursor::setPos()` (qtestmouse.h, Qt 6.10.2).
-  The `QWindow` functions go through `QWindowSystemInterface`. Replay refuses a point another widget
-  would get (`CShotSynth::missed()`).
-- **A context menu asked for with the mouse goes to `qt_last_mouse_receiver`**
-  (`QWidgetWindow::handleContextMenuEvent()`), the widget the pointer last entered, and Qt drops a
-  move to where the pointer already is: a replayed menu moves the pointer onto its place first
-  (`CShotSynth::arrive()`). Offscreen every window overlaps; the self test places its own apart.
-- **Qt 6.10.2 delivers the second press of a double click only as `MouseButtonDblClick`**
-  (QTBUG-25831), so an item view emits `clicked` for the first click and `doubleClicked` for the
-  pair; the handler retracts the `select` into one `dclick`.
-- **A menu entry's own slot runs before `QMenu::triggered`** (`QMenuPrivate::activateCausedStack`),
-  and the frame numbers still put the `trigger` first. Replaying a `trigger` closes open menus
-  first, as picking the entry does; `trigger()` alone leaves an `exec()`'d menu blocking.
-- **Not recorded:** a window closed by its title bar - Qt 6 closes a widget through
-  `QWindow::close()`, so it is the same spontaneous close as the application's own; re-docking a
-  floating dock through its window frame; a main window separator dragged (reported as unhandled);
-  typing into an item view's cell editor.
-- **`key_` names are no addresses** (`CShotAddress`): `CCanvas::generateKey()` hashes the clock
-  when the configuration has no key, so a view added during a recording has a new name each run.
-- **`IPlot::xValueAt()` reads a click by the plot's own rule** (`graphAreaContainsMousePos()`: a
-  point level with the graph area reads its edge).
-- **`sliderOpacity` and `label_3` exist twice**: in the workspace dock and in `CMapPropSetup`, which
-  the map list places in every row. `findChild()` from the main window finds the map panel's, and
-  the workspace slider is addressed positionally, `IGisWorkspace/QSlider#0`.
-- **A widget with a vocabulary of its own is never recorded as a position**: the canvas has a
-  geographic point, `IPlot` the x axis' own value (`xValueAt()`/`pointOfXValue()` - metres on a
-  linear axis, seconds on a time one), `CIconGrid` the `<sym>` name (`iconAt()`/`rectOfIcon()`). A
-  workspace row's tool buttons want the delegate's own names and are **still to do** (#1252): they
-  are painted, not widgets, so nothing but a `sigButtonPressed` in the delegate can report one and
-  nothing but a `pressButton()` can replay it - neither exists on this branch.
-- **A replay starts from nothing, not from what is on screen.** The replay queue (#1253) calls
-  `clear()` before its first step, because a step is not idempotent: a second click on a selected
-  range takes the range away again. Documentation mode is where that bites - it holds a state up
-  for the writer and `shootOne()` then builds the same scenario again to photograph it.
-- **`clear()` puts the canvas' mouse delegate back** (`CCanvas::resetMouse()`, what a right button
-  click does). Which delegate is there is state a scenario left behind, and it is
-  `CMouseRangeTrk`'s destructor that returns the track to `eModeNormal` and lets go of its mouse
-  focus - so the deferred delete has to be asked for
-  (`sendPostedEvents(nullptr, QEvent::DeferredDelete)`). `processEvents()` does not deliver
-  `DeferredDelete`; the event loop that posted it does, on its way out, and `settle()` never leaves
-  one.
-- **An `IScrOpt` overlay is a child widget of the canvas, not the map.** Only `CCanvas` itself is a
-  geographic point; a press on `toolRange` or any other screen-option button is an ordinary
-  addressed widget press, and recording it as a place on the map loses the button.
-- **`IPlot` sets no `objectName`.** The per-instance tag the track compares its mouse-focus owner
-  against is `IPlot::ownerTag`; making it the objectName too made a plot's address depend on how
-  many plots were built before it. A plot placed by a `.ui` keeps its uic name; one built in code is
+  `drag` or `dclick`, ordered at the press, in the surface's units (degrees plus item hit, plot x
+  value, icon name); the release is a pixel offset. `held` uses the monotonic clock like
+  `CMouseAdapter`. A hover is one amended `move`. A gesture ends when an event shows its button up; at
+  `stop()` a held one is dropped with a warning. Something happening mid-gesture splits it into
+  `press`, `move`, …, `release` (`CMouseAdapter::wheelEvent()` sets `ignoreClick`).
+- **A widget with its own vocabulary is never a position**: canvas (geographic point), `IPlot`
+  (`xValueAt()`/`pointOfXValue()`, the plot's own edge rule), `CIconGrid` (`iconAt()`/`rectOfIcon()`),
+  row buttons (delegate name). Not yet covered: `CDateTimeEditor`, `CPhotoViewer`,
+  `CRouterBRouterTilesSelectArea`. An `IScrOpt` overlay is an ordinary child widget of the canvas.
+- **`IPlot` sets no `objectName`**; its mouse-focus owner tag is `ownerTag`. A code-built plot is
   addressed positionally (`framePlot/CPlotProfile#0`).
-- **`--shoot`, `--doc` and their nine companions are parsed under `QMS_DOC_MODE` only**, so a user's
-  binary rejects them instead of accepting a switch that does nothing. The values stay on `CAppOpts`,
-  empty, so no reader needs a branch. `src/qmaptool/setup/` is a separate copy and never had them.
-- **A Windows build owns no console.** `qt_add_executable(${APPLICATION_NAME} WIN32 ...)` links it for
-  the GUI subsystem, so everything `CLogHandler` writes to `std::cout`/`std::cerr` is dropped and a
-  `QCommandLineParser` error arrives as a message box. `IAppSetup::processArguments()` calls
-  `AttachConsole(ATTACH_PARENT_PROCESS)` for a `--shoot`/`--doc` run and reopens a stream on `CONOUT$`
-  only when its standard handle is not already a pipe or a disk file, so the shell that started it
-  gets the output, `shots.py` keeps the pipes it hands over, and the state process inherits the
-  handles. The handle test is untested on Windows.
-  Anything a documentation run has to tell the writer is a dialog, never only a log line.
-- **Never search `PATH` for the interpreter.** `shots.py` hands its own `sys.executable` over as
-  `--doc-python`, and `CShotDocLauncher` runs `shots.py compose` with that. `python3` on Windows is
-  normally the store's app execution alias, which opens the Microsoft Store and exits non-zero, and a
-  session started through the `.py` file association need not have python on `PATH` at all.
-- **A `QProcess` that fails to start emits no `finished()`.** `errorOccurred` with `FailedToStart` is
-  the only report there is, so a launcher that waits for `finished()` alone waits behind its modal
-  box forever. Put the box up before `start()`, not after: the failure is emitted from inside it.
+- **A menu entry is addressed by its action's `objectName`, never its text.** Name actions after the
+  member; data-built menus use a prefix plus an untranslated key (`actionActivity_<act20_e>`,
+  `actionColor_<GPX name>`, `actionWptIcon_<sym>`). POI entries: `IPoiItem::file`/`key`, where
+  `file` is the base name plus the first 8 characters of `CPoiFileItem::key` (MD5 of the file's first
+  4096 bytes), so namesakes differ and it is the same on every machine; a map POI by name and
+  position. Every new menu entry needs one; nothing fails when it is missing — the recorder warns and
+  drops the step.
+- **A menu shown with `exec()` must be deleted when it returns**, or its leftovers shift addresses
+  to `QMenu#n`.
+- **A pick in an open menu is replayed as a click on the entry, not `trigger()`**: callers read
+  `exec()`'s return. `QMenu` ignores a press unless the pointer moved enough, so
+  `CShotSynth::arrive()` uses 8 moves. Replaying `trigger` closes open menus first. A disabled action
+  ignores `trigger()` (`IPlot` enables its actions only while the menu is open), so that fails.
+- **`openmenu`** is a menu opened by a tool button, menu bar or submenu, named by the menu's
+  `objectName`; timer-opened ones are ordered at the last frame.
+- **A completer popup has no parent**: its input counts for the line edit (`amend(..., alsoThrough)`).
+  Enter in it fires `returnPressed`. Replayed typing hides it.
+- **The Menu key's context menu is made by the platform plugin**, none offscreen; the self test
+  injects it via `QWindowSystemInterface` (`Qt6::GuiPrivate`).
+- **A mouse context menu goes to `qt_last_mouse_receiver`** and Qt drops a move to the current
+  position, so replay moves the pointer onto the place first (`CShotSynth::arrive()`).
+- **Replay and `CShotSelfTest` use `CShotSynth`, never QTest's `QWidget` functions**, which bypass
+  window routing (grabs, popups, double-click synthesis, focus). Replay refuses a point another
+  widget would get (`CShotSynth::missed()`).
+- **Qt delivers a double click's second press only as `MouseButtonDblClick`**: an item view emits
+  `clicked` then `doubleClicked`; the handler folds the `select` into one `dclick`, taking back the
+  first click past hover steps. A delegate that takes the double click still leaves a `clicked`,
+  which is no `select`.
+- **A menu entry's own slot runs before `QMenu::triggered`**; frame numbers still order `trigger`
+  first.
+- **The wheel over a list goes to its viewport**: an item view's scroll is `scroll` (top row,
+  `scrollTo(PositionAtTop)`), another scroll area's a share of its range.
+- **A line edit's cell-editor status is decided when typed into**, not when watched.
+- **Row buttons** (`CRowButtonHandler`): a `click` with `row` and `button` from the delegate's
+  `sigButtonPressed`, emitted only where a press acted; the `select` the release makes is taken back. A
+  button is named by its `Q_ENUM` enumerator without the `e` (`eAutoSyncDev` is `autoSyncDev`), so
+  renaming an enumerator renames it in every recorded step. The row is named at the press, before the
+  delegate acts. Any mouse button acts (`mouse: right`; its context menu is no step). A double click
+  on a button is one `dclick` with `button`.
+  Replay clicks `buttonRect()`, built by `delegateOptionOf()` (rect, font, `State_HasFocus`), and
+  checks the signal. Database, map and DEM rows are named by what they show
+  (`CShotAddress::namePathOf()`); a name with `/` or used twice has no path. Workspace device and
+  geo search rows have none, so their buttons are dropped with a warning.
+- **Not recorded**: a window closed by its title bar, re-docking through a window frame, a main
+  window separator drag (reported), typing into a cell editor, touch (reported).
+- **A replay starts from nothing**: the queue (#1253) calls `clear()` first, because steps are not
+  idempotent. `clear()` calls `CCanvas::resetMouse()` and must
+  `sendPostedEvents(nullptr, QEvent::DeferredDelete)` — `CMouseRangeTrk`'s destructor returns the
+  track to `eModeNormal`, and `processEvents()` does not deliver `DeferredDelete`.
+- **`settle()` ends every finite running animation**; animations run on wall time. Endless ones are
+  left alone.
 
-A `--shoot` or `--doc` run must set `CMapDraw::setCacheRoot()` and `CGisListWks::setDatabasePath()`
-before `CMainWindow` is constructed, or it prunes the user's tile cache and empties their
-workspace. **Two mechanisms, both wanted:** that root protects the user's tiles during startup, and
-the `Canvas/cachePath` `shots.py` injects into the scratch configuration is read by `CMainWindow`
-afterwards and is the one the run then uses - one cache shared by the writer's session and the
-replay, or the replay re-downloads every tile and draws an empty map without a network.
+#### Still demo-only: documentation mode (#1253-#1257)
 
-**`-platform` is plain `offscreen`, with nothing after it.** The plugin's `configfile=` parameter
-pinned a 1920x1200 screen so `restoreGeometry()` could not clamp a window to the 800x600 default -
-and a Windows run does not start with any parameter there at all. Measured 2026-09-02: the seven
-`test` images are byte-identical without it, because every window a run photographs is resized by
-`shootOne()` and `resize()` is not clamped to the screen. Do not put it back to fix a size; resize
-the window instead. Everything else `shots.py` hands over is absolute.
-
-**The offscreen platform has no font database on Windows.** It uses `QFreeTypeFontDatabase`, which
-populates from `QLibraryInfo::LibrariesPath + "/fonts"` — a directory Qt no longer ships — so a
-headless run there had no font at all and drew every glyph as an empty box. `src/fonts/` is
-bundled in `resources.qrc` and registered by `IAppSetup::processArguments()` for `--shoot` and
-`--doc` only. `--font-family` names a family; it cannot supply one.
-
-**A picture is rendered at a device pixel ratio of 1, never `QWidget::grab()`.** `grab()` uses the
-widget's own ratio, so a HiDPI writer accepted pictures twice the size the build produced. Qt 6
-cannot put a real screen back to 1 — `CShotWriter` takes the ratio out of the paint device instead.
-Exact for a dialog, a menu or a docker; a canvas is the exception, because `IDrawContext` sizes its
-buffers by the widget's ratio, so a HiDPI writer's map lands downscaled — same size and layout,
-resampled tiles.
-
-**An opaque picture must not carry an alpha channel.** `grab()` gives one only to a widget that
-does not paint its whole rect; rendering into an `ARGB32` image gives one to everything, which cost
-a third of every PNG for pixels that were all opaque. `renderAtDpr1()` scans the result and
-converts to `RGB32` when nothing used the alpha. Image weight is not cosmetic — every picture ships
-inside the `.qch` that every user downloads.
-
-**A map is complete when `CCanvas::isDrawComplete()` says so, not when no tile is pending.**
-`CMapTMS::draw()` clears its queue as a redraw starts and the canvas paints the previous buffer until
-the draw thread swaps it, so the test is: no redraw outstanding, no draw context running, and only
-then `CMapDraw::pendingTiles()` — `drawt()` holds `CMapItem::mutexActiveMaps` for its whole run, so
-asking first blocks the GUI thread. A hidden canvas' `paintEvent()` returns before clearing
-`needsRedraw`, so it never completes and renders blank. `settleStable()` skips a canvas that is not
-`isVisibleTo(w)` - a canvas tab behind a details page is not in the picture - and refuses one that is
-but is not `isVisible()`, which is a `w` that was never shown: with no canvas left to wait on, two
-blank renders agree and were accepted.
-
-**`settleStable()` asks `isDrawComplete()` before it renders, never after.** A draw that finishes
-during the render leaves a picture the later check vouches for. Measured with every draw slowed to
-1.5 s and the load indicator GIFs stopped: the old order accepted the finished map with the load
-indicator still on it in 3 of 3 runs — `sigStopThread` hides it through the queued `finished` — the new
-order in 0 of 3. At normal speed the animated GIF (12 frames of 100 ms) makes two renders during a draw
-differ, which hides the defect without closing it. `isDrawComplete()` also requires
-`drawContextViewportIsCurrent()`: a resize a running draw refused asks for no redraw until
-`timerViewport` or `finished` applies it. Measured the same way with the window alternating
-1200x800 / 1000x700: without that condition 9 of 9 shots after a shrink carried the load indicator over
-the previous size's buffer, with it 0 of 18 differed from the normal-speed reference.
-
-**A main window picture depends on the resize history, not only on its size.** Asked for 1000x700 it
-came out 1000x753 — the window's minimum wins without a word — and 1200x800 reached again after that
-lays the right dock column out 1 px higher than the first 1200x800 of the run. So a picture is a
-function of the configuration: two runs on fresh configurations are byte-identical, and a run on the
-configuration the previous one wrote back differs in that column (2026-09-14).
-
-**`CShotWriter::render()` resizes a window, never a widget inside one.** A child is photographed at
-the size its layout gave it; resizing it to its size hint showed the Workspace dock 355x240 where the
-window has it 355x125, and the parent's layout is not re-applied, so the next main window picture at
-the same size still had it covering the Database dock (2026-09-14).
-
-**A configuration with no `MainWindow/geometry` maximizes the window 500 ms after `CMainWindow`'s
-constructor** (`showMaximized`), over any size set before. `CShotRunner` waits 1000 ms before the
-first shot; with it 3 of 3 fresh-configuration runs rendered 1200x800. A resize straight after
-`show()` came out 796x796, which fits that timer; not isolated.
-
-**A shot's `set` is put back after the picture**, newest first and also when the shot fails, so a
-full run shows every later shot as `--only` shows it alone. Measured: the main window after
-`test/workspace-filter` is byte-identical to the one before.
-
-**A `size` is applied to the main window or a window itself, and refused anywhere else.** A widget
-another window lays out - a dialog's child, a floating dock's content - would come out without it (read
-from the code, not measured).
-
-**`setProperty()` on a name the class does not declare adds a dynamic property and answers false**,
-so reading it back finds the value. `driveProperty()` checks `indexOfProperty()` first.
-
-**`addressOf()` answers `std::optional`**: an empty string is the root, nothing is a widget outside
-it, which `resolve()` would otherwise turn into the main window. On a fresh main window 332 widgets
-address and resolve back to themselves. `CCanvas::zoom()` clamps a level past the last (9999 came
-back 30), so `applyView()` reads the view back.
-
-**`--only` is not a path glob** (`NonPathWildcardConversion`): `*` crosses the `/` between page and
-name, as `fnmatch` does. Quote it in a shell.
-
-**A failed tile stays a hole until its `CDiskCache` is replaced.** An error and an undecodable reply
-both store a null image, which the cache answers from memory with a transparent dummy and never
-requests again. **Keep that dummy in `cache`:** without it `contains()` is false, the next draw
-queues the tile again, and a server that keeps failing loops through the reply's
-`emitSigCanvasUpdate()` for ever (read from the code, not measured). A cache file that does not load becomes the same dummy, or its null image would set
-`tileSizePx` to 0 and the next draw divides by it. `CDiskCache::restore()` returns false for it, and `CMapTMS::draw()` /
-`CMapWMTS::draw()` reset and count those per draw, so `failedTiles()` is the holes in the last
-buffer, never a lifetime total; `settleStable()` refuses a picture with any. The dummy is 256 px, so
-`CMapTMS` learns `tileSizePx` and `CMapWMTS` learns `tileScale` only from a restored real tile: learned
-from a hole, a 512 px source with one missing tile flips the value on every draw and requests a redraw
-each time, which a shot sees as a 20 s timeout instead of holes. Measured on a local 512 px TMS
-server missing one tile per zoom level, same requests either way: learning from holes timed out after
-20 s, learning from real tiles refused the picture with 1 hole after 0.5 s. The WMTS path is the same
-condition and was not run.
-
-**`processEvents(flags, ms)` does not wait** — it returns as soon as nothing is pending (Qt 6.10.2).
-Waiting for tiles is a `QEventLoop` quit by a `QTimer`.
-
-**Close the main window before leaving `exec()`.** Destroying it while shown makes `~QWidget` hide
-the docks, whose `visibilityChanged` reaches `CMainWindow::slotDockVisibilityChanged()` after its
-`docks` member is gone: SIGSEGV on exit (gdb, 2026-09-14). The SIGTERM handler closes first and exits
-cleanly.
-
-**`(base)` is a state, so it has to be restorable.** `CShotDocMode` captures the arrangement and
-the view once the fixture is up and replays that for the base row; selecting it used to fall into
-`"This page has no scenario called %1"` with an empty `%1`. Nothing about the base is stored —
-that is the point of it.
-
-**A documentation run pins the colour scheme, it does not follow the desktop.**
-`--color-scheme light|dark` → `CUiTheme::pinColorScheme()`, which sets *both* the style hint and
-the application palette. Neither alone is enough: `QPlatformTheme::requestColorScheme()` has an
-empty default implementation, so `QStyleHints::setColorScheme()` does nothing on X11, and
-`QStyle::standardPalette()` reads the platform theme's scheme — the thing being pinned away. The
-palette is the one that matters here, because `paletteIsDark()` reads it and `CUiTheme`,
-`CQmsStyle` and the `.svgt` icon engine all follow from that.
-
-**The documentation panel must not be `WindowStaysOnTopHint`.** It floated above the modal dialogs
-the main window opens too, and one centred under it could be neither reached, closed nor moved out
-from under — the application had to be killed. A parented `Qt::Tool` already floats above its own
-window.
-
-**An exposure is built by `shootOne()` and deleted when the shot returns**, after the values its `set`
-drove are put back. Its `TYPE` must declare `Q_OBJECT` - `SHOT_EXPOSE` does not compile otherwise,
-through `QtPrivate::HasQ_OBJECT_Macro` - and what the factory built is compared with
-`TYPE::staticMetaObject`; a mismatch refuses the widget. Without `Q_OBJECT` a dialog's meta object
-is `QDialog`'s, which is why five dialogs got one. A second `SHOT_EXPOSE` with a taken id is refused
-and counted as a failure in every `--shoot` run.
-
-**A value a dialog keeps a reference to is a static of its own factory, set again for every
-build.** Shared per type, `SetupFolder` left its folder name behind and `MapPathSetup` showed it as
-the cache root when taken later in the same run. Measured 2026-09-14: the 35 exposures forward and
-in reverse order are byte-identical.
-`CSelectProjectDialog` is built without the workspace tree, which is its form for naming a new
-project.
-
-**A fixture exposure gets what the application's own call site passes** - `CInputDialog` asks for a
-waypoint's proximity as `CDetailsWpt` does, the route and area dialogs are named after the track as
-`CGisItemTrk::toRoute()` names them. 16 of them build from the fixture. `CPrintDialog` is not exposed:
-it shows a canvas of its own inside a dialog that is never shown, and a hidden canvas is refused.
-
-**Some exposures show the machine, not the application.** Measured 2026-09-14: `CAbout` prints the
-Qt, GDAL, PROJ and Routino versions it runs against; `CWptIconDialog` shows `Paths/externalWptIcons`,
-which falls back to `userDataPath("WaypointIcons")` under the user's home; `CSetupDatabase` says
-whether the QMYSQL driver is installed; `CPhotoViewer` calls `showMaximized()` in its constructor and
-comes out 796x796 offscreen. Byte-identical on one machine, not across machines.
-
-**Every comma in a `SHOT_EXPOSE` lambda must sit inside parentheses.** Only parens
-protect a macro argument — a brace list (`x = {1, 2}`) or a template argument (`f<T, 1>()`) at
-statement level splits the lambda into extra arguments and the error points at the closing `});`.
-Put such a value in a helper function in the anonymous namespace and call it.
+- **Two processes.** `qmapshack --doc <repo> --doc-page <ch>` is the launcher: never-shown main window
+  (for the singletons), the panel, the shot file and every file operation except writing the base
+  configuration and a recording. It starts a state process with `--doc-scenario <name|->` and throws
+  it away on another pick; nothing is ever reset in place. The launcher owns the session and every
+  panel dialog; the state process owns only F9's dialogs and `Ctrl+Shift+F9`.
+- **They talk over a `QLocalSocket`** (`--doc-channel`). Launcher → state: `region`, `update`,
+  `retake`, `record`, `stop`, `sync`. State → launcher: `status`, `ready`, `tagged`, `changed`,
+  `recording`, `recorded`.
+- **Closing either window ends the session**; a state whose channel drops quits too.
+- **The launcher runs `shots.py compose` with `--doc-python`** (its own `sys.executable`), never
+  `python3` from `PATH` (a Store alias on Windows). A `QProcess` that fails to start emits only
+  `errorOccurred`; put the dialog up before `start()`.
+- **A state takes ~7 s to start**; the panel refuses input meanwhile (`setBusy`).
+- **The panel**: geometry applied one event loop after show, once; never `WindowStaysOnTopHint`
+  (hides modal dialogs); must always be closable (it is the launcher's only window).
+- **The state re-applies `MainWindow/geometry` after the fixture is up**, and
+  `portableGeometry()` zeroes the screen width in stored geometry so `restoreGeometry()` does not
+  drop it on another screen size (>25 % difference). `moveToWritersScreen()` centres the window on
+  the panel's screen (`--doc-screen`).
+- **`(base)` is a row, not a scenario**: shots in it have no `scenario` key (`--shoot-scenario -`);
+  `CShotDocMode` captures and replays its arrangement and view; nothing is stored.
+- **Losing or changing a shot's scenario reduces it to its `id` and deletes the image.**
+- **A scenario is never performed on top of itself** (`CShotContext::liveScenario()`): a shot of the
+  live scenario photographs what is there; a build sets none and performs every scenario.
+- **Render before asking anything.** Focus cannot be restored across another window, and a project
+  row's focus buttons fade in only with `State_HasFocus`, so `tag()` renders every candidate
+  (`livePartsAt()`) at the key press. `CShotRegionPicker` takes `Qt::NoFocus`. `select` steps call
+  `setFocus()` with `setCurrentItem()`.
 
 ### CMake — remaining
 

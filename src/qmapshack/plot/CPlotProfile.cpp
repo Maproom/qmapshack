@@ -48,6 +48,7 @@ void CPlotProfile::init() {
 
     menu->addSeparator();
     QAction* action = new QAction(tr("Show Labels"), this);
+    action->setObjectName("actionShowWptLabels");
     action->setCheckable(true);
     action->setChecked(showWptLabels);
     menu->addAction(action);

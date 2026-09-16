@@ -299,6 +299,7 @@ IPoiItem CPoiItemPOI::toPoi() const {
   IPoiItem poi;
   poi.pos = coordinates;
   poi.name = getName();
+  poi.key = key;
   poi.icon = garminIcon;
   poi.desc = getDesc();
   poi.links = getLinks();

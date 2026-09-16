@@ -113,7 +113,7 @@ bool CPoiFileItem::activate() {
   // load map by suffix
   QFileInfo fi(filename);
   if (fi.suffix().toLower() == "poi") {
-    poifile = new CPoiFilePOI(filename, poi);
+    poifile = new CPoiFilePOI(filename, key, poi);
   }
 
   updateIcon();

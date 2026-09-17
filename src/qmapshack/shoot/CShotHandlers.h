@@ -39,6 +39,12 @@ QWidget* ownerOf(QWidget* widget);
 /** @return @p step's action or widget below @p root, nullptr when not there */
 QObject* resolve(QWidget* root, const QJsonObject& step);
 
+/** @return @p button as a step names it, empty for one a step does not record */
+QString buttonName(Qt::MouseButton button);
+
+/** @return the button a step calls @p name, NoButton for an unknown name */
+Qt::MouseButton buttonOf(const QString& name);
+
 /** @return @p key as a portable name, empty for a modifier on its own or a key without a name */
 QString keyName(int key);
 
@@ -51,6 +57,15 @@ void putMods(QJsonObject& step, Qt::KeyboardModifiers mods);
    @return the failures
  */
 qint32 replay(QWidget* root, const QJsonObject& step);
+
+/** @brief Forget the presses a replay left without their release */
+void forgetPresses();
+
+/** @return the classes with a handler whose replay has not run in this process, sorted */
+QStringList unreplayed();
+
+/** @brief Name the step being replayed in every failure that follows: 1-based @p number of @p count; 0 for none */
+void setStepNumber(qsizetype number, qsizetype count);
 }  // namespace CShotHandlers
 
 #endif  // CSHOTHANDLERS_H

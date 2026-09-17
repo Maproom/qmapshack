@@ -31,6 +31,8 @@
 #include <QDebug>
 #include <QDockWidget>
 #include <QDoubleSpinBox>
+#include <QElapsedTimer>
+#include <QEventLoop>
 #include <QGroupBox>
 #include <QHash>
 #include <QHeaderView>
@@ -51,6 +53,7 @@
 #include <QStyleOptionViewItem>
 #include <QTabBar>
 #include <QTabWidget>
+#include <QTimer>
 #include <QToolButton>
 #include <QTreeView>
 #include <QTreeWidget>
@@ -86,24 +89,39 @@
 #include "widgets/CIconGrid.h"
 
 namespace {
-qint32 fail(const QString& what) {
-  qWarning().noquote() << "shoot:" << what;
+using CShotHandlers::buttonName;
+using CShotHandlers::buttonOf;
+
+/** How long a canvas step waits for the map to finish drawing, and how often it looks [ms]. */
+constexpr qint32 kCanvasSettleMs = 20000;
+constexpr qint32 kCanvasPollMs = 20;
+
+/** The step CShotReplay is performing, 1-based, and how many there are; 0 outside a replay. */
+qsizetype stepNumber = 0;
+qsizetype stepCount = 0;
+
+/** @brief Warn in the writer's words that @p step did not replay because of @p why; the step as recorded goes to the
+    debug log. */
+qint32 fail(const QString& why, const QJsonObject& step) {
+  const QString& what = CShotStep::describe(step);
+  if (0 == stepNumber) {
+    qWarning().noquote() << QString("shoot: The action '%1' did not replay: %2.").arg(what, why);
+  } else {
+    qWarning().noquote() << QString("shoot: Action %1 of %2 in the recording, '%3', did not replay: %4.")
+                                .arg(stepNumber)
+                                .arg(stepCount)
+                                .arg(what, why);
+  }
   return 1;
 }
-
-QString compact(const QJsonObject& step) {
-  return QString::fromUtf8(QJsonDocument(step).toJson(QJsonDocument::Compact));
-}
-
-QString classOf(const QObject* object) { return QString::fromLatin1(object->metaObject()->className()); }
 
 /** @return a failure unless a user could act on @p widget now */
 qint32 failUnlessUsable(const QWidget* widget, const QJsonObject& step) {
   if (!widget->isVisible()) {
-    return fail("the step cannot be performed, its widget is not shown: " + compact(step));
+    return fail("what it acts on is hidden at that moment", step);
   }
   if (!widget->isEnabled()) {
-    return fail("the step cannot be performed, its widget is disabled: " + compact(step));
+    return fail("what it acts on is disabled at that moment", step);
   }
   return 0;
 }
@@ -111,7 +129,7 @@ qint32 failUnlessUsable(const QWidget* widget, const QJsonObject& step) {
 /** @return a failure when input at @p pos of @p widget would reach another widget than @p widget */
 qint32 failUnlessReached(QWidget* widget, const QPoint& pos, const QJsonObject& step) {
   const QString& other = CShotSynth::missed(widget, pos);
-  return other.isEmpty() ? 0 : fail(QString("the step would reach %1 instead: %2").arg(other, compact(step)));
+  return other.isEmpty() ? 0 : fail("something else covers the place it acts on", step);
 }
 
 /** Notes whether a wheel event reaches @p target at @p pos, directly or through a widget inside it. */
@@ -178,32 +196,6 @@ Button rowButtonByName(const QString& name) {
   return Button::eNone;
 }
 
-QString buttonName(Qt::MouseButton button) {
-  switch (button) {
-    case Qt::LeftButton:
-      return "left";
-    case Qt::RightButton:
-      return "right";
-    case Qt::MiddleButton:
-      return "middle";
-    default:
-      return QString();
-  }
-}
-
-Qt::MouseButton buttonOf(const QString& name) {
-  if ("left" == name) {
-    return Qt::LeftButton;
-  }
-  if ("right" == name) {
-    return Qt::RightButton;
-  }
-  if ("middle" == name) {
-    return Qt::MiddleButton;
-  }
-  return Qt::NoButton;
-}
-
 Qt::KeyboardModifiers modsOf(const QJsonObject& step) {
   Qt::KeyboardModifiers mods = Qt::NoModifier;
   const QJsonArray& names = step["mods"].toArray();
@@ -235,12 +227,10 @@ QAbstractItemView* completerPopupOf(const QWidget* control) {
 }
 
 /** @brief Record typing into @p control as one `key` step holding the final value */
-void watchTyping(QWidget* control, QLineEdit* edit, CShotRecorder& recorder, const std::function<QString()>& valueOf) {
-  QObject::connect(edit, &QLineEdit::textChanged, &recorder, [control, &recorder, valueOf](const QString&) {
-    if (const std::optional<QString>& address = recorder.address(control); address.has_value()) {
-      recorder.amend(control, CShotStep::key(*address, valueOf(), false));
-    }
-  });
+void recordTyping(QWidget* control, CShotRecorder& recorder) {
+  if (const std::optional<QString>& address = recorder.address(control); address.has_value()) {
+    recorder.amend(control, CShotStep::key(*address, CShotInput::keyValueOf(control), false));
+  }
 }
 
 /**
@@ -248,7 +238,7 @@ void watchTyping(QWidget* control, QLineEdit* edit, CShotRecorder& recorder, con
 
    A replayed click or trigger moves no focus, so a focus loss needs a step of its own.
  */
-void endTyping(QWidget* control, CShotRecorder& recorder, const std::function<QString()>& valueOf) {
+void endTyping(QWidget* control, CShotRecorder& recorder) {
   const std::optional<QString>& address = recorder.address(control);
   if (!address.has_value()) {
     return;
@@ -261,10 +251,10 @@ void endTyping(QWidget* control, CShotRecorder& recorder, const std::function<QS
       (CShotApplication::frameWithin(control) || (nullptr != popup && CShotApplication::frameWithin(popup)));
   if (enter) {
     if (QJsonObject* open = recorder.openStep(control, "key"); nullptr != open) {
-      (*open)["text"] = valueOf();
+      (*open)["text"] = CShotInput::keyValueOf(control);
       (*open)["enter"] = true;
     } else {
-      recorder.amend(control, CShotStep::key(*address, valueOf(), true));
+      recorder.amend(control, CShotStep::key(*address, CShotInput::keyValueOf(control), true));
     }
     recorder.close(control);
     return;
@@ -274,7 +264,7 @@ void endTyping(QWidget* control, CShotRecorder& recorder, const std::function<QS
 }
 
 /** @brief Replace @p control's text with @p step's by typing */
-qint32 replayTyping(QWidget* control, const QJsonObject& step, const std::function<QString()>& valueOf) {
+qint32 replayTyping(QWidget* control, const QJsonObject& step) {
   if (const qint32 failed = failUnlessUsable(control, step); 0 != failed) {
     return failed;
   }
@@ -287,8 +277,8 @@ qint32 replayTyping(QWidget* control, const QJsonObject& step, const std::functi
     popup->hide();
   }
   // Read before Enter, which can accept a dialog and take the input with it.
-  if (valueOf() != text) {
-    return fail(QString("%1 holds '%2' after '%3' was typed").arg(step["widget"].toString(), valueOf(), text));
+  if (const QString& value = CShotInput::keyValueOf(control); value != text) {
+    return fail(QString("after typing '%1' the field holds '%2'").arg(text, value), step);
   }
   if (step["enter"].toBool()) {
     CShotSynth::key(control, Qt::Key_Return);
@@ -327,6 +317,7 @@ QAction* actionIn(const QWidget* owner, const QString& name) {
 class CActionHandler : public IShotHandler {
  public:
   const QMetaObject* handles() const override { return &QAction::staticMetaObject; }
+  QSet<QString> verbs() const override { return {"trigger"}; }
 
   void watch(QObject* object, CShotRecorder& recorder) const override {
     QAction* action = static_cast<QAction*>(object);
@@ -358,7 +349,7 @@ class CActionHandler : public IShotHandler {
   qint32 replay(const QJsonObject& step, QObject* target) const override {
     QAction* action = static_cast<QAction*>(target);
     if (!action->isEnabled()) {
-      return fail("the action is disabled: " + compact(step));
+      return fail("the menu entry is disabled at that moment", step);
     }
     if (QMenu* menu = qobject_cast<QMenu*>(QApplication::activePopupWidget());
         nullptr != menu && menu->actions().contains(action)) {
@@ -382,7 +373,7 @@ class CActionHandler : public IShotHandler {
       action->trigger();
     }
     if (step.contains("checked") && action->isChecked() != step["checked"].toBool()) {
-      return fail("the action did not end up as recorded: " + compact(step));
+      return fail("the entry was chosen, but its setting is not the recorded one", step);
     }
     return 0;
   }
@@ -417,6 +408,7 @@ class CActionHandler : public IShotHandler {
 class CButtonHandler : public IShotHandler {
  public:
   const QMetaObject* handles() const override { return &QAbstractButton::staticMetaObject; }
+  QSet<QString> verbs() const override { return {"click"}; }
 
   void watch(QObject* object, CShotRecorder& recorder) const override {
     QAbstractButton* button = static_cast<QAbstractButton*>(object);
@@ -444,7 +436,7 @@ class CButtonHandler : public IShotHandler {
     // Emits clicked(), as the keyboard does.
     button->click();
     if (step.contains("checked") && button->isChecked() != step["checked"].toBool()) {
-      return fail("the button did not end up as recorded: " + compact(step));
+      return fail("the button was clicked, but it is not in the recorded state", step);
     }
     return 0;
   }
@@ -464,6 +456,7 @@ class CButtonHandler : public IShotHandler {
 class CGroupBoxHandler : public IShotHandler {
  public:
   const QMetaObject* handles() const override { return &QGroupBox::staticMetaObject; }
+  QSet<QString> verbs() const override { return {"click"}; }
 
   void watch(QObject* object, CShotRecorder& recorder) const override {
     QGroupBox* group = static_cast<QGroupBox*>(object);
@@ -484,7 +477,7 @@ class CGroupBoxHandler : public IShotHandler {
     // Space clicks it without knowing where the check box is drawn.
     CShotSynth::key(group, Qt::Key_Space);
     if (group->isChecked() != step["checked"].toBool()) {
-      return fail("the group box did not end up as recorded: " + compact(step));
+      return fail("the box was clicked, but it is not in the recorded state", step);
     }
     return 0;
   }
@@ -494,6 +487,7 @@ class CGroupBoxHandler : public IShotHandler {
 class CComboBoxHandler : public IShotHandler {
  public:
   const QMetaObject* handles() const override { return &QComboBox::staticMetaObject; }
+  QSet<QString> verbs() const override { return {"set", "key", "endedit"}; }
 
   void watch(QObject* object, CShotRecorder& recorder) const override {
     QComboBox* combo = static_cast<QComboBox*>(object);
@@ -503,10 +497,10 @@ class CComboBoxHandler : public IShotHandler {
       }
     });
     if (nullptr != combo->lineEdit()) {
-      const std::function<QString()> valueOf = [combo]() { return combo->currentText(); };
-      watchTyping(combo, combo->lineEdit(), recorder, valueOf);
+      QObject::connect(combo->lineEdit(), &QLineEdit::textChanged, &recorder,
+                       [combo, &recorder](const QString&) { recordTyping(combo, recorder); });
       QObject::connect(combo->lineEdit(), &QLineEdit::editingFinished, &recorder,
-                       [combo, &recorder, valueOf]() { endTyping(combo, recorder, valueOf); });
+                       [combo, &recorder]() { endTyping(combo, recorder); });
     }
   }
 
@@ -514,7 +508,7 @@ class CComboBoxHandler : public IShotHandler {
     QComboBox* combo = static_cast<QComboBox*>(target);
     const QString& verb = step["do"].toString();
     if ("key" == verb) {
-      return replayTyping(combo, step, [combo]() { return combo->currentText(); });
+      return replayTyping(combo, step);
     }
     if ("endedit" == verb) {
       return replayEndEdit(combo);
@@ -524,7 +518,7 @@ class CComboBoxHandler : public IShotHandler {
     }
     const int index = step["value"].toInt();
     if (index < 0 || index >= combo->count()) {
-      return fail(QString("the combo box has no entry %1: %2").arg(index).arg(compact(step)));
+      return fail("the drop-down list has fewer entries than when it was recorded", step);
     }
     combo->setCurrentIndex(index);
     // What a pick in the popup emits.
@@ -538,6 +532,7 @@ class CComboBoxHandler : public IShotHandler {
 class CLineEditHandler : public IShotHandler {
  public:
   const QMetaObject* handles() const override { return &QLineEdit::staticMetaObject; }
+  QSet<QString> verbs() const override { return {"key", "endedit"}; }
 
   void watch(QObject* object, CShotRecorder& recorder) const override {
     QLineEdit* edit = static_cast<QLineEdit*>(object);
@@ -547,20 +542,19 @@ class CLineEditHandler : public IShotHandler {
     }
     // Asked at typing time: a view places a widget into its row only after it is shown. A cell editor is gone on
     // replay.
-    const std::function<QString()> valueOf = [edit]() { return edit->text(); };
-    QObject::connect(edit, &QLineEdit::textChanged, &recorder, [edit, &recorder, valueOf](const QString&) {
+    QObject::connect(edit, &QLineEdit::textChanged, &recorder, [edit, &recorder](const QString&) {
       if (CShotInput::isCellEditor(edit)) {
         qWarning() << "shoot: typing into a cell editor is not recorded: it exists only while the edit is open";
         return;
       }
       if (const std::optional<QString>& address = recorder.address(edit); address.has_value()) {
         // The completer's parentless popup counts as the line edit.
-        recorder.amend(edit, CShotStep::key(*address, valueOf(), false), completerPopupOf(edit));
+        recorder.amend(edit, CShotStep::key(*address, edit->text(), false), completerPopupOf(edit));
       }
     });
-    QObject::connect(edit, &QLineEdit::editingFinished, &recorder, [edit, &recorder, valueOf]() {
+    QObject::connect(edit, &QLineEdit::editingFinished, &recorder, [edit, &recorder]() {
       if (!CShotInput::isCellEditor(edit)) {
-        endTyping(edit, recorder, valueOf);
+        endTyping(edit, recorder);
       }
     });
   }
@@ -570,7 +564,7 @@ class CLineEditHandler : public IShotHandler {
     if ("endedit" == step["do"].toString()) {
       return replayEndEdit(edit);
     }
-    return replayTyping(edit, step, [edit]() { return edit->text(); });
+    return replayTyping(edit, step);
   }
 };
 
@@ -580,55 +574,30 @@ class CLineEditHandler : public IShotHandler {
    Typing via textEdited() (a key can change the text but not the value); stepping via the value signal, because
    updateEdit() blocks the line edit's signals.
  */
+template <typename Spin>
 class CSpinBoxHandler : public IShotHandler {
  public:
+  const QMetaObject* handles() const override { return &Spin::staticMetaObject; }
+  QSet<QString> verbs() const override { return {"key", "endedit"}; }
+
   void watch(QObject* object, CShotRecorder& recorder) const override {
-    QAbstractSpinBox* spin = static_cast<QAbstractSpinBox*>(object);
-    if (QLineEdit* edit = spin->findChild<QLineEdit*>(QString(), Qt::FindDirectChildrenOnly); nullptr != edit) {
+    Spin* spin = static_cast<Spin*>(object);
+    if (QLineEdit* edit = spin->template findChild<QLineEdit*>(QString(), Qt::FindDirectChildrenOnly);
+        nullptr != edit) {
       QObject::connect(edit, &QLineEdit::textEdited, &recorder,
-                       [spin, &recorder](const QString&) { recordValue(spin, recorder); });
+                       [spin, &recorder](const QString&) { recordTyping(spin, recorder); });
     }
-    QObject::connect(spin, &QAbstractSpinBox::editingFinished, &recorder, [spin, &recorder]() {
-      endTyping(spin, recorder, [spin]() { return CShotInput::keyValueOf(spin); });
-    });
+    QObject::connect(spin, &Spin::valueChanged, &recorder, [spin, &recorder]() { recordTyping(spin, recorder); });
+    QObject::connect(spin, &QAbstractSpinBox::editingFinished, &recorder,
+                     [spin, &recorder]() { endTyping(spin, recorder); });
   }
 
   qint32 replay(const QJsonObject& step, QObject* target) const override {
-    QAbstractSpinBox* spin = static_cast<QAbstractSpinBox*>(target);
+    Spin* spin = static_cast<Spin*>(target);
     if ("endedit" == step["do"].toString()) {
       return replayEndEdit(spin);
     }
-    return replayTyping(spin, step, [spin]() { return CShotInput::keyValueOf(spin); });
-  }
-
- protected:
-  static void recordValue(QAbstractSpinBox* spin, CShotRecorder& recorder) {
-    if (const std::optional<QString>& address = recorder.address(spin); address.has_value()) {
-      recorder.amend(spin, CShotStep::key(*address, CShotInput::keyValueOf(spin), false));
-    }
-  }
-};
-
-class CIntSpinBoxHandler : public CSpinBoxHandler {
- public:
-  const QMetaObject* handles() const override { return &QSpinBox::staticMetaObject; }
-
-  void watch(QObject* object, CShotRecorder& recorder) const override {
-    CSpinBoxHandler::watch(object, recorder);
-    QSpinBox* spin = static_cast<QSpinBox*>(object);
-    QObject::connect(spin, &QSpinBox::valueChanged, &recorder, [spin, &recorder](int) { recordValue(spin, recorder); });
-  }
-};
-
-class CDoubleSpinBoxHandler : public CSpinBoxHandler {
- public:
-  const QMetaObject* handles() const override { return &QDoubleSpinBox::staticMetaObject; }
-
-  void watch(QObject* object, CShotRecorder& recorder) const override {
-    CSpinBoxHandler::watch(object, recorder);
-    QDoubleSpinBox* spin = static_cast<QDoubleSpinBox*>(object);
-    QObject::connect(spin, &QDoubleSpinBox::valueChanged, &recorder,
-                     [spin, &recorder](double) { recordValue(spin, recorder); });
+    return replayTyping(spin, step);
   }
 };
 
@@ -636,6 +605,7 @@ class CDoubleSpinBoxHandler : public CSpinBoxHandler {
 class CDateTimeEditHandler : public IShotHandler {
  public:
   const QMetaObject* handles() const override { return &QDateTimeEdit::staticMetaObject; }
+  QSet<QString> verbs() const override { return {"set", "endedit"}; }
 
   void watch(QObject* object, CShotRecorder& recorder) const override {
     QDateTimeEdit* edit = static_cast<QDateTimeEdit*>(object);
@@ -647,7 +617,7 @@ class CDateTimeEditHandler : public IShotHandler {
     QObject::connect(edit, &QAbstractSpinBox::editingFinished, &recorder, [edit, &recorder]() {
       recorder.close(edit);
       if (const std::optional<QString>& address = recorder.address(edit); address.has_value()) {
-        recorder.recordOutcome(edit, QJsonObject{{"do", "endedit"}, {"widget", *address}});
+        recorder.recordOutcome(edit, CShotStep::endEdit(*address));
       }
     });
   }
@@ -662,11 +632,11 @@ class CDateTimeEditHandler : public IShotHandler {
     }
     const QDateTime& value = QDateTime::fromString(step["value"].toString(), Qt::ISODateWithMs);
     if (!value.isValid()) {
-      return fail("the recorded date is no date: " + compact(step));
+      return fail("the recorded date cannot be read", step);
     }
     CShotSynth::focus(edit);
     edit->setDateTime(value);
-    return (edit->dateTime() == value) ? 0 : fail("the date edit did not take the value: " + compact(step));
+    return (edit->dateTime() == value) ? 0 : fail("the date field did not take the date", step);
   }
 };
 
@@ -688,6 +658,7 @@ QAbstractScrollArea* scrollAreaOf(const QAbstractSlider* bar) {
 class CSliderHandler : public IShotHandler {
  public:
   const QMetaObject* handles() const override { return &QAbstractSlider::staticMetaObject; }
+  QSet<QString> verbs() const override { return {"set"}; }
 
   void watch(QObject* object, CShotRecorder& recorder) const override {
     QAbstractSlider* slider = static_cast<QAbstractSlider*>(object);
@@ -714,13 +685,13 @@ class CSliderHandler : public IShotHandler {
     if ("share" == step["property"].toString()) {
       const int value = slider->minimum() + qRound(step["value"].toDouble() * (slider->maximum() - slider->minimum()));
       slider->setValue(value);
-      return (qAbs(slider->value() - value) <= 1) ? 0 : fail("the scroll bar did not take the share: " + compact(step));
+      return (qAbs(slider->value() - value) <= 1) ? 0 : fail("the scroll bar did not move there", step);
     }
     if (const qint32 failed = failUnlessUsable(slider, step); 0 != failed) {
       return failed;
     }
     slider->setValue(step["value"].toInt());
-    return (slider->value() == step["value"].toInt()) ? 0 : fail("the slider did not take the value: " + compact(step));
+    return (slider->value() == step["value"].toInt()) ? 0 : fail("the slider did not move there", step);
   }
 };
 
@@ -728,6 +699,7 @@ class CSliderHandler : public IShotHandler {
 class CSplitterHandler : public IShotHandler {
  public:
   const QMetaObject* handles() const override { return &QSplitter::staticMetaObject; }
+  QSet<QString> verbs() const override { return {"set"}; }
 
   void watch(QObject* object, CShotRecorder& recorder) const override {
     QSplitter* splitter = static_cast<QSplitter*>(object);
@@ -755,7 +727,7 @@ class CSplitterHandler : public IShotHandler {
     QList<int> sizes = splitter->sizes();
     const qint32 total = std::accumulate(sizes.begin(), sizes.end(), 0);
     if (shares.size() != sizes.size() || total <= 0) {
-      return fail("the splitter has other parts than when it was recorded: " + compact(step));
+      return fail("the divided area has other parts than when it was recorded", step);
     }
     for (qsizetype i = 0; i < sizes.size(); i++) {
       sizes[i] = qRound(shares.at(i).toDouble() * total);
@@ -765,7 +737,7 @@ class CSplitterHandler : public IShotHandler {
     const QList<int>& taken = splitter->sizes();
     for (qsizetype i = 0; i < sizes.size(); i++) {
       if (qAbs(taken[i] - sizes[i]) > 1) {
-        return fail("the splitter could not be put where it was recorded: " + compact(step));
+        return fail("the divider could not be moved where it was recorded", step);
       }
     }
     return 0;
@@ -779,6 +751,7 @@ class CSplitterHandler : public IShotHandler {
 class CDockWidgetHandler : public IShotHandler {
  public:
   const QMetaObject* handles() const override { return &QDockWidget::staticMetaObject; }
+  QSet<QString> verbs() const override { return {"arrange"}; }
 
   void watch(QObject* object, CShotRecorder& recorder) const override {
     QDockWidget* dock = static_cast<QDockWidget*>(object);
@@ -792,14 +765,14 @@ class CDockWidgetHandler : public IShotHandler {
     QDockWidget* dock = static_cast<QDockWidget*>(target);
     QMainWindow* main = qobject_cast<QMainWindow*>(dock->parentWidget());
     if (nullptr == main) {
-      return fail("the dock is in no main window: " + compact(step));
+      return fail("the panel is not part of the application window", step);
     }
     if (!main->restoreState(QByteArray::fromBase64(step["state"].toString().toLatin1()))) {
-      return fail("the main window did not take the arrangement: " + compact(step));
+      return fail("the application window did not take the panel arrangement", step);
     }
     const bool floating = step["floating"].toBool();
     if (dock->isFloating() != floating || (!floating && int(main->dockWidgetArea(dock)) != step["area"].toInt())) {
-      return fail("the dock did not end up where it was recorded: " + compact(step));
+      return fail("the panel did not end up where it was recorded", step);
     }
     return 0;
   }
@@ -824,6 +797,7 @@ class CDockWidgetHandler : public IShotHandler {
 class CTabBarHandler : public IShotHandler {
  public:
   const QMetaObject* handles() const override { return &QTabBar::staticMetaObject; }
+  QSet<QString> verbs() const override { return {"set", "close"}; }
 
   void watch(QObject* object, CShotRecorder& recorder) const override {
     QTabBar* bar = static_cast<QTabBar*>(object);
@@ -860,7 +834,7 @@ class CTabBarHandler : public IShotHandler {
     const bool close = "close" == step["do"].toString();
     const int index = close ? step["index"].toInt() : step["value"].toInt();
     if (index < 0 || index >= bar->count()) {
-      return fail(QString("the tab bar has no tab %1: %2").arg(index).arg(compact(step)));
+      return fail("the tab is not there", step);
     }
     if (close) {
       // The close button's position is up to the style.
@@ -868,7 +842,7 @@ class CTabBarHandler : public IShotHandler {
       return 0;
     }
     bar->setCurrentIndex(index);
-    return (bar->currentIndex() == index) ? 0 : fail("the tab bar did not go to the tab: " + compact(step));
+    return (bar->currentIndex() == index) ? 0 : fail("the tab did not open", step);
   }
 };
 
@@ -876,6 +850,7 @@ class CTabBarHandler : public IShotHandler {
 class CHeaderViewHandler : public IShotHandler {
  public:
   const QMetaObject* handles() const override { return &QHeaderView::staticMetaObject; }
+  QSet<QString> verbs() const override { return {"click"}; }
 
   void watch(QObject* object, CShotRecorder& recorder) const override {
     QHeaderView* header = static_cast<QHeaderView*>(object);
@@ -894,7 +869,7 @@ class CHeaderViewHandler : public IShotHandler {
     }
     const int section = step["section"].toInt();
     if (section < 0 || section >= header->count() || header->isSectionHidden(section)) {
-      return fail(QString("the header has no section %1 to click: %2").arg(section).arg(compact(step)));
+      return fail("the column is not there", step);
     }
     const QPoint at(header->sectionViewportPosition(section) + header->sectionSize(section) / 2,
                     header->viewport()->height() / 2);
@@ -903,7 +878,7 @@ class CHeaderViewHandler : public IShotHandler {
     }
     CShotSynth::mouse(QTest::MouseClick, header->viewport(), Qt::LeftButton, Qt::NoModifier, at);
     if (header->isSortIndicatorShown() && header->sortIndicatorSection() != section) {
-      return fail("the header did not sort by the section: " + compact(step));
+      return fail("the list was not sorted by that column", step);
     }
     return 0;
   }
@@ -939,6 +914,7 @@ class CPressWatch : public QObject {
 class CItemViewHandler : public IShotHandler {
  public:
   const QMetaObject* handles() const override { return &QAbstractItemView::staticMetaObject; }
+  QSet<QString> verbs() const override { return {"select", "dclick", "expand", "collapse", "scroll", "menu"}; }
 
   void watch(QObject* object, CShotRecorder& recorder) const override {
     QAbstractItemView* view = static_cast<QAbstractItemView*>(object);
@@ -1037,7 +1013,7 @@ class CItemViewHandler : public IShotHandler {
 
     if ("scroll" == verb) {
       if (!scrollToTop(view, row)) {
-        return fail("the view has no such row to scroll to: " + compact(step));
+        return fail("the row is not in the list", step);
       }
       if (step.contains("x")) {
         QScrollBar* sideways = view->horizontalScrollBar();
@@ -1045,9 +1021,7 @@ class CItemViewHandler : public IShotHandler {
                            qRound(step["x"].toDouble() * (sideways->maximum() - sideways->minimum())));
       }
       // Stopped short by the list's end: the recording came from another state.
-      return (rowOf(view, view->indexAt(QPoint(1, 1))) == row)
-                 ? 0
-                 : fail("the view did not scroll there: " + compact(step));
+      return (rowOf(view, view->indexAt(QPoint(1, 1))) == row) ? 0 : fail("the list did not scroll there", step);
     }
 
     QPoint at;
@@ -1057,7 +1031,7 @@ class CItemViewHandler : public IShotHandler {
       // Measured after the scroll.
       const QRect& before = rectOf(view, row);
       if (!before.isValid()) {
-        return fail("the view has no such row: " + compact(step));
+        return fail("the row is not in the list", step);
       }
       view->scrollTo(view->indexAt(before.center()));
       const QRect& rect = rectOf(view, row);
@@ -1072,12 +1046,11 @@ class CItemViewHandler : public IShotHandler {
     if ("expand" == verb || "collapse" == verb) {
       QTreeView* tree = qobject_cast<QTreeView*>(view);
       if (nullptr == tree) {
-        return fail("the view is no tree: " + compact(step));
+        return fail("this list has no rows to expand or collapse", step);
       }
       const QModelIndex& index = view->indexAt(at);
       tree->setExpanded(index, "expand" == verb);
-      return (tree->isExpanded(index) == ("expand" == verb)) ? 0
-                                                             : fail("the row did not " + verb + ": " + compact(step));
+      return (tree->isExpanded(index) == ("expand" == verb)) ? 0 : fail("the row did not change", step);
     }
     if ("menu" == verb) {
       CShotSynth::arrive(view->viewport(), at);
@@ -1085,11 +1058,13 @@ class CItemViewHandler : public IShotHandler {
       return 0;
     }
     if ("select" != verb && "dclick" != verb) {
-      return fail("an item view cannot " + verb);
+      return fail("a list cannot replay this kind of action", step);
     }
     CShotSynth::mouse(("dclick" == verb) ? QTest::MouseDClick : QTest::MouseClick, view->viewport(), Qt::LeftButton,
-                      Qt::NoModifier, at);
-    return (rowOf(view, view->currentIndex()) == row) ? 0 : fail("the row did not become current: " + compact(step));
+                      modsOf(step), at);
+    return (rowOf(view, view->currentIndex()) == row)
+               ? 0
+               : fail("the row was clicked, but it did not become the selected one", step);
   }
 
  protected:
@@ -1136,6 +1111,8 @@ class CItemViewHandler : public IShotHandler {
         const QPoint& inViewport = view->viewport()->mapFromGlobal(receiver->mapToGlobal(frame.pos));
         step["at"] = fractionIn(rectOf(view, row), inViewport);
       }
+      // Ctrl and Shift extend a selection instead of replacing it.
+      CShotHandlers::putMods(step, frame.mods);
     }
     recorder.record(view, step);
   }
@@ -1164,6 +1141,8 @@ QStyleOptionViewItem delegateOptionOf(const QAbstractItemView* view, const QMode
 template <typename Delegate>
 class CRowButtonHandler : public CItemViewHandler {
  public:
+  QSet<QString> verbs() const override { return CItemViewHandler::verbs() + QSet<QString>{"click"}; }
+
   void watch(QObject* object, CShotRecorder& recorder) const override {
     CItemViewHandler::watch(object, recorder);
     QTreeWidget* tree = static_cast<QTreeWidget*>(object);
@@ -1282,15 +1261,15 @@ class CRowButtonHandler : public CItemViewHandler {
     }
     Delegate* delegate = qobject_cast<Delegate*>(tree->itemDelegate());
     if (nullptr == delegate) {
-      return fail("the view paints no row buttons: " + compact(step));
+      return fail("the list shows no buttons in its rows", step);
     }
     const typename Delegate::button_e button = rowButtonByName<typename Delegate::button_e>(step["button"].toString());
     if (Delegate::button_e::eNone == button) {
-      return fail("no row button has that name: " + compact(step));
+      return fail("the row has no such button", step);
     }
     QTreeWidgetItem* item = itemOf(tree, step["row"].toString());
     if (nullptr == item) {
-      return fail("the view has no such row: " + compact(step));
+      return fail("the row is not in the list", step);
     }
 
     // Measured after the scroll.
@@ -1298,7 +1277,7 @@ class CRowButtonHandler : public CItemViewHandler {
     const QModelIndex& index = tree->indexAt(tree->visualItemRect(item).center());
     const QRect& rect = delegate->buttonRect(delegateOptionOf(tree, index), index, button);
     if (!rect.isValid()) {
-      return fail("the row does not show the button now: " + compact(step));
+      return fail("the row does not show that button at that moment", step);
     }
     if (const qint32 failed = failUnlessReached(tree->viewport(), rect.center(), step); 0 != failed) {
       return failed;
@@ -1306,7 +1285,7 @@ class CRowButtonHandler : public CItemViewHandler {
 
     const Qt::MouseButton mouse = step.contains("mouse") ? buttonOf(step["mouse"].toString()) : Qt::LeftButton;
     if (Qt::NoButton == mouse) {
-      return fail("the step names no mouse button: " + compact(step));
+      return fail("the recording does not say which mouse button was used", step);
     }
     if (Qt::RightButton == mouse) {
       // A context menu goes to the widget last entered.
@@ -1323,7 +1302,7 @@ class CRowButtonHandler : public CItemViewHandler {
     CShotSynth::mouse(("dclick" == step["do"].toString()) ? QTest::MouseDClick : QTest::MouseClick, tree->viewport(),
                       mouse, Qt::NoModifier, rect.center());
     QObject::disconnect(connection);
-    return pressed ? 0 : fail("the button did not act: " + compact(step));
+    return pressed ? 0 : fail("the button did not react", step);
   }
 
  protected:
@@ -1435,6 +1414,8 @@ class CNamedRowsHandler : public CRowButtonHandler<Delegate> {
  */
 class CSurfaceHandler : public IShotHandler {
  public:
+  QSet<QString> verbs() const override { return {"move", "press", "release", "wheel", "click", "dclick", "drag"}; }
+
   void watch(QObject* object, CShotRecorder& recorder) const override {
     Q_UNUSED(object)
     Q_UNUSED(recorder)
@@ -1468,13 +1449,16 @@ class CSurfaceHandler : public IShotHandler {
     if (const qint32 failed = failUnlessUsable(surface, step); 0 != failed) {
       return failed;
     }
+    if (!settle(surface)) {
+      return fail("the map did not finish drawing in time", step);
+    }
     const QString& verb = step["do"].toString();
     const Qt::KeyboardModifiers mods = modsOf(step);
     if (("move" == verb || "release" == verb) && step.contains("dx")) {
       // Part of a split gesture: offset from the replayed press.
       const auto pressed = pressedAt().constFind(surface);
       if (pressed == pressedAt().constEnd()) {
-        return fail("the step belongs to a press that was not replayed: " + compact(step));
+        return fail("it continues a mouse press that did not replay", step);
       }
       const QPoint& pixel = pressed.value() + QPoint(step["dx"].toInt(), step["dy"].toInt());
       if ("move" == verb) {
@@ -1487,15 +1471,16 @@ class CSurfaceHandler : public IShotHandler {
     }
     const std::optional<QPoint>& at = pixelOf(surface, step);
     if (!at.has_value()) {
-      return fail(classOf(surface) + " does not show where the step was: " + compact(step));
+      return fail("that place is outside what is shown now", step);
     }
     if (const qint32 failed = failUnlessReached(surface, *at, step); 0 != failed) {
       return failed;
     }
     if (const QString& hit = step["hit"].toString(); !hit.isEmpty()) {
       if (const QString& found = hitAt(surface, *at); found != hit) {
-        return fail(QString("the step expects %1 under the pointer and finds %2: %3")
-                        .arg(hit, found.isEmpty() ? "nothing" : found, compact(step)));
+        return fail(QString("'%1' was under the pointer when it was recorded, now %2 is")
+                        .arg(hit, found.isEmpty() ? QString("nothing") : QString("'%1'").arg(found)),
+                    step);
       }
     }
 
@@ -1507,11 +1492,11 @@ class CSurfaceHandler : public IShotHandler {
       const QJsonArray& angle = step["angle"].toArray();
       const CWheelWatch watch(surface, *at);
       CShotSynth::wheel(surface, *at, QPoint(angle.at(0).toInt(), angle.at(1).toInt()), mods);
-      return watch.reached() ? 0 : fail("the wheel turn arrived somewhere else: " + compact(step));
+      return watch.reached() ? 0 : fail("the wheel turn arrived somewhere else", step);
     }
     const Qt::MouseButton button = buttonOf(step["button"].toString());
     if (Qt::NoButton == button) {
-      return fail("the step names no button: " + compact(step));
+      return fail("the recording does not say which mouse button was used", step);
     }
     if ("press" == verb) {
       pressedAt().insert(surface, *at);
@@ -1523,7 +1508,7 @@ class CSurfaceHandler : public IShotHandler {
       return 0;
     }
     if ("click" != verb && "drag" != verb) {
-      return fail(classOf(surface) + " cannot " + verb);
+      return fail("this kind of action cannot be replayed there", step);
     }
     const QPoint& end = *at + QPoint(step["dx"].toInt(), step["dy"].toInt());
     CShotSynth::mouse(QTest::MousePress, surface, button, mods, *at);
@@ -1551,13 +1536,20 @@ class CSurfaceHandler : public IShotHandler {
   /** @return the pixel of @p step's position now; nothing when not shown */
   virtual std::optional<QPoint> pixelOf(QWidget* surface, const QJsonObject& step) const = 0;
 
- private:
-  /** @return each surface's replayed `press` until its `release` */
+  /** @brief Wait until @p surface shows what the previous step did; false when it never does */
+  virtual bool settle(QWidget* surface) const {
+    Q_UNUSED(surface)
+    return true;
+  }
+
+ public:
+  /** @return each surface's replayed `press` until its `release`; keyed by pointer, so cleared between replays */
   static QHash<const QWidget*, QPoint>& pressedAt() {
     static QHash<const QWidget*, QPoint> pixels;
     return pixels;
   }
 
+ private:
   QJsonObject stepAt(const QString& verb, QWidget* surface, const QPoint& pixel, const CShotRecorder& recorder) const {
     const QJsonObject& position = where(surface, pixel);
     const std::optional<QString>& address = position.isEmpty() ? std::nullopt : recorder.address(surface);
@@ -1697,6 +1689,22 @@ class CCanvasHandler : public CSurfaceHandler {
     return (1 == items.size()) ? CShotAddress::itemPathOf(items.first()) : QString();
   }
 
+  /** An item's pixels are updated by the draw, so a hit or click after a zoom or pan needs it finished. */
+  bool settle(QWidget* surface) const override {
+    const CCanvas* canvas = static_cast<CCanvas*>(surface);
+    QElapsedTimer timer;
+    timer.start();
+    while (!canvas->isDrawComplete()) {
+      if (timer.hasExpired(kCanvasSettleMs)) {
+        return false;
+      }
+      QEventLoop loop;
+      QTimer::singleShot(kCanvasPollMs, &loop, &QEventLoop::quit);
+      loop.exec(QEventLoop::ExcludeUserInputEvents);
+    }
+    return true;
+  }
+
   std::optional<QPoint> pixelOf(QWidget* surface, const QJsonObject& step) const override {
     if (!step["lat"].isDouble() || !step["lon"].isDouble()) {
       return std::nullopt;
@@ -1770,7 +1778,7 @@ qint32 replayOpenMenu(QWidget* root, const QJsonObject& step) {
     QMenu* open = qobject_cast<QMenu*>(QApplication::activePopupWidget());
     QAction* entry = (nullptr == open) ? nullptr : menuEntryIn(open, name);
     if (nullptr == entry) {
-      return fail("no open menu has the submenu: " + compact(step));
+      return fail("no open menu has that submenu", step);
     }
     const QPoint& at = open->actionGeometry(entry).center();
     if (const qint32 failed = failUnlessReached(open, at, step); 0 != failed) {
@@ -1778,7 +1786,7 @@ qint32 replayOpenMenu(QWidget* root, const QJsonObject& step) {
     }
     CShotSynth::arrive(open, at);
     CShotSynth::mouse(QTest::MouseClick, open, Qt::LeftButton, Qt::NoModifier, at);
-    return entry->menu()->isVisible() ? 0 : fail("the submenu did not open: " + compact(step));
+    return entry->menu()->isVisible() ? 0 : fail("the submenu did not open", step);
   }
 
   QObject* target = CShotHandlers::resolve(root, step);
@@ -1805,16 +1813,16 @@ qint32 replayOpenMenu(QWidget* root, const QJsonObject& step) {
     }
     QAction* entry = menuEntryIn(bar, name);
     if (nullptr == entry) {
-      return fail("the menu bar has no such menu: " + compact(step));
+      return fail("the menu bar has no such menu", step);
     }
     const QPoint& at = bar->actionGeometry(entry).center();
     if (const qint32 failed = failUnlessReached(bar, at, step); 0 != failed) {
       return failed;
     }
     CShotSynth::mouse(QTest::MouseClick, bar, Qt::LeftButton, Qt::NoModifier, at);
-    return entry->menu()->isVisible() ? 0 : fail("the menu did not open: " + compact(step));
+    return entry->menu()->isVisible() ? 0 : fail("the menu did not open", step);
   }
-  return fail("nothing opens the menu: " + compact(step));
+  return fail("nothing that opens this menu is there", step);
 }
 
 /** Handlers whose replay() ran, for the self test's coverage check. */
@@ -1829,8 +1837,8 @@ const QHash<const QMetaObject*, const IShotHandler*>& handlers() {
   static const CGroupBoxHandler group;
   static const CComboBoxHandler combo;
   static const CLineEditHandler edit;
-  static const CIntSpinBoxHandler spin;
-  static const CDoubleSpinBoxHandler doubleSpin;
+  static const CSpinBoxHandler<QSpinBox> spin;
+  static const CSpinBoxHandler<QDoubleSpinBox> doubleSpin;
   static const CDateTimeEditHandler dateTime;
   static const CSliderHandler slider;
   static const CSplitterHandler splitter;
@@ -1881,6 +1889,32 @@ QWidget* CShotHandlers::ownerOf(QWidget* widget) {
   return (nullptr != area && area->viewport() == widget) ? area : widget;
 }
 
+QString CShotHandlers::buttonName(Qt::MouseButton button) {
+  switch (button) {
+    case Qt::LeftButton:
+      return "left";
+    case Qt::RightButton:
+      return "right";
+    case Qt::MiddleButton:
+      return "middle";
+    default:
+      return QString();
+  }
+}
+
+Qt::MouseButton CShotHandlers::buttonOf(const QString& name) {
+  if ("left" == name) {
+    return Qt::LeftButton;
+  }
+  if ("right" == name) {
+    return Qt::RightButton;
+  }
+  if ("middle" == name) {
+    return Qt::MiddleButton;
+  }
+  return Qt::NoButton;
+}
+
 QString CShotHandlers::keyName(int key) {
   switch (key) {
     case 0:
@@ -1929,14 +1963,17 @@ QObject* CShotHandlers::resolve(QWidget* root, const QJsonObject& step) {
 qint32 CShotHandlers::replay(QWidget* root, const QJsonObject& step) {
   const QString& verb = step["do"].toString();
   if ("layout" == verb || "view" == verb) {
-    return fail("a " + verb + " is the state the steps start from and is applied before them, not replayed as a step");
+    return fail("it is part of the starting state and cannot be replayed as an action", step);
   }
   if ("openmenu" == verb) {
     return replayOpenMenu(root, step);
   }
+  if (!step.contains("widget") && !step.contains("action")) {
+    return fail("the recording does not say what it acts on", step);
+  }
   QObject* target = resolve(root, step);
   if (nullptr == target) {
-    return fail("what the step was done to is not there: " + compact(step));
+    return fail("the window, control or item it was recorded on is not there", step);
   }
 
   // For any widget class.
@@ -1947,9 +1984,22 @@ qint32 CShotHandlers::replay(QWidget* root, const QJsonObject& step) {
     }
     const QKeySequence& sequence = QKeySequence::fromString(step["key"].toString(), QKeySequence::PortableText);
     if (sequence.isEmpty()) {
-      return fail("the step names no key: " + compact(step));
+      return fail("the recording does not say which key was pressed", step);
     }
     CShotSynth::key(widget, sequence[0].key(), modsOf(step), step["text"].toString());
+    return 0;
+  }
+  if (nullptr != widget && ("mouseclick" == verb || "mousedclick" == verb)) {
+    if (const qint32 failed = failUnlessUsable(widget, step); 0 != failed) {
+      return failed;
+    }
+    const QPoint& at = pointAt(widget->rect(), step["at"].toArray());
+    if (const qint32 failed = failUnlessReached(widget, at, step); 0 != failed) {
+      return failed;
+    }
+    CShotSynth::arrive(widget, at);
+    CShotSynth::mouse(("mousedclick" == verb) ? QTest::MouseDClick : QTest::MouseClick, widget,
+                      buttonOf(step["button"].toString()), modsOf(step), at);
     return 0;
   }
   if (nullptr != widget && "menu" == verb && !step.contains("row")) {
@@ -1967,7 +2017,30 @@ qint32 CShotHandlers::replay(QWidget* root, const QJsonObject& step) {
 
   const IShotHandler* handler = of(target);
   if (nullptr == handler) {
-    return fail("no handler performs " + verb + " on a " + classOf(target) + ": " + compact(step));
+    return fail("the documentation tool cannot replay this kind of action yet", step);
   }
+  if (!handler->verbs().contains(verb)) {
+    return fail("this kind of action cannot be replayed there", step);
+  }
+  replayedHandlers().insert(handler);
   return handler->replay(step, target);
+}
+
+void CShotHandlers::forgetPresses() { CSurfaceHandler::pressedAt().clear(); }
+
+QStringList CShotHandlers::unreplayed() {
+  QStringList names;
+  const QHash<const QMetaObject*, const IShotHandler*>& byClass = handlers();
+  for (auto it = byClass.constBegin(); it != byClass.constEnd(); ++it) {
+    if (!replayedHandlers().contains(it.value())) {
+      names << QString::fromLatin1(it.key()->className());
+    }
+  }
+  names.sort();
+  return names;
+}
+
+void CShotHandlers::setStepNumber(qsizetype number, qsizetype count) {
+  stepNumber = number;
+  stepCount = count;
 }

@@ -80,8 +80,8 @@ Target-scoped CMake. Nothing is set at directory scope except the MSVC options b
 - **An unknown `QT_QPA_PLATFORMTHEME` still loads the desktop's theme**, so the rest is pinned in
   the application. Generic theme vs none (Qt 6.10.2, Fusion) differs only in
   `SH_DialogButtonBox_ButtonsHaveIcons` and `QIcon::themeName()`:
-  `CQmsStyle::pinThemeIndependentHints()` answers the hint 0 and `CShotEntry::prepare()` clears the
-  icon theme. Any further difference goes into that override, never a per-symptom patch.
+  `CQmsStyle::pinThemeIndependentHints()` answers the hint 0; nothing pins `QIcon::themeName()`. Any
+  further difference goes into that override, never a per-symptom patch.
 - **`QLocale::system()` follows `LANGUAGE`, not only `LANG`.** A desktop-independent run passes
   `--locale`.
 - **Stack smashing at startup after a checkout:** stale objects; `ninja -C build -t clean qmapshack`.
@@ -1111,8 +1111,7 @@ file.
 - `waypoint-icon-resolution-plan.md` — 32 → 96 px waypoint icons, gated on storing `icon_t::focus`
   relative.
 - `doc-image-publish-plan.md` — `shots.py publish`: commit only the pictures a recipe change moved.
-- `QMS-1251-recorder-signals-plan.md` — the recorder; left: the replay queue (#1253).
-  `shots.py selftest` verifies it.
+- `QMS-1251-recorder-signals-plan.md` — the recorder. `shots.py selftest` verifies it.
 
 ### Documentation subsystem (QMS-1217)
 
@@ -1120,8 +1119,8 @@ file.
 not re-derive), §10 what the demo does not do, §11 the sub-tickets.
 
 **One branch, one commit per sub-ticket.** #1245-#1257 are commits on `QMS-1217` (based on `dev`),
-never branches of their own. #1245-#1252 exist: hermetic run, render path, shot file, exposure
-catalog, fixture, `shots.py`, recorder, row buttons. Documentation mode (the writer's session) is
+never branches of their own. #1245-#1253 exist: hermetic run, render path, shot file, exposure
+catalog, fixture, `shots.py`, recorder, row buttons, replay queue. Documentation mode (the writer's session) is
 still only the throwaway demo on `QMS-1217_demo`; statements about it below are requirements. The
 demo's `doc` / `chapter|build` are `shots.py take <page>` / `shots.py replay` here.
 
@@ -1144,7 +1143,7 @@ doc/shots/fixture/shots.ini    the base a page opens on
   `CAppOpts::doc`, empty without the subsystem.
 - **`prepare()` runs before `CMainWindow`** and sets the cache root, the workspace database
   (`CGisListWks::setDatabasePath()`), the colour scheme (`pinColorScheme()`),
-  `CQmsStyle::pinThemeIndependentHints()`, clears the icon theme and registers the bundled DejaVu
+  `CQmsStyle::pinThemeIndependentHints()` and registers the bundled DejaVu
   fonts (offscreen on Windows has no font database). It fails without `--config`, and `main()`
   exits 1.
 - **A doc run skips the splash and `CSingleInstanceProxy`**, which would hand the arguments to a
@@ -1185,10 +1184,19 @@ doc/shots/fixture/shots.ini    the base a page opens on
 
 - **A window's size has one record, the shot's `size`**, applied to the main window or a window
   only; a shot the main window sizes must give one (exposures exempt). `layout` holds `saveState()`,
-  the tab and every splitter's state, never `saveGeometry()`; a `geometry` in it warns and is
-  ignored. `shootOne()` resizes before `restoreState()`, because dock extents are pixels.
-- **The `tab` index and splitter states are applied after every other step**: pages a step opens
-  do not exist while `restoreState()` runs, and `QTabWidget` drops an index past its last page.
+  the tab and every splitter's state, never `saveGeometry()`. `shootOne()` resizes before
+  `restoreState()`, because dock extents are pixels.
+- **A scenario shot must have a `size`: the main window's**, applied before the replay. A window a
+  step opened is rendered at its own size hint.
+- **One scenario per process.** `CShotPage::run()` refuses a scenario shot `--only` matches unless
+  `--shoot-scenario` is given; `shots.py` starts one process per scenario with its own `.ini`. Only
+  the same scenario is replayed again in a process — measured with a details tab: the second replay
+  reuses the tab the first opened (self test).
+- **The `tab` index and splitter states are applied with the leading `layout`, before the steps**:
+  they are taken when the recording starts, so applied last they undo a step (Edit's details tab).
+- **A canvas step waits for `isDrawComplete()` first** (`CCanvasHandler::settle()`): items' pixels
+  are updated by the draw, so a `hit` or click right after a wheel zoom finds nothing (measured: 4 of
+  8 replays of a zoom-then-select scenario failed without it).
 - **A `set` goes through `driveProperty()`**, which checks `indexOfProperty()` (an undeclared name
   becomes a dynamic property) and reads the value back. It is put back after the picture, newest
   first, also on failure.
@@ -1342,14 +1350,37 @@ doc/shots/fixture/shots.ini    the base a page opens on
   geo search rows have none, so their buttons are dropped with a warning.
 - **Not recorded**: a window closed by its title bar, re-docking through a window frame, a main
   window separator drag (reported), typing into a cell editor, touch (reported).
-- **A replay starts from nothing**: the queue (#1253) calls `clear()` first, because steps are not
-  idempotent. `clear()` calls `CCanvas::resetMouse()` and must
-  `sendPostedEvents(nullptr, QEvent::DeferredDelete)` — `CMouseRangeTrk`'s destructor returns the
-  track to `eModeNormal`, and `processEvents()` does not deliver `DeferredDelete`.
+- **A replay starts from nothing**: `CShotReplay::replay()` calls `clear()` first and `shootOne()`
+  after the picture, because steps are not idempotent. `clear()` calls `CCanvas::abortMouse()` (the
+  screen options), `resetMouse()`, `slotStopRange` on a plot `isSelectingRange()` and `slotResetZoom` on one
+  `isZoomed()` (a plot owns the range it started, so the track refuses any other reset; on an idle plot
+  `slotStopRange` resets the track's mode and filter tab, and a details tab replays differently) and must
+  `sendPostedEvents(nullptr, QEvent::DeferredDelete)` —
+  `CMouseRangeTrk`'s destructor returns the track to `eModeNormal`, and `processEvents()` does not
+  deliver `DeferredDelete`.
+- **The deadline ends the process** (`std::_Exit(kDeadlineExitCode)` after the message): a step that
+  never returns keeps every loop below it, `perform()` included, from returning — measured with a
+  click that entered an endless `QEventLoop`: message at 60 s, exit code 1.
+- **The picture is the replay's last step** (`whenReady`): a dialog a step opened is still inside its
+  `exec()` there. Popups and modal dialogs are closed after it, or the loops below cannot return.
+- **The next step is queued before a step runs, and may run inside it only when that step waits in
+  an `exec()`**: `QThread::loopLevel()` above its level at the start and a popup or modal up that
+  was not up when the step started (its own waits inside an open menu run a loop above it too). A popup
+  alone is not enough — measured: `CShotSynth::mouse()` on a menu bar delivers the queued steps
+  before it returns, at the same loop level with the menu up, so they close the menu before the
+  click's own check.
+- **Steps start only once the start state's map is drawn** (`settleStable()`): during a redraw the
+  draw thread holds `CDemItem::mutexActiveDems` and `CDemDraw::getElevationAt()` answers `NOFLOAT`,
+  so the status bar of the first replay lacks the elevation later ones show.
+- **A `trigger` whose slot runs `exec()` is recorded only once that dialog closes** — measured:
+  `CMainWindow::slotSetupUnits()`'s `exec()` returns before the recorder's `triggered` lambda runs.
+  A recording stopped with the dialog open lacks it.
+- **Closing an `exec()`'d menu by recorded input splits a held gesture** on the surface that opened
+  it: `press`, `keypress`, `release` instead of one `click` (measured on the plot's menu).
 - **`settle()` ends every finite running animation**; animations run on wall time. Endless ones are
   left alone.
 
-#### Still demo-only: documentation mode (#1253-#1257)
+#### Still demo-only: documentation mode (#1254-#1257)
 
 - **Two processes.** `qmapshack --doc <repo> --doc-page <ch>` is the launcher: never-shown main window
   (for the singletons), the panel, the shot file and every file operation except writing the base

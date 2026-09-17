@@ -265,8 +265,8 @@ Done: `CGisListWks` (52), `CGisListDB` (14), `CMouseNormal` (10), `CSearchLineEd
 
 **`CShotSelfTest` is what shows it works** (`shots.py selftest`): each case performs input through the
 window system while recording, compares the steps, replays them and compares the state the replay
-leaves with the one the recording left. 88 cases; the replay runs its steps as the scenario queue will, the next
-one scheduled before a step runs, so a step that opens a menu with `exec()` gets its pick delivered from inside it. The contract the vocabulary is held to - finite,
+leaves with the one the recording left. The replay runs through `CShotReplay::perform()`, so a step that opens a
+menu with `exec()` gets its pick delivered from inside it. The contract the vocabulary is held to - finite,
 tested, reported where it ends, and every recording replayed before it is saved (#1257) - is in
 `QMS-1251-recorder-signals-plan.md`.
 
@@ -278,35 +278,35 @@ frame; a main window separator dragged (reported); typing into an item view's ce
 
 ## 5. Replay
 
-Replay is a queue: each step schedules the next from the event loop instead of a `for` loop calling
-them in sequence, and performs it through `IShotHandler::replay()` of the class the step's target
-belongs to - the same handler that recorded it. That is what lets a step enter a modal dialog, a popup menu or
-a nested progress loop while the steps after it still run, and it is what made the exposure catalog
-unnecessary for anything reachable through the UI.
+`CShotReplay::perform()` queues each step from the event loop before it runs and performs it through
+`IShotHandler::replay()` of the class the step's target belongs to - the handler that recorded it. A
+step that opens a modal dialog, a popup menu or a nested progress loop gets the steps after it
+delivered from inside that loop.
 
-- **The picture is taken as the scenario's last step, never after it.** A step that opened a modal
-  dialog is still inside its `exec()` there; by the time `replay()` returns the dialog is gone and
-  the picture would be of the window behind it.
-- **A replay starts from nothing, not from what is on screen.** The queue calls `clear()` before
-  its first step. A step is not idempotent - a second click on a selected range takes the range
-  away - and documentation mode replays a scenario it is already holding: once for a picture, twice
-  more for a rectangle.
-- **`clear()` takes back what a replay leaves**: the screen options, the canvas' mouse delegate
-  (`CCanvas::resetMouse()`, what a right button click does), a track's mouse focus, and the hint a
-  selection puts on the map. It runs before every replay, and after a shot unless the context is
-  holding the state up for a writer.
-- **A recorded click is replayed as a click.** A geographic point reaches the canvas as a move, a
-  press and a release, so whichever mouse delegate the scenario put there answers it - normal,
-  range, edit, ruler - and a mode nobody has taught the framework about replays like every other.
-  The point is approached from `kApproachPixels` away and the canvas repaints before the button goes
-  down, because the hover an overlay needs is computed while the canvas paints.
-- **The arrangement's `tab` index is applied after every other step**, because a page a step adds
-  does not exist while `restoreState()` runs, and `QTabWidget` drops an index past its last page
-  without a word.
-- **Every step waits for a condition**, never for a duration: `CShotWriter::settle()`,
-  `settleStable()`, `CCanvas::waitForDrawContexts()`.
-- **A handler that sets instead of clicking reads the value back**, because `setProperty()` and its
-  kin answer whether the property exists, never whether the value took (`CShotPage::driveProperty()`).
+- **The next step runs inside a running step only when that step waits in an `exec()`**:
+  `QThread::loopLevel()` above its level at the start and a popup or modal up. A synthesized click on
+  a menu bar delivers queued steps before it returns, at the same loop level with the menu up.
+- **The picture is the replay's last step** (`whenReady`): a dialog a step opened is still inside its
+  `exec()` there. Popups and modal dialogs are closed after it.
+- **One scenario per process.** `shots.py` starts one process per scenario with its own `.ini`;
+  `CShotPage::run()` refuses a matched scenario shot without `--shoot-scenario`. Within a process the
+  same scenario is replayed once per shot.
+- **`clear()` runs before every replay and after every scenario shot**: `CCanvas::abortMouse()` (the
+  screen options), `resetMouse()` with `sendPostedEvents(DeferredDelete)`, the selection's map hint,
+  and the mouse focus of every track a step's `hit` names.
+- **The start state comes first**: the leading `layout` (`restoreState()`) and `view`, then
+  `settleStable()` on the main window before the first step - during a redraw the DEM is locked by
+  the draw thread.
+- **The `tab` index and splitter states are applied with the leading `layout`, before the steps**:
+  they were taken when the recording started, and a step may change them (Edit opens a details tab).
+- **A canvas step waits until the map has finished drawing** (`CCanvasHandler::settle()`): an item's
+  pixels are updated by the draw, so a `hit` or click after a zoom finds nothing until it is done.
+- **A recorded click is a press and a release at the point**; the hover before it is a `move` step of
+  its own.
+- **A replay not finished after `kDeadlineMs` (60 s) ends the process** with exit code 1, after naming
+  the step that has not returned.
+- **A handler that sets instead of clicking reads the value back** (`CShotPage::driveProperty()`):
+  `setProperty()` answers whether the property exists, not whether the value took.
 
 ## 6. The writer's loop
 
@@ -779,7 +779,7 @@ ticket of its own, because none of them needs the framework to be reviewable:
 | 6 | **shots.py** (#1250) | `compose`, `replay`, `unused`; the pinned command line and environment; one process per scenario; `compose` injects the fixture paths, `Route/routino\paths` and a scratch copy of `Example.db`; the leak guard inside `replay` - list `~/.QMapShack` and the user's settings before and after, a changed file fails the run; the cached tiles' modification times refreshed before a run, because `CDiskCache` deletes tiles older than `cacheExpiration` every 20 s and an offline run then has holes | `shots.py replay` replays every committed shot, and reports a run that wrote outside the scratch tree |
 | 7 | **Recorder: vocabulary** (#1251) | the input frame (`CShotApplication::notify()`), `IShotHandler` and the handler per class, the step table of §4, `key`, the map, the plot and the icon grid as raw input; `stop()` returns JSON, writing it into the shot file is #1257 | `shots.py selftest` - `CShotSelfTest`, committed with the subsystem - records real input and compares every step, and replays what it records back into the same state |
 | 8 | **Recorder: the painted row buttons** (#1252) | the buttons of all three item delegates - workspace, maps, database - which are painted into the row and are no widgets: a `sigButtonPressed(index, button)` and a `buttonRect()` in `CWksItemDelegate`, `CMapItemDelegate` and `CDBItemDelegate`, and the handler that records them and replays them as input; the menu-owner `objectName` audit. The canvas, `IPlot` and `CIconGrid` are done in #1251 | a case in `CShotSelfTest` per delegate; a recorded scenario that expands a database folder and toggles a row's check state replays |
-| 9 | **Replay** (#1253) | the queue that performs a recording, calling `IShotHandler::replay()` per step - the handlers already carry their own half, what is missing is what drives them: the scheduling that survives a modal loop, `clear()` before and after (`CMouseNormal::clearScreenOption()`, `CCanvas::resetMouse()` and the `DeferredDelete` it needs, public `waitForDrawContexts()`), the `tab`-last rule, and a scenario's steps read out of the shot file | a page with a scenario reproduces byte-identically, three times in one process |
+| 9 | **Replay** (#1253) | `CShotReplay`: the queue that calls `IShotHandler::replay()` per step, `clear()` before and after, the start state and the `tab`-last rule, the deadline, a scenario's steps read out of the shot file, one scenario per process | a page with a scenario reproduces byte-identically, three times in one process |
 | 10 | **Launcher, panel, channel** (#1254) | `shots.py take` and `shots.py publish`; the session and every file operation but writing the base configuration and a recording, `childArguments()`, the panel's buttons and statuses, `setBusy`, `mayClose()`, `endSession()`, the `QLocalServer` named `qms-doc-<pid>` | the panel comes up, starts and replaces a state process, and asks before closing over unpublished pictures; `publish` puts the retaken pictures into `doc/images/` and empties `_work/` |
 | 11 | **State process and F9** (#1257) | one scenario held up, writing a recording into the shot file only after it replays to the state it was recorded in, `Ctrl+Shift+F9`, the keep/throw preview, the region picker, `portableGeometry()`/`namesAPlace()`, `settingsDrift()` | a writer records a scenario and tags a picture without touching a file |
 | 12 | **Writer-facing labels** (#1255) | names, not addresses, in `chooseLivePart()`; `qt_`-prefixed internals not offered | the step list reads in the writer's words |

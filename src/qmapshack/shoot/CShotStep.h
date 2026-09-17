@@ -65,6 +65,9 @@ QJsonObject key(const QString& widget, const QString& text, bool enter);
    @param where  the surface's own units: `lat`/`lon` on the map, `x` or `at` on a plot, `icon` on the icon grid
  */
 QJsonObject surface(const QString& event, const QString& widget, const QJsonObject& where);
+
+/** @return @p step in the writer's words, for a message: "click the row 'Example' in the workspace" */
+QString describe(const QJsonObject& step);
 }  // namespace CShotStep
 
 #endif  // CSHOTSTEP_H

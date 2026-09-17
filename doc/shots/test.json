@@ -1,4 +1,56 @@
 {
+    "scenarios": {
+        "track-screen-option": [
+            {
+                "do": "layout",
+                "state": "AAAA/wAAAAD9AAAAAgAAAAAAAAEVAAACzvwCAAAAA/sAAAAQAGQAbwBjAGsATQBhAHAAcwEAAAA8AAAA6wAAAIIA////+wAAAA4AZABvAGMAawBEAGUAbQEAAAEtAAAA7AAAAIIA////+wAAAA4AZABvAGMAawBQAG8AaQEAAAIfAAAA6wAAAGsA////AAAAAQAAAV4AAALO/AIAAAAE+wAAABoAZABvAGMAawBXAG8AcgBrAHMAcABhAGMAZQEAAAA8AAAAhAAAAHMA////+wAAABgAZABvAGMAawBEAGEAdABhAGIAYQBzAGUBAAAAxgAAAMIAAABgAP////sAAAAOAGQAbwBjAGsAUgB0AGUBAAABjgAAANUAAAC6AP////sAAAAYAGQAbwBjAGsAUgBlAGEAbAB0AGkAbQBlAQAAAmkAAAChAAAAjAD///8AAAIxAAACzgAAAAQAAAAEAAAACAAAAAj8AAAAAQAAAAIAAAABAAAADgB0AG8AbwBsAEIAYQByAQAAAAD/////AAAAAAAAAAA=",
+                "tab": 0
+            },
+            {
+                "do": "view",
+                "lat": 47.537098,
+                "lon": 10.558351,
+                "zoom": 12
+            },
+            {
+                "do": "move",
+                "hit": "Example/trk:Track",
+                "lat": 47.537098,
+                "lon": 10.558395915764205,
+                "widget": "qt_tabwidget_stackedwidget/CCanvas#0"
+            },
+            {
+                "button": "left",
+                "do": "click",
+                "hit": "Example/trk:Track",
+                "lat": 47.537098,
+                "lon": 10.558395915764205,
+                "widget": "qt_tabwidget_stackedwidget/CCanvas#0"
+            }
+        ],
+        "units-dialog": [
+            {
+                "do": "layout",
+                "state": "AAAA/wAAAAD9AAAAAgAAAAAAAAEVAAACzvwCAAAAA/sAAAAQAGQAbwBjAGsATQBhAHAAcwEAAAA8AAAA6wAAAIIA////+wAAAA4AZABvAGMAawBEAGUAbQEAAAEtAAAA7AAAAIIA////+wAAAA4AZABvAGMAawBQAG8AaQEAAAIfAAAA6wAAAGsA////AAAAAQAAAV4AAALO/AIAAAAE+wAAABoAZABvAGMAawBXAG8AcgBrAHMAcABhAGMAZQEAAAA8AAAAhAAAAHMA////+wAAABgAZABvAGMAawBEAGEAdABhAGIAYQBzAGUBAAAAxgAAAMIAAABgAP////sAAAAOAGQAbwBjAGsAUgB0AGUBAAABjgAAANUAAAC6AP////sAAAAYAGQAbwBjAGsAUgBlAGEAbAB0AGkAbQBlAQAAAmkAAAChAAAAjAD///8AAAIxAAACzgAAAAQAAAAEAAAACAAAAAj8AAAAAQAAAAIAAAABAAAADgB0AG8AbwBsAEIAYQByAQAAAAD/////AAAAAAAAAAA=",
+                "tab": 0
+            },
+            {
+                "do": "view",
+                "lat": 47.537098,
+                "lon": 10.558351,
+                "zoom": 12
+            },
+            {
+                "do": "openmenu",
+                "menu": "menuView",
+                "widget": "menubar"
+            },
+            {
+                "action": "actionSetupUnits",
+                "do": "trigger"
+            }
+        ]
+    },
     "shots": [
         {
             "id": "test/menu-project",
@@ -112,6 +164,25 @@
         {
             "exposure": "SetupIconAndName",
             "id": "test/setup-icon-and-name"
+        },
+        {
+            "id": "test/track-screen-option",
+            "scenario": "track-screen-option",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "id": "test/units-dialog",
+            "scenario": "units-dialog",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": "",
+            "window": "CUnitsSetup"
         }
     ]
 }

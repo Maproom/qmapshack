@@ -43,6 +43,8 @@ class IPlot : public QWidget, public INotifyTrk {
   void setSolid(bool yes) { solid = yes; }
 
   bool isZoomed() const;
+  /** @return true between the first click of a range selection and its end */
+  bool isSelectingRange() const { return eMouseClickIdle != mouseClickState; }
 
   void clear();
 

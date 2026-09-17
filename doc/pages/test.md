@@ -46,3 +46,11 @@ A menu is photographed without being opened.
 ![](../images/test/elevation-dialog.png)
 ![](../images/test/input-dialog.png)
 ![](../images/test/setup-icon-and-name.png)
+
+## A recorded scenario
+
+![](../images/test/track-screen-option.png)
+
+## A modal dialog a scenario opened
+
+![](../images/test/units-dialog.png)

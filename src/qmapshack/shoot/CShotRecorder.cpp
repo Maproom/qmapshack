@@ -109,10 +109,7 @@ QJsonArray CShotRecorder::stop() {
     // A press replayed alone leaves the button down: only a gesture whose button is up is a step, its release having
     // gone to a menu the press opened.
     for (auto it = gestures.constBegin(); it != gestures.constEnd(); ++it) {
-      const QString& name = it->step["button"].toString();
-      const Qt::MouseButton button =
-          ("right" == name) ? Qt::RightButton : (("middle" == name) ? Qt::MiddleButton : Qt::LeftButton);
-      if (QGuiApplication::mouseButtons() & button) {
+      if (QGuiApplication::mouseButtons() & CShotHandlers::buttonOf(it->step["button"].toString())) {
         qWarning() << "shoot: a button was still held when the recording stopped; what it was doing is not recorded";
         const QObject* surface = it.key();
         const quint64 pressed = it->frame;
@@ -640,6 +637,28 @@ void CShotRecorder::onMouseFrame(const SShotFrame& frame, bool opened) {
     if (QEvent::MouseButtonRelease == frame.type) {
       return;
     }
+    // A press before the last one's release: that release went elsewhere.
+    pendingClick.reset();
+    const QString& button = CShotHandlers::buttonName(frame.button);
+    // A widget with a handler records what it does itself, a menu its entries; the right button asks for a context
+    // menu, a step once one answers.
+    if (nullptr == receiver || button.isEmpty() || Qt::RightButton == frame.button ||
+        nullptr != CShotHandlers::of(receiver) || nullptr != qobject_cast<QMenu*>(receiver)) {
+      return;
+    }
+    const QJsonArray at(
+        {double(frame.pos.x()) / qMax(1, receiver->width()), double(frame.pos.y()) / qMax(1, receiver->height())});
+    QJsonObject step{{"do", (QEvent::MouseButtonDblClick == frame.type) ? "mousedclick" : "mouseclick"},
+                     {"button", button},
+                     {"at", at}};
+    CShotHandlers::putMods(step, frame.mods);
+    pendingClick =
+        pendingClick_t{frame.number, receiver, receiver, frame.button, receiver->mapToGlobal(frame.pos), step};
+    return;
+  }
+
+  if (QEvent::MouseButtonRelease != frame.type || !pendingClick.has_value() || pendingClick->button != frame.button) {
+    return;
   }
   const pendingClick_t held = *pendingClick;
   pendingClick.reset();

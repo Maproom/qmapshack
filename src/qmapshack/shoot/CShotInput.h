@@ -30,7 +30,8 @@ namespace CShotInput {
 /** @return true for an item view's cell editor, deleted when the edit ends; an index widget is none */
 bool isCellEditor(const QWidget* input);
 
-/** @return what a `key` step types into @p input once all of it is selected; a spin box's without prefix and suffix */
+/** @return what a `key` step types into @p input once all of it is selected; a spin box's without prefix and suffix,
+    an editable combo box's current text */
 QString keyValueOf(const QWidget* input);
 }  // namespace CShotInput
 

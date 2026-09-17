@@ -21,6 +21,8 @@
 
 #include <QJsonArray>
 #include <QJsonObject>
+#include <QPoint>
+#include <QRect>
 #include <QString>
 
 class QVariant;
@@ -32,6 +34,12 @@ class QVariant;
    window pixel. The handler of the target's class replays a step, so verbs mean different things per handler.
  */
 namespace CShotStep {
+/** @return @p pos as a fraction of @p rect, the unit a step records a position in */
+QJsonArray fractionIn(const QRect& rect, const QPoint& pos);
+
+/** @return the point of @p rect that the fraction @p at names; the inverse of fractionIn() */
+QPoint pointAt(const QRect& rect, const QJsonArray& at);
+
 /** @return @p widget clicked */
 QJsonObject click(const QString& widget);
 
@@ -65,6 +73,9 @@ QJsonObject key(const QString& widget, const QString& text, bool enter);
    @param where  the surface's own units: `lat`/`lon` on the map, `x` or `at` on a plot, `icon` on the icon grid
  */
 QJsonObject surface(const QString& event, const QString& widget, const QJsonObject& where);
+
+/** @return @p step in the writer's words, for a message: "click the row 'Example' in the workspace" */
+QString describe(const QJsonObject& step);
 }  // namespace CShotStep
 
 #endif  // CSHOTSTEP_H

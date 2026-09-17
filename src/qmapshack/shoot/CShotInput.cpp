@@ -44,6 +44,9 @@ QString CShotInput::keyValueOf(const QWidget* input) {
   if (const QDoubleSpinBox* spin = qobject_cast<const QDoubleSpinBox*>(input); nullptr != spin) {
     return spin->cleanText();
   }
+  if (const QComboBox* combo = qobject_cast<const QComboBox*>(input); nullptr != combo) {
+    return combo->currentText();
+  }
   if (const QAbstractSpinBox* spin = qobject_cast<const QAbstractSpinBox*>(input); nullptr != spin) {
     return spin->text();
   }

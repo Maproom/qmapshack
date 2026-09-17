@@ -1125,6 +1125,8 @@ if(QMS_DOC_MODE)
         shoot/CShotRecorder.h
         shoot/CShotRegistry.cpp
         shoot/CShotRegistry.h
+        shoot/CShotReplay.cpp
+        shoot/CShotReplay.h
         shoot/CShotRunner.cpp
         shoot/CShotRunner.h
         shoot/CShotSelfTest.cpp

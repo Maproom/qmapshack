@@ -47,18 +47,38 @@ QJsonObject viewOf(const CCanvas* canvas);
  */
 QJsonObject layoutOf(const CMainWindow& main);
 
+/** @return false when the main window refuses the `layout` step's saveState() */
+bool applyLayout(CMainWindow& main, const QJsonObject& layout);
+
+/**
+   @brief Apply a `layout` step's tab index and splitter states.
+
+   Before the steps: they are taken when the recording starts, so applied after the steps they undo one. An index past a
+   tab widget's last page is dropped, so the arrangement names only what exists before the steps.
+
+   @return the failures
+ */
+qint32 applyArrangement(CMainWindow& main, const QJsonObject& layout);
+
 /** @return false when the canvas did not take @p view */
 bool applyView(CCanvas* canvas, const QJsonObject& view);
 
-/** @return the failures of one shot */
-qint32 shootOne(const QJsonObject& shot, CShotContext& ctx);
+/**
+   @brief Take one shot, in its scenario when it names one.
+
+   @param scenarios  the shot file's recordings by name
+   @return the failures
+ */
+qint32 shootOne(const QJsonObject& shot, CShotContext& ctx, const QJsonObject& scenarios = QJsonObject());
 
 /**
    @brief Take the shots of a shot file.
 
    @param only      an id glob; empty takes every shot
-   @param scenario  the shots of this scenario, kBaseScenario for those of none, empty for all
-   @return the failures; a file that cannot be read or a filter that matches nothing is one
+   @param scenario  the shots of this scenario, kBaseScenario for those of none, empty for all when none of the
+                    shots @p only matches is in a scenario
+   @return the failures; a file that cannot be read, a filter that matches nothing, or an empty @p scenario matching
+           a shot in a scenario is one
  */
 qint32 run(const QString& file, CShotContext& ctx, const QString& only, const QString& scenario);
 }  // namespace CShotPage

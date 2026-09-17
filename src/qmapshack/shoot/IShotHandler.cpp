@@ -40,7 +40,5 @@ QJsonObject IShotHandler::menuAt(QWidget* target, const QPoint& pos, const CShot
   if (!address.has_value()) {
     return QJsonObject();
   }
-  // A fraction, so it survives another widget size.
-  const QJsonArray at({double(pos.x()) / qMax(1, target->width()), double(pos.y()) / qMax(1, target->height())});
-  return CShotStep::menuAt(*address, at);
+  return CShotStep::menuAt(*address, CShotStep::fractionIn(target->rect(), pos));
 }

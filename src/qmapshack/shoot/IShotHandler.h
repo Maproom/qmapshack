@@ -44,6 +44,9 @@ class IShotHandler {
   /** @return the class handled */
   virtual const QMetaObject* handles() const = 0;
 
+  /** @return the step verbs replay() performs; CShotHandlers::replay() refuses any other */
+  virtual QSet<QString> verbs() const = 0;
+
   /**
      @brief Connect @p object's user signals to @p recorder, once per object.
 

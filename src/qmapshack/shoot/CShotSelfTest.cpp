@@ -31,10 +31,11 @@
 #include <QDialogButtonBox>
 #include <QDockWidget>
 #include <QDoubleSpinBox>
-#include <QEventLoop>
 #include <QGridLayout>
 #include <QGroupBox>
+#include <QGuiApplication>
 #include <QHeaderView>
+#include <QImage>
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
@@ -56,7 +57,9 @@
 #include <QStyleOptionViewItem>
 #include <QTabBar>
 #include <QTabWidget>
+#include <QTemporaryDir>
 #include <QTimer>
+#include <QToolBar>
 #include <QToolButton>
 #include <QTreeWidget>
 #include <QVBoxLayout>
@@ -96,8 +99,11 @@
 #include "shoot/CShotHandlers.h"
 #include "shoot/CShotPage.h"
 #include "shoot/CShotRecorder.h"
+#include "shoot/CShotReplay.h"
+#include "shoot/CShotStep.h"
 #include "shoot/CShotSynth.h"
 #include "shoot/CShotWarnings.h"
+#include "shoot/CShotWriter.h"
 #include "widgets/CIconGrid.h"
 
 namespace {
@@ -153,10 +159,10 @@ struct case_t {
   std::function<void()> reset = []() {}; /**< restores the starting state */
   std::function<void()> perform;         /**< the input */
   std::function<QString()> state = []() { return QString(); };
-  bool replays = true;            /**< false where replaying needs the scenario queue */
-  bool closesMenus = false;       /**< close exec()'d menus, or the case blocks */
-  bool replayClosesMenus = false; /**< the same, for the replay only */
-  QString warns;                  /**< a warning the recording must give */
+  bool replays = true;      /**< false where replaying needs the scenario queue */
+  bool closesMenus = false; /**< close exec()'d menus, or the case blocks */
+  QString warns;            /**< a warning the recording must give; without one, any `shoot:` warning fails */
+  QString expect;           /**< the state the input must give; empty when only the replay's must equal it */
 };
 
 struct panel_t {
@@ -186,6 +192,8 @@ struct panel_t {
   QAction* shortcut = nullptr;
   QPushButton* modal = nullptr;
   QLabel* label = nullptr;
+  QLabel* link = nullptr;
+  QLabel* menuLabel = nullptr;
   QPushButton* execMenu = nullptr;
   QLineEdit* completed = nullptr;
   QListWidget* longList = nullptr;
@@ -297,6 +305,15 @@ void buildPanel(panel_t& p, QWidget* main, CGisItemTrk* trk) {
   });
 
   p.label = static_cast<QLabel*>(add(new QLabel("label"), "probeLabel"));
+  // A link in a label, as the details dialogs and the map's item popups have them.
+  p.link = static_cast<QLabel*>(add(new QLabel("<a href='probe'>link</a>"), "probeLink"));
+  p.link->setAlignment(Qt::AlignCenter);
+  QObject::connect(p.link, &QLabel::linkActivated, p.window, [&p]() { p.counts["link"]++; });
+  p.menuLabel = static_cast<QLabel*>(add(new QLabel("context menu"), "probeMenuLabel"));
+  p.menuLabel->setContextMenuPolicy(Qt::ActionsContextMenu);
+  QAction* contextEntry = new QAction("context entry", p.menuLabel);
+  contextEntry->setObjectName("probeContextEntry");
+  p.menuLabel->addAction(contextEntry);
 
   // A menu decided by exec()'s return value, with no slot on the entry, like the waypoint icon and colour menus.
   p.execMenu = static_cast<QPushButton*>(add(new QPushButton("exec menu"), "probeExecMenu"));
@@ -324,6 +341,7 @@ void buildPanel(panel_t& p, QWidget* main, CGisItemTrk* trk) {
     p.longList->addItem(QString("line %1").arg(i));
   }
   p.longList->setFixedHeight(120);
+  p.longList->setSelectionMode(QAbstractItemView::ExtendedSelection);
 
   p.doubleSpin = static_cast<QDoubleSpinBox*>(add(new QDoubleSpinBox, "probeDoubleSpin"));
   p.doubleSpin->setDecimals(1);
@@ -622,48 +640,10 @@ qint32 CShotSelfTest::run(CShotContext& ctx) {
       verdict(c.name, false, "the recording's start view could not be applied");
       return;
     }
-    if (c.closesMenus || c.replayClosesMenus) {
+    if (c.closesMenus) {
       menuCloser.start();
     }
-    // Like the scenario queue: the next step is scheduled before a step runs, as a step that exec()s a menu returns
-    // only once a later step picked from it. A step running outside such a loop is let finish first.
-    qint32 replayFailures = 0;
-    qsizetype next = 0;
-    qint32 running = 0;
-    QEventLoop loop;
-    std::function<void()> pump = [&]() {
-      if (running > 0 && nullptr == QApplication::activePopupWidget() && nullptr == QApplication::activeModalWidget()) {
-        QTimer::singleShot(10, &loop, pump);
-        return;
-      }
-      if (next >= steps.size()) {
-        if (0 == running) {
-          loop.quit();
-        } else {
-          QTimer::singleShot(10, &loop, pump);
-        }
-        return;
-      }
-      const QJsonObject step = steps.at(next++);
-      QTimer::singleShot(60, &loop, pump);
-      running++;
-      replayFailures += CShotHandlers::replay(main, step);
-      running--;
-    };
-    QTimer deadline;
-    deadline.setSingleShot(true);
-    QObject::connect(&deadline, &QTimer::timeout, &loop, [&]() {
-      qWarning() << "shoot: the replay did not finish - a step opened something no later step closed";
-      replayFailures++;
-      next = steps.size();
-      while (QWidget* popup = QApplication::activePopupWidget()) {
-        popup->close();
-      }
-      loop.quit();
-    });
-    deadline.start(20000);
-    QTimer::singleShot(0, &loop, pump);
-    loop.exec();
+    const qint32 replayFailures = CShotReplay::perform(main, steps);
     settle(120);
     menuCloser.stop();
     const QString replayed = c.state();
@@ -829,10 +809,60 @@ qint32 CShotSelfTest::run(CShotContext& ctx) {
          .perform = [&]() { click(p.modal, center(p.modal)); },
          .replays = false});
 
-  check({"a press on a label no handler covers records nothing",
-         {},
-         []() {},
-         [&]() { click(p.label, center(p.label)); }});
+  check({.name = "a click on a label no handler covers is a click there",
+         .wanted = {R"({"button":"left","do":"mouseclick","widget":"probeLabel"})"},
+         .perform = [&]() { click(p.label, center(p.label)); }});
+
+  check({.name = "a click on a label's link opens it",
+         .wanted = {R"({"button":"left","do":"mouseclick","widget":"probeLink"})"},
+         .reset = [&p]() { zeroCounts(p); },
+         .perform = [&]() { click(p.link, center(p.link)); },
+         .state = [&p]() { return countsOf(p, {"link"}); },
+         .expect = "link=1"});
+
+  check({.name = "a double click on a label is one step",
+         .wanted = {R"({"button":"left","do":"mousedclick","widget":"probeLabel"})"},
+         .perform = [&]() {
+           CShotSynth::mouse(QTest::MouseDClick, p.label, Qt::LeftButton, Qt::NoModifier, center(p.label));
+         }});
+
+  check({.name = "a drag on a label is no step and says so",
+         .perform =
+             [&]() {
+               const QPoint& from = center(p.label) - QPoint(20, 0);
+               CShotSynth::mouse(QTest::MousePress, p.label, Qt::LeftButton, Qt::NoModifier, from);
+               CShotSynth::move(p.label, from + QPoint(20, 0));
+               CShotSynth::move(p.label, from + QPoint(40, 0));
+               CShotSynth::mouse(QTest::MouseRelease, p.label, Qt::LeftButton, Qt::NoModifier, from + QPoint(40, 0));
+             },
+         .replays = false,
+         .warns = "dragging on a QLabel is not recorded"});
+
+  check({.name = "Ctrl adds a row to the selection",
+         .wanted = {R"({"do":"select","row":"1:0","widget":"probeLong"})",
+                    R"({"do":"select","mods":["ctrl"],"row":"3:0","widget":"probeLong"})"},
+         .reset =
+             [&p]() {
+               p.longList->scrollToTop();
+               p.longList->clearSelection();
+               p.longList->setCurrentRow(0, QItemSelectionModel::NoUpdate);
+             },
+         .perform =
+             [&]() {
+               click(p.longList->viewport(), p.longList->visualItemRect(p.longList->item(1)).center());
+               CShotSynth::mouse(QTest::MouseClick, p.longList->viewport(), Qt::LeftButton, Qt::ControlModifier,
+                                 p.longList->visualItemRect(p.longList->item(3)).center());
+             },
+         .state =
+             [&p]() {
+               QStringList rows;
+               for (const QListWidgetItem* item : p.longList->selectedItems()) {
+                 rows << QString::number(p.longList->row(item));
+               }
+               rows.sort();
+               return rows.join(' ');
+             },
+         .expect = "1 3"});
 
   check({"a context menu request no menu answers is no step",
          {},
@@ -887,14 +917,16 @@ qint32 CShotSelfTest::run(CShotContext& ctx) {
          },
          [&p]() { return QString("%1 %2").arg(p.tabs->count()).arg(p.tabs->tabText(p.tabs->currentIndex())); }});
 
-  check({"a header click sorts",
-         {R"({"do":"click","section":0,"widget":"probeTree/QHeaderView#0"})"},
-         [&p]() { p.tree->sortByColumn(0, Qt::AscendingOrder); },
-         [&]() {
-           QHeaderView* header = p.tree->header();
-           click(header->viewport(), QPoint(header->sectionViewportPosition(0) + 10, header->height() / 2));
-         },
-         [&p]() { return QString::number(int(p.tree->header()->sortIndicatorOrder())); }});
+  check({.name = "a header click sorts",
+         .wanted = {R"({"do":"click","section":0,"widget":"probeTree/QHeaderView#0"})"},
+         .reset = [&p]() { p.tree->sortByColumn(0, Qt::AscendingOrder); },
+         .perform =
+             [&]() {
+               QHeaderView* header = p.tree->header();
+               click(header->viewport(), QPoint(header->sectionViewportPosition(0) + 10, header->height() / 2));
+             },
+         .state = [&p]() { return QString::number(int(p.tree->header()->sortIndicatorOrder())); },
+         .expect = QString::number(int(Qt::DescendingOrder))});
 
   check({"a double click on a row is one step, and expands it",
          {R"({"do":"dclick","row":"0:0","widget":"probeTree"})", R"({"do":"expand","row":"0:0","widget":"probeTree"})"},
@@ -978,14 +1010,17 @@ qint32 CShotSelfTest::run(CShotContext& ctx) {
     }
   };
 
-  check({"Enter in a dialog's line edit is the typing, not the default button",
-         {R"({"do":"key","enter":true,"text":"x","widget":"probeDialogEdit"})"},
-         showDialog,
-         [&p]() {
-           CShotSynth::type(p.dialogEdit, "x");
-           CShotSynth::key(p.dialogEdit, Qt::Key_Return);
-         },
-         [&p]() { return countsOf(p, {"accepted", "rejected"}) + " " + QString::number(p.dialog->isVisible()); }});
+  check(
+      {.name = "Enter in a dialog's line edit is one typing step, and accepts through the default button",
+       .wanted = {R"({"do":"key","enter":true,"text":"x","widget":"probeDialogEdit"})"},
+       .reset = showDialog,
+       .perform =
+           [&p]() {
+             CShotSynth::type(p.dialogEdit, "x");
+             CShotSynth::key(p.dialogEdit, Qt::Key_Return);
+           },
+       .state = [&p]() { return countsOf(p, {"accepted", "rejected"}) + " " + QString::number(p.dialog->isVisible()); },
+       .expect = "accepted=1 rejected=0 0"});
 
   check({"Escape in a dialog is a key press",
          {R"({"do":"keypress","key":"Esc","widget":"probeDialogEdit"})"},
@@ -1365,14 +1400,11 @@ qint32 CShotSelfTest::run(CShotContext& ctx) {
     QTest::qWait(250);
   };
 
-  check({"the map's address is its place, not the key it names itself with",
-         {},
-         []() {},
-         []() {},
-         [main, canvas]() {
-           const QString& address = CShotAddress::addressOf(main, canvas).value_or(QString());
-           return QString("%1 %2").arg(address.contains("key_")).arg(CShotAddress::resolve(main, address) == canvas);
-         }});
+  {
+    const QString& address = CShotAddress::addressOf(main, canvas).value_or(QString());
+    verdict("the map's address is its place, not the key it names itself with",
+            !address.isEmpty() && !address.contains("key_") && CShotAddress::resolve(main, address) == canvas, address);
+  }
 
   check({"a click on the map is the hover before it and the click",
          {R"({"do":"move","widget":"%MAP%"})", R"({"button":"left","do":"click","widget":"%MAP%"})"},
@@ -1532,7 +1564,11 @@ qint32 CShotSelfTest::run(CShotContext& ctx) {
          [canvas]() {
            const QToolButton* range = canvas->findChild<QToolButton*>("toolRange");
            return QString("screen options shown: %1").arg(nullptr != range && range->isVisible());
-         }});
+         },
+         true,
+         false,
+         QString(),
+         "screen options shown: 0"});
 
   check({.name = "a press still held when the recording stops is no step",
          .wanted = {R"({"do":"move","widget":"%MAP%"})"},
@@ -1543,7 +1579,7 @@ qint32 CShotSelfTest::run(CShotContext& ctx) {
                hover(at + QPoint(0, -15));
                hover(at);
                CShotSynth::mouse(QTest::MousePress, canvas, Qt::LeftButton, Qt::NoModifier, at);
-               // The recording stops with the button down; the next case's reset releases it.
+               // The recording stops with the button down; the timer releases it afterwards.
                QTimer::singleShot(400, canvas, [canvas, at]() {
                  CShotSynth::mouse(QTest::MouseRelease, canvas, Qt::LeftButton, Qt::NoModifier, at);
                });
@@ -1730,7 +1766,9 @@ qint32 CShotSelfTest::run(CShotContext& ctx) {
          plotState});
 
   check({"after a right click opened the plot's menu, the plot is still recorded",
-         {R"({"do":"move","widget":"probePlot"})", R"({"button":"right","do":"click","widget":"probePlot"})",
+         {R"({"do":"move","widget":"probePlot"})", R"({"button":"right","do":"press","widget":"probePlot"})",
+          R"({"do":"keypress","key":"Esc","widget":"probePlot/QMenu#0"})",
+          R"({"button":"right","do":"release","dx":0,"dy":0,"widget":"probePlot"})",
           R"({"button":"left","do":"click","widget":"probePlot"})"},
          resetPlot,
          [&]() {
@@ -1742,7 +1780,7 @@ qint32 CShotSelfTest::run(CShotContext& ctx) {
              CShotSynth::mouse(QTest::MouseRelease, p.plot, Qt::RightButton, Qt::NoModifier, at);
              QTimer::singleShot(150, p.plot, []() {
                if (QMenu* menu = qobject_cast<QMenu*>(QApplication::activePopupWidget()); nullptr != menu) {
-                 menu->close();
+                 QTest::keyClick(menu->windowHandle(), Qt::Key_Escape);
                }
              });
            });
@@ -1750,10 +1788,7 @@ qint32 CShotSelfTest::run(CShotContext& ctx) {
            settle(400);
            click(p.plot, at);
          },
-         [&menus, plotState]() { return plotState() + " menus=" + QString::number(menus.shown); },
-         true,
-         false,
-         true});
+         [&menus, plotState]() { return plotState() + " menus=" + QString::number(menus.shown); }});
 
   check({"a wheel on the plot with Alt held zooms one axis, and replays so",
          {R"({"do":"move","widget":"probePlot"})",
@@ -2165,6 +2200,126 @@ qint32 CShotSelfTest::run(CShotContext& ctx) {
                   .arg(memories)
                   .arg(actionNames.size())
                   .arg(QStringList(actionNames.begin(), actionNames.end()).join(' ')));
+    }
+  }
+
+  // ---- a scenario replayed twice in one process
+
+  {
+    const QString name = "a scenario that opens a details tab replays the same the second time";
+    resetMap();
+    project->setExpanded(true);
+    wks->scrollToItem(trk);
+    settle(200);
+
+    recorder.start();
+    QTimer::singleShot(300, wks, []() {
+      QMenu* menu = qobject_cast<QMenu*>(QApplication::activePopupWidget());
+      const QList<QAction*>& entries = (nullptr == menu) ? QList<QAction*>() : menu->actions();
+      for (QAction* entry : entries) {
+        if ("actionEditDetails" == entry->objectName()) {
+          const QPoint& at = menu->actionGeometry(entry).center();
+          CShotSynth::arrive(menu, at);
+          CShotSynth::mouse(QTest::MouseClick, menu, Qt::LeftButton, Qt::NoModifier, at);
+          return;
+        }
+      }
+      if (nullptr != menu) {
+        menu->close();
+      }
+    });
+    click(wks->viewport(), wks->visualItemRect(trk).center(), Qt::RightButton);
+    settle(500);
+    const QJsonArray& details = recorder.stop();
+    qDebug().noquote() << "shoot: case" << name << "recorded" << QJsonDocument(details).toJson(QJsonDocument::Compact);
+
+    QTabWidget* tabs = nullptr;
+    for (QWidget* w = canvas->parentWidget(); nullptr != w && nullptr == tabs; w = w->parentWidget()) {
+      tabs = qobject_cast<QTabWidget*>(w);
+    }
+    // The recording opened the tab; the replays must find the window without it.
+    const auto closeDetails = [tabs]() {
+      while (nullptr != tabs && tabs->count() > 1) {
+        emit tabs->tabCloseRequested(tabs->count() - 1);
+        settle(100);
+      }
+    };
+    closeDetails();
+    const qint32 before = (nullptr == tabs) ? -1 : tabs->count();
+    const auto pictureInto = [main, tabs](QImage& image, qint32& tabCount) {
+      return [main, tabs, &image, &tabCount]() -> qint32 {
+        tabCount = (nullptr == tabs) ? -1 : tabs->count();
+        image = CShotWriter::render(main, main->size());
+        return image.isNull() ? 1 : 0;
+      };
+    };
+    QImage first;
+    QImage second;
+    qint32 firstTabs = 0;
+    qint32 secondTabs = 0;
+    qint32 replayFailures = CShotReplay::replay(details, ctx, pictureInto(first, firstTabs));
+    CShotReplay::clear(details, ctx);
+    replayFailures += CShotReplay::replay(details, ctx, pictureInto(second, secondTabs));
+    CShotReplay::clear(details, ctx);
+    closeDetails();
+
+    verdict(
+        name,
+        0 == replayFailures && !first.isNull() && first == second && before + 1 == firstTabs && firstTabs == secondTabs,
+        QString("%1 replay failure(s), %2 tabs before, %3 then %4, pictures %5")
+            .arg(replayFailures)
+            .arg(before)
+            .arg(firstTabs)
+            .arg(secondTabs)
+            .arg(first == second ? "equal" : "differ"));
+  }
+
+  {
+    const QString name = "a range started in a plot is undone before the scenario replays again";
+    resetMap();
+    trk->edit();
+    settle(500);
+    CPlotProfile* plot = nullptr;
+    const QList<CPlotProfile*>& plots = main->findChildren<CPlotProfile*>();
+    for (CPlotProfile* candidate : plots) {
+      if (candidate->isVisible() && NOFLOAT != candidate->xValueAt(center(candidate))) {
+        plot = candidate;
+        break;
+      }
+    }
+    if (nullptr == plot) {
+      verdict(name, false, "the details tab shows no profile");
+    } else {
+      recorder.start();
+      CShotSynth::move(plot, center(plot));
+      click(plot, center(plot));
+      settle(200);
+      const QJsonArray& steps = recorder.stop();
+      qDebug().noquote() << "shoot: case" << name << "recorded" << QJsonDocument(steps).toJson(QJsonDocument::Compact);
+      const auto rangeState = [plot, trk]() {
+        return QString("%1/%2").arg(plot->isSelectingRange()).arg(int(trk->getRangState()));
+      };
+      const QString recorded = rangeState();
+      qint32 replayFailures = CShotReplay::replay(steps, ctx, {});
+      const QString firstState = rangeState();
+      replayFailures += CShotReplay::replay(steps, ctx, {});
+      const QString secondState = rangeState();
+      CShotReplay::clear(steps, ctx);
+      const QString cleared = rangeState();
+      verdict(name,
+              0 == replayFailures && recorded.startsWith("1/") && recorded == firstState && firstState == secondState &&
+                  !plot->isSelectingRange(),
+              QString("%1 replay failure(s), recorded %2, replays %3 then %4, cleared %5")
+                  .arg(replayFailures)
+                  .arg(recorded, firstState, secondState, cleared));
+    }
+    QTabWidget* tabs = nullptr;
+    for (QWidget* w = canvas->parentWidget(); nullptr != w && nullptr == tabs; w = w->parentWidget()) {
+      tabs = qobject_cast<QTabWidget*>(w);
+    }
+    while (nullptr != tabs && tabs->count() > 1) {
+      emit tabs->tabCloseRequested(tabs->count() - 1);
+      settle(100);
     }
   }
 

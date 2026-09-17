@@ -2,7 +2,7 @@
 #         QMapShack for Windows dependencies                #
 #############################################################
 This installation of QMapShack for Windows (short: QMS) 
-has been build with Visual Studio 2017 as 64bit application.
+has been build with Visual Studio 2022 as 64bit application.
 
 If you want to build QMS on your own, have a look at
 https://github.com/Maproom/qmapshack/wiki/BuildWindowsVisualStudio
@@ -13,52 +13,62 @@ Dependencies
 ============
 QMS depends on the 3rd party software listed below:
 
-1.) Microsoft Visual C++ 2017 Redistributable Package
-  The installer vcredist_x64.exe (ca 7MB size) as downloaded from
-    https://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads
-  is already contained in the QMS Installer package and will be executed if selected by the user.
+ 1.) Microsoft Visual C++ 2022 Redistributable Package
+     The installer vc_redist.x64.exe (approx. 18 MB size) as downloaded from
+     https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist
+     is already contained in the QMS Installer package and will be executed if selected by the user.
 
-  Note: Those runtime libraries may already be contained in Windows 10 installations.
+     Note: Those runtime libraries may already be contained in Windows 10/11 installations.
 
-2.) Qt5 runtime libraries
-  The Qt libraries are deployed in the QMS installation directory.
-  Qt is used according the GPLv3 open source License
-    See https://www.qt.io/download-open-source and https://www.gnu.org/licenses/gpl-3.0.html
+ 2.) Qt6 runtime libraries
+     The Qt libraries are deployed in the QMS installation directory.
+     Qt is used according the GPLv3 open source License
+     See https://www.qt.io/download-open-sourcei
+     and https://www.gnu.org/licenses/gpl-3.0.html
 
-3.) The GDAL library, http://www.gdal.org/
+ 3.) GDAL library, source at https://gdal.org
+     MSVC 2022 library, header and binary precompiled files are contained
+     in GDAL release available at https://www.gisinternals.com/release.php
 
-4.) The PROJ library http://trac.osgeo.org/proj/
+ 4.) PROJ library and data, source at https://proj.org
+     MSVC 2022 library, header and precompiled binary files are contained
+     in GDAL release available at https://www.gisinternals.com/release.php
 
-5.) Icons for the Windows Start Menu ==> We should get rid of them and use own icons
-    kfm_home.ico has been created from the Nuvola 1.0 icon set (http://www.icon-king.com/projects/nuvola/)
-    gdalicon.ico has been converted from gdalicon.png from the GDAL package
+ 5.) Icon for GDAL shell in the Windows start menu
+     GDAL package's gdalicon.png has been converted to gdalicon.ico.
 
-6.) The routino library
-  Source code is available http://www.routino.org/
-  This QMapShack installation uses a routino library which is precompiled with mingw64 to reduce porting efforts
+ 6.) Routino library and translations, source at https://www.routino.org
+     This QMapShack installation uses a Routino library
+     which was precompiled with mingw-w64 to reduce porting efforts.
 
-7.) MinGW64,  http://mingw-w64.org
-  The mingw64 compiler is used to compile the routino library.
-  This resulting library depends from mingw64 runtime libraries such as libwinpthread-1.dll, libz-1.dll
-  which are also included in this installation
+ 7.) mingw-w64 compiler, https://www.mingw-w64.org
+     The mingw-w64 compiler is used to compile the Routino library and build the Routino binaries.
+     The resulting binaries depend on mingw-w64 runtime libraries libwinpthread-1.dll and zlib1.dll
+     which are also included in this installation.
 
-8.) MariaDB, https://mariadb.com/
-  For MySql/MariaDB support, the Qt mysql plugin needs libmysql.dll.
-  This DLL can be downloaded as part of the precompiled MariaDB binaries at https://downloads.mariadb.org/mariadb/+releases/
-  For the current QMS binary distribution, libmysql.dll is taken from mariadb version 10.1.34: 
-  https://downloads.mariadb.org/mariadb/10.1.34 --> mariadb-10.1.34-winx64.zip
+ 8.) MySql/MariaDB
+     For MySql/MariaDB support, Qt's sqldrivers plugin qsqlmysql.dll
+     as well as dependent runtime library libmysql.dll are required.
+     As Qt does not provide these binaries itself, a MSVC 2022 precompiled driver bundle suitable
+     to Qt version can be downloaded at https://github.com/thecodemonkey86/qt_mysql_driver/releases
+     and is included in this installation.
 
-9.) libjpeg
-  The libjpeg.lib and header files are needed to compile the helper program qmt_map2jnx.exe
-  The source code can be downloaded as jpegsr9c.zip from http://www.ijg.org/
+ 9.) libjpeg, source at https://www.ijg.org
+     The libjpeg.lib and header files are needed to compile the helper program qmt_map2jnx.exe.
+     MSVC 2022 library, header and precompiled binary files are contained
+     in GDAL release available at https://www.gisinternals.com/release.php
 
-10.) zlib
-  zlib is used to build cURL and GDAL with support for additional formats
-  The source code can be downloaded from https://zlib.net/
+10.) zlib, source at https://zlib.net
+     zlib is used to build cURL and GDAL with support for additional formats.
+     MSVC 2022 library, header and precompiled binary files are contained
+     in GDAL release available at https://www.gisinternals.com/release.php
 
-11.) cURL
-  cURL is used to build GDAL with support for additional formats
-  The source code can be downloaded from https://curl.haxx.se/
+11.) cURL, source at https://curl.haxx.se
+     cURL is used to build GDAL with support for additional formats.
+     MSVC 2022 library, header and precompiled binary files are contained
+     in GDAL release available at https://www.gisinternals.com/release.php
 
-12.) sqlite
-  The source code can be downloaded from https://www.sqlite.org/download.html
+12.) sqlite, source at https://www.sqlite.org/download.html
+     MSVC 2022 library, header and precompiled binary files are contained
+     in GDAL release available at https://www.gisinternals.com/release.php
+

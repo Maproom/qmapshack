@@ -1108,9 +1108,21 @@ if(QMS_DOC_MODE)
         shoot/CShotApplication.h
         shoot/CShotContext.cpp
         shoot/CShotContext.h
+        shoot/CShotDocLauncher.cpp
+        shoot/CShotDocLauncher.h
+        shoot/CShotDocMode.cpp
+        shoot/CShotDocMode.h
+        shoot/CShotDocPanel.cpp
+        shoot/CShotDocPanel.h
+        shoot/CShotDocSelfTest.cpp
+        shoot/CShotDocSelfTest.h
+        shoot/CShotDocState.cpp
+        shoot/CShotDocState.h
         shoot/CShotEntry.cpp
         shoot/CShotEntry.h
         shoot/CShotExposures.cpp
+        shoot/CShotFiles.cpp
+        shoot/CShotFiles.h
         shoot/CShotFixture.cpp
         shoot/CShotFixture.h
         shoot/CShotHandlers.cpp
@@ -1131,6 +1143,8 @@ if(QMS_DOC_MODE)
         shoot/CShotRunner.h
         shoot/CShotSelfTest.cpp
         shoot/CShotSelfTest.h
+        shoot/CShotsJob.cpp
+        shoot/CShotsJob.h
         shoot/CShotStep.cpp
         shoot/CShotStep.h
         shoot/CShotSynth.cpp

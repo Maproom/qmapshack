@@ -10,3 +10,4 @@ CMakeUserPresets.json
 **/_cache/
 # Where shots.py replay renders; only publishing writes doc/images.
 doc/images/_check/
+doc/images/_work/

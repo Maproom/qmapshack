@@ -27,6 +27,7 @@
 #include <QWidget>
 
 #include "shoot/CShotContext.h"
+#include "shoot/CShotDocSelfTest.h"
 #include "shoot/CShotFixture.h"
 #include "shoot/CShotPage.h"
 #include "shoot/CShotSelfTest.h"
@@ -67,6 +68,10 @@ void CShotRunner::slotRun() {
       failures += CShotSelfTest::run(ctx);
     } else {
       qWarning() << "shoot: the self test does not run: its fixture did not load";
+    }
+    // Needs no fixture.
+    if (selfTest) {
+      failures += CShotDocSelfTest::run();
     }
   }
 

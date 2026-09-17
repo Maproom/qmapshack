@@ -121,7 +121,9 @@ int main(int argc, char** argv) {
   }
 
   CMainWindow w;
-  w.show();
+  if (CShotEntry::showsMainWindow(*qlOpts)) {
+    w.show();
+  }
 
   if (const std::optional<qint32>& code = CShotEntry::run(*qlOpts, w); code.has_value()) {
     return code.value();

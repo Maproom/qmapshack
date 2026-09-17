@@ -1,6 +1,7 @@
 # PLAN — publish only the pictures that really changed
 
-**Status:** implemented in the demo; on `QMS-1217` it comes with the panel (#1254). The writer decides;
+**Status:** on `QMS-1217` with #1254: `shots.py publish [--report]`, the panel's Publish, Revert and the
+close question. The writer decides;
 the tool compares nothing.
 
 **Scope:** `doc/tools/shots.py` (a `publish` command), `src/qmapshack/shoot/CShotDocPanel.cpp`
@@ -82,7 +83,7 @@ So the comparison is put where it can be made:
 ```
 
 Nothing stores the flag: a row is changed exactly while a work copy exists for it, which is
-`CShotChapter::workImagePath()` and `hasUnpublishedImages()`.
+`CShotFiles::workImage()` and `hasUnpublishedImages()`.
 
 ## Three directories
 
@@ -98,7 +99,7 @@ its output where a deliberate retake leaves its own.
 
 ## Take all again
 
-Not a picture comparison. It replays every shot of the chapter and reports which steps could not
+Not a picture comparison. It replays every shot of the page and reports which steps could not
 find what they address. That is the thing worth knowing before a C++ change forces the pictures to
 be redone, and it is the only part of the old design that survived contact with the real question.
 

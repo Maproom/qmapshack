@@ -38,6 +38,8 @@
 #include "map/CMapDraw.h"
 #include "setup/CAppOpts.h"
 #include "shoot/CShotApplication.h"
+#include "shoot/CShotDocLauncher.h"
+#include "shoot/CShotDocMode.h"
 #include "shoot/CShotRunner.h"
 #include "theme/CQmsStyle.h"
 
@@ -126,7 +128,21 @@ void pinColorScheme(bool dark) {
 
 bool CShotEntry::isDocRun(const CAppOpts& opts) { return !opts.doc.shootDir.isEmpty() || !opts.doc.docDir.isEmpty(); }
 
+bool CShotEntry::showsMainWindow(const CAppOpts& opts) {
+  return opts.doc.docDir.isEmpty() || !opts.doc.docScenario.isEmpty();
+}
+
 std::optional<qint32> CShotEntry::run(const CAppOpts& opts, CMainWindow& window) {
+  if (!opts.doc.docDir.isEmpty()) {
+    if (opts.doc.docScenario.isEmpty()) {
+      // CMainWindow maximizes itself 500 ms after construction when the configuration stores no geometry.
+      window.setAttribute(Qt::WA_DontShowOnScreen);
+      (new CShotDocLauncher(QDir(opts.doc.docDir), opts.doc.docPage, &window))->start();
+    } else {
+      (new CShotDocMode(QDir(opts.doc.docDir), opts.doc.docPage, opts.doc.docScenario, &window))->start();
+    }
+    return std::nullopt;
+  }
   if (opts.doc.shootDir.isEmpty()) {
     return std::nullopt;
   }
@@ -193,7 +209,9 @@ bool CShotEntry::prepare(const CAppOpts& opts) {
     return redirectUserData(QDir(opts.doc.shootDir).absoluteFilePath("_cache"),
                             QFileInfo(opts.doc.shootTarget).completeBaseName());
   }
-  return redirectUserData(QDir(opts.doc.docDir).absoluteFilePath("doc/shots/_cache"), opts.doc.docPage);
+  // The launcher and its state process run at once; one SQLite workspace for both is locked for seconds.
+  const QString& name = opts.doc.docScenario.isEmpty() ? opts.doc.docPage + "-launcher" : opts.doc.docPage;
+  return redirectUserData(QDir(opts.doc.docDir).absoluteFilePath("doc/shots/_cache"), name);
 }
 
 QString CShotEntry::scratchWorkspace(const QString& dir, const QString& name) {

@@ -55,7 +55,14 @@ class CShotEntry {
    */
   static bool prepare(const CAppOpts& opts);
 
-  /** @return the exit code of a `--shoot` run (failures, capped at 255), nothing for any other run */
+  /** @return false for the documentation launcher, whose main window only initialises the singletons */
+  static bool showsMainWindow(const CAppOpts& opts);
+
+  /**
+     @brief Start a `--doc` launcher or state process, or run a `--shoot` run to its end.
+
+     @return the exit code of a `--shoot` run (failures, capped at 255), nothing for any other run
+   */
   static std::optional<qint32> run(const CAppOpts& opts, CMainWindow& window);
 
  private:

@@ -1,12 +1,15 @@
 #!/usr/bin/env python3
-"""Replay QMapShack's documentation pictures headless.
+"""Take and replay QMapShack's documentation pictures.
 
+  shots.py take PAGE              open the writer's session on a page
+  shots.py publish                copy the pictures taken again into doc/images
   shots.py replay [--only GLOB]   replay every shot and report the ones that no longer come out
+  shots.py selftest               the recorder's and documentation mode's own cases
   shots.py unused [--delete]      shots and pictures no page references any more
 
 A picture's bytes depend on the machine that rendered it, so `replay` compares no pictures: it
 answers whether every shot still replays. It renders into doc/images/_check and never into
-doc/images.
+doc/images. A session writes into doc/images/_work; only `publish` writes doc/images.
 
 Needs Python 3.9 and this checkout's build configured with -DQMS_DOC_MODE=ON.
 """
@@ -39,6 +42,8 @@ REPO = Path(__file__).resolve().parents[2]
 IMAGES_DIR = REPO / "doc" / "images"
 # Where `replay` renders; git-ignored. Only publishing writes doc/images.
 CHECK_DIR = IMAGES_DIR / "_check"
+# Where a session's pictures wait for `publish`; git-ignored.
+WORK_DIR = IMAGES_DIR / "_work"
 PAGES_DIR = REPO / "doc" / "pages"
 SHOTS_DIR = REPO / "doc" / "shots"
 FIXTURE_DIR = SHOTS_DIR / "fixture"
@@ -68,12 +73,13 @@ def shot_label(shot_id):
     return shot_id or "(a shot without an id)"
 
 
-def pinned_env():
+def pinned_env(offscreen=True):
     env = dict(os.environ)
     for name in SCALING_VARIABLES:
         env.pop(name, None)
     # QT_QPA_PLATFORMTHEME is the application's: CShotEntry::pinEnvironment() sets it for --shoot, not on Windows.
-    env["QT_QPA_PLATFORM"] = "offscreen"
+    if offscreen:
+        env["QT_QPA_PLATFORM"] = "offscreen"
     env["TZ"] = "UTC"
     env["LC_ALL"] = env["LANG"] = env["LANGUAGE"] = SYSTEM_LOCALE
     return env
@@ -374,18 +380,19 @@ def cmd_replay(args):
         groups += sorted({shot["scenario"] for shot in shots if shot.get("scenario")})
         for group in groups:
             ids = [shot.get("id", "") for shot in shots if (shot.get("scenario") or BASE_SCENARIO) == group]
-            # A picture left from an earlier run would read as one this run took.
-            for shot_id in ids:
-                (out / f"{shot_id}.png").unlink(missing_ok=True)
             if another_instance_runs(user_data):
                 sys.exit("QMapShack was started during the replay. Close it and replay again.")
 
             refresh_tile_cache()
             before = snapshot(watched)
-            code, said = run_group(binary, out, page_file, group, args.only, args.verbose)
+            # Rendered aside and moved in: a picture that does not come out keeps the one out holds.
+            with tempfile.TemporaryDirectory(prefix="render-", dir=CACHE_DIR) as rendered:
+                code, said = run_group(binary, Path(rendered), page_file, group, args.only, args.verbose)
+                missing = [shot_id for shot_id in ids if not (Path(rendered) / f"{shot_id}.png").is_file()]
+                for shot_id in ids:
+                    if shot_id not in missing:
+                        move_picture(Path(rendered) / f"{shot_id}.png", out / f"{shot_id}.png")
             leaked = changed(before, snapshot(watched))
-
-            missing = [shot_id for shot_id in ids if not (out / f"{shot_id}.png").is_file()]
             for shot_id in ids:
                 print(f"    {shot_label(shot_id):<44} {group_label(group)}{'   did not come out' if shot_id in missing else ''}")
             told = condense(said)
@@ -433,44 +440,35 @@ def cmd_selftest(args):
     out.mkdir(parents=True, exist_ok=True)
     CACHE_DIR.mkdir(parents=True, exist_ok=True)
     refresh_tile_cache()
+    watched = (cache, user_data)
+    before = snapshot(watched)
 
     with tempfile.TemporaryDirectory(prefix="qms-selftest-") as scratch:
         config = Path(scratch) / "shots.ini"
         compose_config(page_file.stem, None, config)
-        cmd = [str(binary), "-platform", "offscreen", "-style", STYLE, "--no-splash", "--config", str(config),
-               "--font-family", FONT_FAMILY, "--font-size", FONT_SIZE, "--color-scheme", COLOR_SCHEME,
-               "--locale", LOCALE, "--shoot", str(out), "--shoot-target", str(page_file), "--shoot-selftest"]
+        cmd = [str(binary), "-platform", "offscreen", *app_args(config), "--shoot", str(out),
+               "--shoot-target", str(page_file), "--shoot-selftest"]
         if args.verbose:
             cmd.append("-d")
             print("      " + " ".join(cmd), file=sys.stderr)
 
-        process = subprocess.Popen(cmd, env=pinned_env(), cwd=scratch, stdout=None if args.verbose else subprocess.DEVNULL,
-                                   stderr=subprocess.PIPE, encoding="utf-8", errors="replace")
-        timed_out = threading.Event()
+        def report(line):
+            if "shoot: PASS" in line or "shoot: FAIL" in line or "shoot: self test" in line:
+                print("  " + line.split("shoot: ", 1)[1].rstrip())
 
-        def kill():
-            timed_out.set()
-            process.kill()
+        code, timed_out = run_app(cmd, scratch, args.verbose, report)
 
-        watchdog = threading.Timer(RUN_TIMEOUT_S, kill)
-        watchdog.daemon = True
-        watchdog.start()
-        try:
-            for line in process.stderr:
-                if args.verbose:
-                    sys.stderr.write(line)
-                if "shoot: PASS" in line or "shoot: FAIL" in line or "shoot: self test" in line:
-                    print("  " + line.split("shoot: ", 1)[1].rstrip())
-            code = process.wait()
-        except BaseException:
-            process.kill()
-            process.wait()
-            raise
-        finally:
-            watchdog.cancel()
-
-    if timed_out.is_set():
+    leaked = changed(before, snapshot(watched))
+    for path in leaked:
+        print(f"  the self test changed {path}")
+    if timed_out:
         sys.exit(f"the self test did not finish within {RUN_TIMEOUT_S}s - a case opened something nothing closes")
+    if leaked:
+        sys.exit(f"the self test wrote outside the scratch tree: {len(leaked)} file(s)")
+    if code == DEADLINE_EXIT:
+        sys.exit("the self test stopped at a case that did not return; the cases after it did not run")
+    if not 0 <= code <= MAX_FAILURE_EXIT:
+        sys.exit(f"the self test crashed with exit code {code}")
     if code != 0:
         sys.exit(f"{code} case(s) failed")
     print("every case passes")
@@ -516,11 +514,80 @@ def cmd_unused(args):
         shot_file["shots"] = [shot for shot in shot_file.get("shots", []) if shot.get("id", "") not in gone]
         write_shot_file(page_file, shot_file)
     for _, shot_id in dead:
-        for picture in (IMAGES_DIR / f"{shot_id}.png", out / f"{shot_id}.png"):
+        # What CShotFiles::removePictures() removes, and the check render.
+        for picture in (IMAGES_DIR / f"{shot_id}.png", WORK_DIR / f"{shot_id}.png", WORK_DIR / f"{shot_id}.shot.json",
+                        out / f"{shot_id}.png"):
             picture.unlink(missing_ok=True)
     for picture in orphans:
         picture.unlink()
     print(f"\nremoved {len(dead) + len(orphans)}")
+
+
+def page_name(value):
+    """`test`, `test.md` or `doc/pages/test.md` is page `test`; pages have no folders: replay reads doc/shots/*.json."""
+    path = Path(value)
+    if path.suffix in (".md", ".json"):
+        path = path.with_suffix("")
+    parent = path.parent.resolve()
+    if path.name == "" or parent not in (Path.cwd().resolve(), PAGES_DIR.resolve(), SHOTS_DIR.resolve()):
+        sys.exit(f"{value} is no page: a page is a file directly in {PAGES_DIR.relative_to(REPO)}")
+    return path.name
+
+
+def cmd_take(args):
+    """The launcher: the panel, and the state processes it starts."""
+    page = page_name(args.page)
+    binary = find_binary(args.binary)
+    page_file = PAGES_DIR / f"{page}.md"
+    if not page_file.is_file():
+        print(f"warning: there is no {page_file.relative_to(REPO)} yet; its image lines name the pictures.",
+              file=sys.stderr)
+    CACHE_DIR.mkdir(parents=True, exist_ok=True)
+    refresh_tile_cache()
+
+    with tempfile.TemporaryDirectory(prefix="qms-doc-") as scratch:
+        # The launcher's own main window is never shown; this only keeps it out of the user's settings.
+        config = Path(scratch) / "launcher.ini"
+        compose_config(page, None, config)
+        cmd = [str(binary), *app_args(config), "--doc", str(REPO), "--doc-page", page, "--doc-python", sys.executable]
+        if args.verbose:
+            cmd.append("-d")
+            print(" ".join(cmd), file=sys.stderr)
+        result = subprocess.run(cmd, env=pinned_env(offscreen=False), cwd=scratch)
+    # A Windows build owns no console, so a session that dies silently is only visible here.
+    if result.returncode != 0:
+        sys.exit(f"the session ended with {result.returncode}")
+
+
+def move_picture(picture, target):
+    """Move @p picture over @p target; a move, so a reader of target never finds half a picture."""
+    target.parent.mkdir(parents=True, exist_ok=True)
+    try:
+        os.replace(picture, target)
+    except OSError:
+        shutil.copyfile(picture, target)
+        picture.unlink()
+
+
+def cmd_publish(args):
+    """Copy every picture under doc/images/_work into doc/images and empty _work. No render, no comparison, no git."""
+    published = []
+    for picture in sorted(WORK_DIR.rglob("*.png")):
+        shot_id = picture.relative_to(WORK_DIR).with_suffix("").as_posix()
+        # A move, not copy and delete: a picture taken again meanwhile is a new file in _work, never lost.
+        move_picture(picture, IMAGES_DIR / f"{shot_id}.png")
+        published.append(shot_id)
+    # Only emptied directories go: a picture taken meanwhile stays for the next publish.
+    for directory in sorted((path for path in WORK_DIR.rglob("*") if path.is_dir()), reverse=True) + [WORK_DIR]:
+        try:
+            directory.rmdir()
+        except OSError:
+            pass  # not empty, or gone: either way nothing to do
+    if args.report:
+        Path(args.report).write_text(json.dumps({"published": published}, indent=4) + "\n", encoding="utf-8")
+    for shot_id in published:
+        print(f"  {shot_id}")
+    print(f"{len(published)} picture(s) published" if published else "nothing was taken again, nothing to publish")
 
 
 def cmd_compose(args):
@@ -528,7 +595,7 @@ def cmd_compose(args):
     out = Path(args.out).resolve()
     out.parent.mkdir(parents=True, exist_ok=True)
     scenario = None if args.scenario in (None, "", BASE_SCENARIO) else args.scenario
-    compose_config(Path(args.page).stem, scenario, out)
+    compose_config(page_name(args.page), scenario, out)
     print(out)
 
 
@@ -539,7 +606,15 @@ def main():
     parser.add_argument("--binary", help="the qmapshack executable; this checkout's build by default")
     parser.add_argument("-o", "--out", default=str(CHECK_DIR), help="where replay renders (default: %(default)s)")
     parser.add_argument("-v", "--verbose", action="store_true", help="show the application's own output")
-    commands = parser.add_subparsers(dest="command", required=True, metavar="{replay,unused}")
+    commands = parser.add_subparsers(dest="command", required=True, metavar="{take,publish,replay,selftest,unused}")
+
+    take = commands.add_parser("take", help="open the writer's session on a page")
+    take.add_argument("page", help="the page, e.g. test")
+    take.set_defaults(func=cmd_take)
+
+    publish = commands.add_parser("publish", help="copy the pictures taken again into doc/images")
+    publish.add_argument("--report", metavar="FILE", help="write the published ids as JSON")
+    publish.set_defaults(func=cmd_publish)
 
     replay = commands.add_parser("replay", help="replay every shot and report the ones that do not come out")
     replay.add_argument("--only", metavar="GLOB", help="shot ids: test/* is one page, test/menu-project one picture")

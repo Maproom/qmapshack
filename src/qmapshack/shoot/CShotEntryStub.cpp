@@ -22,6 +22,7 @@
 
 /// A build without the documentation subsystem.
 bool CShotEntry::isDocRun(const CAppOpts&) { return false; }
+bool CShotEntry::showsMainWindow(const CAppOpts&) { return true; }
 
 void CShotEntry::pinEnvironment(int, char**) {}
 

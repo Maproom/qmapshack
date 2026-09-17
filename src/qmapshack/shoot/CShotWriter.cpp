@@ -26,6 +26,7 @@
 #include <QEventLoop>
 #include <QFileInfo>
 #include <QLayout>
+#include <QSaveFile>
 #include <QTimer>
 #include <QWidget>
 
@@ -137,7 +138,14 @@ QString CShotWriter::write(const QImage& image, const QString& id) const {
   }
 
   const QString& path = QDir(outDir).absoluteFilePath(id + ".png");
-  if (!QDir().mkpath(QFileInfo(path).absolutePath()) || !image.save(path, "PNG")) {
+  // QSaveFile: publish may move the file at any moment and must never find half a picture.
+  QSaveFile out(path);
+  // Twice: publish removes a directory it emptied, possibly between mkpath() and open().
+  bool opened = false;
+  for (qint32 attempt = 0; attempt < 2 && !opened; attempt++) {
+    opened = QDir().mkpath(QFileInfo(path).absolutePath()) && out.open(QIODevice::WriteOnly);
+  }
+  if (!opened || !image.save(&out, "PNG") || !out.commit()) {
     qWarning() << "shoot:" << id << "cannot be written to" << path;
     return QString();
   }

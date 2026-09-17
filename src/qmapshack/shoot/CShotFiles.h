@@ -1,0 +1,136 @@
+/**********************************************************************************************
+   Copyright (C) 2026 Oliver Eichler <oliver.eichler@gmx.de>
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+**********************************************************************************************/
+
+#ifndef CSHOTFILES_H
+#define CSHOTFILES_H
+
+#include <QDir>
+#include <QJsonArray>
+#include <QJsonObject>
+#include <QList>
+#include <QPoint>
+#include <QSet>
+#include <QSize>
+#include <QString>
+#include <QStringList>
+#include <optional>
+
+/**
+   @brief One page's files in the checkout: the shot file, its scenarios' configurations, the pictures.
+
+   Every rule about what an operation may change and what it takes with it lives here, so the panel only asks and
+   calls. An operation returns an empty string on success, else what went wrong; a failed operation changes nothing.
+   No rendering, no widgets.
+ */
+class CShotFiles {
+ public:
+  /** What the panel calls the base; nothing stores it. */
+  static inline const QString kBaseLabel = QStringLiteral("(base)");
+  /** @return @p scenario, or kBaseLabel for the empty one */
+  static QString label(const QString& scenario) { return scenario.isEmpty() ? kBaseLabel : scenario; }
+
+  enum state_e {
+    eTaken,        ///< referenced by the page, has a picture
+    eNoImage,      ///< referenced by the page, has a shot, no picture
+    eNotUsed,      ///< has a shot, no page references it
+    eMissing,      ///< referenced by the page, neither shot nor picture
+    eUnregistered  ///< referenced by the page, has a picture, no shot
+  };
+
+  /** One picture of the page as the panel lists it. */
+  struct row_t {
+    QString id;
+    QString scenario;  ///< empty is `(base)`
+    QString note;
+    state_e state = eTaken;
+    bool changed = false;   ///< a work picture waits to be published
+    QString imagePath;      ///< the work picture, else the published one; empty when there is none
+    QString publishedPath;  ///< empty when there is none
+  };
+
+  CShotFiles(const QDir& repo, const QString& page);
+
+  /** @return why @p name cannot be a scenario, empty when it can */
+  static QString nameProblem(const QString& name);
+
+  QString shotFile() const;
+  /** @return the INI file the panel's size and where the panel and the application window sit are kept in */
+  QString placementFile() const;
+  /**
+     @return @p at moved so a frame of @p size there lies on the available area of the screen under its centre,
+     the top left corner first when it is larger; nothing when no screen is under the centre
+   */
+  static std::optional<QPoint> onScreen(const QPoint& at, const QSize& size);
+  QString pageFile() const;
+  /** @return `doc/shots/<page>/<scenario>.ini` */
+  QString scenarioConfig(const QString& scenario) const;
+  QString publishedImage(const QString& id) const;
+  QString workImage(const QString& id) const;
+
+  /** @return true when `doc/images/_work/` holds a picture of this page */
+  bool hasUnpublishedImages() const;
+
+  QStringList scenarioNames() const;
+  QJsonObject scenarios() const;
+  /** @return the entry for @p id, empty when there is none */
+  QJsonObject shot(const QString& id) const;
+  /** @return the ids of the shots taken in @p scenario */
+  QStringList shotsIn(const QString& scenario) const;
+
+  /** @return true for an id of this page, `<page>/<name>` */
+  bool isOwn(const QString& id) const;
+
+  /** @return the shot file's shots in order, then the page's own references without a shot, sorted */
+  QList<row_t> rows() const;
+
+  /** @return the ids of this page's shots no page under `doc/pages` references */
+  QStringList unusedShots() const;
+
+  /** @return true when changing @p id's scenario throws away anything but `id` and `scenario`, or a picture */
+  bool rebindLoses(const QString& id) const;
+
+  /** @brief Rename a scenario: its configuration, then every reference in the shot file. */
+  QString renameScenario(const QString& from, const QString& to);
+
+  /** @brief Delete a scenario; its shots are reduced to their `id` and lose their pictures and its configuration. */
+  QString deleteScenario(const QString& name);
+
+  /** @brief Take own @p id in @p scenario (empty is `(base)`): reduced to `id` and `scenario`, pictures deleted. */
+  QString rebindShot(const QString& id, const QString& scenario);
+
+  /** @brief Remove shots and their pictures; the scenarios stay. */
+  QString removeShots(const QStringList& ids);
+
+  /** @brief Delete @p id's work picture. */
+  QString revertShot(const QString& id);
+
+ private:
+  /** @return a row of @p id holding only where its pictures are */
+  row_t picturesOf(const QString& id) const;
+  QString readShotFile(QJsonObject& content) const;
+  QString writeShotFile(const QJsonObject& content) const;
+  /** @brief Delete the published and the work picture of every id, and the work entry; shots.py unused does too. */
+  void removePictures(const QStringList& ids) const;
+  QSet<QString> references(const QString& file) const;
+  QSet<QString> allReferences() const;
+
+  QDir repo;
+  QString page;
+};
+
+#endif  // CSHOTFILES_H

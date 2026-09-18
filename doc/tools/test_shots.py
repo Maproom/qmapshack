@@ -113,6 +113,24 @@ class Unused(ScratchTree):
         for base in (shots.IMAGES_DIR, shots.WORK_DIR, check):
             self.assertFalse((base / "p" / "gone.png").exists(), base)
 
+    def test_deletes_the_work_entry_as_the_panel_does(self):
+        self.put(shots.PAGES_DIR / "p.md", b"")
+        self.put(shots.SHOTS_DIR / "p.json", json.dumps({"shots": [{"id": "p/gone"}]}).encode())
+        entry = shots.WORK_DIR / "p" / "gone.shot.json"
+        self.put(entry, b"{}")
+        self.quietly(shots.cmd_unused, out=str(self.root / "check"), delete=True)
+        self.assertFalse(entry.exists())
+        self.assertFalse((shots.SHOTS_DIR / "p.json.tmp").exists())
+
+    def test_an_id_outside_doc_images_deletes_nothing(self):
+        self.put(shots.PAGES_DIR / "p.md", b"")
+        shot_file = shots.SHOTS_DIR / "p.json"
+        self.put(shot_file, json.dumps({"shots": [{"id": "../../victim"}]}).encode())
+        victim = shots.IMAGES_DIR / ".." / ".." / "victim.png"
+        self.put(victim)
+        self.quietly(shots.cmd_unused, out=str(self.root / "check"), delete=True)
+        self.assertTrue(victim.exists())
+
 
 class ShotFile(ScratchTree):
     def test_a_broken_shot_file_says_which_and_what_to_do(self):

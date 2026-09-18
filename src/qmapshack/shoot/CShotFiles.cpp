@@ -18,6 +18,7 @@
 
 #include "shoot/CShotFiles.h"
 
+#include <QDir>
 #include <QDirIterator>
 #include <QFile>
 #include <QFileInfo>
@@ -61,7 +62,27 @@ QString CShotFiles::nameProblem(const QString& name) {
     return QString("%1 cannot be a file name. Leave out / \\ : * ? \" < > |, and spaces or dots at the ends.")
         .arg(name);
   }
+  // Windows opens a device for these, whatever the extension.
+  static const QRegularExpression device(R"(^(con|prn|aux|nul|com[1-9]|lpt[1-9])(\..*)?$)",
+                                         QRegularExpression::CaseInsensitiveOption);
+  if (device.match(name).hasMatch()) {
+    return QString("%1 is a device name on Windows and cannot be a file name.").arg(name);
+  }
   return QString();
+}
+
+bool CShotFiles::staysInside(const QString& name) {
+  // Ids and scenario names come from files a writer may edit by hand. shots.py's stays_inside() is the same rule.
+  if (name.isEmpty() || name.startsWith('/') || name.contains('\\') || name.contains(':')) {
+    return false;
+  }
+  const QStringList& parts = name.split('/');
+  for (const QString& part : parts) {
+    if (part.isEmpty() || "." == part || ".." == part) {
+      return false;
+    }
+  }
+  return true;
 }
 
 QString CShotFiles::shotFile() const { return repo.absoluteFilePath("doc/shots/" + page + ".json"); }
@@ -69,15 +90,25 @@ QString CShotFiles::shotFile() const { return repo.absoluteFilePath("doc/shots/"
 QString CShotFiles::pageFile() const { return repo.absoluteFilePath("doc/pages/" + page + ".md"); }
 
 QString CShotFiles::scenarioConfig(const QString& scenario) const {
-  return repo.absoluteFilePath("doc/shots/" + page + "/" + scenario + ".ini");
+  return staysInside(scenario) ? repo.absoluteFilePath("doc/shots/" + page + "/" + scenario + ".ini") : QString();
 }
 
 QString CShotFiles::publishedImage(const QString& id) const {
-  return repo.absoluteFilePath("doc/images/" + id + ".png");
+  return staysInside(id) ? repo.absoluteFilePath("doc/images/" + id + ".png") : QString();
 }
 
 QString CShotFiles::workImage(const QString& id) const {
-  return repo.absoluteFilePath("doc/images/_work/" + id + ".png");
+  return staysInside(id) ? repo.absoluteFilePath("doc/images/_work/" + id + ".png") : QString();
+}
+
+QString CShotFiles::pendingDir() const { return repo.absoluteFilePath("doc/shots/_cache/pending"); }
+
+QString CShotFiles::pendingImage(const QString& id) const {
+  return staysInside(id) ? QDir(pendingDir()).absoluteFilePath(id + ".png") : QString();
+}
+
+QString CShotFiles::workEntry(const QString& id) const {
+  return staysInside(id) ? repo.absoluteFilePath("doc/images/_work/" + id + ".shot.json") : QString();
 }
 
 QString CShotFiles::placementFile() const { return repo.absoluteFilePath("doc/shots/_cache/doc-panel.ini"); }
@@ -91,6 +122,10 @@ std::optional<QPoint> CShotFiles::onScreen(const QPoint& at, const QSize& size) 
   return QPoint(std::max(room.left(), std::min(at.x(), room.right() + 1 - size.width())),
                 std::max(room.top(), std::min(at.y(), room.bottom() + 1 - size.height())));
 }
+
+QString CShotFiles::trialFile() const { return repo.absoluteFilePath("doc/shots/_cache/" + page + "-trial.json"); }
+
+QString CShotFiles::trialConfig() const { return repo.absoluteFilePath("doc/shots/_cache/" + page + "-trial.ini"); }
 
 bool CShotFiles::hasUnpublishedImages() const {
   QDirIterator walk(repo.absoluteFilePath("doc/images/_work/" + page), {"*.png"}, QDir::Files,
@@ -112,7 +147,13 @@ QString CShotFiles::readShotFile(QJsonObject& content) const {
   if (QJsonParseError::NoError != error.error || !document.isObject()) {
     return QString("%1 is not a shot file: %2").arg(shotFile(), error.errorString());
   }
-  content = document.object();
+  // Read as empty, a member of the wrong type would be dropped by the next write.
+  const QJsonObject& object = document.object();
+  if ((object.contains("shots") && !object["shots"].isArray()) ||
+      (object.contains("scenarios") && !object["scenarios"].isObject())) {
+    return QString("%1 is not a shot file: shots must be a list and scenarios an object.").arg(shotFile());
+  }
+  content = object;
   return QString();
 }
 
@@ -130,6 +171,7 @@ void CShotFiles::removePictures(const QStringList& ids) const {
   for (const QString& id : ids) {
     QFile::remove(publishedImage(id));
     QFile::remove(workImage(id));
+    QFile::remove(workEntry(id));
   }
 }
 
@@ -156,6 +198,11 @@ QSet<QString> CShotFiles::allReferences() const {
     referenced.unite(references(walk.next()));
   }
   return referenced;
+}
+
+QString CShotFiles::shotFileProblem() const {
+  QJsonObject content;
+  return readShotFile(content);
 }
 
 QJsonObject CShotFiles::scenarios() const {
@@ -258,6 +305,9 @@ bool CShotFiles::rebindLoses(const QString& id) const {
 QString CShotFiles::renameScenario(const QString& from, const QString& to) {
   if (const QString& problem = nameProblem(to); !problem.isEmpty()) {
     return problem;
+  }
+  if (const QString& twin = caseTwinOf(to); !twin.isEmpty() && twin != from) {
+    return QString("%1 differs from the scenario %2 only in case.").arg(to, twin);
   }
   QJsonObject content;
   if (const QString& error = readShotFile(content); !error.isEmpty()) {
@@ -386,11 +436,163 @@ QString CShotFiles::removeShots(const QStringList& ids) {
 }
 
 QString CShotFiles::revertShot(const QString& id) {
-  if (!QFileInfo::exists(workImage(id))) {
+  const bool hasImage = QFileInfo::exists(workImage(id));
+  const bool hasEntry = QFileInfo::exists(workEntry(id));
+  if (!hasImage && !hasEntry) {
     return QString("%1 was not taken again.").arg(id);
   }
-  if (!QFile::remove(workImage(id))) {
+  if (hasEntry) {
+    QFile in(workEntry(id));
+    if (!in.open(QIODevice::ReadOnly)) {
+      return QString("%1 cannot be read.").arg(workEntry(id));
+    }
+    QJsonParseError parsed;
+    const QJsonDocument& entry = QJsonDocument::fromJson(in.readAll(), &parsed);
+    in.close();
+    // An unreadable entry would read as {}, which removes the shot.
+    if (QJsonParseError::NoError != parsed.error || !entry.isObject()) {
+      return QString("%1 is damaged; nothing was reverted.").arg(workEntry(id));
+    }
+    const QJsonObject& before = entry.object();
+
+    QJsonObject content;
+    if (const QString& error = readShotFile(content); !error.isEmpty()) {
+      return error;
+    }
+    QJsonArray shots = content["shots"].toArray();
+    const qsizetype index = indexOf(shots, id);
+    // An empty entry: the shot did not exist before.
+    if (before.isEmpty()) {
+      if (index >= 0) {
+        shots.removeAt(index);
+      }
+    } else if (index < 0) {
+      shots.append(before);
+    } else {
+      shots.replace(index, before);
+    }
+    content["shots"] = shots;
+    if (const QString& error = writeShotFile(content); !error.isEmpty()) {
+      return error;
+    }
+    QFile::remove(workEntry(id));
+  }
+  if (hasImage && !QFile::remove(workImage(id))) {
     return QString("%1 cannot be deleted.").arg(workImage(id));
   }
   return QString();
+}
+
+QString CShotFiles::parkRecording(const QJsonArray& steps) const {
+  if (!QDir().mkpath(QFileInfo(trialFile()).absolutePath())) {
+    return QString("%1 cannot be created.").arg(QFileInfo(trialFile()).absolutePath());
+  }
+  QSaveFile out(trialFile());
+  if (!out.open(QIODevice::WriteOnly) || out.write(QJsonDocument(steps).toJson(QJsonDocument::Indented)) < 0 ||
+      !out.commit()) {
+    return QString("%1 cannot be written: %2").arg(trialFile(), out.errorString());
+  }
+  return QString();
+}
+
+QString CShotFiles::parkedRecording(QJsonArray& steps) const {
+  QFile in(trialFile());
+  if (!in.open(QIODevice::ReadOnly)) {
+    return QString("There is no parked recording %1.").arg(trialFile());
+  }
+  QJsonParseError error;
+  const QJsonDocument& document = QJsonDocument::fromJson(in.readAll(), &error);
+  if (QJsonParseError::NoError != error.error || !document.isArray()) {
+    return QString("%1 is no recording: %2").arg(trialFile(), error.errorString());
+  }
+  steps = document.array();
+  return QString();
+}
+
+void CShotFiles::dropParked() const {
+  QFile::remove(trialFile());
+  QFile::remove(trialConfig());
+}
+
+QString CShotFiles::caseTwinOf(const QString& name) const {
+  // On a case-insensitive file system both would be one configuration file.
+  const QStringList& names = scenarioNames();
+  for (const QString& other : names) {
+    if (other != name && 0 == other.compare(name, Qt::CaseInsensitive)) {
+      return other;
+    }
+  }
+  return QString();
+}
+
+QString CShotFiles::storeScenario(const QString& name, const QJsonArray& steps, const QString& config) {
+  if (const QString& problem = nameProblem(name); !problem.isEmpty()) {
+    return problem;
+  }
+  if (const QString& twin = caseTwinOf(name); !twin.isEmpty()) {
+    return QString("%1 differs from the scenario %2 only in case.").arg(name, twin);
+  }
+  QJsonObject content;
+  if (const QString& error = readShotFile(content); !error.isEmpty()) {
+    return error;
+  }
+  QJsonObject scenarios = content["scenarios"].toObject();
+  scenarios[name] = steps;
+  content["scenarios"] = scenarios;
+
+  // Copied beside the target first, so a failed copy or shot file write leaves the old configuration.
+  const QString& target = scenarioConfig(name);
+  const QString& part = target + ".part";
+  if (!config.isEmpty()) {
+    QFile::remove(part);
+    if (!QDir().mkpath(QFileInfo(target).absolutePath()) || !QFile::copy(config, part)) {
+      QFile::remove(part);
+      return QString("%1 cannot be copied to %2.").arg(config, part);
+    }
+  }
+  if (const QString& error = writeShotFile(content); !error.isEmpty()) {
+    QFile::remove(part);
+    return error;
+  }
+  if (!config.isEmpty()) {
+    QFile::remove(target);
+    if (!QFile::rename(part, target)) {
+      return QString("The scenario %1 is stored, its configuration is left in %2.").arg(name, part);
+    }
+  }
+  return QString();
+}
+
+QString CShotFiles::storeShot(const QJsonObject& shot) {
+  const QString& id = shot["id"].toString();
+  if (!isOwn(id)) {
+    return QString("%1 belongs to another page.").arg(id);
+  }
+  QJsonObject content;
+  if (const QString& error = readShotFile(content); !error.isEmpty()) {
+    return error;
+  }
+  QJsonArray shots = content["shots"].toArray();
+  const qsizetype index = indexOf(shots, id);
+
+  // Only the first since publish or revert: that is the entry the published picture belongs to.
+  if (!QFileInfo::exists(workEntry(id))) {
+    if (!QDir().mkpath(QFileInfo(workEntry(id)).absolutePath())) {
+      return QString("%1 cannot be created.").arg(QFileInfo(workEntry(id)).absolutePath());
+    }
+    const QJsonObject& before = (index < 0) ? QJsonObject() : shots.at(index).toObject();
+    QSaveFile out(workEntry(id));
+    if (!out.open(QIODevice::WriteOnly) || out.write(QJsonDocument(before).toJson(QJsonDocument::Indented)) < 0 ||
+        !out.commit()) {
+      return QString("%1 cannot be written: %2").arg(workEntry(id), out.errorString());
+    }
+  }
+
+  if (index < 0) {
+    shots.append(shot);
+  } else {
+    shots.replace(index, shot);
+  }
+  content["shots"] = shots;
+  return writeShotFile(content);
 }

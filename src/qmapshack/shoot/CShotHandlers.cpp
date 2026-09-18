@@ -31,8 +31,6 @@
 #include <QDebug>
 #include <QDockWidget>
 #include <QDoubleSpinBox>
-#include <QElapsedTimer>
-#include <QEventLoop>
 #include <QGroupBox>
 #include <QHash>
 #include <QHeaderView>
@@ -53,7 +51,6 @@
 #include <QStyleOptionViewItem>
 #include <QTabBar>
 #include <QTabWidget>
-#include <QTimer>
 #include <QToolButton>
 #include <QTreeView>
 #include <QTreeWidget>
@@ -84,6 +81,7 @@
 #include "shoot/CShotRecorder.h"
 #include "shoot/CShotStep.h"
 #include "shoot/CShotSynth.h"
+#include "shoot/CShotWait.h"
 #include "shoot/IShotHandler.h"
 #include "units/IUnit.h"
 #include "widgets/CIconGrid.h"
@@ -1692,17 +1690,7 @@ class CCanvasHandler : public CSurfaceHandler {
   /** An item's pixels are updated by the draw, so a hit or click after a zoom or pan needs it finished. */
   bool settle(QWidget* surface) const override {
     const CCanvas* canvas = static_cast<CCanvas*>(surface);
-    QElapsedTimer timer;
-    timer.start();
-    while (!canvas->isDrawComplete()) {
-      if (timer.hasExpired(kCanvasSettleMs)) {
-        return false;
-      }
-      QEventLoop loop;
-      QTimer::singleShot(kCanvasPollMs, &loop, &QEventLoop::quit);
-      loop.exec(QEventLoop::ExcludeUserInputEvents);
-    }
-    return true;
+    return CShotWait::waitFor([canvas]() { return canvas->isDrawComplete(); }, kCanvasSettleMs, kCanvasPollMs);
   }
 
   std::optional<QPoint> pixelOf(QWidget* surface, const QJsonObject& step) const override {

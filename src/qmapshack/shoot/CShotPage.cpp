@@ -382,8 +382,9 @@ qint32 CShotPage::shootOne(const QJsonObject& shot, CShotContext& ctx, const QJs
     return failed;
   };
 
-  // One path with or without a scenario: no steps take the picture at once.
-  const QJsonArray& steps = inScenario ? scenarios[scenario].toArray() : QJsonArray();
+  // One path with or without a scenario: no steps take the picture at once. A live scenario is on screen already.
+  const bool perform = inScenario && ctx.liveScenario() != scenario;
+  const QJsonArray& steps = perform ? scenarios[scenario].toArray() : QJsonArray();
   failures += CShotReplay::replay(steps, ctx, takePicture);
   // The next shot of this run must not start from what the scenario left.
   if (!steps.isEmpty()) {

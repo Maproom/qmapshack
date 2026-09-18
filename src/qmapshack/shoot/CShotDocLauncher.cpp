@@ -106,7 +106,7 @@ void CShotDocLauncher::start() {
   connect(panel, &CShotDocPanel::storeConfigClicked, this, [this]() { storeConfig(); });
   connect(panel, &CShotDocPanel::rebindRequested, this,
           [this](const QString& id, const QString& scenario) { rebindShot(id, scenario); });
-  connect(panel, &CShotDocPanel::retakeShotClicked, this, [this](const QString& id) { actOnShot("retake", id); });
+  connect(panel, &CShotDocPanel::retakeShotClicked, this, [this](const QString& id) { retakeShot(id); });
   connect(panel, &CShotDocPanel::takeRegionClicked, this, [this](const QString& id) { actOnShot("region", id); });
   connect(panel, &CShotDocPanel::revertShotClicked, this, [this](const QString& id) { revertShot(id); });
   connect(panel, &CShotDocPanel::retakePageClicked, this, [this]() { retakePage(); });
@@ -160,6 +160,12 @@ QString CShotDocLauncher::channelName() const { return QString("qms-doc-%1").arg
 // --- the state process ---------------------------------------------------------------------------
 
 void CShotDocLauncher::enterScenario(const QString& scenario, const QString& followUp) {
+  startState(scenario, followUp, QString());
+}
+
+void CShotDocLauncher::tryRecording(const QString& name) { startState(name, QString(), name); }
+
+void CShotDocLauncher::startState(const QString& scenario, const QString& followUp, const QString& trial) {
   stopState();
   // Without the channel a state never reports ready and the busy box would never close.
   if (!server->isListening()) {
@@ -168,8 +174,10 @@ void CShotDocLauncher::enterScenario(const QString& scenario, const QString& fol
     return;
   }
 
+  // A trial replays against the settings the recording started from, which become the scenario's own.
   QString error;
-  const QString& config = composeConfig(scenario, error);
+  const QString& config =
+      trial.isEmpty() ? composeConfig(scenario, error) : composeConfig(QString(), error, files.trialConfig());
   if (config.isEmpty()) {
     reportFailure(
         QString("The configuration of %1 could not be composed.\n\n%2").arg(CShotFiles::label(scenario), error));
@@ -183,7 +191,8 @@ void CShotDocLauncher::enterScenario(const QString& scenario, const QString& fol
   connect(next, &CShotDocState::reported, this, &CShotDocLauncher::onStateReport);
   connect(next, &CShotDocState::ended, this, &CShotDocLauncher::onStateEnded);
   updateBusy();
-  next->start(QCoreApplication::applicationFilePath(), childArguments(config, scenario));
+  next->start(QCoreApplication::applicationFilePath(),
+              childArguments(config, trial.isEmpty() ? scenario : QString(), trial));
 }
 
 void CShotDocLauncher::stopState() {
@@ -220,8 +229,12 @@ void CShotDocLauncher::onStateReport(const QString& what, const QString& rest) {
     refreshPanel("Nothing was recorded.");
   } else if ("recorded" == what) {
     selectedScenario = rest;
-    // The recording ran in a process started in the base; its scenario is entered by starting one in it.
-    enterScenario(rest);
+    // Parked, not stored: a state replays it and stores it only if it replays, then holds it.
+    tryRecording(rest);
+  } else if ("trial-failed" == what) {
+    selectedScenario.clear();
+    reportFailure(rest);
+    enterScenario(QString());
   } else {
     qWarning() << "doc: unknown report from the state process:" << what << rest;
   }
@@ -301,7 +314,7 @@ void CShotDocLauncher::updateBusy() {
   if (!publishJob.isNull()) {
     panel->setBusy(true, "Please wait, publishing");
   } else if (!replayJob.isNull()) {
-    panel->setBusy(true, "Please wait, replaying every picture of this page");
+    panel->setBusy(true, "Please wait, taking pictures again");
   } else if (!state.isNull() && !state->isReady()) {
     panel->setBusy(true,
                    QString("Please wait, starting the application in %1").arg(CShotFiles::label(state->scenario())));
@@ -311,7 +324,7 @@ void CShotDocLauncher::updateBusy() {
   panel->setRecording(!state.isNull() && state->isRecording());
 }
 
-QString CShotDocLauncher::composeConfig(const QString& scenario, QString& error) {
+QString CShotDocLauncher::composeConfig(const QString& scenario, QString& error, const QString& source) {
   const QString& interpreter = python();
   if (interpreter.isEmpty()) {
     error = kNoPython;
@@ -323,6 +336,9 @@ QString CShotDocLauncher::composeConfig(const QString& scenario, QString& error)
   QStringList args{repo.absoluteFilePath("doc/tools/shots.py"), "compose", page, "--out", out};
   if (!scenario.isEmpty()) {
     args << "--scenario" << scenario;
+  }
+  if (!source.isEmpty()) {
+    args << "--from" << source;
   }
 
   QProcess compose;
@@ -354,14 +370,16 @@ QString CShotDocLauncher::composeConfig(const QString& scenario, QString& error)
   return out;
 }
 
-QStringList CShotDocLauncher::childArguments(const QString& config, const QString& scenario) const {
+QStringList CShotDocLauncher::childArguments(const QString& config, const QString& scenario,
+                                             const QString& trial) const {
   QStringList args = QCoreApplication::arguments();
   args.removeFirst();
 
   QStringList out;
   for (qsizetype i = 0; i < args.size(); i++) {
     const QString& arg = args.at(i);
-    if (arg.startsWith("--config") || arg.startsWith("--doc-scenario") || arg.startsWith("--doc-channel")) {
+    if ("-c" == arg || arg.startsWith("--config") || arg.startsWith("--doc-scenario") ||
+        arg.startsWith("--doc-channel") || arg.startsWith("--doc-trial")) {
       // `--config x` carries its value in the next argument, `--config=x` does not.
       if (!arg.contains('=')) {
         i++;
@@ -382,6 +400,9 @@ QStringList CShotDocLauncher::childArguments(const QString& config, const QStrin
   out << "--config" << config;
   out << "--doc-scenario" << (scenario.isEmpty() ? CShotPage::kBaseScenario : scenario);
   out << "--doc-channel" << channelName();
+  if (!trial.isEmpty()) {
+    out << "--doc-trial" << trial;
+  }
   return out;
 }
 
@@ -440,16 +461,17 @@ void CShotDocLauncher::storeConfig() {
     refreshPanel("The application is not running. Pick a scenario first.");
     return;
   }
-  // What the running state holds is stored, whatever the panel has selected.
+  // A configuration stored after a scenario ran holds what its steps did; a replay would do them again on top.
   if (!state->scenario().isEmpty()) {
-    command("update " + state->scenario());
+    refreshPanel(
+        QString("%1 keeps the settings it was recorded with. Record it again to change them.").arg(state->scenario()));
     return;
   }
   if (QMessageBox::Yes ==
       QMessageBox::question(panel, "Save as base",
                             "The base is what every page opens on and what a new recording starts from. Scenarios "
-                            "with their own configuration keep it.\n\nSave the arrangement, size, paths and settings "
-                            "on screen as the base?",
+                            "keep the settings they were recorded with.\n\nSave the arrangement, size and settings "
+                            "on screen as the base? Paths on this machine are left out.",
                             QMessageBox::Yes | QMessageBox::No, QMessageBox::No)) {
     command("update " + CShotPage::kBaseScenario);
   }
@@ -585,6 +607,22 @@ bool CShotDocLauncher::runShots(QPointer<CShotsJob>& slot, const QStringList& ar
   return true;
 }
 
+void CShotDocLauncher::retakeShot(const QString& id) {
+  // Headless, the way a build renders it; a picture that does not come out keeps the work picture.
+  const bool started =
+      runShots(replayJob, {"-o", repo.absoluteFilePath("doc/images/_work"), "replay", "--only", id},
+               [this, id](bool ok, const QString& error) {
+                 if (ok) {
+                   refreshPanel(QString("%1 was taken again; Publish puts it into the documentation.").arg(id));
+                 } else {
+                   reportFailure(QString("%1 was not taken again.\n\n%2").arg(id, error));
+                 }
+               });
+  if (!started) {
+    refreshPanel("Something is running already; wait for it.");
+  }
+}
+
 void CShotDocLauncher::retakePage() {
   runShots(replayJob, {"replay", "--only", page + "/*"}, [this](bool ok, const QString& error) {
     refreshPanel(
@@ -661,7 +699,10 @@ void CShotDocLauncher::refreshPanel(const QString& status) {
   panel->setShots(rows);
   panel->setCurrentShot(selectedShot);
 
-  if (!status.isEmpty()) {
+  // Shown before anything else: every list above reads as empty then.
+  if (const QString& problem = files.shotFileProblem(); !problem.isEmpty()) {
+    panel->setStatus(problem);
+  } else if (!status.isEmpty()) {
     panel->setStatus(status);
   } else if (!hasPage) {
     panel->setStatus(QString("Write %1 first; its image lines name the pictures.").arg(pageName));

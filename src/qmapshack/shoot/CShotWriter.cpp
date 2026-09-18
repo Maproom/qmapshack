@@ -27,14 +27,31 @@
 #include <QFileInfo>
 #include <QLayout>
 #include <QSaveFile>
-#include <QTimer>
 #include <QWidget>
 
 #include "canvas/CCanvas.h"
+#include "shoot/CShotFiles.h"
+#include "shoot/CShotWait.h"
 
 namespace {
 constexpr qint32 kPollMs = 250;
 constexpr qint32 kTimeoutMs = 20000;
+
+bool holdsCanvas(QWidget* w) { return nullptr != qobject_cast<CCanvas*>(w) || nullptr != w->findChild<CCanvas*>(); }
+
+/** @return true when no map in @p w is drawing; one on a page that is not current is not in the picture */
+bool drawComplete(QWidget* w) {
+  QList<CCanvas*> canvases = w->findChildren<CCanvas*>();
+  if (CCanvas* canvas = qobject_cast<CCanvas*>(w); nullptr != canvas) {
+    canvases << canvas;
+  }
+  for (const CCanvas* canvas : std::as_const(canvases)) {
+    if ((canvas == w || canvas->isVisibleTo(w)) && !canvas->isDrawComplete()) {
+      return false;
+    }
+  }
+  return true;
+}
 }  // namespace
 
 CShotWriter::CShotWriter(const QString& outDir) : outDir(outDir) {}
@@ -85,9 +102,7 @@ bool CShotWriter::settleStable(QWidget* w) {
   QImage last;
   while (!timer.hasExpired(kTimeoutMs)) {
     // processEvents() returns once nothing is pending; tiles need a real wait.
-    QEventLoop loop;
-    QTimer::singleShot(kPollMs, &loop, &QEventLoop::quit);
-    loop.exec(QEventLoop::ExcludeUserInputEvents);
+    CShotWait::wait(kPollMs);
 
     // Before rendering: a draw finishing mid-render swaps the buffer after it was read.
     bool complete = true;
@@ -124,11 +139,32 @@ QImage CShotWriter::render(QWidget* w, const QSize& size) {
     settle(w);
   }
 
-  const bool hasCanvas = nullptr != qobject_cast<CCanvas*>(w) || nullptr != w->findChild<CCanvas*>();
-  if (hasCanvas && !settleStable(w)) {
+  if (holdsCanvas(w) && !settleStable(w)) {
     return QImage();
   }
   return renderAtDpr1(w);
+}
+
+QHash<const QWidget*, QImage> CShotWriter::renderAll(const QList<QWidget*>& parts) {
+  // settleStable() takes two passes of its own; a window's maps are those of every part in it.
+  QHash<const QWidget*, bool> mapsComplete;
+  QHash<const QWidget*, QImage> pictures;
+  for (QWidget* w : parts) {
+    settle(w);
+    if (holdsCanvas(w)) {
+      QWidget* window = w->window();
+      if (!mapsComplete.contains(window)) {
+        mapsComplete.insert(window, settleStable(window));
+      }
+      // Rendering a part paints its map, which may start a redraw the next part would catch half done.
+      if (!mapsComplete.value(window) || (!drawComplete(w) && !settleStable(w))) {
+        pictures.insert(w, QImage());
+        continue;
+      }
+    }
+    pictures.insert(w, renderAtDpr1(w));
+  }
+  return pictures;
 }
 
 QString CShotWriter::write(const QImage& image, const QString& id) const {
@@ -137,6 +173,10 @@ QString CShotWriter::write(const QImage& image, const QString& id) const {
     return QString();
   }
 
+  if (!CShotFiles::staysInside(id)) {
+    qWarning() << "shoot:" << id << "names a place outside" << outDir;
+    return QString();
+  }
   const QString& path = QDir(outDir).absoluteFilePath(id + ".png");
   // QSaveFile: publish may move the file at any moment and must never find half a picture.
   QSaveFile out(path);

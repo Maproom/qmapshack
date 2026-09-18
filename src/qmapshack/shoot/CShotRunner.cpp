@@ -21,7 +21,6 @@
 #include <QApplication>
 #include <QDebug>
 #include <QDir>
-#include <QEventLoop>
 #include <QFileInfo>
 #include <QTimer>
 #include <QWidget>
@@ -31,12 +30,8 @@
 #include "shoot/CShotFixture.h"
 #include "shoot/CShotPage.h"
 #include "shoot/CShotSelfTest.h"
+#include "shoot/CShotWait.h"
 #include "shoot/CShotWriter.h"
-
-namespace {
-/** CMainWindow maximizes a window with no stored geometry after 500 ms. */
-constexpr qint32 kStartupMs = 1000;
-}  // namespace
 
 CShotRunner::CShotRunner(const CShotOptions::opts_t& opts, QWidget* window)
     : QObject(window),
@@ -50,9 +45,7 @@ CShotRunner::CShotRunner(const CShotOptions::opts_t& opts, QWidget* window)
 void CShotRunner::start() { QTimer::singleShot(0, this, &CShotRunner::slotRun); }
 
 void CShotRunner::slotRun() {
-  QEventLoop loop;
-  QTimer::singleShot(kStartupMs, &loop, &QEventLoop::quit);
-  loop.exec(QEventLoop::ExcludeUserInputEvents);
+  CShotWait::wait(CShotWait::kStartupMs);
 
   if (target.isEmpty()) {
     qWarning() << "shoot: --shoot needs --shoot-target, the page's shot file";

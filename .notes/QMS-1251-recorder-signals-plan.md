@@ -14,7 +14,8 @@ records on one machine and replays on another gets rid of that. What keeps it fr
    the window system, replay, and compare the state.
 2. **Nothing unsupported goes unnoticed while recording**: a click nothing covers is reported, a key
    press nothing made a step of is recorded as itself.
-3. **A recording is saved only if it replays to the same state** in the writer's session - #1257. A
+3. **A recording is saved only if it replays** - every step's replay check passes in a state started with
+   `--doc-trial`, the recording parked in `_cache` until then - #1257. A
    handler bug then shows as "record this differently" when it happens, not as a wrong picture later.
 4. **A finding is a local handler fix with a case that fails first** - never a design change.
 

@@ -42,6 +42,12 @@ class CShotRegistry {
 
   QStringList exposureNames() const { return exposures.keys(); }
 
+  /** @return the id of the exposure building exactly @p widget's class, empty when there is none */
+  QString exposureOf(const QWidget* widget) const;
+
+  /** @return what the exposure @p id shows, empty for an unknown id */
+  QString exposureDescription(const QString& id) const { return exposures.value(id).description; }
+
   /** @return ids registered more than once; the first registration wins */
   const QStringList& duplicates() const { return duplicateIds; }
 

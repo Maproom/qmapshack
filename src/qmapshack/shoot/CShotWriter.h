@@ -19,7 +19,9 @@
 #ifndef CSHOTWRITER_H
 #define CSHOTWRITER_H
 
+#include <QHash>
 #include <QImage>
+#include <QList>
 #include <QString>
 
 class QWidget;
@@ -46,6 +48,13 @@ class CShotWriter {
      @return a null image when a map is incomplete
    */
   static QImage render(QWidget* w, const QSize& size);
+
+  /**
+     @brief Render each of @p parts at its current size and dpr 1, waiting for the maps once per window.
+
+     @return a picture per part, a null one for a part whose map is incomplete
+   */
+  static QHash<const QWidget*, QImage> renderAll(const QList<QWidget*>& parts);
 
   /** @return the path written, or an empty string on failure */
   QString write(const QImage& image, const QString& id) const;

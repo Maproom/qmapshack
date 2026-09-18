@@ -8,7 +8,8 @@ Status: a throwaway demo on branch `QMS-1217_demo`. It renders a real page, a wr
 and a scenario is recorded rather than registered. On `QMS-1217` the fixture data is committed and
 `CShotFixture` loads it (#1249); `shots.py replay` and `unused` run the pages headless (#1250);
 `shots.py take` opens the launcher and panel, `shots.py publish` exists (#1254); the state process takes
-pictures with F9 and a region, records, and stores a recording only once it replays (#1257).
+pictures with F9 and a region, records, and stores a recording only once it replays (#1257); F9 offers
+the parts in the writer's words (#1255).
 
 This file replaces `QMS-1217-screenshot-framework-plan.md`,
 `QMS-1217-doc-mode-two-process-plan.md` and `shot-input-replay-plan.md`. They were three layers of
@@ -343,7 +344,10 @@ button, because the mouse is busy pointing:
 | | Reload page, Publish | read the page again; `shots.py publish` |
 
 F9 starts at the widget under the mouse and offers every step up to the whole window that a shot can
-find again, and shows what it took to keep or throw away. A live part is written from the render made
+find again, each named the way the writer sees it - a dock's caption, a tab's text, a group box's
+title, a window's title, the class name only when nothing else names it, and the address appended
+only where two would read the same. Qt's own `qt_`-prefixed widgets are not offered. It shows what it
+took to keep or throw away. A live part is written from the render made
 at the key press; everything else - an exposed window above all - is a **fresh** instance through the
 headless path. A class with no exposure prints the one line a developer has to add.
 
@@ -821,7 +825,7 @@ ticket of its own, because none of them needs the framework to be reviewable:
 | 9 | **Replay** (#1253) | `CShotReplay`: the queue that calls `IShotHandler::replay()` per step, `clear()` before and after, the start state and the `tab`-last rule, the deadline, a scenario's steps read out of the shot file, one scenario per process | a page with a scenario reproduces byte-identically, three times in one process |
 | 10 | **Launcher, panel, channel** (#1254); also the minimal state process: `--doc-scenario`, the fixture, the replay, `ready`, `leave()` | `shots.py take` and `shots.py publish`; the session and every file operation but writing the base configuration and a recording, `childArguments()`, the panel's buttons and statuses, `setBusy`, `mayClose()`, `endSession()`, the `QLocalServer` named `qms-doc-<pid>` | the panel comes up, starts and replaces a state process, and asks before closing over unpublished pictures; `publish` puts the retaken pictures into `doc/images/` and empties `_work/` |
 | 11 | **State process and F9** (#1257) | on top of #1254's minimal `CShotDocMode`: the `(base)` arrangement captured and replayed, the verbs beyond `select`/`sync`, one scenario held up, writing a recording into the shot file only after a state started with `--doc-trial` replays it without a failure, parked in `_cache` until then together with the settings snapshotted when the recording started, which that state is composed from, `Ctrl+Shift+F9`, the keep/throw preview, the region picker, `portableGeometry()`/`namesAPlace()`, `settingsDrift()` | a writer records a scenario and tags a picture without touching a file |
-| 12 | **Writer-facing labels** (#1255) | names, not addresses, in `chooseLivePart()`; `qt_`-prefixed internals not offered | the step list reads in the writer's words |
+| 12 | **Writer-facing labels** (#1255) | `CShotDocMode::onScreenName()`: a dock's caption, a tab's text, a group box's title, a window's title, else the class name; `qt_`-prefixed internals not offered; the address only where two entries collide, because `chooseLivePart()` finds the part by its label. The stored address does not change | the step list reads in the writer's words |
 | 13 | **Drop the menu split** (#1256) | delete `CGisListWks::buildMenuItemTrk()`, which the replay queue made pointless, and cover a stack-local menu with a shot instead | a shot of the track context menu replays; nothing calls a `buildMenuXxx()` |
 
 **Naming, to settle with Oliver before the branch closes.** The switch prefixes name the driver, not

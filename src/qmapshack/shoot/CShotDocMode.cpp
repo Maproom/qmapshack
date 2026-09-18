@@ -25,10 +25,12 @@
 #include <QDebug>
 #include <QDialog>
 #include <QDialogButtonBox>
+#include <QDockWidget>
 #include <QEvent>
 #include <QEventLoop>
 #include <QFile>
 #include <QFileInfo>
+#include <QGroupBox>
 #include <QHash>
 #include <QImage>
 #include <QInputDialog>
@@ -577,6 +579,27 @@ QWidget* CShotDocMode::activeTarget() {
   return nullptr == focus ? nullptr : focus->window();
 }
 
+QString CShotDocMode::onScreenName(const QWidget* w) {
+  if (nullptr == w) {
+    return QString();
+  }
+  if (const QDockWidget* dock = qobject_cast<const QDockWidget*>(w); nullptr != dock) {
+    return dock->windowTitle();
+  }
+  // A page of a tab widget is named by its tab; its parent is the stack inside the tab widget.
+  if (const QWidget* stack = w->parentWidget(); nullptr != stack) {
+    if (const QTabWidget* tabs = qobject_cast<const QTabWidget*>(stack->parentWidget()); nullptr != tabs) {
+      if (const qint32 index = tabs->indexOf(const_cast<QWidget*>(w)); index >= 0) {
+        return tabs->tabText(index);
+      }
+    }
+  }
+  if (const QGroupBox* group = qobject_cast<const QGroupBox*>(w); nullptr != group) {
+    return group->title();
+  }
+  return w->isWindow() ? w->windowTitle() : QString();
+}
+
 QList<QWidget*> CShotDocMode::livePartsAt(CMainWindow* main, QStringList& labels) const {
   // Where the writer points, not where the keyboard focus is.
   QWidget* start = QApplication::widgetAt(QCursor::pos());
@@ -585,20 +608,34 @@ QList<QWidget*> CShotDocMode::livePartsAt(CMainWindow* main, QStringList& labels
   }
 
   QList<QWidget*> parts;
-  labels.clear();
+  QStringList names;
+  QStringList addresses;
   for (QWidget* w = start; nullptr != w && w != main; w = w->parentWidget()) {
     // Only what a shot can find again.
     const std::optional<QString>& address = CShotAddress::addressOf(main, w);
     if (!address.has_value() || address->isEmpty()) {
       continue;
     }
-    const QString& title =
-        w->windowTitle().isEmpty() ? QString::fromLatin1(w->metaObject()->className()) : w->windowTitle();
+    // Qt's own plumbing is never what the writer pointed at.
+    if (w->objectName().startsWith("qt_")) {
+      continue;
+    }
+    const QString& name = onScreenName(w);
     parts << w;
-    labels << QString("%1 (%2)").arg(title, *address);
+    names << (name.isEmpty() ? QString::fromLatin1(w->metaObject()->className()) : name);
+    addresses << *address;
   }
   parts << main;
-  labels << QString("The whole application");
+  names << QString("The whole application");
+  addresses << QString();
+
+  // chooseLivePart() finds the part by its label, so two that read the same are told apart by their address.
+  labels.clear();
+  for (qsizetype i = 0; i < names.size(); i++) {
+    const QString& name = names.at(i);
+    const bool ambiguous = names.count(name) > 1 && !addresses.at(i).isEmpty();
+    labels << (ambiguous ? QString("%1 (%2)").arg(name, addresses.at(i)) : name);
+  }
   return parts;
 }
 

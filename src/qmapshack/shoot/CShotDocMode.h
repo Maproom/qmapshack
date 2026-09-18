@@ -74,6 +74,13 @@ class CShotDocMode : public QObject {
   /** @return true when @p value is an absolute path, or a list holding one; those exist on this machine only */
   static bool namesAPlace(const QVariant& value);
 
+  /**
+     @brief What the writer sees @p w called: a dock's caption, its tab's text, a group box's title, a window's title.
+
+     @return empty when nothing on screen names it; the caller falls back to the class name
+   */
+  static QString onScreenName(const QWidget* w);
+
  protected:
   bool eventFilter(QObject* watched, QEvent* event) override;
 

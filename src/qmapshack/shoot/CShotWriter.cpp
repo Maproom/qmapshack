@@ -27,14 +27,39 @@
 #include <QFileInfo>
 #include <QLayout>
 #include <QSaveFile>
-#include <QTimer>
 #include <QWidget>
+#include <algorithm>
 
 #include "canvas/CCanvas.h"
+#include "shoot/CShotFiles.h"
+#include "shoot/CShotWait.h"
 
 namespace {
 constexpr qint32 kPollMs = 250;
 constexpr qint32 kTimeoutMs = 20000;
+
+/** @return the maps in the picture of @p w: @p w itself or one visible to it; a page that is not current is not */
+QList<CCanvas*> canvasesIn(QWidget* w) {
+  QList<CCanvas*> canvases;
+  if (CCanvas* canvas = qobject_cast<CCanvas*>(w); nullptr != canvas) {
+    canvases << canvas;
+  }
+  const QList<CCanvas*>& children = w->findChildren<CCanvas*>();
+  for (CCanvas* canvas : children) {
+    if (canvas->isVisibleTo(w)) {
+      canvases << canvas;
+    }
+  }
+  return canvases;
+}
+
+bool holdsCanvas(QWidget* w) { return !canvasesIn(w).isEmpty(); }
+
+/** @return true when no map in the picture of @p w is drawing */
+bool drawComplete(QWidget* w) {
+  const QList<CCanvas*>& canvases = canvasesIn(w);
+  return std::all_of(canvases.begin(), canvases.end(), [](const CCanvas* canvas) { return canvas->isDrawComplete(); });
+}
 }  // namespace
 
 CShotWriter::CShotWriter(const QString& outDir) : outDir(outDir) {}
@@ -61,23 +86,13 @@ void CShotWriter::settle(QWidget* w) {
 }
 
 bool CShotWriter::settleStable(QWidget* w) {
-  QList<CCanvas*> candidates = w->findChildren<CCanvas*>();
-  if (CCanvas* canvas = qobject_cast<CCanvas*>(w); nullptr != canvas) {
-    candidates << canvas;
-  }
-
-  QList<CCanvas*> canvases;
-  for (CCanvas* canvas : std::as_const(candidates)) {
-    // A canvas on a page that is not current is not in the picture.
-    if (canvas != w && !canvas->isVisibleTo(w)) {
-      continue;
-    }
+  const QList<CCanvas*>& canvases = canvasesIn(w);
+  for (const CCanvas* canvas : canvases) {
     // A hidden canvas never paints, so its redraw never completes.
     if (!canvas->isVisible()) {
       qWarning() << "shoot: a map in the picture is hidden and paints nothing";
       return false;
     }
-    canvases << canvas;
   }
 
   QElapsedTimer timer;
@@ -85,9 +100,7 @@ bool CShotWriter::settleStable(QWidget* w) {
   QImage last;
   while (!timer.hasExpired(kTimeoutMs)) {
     // processEvents() returns once nothing is pending; tiles need a real wait.
-    QEventLoop loop;
-    QTimer::singleShot(kPollMs, &loop, &QEventLoop::quit);
-    loop.exec(QEventLoop::ExcludeUserInputEvents);
+    CShotWait::wait(kPollMs);
 
     // Before rendering: a draw finishing mid-render swaps the buffer after it was read.
     bool complete = true;
@@ -124,11 +137,32 @@ QImage CShotWriter::render(QWidget* w, const QSize& size) {
     settle(w);
   }
 
-  const bool hasCanvas = nullptr != qobject_cast<CCanvas*>(w) || nullptr != w->findChild<CCanvas*>();
-  if (hasCanvas && !settleStable(w)) {
+  if (holdsCanvas(w) && !settleStable(w)) {
     return QImage();
   }
   return renderAtDpr1(w);
+}
+
+QHash<const QWidget*, QImage> CShotWriter::renderAll(const QList<QWidget*>& parts) {
+  // settleStable() takes two passes of its own; a window's maps are those of every part in it.
+  QHash<const QWidget*, bool> mapsComplete;
+  QHash<const QWidget*, QImage> pictures;
+  for (QWidget* w : parts) {
+    settle(w);
+    if (holdsCanvas(w)) {
+      QWidget* window = w->window();
+      if (!mapsComplete.contains(window)) {
+        mapsComplete.insert(window, settleStable(window));
+      }
+      // Rendering a part paints its map, which may start a redraw the next part would catch half done.
+      if (!mapsComplete.value(window) || (!drawComplete(w) && !settleStable(w))) {
+        pictures.insert(w, QImage());
+        continue;
+      }
+    }
+    pictures.insert(w, renderAtDpr1(w));
+  }
+  return pictures;
 }
 
 QString CShotWriter::write(const QImage& image, const QString& id) const {
@@ -137,6 +171,10 @@ QString CShotWriter::write(const QImage& image, const QString& id) const {
     return QString();
   }
 
+  if (!CShotFiles::staysInside(id)) {
+    qWarning() << "shoot:" << id << "names a place outside" << outDir;
+    return QString();
+  }
   const QString& path = QDir(outDir).absoluteFilePath(id + ".png");
   // QSaveFile: publish may move the file at any moment and must never find half a picture.
   QSaveFile out(path);

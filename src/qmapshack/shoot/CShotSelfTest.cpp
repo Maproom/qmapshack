@@ -31,6 +31,9 @@
 #include <QDialogButtonBox>
 #include <QDockWidget>
 #include <QDoubleSpinBox>
+#include <QElapsedTimer>
+#include <QFile>
+#include <QFileInfo>
 #include <QGridLayout>
 #include <QGroupBox>
 #include <QGuiApplication>
@@ -102,6 +105,7 @@
 #include "shoot/CShotReplay.h"
 #include "shoot/CShotStep.h"
 #include "shoot/CShotSynth.h"
+#include "shoot/CShotWait.h"
 #include "shoot/CShotWarnings.h"
 #include "shoot/CShotWriter.h"
 #include "widgets/CIconGrid.h"
@@ -1584,8 +1588,10 @@ qint32 CShotSelfTest::run(CShotContext& ctx) {
                  CShotSynth::mouse(QTest::MouseRelease, canvas, Qt::LeftButton, Qt::NoModifier, at);
                });
              },
-         .replays = false});
-  settle(500);
+         .replays = false,
+         .warns = "a button was still held when the recording stopped"});
+  // The release must not land in the next case's recording.
+  CShotWait::waitFor([]() { return Qt::NoButton == QGuiApplication::mouseButtons(); }, 2000, 20);
 
   check({"a hover goes on after a key press as a hover of its own",
          {R"({"do":"move","widget":"%MAP%"})", R"({"do":"keypress","key":"Up","widget":"%MAP%"})",

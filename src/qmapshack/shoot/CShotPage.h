@@ -64,7 +64,7 @@ qint32 applyArrangement(CMainWindow& main, const QJsonObject& layout);
 bool applyView(CCanvas* canvas, const QJsonObject& view);
 
 /**
-   @brief Take one shot, in its scenario when it names one.
+   @brief Take one shot, in its scenario when it names one and that is not CShotContext::liveScenario().
 
    @param scenarios  the shot file's recordings by name
    @return the failures

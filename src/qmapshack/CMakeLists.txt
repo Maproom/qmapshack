@@ -1149,6 +1149,8 @@ if(QMS_DOC_MODE)
         shoot/CShotStep.h
         shoot/CShotSynth.cpp
         shoot/CShotSynth.h
+        shoot/CShotWait.cpp
+        shoot/CShotWait.h
         shoot/CShotWarnings.cpp
         shoot/CShotWarnings.h
         shoot/CShotWriter.cpp

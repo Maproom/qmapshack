@@ -37,6 +37,19 @@ bool CShotRegistry::addExposure(const QString& id, const QMetaObject* metaObject
   return true;
 }
 
+QString CShotRegistry::exposureOf(const QWidget* widget) const {
+  if (nullptr == widget) {
+    return QString();
+  }
+  // A subclass is another dialog.
+  for (auto it = exposures.constBegin(); it != exposures.constEnd(); ++it) {
+    if (it->metaObject == widget->metaObject()) {
+      return it.key();
+    }
+  }
+  return QString();
+}
+
 QWidget* CShotRegistry::buildExposure(const QString& id, CShotContext& ctx, QWidget* parent) const {
   const auto it = exposures.constFind(id);
   if (it == exposures.constEnd()) {

@@ -57,6 +57,11 @@ class CShotDocLauncher : public QObject {
  private:
   /** @brief Replace the state process with one in @p scenario; @p followUp is sent once it is ready. */
   void enterScenario(const QString& scenario, const QString& followUp = QString());
+  /** @brief Replace the state process with one in the base that replays the parked recording and stores it as @p name.
+   */
+  void tryRecording(const QString& name);
+  /** @brief Compose the configuration and start a state process in @p scenario; @p trial names a parked recording. */
+  void startState(const QString& scenario, const QString& followUp, const QString& trial);
   void stopState();
   void onStateReady(const QString& text);
   void onStateReport(const QString& what, const QString& rest);
@@ -83,10 +88,15 @@ class CShotDocLauncher : public QObject {
   /** @brief Say it on the panel and in a box; a Windows build has no console. */
   void reportFailure(const QString& text);
 
-  /** @return the composed configuration, empty with @p error set when composing failed */
-  QString composeConfig(const QString& scenario, QString& error);
+  /**
+     @brief Compose a run's configuration through `shots.py compose`.
+
+     @param source  compose from this file instead of @p scenario's own or the base; a trial's parked settings
+     @return the composed configuration, empty with @p error set when composing failed
+   */
+  QString composeConfig(const QString& scenario, QString& error, const QString& source = QString());
   /** @return this process' arguments with the launcher's switches replaced for a state in @p scenario */
-  QStringList childArguments(const QString& config, const QString& scenario) const;
+  QStringList childArguments(const QString& config, const QString& scenario, const QString& trial) const;
   QString channelName() const;
 
   void showShot(const QString& id);
@@ -100,6 +110,8 @@ class CShotDocLauncher : public QObject {
   /** @brief Send @p verb for @p id to a state in the shot's own scenario, starting one when needed. */
   void actOnShot(const QString& verb, const QString& id);
 
+  /** @brief Take @p id again headless, into `doc/images/_work/`, the way a build renders it. */
+  void retakeShot(const QString& id);
   /** @brief `shots.py replay` of this page into `_check`: whether every shot still replays. */
   void retakePage();
   /** @brief `shots.py publish`; with @p thenEnd the session ends once it succeeded. */

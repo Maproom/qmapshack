@@ -67,8 +67,14 @@ class CShotFiles {
 
   /** @return why @p name cannot be a scenario, empty when it can */
   static QString nameProblem(const QString& name);
+  /** @return the scenario whose name differs from @p name only in case, empty when there is none */
+  QString caseTwinOf(const QString& name) const;
+  /** @return true when @p name, a shot id or scenario name joined below a directory, stays below it */
+  static bool staysInside(const QString& name);
 
   QString shotFile() const;
+  /** @return why the shot file cannot be read, empty when it can or does not exist */
+  QString shotFileProblem() const;
   /** @return the INI file the panel's size and where the panel and the application window sit are kept in */
   QString placementFile() const;
   /**
@@ -81,6 +87,16 @@ class CShotFiles {
   QString scenarioConfig(const QString& scenario) const;
   QString publishedImage(const QString& id) const;
   QString workImage(const QString& id) const;
+  /** @return where a picture just taken waits for the writer's Keep: `doc/shots/_cache/pending/` */
+  QString pendingDir() const;
+  QString pendingImage(const QString& id) const;
+  /** @return where storeShot() keeps @p id's entry from before it was taken again, until revert or publish */
+  QString workEntry(const QString& id) const;
+
+  /** @return where a recording waits until it replays: `doc/shots/_cache/<page>-trial.json` */
+  QString trialFile() const;
+  /** @return the parked recording's settings: `doc/shots/_cache/<page>-trial.ini` */
+  QString trialConfig() const;
 
   /** @return true when `doc/images/_work/` holds a picture of this page */
   bool hasUnpublishedImages() const;
@@ -116,8 +132,27 @@ class CShotFiles {
   /** @brief Remove shots and their pictures; the scenarios stay. */
   QString removeShots(const QStringList& ids);
 
-  /** @brief Delete @p id's work picture. */
+  /** @brief Delete @p id's work picture and put back its entry from before it was taken again. */
   QString revertShot(const QString& id);
+
+  /** @brief Write @p steps to trialFile(); trialConfig() is the caller's to write. */
+  QString parkRecording(const QJsonArray& steps) const;
+
+  /** @brief Read the steps parkRecording() wrote. */
+  QString parkedRecording(QJsonArray& steps) const;
+
+  /** @brief Delete trialFile() and trialConfig(). */
+  void dropParked() const;
+
+  /**
+     @brief Store @p steps as the scenario @p name, replacing one of that name, and @p config as its configuration.
+
+     @param config  an INI file copied to scenarioConfig(), empty to leave the configuration alone
+   */
+  QString storeScenario(const QString& name, const QJsonArray& steps, const QString& config);
+
+  /** @brief Store own @p shot, replacing the one with its id; the first replaced since publish is kept for revert. */
+  QString storeShot(const QJsonObject& shot);
 
  private:
   /** @return a row of @p id holding only where its pictures are */

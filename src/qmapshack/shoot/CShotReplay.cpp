@@ -49,35 +49,28 @@ QString compact(const QJsonObject& step) {
   return QString::fromUtf8(QJsonDocument(step).toJson(QJsonDocument::Compact));
 }
 
-/** @brief Close @p active's windows one by one; one that stays open ends it. */
-void closeAll(QWidget* (*active)()) {
-  QPointer<QWidget> widget = active();
-  while (!widget.isNull()) {
+using CShotReplay::blocker;
+
+/** The deadline of every perform() running, outermost first. */
+QList<QTimer*> armed;
+
+/** @brief Close the popups and modal dialogs on top of @p below, so the loops under them can return. */
+void closeAbove(const QWidget* below) {
+  QPointer<QWidget> widget = blocker();
+  while (!widget.isNull() && widget != below) {
     // A dialog's closeEvent() may refuse; reject() ends its exec() regardless.
     if (QDialog* dialog = qobject_cast<QDialog*>(widget); nullptr != dialog) {
       dialog->reject();
     } else {
       widget->close();
     }
-    QWidget* next = active();
+    QWidget* next = blocker();
     if (next == widget) {
       qWarning() << "shoot: the replay cannot close" << widget->metaObject()->className();
       return;
     }
     widget = next;
   }
-}
-
-/** @brief Close what runs an event loop on top of the application, so the loops below can return. */
-void closeBlockingWindows() {
-  closeAll(&QApplication::activePopupWidget);
-  closeAll(&QApplication::activeModalWidget);
-}
-
-/** @return the popup, else the modal dialog, that runs an event loop on top; nullptr when none does */
-QWidget* blocker() {
-  QWidget* popup = QApplication::activePopupWidget();
-  return (nullptr != popup) ? popup : QApplication::activeModalWidget();
 }
 
 /** A step that has not returned: which one, the event loop level and what was open when it started. */
@@ -164,8 +157,10 @@ qint32 CShotReplay::perform(QWidget* root, const QList<QJsonObject>& steps, cons
       q->failures += q->whenReady();
       q->picturing = false;
     }
-    // The loop below what a step opened cannot return while it is up.
-    closeBlockingWindows();
+    // The loop below what a step opened cannot return while it is up. Without steps a window up is the writer's own.
+    if (!q->steps.isEmpty()) {
+      closeAbove(q->below);
+    }
     q->loop.quit();
   };
 
@@ -199,10 +194,24 @@ qint32 CShotReplay::perform(QWidget* root, const QList<QJsonObject>& steps, cons
   queue->deadline = &deadline;
   queue->below = blocker();
   deadline.start(kDeadlineMs);
+  armed << &deadline;
 
   QTimer::singleShot(0, qApp, queue->pump);
   queue->loop.exec();
+  armed.removeOne(&deadline);
+  queue->deadline = nullptr;
   return queue->failures;
+}
+
+void CShotReplay::keepAlive() {
+  for (QTimer* deadline : std::as_const(armed)) {
+    deadline->start(kDeadlineMs);
+  }
+}
+
+QWidget* CShotReplay::blocker() {
+  QWidget* popup = QApplication::activePopupWidget();
+  return (nullptr != popup) ? popup : QApplication::activeModalWidget();
 }
 
 void CShotReplay::clear(const QJsonArray& scenario, CShotContext& ctx) {

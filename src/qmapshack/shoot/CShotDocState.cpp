@@ -24,11 +24,7 @@
 #include <utility>
 
 #include "shoot/CShotPage.h"
-
-namespace {
-/** How long the process gets to end on terminate(), then on kill() [ms]. */
-constexpr qint32 kStopTimeoutMs = 5000;
-}  // namespace
+#include "shoot/CShotWait.h"
 
 CShotDocState::CShotDocState(const QString& scenario, const QString& followUp, QObject* parent)
     : QObject(parent), scenarioName(scenario), followUp(followUp), process(new QProcess(this)) {
@@ -64,13 +60,8 @@ void CShotDocState::start(const QString& program, const QStringList& args) { pro
 
 void CShotDocState::stop() {
   stopped = true;
-  if (QProcess::NotRunning != process->state()) {
-    process->terminate();
-    if (!process->waitForFinished(kStopTimeoutMs)) {
-      process->kill();
-      process->waitForFinished(kStopTimeoutMs);
-    }
-  }
+  // A GUI process: terminate() reaches it on every platform.
+  CShotWait::stopProcess(process, true);
   if (!socket.isNull()) {
     socket->disconnect(this);
     socket->deleteLater();

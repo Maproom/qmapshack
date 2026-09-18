@@ -77,6 +77,13 @@ class CShotDocMode : public QObject {
   /** @return true when @p key holds an account detail: an API key, a user name, an email, a password */
   static bool isAccountDetail(const QString& key);
 
+  /**
+     @brief What the writer sees @p w called: a dock's caption, its tab's text, a group box's title, a window's title.
+
+     @return empty when nothing on screen names it; the caller falls back to the class name
+   */
+  static QString onScreenName(const QWidget* w);
+
  protected:
   bool eventFilter(QObject* watched, QEvent* event) override;
 

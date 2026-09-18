@@ -22,10 +22,12 @@
 #include <QDataStream>
 #include <QDebug>
 #include <QDir>
+#include <QDockWidget>
 #include <QEvent>
 #include <QEventLoop>
 #include <QFile>
 #include <QFileInfo>
+#include <QGroupBox>
 #include <QGuiApplication>
 #include <QJsonArray>
 #include <QJsonDocument>
@@ -37,6 +39,7 @@
 #include <QPointer>
 #include <QRect>
 #include <QScreen>
+#include <QTabWidget>
 #include <QTemporaryDir>
 #include <QTimer>
 #include <QVariant>
@@ -497,6 +500,29 @@ void testIsAccountDetail() {
   verdict("isAccountDetail: search keys, user names, emails and database logins, nothing else", ok);
 }
 
+void testOnScreenName() {
+  QDockWidget dock("Workspace");
+  QWidget* content = new QWidget(&dock);
+  dock.setWidget(content);
+
+  QTabWidget tabs;
+  QWidget* page = new QWidget;
+  tabs.addTab(page, "Summary");
+
+  QGroupBox group("Filter");
+  QWidget plain;
+  QWidget window(nullptr, Qt::Window);
+  window.setWindowTitle("Set up the map");
+
+  const QStringList& got = {CShotDocMode::onScreenName(&dock),  CShotDocMode::onScreenName(page),
+                            CShotDocMode::onScreenName(&group), CShotDocMode::onScreenName(&window),
+                            CShotDocMode::onScreenName(&plain), CShotDocMode::onScreenName(content),
+                            CShotDocMode::onScreenName(nullptr)};
+  const QStringList& want = {"Workspace", "Summary", "Filter", "Set up the map", "", "", ""};
+  verdict("onScreenName: the dock's caption, the tab's text, the group's title, the window's title, else nothing",
+          got == want, got.join(" | "));
+}
+
 void testUnused() {
   checkout_t c;
   const QStringList& unused = c.files.unusedShots();
@@ -752,6 +778,7 @@ qint32 CShotDocSelfTest::run() {
   testOnScreen();
   testNamesAPlace();
   testIsAccountDetail();
+  testOnScreenName();
   testJob();
   testStateProcess();
   qWarning().noquote() << "shoot: self test (documentation mode)" << (cases - failures) << "of" << cases

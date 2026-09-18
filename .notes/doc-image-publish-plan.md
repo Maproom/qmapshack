@@ -90,12 +90,13 @@ Nothing stores the flag: a row is changed exactly while a work copy exists for i
 | | written by | published | in git |
 |---|---|---|---|
 | `doc/images/` | `publish`, nothing else | — | yes |
-| `doc/images/_work/` | the session, when a picture is taken | by `publish`, then emptied | no |
-| `doc/images/_check/` | `shots.py replay` | never | no |
+| `doc/images/_work/` | the session, when a picture is taken, and *Take again* | by `publish`, then emptied | no |
+| `doc/images/_check/` | `shots.py replay` with no `-o`, which *Take all again* is | never | no |
 
 The third is what keeps *Take all again* from marking every row: it answers whether each shot still
 replays, which is a different question from whether a picture should change, and it must not leave
-its output where a deliberate retake leaves its own.
+its output where a deliberate retake leaves its own. Both run `shots.py replay`; only the deliberate
+one passes `-o doc/images/_work`.
 
 ## Take all again
 

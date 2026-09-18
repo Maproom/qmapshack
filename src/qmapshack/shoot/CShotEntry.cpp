@@ -139,7 +139,8 @@ std::optional<qint32> CShotEntry::run(const CAppOpts& opts, CMainWindow& window)
       window.setAttribute(Qt::WA_DontShowOnScreen);
       (new CShotDocLauncher(QDir(opts.doc.docDir), opts.doc.docPage, &window))->start();
     } else {
-      (new CShotDocMode(QDir(opts.doc.docDir), opts.doc.docPage, opts.doc.docScenario, &window))->start();
+      (new CShotDocMode(QDir(opts.doc.docDir), opts.doc.docPage, opts.doc.docScenario, opts.doc.docTrial, &window))
+          ->start();
     }
     return std::nullopt;
   }
@@ -183,6 +184,10 @@ void CShotEntry::pinEnvironment(int argc, char** argv) {
 }
 
 bool CShotEntry::prepare(const CAppOpts& opts) {
+  if (!opts.doc.stray.isEmpty()) {
+    qCritical().noquote() << opts.doc.stray.join(' ') << "belong to a documentation run; give --shoot or --doc too";
+    return false;
+  }
   if (!isDocRun(opts)) {
     return true;
   }

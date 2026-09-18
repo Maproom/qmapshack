@@ -22,12 +22,7 @@
 #include <QTimer>
 #include <cstdio>
 
-namespace {
-/** How long a program asked to end gets to clean up [ms]. */
-constexpr qint32 kTerminateTimeoutMs = 5000;
-/** How long a killed program gets to go [ms]. */
-constexpr qint32 kKillTimeoutMs = 5000;
-}  // namespace
+#include "shoot/CShotWait.h"
 
 CShotsJob::CShotsJob(const QString& program, const QStringList& args, const QString& missing, QObject* parent)
     : QObject(parent) {
@@ -62,14 +57,11 @@ CShotsJob::~CShotsJob() {
     process->disconnect(this);
     // Asked first: shots.py kills the application it started and removes its scratch directory on SIGTERM. Windows
     // has no such request for a console program.
-#if !defined(Q_OS_WIN)
-    process->terminate();
-    if (process->waitForFinished(kTerminateTimeoutMs)) {
-      return;
-    }
+#if defined(Q_OS_WIN)
+    CShotWait::stopProcess(process, false);
+#else
+    CShotWait::stopProcess(process, true);
 #endif
-    process->kill();
-    process->waitForFinished(kKillTimeoutMs);
   }
 }
 

@@ -20,11 +20,8 @@
 
 #include <QDebug>
 #include <QDir>
-#include <QElapsedTimer>
-#include <QEventLoop>
 #include <QFileInfo>
 #include <QStringList>
-#include <QTimer>
 #include <functional>
 
 #include "gis/CGisListWks.h"
@@ -35,6 +32,7 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "shoot/CShotContext.h"
+#include "shoot/CShotWait.h"
 
 namespace {
 const QString kProject = "projects/Example.qms";
@@ -51,21 +49,6 @@ IGisProject* projectOf(const QString& filename) {
     }
   }
   return nullptr;
-}
-
-/** @return false when @p done is still false after kLoadTimeoutMs; the event loop runs meanwhile */
-bool waitFor(const std::function<bool()>& done) {
-  QElapsedTimer timer;
-  timer.start();
-  while (!done()) {
-    if (timer.hasExpired(kLoadTimeoutMs)) {
-      return false;
-    }
-    QEventLoop loop;
-    QTimer::singleShot(kPollMs, &loop, &QEventLoop::quit);
-    loop.exec(QEventLoop::ExcludeUserInputEvents);
-  }
-  return true;
 }
 
 /** @return the first item of this type in @p project, nullptr if there is none */
@@ -89,7 +72,7 @@ qint32 CShotFixture::load(const QString& dir, CShotContext& ctx) {
 
   // The workspace restores saved projects on its own timer.
   const CGisListWks& wks = CGisWorkspace::self().getWksList();
-  if (!waitFor([&wks]() { return wks.isWorkspaceLoaded(); })) {
+  if (!CShotWait::waitFor([&wks]() { return wks.isWorkspaceLoaded(); }, kLoadTimeoutMs, kPollMs)) {
     qWarning() << "shoot: the workspace is still not restored after" << kLoadTimeoutMs << "ms";
     return 1;
   }
@@ -107,7 +90,7 @@ qint32 CShotFixture::load(const QString& dir, CShotContext& ctx) {
   }
 
   // Items arrive from a load thread through the event loop.
-  if (!waitFor([project]() { return !project->isLoading(); })) {
+  if (!CShotWait::waitFor([project]() { return !project->isLoading(); }, kLoadTimeoutMs, kPollMs)) {
     qWarning() << "shoot: the fixture project" << filename << "is still loading after" << kLoadTimeoutMs << "ms";
     return 1;
   }

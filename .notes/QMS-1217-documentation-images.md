@@ -7,8 +7,8 @@ Goal: every image in the user documentation is build output, regenerable by one 
 Status: a throwaway demo on branch `QMS-1217_demo`. It renders a real page, a writer can use it,
 and a scenario is recorded rather than registered. On `QMS-1217` the fixture data is committed and
 `CShotFixture` loads it (#1249); `shots.py replay` and `unused` run the pages headless (#1250);
-`shots.py take` opens the launcher and panel with a minimal state process, `shots.py publish` exists
-(#1254).
+`shots.py take` opens the launcher and panel, `shots.py publish` exists (#1254); the state process takes
+pictures with F9 and a region, records, and stores a recording only once it replays (#1257).
 
 This file replaces `QMS-1217-screenshot-framework-plan.md`,
 `QMS-1217-doc-mode-two-process-plan.md` and `shot-input-replay-plan.md`. They were three layers of
@@ -49,15 +49,17 @@ stored nowhere, and a picture taken in it simply has no `scenario` key. A per-pa
 start state can go stale; the start state cannot. `--shoot-scenario -` is how a build asks for that
 group, and `-` is refused as a scenario name.
 
-**One base, a scenario may only add.** Maps and DEM are shared and nothing changes them; example
-data is one base project a page may add a file *on top of*. Data that needs to *change* the base
-means the base is wrong - fix the base. Storing a scenario's setup is an explicit button, never
-automatic, or the setups drift with every session.
+**One base for the data, its own configuration per scenario.** Maps and DEM are shared and nothing
+changes them; example data is one base project a page may add a file *on top of*. Data that needs to
+*change* the base means the base is wrong - fix the base. Settings are not data: a scenario carries
+the whole configuration it was recorded against, so it reproduces whatever the base becomes later.
 
 **A scenario's `.ini` is a whole configuration, never a patch on the base.** A file holding a
 difference would move whenever the base moved, and a picture already taken would silently stop
-reproducing. Storing a base changes what a page opens on and what the next recording starts
-from, and nothing else.
+reproducing. It is written once, from the settings on screen when the recording starts, and the trial
+that decides whether the recording is kept replays against it - there is no button that stores a
+scenario's settings, a scenario is changed by recording it again. Storing a base changes what a page
+opens on and what the next recording starts from, and nothing else.
 
 ## 2. A shot is data
 
@@ -176,13 +178,13 @@ qmapshack --doc <repo> --doc-page <ch>                 the launcher: the panel, 
   state is not enumerable, so a list of things to put back is never complete.
 - The state process owns nothing but the window it is pointed at. `Ctrl+Shift+F9` stays there.
 - They talk over a `QLocalSocket`, `--doc-channel`. Launcher to state: `region`, `update`, `record`,
-  `stop`, `name`, `discard`, `select`, `retake`, `sync`. State to launcher: `status`, `ready`, `tagged`,
-  `recording`, `recorded`, `recorded-pending`, `recorded-none`.
+  `stop`, `name`, `discard`, `select`, `sync`. State to launcher: `status`, `ready`, `tagged`,
+  `recording`, `recorded`, `recorded-pending`, `recorded-none`, `trial-failed`.
 - Closing either window ends the session. The state process quits when its window closes, when its
   channel drops and when it cannot connect (`CShotDocMode::leave()`); the launcher quits when the state
   exits with 0 and when its panel is closed. A state that dies otherwise leaves the panel up.
-- The launcher must never render: no fixture, no replay, no `CShotWriter`. A picture is always taken
-  by the state process.
+- The launcher process must never render: no fixture, no replay, no `CShotWriter`. A picture is taken
+  by the state process, or by a `shots.py` child it starts - *Take again* and *Take all again*.
 
 **The exposure catalog is the only C++ that grows.** `CShotExposures.cpp`, 52 entries, because a
 constructor's arguments cannot be data. Only 9 of the 61 dialogs take nothing but a parent; the rest
@@ -329,23 +331,24 @@ button, because the mouse is busy pointing:
 
 | Section | Button | Does |
 |---|---|---|
-| Scenarios | Record… | perform the state a picture needs; stop and it becomes the page's own |
+| Scenarios | Record… | perform the state a picture needs; stop, name it, and it becomes the page's own once a trial replays it |
 | | Rename… | another name; no picture is invalidated |
 | | Delete | throw it away, and with it every picture taken in it |
-| | Save config | store the arrangement, the size, the map and the settings on screen into the selected scenario; on `(base)` it asks first |
-| Pictures | Take again | take the selected picture again in its own scenario |
+| | Save config | store the arrangement, the size, the map and the settings on screen as `(base)`, which it asks first; a scenario keeps what it was recorded with |
+| Pictures | Take again | `shots.py replay --only <id>` of the selected picture into `_work`: headless, the way a build renders it |
 | | Region | drag a rectangle over the window in the picture's own scenario |
-| | Revert | throw the work picture away; the published one stays |
+| | Revert | throw the work picture away and put the shot's entry back; the published one stays |
 | | Take all again | `shots.py replay` of the page into `_check`: whether every picture still replays |
 | | Remove unused | delete the shots and pictures no page references |
 | | Reload page, Publish | read the page again; `shots.py publish` |
 
 F9 starts at the widget under the mouse and offers every step up to the whole window that a shot can
-find again, renders a **fresh** instance through the headless path, and shows it to keep or throw
-away. A class with no exposure prints the one line a developer has to add.
+find again, and shows what it took to keep or throw away. A live part is written from the render made
+at the key press; everything else - an exposed window above all - is a **fresh** instance through the
+headless path. A class with no exposure prints the one line a developer has to add.
 
 The panel lists what the page asks for against what exists: *taken*, *not taken*, *no image*, *not
-used*, *not registered*, and *changed by the retake* while a work picture waits. A page lists only its
+used*, *not registered*, and *taken again* while a work picture waits. A page lists only its
 own ids (`<page>/<name>`).
 
 **Starting a state takes about seven seconds**, because it is a whole application. The panel says so
@@ -364,7 +367,7 @@ platforms rule out a shell script.
 | Command | Does |
 |---|---|
 | `take PAGE` | open the launcher so a writer can take the pictures a page asks for |
-| `compose <page> [--scenario <name>] --out <ini>` | the one composer of a run's configuration; the launcher's only way in, hidden from `--help` |
+| `compose <page> [--scenario <name>] [--from <ini>] --out <ini>` | the one composer of a run's configuration; the launcher's only way in, hidden from `--help`. `--from` names the source file instead of resolving it from the page and scenario, which is how a trial replays against a parked recording's settings |
 | `replay [--only GLOB]` | replay every shot and report the ones that no longer replay, one process per scenario; `GLOB` is an id glob - `test/*` one page, `test/menu-project` one picture |
 | `unused [--delete]` | pictures and shot entries no page references any more |
 | `publish` | copy the pictures a writer retook from `doc/images/_work/` into `doc/images/` and empty `_work/`; no render, no comparison |
@@ -373,8 +376,9 @@ There is no `list`, `inspect` or `explore`: they were developer probes for autho
 nothing in a build depends on them. With them the `--shoot-task` switch goes as well - `--shoot`
 plus `--shoot-target` is the whole interface - and 243 of `CShotRunner.cpp`'s 370 lines.
 
-It composes the run's configuration into a scratch copy - the scenario's own file, or the base when
-it has none - so a writer's session cannot drift what a build renders. The launcher runs the same
+It composes the run's configuration into a scratch copy - the file `--from` names, else the
+scenario's own file, or the base when it has none - so a writer's session cannot drift what a build
+renders. The launcher runs the same
 `compose` before starting a state process, so the writer's session and the build cannot disagree.
 
 **What the tool owns is injected per run, never stored**: `Canvas/{cachePath,mapPath,demPaths,poiPaths}` and
@@ -536,9 +540,7 @@ carries the token twice, which is why each command above is written the way it i
   cannot address the workspace. `itemPathOf()`/`resolveItemPath()` stay.
 - **`saveGeometry()` records the screen the window was on and where it sat on the whole desktop**,
   so on a multi-screen desk a state process landed away from the panel. Where the window sits is the
-  writer's screen (`--doc-screen`, `panel->screen()->name()`), not a stored position. Measured on
-  three screens: asked for `DVI-I-1-1` / `DVI-I-2-2` / `HDMI-1`, the frame came out at x=2320 / 400
-  / 4240, always 1119x769.
+  position the writer last moved a state's window to (`placeWindow()`, `doc-panel.ini`).
 - **`processEvents(flags, ms)` does not wait.** It strips `WaitForMoreEvents` and returns as soon as
   nothing is pending (qcoreapplication.cpp, Qt 6.10.2), so a loop built on it spins. Waiting for
   something that arrives over the network is a `QEventLoop` quit by a timer.
@@ -645,6 +647,18 @@ carries the token twice, which is why each command above is written the way it i
   scenario, close with Publish). A state process started without a launcher stayed up until killed;
   with `leave()` it ends after 2 s. A `QMessageBox` given `NoButton` after `show()` crashed on Escape
   (SIGSEGV, exit 139); before `show()` it has no button and ignores Escape and close.
+- **Measured for #1257 (2026-09-17)**, `shots.py take test` in a nested `Xephyr` with `kwin_x11` on a
+  scratch copy of `doc/`: F9 on the Workspace docker stored `widget: dockWorkspace` and a 350x174
+  picture; a dragged region stored `rect` [300, 172, 601, 401] and a 601x401 picture; Throw away stored
+  nothing; F9 on the About box went through its exposure, on `CDetailsWpt` it showed the `SHOT_EXPOSE`
+  line; a recording (expand Example, select Track) was parked, replayed by a `--doc-trial track` state
+  and stored with `track.ini`, the parked files gone; F9 in it stored `scenario: track`; F9 on a
+  `(base)` shot there was refused; changing the units appended the drift warning (`Units/type` 1 vs 0)
+  and Save config cleared it; Save config on `(base)` stored 49 settings and left out 9 paths; that
+  base, stored on a 1700 px screen at 1200x876, came up 1200x872 on a 1280x900 one; launcher `kill -9`
+  left no state after 1 s. `selftest` 89/89 and 39/39, `replay` 24 pictures. A `QVariant` drift
+  compare reported `dem2/keysKnownDems` as changed on an untouched scenario (`QStringList` vs
+  `QString`); `perform()` without steps closed the About box F9 was pressed on.
 - **Measured for #1246 (2026-09-14):** a 1200x800 main window and its canvas render byte-identically
   twice in one process and across a cold-cache and a warm-cache process; an unreachable tile server
   is refused with no picture written; a local server failing one zoom level: refused there, accepted
@@ -806,7 +820,7 @@ ticket of its own, because none of them needs the framework to be reviewable:
 | 8 | **Recorder: the painted row buttons** (#1252) | the buttons of all three item delegates - workspace, maps, database - which are painted into the row and are no widgets: a `sigButtonPressed(index, button)` and a `buttonRect()` in `CWksItemDelegate`, `CMapItemDelegate` and `CDBItemDelegate`, and the handler that records them and replays them as input; the menu-owner `objectName` audit. The canvas, `IPlot` and `CIconGrid` are done in #1251 | a case in `CShotSelfTest` per delegate; a recorded scenario that expands a database folder and toggles a row's check state replays |
 | 9 | **Replay** (#1253) | `CShotReplay`: the queue that calls `IShotHandler::replay()` per step, `clear()` before and after, the start state and the `tab`-last rule, the deadline, a scenario's steps read out of the shot file, one scenario per process | a page with a scenario reproduces byte-identically, three times in one process |
 | 10 | **Launcher, panel, channel** (#1254); also the minimal state process: `--doc-scenario`, the fixture, the replay, `ready`, `leave()` | `shots.py take` and `shots.py publish`; the session and every file operation but writing the base configuration and a recording, `childArguments()`, the panel's buttons and statuses, `setBusy`, `mayClose()`, `endSession()`, the `QLocalServer` named `qms-doc-<pid>` | the panel comes up, starts and replaces a state process, and asks before closing over unpublished pictures; `publish` puts the retaken pictures into `doc/images/` and empties `_work/` |
-| 11 | **State process and F9** (#1257) | on top of #1254's minimal `CShotDocMode`: the `(base)` arrangement captured and replayed, the verbs beyond `select`/`sync`, one scenario held up, writing a recording into the shot file only after it replays to the state it was recorded in, `Ctrl+Shift+F9`, the keep/throw preview, the region picker, `portableGeometry()`/`namesAPlace()`, `settingsDrift()` | a writer records a scenario and tags a picture without touching a file |
+| 11 | **State process and F9** (#1257) | on top of #1254's minimal `CShotDocMode`: the `(base)` arrangement captured and replayed, the verbs beyond `select`/`sync`, one scenario held up, writing a recording into the shot file only after a state started with `--doc-trial` replays it without a failure, parked in `_cache` until then together with the settings snapshotted when the recording started, which that state is composed from, `Ctrl+Shift+F9`, the keep/throw preview, the region picker, `portableGeometry()`/`namesAPlace()`, `settingsDrift()` | a writer records a scenario and tags a picture without touching a file |
 | 12 | **Writer-facing labels** (#1255) | names, not addresses, in `chooseLivePart()`; `qt_`-prefixed internals not offered | the step list reads in the writer's words |
 | 13 | **Drop the menu split** (#1256) | delete `CGisListWks::buildMenuItemTrk()`, which the replay queue made pointless, and cover a stack-local menu with a shot instead | a shot of the track context menu replays; nothing calls a `buildMenuXxx()` |
 

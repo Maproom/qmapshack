@@ -1113,7 +1113,7 @@ file.
 - `doc-image-publish-plan.md` — `shots.py publish` and the panel's Publish exist (#1254); left: its
   "Left to do".
 - `QMS-1251-recorder-signals-plan.md` — the recorder. `shots.py selftest` verifies it.
-- `QMS-1257-state-process-plan.md` — #1257 built but uncommitted; left: the live checks and one proposal.
+- `QMS-1257-state-process-plan.md` — #1257 committed; left: the live checks and one proposal.
 
 ### Documentation subsystem (QMS-1217)
 
@@ -1121,9 +1121,9 @@ file.
 not re-derive), §10 what the demo does not do, §11 the sub-tickets.
 
 **One branch, one commit per sub-ticket.** #1245-#1257 are commits on `QMS-1217` (based on `dev`),
-never branches of their own. #1245-#1254 and #1257 exist: hermetic run, render path, shot file, exposure
+never branches of their own. #1245-#1255 and #1257 exist: hermetic run, render path, shot file, exposure
 catalog, fixture, `shots.py`, recorder, row buttons, replay queue, launcher/panel/channel, state process
-and F9. #1255 (writer-facing labels) and #1256 (menu split) are still to do.
+and F9, writer-facing labels. #1256 (menu split) is still to do.
 
 ```
 doc/pages/<page>.md            the only source of shot names
@@ -1498,6 +1498,10 @@ or run it belongs to is the bug this subsystem invites; keep what runs in these 
   live scenario photographs what is there; a build sets none and performs every scenario.
 - **`CShotReplay::perform()` closes popups and modal dialogs only when it ran steps.** Without steps
   a window up is the writer's own; closing it anyway shut the About box F9 was pressed on.
+- **F9 names a part the way the writer sees it** (`onScreenName()`): a dock's caption, a tab's text, a
+  group box's title, a window's title, the class name only when nothing else names it. `qt_`-prefixed
+  widgets are not offered, and the address is appended only where two entries would read the same -
+  `chooseLivePart()` finds the part by `labels.indexOf()`, so two equal labels would pick the first.
 - **Render before asking anything.** Focus cannot be restored across another window, and a project
   row's focus buttons fade in only with `State_HasFocus`, so `tag()` renders every candidate
   (`livePartsAt()`) at the key press, through `CShotWriter::renderAll()`: one `settleStable()` per window, and again only for a

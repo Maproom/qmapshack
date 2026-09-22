@@ -18,6 +18,7 @@
 
 #include "shoot/CShotDocPanel.h"
 
+#include <QAction>
 #include <QCloseEvent>
 #include <QComboBox>
 #include <QGuiApplication>
@@ -26,6 +27,7 @@
 #include <QIcon>
 #include <QLabel>
 #include <QListWidget>
+#include <QMenu>
 #include <QMessageBox>
 #include <QPainter>
 #include <QScreen>
@@ -70,6 +72,9 @@ CShotDocPanel::CShotDocPanel(const QString& page, const QString& sizeFile, QWidg
   this->page = new QLabel(this);
   this->page->setWordWrap(true);
   layout->addWidget(this->page);
+  fixture = new QLabel(this);
+  fixture->setWordWrap(true);
+  layout->addWidget(fixture);
 
   // --- scenarios ---
   QLabel* scenarioTitle = new QLabel("<b>Scenarios</b> - the states your pictures are taken in:", this);
@@ -120,10 +125,17 @@ CShotDocPanel::CShotDocPanel(const QString& page, const QString& sizeFile, QWidg
   deleteButton = addButton(scenarioButtons, ":/icons/DocDelete.svgt", "Delete",
                            "Delete the selected scenario; every picture taken in it has to be taken again.",
                            &CShotDocPanel::deleteScenarioClicked);
-  baseButton = addButton(scenarioButtons, ":/icons/DocBase.svgt", "Base",
-                         "Store the arrangement, size, map and settings on screen as (base), which it asks first; "
-                         "a scenario keeps what it was recorded with.",
-                         &CShotDocPanel::storeConfigClicked);
+  baseButton = newButton(":/icons/DocBase.svgt", "Base",
+                         "This page's (base): save what is on screen as it, or copy another page's or the default "
+                         "fixture's. A scenario keeps what it was recorded with.");
+  QMenu* baseMenu = new QMenu(baseButton);
+  connect(baseMenu->addAction("Save what is on screen as this page's base..."), &QAction::triggered, this,
+          &CShotDocPanel::storeConfigClicked);
+  connect(baseMenu->addAction("Copy the base of another page..."), &QAction::triggered, this,
+          &CShotDocPanel::copyBaseClicked);
+  baseButton->setMenu(baseMenu);
+  baseButton->setPopupMode(QToolButton::InstantPopup);
+  scenarioButtons->addWidget(baseButton);
   scenarioButtons->addStretch();
   layout->addLayout(scenarioButtons);
 
@@ -427,6 +439,14 @@ void CShotDocPanel::setStatus(const QString& text) { status->setText(text); }
 void CShotDocPanel::setPage(const QString& path, bool exists) {
   page->setText(exists ? QString("Page: %1").arg(path)
                        : CUiTheme::span(CUiTheme::Role::eWarn, QString("There is no page %1 yet.").arg(path)));
+}
+
+void CShotDocPanel::setFixture(const QStringList& own, const QString& dir) {
+  fixture->setText(own.isEmpty()
+                       ? QString("Fixture: the default")
+                       : QString("Fixture: %1 from this page; the rest from the default").arg(own.join(", ")));
+  fixture->setToolTip(
+      QString("A part holding something in %1 replaces the default's; an empty one is the default's.").arg(dir));
 }
 
 void CShotDocPanel::setBusy(bool on, const QString& what) {

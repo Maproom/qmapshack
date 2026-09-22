@@ -18,12 +18,16 @@ import shots  # noqa: E402
 class ScratchTree(unittest.TestCase):
     def setUp(self):
         self.root = Path(tempfile.mkdtemp(prefix="qms-test-shots-"))
-        self.saved = {name: getattr(shots, name) for name in ("REPO", "PAGES_DIR", "SHOTS_DIR", "IMAGES_DIR", "WORK_DIR")}
+        self.saved = {name: getattr(shots, name) for name in ("REPO", "PAGES_DIR", "SHOTS_DIR", "IMAGES_DIR", "WORK_DIR",
+                                                              "FIXTURES_DIR", "DEFAULT_FIXTURE", "DEFAULT_BASE")}
         shots.REPO = self.root
         shots.PAGES_DIR = self.root / "doc" / "pages"
         shots.SHOTS_DIR = self.root / "doc" / "shots"
         shots.IMAGES_DIR = self.root / "doc" / "images"
         shots.WORK_DIR = shots.IMAGES_DIR / "_work"
+        shots.FIXTURES_DIR = shots.SHOTS_DIR / "fixtures"
+        shots.DEFAULT_FIXTURE = shots.FIXTURES_DIR / "default"
+        shots.DEFAULT_BASE = shots.DEFAULT_FIXTURE / "shots.ini"
 
     def tearDown(self):
         for name, value in self.saved.items():
@@ -108,6 +112,51 @@ class PageName(ScratchTree):
         self.assertEqual(shots.page_name(str(shots.PAGES_DIR / "test.md")), "test")
         with contextlib.redirect_stderr(io.StringIO()), self.assertRaises(SystemExit):
             shots.page_name("guide/maps")
+
+    def test_refuses_the_default_fixture_s_name(self):
+        with contextlib.redirect_stderr(io.StringIO()), self.assertRaises(SystemExit):
+            shots.page_name("default")
+
+
+class Condense(unittest.TestCase):
+    def test_a_line_said_for_every_picture_is_told_once(self):
+        said = ["shoot: Action 2 of 5 in the recording, 'x', did not replay: y.", "shoot: Action 2 of 5 in the recording, 'x', did not replay: y.", "shoot: other"]
+        self.assertEqual(shots.condense(said), ["Action 2 of 5 in the recording, 'x', did not replay: y. (2 times, once per picture)", "other"])
+
+
+class Fixture(ScratchTree):
+    def test_a_page_fixture_holds_only_what_differs(self):
+        self.put(shots.DEFAULT_FIXTURE / "maps" / "a.vrt")
+        self.put(shots.DEFAULT_FIXTURE / "projects" / "Example.qms")
+        self.put(shots.FIXTURES_DIR / "p" / "projects" / "Own.qms")
+        self.assertEqual(shots.fixture_part("p", "projects"), shots.FIXTURES_DIR / "p" / "projects")
+        self.assertEqual(shots.fixture_part("p", "maps"), shots.DEFAULT_FIXTURE / "maps")
+        self.assertEqual(shots.fixture_part("q", "projects"), shots.DEFAULT_FIXTURE / "projects")
+        # The launcher creates every part's folder empty.
+        (shots.FIXTURES_DIR / "p" / "dem").mkdir(parents=True)
+        self.assertEqual(shots.fixture_part("p", "dem"), shots.DEFAULT_FIXTURE / "dem")
+        # A description or a file manager's dotfile is no content.
+        self.put(shots.FIXTURES_DIR / "p" / "poi" / "SOURCE.md")
+        self.put(shots.FIXTURES_DIR / "p" / "poi" / ".directory")
+        self.assertEqual(shots.fixture_part("p", "poi"), shots.DEFAULT_FIXTURE / "poi")
+
+    def test_a_page_composes_its_own_base_and_fixture(self):
+        self.put(shots.DEFAULT_BASE, b"[General]\nfrom=default\n")
+        self.put(shots.SHOTS_DIR / "p.ini", b"[General]\nfrom=page\n")
+        self.put(shots.FIXTURES_DIR / "p" / "projects" / "Own.qms")
+        out = self.root / "out" / "p.ini"
+        out.parent.mkdir()
+        self.assertEqual(shots.compose_config("p", None, out), shots.SHOTS_DIR / "p.ini")
+        data = shots.read_ini(out)
+        self.assertEqual(data["General/from"], "page")
+        self.assertIn("fixtures/p/projects/Own.qms", data["Shoot/fixtureProject"])
+        # A GPX file is a project too.
+        (shots.FIXTURES_DIR / "p" / "projects" / "Own.qms").unlink()
+        self.put(shots.FIXTURES_DIR / "p" / "projects" / "Own.gpx")
+        shots.compose_config("p", None, out)
+        self.assertIn("fixtures/p/projects/Own.gpx", shots.read_ini(out)["Shoot/fixtureProject"])
+        # A page without a base yet composes the default's.
+        self.assertEqual(shots.compose_config("q", None, self.root / "out" / "q.ini"), shots.DEFAULT_BASE)
 
 
 class Unused(ScratchTree):

@@ -64,12 +64,12 @@ class CShotContext {
   /** @return the workspace tree, nullptr before the main window is constructed */
   const CGisListWks* wksList() const;
 
-  /** The fixture's items by role; nullptr until CShotFixture has loaded them. */
-  IGisProject* project() const { return fixture.project; }
-  CGisItemTrk* trk() const { return fixture.trk; }
-  CGisItemWpt* wpt() const { return fixture.wpt; }
-  CGisItemRte* rte() const { return fixture.rte; }
-  CGisItemOvlArea* area() const { return fixture.area; }
+  /** The fixture's items by role, looked up each time; nullptr before CShotFixture loaded them or once deleted. */
+  IGisProject* project() const;
+  CGisItemTrk* trk() const;
+  CGisItemWpt* wpt() const;
+  CGisItemRte* rte() const;
+  CGisItemOvlArea* area() const;
 
   QList<IGisItem::key_t> keys() const;
 
@@ -88,12 +88,13 @@ class CShotContext {
   /** @return false when the picture is refused and nothing was written */
   bool emitPicture(QWidget* w, const QSize& size, const QString& stem) const;
 
+  /** Keys, not pointers: a scenario step can delete an item, and the items are no QObjects. */
   struct fixture_t {
-    IGisProject* project = nullptr;
-    CGisItemTrk* trk = nullptr;
-    CGisItemWpt* wpt = nullptr;
-    CGisItemRte* rte = nullptr;
-    CGisItemOvlArea* area = nullptr;
+    QString project;
+    IGisItem::key_t trk;
+    IGisItem::key_t wpt;
+    IGisItem::key_t rte;
+    IGisItem::key_t area;
   };
 
   const CShotWriter& writer;

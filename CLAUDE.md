@@ -1114,6 +1114,8 @@ file.
   "Left to do".
 - `QMS-1251-recorder-signals-plan.md` — the recorder. `shots.py selftest` verifies it.
 - `QMS-1257-state-process-plan.md` — #1257 committed; left: the live checks and one proposal.
+- `QMS-1266-per-page-base-plan.md` — each page owns a base, copied once at creation, and a fixture
+  holding only what differs from the default. Implemented; the plan keeps the design.
 
 ### Documentation subsystem (QMS-1217)
 
@@ -1129,7 +1131,9 @@ and F9, writer-facing labels. #1256 (menu split) is still to do.
 doc/pages/<page>.md            the only source of shot names
 doc/shots/<page>.json          the shots and the recorded scenarios
 doc/shots/<page>/<name>.ini    one scenario's whole configuration
-doc/shots/fixture/shots.ini    the base a page opens on
+doc/shots/<page>.ini           the page's base, copied once when the page was created
+doc/shots/fixtures/default/    the fixture; its shots.ini only seeds a new page's base
+doc/shots/fixtures/<page>/     what the page's fixture differs in, one part (maps/, projects/...) each
 ```
 
 #### Build and entry
@@ -1234,19 +1238,35 @@ doc/shots/fixture/shots.ini    the base a page opens on
 - **No `details` step**: a track's or project's `edit()` adds a tab, so the recorded input that
   opens it is the record; every other `edit()` is a modal `exec()` and belongs to the catalog.
 
-#### Fixture (`doc/shots/fixture/`, `CShotFixture`)
+#### Fixture (`doc/shots/fixtures/`, `CShotFixture`)
 
 - **Plain git, not LFS:** keep rasters cropped and compressed.
-- **`CShotFixture::load()`** loads `projects/Example.qms` beside the page's shot file, waits for
+- **A page's fixture holds only what differs** (`shots.py fixture_part()`): a part in
+  `fixtures/<page>/` holding something replaces the default's part whole; an empty or missing one is
+  the default's, and `SOURCE.md`, `README.md` and dotfiles are no content. The rule exists twice,
+  `fixture_part()` and `CShotFiles::ownFixtureParts()`, each naming the other - change both.
+  `default` is no page name. Every session start adds what the folder lacks: an empty folder per part
+  and a git-ignored `README.md`. The panel header says which parts are the page's own, and the file
+  watcher updates it when a part is filled or emptied.
+- **A page owns its base**, `doc/shots/<page>.ini`. The launcher asks which base to copy when a page
+  has none (`chooseBase()`); Base / Save writes it, Base / Copy replaces it. Nothing writes a
+  fixture's `shots.ini`. `compose` falls back to the default's only for a page without a base yet.
+- **`CShotFixture::load()`** loads the project the configuration names as `Shoot/fixtureProject`
+  (`compose` writes the page fixture's first `*.qms` or `*.gpx`), waits for
   `CGisListWks::isWorkspaceLoaded()` (the restore runs ~1100 ms after `CMainWindow` and does not
   check duplicates) and `IGisProject::isLoading()`, refuses a workspace already holding the project,
   and hands the first trk/wpt/rte/area to `CShotContext`.
-- **`shots.py compose`** adds to `fixture/shots.ini` the absolute `Canvas/cachePath`, `mapPath`,
-  `demPaths`, `poiPaths`, `Route/routino\paths` and a `Database/Entries` on a scratch copy of
-  `database/Example.db`, plus `Database/saveOnExit=false`. A scenario `.ini` is a whole
+- **`shots.py compose`** adds to the base the absolute `Canvas/cachePath`, `mapPath`,
+  `demPaths`, `poiPaths`, `Route/routino\paths`, `Shoot/fixtureProject` and a `Database/Entries` on
+  a scratch copy of the fixture's first `database/*.db`, plus `Database/saveOnExit=false`. A scenario `.ini` is a whole
   configuration, never a patch; settings are read in constructors, so one process per scenario.
 - **A map or DEM activates from the configuration only with more than two keys**
   (`noShadowConfig()`): store `opacity`, `minScale`, `maxScale` with `isActive`.
+- **A map's or DEM's configuration key is the MD5 of the file's first 4096 bytes** (`CMapItem`,
+  `CDemItem`). A CRLF checkout of a `.vrt`/`.tms` (Windows `core.autocrlf`) changes the key, the
+  configuration names nothing, and no map is active: the canvas' `labelHelp` then covers the map and
+  takes its input. `.gitattributes` pins the fixtures' `.vrt`/`.tms`/`.wmts` to LF; a checkout made
+  before that keeps its CRLF until the files are deleted and checked out again.
 - **The DEM draws over maps and POIs**; the base uses opacity 20.
 - **Tile files expire during a run** (`cacheExpiration`, 20 s timer) and come back as holes
   offline; refresh modification times on an old cache first.
@@ -1268,6 +1288,9 @@ doc/shots/fixture/shots.ini    the base a page opens on
 - **`selftest`** (`--shoot-selftest`, `CShotSelfTest`) takes no pictures: it drives the app through
   `CShotSynth`, compares the recorded steps, replays them and compares the state. Exit code = failed
   cases.
+- **The self test has a base of its own**, `doc/tools/selftest.ini`, with the default fixture: it
+  checks the recorder, so a page's base can change without moving a case. `--page` only names the
+  run. Its cases assume that base's arrangement; changing it means fixing the cases that break.
 - **Directories come from the application** (`-d` prints `"CACHE"` and `"USER DATA"`). A running
   QMapShack is detected by `USER DATA/.QMapShack.lock` (`.lock` on macOS); `replay` refuses while it
   is held and never creates it. The leak guard compares mtime and size of everything below both

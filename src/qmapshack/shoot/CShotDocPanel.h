@@ -63,6 +63,8 @@ class CShotDocPanel : public QDialog {
   void setStatus(const QString& text);
 
   void setPage(const QString& path, bool exists);
+  /** @brief Say which fixture parts the page has itself; @p dir is its fixture folder */
+  void setFixture(const QStringList& own, const QString& dir);
 
   /** @brief While a recording runs, everything but Stop is disabled. */
   void setRecording(bool on);
@@ -83,6 +85,7 @@ class CShotDocPanel : public QDialog {
   void renameClicked();
   void deleteScenarioClicked();
   void storeConfigClicked();
+  void copyBaseClicked();
   /** @brief A picture's combo box changed to @p scenario, empty for `(base)`; emitted queued: the answer rebuilds the
    * rows. */
   void rebindRequested(const QString& id, const QString& scenario);
@@ -137,6 +140,7 @@ class CShotDocPanel : public QDialog {
   /** Every button; all share one height (newButton()). */
   QList<QToolButton*> buttons;
   QLabel* page = nullptr;
+  QLabel* fixture = nullptr;
   QLabel* status = nullptr;
   QLabel* preview = nullptr;
 

@@ -27,13 +27,13 @@ class CShotContext;
 class CShotFixture {
  public:
   /**
-     @brief Load `projects/Example.qms` below @p dir, `doc/shots/fixture`.
+     @brief Load the project the configuration names as `Shoot/fixtureProject`: the page fixture's.
 
      A missing track, waypoint, route or area is a warning, not a failure.
 
      @return the failures
    */
-  static qint32 load(const QString& dir, CShotContext& ctx);
+  static qint32 load(CShotContext& ctx);
 };
 
 #endif  // CSHOTFIXTURE_H

@@ -28,57 +28,42 @@ class CMainWindow;
 class QApplication;
 
 /** @brief All main() knows about the documentation subsystem; the stub build answers false and does nothing. */
-class CShotEntry {
- public:
-  /** @return true for a shoot or a documentation run */
-  static bool isDocRun(const CAppOpts& opts);
+namespace CShotEntry {
+/** @return true for a shoot or a documentation run */
+bool isDocRun(const CAppOpts& opts);
 
-  /**
-     @brief Prepare a documentation run's process before QApplication.
+/**
+   @brief Prepare a documentation run's process before QApplication.
 
-     Sets QT_QPA_PLATFORMTHEME=generic so on-screen and headless runs render alike; on Windows, which has no desktop
-     theme, attaches the GUI-subsystem build to the parent's console instead.
-   */
-  static void pinEnvironment(int argc, char** argv);
+   Sets QT_QPA_PLATFORMTHEME=generic so on-screen and headless runs render alike; on Windows, which has no desktop
+   theme, attaches the GUI-subsystem build to the parent's console instead.
+ */
+void pinEnvironment(int argc, char** argv);
 
-  /**
-     @brief The application object, created before anything else.
+/**
+   @brief The application object, created before anything else.
 
-     A documentation run gets a subclass that wraps input delivery in notify(); any other run a plain QApplication.
-   */
-  static std::unique_ptr<QApplication> createApplication(int& argc, char** argv);
+   A documentation run gets a subclass that wraps input delivery in notify(); any other run a plain QApplication.
+ */
+std::unique_ptr<QApplication> createApplication(int& argc, char** argv);
 
-  /**
-     @brief Redirect a documentation run's data and pin its appearance. Once, before CMainWindow.
+/**
+   @brief Redirect a documentation run's data and pin its appearance. Once, before CMainWindow.
 
-     @return false when the run must not start
-   */
-  static bool prepare(const CAppOpts& opts);
+   @return false when the run must not start
+ */
+bool prepare(const CAppOpts& opts);
 
-  /** @return false for the documentation launcher, whose main window only initialises the singletons */
-  static bool showsMainWindow(const CAppOpts& opts);
+/** @return false for the documentation launcher, whose main window only initialises the singletons */
+bool showsMainWindow(const CAppOpts& opts);
 
-  /**
-     @brief Start a `--doc` launcher or state process, or run a `--shoot` run to its end.
+/**
+   @brief Start a `--doc` launcher or state process, or run a `--shoot` run to its end.
 
-     @return the exit code of a `--shoot` run (failures, capped at 255), nothing for any other run
-   */
-  static std::optional<qint32> run(const CAppOpts& opts, CMainWindow& window);
-
- private:
-  /** @return the workspace database path, empty when @p dir could not be created */
-  static QString scratchWorkspace(const QString& dir, const QString& name);
-
-  /** @return false when the scratch directory could not be created */
-  static bool redirectUserData(const QString& cache, const QString& name);
-
-  /** @brief The offscreen platform on Windows has no fonts. */
-  static void registerFonts();
-
-  static void pinAppearance(const QString& colorScheme);
-
-  /** @return true when the raw @p argv asks for a shoot or documentation run */
-  static bool isDocArgv(int argc, char** argv);
-};
+   @return the exit code of a `--shoot` run (failures, capped at CShotReplay::kMaxFailureExitCode), nothing for any
+   other run
+ */
+std::optional<qint32> run(const CAppOpts& opts, CMainWindow& window);
+}  // namespace CShotEntry
 
 #endif  // CSHOTENTRY_H

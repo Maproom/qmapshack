@@ -3,51 +3,35 @@
         "track-screen-option": [
             {
                 "do": "layout",
-                "state": "AAAA/wAAAAD9AAAAAgAAAAAAAAEVAAACzvwCAAAAA/sAAAAQAGQAbwBjAGsATQBhAHAAcwEAAAA8AAAA6wAAAIIA////+wAAAA4AZABvAGMAawBEAGUAbQEAAAEtAAAA7AAAAIIA////+wAAAA4AZABvAGMAawBQAG8AaQEAAAIfAAAA6wAAAGsA////AAAAAQAAAV4AAALO/AIAAAAE+wAAABoAZABvAGMAawBXAG8AcgBrAHMAcABhAGMAZQEAAAA8AAAAhAAAAHMA////+wAAABgAZABvAGMAawBEAGEAdABhAGIAYQBzAGUBAAAAxgAAAMIAAABgAP////sAAAAOAGQAbwBjAGsAUgB0AGUBAAABjgAAANUAAAC6AP////sAAAAYAGQAbwBjAGsAUgBlAGEAbAB0AGkAbQBlAQAAAmkAAAChAAAAjAD///8AAAIxAAACzgAAAAQAAAAEAAAACAAAAAj8AAAAAQAAAAIAAAABAAAADgB0AG8AbwBsAEIAYQByAQAAAAD/////AAAAAAAAAAA=",
+                "state": "AAAA/wAAAAD9AAAAAgAAAAAAAAEtAAADOPwCAAAAAvwAAAA8AAABnwAAANUBAAAa+gAAAAABAAAAAvsAAAAaAGQAbwBjAGsAVwBvAHIAawBzAHAAYQBjAGUBAAAAAAAAAW4AAAB9AP////sAAAAOAGQAbwBjAGsAUgB0AGUBAAAAAP////8AAAEtAP////wAAAHhAAABkwAAAJ0BAAAa+gAAAAABAAAABPsAAAAYAGQAbwBjAGsARABhAHQAYQBiAGEAcwBlAQAAAAD/////AAAAigD////7AAAAEABkAG8AYwBrAE0AYQBwAHMBAAAAAP////8AAACQAP////sAAAAOAGQAbwBjAGsAUABvAGkAAAAAAP////8AAACQAP////sAAAAOAGQAbwBjAGsARABlAG0BAAAAAAAAAW4AAACQAP///wAAAAEAAAFdAAADkvwCAAAAAfsAAAAYAGQAbwBjAGsAUgBlAGEAbAB0AGkAbQBlAAAAAkcAAAGHAAAAjAD///8AAAR3AAADOAAAAAQAAAAEAAAACAAAAAj8AAAAAQAAAAIAAAABAAAADgB0AG8AbwBsAEIAYQByAQAAAAD/////AAAAAAAAAAA=",
                 "tab": 0
             },
             {
                 "do": "view",
-                "lat": 47.537098,
-                "lon": 10.558351,
+                "lat": 47.519,
+                "lon": 10.5655,
                 "zoom": 12
             },
             {
                 "do": "move",
                 "hit": "Example/trk:Track",
-                "lat": 47.537098,
-                "lon": 10.558395915764205,
+                "lat": 47.53058618137259,
+                "lon": 10.563299127553908,
                 "widget": "qt_tabwidget_stackedwidget/CCanvas#0"
             },
             {
                 "button": "left",
                 "do": "click",
                 "hit": "Example/trk:Track",
-                "lat": 47.537098,
-                "lon": 10.558395915764205,
+                "lat": 47.53058618137259,
+                "lon": 10.563299127553908,
                 "widget": "qt_tabwidget_stackedwidget/CCanvas#0"
-            }
-        ],
-        "units-dialog": [
-            {
-                "do": "layout",
-                "state": "AAAA/wAAAAD9AAAAAgAAAAAAAAEVAAACzvwCAAAAA/sAAAAQAGQAbwBjAGsATQBhAHAAcwEAAAA8AAAA6wAAAIIA////+wAAAA4AZABvAGMAawBEAGUAbQEAAAEtAAAA7AAAAIIA////+wAAAA4AZABvAGMAawBQAG8AaQEAAAIfAAAA6wAAAGsA////AAAAAQAAAV4AAALO/AIAAAAE+wAAABoAZABvAGMAawBXAG8AcgBrAHMAcABhAGMAZQEAAAA8AAAAhAAAAHMA////+wAAABgAZABvAGMAawBEAGEAdABhAGIAYQBzAGUBAAAAxgAAAMIAAABgAP////sAAAAOAGQAbwBjAGsAUgB0AGUBAAABjgAAANUAAAC6AP////sAAAAYAGQAbwBjAGsAUgBlAGEAbAB0AGkAbQBlAQAAAmkAAAChAAAAjAD///8AAAIxAAACzgAAAAQAAAAEAAAACAAAAAj8AAAAAQAAAAIAAAABAAAADgB0AG8AbwBsAEIAYQByAQAAAAD/////AAAAAAAAAAA=",
-                "tab": 0
             },
             {
-                "do": "view",
-                "lat": 47.537098,
-                "lon": 10.558351,
-                "zoom": 12
-            },
-            {
-                "do": "openmenu",
-                "menu": "menuView",
-                "widget": "menubar"
-            },
-            {
-                "action": "actionSetupUnits",
-                "do": "trigger"
+                "do": "move",
+                "lat": 47.538773823572015,
+                "lon": 10.616030234731722,
+                "widget": "qt_tabwidget_stackedwidget/CCanvas#0"
             }
         ]
     },
@@ -167,22 +151,22 @@
         },
         {
             "id": "test/track-screen-option",
+            "note": "A part of the window in track-screen-option",
+            "rect": [
+                534,
+                142,
+                639,
+                410
+            ],
             "scenario": "track-screen-option",
             "size": [
-                1200,
-                800
+                1450,
+                906
             ],
             "widget": ""
         },
         {
-            "id": "test/units-dialog",
-            "scenario": "units-dialog",
-            "size": [
-                1200,
-                800
-            ],
-            "widget": "",
-            "window": "CUnitsSetup"
+            "id": "test/units-dialog"
         },
         {
             "active": "actionEditDetails",

@@ -136,8 +136,8 @@ class CShotDocMode : public QObject {
   QString scenarioFor(const QString& id) const;
   /** @return true when @p id may be taken here; otherwise the writer is told where */
   bool takenHere(const QString& id);
-  /** @return true to keep @p id's work picture; false restores @p previous, or deletes it when that is empty */
-  bool confirmResult(const QString& id, const QByteArray& previous) const;
+  /** @return true when the writer keeps @p id's pending picture */
+  bool confirmResult(const QString& id) const;
   /** @return the work picture of @p id before it is taken again, empty when there is none */
   QByteArray previousPicture(const QString& id) const;
   /** @brief Tell the writer the line a developer has to add for an unexposed class. */

@@ -25,6 +25,7 @@
 #include <QDebug>
 #include <QDialog>
 #include <QDialogButtonBox>
+#include <QDir>
 #include <QDockWidget>
 #include <QEvent>
 #include <QEventLoop>
@@ -49,7 +50,6 @@
 #include <QPlainTextEdit>
 #include <QPushButton>
 #include <QRect>
-#include <QSaveFile>
 #include <QScreen>
 #include <QSettings>
 #include <QTabWidget>
@@ -91,7 +91,6 @@ constexpr qint32 kPlacementSettleMs = 300;
 /** QWidget::saveGeometry()'s magic number and the only major version portableGeometry() knows. */
 constexpr quint32 kGeometryMagic = 0x1D9D0CB;
 constexpr quint16 kGeometryMajor = 3;
-const QString kBaseConfig = QStringLiteral("doc/shots/fixture/shots.ini");
 const QString kSetupConfig = QStringLiteral("setup.ini");
 /** Every writer's window: scenarios are recorded and replayed at it, so they replay on every machine. */
 const QSize kWindowSize(1200, 800);
@@ -353,7 +352,7 @@ void CShotDocMode::slotSetUp() {
   }
 
   const QString& name = trial.isEmpty() ? CShotFiles::label(scenario) : trial;
-  if (0 != CShotFixture::load(repo.absoluteFilePath("doc/shots/fixture"), *ctx)) {
+  if (0 != CShotFixture::load(*ctx)) {
     send(trial.isEmpty() ? QString("ready The fixture did not load in %1. The console says why.").arg(name)
                          : QString("trial-failed The fixture did not load, so %1 was not stored.").arg(name));
     if (!trial.isEmpty()) {
@@ -414,6 +413,7 @@ void CShotDocMode::slotSetUp() {
   snapshotSetup();
   ready = true;
   qDebug() << "doc: state" << CShotFiles::label(scenario) << "of page" << page;
+  send("in " + (scenario.isEmpty() ? CShotPage::kBaseScenario : scenario));
   send("ready " + (problem.isEmpty() ? QString("The application is in %1. Point at what to photograph and press "
                                                "Ctrl+Shift+F9.")
                                            .arg(CShotFiles::label(scenario))
@@ -454,6 +454,7 @@ void CShotDocMode::runTrial() {
   snapshotSetup();
   ready = true;
   qDebug() << "doc: state" << scenario << "recorded on page" << page;
+  send("in " + scenario);
   send(QString("ready %1 replays and is stored. The application is in it; point at what to photograph and press "
                "Ctrl+Shift+F9.")
            .arg(scenario));
@@ -706,8 +707,8 @@ QByteArray CShotDocMode::previousPicture(const QString& id) const {
   return in.open(QIODevice::ReadOnly) ? in.readAll() : QByteArray();
 }
 
-bool CShotDocMode::confirmResult(const QString& id, const QByteArray& previous) const {
-  const QImage image(files.workImage(id));
+bool CShotDocMode::confirmResult(const QString& id) const {
+  const QImage image(files.pendingImage(id));
 
   QDialog preview(dialogParent());
   preview.setWindowTitle("Picture taken");
@@ -716,7 +717,7 @@ bool CShotDocMode::confirmResult(const QString& id, const QByteArray& previous) 
   picture->setPixmap(QPixmap::fromImage(image.scaled(QSize(720, 540), Qt::KeepAspectRatio, Qt::SmoothTransformation)));
   layout->addWidget(picture);
   layout->addWidget(new QLabel("Use it in your page as:", &preview));
-  QPlainTextEdit* usage = new QPlainTextEdit(QString("![](images/%1.png)").arg(id), &preview);
+  QPlainTextEdit* usage = new QPlainTextEdit(QString("![](../images/%1.png)").arg(id), &preview);
   usage->setReadOnly(true);
   usage->setMaximumHeight(40);
   layout->addWidget(usage);
@@ -727,19 +728,7 @@ bool CShotDocMode::confirmResult(const QString& id, const QByteArray& previous) 
   connect(buttons, &QDialogButtonBox::rejected, &preview, &QDialog::reject);
   layout->addWidget(buttons);
 
-  if (QDialog::Accepted == preview.exec()) {
-    return true;
-  }
-  // The work picture a retake replaced stays the writer's.
-  if (previous.isEmpty()) {
-    QFile::remove(files.workImage(id));
-  } else {
-    QSaveFile out(files.workImage(id));
-    if (!out.open(QIODevice::WriteOnly) || out.write(previous) < 0 || !out.commit()) {
-      qWarning() << "doc: the previous work picture of" << id << "cannot be put back";
-    }
-  }
-  return false;
+  return QDialog::Accepted == preview.exec();
 }
 
 void CShotDocMode::reportUnexposed(const QWidget* target) const {
@@ -774,16 +763,45 @@ void CShotDocMode::reportUnexposed(const QWidget* target) const {
 
 void CShotDocMode::keepShot(const QJsonObject& shot, const std::function<bool()>& take) {
   const QString& id = shot["id"].toString();
-  const QByteArray& previous = previousPicture(id);
-  if (!take()) {
+  const QString& pending = files.pendingImage(id);
+  // Taken beside the work picture: until Keep, a state that ends leaves the writer's work as it was.
+  QFile::remove(pending);
+  const QString work = writer->getOutDir();
+  writer->setOutDir(files.pendingDir());
+  const bool taken = take();
+  writer->setOutDir(work);
+  if (!taken) {
+    QFile::remove(pending);
     report(QString("%1 could not be taken; the console says why. Nothing was changed.").arg(id));
     return;
   }
-  if (!confirmResult(id, previous)) {
+  const bool kept = confirmResult(id);
+  QFile in(pending);
+  const QByteArray& picture = in.open(QIODevice::ReadOnly) ? in.readAll() : QByteArray();
+  in.close();
+  QFile::remove(pending);
+  if (!kept) {
     report(QString("%1 was thrown away.").arg(id));
     return;
   }
-  if (const QString& error = files.storeShot(shot); !error.isEmpty()) {
+
+  const QByteArray& previous = previousPicture(id);
+  const QString& target = files.workImage(id);
+  QString error = QDir().mkpath(QFileInfo(target).absolutePath())
+                      ? CShotFiles::writeWhole(target, picture)
+                      : QString("%1 cannot be created.").arg(QFileInfo(target).absolutePath());
+  if (error.isEmpty()) {
+    error = files.storeShot(shot);
+    if (!error.isEmpty()) {
+      // The picture goes with its entry: the one it replaced is put back.
+      if (previous.isEmpty()) {
+        QFile::remove(target);
+      } else if (const QString& undo = CShotFiles::writeWhole(target, previous); !undo.isEmpty()) {
+        error += "\n" + undo;
+      }
+    }
+  }
+  if (!error.isEmpty()) {
     report(error);
     return;
   }
@@ -1068,16 +1086,18 @@ void CShotDocMode::updateScenario(const QString& target) {
   }
 
   qint32 dropped = 0;
-  const qint32 stored = storeSettings(repo.absoluteFilePath(kBaseConfig), dropped);
+  const qint32 stored = storeSettings(files.baseFile(), dropped);
   if (stored < 0) {
-    report(QString("%1 cannot be written.").arg(kBaseConfig));
+    report(QString("%1 cannot be written.").arg(repo.relativeFilePath(files.baseFile())));
     return;
   }
   snapshotSetup();
-  report(QString("%1 settings are the base now; %2 naming a place on this machine were left out. Scenarios keep the "
-                 "settings they were recorded with.")
-             .arg(stored)
-             .arg(dropped));
+  report(
+      QString(
+          "%1 settings are this page's base now; %2 naming a place on this machine were left out. Scenarios keep the "
+          "settings they were recorded with.")
+          .arg(stored)
+          .arg(dropped));
 }
 
 // --- recording -----------------------------------------------------------------------------------

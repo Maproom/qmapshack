@@ -32,7 +32,8 @@ A **page** is one `.md`, one JSON shot file, one directory of images:
 doc/pages/<page>.md              the page, MyST, references ../images/<page>/<name>.png
 doc/shots/<page>.json            the pictures and the scenarios, written by the application
 doc/shots/<page>/<scenario>.ini  one scenario's whole configuration
-doc/shots/fixture/shots.ini         the base every page opens on
+doc/shots/<page>.ini                the page's base
+doc/shots/fixtures/default/         the fixture; fixtures/<page>/ holds what a page's differs in
 doc/images/<page>/               the pictures
 doc/shots/_cache/                   per-run tile cache and workspace database, git-ignored
 ```
@@ -388,7 +389,7 @@ renders. The launcher runs the same
 `compose` before starting a state process, so the writer's session and the build cannot disagree.
 
 **What the tool owns is injected per run, never stored**: `Canvas/{cachePath,mapPath,demPaths,poiPaths}` and
-`Route/routino\paths` from `doc/shots/fixture/`, absolute and therefore uncommittable, a
+`Route/routino\paths` from the page's fixture, absolute and therefore uncommittable, a
 `Database/Entries` pointing at a scratch copy of `database/Example.db`, and
 `Database/saveOnExit=false` - without it a run saves its workspace and `CShotFixture` refuses the
 next one. The cached tiles' modification times are refreshed before a run.
@@ -682,7 +683,7 @@ carries the token twice, which is why each command above is written the way it i
    The branch commits the data instead (#1249), each directory with a `SOURCE.md` naming source,
    licence and the commands that made it:
 
-   | `doc/shots/fixture/` | What |
+   | `doc/shots/fixtures/default/` | What |
    |---|---|
    | `projects/Example.qms` | project "Example": Track, Waypoint, Route, Area |
    | `database/Example.db` | SQLite: group "Projects", project "Einstein" |

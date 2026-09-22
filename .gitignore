@@ -11,3 +11,5 @@ CMakeUserPresets.json
 # Where shots.py replay renders; only publishing writes doc/images.
 doc/images/_check/
 doc/images/_work/
+# The panel writes it into a new page fixture folder for the writer; it describes, it is no part.
+doc/shots/fixtures/*/README.md

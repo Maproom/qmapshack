@@ -32,6 +32,10 @@
 #include "shoot/CShotPage.h"
 
 namespace {
+/** A fixture's parts, one folder each; shots.py FIXTURE_PARTS. */
+const QStringList kFixtureParts = {"projects", "maps", "dem", "poi", "routino", "database"};
+/** Describe a part and are no part of it; shots.py FIXTURE_NOTES. */
+const QStringList kFixtureNotes = {"SOURCE.md", "README.md"};
 /** @return the index of the shot with @p id, -1 when there is none */
 qsizetype indexOf(const QJsonArray& shots, const QString& id) {
   for (qsizetype i = 0; i < shots.size(); i++) {
@@ -85,6 +89,14 @@ bool CShotFiles::staysInside(const QString& name) {
   return true;
 }
 
+QString CShotFiles::writeWhole(const QString& path, const QByteArray& bytes) {
+  QSaveFile out(path);
+  if (!out.open(QIODevice::WriteOnly) || out.write(bytes) < 0 || !out.commit()) {
+    return QString("%1 cannot be written: %2").arg(path, out.errorString());
+  }
+  return QString();
+}
+
 QString CShotFiles::shotFile() const { return repo.absoluteFilePath("doc/shots/" + page + ".json"); }
 
 QString CShotFiles::pageFile() const { return repo.absoluteFilePath("doc/pages/" + page + ".md"); }
@@ -109,6 +121,75 @@ QString CShotFiles::pendingImage(const QString& id) const {
 
 QString CShotFiles::workEntry(const QString& id) const {
   return staysInside(id) ? repo.absoluteFilePath("doc/images/_work/" + id + ".shot.json") : QString();
+}
+
+QString CShotFiles::baseFile() const { return repo.absoluteFilePath("doc/shots/" + page + ".ini"); }
+
+QList<QPair<QString, QString>> CShotFiles::bases() const {
+  QList<QPair<QString, QString>> found{
+      {"the default fixture's", repo.absoluteFilePath("doc/shots/fixtures/default/shots.ini")}};
+  const QFileInfoList& inis =
+      QDir(repo.absoluteFilePath("doc/shots")).entryInfoList({"*.ini"}, QDir::Files, QDir::Name);
+  for (const QFileInfo& ini : inis) {
+    if (ini.completeBaseName() != page) {
+      found << qMakePair(QString("page %1").arg(ini.completeBaseName()), ini.absoluteFilePath());
+    }
+  }
+  return found;
+}
+
+QString CShotFiles::copyBase(const QString& source) const {
+  QFile in(source);
+  if (!in.open(QIODevice::ReadOnly)) {
+    return QString("%1 cannot be read.").arg(source);
+  }
+  return writeWhole(baseFile(), in.readAll());
+}
+
+QString CShotFiles::fixtureDir() const { return repo.absoluteFilePath("doc/shots/fixtures/" + page); }
+
+QStringList CShotFiles::ownFixtureParts() const {
+  QStringList own;
+  for (const QString& part : kFixtureParts) {
+    // shots.py fixture_part()'s rule by name: Windows hides by attribute, not by a leading dot.
+    const QStringList& entries = QDir(QDir(fixtureDir()).absoluteFilePath(part))
+                                     .entryList(QDir::AllEntries | QDir::Hidden | QDir::System | QDir::NoDotAndDotDot);
+    for (const QString& entry : entries) {
+      if (!kFixtureNotes.contains(entry) && !entry.startsWith('.')) {
+        own << part;
+        break;
+      }
+    }
+  }
+  return own;
+}
+
+QStringList CShotFiles::fixtureFolders() const {
+  QStringList folders{fixtureDir()};
+  for (const QString& part : kFixtureParts) {
+    folders << QDir(fixtureDir()).absoluteFilePath(part);
+  }
+  return folders;
+}
+
+QString CShotFiles::makeFixtureDir() const {
+  // Whatever is missing is added, nothing replaced.
+  for (const QString& part : kFixtureParts) {
+    if (!QDir().mkpath(QDir(fixtureDir()).absoluteFilePath(part))) {
+      return QString("%1 cannot be created.").arg(QDir(fixtureDir()).absoluteFilePath(part));
+    }
+  }
+  const QString& readme = QDir(fixtureDir()).absoluteFilePath("README.md");
+  if (QFileInfo::exists(readme)) {
+    return QString();
+  }
+  return writeWhole(readme,
+                    QString("# Fixture of the page %1\n\n"
+                            "Put into a part's folder only what this page needs different from `../default/`: "
+                            "`projects/`, `maps/`, `dem/`, `poi/`, `routino/`, `database/`. A part holding something "
+                            "replaces the default's part whole; an empty or missing one is the default's.\n")
+                        .arg(page)
+                        .toUtf8());
 }
 
 QString CShotFiles::placementFile() const { return repo.absoluteFilePath("doc/shots/_cache/doc-panel.ini"); }
@@ -158,13 +239,8 @@ QString CShotFiles::readShotFile(QJsonObject& content) const {
 }
 
 QString CShotFiles::writeShotFile(const QJsonObject& content) const {
-  // QSaveFile: a failed write leaves the old file whole. QJsonDocument::Indented is what shots.py writes too.
-  QSaveFile out(shotFile());
-  if (!out.open(QIODevice::WriteOnly) || out.write(QJsonDocument(content).toJson(QJsonDocument::Indented)) < 0 ||
-      !out.commit()) {
-    return QString("%1 cannot be written: %2").arg(shotFile(), out.errorString());
-  }
-  return QString();
+  // QJsonDocument::Indented is what shots.py writes too.
+  return writeWhole(shotFile(), QJsonDocument(content).toJson(QJsonDocument::Indented));
 }
 
 void CShotFiles::removePictures(const QStringList& ids) const {
@@ -494,12 +570,7 @@ QString CShotFiles::parkRecording(const QJsonArray& steps) const {
   if (!QDir().mkpath(QFileInfo(trialFile()).absolutePath())) {
     return QString("%1 cannot be created.").arg(QFileInfo(trialFile()).absolutePath());
   }
-  QSaveFile out(trialFile());
-  if (!out.open(QIODevice::WriteOnly) || out.write(QJsonDocument(steps).toJson(QJsonDocument::Indented)) < 0 ||
-      !out.commit()) {
-    return QString("%1 cannot be written: %2").arg(trialFile(), out.errorString());
-  }
-  return QString();
+  return writeWhole(trialFile(), QJsonDocument(steps).toJson(QJsonDocument::Indented));
 }
 
 QString CShotFiles::parkedRecording(QJsonArray& steps) const {
@@ -588,10 +659,9 @@ QString CShotFiles::storeShot(const QJsonObject& shot) {
       return QString("%1 cannot be created.").arg(QFileInfo(workEntry(id)).absolutePath());
     }
     const QJsonObject& before = (index < 0) ? QJsonObject() : shots.at(index).toObject();
-    QSaveFile out(workEntry(id));
-    if (!out.open(QIODevice::WriteOnly) || out.write(QJsonDocument(before).toJson(QJsonDocument::Indented)) < 0 ||
-        !out.commit()) {
-      return QString("%1 cannot be written: %2").arg(workEntry(id), out.errorString());
+    if (const QString& error = writeWhole(workEntry(id), QJsonDocument(before).toJson(QJsonDocument::Indented));
+        !error.isEmpty()) {
+      return error;
     }
   }
 

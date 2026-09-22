@@ -104,6 +104,13 @@ class CShotDocLauncher : public QObject {
   /** @return the name a new recording is stored under, empty when the writer cancelled */
   QString askRecordingName();
   void storeConfig();
+  /**
+     @brief Let the writer pick a base to copy over the page's.
+
+     @param creating  the page has none yet: no question before replacing
+     @return true when the page's base was written
+   */
+  bool chooseBase(bool creating);
   void renameScenario();
   void deleteScenario();
   void rebindShot(const QString& id, const QString& scenario);

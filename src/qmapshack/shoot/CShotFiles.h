@@ -23,6 +23,7 @@
 #include <QJsonArray>
 #include <QJsonObject>
 #include <QList>
+#include <QPair>
 #include <QPoint>
 #include <QSet>
 #include <QSize>
@@ -74,9 +75,30 @@ class CShotFiles {
   /** @return true when @p name, a shot id or scenario name joined below a directory, stays below it */
   static bool staysInside(const QString& name);
 
+  /**
+     @brief Replace @p path by @p bytes through QSaveFile, so a failed write leaves the old file whole.
+
+     @return empty, or why it failed in the writer's words
+   */
+  static QString writeWhole(const QString& path, const QByteArray& bytes);
+
   QString shotFile() const;
   /** @return why the shot file cannot be read, empty when it can or does not exist */
   QString shotFileProblem() const;
+  /** @return the page's own base, `doc/shots/<page>.ini`, a whole configuration */
+  QString baseFile() const;
+  /** @return the bases a page's base can be copied from: the default fixture's, then every other page's, by label */
+  QList<QPair<QString, QString>> bases() const;
+  /** @brief Replace the page's base with a copy of @p source; a failure leaves the old one as it was */
+  QString copyBase(const QString& source) const;
+  /** @return `doc/shots/fixtures/<page>`, what the page's fixture differs in from the default */
+  QString fixtureDir() const;
+  /** @brief Add to fixtureDir() what it lacks: an empty folder per part and a README saying what goes in */
+  QString makeFixtureDir() const;
+  /** @return the parts the page's fixture has itself; every other one is the default's (shots.py fixture_part()) */
+  QStringList ownFixtureParts() const;
+  /** @return the page's fixture folder and every part folder in it */
+  QStringList fixtureFolders() const;
   /** @return the INI file the panel's size and where the panel and the application window sit are kept in */
   QString placementFile() const;
   /**

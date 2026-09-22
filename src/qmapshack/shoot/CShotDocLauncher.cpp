@@ -120,6 +120,13 @@ void CShotDocLauncher::start() {
   connect(panel, &CShotDocPanel::renameClicked, this, [this]() { renameScenario(); });
   connect(panel, &CShotDocPanel::deleteScenarioClicked, this, [this]() { deleteScenario(); });
   connect(panel, &CShotDocPanel::storeConfigClicked, this, [this]() { storeConfig(); });
+  connect(panel, &CShotDocPanel::copyBaseClicked, this, [this]() {
+    if (chooseBase(false)) {
+      selectedScenario.clear();
+      enterScenario(QString());
+      refreshPanel(QString("%1 has a new base.").arg(page));
+    }
+  });
   connect(panel, &CShotDocPanel::rebindRequested, this,
           [this](const QString& id, const QString& scenario) { rebindShot(id, scenario); });
   connect(panel, &CShotDocPanel::retakeShotClicked, this, [this](const QString& id) { retakeShot(id); });
@@ -159,8 +166,49 @@ void CShotDocLauncher::start() {
     }
   });
 
-  refreshPanel();
-  enterScenario(QString());
+  // Queued: start() runs before the event loop, and endSession()'s exit() ends only a running one.
+  QTimer::singleShot(0, this, [this]() {
+    // A page owns its base from the start; which one it begins with is the writer's choice.
+    if (!QFileInfo::exists(files.baseFile()) && !chooseBase(true)) {
+      endSession();
+      return;
+    }
+    // Where the writer puts what the page's fixture differs in.
+    if (const QString& error = files.makeFixtureDir(); !error.isEmpty()) {
+      reportFailure(error);
+    }
+    watchPage();
+    refreshPanel();
+    enterScenario(QString());
+  });
+}
+
+bool CShotDocLauncher::chooseBase(bool creating) {
+  const QList<QPair<QString, QString>>& bases = files.bases();
+  QStringList labels;
+  for (const QPair<QString, QString>& base : bases) {
+    labels << base.first;
+  }
+  bool ok = false;
+  const QString& text = creating ? QString("%1 has no base yet. Which one does it start from?").arg(page)
+                                 : QString("Replace the base of %1 with:").arg(page);
+  const QString& picked = QInputDialog::getItem(panel, "Base of the page", text, labels, 0, false, &ok);
+  if (!ok) {
+    return false;
+  }
+  if (!creating &&
+      QMessageBox::Yes != QMessageBox::question(panel, "Base of the page",
+                                                QString("Every picture of %1 taken in (base) changes. Replace its base "
+                                                        "with %2?")
+                                                    .arg(page, picked),
+                                                QMessageBox::Yes | QMessageBox::No, QMessageBox::No)) {
+    return false;
+  }
+  if (const QString& error = files.copyBase(bases.value(labels.indexOf(picked)).second); !error.isEmpty()) {
+    reportFailure(error);
+    return false;
+  }
+  return true;
 }
 
 bool CShotDocLauncher::eventFilter(QObject* watched, QEvent* event) {
@@ -505,9 +553,9 @@ void CShotDocLauncher::storeConfig() {
   }
   if (QMessageBox::Yes ==
       QMessageBox::question(panel, "Save as base",
-                            "The base is what every page opens on and what a new recording starts from. Scenarios "
+                            "This page's base is what it opens on and what a new recording starts from. Scenarios "
                             "keep the settings they were recorded with.\n\nSave the arrangement, size and settings "
-                            "on screen as the base? Paths on this machine are left out.",
+                            "on screen as this page's base? Paths on this machine are left out.",
                             QMessageBox::Yes | QMessageBox::No, QMessageBox::No)) {
     command("update " + CShotPage::kBaseScenario);
   }
@@ -685,6 +733,12 @@ void CShotDocLauncher::watchPage() {
     connect(watcher, &QFileSystemWatcher::fileChanged, settle, qOverload<>(&QTimer::start));
     connect(watcher, &QFileSystemWatcher::directoryChanged, settle, qOverload<>(&QTimer::start));
   }
+  // A part filled or emptied changes where the page's pictures take it from.
+  for (const QString& folder : files.fixtureFolders()) {
+    if (QFileInfo::exists(folder) && !watcher->directories().contains(folder)) {
+      watcher->addPath(folder);
+    }
+  }
   // A file saved by rename is a new file the watcher lost; its directory sees it appear.
   for (const QString& file : {files.pageFile(), files.shotFile()}) {
     for (const QString& path : {file, QFileInfo(file).absolutePath()}) {
@@ -765,6 +819,7 @@ void CShotDocLauncher::refreshPanel(const QString& status) {
   const bool hasPage = QFileInfo::exists(files.pageFile());
   const QString& pageName = repo.relativeFilePath(files.pageFile());
   panel->setPage(pageName, hasPage);
+  panel->setFixture(files.ownFixtureParts(), repo.relativeFilePath(files.fixtureDir()));
   panel->setScenarios(files.scenarioNames(), selectedScenario);
   const QList<CShotFiles::row_t>& rows = files.rows();
   panel->setShots(rows);

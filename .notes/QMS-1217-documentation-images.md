@@ -308,6 +308,8 @@ delivered from inside that loop.
   the draw thread.
 - **The `tab` index and splitter states are applied with the leading `layout`, before the steps**:
   they were taken when the recording started, and a step may change them (Edit opens a details tab).
+- **A context menu's shot carries the step that opens it** (`open`): the scenario stays free of
+  open menus, and the replay runs `open` last and takes the picture inside the menu's `exec()`.
 - **A canvas step waits until the map has finished drawing** (`CCanvasHandler::settle()`): an item's
   pixels are updated by the draw, so a `hit` or click after a zoom finds nothing until it is done.
 - **A recorded click is a press and a release at the point**; the hover before it is a `move` step of

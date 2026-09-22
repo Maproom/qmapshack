@@ -87,6 +87,8 @@ constexpr Qt::Key kTagKey = Qt::Key_F9;
 constexpr qint32 kMinRegionSide = 8;
 /** Where the application window sat, in CShotFiles::placementFile(). */
 const QString kWindowPosKey = "window/pos";
+/** How long the window rests before its position is written [ms]. */
+constexpr qint32 kPlacementSettleMs = 300;
 /** QWidget::saveGeometry()'s magic number and the only major version portableGeometry() knows. */
 constexpr quint32 kGeometryMagic = 0x1D9D0CB;
 constexpr quint16 kGeometryMajor = 3;
@@ -277,6 +279,10 @@ CShotDocMode::CShotDocMode(const QDir& repo, const QString& page, const QString&
       writer(std::make_unique<CShotWriter>(repo.absoluteFilePath("doc/images/_work"))),
       ctx(std::make_unique<CShotContext>(*writer)) {
   recorder = new CShotRecorder(*ctx, this);
+  placementTimer = new QTimer(this);
+  placementTimer->setSingleShot(true);
+  placementTimer->setInterval(kPlacementSettleMs);
+  connect(placementTimer, &QTimer::timeout, this, &CShotDocMode::storePlacement);
 }
 
 CShotDocMode::~CShotDocMode() = default;
@@ -313,7 +319,19 @@ bool CShotDocMode::eventFilter(QObject* watched, QEvent* event) {
 
   // Every state process comes up where the writer moved the last one to.
   if (QEvent::Move == event->type() && ready && !CMainWindow::isNull() && watched == &CMainWindow::self()) {
-    QSettings(files.placementFile(), QSettings::IniFormat).setValue(kWindowPosKey, CMainWindow::self().pos());
+    // A drag moves the window many times; each write is a file sync.
+    placementTimer->start();
+    return QObject::eventFilter(watched, event);
+  }
+
+  // Shown inside the request's frame; a replay of its picture has only the step to open it again.
+  if (QEvent::Show == event->type()) {
+    if (QMenu* menu = qobject_cast<QMenu*>(watched); nullptr != menu) {
+      if (const QJsonObject& step = recorder->contextMenuStep(); !step.isEmpty()) {
+        contextMenu = menu;
+        contextMenuOpen = step;
+      }
+    }
     return QObject::eventFilter(watched, event);
   }
 
@@ -340,6 +358,10 @@ void CShotDocMode::leave(const QString& why) {
   }
   leaving = true;
   qDebug().noquote() << "doc:" << why << "- the state process ends";
+  if (placementTimer->isActive()) {
+    placementTimer->stop();
+    storePlacement();
+  }
   qApp->removeEventFilter(this);
   // Destroying the main window while shown crashes in its docks' visibilityChanged.
   if (!CMainWindow::isNull()) {
@@ -471,6 +493,12 @@ void CShotDocMode::runTrial() {
   send(QString("ready %1 replays and is stored. The application is in it; point at what to photograph and press "
                "Ctrl+Shift+F9.")
            .arg(scenario));
+}
+
+void CShotDocMode::storePlacement() {
+  if (!CMainWindow::isNull()) {
+    QSettings(files.placementFile(), QSettings::IniFormat).setValue(kWindowPosKey, CMainWindow::self().pos());
+  }
 }
 
 void CShotDocMode::placeWindow() {
@@ -822,6 +850,12 @@ void CShotDocMode::tag() {
     return;
   }
 
+  // The entry under the pointer is highlighted and a replay has no pointer; read before a question takes the focus.
+  QString activeEntry;
+  if (const QMenu* menu = qobject_cast<const QMenu*>(target); nullptr != menu && nullptr != menu->activeAction()) {
+    activeEntry = menu->activeAction()->objectName();
+  }
+
   // Rendered before any question: while a question is up the application has no focus, and a row that draws its
   // buttons only with focus would be photographed without them.
   QList<QWidget*> parts;
@@ -838,18 +872,7 @@ void CShotDocMode::tag() {
     reportUnexposed(target);
     return;
   }
-  // A build takes the picture where the scenario's actions end; a window they did not leave open is not there.
-  if (kind_e::eFromScenario == kind &&
-      !scenarioWindows.contains(QString::fromLatin1(target->metaObject()->className()))) {
-    const QString& name = onScreenName(target);
-    QString text = QString(
-                       "%1 was opened by hand. A build replays only the actions of %2, which do not leave it "
-                       "open, so its picture could not be taken again.")
-                       .arg(name.isEmpty() ? QString("This window") : QString("\"%1\"").arg(name), scenario);
-    text += CShotRegistry::self().exposureOf(target).isEmpty()
-                ? QString(" It cannot be photographed in a scenario yet.")
-                : QString(" Pick %1 in the panel and photograph it there.").arg(CShotFiles::kBaseLabel);
-    report(text);
+  if (kind_e::eFromScenario == kind && refusedAsHandOpened(target)) {
     return;
   }
   if (kind_e::eLive == kind) {
@@ -864,30 +887,12 @@ void CShotDocMode::tag() {
     return;
   }
 
-  QJsonObject shot{{"id", id}};
-  if (!scenario.isEmpty()) {
-    shot["scenario"] = scenario;
-  }
+  QJsonObject shot = newShot(id);
   if (const QJsonObject& set = openTabs(target); !set.isEmpty()) {
     shot["set"] = set;
   }
 
-  if (kind_e::eFromScenario == kind) {
-    // The scenario opens the window again; the class says which one it has to be.
-    shot["widget"] = QString();
-    shot["window"] = QString::fromLatin1(target->metaObject()->className());
-    shot["size"] = QJsonArray{main->width(), main->height()};
-    if (!target->windowTitle().isEmpty()) {
-      shot["note"] = target->windowTitle();
-    }
-  } else if (kind_e::eLive == kind) {
-    shot["widget"] = CShotAddress::addressOf(main, target).value_or(QString());
-    // A docker is laid out by the window, so its picture depends on the window's size too.
-    shot["size"] = QJsonArray{main->width(), main->height()};
-    if (!target->windowTitle().isEmpty()) {
-      shot["note"] = target->windowTitle();
-    }
-  } else {
+  if (kind_e::eExposed == kind) {
     // A size only when the writer's window differs from what the exposure comes out at by itself.
     const std::unique_ptr<QWidget> probe(CShotRegistry::self().buildExposure(exposure, *ctx, dialogParent()));
     const QSize& defaultSize = (nullptr == probe) ? QSize() : CShotWriter::render(probe.get(), QSize()).size();
@@ -895,6 +900,25 @@ void CShotDocMode::tag() {
     shot["note"] = CShotRegistry::self().exposureDescription(exposure);
     if (defaultSize != target->size()) {
       shot["size"] = QJsonArray{target->width(), target->height()};
+    }
+  } else {
+    if (kind_e::eFromScenario == kind) {
+      // The scenario opens the window again; the class says which one it has to be.
+      shot["widget"] = QString();
+      shot["window"] = QString::fromLatin1(target->metaObject()->className());
+    } else {
+      shot["widget"] = CShotAddress::addressOf(main, target).value_or(QString());
+      if (target == contextMenu) {
+        shot["open"] = contextMenuOpen;
+        if (!activeEntry.isEmpty()) {
+          shot["active"] = activeEntry;
+        }
+      }
+    }
+    // A part is laid out by the main window and a scenario's window opens at its size: the picture depends on it.
+    shot["size"] = QJsonArray{main->width(), main->height()};
+    if (!target->windowTitle().isEmpty()) {
+      shot["note"] = target->windowTitle();
     }
   }
 
@@ -907,6 +931,31 @@ void CShotDocMode::tag() {
     }
     return 0 == CShotPage::shootOne(shot, *ctx, files.scenarios());
   });
+}
+
+QJsonObject CShotDocMode::newShot(const QString& id) const {
+  QJsonObject shot{{"id", id}};
+  if (!scenario.isEmpty()) {
+    shot["scenario"] = scenario;
+  }
+  return shot;
+}
+
+bool CShotDocMode::refusedAsHandOpened(const QWidget* target) {
+  // A build takes the picture where the scenario's actions end; a window they did not leave open is not there.
+  if (scenarioWindows.contains(QString::fromLatin1(target->metaObject()->className()))) {
+    return false;
+  }
+  const QString& name = onScreenName(target);
+  QString text = QString(
+                     "%1 was opened by hand. A build replays only the actions of %2, which do not leave it open, so "
+                     "its picture could not be taken again.")
+                     .arg(name.isEmpty() ? QString("This window") : QString("\"%1\"").arg(name), scenario);
+  text += CShotRegistry::self().exposureOf(target).isEmpty()
+              ? QString(" It cannot be photographed in a scenario yet.")
+              : QString(" Pick %1 in the panel and photograph it there.").arg(CShotFiles::kBaseLabel);
+  report(text);
+  return true;
 }
 
 void CShotDocMode::takeRegion(const QString& wanted) {
@@ -932,10 +981,8 @@ void CShotDocMode::takeRegion(const QString& wanted) {
     return;
   }
 
-  QJsonObject shot{{"id", id}, {"widget", QString()}};
-  if (!scenario.isEmpty()) {
-    shot["scenario"] = scenario;
-  }
+  QJsonObject shot = newShot(id);
+  shot["widget"] = QString();
   // The rectangle is measured against the window's size.
   shot["size"] = QJsonArray{main->width(), main->height()};
   shot["rect"] = QJsonArray{region.x(), region.y(), region.width(), region.height()};

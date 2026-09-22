@@ -183,6 +183,24 @@
             ],
             "widget": "",
             "window": "CUnitsSetup"
+        },
+        {
+            "active": "actionEditDetails",
+            "id": "test/menu-track",
+            "open": {
+                "at": [
+                    0.1,
+                    0.5
+                ],
+                "do": "menu",
+                "row": "Example/trk:Track",
+                "widget": "treeWks"
+            },
+            "size": [
+                1200,
+                800
+            ],
+            "widget": "treeWks/QMenu#0"
         }
     ]
 }

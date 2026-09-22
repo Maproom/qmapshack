@@ -383,8 +383,15 @@ def cmd_replay(args):
 
         groups = [BASE_SCENARIO] if any(not shot.get("scenario") for shot in shots) else []
         groups += sorted({shot["scenario"] for shot in shots if shot.get("scenario")})
+        # A scenario is replayed once per process, with the window at the first shot's size: each other size runs alone.
+        runs = []
         for group in groups:
-            ids = [shot.get("id", "") for shot in shots if (shot.get("scenario") or BASE_SCENARIO) == group]
+            members = [shot for shot in shots if (shot.get("scenario") or BASE_SCENARIO) == group]
+            first = members[0].get("size")
+            apart = [shot.get("id", "") for shot in members if group != BASE_SCENARIO and shot.get("size") != first]
+            runs.append((group, args.only, [shot.get("id", "") for shot in members if shot.get("id", "") not in apart]))
+            runs += [(group, shot_id, [shot_id]) for shot_id in apart]
+        for group, only, ids in runs:
             if another_instance_runs(user_data):
                 sys.exit("QMapShack was started during the replay. Close it and replay again.")
 
@@ -392,7 +399,7 @@ def cmd_replay(args):
             before = snapshot(watched)
             # Rendered aside and moved in: a picture that does not come out keeps the one out holds.
             with tempfile.TemporaryDirectory(prefix="render-", dir=CACHE_DIR) as rendered:
-                code, said = run_group(binary, Path(rendered), page_file, group, args.only, args.verbose)
+                code, said = run_group(binary, Path(rendered), page_file, group, only, args.verbose)
                 missing = [shot_id for shot_id in ids if not (Path(rendered) / f"{shot_id}.png").is_file()]
                 for shot_id in ids:
                     if shot_id not in missing:

@@ -54,3 +54,9 @@ A menu is photographed without being opened.
 ## A modal dialog a scenario opened
 
 ![](../images/test/units-dialog.png)
+
+## A context menu
+
+The menu is a stack local of `showMenuItemTrk()`; the shot's `open` right-clicks the row again.
+
+![](../images/test/menu-track.png)

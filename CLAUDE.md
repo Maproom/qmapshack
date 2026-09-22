@@ -1136,6 +1136,8 @@ doc/shots/fixtures/default/    the fixture; its shots.ini only seeds a new page'
 doc/shots/fixtures/<page>/     what the page's fixture differs in, one part (maps/, projects/...) each
 ```
 
+The writer's guide is `doc/WRITING.md`: short, facts only, updated with every change a writer sees.
+
 #### Build and entry
 
 - **Developer-only, behind `-DQMS_DOC_MODE=ON`.** No source tests the option: CMake compiles

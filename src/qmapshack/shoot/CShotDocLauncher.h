@@ -31,6 +31,7 @@
 
 class CShotDocPanel;
 class CShotsJob;
+class QFileSystemWatcher;
 class QLocalServer;
 class QTemporaryDir;
 
@@ -100,7 +101,8 @@ class CShotDocLauncher : public QObject {
   QString channelName() const;
 
   void showShot(const QString& id);
-  void nameRecording(const QString& suggestion);
+  /** @return the name a new recording is stored under, empty when the writer cancelled */
+  QString askRecordingName();
   void storeConfig();
   void renameScenario();
   void deleteScenario();
@@ -114,8 +116,14 @@ class CShotDocLauncher : public QObject {
   void retakeShot(const QString& id);
   /** @brief `shots.py replay` of this page into `_check`: whether every shot still replays. */
   void retakePage();
-  /** @brief `shots.py publish`; with @p thenEnd the session ends once it succeeded. */
-  void publishPictures(bool thenEnd);
+  /**
+     @brief `shots.py publish`; with @p thenEnd the session ends once it succeeded.
+
+     @param only  the ids to publish as a glob, empty for every picture taken again
+   */
+  void publishPictures(bool thenEnd, const QString& only = QString());
+  /** @brief Watch the page and its shot file, so an edit made outside shows in the panel */
+  void watchPage();
   /**
      @brief Start `shots.py` with @p args into @p slot.
 
@@ -138,6 +146,7 @@ class CShotDocLauncher : public QObject {
 
   CShotDocPanel* panel = nullptr;
   QLocalServer* server = nullptr;
+  QFileSystemWatcher* watcher = nullptr;
   QTemporaryDir* scratch = nullptr;
   QPointer<CShotDocState> state;
   QPointer<CShotsJob> replayJob;

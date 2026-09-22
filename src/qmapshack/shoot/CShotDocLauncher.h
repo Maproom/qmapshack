@@ -121,7 +121,7 @@ class CShotDocLauncher : public QObject {
 
   /** @brief Take @p id again headless, into `doc/images/_work/`, the way a build renders it. */
   void retakeShot(const QString& id);
-  /** @brief `shots.py replay` of this page into `_check`: whether every shot still replays. */
+  /** @brief `shots.py replay` of this page into `_work`: every picture taken again, to compare and publish. */
   void retakePage();
   /**
      @brief `shots.py publish`; with @p thenEnd the session ends once it succeeded.

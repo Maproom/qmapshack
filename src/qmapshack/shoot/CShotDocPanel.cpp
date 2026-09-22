@@ -193,7 +193,7 @@ CShotDocPanel::CShotDocPanel(const QString& page, const QString& sizeFile, QWidg
   // The page's own actions, apart from the selected picture's.
   shotActions->addSpacing(side);
   whileIdle << addButton(shotActions, ":/icons/DocRetakeAll.svgt", "All",
-                         "Replay every picture of this page into doc/images/_check; nothing here changes.",
+                         "Take every picture of this page again into doc/images/_work, to compare and publish.",
                          &CShotDocPanel::retakePageClicked);
   reapButton = addButton(shotActions, ":/icons/DocClean.svgt", "Clean",
                          "Delete the shots and pictures of this page no page line uses.", &CShotDocPanel::reapClicked);

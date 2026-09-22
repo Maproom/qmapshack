@@ -18,11 +18,13 @@
 
 #include "shoot/CShotPage.h"
 
+#include <QAction>
 #include <QApplication>
 #include <QDebug>
 #include <QFile>
 #include <QJsonArray>
 #include <QJsonDocument>
+#include <QMenu>
 #include <QPointer>
 #include <QRect>
 #include <QRegularExpression>
@@ -45,7 +47,8 @@
 #include "shoot/CShotWriter.h"
 
 namespace {
-const QSet<QString> kShotKeys = {"exposure", "id", "note", "rect", "scenario", "set", "size", "widget", "window"};
+const QSet<QString> kShotKeys = {"active",   "exposure", "id",   "note",   "open",  "rect",
+                                 "scenario", "set",      "size", "widget", "window"};
 
 /** Coordinates of two views closer than this are the same place [°]. */
 constexpr qreal kViewEpsilon = 1e-9;
@@ -88,6 +91,162 @@ bool readRect(const QJsonObject& shot, QRect& rect) {
   const QJsonArray& value = shot["rect"].toArray();
   rect = QRect(value.at(0).toInt(), value.at(1).toInt(), value.at(2).toInt(), value.at(3).toInt());
   return 4 == value.size() && !rect.isEmpty();
+}
+
+/** @return the shot's key and shape errors, each warned about; a misspelt key would silently be ignored */
+qint32 shotProblems(const QJsonObject& shot, const QString& id, const QJsonObject& scenarios) {
+  qint32 failures = 0;
+  const QStringList& keys = shot.keys();
+  for (const QString& key : keys) {
+    if (!kShotKeys.contains(key)) {
+      qWarning() << "shoot:" << id << "has an unknown key" << key;
+      failures++;
+    }
+  }
+
+  QSize size;
+  if (!readSize(shot, size)) {
+    qWarning() << "shoot:" << id << "has a size that is not [width, height]:" << shot["size"];
+    failures++;
+  }
+  QRect rect;
+  if (!readRect(shot, rect)) {
+    qWarning() << "shoot:" << id << "has a rect that is not [x, y, width, height]:" << shot["rect"];
+    failures++;
+  }
+  if (shot.contains("set") && !shot["set"].isObject()) {
+    qWarning() << "shoot:" << id << "has a set that is not an object:" << shot["set"];
+    failures++;
+  }
+  const QString& scenario = shot["scenario"].toString();
+  if (shot.contains("scenario") && !scenarios[scenario].isArray()) {
+    qWarning() << "shoot:" << id << "wants the scenario" << scenario << "- the ones there are:" << scenarios.keys();
+    failures++;
+  }
+  if ((shot.contains("scenario") || shot.contains("open")) && !size.isValid()) {
+    qWarning() << "shoot:" << id << "runs steps and has no size";
+    failures++;
+  }
+  if (shot.contains("open") && !shot["open"].isObject()) {
+    qWarning() << "shoot:" << id << "has an open that is not a step:" << shot["open"];
+    failures++;
+  }
+  if (shot.contains("exposure") && shot.contains("widget")) {
+    qWarning() << "shoot:" << id << "has both the exposure" << shot["exposure"].toString() << "and a widget";
+    failures++;
+  }
+  if (shot.contains("exposure") && !CShotRegistry::self().exposureNames().contains(shot["exposure"].toString())) {
+    qWarning() << "shoot:" << id << "wants the exposure" << shot["exposure"].toString()
+               << "- the ones there are:" << CShotRegistry::self().exposureNames();
+    failures++;
+  }
+  return failures;
+}
+
+/** @return false, warned about, when @p main does not take @p size; a window's minimum silently wins */
+bool sizeMainWindow(QWidget* main, const QSize& size, const QString& id) {
+  main->resize(size);
+  CShotWriter::settle(main);
+  if (main->size() == size) {
+    return true;
+  }
+  qWarning().noquote() << QString(
+                              "shoot: %1: the application window could not be made %2 x %3 on this computer, it is "
+                              "%4 x %5.")
+                              .arg(id)
+                              .arg(size.width())
+                              .arg(size.height())
+                              .arg(main->width())
+                              .arg(main->height());
+  return false;
+}
+
+/** @return what the shot photographs, nullptr when it is not there; a built exposure is handed to @p exposure */
+QWidget* pictureTarget(const QJsonObject& shot, const QString& id, CShotContext& ctx, QWidget* main,
+                       std::unique_ptr<QWidget>& exposure) {
+  if (shot.contains("exposure")) {
+    const QString& name = shot["exposure"].toString();
+    exposure.reset(CShotRegistry::self().buildExposure(name, ctx, CMainWindow::getBestWidgetForParent()));
+    if (nullptr == exposure) {
+      qWarning() << "shoot:" << id << "cannot build the exposure" << name;
+    }
+    return exposure.get();
+  }
+  const QString& address = shot["widget"].toString();
+  QWidget* widget = address.isEmpty() ? topmost(main) : CShotAddress::resolve(main, address);
+  if (nullptr == widget) {
+    qWarning().noquote() << "shoot:" << id
+                         << "- what it photographs is not on screen. Take the picture again "
+                            "in the panel.";
+    qDebug().noquote() << "shoot:" << id << "photographs the widget at" << address;
+  }
+  return widget;
+}
+
+/** @return false when @p widget is no menu with the entry @p active; a context menu's actions are its builder's */
+bool highlightEntry(QWidget* widget, const QString& active, const QString& id) {
+  QMenu* menu = qobject_cast<QMenu*>(widget);
+  QAction* action = nullptr;
+  const QList<QAction*>& actions = (nullptr == menu) ? QList<QAction*>() : menu->actions();
+  for (QAction* entry : actions) {
+    if (entry->objectName() == active) {
+      action = entry;
+    }
+  }
+  if (nullptr == action) {
+    qWarning() << "shoot:" << id << "has no menu entry" << active << "to highlight";
+    return false;
+  }
+  menu->setActiveAction(action);
+  return true;
+}
+
+/** A value a shot's `set` replaced, put back after the picture so shots stay independent. */
+struct restore_t {
+  QPointer<QObject> target;
+  QString property;
+  QVariant value;
+};
+
+/** @return the `set` entries that failed; what each one replaced is prepended to @p restore, newest first */
+qint32 driveSet(QWidget* widget, const QJsonObject& set, const QString& id, QList<restore_t>& restore) {
+  qint32 failed = 0;
+  for (auto it = set.constBegin(); it != set.constEnd(); ++it) {
+    // `child.property` addresses below the photographed widget; a bare property is its own.
+    const qsizetype dot = it.key().lastIndexOf('.');
+    const QString& target = (dot < 0) ? QString() : it.key().left(dot);
+    const QString& property = it.key().mid(dot + 1);
+    const QByteArray& name = property.toLatin1();
+    QObject* driven = CShotAddress::resolve(widget, target);
+    if (nullptr == driven) {
+      qWarning() << "shoot:" << id << "has no" << target << "to set" << property << "on";
+      failed++;
+    } else if (driven->metaObject()->indexOfProperty(name.constData()) < 0) {
+      qWarning() << "shoot:" << id << "has no property" << property << "on" << driven->metaObject()->className();
+      failed++;
+    } else {
+      // Read before driving: a failed set may still have changed the value.
+      restore.prepend({driven, property, driven->property(name.constData())});
+      if (!CShotPage::driveProperty(driven, property, it.value().toVariant())) {
+        qWarning() << "shoot:" << id << "cannot set" << it.key() << "to" << it.value().toVariant() << "- it is"
+                   << driven->property(name.constData());
+        failed++;
+      }
+    }
+  }
+  return failed;
+}
+
+/** @return the values that could not be put back */
+qint32 restoreSet(const QList<restore_t>& restore, const QString& id) {
+  qint32 failed = 0;
+  for (const restore_t& before : restore) {
+    if (!CShotPage::driveProperty(before.target, before.property, before.value)) {
+      qWarning() << "shoot:" << id << "cannot put" << before.property << "back to" << before.value;
+      failed++;
+    }
+  }
+  return failed;
 }
 }  // namespace
 
@@ -184,208 +343,175 @@ bool CShotPage::applyView(CCanvas* canvas, const QJsonObject& view) {
          std::abs(now["lon"].toDouble() - view["lon"].toDouble()) < kViewEpsilon;
 }
 
-qint32 CShotPage::shootOne(const QJsonObject& shot, CShotContext& ctx, const QJsonObject& scenarios) {
+namespace {
+/** @return the failures that keep @p shot from being taken at all, each warned about */
+qint32 refusal(const QJsonObject& shot, const QJsonObject& scenarios) {
   const QString& id = shot["id"].toString();
   if (id.isEmpty()) {
     qWarning() << "shoot: a shot has no id:" << shot;
     return 1;
   }
+  return shotProblems(shot, id, scenarios);
+}
 
-  // A misspelt key would silently be ignored.
-  qint32 failures = 0;
-  const QStringList& keys = shot.keys();
-  for (const QString& key : keys) {
-    if (!kShotKeys.contains(key)) {
-      qWarning() << "shoot:" << id << "has an unknown key" << key;
-      failures++;
-    }
+/** @return false, warned about, when there is no main window to run steps in or it does not take @p shot's size */
+bool sizeForSteps(const QJsonObject& shot, QWidget* main) {
+  const QString& id = shot["id"].toString();
+  if (nullptr == main) {
+    qWarning() << "shoot:" << id << "runs steps and there is no main window";
+    return false;
   }
-
   QSize size;
-  if (!readSize(shot, size)) {
-    qWarning() << "shoot:" << id << "has a size that is not [width, height]:" << shot["size"];
-    failures++;
-  }
+  readSize(shot, size);
+  // Before the steps: restoreState() distributes dock extents in pixels.
+  return sizeMainWindow(main, size, id);
+}
+
+/**
+   @brief Photograph @p shot as the screen is now.
+
+   @param stepped  steps ran for it: the main window is sized already and a window a step opened keeps its own size
+   @return the failures
+ */
+qint32 takePicture(const QJsonObject& shot, CShotContext& ctx, QWidget* main, bool stepped) {
+  const QString& id = shot["id"].toString();
+  QSize size;
+  readSize(shot, size);
   QRect rect;
-  if (!readRect(shot, rect)) {
-    qWarning() << "shoot:" << id << "has a rect that is not [x, y, width, height]:" << shot["rect"];
-    failures++;
+  readRect(shot, rect);
+
+  // Outlives the restore of `set` values below.
+  std::unique_ptr<QWidget> exposure;
+  QWidget* widget = pictureTarget(shot, id, ctx, main, exposure);
+  if (nullptr == widget) {
+    return 1;
   }
-  if (shot.contains("set") && !shot["set"].isObject()) {
-    qWarning() << "shoot:" << id << "has a set that is not an object:" << shot["set"];
-    failures++;
-  }
-  const bool inScenario = shot.contains("scenario");
-  const QString& scenario = shot["scenario"].toString();
-  if (inScenario && !scenarios[scenario].isArray()) {
-    qWarning() << "shoot:" << id << "wants the scenario" << scenario << "- the ones there are:" << scenarios.keys();
-    failures++;
-  }
-  // Everything a scenario does is measured against the main window's size.
-  if (inScenario && !size.isValid()) {
-    qWarning() << "shoot:" << id << "is taken in the scenario" << scenario << "and has no size";
-    failures++;
-  }
-  if (shot.contains("exposure") && shot.contains("widget")) {
-    qWarning() << "shoot:" << id << "has both the exposure" << shot["exposure"].toString() << "and a widget";
-    failures++;
-  }
-  if (shot.contains("exposure") && !CShotRegistry::self().exposureNames().contains(shot["exposure"].toString())) {
-    qWarning() << "shoot:" << id << "wants the exposure" << shot["exposure"].toString()
-               << "- the ones there are:" << CShotRegistry::self().exposureNames();
-    failures++;
-  }
-  if (0 != failures) {
-    return failures;
+  if (const QString& active = shot["active"].toString(); !active.isEmpty() && !highlightEntry(widget, active, id)) {
+    return 1;
   }
 
-  QWidget* main = CMainWindow::isNull() ? nullptr : &CMainWindow::self();
-  // Before the scenario: restoreState() distributes dock extents in pixels.
-  if (inScenario) {
-    if (nullptr == main) {
-      qWarning() << "shoot:" << id << "is taken in a scenario and there is no main window";
-      return 1;
-    }
-    main->resize(size);
-    CShotWriter::settle(main);
-    if (main->size() != size) {
-      qWarning().noquote() << QString(
-                                  "shoot: %1: the application window could not be made %2 x %3 on this computer, it is "
-                                  "%4 x %5.")
-                                  .arg(id)
-                                  .arg(size.width())
-                                  .arg(size.height())
-                                  .arg(main->width())
-                                  .arg(main->height());
-      return 1;
-    }
+  // Guards against photographing the window behind a dialog that failed to open.
+  const QString& window = shot["window"].toString();
+  const QString& className = QString::fromLatin1(widget->metaObject()->className());
+  if (!window.isEmpty() && window != className) {
+    qWarning().noquote() << QString(
+                                "shoot: %1 - the window it photographs did not open: %2 is on top, not %3. If a "
+                                "step failed above, that is why; else take the picture again in the panel.")
+                                .arg(id, className, window);
+    return 1;
   }
 
-  // Taken as the scenario's last step: a dialog a step opened is gone once replay() returns.
-  const auto takePicture = [&]() -> qint32 {
-    // Outlives the restore of `set` values below.
-    std::unique_ptr<QWidget> exposure;
-    QWidget* widget = nullptr;
-    if (shot.contains("exposure")) {
-      const QString& name = shot["exposure"].toString();
-      exposure.reset(CShotRegistry::self().buildExposure(name, ctx, CMainWindow::getBestWidgetForParent()));
-      if (nullptr == exposure) {
-        qWarning() << "shoot:" << id << "cannot build the exposure" << name;
-        return 1;
-      }
-      widget = exposure.get();
-    } else {
-      const QString& address = shot["widget"].toString();
-      widget = address.isEmpty() ? topmost(main) : CShotAddress::resolve(main, address);
-      if (nullptr == widget) {
-        qWarning().noquote() << "shoot:" << id
-                             << "- what it photographs is not on screen. Take the picture again "
-                                "in the panel.";
-        qDebug().noquote() << "shoot:" << id << "photographs the widget at" << address;
-        return 1;
-      }
-    }
-
-    // Guards against photographing the window behind a dialog that failed to open.
-    const QString& window = shot["window"].toString();
-    const QString& className = QString::fromLatin1(widget->metaObject()->className());
-    if (!window.isEmpty() && window != className) {
-      qWarning().noquote() << QString(
-                                  "shoot: %1 - the window it photographs did not open: %2 is on top, not %3. If a "
-                                  "step failed above, that is why; else take the picture again in the panel.")
-                                  .arg(id, className, window);
-      return 1;
-    }
-
+  // A window a scenario step opened is rendered at its own size.
+  const QSize renderSize = (stepped && widget != main) ? QSize() : size;
+  if (!stepped) {
     // Main window layout differs per platform, so such a shot must fix the window size.
     const bool sizedByWindow = (widget == main) || (!widget->isWindow() && widget->window() == main);
-    // The size a window is rendered at; a window a scenario step opened keeps its own.
-    QSize renderSize = size;
-    if (inScenario) {
-      if (widget != main) {
-        renderSize = QSize();
-      }
-    } else if (sizedByWindow) {
-      if (!size.isValid()) {
-        qWarning() << "shoot:" << id << "is sized by the main window and has no size";
-        return 1;
-      }
-      // Before any `set`: the state depends on the window size.
-      main->resize(size);
-      CShotWriter::settle(main);
-      if (main->size() != size) {
-        qWarning().noquote()
-            << QString(
-                   "shoot: %1: the application window could not be made %2 x %3 on this computer, it is "
-                   "%4 x %5.")
-                   .arg(id)
-                   .arg(size.width())
-                   .arg(size.height())
-                   .arg(main->width())
-                   .arg(main->height());
-        return 1;
-      }
-    } else if (!widget->isWindow() && size.isValid()) {
+    if (sizedByWindow && !size.isValid()) {
+      qWarning() << "shoot:" << id << "is sized by the main window and has no size";
+      return 1;
+    }
+    // Before any `set`: the state depends on the window size.
+    if (sizedByWindow && !sizeMainWindow(main, size, id)) {
+      return 1;
+    }
+    if (!sizedByWindow && !widget->isWindow() && size.isValid()) {
       // A size applies to a window only.
       qWarning() << "shoot:" << id << "has a size and is laid out by" << widget->window()->metaObject()->className();
       return 1;
     }
+  }
 
-    // Restored after the picture, so shots stay independent.
-    struct restore_t {
-      QPointer<QObject> target;
-      QString property;
-      QVariant value;
-    };
-    QList<restore_t> restore;
+  QList<restore_t> restore;
+  qint32 failed = driveSet(widget, shot["set"].toObject(), id, restore);
+  if (0 == failed) {
+    CShotWriter::settle(widget);
+    ctx.begin(id, rect);
+    if (!ctx.shot(widget, widget->isWindow() ? renderSize : QSize())) {
+      failed++;
+    }
+  }
+  return failed + restoreSet(restore, id);
+}
 
+/** @return the failures of @p shot's picture, inside the exec() of its context menu when it has an `open` step */
+qint32 takeOpened(const QJsonObject& shot, CShotContext& ctx, QWidget* main) {
+  if (!shot.contains("open")) {
+    return takePicture(shot, ctx, main, true);
+  }
+  // Closes only the menu: what the scenario opened stays up for the next shot.
+  return CShotReplay::perform(main, {shot["open"].toObject()}, [&]() { return takePicture(shot, ctx, main, true); });
+}
+
+/**
+   @brief Take @p shots, all of @p scenario, in one replay of it: a scenario performed on top of itself is another
+   state.
+
+   @return the failures
+ */
+qint32 shootScenario(const QList<QJsonObject>& shots, CShotContext& ctx, const QJsonObject& scenarios,
+                     const QString& scenario) {
+  qint32 failures = 0;
+  QList<QJsonObject> together;
+  QList<QJsonObject> apart;
+  for (const QJsonObject& shot : shots) {
+    if (const qint32 refused = refusal(shot, scenarios); 0 != refused) {
+      failures += refused;
+    } else if (together.isEmpty() || shot["size"] == together.first()["size"]) {
+      together << shot;
+    } else {
+      // The window is sized before the steps, so another size needs a replay of its own.
+      apart << shot;
+    }
+  }
+  for (const QJsonObject& shot : std::as_const(apart)) {
+    failures += CShotPage::shootOne(shot, ctx, scenarios);
+  }
+  if (together.isEmpty()) {
+    return failures;
+  }
+
+  QWidget* main = CMainWindow::isNull() ? nullptr : &CMainWindow::self();
+  if (!sizeForSteps(together.first(), main)) {
+    return failures + together.size();
+  }
+  const QJsonArray& steps = scenarios[scenario].toArray();
+  failures += CShotReplay::replay(steps, ctx, [&]() {
     qint32 failed = 0;
-    const QJsonObject& set = shot["set"].toObject();
-    for (auto it = set.constBegin(); it != set.constEnd(); ++it) {
-      // `child.property` addresses below the photographed widget; a bare property is its own.
-      const qsizetype dot = it.key().lastIndexOf('.');
-      const QString& target = (dot < 0) ? QString() : it.key().left(dot);
-      const QString& property = it.key().mid(dot + 1);
-      const QByteArray& name = property.toLatin1();
-      QObject* driven = CShotAddress::resolve(widget, target);
-      if (nullptr == driven) {
-        qWarning() << "shoot:" << id << "has no" << target << "to set" << property << "on";
-        failed++;
-      } else if (driven->metaObject()->indexOfProperty(name.constData()) < 0) {
-        qWarning() << "shoot:" << id << "has no property" << property << "on" << driven->metaObject()->className();
-        failed++;
-      } else {
-        // Newest first, read before driving: a failed set may still have changed the value.
-        restore.prepend({driven, property, driven->property(name.constData())});
-        if (!driveProperty(driven, property, it.value().toVariant())) {
-          qWarning() << "shoot:" << id << "cannot set" << it.key() << "to" << it.value().toVariant() << "- it is"
-                     << driven->property(name.constData());
-          failed++;
-        }
-      }
-    }
-    if (0 == failed) {
-      CShotWriter::settle(widget);
-
-      ctx.begin(id, rect);
-      if (!ctx.shot(widget, widget->isWindow() ? renderSize : QSize())) {
-        failed++;
-      }
-    }
-
-    for (const restore_t& before : std::as_const(restore)) {
-      if (!driveProperty(before.target, before.property, before.value)) {
-        qWarning() << "shoot:" << id << "cannot put" << before.property << "back to" << before.value;
-        failed++;
-      }
+    for (const QJsonObject& shot : std::as_const(together)) {
+      // Each picture may wait as long as one alone.
+      CShotReplay::keepAlive();
+      failed += takeOpened(shot, ctx, main);
     }
     return failed;
-  };
+  });
+  CShotReplay::clear(steps, ctx);
+  return failures;
+}
+}  // namespace
+
+qint32 CShotPage::shootOne(const QJsonObject& shot, CShotContext& ctx, const QJsonObject& scenarios) {
+  if (const qint32 failures = refusal(shot, scenarios); 0 != failures) {
+    return failures;
+  }
+  const bool inScenario = shot.contains("scenario");
+  const QString& scenario = shot["scenario"].toString();
+  // Steps run for the picture, measured against the main window's size like a scenario's.
+  const bool stepped = inScenario || shot.contains("open");
+
+  QWidget* main = CMainWindow::isNull() ? nullptr : &CMainWindow::self();
+  if (stepped && !sizeForSteps(shot, main)) {
+    return 1;
+  }
 
   // One path with or without a scenario: no steps take the picture at once. A live scenario is on screen already.
   const bool perform = inScenario && ctx.liveScenario() != scenario;
-  const QJsonArray& steps = perform ? scenarios[scenario].toArray() : QJsonArray();
-  failures += CShotReplay::replay(steps, ctx, takePicture);
+  QJsonArray steps = perform ? scenarios[scenario].toArray() : QJsonArray();
+  // A context menu is taken inside the exec() its step runs.
+  if (shot.contains("open")) {
+    steps.append(shot["open"]);
+  }
+  // Taken as the scenario's last step: a dialog a step opened is gone once replay() returns.
+  qint32 failures = CShotReplay::replay(steps, ctx, [&]() { return takePicture(shot, ctx, main, stepped); });
   // The next shot of this run must not start from what the scenario left.
   if (!steps.isEmpty()) {
     CShotReplay::clear(steps, ctx);
@@ -461,7 +587,17 @@ qint32 CShotPage::run(const QString& file, CShotContext& ctx, const QString& onl
     }
 
     taken++;
-    failures += shootOne(shot, ctx, scenarios);
+    toTake << shot;
+  }
+
+  // In a process of its own, a scenario is replayed once for all its shots.
+  const bool together = !scenario.isEmpty() && kBaseScenario != scenario && ctx.liveScenario() != scenario;
+  if (together) {
+    failures += shootScenario(toTake, ctx, scenarios, scenario);
+  } else {
+    for (const QJsonObject& shot : std::as_const(toTake)) {
+      failures += shootOne(shot, ctx, scenarios);
+    }
   }
 
   if (0 == taken) {

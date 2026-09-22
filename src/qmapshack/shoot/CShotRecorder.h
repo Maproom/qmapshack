@@ -136,6 +136,14 @@ class CShotRecorder : public QObject {
   /** @return how a step names @p widget, nothing for a widget that cannot be named - reported once per class */
   std::optional<QString> address(const QWidget* widget) const;
 
+  /**
+     @brief The step that opens the context menu being asked for now, recording or not.
+
+     @param owner  set to the widget the step is done to
+     @return empty outside a context menu request
+   */
+  QJsonObject contextMenuStep(QWidget** owner = nullptr) const;
+
   const CShotContext& context() const { return ctx; }
 
  protected:

@@ -439,24 +439,36 @@ void CShotRecorder::watchAll() {
   }
 }
 
-void CShotRecorder::recordContextMenu() {
+QJsonObject CShotRecorder::contextMenuStep(QWidget** owner) const {
   const SShotFrame& frame = CShotApplication::frame();
-  // A menu bar's menu shows inside a press, and its pick is the entry's own `trigger`.
-  if (QEvent::ContextMenu != frame.type || menuFrame == frame.number) {
-    return;
-  }
   QWidget* receiver = qobject_cast<QWidget*>(frame.receiver);
-  if (nullptr == receiver) {
-    return;
+  // A menu bar's menu shows inside a press, and its pick is the entry's own `trigger`.
+  if (QEvent::ContextMenu != frame.type || nullptr == receiver) {
+    return QJsonObject();
   }
-  menuFrame = frame.number;
 
   // The request goes to a viewport; the address and row belong to the owning view. Without a handler, a position.
-  QWidget* owner = CShotHandlers::ownerOf(receiver);
-  const QPoint& pos = owner->mapFromGlobal(receiver->mapToGlobal(frame.pos));
-  const IShotHandler* handler = CShotHandlers::of(owner);
-  record(owner,
-         (nullptr == handler) ? IShotHandler::menuAt(owner, pos, *this) : handler->contextMenu(owner, pos, *this));
+  QWidget* opener = CShotHandlers::ownerOf(receiver);
+  if (nullptr != owner) {
+    *owner = opener;
+  }
+  const QPoint& pos = opener->mapFromGlobal(receiver->mapToGlobal(frame.pos));
+  const IShotHandler* handler = CShotHandlers::of(opener);
+  return (nullptr == handler) ? IShotHandler::menuAt(opener, pos, *this) : handler->contextMenu(opener, pos, *this);
+}
+
+void CShotRecorder::recordContextMenu() {
+  const quint64 number = CShotApplication::frame().number;
+  if (menuFrame == number) {
+    return;
+  }
+  QWidget* owner = nullptr;
+  const QJsonObject& step = contextMenuStep(&owner);
+  if (nullptr == owner) {
+    return;
+  }
+  menuFrame = number;
+  record(owner, step);
 }
 
 void CShotRecorder::recordMenuOpened(QMenu* menu) {

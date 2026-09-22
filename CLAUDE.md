@@ -1190,12 +1190,21 @@ doc/shots/fixture/shots.ini    the base a page opens on
   `restoreState()`, because dock extents are pixels.
 - **A scenario shot must have a `size`: the main window's**, applied before the replay. A window a
   step opened is rendered at its own size hint.
-- **One scenario per process.** `CShotPage::run()` refuses a scenario shot `--only` matches unless
-  `--shoot-scenario` is given; `shots.py` starts one process per scenario with its own `.ini`. Only
-  the same scenario is replayed again in a process — measured with a details tab: the second replay
-  reuses the tab the first opened (self test).
+- **One scenario per process, replayed once.** `CShotPage::run()` refuses a scenario shot `--only`
+  matches unless `--shoot-scenario` is given; `shots.py` starts one process per scenario with its own
+  `.ini`. Every shot of the scenario is taken inside that one replay (`shootScenario()`), a shot with
+  `open` inside its menu's `exec()`; a replay on top of the scenario would be another state. Only a
+  shot of another `size` replays alone.
 - **The `tab` index and splitter states are applied with the leading `layout`, before the steps**:
   they are taken when the recording starts, so applied last they undo a step (Edit's details tab).
+- **A context menu is photographed by its shot, not its scenario**: Ctrl+Shift+F9 on a menu a
+  context request opened stores that request's step as the shot's `open`
+  (`CShotRecorder::contextMenuStep()`, recording or not); `shootOne()` appends it to the steps and
+  takes the picture inside the menu's `exec()`. A row step reveals a row under a collapsed parent
+  (`reveal()`, `scrollTo()` expands it), so a menu taken on a row expanded by hand replays. A shot with
+  `open` sizes the main window before the steps and renders the menu at its own size, like a scenario's. The
+  highlighted entry is stored as `active` (the action's `objectName`, searched in `menu->actions()`:
+  a context menu's actions belong to the view that built it) and set with `setActiveAction()`.
 - **A canvas step waits for `isDrawComplete()` first** (`CCanvasHandler::settle()`): items' pixels
   are updated by the draw, so a `hit` or click right after a wheel zoom finds nothing (measured: 4 of
   8 replays of a zoom-then-select scenario failed without it).
@@ -1458,7 +1467,7 @@ or run it belongs to is the bug this subsystem invites; keep what runs in these 
 - **The panel's size and position and the application window's position** live in
   `doc/shots/_cache/doc-panel.ini` (`CShotFiles::placementFile()`), applied one event loop after show;
   a position whose screen is gone is ignored, any other is moved fully onto its screen's available area
-  (`CShotFiles::onScreen()`, panel and window alike). The state saves the window's on every move once ready.
+  (`CShotFiles::onScreen()`, panel and window alike). The state saves the window's 300 ms after it stops moving, once ready.
   No `WindowStaysOnTopHint`; `reject()` swallows Escape.
 - **Every `shots.py` run uses `--doc-python`** (`shots.py take` passes `sys.executable`), never
   `python3` from `PATH` (a Store alias on Windows): `compose` before each state, `replay` for Take again

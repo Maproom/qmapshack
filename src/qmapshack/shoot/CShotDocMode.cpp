@@ -86,6 +86,8 @@ constexpr Qt::Key kTagKey = Qt::Key_F9;
 constexpr qint32 kMinRegionSide = 8;
 /** Where the application window sat, in CShotFiles::placementFile(). */
 const QString kWindowPosKey = "window/pos";
+/** How long the window rests before its position is written [ms]. */
+constexpr qint32 kPlacementSettleMs = 300;
 /** QWidget::saveGeometry()'s magic number and the only major version portableGeometry() knows. */
 constexpr quint32 kGeometryMagic = 0x1D9D0CB;
 constexpr quint16 kGeometryMajor = 3;
@@ -264,6 +266,10 @@ CShotDocMode::CShotDocMode(const QDir& repo, const QString& page, const QString&
       writer(std::make_unique<CShotWriter>(repo.absoluteFilePath("doc/images/_work"))),
       ctx(std::make_unique<CShotContext>(*writer)) {
   recorder = new CShotRecorder(*ctx, this);
+  placementTimer = new QTimer(this);
+  placementTimer->setSingleShot(true);
+  placementTimer->setInterval(kPlacementSettleMs);
+  connect(placementTimer, &QTimer::timeout, this, &CShotDocMode::storePlacement);
 }
 
 CShotDocMode::~CShotDocMode() = default;
@@ -300,7 +306,19 @@ bool CShotDocMode::eventFilter(QObject* watched, QEvent* event) {
 
   // Every state process comes up where the writer moved the last one to.
   if (QEvent::Move == event->type() && ready && !CMainWindow::isNull() && watched == &CMainWindow::self()) {
-    QSettings(files.placementFile(), QSettings::IniFormat).setValue(kWindowPosKey, CMainWindow::self().pos());
+    // A drag moves the window many times; each write is a file sync.
+    placementTimer->start();
+    return QObject::eventFilter(watched, event);
+  }
+
+  // Shown inside the request's frame; a replay of its picture has only the step to open it again.
+  if (QEvent::Show == event->type()) {
+    if (QMenu* menu = qobject_cast<QMenu*>(watched); nullptr != menu) {
+      if (const QJsonObject& step = recorder->contextMenuStep(); !step.isEmpty()) {
+        contextMenu = menu;
+        contextMenuOpen = step;
+      }
+    }
     return QObject::eventFilter(watched, event);
   }
 
@@ -327,6 +345,10 @@ void CShotDocMode::leave(const QString& why) {
   }
   leaving = true;
   qDebug().noquote() << "doc:" << why << "- the state process ends";
+  if (placementTimer->isActive()) {
+    placementTimer->stop();
+    storePlacement();
+  }
   qApp->removeEventFilter(this);
   // Destroying the main window while shown crashes in its docks' visibilityChanged.
   if (!CMainWindow::isNull()) {
@@ -451,6 +473,12 @@ void CShotDocMode::runTrial() {
   send(QString("ready %1 replays and is stored. The application is in it; point at what to photograph and press "
                "Ctrl+Shift+F9.")
            .arg(scenario));
+}
+
+void CShotDocMode::storePlacement() {
+  if (!CMainWindow::isNull()) {
+    QSettings(files.placementFile(), QSettings::IniFormat).setValue(kWindowPosKey, CMainWindow::self().pos());
+  }
 }
 
 void CShotDocMode::placeWindow() {
@@ -802,6 +830,12 @@ void CShotDocMode::tag() {
     return;
   }
 
+  // The entry under the pointer is highlighted and a replay has no pointer; read before a question takes the focus.
+  QString activeEntry;
+  if (const QMenu* menu = qobject_cast<const QMenu*>(target); nullptr != menu && nullptr != menu->activeAction()) {
+    activeEntry = menu->activeAction()->objectName();
+  }
+
   // Rendered before any question: while a question is up the application has no focus, and a row that draws its
   // buttons only with focus would be photographed without them.
   QList<QWidget*> parts;
@@ -848,6 +882,12 @@ void CShotDocMode::tag() {
     }
   } else if (kind_e::eLive == kind) {
     shot["widget"] = CShotAddress::addressOf(main, target).value_or(QString());
+    if (target == contextMenu) {
+      shot["open"] = contextMenuOpen;
+    }
+    if (target == contextMenu && !activeEntry.isEmpty()) {
+      shot["active"] = activeEntry;
+    }
     // A docker is laid out by the window, so its picture depends on the window's size too.
     shot["size"] = QJsonArray{main->width(), main->height()};
     if (!target->windowTitle().isEmpty()) {

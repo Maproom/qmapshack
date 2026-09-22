@@ -1026,7 +1026,10 @@ class CItemViewHandler : public IShotHandler {
     if (row.isEmpty()) {
       at = pointAt(view->viewport()->rect(), step["at"].toArray());
     } else {
-      // Measured after the scroll.
+      // Measured after the scroll. A row under a collapsed parent was expanded by hand; scrollTo() expands to it.
+      if (!rectOf(view, row).isValid()) {
+        reveal(view, row);
+      }
       const QRect& before = rectOf(view, row);
       if (!before.isValid()) {
         return fail("the row is not in the list", step);
@@ -1076,6 +1079,14 @@ class CItemViewHandler : public IShotHandler {
   virtual QRect rectOf(const QAbstractItemView* view, const QString& row) const {
     const QModelIndex& index = CShotAddress::resolveRowPath(*view->model(), row);
     return index.isValid() ? view->visualRect(index) : QRect();
+  }
+
+  /** @brief Scroll to @p row, which expands its collapsed parents in a tree */
+  virtual void reveal(QAbstractItemView* view, const QString& row) const {
+    const QModelIndex& index = CShotAddress::resolveRowPath(*view->model(), row);
+    if (index.isValid()) {
+      view->scrollTo(index);
+    }
   }
 
   /** @brief Scroll @p row to the top; false when there is no such row */
@@ -1307,6 +1318,29 @@ class CRowButtonHandler : public CItemViewHandler {
   /** @return the row @p row names in @p tree, nullptr when there is none */
   virtual QTreeWidgetItem* itemOf(const QTreeWidget* tree, const QString& row) const = 0;
 
+  QRect rectOf(const QAbstractItemView* view, const QString& row) const override {
+    const QTreeWidget* tree = static_cast<const QTreeWidget*>(view);
+    QTreeWidgetItem* item = itemOf(tree, row);
+    return (nullptr == item) ? QRect() : tree->visualItemRect(item);
+  }
+
+  void reveal(QAbstractItemView* view, const QString& row) const override {
+    QTreeWidget* tree = static_cast<QTreeWidget*>(view);
+    if (QTreeWidgetItem* item = itemOf(tree, row); nullptr != item) {
+      tree->scrollToItem(item);
+    }
+  }
+
+  bool scrollToTop(QAbstractItemView* view, const QString& row) const override {
+    QTreeWidget* tree = static_cast<QTreeWidget*>(view);
+    QTreeWidgetItem* item = itemOf(tree, row);
+    if (nullptr == item) {
+      return false;
+    }
+    tree->scrollToItem(item, QAbstractItemView::PositionAtTop);
+    return true;
+  }
+
  private:
   /** The last press on a tree, read before the delegate acted. */
   struct press_t {
@@ -1343,22 +1377,6 @@ class CWksListHandler : public CRowButtonHandler<CWksItemDelegate> {
     return CShotAddress::itemPathOf(tree->itemAt(view->visualRect(index).center()));
   }
 
-  QRect rectOf(const QAbstractItemView* view, const QString& row) const override {
-    const CGisListWks* list = static_cast<const CGisListWks*>(view);
-    QTreeWidgetItem* item = CShotAddress::resolveItemPath(*list, row);
-    return (nullptr == item) ? QRect() : list->visualItemRect(item);
-  }
-
-  bool scrollToTop(QAbstractItemView* view, const QString& row) const override {
-    CGisListWks* list = static_cast<CGisListWks*>(view);
-    QTreeWidgetItem* item = CShotAddress::resolveItemPath(*list, row);
-    if (nullptr == item) {
-      return false;
-    }
-    list->scrollToItem(item, QAbstractItemView::PositionAtTop);
-    return true;
-  }
-
   QTreeWidgetItem* itemOf(const QTreeWidget* tree, const QString& row) const override {
     return CShotAddress::resolveItemPath(*static_cast<const CGisListWks*>(tree), row);
   }
@@ -1377,22 +1395,6 @@ class CNamedRowsHandler : public CRowButtonHandler<Delegate> {
     }
     const QTreeWidget* tree = static_cast<const QTreeWidget*>(view);
     return CShotAddress::namePathOf(tree->itemAt(view->visualRect(index).center()));
-  }
-
-  QRect rectOf(const QAbstractItemView* view, const QString& row) const override {
-    const QTreeWidget* tree = static_cast<const QTreeWidget*>(view);
-    QTreeWidgetItem* item = CShotAddress::resolveNamePath(*tree, row);
-    return (nullptr == item) ? QRect() : tree->visualItemRect(item);
-  }
-
-  bool scrollToTop(QAbstractItemView* view, const QString& row) const override {
-    QTreeWidget* tree = static_cast<QTreeWidget*>(view);
-    QTreeWidgetItem* item = CShotAddress::resolveNamePath(*tree, row);
-    if (nullptr == item) {
-      return false;
-    }
-    tree->scrollToItem(item, QAbstractItemView::PositionAtTop);
-    return true;
   }
 
   QTreeWidgetItem* itemOf(const QTreeWidget* tree, const QString& row) const override {

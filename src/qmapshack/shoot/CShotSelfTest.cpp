@@ -2061,6 +2061,21 @@ qint32 CShotSelfTest::run(CShotContext& ctx) {
              const IDBItem* item = itemRow();
              return (nullptr == item) ? QString() : QString::number(item->getCheckState());
            }});
+    // Expanded by no recorded step, so the replay finds the project under a collapsed folder.
+    check({"a click on a project in a collapsed database folder reveals it",
+           {QString(R"({"do":"select","row":"%1","widget":"%DB%"})").arg(projectRowPath)},
+           resetDb,
+           [&, db]() {
+             if (IDBItem* group = dbRow(groupPath); nullptr != group) {
+               group->setExpanded(true);
+             }
+             settle(300);
+             if (IDBItem* einstein = dbRow(projectRowPath); nullptr != einstein) {
+               click(db->viewport(), db->visualItemRect(einstein).center());
+               settle(300);
+             }
+           },
+           [db]() { return CShotAddress::namePathOf(db->currentItem()); }});
     resetItem();
     resetDb();
     if (IDBItem* einstein = dbRow(projectRowPath); nullptr != einstein) {

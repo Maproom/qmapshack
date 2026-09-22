@@ -25,6 +25,7 @@
 #include <QJsonObject>
 #include <QList>
 #include <QObject>
+#include <QPointer>
 #include <QString>
 #include <QStringList>
 #include <QTemporaryDir>
@@ -38,6 +39,8 @@ class CShotContext;
 class CShotRecorder;
 class CShotWriter;
 class QLocalSocket;
+class QMenu;
+class QTimer;
 class QVariant;
 class QWidget;
 
@@ -101,6 +104,8 @@ class CShotDocMode : public QObject {
   void runTrial();
   /** @brief Move the window to where the writer left the last one, keeping its size and its frame on the screen. */
   void placeWindow();
+  /** @brief Write the window's position for the next state process. */
+  void storePlacement();
   /** @return what keeps the window from the documentation size on its screen; empty when nothing does */
   QString windowProblem() const;
 
@@ -171,9 +176,14 @@ class CShotDocMode : public QObject {
   CShotRecorder* recorder = nullptr;
   /** What a stopped recording returned, until the launcher names it. */
   QJsonArray pendingSteps;
+  /** The context menu shown last and the step that opens it; a picture of it keeps the step. */
+  QPointer<QMenu> contextMenu;
+  QJsonObject contextMenuOpen;
   /** Holds the settings the state was set up with; drift is measured against them. */
   QTemporaryDir setUpWith;
   QLocalSocket* channel = nullptr;
+  /** Writes the window's position once a drag has stopped moving it. */
+  QTimer* placementTimer = nullptr;
   bool leaving = false;
   /** F9 and the commands wait for the scenario to be set up. */
   bool ready = false;

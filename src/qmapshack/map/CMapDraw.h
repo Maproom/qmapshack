@@ -80,11 +80,14 @@ class CMapDraw : public IDrawContext {
   static const QString& getCacheRoot() { return cachePath; }
 
   /**
-     @brief Redirect the tile cache root, before anything reads it.
+     @brief Redirect the tile cache root for good, before anything reads it; `Canvas/cachePath` no longer applies.
 
-     A scratch configuration otherwise deletes the user's tiles: CDiskCache::cleanupRemovedMaps().
+     A configuration naming another root would have its tiles deleted: CDiskCache::cleanupRemovedMaps().
    */
-  static void setCacheRoot(const QString& path) { cachePath = path; }
+  static void setCacheRoot(const QString& path) {
+    cachePath = path;
+    cacheRootPinned = true;
+  }
 
   /** @return tiles the active maps are still waiting for; blocks while the draw thread runs */
   qint32 pendingTiles();
@@ -212,6 +215,7 @@ class CMapDraw : public IDrawContext {
   static QStringList mapPaths;
 
   static QString cachePath;
+  static bool cacheRootPinned;
 
   /// all existing CMapDraw instances
   static QList<CMapDraw*> maps;

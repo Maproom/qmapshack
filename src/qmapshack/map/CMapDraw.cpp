@@ -36,6 +36,7 @@
 
 QList<CMapDraw*> CMapDraw::maps;
 QString CMapDraw::cachePath = "";
+bool CMapDraw::cacheRootPinned = false;
 QStringList CMapDraw::mapPaths;
 QStringList CMapDraw::supportedFormats = QString("*.vrt|*.jnx|*.img|*.rmap|*.wmts|*.tms|*.gemf").split('|');
 
@@ -121,7 +122,9 @@ void CMapDraw::saveMapPath(QSettings& cfg) {
 void CMapDraw::loadMapPath(QSettings& cfg) {
   qDebug() << "CMapDraw::loadMapPath(cfg)";
   mapPaths = cfg.value("mapPath", mapPaths).toStringList();
-  cachePath = cfg.value("cachePath", cachePath).toString();
+  if (!cacheRootPinned) {
+    cachePath = cfg.value("cachePath", cachePath).toString();
+  }
 
   if (cachePath.isEmpty()) {
     cachePath = IAppSetup::getPlatformInstance()->defaultCachePath();

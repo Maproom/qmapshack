@@ -105,6 +105,8 @@ class CShotDocMode : public QObject {
 
   /** @brief Replay the parked recording and store it under `trial` if it replays; reports how it went. */
   void runTrial();
+  /** @brief Hold the scenario now on screen and tell the launcher, with @p readyText for the writer. */
+  void enterState(const QString& readyText);
   /** @brief Move the window to where the writer left the last one, keeping its size and its frame on the screen. */
   void placeWindow();
   /** @brief Write the window's position for the next state process. */
@@ -139,10 +141,8 @@ class CShotDocMode : public QObject {
   QString scenarioFor(const QString& id) const;
   /** @return true when @p id may be taken here; otherwise the writer is told where */
   bool takenHere(const QString& id);
-  /** @return true to keep @p id's work picture; false restores @p previous, or deletes it when that is empty */
-  bool confirmResult(const QString& id, const QByteArray& previous) const;
-  /** @return the work picture of @p id before it is taken again, empty when there is none */
-  QByteArray previousPicture(const QString& id) const;
+  /** @return true when the writer keeps @p id's pending picture */
+  bool confirmResult(const QString& id) const;
   /** @brief Tell the writer the line a developer has to add for an unexposed class. */
   void reportUnexposed(const QWidget* target) const;
   /** @brief Take @p shot by @p take, keep it if the writer says so, store it and report; nothing changes otherwise. */

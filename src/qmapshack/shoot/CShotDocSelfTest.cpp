@@ -97,10 +97,7 @@ void write(const QString& path, const QByteArray& content) {
   }
 }
 
-QByteArray read(const QString& path) {
-  QFile in(path);
-  return in.open(QIODevice::ReadOnly) ? in.readAll() : QByteArray();
-}
+QByteArray read(const QString& path) { return CShotFiles::readWhole(path); }
 
 /**
    A scratch checkout. Page `p`: shots `p/a` (widget, scenario `s`, picture and work picture), `p/b` (bare, scenario

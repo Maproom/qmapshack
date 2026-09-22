@@ -3,51 +3,35 @@
         "track-screen-option": [
             {
                 "do": "layout",
-                "state": "AAAA/wAAAAD9AAAAAgAAAAAAAAEVAAACzvwCAAAAA/sAAAAQAGQAbwBjAGsATQBhAHAAcwEAAAA8AAAA6wAAAIIA////+wAAAA4AZABvAGMAawBEAGUAbQEAAAEtAAAA7AAAAIIA////+wAAAA4AZABvAGMAawBQAG8AaQEAAAIfAAAA6wAAAGsA////AAAAAQAAAV4AAALO/AIAAAAE+wAAABoAZABvAGMAawBXAG8AcgBrAHMAcABhAGMAZQEAAAA8AAAAhAAAAHMA////+wAAABgAZABvAGMAawBEAGEAdABhAGIAYQBzAGUBAAAAxgAAAMIAAABgAP////sAAAAOAGQAbwBjAGsAUgB0AGUBAAABjgAAANUAAAC6AP////sAAAAYAGQAbwBjAGsAUgBlAGEAbAB0AGkAbQBlAQAAAmkAAAChAAAAjAD///8AAAIxAAACzgAAAAQAAAAEAAAACAAAAAj8AAAAAQAAAAIAAAABAAAADgB0AG8AbwBsAEIAYQByAQAAAAD/////AAAAAAAAAAA=",
+                "state": "AAAA/wAAAAD9AAAAAgAAAAAAAAEtAAACzvwCAAAAAvwAAAA8AAABaQAAANUBAAAa+gAAAAABAAAAAvsAAAAaAGQAbwBjAGsAVwBvAHIAawBzAHAAYQBjAGUBAAAAAAAAAW4AAAB9AP////sAAAAOAGQAbwBjAGsAUgB0AGUBAAAAAP////8AAAEtAP////wAAAGrAAABXwAAAJ0BAAAa+gAAAAABAAAABPsAAAAYAGQAbwBjAGsARABhAHQAYQBiAGEAcwBlAQAAAAD/////AAAAigD////7AAAAEABkAG8AYwBrAE0AYQBwAHMBAAAAAP////8AAACQAP////sAAAAOAGQAbwBjAGsAUABvAGkAAAAAAP////8AAACQAP////sAAAAOAGQAbwBjAGsARABlAG0BAAAAAAAAAW4AAACQAP///wAAAAEAAAFdAAADkvwCAAAAAfsAAAAYAGQAbwBjAGsAUgBlAGEAbAB0AGkAbQBlAAAAAkcAAAGHAAAAjAD///8AAAN9AAACzgAAAAQAAAAEAAAACAAAAAj8AAAAAQAAAAIAAAABAAAADgB0AG8AbwBsAEIAYQByAQAAAAD/////AAAAAAAAAAA=",
                 "tab": 0
             },
             {
                 "do": "view",
-                "lat": 47.537098,
-                "lon": 10.558351,
+                "lat": 47.519,
+                "lon": 10.5655,
                 "zoom": 12
             },
             {
                 "do": "move",
                 "hit": "Example/trk:Track",
-                "lat": 47.537098,
-                "lon": 10.558395915764205,
-                "widget": "qt_tabwidget_stackedwidget/CCanvas#0"
+                "lat": 47.529069811042866,
+                "lon": 10.561861823099315,
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0"
             },
             {
                 "button": "left",
                 "do": "click",
                 "hit": "Example/trk:Track",
-                "lat": 47.537098,
-                "lon": 10.558395915764205,
-                "widget": "qt_tabwidget_stackedwidget/CCanvas#0"
-            }
-        ],
-        "units-dialog": [
-            {
-                "do": "layout",
-                "state": "AAAA/wAAAAD9AAAAAgAAAAAAAAEVAAACzvwCAAAAA/sAAAAQAGQAbwBjAGsATQBhAHAAcwEAAAA8AAAA6wAAAIIA////+wAAAA4AZABvAGMAawBEAGUAbQEAAAEtAAAA7AAAAIIA////+wAAAA4AZABvAGMAawBQAG8AaQEAAAIfAAAA6wAAAGsA////AAAAAQAAAV4AAALO/AIAAAAE+wAAABoAZABvAGMAawBXAG8AcgBrAHMAcABhAGMAZQEAAAA8AAAAhAAAAHMA////+wAAABgAZABvAGMAawBEAGEAdABhAGIAYQBzAGUBAAAAxgAAAMIAAABgAP////sAAAAOAGQAbwBjAGsAUgB0AGUBAAABjgAAANUAAAC6AP////sAAAAYAGQAbwBjAGsAUgBlAGEAbAB0AGkAbQBlAQAAAmkAAAChAAAAjAD///8AAAIxAAACzgAAAAQAAAAEAAAACAAAAAj8AAAAAQAAAAIAAAABAAAADgB0AG8AbwBsAEIAYQByAQAAAAD/////AAAAAAAAAAA=",
-                "tab": 0
+                "lat": 47.529069811042866,
+                "lon": 10.561861823099315,
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0"
             },
             {
-                "do": "view",
-                "lat": 47.537098,
-                "lon": 10.558351,
-                "zoom": 12
-            },
-            {
-                "do": "openmenu",
-                "menu": "menuView",
-                "widget": "menubar"
-            },
-            {
-                "action": "actionSetupUnits",
-                "do": "trigger"
+                "do": "move",
+                "lat": 47.5028600071983,
+                "lon": 10.592135048174143,
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0"
             }
         ]
     },
@@ -167,6 +151,13 @@
         },
         {
             "id": "test/track-screen-option",
+            "note": "A part of the window in track-screen-option",
+            "rect": [
+                440,
+                278,
+                553,
+                195
+            ],
             "scenario": "track-screen-option",
             "size": [
                 1200,
@@ -175,14 +166,7 @@
             "widget": ""
         },
         {
-            "id": "test/units-dialog",
-            "scenario": "units-dialog",
-            "size": [
-                1200,
-                800
-            ],
-            "widget": "",
-            "window": "CUnitsSetup"
+            "id": "test/units-dialog"
         },
         {
             "active": "actionEditDetails",

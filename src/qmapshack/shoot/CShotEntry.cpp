@@ -27,20 +27,30 @@
 #endif
 
 #include <QApplication>
+#include <QDebug>
 #include <QDir>
 #include <QFileInfo>
 #include <QFontDatabase>
 #include <QPalette>
 #include <QStyleHints>
+#include <QTimer>
 
 #include "CMainWindow.h"
 #include "gis/CGisListWks.h"
 #include "map/CMapDraw.h"
 #include "setup/CAppOpts.h"
 #include "shoot/CShotApplication.h"
+#include "shoot/CShotContext.h"
 #include "shoot/CShotDocLauncher.h"
 #include "shoot/CShotDocMode.h"
-#include "shoot/CShotRunner.h"
+#include "shoot/CShotDocSelfTest.h"
+#include "shoot/CShotFiles.h"
+#include "shoot/CShotFixture.h"
+#include "shoot/CShotPage.h"
+#include "shoot/CShotReplay.h"
+#include "shoot/CShotSelfTest.h"
+#include "shoot/CShotWait.h"
+#include "shoot/CShotWriter.h"
 #include "theme/CQmsStyle.h"
 
 namespace {
@@ -126,6 +136,47 @@ void pinColorScheme(bool dark) {
 }
 }  // namespace
 
+namespace {
+/** @return true when the raw @p argv asks for a shoot or documentation run */
+bool isDocArgv(int argc, char** argv);
+/** @return the workspace database path, empty when @p dir could not be created */
+QString scratchWorkspace(const QString& dir, const QString& name);
+/** @return false when the scratch directory could not be created; @p fresh removes a workspace an earlier run left */
+bool redirectUserData(const QString& tiles, const QString& scratch, const QString& name, bool fresh);
+/** @brief The offscreen platform on Windows has no fonts. */
+void registerFonts();
+void pinAppearance(const QString& colorScheme);
+}  // namespace
+
+namespace {
+/** @return the failures of taking the shots, or running the self test, that @p opts ask for */
+qint32 shoot(const CShotOptions::opts_t& opts) {
+  // The main window finishes initialising on timers.
+  CShotWait::wait(CShotWait::kStartupMs);
+  if (opts.shootTarget.isEmpty()) {
+    qWarning() << "shoot: --shoot needs --shoot-target, the page's shot file";
+    return 1;
+  }
+
+  const CShotWriter writer(opts.shootDir);
+  CShotContext ctx(writer);
+  qint32 failures = CShotFixture::load(ctx);
+  if (0 != failures) {
+    // Every picture would fail for it and bury the reason.
+    qWarning() << "shoot: nothing is taken: the example data did not load";
+  } else if (opts.shootSelfTest) {
+    failures += CShotSelfTest::run(ctx);
+  } else {
+    failures += CShotPage::run(opts.shootTarget, ctx, opts.shootOnly, opts.shootScenario);
+  }
+  // Needs no fixture.
+  if (opts.shootSelfTest) {
+    failures += CShotDocSelfTest::run();
+  }
+  return failures;
+}
+}  // namespace
+
 bool CShotEntry::isDocRun(const CAppOpts& opts) { return !opts.doc.shootDir.isEmpty() || !opts.doc.docDir.isEmpty(); }
 
 bool CShotEntry::showsMainWindow(const CAppOpts& opts) {
@@ -148,13 +199,19 @@ std::optional<qint32> CShotEntry::run(const CAppOpts& opts, CMainWindow& window)
     return std::nullopt;
   }
 
-  CShotRunner* runner = new CShotRunner(opts.doc, &window);
-  runner->start();
+  qint32 failures = 0;
+  QTimer::singleShot(0, &window, [&opts, &window, &failures]() {
+    failures = shoot(opts.doc);
+    // Destroying the main window while shown crashes in its docks' visibilityChanged.
+    window.close();
+    qApp->quit();
+  });
   QApplication::exec();
-  return qMin(runner->getFailures(), 255);
+  return qMin(failures, CShotReplay::kMaxFailureExitCode);
 }
 
-bool CShotEntry::isDocArgv(int argc, char** argv) {
+namespace {
+bool isDocArgv(int argc, char** argv) {
   for (int i = 1; i < argc; ++i) {
     const QByteArray arg(argv[i]);
     if (arg.startsWith("--shoot") || arg.startsWith("--doc")) {
@@ -163,6 +220,7 @@ bool CShotEntry::isDocArgv(int argc, char** argv) {
   }
   return false;
 }
+}  // namespace
 
 std::unique_ptr<QApplication> CShotEntry::createApplication(int& argc, char** argv) {
   if (isDocArgv(argc, argv)) {
@@ -192,8 +250,7 @@ bool CShotEntry::prepare(const CAppOpts& opts) {
     return true;
   }
 
-  // Without --config ~CMainWindow overwrites the user's settings, and a stored cachePath there overrides
-  // setCacheRoot().
+  // Without --config ~CMainWindow overwrites the user's settings.
   if (opts.configfile.isEmpty()) {
     qCritical() << "a documentation run needs --config: without it it writes the user's settings";
     return false;
@@ -211,36 +268,54 @@ bool CShotEntry::prepare(const CAppOpts& opts) {
   registerFonts();
 
   if (!opts.doc.shootDir.isEmpty()) {
-    return redirectUserData(QDir(opts.doc.shootDir).absoluteFilePath("_cache"),
-                            QFileInfo(opts.doc.shootTarget).completeBaseName());
+    // The shot file lies in doc/shots: tiles are kept across runs. The workspace sits beside the output, which
+    // selftest keeps, so each run starts it empty.
+    const QFileInfo target(opts.doc.shootTarget);
+    QDir repo = target.absoluteDir();
+    repo.cd("../..");
+    // The self test loads the default fixture whatever page names the run.
+    const QString& tiles = opts.doc.shootSelfTest ? CShotFiles::sharedTileCache(repo)
+                                                  : CShotFiles(repo, target.completeBaseName()).tileCache();
+    return redirectUserData(tiles, QDir(opts.doc.shootDir).absoluteFilePath("_cache"), target.completeBaseName(), true);
   }
   // The launcher and its state process run at once; one SQLite workspace for both is locked for seconds.
   const QString& name = opts.doc.docScenario.isEmpty() ? opts.doc.docPage + "-launcher" : opts.doc.docPage;
-  return redirectUserData(QDir(opts.doc.docDir).absoluteFilePath("doc/shots/_cache"), name);
+  const QDir repo(opts.doc.docDir);
+  return redirectUserData(CShotFiles(repo, opts.doc.docPage).tileCache(), repo.absoluteFilePath("doc/shots/_cache"),
+                          name, false);
 }
 
-QString CShotEntry::scratchWorkspace(const QString& dir, const QString& name) {
+namespace {
+QString scratchWorkspace(const QString& dir, const QString& name) {
   if (!QDir(dir).mkpath(".")) {
     return QString();
   }
   return QDir(dir).absoluteFilePath((name.isEmpty() ? QString("shoot") : name) + "-workspace.db");
 }
+}  // namespace
 
-bool CShotEntry::redirectUserData(const QString& cache, const QString& name) {
-  const QString& workspace = scratchWorkspace(cache, name);
+namespace {
+bool redirectUserData(const QString& tiles, const QString& scratch, const QString& name, bool fresh) {
+  const QString& workspace = scratchWorkspace(scratch, name);
   if (workspace.isEmpty()) {
-    qCritical() << "cannot create the scratch directory" << cache;
+    qCritical() << "cannot create the scratch directory" << scratch;
+    return false;
+  }
+  if (fresh && QFileInfo::exists(workspace) && !QFile::remove(workspace)) {
+    qCritical() << "cannot remove the workspace an earlier run left" << workspace;
     return false;
   }
 
-  CMapDraw::setCacheRoot(cache);
+  CMapDraw::setCacheRoot(tiles);
   CGisListWks::setDatabasePath(workspace);
-  qDebug() << "documentation run: tile cache" << cache;
+  qDebug() << "documentation run: tile cache" << tiles;
   qDebug() << "documentation run: workspace database" << workspace;
   return true;
 }
+}  // namespace
 
-void CShotEntry::registerFonts() {
+namespace {
+void registerFonts() {
   const QStringList fonts = {":/fonts/DejaVuSans.ttf", ":/fonts/DejaVuSans-Bold.ttf"};
   for (const QString& font : fonts) {
     if (QFontDatabase::addApplicationFont(font) < 0) {
@@ -250,8 +325,10 @@ void CShotEntry::registerFonts() {
     }
   }
 }
+}  // namespace
 
-void CShotEntry::pinAppearance(const QString& colorScheme) {
+namespace {
+void pinAppearance(const QString& colorScheme) {
   CQmsStyle::pinThemeIndependentHints();
 
   if (colorScheme.isEmpty()) {
@@ -264,3 +341,4 @@ void CShotEntry::pinAppearance(const QString& colorScheme) {
     qWarning() << "unknown --color-scheme" << colorScheme << "- expected light or dark";
   }
 }
+}  // namespace

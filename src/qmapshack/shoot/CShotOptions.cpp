@@ -54,7 +54,7 @@ void CShotOptions::addOptions(QCommandLineParser& parser) {
   add(parser, "color-scheme", "Pin the colour scheme instead of following the desktop: light or dark.", "name");
   addFlag(parser, "shoot-selftest",
           "Run the recorder's own cases against this application instead of taking a page's shots. Needs --shoot and "
-          "--shoot-target, whose directory the fixture is loaded from.");
+          "--shoot-target, the page's shot file; the fixture is the one the configuration names.");
 }
 
 CShotOptions::opts_t CShotOptions::read(const QCommandLineParser& parser) {

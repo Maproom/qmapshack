@@ -53,6 +53,17 @@ class Publish(ScratchTree):
         self.assertFalse(shots.WORK_DIR.exists())
         self.assertEqual(json.loads(report.read_text()), {"published": ["p/a"]})
 
+    def test_only_publishes_the_matching_ids(self):
+        self.put(shots.WORK_DIR / "p" / "a.png", b"A")
+        self.put(shots.WORK_DIR / "p" / "b.png", b"B")
+        self.put(shots.WORK_DIR / "p" / "a.shot.json", b"{}")
+        report = self.root / "report.json"
+        self.quietly(shots.cmd_publish, report=str(report), only="p/a")
+        self.assertEqual((shots.IMAGES_DIR / "p" / "a.png").read_bytes(), b"A")
+        self.assertFalse((shots.WORK_DIR / "p" / "a.shot.json").exists())
+        self.assertEqual((shots.WORK_DIR / "p" / "b.png").read_bytes(), b"B")
+        self.assertEqual(json.loads(report.read_text()), {"published": ["p/a"]})
+
     def test_keeps_a_picture_taken_meanwhile(self):
         self.put(shots.WORK_DIR / "p" / "a.png")
         late = shots.WORK_DIR / "p" / "late.png"

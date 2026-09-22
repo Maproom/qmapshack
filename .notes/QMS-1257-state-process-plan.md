@@ -32,8 +32,8 @@ them; nothing below was exercised in a live session.
    `Search/*` do not meet `Canvas/Profile/<canvas>/geometry`, which is all a deleted view writes.
 2. **A scenario's `.ini` is the configuration that stood when its recording started.**
    `startRecording()` writes `storeSettings(files.trialConfig(), ...)` before `recorder->start()`;
-   `parkRecording()` only checks the file is still there. `recorded-none` and `discard` drop it,
-   `discard` only while nothing records. `tryRecording()` composes `--from` it, which `compose` and
+   `stopRecording()` only checks the file is still there before it parks the steps; `recorded-none`
+   drops it. `tryRecording()` composes `--from` it, which `compose` and
    `composeConfig()` learned.
 3. **Drift is measured against a snapshot taken when the state is set up.** `snapshotSetup()` writes
    into the `setUpWith` temporary directory at the end of `slotSetUp()`, after `runTrial()` succeeds

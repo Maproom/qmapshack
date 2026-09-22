@@ -1,0 +1,19 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+    <qresource>
+        <file>../../fonts/DejaVuSans-Bold.ttf</file>
+        <file>../../fonts/DejaVuSans.ttf</file>
+        <file alias="icons/DocBase.svgt">../../icons/DocBase.svg</file>
+        <file alias="icons/DocClean.svgt">../../icons/DocClean.svg</file>
+        <file alias="icons/DocDelete.svgt">../../icons/DocDelete.svg</file>
+        <file alias="icons/DocPublish.svgt">../../icons/DocPublish.svg</file>
+        <file alias="icons/DocPublishAll.svgt">../../icons/DocPublishAll.svg</file>
+        <file alias="icons/DocRegion.svgt">../../icons/DocRegion.svg</file>
+        <file alias="icons/DocRecord.svgt">../../icons/DocRecord.svg</file>
+        <file alias="icons/DocRename.svgt">../../icons/DocRename.svg</file>
+        <file alias="icons/DocRetake.svgt">../../icons/DocRetake.svg</file>
+        <file alias="icons/DocRetakeAll.svgt">../../icons/DocRetakeAll.svg</file>
+        <file alias="icons/DocRevert.svgt">../../icons/DocRevert.svg</file>
+        <file alias="icons/DocStop.svgt">../../icons/DocStop.svg</file>
+    </qresource>
+</RCC>

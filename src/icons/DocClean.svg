@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   version="1.1"
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
+   id="svg10"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><style id="current-color-scheme">.ink{color:#000080}.paper{color:#ffffff}</style>
+  <defs
+     id="defs14" />
+  <g
+     transform="translate(-4.3496,-7.4563) scale(1.242718)"
+     id="g8">
+    <path
+       style="fill:none;stroke:currentColor;stroke-width:4;stroke-linecap:round;stroke-linejoin:round"
+       d="M 50 8 L 34 32"
+       id="path2" class="ink"/>
+    <path
+       style="fill:currentColor;stroke:currentColor;stroke-width:3;stroke-linejoin:round"
+       d="M 24 30 L 42 38 L 34 56 L 8 48 Z"
+       id="path4" class="ink"/>
+    <path
+       style="fill:none;stroke:currentColor;stroke-width:2.0117;stroke-linecap:round"
+       d="M 18 44 L 14 50 M 25 46 L 21 53 M 32 48 L 28 55"
+       id="path6" class="paper"/>
+  </g>
+</svg>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   version="1.1"
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
+   id="svg14"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><style id="current-color-scheme">.paper-ink{fill:#ffffff;color:#000080}.ink{color:#000080}.mark-paper{fill:#5555ff;color:#ffffff}.paper{color:#ffffff}</style>
+  <defs
+     id="defs18" />
+  <g
+     transform="translate(-4.4599,-4.4599) scale(1.114983)"
+     id="g12">
+    <path
+       style="stroke:currentColor;stroke-width:4;stroke-linejoin:round"
+       d="M 6 6 H 40 L 50 16 V 50 H 6 Z"
+       id="path2" class="paper-ink"/>
+    <path
+       id="rect4"
+       style="fill:currentColor"
+       d="M 16,6 H 36 V 19 H 16 Z" class="ink"/>
+    <path
+       id="rect6"
+       style="fill:none;stroke:currentColor;stroke-width:3;stroke-linejoin:round"
+       d="M 13,30 H 43 V 50 H 13 Z" class="ink"/>
+    <path
+       style="stroke:currentColor;stroke-width:3;stroke-linejoin:round"
+       d="M 59.90 43.24 L 59.44 49.07 L 55.59 47.99 L 53.64 51.81 L 56.78 54.29 L 52.33 58.09 L 50.37 54.60 L 46.29 55.92 L 46.76 59.90 L 40.93 59.44 L 42.01 55.59 L 38.19 53.64 L 35.71 56.78 L 31.91 52.33 L 35.40 50.37 L 34.08 46.29 L 30.10 46.76 L 30.56 40.93 L 34.41 42.01 L 36.36 38.19 L 33.22 35.71 L 37.67 31.91 L 39.63 35.40 L 43.71 34.08 L 43.24 30.10 L 49.07 30.56 L 47.99 34.41 L 51.81 36.36 L 54.29 33.22 L 58.09 37.67 L 54.60 39.63 L 55.92 43.71 Z"
+       id="path8" class="mark-paper"/>
+    <path
+       id="circle10"
+       style="fill:currentColor"
+       d="m 50,45 a 5,5 0 0 1 -5,5 5,5 0 0 1 -5,-5 5,5 0 0 1 5,-5 5,5 0 0 1 5,5 z" class="paper"/>
+  </g>
+</svg>

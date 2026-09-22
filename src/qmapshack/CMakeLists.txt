@@ -968,9 +968,9 @@ set( RCS
     resources.qrc
 )
 
-# Separate, so a user's binary carries no fonts only a documentation run loads.
+# Separate, so a user's binary carries no fonts or icons only a documentation run loads.
 if(QMS_DOC_MODE)
-    list(APPEND RCS shoot/fonts.qrc)
+    list(APPEND RCS shoot/doc.qrc)
 endif()
 
 ###############################################################################################

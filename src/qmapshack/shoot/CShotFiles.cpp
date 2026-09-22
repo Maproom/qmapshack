@@ -234,6 +234,16 @@ QStringList CShotFiles::shotsIn(const QString& scenario) const {
   return ids;
 }
 
+CShotFiles::row_t CShotFiles::picturesOf(const QString& id) const {
+  row_t row;
+  row.id = id;
+  row.changed = QFileInfo::exists(workImage(id));
+  row.revertable = row.changed || QFileInfo::exists(workEntry(id));
+  row.publishedPath = QFileInfo::exists(publishedImage(id)) ? publishedImage(id) : QString();
+  row.imagePath = row.changed ? workImage(id) : row.publishedPath;
+  return row;
+}
+
 QList<CShotFiles::row_t> CShotFiles::rows() const {
   QJsonObject content;
   readShotFile(content);
@@ -248,8 +258,9 @@ QList<CShotFiles::row_t> CShotFiles::rows() const {
     row_t row = picturesOf(shot["id"].toString());
     row.scenario = shot["scenario"].toString();
     row.note = shot["note"].toString();
-    row.publishedPath = QFileInfo::exists(publishedImage(row.id)) ? publishedImage(row.id) : QString();
-    row.imagePath = row.changed ? workImage(row.id) : row.publishedPath;
+    // A rebound shot is reduced to its id and scenario and photographs nothing.
+    // CShotPage::run() and shots.py replay skip the others.
+    row.takeable = shot.contains("widget") || shot.contains("exposure");
     row.state = !anywhere.contains(row.id) ? eNotUsed : (row.imagePath.isEmpty() ? eNoImage : eTaken);
     known << row.id;
     rows << row;
@@ -262,11 +273,7 @@ QList<CShotFiles::row_t> CShotFiles::rows() const {
     if (known.contains(id) || !isOwn(id)) {
       continue;
     }
-    row_t row;
-    row.id = id;
-    row.changed = QFileInfo::exists(workImage(id));
-    row.publishedPath = QFileInfo::exists(publishedImage(id)) ? publishedImage(id) : QString();
-    row.imagePath = row.changed ? workImage(id) : row.publishedPath;
+    row_t row = picturesOf(id);
     // A picture without a shot was drawn by hand or taken before the shot file.
     row.state = row.imagePath.isEmpty() ? eMissing : eUnregistered;
     row.note = row.imagePath.isEmpty() ? "The page uses it; there is neither a shot nor a picture."

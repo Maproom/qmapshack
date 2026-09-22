@@ -368,6 +368,7 @@ def cmd_replay(args):
     watched = (cache, user_data)
 
     taken = 0
+    untaken = 0
     broken = {}
     for page_file in sorted(SHOTS_DIR.glob("*.json")):
         if not may_match(page_file, args.only):
@@ -377,9 +378,15 @@ def cmd_replay(args):
         outside = [shot.get("id", "") for shot in shots if not stays_inside(shot.get("id", ""))]
         if outside:
             sys.exit(f"{page_file.name}: these ids name a place outside doc/images: {', '.join(outside)}")
-        if not shots:
+        # Cut down to its id by a delete or rebind: CShotPage::run() skips it, and so does the grouping here.
+        waiting = [shot.get("id", "") for shot in shots if "widget" not in shot and "exposure" not in shot]
+        shots = [shot for shot in shots if "widget" in shot or "exposure" in shot]
+        if not shots and not waiting:
             continue
         print(f"{page_file.stem}.md")
+        for shot_id in waiting:
+            print(f"    {shot_label(shot_id):<44} not taken yet")
+        untaken += len(waiting)
 
         groups = [BASE_SCENARIO] if any(not shot.get("scenario") for shot in shots) else []
         groups += sorted({shot["scenario"] for shot in shots if shot.get("scenario")})
@@ -412,7 +419,7 @@ def cmd_replay(args):
                 entry["groups"].append((group, missing, said[0].removeprefix("shoot:").strip() if said else ""))
                 entry["leaked"] += [str(path) for path in leaked]
 
-    if not broken and taken == 0:
+    if not broken and taken == 0 and untaken == 0:
         sys.exit(f"no shot matches {args.only}" if args.only else f"no shots in {SHOTS_DIR}")
     print(f"\n{taken} picture(s) in {out}")
     if broken:
@@ -586,10 +593,13 @@ def move_picture(picture, target):
 
 
 def cmd_publish(args):
-    """Copy every picture under doc/images/_work into doc/images and empty _work. No render, no comparison, no git."""
+    """Copy the pictures under doc/images/_work into doc/images and empty _work. No render, no comparison, no git."""
+    only = getattr(args, "only", None)
     published = []
     for picture in sorted(WORK_DIR.rglob("*.png")):
         shot_id = picture.relative_to(WORK_DIR).with_suffix("").as_posix()
+        if only and not fnmatch.fnmatchcase(shot_id, only):
+            continue
         # A move, not copy and delete: a picture taken again meanwhile is a new file in _work, never lost.
         move_picture(picture, IMAGES_DIR / f"{shot_id}.png")
         published.append(shot_id)
@@ -635,6 +645,7 @@ def main():
 
     publish = commands.add_parser("publish", help="copy the pictures taken again into doc/images")
     publish.add_argument("--report", metavar="FILE", help="write the published ids as JSON")
+    publish.add_argument("--only", metavar="GLOB", help="shot ids: test/* is one page, test/menu-project one picture")
     publish.set_defaults(func=cmd_publish)
 
     replay = commands.add_parser("replay", help="replay every shot and report the ones that do not come out")

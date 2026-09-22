@@ -115,12 +115,10 @@ class CShotDocMode : public QObject {
   void takeRegion(const QString& id);
   /** @brief Base > Save: the arrangement, view and settings on screen as the base; a scenario keeps its own. */
   void updateScenario(const QString& target);
-  /** @brief `record`: snapshot the settings the steps are recorded against, then run the recorder. */
-  void startRecording();
-  /** @brief `stop`: keep the steps until the launcher names them, or report that nothing was recorded. */
+  /** @brief `record <name>`: snapshot the settings the steps are recorded against, then run the recorder. */
+  void startRecording(const QString& name);
+  /** @brief `stop`: park the steps under the recording's name for the trial, or report that nothing was recorded. */
   void stopRecording();
-  /** @brief `name`: park the stopped recording; the launcher starts its trial. */
-  void parkRecording(const QString& name);
 
   /** @return the window the writer means: the popup, the modal dialog, the active window, the focus' window */
   static QWidget* activeTarget();
@@ -174,8 +172,8 @@ class CShotDocMode : public QObject {
   std::unique_ptr<CShotWriter> writer;
   std::unique_ptr<CShotContext> ctx;
   CShotRecorder* recorder = nullptr;
-  /** What a stopped recording returned, until the launcher names it. */
-  QJsonArray pendingSteps;
+  /** The name the running recording is parked under at Stop. */
+  QString recordingName;
   /** The context menu shown last and the step that opens it; a picture of it keeps the step. */
   QPointer<QMenu> contextMenu;
   QJsonObject contextMenuOpen;

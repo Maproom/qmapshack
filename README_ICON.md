@@ -27,7 +27,8 @@ Draw with these four colours and the icon follows the light/dark theme by itself
 
 ## 2. Register
 
-In `src/qmapshack/resources.qrc` and/or `src/qmaptool/resources.qrc`:
+In `src/qmapshack/resources.qrc` and/or `src/qmaptool/resources.qrc` (an icon only documentation mode uses:
+`src/qmapshack/shoot/doc.qrc`, path `../../icons/`):
 
 ```xml
 <file alias="icons/Foo.svgt">../icons/Foo.svg</file>

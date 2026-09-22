@@ -31,7 +31,6 @@
 class QLabel;
 class QListWidget;
 class QMessageBox;
-class QPushButton;
 class QToolButton;
 class QTreeWidget;
 class QTreeWidgetItem;
@@ -55,7 +54,7 @@ class CShotDocPanel : public QDialog {
   /** @return the selected picture's id, empty when none is selected */
   QString currentId() const;
 
-  /** @brief Select the picture @p id; nothing when there is no such row. */
+  /** @brief Select the picture @p id; no picture is selected when there is no such row. */
   void setCurrentShot(const QString& id);
 
   /** @brief Asked before a close is accepted; false keeps the panel open, and must only follow a question. */
@@ -92,7 +91,7 @@ class CShotDocPanel : public QDialog {
   void revertShotClicked(const QString& id);
   void retakePageClicked();
   void reapClicked();
-  void reloadClicked();
+  void publishShotClicked(const QString& id);
   /** @brief Publish every picture of the page taken again. */
   void publishClicked();
   /** @brief After a close was accepted. */
@@ -113,6 +112,8 @@ class CShotDocPanel : public QDialog {
   QPixmap comparison(const QString& before, const QString& after) const;
   void buildScenarioCell(QTreeWidgetItem* row, const CShotFiles::row_t& entry);
   void updateShotActions();
+  /** @brief Rename and Delete for a scenario, Base for (base), nothing while recording */
+  void updateScenarioActions();
   static QString label(CShotFiles::state_e state);
 
   std::function<bool()> closeRequest;
@@ -121,13 +122,20 @@ class CShotDocPanel : public QDialog {
 
   QListWidget* scenarios = nullptr;
   QTreeWidget* shots = nullptr;
-  QPushButton* recordButton = nullptr;
-  QPushButton* reapButton = nullptr;
+  QToolButton* recordButton = nullptr;
+  QToolButton* reapButton = nullptr;
+  QToolButton* publishButton = nullptr;
+  QToolButton* publishAllButton = nullptr;
+  QToolButton* renameButton = nullptr;
+  QToolButton* deleteButton = nullptr;
+  QToolButton* baseButton = nullptr;
   QToolButton* againButton = nullptr;
   QToolButton* regionButton = nullptr;
   QToolButton* revertButton = nullptr;
   /** Disabled while a recording runs. */
-  QList<QPushButton*> whileIdle;
+  QList<QToolButton*> whileIdle;
+  /** Every button; all share one height (newButton()). */
+  QList<QToolButton*> buttons;
   QLabel* page = nullptr;
   QLabel* status = nullptr;
   QLabel* preview = nullptr;

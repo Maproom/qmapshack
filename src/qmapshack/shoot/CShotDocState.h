@@ -63,7 +63,7 @@ class CShotDocState : public QObject {
 
   const QString& scenario() const { return scenarioName; }
   bool isReady() const { return ready; }
-  /** @return true between the state's `recording` and its `recorded`, `recorded-pending` or `recorded-none` */
+  /** @return true between the state's `recording` and its `recorded` or `recorded-none` */
   bool isRecording() const { return recording; }
 
  signals:

@@ -179,22 +179,6 @@ bool isPartOf(const QWidget* main, const QWidget* widget) {
   return false;
 }
 
-/** @return `Demo Track` as `demo-track` */
-QString slug(const QString& text) {
-  QString out;
-  for (const QChar c : text) {
-    if (c.isLetterOrNumber()) {
-      out += c.toLower();
-    } else if (!out.isEmpty() && !out.endsWith('-')) {
-      out += '-';
-    }
-  }
-  while (out.endsWith('-')) {
-    out.chop(1);
-  }
-  return out;
-}
-
 /** How a picture of what Ctrl+Shift+F9 points at is taken again. */
 enum class kind_e {
   eLive,         /**< a part of the main window, written from what was rendered at the key press */
@@ -546,7 +530,7 @@ void CShotDocMode::obey(const QString& line) {
     return;
   }
 
-  if (const QString& problem = windowProblem(); !problem.isEmpty() && "name" != verb && "discard" != verb) {
+  if (const QString& problem = windowProblem(); !problem.isEmpty()) {
     if (recorder->isRecording()) {
       recorder->stop();
       files.dropParked();
@@ -562,17 +546,9 @@ void CShotDocMode::obey(const QString& line) {
   } else if ("update" == verb) {
     updateScenario(rest);
   } else if ("record" == verb) {
-    startRecording();
+    startRecording(rest);
   } else if ("stop" == verb) {
     stopRecording();
-  } else if ("name" == verb) {
-    parkRecording(rest);
-  } else if ("discard" == verb) {
-    pendingSteps = QJsonArray();
-    // A running recording still needs the settings it started from.
-    if (!recorder->isRecording()) {
-      files.dropParked();
-    }
   } else {
     qWarning() << "doc: the state process does not know" << line;
     send(QString("status The application does not know '%1'.").arg(verb));
@@ -1106,9 +1082,13 @@ void CShotDocMode::updateScenario(const QString& target) {
 
 // --- recording -----------------------------------------------------------------------------------
 
-void CShotDocMode::startRecording() {
+void CShotDocMode::startRecording(const QString& name) {
   if (recorder->isRecording()) {
     report("A recording is already running; press Stop to end it.");
+    return;
+  }
+  if (const QString& problem = CShotFiles::nameProblem(name); !problem.isEmpty()) {
+    report(problem + " Nothing is being recorded.");
     return;
   }
   // The launcher starts a recording in a process in the base, so it is a whole state.
@@ -1123,7 +1103,7 @@ void CShotDocMode::startRecording() {
     return;
   }
 
-  pendingSteps = QJsonArray();
+  recordingName = name;
   recorder->start();
   send("recording");
   report(
@@ -1147,30 +1127,6 @@ void CShotDocMode::stopRecording() {
         "the map area, a click on an item.");
     return;
   }
-  pendingSteps = steps;
-
-  const QString& path =
-      (nullptr == ctx->wksList()) ? QString() : CShotAddress::itemPathOf(ctx->wksList()->currentItem());
-  const QString& base = slug(path.section(':', -1)).isEmpty() ? QString("scenario") : slug(path.section(':', -1));
-  const QStringList& known = files.scenarioNames();
-  QString suggestion = base;
-  for (qint32 i = 2; known.contains(suggestion); i++) {
-    suggestion = QString("%1-%2").arg(base).arg(i);
-  }
-  send("recorded-pending " + suggestion);
-}
-
-void CShotDocMode::parkRecording(const QString& name) {
-  const QJsonArray steps = std::exchange(pendingSteps, QJsonArray());
-  if (steps.isEmpty()) {
-    report("There is no recording to name.");
-    return;
-  }
-  if (const QString& problem = CShotFiles::nameProblem(name); !problem.isEmpty()) {
-    files.dropParked();
-    report(problem + " The recording was thrown away; record again.");
-    return;
-  }
 
   QString error = files.parkRecording(steps);
   // Written when the recording started; the trial replays the steps against it and it becomes the scenario's.
@@ -1179,10 +1135,12 @@ void CShotDocMode::parkRecording(const QString& name) {
   }
   if (!error.isEmpty()) {
     files.dropParked();
+    send("recorded-none");
     report(error + " The recording was thrown away.");
     return;
   }
-  qDebug().noquote() << "doc: parked" << name << QString::fromUtf8(QJsonDocument(steps).toJson(QJsonDocument::Compact));
+  qDebug().noquote() << "doc: parked" << recordingName
+                     << QString::fromUtf8(QJsonDocument(steps).toJson(QJsonDocument::Compact));
   // The launcher answers with a state that replays it and stores it only then.
-  send("recorded " + name);
+  send("recorded " + recordingName);
 }

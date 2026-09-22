@@ -58,9 +58,11 @@ class CShotFiles {
     QString scenario;  ///< empty is `(base)`
     QString note;
     state_e state = eTaken;
-    bool changed = false;   ///< a work picture waits to be published
-    QString imagePath;      ///< the work picture, else the published one; empty when there is none
-    QString publishedPath;  ///< empty when there is none
+    bool changed = false;     ///< a work picture waits to be published
+    bool takeable = false;    ///< the shot names what to photograph
+    bool revertable = false;  ///< a work picture or the entry from before the take waits
+    QString imagePath;        ///< the work picture, else the published one; empty when there is none
+    QString publishedPath;    ///< empty when there is none
   };
 
   CShotFiles(const QDir& repo, const QString& page);

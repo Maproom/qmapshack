@@ -1135,7 +1135,7 @@ doc/shots/fixture/shots.ini    the base a page opens on
 #### Build and entry
 
 - **Developer-only, behind `-DQMS_DOC_MODE=ON`.** No source tests the option: CMake compiles
-  `shoot/CShotEntry.cpp`/`CShotOptions.cpp` or the `*Stub.cpp` pair, and `shoot/fonts.qrc` only
+  `shoot/CShotEntry.cpp`/`CShotOptions.cpp` or the `*Stub.cpp` pair, and `shoot/doc.qrc` (fonts and `Doc*` icons) only
   with it. A user's binary rejects `--shoot`, `--doc`, `--color-scheme` and companions through
   `QCommandLineParser`; `main.cpp`, `CCommandProcessor` and `CAppOpts` carry no `#if`.
   `src/qmaptool/setup/` never had the switches.
@@ -1451,10 +1451,10 @@ or run it belongs to is the bug this subsystem invites; keep what runs in these 
 - **Launcher and state need separate workspace databases** (`<page>-launcher-workspace.db`): one
   shared SQLite file logged `database is locked` twice and delayed the fixture from 1.6 s to 12 s.
 - **Channel** `QLocalServer` `qms-doc-<pid>`, one line per message, every report handled queued.
-  Launcher → state: `region`, `update`, `record`, `stop`, `name`, `discard`, `select`, `sync`.
-  State → launcher: `status`, `ready`, `tagged`, `recording`, `recorded`, `recorded-pending`,
-  `recorded-none`, `trial-failed`. Before its `ready` a state answers every verb but `select`/`sync` with a
-  `status` line.
+  Launcher → state: `region`, `update`, `record <name>`, `stop`, `select`.
+  State → launcher: `status`, `ready`, `tagged`, `recording`, `recorded`, `recorded-none`, `trial-failed`.
+  Every `recording` ends in `recorded` or `recorded-none`. Before its `ready` a state answers every verb but
+  `select` with a `status` line.
 - **Lifetime, measured on Linux:** state `kill -9` → panel stays and says so; state window closed →
   session ends; launcher `kill -9` → state quits on `disconnected` within 1 s; launcher SIGTERM →
   both end. SIGTERM only closes the main window (`CAppSetupLinux::closeOnSIGTERM`), so both the
@@ -1469,6 +1469,21 @@ or run it belongs to is the bug this subsystem invites; keep what runs in these 
   a position whose screen is gone is ignored, any other is moved fully onto its screen's available area
   (`CShotFiles::onScreen()`, panel and window alike). The state saves the window's 300 ms after it stops moving, once ready.
   No `WindowStaysOnTopHint`; `reject()` swallows Escape.
+- **Every panel button is a `QToolButton` with its label under the icon** (`newButton()`, labels at
+  `kLabelScale` of the panel font), the name leading its tooltip. All share one height, each as wide
+  as its label (Record as wide as Stop): one common width set by "Publish all" made the panel 565 px
+  wide, so that button's label is "Publ. All" and the panel's minimum is 440 px (measured, DejaVu Sans
+  10). The `Doc*` icons are drawn for it. Enabling follows what is possible:
+  Rename/Delete need a scenario, Base needs `(base)` (`updateScenarioActions()`); Retake needs a shot
+  naming `widget`/`exposure`, Revert a work picture or kept entry, Publish a work picture
+  (`row_t::takeable`/`revertable`/`changed`, `updateShotActions()`).
+- **Record asks for the name first** (`askRecordingName()`): the selected scenario is the default,
+  OK only for a valid name, replacing an existing one asks. Stop stores under it without asking.
+- **Selecting a scenario deselects a shot taken in another one; a rebind selects the shot and enters
+  its new scenario.**
+- **Publish is per shot or per page** (`shots.py publish --only <id>` / `<page>/*`); closing the
+  session publishes all of `_work`. A `QFileSystemWatcher` on the page and shot file and their
+  folders refreshes the panel 300 ms after an edit made outside it.
 - **Every `shots.py` run uses `--doc-python`** (`shots.py take` passes `sys.executable`), never
   `python3` from `PATH` (a Store alias on Windows): `compose` before each state, `replay` for Take again
   and Take all again, `publish`.
@@ -1518,8 +1533,8 @@ or run it belongs to is the bug this subsystem invites; keep what runs in these 
   `CShotRegionPicker` takes `Qt::NoFocus`.
 - **F9 refuses a picture whose shot names another scenario** than the running one; its row starts
   that scenario.
-- **A recording is stored only once it replays.** `record` snapshots the settings into
-  `_cache/<page>-trial.ini` before the recorder runs, `name` parks the steps beside it in
+- **A recording is stored only once it replays.** `record <name>` snapshots the settings into
+  `_cache/<page>-trial.ini` before the recorder runs, `stop` parks the steps beside it in
   `<page>-trial.json`; the launcher starts a state composed `--from` that snapshot with
   `--doc-trial <name>`, which replays them, stores them with `CShotFiles::storeScenario()` and holds
   the scenario - or reports `trial-failed` with the first `shoot:` warning, stores nothing and the

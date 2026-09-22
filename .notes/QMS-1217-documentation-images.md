@@ -342,7 +342,7 @@ button, because the mouse is busy pointing:
 | Pictures | Take again | `shots.py replay --only <id>` of the selected picture into `_work`: headless, the way a build renders it |
 | | Region | drag a rectangle over the window in the picture's own scenario |
 | | Revert | throw the work picture away and put the shot's entry back; the published one stays |
-| | Take all again | `shots.py replay` of the page into `_check`: whether every picture still replays |
+| | All | `shots.py replay` of the page into `_work`: every picture taken again, to compare and publish or revert |
 | | Remove unused | delete the shots and pictures no page references |
 | | Reload page, Publish | read the page again; `shots.py publish` |
 

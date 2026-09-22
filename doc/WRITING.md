@@ -61,7 +61,9 @@ build uses.
     when no row says "not taken" any more:
 
   ┌──────────────────────────────────────────────────────────┐
-  │      All            every picture still replays?         │
+  │      All            QMapShack takes every picture        │
+  │                     again by itself; check each one.     │
+  │                     A published one is shown beside it.  │
   └────────────────────────────┬─────────────────────────────┘
                                ▼
   ┌──────────────────────────────────────────────────────────┐
@@ -74,8 +76,11 @@ build uses.
   │      commit                                              │
   └──────────────────────────────────────────────────────────┘
 
-    later, the program has changed:
-    All -> Retake what looks different -> Publish
+    When QMapShack itself has changed, the pictures may be out of date:
+    open the page and press All. Where a new picture no longer shows what
+    the page describes, the app has changed too much for how it is taken:
+    record its scenario again, or save the base again, and take it again.
+    Then Publish all and commit.
 ```
 
 ## The panel
@@ -94,7 +99,7 @@ build uses.
 | ![](../src/icons/32x32/DocRevert.png) | Revert | throw away what you took and how; the project's picture stays |
 | ![](../src/icons/32x32/DocPublish.png) | Publish | put it into the project |
 | **Page** | | |
-| ![](../src/icons/32x32/DocRetakeAll.png) | All | replay every picture into `doc/images/_check`; changes nothing |
+| ![](../src/icons/32x32/DocRetakeAll.png) | All | take every picture of the page again, as Retake does for one; asks first when pictures you took are not published |
 | ![](../src/icons/32x32/DocClean.png) | Clean | delete shots and pictures no page uses |
 | ![](../src/icons/32x32/DocPublishAll.png) | Publ. All | put every picture of the page you took again into the project |
 
@@ -178,7 +183,7 @@ Not: revert it.
 
 Pictures never match byte for byte across machines; judge them by eye.
 
-When a Retake or All fails, the console names the step.
+When a Retake or All fails, a dialog says which picture and why.
 
 Taking a picture again replays it: QMapShack performs its scenario's recorded steps without you,
 headless, and photographs the result. `shots.py replay` does that for every page, to check that every
@@ -249,7 +254,7 @@ doc/shots/fixtures/<page>/       the page's own example data
 doc/shots/fixtures/default/      the default example data
 doc/images/<page>/*.png          the published pictures
 doc/images/_work/                taken again, not published; not in git
-doc/images/_check/               what All renders; not in git
+doc/images/_check/               what `shots.py replay` renders when run by hand; not in git
 ```
 
 ## Not built yet

@@ -1123,9 +1123,9 @@ file.
 not re-derive), §10 what the demo does not do, §11 the sub-tickets.
 
 **One branch, one commit per sub-ticket.** #1245-#1257 are commits on `QMS-1217` (based on `dev`),
-never branches of their own. #1245-#1255 and #1257 exist: hermetic run, render path, shot file, exposure
+never branches of their own. #1245-#1257 and #1266 exist: hermetic run, render path, shot file, exposure
 catalog, fixture, `shots.py`, recorder, row buttons, replay queue, launcher/panel/channel, state process
-and F9, writer-facing labels. #1256 (menu split) is still to do.
+and F9, writer-facing labels, context-menu shots, a base and fixture per page.
 
 ```
 doc/pages/<page>.md            the only source of shot names
@@ -1510,8 +1510,9 @@ or run it belongs to is the bug this subsystem invites; keep what runs in these 
   session publishes all of `_work`. A `QFileSystemWatcher` on the page and shot file and their
   folders refreshes the panel 300 ms after an edit made outside it.
 - **Every `shots.py` run uses `--doc-python`** (`shots.py take` passes `sys.executable`), never
-  `python3` from `PATH` (a Store alias on Windows): `compose` before each state, `replay` for Take again
-  and Take all again, `publish`.
+  `python3` from `PATH` (a Store alias on Windows): `compose` before each state, `replay` for Retake
+  and All - both into `_work`, so All marks every row that replays as taken again - and `publish`.
+  `_check` is only `shots.py replay`'s default when run by hand.
 - **Revert puts the shot's entry back too**: `storeShot()` keeps the entry from before the first take
   since publish as `_work/<id>.shot.json` (`{}` for a new shot); `revertShot()` restores it,
   `shots.py publish` deletes it with the picture it moves.

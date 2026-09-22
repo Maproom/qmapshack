@@ -712,11 +712,28 @@ void CShotDocLauncher::retakeShot(const QString& id) {
 }
 
 void CShotDocLauncher::retakePage() {
-  runShots(replayJob, {"replay", "--only", page + "/*"}, [this](bool ok, const QString& error) {
-    refreshPanel(
-        ok ? QString("Every picture of this page still replays. Nothing here changed.")
-           : QString("Some pictures do not replay any more; the console says which step fails. %1").arg(error));
-  });
+  if (files.hasUnpublishedImages() &&
+      QMessageBox::Yes != QMessageBox::question(panel, "Take every picture again?",
+                                                "Pictures of this page taken and not published yet are replaced.\n\n"
+                                                "Take every picture again?",
+                                                QMessageBox::Yes | QMessageBox::Cancel, QMessageBox::Cancel)) {
+    return;
+  }
+  // Headless into _work, like Take again for every row: each is judged side by side and published or reverted.
+  const bool started =
+      runShots(replayJob, {"-o", repo.absoluteFilePath("doc/images/_work"), "replay", "--only", page + "/*"},
+               [this](bool ok, const QString& error) {
+                 if (ok) {
+                   refreshPanel(
+                       QString("Every picture of this page was taken again; compare them, revert what is not "
+                               "better, then Publish all."));
+                 } else {
+                   reportFailure(QString("Not every picture was taken again.\n\n%1").arg(error));
+                 }
+               });
+  if (!started) {
+    refreshPanel("Something is running already; wait for it.");
+  }
 }
 
 void CShotDocLauncher::watchPage() {

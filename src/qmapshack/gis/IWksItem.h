@@ -22,6 +22,7 @@
 #include <QIcon>
 #include <QPointer>
 #include <QTreeWidgetItem>
+#include <memory>
 
 class QVariantAnimation;
 
@@ -134,6 +135,14 @@ class IWksItem : public QTreeWidgetItem {
 
   quint32 countProgress = 0;
   quint32 totalProgress = 0;
+
+  /**
+   * @brief Token to detect the destruction of this item from within a queued call.
+   *
+   * IWksItem is no QObject. Thus QPointer can't be used to guard a queued call
+   * capturing the item. The token is owned by the item and expires with it.
+   */
+  std::shared_ptr<int> lifetime = std::make_shared<int>(0);
 
   float opacityOfFocusBasedItems = 0.0;
   bool lastFocusState = false;

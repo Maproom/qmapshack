@@ -44,7 +44,11 @@ class CGisListWks : public QTreeWidget {
   // enum column_e { eColumnName = 2 };
 
   void setExternalMenu(QMenu* project);
-  bool hasProject(IGisProject* project);
+  /**
+     @brief Find another project in the workspace sharing the project's key.
+     @return The colliding project or nullptr if the key is unique.
+   */
+  IGisProject* getDuplicateProject(IGisProject* project);
 
   IGisProject* getProjectByKey(const QString& key);
   CDBProject* getProjectById(quint64 id, const QString& db);

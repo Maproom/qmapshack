@@ -97,6 +97,10 @@ void CGisWorkspace::setOpacity(qreal val) { sliderOpacity->setValue(val * 100); 
 void CGisWorkspace::postEventForWks(QEvent* event) { QCoreApplication::postEvent(treeWks, event); }
 
 void CGisWorkspace::loadGisProject(const QString& filename) {
+  bool isDuplicate = false;
+  QString nameLoaded;
+  QString nameInWorkspace;
+
   // add project to workspace
   {
     CCanvasCursorLock cursorLock(Qt::WaitCursor, __func__);
@@ -105,11 +109,12 @@ void CGisWorkspace::loadGisProject(const QString& filename) {
     QMutexLocker lock(&IGisItem::mutexItems);
 
     IGisProject* item = IGisProject::create(filename, treeWks);
-    // skip if project is already loaded
-    if (item && treeWks->hasProject(item)) {
-      QMessageBox::information(this, tr("Load project..."),
-                               tr("The project \"%1\" is already in the workspace.").arg(item->getName()),
-                               QMessageBox::Abort);
+    // skip if another project with the same key is already loaded
+    IGisProject* duplicate = (item != nullptr) ? treeWks->getDuplicateProject(item) : nullptr;
+    if (duplicate != nullptr) {
+      isDuplicate = true;
+      nameLoaded = item->getName();
+      nameInWorkspace = duplicate->getName();
 
       item->destroyLater();
       item = nullptr;
@@ -120,6 +125,18 @@ void CGisWorkspace::loadGisProject(const QString& filename) {
     if (item != nullptr) {
       item->setWorkspaceFilter(currentSearch);
     }
+  }
+
+  // [Issue #1268] Report outside of the scope above. The message box runs an event loop.
+  // Neither the item mutex nor the wait cursor must be held while it is waiting for the
+  // user. The mutex would block the project's load thread from honoring the abort.
+  if (isDuplicate) {
+    QMessageBox::information(this, tr("Load project..."),
+                             tr("The project \"%1\" has the same project key as the project \"%2\", which is "
+                                "already in the workspace. A project is identified by its key, not by its name or "
+                                "file name. Copying a project file copies its key, too.")
+                                 .arg(nameLoaded, nameInWorkspace),
+                             QMessageBox::Abort);
   }
 
   emit sigChanged();

@@ -99,7 +99,9 @@ IGisProject::IGisProject(type_e type, const QString& filename, IDevice* parent)
 }
 
 IGisProject::~IGisProject() {
-  if (threadLoadPoject != nullptr) {
+  if (threadLoadPoject != nullptr && !threadLoadPoject->isFinished()) {
+    // This must not happen. destroyLater() waits for the thread to finish. Deleting
+    // the project behind destroyLater()'s back is the only way to get here.
     qWarning() << getName() << "threadLoadPoject is still active!";
     threadLoadPoject->requestInterruption();
   }
@@ -110,21 +112,35 @@ IGisProject::~IGisProject() {
 }
 
 void IGisProject::destroyLater() {
-  QMutexLocker lock(&IGisItem::mutexItems);
-  if (threadLoadPoject != nullptr) {
-    threadLoadPoject->requestInterruption();
+  {
+    QMutexLocker lock(&IGisItem::mutexItems);
+    if (threadLoadPoject != nullptr) {
+      threadLoadPoject->requestInterruption();
+    }
   }
-  QMetaObject::invokeMethod(
-      &CGisWorkspace::self(),
-      [this]() {
-        {
-          QMutexLocker lock(&IGisItem::mutexItems);
-          delete this;
-        }
-        // The project's items are gone only now. Redraw so they leave the map.
-        CCanvas::triggerCompleteUpdate(CCanvas::eRedrawGis);
-      },
-      Qt::QueuedConnection);
+  QMetaObject::invokeMethod(&CGisWorkspace::self(), [this]() { destroyNow(); }, Qt::QueuedConnection);
+}
+
+void IGisProject::destroyNow() {
+  // [Issue #1268] The load thread reads members of this project and schedules calls into
+  // the main thread passing the project. Deleting the project while that thread is still
+  // running leaves it with a dangling pointer. Thus the thread has to finish first.
+  //
+  // The main thread must not block while waiting for it. The load thread uses
+  // Qt::BlockingQueuedConnection and depends on the main thread's event loop to return
+  // from a pending call. Therefore poll instead of calling QThread::wait().
+  if (threadLoadPoject != nullptr && !threadLoadPoject->isFinished()) {
+    threadLoadPoject->requestInterruption();
+    QTimer::singleShot(50, &CGisWorkspace::self(), [this]() { destroyNow(); });
+    return;
+  }
+
+  {
+    QMutexLocker lock(&IGisItem::mutexItems);
+    delete this;
+  }
+  // The project's items are gone only now. Redraw so they leave the map.
+  CCanvas::triggerCompleteUpdate(CCanvas::eRedrawGis);
 }
 
 IGisProject* IGisProject::create(const QString filename, CGisListWks* parent) {

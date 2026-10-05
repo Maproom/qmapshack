@@ -74,6 +74,13 @@ void IAppSetup::exportLocaleEnv(int argc, char** argv) {
   }
 }
 
+void IAppSetup::exportStyleEnv() {
+  const QString& style = defaultStyle();
+  if (!style.isEmpty() && !qEnvironmentVariableIsSet("QT_STYLE_OVERRIDE")) {
+    qputenv("QT_STYLE_OVERRIDE", style.toLocal8Bit());
+  }
+}
+
 void IAppSetup::prepareGdal(QString gdalDataDir, QString gdalPluginsDir, QString projDataDir) {
   if (!gdalDataDir.isEmpty()) {
     qputenv("GDAL_DATA", gdalDataDir.toUtf8());

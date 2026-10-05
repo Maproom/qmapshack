@@ -33,6 +33,9 @@ Q_IMPORT_PLUGIN(CSvgtIconEnginePlugin)
 
 int main(int argc, char** argv) {
   IAppSetup::exportLocaleEnv(argc, argv);
+  // created before QApplication to export the style, adopted by it below
+  IAppSetup& env = IAppSetup::createInstance(nullptr);
+  env.exportStyleEnv();
 
   // preserve "original" argument list
   int argCnt = argc;
@@ -52,7 +55,7 @@ int main(int argc, char** argv) {
   QCoreApplication::setAttribute(Qt::AA_DontShowIconsInMenus, false);
   QCoreApplication::setAttribute(Qt::AA_DontShowShortcutsInContextMenus, false);
 
-  IAppSetup& env = IAppSetup::createInstance(qApp);
+  env.setParent(&app);
   env.processArguments();
   env.initLogHandler();
 

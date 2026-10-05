@@ -79,9 +79,6 @@ void IWksItem::updateItem() {
     return;
   }
 
-  if (tree == nullptr) {
-    return;
-  }
   emit tree->itemChanged(this, 0);
   QWidget* viewport = tree->viewport();
   if (viewport == nullptr) {
@@ -129,7 +126,15 @@ void IWksItem::setProgress(quint32 count, quint32 total) {
   QMutexLocker lock(&IGisItem::mutexItems);
   countProgress = count;
   totalProgress = total;
-  QMetaObject::invokeMethod(treeWidget(), [this]() { updateItem(); });
+  // [Issue #1268] Called from a worker thread this call is queued. By the time it is
+  // served the item might have been destroyed already. Thus the lifetime token has to
+  // be tested before the item is touched.
+  QMetaObject::invokeMethod(treeWidget(), [this, token = std::weak_ptr<int>(lifetime)]() {
+    if (token.expired()) {
+      return;
+    }
+    updateItem();
+  });
 }
 
 std::tuple<bool, qreal> IWksItem::getProgress() const {

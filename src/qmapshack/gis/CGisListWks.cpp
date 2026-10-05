@@ -723,7 +723,7 @@ void CGisListWks::removeDevice(const QString& key) {
   }
 }
 
-bool CGisListWks::hasProject(IGisProject* project) {
+IGisProject* CGisListWks::getDuplicateProject(IGisProject* project) {
   CGisListWksEditLock lock(true, IGisItem::mutexItems);
 
   QString key = project->getKey();
@@ -731,10 +731,10 @@ bool CGisListWks::hasProject(IGisProject* project) {
   for (int i = 0; i < topLevelItemCount(); i++) {
     IGisProject* item = dynamic_cast<IGisProject*>(topLevelItem(i));
     if (item && item->getKey() == key && item != project) {
-      return true;
+      return item;
     }
   }
-  return false;
+  return nullptr;
 }
 
 IGisProject* CGisListWks::getProjectByKey(const QString& key) {

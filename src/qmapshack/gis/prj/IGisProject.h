@@ -529,6 +529,13 @@ class IGisProject : public IWksItem {
   QPointer<CThread> threadLoadPoject;
 
  private:
+  /**
+   * @brief Delete the project as soon as no thread is using it anymore.
+   *
+   * Reschedules itself as long as the project's load thread is running.
+   */
+  void destroyNow();
+
   bool noUpdate = false;
 };
 Q_DECLARE_METATYPE(IGisProject*)

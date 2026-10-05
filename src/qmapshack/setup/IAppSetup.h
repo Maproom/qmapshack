@@ -42,6 +42,15 @@ class IAppSetup {
    */
   static void exportLocaleEnv(int argc, char** argv);
 
+  /**
+     @brief Export the platform's preferred Qt style to the environment
+
+     Sets `QT_STYLE_OVERRIDE` to `defaultStyle()` unless the user already set it. Qt ranks a `-style`
+     argument above the variable, so an explicit choice still wins. This has to run before
+     `QApplication` is created, which is when Qt picks the style.
+   */
+  void exportStyleEnv();
+
   virtual QString routinoPath(QString xmlFile) = 0;
   virtual QString defaultCachePath() = 0;
   virtual QString userDataPath(QString subdir = 0) = 0;
@@ -51,6 +60,13 @@ class IAppSetup {
   virtual bool setLock() = 0;
 
  protected:
+  /**
+     @brief The Qt style this platform prefers over Qt's default
+
+     @return the style name, or an empty string to keep Qt's choice
+   */
+  virtual QString defaultStyle() { return {}; }
+
   void prepareGdal(QString gdalDataDir, QString gdalPluginsDir, QString projDataDir);
   /**
      @brief Install the Qt and application translators for the effective locale

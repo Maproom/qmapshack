@@ -38,6 +38,10 @@ class CAppSetupMac : public IAppSetup {
   QString helpFile() override;
   bool setLock() override;
 
+ protected:
+  // Qt's "macos" style draws tool buttons too faintly on a dark palette (QMS-1269)
+  QString defaultStyle() override { return "Fusion"; }
+
  private:
   QDir getApplicationDir(QString subdir);
   void migrateDirContent(QString dest);

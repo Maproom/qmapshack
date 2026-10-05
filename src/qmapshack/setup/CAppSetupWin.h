@@ -36,6 +36,10 @@ class CAppSetupWin : public IAppSetup {
   bool setLock() override;
 
   QByteArray path;
+
+ protected:
+  // Qt's "windows11" style looks poor; Fusion matches macOS (QMS-1269)
+  QString defaultStyle() override { return "Fusion"; }
 };
 
 #endif  // CAPPSETUPWIN_H

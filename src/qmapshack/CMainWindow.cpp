@@ -1544,7 +1544,26 @@ void CMainWindow::slotFullScreen() {
   }
 }
 
-void CMainWindow::slotStartQMapTool() { QProcess::startDetached("qmaptool", {}); }
+void CMainWindow::slotStartQMapTool() {
+  QStringList arguments;
+  if (qlOpts->nosplash) {
+    arguments << "--no-splash";
+  }
+  if (qlOpts->debug) {
+    arguments << "--debug";
+  }
+  if (qlOpts->locale != "") {
+    arguments << "--locale" << qlOpts->locale;
+  }
+  if (qlOpts->fontfamily != "") {
+    arguments << "--font-family" << qlOpts->fontfamily;
+  }
+  if (qlOpts->fontsize != "") {
+    arguments << "--font-size" << qlOpts->fontsize;
+  }
+  arguments << "--style" << ((QProxyStyle*)qApp->style())->baseStyle()->name();
+  QProcess::startDetached("qmaptool", arguments);
+}
 
 void CMainWindow::slotGeoSearchConfigChanged() { actionGeoSearch->setIcon(geoSearchConfig->getCurrentIcon()); }
 

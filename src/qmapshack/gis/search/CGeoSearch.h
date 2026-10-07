@@ -57,7 +57,8 @@ class CGeoSearch : public QObject, public IGisProject {
   void slotResetResults();
 
  private:
-  QAction* addService(CGeoSearchConfig::service_e service, const QString& name, QMenu* menu);
+  /// @param id  the objectName
+  QAction* addService(CGeoSearchConfig::service_e service, const char* id, const QString& name, QMenu* menu);
   void requestNominatim(QString& addr) const;
   void requestGeonamesSearch(QString& addr) const;
   void requestGeonamesAddress(QString& addr) const;

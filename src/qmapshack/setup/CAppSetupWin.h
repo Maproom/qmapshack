@@ -26,6 +26,7 @@
 class CAppSetupWin : public IAppSetup {
   Q_DECLARE_TR_FUNCTIONS(CAppSetupWin)
  public:
+  void attachParentConsole(int argc, char** argv) override;
   void initQMapShack() override;
   QString routinoPath(QString xmlFile) override;
   QString defaultCachePath() override;

@@ -102,6 +102,10 @@ class CCanvas : public QWidget {
   void moveMap(const QPointF& delta);
   void zoomTo(const QRectF& rect);
   void zoom(int index);
+  /** @return the zoom level zoom(int) takes */
+  int getZoomIndex() const;
+  /** @return the point the canvas is centred on [rad] */
+  const QPointF& getPosFocus() const { return posFocus; }
   void displayInfo(const QPoint& px);
   /// The POIs can be clustered together, so the icon is not necessarily displayed where the POI is.
   ///  Thus the location where to draw the highlight is separately given
@@ -181,6 +185,12 @@ class CCanvas : public QWidget {
   bool findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint32 threshold, QPolygonF& polyline);
 
   void print(QPainter& p, const QRectF& area, const QPointF& focus, bool printScale = true);
+
+  /** @return false while a layer draws or has work outstanding, or a map waits for tiles */
+  bool isDrawComplete() const;
+
+  /** @return tiles the active maps drew as a hole; call after isDrawComplete(), or it blocks */
+  qint32 failedTiles() const;
 
   /**
      @brief Set a single map file to be shown on the canvas

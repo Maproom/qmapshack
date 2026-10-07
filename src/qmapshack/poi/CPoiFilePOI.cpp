@@ -19,6 +19,7 @@
 
 #include "poi/CPoiFilePOI.h"
 
+#include <QFileInfo>
 #include <QMessageBox>
 #include <QSqlDatabase>
 #include <QSqlError>
@@ -33,8 +34,11 @@
 #include "poi/IPoiFile.h"
 #include "poi/IPoiItem.h"
 
-CPoiFilePOI::CPoiFilePOI(const QString& filename, CPoiDraw* parent)
-    : IPoiFile(parent), filename(filename), loadTimer(new QTimer(this)) {
+CPoiFilePOI::CPoiFilePOI(const QString& filename, const QString& fileKey, CPoiDraw* parent)
+    : IPoiFile(parent),
+      filename(filename),
+      fileTag(QString("%1-%2").arg(QFileInfo(filename).completeBaseName(), fileKey.left(8))),
+      loadTimer(new QTimer(this)) {
   // Set true if the file could be opened and loaded successfully
   // If not set true, the system will take care to destroy this object
   isActivated = true;
@@ -55,9 +59,9 @@ CPoiFilePOI::CPoiFilePOI(const QString& filename, CPoiDraw* parent)
       const QString& msg = tr("Failed to open SQL database:");
       const QString& err = db.lastError().text();
       if (msgBoxShow) {
-	QMessageBox msgBox(QMessageBox::Warning, tr("SQL error..."), msg + "<br>" + err, QMessageBox::Ok, msgBoxParent);
-	msgBox.setTextFormat(Qt::RichText);
-	msgBox.exec();
+        QMessageBox msgBox(QMessageBox::Warning, tr("SQL error..."), msg + "<br>" + err, QMessageBox::Ok, msgBoxParent);
+        msgBox.setTextFormat(Qt::RichText);
+        msgBox.exec();
       } else {
         qDebug() << msg + " " + err;
       }
@@ -86,23 +90,24 @@ CPoiFilePOI::CPoiFilePOI(const QString& filename, CPoiDraw* parent)
   }
 
   if (isActivated) {
-
     QSqlQuery query("SELECT value FROM main.metadata WHERE name='version'", QSqlDatabase::database(filename + "_bbox"));
 
     const QString& version = query.next() ? query.value(0).toString() : "unknown";
     if (version != "2") {
-      const QString& msg = tr("POI file '%1' is POI version %2. Only version 2 is supported!").arg(filename).arg(version);
-      const QString& hint = tr("See <a href='https://github.com/Maproom/qmapshack/wiki/DocGisItemsPOI'>Wiki</a> for more information.");
+      const QString& msg =
+          tr("POI file '%1' is POI version %2. Only version 2 is supported!").arg(filename).arg(version);
+      const QString& hint =
+          tr("See <a href='https://github.com/Maproom/qmapshack/wiki/DocGisItemsPOI'>Wiki</a> for more information.");
       if (msgBoxShow) {
-	QMessageBox msgBox(QMessageBox::Warning, tr("POI file error..."), msg + "<br>" + hint, QMessageBox::Ok, msgBoxParent);
-	msgBox.setTextFormat(Qt::RichText);
-	msgBox.exec();
+        QMessageBox msgBox(QMessageBox::Warning, tr("POI file error..."), msg + "<br>" + hint, QMessageBox::Ok,
+                           msgBoxParent);
+        msgBox.setTextFormat(Qt::RichText);
+        msgBox.exec();
       } else {
         qDebug() << msg;
       }
       isActivated = false;
     }
-
   }
 
   // Database is no longer needed
@@ -259,7 +264,9 @@ bool CPoiFilePOI::findPoiCloseBy(const QPoint& px, QSet<IPoiItem>& poiItems, QLi
   poiGroup_t poiGroup;
   if (getPoiGroupCloseBy(px, poiGroup)) {
     for (quint64 key : std::as_const(poiGroup.pois)) {
-      poiItems.insert(loadedPois[key].toPoi());
+      IPoiItem poi = loadedPois[key].toPoi();
+      poi.file = fileTag;
+      poiItems.insert(poi);
     }
     posPoiHighlight.append(poiGroup.iconCenter);
     return true;
@@ -295,7 +302,9 @@ void CPoiFilePOI::findPoisIn(const QRectF& degRect, QSet<IPoiItem>& pois, QList<
           if (!copiedItems.contains(poiItemFound.getKey())) {
             // Maybe look through the whole code of selecting items from a map to avoid this conversion
             if (degRect.contains(poiItemFound.getCoordinates() * RAD_TO_DEG)) {
-              pois.insert(poiItemFound.toPoi());
+              IPoiItem poi = poiItemFound.toPoi();
+              poi.file = fileTag;
+              pois.insert(poi);
               copiedItems.insert(poiItemFound.getKey());
             }
           }

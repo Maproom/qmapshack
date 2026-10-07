@@ -117,12 +117,15 @@ QMenu* CGeoSearchWeb::getMenu(const QPointF& pt, QWidget* parent, bool execute) 
   int serviceId = 0;
   for (const service_t& service : services) {
     action = menu->addAction(QIcon(displayIconPath(service.icon)), service.name);
+    // By index; the name is user data.
+    action->setObjectName("actionSearchWeb_" + QString::number(serviceId));
     connect(action, &QAction::triggered, this, [this, serviceId, pt]() { slotSearchWeb(serviceId, pt); });
     serviceId++;
   }
 
   menu->addSeparator();
   action = menu->addAction(QIcon("://icons/Apply.svgt"), tr("Configure Services"));
+  action->setObjectName("actionConfigureServices");
   connect(action, &QAction::triggered, this, &CGeoSearchWeb::slotConfigureServices);
 
   if (execute) {

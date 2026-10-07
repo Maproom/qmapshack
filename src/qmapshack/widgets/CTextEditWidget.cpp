@@ -68,6 +68,7 @@ CTextEditWidget::CTextEditWidget(const QString& html, QWidget* parent) : QDialog
   defaultFont = textEdit->font();
 
   actionTextColor = new QAction(tr("&Color..."), this);
+  actionTextColor->setObjectName("actionTextColor");
   connect(actionTextColor, &QAction::triggered, this, &CTextEditWidget::slotTextColor);
   toolColor->setDefaultAction(actionTextColor);
 

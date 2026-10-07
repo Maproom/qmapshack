@@ -51,6 +51,13 @@ class CMouseNormal : public IMouse {
   void doubleClicked(const QPoint& point) override;
   void scaleChanged() override;
 
+  /**
+     @brief The objectName of the context menu entry that adds @p poi as a waypoint.
+
+     By file and id for a POI file's POI, by name and position for a map's: POIs close by share names.
+   */
+  static QString poiActionName(const IPoiItem& poi);
+
  private slots:
   void slotAddPoi(const IPoiItem& poi) const;
   void slotAddWpt() const;

@@ -70,15 +70,18 @@ void CHelpBrowser::contextMenuEvent(QContextMenuEvent* event) {
   menu->addSeparator();
   if (isBackwardAvailable()) {
     menu->addAction(QIcon(":/icons/Left.svgt"), tr("Go back one page"), Qt::CTRL | Qt::Key_Left, this,
-                    &CHelpBrowser::backward);
+                    &CHelpBrowser::backward)
+        ->setObjectName("actionBackward");
   }
   if (isForwardAvailable()) {
     menu->addAction(QIcon(":/icons/Right.svgt"), tr("Go forward one page"), Qt::CTRL | Qt::Key_Right, this,
-                    &CHelpBrowser::forward);
+                    &CHelpBrowser::forward)
+        ->setObjectName("actionForward");
   }
   if (isBackwardAvailable()) {
     menu->addAction(QIcon(":/icons/ToTop.svgt"), tr("Go to initial page"), Qt::CTRL | Qt::Key_Up, this,
-                    &CHelpBrowser::home);
+                    &CHelpBrowser::home)
+        ->setObjectName("actionHome");
   }
 
   menu->exec(event->globalPos());

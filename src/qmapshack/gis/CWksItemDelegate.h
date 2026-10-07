@@ -44,6 +44,29 @@ class CWksItemDelegate : public QStyledItemDelegate {
   CWksItemDelegate(CGisListWks* parent);
   virtual ~CWksItemDelegate() = default;
 
+  /** @brief The tool buttons painted into a row. */
+  enum class button_e {
+    eNone,
+    eVisible,       /**< show or hide a project, device or geo search on the map */
+    eSave,          /**< save a project, toggle its auto save, or copy a device project into the workspace */
+    eAutoSyncDev,   /**< toggle a project's automatic synchronisation with devices */
+    eActiveProject, /**< make a project the active one, or stop it being that */
+    eSetup,         /**< the geo search's service menu */
+    eWptIcon,       /**< the geo search's waypoint symbol menu */
+  };
+
+  /** @return the untranslated name of @p button, empty for eNone */
+  static QString buttonName(button_e button);
+  /** @return the button called @p name, eNone for a name no button has */
+  static button_e buttonByName(const QString& name);
+
+  /**
+     @return where @p button is painted in row @p index, invalid when the row does not show it now
+
+     @p opt as editorEvent() gets it; State_HasFocus decides whether a project row shows its focus-based buttons.
+   */
+  QRect buttonRect(const QStyleOptionViewItem& opt, const QModelIndex& index, button_e button) const;
+
 #ifdef Q_CC_GNU
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wpedantic"
@@ -184,6 +207,8 @@ class CWksItemDelegate : public QStyledItemDelegate {
 
  signals:
   void sigUpdateCanvas();
+  /** @brief A press on @p button of row @p index acted. */
+  void sigButtonPressed(const QModelIndex& index, CWksItemDelegate::button_e button);
 
  private:
   /** @brief Cast the model index to an IWksItem; returns nullptr if the index is not an IWksItem. */

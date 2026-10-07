@@ -31,7 +31,8 @@
 class CPoiFilePOI : public IPoiFile {
   Q_DECLARE_TR_FUNCTIONS(CPoiFilePOI)
  public:
-  CPoiFilePOI(const QString& filename, CPoiDraw* parent);
+  /** @param fileKey  CPoiFileItem::key, the same on every machine for the same file */
+  CPoiFilePOI(const QString& filename, const QString& fileKey, CPoiDraw* parent);
   virtual ~CPoiFilePOI() = default;
 
   void addTreeWidgetItems(QTreeWidget* widget) override;
@@ -80,6 +81,8 @@ class CPoiFilePOI : public IPoiFile {
 
   mutable QRecursiveMutex mutex;
   QString filename;
+  /** What a POI's `file` is: the base name, told apart from a namesake elsewhere by the file's key. */
+  QString fileTag;
   QTimer* loadTimer;
 
   QMap<quint64, Qt::CheckState> categoryActivated;

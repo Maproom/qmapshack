@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   version="1.1"
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
+   id="svg12"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><style id="current-color-scheme">.ink{color:#000080}.paper{color:#ffffff}.mark{color:#5555ff}</style>
+  <defs
+     id="defs16" />
+  <g
+     transform="translate(-7.3846,-9.2308) scale(1.230769)"
+     id="g10">
+    <path
+       style="fill:currentColor;stroke:currentColor;stroke-width:4;stroke-linejoin:round"
+       d="M 8 22 H 20 L 25 15 H 39 L 44 22 H 56 V 52 H 8 Z"
+       id="path2" class="ink"/>
+    <path
+       id="circle4"
+       style="fill:currentColor"
+       d="M 44,37 A 12,12 0 0 1 32,49 12,12 0 0 1 20,37 12,12 0 0 1 32,25 12,12 0 0 1 44,37 Z" class="paper"/>
+    <path
+       style="fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round"
+       d="M 34.22 30.89 A 6.5 6.5 0 1 1 27.02 32.82"
+       id="path6" class="mark"/>
+    <path
+       style="fill:currentColor;stroke:currentColor;stroke-width:2.0313;stroke-linejoin:round"
+       d="M 30.68 28.46 L 21.26 31.71 L 29.12 38.30 Z"
+       id="path8" class="mark"/>
+  </g>
+</svg>

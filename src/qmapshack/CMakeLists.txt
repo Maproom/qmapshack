@@ -926,6 +926,11 @@ set( RCS
     resources.qrc
 )
 
+# Separate, so a user's binary carries no fonts only a documentation run loads.
+if(QMS_DOC_MODE)
+    list(APPEND RCS shoot/fonts.qrc)
+endif()
+
 ###############################################################################################
 # Some Qt magic
 ###############################################################################################
@@ -1047,6 +1052,72 @@ if(Qt6DBus_FOUND)
 else(Qt6DBus_FOUND)
     set(DBUS_LIB)
 endif(Qt6DBus_FOUND)
+
+# Both branches implement the same two headers.
+if(QMS_DOC_MODE)
+    target_sources(${APPLICATION_NAME} PRIVATE
+        shoot/CShotAddress.cpp
+        shoot/CShotAddress.h
+        shoot/CShotApplication.cpp
+        shoot/CShotApplication.h
+        shoot/CShotContext.cpp
+        shoot/CShotContext.h
+        shoot/CShotDocLauncher.cpp
+        shoot/CShotDocLauncher.h
+        shoot/CShotDocMode.cpp
+        shoot/CShotDocMode.h
+        shoot/CShotDocPanel.cpp
+        shoot/CShotDocPanel.h
+        shoot/CShotDocSelfTest.cpp
+        shoot/CShotDocSelfTest.h
+        shoot/CShotDocState.cpp
+        shoot/CShotDocState.h
+        shoot/CShotEntry.cpp
+        shoot/CShotEntry.h
+        shoot/CShotExposures.cpp
+        shoot/CShotFiles.cpp
+        shoot/CShotFiles.h
+        shoot/CShotFixture.cpp
+        shoot/CShotFixture.h
+        shoot/CShotHandlers.cpp
+        shoot/CShotHandlers.h
+        shoot/CShotInput.cpp
+        shoot/CShotInput.h
+        shoot/CShotOptions.cpp
+        shoot/CShotOptions.h
+        shoot/CShotPage.cpp
+        shoot/CShotPage.h
+        shoot/CShotRecorder.cpp
+        shoot/CShotRecorder.h
+        shoot/CShotRegistry.cpp
+        shoot/CShotRegistry.h
+        shoot/CShotReplay.cpp
+        shoot/CShotReplay.h
+        shoot/CShotRunner.cpp
+        shoot/CShotRunner.h
+        shoot/CShotSelfTest.cpp
+        shoot/CShotSelfTest.h
+        shoot/CShotsJob.cpp
+        shoot/CShotsJob.h
+        shoot/CShotStep.cpp
+        shoot/CShotStep.h
+        shoot/CShotSynth.cpp
+        shoot/CShotSynth.h
+        shoot/CShotWriter.cpp
+        shoot/CShotWriter.h
+        shoot/IShotHandler.cpp
+        shoot/IShotHandler.h
+    )
+    # QTest synthesizes input through QWindowSystemInterface; the private one injects a keyboard context menu.
+    target_link_libraries(${APPLICATION_NAME} PRIVATE Qt6::Test Qt6::GuiPrivate)
+else()
+    target_sources(${APPLICATION_NAME} PRIVATE
+        shoot/CShotEntry.h
+        shoot/CShotEntryStub.cpp
+        shoot/CShotOptions.h
+        shoot/CShotOptionsStub.cpp
+    )
+endif()
 
 target_link_libraries(${APPLICATION_NAME} PRIVATE
     qms_options

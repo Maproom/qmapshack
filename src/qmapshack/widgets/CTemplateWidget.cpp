@@ -226,6 +226,7 @@ void CTemplateWidget::slotPreview() {
   preview->raise();
 
   QAction* action = new QAction(preview);
+  action->setObjectName("actionClosePreview");
   action->setShortcut(Qt::Key_Escape);
 
   preview->addAction(action);

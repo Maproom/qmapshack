@@ -24,6 +24,7 @@
 class CGeoSearchConfig;
 
 class CGeoSearchConfigDialog : public QDialog, Ui_IGeoSearchConfigDialog {
+  Q_OBJECT
  public:
   CGeoSearchConfigDialog(QWidget* parent, CGeoSearchConfig* searchConfig);
 

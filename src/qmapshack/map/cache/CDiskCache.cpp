@@ -61,12 +61,14 @@ void CDiskCache::store(const QString& key, QImage& img) {
     img.save(dir.absoluteFilePath(filename));
     table[hash] = filename;
     cache[hash] = img;
+    failed.remove(hash);
   } else {
     cache[hash] = dummy;
+    failed.insert(hash);
   }
 }
 
-void CDiskCache::restore(const QString& key, QImage& img) {
+bool CDiskCache::restore(const QString& key, QImage& img) {
   QMutexLocker lock(&mutex);
 
   QCryptographicHash md5(QCryptographicHash::Md5);
@@ -76,14 +78,19 @@ void CDiskCache::restore(const QString& key, QImage& img) {
 
   if (cache.contains(hash)) {
     img = cache[hash];
+    return !failed.contains(hash);
   } else if (table.contains(hash)) {
-    img.load(dir.absoluteFilePath(table[hash]));
-    if (!cache.contains(hash)) {
-      cache[hash] = img;
+    // A file that does not load is a hole.
+    if (!img.load(dir.absoluteFilePath(table[hash]))) {
+      img = dummy;
+      failed.insert(hash);
     }
-  } else {
-    img = QImage();
+    cache[hash] = img;
+    return !failed.contains(hash);
   }
+
+  img = QImage();
+  return false;
 }
 
 bool CDiskCache::contains(const QString& key) const {
@@ -100,6 +107,7 @@ void CDiskCache::removeCacheFile(const QFileInfo& fileinfo) {
   QString hash = fileinfo.baseName();
   table.remove(hash);
   cache.remove(hash);
+  failed.remove(hash);
   QFile::remove(fileinfo.absoluteFilePath());
 }
 

@@ -84,6 +84,14 @@ class CUiTheme {
   /** @brief True when the application palette is a dark one, unless a CForceLight is active. */
   static bool isDark();
 
+  /**
+     @brief Pin the colour scheme to light or dark, whatever the desktop is set to.
+
+     Replaces the application palette with Fusion's, which everything themed follows through
+     paletteIsDark(). Once, before the first window; not undone.
+   */
+  static void pinColorScheme(bool dark);
+
   /** @brief Text colour of @p role. Legible on the role's own background and on the palette's. */
   static QColor foreground(Role role);
 
@@ -139,6 +147,10 @@ class CUiTheme {
      state of buttons and menu items is drawn by CQmsStyle and needs nothing here.
    */
   static void installThemeRefresh();
+
+ private:
+  /** @brief Set while a CForceLight lives. */
+  static bool forceLight;
 };
 
 #endif  // CUITHEME_H

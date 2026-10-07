@@ -407,6 +407,40 @@ void CMapDraw::reportStatusToCanvas(const QString& key, const QString& msg) {
   }
 }
 
+qint32 CMapDraw::pendingTiles() {
+  qint32 pending = 0;
+  QMutexLocker lock(&CMapItem::mutexActiveMaps);
+  if (mapList) {
+    for (int i = 0; i < mapList->count(); i++) {
+      CMapItem* item = mapList->item(i);
+
+      if (!item || !item->isActivated()) {
+        continue;
+      }
+
+      pending += item->getMapfile()->pendingTiles();
+    }
+  }
+  return pending;
+}
+
+qint32 CMapDraw::failedTiles() {
+  qint32 failed = 0;
+  QMutexLocker lock(&CMapItem::mutexActiveMaps);
+  if (mapList) {
+    for (int i = 0; i < mapList->count(); i++) {
+      CMapItem* item = mapList->item(i);
+
+      if (!item || !item->isActivated()) {
+        continue;
+      }
+
+      failed += item->getMapfile()->failedTiles();
+    }
+  }
+  return failed;
+}
+
 void CMapDraw::drawt(IDrawContext::buffer_t& currentBuffer) /* override */
 {
   bool seenActiveMap = false;

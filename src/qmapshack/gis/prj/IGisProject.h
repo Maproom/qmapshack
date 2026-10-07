@@ -327,6 +327,13 @@ class IGisProject : public IWksItem {
   bool isValid() const { return valid; }
 
   /**
+     @brief Test if the items are still being created from the stream the project was loaded from
+
+     @return True while the load thread exists
+   */
+  bool isLoading() const { return !threadLoadPoject.isNull(); }
+
+  /**
      @brief Test if this project is handled by a device
      @return The device type (IDevice::type_e). IDevice::eTypeNone if the project is not stored on a device.
    */
@@ -501,7 +508,8 @@ class IGisProject : public IWksItem {
   bool autoSyncToDevPending = false;  ///< flag to show that a sync to device is already pending
 
   metadata_t metadata;
-  /// passthrough xmlns:* declarations (prefix -> URI) found on the loaded GPX root that are not one of the namespaces above
+  /// passthrough xmlns:* declarations (prefix -> URI) found on the loaded GPX root that are not one of the namespaces
+  /// above
   QMap<QString, QString> extraNamespaces;
   QString nameSuffix;
 

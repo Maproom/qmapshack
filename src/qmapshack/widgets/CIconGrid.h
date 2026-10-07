@@ -35,6 +35,15 @@ class CIconGrid : public QWidget {
   static constexpr int kVisibleRows = 5;
   static constexpr int kVisibleCols = 8;
 
+  /** @return the name of the icon under this point, empty when the point is past the last tile */
+  QString iconAt(const QPoint &pos) const;
+
+  /** @return where the tile of a named icon sits, invalid when the grid does not hold it */
+  QRect rectOfIcon(const QString &name) const;
+
+  /** @return the tile index under a point, -1 when there is none */
+  int indexAt(const QPoint &pos) const;
+
  signals:
   void sigIconName(const QString &name);
   void sigSelectedIcon(const QString &name);

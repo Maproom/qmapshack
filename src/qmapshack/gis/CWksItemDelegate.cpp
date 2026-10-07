@@ -684,6 +684,81 @@ void CWksItemDelegate::paintGeoSearchError(QPainter* p, const QStyleOptionViewIt
   p->drawText(layout.rectName.adjusted(kMargin, -1, 0, 1), Qt::AlignTop | Qt::AlignLeft, item.getName());
 }
 
+QString CWksItemDelegate::buttonName(button_e button) {
+  switch (button) {
+    case button_e::eVisible:
+      return "visible";
+    case button_e::eSave:
+      return "save";
+    case button_e::eAutoSyncDev:
+      return "autoSyncDev";
+    case button_e::eActiveProject:
+      return "activeProject";
+    case button_e::eSetup:
+      return "setup";
+    case button_e::eWptIcon:
+      return "wptIcon";
+    case button_e::eNone:
+      break;
+  }
+  return QString();
+}
+
+CWksItemDelegate::button_e CWksItemDelegate::buttonByName(const QString& name) {
+  for (button_e button : {button_e::eVisible, button_e::eSave, button_e::eAutoSyncDev, button_e::eActiveProject,
+                          button_e::eSetup, button_e::eWptIcon}) {
+    if (buttonName(button) == name) {
+      return button;
+    }
+  }
+  return button_e::eNone;
+}
+
+QRect CWksItemDelegate::buttonRect(const QStyleOptionViewItem& opt, const QModelIndex& index, button_e button) const {
+  IWksItem* item = indexToItem(index);
+  if (item == nullptr) {
+    return QRect();
+  }
+
+  switch (item->getBaseType()) {
+    case IWksItem::eBaseType::Project: {
+      const auto& layout = getRectanglesProject(opt, *item);
+      switch (button) {
+        case button_e::eVisible:
+          return layout.rectVisible;
+        case button_e::eSave:
+          return layout.rectSave;
+        case button_e::eAutoSyncDev:
+          return layout.rectAutoSyncDev;
+        case button_e::eActiveProject:
+          return layout.rectActiveProject;
+        default:
+          return QRect();
+      }
+    }
+
+    case IWksItem::eBaseType::Device:
+      return (button == button_e::eVisible) ? getRectanglesDevice(opt, *item).rectVisible : QRect();
+
+    case IWksItem::eBaseType::GeoSearch: {
+      const auto& layout = getRectanglesGeoSearch(opt);
+      switch (button) {
+        case button_e::eVisible:
+          return layout.rectVisible;
+        case button_e::eSetup:
+          return layout.rectSetup;
+        case button_e::eWptIcon:
+          return layout.rectWptIcon;
+        default:
+          return QRect();
+      }
+    }
+
+    default:
+      return QRect();
+  }
+}
+
 bool CWksItemDelegate::editorEvent(QEvent* event, QAbstractItemModel* model, const QStyleOptionViewItem& opt,
                                    const QModelIndex& index) {
   IWksItem* item = indexToItem(index);
@@ -713,6 +788,7 @@ bool CWksItemDelegate::mousePressProject(QMouseEvent* me, const QStyleOptionView
   if (layout.rectVisible.contains(me->pos())) {
     item.setVisibility(!item.isVisible());
     emit sigUpdateCanvas();
+    emit sigButtonPressed(index, button_e::eVisible);
     return true;
   } else if (layout.rectSave.contains(me->pos())) {
     if (item.isOnDevice() == IWksItem::eTypeNone) {
@@ -736,9 +812,11 @@ bool CWksItemDelegate::mousePressProject(QMouseEvent* me, const QStyleOptionView
     } else {
       treeWidget->slotCopyProject();
     }
+    emit sigButtonPressed(index, button_e::eSave);
     return true;
   } else if (layout.rectAutoSyncDev.contains(me->pos())) {
     item.setAutoSyncToDev(!item.isAutoSyncToDev());
+    emit sigButtonPressed(index, button_e::eAutoSyncDev);
     return true;
 
   } else if (layout.rectActiveProject.contains(me->pos())) {
@@ -748,6 +826,7 @@ bool CWksItemDelegate::mousePressProject(QMouseEvent* me, const QStyleOptionView
     }
     if ((opt.state & QStyle::State_HasFocus) != 0) {
       treeWidget->setUserFocus(project->getKey(), !project->hasUserFocus());
+      emit sigButtonPressed(index, button_e::eActiveProject);
     }
     return true;
   }
@@ -762,6 +841,7 @@ bool CWksItemDelegate::mousePressDevice(QMouseEvent* me, const QStyleOptionViewI
   if (layout.rectVisible.contains(me->pos())) {
     item.setVisibility(!item.isVisible());
     emit sigUpdateCanvas();
+    emit sigButtonPressed(index, button_e::eVisible);
     return true;
   }
   return false;
@@ -779,14 +859,17 @@ bool CWksItemDelegate::mousePressGeoSearch(QMouseEvent* me, const QStyleOptionVi
   if (layout.rectVisible.contains(me->pos())) {
     item.setVisibility(!item.isVisible());
     emit sigUpdateCanvas();
+    emit sigButtonPressed(index, button_e::eVisible);
     return true;
   }
   if (layout.rectSetup.contains(me->pos())) {
     search->selectService(layout.rectSetup);
+    emit sigButtonPressed(index, button_e::eSetup);
     return true;
   }
   if (layout.rectWptIcon.contains(me->pos())) {
     search->changeSymbol();
+    emit sigButtonPressed(index, button_e::eWptIcon);
     return true;
   }
 
@@ -858,7 +941,8 @@ bool CWksItemDelegate::helpEventProject(const QPoint& pos, const QPoint& posGlob
       QToolTip::showText(posGlobal, toRichText(tr("Disable automatic synchronization with GPS device.")), view, {},
                          3000);
     } else {
-      QToolTip::showText(posGlobal, toRichText(tr("Enable automatic synchronization with GPS device.")), view, {}, 3000);
+      QToolTip::showText(posGlobal, toRichText(tr("Enable automatic synchronization with GPS device.")), view, {},
+                         3000);
     }
     return true;
   } else if (layout.rectActiveProject.contains(pos)) {

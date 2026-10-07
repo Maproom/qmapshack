@@ -22,6 +22,8 @@
 #include <QCommandLineParser>
 #include <QStyleFactory>
 
+#include "shoot/CShotOptions.h"
+
 CAppOpts* CCommandProcessor::processOptions(const QStringList& arguments) {
   QCommandLineParser parser;
   parser.addHelpOption();
@@ -55,11 +57,13 @@ CAppOpts* CCommandProcessor::processOptions(const QStringList& arguments) {
                                  tr("name"));
   parser.addOption(styleOption);
 
+  CShotOptions::addOptions(parser);
+
   parser.addPositionalArgument("files", tr("Files for future use."));
 
   parser.process(arguments);
 
   return new CAppOpts(parser.isSet(nosplashOption), parser.isSet(debugOption), parser.isSet(logfileOption),
                       parser.value(configOption), parser.value(localeOption), parser.value(fontFamilyOption),
-                      parser.value(fontSizeOption), parser.positionalArguments());
+                      parser.value(fontSizeOption), CShotOptions::read(parser), parser.positionalArguments());
 }

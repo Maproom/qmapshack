@@ -283,6 +283,44 @@ void CMapItemDelegate::paint(QPainter* p, const QStyleOptionViewItem& opt, const
   p->restore();
 }
 
+QString CMapItemDelegate::buttonName(button_e button) {
+  switch (button) {
+    case button_e::eActivate:
+      return "activate";
+    case button_e::eOverview:
+      return "overview";
+    case button_e::eNone:
+      break;
+  }
+  return QString();
+}
+
+CMapItemDelegate::button_e CMapItemDelegate::buttonByName(const QString& name) {
+  for (button_e button : {button_e::eActivate, button_e::eOverview}) {
+    if (buttonName(button) == name) {
+      return button;
+    }
+  }
+  return button_e::eNone;
+}
+
+QRect CMapItemDelegate::buttonRect(const QStyleOptionViewItem& opt, const QModelIndex& index, button_e button) const {
+  const IMapItem* item = indexToItem(index);
+  if (item == nullptr) {
+    return QRect();
+  }
+  const auto& layout = getRectangles(opt);
+  switch (button) {
+    case button_e::eActivate:
+      return layout.rectButton;
+    case button_e::eOverview:
+      return item->showsOverviewWarning() ? overviewBadgeRect(layout.rectIcon) : QRect();
+    case button_e::eNone:
+      break;
+  }
+  return QRect();
+}
+
 bool CMapItemDelegate::editorEvent(QEvent* event, QAbstractItemModel* model, const QStyleOptionViewItem& opt,
                                    const QModelIndex& index) {
   if (event->type() == QEvent::MouseButtonPress) {
@@ -293,6 +331,7 @@ bool CMapItemDelegate::editorEvent(QEvent* event, QAbstractItemModel* model, con
     IMapItem* item = indexToItem(index);
     if (item != nullptr && item->showsOverviewWarning() && overviewBadgeRect(layout.rectIcon).contains(me->pos())) {
       item->triggerOverviewAdvisory();
+      emit sigButtonPressed(index, button_e::eOverview);
       return true;
     }
 
@@ -311,6 +350,7 @@ bool CMapItemDelegate::editorEvent(QEvent* event, QAbstractItemModel* model, con
         } else {
           hideIndicator(index);
         }
+        emit sigButtonPressed(index, button_e::eActivate);
       }
       return true;
     }

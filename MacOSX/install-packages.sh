@@ -4,13 +4,13 @@ source $QMSDEVDIR/qmapshack/MacOSX/config.sh   # check for important paramters
 echo "${ATTN}Installing packages ...${NC}"
 echo "${ATTN}-----------------------${NC}"
 
-######################################################################## 
+########################################################################
 #
 # install homebrew (if needed) and packages / macports
 
 if [ -z "$MACPORTS_BUILD" ]; then
 
-    ######################################################################## 
+    ########################################################################
     # install homebrew  (https://brew.sh)
     #       /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     # HomwBrew location (this can also be put into $HOME/.zshrc, if homebrew is used anyway)
@@ -22,7 +22,7 @@ if [ -z "$MACPORTS_BUILD" ]; then
     fi
     eval "$(brew shellenv)"
 
-    ######################################################################## 
+    ########################################################################
     # install all necessary packages with homebrew.
     # Attention: there will be installed additional packages due to dependencies
     # First get all currently installed brew packages to be able to find out which packahes will be installed
@@ -50,13 +50,18 @@ if [ -z "$MACPORTS_BUILD" ]; then
         brew install libkml
         brew install minizip
         brew install uriparser
+        brew install sqlite     # required by libgdal, libproj
+        brew install curl       # required by libgdal, libproj
         brew install libtiff    # required by libproj, libpoppler
         brew install jpeg-turbo # required by libtiff
         brew install unixodbc   # required by libgdal
         brew install libheif    # required by libgdal
         brew install geos       # required by libgdal
+        brew install deflate    # required by libgdal
+        brew install lz4        # required by libgdal
         brew install zstd       # required by libgdal
         brew install poppler    # required by libgdal
+        brew install brotli     # required by libcurl
     else
         brew install gdal
     fi
@@ -76,17 +81,19 @@ else
     # install mac ports
     # sudo port -v selfupdate
     # sudo port upgrade outdated
-     # qt5
-    sudo port install qt5
-    sudo port install qt5-qtwebengine
+    # Qt6
+    sudo port install qt6
+    sudo port install qt6-qtwebengine
     # if routino is not compiled from source
     sudo port install routino
     # if gdal is not compiled from source
     sudo port install zstd
     sudo port install jpeg
     sudo port install tiff
-    sudo paort install proj
+    sudo port install proj
     sudo port install gdal
+    sudo port install curl
+    sudo port install sqlite3
 
     sudo port install cmake
 

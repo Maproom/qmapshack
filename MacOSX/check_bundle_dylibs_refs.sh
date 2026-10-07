@@ -8,7 +8,7 @@ set +a
 BUILD_RELEASE_DIR=$QMSDEVDIR/release
 
 
-if [[ "$APP_NAME" != "QMapTool" && "$APP_NAME" != "QMapShack" ]] 
+if [[ "$APP_NAME" != "QMapTool" && "$APP_NAME" != "QMapShack" ]]
 then
     echo "Parameter needs to be either QMapTool or QMapShack"
     exit
@@ -109,7 +109,7 @@ function checkLibraries {
 	for P in `otool -L $F | awk '{print $1}'`
     do
         echo $P
-        
+
     	if [[ "$P" == "@executable_path"* ]]; then
     		FREL=${P##@executable_path}
     		LIB=${DIR}${FREL}
@@ -121,7 +121,7 @@ function checkLibraries {
     	if [[ "$P" == "/"* && "$P" != "/System/Library/"* && "$P" != "/usr/lib/"* && "$P" != *":" ]]; then
     		echo "external library: $P"
     	fi
-        
+
     done
 }
 

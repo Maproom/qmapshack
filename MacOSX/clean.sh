@@ -2,7 +2,7 @@
 
 source $QMSDEVDIR/qmapshack/MacOSX/config.sh   # check for important paramters
 
-######################################################################## 
+########################################################################
 # clean up
 echo "${ATTN}Cleaning build artifacts ...${NC}"
 

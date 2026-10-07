@@ -2,7 +2,7 @@
 
 source $QMSDEVDIR/qmapshack/MacOSX/config.sh   # check for important paramters
 
-######################################################################## 
+########################################################################
 # build Routino
 echo "${ATTN}Building Routino ...${NC}"
 echo "${ATTN}--------------------${NC}"
@@ -20,7 +20,7 @@ ROUTINO_INCLUDE_DIR=$ROUTINO_DEV_PATH/include
 ROUTINO_SHARE_DIR=$ROUTINO_DEV_PATH/xml
 ROUTINO_BIN_DIR=$ROUTINO_DEV_PATH/bin
 
-   
+
 function checkoutRoutino {
     echo "${GREEN}Fetching Routino ...${NC}"
     cd $QMSDEVDIR
@@ -37,7 +37,7 @@ function buildRoutino {
     # Patch Makefile.conf for macOS
     # inspired by macports version
     # https://github.com/macports/macports-ports/blob/master/gis/routino/files/patch-Makefile_conf.diff
-    
+
     echo "${GREEN}Patching Makefile.conf for macOS ...${NC}"
     sed -i.bak \
         -e 's|^CC=gcc|#CC=gcc|' \
@@ -55,7 +55,7 @@ function buildRoutino {
 
 function adjustLinking {
     echo "${GREEN}Adjust Routino linking libs ...${NC}"
-    install_name_tool -id $ROUTINO_LIB_DIR/libroutino.dylib $ROUTINO_LIB_DIR/libroutino.dylib    
+    install_name_tool -id $ROUTINO_LIB_DIR/libroutino.dylib $ROUTINO_LIB_DIR/libroutino.dylib
 }
 
 function copyRoutinoToInstallDir {

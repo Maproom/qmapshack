@@ -1,11 +1,11 @@
 #!/bin/sh
 
-######################################################################## 
+########################################################################
 #
 # Check prerequisites for building (parts of) QMS
 #
 # Also set some vars for coloring output
-######################################################################## 
+########################################################################
 
 # only include once
 if [ -z "$INCLUDED" ]; then
@@ -15,7 +15,7 @@ else
 fi
 
 # Some vars
-######################################################################## 
+########################################################################
 # Color echo output (only to emphasize the stages in the build process)
 export INFO=$(tput setaf 2)   # green
 export ATTN=$(tput setaf 1)  # red
@@ -75,7 +75,7 @@ fi
 export MACPORTS_BUILD=
 
 # build with brew package, but do not copy libs and bins from the brew package
-# into the bundle, i.e. the brew packages are nedded at runtime 
+# into the bundle, i.e. the brew packages are needed at runtime
 # if set with any value -> do not copy brew packages into the bundle
 # if an empty string -> create self-contained bundle
 export BREW_PACKAGE_BUILD=
@@ -86,10 +86,10 @@ export BREW_PACKAGE_BUILD=
 export XCODE_PROJECT=
 
 
-# GDAL: if set to "x", it will be built from source. 
+# GDAL: if set to "x", it will be built from source.
 # If not set (i.e. blank), GDAL will be taken from the package manager
 export BUILD_GDAL="x"
-# PROJ (still experimental): if set to "x", it will be built from source. 
+# PROJ: if set to "x", it will be built from source.
 # If not set (i.e. blank), PROJ will be taken from the package manager
 export BUILD_PROJ="x"
 
@@ -150,7 +150,7 @@ export BUILD_RELEASE_DIR=$QMSDEVDIR/release # app bundles will be put
 export QMS_SRC_DIR=$QMSDEVDIR/qmapshack # QMS source dir (clone from GitHub)
 export SRC_OSX_DIR=$QMSDEVDIR/qmapshack/MacOSX # Sources only for MacOS
 
-# QT6
+# Qt6
 if [ "$MACPORTS_BUILD" = "x" ]; then
     export QT_DEV_PATH=$PACKAGES_PATH/libexec/qt6
 else
@@ -165,7 +165,7 @@ if [ "$MACPORTS_BUILD" = "x" ]; then
     export PROJ_DEV_PATH=$PACKAGES_PATH/lib/proj9
 else
     # ROUTINO, GDAL, PROJ are compiled from source
-    export ROUTINO_RELEASE="3.4.3"
+    export ROUTINO_RELEASE="3.4.4"
     export ROUTINO_DEV_PATH=$LOCAL_ENV
     if [ "$BUILD_GDAL" = "x" ]; then
         export GDAL_RELEASE="3.13"
@@ -174,8 +174,8 @@ else
         export GDAL=$PACKAGES_PATH
     fi
     if [ "$BUILD_PROJ" = "x" ]; then
-        export PROJ_RELEASE="9.8"
-        export PROJ_DATA_RELEASE="1.24"
+        export PROJ_RELEASE="9.9"
+        export PROJ_DATA_RELEASE="1.25"
         export PROJ_DEV_PATH=$LOCAL_ENV
     else
         export PROJ_DEV_PATH=$PACKAGES_PATH

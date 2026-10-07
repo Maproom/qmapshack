@@ -7,6 +7,7 @@ V1.XX.X
 [QMS-1268] Fix: Crash when opening a copy of a QMS project
 [QMS-1269] Use Qt style Fusion by default on macOS and Windows
 [QMS-1274] Pass QMS look-and-feel to internally called QMT
+[QMS-1276] macOS build scripts maintenance
 
 V1.21.1
 [QMS-1212] Update macOS build scripts

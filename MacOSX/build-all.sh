@@ -3,16 +3,16 @@
 # Created by Git user d029940, Jul-2022
 # Feel free to adjust it to your liking
 
-######################################################################## 
+########################################################################
 #
-# Prequisite: 
+# Prequisite:
 # 1. A build directory for QMS (refered here as QMSDEVDIR) has been created
 # 2. The shell var QMSDEVDIR has been set QMSDEVDIR to this dir
 #    export $QMSDEVDIR=<QMSDEVDIR>
 # 2. The script 1st_QMS_start.sh has been copied to $QMSDEVDIR and ran
 #       OR
 # 2a. QMapShack has been downloaded from git (git clone ...)
-######################################################################## 
+########################################################################
 
 source $QMSDEVDIR/qmapshack/MacOSX/config.sh   # check for important paramters
 
@@ -24,7 +24,7 @@ echo "${INFO}Press key to start building process${NC}"
 read -n 1 -s
 
 
-######################################################################## 
+########################################################################
 # clean up
 if [ "$1" = "clean" ]; then
     unset INCLUDED
@@ -41,14 +41,14 @@ cd $QMSDEVDIR
 source  $SRC_OSX_DIR/install-packages.sh
 cd $QMSDEVDIR
 
-######################################################################## 
+########################################################################
 # build otoolrecursive
 
 cd $QMSDEVDIR
 source $SRC_OSX_DIR/build-otoolrecursive.sh
 cd $QMSDEVDIR
 
-######################################################################## 
+########################################################################
 # build Proj
 if [ -z "$MACPORTS_BUILD" ]; then
    if [ "$BUILD_PROJ" = "x" ]; then
@@ -58,7 +58,7 @@ if [ -z "$MACPORTS_BUILD" ]; then
     fi
 fi
 
-######################################################################## 
+########################################################################
 # build GDAL
 if [ -z "$MACPORTS_BUILD" ]; then
    if [ "$BUILD_GDAL" = "x" ]; then
@@ -68,7 +68,7 @@ if [ -z "$MACPORTS_BUILD" ]; then
     fi
 fi
 
-######################################################################## 
+########################################################################
 # build Routino
 cd $QMSDEVDIR
 source $SRC_OSX_DIR/build-routino.sh

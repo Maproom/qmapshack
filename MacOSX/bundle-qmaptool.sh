@@ -20,7 +20,7 @@ function extendAppStructure {
 
 
 function copyAdditionalLibraries {
-      if [ -z "$MACPORTS_BUILD" ]; then
+    if [ -z "$MACPORTS_BUILD" ]; then
 
         echo "---building with homebrew---"
 
@@ -29,29 +29,25 @@ function copyAdditionalLibraries {
             echo "---build needs brew at runtime---"
 
             if [ "$BUILD_GDAL" = "x" ]; then
-                install -m 644 `brew --prefix openjpeg`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
-                install -m 644 `brew --prefix libkml`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
-                install -m 644 `brew --prefix minizip`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
-                install -m 644 `brew --prefix uriparser`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
-                install -m 644 `brew --prefix geos`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
-                install -m 644 $LOCAL_ENV/lib/libgdal*.dylib $BUILD_BUNDLE_FRW_DIR
-                install -m 644 `brew --prefix dbus`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
+                for pkg in openjpeg libkml minizip uriparser geos sqlite brotli dbus
+                do
+                    ( cd $(brew --prefix $pkg)/lib; find *.dylib | cpio -dpv $BUILD_BUNDLE_FRW_DIR )
+                done
+                ( cd $LOCAL_ENV/lib; find libgdal*.dylib | cpio -dpv $BUILD_BUNDLE_FRW_DIR )
             else
-                install -m 644 `brew --prefix gdal`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
-                install -m 644 `brew --prefix openexr`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
-                install -m 644 `brew --prefix geos`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
-                install -m 644 `brew --prefix jpeg-xl`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
-                install -m 644 `brew --prefix dbus`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
+                for pkg in gdal openexr geos jpeg-xl dbus
+                do
+                    ( cd $(brew --prefix $pkg)/lib; find *.dylib | cpio -dpv $BUILD_BUNDLE_FRW_DIR )
+                done
             fi
 
             $LOCAL_ENV/bin/otoolrecursive -u $BUILD_BUNDLE_FRW_DIR/libgdal.dylib | xargs -I{} cp -v {} $BUILD_BUNDLE_FRW_DIR
 
             if [ "$BUILD_PROJ" = "x" ]; then
-                install -m 644 $LOCAL_ENV/lib/libproj*.dylib $BUILD_BUNDLE_FRW_DIR
+                ( cd $LOCAL_ENV/lib; find libproj*.dylib | cpio -dpv $BUILD_BUNDLE_FRW_DIR )
             else
-                install -m 644 `brew --prefix proj`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
+                ( cd $(brew --prefix proj)/lib; find *.dylib | cpio -dpv $BUILD_BUNDLE_FRW_DIR )
             fi
-            install -m 644 `brew --prefix dbus`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
 
         fi
 
@@ -80,7 +76,7 @@ function copyAdditionalLibraries {
 function copyExternalFiles {
     if [ -z "$MACPORTS_BUILD" ]; then
         echo "---building with homebrew---"
-        
+
         if [ "$BUILD_GDAL" = "x" ]; then
             cp -vP $LOCAL_ENV/share/gdal/* $BUILD_BUNDLE_RES_GDAL_DIR
             cp -vP $LOCAL_ENV/lib/gdalplugins/* $BUILD_BUNDLE_RES_GDAL_PLUGINS_DIR
@@ -93,7 +89,7 @@ function copyExternalFiles {
         else
             cp -vP $PACKAGES_PATH/share/proj/* $BUILD_BUNDLE_RES_PROJ_DIR
         fi
-        
+
     else
         echo "---building with macports---"
 

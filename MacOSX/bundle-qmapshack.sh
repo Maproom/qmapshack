@@ -23,7 +23,7 @@ function extendAppStructure {
 
 
 function copyAdditionalLibraries {
-      if [ -z "$MACPORTS_BUILD" ]; then
+    if [ -z "$MACPORTS_BUILD" ]; then
 
         echo "---building with homebrew---"
         cp -v    $ROUTINO_DEV_PATH/lib/libroutino* $BUILD_BUNDLE_FRW_DIR
@@ -33,31 +33,29 @@ function copyAdditionalLibraries {
             echo "---build needs brew at runtime---"
 
             if [ "$BUILD_GDAL" = "x" ]; then
-                install -m 644 `brew --prefix openjpeg`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
-                install -m 644 `brew --prefix libkml`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
-                install -m 644 `brew --prefix minizip`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
-                install -m 644 `brew --prefix uriparser`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
-                install -m 644 `brew --prefix geos`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
-                install -m 644 $LOCAL_ENV/lib/libgdal*.dylib $BUILD_BUNDLE_FRW_DIR
+                for pkg in openjpeg libkml minizip uriparser geos sqlite brotli dbus
+                do
+                    ( cd $(brew --prefix $pkg)/lib; find *.dylib | cpio -dpv $BUILD_BUNDLE_FRW_DIR )
+                done
+                ( cd $LOCAL_ENV/lib; find libgdal*.dylib | cpio -dpv $BUILD_BUNDLE_FRW_DIR )
             else
-                install -m 644 `brew --prefix gdal`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
-                install -m 644 `brew --prefix openexr`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
-                install -m 644 `brew --prefix geos`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
-                install -m 644 `brew --prefix jpeg-xl`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
+                for pkg in gdal openexr geos jpeg-xl dbus
+                do
+                    ( cd $(brew --prefix $pkg)/lib; find *.dylib | cpio -dpv $BUILD_BUNDLE_FRW_DIR )
+                done
             fi
-            
+
             $LOCAL_ENV/bin/otoolrecursive -u $BUILD_BUNDLE_FRW_DIR/libgdal.dylib | xargs -I{} cp -v {} $BUILD_BUNDLE_FRW_DIR
 
             if [ "$BUILD_PROJ" = "x" ]; then
-                install -m 644 $LOCAL_ENV/lib/libproj*.dylib $BUILD_BUNDLE_FRW_DIR
+                ( cd $LOCAL_ENV/lib; find libproj*.dylib | cpio -dpv $BUILD_BUNDLE_FRW_DIR )
             else
-                install -m 644 `brew --prefix proj`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
+                ( cd $(brew --prefix proj)/lib; find *.dylib | cpio -dpv $BUILD_BUNDLE_FRW_DIR )
             fi
-            install -m 644 `brew --prefix dbus`/lib/lib*.dylib $BUILD_BUNDLE_FRW_DIR
 
             cp -v -R $QT_DEV_PATH/lib/QtQuickWidgets.framework $BUILD_BUNDLE_FRW_DIR
         fi
-        
+
     else
         echo "---building with macports---"
         echo "---copy additional libs into bundle ------------------"
@@ -75,7 +73,7 @@ function copyAdditionalLibraries {
         echo $F
         rm $F
     done
-    
+
     # remove static libraries
     rm -f $BUILD_BUNDLE_FRW_DIR/lib*.a
 }
@@ -84,7 +82,7 @@ function copyAdditionalLibraries {
 function copyExternalFiles {
     if [ -z "$MACPORTS_BUILD" ]; then
         echo "---building with homebrew---"
-        
+
         if [ "$BUILD_GDAL" = "x" ]; then
             cp -vP $LOCAL_ENV/share/gdal/* $BUILD_BUNDLE_RES_GDAL_DIR
             cp -vP $LOCAL_ENV/lib/gdalplugins/* $BUILD_BUNDLE_RES_GDAL_PLUGINS_DIR
@@ -97,19 +95,19 @@ function copyExternalFiles {
         else
             cp -vP $PACKAGES_PATH/share/proj/* $BUILD_BUNDLE_RES_PROJ_DIR
         fi
-        
+
         cp -v $ROUTINO_DEV_PATH/xml/profiles.xml $BUILD_BUNDLE_RES_ROUTINO_DIR
         cp -v $ROUTINO_DEV_PATH/xml/translations.xml $BUILD_BUNDLE_RES_ROUTINO_DIR
-        cp -v $ROUTINO_DEV_PATH/xml/tagging.xml $BUILD_BUNDLE_RES_ROUTINO_DIR  
+        cp -v $ROUTINO_DEV_PATH/xml/tagging.xml $BUILD_BUNDLE_RES_ROUTINO_DIR
     else
         echo "---building with macports---"
 
         port contents gdal | grep $PACKAGES_PATH/share/gdal/ | xargs -I{} cp -vP {} $BUILD_BUNDLE_RES_GDAL_DIR
         port contents proj9 | grep $PACKAGES_PATH/lib/proj9/share/proj/ | xargs -I{} cp -vP {} $BUILD_BUNDLE_RES_PROJ_DIR
-        # port contents routino | grep $PACKAGES_PATH/share/routino/ | xargs -I{} cp -vP {} $BUILD_BUNDLE_RES_ROUTINO_DIR 
+        # port contents routino | grep $PACKAGES_PATH/share/routino/ | xargs -I{} cp -vP {} $BUILD_BUNDLE_RES_ROUTINO_DIR
         cp -v $ROUTINO_DEV_PATH/xml/profiles.xml $BUILD_BUNDLE_RES_ROUTINO_DIR
         cp -v $ROUTINO_DEV_PATH/xml/translations.xml $BUILD_BUNDLE_RES_ROUTINO_DIR
-        cp -v $ROUTINO_DEV_PATH/xml/tagging.xml $BUILD_BUNDLE_RES_ROUTINO_DIR  
+        cp -v $ROUTINO_DEV_PATH/xml/tagging.xml $BUILD_BUNDLE_RES_ROUTINO_DIR
     fi
 
     # Too many files copied from proj --> delete them
@@ -127,7 +125,7 @@ function copyExternalHelpFiles_QMS {
 function copyExtTools {
     if [ -z "$MACPORTS_BUILD" ]; then
         echo "---building with homebrew---"
- 
+
         if [ -z "$BREW_PACKAGE_BUILD" ]; then
             # copy only if built as standalone package (QMS not as a brew pkg)
             if [ "$BUILD_PROJ" = "x" ]; then

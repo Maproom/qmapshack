@@ -1,8 +1,8 @@
 #!/bin/sh
 
-######################################################################## 
+########################################################################
 # Run this script as "sh build-QMS.sh"
-######################################################################## 
+########################################################################
 # build QMapShack
 
 source $QMSDEVDIR/qmapshack/MacOSX/config.sh   # check for important paramters
@@ -21,13 +21,13 @@ CMAKE_PAR="-DCMAKE_MACOSX_RPATH=ON -DCMAKE_OSX_DEPLOYMENT_TARGET=$OSX_DEPLOYMENT
 echo "${INFO} cmake ../qmapshack ${CMAKE_PAR}${NC}"
 
 if [[ "$XCODE_PROJECT" == "" ]]; then
-    $PACKAGES_PATH/bin/cmake ../qmapshack $CMAKE_PAR -DCMAKE_BUILD_TYPE=Release 
+    $PACKAGES_PATH/bin/cmake ../qmapshack $CMAKE_PAR -DCMAKE_BUILD_TYPE=Release
     # building QMapShack
     echo "${INFO}Building QMapShack - can take very long ...${NC}"
     make -j$(sysctl -n hw.ncpu)
     echo "${INFO}Building QMapShack - finished${NC}"
 else
-    # BROKEN:  Creade Xcode project for debugging    
+    # BROKEN:  Create Xcode project for debugging
     # export Qt5Widgets_DIR=/$QT_DIR/lib/cmake/Qt5Widgets
     # export Qt5Xml_DIR=$QT_DIR/lib/cmake/Qt5Xml
     # export Qt5Sql_DIR=$QT_DIR/lib/cmake/Qt5Sql

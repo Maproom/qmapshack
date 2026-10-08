@@ -24,9 +24,13 @@
 #include <QMutex>
 #include <QTimer>
 
+#include "poi/CPoiFilePOIQuery.h"
 #include "poi/CPoiIconCategory.h"
 #include "poi/CPoiItemPOI.h"
 #include "poi/IPoiFile.h"
+
+class QSqlDatabase;
+class QSqlQuery;
 
 class CPoiFilePOI : public IPoiFile {
   Q_DECLARE_TR_FUNCTIONS(CPoiFilePOI)
@@ -36,8 +40,8 @@ class CPoiFilePOI : public IPoiFile {
 
   void addTreeWidgetItems(QTreeWidget* widget) override;
   // category, minLon multiplied by 10, minLat multiplied by 10. POIs are loaded in squares of degrees (should be fine
-  // enough to not hang the system)
-  void loadPOIsFromFile(quint64 categoryID, int minLonM10, int minLatM10);
+  // enough to not hang the system). maxLonM10 is the last square of the row in view, used for files without R-tree.
+  void loadPOIsFromFile(quint64 categoryID, int minLonM10, int minLatM10, int maxLonM10);
 
   void draw(IDrawContext::buffer_t& buf) override;
 
@@ -63,23 +67,20 @@ class CPoiFilePOI : public IPoiFile {
     QSet<quint64> pois;
   };
 
-  enum SqlColumnPoi_e {
-    eSqlColumnPoiMaxLat,
-    eSqlColumnPoiMaxLon,
-    eSqlColumnPoiMinLat,
-    eSqlColumnPoiMinLon,
-    eSqlColumnPoiData,
-    eSqlColumnPoiId
-  };
   enum SqlColumnCategory_e { eSqlColumnCategoryId, eSqlColumnCategoryName, eSqlColumnCategoryParent };
 
   void getPoiIcon(QPixmap& icon, const poiGroup_t& poiGroup);
   void getPoiIcon(QPixmap& icon, const CPoiItemPOI& poi, const QString& definingTag = "");
   bool overlapsWithIcon(const QRectF& rect) const;
   bool getPoiGroupCloseBy(const QPoint& px, poiGroup_t& poiItem) const;
+  void loadPoisInSquare(const QSqlDatabase& db, quint64 categoryID, int minLonM10, int minLatM10);
+  void loadPoisInRow(const QSqlDatabase& db, int minLonM10, int maxLonM10, int minLatM10);
+  bool isLoaded(quint64 categoryID, int minLonM10, int minLatM10) const;
+  void addPoi(const QSqlQuery& query, quint64 categoryID, int minLonM10, int minLatM10);
 
   mutable QRecursiveMutex mutex;
   QString filename;
+  CPoiFilePOIQuery::Index index = CPoiFilePOIQuery::Index::eUnsupported;
   QTimer* loadTimer;
 
   QMap<quint64, Qt::CheckState> categoryActivated;

@@ -42,8 +42,10 @@ CPoiItemPOI::CPoiItemPOI(const QStringList& data, const QPointF& coordinates, co
       if (keyValue[0].contains("wikidata", Qt::CaseInsensitive)) {
         wikidataRelatedKeys += keyValue[0];
       }
-      if (keyValue[0] == "name" || keyValue[0].contains("name:\\w\\w", Qt::CaseInsensitive) ||
-          keyValue[0].contains(re_match_name)) {
+      // normalized_name is the lowercase name without accents the mapsforge writer adds for searching
+      if ((keyValue[0] == "name" || keyValue[0].contains("name:\\w\\w", Qt::CaseInsensitive) ||
+           keyValue[0].contains(re_match_name)) &&
+          keyValue[0] != "normalized_name") {
         nameRelatedKeys += keyValue[0];
       }
       this->data[keyValue[0]] = keyValue[1];
@@ -183,7 +185,7 @@ QString CPoiItemPOI::getDesc() const {
   for (const QString& key : keys) {
     if (skipKeys.contains(key) || tempSkipKeys.contains(key) || wikidataRelatedKeys.contains(key) ||
         wikipediaRelatedKeys.contains(key) || nameRelatedKeys.contains(key) || key == "phone" ||
-        key == "contact:phone" || key == "contact:mobile" || key == "fax") {
+        key == "contact:phone" || key == "contact:mobile" || key == "fax" || key == "normalized_name") {
       continue;
     }
 

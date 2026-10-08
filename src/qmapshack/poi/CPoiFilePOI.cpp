@@ -55,9 +55,9 @@ CPoiFilePOI::CPoiFilePOI(const QString& filename, CPoiDraw* parent)
       const QString& msg = tr("Failed to open SQL database:");
       const QString& err = db.lastError().text();
       if (msgBoxShow) {
-	QMessageBox msgBox(QMessageBox::Warning, tr("SQL error..."), msg + "<br>" + err, QMessageBox::Ok, msgBoxParent);
-	msgBox.setTextFormat(Qt::RichText);
-	msgBox.exec();
+        QMessageBox msgBox(QMessageBox::Warning, tr("SQL error..."), msg + "<br>" + err, QMessageBox::Ok, msgBoxParent);
+        msgBox.setTextFormat(Qt::RichText);
+        msgBox.exec();
       } else {
         qDebug() << msg + " " + err;
       }
@@ -86,23 +86,25 @@ CPoiFilePOI::CPoiFilePOI(const QString& filename, CPoiDraw* parent)
   }
 
   if (isActivated) {
-
     QSqlQuery query("SELECT value FROM main.metadata WHERE name='version'", QSqlDatabase::database(filename + "_bbox"));
 
     const QString& version = query.next() ? query.value(0).toString() : "unknown";
-    if (version != "2") {
-      const QString& msg = tr("POI file '%1' is POI version %2. Only version 2 is supported!").arg(filename).arg(version);
-      const QString& hint = tr("See <a href='https://github.com/Maproom/qmapshack/wiki/DocGisItemsPOI'>Wiki</a> for more information.");
+    index = CPoiFilePOIQuery::indexForVersion(version);
+    if (index == CPoiFilePOIQuery::Index::eUnsupported) {
+      const QString& msg =
+          tr("POI file '%1' is POI version %2. Only versions 2, 3 and 4 are supported!").arg(filename, version);
+      const QString& hint =
+          tr("See <a href='https://github.com/Maproom/qmapshack/wiki/DocGisItemsPOI'>Wiki</a> for more information.");
       if (msgBoxShow) {
-	QMessageBox msgBox(QMessageBox::Warning, tr("POI file error..."), msg + "<br>" + hint, QMessageBox::Ok, msgBoxParent);
-	msgBox.setTextFormat(Qt::RichText);
-	msgBox.exec();
+        QMessageBox msgBox(QMessageBox::Warning, tr("POI file error..."), msg + "<br>" + hint, QMessageBox::Ok,
+                           msgBoxParent);
+        msgBox.setTextFormat(Qt::RichText);
+        msgBox.exec();
       } else {
         qDebug() << msg;
       }
       isActivated = false;
     }
-
   }
 
   // Database is no longer needed
@@ -160,7 +162,7 @@ void CPoiFilePOI::draw(IDrawContext::buffer_t& buf) {
       for (int minLatM10 = qFloor(yMin * RAD_TO_DEG * 10); minLatM10 < qCeil(yMax * RAD_TO_DEG * 10); minLatM10++) {
         if (!loadedPoisByArea.contains(categoryID) || !loadedPoisByArea[categoryID].contains(minLonM10) ||
             !loadedPoisByArea[categoryID][minLonM10].contains(minLatM10)) {
-          loadPOIsFromFile(categoryID, minLonM10, minLatM10);
+          loadPOIsFromFile(categoryID, minLonM10, minLatM10, qCeil(xMax * RAD_TO_DEG * 10) - 1);
         }
         if (poi->needsRedraw()) {
           return;
@@ -288,7 +290,7 @@ void CPoiFilePOI::findPoisIn(const QRectF& degRect, QSet<IPoiItem>& pois, QList<
         // some tiles are not loaded then
         if (!loadedPoisByArea.contains(categoryID) || !loadedPoisByArea[categoryID].contains(minLonM10) ||
             !loadedPoisByArea[categoryID][minLonM10].contains(minLatM10)) {
-          loadPOIsFromFile(categoryID, minLonM10, minLatM10);
+          loadPOIsFromFile(categoryID, minLonM10, minLatM10, qFloor(degRect.right() * 10));
         }
         for (quint64 poiFoundID : std::as_const(loadedPoisByArea[categoryID][minLonM10][minLatM10])) {
           const CPoiItemPOI& poiItemFound = loadedPois[poiFoundID];
@@ -449,7 +451,7 @@ bool CPoiFilePOI::getPoiGroupCloseBy(const QPoint& px, CPoiFilePOI::poiGroup_t& 
   return false;
 }
 
-void CPoiFilePOI::loadPOIsFromFile(quint64 categoryID, int minLonM10, int minLatM10) {
+void CPoiFilePOI::loadPOIsFromFile(quint64 categoryID, int minLonM10, int minLatM10, int maxLonM10) {
   QMutexLocker lock(&mutex);
 
   // check if query is within bounds
@@ -468,54 +470,92 @@ void CPoiFilePOI::loadPOIsFromFile(quint64 categoryID, int minLonM10, int minLat
     }
   }
 
-  QSqlQuery query(QSqlDatabase::database(filename));
-  query.prepare(
-      "SELECT main.poi_index.maxLat, main.poi_index.maxLon, main.poi_index.minLat, main.poi_index.minLon, "
-      "main.poi_data.data, main.poi_data.id "
-      "FROM main.poi_data, main.poi_index "
-      "WHERE main.poi_data.id IN "
-      "("
-      "    SELECT main.poi_category_map.id "
-      "    FROM main.poi_category_map "
-      "    WHERE main.poi_category_map.id IN "
-      "    ( "
-      "        SELECT main.poi_index.id "
-      "        FROM main.poi_index "
-      "        WHERE main.poi_index.maxLat<:maxLat "
-      "        AND main.poi_index.minLat>=:minLat "
-      "        AND main.poi_index.maxLon<:maxLon "
-      "        AND main.poi_index.minLon>=:minLon "
-      "    ) "
-      "    AND main.poi_category_map.category=:categoryID "
-      ") "
-      "AND main.poi_data.id = main.poi_index.id");
-  query.bindValue(":maxLat", QString::number((minLatM10 + 1) / 10., 'f'));
-  query.bindValue(":minLat", QString::number(minLatM10 / 10., 'f'));
-  query.bindValue(":maxLon", QString::number((minLonM10 + 1) / 10., 'f'));
-  query.bindValue(":minLon", QString::number(minLonM10 / 10., 'f'));
-  query.bindValue(":categoryID", categoryID);
-  query.exec();
-  while (query.next()) {
-    quint64 key = query.value(eSqlColumnPoiId).toUInt();
-    const QStringList& data = query.value(eSqlColumnPoiData).toString().split("\r");
-    QString garminIcon;
-    for (const QString& tag : data) {
-      if (tagMap.contains(tag)) {
-        garminIcon = tagMap[tag].getGarminSym();
-        break;
-      }
-    }
-    loadedPoisByArea[categoryID][minLonM10][minLatM10].append(key);
-    // TODO: this overwrites a POI if it already was loaded. The difference between those will be the category. Some
-    // better handling should be done
-    loadedPois[key] = CPoiItemPOI(
-        data,
-        QPointF((query.value(eSqlColumnPoiMaxLon).toDouble() + query.value(eSqlColumnPoiMinLon).toDouble()) / 2 *
-                    DEG_TO_RAD,
-                (query.value(eSqlColumnPoiMaxLat).toDouble() + query.value(eSqlColumnPoiMinLat).toDouble()) / 2 *
-                    DEG_TO_RAD),
-        key, categoryNames[categoryID], garminIcon);
+  QSqlDatabase db = QSqlDatabase::database(filename);
+  if (index == CPoiFilePOIQuery::Index::eLatLon) {
+    loadPoisInRow(db, minLonM10, maxLonM10, minLatM10);
+  } else {
+    loadPoisInSquare(db, categoryID, minLonM10, minLatM10);
   }
+  db = QSqlDatabase();
   // Close database, as this method is called from mutiple threads.
   QSqlDatabase::removeDatabase(filename);
+}
+
+void CPoiFilePOI::loadPoisInSquare(const QSqlDatabase& db, quint64 categoryID, int minLonM10, int minLatM10) {
+  QSqlQuery query(db);
+  query.prepare(CPoiFilePOIQuery::selectPoisInSquare());
+  CPoiFilePOIQuery::bindSquare(query, categoryID, minLonM10, minLatM10);
+  query.exec();
+  while (query.next()) {
+    addPoi(query, categoryID, minLonM10, minLatM10);
+  }
+}
+
+void CPoiFilePOI::loadPoisInRow(const QSqlDatabase& db, int minLonM10, int maxLonM10, int minLatM10) {
+  // A query costs about the same for one square as for a whole row, and for one category as for several.
+  // So load the row segment in view for all checked categories that miss its first square.
+  const int firstLonM10 = qMax(minLonM10, qFloor(bbox.left() * 10));
+  const int lastLonM10 = qMax(firstLonM10, qMin(maxLonM10, qFloor(bbox.right() * 10)));
+
+  QList<quint64> categories;
+  QSet<QPair<quint64, int>> squaresToLoad;
+  const QList<quint64>& keys = categoryActivated.keys();
+  for (quint64 categoryID : keys) {
+    if (categoryActivated[categoryID] != Qt::Checked || isLoaded(categoryID, firstLonM10, minLatM10)) {
+      continue;
+    }
+    categories << categoryID;
+    for (int lonM10 = firstLonM10; lonM10 <= lastLonM10; lonM10++) {
+      if (!isLoaded(categoryID, lonM10, minLatM10)) {
+        // mark the square as loaded, even if it has no POIs
+        loadedPoisByArea[categoryID][lonM10][minLatM10];
+        squaresToLoad.insert({categoryID, lonM10});
+      }
+    }
+  }
+  if (categories.isEmpty()) {
+    return;
+  }
+
+  QSqlQuery query(db);
+  query.prepare(CPoiFilePOIQuery::selectPoisInRow(categories.size()));
+  CPoiFilePOIQuery::bindRow(query, categories, firstLonM10, lastLonM10, minLatM10);
+  query.exec();
+  while (query.next()) {
+    const quint64 categoryID = query.value(CPoiFilePOIQuery::eSqlColumnPoiCategory).toULongLong();
+    const qreal lon = query.value(CPoiFilePOIQuery::eSqlColumnPoiLon).toDouble();
+    const int lonM10 = qBound(firstLonM10, qFloor(lon * 10), lastLonM10);
+    // skip squares that were loaded before for this category
+    if (squaresToLoad.contains({categoryID, lonM10})) {
+      addPoi(query, categoryID, lonM10, minLatM10);
+    }
+  }
+}
+
+bool CPoiFilePOI::isLoaded(quint64 categoryID, int minLonM10, int minLatM10) const {
+  const auto category = loadedPoisByArea.constFind(categoryID);
+  if (category == loadedPoisByArea.constEnd()) {
+    return false;
+  }
+  const auto column = category->constFind(minLonM10);
+  return column != category->constEnd() && column->contains(minLatM10);
+}
+
+void CPoiFilePOI::addPoi(const QSqlQuery& query, quint64 categoryID, int minLonM10, int minLatM10) {
+  const quint64 key = query.value(CPoiFilePOIQuery::eSqlColumnPoiId).toULongLong();
+  const qreal lon = query.value(CPoiFilePOIQuery::eSqlColumnPoiLon).toDouble();
+  const qreal lat = query.value(CPoiFilePOIQuery::eSqlColumnPoiLat).toDouble();
+  const QStringList& data = query.value(CPoiFilePOIQuery::eSqlColumnPoiData).toString().split("\r");
+  QString garminIcon;
+  for (const QString& tag : data) {
+    if (tagMap.contains(tag)) {
+      garminIcon = tagMap[tag].getGarminSym();
+      break;
+    }
+  }
+  loadedPoisByArea[categoryID][minLonM10][minLatM10].append(key);
+  // TODO: this overwrites a POI if it already was loaded. The difference between those will be the category. Some
+  // better handling should be done
+  loadedPois[key] =
+      CPoiItemPOI(data, QPointF(lon * DEG_TO_RAD, lat * DEG_TO_RAD), key, categoryNames[categoryID], garminIcon);
 }

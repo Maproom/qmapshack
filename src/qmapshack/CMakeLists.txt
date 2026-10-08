@@ -274,6 +274,7 @@ set( SRCS
     poi/CPoiDraw.cpp
     poi/CPoiFileItem.cpp
     poi/CPoiFilePOI.cpp
+    poi/CPoiFilePOIQuery.cpp
     poi/CPoiFilePOI_TagMap.cpp
     poi/CPoiIconCategory.cpp
     poi/CPoiItemPOI.cpp
@@ -669,6 +670,7 @@ set( HDRS
     poi/CPoiDraw.h
     poi/CPoiFileItem.h
     poi/CPoiFilePOI.h
+    poi/CPoiFilePOIQuery.h
     poi/CPoiIconCategory.h
     poi/CPoiItemPOI.h
     poi/CPoiList.h

@@ -1,12 +1,12 @@
 #!/bin/sh
 
-source $QMSDEVDIR/qmapshack/MacOSX/config.sh   # check for important paramters
+source $QMSDEVDIR/qmapshack/MacOSX/config.sh   # check for important parameters
 echo "${ATTN}Building PROJ ...${NC}"
 echo "${ATTN}-----------------${NC}"
 
 ########################################################################
 # build PROJ
-echo "${ATTN}Building Proj ...${NC}"
+echo "${ATTN}Building PROJ ...${NC}"
 cd $QMSDEVDIR
 
 # Check for local PROJ repo

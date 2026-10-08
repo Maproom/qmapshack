@@ -1,6 +1,6 @@
 #!/bin/sh
 
-source $QMSDEVDIR/qmapshack/MacOSX/config.sh   # check for important paramters
+source $QMSDEVDIR/qmapshack/MacOSX/config.sh   # check for important parameters
 
 # Directories for QMS
 SRC_RESOURCES_DIR=$SRC_OSX_DIR/resources
@@ -378,7 +378,7 @@ function checkLibraries {
 	DIR=${BUILD_BUNDLE_APP_FILE%/*}
 
     echo "--------------------"
-    echo "das File: $F"
+    echo "File: $F"
     echo "--------------------"
 
 	for P in `otool -L $F | awk '{print $1}'`
@@ -412,15 +412,15 @@ function printLinking {
 function extractVersion {
     # Version CMakeList.txt
 
-    # set(APPLICATION_VERSION_MAJOR "1")
-    # set(APPLICATION_VERSION_MINOR "3")
-    # set(APPLICATION_VERSION_PATCH "0.libroutino")
+    # Example: set(APPLICATION_VERSION_MAJOR "1")
+    # Example: set(APPLICATION_VERSION_MINOR "3")
+    # Example: set(APPLICATION_VERSION_PATCH "0.libroutino")
     MAJOR_VERSION=$(sed -E -n 's/.*_VERSION_MAJOR.*([[:digit:]]+).*/\1/p' $QMS_SRC_DIR/src/$APP_NAME_LOWER/CMakeLists.txt)
     MINOR_VERSION=$(sed -E -n 's/.*_VERSION_MINOR.*([[:digit:]]+).*/\1/p' $QMS_SRC_DIR/src/$APP_NAME_LOWER/CMakeLists.txt)
     PATCH_VERSION=$(sed -E -n 's/.*_VERSION_PATCH.*([[:digit:]]+).*/\1/p' $QMS_SRC_DIR/src/$APP_NAME_LOWER/CMakeLists.txt)
 
     if [ -z "$MAJOR_VERSION" ]; then
-         # project(QMapShack VERSION 1.11.0)
+        # Example: project(QMapShack VERSION 1.11.0)
         MAJOR_VERSION=$(sed -E -n 's/.*QMapShack VERSION.*([[:digit:]]+)\.([[:digit:]]+)\.([[:digit:]]+).*/\1/p' $QMS_SRC_DIR/CMakeLists.txt)
         MINOR_VERSION=$(sed -E -n 's/.*QMapShack VERSION.*([[:digit:]]+)\.([[:digit:]]+)\.([[:digit:]]+).*/\2/p' $QMS_SRC_DIR/CMakeLists.txt)
         PATCH_VERSION=$(sed -E -n 's/.*QMapShack VERSION.*([[:digit:]]+)\.([[:digit:]]+)\.([[:digit:]]+).*/\3/p' $QMS_SRC_DIR/CMakeLists.txt)

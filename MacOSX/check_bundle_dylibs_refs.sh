@@ -103,7 +103,7 @@ function checkLibraries {
 	DIR=${BUILD_BUNDLE_APP_FILE%/*}
 
     echo "--------------------"
-    echo "das File: $F"
+    echo "File: $F"
     echo "--------------------"
 
 	for P in `otool -L $F | awk '{print $1}'`

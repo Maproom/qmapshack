@@ -1,6 +1,6 @@
 #!/bin/sh
 
-source $QMSDEVDIR/qmapshack/MacOSX/config.sh   # check for important paramters
+source $QMSDEVDIR/qmapshack/MacOSX/config.sh   # check for important parameters
 
 # Bundling QMapShack and QMapTool
 echo "${INFO}Bundle QMapShack ...${NC}"

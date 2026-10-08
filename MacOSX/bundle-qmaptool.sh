@@ -1,6 +1,6 @@
 #!/bin/sh
 
-source $QMSDEVDIR/qmapshack/MacOSX/config.sh   # check for important paramters
+source $QMSDEVDIR/qmapshack/MacOSX/config.sh   # check for important parameters
 echo "${ATTN}Bundling QMapTool.app ...${NC}"
 echo "${ATTN}-------------------------${NC}"
 
@@ -187,7 +187,7 @@ echo "------------------------------------"
 # Codesign the apps (on arm64 mandatory):
 echo "${INFO}Signing app bundles${NC}"
 
-# 1. remove all empty directories, otherwiese verification of signing will fail
+# 1. remove all empty directories, otherwise verification of signing will fail
 find $BUILD_BUNDLE_CONTENTS_DIR -type d -empty -delete
 
 # 2. codesign --force --deep --sign - $BUILD_RELEASE_DIR/QMapTool.app

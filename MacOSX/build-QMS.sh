@@ -5,7 +5,7 @@
 ########################################################################
 # build QMapShack
 
-source $QMSDEVDIR/qmapshack/MacOSX/config.sh   # check for important paramters
+source $QMSDEVDIR/qmapshack/MacOSX/config.sh   # check for important parameters
 echo "${ATTN}Building QMS ...${NC}"
 echo "${ATTN}----------------${NC}"
 

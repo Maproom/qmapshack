@@ -17,7 +17,7 @@ fi
 # Some vars
 ########################################################################
 # Color echo output (only to emphasize the stages in the build process)
-export INFO=$(tput setaf 2)   # green
+export INFO=$(tput setaf 2)  # green
 export ATTN=$(tput setaf 1)  # red
 export NC=$(tput sgr0)
 
@@ -55,7 +55,7 @@ echo ${DIR_SCRIPT%/*}
 # echo ${DIR_SCRIPT%/*}/*
 if [ "$QMSDEVDIR" = "$DIR_SCRIPT" ] || [ "$QMSDEVDIR" = "${DIR_SCRIPT%/*}" ]; then
     echo $ATTN
-    echo "Your shell var QMSDEVDIR points to a driectory inside qmapshack"
+    echo "Your shell var QMSDEVDIR points to a folder inside qmapshack"
     echo "Please export QMSDEVDIR to a folder outside of qmapshack"
     echo "Proposal - copy this in your terminal and hit enter:"
     echo "export QMSDEVDIR=${DIR_SCRIPT%/*/*}"
@@ -82,7 +82,7 @@ export BREW_PACKAGE_BUILD=
 
 # build Xcode project
 # if set with any value -> create an Xcode proj
-# if an empty string -> compile, build and nundle w/o XCode
+# if an empty string -> compile, build and bundle w/o XCode
 export XCODE_PROJECT=
 
 
@@ -94,7 +94,7 @@ export BUILD_GDAL="x"
 export BUILD_PROJ="x"
 
 
-# checking arguments: intested in -x (Xcode), -m (MacPorts), -b (Homebrew)
+# checking arguments: interested in -x (Xcode), -m (MacPorts), -b (Homebrew)
 while getopts ":bmx" opt; do
   case $opt in
     b)
@@ -119,7 +119,7 @@ while getopts ":bmx" opt; do
 done
 
 ########################################################################
-# Paramters driving the build process
+# Parameters driving the build process
 echo $INFO
 echo "Parameters driving the build process:"
 echo "-------------------------------------"
@@ -131,7 +131,7 @@ echo ${NC}
 
 
 ########################################################################
-# Addtional Vars / Paramters for building
+# Additional Vars / Parameters for building
 
 export LOCAL_ENV=$QMSDEVDIR/local  # folder for building pkgs from source
 

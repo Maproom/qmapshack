@@ -1,6 +1,6 @@
 #!/bin/sh
 
-source $QMSDEVDIR/qmapshack/MacOSX/config.sh   # check for important paramters
+source $QMSDEVDIR/qmapshack/MacOSX/config.sh   # check for important parameters
 
 ########################################################################
 # clean up
@@ -18,7 +18,7 @@ rm -rf $QMSDEVDIR/routino*
 rm -rf $QMSDEVDIR/proj*
 rm -rf $QMSDEVDIR/build_QMapShack
 
-echo "${ATTN}You can remove the qmapshap git repo from $QMSDEVDIR by rm -rf $QMSDEVDIR/qmapshack ${NC}"
+echo "${ATTN}You can remove the qmapshack git repo from $QMSDEVDIR by rm -rf $QMSDEVDIR/qmapshack ${NC}"
 
 
 

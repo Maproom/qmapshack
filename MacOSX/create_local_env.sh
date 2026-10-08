@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Create a local environment for all includes, libs, ... needed
-source $QMSDEVDIR/qmapshack/MacOSX/config.sh   # check for important paramters
+source $QMSDEVDIR/qmapshack/MacOSX/config.sh   # check for important parameters
 
 mkdir $LOCAL_ENV
 mkdir $LOCAL_ENV/bin

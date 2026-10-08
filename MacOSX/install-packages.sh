@@ -1,6 +1,6 @@
 #!/bin/sh
 
-source $QMSDEVDIR/qmapshack/MacOSX/config.sh   # check for important paramters
+source $QMSDEVDIR/qmapshack/MacOSX/config.sh   # check for important parameters
 echo "${ATTN}Installing packages ...${NC}"
 echo "${ATTN}-----------------------${NC}"
 
@@ -25,7 +25,7 @@ if [ -z "$MACPORTS_BUILD" ]; then
     ########################################################################
     # install all necessary packages with homebrew.
     # Attention: there will be installed additional packages due to dependencies
-    # First get all currently installed brew packages to be able to find out which packahes will be installed
+    # First get all currently installed brew packages to be able to find out which packages will be installed
     # during QMS build
     echo "${ATTN}Fetching brew packages ${NC}"
     rm -f $QMSDEVDIR/brewlist*.txt
@@ -57,7 +57,7 @@ if [ -z "$MACPORTS_BUILD" ]; then
         brew install unixodbc   # required by libgdal
         brew install libheif    # required by libgdal
         brew install geos       # required by libgdal
-        brew install deflate    # required by libgdal
+        brew install libdeflate # required by libgdal
         brew install lz4        # required by libgdal
         brew install zstd       # required by libgdal
         brew install poppler    # required by libgdal
@@ -67,7 +67,7 @@ if [ -z "$MACPORTS_BUILD" ]; then
     fi
 
 
-    # # Used by routino
+    # Used by routino
     # brew install bzip2
     brew list > $QMSDEVDIR/brewlist-`date +%s`.txt
     diff $QMSDEVDIR/brewlist*.txt > $QMSDEVDIR/brewdiff-`date +%s`.txt

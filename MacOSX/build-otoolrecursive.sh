@@ -1,5 +1,5 @@
 #!/bin/sh
-source $QMSDEVDIR/qmapshack/MacOSX/config.sh   # check for important paramters
+source $QMSDEVDIR/qmapshack/MacOSX/config.sh   # check for important parameters
 echo "${ATTN}Building otoolrecursive ...${NC}"
 echo "${ATTN}---------------------------${NC}"
 

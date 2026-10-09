@@ -143,6 +143,7 @@
     <addaction name="actionImportDatabase"/>
     <addaction name="actionVrtBuilder"/>
     <addaction name="actionCreateRoutinoDatabase"/>
+    <addaction name="actionCreateSurfaceDatabase"/>
     <addaction name="actionStartQMapTool"/>
    </widget>
    <addaction name="menuFile"/>
@@ -763,6 +764,21 @@
    </property>
    <property name="text">
     <string>Create Routino Database</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionCreateSurfaceDatabase">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/ActFoot.svgt</normaloff>:/icons/ActFoot.svgt</iconset>
+   </property>
+   <property name="text">
+    <string>Create Surface Database</string>
+   </property>
+   <property name="toolTip">
+    <string>Build a database of road and path surfaces from an OpenStreetMap extract, to show the surfaces and way types of tracks.</string>
    </property>
    <property name="menuRole">
     <enum>QAction::MenuRole::NoRole</enum>

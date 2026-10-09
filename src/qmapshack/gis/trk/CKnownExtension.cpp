@@ -20,6 +20,7 @@
 
 #include <QStringBuilder>
 
+#include "gis/trk/surface/CSurface.h"
 #include "units/IUnit.h"
 
 const QString CKnownExtension::internalSlope = "ql:slope";
@@ -28,6 +29,8 @@ const QString CKnownExtension::internalSpeedTime = "ql:speedtime";
 const QString CKnownExtension::internalEle = "ql:ele";
 const QString CKnownExtension::internalProgress = "ql:progress";
 const QString CKnownExtension::internalTerrainSlope = "ql:terrainslope";
+const QString CKnownExtension::internalSurface = "ql:surface";
+const QString CKnownExtension::internalWayType = "ql:waytype";
 
 QHash<QString, CKnownExtension> CKnownExtension::knownExtensions;
 QSet<QString> CKnownExtension::registeredNS;
@@ -191,7 +194,17 @@ void CKnownExtension::init(const IUnit& units) {
 
       {internalTerrainSlope,
        {tr("Terr. Slope", "extShortName"), tr("Terrain Slope*", "extLongName"), -1, 0, 90., 1., "°",
-        "://icons/CSrcSlope.svgt", true, false, getExtensionValueFunc(internalTerrainSlope)}}};
+        "://icons/CSrcSlope.svgt", true, false, getExtensionValueFunc(internalTerrainSlope)}},
+
+      {internalSurface,
+       {tr("Surface", "extShortName"), tr("Surface*", "extLongName"), -1, 0., CSurface::eClassCount - 1, 1., "",
+        "://icons/ActFoot.svgt", true, true,
+        [](const CTrackData::trkpt_t& p) { return p.surfaceClass < 0 ? NOFLOAT : qreal(p.surfaceClass); }}},
+
+      {internalWayType,
+       {tr("Way Type", "extShortName"), tr("Way Type*", "extLongName"), -1, 0., CSurface::eWayCount - 1, 1., "",
+        "://icons/PathOrange.svgt", true, true,
+        [](const CTrackData::trkpt_t& p) { return p.surfaceWay < 0 ? NOFLOAT : qreal(p.surfaceWay); }}}};
 
   initGarminTPXv1(units, "gpxtpx");
   initGarminTPXv1(units, "tp1");
@@ -208,6 +221,8 @@ const CKnownExtension CKnownExtension::get(const QString& key) {
 
 bool CKnownExtension::isKnown(const QString& key) { return knownExtensions.contains(key); }
 
+bool CKnownExtension::isCategorical(const QString& key) { return key == internalSurface || key == internalWayType; }
+
 QString CKnownExtension::getName(const QString& altName) const {
   bool hasNoName = nameShortText.isEmpty();
   QString name = hasNoName ? altName : nameShortText;
@@ -223,6 +238,12 @@ QString CKnownExtension::toString(qreal value, bool withName, const QString& key
   QString str;
   if (key == CKnownExtension::internalProgress) {
     return str;
+  } else if (key == CKnownExtension::internalSurface) {
+    str = (value >= 0 && value < qint32(CSurface::eClassCount)) ? CSurface::className(CSurface::class_e(qRound(value)))
+                                                             : "-";
+  } else if (key == CKnownExtension::internalWayType) {
+    str = (value >= 0 && value < qint32(CSurface::eWayCount)) ? CSurface::wayTypeName(CSurface::waytype_e(qRound(value)))
+                                                           : "-";
   } else if (key.contains("speed")) {
     QString v, u;
     IUnit::self().meter2speed(value, v, u);

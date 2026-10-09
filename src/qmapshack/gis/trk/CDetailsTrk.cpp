@@ -20,6 +20,7 @@
 
 #include <QtWidgets>
 
+#include "CMainWindow.h"
 #include "canvas/CCanvas.h"
 #include "gis/trk/CEnergyCyclingDialog.h"
 #include "gis/trk/CKnownExtension.h"
@@ -147,6 +148,7 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk) : INotifyTrk(CGisItemTrk::eVisualDeta
   connect(textCmtDesc, &QTextBrowser::anchorClicked, this, &CDetailsTrk::slotLinkActivated);
 
   connect(pushSetActivities, &QPushButton::clicked, this, &CDetailsTrk::slotSetActivities);
+  connect(widgetSurface, &CSurfaceWidget::sigSetup, &CMainWindow::self(), &CMainWindow::slotCreateSurfaceDatabase);
   connect(toolSetEnergyCycling, &QPushButton::clicked, this, &CDetailsTrk::slotSetEnergyCycling);
 
   connect(lineName, &QLineEdit::textEdited, this, &CDetailsTrk::slotNameChanged);
@@ -440,6 +442,7 @@ void CDetailsTrk::updateData() {
   labelTainted->setVisible(trk.isTainted());
 
   labelInfo->setText(trk.getInfo(IGisItem::eFeatureNone));
+  widgetSurface->setData(trk.getSurface());
   comboColor->setCurrentIndex(trk.getColorIdx());
   toolLock->setChecked(isReadOnly);
   labelNogo->setVisible(isNogo);
@@ -506,12 +509,15 @@ void CDetailsTrk::updateData() {
   comboColorSource->setCurrentIndex(currentIdx);
 
   QString source = comboColorSource->currentData().toString();
-  bool enabledColorize = !source.isEmpty() && (source != "activity");
+  bool enabledCategorical = CKnownExtension::isCategorical(source);
+  bool enabledColorize = !source.isEmpty() && (source != "activity") && !enabledCategorical;
   bool enabledActivity = source == "activity";
 
-  comboColor->setVisible(!(enabledColorize || enabledActivity));
-  widgetColorLabel->setVisible(enabledColorize);
-  widgetColorLabel->setEnabled(enabledColorize);
+  comboColor->setVisible(!(enabledColorize || enabledActivity || enabledCategorical));
+  widgetColorLabel->setVisible(enabledColorize || enabledCategorical);
+  widgetColorLabel->setEnabled(enabledColorize || enabledCategorical);
+  widgetColorLabel->setCategories(enabledCategorical ? CColorLegend::categoriesOf(source)
+                                                     : QList<CColorLegend::category_t>());
   toolLimitAutoStyle->setEnabled(enabledColorize);
   toolLimitUsrStyle->setEnabled(enabledColorize);
   toolLimitSysStyle->setEnabled(enabledColorize);

@@ -88,6 +88,23 @@
      <item row="1" column="1">
       <widget class="QComboBox" name="comboLanguage"/>
      </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="labelSurface">
+       <property name="text">
+        <string>Surface</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1" colspan="2">
+      <widget class="QPushButton" name="pushSurface">
+       <property name="toolTip">
+        <string>Build surface databases from the same OpenStreetMap extracts, to show the surfaces and way types of tracks.</string>
+       </property>
+       <property name="text">
+        <string>Surface databases...</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
    <item>

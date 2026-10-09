@@ -49,6 +49,11 @@ class CKnownExtension {
   static const QString internalEle;           //< name of internally derived elevation (DEM)
   static const QString internalProgress;      //< name of internally derived progress
   static const QString internalTerrainSlope;  //< name of internally derived terrain slope
+  static const QString internalSurface;       //< name of the surface class from a surface database
+  static const QString internalWayType;       //< name of the way type from a surface database
+
+  /// true for sources with a fixed set of values, drawn with one color per value
+  static bool isCategorical(const QString& key);
 
   /**
      @brief Get extension descriptor for name

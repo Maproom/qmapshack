@@ -134,6 +134,8 @@ class CMainWindow : public QMainWindow, private Ui::IMainWindow {
   void sigCanvasChange();
 
  public slots:
+  /// open the tool tab to build surface databases
+  void slotCreateSurfaceDatabase();
   void slotLinkActivated(const QString& link);
   void slotLinkActivated(const QUrl& url);
   void slotSetupMapView();

@@ -71,6 +71,7 @@ option(BUILD_FOR_LOCAL_SYSTEM "Build for local system ONLY (resulting binary mig
 # Off by default on purpose: only a build that is deliberately refreshing the catalogs may run
 # lupdate and rewrite the tracked .ts files.
 option(UPDATE_TRANSLATIONS "Update translation files" OFF)
+option(BUILD_TESTING "Build the unit tests (run them with ctest)" OFF)
 option(UPDATE_TRANSLATIONS_PURGE_OBSOLETE "Remove obsolete translations" OFF)
 
 
@@ -168,6 +169,7 @@ qms_add_flag_if_supported(-Woverloaded-virtual)
 ###############################################################################################
 # Core5Compat provides QTextCodec, which decodes the Garmin codepages QStringConverter cannot.
 find_package(Qt6 6.8 REQUIRED COMPONENTS
+    Concurrent
     Core
     Core5Compat
     Help
@@ -215,6 +217,11 @@ endif()
 
 if(USE_QT6DBus)
     find_package(Qt6 REQUIRED COMPONENTS DBus)
+endif()
+
+if(BUILD_TESTING)
+    find_package(Qt6 REQUIRED COMPONENTS Test)
+    enable_testing()
 endif()
 
 # Everything included. Let's finetune the mess a bit more
@@ -301,6 +308,7 @@ add_subdirectory(src/common/svgticon)
 
 if(BUILD_QMAPSHACK)
 add_subdirectory(src/qmapshack)
+add_subdirectory(src/qms_surfacedb)
 endif(BUILD_QMAPSHACK)
 
 if(BUILD_QMAPTOOL)

@@ -66,6 +66,7 @@
 #include "tool/CImportDatabase.h"
 #include "tool/CMapVrtBuilder.h"
 #include "tool/CRoutinoDatabaseBuilder.h"
+#include "tool/CSurfaceDatabaseBuilder.h"
 #include "units/CCoordFormatSetup.h"
 #include "units/CTimeZoneSetup.h"
 #include "units/CUnitsSetup.h"
@@ -222,6 +223,7 @@ CMainWindow::CMainWindow() : id(QRandomGenerator::global()->generate()) {
   connect(actionLoadView, &QAction::triggered, this, &CMainWindow::slotLoadView);
   connect(actionClose, &QAction::triggered, this, &CMainWindow::close);
   connect(actionCreateRoutinoDatabase, &QAction::triggered, this, &CMainWindow::slotCreateRoutinoDatabase);
+  connect(actionCreateSurfaceDatabase, &QAction::triggered, this, &CMainWindow::slotCreateSurfaceDatabase);
   connect(actionPrintMap, &QAction::triggered, this, &CMainWindow::slotPrintMap);
   connect(actionTakeScreenshot, &QAction::triggered, this, &CMainWindow::slotTakeScreenshot);
   connect(actionCloseTab, &QAction::triggered, this, &CMainWindow::slotCloseTab);
@@ -458,6 +460,7 @@ CMainWindow::CMainWindow() : id(QRandomGenerator::global()->generate()) {
                       actionClose,
                       actionCloneMapView,
                       actionCreateRoutinoDatabase,
+                      actionCreateSurfaceDatabase,
                       actionPrintMap,
                       actionTakeScreenshot,
                       actionSetupCoordFormat,
@@ -1281,6 +1284,18 @@ void CMainWindow::slotCreateRoutinoDatabase() {
   addWidgetToTab(widget);
 }
 
+void CMainWindow::slotCreateSurfaceDatabase() {
+  // one tab is enough, it also lists the databases
+  for (int i = 0; i < tabWidget->count(); i++) {
+    if (dynamic_cast<CSurfaceDatabaseBuilder*>(tabWidget->widget(i)) != nullptr) {
+      tabWidget->setCurrentIndex(i);
+      return;
+    }
+  }
+  CSurfaceDatabaseBuilder* widget = new CSurfaceDatabaseBuilder(this);
+  addWidgetToTab(widget);
+}
+
 void CMainWindow::slotLoadGISData() {
   SETTINGS;
   QString path = cfg.value("Paths/lastGisPath", QDir::homePath()).toString();
@@ -1437,6 +1452,8 @@ void CMainWindow::slotLinkActivated(const QString& link) {
     slotSetupDemPath();
   } else if (link == "CreateRoutino") {
     slotCreateRoutinoDatabase();
+  } else if (link == "CreateSurface") {
+    slotCreateSurfaceDatabase();
   } else if (link == "BRouterSetup") {
     CRouterBRouter::self().slotToolSetupClicked();
   } else if (link == "LoadData") {

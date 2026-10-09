@@ -34,6 +34,12 @@ class CColorLegend : public QWidget, public INotifyTrk {
 
   void setUnit(const QString& unit);
 
+  using category_t = QPair<QColor, QString>;
+  /// show these colors with their names instead of a gradient, empty: gradient
+  void setCategories(const QList<category_t>& categories);
+  /// the categories of a categorical color source (see CKnownExtension::isCategorical())
+  static QList<category_t> categoriesOf(const QString& source);
+
   void updateData() override;
   void setMouseFocus(const CTrackData::trkpt_t* pt) override;
   void setMouseRangeFocus(const CTrackData::trkpt_t* /*pt1*/, const CTrackData::trkpt_t* /*pt2*/) override {}
@@ -45,6 +51,7 @@ class CColorLegend : public QWidget, public INotifyTrk {
 
  private:
   int paintLabel(QPainter& p, qreal value);
+  void paintCategories(QPainter& p);
 
   const int colorWidth = 18;
   const int colorHeight = 256;
@@ -57,6 +64,7 @@ class CColorLegend : public QWidget, public INotifyTrk {
   int xOffset = 1;
   CGisItemTrk* trk = nullptr;
   qreal val = NOFLOAT;
+  QList<category_t> categories;
 };
 
 #endif  // CCOLORLEGEND_H

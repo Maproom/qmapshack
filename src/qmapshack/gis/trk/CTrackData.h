@@ -160,6 +160,9 @@ class CTrackData {
     qreal slope1;                         //< the slope [°] over several points close by
     qreal slope2;                         //< the slope [%] over several points close by
     qreal speed;                          //< the speed over several points close by
+    qint8 surfaceClass = -1;              //< surface class (CSurface::class_e) from a surface database, -1: none
+    qint8 surfaceWay = -1;                //< way type (CSurface::waytype_e), -1: none
+    qint8 surfaceLabel = -1;              //< detailed surface (CSurface::label_e), -1: none
     qreal elapsedSeconds;                 //< the seconds since the start of the track
     qreal elapsedSecondsMoving;           //< the seconds since the start of the track with moving speed
     IGisItem::key_t keyWpt;               //< the key of an attached waypoint

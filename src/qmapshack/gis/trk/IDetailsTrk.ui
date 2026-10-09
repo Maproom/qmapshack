@@ -463,11 +463,21 @@
               <widget class="CPlotTrack" name="plotTrack" native="true"/>
              </item>
              <item>
-              <widget class="QTextBrowser" name="textCmtDesc">
-               <property name="openLinks">
-                <bool>false</bool>
+              <layout class="QVBoxLayout" name="layoutCmtDescSurface">
+               <property name="spacing">
+                <number>3</number>
                </property>
-              </widget>
+               <item>
+                <widget class="QTextBrowser" name="textCmtDesc">
+                 <property name="openLinks">
+                  <bool>false</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="CSurfaceWidget" name="widgetSurface" native="true"/>
+               </item>
+              </layout>
              </item>
             </layout>
            </widget>
@@ -1761,6 +1771,12 @@
    <class>CTableTrkInfo</class>
    <extends>QTreeWidget</extends>
    <header>gis/trk/CTableTrkInfo.h</header>
+  </customwidget>
+  <customwidget>
+   <class>CSurfaceWidget</class>
+   <extends>QWidget</extends>
+   <header>gis/trk/surface/CSurfaceWidget.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources>

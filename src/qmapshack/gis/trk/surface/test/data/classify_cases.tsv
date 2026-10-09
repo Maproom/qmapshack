@@ -1,0 +1,960 @@
+				verhard (aangenomen)	0	?
+	asphalt			asfalt	0	?
+	bricks			klinkers	0	?
+	chipseal			asfalt	0	?
+	cobblestone			kasseien	0	?
+	compacted			verdicht steenslag	1	?
+	concrete			beton	0	?
+	concrete:lanes			betonsporen	0	?
+	concrete:plates			betonplaten	0	?
+	dirt			aarde	2	?
+	earth			aarde	2	?
+	fine_gravel			fijn grind	1	?
+	grass			gras	2	?
+	grass_paver			grasdallen	1	?
+	gravel			grind	1	?
+	ground			natuurlijke bodem	2	?
+	metal			metaal	0	?
+	mud			modder	2	?
+	paved			verhard	0	?
+	paving_stones			klinkers	0	?
+	pebblestone			kiezel	1	?
+	rock			rots	2	?
+	sand			zand	2	?
+	sett			kasseien	0	?
+	stepping_stones			stapstenen	2	?
+	unhewn_cobblestone			kasseien	0	?
+	unpaved			onverhard	2	?
+	weird			verhard (aangenomen)	0	?
+	wood			hout	0	?
+	woodchips			houtsnippers	2	?
+bridleway				onverhard (aangenomen)	2	pad
+bridleway			crossing	onverhard (aangenomen)	2	pad
+bridleway			sidewalk	onverhard (aangenomen)	2	pad
+bridleway		grade1		onverhard (aangenomen)	2	pad
+bridleway		grade1	crossing	onverhard (aangenomen)	2	pad
+bridleway		grade1	sidewalk	onverhard (aangenomen)	2	pad
+bridleway		grade2		onverhard (aangenomen)	2	pad
+bridleway		grade2	crossing	onverhard (aangenomen)	2	pad
+bridleway		grade2	sidewalk	onverhard (aangenomen)	2	pad
+bridleway		grade3		onverhard (aangenomen)	2	pad
+bridleway		grade3	crossing	onverhard (aangenomen)	2	pad
+bridleway		grade3	sidewalk	onverhard (aangenomen)	2	pad
+bridleway		grade4		onverhard (aangenomen)	2	pad
+bridleway		grade4	crossing	onverhard (aangenomen)	2	pad
+bridleway		grade4	sidewalk	onverhard (aangenomen)	2	pad
+bridleway		grade5		onverhard (aangenomen)	2	pad
+bridleway		grade5	crossing	onverhard (aangenomen)	2	pad
+bridleway		grade5	sidewalk	onverhard (aangenomen)	2	pad
+bridleway		grade9		onverhard (aangenomen)	2	pad
+bridleway		grade9	crossing	onverhard (aangenomen)	2	pad
+bridleway		grade9	sidewalk	onverhard (aangenomen)	2	pad
+bridleway	asphalt			asfalt	0	pad
+bridleway	bricks			klinkers	0	pad
+bridleway	chipseal			asfalt	0	pad
+bridleway	cobblestone			kasseien	0	pad
+bridleway	compacted			verdicht steenslag	1	pad
+bridleway	concrete			beton	0	pad
+bridleway	concrete:lanes			betonsporen	0	pad
+bridleway	concrete:plates			betonplaten	0	pad
+bridleway	dirt			aarde	2	pad
+bridleway	earth			aarde	2	pad
+bridleway	fine_gravel			fijn grind	1	pad
+bridleway	grass			gras	2	pad
+bridleway	grass_paver			grasdallen	1	pad
+bridleway	gravel			grind	1	pad
+bridleway	gravel		crossing	grind	1	pad
+bridleway	gravel		sidewalk	grind	1	pad
+bridleway	gravel	grade1		grind	1	pad
+bridleway	gravel	grade1	crossing	grind	1	pad
+bridleway	gravel	grade1	sidewalk	grind	1	pad
+bridleway	gravel	grade2		grind	1	pad
+bridleway	gravel	grade2	crossing	grind	1	pad
+bridleway	gravel	grade2	sidewalk	grind	1	pad
+bridleway	gravel	grade3		grind	1	pad
+bridleway	gravel	grade3	crossing	grind	1	pad
+bridleway	gravel	grade3	sidewalk	grind	1	pad
+bridleway	gravel	grade4		grind	1	pad
+bridleway	gravel	grade4	crossing	grind	1	pad
+bridleway	gravel	grade4	sidewalk	grind	1	pad
+bridleway	gravel	grade5		grind	1	pad
+bridleway	gravel	grade5	crossing	grind	1	pad
+bridleway	gravel	grade5	sidewalk	grind	1	pad
+bridleway	gravel	grade9		grind	1	pad
+bridleway	gravel	grade9	crossing	grind	1	pad
+bridleway	gravel	grade9	sidewalk	grind	1	pad
+bridleway	ground			natuurlijke bodem	2	pad
+bridleway	metal			metaal	0	pad
+bridleway	mud			modder	2	pad
+bridleway	paved			verhard	0	pad
+bridleway	paving_stones			klinkers	0	pad
+bridleway	pebblestone			kiezel	1	pad
+bridleway	rock			rots	2	pad
+bridleway	sand			zand	2	pad
+bridleway	sett			kasseien	0	pad
+bridleway	stepping_stones			stapstenen	2	pad
+bridleway	unhewn_cobblestone			kasseien	0	pad
+bridleway	unpaved			onverhard	2	pad
+bridleway	weird			onverhard (aangenomen)	2	pad
+bridleway	weird		crossing	onverhard (aangenomen)	2	pad
+bridleway	weird		sidewalk	onverhard (aangenomen)	2	pad
+bridleway	weird	grade1		onverhard (aangenomen)	2	pad
+bridleway	weird	grade1	crossing	onverhard (aangenomen)	2	pad
+bridleway	weird	grade1	sidewalk	onverhard (aangenomen)	2	pad
+bridleway	weird	grade2		onverhard (aangenomen)	2	pad
+bridleway	weird	grade2	crossing	onverhard (aangenomen)	2	pad
+bridleway	weird	grade2	sidewalk	onverhard (aangenomen)	2	pad
+bridleway	weird	grade3		onverhard (aangenomen)	2	pad
+bridleway	weird	grade3	crossing	onverhard (aangenomen)	2	pad
+bridleway	weird	grade3	sidewalk	onverhard (aangenomen)	2	pad
+bridleway	weird	grade4		onverhard (aangenomen)	2	pad
+bridleway	weird	grade4	crossing	onverhard (aangenomen)	2	pad
+bridleway	weird	grade4	sidewalk	onverhard (aangenomen)	2	pad
+bridleway	weird	grade5		onverhard (aangenomen)	2	pad
+bridleway	weird	grade5	crossing	onverhard (aangenomen)	2	pad
+bridleway	weird	grade5	sidewalk	onverhard (aangenomen)	2	pad
+bridleway	weird	grade9		onverhard (aangenomen)	2	pad
+bridleway	weird	grade9	crossing	onverhard (aangenomen)	2	pad
+bridleway	weird	grade9	sidewalk	onverhard (aangenomen)	2	pad
+bridleway	wood			hout	0	pad
+bridleway	woodchips			houtsnippers	2	pad
+construction				verhard (aangenomen)	0	construction
+construction	asphalt			asfalt	0	construction
+construction	bricks			klinkers	0	construction
+construction	chipseal			asfalt	0	construction
+construction	cobblestone			kasseien	0	construction
+construction	compacted			verdicht steenslag	1	construction
+construction	concrete			beton	0	construction
+construction	concrete:lanes			betonsporen	0	construction
+construction	concrete:plates			betonplaten	0	construction
+construction	dirt			aarde	2	construction
+construction	earth			aarde	2	construction
+construction	fine_gravel			fijn grind	1	construction
+construction	grass			gras	2	construction
+construction	grass_paver			grasdallen	1	construction
+construction	gravel			grind	1	construction
+construction	ground			natuurlijke bodem	2	construction
+construction	metal			metaal	0	construction
+construction	mud			modder	2	construction
+construction	paved			verhard	0	construction
+construction	paving_stones			klinkers	0	construction
+construction	pebblestone			kiezel	1	construction
+construction	rock			rots	2	construction
+construction	sand			zand	2	construction
+construction	sett			kasseien	0	construction
+construction	stepping_stones			stapstenen	2	construction
+construction	unhewn_cobblestone			kasseien	0	construction
+construction	unpaved			onverhard	2	construction
+construction	weird			verhard (aangenomen)	0	construction
+construction	wood			hout	0	construction
+construction	woodchips			houtsnippers	2	construction
+cycleway				verhard (aangenomen)	0	fietspad
+cycleway	asphalt			asfalt	0	fietspad
+cycleway	bricks			klinkers	0	fietspad
+cycleway	chipseal			asfalt	0	fietspad
+cycleway	cobblestone			kasseien	0	fietspad
+cycleway	compacted			verdicht steenslag	1	fietspad
+cycleway	concrete			beton	0	fietspad
+cycleway	concrete:lanes			betonsporen	0	fietspad
+cycleway	concrete:plates			betonplaten	0	fietspad
+cycleway	dirt			aarde	2	fietspad
+cycleway	earth			aarde	2	fietspad
+cycleway	fine_gravel			fijn grind	1	fietspad
+cycleway	grass			gras	2	fietspad
+cycleway	grass_paver			grasdallen	1	fietspad
+cycleway	gravel			grind	1	fietspad
+cycleway	ground			natuurlijke bodem	2	fietspad
+cycleway	metal			metaal	0	fietspad
+cycleway	mud			modder	2	fietspad
+cycleway	paved			verhard	0	fietspad
+cycleway	paving_stones			klinkers	0	fietspad
+cycleway	pebblestone			kiezel	1	fietspad
+cycleway	rock			rots	2	fietspad
+cycleway	sand			zand	2	fietspad
+cycleway	sett			kasseien	0	fietspad
+cycleway	stepping_stones			stapstenen	2	fietspad
+cycleway	unhewn_cobblestone			kasseien	0	fietspad
+cycleway	unpaved			onverhard	2	fietspad
+cycleway	weird			verhard (aangenomen)	0	fietspad
+cycleway	wood			hout	0	fietspad
+cycleway	woodchips			houtsnippers	2	fietspad
+footway				onverhard (aangenomen)	2	pad
+footway			crossing	onverhard (aangenomen)	2	pad
+footway			sidewalk	verhard (aangenomen)	0	pad
+footway		grade1		onverhard (aangenomen)	2	pad
+footway		grade1	crossing	onverhard (aangenomen)	2	pad
+footway		grade1	sidewalk	verhard (aangenomen)	0	pad
+footway		grade2		onverhard (aangenomen)	2	pad
+footway		grade2	crossing	onverhard (aangenomen)	2	pad
+footway		grade2	sidewalk	verhard (aangenomen)	0	pad
+footway		grade3		onverhard (aangenomen)	2	pad
+footway		grade3	crossing	onverhard (aangenomen)	2	pad
+footway		grade3	sidewalk	verhard (aangenomen)	0	pad
+footway		grade4		onverhard (aangenomen)	2	pad
+footway		grade4	crossing	onverhard (aangenomen)	2	pad
+footway		grade4	sidewalk	verhard (aangenomen)	0	pad
+footway		grade5		onverhard (aangenomen)	2	pad
+footway		grade5	crossing	onverhard (aangenomen)	2	pad
+footway		grade5	sidewalk	verhard (aangenomen)	0	pad
+footway		grade9		onverhard (aangenomen)	2	pad
+footway		grade9	crossing	onverhard (aangenomen)	2	pad
+footway		grade9	sidewalk	verhard (aangenomen)	0	pad
+footway	asphalt			asfalt	0	pad
+footway	bricks			klinkers	0	pad
+footway	chipseal			asfalt	0	pad
+footway	cobblestone			kasseien	0	pad
+footway	compacted			verdicht steenslag	1	pad
+footway	concrete			beton	0	pad
+footway	concrete:lanes			betonsporen	0	pad
+footway	concrete:plates			betonplaten	0	pad
+footway	dirt			aarde	2	pad
+footway	earth			aarde	2	pad
+footway	fine_gravel			fijn grind	1	pad
+footway	grass			gras	2	pad
+footway	grass_paver			grasdallen	1	pad
+footway	gravel			grind	1	pad
+footway	gravel		crossing	grind	1	pad
+footway	gravel		sidewalk	grind	1	pad
+footway	gravel	grade1		grind	1	pad
+footway	gravel	grade1	crossing	grind	1	pad
+footway	gravel	grade1	sidewalk	grind	1	pad
+footway	gravel	grade2		grind	1	pad
+footway	gravel	grade2	crossing	grind	1	pad
+footway	gravel	grade2	sidewalk	grind	1	pad
+footway	gravel	grade3		grind	1	pad
+footway	gravel	grade3	crossing	grind	1	pad
+footway	gravel	grade3	sidewalk	grind	1	pad
+footway	gravel	grade4		grind	1	pad
+footway	gravel	grade4	crossing	grind	1	pad
+footway	gravel	grade4	sidewalk	grind	1	pad
+footway	gravel	grade5		grind	1	pad
+footway	gravel	grade5	crossing	grind	1	pad
+footway	gravel	grade5	sidewalk	grind	1	pad
+footway	gravel	grade9		grind	1	pad
+footway	gravel	grade9	crossing	grind	1	pad
+footway	gravel	grade9	sidewalk	grind	1	pad
+footway	ground			natuurlijke bodem	2	pad
+footway	metal			metaal	0	pad
+footway	mud			modder	2	pad
+footway	paved			verhard	0	pad
+footway	paving_stones			klinkers	0	pad
+footway	pebblestone			kiezel	1	pad
+footway	rock			rots	2	pad
+footway	sand			zand	2	pad
+footway	sett			kasseien	0	pad
+footway	stepping_stones			stapstenen	2	pad
+footway	unhewn_cobblestone			kasseien	0	pad
+footway	unpaved			onverhard	2	pad
+footway	weird			onverhard (aangenomen)	2	pad
+footway	weird		crossing	onverhard (aangenomen)	2	pad
+footway	weird		sidewalk	verhard (aangenomen)	0	pad
+footway	weird	grade1		onverhard (aangenomen)	2	pad
+footway	weird	grade1	crossing	onverhard (aangenomen)	2	pad
+footway	weird	grade1	sidewalk	verhard (aangenomen)	0	pad
+footway	weird	grade2		onverhard (aangenomen)	2	pad
+footway	weird	grade2	crossing	onverhard (aangenomen)	2	pad
+footway	weird	grade2	sidewalk	verhard (aangenomen)	0	pad
+footway	weird	grade3		onverhard (aangenomen)	2	pad
+footway	weird	grade3	crossing	onverhard (aangenomen)	2	pad
+footway	weird	grade3	sidewalk	verhard (aangenomen)	0	pad
+footway	weird	grade4		onverhard (aangenomen)	2	pad
+footway	weird	grade4	crossing	onverhard (aangenomen)	2	pad
+footway	weird	grade4	sidewalk	verhard (aangenomen)	0	pad
+footway	weird	grade5		onverhard (aangenomen)	2	pad
+footway	weird	grade5	crossing	onverhard (aangenomen)	2	pad
+footway	weird	grade5	sidewalk	verhard (aangenomen)	0	pad
+footway	weird	grade9		onverhard (aangenomen)	2	pad
+footway	weird	grade9	crossing	onverhard (aangenomen)	2	pad
+footway	weird	grade9	sidewalk	verhard (aangenomen)	0	pad
+footway	wood			hout	0	pad
+footway	woodchips			houtsnippers	2	pad
+living_street				verhard (aangenomen)	0	straat
+living_street	asphalt			asfalt	0	straat
+living_street	bricks			klinkers	0	straat
+living_street	chipseal			asfalt	0	straat
+living_street	cobblestone			kasseien	0	straat
+living_street	compacted			verdicht steenslag	1	straat
+living_street	concrete			beton	0	straat
+living_street	concrete:lanes			betonsporen	0	straat
+living_street	concrete:plates			betonplaten	0	straat
+living_street	dirt			aarde	2	straat
+living_street	earth			aarde	2	straat
+living_street	fine_gravel			fijn grind	1	straat
+living_street	grass			gras	2	straat
+living_street	grass_paver			grasdallen	1	straat
+living_street	gravel			grind	1	straat
+living_street	ground			natuurlijke bodem	2	straat
+living_street	metal			metaal	0	straat
+living_street	mud			modder	2	straat
+living_street	paved			verhard	0	straat
+living_street	paving_stones			klinkers	0	straat
+living_street	pebblestone			kiezel	1	straat
+living_street	rock			rots	2	straat
+living_street	sand			zand	2	straat
+living_street	sett			kasseien	0	straat
+living_street	stepping_stones			stapstenen	2	straat
+living_street	unhewn_cobblestone			kasseien	0	straat
+living_street	unpaved			onverhard	2	straat
+living_street	weird			verhard (aangenomen)	0	straat
+living_street	wood			hout	0	straat
+living_street	woodchips			houtsnippers	2	straat
+motorway				verhard (aangenomen)	0	motorway
+motorway	asphalt			asfalt	0	motorway
+motorway	bricks			klinkers	0	motorway
+motorway	chipseal			asfalt	0	motorway
+motorway	cobblestone			kasseien	0	motorway
+motorway	compacted			verdicht steenslag	1	motorway
+motorway	concrete			beton	0	motorway
+motorway	concrete:lanes			betonsporen	0	motorway
+motorway	concrete:plates			betonplaten	0	motorway
+motorway	dirt			aarde	2	motorway
+motorway	earth			aarde	2	motorway
+motorway	fine_gravel			fijn grind	1	motorway
+motorway	grass			gras	2	motorway
+motorway	grass_paver			grasdallen	1	motorway
+motorway	gravel			grind	1	motorway
+motorway	ground			natuurlijke bodem	2	motorway
+motorway	metal			metaal	0	motorway
+motorway	mud			modder	2	motorway
+motorway	paved			verhard	0	motorway
+motorway	paving_stones			klinkers	0	motorway
+motorway	pebblestone			kiezel	1	motorway
+motorway	rock			rots	2	motorway
+motorway	sand			zand	2	motorway
+motorway	sett			kasseien	0	motorway
+motorway	stepping_stones			stapstenen	2	motorway
+motorway	unhewn_cobblestone			kasseien	0	motorway
+motorway	unpaved			onverhard	2	motorway
+motorway	weird			verhard (aangenomen)	0	motorway
+motorway	wood			hout	0	motorway
+motorway	woodchips			houtsnippers	2	motorway
+path				onverhard (aangenomen)	2	pad
+path			crossing	onverhard (aangenomen)	2	pad
+path			sidewalk	onverhard (aangenomen)	2	pad
+path		grade1		onverhard (aangenomen)	2	pad
+path		grade1	crossing	onverhard (aangenomen)	2	pad
+path		grade1	sidewalk	onverhard (aangenomen)	2	pad
+path		grade2		onverhard (aangenomen)	2	pad
+path		grade2	crossing	onverhard (aangenomen)	2	pad
+path		grade2	sidewalk	onverhard (aangenomen)	2	pad
+path		grade3		onverhard (aangenomen)	2	pad
+path		grade3	crossing	onverhard (aangenomen)	2	pad
+path		grade3	sidewalk	onverhard (aangenomen)	2	pad
+path		grade4		onverhard (aangenomen)	2	pad
+path		grade4	crossing	onverhard (aangenomen)	2	pad
+path		grade4	sidewalk	onverhard (aangenomen)	2	pad
+path		grade5		onverhard (aangenomen)	2	pad
+path		grade5	crossing	onverhard (aangenomen)	2	pad
+path		grade5	sidewalk	onverhard (aangenomen)	2	pad
+path		grade9		onverhard (aangenomen)	2	pad
+path		grade9	crossing	onverhard (aangenomen)	2	pad
+path		grade9	sidewalk	onverhard (aangenomen)	2	pad
+path	asphalt			asfalt	0	pad
+path	bricks			klinkers	0	pad
+path	chipseal			asfalt	0	pad
+path	cobblestone			kasseien	0	pad
+path	compacted			verdicht steenslag	1	pad
+path	concrete			beton	0	pad
+path	concrete:lanes			betonsporen	0	pad
+path	concrete:plates			betonplaten	0	pad
+path	dirt			aarde	2	pad
+path	earth			aarde	2	pad
+path	fine_gravel			fijn grind	1	pad
+path	grass			gras	2	pad
+path	grass_paver			grasdallen	1	pad
+path	gravel			grind	1	pad
+path	gravel		crossing	grind	1	pad
+path	gravel		sidewalk	grind	1	pad
+path	gravel	grade1		grind	1	pad
+path	gravel	grade1	crossing	grind	1	pad
+path	gravel	grade1	sidewalk	grind	1	pad
+path	gravel	grade2		grind	1	pad
+path	gravel	grade2	crossing	grind	1	pad
+path	gravel	grade2	sidewalk	grind	1	pad
+path	gravel	grade3		grind	1	pad
+path	gravel	grade3	crossing	grind	1	pad
+path	gravel	grade3	sidewalk	grind	1	pad
+path	gravel	grade4		grind	1	pad
+path	gravel	grade4	crossing	grind	1	pad
+path	gravel	grade4	sidewalk	grind	1	pad
+path	gravel	grade5		grind	1	pad
+path	gravel	grade5	crossing	grind	1	pad
+path	gravel	grade5	sidewalk	grind	1	pad
+path	gravel	grade9		grind	1	pad
+path	gravel	grade9	crossing	grind	1	pad
+path	gravel	grade9	sidewalk	grind	1	pad
+path	ground			natuurlijke bodem	2	pad
+path	metal			metaal	0	pad
+path	mud			modder	2	pad
+path	paved			verhard	0	pad
+path	paving_stones			klinkers	0	pad
+path	pebblestone			kiezel	1	pad
+path	rock			rots	2	pad
+path	sand			zand	2	pad
+path	sett			kasseien	0	pad
+path	stepping_stones			stapstenen	2	pad
+path	unhewn_cobblestone			kasseien	0	pad
+path	unpaved			onverhard	2	pad
+path	weird			onverhard (aangenomen)	2	pad
+path	weird		crossing	onverhard (aangenomen)	2	pad
+path	weird		sidewalk	onverhard (aangenomen)	2	pad
+path	weird	grade1		onverhard (aangenomen)	2	pad
+path	weird	grade1	crossing	onverhard (aangenomen)	2	pad
+path	weird	grade1	sidewalk	onverhard (aangenomen)	2	pad
+path	weird	grade2		onverhard (aangenomen)	2	pad
+path	weird	grade2	crossing	onverhard (aangenomen)	2	pad
+path	weird	grade2	sidewalk	onverhard (aangenomen)	2	pad
+path	weird	grade3		onverhard (aangenomen)	2	pad
+path	weird	grade3	crossing	onverhard (aangenomen)	2	pad
+path	weird	grade3	sidewalk	onverhard (aangenomen)	2	pad
+path	weird	grade4		onverhard (aangenomen)	2	pad
+path	weird	grade4	crossing	onverhard (aangenomen)	2	pad
+path	weird	grade4	sidewalk	onverhard (aangenomen)	2	pad
+path	weird	grade5		onverhard (aangenomen)	2	pad
+path	weird	grade5	crossing	onverhard (aangenomen)	2	pad
+path	weird	grade5	sidewalk	onverhard (aangenomen)	2	pad
+path	weird	grade9		onverhard (aangenomen)	2	pad
+path	weird	grade9	crossing	onverhard (aangenomen)	2	pad
+path	weird	grade9	sidewalk	onverhard (aangenomen)	2	pad
+path	wood			hout	0	pad
+path	woodchips			houtsnippers	2	pad
+pedestrian				verhard (aangenomen)	0	straat
+pedestrian	asphalt			asfalt	0	straat
+pedestrian	bricks			klinkers	0	straat
+pedestrian	chipseal			asfalt	0	straat
+pedestrian	cobblestone			kasseien	0	straat
+pedestrian	compacted			verdicht steenslag	1	straat
+pedestrian	concrete			beton	0	straat
+pedestrian	concrete:lanes			betonsporen	0	straat
+pedestrian	concrete:plates			betonplaten	0	straat
+pedestrian	dirt			aarde	2	straat
+pedestrian	earth			aarde	2	straat
+pedestrian	fine_gravel			fijn grind	1	straat
+pedestrian	grass			gras	2	straat
+pedestrian	grass_paver			grasdallen	1	straat
+pedestrian	gravel			grind	1	straat
+pedestrian	ground			natuurlijke bodem	2	straat
+pedestrian	metal			metaal	0	straat
+pedestrian	mud			modder	2	straat
+pedestrian	paved			verhard	0	straat
+pedestrian	paving_stones			klinkers	0	straat
+pedestrian	pebblestone			kiezel	1	straat
+pedestrian	rock			rots	2	straat
+pedestrian	sand			zand	2	straat
+pedestrian	sett			kasseien	0	straat
+pedestrian	stepping_stones			stapstenen	2	straat
+pedestrian	unhewn_cobblestone			kasseien	0	straat
+pedestrian	unpaved			onverhard	2	straat
+pedestrian	weird			verhard (aangenomen)	0	straat
+pedestrian	wood			hout	0	straat
+pedestrian	woodchips			houtsnippers	2	straat
+platform				verhard (aangenomen)	0	platform
+platform	asphalt			asfalt	0	platform
+platform	bricks			klinkers	0	platform
+platform	chipseal			asfalt	0	platform
+platform	cobblestone			kasseien	0	platform
+platform	compacted			verdicht steenslag	1	platform
+platform	concrete			beton	0	platform
+platform	concrete:lanes			betonsporen	0	platform
+platform	concrete:plates			betonplaten	0	platform
+platform	dirt			aarde	2	platform
+platform	earth			aarde	2	platform
+platform	fine_gravel			fijn grind	1	platform
+platform	grass			gras	2	platform
+platform	grass_paver			grasdallen	1	platform
+platform	gravel			grind	1	platform
+platform	ground			natuurlijke bodem	2	platform
+platform	metal			metaal	0	platform
+platform	mud			modder	2	platform
+platform	paved			verhard	0	platform
+platform	paving_stones			klinkers	0	platform
+platform	pebblestone			kiezel	1	platform
+platform	rock			rots	2	platform
+platform	sand			zand	2	platform
+platform	sett			kasseien	0	platform
+platform	stepping_stones			stapstenen	2	platform
+platform	unhewn_cobblestone			kasseien	0	platform
+platform	unpaved			onverhard	2	platform
+platform	weird			verhard (aangenomen)	0	platform
+platform	wood			hout	0	platform
+platform	woodchips			houtsnippers	2	platform
+primary				verhard (aangenomen)	0	drukke weg
+primary	asphalt			asfalt	0	drukke weg
+primary	bricks			klinkers	0	drukke weg
+primary	chipseal			asfalt	0	drukke weg
+primary	cobblestone			kasseien	0	drukke weg
+primary	compacted			verdicht steenslag	1	drukke weg
+primary	concrete			beton	0	drukke weg
+primary	concrete:lanes			betonsporen	0	drukke weg
+primary	concrete:plates			betonplaten	0	drukke weg
+primary	dirt			aarde	2	drukke weg
+primary	earth			aarde	2	drukke weg
+primary	fine_gravel			fijn grind	1	drukke weg
+primary	grass			gras	2	drukke weg
+primary	grass_paver			grasdallen	1	drukke weg
+primary	gravel			grind	1	drukke weg
+primary	ground			natuurlijke bodem	2	drukke weg
+primary	metal			metaal	0	drukke weg
+primary	mud			modder	2	drukke weg
+primary	paved			verhard	0	drukke weg
+primary	paving_stones			klinkers	0	drukke weg
+primary	pebblestone			kiezel	1	drukke weg
+primary	rock			rots	2	drukke weg
+primary	sand			zand	2	drukke weg
+primary	sett			kasseien	0	drukke weg
+primary	stepping_stones			stapstenen	2	drukke weg
+primary	unhewn_cobblestone			kasseien	0	drukke weg
+primary	unpaved			onverhard	2	drukke weg
+primary	weird			verhard (aangenomen)	0	drukke weg
+primary	wood			hout	0	drukke weg
+primary	woodchips			houtsnippers	2	drukke weg
+primary_link				verhard (aangenomen)	0	drukke weg
+primary_link	asphalt			asfalt	0	drukke weg
+primary_link	bricks			klinkers	0	drukke weg
+primary_link	chipseal			asfalt	0	drukke weg
+primary_link	cobblestone			kasseien	0	drukke weg
+primary_link	compacted			verdicht steenslag	1	drukke weg
+primary_link	concrete			beton	0	drukke weg
+primary_link	concrete:lanes			betonsporen	0	drukke weg
+primary_link	concrete:plates			betonplaten	0	drukke weg
+primary_link	dirt			aarde	2	drukke weg
+primary_link	earth			aarde	2	drukke weg
+primary_link	fine_gravel			fijn grind	1	drukke weg
+primary_link	grass			gras	2	drukke weg
+primary_link	grass_paver			grasdallen	1	drukke weg
+primary_link	gravel			grind	1	drukke weg
+primary_link	ground			natuurlijke bodem	2	drukke weg
+primary_link	metal			metaal	0	drukke weg
+primary_link	mud			modder	2	drukke weg
+primary_link	paved			verhard	0	drukke weg
+primary_link	paving_stones			klinkers	0	drukke weg
+primary_link	pebblestone			kiezel	1	drukke weg
+primary_link	rock			rots	2	drukke weg
+primary_link	sand			zand	2	drukke weg
+primary_link	sett			kasseien	0	drukke weg
+primary_link	stepping_stones			stapstenen	2	drukke weg
+primary_link	unhewn_cobblestone			kasseien	0	drukke weg
+primary_link	unpaved			onverhard	2	drukke weg
+primary_link	weird			verhard (aangenomen)	0	drukke weg
+primary_link	wood			hout	0	drukke weg
+primary_link	woodchips			houtsnippers	2	drukke weg
+residential				verhard (aangenomen)	0	straat
+residential			crossing	verhard (aangenomen)	0	straat
+residential			sidewalk	verhard (aangenomen)	0	straat
+residential		grade1		verhard (aangenomen)	0	straat
+residential		grade1	crossing	verhard (aangenomen)	0	straat
+residential		grade1	sidewalk	verhard (aangenomen)	0	straat
+residential		grade2		verhard (aangenomen)	0	straat
+residential		grade2	crossing	verhard (aangenomen)	0	straat
+residential		grade2	sidewalk	verhard (aangenomen)	0	straat
+residential		grade3		verhard (aangenomen)	0	straat
+residential		grade3	crossing	verhard (aangenomen)	0	straat
+residential		grade3	sidewalk	verhard (aangenomen)	0	straat
+residential		grade4		verhard (aangenomen)	0	straat
+residential		grade4	crossing	verhard (aangenomen)	0	straat
+residential		grade4	sidewalk	verhard (aangenomen)	0	straat
+residential		grade5		verhard (aangenomen)	0	straat
+residential		grade5	crossing	verhard (aangenomen)	0	straat
+residential		grade5	sidewalk	verhard (aangenomen)	0	straat
+residential		grade9		verhard (aangenomen)	0	straat
+residential		grade9	crossing	verhard (aangenomen)	0	straat
+residential		grade9	sidewalk	verhard (aangenomen)	0	straat
+residential	asphalt			asfalt	0	straat
+residential	bricks			klinkers	0	straat
+residential	chipseal			asfalt	0	straat
+residential	cobblestone			kasseien	0	straat
+residential	compacted			verdicht steenslag	1	straat
+residential	concrete			beton	0	straat
+residential	concrete:lanes			betonsporen	0	straat
+residential	concrete:plates			betonplaten	0	straat
+residential	dirt			aarde	2	straat
+residential	earth			aarde	2	straat
+residential	fine_gravel			fijn grind	1	straat
+residential	grass			gras	2	straat
+residential	grass_paver			grasdallen	1	straat
+residential	gravel			grind	1	straat
+residential	gravel		crossing	grind	1	straat
+residential	gravel		sidewalk	grind	1	straat
+residential	gravel	grade1		grind	1	straat
+residential	gravel	grade1	crossing	grind	1	straat
+residential	gravel	grade1	sidewalk	grind	1	straat
+residential	gravel	grade2		grind	1	straat
+residential	gravel	grade2	crossing	grind	1	straat
+residential	gravel	grade2	sidewalk	grind	1	straat
+residential	gravel	grade3		grind	1	straat
+residential	gravel	grade3	crossing	grind	1	straat
+residential	gravel	grade3	sidewalk	grind	1	straat
+residential	gravel	grade4		grind	1	straat
+residential	gravel	grade4	crossing	grind	1	straat
+residential	gravel	grade4	sidewalk	grind	1	straat
+residential	gravel	grade5		grind	1	straat
+residential	gravel	grade5	crossing	grind	1	straat
+residential	gravel	grade5	sidewalk	grind	1	straat
+residential	gravel	grade9		grind	1	straat
+residential	gravel	grade9	crossing	grind	1	straat
+residential	gravel	grade9	sidewalk	grind	1	straat
+residential	ground			natuurlijke bodem	2	straat
+residential	metal			metaal	0	straat
+residential	mud			modder	2	straat
+residential	paved			verhard	0	straat
+residential	paving_stones			klinkers	0	straat
+residential	pebblestone			kiezel	1	straat
+residential	rock			rots	2	straat
+residential	sand			zand	2	straat
+residential	sett			kasseien	0	straat
+residential	stepping_stones			stapstenen	2	straat
+residential	unhewn_cobblestone			kasseien	0	straat
+residential	unpaved			onverhard	2	straat
+residential	weird			verhard (aangenomen)	0	straat
+residential	weird		crossing	verhard (aangenomen)	0	straat
+residential	weird		sidewalk	verhard (aangenomen)	0	straat
+residential	weird	grade1		verhard (aangenomen)	0	straat
+residential	weird	grade1	crossing	verhard (aangenomen)	0	straat
+residential	weird	grade1	sidewalk	verhard (aangenomen)	0	straat
+residential	weird	grade2		verhard (aangenomen)	0	straat
+residential	weird	grade2	crossing	verhard (aangenomen)	0	straat
+residential	weird	grade2	sidewalk	verhard (aangenomen)	0	straat
+residential	weird	grade3		verhard (aangenomen)	0	straat
+residential	weird	grade3	crossing	verhard (aangenomen)	0	straat
+residential	weird	grade3	sidewalk	verhard (aangenomen)	0	straat
+residential	weird	grade4		verhard (aangenomen)	0	straat
+residential	weird	grade4	crossing	verhard (aangenomen)	0	straat
+residential	weird	grade4	sidewalk	verhard (aangenomen)	0	straat
+residential	weird	grade5		verhard (aangenomen)	0	straat
+residential	weird	grade5	crossing	verhard (aangenomen)	0	straat
+residential	weird	grade5	sidewalk	verhard (aangenomen)	0	straat
+residential	weird	grade9		verhard (aangenomen)	0	straat
+residential	weird	grade9	crossing	verhard (aangenomen)	0	straat
+residential	weird	grade9	sidewalk	verhard (aangenomen)	0	straat
+residential	wood			hout	0	straat
+residential	woodchips			houtsnippers	2	straat
+secondary				verhard (aangenomen)	0	drukke weg
+secondary	asphalt			asfalt	0	drukke weg
+secondary	bricks			klinkers	0	drukke weg
+secondary	chipseal			asfalt	0	drukke weg
+secondary	cobblestone			kasseien	0	drukke weg
+secondary	compacted			verdicht steenslag	1	drukke weg
+secondary	concrete			beton	0	drukke weg
+secondary	concrete:lanes			betonsporen	0	drukke weg
+secondary	concrete:plates			betonplaten	0	drukke weg
+secondary	dirt			aarde	2	drukke weg
+secondary	earth			aarde	2	drukke weg
+secondary	fine_gravel			fijn grind	1	drukke weg
+secondary	grass			gras	2	drukke weg
+secondary	grass_paver			grasdallen	1	drukke weg
+secondary	gravel			grind	1	drukke weg
+secondary	ground			natuurlijke bodem	2	drukke weg
+secondary	metal			metaal	0	drukke weg
+secondary	mud			modder	2	drukke weg
+secondary	paved			verhard	0	drukke weg
+secondary	paving_stones			klinkers	0	drukke weg
+secondary	pebblestone			kiezel	1	drukke weg
+secondary	rock			rots	2	drukke weg
+secondary	sand			zand	2	drukke weg
+secondary	sett			kasseien	0	drukke weg
+secondary	stepping_stones			stapstenen	2	drukke weg
+secondary	unhewn_cobblestone			kasseien	0	drukke weg
+secondary	unpaved			onverhard	2	drukke weg
+secondary	weird			verhard (aangenomen)	0	drukke weg
+secondary	wood			hout	0	drukke weg
+secondary	woodchips			houtsnippers	2	drukke weg
+secondary_link				verhard (aangenomen)	0	drukke weg
+secondary_link	asphalt			asfalt	0	drukke weg
+secondary_link	bricks			klinkers	0	drukke weg
+secondary_link	chipseal			asfalt	0	drukke weg
+secondary_link	cobblestone			kasseien	0	drukke weg
+secondary_link	compacted			verdicht steenslag	1	drukke weg
+secondary_link	concrete			beton	0	drukke weg
+secondary_link	concrete:lanes			betonsporen	0	drukke weg
+secondary_link	concrete:plates			betonplaten	0	drukke weg
+secondary_link	dirt			aarde	2	drukke weg
+secondary_link	earth			aarde	2	drukke weg
+secondary_link	fine_gravel			fijn grind	1	drukke weg
+secondary_link	grass			gras	2	drukke weg
+secondary_link	grass_paver			grasdallen	1	drukke weg
+secondary_link	gravel			grind	1	drukke weg
+secondary_link	ground			natuurlijke bodem	2	drukke weg
+secondary_link	metal			metaal	0	drukke weg
+secondary_link	mud			modder	2	drukke weg
+secondary_link	paved			verhard	0	drukke weg
+secondary_link	paving_stones			klinkers	0	drukke weg
+secondary_link	pebblestone			kiezel	1	drukke weg
+secondary_link	rock			rots	2	drukke weg
+secondary_link	sand			zand	2	drukke weg
+secondary_link	sett			kasseien	0	drukke weg
+secondary_link	stepping_stones			stapstenen	2	drukke weg
+secondary_link	unhewn_cobblestone			kasseien	0	drukke weg
+secondary_link	unpaved			onverhard	2	drukke weg
+secondary_link	weird			verhard (aangenomen)	0	drukke weg
+secondary_link	wood			hout	0	drukke weg
+secondary_link	woodchips			houtsnippers	2	drukke weg
+service				verhard (aangenomen)	0	weg
+service	asphalt			asfalt	0	weg
+service	bricks			klinkers	0	weg
+service	chipseal			asfalt	0	weg
+service	cobblestone			kasseien	0	weg
+service	compacted			verdicht steenslag	1	weg
+service	concrete			beton	0	weg
+service	concrete:lanes			betonsporen	0	weg
+service	concrete:plates			betonplaten	0	weg
+service	dirt			aarde	2	weg
+service	earth			aarde	2	weg
+service	fine_gravel			fijn grind	1	weg
+service	grass			gras	2	weg
+service	grass_paver			grasdallen	1	weg
+service	gravel			grind	1	weg
+service	ground			natuurlijke bodem	2	weg
+service	metal			metaal	0	weg
+service	mud			modder	2	weg
+service	paved			verhard	0	weg
+service	paving_stones			klinkers	0	weg
+service	pebblestone			kiezel	1	weg
+service	rock			rots	2	weg
+service	sand			zand	2	weg
+service	sett			kasseien	0	weg
+service	stepping_stones			stapstenen	2	weg
+service	unhewn_cobblestone			kasseien	0	weg
+service	unpaved			onverhard	2	weg
+service	weird			verhard (aangenomen)	0	weg
+service	wood			hout	0	weg
+service	woodchips			houtsnippers	2	weg
+steps				verhard (aangenomen)	0	trap
+steps	asphalt			asfalt	0	trap
+steps	bricks			klinkers	0	trap
+steps	chipseal			asfalt	0	trap
+steps	cobblestone			kasseien	0	trap
+steps	compacted			verdicht steenslag	1	trap
+steps	concrete			beton	0	trap
+steps	concrete:lanes			betonsporen	0	trap
+steps	concrete:plates			betonplaten	0	trap
+steps	dirt			aarde	2	trap
+steps	earth			aarde	2	trap
+steps	fine_gravel			fijn grind	1	trap
+steps	grass			gras	2	trap
+steps	grass_paver			grasdallen	1	trap
+steps	gravel			grind	1	trap
+steps	ground			natuurlijke bodem	2	trap
+steps	metal			metaal	0	trap
+steps	mud			modder	2	trap
+steps	paved			verhard	0	trap
+steps	paving_stones			klinkers	0	trap
+steps	pebblestone			kiezel	1	trap
+steps	rock			rots	2	trap
+steps	sand			zand	2	trap
+steps	sett			kasseien	0	trap
+steps	stepping_stones			stapstenen	2	trap
+steps	unhewn_cobblestone			kasseien	0	trap
+steps	unpaved			onverhard	2	trap
+steps	weird			verhard (aangenomen)	0	trap
+steps	wood			hout	0	trap
+steps	woodchips			houtsnippers	2	trap
+tertiary				verhard (aangenomen)	0	weg
+tertiary	asphalt			asfalt	0	weg
+tertiary	bricks			klinkers	0	weg
+tertiary	chipseal			asfalt	0	weg
+tertiary	cobblestone			kasseien	0	weg
+tertiary	compacted			verdicht steenslag	1	weg
+tertiary	concrete			beton	0	weg
+tertiary	concrete:lanes			betonsporen	0	weg
+tertiary	concrete:plates			betonplaten	0	weg
+tertiary	dirt			aarde	2	weg
+tertiary	earth			aarde	2	weg
+tertiary	fine_gravel			fijn grind	1	weg
+tertiary	grass			gras	2	weg
+tertiary	grass_paver			grasdallen	1	weg
+tertiary	gravel			grind	1	weg
+tertiary	ground			natuurlijke bodem	2	weg
+tertiary	metal			metaal	0	weg
+tertiary	mud			modder	2	weg
+tertiary	paved			verhard	0	weg
+tertiary	paving_stones			klinkers	0	weg
+tertiary	pebblestone			kiezel	1	weg
+tertiary	rock			rots	2	weg
+tertiary	sand			zand	2	weg
+tertiary	sett			kasseien	0	weg
+tertiary	stepping_stones			stapstenen	2	weg
+tertiary	unhewn_cobblestone			kasseien	0	weg
+tertiary	unpaved			onverhard	2	weg
+tertiary	weird			verhard (aangenomen)	0	weg
+tertiary	wood			hout	0	weg
+tertiary	woodchips			houtsnippers	2	weg
+tertiary_link				verhard (aangenomen)	0	weg
+tertiary_link	asphalt			asfalt	0	weg
+tertiary_link	bricks			klinkers	0	weg
+tertiary_link	chipseal			asfalt	0	weg
+tertiary_link	cobblestone			kasseien	0	weg
+tertiary_link	compacted			verdicht steenslag	1	weg
+tertiary_link	concrete			beton	0	weg
+tertiary_link	concrete:lanes			betonsporen	0	weg
+tertiary_link	concrete:plates			betonplaten	0	weg
+tertiary_link	dirt			aarde	2	weg
+tertiary_link	earth			aarde	2	weg
+tertiary_link	fine_gravel			fijn grind	1	weg
+tertiary_link	grass			gras	2	weg
+tertiary_link	grass_paver			grasdallen	1	weg
+tertiary_link	gravel			grind	1	weg
+tertiary_link	ground			natuurlijke bodem	2	weg
+tertiary_link	metal			metaal	0	weg
+tertiary_link	mud			modder	2	weg
+tertiary_link	paved			verhard	0	weg
+tertiary_link	paving_stones			klinkers	0	weg
+tertiary_link	pebblestone			kiezel	1	weg
+tertiary_link	rock			rots	2	weg
+tertiary_link	sand			zand	2	weg
+tertiary_link	sett			kasseien	0	weg
+tertiary_link	stepping_stones			stapstenen	2	weg
+tertiary_link	unhewn_cobblestone			kasseien	0	weg
+tertiary_link	unpaved			onverhard	2	weg
+tertiary_link	weird			verhard (aangenomen)	0	weg
+tertiary_link	wood			hout	0	weg
+tertiary_link	woodchips			houtsnippers	2	weg
+track				onbekend	3	bos-/veldweg
+track			crossing	onbekend	3	bos-/veldweg
+track			sidewalk	onbekend	3	bos-/veldweg
+track		grade1		verhard	0	bos-/veldweg
+track		grade1	crossing	verhard	0	bos-/veldweg
+track		grade1	sidewalk	verhard	0	bos-/veldweg
+track		grade2		halfverhard	1	bos-/veldweg
+track		grade2	crossing	halfverhard	1	bos-/veldweg
+track		grade2	sidewalk	halfverhard	1	bos-/veldweg
+track		grade3		onverhard	2	bos-/veldweg
+track		grade3	crossing	onverhard	2	bos-/veldweg
+track		grade3	sidewalk	onverhard	2	bos-/veldweg
+track		grade4		onverhard	2	bos-/veldweg
+track		grade4	crossing	onverhard	2	bos-/veldweg
+track		grade4	sidewalk	onverhard	2	bos-/veldweg
+track		grade5		onverhard	2	bos-/veldweg
+track		grade5	crossing	onverhard	2	bos-/veldweg
+track		grade5	sidewalk	onverhard	2	bos-/veldweg
+track		grade9		onbekend	3	bos-/veldweg
+track		grade9	crossing	onbekend	3	bos-/veldweg
+track		grade9	sidewalk	onbekend	3	bos-/veldweg
+track	asphalt			asfalt	0	bos-/veldweg
+track	bricks			klinkers	0	bos-/veldweg
+track	chipseal			asfalt	0	bos-/veldweg
+track	cobblestone			kasseien	0	bos-/veldweg
+track	compacted			verdicht steenslag	1	bos-/veldweg
+track	concrete			beton	0	bos-/veldweg
+track	concrete:lanes			betonsporen	0	bos-/veldweg
+track	concrete:plates			betonplaten	0	bos-/veldweg
+track	dirt			aarde	2	bos-/veldweg
+track	earth			aarde	2	bos-/veldweg
+track	fine_gravel			fijn grind	1	bos-/veldweg
+track	grass			gras	2	bos-/veldweg
+track	grass_paver			grasdallen	1	bos-/veldweg
+track	gravel			grind	1	bos-/veldweg
+track	gravel		crossing	grind	1	bos-/veldweg
+track	gravel		sidewalk	grind	1	bos-/veldweg
+track	gravel	grade1		grind	1	bos-/veldweg
+track	gravel	grade1	crossing	grind	1	bos-/veldweg
+track	gravel	grade1	sidewalk	grind	1	bos-/veldweg
+track	gravel	grade2		grind	1	bos-/veldweg
+track	gravel	grade2	crossing	grind	1	bos-/veldweg
+track	gravel	grade2	sidewalk	grind	1	bos-/veldweg
+track	gravel	grade3		grind	1	bos-/veldweg
+track	gravel	grade3	crossing	grind	1	bos-/veldweg
+track	gravel	grade3	sidewalk	grind	1	bos-/veldweg
+track	gravel	grade4		grind	1	bos-/veldweg
+track	gravel	grade4	crossing	grind	1	bos-/veldweg
+track	gravel	grade4	sidewalk	grind	1	bos-/veldweg
+track	gravel	grade5		grind	1	bos-/veldweg
+track	gravel	grade5	crossing	grind	1	bos-/veldweg
+track	gravel	grade5	sidewalk	grind	1	bos-/veldweg
+track	gravel	grade9		grind	1	bos-/veldweg
+track	gravel	grade9	crossing	grind	1	bos-/veldweg
+track	gravel	grade9	sidewalk	grind	1	bos-/veldweg
+track	ground			natuurlijke bodem	2	bos-/veldweg
+track	metal			metaal	0	bos-/veldweg
+track	mud			modder	2	bos-/veldweg
+track	paved			verhard	0	bos-/veldweg
+track	paving_stones			klinkers	0	bos-/veldweg
+track	pebblestone			kiezel	1	bos-/veldweg
+track	rock			rots	2	bos-/veldweg
+track	sand			zand	2	bos-/veldweg
+track	sett			kasseien	0	bos-/veldweg
+track	stepping_stones			stapstenen	2	bos-/veldweg
+track	unhewn_cobblestone			kasseien	0	bos-/veldweg
+track	unpaved			onverhard	2	bos-/veldweg
+track	weird			onbekend	3	bos-/veldweg
+track	weird		crossing	onbekend	3	bos-/veldweg
+track	weird		sidewalk	onbekend	3	bos-/veldweg
+track	weird	grade1		verhard	0	bos-/veldweg
+track	weird	grade1	crossing	verhard	0	bos-/veldweg
+track	weird	grade1	sidewalk	verhard	0	bos-/veldweg
+track	weird	grade2		halfverhard	1	bos-/veldweg
+track	weird	grade2	crossing	halfverhard	1	bos-/veldweg
+track	weird	grade2	sidewalk	halfverhard	1	bos-/veldweg
+track	weird	grade3		onverhard	2	bos-/veldweg
+track	weird	grade3	crossing	onverhard	2	bos-/veldweg
+track	weird	grade3	sidewalk	onverhard	2	bos-/veldweg
+track	weird	grade4		onverhard	2	bos-/veldweg
+track	weird	grade4	crossing	onverhard	2	bos-/veldweg
+track	weird	grade4	sidewalk	onverhard	2	bos-/veldweg
+track	weird	grade5		onverhard	2	bos-/veldweg
+track	weird	grade5	crossing	onverhard	2	bos-/veldweg
+track	weird	grade5	sidewalk	onverhard	2	bos-/veldweg
+track	weird	grade9		onbekend	3	bos-/veldweg
+track	weird	grade9	crossing	onbekend	3	bos-/veldweg
+track	weird	grade9	sidewalk	onbekend	3	bos-/veldweg
+track	wood			hout	0	bos-/veldweg
+track	woodchips			houtsnippers	2	bos-/veldweg
+trunk				verhard (aangenomen)	0	drukke weg
+trunk	asphalt			asfalt	0	drukke weg
+trunk	bricks			klinkers	0	drukke weg
+trunk	chipseal			asfalt	0	drukke weg
+trunk	cobblestone			kasseien	0	drukke weg
+trunk	compacted			verdicht steenslag	1	drukke weg
+trunk	concrete			beton	0	drukke weg
+trunk	concrete:lanes			betonsporen	0	drukke weg
+trunk	concrete:plates			betonplaten	0	drukke weg
+trunk	dirt			aarde	2	drukke weg
+trunk	earth			aarde	2	drukke weg
+trunk	fine_gravel			fijn grind	1	drukke weg
+trunk	grass			gras	2	drukke weg
+trunk	grass_paver			grasdallen	1	drukke weg
+trunk	gravel			grind	1	drukke weg
+trunk	ground			natuurlijke bodem	2	drukke weg
+trunk	metal			metaal	0	drukke weg
+trunk	mud			modder	2	drukke weg
+trunk	paved			verhard	0	drukke weg
+trunk	paving_stones			klinkers	0	drukke weg
+trunk	pebblestone			kiezel	1	drukke weg
+trunk	rock			rots	2	drukke weg
+trunk	sand			zand	2	drukke weg
+trunk	sett			kasseien	0	drukke weg
+trunk	stepping_stones			stapstenen	2	drukke weg
+trunk	unhewn_cobblestone			kasseien	0	drukke weg
+trunk	unpaved			onverhard	2	drukke weg
+trunk	weird			verhard (aangenomen)	0	drukke weg
+trunk	wood			hout	0	drukke weg
+trunk	woodchips			houtsnippers	2	drukke weg
+unclassified				verhard (aangenomen)	0	weg
+unclassified	asphalt			asfalt	0	weg
+unclassified	bricks			klinkers	0	weg
+unclassified	chipseal			asfalt	0	weg
+unclassified	cobblestone			kasseien	0	weg
+unclassified	compacted			verdicht steenslag	1	weg
+unclassified	concrete			beton	0	weg
+unclassified	concrete:lanes			betonsporen	0	weg
+unclassified	concrete:plates			betonplaten	0	weg
+unclassified	dirt			aarde	2	weg
+unclassified	earth			aarde	2	weg
+unclassified	fine_gravel			fijn grind	1	weg
+unclassified	grass			gras	2	weg
+unclassified	grass_paver			grasdallen	1	weg
+unclassified	gravel			grind	1	weg
+unclassified	ground			natuurlijke bodem	2	weg
+unclassified	metal			metaal	0	weg
+unclassified	mud			modder	2	weg
+unclassified	paved			verhard	0	weg
+unclassified	paving_stones			klinkers	0	weg
+unclassified	pebblestone			kiezel	1	weg
+unclassified	rock			rots	2	weg
+unclassified	sand			zand	2	weg
+unclassified	sett			kasseien	0	weg
+unclassified	stepping_stones			stapstenen	2	weg
+unclassified	unhewn_cobblestone			kasseien	0	weg
+unclassified	unpaved			onverhard	2	weg
+unclassified	weird			verhard (aangenomen)	0	weg
+unclassified	wood			hout	0	weg
+unclassified	woodchips			houtsnippers	2	weg

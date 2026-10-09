@@ -23,6 +23,7 @@
 #include "CMainWindow.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/CKnownExtension.h"
+#include "gis/trk/surface/CSurface.h"
 #include "helpers/CDraw.h"
 
 CColorLegend::CColorLegend(QWidget* parent, CGisItemTrk* trk)
@@ -54,6 +55,10 @@ void CColorLegend::setMouseFocus(const CTrackData::trkpt_t* pt) {
   }
 
   QString colorSource = trk->getColorizeSource();
+  if (CKnownExtension::isCategorical(colorSource)) {
+    val = NOFLOAT;
+    return;
+  }
   auto valueFunc = CKnownExtension::get(colorSource).valueFunc;
   const qreal factor = CKnownExtension::get(colorSource).factor;
 
@@ -63,7 +68,13 @@ void CColorLegend::setMouseFocus(const CTrackData::trkpt_t* pt) {
 }
 
 void CColorLegend::updateData() {
-  if (!trk->getColorizeSource().isEmpty() && (trk->getColorizeSource() != "activity")) {
+  const QString source = trk->getColorizeSource();
+  if (CKnownExtension::isCategorical(source)) {
+    categories = categoriesOf(source);
+    update();
+    show();
+  } else if (!source.isEmpty() && (source != "activity")) {
+    categories.clear();
     unit = trk->getColorizeUnit();
     minimum = trk->getColorizeLimitLow();
     maximum = trk->getColorizeLimitHigh();
@@ -83,6 +94,48 @@ void CColorLegend::setMinimum(qreal min) {
 void CColorLegend::setMaximum(qreal max) {
   maximum = max;
   update();
+}
+
+void CColorLegend::setCategories(const QList<category_t>& newCategories) {
+  categories = newCategories;
+  update();
+}
+
+QList<CColorLegend::category_t> CColorLegend::categoriesOf(const QString& source) {
+  QList<category_t> list;
+  if (source == CKnownExtension::internalSurface) {
+    for (int i = 0; i < CSurface::eClassCount; i++) {
+      list << category_t(CSurface::classColor(CSurface::class_e(i)), CSurface::className(CSurface::class_e(i)));
+    }
+  } else if (source == CKnownExtension::internalWayType) {
+    for (int i = 0; i < CSurface::eWayCount; i++) {
+      list << category_t(CSurface::wayTypeColor(CSurface::waytype_e(i)), CSurface::wayTypeName(CSurface::waytype_e(i)));
+    }
+  }
+  return list;
+}
+
+void CColorLegend::paintCategories(QPainter& p) {
+  const QFontMetrics fm(p.font());
+  const int lineHeight = fm.height() + 4;
+  int y = qMax(5, (height() - lineHeight * int(categories.size())) / 2);
+  int reqWidth = 0;
+  for (const category_t& category : std::as_const(categories)) {
+    const QRect swatch(xOffset, y + 2, colorWidth, fm.height());
+    p.setPen(QPen(palette().color(QPalette::WindowText), 1));
+    p.setBrush(category.first);
+    p.drawRect(swatch);
+    p.setPen(palette().color(QPalette::WindowText));
+    const int x = swatch.right() + 6;
+    p.drawText(x, y + 2 + fm.ascent(), category.second);
+    reqWidth = qMax(reqWidth, x + fm.horizontalAdvance(category.second));
+    y += lineHeight;
+  }
+
+  if (reqWidth + 5 != width()) {
+    setMinimumWidth(reqWidth + 5);
+    resize(reqWidth + 5, height());
+  }
 }
 
 void CColorLegend::setUnit(const QString& unit) {
@@ -148,6 +201,12 @@ void CColorLegend::paintEvent(QPaintEvent* /*event*/) {
 
       p.setOpacity(1.f);
       p.setRenderHint(QPainter::Antialiasing, false);
+    }
+
+    if (!categories.isEmpty()) {
+      paintCategories(p);
+      p.end();
+      return;
     }
 
     // draw the black frame

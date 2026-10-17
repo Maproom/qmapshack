@@ -55,7 +55,9 @@ void CPropertyTrk::setupData() {
     if ((key == CKnownExtension::internalProgress) || (key == CKnownExtension::internalSpeedTime)) {
       property.min = 0;
       property.axisType = property_t::eAxisTime;
-      property.getX = [](const CTrackData::trkpt_t& p) { return p.time.isValid() ? p.time.toSecsSinceEpoch() : NOFLOAT; };
+      property.getX = [](const CTrackData::trkpt_t& p) {
+        return p.time.isValid() ? p.time.toSecsSinceEpoch() : NOFLOAT;
+      };
     }
 
     if (key == CKnownExtension::internalSpeedDist) {
@@ -100,6 +102,10 @@ void CPropertyTrk::fillComboBox(QComboBox* box) const {
   for (const property_t& p : properties) {
     if (p.key == CKnownExtension::internalEle) {
       // skip it as there is a dedicated profile plot
+      continue;
+    }
+    if (CKnownExtension::get(p.key).isCategorical()) {
+      // a category's number is no measurement to plot
       continue;
     }
     box->addItem(p.icon, p.nameLongText, p.key);

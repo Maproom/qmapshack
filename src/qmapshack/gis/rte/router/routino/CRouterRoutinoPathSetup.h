@@ -23,10 +23,23 @@
 
 #include "ui_IRouterRoutinoPathSetup.h"
 
+/**
+   @brief Dialog to add or remove the paths of the Routino databases, or of other data kept the same way
+ */
 class CRouterRoutinoPathSetup : public QDialog, private Ui::IRouterRoutinoPathSetup {
   Q_OBJECT
  public:
+  /** @brief the paths of the Routino databases */
   CRouterRoutinoPathSetup(QStringList& paths);
+  /**
+     @brief the paths of other data, e.g. the surface databases
+
+     @param paths    the paths, changed on accept()
+     @param title    the window title, empty for the one of the form
+     @param help     the text above the list
+     @param caption  the caption of the dialog to select a path
+   */
+  CRouterRoutinoPathSetup(QStringList& paths, const QString& title, const QString& help, const QString& caption);
   virtual ~CRouterRoutinoPathSetup();
 
  public slots:
@@ -45,6 +58,7 @@ class CRouterRoutinoPathSetup : public QDialog, private Ui::IRouterRoutinoPathSe
   QStringList currentPaths() const;
 
   QStringList& paths;
+  const QString caption;
 };
 
 #endif  // CROUTERROUTINOPATHSETUP_H

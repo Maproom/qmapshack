@@ -81,7 +81,7 @@ cmake --build . -j$(nproc)
 sudo cmake --install .
 ```
 
-This builds and installs `qmapshack`, `qmaptool`, `qmt_rgb2pct` and `qmt_map2jnx`. Configure with
+This builds and installs `qmapshack`, `qms_surfacedb`, `qmaptool`, `qmt_rgb2pct` and `qmt_map2jnx`. Configure with
 `-DBUILD_QMAPTOOL=OFF` to leave out the three QMapTool binaries, or build a single binary with
 `--target qmapshack` — note that `cmake --install` then fails on the binaries that were not built.
 

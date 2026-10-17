@@ -20,6 +20,7 @@
 
 #include <QtWidgets>
 
+#include "CMainWindow.h"
 #include "canvas/CCanvas.h"
 #include "gis/trk/CEnergyCyclingDialog.h"
 #include "gis/trk/CKnownExtension.h"
@@ -136,7 +137,7 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk) : INotifyTrk(CGisItemTrk::eVisualDeta
   splitter1->restoreState(cfg.value("splitterSizes1").toByteArray());
   splitter2->restoreState(cfg.value("splitterSizes2").toByteArray());
   splitter3->restoreState(cfg.value("splitterSizes3").toByteArray());
-  tabWidget->setCurrentIndex(cfg.value("visibleTab", 0).toInt());
+  restoreVisibleTab(cfg.value("visibleTabName"), cfg.value("visibleTab"));
   cfg.endGroup();
 
   connect(checkGraph1, &QCheckBox::clicked, this, &CDetailsTrk::slotShowPlots);
@@ -147,6 +148,7 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk) : INotifyTrk(CGisItemTrk::eVisualDeta
   connect(textCmtDesc, &QTextBrowser::anchorClicked, this, &CDetailsTrk::slotLinkActivated);
 
   connect(pushSetActivities, &QPushButton::clicked, this, &CDetailsTrk::slotSetActivities);
+  connect(widgetSurface, &CSurfaceWidget::sigSetup, &CMainWindow::self(), &CMainWindow::slotCreateSurfaceDatabase);
   connect(toolSetEnergyCycling, &QPushButton::clicked, this, &CDetailsTrk::slotSetEnergyCycling);
 
   connect(lineName, &QLineEdit::textEdited, this, &CDetailsTrk::slotNameChanged);
@@ -263,7 +265,8 @@ CDetailsTrk::~CDetailsTrk() {
   cfg.setValue("splitterSizes1", splitter1->saveState());
   cfg.setValue("splitterSizes2", splitter2->saveState());
   cfg.setValue("splitterSizes3", splitter3->saveState());
-  cfg.setValue("visibleTab", tabWidget->currentIndex());
+  // by name, so adding a tab does not shift it
+  cfg.setValue("visibleTabName", tabWidget->currentWidget()->objectName());
   cfg.endGroup();
 
   saveGraphSource(comboGraph2, 2);
@@ -440,6 +443,7 @@ void CDetailsTrk::updateData() {
   labelTainted->setVisible(trk.isTainted());
 
   labelInfo->setText(trk.getInfo(IGisItem::eFeatureNone));
+  widgetSurface->setData(trk.getSurface());
   comboColor->setCurrentIndex(trk.getColorIdx());
   toolLock->setChecked(isReadOnly);
   labelNogo->setVisible(isNogo);
@@ -506,12 +510,15 @@ void CDetailsTrk::updateData() {
   comboColorSource->setCurrentIndex(currentIdx);
 
   QString source = comboColorSource->currentData().toString();
-  bool enabledColorize = !source.isEmpty() && (source != "activity");
+  const CKnownExtension extColor = CKnownExtension::get(source);
+  bool enabledCategorical = extColor.isCategorical();
+  bool enabledColorize = !source.isEmpty() && (source != "activity") && !enabledCategorical;
   bool enabledActivity = source == "activity";
 
-  comboColor->setVisible(!(enabledColorize || enabledActivity));
-  widgetColorLabel->setVisible(enabledColorize);
-  widgetColorLabel->setEnabled(enabledColorize);
+  comboColor->setVisible(!(enabledColorize || enabledActivity || enabledCategorical));
+  widgetColorLabel->setVisible(enabledColorize || enabledCategorical);
+  widgetColorLabel->setEnabled(enabledColorize || enabledCategorical);
+  widgetColorLabel->setCategories(extColor.categories);
   toolLimitAutoStyle->setEnabled(enabledColorize);
   toolLimitUsrStyle->setEnabled(enabledColorize);
   toolLimitSysStyle->setEnabled(enabledColorize);
@@ -592,6 +599,29 @@ void CDetailsTrk::setMouseFocus(const CTrackData::trkpt_t* pt) {
 
 void CDetailsTrk::setMouseRangeFocus(const CTrackData::trkpt_t* pt1, const CTrackData::trkpt_t* pt2) {
   labelInfoRange->setText((pt1 && pt2) ? trk.getInfoRange(*pt1, *pt2) : "-\n-");
+}
+
+void CDetailsTrk::restoreVisibleTab(const QVariant& name, const QVariant& index) {
+  QWidget* tab = name.isValid() ? tabWidget->findChild<QWidget*>(name.toString()) : nullptr;
+  if (tab != nullptr && tabWidget->indexOf(tab) >= 0) {
+    tabWidget->setCurrentWidget(tab);
+    return;
+  }
+
+  if (!name.isValid() && index.isValid()) {
+    // an index saved by 1.21 or older counts without the Surface tab
+    qint32 idx = index.toInt();
+    if (idx >= eTabSurface) {
+      idx++;
+    }
+    if (idx >= 0 && idx < tabWidget->count()) {
+      tabWidget->setCurrentIndex(idx);
+      return;
+    }
+  }
+
+  // nothing saved, or a tab that is gone: never the one the .ui file was last saved with
+  tabWidget->setCurrentIndex(eTabInfo);
 }
 
 void CDetailsTrk::enableTabFilter() {

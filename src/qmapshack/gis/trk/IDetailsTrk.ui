@@ -1592,6 +1592,39 @@
          </item>
         </layout>
        </widget>
+       <widget class="QWidget" name="tabSurface">
+        <attribute name="title">
+         <string>Surface</string>
+        </attribute>
+        <layout class="QVBoxLayout" name="tabSurfaceLayout">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QScrollArea" name="scrollSurface">
+           <property name="frameShape">
+            <enum>QFrame::NoFrame</enum>
+           </property>
+           <property name="widgetResizable">
+            <bool>true</bool>
+           </property>
+           <widget class="CSurfaceWidget" name="widgetSurface"/>
+          </widget>
+         </item>
+        </layout>
+       </widget>
        <widget class="QWidget" name="tab">
         <attribute name="title">
          <string>Points</string>
@@ -1761,6 +1794,12 @@
    <class>CTableTrkInfo</class>
    <extends>QTreeWidget</extends>
    <header>gis/trk/CTableTrkInfo.h</header>
+  </customwidget>
+  <customwidget>
+   <class>CSurfaceWidget</class>
+   <extends>QWidget</extends>
+   <header>gis/trk/surface/CSurfaceWidget.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources>

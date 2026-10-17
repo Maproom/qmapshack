@@ -38,6 +38,7 @@
 #include "gis/trk/CScrOptTrk.h"
 #include "gis/trk/CTrkToAreaDialog.h"
 #include "gis/trk/CTrkToRteDialog.h"
+#include "gis/trk/surface/CSurfaceDbManager.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CDraw.h"
 #include "misc.h"
@@ -643,6 +644,13 @@ QString CGisItemTrk::getInfoTrkPt(const CTrackData::trkpt_t& pt) const {
     str += tr(", Speed: %1%2").arg(val1, unit1);
   }
 
+  if (pt.surfaceClass >= 0) {
+    str += "\n" % tr("Surface: %1 (%2), %3")
+                      .arg(CSurface::labelName(CSurface::label_e(pt.surfaceLabel)),
+                           CSurface::className(CSurface::class_e(pt.surfaceClass)),
+                           CSurface::wayTypeName(CSurface::waytype_e(pt.surfaceWay)));
+  }
+
   QStringList keys = pt.extensions.keys();
   keys.sort();
 
@@ -876,6 +884,36 @@ void CGisItemTrk::updateExtremaAndExtensions() {
   }
 
   existingExtensions.subtract(nonRealExtensions);
+
+  // kept while a new analysis runs, so a chosen color source survives editing the track
+  const CSurfaceTrk::state_e stateSurface = surface->getState();
+  if (stateSurface == CSurfaceTrk::eStateReady || stateSurface == CSurfaceTrk::eStateAnalyzing) {
+    existingExtensions << CKnownExtension::internalSurface << CKnownExtension::internalWayType;
+  } else {
+    // without a database the chosen color source stays, too: the track details must not
+    // reset it behind the user's back, and the user can still switch it there
+    const QString& source = getColorizeSource();
+    if (CKnownExtension::get(source).isCategorical()) {
+      existingExtensions << source;
+    }
+  }
+}
+
+void CGisItemTrk::updateSurface() {
+  {
+    QMutexLocker lock(&mutexItems);
+    surface->update(trk);
+    updateExtremaAndExtensions();
+  }
+  if (propHandler != nullptr) {
+    propHandler->setupData();
+  }
+  // only the details (Surface tab, color source) and the legend show surfaces, plots and tables don't
+  updateVisuals(eVisualDetails | eVisualColorLegend, "updateSurface()");
+  // the map shows the surfaces only as color source
+  if (CKnownExtension::get(getColorizeSource()).isCategorical()) {
+    CSurfaceDbManager::self().triggerCanvasUpdate();
+  }
 }
 
 void CGisItemTrk::resetInternalData() {
@@ -1098,6 +1136,7 @@ void CGisItemTrk::deriveSecondaryData() {
 
   activities.update();
 
+  surface->update(trk);
   updateExtremaAndExtensions();
   // make sure we have a graph properties object by now
   if (propHandler == nullptr) {
@@ -1711,6 +1750,8 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     }
   } else if (getColorizeSource() == "activity") {
     drawColorizedByActivity(p);
+  } else if (CKnownExtension::get(getColorizeSource()).isCategorical()) {
+    drawColorizedByCategory(p);
   } else {
     drawColorized(p);
   }
@@ -1847,6 +1888,57 @@ void CGisItemTrk::drawColorizedByActivity(QPainter& p) const {
   }
 }
 
+void CGisItemTrk::drawColorizedByCategory(QPainter& p) const {
+  const CKnownExtension ext = CKnownExtension::get(getColorizeSource());
+  // a stretch without a category (no database, analysis still running) gets the track's ordinary color
+  auto colorOf = [&](const CTrackData::trkpt_t& pt) {
+    const qreal value = ext.valueFunc(pt);
+    const qint32 idx = value == NOFLOAT ? -1 : qRound(value);
+    return (idx >= 0 && idx < ext.categories.size()) ? ext.categories[idx].color : color;
+  };
+  // one point for all changes: the value functions read only its surface fields
+  CTrackData::trkpt_t ptChange;
+  auto colorOfInfo = [&](const CSurface::info_t& info) {
+    ptChange.surfaceClass = info.cls;
+    ptChange.surfaceWay = info.way;
+    ptChange.surfaceLabel = info.label;
+    return colorOf(ptChange);
+  };
+
+  QPen pen;
+  pen.setWidth(penWidthFg);
+  pen.setCapStyle(Qt::RoundCap);
+  auto drawPiece = [&](const QPointF& from, const QPointF& to, const QColor& colorPiece) {
+    pen.setColor(colorPiece);
+    p.setPen(pen);
+    p.drawLine(from, to);
+  };
+
+  // each leg in the colors of its samples, as the analysis counts them
+  for (const CTrackData::trkseg_t& segment : trk.segs) {
+    const CTrackData::trkpt_t* ptPrev = nullptr;
+    for (const CTrackData::trkpt_t& pt : segment.pts) {
+      if (pt.isHidden()) {
+        continue;
+      }
+      if (ptPrev != nullptr) {
+        const QPointF& start = lineSimple[ptPrev->idxVisible];
+        const QPointF& end = lineSimple[pt.idxVisible];
+        QPointF from = start;
+        QColor colorPiece = colorOf(*ptPrev);
+        for (const CSurfaceAnalyzer::change_t& change : surface->getChanges(ptPrev->idxTotal)) {
+          const QPointF to = start + (end - start) * change.fraction;
+          drawPiece(from, to, colorPiece);
+          from = to;
+          colorPiece = colorOfInfo(change.info);
+        }
+        drawPiece(from, end, colorPiece);
+      }
+      ptPrev = &pt;
+    }
+  }
+}
+
 void CGisItemTrk::drawColorized(QPainter& p) const {
   auto valueFunc = CKnownExtension::get(getColorizeSource()).valueFunc;
 
@@ -1903,11 +1995,19 @@ void CGisItemTrk::drawColorized(QPainter& p) const {
 }
 
 qreal CGisItemTrk::getMin(const QString& source) const {
-  return extrema.value(source).min * CKnownExtension::get(source).factor;
+  const CKnownExtension ext = CKnownExtension::get(source);
+  if (ext.isCategorical()) {
+    return ext.minimum;
+  }
+  return extrema.value(source).min * ext.factor;
 }
 
 qreal CGisItemTrk::getMax(const QString& source) const {
-  return extrema.value(source).max * CKnownExtension::get(source).factor;
+  const CKnownExtension ext = CKnownExtension::get(source);
+  if (ext.isCategorical()) {
+    return ext.maximum;
+  }
+  return extrema.value(source).max * ext.factor;
 }
 
 qreal CGisItemTrk::getMinProp(const QString& source) const {

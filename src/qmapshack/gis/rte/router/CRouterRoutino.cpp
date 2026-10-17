@@ -103,6 +103,7 @@ CRouterRoutino::CRouterRoutino(QWidget* parent) : IRouter(true, parent) {
   comboLanguage->addItem(tr("Slovak"), "sk");
 
   connect(toolSetupPaths, &QToolButton::clicked, this, &CRouterRoutino::slotSetupPaths);
+  connect(pushSurface, &QPushButton::clicked, &CMainWindow::self(), &CMainWindow::slotCreateSurfaceDatabase);
 
   SETTINGS;
   dbPaths = cfg.value("Route/routino/paths", dbPaths).toStringList();

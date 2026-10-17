@@ -25,8 +25,18 @@
 #include "svgticon/CSvgtIcon.h"
 
 CRouterRoutinoPathSetup::CRouterRoutinoPathSetup(QStringList& paths)
-    : QDialog(CMainWindow::getBestWidgetForParent()), paths(paths) {
+    : CRouterRoutinoPathSetup(paths, QString(),
+                              tr("Add or remove paths containing Routino data. There can be multiple databases in a "
+                                 "path but no sub-path is parsed."),
+                              tr("Select routing data file path...")) {}
+
+CRouterRoutinoPathSetup::CRouterRoutinoPathSetup(QStringList& paths, const QString& title, const QString& help,
+                                                 const QString& caption)
+    : QDialog(CMainWindow::getBestWidgetForParent()), paths(paths), caption(caption) {
   setupUi(this);
+  if (!title.isEmpty()) {
+    setWindowTitle(title);
+  }
   CSvgtIcon::load(label, "://icons/Help.svgt");
 
   connect(toolAdd, &QToolButton::clicked, this, &CRouterRoutinoPathSetup::slotAddPath);
@@ -38,9 +48,7 @@ CRouterRoutinoPathSetup::CRouterRoutinoPathSetup(QStringList& paths)
     item->setText(path);
   }
 
-  labelHelp->setText(
-      tr("Add or remove paths containing Routino data. There can be multiple databases in a path but no sub-path is "
-         "parsed."));
+  labelHelp->setText(help);
 }
 
 CRouterRoutinoPathSetup::~CRouterRoutinoPathSetup() {}
@@ -60,8 +68,7 @@ QStringList CRouterRoutinoPathSetup::currentPaths() const {
 
 void CRouterRoutinoPathSetup::slotAddPath() {
   // keep the path as the user picked it, only cleaned. Comparing resolves it later on.
-  const QString& path =
-      cleanPath(QFileDialog::getExistingDirectory(this, tr("Select routing data file path..."), QDir::homePath()));
+  const QString& path = cleanPath(QFileDialog::getExistingDirectory(this, caption, QDir::homePath()));
   if (path.isEmpty() || containsPath(currentPaths(), path)) {
     return;
   }

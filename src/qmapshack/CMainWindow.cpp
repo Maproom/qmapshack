@@ -42,6 +42,7 @@
 #include "gis/trk/CActivityTrk.h"
 #include "gis/trk/CDetailsTrk.h"
 #include "gis/trk/CKnownExtension.h"
+#include "gis/trk/surface/CSurfaceDbManager.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "help/CHelp.h"
 #include "helpers/CMapIconSizesSetup.h"
@@ -66,6 +67,7 @@
 #include "tool/CImportDatabase.h"
 #include "tool/CMapVrtBuilder.h"
 #include "tool/CRoutinoDatabaseBuilder.h"
+#include "tool/CSurfaceDatabaseBuilder.h"
 #include "units/CCoordFormatSetup.h"
 #include "units/CTimeZoneSetup.h"
 #include "units/CUnitsSetup.h"
@@ -142,6 +144,8 @@ CMainWindow::CMainWindow() : id(QRandomGenerator::global()->generate()) {
 
   CKnownExtension::init(IUnit::self());
   CActivityTrk::init();
+  // scans the surface databases now, not while the first track loads under IGisItem::mutexItems
+  CSurfaceDbManager::self();
 
   widgetGisWorkspace = new CGisWorkspace(menuProject, this);
   dockWorkspace->setWidget(widgetGisWorkspace);
@@ -222,6 +226,7 @@ CMainWindow::CMainWindow() : id(QRandomGenerator::global()->generate()) {
   connect(actionLoadView, &QAction::triggered, this, &CMainWindow::slotLoadView);
   connect(actionClose, &QAction::triggered, this, &CMainWindow::close);
   connect(actionCreateRoutinoDatabase, &QAction::triggered, this, &CMainWindow::slotCreateRoutinoDatabase);
+  connect(actionCreateSurfaceDatabase, &QAction::triggered, this, &CMainWindow::slotCreateSurfaceDatabase);
   connect(actionPrintMap, &QAction::triggered, this, &CMainWindow::slotPrintMap);
   connect(actionTakeScreenshot, &QAction::triggered, this, &CMainWindow::slotTakeScreenshot);
   connect(actionCloseTab, &QAction::triggered, this, &CMainWindow::slotCloseTab);
@@ -458,6 +463,7 @@ CMainWindow::CMainWindow() : id(QRandomGenerator::global()->generate()) {
                       actionClose,
                       actionCloneMapView,
                       actionCreateRoutinoDatabase,
+                      actionCreateSurfaceDatabase,
                       actionPrintMap,
                       actionTakeScreenshot,
                       actionSetupCoordFormat,
@@ -1278,6 +1284,18 @@ void CMainWindow::slotBuildVrt() {
 
 void CMainWindow::slotCreateRoutinoDatabase() {
   CRoutinoDatabaseBuilder* widget = new CRoutinoDatabaseBuilder(this);
+  addWidgetToTab(widget);
+}
+
+void CMainWindow::slotCreateSurfaceDatabase() {
+  // one tab is enough, it also lists the databases
+  for (qint32 i = 0; i < tabWidget->count(); i++) {
+    if (dynamic_cast<CSurfaceDatabaseBuilder*>(tabWidget->widget(i)) != nullptr) {
+      tabWidget->setCurrentIndex(i);
+      return;
+    }
+  }
+  CSurfaceDatabaseBuilder* widget = new CSurfaceDatabaseBuilder(this);
   addWidgetToTab(widget);
 }
 

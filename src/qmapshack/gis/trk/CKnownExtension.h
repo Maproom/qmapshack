@@ -19,6 +19,8 @@
 #ifndef CKNOWNEXTENSION_H
 #define CKNOWNEXTENSION_H
 
+#include <QColor>
+#include <QList>
 #include <QSet>
 
 #include "gis/trk/CGisItemTrk.h"
@@ -49,6 +51,14 @@ class CKnownExtension {
   static const QString internalEle;           //< name of internally derived elevation (DEM)
   static const QString internalProgress;      //< name of internally derived progress
   static const QString internalTerrainSlope;  //< name of internally derived terrain slope
+  static const QString internalSurface;       /**< name of the surface class from a surface database */
+  static const QString internalWayType;       /**< name of the way type from a surface database */
+
+  /** @brief one value of a categorical source, see categories */
+  struct category_t {
+    QColor color;
+    QString name;
+  };
 
   /**
      @brief Get extension descriptor for name
@@ -76,6 +86,11 @@ class CKnownExtension {
   bool known;              //< true if extension is known, false otherwise
   bool derivedQMS;         //< if set to true the value is derived by QMS (p.x. slope*)
   fTrkPtGetVal valueFunc;  //< the function used to retrieve the value
+  /** @brief For a source with a fixed set of values: color and name of each value 0, 1, ... Empty otherwise. */
+  QList<category_t> categories;
+
+  /** @brief true for a source with a fixed set of values, drawn with one color per value */
+  bool isCategorical() const { return !categories.isEmpty(); }
 
   /**
    * @brief Convert a value to a string
@@ -104,7 +119,8 @@ class CKnownExtension {
   static QSet<QString> registeredNS;
 
   CKnownExtension(QString nameShortText, QString nameLongText, int order, qreal minimum, qreal maximum, qreal factor,
-                  QString unit, QString icon, bool known, bool derivedQMS, fTrkPtGetVal valueFunc)
+                  QString unit, QString icon, bool known, bool derivedQMS, fTrkPtGetVal valueFunc,
+                  const QList<category_t>& categories = {})
       : nameShortText(nameShortText),
         nameLongText(nameLongText),
         order(order),
@@ -115,7 +131,8 @@ class CKnownExtension {
         icon(icon),
         known(known),
         derivedQMS(derivedQMS),
-        valueFunc(valueFunc) {}
+        valueFunc(valueFunc),
+        categories(categories) {}
 
   static void initMioTPX(const IUnit& units);
 };

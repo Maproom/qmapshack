@@ -1,0 +1,41 @@
+.TH "QMS_SURFACEDB" "1" "Oct 2026" "" ""
+.SH "NAME"
+qms_surfacedb \- build a QMapShack surface database from an OpenStreetMap extract
+.SH "SYNOPSIS"
+\fBqms_surfacedb\fR [\fB\-n\fR|\fB\-\-name\fR <name>] [\fB\-q\fR|\fB\-\-quiet\fR] \fIsource\fR \fItarget\fR
+.SH "DESCRIPTION"
+Reads the roads and paths of an OpenStreetMap extract (\fI.osm.pbf\fR) and writes them with their
+surface and way type into a surface database (\fI<name>.surface.sqlite\fR). Put the database into
+one of the paths set up in QMapShack's "Create Surface Database" tool. QMapShack then shows the
+surfaces and way types of every track it covers.
+.PP
+This is the same as the "Create Surface Database" tool of
+.BR qmapshack (1),
+without the GUI, e.g. for a script that also builds the Routino databases.
+.SH "OPTIONS"
+.TP
+\fB\-h, \-\-help\fR
+Displays the help.
+.TP
+\fB\-v, \-\-version\fR
+Displays the version.
+.TP
+\fB\-n, \-\-name\fR <name>
+The name of the region shown in QMapShack. Default: the target file name up to the first dot.
+.TP
+\fB\-q, \-\-quiet\fR
+No progress output.
+.SH "ARGUMENTS"
+.TP
+\fIsource\fR
+The OpenStreetMap extract, e.g. belgium\-latest.osm.pbf from download.geofabrik.de.
+.TP
+\fItarget\fR
+The database file to write, e.g. Belgium.surface.sqlite. An existing file is replaced only when the
+new database is complete.
+.SH "EXIT STATUS"
+0 on success, 1 on an error, which is printed to standard error.
+.SH "SEE ALSO"
+.BR qmapshack (1)
+.SH "AUTHOR"
+qms_surfacedb was written by Gert Pellin <gert@pellin.be>.

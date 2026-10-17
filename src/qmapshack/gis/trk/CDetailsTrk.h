@@ -94,7 +94,10 @@ class CDetailsTrk : public QWidget, public INotifyTrk, private Ui::IDetailsTrk {
                   QDoubleSpinBox* spinMax);
   void setupLimits(CLimit* limit, QDoubleSpinBox* spinMin, QDoubleSpinBox* spinMax);
 
-  enum tabs_t { eTabInfo, eTabStyle, eTabGraphs, eTabActivity, eTabPoints, eTabFilter, eTabHistory };
+  enum tabs_t { eTabInfo, eTabStyle, eTabGraphs, eTabActivity, eTabSurface, eTabPoints, eTabFilter, eTabHistory };
+
+  /** @brief select the tab visible when the dialog was closed last time */
+  void restoreVisibleTab(const QVariant& name, const QVariant& index);
 
   /**
      @brief Pointer to track item

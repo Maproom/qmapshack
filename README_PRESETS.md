@@ -48,7 +48,7 @@ The build presets compile everything. To build just one binary, pass the target 
 cmake --build --preset linux-debug --target qmapshack -j$(nproc)
 ```
 
-Targets: `qmapshack`, `qmaptool`, `qmt_map2jnx`, `qmt_rgb2pct`.
+Targets: `qmapshack`, `qms_surfacedb`, `qmaptool`, `qmt_map2jnx`, `qmt_rgb2pct`.
 
 ## Adding options on top of a preset
 

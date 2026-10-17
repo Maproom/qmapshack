@@ -980,7 +980,7 @@ void CCanvas::slotCheckTrackOnFocus() {
     // track profile visibility is set in slotUpdateTrackInfo()
 
     colorLegend = new CColorLegend(this, trk2);
-    colorLegend->setGeometry(20, 20, 40, 300);
+    colorLegend->move(20, 20);
 
     // finally store the new key as track on focus
     keyTrackOnFocus = key;

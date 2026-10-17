@@ -22,6 +22,7 @@
 #include <QWidget>
 
 #include "gis/trk/CGisItemTrk.h"
+#include "gis/trk/CKnownExtension.h"
 
 class CColorLegend : public QWidget, public INotifyTrk {
   Q_OBJECT
@@ -34,6 +35,9 @@ class CColorLegend : public QWidget, public INotifyTrk {
 
   void setUnit(const QString& unit);
 
+  /** @brief show these colors with their names instead of a gradient, empty: gradient */
+  void setCategories(const QList<CKnownExtension::category_t>& categories);
+
   void updateData() override;
   void setMouseFocus(const CTrackData::trkpt_t* pt) override;
   void setMouseRangeFocus(const CTrackData::trkpt_t* /*pt1*/, const CTrackData::trkpt_t* /*pt2*/) override {}
@@ -45,9 +49,12 @@ class CColorLegend : public QWidget, public INotifyTrk {
 
  private:
   int paintLabel(QPainter& p, qreal value);
+  void paintCategories(QPainter& p);
 
   const int colorWidth = 18;
   const int colorHeight = 256;
+  /** @brief height of the gradient on the canvas, a list of categories gets the height it needs */
+  const qint32 heightOnCanvas = 300;
 
   QRect colorRect;
   QString unit;
@@ -57,6 +64,7 @@ class CColorLegend : public QWidget, public INotifyTrk {
   int xOffset = 1;
   CGisItemTrk* trk = nullptr;
   qreal val = NOFLOAT;
+  QList<CKnownExtension::category_t> categories;
 };
 
 #endif  // CCOLORLEGEND_H

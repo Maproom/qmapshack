@@ -9,6 +9,7 @@ V1.XX.X
 [QMS-1274] Pass QMS look-and-feel to internally called QMT
 [QMS-1276] macOS build scripts maintenance
 [QMS-1278] More macOS build scripts maintenance
+[QMS-1280] Show surfaces and way types of tracks from OpenStreetMap data
 [QMS-1281] Support Mapsforge POI files of version 3 and 4
 
 V1.21.1

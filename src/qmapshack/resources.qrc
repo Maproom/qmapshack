@@ -1494,8 +1494,10 @@
         <file alias="icons/CSrcSlope.svgt">../icons/CSrcSlope.svg</file>
         <file alias="icons/CSrcSolid.svgt">../icons/CSrcSolid.svg</file>
         <file alias="icons/CSrcSpeed.svgt">../icons/CSrcSpeed.svg</file>
+        <file alias="icons/CSrcSurface.svgt">../icons/CSrcSurface.svg</file>
         <file alias="icons/CSrcUnknown.svgt">../icons/CSrcUnknown.svg</file>
         <file alias="icons/CSrcVertSpeed.svgt">../icons/CSrcVertSpeed.svg</file>
+        <file alias="icons/CSrcWayType.svgt">../icons/CSrcWayType.svg</file>
         <file alias="icons/CSrcWTemp.svgt">../icons/CSrcWTemp.svg</file>
         <file alias="icons/Cancel.svgt">../icons/Cancel.svg</file>
         <file alias="icons/Check.svgt">../icons/Check.svg</file>

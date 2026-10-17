@@ -33,6 +33,8 @@ CColorLegend::CColorLegend(QWidget* parent, CGisItemTrk* trk)
   if (nullptr != trk) {
     background = true;
     xOffset = 5;
+    // on the canvas the legend sizes itself, see paintEvent()
+    resize(40, heightOnCanvas);
 
     trk->registerVisual(this);
 
@@ -54,6 +56,10 @@ void CColorLegend::setMouseFocus(const CTrackData::trkpt_t* pt) {
   }
 
   QString colorSource = trk->getColorizeSource();
+  if (CKnownExtension::get(colorSource).isCategorical()) {
+    val = NOFLOAT;
+    return;
+  }
   auto valueFunc = CKnownExtension::get(colorSource).valueFunc;
   const qreal factor = CKnownExtension::get(colorSource).factor;
 
@@ -63,7 +69,16 @@ void CColorLegend::setMouseFocus(const CTrackData::trkpt_t* pt) {
 }
 
 void CColorLegend::updateData() {
-  if (!trk->getColorizeSource().isEmpty() && (trk->getColorizeSource() != "activity")) {
+  const QString source = trk->getColorizeSource();
+  const QList<CKnownExtension::category_t> sourceCategories = CKnownExtension::get(source).categories;
+  if (!sourceCategories.isEmpty()) {
+    categories = sourceCategories;
+    update();
+    // without surfaces the track has its plain color, there is nothing to explain
+    const CSurfaceTrk::state_e state = trk->getSurface().getState();
+    setVisible(state == CSurfaceTrk::eStateReady || state == CSurfaceTrk::eStateAnalyzing);
+  } else if (!source.isEmpty() && (source != "activity")) {
+    categories.clear();
     unit = trk->getColorizeUnit();
     minimum = trk->getColorizeLimitLow();
     maximum = trk->getColorizeLimitHigh();
@@ -83,6 +98,38 @@ void CColorLegend::setMinimum(qreal min) {
 void CColorLegend::setMaximum(qreal max) {
   maximum = max;
   update();
+}
+
+void CColorLegend::setCategories(const QList<CKnownExtension::category_t>& newCategories) {
+  categories = newCategories;
+  update();
+}
+
+void CColorLegend::paintCategories(QPainter& p) {
+  const QFontMetrics fm(p.font());
+  const qint32 lineHeight = fm.height() + 4;
+  qint32 y = qMax(5, (height() - lineHeight * qint32(categories.size())) / 2);
+  qint32 reqWidth = 0;
+  for (const CKnownExtension::category_t& category : std::as_const(categories)) {
+    const QRect swatch(xOffset, y + 2, colorWidth, fm.height());
+    p.setPen(QPen(palette().color(QPalette::WindowText), 1));
+    p.setBrush(category.color);
+    p.drawRect(swatch);
+    p.setPen(palette().color(QPalette::WindowText));
+    const qint32 x = swatch.right() + 6;
+    // the box can't grow beyond its maximum width, a long name is cut with an ellipsis instead
+    const QString name = fm.elidedText(category.name, Qt::ElideRight, maximumWidth() - x - 5);
+    p.drawText(x, y + 2 + fm.ascent(), name);
+    reqWidth = qMax(reqWidth, x + fm.horizontalAdvance(name));
+    y += lineHeight;
+  }
+
+  // on the canvas the box fits the list, in the track details the layout sets the height
+  const qint32 reqHeight = 2 * 5 + lineHeight * qint32(categories.size());
+  if (reqWidth + 5 != width() || (background && reqHeight != height())) {
+    setMinimumWidth(reqWidth + 5);
+    resize(reqWidth + 5, background ? reqHeight : height());
+  }
 }
 
 void CColorLegend::setUnit(const QString& unit) {
@@ -148,6 +195,17 @@ void CColorLegend::paintEvent(QPaintEvent* /*event*/) {
 
       p.setOpacity(1.f);
       p.setRenderHint(QPainter::Antialiasing, false);
+    }
+
+    if (!categories.isEmpty()) {
+      paintCategories(p);
+      p.end();
+      return;
+    }
+
+    if (background && height() != heightOnCanvas) {
+      // back from a list of categories
+      resize(width(), heightOnCanvas);
     }
 
     // draw the black frame

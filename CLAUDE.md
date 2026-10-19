@@ -189,6 +189,9 @@ those in) or guard the block with `// clang-format off` as `CMainWindow.cpp` doe
   `ReadRaster()`).
 - **Constructor and destructor come first in a `.cpp`**, in that order; every other member function
   follows both.
+- **Log and error messages are for the reader, not the code.** Say what is wrong in the user's terms
+  and hint how to fix it. No raw JSON, internal keys or class names as the message itself — that
+  detail goes after it or behind `-d`. Report the first cause once, not every failure it triggers.
 
 ---
 
@@ -1369,6 +1372,10 @@ The writer's guide is `doc/WRITING.md`: short, facts only, updated with every ch
 - **Replay and `CShotSelfTest` use `CShotSynth`, never QTest's `QWidget` functions**, which bypass
   window routing (grabs, popups, double-click synthesis, focus). Replay refuses a point another
   widget would get (`CShotSynth::missed()`).
+- **`QTest::wheelEvent()` hands logical positions on as native ones**, so on a scaled screen the wheel
+  lands elsewhere (measured: every wheel case fails at `QT_SCALE_FACTOR=1.5`; mouse events are fine).
+  `CShotSynth::wheel()` scales them itself; replay fails a wheel that does not arrive at its place
+  (`CWheelWatch`). `shots.py` drops every scaling variable, so a scaled check sets one by hand.
 - **Qt delivers a double click's second press only as `MouseButtonDblClick`**: an item view emits
   `clicked` then `doubleClicked`; the handler folds the `select` into one `dclick`, taking back the
   first click past hover steps. A delegate that takes the double click still leaves a `clicked`,

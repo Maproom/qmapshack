@@ -148,6 +148,8 @@ function copyExtTools {
         cp -v $PACKAGES_PATH/bin/gdalbuildvrt            $BUILD_BUNDLE_RES_BIN_DIR
         cp -v $ROUTINO_DEV_PATH/bin/planetsplitter       $BUILD_BUNDLE_RES_BIN_DIR
     fi
+    # currently only used by QMapShack.
+    cp -v $BUILD_BIN_DIR/qms_surfacedb          $BUILD_BUNDLE_RES_BIN_DIR
 }
 
 

@@ -529,146 +529,215 @@ QPoint emptyPlace(CCanvas* canvas) {
   }
   return QPoint(canvas->width() / 2, canvas->height() - 30);
 }
-}  // namespace
 
-qint32 CShotSelfTest::run(CShotContext& ctx) {
-  failures = 0;
-  cases = 0;
-
-  CMainWindow* main = ctx.mainWindow();
-  CGisListWks* wks = const_cast<CGisListWks*>(ctx.wksList());
-  CCanvas* canvas = ctx.canvas();
-  CGisItemTrk* trk = ctx.trk();
-  const bool trackUsable =
-      nullptr != trk && !trk->getTrackData().segs.isEmpty() && trk->getTrackData().segs.first().pts.size() >= 3;
-  if (nullptr == main || nullptr == wks || nullptr == canvas || !trackUsable || 0 == wks->topLevelItemCount()) {
-    verdict("the fixture has what the cases need: a main window, a map, a project and a track of three points", false);
-    return failures;
+/** Click @p w at @p at, warning when another widget is there. */
+void click(QWidget* w, const QPoint& at, Qt::MouseButton button = Qt::LeftButton) {
+  // A case that clicks where its widget is not would test another widget.
+  if (const QString& other = CShotSynth::missed(w, at); !other.isEmpty()) {
+    qWarning().noquote() << "shoot: the case clicks" << w->metaObject()->className() << "where" << other << "is";
   }
+  CShotSynth::mouse(QTest::MouseClick, w, button, Qt::NoModifier, at);
+}
 
-  // An item's screen options open beside the click; in a narrow map they fall outside it and cannot be clicked.
-  main->showNormal();
-  main->resize(1600, 1000);
-  settle(500);
+QPoint center(QWidget* w) { return w->rect().center(); }
 
+/** What every group of cases works with; the destructor puts the application back. */
+class CHarness {
+ public:
+  CHarness(CShotContext& ctx, CMainWindow* main, CGisListWks* wks, CCanvas* canvas, CGisItemTrk* trk);
+  ~CHarness();
+
+  /** Record @p c, compare its steps, replay them and compare the state; one verdict. */
+  void check(const case_t& c);
+  /** The map centered between the track points a third and two thirds along, nothing selected. */
+  void resetMap() const;
+  void resetPlot() const;
+  void hover(const QPoint& at) const;
+
+  CShotContext& ctx;
+  CMainWindow* const main;
+  CGisListWks* const wks;
+  CCanvas* const canvas;
+  CGisItemTrk* const trk;
+  const CTrackData::trkpt_t* first = nullptr;  /**< a third along the track */
+  const CTrackData::trkpt_t* second = nullptr; /**< two thirds along the track */
+  QPointF middle;                              /**< between them, in radians */
   panel_t p;
-  buildPanel(p, main, trk);
-  CShotRecorder recorder(ctx, main);
+  CShotRecorder recorder;
   CMenuCounter menus;
-  qApp->installEventFilter(&menus);
   QTimer menuCloser;
+  QTreeWidgetItem* const project;
+  const QString projectPath;
+  /** Placeholders in the wanted steps, resolved for this run. */
+  QHash<QString, QString> names;
+};
+
+CHarness::CHarness(CShotContext& ctx, CMainWindow* main, CGisListWks* wks, CCanvas* canvas, CGisItemTrk* trk)
+    : ctx(ctx),
+      main(main),
+      wks(wks),
+      canvas(canvas),
+      trk(trk),
+      p([main, trk]() {
+        panel_t built;
+        buildPanel(built, main, trk);
+        return built;
+      }()),
+      recorder(ctx, main),
+      project(wks->topLevelItem(0)),
+      projectPath(CShotAddress::itemPathOf(project)),
+      names{{"%TRK%", CShotAddress::itemPathOf(trk)},
+            {"%MAP%", CShotAddress::addressOf(main, canvas).value_or(QString())}} {
+  const QVector<CTrackData::trkpt_t>& pts = trk->getTrackData().segs.first().pts;
+  first = &pts[pts.size() / 3];
+  second = &pts[2 * pts.size() / 3];
+  middle = QPointF((first->lon + second->lon) / 2, (first->lat + second->lat) / 2) * DEG_TO_RAD;
+
+  qApp->installEventFilter(&menus);
   menuCloser.setInterval(50);
   QObject::connect(&menuCloser, &QTimer::timeout, &menuCloser, []() {
     if (QMenu* menu = qobject_cast<QMenu*>(QApplication::activePopupWidget()); nullptr != menu) {
       menu->close();
     }
   });
+}
 
-  QTreeWidgetItem* project = wks->topLevelItem(0);
-  const QString projectPath = CShotAddress::itemPathOf(project);
-  // Placeholders in the wanted steps, resolved for this run.
-  QHash<QString, QString> names{{"%TRK%", CShotAddress::itemPathOf(trk)},
-                                {"%MAP%", CShotAddress::addressOf(main, canvas).value_or(QString())}};
+CHarness::~CHarness() {
+  qApp->removeEventFilter(&menus);
+  resetPlot();
+  canvas->resetMouse();
+  p.dialog->hide();
+  p.surfaces->close();
+  p.window->close();
+  delete p.surfaces;
+  delete p.dialog;
+  delete p.window;
+}
 
-  auto check = [&](const case_t& c) {
-    // Leftover focus would end an edit in the next case.
-    while (QWidget* popup = QApplication::activePopupWidget()) {
-      popup->close();
-    }
-    if (QWidget* focus = QApplication::focusWidget(); nullptr != focus) {
-      focus->clearFocus();
-    }
-    c.reset();
-    menus.shown = 0;
-    settle();
-    if (c.closesMenus) {
-      menuCloser.start();
-    }
-    std::optional<CShotWarnings> warnings;
-    warnings.emplace();
-    recorder.start();
-    c.perform();
-    settle(120);
-    const QJsonArray& actions = recorder.stop();
-    const bool warned = c.warns.isEmpty() || warnings->contains(c.warns);
-    warnings.reset();
-    menuCloser.stop();
-    const QString recorded = c.state();
+void CHarness::check(const case_t& c) {
+  // Leftover focus would end an edit in the next case.
+  while (QWidget* popup = QApplication::activePopupWidget()) {
+    popup->close();
+  }
+  if (QWidget* focus = QApplication::focusWidget(); nullptr != focus) {
+    focus->clearFocus();
+  }
+  c.reset();
+  menus.shown = 0;
+  settle();
+  if (c.closesMenus) {
+    menuCloser.start();
+  }
+  std::optional<CShotWarnings> warnings;
+  warnings.emplace();
+  recorder.start();
+  c.perform();
+  settle(120);
+  const QJsonArray& actions = recorder.stop();
+  const QString warning = warnings->first();
+  const bool warned = c.warns.isEmpty() ? warning.isEmpty() : warnings->contains(c.warns);
+  warnings.reset();
+  menuCloser.stop();
+  const QString recorded = c.state();
 
-    QList<QJsonObject> steps;
-    QJsonObject view;
-    for (const QJsonValue& value : actions) {
-      const QJsonObject& step = value.toObject();
-      const QString& verb = step["do"].toString();
-      if ("view" == verb) {
-        view = step;
-      } else if ("layout" != verb) {
-        steps << step;
-      }
+  QList<QJsonObject> steps;
+  QJsonObject view;
+  for (const QJsonValue& value : actions) {
+    const QJsonObject& step = value.toObject();
+    const QString& verb = step["do"].toString();
+    if ("view" == verb) {
+      view = step;
+    } else if ("layout" != verb) {
+      steps << step;
     }
-    QStringList got;
-    QStringList full;
-    for (const QJsonObject& step : std::as_const(steps)) {
-      got << signatureOf(step);
-      full << compact(step);
+  }
+  QStringList got;
+  QStringList full;
+  for (const QJsonObject& step : std::as_const(steps)) {
+    got << signatureOf(step);
+    full << compact(step);
+  }
+  qDebug().noquote() << "shoot: case" << c.name << "recorded" << full.join(" ");
+  QStringList wanted = c.wanted;
+  for (QString& spelled : wanted) {
+    for (auto it = names.constBegin(); it != names.constEnd(); ++it) {
+      spelled.replace(it.key(), it.value());
     }
-    qDebug().noquote() << "shoot: case" << c.name << "recorded" << full.join(" ");
-    QStringList wanted = c.wanted;
-    for (QString& spelled : wanted) {
-      for (auto it = names.constBegin(); it != names.constEnd(); ++it) {
-        spelled.replace(it.key(), it.value());
-      }
-    }
-    if (got != wanted) {
-      verdict(c.name, false,
-              QString("wanted: %1 | got: %2")
-                  .arg(wanted.isEmpty() ? "(nothing)" : wanted.join(" "), got.isEmpty() ? "(nothing)" : got.join(" ")));
-      return;
-    }
-    if (!warned) {
-      verdict(c.name, false, "no warning says: " + c.warns);
-      return;
-    }
-    if (!c.replays) {
-      verdict(c.name, true);
-      return;
-    }
+  }
+  if (got != wanted) {
+    verdict(c.name, false,
+            QString("wanted: %1 | got: %2")
+                .arg(wanted.isEmpty() ? "(nothing)" : wanted.join(" "), got.isEmpty() ? "(nothing)" : got.join(" ")));
+    return;
+  }
+  if (!warned) {
+    verdict(c.name, false, c.warns.isEmpty() ? "it warned: " + warning : "no warning says: " + c.warns);
+    return;
+  }
+  if (!c.expect.isEmpty() && recorded != c.expect) {
+    verdict(c.name, false, QString("the input gave '%1', wanted '%2'").arg(recorded, c.expect));
+    return;
+  }
+  if (!c.replays) {
+    verdict(c.name, true);
+    return;
+  }
 
-    if (QWidget* focus = QApplication::focusWidget(); nullptr != focus) {
-      focus->clearFocus();
-    }
-    c.reset();
-    menus.shown = 0;
-    settle();
-    if (!view.isEmpty() && !CShotPage::applyView(canvas, view)) {
-      verdict(c.name, false, "the recording's start view could not be applied");
-      return;
-    }
-    if (c.closesMenus) {
-      menuCloser.start();
-    }
-    const qint32 replayFailures = CShotReplay::perform(main, steps);
-    settle(120);
-    menuCloser.stop();
-    const QString replayed = c.state();
-    verdict(c.name, 0 == replayFailures && replayed == recorded,
-            (0 == replayFailures && replayed == recorded)
-                ? QString()
-                : QString("recorded '%1', replayed '%2', %3 replay failure(s)")
-                      .arg(recorded, replayed)
-                      .arg(replayFailures));
-  };
+  if (QWidget* focus = QApplication::focusWidget(); nullptr != focus) {
+    focus->clearFocus();
+  }
+  c.reset();
+  menus.shown = 0;
+  settle();
+  if (!view.isEmpty() && !CShotPage::applyView(canvas, view)) {
+    verdict(c.name, false, "the recording's start view could not be applied");
+    return;
+  }
+  if (c.closesMenus) {
+    menuCloser.start();
+  }
+  const qint32 replayFailures = CShotReplay::perform(main, steps);
+  settle(120);
+  menuCloser.stop();
+  const QString replayed = c.state();
+  verdict(
+      c.name, 0 == replayFailures && replayed == recorded,
+      (0 == replayFailures && replayed == recorded)
+          ? QString()
+          : QString("recorded '%1', replayed '%2', %3 replay failure(s)").arg(recorded, replayed).arg(replayFailures));
+}
 
-  auto click = [](QWidget* w, const QPoint& at, Qt::MouseButton button = Qt::LeftButton) {
-    // A case that clicks where its widget is not would test another widget.
-    if (const QString& other = CShotSynth::missed(w, at); !other.isEmpty()) {
-      qWarning().noquote() << "shoot: the case clicks" << w->metaObject()->className() << "where" << other << "is";
-    }
-    CShotSynth::mouse(QTest::MouseClick, w, button, Qt::NoModifier, at);
-  };
-  auto center = [](QWidget* w) { return w->rect().center(); };
+void CHarness::resetMap() const {
+  CGisWorkspace::self().slotWksItemSelectionReset();
+  canvas->resetMouse();
+  QApplication::sendPostedEvents(nullptr, QEvent::DeferredDelete);
+  canvas->moveTo(middle);
+  QTest::qWait(300);
+}
 
-  // ---- Qt's controls
+void CHarness::resetPlot() const {
+  canvas->resetMouse();
+  QApplication::sendPostedEvents(nullptr, QEvent::DeferredDelete);
+  // Slots, not actions: IPlot enables its actions only while its context menu is open.
+  QMetaObject::invokeMethod(p.plot, "slotStopRange");
+  QMetaObject::invokeMethod(p.plot, "slotResetZoom");
+  QTest::qWait(200);
+}
+
+void CHarness::hover(const QPoint& at) const {
+  CShotSynth::move(canvas, at);
+  // A hover focuses an item at the next paint, not at the move.
+  QTest::qWait(250);
+}
+
+/** Qt's controls. */
+void checkQtControls(CHarness& h) {
+  CShotContext& ctx = h.ctx;
+  CMainWindow* main = h.main;
+  panel_t& p = h.p;
+  CShotRecorder& recorder = h.recorder;
+  CMenuCounter& menus = h.menus;
+  const auto check = [&h](const case_t& c) { h.check(c); };
 
   check({"a button is a click",
          {R"({"do":"click","widget":"probeButton"})"},
@@ -1354,8 +1423,15 @@ qint32 CShotSelfTest::run(CShotContext& ctx) {
          settle(300);
        },
        [&p]() { return countsOf(p, {"exec:probeExecOne", "exec:probeExecTwo"}); }});
+}
 
-  // ---- the workspace
+/** The workspace. */
+void checkWorkspace(CHarness& h) {
+  CGisListWks* wks = h.wks;
+  CMenuCounter& menus = h.menus;
+  QTreeWidgetItem* project = h.project;
+  const QString& projectPath = h.projectPath;
+  const auto check = [&h](const case_t& c) { h.check(c); };
 
   check(
       {"a workspace row is its name path",
@@ -1378,30 +1454,26 @@ qint32 CShotSelfTest::run(CShotContext& ctx) {
          .perform = [&]() { click(wks->viewport(), wks->visualItemRect(project).center(), Qt::RightButton); },
          .state = [&menus]() { return QString::number(menus.shown); },
          .closesMenus = true});
+}
 
-  // ---- the map
+/** The map. */
+void checkMap(CHarness& h) {
+  CMainWindow* main = h.main;
+  CCanvas* canvas = h.canvas;
+  CGisItemTrk* trk = h.trk;
+  CMenuCounter& menus = h.menus;
+  QHash<QString, QString>& names = h.names;
+  const auto check = [&h](const case_t& c) { h.check(c); };
+  const auto hover = [&h](const QPoint& at) { h.hover(at); };
+  const auto resetMap = [&h]() { h.resetMap(); };
+  const CTrackData::trkpt_t& first = *h.first;
+  const CTrackData::trkpt_t& second = *h.second;
 
-  const QVector<CTrackData::trkpt_t>& pts = trk->getTrackData().segs.first().pts;
-  const CTrackData::trkpt_t& first = pts[pts.size() / 3];
-  const CTrackData::trkpt_t& second = pts[2 * pts.size() / 3];
-  const QPointF middle = QPointF((first.lon + second.lon) / 2, (first.lat + second.lat) / 2) * DEG_TO_RAD;
-  auto resetMap = [canvas, middle]() {
-    CGisWorkspace::self().slotWksItemSelectionReset();
-    canvas->resetMouse();
-    QApplication::sendPostedEvents(nullptr, QEvent::DeferredDelete);
-    canvas->moveTo(middle);
-    QTest::qWait(300);
-  };
   auto pixelOf = [canvas](const CTrackData::trkpt_t& pt) {
     QPointF pos(pt.lon, pt.lat);
     pos *= DEG_TO_RAD;
     canvas->convertRad2Px(pos);
     return pos.toPoint();
-  };
-  auto hover = [canvas](const QPoint& at) {
-    CShotSynth::move(canvas, at);
-    // A hover focuses an item at the next paint, not at the move.
-    QTest::qWait(250);
   };
 
   {
@@ -1715,17 +1787,16 @@ qint32 CShotSelfTest::run(CShotContext& ctx) {
       dock->setFloating(false);
     }
   }
+}
 
-  // ---- the plot and the icon grid
+/** The plot and the icon grid. */
+void checkPlotAndIconGrid(CHarness& h) {
+  CGisItemTrk* trk = h.trk;
+  panel_t& p = h.p;
+  CMenuCounter& menus = h.menus;
+  const auto check = [&h](const case_t& c) { h.check(c); };
+  const auto resetPlot = [&h]() { h.resetPlot(); };
 
-  auto resetPlot = [&p, trk, canvas]() {
-    canvas->resetMouse();
-    QApplication::sendPostedEvents(nullptr, QEvent::DeferredDelete);
-    // Slots, not actions: IPlot enables its actions only while its context menu is open.
-    QMetaObject::invokeMethod(p.plot, "slotStopRange");
-    QMetaObject::invokeMethod(p.plot, "slotResetZoom");
-    QTest::qWait(200);
-  };
   auto plotState = [&p, trk]() {
     const CTrackData::trkpt_t* focus = trk->getMouseMoveFocusPoint();
     const QPoint middleOfPlot(p.plot->width() / 2, p.plot->height() / 2);
@@ -1848,8 +1919,17 @@ qint32 CShotSelfTest::run(CShotContext& ctx) {
            }
            return picked.join(' ');
          }});
+}
 
-  // ---- the painted row buttons
+/** The painted row buttons. */
+void checkRowButtons(CHarness& h) {
+  CMainWindow* main = h.main;
+  CGisListWks* wks = h.wks;
+  CMenuCounter& menus = h.menus;
+  QTreeWidgetItem* project = h.project;
+  const QString& projectPath = h.projectPath;
+  QHash<QString, QString>& names = h.names;
+  const auto check = [&h](const case_t& c) { h.check(c); };
 
   // The option is built as QAbstractItemViewPrivate::sendDelegateEvent() builds it (Qt 6.10.2); an independent copy, so
   // a recording that misses the button fails.
@@ -2157,8 +2237,12 @@ qint32 CShotSelfTest::run(CShotContext& ctx) {
            }});
     resetDems();
   }
+}
 
-  // ---- menus a row button opens
+/** Menus a row button opens. */
+void checkGeoSearchMenus(CHarness& h) {
+  CGisListWks* wks = h.wks;
+  QTimer& menuCloser = h.menuCloser;
 
   {
     // A leftover menu shares action names with the next, which is then addressed by position.
@@ -2172,6 +2256,7 @@ qint32 CShotSelfTest::run(CShotContext& ctx) {
     } else {
       auto menusOfTree = [wks]() { return wks->findChildren<QMenu*>(Qt::FindDirectChildrenOnly).size(); };
       const qsizetype before = menusOfTree();
+      const qint32 shownBefore = h.menus.shown;
       menuCloser.start();
       for (qint32 i = 0; i < 2; i++) {
         search->selectService(QRect());
@@ -2179,13 +2264,17 @@ qint32 CShotSelfTest::run(CShotContext& ctx) {
       }
       menuCloser.stop();
       const qsizetype after = menusOfTree();
-      verdict("the geo search's menus are gone once they close", before == after,
-              QString("%1 menus below the workspace before, %2 after").arg(before).arg(after));
+      const qint32 shown = h.menus.shown - shownBefore;
+      verdict("the geo search's menus are gone once they close", before == after && 4 == shown,
+              QString("%1 menus shown, %2 below the workspace before, %3 after").arg(shown).arg(before).arg(after));
     }
     QMetaObject::invokeMethod(wks, "slotGeoSearch", Q_ARG(bool, false));
   }
+}
 
-  // ---- POIs in the map's context menu
+/** POIs in the map's context menu. */
+void checkMapPois(CHarness& h) {
+  CMainWindow* main = h.main;
 
   {
     // The fixture has several routes called Memory within metres, two at one position, in category 321.
@@ -2223,8 +2312,18 @@ qint32 CShotSelfTest::run(CShotContext& ctx) {
                   .arg(QStringList(actionNames.begin(), actionNames.end()).join(' ')));
     }
   }
+}
 
-  // ---- a scenario replayed twice in one process
+/** A scenario replayed twice in one process. */
+void checkScenarioTwice(CHarness& h) {
+  CShotContext& ctx = h.ctx;
+  CMainWindow* main = h.main;
+  CGisListWks* wks = h.wks;
+  CCanvas* canvas = h.canvas;
+  CGisItemTrk* trk = h.trk;
+  CShotRecorder& recorder = h.recorder;
+  QTreeWidgetItem* project = h.project;
+  const auto resetMap = [&h]() { h.resetMap(); };
 
   {
     const QString name = "a scenario that opens a details tab replays the same the second time";
@@ -2343,16 +2442,180 @@ qint32 CShotSelfTest::run(CShotContext& ctx) {
       settle(100);
     }
   }
+}
 
-  qApp->removeEventFilter(&menus);
-  resetPlot();
-  canvas->resetMouse();
-  p.dialog->hide();
-  p.surfaces->close();
-  p.window->close();
-  delete p.surfaces;
-  delete p.dialog;
-  delete p.window;
+/** Rendering every part around the map at once. */
+void checkRenderAll(CHarness& h) {
+  CMainWindow* main = h.main;
+  CCanvas* canvas = h.canvas;
+  const auto resetMap = [&h]() { h.resetMap(); };
+
+  {
+    const QString name = "the parts around the map render together as render() renders each";
+    resetMap();
+    QList<QWidget*> parts;
+    for (QWidget* w = canvas; nullptr != w && w != main; w = w->parentWidget()) {
+      parts << w;
+    }
+    parts << main;
+    QElapsedTimer timer;
+    timer.start();
+    QList<QImage> each;
+    for (QWidget* part : std::as_const(parts)) {
+      each << CShotWriter::render(part, part->isWindow() ? part->size() : QSize());
+    }
+    const qint64 eachMs = timer.restart();
+    const QHash<const QWidget*, QImage>& all = CShotWriter::renderAll(parts);
+    const qint64 allMs = timer.elapsed();
+    qint32 equal = 0;
+    for (qsizetype i = 0; i < parts.size(); i++) {
+      equal += (!each.at(i).isNull() && each.at(i) == all.value(parts.at(i))) ? 1 : 0;
+    }
+    // The times are for reading only: a loaded machine reverses them.
+    verdict(name, equal == parts.size(),
+            QString("%1 of %2 parts equal, %3 ms one by one, %4 ms together")
+                .arg(equal)
+                .arg(parts.size())
+                .arg(eachMs)
+                .arg(allMs));
+  }
+}
+
+/** Steps that cannot replay fail, and say why. */
+void checkReplayRefuses(CHarness& h) {
+  panel_t& p = h.p;
+  const auto refuses = [&h](const QString& name, const QJsonObject& step, const QString& why) {
+    const CShotWarnings warnings;
+    const qint32 failed = CShotReplay::perform(h.main, {step});
+    verdict(name, 1 == failed && warnings.contains(why),
+            QString("%1 failure(s): %2").arg(failed).arg(warnings.first()));
+  };
+  const QString& button = CShotAddress::addressOf(h.main, p.button).value_or(QString());
+
+  refuses("a step on a control that is not there fails", CShotStep::click("probeNoSuchButton"), "is not there");
+  p.button->hide();
+  refuses("a click on a hidden button fails", CShotStep::click(button), "hidden");
+  p.button->show();
+  refuses("a step a control cannot do fails", QJsonObject{{"do", "frobnicate"}, {"widget", button}}, "did not replay");
+  settle(100);
+}
+
+/** A shot file taken as a build takes it. */
+void checkShootScenario(CHarness& h) {
+  panel_t& p = h.p;
+  const QString name = "the shots of a scenario are taken in one replay of it, a context menu shot inside it";
+  QTemporaryDir dir;
+  const CShotWriter writer(dir.path());
+  CShotContext ctx(writer);
+  ctx.setFixture(h.ctx.project(), h.ctx.trk(), h.ctx.wpt(), h.ctx.rte(), h.ctx.area());
+
+  const QString& button = CShotAddress::addressOf(h.main, p.button).value_or(QString());
+  const QString& menuLabel = CShotAddress::addressOf(h.main, p.menuLabel).value_or(QString());
+  const QJsonArray size{h.main->width(), h.main->height()};
+  const QJsonObject open = CShotStep::menuAt(menuLabel, QJsonArray{0.5, 0.5});
+  const QJsonObject content{
+      {"scenarios", QJsonObject{{"press", QJsonArray{CShotStep::click(button)}}}},
+      {"shots",
+       QJsonArray{QJsonObject{{"id", "selftest/button"}, {"scenario", "press"}, {"size", size}, {"widget", button}},
+                  QJsonObject{{"id", "selftest/menu"},
+                              {"scenario", "press"},
+                              {"size", size},
+                              {"widget", QString()},
+                              {"open", open},
+                              {"active", "probeContextEntry"}}}}};
+  const QString& path = dir.filePath("selftest.json");
+  QFile out(path);
+  if (!out.open(QIODevice::WriteOnly) || out.write(QJsonDocument(content).toJson()) < 0) {
+    verdict(name, false, "the shot file cannot be written");
+    return;
+  }
+  out.close();
+
+  zeroCounts(p);
+  const qint32 failed = CShotPage::run(path, ctx, "*", "press");
+  settle(100);
+  const bool pictures =
+      QFileInfo::exists(dir.filePath("selftest/button.png")) && QFileInfo::exists(dir.filePath("selftest/menu.png"));
+  const bool closed = nullptr == QApplication::activePopupWidget();
+  verdict(name, 0 == failed && 1 == p.counts.value("button") && pictures && closed,
+          QString("%1 failure(s), %2, pictures %3, menu %4")
+              .arg(failed)
+              .arg(countsOf(p, {"button"}))
+              .arg(pictures ? "written" : "missing")
+              .arg(closed ? "closed" : "open"));
+}
+
+/** What every case together must have covered. */
+void checkCoverage(CHarness& h) {
+  const QStringList& missing = CShotHandlers::unreplayed();
+  verdict("every handler replays in some case", missing.isEmpty(), missing.join(", "));
+
+  // A menu entry is addressed by its objectName; without one, picking it is not recorded.
+  QStringList unnamed;
+  const QList<QAction*>& actions = h.main->findChildren<QAction*>();
+  for (const QAction* action : actions) {
+    if (action->isSeparator() || action->text().isEmpty() || !action->objectName().isEmpty() ||
+        nullptr != action->menu()) {
+      continue;
+    }
+    // The self test's own windows hold entries without one on purpose.
+    const auto isProbe = [&h](const QObject* object) {
+      for (const QObject* o = object; nullptr != o; o = o->parent()) {
+        if (o == h.p.window || o == h.p.surfaces) {
+          return true;
+        }
+      }
+      return false;
+    };
+    const QList<QObject*>& owners = action->associatedObjects();
+    if (!isProbe(action) && std::any_of(owners.begin(), owners.end(), [](const QObject* owner) {
+          return nullptr != qobject_cast<const QMenu*>(owner) || nullptr != qobject_cast<const QToolBar*>(owner);
+        })) {
+      unnamed << action->text();
+    }
+  }
+  unnamed.sort();
+  verdict("every entry of the main window's menus and toolbars has an objectName", unnamed.isEmpty(),
+          unnamed.join(", "));
+}
+}  // namespace
+
+qint32 CShotSelfTest::run(CShotContext& ctx) {
+  failures = 0;
+  cases = 0;
+
+  CMainWindow* main = ctx.mainWindow();
+  CGisListWks* wks = const_cast<CGisListWks*>(ctx.wksList());
+  CCanvas* canvas = ctx.canvas();
+  CGisItemTrk* trk = ctx.trk();
+  const bool trackUsable =
+      nullptr != trk && !trk->getTrackData().segs.isEmpty() && trk->getTrackData().segs.first().pts.size() >= 3;
+  if (nullptr == main || nullptr == wks || nullptr == canvas || !trackUsable || 0 == wks->topLevelItemCount()) {
+    verdict("the fixture has what the cases need: a main window, a map, a project and a track of three points", false);
+    return failures;
+  }
+
+  // An item's screen options open beside the click; in a narrow map they fall outside it and cannot be clicked.
+  main->showNormal();
+  main->resize(1600, 1000);
+  settle(500);
+
+  {
+    CHarness h(ctx, main, wks, canvas, trk);
+    checkQtControls(h);
+    checkWorkspace(h);
+    checkMap(h);
+    checkPlotAndIconGrid(h);
+    checkRowButtons(h);
+    checkGeoSearchMenus(h);
+    checkMapPois(h);
+    checkScenarioTwice(h);
+    checkRenderAll(h);
+    checkReplayRefuses(h);
+    checkShootScenario(h);
+    checkCoverage(h);
+  }
+
   qWarning().noquote() << "shoot: self test" << (cases - failures) << "of" << cases << "cases pass";
   return failures;
 }

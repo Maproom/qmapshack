@@ -21,6 +21,8 @@
 #include <gdal.h>
 
 #include <QFont>
+#include <QLocale>
+#include <QStyleHints>
 
 #if defined(Q_OS_MAC)
 #include "setup/CAppSetupMac.h"
@@ -242,4 +244,20 @@ void IAppSetup::processArguments() {
     if (fontSize > 0.) appFont.setPointSizeF(fontSize);
   }
   qApp->setFont(appFont);
+
+  // --locale switches the whole locale, not only the strings: numbers, dates and time zone names
+  // come from QLocale, so a run left on the system locale renders English text with German dates.
+  // Without the option nothing changes - QLocale already defaults to the system.
+  if (qlOpts->locale != nullptr) {
+    QLocale::setDefault(QLocale(qlOpts->locale));
+  }
+
+  // override default application color scheme
+  if (qlOpts->colormode != nullptr) {
+    if (qlOpts->colormode.toLower() == "light") {
+      qApp->styleHints()->setColorScheme(Qt::ColorScheme::Light);
+    } else if (qlOpts->colormode.toLower() == "dark") {
+      qApp->styleHints()->setColorScheme(Qt::ColorScheme::Dark);
+    }
+  }
 }

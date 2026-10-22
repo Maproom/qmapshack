@@ -22,6 +22,7 @@
 
 #include <QFont>
 #include <QLocale>
+#include <QStyleHints>
 
 #if defined(Q_OS_MAC)
 #include "setup/CAppSetupMac.h"
@@ -217,5 +218,14 @@ void IAppSetup::processArguments() {
   // Without the option nothing changes - QLocale already defaults to the system.
   if (qlOpts->locale != nullptr) {
     QLocale::setDefault(QLocale(qlOpts->locale));
+  }
+
+  // override default application color scheme
+  if (qlOpts->colormode != nullptr) {
+    if (qlOpts->colormode.toLower() == "light") {
+      qApp->styleHints()->setColorScheme(Qt::ColorScheme::Light);
+    } else if (qlOpts->colormode.toLower() == "dark") {
+      qApp->styleHints()->setColorScheme(Qt::ColorScheme::Dark);
+    }
   }
 }

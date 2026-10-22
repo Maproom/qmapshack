@@ -33,12 +33,20 @@ class CAppOpts {
   const QString locale;
   const QString fontfamily;
   const QString fontsize;
+  const QString colormode;
   const QStringList arguments;
 
-  CAppOpts(bool noSplash, bool doDebug, bool doLogfile, const QString& config,
-        const QString& locale, const QString& fontFamily, const QString& fontSize, const QStringList& args)
-      : nosplash(noSplash), debug(doDebug), logfile(doLogfile), configfile(config),
-        locale(locale), fontfamily(fontFamily), fontsize(fontSize), arguments(args) {}
+  CAppOpts(bool noSplash, bool doDebug, bool doLogfile, const QString& config, const QString& locale,
+           const QString& fontFamily, const QString& fontSize, const QString& colorMode, const QStringList& args)
+      : nosplash(noSplash),
+        debug(doDebug),
+        logfile(doLogfile),
+        configfile(config),
+        locale(locale),
+        fontfamily(fontFamily),
+        fontsize(fontSize),
+        colormode(colorMode),
+        arguments(args) {}
 };
 
 extern CAppOpts* qlOpts;

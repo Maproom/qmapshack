@@ -1579,6 +1579,9 @@ void CMainWindow::slotStartQMapTool() {
   if (qlOpts->fontsize != "") {
     arguments << "--font-size" << qlOpts->fontsize;
   }
+  if (qlOpts->colormode != "") {
+    arguments << "--color-mode" << qlOpts->colormode;
+  }
   arguments << "--style" << ((QProxyStyle*)qApp->style())->baseStyle()->name();
   QProcess::startDetached("qmaptool", arguments);
 }

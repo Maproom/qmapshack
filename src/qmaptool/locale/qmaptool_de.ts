@@ -4,12 +4,12 @@
 <context>
     <name>CAppSetupLinux</name>
     <message>
-        <location filename="../setup/CAppSetupLinux.cpp" line="108"/>
+        <location filename="../setup/CAppSetupLinux.cpp" line="105"/>
         <source>Fatal...</source>
         <translation>Schwerer Fehler...</translation>
     </message>
     <message>
-        <location filename="../setup/CAppSetupLinux.cpp" line="109"/>
+        <location filename="../setup/CAppSetupLinux.cpp" line="105"/>
         <source>Failed to lock file&lt;br&gt;%1&lt;br&gt;%2</source>
         <translatorcomment>Datei konnte nicht gesperrt werden&lt;br&gt;%1&lt;br&gt;%2</translatorcomment>
         <translation></translation>
@@ -18,12 +18,12 @@
 <context>
     <name>CAppSetupMac</name>
     <message>
-        <location filename="../setup/CAppSetupMac.cpp" line="171"/>
+        <location filename="../setup/CAppSetupMac.cpp" line="169"/>
         <source>Fatal...</source>
         <translation>Schwerer Fehler...</translation>
     </message>
     <message>
-        <location filename="../setup/CAppSetupMac.cpp" line="172"/>
+        <location filename="../setup/CAppSetupMac.cpp" line="169"/>
         <source>Failed to lock file&lt;br&gt;%1&lt;br&gt;%2</source>
         <translation>Datei konnte nicht gesperrt werden&lt;br&gt;%1&lt;br&gt;%2</translation>
     </message>
@@ -31,12 +31,12 @@
 <context>
     <name>CAppSetupWin</name>
     <message>
-        <location filename="../setup/CAppSetupWin.cpp" line="120"/>
+        <location filename="../setup/CAppSetupWin.cpp" line="118"/>
         <source>Fatal...</source>
         <translation>Schwerer Fehler...</translation>
     </message>
     <message>
-        <location filename="../setup/CAppSetupWin.cpp" line="121"/>
+        <location filename="../setup/CAppSetupWin.cpp" line="119"/>
         <source>Failed to lock file&lt;br&gt;%1&lt;br&gt;%2</source>
         <translation>Datei konnte nicht gesperrt werden&lt;br&gt;%1&lt;br&gt;%2</translation>
     </message>
@@ -93,7 +93,7 @@
     </message>
     <message>
         <location filename="../setup/CCommandProcessor.cpp" line="46"/>
-        <location filename="../setup/CCommandProcessor.cpp" line="55"/>
+        <location filename="../setup/CCommandProcessor.cpp" line="60"/>
         <source>name</source>
         <translation>Name</translation>
     </message>
@@ -109,16 +109,27 @@
     </message>
     <message>
         <location filename="../setup/CCommandProcessor.cpp" line="53"/>
+        <source>Application color mode.</source>
+        <translation>Farbmodus der Applikation.</translation>
+    </message>
+    <message>
+        <location filename="../setup/CCommandProcessor.cpp" line="54"/>
+        <source>mode</source>
+        <translation>Modus</translation>
+    </message>
+    <message>
+        <location filename="../setup/CCommandProcessor.cpp" line="58"/>
         <source>Qt style.</source>
         <translation>Qt-Stil.</translation>
     </message>
     <message>
         <location filename="../setup/CCommandProcessor.cpp" line="53"/>
+        <location filename="../setup/CCommandProcessor.cpp" line="58"/>
         <source>Available:</source>
         <translation>Verfügbar:</translation>
     </message>
     <message>
-        <location filename="../setup/CCommandProcessor.cpp" line="54"/>
+        <location filename="../setup/CCommandProcessor.cpp" line="59"/>
         <source>Recommended:</source>
         <translation>Empfohlen:</translation>
     </message>
@@ -388,12 +399,12 @@
     <message>
         <location filename="../misc.h" line="29"/>
         <source>File access failed...</source>
-        <translation type="unfinished"></translation>
+        <translation>Dateizugriff fehlgeschlagen...</translation>
     </message>
     <message>
         <location filename="../misc.h" line="30"/>
         <source>Failed to open %1 with error %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Öffnen von %1 mit Fehler %2 fehlgeschlagen</translation>
     </message>
 </context>
 <context>
@@ -1287,7 +1298,7 @@ oder
     </message>
     <message>
         <source>&lt;b style=&apos;color: red;&apos;&gt;not found&lt;/b&gt;</source>
-        <translation>&lt;b style=&apos;color: red;&apos;&gt;nicht gefunden&lt;/b&gt;</translation>
+        <translation type="vanished">&lt;b style=&apos;color: red;&apos;&gt;nicht gefunden&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../setup/ISetupExtTools.ui" line="32"/>
@@ -1491,7 +1502,7 @@ oder
     </message>
     <message>
         <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdaladdo&quot; found. Please check setup!&lt;/b&gt;</source>
-        <translation>&lt;b style=&apos;color: red;&apos;&gt;&quot;gdaladdo&quot;nicht gefunden. Bitte überprüfen Sie die Einstellungen!&lt;/b&gt;</translation>
+        <translation type="vanished">&lt;b style=&apos;color: red;&apos;&gt;&quot;gdaladdo&quot;nicht gefunden. Bitte überprüfen Sie die Einstellungen!&lt;/b&gt;</translation>
     </message>
 </context>
 <context>
@@ -1553,11 +1564,11 @@ oder
     </message>
     <message>
         <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdalwarp&quot; found. Please check setup!&lt;/b&gt;</source>
-        <translation>&lt;b style=&apos;color: red;&apos;&gt;&quot;gdalwarp&quot;nicht gefunden. Bitte überprüfen Sie die Einstellungen!&lt;/b&gt;</translation>
+        <translation type="vanished">&lt;b style=&apos;color: red;&apos;&gt;&quot;gdalwarp&quot;nicht gefunden. Bitte überprüfen Sie die Einstellungen!&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdaladdo&quot; found. Please check setup!&lt;/b&gt;</source>
-        <translation>&lt;b style=&apos;color: red;&apos;&gt;&quot;gdaladdo&quot;nicht gefunden. Bitte überprüfen Sie die Einstellungen!&lt;/b&gt;</translation>
+        <translation type="vanished">&lt;b style=&apos;color: red;&apos;&gt;&quot;gdaladdo&quot;nicht gefunden. Bitte überprüfen Sie die Einstellungen!&lt;/b&gt;</translation>
     </message>
 </context>
 <context>
@@ -1610,7 +1621,7 @@ oder
     </message>
     <message>
         <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;qmt_map2jnx&quot; found. Please check setup!&lt;/b&gt;</source>
-        <translation>&lt;b style=&apos;color: red;&apos;&gt;&quot;qmt_map2jnx&quot;nicht gefunden. Bitte überprüfen Sie die Einstellungen!&lt;/b&gt;</translation>
+        <translation type="vanished">&lt;b style=&apos;color: red;&apos;&gt;&quot;qmt_map2jnx&quot;nicht gefunden. Bitte überprüfen Sie die Einstellungen!&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../tool/IToolExport.ui" line="184"/>
@@ -1888,15 +1899,15 @@ oder
     </message>
     <message>
         <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdaladdo&quot; found. Please check setup!&lt;/b&gt;</source>
-        <translation>&lt;b style=&apos;color: red;&apos;&gt;&quot;gdaladdo&quot;nicht gefunden. Bitte überprüfen Sie die Einstellungen!&lt;/b&gt;</translation>
+        <translation type="vanished">&lt;b style=&apos;color: red;&apos;&gt;&quot;gdaladdo&quot;nicht gefunden. Bitte überprüfen Sie die Einstellungen!&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdal_translate&quot; found. Please check setup!&lt;/b&gt;</source>
-        <translation>&lt;b style=&apos;color: red;&apos;&gt;&quot;gdal_translate&quot;nicht gefunden. Bitte überprüfen Sie die Einstellungen!&lt;/b&gt;</translation>
+        <translation type="vanished">&lt;b style=&apos;color: red;&apos;&gt;&quot;gdal_translate&quot;nicht gefunden. Bitte überprüfen Sie die Einstellungen!&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;qmt_rgb2pct&quot; found. Please check setup!&lt;/b&gt;</source>
-        <translation>&lt;b style=&apos;color: red;&apos;&gt;&quot;qmt_rgb2pct&quot;nicht gefunden. Bitte überprüfen Sie die Einstellungen!&lt;/b&gt;</translation>
+        <translation type="vanished">&lt;b style=&apos;color: red;&apos;&gt;&quot;qmt_rgb2pct&quot;nicht gefunden. Bitte überprüfen Sie die Einstellungen!&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../tool/IToolPalettize.ui" line="254"/>
@@ -1973,15 +1984,15 @@ oder
     </message>
     <message>
         <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdalwarp&quot; found. Please check setup!&lt;/b&gt;</source>
-        <translation>&lt;b style=&apos;color: red;&apos;&gt;&quot;gdalwarp&quot;nicht gefunden. Bitte überprüfen Sie die Einstellungen!&lt;/b&gt;</translation>
+        <translation type="vanished">&lt;b style=&apos;color: red;&apos;&gt;&quot;gdalwarp&quot;nicht gefunden. Bitte überprüfen Sie die Einstellungen!&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdal_translate&quot; found. Please check setup!&lt;/b&gt;</source>
-        <translation>&lt;b style=&apos;color: red;&apos;&gt;&quot;gdal_translate&quot;nicht gefunden. Bitte überprüfen Sie die Einstellungen!&lt;/b&gt;</translation>
+        <translation type="vanished">&lt;b style=&apos;color: red;&apos;&gt;&quot;gdal_translate&quot;nicht gefunden. Bitte überprüfen Sie die Einstellungen!&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdaladdo&quot; found. Please check setup!&lt;/b&gt;</source>
-        <translation>&lt;b style=&apos;color: red;&apos;&gt;&quot;gdaladdo&quot;nicht gefunden. Bitte überprüfen Sie die Einstellungen!&lt;/b&gt;</translation>
+        <translation type="vanished">&lt;b style=&apos;color: red;&apos;&gt;&quot;gdaladdo&quot;nicht gefunden. Bitte überprüfen Sie die Einstellungen!&lt;/b&gt;</translation>
     </message>
 </context>
 <context>

@@ -49,6 +49,11 @@ CAppOpts* CCommandProcessor::processOptions(const QStringList& arguments) {
   QCommandLineOption fontSizeOption(QStringList() << "font-size", tr("Application font size."), tr("size"));
   parser.addOption(fontSizeOption);
 
+  QCommandLineOption colorModeOption(QStringList() << "color-mode",
+                                     tr("Application color mode.") % "\n" % tr("Available:") % " light, dark",
+                                     tr("mode"));
+  parser.addOption(colorModeOption);
+
   QCommandLineOption styleOption(QStringList() << "style",
                                  tr("Qt style.") % "\n" % tr("Available:") % " " % QStyleFactory::keys().join(", ") %
                                      "\n" % tr("Recommended:") % " Fusion",
@@ -61,5 +66,5 @@ CAppOpts* CCommandProcessor::processOptions(const QStringList& arguments) {
 
   return new CAppOpts(parser.isSet(nosplashOption), parser.isSet(debugOption), parser.isSet(logfileOption),
                       parser.value(configOption), parser.value(localeOption), parser.value(fontFamilyOption),
-                      parser.value(fontSizeOption), parser.positionalArguments());
+                      parser.value(fontSizeOption), parser.value(colorModeOption), parser.positionalArguments());
 }

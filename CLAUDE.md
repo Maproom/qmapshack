@@ -84,8 +84,10 @@ Target-scoped CMake. Nothing is set at directory scope except the MSVC options b
   generators resolve the per-config variable to the same path as the plain one, so Linux and the
   macOS release path (`build-QMS.sh` uses `Unix Makefiles`; its Xcode branch is marked BROKEN and
   exits before bundling) are flat whatever the build type.
-- **`ConfigureChecks.cmake` probes through the C++ compiler.** The project enables no C language, so
-  `check_include_file` / `check_symbol_exists` hard-fail; use the `_cxx` variants.
+- **The project enables C as well as C++** (`LANGUAGES CXX C`). PROJ is a C library and its imported
+  target can carry C compile features (Homebrew's exports `c_std_99`), which a CXX-only project fails
+  to generate. `ConfigureChecks.cmake` still probes through the C++ compiler with the `_cxx` variants,
+  as the code it guards is C++.
 - **`CMAKE_AUTOUIC` is OFF** — the `.ui` files are listed explicitly and go through `qt_wrap_ui`.
   `qt_standard_project_setup()` sits directly after `find_package(Qt6 ...)` because it flips
   AUTOMOC/AUTOUIC and appends to `CMAKE_INSTALL_RPATH`.
@@ -215,6 +217,81 @@ With vector or track routing active, `updateLeadLines()` finds the map/track pol
 active point → `leadLineCoord1/2` (geographic) and `leadLinePixel1/2` (screen).
 `GPS_Math_SubPolyline()` then extracts the segment lying between the two adjacent line points →
 `subLineCoord1/2` / `subLinePixel1/2`. The sub-line is what becomes the routed sub-segment on drop.
+
+---
+
+## Architecture: MTP devices
+
+`CDeviceGarminMtp` works only through the abstract `IDeviceAccess`. The maintainer's rule is that
+new device support goes into the OS-specific device watcher and an `IDeviceAccess` subclass only;
+growing `IDeviceAccess` or touching `CDeviceGarminMtp`/`IDevice`/the workspace needs a real
+blocker. `IDeviceAccess` is synchronous by design. `CDeviceAccessKMtp::waitForCopyOperation()`
+keeps the GUI repainting through a transfer by spinning a nested `QEventLoop` inside the
+synchronous call, so a backend with a worker thread gets a responsive GUI without an async API.
+The project loader calls `listFilesOnStorage()` from a `CThread` and `readFileFromStorage()` on
+the GUI thread (`BlockingQueuedConnection`). Each storage of a device is its own workspace device,
+so a memory card shows next to the internal storage; a storage without `GarminDevice.xml` falls
+back to the fixed paths in `CDeviceGarminMtp::setup()`.
+
+**Open, all platforms:** deleting a `CDeviceGarminMtp` while its load thread runs (an unplug during
+the initial load) blocks the GUI for `CThread::cancel()`'s 5 s, because the thread waits on a
+`BlockingQueuedConnection` into the GUI, and afterwards the thread uses the deleted device.
+
+### macOS: `CDeviceAccessLibMtp`
+
+libmtp is required on macOS. One worker thread per USB device (`Connection`) owns the libmtp
+session and serves every storage's `CDeviceAccessLibMtp`; each call waits behind a nested loop.
+
+- **Devices are found through libusb hotplug, never by `LIBMTP_Detect_Raw_Devices()`.** That scan
+  opens every USB device missing from libmtp's device table and sends vendor requests to some of
+  them. `CUsbWorker` registers a hotplug callback filtered on Garmin's vendor id (it also reports
+  devices already connected), and `CDeviceAccessLibMtp::openDevice()` takes the flags from libmtp's
+  table or probes that one device with `LIBMTP_Check_Specific_Device()`, on the worker thread. The
+  GUI thread never calls libmtp. libusb's bus number and device address are what libmtp's raw device
+  wants.
+- **The watcher reconciles, it does not react.** Hotplug only edits `pluggedMtpDevices`;
+  `slotUpdateMtp()` then removes what is open but no longer plugged and opens at most one plugged
+  device per pass. Every open and removal runs local event loops that can re-enter it, so a nested
+  call only sets `updateMtpAgain` and the outer call runs another pass; the timer is set once, at
+  the end. A serial per arrival tells a device replugged at the same address from the earlier one.
+- **A new device is opened 3 s after it appears.** A booting Edge 1040 shows up on USB for about a
+  millisecond and leaves again; the delay keeps such a device from being opened. Any failed open —
+  not MTP yet, no storage yet, a failed listing, held by Garmin Express or OpenMTP — is retried
+  2.5, 5, 10, 20 and 40 s later, then given up until the device is plugged in again. A device
+  without `GarminDevice.xml` is dropped at once.
+- **libmtp is not thread safe, so every libmtp call holds one process-wide mutex.** Consequence:
+  destroying a `Connection` blocks the GUI until another device's running transfer ends.
+- **A device must not be deleted while a call to it runs**, since the call waits in local event
+  loops, its failure message boxes included. Each public call holds `CBusy` on its connection's
+  counter, and the watcher postpones removing a device whose `isBusy()` is true.
+- **A quit aborts every running transfer.** `QCoreApplication::exit()` emits `aboutToQuit` before it
+  ends any event loop (Qt 6.8.0 and 6.11.2), and a connection made on the first `openDevice()` sets the
+  process-wide `quitting` from it; libmtp's progress callback of every connection answers by aborting,
+  and the object an aborted upload created is deleted. It must be process-wide: a device opened from
+  inside another device's waiting call waits for the libmtp lock that call's worker holds, and the
+  outer call cannot resume until the inner one returns. It also reaches calls waiting on the loader
+  thread, whose loops a quit does not end. In `run()`, the worker posts the loop's quit before it
+  releases the semaphore, so the loop and the captured locals outlive the worker's last use.
+  Measured on the Edge with a 75 MB upload and a quit Apple event: the send stopped within 6 ms of
+  `aboutToQuit`, and the app exited 2.4 s after the quit. The Edge 1040 drops an aborted object itself,
+  so the cleanup delete fails there and nothing is left behind; that delete once took the device 4 s.
+- **Transfers go straight through the caller's file descriptor**, as `CDeviceAccessKMtp` does. Nothing
+  is read back.
+- **An upload never deletes a file.** "Send to Devices" of a project the device already has goes
+  through `IDevice::updateProject()`, which removes the device's copy first, so a name still taken
+  belongs to another project: `simplifiedName()` drops every character outside `[A-Za-z0-9_]`, and
+  "Tour 1" and "Tour-1" both become `Tour1.gpx`. The upload refuses it.
+- **Object ids come from remembered folder listings.** A lookup walks the path down from the Garmin
+  folder, taking ancestors from memory. Listing a folder, sending and removing fetch the folder
+  concerned; reading reuses it, so the loader's 118 reads need no listing each. A lookup that fails
+  forgets every listing and is walked once more from the device, and nothing below `retryLookup()`
+  retries; a failed read forgets them too. Forgetting must reach the ancestors: a folder made anew
+  keeps its stale id in its parent's listing.
+  `LIBMTP_Get_Files_And_Folders()` returns no files for an empty folder and for a failure alike,
+  so `entries()` tells them apart by the error stack.
+- `LIBMTP_Open_Raw_Device_Uncached()` already calls `LIBMTP_Get_Storage()` and fails only on -1;
+  1 means storage ids without properties and is a working device.
+- Homebrew Qt ships D-Bus, so a macOS build also compiles the Linux D-Bus device sources.
 
 ---
 

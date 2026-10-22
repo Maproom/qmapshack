@@ -224,6 +224,13 @@ if(BUILD_TESTING)
     enable_testing()
 endif()
 
+if(APPLE)
+    # macOS has no MTP service, so MTP devices are accessed directly, and found through libusb hotplug
+    find_package(PkgConfig REQUIRED)
+    pkg_check_modules(LIBMTP REQUIRED IMPORTED_TARGET libmtp>=1.1.21)
+    pkg_check_modules(LIBUSB REQUIRED IMPORTED_TARGET libusb-1.0)
+endif()
+
 # Everything included. Let's finetune the mess a bit more
 
 if(APPLE)

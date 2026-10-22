@@ -373,15 +373,24 @@ set( SRCS
 )
 
 
+if(Qt6DBus_FOUND OR APPLE)
+list(APPEND SRCS
+    device/IDeviceAccess.cpp
+    device/CDeviceGarminMtp.cpp
+    device/CDeviceGarminArchiveMtp.cpp
+)
+endif()
+
+if(APPLE)
+list(APPEND SRCS device/CDeviceAccessLibMtp.cpp)
+endif()
+
 if(Qt6DBus_FOUND)
 set( SRCS
     ${SRCS}
-    device/IDeviceAccess.cpp
     device/CDeviceWatcherLinux.cpp
     device/CDeviceAccessKMtp.cpp
     device/CDeviceAccessGvfsMtp.cpp
-    device/CDeviceGarminMtp.cpp
-    device/CDeviceGarminArchiveMtp.cpp
     device/CDeviceGenericMtp.cpp
     device/dbus/org.kde.kmtp.Daemon.cpp
     device/dbus/org.kde.kmtp.Device.cpp
@@ -781,16 +790,25 @@ set( HDRS
 )
 
 
+if(Qt6DBus_FOUND OR APPLE)
+list(APPEND HDRS
+    device/IDeviceAccess.h
+    device/CDeviceGarminMtp.h
+    device/CDeviceGarminArchiveMtp.h
+)
+endif()
+
+if(APPLE)
+list(APPEND HDRS device/CDeviceAccessLibMtp.h)
+endif()
+
 if(Qt6DBus_FOUND)
 set( HDRS
     ${HDRS}
     device/CDeviceWatcherLinux.h
     device/CDeviceAccessKMtp.h
     device/CDeviceAccessGvfsMtp.h
-    device/CDeviceGarminMtp.h
-    device/CDeviceGarminArchiveMtp.h
     device/CDeviceGenericMtp.h
-    device/IDeviceAccess.h
     device/dbus/org.kde.kmtp.Daemon.h
     device/dbus/org.kde.kmtp.Device.h
     device/dbus/org.kde.kmtp.Storage.h
@@ -1057,6 +1075,10 @@ target_compile_definitions(${APPLICATION_NAME} PRIVATE
 
 if(Qt6DBus_FOUND)
     target_compile_definitions(${APPLICATION_NAME} PRIVATE HAVE_DBUS)
+endif()
+
+if(APPLE)
+    target_link_libraries(${APPLICATION_NAME} PRIVATE PkgConfig::LIBMTP PkgConfig::LIBUSB)
 endif()
 
 if(DEVELOPMENT_VERSION)

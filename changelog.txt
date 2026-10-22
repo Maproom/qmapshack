@@ -11,6 +11,7 @@ V1.XX.X
 [QMS-1278] More macOS build scripts maintenance
 [QMS-1280] Show surfaces and way types of tracks from OpenStreetMap data
 [QMS-1281] Support Mapsforge POI files of version 3 and 4
+[QMS-1284] Access Garmin MTP devices natively on macOS
 [QMS-1289] Include standalone tool qms_surfacedb into QMapShack.app on macOS
 [QMS-1291] Fix: CMake problem with the dev version on Arch Linux
 

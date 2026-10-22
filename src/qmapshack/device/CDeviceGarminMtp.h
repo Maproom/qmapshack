@@ -23,17 +23,16 @@
 
 #include "device/IDevice.h"
 
-class QDBusObjectPath;
 class IDeviceAccess;
-class GVFSMount;
 class CThread;
 
 class CDeviceGarminMtp : public QObject, public IDevice {
   Q_OBJECT
  public:
-  CDeviceGarminMtp(const QDBusObjectPath& objectPathStorage, const QString& key, QTreeWidget* parent);
-
-  CDeviceGarminMtp(const GVFSMount& mount, const QString& storagePath, const QString& key, QTreeWidget* parent);
+  /**
+   * @brief A Garmin device on an MTP storage, taking ownership of the platform's storage access
+   */
+  CDeviceGarminMtp(IDeviceAccess* access, const QString& key, QTreeWidget* parent);
 
   virtual ~CDeviceGarminMtp();
 

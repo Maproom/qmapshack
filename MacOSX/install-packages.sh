@@ -35,6 +35,11 @@ if [ -z "$MACPORTS_BUILD" ]; then
 
     brew install dbus
 
+    # MTP access to Garmin devices
+    brew install pkgconf
+    brew install libmtp
+    brew install libusb
+
     # packages to build proj
     if [[ "$BUILD_PROJ" == "x" ]]; then
         brew install libtiff
@@ -94,6 +99,11 @@ else
     sudo port install gdal
     sudo port install curl
     sudo port install sqlite3
+
+    # MTP access to Garmin devices
+    sudo port install pkgconfig
+    sudo port install libmtp
+    sudo port install libusb
 
     sudo port install cmake
 

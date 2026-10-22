@@ -33,13 +33,13 @@ function copyAdditionalLibraries {
             echo "---build needs brew at runtime---"
 
             if [ "$BUILD_GDAL" = "x" ]; then
-                for pkg in openjpeg libkml minizip uriparser geos sqlite brotli dbus
+                for pkg in openjpeg libkml minizip uriparser geos sqlite brotli dbus libmtp libusb
                 do
                     ( cd $(brew --prefix $pkg)/lib; find *.dylib | cpio -dpv $BUILD_BUNDLE_FRW_DIR )
                 done
                 ( cd $LOCAL_ENV/lib; find libgdal*.dylib | cpio -dpv $BUILD_BUNDLE_FRW_DIR )
             else
-                for pkg in gdal openexr geos jpeg-xl dbus
+                for pkg in gdal openexr geos jpeg-xl dbus libmtp libusb
                 do
                     ( cd $(brew --prefix $pkg)/lib; find *.dylib | cpio -dpv $BUILD_BUNDLE_FRW_DIR )
                 done
@@ -61,6 +61,8 @@ function copyAdditionalLibraries {
         echo "---copy additional libs into bundle ------------------"
         port contents routino | grep $PACKAGES_PATH/lib/libgroutino | xargs -I{} cp -vP {} $BUILD_BUNDLE_FRW_DIR
         port contents gdal | grep $GDAL/lib/libgdal | xargs -I{} cp -vP {} $BUILD_BUNDLE_FRW_DIR
+        port contents libmtp | grep $PACKAGES_PATH/lib/libmtp | xargs -I{} cp -vP {} $BUILD_BUNDLE_FRW_DIR
+        port contents libusb | grep $PACKAGES_PATH/lib/libusb | xargs -I{} cp -vP {} $BUILD_BUNDLE_FRW_DIR
 
         cp -v -R $QT_DEV_PATH/lib/QtOpenGL.framework $BUILD_BUNDLE_FRW_DIR
         cp -v -R $QT_DEV_PATH/lib/QtQuick.framework $BUILD_BUNDLE_FRW_DIR

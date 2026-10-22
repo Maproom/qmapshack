@@ -21,11 +21,19 @@
 
 #include <DiskArbitration/DiskArbitration.h>
 
+#include <QDeadlineTimer>
+#include <QMap>
+#include <QPointer>
 #include <QStorageInfo>
 #include <QThread>
+#include <QTimer>
 #include <QtCore/QStringList>
+#include <atomic>
 
+#include "device/CDeviceAccessLibMtp.h"
 #include "device/IDeviceWatcher.h"
+
+struct libusb_context;
 
 class CDeviceWorker : public QThread {
   Q_OBJECT
@@ -44,6 +52,36 @@ class CDeviceWorker : public QThread {
   DASessionRef mSession;
 };
 
+/**
+ * @brief Reports Garmin USB devices coming and going through libusb hotplug
+ *
+ * Scanning the bus with libmtp would open every unknown USB device, so only Garmin devices are looked at.
+ */
+class CUsbWorker : public QThread {
+  Q_OBJECT
+ public:
+  CUsbWorker() = default;
+  ~CUsbWorker() override;
+
+  /**
+   * @brief Register for Garmin devices and start the event thread
+   *
+   * Devices already connected are reported, too.
+   */
+  bool startHotplug();
+  void stop();
+  void run() override;
+
+ signals:
+  void sigUsbDeviceAdded(quint8 bus, quint8 address, quint16 vendor, quint16 product);
+  void sigUsbDeviceRemoved(quint8 bus, quint8 address, quint16 product);
+
+ private:
+  libusb_context* context = nullptr;
+  int handle = 0;
+  std::atomic_bool stopping{false};
+};
+
 class CDeviceWatcherMac : public IDeviceWatcher {
   Q_OBJECT
  public:
@@ -54,12 +92,45 @@ class CDeviceWatcherMac : public IDeviceWatcher {
   void slotDeviceAdded(QString dev);
   void slotDeviceRemoved(QString dev);
   void slotEndListing();
+  void slotUsbDeviceAdded(quint8 bus, quint8 address, quint16 vendor, quint16 product);
+  void slotUsbDeviceRemoved(quint8 bus, quint8 address, quint16 product);
+  void slotUpdateMtp();
 
  private:
   void addDevice(const QStorageInfo& storage);
+  /**
+   * @brief Bring the workspace in line with the Garmin devices plugged in, opening at most one device
+   * @param next  The time in ms until the next pass is due, or -1
+   * @return True if a device was opened, which needs another pass
+   */
+  bool updateMtpOnce(qint64& next);
 
   CDeviceWorker worker;
+  CUsbWorker usbWorker;
   QStringList deviceList;
+  QTimer mtpTimer;
+
+  struct plugged_t {
+    CDeviceAccessLibMtp::DeviceInfo info;
+    quint64 serial = 0; /**< tells a device plugged in again at the same address from the earlier one */
+    QDeadlineTimer next;
+    qint32 failures = 0;
+    bool done = false; /**< opened, or given up */
+  };
+  struct storage_t {
+    QString key; /**< the device in the workspace */
+    QPointer<CDeviceAccessLibMtp> access;
+  };
+  struct opened_t {
+    quint64 serial = 0;
+    QList<storage_t> storages;
+  };
+
+  QMap<QString, plugged_t> pluggedMtpDevices; /**< the Garmin USB devices plugged in */
+  QMap<QString, opened_t> openedMtpDevices;   /**< the USB devices with storages in the workspace */
+  quint64 mtpSerial = 0;
+  bool updatingMtp = false;
+  bool updateMtpAgain = false; /**< called again while updating */
 };
 
 #endif  // CDEVICEWATCHERMAC_H

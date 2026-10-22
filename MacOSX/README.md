@@ -60,6 +60,23 @@ and uninstall them if not needed anymore.
 
 ---
 
+## Garmin MTP devices
+
+macOS has no MTP service, so QMapShack accesses MTP devices directly through
+`libmtp` and `libusb`, which are required dependencies. Install them and
+`pkg-config` with Homebrew (`install-packages.sh` does this) or MacPorts before
+configuring.
+
+Garmin devices that use MTP instead of USB mass storage, such as recent Edge
+models, appear in the workspace like on Linux: their projects are loaded, and
+projects can be sent to, updated on and removed from the device. Garmin devices
+are reported by libusb hotplug as they are plugged in. Close Garmin Express,
+OpenMTP and other MTP clients before starting QMapShack, as only one application
+can hold the device. Like on Linux, each storage with a Garmin folder, such as a
+memory card, appears as a device of its own.
+
+---
+
 Contents of this folder _MacOSX_
 
 Folders:

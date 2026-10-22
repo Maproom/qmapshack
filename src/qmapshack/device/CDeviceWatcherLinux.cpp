@@ -23,6 +23,8 @@
 #include <QtXml>
 
 #include "canvas/CCanvas.h"
+#include "device/CDeviceAccessGvfsMtp.h"
+#include "device/CDeviceAccessKMtp.h"
 #include "device/CDeviceGarminMtp.h"
 #include "device/CDeviceGenericMtp.h"
 #include "device/dbus/org.kde.kmtp.Device.h"
@@ -313,7 +315,7 @@ void CDeviceWatcherLinux::addKMtpDevice(org::kde::kmtp::Device& device, const QS
     const QString& key = QString("%1@%2").arg(storage.description(), device.udi());
     switch (deviceType) {
       case IDevice::eTypeGarminMtp:
-        new CDeviceGarminMtp(storagePath, key, listWks);
+        new CDeviceGarminMtp(new CDeviceAccessKMtp(storagePath, nullptr), key, listWks);
         break;
       case IDevice::eTypeGenericMtp:
         new CDeviceGenericMtp(storagePath, key, listWks);
@@ -339,7 +341,7 @@ void CDeviceWatcherLinux::slotGVFSMounted(GVFSMount mount) {
   qDebug() << "CDeviceWatcherLinux::slotGVFSMounted" << mount.dbusId << mount.objectPath << mount.fuseMountPoint;
   QPointer<CDeviceWatcherLinux> self(this);
   QTimer::singleShot(2000, this, [self, mount]() {
-    if(self.isNull()){
+    if (self.isNull()) {
       return;
     }
     QDir dir(mount.fuseMountPoint.constData());
@@ -376,7 +378,7 @@ void CDeviceWatcherLinux::addGVFSMtpDevice(const GVFSMount& mount, const QString
     const QString& key = QString("%1@%2").arg(storagePath, mount.dbusId);
     switch (deviceType) {
       case IDevice::eTypeGarminMtp:
-        new CDeviceGarminMtp(mount, storagePath, key, listWks);
+        new CDeviceGarminMtp(new CDeviceAccessGvfsMtp(mount, storagePath, nullptr), key, listWks);
         break;
       case IDevice::eTypeGenericMtp:
         new CDeviceGenericMtp(mount, storagePath, key, listWks);

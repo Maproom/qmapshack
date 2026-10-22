@@ -18,25 +18,17 @@
 
 #include "device/CDeviceGarminMtp.h"
 
-#include "device/CDeviceAccessGvfsMtp.h"
-#include "device/CDeviceAccessKMtp.h"
 #include "device/CDeviceGarminArchiveMtp.h"
+#include "device/IDeviceAccess.h"
 #include "gis/CGisListWks.h"
 #include "gis/fit2/CFit2Project.h"
 #include "gis/gpx/CGpxProject.h"
 #include "helpers/CThread.h"
 #include "misc.h"
 
-CDeviceGarminMtp::CDeviceGarminMtp(const GVFSMount& mount, const QString& storagePath, const QString& key,
-                                   QTreeWidget* parent)
-    : QObject(parent), IDevice("", eTypeGarminMtp, key, parent) {
-  device = new CDeviceAccessGvfsMtp(mount, storagePath, this);
-  setup();
-}
-
-CDeviceGarminMtp::CDeviceGarminMtp(const QDBusObjectPath& objectPathStorage, const QString& key, QTreeWidget* parent)
-    : QObject(parent), IDevice("", eTypeGarminMtp, key, parent) {
-  device = new CDeviceAccessKMtp(objectPathStorage, this);
+CDeviceGarminMtp::CDeviceGarminMtp(IDeviceAccess* access, const QString& key, QTreeWidget* parent)
+    : QObject(parent), IDevice("", eTypeGarminMtp, key, parent), device(access) {
+  device->setParent(this);
   setup();
 }
 

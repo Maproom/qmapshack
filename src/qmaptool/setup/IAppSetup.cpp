@@ -242,4 +242,11 @@ void IAppSetup::processArguments() {
     if (fontSize > 0.) appFont.setPointSizeF(fontSize);
   }
   qApp->setFont(appFont);
+
+  // --locale switches the whole locale, not only the strings: numbers, dates and time zone names
+  // come from QLocale, so a run left on the system locale renders English text with German dates.
+  // Without the option nothing changes - QLocale already defaults to the system.
+  if (qlOpts->locale != nullptr) {
+    QLocale::setDefault(QLocale(qlOpts->locale));
+  }
 }

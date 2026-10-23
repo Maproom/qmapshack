@@ -4,12 +4,12 @@
 <context>
     <name>CAppSetupLinux</name>
     <message>
-        <location filename="../setup/CAppSetupLinux.cpp" line="108"/>
+        <location filename="../setup/CAppSetupLinux.cpp" line="105"/>
         <source>Fatal...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setup/CAppSetupLinux.cpp" line="109"/>
+        <location filename="../setup/CAppSetupLinux.cpp" line="105"/>
         <source>Failed to lock file&lt;br&gt;%1&lt;br&gt;%2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -17,12 +17,12 @@
 <context>
     <name>CAppSetupMac</name>
     <message>
-        <location filename="../setup/CAppSetupMac.cpp" line="171"/>
+        <location filename="../setup/CAppSetupMac.cpp" line="169"/>
         <source>Fatal...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setup/CAppSetupMac.cpp" line="172"/>
+        <location filename="../setup/CAppSetupMac.cpp" line="169"/>
         <source>Failed to lock file&lt;br&gt;%1&lt;br&gt;%2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -30,12 +30,12 @@
 <context>
     <name>CAppSetupWin</name>
     <message>
-        <location filename="../setup/CAppSetupWin.cpp" line="120"/>
+        <location filename="../setup/CAppSetupWin.cpp" line="118"/>
         <source>Fatal...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setup/CAppSetupWin.cpp" line="121"/>
+        <location filename="../setup/CAppSetupWin.cpp" line="119"/>
         <source>Failed to lock file&lt;br&gt;%1&lt;br&gt;%2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1346,10 +1346,6 @@ or
         <source>&lt;b&gt;Note:&lt;/b&gt; Usually QMapTool should detect all external tools by itself. If it does not, it&apos;s a bad setup and you should fix the PATH variable of your system. You can setup the paths manually, too, if you know what you are doing. But please keep in mind that GDAL needs a proper environment setup to function properly. If it&apos;s not setup properly you might get results but these can be off grid.</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>&lt;b style=&apos;color: red;&apos;&gt;not found&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>ITimeZoneSetup</name>
@@ -1471,10 +1467,6 @@ or
         <source>No &quot;gdaladdo&quot; found. Please check setup!</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdaladdo&quot; found. Please check setup!&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>IToolCutMap</name>
@@ -1533,14 +1525,6 @@ or
         <source>No &quot;gdaladdo&quot; found. Please check setup!</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdalwarp&quot; found. Please check setup!&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdaladdo&quot; found. Please check setup!&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>IToolExport</name>
@@ -1593,10 +1577,6 @@ or
     <message>
         <location filename="../tool/IToolExport.ui" line="184"/>
         <source>Target Filename</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;qmt_map2jnx&quot; found. Please check setup!&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1872,18 +1852,6 @@ or
         <source>Select filename</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdaladdo&quot; found. Please check setup!&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdal_translate&quot; found. Please check setup!&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;qmt_rgb2pct&quot; found. Please check setup!&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>IToolRefMap</name>
@@ -1950,18 +1918,6 @@ or
     <message>
         <location filename="../tool/IToolRefMap.ui" line="256"/>
         <source>No &quot;gdaladdo&quot; found. Please check setup!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdalwarp&quot; found. Please check setup!&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdal_translate&quot; found. Please check setup!&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdaladdo&quot; found. Please check setup!&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

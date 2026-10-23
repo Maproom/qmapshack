@@ -4,12 +4,12 @@
 <context>
     <name>CAppSetupLinux</name>
     <message>
-        <location filename="../setup/CAppSetupLinux.cpp" line="108"/>
+        <location filename="../setup/CAppSetupLinux.cpp" line="105"/>
         <source>Fatal...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setup/CAppSetupLinux.cpp" line="109"/>
+        <location filename="../setup/CAppSetupLinux.cpp" line="105"/>
         <source>Failed to lock file&lt;br&gt;%1&lt;br&gt;%2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -17,12 +17,12 @@
 <context>
     <name>CAppSetupMac</name>
     <message>
-        <location filename="../setup/CAppSetupMac.cpp" line="171"/>
+        <location filename="../setup/CAppSetupMac.cpp" line="169"/>
         <source>Fatal...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setup/CAppSetupMac.cpp" line="172"/>
+        <location filename="../setup/CAppSetupMac.cpp" line="169"/>
         <source>Failed to lock file&lt;br&gt;%1&lt;br&gt;%2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -30,12 +30,12 @@
 <context>
     <name>CAppSetupWin</name>
     <message>
-        <location filename="../setup/CAppSetupWin.cpp" line="120"/>
+        <location filename="../setup/CAppSetupWin.cpp" line="118"/>
         <source>Fatal...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setup/CAppSetupWin.cpp" line="121"/>
+        <location filename="../setup/CAppSetupWin.cpp" line="119"/>
         <source>Failed to lock file&lt;br&gt;%1&lt;br&gt;%2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -159,7 +159,7 @@
     <message>
         <location filename="../canvas/CDrawContextProj.cpp" line="59"/>
         <source>Failed to load</source>
-        <translation type="unfinished">Fallo al cargar</translation>
+        <translation>Fallo al cargar</translation>
     </message>
 </context>
 <context>
@@ -169,38 +169,38 @@
         <location filename="../helpers/CGdalFile.cpp" line="56"/>
         <location filename="../helpers/CGdalFile.cpp" line="78"/>
         <source>Error...</source>
-        <translation type="unfinished">Error...</translation>
+        <translation>Error...</translation>
     </message>
     <message>
         <location filename="../helpers/CGdalFile.cpp" line="45"/>
         <location filename="../helpers/CGdalFile.cpp" line="56"/>
         <source>Failed to load file: %1</source>
-        <translation type="unfinished">Fallo al cargar el archivo: %1</translation>
+        <translation>Fallo al cargar el archivo: %1</translation>
     </message>
     <message>
         <location filename="../helpers/CGdalFile.cpp" line="78"/>
         <source>File must be 8 bit palette or gray indexed.</source>
-        <translation type="unfinished">El archivo debe de tener una paleta superior a 8 bits o gris indexado.</translation>
+        <translation>El archivo debe de tener una paleta superior a 8 bits o gris indexado.</translation>
     </message>
     <message>
         <location filename="../helpers/CGdalFile.cpp" line="165"/>
         <source>(color table)</source>
-        <translation type="unfinished">(tabla de color)</translation>
+        <translation>(tabla de color)</translation>
     </message>
     <message>
         <location filename="../helpers/CGdalFile.cpp" line="169"/>
         <source>(RGB)</source>
-        <translation type="unfinished">(RGB)</translation>
+        <translation>(RGB)</translation>
     </message>
     <message>
         <location filename="../helpers/CGdalFile.cpp" line="173"/>
         <source>(RGBA)</source>
-        <translation type="unfinished">(RGBA)</translation>
+        <translation>(RGBA)</translation>
     </message>
     <message>
         <location filename="../helpers/CGdalFile.cpp" line="177"/>
         <source>(unknown)</source>
-        <translation type="unfinished">(desconocido)</translation>
+        <translation>(desconocido)</translation>
     </message>
 </context>
 <context>
@@ -500,7 +500,7 @@ También es la opción para ajustar los puntos de referencia en modo automático
 &apos;%1&apos;
 is not a valid coordinate system definition:
 %2</source>
-        <translation type="unfinished">El valor
+        <translation>El valor
 &apos;%1&apos;
 No es una definición válida del sistema de coordenadas:
 %2</translation>
@@ -537,13 +537,9 @@ No es una definición válida del sistema de coordenadas:
 <context>
     <name>CSetupExtTools</name>
     <message>
-        <source>&lt;b style=&apos;color: red;&apos;&gt;not found&lt;/b&gt;</source>
-        <translation type="vanished">&lt;b style=&apos;color: red;&apos;&gt;no encontrado&lt;/b&gt;</translation>
-    </message>
-    <message>
         <location filename="../setup/CSetupExtTools.cpp" line="62"/>
         <source>not found</source>
-        <translation type="unfinished"></translation>
+        <translation>no encontrado</translation>
     </message>
     <message>
         <location filename="../setup/CSetupExtTools.cpp" line="80"/>
@@ -929,7 +925,7 @@ o
     <message>
         <location filename="../items/IItemTreeWidget.ui" line="40"/>
         <source>Add map files to list</source>
-        <translation type="unfinished">Añadir archivos de mapa a la lista</translation>
+        <translation>Añadir archivos de mapa a la lista</translation>
     </message>
     <message>
         <location filename="../items/IItemTreeWidget.ui" line="43"/>
@@ -942,17 +938,17 @@ o
     <message>
         <location filename="../items/IItemTreeWidget.ui" line="57"/>
         <source>Remove selected file from the list.</source>
-        <translation type="unfinished">Borrar archivo seleccionado de la lista.</translation>
+        <translation>Borrar archivo seleccionado de la lista.</translation>
     </message>
     <message>
         <location filename="../items/IItemTreeWidget.ui" line="74"/>
         <source>Clear complete list of map files.</source>
-        <translation type="unfinished">Borrar lista completa de archivos de mapa.</translation>
+        <translation>Borrar lista completa de archivos de mapa.</translation>
     </message>
     <message>
         <location filename="../items/IItemTreeWidget.ui" line="91"/>
         <source>Reload the currently selected map.</source>
-        <translation type="unfinished">Recargar mapa seleccionado.</translation>
+        <translation>Recargar mapa seleccionado.</translation>
     </message>
 </context>
 <context>
@@ -1284,10 +1280,6 @@ o
         <translation>Configurar Herramientas Ext.</translation>
     </message>
     <message>
-        <source>&lt;b style=&apos;color: red;&apos;&gt;not found&lt;/b&gt;</source>
-        <translation>&lt;b style=&apos;color: red;&apos;&gt;no encontrado&lt;/b&gt;</translation>
-    </message>
-    <message>
         <location filename="../setup/ISetupExtTools.ui" line="32"/>
         <location filename="../setup/ISetupExtTools.ui" line="53"/>
         <location filename="../setup/ISetupExtTools.ui" line="74"/>
@@ -1331,7 +1323,7 @@ o
         <location filename="../setup/ISetupExtTools.ui" line="194"/>
         <location filename="../setup/ISetupExtTools.ui" line="257"/>
         <source>not found</source>
-        <translation type="unfinished"></translation>
+        <translation>no encontrado</translation>
     </message>
     <message>
         <location filename="../setup/ISetupExtTools.ui" line="29"/>
@@ -1485,11 +1477,7 @@ o
     <message>
         <location filename="../tool/IToolAddOverview.ui" line="257"/>
         <source>No &quot;gdaladdo&quot; found. Please check setup!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdaladdo&quot; found. Please check setup!&lt;/b&gt;</source>
-        <translation>&lt;b style=&apos;color: red;&apos;&gt;&quot;Gdaladdo&quot; no encontrado. ¡Comprobar la configuración!&lt;/b&gt;</translation>
+        <translation>&quot;gdaladdo&quot; no encontrado. ¡Comprobar la configuración!</translation>
     </message>
 </context>
 <context>
@@ -1542,20 +1530,12 @@ o
     <message>
         <location filename="../tool/IToolCutMap.ui" line="233"/>
         <source>No &quot;gdalwarp&quot; found. Please check setup!</source>
-        <translation type="unfinished"></translation>
+        <translation>&quot;gdalwarp&quot; no encontrado. ¡Comprobar la configuración!</translation>
     </message>
     <message>
         <location filename="../tool/IToolCutMap.ui" line="243"/>
         <source>No &quot;gdaladdo&quot; found. Please check setup!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdalwarp&quot; found. Please check setup!&lt;/b&gt;</source>
-        <translation>lt;b style=&apos;color: red;&apos;&gt; &quot;Gdalwarp&quot;no encontrado. ¡Comprobar la configuración!&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdaladdo&quot; found. Please check setup!&lt;/b&gt;</source>
-        <translation>&lt;b style=&apos;color: red;&apos;&gt; &quot;Gdaladdo&quot;no encontrado ¡Comprobar la configuración!&lt;/b&gt;</translation>
+        <translation>&quot;gdaladdo&quot; no encontrado. ¡Comprobar la configuración!</translation>
     </message>
 </context>
 <context>
@@ -1604,11 +1584,7 @@ o
     <message>
         <location filename="../tool/IToolExport.ui" line="173"/>
         <source>No &quot;qmt_map2jnx&quot; found. Please check setup!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;qmt_map2jnx&quot; found. Please check setup!&lt;/b&gt;</source>
-        <translation>&lt;b style=&apos;color: red;&apos;&gt;&quot;qmt_map2jnx&quot; No encontrado. ¡Comprobar la configuración!&lt;/b&gt;</translation>
+        <translation>&quot;qmt_map2jnx&quot; no encontrado. ¡Comprobar la configuración!</translation>
     </message>
     <message>
         <location filename="../tool/IToolExport.ui" line="184"/>
@@ -1653,7 +1629,7 @@ o
     <message>
         <location filename="../tool/export/IToolExportJnx.ui" line="88"/>
         <source>Description</source>
-        <translation type="unfinished">Descripción</translation>
+        <translation>Descripción</translation>
     </message>
     <message>
         <location filename="../tool/export/IToolExportJnx.ui" line="105"/>
@@ -1871,29 +1847,17 @@ o
     <message>
         <location filename="../tool/IToolPalettize.ui" line="220"/>
         <source>No &quot;gdaladdo&quot; found. Please check setup!</source>
-        <translation type="unfinished"></translation>
+        <translation>&quot;gdaladdo&quot; no encontrado. ¡Comprobar la configuración!</translation>
     </message>
     <message>
         <location filename="../tool/IToolPalettize.ui" line="230"/>
         <source>No &quot;gdal_translate&quot; found. Please check setup!</source>
-        <translation type="unfinished"></translation>
+        <translation>&quot;gdal_translate&quot; no encontrado. ¡Comprobar la configuración!</translation>
     </message>
     <message>
         <location filename="../tool/IToolPalettize.ui" line="240"/>
         <source>No &quot;qmt_rgb2pct&quot; found. Please check setup!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdaladdo&quot; found. Please check setup!&lt;/b&gt;</source>
-        <translation>&lt;b style=&apos;color: red;&apos;&gt;&quot;Gdaladdo&quot; no encontrado. ¡Comprobar la configuración!&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdal_translate&quot; found. Please check setup!&lt;/b&gt;</source>
-        <translation>&lt;b style=&apos;color: red;&apos;&gt;&quot;Gdal_translate&quot; no encontrado. ¡Comprobar la configuración!&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;qmt_rgb2pct&quot; found. Please check setup!&lt;/b&gt;</source>
-        <translation>&lt;b style=&apos;color: red;&apos;&gt;&quot;Qmt_rgb2pct&quot; no encontrado. ¡Comprobar la configuración!&lt;/b&gt;</translation>
+        <translation>&quot;qmt_rgb2pct&quot; no encontrado. ¡Comprobar la configuración!</translation>
     </message>
     <message>
         <location filename="../tool/IToolPalettize.ui" line="254"/>
@@ -1956,29 +1920,17 @@ o
     <message>
         <location filename="../tool/IToolRefMap.ui" line="236"/>
         <source>No &quot;gdalwarp&quot; found. Please check setup!</source>
-        <translation type="unfinished"></translation>
+        <translation>&quot;gdalwarp&quot; no encontrado. ¡Comprobar la configuración!</translation>
     </message>
     <message>
         <location filename="../tool/IToolRefMap.ui" line="246"/>
         <source>No &quot;gdal_translate&quot; found. Please check setup!</source>
-        <translation type="unfinished"></translation>
+        <translation>&quot;gdal_translate&quot; no encontrado. ¡Comprobar la configuración!</translation>
     </message>
     <message>
         <location filename="../tool/IToolRefMap.ui" line="256"/>
         <source>No &quot;gdaladdo&quot; found. Please check setup!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdalwarp&quot; found. Please check setup!&lt;/b&gt;</source>
-        <translation>&lt;b style=&apos;color: red;&apos;&gt;&quot;Gdalwarp&quot; no encontrado. ¡Comprobar la configuración!&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdal_translate&quot; found. Please check setup!&lt;/b&gt;</source>
-        <translation>&lt;b style=&apos;color: red;&apos;&gt;&quot;Gdal_translate&quot; no encontrado. ¡Comprobar la configuración!&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdaladdo&quot; found. Please check setup!&lt;/b&gt;</source>
-        <translation>&lt;b style=&apos;color: red;&apos;&gt;&quot;Gdaladdo&quot; no encontrado. ¡Comprobar la configuración!&lt;/b&gt;</translation>
+        <translation>&quot;gdaladdo&quot; no encontrado. ¡Comprobar la configuración!</translation>
     </message>
 </context>
 <context>

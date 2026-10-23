@@ -4,12 +4,12 @@
 <context>
     <name>CAppSetupLinux</name>
     <message>
-        <location filename="../setup/CAppSetupLinux.cpp" line="108"/>
+        <location filename="../setup/CAppSetupLinux.cpp" line="105"/>
         <source>Fatal...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setup/CAppSetupLinux.cpp" line="109"/>
+        <location filename="../setup/CAppSetupLinux.cpp" line="105"/>
         <source>Failed to lock file&lt;br&gt;%1&lt;br&gt;%2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -17,12 +17,12 @@
 <context>
     <name>CAppSetupMac</name>
     <message>
-        <location filename="../setup/CAppSetupMac.cpp" line="171"/>
+        <location filename="../setup/CAppSetupMac.cpp" line="169"/>
         <source>Fatal...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setup/CAppSetupMac.cpp" line="172"/>
+        <location filename="../setup/CAppSetupMac.cpp" line="169"/>
         <source>Failed to lock file&lt;br&gt;%1&lt;br&gt;%2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -30,12 +30,12 @@
 <context>
     <name>CAppSetupWin</name>
     <message>
-        <location filename="../setup/CAppSetupWin.cpp" line="120"/>
+        <location filename="../setup/CAppSetupWin.cpp" line="118"/>
         <source>Fatal...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setup/CAppSetupWin.cpp" line="121"/>
+        <location filename="../setup/CAppSetupWin.cpp" line="119"/>
         <source>Failed to lock file&lt;br&gt;%1&lt;br&gt;%2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -538,13 +538,9 @@ is not a valid coordinate system definition:
 <context>
     <name>CSetupExtTools</name>
     <message>
-        <source>&lt;b style=&apos;color: red;&apos;&gt;not found&lt;/b&gt;</source>
-        <translation type="vanished">&lt;b style=&apos;color: red;&apos;&gt;не найдено&lt;/b&gt;</translation>
-    </message>
-    <message>
         <location filename="../setup/CSetupExtTools.cpp" line="62"/>
         <source>not found</source>
-        <translation type="unfinished"></translation>
+        <translation>не найдено</translation>
     </message>
     <message>
         <location filename="../setup/CSetupExtTools.cpp" line="80"/>
@@ -1292,10 +1288,6 @@ or
         <translation>Настройка внешних инструментов</translation>
     </message>
     <message>
-        <source>&lt;b style=&apos;color: red;&apos;&gt;not found&lt;/b&gt;</source>
-        <translation>&lt;b style=&apos;color: red;&apos;&gt;не найдено&lt;/b&gt;</translation>
-    </message>
-    <message>
         <location filename="../setup/ISetupExtTools.ui" line="32"/>
         <location filename="../setup/ISetupExtTools.ui" line="53"/>
         <location filename="../setup/ISetupExtTools.ui" line="74"/>
@@ -1339,7 +1331,7 @@ or
         <location filename="../setup/ISetupExtTools.ui" line="194"/>
         <location filename="../setup/ISetupExtTools.ui" line="257"/>
         <source>not found</source>
-        <translation type="unfinished"></translation>
+        <translation>не найдено</translation>
     </message>
     <message>
         <location filename="../setup/ISetupExtTools.ui" line="29"/>
@@ -1493,11 +1485,7 @@ or
     <message>
         <location filename="../tool/IToolAddOverview.ui" line="257"/>
         <source>No &quot;gdaladdo&quot; found. Please check setup!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdaladdo&quot; found. Please check setup!&lt;/b&gt;</source>
-        <translation>&lt;b style=&apos;color: red;&apos;&gt;&quot;gdaladdo&quot; не найдено. Пожалуйста, проверьте настройки!&lt;/b&gt;</translation>
+        <translation>&quot;gdaladdo&quot; не найдено. Пожалуйста, проверьте настройки!</translation>
     </message>
 </context>
 <context>
@@ -1550,20 +1538,12 @@ or
     <message>
         <location filename="../tool/IToolCutMap.ui" line="233"/>
         <source>No &quot;gdalwarp&quot; found. Please check setup!</source>
-        <translation type="unfinished"></translation>
+        <translation>&quot;gdalwarp&quot; не найдено. Пожалуйста, проверьте настройки!</translation>
     </message>
     <message>
         <location filename="../tool/IToolCutMap.ui" line="243"/>
         <source>No &quot;gdaladdo&quot; found. Please check setup!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdalwarp&quot; found. Please check setup!&lt;/b&gt;</source>
-        <translation>&lt;b style=&apos;color: red;&apos;&gt;&quot;gdalwarp&quot; не найдено. Пожалуйста, проверьте настройки!&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdaladdo&quot; found. Please check setup!&lt;/b&gt;</source>
-        <translation>&lt;b style=&apos;color: red;&apos;&gt;&quot;gdaladdo&quot; не найдено. Пожалуйста, проверьте настройки!&lt;/b&gt;</translation>
+        <translation>&quot;gdaladdo&quot; не найдено. Пожалуйста, проверьте настройки!</translation>
     </message>
 </context>
 <context>
@@ -1612,11 +1592,7 @@ or
     <message>
         <location filename="../tool/IToolExport.ui" line="173"/>
         <source>No &quot;qmt_map2jnx&quot; found. Please check setup!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;qmt_map2jnx&quot; found. Please check setup!&lt;/b&gt;</source>
-        <translation>&lt;b style=&apos;color: red;&apos;&gt;&quot;qmt_map2jnx&quot; не найдено. Пожалуйста, проверьте настройки!&lt;/b&gt;</translation>
+        <translation>&quot;qmt_map2jnx&quot; не найдено. Пожалуйста, проверьте настройки!</translation>
     </message>
     <message>
         <location filename="../tool/IToolExport.ui" line="184"/>
@@ -1879,29 +1855,17 @@ or
     <message>
         <location filename="../tool/IToolPalettize.ui" line="220"/>
         <source>No &quot;gdaladdo&quot; found. Please check setup!</source>
-        <translation type="unfinished"></translation>
+        <translation>&quot;gdaladdo&quot; не найдено. Пожалуйста, проверьте настройки!</translation>
     </message>
     <message>
         <location filename="../tool/IToolPalettize.ui" line="230"/>
         <source>No &quot;gdal_translate&quot; found. Please check setup!</source>
-        <translation type="unfinished"></translation>
+        <translation>&quot;gdal_translate&quot; не найдено. Пожалуйста, проверьте настройки!</translation>
     </message>
     <message>
         <location filename="../tool/IToolPalettize.ui" line="240"/>
         <source>No &quot;qmt_rgb2pct&quot; found. Please check setup!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdaladdo&quot; found. Please check setup!&lt;/b&gt;</source>
-        <translation>&lt;b style=&apos;color: red;&apos;&gt;&quot;gdaladdo&quot; не найдено. Пожалуйста, проверьте настройки!&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdal_translate&quot; found. Please check setup!&lt;/b&gt;</source>
-        <translation>&lt;b style=&apos;color: red;&apos;&gt;&quot;gdal_translate&quot; не найдено. Пожалуйста, проверьте настройки!&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;qmt_rgb2pct&quot; found. Please check setup!&lt;/b&gt;</source>
-        <translation>&lt;b style=&apos;color: red;&apos;&gt;&quot;qmt_rgb2pct&quot; не найдено. Пожалуйста, проверьте настройки!&lt;/b&gt;</translation>
+        <translation>&quot;qmt_rgb2pct&quot; не найдено. Пожалуйста, проверьте настройки!</translation>
     </message>
     <message>
         <location filename="../tool/IToolPalettize.ui" line="254"/>
@@ -1964,29 +1928,17 @@ or
     <message>
         <location filename="../tool/IToolRefMap.ui" line="236"/>
         <source>No &quot;gdalwarp&quot; found. Please check setup!</source>
-        <translation type="unfinished"></translation>
+        <translation>&quot;gdalwarp&quot; не найдено. Пожалуйста, проверьте настройки!</translation>
     </message>
     <message>
         <location filename="../tool/IToolRefMap.ui" line="246"/>
         <source>No &quot;gdal_translate&quot; found. Please check setup!</source>
-        <translation type="unfinished"></translation>
+        <translation>&quot;gdal_translate&quot; не найдено. Пожалуйста, проверьте настройки!</translation>
     </message>
     <message>
         <location filename="../tool/IToolRefMap.ui" line="256"/>
         <source>No &quot;gdaladdo&quot; found. Please check setup!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdalwarp&quot; found. Please check setup!&lt;/b&gt;</source>
-        <translation>&lt;b style=&apos;color: red;&apos;&gt;&quot;gdalwarp&quot; не найдено. Пожалуйста, проверьте настройки!&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdal_translate&quot; found. Please check setup!&lt;/b&gt;</source>
-        <translation>&lt;b style=&apos;color: red;&apos;&gt;&quot;gdal_translate&quot; не найдено. Пожалуйста, проверьте настройки!&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;b style=&apos;color: red;&apos;&gt;No &quot;gdaladdo&quot; found. Please check setup!&lt;/b&gt;</source>
-        <translation>&lt;b style=&apos;color: red;&apos;&gt;&quot;gdaladdo&quot; не найдено. Пожалуйста, проверьте настройки!&lt;/b&gt;</translation>
+        <translation>&quot;gdaladdo&quot; не найдено. Пожалуйста, проверьте настройки!</translation>
     </message>
 </context>
 <context>

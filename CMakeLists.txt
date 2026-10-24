@@ -84,6 +84,11 @@ if (APPLE)
     # Foundation and DiskArbitration come from find_library below, linked per target. The headers
     # resolve through the implicit framework search path, not an include directory.
 
+    if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+        # Suppress "clang++: warning: -framework IOKit: 'linker' input unused"
+        add_compile_options(-Wno-unused-command-line-argument)
+    endif()
+
     if(NOT DEFINED QT_DEV_PATH)
         message(FATAL_ERROR "QT_DEV_PATH not set!!!")
     endif()

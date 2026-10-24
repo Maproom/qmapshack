@@ -15,6 +15,7 @@ V1.XX.X
 [QMS-1289] Include standalone tool qms_surfacedb into QMapShack.app on macOS
 [QMS-1291] Fix: CMake problem with the dev version on Arch Linux
 [QMS-1297] Translate "surface" dialogs into German
+[QMS-1299] Fix: Compiler warnings due to "-framework IOkit" compiler option on macOS
 
 V1.21.1
 [QMS-1212] Update macOS build scripts

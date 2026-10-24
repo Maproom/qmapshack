@@ -50,6 +50,9 @@ class CMainWindow : public QMainWindow, private Ui::IMainWindow {
 
   static QWidget* getBestWidgetForParent();
 
+  /** @brief Write the window's, the views' and the units' settings; the destructor's, and documentation mode's. */
+  void saveConfig();
+
   QString getHomePath() { return (homeDir.path() != "" && homeDir.exists()) ? homeDir.absolutePath() : ""; }
 
   QString getMapsPath() {

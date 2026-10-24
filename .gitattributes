@@ -17,3 +17,11 @@ src/icons/svghygiene   text eol=lf
 #
 # Markdown files should use lf
 *.md   text eol=lf
+
+# Fonts are binary; never let an eol attribute near them.
+*.ttf  binary
+
+# A fixture map's configuration key is the MD5 of its first 4096 bytes; CRLF changes it.
+doc/shots/fixtures/**/*.vrt   text eol=lf
+doc/shots/fixtures/**/*.tms   text eol=lf
+doc/shots/fixtures/**/*.wmts  text eol=lf

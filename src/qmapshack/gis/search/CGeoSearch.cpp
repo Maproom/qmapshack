@@ -110,33 +110,41 @@ void CGeoSearch::selectService(const QRect& rect) {
 
   QActionGroup* actionGroup = new QActionGroup(menu);
 
-  actionGroup->addAction(addService(CGeoSearchConfig::eServiceNominatim, tr("OSM Nominatim"), menu));
-  actionGroup->addAction(addService(CGeoSearchConfig::eServiceGeonamesSearch, tr("Geonames Places"), menu));
-  actionGroup->addAction(addService(CGeoSearchConfig::eServiceGeonamesAddress, tr("Geonames Address"), menu));
-  actionGroup->addAction(addService(CGeoSearchConfig::eServiceGoogle, tr("Google"), menu));
+  actionGroup->addAction(
+      addService(CGeoSearchConfig::eServiceNominatim, "actionServiceNominatim", tr("OSM Nominatim"), menu));
+  actionGroup->addAction(
+      addService(CGeoSearchConfig::eServiceGeonamesSearch, "actionServiceGeonamesSearch", tr("Geonames Places"), menu));
+  actionGroup->addAction(addService(CGeoSearchConfig::eServiceGeonamesAddress, "actionServiceGeonamesAddress",
+                                    tr("Geonames Address"), menu));
+  actionGroup->addAction(addService(CGeoSearchConfig::eServiceGoogle, "actionServiceGoogle", tr("Google"), menu));
 
   menu->addSeparator();
   QAction* actAccu = menu->addAction(QIcon("://icons/AddGreen.svgt"), tr("Accumulative Results"));
+  actAccu->setObjectName("actionAccuResults");
   actAccu->setCheckable(true);
   actAccu->setChecked(searchConfig->accumulativeResults);
   connect(actAccu, &QAction::triggered, this, &CGeoSearch::slotAccuResults);
 
   QAction* actReset = menu->addAction(QIcon("://icons/Reset.svgt"), tr("Reset Results"));
+  actReset->setObjectName("actionResetResults");
   actReset->setEnabled(childCount() != 0);
   connect(actReset, &QAction::triggered, this, &CGeoSearch::slotResetResults);
 
   menu->addSeparator();
 
   QAction* actSetup = menu->addAction(QIcon("://icons/Apply.svgt"), tr("Configure Services"));
+  actSetup->setObjectName("actionSetupGeoSearch");
   actSetup->setToolTip(toRichText(tr("configure providers of geocoding search services")));
   connect(actSetup, &QAction::triggered, this, &CGeoSearch::slotSetupGeoSearch);
 
   menu->move(tree->mapToGlobal(rect.topRight()));
   menu->exec();
+  delete menu;
 }
 
-QAction* CGeoSearch::addService(CGeoSearchConfig::service_e service, const QString& name, QMenu* menu) {
+QAction* CGeoSearch::addService(CGeoSearchConfig::service_e service, const char* id, const QString& name, QMenu* menu) {
   QAction* action = menu->addAction(name);
+  action->setObjectName(QString::fromLatin1(id));
   action->setCheckable(true);
 
   connect(action, &QAction::triggered, this, [this, service](bool checked) { slotServiceSelected(service, checked); });

@@ -335,6 +335,15 @@ void CDBItemDelegate::toggleCheckState(IDBItem& item) {
   }
 }
 
+QRect CDBItemDelegate::buttonRect(const QStyleOptionViewItem& opt, const QModelIndex& index, button_e button) const {
+  const IDBItem* item = indexToItem(index);
+  if (item == nullptr || button != button_e::eCheckState) {
+    return QRect();
+  }
+  return (item->type() == IDBItem::eTypeItem) ? getRectanglesItem(opt, *item).rectButton
+                                              : getRectanglesFolder(opt, *item).rectButton;
+}
+
 bool CDBItemDelegate::editorEvent(QEvent* event, QAbstractItemModel* model, const QStyleOptionViewItem& opt,
                                   const QModelIndex& index) {
   IDBItem* item = indexToItem(index);
@@ -365,6 +374,7 @@ bool CDBItemDelegate::editorEventFolder(QEvent* event, QAbstractItemModel* model
     auto* me = static_cast<QMouseEvent*>(event);
     if (layout.rectButton.contains(me->pos())) {
       toggleCheckState(item);
+      emit sigButtonPressed(index, button_e::eCheckState);
       return true;
     }
   }
@@ -383,6 +393,7 @@ bool CDBItemDelegate::editorEventItem(QEvent* event, QAbstractItemModel* model, 
     auto* me = static_cast<QMouseEvent*>(event);
     if (layout.rectButton.contains(me->pos())) {
       toggleCheckState(item);
+      emit sigButtonPressed(index, button_e::eCheckState);
       return true;
     }
   }

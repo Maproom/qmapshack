@@ -42,6 +42,17 @@ class CDBItemDelegate : public QStyledItemDelegate {
   CDBItemDelegate(QTreeWidget* parent);
   virtual ~CDBItemDelegate() = default;
 
+  /** @brief The buttons painted into a row. */
+  enum class button_e {
+    eNone,
+    eCheckState, /**< load a folder or an item into the workspace, or unload it */
+  };
+  Q_ENUM(button_e)
+
+  /** @return where @p button is painted in row @p index, invalid when the row has none; @p opt as editorEvent() gets it
+   */
+  QRect buttonRect(const QStyleOptionViewItem& opt, const QModelIndex& index, button_e button) const;
+
 #ifdef Q_CC_GNU
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wpedantic"
@@ -121,6 +132,10 @@ class CDBItemDelegate : public QStyledItemDelegate {
    */
   bool helpEvent(QHelpEvent* event, QAbstractItemView* view, const QStyleOptionViewItem& opt,
                  const QModelIndex& index) override;
+
+ signals:
+  /** @brief A press on @p button of row @p index acted; not emitted for an item row's double click. */
+  void sigButtonPressed(const QModelIndex& index, CDBItemDelegate::button_e button);
 
  private:
   /** @brief Cast the model index to an IDBItem; returns nullptr if the index is not an IDBItem. */

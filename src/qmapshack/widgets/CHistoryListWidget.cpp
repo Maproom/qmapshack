@@ -36,6 +36,8 @@ CHistoryListWidget::CHistoryListWidget(QWidget* parent) : QListWidget(parent) {
                                            &CHistoryListWidget::slotCutHistoryBefore);
   actionCutHistoryAfter = menu->addAction(QIcon("://icons/CutHistoryAfter.svgt"), tr("Cut history after"), this,
                                           &CHistoryListWidget::slotCutHistoryAfter);
+  actionCutHistoryBefore->setObjectName("actionCutHistoryBefore");
+  actionCutHistoryAfter->setObjectName("actionCutHistoryAfter");
 }
 
 CHistoryListWidget::~CHistoryListWidget() {}

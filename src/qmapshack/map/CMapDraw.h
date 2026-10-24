@@ -30,6 +30,7 @@ class CMapList;
 class QSettings;
 class CMapItem;
 class CMapVRT;
+class IMap;
 struct IPoiItem;
 
 class CMapDraw : public IDrawContext {
@@ -77,6 +78,19 @@ class CMapDraw : public IDrawContext {
   static void loadMapPath(QSettings& cfg);
   static const QStringList& getSupportedFormats() { return supportedFormats; }
   static const QString& getCacheRoot() { return cachePath; }
+
+  /**
+     @brief Redirect the tile cache root, before anything reads it.
+
+     A scratch configuration otherwise deletes the user's tiles: CDiskCache::cleanupRemovedMaps().
+   */
+  static void setCacheRoot(const QString& path) { cachePath = path; }
+
+  /** @return tiles the active maps are still waiting for; blocks while the draw thread runs */
+  qint32 pendingTiles();
+
+  /** @return tiles the active maps painted as a hole in the last draw; blocks while the draw thread runs */
+  qint32 failedTiles();
 
   /**
      @brief Forward messages to CCanvas::reportStatus()
@@ -144,6 +158,9 @@ class CMapDraw : public IDrawContext {
   void saveMapList();
 
  private:
+  /** @return @p count added up over the active maps, under CMapItem::mutexActiveMaps */
+  qint32 sumOverActiveMaps(qint32 (IMap::*count)());
+
   /**
      @brief Create a CMapItem from a filename
 

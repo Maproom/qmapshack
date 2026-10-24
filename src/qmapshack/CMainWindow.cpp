@@ -548,12 +548,7 @@ void CMainWindow::prepareMenuForMac() {
   dockRte->toggleViewAction()->setMenuRole(QAction::NoRole);
 }
 
-CMainWindow::~CMainWindow() {
-  // Invalidate stylesheet to avoid crash after destruction (macOS!)
-  qApp->setStyleSheet("");
-
-  CActivityTrk::release();
-
+void CMainWindow::saveConfig() {
   SETTINGS;
   cfg.beginGroup("MainWindow");
   cfg.setValue("state", saveState());
@@ -574,8 +569,6 @@ CMainWindow::~CMainWindow() {
      and "Views" section containing a subsection for each view.
    */
   cfg.beginGroup("Canvas");
-  QList<CCanvas*> allViews;
-  QList<QWidget*> allOtherTabs;
   QStringList allViewKeys;
 
   // save setup of all views
@@ -588,7 +581,6 @@ CMainWindow::~CMainWindow() {
     CCanvas* view = dynamic_cast<CCanvas*>(tabWidget->widget(i));
 
     if (nullptr == view) {
-      allOtherTabs << tabWidget->widget(i);
       continue;
     }
 
@@ -597,8 +589,6 @@ CMainWindow::~CMainWindow() {
     cfg.beginGroup(view->getKey());
     view->saveConfig(cfg);
     cfg.endGroup();
-
-    allViews << view;
   }
   cfg.endGroup();  // Views
 
@@ -628,20 +618,6 @@ CMainWindow::~CMainWindow() {
   CPoiDraw::savePoiPath(cfg);
   cfg.endGroup();  // Canvas
 
-  /*
-      Delete all widgets in the tab widget other than views. The IPlot objects
-      in a track detail dialog send update events to the view on destruction.
-      So it is important that these are destroyed first.
-   */
-  qDeleteAll(allOtherTabs);
-  /*
-      Delete all canvas objects now to make sure they are destroyed before all
-      other objects. This allows children of the canvas to access central objects
-      like CGisWorkspace safely upon their destruction. (e.g. CMouseRangeTrk to reset
-      it's track's draw mode by key)
-   */
-  qDeleteAll(allViews);
-
   QByteArray tz;
   IUnit::tz_mode_e tzmode;
   bool useShortFormat;
@@ -655,6 +631,40 @@ CMainWindow::~CMainWindow() {
 
   toolBarConfig->saveSettings();
   geoSearchConfig->save();
+}
+
+CMainWindow::~CMainWindow() {
+  // Invalidate stylesheet to avoid crash after destruction (macOS!)
+  qApp->setStyleSheet("");
+
+  CActivityTrk::release();
+
+  saveConfig();
+
+  QList<CCanvas*> allViews;
+  QList<QWidget*> allOtherTabs;
+  for (int i = 0; i < tabWidget->count(); i++) {
+    CCanvas* view = dynamic_cast<CCanvas*>(tabWidget->widget(i));
+    if (nullptr == view) {
+      allOtherTabs << tabWidget->widget(i);
+    } else {
+      allViews << view;
+    }
+  }
+
+  /*
+      Delete all widgets in the tab widget other than views. The IPlot objects
+      in a track detail dialog send update events to the view on destruction.
+      So it is important that these are destroyed first.
+   */
+  qDeleteAll(allOtherTabs);
+  /*
+      Delete all canvas objects now to make sure they are destroyed before all
+      other objects. This allows children of the canvas to access central objects
+      like CGisWorkspace safely upon their destruction. (e.g. CMouseRangeTrk to reset
+      it's track's draw mode by key)
+   */
+  qDeleteAll(allViews);
 
   // delete icon manager explicitely to make sure temporary icon files are
   // removed upon destruction

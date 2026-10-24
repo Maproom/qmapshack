@@ -1,0 +1,309 @@
+/**********************************************************************************************
+   Copyright (C) 2026 Oliver Eichler <oliver.eichler@gmx.de>
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+**********************************************************************************************/
+
+#include "shoot/CShotReplay.h"
+
+#include <QApplication>
+#include <QDebug>
+#include <QDialog>
+#include <QEventLoop>
+#include <QJsonDocument>
+#include <QPointer>
+#include <QThread>
+#include <QTimer>
+#include <QWidget>
+#include <cstdlib>
+#include <memory>
+
+#include "CMainWindow.h"
+#include "canvas/CCanvas.h"
+#include "gis/CGisListWks.h"
+#include "gis/CGisWorkspace.h"
+#include "gis/trk/CGisItemTrk.h"
+#include "plot/IPlot.h"
+#include "shoot/CShotAddress.h"
+#include "shoot/CShotContext.h"
+#include "shoot/CShotHandlers.h"
+#include "shoot/CShotPage.h"
+#include "shoot/CShotStep.h"
+#include "shoot/CShotWriter.h"
+#include "units/IUnit.h"
+
+namespace {
+QString compact(const QJsonObject& step) {
+  return QString::fromUtf8(QJsonDocument(step).toJson(QJsonDocument::Compact));
+}
+
+using CShotReplay::blocker;
+
+/** The deadline of every perform() running, outermost first. */
+QList<QTimer*> armed;
+
+/** @brief Close the popups and modal dialogs on top of @p below, so the loops under them can return. */
+void closeAbove(const QWidget* below) {
+  QPointer<QWidget> widget = blocker();
+  while (!widget.isNull() && widget != below) {
+    // A dialog's closeEvent() may refuse; reject() ends its exec() regardless.
+    if (QDialog* dialog = qobject_cast<QDialog*>(widget); nullptr != dialog) {
+      dialog->reject();
+    } else {
+      widget->close();
+    }
+    QWidget* next = blocker();
+    if (next == widget) {
+      qWarning() << "shoot: the replay cannot close" << widget->metaObject()->className();
+      return;
+    }
+    widget = next;
+  }
+}
+
+/** A step that has not returned: which one, the event loop level and what was open when it started. */
+struct running_t {
+  qsizetype index = 0;
+  qint32 loopLevel = 0;
+  QPointer<QWidget> blocker;
+};
+
+/** One perform(), kept alive for a pump still queued when it ended. */
+struct queue_t {
+  QWidget* root = nullptr;
+  QList<QJsonObject> steps;
+  std::function<qint32()> whenReady;
+  qsizetype next = 0;
+  qint32 failures = 0;
+  /** The steps that have not returned, innermost last. */
+  QList<running_t> running;
+  /** A step failed: the rest is skipped and whenReady does not run. */
+  bool stopped = false;
+  bool done = false;
+  /** whenReady is running. */
+  bool picturing = false;
+  std::function<void()> pump;
+  QEventLoop loop;
+  /** What was on top when perform() started; the steps close only what they opened above it. */
+  QPointer<QWidget> below;
+  /** Restarted as each step starts and before whenReady; valid while not done. */
+  QTimer* deadline = nullptr;
+};
+}  // namespace
+
+qint32 CShotReplay::perform(QWidget* root, const QList<QJsonObject>& steps, const std::function<qint32()>& whenReady) {
+  const std::shared_ptr<queue_t> queue = std::make_shared<queue_t>();
+  queue->root = root;
+  queue->steps = steps;
+  queue->whenReady = whenReady;
+
+  // Weak, or the state would own the function that owns the state.
+  const std::weak_ptr<queue_t> weak = queue;
+  queue->pump = [weak]() {
+    const std::shared_ptr<queue_t> q = weak.lock();
+    if (nullptr == q || q->done) {
+      return;
+    }
+    // Only a step waiting in the exec() of a popup or dialog it opened may have the next one run inside it; one that
+    // spins events itself - a synthesized click, settle() - has not seen its own outcome yet.
+    // A popup open before the step is not one it waits in: its own waits run a loop above it too.
+    const bool insideExec = !q->running.isEmpty() &&
+                            QThread::currentThread()->loopLevel() > q->running.last().loopLevel &&
+                            nullptr != blocker() && blocker() != q->running.last().blocker;
+    if (!q->running.isEmpty() && !insideExec) {
+      QTimer::singleShot(1, qApp, q->pump);
+      return;
+    }
+
+    if (q->next < q->steps.size()) {
+      const qsizetype index = q->next++;
+      // Queued before the step runs: a step inside exec() returns only after a later step closed what it opened.
+      QTimer::singleShot(0, qApp, q->pump);
+      q->deadline->start(kDeadlineMs);
+      q->running << running_t{index, QThread::currentThread()->loopLevel(), blocker()};
+      CShotHandlers::setStepNumber(index + 1, q->steps.size());
+      const qint32 failed = CShotHandlers::replay(q->root, q->steps.at(index));
+      q->running.removeLast();
+      CShotHandlers::setStepNumber(q->running.isEmpty() ? 0 : q->running.last().index + 1, q->steps.size());
+      // The steps after a failed one act on a state that is not the recorded one; their failures say nothing new.
+      if (0 != failed && !q->stopped) {
+        q->stopped = true;
+        q->next = q->steps.size();
+        qDebug().noquote() << "shoot: the failed step as recorded:" << compact(q->steps.at(index));
+        qWarning().noquote() << "shoot: The actions after it are skipped and the picture is not taken. If the "
+                                "application or the example data changed since the scenario was recorded, record "
+                                "it again.";
+      }
+      q->failures += failed;
+      return;
+    }
+
+    q->done = true;
+    if (q->whenReady && !q->stopped) {
+      q->deadline->start(kDeadlineMs);
+      q->picturing = true;
+      q->failures += q->whenReady();
+      q->picturing = false;
+    }
+    // The loop below what a step opened cannot return while it is up. Without steps a window up is the writer's own.
+    if (!q->steps.isEmpty()) {
+      closeAbove(q->below);
+    }
+    q->loop.quit();
+  };
+
+  QTimer deadline;
+  deadline.setSingleShot(true);
+  // A step that never returns keeps every loop below it running, so nothing short of exiting ends the run.
+  // Armed until perform() returns: the picture and the closing of what a step opened can hang too.
+  QObject::connect(&deadline, &QTimer::timeout, &queue->loop, [queue]() {
+    const QWidget* open = blocker();
+    const QString& opened =
+        (nullptr == open) ? QString() : QString(" and %1 is open").arg(open->metaObject()->className());
+    if (queue->picturing) {
+      qWarning().noquote()
+          << QString("shoot: the picture was not taken within %1 s%2").arg(kDeadlineMs / 1000).arg(opened);
+    } else if (queue->running.isEmpty()) {
+      qWarning().noquote() << QString("shoot: the replay did not finish within %1 s with no step running%2")
+                                  .arg(kDeadlineMs / 1000)
+                                  .arg(opened);
+    } else {
+      // Innermost: the steps around it wait for it.
+      const qsizetype index = queue->running.last().index;
+      qWarning().noquote() << QString("shoot: step %1 ('%2') has not returned within %3 s%4")
+                                  .arg(index + 1)
+                                  .arg(CShotStep::describe(queue->steps.at(index)))
+                                  .arg(kDeadlineMs / 1000)
+                                  .arg(opened);
+      qDebug().noquote() << "shoot: the step as recorded:" << compact(queue->steps.at(index));
+    }
+    std::_Exit(kDeadlineExitCode);
+  });
+  queue->deadline = &deadline;
+  queue->below = blocker();
+  deadline.start(kDeadlineMs);
+  armed << &deadline;
+
+  QTimer::singleShot(0, qApp, queue->pump);
+  queue->loop.exec();
+  armed.removeOne(&deadline);
+  queue->deadline = nullptr;
+  return queue->failures;
+}
+
+void CShotReplay::keepAlive() {
+  for (QTimer* deadline : std::as_const(armed)) {
+    deadline->start(kDeadlineMs);
+  }
+}
+
+QWidget* CShotReplay::blocker() {
+  QWidget* popup = QApplication::activePopupWidget();
+  return (nullptr != popup) ? popup : QApplication::activeModalWidget();
+}
+
+void CShotReplay::clear(const QJsonArray& scenario, CShotContext& ctx) {
+  CMainWindow* main = ctx.mainWindow();
+  if (nullptr == main) {
+    return;
+  }
+
+  const QList<CCanvas*>& canvases = main->getCanvas();
+  for (CCanvas* canvas : canvases) {
+    // CMouseNormal closes its screen options on unfocus().
+    canvas->abortMouse();
+    canvas->resetMouse();
+  }
+  // A plot owns the range it started, so the track refuses other resets; an idle plot's slotStopRange() resets the
+  // track's mode and filter tab.
+  for (IPlot* plot : main->findChildren<IPlot*>()) {
+    // Private slots, so by name: a rename is reported here.
+    if (plot->isSelectingRange() && !QMetaObject::invokeMethod(plot, "slotStopRange")) {
+      qWarning() << "shoot: IPlot::slotStopRange() is gone; CShotReplay::clear() cannot end a range";
+    }
+    if (plot->isZoomed() && !QMetaObject::invokeMethod(plot, "slotResetZoom")) {
+      qWarning() << "shoot: IPlot::slotResetZoom() is gone; CShotReplay::clear() cannot reset a zoom";
+    }
+  }
+  // resetMouse() and slotStopRange() delete later, and processEvents() never delivers DeferredDelete.
+  QCoreApplication::sendPostedEvents(nullptr, QEvent::DeferredDelete);
+
+  CGisWorkspace::self().slotWksItemSelectionReset();
+  CShotHandlers::forgetPresses();
+
+  const CGisListWks* wks = ctx.wksList();
+  for (const QJsonValue& value : scenario) {
+    const QString& hit = value.toObject()["hit"].toString();
+    CGisItemTrk* trk = (hit.isEmpty() || nullptr == wks)
+                           ? nullptr
+                           : dynamic_cast<CGisItemTrk*>(CShotAddress::resolveItemPath(*wks, hit));
+    if (nullptr != trk) {
+      trk->setMouseFocusByPoint(NOPOINT, CGisItemTrk::eFocusMouseClick, "CShotReplay");
+      trk->setMouseFocusByPoint(NOPOINT, CGisItemTrk::eFocusMouseMove, "CShotReplay");
+    }
+  }
+  CShotWriter::settle(main);
+}
+
+qint32 CShotReplay::replay(const QJsonArray& scenario, CShotContext& ctx, const std::function<qint32()>& whenReady) {
+  CMainWindow* main = ctx.mainWindow();
+  if (scenario.isEmpty()) {
+    return perform(main, {}, whenReady);
+  }
+  if (nullptr == main) {
+    qWarning() << "shoot: a scenario is replayed and there is no main window";
+    return 1;
+  }
+
+  clear(scenario, ctx);
+
+  // The recorder puts the start state first.
+  qint32 failures = 0;
+  QJsonObject layout;
+  QList<QJsonObject> steps;
+  for (const QJsonValue& value : scenario) {
+    const QJsonObject& step = value.toObject();
+    const QString& verb = step["do"].toString();
+    if (steps.isEmpty() && "layout" == verb && layout.isEmpty()) {
+      layout = step;
+      if (!CShotPage::applyLayout(*main, layout)) {
+        qWarning().noquote() << "shoot: the main window does not take the dock arrangement the scenario was recorded "
+                                "with. Record the scenario again.";
+        failures++;
+      }
+      // Taken when the recording started, so it names only what exists before the steps, which may change it.
+      failures += CShotPage::applyArrangement(*main, layout);
+    } else if (steps.isEmpty() && "view" == verb) {
+      if (!CShotPage::applyView(ctx.canvas(), step)) {
+        qWarning().noquote() << "shoot: the map does not go to where the scenario starts. Record the scenario again.";
+        qDebug().noquote() << "shoot: the scenario's view:" << compact(step);
+        failures++;
+      }
+    } else {
+      steps << step;
+    }
+  }
+  // A step during a map redraw finds the DEM locked by the draw thread: the elevation it shows is missing.
+  if (!CShotWriter::settleStable(main)) {
+    qWarning().noquote() << "shoot: the map where the scenario starts does not finish drawing. A map or DEM of the "
+                            "fixture is too slow or broken.";
+    failures++;
+  }
+  if (0 != failures) {
+    return failures;
+  }
+
+  return perform(main, steps, whenReady);
+}

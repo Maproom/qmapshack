@@ -137,8 +137,8 @@ CGisListDB::CGisListDB(QWidget* parent) : QTreeWidget(parent), socket(nullptr) {
 
   menuDatabase = new QMenu(this);
   menuDatabase->addAction(actionAddFolder);
-  actionSearch =
-      menuDatabase->addAction(QIcon("://icons/Zoom.svgt"), tr("Search Database"), this, &CGisListDB::slotSearchDatabase);
+  actionSearch = menuDatabase->addAction(QIcon("://icons/Zoom.svgt"), tr("Search Database"), this,
+                                         &CGisListDB::slotSearchDatabase);
   actionUpdate = menuDatabase->addAction(QIcon("://icons/DatabaseSync.svgt"), tr("Sync. with Database"), this,
                                          &CGisListDB::slotUpdateDatabase);
   actionDelDatabase = menuDatabase->addAction(QIcon("://icons/DeleteOne.svgt"), tr("Remove Database"), this,
@@ -154,6 +154,21 @@ CGisListDB::CGisListDB(QWidget* parent) : QTreeWidget(parent), socket(nullptr) {
   menuLostFoundItem = new QMenu(this);
   actionDelLostFoundItem = menuLostFoundItem->addAction(QIcon("://icons/DeleteOne.svgt"), tr("Delete Item"), this,
                                                         &CGisListDB::slotDelLostFoundItem);
+
+  actionAddDatabase->setObjectName("actionAddDatabase");
+  actionAddFolder->setObjectName("actionAddFolder");
+  actionRenameFolder->setObjectName("actionRenameFolder");
+  actionCopyFolder->setObjectName("actionCopyFolder");
+  actionMoveFolder->setObjectName("actionMoveFolder");
+  actionDelFolder->setObjectName("actionDelFolder");
+  actionImport->setObjectName("actionImport");
+  actionExportToGpx->setObjectName("actionExportToGpx");
+  actionDelItem->setObjectName("actionDelItem");
+  actionSearch->setObjectName("actionSearch");
+  actionUpdate->setObjectName("actionUpdate");
+  actionDelDatabase->setObjectName("actionDelDatabase");
+  actionDelLostFound->setObjectName("actionDelLostFound");
+  actionDelLostFoundItem->setObjectName("actionDelLostFoundItem");
 
   connect(this, &CGisListDB::customContextMenuRequested, this, &CGisListDB::slotContextMenu);
   connect(this, &CGisListDB::itemExpanded, this, &CGisListDB::slotItemExpanded);
@@ -915,8 +930,7 @@ void CGisListDB::slotReadyRead() {
     }
 
     qDebug() << "Receive database update from:" << sender << senderPort;
-    qDebug() << "with"
-             << "tan:" << lastTan << "app ID:" << id << "driver:" << driver << "DB name:" << dbName
+    qDebug() << "with" << "tan:" << lastTan << "app ID:" << id << "driver:" << driver << "DB name:" << dbName
              << "DB host:" << dbHost;
 
     IDBFolderSql* folder = getDataBase(dbName, dbHost);

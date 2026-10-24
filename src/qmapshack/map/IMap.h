@@ -111,6 +111,12 @@ class IMap : public IDrawObject {
 
   const QString& getCachePath() const { return cachePath; }
 
+  /** @return tiles this map is still waiting for; 0 for a map that does not stream */
+  virtual qint32 pendingTiles() { return 0; }
+
+  /** @return tiles the last draw painted as a hole; 0 for a map that does not stream */
+  virtual qint32 failedTiles() { return 0; }
+
   qint32 getCacheSize() const { return cacheSizeMB; }
 
   qint32 getCacheExpiration() const { return cacheExpiration; }

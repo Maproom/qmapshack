@@ -33,6 +33,9 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QKeyEvent>
+#include <QLabel>
+#include <QLineEdit>
+#include <QListWidget>
 #include <QLocalServer>
 #include <QLocalSocket>
 #include <QMessageBox>
@@ -50,6 +53,7 @@
 #include "shoot/CShotDocPanel.h"
 #include "shoot/CShotDocState.h"
 #include "shoot/CShotFiles.h"
+#include "shoot/CShotPrivacy.h"
 #include "shoot/CShotWarnings.h"
 #include "shoot/CShotsJob.h"
 
@@ -486,6 +490,63 @@ void testNamesAPlace() {
   verdict("namesAPlace: an absolute string or list entry, never a byte array or a relative path", ok);
 }
 
+void testPrivacy() {
+  const QString& home = QDir::homePath();
+  const QString& fixture = home + "/src/qmapshack/doc/shots/fixtures/default";
+  const QStringList& wrong = [&]() {
+    QStringList found;
+    const QList<QPair<QString, QString>> cases{
+        {fixture + "/maps", "/home/user/maps"},
+        {"Filename: " + fixture + "/projects/Example.qms<br/>", "Filename: /home/user/projects/Example.qms<br/>"},
+        {QString(fixture).replace('/', '\\') + "\\dem", "/home/user\\dem"},
+        {home + "/src/qmapshack/doc/shots/_cache/OSM", "/home/user/.cache/QMapShack/OSM"},
+        {QDir::tempPath() + "/qms-xyz/Example.db", "/home/user/Example.db"},
+        {home + "/.local/share/QMapShack/WaypointIcons", "/home/user/.local/share/QMapShack/WaypointIcons"},
+        {home + "2/other", home + "2/other"},
+        {fixture + "/maps;" + fixture + "/dem", "/home/user/maps;/home/user/dem"},
+        {"see:" + fixture + "/maps", "see:/home/user/maps"},
+        {"relative/maps and /usr/bin/java", "relative/maps and /usr/bin/java"}};
+    for (const QPair<QString, QString>& c : cases) {
+      if (CShotPrivacy::neutral(c.first) != c.second) {
+        found << c.first + " -> " + CShotPrivacy::neutral(c.first);
+      }
+    }
+    return found;
+  }();
+  verdict("privacy: a fixture, cache, scratch or home path reads /home/user, nothing else changes", wrong.isEmpty(),
+          wrong.join(", "));
+
+  QWidget root;
+  QLabel* label = new QLabel(fixture + "/maps", &root);
+  QLineEdit* edit = new QLineEdit(home + "/x", &root);
+  QListWidget* list = new QListWidget(&root);
+  list->addItem(fixture + "/poi");
+  // Selected backwards from the end, as a writer's drag leaves it.
+  edit->setSelection(edit->text().size(), -2);
+  edit->setModified(true);
+  qint32 edits = 0;
+  QObject::connect(edit, &QLineEdit::textChanged, [&edits]() { edits++; });
+  bool during = false;
+  {
+    const CShotPrivacy privacy({&root});
+    during = label->text() == "/home/user/maps" && edit->text() == "/home/user/x" &&
+             list->item(0)->text() == "/home/user/poi";
+  }
+  const bool after =
+      label->text() == fixture + "/maps" && edit->text() == home + "/x" && list->item(0)->text() == fixture + "/poi";
+  verdict("privacy: widget texts read /home/user while it lives, are put back after, and emit nothing",
+          during && after && 0 == edits);
+  const qint32 end = edit->text().size();
+  verdict("privacy: a line edit keeps its selection, cursor and modified flag",
+          edit->selectionStart() == end - 2 && edit->selectionLength() == 2 && edit->cursorPosition() == end - 2 &&
+              edit->isModified(),
+          QString("selection %1+%2, cursor %3, modified %4")
+              .arg(edit->selectionStart())
+              .arg(edit->selectionLength())
+              .arg(edit->cursorPosition())
+              .arg(edit->isModified()));
+}
+
 void testIsAccountDetail() {
   const bool ok = CShotDocMode::isAccountDetail("Search/google/key") &&
                   CShotDocMode::isAccountDetail("Search/geonames/username") &&
@@ -774,6 +835,7 @@ qint32 CShotDocSelfTest::run() {
   testWarnings();
   testOnScreen();
   testNamesAPlace();
+  testPrivacy();
   testIsAccountDetail();
   testOnScreenName();
   testJob();

@@ -1133,6 +1133,8 @@ if(QMS_DOC_MODE)
         shoot/CShotOptions.h
         shoot/CShotPage.cpp
         shoot/CShotPage.h
+        shoot/CShotPrivacy.cpp
+        shoot/CShotPrivacy.h
         shoot/CShotRecorder.cpp
         shoot/CShotRecorder.h
         shoot/CShotRegistry.cpp

@@ -63,7 +63,8 @@ class CShotWriter {
   const QString& getOutDir() const { return outDir; }
 
  private:
-  static QImage renderAtDpr1(QWidget* w);
+  /** @param hidePrivate  false only for a render that is compared and thrown away, never written */
+  static QImage renderAtDpr1(QWidget* w, bool hidePrivate);
 
   QString outDir;
 };

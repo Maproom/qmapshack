@@ -32,6 +32,7 @@
 
 #include "canvas/CCanvas.h"
 #include "shoot/CShotFiles.h"
+#include "shoot/CShotPrivacy.h"
 #include "shoot/CShotWait.h"
 
 namespace {
@@ -109,7 +110,7 @@ bool CShotWriter::settleStable(QWidget* w) {
     }
 
     // Rendering paints the canvas, which starts an outstanding redraw.
-    const QImage& image = renderAtDpr1(w);
+    const QImage& image = renderAtDpr1(w, false);
 
     if (complete && image == last) {
       qint32 failed = 0;
@@ -140,7 +141,7 @@ QImage CShotWriter::render(QWidget* w, const QSize& size) {
   if (holdsCanvas(w) && !settleStable(w)) {
     return QImage();
   }
-  return renderAtDpr1(w);
+  return renderAtDpr1(w, true);
 }
 
 QHash<const QWidget*, QImage> CShotWriter::renderAll(const QList<QWidget*>& parts) {
@@ -160,7 +161,7 @@ QHash<const QWidget*, QImage> CShotWriter::renderAll(const QList<QWidget*>& part
         continue;
       }
     }
-    pictures.insert(w, renderAtDpr1(w));
+    pictures.insert(w, renderAtDpr1(w, true));
   }
   return pictures;
 }
@@ -192,10 +193,16 @@ QString CShotWriter::write(const QImage& image, const QString& id) const {
   return path;
 }
 
-QImage CShotWriter::renderAtDpr1(QWidget* w) {
+QImage CShotWriter::renderAtDpr1(QWidget* w, bool hidePrivate) {
   QImage image(w->size(), QImage::Format_ARGB32_Premultiplied);
   image.fill(Qt::transparent);
-  w->render(&image);
+  if (hidePrivate) {
+    // Only around the render: it keeps pointers that an event loop could delete.
+    const CShotPrivacy privacy({w});
+    w->render(&image);
+  } else {
+    w->render(&image);
+  }
 
   // Drop the alpha channel of an opaque picture.
   for (qint32 y = 0; y < image.height(); y++) {

@@ -63,6 +63,13 @@ that decides whether the recording is kept replays against it - there is no butt
 scenario's settings, a scenario is changed by recording it again. Storing a base changes what a page
 opens on and what the next recording starts from, and nothing else.
 
+**A page's base is copied once, when the page is created**, from the default fixture's `shots.ini` or
+another page's base; Base / Save writes only `doc/shots/<page>.ini`, Base / Copy from... replaces it.
+A fixture's `shots.ini` only seeds new pages. **A page's fixture holds only what differs**: a part it
+has (`projects/`, `maps/`, `dem/`, `poi/`, `routino/`, `database/`) replaces the default's whole; one
+it lacks, or holding only `SOURCE.md`, `README.md` or dotfiles, is the default's (`fixture_part()`,
+`CShotFiles::ownFixtureParts()`).
+
 ## 2. A shot is data
 
 `doc/shots/<page>.json`, written by documentation mode through `CShotPage::store()`:
@@ -276,13 +283,19 @@ Done: `CGisListWks` (52), `CGisListDB` (14), `CMouseNormal` (10), `CSearchLineEd
 **`CShotSelfTest` is what shows it works** (`shots.py selftest`): each case performs input through the
 window system while recording, compares the steps, replays them and compares the state the replay
 leaves with the one the recording left. The replay runs through `CShotReplay::perform()`, so a step that opens a
-menu with `exec()` gets its pick delivered from inside it. The contract the vocabulary is held to - finite,
-tested, reported where it ends, and every recording replayed before it is saved (#1257) - is in
-`QMS-1251-recorder-signals-plan.md`.
+menu with `exec()` gets its pick delivered from inside it.
+
+**The contract.** Steps carry meaning, not input positions, so the vocabulary is finite and grows by
+maintenance. It is the handlers, each backed by self-test cases; input nothing covers is reported
+while recording; a recording is saved only once a `--doc-trial` state replays it (#1257); a finding
+is a local handler fix with a case that fails first, never a design change. Two earlier designs
+inferred what a press meant from a state diff and failed on every Qt delivery detail - a symptom that
+seems to need such a rule means a class has no handler.
 
 **Not recorded:** a window closed by its title bar - Qt 6 closes a widget through `QWindow::close()`,
 the same spontaneous close as the application's own; re-docking a floating dock through its window
-frame; a main window separator dragged (reported); typing into an item view's cell editor.
+frame; a main window separator dragged (reported); typing into an item view's cell editor; a pinch or
+touchpad gesture (reported).
 
 **A recording never runs while a replay does**: replayed input is delivered like a user's own.
 

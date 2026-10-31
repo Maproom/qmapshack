@@ -233,6 +233,9 @@ void CShotEntry::pinEnvironment(int argc, char** argv) {
   if (!isDocArgv(argc, argv)) {
     return;
   }
+  // CMainWindow::getUser() puts the login into history entries and the database dialog.
+  qputenv("USER", "user");
+  qputenv("USERNAME", "user");
 #if defined(Q_OS_WIN32)
   // `generic` crashes the QApplication constructor on Windows.
   attachParentConsole();

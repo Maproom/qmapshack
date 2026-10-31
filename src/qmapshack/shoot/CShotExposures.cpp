@@ -36,6 +36,7 @@
 #include "canvas/CCanvas.h"
 #include "canvas/CCanvasSelect.h"
 #include "canvas/CCanvasSetup.h"
+#include "dem/CDemDraw.h"
 #include "dem/CDemPathSetup.h"
 #include "gis/CGisDatabase.h"
 #include "gis/CGisItemRate.h"
@@ -82,6 +83,7 @@
 #include "helpers/CProgressDialog.h"
 #include "helpers/CSelectCopyAction.h"
 #include "helpers/CSelectProjectDialog.h"
+#include "helpers/CSettings.h"
 #include "helpers/CShortcutConfig.h"
 #include "helpers/CShortcutSetupDialog.h"
 #include "helpers/CTimeDialog.h"
@@ -91,6 +93,7 @@
 #include "helpers/CWptIconDialog.h"
 #include "map/CMapDraw.h"
 #include "map/CMapPathSetup.h"
+#include "poi/CPoiDraw.h"
 #include "poi/CPoiPathSetup.h"
 #include "print/CScreenshotDialog.h"
 #include "realtime/CRtSelectSource.h"
@@ -430,24 +433,25 @@ SHOT_EXPOSE("SelectDBFolder", "Which database folder to use", CSelectDBFolder,
 SHOT_EXPOSE("MapPathSetup", "Where map files are looked for", CMapPathSetup, [](CShotContext&, QWidget*) -> QWidget* {
   static QStringList paths;
   static QString cachePath;
-  paths.clear();
-  cachePath.clear();
+  paths = CMapDraw::getMapPaths();
+  cachePath = CMapDraw::getCacheRoot();
   return new CMapPathSetup(paths, cachePath);
 });
 SHOT_EXPOSE("DemPathSetup", "Where elevation files are looked for", CDemPathSetup,
             [](CShotContext&, QWidget*) -> QWidget* {
               static QStringList paths;
-              paths.clear();
+              paths = CDemDraw::getDemPaths();
               return new CDemPathSetup(paths);
             });
 SHOT_EXPOSE("PoiPathSetup", "Where POI files are looked for", CPoiPathSetup, [](CShotContext&, QWidget*) -> QWidget* {
   static QStringList paths;
-  paths.clear();
+  paths = CPoiDraw::getPoiPaths();
   return new CPoiPathSetup(paths);
 });
 SHOT_EXPOSE("RouterRoutinoPathSetup", "Where Routino databases are looked for", CRouterRoutinoPathSetup,
             [](CShotContext&, QWidget*) -> QWidget* {
               static QStringList paths;
-              paths.clear();
+              SETTINGS;
+              paths = cfg.value("Route/routino/paths").toStringList();
               return new CRouterRoutinoPathSetup(paths);
             });

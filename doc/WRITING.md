@@ -110,20 +110,15 @@ build uses.
 
 ## Base and scenario
 
-The **base** is QMapShack as it starts: dockers, maps, elevation data, POIs, units, map position.
-Set it up by hand and save it with **Base**. Nothing in it is recorded.
+The **base** is QMapShack as the page starts it: dockers, maps, elevation data, POIs, units, map
+position, stored in `doc/shots/<page>.ini`. Set it up by hand and save it with **Base**; nothing in
+it is recorded. Every page needs one; a new page asks which page's base to copy. A picture is taken
+in it unless you give it a scenario, and every recording starts from it. The panel lists it as
+`(base)`, above the scenarios.
 
 A **scenario** is a short recording on top of the base, for what a restart loses: a selected item,
-an open window, a range on a track, screen options.
-
-Other maps or elevation data need another base, not a scenario.
-
-## The base
-
-The base is the page's basic configuration, `doc/shots/<page>.ini`: the QMapShack settings the page
-opens with, such as dockers, window size, units and maps. Every page needs one; a new page asks
-which page's base to copy. A picture is taken with it unless you give it a scenario, and every
-recording starts from it. The panel lists it as `(base)`, above the scenarios.
+an open window, a range on a track, screen options. Other maps or elevation data need another base,
+not a scenario.
 
 With `(base)` selected, **Base** offers:
 
@@ -135,8 +130,8 @@ With `(base)` selected, **Base** offers:
 ## Scenarios
 
 **Record** asks for the name (the selected scenario's is offered; an existing one is replaced only
-after asking), restarts QMapShack in the base and turns into **Stop**. Do what the state is, press
-**Stop**. The recording is stored if it replays.
+after asking), restarts QMapShack in the base and turns into **Stop**. Do what the state is, close
+every dialog and menu, press **Stop**. The recording is stored if it replays.
 
 It stores what you did, never a screen position:
 
@@ -152,10 +147,11 @@ It stores what you did, never a screen position:
 | clicked anything else, such as a link in a label | the place on it |
 
 Not stored: tooltips, closing a window by its title bar, docking a floating docker again by its window
-frame, dragging a separator between dockers, typing into a table cell, drag and drop. Ctrl and Shift
-on a list row are stored.
+frame, dragging a separator between dockers, typing into a table cell, drag and drop, touchpad
+gestures. Ctrl and Shift on a list row are stored.
 
-A replay stops and names the step when it cannot find what a step addresses.
+A replay stops and names the step when it cannot find what a step addresses. Record that scenario
+again under the same name: its pictures stay with it; take them again.
 
 **Rename** and **Delete** are for scenarios; deleting one means taking its pictures again. Changing
 a picture's **Taken in** box asks first and moves QMapShack to the new scenario.
@@ -173,8 +169,8 @@ Point at it and press **Ctrl+Shift+F9**, then answer:
 
 - **A context menu:** open it, rest the pointer on the entry to highlight, press Ctrl+Shift+F9.
   The picture remembers both.
-- **A dialog in a scenario:** record the scenario up to opening it. In the session it is closed
-  again; open it by hand and press Ctrl+Shift+F9.
+- **A window in a scenario:** only one the scenario's recording leaves open can be taken. A dialog
+  that waits for an answer cannot stay open at **Stop**; take it in `(base)` instead.
 - **Part of a window:** select the row, press **Region**, drag a rectangle (Escape cancels).
 
 ## Taking again and publishing

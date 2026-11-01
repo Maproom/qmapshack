@@ -16,14 +16,14 @@ The writer's guide is `doc/WRITING.md`: short, facts only, updated with every ch
 
 - **Developer-only, behind `-DQMS_DOC_MODE=ON`.** No source tests the option: CMake compiles
   `shoot/CShotEntry.cpp`/`CShotOptions.cpp` or the `*Stub.cpp` pair, and `shoot/doc.qrc` (fonts and `Doc*` icons) only
-  with it. A user's binary rejects `--shoot`, `--doc`, `--color-scheme` and companions through
+  with it. A user's binary rejects `--shoot`, `--doc` and companions through
   `QCommandLineParser`; `main.cpp`, `CCommandProcessor` and `CAppOpts` carry no `#if`.
   `src/qmaptool/setup/` never had the switches.
 - **`CShotEntry` is all `main.cpp` knows**: `pinEnvironment()`, `createApplication()`, `isDocRun()`,
   `prepare()`, `run()`. `CShotOptions` defines and reads every switch; they reach the app as
   `CAppOpts::doc`, empty without the subsystem.
 - **`prepare()` runs before `CMainWindow`** and sets the cache root, the workspace database
-  (`CGisListWks::setDatabasePath()`), the colour scheme (`pinColorScheme()`),
+  (`CGisListWks::setDatabasePath()`), Fusion's palette for `--color-scheme` (`CUiTheme::pinColorScheme(scheme, true)`),
   `CQmsStyle::pinThemeIndependentHints()` and registers the bundled DejaVu
   fonts (offscreen on Windows has no font database). It fails without `--config`, and `main()`
   exits 1.

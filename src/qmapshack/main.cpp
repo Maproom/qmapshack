@@ -64,6 +64,8 @@ int main(int argc, char** argv) {
 
   env->processArguments();
   env->initLogHandler();
+  // After the log handler, so a wrong value is logged.
+  CUiTheme::pinColorSchemeOption(qlOpts->colorscheme);
 
   // useful debug info
   {

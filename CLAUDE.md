@@ -382,8 +382,10 @@ Do not re-add a `setIcon(const QPixmap&)` overload on `IDBItem`.
 stylesheets and `setTextColor()`. Roles `Neutral/Ok/Warn/Error/Info/Code`, each a fixed light/dark
 pair. Tune there, never per site.
 
-`--color-scheme` (`pinColorScheme()` in `CShotEntry.cpp`) replaces the application palette with Fusion's so
-output cannot depend on the desktop. Once, before the first window; not a scope, not undoable. The palette is what
+`--color-scheme light|dark` is a normal option of both apps (`CUiTheme::pinColorSchemeOption()` from `main()`, after
+`initLogHandler()` so a wrong value is logged; passed on to QMapTool). It sets the scheme hint and installs Fusion's palette only
+where the palette does not follow; a doc run always installs Fusion's, so output cannot depend on the desktop.
+Before the first window; not a scope, not undoable. The palette is what
 matters (`paletteIsDark()` reads it): `setColorScheme()` is inert on X11 and `standardPalette()`
 asks the platform theme.
 

@@ -139,6 +139,21 @@ class CUiTheme {
      state of buttons and menu items is drawn by CQmsStyle and needs nothing here.
    */
   static void installThemeRefresh();
+
+  /**
+     @brief Use the @p scheme instead of following the desktop. Call before the first window; a later call replaces it.
+
+     Sets the colour scheme hint. Where the palette does not follow it (X11), and always with @p forceFusion,
+     Fusion's light or dark palette replaces the application palette; a desktop change that turns the palette to the
+     other scheme gets the same repair.
+   */
+  static void pinColorScheme(Qt::ColorScheme scheme, bool forceFusion = false);
+
+  /** @brief Pin the scheme a --color-scheme value names; warn about an unknown one. Nothing for an empty value. */
+  static void pinColorSchemeOption(const QString& name);
+
+  /** @return the scheme a --color-scheme value names, Unknown for an empty or unknown name */
+  static Qt::ColorScheme colorSchemeFromName(const QString& name);
 };
 
 #endif  // CUITHEME_H

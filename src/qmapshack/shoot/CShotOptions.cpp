@@ -51,7 +51,6 @@ void CShotOptions::addOptions(QCommandLineParser& parser) {
       "Replay the recording parked in doc/shots/_cache and store it as the page's scenario of this name if it "
       "replays. Only the launcher passes it.",
       "name");
-  add(parser, "color-scheme", "Pin the colour scheme instead of following the desktop: light or dark.", "name");
   addFlag(parser, "shoot-selftest",
           "Run the recorder's own cases against this application instead of taking a page's shots. Needs --shoot and "
           "--shoot-target, the page's shot file; the fixture is the one the configuration names.");
@@ -69,12 +68,11 @@ CShotOptions::opts_t CShotOptions::read(const QCommandLineParser& parser) {
   opts.docChannel = parser.value("doc-channel");
   opts.docPython = parser.value("doc-python");
   opts.docTrial = parser.value("doc-trial");
-  opts.colorScheme = parser.value("color-scheme");
   opts.shootSelfTest = parser.isSet("shoot-selftest");
   // Alone they would start a normal run on the user's settings.
   if (opts.shootDir.isEmpty() && opts.docDir.isEmpty()) {
     for (const char* name : {"shoot-target", "shoot-scenario", "only", "doc-page", "doc-scenario", "doc-channel",
-                             "doc-python", "doc-trial", "color-scheme", "shoot-selftest"}) {
+                             "doc-python", "doc-trial", "shoot-selftest"}) {
       if (parser.isSet(name)) {
         opts.stray << QString("--%1").arg(name);
       }

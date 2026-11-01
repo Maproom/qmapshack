@@ -31,8 +31,6 @@
 #include <QDir>
 #include <QFileInfo>
 #include <QFontDatabase>
-#include <QPalette>
-#include <QStyleHints>
 #include <QTimer>
 
 #include "CMainWindow.h"
@@ -52,6 +50,7 @@
 #include "shoot/CShotWait.h"
 #include "shoot/CShotWriter.h"
 #include "theme/CQmsStyle.h"
+#include "theme/CUiTheme.h"
 
 namespace {
 #if defined(Q_OS_WIN32)
@@ -83,57 +82,6 @@ void attachParentConsole() {
   }
 }
 #endif
-
-/** @brief Replace the application palette with Fusion's light or dark one, whatever the desktop is set to. */
-void pinColorScheme(bool dark) {
-  QGuiApplication::styleHints()->setColorScheme(dark ? Qt::ColorScheme::Dark : Qt::ColorScheme::Light);
-
-  // Fusion's palette; QStyle::standardPalette() would ask the platform theme for the scheme.
-  const QColor windowText = dark ? QColor(240, 240, 240) : QColor(Qt::black);
-  const QColor button = dark ? QColor(50, 50, 50) : QColor(239, 239, 239);
-  const QColor light = button.lighter(150);
-  const QColor mid = button.darker(130);
-  const QColor shade = button.darker(150);
-  const QColor base = dark ? button.darker(140) : QColor(Qt::white);
-  const QColor highlight(48, 140, 198);
-  const QColor disabledText = dark ? QColor(130, 130, 130) : QColor(190, 190, 190);
-  const QColor shadow = shade.darker(135);
-  QColor placeholder = windowText;
-  placeholder.setAlpha(128);
-
-  // The seven-colour ctor takes Window, which paletteIsDark() reads, from `button`.
-  QPalette palette(windowText, button, light, shade, mid, windowText, base);
-  palette.setBrush(QPalette::Midlight, mid.lighter(110));
-  palette.setBrush(QPalette::Button, button);
-  palette.setBrush(QPalette::Shadow, shadow);
-  palette.setBrush(QPalette::HighlightedText, dark ? windowText : QColor(Qt::white));
-  // The seven-colour ctor takes BrightText from `light`, too dark on a dark window.
-  palette.setBrush(QPalette::BrightText, QColor(Qt::white));
-  palette.setBrush(QPalette::PlaceholderText, placeholder);
-
-  palette.setBrush(QPalette::Disabled, QPalette::Text, disabledText);
-  palette.setBrush(QPalette::Disabled, QPalette::WindowText, disabledText);
-  palette.setBrush(QPalette::Disabled, QPalette::ButtonText, disabledText);
-  palette.setBrush(QPalette::Disabled, QPalette::Base, button);
-  // Light arm: Fusion's literal. Dark arm derived, the literal is a near-white edge there.
-  palette.setBrush(QPalette::Disabled, QPalette::Dark, dark ? shade.lighter(120) : QColor(209, 209, 209).darker(110));
-  palette.setBrush(QPalette::Disabled, QPalette::Shadow, shadow.lighter(150));
-
-  const QColor disabledHighlight(145, 145, 145);
-  palette.setBrush(QPalette::Active, QPalette::Highlight, highlight);
-  palette.setBrush(QPalette::Inactive, QPalette::Highlight, highlight);
-  palette.setBrush(QPalette::Disabled, QPalette::Highlight, disabledHighlight);
-  palette.setBrush(QPalette::Active, QPalette::Accent, highlight);
-  palette.setBrush(QPalette::Inactive, QPalette::Accent, highlight);
-  palette.setBrush(QPalette::Disabled, QPalette::Accent, disabledHighlight);
-
-  // Qt::blue, the default, is unreadable on a dark window.
-  if (dark) {
-    palette.setBrush(QPalette::Link, highlight);
-  }
-
-  QApplication::setPalette(palette);
-}
 }  // namespace
 
 namespace {
@@ -267,7 +215,7 @@ bool CShotEntry::prepare(const CAppOpts& opts) {
   qDebug() << "documentation run: platform theme" << qgetenv("QT_QPA_PLATFORMTHEME");
   // -d traces every user input frame.
   CShotApplication::setTrace(opts.debug);
-  pinAppearance(opts.doc.colorScheme);
+  pinAppearance(opts.colorscheme);
   registerFonts();
 
   if (!opts.doc.shootDir.isEmpty()) {
@@ -334,14 +282,11 @@ namespace {
 void pinAppearance(const QString& colorScheme) {
   CQmsStyle::pinThemeIndependentHints();
 
-  if (colorScheme.isEmpty()) {
-    return;
-  }
-  if ("light" == colorScheme || "dark" == colorScheme) {
-    pinColorScheme("dark" == colorScheme);
-    qDebug() << "documentation run: colour scheme pinned to" << colorScheme;
-  } else {
-    qWarning() << "unknown --color-scheme" << colorScheme << "- expected light or dark";
+  // A picture must not depend on the platform's palette.
+  const Qt::ColorScheme scheme = CUiTheme::colorSchemeFromName(colorScheme);
+  if (Qt::ColorScheme::Unknown != scheme) {
+    CUiTheme::pinColorScheme(scheme, true);
+    qDebug() << "documentation run: colour scheme pinned to Fusion's" << colorScheme << "palette";
   }
 }
 }  // namespace

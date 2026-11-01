@@ -19,8 +19,10 @@
 #include "theme/CUiTheme.h"
 
 #include <QApplication>
+#include <QDebug>
 #include <QEvent>
 #include <QLabel>
+#include <QStyleHints>
 #include <QWidget>
 
 namespace {
@@ -90,6 +92,93 @@ class CThemeRefresher : public QObject {
     }
   }
 
+  bool pending = false;
+};
+
+/** @return Fusion's light or dark palette; QStyle::standardPalette() would ask the platform theme for the scheme */
+QPalette fusionPalette(bool dark) {
+  const QColor windowText = dark ? QColor(240, 240, 240) : QColor(Qt::black);
+  const QColor button = dark ? QColor(50, 50, 50) : QColor(239, 239, 239);
+  const QColor light = button.lighter(150);
+  const QColor mid = button.darker(130);
+  const QColor shade = button.darker(150);
+  const QColor base = dark ? button.darker(140) : QColor(Qt::white);
+  const QColor highlight(48, 140, 198);
+  const QColor disabledText = dark ? QColor(130, 130, 130) : QColor(190, 190, 190);
+  const QColor shadow = shade.darker(135);
+  QColor placeholder = windowText;
+  placeholder.setAlpha(128);
+
+  // The seven-colour ctor takes Window, which paletteIsDark() reads, from `button`.
+  QPalette palette(windowText, button, light, shade, mid, windowText, base);
+  palette.setBrush(QPalette::Midlight, mid.lighter(110));
+  palette.setBrush(QPalette::Button, button);
+  palette.setBrush(QPalette::Shadow, shadow);
+  palette.setBrush(QPalette::HighlightedText, dark ? windowText : QColor(Qt::white));
+  // The seven-colour ctor takes BrightText from `light`, too dark on a dark window.
+  palette.setBrush(QPalette::BrightText, QColor(Qt::white));
+  palette.setBrush(QPalette::PlaceholderText, placeholder);
+
+  palette.setBrush(QPalette::Disabled, QPalette::Text, disabledText);
+  palette.setBrush(QPalette::Disabled, QPalette::WindowText, disabledText);
+  palette.setBrush(QPalette::Disabled, QPalette::ButtonText, disabledText);
+  palette.setBrush(QPalette::Disabled, QPalette::Base, button);
+  // Light arm: Fusion's literal. Dark arm derived, the literal is a near-white edge there.
+  palette.setBrush(QPalette::Disabled, QPalette::Dark, dark ? shade.lighter(120) : QColor(209, 209, 209).darker(110));
+  palette.setBrush(QPalette::Disabled, QPalette::Shadow, shadow.lighter(150));
+
+  const QColor disabledHighlight(145, 145, 145);
+  palette.setBrush(QPalette::Active, QPalette::Highlight, highlight);
+  palette.setBrush(QPalette::Inactive, QPalette::Highlight, highlight);
+  palette.setBrush(QPalette::Disabled, QPalette::Highlight, disabledHighlight);
+  palette.setBrush(QPalette::Active, QPalette::Accent, highlight);
+  palette.setBrush(QPalette::Inactive, QPalette::Accent, highlight);
+  palette.setBrush(QPalette::Disabled, QPalette::Accent, disabledHighlight);
+
+  // Qt::blue, the default, is unreadable on a dark window.
+  if (dark) {
+    palette.setBrush(QPalette::Link, highlight);
+  }
+
+  return palette;
+}
+
+/**
+   @brief Keeps the application palette on the pinned scheme.
+
+   Installs Fusion's palette when the platform did not follow the colour scheme hint, and again whenever a desktop
+   change leaves the palette on the other scheme.
+ */
+class CColorSchemePin : public QObject {
+ public:
+  explicit CColorSchemePin(QObject* parent) : QObject(parent) {}
+
+  void pin(bool dark, bool fusion) {
+    this->dark = dark;
+    QGuiApplication::styleHints()->setColorScheme(dark ? Qt::ColorScheme::Dark : Qt::ColorScheme::Light);
+    if (fusion || paletteIsDark() != dark) {
+      QApplication::setPalette(fusionPalette(dark));
+    }
+  }
+
+ protected:
+  bool eventFilter(QObject* watched, QEvent* event) override {
+    if (event->type() == QEvent::ApplicationPaletteChange && !pending && paletteIsDark() != dark) {
+      pending = true;
+      QMetaObject::invokeMethod(this, [this]() { repair(); }, Qt::QueuedConnection);
+    }
+    return QObject::eventFilter(watched, event);
+  }
+
+ private:
+  void repair() {
+    pending = false;
+    if (paletteIsDark() != dark) {
+      QApplication::setPalette(fusionPalette(dark));
+    }
+  }
+
+  bool dark = false;
   bool pending = false;
 };
 }  // namespace
@@ -177,4 +266,36 @@ void CUiTheme::installThemeRefresh() {
   }
   installed = true;
   qApp->installEventFilter(new CThemeRefresher(qApp));
+}
+
+void CUiTheme::pinColorScheme(Qt::ColorScheme scheme, bool forceFusion) {
+  static CColorSchemePin* pin = nullptr;
+  if (nullptr == pin) {
+    pin = new CColorSchemePin(qApp);
+    qApp->installEventFilter(pin);
+  }
+  pin->pin(Qt::ColorScheme::Dark == scheme, forceFusion);
+}
+
+void CUiTheme::pinColorSchemeOption(const QString& name) {
+  if (name.isEmpty()) {
+    return;
+  }
+  const Qt::ColorScheme scheme = colorSchemeFromName(name);
+  if (Qt::ColorScheme::Unknown == scheme) {
+    qWarning().noquote() << "--color-scheme" << name
+                         << "is neither light nor dark; the colour scheme follows the desktop.";
+    return;
+  }
+  pinColorScheme(scheme);
+}
+
+Qt::ColorScheme CUiTheme::colorSchemeFromName(const QString& name) {
+  if (0 == name.compare("light", Qt::CaseInsensitive)) {
+    return Qt::ColorScheme::Light;
+  }
+  if (0 == name.compare("dark", Qt::CaseInsensitive)) {
+    return Qt::ColorScheme::Dark;
+  }
+  return Qt::ColorScheme::Unknown;
 }

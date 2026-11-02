@@ -286,7 +286,7 @@ void pinAppearance(const QString& colorScheme) {
   const Qt::ColorScheme scheme = CUiTheme::colorSchemeFromName(colorScheme);
   if (Qt::ColorScheme::Unknown != scheme) {
     CUiTheme::pinColorScheme(scheme, true);
-    qDebug() << "documentation run: colour scheme pinned to Fusion's" << colorScheme << "palette";
+    qDebug() << "documentation run: color scheme pinned to Fusion's" << colorScheme << "palette";
   }
 }
 }  // namespace

@@ -50,7 +50,7 @@ CAppOpts* CCommandProcessor::processOptions(const QStringList& arguments) {
   parser.addOption(fontSizeOption);
 
   QCommandLineOption colorSchemeOption(QStringList() << "color-scheme",
-                                       tr("Colour scheme instead of the desktop's: light or dark."), tr("name"));
+                                       tr("Color scheme instead of the desktop's: light or dark."), tr("name"));
   parser.addOption(colorSchemeOption);
 
   QCommandLineOption styleOption(QStringList() << "style",

@@ -284,7 +284,7 @@ void CUiTheme::pinColorSchemeOption(const QString& name) {
   const Qt::ColorScheme scheme = colorSchemeFromName(name);
   if (Qt::ColorScheme::Unknown == scheme) {
     qWarning().noquote() << "--color-scheme" << name
-                         << "is neither light nor dark; the colour scheme follows the desktop.";
+                         << "is neither light nor dark; the color scheme follows the desktop.";
     return;
   }
   pinColorScheme(scheme);

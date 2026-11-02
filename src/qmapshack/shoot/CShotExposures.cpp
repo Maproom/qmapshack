@@ -364,7 +364,7 @@ SHOT_EXPOSE("CanvasSelect", "Which canvas an action applies to", CCanvasSelect,
 SHOT_EXPOSE("SetupWorkspace", "Workspace behaviour", CSetupWorkspace, [](CShotContext&, QWidget* p) -> QWidget* {
   return new CSetupWorkspace(&CGisWorkspace::self(), &CGisDatabase::self(), p);
 });
-SHOT_EXPOSE("GridSetup", "Grid projection and colour", CGridSetup, [](CShotContext&, QWidget*) -> QWidget* {
+SHOT_EXPOSE("GridSetup", "Grid projection and color", CGridSetup, [](CShotContext&, QWidget*) -> QWidget* {
   CCanvas* canvas = CMainWindow::self().getVisibleCanvas();
   CGrid* grid = (nullptr == canvas) ? nullptr : canvas->findChild<CGrid*>();
   CMapDraw* map = (nullptr == canvas) ? nullptr : canvas->findChild<CMapDraw*>();

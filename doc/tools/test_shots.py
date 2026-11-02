@@ -198,7 +198,7 @@ class ShotFile(ScratchTree):
         self.put(broken, b"{ not json")
         with self.assertRaises(SystemExit) as raised:
             shots.read_shot_file(broken)
-        self.assertIn("doc/shots/p.json", str(raised.exception))
+        self.assertIn(str(Path("doc/shots/p.json")), str(raised.exception))
         self.assertIn("git", str(raised.exception))
 
     def test_shots_must_be_a_list(self):

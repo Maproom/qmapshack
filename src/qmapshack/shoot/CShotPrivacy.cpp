@@ -131,8 +131,14 @@ CShotPrivacy::CShotPrivacy(const QList<QWidget*>& roots) {
       const qint32 start = edit->selectionStart();
       const qint32 length = edit->selectionLength();
       const bool modified = edit->isModified();
-      take(edit->text(), [edit, cursor, start, length, modified](const QString& s) {
+      const QString original = edit->text();
+      take(original, [edit, original, cursor, start, length, modified](const QString& s) {
         edit->setText(s);
+        // The positions belong to the original text.
+        if (s != original) {
+          edit->setModified(modified);
+          return;
+        }
         if (start < 0) {
           edit->setCursorPosition(cursor);
         } else if (cursor == start) {
@@ -202,18 +208,18 @@ CShotPrivacy::~CShotPrivacy() {
 }
 
 QList<CShotPrivacy::rule_t> CShotPrivacy::rules() {
-  QList<rule_t> list{
-      // The fixture and the cache of the checkout, wherever it lies.
-      {QRegularExpression(kLead + R"([/\\]doc[/\\]shots[/\\]fixtures[/\\])" + kPart + kEnd), kHome},
-      {QRegularExpression(kLead + R"([/\\]doc[/\\]shots[/\\]_cache)" + kEnd), kCache},
-  };
-  // Literal places, the most specific first: a scratch directory holds the copied database and the configuration.
+  // Literal places first, the most specific first: they match a directory name with a space, which kLead cannot.
+  // A scratch directory holds the copied database and the configuration.
+  QList<rule_t> list;
   const QString& cacheRoot = CMapDraw::getCacheRoot();
   if (!cacheRoot.isEmpty()) {
     list << rule_t{QRegularExpression(anySeparator(cacheRoot) + kEnd), kCache};
   }
   list << rule_t{QRegularExpression(anySeparator(QDir::tempPath()) + R"([/\\])" + kPart + kEnd), kHome};
   list << rule_t{QRegularExpression(anySeparator(QDir::homePath()) + kEnd), kHome};
+  // The fixture and the cache of the checkout, wherever it lies.
+  list << rule_t{QRegularExpression(kLead + R"([/\\]doc[/\\]shots[/\\]fixtures[/\\])" + kPart + kEnd), kHome};
+  list << rule_t{QRegularExpression(kLead + R"([/\\]doc[/\\]shots[/\\]_cache)" + kEnd), kCache};
   return list;
 }
 

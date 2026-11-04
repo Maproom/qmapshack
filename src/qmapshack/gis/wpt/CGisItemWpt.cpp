@@ -107,7 +107,7 @@ CGisItemWpt::CGisItemWpt(const CGisItemWpt& parentWpt, IGisProject* project, int
 
   if (clone) {
     wpt.name += tr("_Clone");
-    key.clear();
+    genCloneKey();
     history.events.clear();
     setupHistory();
   }
@@ -184,7 +184,7 @@ IGisItem* CGisItemWpt::createClone() {
 void CGisItemWpt::setSymbol() { setIcon(); }
 
 void CGisItemWpt::genKey() const {
-  if (geocache.hasData) {
+  if (geocache.hasData && key.item.isEmpty()) {
     key.item = QString::number(geocache.id);
   }
   IGisItem::genKey();

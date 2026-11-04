@@ -59,7 +59,7 @@ CGisItemRte::CGisItemRte(const CGisItemRte& parentRte, IGisProject* project, int
 
   if (clone) {
     rte.name += tr("_Clone");
-    key.clear();
+    genCloneKey();
     history.events.clear();
   }
 

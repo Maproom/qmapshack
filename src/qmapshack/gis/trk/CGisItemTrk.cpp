@@ -185,7 +185,7 @@ CGisItemTrk::CGisItemTrk(const CGisItemTrk& parentTrk, IGisProject* project, int
   // build new ones.
   if (clone) {
     trk.name += tr("_Clone");
-    key.clear();
+    genCloneKey();
     history.events.clear();
     setupHistory();
   }

@@ -54,7 +54,7 @@ CGisItemOvlArea::CGisItemOvlArea(const CGisItemOvlArea& parentArea, IGisProject*
 
   if (clone) {
     area.name += tr("_Clone");
-    key.clear();
+    genCloneKey();
     history.events.clear();
     setupHistory();
   }

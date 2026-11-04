@@ -341,6 +341,15 @@ place. Only the draw thread touches it, so no lock. Tracy: `strtbl.get` counts e
 
 ---
 
+## GIS item keys
+
+`key.item` is the database identity (`items.keyqms`, unique): an import links an item whose key
+exists instead of storing it again. It is the MD5 of the item's data, a geocache's id for a
+waypoint with geocache data and no key yet. A clone takes a random key (`genCloneKey()`), since
+every clone of one item has the same data.
+
+---
+
 ## Architecture: tree item delegates
 
 - `gis/CWksItemDelegate.{h,cpp}` — workspace tree

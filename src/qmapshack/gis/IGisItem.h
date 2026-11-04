@@ -526,6 +526,8 @@ class IGisItem : public IWksItem {
   void writeWpt(QDomElement& xml, const wpt_t& wpt, bool strictGpx11);
   /// generate a unique key from item's data
   virtual void genKey() const;
+  /// give a clone a random key, as its content repeats that of every other clone of the same item
+  void genCloneKey();
   /// setup the history structure right after the creation of the item
   void setupHistory();
   /// update current history entry (e.g. to save the flags)

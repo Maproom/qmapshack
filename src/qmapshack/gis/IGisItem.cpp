@@ -19,6 +19,7 @@
 
 #include "gis/IGisItem.h"
 
+#include <QUuid>
 #include <QtSql>
 #include <QtWidgets>
 #include <QtXml>
@@ -201,6 +202,11 @@ void IGisItem::genKey() const {
       key.project = project->getKey();
     }
   }
+}
+
+void IGisItem::genCloneKey() {
+  key.clear();
+  key.item = QUuid::createUuid().toString(QUuid::Id128);
 }
 
 void IGisItem::loadFromDb(quint64 id, QSqlDatabase& db) {

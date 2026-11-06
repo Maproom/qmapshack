@@ -157,6 +157,7 @@ void CPoiFilePOI::draw(IDrawContext::buffer_t& buf) {
   displayedPois.clear();
   QRectF freeSpaceRect(QPointF(), IPoiFile::iconSize() * 2);
   // Find POIs in view
+  bool canLoad = true;
   const QList<quint64>& keys = categoryActivated.keys();
   for (quint64 categoryID : keys) {
     if (categoryActivated[categoryID] != Qt::Checked) {
@@ -164,14 +165,14 @@ void CPoiFilePOI::draw(IDrawContext::buffer_t& buf) {
     }
     for (int minLonM10 = qFloor(xMin * RAD_TO_DEG * 10); minLonM10 < qCeil(xMax * RAD_TO_DEG * 10); minLonM10++) {
       for (int minLatM10 = qFloor(yMin * RAD_TO_DEG * 10); minLatM10 < qCeil(yMax * RAD_TO_DEG * 10); minLatM10++) {
-        if (!loadedPoisByArea.contains(categoryID) || !loadedPoisByArea[categoryID].contains(minLonM10) ||
-            !loadedPoisByArea[categoryID][minLonM10].contains(minLatM10)) {
-          loadPOIsFromFile(categoryID, minLonM10, minLatM10, qCeil(xMax * RAD_TO_DEG * 10) - 1);
+        if (canLoad && !isLoaded(categoryID, minLonM10, minLatM10)) {
+          canLoad = loadPOIsFromFile(categoryID, minLonM10, minLatM10, qCeil(xMax * RAD_TO_DEG * 10) - 1);
         }
         if (poi->needsRedraw()) {
           return;
         }
-        for (quint64 poiToDrawID : std::as_const(loadedPoisByArea[categoryID][minLonM10][minLatM10])) {
+        const QList<quint64>& poisToDraw = poisInSquare(categoryID, minLonM10, minLatM10);
+        for (quint64 poiToDrawID : poisToDraw) {
           const CPoiItemPOI& poiToDraw = loadedPois[poiToDrawID];
           QPointF pt = poiToDraw.getCoordinates();
           poi->convertRad2Px(pt);
@@ -285,6 +286,7 @@ void CPoiFilePOI::findPoisIn(const QRectF& degRect, QSet<IPoiItem>& pois, QList<
 
   // Find POIs
   QSet<quint64> copiedItems;  // Some Items may appear in multiple categories. We only want to copy those once.
+  bool canLoad = true;
   const QList<quint64>& keys = categoryActivated.keys();
   for (quint64 categoryID : keys) {
     if (categoryActivated[categoryID] != Qt::Checked) {
@@ -294,11 +296,11 @@ void CPoiFilePOI::findPoisIn(const QRectF& degRect, QSet<IPoiItem>& pois, QList<
       for (int minLatM10 = qFloor(degRect.bottom() * 10); minLatM10 <= qFloor(degRect.top() * 10); minLatM10++) {
         // Imagine the user moves the screen in an l-shape while updating the selection rectangle. It is possible that
         // some tiles are not loaded then
-        if (!loadedPoisByArea.contains(categoryID) || !loadedPoisByArea[categoryID].contains(minLonM10) ||
-            !loadedPoisByArea[categoryID][minLonM10].contains(minLatM10)) {
-          loadPOIsFromFile(categoryID, minLonM10, minLatM10, qFloor(degRect.right() * 10));
+        if (canLoad && !isLoaded(categoryID, minLonM10, minLatM10)) {
+          canLoad = loadPOIsFromFile(categoryID, minLonM10, minLatM10, qFloor(degRect.right() * 10));
         }
-        for (quint64 poiFoundID : std::as_const(loadedPoisByArea[categoryID][minLonM10][minLatM10])) {
+        const QList<quint64>& poisFound = poisInSquare(categoryID, minLonM10, minLatM10);
+        for (quint64 poiFoundID : poisFound) {
           const CPoiItemPOI& poiItemFound = loadedPois[poiFoundID];
           if (!copiedItems.contains(poiItemFound.getKey())) {
             // Maybe look through the whole code of selecting items from a map to avoid this conversion
@@ -459,12 +461,13 @@ bool CPoiFilePOI::getPoiGroupCloseBy(const QPoint& px, CPoiFilePOI::poiGroup_t& 
   return false;
 }
 
-void CPoiFilePOI::loadPOIsFromFile(quint64 categoryID, int minLonM10, int minLatM10, int maxLonM10) {
+bool CPoiFilePOI::loadPOIsFromFile(quint64 categoryID, qint32 minLonM10, qint32 minLatM10, qint32 maxLonM10) {
   QMutexLocker lock(&mutex);
 
   // check if query is within bounds
-  if (!bbox.intersects({minLonM10 / 10.0, minLatM10 / 10.0, 0.1, 0.1})) {
-    return;
+  // intersects() also lets through a square that reaches bbox.left only by rounding
+  if (!bbox.intersects({minLonM10 / 10.0, minLatM10 / 10.0, 0.1, 0.1}) || minLonM10 < qFloor(bbox.left() * 10)) {
+    return true;
   }
 
   // Open Database here so it is owned by the right thread
@@ -472,75 +475,118 @@ void CPoiFilePOI::loadPOIsFromFile(quint64 categoryID, int minLonM10, int minLat
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", filename);
     db.setDatabaseName(filename);
     if (!db.open()) {
-      qDebug() << "failed to open database" << db.lastError();
+      logUnreadable(db.lastError());
       isActivated = false;
-      return;
+      db = QSqlDatabase();
+      QSqlDatabase::removeDatabase(filename);
+      return false;
     }
   }
 
   QSqlDatabase db = QSqlDatabase::database(filename);
-  if (index == CPoiFilePOIQuery::Index::eLatLon) {
-    loadPoisInRow(db, minLonM10, maxLonM10, minLatM10);
-  } else {
-    loadPoisInSquare(db, categoryID, minLonM10, minLatM10);
-  }
+  const bool canLoad = (index == CPoiFilePOIQuery::Index::eLatLon)
+                           ? loadPoisInRow(db, minLonM10, maxLonM10, minLatM10)
+                           : loadPoisInSquare(db, categoryID, minLonM10, minLatM10);
   db = QSqlDatabase();
   // Close database, as this method is called from mutiple threads.
   QSqlDatabase::removeDatabase(filename);
+  return canLoad;
 }
 
-void CPoiFilePOI::loadPoisInSquare(const QSqlDatabase& db, quint64 categoryID, int minLonM10, int minLatM10) {
+bool CPoiFilePOI::loadPoisInSquare(const QSqlDatabase& db, quint64 categoryID, qint32 minLonM10, qint32 minLatM10) {
   QSqlQuery query(db);
-  query.prepare(CPoiFilePOIQuery::selectPoisInSquare());
-  CPoiFilePOIQuery::bindSquare(query, categoryID, minLonM10, minLatM10);
-  query.exec();
-  while (query.next()) {
-    addPoi(query, categoryID, minLonM10, minLatM10);
+  if (!prepareQuery(query, CPoiFilePOIQuery::selectPoisInSquare())) {
+    return false;
   }
+  // mark the square as loaded, even if it has no POIs
+  loadedPoisByArea[categoryID][minLonM10][minLatM10];
+  CPoiFilePOIQuery::bindSquare(query, categoryID, minLonM10, minLatM10);
+  if (query.exec()) {
+    while (query.next()) {
+      addPoi(query, categoryID, minLonM10, minLatM10);
+    }
+  }
+  logReadError(query);
+  return true;
 }
 
-void CPoiFilePOI::loadPoisInRow(const QSqlDatabase& db, int minLonM10, int maxLonM10, int minLatM10) {
+bool CPoiFilePOI::loadPoisInRow(const QSqlDatabase& db, qint32 minLonM10, qint32 maxLonM10, qint32 minLatM10) {
   // A query costs about the same for one square as for a whole row, and for one category as for several.
   // So load the row segment in view for all checked categories that miss its first square.
-  const int firstLonM10 = qMax(minLonM10, qFloor(bbox.left() * 10));
-  const int lastLonM10 = qMax(firstLonM10, qMin(maxLonM10, qFloor(bbox.right() * 10)));
+  const qint32 firstLonM10 = qMax(minLonM10, qFloor(bbox.left() * 10));
+  const qint32 lastLonM10 = qMax(firstLonM10, qMin(maxLonM10, qFloor(bbox.right() * 10)));
 
   QList<quint64> categories;
-  QSet<QPair<quint64, int>> squaresToLoad;
+  QSet<QPair<quint64, qint32>> squaresToLoad;
   const QList<quint64>& keys = categoryActivated.keys();
   for (quint64 categoryID : keys) {
     if (categoryActivated[categoryID] != Qt::Checked || isLoaded(categoryID, firstLonM10, minLatM10)) {
       continue;
     }
     categories << categoryID;
-    for (int lonM10 = firstLonM10; lonM10 <= lastLonM10; lonM10++) {
+    for (qint32 lonM10 = firstLonM10; lonM10 <= lastLonM10; lonM10++) {
       if (!isLoaded(categoryID, lonM10, minLatM10)) {
-        // mark the square as loaded, even if it has no POIs
-        loadedPoisByArea[categoryID][lonM10][minLatM10];
         squaresToLoad.insert({categoryID, lonM10});
       }
     }
   }
   if (categories.isEmpty()) {
-    return;
+    return true;
   }
 
   QSqlQuery query(db);
-  query.prepare(CPoiFilePOIQuery::selectPoisInRow(categories.size()));
+  if (!prepareQuery(query, CPoiFilePOIQuery::selectPoisInRow(categories.size()))) {
+    return false;
+  }
+  for (const QPair<quint64, qint32>& square : std::as_const(squaresToLoad)) {
+    // mark the square as loaded, even if it has no POIs
+    loadedPoisByArea[square.first][square.second][minLatM10];
+  }
   CPoiFilePOIQuery::bindRow(query, categories, firstLonM10, lastLonM10, minLatM10);
-  query.exec();
-  while (query.next()) {
-    const quint64 categoryID = query.value(CPoiFilePOIQuery::eSqlColumnPoiCategory).toULongLong();
-    const qreal lon = query.value(CPoiFilePOIQuery::eSqlColumnPoiLon).toDouble();
-    const int lonM10 = qBound(firstLonM10, qFloor(lon * 10), lastLonM10);
-    // skip squares that were loaded before for this category
-    if (squaresToLoad.contains({categoryID, lonM10})) {
-      addPoi(query, categoryID, lonM10, minLatM10);
+  if (query.exec()) {
+    while (query.next()) {
+      const quint64 categoryID = query.value(CPoiFilePOIQuery::eSqlColumnPoiCategory).toULongLong();
+      const qreal lon = query.value(CPoiFilePOIQuery::eSqlColumnPoiLon).toDouble();
+      const qint32 lonM10 = qBound(firstLonM10, qFloor(lon * 10), lastLonM10);
+      // skip squares that were loaded before for this category
+      if (squaresToLoad.contains({categoryID, lonM10})) {
+        addPoi(query, categoryID, lonM10, minLatM10);
+      }
     }
+  }
+  logReadError(query);
+  return true;
+}
+
+bool CPoiFilePOI::prepareQuery(QSqlQuery& query, const QString& sql) {
+  // Check it here: exec() replaces the error of a failed prepare() by "Parameter count mismatch"
+  if (!query.prepare(sql)) {
+    logUnreadable(query.lastError());
+    return false;
+  }
+  lastUnreadableError.clear();
+  return true;
+}
+
+void CPoiFilePOI::logUnreadable(const QSqlError& error) {
+  if (error.text() != lastUnreadableError) {
+    lastUnreadableError = error.text();
+    qWarning().noquote() << "Cannot read the POI file" << filename << ":" << lastUnreadableError
+                         << "- trying again when the map is drawn the next time.";
   }
 }
 
-bool CPoiFilePOI::isLoaded(quint64 categoryID, int minLonM10, int minLatM10) const {
+void CPoiFilePOI::logReadError(const QSqlQuery& query) {
+  // next() ends on an error as on the last row
+  const QSqlError& error = query.lastError();
+  if (error.isValid() && error.text() != lastReadError) {
+    lastReadError = error.text();
+    qWarning().noquote() << "Some POIs of" << filename << "are missing:" << lastReadError
+                         << "- the file may be damaged, try a new copy.";
+  }
+}
+
+bool CPoiFilePOI::isLoaded(quint64 categoryID, qint32 minLonM10, qint32 minLatM10) const {
   const auto category = loadedPoisByArea.constFind(categoryID);
   if (category == loadedPoisByArea.constEnd()) {
     return false;
@@ -549,7 +595,11 @@ bool CPoiFilePOI::isLoaded(quint64 categoryID, int minLonM10, int minLatM10) con
   return column != category->constEnd() && column->contains(minLatM10);
 }
 
-void CPoiFilePOI::addPoi(const QSqlQuery& query, quint64 categoryID, int minLonM10, int minLatM10) {
+QList<quint64> CPoiFilePOI::poisInSquare(quint64 categoryID, qint32 minLonM10, qint32 minLatM10) const {
+  return loadedPoisByArea.value(categoryID).value(minLonM10).value(minLatM10);
+}
+
+void CPoiFilePOI::addPoi(const QSqlQuery& query, quint64 categoryID, qint32 minLonM10, qint32 minLatM10) {
   const quint64 key = query.value(CPoiFilePOIQuery::eSqlColumnPoiId).toULongLong();
   const qreal lon = query.value(CPoiFilePOIQuery::eSqlColumnPoiLon).toDouble();
   const qreal lat = query.value(CPoiFilePOIQuery::eSqlColumnPoiLat).toDouble();

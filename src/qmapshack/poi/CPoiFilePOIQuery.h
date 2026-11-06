@@ -38,7 +38,7 @@ class CPoiFilePOIQuery {
  public:
   enum class Index { eUnsupported, eRTree, eLatLon };
 
-  /// Result columns of selectPoisInSquare() and selectPoisInRow()
+  /** Result columns of selectPoisInSquare() and selectPoisInRow() */
   enum SqlColumnPoi_e {
     eSqlColumnPoiLat,
     eSqlColumnPoiLon,

@@ -341,6 +341,15 @@ place. Only the draw thread touches it, so no lock. Tracy: `strtbl.get` counts e
 
 ---
 
+## Mapsforge POI loading — `CPoiFilePOI`
+
+A square counts as loaded once it has an entry in `loadedPoisByArea`, so read it only through `isLoaded()`/`poisInSquare()`:
+`operator[]` inserts. Only a failed `prepare()` (lock, missing table) leaves squares unloaded, retried on the next draw; it stops
+that draw's loading. A failed `exec()`/`next()` (corruption) keeps what was read: retrying costs every draw and cannot help.
+A following `exec()` replaces `prepare()`'s error by "Parameter count mismatch", so check `prepare()` on its own.
+
+---
+
 ## GIS item keys
 
 `key.item` is the database identity (`items.keyqms`, unique): an import links an item whose key

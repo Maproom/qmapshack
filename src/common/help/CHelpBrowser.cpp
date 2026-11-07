@@ -18,69 +18,198 @@
 
 #include "help/CHelpBrowser.h"
 
+#include <QBuffer>
+#include <QContextMenuEvent>
+#include <QDesktopServices>
 #include <QEvent>
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QMenu>
+#include <QMimeDatabase>
+#include <QWebEngineContextMenuRequest>
+#include <QWebEngineHistory>
+#include <QWebEnginePage>
+#include <QWebEngineProfile>
+#include <QWebEngineScript>
+#include <QWebEngineScriptCollection>
+#include <QWebEngineSettings>
+#include <QWebEngineUrlRequestJob>
+#include <QWebEngineUrlScheme>
+#include <QWebEngineUrlSchemeHandler>
 #include <QtHelp>
 
 #include "theme/CUiTheme.h"
 
-CHelpBrowser::CHelpBrowser(QHelpEngine* helpEngine, QWidget* parent) : QTextBrowser(parent), engine(helpEngine) {
-  connect(engine->contentWidget(), &QHelpContentWidget::linkActivated, this, &CHelpBrowser::setSource);
-  connect(engine->indexWidget(), &QHelpIndexWidget::documentActivated, this,
-          [this](const QHelpLink& document, const QString& keyword) { setSource(document.url); });
-  connect(engine->searchEngine()->resultWidget(), &QHelpSearchResultWidget::requestShowLink, this,
-          &CHelpBrowser::setSource);
+static constexpr char kScheme[] = "qthelp";
+static constexpr char kThemeScript[] = "qmsTheme";
 
-  QTextBrowser::setOpenLinks(false);
-  connect(this, &QTextBrowser::anchorClicked, this, &CHelpBrowser::setSource);
+static bool isWebUrl(const QUrl& url) { return url.scheme() == "http" || url.scheme() == "https"; }
+
+namespace {
+/** @brief Answers qthelp:// requests from the help engine's compressed help file. */
+class CHelpSchemeHandler : public QWebEngineUrlSchemeHandler {
+ public:
+  CHelpSchemeHandler(QHelpEngine* engine, QObject* parent) : QWebEngineUrlSchemeHandler(parent), engine(engine) {}
+
+  void requestStarted(QWebEngineUrlRequestJob* job) override {
+    const QUrl& url = job->requestUrl();
+    const QByteArray& data = engine->fileData(url);
+    if (data.isEmpty()) {
+      job->fail(QWebEngineUrlRequestJob::UrlNotFound);
+      return;
+    }
+
+    QByteArray mime = QMimeDatabase().mimeTypeForFile(url.path(), QMimeDatabase::MatchExtension).name().toUtf8();
+    // Help pages are UTF-8, and some carry no charset of their own; Chromium would assume Windows-1252.
+    if (mime.startsWith("text/")) {
+      mime += ";charset=utf-8";
+    }
+    QBuffer* buffer = new QBuffer(job);
+    buffer->setData(data);
+    job->reply(mime, buffer);
+  }
+
+ private:
+  QHelpEngine* engine;
+};
+
+/** @brief Hands a clicked web link to the system browser and loads no web page itself. */
+class CHelpPage : public QWebEnginePage {
+ public:
+  CHelpPage(QWebEngineProfile* profile, QObject* parent) : QWebEnginePage(profile, parent) {}
+
+  bool acceptNavigationRequest(const QUrl& url, NavigationType type, bool isMainFrame) override {
+    if (isWebUrl(url)) {
+      if (type == NavigationTypeLinkClicked && isMainFrame) {
+        QDesktopServices::openUrl(url);
+      }
+      return false;
+    }
+    return QWebEnginePage::acceptNavigationRequest(url, type, isMainFrame);
+  }
+};
+}  // namespace
+
+CHelpBrowser::CHelpBrowser(QHelpEngine* helpEngine, QWidget* parent)
+    : QWebEngineView(parent), engine(helpEngine), profile(new QWebEngineProfile(this)) {
+  profile->installUrlSchemeHandler(kScheme, new CHelpSchemeHandler(helpEngine, this));
+  // A font the help CSS names but the system lacks falls back to the application's, not to serif.
+  profile->settings()->setFontFamily(QWebEngineSettings::StandardFont, font().family());
+  setPage(new CHelpPage(profile, this));
+  applyTheme();
+
+  connect(helpEngine->contentWidget(), &QHelpContentWidget::linkActivated, this, &CHelpBrowser::setSource);
+  connect(helpEngine->indexWidget(), &QHelpIndexWidget::documentActivated, this,
+          [this](const QHelpLink& document, const QString& keyword) { setSource(document.url); });
+  connect(helpEngine->searchEngine()->resultWidget(), &QHelpSearchResultWidget::requestShowLink, this,
+          &CHelpBrowser::setSource);
 }
 
-void CHelpBrowser::changeEvent(QEvent* e) {
-  QTextBrowser::changeEvent(e);
-  // loadResource() resolves the themed colours once per page load, so re-read the page.
-  if (CUiTheme::isPaletteChange(e)) {
-    reload();
-  }
+CHelpBrowser::~CHelpBrowser() {
+  // The profile must outlive its page, but as a child of this it would be deleted first.
+  delete page();
+}
+
+void CHelpBrowser::registerUrlScheme() {
+  QWebEngineUrlScheme scheme(kScheme);
+  scheme.setSyntax(QWebEngineUrlScheme::Syntax::Host);
+  // CORS and Fetch allow page scripts to fetch() files from the help file.
+  scheme.setFlags(QWebEngineUrlScheme::SecureScheme | QWebEngineUrlScheme::LocalScheme |
+                  QWebEngineUrlScheme::CorsEnabled | QWebEngineUrlScheme::FetchApiAllowed);
+  QWebEngineUrlScheme::registerScheme(scheme);
 }
 
 void CHelpBrowser::setSource(const QUrl& url) {
-  if (url.scheme().startsWith("http")) {
+  if (isWebUrl(url)) {
     QDesktopServices::openUrl(url);
-  } else {
-    QTextBrowser::setSource(url);
+    return;
+  }
+  // The table of contents links its chapter nodes to no file at all.
+  if (url.scheme() == kScheme && engine->fileData(url).isEmpty()) {
+    return;
+  }
+  if (homeUrl.isEmpty()) {
+    homeUrl = url;
+  }
+  setUrl(url);
+}
+
+void CHelpBrowser::changeEvent(QEvent* e) {
+  QWebEngineView::changeEvent(e);
+  if (CUiTheme::isPaletteChange(e)) {
+    applyTheme();
   }
 }
 
-QVariant CHelpBrowser::loadResource(int type, const QUrl& name) {
-  const QVariant data =
-      (name.scheme() == "qthelp") ? QVariant(engine->fileData(name)) : QTextBrowser::loadResource(type, name);
+void CHelpBrowser::applyTheme() {
+  // The packaged help CSS leaves the page colours to the viewer. Add a stylesheet after it, so its
+  // rules win, and swap its text on a palette change instead of reloading the page.
+  const QPalette& pal = palette();
+  const QString& css = QString(
+                           ":root {color-scheme:%1}\n"
+                           "body {color:%2; background-color:%3}\n"
+                           "a:link {color:%4}\n"
+                           "a:visited {color:%5}\n"
+                           "code, pre {%6}\n")
+                           .arg(CUiTheme::isDark() ? "dark" : "light", pal.color(QPalette::Text).name(),
+                                pal.color(QPalette::Base).name(), pal.color(QPalette::Link).name(),
+                                pal.color(QPalette::LinkVisited).name(), CUiTheme::css(CUiTheme::Role::eCode));
 
-  if (type == QTextDocument::StyleSheetResource) {
-    // The packaged help CSS fills the code background but leaves the text colour to the palette,
-    // which inverts on a dark scheme. Append the themed pair - a later rule wins. A miss becomes
-    // a hit carrying just that rule, so code blocks stay themed even with no stylesheet shipped.
-    return QString::fromUtf8(data.toByteArray()) + "\ncode, pre {" + CUiTheme::css(CUiTheme::Role::eCode) + "}\n";
+  const QString& literal = QString::fromUtf8(QJsonDocument(QJsonArray{css}).toJson(QJsonDocument::Compact));
+  const QString& source = QString(
+                              "(function() {"
+                              "  let style = document.getElementById('qms-theme');"
+                              "  if (!style) {"
+                              "    style = document.createElement('style');"
+                              "    style.id = 'qms-theme';"
+                              "    (document.head || document.documentElement).appendChild(style);"
+                              "  }"
+                              "  style.textContent = %1[0];"
+                              "})();")
+                              .arg(literal);
+
+  QWebEngineScriptCollection& scripts = page()->scripts();
+  for (const QWebEngineScript& old : scripts.find(kThemeScript)) {
+    scripts.remove(old);
   }
+  QWebEngineScript script;
+  script.setName(kThemeScript);
+  script.setInjectionPoint(QWebEngineScript::DocumentReady);
+  script.setWorldId(QWebEngineScript::ApplicationWorld);
+  script.setSourceCode(source);
+  scripts.insert(script);
 
-  return data;
+  page()->setBackgroundColor(pal.color(QPalette::Base));
+  page()->runJavaScript(source, QWebEngineScript::ApplicationWorld);
 }
 
 void CHelpBrowser::contextMenuEvent(QContextMenuEvent* event) {
-  QMenu* menu = createStandardContextMenu();
+  QMenu* menu = new QMenu(this);
 
+  const QWebEngineContextMenuRequest* request = lastContextMenuRequest();
+  if (request != nullptr && !request->selectedText().isEmpty()) {
+    menu->addAction(pageAction(QWebEnginePage::Copy));
+  }
+  if (request != nullptr && request->linkUrl().isValid()) {
+    menu->addAction(pageAction(QWebEnginePage::CopyLinkToClipboard));
+  }
+  menu->addAction(pageAction(QWebEnginePage::SelectAll));
+
+  QWebEngineHistory* hist = history();
   menu->addSeparator();
-  if (isBackwardAvailable()) {
+  if (hist->canGoBack()) {
     menu->addAction(QIcon(":/icons/Left.svgt"), tr("Go back one page"), Qt::CTRL | Qt::Key_Left, this,
-                    &CHelpBrowser::backward)
+                    &CHelpBrowser::back)
         ->setObjectName("actionBackward");
   }
-  if (isForwardAvailable()) {
+  if (hist->canGoForward()) {
     menu->addAction(QIcon(":/icons/Right.svgt"), tr("Go forward one page"), Qt::CTRL | Qt::Key_Right, this,
                     &CHelpBrowser::forward)
         ->setObjectName("actionForward");
   }
-  if (isBackwardAvailable()) {
+  if (hist->canGoBack()) {
     menu->addAction(QIcon(":/icons/ToTop.svgt"), tr("Go to initial page"), Qt::CTRL | Qt::Key_Up, this,
-                    &CHelpBrowser::home)
+                    [this]() { setSource(homeUrl); })
         ->setObjectName("actionHome");
   }
 

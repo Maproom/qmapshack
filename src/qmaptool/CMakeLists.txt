@@ -283,6 +283,7 @@ target_link_libraries(${APPLICATION_NAME} PRIVATE
     Qt6::SvgWidgets  # QSvgWidget: the dpr-aware way to show a static icon
     Qt6::Network
     Qt6::Help
+    Qt6::WebEngineWidgets
     GDAL::GDAL
     PROJ::proj
 )

@@ -19,27 +19,35 @@
 #ifndef CHELPBROWSER_H
 #define CHELPBROWSER_H
 
-#include <QTextBrowser>
+#include <QWebEngineView>
 
 class QHelpEngine;
+class QWebEngineProfile;
 
-class CHelpBrowser : public QTextBrowser {
+class CHelpBrowser : public QWebEngineView {
   Q_OBJECT
  public:
   CHelpBrowser(QHelpEngine* helpEngine, QWidget* parent);
-  virtual ~CHelpBrowser() = default;
+  ~CHelpBrowser() override;
 
-  QVariant loadResource(int type, const QUrl& name) override;
-  void contextMenuEvent(QContextMenuEvent* event) override;
-
-  /// @brief Reload on a palette switch - the themed colours are baked into the page.
-  void changeEvent(QEvent* e) override;
+  /** @brief Register the qthelp URL scheme. Call once, before the QApplication is constructed. */
+  static void registerUrlScheme();
 
  public slots:
   void setSource(const QUrl& url);
 
+ protected:
+  void contextMenuEvent(QContextMenuEvent* event) override;
+
+  /** @brief Re-apply the themed colours to the open page on a palette switch. */
+  void changeEvent(QEvent* e) override;
+
  private:
+  void applyTheme();
+
   QHelpEngine* engine;
+  QWebEngineProfile* profile;
+  QUrl homeUrl;
 };
 
 #endif  // CHELPBROWSER_H

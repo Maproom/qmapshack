@@ -22,6 +22,7 @@
 
 #include "CMainWindow.h"
 #include "CSingleInstanceProxy.h"
+#include "help/CHelpBrowser.h"
 #include "helpers/CSettings.h"
 #include "setup/IAppSetup.h"
 #include "theme/CQmsStyle.h"
@@ -44,6 +45,7 @@ int main(int argc, char** argv) {
     argVal[i] = argv[i];
   }
 
+  CHelpBrowser::registerUrlScheme();
   QApplication app(argc, argv);
   CQmsStyle::install();
   CUiTheme::installThemeRefresh();

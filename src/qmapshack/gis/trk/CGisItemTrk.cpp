@@ -3013,6 +3013,15 @@ void CGisItemTrk::toRoute() {
     qCritical("CGisItemTrk::toRoute no project");
     return;
   }
+
+  // A device project cannot store a new item: nothing writes it back to the device.
+  if (project->isOnDevice()) {
+    project = CGisWorkspace::self().selectProject(true);
+    if (nullptr == project) {
+      return;
+    }
+  }
+
   getMouseRange(idx1, idx2, true);
 
   if (NOIDX == idx1) {
@@ -3041,6 +3050,15 @@ void CGisItemTrk::toArea() {
     qCritical("CGisItemTrk::toArea no project");
     return;
   }
+
+  // A device project cannot store a new item: nothing writes it back to the device.
+  if (project->isOnDevice()) {
+    project = CGisWorkspace::self().selectProject(true);
+    if (nullptr == project) {
+      return;
+    }
+  }
+
   getMouseRange(idx1, idx2, true);
 
   if (NOIDX == idx1) {

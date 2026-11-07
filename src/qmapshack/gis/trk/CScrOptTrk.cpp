@@ -41,6 +41,14 @@ CScrOptTrk::CScrOptTrk(CGisItemTrk* trk, const QPoint& point, IMouse* parent) : 
   toolEdit->setDisabled(isOnDevice);
   toolReverse->setDisabled(isOnDevice);
   toolRange->setDisabled(isOnDevice);
+  toolDelete->setDisabled(isOnDevice);
+  toolEditDetails->setDisabled(isOnDevice);
+  toolTags->setDisabled(isOnDevice);
+  toolActivity->setDisabled(isOnDevice);
+  toolColor->setDisabled(isOnDevice);
+  toolNogo->setDisabled(isOnDevice);
+  toolAddElevation->setDisabled(isOnDevice);
+  toolAddInfo->setDisabled(isOnDevice);
   toolCopyWithWpt->setEnabled(trk->getNumberOfAttachedWpt() != 0);
   toolNogo->setChecked(trk->isNogo());
 

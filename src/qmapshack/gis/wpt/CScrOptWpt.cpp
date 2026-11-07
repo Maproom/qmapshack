@@ -35,14 +35,21 @@ CScrOptWpt::CScrOptWpt(CGisItemWpt* wpt, const QPoint& point, IMouse* parent) : 
   label->setText(wpt->getInfo(IGisItem::eFeatureShowName | IGisItem::eFeatureShowLinks));
   adjustSize();
 
-  toolProj->setDisabled(wpt->isGeocache() || wpt->isOnDevice());
-  toolMove->setDisabled(wpt->isGeocache() || wpt->isOnDevice());
+  const bool isOnDevice = wpt->isOnDevice();
+  toolProj->setDisabled(wpt->isGeocache() || isOnDevice);
+  toolMove->setDisabled(wpt->isGeocache() || isOnDevice);
+  toolDelete->setDisabled(isOnDevice);
+  toolEdit->setDisabled(isOnDevice);
+  toolTags->setDisabled(isOnDevice);
+  toolAddElevation->setDisabled(isOnDevice);
+  toolBubble->setDisabled(isOnDevice);
+  toolEditRadius->setDisabled(isOnDevice);
   photoAlbum->reload(wpt->getImages());
   toolBubble->setChecked(wpt->hasBubble());
   bool radius = wpt->hasRadius();
-  toolNogoArea->setEnabled(radius);
+  toolNogoArea->setEnabled(radius && !isOnDevice);
   toolNogoArea->setChecked(radius && wpt->isNogo());
-  toolDelRadius->setEnabled(radius);
+  toolDelRadius->setEnabled(radius && !isOnDevice);
 
   anchor = wpt->getPointCloseBy(point);
   moveTo(anchor.toPoint());

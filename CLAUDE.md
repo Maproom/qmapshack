@@ -240,6 +240,10 @@ the GUI thread (`BlockingQueuedConnection`). Each storage of a device is its own
 so a memory card shows next to the internal storage; a storage without `GarminDevice.xml` falls
 back to the fixed paths in `CDeviceGarminMtp::setup()`.
 
+**Nothing writes an item change back to a device.** So the workspace menus, on-map buttons and map
+selection disable item changes on `isOnDevice()`, and a track converted from one goes to a workspace
+project; only a whole project can be removed.
+
 **Open, all platforms:** deleting a `CDeviceGarminMtp` while its load thread runs (an unplug during
 the initial load) blocks the GUI for `CThread::cancel()`'s 5 s, because the thread waits on a
 `BlockingQueuedConnection` into the GUI, and afterwards the thread uses the deleted device.

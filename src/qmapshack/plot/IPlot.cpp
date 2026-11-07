@@ -346,7 +346,7 @@ void IPlot::mousePressEvent(QMouseEvent* e) {
     return;
   }
 
-  if ((e->button() == Qt::LeftButton) && (mode == eModeIcon)) {
+  if ((e->button() == Qt::LeftButton) && (mode == eModeIcon) && !trk->isOnDevice()) {
     trk->edit();
   }
 

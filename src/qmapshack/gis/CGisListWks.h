@@ -166,11 +166,12 @@ class CGisListWks : public QTreeWidget {
   void showMenuProjectWks(const QPoint& p);
   void showMenuProjectDev(const QPoint& p);
   void showMenuProjectTrash(const QPoint& p);
-  void showMenuItemTrk(const QPoint& p, const IGisItem::key_t& key);
+  void showMenuItemTrk(const QPoint& p, const IGisItem::key_t& key, bool isOnDevice);
   void showMenuItemWpt(const QPoint& p, CGisItemWpt* wpt);
   void showMenuItemRte(const QPoint& p);
   void showMenuItemOvl(const QPoint& p);
-  void showMenuItem(const QPoint& p, const QList<IGisItem::key_t>& keysTrks, const QList<IGisItem::key_t>& keysWpts);
+  void showMenuItem(const QPoint& p, const QList<IGisItem::key_t>& keysTrks, const QList<IGisItem::key_t>& keysWpts,
+                    bool hasItemOnDevice);
 
   void syncPrjToDevices(IGisProject* project, const QSet<QString>& keys);
   QSet<QString> getAllDeviceKeys() const;

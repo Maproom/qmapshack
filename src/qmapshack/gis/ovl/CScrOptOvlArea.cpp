@@ -39,6 +39,12 @@ CScrOptOvlArea::CScrOptOvlArea(CGisItemOvlArea* area, const QPoint& point, IMous
   }
   moveTo(anchor.toPoint());
   toolNogo->setChecked(area->isNogo());
+  const bool isOnDevice = area->isOnDevice();
+  toolDelete->setDisabled(isOnDevice);
+  toolEditDetails->setDisabled(isOnDevice);
+  toolTags->setDisabled(isOnDevice);
+  toolEdit->setDisabled(isOnDevice);
+  toolNogo->setDisabled(isOnDevice);
   show();
 
   connect(toolEditDetails, &QToolButton::clicked, this, &CScrOptOvlArea::slotEditDetails);

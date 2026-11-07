@@ -36,17 +36,27 @@ CDeviceGarminArchiveMtp::CDeviceGarminArchiveMtp(const QString& path, IDeviceAcc
 
 CDeviceGarminArchiveMtp::~CDeviceGarminArchiveMtp() {
   if (threadLoadData != nullptr) {
-    threadLoadData->cancel();
+    threadLoadData->cancel(this);
   }
 };
 
+bool CDeviceGarminArchiveMtp::stopLoading() {
+  const bool subDevicesStopped = IDevice::stopLoading();
+  return stopLoadThread(threadLoadData, this) && subDevicesStopped;
+}
+
 bool CDeviceGarminArchiveMtp::removeFromDevice(const QString& filename) {
   qDebug() << "CDeviceGarminArchiveMtp::removeFromDevice(" << filename << ")";
+  CRunningCall call(this);
   return device->removeFileFromStorage(filename);
 }
 
 void CDeviceGarminArchiveMtp::slotExpanded(QTreeWidgetItem* item) {
   if ((item != this) || (childCount() != 0)) {
+    return;
+  }
+  // a collapse still stopping the last load restarts it
+  if ((threadLoadData != nullptr) && !threadLoadData->isFinished()) {
     return;
   }
 
@@ -58,8 +68,8 @@ void CDeviceGarminArchiveMtp::slotExpanded(QTreeWidgetItem* item) {
     const quint32 total = entries.count();
     quint32 count = 0;
     for (const QString& entry : entries) {
-      if (threadLoadData->isInterruptionRequested()) {
-        break;
+      if (QThread::currentThread()->isInterruptionRequested()) {
+        return;
       }
 
       setProgress(++count, total);
@@ -70,6 +80,7 @@ void CDeviceGarminArchiveMtp::slotExpanded(QTreeWidgetItem* item) {
       QMetaObject::invokeMethod(
           this,
           [this, entry]() {
+            CRunningCall call(this);
             const QString& filename = dir.filePath(entry);
             QTemporaryFile tempFile;
             if (!device->readFileFromStorage(filename, tempFile)) {
@@ -103,16 +114,33 @@ void CDeviceGarminArchiveMtp::slotExpanded(QTreeWidgetItem* item) {
 }
 
 void CDeviceGarminArchiveMtp::slotCollapsed(QTreeWidgetItem* item) {
-  if ((item != this) || (childCount() == 0)) {
+  if (item != this) {
     return;
   }
 
-  if (threadLoadData != nullptr) {
-    threadLoadData->cancel();
+  if (!stopLoading()) {
+    // one retry at a time, or a stale one stops a load started later
+    if (!collapsePending) {
+      collapsePending = true;
+      QTimer::singleShot(100, this, [this]() {
+        collapsePending = false;
+        slotCollapsed(this);
+      });
+    }
+    return;
   }
 
-  QMutexLocker lock(&IGisItem::mutexItems);
-  qDeleteAll(takeChildren());
-  name = tr("Archive - expand to load");
+  {
+    QMutexLocker lock(&IGisItem::mutexItems);
+    qDeleteAll(takeChildren());
+    name = tr("Archive - expand to load");
+    // a stopped load leaves the progress unfinished
+    setProgress(0, 0);
+  }
   emit CGisWorkspace::self().sigChanged();
+
+  // expanded again while the load was stopping
+  if (isExpanded()) {
+    slotExpanded(this);
+  }
 }

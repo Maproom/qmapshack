@@ -34,13 +34,18 @@ CDeviceGarminMtp::CDeviceGarminMtp(IDeviceAccess* access, const QString& key, QT
 
 CDeviceGarminMtp::~CDeviceGarminMtp() {
   if (threadLoadData != nullptr) {
-    threadLoadData->cancel();
+    threadLoadData->cancel(this);
   }
 }
 
 QString CDeviceGarminMtp::getInfo(quint32) const {
   // update the tool tip with information from the device xml
   return QString("%1 (%2, V%3)").arg(description, partno, softwareVersion);
+}
+
+bool CDeviceGarminMtp::stopLoading() {
+  const bool subDevicesStopped = IDevice::stopLoading();
+  return stopLoadThread(threadLoadData, this) && subDevicesStopped;
 }
 
 void CDeviceGarminMtp::setup() {
@@ -139,7 +144,7 @@ void CDeviceGarminMtp::setup() {
     total += device->listFilesOnStorage(pathActivities).count();
     total += device->listFilesOnStorage(pathCourses).count();
     if (!pathLocations.isEmpty()) {
-      total += device->listFilesOnStorage(pathCourses).count();
+      total += device->listFilesOnStorage(pathLocations).count();
     }
     quint32 count = 0;
 
@@ -150,9 +155,14 @@ void CDeviceGarminMtp::setup() {
       createProjectsFromFiles(pathLocations, "fit", count, total);
     }
 
+    if (QThread::currentThread()->isInterruptionRequested()) {
+      return;
+    }
+
     QMetaObject::invokeMethod(
         this,
         [this]() {
+          CRunningCall call(this);
           QMutexLocker lock(&IGisItem::mutexItems);
           if (device->listDirsOnStorage(pathGpx).contains("Archive") &&
               !device->listFilesOnStorage(QDir(pathGpx).filePath("Archive")).isEmpty()) {
@@ -169,6 +179,7 @@ void CDeviceGarminMtp::setup() {
 
 bool CDeviceGarminMtp::removeFromDevice(const QString& filename) {
   qDebug() << "CDeviceGarminMtp::removeFromDevice(" << filename << ")";
+  CRunningCall call(this);
   return device->removeFileFromStorage(filename);
 }
 
@@ -200,6 +211,10 @@ void CDeviceGarminMtp::insertCopyOfProject(IGisProject* project) {
 
 void CDeviceGarminMtp::createProjectsFromFiles(QString subdirectory, QString extension, quint32& count,
                                                const quint32 total) {
+  if (QThread::currentThread()->isInterruptionRequested()) {
+    return;
+  }
+
   QDir d(subdirectory);
   const QStringList& files = device->listFilesOnStorage(subdirectory);
   for (const QString& file : files) {
@@ -215,6 +230,7 @@ void CDeviceGarminMtp::createProjectsFromFiles(QString subdirectory, QString ext
     QMetaObject::invokeMethod(
         this,
         [this, d, file, extension]() {
+          CRunningCall call(this);
           QTemporaryFile tempFile;
           if (!device->readFileFromStorage(d.filePath(file), tempFile)) {
             return;

@@ -23,6 +23,7 @@
 #include "gis/CGisListWks.h"
 #include "gis/prj/IGisProject.h"
 #include "helpers/CSelectCopyAction.h"
+#include "helpers/CThread.h"
 
 #ifdef HAVE_DBUS
 #include <QtDBus>
@@ -48,6 +49,30 @@ IDevice::~IDevice() {
   if (type() != eTypeVirtual) {
     countDevice--;
   }
+}
+
+bool IDevice::stopLoading() {
+  bool stopped = callsRunning == 0;
+  const int N = childCount();
+  for (int n = 0; n < N; n++) {
+    IDevice* device = dynamic_cast<IDevice*>(child(n));
+    if (device != nullptr && !device->stopLoading()) {
+      stopped = false;
+    }
+  }
+  return stopped;
+}
+
+bool IDevice::stopLoadThread(CThread* thread, QObject* receiver) {
+  if (thread == nullptr) {
+    return true;
+  }
+  if (callsRunning != 0) {
+    thread->requestInterruption();
+    return false;
+  }
+  // bounded: the thread can wait for device I/O or for IGisItem::mutexItems held further up the GUI stack
+  return thread->cancel(receiver, QDeadlineTimer(100));
 }
 
 void IDevice::setVisibility(bool visible) {
@@ -230,6 +255,7 @@ void IDevice::editItemByKey(const IGisItem::key_t& key) {
 }
 
 void IDevice::insertCopyOfProject(IGisProject* project, int& lastResult) {
+  CRunningCall call(this);
   IGisProject* project2 = getProjectByKey(project->getKey());
   if (project2) {
     int result = lastResult;
@@ -260,6 +286,7 @@ void IDevice::insertCopyOfProject(IGisProject* project, int& lastResult) {
 }
 
 void IDevice::updateProject(IGisProject* project) {
+  CRunningCall call(this);
   IGisProject* project2 = getProjectByKey(project->getKey());
   if (project2) {
     if (project2->remove()) {

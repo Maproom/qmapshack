@@ -27,6 +27,7 @@
 class CGisDraw;
 class CGisItemWpt;
 class CDeviceGarmin;
+class CThread;
 
 class IDevice : public IWksItem {
   Q_DECLARE_TR_FUNCTIONS(IDevice)
@@ -71,8 +72,44 @@ class IDevice : public IWksItem {
 
   void setVisibility(bool visible) override;
 
+  /**
+     @brief Stop the threads loading this device and its sub-devices
+
+     @return False if a call into the device or a sub-device is running on the GUI thread further up the stack
+             (CRunningCall), or a loading thread did not end within 100 ms; each thread is waited for on its own, so a
+             device with an Archive can take 200 ms. The device must not be deleted until a later call returns true.
+   */
+  virtual bool stopLoading();
+
+  /**
+     @brief Marks a call into the device running on the GUI thread
+
+     Such a call can wait in a local event loop, where an unplug arrives. While one runs, stopLoading() returns false
+     and the device is not deleted. Hold it before any nested loop, dialog included, that is followed by a call into
+     the device or one of its projects.
+   */
+  class CRunningCall {
+   public:
+    explicit CRunningCall(IDevice* dev) : device(dev) {
+      if (device != nullptr) {
+        ++device->callsRunning;
+      }
+    }
+    ~CRunningCall() {
+      if (device != nullptr) {
+        --device->callsRunning;
+      }
+    }
+    CRunningCall(const CRunningCall&) = delete;
+    CRunningCall& operator=(const CRunningCall&) = delete;
+
+   private:
+    IDevice* device;
+  };
+
  protected:
   virtual void insertCopyOfProject(IGisProject* project) = 0;
+  bool stopLoadThread(CThread* thread, QObject* receiver);
   /**
      @brief Test if a project's filename/path is already used
 
@@ -86,6 +123,7 @@ class IDevice : public IWksItem {
 
   QDir dir;
   QString key;
+  qint32 callsRunning = 0; /**< calls into the device running on the GUI thread, see CRunningCall */
   static quint32 countMount;
   static quint32 countDevice;
 };

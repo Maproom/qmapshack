@@ -43,11 +43,16 @@ CDeviceGenericMtp::CDeviceGenericMtp(const QDBusObjectPath& objectPathStorage, c
 
 CDeviceGenericMtp::~CDeviceGenericMtp() {
   if (threadLoadData != nullptr) {
-    threadLoadData->cancel();
+    threadLoadData->cancel(this);
   }
 }
 
 QString CDeviceGenericMtp::getInfo(quint32) const { return ""; }
+
+bool CDeviceGenericMtp::stopLoading() {
+  const bool subDevicesStopped = IDevice::stopLoading();
+  return stopLoadThread(threadLoadData, this) && subDevicesStopped;
+}
 
 void CDeviceGenericMtp::setup() {
   if (!device->foundValidStoragePath()) {
@@ -104,15 +109,20 @@ void CDeviceGenericMtp::setup() {
         createProjectsFromFiles(QDir::cleanPath(rootPath.filePath(path)), count, total);
       }
 
+      if (QThread::currentThread()->isInterruptionRequested()) {
+        return;
+      }
+
       setProgress(total, total);
     });
-  }
 
-  threadLoadData->start();
+    threadLoadData->start();
+  }
 }
 
 bool CDeviceGenericMtp::removeFromDevice(const QString& filename) {
   qDebug() << "CDeviceGenericMtp::removeFromDevice(" << filename << ")";
+  CRunningCall call(this);
   return device->removeFileFromStorage(filename);
 }
 
@@ -146,6 +156,10 @@ void CDeviceGenericMtp::insertCopyOfProject(IGisProject* project) {
 
 void CDeviceGenericMtp::createProjectsFromFiles(const QString& subdirectory, quint32& count, const quint32 total) {
   static const QStringList knownSuffix = {"gpx", "fit"};
+  if (QThread::currentThread()->isInterruptionRequested()) {
+    return;
+  }
+
   QDir d(subdirectory);
 
   const QStringList& files = device->listFilesOnStorage(subdirectory);
@@ -164,6 +178,7 @@ void CDeviceGenericMtp::createProjectsFromFiles(const QString& subdirectory, qui
     QMetaObject::invokeMethod(
         this,
         [this, suffix, d, file]() {
+          CRunningCall call(this);
           QTemporaryFile tempFile;
           if (!device->readFileFromStorage(d.filePath(file), tempFile)) {
             return;

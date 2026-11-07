@@ -43,6 +43,8 @@ class CDeviceGenericMtp : public QObject, public IDevice {
 
   QString getInfo(quint32) const override;
 
+  bool stopLoading() override;
+
  protected:
   void insertCopyOfProject(IGisProject* project) override;
 

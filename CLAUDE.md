@@ -9,8 +9,8 @@ vector maps and DEM data; supports online and offline routing engines.
 
 - **Language:** C++20
 - **GUI / framework:** Qt 6.8+
-- **Key libs:** GDAL, PROJ 8+, Routino
-- **Build:** CMake 3.20+, Ninja; Debug build in `build/`, binaries in `build/bin/`
+- **Key libs:** GDAL, PROJ 9.4+, Routino
+- **Build:** CMake 3.20+, Ninja; build tree `build/`, binaries in `build/bin/`
 - **Bundled 3rdparty:** Garmin FIT SDK
 - **Minimum GDAL:** 3.10
 
@@ -20,7 +20,7 @@ vector maps and DEM data; supports online and offline routing engines.
 
 ```
 src/
-  qmapshack/        main app (21 subsystems)
+  qmapshack/        main app
     canvas/         map rendering
     gis/            tracks, routes, waypoints, DB, GPX, routing (gis/rte/router/)
     mouse/          mouse interaction; line editing in mouse/line/
@@ -28,6 +28,7 @@ src/
   qmaptool/         map creation tool
   qmt_map2jnx/      utility
   qmt_rgb2pct/      utility
+  qms_surfacedb/    surface database tool
   common/           shared code
 ```
 
@@ -48,6 +49,9 @@ src/
   moc, AUTOUIC, linking, or anything inside `#if defined(Q_OS_WIN32)`.
 - **Never commit or push** without being asked for that specific change.
 - **No `Co-Authored-By` lines** in commit messages.
+- **Working on a ticket adds its line to `changelog.txt`** as part of the change, under the top
+  version block, sorted by ticket number: `[QMS-nnnn] <commit subject>`. Skip it only if the line
+  is already there.
 - For "what were we working on", read `git status && git diff` first — the live diff is ground
   truth, notes are not.
 - Store project learnings in this file or the subsystem's own `CLAUDE.md` (see "Subsystem notes
@@ -64,19 +68,20 @@ src/
 
 ## Build system
 
-Target-scoped CMake. Nothing is set at directory scope except the MSVC options below.
+Target-scoped CMake. Directory scope holds only platform and toolchain flags (PIC, MSVC, Apple
+libc++, ASan).
 
 - **Never touch the translation block's gating.** With `UPDATE_TRANSLATIONS` off no lupdate target
   exists, so no build rewrites the tracked `.ts` files; Qt's `update_translations` is no substitute.
   Keep the `/locale` resource in the `else` branch: nothing reads it, but it makes the `.qm` files
   inputs of the application target, which the packaging scripts copy from `<build>/src/<app>/`.
-- **All nine `.qm` catalogs are in the binary under `:/locale`**, but `prepareTranslators()` reads
-  only the filesystem, so a build-tree run is English.
+- **All ten `.qm` catalogs (base plus nine languages) are in the binary under `:/locale`**, but
+  `prepareTranslators()` reads only the filesystem, so a build-tree run is English.
 - **Standard dialog buttons are translated by the platform theme, not a `.qm`**, following
   `LANGUAGE`/`LC_MESSAGES`. `QT_QPA_PLATFORMTHEME=` (empty) still loads `kde` via
   `XDG_CURRENT_DESKTOP`; `generic` does not. Offscreen loads no theme and ignores the variable.
-- **An unknown `QT_QPA_PLATFORMTHEME` still loads the desktop's theme**, so the rest is pinned in
-  the application. Generic theme vs none (Qt 6.10.2, Fusion) differs only in
+- **An unknown `QT_QPA_PLATFORMTHEME` still loads the desktop's theme**, so a documentation run
+  pins the rest. Generic theme vs none (Qt 6.10.2, Fusion) differs only in
   `SH_DialogButtonBox_ButtonsHaveIcons` and `QIcon::themeName()`:
   `CQmsStyle::pinThemeIndependentHints()` answers the hint 0; nothing pins `QIcon::themeName()`. Any
   further difference goes into that override, never a per-symptom patch.
@@ -95,7 +100,7 @@ Target-scoped CMake. Nothing is set at directory scope except the MSVC options b
   being tied to one Qt build is accepted. Only 6.10.2 is tested.
 - **Defines are per target**: `HELPPATH` on qmapshack and qmaptool, `ROUTINO_XML_PATH` and
   `HAVE_DBUS` on qmapshack. Global on purpose: `_CRT_SECURE_NO_WARNINGS`, `/MP` and `/utf-8` under
-  MSVC, which the bundled FIT SDK needs, and `-march=native`.
+  MSVC, which the bundled FIT SDK needs, and `-march=native` with `BUILD_FOR_LOCAL_SYSTEM`.
 - **Install paths** come from `GNUInstallDirs` on UNIX and stay relative to the application
   directory on Windows, where `CAppSetupWin` resolves `HELPPATH` against it. Six cache variables
   survive so a packager can override them. `HTML_INSTALL_DIR` is `share/doc/HTML`, not
@@ -170,14 +175,14 @@ those in) or guard the block with `// clang-format off` as `CMainWindow.cpp` doe
 
 ## Architecture: mouse/line editor
 
-`src/qmapshack/mouse/line/`.
+`src/qmapshack/mouse/line/`; the three editors are in `mouse/`.
 
 ```
 IMouseEditLine          – owns the point list (SGisLine), undo/redo history,
 │                          routing mode buttons, and the active ILineOp
-├── CMouseEditTrk       – edits a track (IGisItemTrk)
-├── CMouseEditRte       – edits a route (IGisItemRte)
-└── CMouseEditArea      – edits an area overlay (IGisItemOvl)
+├── CMouseEditTrk       – edits a track (CGisItemTrk)
+├── CMouseEditRte       – edits a route (CGisItemRte)
+└── CMouseEditArea      – edits an area overlay (CGisItemOvlArea)
 
 ILineOp                 – base for one interactive editing operation
 ├── CLineOpAddPoint     – insert new points / extend the line
@@ -194,7 +199,7 @@ deletes the current op and creates a new one.
 `CRouterSetup::calcRoute()` shows a `CProgressDialog` running a nested `QEventLoop`. The full Qt
 event pipeline stays live while it spins, so during routing:
 
-- `mouseMove()` fires and drifts `points[idxFocus].coord` to the cursor.
+- `mouseMove()` fires; `CLineOpAddPoint`/`CLineOpMovePoint` ignore it while `isRouting`.
 - A right-click reaches `abortStep()` → `restoreFromHistory()`, which reallocates `points` and
   invalidates every saved index or pointer into it.
 - A left-click can re-enter `leftClick()`.
@@ -203,12 +208,11 @@ event pipeline stays live while it spins, so during routing:
 return value.** It:
 
 1. Pins `points[idxFocus].coord = coord` before routing.
-2. Sets `isRouting = true` — subclasses test this at the top of `leftClick()` to block re-entry.
+2. Sets `isRouting = true` — subclasses test it in `leftClick()` to block re-entry.
 3. Calls `slotTimeoutRouting()` → `finalizeOperation()` → `tryRouting()`.
 4. Re-validates `idxFocus` against `points.size()` after the loop returns (an abort leaves both
    unknown).
-5. Restores `points[idxFocus].coord = coord`, undoing any drift.
-6. Returns `false` if aborted — the caller must return immediately.
+5. Returns `false` if aborted — the caller must return immediately.
 
 ### CLineOpAddPoint state
 
@@ -244,9 +248,13 @@ back to the fixed paths in `CDeviceGarminMtp::setup()`.
 selection disable item changes on `isOnDevice()`, and a track converted from one goes to a workspace
 project; only a whole project can be removed.
 
-**Open, all platforms:** deleting a `CDeviceGarminMtp` while its load thread runs (an unplug during
-the initial load) blocks the GUI for `CThread::cancel()`'s 5 s, because the thread waits on a
-`BlockingQueuedConnection` into the GUI, and afterwards the thread uses the deleted device.
+**Stopping an MTP load thread:** `IDevice::stopLoading()` cancels each load thread with a 100 ms
+deadline (`CThread::cancel(receiver, deadline)`) and returns false while a call into the device is
+on the GUI stack or a thread has not ended (`setProgress()` needs `mutexItems`); `removeDevice()`
+and the Archive's collapse retry later. Code that enters a nested loop (KMtp transfer, LibMtp call,
+dialog, `processEvents()`) and then calls into a device or its project holds an
+`IDevice::CRunningCall` from before the loop. Only the destructors wait without a limit;
+`CDeviceGarmin`/`CDeviceGarminArchive` still use the 5 s `cancel()`.
 
 ### macOS: `CDeviceAccessLibMtp`
 
@@ -265,8 +273,8 @@ session and serves every storage's `CDeviceAccessLibMtp`; each call waits behind
   device per pass. Every open and removal runs local event loops that can re-enter it, so a nested
   call only sets `updateMtpAgain` and the outer call runs another pass; the timer is set once, at
   the end. A serial per arrival tells a device replugged at the same address from the earlier one.
-- **A new device is opened 3 s after it appears.** A booting Edge 1040 shows up on USB for about a
-  millisecond and leaves again; the delay keeps such a device from being opened. Any failed open —
+- **A new device is opened 3 s after it appears.** A booting device can show up on USB briefly and
+  leave again; the delay keeps such a device from being opened. Any failed open —
   not MTP yet, no storage yet, a failed listing, held by Garmin Express or OpenMTP — is retried
   2.5, 5, 10, 20 and 40 s later, then given up until the device is plugged in again. A device
   without `GarminDevice.xml` is dropped at once.
@@ -288,7 +296,7 @@ session and serves every storage's `CDeviceAccessLibMtp`; each call waits behind
   "Tour 1" and "Tour-1" both become `Tour1.gpx`. The upload refuses it.
 - **Object ids come from remembered folder listings.** A lookup walks the path down from the Garmin
   folder, taking ancestors from memory. Listing a folder, sending and removing fetch the folder
-  concerned; reading reuses it, so the loader's 118 reads need no listing each. A lookup that fails
+  concerned; reading reuses it. A lookup that fails
   forgets every listing and is walked once more from the device, and nothing below `retryLookup()`
   retries; a failed read forgets them too. Forgetting must reach the ancestors: a folder made anew
   keeps its stale id in its parent's listing.
@@ -312,8 +320,8 @@ session and serves every storage's `CDeviceAccessLibMtp`; each call waits behind
 `sigHasFastRouting(bool)` when the router capability changes; `IMouseEditLine` listens and
 enables/disables the auto-routing button.
 
-Only local BRouter supports fast (on-the-fly) routing. Online BRouter and Routino need the whole
-route at once via `calcRoute(const IGisItem::key_t&)`.
+Routino and local BRouter support fast (on-the-fly) routing; online BRouter needs the whole route at
+once via `calcRoute(const IGisItem::key_t&)`.
 
 ---
 
@@ -340,8 +348,7 @@ preview curve.
 
 `get()` is a non-virtual wrapper over a bounded LRU `QCache` (key `(type << 32) | offset`); a miss
 calls the pure-virtual `decode()` of `CGarminStrTbl6/8/Utf8`. Keep the split so the cache lives in one
-place. Only the draw thread touches it, so no lock. Tracy: `strtbl.get` counts every lookup,
-`strtbl.decode` the misses.
+place. Only the draw thread touches it, so no lock.
 
 ---
 
@@ -370,7 +377,7 @@ every clone of one item has the same data.
 - `map/CMapItemDelegate.{h,cpp}` — map-item tree
 
 Every `getRectangles*()` carves its row with `CRowBuilder` (`helpers/CRowBuilder.h`); padding is
-`kCellPad`/`kInnerGap` in `helpers/CDraw.h`. `CWksItemDelegate` and `CDBItemDelegate` take
+`kCellPad`/`kInnerGap` there. `CWksItemDelegate` and `CDBItemDelegate` take
 name-height buttons (`takeButton(fmName.height())`) with `fullStatusSlice()`, so the status line runs
 under them; `CMapItemDelegate` takes full-height ones (`takeRight(row.height())`) with `statusSlice()`.
 
@@ -517,7 +524,8 @@ History icons are **PNG on disk, `.svgt` in memory**: `displayIconPath()` resolv
 load, `savedIconPath()` converts back on save, and neither marks the item changed. A saved file
 stays readable by a build without the icon engine, where a `.svgt` path renders blank.
 
-The `comment` column keeps its PNG paths — it exists for full-text search and is never rendered.
+The `comment` column keeps its PNG paths: it serves full-text search, and its tooltip strips
+`<img>`.
 
 ### Drawing rules no tool catches
 
@@ -543,24 +551,21 @@ Qt has no SVG recolouring API, so `CSvgtIconEngine` rewrites the SVG text and lo
   renders **nothing**; lowercase `currentcolor` is black (QTBUG-46947); a `<style>` class beats a
   root `color=`, so the KDE/Breeze idiom does not mix with ours.
 - `QSvgRenderer` **ignores a class-supplied `fill:`**. `recolored()` inlines the resolved fill as a
-  presentation attribute; without it 19 icons render black.
+  presentation attribute; without it those icons render black.
 - Qt ignores `markerUnits="strokeWidth"`, so `svghygiene` bakes markers into geometry. Set
   `stroke:none` wherever `stroke-width` is 0 **first**, or the shape becomes a filled block.
-- `QIcon(":/x.svg")` needs both `imageformats/qsvg` and `iconengines/qsvgicon` deployed; all three
-  platforms are confirmed OK.
-- Qt 6.10.0 has a `currentColor` regression, fixed in 6.10.1 (QTBUG-141102).
+- `QIcon(":/x.svg")` needs both `imageformats/qsvg` and `iconengines/qsvgicon` deployed.
+- Qt 6.10.0 breaks `currentColor` (QTBUG-141102); use 6.10.1 or newer.
 
-Dark `ink` is `#9999ff`: it must stay legible on `paper` `#353535` at 4.5:1 while staying clear of
-`lead` `#e0e0e0` (120 icons paint both) and `mark` `#66aaff` (19 icons paint both). That rules out
-the azure family — a "more vibrant blue" means a more saturated navy, not a different blue.
+Dark `ink` is `#9999ff`: legible on `paper` `#353535` at 4.5:1 and distinct from `lead` `#e0e0e0`
+and `mark` `#66aaff`, which icons paint beside it. A "more vibrant blue" means a more saturated
+navy, not azure.
 
 ### Waypoints are data, not chrome
 
-`src/icons/waypoints/` is named by the GPX `<sym>` vocabulary shared with Garmin and its exact look
-is a frozen contract, so it **stays PNG on the canvas**: SVG would hand rendering to whichever Qt
-the user has, and a Qt antialiasing change could silently restyle accepted iconography. External
-user icons are PNG/BMP forever (`CWptIconManager`), so the raster path must exist anyway. Dark
-theming does not apply — they sit on map tiles, not the UI palette.
+`src/icons/waypoints/` follows the GPX `<sym>` vocabulary and its look is frozen, so it **stays PNG
+on the canvas**; user icons are PNG/BMP (`CWptIconManager`) anyway. No dark theming: they sit on map
+tiles.
 
 A waypoint symbol used as **UI chrome** (menu action, tool button) is under none of that and uses
 the SVG. Only `FlagBlue.svg` and `PinBlue.svg` are registered; add others as UI needs them.
@@ -576,9 +581,9 @@ waypoint resolution at all. `getWptIconScaledByName` holds `focus = focus * scal
 
 ### GIS item icons — serialization stores sym/colour, not the icon
 
-`.qms`/DB store the symbol name and the colour; icons are re-derived on load, and the stored pixmaps
-(`items.icon`, `history_event_t.icon`) are caches. Only the waypoint symbol is a frozen raster: the
-track/area PNGs are silhouette masks and can become SVG rendered at size.
+`.qms`/DB store the symbol name and the colour; icons are re-derived on load, and `items.icon` is a
+cache. Only the waypoint symbol is a frozen raster: the track/area PNGs are silhouette masks and can
+become SVG rendered at size.
 
 ---
 
@@ -624,19 +629,16 @@ Qt enforces `minimumSizeHint()` on a window with a layout, so anything that infl
 smallest the main window can be. Each of these reads a *preferred* width as a *required* one:
 
 - **A `QLabel` without `wordWrap` reports its whole unwrapped string as a minimum.** With `wordWrap`
-  it reports its widest word — 436 → 52 for one filter label. Qt 6 turns `hasHeightForWidth()` on by
-  itself there; the `setSizePolicy()` line usually recommended alongside is measured to change
-  nothing. Give any label holding a sentence `wordWrap`, especially one whose text is set at runtime
-  or translated.
+  it reports its widest word. Give any label holding a sentence `wordWrap`, especially one whose
+  text is set at runtime or translated.
 - **`QSplitter` sizes a child through `qSmartMinSize()`**, which takes `qMax(sizeHint,
   minimumSizeHint)` unless the child's size policy carries a `ShrinkFlag`. `MinimumExpanding` and
-  `Minimum` have none, so the child's preferred width becomes a hard floor — 222 px of the details
-  page. Use `Expanding` or `Preferred` for a splitter child that may shrink.
+  `Minimum` have none, so the child's preferred width becomes a hard floor. Use `Expanding` or
+  `Preferred` for a splitter child that may shrink.
 - **A `QTreeWidget` row is as high as the item's size hint, which does not follow the width.** A
   wrapped label in an item widget is clipped as the tree narrows; recompute the item size hints from
   `heightForWidth()` on resize, as `CDetailsTrk::updateFilterRowHeights()` does.
-- **A combo box beside a field frame adds both widths.** Stacking it above cost the speed filters
-  nothing and saved 190 px.
+- **A combo box beside a field frame adds both widths**; stack it above instead.
 
 Measure before believing any of this of a given widget: walk the tree printing `minimumSizeHint()`,
 and remember that a `sizeHint()` is what the widget *wants*.
@@ -658,24 +660,14 @@ Multi-byte formats (`Format_ARGB32`) are unaffected since `width * 4` is always 
 
 ### Warped VRT — transparency outside the source footprint
 
-`GDALAutoCreateWarpedVRT` resamples onto an axis-aligned bounding box around the reprojected
-footprint, so corners with no source coverage exist whenever the source isn't already axis-aligned
-with the target SRS. What fills them depends on the path:
+`GDALAutoCreateWarpedVRT` warps onto an axis-aligned box, so a source not aligned with the target
+SRS has uncovered corners:
 
-- **Single-band palette/gray (`CMapVRT`)** — handled. If the source declares a nodata value, GDAL
-  uses it as both src/dst nodata (we never set `padfSrcNoDataReal`/`padfDstNoDataReal`), so
-  uncovered pixels come back as that index and the constructor zeroes its alpha in the colortable.
-  With no source nodata there is no automatic transparency; `Format_Indexed8` has no alpha channel
-  to retrofit one.
-- **Multi-band RGB(A) without its own alpha band (`CMapVRT`)** — handled by a synthetic destination
-  alpha band (`GDALWarpInitDefaultBandMapping` + `psOptions->nDstAlphaBand = nBandCount + 1`,
-  mirroring `gdalwarp -dstalpha`). The warp tracks per-pixel source coverage into it;
-  `rasterBandCount` is re-read from the warped dataset afterwards so `draw()`'s band loop picks it
-  up. Without it, uncovered corners come back solid black — GDAL's own warp fill, which
-  unconditionally overwrites the `img.fill(white)` pre-fill in `draw()`.
-- **`CDemVRT`** — no handling. Uncovered elevation samples read back as whatever the destination
-  buffer was zero-initialised to (not `NOFLOAT`); `getElevationAt()`/`draw()` never check warp
-  coverage. Only matters for non-axis-aligned DEM sources. **Open.**
+- **Palette/gray (`CMapVRT`):** a source nodata value becomes src and dst nodata, and the
+  constructor zeroes its alpha in the colortable. Without source nodata there is no transparency.
+- **RGB(A) without alpha (`CMapVRT`):** a synthetic destination alpha band (`nDstAlphaBand`, as
+  `gdalwarp -dstalpha`); `rasterBandCount` is re-read afterwards. Without it the corners are black.
+- **`CDemVRT`:** not handled; uncovered samples read back zero-initialised, not `NOFLOAT`. **Open.**
 
 ### Blank hillshade when zoomed out
 
@@ -734,9 +726,9 @@ file.
   `QT_DEV_PATH`/`ROUTINO_DEV_PATH`/… `FATAL_ERROR` gauntlet can move into `CMakePresets.json`, and
   `MacOSX/build-QMS.sh` and the msvc batch files can call `--preset`. Needs someone who can test
   both release paths.
-- Shared `qms_common` library: ten files under `src/common/` are compiled once per app. Blocker is
-  `src/common/help/CHelp.cpp`'s `"helpers/CSettings.h"`, which resolves per-app; the two copies are
-  byte-identical, so moving that header to `src/common/helpers/` unblocks it.
+- Shared `qms_common` library: eleven files under `src/common/` are compiled once per app. Blocker
+  is `src/common/help/CHelp.cpp`'s `"helpers/CSettings.h"`, which resolves per-app; the two copies
+  are byte-identical, so moving that header to `src/common/helpers/` unblocks it.
 - Confirm on their own platforms that these removals were inert: macOS `LINK_FLAGS`, the
   `-framework` entries in `CMAKE_C_FLAGS` and the three framework include dirs; Windows
   qmt_map2jnx's `Win32/` include dir. `msvc_64/cmake/{FindGDAL,FindPROJ,FindJPEG}.cmake` can go if
@@ -747,7 +739,5 @@ file.
 - **Open:** batch `getElevationAt()`/`getSlopeAt()` point queries. Each is one small `RasterIO` call
   per point (e.g. per vertex of a track elevation profile) — a different path from `draw()`'s map
   rendering. Worth revisiting only if track-profile performance comes up.
-- **Deliberately skipped:** caching `1/xscale`/`1/yscale` for `slopeOfWindowInterp()`. Modest win,
-  and hoisting needs either a signature change touching its three callers or new cached members with
-  a staleness trap — `xscale`/`yscale` are plain protected members assigned directly, with no setter
-  to keep a reciprocal in sync.
+- **Deliberately skipped:** caching `1/xscale`/`1/yscale` for `slopeOfWindowInterp()`;
+  `xscale`/`yscale` have no setter to keep a reciprocal in sync.

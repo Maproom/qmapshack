@@ -40,6 +40,11 @@ CDeviceGarminArchiveMtp::~CDeviceGarminArchiveMtp() {
   }
 };
 
+bool CDeviceGarminArchiveMtp::removeFromDevice(const QString& filename) {
+  qDebug() << "CDeviceGarminArchiveMtp::removeFromDevice(" << filename << ")";
+  return device->removeFileFromStorage(filename);
+}
+
 void CDeviceGarminArchiveMtp::slotExpanded(QTreeWidgetItem* item) {
   if ((item != this) || (childCount() != 0)) {
     return;

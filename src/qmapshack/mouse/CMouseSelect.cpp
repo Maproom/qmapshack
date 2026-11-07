@@ -137,14 +137,16 @@ void CMouseSelect::findItems(QList<IGisItem*>& items) {
   }
 
   scrOptSelect->frameFunction->setDisabled(items.isEmpty() && poisFound.isEmpty());
-  scrOptSelect->toolDelete->setDisabled(items.isEmpty());
-  scrOptSelect->toolSymWpt->setEnabled(cntWpt);
+  const bool hasItemOnDevice =
+      std::any_of(items.cbegin(), items.cend(), [](const IGisItem* item) { return item->isOnDevice() != 0; });
+  scrOptSelect->toolDelete->setDisabled(items.isEmpty() || hasItemOnDevice);
+  scrOptSelect->toolSymWpt->setEnabled(cntWpt && !hasItemOnDevice);
   scrOptSelect->toolRoute->setEnabled(cntWpt > 1);
-  scrOptSelect->toolEditPrxWpt->setEnabled(cntWpt);
+  scrOptSelect->toolEditPrxWpt->setEnabled(cntWpt && !hasItemOnDevice);
   scrOptSelect->toolCombineTrk->setEnabled(cntTrk > 1);
-  scrOptSelect->toolActivityTrk->setEnabled(cntTrk > 0);
-  scrOptSelect->toolColorTrk->setEnabled(cntTrk > 0);
-  scrOptSelect->toolEleWptTrk->setEnabled((cntWpt > 0) | (cntTrk > 0));
+  scrOptSelect->toolActivityTrk->setEnabled(cntTrk > 0 && !hasItemOnDevice);
+  scrOptSelect->toolColorTrk->setEnabled(cntTrk > 0 && !hasItemOnDevice);
+  scrOptSelect->toolEleWptTrk->setEnabled(((cntWpt > 0) | (cntTrk > 0)) && !hasItemOnDevice);
 }
 
 void CMouseSelect::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect& rect) {

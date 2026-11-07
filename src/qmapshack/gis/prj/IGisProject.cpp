@@ -24,6 +24,7 @@
 
 #include "CMainWindow.h"
 #include "canvas/CCanvas.h"
+#include "device/CDeviceGarminArchiveMtp.h"
 #include "device/CDeviceGarminMtp.h"
 #include "device/CDeviceGenericMtp.h"
 #include "device/IDevice.h"
@@ -807,6 +808,10 @@ bool IGisProject::remove() {
   CDeviceGarminMtp* mtpGarmin = dynamic_cast<CDeviceGarminMtp*>(parent());
   if (mtpGarmin != nullptr) {
     return mtpGarmin->removeFromDevice(filename);
+  }
+  CDeviceGarminArchiveMtp* mtpGarminArchive = dynamic_cast<CDeviceGarminArchiveMtp*>(parent());
+  if (mtpGarminArchive != nullptr) {
+    return mtpGarminArchive->removeFromDevice(filename);
   }
 #endif
 #ifdef Q_OS_LINUX

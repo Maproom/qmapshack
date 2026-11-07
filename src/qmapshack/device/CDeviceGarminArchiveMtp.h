@@ -33,6 +33,8 @@ class CDeviceGarminArchiveMtp : public QObject, public IDevice {
   CDeviceGarminArchiveMtp(const QString& path, IDeviceAccess* device, CDeviceGarminMtp* parent);
   virtual ~CDeviceGarminArchiveMtp();
 
+  bool removeFromDevice(const QString& filename);
+
   QString getInfo(quint32) const override { return ""; }
 
  protected:

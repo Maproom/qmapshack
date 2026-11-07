@@ -46,6 +46,10 @@ CScrOptWptRadius::CScrOptWptRadius(CGisItemWpt* wpt, const QPoint& point, IMouse
   adjustSize();
 
   toolNogoArea->setChecked(wpt->isNogo());
+  const bool isOnDevice = wpt->isOnDevice();
+  toolNogoArea->setDisabled(isOnDevice);
+  toolDelete->setDisabled(isOnDevice);
+  toolEdit->setDisabled(isOnDevice);
 
   anchor = wpt->getPointCloseBy(point);
   moveTo(anchor.toPoint());

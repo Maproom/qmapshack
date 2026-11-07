@@ -1040,7 +1040,7 @@ void CGisListWks::showMenuProjectTrash(const QPoint& p) {
   menu.exec(p);
 }
 
-void CGisListWks::showMenuItemTrk(const QPoint& p, const IGisItem::key_t& key) {
+void CGisListWks::showMenuItemTrk(const QPoint& p, const IGisItem::key_t& key, bool isOnDevice) {
   CGisWorkspace::self().slotWksItemSelectionReset();
 
   QMenu menu(this);
@@ -1053,8 +1053,9 @@ void CGisListWks::showMenuItemTrk(const QPoint& p, const IGisItem::key_t& key) {
   menu.addAction(actionEditTrk);
   menu.addAction(actionReverseTrk);
   menu.addAction(actionCombineTrk);
-  menu.addMenu(CActivityTrk::getMenu(key, &menu));
-  menu.addMenu(IGisItem::getColorMenu(tr("Set Track Color"), this, SLOT(slotColorTrk()), &menu));
+  menu.addMenu(CActivityTrk::getMenu(key, &menu))->setDisabled(isOnDevice);
+  menu.addMenu(IGisItem::getColorMenu(tr("Set Track Color"), this, SLOT(slotColorTrk()), &menu))
+      ->setDisabled(isOnDevice);
   menu.addAction(actionEleWptTrk);
   menu.addAction(actionCopyTrkWithWpt);
   menu.addAction(actionToRoute);
@@ -1125,7 +1126,7 @@ void CGisListWks::showMenuItemOvl(const QPoint& p) {
 }
 
 void CGisListWks::showMenuItem(const QPoint& p, const QList<IGisItem::key_t>& keysTrks,
-                               const QList<IGisItem::key_t>& keysWpts) {
+                               const QList<IGisItem::key_t>& keysWpts, bool hasItemOnDevice) {
   CGisWorkspace::self().slotWksItemSelectionReset();
   QAction* action;
 
@@ -1141,9 +1142,9 @@ void CGisListWks::showMenuItem(const QPoint& p, const QList<IGisItem::key_t>& ke
   menu.addSection(tr("Tracks"));
   menu.addAction(actionCombineTrk);
   action = menu.addMenu(CActivityTrk::getMenu(keysTrks, &menu));
-  action->setEnabled(!keysTrks.isEmpty());
+  action->setEnabled(!keysTrks.isEmpty() && !hasItemOnDevice);
   action = menu.addMenu(IGisItem::getColorMenu(tr("Set Track Color"), this, SLOT(slotColorTrk()), &menu));
-  action->setEnabled(!keysTrks.isEmpty());
+  action->setEnabled(!keysTrks.isEmpty() && !hasItemOnDevice);
   menu.addSeparator();
   menu.addAction(actionDelete);
   menu.exec(p);
@@ -1206,9 +1207,15 @@ void CGisListWks::slotContextMenu(const QPoint& point) {
     if (nullptr != gisItem) {
       QList<IGisItem::key_t> keysTrk;
       QList<IGisItem::key_t> keysWpt;
+      bool hasItemOnDevice = false;
 
       const QList<QTreeWidgetItem*>& items = selectedItems();
       for (QTreeWidgetItem* item : items) {
+        IGisItem* selectedItem = dynamic_cast<IGisItem*>(item);
+        if (selectedItem != nullptr && selectedItem->isOnDevice()) {
+          hasItemOnDevice = true;
+        }
+
         CGisItemTrk* trk = dynamic_cast<CGisItemTrk*>(item);
         if (trk != nullptr) {
           keysTrk << trk->getKey();
@@ -1224,11 +1231,13 @@ void CGisListWks::slotContextMenu(const QPoint& point) {
       bool hasTrks = !keysTrk.isEmpty();
 
       actionRteFromWpt->setEnabled(keysWpt.count() > 1);
-      actionEditPrxWpt->setEnabled(hasWpts);
-      actionChangeIconWpt->setEnabled(hasWpts);
+      actionEditPrxWpt->setEnabled(hasWpts && !hasItemOnDevice);
+      actionChangeIconWpt->setEnabled(hasWpts && !hasItemOnDevice);
       actionCombineTrk->setEnabled(keysTrk.count() > 1);
-      actionEleWptTrk->setEnabled(hasWpts | hasTrks);
-      showMenuItem(p, keysTrk, keysWpt);
+      actionEleWptTrk->setEnabled((hasWpts | hasTrks) && !hasItemOnDevice);
+      actionTagItem->setDisabled(hasItemOnDevice);
+      actionDelete->setDisabled(hasItemOnDevice);
+      showMenuItem(p, keysTrk, keysWpt, hasItemOnDevice);
       return;
     }
     return;
@@ -1297,6 +1306,11 @@ void CGisListWks::slotContextMenu(const QPoint& point) {
       IGisProject* project = gisItem->getParentProject();
       bool isProjectVisible = project == nullptr ? false : project->isVisible();
 
+      actionEditDetails->setDisabled(isOnDevice);
+      actionTagItem->setDisabled(isOnDevice);
+      actionEleWptTrk->setDisabled(isOnDevice);
+      actionDelete->setDisabled(isOnDevice);
+
       switch (gisItem->type()) {
         case IGisItem::eTypeTrk: {
           CGisItemTrk* trk = dynamic_cast<CGisItemTrk*>(gisItem);
@@ -1312,12 +1326,12 @@ void CGisListWks::slotContextMenu(const QPoint& point) {
           actionRangeTrk->setEnabled(isProjectVisible && !isOnDevice);
           actionReverseTrk->setDisabled(isOnDevice);
           actionEditTrk->setEnabled(isProjectVisible && !isOnDevice);
-          actionNogoTrk->setEnabled(isProjectVisible);
+          actionNogoTrk->setEnabled(isProjectVisible && !isOnDevice);
           actionNogoTrk->setChecked(gisItem->isNogo());
           actionCopyTrkWithWpt->setEnabled(trk->getNumberOfAttachedWpt() != 0);
           actionFocusTrk->setChecked(gisItem->hasUserFocus());
           actionFocusTrk->setEnabled(isProjectVisible);
-          showMenuItemTrk(p, trk->getKey());
+          showMenuItemTrk(p, trk->getKey(), isOnDevice);
           break;
         }
 
@@ -1328,11 +1342,11 @@ void CGisListWks::slotContextMenu(const QPoint& point) {
           }
 
           actionBubbleWpt->setChecked(wpt->hasBubble());
-          actionBubbleWpt->setEnabled(isProjectVisible);
-          actionEditRadiusWpt->setEnabled(isProjectVisible);
+          actionBubbleWpt->setEnabled(isProjectVisible && !isOnDevice);
+          actionEditRadiusWpt->setEnabled(isProjectVisible && !isOnDevice);
           bool radius = wpt->hasRadius();
-          actionDelRadiusWpt->setEnabled(isProjectVisible && radius);
-          actionNogoWpt->setEnabled(isProjectVisible && radius);
+          actionDelRadiusWpt->setEnabled(isProjectVisible && radius && !isOnDevice);
+          actionNogoWpt->setEnabled(isProjectVisible && radius && !isOnDevice);
           actionNogoWpt->setChecked(radius && wpt->isNogo());
           actionMoveWpt->setEnabled(isProjectVisible && !isOnDevice);
           actionProjWpt->setDisabled(isOnDevice);
@@ -1348,18 +1362,19 @@ void CGisListWks::slotContextMenu(const QPoint& point) {
 
           actionFocusRte->setChecked(rte->hasUserFocus());
           actionFocusRte->setEnabled(isProjectVisible && rte->isCalculated());
-          actionCalcRte->setEnabled(isProjectVisible);
-          actionEditRte->setEnabled(isProjectVisible);
-          actionNogoRte->setEnabled(isProjectVisible);
+          actionCalcRte->setEnabled(isProjectVisible && !isOnDevice);
+          actionEditRte->setEnabled(isProjectVisible && !isOnDevice);
+          actionNogoRte->setEnabled(isProjectVisible && !isOnDevice);
           actionNogoRte->setChecked(gisItem->isNogo());
-          actionResetRte->setEnabled(isProjectVisible);
+          actionResetRte->setEnabled(isProjectVisible && !isOnDevice);
+          actionReverseRte->setDisabled(isOnDevice);
           showMenuItemRte(p);
           break;
         }
 
         case IGisItem::eTypeOvl:
           actionEditArea->setEnabled(isProjectVisible && !isOnDevice);
-          actionNogoArea->setEnabled(isProjectVisible);
+          actionNogoArea->setEnabled(isProjectVisible && !isOnDevice);
           actionNogoArea->setChecked(gisItem->isNogo());
           showMenuItemOvl(p);
           break;

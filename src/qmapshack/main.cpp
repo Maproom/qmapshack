@@ -24,6 +24,7 @@
 
 #include "CMainWindow.h"
 #include "CSingleInstanceProxy.h"
+#include "help/CHelpBrowser.h"
 #include "helpers/CSettings.h"
 #include "setup/CAppOpts.h"
 #include "setup/IAppSetup.h"
@@ -49,6 +50,7 @@ int main(int argc, char** argv) {
 
   // Before QApplication: it reads QT_QPA_PLATFORMTHEME, and its fatals must reach a console.
   CShotEntry::pinEnvironment(argc, argv);
+  CHelpBrowser::registerUrlScheme();
 
   // A documentation run needs its own QApplication subclass.
   const std::unique_ptr<QApplication> app = CShotEntry::createApplication(argc, argv);

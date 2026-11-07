@@ -361,6 +361,14 @@ A following `exec()` replaces `prepare()`'s error by "Parameter count mismatch",
 
 ---
 
+## Help browser — `CHelpBrowser`
+
+A `QWebEngineView` on its own off-the-record profile, whose `qthelp` handler serves `QHelpEngine::fileData()`.
+`registerUrlScheme()` must run in both `main()`s before the `QApplication`. The destructor deletes the page
+first: a profile deleted before its page is a Qt error. Theme colours are an injected `<style>`, rewritten on a palette change, never a reload.
+
+---
+
 ## GIS item keys
 
 `key.item` is the database identity (`items.keyqms`, unique): an import links an item whose key

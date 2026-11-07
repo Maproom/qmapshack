@@ -103,10 +103,9 @@ class ILineOp : public QObject {
   void startMouseMove(const QPointF& point);
 
   /**
-     @brief Pin coord at points[idxFocus], run routing synchronously, then restore coord.
+     @brief Pin coord at points[idxFocus] and run routing synchronously.
 
-     The restore is necessary because mouseMove() fires during the routing event loop and
-     drifts points[idxFocus].coord to the current cursor position.
+     mouseMove() fires during the routing event loop; subclasses ignore it while isRouting.
 
      @return false if the operation was aborted during routing (idxFocus or points invalidated).
    */

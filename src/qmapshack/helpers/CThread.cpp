@@ -18,6 +18,8 @@
 
 #include "helpers/CThread.h"
 
+#include <QCoreApplication>
+
 CThread::CThread(CThread::fCallback worker) : worker(worker) {
   connect(this, &CThread::finished, this, &CThread::deleteLater);
 }
@@ -30,4 +32,15 @@ void CThread::cancel() {
   }
   requestInterruption();
   wait(5000);
+}
+
+bool CThread::cancel(QObject* receiver, QDeadlineTimer deadline) {
+  requestInterruption();
+  while (!wait(5)) {
+    QCoreApplication::removePostedEvents(receiver, QEvent::MetaCall);
+    if (deadline.hasExpired()) {
+      return false;
+    }
+  }
+  return true;
 }

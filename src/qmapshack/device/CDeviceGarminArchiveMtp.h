@@ -37,6 +37,8 @@ class CDeviceGarminArchiveMtp : public QObject, public IDevice {
 
   QString getInfo(quint32) const override { return ""; }
 
+  bool stopLoading() override;
+
  protected:
   void insertCopyOfProject(IGisProject* project) override {}
 
@@ -48,6 +50,7 @@ class CDeviceGarminArchiveMtp : public QObject, public IDevice {
   IDeviceAccess* device;
 
   QPointer<CThread> threadLoadData;
+  bool collapsePending = false; /**< a collapse waits for the load to stop */
 };
 
 #endif  // CDEVICEGARMINARCHIVEMTP_H

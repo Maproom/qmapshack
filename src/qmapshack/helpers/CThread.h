@@ -19,6 +19,7 @@
 #ifndef CTHREAD_H
 #define CTHREAD_H
 
+#include <QDeadlineTimer>
 #include <QThread>
 
 class CThread : public QThread {
@@ -31,6 +32,18 @@ class CThread : public QThread {
   void run() override;
 
   void cancel();
+
+  /**
+     @brief Stop a thread making blocking queued calls into an object, and wait for it
+
+     Calls not delivered yet are dropped, as that releases the thread. Call on the receiver's thread. Without a
+     deadline, never call it from inside such a call or while holding a lock the thread needs: the wait would not end.
+
+     @param receiver    the object the thread calls into
+     @param deadline    when to give up waiting
+     @return True if the thread has finished, false if the deadline expired first
+   */
+  bool cancel(QObject* receiver, QDeadlineTimer deadline = QDeadlineTimer::Forever);
 
  private:
   fCallback worker;

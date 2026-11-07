@@ -749,11 +749,15 @@ void CGisListWks::addProject(IGisProject* proj) {
 }
 
 void CGisListWks::removeDevice(const QString& key) {
-  CGisListWksEditLock lock(true, IGisItem::mutexItems);
-
   for (int i = 0; i < topLevelItemCount(); i++) {
     IDevice* device = dynamic_cast<IDevice*>(topLevelItem(i));
     if (device && device->getKey() == key) {
+      if (!device->stopLoading()) {
+        QTimer::singleShot(1000, this, [this, key]() { removeDevice(key); });
+        return;
+      }
+
+      CGisListWksEditLock lock(true, IGisItem::mutexItems);
       delete device;
       emit sigChanged();
       return;
@@ -1451,6 +1455,8 @@ void CGisListWks::slotDeleteProject() {
   for (QTreeWidgetItem* item : items) {
     IGisProject* project = dynamic_cast<IGisProject*>(item);
     if (nullptr != project) {
+      // the question's event loop delivers an unplug
+      IDevice::CRunningCall call(dynamic_cast<IDevice*>(project->parent()));
       {
         CCanvasCursorLock cursorLock(Qt::ArrowCursor, __func__);
         int res = QMessageBox::question(CMainWindow::getBestWidgetForParent(), tr("Delete project..."),
@@ -1952,6 +1958,8 @@ void CGisListWks::slotSyncDevWks() {
   if (nullptr == device) {
     return;
   }
+  // processEvents() below delivers an unplug
+  IDevice::CRunningCall call(device);
 
   QString key = project->getKey();
 
@@ -2019,6 +2027,8 @@ void CGisListWks::syncPrjToDevices(IGisProject* project, const QSet<QString>& ke
     if (nullptr == device || keys.isEmpty() || !keys.contains(device->getKey())) {
       continue;
     }
+    // processEvents() below delivers an unplug
+    IDevice::CRunningCall call(device);
     if (canvas) {
       canvas->reportStatus("device",
                            tr("<b>Update devices</b><p>Update %1<br/>Please wait...</p>").arg(device->getName()));

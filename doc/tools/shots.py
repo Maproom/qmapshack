@@ -324,7 +324,7 @@ def another_instance_runs(user_data):
 
 
 def snapshot(dirs):
-    """Every file and directory below @p dirs with its modification time and size."""
+    """Every file below @p dirs with its modification time and size, every directory by its existence."""
     state = {}
     for top in dirs:
         if not top.exists():
@@ -336,7 +336,8 @@ def snapshot(dirs):
                     stat = path.stat()
                 except OSError:
                     continue
-                state[path] = (stat.st_mtime_ns, stat.st_size)
+                # What a directory holds is listed itself; its own time changes on a mere temporary file.
+                state[path] = None if name in subdirs else (stat.st_mtime_ns, stat.st_size)
     return state
 
 

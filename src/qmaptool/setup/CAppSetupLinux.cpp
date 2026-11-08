@@ -45,6 +45,7 @@ void CAppSetupLinux::initQMapTool() {
   prepareTranslators(translationPath, "qmaptool_", resourceDir);
 
   // create directories
+  IAppSetup::path(userDataPath(), 0, true, "USER DATA");
   IAppSetup::path(logDir(), 0, true, "LOG");
 
   prepareToolPaths();

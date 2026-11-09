@@ -23,6 +23,7 @@ V1.XX.X
 [QMS-1297] Translate "surface" dialogs into German
 [QMS-1299] Fix: Compiler warnings due to "-framework IOkit" compiler option on macOS
 [QMS-1307] Fix: Cloning an item a second time when importing into a database fails with a duplicate key
+[QMS-1314] Fix: Surface database is "unusable": database is locked
 
 V1.21.1
 [QMS-1212] Update macOS build scripts

@@ -361,6 +361,13 @@ A following `exec()` replaces `prepare()`'s error by "Parameter count mismatch",
 
 ---
 
+## Surface databases — `CSurfaceDb`
+
+Opened as `immutable=1` through a URI, so SQLite takes no lock: a built file never changes (the builder renames a finished
+`.part` into place). The URI is percent-encoded and has no authority, which SQLite rejects.
+
+---
+
 ## Help browser — `CHelpBrowser`
 
 A `QWebEngineView` on its own off-the-record profile, whose `qthelp` handler serves `QHelpEngine::fileData()`.

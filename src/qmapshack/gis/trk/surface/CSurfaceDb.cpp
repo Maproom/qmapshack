@@ -23,6 +23,7 @@
 #include <QSet>
 #include <QSqlError>
 #include <QTimeZone>
+#include <QUrl>
 #include <QUuid>
 #include <QVarLengthArray>
 #include <QtEndian>
@@ -51,12 +52,20 @@ struct CSurfaceDb::cache_t {
   QHash<QString, QPair<QString, std::shared_ptr<shared_t>>> files;
 };
 
+/** @brief SQLite URI of a file opened without locks; SQLite rejects an authority, so "//server/x" stays in the path */
+static QString immutableUri(const QString& filename) {
+  const QString path = QFileInfo(filename).absoluteFilePath();
+  const QString prefix = path.startsWith('/') ? "file://" : "file:///";
+  return prefix + QString::fromLatin1(QUrl::toPercentEncoding(path, "/:")) + "?immutable=1";
+}
+
 CSurfaceDb::CSurfaceDb(const QString& filename, mode_e mode) : file(filename) {
   connection = "surface-" + QUuid::createUuid().toString(QUuid::WithoutBraces);
   {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", connection);
-    db.setDatabaseName(filename);
-    db.setConnectOptions("QSQLITE_OPEN_READONLY");
+    // a file never changes once built, and on macOS shares a read lock can be an exclusive lock folder
+    db.setDatabaseName(immutableUri(filename));
+    db.setConnectOptions("QSQLITE_OPEN_READONLY;QSQLITE_OPEN_URI");
     if (!db.open()) {
       error = db.lastError().text();
       return;

@@ -16,6 +16,7 @@
 
 **********************************************************************************************/
 
+#include <QDateTime>
 #include <QFile>
 #include <QHash>
 #include <QScopeGuard>
@@ -23,8 +24,11 @@
 #include <QSqlQuery>
 #include <QTemporaryDir>
 #include <QTest>
+#include <QThread>
 #include <QTranslator>
 #include <QtEndian>
+#include <algorithm>
+#include <atomic>
 
 #include "gis/trk/surface/CPbfReader.h"
 #include "gis/trk/surface/CSurfaceDb.h"
@@ -78,6 +82,9 @@ class test_CSurfaceDb : public QObject {
   void invalidFiles();
   void errorsAreTranslated();
   void distanceAndCells();
+  void readsWhileLocked();
+  void parallelReaders();
+  void readersDuringRebuild();
 
  private:
   QString build(const QString& name, qint32 chunkSegments = 16, const QRectF& area = QRectF());
@@ -770,10 +777,10 @@ void test_CSurfaceDb::nameForSource_data() {
   QTest::newRow("first pick") << "/data/belgium-latest.osm.pbf" << QString() << QString() << "Belgium";
   QTest::newRow("other region") << "/data/france-latest.osm.pbf" << "/data/belgium-latest.osm.pbf" << "Belgium"
                                 << "France";
-  QTest::newRow("same file keeps own name") << "/data/belgium-latest.osm.pbf" << "/data/belgium-latest.osm.pbf"
-                                            << "Belgique" << "Belgique";
-  QTest::newRow("same file, no name yet") << "/data/belgium-latest.osm.pbf" << "/data/belgium-latest.osm.pbf"
-                                          << " " << "Belgium";
+  QTest::newRow("same file keeps own name")
+      << "/data/belgium-latest.osm.pbf" << "/data/belgium-latest.osm.pbf" << "Belgique" << "Belgique";
+  QTest::newRow("same file, no name yet")
+      << "/data/belgium-latest.osm.pbf" << "/data/belgium-latest.osm.pbf" << " " << "Belgium";
   QTest::newRow("no -latest") << "/data/liege.osm.pbf" << QString() << QString() << "Liege";
   QTest::newRow("no name") << "/data/.osm.pbf" << QString() << QString() << QString();
 }
@@ -791,6 +798,12 @@ void test_CSurfaceDb::rebuiltFileGetsNewCache() {
   // with a file built again under the same name
   const QString file = build("rebuilt.surface.sqlite");
   QVERIFY(!file.isEmpty());
+  // two builds can share a stamp: same size, same second, same file time
+  {
+    QFile built(file);
+    QVERIFY(built.open(QIODevice::ReadWrite));
+    QVERIFY(built.setFileTime(QDateTime::currentDateTimeUtc().addSecs(-3600), QFileDevice::FileModificationTime));
+  }
   CSurfaceDb before(file);
   QVERIFY(before.isValid());
   QCOMPARE(infoOf(before.lookupCell(50.002, 5.001)).way, CSurface::eWayPath);
@@ -995,6 +1008,121 @@ void test_CSurfaceDb::overlaps() {
   QVERIFY(CSurfaceDb::overlaps(box, QRectF(5.05, 50.05, 0, 0)));
   QVERIFY(!CSurfaceDb::overlaps(box, QRectF(QPointF(5.2, 50.05), QPointF(5.3, 50.06))));
   QVERIFY(!CSurfaceDb::overlaps(box, QRectF(5.2, 50.2, 0, 0)));
+}
+
+void test_CSurfaceDb::readsWhileLocked() {
+  // the characters a URI has to encode
+  const QString file = tmp.filePath(QString::fromUtf8("Baden-Württemberg 100%#&.surface.sqlite"));
+  QVERIFY(QFile::copy(db, file));
+  {
+    QSqlDatabase sql = QSqlDatabase::addDatabase("QSQLITE", "locked");
+    sql.setDatabaseName(file);
+    QVERIFY(sql.open());
+    QSqlQuery query(sql);
+    QVERIFY(query.exec("BEGIN EXCLUSIVE"));
+
+    CSurfaceDb meta(file, CSurfaceDb::eModeMeta);
+    QVERIFY2(meta.isValid(), qPrintable(meta.errorString()));
+    CSurfaceDb surface(file);
+    QVERIFY2(surface.isValid(), qPrintable(surface.errorString()));
+    QCOMPARE(infoOf(surface.lookupCell(50.002, 5.001)).way, CSurface::eWayPath);
+
+    QVERIFY(query.exec("ROLLBACK"));
+    query = QSqlQuery();
+    sql.close();
+  }
+  QSqlDatabase::removeDatabase("locked");
+}
+
+// the cell results of a line of positions, as one number per position
+static QVector<qint32> scanCells(CSurfaceDb& surface) {
+  QVector<qint32> result;
+  for (qint32 i = 0; i < 200; i++) {
+    const CSurface::info_t info = infoOf(surface.lookupCell(50.0 + i * 5e-5, 5.0 + i * 5e-5));
+    result << info.label * 100 + info.way;
+  }
+  return result;
+}
+
+void test_CSurfaceDb::parallelReaders() {
+  // the same results as a single thread, with one connection per thread and the cells of the file shared
+  QVector<qint32> expected;
+  {
+    CSurfaceDb surface(db);
+    QVERIFY(surface.isValid());
+    expected = scanCells(surface);
+  }
+  QVERIFY(std::any_of(expected.cbegin(), expected.cend(),
+                      [&](qint32 value) { return value != CSurface::noData().label * 100 + CSurface::noData().way; }));
+
+  std::atomic_int failures = 0;
+  QList<QThread*> threads;
+  for (qint32 t = 0; t < 8; t++) {
+    threads << QThread::create([&] {
+      for (qint32 i = 0; i < 50; i++) {
+        // the cells start empty, so the threads read the file at the same time
+        CSurfaceDb::releaseShared({});
+        CSurfaceDb surface(db);
+        if (!surface.isValid() || scanCells(surface) != expected) {
+          failures++;
+        }
+      }
+    });
+    threads.last()->start();
+  }
+  for (QThread* thread : std::as_const(threads)) {
+    QVERIFY(thread->wait());
+  }
+  qDeleteAll(threads);
+  QCOMPARE(failures.load(), 0);
+}
+
+void test_CSurfaceDb::readersDuringRebuild() {
+#ifdef Q_OS_WIN
+  QSKIP("Windows refuses to rename a file that is open");
+#endif
+  const QString file = build("rebuild-readers.surface.sqlite");
+  QVERIFY(!file.isEmpty());
+
+  CSurfaceDb open(file);
+  QVERIFY(open.isValid());
+  const QVector<qint32> expected = scanCells(open);
+  CSurfaceDb::releaseShared({});
+
+  std::atomic_bool stop = false;
+  std::atomic_int runs = 0;
+  std::atomic_int notOpened = 0;
+  std::atomic_int wrong = 0;
+  QList<QThread*> threads;
+  for (qint32 t = 0; t < 4; t++) {
+    threads << QThread::create([&] {
+      while (!stop) {
+        CSurfaceDb surface(file);
+        runs++;
+        if (!surface.isValid()) {
+          // the name is missing for a moment while replaceFile() swaps the files
+          notOpened++;
+        } else if (scanCells(surface) != expected) {
+          wrong++;
+        }
+      }
+    });
+    threads.last()->start();
+  }
+  for (qint32 i = 0; i < 20; i++) {
+    QVERIFY(!build("rebuild-readers.surface.sqlite").isEmpty());
+  }
+  stop = true;
+  for (QThread* thread : std::as_const(threads)) {
+    QVERIFY(thread->wait());
+  }
+  qDeleteAll(threads);
+
+  qInfo() << "runs" << runs.load() << "not opened" << notOpened.load() << "wrong" << wrong.load();
+  QVERIFY(runs > 0);
+  QCOMPARE(wrong.load(), 0);
+  // a connection opened before all the rebuilds still reads its file
+  QCOMPARE(scanCells(open), expected);
 }
 
 void test_CSurfaceDb::invalidFiles() {

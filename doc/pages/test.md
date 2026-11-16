@@ -1,6 +1,9 @@
 # Test page
 
-The pictures the documentation subsystem is verified against.
+The images the documentation subsystem is verified against.
+
+Images: *Datenquelle: BEV – Bundesamt für Eich- und Vermessungswesen, CC BY 4.0*;
+*Datenquelle: Land Tirol - data.tirol.gv.at, CC BY 4.0*; *© OpenStreetMap contributors*.
 
 ## A menu
 
@@ -50,10 +53,6 @@ A menu is photographed without being opened.
 ## A recorded scenario
 
 ![](../images/test/track-screen-option.png)
-
-## A modal dialog a scenario opened
-
-![](../images/test/units-dialog.png)
 
 ## A context menu
 

@@ -13,3 +13,5 @@ doc/images/_check/
 doc/images/_work/
 # The panel writes it into a new page fixture folder for the writer; it describes, it is no part.
 doc/shots/fixtures/*/README.md
+# The test page is not documentation; its images stay local.
+doc/images/test/

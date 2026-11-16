@@ -89,19 +89,40 @@ CHelp::CHelp(const QString& sourceQhc, const QString& homepage, QWidget* parent)
 
   setWidget(splitter);
 
-  SETTINGS;
-  cfg.beginGroup("Help");
-  if (cfg.contains("geometry")) {
-    restoreGeometry(cfg.value("geometry").toByteArray());
-    splitter->restoreState(cfg.value("splitter").toByteArray());
-  }
-  cfg.endGroup();
+  resize(1100, 750);
+  restoreSettings();
+}
+
+CHelp::CHelp(const QString& homepage, QWidget* parent) : QDockWidget(tr("Help"), parent) {
+  setWindowFlag(Qt::Tool, true);
+  setAttribute(Qt::WA_DeleteOnClose, true);
+
+  CHelpBrowser* browser = new CHelpBrowser(nullptr, this);
+  browser->setSource(QUrl::fromLocalFile(homepage));
+  setWidget(browser);
+
+  resize(1100, 750);
+  restoreSettings();
 }
 
 CHelp::~CHelp() {
   SETTINGS;
   cfg.beginGroup("Help");
   cfg.setValue("geometry", saveGeometry());
-  cfg.setValue("splitter", splitter->saveState());
+  if (splitter != nullptr) {
+    cfg.setValue("splitter", splitter->saveState());
+  }
+  cfg.endGroup();
+}
+
+void CHelp::restoreSettings() {
+  SETTINGS;
+  cfg.beginGroup("Help");
+  if (cfg.contains("geometry")) {
+    restoreGeometry(cfg.value("geometry").toByteArray());
+    if (splitter != nullptr) {
+      splitter->restoreState(cfg.value("splitter").toByteArray());
+    }
+  }
   cfg.endGroup();
 }

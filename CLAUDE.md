@@ -98,8 +98,8 @@ libc++, ASan).
   6.10**, so it is an `OPTIONAL_COMPONENTS` find with no version test; a missing package still fails at
   `target_link_libraries`. `QT_NO_PRIVATE_MODULE_WARNING` is set: documentation mode never ships, so
   being tied to one Qt build is accepted. Only 6.10.2 is tested.
-- **Defines are per target**: `HELPPATH` on qmapshack and qmaptool, `ROUTINO_XML_PATH` and
-  `HAVE_DBUS` on qmapshack. Global on purpose: `_CRT_SECURE_NO_WARNINGS`, `/MP` and `/utf-8` under
+- **Defines are per target**: `HELPPATH` on qmapshack and qmaptool, `ROUTINO_XML_PATH`,
+  `HAVE_DBUS` and `QMS_SOURCE_DOC_HTML` (the source tree's `doc/html`, F1's first choice) on qmapshack. Global on purpose: `_CRT_SECURE_NO_WARNINGS`, `/MP` and `/utf-8` under
   MSVC, which the bundled FIT SDK needs, and `-march=native` with `BUILD_FOR_LOCAL_SYSTEM`.
 - **Install paths** come from `GNUInstallDirs` on UNIX and stay relative to the application
   directory on Windows, where `CAppSetupWin` resolves `HELPPATH` against it. Six cache variables
@@ -370,7 +370,8 @@ Opened as `immutable=1` through a URI, so SQLite takes no lock: a built file nev
 
 ## Help browser — `CHelpBrowser`
 
-A `QWebEngineView` on its own off-the-record profile, whose `qthelp` handler serves `QHelpEngine::fileData()`.
+A `QWebEngineView` on its own off-the-record profile. QMapShack loads `doc/html/` from `file://` (`engine` is null) and sets Furo's
+theme; QMapTool's `qthelp` handler serves `QHelpEngine::fileData()`.
 `registerUrlScheme()` must run in both `main()`s before the `QApplication`. The destructor deletes the page
 first: a profile deleted before its page is a Qt error. Theme colours are an injected `<style>`, rewritten on a palette change, never a reload.
 

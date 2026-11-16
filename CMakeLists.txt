@@ -341,6 +341,24 @@ add_subdirectory(src/qmt_map2jnx)
 endif(BUILD_QMAPTOOL)
 
 ###############################################################################################
+# The documentation: "doc" runs doc/tools/generate_html.py, which sets up its own environment in
+# .doc-venv. Not part of "all"; the first run needs internet access.
+###############################################################################################
+find_package(Python3 COMPONENTS Interpreter QUIET)
+if(Python3_Interpreter_FOUND)
+    add_custom_target(doc
+        COMMAND ${Python3_EXECUTABLE} ${CMAKE_SOURCE_DIR}/doc/tools/generate_html.py
+        COMMENT "Generating doc/html"
+        USES_TERMINAL
+        VERBATIM)
+else()
+    add_custom_target(doc
+        COMMAND ${CMAKE_COMMAND} -E echo "No Python 3 found: the documentation needs Python 3.9 or newer"
+        COMMAND ${CMAKE_COMMAND} -E false
+        VERBATIM)
+endif()
+
+###############################################################################################
 # Copy a few more files need by the install/unistall target
 ###############################################################################################
 if (UNIX AND NOT WIN32 AND NOT APPLE)
@@ -350,8 +368,7 @@ if(BUILD_QMAPSHACK)
     install( DIRECTORY    src/icons/qmapshack/hicolor       DESTINATION     ${ICON_INSTALL_DIR} )
     install( FILES        qmapshack.1                       DESTINATION     ${MAN_INSTALL_DIR}/man1  )
     install( FILES        qms_surfacedb.1                   DESTINATION     ${MAN_INSTALL_DIR}/man1  )
-    install( FILES        src/qmapshack/doc/QMSHelp.qhc     DESTINATION     ${HTML_INSTALL_DIR})
-    install( FILES        src/qmapshack/doc/QMSHelp.qch     DESTINATION     ${HTML_INSTALL_DIR})
+    install( DIRECTORY    doc/html/                         DESTINATION     ${HTML_INSTALL_DIR}/qms)
 endif(BUILD_QMAPSHACK)
 
 if(BUILD_QMAPTOOL)

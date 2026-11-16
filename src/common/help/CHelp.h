@@ -29,15 +29,20 @@ class CHelpSearch;
 class CHelp : public QDockWidget {
   Q_OBJECT
  public:
+  /** @brief Help from a compressed Qt help collection, with content, index and search panes. */
   CHelp(const QString& helpfile, const QString& homepage, QWidget* parent);
+  /** @brief Help from a generated HTML tree, which brings its own navigation, index and search. */
+  CHelp(const QString& homepage, QWidget* parent);
   virtual ~CHelp();
 
  private:
-  QHelpEngine* engine;
-  QTabWidget* tabWidget;
-  QSplitter* splitter;
-  CHelpIndex* index;
-  CHelpSearch* search;
+  void restoreSettings();
+
+  QHelpEngine* engine = nullptr;
+  QTabWidget* tabWidget = nullptr;
+  QSplitter* splitter = nullptr;
+  CHelpIndex* index = nullptr;
+  CHelpSearch* search = nullptr;
 };
 
 #endif  // CHELP_H

@@ -93,7 +93,7 @@ struct queue_t {
   bool stopped = false;
   bool done = false;
   /** whenReady is running. */
-  bool picturing = false;
+  bool imaging = false;
   std::function<void()> pump;
   QEventLoop loop;
   /** What was on top when perform() started; the steps close only what they opened above it. */
@@ -142,7 +142,7 @@ qint32 CShotReplay::perform(QWidget* root, const QList<QJsonObject>& steps, cons
         q->stopped = true;
         q->next = q->steps.size();
         qDebug().noquote() << "shoot: the failed step as recorded:" << compact(q->steps.at(index));
-        qWarning().noquote() << "shoot: The actions after it are skipped and the picture is not taken. If the "
+        qWarning().noquote() << "shoot: The actions after it are skipped and the image is not taken. If the "
                                 "application or the example data changed since the scenario was recorded, record "
                                 "it again.";
       }
@@ -153,9 +153,9 @@ qint32 CShotReplay::perform(QWidget* root, const QList<QJsonObject>& steps, cons
     q->done = true;
     if (q->whenReady && !q->stopped) {
       q->deadline->start(kDeadlineMs);
-      q->picturing = true;
+      q->imaging = true;
       q->failures += q->whenReady();
-      q->picturing = false;
+      q->imaging = false;
     }
     // The loop below what a step opened cannot return while it is up. Without steps a window up is the writer's own.
     if (!q->steps.isEmpty()) {
@@ -167,14 +167,14 @@ qint32 CShotReplay::perform(QWidget* root, const QList<QJsonObject>& steps, cons
   QTimer deadline;
   deadline.setSingleShot(true);
   // A step that never returns keeps every loop below it running, so nothing short of exiting ends the run.
-  // Armed until perform() returns: the picture and the closing of what a step opened can hang too.
+  // Armed until perform() returns: the image and the closing of what a step opened can hang too.
   QObject::connect(&deadline, &QTimer::timeout, &queue->loop, [queue]() {
     const QWidget* open = blocker();
     const QString& opened =
         (nullptr == open) ? QString() : QString(" and %1 is open").arg(open->metaObject()->className());
-    if (queue->picturing) {
+    if (queue->imaging) {
       qWarning().noquote()
-          << QString("shoot: the picture was not taken within %1 s%2").arg(kDeadlineMs / 1000).arg(opened);
+          << QString("shoot: the image was not taken within %1 s%2").arg(kDeadlineMs / 1000).arg(opened);
     } else if (queue->running.isEmpty()) {
       qWarning().noquote() << QString("shoot: the replay did not finish within %1 s with no step running%2")
                                   .arg(kDeadlineMs / 1000)

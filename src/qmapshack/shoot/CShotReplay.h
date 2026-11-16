@@ -35,7 +35,7 @@ class QWidget;
    inside it delivers the steps after it.
  */
 namespace CShotReplay {
-/** A step or picture that has not returned by then ends the process with kDeadlineExitCode. */
+/** A step or image that has not returned by then ends the process with kDeadlineExitCode. */
 constexpr qint32 kDeadlineMs = 60000;
 /** A run exits with its failure count, capped here; the codes above it are no count. */
 constexpr qint32 kMaxFailureExitCode = 123;
@@ -67,7 +67,7 @@ void clear(const QJsonArray& scenario, CShotContext& ctx);
 
    Nothing to perform clears nothing.
 
-   @param whenReady  takes the picture; see perform()
+   @param whenReady  takes the image; see perform()
    @return the failures
  */
 qint32 replay(const QJsonArray& scenario, CShotContext& ctx, const std::function<qint32()>& whenReady);

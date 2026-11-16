@@ -36,7 +36,7 @@ void CShotOptions::addOptions(QCommandLineParser& parser) {
   add(parser, "shoot-target", "The page to shoot.", "file");
   add(parser, "shoot-scenario", "Which of the page's scenarios to shoot.", "name");
   add(parser, "only", "Shoot only the images whose id matches this glob.", "glob");
-  add(parser, "doc", "Documentation mode: record pictures into this checkout.", "dir");
+  add(parser, "doc", "Documentation mode: record images into this checkout.", "dir");
   add(parser, "doc-page", "Which page F9 appends to.", "name", "scratch");
   add(parser, "doc-scenario",
       "The state to come up in. Only the launcher passes it, and it is what makes a process the one "

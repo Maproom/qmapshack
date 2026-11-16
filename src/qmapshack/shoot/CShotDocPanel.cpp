@@ -54,7 +54,7 @@ const QString kRecordIcon = ":/icons/DocRecord.svgt";
 const QString kRecordText = "Record";
 const QString kStopIcon = ":/icons/DocStop.svgt";
 const QString kStopText = "Stop";
-const QString kRecordHint = "Name the scenario, start from the base, do what the picture needs, then press Stop.";
+const QString kRecordHint = "Name the scenario, start from the base, do what the image needs, then press Stop.";
 const QString kStopHint = "Stop the recording and store it under the name it was started with.";
 /** Distance of the panel from the screen's top right corner [px]. */
 constexpr qint32 kScreenMargin = 20;
@@ -77,7 +77,7 @@ CShotDocPanel::CShotDocPanel(const QString& page, const QString& sizeFile, QWidg
   layout->addWidget(fixture);
 
   // --- scenarios ---
-  QLabel* scenarioTitle = new QLabel("<b>Scenarios</b> - the states your pictures are taken in:", this);
+  QLabel* scenarioTitle = new QLabel("<b>Scenarios</b> - the states your images are taken in:", this);
   scenarioTitle->setWordWrap(true);
   layout->addWidget(scenarioTitle);
 
@@ -123,7 +123,7 @@ CShotDocPanel::CShotDocPanel(const QString& page, const QString& sizeFile, QWidg
   renameButton = addButton(scenarioButtons, ":/icons/DocRename.svgt", "Rename",
                            "Give the selected scenario another name.", &CShotDocPanel::renameClicked);
   deleteButton = addButton(scenarioButtons, ":/icons/DocDelete.svgt", "Delete",
-                           "Delete the selected scenario; every picture taken in it has to be taken again.",
+                           "Delete the selected scenario; every image taken in it has to be taken again.",
                            &CShotDocPanel::deleteScenarioClicked);
   baseButton = newButton(":/icons/DocBase.svgt", "Base",
                          "This page's (base): save what is on screen as it, or copy another page's or the default "
@@ -139,9 +139,9 @@ CShotDocPanel::CShotDocPanel(const QString& page, const QString& sizeFile, QWidg
   scenarioButtons->addStretch();
   layout->addLayout(scenarioButtons);
 
-  // --- pictures ---
+  // --- images ---
   QLabel* shotTitle = new QLabel(
-      "<b>Pictures</b> - select one, point in QMapShack at what it shows and press <b>Ctrl+Shift+F9</b>:", this);
+      "<b>Images</b> - select one, point in QMapShack at what it shows and press <b>Ctrl+Shift+F9</b>:", this);
   shotTitle->setWordWrap(true);
   layout->addWidget(shotTitle);
 
@@ -149,7 +149,7 @@ CShotDocPanel::CShotDocPanel(const QString& page, const QString& sizeFile, QWidg
   shots->setRootIsDecorated(false);
   shots->setAlternatingRowColors(true);
   shots->setColumnCount(3);
-  shots->setHeaderLabels({"Picture", "State", "Taken in"});
+  shots->setHeaderLabels({"Image", "State", "Taken in"});
   shots->header()->setSectionResizeMode(eColumnId, QHeaderView::Stretch);
   shots->header()->setSectionResizeMode(eColumnState, QHeaderView::ResizeToContents);
   shots->header()->setSectionResizeMode(eColumnScenario, QHeaderView::ResizeToContents);
@@ -178,29 +178,29 @@ CShotDocPanel::CShotDocPanel(const QString& page, const QString& sizeFile, QWidg
   };
   againButton = addShotAction(
       ":/icons/DocRetake.svgt", "Retake",
-      "Take this picture again into doc/images/_work, as a build would; the application on screen is not touched.",
+      "Take this image again into doc/images/_work, as a build would; the application on screen is not touched.",
       &CShotDocPanel::retakeShotClicked);
   regionButton = addShotAction(":/icons/DocRegion.svgt", "Region",
-                               "Drag a rectangle for this picture instead of pointing at one widget.",
+                               "Drag a rectangle for this image instead of pointing at one widget.",
                                &CShotDocPanel::takeRegionClicked);
   revertButton =
       addShotAction(":/icons/DocRevert.svgt", "Revert",
-                    "Throw the picture just taken away and put the shot back as it was; the published one stays.",
+                    "Throw the image just taken away and put the shot back as it was; the published one stays.",
                     &CShotDocPanel::revertShotClicked);
-  publishButton = addShotAction(":/icons/DocPublish.svgt", "Publish", "Copy this picture taken again into doc/images.",
+  publishButton = addShotAction(":/icons/DocPublish.svgt", "Publish", "Copy this image taken again into doc/images.",
                                 &CShotDocPanel::publishShotClicked);
 
-  // The page's own actions, apart from the selected picture's.
+  // The page's own actions, apart from the selected image's.
   shotActions->addSpacing(side);
   whileIdle << addButton(shotActions, ":/icons/DocRetakeAll.svgt", "All",
-                         "Take every picture of this page again into doc/images/_work, to compare and publish.",
+                         "Take every image of this page again into doc/images/_work, to compare and publish.",
                          &CShotDocPanel::retakePageClicked);
   reapButton = addButton(shotActions, ":/icons/DocClean.svgt", "Clean",
-                         "Delete the shots and pictures of this page no page line uses.", &CShotDocPanel::reapClicked);
+                         "Delete the shots and images of this page no page line uses.", &CShotDocPanel::reapClicked);
   whileIdle << reapButton;
   publishAllButton =
       addButton(shotActions, ":/icons/DocPublishAll.svgt", "Publish all",
-                "Copy every picture of this page taken again into doc/images.", &CShotDocPanel::publishClicked);
+                "Copy every image of this page taken again into doc/images.", &CShotDocPanel::publishClicked);
   // Short on the button, where the longest label sets the panel's width; the tooltip keeps the name.
   publishAllButton->setText("Publ. All");
   whileIdle << publishAllButton;
@@ -366,7 +366,7 @@ void CShotDocPanel::setShots(const QList<CShotFiles::row_t>& shots_) {
       std::any_of(entries.cbegin(), entries.cend(), [](const CShotFiles::row_t& e) { return e.changed; });
   publishAllButton->setEnabled(waiting && shots->isEnabled());
   reapButton->setToolTip(
-      QString("<b>Clean</b>: delete the shots and pictures of this page no page line uses: %1.").arg(unused));
+      QString("<b>Clean</b>: delete the shots and images of this page no page line uses: %1.").arg(unused));
 
   setCurrentShot(current);
   showPreview();
@@ -397,7 +397,7 @@ void CShotDocPanel::showPreview() {
   const CShotFiles::row_t& entry = entries.value(shots->indexOfTopLevelItem(shots->currentItem()));
   if (entry.imagePath.isEmpty()) {
     preview->setPixmap(QPixmap());
-    preview->setText(entry.id.isEmpty() ? "Select a picture." : "No image yet.");
+    preview->setText(entry.id.isEmpty() ? "Select an image." : "No image yet.");
     return;
   }
   preview->setText(QString());

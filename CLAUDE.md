@@ -717,7 +717,8 @@ Used by the BRouter installer only.
 
 Loaded when files there are touched; read them before working on the subsystem from outside.
 
-- `src/qmapshack/shoot/CLAUDE.md` — documentation mode (`-DQMS_DOC_MODE=ON`, `doc/tools/shots.py`).
+- `src/qmapshack/shoot/CLAUDE.md` — documentation mode (`-DQMS_DOC_MODE=ON`, `doc/tools/shots.py`); its design is
+  `DESIGN.md` beside it.
 - `src/qmapshack/helpers/CLAUDE.md` — the overview-advisory system (VRT overviews, Fix, Combine).
 - `src/common/theme/CLAUDE.md` — colour scheme details.
 
@@ -732,8 +733,6 @@ file.
   cancelled.
 - `waypoint-icon-resolution-plan.md` — 32 → 96 px waypoint icons, gated on storing `icon_t::focus`
   relative.
-- `QMS-1217-review-plan.md` — what is left on `QMS-1217`: live checks, open points, what was left
-  deliberately. The design is `QMS-1217-documentation-images.md`.
 
 ### CMake — remaining
 

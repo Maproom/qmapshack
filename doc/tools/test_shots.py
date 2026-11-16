@@ -39,7 +39,7 @@ class ScratchTree(unittest.TestCase):
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_bytes(content)
 
-    def pictures(self, below):
+    def images(self, below):
         return sorted(p.relative_to(below).as_posix() for p in below.rglob("*.png")) if below.exists() else []
 
     def quietly(self, command, **options):
@@ -68,7 +68,7 @@ class Publish(ScratchTree):
         self.assertEqual((shots.WORK_DIR / "p" / "b.png").read_bytes(), b"B")
         self.assertEqual(json.loads(report.read_text()), {"published": ["p/a"]})
 
-    def test_keeps_a_picture_taken_meanwhile(self):
+    def test_keeps_an_image_taken_meanwhile(self):
         self.put(shots.WORK_DIR / "p" / "a.png")
         late = shots.WORK_DIR / "p" / "late.png"
         move = shots.os.replace
@@ -83,8 +83,8 @@ class Publish(ScratchTree):
             self.quietly(shots.cmd_publish, report=None)
         finally:
             shots.os.replace = move
-        self.assertEqual(self.pictures(shots.WORK_DIR), ["p/late.png"])
-        self.assertEqual(self.pictures(shots.IMAGES_DIR / "p"), ["a.png"])
+        self.assertEqual(self.images(shots.WORK_DIR), ["p/late.png"])
+        self.assertEqual(self.images(shots.IMAGES_DIR / "p"), ["a.png"])
 
 
     def test_a_directory_filled_meanwhile_is_no_failure(self):
@@ -119,9 +119,9 @@ class PageName(ScratchTree):
 
 
 class Condense(unittest.TestCase):
-    def test_a_line_said_for_every_picture_is_told_once(self):
+    def test_a_line_said_for_every_image_is_told_once(self):
         said = ["shoot: Action 2 of 5 in the recording, 'x', did not replay: y.", "shoot: Action 2 of 5 in the recording, 'x', did not replay: y.", "shoot: other"]
-        self.assertEqual(shots.condense(said), ["Action 2 of 5 in the recording, 'x', did not replay: y. (2 times, once per picture)", "other"])
+        self.assertEqual(shots.condense(said), ["Action 2 of 5 in the recording, 'x', did not replay: y. (2 times, once per image)", "other"])
 
 
 class Fixture(ScratchTree):

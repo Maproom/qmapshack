@@ -48,7 +48,7 @@ class QWidget;
    @brief The state process: one scenario, put up once, held, and thrown away with the process.
 
    It loads the fixture, replays its scenario - or a parked recording on trial - and reports `ready` to the launcher.
-   Ctrl+Shift+F9 photographs what the writer points at; the launcher's commands take a region, take a picture again,
+   Ctrl+Shift+F9 photographs what the writer points at; the launcher's commands take a region, take an image again,
    record, and store the settings. It ends when its window is closed or the channel drops.
  */
 class CShotDocMode : public QObject {
@@ -135,13 +135,13 @@ class CShotDocMode : public QObject {
   QList<QWidget*> livePartsAt(CMainWindow* main, QStringList& labels) const;
   /** @return the part picked from @p parts, nullptr when the writer cancelled */
   QWidget* chooseLivePart(CMainWindow* main, const QList<QWidget*>& parts, const QStringList& labels) const;
-  /** @return the picture the writer picks among what the page references, empty when cancelled */
+  /** @return the image the writer picks among what the page references, empty when cancelled */
   QString askForId() const;
-  /** @return @p id's scenario: the shot's, or this process' own for a picture without a shot */
+  /** @return @p id's scenario: the shot's, or this process' own for an image without a shot */
   QString scenarioFor(const QString& id) const;
   /** @return true when @p id may be taken here; otherwise the writer is told where */
   bool takenHere(const QString& id);
-  /** @return true when the writer keeps @p id's pending picture */
+  /** @return true when the writer keeps @p id's pending image */
   bool confirmResult(const QString& id) const;
   /** @brief Tell the writer the line a developer has to add for an unexposed class. */
   void reportUnexposed(const QWidget* target) const;
@@ -176,7 +176,7 @@ class CShotDocMode : public QObject {
   QString trial;
   /** The classes of the windows the scenario's actions leave open; F9 in a scenario takes only one of these. */
   QStringList scenarioWindows;
-  /** The picture the writer has selected in the panel. */
+  /** The image the writer has selected in the panel. */
   QString wantedShot;
 
   std::unique_ptr<CShotWriter> writer;
@@ -184,7 +184,7 @@ class CShotDocMode : public QObject {
   CShotRecorder* recorder = nullptr;
   /** The name the running recording is parked under at Stop. */
   QString recordingName;
-  /** The context menu shown last and the step that opens it; a picture of it keeps the step. */
+  /** The context menu shown last and the step that opens it; an image of it keeps the step. */
   QPointer<QMenu> contextMenu;
   QJsonObject contextMenuOpen;
   /** Holds the settings the state was set up with; drift is measured against them. */
@@ -195,7 +195,7 @@ class CShotDocMode : public QObject {
   bool leaving = false;
   /** F9 and the commands wait for the scenario to be set up. */
   bool ready = false;
-  /** Against re-entering from the dialogs a picture opens. */
+  /** Against re-entering from the dialogs an image opens. */
   bool busy = false;
 };
 

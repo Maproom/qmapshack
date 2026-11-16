@@ -87,17 +87,17 @@ void CShotContext::begin(const QString& id, const QRect& rect) {
   this->rect = rect;
 }
 
-bool CShotContext::shot(QWidget* w, const QSize& size) { return emitPicture(w, size, id); }
+bool CShotContext::shot(QWidget* w, const QSize& size) { return emitImage(w, size, id); }
 
-bool CShotContext::emitPicture(QWidget* w, const QSize& size, const QString& stem) const {
+bool CShotContext::emitImage(QWidget* w, const QSize& size, const QString& stem) const {
   const QImage& image = CShotWriter::render(w, size);
   if (image.isNull()) {
-    qWarning() << "shoot:" << stem << "has no picture";
+    qWarning() << "shoot:" << stem << "has no image";
     return false;
   }
   // resize() silently stops at the minimum size.
   if (size.isValid() && image.size() != size) {
-    qWarning() << "shoot:" << stem << "asks for" << size << "and the picture is" << image.size();
+    qWarning() << "shoot:" << stem << "asks for" << size << "and the image is" << image.size();
     return false;
   }
   if (!rect.isValid()) {

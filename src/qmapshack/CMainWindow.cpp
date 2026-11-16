@@ -1757,7 +1757,17 @@ void CMainWindow::slotSanityTest() {
 
 void CMainWindow::slotHelp() {
   if (help.isNull()) {
-    help = new CHelp(IAppSetup::getPlatformInstance()->helpFile(), "qthelp://qms/doc/doc/html/DocMain.html", this);
+    // The source tree's pages match the code this binary was built from; an installed package has no source tree.
+    QString home = QString::fromUtf8(QMS_SOURCE_DOC_HTML) + "/index.html";
+    if (!QFileInfo::exists(home)) {
+      home = IAppSetup::getPlatformInstance()->helpFile();
+    }
+    if (!QFileInfo::exists(home)) {
+      QMessageBox::warning(this, tr("Help"),
+                           tr("The help pages are missing (%1). Please reinstall QMapShack.").arg(home));
+      return;
+    }
+    help = new CHelp(home, this);
     addDockWidget(Qt::LeftDockWidgetArea, help);
   }
 

@@ -27,6 +27,7 @@ class QWebEngineProfile;
 class CHelpBrowser : public QWebEngineView {
   Q_OBJECT
  public:
+  /** @param helpEngine the compressed help to serve, nullptr for pages from a generated HTML tree */
   CHelpBrowser(QHelpEngine* helpEngine, QWidget* parent);
   ~CHelpBrowser() override;
 

@@ -65,28 +65,28 @@ header("Pull latest version")
 run("git checkout dev")
 run("git pull")
 
-header("Create offline help")
-asw = get_input("Do you want to update the offline help? [Y/n]") or "Y"
+# QMapShack's help is doc/html in this repository; only QMapTool's help is built from the wiki.
+header("Create QMapTool offline help")
+asw = get_input("Do you want to update QMapTool's offline help? [Y/n]") or "Y"
 if asw.upper() == "Y":
-    wiki_repo_path = get_input("Where is the Wiki loacted? [../QMapShack_Wiki]") or "../QMapShack_Wiki"
+    wiki_repo_path = get_input("Where is the Wiki located? [../QMapShack_Wiki]") or "../QMapShack_Wiki"
     if not os.path.exists(wiki_repo_path):
         error("Wiki path does not exist!")
 
     # update wiki and create help files
     os.chdir(wiki_repo_path)
     run('git pull')
-    run('make VERBOSE=YES -f Makefile.make HELPGENERATOR=qcollectiongenerator ASSISTANT=assistant all')
+    run('make VERBOSE=YES -f Makefile.make HELPGENERATOR=qcollectiongenerator ASSISTANT=assistant '
+        'clean qhp doc/qmt/QMTHelp.qhc')
 
     # move help files to source repo
     os.chdir(source_repo_path)
-    run(f'mv -v {wiki_repo_path}/doc/qms/QMSHelp.qch src/qmapshack/doc/')
-    run(f'mv -v {wiki_repo_path}/doc/qms/QMSHelp.qhc src/qmapshack/doc/')
     run(f'mv -v {wiki_repo_path}/doc/qmt/QMTHelp.qch src/qmaptool/doc/')
     run(f'mv -v {wiki_repo_path}/doc/qmt/QMTHelp.qhc src/qmaptool/doc/')
 
     # commit updated help files
-    run(f'git commit {DRYRUN} -a -v -m "Update help files."')
-    print(bcolors.OKGREEN + "Updated help files successfully" + bcolors.ENDC)
+    run(f'git commit {DRYRUN} -a -v -m "Update QMapTool help files."')
+    print(bcolors.OKGREEN + "Updated QMapTool help files successfully" + bcolors.ENDC)
 
 header("Update Version")
 current_version = None

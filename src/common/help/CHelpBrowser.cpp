@@ -92,11 +92,17 @@ class CHelpPage : public QWebEnginePage {
 
 CHelpBrowser::CHelpBrowser(QHelpEngine* helpEngine, QWidget* parent)
     : QWebEngineView(parent), engine(helpEngine), profile(new QWebEngineProfile(this)) {
-  profile->installUrlSchemeHandler(kScheme, new CHelpSchemeHandler(helpEngine, this));
+  if (helpEngine != nullptr) {
+    profile->installUrlSchemeHandler(kScheme, new CHelpSchemeHandler(helpEngine, this));
+  }
   // A font the help CSS names but the system lacks falls back to the application's, not to serif.
   profile->settings()->setFontFamily(QWebEngineSettings::StandardFont, font().family());
   setPage(new CHelpPage(profile, this));
   applyTheme();
+
+  if (helpEngine == nullptr) {
+    return;
+  }
 
   connect(helpEngine->contentWidget(), &QHelpContentWidget::linkActivated, this, &CHelpBrowser::setSource);
   connect(helpEngine->indexWidget(), &QHelpIndexWidget::documentActivated, this,
@@ -125,7 +131,7 @@ void CHelpBrowser::setSource(const QUrl& url) {
     return;
   }
   // The table of contents links its chapter nodes to no file at all.
-  if (url.scheme() == kScheme && engine->fileData(url).isEmpty()) {
+  if (engine != nullptr && url.scheme() == kScheme && engine->fileData(url).isEmpty()) {
     return;
   }
   if (homeUrl.isEmpty()) {
@@ -142,9 +148,49 @@ void CHelpBrowser::changeEvent(QEvent* e) {
 }
 
 void CHelpBrowser::applyTheme() {
+  const QPalette& palette = this->palette();
+  page()->setBackgroundColor(palette.color(QPalette::Base));
+
+  QWebEngineScriptCollection& scripts = page()->scripts();
+  for (const QWebEngineScript& old : scripts.find(kThemeScript)) {
+    scripts.remove(old);
+  }
+
+  QWebEngineScript script;
+  script.setName(kThemeScript);
+  script.setWorldId(QWebEngineScript::ApplicationWorld);
+
+  if (engine == nullptr) {
+    // Furo reads the stored theme while the body is parsed, so storing it at creation avoids a flash of the
+    // other scheme. The application decides the scheme, so Furo's own switch is hidden.
+    const QString& source =
+        QString(
+            "(function() {"
+            "  const theme = '%1';"
+            "  try { localStorage.setItem('theme', theme); } catch (e) {}"
+            "  const apply = function() {"
+            "    document.body.dataset.theme = theme;"
+            "    let style = document.getElementById('qms-theme');"
+            "    if (!style) {"
+            "      style = document.createElement('style');"
+            "      style.id = 'qms-theme';"
+            "      style.textContent = '.theme-toggle-container {display:none}';"
+            "      document.head.appendChild(style);"
+            "    }"
+            "  };"
+            "  if (document.body) { apply(); } else { document.addEventListener('DOMContentLoaded', apply); }"
+            "})();")
+            .arg(CUiTheme::isDark() ? "dark" : "light");
+    script.setInjectionPoint(QWebEngineScript::DocumentCreation);
+    script.setSourceCode(source);
+    scripts.insert(script);
+    page()->runJavaScript(source, QWebEngineScript::ApplicationWorld);
+    return;
+  }
+
   // The packaged help CSS leaves the page colours to the viewer. Add a stylesheet after it, so its
   // rules win, and swap its text on a palette change instead of reloading the page.
-  const QPalette& pal = palette();
+  const QPalette& pal = palette;
   const QString& css = QString(
                            ":root {color-scheme:%1}\n"
                            "body {color:%2; background-color:%3}\n"
@@ -168,18 +214,10 @@ void CHelpBrowser::applyTheme() {
                               "})();")
                               .arg(literal);
 
-  QWebEngineScriptCollection& scripts = page()->scripts();
-  for (const QWebEngineScript& old : scripts.find(kThemeScript)) {
-    scripts.remove(old);
-  }
-  QWebEngineScript script;
-  script.setName(kThemeScript);
   script.setInjectionPoint(QWebEngineScript::DocumentReady);
-  script.setWorldId(QWebEngineScript::ApplicationWorld);
   script.setSourceCode(source);
   scripts.insert(script);
 
-  page()->setBackgroundColor(pal.color(QPalette::Base));
   page()->runJavaScript(source, QWebEngineScript::ApplicationWorld);
 }
 

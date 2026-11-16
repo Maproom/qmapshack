@@ -101,7 +101,7 @@ QString CAppSetupWin::findExecutable(const QString& name) { return QStandardPath
 QString CAppSetupWin::helpFile() {
   QDir dirApp(QCoreApplication::applicationDirPath());
   QDir dirHelp(dirApp.absoluteFilePath(_MKSTR(HELPPATH)));
-  return dirHelp.absoluteFilePath("QMSHelp.qhc");
+  return dirHelp.absoluteFilePath("qms/index.html");
 }
 
 bool CAppSetupWin::setLock() {

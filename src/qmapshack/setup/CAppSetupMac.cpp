@@ -134,7 +134,7 @@ void CAppSetupMac::migrateDirContent(QString dest) {
 
 QString CAppSetupMac::helpFile() {
   QDir dirHelp(getApplicationDir(relHelpDir));
-  return dirHelp.absoluteFilePath("QMSHelp.qhc");
+  return dirHelp.absoluteFilePath("qms/index.html");
 }
 
 void CAppSetupMac::closeOnSIGTERM() {

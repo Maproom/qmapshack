@@ -72,7 +72,7 @@ QString CAppSetupLinux::logDir() { return QDir::temp().absolutePath(); }
 
 QString CAppSetupLinux::helpFile() {
   QDir dir(_MKSTR(HELPPATH));
-  return dir.absoluteFilePath("QMSHelp.qhc");
+  return dir.absoluteFilePath("qms/index.html");
 }
 
 void CAppSetupLinux::closeOnSIGTERM() {

@@ -24,6 +24,7 @@ V1.XX.X
 [QMS-1299] Fix: Compiler warnings due to "-framework IOkit" compiler option on macOS
 [QMS-1307] Fix: Cloning an item a second time when importing into a database fails with a duplicate key
 [QMS-1314] Fix: Surface database is "unusable": database is locked
+[QMS-1317] Offline help: generate it with Sphinx from Markdown pages in this repository
 
 V1.21.1
 [QMS-1212] Update macOS build scripts

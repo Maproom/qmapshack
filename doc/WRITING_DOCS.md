@@ -1,19 +1,24 @@
 # Writing QMapShack documentation
 
-You write a page and mark where the pictures go. You take each picture once, by pointing at it.
-QMapShack takes them all again later without you.
+You write a page and mark where the images go. You take each image once, by pointing at it.
+QMapShack takes them all again later without you. Generating the pages from them is
+[CREATING_DOCS.md](CREATING_DOCS.md).
 
 ## Setting up
 
-You need Python 3 and a QMapShack you can build yourself. Build it the way you normally do on your
-system ([Building from Source](https://github.com/Maproom/qmapshack/blob/dev/README.md#building-from-source)), and add one option to the
+You need Python 3.9 or newer and a QMapShack you can build yourself. Build it the way you normally do
+on your system ([Building from Source](https://github.com/Maproom/qmapshack/blob/dev/README.md#building-from-source)), and add one option to the
 configure step:
 
 ```
 -DQMS_DOC_MODE=ON
 ```
 
-`shots.py` uses `build/bin/qmapshack`; pass `--binary path/to/qmapshack` for another one.
+This also needs Qt's Test module and, from Qt 6.9 on, its GuiPrivate package.
+
+Run `shots.py` from the top folder of your checkout: `python3 doc/tools/shots.py <command>`, on
+Windows `py doc\tools\shots.py <command>`. It uses `build/bin/qmapshack`; pass
+`--binary path/to/qmapshack` for another one.
 
 On Windows copy `platforms\qoffscreen.dll` from your Qt installation beside the `qwindows.dll` your
 build uses.
@@ -22,7 +27,7 @@ build uses.
 
 ```
   ┌──────────────────────────────────────────────────────────┐
-  │ [0]  doc/tools/shots.py take <page>                      │
+  │ [0]  python3 doc/tools/shots.py take <page>              │
   │        opens the panel, and QMapShack in (base)          │
   │        a page without a base asks which one to copy      │
   └────────────────────────────┬─────────────────────────────┘
@@ -34,7 +39,7 @@ build uses.
   └────────────────────────────┬─────────────────────────────┘
                                ▼
   ┌──────────────────────────────────────────────────────────┐
-  │ [2]  select the next picture marked "not taken"          │
+  │ [2]  select the next image marked "not taken"            │
   └────────────────────────────┬─────────────────────────────┘
                                ▼
   ┌──────────────────────────────────────────────────────────┐
@@ -52,7 +57,7 @@ build uses.
                                ▼
   ┌──────────────────────────────────────────────────────────┐
   │      is it right?                                        │
-  │        yes ............  [2]  next picture               │
+  │        yes ............  [2]  next image                 │
   │        wrong part .....  [3]  take it again              │
   │        wrong state ....  [3]  after fixing the scenario  │
   │        wrong page .....  [1]  rewrite it                 │
@@ -61,27 +66,25 @@ build uses.
     when no row says "not taken" any more:
 
   ┌──────────────────────────────────────────────────────────┐
-  │      All            QMapShack takes every picture        │
+  │      All            QMapShack takes every image          │
   │                     again by itself; check each one.     │
   │                     A published one is shown beside it.  │
   └────────────────────────────┬─────────────────────────────┘
                                ▼
   ┌──────────────────────────────────────────────────────────┐
-  │      Publish all    moves the new pictures from          │
+  │      Publ. All      moves the new images from            │
   │                     doc/images/_work/ to doc/images/,    │
   │                     where git sees them.                 │
   └────────────────────────────┬─────────────────────────────┘
                                ▼
   ┌──────────────────────────────────────────────────────────┐
-  │      commit                                              │
+  │      generate the pages and commit (CREATING_DOCS.md)    │
   └──────────────────────────────────────────────────────────┘
-
-    When QMapShack itself has changed, the pictures may be out of date:
-    open the page and press All. Where a new picture no longer shows what
-    the page describes, the app has changed too much for how it is taken:
-    record its scenario again, or save the base again, and take it again.
-    Then Publish all and commit.
 ```
+
+When QMapShack itself has changed, the images may be out of date: open the page and press **All**.
+Where a new image no longer shows what the page describes, record its scenario again, or save the
+base again, and take it again. Then **Publ. All**, generate and commit.
 
 ## The panel
 
@@ -91,28 +94,28 @@ build uses.
 | ![](../src/icons/32x32/DocRecord.png) | Record | name a scenario and record it |
 | ![](../src/icons/32x32/DocStop.png) | Stop | end the recording and store it |
 | ![](../src/icons/32x32/DocRename.png) | Rename | rename the selected scenario |
-| ![](../src/icons/32x32/DocDelete.png) | Delete | delete the selected scenario; every picture taken in it is deleted too and has to be taken again |
-| ![](../src/icons/32x32/DocBase.png) | Base | write the running QMapShack's configuration into the page's base, or copy another page's base; see [The base](#the-base) (with `(base)` selected) |
-| **Picture** | | |
-| ![](../src/icons/32x32/DocRetake.png) | Retake | take the selected picture again as a build would |
+| ![](../src/icons/32x32/DocDelete.png) | Delete | delete the selected scenario; every image taken in it is deleted too and has to be taken again |
+| ![](../src/icons/32x32/DocBase.png) | Base | write the running QMapShack's configuration into the page's base, or copy another page's base; see [Base and scenario](#base-and-scenario) |
+| **Image** | | |
+| ![](../src/icons/32x32/DocRetake.png) | Retake | take the selected image again as a build would |
 | ![](../src/icons/32x32/DocRegion.png) | Region | drag a rectangle for it |
-| ![](../src/icons/32x32/DocRevert.png) | Revert | throw away what you took and how; the project's picture stays |
+| ![](../src/icons/32x32/DocRevert.png) | Revert | throw away what you took and how; the project's image stays |
 | ![](../src/icons/32x32/DocPublish.png) | Publish | put it into the project |
 | **Page** | | |
-| ![](../src/icons/32x32/DocRetakeAll.png) | All | take every picture of the page again, as Retake does for one; asks first when pictures you took are not published |
-| ![](../src/icons/32x32/DocClean.png) | Clean | delete shots and pictures no page uses |
-| ![](../src/icons/32x32/DocPublishAll.png) | Publ. All | put every picture of the page you took again into the project |
+| ![](../src/icons/32x32/DocRetakeAll.png) | All | take every image of the page again, as Retake does for one; asks first when images you took are not published |
+| ![](../src/icons/32x32/DocClean.png) | Clean | delete shots and images no page uses |
+| ![](../src/icons/32x32/DocPublishAll.png) | Publ. All | put every image of the page you took again into the project |
 
 - Each button is labelled; its tooltip says more. A greyed-out one has nothing to do.
-- Picking a scenario or a picture restarts QMapShack in that state (about seven seconds).
+- Picking a scenario or an image restarts QMapShack in that state.
 - Closing either window ends the session. Both come back where you left them.
-- Ctrl+Shift+F9 is the only key.
+- Ctrl+Shift+F9 takes an image; Escape cancels **Region**.
 
 ## Base and scenario
 
 The **base** is QMapShack as the page starts it: dockers, maps, elevation data, POIs, units, map
 position, stored in `doc/shots/<page>.ini`. Set it up by hand and save it with **Base**; nothing in
-it is recorded. Every page needs one; a new page asks which page's base to copy. A picture is taken
+it is recorded. Every page needs one; a new page asks which page's base to copy. An image is taken
 in it unless you give it a scenario, and every recording starts from it. The panel lists it as
 `(base)`, above the scenarios.
 
@@ -125,7 +128,7 @@ With `(base)` selected, **Base** offers:
 - **Save what is on screen as this page's base...** — writes the configuration of the running QMapShack, as it
   would write it on exit, into `doc/shots/<page>.ini`. Settings holding a path on this machine, and account
   details such as API keys and passwords, are left out.
-- **Copy the base of another page...** — asks first; every picture taken in `(base)` changes.
+- **Copy the base of another page...** — asks first; every image taken in `(base)` changes.
 
 ## Scenarios
 
@@ -137,7 +140,7 @@ It stores what you did, never a screen position:
 
 | You did | It stores |
 |---|---|
-| arranged the window, moved or zoomed the map | the arrangement, splitters, centre, zoom |
+| arranged the window, moved or zoomed the map | the arrangement, splitters, center, zoom |
 | selected, opened or expanded an item | the item, by name |
 | clicked or rested the pointer on the map | the point and what was under it |
 | clicked a button, tab, row or a row's button | that button, tab or row |
@@ -151,58 +154,61 @@ frame, dragging a separator between dockers, typing into a table cell, drag and 
 gestures. Ctrl and Shift on a list row are stored.
 
 A replay stops and names the step when it cannot find what a step addresses. Record that scenario
-again under the same name: its pictures stay with it; take them again.
+again under the same name: its images stay with it; take them again.
 
-**Rename** and **Delete** are for scenarios; deleting one means taking its pictures again. Changing
-a picture's **Taken in** box asks first and moves QMapShack to the new scenario.
+**Rename** and **Delete** are for scenarios; deleting one means taking its images again. Changing
+an image's **Taken in** box asks first and moves QMapShack to the new scenario.
 
-If you change settings after QMapShack started in a scenario, the panel warns after the picture: set
+If you change settings after QMapShack started in a scenario, the panel warns after the image: set
 them back, or record the scenario again.
 
-## Taking a picture
+## Taking an image
 
 Point at it and press **Ctrl+Shift+F9**, then answer:
 
-1. **Take a picture of** — which part: the list, the docker, the window.
-2. **Which picture is this?** — the selected row comes first.
-3. **Picture taken** — **Keep** or **Throw away**.
+1. **Take an image of** — which part: the list, the docker, the window.
+2. **Which image is this?** — the selected row comes first.
+3. **Image taken** — **Keep** or **Throw away**.
 
 - **A context menu:** open it, rest the pointer on the entry to highlight, press Ctrl+Shift+F9.
-  The picture remembers both.
+  The image remembers both.
 - **A window in a scenario:** only one the scenario's recording leaves open can be taken. A dialog
   that waits for an answer cannot stay open at **Stop**; take it in `(base)` instead.
 - **Part of a window:** select the row, press **Region**, drag a rectangle (Escape cancels).
 
 ## Taking again and publishing
 
-After a take the panel shows the project's picture and yours side by side. Better: publish it.
+After a take the panel shows the project's image and yours side by side. Better: publish it.
 Not: revert it.
 
-Pictures never match byte for byte across machines; judge them by eye.
+Images never match byte for byte across machines; judge them by eye.
 
-When a Retake or All fails, a dialog says which picture and why.
+When a Retake or All fails, a dialog says which image and why.
 
-Taking a picture again replays it: QMapShack performs its scenario's recorded steps without you,
+Taking an image again replays it: QMapShack performs its scenario's recorded steps without you,
 headless, and photographs the result. `shots.py replay` does that for every page, to check that every
-picture still comes out; it writes `doc/images/_check/`, which is only for looking at - nothing is
-published from it and it can be deleted.
+image still comes out. It writes into `doc/images/_check/`. Nothing is published from there, and the
+folder can be deleted.
 
-Closing the panel or the QMapShack window with unpublished pictures of this page asks whether to
-publish them. A picture you take shows up in the panel only once you press Keep.
+Closing the panel or the QMapShack window with unpublished images of this page asks whether to
+publish them. An image you take shows up in the panel only once you press Keep.
 
 ## What the rows mean
 
+A *shot* is how an image is taken: its scenario and the part it shows, stored in
+`doc/shots/<page>.json`.
+
 | State | Meaning |
 |---|---|
-| taken | shot and picture exist |
+| taken | shot and image exist |
 | not taken | the page asks for it; take it |
-| no image | the shot exists, the picture is gone; take it again |
-| not registered | a picture exists but no shot took it |
+| no image | the shot exists, the image is gone; take it again |
+| not registered | an image exists but no shot took it |
 | not used | a shot no page asks for; **Clean** deletes it |
 
-", taken again" means a picture waits to be published.
+", taken again" means an image waits to be published.
 
-## Picture names
+## Image names
 
 `<page>/<subject>[-<variant>]`, lower case with hyphens: `track-details`,
 `track-details-graphs`. A page cannot be called `default`.
@@ -222,7 +228,7 @@ Press **All** after a change.
 
 OpenStreetMap needs a network on the first run.
 
-A picture carries the attribution of the data it shows:
+A page names the attribution of the data its images show, in a line of text below its introduction:
 
 | Shows | Attribution |
 |---|---|
@@ -234,22 +240,22 @@ Each part's `SOURCE.md` in `doc/shots/fixtures/default/` has the full terms.
 
 ## What is fixed
 
-Light colours, DejaVu Sans 10, English, Fusion style, UTC, one image pixel per screen pixel.
+Light colors, DejaVu Sans 10, English, Fusion style, UTC, one image pixel per screen pixel.
 
 The QMapShack window is 1200 × 800 and cannot be resized, so a scenario replays the same on every
-machine. A screen without room for it, display scaling included, cannot record or take pictures;
+machine. A screen without room for it, display scaling included, cannot record or take images;
 QMapShack says so.
 
 ## Files
 
 ```
 doc/pages/<page>.md              your text
-doc/shots/<page>.json            pictures and scenarios
+doc/shots/<page>.json            images and scenarios
 doc/shots/<page>.ini             the page's base
 doc/shots/<page>/<name>.ini      a scenario's settings
 doc/shots/fixtures/<page>/       the page's own example data
 doc/shots/fixtures/default/      the default example data
-doc/images/<page>/*.png          the published pictures
+doc/images/<page>/*.png          the published images
 doc/images/_work/                taken again, not published; not in git
 doc/images/_check/               what `shots.py replay` renders when run by hand; not in git
 ```

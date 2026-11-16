@@ -36,7 +36,7 @@ class QTreeWidget;
 class QTreeWidgetItem;
 
 /**
-   @brief The writer's panel: the page's scenarios above, its pictures below.
+   @brief The writer's panel: the page's scenarios above, its images below.
 
    Every button calls a handler the launcher sets; the panel itself touches no file but its own size.
  */
@@ -54,10 +54,10 @@ class CShotDocPanel : public QDialog {
   /** @return the highlighted scenario's name, empty for (base) or none */
   QString currentScenario() const;
 
-  /** @return the selected picture's id, empty when none is selected */
+  /** @return the selected image's id, empty when none is selected */
   QString currentId() const;
 
-  /** @brief Select the picture @p id; no picture is selected when there is no such row. */
+  /** @brief Select the image @p id; no image is selected when there is no such row. */
   void setCurrentShot(const QString& id);
 
   /** @brief Asked before a close is accepted; false keeps the panel open, and must only follow a question. */
@@ -80,7 +80,7 @@ class CShotDocPanel : public QDialog {
   void setBusy(bool on, const QString& what);
 
  signals:
-  /** @brief A picture's row was clicked; emitted queued, after the click is delivered. */
+  /** @brief An image's row was clicked; emitted queued, after the click is delivered. */
   void shotPicked(const QString& id);
   /** @brief A scenario was clicked; emitted queued: the answer rebuilds the list. */
   void scenarioPicked(const QString& name);
@@ -89,7 +89,7 @@ class CShotDocPanel : public QDialog {
   void deleteScenarioClicked();
   void storeConfigClicked();
   void copyBaseClicked();
-  /** @brief A picture's combo box changed to @p scenario, empty for `(base)`; emitted queued: the answer rebuilds the
+  /** @brief An image's combo box changed to @p scenario, empty for `(base)`; emitted queued: the answer rebuilds the
    * rows. */
   void rebindRequested(const QString& id, const QString& scenario);
   void retakeShotClicked(const QString& id);
@@ -98,7 +98,7 @@ class CShotDocPanel : public QDialog {
   void retakePageClicked();
   void reapClicked();
   void publishShotClicked(const QString& id);
-  /** @brief Publish every picture of the page taken again. */
+  /** @brief Publish every image of the page taken again. */
   void publishClicked();
   /** @brief After a close was accepted. */
   void closed();
@@ -114,7 +114,7 @@ class CShotDocPanel : public QDialog {
  private:
   void centreWaiting();
   void showPreview();
-  /** @return the published and the work picture side by side, captioned */
+  /** @return the published and the work image side by side, captioned */
   QPixmap comparison(const QString& before, const QString& after) const;
   void buildScenarioCell(QTreeWidgetItem* row, const CShotFiles::row_t& entry);
   void updateShotActions();

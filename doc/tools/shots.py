@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
-"""Take and replay QMapShack's documentation pictures.
+"""Take and replay QMapShack's documentation images.
 
   shots.py take PAGE              open the writer's session on a page
-  shots.py publish                copy the pictures taken again into doc/images
+  shots.py publish                copy the images taken again into doc/images
   shots.py replay [--only GLOB]   replay every shot and report the ones that no longer come out
   shots.py selftest               the recorder's and documentation mode's own cases
-  shots.py unused [--delete]      shots and pictures no page references any more
+  shots.py unused [--delete]      shots and images no page references any more
 
-A picture's bytes depend on the machine that rendered it, so `replay` compares no pictures: it
+An image's bytes depend on the machine that rendered it, so `replay` compares no images: it
 answers whether every shot still replays. It renders into doc/images/_check and never into
 doc/images. A session writes into doc/images/_work; only `publish` writes doc/images.
 
@@ -27,7 +27,7 @@ import tempfile
 import threading
 from pathlib import Path
 
-# Every picture is rendered with these. The font family is bundled: offscreen has no font database.
+# Every image is rendered with these. The font family is bundled: offscreen has no font database.
 STYLE = "Fusion"
 FONT_FAMILY = "DejaVu Sans"
 FONT_SIZE = "10"
@@ -42,13 +42,13 @@ REPO = Path(__file__).resolve().parents[2]
 IMAGES_DIR = REPO / "doc" / "images"
 # Where `replay` renders; git-ignored. Only publishing writes doc/images.
 CHECK_DIR = IMAGES_DIR / "_check"
-# Where a session's pictures wait for `publish`; git-ignored.
+# Where a session's images wait for `publish`; git-ignored.
 WORK_DIR = IMAGES_DIR / "_work"
 PAGES_DIR = REPO / "doc" / "pages"
 SHOTS_DIR = REPO / "doc" / "shots"
 FIXTURES_DIR = SHOTS_DIR / "fixtures"
 DEFAULT_FIXTURE = FIXTURES_DIR / "default"
-# Seeds a new page's base; a page's pictures only ever use the page's own.
+# Seeds a new page's base; a page's images only ever use the page's own.
 DEFAULT_BASE = DEFAULT_FIXTURE / "shots.ini"
 # The self test's own base: it checks the recorder, so no page's arrangement may move its cases.
 SELFTEST_BASE = Path(__file__).resolve().parent / "selftest.ini"
@@ -70,7 +70,7 @@ DEADLINE_EXIT = 124
 LOCK_FILE = ".lock" if sys.platform == "darwin" else ".QMapShack.lock"
 # IAppSetup::path() says "path created" instead of "path" when the directory did not exist yet.
 PATH_LINE = re.compile(r'"(CACHE|USER DATA)" path (?:created )?"(.*)"')
-PICTURE_REFERENCE = re.compile(r"images/([\w./-]+)\.png")
+IMAGE_REFERENCE = re.compile(r"images/([\w./-]+)\.png")
 
 
 def shot_label(shot_id):
@@ -193,7 +193,7 @@ def may_match(page_file, only):
 def compose_config(page, scenario, out, source=None):
     """One scenario's whole configuration: `source`, else its own file, else the page's base.
 
-    Never merged, so changing a base cannot move a picture already taken. `source` is what a trial
+    Never merged, so changing a base cannot move an image already taken. `source` is what a trial
     replays a parked recording against: the settings the recording started from. A page without a
     base yet - the launcher before it asked for one - composes the default's. Paths use forward
     slashes: QSettings reads a backslash as an escape.
@@ -425,18 +425,18 @@ def group_label(group):
 
 
 def condense(said):
-    """The application's lines without their prefix, each once: a scenario's failure repeats for every picture in it."""
+    """The application's lines without their prefix, each once: a scenario's failure repeats for every image in it."""
     counts = {}
     for line in said:
         text = line.removeprefix("shoot:").strip()
         counts[text] = counts.get(text, 0) + 1
-    return [text if n == 1 else f"{text} ({n} times, once per picture)" for text, n in counts.items()]
+    return [text if n == 1 else f"{text} ({n} times, once per image)" for text, n in counts.items()]
 
 
 def page_references():
     used = set()
     for page in PAGES_DIR.rglob("*.md"):
-        used.update(PICTURE_REFERENCE.findall(page.read_text(encoding="utf-8", errors="replace")))
+        used.update(IMAGE_REFERENCE.findall(page.read_text(encoding="utf-8", errors="replace")))
     return used
 
 
@@ -488,13 +488,13 @@ def cmd_replay(args):
 
             refresh_tile_cache()
             before = snapshot(watched)
-            # Rendered aside and moved in: a picture that does not come out keeps the one out holds.
+            # Rendered aside and moved in: an image that does not come out keeps the one out holds.
             with tempfile.TemporaryDirectory(prefix="render-", dir=CACHE_DIR) as rendered:
                 code, said = run_group(binary, Path(rendered), page_file, group, only, args.verbose)
                 missing = [shot_id for shot_id in ids if not (Path(rendered) / f"{shot_id}.png").is_file()]
                 for shot_id in ids:
                     if shot_id not in missing:
-                        move_picture(Path(rendered) / f"{shot_id}.png", out / f"{shot_id}.png")
+                        move_image(Path(rendered) / f"{shot_id}.png", out / f"{shot_id}.png")
             leaked = changed(before, snapshot(watched))
             for shot_id in ids:
                 print(f"    {shot_label(shot_id):<44} {group_label(group)}{'   did not come out' if shot_id in missing else ''}")
@@ -512,19 +512,19 @@ def cmd_replay(args):
 
     if not broken and taken == 0 and untaken == 0:
         sys.exit(f"no shot matches {args.only}" if args.only else f"no shots in {SHOTS_DIR}")
-    print(f"\n{taken} picture(s) in {out}")
+    print(f"\n{taken} image(s) in {out}")
     if broken:
         # On standard error, where the panel reads the reason a Retake or All failed.
         sys.stdout.flush()
         for page, entry in sorted(broken.items()):
             count = sum(len(missing) for _, missing, _ in entry["groups"])
-            print(f"{page}.md: {count} picture(s) did not come out", file=sys.stderr)
+            print(f"{page}.md: {count} image(s) did not come out", file=sys.stderr)
             for group, missing, first in entry["groups"]:
-                print(f"  {group_label(group)}: {len(missing)} picture(s) - {first or 'the run gave no reason'}",
+                print(f"  {group_label(group)}: {len(missing)} image(s) - {first or 'the run gave no reason'}",
                       file=sys.stderr)
                 if group != BASE_SCENARIO and "did not replay" in first:
                     print(f"    To fix it: record {group} again under the same name in the panel "
-                          f"(shots.py take {page}), then take its pictures again.", file=sys.stderr)
+                          f"(shots.py take {page}), then take its images again.", file=sys.stderr)
             for path in entry["leaked"]:
                 print(f"  wrote outside the scratch tree: {path}", file=sys.stderr)
         sys.exit(f"{len(broken)} page(s) did not replay")
@@ -592,24 +592,24 @@ def cmd_unused(args):
             if shot.get("id") not in used:
                 dead.append((page_file, shot.get("id", "")))
 
-    # A picture with no shot and no page, left behind by a shot that was removed.
+    # An image with no shot and no page, left behind by a shot that was removed.
     ids = {shot_id for _, shot_id in dead}
     orphans = []
-    for picture in sorted(IMAGES_DIR.rglob("*.png")):
-        relative = picture.relative_to(IMAGES_DIR)
+    for image in sorted(IMAGES_DIR.rglob("*.png")):
+        relative = image.relative_to(IMAGES_DIR)
         if relative.parts[0].startswith("_"):
             continue
         shot_id = relative.with_suffix("").as_posix()
         if shot_id not in used and shot_id not in ids:
-            orphans.append(picture)
+            orphans.append(image)
 
     if not dead and not orphans:
-        print("every shot and every picture is referenced by a page")
+        print("every shot and every image is referenced by a page")
         return
     for page_file, shot_id in dead:
         print(f"  {shot_label(shot_id):<44} shot in {page_file.relative_to(REPO)}")
-    for picture in orphans:
-        print(f"  {picture.relative_to(REPO)}")
+    for image in orphans:
+        print(f"  {image.relative_to(REPO)}")
     if not args.delete:
         print(f"\n{len(dead) + len(orphans)} unused. Run again with --delete to remove them.")
         return
@@ -623,14 +623,14 @@ def cmd_unused(args):
     for _, shot_id in dead:
         # A hand-edited id could name a file anywhere.
         if not stays_inside(shot_id):
-            print(f"  {shot_id} names a place outside doc/images; its pictures are left alone")
+            print(f"  {shot_id} names a place outside doc/images; its images are left alone")
             continue
-        # What CShotFiles::removePictures() removes, and the check render.
-        for picture in (IMAGES_DIR / f"{shot_id}.png", WORK_DIR / f"{shot_id}.png", WORK_DIR / f"{shot_id}.shot.json",
-                        out / f"{shot_id}.png"):
-            picture.unlink(missing_ok=True)
-    for picture in orphans:
-        picture.unlink()
+        # What CShotFiles::removeImages() removes, and the check render.
+        for image in (IMAGES_DIR / f"{shot_id}.png", WORK_DIR / f"{shot_id}.png", WORK_DIR / f"{shot_id}.shot.json",
+                      out / f"{shot_id}.png"):
+            image.unlink(missing_ok=True)
+    for image in orphans:
+        image.unlink()
     print(f"\nremoved {len(dead) + len(orphans)}")
 
 
@@ -653,7 +653,7 @@ def cmd_take(args):
     binary = find_binary(args.binary)
     page_file = PAGES_DIR / f"{page}.md"
     if not page_file.is_file():
-        print(f"warning: there is no {page_file.relative_to(REPO)} yet; its image lines name the pictures.",
+        print(f"warning: there is no {page_file.relative_to(REPO)} yet; its image lines name the images.",
               file=sys.stderr)
     CACHE_DIR.mkdir(parents=True, exist_ok=True)
     refresh_tile_cache()
@@ -679,30 +679,30 @@ def stays_inside(name):
     return all(part not in ("", ".", "..") for part in name.split("/"))
 
 
-def move_picture(picture, target):
-    """Move @p picture over @p target; a move, so a reader of target never finds half a picture."""
+def move_image(image, target):
+    """Move @p image over @p target; a move, so a reader of target never finds half an image."""
     target.parent.mkdir(parents=True, exist_ok=True)
     try:
-        os.replace(picture, target)
+        os.replace(image, target)
     except OSError:
-        shutil.copyfile(picture, target)
-        picture.unlink()
+        shutil.copyfile(image, target)
+        image.unlink()
 
 
 def cmd_publish(args):
-    """Copy the pictures under doc/images/_work into doc/images and empty _work. No render, no comparison, no git."""
+    """Copy the images under doc/images/_work into doc/images and empty _work. No render, no comparison, no git."""
     only = getattr(args, "only", None)
     published = []
-    for picture in sorted(WORK_DIR.rglob("*.png")):
-        shot_id = picture.relative_to(WORK_DIR).with_suffix("").as_posix()
+    for image in sorted(WORK_DIR.rglob("*.png")):
+        shot_id = image.relative_to(WORK_DIR).with_suffix("").as_posix()
         if only and not fnmatch.fnmatchcase(shot_id, only):
             continue
-        # A move, not copy and delete: a picture taken again meanwhile is a new file in _work, never lost.
-        move_picture(picture, IMAGES_DIR / f"{shot_id}.png")
+        # A move, not copy and delete: an image taken again meanwhile is a new file in _work, never lost.
+        move_image(image, IMAGES_DIR / f"{shot_id}.png")
         published.append(shot_id)
-        # The entry kept for a revert: the published picture now belongs to the current one.
+        # The entry kept for a revert: the published image now belongs to the current one.
         (WORK_DIR / f"{shot_id}.shot.json").unlink(missing_ok=True)
-    # Only emptied directories go: a picture taken meanwhile stays for the next publish.
+    # Only emptied directories go: an image taken meanwhile stays for the next publish.
     for directory in sorted((path for path in WORK_DIR.rglob("*") if path.is_dir()), reverse=True) + [WORK_DIR]:
         try:
             directory.rmdir()
@@ -712,7 +712,7 @@ def cmd_publish(args):
         Path(args.report).write_text(json.dumps({"published": published}, indent=4) + "\n", encoding="utf-8")
     for shot_id in published:
         print(f"  {shot_id}")
-    print(f"{len(published)} picture(s) published" if published else "nothing was taken again, nothing to publish")
+    print(f"{len(published)} image(s) published" if published else "nothing was taken again, nothing to publish")
 
 
 def cmd_compose(args):
@@ -745,20 +745,20 @@ def main():
     take.add_argument("page", help="the page, e.g. test")
     take.set_defaults(func=cmd_take)
 
-    publish = commands.add_parser("publish", parents=[common], help="copy the pictures taken again into doc/images")
+    publish = commands.add_parser("publish", parents=[common], help="copy the images taken again into doc/images")
     publish.add_argument("--report", metavar="FILE", help="write the published ids as JSON")
-    publish.add_argument("--only", metavar="GLOB", help="shot ids: test/* is one page, test/menu-project one picture")
+    publish.add_argument("--only", metavar="GLOB", help="shot ids: test/* is one page, test/menu-project one image")
     publish.set_defaults(func=cmd_publish)
 
     replay = commands.add_parser("replay", parents=[common], help="replay every shot and report the ones that do not come out")
-    replay.add_argument("--only", metavar="GLOB", help="shot ids: test/* is one page, test/menu-project one picture")
+    replay.add_argument("--only", metavar="GLOB", help="shot ids: test/* is one page, test/menu-project one image")
     replay.set_defaults(func=cmd_replay)
 
     selftest = commands.add_parser("selftest", parents=[common], help="the recorder's own cases: record real input, compare the steps")
     selftest.add_argument("--page", default="test", help="the shot file that names the run; base and fixture are the self test's own (default: %(default)s)")
     selftest.set_defaults(func=cmd_selftest)
 
-    unused = commands.add_parser("unused", parents=[common], help="shots and pictures no page references")
+    unused = commands.add_parser("unused", parents=[common], help="shots and images no page references")
     unused.add_argument("--delete", action="store_true", help="remove them")
     unused.set_defaults(func=cmd_unused)
 

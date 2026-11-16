@@ -28,7 +28,7 @@ class QTextDocument;
 class QWidget;
 
 /**
-   @brief Keeps what is private to the writer out of a picture while it lives.
+   @brief Keeps what is private to the writer out of an image while it lives.
 
    Paths in the text of the standard widgets below the given ones read as `/home/user/...`; the texts are put back when
    it ends. Hold it only around the render call: nothing may run the event loop while it lives, since it keeps

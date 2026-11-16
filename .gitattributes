@@ -25,3 +25,6 @@ src/icons/svghygiene   text eol=lf
 doc/shots/fixtures/**/*.vrt   text eol=lf
 doc/shots/fixtures/**/*.tms   text eol=lf
 doc/shots/fixtures/**/*.wmts  text eol=lf
+
+# The fixture's base is LF in the repository; a CRLF checkout shows it modified.
+doc/shots/fixtures/**/*.ini   text eol=lf

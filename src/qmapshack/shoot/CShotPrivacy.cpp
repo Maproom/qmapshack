@@ -108,7 +108,7 @@ CShotPrivacy::CShotPrivacy(const QList<QWidget*>& roots) {
       };
     };
 
-    // A sorted view re-sorts on every rewritten row: the picture would show another order and the loop skip rows.
+    // A sorted view re-sorts on every rewritten row: the image would show another order and the loop skip rows.
     // Pushed before the rows, so it is undone after them.
     const auto holdOrder = [this](auto* view) {
       if (!view->isSortingEnabled()) {

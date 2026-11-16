@@ -117,7 +117,7 @@ qint32 CShotFixture::load(CShotContext& ctx) {
   CGisItemOvlArea* area = firstItem<CGisItemOvlArea>(project);
   ctx.setFixture(project, trk, wpt, rte, area);
 
-  // A picture that needs a missing item fails on its own; the others can still be taken.
+  // An image that needs a missing item fails on its own; the others can still be taken.
   QStringList missing;
   if (nullptr == trk) {
     missing << "track";
@@ -133,7 +133,7 @@ qint32 CShotFixture::load(CShotContext& ctx) {
   }
   if (!missing.isEmpty()) {
     qWarning().noquote() << "shoot: the fixture project" << filename << "has no" << missing.join(", ")
-                         << "- pictures of a dialog for one cannot be taken";
+                         << "- images of a dialog for one cannot be taken";
   }
   qDebug() << "shoot: fixture project" << project->getName() << "with" << project->childCount() << "items";
   return 0;

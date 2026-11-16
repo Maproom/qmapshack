@@ -179,7 +179,7 @@ bool isPartOf(const QWidget* main, const QWidget* widget) {
   return false;
 }
 
-/** How a picture of what Ctrl+Shift+F9 points at is taken again. */
+/** How an image of what Ctrl+Shift+F9 points at is taken again. */
 enum class kind_e {
   eLive,         /**< a part of the main window, written from what was rendered at the key press */
   eFromScenario, /**< a window the running scenario opened; the scenario opens it again */
@@ -307,7 +307,7 @@ bool CShotDocMode::eventFilter(QObject* watched, QEvent* event) {
     return QObject::eventFilter(watched, event);
   }
 
-  // Shown inside the request's frame; a replay of its picture has only the step to open it again.
+  // Shown inside the request's frame; a replay of its image has only the step to open it again.
   if (QEvent::Show == event->type()) {
     if (QMenu* menu = qobject_cast<QMenu*>(watched); nullptr != menu) {
       if (const QJsonObject& step = recorder->contextMenuStep(); !step.isEmpty()) {
@@ -412,11 +412,11 @@ void CShotDocMode::slotSetUp() {
             QString("The page has no scenario %1; the application is in %2.").arg(scenario, CShotFiles::kBaseLabel);
         scenario.clear();
       } else if (0 != CShotReplay::replay(recorded.value(scenario).toArray(), *ctx, {})) {
-        // Recording it again replaces only its actions: its pictures stay bound to it.
+        // Recording it again replaces only its actions: its images stay bound to it.
         problem = QString("%1 does not replay any more. %2 Press Record and record %1 again under the same name.")
                       .arg(scenario, warnings.first());
         if (const QStringList& ids = files.shotsIn(scenario); !ids.isEmpty()) {
-          problem += QString(" Then take its pictures again with All or Retake: %1.").arg(ids.join(", "));
+          problem += QString(" Then take its images again with All or Retake: %1.").arg(ids.join(", "));
         }
       }
     }
@@ -433,7 +433,7 @@ void CShotDocMode::slotSetUp() {
 }
 
 void CShotDocMode::enterState(const QString& readyText) {
-  // What is on screen now, broken or not: a picture of it performs nothing again.
+  // What is on screen now, broken or not: an image of it performs nothing again.
   ctx->setLiveScenario(scenario);
   scenarioWindows = openWindowClasses(ctx->mainWindow());
   snapshotSetup();
@@ -512,7 +512,7 @@ QString CShotDocMode::windowProblem() const {
   const QSize& frame = main->frameGeometry().size();
   if (room.isValid() && (frame.width() > room.width() || frame.height() > room.height())) {
     return QString(
-               "Documentation pictures need the application window at %1 x %2, and your screen has room for %3 x "
+               "Documentation images need the application window at %1 x %2, and your screen has room for %3 x "
                "%4. Use a larger screen or lower the display scaling in the system settings; until then nothing "
                "can be recorded or photographed.")
         .arg(kWindowSize.width())
@@ -522,7 +522,7 @@ QString CShotDocMode::windowProblem() const {
   }
   if (main->size() != kWindowSize) {
     return QString(
-               "The application window is %1 x %2 and documentation pictures need %3 x %4. Restore it if it is "
+               "The application window is %1 x %2 and documentation images need %3 x %4. Restore it if it is "
                "maximized; until then nothing can be recorded or photographed.")
         .arg(main->width())
         .arg(main->height())
@@ -586,7 +586,7 @@ void CShotDocMode::send(const QString& line) {
 
 void CShotDocMode::report(const QString& status) { send("status " + status); }
 
-// --- pictures ------------------------------------------------------------------------------------
+// --- images --------------------------------------------------------------------------------------
 
 QWidget* CShotDocMode::activeTarget() {
   if (QWidget* popup = QApplication::activePopupWidget(); nullptr != popup) {
@@ -668,7 +668,7 @@ QWidget* CShotDocMode::chooseLivePart(CMainWindow* main, const QList<QWidget*>& 
     return main;
   }
   bool ok = false;
-  const QString& chosen = QInputDialog::getItem(dialogParent(), "Take a picture of", "Part:", labels, 0, false, &ok);
+  const QString& chosen = QInputDialog::getItem(dialogParent(), "Take an image of", "Part:", labels, 0, false, &ok);
   return ok ? parts.value(labels.indexOf(chosen), main) : nullptr;
 }
 
@@ -693,14 +693,14 @@ QString CShotDocMode::askForId() const {
   const QStringList& choices = wanted + without + with;
 
   if (choices.isEmpty()) {
-    QMessageBox::information(dialogParent(), "Take a picture",
-                             "The page references no picture. Put an image line where you want one, and its name "
+    QMessageBox::information(dialogParent(), "Take an image",
+                             "The page references no image. Put an image line where you want one, and its name "
                              "appears here.");
     return QString();
   }
   bool ok = false;
   const QString& id =
-      QInputDialog::getItem(dialogParent(), "Take a picture", "Which picture is this?", choices, 0, false, &ok);
+      QInputDialog::getItem(dialogParent(), "Take an image", "Which image is this?", choices, 0, false, &ok);
   return ok ? id : QString();
 }
 
@@ -724,11 +724,11 @@ bool CShotDocMode::confirmResult(const QString& id) const {
   const QImage image(files.pendingImage(id));
 
   QDialog preview(dialogParent());
-  preview.setWindowTitle("Picture taken");
+  preview.setWindowTitle("Image taken");
   QVBoxLayout* layout = new QVBoxLayout(&preview);
-  QLabel* picture = new QLabel(&preview);
-  picture->setPixmap(QPixmap::fromImage(image.scaled(QSize(720, 540), Qt::KeepAspectRatio, Qt::SmoothTransformation)));
-  layout->addWidget(picture);
+  QLabel* shown = new QLabel(&preview);
+  shown->setPixmap(QPixmap::fromImage(image.scaled(QSize(720, 540), Qt::KeepAspectRatio, Qt::SmoothTransformation)));
+  layout->addWidget(shown);
   layout->addWidget(new QLabel("Use it in your page as:", &preview));
   QPlainTextEdit* usage = new QPlainTextEdit(QString("![](../images/%1.png)").arg(id), &preview);
   usage->setReadOnly(true);
@@ -777,7 +777,7 @@ void CShotDocMode::reportUnexposed(const QWidget* target) const {
 void CShotDocMode::keepShot(const QJsonObject& shot, const std::function<bool()>& take) {
   const QString& id = shot["id"].toString();
   const QString& pending = files.pendingImage(id);
-  // Taken beside the work picture: until Keep, a state that ends leaves the writer's work as it was.
+  // Taken beside the work image: until Keep, a state that ends leaves the writer's work as it was.
   QFile::remove(pending);
   const QString work = writer->getOutDir();
   writer->setOutDir(files.pendingDir());
@@ -789,7 +789,7 @@ void CShotDocMode::keepShot(const QJsonObject& shot, const std::function<bool()>
     return;
   }
   const bool kept = confirmResult(id);
-  const QByteArray& picture = CShotFiles::readWhole(pending);
+  const QByteArray& image = CShotFiles::readWhole(pending);
   QFile::remove(pending);
   if (!kept) {
     report(QString("%1 was thrown away.").arg(id));
@@ -799,12 +799,12 @@ void CShotDocMode::keepShot(const QJsonObject& shot, const std::function<bool()>
   const QByteArray& previous = CShotFiles::readWhole(files.workImage(id));
   const QString& target = files.workImage(id);
   QString error = QDir().mkpath(QFileInfo(target).absolutePath())
-                      ? CShotFiles::writeWhole(target, picture)
+                      ? CShotFiles::writeWhole(target, image)
                       : QString("%1 cannot be created.").arg(QFileInfo(target).absolutePath());
   if (error.isEmpty()) {
     error = files.storeShot(shot);
     if (!error.isEmpty()) {
-      // The picture goes with its entry: the one it replaced is put back.
+      // The image goes with its entry: the one it replaced is put back.
       if (previous.isEmpty()) {
         QFile::remove(target);
       } else if (const QString& undo = CShotFiles::writeWhole(target, previous); !undo.isEmpty()) {
@@ -822,7 +822,7 @@ void CShotDocMode::keepShot(const QJsonObject& shot, const std::function<bool()>
 
 void CShotDocMode::tag() {
   if (recorder->isRecording()) {
-    report("Stop the recording first: taking a picture drives the application, and that would be recorded.");
+    report("Stop the recording first: taking an image drives the application, and that would be recorded.");
     return;
   }
   if (const QString& problem = windowProblem(); !problem.isEmpty()) {
@@ -845,10 +845,10 @@ void CShotDocMode::tag() {
   // buttons only with focus would be photographed without them.
   QList<QWidget*> parts;
   QStringList labels;
-  QHash<const QWidget*, QImage> pictures;
+  QHash<const QWidget*, QImage> images;
   if (isPartOf(main, target)) {
     parts = livePartsAt(main, labels);
-    pictures = CShotWriter::renderAll(parts);
+    images = CShotWriter::renderAll(parts);
   }
 
   QString exposure;
@@ -900,7 +900,7 @@ void CShotDocMode::tag() {
         }
       }
     }
-    // A part is laid out by the main window and a scenario's window opens at its size: the picture depends on it.
+    // A part is laid out by the main window and a scenario's window opens at its size: the image depends on it.
     shot["size"] = QJsonArray{main->width(), main->height()};
     if (!target->windowTitle().isEmpty()) {
       shot["note"] = target->windowTitle();
@@ -909,10 +909,10 @@ void CShotDocMode::tag() {
 
   keepShot(shot, [&]() {
     // Only a live part is written from what was rendered at the key press; a dialog parented to the main window is
-    // in pictures too, and its shot says exposure.
-    if (kind_e::eLive == kind && pictures.contains(target)) {
-      const QImage& picture = pictures.value(target);
-      return !picture.isNull() && !writer->write(picture, id).isEmpty();
+    // in images too, and its shot says exposure.
+    if (kind_e::eLive == kind && images.contains(target)) {
+      const QImage& image = images.value(target);
+      return !image.isNull() && !writer->write(image, id).isEmpty();
     }
     return 0 == CShotPage::shootOne(shot, *ctx, files.scenarios());
   });
@@ -927,14 +927,14 @@ QJsonObject CShotDocMode::newShot(const QString& id) const {
 }
 
 bool CShotDocMode::refusedAsHandOpened(const QWidget* target) {
-  // A build takes the picture where the scenario's actions end; a window they did not leave open is not there.
+  // A build takes the image where the scenario's actions end; a window they did not leave open is not there.
   if (scenarioWindows.contains(QString::fromLatin1(target->metaObject()->className()))) {
     return false;
   }
   const QString& name = onScreenName(target);
   QString text = QString(
                      "%1 was opened by hand. A build replays only the actions of %2, which do not leave it open, so "
-                     "its picture could not be taken again.")
+                     "its image could not be taken again.")
                      .arg(name.isEmpty() ? QString("This window") : QString("\"%1\"").arg(name), scenario);
   text += CShotRegistry::self().exposureOf(target).isEmpty()
               ? QString(" It cannot be photographed in a scenario yet.")
@@ -1107,7 +1107,7 @@ QString CShotDocMode::driftWarning(const QString& name) const {
   }
   return QString(
              " The settings on screen differ from the ones %1 was set up with (%2), so a replay will not produce "
-             "this picture. %3")
+             "this image. %3")
       .arg(CShotFiles::label(name), which,
            name.isEmpty() ? QString("Use Base > Save what is on screen as this page's base, or undo those changes.")
                           : QString("Undo those changes, or record the scenario again with them."));

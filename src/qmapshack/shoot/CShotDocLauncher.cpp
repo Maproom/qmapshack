@@ -134,8 +134,8 @@ void CShotDocLauncher::start() {
   connect(panel, &CShotDocPanel::revertShotClicked, this, [this](const QString& id) { revertShot(id); });
   connect(panel, &CShotDocPanel::retakePageClicked, this, [this]() { retakePage(); });
   connect(panel, &CShotDocPanel::reapClicked, this, [this]() { reapUnused(); });
-  connect(panel, &CShotDocPanel::publishShotClicked, this, [this](const QString& id) { publishPictures(false, id); });
-  connect(panel, &CShotDocPanel::publishClicked, this, [this]() { publishPictures(false, page + "/*"); });
+  connect(panel, &CShotDocPanel::publishShotClicked, this, [this](const QString& id) { publishImages(false, id); });
+  connect(panel, &CShotDocPanel::publishClicked, this, [this]() { publishImages(false, page + "/*"); });
   panel->setCloseRequestHandler([this]() { return mayClose(); });
   connect(panel, &CShotDocPanel::closed, this, [this]() {
     qDebug() << "doc: the panel was closed, the session ends";
@@ -199,7 +199,7 @@ bool CShotDocLauncher::chooseBase(bool creating) {
   }
   if (!creating &&
       QMessageBox::Yes != QMessageBox::question(panel, "Base of the page",
-                                                QString("Every picture of %1 taken in (base) changes. Replace its base "
+                                                QString("Every image of %1 taken in (base) changes. Replace its base "
                                                         "with %2?")
                                                     .arg(page, picked),
                                                 QMessageBox::Yes | QMessageBox::No, QMessageBox::No)) {
@@ -321,7 +321,7 @@ void CShotDocLauncher::onStateEnded(CShotDocState::end_e how, const QString& det
   switch (how) {
     case CShotDocState::eClosed:
       qDebug() << "doc: the application window was closed, the session ends";
-      // Closing either window asks about unpublished pictures.
+      // Closing either window asks about unpublished images.
       if (mayClose()) {
         endSession();
       } else {
@@ -384,7 +384,7 @@ void CShotDocLauncher::updateBusy() {
   if (!publishJob.isNull()) {
     panel->setBusy(true, "Please wait, publishing");
   } else if (!replayJob.isNull()) {
-    panel->setBusy(true, "Please wait, taking pictures again");
+    panel->setBusy(true, "Please wait, taking images again");
   } else if (!state.isNull() && !state->isReady()) {
     panel->setBusy(true,
                    QString("Please wait, starting the application in %1").arg(CShotFiles::label(state->scenario())));
@@ -498,7 +498,7 @@ void CShotDocLauncher::showShot(const QString& id) {
 }
 
 void CShotDocLauncher::actOnShot(const QString& verb, const QString& id) {
-  // A picture without a shot is taken in the base.
+  // An image without a shot is taken in the base.
   const QString& scenario = files.shot(id)["scenario"].toString();
   selectedShot = id;
   if (!state.isNull() && state->isReady() && state->scenario() == scenario) {
@@ -600,7 +600,7 @@ void CShotDocLauncher::renameScenario() {
   if (live) {
     enterScenario(to);
   }
-  refreshPanel(QString("Renamed to %1. No picture changed.").arg(to));
+  refreshPanel(QString("Renamed to %1. No image changed.").arg(to));
 }
 
 void CShotDocLauncher::deleteScenario() {
@@ -610,12 +610,12 @@ void CShotDocLauncher::deleteScenario() {
     return;
   }
   const QStringList& affected = files.shotsIn(name);
-  const QString& question =
-      affected.isEmpty() ? QString("Delete the scenario %1?").arg(name)
-                         : QString(
-                               "Delete the scenario %1?\n\nThese pictures are taken in it. They lose their picture "
-                               "and how they were taken, and have to be taken again:\n\n%2")
-                               .arg(name, affected.join("\n"));
+  const QString& question = affected.isEmpty()
+                                ? QString("Delete the scenario %1?").arg(name)
+                                : QString(
+                                      "Delete the scenario %1?\n\nThese images are taken in it. They lose their image "
+                                      "and how they were taken, and have to be taken again:\n\n%2")
+                                      .arg(name, affected.join("\n"));
   if (QMessageBox::Yes !=
       QMessageBox::question(panel, "Delete scenario", question, QMessageBox::Yes | QMessageBox::No, QMessageBox::No)) {
     return;
@@ -627,7 +627,7 @@ void CShotDocLauncher::deleteScenario() {
   if (selectedScenario == name) {
     selectedScenario.clear();
   }
-  refreshPanel(QString("%1 deleted, %2 picture(s) have to be taken again.").arg(name).arg(affected.size()));
+  refreshPanel(QString("%1 deleted, %2 image(s) have to be taken again.").arg(name).arg(affected.size()));
   // Nothing describes the state on screen any more.
   if (!state.isNull() && state->scenario() == name) {
     enterScenario(QString());
@@ -641,7 +641,7 @@ void CShotDocLauncher::rebindShot(const QString& id, const QString& scenario) {
   }
   if (files.rebindLoses(id) &&
       QMessageBox::Yes != QMessageBox::question(panel, "Take it in another scenario",
-                                                QString("%1 is taken in %2. Its picture and how it was taken are "
+                                                QString("%1 is taken in %2. Its image and how it was taken are "
                                                         "thrown away and it has to be taken again.\n\nGo on?")
                                                     .arg(id, CShotFiles::label(was)),
                                                 QMessageBox::Yes | QMessageBox::No, QMessageBox::No)) {
@@ -663,13 +663,13 @@ void CShotDocLauncher::rebindShot(const QString& id, const QString& scenario) {
 void CShotDocLauncher::reapUnused() {
   const QStringList& unused = files.unusedShots();
   if (unused.isEmpty()) {
-    refreshPanel("Every picture is used by a page.");
+    refreshPanel("Every image is used by a page.");
     return;
   }
   if (QMessageBox::Yes !=
       QMessageBox::question(
           panel, "Remove unused",
-          QString("No page references these. Delete their shots and pictures?\n\n%1").arg(unused.join("\n")),
+          QString("No page references these. Delete their shots and images?\n\n%1").arg(unused.join("\n")),
           QMessageBox::Yes | QMessageBox::No, QMessageBox::No)) {
     return;
   }
@@ -686,8 +686,8 @@ void CShotDocLauncher::revertShot(const QString& id) {
     return;
   }
   refreshPanel(QFileInfo::exists(files.publishedImage(id))
-                   ? QString("%1 is back to the published picture.").arg(id)
-                   : QString("%1 has no picture again; none is published.").arg(id));
+                   ? QString("%1 is back to the published image.").arg(id)
+                   : QString("%1 has no image again; none is published.").arg(id));
 }
 
 // --- shots.py ------------------------------------------------------------------------------------
@@ -716,7 +716,7 @@ bool CShotDocLauncher::runShots(QPointer<CShotsJob>& slot, const QStringList& ar
 }
 
 void CShotDocLauncher::retakeShot(const QString& id) {
-  // Headless, the way a build renders it; a picture that does not come out keeps the work picture.
+  // Headless, the way a build renders it; an image that does not come out keeps the work image.
   const bool started =
       runShots(replayJob, {"-o", repo.absoluteFilePath("doc/images/_work"), "replay", "--only", id},
                [this, id](bool ok, const QString& error) {
@@ -733,9 +733,9 @@ void CShotDocLauncher::retakeShot(const QString& id) {
 
 void CShotDocLauncher::retakePage() {
   if (files.hasUnpublishedImages() &&
-      QMessageBox::Yes != QMessageBox::question(panel, "Take every picture again?",
-                                                "Pictures of this page taken and not published yet are replaced.\n\n"
-                                                "Take every picture again?",
+      QMessageBox::Yes != QMessageBox::question(panel, "Take every image again?",
+                                                "Images of this page taken and not published yet are replaced.\n\n"
+                                                "Take every image again?",
                                                 QMessageBox::Yes | QMessageBox::Cancel, QMessageBox::Cancel)) {
     return;
   }
@@ -745,10 +745,10 @@ void CShotDocLauncher::retakePage() {
                [this](bool ok, const QString& error) {
                  if (ok) {
                    refreshPanel(
-                       QString("Every picture of this page was taken again; compare them, revert what is not "
+                       QString("Every image of this page was taken again; compare them, revert what is not "
                                "better, then Publish all."));
                  } else {
-                   reportFailure(QString("Not every picture was taken again.\n\n%1").arg(error));
+                   reportFailure(QString("Not every image was taken again.\n\n%1").arg(error));
                  }
                });
   if (!started) {
@@ -770,7 +770,7 @@ void CShotDocLauncher::watchPage() {
     connect(watcher, &QFileSystemWatcher::fileChanged, settle, qOverload<>(&QTimer::start));
     connect(watcher, &QFileSystemWatcher::directoryChanged, settle, qOverload<>(&QTimer::start));
   }
-  // A part filled or emptied changes where the page's pictures take it from.
+  // A part filled or emptied changes where the page's images take it from.
   for (const QString& folder : files.fixtureFolders()) {
     if (QFileInfo::exists(folder) && !watcher->directories().contains(folder)) {
       watcher->addPath(folder);
@@ -786,7 +786,7 @@ void CShotDocLauncher::watchPage() {
   }
 }
 
-void CShotDocLauncher::publishPictures(bool thenEnd, const QString& only) {
+void CShotDocLauncher::publishImages(bool thenEnd, const QString& only) {
   const QString& report = QDir(scratch->path()).absoluteFilePath("publish.json");
   QFile::remove(report);
   QStringList args{"publish", "--report", report};
@@ -796,14 +796,14 @@ void CShotDocLauncher::publishPictures(bool thenEnd, const QString& only) {
   const bool started = runShots(publishJob, args, [this, report, thenEnd](bool ok, const QString& error) {
     if (!ok) {
       // A failed publish does not end the session: the next close asks again.
-      reportFailure(QString("The pictures could not be published.\n\n%1").arg(error));
+      reportFailure(QString("The images could not be published.\n\n%1").arg(error));
       return;
     }
     QFile in(report);
     const qsizetype published =
         in.open(QIODevice::ReadOnly) ? QJsonDocument::fromJson(in.readAll()).object()["published"].toArray().size() : 0;
     refreshPanel(0 == published ? QString("Nothing was taken again, nothing to publish.")
-                                : QString("%1 picture(s) published and ready to commit.").arg(published));
+                                : QString("%1 image(s) published and ready to commit.").arg(published));
     if (thenEnd) {
       endSession();
     }
@@ -814,7 +814,7 @@ void CShotDocLauncher::publishPictures(bool thenEnd, const QString& only) {
 }
 
 bool CShotDocLauncher::mayClose() {
-  // The session is ending already; work pictures stay in _work for the next one.
+  // The session is ending already; work images stay in _work for the next one.
   if (ending) {
     return true;
   }
@@ -826,13 +826,13 @@ bool CShotDocLauncher::mayClose() {
   }
   const QMessageBox::StandardButton answer =
       QMessageBox::question(panel, "Publish before closing?",
-                            "Pictures of this page were taken again and are not published.\n\nPublish them now?",
+                            "Images of this page were taken again and are not published.\n\nPublish them now?",
                             QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel, QMessageBox::Yes);
   if (QMessageBox::No == answer) {
     return true;
   }
   if (QMessageBox::Yes == answer) {
-    publishPictures(true, page + "/*");
+    publishImages(true, page + "/*");
   }
   return false;
 }
@@ -868,8 +868,8 @@ void CShotDocLauncher::refreshPanel(const QString& status) {
   } else if (!status.isEmpty()) {
     panel->setStatus(status);
   } else if (!hasPage) {
-    panel->setStatus(QString("Write %1 first; its image lines name the pictures.").arg(pageName));
+    panel->setStatus(QString("Write %1 first; its image lines name the images.").arg(pageName));
   } else if (rows.isEmpty()) {
-    panel->setStatus(QString("%1 references no picture yet.").arg(pageName));
+    panel->setStatus(QString("%1 references no image yet.").arg(pageName));
   }
 }

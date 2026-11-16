@@ -104,9 +104,9 @@ void write(const QString& path, const QByteArray& content) {
 QByteArray read(const QString& path) { return CShotFiles::readWhole(path); }
 
 /**
-   A scratch checkout. Page `p`: shots `p/a` (widget, scenario `s`, picture and work picture), `p/b` (bare, scenario
-   `s`), `p/c` (widget, base, picture), `p/d` (bare, base, no picture), `p/e` (used only by page `q`), `p/f` (used by
-   no page, picture). The page `p` also references `p/g` (picture, no shot) and `p/h` (nothing). Scenario `s` has a
+   A scratch checkout. Page `p`: shots `p/a` (widget, scenario `s`, image and work image), `p/b` (bare, scenario
+   `s`), `p/c` (widget, base, image), `p/d` (bare, base, no image), `p/e` (used only by page `q`), `p/f` (used by
+   no page, image). The page `p` also references `p/g` (image, no shot) and `p/h` (nothing). Scenario `s` has a
    configuration, scenario `t` none.
  */
 struct checkout_t {
@@ -225,7 +225,7 @@ void testRename() {
     const QString& error = taken + c.files.renameScenario("s", "zoomed");
     const QString& reverted = c.files.revertShot("p/a");
     const bool ok = error.isEmpty() && reverted.isEmpty() && c.files.shot("p/a")["scenario"].toString() == "zoomed";
-    verdict("a picture taken again and reverted after a rename names the new scenario", ok, error + reverted);
+    verdict("an image taken again and reverted after a rename names the new scenario", ok, error + reverted);
   }
   for (const QString& to : {QString("t"), QString("a/b"), QString("(base)")}) {
     checkout_t c;
@@ -272,7 +272,7 @@ void testDelete() {
                   c.files.shot("p/b") == QJsonObject{{"id", "p/b"}} &&
                   !QFileInfo::exists(c.files.publishedImage("p/a")) && !QFileInfo::exists(c.files.workImage("p/a")) &&
                   !QFileInfo::exists(c.files.scenarioConfig("s")) && QFileInfo::exists(c.files.publishedImage("p/c"));
-  verdict("delete reduces the scenario's shots to their id and takes their pictures and configuration", ok, error);
+  verdict("delete reduces the scenario's shots to their id and takes their images and configuration", ok, error);
 }
 
 void testRebind() {
@@ -285,14 +285,14 @@ void testRebind() {
     write(c.files.shotFile(), QJsonDocument(content).toJson());
     const bool ok = c.files.rebindLoses("p/a") && c.files.rebindLoses("p/c") && c.files.rebindLoses("p/g") &&
                     c.files.rebindLoses("p/n") && !c.files.rebindLoses("p/b") && !c.files.rebindLoses("p/h");
-    verdict("rebind loses something: any key but id and scenario, a picture, or a picture without a shot", ok);
+    verdict("rebind loses something: any key but id and scenario, an image, or an image without a shot", ok);
   }
   {
     checkout_t c;
     const QString& error = c.files.rebindShot("p/c", "t");
     const bool ok = error.isEmpty() && c.files.shot("p/c") == QJsonObject{{"id", "p/c"}, {"scenario", "t"}} &&
                     !QFileInfo::exists(c.files.publishedImage("p/c"));
-    verdict("rebind reduces the shot to id and scenario and deletes its picture", ok, error);
+    verdict("rebind reduces the shot to id and scenario and deletes its image", ok, error);
   }
   {
     checkout_t c;
@@ -589,7 +589,7 @@ void testUnused() {
   const QString& error = c.files.removeShots(unused);
   const bool ok = error.isEmpty() && c.files.shot("p/f").isEmpty() && !c.files.shot("p/e").isEmpty() &&
                   !QFileInfo::exists(c.files.publishedImage("p/f")) && c.files.scenarioNames().size() == 2;
-  verdict("remove takes the shots and their pictures, the scenarios stay", ok, error);
+  verdict("remove takes the shots and their images, the scenarios stay", ok, error);
 }
 
 void testUnicodeNames() {
@@ -602,11 +602,10 @@ void testUnicodeNames() {
   content["shots"] = shots;
   write(c.files.shotFile(), QJsonDocument(content).toJson());
   const QStringList& unused = c.files.unusedShots();
-  verdict("a picture name beyond ASCII is a reference, as in shots.py", unused == QStringList{"p/f"},
-          unused.join(", "));
+  verdict("an image name beyond ASCII is a reference, as in shots.py", unused == QStringList{"p/f"}, unused.join(", "));
 }
 
-void testForeignPicture() {
+void testForeignImage() {
   // Page q references p/e, whose shot is in p.json.
   checkout_t c;
   CShotFiles q(c.repo, "q");
@@ -619,7 +618,7 @@ void testForeignPicture() {
   const QString& error = q.rebindShot("p/e", QString());
   const bool ok = listed.isEmpty() && !error.isEmpty() && QFileInfo::exists(c.files.publishedImage("p/e")) &&
                   !QFileInfo::exists(q.shotFile());
-  verdict("another page's picture is not listed and cannot be rebound here", ok,
+  verdict("another page's image is not listed and cannot be rebound here", ok,
           QString("listed '%1', %2").arg(listed.join(", "), error));
 }
 
@@ -656,7 +655,7 @@ void testRows() {
 
   checkout_t d;
   const QString& error = d.files.revertShot("p/a");
-  verdict("revert deletes only the work picture",
+  verdict("revert deletes only the work image",
           error.isEmpty() && !QFileInfo::exists(d.files.workImage("p/a")) &&
               QFileInfo::exists(d.files.publishedImage("p/a")),
           error);
@@ -824,7 +823,7 @@ qint32 CShotDocSelfTest::run() {
   testRebind();
   testUnused();
   testUnicodeNames();
-  testForeignPicture();
+  testForeignImage();
   testBusyBox();
   testRows();
   testParkedRecording();

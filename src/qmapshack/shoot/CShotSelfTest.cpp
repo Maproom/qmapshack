@@ -2366,7 +2366,7 @@ void checkScenarioTwice(CHarness& h) {
     };
     closeDetails();
     const qint32 before = (nullptr == tabs) ? -1 : tabs->count();
-    const auto pictureInto = [main, tabs](QImage& image, qint32& tabCount) {
+    const auto imageInto = [main, tabs](QImage& image, qint32& tabCount) {
       return [main, tabs, &image, &tabCount]() -> qint32 {
         tabCount = (nullptr == tabs) ? -1 : tabs->count();
         image = CShotWriter::render(main, main->size());
@@ -2377,16 +2377,16 @@ void checkScenarioTwice(CHarness& h) {
     QImage second;
     qint32 firstTabs = 0;
     qint32 secondTabs = 0;
-    qint32 replayFailures = CShotReplay::replay(details, ctx, pictureInto(first, firstTabs));
+    qint32 replayFailures = CShotReplay::replay(details, ctx, imageInto(first, firstTabs));
     CShotReplay::clear(details, ctx);
-    replayFailures += CShotReplay::replay(details, ctx, pictureInto(second, secondTabs));
+    replayFailures += CShotReplay::replay(details, ctx, imageInto(second, secondTabs));
     CShotReplay::clear(details, ctx);
     closeDetails();
 
     verdict(
         name,
         0 == replayFailures && !first.isNull() && first == second && before + 1 == firstTabs && firstTabs == secondTabs,
-        QString("%1 replay failure(s), %2 tabs before, %3 then %4, pictures %5")
+        QString("%1 replay failure(s), %2 tabs before, %3 then %4, images %5")
             .arg(replayFailures)
             .arg(before)
             .arg(firstTabs)
@@ -2534,14 +2534,14 @@ void checkShootScenario(CHarness& h) {
   zeroCounts(p);
   const qint32 failed = CShotPage::run(path, ctx, "*", "press");
   settle(100);
-  const bool pictures =
+  const bool images =
       QFileInfo::exists(dir.filePath("selftest/button.png")) && QFileInfo::exists(dir.filePath("selftest/menu.png"));
   const bool closed = nullptr == QApplication::activePopupWidget();
-  verdict(name, 0 == failed && 1 == p.counts.value("button") && pictures && closed,
-          QString("%1 failure(s), %2, pictures %3, menu %4")
+  verdict(name, 0 == failed && 1 == p.counts.value("button") && images && closed,
+          QString("%1 failure(s), %2, images %3, menu %4")
               .arg(failed)
               .arg(countsOf(p, {"button"}))
-              .arg(pictures ? "written" : "missing")
+              .arg(images ? "written" : "missing")
               .arg(closed ? "closed" : "open"));
 }
 

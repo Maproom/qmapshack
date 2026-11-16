@@ -256,7 +256,7 @@ QString CShotFiles::writeShotFile(const QJsonObject& content) const {
   return writeWhole(shotFile(), QJsonDocument(content).toJson(QJsonDocument::Indented));
 }
 
-void CShotFiles::removePictures(const QStringList& ids) const {
+void CShotFiles::removeImages(const QStringList& ids) const {
   for (const QString& id : ids) {
     QFile::remove(publishedImage(id));
     QFile::remove(workImage(id));
@@ -270,7 +270,7 @@ QSet<QString> CShotFiles::references(const QString& file) const {
   if (!in.open(QIODevice::ReadOnly | QIODevice::Text)) {
     return referenced;
   }
-  // shots.py's PICTURE_REFERENCE; without the option Qt's \w is ASCII and misses `größe.png`, Python's is not.
+  // shots.py's IMAGE_REFERENCE; without the option Qt's \w is ASCII and misses `größe.png`, Python's is not.
   static const QRegularExpression pattern("images/([\\w./-]+)\\.png", QRegularExpression::UseUnicodePropertiesOption);
   QRegularExpressionMatchIterator matches = pattern.globalMatch(QString::fromUtf8(in.readAll()));
   while (matches.hasNext()) {
@@ -280,7 +280,7 @@ QSet<QString> CShotFiles::references(const QString& file) const {
 }
 
 QSet<QString> CShotFiles::allReferences() const {
-  // shots.py's page_references(): every page, because a page may use another page's picture.
+  // shots.py's page_references(): every page, because a page may use another page's image.
   QSet<QString> referenced;
   QDirIterator walk(repo.absoluteFilePath("doc/pages"), {"*.md"}, QDir::Files, QDirIterator::Subdirectories);
   while (walk.hasNext()) {
@@ -323,7 +323,7 @@ QStringList CShotFiles::shotsIn(const QString& scenario) const {
   return ids;
 }
 
-CShotFiles::row_t CShotFiles::picturesOf(const QString& id) const {
+CShotFiles::row_t CShotFiles::imagesOf(const QString& id) const {
   row_t row;
   row.id = id;
   row.changed = QFileInfo::exists(workImage(id));
@@ -344,7 +344,7 @@ QList<CShotFiles::row_t> CShotFiles::rows() const {
   const QJsonArray& shots = content["shots"].toArray();
   for (const QJsonValue& value : shots) {
     const QJsonObject& shot = value.toObject();
-    row_t row = picturesOf(shot["id"].toString());
+    row_t row = imagesOf(shot["id"].toString());
     row.scenario = shot["scenario"].toString();
     row.note = shot["note"].toString();
     // A rebound shot is reduced to its id and scenario and photographs nothing.
@@ -358,15 +358,15 @@ QList<CShotFiles::row_t> CShotFiles::rows() const {
   QStringList missing(own.begin(), own.end());
   missing.sort();
   for (const QString& id : std::as_const(missing)) {
-    // Another page's picture belongs to that page's shot file.
+    // Another page's image belongs to that page's shot file.
     if (known.contains(id) || !isOwn(id)) {
       continue;
     }
-    row_t row = picturesOf(id);
-    // A picture without a shot was drawn by hand or taken before the shot file.
+    row_t row = imagesOf(id);
+    // An image without a shot was drawn by hand or taken before the shot file.
     row.state = row.imagePath.isEmpty() ? eMissing : eUnregistered;
-    row.note = row.imagePath.isEmpty() ? "The page uses it; there is neither a shot nor a picture."
-                                       : "The page uses it and the picture exists, but no shot takes it.";
+    row.note = row.imagePath.isEmpty() ? "The page uses it; there is neither a shot nor an image."
+                                       : "The page uses it and the image exists, but no shot takes it.";
     rows << row;
   }
   return rows;
@@ -459,7 +459,7 @@ QString CShotFiles::renameScenario(const QString& from, const QString& to) {
     before["scenario"] = to;
     if (const QString& error = writeWhole(path, QJsonDocument(before).toJson(QJsonDocument::Indented));
         !error.isEmpty()) {
-      return QString("Renamed, but %1. Revert on that picture would bring back %2.").arg(error, from);
+      return QString("Renamed, but %1. Revert on that image would bring back %2.").arg(error, from);
     }
   }
   return QString();
@@ -492,7 +492,7 @@ QString CShotFiles::deleteScenario(const QString& name) {
   if (const QString& error = writeShotFile(content); !error.isEmpty()) {
     return error;
   }
-  removePictures(affected);
+  removeImages(affected);
   QFile::remove(scenarioConfig(name));
   return QString();
 }
@@ -524,7 +524,7 @@ QString CShotFiles::rebindShot(const QString& id, const QString& scenario) {
   if (const QString& error = writeShotFile(content); !error.isEmpty()) {
     return error;
   }
-  removePictures({id});
+  removeImages({id});
   return QString();
 }
 
@@ -546,7 +546,7 @@ QString CShotFiles::removeShots(const QStringList& ids) {
   if (const QString& error = writeShotFile(content); !error.isEmpty()) {
     return error;
   }
-  removePictures(ids);
+  removeImages(ids);
   return QString();
 }
 
@@ -686,7 +686,7 @@ QString CShotFiles::storeShot(const QJsonObject& shot) {
   QJsonArray shots = content["shots"].toArray();
   const qsizetype index = indexOf(shots, id);
 
-  // Only the first since publish or revert: that is the entry the published picture belongs to.
+  // Only the first since publish or revert: that is the entry the published image belongs to.
   if (!QFileInfo::exists(workEntry(id))) {
     if (!QDir().mkpath(QFileInfo(workEntry(id)).absolutePath())) {
       return QString("%1 cannot be created.").arg(QFileInfo(workEntry(id)).absolutePath());

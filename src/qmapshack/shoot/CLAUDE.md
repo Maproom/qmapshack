@@ -1,16 +1,9 @@
-# Documentation mode (QMS-1217)
+# Documentation mode
 
 Subsystem notes; the project rules are in the root `CLAUDE.md`. `doc/tools/shots.py` is part of it.
+The design and the file layout are `DESIGN.md` in this directory.
 
-`.notes/QMS-1217-documentation-images.md` is the one plan: §1-§8 design, §9 evidence (measured, do
-not re-derive), §10 what the demo does not do, §11 the sub-tickets.
-
-**One branch, one commit per sub-ticket**: each sub-ticket is a commit on `QMS-1217` (based on `dev`),
-never a branch of its own. A fix goes into the commit that introduced the code.
-
-The file layout is plan §1.
-
-The writer's guide is `doc/WRITING.md`: short, facts only, updated with every change a writer sees.
+The writer's guide is `doc/WRITING_DOCS.md`: short, facts only, updated with every change a writer sees.
 
 ## Build and entry
 
@@ -40,8 +33,8 @@ The writer's guide is `doc/WRITING.md`: short, facts only, updated with every ch
 
 - **Render at dpr 1, never `QWidget::grab()`**, which uses the widget's ratio. A canvas stays the
   exception: `IDrawContext` sizes its buffers by the widget's ratio, so a HiDPI map is resampled.
-- **An opaque picture carries no alpha**: `renderAtDpr1()` converts to `RGB32` when no pixel uses
-  it. Picture weight ships in every user's `.qch`.
+- **An opaque image carries no alpha**: `renderAtDpr1()` converts to `RGB32` when no pixel uses
+  it. Image weight ships in every user's installed help.
 - **Resize a window, never a widget inside one**: a child resized to its hint stays that size and
   the parent's layout is not re-applied.
 - **A map is complete when `CCanvas::isDrawComplete()` says so**: no redraw outstanding,
@@ -50,16 +43,16 @@ The writer's guide is `doc/WRITING.md`: short, facts only, updated with every ch
 - **`settleStable()` asks `isDrawComplete()` before it renders, never after**, or a draw finishing
   mid-render passes with the load indicator in it. It skips a canvas not `isVisibleTo(w)` and
   refuses one that is but not `isVisible()` (a hidden canvas never clears `needsRedraw`). It also
-  refuses a picture with any `failedTiles()`.
+  refuses an image with any `failedTiles()`.
 - **`processEvents(flags, ms)` does not wait**; wait with `CShotWait::wait()`/`waitFor()`, a `QEventLoop` quit by a
   `QTimer` without user input.
-- **A main window picture depends on its resize history**: a window's minimum silently wins, and
+- **A main window image depends on its resize history**: a window's minimum silently wins, and
   returning to a size can shift the right dock column by 1 px. Two runs on fresh configurations are
   byte-identical.
 - **No `MainWindow/geometry` maximizes the window 500 ms after construction**; `CShotEntry::run()`
   waits 1000 ms before the first shot.
 - **`-platform offscreen` takes no parameters**; resize the window instead of pinning a screen size.
-- **A picture shows nothing private to the writer.** `CShotPrivacy`, held only around `QWidget::render()` in `renderAtDpr1()`, rewrites
+- **An image shows nothing private to the writer.** `CShotPrivacy`, held only around `QWidget::render()` in `renderAtDpr1()`, rewrites
   fixture, scratch, cache and home paths in standard widgets' text to `/home/user/...` and puts it back after;
   `pinEnvironment()` pins `USER`/`USERNAME` to `user`. Text a delegate paints or a model view holds is not covered.
 - **Close the main window before leaving `exec()`**: destroying it while shown hides the docks after
@@ -84,7 +77,7 @@ The writer's guide is `doc/WRITING.md`: short, facts only, updated with every ch
 - **A context menu is photographed by its shot, not its scenario**: Ctrl+Shift+F9 on a menu a
   context request opened stores that request's step as the shot's `open`
   (`CShotRecorder::contextMenuStep()`, recording or not); `shootOne()` appends it to the steps and
-  takes the picture inside the menu's `exec()`. A row step reveals a row under a collapsed parent
+  takes the image inside the menu's `exec()`. A row step reveals a row under a collapsed parent
   (`reveal()`, `scrollTo()` expands it), so a menu taken on a row expanded by hand replays. A shot with
   `open` sizes the main window before the steps and renders the menu at its own size, like a scenario's. The
   highlighted entry is stored as `active` (the action's `objectName`, searched in `menu->actions()`:
@@ -92,7 +85,7 @@ The writer's guide is `doc/WRITING.md`: short, facts only, updated with every ch
 - **A canvas step waits for `isDrawComplete()` first** (`CCanvasHandler::settle()`): items' pixels
   are updated by the draw, so a `hit` or click right after a wheel zoom finds nothing.
 - **A `set` goes through `driveProperty()`**, which checks `indexOfProperty()` (an undeclared name
-  becomes a dynamic property) and reads the value back. It is put back after the picture, newest
+  becomes a dynamic property) and reads the value back. It is put back after the image, newest
   first, also on failure.
 - **`addressOf()` returns `std::optional`**: empty string is the main window, nothing is outside it.
   `CCanvas::zoom()` clamps, so `applyView()` reads the view back. A view is centre plus zoom level,
@@ -164,7 +157,7 @@ The writer's guide is `doc/WRITING.md`: short, facts only, updated with every ch
   123; 124 is a step that never returned, `CShotReplay::kDeadlineExitCode`) and whether
   `<id>.png` came out in its render folder (`doc/shots/_cache/render-*`); only one that did replaces
   `<out>/<id>.png`. `-v` adds `-d`: `qDebug` lines, including one per input frame.
-- **`selftest`** (`--shoot-selftest`, `CShotSelfTest`) takes no pictures: it drives the app through
+- **`selftest`** (`--shoot-selftest`, `CShotSelfTest`) takes no images: it drives the app through
   `CShotSynth`, compares the recorded steps, replays them and compares the state. Exit code = failed
   cases. A case goes into its group's `check…(CHarness&)`; a `case_t` field off its default is
   named (`.closesMenus = true`). A `shoot:` warning a case does not name in `warns` fails it; `expect`
@@ -253,7 +246,7 @@ The writer's guide is `doc/WRITING.md`: short, facts only, updated with every ch
   `DeferredDelete`.
 - **Steps start only once the start state's map is drawn** (`settleStable()`): during a redraw
   `CDemDraw::getElevationAt()` answers `NOFLOAT`.
-- **The picture is the replay's last step**: a dialog a step opened is still inside its `exec()`.
+- **The image is the replay's last step**: a dialog a step opened is still inside its `exec()`.
   The popups and modal dialogs the steps opened are closed after it, or the loops below cannot
   return; what was up before `perform()` stays (`closeAbove()`), so a shot's `open` menu closes and
   the scenario's dialog does not.
@@ -262,7 +255,7 @@ The writer's guide is `doc/WRITING.md`: short, facts only, updated with every ch
   enough: `CShotSynth::mouse()` on a menu bar delivers queued steps at the same loop level.
 - **The deadline ends the process** (`std::_Exit(kDeadlineExitCode)`): a step that never returns
   keeps every loop below it from returning. It is restarted as each step starts and before the
-  picture, and `keepAlive()` restarts every running one per shot; the report names the innermost
+  image, and `keepAlive()` restarts every running one per shot; the report names the innermost
   step.
 - **`settle()` ends every finite running animation**; animations run on wall time.
 
@@ -279,7 +272,7 @@ it belongs to is the bug this subsystem invites:
   `shots.py` writes why a replay failed; the launcher shows it in a dialog. Standard output is
   forwarded to the console.
 - **`CShotFiles`** is one page on disk and owns every file rule: names, rename with rollback (the
-  scenario's `.ini` moves too), pictures deleted only after the shot file is committed
+  scenario's `.ini` moves too), images deleted only after the shot file is committed
   (`QSaveFile`). The launcher only asks the question.
 - **Two processes.** `shots.py take <page>` starts the launcher (`--doc <repo> --doc-page <page>
   --doc-python`), which owns the panel and the files and never renders. Each pick starts a new state
@@ -294,7 +287,7 @@ it belongs to is the bug this subsystem invites:
   answers every verb but `select` with a `status` line. Without a listening channel no state is
   started.
 - **Lifetime:** state killed → the panel stays and says so; state window closed → the session ends
-  once `mayClose()` agrees, which asks about the page's unpublished pictures as closing the panel does;
+  once `mayClose()` agrees, which asks about the page's unpublished images as closing the panel does;
   launcher killed → the state quits on `disconnected`. SIGTERM only closes the main window
   (`CAppSetupLinux::closeOnSIGTERM`), so the launcher and `CShotDocMode` filter `QEvent::Close` on
   it. The state ends through `CShotDocMode::leave()`, which falls back to `std::_Exit(0)` after 2 s.
@@ -309,7 +302,7 @@ it belongs to is the bug this subsystem invites:
   `_work/<id>.shot.json` (`{}` for a new shot). A revert entry that does not parse reverts nothing.
 - **A shot file with `shots` not a list or `scenarios` not an object is refused** like one that is
   no JSON: read as empty, the next write would drop it.
-- **Deleting a scenario or rebinding a shot reduces the shot to its `id` and deletes its pictures.**
+- **Deleting a scenario or rebinding a shot reduces the shot to its `id` and deletes its images.**
 - **A shot id or scenario name that leaves its directory has no path** (`CShotFiles::staysInside()`);
   `shots.py`'s `stays_inside()` is the same rule — change both.
 - **Scenario names are file names and arguments**: no `/ \ : * ? " < > |`, no leading `-`, no spaces
@@ -317,7 +310,7 @@ it belongs to is the bug this subsystem invites:
   in case.
 - **A page is a file directly in `doc/pages`** and lists and rebinds only its own ids
   (`<page>/<name>`).
-- **Picture references need `QRegularExpression::UseUnicodePropertiesOption`**: without it Qt's `\w`
+- **Image references need `QRegularExpression::UseUnicodePropertiesOption`**: without it Qt's `\w`
   is ASCII.
 - **A `QMessageBox` meant to have no button gets `setStandardButtons(NoButton)` before its first
   `show()`**: otherwise it adds an OK button as its escape button, and removing it later crashes on
@@ -335,8 +328,8 @@ it belongs to is the bug this subsystem invites:
 ## The state process (`CShotDocMode`)
 
 - **Every writer works at one window size** (`kWindowSize`, 1200x800, `setFixedSize()` after the
-  geometry): recording, trial and pictures happen at it, so a scenario's map positions land on every
-  machine. `windowProblem()` refuses recording and pictures when the screen has no room for it or the
+  geometry): recording, trial and images happen at it, so a scenario's map positions land on every
+  machine. `windowProblem()` refuses recording and images when the screen has no room for it or the
   window is not at it, and says so in the writer's words.
 - **A replay failure names the action and why, in the writer's words**: `fail(why, step)` writes
   "Action N of M in the recording, '<step described>', did not replay: <why>." No class names.
@@ -360,7 +353,7 @@ it belongs to is the bug this subsystem invites:
 - **F9 in a scenario takes only a window its actions leave open** (`scenarioWindows`, noted after
   the setup and after a trial): the scenario's replay closes the modal dialogs it opened, so one on
   screen was opened by hand and a build could not take it.
-- **F9 refuses a picture whose shot names another scenario** than the running one; its row starts
+- **F9 refuses an image whose shot names another scenario** than the running one; its row starts
   that scenario.
 - **Stop is refused while a popup or modal dialog is up** (`CShotReplay::blocker()`): what opened it
   is recorded only once it closes, so the recording would lack it.
@@ -373,15 +366,41 @@ it belongs to is the bug this subsystem invites:
 - **Save config writes only `(base)`**, through `CMainWindow::saveConfig()` (what `~CMainWindow`
   writes): a scenario keeps its recorded configuration. `compose --from <ini>` names the source file.
 - **Take again is headless**: the launcher runs `shots.py -o doc/images/_work replay --only <id>`,
-  what a build does; a failure keeps the work picture.
-- **A picture is written from what F9 rendered only for a live part.** An exposed dialog parented to
+  what a build does; a failure keeps the work image.
+- **An image is written from what F9 rendered only for a live part.** An exposed dialog parented to
   the main window is in that render too, and its shot says `exposure`, which the build renders from.
-- **A picture just taken waits in `doc/shots/_cache/pending/` until Keep** (`keepShot()` points the
+- **An image just taken waits in `doc/shots/_cache/pending/` until Keep** (`keepShot()` points the
   writer there): a state that ends with the question up leaves `_work` as it was. Keep moves it into
-  `_work`, then stores the entry; a failed store puts the replaced work picture back.
+  `_work`, then stores the entry; a failed store puts the replaced work image back.
 - **Publishing on close is the page's alone** (`page + "/*"`), as Publ. All is; another page's work
-  pictures wait for that page's session.
+  images wait for that page's session.
 - **Settings drift is what changed since the state was set up** (`snapshotSetup()` after
   `slotSetUp()`, a trial and base Save config), compared as INI text: `QSettings` reads a one-entry
   list back as `QString` from another process' file and as `QStringList` from its own write.
 - **`obey()` refuses launcher commands with a `status` while F9 or a region is in progress** (`busy`).
+
+## Left out on purpose
+
+- **Drag and drop is not recorded** (`CShotRecorder` warns on `Drop`): replaying it would mean driving
+  `QDrag::exec()`.
+- **One handler per value control**, not one over Qt's USER property: line edit, spin box, slider,
+  combo box and date edit replay differently (typing vs value, share of range), so a merge changes
+  replay semantics.
+- **`pinned_env()` does not pin fontconfig**; another `FONTCONFIG_FILE` changes the images.
+
+## Testing the panel live
+
+Never on the writer's desktop:
+
+```sh
+Xephyr :5 -screen 1700x1050 -ac -br -noreset &     # nested display
+DISPLAY=:5 kwin_x11 &                              # without --replace
+cp -a doc <scratch>/repo/                          # scratch copy, the checkout stays clean
+cd <scratch>/repo && DISPLAY=:5 python3 doc/tools/shots.py \
+    --binary ~/projects/qmapshack/build/bin/qmapshack -v take test > session.log 2>&1
+```
+
+Drive with `DISPLAY=:5 xdotool` (it types `-` as `/` there; never `windowclose`, which destroys the
+window without a close event); capture a window with `import -display :5 -window <id>` (`xwd -root`
+misses dialogs under kwin in Xephyr). Kill only the launcher by pid (`ps` args without
+`--doc-scenario`). Close the Xephyr windows afterwards.

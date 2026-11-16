@@ -52,7 +52,7 @@ class CShotWriter {
   /**
      @brief Render each of @p parts at its current size and dpr 1, waiting for the maps once per window.
 
-     @return a picture per part, a null one for a part whose map is incomplete
+     @return an image per part, a null one for a part whose map is incomplete
    */
   static QHash<const QWidget*, QImage> renderAll(const QList<QWidget*>& parts);
 

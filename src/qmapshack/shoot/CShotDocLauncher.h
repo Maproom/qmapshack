@@ -79,7 +79,7 @@ class CShotDocLauncher : public QObject {
   void command(const QString& line);
   /** @brief Send @p line to the running state if there is one, quietly: housekeeping, not an action. */
   void notify(const QString& line);
-  /** @brief Tell the state the selected picture; quiet when there is none. */
+  /** @brief Tell the state the selected image; quiet when there is none. */
   void sendSelection();
 
   /** @brief Set the panel's busy box and recording mode from what runs. */
@@ -121,14 +121,14 @@ class CShotDocLauncher : public QObject {
 
   /** @brief Take @p id again headless, into `doc/images/_work/`, the way a build renders it. */
   void retakeShot(const QString& id);
-  /** @brief `shots.py replay` of this page into `_work`: every picture taken again, to compare and publish. */
+  /** @brief `shots.py replay` of this page into `_work`: every image taken again, to compare and publish. */
   void retakePage();
   /**
      @brief `shots.py publish`; with @p thenEnd the session ends once it succeeded.
 
-     @param only  the ids to publish as a glob, empty for every picture taken again
+     @param only  the ids to publish as a glob, empty for every image taken again
    */
-  void publishPictures(bool thenEnd, const QString& only = QString());
+  void publishImages(bool thenEnd, const QString& only = QString());
   /** @brief Watch the page and its shot file, so an edit made outside shows in the panel */
   void watchPage();
   /**
@@ -139,14 +139,14 @@ class CShotDocLauncher : public QObject {
   bool runShots(QPointer<CShotsJob>& slot, const QStringList& args,
                 const std::function<void(bool, const QString&)>& done);
 
-  /** @brief Ask before closing over unpublished pictures: Publish, No, Cancel; refuse only while publishing. */
+  /** @brief Ask before closing over unpublished images: Publish, No, Cancel; refuse only while publishing. */
   bool mayClose();
 
   QDir repo;
   QString page;
   CShotFiles files;
 
-  /** The writer's selection; a new picture is taken in `selectedScenario`. */
+  /** The writer's selection; a new image is taken in `selectedScenario`. */
   QString selectedScenario;
   QString selectedShot;
   bool ending = false;

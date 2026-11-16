@@ -39,7 +39,7 @@ namespace {
 constexpr qint32 kPollMs = 250;
 constexpr qint32 kTimeoutMs = 20000;
 
-/** @return the maps in the picture of @p w: @p w itself or one visible to it; a page that is not current is not */
+/** @return the maps in the image of @p w: @p w itself or one visible to it; a page that is not current is not */
 QList<CCanvas*> canvasesIn(QWidget* w) {
   QList<CCanvas*> canvases;
   if (CCanvas* canvas = qobject_cast<CCanvas*>(w); nullptr != canvas) {
@@ -56,7 +56,7 @@ QList<CCanvas*> canvasesIn(QWidget* w) {
 
 bool holdsCanvas(QWidget* w) { return !canvasesIn(w).isEmpty(); }
 
-/** @return true when no map in the picture of @p w is drawing */
+/** @return true when no map in the image of @p w is drawing */
 bool drawComplete(QWidget* w) {
   const QList<CCanvas*>& canvases = canvasesIn(w);
   return std::all_of(canvases.begin(), canvases.end(), [](const CCanvas* canvas) { return canvas->isDrawComplete(); });
@@ -91,7 +91,7 @@ bool CShotWriter::settleStable(QWidget* w) {
   for (const CCanvas* canvas : canvases) {
     // A hidden canvas never paints, so its redraw never completes.
     if (!canvas->isVisible()) {
-      qWarning() << "shoot: a map in the picture is hidden and paints nothing";
+      qWarning() << "shoot: a map in the image is hidden and paints nothing";
       return false;
     }
   }
@@ -118,7 +118,7 @@ bool CShotWriter::settleStable(QWidget* w) {
         failed += canvas->failedTiles();
       }
       if (0 != failed) {
-        qWarning() << "shoot:" << failed << "tiles in the picture are holes; the map is incomplete";
+        qWarning() << "shoot:" << failed << "tiles in the image are holes; the map is incomplete";
         return false;
       }
       return true;
@@ -147,7 +147,7 @@ QImage CShotWriter::render(QWidget* w, const QSize& size) {
 QHash<const QWidget*, QImage> CShotWriter::renderAll(const QList<QWidget*>& parts) {
   // settleStable() takes two passes of its own; a window's maps are those of every part in it.
   QHash<const QWidget*, bool> mapsComplete;
-  QHash<const QWidget*, QImage> pictures;
+  QHash<const QWidget*, QImage> images;
   for (QWidget* w : parts) {
     settle(w);
     if (holdsCanvas(w)) {
@@ -157,18 +157,18 @@ QHash<const QWidget*, QImage> CShotWriter::renderAll(const QList<QWidget*>& part
       }
       // Rendering a part paints its map, which may start a redraw the next part would catch half done.
       if (!mapsComplete.value(window) || (!drawComplete(w) && !settleStable(w))) {
-        pictures.insert(w, QImage());
+        images.insert(w, QImage());
         continue;
       }
     }
-    pictures.insert(w, renderAtDpr1(w, true));
+    images.insert(w, renderAtDpr1(w, true));
   }
-  return pictures;
+  return images;
 }
 
 QString CShotWriter::write(const QImage& image, const QString& id) const {
   if (image.isNull()) {
-    qWarning() << "shoot:" << id << "has no picture";
+    qWarning() << "shoot:" << id << "has no image";
     return QString();
   }
 
@@ -177,7 +177,7 @@ QString CShotWriter::write(const QImage& image, const QString& id) const {
     return QString();
   }
   const QString& path = QDir(outDir).absoluteFilePath(id + ".png");
-  // QSaveFile: publish may move the file at any moment and must never find half a picture.
+  // QSaveFile: publish may move the file at any moment and must never find half an image.
   QSaveFile out(path);
   // Twice: publish removes a directory it emptied, possibly between mkpath() and open().
   bool opened = false;
@@ -204,7 +204,7 @@ QImage CShotWriter::renderAtDpr1(QWidget* w, bool hidePrivate) {
     w->render(&image);
   }
 
-  // Drop the alpha channel of an opaque picture.
+  // Drop the alpha channel of an opaque image.
   for (qint32 y = 0; y < image.height(); y++) {
     const QRgb* line = reinterpret_cast<const QRgb*>(image.constScanLine(y));
     for (qint32 x = 0; x < image.width(); x++) {

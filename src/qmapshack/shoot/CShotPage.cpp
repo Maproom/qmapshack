@@ -162,8 +162,8 @@ bool sizeMainWindow(QWidget* main, const QSize& size, const QString& id) {
 }
 
 /** @return what the shot photographs, nullptr when it is not there; a built exposure is handed to @p exposure */
-QWidget* pictureTarget(const QJsonObject& shot, const QString& id, CShotContext& ctx, QWidget* main,
-                       std::unique_ptr<QWidget>& exposure) {
+QWidget* imageTarget(const QJsonObject& shot, const QString& id, CShotContext& ctx, QWidget* main,
+                     std::unique_ptr<QWidget>& exposure) {
   if (shot.contains("exposure")) {
     const QString& name = shot["exposure"].toString();
     exposure.reset(CShotRegistry::self().buildExposure(name, ctx, CMainWindow::getBestWidgetForParent()));
@@ -176,7 +176,7 @@ QWidget* pictureTarget(const QJsonObject& shot, const QString& id, CShotContext&
   QWidget* widget = address.isEmpty() ? topmost(main) : CShotAddress::resolve(main, address);
   if (nullptr == widget) {
     qWarning().noquote() << "shoot:" << id
-                         << "- what it photographs is not on screen. Take the picture again "
+                         << "- what it photographs is not on screen. Take the image again "
                             "in the panel.";
     qDebug().noquote() << "shoot:" << id << "photographs the widget at" << address;
   }
@@ -201,7 +201,7 @@ bool highlightEntry(QWidget* widget, const QString& active, const QString& id) {
   return true;
 }
 
-/** A value a shot's `set` replaced, put back after the picture so shots stay independent. */
+/** A value a shot's `set` replaced, put back after the image so shots stay independent. */
 struct restore_t {
   QPointer<QObject> target;
   QString property;
@@ -374,7 +374,7 @@ bool sizeForSteps(const QJsonObject& shot, QWidget* main) {
    @param stepped  steps ran for it: the main window is sized already and a window a step opened keeps its own size
    @return the failures
  */
-qint32 takePicture(const QJsonObject& shot, CShotContext& ctx, QWidget* main, bool stepped) {
+qint32 takeImage(const QJsonObject& shot, CShotContext& ctx, QWidget* main, bool stepped) {
   const QString& id = shot["id"].toString();
   QSize size;
   readSize(shot, size);
@@ -383,7 +383,7 @@ qint32 takePicture(const QJsonObject& shot, CShotContext& ctx, QWidget* main, bo
 
   // Outlives the restore of `set` values below.
   std::unique_ptr<QWidget> exposure;
-  QWidget* widget = pictureTarget(shot, id, ctx, main, exposure);
+  QWidget* widget = imageTarget(shot, id, ctx, main, exposure);
   if (nullptr == widget) {
     return 1;
   }
@@ -397,7 +397,7 @@ qint32 takePicture(const QJsonObject& shot, CShotContext& ctx, QWidget* main, bo
   if (!window.isEmpty() && window != className) {
     qWarning().noquote() << QString(
                                 "shoot: %1 - the window it photographs did not open: %2 is on top, not %3. If a "
-                                "step failed above, that is why; else take the picture again in the panel.")
+                                "step failed above, that is why; else take the image again in the panel.")
                                 .arg(id, className, window);
     return 1;
   }
@@ -436,13 +436,13 @@ qint32 takePicture(const QJsonObject& shot, CShotContext& ctx, QWidget* main, bo
   return failed + restoreSet(restore, id);
 }
 
-/** @return the failures of @p shot's picture, inside the exec() of its context menu when it has an `open` step */
+/** @return the failures of @p shot's image, inside the exec() of its context menu when it has an `open` step */
 qint32 takeOpened(const QJsonObject& shot, CShotContext& ctx, QWidget* main) {
   if (!shot.contains("open")) {
-    return takePicture(shot, ctx, main, true);
+    return takeImage(shot, ctx, main, true);
   }
   // Closes only the menu: what the scenario opened stays up for the next shot.
-  return CShotReplay::perform(main, {shot["open"].toObject()}, [&]() { return takePicture(shot, ctx, main, true); });
+  return CShotReplay::perform(main, {shot["open"].toObject()}, [&]() { return takeImage(shot, ctx, main, true); });
 }
 
 /**
@@ -483,7 +483,7 @@ qint32 shootScenario(const QList<QJsonObject>& shots, CShotContext& ctx, const Q
   failures += CShotReplay::replay(steps, ctx, [&]() {
     qint32 failed = 0;
     for (const QJsonObject& shot : std::as_const(together)) {
-      // Each picture may wait as long as one alone.
+      // Each image may wait as long as one alone.
       CShotReplay::keepAlive();
       failed += takeOpened(shot, ctx, main);
     }
@@ -500,7 +500,7 @@ qint32 CShotPage::shootOne(const QJsonObject& shot, CShotContext& ctx, const QJs
   }
   const bool inScenario = shot.contains("scenario");
   const QString& scenario = shot["scenario"].toString();
-  // Steps run for the picture, measured against the main window's size like a scenario's.
+  // Steps run for the image, measured against the main window's size like a scenario's.
   const bool stepped = inScenario || shot.contains("open");
 
   QWidget* main = CMainWindow::isNull() ? nullptr : &CMainWindow::self();
@@ -508,7 +508,7 @@ qint32 CShotPage::shootOne(const QJsonObject& shot, CShotContext& ctx, const QJs
     return 1;
   }
 
-  // One path with or without a scenario: no steps take the picture at once. A live scenario is on screen already.
+  // One path with or without a scenario: no steps take the image at once. A live scenario is on screen already.
   const bool perform = inScenario && ctx.liveScenario() != scenario;
   QJsonArray steps = perform ? scenarios[scenario].toArray() : QJsonArray();
   // A context menu is taken inside the exec() its step runs.
@@ -516,7 +516,7 @@ qint32 CShotPage::shootOne(const QJsonObject& shot, CShotContext& ctx, const QJs
     steps.append(shot["open"]);
   }
   // Taken as the scenario's last step: a dialog a step opened is gone once replay() returns.
-  qint32 failures = CShotReplay::replay(steps, ctx, [&]() { return takePicture(shot, ctx, main, stepped); });
+  qint32 failures = CShotReplay::replay(steps, ctx, [&]() { return takeImage(shot, ctx, main, stepped); });
   // The next shot of this run must not start from what the scenario left.
   if (!steps.isEmpty()) {
     CShotReplay::clear(steps, ctx);

@@ -37,7 +37,7 @@ class CShotWriter;
 class IGisProject;
 class QWidget;
 
-/** @brief What a shot writes its pictures through, and the fixture it is taken against. */
+/** @brief What a shot writes its images through, and the fixture it is taken against. */
 class CShotContext {
  public:
   explicit CShotContext(const CShotWriter& writer);
@@ -45,13 +45,13 @@ class CShotContext {
   /**
      @brief Start shot @p id.
 
-     @param rect  the crop of every picture, invalid for none
+     @param rect  the crop of every image, invalid for none
    */
   void begin(const QString& id, const QRect& rect = QRect());
 
   /**
      @param size  a window's size, invalid for its sizeHint; ignored for a non-window widget
-     @return false when no picture was written
+     @return false when no image was written
    */
   bool shot(QWidget* w, const QSize& size = QSize());
 
@@ -85,8 +85,8 @@ class CShotContext {
   const QString& liveScenario() const { return live; }
 
  private:
-  /** @return false when the picture is refused and nothing was written */
-  bool emitPicture(QWidget* w, const QSize& size, const QString& stem) const;
+  /** @return false when the image is refused and nothing was written */
+  bool emitImage(QWidget* w, const QSize& size, const QString& stem) const;
 
   /** Keys, not pointers: a scenario step can delete an item, and the items are no QObjects. */
   struct fixture_t {

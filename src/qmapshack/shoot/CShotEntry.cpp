@@ -110,7 +110,7 @@ qint32 shoot(const CShotOptions::opts_t& opts) {
   CShotContext ctx(writer);
   qint32 failures = CShotFixture::load(ctx);
   if (0 != failures) {
-    // Every picture would fail for it and bury the reason.
+    // Every image would fail for it and bury the reason.
     qWarning() << "shoot: nothing is taken: the example data did not load";
   } else if (opts.shootSelfTest) {
     failures += CShotSelfTest::run(ctx);
@@ -282,7 +282,7 @@ namespace {
 void pinAppearance(const QString& colorScheme) {
   CQmsStyle::pinThemeIndependentHints();
 
-  // A picture must not depend on the platform's palette.
+  // An image must not depend on the platform's palette.
   const Qt::ColorScheme scheme = CUiTheme::colorSchemeFromName(colorScheme);
   if (Qt::ColorScheme::Unknown != scheme) {
     CUiTheme::pinColorScheme(scheme, true);

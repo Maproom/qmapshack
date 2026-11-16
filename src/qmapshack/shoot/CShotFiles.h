@@ -32,7 +32,7 @@
 #include <optional>
 
 /**
-   @brief One page's files in the checkout: the shot file, its scenarios' configurations, the pictures.
+   @brief One page's files in the checkout: the shot file, its scenarios' configurations, the images.
 
    Every rule about what an operation may change and what it takes with it lives here, so the panel only asks and
    calls. An operation returns an empty string on success, else what went wrong; a failed operation changes nothing.
@@ -46,23 +46,23 @@ class CShotFiles {
   static QString label(const QString& scenario) { return scenario.isEmpty() ? kBaseLabel : scenario; }
 
   enum state_e {
-    eTaken,        ///< referenced by the page, has a picture
-    eNoImage,      ///< referenced by the page, has a shot, no picture
+    eTaken,        ///< referenced by the page, has an image
+    eNoImage,      ///< referenced by the page, has a shot, no image
     eNotUsed,      ///< has a shot, no page references it
-    eMissing,      ///< referenced by the page, neither shot nor picture
-    eUnregistered  ///< referenced by the page, has a picture, no shot
+    eMissing,      ///< referenced by the page, neither shot nor image
+    eUnregistered  ///< referenced by the page, has an image, no shot
   };
 
-  /** One picture of the page as the panel lists it. */
+  /** One image of the page as the panel lists it. */
   struct row_t {
     QString id;
     QString scenario;  ///< empty is `(base)`
     QString note;
     state_e state = eTaken;
-    bool changed = false;     ///< a work picture waits to be published
+    bool changed = false;     ///< a work image waits to be published
     bool takeable = false;    ///< the shot names what to photograph
-    bool revertable = false;  ///< a work picture or the entry from before the take waits
-    QString imagePath;        ///< the work picture, else the published one; empty when there is none
+    bool revertable = false;  ///< a work image or the entry from before the take waits
+    QString imagePath;        ///< the work image, else the published one; empty when there is none
     QString publishedPath;    ///< empty when there is none
   };
 
@@ -119,7 +119,7 @@ class CShotFiles {
   QString scenarioConfig(const QString& scenario) const;
   QString publishedImage(const QString& id) const;
   QString workImage(const QString& id) const;
-  /** @return where a picture just taken waits for the writer's Keep: `doc/shots/_cache/pending/` */
+  /** @return where an image just taken waits for the writer's Keep: `doc/shots/_cache/pending/` */
   QString pendingDir() const;
   QString pendingImage(const QString& id) const;
   /** @return where storeShot() keeps @p id's entry from before it was taken again, until revert or publish */
@@ -130,7 +130,7 @@ class CShotFiles {
   /** @return the parked recording's settings: `doc/shots/_cache/<page>-trial.ini` */
   QString trialConfig() const;
 
-  /** @return true when `doc/images/_work/` holds a picture of this page */
+  /** @return true when `doc/images/_work/` holds an image of this page */
   bool hasUnpublishedImages() const;
 
   QStringList scenarioNames() const;
@@ -149,22 +149,22 @@ class CShotFiles {
   /** @return the ids of this page's shots no page under `doc/pages` references */
   QStringList unusedShots() const;
 
-  /** @return true when changing @p id's scenario throws away anything but `id` and `scenario`, or a picture */
+  /** @return true when changing @p id's scenario throws away anything but `id` and `scenario`, or an image */
   bool rebindLoses(const QString& id) const;
 
   /** @brief Rename a scenario: its configuration, then every reference in the shot file. */
   QString renameScenario(const QString& from, const QString& to);
 
-  /** @brief Delete a scenario; its shots are reduced to their `id` and lose their pictures and its configuration. */
+  /** @brief Delete a scenario; its shots are reduced to their `id` and lose their images and its configuration. */
   QString deleteScenario(const QString& name);
 
-  /** @brief Take own @p id in @p scenario (empty is `(base)`): reduced to `id` and `scenario`, pictures deleted. */
+  /** @brief Take own @p id in @p scenario (empty is `(base)`): reduced to `id` and `scenario`, images deleted. */
   QString rebindShot(const QString& id, const QString& scenario);
 
-  /** @brief Remove shots and their pictures; the scenarios stay. */
+  /** @brief Remove shots and their images; the scenarios stay. */
   QString removeShots(const QStringList& ids);
 
-  /** @brief Delete @p id's work picture and put back its entry from before it was taken again. */
+  /** @brief Delete @p id's work image and put back its entry from before it was taken again. */
   QString revertShot(const QString& id);
 
   /** @brief Write @p steps to trialFile(); trialConfig() is the caller's to write. */
@@ -187,12 +187,12 @@ class CShotFiles {
   QString storeShot(const QJsonObject& shot);
 
  private:
-  /** @return a row of @p id holding only where its pictures are */
-  row_t picturesOf(const QString& id) const;
+  /** @return a row of @p id holding only where its images are */
+  row_t imagesOf(const QString& id) const;
   QString readShotFile(QJsonObject& content) const;
   QString writeShotFile(const QJsonObject& content) const;
-  /** @brief Delete the published and the work picture of every id, and the work entry; shots.py unused does too. */
-  void removePictures(const QStringList& ids) const;
+  /** @brief Delete the published and the work image of every id, and the work entry; shots.py unused does too. */
+  void removeImages(const QStringList& ids) const;
   QSet<QString> references(const QString& file) const;
   QSet<QString> allReferences() const;
 

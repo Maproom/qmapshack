@@ -726,6 +726,10 @@ Loaded when files there are touched; read them before working on the subsystem f
 
 ## Open work
 
+### Documentation
+
+`.notes/documentation-plan.md`: generated HTML in `doc/html/` replaces `QMSHelp.qch`.
+
 Analysed designs live in `.notes/`, each wanting its own branch. De-freeze one by pointing at the
 file.
 

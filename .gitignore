@@ -3,6 +3,8 @@ CMakeLists.txt.user
 *build*
 .vscode
 __pycache__/
+# doc/tools/generate_html.py's tools.
+/.doc-venv/
 *.pyc
 CMakeUserPresets.json
 

@@ -166,9 +166,6 @@
             "widget": ""
         },
         {
-            "id": "test/units-dialog"
-        },
-        {
             "active": "actionEditDetails",
             "id": "test/menu-track",
             "open": {

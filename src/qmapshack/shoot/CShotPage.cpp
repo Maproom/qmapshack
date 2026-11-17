@@ -47,8 +47,8 @@
 #include "shoot/CShotWriter.h"
 
 namespace {
-const QSet<QString> kShotKeys = {"active",   "exposure", "id",   "note",   "open",  "rect",
-                                 "scenario", "set",      "size", "widget", "window"};
+const QSet<QString> kShotKeys = {"active", "exposure", "id",  "mark", "note",   "open",
+                                 "rect",   "scenario", "set", "size", "widget", "window"};
 
 /** Coordinates of two views closer than this are the same place [°]. */
 constexpr qreal kViewEpsilon = 1e-9;
@@ -424,11 +424,25 @@ qint32 takeImage(const QJsonObject& shot, CShotContext& ctx, QWidget* main, bool
     }
   }
 
+  // A mark is an address below the photographed widget, or an object with `widget`, `part`, `row` and `shape`.
+  QList<CShotContext::mark_t> marks;
+  for (const QJsonValue& value : shot["mark"].toArray()) {
+    const QJsonObject& object = value.isObject() ? value.toObject() : QJsonObject{{"widget", value.toString()}};
+    const QString& address = object["widget"].toString();
+    QWidget* mark = CShotAddress::resolve(widget, address);
+    if (nullptr == mark) {
+      qWarning() << "shoot:" << id << "marks" << address << "which is not on screen";
+      return 1;
+    }
+    marks << CShotContext::mark_t{mark, object["part"].toString(), object["row"].toString(),
+                                  object["shape"].toString()};
+  }
+
   QList<restore_t> restore;
   qint32 failed = driveSet(widget, shot["set"].toObject(), id, restore);
   if (0 == failed) {
     CShotWriter::settle(widget);
-    ctx.begin(id, rect);
+    ctx.begin(id, rect, marks);
     if (!ctx.shot(widget, widget->isWindow() ? renderSize : QSize())) {
       failed++;
     }

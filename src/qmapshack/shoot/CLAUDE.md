@@ -94,6 +94,14 @@ The writer's guide is `doc/WRITING_DOCS.md`: short, facts only, updated with eve
   `IMapList/CMapTreeWidget#0`). `sliderOpacity`/`label_3` exist in the workspace dock and in every
   map row, so the workspace slider is `IGisWorkspace/QSlider#0`. `key_` names are no addresses:
   `CCanvas::generateKey()` hashes the clock.
+- **A plain name in an address is `findChild()`, which may return a hidden widget**: with one map expanded,
+  `sliderOpacity` below the map tree named a hidden one, the visible one was `CMapPropSetup#1`. Where from is unchecked.
+- **Dock tab bars are `QMainWindowTabBar`**, direct children of the main window: `QMainWindowTabBar#n`, not `QTabBar`.
+- **A map tree row is addressed by its name**, the file's base name with `_` as a space (`CMapDraw.cpp:260`);
+  other item views take `row/…:column`.
+- **Marks (`mark`) are painted on the rendered image** in `CShotContext::emitImage()`, each
+  position read from the live widget at write time; a target not `isVisibleTo()` the photographed widget fails the
+  shot. `QSlider::initStyleOption()` is protected: `markArea()` reaches it through a derived struct's member pointer.
 - **`--only` is not a path glob**: `*` crosses `/`. Quote it.
 - **An exposure is built by `shootOne()` and deleted when the shot returns.** Its `TYPE` needs
   `Q_OBJECT` or `SHOT_EXPOSE` does not compile; the built widget is checked against

@@ -18,8 +18,15 @@
 
 #include "shoot/CShotContext.h"
 
+#include <QAbstractItemView>
 #include <QDebug>
 #include <QImage>
+#include <QPainter>
+#include <QSlider>
+#include <QStyle>
+#include <QStyleOptionSlider>
+#include <QTreeView>
+#include <QWidget>
 
 #include "CMainWindow.h"
 #include "gis/CGisListWks.h"
@@ -28,6 +35,7 @@
 #include "gis/rte/CGisItemRte.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
+#include "shoot/CShotAddress.h"
 #include "shoot/CShotWriter.h"
 
 namespace {
@@ -82,15 +90,60 @@ void CShotContext::setFixture(IGisProject* project, CGisItemTrk* trk, CGisItemWp
   fixture = {(nullptr == project) ? QString() : project->getKey(), keyOf(trk), keyOf(wpt), keyOf(rte), keyOf(area)};
 }
 
-void CShotContext::begin(const QString& id, const QRect& rect) {
+namespace {
+/** Reaches QSlider's protected initStyleOption(), which the style needs for the handle's geometry. */
+struct CSliderAccess : QSlider {
+  static void styleOption(const QSlider& slider, QStyleOptionSlider* option) {
+    void (QSlider::*init)(QStyleOptionSlider*) const = &CSliderAccess::initStyleOption;
+    (slider.*init)(option);
+  }
+};
+
+/** @return the area of @p mark in @p w's coordinates, an empty rect when the part is not there */
+QRect markArea(const CShotContext::mark_t& mark, QWidget* w) {
+  QWidget* widget = mark.widget;
+  if (mark.part.isEmpty()) {
+    return QRect(widget->mapTo(w, QPoint(0, 0)), widget->size());
+  }
+  if ("handle" == mark.part) {
+    const QSlider* slider = qobject_cast<const QSlider*>(widget);
+    if (nullptr == slider) {
+      return QRect();
+    }
+    QStyleOptionSlider option;
+    CSliderAccess::styleOption(*slider, &option);
+    const QRect handle = slider->style()->subControlRect(QStyle::CC_Slider, &option, QStyle::SC_SliderHandle, slider);
+    return handle.translated(slider->mapTo(w, QPoint(0, 0)));
+  }
+  if ("branch" == mark.part) {
+    const QAbstractItemView* view = CShotAddress::itemViewOf(widget);
+    const QTreeView* tree = qobject_cast<const QTreeView*>(view);
+    if (nullptr == tree) {
+      return QRect();
+    }
+    const QModelIndex& index = CShotAddress::resolveRowPath(*tree->model(), mark.row);
+    if (!index.isValid()) {
+      return QRect();
+    }
+    // The branch indicator sits in the indentation left of the row's first cell.
+    const QRect cell = tree->visualRect(index.siblingAtColumn(0));
+    const QRect branch(cell.left() - tree->indentation(), cell.top(), tree->indentation(), cell.height());
+    return branch.translated(tree->viewport()->mapTo(w, QPoint(0, 0)));
+  }
+  return QRect();
+}
+}  // namespace
+
+void CShotContext::begin(const QString& id, const QRect& rect, const QList<mark_t>& marks) {
   this->id = id;
   this->rect = rect;
+  this->marks = marks;
 }
 
 bool CShotContext::shot(QWidget* w, const QSize& size) { return emitImage(w, size, id); }
 
 bool CShotContext::emitImage(QWidget* w, const QSize& size, const QString& stem) const {
-  const QImage& image = CShotWriter::render(w, size);
+  QImage image = CShotWriter::render(w, size);
   if (image.isNull()) {
     qWarning() << "shoot:" << stem << "has no image";
     return false;
@@ -99,6 +152,35 @@ bool CShotContext::emitImage(QWidget* w, const QSize& size, const QString& stem)
   if (size.isValid() && image.size() != size) {
     qWarning() << "shoot:" << stem << "asks for" << size << "and the image is" << image.size();
     return false;
+  }
+  if (!marks.isEmpty()) {
+    // Geometry after render(): it resizes the window and re-applies the layout.
+    QPainter p(&image);
+    p.setRenderHint(QPainter::Antialiasing);
+    for (const mark_t& mark : marks) {
+      if (mark.widget.isNull() || (mark.widget != w && !w->isAncestorOf(mark.widget)) || !mark.widget->isVisibleTo(w)) {
+        qWarning() << "shoot:" << stem << "marks a widget that is not in the image";
+        return false;
+      }
+      const QRect area = markArea(mark, w);
+      qDebug() << "shoot:" << stem << "marks" << mark.widget->metaObject()->className() << mark.widget->objectName()
+               << mark.part << "at" << area << "visible" << mark.widget->isVisibleTo(w);
+      if (area.isEmpty()) {
+        qWarning() << "shoot:" << stem << "marks" << mark.part << mark.row << "which its widget does not have";
+        return false;
+      }
+      const QString& shape = mark.shape.isEmpty() ? (mark.part.isEmpty() ? "frame" : "disc") : mark.shape;
+      if ("disc" == shape) {
+        const qreal radius = qMax(14.0, qMax(area.width(), area.height()) / 2.0 + 6.0);
+        p.setPen(Qt::NoPen);
+        p.setBrush(QColor(255, 0, 0, 70));
+        p.drawEllipse(QRectF(area).center(), radius, radius);
+      } else {
+        p.setPen(QPen(QColor(255, 0, 0, 200), 3));
+        p.setBrush(Qt::NoBrush);
+        p.drawRoundedRect(QRectF(area).adjusted(1.5, 1.5, -1.5, -1.5), 4, 4);
+      }
+    }
   }
   if (!rect.isValid()) {
     return !writer.write(image, stem).isEmpty();

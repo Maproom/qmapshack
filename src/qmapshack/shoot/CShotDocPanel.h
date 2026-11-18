@@ -79,6 +79,10 @@ class CShotDocPanel : public QDialog {
    */
   void setBusy(bool on, const QString& what);
 
+  /** @brief The selected image's marks, one line each, and what each shows on screen. */
+  void setMarks(const QStringList& names);
+  void setMarkStatuses(const QStringList& statuses);
+
  signals:
   /** @brief An image's row was clicked; emitted queued, after the click is delivered. */
   void shotPicked(const QString& id);
@@ -102,6 +106,11 @@ class CShotDocPanel : public QDialog {
   void publishClicked();
   /** @brief After a close was accepted. */
   void closed();
+  /** @brief The marker Ctrl+Shift+F10 places: frame, disc, arrow, pointer, hand or resize; empty for none. */
+  void markerPicked(const QString& kind);
+  /** @brief Remove the selected image's mark at @p index. */
+  void removeMarkClicked(qint32 index);
+  void showMarksToggled(bool on);
 
  protected:
   /** @brief Escape does not close the panel. */
@@ -146,6 +155,10 @@ class CShotDocPanel : public QDialog {
   QLabel* fixture = nullptr;
   QLabel* status = nullptr;
   QLabel* preview = nullptr;
+  QListWidget* marks = nullptr;
+  QToolButton* removeMarkButton = nullptr;
+  QStringList markNames;
+  void showMarks(const QStringList& statuses);
 
   QStringList scenarioNames;
   QList<CShotFiles::row_t> entries;

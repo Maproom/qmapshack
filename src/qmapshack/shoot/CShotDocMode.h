@@ -36,6 +36,7 @@
 
 class CMainWindow;
 class CShotContext;
+class CShotMarker;
 class CShotRecorder;
 class CShotWriter;
 class QLocalSocket;
@@ -102,6 +103,8 @@ class CShotDocMode : public QObject {
   void send(const QString& line);
   /** @brief The launcher's status line. */
   void report(const QString& status);
+  /** @brief Ctrl+Shift+F10, here or in the panel: place the panel's marker on the selected image. */
+  void markAtPointer();
 
   /** @brief Replay the parked recording and store it under `trial` if it replays; reports how it went. */
   void runTrial();
@@ -182,6 +185,7 @@ class CShotDocMode : public QObject {
   std::unique_ptr<CShotWriter> writer;
   std::unique_ptr<CShotContext> ctx;
   CShotRecorder* recorder = nullptr;
+  CShotMarker* marker = nullptr;
   /** The name the running recording is parked under at Stop. */
   QString recordingName;
   /** The context menu shown last and the step that opens it; an image of it keeps the step. */

@@ -113,10 +113,13 @@ bool CShotContext::emitImage(QWidget* w, const QSize& size, const QString& stem)
       }
       placed << p;
     }
-    if (const QString& problem = CShotMarks::paint(image, placed, w, rect); !problem.isEmpty()) {
+    const auto window = [w]() { return CShotWriter::render(w->window(), w->window()->size()); };
+    QImage marked;
+    if (const QString& problem = CShotMarks::framed(image, w, rect, placed, window, marked); !problem.isEmpty()) {
       qWarning().noquote() << QString("shoot: %1: %2.").arg(stem, problem);
       return false;
     }
+    return !writer.write(marked, stem).isEmpty();
   }
   if (!rect.isValid()) {
     return !writer.write(image, stem).isEmpty();

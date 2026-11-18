@@ -29,6 +29,7 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QKeyEvent>
 #include <QLabel>
 #include <QLineEdit>
 #include <QLocalServer>
@@ -48,6 +49,7 @@
 #include "setup/CAppOpts.h"
 #include "setup/IAppSetup.h"
 #include "shoot/CShotDocPanel.h"
+#include "shoot/CShotMarks.h"
 #include "shoot/CShotPage.h"
 #include "shoot/CShotsJob.h"
 
@@ -136,6 +138,11 @@ void CShotDocLauncher::start() {
   connect(panel, &CShotDocPanel::reapClicked, this, [this]() { reapUnused(); });
   connect(panel, &CShotDocPanel::publishShotClicked, this, [this](const QString& id) { publishImages(false, id); });
   connect(panel, &CShotDocPanel::publishClicked, this, [this]() { publishImages(false, page + "/*"); });
+  connect(panel, &CShotDocPanel::markerPicked, this, [this](const QString& kind) { notify("marker " + kind); });
+  connect(panel, &CShotDocPanel::showMarksToggled, this,
+          [this](bool on) { notify(QString("marks-shown %1").arg(on ? 1 : 0)); });
+  connect(panel, &CShotDocPanel::removeMarkClicked, this, [this](qint32 index) { removeMark(index); });
+  qApp->installEventFilter(this);
   panel->setCloseRequestHandler([this]() { return mayClose(); });
   connect(panel, &CShotDocPanel::closed, this, [this]() {
     qDebug() << "doc: the panel was closed, the session ends";
@@ -217,6 +224,26 @@ bool CShotDocLauncher::eventFilter(QObject* watched, QEvent* event) {
     qDebug() << "doc: the launcher's main window was closed, the session ends";
     endSession();
   }
+  // Pressed while the panel has the keyboard: the application acts at the pointer all the same.
+  if (QEvent::KeyPress == event->type()) {
+    const QKeyEvent* key = static_cast<QKeyEvent*>(event);
+    // While a mark's target is chosen, Return takes it and Escape cancels, wherever they are pressed.
+    if (marking && Qt::NoModifier == key->modifiers()) {
+      if (Qt::Key_Return == key->key() || Qt::Key_Enter == key->key() || Qt::Key_Escape == key->key()) {
+        notify(Qt::Key_Escape == key->key() ? "mark-cancel" : "mark-confirm");
+        return true;
+      }
+    }
+    const Qt::KeyboardModifiers modifiers =
+        key->modifiers() & (Qt::ControlModifier | Qt::ShiftModifier | Qt::AltModifier | Qt::MetaModifier);
+    if ((Qt::ControlModifier | Qt::ShiftModifier) == modifiers &&
+        (Qt::Key_F9 == key->key() || Qt::Key_F10 == key->key())) {
+      if (!key->isAutoRepeat()) {
+        command(Qt::Key_F9 == key->key() ? "tag" : "mark");
+      }
+      return true;
+    }
+  }
   return QObject::eventFilter(watched, event);
 }
 
@@ -283,6 +310,16 @@ void CShotDocLauncher::onStateReady(const QString& text) {
 void CShotDocLauncher::onStateReport(const QString& what, const QString& rest) {
   if ("status" == what) {
     panel->setStatus(rest);
+  } else if ("mark-placed" == what) {
+    addMark(rest.section(' ', 0, 0), QJsonDocument::fromJson(rest.section(' ', 1).toUtf8()).object());
+  } else if ("marking" == what) {
+    marking = "1" == rest;
+  } else if ("mark-status" == what) {
+    QStringList statuses;
+    for (const QJsonValue& status : QJsonDocument::fromJson(rest.toUtf8()).array()) {
+      statuses << status.toString();
+    }
+    panel->setMarkStatuses(statuses);
   } else if ("tagged" == what) {
     selectedShot = rest;
     refreshPanel(QString("%1 taken.").arg(rest));
@@ -375,6 +412,43 @@ void CShotDocLauncher::notify(const QString& line) {
 
 void CShotDocLauncher::sendSelection() {
   notify(selectedShot.isEmpty() ? QString("select") : "select " + selectedShot);
+  const QJsonArray& marks = files.shot(selectedShot)["mark"].toArray();
+  notify("marks " + QString::fromUtf8(QJsonDocument(marks).toJson(QJsonDocument::Compact)));
+}
+
+void CShotDocLauncher::storeMarks(const QString& id, const QJsonArray& marks, const QString& done) {
+  QJsonObject shot = files.shot(id);
+  if (shot.isEmpty()) {
+    refreshPanel(QString("%1 has no shot; take it first, then mark it.").arg(id));
+    return;
+  }
+  if (marks.isEmpty()) {
+    shot.remove("mark");
+  } else {
+    shot["mark"] = marks;
+  }
+  if (const QString& error = files.storeShot(shot); !error.isEmpty()) {
+    reportFailure(error);
+    return;
+  }
+  refreshPanel(done);
+  sendSelection();
+}
+
+void CShotDocLauncher::addMark(const QString& id, const QJsonObject& mark) {
+  QJsonArray marks = files.shot(id)["mark"].toArray();
+  marks.append(mark);
+  storeMarks(id, marks, QString("%1 is marked: %2.").arg(id, mark["name"].toString()));
+}
+
+void CShotDocLauncher::removeMark(qint32 index) {
+  QJsonArray marks = files.shot(selectedShot)["mark"].toArray();
+  if (index < 0 || index >= marks.size()) {
+    return;
+  }
+  const QString& name = marks.at(index).toObject()["name"].toString();
+  marks.removeAt(index);
+  storeMarks(selectedShot, marks, QString("%1 is no longer marked: %2.").arg(selectedShot, name));
 }
 
 void CShotDocLauncher::updateBusy() {
@@ -861,6 +935,13 @@ void CShotDocLauncher::refreshPanel(const QString& status) {
   const QList<CShotFiles::row_t>& rows = files.rows();
   panel->setShots(rows);
   panel->setCurrentShot(selectedShot);
+  QStringList markNames;
+  QList<CShotMarks::mark_t> marks;
+  CShotMarks::parse(files.shot(selectedShot)["mark"].toArray(), marks);
+  for (const CShotMarks::mark_t& mark : std::as_const(marks)) {
+    markNames << CShotMarks::describe(mark);
+  }
+  panel->setMarks(markNames);
 
   // Shown before anything else: every list above reads as empty then.
   if (const QString& problem = files.shotFileProblem(); !problem.isEmpty()) {

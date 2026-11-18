@@ -24,9 +24,12 @@
 #include <QRect>
 #include <QString>
 #include <QStringList>
+#include <functional>
 
 class QImage;
 class QJsonArray;
+class QDockWidget;
+class QTabBar;
 class QWidget;
 
 /** @brief Marks on documentation images: as the shot file holds them, where they land, how they are drawn. */
@@ -35,9 +38,10 @@ namespace CShotMarks {
 struct mark_t {
   QString root;        /**< `main`, `menu`, `window` or `dock:<address>` */
   QString widget;      /**< address below the root; empty is the root */
-  QString part;        /**< empty, `handle`, `branch`, `title`, `action` or `splitter` */
-  QString row;         /**< the tree row of a `branch`, as CShotAddress::rowPathOf() */
+  QString part;        /**< empty, `handle`, `branch`, `title`, `action`, `tab`, `button` or `splitter` */
+  QString row;         /**< the tree row of a `branch` or `button`, as CShotAddress::rowPathOf() */
   QString action;      /**< the objectName of an `action` */
+  QString button;      /**< a row's `button`, named as a step names it */
   QStringList between; /**< the two addresses a `splitter` divides */
   QString shape; /**< `frame`, `disc`, `arrow` or `cursor`; empty is a disc for a knob, a tree arrow or a splitter, else
                     a frame */
@@ -73,8 +77,33 @@ QString place(const mark_t& mark, QWidget* shot, placed_t& out);
 QString paint(QImage& image, const QList<placed_t>& placed, const QWidget* w, const QRect& keep,
               QList<QRect>* drawn = nullptr);
 
+/** @return false when a disc on @p area would be cut apart by the hole its target leaves: a tab, a field */
+bool discFits(const QRect& area);
+
+/**
+   @brief @p image of @p w with @p placed drawn, cut to @p keep, invalid for all of it.
+
+   A part whose marks reach past it is cut from its window's image instead, with room for them.
+   @param windowImage  renders @p w's window; called only when the marks need that room
+   @return why it cannot be drawn, empty when @p out holds the image
+ */
+QString framed(const QImage& image, QWidget* w, const QRect& keep, const QList<placed_t>& placed,
+               const std::function<QImage()>& windowImage, QImage& out);
+
+/** @return the index of @p dock's tab in the main window's dock tab bar @p bar, -1 with @p bar null for none */
+qint32 dockTab(const QDockWidget* dock, const QTabBar*& bar);
+
+/** @return the docker of tab @p index of a main window's dock tab bar @p bar, nullptr for none */
+QDockWidget* dockOfTab(const QTabBar* bar, qint32 index);
+
 /** @return @p mark's name, or a description built from it */
 QString describe(const mark_t& mark);
+
+/** @return what @p placed draws, in @p w's coordinates, a frame drawn around its target */
+QRect extent(const QList<placed_t>& placed, const QWidget* w);
+
+/** @return the marker @p kind (frame, disc, arrow, pointer, hand, resize) drawn as it is drawn on an image */
+QImage icon(const QString& kind, qint32 side);
 
 /** @return @p tail turned to the nearest multiple of 45°, its length kept */
 QPoint snap(const QPoint& tail);

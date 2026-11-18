@@ -59,6 +59,7 @@
 #include <memory>
 #include <numeric>
 #include <optional>
+#include <type_traits>
 
 #include "CMainWindow.h"
 #include "canvas/CCanvas.h"
@@ -1864,6 +1865,22 @@ const QHash<const QMetaObject*, const IShotHandler*>& handlers() {
   }
   return byClass;
 }
+
+/** @brief Call @p f with @p view's delegate as the class that paints buttons into rows; false for any other */
+template <typename F>
+bool withRowDelegate(const QAbstractItemView* view, F&& f) {
+  const QAbstractItemDelegate* delegate = view->itemDelegate();
+  if (const CWksItemDelegate* wks = qobject_cast<const CWksItemDelegate*>(delegate); nullptr != wks) {
+    f(wks);
+  } else if (const CDBItemDelegate* db = qobject_cast<const CDBItemDelegate*>(delegate); nullptr != db) {
+    f(db);
+  } else if (const CMapItemDelegate* map = qobject_cast<const CMapItemDelegate*>(delegate); nullptr != map) {
+    f(map);
+  } else {
+    return false;
+  }
+  return true;
+}
 }  // namespace
 
 const IShotHandler* CShotHandlers::of(const QObject* object) {
@@ -2030,4 +2047,41 @@ QStringList CShotHandlers::unreplayed() {
 void CShotHandlers::setStepNumber(qsizetype number, qsizetype count) {
   stepNumber = number;
   stepCount = count;
+}
+
+QRect CShotHandlers::rowButtonRect(const QAbstractItemView* view, const QModelIndex& index, const QString& button,
+                                   QString& problem) {
+  QRect rect;
+  const bool painted = withRowDelegate(view, [&](const auto* delegate) {
+    using Button = typename std::remove_cvref_t<decltype(*delegate)>::button_e;
+    const Button which = rowButtonByName<Button>(button);
+    if (Button::eNone == which) {
+      problem = QString("its rows have no button %1").arg(button);
+      return;
+    }
+    rect = delegate->buttonRect(delegateOptionOf(view, index), index, which);
+    if (!rect.isValid()) {
+      problem = QString("the row does not show its button %1 now").arg(button);
+    }
+  });
+  if (!painted) {
+    problem = "the list shows no buttons in its rows";
+  }
+  return rect;
+}
+
+QString CShotHandlers::rowButtonAt(const QAbstractItemView* view, const QModelIndex& index, const QPoint& at) {
+  QString name;
+  withRowDelegate(view, [&](const auto* delegate) {
+    using Button = typename std::remove_cvref_t<decltype(*delegate)>::button_e;
+    const QStyleOptionViewItem& opt = delegateOptionOf(view, index);
+    const QMetaEnum meta = QMetaEnum::fromType<Button>();
+    for (qint32 i = 0; i < meta.keyCount() && name.isEmpty(); i++) {
+      const Button button = Button(meta.value(i));
+      if (Button::eNone != button && delegate->buttonRect(opt, index, button).contains(at)) {
+        name = rowButtonName(button);
+      }
+    }
+  });
+  return name;
 }

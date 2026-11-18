@@ -69,6 +69,7 @@
 #include "shoot/CShotAddress.h"
 #include "shoot/CShotContext.h"
 #include "shoot/CShotFixture.h"
+#include "shoot/CShotMarks.h"
 #include "shoot/CShotPage.h"
 #include "shoot/CShotRecorder.h"
 #include "shoot/CShotRegistry.h"
@@ -846,9 +847,27 @@ void CShotDocMode::tag() {
   QList<QWidget*> parts;
   QStringList labels;
   QHash<const QWidget*, QImage> images;
+  // The selected row's marks go with the image to whichever row it is taken for.
+  const QJsonArray& marks = wantedShot.isEmpty() ? QJsonArray() : files.shot(wantedShot)["mark"].toArray();
+  QList<CShotMarks::placed_t> placed;
   if (isPartOf(main, target)) {
     parts = livePartsAt(main, labels);
     images = CShotWriter::renderAll(parts);
+    // Placed now, while what they point at is on screen as rendered.
+    QList<CShotMarks::mark_t> parsed;
+    QString problem = CShotMarks::parse(marks, parsed);
+    for (const CShotMarks::mark_t& mark : std::as_const(parsed)) {
+      CShotMarks::placed_t p;
+      if (problem.isEmpty()) {
+        problem = CShotMarks::place(mark, target, p);
+        problem = problem.isEmpty() ? problem : CShotMarks::describe(mark) + ": " + problem;
+      }
+      placed << p;
+    }
+    if (!problem.isEmpty()) {
+      report(QString("The marks of %1 cannot be drawn: %2.").arg(wantedShot, problem));
+      return;
+    }
   }
 
   QString exposure;
@@ -907,11 +926,18 @@ void CShotDocMode::tag() {
     }
   }
 
+  if (!marks.isEmpty()) {
+    shot["mark"] = marks;
+  }
   keepShot(shot, [&]() {
     // Only a live part is written from what was rendered at the key press; a dialog parented to the main window is
     // in images too, and its shot says exposure.
     if (kind_e::eLive == kind && images.contains(target)) {
-      const QImage& image = images.value(target);
+      QImage image = images.value(target);
+      if (const QString& problem = CShotMarks::paint(image, placed, target, QRect()); !problem.isEmpty()) {
+        qWarning().noquote() << QString("shoot: %1: %2.").arg(id, problem);
+        return false;
+      }
       return !image.isNull() && !writer->write(image, id).isEmpty();
     }
     return 0 == CShotPage::shootOne(shot, *ctx, files.scenarios());

@@ -59,11 +59,12 @@ class CShotFiles {
     QString scenario;  ///< empty is `(base)`
     QString note;
     state_e state = eTaken;
-    bool changed = false;     ///< a work image waits to be published
-    bool takeable = false;    ///< the shot names what to photograph
-    bool revertable = false;  ///< a work image or the entry from before the take waits
-    QString imagePath;        ///< the work image, else the published one; empty when there is none
-    QString publishedPath;    ///< empty when there is none
+    bool changed = false;       ///< a work image waits to be published
+    bool takeable = false;      ///< the shot names what to photograph
+    bool revertable = false;    ///< a work image or the entry from before the take waits
+    bool marksChanged = false;  ///< its marks changed since its image was taken
+    QString imagePath;          ///< the work image, else the published one; empty when there is none
+    QString publishedPath;      ///< empty when there is none
   };
 
   CShotFiles(const QDir& repo, const QString& page);
@@ -145,6 +146,8 @@ class CShotFiles {
 
   /** @return the shot file's shots in order, then the page's own references without a shot, sorted */
   QList<row_t> rows() const;
+  /** @return the row of @p id, none when the page has no such image */
+  std::optional<row_t> row(const QString& id) const;
 
   /** @return the ids of this page's shots no page under `doc/pages` references */
   QStringList unusedShots() const;
@@ -186,10 +189,24 @@ class CShotFiles {
   /** @brief Store own @p shot, replacing the one with its id; the first replaced since publish is kept for revert. */
   QString storeShot(const QJsonObject& shot);
 
+  /** @return the marks placed on @p id before it has a shot; kept in marksFile() */
+  QJsonArray pendingMarks(const QString& id) const;
+  /** @brief Keep @p marks for @p id until its first image takes them; empty drops them. */
+  QString setPendingMarks(const QString& id, const QJsonArray& marks) const;
+  /** @return the ids whose marks changed since their image was taken */
+  QStringList marksChanged() const;
+  QString setMarksChanged(const QString& id, bool on) const;
+  /** @brief Forget pending marks and "marks changed" of ids that have neither a shot nor a page line. */
+  QString dropStaleMarks() const;
+
  private:
   /** @return a row of @p id holding only where its images are */
   row_t imagesOf(const QString& id) const;
   QString readShotFile(QJsonObject& content) const;
+  /** @return the launcher's own record of pending marks and changed ones: `doc/shots/_cache/<page>-marks.json` */
+  QString marksFile() const;
+  QJsonObject readMarksFile() const;
+  QString writeMarksFile(const QJsonObject& content) const;
   QString writeShotFile(const QJsonObject& content) const;
   /** @brief Delete the published and the work image of every id, and the work entry; shots.py unused does too. */
   void removeImages(const QStringList& ids) const;

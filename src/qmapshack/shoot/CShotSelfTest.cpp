@@ -74,6 +74,7 @@
 #include <functional>
 #include <memory>
 #include <optional>
+#include <tuple>
 
 #include "CMainWindow.h"
 #include "canvas/CCanvas.h"
@@ -2606,6 +2607,7 @@ void checkMarks(CHarness& h) {
   const QString& wksName = CShotAddress::addressOf(main, h.wks).value_or(QString());
   const QString& projectRow = CShotAddress::rowPathOf(h.wks->model()->index(0, 0));
   fillTabs(p);
+  p.tabs->widget(1)->setObjectName("probeTabTwo");
 
   struct probe_t {
     QString name;
@@ -2635,6 +2637,9 @@ void checkMarks(CHarness& h) {
        main},
       {"a frame on a tab widget page's tab",
        {{"root", "window"}, {"widget", "probeTabEdit"}, {"part", "tab"}},
+       p.window},
+      {"a frame on the tab of a page not shown",
+       {{"root", "window"}, {"widget", "probeTabTwo"}, {"part", "tab"}},
        p.window},
       {"a frame on a button in a workspace row",
        {{"widget", wksName}, {"part", "button"}, {"row", projectRow}, {"button", "visible"}},
@@ -2701,19 +2706,43 @@ void checkMarks(CHarness& h) {
             problem.contains("too big for a disc"), problem);
   }
 
+  // What a mark that cannot be placed says: its target is not on screen now, not there, or no fit for it.
+  {
+    QTreeWidgetItem* root = p.tree->topLevelItem(0);
+    const bool expanded = root->isExpanded();
+    root->setExpanded(false);
+    settle();
+    const QString& child = CShotAddress::rowPathOf(p.tree->model()->index(0, 0, p.tree->model()->index(0, 0)));
+    using found_e = CShotMarks::found_e;
+    const QList<std::tuple<QString, QJsonObject, found_e>> kinds = {
+        {"the arrow of a row under a closed parent is not on screen",
+         {{"root", "window"}, {"widget", "probeTree"}, {"part", "branch"}, {"row", child}},
+         found_e::eClosed},
+        {"a widget that is not there is not found",
+         {{"root", "window"}, {"widget", "probeNoSuchWidget"}},
+         found_e::eMissing},
+        {"a tab on a button does not fit",
+         {{"root", "window"}, {"widget", "probeButton"}, {"part", "tab"}},
+         found_e::eWrong},
+    };
+    for (const auto& [what, mark, wanted] : kinds) {
+      CShotMarks::placed_t placed;
+      const QString& problem = CShotMarks::place(markOf(mark), p.window, placed);
+      verdict("marks: " + what, !problem.isEmpty() && wanted == placed.found,
+              QString("kind %1: %2").arg(qint32(placed.found)).arg(problem));
+    }
+    root->setExpanded(expanded);
+    settle();
+    QList<CShotMarks::mark_t> parsed;
+    const QString& problem = CShotMarks::parse(QJsonArray{leftName}, parsed);
+    verdict("marks: a mark given as a plain string is refused", !problem.isEmpty() && parsed.isEmpty(), problem);
+  }
+
   // Pointing: the most specific candidate under the pointer is the docker's tab, the row's button.
   {
     const QDockWidget* front = left;
     const QTabBar* bar = nullptr;
-    qint32 tab = -1;
-    for (const QTabBar* candidate : main->findChildren<QTabBar*>(Qt::FindDirectChildrenOnly)) {
-      for (qint32 i = 0; i < candidate->count() && candidate->isVisible(); i++) {
-        if (candidate->tabData(i).value<quintptr>() == quintptr(front)) {
-          bar = candidate;
-          tab = i;
-        }
-      }
-    }
+    const qint32 tab = CShotMarks::dockTab(front, bar);
     const QModelIndex& projectIndex = h.wks->model()->index(0, 0);
     QString problem;
     const QRect& button = CShotHandlers::rowButtonRect(h.wks, projectIndex, "visible", problem);
@@ -2738,6 +2767,16 @@ void checkMarks(CHarness& h) {
       CShotMarks::placed_t placed;
       return CShotMarks::place(markOf(knobMark), p.window, placed).isEmpty() ? placed.area.center() : QPoint();
     };
+    // A tool button with Designer's placeholder text is named by its tooltip's first sentence.
+    const QString toolText = p.tool->text();
+    const QString toolTip = p.tool->toolTip();
+    p.tool->setText("...");
+    p.tool->setToolTip("Set an activity. Then more.");
+    const auto restoreTool = qScopeGuard([&p, toolText, toolTip]() {
+      p.tool->setText(toolText);
+      p.tool->setToolTip(toolTip);
+    });
+    const auto atTool = [&p]() { return p.tool->mapToGlobal(p.tool->rect().center()); };
     // A window a scenario opens: its shot names it by its class.
     const QJsonObject dialogShot{{"widget", QString()},
                                  {"window", QString::fromLatin1(p.window->metaObject()->className())}};
@@ -2754,6 +2793,13 @@ void checkMarks(CHarness& h) {
          "disc",
          atKnob,
          knobMark,
+         {},
+         dialogShot,
+         p.window},
+        {"pointing at a tool button with placeholder text names it by its tooltip",
+         "frame",
+         atTool,
+         {{"root", "window"}, {"widget", "probeTool"}, {"name", "Set an activity"}},
          {},
          dialogShot,
          p.window},
@@ -2799,7 +2845,7 @@ void checkMarks(CHarness& h) {
       QJsonObject placed;
       for (const QString& line : sent) {
         if (line.startsWith("mark-placed ")) {
-          placed = QJsonDocument::fromJson(line.section(' ', 2).toUtf8()).object();
+          placed = QJsonDocument::fromJson(line.section('\t', 1).toUtf8()).object();
         }
       }
       // A hint at the pointer, wrapped into short lines.
@@ -2881,10 +2927,14 @@ void checkMarks(CHarness& h) {
       {"scenarios", QJsonObject()},
       {"shots",
        QJsonArray{
-           QJsonObject{
-               {"id", "selftest/marked"}, {"size", size}, {"widget", QString()}, {"mark", QJsonArray{leftName}}},
-           QJsonObject{
-               {"id", "selftest/framed-part"}, {"size", size}, {"widget", leftName}, {"mark", QJsonArray{leftName}}},
+           QJsonObject{{"id", "selftest/marked"},
+                       {"size", size},
+                       {"widget", QString()},
+                       {"mark", QJsonArray{QJsonObject{{"widget", leftName}}}}},
+           QJsonObject{{"id", "selftest/framed-part"},
+                       {"size", size},
+                       {"widget", leftName},
+                       {"mark", QJsonArray{QJsonObject{{"widget", leftName}}}}},
            QJsonObject{{"id", "selftest/outside-part"},
                        {"size", size},
                        {"widget", leftName},
@@ -2893,7 +2943,7 @@ void checkMarks(CHarness& h) {
                        {"size", size},
                        {"widget", QString()},
                        {"rect", QJsonArray{0, 0, 10, 10}},
-                       {"mark", QJsonArray{leftName}}},
+                       {"mark", QJsonArray{QJsonObject{{"widget", leftName}}}}},
            QJsonObject{{"id", "selftest/drawn-past"},
                        {"size", size},
                        {"widget", QString()},

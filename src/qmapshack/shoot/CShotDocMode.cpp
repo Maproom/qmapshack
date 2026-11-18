@@ -660,9 +660,11 @@ void CShotDocMode::markAtPointer() {
     marker->refuse("Select the image the mark is for first.");
     return;
   }
-  if (files.shot(wantedShot).isEmpty()) {
-    marker->refuse(QString("Take %1 first; then mark it.").arg(wantedShot));
-    return;
+  for (const CShotFiles::row_t& row : files.rows()) {
+    if (row.id == wantedShot && CShotFiles::eUnregistered == row.state) {
+      marker->refuse(QString("%1 has an image but no shot; take it again before marking it.").arg(wantedShot));
+      return;
+    }
   }
   marker->markAtPointer(wantedShot);
 }
@@ -921,7 +923,8 @@ void CShotDocMode::tag() {
   QStringList labels;
   QHash<const QWidget*, QImage> images;
   // The selected row's marks go with the image to whichever row it is taken for.
-  const QJsonArray& marks = wantedShot.isEmpty() ? QJsonArray() : files.shot(wantedShot)["mark"].toArray();
+  // The launcher sent them: the entry's, or the pending ones of a row not taken yet.
+  const QJsonArray marks = wantedShot.isEmpty() ? QJsonArray() : marker->currentMarks();
   QList<CShotMarks::placed_t> placed;
   if (isPartOf(main, target)) {
     parts = livePartsAt(main, labels);

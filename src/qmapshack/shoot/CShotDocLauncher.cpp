@@ -321,6 +321,9 @@ void CShotDocLauncher::onStateReport(const QString& what, const QString& rest) {
     }
     panel->setMarkStatuses(statuses);
   } else if ("tagged" == what) {
+    // The selected row's marks went with the image; pending ones now live in its entry.
+    files.setPendingMarks(selectedShot, QJsonArray());
+    files.setMarksChanged(rest, false);
     selectedShot = rest;
     refreshPanel(QString("%1 taken.").arg(rest));
     sendSelection();
@@ -412,22 +415,39 @@ void CShotDocLauncher::notify(const QString& line) {
 
 void CShotDocLauncher::sendSelection() {
   notify(selectedShot.isEmpty() ? QString("select") : "select " + selectedShot);
-  const QJsonArray& marks = files.shot(selectedShot)["mark"].toArray();
-  notify("marks " + QString::fromUtf8(QJsonDocument(marks).toJson(QJsonDocument::Compact)));
+  notify("marks " + QString::fromUtf8(QJsonDocument(marksOf(selectedShot)).toJson(QJsonDocument::Compact)));
+}
+
+QJsonArray CShotDocLauncher::marksOf(const QString& id) const {
+  const QJsonObject& shot = files.shot(id);
+  return shot.isEmpty() ? files.pendingMarks(id) : shot["mark"].toArray();
 }
 
 void CShotDocLauncher::storeMarks(const QString& id, const QJsonArray& marks, const QString& done) {
   QJsonObject shot = files.shot(id);
+  QString error;
   if (shot.isEmpty()) {
-    refreshPanel(QString("%1 has no shot; take it first, then mark it.").arg(id));
-    return;
-  }
-  if (marks.isEmpty()) {
-    shot.remove("mark");
+    // Not taken yet: they wait for the first image.
+    error = files.setPendingMarks(id, marks);
   } else {
-    shot["mark"] = marks;
+    bool hadImage = false;
+    for (const CShotFiles::row_t& row : files.rows()) {
+      hadImage = hadImage || (row.id == id && !row.imagePath.isEmpty());
+    }
+    if (marks.isEmpty()) {
+      shot.remove("mark");
+    } else {
+      shot["mark"] = marks;
+    }
+    // storeShot() keeps the entry the published image was taken with, for Revert.
+    error = files.storeShot(shot);
+    // The image no longer shows them: one waiting goes, the published one stays until a new one is published.
+    if (error.isEmpty() && hadImage) {
+      QFile::remove(files.workImage(id));
+      error = files.setMarksChanged(id, true);
+    }
   }
-  if (const QString& error = files.storeShot(shot); !error.isEmpty()) {
+  if (!error.isEmpty()) {
     reportFailure(error);
     return;
   }
@@ -436,13 +456,13 @@ void CShotDocLauncher::storeMarks(const QString& id, const QJsonArray& marks, co
 }
 
 void CShotDocLauncher::addMark(const QString& id, const QJsonObject& mark) {
-  QJsonArray marks = files.shot(id)["mark"].toArray();
+  QJsonArray marks = marksOf(id);
   marks.append(mark);
   storeMarks(id, marks, QString("%1 is marked: %2.").arg(id, mark["name"].toString()));
 }
 
 void CShotDocLauncher::removeMark(qint32 index) {
-  QJsonArray marks = files.shot(selectedShot)["mark"].toArray();
+  QJsonArray marks = marksOf(selectedShot);
   if (index < 0 || index >= marks.size()) {
     return;
   }
@@ -687,8 +707,8 @@ void CShotDocLauncher::deleteScenario() {
   const QString& question = affected.isEmpty()
                                 ? QString("Delete the scenario %1?").arg(name)
                                 : QString(
-                                      "Delete the scenario %1?\n\nThese images are taken in it. They lose their image "
-                                      "and how they were taken, and have to be taken again:\n\n%2")
+                                      "Delete the scenario %1?\n\nThese images are taken in it. They lose their image, "
+                                      "how they were taken and their marks, and have to be taken again:\n\n%2")
                                       .arg(name, affected.join("\n"));
   if (QMessageBox::Yes !=
       QMessageBox::question(panel, "Delete scenario", question, QMessageBox::Yes | QMessageBox::No, QMessageBox::No)) {
@@ -697,6 +717,9 @@ void CShotDocLauncher::deleteScenario() {
   if (const QString& error = files.deleteScenario(name); !error.isEmpty()) {
     reportFailure(error);
     return;
+  }
+  for (const QString& id : affected) {
+    files.setMarksChanged(id, false);
   }
   if (selectedScenario == name) {
     selectedScenario.clear();
@@ -713,11 +736,16 @@ void CShotDocLauncher::rebindShot(const QString& id, const QString& scenario) {
   if (was == scenario) {
     return;
   }
-  if (files.rebindLoses(id) &&
-      QMessageBox::Yes != QMessageBox::question(panel, "Take it in another scenario",
-                                                QString("%1 is taken in %2. Its image and how it was taken are "
-                                                        "thrown away and it has to be taken again.\n\nGo on?")
-                                                    .arg(id, CShotFiles::label(was)),
+  // What it marks may not be there in the other scenario, or look different.
+  const bool marked = !marksOf(id).isEmpty();
+  const QString& lost = files.rebindLoses(id)
+                            ? QString(
+                                  "%1 is taken in %2. Its image and how it was taken are thrown away and it has "
+                                  "to be taken again.%3")
+                                  .arg(id, CShotFiles::label(was), marked ? " Its marks go too." : "")
+                            : QString("%1 loses its marks; place them again in the other scenario.").arg(id);
+  if ((files.rebindLoses(id) || marked) &&
+      QMessageBox::Yes != QMessageBox::question(panel, "Take it in another scenario", lost + "\n\nGo on?",
                                                 QMessageBox::Yes | QMessageBox::No, QMessageBox::No)) {
     // Puts the row's combo box back.
     refreshPanel(QString("%1 is still taken in %2.").arg(id, CShotFiles::label(was)));
@@ -727,6 +755,8 @@ void CShotDocLauncher::rebindShot(const QString& id, const QString& scenario) {
     reportFailure(error);
     return;
   }
+  files.setPendingMarks(id, QJsonArray());
+  files.setMarksChanged(id, false);
   // The shot is now what the scenario is selected for, and the application goes there.
   selectedShot = id;
   selectedScenario = scenario;
@@ -751,6 +781,7 @@ void CShotDocLauncher::reapUnused() {
     reportFailure(error);
     return;
   }
+  files.dropStaleMarks();
   refreshPanel(QString("Removed %1 unused.").arg(unused.size()));
 }
 
@@ -759,6 +790,9 @@ void CShotDocLauncher::revertShot(const QString& id) {
     refreshPanel(error);
     return;
   }
+  // The entry is back with the marks the published image shows.
+  files.setMarksChanged(id, false);
+  sendSelection();
   refreshPanel(QFileInfo::exists(files.publishedImage(id))
                    ? QString("%1 is back to the published image.").arg(id)
                    : QString("%1 has no image again; none is published.").arg(id));
@@ -795,6 +829,8 @@ void CShotDocLauncher::retakeShot(const QString& id) {
       runShots(replayJob, {"-o", repo.absoluteFilePath("doc/images/_work"), "replay", "--only", id},
                [this, id](bool ok, const QString& error) {
                  if (ok) {
+                   // Taken with its marks as they are now.
+                   files.setMarksChanged(id, false);
                    refreshPanel(QString("%1 was taken again; Publish puts it into the documentation.").arg(id));
                  } else {
                    reportFailure(QString("%1 was not taken again.\n\n%2").arg(id, error));
@@ -818,6 +854,9 @@ void CShotDocLauncher::retakePage() {
       runShots(replayJob, {"-o", repo.absoluteFilePath("doc/images/_work"), "replay", "--only", page + "/*"},
                [this](bool ok, const QString& error) {
                  if (ok) {
+                   for (const QString& id : files.marksChanged()) {
+                     files.setMarksChanged(id, false);
+                   }
                    refreshPanel(
                        QString("Every image of this page was taken again; compare them, revert what is not "
                                "better, then Publish all."));
@@ -895,6 +934,18 @@ bool CShotDocLauncher::mayClose() {
   if (!publishJob.isNull()) {
     return false;
   }
+  // No image waits for these, so the question below would not name them.
+  if (const QStringList& changed = files.marksChanged(); !changed.isEmpty()) {
+    const QString& text = (1 == changed.size())
+                              ? QString("%1 needs taking again because its marks changed.").arg(changed.first())
+                              : QString("%1 images need taking again because their marks changed:\n\n%2")
+                                    .arg(changed.size())
+                                    .arg(changed.join("\n"));
+    if (QMessageBox::Yes != QMessageBox::question(panel, "Marks changed", text + "\n\nClose anyway?",
+                                                  QMessageBox::Yes | QMessageBox::Cancel, QMessageBox::Cancel)) {
+      return false;
+    }
+  }
   if (!files.hasUnpublishedImages()) {
     return true;
   }
@@ -937,7 +988,7 @@ void CShotDocLauncher::refreshPanel(const QString& status) {
   panel->setCurrentShot(selectedShot);
   QStringList markNames;
   QList<CShotMarks::mark_t> marks;
-  CShotMarks::parse(files.shot(selectedShot)["mark"].toArray(), marks);
+  CShotMarks::parse(marksOf(selectedShot), marks);
   for (const CShotMarks::mark_t& mark : std::as_const(marks)) {
     markNames << CShotMarks::describe(mark);
   }

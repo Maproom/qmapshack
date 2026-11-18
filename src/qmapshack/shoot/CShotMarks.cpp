@@ -69,9 +69,11 @@ const QSet<QString> kKeys = {"root",    "widget", "part", "row",    "action", "b
 
 /** Reaches QSlider's protected initStyleOption(), which the style needs for the handle's geometry. */
 struct CSliderAccess : QSlider {
-  static void styleOption(const QSlider& slider, QStyleOptionSlider* option) {
+  static QRect handleOf(const QSlider& slider) {
+    QStyleOptionSlider option;
     void (QSlider::*init)(QStyleOptionSlider*) const = &CSliderAccess::initStyleOption;
-    (slider.*init)(option);
+    (slider.*init)(&option);
+    return slider.style()->subControlRect(QStyle::CC_Slider, &option, QStyle::SC_SliderHandle, &slider);
   }
 };
 
@@ -88,6 +90,23 @@ QRect globalRect(const QWidget* widget, const QRect& local) {
 }
 
 QRect globalRect(const QWidget* widget) { return globalRect(widget, widget->rect()); }
+
+/** @return @p why; @p out says its target is there, but not on screen now */
+QString closed(CShotMarks::placed_t& out, const QString& why) {
+  out.found = CShotMarks::found_e::eClosed;
+  return why;
+}
+
+/** @return @p why; @p out says it has no target */
+QString missing(CShotMarks::placed_t& out, const QString& why) {
+  out.found = CShotMarks::found_e::eMissing;
+  return why;
+}
+
+/** @return @p problem, why @p address below @p root resolves to no single widget; @p out says whether there is none */
+QString notResolved(QWidget* root, const QString& address, const QString& problem, CShotMarks::placed_t& out) {
+  return (nullptr == CShotAddress::resolve(root, address)) ? missing(out, problem) : problem;
+}
 
 QWidget* rootOf(const QString& root, QWidget* shot, QString& problem) {
   QWidget* main = CMainWindow::isNull() ? nullptr : &CMainWindow::self();
@@ -240,7 +259,7 @@ QString placeSplitter(const CShotMarks::mark_t& mark, QWidget* root, CShotMarks:
     QString problem;
     sides[i] = CShotAddress::resolveUnique(root, mark.between.value(i), problem);
     if (nullptr == sides[i]) {
-      return problem;
+      return notResolved(root, mark.between.value(i), problem, out);
     }
   }
 
@@ -254,7 +273,7 @@ QString placeSplitter(const CShotMarks::mark_t& mark, QWidget* root, CShotMarks:
     }
     QWidget* handle = splitter->handle(qMax(a, b));
     if (!handle->isVisibleTo(splitter->window())) {
-      return "the handle between them is hidden";
+      return closed(out, "the handle between them is hidden");
     }
     out.area = globalRect(handle);
     out.arrows = splitter->orientation();
@@ -273,7 +292,7 @@ QString placeSplitter(const CShotMarks::mark_t& mark, QWidget* root, CShotMarks:
   return separatorBetween(main, a, b, out.area, out.arrows);
 }
 
-QString placeAction(const CShotMarks::mark_t& mark, QWidget* widget, QRect& area) {
+QString placeAction(const CShotMarks::mark_t& mark, QWidget* widget, CShotMarks::placed_t& out) {
   QAction* action = nullptr;
   const QList<QAction*>& actions = widget->actions();
   for (QAction* entry : actions) {
@@ -282,34 +301,37 @@ QString placeAction(const CShotMarks::mark_t& mark, QWidget* widget, QRect& area
     }
   }
   if (nullptr == action) {
-    return QString("it has no entry %1").arg(mark.action);
+    return missing(out, QString("it has no entry %1").arg(mark.action));
   }
   if (!action->isVisible()) {
-    return QString("its entry %1 is hidden").arg(mark.action);
+    return closed(out, QString("its entry %1 is hidden").arg(mark.action));
   }
   if (const QMenu* menu = qobject_cast<const QMenu*>(widget); nullptr != menu) {
-    area = globalRect(widget, menu->actionGeometry(action));
+    out.area = globalRect(widget, menu->actionGeometry(action));
   } else if (const QMenuBar* bar = qobject_cast<const QMenuBar*>(widget); nullptr != bar) {
-    area = globalRect(widget, bar->actionGeometry(action));
+    out.area = globalRect(widget, bar->actionGeometry(action));
   } else if (const QToolBar* toolbar = qobject_cast<const QToolBar*>(widget); nullptr != toolbar) {
     QWidget* button = toolbar->widgetForAction(action);
     if (nullptr == button || !button->isVisibleTo(toolbar)) {
-      return QString("its entry %1 is not shown").arg(mark.action);
+      return closed(out, QString("its entry %1 is not shown").arg(mark.action));
     }
-    area = globalRect(button);
+    out.area = globalRect(button);
   } else {
     return "it is no menu or toolbar";
   }
-  return area.isEmpty() ? QString("its entry %1 has no place").arg(mark.action) : QString();
+  return out.area.isEmpty() ? closed(out, QString("its entry %1 has no place").arg(mark.action)) : QString();
 }
 
-/** @return why @p widget, a docked docker or a tab widget's page, shows no tab, empty when @p area holds it */
-QString placeTab(QWidget* widget, QRect& area) {
+/** @return why @p widget, a docked docker or a tab widget's page, shows no tab, empty when @p out holds it */
+QString placeTab(QWidget* widget, CShotMarks::placed_t& out) {
   const QTabBar* bar = nullptr;
   qint32 at = -1;
   if (const QDockWidget* dock = qobject_cast<const QDockWidget*>(widget); nullptr != dock) {
     if (nullptr == qobject_cast<const QMainWindow*>(dock->parentWidget()) || dock->isFloating()) {
       return "it is no docked docker";
+    }
+    if (!dock->isVisibleTo(dock->window())) {
+      return closed(out, "it is hidden");
     }
     at = CShotMarks::dockTab(dock, bar);
     if (nullptr == bar) {
@@ -322,19 +344,22 @@ QString placeTab(QWidget* widget, QRect& area) {
     if (nullptr == tabs || tabs->indexOf(widget) < 0) {
       return "it is no docker or tab page";
     }
+    if (!tabs->isVisibleTo(tabs->window())) {
+      return closed(out, "its tab widget is hidden");
+    }
     bar = tabs->tabBar();
     at = tabs->indexOf(widget);
   }
   if (!bar->isTabVisible(at)) {
-    return "its tab is hidden";
+    return closed(out, "its tab is hidden");
   }
-  area = globalRect(bar, bar->tabRect(at));
-  return area.isEmpty() ? QString("its tab has no place") : QString();
+  out.area = globalRect(bar, bar->tabRect(at));
+  return out.area.isEmpty() ? closed(out, "its tab has no place") : QString();
 }
 
-QString placePart(const CShotMarks::mark_t& mark, QWidget* widget, QRect& area) {
+QString placePart(const CShotMarks::mark_t& mark, QWidget* widget, CShotMarks::placed_t& out) {
   if (mark.part.isEmpty()) {
-    area = globalRect(widget);
+    out.area = globalRect(widget);
     return QString();
   }
   if ("handle" == mark.part) {
@@ -342,10 +367,7 @@ QString placePart(const CShotMarks::mark_t& mark, QWidget* widget, QRect& area) 
     if (nullptr == slider) {
       return "it is no slider";
     }
-    QStyleOptionSlider option;
-    CSliderAccess::styleOption(*slider, &option);
-    area = globalRect(widget,
-                      slider->style()->subControlRect(QStyle::CC_Slider, &option, QStyle::SC_SliderHandle, slider));
+    out.area = globalRect(widget, CShotMarks::sliderHandle(*slider));
     return QString();
   }
   if ("branch" == mark.part) {
@@ -355,13 +377,18 @@ QString placePart(const CShotMarks::mark_t& mark, QWidget* widget, QRect& area) 
     }
     const QModelIndex& index = CShotAddress::resolveRowPath(*tree->model(), mark.row);
     if (!index.isValid()) {
-      return QString("it has no row %1").arg(mark.row);
+      return missing(out, QString("it has no row %1").arg(mark.row));
     }
     // The branch indicator sits in the indentation left of the row's first cell, centred in the row's height.
     const QRect cell = tree->visualRect(index.siblingAtColumn(0));
     const qint32 side = qMin(tree->indentation(), cell.height());
-    area = globalRect(tree->viewport(), QRect(cell.left() - tree->indentation() + (tree->indentation() - side) / 2,
-                                              cell.center().y() - side / 2, side, side));
+    const QRect branch(cell.left() - tree->indentation() + (tree->indentation() - side) / 2,
+                       cell.center().y() - side / 2, side, side);
+    // A row under a closed parent has no place; one scrolled away lies outside the viewport.
+    if (cell.isEmpty() || !tree->viewport()->rect().contains(branch)) {
+      return closed(out, QString("its row %1 is not shown now").arg(mark.row));
+    }
+    out.area = globalRect(tree->viewport(), branch);
     return QString();
   }
   if ("title" == mark.part) {
@@ -370,7 +397,7 @@ QString placePart(const CShotMarks::mark_t& mark, QWidget* widget, QRect& area) 
       return "it is no docker";
     }
     if (const QWidget* bar = dock->titleBarWidget(); nullptr != bar) {
-      area = globalRect(bar);
+      out.area = globalRect(bar);
       return QString();
     }
     // The dock's own title is what its content leaves free: a strip on the left or the top.
@@ -379,16 +406,16 @@ QString placePart(const CShotMarks::mark_t& mark, QWidget* widget, QRect& area) 
                             ? QRect(0, 0, content.left(), dock->height())
                             : QRect(0, 0, dock->width(), content.top());
     if (title.isEmpty()) {
-      return "its title bar has no place";
+      return closed(out, "its title bar has no place");
     }
-    area = globalRect(widget, title);
+    out.area = globalRect(widget, title);
     return QString();
   }
   if ("action" == mark.part) {
-    return placeAction(mark, widget, area);
+    return placeAction(mark, widget, out);
   }
   if ("tab" == mark.part) {
-    return placeTab(widget, area);
+    return placeTab(widget, out);
   }
   if ("button" == mark.part) {
     const QAbstractItemView* view = CShotAddress::itemViewOf(widget);
@@ -397,17 +424,45 @@ QString placePart(const CShotMarks::mark_t& mark, QWidget* widget, QRect& area) 
     }
     const QModelIndex& index = CShotAddress::resolveRowPath(*view->model(), mark.row);
     if (!index.isValid()) {
-      return QString("it has no row %1").arg(mark.row);
+      return missing(out, QString("it has no row %1").arg(mark.row));
     }
     QString problem;
     const QRect& rect = CShotHandlers::rowButtonRect(view, index, mark.button, problem);
-    if (!rect.isValid()) {
+    if (!problem.isEmpty()) {
       return problem;
     }
-    area = globalRect(view->viewport(), rect);
+    if (!rect.isValid() || !view->viewport()->rect().contains(rect)) {
+      return closed(out, QString("its row %1 does not show its button %2 now").arg(mark.row, mark.button));
+    }
+    out.area = globalRect(view->viewport(), rect);
     return QString();
   }
   return QString("its part %1 is unknown").arg(mark.part);
+}
+
+QString placeOn(const CShotMarks::mark_t& mark, QWidget* shot, CShotMarks::placed_t& out) {
+  QString problem;
+  QWidget* root = rootOf(mark.root, shot, problem);
+  if (nullptr == root) {
+    // A menu or a window of its own is closed now; a docker named as root is not there.
+    if ("menu" == mark.root || "window" == mark.root) {
+      return closed(out, problem);
+    }
+    return mark.root.startsWith("dock:") ? missing(out, problem) : problem;
+  }
+  if ("splitter" == mark.part) {
+    return placeSplitter(mark, root, out);
+  }
+  QWidget* widget = CShotAddress::resolveUnique(root, mark.widget, problem);
+  if (nullptr == widget) {
+    return notResolved(root, mark.widget, problem, out);
+  }
+  // A tab widget's pages other than the current one are hidden; their tabs are not.
+  if ("tab" != mark.part && !widget->isVisibleTo(widget->window()) && widget != widget->window()) {
+    return closed(out, "it is hidden");
+  }
+  out.window = widget->window();
+  return placePart(mark, widget, out);
 }
 
 /** @return the outline of a mouse cursor, its hotspot at the origin */
@@ -616,9 +671,8 @@ QString CShotMarks::describe(const mark_t& mark) {
 QString CShotMarks::parse(const QJsonArray& marks, QList<mark_t>& out) {
   out.clear();
   for (const QJsonValue& value : marks) {
-    if (value.isString()) {
-      out << mark_t{"main", value.toString()};
-      continue;
+    if (!value.isObject()) {
+      return "a mark is an object with a widget, not a plain value";
     }
     const QJsonObject& object = value.toObject();
     for (const QString& key : object.keys()) {
@@ -674,24 +728,14 @@ QString CShotMarks::parse(const QJsonArray& marks, QList<mark_t>& out) {
 
 QString CShotMarks::place(const mark_t& mark, QWidget* shot, placed_t& out) {
   out = placed_t{mark};
-  QString problem;
-  QWidget* root = rootOf(mark.root, shot, problem);
-  if (nullptr == root) {
-    return problem;
+  QString problem = placeOn(mark, shot, out);
+  if (problem.isEmpty()) {
+    out.found = found_e::eFound;
   }
-  if ("splitter" == mark.part) {
-    return placeSplitter(mark, root, out);
-  }
-  QWidget* widget = CShotAddress::resolveUnique(root, mark.widget, problem);
-  if (nullptr == widget) {
-    return problem;
-  }
-  if (!widget->isVisibleTo(widget->window()) && widget != widget->window()) {
-    return "it is hidden";
-  }
-  out.window = widget->window();
-  return placePart(mark, widget, out.area);
+  return problem;
 }
+
+QRect CShotMarks::sliderHandle(const QSlider& slider) { return CSliderAccess::handleOf(slider); }
 
 bool CShotMarks::discFits(const QRect& area) {
   const qreal radius = discRadius(QRectF(area));
@@ -708,7 +752,10 @@ qint32 CShotMarks::dockTab(const QDockWidget* dock, const QTabBar*& bar) {
   }
   // A tab of the main window's dock tab bars holds its docker as data.
   for (const QTabBar* candidate : main->findChildren<QTabBar*>(Qt::FindDirectChildrenOnly)) {
-    for (qint32 i = 0; i < candidate->count() && candidate->isVisible(); i++) {
+    if (!candidate->isVisible()) {
+      continue;
+    }
+    for (qint32 i = 0; i < candidate->count(); i++) {
       if (candidate->tabData(i).value<quintptr>() == quintptr(dock)) {
         bar = candidate;
         return i;

@@ -100,6 +100,7 @@
 #include "shoot/CShotApplication.h"
 #include "shoot/CShotContext.h"
 #include "shoot/CShotHandlers.h"
+#include "shoot/CShotMarks.h"
 #include "shoot/CShotPage.h"
 #include "shoot/CShotRecorder.h"
 #include "shoot/CShotReplay.h"
@@ -2545,6 +2546,185 @@ void checkShootScenario(CHarness& h) {
               .arg(closed ? "closed" : "open"));
 }
 
+/** @return the mark @p object describes, an empty one when it cannot be read */
+CShotMarks::mark_t markOf(const QJsonObject& object) {
+  QList<CShotMarks::mark_t> marks;
+  CShotMarks::parse(QJsonArray{object}, marks);
+  return marks.value(0);
+}
+
+/** Each kind of mark lands on its target, drawn there and nowhere else; marks that cannot be drawn say why. */
+void checkMarks(CHarness& h) {
+  CMainWindow* main = h.main;
+  panel_t& p = h.p;
+
+  // A docker on the left in front of its tab group, and the map beside it.
+  QDockWidget* left = nullptr;
+  const QList<QDockWidget*>& docks = main->findChildren<QDockWidget*>();
+  for (QDockWidget* dock : docks) {
+    const QRect r(dock->mapTo(main, QPoint(0, 0)), dock->size());
+    if (nullptr == left && !dock->isFloating() && dock->isVisible() && main->rect().contains(r) &&
+        Qt::LeftDockWidgetArea == main->dockWidgetArea(dock) && !dock->objectName().isEmpty()) {
+      left = dock;
+    }
+  }
+  const QString& central = CShotAddress::addressOf(main, main->centralWidget()).value_or(QString());
+  const QString& toolbar = "toolBar";
+  QString entry;
+  if (const QToolBar* bar = main->findChild<QToolBar*>(toolbar); nullptr != bar) {
+    for (QAction* action : bar->actions()) {
+      if (entry.isEmpty() && action->isVisible() && !action->objectName().isEmpty() &&
+          nullptr != bar->widgetForAction(action)) {
+        entry = action->objectName();
+      }
+    }
+  }
+  const QString& leftName = (nullptr == left) ? QString() : left->objectName();
+
+  struct probe_t {
+    QString name;
+    QJsonObject mark;
+    QWidget* shot;
+  };
+  const QList<probe_t> probes = {
+      {"a frame around a docker", {{"widget", leftName}}, main},
+      {"a frame on a docker's title bar", {{"widget", leftName}, {"part", "title"}}, main},
+      {"a disc on the main window's separator beside the map",
+       {{"part", "splitter"}, {"between", QJsonArray{leftName, central}}},
+       main},
+      {"a resize cursor on it",
+       {{"part", "splitter"}, {"between", QJsonArray{leftName, central}}, {"shape", "cursor"}, {"cursor", "resize"}},
+       main},
+      {"a frame on a toolbar action", {{"widget", toolbar}, {"part", "action"}, {"action", entry}}, main},
+      {"a hand on it",
+       {{"widget", toolbar}, {"part", "action"}, {"action", entry}, {"shape", "cursor"}, {"cursor", "hand"}},
+       main},
+      {"an arrow at it",
+       {{"widget", toolbar}, {"part", "action"}, {"action", entry}, {"shape", "arrow"}, {"tail", QJsonArray{90, 70}}},
+       main},
+      {"a disc on a slider's knob", {{"root", "window"}, {"widget", "probeSlider"}, {"part", "handle"}}, p.window},
+      {"a disc on a QSplitter's handle",
+       {{"root", "window"},
+        {"part", "splitter"},
+        {"between", QJsonArray{"probeSplitter/QLabel#0", "probeSplitter/QLabel#1"}}},
+       p.window},
+  };
+
+  QHash<QWidget*, QImage> plain;
+  for (const probe_t& probe : probes) {
+    if (!plain.contains(probe.shot)) {
+      plain[probe.shot] = CShotWriter::render(probe.shot, probe.shot->isWindow() ? probe.shot->size() : QSize());
+    }
+    const QString name = "marks: " + probe.name + " lands on it";
+    CShotMarks::placed_t placed;
+    QString problem = CShotMarks::place(markOf(probe.mark), probe.shot, placed);
+    QImage image = plain.value(probe.shot);
+    QList<QRect> drawn;
+    if (problem.isEmpty()) {
+      problem = CShotMarks::paint(image, {placed}, probe.shot, QRect(), &drawn);
+    }
+    if (!problem.isEmpty()) {
+      verdict(name, false, problem);
+      continue;
+    }
+    // Drawn inside its bounds, which hold its target's centre, and nowhere else.
+    const QImage& before = plain.value(probe.shot);
+    const QRect bounds = drawn.value(0);
+    qint32 inside = 0;
+    qint32 outside = 0;
+    for (qint32 y = 0; y < image.height(); y++) {
+      for (qint32 x = 0; x < image.width(); x++) {
+        if (image.pixel(x, y) != before.pixel(x, y)) {
+          (bounds.contains(x, y) ? inside : outside)++;
+        }
+      }
+    }
+    // An arrow ends at its target's edge; every other shape covers its centre.
+    const QRect target = placed.area.translated(-probe.shot->mapToGlobal(QPoint(0, 0)));
+    const auto text = [](const QRect& r) {
+      return QString("%1,%2 %3x%4").arg(r.x()).arg(r.y()).arg(r.width()).arg(r.height());
+    };
+    verdict(name, inside > 0 && 0 == outside && bounds.intersects(target),
+            QString("%1 pixels inside %2, %3 outside, target %4")
+                .arg(inside)
+                .arg(text(bounds))
+                .arg(outside)
+                .arg(text(target)));
+  }
+
+  // A name more than one widget carries.
+  QString repeated;
+  QHash<QString, qint32> names;
+  for (const QWidget* w : main->findChildren<QWidget*>()) {
+    if (!w->objectName().isEmpty() && !w->objectName().startsWith("qt_") && ++names[w->objectName()] == 2 &&
+        repeated.isEmpty()) {
+      repeated = w->objectName();
+    }
+  }
+  struct refusal_t {
+    QString name;
+    QJsonObject mark;
+    QString why;
+  };
+  const QList<refusal_t> refusals = {
+      {"a name more than one widget carries", {{"widget", repeated}}, "widgets"},
+      {"a separator between widgets that are no neighbours",
+       {{"part", "splitter"}, {"between", QJsonArray{leftName, toolbar}}},
+       "no neighbours"},
+      {"an entry the toolbar does not have",
+       {{"widget", toolbar}, {"part", "action"}, {"action", "noSuchAction"}},
+       "no entry"},
+      {"a menu entry while no menu is open", {{"root", "menu"}, {"part", "action"}, {"action", entry}}, "no menu"},
+  };
+  for (const refusal_t& refusal : refusals) {
+    CShotMarks::placed_t placed;
+    const QString& problem = CShotMarks::place(markOf(refusal.mark), main, placed);
+    verdict("marks: " + refusal.name + " is refused", problem.contains(refusal.why), problem);
+  }
+  {
+    QList<CShotMarks::mark_t> marks;
+    const QString& problem = CShotMarks::parse(
+        QJsonArray{QJsonObject{{"widget", leftName}, {"shape", "cursor"}, {"cursor", "resize"}}}, marks);
+    verdict("marks: a resize cursor on something that is no splitter is refused", problem.contains("no splitter"),
+            problem);
+  }
+
+  // Through a shot file, as a build takes it: drawn, or the shot fails.
+  QTemporaryDir dir;
+  const CShotWriter writer(dir.path());
+  CShotContext ctx(writer);
+  ctx.setFixture(h.ctx.project(), h.ctx.trk(), h.ctx.wpt(), h.ctx.rte(), h.ctx.area());
+  const QJsonArray size{main->width(), main->height()};
+  const QJsonObject content{
+      {"scenarios", QJsonObject()},
+      {"shots",
+       QJsonArray{QJsonObject{
+                      {"id", "selftest/marked"}, {"size", size}, {"widget", QString()}, {"mark", QJsonArray{leftName}}},
+                  QJsonObject{{"id", "selftest/cut"},
+                              {"size", size},
+                              {"widget", QString()},
+                              {"rect", QJsonArray{0, 0, 10, 10}},
+                              {"mark", QJsonArray{leftName}}}}}};
+  const QString& path = dir.filePath("selftest.json");
+  QFile out(path);
+  if (!out.open(QIODevice::WriteOnly) || out.write(QJsonDocument(content).toJson()) < 0) {
+    verdict("marks: a shot file draws them", false, "the shot file cannot be written");
+    return;
+  }
+  out.close();
+  const CShotWarnings warnings;
+  const qint32 failed = CShotPage::run(path, ctx, "*", "-");
+  const bool marked = QFileInfo::exists(dir.filePath("selftest/marked.png"));
+  const bool cut = QFileInfo::exists(dir.filePath("selftest/cut.png"));
+  verdict("marks: a shot file draws them, and fails a shot whose mark its rect cuts",
+          1 == failed && marked && !cut && warnings.contains("not completely inside"),
+          QString("%1 failure(s), marked %2, cut %3: %4")
+              .arg(failed)
+              .arg(marked ? "written" : "missing")
+              .arg(cut ? "written" : "refused")
+              .arg(warnings.first()));
+}
+
 /** What every case together must have covered. */
 void checkCoverage(CHarness& h) {
   const QStringList& missing = CShotHandlers::unreplayed();
@@ -2613,6 +2793,7 @@ qint32 CShotSelfTest::run(CShotContext& ctx) {
     checkRenderAll(h);
     checkReplayRefuses(h);
     checkShootScenario(h);
+    checkMarks(h);
     checkCoverage(h);
   }
 

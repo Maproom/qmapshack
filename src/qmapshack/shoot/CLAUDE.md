@@ -99,9 +99,14 @@ The writer's guide is `doc/WRITING_DOCS.md`: short, facts only, updated with eve
 - **Dock tab bars are `QMainWindowTabBar`**, direct children of the main window: `QMainWindowTabBar#n`, not `QTabBar`.
 - **A map tree row is addressed by its name**, the file's base name with `_` as a space (`CMapDraw.cpp:260`);
   other item views take `row/…:column`.
-- **Marks (`mark`) are painted on the rendered image** in `CShotContext::emitImage()`, each
-  position read from the live widget at write time; a target not `isVisibleTo()` the photographed widget fails the
-  shot. `QSlider::initStyleOption()` is protected: `markArea()` reaches it through a derived struct's member pointer.
+- **Marks (`mark`) are `CShotMarks`**: placed after the render from the live widgets, in global coordinates, and
+  drawn in `CShotContext::emitImage()`; a live Ctrl+Shift+F9 take places the selected row's marks at the key press
+  and draws them on the chosen part. A mark not completely inside the image or `rect`, or in another window, fails
+  the shot. A plain name must be unique below the mark's `root` (`CShotAddress::resolveUnique()`).
+- **A docker behind a tab stays `isVisible()`**, moved to negative coordinates; a separator is found by walking from
+  one neighbour to the other with `QMainWindow::isSeparator()`, through tab bars only.
+- **The hand cursor is DejaVu Sans' U+261D read with `QRawFont`** from `:/fonts/DejaVuSans.ttf`: `QPainterPath::addText()`
+  with the family gives an empty path for it.
 - **`--only` is not a path glob**: `*` crosses `/`. Quote it.
 - **An exposure is built by `shootOne()` and deleted when the shot returns.** Its `TYPE` needs
   `Q_OBJECT` or `SHOT_EXPOSE` does not compile; the built widget is checked against

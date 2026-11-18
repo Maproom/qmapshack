@@ -47,6 +47,13 @@ std::optional<QString> addressOf(const QWidget* root, const QWidget* widget);
 QWidget* resolve(QWidget* root, const QString& address);
 
 /**
+   @brief resolve(), refusing a name more than one widget below its parent part carries.
+
+   @param problem  set to why nothing was found, when it returns nullptr
+ */
+QWidget* resolveUnique(QWidget* root, const QString& address, QString& problem);
+
+/**
    @brief The path of a workspace item: `Example/trk:Track`, a project by its name alone; folders are skipped.
 
    @return empty for anything but a project or GIS item, or when the path would not resolve to it

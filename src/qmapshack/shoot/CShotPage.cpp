@@ -424,18 +424,10 @@ qint32 takeImage(const QJsonObject& shot, CShotContext& ctx, QWidget* main, bool
     }
   }
 
-  // A mark is an address below the photographed widget, or an object with `widget`, `part`, `row` and `shape`.
-  QList<CShotContext::mark_t> marks;
-  for (const QJsonValue& value : shot["mark"].toArray()) {
-    const QJsonObject& object = value.isObject() ? value.toObject() : QJsonObject{{"widget", value.toString()}};
-    const QString& address = object["widget"].toString();
-    QWidget* mark = CShotAddress::resolve(widget, address);
-    if (nullptr == mark) {
-      qWarning() << "shoot:" << id << "marks" << address << "which is not on screen";
-      return 1;
-    }
-    marks << CShotContext::mark_t{mark, object["part"].toString(), object["row"].toString(),
-                                  object["shape"].toString()};
+  QList<CShotMarks::mark_t> marks;
+  if (const QString& problem = CShotMarks::parse(shot["mark"].toArray(), marks); !problem.isEmpty()) {
+    qWarning().noquote() << QString("shoot: %1: %2.").arg(id, problem);
+    return 1;
   }
 
   QList<restore_t> restore;

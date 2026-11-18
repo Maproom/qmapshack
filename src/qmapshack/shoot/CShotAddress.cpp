@@ -155,6 +155,33 @@ QWidget* CShotAddress::resolve(QWidget* root, const QString& address) {
   return current;
 }
 
+QWidget* CShotAddress::resolveUnique(QWidget* root, const QString& address, QString& problem) {
+  QWidget* current = root;
+  if (nullptr == root || address.isEmpty()) {
+    return current;
+  }
+
+  for (const QString& part : address.split('/')) {
+    if (part.contains('#')) {
+      bool ok = false;
+      const qint32 index = part.section('#', 1).toInt(&ok);
+      current = ok ? childrenOfClass(current, part.section('#', 0, 0)).value(index, nullptr) : nullptr;
+    } else {
+      const QList<QWidget*>& named = current->findChildren<QWidget*>(part);
+      if (named.size() > 1) {
+        problem = QString("%1 names %2 widgets").arg(part).arg(named.size());
+        return nullptr;
+      }
+      current = named.value(0, nullptr);
+    }
+    if (nullptr == current) {
+      problem = QString("%1 is not there").arg(part);
+      return nullptr;
+    }
+  }
+  return current;
+}
+
 QString CShotAddress::itemPathOf(const QTreeWidgetItem* item) {
   const CGisListWks* list = (nullptr == item) ? nullptr : dynamic_cast<const CGisListWks*>(item->treeWidget());
   if (nullptr == list) {

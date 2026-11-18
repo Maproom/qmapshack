@@ -26,6 +26,7 @@
 #include <QString>
 
 #include "gis/IGisItem.h"
+#include "shoot/CShotMarks.h"
 
 class CCanvas;
 class CGisItemOvlArea;
@@ -41,23 +42,15 @@ class QWidget;
 /** @brief What a shot writes its images through, and the fixture it is taken against. */
 class CShotContext {
  public:
-  /** @brief One mark drawn into an image: a widget, or a part of it. */
-  struct mark_t {
-    QPointer<QWidget> widget;
-    QString part;  /**< empty for the whole widget, `handle` of a slider, `branch` of a tree row */
-    QString row;   /**< the tree row for `branch`, as CShotAddress::rowPathOf() */
-    QString shape; /**< `frame` or `disc`; empty is a frame for a widget, a disc for a part */
-  };
-
   explicit CShotContext(const CShotWriter& writer);
 
   /**
      @brief Start shot @p id.
 
      @param rect  the crop of every image, invalid for none
-     @param marks  widgets framed in every image; each must be the photographed widget or inside it
+     @param marks  drawn on every image, placed after it is rendered; each must lie inside it and @p rect
    */
-  void begin(const QString& id, const QRect& rect = QRect(), const QList<mark_t>& marks = {});
+  void begin(const QString& id, const QRect& rect = QRect(), const QList<CShotMarks::mark_t>& marks = {});
 
   /**
      @param size  a window's size, invalid for its sizeHint; ignored for a non-window widget
@@ -110,7 +103,7 @@ class CShotContext {
   const CShotWriter& writer;
   QString id;
   QRect rect;
-  QList<mark_t> marks;
+  QList<CShotMarks::mark_t> marks;
   fixture_t fixture;
   QString live;
 };

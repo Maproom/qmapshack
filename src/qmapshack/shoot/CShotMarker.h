@@ -59,6 +59,9 @@ class CShotMarker : public QObject {
   /** @brief The selected image's shot, for what its image shows; empty when it has none. */
   void setShot(const QJsonObject& shot) { this->shot = shot; }
 
+  /** @return the selected image's marks as last set */
+  const QJsonArray& currentMarks() const { return marks; }
+
   /** @brief "Show marks" in the panel. */
   void setShown(bool on);
 
@@ -102,7 +105,10 @@ class CShotMarker : public QObject {
   void accept();
   void finish(const QJsonObject& mark);
   void leaveMode();
-  /** @return what a `window` mark is placed on: the open dialog, the window pointed at while placing, the active one */
+  /**
+     @return what a `window` mark is placed on: the open dialog, the window pointed at while placing, the selected
+             image's window, the active one
+   */
   QWidget* windowShot() const;
   /** @return false when @p placed lies outside what the selected image shows */
   bool inImage(const CShotMarks::placed_t& placed) const;
@@ -114,6 +120,7 @@ class CShotMarker : public QObject {
 
   QString marker;
   QJsonArray marks;
+  QList<CShotMarks::mark_t> selectedMarks; /**< marks as read, up to the first that cannot be */
   QJsonObject shot;
   QStringList statuses;
   bool shown = true;
@@ -126,7 +133,7 @@ class CShotMarker : public QObject {
   QJsonObject head;
 
   QPointer<QWidget> overlay;
-  /** The window Ctrl+Shift+F10 was pressed over, while a mark is placed. */
+  /** The window Ctrl+Shift+F10 was pressed over, while a mark is placed; cleared when it is done. */
   QPointer<QWidget> pointedWindow;
   QTimer* timer = nullptr;
 };

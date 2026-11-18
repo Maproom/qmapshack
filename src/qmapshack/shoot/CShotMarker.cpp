@@ -30,12 +30,12 @@
 #include <QMenu>
 #include <QMouseEvent>
 #include <QPainter>
+#include <QRegularExpression>
 #include <QSlider>
 #include <QSplitter>
-#include <QStyle>
-#include <QStyleOptionSlider>
 #include <QTabBar>
 #include <QTabWidget>
+#include <QTextDocumentFragment>
 #include <QTimer>
 #include <QToolBar>
 #include <QToolButton>
@@ -56,20 +56,10 @@ constexpr qint32 kHintMs = 6000;
 constexpr Qt::Key kMarkKey = Qt::Key_F10;
 constexpr Qt::KeyboardModifiers kMarkModifiers = Qt::ControlModifier | Qt::ShiftModifier;
 
-/** Reaches QSlider's protected initStyleOption(), which the style needs for the handle's geometry. */
-struct CSliderAccess : QSlider {
-  static QRect handleOf(const QSlider& slider) {
-    QStyleOptionSlider option;
-    void (QSlider::*init)(QStyleOptionSlider*) const = &CSliderAccess::initStyleOption;
-    (slider.*init)(&option);
-    return slider.style()->subControlRect(QStyle::CC_Slider, &option, QStyle::SC_SliderHandle, &slider);
-  }
-};
-
-/** @brief Draws the selected image's marks over the main window; mouse events pass through it. */
+/** @brief Draws the selected image's marks over a window; mouse events pass through it. */
 class CShotMarkOverlay : public QWidget {
  public:
-  explicit CShotMarkOverlay(QWidget* main) : QWidget(main) {
+  explicit CShotMarkOverlay(QWidget* window) : QWidget(window) {
     setAttribute(Qt::WA_TransparentForMouseEvents);
     setAttribute(Qt::WA_NoSystemBackground);
     setFocusPolicy(Qt::NoFocus);
@@ -109,17 +99,33 @@ class CShotMarkOverlay : public QWidget {
 QWidget* mainWindow() { return CMainWindow::isNull() ? nullptr : &CMainWindow::self(); }
 
 /** @return what the writer sees @p w called, else what it is and where */
+/** @return the first sentence of the tooltip @p tip, plain text without its closing stop */
+QString firstSentence(const QString& tip) {
+  QString text = Qt::mightBeRichText(tip) ? QTextDocumentFragment::fromHtml(tip).toPlainText() : tip;
+  text = text.section('\n', 0, 0).trimmed();
+  if (const qsizetype stop = text.indexOf(". "); stop > 0) {
+    text.truncate(stop);
+  }
+  while (text.endsWith('.') || text.endsWith(':')) {
+    text.chop(1);
+  }
+  return text.trimmed();
+}
+
 QString nameOf(const QWidget* w) {
   const QString& name = CShotDocMode::onScreenName(w);
   if (!name.isEmpty()) {
     return name;
   }
   if (const QAbstractButton* button = qobject_cast<const QAbstractButton*>(w); nullptr != button) {
-    if (!button->text().isEmpty()) {
-      return QString(button->text()).remove('&');
+    // Designer gives a tool button the text "..." until it has an icon.
+    static const QRegularExpression placeholder(R"(^[.\s]*$)");
+    const QString& text = QString(button->text()).remove('&');
+    if (!text.contains(placeholder)) {
+      return text;
     }
-    if (!button->toolTip().isEmpty()) {
-      return button->toolTip();
+    if (const QString& tip = firstSentence(button->toolTip()); !tip.isEmpty()) {
+      return tip;
     }
   }
   if (const QMainWindow* main = qobject_cast<const QMainWindow*>(mainWindow()); nullptr != main) {
@@ -178,22 +184,21 @@ QWidget* neighbourAt(QWidget* main, QPoint p, const QPoint& step) {
 }
 
 /** @return the status a mark of the selected image shows in the panel */
-QString statusOf(const QString& problem, const CShotMarks::placed_t& placed, const QWidget* main) {
-  if (problem.isEmpty()) {
-    return (placed.window == main &&
-            main->rect().contains(QRect(main->mapFromGlobal(placed.area.topLeft()), placed.area.size())))
-               ? "shown"
-               : "not on screen";
-  }
-  for (const char* closed : {"no menu is open", "is hidden", "no window of its own", "not shown"}) {
-    if (problem.contains(closed)) {
+QString statusOf(const QString& problem, const CShotMarks::placed_t& placed) {
+  switch (placed.found) {
+    case CShotMarks::found_e::eFound: {
+      const QWidget* window = placed.window;
+      const bool onScreen =
+          nullptr != window && window->isVisible() &&
+          window->rect().contains(QRect(window->mapFromGlobal(placed.area.topLeft()), placed.area.size()));
+      return onScreen ? "shown" : "not on screen";
+    }
+    case CShotMarks::found_e::eClosed:
       return "not on screen";
-    }
-  }
-  for (const char* gone : {"is not there", "has no entry", "has no row", "is no docker"}) {
-    if (problem.contains(gone)) {
+    case CShotMarks::found_e::eMissing:
       return "not found";
-    }
+    case CShotMarks::found_e::eWrong:
+      break;
   }
   return "fails: " + problem;
 }
@@ -208,7 +213,13 @@ CShotMarker::CShotMarker(std::function<void(const QString&)> send, std::function
   timer->start();
 }
 
-CShotMarker::~CShotMarker() { leaveMode(); }
+CShotMarker::~CShotMarker() {
+  // No refresh: it would draw the marks again.
+  if (eIdle != mode || !candidates.isEmpty()) {
+    qApp->removeEventFilter(this);
+  }
+  delete overlay.data();
+}
 
 void CShotMarker::setMarker(const QString& kind) {
   marker = kind;
@@ -219,6 +230,9 @@ void CShotMarker::setMarker(const QString& kind) {
 
 void CShotMarker::setMarks(const QJsonArray& marks) {
   this->marks = marks;
+  if (const QString& problem = CShotMarks::parse(marks, selectedMarks); !problem.isEmpty()) {
+    report(QString("The selected image's marks cannot be read: %1.").arg(problem));
+  }
   statuses.clear();
   refresh();
 }
@@ -350,18 +364,20 @@ void CShotMarker::accept() {
 }
 
 void CShotMarker::finish(const QJsonObject& mark) {
+  // Read before leaving: that forgets the window pointed at.
+  QWidget* window = windowShot();
   leaveMode();
   QList<CShotMarks::mark_t> parsed;
   QString problem = CShotMarks::parse(QJsonArray{mark}, parsed);
   CShotMarks::placed_t placed;
   if (problem.isEmpty()) {
-    problem = CShotMarks::place(parsed.first(), windowShot(), placed);
+    problem = CShotMarks::place(parsed.first(), window, placed);
   }
   if (!problem.isEmpty()) {
     refuse(QString("The mark cannot be placed: %1.").arg(problem));
     return;
   }
-  send(QString("mark-placed %1 %2").arg(row, QString::fromUtf8(QJsonDocument(mark).toJson(QJsonDocument::Compact))));
+  send(QString("mark-placed %1\t%2").arg(row, QString::fromUtf8(QJsonDocument(mark).toJson(QJsonDocument::Compact))));
   if (!inImage(placed)) {
     hint(QString("%1 is marked, but it is not in this image. Take the image again with what it should show.")
              .arg(mark["name"].toString()));
@@ -392,6 +408,7 @@ void CShotMarker::leaveMode() {
   mode = eIdle;
   candidates.clear();
   head = QJsonObject();
+  pointedWindow = nullptr;
   refresh();
 }
 
@@ -533,7 +550,7 @@ QList<CShotMarker::candidate_t> CShotMarker::candidatesAt(const QPoint& global) 
   }
   // A slider's knob.
   if (const QSlider* slider = qobject_cast<const QSlider*>(w); nullptr != slider) {
-    if (CSliderAccess::handleOf(*slider).contains(slider->mapFromGlobal(global))) {
+    if (CShotMarks::sliderHandle(*slider).contains(slider->mapFromGlobal(global))) {
       add({{"root", root}, {"widget", address(slider)}, {"part", "handle"}},
           QString("the knob of %1").arg(nameOf(slider)));
     }
@@ -627,6 +644,14 @@ QWidget* CShotMarker::windowShot() const {
   if (!pointedWindow.isNull()) {
     return pointedWindow;
   }
+  // The selected image's window, named by its class.
+  if (const QString& name = shot["window"].toString(); !name.isEmpty()) {
+    for (QWidget* window : QApplication::topLevelWidgets()) {
+      if (window->isVisible() && name == window->metaObject()->className()) {
+        return window;
+      }
+    }
+  }
   QWidget* active = QApplication::activeWindow();
   return (nullptr == active || nullptr != qobject_cast<QMenu*>(active)) ? mainWindow() : active;
 }
@@ -662,24 +687,22 @@ bool CShotMarker::inImage(const CShotMarks::placed_t& placed) const {
 }
 
 void CShotMarker::refresh() {
-  QWidget* main = mainWindow();
-  if (nullptr == main) {
+  if (nullptr == mainWindow()) {
     return;
   }
-  QList<CShotMarks::mark_t> parsed;
+  // The overlay covers one window: the one a `window` mark lies in.
+  QWidget* window = windowShot();
   QList<CShotMarks::placed_t> placed;
   QStringList now;
-  // A mark of another shape keeps its place: the shape only changes how it is drawn.
-  CShotMarks::parse(marks, parsed);
-  for (const CShotMarks::mark_t& mark : std::as_const(parsed)) {
+  for (const CShotMarks::mark_t& mark : std::as_const(selectedMarks)) {
     CShotMarks::placed_t p;
-    const QString& problem = CShotMarks::place(mark, windowShot(), p);
-    QString status = statusOf(problem, p, main);
+    const QString& problem = CShotMarks::place(mark, window, p);
+    QString status = statusOf(problem, p);
     if ("shown" == status && !inImage(p)) {
       status = "not in this image";
     }
     now << status;
-    if (problem.isEmpty() && p.window == main) {
+    if (problem.isEmpty() && p.window == window) {
       placed << p;
     }
   }
@@ -695,7 +718,7 @@ void CShotMarker::refresh() {
     CShotMarks::placed_t p;
     // The candidate as a plain frame: an arrow without its tail cannot be placed yet.
     if (CShotMarks::parse(QJsonArray{candidates.at(current).mark}, one).isEmpty() && !one.isEmpty() &&
-        CShotMarks::place(one.first(), main, p).isEmpty() && p.window == main) {
+        CShotMarks::place(one.first(), window, p).isEmpty() && p.window == window) {
       highlight = p.area;
     }
   }
@@ -707,8 +730,11 @@ void CShotMarker::refresh() {
     }
     return;
   }
+  if (!overlay.isNull() && overlay->parentWidget() != window) {
+    delete overlay.data();
+  }
   if (overlay.isNull()) {
-    overlay = new CShotMarkOverlay(main);
+    overlay = new CShotMarkOverlay(window);
   }
   static_cast<CShotMarkOverlay*>(overlay.data())->show(shown ? placed : QList<CShotMarks::placed_t>(), highlight);
   overlay->setVisible(true);

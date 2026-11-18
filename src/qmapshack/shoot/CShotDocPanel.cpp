@@ -432,9 +432,12 @@ void CShotDocPanel::setShots(const QList<CShotFiles::row_t>& shots_) {
     const QString& text = label(entry.state);
     QTreeWidgetItem* row = new QTreeWidgetItem(shots);
     row->setText(eColumnId, entry.id);
-    row->setText(eColumnState, entry.changed ? text + ", taken again" : text);
+    // Changed marks win: the image no longer shows them, whatever else it is.
+    row->setText(eColumnState, entry.marksChanged ? QString("marks changed, take it again")
+                                                  : (entry.changed ? text + ", taken again" : text));
     row->setToolTip(eColumnId, entry.note.isEmpty() ? entry.id : entry.note);
-    if (entry.changed || CShotFiles::eMissing == entry.state || CShotFiles::eNoImage == entry.state) {
+    if (entry.marksChanged || entry.changed || CShotFiles::eMissing == entry.state ||
+        CShotFiles::eNoImage == entry.state) {
       row->setForeground(eColumnState, CUiTheme::foreground(CUiTheme::Role::eWarn));
     }
     buildScenarioCell(row, entry);

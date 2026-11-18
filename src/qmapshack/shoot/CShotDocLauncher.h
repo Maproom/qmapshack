@@ -82,6 +82,8 @@ class CShotDocLauncher : public QObject {
   /** @brief Send @p line to the running state if there is one, quietly: housekeeping, not an action. */
   void notify(const QString& line);
   /** @brief Tell the state the selected image; quiet when there is none. */
+  /** @return @p id's marks: its entry's, or the pending ones while it has no shot */
+  QJsonArray marksOf(const QString& id) const;
   /** @brief Store @p marks as @p id's, refresh the panel with @p done and tell the state. */
   void storeMarks(const QString& id, const QJsonArray& marks, const QString& done);
   void addMark(const QString& id, const QJsonObject& mark);

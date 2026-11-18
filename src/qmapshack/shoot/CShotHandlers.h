@@ -70,7 +70,7 @@ QStringList unreplayed();
 
 /**
    @return where the button @p button (a step's name for it) of row @p index is painted in @p view's viewport, invalid
-           when the row does not show it now; @p problem says why
+           when the row does not show it now; @p problem says why it never can
  */
 QRect rowButtonRect(const QAbstractItemView* view, const QModelIndex& index, const QString& button, QString& problem);
 

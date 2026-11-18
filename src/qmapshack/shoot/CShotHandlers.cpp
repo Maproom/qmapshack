@@ -2060,9 +2060,6 @@ QRect CShotHandlers::rowButtonRect(const QAbstractItemView* view, const QModelIn
       return;
     }
     rect = delegate->buttonRect(delegateOptionOf(view, index), index, which);
-    if (!rect.isValid()) {
-      problem = QString("the row does not show its button %1 now").arg(button);
-    }
   });
   if (!painted) {
     problem = "the list shows no buttons in its rows";

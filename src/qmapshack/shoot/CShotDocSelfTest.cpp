@@ -398,6 +398,54 @@ void testRevertShotEntry() {
           first + second + added + revertedC + revertedH);
 }
 
+void testMarksBookkeeping() {
+  const QJsonObject mark{{"widget", "dockWorkspace"}, {"name", "the docker"}};
+  {
+    checkout_t c;
+    const QByteArray& before = read(c.files.shotFile());
+    const QString& stored = c.files.setPendingMarks("p/h", QJsonArray{mark});
+    const bool kept = c.files.pendingMarks("p/h") == QJsonArray{mark};
+    const QString& dropped = c.files.setPendingMarks("p/h", QJsonArray());
+    const bool ok = stored.isEmpty() && dropped.isEmpty() && kept && c.files.pendingMarks("p/h").isEmpty() &&
+                    read(c.files.shotFile()) == before;
+    verdict("marks on an image not taken yet wait beside the shot file, and go when emptied", ok, stored + dropped);
+  }
+  {
+    checkout_t c;
+    c.files.setMarksChanged("p/a", true);
+    const auto changed = [&c](const QString& id) {
+      const auto& row = c.files.row(id);
+      return row && row->marksChanged;
+    };
+    const bool on = changed("p/a") && !changed("p/c");
+    c.files.setMarksChanged("p/a", false);
+    verdict("a row says its marks changed until that is cleared",
+            on && !changed("p/a") && c.files.marksChanged().isEmpty());
+  }
+  {
+    checkout_t c;
+    c.files.setPendingMarks("p/h", QJsonArray{mark});
+    c.files.setPendingMarks("p/gone", QJsonArray{mark});
+    c.files.setMarksChanged("p/a", true);
+    c.files.setMarksChanged("p/gone", true);
+    const QString& error = c.files.dropStaleMarks();
+    const bool ok = error.isEmpty() && !c.files.pendingMarks("p/h").isEmpty() &&
+                    c.files.pendingMarks("p/gone").isEmpty() && c.files.marksChanged() == QStringList{"p/a"};
+    verdict("only marks of ids with neither a shot nor a page line are forgotten", ok,
+            error + " changed: " + c.files.marksChanged().join(","));
+  }
+  {
+    checkout_t c;
+    QJsonObject shot = c.files.shot("p/c");
+    shot["mark"] = QJsonArray{mark};
+    const QString& stored = c.files.storeShot(shot);
+    const QString& reverted = c.files.revertShot("p/c");
+    const bool ok = stored.isEmpty() && reverted.isEmpty() && !c.files.shot("p/c").contains("mark") &&
+                    QFileInfo::exists(c.files.publishedImage("p/c"));
+    verdict("revert after a mark was added brings back the marks the published image shows", ok, stored + reverted);
+  }
+}
+
 void testPortableGeometry() {
   QWidget window;
   window.setGeometry(40, 50, 300, 200);
@@ -830,6 +878,7 @@ qint32 CShotDocSelfTest::run() {
   testStoreScenario();
   testStoreShot();
   testRevertShotEntry();
+  testMarksBookkeeping();
   testPortableGeometry();
   testWarnings();
   testOnScreen();

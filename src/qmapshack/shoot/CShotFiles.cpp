@@ -333,6 +333,15 @@ CShotFiles::row_t CShotFiles::imagesOf(const QString& id) const {
   return row;
 }
 
+std::optional<CShotFiles::row_t> CShotFiles::row(const QString& id) const {
+  for (const row_t& row : rows()) {
+    if (row.id == id) {
+      return row;
+    }
+  }
+  return std::nullopt;
+}
+
 QList<CShotFiles::row_t> CShotFiles::rows() const {
   QJsonObject content;
   readShotFile(content);
@@ -341,6 +350,7 @@ QList<CShotFiles::row_t> CShotFiles::rows() const {
 
   QList<row_t> rows;
   QSet<QString> known;
+  const QStringList& changed = marksChanged();
   const QJsonArray& shots = content["shots"].toArray();
   for (const QJsonValue& value : shots) {
     const QJsonObject& shot = value.toObject();
@@ -351,6 +361,7 @@ QList<CShotFiles::row_t> CShotFiles::rows() const {
     // CShotPage::run() and shots.py replay skip the others.
     row.takeable = shot.contains("widget") || shot.contains("exposure");
     row.state = !anywhere.contains(row.id) ? eNotUsed : (row.imagePath.isEmpty() ? eNoImage : eTaken);
+    row.marksChanged = changed.contains(row.id);
     known << row.id;
     rows << row;
   }
@@ -672,6 +683,84 @@ QString CShotFiles::storeScenario(const QString& name, const QJsonArray& steps, 
     }
   }
   return QString();
+}
+
+QString CShotFiles::marksFile() const { return repo.absoluteFilePath("doc/shots/_cache/" + page + "-marks.json"); }
+
+QJsonObject CShotFiles::readMarksFile() const { return QJsonDocument::fromJson(readWhole(marksFile())).object(); }
+
+QString CShotFiles::writeMarksFile(const QJsonObject& content) const {
+  if (!QDir().mkpath(QFileInfo(marksFile()).absolutePath())) {
+    return QString("%1 cannot be created.").arg(QFileInfo(marksFile()).absolutePath());
+  }
+  return writeWhole(marksFile(), QJsonDocument(content).toJson(QJsonDocument::Indented));
+}
+
+QJsonArray CShotFiles::pendingMarks(const QString& id) const {
+  return readMarksFile()["pending"].toObject()[id].toArray();
+}
+
+QString CShotFiles::setPendingMarks(const QString& id, const QJsonArray& marks) const {
+  QJsonObject content = readMarksFile();
+  QJsonObject pending = content["pending"].toObject();
+  if (marks.isEmpty()) {
+    if (!pending.contains(id)) {
+      return QString();
+    }
+    pending.remove(id);
+  } else {
+    pending[id] = marks;
+  }
+  content["pending"] = pending;
+  return writeMarksFile(content);
+}
+
+QStringList CShotFiles::marksChanged() const {
+  QStringList ids;
+  for (const QJsonValue& id : readMarksFile()["changed"].toArray()) {
+    ids << id.toString();
+  }
+  return ids;
+}
+
+QString CShotFiles::setMarksChanged(const QString& id, bool on) const {
+  QStringList ids = marksChanged();
+  if (on == ids.contains(id)) {
+    return QString();
+  }
+  if (on) {
+    ids << id;
+  } else {
+    ids.removeAll(id);
+  }
+  QJsonObject content = readMarksFile();
+  content["changed"] = QJsonArray::fromStringList(ids);
+  return writeMarksFile(content);
+}
+
+QString CShotFiles::dropStaleMarks() const {
+  QSet<QString> alive;
+  for (const row_t& row : rows()) {
+    if (eNotUsed != row.state || !shot(row.id).isEmpty()) {
+      alive << row.id;
+    }
+  }
+  QJsonObject content = readMarksFile();
+  QJsonObject pending = content["pending"].toObject();
+  for (const QString& id : pending.keys()) {
+    if (!alive.contains(id)) {
+      pending.remove(id);
+    }
+  }
+  QJsonArray changed;
+  for (const QJsonValue& id : content["changed"].toArray()) {
+    if (alive.contains(id.toString()) && !shot(id.toString()).isEmpty()) {
+      changed.append(id);
+    }
+  }
+  content["pending"] = pending;
+  content["changed"] = changed;
+  return writeMarksFile(content);
 }
 
 QString CShotFiles::storeShot(const QJsonObject& shot) {

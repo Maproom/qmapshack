@@ -107,6 +107,10 @@ The writer's guide is `doc/WRITING_DOCS.md`: short, facts only, updated with eve
   steps through them, a click or Return takes one; it swallows every key and click meanwhile, so an open menu stays open.
   The launcher writes the mark (`mark-placed`) through `storeShot()` and sends the row's marks back (`marks`); the
   overlay showing them is a child of the main window, hidden while an image is taken.
+- **The launcher keeps marks a shot file cannot hold** in `doc/shots/_cache/<page>-marks.json`: marks of an image not
+  taken yet (`pending`, moved into the entry by its first take) and the ids whose marks changed since their image
+  (`changed`). A mark change on a taken row deletes its `_work` image; any new image of the row, Revert, Taken in and
+  scenario Delete clear `changed`. `shots.py publish` keeps a `<id>.shot.json` whose image is not in `_work`.
 - **Ctrl+Shift+F9 and F10 pressed in the panel go to the panel's process**; the launcher's application filter passes
   them on as `tag`/`mark`, and Return/Escape as `mark-confirm`/`mark-cancel` while the state reports `marking 1`.
   `activeTarget()` falls back to the window under the pointer: the state then has no active window.

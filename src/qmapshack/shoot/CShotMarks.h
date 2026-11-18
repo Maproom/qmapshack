@@ -28,6 +28,7 @@
 
 class QImage;
 class QJsonArray;
+class QSlider;
 class QDockWidget;
 class QTabBar;
 class QWidget;
@@ -50,20 +51,30 @@ struct mark_t {
   QString name;   /**< what the writer reads */
 };
 
+/** @brief Whether a mark's target is on screen. */
+enum class found_e {
+  eFound,   /**< placed */
+  eClosed,  /**< there, but not on screen now: a closed menu, a hidden page, a collapsed row */
+  eMissing, /**< no such widget, entry or row */
+  eWrong    /**< the mark does not fit its target */
+};
+
 /** @brief Where a mark lands. */
 struct placed_t {
   mark_t mark;
+  found_e found = found_e::eWrong;
   QRect area;                              /**< global coordinates */
   Qt::Orientation arrows = Qt::Horizontal; /**< a resize cursor's direction */
   QWidget* window = nullptr;               /**< the window the target lies in */
 };
 
-/** @return why @p marks cannot be read, empty when @p out holds them */
+/** @return why @p marks cannot be read, empty when @p out holds them; else @p out holds those before the first bad one
+ */
 QString parse(const QJsonArray& marks, QList<mark_t>& out);
 
 /**
    @param shot  the photographed widget: the `window` root, and the menu when no popup is open
-   @return why @p mark is not on screen, empty when @p out holds where it lands
+   @return why @p mark is not on screen, empty when @p out holds where it lands; @p out says which kind either way
  */
 QString place(const mark_t& mark, QWidget* shot, placed_t& out);
 
@@ -76,6 +87,9 @@ QString place(const mark_t& mark, QWidget* shot, placed_t& out);
  */
 QString paint(QImage& image, const QList<placed_t>& placed, const QWidget* w, const QRect& keep,
               QList<QRect>* drawn = nullptr);
+
+/** @return where @p slider's knob is, in its own coordinates */
+QRect sliderHandle(const QSlider& slider);
 
 /** @return false when a disc on @p area would be cut apart by the hole its target leaves: a tab, a field */
 bool discFits(const QRect& area);

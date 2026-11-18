@@ -730,6 +730,7 @@ Loaded when files there are touched; read them before working on the subsystem f
 ### Documentation
 
 `.notes/documentation-plan.md`: generated HTML in `doc/html/` replaces `QMSHelp.qch`.
+`.notes/shot-marks-plan.md`: marks in documentation images (QMS-1319); read it first when resuming.
 
 Analysed designs live in `.notes/`, each wanting its own branch. De-freeze one by pointing at the
 file.

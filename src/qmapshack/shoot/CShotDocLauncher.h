@@ -32,6 +32,8 @@
 class CShotDocPanel;
 class CShotsJob;
 class QFileSystemWatcher;
+class QJsonArray;
+class QJsonObject;
 class QLocalServer;
 class QTemporaryDir;
 
@@ -80,6 +82,10 @@ class CShotDocLauncher : public QObject {
   /** @brief Send @p line to the running state if there is one, quietly: housekeeping, not an action. */
   void notify(const QString& line);
   /** @brief Tell the state the selected image; quiet when there is none. */
+  /** @brief Store @p marks as @p id's, refresh the panel with @p done and tell the state. */
+  void storeMarks(const QString& id, const QJsonArray& marks, const QString& done);
+  void addMark(const QString& id, const QJsonObject& mark);
+  void removeMark(qint32 index);
   void sendSelection();
 
   /** @brief Set the panel's busy box and recording mode from what runs. */
@@ -152,6 +158,8 @@ class CShotDocLauncher : public QObject {
   bool ending = false;
 
   CShotDocPanel* panel = nullptr;
+  /** While the state process chooses a mark's target, Return and Escape go to it. */
+  bool marking = false;
   QLocalServer* server = nullptr;
   QFileSystemWatcher* watcher = nullptr;
   QTemporaryDir* scratch = nullptr;

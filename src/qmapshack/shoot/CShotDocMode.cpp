@@ -60,6 +60,7 @@
 #include <QVariant>
 #include <algorithm>
 #include <cstdlib>
+#include <memory>
 #include <utility>
 
 #include "CMainWindow.h"
@@ -69,6 +70,7 @@
 #include "shoot/CShotAddress.h"
 #include "shoot/CShotContext.h"
 #include "shoot/CShotFixture.h"
+#include "shoot/CShotMarker.h"
 #include "shoot/CShotMarks.h"
 #include "shoot/CShotPage.h"
 #include "shoot/CShotRecorder.h"
@@ -84,6 +86,7 @@ constexpr qint32 kLeaveTimeoutMs = 2000;
 /** The documentation key; a bare function key would be taken from the application, where F1, F8 and F11 are bound. */
 constexpr Qt::KeyboardModifiers kTagModifiers = Qt::ControlModifier | Qt::ShiftModifier;
 constexpr Qt::Key kTagKey = Qt::Key_F9;
+constexpr Qt::Key kMarkKey = Qt::Key_F10;
 /** A dragged rectangle smaller than this on either side is a click [px]. */
 constexpr qint32 kMinRegionSide = 8;
 /** Where the application window sat, in CShotFiles::placementFile(). */
@@ -263,6 +266,8 @@ CShotDocMode::CShotDocMode(const QDir& repo, const QString& page, const QString&
       writer(std::make_unique<CShotWriter>(repo.absoluteFilePath("doc/images/_work"))),
       ctx(std::make_unique<CShotContext>(*writer)) {
   recorder = new CShotRecorder(*ctx, this);
+  marker =
+      new CShotMarker([this](const QString& line) { send(line); }, [this](const QString& text) { report(text); }, this);
   placementTimer = new QTimer(this);
   placementTimer->setSingleShot(true);
   placementTimer->setInterval(kPlacementSettleMs);
@@ -325,6 +330,12 @@ bool CShotDocMode::eventFilter(QObject* watched, QEvent* event) {
   const QKeyEvent* key = static_cast<QKeyEvent*>(event);
   const Qt::KeyboardModifiers modifiers =
       key->modifiers() & (Qt::ControlModifier | Qt::ShiftModifier | Qt::AltModifier | Qt::MetaModifier);
+  if (kMarkKey == key->key() && kTagModifiers == modifiers) {
+    if (!key->isAutoRepeat()) {
+      markAtPointer();
+    }
+    return true;
+  }
   if (kTagKey != key->key() || kTagModifiers != modifiers) {
     return QObject::eventFilter(watched, event);
   }
@@ -539,6 +550,27 @@ void CShotDocMode::obey(const QString& line) {
 
   if ("select" == verb) {
     wantedShot = rest;
+    marker->setShot(files.shot(rest));
+    return;
+  }
+  if ("marker" == verb) {
+    marker->setMarker(rest);
+    return;
+  }
+  if ("marks" == verb) {
+    marker->setMarks(QJsonDocument::fromJson(rest.toUtf8()).array());
+    return;
+  }
+  if ("mark-confirm" == verb) {
+    marker->confirm();
+    return;
+  }
+  if ("mark-cancel" == verb) {
+    marker->cancel();
+    return;
+  }
+  if ("marks-shown" == verb) {
+    marker->setShown("1" == rest);
     return;
   }
   if (!ready) {
@@ -560,8 +592,15 @@ void CShotDocMode::obey(const QString& line) {
     return;
   }
 
+  if ("mark" == verb) {
+    markAtPointer();
+    return;
+  }
+
   busy = true;
-  if ("region" == verb) {
+  if ("tag" == verb) {
+    tag();
+  } else if ("region" == verb) {
     takeRegion(rest);
   } else if ("update" == verb) {
     updateScenario(rest);
@@ -599,8 +638,33 @@ QWidget* CShotDocMode::activeTarget() {
   if (QWidget* active = QApplication::activeWindow(); nullptr != active) {
     return active;
   }
-  QWidget* focus = QApplication::focusWidget();
-  return nullptr == focus ? nullptr : focus->window();
+  if (QWidget* focus = QApplication::focusWidget(); nullptr != focus) {
+    return focus->window();
+  }
+  // Ctrl+Shift+F9 pressed in the panel: the application has no active window, the pointer says which.
+  if (QWidget* under = QApplication::widgetAt(QCursor::pos()); nullptr != under) {
+    return under->window();
+  }
+  return CMainWindow::isNull() ? nullptr : &CMainWindow::self();
+}
+
+void CShotDocMode::markAtPointer() {
+  if (recorder->isRecording()) {
+    marker->refuse("Marks are placed after Stop, on an image.");
+    return;
+  }
+  if (!ready || busy) {
+    return;
+  }
+  if (wantedShot.isEmpty()) {
+    marker->refuse("Select the image the mark is for first.");
+    return;
+  }
+  if (files.shot(wantedShot).isEmpty()) {
+    marker->refuse(QString("Take %1 first; then mark it.").arg(wantedShot));
+    return;
+  }
+  marker->markAtPointer(wantedShot);
 }
 
 QString CShotDocMode::onScreenName(const QWidget* w) {
@@ -782,11 +846,17 @@ void CShotDocMode::keepShot(const QJsonObject& shot, const std::function<bool()>
   QFile::remove(pending);
   const QString work = writer->getOutDir();
   writer->setOutDir(files.pendingDir());
+  const CShotWarnings warnings;
   const bool taken = take();
   writer->setOutDir(work);
   if (!taken) {
     QFile::remove(pending);
-    report(QString("%1 could not be taken; the console says why. Nothing was changed.").arg(id));
+    const QString& why = warnings.first();
+    const QString& text = why.isEmpty()
+                              ? QString("%1 could not be taken; the console says why. Nothing was changed.").arg(id)
+                              : QString("Not taken: %1 Nothing was changed.").arg(why);
+    report(text);
+    CShotMarker::hint(text);
     return;
   }
   const bool kept = confirmResult(id);
@@ -822,6 +892,9 @@ void CShotDocMode::keepShot(const QJsonObject& shot, const std::function<bool()>
 }
 
 void CShotDocMode::tag() {
+  // The marks shown on screen are no part of the image.
+  marker->setHidden(true);
+  const std::shared_ptr<void> shownAgain(nullptr, [this](void*) { marker->setHidden(false); });
   if (recorder->isRecording()) {
     report("Stop the recording first: taking an image drives the application, and that would be recorded.");
     return;
@@ -933,8 +1006,16 @@ void CShotDocMode::tag() {
     // Only a live part is written from what was rendered at the key press; a dialog parented to the main window is
     // in images too, and its shot says exposure.
     if (kind_e::eLive == kind && images.contains(target)) {
-      QImage image = images.value(target);
-      if (const QString& problem = CShotMarks::paint(image, placed, target, QRect()); !problem.isEmpty()) {
+      // As a build takes it, from what was rendered at the key press.
+      QWidget* window = target->window();
+      // A floating docker is no part of the main window's render.
+      const auto windowImage = [&images, window]() {
+        return images.contains(window) ? images.value(window) : CShotWriter::render(window, window->size());
+      };
+      QImage image;
+      if (const QString& problem =
+              CShotMarks::framed(images.value(target), target, QRect(), placed, windowImage, image);
+          !problem.isEmpty()) {
         qWarning().noquote() << QString("shoot: %1: %2.").arg(id, problem);
         return false;
       }
@@ -970,6 +1051,8 @@ bool CShotDocMode::refusedAsHandOpened(const QWidget* target) {
 }
 
 void CShotDocMode::takeRegion(const QString& wanted) {
+  marker->setHidden(true);
+  const std::shared_ptr<void> shownAgain(nullptr, [this](void*) { marker->setHidden(false); });
   CMainWindow* main = ctx->mainWindow();
   if (nullptr == main) {
     return;

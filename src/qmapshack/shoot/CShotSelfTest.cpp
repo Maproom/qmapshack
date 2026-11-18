@@ -25,6 +25,7 @@
 #include <QCheckBox>
 #include <QComboBox>
 #include <QCompleter>
+#include <QCursor>
 #include <QDateTimeEdit>
 #include <QDebug>
 #include <QDialog>
@@ -49,6 +50,8 @@
 #include <QMenuBar>
 #include <QPlainTextEdit>
 #include <QPushButton>
+#include <QScopeGuard>
+#include <QScreen>
 #include <QScrollArea>
 #include <QSlider>
 #include <QSpinBox>
@@ -64,6 +67,7 @@
 #include <QTimer>
 #include <QToolBar>
 #include <QToolButton>
+#include <QToolTip>
 #include <QTreeWidget>
 #include <QVBoxLayout>
 #include <algorithm>
@@ -100,6 +104,7 @@
 #include "shoot/CShotApplication.h"
 #include "shoot/CShotContext.h"
 #include "shoot/CShotHandlers.h"
+#include "shoot/CShotMarker.h"
 #include "shoot/CShotMarks.h"
 #include "shoot/CShotPage.h"
 #include "shoot/CShotRecorder.h"
@@ -2580,6 +2585,27 @@ void checkMarks(CHarness& h) {
     }
   }
   const QString& leftName = (nullptr == left) ? QString() : left->objectName();
+  // A tab group: another docker tabified behind the one on the left, the layout restored afterwards.
+  const QByteArray layout = main->saveState();
+  const auto restore = qScopeGuard([main, layout]() {
+    main->restoreState(layout);
+    settle();
+  });
+  QDockWidget* behind = nullptr;
+  for (QDockWidget* dock : docks) {
+    if (nullptr == behind && dock != left && !dock->isFloating() && dock->isVisible() &&
+        Qt::LeftDockWidgetArea == main->dockWidgetArea(dock)) {
+      behind = dock;
+    }
+  }
+  if (nullptr != left && nullptr != behind) {
+    main->tabifyDockWidget(behind, left);
+    settle(120);
+  }
+  const QString& tabbed = (nullptr == left || main->tabifiedDockWidgets(left).isEmpty()) ? QString() : leftName;
+  const QString& wksName = CShotAddress::addressOf(main, h.wks).value_or(QString());
+  const QString& projectRow = CShotAddress::rowPathOf(h.wks->model()->index(0, 0));
+  fillTabs(p);
 
   struct probe_t {
     QString name;
@@ -2603,6 +2629,16 @@ void checkMarks(CHarness& h) {
        {{"widget", toolbar}, {"part", "action"}, {"action", entry}, {"shape", "arrow"}, {"tail", QJsonArray{90, 70}}},
        main},
       {"a disc on a slider's knob", {{"root", "window"}, {"widget", "probeSlider"}, {"part", "handle"}}, p.window},
+      {"a frame on a docker's tab", {{"widget", tabbed}, {"part", "tab"}}, main},
+      {"a disc on the arrow of a workspace row, as tall as its status line makes it",
+       {{"widget", wksName}, {"part", "branch"}, {"row", projectRow}},
+       main},
+      {"a frame on a tab widget page's tab",
+       {{"root", "window"}, {"widget", "probeTabEdit"}, {"part", "tab"}},
+       p.window},
+      {"a frame on a button in a workspace row",
+       {{"widget", wksName}, {"part", "button"}, {"row", projectRow}, {"button", "visible"}},
+       main},
       {"a disc on a QSplitter's handle",
        {{"root", "window"},
         {"part", "splitter"},
@@ -2652,6 +2688,144 @@ void checkMarks(CHarness& h) {
                 .arg(text(target)));
   }
 
+  for (const auto& [what, mark] :
+       QList<QPair<QString, QJsonObject>>{{"a tab", {{"widget", leftName}, {"part", "tab"}, {"shape", "disc"}}},
+                                          {"a docker", {{"widget", leftName}, {"shape", "disc"}}}}) {
+    CShotMarks::placed_t placed;
+    QString problem = CShotMarks::place(markOf(mark), main, placed);
+    QImage image(main->size(), QImage::Format_ARGB32_Premultiplied);
+    if (problem.isEmpty()) {
+      problem = CShotMarks::paint(image, {placed}, main, QRect());
+    }
+    verdict(QString("marks: a disc on %1, too big for it, is refused").arg(what),
+            problem.contains("too big for a disc"), problem);
+  }
+
+  // Pointing: the most specific candidate under the pointer is the docker's tab, the row's button.
+  {
+    const QDockWidget* front = left;
+    const QTabBar* bar = nullptr;
+    qint32 tab = -1;
+    for (const QTabBar* candidate : main->findChildren<QTabBar*>(Qt::FindDirectChildrenOnly)) {
+      for (qint32 i = 0; i < candidate->count() && candidate->isVisible(); i++) {
+        if (candidate->tabData(i).value<quintptr>() == quintptr(front)) {
+          bar = candidate;
+          tab = i;
+        }
+      }
+    }
+    const QModelIndex& projectIndex = h.wks->model()->index(0, 0);
+    QString problem;
+    const QRect& button = CShotHandlers::rowButtonRect(h.wks, projectIndex, "visible", problem);
+    struct pointing_t {
+      QString name;
+      QString marker;
+      std::function<QPoint()> global;
+      QJsonObject wanted; /**< empty: refused */
+      QString hint;       /**< what the tooltip at the pointer says, empty for none */
+      QJsonObject shot;   /**< the selected image's shot */
+      QWidget* window;    /**< the window the target lies in */
+    };
+    const auto atTab = [bar, tab]() {
+      return (nullptr == bar) ? QPoint() : bar->mapToGlobal(bar->tabRect(tab).center());
+    };
+    const auto atButton = [&h, button]() {
+      return button.isValid() ? h.wks->viewport()->mapToGlobal(button.center()) : QPoint();
+    };
+    const QJsonObject buttonMark{{"widget", wksName}, {"part", "button"}, {"row", projectRow}, {"button", "visible"}};
+    const QJsonObject knobMark{{"root", "window"}, {"widget", "probeSlider"}, {"part", "handle"}};
+    const auto atKnob = [&p, knobMark]() {
+      CShotMarks::placed_t placed;
+      return CShotMarks::place(markOf(knobMark), p.window, placed).isEmpty() ? placed.area.center() : QPoint();
+    };
+    // A window a scenario opens: its shot names it by its class.
+    const QJsonObject dialogShot{{"widget", QString()},
+                                 {"window", QString::fromLatin1(p.window->metaObject()->className())}};
+    const QList<pointing_t> pointings = {
+        {"pointing at a docker's tab offers it first",
+         "frame",
+         atTab,
+         {{"widget", leftName}, {"part", "tab"}},
+         {},
+         {},
+         main},
+        {"pointing at a button in a workspace row offers it first", "frame", atButton, buttonMark, {}, {}, main},
+        {"pointing at a slider's knob in a window of its own marks it, in that window's image",
+         "disc",
+         atKnob,
+         knobMark,
+         {},
+         dialogShot,
+         p.window},
+        {"a disc pointed at a docker's tab is refused, a frame suggested at the pointer",
+         "disc",
+         atTab,
+         {},
+         "mark this with a frame",
+         {},
+         main},
+        {"a mark placed outside the selected image is placed, and the pointer says so",
+         "frame",
+         atButton,
+         buttonMark,
+         "not in this image",
+         {{"widget", toolbar}},
+         main},
+    };
+    // The offscreen screen is smaller than the main window: the target is moved onto it, as on a desktop.
+    const QPoint mainHome = main->pos();
+    const QPoint windowHome = p.window->pos();
+    const QPoint middle = QGuiApplication::primaryScreen()->geometry().center();
+    for (const pointing_t& pointing : pointings) {
+      const QString name = "marks: " + pointing.name;
+      if (pointing.global().isNull()) {
+        verdict(name, false, "there is nothing to point at");
+        continue;
+      }
+      pointing.window->move(pointing.window->pos() + middle - pointing.global());
+      pointing.window->raise();
+      settle();
+      QStringList sent;
+      QStringList reported;
+      CShotMarker marker([&sent](const QString& line) { sent << line; },
+                         [&reported](const QString& line) { reported << line; }, nullptr);
+      marker.setMarker(pointing.marker);
+      marker.setShot(pointing.shot);
+      QToolTip::hideText();
+      QCursor::setPos(pointing.global());
+      settle();
+      marker.markAtPointer("selftest/pointing");
+      marker.confirm();
+      QJsonObject placed;
+      for (const QString& line : sent) {
+        if (line.startsWith("mark-placed ")) {
+          placed = QJsonDocument::fromJson(line.section(' ', 2).toUtf8()).object();
+        }
+      }
+      // A hint at the pointer, wrapped into short lines.
+      const QString tip = QToolTip::isVisible() ? QToolTip::text() : QString();
+      QToolTip::hideText();
+      qsizetype longest = 0;
+      for (const QString& line : tip.split('\n')) {
+        longest = qMax(longest, line.size());
+      }
+      bool same = pointing.wanted.isEmpty() ? placed.isEmpty() : !placed.isEmpty();
+      for (auto it = pointing.wanted.begin(); it != pointing.wanted.end(); ++it) {
+        same = same && placed[it.key()] == it.value();
+      }
+      same =
+          same && (pointing.hint.isEmpty() ? tip.isEmpty()
+                                           : QString(tip).replace('\n', ' ').contains(pointing.hint) && longest <= 40);
+      main->move(mainHome);
+      p.window->move(windowHome);
+      settle();
+      verdict(name, same,
+              QString("%1 | %2 | at the pointer: %3")
+                  .arg(QString::fromUtf8(QJsonDocument(placed).toJson(QJsonDocument::Compact)), reported.value(0),
+                       tip.isEmpty() ? QString("nothing") : QString(tip).replace('\n', " / ")));
+    }
+  }
+
   // A name more than one widget carries.
   QString repeated;
   QHash<QString, qint32> names;
@@ -2675,6 +2849,13 @@ void checkMarks(CHarness& h) {
        {{"widget", toolbar}, {"part", "action"}, {"action", "noSuchAction"}},
        "no entry"},
       {"a menu entry while no menu is open", {{"root", "menu"}, {"part", "action"}, {"action", entry}}, "no menu"},
+      {"a tab on what has no tab", {{"widget", toolbar}, {"part", "tab"}}, "no docker or tab page"},
+      {"a row button the rows do not have",
+       {{"widget", wksName}, {"part", "button"}, {"row", projectRow}, {"button", "noSuchButton"}},
+       "no button"},
+      {"a row button on a row the list does not have",
+       {{"widget", wksName}, {"part", "button"}, {"row", "999:0"}, {"button", "visible"}},
+       "no row"},
   };
   for (const refusal_t& refusal : refusals) {
     CShotMarks::placed_t placed;
@@ -2695,16 +2876,30 @@ void checkMarks(CHarness& h) {
   CShotContext ctx(writer);
   ctx.setFixture(h.ctx.project(), h.ctx.trk(), h.ctx.wpt(), h.ctx.rte(), h.ctx.area());
   const QJsonArray size{main->width(), main->height()};
+  const QRect leftRect = (nullptr == left) ? QRect() : QRect(left->mapTo(main, QPoint(0, 0)), left->size());
   const QJsonObject content{
       {"scenarios", QJsonObject()},
       {"shots",
-       QJsonArray{QJsonObject{
-                      {"id", "selftest/marked"}, {"size", size}, {"widget", QString()}, {"mark", QJsonArray{leftName}}},
-                  QJsonObject{{"id", "selftest/cut"},
-                              {"size", size},
-                              {"widget", QString()},
-                              {"rect", QJsonArray{0, 0, 10, 10}},
-                              {"mark", QJsonArray{leftName}}}}}};
+       QJsonArray{
+           QJsonObject{
+               {"id", "selftest/marked"}, {"size", size}, {"widget", QString()}, {"mark", QJsonArray{leftName}}},
+           QJsonObject{
+               {"id", "selftest/framed-part"}, {"size", size}, {"widget", leftName}, {"mark", QJsonArray{leftName}}},
+           QJsonObject{{"id", "selftest/outside-part"},
+                       {"size", size},
+                       {"widget", leftName},
+                       {"mark", QJsonArray{QJsonObject{{"widget", toolbar}, {"part", "action"}, {"action", entry}}}}},
+           QJsonObject{{"id", "selftest/cut"},
+                       {"size", size},
+                       {"widget", QString()},
+                       {"rect", QJsonArray{0, 0, 10, 10}},
+                       {"mark", QJsonArray{leftName}}},
+           QJsonObject{{"id", "selftest/drawn-past"},
+                       {"size", size},
+                       {"widget", QString()},
+                       {"rect", QJsonArray{leftRect.x(), leftRect.y(), leftRect.width(), leftRect.height()}},
+                       {"mark", QJsonArray{QJsonObject{
+                                    {"widget", leftName}, {"shape", "arrow"}, {"tail", QJsonArray{400, 0}}}}}}}}};
   const QString& path = dir.filePath("selftest.json");
   QFile out(path);
   if (!out.open(QIODevice::WriteOnly) || out.write(QJsonDocument(content).toJson()) < 0) {
@@ -2716,13 +2911,23 @@ void checkMarks(CHarness& h) {
   const qint32 failed = CShotPage::run(path, ctx, "*", "-");
   const bool marked = QFileInfo::exists(dir.filePath("selftest/marked.png"));
   const bool cut = QFileInfo::exists(dir.filePath("selftest/cut.png"));
-  verdict("marks: a shot file draws them, and fails a shot whose mark its rect cuts",
-          1 == failed && marked && !cut && warnings.contains("not completely inside"),
-          QString("%1 failure(s), marked %2, cut %3: %4")
-              .arg(failed)
-              .arg(marked ? "written" : "missing")
-              .arg(cut ? "written" : "refused")
-              .arg(warnings.first()));
+  const QImage framed(dir.filePath("selftest/framed-part.png"));
+  const QSize part = (nullptr == left) ? QSize() : left->size();
+  verdict(
+      "marks: a part whose frame reaches past it is cut from its window with room for it",
+      !framed.isNull() && framed.width() > part.width() && framed.height() > part.height(),
+      QString("image %1x%2, part %3x%4").arg(framed.width()).arg(framed.height()).arg(part.width()).arg(part.height()));
+  verdict("marks: a mark on something outside the part fails its shot",
+          !QFileInfo::exists(dir.filePath("selftest/outside-part.png")) &&
+              warnings.contains("selftest/outside-part: it marks"),
+          warnings.first());
+  verdict("marks: a mark on something outside the rect a shot keeps fails it",
+          !cut && warnings.contains("selftest/cut: it marks"), warnings.first());
+  verdict("marks: a mark inside the rect whose drawing reaches past it fails its shot",
+          !QFileInfo::exists(dir.filePath("selftest/drawn-past.png")) && warnings.contains("not completely inside"),
+          warnings.first());
+  verdict("marks: a shot file draws them, and only the failing shots fail", 3 == failed && marked,
+          QString("%1 failure(s), marked %2").arg(failed).arg(marked ? "written" : "missing"));
 }
 
 /** What every case together must have covered. */

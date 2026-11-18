@@ -18,6 +18,7 @@
 
 #include "shoot/CShotMarks.h"
 
+#include <QAbstractItemView>
 #include <QApplication>
 #include <QDockWidget>
 #include <QImage>
@@ -29,12 +30,13 @@
 #include <QPainter>
 #include <QPainterPath>
 #include <QPainterPathStroker>
-#include <QRawFont>
 #include <QSet>
 #include <QSlider>
 #include <QSplitter>
 #include <QStyle>
 #include <QStyleOptionSlider>
+#include <QTabBar>
+#include <QTabWidget>
 #include <QToolBar>
 #include <QTreeView>
 #include <QtMath>
@@ -42,6 +44,7 @@
 
 #include "CMainWindow.h"
 #include "shoot/CShotAddress.h"
+#include "shoot/CShotHandlers.h"
 
 namespace {
 const QColor kRed(255, 0, 0, 200);
@@ -49,8 +52,20 @@ const QColor kDisc(255, 0, 0, 70);
 const QColor kLight(255, 255, 255, 190);
 constexpr qreal kLine = 3.0;
 constexpr qreal kOutline = 2.0;
+/** A frame's see-through band, so it is no widget border [px]. */
+constexpr qreal kBand = 12.0;
+/** A cursor's glow [px]. */
+constexpr qreal kGlow = 18.0;
+/** A target no thicker than this is a line a disc sits across [px]. */
+constexpr qint32 kThin = 16;
+/** A target thicker than this is no spot a disc can mark [px]. */
+constexpr qint32 kSpot = 2 * kThin;
 
-const QSet<QString> kKeys = {"root", "widget", "part", "row", "action", "between", "shape", "tail", "cursor", "name"};
+/** @return a disc's radius on @p area: by the shorter side, so a disc on a long, thin target stays a spot */
+qreal discRadius(const QRectF& area) { return qMax(14.0, qMin(area.width(), area.height()) / 2.0 + 6.0); }
+
+const QSet<QString> kKeys = {"root",    "widget", "part", "row",    "action", "button",
+                             "between", "shape",  "tail", "cursor", "name"};
 
 /** Reaches QSlider's protected initStyleOption(), which the style needs for the handle's geometry. */
 struct CSliderAccess : QSlider {
@@ -288,6 +303,35 @@ QString placeAction(const CShotMarks::mark_t& mark, QWidget* widget, QRect& area
   return area.isEmpty() ? QString("its entry %1 has no place").arg(mark.action) : QString();
 }
 
+/** @return why @p widget, a docked docker or a tab widget's page, shows no tab, empty when @p area holds it */
+QString placeTab(QWidget* widget, QRect& area) {
+  const QTabBar* bar = nullptr;
+  qint32 at = -1;
+  if (const QDockWidget* dock = qobject_cast<const QDockWidget*>(widget); nullptr != dock) {
+    if (nullptr == qobject_cast<const QMainWindow*>(dock->parentWidget()) || dock->isFloating()) {
+      return "it is no docked docker";
+    }
+    at = CShotMarks::dockTab(dock, bar);
+    if (nullptr == bar) {
+      return "it has no tab";
+    }
+  } else {
+    // A page sits in the tab widget's stack.
+    const QWidget* stack = widget->parentWidget();
+    const QTabWidget* tabs = (nullptr == stack) ? nullptr : qobject_cast<const QTabWidget*>(stack->parentWidget());
+    if (nullptr == tabs || tabs->indexOf(widget) < 0) {
+      return "it is no docker or tab page";
+    }
+    bar = tabs->tabBar();
+    at = tabs->indexOf(widget);
+  }
+  if (!bar->isTabVisible(at)) {
+    return "its tab is hidden";
+  }
+  area = globalRect(bar, bar->tabRect(at));
+  return area.isEmpty() ? QString("its tab has no place") : QString();
+}
+
 QString placePart(const CShotMarks::mark_t& mark, QWidget* widget, QRect& area) {
   if (mark.part.isEmpty()) {
     area = globalRect(widget);
@@ -313,10 +357,11 @@ QString placePart(const CShotMarks::mark_t& mark, QWidget* widget, QRect& area) 
     if (!index.isValid()) {
       return QString("it has no row %1").arg(mark.row);
     }
-    // The branch indicator sits in the indentation left of the row's first cell.
+    // The branch indicator sits in the indentation left of the row's first cell, centred in the row's height.
     const QRect cell = tree->visualRect(index.siblingAtColumn(0));
-    area = globalRect(tree->viewport(),
-                      QRect(cell.left() - tree->indentation(), cell.top(), tree->indentation(), cell.height()));
+    const qint32 side = qMin(tree->indentation(), cell.height());
+    area = globalRect(tree->viewport(), QRect(cell.left() - tree->indentation() + (tree->indentation() - side) / 2,
+                                              cell.center().y() - side / 2, side, side));
     return QString();
   }
   if ("title" == mark.part) {
@@ -342,6 +387,26 @@ QString placePart(const CShotMarks::mark_t& mark, QWidget* widget, QRect& area) 
   if ("action" == mark.part) {
     return placeAction(mark, widget, area);
   }
+  if ("tab" == mark.part) {
+    return placeTab(widget, area);
+  }
+  if ("button" == mark.part) {
+    const QAbstractItemView* view = CShotAddress::itemViewOf(widget);
+    if (nullptr == view) {
+      return "it is no list";
+    }
+    const QModelIndex& index = CShotAddress::resolveRowPath(*view->model(), mark.row);
+    if (!index.isValid()) {
+      return QString("it has no row %1").arg(mark.row);
+    }
+    QString problem;
+    const QRect& rect = CShotHandlers::rowButtonRect(view, index, mark.button, problem);
+    if (!rect.isValid()) {
+      return problem;
+    }
+    area = globalRect(view->viewport(), rect);
+    return QString();
+  }
   return QString("its part %1 is unknown").arg(mark.part);
 }
 
@@ -351,18 +416,25 @@ QPainterPath cursorPath(const QString& kind, Qt::Orientation arrows) {
   if ("pointer" == kind) {
     path.addPolygon(QPolygonF({{0, 0}, {0, 17}, {4, 13}, {7, 20}, {10, 19}, {7, 12}, {12, 12}, {0, 0}}));
   } else if ("hand" == kind) {
-    // The bundled DejaVu Sans' pointing index, read from the file: font matching takes it from another font or
-    // none. Its tip is the hotspot.
-    const QRawFont font(QString(":/fonts/DejaVuSans.ttf"), 28);
-    path = font.pathForGlyph(font.glyphIndexesForString(QString(QChar(0x261D))).value(0));
-    QPointF tip(0, 1e9);
-    for (qint32 i = 0; i < path.elementCount(); i++) {
-      const QPointF p = path.elementAt(i);
-      if (p.y() < tip.y()) {
-        tip = p;
-      }
-    }
-    path.translate(-tip);
+    // A pointing hand: the index finger raised, the others bent beside it, the thumb out; the fingertip is the
+    // hotspot. DejaVu's U+261D is an outline and fills to a blob.
+    const auto part = [](qreal x, qreal y, qreal w, qreal h, qreal r) {
+      QPainterPath p;
+      p.addRoundedRect(QRectF(x, y, w, h), r, r);
+      return p;
+    };
+    QPainterPath thumb;
+    thumb.moveTo(-2, 13);
+    thumb.lineTo(-6.5, 9.5);
+    thumb.quadTo(-8.5, 9, -7.5, 11.5);
+    thumb.lineTo(-2, 19);
+    thumb.closeSubpath();
+    path = part(-2, 0, 4, 14, 2)
+               .united(part(2, 6, 4, 9, 2))
+               .united(part(6, 7, 4, 8, 2))
+               .united(part(10, 8.5, 3.5, 7, 1.75))
+               .united(part(-2, 11, 15.5, 11, 3.5))
+               .united(thumb);
   } else {
     path.addPolygon(QPolygonF(
         {{-11, 0}, {-5, -6}, {-5, -2}, {5, -2}, {5, -6}, {11, 0}, {5, 6}, {5, 2}, {-5, 2}, {-5, 6}, {-11, 0}}));
@@ -383,32 +455,38 @@ QPointF edgeToward(const QRectF& area, const QPointF& tail) {
 }
 
 struct drawing_t {
-  QPainterPath fill;   /**< filled in red, or black for a cursor */
+  QPainterPath halo;   /**< filled see-through red under the rest: a frame's band, a cursor's glow */
+  QPainterPath fill;   /**< filled in red, see-through for a disc */
   QPainterPath stroke; /**< stroked in red */
+  QPainterPath detail; /**< drawn light over the red: a hand's fingers */
   QRectF bounds;
 };
 
-drawing_t drawingOf(const CShotMarks::placed_t& placed, const QPoint& origin) {
+drawing_t drawingOf(const CShotMarks::placed_t& placed, const QPoint& origin, const QRectF& fit = QRectF()) {
   const CShotMarks::mark_t& mark = placed.mark;
   const QRectF area = QRectF(placed.area.translated(-origin));
   const QString& shape = shapeOf(mark);
   drawing_t d;
-  const qreal margin = kLine / 2 + kOutline;
   if ("frame" == shape) {
-    // Inside the target, so a frame on the photographed widget fits the image; a thin target is framed around.
-    QRectF r = area.adjusted(margin, margin, -margin, -margin);
-    constexpr qreal least = 6;
-    if (r.width() < least) {
-      r.adjust(-(least - r.width()) / 2 - margin, 0, (least - r.width()) / 2 + margin, 0);
-    }
-    if (r.height() < least) {
-      r.adjust(0, -(least - r.height()) / 2 - margin, 0, (least - r.height()) / 2 + margin);
+    // Around the target, the band from its edge outward; where the image ends first, along the image's edge.
+    const qreal margin = kBand / 2;
+    QRectF r = area.adjusted(-margin, -margin, margin, margin);
+    // Only a target inside the image: one partly outside still fails.
+    if (fit.isValid() && fit.contains(area)) {
+      r = r.intersected(fit.adjusted(margin, margin, -margin, -margin));
     }
     d.stroke.addRoundedRect(r, 4, 4);
+    QPainterPathStroker band;
+    band.setWidth(kBand);
+    band.setJoinStyle(Qt::RoundJoin);
+    d.halo = band.createStroke(d.stroke);
   } else if ("disc" == shape) {
-    // By the shorter side: a disc on a long, thin target stays a spot.
-    const qreal radius = qMax(14.0, qMin(area.width(), area.height()) / 2.0 + 6.0);
+    const qreal radius = discRadius(area);
     d.fill.addEllipse(area.center(), radius, radius);
+    // A hole where the target is: the knob stays visible.
+    QPainterPath hole;
+    hole.addEllipse(area.adjusted(-1, -1, 1, 1));
+    d.fill = d.fill.subtracted(hole);
   } else if ("arrow" == shape) {
     const QPointF tail = area.center() + QPointF(CShotMarks::snap(mark.tail));
     const QPointF head = edgeToward(area, tail);
@@ -423,6 +501,16 @@ drawing_t drawingOf(const CShotMarks::placed_t& placed, const QPoint& origin) {
         QPolygonF({head, head - unit * length + normal * width, head - unit * length - normal * width, head}));
   } else {
     d.fill = cursorPath(mark.cursor, placed.arrows).translated(area.center());
+    d.halo.addEllipse(d.fill.boundingRect().center(), kGlow, kGlow);
+    if ("hand" == mark.cursor) {
+      d.detail.moveTo(2, 8);
+      d.detail.lineTo(2, 13);
+      d.detail.moveTo(6, 9);
+      d.detail.lineTo(6, 13);
+      d.detail.moveTo(10, 10.5);
+      d.detail.lineTo(10, 13);
+      d.detail.translate(area.center());
+    }
   }
   QPainterPathStroker stroker;
   stroker.setWidth(kLine + 2 * kOutline);
@@ -430,9 +518,70 @@ drawing_t drawingOf(const CShotMarks::placed_t& placed, const QPoint& origin) {
   if (!d.fill.isEmpty()) {
     d.bounds = d.bounds.united(d.fill.boundingRect().adjusted(-kOutline, -kOutline, kOutline, kOutline));
   }
+  if (!d.halo.isEmpty()) {
+    d.bounds = d.bounds.united(d.halo.boundingRect());
+  }
   return d;
 }
+/** @brief Every mark in the one red, a disc see-through; each with the thin light outline. */
+void draw(QPainter& painter, const drawing_t& d, const QString& shape) {
+  if (!d.halo.isEmpty()) {
+    painter.fillPath(d.halo, kDisc);
+  }
+  if (!d.stroke.isEmpty()) {
+    painter.strokePath(d.stroke, QPen(kLight, kLine + 2 * kOutline, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    painter.strokePath(d.stroke, QPen(kRed, kLine, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+  }
+  if (!d.fill.isEmpty()) {
+    painter.strokePath(d.fill, QPen(kLight, 2 * kOutline, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    painter.fillPath(d.fill, "disc" == shape ? kDisc : kRed);
+  }
+  if (!d.detail.isEmpty()) {
+    painter.strokePath(d.detail, QPen(kLight, 1.2, Qt::SolidLine, Qt::RoundCap));
+  }
+}
 }  // namespace
+
+QImage CShotMarks::icon(const QString& kind, qint32 side) {
+  QImage image(side, side, QImage::Format_ARGB32_Premultiplied);
+  image.fill(Qt::transparent);
+  placed_t p;
+  const qint32 c = side / 2;
+  if ("frame" == kind || "disc" == kind) {
+    p.mark.shape = kind;
+    p.area = ("frame" == kind) ? QRect(8, 10, side - 16, side - 20) : QRect(c - 2, c - 2, 4, 4);
+  } else if ("arrow" == kind) {
+    // At a small target top left, from the bottom right.
+    p.mark.shape = kind;
+    p.area = QRect(2, 2, 6, 6);
+    p.mark.tail = QPoint(side - 10, side - 10);
+  } else {
+    p.mark.shape = "cursor";
+    p.mark.cursor = kind;
+    // The hotspot where the cursor's figure sits centred.
+    const QRectF figure = cursorPath(kind, Qt::Horizontal).boundingRect();
+    p.area = QRect((QPointF(c, c) - figure.center()).toPoint(), QSize(1, 1));
+  }
+  // Shrunk to fit: a cursor's glow is wider than the button.
+  const drawing_t d = drawingOf(p, QPoint());
+  const qreal scale = qMin(1.0, (side - 2) / qMax(d.bounds.width(), d.bounds.height()));
+  QPainter painter(&image);
+  painter.setRenderHint(QPainter::Antialiasing);
+  painter.translate(side / 2.0, side / 2.0);
+  painter.scale(scale, scale);
+  painter.translate(-d.bounds.center());
+  draw(painter, d, shapeOf(p.mark));
+  return image;
+}
+
+QRect CShotMarks::extent(const QList<placed_t>& placed, const QWidget* w) {
+  const QPoint origin = w->mapToGlobal(QPoint(0, 0));
+  QRectF all;
+  for (const placed_t& p : placed) {
+    all = all.united(drawingOf(p, origin).bounds);
+  }
+  return all.toAlignedRect();
+}
 
 QPoint CShotMarks::snap(const QPoint& tail) {
   if (tail.isNull()) {
@@ -457,6 +606,8 @@ QString CShotMarks::describe(const mark_t& mark) {
     part = mark.action;
   } else if ("branch" == mark.part) {
     part = "branch " + mark.row;
+  } else if ("button" == mark.part) {
+    part = QString("button %1 of row %2").arg(mark.button, mark.row);
   }
   return part.isEmpty() || "splitter" == mark.part ? QString("%1: %2").arg(shape, target)
                                                    : QString("%1: %2 (%3)").arg(shape, target, part);
@@ -481,6 +632,7 @@ QString CShotMarks::parse(const QJsonArray& marks, QList<mark_t>& out) {
     mark.part = object["part"].toString();
     mark.row = object["row"].toString();
     mark.action = object["action"].toString();
+    mark.button = object["button"].toString();
     for (const QJsonValue& side : object["between"].toArray()) {
       mark.between << side.toString();
     }
@@ -499,6 +651,9 @@ QString CShotMarks::parse(const QJsonArray& marks, QList<mark_t>& out) {
     }
     if ("action" == mark.part && mark.action.isEmpty()) {
       return QString("%1 names no entry").arg(what);
+    }
+    if ("button" == mark.part && (mark.row.isEmpty() || mark.button.isEmpty())) {
+      return QString("%1 names no row or no button").arg(what);
     }
     if ("branch" == mark.part && mark.row.isEmpty()) {
       return QString("%1 names no row").arg(what);
@@ -538,6 +693,77 @@ QString CShotMarks::place(const mark_t& mark, QWidget* shot, placed_t& out) {
   return placePart(mark, widget, out.area);
 }
 
+bool CShotMarks::discFits(const QRect& area) {
+  const qreal radius = discRadius(QRectF(area));
+  const qint32 thickness = qMin(area.width(), area.height());
+  return thickness <= kThin ||
+         (thickness <= kSpot && area.width() / 2.0 + 1 <= radius && area.height() / 2.0 + 1 <= radius);
+}
+
+qint32 CShotMarks::dockTab(const QDockWidget* dock, const QTabBar*& bar) {
+  bar = nullptr;
+  const QWidget* main = (nullptr == dock) ? nullptr : dock->parentWidget();
+  if (nullptr == main) {
+    return -1;
+  }
+  // A tab of the main window's dock tab bars holds its docker as data.
+  for (const QTabBar* candidate : main->findChildren<QTabBar*>(Qt::FindDirectChildrenOnly)) {
+    for (qint32 i = 0; i < candidate->count() && candidate->isVisible(); i++) {
+      if (candidate->tabData(i).value<quintptr>() == quintptr(dock)) {
+        bar = candidate;
+        return i;
+      }
+    }
+  }
+  return -1;
+}
+
+QDockWidget* CShotMarks::dockOfTab(const QTabBar* bar, qint32 index) {
+  const quintptr data = bar->tabData(index).value<quintptr>();
+  const QList<QDockWidget*>& docks = bar->parentWidget()->findChildren<QDockWidget*>();
+  for (QDockWidget* dock : docks) {
+    if (quintptr(dock) == data) {
+      return dock;
+    }
+  }
+  return nullptr;
+}
+
+QString CShotMarks::framed(const QImage& image, QWidget* w, const QRect& keep, const QList<placed_t>& placed,
+                           const std::function<QImage()>& windowImage, QImage& out) {
+  if (keep.isValid() && !image.rect().contains(keep)) {
+    return "the part it keeps is not inside it";
+  }
+  // What the marks mark lies inside the part.
+  const QRect kept = keep.isValid() ? keep : image.rect();
+  const QRect part = kept.translated(w->mapToGlobal(QPoint(0, 0)));
+  for (const placed_t& p : placed) {
+    if (p.window != w->window() || !part.contains(p.area)) {
+      return QString("it marks %1, which is not in the image").arg(describe(p.mark));
+    }
+  }
+  // A part whose marks reach past it is cut from its window, with room for them.
+  const QRect needed = kept.united(extent(placed, w));
+  QWidget* window = w->window();
+  if (window != w && !kept.contains(needed)) {
+    QImage whole = windowImage();
+    const QRect crop = needed.translated(w->mapTo(window, QPoint(0, 0))).intersected(whole.rect());
+    if (const QString& problem = paint(whole, placed, window, crop); !problem.isEmpty()) {
+      return problem;
+    }
+    out = whole.copy(crop);
+    return QString();
+  }
+  out = image;
+  if (const QString& problem = paint(out, placed, w, keep); !problem.isEmpty()) {
+    return problem;
+  }
+  if (keep.isValid()) {
+    out = out.copy(keep);
+  }
+  return QString();
+}
+
 QString CShotMarks::paint(QImage& image, const QList<placed_t>& placed, const QWidget* w, const QRect& keep,
                           QList<QRect>* drawn) {
   const QPoint origin = w->mapToGlobal(QPoint(0, 0));
@@ -547,7 +773,10 @@ QString CShotMarks::paint(QImage& image, const QList<placed_t>& placed, const QW
     if (p.window != w->window()) {
       return QString("%1 lies in another window than the image").arg(describe(p.mark));
     }
-    const drawing_t d = drawingOf(p, origin);
+    if ("disc" == shapeOf(p.mark) && !discFits(p.area)) {
+      return QString("%1 is too big for a disc; mark it with a frame").arg(describe(p.mark));
+    }
+    const drawing_t d = drawingOf(p, origin, QRectF(inside));
     if (!QRectF(inside).contains(d.bounds)) {
       return QString("%1 is not completely inside the image").arg(describe(p.mark));
     }
@@ -558,15 +787,7 @@ QString CShotMarks::paint(QImage& image, const QList<placed_t>& placed, const QW
   painter.setRenderHint(QPainter::Antialiasing);
   for (qsizetype i = 0; i < drawings.size(); i++) {
     const drawing_t& d = drawings.at(i);
-    const QString& shape = shapeOf(placed.at(i).mark);
-    if (!d.stroke.isEmpty()) {
-      painter.strokePath(d.stroke, QPen(kLight, kLine + 2 * kOutline, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-      painter.strokePath(d.stroke, QPen(kRed, kLine, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-    }
-    if (!d.fill.isEmpty()) {
-      painter.strokePath(d.fill, QPen(kLight, 2 * kOutline, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-      painter.fillPath(d.fill, "cursor" == shape ? QColor(Qt::black) : ("disc" == shape ? kDisc : kRed));
-    }
+    draw(painter, d, shapeOf(placed.at(i).mark));
     if (nullptr != drawn) {
       *drawn << d.bounds.toAlignedRect();
     }

@@ -1130,6 +1130,8 @@ if(QMS_DOC_MODE)
         shoot/CShotHandlers.h
         shoot/CShotInput.cpp
         shoot/CShotInput.h
+        shoot/CShotMarker.cpp
+        shoot/CShotMarker.h
         shoot/CShotMarks.cpp
         shoot/CShotMarks.h
         shoot/CShotOptions.cpp

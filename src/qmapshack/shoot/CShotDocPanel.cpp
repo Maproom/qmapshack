@@ -19,6 +19,8 @@
 #include "shoot/CShotDocPanel.h"
 
 #include <QAction>
+#include <QButtonGroup>
+#include <QCheckBox>
 #include <QCloseEvent>
 #include <QComboBox>
 #include <QGuiApplication>
@@ -32,6 +34,7 @@
 #include <QPainter>
 #include <QScreen>
 #include <QSettings>
+#include <QSignalBlocker>
 #include <QTimer>
 #include <QToolButton>
 #include <QTreeWidget>
@@ -40,6 +43,7 @@
 #include <algorithm>
 #include <utility>
 
+#include "shoot/CShotMarks.h"
 #include "theme/CUiTheme.h"
 
 namespace {
@@ -207,6 +211,65 @@ CShotDocPanel::CShotDocPanel(const QString& page, const QString& sizeFile, QWidg
   shotActions->addStretch();
   layout->addLayout(shotActions);
 
+  // --- marks ---
+  QLabel* markTitle =
+      new QLabel("<b>Marks</b> - pick one, point in QMapShack at a control and press <b>Ctrl+Shift+F10</b>:", this);
+  markTitle->setWordWrap(true);
+  layout->addWidget(markTitle);
+  QHBoxLayout* markers = new QHBoxLayout;
+  QButtonGroup* markerGroup = new QButtonGroup(this);
+  markerGroup->setExclusive(false);
+  const QList<QPair<QString, QString>> kinds = {{"frame", "Frame"},     {"disc", "Disc"}, {"arrow", "Arrow"},
+                                                {"pointer", "Pointer"}, {"hand", "Hand"}, {"resize", "Resize"}};
+  for (const auto& [kind, text] : kinds) {
+    QToolButton* button = new QToolButton(this);
+    button->setText(text);
+    button->setIcon(QIcon(QPixmap::fromImage(CShotMarks::icon(kind, 32))));
+    button->setIconSize(QSize(32, 32));
+    button->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+    button->setCheckable(true);
+    button->setToolTip(QString("<b>%1</b>: what Ctrl+Shift+F10 places; click again to put it away.").arg(text));
+    markerGroup->addButton(button);
+    connect(button, &QToolButton::toggled, this, [this, markerGroup, button, kind](bool on) {
+      // One at a time, and none when the picked one is clicked again.
+      if (on) {
+        for (QAbstractButton* other : markerGroup->buttons()) {
+          if (other != button && other->isChecked()) {
+            QSignalBlocker block(other);
+            other->setChecked(false);
+          }
+        }
+      }
+      emit markerPicked(on ? kind : QString());
+    });
+    markers->addWidget(button);
+  }
+  markers->addStretch();
+  QCheckBox* showMarksBox = new QCheckBox("Show marks", this);
+  showMarksBox->setChecked(true);
+  showMarksBox->setToolTip("Show the selected image's marks in QMapShack; they go into the image either way.");
+  connect(showMarksBox, &QCheckBox::toggled, this, &CShotDocPanel::showMarksToggled);
+  markers->addWidget(showMarksBox);
+  layout->addLayout(markers);
+
+  QHBoxLayout* markRow = new QHBoxLayout;
+  marks = new QListWidget(this);
+  marks->setMaximumHeight(4 * marks->fontMetrics().height() + 8);
+  markRow->addWidget(marks);
+  removeMarkButton = new QToolButton(this);
+  removeMarkButton->setText("Remove");
+  removeMarkButton->setToolTip("<b>Remove</b>: take the selected mark off this image.");
+  removeMarkButton->setEnabled(false);
+  connect(marks, &QListWidget::currentRowChanged, this,
+          [this](qint32 index) { removeMarkButton->setEnabled(index >= 0); });
+  connect(removeMarkButton, &QToolButton::clicked, this, [this]() {
+    if (const qint32 index = marks->currentRow(); index >= 0) {
+      emit removeMarkClicked(index);
+    }
+  });
+  markRow->addWidget(removeMarkButton, 0, Qt::AlignTop);
+  layout->addLayout(markRow);
+
   preview = new QLabel(this);
   preview->setMinimumHeight(200);
   preview->setAlignment(Qt::AlignCenter);
@@ -231,6 +294,27 @@ CShotDocPanel::CShotDocPanel(const QString& page, const QString& sizeFile, QWidg
   }
 
   resize(kDefaultSize);
+}
+
+void CShotDocPanel::setMarks(const QStringList& names) {
+  if (names == markNames) {
+    return;
+  }
+  markNames = names;
+  showMarks(QStringList());
+}
+
+void CShotDocPanel::setMarkStatuses(const QStringList& statuses) { showMarks(statuses); }
+
+void CShotDocPanel::showMarks(const QStringList& statuses) {
+  const qint32 row = marks->currentRow();
+  marks->clear();
+  for (qsizetype i = 0; i < markNames.size(); i++) {
+    const QString& status = statuses.value(i);
+    marks->addItem(status.isEmpty() ? markNames.at(i) : QString("%1 - %2").arg(markNames.at(i), status));
+  }
+  marks->setCurrentRow(qMin(row, qint32(markNames.size()) - 1));
+  removeMarkButton->setEnabled(marks->currentRow() >= 0);
 }
 
 void CShotDocPanel::showEvent(QShowEvent* event) {

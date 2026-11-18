@@ -25,7 +25,11 @@
 #include <QtGlobal>
 
 class IShotHandler;
+class QAbstractItemView;
+class QModelIndex;
 class QObject;
+class QPoint;
+class QRect;
 class QWidget;
 
 /** @brief The handler per recordable class, and how a step resolves its target. Add new classes here only. */
@@ -63,6 +67,15 @@ void forgetPresses();
 
 /** @return the classes with a handler whose replay has not run in this process, sorted */
 QStringList unreplayed();
+
+/**
+   @return where the button @p button (a step's name for it) of row @p index is painted in @p view's viewport, invalid
+           when the row does not show it now; @p problem says why
+ */
+QRect rowButtonRect(const QAbstractItemView* view, const QModelIndex& index, const QString& button, QString& problem);
+
+/** @return the step's name of the button of row @p index under @p at in @p view's viewport, empty for none */
+QString rowButtonAt(const QAbstractItemView* view, const QModelIndex& index, const QPoint& at);
 
 /** @brief Name the step being replayed in every failure that follows: 1-based @p number of @p count; 0 for none */
 void setStepNumber(qsizetype number, qsizetype count);

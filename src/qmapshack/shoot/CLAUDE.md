@@ -103,10 +103,18 @@ The writer's guide is `doc/WRITING_DOCS.md`: short, facts only, updated with eve
   drawn in `CShotContext::emitImage()`; a live Ctrl+Shift+F9 take places the selected row's marks at the key press
   and draws them on the chosen part. A mark not completely inside the image or `rect`, or in another window, fails
   the shot. A plain name must be unique below the mark's `root` (`CShotAddress::resolveUnique()`).
+- **Marks are placed by `CShotMarker` in the state process**: Ctrl+Shift+F10 lists the candidates at the pointer,
+  steps through them, a click or Return takes one; it swallows every key and click meanwhile, so an open menu stays open.
+  The launcher writes the mark (`mark-placed`) through `storeShot()` and sends the row's marks back (`marks`); the
+  overlay showing them is a child of the main window, hidden while an image is taken.
+- **Ctrl+Shift+F9 and F10 pressed in the panel go to the panel's process**; the launcher's application filter passes
+  them on as `tag`/`mark`, and Return/Escape as `mark-confirm`/`mark-cancel` while the state reports `marking 1`.
+  `activeTarget()` falls back to the window under the pointer: the state then has no active window.
 - **A docker behind a tab stays `isVisible()`**, moved to negative coordinates; a separator is found by walking from
   one neighbour to the other with `QMainWindow::isSeparator()`, through tab bars only.
-- **The hand cursor is DejaVu Sans' U+261D read with `QRawFont`** from `:/fonts/DejaVuSans.ttf`: `QPainterPath::addText()`
-  with the family gives an empty path for it.
+- **Every mark is the one red** (a disc see-through), with a thin light outline. The hand cursor is a drawn pointing hand
+  with light finger lines: DejaVu's U+261D is an outline glyph and fills to a blob. `CShotMarks::icon()` draws the
+  panel's marker buttons with the same code.
 - **`--only` is not a path glob**: `*` crosses `/`. Quote it.
 - **An exposure is built by `shootOne()` and deleted when the shot returns.** Its `TYPE` needs
   `Q_OBJECT` or `SHOT_EXPOSE` does not compile; the built widget is checked against

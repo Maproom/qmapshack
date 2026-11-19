@@ -17,7 +17,8 @@ doc/images/<page>/<name>.png     the published images
 doc/images/_work/                images taken again and their <id>.shot.json, not published (git-ignored)
 doc/images/_check/               what shots.py replay renders (git-ignored)
 doc/shots/_cache/                tile caches, workspace databases, images waiting for Keep, parked
-                                 recordings, doc-panel.ini, render-* run directories (git-ignored)
+                                 recordings, doc-panel.ini, <page>-marks.json, render-* run directories
+                                 (git-ignored)
 ```
 
 - **The page says which images exist**; the shot file says how each is taken.
@@ -69,12 +70,32 @@ doc/shots/_cache/                tile caches, workspace databases, images waitin
 | `open` | the step that opens a context menu; it runs last and the image is taken inside the menu |
 | `active` | the menu entry highlighted in that menu |
 | `note` | free text |
+| `mark` | marks drawn on the image; see below |
 
 - **A window-sized image has an explicit `size`**, applied before the scenario runs. A shot sized by
   the main window without `size` fails.
 - **`rect` is cut out of whatever produced the image**: a widget, an exposure or a scenario.
 - **A shot moved to another scenario keeps only `id` and `scenario`**, losing its scenario keeps only
   `id`; either way its images are deleted.
+- **A mark** (`CShotMarks`) is placed after the render from the live widgets and drawn in one red, each with a
+  thin light outline; one not completely inside the image or `rect`, or in another window, fails the shot.
+
+  | Key | |
+  |---|---|
+  | `root` | `main`, `menu` (the open menu), `window` (the window a scenario leaves open, or the exposure), `dock:<address>` (a floating docker) |
+  | `widget` | address below `root`; a plain name must be unique there; a mark is always an object |
+  | `part` | empty for the whole widget, `handle` (a slider's knob), `branch` (a tree row's arrow, with `row`), `button` (a button a list's delegate paints into a row, with `row` and `button`), `tab` (the tab of a docked docker or of a tab widget's page), `title` (a docker's title bar), `action` (a menu entry or toolbar action, with `action`, its objectName), `splitter` (with `between`) |
+  | `row` | a tree row as `CShotAddress::rowPathOf()`: row numbers from the top level down and the column, `0/2:0` |
+  | `button` | a row's button as a `click` step names it: `visible`, `save`, `checkState`, `activate`, … |
+  | `between` | the two addresses a separator divides; a docker stands for its tab group |
+  | `shape` | `frame`, `disc`, `arrow` (with `tail`), `cursor` (with `cursor`); empty is a disc on a knob, an arrow or a separator, else a frame; a disc fails on a target that fits neither inside it nor is at most 16 px thick (`CShotMarks::discFits()`) |
+  | `tail` | `[dx, dy]`, an arrow's start from its target's centre in image pixels, a multiple of 45° |
+  | `cursor` | `pointer`, `hand`, `resize`; resize only on a separator |
+  | `name` | what the panel and failures call it |
+
+- **Marks a shot file cannot hold** are the launcher's, in `_cache/<page>-marks.json`: those placed on an image not
+  taken yet (`pending`, moved into its entry by the first take) and the ids whose marks changed since their image
+  (`changed`). A mark change on a taken image deletes its `_work` image.
 - **A view step is the canvas' centre and zoom level** (`getPosFocus()`, `getZoomIndex()`), never a
   rectangle.
 
@@ -135,11 +156,18 @@ qmapshack --doc <repo> --doc-page <page> …          the launcher: the panel on
 - **The state process is disposable.** It comes up in one scenario and stays while the writer works
   in it; another scenario is another process. No scenario is undone in place.
 - **They talk over a `QLocalSocket`** (`--doc-channel`). Launcher to state: `select`, `region`,
-  `update`, `record`, `stop`. State to launcher: `status`, `ready`, `in`, `tagged`, `recording`,
-  `recorded`, `recorded-none`, `trial-failed`, `setup-failed`.
+  `update`, `record`, `stop`, `tag`, `mark`, `marker`, `marks`, `marks-shown`, `mark-confirm`, `mark-cancel`,
+  `drift`. State to launcher: `status`, `ready`, `in`, `tagged <id>[\t<row whose marks it carries>]`, `recording`,
+  `recorded`, `recorded-none`, `trial-failed`, `setup-failed`, `mark-placed <id>\t<mark>`, `mark-status`, `marking`,
+  and `drift <scenario>\t<settings>`, or
+  `drift-unknown <why>` while the state cannot tell. `drift` is always answered: the launcher asks before Retake and
+  All, and offers to save the base when settings differ.
+- **Ctrl+Shift+F9 and F10 pressed in the panel** reach the launcher; it passes them on as `tag` and `mark`, and Return
+  and Escape as `mark-confirm` and `mark-cancel` while the state chooses a mark's target.
 - **Closing either window ends the session.** The state quits when its window closes, its channel
   drops or it cannot connect (`CShotDocMode::leave()`). The launcher ends when the state exits with 0
-  or the panel is closed, both through `mayClose()`, which asks first over unpublished images. A
+  or the panel is closed, both through `mayClose()`, which asks first over images whose marks changed and over
+  unpublished images. A
   state that dies otherwise leaves the panel up.
 
 ## Recording
@@ -180,7 +208,7 @@ qmapshack --doc <repo> --doc-page <page> …          the launcher: the panel on
 |---|---|
 | `take PAGE` | open the launcher on a page |
 | `replay [--only GLOB]` | replay every shot into `doc/images/_check/`, one process per scenario; report what no longer comes out |
-| `publish [--only GLOB] [--report FILE]` | copy `doc/images/_work/` into `doc/images/` and empty `_work/` |
+| `publish [--only GLOB] [--report FILE]` | move `doc/images/_work/`'s images into `doc/images/` and delete their `<id>.shot.json`; one without an image stays |
 | `unused [--delete]` | shots and images no page references |
 | `selftest [--page PAGE]` | the recorder's and documentation mode's own cases |
 | `compose` | the one composer of a run's configuration; used by the launcher, hidden from `--help` |

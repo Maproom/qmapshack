@@ -20,9 +20,10 @@
 
 #include <QAction>
 #include <QButtonGroup>
-#include <QCheckBox>
 #include <QCloseEvent>
 #include <QComboBox>
+#include <QFrame>
+#include <QGroupBox>
 #include <QGuiApplication>
 #include <QHBoxLayout>
 #include <QHeaderView>
@@ -81,13 +82,14 @@ CShotDocPanel::CShotDocPanel(const QString& page, const QString& sizeFile, QWidg
   layout->addWidget(fixture);
 
   // --- scenarios ---
-  QLabel* scenarioTitle = new QLabel("<b>Scenarios</b> - the states your images are taken in:", this);
-  scenarioTitle->setWordWrap(true);
-  layout->addWidget(scenarioTitle);
+  QGroupBox* scenarioBox = new QGroupBox("Scenarios - the states your images are taken in", this);
+  QVBoxLayout* scenarioLayout = new QVBoxLayout(scenarioBox);
+  layout->addWidget(scenarioBox);
 
-  scenarios = new QListWidget(this);
+  scenarios = new QListWidget(scenarioBox);
   scenarios->setAlternatingRowColors(true);
-  scenarios->setMaximumHeight(120);
+  // Five rows and the list's frame.
+  scenarios->setMaximumHeight(5 * scenarios->fontMetrics().height() + 8);
   // A click, not a current row change: the arrow keys must not start a state each.
   connect(scenarios, &QListWidget::itemClicked, this, [this](QListWidgetItem* item) {
     if (nullptr == item) {
@@ -98,7 +100,7 @@ CShotDocPanel::CShotDocPanel(const QString& page, const QString& sizeFile, QWidg
     QTimer::singleShot(0, this, [this, name]() { emit scenarioPicked(name); });
   });
   connect(scenarios, &QListWidget::currentItemChanged, this, [this]() { updateScenarioActions(); });
-  layout->addWidget(scenarios);
+  scenarioLayout->addWidget(scenarios);
 
   const qint32 side = fontMetrics().height() + 2;
   QFont label = font();
@@ -122,6 +124,14 @@ CShotDocPanel::CShotDocPanel(const QString& page, const QString& sizeFile, QWidg
     return button;
   };
 
+  // Between a row's groups of buttons.
+  const auto addSeparator = [](QBoxLayout* row, QWidget* parent) {
+    QFrame* separator = new QFrame(parent);
+    separator->setFrameShape(QFrame::VLine);
+    separator->setFrameShadow(QFrame::Sunken);
+    row->addWidget(separator);
+  };
+
   QHBoxLayout* scenarioButtons = new QHBoxLayout;
   recordButton = addButton(scenarioButtons, kRecordIcon, kRecordText, kRecordHint, &CShotDocPanel::recordClicked);
   renameButton = addButton(scenarioButtons, ":/icons/DocRename.svgt", "Rename",
@@ -141,15 +151,18 @@ CShotDocPanel::CShotDocPanel(const QString& page, const QString& sizeFile, QWidg
   baseButton->setPopupMode(QToolButton::InstantPopup);
   scenarioButtons->addWidget(baseButton);
   scenarioButtons->addStretch();
-  layout->addLayout(scenarioButtons);
+  scenarioLayout->addLayout(scenarioButtons);
 
   // --- images ---
-  QLabel* shotTitle = new QLabel(
-      "<b>Images</b> - select one, point in QMapShack at what it shows and press <b>Ctrl+Shift+F9</b>:", this);
+  QGroupBox* shotBox = new QGroupBox("Images", this);
+  QVBoxLayout* shotLayout = new QVBoxLayout(shotBox);
+  layout->addWidget(shotBox);
+  QLabel* shotTitle =
+      new QLabel("Select one, point in QMapShack at what it shows and press <b>Ctrl+Shift+F9</b>:", shotBox);
   shotTitle->setWordWrap(true);
-  layout->addWidget(shotTitle);
+  shotLayout->addWidget(shotTitle);
 
-  shots = new QTreeWidget(this);
+  shots = new QTreeWidget(shotBox);
   shots->setRootIsDecorated(false);
   shots->setAlternatingRowColors(true);
   shots->setColumnCount(3);
@@ -165,7 +178,7 @@ CShotDocPanel::CShotDocPanel(const QString& page, const QString& sizeFile, QWidg
     }
     QTimer::singleShot(0, this, [this, id]() { emit shotPicked(id); });
   });
-  layout->addWidget(shots);
+  shotLayout->addWidget(shots);
 
   QHBoxLayout* shotActions = new QHBoxLayout;
   const auto addShotAction = [&](const QString& icon, const QString& text, const QString& hint,
@@ -195,7 +208,7 @@ CShotDocPanel::CShotDocPanel(const QString& page, const QString& sizeFile, QWidg
                                 &CShotDocPanel::publishShotClicked);
 
   // The page's own actions, apart from the selected image's.
-  shotActions->addSpacing(side);
+  addSeparator(shotActions, shotBox);
   whileIdle << addButton(shotActions, ":/icons/DocRetakeAll.svgt", "All",
                          "Take every image of this page again into doc/images/_work, to compare and publish.",
                          &CShotDocPanel::retakePageClicked);
@@ -209,28 +222,28 @@ CShotDocPanel::CShotDocPanel(const QString& page, const QString& sizeFile, QWidg
   publishAllButton->setText("Publ. All");
   whileIdle << publishAllButton;
   shotActions->addStretch();
-  layout->addLayout(shotActions);
+  shotLayout->addLayout(shotActions);
 
-  // --- marks ---
+  // --- the selected image: its marks and its preview ---
+  imageBox = new QGroupBox(this);
+  QVBoxLayout* imageLayout = new QVBoxLayout(imageBox);
+  layout->addWidget(imageBox, 1);
   QLabel* markTitle =
-      new QLabel("<b>Marks</b> - pick one, point in QMapShack at a control and press <b>Ctrl+Shift+F10</b>:", this);
+      new QLabel("<b>Marks</b> - pick one, point in QMapShack at a control and press <b>Ctrl+Shift+F10</b>:", imageBox);
   markTitle->setWordWrap(true);
-  layout->addWidget(markTitle);
+  imageLayout->addWidget(markTitle);
   QHBoxLayout* markers = new QHBoxLayout;
-  QButtonGroup* markerGroup = new QButtonGroup(this);
+  markerGroup = new QButtonGroup(this);
   markerGroup->setExclusive(false);
   const QList<QPair<QString, QString>> kinds = {{"frame", "Frame"},     {"disc", "Disc"}, {"arrow", "Arrow"},
                                                 {"pointer", "Pointer"}, {"hand", "Hand"}, {"resize", "Resize"}};
   for (const auto& [kind, text] : kinds) {
-    QToolButton* button = new QToolButton(this);
-    button->setText(text);
-    button->setIcon(QIcon(QPixmap::fromImage(CShotMarks::icon(kind, 32))));
-    button->setIconSize(QSize(32, 32));
-    button->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+    QToolButton* button = newButton(QString(), text, "what Ctrl+Shift+F10 places; click again to put it away.");
+    // Drawn at the size shown: the marks' line widths are fixed, scaled down they vanish.
+    button->setIcon(QIcon(QPixmap::fromImage(CShotMarks::icon(kind, button->iconSize().width()))));
     button->setCheckable(true);
-    button->setToolTip(QString("<b>%1</b>: what Ctrl+Shift+F10 places; click again to put it away.").arg(text));
     markerGroup->addButton(button);
-    connect(button, &QToolButton::toggled, this, [this, markerGroup, button, kind](bool on) {
+    connect(button, &QToolButton::toggled, this, [this, button, kind](bool on) {
       // One at a time, and none when the picked one is clicked again.
       if (on) {
         for (QAbstractButton* other : markerGroup->buttons()) {
@@ -244,37 +257,45 @@ CShotDocPanel::CShotDocPanel(const QString& page, const QString& sizeFile, QWidg
     });
     markers->addWidget(button);
   }
-  markers->addStretch();
-  QCheckBox* showMarksBox = new QCheckBox("Show marks", this);
-  showMarksBox->setChecked(true);
-  showMarksBox->setToolTip("Show the selected image's marks in QMapShack; they go into the image either way.");
-  connect(showMarksBox, &QCheckBox::toggled, this, &CShotDocPanel::showMarksToggled);
-  markers->addWidget(showMarksBox);
-  layout->addLayout(markers);
-
-  QHBoxLayout* markRow = new QHBoxLayout;
-  marks = new QListWidget(this);
-  marks->setMaximumHeight(4 * marks->fontMetrics().height() + 8);
-  markRow->addWidget(marks);
-  removeMarkButton = new QToolButton(this);
-  removeMarkButton->setText("Remove");
-  removeMarkButton->setToolTip("<b>Remove</b>: take the selected mark off this image.");
+  // What is done with the marks, apart from the markers.
+  addSeparator(markers, imageBox);
+  QToolButton* showMarksButton = newButton(":/icons/ShowAll.svgt", "Show",
+                                           "show the selected image's marks in QMapShack; they go into the image "
+                                           "either way.");
+  showMarksButton->setCheckable(true);
+  showMarksButton->setChecked(true);
+  connect(showMarksButton, &QToolButton::toggled, this, &CShotDocPanel::showMarksToggled);
+  markers->addWidget(showMarksButton);
+  removeMarkButton = newButton(":/icons/DocDelete.svgt", "Remove", "take the selected mark off this image.");
   removeMarkButton->setEnabled(false);
-  connect(marks, &QListWidget::currentRowChanged, this,
-          [this](qint32 index) { removeMarkButton->setEnabled(index >= 0); });
+  markers->addWidget(removeMarkButton);
+  markers->addStretch();
+  imageLayout->addLayout(markers);
+
+  marks = new QTreeWidget(imageBox);
+  marks->setRootIsDecorated(false);
+  marks->setAlternatingRowColors(true);
+  marks->setColumnCount(2);
+  marks->setHeaderLabels({"Mark", "Status"});
+  marks->header()->setSectionResizeMode(0, QHeaderView::Stretch);
+  marks->header()->setSectionResizeMode(1, QHeaderView::ResizeToContents);
+  marks->header()->setStretchLastSection(false);
+  // The header, four rows and the list's frame.
+  marks->setMaximumHeight(marks->header()->sizeHint().height() + 4 * marks->fontMetrics().height() + 12);
+  imageLayout->addWidget(marks);
+  connect(marks, &QTreeWidget::currentItemChanged, this,
+          [this]() { removeMarkButton->setEnabled(nullptr != marks->currentItem()); });
   connect(removeMarkButton, &QToolButton::clicked, this, [this]() {
-    if (const qint32 index = marks->currentRow(); index >= 0) {
+    if (const qint32 index = marks->indexOfTopLevelItem(marks->currentItem()); index >= 0) {
       emit removeMarkClicked(index);
     }
   });
-  markRow->addWidget(removeMarkButton, 0, Qt::AlignTop);
-  layout->addLayout(markRow);
 
-  preview = new QLabel(this);
+  preview = new QLabel(imageBox);
   preview->setMinimumHeight(200);
   preview->setAlignment(Qt::AlignCenter);
   preview->setFrameShape(QFrame::StyledPanel);
-  layout->addWidget(preview);
+  imageLayout->addWidget(preview, 1);
 
   status = new QLabel(this);
   status->setWordWrap(true);
@@ -293,6 +314,7 @@ CShotDocPanel::CShotDocPanel(const QString& page, const QString& sizeFile, QWidg
     button->setFixedSize(qMax(width, height), height);
   }
 
+  updateShotActions();
   resize(kDefaultSize);
 }
 
@@ -307,14 +329,13 @@ void CShotDocPanel::setMarks(const QStringList& names) {
 void CShotDocPanel::setMarkStatuses(const QStringList& statuses) { showMarks(statuses); }
 
 void CShotDocPanel::showMarks(const QStringList& statuses) {
-  const qint32 row = marks->currentRow();
+  const qint32 row = marks->indexOfTopLevelItem(marks->currentItem());
   marks->clear();
   for (qsizetype i = 0; i < markNames.size(); i++) {
-    const QString& status = statuses.value(i);
-    marks->addItem(status.isEmpty() ? markNames.at(i) : QString("%1 - %2").arg(markNames.at(i), status));
+    new QTreeWidgetItem(marks, {markNames.at(i), statuses.value(i)});
   }
-  marks->setCurrentRow(qMin(row, qint32(markNames.size()) - 1));
-  removeMarkButton->setEnabled(marks->currentRow() >= 0);
+  marks->setCurrentItem(marks->topLevelItem(qMin(row, qint32(markNames.size()) - 1)));
+  removeMarkButton->setEnabled(nullptr != marks->currentItem());
 }
 
 void CShotDocPanel::showEvent(QShowEvent* event) {
@@ -476,6 +497,15 @@ void CShotDocPanel::updateShotActions() {
   regionButton->setEnabled(selected);
   revertButton->setEnabled(selected && entry.revertable);
   publishButton->setEnabled(selected && entry.changed);
+
+  // Marks and preview belong to an image: without one, the group is off and no marker stays picked.
+  imageBox->setTitle(entry.id.isEmpty() ? QString("No image selected") : "Selected image: " + entry.id);
+  imageBox->setEnabled(selected);
+  if (!selected) {
+    for (QAbstractButton* button : markerGroup->buttons()) {
+      button->setChecked(false);
+    }
+  }
 }
 
 void CShotDocPanel::showPreview() {

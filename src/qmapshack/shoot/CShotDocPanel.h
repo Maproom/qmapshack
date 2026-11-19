@@ -28,6 +28,8 @@
 
 #include "shoot/CShotFiles.h"
 
+class QButtonGroup;
+class QGroupBox;
 class QLabel;
 class QListWidget;
 class QMessageBox;
@@ -155,7 +157,9 @@ class CShotDocPanel : public QDialog {
   QLabel* fixture = nullptr;
   QLabel* status = nullptr;
   QLabel* preview = nullptr;
-  QListWidget* marks = nullptr;
+  QGroupBox* imageBox = nullptr;
+  QButtonGroup* markerGroup = nullptr;
+  QTreeWidget* marks = nullptr;
   QToolButton* removeMarkButton = nullptr;
   QStringList markNames;
   void showMarks(const QStringList& statuses);

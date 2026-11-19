@@ -81,13 +81,15 @@ class CShotDocLauncher : public QObject {
   void command(const QString& line);
   /** @brief Send @p line to the running state if there is one, quietly: housekeeping, not an action. */
   void notify(const QString& line);
-  /** @brief Tell the state the selected image; quiet when there is none. */
   /** @return @p id's marks: its entry's, or the pending ones while it has no shot */
   QJsonArray marksOf(const QString& id) const;
   /** @brief Store @p marks as @p id's, refresh the panel with @p done and tell the state. */
   void storeMarks(const QString& id, const QJsonArray& marks, const QString& done);
+  /** @brief Append @p mark, placed by pointing, to @p id's marks. */
   void addMark(const QString& id, const QJsonObject& mark);
+  /** @brief Take the selected image's mark at @p index off. */
   void removeMark(qint32 index);
+  /** @brief Tell the state the selected image and its marks; quiet when there is none. */
   void sendSelection();
 
   /** @brief Set the panel's busy box and recording mode from what runs. */
@@ -129,8 +131,16 @@ class CShotDocLauncher : public QObject {
 
   /** @brief Take @p id again headless, into `doc/images/_work/`, the way a build renders it. */
   void retakeShot(const QString& id);
+  /** @brief retakeShot() once the writer knows what the replay would miss. */
+  void runRetakeShot(const QString& id);
+  /** @brief Ask the state which settings on screen its replay would not show, then @p go, after asking the writer */
+  void askDrift(const std::function<void()>& go);
+  /** @brief The state's answer: @p keys the settings that differ from those @p name was set up with */
+  void onDrift(const QString& name, const QString& keys);
   /** @brief `shots.py replay` of this page into `_work`: every image taken again, to compare and publish. */
   void retakePage();
+  /** @brief retakePage() once the writer knows what the replay would miss. */
+  void runRetakePage();
   /**
      @brief `shots.py publish`; with @p thenEnd the session ends once it succeeded.
 
@@ -162,6 +172,10 @@ class CShotDocLauncher : public QObject {
   CShotDocPanel* panel = nullptr;
   /** While the state process chooses a mark's target, Return and Escape go to it. */
   bool marking = false;
+  /** What waits for the state's `drift` answer. */
+  std::function<void()> afterDrift;
+  /** The base is being saved: the next `drift` answer comes after the save. */
+  bool savingBase = false;
   QLocalServer* server = nullptr;
   QFileSystemWatcher* watcher = nullptr;
   QTemporaryDir* scratch = nullptr;

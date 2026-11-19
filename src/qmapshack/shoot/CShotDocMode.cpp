@@ -51,6 +51,7 @@
 #include <QPushButton>
 #include <QRect>
 #include <QRegularExpression>
+#include <QScopeGuard>
 #include <QScreen>
 #include <QSettings>
 #include <QTabWidget>
@@ -573,6 +574,16 @@ void CShotDocMode::obey(const QString& line) {
     marker->setShown("1" == rest);
     return;
   }
+  if ("drift" == verb) {
+    // Asked before a retake: the settings a replay of this state would not show. Always answered.
+    if (!ready || busy) {
+      send(QString("drift-unknown %1")
+               .arg(ready ? "Answer the question in the application first." : "The application is not set up yet."));
+    } else {
+      send(QString("drift %1\t%2").arg(scenario, settingsDrift().join(", ")));
+    }
+    return;
+  }
   if (!ready) {
     send(QString("status The application is not set up yet; '%1' was not done.").arg(verb));
     return;
@@ -660,11 +671,9 @@ void CShotDocMode::markAtPointer() {
     marker->refuse("Select the image the mark is for first.");
     return;
   }
-  for (const CShotFiles::row_t& row : files.rows()) {
-    if (row.id == wantedShot && CShotFiles::eUnregistered == row.state) {
-      marker->refuse(QString("%1 has an image but no shot; take it again before marking it.").arg(wantedShot));
-      return;
-    }
+  if (const auto& row = files.row(wantedShot); row && CShotFiles::eUnregistered == row->state) {
+    marker->refuse(QString("%1 has an image but no shot; take it again before marking it.").arg(wantedShot));
+    return;
   }
   marker->markAtPointer(wantedShot);
 }
@@ -841,7 +850,7 @@ void CShotDocMode::reportUnexposed(const QWidget* target) const {
   dialog.exec();
 }
 
-void CShotDocMode::keepShot(const QJsonObject& shot, const std::function<bool()>& take) {
+void CShotDocMode::keepShot(const QJsonObject& shot, const QString& markedFrom, const std::function<bool()>& take) {
   const QString& id = shot["id"].toString();
   const QString& pending = files.pendingImage(id);
   // Taken beside the work image: until Keep, a state that ends leaves the writer's work as it was.
@@ -889,14 +898,19 @@ void CShotDocMode::keepShot(const QJsonObject& shot, const std::function<bool()>
     report(error);
     return;
   }
-  send("tagged " + id);
-  report(QString("Took %1.").arg(id) + driftWarning(scenario));
+  send(markedFrom.isEmpty() ? "tagged " + id : QString("tagged %1\t%2").arg(id, markedFrom));
+  const QString& drift = driftWarning(scenario);
+  report(QString("Took %1.").arg(id) + drift);
+  if (!drift.isEmpty()) {
+    // The writer looks at the application, not at the panel's status line.
+    CShotMarker::hint(drift.trimmed());
+  }
 }
 
 void CShotDocMode::tag() {
   // The marks shown on screen are no part of the image.
   marker->setHidden(true);
-  const std::shared_ptr<void> shownAgain(nullptr, [this](void*) { marker->setHidden(false); });
+  const auto shownAgain = qScopeGuard([this]() { marker->setHidden(false); });
   if (recorder->isRecording()) {
     report("Stop the recording first: taking an image drives the application, and that would be recorded.");
     return;
@@ -925,6 +939,8 @@ void CShotDocMode::tag() {
   // The selected row's marks go with the image to whichever row it is taken for.
   // The launcher sent them: the entry's, or the pending ones of a row not taken yet.
   const QJsonArray marks = wantedShot.isEmpty() ? QJsonArray() : marker->currentMarks();
+  // The panel's selection may change while a question is up.
+  const QString markedFrom = wantedShot;
   QList<CShotMarks::placed_t> placed;
   if (isPartOf(main, target)) {
     parts = livePartsAt(main, labels);
@@ -1005,7 +1021,7 @@ void CShotDocMode::tag() {
   if (!marks.isEmpty()) {
     shot["mark"] = marks;
   }
-  keepShot(shot, [&]() {
+  keepShot(shot, marks.isEmpty() ? QString() : markedFrom, [&]() {
     // Only a live part is written from what was rendered at the key press; a dialog parented to the main window is
     // in images too, and its shot says exposure.
     if (kind_e::eLive == kind && images.contains(target)) {
@@ -1055,7 +1071,7 @@ bool CShotDocMode::refusedAsHandOpened(const QWidget* target) {
 
 void CShotDocMode::takeRegion(const QString& wanted) {
   marker->setHidden(true);
-  const std::shared_ptr<void> shownAgain(nullptr, [this](void*) { marker->setHidden(false); });
+  const auto shownAgain = qScopeGuard([this]() { marker->setHidden(false); });
   CMainWindow* main = ctx->mainWindow();
   if (nullptr == main) {
     return;
@@ -1085,7 +1101,7 @@ void CShotDocMode::takeRegion(const QString& wanted) {
   shot["rect"] = QJsonArray{region.x(), region.y(), region.width(), region.height()};
   shot["note"] =
       scenario.isEmpty() ? QString("A part of the window") : QString("A part of the window in %1").arg(scenario);
-  keepShot(shot, [&]() { return 0 == CShotPage::shootOne(shot, *ctx, files.scenarios()); });
+  keepShot(shot, QString(), [&]() { return 0 == CShotPage::shootOne(shot, *ctx, files.scenarios()); });
 }
 
 // --- settings ------------------------------------------------------------------------------------

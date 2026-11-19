@@ -148,8 +148,11 @@ class CShotDocMode : public QObject {
   bool confirmResult(const QString& id) const;
   /** @brief Tell the writer the line a developer has to add for an unexposed class. */
   void reportUnexposed(const QWidget* target) const;
-  /** @brief Take @p shot by @p take, keep it if the writer says so, store it and report; nothing changes otherwise. */
-  void keepShot(const QJsonObject& shot, const std::function<bool()>& take);
+  /**
+     @brief Take @p shot by @p take, keep it if the writer says so, store it and report; nothing changes otherwise.
+     @param markedFrom  the row whose marks @p shot carries, or empty
+   */
+  void keepShot(const QJsonObject& shot, const QString& markedFrom, const std::function<bool()>& take);
   /** @return a shot of @p id, in the running scenario when there is one */
   QJsonObject newShot(const QString& id) const;
   /** @return true, having told the writer, when @p target is a window the running scenario's actions do not leave open

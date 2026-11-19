@@ -19,7 +19,6 @@
 #include "shoot/CShotDocPanel.h"
 
 #include <QAction>
-#include <QButtonGroup>
 #include <QCloseEvent>
 #include <QComboBox>
 #include <QFrame>
@@ -233,8 +232,6 @@ CShotDocPanel::CShotDocPanel(const QString& page, const QString& sizeFile, QWidg
   markTitle->setWordWrap(true);
   imageLayout->addWidget(markTitle);
   QHBoxLayout* markers = new QHBoxLayout;
-  markerGroup = new QButtonGroup(this);
-  markerGroup->setExclusive(false);
   const QList<QPair<QString, QString>> kinds = {{"frame", "Frame"},     {"disc", "Disc"}, {"arrow", "Arrow"},
                                                 {"pointer", "Pointer"}, {"hand", "Hand"}, {"resize", "Resize"}};
   for (const auto& [kind, text] : kinds) {
@@ -242,11 +239,11 @@ CShotDocPanel::CShotDocPanel(const QString& page, const QString& sizeFile, QWidg
     // Drawn at the size shown: the marks' line widths are fixed, scaled down they vanish.
     button->setIcon(QIcon(QPixmap::fromImage(CShotMarks::icon(kind, button->iconSize().width()))));
     button->setCheckable(true);
-    markerGroup->addButton(button);
+    markerButtons.insert(kind, button);
     connect(button, &QToolButton::toggled, this, [this, button, kind](bool on) {
       // One at a time, and none when the picked one is clicked again.
       if (on) {
-        for (QAbstractButton* other : markerGroup->buttons()) {
+        for (QToolButton* other : std::as_const(markerButtons)) {
           if (other != button && other->isChecked()) {
             QSignalBlocker block(other);
             other->setChecked(false);
@@ -259,9 +256,9 @@ CShotDocPanel::CShotDocPanel(const QString& page, const QString& sizeFile, QWidg
   }
   // What is done with the marks, apart from the markers.
   addSeparator(markers, imageBox);
-  QToolButton* showMarksButton = newButton(":/icons/ShowAll.svgt", "Show",
-                                           "show the selected image's marks in QMapShack; they go into the image "
-                                           "either way.");
+  showMarksButton = newButton(":/icons/ShowAll.svgt", "Show",
+                              "show the selected image's marks in QMapShack; they go into the image "
+                              "either way.");
   showMarksButton->setCheckable(true);
   showMarksButton->setChecked(true);
   connect(showMarksButton, &QToolButton::toggled, this, &CShotDocPanel::showMarksToggled);
@@ -318,13 +315,29 @@ CShotDocPanel::CShotDocPanel(const QString& page, const QString& sizeFile, QWidg
   resize(kDefaultSize);
 }
 
-void CShotDocPanel::setMarks(const QStringList& names) {
-  if (names == markNames) {
+void CShotDocPanel::setMarks(const QString& id, const QStringList& names) {
+  if (id == markedImage && names == markNames) {
     return;
   }
+  if (id != markedImage) {
+    // Another image's list: nothing of the old one is picked.
+    marks->setCurrentItem(nullptr);
+  }
+  markedImage = id;
   markNames = names;
   showMarks(QStringList());
 }
+
+QString CShotDocPanel::pickedMarker() const {
+  for (auto it = markerButtons.constBegin(); it != markerButtons.constEnd(); ++it) {
+    if (it.value()->isChecked()) {
+      return it.key();
+    }
+  }
+  return QString();
+}
+
+bool CShotDocPanel::marksShown() const { return showMarksButton->isChecked(); }
 
 void CShotDocPanel::setMarkStatuses(const QStringList& statuses) { showMarks(statuses); }
 
@@ -502,7 +515,7 @@ void CShotDocPanel::updateShotActions() {
   imageBox->setTitle(entry.id.isEmpty() ? QString("No image selected") : "Selected image: " + entry.id);
   imageBox->setEnabled(selected);
   if (!selected) {
-    for (QAbstractButton* button : markerGroup->buttons()) {
+    for (QToolButton* button : std::as_const(markerButtons)) {
       button->setChecked(false);
     }
   }

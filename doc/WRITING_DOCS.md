@@ -105,11 +105,19 @@ base again, and take it again. Then **Publ. All**, generate and commit.
 | ![](../src/icons/32x32/DocRetakeAll.png) | All | take every image of the page again, as Retake does for one; asks first when images you took are not published |
 | ![](../src/icons/32x32/DocClean.png) | Clean | delete shots and images no page uses |
 | ![](../src/icons/32x32/DocPublishAll.png) | Publ. All | put every image of the page you took again into the project |
+| **Selected image** | | |
+| | Frame, Disc, Arrow, Pointer, Hand, Resize | the marker Ctrl+Shift+F10 places; click it again to put it away |
+| ![](../src/icons/32x32/ShowAll.png) | Show | show the selected image's marks in QMapShack; they go into the image either way |
+| ![](../src/icons/32x32/DocDelete.png) | Remove | take the selected mark off the image |
 
 - Each button is labelled; its tooltip says more. A greyed-out one has nothing to do.
+- The bottom group belongs to the selected image: its marks and its preview. It is greyed out until you select an
+  image.
 - Picking a scenario or an image restarts QMapShack in that state.
 - Closing either window ends the session. Both come back where you left them.
-- Ctrl+Shift+F9 takes an image; Escape cancels **Region**.
+- Ctrl+Shift+F9 takes an image, Ctrl+Shift+F10 places a mark; both work while the panel or one of its dialogs has the
+  keyboard. Escape
+  cancels **Region**.
 
 ## Base and scenario
 
@@ -159,8 +167,10 @@ again under the same name: its images stay with it; take them again.
 **Rename** and **Delete** are for scenarios; deleting one means taking its images again. Changing
 an image's **Taken in** box asks first and moves QMapShack to the new scenario.
 
-If you change settings after QMapShack started in a scenario, the panel warns after the image: set
-them back, or record the scenario again.
+If you change settings after QMapShack started in a scenario, a map's opacity for example, a replay will not show
+them: Retake and All start from the base and replay the scenario. QMapShack says so next to the pointer after
+Ctrl+Shift+F9, and All, or Retake on an image of the scenario QMapShack is in, ask first. In (base), **Save as base,
+then retake** keeps them; in a scenario, record it again with them.
 
 ## Taking an image
 
@@ -175,6 +185,54 @@ Point at it and press **Ctrl+Shift+F9**, then answer:
 - **A window in a scenario:** only one the scenario's recording leaves open can be taken. A dialog
   that waits for an answer cannot stay open at **Stop**; take it in `(base)` instead.
 - **Part of a window:** select the row, press **Region**, drag a rectangle (Escape cancels).
+
+## Marks
+
+A mark shows the reader where to look in an image: a red rectangle around a button or list, a red spot on a slider's
+knob, a red arrow pointing at something, or a red mouse pointer where to click or drag. It belongs to the image and
+is drawn again whenever the image is taken again.
+
+### Placing a mark
+
+1. Select the image's row.
+2. In the panel, under **Marks**, click the button of the marker you want: Frame, Disc, Arrow, Pointer, Hand or
+   Resize.
+3. In QMapShack, point at what you want to mark and press **Ctrl+Shift+F10**.
+
+If it is in a menu or dialog, open that first.
+
+When nothing can be marked there, or the marker does not fit, QMapShack says why next to the pointer.
+
+### The markers
+
+| Button | Draws | On | |
+|---|---|---|---|
+| Frame | a red rectangle around it | a button, a list, a field, a docker, a tab, a button in a list's row | |
+| Disc | a red spot on it | a small part: a slider's knob, the arrow that opens a list entry | refused on anything bigger, such as a tab or a field: use Frame |
+| Arrow | a red arrow pointing at it | anything | then click where the arrow starts; it runs in steps of 45° |
+| Pointer | a red mouse pointer | where to click | |
+| Hand | a red pointing hand | what to drag | |
+| Resize | a red double arrow | the separator between two dockers, to show it can be dragged | |
+
+### When QMapShack is not sure
+
+It outlines one candidate in blue, for example the list or the docker around it. Ctrl+Shift+F10 outlines the next, a
+click or Return takes it, Escape cancels.
+
+### The list of marks
+
+The table below the markers lists the marks of the selected image, each with its status: *shown*, *not on screen* (in
+a closed menu or under a collapsed row, for example), *not in this image* (outside what the image shows; take it again
+with what it should show), *not found*, or *fails*, and why. A mark placed outside the image is kept; QMapShack says so
+next to the pointer. **Remove** takes the selected one off. To move a mark,
+remove it and place it again; it stays on what it marks when the layout changes.
+
+### Marks and the image
+
+- Marks placed before the image is taken go into it with Ctrl+Shift+F9.
+- Changing the marks of an image already taken throws away the image taken again. The row says *marks changed, take
+  it again* until you take it again or revert it.
+- An image moved to another scenario, or whose scenario is deleted, loses its marks.
 
 ## Taking again and publishing
 
@@ -191,7 +249,8 @@ image still comes out. It writes into `doc/images/_check/`. Nothing is published
 folder can be deleted.
 
 Closing the panel or the QMapShack window with unpublished images of this page asks whether to
-publish them. An image you take shows up in the panel only once you press Keep.
+publish them, and with images whose marks changed whether to close anyway. An image you take shows up in the
+panel only once you press Keep.
 
 ## What the rows mean
 
@@ -205,6 +264,7 @@ A *shot* is how an image is taken: its scenario and the part it shows, stored in
 | no image | the shot exists, the image is gone; take it again |
 | not registered | an image exists but no shot took it |
 | not used | a shot no page asks for; **Clean** deletes it |
+| marks changed, take it again | its marks changed since the image was taken |
 
 ", taken again" means an image waits to be published.
 

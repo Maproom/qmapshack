@@ -20,6 +20,7 @@
 #define CSHOTDOCPANEL_H
 
 #include <QDialog>
+#include <QHash>
 #include <QList>
 #include <QPixmap>
 #include <QString>
@@ -28,7 +29,6 @@
 
 #include "shoot/CShotFiles.h"
 
-class QButtonGroup;
 class QGroupBox;
 class QLabel;
 class QListWidget;
@@ -81,9 +81,12 @@ class CShotDocPanel : public QDialog {
    */
   void setBusy(bool on, const QString& what);
 
-  /** @brief The selected image's marks, one line each, and what each shows on screen. */
-  void setMarks(const QStringList& names);
+  /** @brief The marks of image @p id, one line each, and what each shows on screen. */
+  void setMarks(const QString& id, const QStringList& names);
   void setMarkStatuses(const QStringList& statuses);
+  /** @return the kind of the marker picked, or empty */
+  QString pickedMarker() const;
+  bool marksShown() const;
 
  signals:
   /** @brief An image's row was clicked; emitted queued, after the click is delivered. */
@@ -158,9 +161,12 @@ class CShotDocPanel : public QDialog {
   QLabel* status = nullptr;
   QLabel* preview = nullptr;
   QGroupBox* imageBox = nullptr;
-  QButtonGroup* markerGroup = nullptr;
+  /** Kind to button; one is checked at most. */
+  QHash<QString, QToolButton*> markerButtons;
+  QToolButton* showMarksButton = nullptr;
   QTreeWidget* marks = nullptr;
   QToolButton* removeMarkButton = nullptr;
+  QString markedImage;
   QStringList markNames;
   void showMarks(const QStringList& statuses);
 

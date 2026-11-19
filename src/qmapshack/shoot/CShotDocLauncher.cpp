@@ -288,6 +288,9 @@ void CShotDocLauncher::startState(const QString& scenario, const QString& follow
 }
 
 void CShotDocLauncher::stopState() {
+  // Its answers never come.
+  afterDrift = nullptr;
+  marking = false;
   if (state.isNull()) {
     return;
   }
@@ -305,15 +308,26 @@ void CShotDocLauncher::onStateReady(const QString& text) {
   refreshPanel(text);
   // Not on connect: the fixture is not loaded then.
   sendSelection();
+  // A new state knows nothing of the panel's buttons.
+  notify("marker " + panel->pickedMarker());
+  notify(QString("marks-shown %1").arg(panel->marksShown() ? 1 : 0));
 }
 
 void CShotDocLauncher::onStateReport(const QString& what, const QString& rest) {
   if ("status" == what) {
     panel->setStatus(rest);
   } else if ("mark-placed" == what) {
-    addMark(rest.section(' ', 0, 0), QJsonDocument::fromJson(rest.section(' ', 1).toUtf8()).object());
+    // An id may hold spaces.
+    addMark(rest.section('\t', 0, 0), QJsonDocument::fromJson(rest.section('\t', 1).toUtf8()).object());
   } else if ("marking" == what) {
     marking = "1" == rest;
+  } else if ("drift" == what) {
+    onDrift(rest.section('\t', 0, 0), rest.section('\t', 1));
+  } else if ("drift-unknown" == what) {
+    // Nothing is taken without knowing what it would miss.
+    if (std::exchange(afterDrift, nullptr)) {
+      refreshPanel(rest + " Nothing was taken again.");
+    }
   } else if ("mark-status" == what) {
     QStringList statuses;
     for (const QJsonValue& status : QJsonDocument::fromJson(rest.toUtf8()).array()) {
@@ -321,11 +335,15 @@ void CShotDocLauncher::onStateReport(const QString& what, const QString& rest) {
     }
     panel->setMarkStatuses(statuses);
   } else if ("tagged" == what) {
-    // The selected row's marks went with the image; pending ones now live in its entry.
-    files.setPendingMarks(selectedShot, QJsonArray());
-    files.setMarksChanged(rest, false);
-    selectedShot = rest;
-    refreshPanel(QString("%1 taken.").arg(rest));
+    // "<id>[\t<row whose marks it carries>]": those marks now live in the entry of id.
+    const QString& id = rest.section('\t', 0, 0);
+    const QString& markedFrom = rest.section('\t', 1);
+    QString error = markedFrom.isEmpty() ? QString() : files.setPendingMarks(markedFrom, QJsonArray());
+    if (const QString& changed = files.setMarksChanged(id, false); !changed.isEmpty()) {
+      error += (error.isEmpty() ? "" : "\n") + changed;
+    }
+    selectedShot = id;
+    refreshPanel(error.isEmpty() ? QString("%1 taken.").arg(id) : QString("%1 taken, but %2").arg(id, error));
     sendSelection();
   } else if ("recording" == what) {
     updateBusy();
@@ -351,6 +369,9 @@ void CShotDocLauncher::onStateReport(const QString& what, const QString& rest) {
 }
 
 void CShotDocLauncher::onStateEnded(CShotDocState::end_e how, const QString& detail) {
+  // Its answers never come.
+  afterDrift = nullptr;
+  marking = false;
   // Only the current state emits: a replaced one was stopped.
   if (!state.isNull()) {
     state->deleteLater();
@@ -430,10 +451,8 @@ void CShotDocLauncher::storeMarks(const QString& id, const QJsonArray& marks, co
     // Not taken yet: they wait for the first image.
     error = files.setPendingMarks(id, marks);
   } else {
-    bool hadImage = false;
-    for (const CShotFiles::row_t& row : files.rows()) {
-      hadImage = hadImage || (row.id == id && !row.imagePath.isEmpty());
-    }
+    const auto& row = files.row(id);
+    const bool hadImage = row && !row->imagePath.isEmpty();
     if (marks.isEmpty()) {
       shot.remove("mark");
     } else {
@@ -823,7 +842,71 @@ bool CShotDocLauncher::runShots(QPointer<CShotsJob>& slot, const QStringList& ar
   return true;
 }
 
+void CShotDocLauncher::askDrift(const std::function<void()>& go) {
+  if (afterDrift) {
+    refreshPanel("Waiting for QMapShack to say which settings differ; try again in a moment.");
+    return;
+  }
+  afterDrift = go;
+  savingBase = false;
+  if (!state->send("drift")) {
+    afterDrift = nullptr;
+    go();
+  }
+}
+
+void CShotDocLauncher::onDrift(const QString& name, const QString& keys) {
+  const std::function<void()> go = std::exchange(afterDrift, nullptr);
+  if (!go) {
+    return;
+  }
+  if (keys.isEmpty()) {
+    go();
+    return;
+  }
+  if (savingBase) {
+    refreshPanel("The base was not saved, so nothing was taken again.");
+    return;
+  }
+  const QString& label = CShotFiles::label(name);
+  QMessageBox box(QMessageBox::Warning, "Settings on screen differ",
+                  QString("The settings on screen differ from the ones %1 was set up with: %2.\n\nRetake replays %1, "
+                          "so the image will not show them.")
+                      .arg(label, keys),
+                  QMessageBox::NoButton, panel);
+  QPushButton* save = nullptr;
+  if (name.isEmpty()) {
+    save = box.addButton("Save as base, then retake", QMessageBox::AcceptRole);
+  } else {
+    box.setInformativeText("To keep them, record the scenario again with them; or undo them.");
+  }
+  QPushButton* anyway = box.addButton("Retake anyway", QMessageBox::DestructiveRole);
+  box.addButton(QMessageBox::Cancel);
+  box.exec();
+  if (box.clickedButton() == anyway) {
+    go();
+  } else if (nullptr != save && box.clickedButton() == save) {
+    // The state answers in order: the second answer comes once the base is written, and has no drift left.
+    if (state.isNull() || !state->send("update " + CShotPage::kBaseScenario) || !state->send("drift")) {
+      refreshPanel("The application is not running; nothing was taken again.");
+      return;
+    }
+    afterDrift = go;
+    savingBase = true;
+  }
+}
+
 void CShotDocLauncher::retakeShot(const QString& id) {
+  // Only the running state's images can carry what was changed on screen.
+  const auto& row = files.row(id);
+  if (!state.isNull() && state->isReady() && !state->isRecording() && row && row->scenario == state->scenario()) {
+    askDrift([this, id]() { runRetakeShot(id); });
+    return;
+  }
+  runRetakeShot(id);
+}
+
+void CShotDocLauncher::runRetakeShot(const QString& id) {
   // Headless, the way a build renders it; an image that does not come out keeps the work image.
   const bool started =
       runShots(replayJob, {"-o", repo.absoluteFilePath("doc/images/_work"), "replay", "--only", id},
@@ -842,6 +925,7 @@ void CShotDocLauncher::retakeShot(const QString& id) {
 }
 
 void CShotDocLauncher::retakePage() {
+  // Asked first: a base saved for the retake stays saved.
   if (files.hasUnpublishedImages() &&
       QMessageBox::Yes != QMessageBox::question(panel, "Take every image again?",
                                                 "Images of this page taken and not published yet are replaced.\n\n"
@@ -849,6 +933,14 @@ void CShotDocLauncher::retakePage() {
                                                 QMessageBox::Yes | QMessageBox::Cancel, QMessageBox::Cancel)) {
     return;
   }
+  if (!state.isNull() && state->isReady() && !state->isRecording()) {
+    askDrift([this]() { runRetakePage(); });
+    return;
+  }
+  runRetakePage();
+}
+
+void CShotDocLauncher::runRetakePage() {
   // Headless into _work, like Take again for every row: each is judged side by side and published or reverted.
   const bool started =
       runShots(replayJob, {"-o", repo.absoluteFilePath("doc/images/_work"), "replay", "--only", page + "/*"},
@@ -992,7 +1084,7 @@ void CShotDocLauncher::refreshPanel(const QString& status) {
   for (const CShotMarks::mark_t& mark : std::as_const(marks)) {
     markNames << CShotMarks::describe(mark);
   }
-  panel->setMarks(markNames);
+  panel->setMarks(selectedShot, markNames);
 
   // Shown before anything else: every list above reads as empty then.
   if (const QString& problem = files.shotFileProblem(); !problem.isEmpty()) {

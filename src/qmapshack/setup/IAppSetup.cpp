@@ -175,7 +175,14 @@ void installCatalog(const QString& dir, const QString& prefix, const QString& lo
 
 void IAppSetup::prepareTranslators(const QString& appPath, const QString& appPrefix, const QString& qtPath) {
   const QString& wanted = qlOpts->locale != nullptr ? qlOpts->locale : QLocale::system().name();
-  const QString& locale = findCatalogLocale(appPath, appPrefix, wanted);
+  // Installed catalogs first. A build-tree run has none: it takes the ones compiled in only for an explicit
+  // --locale, so a developer's run stays English.
+  QString catalogDir = appPath;
+  QString locale = findCatalogLocale(catalogDir, appPrefix, wanted);
+  if (locale.isEmpty() && qlOpts->locale != nullptr) {
+    catalogDir = ":/locale";
+    locale = findCatalogLocale(catalogDir, appPrefix, wanted);
+  }
   if (locale.isEmpty()) {
     // Force English everywhere, not just in the strings the application owns: a desktop environment
     // installs a Qt catalog for the system locale on its own, which would leave the GUI in two
@@ -186,11 +193,12 @@ void IAppSetup::prepareTranslators(const QString& appPath, const QString& appPre
   }
 
   qDebug() << "locale" << locale;
+  guiLanguage = locale.section('_', 0, 0);
   const QString& qtLocale = findCatalogLocale(qtPath, "qtbase_", locale);
   if (!qtLocale.isEmpty()) {
     installCatalog(qtPath, "qtbase_", qtLocale);
   }
-  installCatalog(appPath, appPrefix, locale);
+  installCatalog(catalogDir, appPrefix, locale);
 }
 
 void IAppSetup::initLogHandler() { CLogHandler::initLogHandler(logDir(), qlOpts->logfile, qlOpts->debug); }

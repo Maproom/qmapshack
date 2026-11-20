@@ -146,7 +146,7 @@ rem section 2.4.1) Copy the documentation files
 mkdir doc
 cd doc
 mkdir HTML
-copy ..\..\..\src\qmapshack\doc\QMSHelp.* HTML
+xcopy ..\..\..\doc\html HTML\qms /s /i
 copy ..\..\..\src\qmaptool\doc\QMTHelp.* HTML
 cd ..
 

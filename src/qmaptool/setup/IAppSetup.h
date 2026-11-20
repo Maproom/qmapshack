@@ -189,6 +189,8 @@ class IAppSetup : public QObject {
      @brief Install the Qt and application translators for the effective locale
 
      The application catalog decides: without one for the locale Qt's catalog is not loaded either.
+     The application catalog comes from @p appPath; with an explicit `--locale`, else from the catalogs
+     compiled in under `:/locale`.
 
      @param appPath the directory holding the application's `.qm` files
      @param appPrefix the application catalog prefix including the trailing underscore

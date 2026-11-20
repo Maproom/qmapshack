@@ -57,6 +57,8 @@ class IAppSetup {
   virtual QString logDir() = 0;
   virtual QString findExecutable(const QString& name) = 0;
   virtual QString helpFile() = 0;
+  /** @return the language of the GUI's catalog, e.g. `de`; `en` when the GUI is untranslated */
+  const QString& language() const { return guiLanguage; }
   virtual bool setLock() = 0;
 
  protected:
@@ -72,6 +74,8 @@ class IAppSetup {
      @brief Install the Qt and application translators for the effective locale
 
      The application catalog decides: without one for the locale Qt's catalog is not loaded either.
+     The application catalog comes from @p appPath; with an explicit `--locale`, else from the catalogs
+     compiled in under `:/locale`.
 
      @param appPath the directory holding the application's `.qm` files
      @param appPrefix the application catalog prefix including the trailing underscore
@@ -82,6 +86,9 @@ class IAppSetup {
   static IAppSetup* instance;
 
   QString path(QString path, QString subdir, bool mkdir, QString debugName);
+
+ private:
+  QString guiLanguage = "en";
 };
 
 #endif  // IAPPSETUP_H

@@ -1758,10 +1758,16 @@ void CMainWindow::slotSanityTest() {
 void CMainWindow::slotHelp() {
   if (help.isNull()) {
     // The source tree's pages match the code this binary was built from; an installed package has no source tree.
-    QString home = QString::fromUtf8(QMS_SOURCE_DOC_HTML) + "/index.html";
-    if (!QFileInfo::exists(home)) {
-      home = IAppSetup::getPlatformInstance()->helpFile();
+    QDir root(QString::fromUtf8(QMS_SOURCE_DOC_HTML));
+    if (!QFileInfo::exists(root.absoluteFilePath("en/index.html"))) {
+      root = QFileInfo(IAppSetup::getPlatformInstance()->helpFile()).absoluteDir();
     }
+    // The GUI's language, else English: each language is a folder of its own.
+    QString home = root.absoluteFilePath(IAppSetup::getPlatformInstance()->language() + "/index.html");
+    if (!QFileInfo::exists(home)) {
+      home = root.absoluteFilePath("en/index.html");
+    }
+    qDebug() << "help pages" << home;
     if (!QFileInfo::exists(home)) {
       QMessageBox::warning(this, tr("Help"),
                            tr("The help pages are missing (%1). Please reinstall QMapShack.").arg(home));

@@ -1,7 +1,7 @@
 # Style guide
 
 How to write a page of the QMapShack documentation. For anything not covered here, follow the
-[Microsoft writing style guide][MSSTYLE]. Break a **review** rule when the page gets clearer by it.
+[Microsoft writing style guide][MSSTYLE]. Break a **review** rule when breaking it makes the page clearer.
 
 The **Check** column says who finds a mistake:
 
@@ -15,12 +15,13 @@ Write for people who use QMapShack, not for developers. One page answers one que
 
 | Rule | Check |
 |---|---|
-| Use American English. The build knows the spellings in the Words table. | build |
+| Use American English. The build checks the spellings in the Words table. | build |
 | Use short, direct sentences: at most 25 words. | build |
 | Use the active voice: "QMapShack shows the track", not "The track is shown". | review |
 | Address the reader as "you". Don't write "we" or "our". | build |
 | Use one idea per paragraph, at most four sentences. | build |
 | Explain a technical term the first time a page uses it, or link to where it's explained. | review |
+| A page stands on its own as far as possible: don't assume the reader has read another page. Say what to do, or link to it; no "as on the previous page". | review |
 
 ## Words
 
@@ -35,11 +36,12 @@ names the one to use. It reads this table, so a new row is checked at once.
 | image | picture, screenshot |
 | toolbar | tool bar |
 | double-click | double click |
+| right-click | right click |
 | click | click on |
 | online, offline | on-line, off-line |
 | Markdown | markdown |
 | alphanumeric | alphanumerical |
-| track point | Track Point, trackpoint |
+| trackpoint | track point, Track Point |
 | color | colour |
 | center | centre |
 | gray | grey |
@@ -74,7 +76,7 @@ A page uses the parts it needs, in this order:
 
 | Rule | Check |
 |---|---|
-| A new page is listed in `doc/index.md`. | Sphinx |
+| A new page is listed in `doc/en/index.md`. | Sphinx |
 | A page has exactly one title (`#`). | build |
 | The file name is lower case letters, digits and hyphens: `track-filters.md`. | build |
 | The file is UTF-8 and contains no tab characters. | build |
@@ -118,26 +120,27 @@ finds it. Write a menu path with arrows:
 |---|---|
 | A label matches the user interface. | review |
 | A menu path uses `→` between the entries. | build |
-| Use **Click** for buttons and menu entries, **Select** in lists, **Choose** for options in a dialog, **Press** for keys. | review |
-| Write a key as it is labelled: **Ctrl+Shift+F9**. | review |
+| Use **Click** for buttons and menu entries, **Select** in lists, **Choose** for options in a dialog, **Check** and **Clear** for check boxes, **Press** for keys. | review |
+| Write a key as it is labeled: **Ctrl+Shift+F9**. | review |
+| Leave out a label's trailing colon: **Type File**, not **Type File:**. | review |
 
 ## Images
 
 Use an image when it shows something hard to describe: a dialog with many options, a map, a graph.
 Don't use one for a simple menu path.
 
-How images are taken is described in [WRITING_DOCS.md](WRITING_DOCS.md). The usual form is:
+[WRITING_DOCS.md](WRITING_DOCS.md) describes how to take images. The usual form is:
 
 ```
-![](../images/track-filters/track-details-graphs.png)
+![](../images/track-filters/track-filters-graphs.png)
 ```
 
 When the image needs a caption, or another place refers to it, use a figure. GitHub does not show
 a figure in its preview of the page.
 
 ````
-```{figure} ../images/track-filters/track-details-graphs.png
-:name: track-details-graphs
+```{figure} ../images/track-filters/track-filters-graphs.png
+:name: track-filters-graphs
 
 The graphs of a track.
 ```
@@ -146,9 +149,9 @@ The graphs of a track.
 | Rule | Check |
 |---|---|
 | The image exists. | Sphinx |
-| Images are PNG files in `doc/images/<page>/`. | build |
-| The name is `<subject>[-<variant>]`, lower case with hyphens. | build |
-| An image without alternative text gets its name: `track-details-graphs.png` is "Track details graphs". Choose names that say what the image shows. | review |
+| Images are in `doc/<lang>/images/<page>/`, each name starting with the page name (`<page>-<name>.png`): images of the user interface PNG, drawings and diagrams SVG, photos JPG; GIF and WebP are allowed too. | build |
+| The name is `<page>-<subject>[-<variant>]`, lower case with hyphens. | build |
+| An image without alternative text gets its name: `track-filters-graphs.png` is "Track filters graphs". Choose names that say what the image shows. | review |
 | The image shows only the part the text talks about. | review |
 | The image shows the data its attribution names (see [WRITING_DOCS.md](WRITING_DOCS.md)). | review |
 
@@ -229,14 +232,28 @@ Remove such a note once the version is two releases old.
 |---|---|
 | A version note has the form `*Since QMapShack <version>*` or `*Removed in QMapShack <version>*`. | build |
 
+## German
+
+The rules above hold for every language. The build checks German pages for every rule except those about English
+words: spelling and the Words and Names tables. A German page follows its English page: same sections, steps and images.
+
+| Rule | Check |
+|---|---|
+| Address the reader as *Sie*. | review |
+| Use **Klicken Sie auf** for buttons and menu entries, **Wählen Sie … aus** in lists and for options in a dialog, **Aktivieren Sie** and **Deaktivieren Sie** for check boxes, **Drücken Sie** for keys. | review |
+| Write a label exactly as the German QMapShack shows it (`src/qmapshack/locale/qmapshack_de.ts`). | review |
+| Write a key as Qt names it in German: **Strg**, **Umschalt**, **Hoch**, **Herunter**, **Links**, **Rechts**. | review |
+| Use the words of the German user interface: *Bereich* for a panel, *Gebiet* for an area item, *Wegpunkt*, *Track*, *Route*. | review |
+| Call a button *Knopf*, not *Schaltfläche*. | review |
+
 ## Before the pull request
 
 1. Look at the pages that link to a changed page, and at its index entries.
-2. Generate the pages (see [CREATING_DOCS.md](CREATING_DOCS.md)). It must end with "Generated doc/html"
-   (`doc\html` on Windows).
+2. Generate the pages (see [CREATING_DOCS.md](CREATING_DOCS.md)). Its last line starts with
+   "Generated doc/html" (`doc\html` on Windows).
 3. Read the page in a browser, with its images.
 4. Check the **review** rules on this page.
 
-A reviewer checks the same and that the text is correct for the current QMapShack.
+A reviewer checks the same, and also that the text matches the current QMapShack.
 
 [MSSTYLE]: https://learn.microsoft.com/en-us/style-guide/welcome "Microsoft writing style guide"

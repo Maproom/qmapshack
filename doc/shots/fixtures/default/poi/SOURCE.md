@@ -6,7 +6,7 @@ Map data © [OpenStreetMap contributors](https://www.openstreetmap.org/copyright
 [ODbL](https://opendatacommons.org/licenses/odbl/). Extracted from the mapsforge POI file
 <https://download.mapsforge.org/pois/europe/austria.poi>, written 2026-03-14 04:21 UTC.
 
-Changes: cut to lat 47.472–47.565, lon 10.460–10.636, which covers both example projects, the map
+Changes: cropped to lat 47.472–47.565, lon 10.460–10.636, which covers both example projects, the map
 and the DEM; converted from POI version 3 to version 2, the only one QMapShack reads. Version 2 is
 mapsforge's schema at commit 2ce3237cdc: `poi_index` is an R-tree with `minLat`, `maxLat`, `minLon`,
 `maxLon` where version 3 has `lat` and `lon`. Categories, POI data and the metadata `date` are

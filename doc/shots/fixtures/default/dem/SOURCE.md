@@ -7,9 +7,9 @@ Datenquelle: Land Tirol - data.tirol.gv.at,
 5 m, retrieved 2026-09-15, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Terms:
 <https://www.tirol.gv.at/data/nutzungsbedingungen/>.
 
-Changes: cut to MGI / Austria GK West (EPSG:31254) x 9500–22800, y 259300–269600 (2660 × 2060 px,
-5 m), which covers both example projects; 0 declared as nodata - Land Tirol has no data beyond its
-border, which is the German part of the extent; values rounded to 0.05 m through LERC, then stored
+Changes: cropped to MGI / Austria GK West (EPSG:31254) x 9500–22800, y 259300–269600 (2660 × 2060 px,
+5 m), which covers both example projects; 0 declared as nodata, because Land Tirol has no data beyond its
+border (the German part of the extent); values rounded to 0.05 m through LERC, then stored
 DEFLATE-compressed, because not every GDAL build reads LERC; overviews added.
 
 ```bash

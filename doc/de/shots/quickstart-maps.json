@@ -1,0 +1,212 @@
+{
+  "scenarios": {
+    "osm-on": [
+      {
+        "button": "activate",
+        "do": "click",
+        "row": "OpenStreetMap",
+        "widget": "dockMaps/treeWidget"
+      }
+    ],
+    "both-on": [
+      {
+        "button": "activate",
+        "do": "click",
+        "row": "OpenStreetMap",
+        "widget": "dockMaps/treeWidget"
+      },
+      {
+        "button": "activate",
+        "do": "click",
+        "row": "OSM Topo",
+        "widget": "dockMaps/treeWidget"
+      }
+    ],
+    "topo-up": [
+      {
+        "button": "activate",
+        "do": "click",
+        "row": "OpenStreetMap",
+        "widget": "dockMaps/treeWidget"
+      },
+      {
+        "button": "activate",
+        "do": "click",
+        "row": "OSM Topo",
+        "widget": "dockMaps/treeWidget"
+      },
+      {
+        "do": "select",
+        "row": "OSM Topo",
+        "widget": "dockMaps/treeWidget"
+      },
+      {
+        "do": "keypress",
+        "key": "Up",
+        "mods": [
+          "shift"
+        ],
+        "widget": "dockMaps/treeWidget"
+      }
+    ],
+    "topo-half": [
+      {
+        "button": "activate",
+        "do": "click",
+        "row": "OpenStreetMap",
+        "widget": "dockMaps/treeWidget"
+      },
+      {
+        "button": "activate",
+        "do": "click",
+        "row": "OSM Topo",
+        "widget": "dockMaps/treeWidget"
+      },
+      {
+        "do": "expand",
+        "row": "OSM Topo",
+        "widget": "dockMaps/treeWidget"
+      },
+      {
+        "do": "set",
+        "property": "value",
+        "value": 50,
+        "widget": "dockMaps/treeWidget/QWidget#0/CMapPropSetup#1/sliderOpacity"
+      }
+    ]
+  },
+  "shots": [
+    {
+      "id": "quickstart-maps/map-path-setup",
+      "exposure": "MapPathSetup",
+      "mark": [
+        {
+          "root": "window",
+          "widget": "pushMapHonk",
+          "shape": "frame"
+        }
+      ],
+      "rect": [
+        0,
+        272,
+        561,
+        140
+      ]
+    },
+    {
+      "id": "quickstart-maps/maps-panel",
+      "size": [
+        1200,
+        800
+      ],
+      "widget": "",
+      "rect": [
+        16,
+        84,
+        350,
+        212
+      ]
+    },
+    {
+      "id": "quickstart-maps/osm-button",
+      "size": [
+        1200,
+        800
+      ],
+      "widget": "",
+      "mark": [
+        {
+          "root": "main",
+          "widget": "dockMaps/treeWidget",
+          "part": "button",
+          "row": "1:0",
+          "button": "activate",
+          "shape": "cursor",
+          "cursor": "pointer"
+        }
+      ],
+      "rect": [
+        16,
+        84,
+        350,
+        112
+      ]
+    },
+    {
+      "id": "quickstart-maps/osm-on",
+      "scenario": "osm-on",
+      "size": [
+        1200,
+        800
+      ],
+      "widget": "",
+      "rect": [
+        0,
+        56,
+        700,
+        250
+      ]
+    },
+    {
+      "id": "quickstart-maps/both-on",
+      "scenario": "both-on",
+      "size": [
+        1200,
+        800
+      ],
+      "widget": "",
+      "rect": [
+        0,
+        56,
+        700,
+        250
+      ]
+    },
+    {
+      "id": "quickstart-maps/topo-up",
+      "scenario": "topo-up",
+      "size": [
+        1200,
+        800
+      ],
+      "widget": "",
+      "rect": [
+        0,
+        56,
+        700,
+        250
+      ]
+    },
+    {
+      "id": "quickstart-maps/topo-half",
+      "scenario": "topo-half",
+      "size": [
+        1200,
+        800
+      ],
+      "widget": "",
+      "rect": [
+        0,
+        56,
+        700,
+        250
+      ],
+      "mark": [
+        {
+          "root": "main",
+          "widget": "dockMaps/treeWidget",
+          "part": "branch",
+          "row": "2:0",
+          "shape": "disc"
+        },
+        {
+          "root": "main",
+          "widget": "dockMaps/treeWidget/QWidget#0/CMapPropSetup#1/sliderOpacity",
+          "part": "handle",
+          "shape": "cursor",
+          "cursor": "hand"
+        }
+      ]
+    }
+  ]
+}

@@ -10,10 +10,12 @@ CMakeUserPresets.json
 
 # A documentation run's own tile cache and workspace database, wherever --shoot points.
 **/_cache/
-# Where shots.py replay renders; only publishing writes doc/images.
-doc/images/_check/
-doc/images/_work/
+# Where shots.py replay renders; only publishing writes doc/<lang>/images.
+doc/*/images/_check/
+doc/*/images/_work/
 # The panel writes it into a new page fixture folder for the writer; it describes, it is no part.
 doc/shots/fixtures/*/README.md
 # The test page is not documentation; its images stay local.
-doc/images/test/
+doc/*/images/test/
+# Sphinx compiles doc/locales/*/LC_MESSAGES/sphinx.po on every build.
+doc/locales/*/LC_MESSAGES/*.mo

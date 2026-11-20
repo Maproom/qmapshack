@@ -6,6 +6,7 @@
   shots.py replay [--only GLOB]   replay every shot and report the ones that no longer come out
   shots.py selftest               the recorder's and documentation mode's own cases
   shots.py unused [--delete]      shots and images no page references any more
+  shots.py completion             write Tab completion for bash again (the first run does it)
 
 An image's bytes depend on the machine that rendered it, so `replay` compares no images: it
 answers whether every shot still replays. It renders into doc/<lang>/images/_check and never
@@ -16,10 +17,12 @@ Needs Python 3.9 and this checkout's build configured with -DQMS_DOC_MODE=ON.
 """
 
 import argparse
+import concurrent.futures
 import fnmatch
 import json
 import os
 import re
+import shlex
 import shutil
 import signal
 import subprocess
@@ -27,6 +30,8 @@ import sys
 import tempfile
 import threading
 from pathlib import Path
+
+from check_pages import IMAGE_EXTENSIONS
 
 # Every image is rendered with these. The font family is bundled: offscreen has no font database.
 STYLE = "Fusion"
@@ -73,6 +78,10 @@ DEFAULT_FIXTURE = FIXTURES_DIR / "default"
 DEFAULT_BASE = DEFAULT_FIXTURE / "shots.ini"
 # The self test's own base: it checks the recorder, so no page's arrangement may move its cases.
 SELFTEST_BASE = Path(__file__).resolve().parent / "selftest.ini"
+# CShotSelfTest::groups() plus "doc", CShotEntry's documentation mode cases; each runs in a process of its own.
+SELFTEST_GROUPS = ["qt-controls", "workspace", "map", "plot-icon-grid", "row-buttons", "geo-search-menus", "map-pois",
+                   "scenario-twice", "render-all", "replay-refuses", "shoot-scenario", "marks", "menu-names"]
+SELFTEST_DOC_GROUP = "doc"
 # Names the default fixture's folder, so it cannot name a page.
 RESERVED_PAGES = ("default",)
 # One tile cache for every run and the writer's session; git-ignored.
@@ -91,7 +100,7 @@ DEADLINE_EXIT = 124
 LOCK_FILE = ".lock" if sys.platform == "darwin" else ".QMapShack.lock"
 # IAppSetup::path() says "path created" instead of "path" when the directory did not exist yet.
 PATH_LINE = re.compile(r'"(CACHE|USER DATA)" path (?:created )?"(.*)"')
-IMAGE_REFERENCE = re.compile(r"images/([\w./-]+)\.png")
+IMAGE_REFERENCE = re.compile(r"images/([\w./-]+)\.(?:" + "|".join(IMAGE_EXTENSIONS) + ")")
 
 
 def shot_label(shot_id):
@@ -136,7 +145,8 @@ def write_ini(path, data):
         lines.append(f"[{section}]")
         lines += [f"{key}={value}" for key, value in sorted(sections[section])]
         lines.append("")
-    path.write_text("\n".join(lines), encoding="utf-8")
+    with path.open("w", encoding="utf-8", newline="\n") as file:
+        file.write("\n".join(lines))
 
 
 def ini_string(value):
@@ -202,7 +212,8 @@ def write_shot_file(path, content):
     # QJsonDocument opens and closes an empty object or list on two lines.
     text = EMPTY_CONTAINER.sub(lambda m: f"{m[1]}{m[2]}{m[3]}\n{m[1]}{m[4]}{m[5]}", text)
     temporary = path.with_name(path.name + ".tmp")
-    temporary.write_text(text + "\n", encoding="utf-8")
+    with temporary.open("w", encoding="utf-8", newline="\n") as file:
+        file.write(text + "\n")
     os.replace(temporary, path)
 
 
@@ -256,6 +267,20 @@ def compose_config(page, scenario, out, source=None):
         projects = sorted(p for p in folder.iterdir() if p.suffix.lower() in PROJECT_SUFFIXES)
     if projects:
         data["Shoot/fixtureProject"] = ini_string(projects[0].as_posix())
+    # A file dialog opens in the fixture's projects folder; its side bar still lists the writer's places.
+    if folder is not None and folder.is_dir():
+        data["Paths/lastGisPath"] = ini_string(folder.as_posix())
+
+    # A database created in a run goes into a folder emptied on every compose: the writer's session composes every
+    # scenario next to the same file, and a database left by the one before makes Add Database fail. Exports likewise.
+    databases = out.parent / "databases"
+    shutil.rmtree(databases, ignore_errors=True)
+    databases.mkdir(parents=True)
+    data["Database/lastDatabasePath"] = ini_string(databases.as_posix())
+    export = out.parent / "export"
+    shutil.rmtree(export, ignore_errors=True)
+    export.mkdir(parents=True)
+    data["ExportDB/path"] = ini_string(export.as_posix())
 
     folder = fixture_part(page, "database")
     if folder is None:
@@ -392,6 +417,17 @@ def app_args(config):
             "--font-size", FONT_SIZE, "--color-scheme", COLOR_SCHEME, "--locale", LOCALE]
 
 
+# Applications started by run_app() and not yet ended, so a stopped parallel run can kill them all.
+RUNNING = set()
+RUNNING_LOCK = threading.Lock()
+
+
+def kill_running():
+    with RUNNING_LOCK:
+        for process in RUNNING:
+            process.kill()
+
+
 def run_app(cmd, scratch, verbose, on_line):
     """Run a headless application in the scratch directory, hand each line of its stderr to on_line.
 
@@ -400,6 +436,8 @@ def run_app(cmd, scratch, verbose, on_line):
     # In the scratch directory, so the run leaves nothing anywhere else.
     process = subprocess.Popen(cmd, env=pinned_env(), cwd=scratch, stdout=None if verbose else subprocess.DEVNULL,
                                stderr=subprocess.PIPE, encoding="utf-8", errors="replace")
+    with RUNNING_LOCK:
+        RUNNING.add(process)
     timed_out = threading.Event()
 
     def kill():
@@ -422,6 +460,8 @@ def run_app(cmd, scratch, verbose, on_line):
         raise
     finally:
         watchdog.cancel()
+        with RUNNING_LOCK:
+            RUNNING.discard(process)
     return code, timed_out.is_set()
 
 
@@ -571,8 +611,34 @@ def cmd_replay(args):
         sys.exit(f"{len(broken)} page(s) did not replay")
 
 
+def run_selftest_group(binary, out, page_file, group, verbose):
+    """One self test group in an application of its own.
+
+    @return the exit code, whether the watchdog killed it, and its `shoot:` lines
+    """
+    lines = []
+    with tempfile.TemporaryDirectory(prefix="qms-selftest-") as scratch:
+        config = Path(scratch) / "shots.ini"
+        # The default fixture, whatever the page's own holds; the shot file only names the run.
+        compose_config(DEFAULT_FIXTURE.name, None, config, source=SELFTEST_BASE)
+        group_out = out / group
+        group_out.mkdir(parents=True, exist_ok=True)
+        cmd = [str(binary), "-platform", "offscreen", *app_args(config), "--shoot", str(group_out),
+               "--shoot-target", str(page_file), "--shoot-selftest", "--shoot-selftest-group", group]
+        if verbose:
+            cmd.append("-d")
+            print("      " + " ".join(cmd), file=sys.stderr)
+
+        def collect(line):
+            if "shoot: " in line:
+                lines.append(line.split("shoot: ", 1)[1].rstrip())
+
+        code, timed_out = run_app(cmd, scratch, verbose, collect)
+    return code, timed_out, lines
+
+
 def cmd_selftest(args):
-    """The recorder's own cases, in one application with the fixture loaded.
+    """The recorder's own cases, one application per group, side by side, each with the fixture loaded.
     """
     binary = find_binary(args.binary)
     cache, user_data = user_paths(binary)
@@ -590,35 +656,59 @@ def cmd_selftest(args):
     watched = (cache, user_data)
     before = snapshot(watched)
 
-    with tempfile.TemporaryDirectory(prefix="qms-selftest-") as scratch:
-        config = Path(scratch) / "shots.ini"
-        # The default fixture, whatever the page's own holds; the shot file only names the run.
-        compose_config(DEFAULT_FIXTURE.name, None, config, source=SELFTEST_BASE)
-        cmd = [str(binary), "-platform", "offscreen", *app_args(config), "--shoot", str(out),
-               "--shoot-target", str(page_file), "--shoot-selftest"]
-        if args.verbose:
-            cmd.append("-d")
-            print("      " + " ".join(cmd), file=sys.stderr)
+    groups = SELFTEST_GROUPS + [SELFTEST_DOC_GROUP]
+    results = {}
+    try:
+        with concurrent.futures.ThreadPoolExecutor(max_workers=args.jobs) as pool:
+            futures = {pool.submit(run_selftest_group, binary, out, page_file, group, args.verbose): group
+                       for group in groups}
+            for future in concurrent.futures.as_completed(futures):
+                results[futures[future]] = future.result()
+    finally:
+        kill_running()
 
-        def report(line):
-            if "shoot: PASS" in line or "shoot: FAIL" in line or "shoot: self test" in line:
-                print("  " + line.split("shoot: ", 1)[1].rstrip())
+    problems = []
+    unreplayed = None
+    mismatched = False
+    for group in groups:
+        code, timed_out, lines = results[group]
+        print(f"  [{group}]")
+        for line in lines:
+            if line.startswith("PASS") or line.startswith("FAIL") or line.startswith("self test"):
+                print("    " + line)
+            elif line.startswith("unreplayed"):
+                names = set(filter(None, line[len("unreplayed"):].strip().split(",")))
+                unreplayed = names if unreplayed is None else unreplayed & names
+            elif line.startswith("groups"):
+                known = line[len("groups"):].strip().split(",")
+                if known != SELFTEST_GROUPS and not mismatched:
+                    mismatched = True
+                    problems.append(f"the application's groups {', '.join(known)} differ from SELFTEST_GROUPS in "
+                                    "shots.py; change both")
+        if timed_out:
+            problems.append(f"{group}: did not finish within {RUN_TIMEOUT_S}s - a case opened something nothing closes")
+        elif code == DEADLINE_EXIT:
+            problems.append(f"{group}: stopped at a case that did not return; the cases after it did not run")
+        elif not 0 <= code <= MAX_FAILURE_EXIT:
+            problems.append(f"{group}: crashed with exit code {code}")
+        elif code != 0:
+            problems.append(f"{group}: {code} case(s) failed")
 
-        code, timed_out = run_app(cmd, scratch, args.verbose, report)
+    # Coverage spans the groups: a handler counts once any group replayed it.
+    if unreplayed is None:
+        problems.append("no group reported the handlers it replayed")
+    elif unreplayed:
+        problems.append(f"no case replays the handlers {', '.join(sorted(unreplayed))}")
+    else:
+        print("  every handler replays in some case")
 
     leaked = changed(before, snapshot(watched))
     for path in leaked:
         print(f"  the self test changed {path}")
-    if timed_out:
-        sys.exit(f"the self test did not finish within {RUN_TIMEOUT_S}s - a case opened something nothing closes")
     if leaked:
-        sys.exit(f"the self test wrote outside the scratch tree: {len(leaked)} file(s)")
-    if code == DEADLINE_EXIT:
-        sys.exit("the self test stopped at a case that did not return; the cases after it did not run")
-    if not 0 <= code <= MAX_FAILURE_EXIT:
-        sys.exit(f"the self test crashed with exit code {code}")
-    if code != 0:
-        sys.exit(f"{code} case(s) failed")
+        problems.append(f"the self test wrote outside the scratch tree: {len(leaked)} file(s)")
+    if problems:
+        sys.exit("\n".join(problems))
     print("every case passes")
 
 
@@ -636,7 +726,7 @@ def cmd_unused(args):
     # An image with no shot and no page, left behind by a shot that was removed.
     ids = {shot_id for _, shot_id in dead}
     orphans = []
-    for image in sorted(IMAGES_DIR.rglob("*.png")):
+    for image in sorted(p for ext in IMAGE_EXTENSIONS for p in IMAGES_DIR.rglob(f"*.{ext}")):
         relative = image.relative_to(IMAGES_DIR)
         if relative.parts[0].startswith("_"):
             continue
@@ -753,7 +843,8 @@ def cmd_publish(args):
         except OSError:
             pass  # not empty, or gone: either way nothing to do
     if args.report:
-        Path(args.report).write_text(json.dumps({"published": published}, indent=4) + "\n", encoding="utf-8")
+        with Path(args.report).open("w", encoding="utf-8", newline="\n") as file:
+            file.write(json.dumps({"published": published}, indent=4) + "\n")
     for shot_id in published:
         print(f"  {shot_id}")
     print(f"{len(published)} image(s) published" if published else "nothing was taken again, nothing to publish")
@@ -771,7 +862,75 @@ def cmd_compose(args):
     print(out)
 
 
+COMMANDS = ("take", "publish", "replay", "selftest", "unused", "completion")
+GLOBAL_OPTIONS = ("--binary", "--lang", "-o", "--out", "-v", "--verbose", "-h", "--help")
+COMMAND_OPTIONS = {"publish": ("--report", "--only"), "replay": ("--only",), "selftest": ("-j", "--jobs", "--page"),
+                   "unused": ("--delete",)}
+# Options whose value is a file or directory: bash completes those itself.
+PATH_OPTIONS = ("--binary", "-o", "--out", "--report")
+
+
+def completions(line):
+    """The words that complete the last word of @p line, a shots.py command line as typed so far."""
+    words = line.split()
+    current = "" if line.endswith((" ", "\t")) or not words else words.pop()
+    words = words[1:]  # the command itself
+    previous = words[-1] if words else ""
+    lang = next((value for option, value in zip(words, words[1:]) if option == "--lang"), "en")
+    language_dir = REPO / "doc" / (lang if lang in LANGUAGES else "en")
+    pages = sorted(path.stem for path in (language_dir / "pages").glob("*.md"))
+    command = next((word for word in words if word in COMMANDS), None)
+    if previous == "--lang":
+        candidates = sorted(LANGUAGES)
+    elif previous in PATH_OPTIONS:
+        candidates = []
+    elif previous == "--page":
+        candidates = pages
+    elif previous == "--only":
+        candidates = [f"{page}/*" for page in pages]
+        for shots in sorted((language_dir / "shots").glob("*.json")):
+            with shots.open(encoding="utf-8") as file:
+                candidates += [shot["id"] for shot in json.load(file).get("shots", [])]
+    elif current.startswith("-"):
+        candidates = list(GLOBAL_OPTIONS) + list(COMMAND_OPTIONS.get(command, ()))
+    elif command is None:
+        candidates = list(COMMANDS)
+    elif command == "take" and not any(word in pages for word in words):
+        candidates = pages
+    else:
+        candidates = []
+    return [candidate for candidate in candidates if candidate.startswith(current)]
+
+
+def completion_file():
+    """Where bash-completion looks for shots.py's completion: its per-user folder."""
+    data = os.environ.get("XDG_DATA_HOME") or str(Path.home() / ".local" / "share")
+    return Path(os.environ.get("BASH_COMPLETION_USER_DIR") or Path(data) / "bash-completion") / "completions" / "shots.py"
+
+
+def write_completion():
+    """Write the bash-completion file that makes Tab complete shots.py's commands, pages and shot ids."""
+    target = completion_file()
+    target.parent.mkdir(parents=True, exist_ok=True)
+    script = Path(__file__).resolve()
+    command = f"{shlex.quote(sys.executable)} {shlex.quote(str(script))} --complete"
+    with target.open("w", encoding="utf-8", newline="\n") as file:
+        file.write(f"# Written by {script}\ncomplete -o default -C {shlex.quote(command)} shots.py\n")
+    return target
+
+
+def cmd_completion(args):
+    if os.name == "nt":
+        raise SystemExit("Tab completion needs bash; Windows shells are not supported.")
+    print(f"{write_completion()} written; Tab completes shots.py in every new terminal.")
+
+
 def main():
+    # Bash calls `shots.py --complete` with the line typed so far in COMP_LINE (`complete -C`).
+    if len(sys.argv) > 1 and sys.argv[1] == "--complete":
+        line = os.environ.get("COMP_LINE", "")
+        print("\n".join(completions(line[: int(os.environ.get("COMP_POINT", len(line)))])))
+        return
     # As an exception, so every run kills the application it started and removes its scratch directory.
     signal.signal(signal.SIGTERM, lambda number, frame: sys.exit(128 + number))
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -779,7 +938,7 @@ def main():
     parser.add_argument("--lang", default="en", choices=sorted(LANGUAGES), help="the language (default: %(default)s)")
     parser.add_argument("-o", "--out", help="where replay renders (default: doc/<lang>/images/_check)")
     parser.add_argument("-v", "--verbose", action="store_true", help="show the application's own output")
-    commands = parser.add_subparsers(dest="command", required=True, metavar="{take,publish,replay,selftest,unused}")
+    commands = parser.add_subparsers(dest="command", required=True, metavar="{take,publish,replay,selftest,unused,completion}")
     # The same options after the command; there they override what came before it.
     common = argparse.ArgumentParser(add_help=False, argument_default=argparse.SUPPRESS)
     common.add_argument("--binary", help=argparse.SUPPRESS)
@@ -793,20 +952,25 @@ def main():
 
     publish = commands.add_parser("publish", parents=[common], help="copy the images taken again into doc/<lang>/images")
     publish.add_argument("--report", metavar="FILE", help="write the published ids as JSON")
-    publish.add_argument("--only", metavar="GLOB", help="shot ids: test/* is one page, test/menu-project one image")
+    publish.add_argument("--only", metavar="GLOB", help="shot ids: test/* is one page, test/test-menu-project one image")
     publish.set_defaults(func=cmd_publish)
 
     replay = commands.add_parser("replay", parents=[common], help="replay every shot and report the ones that do not come out")
-    replay.add_argument("--only", metavar="GLOB", help="shot ids: test/* is one page, test/menu-project one image")
+    replay.add_argument("--only", metavar="GLOB", help="shot ids: test/* is one page, test/test-menu-project one image")
     replay.set_defaults(func=cmd_replay)
 
     selftest = commands.add_parser("selftest", parents=[common], help="the recorder's own cases: record real input, compare the steps")
+    selftest.add_argument("-j", "--jobs", type=int, default=os.cpu_count() or 1,
+                          help="groups run side by side (default: the number of processors, %(default)s)")
     selftest.add_argument("--page", default="test", help="the shot file that names the run; base and fixture are the self test's own (default: %(default)s)")
     selftest.set_defaults(func=cmd_selftest)
 
     unused = commands.add_parser("unused", parents=[common], help="shots and images no page references")
     unused.add_argument("--delete", action="store_true", help="remove them")
     unused.set_defaults(func=cmd_unused)
+
+    completion = commands.add_parser("completion", help="write Tab completion for bash again; the first run does it")
+    completion.set_defaults(func=cmd_completion)
 
     # Hidden: for CShotDocLauncher.
     compose = commands.add_parser("compose")
@@ -818,6 +982,12 @@ def main():
     compose.set_defaults(func=cmd_compose)
 
     args = parser.parse_args()
+    # The first run sets up Tab completion; `completion` writes it again, e.g. for a checkout moved elsewhere.
+    if os.name != "nt" and args.command not in ("compose", "completion") and not completion_file().exists():
+        try:
+            print(f"Tab completion for shots.py set up in {write_completion()}; it works in new terminals.")
+        except OSError:
+            pass  # a home folder that cannot be written to: no completion, the command still runs
     set_language(args.lang)
     if args.out is None:
         args.out = str(CHECK_DIR)

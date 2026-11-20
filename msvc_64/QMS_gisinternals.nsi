@@ -181,13 +181,11 @@ Section "QMapShack/QMapTool" QMapShack
     File Files\translations\qmt_rgb2pct_*.qm
 
   SetOutPath "$INSTDIR\doc\HTML"
-    File Files\doc\HTML\QMSHelp.qch
-    File Files\doc\HTML\QMSHelp.qhc
     File Files\doc\HTML\QMTHelp.qch
     File Files\doc\HTML\QMTHelp.qhc
 
-  SetOutPath "$INSTDIR\doc\HTML\.QMSHelp"
-    File Files\doc\HTML\.QMSHelp\fts
+  SetOutPath "$INSTDIR\doc\HTML\qms"
+    File /r Files\doc\HTML\qms\*
 
   SetOutPath "$INSTDIR\doc\HTML\.QMTHelp"
     File Files\doc\HTML\.QMTHelp\fts
@@ -268,7 +266,7 @@ Section "Start Menu" StartMenu
     CreateShortCut "$SMPROGRAMS\$StartMenuFolder\QMapShack.lnk"     '"$INSTDIR\QMS_Start.bat"' "" "$INSTDIR\QMapShack.ico" 0 "SW_SHOWMINIMIZED" "" "Start QMapShack with correct environment"
     CreateShortCut "$SMPROGRAMS\$StartMenuFolder\QMapTool.lnk"      '"$INSTDIR\QMT_Start.bat"'  "" "$INSTDIR\QMapTool.ico"  0 "SW_SHOWMINIMIZED" "" "Start QMapTool with correct environment"
     
-    CreateShortCut "$SMPROGRAMS\$StartMenuFolder\QMapShack Help offline.lnk" '"$INSTDIR\assistant.exe"' '-collectionFile  "$INSTDIR\doc\HTML\QMSHelp.qhc" --style fusion' 
+    CreateShortCut "$SMPROGRAMS\$StartMenuFolder\QMapShack Help offline.lnk" "$INSTDIR\doc\HTML\qms\index.html"
     CreateShortCut "$SMPROGRAMS\$StartMenuFolder\QMapShack Help online Wiki.lnk" "https://github.com/Maproom/qmapshack/wiki" "" "$INSTDIR\kfm_home.ico"
 
     CreateShortCut "$SMPROGRAMS\$StartMenuFolder\Uninstall.lnk"     '"$INSTDIR\Uninstall.exe"'

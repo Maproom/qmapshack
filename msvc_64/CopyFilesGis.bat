@@ -100,7 +100,7 @@ rem Copy offline help files ------------------------------------------------
 mkdir doc
 cd doc
 mkdir HTML
-copy ..\..\..\src\qmapshack\doc\QMSHelp.* HTML
+xcopy ..\..\..\doc\html HTML\qms /s /i
 copy ..\..\..\src\qmaptool\doc\QMTHelp.* HTML
 cd ..
 

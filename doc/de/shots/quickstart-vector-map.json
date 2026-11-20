@@ -1,0 +1,271 @@
+{
+  "scenarios": {
+    "listed": [
+      {
+        "do": "scroll",
+        "row": "OSM Topo",
+        "widget": "dockMaps/treeWidget"
+      }
+    ],
+    "on": [
+      {
+        "button": "activate",
+        "do": "click",
+        "row": "Tannheimer Tal",
+        "widget": "dockMaps/treeWidget"
+      }
+    ],
+    "settings": [
+      {
+        "button": "activate",
+        "do": "click",
+        "row": "Tannheimer Tal",
+        "widget": "dockMaps/treeWidget"
+      },
+      {
+        "do": "expand",
+        "row": "Tannheimer Tal",
+        "widget": "dockMaps/treeWidget"
+      },
+      {
+        "do": "scroll",
+        "row": "Tannheimer Tal",
+        "widget": "dockMaps/treeWidget"
+      }
+    ],
+    "detail-more": [
+      {
+        "button": "activate",
+        "do": "click",
+        "row": "Tannheimer Tal",
+        "widget": "dockMaps/treeWidget"
+      },
+      {
+        "do": "expand",
+        "row": "Tannheimer Tal",
+        "widget": "dockMaps/treeWidget"
+      },
+      {
+        "do": "scroll",
+        "row": "Tannheimer Tal",
+        "widget": "dockMaps/treeWidget"
+      },
+      {
+        "do": "key",
+        "text": "5",
+        "widget": "dockMaps/treeWidget/QWidget#0/CMapPropSetup#0/spinAdjustDetails"
+      },
+      {
+        "do": "endedit",
+        "widget": "dockMaps/treeWidget/QWidget#0/CMapPropSetup#0/spinAdjustDetails"
+      }
+    ],
+    "no-areas": [
+      {
+        "button": "activate",
+        "do": "click",
+        "row": "Tannheimer Tal",
+        "widget": "dockMaps/treeWidget"
+      },
+      {
+        "do": "expand",
+        "row": "Tannheimer Tal",
+        "widget": "dockMaps/treeWidget"
+      },
+      {
+        "do": "scroll",
+        "row": "Tannheimer Tal",
+        "widget": "dockMaps/treeWidget"
+      },
+      {
+        "do": "click",
+        "widget": "dockMaps/treeWidget/QWidget#0/CMapPropSetup#0/checkPolygons"
+      }
+    ]
+  },
+  "shots": [
+    {
+      "id": "quickstart-vector-map/reload-menu",
+      "open": {
+        "do": "menu",
+        "row": "OpenStreetMap",
+        "widget": "dockMaps/treeWidget"
+      },
+      "active": "actionReloadMaps",
+      "size": [
+        1200,
+        800
+      ],
+      "widget": "dockMaps/IMapList/QMenu#0"
+    },
+    {
+      "id": "quickstart-vector-map/listed",
+      "scenario": "listed",
+      "size": [
+        1200,
+        800
+      ],
+      "widget": "",
+      "rect": [
+        16,
+        84,
+        414,
+        112
+      ],
+      "set": {
+        "dockMaps.minimumWidth": 340
+      }
+    },
+    {
+      "id": "quickstart-vector-map/map-on",
+      "scenario": "on",
+      "size": [
+        1200,
+        800
+      ],
+      "widget": "",
+      "rect": [
+        0,
+        56,
+        700,
+        250
+      ],
+      "set": {
+        "dockMaps.minimumWidth": 340
+      },
+      "mark": [
+        {
+          "root": "main",
+          "widget": "dockMaps/treeWidget",
+          "part": "button",
+          "row": "3:0",
+          "button": "activate",
+          "shape": "cursor",
+          "cursor": "pointer"
+        }
+      ]
+    },
+    {
+      "id": "quickstart-vector-map/settings",
+      "scenario": "settings",
+      "size": [
+        1200,
+        800
+      ],
+      "widget": "",
+      "rect": [
+        0,
+        84,
+        430,
+        146
+      ],
+      "mark": [
+        {
+          "root": "main",
+          "widget": "dockMaps/treeWidget",
+          "part": "branch",
+          "row": "3:0",
+          "shape": "disc"
+        },
+        {
+          "root": "main",
+          "widget": "dockMaps/treeWidget/QWidget#0/CMapPropSetup#0/frameVectorItems",
+          "shape": "frame"
+        }
+      ],
+      "set": {
+        "dockMaps.minimumWidth": 340
+      }
+    },
+    {
+      "id": "quickstart-vector-map/detail-more",
+      "scenario": "detail-more",
+      "size": [
+        1200,
+        800
+      ],
+      "widget": "",
+      "rect": [
+        0,
+        56,
+        700,
+        250
+      ],
+      "set": {
+        "dockMaps.minimumWidth": 340
+      },
+      "mark": [
+        {
+          "root": "main",
+          "widget": "dockMaps/treeWidget/QWidget#0/CMapPropSetup#0/spinAdjustDetails",
+          "shape": "frame"
+        }
+      ]
+    },
+    {
+      "id": "quickstart-vector-map/no-areas",
+      "scenario": "no-areas",
+      "size": [
+        1200,
+        800
+      ],
+      "widget": "",
+      "rect": [
+        0,
+        56,
+        700,
+        250
+      ],
+      "set": {
+        "dockMaps.minimumWidth": 340
+      },
+      "mark": [
+        {
+          "root": "main",
+          "widget": "dockMaps/treeWidget/QWidget#0/CMapPropSetup#0/checkPolygons",
+          "shape": "frame"
+        }
+      ]
+    },
+    {
+      "id": "quickstart-vector-map/typ-row",
+      "scenario": "settings",
+      "size": [
+        1200,
+        800
+      ],
+      "widget": "",
+      "rect": [
+        16,
+        206,
+        414,
+        90
+      ],
+      "mark": [
+        {
+          "root": "main",
+          "widget": "dockMaps/treeWidget/QWidget#0/CMapPropSetup#0/toolClearTypFile",
+          "shape": "arrow",
+          "tail": [
+            -40,
+            35
+          ],
+          "name": "own TYP"
+        },
+        {
+          "root": "main",
+          "widget": "dockMaps/treeWidget/QWidget#0/CMapPropSetup#0/toolOpenTypFile",
+          "shape": "arrow",
+          "tail": [
+            40,
+            35
+          ],
+          "name": "load TYP"
+        }
+      ],
+      "set": {
+        "dockMaps.minimumWidth": 340
+      }
+    }
+  ]
+}

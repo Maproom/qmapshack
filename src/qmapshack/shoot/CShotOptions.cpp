@@ -54,6 +54,10 @@ void CShotOptions::addOptions(QCommandLineParser& parser) {
   addFlag(parser, "shoot-selftest",
           "Run the recorder's own cases against this application instead of taking a page's shots. Needs --shoot and "
           "--shoot-target, the page's shot file; the fixture is the one the configuration names.");
+  add(parser, "shoot-selftest-group",
+      "Run only this group of the self test's cases, so shots.py can run the groups side by side. \"doc\" is the "
+      "documentation mode's cases.",
+      "name");
 }
 
 CShotOptions::opts_t CShotOptions::read(const QCommandLineParser& parser) {
@@ -69,10 +73,11 @@ CShotOptions::opts_t CShotOptions::read(const QCommandLineParser& parser) {
   opts.docPython = parser.value("doc-python");
   opts.docTrial = parser.value("doc-trial");
   opts.shootSelfTest = parser.isSet("shoot-selftest");
+  opts.shootSelfTestGroup = parser.value("shoot-selftest-group");
   // Alone they would start a normal run on the user's settings.
   if (opts.shootDir.isEmpty() && opts.docDir.isEmpty()) {
     for (const char* name : {"shoot-target", "shoot-scenario", "only", "doc-page", "doc-scenario", "doc-channel",
-                             "doc-python", "doc-trial", "shoot-selftest"}) {
+                             "doc-python", "doc-trial", "shoot-selftest", "shoot-selftest-group"}) {
       if (parser.isSet(name)) {
         opts.stray << QString("--%1").arg(name);
       }

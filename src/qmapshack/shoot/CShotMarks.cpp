@@ -43,6 +43,8 @@
 #include <cmath>
 
 #include "CMainWindow.h"
+#include "canvas/CCanvas.h"
+#include "gis/proj_x.h"
 #include "shoot/CShotAddress.h"
 #include "shoot/CShotHandlers.h"
 
@@ -64,8 +66,8 @@ constexpr qint32 kSpot = 2 * kThin;
 /** @return a disc's radius on @p area: by the shorter side, so a disc on a long, thin target stays a spot */
 qreal discRadius(const QRectF& area) { return qMax(14.0, qMin(area.width(), area.height()) / 2.0 + 6.0); }
 
-const QSet<QString> kKeys = {"root",    "widget", "part", "row",    "action", "button",
-                             "between", "shape",  "tail", "cursor", "name"};
+const QSet<QString> kKeys = {"root",  "widget", "part",   "row",  "action", "button", "between",
+                             "shape", "tail",   "cursor", "name", "lat",    "lon"};
 
 /** Reaches QSlider's protected initStyleOption(), which the style needs for the handle's geometry. */
 struct CSliderAccess : QSlider {
@@ -82,7 +84,8 @@ QString shapeOf(const CShotMarks::mark_t& mark) {
   if (!mark.shape.isEmpty()) {
     return mark.shape;
   }
-  return ("handle" == mark.part || "branch" == mark.part || "splitter" == mark.part) ? "disc" : "frame";
+  return ("handle" == mark.part || "branch" == mark.part || "splitter" == mark.part || "point" == mark.part) ? "disc"
+                                                                                                             : "frame";
 }
 
 QRect globalRect(const QWidget* widget, const QRect& local) {
@@ -417,6 +420,21 @@ QString placePart(const CShotMarks::mark_t& mark, QWidget* widget, CShotMarks::p
   if ("tab" == mark.part) {
     return placeTab(widget, out);
   }
+  if ("point" == mark.part) {
+    const CCanvas* canvas = qobject_cast<const CCanvas*>(widget);
+    if (nullptr == canvas) {
+      return "it is no map";
+    }
+    QPointF pixel = mark.point * DEG_TO_RAD;
+    canvas->convertRad2Px(pixel);
+    // A one pixel target: a cursor's hotspot or a disc's centre sits on the point.
+    const QRect spot(pixel.toPoint(), QSize(1, 1));
+    if (!canvas->rect().contains(spot)) {
+      return closed(out, QString("its point %1, %2 is not on the map now").arg(mark.point.y()).arg(mark.point.x()));
+    }
+    out.area = globalRect(widget, spot);
+    return QString();
+  }
   if ("button" == mark.part) {
     const QAbstractItemView* view = CShotAddress::itemViewOf(widget);
     if (nullptr == view) {
@@ -663,6 +681,8 @@ QString CShotMarks::describe(const mark_t& mark) {
     part = "branch " + mark.row;
   } else if ("button" == mark.part) {
     part = QString("button %1 of row %2").arg(mark.button, mark.row);
+  } else if ("point" == mark.part) {
+    part = QString("point %1, %2").arg(mark.point.y()).arg(mark.point.x());
   }
   return part.isEmpty() || "splitter" == mark.part ? QString("%1: %2").arg(shape, target)
                                                    : QString("%1: %2 (%3)").arg(shape, target, part);
@@ -690,6 +710,7 @@ QString CShotMarks::parse(const QJsonArray& marks, QList<mark_t>& out) {
     for (const QJsonValue& side : object["between"].toArray()) {
       mark.between << side.toString();
     }
+    mark.point = QPointF(object["lon"].toDouble(), object["lat"].toDouble());
     mark.shape = object["shape"].toString();
     const QJsonArray& tail = object["tail"].toArray();
     mark.tail = snap(QPoint(tail.at(0).toInt(), tail.at(1).toInt()));
@@ -711,6 +732,12 @@ QString CShotMarks::parse(const QJsonArray& marks, QList<mark_t>& out) {
     }
     if ("branch" == mark.part && mark.row.isEmpty()) {
       return QString("%1 names no row").arg(what);
+    }
+    if ("point" == mark.part && (!object["lat"].isDouble() || !object["lon"].isDouble())) {
+      return QString("%1 names no lat and lon").arg(what);
+    }
+    if ("point" != mark.part && (object.contains("lat") || object.contains("lon"))) {
+      return QString("%1 has a lat or lon, which only a point takes").arg(what);
     }
     if ("arrow" == mark.shape && mark.tail.isNull()) {
       return QString("%1 has no tail").arg(what);

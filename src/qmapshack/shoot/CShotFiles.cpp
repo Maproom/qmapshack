@@ -29,6 +29,7 @@
 #include <QScreen>
 #include <algorithm>
 
+#include "setup/CAppOpts.h"
 #include "shoot/CShotPage.h"
 
 namespace {
@@ -36,6 +37,8 @@ namespace {
 const QStringList kFixtureParts = {"projects", "maps", "dem", "poi", "routino", "database"};
 /** Describe a part and are no part of it; shots.py FIXTURE_NOTES. */
 const QStringList kFixtureNotes = {"SOURCE.md", "README.md"};
+/** Marks a page's part as empty; shots.py FIXTURE_EMPTY. */
+const QString kFixtureEmpty = "EMPTY";
 /** @return the index of the shot with @p id, -1 when there is none */
 qsizetype indexOf(const QJsonArray& shots, const QString& id) {
   for (qsizetype i = 0; i < shots.size(); i++) {
@@ -102,39 +105,61 @@ QString CShotFiles::writeWhole(const QString& path, const QByteArray& bytes) {
   return QString();
 }
 
-QString CShotFiles::shotFile() const { return repo.absoluteFilePath("doc/shots/" + page + ".json"); }
+QString CShotFiles::language() {
+  const QString& locale = nullptr != qlOpts ? qlOpts->locale : QString();
+  return locale.isEmpty() ? QString("en") : locale.section('_', 0, 0);
+}
 
-QString CShotFiles::pageFile() const { return repo.absoluteFilePath("doc/pages/" + page + ".md"); }
+QString CShotFiles::languageDir(const QDir& repo) { return repo.absoluteFilePath("doc/" + language()); }
+
+/** @return @p name, with the language appended outside English: a session's cache files are per language */
+static QString perLanguage(const QString& name) {
+  const QString& lang = CShotFiles::language();
+  return "en" == lang ? name : name + "." + lang;
+}
+
+QDir CShotFiles::repoOfShotFile(const QString& shotFile) {
+  QDir repo = QFileInfo(shotFile).absoluteDir();
+  repo.cd("../../..");
+  return repo;
+}
+
+QString CShotFiles::workDir(const QDir& repo) { return QDir(languageDir(repo)).absoluteFilePath("images/_work"); }
+
+QString CShotFiles::shotFile() const { return QDir(languageDir(repo)).absoluteFilePath("shots/" + page + ".json"); }
+
+QString CShotFiles::pageFile() const { return QDir(languageDir(repo)).absoluteFilePath("pages/" + page + ".md"); }
 
 QString CShotFiles::scenarioConfig(const QString& scenario) const {
-  return staysInside(scenario) ? repo.absoluteFilePath("doc/shots/" + page + "/" + scenario + ".ini") : QString();
+  return staysInside(scenario) ? QDir(languageDir(repo)).absoluteFilePath("shots/" + page + "/" + scenario + ".ini")
+                               : QString();
 }
 
 QString CShotFiles::publishedImage(const QString& id) const {
-  return staysInside(id) ? repo.absoluteFilePath("doc/images/" + id + ".png") : QString();
+  return staysInside(id) ? QDir(languageDir(repo)).absoluteFilePath("images/" + id + ".png") : QString();
 }
 
 QString CShotFiles::workImage(const QString& id) const {
-  return staysInside(id) ? repo.absoluteFilePath("doc/images/_work/" + id + ".png") : QString();
+  return staysInside(id) ? QDir(workDir(repo)).absoluteFilePath(id + ".png") : QString();
 }
 
-QString CShotFiles::pendingDir() const { return repo.absoluteFilePath("doc/shots/_cache/pending"); }
+QString CShotFiles::pendingDir() const { return repo.absoluteFilePath("doc/shots/_cache/" + perLanguage("pending")); }
 
 QString CShotFiles::pendingImage(const QString& id) const {
   return staysInside(id) ? QDir(pendingDir()).absoluteFilePath(id + ".png") : QString();
 }
 
 QString CShotFiles::workEntry(const QString& id) const {
-  return staysInside(id) ? repo.absoluteFilePath("doc/images/_work/" + id + ".shot.json") : QString();
+  return staysInside(id) ? QDir(workDir(repo)).absoluteFilePath(id + ".shot.json") : QString();
 }
 
-QString CShotFiles::baseFile() const { return repo.absoluteFilePath("doc/shots/" + page + ".ini"); }
+QString CShotFiles::baseFile() const { return QDir(languageDir(repo)).absoluteFilePath("shots/" + page + ".ini"); }
 
 QList<QPair<QString, QString>> CShotFiles::bases() const {
   QList<QPair<QString, QString>> found{
       {"the default fixture's", repo.absoluteFilePath("doc/shots/fixtures/default/shots.ini")}};
   const QFileInfoList& inis =
-      QDir(repo.absoluteFilePath("doc/shots")).entryInfoList({"*.ini"}, QDir::Files, QDir::Name);
+      QDir(QDir(languageDir(repo)).absoluteFilePath("shots")).entryInfoList({"*.ini"}, QDir::Files, QDir::Name);
   for (const QFileInfo& ini : inis) {
     if (ini.completeBaseName() != page) {
       found << qMakePair(QString("page %1").arg(ini.completeBaseName()), ini.absoluteFilePath());
@@ -177,6 +202,16 @@ QStringList CShotFiles::ownFixtureParts() const {
   return own;
 }
 
+QStringList CShotFiles::emptyFixtureParts() const {
+  QStringList empty;
+  for (const QString& part : kFixtureParts) {
+    if (QFileInfo::exists(QDir(QDir(fixtureDir()).absoluteFilePath(part)).absoluteFilePath(kFixtureEmpty))) {
+      empty << part;
+    }
+  }
+  return empty;
+}
+
 QStringList CShotFiles::fixtureFolders() const {
   QStringList folders{fixtureDir()};
   for (const QString& part : kFixtureParts) {
@@ -196,13 +231,15 @@ QString CShotFiles::makeFixtureDir() const {
   if (QFileInfo::exists(readme)) {
     return QString();
   }
-  return writeWhole(readme,
-                    QString("# Fixture of the page %1\n\n"
-                            "Put into a part's folder only what this page needs different from `../default/`: "
-                            "`projects/`, `maps/`, `dem/`, `poi/`, `routino/`, `database/`. A part holding something "
-                            "replaces the default's part whole; an empty or missing one is the default's.\n")
-                        .arg(page)
-                        .toUtf8());
+  return writeWhole(
+      readme,
+      QString("# Fixture of the page %1\n\n"
+              "Put into a part's folder only what this page needs different from `../default/`: "
+              "`projects/`, `maps/`, `dem/`, `poi/`, `routino/`, `database/`. A part holding something "
+              "replaces the default's part whole; an empty or missing one is the default's. A file `EMPTY` in a "
+              "part's folder leaves the page without that part, as on a first start.\n")
+          .arg(page)
+          .toUtf8());
 }
 
 QString CShotFiles::placementFile() const { return repo.absoluteFilePath("doc/shots/_cache/doc-panel.ini"); }
@@ -217,13 +254,16 @@ std::optional<QPoint> CShotFiles::onScreen(const QPoint& at, const QSize& size) 
                 std::max(room.top(), std::min(at.y(), room.bottom() + 1 - size.height())));
 }
 
-QString CShotFiles::trialFile() const { return repo.absoluteFilePath("doc/shots/_cache/" + page + "-trial.json"); }
+QString CShotFiles::trialFile() const {
+  return repo.absoluteFilePath("doc/shots/_cache/" + perLanguage(page) + "-trial.json");
+}
 
-QString CShotFiles::trialConfig() const { return repo.absoluteFilePath("doc/shots/_cache/" + page + "-trial.ini"); }
+QString CShotFiles::trialConfig() const {
+  return repo.absoluteFilePath("doc/shots/_cache/" + perLanguage(page) + "-trial.ini");
+}
 
 bool CShotFiles::hasUnpublishedImages() const {
-  QDirIterator walk(repo.absoluteFilePath("doc/images/_work/" + page), {"*.png"}, QDir::Files,
-                    QDirIterator::Subdirectories);
+  QDirIterator walk(QDir(workDir(repo)).absoluteFilePath(page), {"*.png"}, QDir::Files, QDirIterator::Subdirectories);
   return walk.hasNext();
 }
 
@@ -282,7 +322,8 @@ QSet<QString> CShotFiles::references(const QString& file) const {
 QSet<QString> CShotFiles::allReferences() const {
   // shots.py's page_references(): every page, because a page may use another page's image.
   QSet<QString> referenced;
-  QDirIterator walk(repo.absoluteFilePath("doc/pages"), {"*.md"}, QDir::Files, QDirIterator::Subdirectories);
+  QDirIterator walk(QDir(languageDir(repo)).absoluteFilePath("pages"), {"*.md"}, QDir::Files,
+                    QDirIterator::Subdirectories);
   while (walk.hasNext()) {
     referenced.unite(references(walk.next()));
   }
@@ -685,7 +726,9 @@ QString CShotFiles::storeScenario(const QString& name, const QJsonArray& steps, 
   return QString();
 }
 
-QString CShotFiles::marksFile() const { return repo.absoluteFilePath("doc/shots/_cache/" + page + "-marks.json"); }
+QString CShotFiles::marksFile() const {
+  return repo.absoluteFilePath("doc/shots/_cache/" + perLanguage(page) + "-marks.json");
+}
 
 QJsonObject CShotFiles::readMarksFile() const { return QJsonDocument::fromJson(readWhole(marksFile())).object(); }
 

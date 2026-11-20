@@ -19,6 +19,7 @@
 #ifndef CSHOTSELFTEST_H
 #define CSHOTSELFTEST_H
 
+#include <QStringList>
 #include <QtGlobal>
 
 class CShotContext;
@@ -27,8 +28,16 @@ class CShotContext;
    @brief Recorder self test: real window-system input is recorded, compared with the expected steps, and replayed.
  */
 namespace CShotSelfTest {
-/** @return the number of failed cases */
-qint32 run(CShotContext& ctx);
+/** @return the names of the groups of cases, in the order a run of all takes them; `shots.py` keeps the same list */
+QStringList groups();
+
+/**
+   @brief Run the group @p group, or every group and the coverage check for an empty one.
+
+   A single group reports the handlers it did not replay as `shoot: unreplayed <names>`: coverage spans the groups.
+   @return the number of failed cases
+ */
+qint32 run(CShotContext& ctx, const QString& group);
 }  // namespace CShotSelfTest
 
 #endif  // CSHOTSELFTEST_H

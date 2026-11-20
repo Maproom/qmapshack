@@ -1,13 +1,16 @@
 <!doctype html>
-<html class="no-js" lang="en" data-content_root="./">
-  <head><meta charset="utf-8">
+<html class="no-js" lang="de" data-content_root="./">
+  <head>
+<meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="#"><link rel="search" title="Search" href="search.html">
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Stichwortverzeichnis" href="genindex.html"><link rel="search" title="Suche" href="#">
 
-    <!-- Generated with Sphinx 9.1.1 and Furo 2025.12.19 --><title>Index - QMapShack documentation</title>
-<link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
+    <!-- Generated with Sphinx 9.1.1 and Furo 2025.12.19 -->
+<meta name="robots" content="noindex" />
+<title>Suche - QMapShack-Dokumentation</title><link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="_static/qms-layout.css?v=518cad67" />
     
     
 
@@ -16,18 +19,21 @@
   body {
     --color-code-background: #f2f2f2;
   --color-code-foreground: #1e1e1e;
+  --color-highlight-on-target: transparent;
   
   }
   @media not print {
     body[data-theme="dark"] {
       --color-code-background: #202020;
   --color-code-foreground: #d0d0d0;
+  --color-highlight-on-target: transparent;
   
     }
     @media (prefers-color-scheme: dark) {
       body:not([data-theme="light"]) {
         --color-code-background: #202020;
   --color-code-foreground: #d0d0d0;
+  --color-highlight-on-target: transparent;
   
       }
     }
@@ -147,7 +153,7 @@
 <label class="overlay sidebar-overlay" for="__navigation"></label>
 <label class="overlay toc-overlay" for="__toc"></label>
 
-<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+<a class="skip-to-content muted-link" href="#furo-main-content">Zum Inhalt springen</a>
 
 
 
@@ -159,7 +165,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">QMapShack documentation</div></a>
+      <a href="index.html"><div class="brand">QMapShack-Dokumentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -180,16 +186,23 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
   
-  <span class="sidebar-brand-text">QMapShack documentation</span>
+  <span class="sidebar-brand-text">QMapShack-Dokumentation</span>
   
-</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
-  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+</a><form class="sidebar-search-container" method="get" action="#" role="search">
+  <input class="sidebar-search" placeholder="Suche" name="q" aria-label="Suche">
   <input type="hidden" name="check_keywords" value="yes">
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <ul class="current">
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Index</a></li>
+  <ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="pages/quickstart.html">Schnellstart</a><input aria-label="Toggle navigation of Schnellstart" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="pages/quickstart-main-window.html">Das Hauptfenster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pages/quickstart-maps.html">Karten einschalten</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pages/quickstart-vector-map.html">Eine Garmin-Karte einschalten</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pages/quickstart-zoom-pan.html">Zoomen und Verschieben</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="genindex.html">Stichwortverzeichnis</a></li>
 </ul>
 
 </div>
@@ -206,7 +219,7 @@
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
           </svg>
-          <span>Back to top</span>
+          <span>Nach oben</span>
         </a>
         <div class="content-icon-container">
           <div class="theme-toggle-container theme-toggle-content">
@@ -223,10 +236,16 @@
         </div>
         <article role="main" id="furo-main-content">
           
-<section class="genindex-section">
-  <h1 id="index">Index</h1>
-  <div class="genindex-jumpbox"></div>
-</section>
+<noscript>
+<div class="admonition error">
+  <p class="admonition-title">Fehler</p>
+  <p>
+    Bitte aktivieren Sie JavaScript, um die Suche zu nutzen.
+  </p>
+</div>
+</noscript>
+
+<div id="search-results"></div>
 
         </article>
       </div>
@@ -241,7 +260,7 @@
             <div class="copyright">
                 Copyright &#169; the QMapShack authors
             </div>
-            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            Erstellt mit <a href="https://www.sphinx-doc.org/">Sphinx</a> und <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             
@@ -259,10 +278,14 @@
       
     </aside>
   </div>
-</div><script src="_static/documentation_options.js?v=7f41d439"></script>
+</div><script src="_static/documentation_options.js?v=9fe942fc"></script>
     <script src="_static/doctools.js?v=fd6eb6e6"></script>
     <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="_static/translations.js?v=9bf55d28"></script>
     <script src="_static/qms-search.js?v=dd172957"></script>
-    </body>
+    
+<script src="_static/searchtools.js"></script>
+<script src="_static/language_data.js"></script>
+<script src="searchindex.js"></script></body>
 </html>

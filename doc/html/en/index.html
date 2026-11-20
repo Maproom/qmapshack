@@ -1,15 +1,16 @@
 <!doctype html>
 <html class="no-js" lang="en" data-content_root="./">
-  <head>
-<meta charset="utf-8">
+  <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="#">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="Quick start" href="pages/quickstart.html">
 
     <!-- Generated with Sphinx 9.1.1 and Furo 2025.12.19 -->
-<meta name="robots" content="noindex" />
-<title>Search - QMapShack documentation</title><link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
+        <title>QMapShack documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="_static/qms-layout.css?v=518cad67" />
     
     
 
@@ -18,18 +19,21 @@
   body {
     --color-code-background: #f2f2f2;
   --color-code-foreground: #1e1e1e;
+  --color-highlight-on-target: transparent;
   
   }
   @media not print {
     body[data-theme="dark"] {
       --color-code-background: #202020;
   --color-code-foreground: #d0d0d0;
+  --color-highlight-on-target: transparent;
   
     }
     @media (prefers-color-scheme: dark) {
       body:not([data-theme="light"]) {
         --color-code-background: #202020;
   --color-code-foreground: #d0d0d0;
+  --color-highlight-on-target: transparent;
   
       }
     }
@@ -161,7 +165,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">QMapShack documentation</div></a>
+      <a href="#"><div class="brand">QMapShack documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -180,17 +184,24 @@
   <aside class="sidebar-drawer">
     <div class="sidebar-container">
       
-      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="#">
   
   <span class="sidebar-brand-text">QMapShack documentation</span>
   
-</a><form class="sidebar-search-container" method="get" action="#" role="search">
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
   <input type="hidden" name="check_keywords" value="yes">
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="pages/quickstart.html">Quick start</a><input aria-label="Toggle navigation of Quick start" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="pages/quickstart-main-window.html">The main window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pages/quickstart-maps.html">Turning on maps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pages/quickstart-vector-map.html">Turning on a Garmin map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pages/quickstart-zoom-pan.html">Zooming and panning</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
 </ul>
 
@@ -211,7 +222,9 @@
           <span>Back to top</span>
         </a>
         <div class="content-icon-container">
-          <div class="theme-toggle-container theme-toggle-content">
+          
+
+<div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
               <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
               <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
@@ -224,24 +237,36 @@
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          
-<noscript>
-<div class="admonition error">
-  <p class="admonition-title">Error</p>
-  <p>
-    Please activate JavaScript to enable the search functionality.
-  </p>
+          <section id="qmapshack-documentation">
+<h1>QMapShack documentation<a class="headerlink" href="#qmapshack-documentation" title="Link to this heading">#</a></h1>
+<p>With QMapShack you plan your hikes and rides and archive those you have done. Plan a track on the map and use it
+on your GPS device. Back home, read the recording into QMapShack, refine it and save it in your database.</p>
+<p>Work with all kinds of maps side by side, together with elevation data and routing data. That makes QMapShack the
+perfect tool to explore the world.</p>
+<div class="toctree-wrapper compound">
 </div>
-</noscript>
-
-<div id="search-results"></div>
+<ul class="simple">
+<li><p><a class="reference internal" href="pages/quickstart.html"><span class="std std-doc">Quick start</span></a>: your first steps, from the first start to a track on your device. Each page builds on the one
+before.</p></li>
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a>: find a topic by keyword.</p></li>
+</ul>
+<p>Topics not covered here yet are in the <a class="reference external" href="https://github.com/Maproom/qmapshack/wiki/DocMain">QMapShack wiki</a>.</p>
+</section>
 
         </article>
       </div>
       <footer>
         
         <div class="related-pages">
-          
+          <a class="next-page" href="pages/quickstart.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Quick start</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
           
         </div>
         <div class="bottom-of-page">
@@ -272,8 +297,5 @@
     <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/scripts/furo.js?v=46bd48cc"></script>
     <script src="_static/qms-search.js?v=dd172957"></script>
-    
-<script src="_static/searchtools.js"></script>
-<script src="_static/language_data.js"></script>
-<script src="searchindex.js"></script></body>
+    </body>
 </html>

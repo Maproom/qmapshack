@@ -119,8 +119,9 @@ function copyExternalFiles {
 
 
 function copyExternalHelpFiles_QMS {
-    cp -v $HELP_QMS_DIR/QMSHelp.qch $BUILD_BUNDLE_RES_HELP_DIR
-    cp -v $HELP_QMS_DIR/QMSHelp.qhc $BUILD_BUNDLE_RES_HELP_DIR
+    # CAppSetupMac::helpFile() opens Resources/help/qms/index.html.
+    mkdir -p "$BUILD_BUNDLE_RES_HELP_DIR/qms"
+    cp -R "$QMS_SRC_DIR/doc/html/." "$BUILD_BUNDLE_RES_HELP_DIR/qms/"
 }
 
 

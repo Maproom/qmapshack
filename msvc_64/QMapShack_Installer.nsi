@@ -123,12 +123,10 @@ Section "QMapShack" QMapShack
     File Files\translations\qmapshack_*.qm
     File Files\translations\qmaptool_*.qm
   SetOutPath "$INSTDIR\doc\HTML"
-    File Files\doc\HTML\QMSHelp.qch
-    File Files\doc\HTML\QMSHelp.qhc
     File Files\doc\HTML\QMTHelp.qch
     File Files\doc\HTML\QMTHelp.qhc
-SetOutPath "$INSTDIR\doc\HTML\.QMSHelp"
-    File Files\doc\HTML\.QMSHelp\fts
+SetOutPath "$INSTDIR\doc\HTML\qms"
+    File /r Files\doc\HTML\qms\*
 SetOutPath "$INSTDIR\doc\HTML\.QMTHelp"
     File Files\doc\HTML\.QMTHelp\fts
   ;END QMapShack Files

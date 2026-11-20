@@ -25,3 +25,16 @@ Made with GDAL 3.12.0.
 
 Online tiles from tile.openstreetmap.org, © OpenStreetMap contributors,
 [ODbL](https://www.openstreetmap.org/copyright). Only the tile server definition is committed.
+
+## Tannheimer_Tal.img
+
+Map data © [OpenStreetMap contributors](https://www.openstreetmap.org/copyright),
+[ODbL](https://opendatacommons.org/licenses/odbl/), data as of 2026-11-17. Garmin IMG with TYP, built
+by [BBBike](https://extract.bbbike.org) with [mkgmap](https://www.mkgmap.org.uk); map style © OpenStreetMap.org,
+BBBike.org, OpenFietsMap.nl, OpenSeaMap.org, OpenTopoMap.org, atownsend.org.uk.
+
+Extent: lon 10.45–10.64, lat 47.47–47.57. The extract's `gmapsupp.img`, renamed.
+
+```
+https://extract.bbbike.org/?sw_lng=10.450&sw_lat=47.470&ne_lng=10.640&ne_lat=47.570&format=garmin-opentopo.zip&city=tannheimer_tal
+```

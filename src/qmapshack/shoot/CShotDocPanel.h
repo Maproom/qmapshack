@@ -69,7 +69,7 @@ class CShotDocPanel : public QDialog {
 
   void setPage(const QString& path, bool exists);
   /** @brief Say which fixture parts the page has itself; @p dir is its fixture folder */
-  void setFixture(const QStringList& own, const QString& dir);
+  void setFixture(const QStringList& own, const QStringList& empty, const QString& dir);
 
   /** @brief While a recording runs, everything but Stop is disabled. */
   void setRecording(bool on);

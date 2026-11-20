@@ -8,17 +8,17 @@ command. Working rules and details per class: `CLAUDE.md` in this directory.
 A **page** is one Markdown file, one shot file and one directory of images:
 
 ```
-doc/pages/<page>.md              the page; references ../images/<page>/<name>.png
-doc/shots/<page>.json            how each image is taken, and the page's scenarios
-doc/shots/<page>.ini             the page's base configuration
-doc/shots/<page>/<scenario>.ini  a scenario's whole configuration
-doc/shots/fixtures/default/      the example data; fixtures/<page>/ holds what a page's differs in
-doc/images/<page>/<name>.png     the published images
-doc/images/_work/                images taken again and their <id>.shot.json, not published (git-ignored)
-doc/images/_check/               what shots.py replay renders (git-ignored)
-doc/shots/_cache/                tile caches, workspace databases, images waiting for Keep, parked
-                                 recordings, doc-panel.ini, <page>-marks.json, render-* run directories
-                                 (git-ignored)
+doc/en/pages/<page>.md              the page; references ../images/<page>/<name>.png
+doc/en/shots/<page>.json            how each image is taken, and the page's scenarios
+doc/en/shots/<page>.ini             the page's base configuration
+doc/en/shots/<page>/<scenario>.ini  a scenario's whole configuration
+doc/shots/fixtures/default/         the example data; fixtures/<page>/ holds what a page's differs in
+doc/en/images/<page>/<name>.png     the published images
+doc/en/images/_work/                images taken again and their <id>.shot.json, not published (git-ignored)
+doc/en/images/_check/               what shots.py replay renders (git-ignored)
+doc/shots/_cache/                   tile caches, workspace databases, images waiting for Keep, parked
+                                    recordings, doc-panel.ini, <page>-marks.json, render-* run directories
+                                    (git-ignored)
 ```
 
 - **The page says which images exist**; the shot file says how each is taken.
@@ -26,10 +26,11 @@ doc/shots/_cache/                tile caches, workspace databases, images waitin
 - **A page's fixture holds only what differs.** A part it has (`projects/`, `maps/`, `dem/`,
   `poi/`, `routino/`, `database/`) replaces the default's whole; a part it lacks, or one holding only
   `SOURCE.md`, `README.md` or dotfiles, is the default's (`fixture_part()`, `CShotFiles::ownFixtureParts()`).
+  A part holding a file `EMPTY` is left out, as on a first start.
 
 ## Base and scenarios
 
-- **`(base)` is the page's start state**, `doc/shots/<page>.ini`. An image taken in it has no
+- **`(base)` is the page's start state**, `doc/en/shots/<page>.ini`. An image taken in it has no
   `scenario` key; `--shoot-scenario -` selects those images, and `-` is no valid scenario name.
 - **A scenario is a recording on top of the base**: its steps, and the whole configuration on
   screen when the recording started. Never a difference to the base, so a later change of the base
@@ -42,7 +43,7 @@ doc/shots/_cache/                tile caches, workspace databases, images waitin
 
 ## Shot file
 
-`doc/shots/<page>.json`, written by `CShotFiles::writeShotFile()` and by `shots.py`:
+`doc/en/shots/<page>.json`, written by `CShotFiles::writeShotFile()` and by `shots.py`:
 
 ```json
 {
@@ -84,11 +85,12 @@ doc/shots/_cache/                tile caches, workspace databases, images waitin
   |---|---|
   | `root` | `main`, `menu` (the open menu), `window` (the window a scenario leaves open, or the exposure), `dock:<address>` (a floating docker) |
   | `widget` | address below `root`; a plain name must be unique there; a mark is always an object |
-  | `part` | empty for the whole widget, `handle` (a slider's knob), `branch` (a tree row's arrow, with `row`), `button` (a button a list's delegate paints into a row, with `row` and `button`), `tab` (the tab of a docked docker or of a tab widget's page), `title` (a docker's title bar), `action` (a menu entry or toolbar action, with `action`, its objectName), `splitter` (with `between`) |
+  | `part` | empty for the whole widget, `handle` (a slider's knob), `branch` (a tree row's arrow, with `row`), `button` (a button a list's delegate paints into a row, with `row` and `button`), `tab` (the tab of a docked docker or of a tab widget's page), `title` (a docker's title bar), `action` (a menu entry or toolbar action, with `action`, its objectName), `splitter` (with `between`), `point` (a place on the map, with `lat` and `lon`) |
   | `row` | a tree row as `CShotAddress::rowPathOf()`: row numbers from the top level down and the column, `0/2:0` |
   | `button` | a row's button as a `click` step names it: `visible`, `save`, `checkState`, `activate`, … |
   | `between` | the two addresses a separator divides; a docker stands for its tab group |
-  | `shape` | `frame`, `disc`, `arrow` (with `tail`), `cursor` (with `cursor`); empty is a disc on a knob, an arrow or a separator, else a frame; a disc fails on a target that fits neither inside it nor is at most 16 px thick (`CShotMarks::discFits()`) |
+  | `lat`, `lon` | a `point`'s place in degrees; a 1 px target, so a cursor's hotspot or a disc's centre sits on it; not on the map now is *not on screen* |
+  | `shape` | `frame`, `disc`, `arrow` (with `tail`), `cursor` (with `cursor`); empty is a disc on a knob, an arrow, a separator or a point, else a frame; a disc fails on a target that fits neither inside it nor is at most 16 px thick (`CShotMarks::discFits()`) |
   | `tail` | `[dx, dy]`, an arrow's start from its target's centre in image pixels, a multiple of 45° |
   | `cursor` | `pointer`, `hand`, `resize`; resize only on a separator |
   | `name` | what the panel and failures call it |
@@ -207,8 +209,8 @@ qmapshack --doc <repo> --doc-page <page> …          the launcher: the panel on
 | Command | Does |
 |---|---|
 | `take PAGE` | open the launcher on a page |
-| `replay [--only GLOB]` | replay every shot into `doc/images/_check/`, one process per scenario; report what no longer comes out |
-| `publish [--only GLOB] [--report FILE]` | move `doc/images/_work/`'s images into `doc/images/` and delete their `<id>.shot.json`; one without an image stays |
+| `replay [--only GLOB]` | replay every shot into `doc/en/images/_check/`, one process per scenario; report what no longer comes out |
+| `publish [--only GLOB] [--report FILE]` | move `doc/en/images/_work/`'s images into `doc/en/images/` and delete their `<id>.shot.json`; one without an image stays |
 | `unused [--delete]` | shots and images no page references |
 | `selftest [--page PAGE]` | the recorder's and documentation mode's own cases |
 | `compose` | the one composer of a run's configuration; used by the launcher, hidden from `--help` |

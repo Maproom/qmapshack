@@ -129,7 +129,7 @@ class CShotDocLauncher : public QObject {
   /** @brief Send @p verb for @p id to a state in the shot's own scenario, starting one when needed. */
   void actOnShot(const QString& verb, const QString& id);
 
-  /** @brief Take @p id again headless, into `doc/images/_work/`, the way a build renders it. */
+  /** @brief Take @p id again headless, into `doc/<lang>/images/_work/`, the way a build renders it. */
   void retakeShot(const QString& id);
   /** @brief retakeShot() once the writer knows what the replay would miss. */
   void runRetakeShot(const QString& id);

@@ -18,7 +18,8 @@ This also needs Qt's Test module and, from Qt 6.9 on, its GuiPrivate package.
 
 Run `shots.py` from the top folder of your checkout: `python3 doc/tools/shots.py <command>`, on
 Windows `py doc\tools\shots.py <command>`. It uses `build/bin/qmapshack`; pass
-`--binary path/to/qmapshack` for another one.
+`--binary path/to/qmapshack` for another one. It works on English, `doc/en/`; `--lang de` before the
+command works on `doc/de/` and takes the images with a German QMapShack.
 
 On Windows copy `platforms\qoffscreen.dll` from your Qt installation beside the `qwindows.dll` your
 build uses.
@@ -73,8 +74,8 @@ build uses.
                                ▼
   ┌──────────────────────────────────────────────────────────┐
   │      Publ. All      moves the new images from            │
-  │                     doc/images/_work/ to doc/images/,    │
-  │                     where git sees them.                 │
+  │                     doc/en/images/_work/ to              │
+  │                     doc/en/images/, where git sees them. │
   └────────────────────────────┬─────────────────────────────┘
                                ▼
   ┌──────────────────────────────────────────────────────────┐
@@ -122,7 +123,7 @@ base again, and take it again. Then **Publ. All**, generate and commit.
 ## Base and scenario
 
 The **base** is QMapShack as the page starts it: dockers, maps, elevation data, POIs, units, map
-position, stored in `doc/shots/<page>.ini`. Set it up by hand and save it with **Base**; nothing in
+position, stored in `doc/en/shots/<page>.ini`. Set it up by hand and save it with **Base**; nothing in
 it is recorded. Every page needs one; a new page asks which page's base to copy. An image is taken
 in it unless you give it a scenario, and every recording starts from it. The panel lists it as
 `(base)`, above the scenarios.
@@ -134,7 +135,7 @@ not a scenario.
 With `(base)` selected, **Base** offers:
 
 - **Save what is on screen as this page's base...** — writes the configuration of the running QMapShack, as it
-  would write it on exit, into `doc/shots/<page>.ini`. Settings holding a path on this machine, and account
+  would write it on exit, into `doc/en/shots/<page>.ini`. Settings holding a path on this machine, and account
   details such as API keys and passwords, are left out.
 - **Copy the base of another page...** — asks first; every image taken in `(base)` changes.
 
@@ -201,6 +202,9 @@ is drawn again whenever the image is taken again.
 
 If it is in a menu or dialog, open that first.
 
+On the map, QMapShack first offers the place under the pointer. That mark stays on the place, not on the window
+position: zoom or pan and it moves with the map.
+
 When nothing can be marked there, or the marker does not fit, QMapShack says why next to the pointer.
 
 ### The markers
@@ -208,9 +212,9 @@ When nothing can be marked there, or the marker does not fit, QMapShack says why
 | Button | Draws | On | |
 |---|---|---|---|
 | Frame | a red rectangle around it | a button, a list, a field, a docker, a tab, a button in a list's row | |
-| Disc | a red spot on it | a small part: a slider's knob, the arrow that opens a list entry | refused on anything bigger, such as a tab or a field: use Frame |
+| Disc | a red spot on it | a small part: a slider's knob, the arrow that opens a list entry, a place on the map | refused on anything bigger, such as a tab or a field: use Frame |
 | Arrow | a red arrow pointing at it | anything | then click where the arrow starts; it runs in steps of 45° |
-| Pointer | a red mouse pointer | where to click | |
+| Pointer | a red mouse pointer | where to click, a place on the map | |
 | Hand | a red pointing hand | what to drag | |
 | Resize | a red double arrow | the separator between two dockers, to show it can be dragged | |
 
@@ -245,7 +249,7 @@ When a Retake or All fails, a dialog says which image and why.
 
 Taking an image again replays it: QMapShack performs its scenario's recorded steps without you,
 headless, and photographs the result. `shots.py replay` does that for every page, to check that every
-image still comes out. It writes into `doc/images/_check/`. Nothing is published from there, and the
+image still comes out. It writes into `doc/en/images/_check/`. Nothing is published from there, and the
 folder can be deleted.
 
 Closing the panel or the QMapShack window with unpublished images of this page asks whether to
@@ -255,7 +259,7 @@ panel only once you press Keep.
 ## What the rows mean
 
 A *shot* is how an image is taken: its scenario and the part it shows, stored in
-`doc/shots/<page>.json`.
+`doc/en/shots/<page>.json`.
 
 | State | Meaning |
 |---|---|
@@ -281,7 +285,8 @@ database.
 
 For other data, fill `doc/shots/fixtures/<page>/`. The panel creates it with one folder per part:
 `projects/`, `maps/`, `dem/`, `poi/`, `routino/`, `database/`. A part holding something replaces the
-default's; an empty one stays the default's. The panel header says which parts are the page's own.
+default's; an empty one stays the default's. A file `EMPTY` in a part leaves the page without it, as on a
+first start. The panel header says which parts are the page's own.
 `projects/` loads one `.qms` or `.gpx` file, the first by name; a dialog about a track, waypoint,
 route or area can only be photographed if the project has one.
 Press **All** after a change.
@@ -295,12 +300,14 @@ A page names the attribution of the data its images show, in a line of text belo
 | the OpenStreetMap map, POIs or routes | *© OpenStreetMap contributors* |
 | the offline map bev_km50 | *Datenquelle: BEV – Bundesamt für Eich- und Vermessungswesen, CC BY 4.0* |
 | elevation, hillshading or a profile | *Datenquelle: Land Tirol - data.tirol.gv.at, CC BY 4.0* |
+| the online map OSM Topo | *OpenTopoMap, CC-BY-SA*; its trails overlay *trails by waymarkedtrails.org* |
+| the vector map Tannheimer Tal | *© OpenStreetMap contributors, created by BBBike* |
 
 Each part's `SOURCE.md` in `doc/shots/fixtures/default/` has the full terms.
 
 ## What is fixed
 
-Light colors, DejaVu Sans 10, English, Fusion style, UTC, one image pixel per screen pixel.
+Light colors, DejaVu Sans 10, the page's language, Fusion style, UTC, one image pixel per screen pixel.
 
 The QMapShack window is 1200 × 800 and cannot be resized, so a scenario replays the same on every
 machine. A screen without room for it, display scaling included, cannot record or take images;
@@ -309,15 +316,15 @@ QMapShack says so.
 ## Files
 
 ```
-doc/pages/<page>.md              your text
-doc/shots/<page>.json            images and scenarios
-doc/shots/<page>.ini             the page's base
-doc/shots/<page>/<name>.ini      a scenario's settings
-doc/shots/fixtures/<page>/       the page's own example data
-doc/shots/fixtures/default/      the default example data
-doc/images/<page>/*.png          the published images
-doc/images/_work/                taken again, not published; not in git
-doc/images/_check/               what `shots.py replay` renders when run by hand; not in git
+doc/en/pages/<page>.md              your text
+doc/en/shots/<page>.json            images and scenarios
+doc/en/shots/<page>.ini             the page's base
+doc/en/shots/<page>/<name>.ini      a scenario's settings
+doc/shots/fixtures/<page>/          the page's own example data
+doc/shots/fixtures/default/         the default example data
+doc/en/images/<page>/*.png          the published images
+doc/en/images/_work/                taken again, not published; not in git
+doc/en/images/_check/               what `shots.py replay` renders when run by hand; not in git
 ```
 
 ## Not built yet

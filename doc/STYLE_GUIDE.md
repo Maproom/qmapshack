@@ -21,6 +21,7 @@ Write for people who use QMapShack, not for developers. One page answers one que
 | Address the reader as "you". Don't write "we" or "our". | build |
 | Use one idea per paragraph, at most four sentences. | build |
 | Explain a technical term the first time a page uses it, or link to where it's explained. | review |
+| A page stands on its own as far as possible: don't assume the reader has read another page. Say what to do, or link to it; no "as on the previous page". | review |
 
 ## Words
 
@@ -35,11 +36,12 @@ names the one to use. It reads this table, so a new row is checked at once.
 | image | picture, screenshot |
 | toolbar | tool bar |
 | double-click | double click |
+| right-click | right click |
 | click | click on |
 | online, offline | on-line, off-line |
 | Markdown | markdown |
 | alphanumeric | alphanumerical |
-| track point | Track Point, trackpoint |
+| trackpoint | track point, Track Point |
 | color | colour |
 | center | centre |
 | gray | grey |
@@ -74,7 +76,7 @@ A page uses the parts it needs, in this order:
 
 | Rule | Check |
 |---|---|
-| A new page is listed in `doc/index.md`. | Sphinx |
+| A new page is listed in `doc/en/index.md`. | Sphinx |
 | A page has exactly one title (`#`). | build |
 | The file name is lower case letters, digits and hyphens: `track-filters.md`. | build |
 | The file is UTF-8 and contains no tab characters. | build |
@@ -146,7 +148,7 @@ The graphs of a track.
 | Rule | Check |
 |---|---|
 | The image exists. | Sphinx |
-| Images are PNG files in `doc/images/<page>/`. | build |
+| Images are in `doc/<lang>/images/<page>/`: screenshots PNG, drawings and diagrams SVG, photos JPG; GIF and WebP are allowed too. | build |
 | The name is `<subject>[-<variant>]`, lower case with hyphens. | build |
 | An image without alternative text gets its name: `track-details-graphs.png` is "Track details graphs". Choose names that say what the image shows. | review |
 | The image shows only the part the text talks about. | review |

@@ -48,7 +48,14 @@ src/
   `ninja -t compdb` with `-fsyntax-only`; a header is checked through a `.cpp`). Catches shadowing and stale identifiers; not
   moc, AUTOUIC, linking, or anything inside `#if defined(Q_OS_WIN32)`.
 - **Never commit or push** without being asked for that specific change.
-- **No `Co-Authored-By` lines** in commit messages.
+- **Folding fixes into a branch's commits**: one `--fixup` per group of whole files, into the last commit touching
+  them; files using each other's new API go together. Then `rebase -i --autosquash --exec '<build>'` and check
+  `git diff <before> HEAD` is empty. Hunk-wise folding conflicts with later commits, and `git apply
+  --unidiff-zero` misplaces zero-context hunks.
+- **Pull requests go to `Maproom/qmapshack` `dev`** from `kiozen:<branch>`, the body from
+  `.github/PULL_REQUEST_TEMPLATE.md` with every section kept.
+- **No Claude attribution** in commit messages or PR descriptions: no `Co-Authored-By`, no "Generated with
+  Claude Code".
 - **Working on a ticket adds its line to `changelog.txt`** as part of the change, under the top
   version block, sorted by ticket number: `[QMS-nnnn] <commit subject>`. Skip it only if the line
   is already there.
@@ -64,6 +71,22 @@ src/
   `~/projects/qmapshack_master` tracks `Maproom/qmapshack` and is for reference only — never
   branch or edit there.
 
+### Windows from the start
+
+Everything must work on Windows, though only Linux is run here. Check each change against these before reporting:
+
+- **Text a tool writes gets its line ending pinned**: Python `open(..., "w", newline="\n")` (Python 3.9, which the doc tools
+  support, has no `write_text(newline=)`), and a post-pass to LF for files a third-party tool (Sphinx) writes. Text mode writes CRLF on Windows, and a CRLF copy
+  of an `eol=lf` file shows as modified in `git status` while `git diff` is empty.
+- **Every text file is LF in every checkout** (`* text=auto eol=lf`, whatever `core.autocrlf` says); `.gitattributes`
+  lists only exceptions: CRLF scripts, vendored files, bytes that must not change. A checkout from before the rule
+  needs `git rm -r --cached . && git reset --hard` once (drops uncommitted changes). `generate_html.py` refuses a
+  `TEXT_SUFFIXES` file under `doc/html` that `git check-attr` does not pin to `eol=lf`.
+- **A compiled-in source-tree path is a developer fallback only**; the installed layout must work on its own, and the
+  Windows deploy scripts (`msvc_64/*.bat`) are updated with every CMake `install()` change.
+- **Paths via `pathlib`/`QDir`**, never `/`-joined strings or a `bin/` that is `Scripts\` on Windows.
+- Windows-only instructions in a doc are spelled out; a Linux command does not stand for both.
+
 ---
 
 ## Build system
@@ -75,8 +98,9 @@ libc++, ASan).
   exists, so no build rewrites the tracked `.ts` files; Qt's `update_translations` is no substitute.
   Keep the `/locale` resource in the `else` branch: nothing reads it, but it makes the `.qm` files
   inputs of the application target, which the packaging scripts copy from `<build>/src/<app>/`.
-- **All ten `.qm` catalogs (base plus nine languages) are in the binary under `:/locale`**, but
-  `prepareTranslators()` reads only the filesystem, so a build-tree run is English.
+- **All ten `.qm` catalogs (base plus nine languages) are in the binary under `:/locale`**.
+  `prepareTranslators()` takes the installed catalog first and falls back to `:/locale` only for an explicit
+  `--locale`: a build-tree run is English unless given one. With `UPDATE_TRANSLATIONS` on there is no `:/locale`.
 - **Standard dialog buttons are translated by the platform theme, not a `.qm`**, following
   `LANGUAGE`/`LC_MESSAGES`. `QT_QPA_PLATFORMTHEME=` (empty) still loads `kde` via
   `XDG_CURRENT_DESKTOP`; `generic` does not. Offscreen loads no theme and ignores the variable.
@@ -143,6 +167,9 @@ libc++, ASan).
 ```bash
 clang-format -i <file> [<file> ...]
 ```
+
+Only `.cpp`/`.h`: given a Markdown file it rewrites it as C++. From a diff:
+`git diff --name-only -- '*.cpp' '*.h' | xargs clang-format -i`.
 
 Style is `.clang-format` in the project root (Google base, 120 columns). Always accept its output —
 never revert or hand-tune it, and keep reformat hunks it makes on unrelated pre-existing drift.
@@ -731,6 +758,8 @@ Loaded when files there are touched; read them before working on the subsystem f
 
 `.notes/documentation-plan.md`: generated HTML in `doc/html/` replaces `QMSHelp.qch`.
 `.notes/shot-marks-plan.md`: marks in documentation images (QMS-1319); read it first when resuming.
+`.notes/quickstart-plan.md`: its step 7, the quick start; read it first when resuming.
+`.notes/translation-plan.md`: translated documentation, German first; read it first when resuming.
 
 Analysed designs live in `.notes/`, each wanting its own branch. De-freeze one by pointing at the
 file.

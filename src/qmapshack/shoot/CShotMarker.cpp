@@ -44,6 +44,8 @@
 #include <QTreeWidget>
 
 #include "CMainWindow.h"
+#include "canvas/CCanvas.h"
+#include "gis/proj_x.h"
 #include "shoot/CShotAddress.h"
 #include "shoot/CShotDocMode.h"
 #include "shoot/CShotHandlers.h"
@@ -547,6 +549,16 @@ QList<CShotMarker::candidate_t> CShotMarker::candidatesAt(const QPoint& global) 
           QString("the splitter between %1 and %2")
               .arg(nameOf(splitter->widget(index - 1)), nameOf(splitter->widget(index))));
     }
+  }
+  // A place on the map: the point under the pointer, rounded to about 0.1 m.
+  if (const CCanvas* canvas = qobject_cast<const CCanvas*>(w); nullptr != canvas) {
+    QPointF pos = canvas->mapFromGlobal(QPointF(global));
+    canvas->convertPx2Rad(pos);
+    pos /= DEG_TO_RAD;
+    const qreal lat = qRound64(pos.y() * 1e6) / 1e6;
+    const qreal lon = qRound64(pos.x() * 1e6) / 1e6;
+    add({{"root", root}, {"widget", address(canvas)}, {"part", "point"}, {"lat", lat}, {"lon", lon}},
+        QString("the place %1, %2 on the map").arg(lat, 0, 'f', 5).arg(lon, 0, 'f', 5));
   }
   // A slider's knob.
   if (const QSlider* slider = qobject_cast<const QSlider*>(w); nullptr != slider) {

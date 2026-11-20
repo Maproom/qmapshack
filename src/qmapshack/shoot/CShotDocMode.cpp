@@ -51,6 +51,7 @@
 #include <QPushButton>
 #include <QRect>
 #include <QRegularExpression>
+#include <QSaveFile>
 #include <QScopeGuard>
 #include <QScreen>
 #include <QSettings>
@@ -98,6 +99,22 @@ constexpr qint32 kPlacementSettleMs = 300;
 constexpr quint32 kGeometryMagic = 0x1D9D0CB;
 constexpr quint16 kGeometryMajor = 3;
 const QString kSetupConfig = QStringLiteral("setup.ini");
+
+/** @return whether @p path now ends its lines with LF; QSettings writes CRLF on Windows, the files are tracked as LF */
+bool rewriteWithLf(const QString& path) {
+  QFile in(path);
+  if (!in.open(QIODevice::ReadOnly)) {
+    return false;
+  }
+  QByteArray data = in.readAll();
+  in.close();
+  if (!data.contains("\r\n")) {
+    return true;
+  }
+  data.replace("\r\n", "\n");
+  QSaveFile out(path);
+  return out.open(QIODevice::WriteOnly) && out.write(data) == data.size() && out.commit();
+}
 /** Every writer's window: scenarios are recorded and replayed at it, so they replay on every machine. */
 const QSize kWindowSize(1200, 800);
 
@@ -263,8 +280,8 @@ CShotDocMode::CShotDocMode(const QDir& repo, const QString& page, const QString&
       files(repo, page),
       scenario(CShotPage::kBaseScenario == scenario ? QString() : scenario),
       trial(trial),
-      // Never doc/images: only publishing writes there.
-      writer(std::make_unique<CShotWriter>(repo.absoluteFilePath("doc/images/_work"))),
+      // Never doc/<lang>/images: only publishing writes there.
+      writer(std::make_unique<CShotWriter>(CShotFiles::workDir(repo))),
       ctx(std::make_unique<CShotContext>(*writer)) {
   recorder = new CShotRecorder(*ctx, this);
   marker =
@@ -1166,25 +1183,31 @@ qint32 CShotDocMode::storeSettings(const QString& path, qint32& dropped) const {
   }
   cfg.sync();
 
-  QSettings out(path, QSettings::IniFormat);
-  out.clear();
   qint32 stored = 0;
   dropped = 0;
-  const QStringList& keys = cfg.allKeys();
-  for (const QString& key : keys) {
-    if (isAccountDetail(key)) {
-      continue;
+  {
+    // Closed before the rewrite, so its destructor cannot write the file again.
+    QSettings out(path, QSettings::IniFormat);
+    out.clear();
+    const QStringList& keys = cfg.allKeys();
+    for (const QString& key : keys) {
+      if (isAccountDetail(key)) {
+        continue;
+      }
+      const QVariant& value = cfg.value(key);
+      if (namesAPlace(value)) {
+        dropped++;
+        continue;
+      }
+      out.setValue(key, value);
+      stored++;
     }
-    const QVariant& value = cfg.value(key);
-    if (namesAPlace(value)) {
-      dropped++;
-      continue;
+    out.sync();
+    if (QSettings::NoError != out.status()) {
+      return -1;
     }
-    out.setValue(key, value);
-    stored++;
   }
-  out.sync();
-  return (QSettings::NoError == out.status()) ? stored : -1;
+  return rewriteWithLf(path) ? stored : -1;
 }
 
 void CShotDocMode::snapshotSetup() {

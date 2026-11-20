@@ -103,10 +103,15 @@ The writer's guide is `doc/WRITING_DOCS.md`: short, facts only, updated with eve
   drawn in `CShotContext::emitImage()`; a live Ctrl+Shift+F9 take places the selected row's marks at the key press
   and draws them on the chosen part. A mark not completely inside the image or `rect`, or in another window, fails
   the shot. A plain name must be unique below the mark's `root` (`CShotAddress::resolveUnique()`).
+- **A `point` mark is a place on the map** (`lat`/`lon`, through `CCanvas::convertRad2Px()`), a 1 px target.
+  `CShotMarker` offers it first on the map, rounded to 6 decimals.
+- **Panel tooltips go through `tipOf()`**: rich text, which Qt wraps; a plain tooltip is one line as wide as its text.
 - **Marks are placed by `CShotMarker` in the state process**: Ctrl+Shift+F10 lists the candidates at the pointer,
   steps through them, a click or Return takes one; it swallows every key and click meanwhile, so an open menu stays open.
   The launcher writes the mark (`mark-placed`) through `storeShot()` and sends the row's marks back (`marks`); the
-  overlay showing them is a child of the main window, hidden while an image is taken.
+  overlay showing them is a child of the window they lie in (`windowShot()`), hidden while an image is taken.
+- **A mark's panel status comes from `placed_t::found`**, which `CShotMarks::place()` sets; never sort problems by
+  their text. A tool button whose text is only dots (Designer's `...`) is named by its tooltip's first sentence.
 - **The launcher keeps marks a shot file cannot hold** in `doc/shots/_cache/<page>-marks.json`: marks of an image not
   taken yet (`pending`, moved into the entry by its first take) and the ids whose marks changed since their image
   (`changed`). A mark change on a taken row deletes its `_work` image; any new image of the row, Revert, Taken in and
@@ -142,10 +147,34 @@ The writer's guide is `doc/WRITING_DOCS.md`: short, facts only, updated with eve
   `fixtures/<page>/` holding something replaces the default's part whole; an empty or missing one is
   the default's, and `SOURCE.md`, `README.md` and dotfiles are no content. The rule exists twice,
   `fixture_part()` and `CShotFiles::ownFixtureParts()`, each naming the other - change both.
+- **A scenario's `layout` step can be written by hand**: `state` is `QMainWindow::saveState()` in base64. Dock part:
+  `fd`, area count, per area index, size, then a group: `fc` (sequence) or `fa` + visible tab index (tabs),
+  orientation, count, items; a widget item is `fb`, objectName, flags, pos, size, min, max; a nested group is `fc`,
+  pos, size, min, max, then the group.
+- **Longer labels in another language:** a shot's `"set": {"dockMaps.minimumWidth": 340}` widens that dock area for
+  the image only; widen that language's crops to match. A map list's context menu is `dockMaps/IMapList/QMenu#0`
+  (its parent is the form, not the tree); a spin box replays as `key` + `endedit`, not `set`.
+- **Addresses learned on the quick start pages:** the welcome page is `…/CCanvas#0/QTextBrowser#1`
+  (`#0` is `textStatusMessages`); a scroll area scrolls with `set` on `…/qt_scrollarea_vcontainer/QScrollBar#0.value`;
+  each map row has its own `CMapPropSetup`, numbered in activation order below `dockMaps/treeWidget/QWidget#0`;
+  a mark needs a unique address (`qt_scrollarea_viewport` names several), a step takes the first match. A map
+  row's button is `{"do":"click","button":"activate","row":"<map name>","widget":"dockMaps/treeWidget"}`; `select`
+  takes the name too, a mark's `row` is numeric (`2:0`); a shortcut is `keypress` with `"mods":["shift"]`.
+- **Drawing on the map by hand (page 8):** a right `click` with `lat`/`lon` on `tabWidget/QStackedWidget#0/CCanvas#0`
+  replays the map menu, and a shot then takes the open menu; `{"action":"actionAddTrk","do":"trigger"}` starts the
+  track. The edit bar is `…/CCanvas#0/IScrOptEditLine/<toolButton>`. **T** and **V** search the line at the point's
+  previous pixel, so move 2 px beside the target, then onto it, then click. `QInputDialog` hangs below the canvas
+  (`…/CCanvas#0/QInputDialog#0/QLineEdit#0`), the project dialog is `ISelectProjectDialog/lineEdit`. A `key` step
+  cannot reach the map (no Esc there); `view` must be the first step; a file loaded through `actionLoadGISData` +
+  `fileNameEdit` is refused if it has the key of a project already loaded.
+- **MyST anchors keep umlauts** (`#höhen-aus-dem-dem`); the HTML id drops them (`hohen-aus-dem-dem`).
+- **A part holding a file `EMPTY` is left out** (`FIXTURE_EMPTY`, `kFixtureEmpty`): `compose` registers no path and
+  drops the base's, and `projects` writes `Shoot/fixtureProject=""`, which `CShotFixture::load()` takes as no project;
+  a missing key still fails. It counts as the page's own part, so `maps` gets the page's own tile cache.
   `default` is no page name. Every session start adds what the folder lacks: an empty folder per part
   and a git-ignored `README.md`. The panel header says which parts are the page's own, and the file
   watcher updates it when a part is filled or emptied.
-- **A page owns its base**, `doc/shots/<page>.ini`. The launcher asks which base to copy when a page
+- **A page owns its base**, `doc/en/shots/<page>.ini`. The launcher asks which base to copy when a page
   has none (`chooseBase()`); Base / Save writes it, Base / Copy replaces it. Nothing writes a
   fixture's `shots.ini`. `compose` falls back to the default's only for a page without a base yet.
 - **`CShotFixture::load()`** loads the project the configuration names as `Shoot/fixtureProject`
@@ -175,7 +204,7 @@ The writer's guide is `doc/WRITING_DOCS.md`: short, facts only, updated with eve
 ## `doc/tools/shots.py`
 
 - **Starts every headless run**: `replay`, `selftest`, `unused`, hidden `compose`. Python 3.9,
-  standard library only. One process per page and scenario group into `doc/images/_check` (or
+  standard library only. One process per page and scenario group into `doc/en/images/_check` (or
   `-o`), pinned command line and environment (`QT_QPA_PLATFORMTHEME=generic`, `LANGUAGE`,
   `--locale`), scratch working directory, killed after 600 s.
 - **A run's result** is its `shoot:` warnings on stderr, its exit code (failure count, capped at
@@ -187,8 +216,9 @@ The writer's guide is `doc/WRITING_DOCS.md`: short, facts only, updated with eve
   cases. A case goes into its group's `check…(CHarness&)`; a `case_t` field off its default is
   named (`.closesMenus = true`). A `shoot:` warning a case does not name in `warns` fails it; `expect`
   pins the state the input must give, since a replay that equals a recording that did nothing passes.
-  `checkCoverage()` runs last: every handler replayed in some case, every main window menu entry
-  named.
+  `shots.py` runs each group (`CShotSelfTest::groups()` plus `doc`) in a process of its own, side by side (`-j`):
+  a group must not rely on state another left. `SELFTEST_GROUPS` is the same list, compared on every run; handler
+  coverage is the union of the groups' `unreplayed` reports.
 - **The self test has a base of its own**, `doc/tools/selftest.ini`, with the default fixture: it
   checks the recorder, so a page's base can change without moving a case. `--page` only names the
   run. Its cases assume that base's arrangement; changing it means fixing the cases that break.
@@ -303,7 +333,8 @@ it belongs to is the bug this subsystem invites:
   --doc-python`), which owns the panel and the files and never renders. Each pick starts a new state
   process with `--doc-scenario <name|->`; nothing is reset in place. The two need separate workspace
   databases: a shared SQLite file locks.
-- **Channel** `QLocalServer` `qms-doc-<pid>`, one line per message, every report handled queued.
+- **Channel** `QLocalServer` `qms-doc-<pid>`, one line per message, every report handled queued. A field after an
+  image id is split off by a tab: ids may hold spaces.
   Launcher → state: `region`, `update`, `record <name>`, `stop`, `select`.
   State → launcher: `status`, `in <scenario|->`, `ready`, `tagged`, `recording`, `recorded`,
   `recorded-none`, `trial-failed`, `setup-failed` (the fixture did not load; the launcher stops that state).
@@ -333,7 +364,7 @@ it belongs to is the bug this subsystem invites:
 - **Scenario names are file names and arguments**: no `/ \ : * ? " < > |`, no leading `-`, no spaces
   or dots at the ends, not `-` or `(base)`, no Windows device name, none differing from another only
   in case.
-- **A page is a file directly in `doc/pages`** and lists and rebinds only its own ids
+- **A page is a file directly in `doc/en/pages`** and lists and rebinds only its own ids
   (`<page>/<name>`).
 - **Image references need `QRegularExpression::UseUnicodePropertiesOption`**: without it Qt's `\w`
   is ASCII.
@@ -390,7 +421,7 @@ it belongs to is the bug this subsystem invites:
   launcher returns to the base.
 - **Save config writes only `(base)`**, through `CMainWindow::saveConfig()` (what `~CMainWindow`
   writes): a scenario keeps its recorded configuration. `compose --from <ini>` names the source file.
-- **Take again is headless**: the launcher runs `shots.py -o doc/images/_work replay --only <id>`,
+- **Take again is headless**: the launcher runs `shots.py -o doc/en/images/_work replay --only <id>`,
   what a build does; a failure keeps the work image.
 - **An image is written from what F9 rendered only for a live part.** An exposed dialog parented to
   the main window is in that render too, and its shot says `exposure`, which the build renders from.
@@ -406,6 +437,7 @@ it belongs to is the bug this subsystem invites:
 
 ## Left out on purpose
 
+- **No translation**: the shot tool is developer-only; its strings are plain, never `tr()`.
 - **Drag and drop is not recorded** (`CShotRecorder` warns on `Drop`): replaying it would mean driving
   `QDrag::exec()`.
 - **One handler per value control**, not one over Qt's USER property: line edit, spin box, slider,

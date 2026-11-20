@@ -58,6 +58,15 @@ const QString kRecordIcon = ":/icons/DocRecord.svgt";
 const QString kRecordText = "Record";
 const QString kStopIcon = ":/icons/DocStop.svgt";
 const QString kStopText = "Stop";
+/**
+   @return @p text as a tooltip, @p title bold in front; rich text, which Qt wraps, while plain text stays one line
+   @param text  plain text; `<br>` starts a new line
+ */
+QString tipOf(const QString& title, const QString& text) {
+  QString body = text.toHtmlEscaped();
+  body.replace("&lt;br&gt;", "<br>");
+  return "<qt>" + (title.isEmpty() ? body : QString("<b>%1</b>: %2").arg(title.toHtmlEscaped(), body)) + "</qt>";
+}
 const QString kRecordHint = "Name the scenario, start from the base, do what the image needs, then press Stop.";
 const QString kStopHint = "Stop the recording and store it under the name it was started with.";
 /** Distance of the panel from the screen's top right corner [px]. */
@@ -69,6 +78,8 @@ constexpr qint32 kRecentreMs = 250;
 CShotDocPanel::CShotDocPanel(const QString& page, const QString& sizeFile, QWidget* parent)
     : QDialog(parent, Qt::Window), sizeFile(sizeFile) {
   setWindowTitle("Documentation mode");
+  // The writer works in QMapShack, another process: the panel is rarely the active window.
+  setAttribute(Qt::WA_AlwaysShowToolTips);
 
   QVBoxLayout* layout = new QVBoxLayout(this);
   layout->addWidget(new QLabel(QString("Page <b>%1</b>").arg(page), this));
@@ -111,7 +122,7 @@ CShotDocPanel::CShotDocPanel(const QString& page, const QString& sizeFile, QWidg
     button->setText(text);
     button->setFont(label);
     button->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
-    button->setToolTip(QString("<b>%1</b>: %2").arg(text, hint));
+    button->setToolTip(tipOf(text, hint));
     buttons << button;
     return button;
   };
@@ -194,7 +205,7 @@ CShotDocPanel::CShotDocPanel(const QString& page, const QString& sizeFile, QWidg
   };
   againButton = addShotAction(
       ":/icons/DocRetake.svgt", "Retake",
-      "Take this image again into doc/images/_work, as a build would; the application on screen is not touched.",
+      "Take this image again into doc/<lang>/images/_work, as a build would; the application on screen is not touched.",
       &CShotDocPanel::retakeShotClicked);
   regionButton = addShotAction(":/icons/DocRegion.svgt", "Region",
                                "Drag a rectangle for this image instead of pointing at one widget.",
@@ -203,20 +214,21 @@ CShotDocPanel::CShotDocPanel(const QString& page, const QString& sizeFile, QWidg
       addShotAction(":/icons/DocRevert.svgt", "Revert",
                     "Throw the image just taken away and put the shot back as it was; the published one stays.",
                     &CShotDocPanel::revertShotClicked);
-  publishButton = addShotAction(":/icons/DocPublish.svgt", "Publish", "Copy this image taken again into doc/images.",
-                                &CShotDocPanel::publishShotClicked);
+  publishButton =
+      addShotAction(":/icons/DocPublish.svgt", "Publish", "Copy this image taken again into doc/<lang>/images.",
+                    &CShotDocPanel::publishShotClicked);
 
   // The page's own actions, apart from the selected image's.
   addSeparator(shotActions, shotBox);
   whileIdle << addButton(shotActions, ":/icons/DocRetakeAll.svgt", "All",
-                         "Take every image of this page again into doc/images/_work, to compare and publish.",
+                         "Take every image of this page again into doc/<lang>/images/_work, to compare and publish.",
                          &CShotDocPanel::retakePageClicked);
   reapButton = addButton(shotActions, ":/icons/DocClean.svgt", "Clean",
                          "Delete the shots and images of this page no page line uses.", &CShotDocPanel::reapClicked);
   whileIdle << reapButton;
   publishAllButton =
       addButton(shotActions, ":/icons/DocPublishAll.svgt", "Publish all",
-                "Copy every image of this page taken again into doc/images.", &CShotDocPanel::publishClicked);
+                "Copy every image of this page taken again into doc/<lang>/images.", &CShotDocPanel::publishClicked);
   // Short on the button, where the longest label sets the panel's width; the tooltip keeps the name.
   publishAllButton->setText("Publ. All");
   whileIdle << publishAllButton;
@@ -232,10 +244,22 @@ CShotDocPanel::CShotDocPanel(const QString& page, const QString& sizeFile, QWidg
   markTitle->setWordWrap(true);
   imageLayout->addWidget(markTitle);
   QHBoxLayout* markers = new QHBoxLayout;
-  const QList<QPair<QString, QString>> kinds = {{"frame", "Frame"},     {"disc", "Disc"}, {"arrow", "Arrow"},
-                                                {"pointer", "Pointer"}, {"hand", "Hand"}, {"resize", "Resize"}};
-  for (const auto& [kind, text] : kinds) {
-    QToolButton* button = newButton(QString(), text, "what Ctrl+Shift+F10 places; click again to put it away.");
+  struct marker_t {
+    QString kind;
+    QString text;
+    QString hint;
+  };
+  const QList<marker_t> kinds = {
+      {"frame", "Frame", "a red rectangle around a button, a list, a field, a docker or a tab."},
+      {"disc", "Disc", "a red spot on something small: a slider's knob, the arrow that opens a list entry."},
+      {"arrow", "Arrow", "a red arrow pointing at anything; then click where it starts. It runs in steps of 45°."},
+      {"pointer", "Pointer", "a red mouse pointer where to click, also on a place on the map."},
+      {"hand", "Hand", "a red pointing hand on what to drag."},
+      {"resize", "Resize", "a red double arrow on the separator between two dockers, which can be dragged."},
+  };
+  for (const auto& [kind, text, hint] : kinds) {
+    QToolButton* button =
+        newButton(QString(), text, hint + "<br>Ctrl+Shift+F10 places it; click the button again to put it away.");
     // Drawn at the size shown: the marks' line widths are fixed, scaled down they vanish.
     button->setIcon(QIcon(QPixmap::fromImage(CShotMarks::icon(kind, button->iconSize().width()))));
     button->setCheckable(true);
@@ -469,7 +493,7 @@ void CShotDocPanel::setShots(const QList<CShotFiles::row_t>& shots_) {
     // Changed marks win: the image no longer shows them, whatever else it is.
     row->setText(eColumnState, entry.marksChanged ? QString("marks changed, take it again")
                                                   : (entry.changed ? text + ", taken again" : text));
-    row->setToolTip(eColumnId, entry.note.isEmpty() ? entry.id : entry.note);
+    row->setToolTip(eColumnId, tipOf(QString(), entry.note.isEmpty() ? entry.id : entry.note));
     if (entry.marksChanged || entry.changed || CShotFiles::eMissing == entry.state ||
         CShotFiles::eNoImage == entry.state) {
       row->setForeground(eColumnState, CUiTheme::foreground(CUiTheme::Role::eWarn));
@@ -487,7 +511,7 @@ void CShotDocPanel::setShots(const QList<CShotFiles::row_t>& shots_) {
       std::any_of(entries.cbegin(), entries.cend(), [](const CShotFiles::row_t& e) { return e.changed; });
   publishAllButton->setEnabled(waiting && shots->isEnabled());
   reapButton->setToolTip(
-      QString("<b>Clean</b>: delete the shots and images of this page no page line uses: %1.").arg(unused));
+      tipOf("Clean", QString("delete the shots and images of this page no page line uses: %1.").arg(unused)));
 
   setCurrentShot(current);
   showPreview();
@@ -571,12 +595,26 @@ void CShotDocPanel::setPage(const QString& path, bool exists) {
                        : CUiTheme::span(CUiTheme::Role::eWarn, QString("There is no page %1 yet.").arg(path)));
 }
 
-void CShotDocPanel::setFixture(const QStringList& own, const QString& dir) {
-  fixture->setText(own.isEmpty()
-                       ? QString("Fixture: the default")
-                       : QString("Fixture: %1 from this page; the rest from the default").arg(own.join(", ")));
+void CShotDocPanel::setFixture(const QStringList& own, const QStringList& empty, const QString& dir) {
+  QStringList filled;
+  for (const QString& part : own) {
+    if (!empty.contains(part)) {
+      filled << part;
+    }
+  }
+  QStringList says;
+  if (!empty.isEmpty()) {
+    says << QString("%1 left out").arg(empty.join(", "));
+  }
+  if (!filled.isEmpty()) {
+    says << QString("%1 from this page").arg(filled.join(", "));
+  }
+  fixture->setText(says.isEmpty() ? QString("Fixture: the default")
+                                  : QString("Fixture: %1; the rest from the default").arg(says.join("; ")));
   fixture->setToolTip(
-      QString("A part holding something in %1 replaces the default's; an empty one is the default's.").arg(dir));
+      tipOf(QString(), QString("A part holding something in %1 replaces the default's; an empty one is the "
+                               "default's. A file EMPTY in a part leaves the page without it.")
+                           .arg(dir)));
 }
 
 void CShotDocPanel::setBusy(bool on, const QString& what) {
@@ -612,7 +650,7 @@ void CShotDocPanel::setRecording(bool on) {
   recording = on;
   recordButton->setText(on ? kStopText : kRecordText);
   recordButton->setIcon(QIcon(on ? kStopIcon : kRecordIcon));
-  recordButton->setToolTip(QString("<b>%1</b>: %2").arg(on ? kStopText : kRecordText, on ? kStopHint : kRecordHint));
+  recordButton->setToolTip(tipOf(on ? kStopText : kRecordText, on ? kStopHint : kRecordHint));
   for (QToolButton* button : std::as_const(whileIdle)) {
     button->setEnabled(!on);
   }

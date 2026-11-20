@@ -516,7 +516,8 @@ QString CShotDocLauncher::composeConfig(const QString& scenario, QString& error,
 
   const QString& out = QDir(scratch->path()).absoluteFilePath("state.ini");
   QFile::remove(out);
-  QStringList args{repo.absoluteFilePath("doc/tools/shots.py"), "compose", page, "--out", out};
+  QStringList args{
+      repo.absoluteFilePath("doc/tools/shots.py"), "--lang", CShotFiles::language(), "compose", page, "--out", out};
   if (!scenario.isEmpty()) {
     args << "--scenario" << scenario;
   }
@@ -826,9 +827,9 @@ bool CShotDocLauncher::runShots(QPointer<CShotsJob>& slot, const QStringList& ar
   }
   const QString& interpreter = python();
   // `--binary` is shots.py's global option and comes before the command.
-  const QStringList& all =
-      QStringList{repo.absoluteFilePath("doc/tools/shots.py"), "--binary", QCoreApplication::applicationFilePath()} +
-      args;
+  const QStringList& all = QStringList{repo.absoluteFilePath("doc/tools/shots.py"), "--binary",
+                                       QCoreApplication::applicationFilePath(), "--lang", CShotFiles::language()} +
+                           args;
   CShotsJob* job = new CShotsJob(interpreter, all, kNoPython, this);
   slot = job;
   QPointer<CShotsJob>* running = &slot;
@@ -908,17 +909,16 @@ void CShotDocLauncher::retakeShot(const QString& id) {
 
 void CShotDocLauncher::runRetakeShot(const QString& id) {
   // Headless, the way a build renders it; an image that does not come out keeps the work image.
-  const bool started =
-      runShots(replayJob, {"-o", repo.absoluteFilePath("doc/images/_work"), "replay", "--only", id},
-               [this, id](bool ok, const QString& error) {
-                 if (ok) {
-                   // Taken with its marks as they are now.
-                   files.setMarksChanged(id, false);
-                   refreshPanel(QString("%1 was taken again; Publish puts it into the documentation.").arg(id));
-                 } else {
-                   reportFailure(QString("%1 was not taken again.\n\n%2").arg(id, error));
-                 }
-               });
+  const bool started = runShots(
+      replayJob, {"-o", CShotFiles::workDir(repo), "replay", "--only", id}, [this, id](bool ok, const QString& error) {
+        if (ok) {
+          // Taken with its marks as they are now.
+          files.setMarksChanged(id, false);
+          refreshPanel(QString("%1 was taken again; Publish puts it into the documentation.").arg(id));
+        } else {
+          reportFailure(QString("%1 was not taken again.\n\n%2").arg(id, error));
+        }
+      });
   if (!started) {
     refreshPanel("Something is running already; wait for it.");
   }
@@ -942,20 +942,19 @@ void CShotDocLauncher::retakePage() {
 
 void CShotDocLauncher::runRetakePage() {
   // Headless into _work, like Take again for every row: each is judged side by side and published or reverted.
-  const bool started =
-      runShots(replayJob, {"-o", repo.absoluteFilePath("doc/images/_work"), "replay", "--only", page + "/*"},
-               [this](bool ok, const QString& error) {
-                 if (ok) {
-                   for (const QString& id : files.marksChanged()) {
-                     files.setMarksChanged(id, false);
-                   }
-                   refreshPanel(
-                       QString("Every image of this page was taken again; compare them, revert what is not "
-                               "better, then Publish all."));
-                 } else {
-                   reportFailure(QString("Not every image was taken again.\n\n%1").arg(error));
-                 }
-               });
+  const bool started = runShots(replayJob, {"-o", CShotFiles::workDir(repo), "replay", "--only", page + "/*"},
+                                [this](bool ok, const QString& error) {
+                                  if (ok) {
+                                    for (const QString& id : files.marksChanged()) {
+                                      files.setMarksChanged(id, false);
+                                    }
+                                    refreshPanel(QString(
+                                        "Every image of this page was taken again; compare them, revert what is not "
+                                        "better, then Publish all."));
+                                  } else {
+                                    reportFailure(QString("Not every image was taken again.\n\n%1").arg(error));
+                                  }
+                                });
   if (!started) {
     refreshPanel("Something is running already; wait for it.");
   }
@@ -1073,7 +1072,7 @@ void CShotDocLauncher::refreshPanel(const QString& status) {
   const bool hasPage = QFileInfo::exists(files.pageFile());
   const QString& pageName = repo.relativeFilePath(files.pageFile());
   panel->setPage(pageName, hasPage);
-  panel->setFixture(files.ownFixtureParts(), repo.relativeFilePath(files.fixtureDir()));
+  panel->setFixture(files.ownFixtureParts(), files.emptyFixtureParts(), repo.relativeFilePath(files.fixtureDir()));
   panel->setScenarios(files.scenarioNames(), selectedScenario);
   const QList<CShotFiles::row_t>& rows = files.rows();
   panel->setShots(rows);

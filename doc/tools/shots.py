@@ -2,14 +2,15 @@
 """Take and replay QMapShack's documentation images.
 
   shots.py take PAGE              open the writer's session on a page
-  shots.py publish                copy the images taken again into doc/images
+  shots.py publish                copy the images taken again into doc/<lang>/images
   shots.py replay [--only GLOB]   replay every shot and report the ones that no longer come out
   shots.py selftest               the recorder's and documentation mode's own cases
   shots.py unused [--delete]      shots and images no page references any more
 
 An image's bytes depend on the machine that rendered it, so `replay` compares no images: it
-answers whether every shot still replays. It renders into doc/images/_check and never into
-doc/images. A session writes into doc/images/_work; only `publish` writes doc/images.
+answers whether every shot still replays. It renders into doc/<lang>/images/_check and never
+into doc/<lang>/images. A session writes into doc/<lang>/images/_work; only `publish` writes doc/<lang>/images.
+Every command works on one language, --lang (default en).
 
 Needs Python 3.9 and this checkout's build configured with -DQMS_DOC_MODE=ON.
 """
@@ -32,21 +33,41 @@ STYLE = "Fusion"
 FONT_FAMILY = "DejaVu Sans"
 FONT_SIZE = "10"
 COLOR_SCHEME = "light"
-# --locale drives Qt's catalogs and QLocale, the environment everything else.
+# The documentation's languages and the system locale each is rendered in. --locale drives Qt's catalogs and
+# QLocale, the environment everything else; the application takes the language from --locale as well.
+LANGUAGES = {"en": "en_US.UTF-8", "de": "de_DE.UTF-8"}
 LOCALE = "en"
-SYSTEM_LOCALE = "en_US.UTF-8"
+SYSTEM_LOCALE = LANGUAGES[LOCALE]
 SCALING_VARIABLES = ("QT_SCALE_FACTOR", "QT_SCALE_FACTOR_ROUNDING_POLICY", "QT_SCREEN_SCALE_FACTORS",
                      "QT_FONT_DPI", "QT_ENABLE_HIGHDPI_SCALING", "QT_USE_PHYSICAL_DPI", "QT_DEVICE_PIXEL_RATIO")
 
 REPO = Path(__file__).resolve().parents[2]
-IMAGES_DIR = REPO / "doc" / "images"
-# Where `replay` renders; git-ignored. Only publishing writes doc/images.
+# One language's pages, shot files and images; fixtures and caches are shared (CShotFiles::languageDir()).
+LANGUAGE_DIR = REPO / "doc" / "en"
+IMAGES_DIR = LANGUAGE_DIR / "images"
+# Where `replay` renders; git-ignored. Only publishing writes the images.
 CHECK_DIR = IMAGES_DIR / "_check"
 # Where a session's images wait for `publish`; git-ignored.
 WORK_DIR = IMAGES_DIR / "_work"
-PAGES_DIR = REPO / "doc" / "pages"
-SHOTS_DIR = REPO / "doc" / "shots"
-FIXTURES_DIR = SHOTS_DIR / "fixtures"
+PAGES_DIR = LANGUAGE_DIR / "pages"
+SHOTS_DIR = LANGUAGE_DIR / "shots"
+SHARED_SHOTS_DIR = REPO / "doc" / "shots"
+
+
+def set_language(lang):
+    """Point every per-language path and the locale at `lang`'s folder, doc/<lang>/."""
+    global LOCALE, SYSTEM_LOCALE, LANGUAGE_DIR, IMAGES_DIR, CHECK_DIR, WORK_DIR, PAGES_DIR, SHOTS_DIR
+    LOCALE = lang
+    SYSTEM_LOCALE = LANGUAGES[lang]
+    LANGUAGE_DIR = REPO / "doc" / lang
+    IMAGES_DIR = LANGUAGE_DIR / "images"
+    CHECK_DIR = IMAGES_DIR / "_check"
+    WORK_DIR = IMAGES_DIR / "_work"
+    PAGES_DIR = LANGUAGE_DIR / "pages"
+    SHOTS_DIR = LANGUAGE_DIR / "shots"
+
+
+FIXTURES_DIR = SHARED_SHOTS_DIR / "fixtures"
 DEFAULT_FIXTURE = FIXTURES_DIR / "default"
 # Seeds a new page's base; a page's images only ever use the page's own.
 DEFAULT_BASE = DEFAULT_FIXTURE / "shots.ini"
@@ -55,7 +76,7 @@ SELFTEST_BASE = Path(__file__).resolve().parent / "selftest.ini"
 # Names the default fixture's folder, so it cannot name a page.
 RESERVED_PAGES = ("default",)
 # One tile cache for every run and the writer's session; git-ignored.
-CACHE_DIR = SHOTS_DIR / "_cache"
+CACHE_DIR = SHARED_SHOTS_DIR / "_cache"
 
 # What --shoot-scenario is given for the shots that name no scenario.
 BASE_SCENARIO = "-"
@@ -132,6 +153,8 @@ def page_base(page):
 FIXTURE_PARTS = ("projects", "maps", "dem", "poi", "routino", "database")
 # Describe a part, and are no part of it; CShotFiles kFixtureNotes.
 FIXTURE_NOTES = ("SOURCE.md", "README.md")
+# Marks a page's part as empty: the page shows the application without this data; CShotFiles kFixtureEmpty.
+FIXTURE_EMPTY = "EMPTY"
 # What CShotFixture loads as the project; the first by name.
 PROJECT_SUFFIXES = (".qms", ".gpx")
 
@@ -141,8 +164,12 @@ def fixture_part(page, part):
 
     The launcher creates every part's folder empty, so an empty one is the default's; so is one holding
     only a description or a dotfile a file manager left.
+
+    @return the part's folder, None when the page marks it empty with an `EMPTY` file
     """
     own = FIXTURES_DIR / page / part
+    if (own / FIXTURE_EMPTY).is_file():
+        return None
     holds = own.is_dir() and any(p.name not in FIXTURE_NOTES and not p.name.startswith(".") for p in own.iterdir())
     return own if holds else DEFAULT_FIXTURE / part
 
@@ -199,7 +226,7 @@ def compose_config(page, scenario, out, source=None):
     slashes: QSettings reads a backslash as an escape.
     """
     if scenario and not stays_inside(scenario):
-        sys.exit(f"the scenario name {scenario} names a place outside doc/shots/{page}")
+        sys.exit(f"the scenario name {scenario} names a place outside {SHOTS_DIR.relative_to(REPO) / page}")
     own = SHOTS_DIR / page / f"{scenario}.ini" if scenario else None
     if source is None:
         if own is not None and own.is_file():
@@ -210,19 +237,33 @@ def compose_config(page, scenario, out, source=None):
 
     # With it on, a run saves its workspace and CShotFixture refuses the next one.
     data["Database/saveOnExit"] = "false"
-    data["Canvas/mapPath"] = ini_string(fixture_part(page, "maps").as_posix())
-    for key, subdir in (("Canvas/demPaths", "dem"), ("Canvas/poiPaths", "poi"), ("Route/routino\\paths", "routino")):
-        if fixture_part(page, subdir).is_dir():
-            data[key] = ini_string(fixture_part(page, subdir).as_posix())
+    # An empty part also drops what the base carries for it, as on a first start.
+    for key, subdir in (("Canvas/mapPath", "maps"), ("Canvas/demPaths", "dem"), ("Canvas/poiPaths", "poi"),
+                        ("Route/routino\\paths", "routino")):
+        folder = fixture_part(page, subdir)
+        if folder is None:
+            data.pop(key, None)
+        elif folder.is_dir() or subdir == "maps":
+            data[key] = ini_string(folder.as_posix())
 
-    # The application reads the project to load from here; absolute, so no stored configuration keeps it.
+    # The application reads the project to load from here; absolute, so no stored configuration keeps it. Empty
+    # means none on purpose; CShotFixture::load() fails on a missing key.
     folder = fixture_part(page, "projects")
-    projects = sorted(p for p in folder.iterdir() if p.suffix.lower() in PROJECT_SUFFIXES) if folder.is_dir() else []
+    projects = []
+    if folder is None:
+        data["Shoot/fixtureProject"] = ini_string("")
+    elif folder.is_dir():
+        projects = sorted(p for p in folder.iterdir() if p.suffix.lower() in PROJECT_SUFFIXES)
     if projects:
         data["Shoot/fixtureProject"] = ini_string(projects[0].as_posix())
 
+    folder = fixture_part(page, "database")
+    if folder is None:
+        data.pop("Database/names", None)
+        for key in [key for key in data if key.startswith("Database/Entries\\")]:
+            del data[key]
     # Opening a database migrates an older schema, so a run only ever opens a copy.
-    databases = sorted(fixture_part(page, "database").glob("*.db"))
+    databases = sorted(folder.glob("*.db")) if folder is not None else []
     if databases:
         copy = out.parent / databases[0].name
         shutil.copyfile(databases[0], copy)
@@ -461,7 +502,7 @@ def cmd_replay(args):
         shots = [shot for shot in shots if not args.only or fnmatch.fnmatchcase(shot.get("id", ""), args.only)]
         outside = [shot.get("id", "") for shot in shots if not stays_inside(shot.get("id", ""))]
         if outside:
-            sys.exit(f"{page_file.name}: these ids name a place outside doc/images: {', '.join(outside)}")
+            sys.exit(f"{page_file.name}: these ids name a place outside {IMAGES_DIR.relative_to(REPO)}: {', '.join(outside)}")
         # Cut down to its id by a delete or rebind: CShotPage::run() skips it, and so does the grouping here.
         waiting = [shot.get("id", "") for shot in shots if "widget" not in shot and "exposure" not in shot]
         shots = [shot for shot in shots if "widget" in shot or "exposure" in shot]
@@ -623,7 +664,7 @@ def cmd_unused(args):
     for _, shot_id in dead:
         # A hand-edited id could name a file anywhere.
         if not stays_inside(shot_id):
-            print(f"  {shot_id} names a place outside doc/images; its images are left alone")
+            print(f"  {shot_id} names a place outside {IMAGES_DIR.relative_to(REPO)}; its images are left alone")
             continue
         # What CShotFiles::removeImages() removes, and the check render.
         for image in (IMAGES_DIR / f"{shot_id}.png", WORK_DIR / f"{shot_id}.png", WORK_DIR / f"{shot_id}.shot.json",
@@ -635,7 +676,10 @@ def cmd_unused(args):
 
 
 def page_name(value):
-    """`test`, `test.md` or `doc/pages/test.md` is page `test`; pages have no folders: replay reads doc/shots/*.json."""
+    """`test`, `test.md` or `doc/<lang>/pages/test.md` is page `test`.
+
+    Pages have no folders: replay reads doc/<lang>/shots/*.json.
+    """
     path = Path(value)
     if path.suffix in (".md", ".json"):
         path = path.with_suffix("")
@@ -690,7 +734,7 @@ def move_image(image, target):
 
 
 def cmd_publish(args):
-    """Copy the images under doc/images/_work into doc/images and empty _work. No render, no comparison, no git."""
+    """Copy the images under _work into doc/<lang>/images and empty _work. No render, no comparison, no git."""
     only = getattr(args, "only", None)
     published = []
     for image in sorted(WORK_DIR.rglob("*.png")):
@@ -732,12 +776,14 @@ def main():
     signal.signal(signal.SIGTERM, lambda number, frame: sys.exit(128 + number))
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--binary", help="the qmapshack executable; this checkout's build by default")
-    parser.add_argument("-o", "--out", default=str(CHECK_DIR), help="where replay renders (default: %(default)s)")
+    parser.add_argument("--lang", default="en", choices=sorted(LANGUAGES), help="the language (default: %(default)s)")
+    parser.add_argument("-o", "--out", help="where replay renders (default: doc/<lang>/images/_check)")
     parser.add_argument("-v", "--verbose", action="store_true", help="show the application's own output")
     commands = parser.add_subparsers(dest="command", required=True, metavar="{take,publish,replay,selftest,unused}")
     # The same options after the command; there they override what came before it.
     common = argparse.ArgumentParser(add_help=False, argument_default=argparse.SUPPRESS)
     common.add_argument("--binary", help=argparse.SUPPRESS)
+    common.add_argument("--lang", choices=sorted(LANGUAGES), help=argparse.SUPPRESS)
     common.add_argument("-o", "--out", help=argparse.SUPPRESS)
     common.add_argument("-v", "--verbose", action="store_true", help=argparse.SUPPRESS)
 
@@ -745,7 +791,7 @@ def main():
     take.add_argument("page", help="the page, e.g. test")
     take.set_defaults(func=cmd_take)
 
-    publish = commands.add_parser("publish", parents=[common], help="copy the images taken again into doc/images")
+    publish = commands.add_parser("publish", parents=[common], help="copy the images taken again into doc/<lang>/images")
     publish.add_argument("--report", metavar="FILE", help="write the published ids as JSON")
     publish.add_argument("--only", metavar="GLOB", help="shot ids: test/* is one page, test/menu-project one image")
     publish.set_defaults(func=cmd_publish)
@@ -772,6 +818,9 @@ def main():
     compose.set_defaults(func=cmd_compose)
 
     args = parser.parse_args()
+    set_language(args.lang)
+    if args.out is None:
+        args.out = str(CHECK_DIR)
     args.func(args)
 
 

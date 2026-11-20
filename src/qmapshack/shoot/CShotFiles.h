@@ -86,6 +86,14 @@ class CShotFiles {
   static QString writeWhole(const QString& path, const QByteArray& bytes);
   /** @return the bytes of @p path, empty when it cannot be read */
   static QByteArray readWhole(const QString& path);
+  /** @return the documentation's language: the run's `--locale` up to `_`, `en` without one */
+  static QString language();
+  /** @return the folder of language()'s pages, shot files and images; fixtures and tile caches are shared */
+  static QString languageDir(const QDir& repo);
+  /** @return where a session's images wait to be published */
+  static QString workDir(const QDir& repo);
+  /** @return the checkout holding @p shotFile, a page's shot file in languageDir()'s `shots/` */
+  static QDir repoOfShotFile(const QString& shotFile);
 
   QString shotFile() const;
   /** @return why the shot file cannot be read, empty when it can or does not exist */
@@ -106,6 +114,8 @@ class CShotFiles {
   QString makeFixtureDir() const;
   /** @return the parts the page's fixture has itself; every other one is the default's (shots.py fixture_part()) */
   QStringList ownFixtureParts() const;
+  /** @return the parts the page marks with an `EMPTY` file: the page runs without them (shots.py fixture_part()) */
+  QStringList emptyFixtureParts() const;
   /** @return the page's fixture folder and every part folder in it */
   QStringList fixtureFolders() const;
   /** @return the INI file the panel's size and where the panel and the application window sit are kept in */
@@ -131,7 +141,7 @@ class CShotFiles {
   /** @return the parked recording's settings: `doc/shots/_cache/<page>-trial.ini` */
   QString trialConfig() const;
 
-  /** @return true when `doc/images/_work/` holds an image of this page */
+  /** @return true when `doc/<lang>/images/_work/` holds an image of this page */
   bool hasUnpublishedImages() const;
 
   QStringList scenarioNames() const;

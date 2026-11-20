@@ -39,6 +39,7 @@ class CShotOptions {
     QString docPython;          /**< --doc-python */
     QString docTrial;           /**< --doc-trial, the parked recording to replay and store under this name */
     bool shootSelfTest = false; /**< --shoot-selftest, the recorder's cases instead of a page */
+    QString shootSelfTestGroup; /**< --shoot-selftest-group, one group of them; empty for all */
     QStringList stray;          /**< the companion switches given without --shoot or --doc */
   };
 

@@ -21,6 +21,7 @@
 
 #include <QList>
 #include <QPoint>
+#include <QPointF>
 #include <QRect>
 #include <QString>
 #include <QStringList>
@@ -39,14 +40,15 @@ namespace CShotMarks {
 struct mark_t {
   QString root;        /**< `main`, `menu`, `window` or `dock:<address>` */
   QString widget;      /**< address below the root; empty is the root */
-  QString part;        /**< empty, `handle`, `branch`, `title`, `action`, `tab`, `button` or `splitter` */
+  QString part;        /**< empty, `handle`, `branch`, `title`, `action`, `tab`, `button`, `splitter` or `point` */
   QString row;         /**< the tree row of a `branch` or `button`, as CShotAddress::rowPathOf() */
   QString action;      /**< the objectName of an `action` */
   QString button;      /**< a row's `button`, named as a step names it */
   QStringList between; /**< the two addresses a `splitter` divides */
-  QString shape; /**< `frame`, `disc`, `arrow` or `cursor`; empty is a disc for a knob, a tree arrow or a splitter, else
-                    a frame */
-  QPoint tail;   /**< an arrow's tail from its target's centre, image pixels, snapped to 45° */
+  QPointF point;       /**< a map `point`: longitude, latitude [°] */
+  QString shape;  /**< `frame`, `disc`, `arrow` or `cursor`; empty is a disc for a knob, a tree arrow, a splitter or a
+                     point, else a frame */
+  QPoint tail;    /**< an arrow's tail from its target's centre, image pixels, snapped to 45° */
   QString cursor; /**< `pointer`, `hand` or `resize` */
   QString name;   /**< what the writer reads */
 };

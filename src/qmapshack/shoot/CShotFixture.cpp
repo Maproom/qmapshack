@@ -66,9 +66,21 @@ T* firstItem(IGisProject* project) {
 
 qint32 CShotFixture::load(CShotContext& ctx) {
   QString filename;
+  bool noProject = false;
   {
     SETTINGS;
     filename = cfg.value(kProjectKey).toString();
+    // Present and empty: the page's projects part is marked EMPTY.
+    noProject = cfg.contains(kProjectKey) && filename.isEmpty();
+  }
+  if (noProject) {
+    const CGisListWks& wks = CGisWorkspace::self().getWksList();
+    if (!CShotWait::waitFor([&wks]() { return wks.isWorkspaceLoaded(); }, kLoadTimeoutMs, kPollMs)) {
+      qWarning() << "shoot: the workspace is still not restored after" << kLoadTimeoutMs << "ms";
+      return 1;
+    }
+    ctx.setFixture(nullptr, nullptr, nullptr, nullptr, nullptr);
+    return 0;
   }
   if (filename.isEmpty() || !QFileInfo::exists(filename)) {
     qWarning() << "shoot: there is no fixture project" << filename << "- the configuration names it as" << kProjectKey

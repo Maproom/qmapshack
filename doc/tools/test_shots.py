@@ -21,11 +21,11 @@ class ScratchTree(unittest.TestCase):
         self.saved = {name: getattr(shots, name) for name in ("REPO", "PAGES_DIR", "SHOTS_DIR", "IMAGES_DIR", "WORK_DIR",
                                                               "FIXTURES_DIR", "DEFAULT_FIXTURE", "DEFAULT_BASE")}
         shots.REPO = self.root
-        shots.PAGES_DIR = self.root / "doc" / "pages"
-        shots.SHOTS_DIR = self.root / "doc" / "shots"
-        shots.IMAGES_DIR = self.root / "doc" / "images"
+        shots.PAGES_DIR = self.root / "doc" / "en" / "pages"
+        shots.SHOTS_DIR = self.root / "doc" / "en" / "shots"
+        shots.IMAGES_DIR = self.root / "doc" / "en" / "images"
         shots.WORK_DIR = shots.IMAGES_DIR / "_work"
-        shots.FIXTURES_DIR = shots.SHOTS_DIR / "fixtures"
+        shots.FIXTURES_DIR = self.root / "doc" / "shots" / "fixtures"
         shots.DEFAULT_FIXTURE = shots.FIXTURES_DIR / "default"
         shots.DEFAULT_BASE = shots.DEFAULT_FIXTURE / "shots.ini"
 
@@ -198,7 +198,7 @@ class ShotFile(ScratchTree):
         self.put(broken, b"{ not json")
         with self.assertRaises(SystemExit) as raised:
             shots.read_shot_file(broken)
-        self.assertIn(str(Path("doc/shots/p.json")), str(raised.exception))
+        self.assertIn(str(Path("doc/en/shots/p.json")), str(raised.exception))
         self.assertIn("git", str(raised.exception))
 
     def test_shots_must_be_a_list(self):

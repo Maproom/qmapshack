@@ -9,13 +9,22 @@ html_title = "QMapShack documentation"
 extensions = ["myst_parser"]
 source_suffix = {".md": "markdown"}
 root_doc = "index"
-# pages/test.md is the image tool's test page (doc/tools/shots.py), not documentation.
-exclude_patterns = ["html", "images", "shots", "tools", "CLAUDE.md", "CREATING_DOCS.md", "WRITING_DOCS.md", "STYLE_GUIDE.md",
-                    "pages/test.md"]
+# The source is one language's folder, doc/<lang>/. pages/test.md is the image tool's test page
+# (doc/tools/shots.py), not documentation.
+exclude_patterns = ["images", "shots", "pages/test.md"]
+
+# Relative to the source, doc/<lang>/: the theme's labels per language, compiled by Sphinx itself.
+locale_dirs = ["../locales"]
 
 html_theme = "furo"
+# A heading jumped to keeps the page background; Furo's default is a yellow box.
+html_theme_options = {
+    "light_css_variables": {"color-highlight-on-target": "transparent"},
+    "dark_css_variables": {"color-highlight-on-target": "transparent"},
+}
 html_static_path = ["_static"]
 html_js_files = ["qms-search.js"]
+html_css_files = ["qms-layout.css"]
 html_copy_source = False
 html_show_sourcelink = False
 html_permalinks_icon = "#"

@@ -215,5 +215,23 @@ class ShotFile(ScratchTree):
         self.assertTrue(shots.may_match(Path("q.json"), None))
 
 
+
+class Completion(ScratchTree):
+    def setUp(self):
+        super().setUp()
+        for lang, page in (("en", "alpha"), ("en", "alps"), ("de", "alps")):
+            self.put(self.root / "doc" / lang / "pages" / f"{page}.md", b"# A\n")
+        self.put(shots.SHOTS_DIR / "alps.json", json.dumps({"shots": [{"id": "alps/alps-menu"}]}).encode())
+
+    def test_commands_pages_languages_and_ids(self):
+        self.assertEqual(shots.completions("shots.py ta"), ["take"])
+        self.assertEqual(shots.completions("shots.py take al"), ["alpha", "alps"])
+        self.assertEqual(shots.completions("shots.py --lang de take al"), ["alps"])
+        self.assertEqual(shots.completions("shots.py --lang "), ["de", "en"])
+        self.assertEqual(shots.completions("shots.py replay --only alps/a"), ["alps/alps-menu"])
+        self.assertEqual(shots.completions("shots.py take alps "), [])
+        # A file or folder after these options is bash's own completion.
+        self.assertEqual(shots.completions("shots.py -o "), [])
+
 if __name__ == "__main__":
     unittest.main()

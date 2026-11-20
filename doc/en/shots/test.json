@@ -37,11 +37,11 @@
     },
     "shots": [
         {
-            "id": "test/menu-project",
+            "id": "test/test-menu-project",
             "widget": "menuProject"
         },
         {
-            "id": "test/main-window",
+            "id": "test/test-main-window",
             "size": [
                 1200,
                 800
@@ -49,7 +49,7 @@
             "widget": ""
         },
         {
-            "id": "test/workspace-filter",
+            "id": "test/test-workspace-filter",
             "set": {
                 "lineFilter.text": "track"
             },
@@ -60,7 +60,7 @@
             "widget": "dockWorkspace"
         },
         {
-            "id": "test/toolbar",
+            "id": "test/test-toolbar",
             "rect": [
                 0,
                 24,
@@ -75,10 +75,10 @@
         },
         {
             "exposure": "UnitsSetup",
-            "id": "test/units-setup"
+            "id": "test/test-units-setup"
         },
         {
-            "id": "test/database",
+            "id": "test/test-database",
             "size": [
                 1200,
                 800
@@ -87,70 +87,70 @@
         },
         {
             "exposure": "ProjWpt",
-            "id": "test/proj-wpt"
+            "id": "test/test-proj-wpt"
         },
         {
             "exposure": "InvalidTrk",
-            "id": "test/invalid-trk"
+            "id": "test/test-invalid-trk"
         },
         {
             "exposure": "EnergyCyclingDialog",
-            "id": "test/energy-cycling"
+            "id": "test/test-energy-cycling"
         },
         {
             "exposure": "CombineTrk",
-            "id": "test/combine-trk"
+            "id": "test/test-combine-trk"
         },
         {
             "exposure": "CreateRouteFromWpt",
-            "id": "test/create-route-from-wpt"
+            "id": "test/test-create-route-from-wpt"
         },
         {
             "exposure": "SelectCopyAction",
-            "id": "test/select-copy-action"
+            "id": "test/test-select-copy-action"
         },
         {
             "exposure": "SelectSaveAction",
-            "id": "test/select-save-action"
+            "id": "test/test-select-save-action"
         },
         {
             "exposure": "ResolveDatabaseConflict",
-            "id": "test/resolve-database-conflict"
+            "id": "test/test-resolve-database-conflict"
         },
         {
             "exposure": "SelDevices",
-            "id": "test/sel-devices"
+            "id": "test/test-sel-devices"
         },
         {
             "exposure": "TrkToRteDialog",
-            "id": "test/trk-to-rte"
+            "id": "test/test-trk-to-rte"
         },
         {
             "exposure": "TrkToAreaDialog",
-            "id": "test/trk-to-area"
+            "id": "test/test-trk-to-area"
         },
         {
             "exposure": "TimeDialog",
-            "id": "test/time-dialog"
+            "id": "test/test-time-dialog"
         },
         {
             "exposure": "PositionDialog",
-            "id": "test/position-dialog"
+            "id": "test/test-position-dialog"
         },
         {
             "exposure": "ElevationDialog",
-            "id": "test/elevation-dialog"
+            "id": "test/test-elevation-dialog"
         },
         {
             "exposure": "InputDialog",
-            "id": "test/input-dialog"
+            "id": "test/test-input-dialog"
         },
         {
             "exposure": "SetupIconAndName",
-            "id": "test/setup-icon-and-name"
+            "id": "test/test-setup-icon-and-name"
         },
         {
-            "id": "test/track-screen-option",
+            "id": "test/test-track-screen-option",
             "note": "A part of the window in track-screen-option",
             "rect": [
                 440,
@@ -167,7 +167,7 @@
         },
         {
             "active": "actionEditDetails",
-            "id": "test/menu-track",
+            "id": "test/test-menu-track",
             "open": {
                 "at": [
                     0.1,

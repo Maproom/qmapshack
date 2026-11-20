@@ -12,7 +12,7 @@ Discussion: Maproom/qmapshack#1209. The image tool is `src/qmapshack/shoot/DESIG
 
 ## Decisions
 
-- Sphinx with MyST and Furo. Sources in `doc/index.md` and `doc/pages/`.
+- Sphinx with MyST and Furo. Sources in `doc/en/index.md` and `doc/en/pages/`.
 - One generated HTML tree, `doc/html/`, committed. No `.qch` or `.qhc` for QMapShack.
 - F1 shows `doc/html/` of the source tree the binary was built from, if it exists, else the installed
   copy. On a developer system the source tree wins, also for an installed build.
@@ -43,7 +43,7 @@ Worst case, all wiki pages (96 pages, 630 images). `git gc`, then `git count-obj
 
 1. Test branch `docs-html-test`: F1, search, index and dark mode on each OS.
 2. Merge the help change and the `doc` target.
-3. Packaging: `msvc_64/copyfiles.bat`, `CopyFilesGis.bat`, the NSIS scripts, `MacOSX/bundle-qmapshack.sh`.
+3. Packaging is the package maintainers' job, not this plan's.
 4. Done: `release.py` builds only QMapTool's help from the wiki.
 5. Pages Action.
 6. Style guide: wthaem's draft as a PR. The term is image, not picture.
@@ -58,5 +58,6 @@ Worst case, all wiki pages (96 pages, 630 images). `git gc`, then `git count-obj
 - The user interface mixes title case (Load GIS Data) and sentence case (Add empty project) and uses
   `...`; the style guide wants `…`, and the pages follow the user interface. Move the user interface to
   sentence case and `…`?
-- Translations: not decided. Check gettext once there is real text.
+- Translations: `translation-plan.md`.
 - `src/qmapshack/doc/QMSHelp.*` can go once the new help replaces it.
+

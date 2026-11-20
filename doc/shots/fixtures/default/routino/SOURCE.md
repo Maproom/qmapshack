@@ -6,7 +6,7 @@ Map data © [OpenStreetMap contributors](https://www.openstreetmap.org/copyright
 [ODbL](https://opendatacommons.org/licenses/odbl/). Retrieved through the Overpass API, data as of
 2026-09-15 07:09 UTC.
 
-Extent: the DEM's, lat 47.472–47.565, lon 10.459–10.636. Taken are the ways with a `highway` tag and
+Extent: the DEM's, lat 47.472–47.565, lon 10.459–10.636. It holds the ways with a `highway` tag,
 their nodes, and the route and turn restriction relations. The Overpass reply carries `<note>` and
 `<meta>` elements, which Routino's parser rejects. Built with Routino 3.4.1 and the arguments of
 QMapShack's own database builder.

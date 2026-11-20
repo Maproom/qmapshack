@@ -39,7 +39,7 @@ only what the writer sees or does goes to Oliver.
 - Preview: a toggle "Show marks" in the panel's Image group, on by default. On, QMapShack shows the
   selected row's marks and updates them whenever its mark list changes; they are hidden while the
   image is taken, while recording and while Region drags. Off, the marks are still stored and still go into the image.
-- Marks live and die with the shot entry in `doc/shots/<page>.json`: Retake and All keep them and draw
+- Marks live and die with the shot entry in `doc/en/shots/<page>.json`: Retake and All keep them and draw
   them again, Revert resets them with the entry, Publish only copies the image. A shot removed and
   defined again needs its marks again.
 - The mark key is Ctrl+Shift+F10, caught by the same application-wide filter as Ctrl+Shift+F9
@@ -90,8 +90,8 @@ only what the writer sees or does goes to Oliver.
   gets another row, they go with the image to that row.
 - "Throw away" after a take keeps the marks placed for it: on a row not taken yet they go back to the
   pending marks; a thrown-away image does not clear "marks changed".
-- Marks changed on a taken row: an image waiting in `doc/images/_work/` is deleted, a published one
-  in `doc/images/<page>/` stays until a new take is published; the row says the marks changed and
+- Marks changed on a taken row: an image waiting in `doc/en/images/_work/` is deleted, a published one
+  in `doc/en/images/<page>/` stays until a new take is published; the row says the marks changed and
   the image must be taken again, until it is.
 - Ctrl+Shift+F10 while recording a scenario is ignored; the panel says "Marks are placed after Stop,
   on an image."
@@ -181,7 +181,7 @@ only what the writer sees or does goes to Oliver.
   - Throw away removes only what that take wrote.
   - Each mark records its root: `root: "main" | "menu" | "window" | "dock:<address>"` (main window, the
     open menu, the window a scenario leaves open or the exposure's dialog, a floating docker).
-  - No shot file uses `mark` yet (`grep -l '"mark"' doc/shots/*.json` finds none): no old form to
+  - No shot file uses `mark` yet (`grep -l '"mark"' doc/en/shots/*.json` finds none): no old form to
     convert; the built form (addresses below the shot's widget) is replaced.
   - Pending marks of a row not taken yet: dropped when its Taken in changes (as for a shot); Clean
     drops those of rows no page references.
@@ -256,7 +256,7 @@ Built in stages on `QMS-1319` (not pushed): 6ee6ecb66 drawing, 2615b2118 placing
   delegates. Self test points at both through `CShotMarker::markAtPointer()`, moving the main window onto the 800x800
   offscreen screen first. Untested by hand on `:5`.
 - A disc on a target too big for it (its hole cut the disc apart on a tab) is refused, when pointing and when
-  drawn (Oliver: "Frame instead"). `doc/shots/test.json` reverted to HEAD on his request.
+  drawn (Oliver: "Frame instead"). `doc/en/shots/test.json` reverted to HEAD on his request.
 - The marker's refusals show as a tooltip at the pointer too (`CShotMarker::refuse()`), not only in the panel's
   status line; prompts while choosing stay in the status line.
 - 2026-11-19, Oliver's panel points: hints at the pointer wrap at 40 characters (`CShotMarker::hint()`);
@@ -276,7 +276,7 @@ Built in stages on `QMS-1319` (not pushed): 6ee6ecb66 drawing, 2615b2118 placing
   floating docker's own image); a failed take names its reason at the pointer; one `withRowDelegate()`; docker tab
   lookup in `CShotMarks::dockTab()`/`dockOfTab()`.
 - Self test cases for all of it; last run 138 of 138 and 57 of 57.
-- `doc/shots/test.json` holds Oliver's own test marks: keep, never commit.
+- `doc/en/shots/test.json` holds Oliver's own test marks: keep, never commit.
 
 To discuss first: Oliver's replay of `test/menu-project` failed with "marks the slider in Workspace, which is not in
 the image" while the row's image was `menuProject`; after he took it again on `IGisWorkspace` it replays. How marks

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check doc/index.md and doc/pages/*.md against the style guide, as a compiler would.
+"""Check every language's index.md and pages/*.md under doc/<lang>/ against the style guide, as a compiler would.
 
 The word lists come from the tables "Words" and "Names" in doc/STYLE_GUIDE.md. Prints one line per
 mistake, `<file>:<line>: <message>`, and returns the number of mistakes. Needs nothing but Python 3.9.
@@ -16,6 +16,8 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parents[2]
 DOC_DIR = REPO / "doc"
 STYLE_GUIDE = DOC_DIR / "STYLE_GUIDE.md"
+# The style guide's word lists are English: other languages get the rules that do not depend on words.
+WORD_LANGUAGE = "en"
 
 MAX_SENTENCE_WORDS = 25
 MAX_PARAGRAPH_SENTENCES = 4
@@ -23,14 +25,17 @@ MAX_PARAGRAPH_SENTENCES = 4
 PROSE_DIRECTIVES = {"note", "tip", "hint", "warning", "important", "caution", "attention", "danger", "error",
                     "admonition", "seealso"}
 FIRST_PERSON = re.compile(r"\b(we|We|our|Our|ours|us)\b")
-FENCE = re.compile(r"^(\s*)(`{3,}|~{3,}|:{3,})\s*(\{([\w-]+)\})?\s*(.*)$")
+# A fence can open a list item: "- ```{image} …".
+FENCE = re.compile(r"^(\s*(?:[-*+]\s+|\d+[.)]\s+)?)(`{3,}|~{3,}|:{3,})\s*(\{([\w-]+)\})?\s*(.*)$")
 HEADING = re.compile(r"^(#{1,6})\s+(.*?)\s*$")
 SETEXT = re.compile(r"^\s*(=+|-+)\s*$")
 REFERENCE_DEFINITION = re.compile(r"^\[([^\]^]+)\]:\s*\S+")
 REFERENCE_USE = re.compile(r"\]\[([^\]]+)\]")
 INLINE_IMAGE = re.compile(r"!\[([^\]]*)\]\(([^)\s]+)")
 IMAGE_PATH = "../images/{page}/"
-IMAGE_NAME = re.compile(r"[a-z0-9]+(-[a-z0-9]+)*\.png")
+# Formats a browser displays: screenshots PNG, drawings SVG, photos JPG (doc/STYLE_GUIDE.md).
+IMAGE_EXTENSIONS = ("png", "jpg", "svg", "gif", "webp")
+IMAGE_NAME = re.compile(r"[a-z0-9]+(-[a-z0-9]+)*\.(" + "|".join(IMAGE_EXTENSIONS) + ")")
 PAGE_NAME = re.compile(r"[a-z0-9]+(-[a-z0-9]+)*")
 HTML = re.compile(r"<!--|</?[A-Za-z][\w-]*(\s[^<>]*)?/?>")
 VERSION_NOTE = re.compile(r"\*(Since|Removed in) QMapShack \d+\.\d+(\.\d+)?\*")
@@ -38,6 +43,7 @@ VERSION_NOTE = re.compile(r"\*(Since|Removed in) QMapShack \d+\.\d+(\.\d+)?\*")
 VERSION_NOTE_LIKE = re.compile(r"^\*(Since|Removed|Deprecated|Applies|Added|New)\b[^*]*\*$")
 WORD = re.compile(r"[A-Za-z][\w'’-]*")
 CODE = re.compile(r"(`+).+?\1")
+URL = re.compile(r"\b[a-z][a-z0-9+.-]*://[^\s)\]>]+")
 QUOTED = re.compile(r'"[^"]*"|“[^”]*”')
 SENTENCE_END = re.compile(r"(?<=[.!?])\s+(?=[A-Z0-9*`\[(\"“§])")
 
@@ -45,6 +51,7 @@ SENTENCE_END = re.compile(r"(?<=[.!?])\s+(?=[A-Z0-9*`\[(\"“§])")
 def strip_inline(text):
     """Text as a reader reads it: without code, link targets and roles; a UI label becomes '§'."""
     text = CODE.sub(" ", text)
+    text = URL.sub(" ", text)
     text = re.sub(r"\{[\w:-]+\}", " ", text)
     # Not a gap: "Click **Apply** on" must not read as "click on".
     text = re.sub(r"\*\*[^*]+\*\*", " § ", text)
@@ -116,6 +123,10 @@ class Page:
         self.rules = rules
         self.name = path.relative_to(REPO).as_posix() if path.is_relative_to(REPO) else str(path)
         self.is_guide = path.resolve() == STYLE_GUIDE.resolve()
+        # doc/<lang>/…; the guide itself and a page outside doc/ count as English.
+        resolved = path.resolve()
+        parts = resolved.relative_to(DOC_DIR.resolve()).parts if resolved.is_relative_to(DOC_DIR.resolve()) else ()
+        self.words_apply = len(parts) < 2 or parts[0] == WORD_LANGUAGE
 
     def report(self, line, message):
         self.rules.mistakes.append(f"{self.name}:{line}: {message}")
@@ -306,6 +317,8 @@ class Page:
             headings[key] = number
 
     def check_sentence_case(self, number, text, what):
+        if not self.words_apply:
+            return
         # A quoted user interface label keeps its capitals: ## The "Load GIS Data" dialog
         words = WORD.findall(QUOTED.sub(" ", strip_inline(text.replace(";", " "))))
         for word in words[1:]:
@@ -343,9 +356,11 @@ class Page:
         if self.path.parent.name != "pages":
             prefix = prefix[len("../"):]
         if not path.startswith(prefix):
-            self.report(number, f"image '{path}': put it in doc/images/{page}/ and write '{prefix}<name>.png'")
+            lang = (self.path.parent.parent if self.path.parent.name == "pages" else self.path.parent).name
+            self.report(number, f"image '{path}': put it in doc/{lang}/images/{page}/ and write '{prefix}<name>.<ext>'")
         elif not IMAGE_NAME.fullmatch(path[len(prefix):]):
-            self.report(number, f"image '{path}': name it '<subject>[-<variant>].png' in lower case with hyphens")
+            self.report(number, f"image '{path}': name it '<subject>[-<variant>].<ext>' in lower case with hyphens, "
+                        f"<ext> one of {', '.join(IMAGE_EXTENSIONS)}")
 
     def check_images(self, number, line):
         for _, path in INLINE_IMAGE.findall(CODE.sub(" ", line)):
@@ -357,6 +372,8 @@ class Page:
                 self.report(number, f"menu path '{label}': separate the entries with ' → '")
 
     def check_words(self, number, line):
+        if not self.words_apply:
+            return
         # A quoted word is mentioned, not used.
         text = QUOTED.sub(" ", strip_inline(line))
         for pattern, wrong, right in self.rules.wrong_words:
@@ -408,10 +425,14 @@ def excluded_patterns():
 
 
 def pages():
+    """Every language folder's pages, doc/<lang>/index.md and pages/*.md, less Sphinx's exclude_patterns."""
     patterns = excluded_patterns()
-    found = [DOC_DIR / "index.md"] + sorted((DOC_DIR / "pages").glob("*.md"))
-    return [p for p in found
-            if not any(fnmatch.fnmatch(p.relative_to(DOC_DIR).as_posix(), pattern) for pattern in patterns)]
+    found = []
+    for index in sorted(DOC_DIR.glob("*/index.md")):
+        source = index.parent
+        found += [p for p in [index] + sorted((source / "pages").glob("*.md"))
+                  if not any(fnmatch.fnmatch(p.relative_to(source).as_posix(), pattern) for pattern in patterns)]
+    return found
 
 
 def check(paths=None):

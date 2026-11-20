@@ -16,6 +16,7 @@ Needs Python 3.9 and this checkout's build configured with -DQMS_DOC_MODE=ON.
 """
 
 import argparse
+import concurrent.futures
 import fnmatch
 import json
 import os
@@ -27,6 +28,8 @@ import sys
 import tempfile
 import threading
 from pathlib import Path
+
+from check_pages import IMAGE_EXTENSIONS
 
 # Every image is rendered with these. The font family is bundled: offscreen has no font database.
 STYLE = "Fusion"
@@ -73,6 +76,10 @@ DEFAULT_FIXTURE = FIXTURES_DIR / "default"
 DEFAULT_BASE = DEFAULT_FIXTURE / "shots.ini"
 # The self test's own base: it checks the recorder, so no page's arrangement may move its cases.
 SELFTEST_BASE = Path(__file__).resolve().parent / "selftest.ini"
+# CShotSelfTest::groups() plus "doc", CShotEntry's documentation mode cases; each runs in a process of its own.
+SELFTEST_GROUPS = ["qt-controls", "workspace", "map", "plot-icon-grid", "row-buttons", "geo-search-menus", "map-pois",
+                   "scenario-twice", "render-all", "replay-refuses", "shoot-scenario", "marks", "menu-names"]
+SELFTEST_DOC_GROUP = "doc"
 # Names the default fixture's folder, so it cannot name a page.
 RESERVED_PAGES = ("default",)
 # One tile cache for every run and the writer's session; git-ignored.
@@ -91,7 +98,7 @@ DEADLINE_EXIT = 124
 LOCK_FILE = ".lock" if sys.platform == "darwin" else ".QMapShack.lock"
 # IAppSetup::path() says "path created" instead of "path" when the directory did not exist yet.
 PATH_LINE = re.compile(r'"(CACHE|USER DATA)" path (?:created )?"(.*)"')
-IMAGE_REFERENCE = re.compile(r"images/([\w./-]+)\.png")
+IMAGE_REFERENCE = re.compile(r"images/([\w./-]+)\.(?:" + "|".join(IMAGE_EXTENSIONS) + ")")
 
 
 def shot_label(shot_id):
@@ -136,7 +143,8 @@ def write_ini(path, data):
         lines.append(f"[{section}]")
         lines += [f"{key}={value}" for key, value in sorted(sections[section])]
         lines.append("")
-    path.write_text("\n".join(lines), encoding="utf-8")
+    with path.open("w", encoding="utf-8", newline="\n") as file:
+        file.write("\n".join(lines))
 
 
 def ini_string(value):
@@ -202,7 +210,8 @@ def write_shot_file(path, content):
     # QJsonDocument opens and closes an empty object or list on two lines.
     text = EMPTY_CONTAINER.sub(lambda m: f"{m[1]}{m[2]}{m[3]}\n{m[1]}{m[4]}{m[5]}", text)
     temporary = path.with_name(path.name + ".tmp")
-    temporary.write_text(text + "\n", encoding="utf-8")
+    with temporary.open("w", encoding="utf-8", newline="\n") as file:
+        file.write(text + "\n")
     os.replace(temporary, path)
 
 
@@ -392,6 +401,17 @@ def app_args(config):
             "--font-size", FONT_SIZE, "--color-scheme", COLOR_SCHEME, "--locale", LOCALE]
 
 
+# Applications started by run_app() and not yet ended, so a stopped parallel run can kill them all.
+RUNNING = set()
+RUNNING_LOCK = threading.Lock()
+
+
+def kill_running():
+    with RUNNING_LOCK:
+        for process in RUNNING:
+            process.kill()
+
+
 def run_app(cmd, scratch, verbose, on_line):
     """Run a headless application in the scratch directory, hand each line of its stderr to on_line.
 
@@ -400,6 +420,8 @@ def run_app(cmd, scratch, verbose, on_line):
     # In the scratch directory, so the run leaves nothing anywhere else.
     process = subprocess.Popen(cmd, env=pinned_env(), cwd=scratch, stdout=None if verbose else subprocess.DEVNULL,
                                stderr=subprocess.PIPE, encoding="utf-8", errors="replace")
+    with RUNNING_LOCK:
+        RUNNING.add(process)
     timed_out = threading.Event()
 
     def kill():
@@ -422,6 +444,8 @@ def run_app(cmd, scratch, verbose, on_line):
         raise
     finally:
         watchdog.cancel()
+        with RUNNING_LOCK:
+            RUNNING.discard(process)
     return code, timed_out.is_set()
 
 
@@ -571,8 +595,34 @@ def cmd_replay(args):
         sys.exit(f"{len(broken)} page(s) did not replay")
 
 
+def run_selftest_group(binary, out, page_file, group, verbose):
+    """One self test group in an application of its own.
+
+    @return the exit code, whether the watchdog killed it, and its `shoot:` lines
+    """
+    lines = []
+    with tempfile.TemporaryDirectory(prefix="qms-selftest-") as scratch:
+        config = Path(scratch) / "shots.ini"
+        # The default fixture, whatever the page's own holds; the shot file only names the run.
+        compose_config(DEFAULT_FIXTURE.name, None, config, source=SELFTEST_BASE)
+        group_out = out / group
+        group_out.mkdir(parents=True, exist_ok=True)
+        cmd = [str(binary), "-platform", "offscreen", *app_args(config), "--shoot", str(group_out),
+               "--shoot-target", str(page_file), "--shoot-selftest", "--shoot-selftest-group", group]
+        if verbose:
+            cmd.append("-d")
+            print("      " + " ".join(cmd), file=sys.stderr)
+
+        def collect(line):
+            if "shoot: " in line:
+                lines.append(line.split("shoot: ", 1)[1].rstrip())
+
+        code, timed_out = run_app(cmd, scratch, verbose, collect)
+    return code, timed_out, lines
+
+
 def cmd_selftest(args):
-    """The recorder's own cases, in one application with the fixture loaded.
+    """The recorder's own cases, one application per group, side by side, each with the fixture loaded.
     """
     binary = find_binary(args.binary)
     cache, user_data = user_paths(binary)
@@ -590,35 +640,59 @@ def cmd_selftest(args):
     watched = (cache, user_data)
     before = snapshot(watched)
 
-    with tempfile.TemporaryDirectory(prefix="qms-selftest-") as scratch:
-        config = Path(scratch) / "shots.ini"
-        # The default fixture, whatever the page's own holds; the shot file only names the run.
-        compose_config(DEFAULT_FIXTURE.name, None, config, source=SELFTEST_BASE)
-        cmd = [str(binary), "-platform", "offscreen", *app_args(config), "--shoot", str(out),
-               "--shoot-target", str(page_file), "--shoot-selftest"]
-        if args.verbose:
-            cmd.append("-d")
-            print("      " + " ".join(cmd), file=sys.stderr)
+    groups = SELFTEST_GROUPS + [SELFTEST_DOC_GROUP]
+    results = {}
+    try:
+        with concurrent.futures.ThreadPoolExecutor(max_workers=args.jobs) as pool:
+            futures = {pool.submit(run_selftest_group, binary, out, page_file, group, args.verbose): group
+                       for group in groups}
+            for future in concurrent.futures.as_completed(futures):
+                results[futures[future]] = future.result()
+    finally:
+        kill_running()
 
-        def report(line):
-            if "shoot: PASS" in line or "shoot: FAIL" in line or "shoot: self test" in line:
-                print("  " + line.split("shoot: ", 1)[1].rstrip())
+    problems = []
+    unreplayed = None
+    mismatched = False
+    for group in groups:
+        code, timed_out, lines = results[group]
+        print(f"  [{group}]")
+        for line in lines:
+            if line.startswith("PASS") or line.startswith("FAIL") or line.startswith("self test"):
+                print("    " + line)
+            elif line.startswith("unreplayed"):
+                names = set(filter(None, line[len("unreplayed"):].strip().split(",")))
+                unreplayed = names if unreplayed is None else unreplayed & names
+            elif line.startswith("groups"):
+                known = line[len("groups"):].strip().split(",")
+                if known != SELFTEST_GROUPS and not mismatched:
+                    mismatched = True
+                    problems.append(f"the application's groups {', '.join(known)} differ from SELFTEST_GROUPS in "
+                                    "shots.py; change both")
+        if timed_out:
+            problems.append(f"{group}: did not finish within {RUN_TIMEOUT_S}s - a case opened something nothing closes")
+        elif code == DEADLINE_EXIT:
+            problems.append(f"{group}: stopped at a case that did not return; the cases after it did not run")
+        elif not 0 <= code <= MAX_FAILURE_EXIT:
+            problems.append(f"{group}: crashed with exit code {code}")
+        elif code != 0:
+            problems.append(f"{group}: {code} case(s) failed")
 
-        code, timed_out = run_app(cmd, scratch, args.verbose, report)
+    # Coverage spans the groups: a handler counts once any group replayed it.
+    if unreplayed is None:
+        problems.append("no group reported the handlers it replayed")
+    elif unreplayed:
+        problems.append(f"no case replays the handlers {', '.join(sorted(unreplayed))}")
+    else:
+        print("  every handler replays in some case")
 
     leaked = changed(before, snapshot(watched))
     for path in leaked:
         print(f"  the self test changed {path}")
-    if timed_out:
-        sys.exit(f"the self test did not finish within {RUN_TIMEOUT_S}s - a case opened something nothing closes")
     if leaked:
-        sys.exit(f"the self test wrote outside the scratch tree: {len(leaked)} file(s)")
-    if code == DEADLINE_EXIT:
-        sys.exit("the self test stopped at a case that did not return; the cases after it did not run")
-    if not 0 <= code <= MAX_FAILURE_EXIT:
-        sys.exit(f"the self test crashed with exit code {code}")
-    if code != 0:
-        sys.exit(f"{code} case(s) failed")
+        problems.append(f"the self test wrote outside the scratch tree: {len(leaked)} file(s)")
+    if problems:
+        sys.exit("\n".join(problems))
     print("every case passes")
 
 
@@ -636,7 +710,7 @@ def cmd_unused(args):
     # An image with no shot and no page, left behind by a shot that was removed.
     ids = {shot_id for _, shot_id in dead}
     orphans = []
-    for image in sorted(IMAGES_DIR.rglob("*.png")):
+    for image in sorted(p for ext in IMAGE_EXTENSIONS for p in IMAGES_DIR.rglob(f"*.{ext}")):
         relative = image.relative_to(IMAGES_DIR)
         if relative.parts[0].startswith("_"):
             continue
@@ -753,7 +827,8 @@ def cmd_publish(args):
         except OSError:
             pass  # not empty, or gone: either way nothing to do
     if args.report:
-        Path(args.report).write_text(json.dumps({"published": published}, indent=4) + "\n", encoding="utf-8")
+        with Path(args.report).open("w", encoding="utf-8", newline="\n") as file:
+            file.write(json.dumps({"published": published}, indent=4) + "\n")
     for shot_id in published:
         print(f"  {shot_id}")
     print(f"{len(published)} image(s) published" if published else "nothing was taken again, nothing to publish")
@@ -801,6 +876,8 @@ def main():
     replay.set_defaults(func=cmd_replay)
 
     selftest = commands.add_parser("selftest", parents=[common], help="the recorder's own cases: record real input, compare the steps")
+    selftest.add_argument("-j", "--jobs", type=int, default=os.cpu_count() or 1,
+                          help="groups run side by side (default: the number of processors, %(default)s)")
     selftest.add_argument("--page", default="test", help="the shot file that names the run; base and fixture are the self test's own (default: %(default)s)")
     selftest.set_defaults(func=cmd_selftest)
 

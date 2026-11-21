@@ -1,0 +1,22 @@
+/* A list item holds its right-aligned image, so the next item starts below both. */
+article li:has(> img.align-right),
+article li:has(> p > img.align-right),
+article li:has(> img.below-right) {
+  display: list-item flow-root;
+  padding: 0.75em 0;
+  border-bottom: 1px solid var(--color-background-border);
+}
+
+article li > img.align-right,
+article li > p > img.align-right {
+  margin: 0 0 0 1.5em;
+  border: 1px solid var(--color-background-border);
+}
+
+/* A wide image below its text, at the right edge like the others. */
+article li > img.below-right {
+  display: block;
+  clear: both;
+  margin: 0.5em 0 0 auto;
+  border: 1px solid var(--color-background-border);
+}

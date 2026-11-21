@@ -1,0 +1,153 @@
+{
+  "scenarios": {
+    "stacked": [
+      {
+        "do": "layout",
+        "state": "AAAA/wAAAAD9AAAAAgAAAAAAAAEaAAAC0PwCAAAAAvwAAAAAAAAB4AAAANUA////+gAAAAABAAAAAvsAAAAQAGQAbwBjAGsATQBhAHAAcwEAAAAA/////wAAAH0A////+wAAAA4AZABvAGMAawBEAGUAbQEAAAAA/////wAAAH0A////+wAAAA4AZABvAGMAawBQAG8AaQEAAAHkAAAA7AAAAH0A////AAAAAQAAAWoAAALQ/AIAAAAE+wAAABoAZABvAGMAawBXAG8AcgBrAHMAcABhAGMAZQEAAAAAAAAAdgAAAH0A////+wAAABgAZABvAGMAawBEAGEAdABhAGIAYQBzAGUBAAAAegAAAKoAAAB9AP////sAAAAOAGQAbwBjAGsAUgB0AGUBAAABKAAAAQoAAAB9AP////sAAAAYAGQAbwBjAGsAUgBlAGEAbAB0AGkAbQBlAQAAAjYAAACaAAAAfQD///8AAAIkAAAC0AAAAAQAAAAEAAAACAAAAAj8AAAAAQAAAAIAAAABAAAADgB0AG8AbwBsAEIAYQByAQAAAAD/////AAAAAAAAAAA=",
+        "tab": 0
+      }
+    ]
+  },
+  "shots": [
+    {
+      "id": "quickstart-main-window/first-start",
+      "size": [
+        1200,
+        800
+      ],
+      "widget": ""
+    },
+    {
+      "id": "quickstart-main-window/panel-resize",
+      "rect": [
+        0,
+        240,
+        300,
+        110
+      ],
+      "size": [
+        1200,
+        800
+      ],
+      "widget": "",
+      "mark": [
+        {
+          "root": "main",
+          "part": "splitter",
+          "between": [
+            "dockMaps",
+            "dockDem"
+          ],
+          "shape": "cursor",
+          "cursor": "resize"
+        }
+      ]
+    },
+    {
+      "id": "quickstart-main-window/panel-move",
+      "rect": [
+        826,
+        180,
+        300,
+        180
+      ],
+      "size": [
+        1200,
+        800
+      ],
+      "widget": "",
+      "mark": [
+        {
+          "root": "main",
+          "widget": "dockDatabase",
+          "part": "title",
+          "shape": "cursor",
+          "cursor": "hand",
+          "name": "drag here"
+        }
+      ]
+    },
+    {
+      "id": "quickstart-main-window/panel-buttons",
+      "rect": [
+        826,
+        130,
+        300,
+        150
+      ],
+      "size": [
+        1200,
+        800
+      ],
+      "widget": "",
+      "mark": [
+        {
+          "root": "main",
+          "widget": "dockDatabase/QDockWidgetTitleButton#1",
+          "shape": "arrow",
+          "tail": [
+            45,
+            -30
+          ],
+          "name": "close"
+        },
+        {
+          "root": "main",
+          "widget": "dockDatabase/QDockWidgetTitleButton#0",
+          "shape": "arrow",
+          "tail": [
+            45,
+            30
+          ],
+          "name": "detach"
+        }
+      ]
+    },
+    {
+      "id": "quickstart-main-window/panel-stack",
+      "scenario": "stacked",
+      "size": [
+        1200,
+        800
+      ],
+      "widget": "",
+      "rect": [
+        0,
+        430,
+        300,
+        130
+      ],
+      "mark": [
+        {
+          "root": "main",
+          "widget": "dockDem",
+          "part": "tab",
+          "shape": "cursor",
+          "cursor": "pointer",
+          "name": "click to switch"
+        }
+      ]
+    },
+    {
+      "id": "quickstart-main-window/menu-window",
+      "widget": "menuWindow"
+    },
+    {
+      "id": "quickstart-main-window/give-it-a-home",
+      "size": [
+        1200,
+        800
+      ],
+      "widget": "",
+      "set": {
+        "tabWidget/QStackedWidget#0/CCanvas#0/QTextBrowser#1/qt_scrollarea_vcontainer/QScrollBar#0.value": 1122
+      },
+      "rect": [
+        600,
+        618,
+        200,
+        104
+      ]
+    }
+  ]
+}

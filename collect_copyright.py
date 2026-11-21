@@ -35,7 +35,7 @@ for path in Path('src').rglob('*.h'):
 
 sorted_names = sorted(names)
 
-with open("src/qmapshack/contributors.h", "w") as file:
+with open("src/qmapshack/contributors.h", "w", newline="\n") as file:
     print('constexpr auto contributors = ""', file=file)
     for i, name in enumerate(sorted_names):
         separator = ", " if i + 1 < len(sorted_names) else ""

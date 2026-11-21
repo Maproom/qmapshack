@@ -44,7 +44,10 @@
 #include <QScreen>
 #include <QTabWidget>
 #include <QTemporaryDir>
+#include <QTextDocument>
 #include <QTimer>
+#include <QToolButton>
+#include <QToolTip>
 #include <QVariant>
 #include <QWidget>
 #include <functional>
@@ -54,6 +57,7 @@
 #include "shoot/CShotDocState.h"
 #include "shoot/CShotFiles.h"
 #include "shoot/CShotPrivacy.h"
+#include "shoot/CShotSynth.h"
 #include "shoot/CShotWarnings.h"
 #include "shoot/CShotsJob.h"
 
@@ -125,7 +129,7 @@ struct checkout_t {
     write(files.pageFile(),
           "![](../images/p/a.png)\n![](../images/p/b.png)\n![](../images/p/c.png)\n"
           "![](../images/p/d.png)\n![](../images/p/g.png)\n![](../images/p/h.png)\n");
-    write(repo.absoluteFilePath("doc/pages/q.md"), "![](../images/p/e.png)\n");
+    write(QDir(CShotFiles::languageDir(repo)).absoluteFilePath("pages/q.md"), "![](../images/p/e.png)\n");
     write(files.scenarioConfig("s"), "[General]\n");
     for (const char* id : {"p/a", "p/c", "p/f", "p/g"}) {
       write(files.publishedImage(id), "png");
@@ -238,7 +242,7 @@ void testRename() {
   {
     checkout_t c;
     // The shot file cannot be written, the configuration can be moved.
-    const QString& shots = c.repo.absoluteFilePath("doc/shots");
+    const QString& shots = QFileInfo(c.files.shotFile()).absolutePath();
     QFile::setPermissions(shots, QFileDevice::ReadOwner | QFileDevice::ExeOwner);
     const bool locked = !QFile(QDir(shots).absoluteFilePath("probe")).open(QIODevice::WriteOnly);
     const QByteArray& before = read(c.files.shotFile());
@@ -350,7 +354,7 @@ void testStoreScenario() {
     checkout_t c;
     const QString& config = c.repo.absoluteFilePath("doc/shots/_cache/new.ini");
     write(config, "[General]\nnew=1\n");
-    const QString& shots = c.repo.absoluteFilePath("doc/shots");
+    const QString& shots = QFileInfo(c.files.shotFile()).absolutePath();
     QFile::setPermissions(shots, QFileDevice::ReadOwner | QFileDevice::ExeOwner);
     const bool locked = !QFile(QDir(shots).absoluteFilePath("probe")).open(QIODevice::WriteOnly);
     const QByteArray& before = read(c.files.shotFile());
@@ -642,7 +646,7 @@ void testUnused() {
 
 void testUnicodeNames() {
   checkout_t c;
-  write(c.repo.absoluteFilePath("doc/pages/q.md"),
+  write(QDir(CShotFiles::languageDir(c.repo)).absoluteFilePath("pages/q.md"),
         QString("![](../images/p/e.png)\n![](../images/p/f-größe.png)\n").toUtf8());
   QJsonObject content = c.content();
   QJsonArray shots = content["shots"].toArray();
@@ -688,6 +692,67 @@ void testBusyBox() {
   panel.hide();
   // Reaching this line is the other half: Escape on the old order crashed.
   verdict("the busy box has no button and ignores Escape and a close request", noButtons && stays);
+}
+
+void testTooltips() {
+  QTemporaryDir dir;
+  CShotDocPanel panel("p", QDir(dir.path()).absoluteFilePath("panel.ini"), nullptr);
+  qint32 tips = 0;
+  QStringList plain;
+  const QList<QWidget*>& widgets = panel.findChildren<QWidget*>();
+  for (const QWidget* w : widgets) {
+    if (w->toolTip().isEmpty()) {
+      continue;
+    }
+    tips++;
+    // Qt wraps a rich text tooltip; a plain one is a single line as wide as its text.
+    if (!Qt::mightBeRichText(w->toolTip())) {
+      plain << w->toolTip();
+    }
+  }
+  verdict("panel tooltips: all rich text, so Qt wraps them", tips > 0 && plain.isEmpty(),
+          QString("%1 tooltips; plain: %2").arg(tips).arg(plain.join(" | ")));
+
+  // A button's tooltip starts with its one bold name, then says what it does; a marker's says what it draws.
+  QStringList wrong;
+  for (const QToolButton* button : panel.findChildren<QToolButton*>()) {
+    const QString& tip = button->toolTip();
+    const bool marker = tip.contains("Ctrl+Shift+F10 places it");
+    if (!tip.isEmpty() &&
+        (!tip.startsWith("<qt><b>") || 1 != tip.count("<b>") || (marker && !tip.contains(": a red ")))) {
+      wrong << tip;
+    }
+  }
+  verdict("panel tooltips: each button's names it once, a marker's says what it draws", wrong.isEmpty(),
+          wrong.join(" | "));
+
+  // Hovering a marker button while another window is active still shows its tooltip.
+  QToolButton* frame = nullptr;
+  for (QToolButton* button : panel.findChildren<QToolButton*>()) {
+    if ("Frame" == button->text()) {
+      frame = button;
+    }
+  }
+  QWidget other;
+  other.resize(200, 100);
+  panel.show();
+  other.show();
+  other.activateWindow();
+  settle(100);
+  bool shown = false;
+  if (nullptr != frame) {
+    CShotSynth::move(frame, frame->rect().center());
+    CShotSynth::move(frame, frame->rect().center() + QPoint(1, 1));
+    settle(1200);
+    shown = QToolTip::isVisible() && QToolTip::text() == frame->toolTip();
+    QToolTip::hideText();
+  }
+  const bool inactive = !panel.isActiveWindow();
+  panel.hide();
+  other.hide();
+  settle(100);
+  verdict("panel tooltips: shown while QMapShack is the active window", nullptr != frame && inactive && shown,
+          QString("button %1, panel inactive %2, tooltip shown %3").arg(nullptr != frame).arg(inactive).arg(shown));
 }
 
 void testRows() {
@@ -873,6 +938,7 @@ qint32 CShotDocSelfTest::run() {
   testUnicodeNames();
   testForeignImage();
   testBusyBox();
+  testTooltips();
   testRows();
   testParkedRecording();
   testStoreScenario();

@@ -89,7 +89,7 @@ def main():
         data.append({"n": f[:-4], "l": uri(raw, ENGINE_LIGHT), "d": uri(raw, ENGINE_DARK)})
 
     html = TEMPLATE.replace("/*DATA*/", json.dumps(data, separators=(",", ":")))
-    with open(args.out, "w", encoding="utf-8") as fh:
+    with open(args.out, "w", encoding="utf-8", newline="\n") as fh:
         fh.write(html)
     print(f"{len(data)} icons -> {args.out} ({os.path.getsize(args.out) / 1e6:.1f} MB)")
 

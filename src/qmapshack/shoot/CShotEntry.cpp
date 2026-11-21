@@ -97,6 +97,9 @@ void pinAppearance(const QString& colorScheme);
 }  // namespace
 
 namespace {
+/** The self test group of the documentation mode's cases, which need no fixture. */
+const QString kDocGroup = QStringLiteral("doc");
+
 /** @return the failures of taking the shots, or running the self test, that @p opts ask for */
 qint32 shoot(const CShotOptions::opts_t& opts) {
   // The main window finishes initialising on timers.
@@ -112,13 +115,13 @@ qint32 shoot(const CShotOptions::opts_t& opts) {
   if (0 != failures) {
     // Every image would fail for it and bury the reason.
     qWarning() << "shoot: nothing is taken: the example data did not load";
-  } else if (opts.shootSelfTest) {
-    failures += CShotSelfTest::run(ctx);
-  } else {
+  } else if (opts.shootSelfTest && kDocGroup != opts.shootSelfTestGroup) {
+    failures += CShotSelfTest::run(ctx, opts.shootSelfTestGroup);
+  } else if (!opts.shootSelfTest) {
     failures += CShotPage::run(opts.shootTarget, ctx, opts.shootOnly, opts.shootScenario);
   }
   // Needs no fixture.
-  if (opts.shootSelfTest) {
+  if (opts.shootSelfTest && (opts.shootSelfTestGroup.isEmpty() || kDocGroup == opts.shootSelfTestGroup)) {
     failures += CShotDocSelfTest::run();
   }
   return failures;
@@ -219,11 +222,10 @@ bool CShotEntry::prepare(const CAppOpts& opts) {
   registerFonts();
 
   if (!opts.doc.shootDir.isEmpty()) {
-    // The shot file lies in doc/shots: tiles are kept across runs. The workspace sits beside the output, which
+    // The shot file lies in the checkout: tiles are kept across runs. The workspace sits beside the output, which
     // selftest keeps, so each run starts it empty.
     const QFileInfo target(opts.doc.shootTarget);
-    QDir repo = target.absoluteDir();
-    repo.cd("../..");
+    const QDir& repo = CShotFiles::repoOfShotFile(opts.doc.shootTarget);
     // The self test loads the default fixture whatever page names the run.
     const QString& tiles = opts.doc.shootSelfTest ? CShotFiles::sharedTileCache(repo)
                                                   : CShotFiles(repo, target.completeBaseName()).tileCache();

@@ -505,7 +505,7 @@ def render(svg_text, size, tag):
     with tempfile.TemporaryDirectory() as td:
         src = os.path.join(td, f"{tag}.svg")
         out = os.path.join(td, f"{tag}.png")
-        with open(src, "w", encoding="utf-8") as fh:
+        with open(src, "w", encoding="utf-8", newline="\n") as fh:
             fh.write(svg_text)
         r = subprocess.run(
             ["inkscape", "-D", "-w", str(size), "-h", str(size), src,
@@ -576,7 +576,7 @@ def main():
             files += 1
             print(f"  {n:3} implied black fill(s)  {name}")
             if args.write:
-                with open(path, "w", encoding="utf-8") as fh:
+                with open(path, "w", encoding="utf-8", newline="\n") as fh:
                     fh.write(out)
         print(f"\n{total} shapes in {files} icons rely on SVG's implicit black default")
         if not args.write:
@@ -610,7 +610,7 @@ def main():
             if stripped != src:
                 print(f"  un-themed (opt-out)  {name}")
                 if args.write:
-                    with open(path, "w", encoding="utf-8") as fh:
+                    with open(path, "w", encoding="utf-8", newline="\n") as fh:
                         fh.write(stripped)
             continue
         path = os.path.join(args.dir, name)
@@ -626,7 +626,7 @@ def main():
         for src_color, cls in classes.items():
             shades[src_color] = shades.get(src_color, 0) + 1
         if args.write:
-            with open(path, "w", encoding="utf-8") as fh:
+            with open(path, "w", encoding="utf-8", newline="\n") as fh:
                 fh.write(out)
 
     print(f"{len(svgs)} icons")

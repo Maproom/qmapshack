@@ -2608,6 +2608,11 @@ void checkMarks(CHarness& h) {
   const QString& projectRow = CShotAddress::rowPathOf(h.wks->model()->index(0, 0));
   fillTabs(p);
   p.tabs->widget(1)->setObjectName("probeTabTwo");
+  // A place on the map: the centre of the canvas, in degrees.
+  const QString& mapName = CShotAddress::addressOf(main, h.canvas).value_or(QString());
+  QPointF mapCentre(h.canvas->width() / 2, h.canvas->height() / 2);
+  h.canvas->convertPx2Rad(mapCentre);
+  mapCentre /= DEG_TO_RAD;
 
   struct probe_t {
     QString name;
@@ -2643,6 +2648,17 @@ void checkMarks(CHarness& h) {
        p.window},
       {"a frame on a button in a workspace row",
        {{"widget", wksName}, {"part", "button"}, {"row", projectRow}, {"button", "visible"}},
+       main},
+      {"a pointer on a place on the map",
+       {{"widget", mapName},
+        {"part", "point"},
+        {"lat", mapCentre.y()},
+        {"lon", mapCentre.x()},
+        {"shape", "cursor"},
+        {"cursor", "pointer"}},
+       main},
+      {"a disc on a place on the map",
+       {{"widget", mapName}, {"part", "point"}, {"lat", mapCentre.y()}, {"lon", mapCentre.x()}},
        main},
       {"a disc on a QSplitter's handle",
        {{"root", "window"},
@@ -2708,11 +2724,13 @@ void checkMarks(CHarness& h) {
 
   // What a mark that cannot be placed says: its target is not on screen now, not there, or no fit for it.
   {
-    QTreeWidgetItem* root = p.tree->topLevelItem(0);
+    // By name: the sort order is whatever an earlier case left.
+    QTreeWidgetItem* root = p.tree->findItems("root", Qt::MatchExactly).value(0);
     const bool expanded = root->isExpanded();
     root->setExpanded(false);
     settle();
-    const QString& child = CShotAddress::rowPathOf(p.tree->model()->index(0, 0, p.tree->model()->index(0, 0)));
+    const QModelIndex& parent = p.tree->model()->index(p.tree->indexOfTopLevelItem(root), 0);
+    const QString& child = CShotAddress::rowPathOf(p.tree->model()->index(0, 0, parent));
     using found_e = CShotMarks::found_e;
     const QList<std::tuple<QString, QJsonObject, found_e>> kinds = {
         {"the arrow of a row under a closed parent is not on screen",
@@ -2733,6 +2751,15 @@ void checkMarks(CHarness& h) {
     }
     root->setExpanded(expanded);
     settle();
+    {
+      // Half a turn of the earth away from the centre is never on the map.
+      const QJsonObject far{{"widget", mapName}, {"part", "point"}, {"lat", 0.0}, {"lon", mapCentre.x() - 180.0}};
+      CShotMarks::placed_t placed;
+      const QString& problem = CShotMarks::place(markOf(far), main, placed);
+      verdict("marks: a place not on the map now is not on screen",
+              !problem.isEmpty() && found_e::eClosed == placed.found,
+              QString("kind %1: %2").arg(qint32(placed.found)).arg(problem));
+    }
     QList<CShotMarks::mark_t> parsed;
     const QString& problem = CShotMarks::parse(QJsonArray{leftName}, parsed);
     verdict("marks: a mark given as a plain string is refused", !problem.isEmpty() && parsed.isEmpty(), problem);
@@ -2777,6 +2804,10 @@ void checkMarks(CHarness& h) {
       p.tool->setToolTip(toolTip);
     });
     const auto atTool = [&p]() { return p.tool->mapToGlobal(p.tool->rect().center()); };
+    // A place on the map off its centre, where nothing else lies.
+    const auto atPlace = [&h]() {
+      return h.canvas->mapToGlobal(QPoint(h.canvas->width() / 2 + 40, h.canvas->height() / 2 + 30));
+    };
     // A window a scenario opens: its shot names it by its class.
     const QJsonObject dialogShot{{"widget", QString()},
                                  {"window", QString::fromLatin1(p.window->metaObject()->className())}};
@@ -2789,6 +2820,13 @@ void checkMarks(CHarness& h) {
          {},
          main},
         {"pointing at a button in a workspace row offers it first", "frame", atButton, buttonMark, {}, {}, main},
+        {"pointing at the map offers the place under the pointer first",
+         "pointer",
+         atPlace,
+         {{"widget", mapName}, {"part", "point"}, {"shape", "cursor"}, {"cursor", "pointer"}},
+         {},
+         {},
+         main},
         {"pointing at a slider's knob in a window of its own marks it, in that window's image",
          "disc",
          atKnob,
@@ -2981,10 +3019,12 @@ void checkMarks(CHarness& h) {
 }
 
 /** What every case together must have covered. */
-void checkCoverage(CHarness& h) {
+void checkCoverage() {
   const QStringList& missing = CShotHandlers::unreplayed();
   verdict("every handler replays in some case", missing.isEmpty(), missing.join(", "));
+}
 
+void checkMenuNames(CHarness& h) {
   // A menu entry is addressed by its objectName; without one, picking it is not recorded.
   QStringList unnamed;
   const QList<QAction*>& actions = h.main->findChildren<QAction*>();
@@ -3013,11 +3053,46 @@ void checkCoverage(CHarness& h) {
   verdict("every entry of the main window's menus and toolbars has an objectName", unnamed.isEmpty(),
           unnamed.join(", "));
 }
+
+struct group_t {
+  QString name;
+  void (*check)(CHarness&);
+};
+
+/** In the order a run of all takes them. */
+const QList<group_t>& allGroups() {
+  static const QList<group_t> all = {{"qt-controls", checkQtControls},
+                                     {"workspace", checkWorkspace},
+                                     {"map", checkMap},
+                                     {"plot-icon-grid", checkPlotAndIconGrid},
+                                     {"row-buttons", checkRowButtons},
+                                     {"geo-search-menus", checkGeoSearchMenus},
+                                     {"map-pois", checkMapPois},
+                                     {"scenario-twice", checkScenarioTwice},
+                                     {"render-all", checkRenderAll},
+                                     {"replay-refuses", checkReplayRefuses},
+                                     {"shoot-scenario", checkShootScenario},
+                                     {"marks", checkMarks},
+                                     {"menu-names", checkMenuNames}};
+  return all;
+}
 }  // namespace
 
-qint32 CShotSelfTest::run(CShotContext& ctx) {
+QStringList CShotSelfTest::groups() {
+  QStringList names;
+  for (const group_t& group : allGroups()) {
+    names << group.name;
+  }
+  return names;
+}
+
+qint32 CShotSelfTest::run(CShotContext& ctx, const QString& group) {
   failures = 0;
   cases = 0;
+  if (!group.isEmpty() && !groups().contains(group)) {
+    verdict(QString("the self test has a group %1").arg(group), false, groups().join(", "));
+    return failures;
+  }
 
   CMainWindow* main = ctx.mainWindow();
   CGisListWks* wks = const_cast<CGisListWks*>(ctx.wksList());
@@ -3037,19 +3112,17 @@ qint32 CShotSelfTest::run(CShotContext& ctx) {
 
   {
     CHarness h(ctx, main, wks, canvas, trk);
-    checkQtControls(h);
-    checkWorkspace(h);
-    checkMap(h);
-    checkPlotAndIconGrid(h);
-    checkRowButtons(h);
-    checkGeoSearchMenus(h);
-    checkMapPois(h);
-    checkScenarioTwice(h);
-    checkRenderAll(h);
-    checkReplayRefuses(h);
-    checkShootScenario(h);
-    checkMarks(h);
-    checkCoverage(h);
+    for (const group_t& each : allGroups()) {
+      if (group.isEmpty() || group == each.name) {
+        each.check(h);
+      }
+    }
+  }
+  if (group.isEmpty()) {
+    checkCoverage();
+  } else {
+    qWarning().noquote() << "shoot: unreplayed" << CShotHandlers::unreplayed().join(",");
+    qWarning().noquote() << "shoot: groups" << groups().join(",");
   }
 
   qWarning().noquote() << "shoot: self test" << (cases - failures) << "of" << cases << "cases pass";

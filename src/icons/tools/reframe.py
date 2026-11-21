@@ -65,7 +65,7 @@ def normalize_for_query(text):
 def visual_bbox(text, tmpdir, tag, env):
     """The drawing's visual bbox in CONTENT units: (x, y, w, h). Queried on a normalized copy."""
     q = os.path.join(tmpdir, f"q_{tag}.svg")
-    with open(q, "w", encoding="utf-8") as f:
+    with open(q, "w", encoding="utf-8", newline="\n") as f:
         f.write(normalize_for_query(text))
     out = subprocess.check_output(["inkscape", "--query-all", q], text=True,
                                   stderr=subprocess.DEVNULL, env=env)
@@ -99,7 +99,7 @@ def one(path, env, write, tmpdir):
         bbox = visual_bbox(text, tmpdir, name[:-4], env)
         out, scale = reframe_text(text, bbox)
         if write:
-            open(path, "w", encoding="utf-8").write(out)
+            open(path, "w", encoding="utf-8", newline="\n").write(out)
         return name, scale, None
     except Exception as e:  # noqa: BLE001 -- report and continue, never abort the batch
         return name, None, f"ERROR: {e}"

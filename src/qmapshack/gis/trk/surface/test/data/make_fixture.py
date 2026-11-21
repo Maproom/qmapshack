@@ -66,7 +66,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from osmsurface import Surfaces  # noqa: E402
 
 s = Surfaces(out, 50.005, 5.005, 5)
-with open("fixture_cells.tsv", "w") as f:
+with open("fixture_cells.tsv", "w", newline="\n") as f:
     for i in range(-10, 141):
         lat = 49.9985 + i * 0.0001
         for j in range(-5, 116):

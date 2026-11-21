@@ -142,7 +142,7 @@ def main():
             if n:
                 hits[old] = hits.get(old, 0) + n
         if args.write:
-            with open(path, "w", encoding="utf-8") as fh:
+            with open(path, "w", encoding="utf-8", newline="\n") as fh:
                 fh.write(out)
 
     print(f"{len(svgs)} icons | {changed} changed | {skipped} skipped (self-backgrounded)")

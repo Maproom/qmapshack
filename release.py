@@ -108,7 +108,7 @@ print('Replace version string in CMakeLists.txt.')
 with open('CMakeLists.txt') as fp:
     newText = fp.read().replace(str(current_version), str(next_version))
 
-with open('CMakeLists.txt', 'w') as fp:
+with open('CMakeLists.txt', 'w', newline='\n') as fp:
     fp.write(newText)
 
 print('Reset version suffix in CMakeLists.txt.')
@@ -120,14 +120,14 @@ with open('CMakeLists.txt') as fp:
         flags=re.MULTILINE
     )
 
-with open('CMakeLists.txt', 'w') as fp:
+with open('CMakeLists.txt', 'w', newline='\n') as fp:
     fp.write(newText)
 
 print('Replace version string in changelog.txt.')
 with open('changelog.txt') as fp:
     newText = fp.read().replace("V1.XX.X", "V" + str(next_version))
 
-with open('changelog.txt', 'w') as fp:
+with open('changelog.txt', 'w', newline='\n') as fp:
     fp.write(newText)
 
 print('Update list of contributors.')

@@ -1,0 +1,234 @@
+{
+    "scenarios": {
+        "dem-on": [
+            {
+                "do": "view",
+                "lat": 47.495,
+                "lon": 10.575,
+                "zoom": 7
+            },
+            {
+                "button": "activate",
+                "do": "click",
+                "row": "OpenStreetMap",
+                "widget": "dockMaps/treeWidget"
+            },
+            {
+                "button": "activate",
+                "do": "click",
+                "row": "tirol dgm5m",
+                "widget": "dockDem/treeWidget"
+            },
+            {
+                "do": "move",
+                "lat": 47.5028,
+                "lon": 10.5537,
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0"
+            }
+        ],
+        "listed": [
+            {
+                "do": "view",
+                "lat": 47.495,
+                "lon": 10.575,
+                "zoom": 7
+            },
+            {
+                "button": "activate",
+                "do": "click",
+                "row": "OpenStreetMap",
+                "widget": "dockMaps/treeWidget"
+            }
+        ],
+        "shade": [
+            {
+                "do": "view",
+                "lat": 47.495,
+                "lon": 10.575,
+                "zoom": 7
+            },
+            {
+                "button": "activate",
+                "do": "click",
+                "row": "OpenStreetMap",
+                "widget": "dockMaps/treeWidget"
+            },
+            {
+                "button": "activate",
+                "do": "click",
+                "row": "tirol dgm5m",
+                "widget": "dockDem/treeWidget"
+            },
+            {
+                "do": "expand",
+                "row": "tirol dgm5m",
+                "widget": "dockDem/treeWidget"
+            },
+            {
+                "do": "click",
+                "widget": "dockDem/treeWidget/QWidget#0/CDemPropSetup#0/checkHillshading"
+            }
+        ],
+        "shade-strong": [
+            {
+                "do": "view",
+                "lat": 47.495,
+                "lon": 10.575,
+                "zoom": 7
+            },
+            {
+                "button": "activate",
+                "do": "click",
+                "row": "OpenStreetMap",
+                "widget": "dockMaps/treeWidget"
+            },
+            {
+                "button": "activate",
+                "do": "click",
+                "row": "tirol dgm5m",
+                "widget": "dockDem/treeWidget"
+            },
+            {
+                "do": "expand",
+                "row": "tirol dgm5m",
+                "widget": "dockDem/treeWidget"
+            },
+            {
+                "do": "click",
+                "widget": "dockDem/treeWidget/QWidget#0/CDemPropSetup#0/checkHillshading"
+            },
+            {
+                "do": "set",
+                "property": "value",
+                "value": 50,
+                "widget": "dockDem/treeWidget/QWidget#0/CDemPropSetup#0/sliderOpacity"
+            }
+        ]
+    },
+    "shots": [
+        {
+            "id": "quickstart-dem/quickstart-dem-status-bar",
+            "rect": [
+                780,
+                778,
+                420,
+                22
+            ],
+            "scenario": "dem-on",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "id": "quickstart-dem/quickstart-dem-listed",
+            "rect": [
+                4,
+                300,
+                366,
+                110
+            ],
+            "scenario": "listed",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "id": "quickstart-dem/quickstart-dem-dem-button",
+            "mark": [
+                {
+                    "button": "activate",
+                    "cursor": "pointer",
+                    "part": "button",
+                    "root": "main",
+                    "row": "0:0",
+                    "shape": "cursor",
+                    "widget": "dockDem/treeWidget"
+                }
+            ],
+            "rect": [
+                4,
+                300,
+                290,
+                110
+            ],
+            "scenario": "dem-on",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "id": "quickstart-dem/quickstart-dem-hillshading",
+            "mark": [
+                {
+                    "part": "branch",
+                    "root": "main",
+                    "row": "0:0",
+                    "shape": "disc",
+                    "widget": "dockDem/treeWidget"
+                },
+                {
+                    "root": "main",
+                    "shape": "frame",
+                    "widget": "dockDem/treeWidget/QWidget#0/CDemPropSetup#0/checkHillshading"
+                }
+            ],
+            "rect": [
+                4,
+                300,
+                280,
+                230
+            ],
+            "scenario": "shade",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "id": "quickstart-dem/quickstart-dem-shaded",
+            "rect": [
+                400,
+                300,
+                300,
+                300
+            ],
+            "scenario": "shade",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "id": "quickstart-dem/quickstart-dem-stronger",
+            "mark": [
+                {
+                    "cursor": "hand",
+                    "part": "handle",
+                    "root": "main",
+                    "shape": "cursor",
+                    "widget": "dockDem/treeWidget/QWidget#0/CDemPropSetup#0/sliderOpacity"
+                }
+            ],
+            "rect": [
+                4,
+                300,
+                830,
+                240
+            ],
+            "scenario": "shade-strong",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        }
+    ]
+}

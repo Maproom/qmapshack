@@ -21,6 +21,7 @@
 
 #include <QDockWidget>
 class QHelpEngine;
+class QMainWindow;
 class QSplitter;
 class QTabWidget;
 class CHelpIndex;
@@ -35,8 +36,15 @@ class CHelp : public QDockWidget {
   CHelp(const QString& homepage, QWidget* parent);
   virtual ~CHelp();
 
+  /**
+     @brief Show it where it was when last closed, docked or floating; the first time floating, centred over @p main.
+
+     Call after QMainWindow::addDockWidget(): docked, the help takes the width of its dock column.
+   */
+  void place(QMainWindow* main);
+
  private:
-  void restoreSettings();
+  void restoreSplitter();
 
   QHelpEngine* engine = nullptr;
   QTabWidget* tabWidget = nullptr;

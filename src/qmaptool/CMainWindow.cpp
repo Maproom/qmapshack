@@ -165,6 +165,7 @@ void CMainWindow::slotHelp() {
   if (help.isNull()) {
     help = new CHelp(IAppSetup::self().helpFile(), "qthelp://qmt/doc/doc/html/QMapTool/QMTDocMain.html", this);
     addDockWidget(Qt::LeftDockWidgetArea, help);
+    help->place(this);
   }
 
   help->setVisible(true);

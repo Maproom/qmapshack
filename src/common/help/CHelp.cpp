@@ -18,6 +18,7 @@
 
 #include "CHelp.h"
 
+#include <QMainWindow>
 #include <QtGui>
 #include <QtHelp>
 
@@ -25,6 +26,9 @@
 #include "help/CHelpIndex.h"
 #include "help/CHelpSearch.h"
 #include "helpers/CSettings.h"
+
+/** The size of the help window the first time it opens [px]. */
+static constexpr QSize kDefaultSize(1100, 750);
 
 static bool isFileNewer(const QString& originalPath, const QString& copyPath) {
   QFileInfo originalInfo(originalPath);
@@ -88,9 +92,7 @@ CHelp::CHelp(const QString& sourceQhc, const QString& homepage, QWidget* parent)
   splitter->insertWidget(1, browser);
 
   setWidget(splitter);
-
-  resize(1100, 750);
-  restoreSettings();
+  restoreSplitter();
 }
 
 CHelp::CHelp(const QString& homepage, QWidget* parent) : QDockWidget(tr("Help"), parent) {
@@ -100,29 +102,41 @@ CHelp::CHelp(const QString& homepage, QWidget* parent) : QDockWidget(tr("Help"),
   CHelpBrowser* browser = new CHelpBrowser(nullptr, this);
   browser->setSource(QUrl::fromLocalFile(homepage));
   setWidget(browser);
-
-  resize(1100, 750);
-  restoreSettings();
 }
 
 CHelp::~CHelp() {
   SETTINGS;
   cfg.beginGroup("Help");
   cfg.setValue("geometry", saveGeometry());
+  cfg.setValue("floating", isFloating());
   if (splitter != nullptr) {
     cfg.setValue("splitter", splitter->saveState());
   }
   cfg.endGroup();
 }
 
-void CHelp::restoreSettings() {
+void CHelp::restoreSplitter() {
+  SETTINGS;
+  if (cfg.contains("Help/splitter")) {
+    splitter->restoreState(cfg.value("Help/splitter").toByteArray());
+  }
+}
+
+void CHelp::place(QMainWindow* main) {
   SETTINGS;
   cfg.beginGroup("Help");
-  if (cfg.contains("geometry")) {
-    restoreGeometry(cfg.value("geometry").toByteArray());
-    if (splitter != nullptr) {
-      splitter->restoreState(cfg.value("splitter").toByteArray());
-    }
-  }
+  const bool floating = cfg.value("floating", true).toBool();
+  const QByteArray& geometry = cfg.value("geometry").toByteArray();
   cfg.endGroup();
+
+  setFloating(floating);
+  if (!floating) {
+    return;
+  }
+  if (!geometry.isEmpty() && restoreGeometry(geometry)) {
+    return;
+  }
+  // Docked, it would take the width of the dock column; the pages need room.
+  resize(kDefaultSize.boundedTo(main->size()));
+  move(main->geometry().center() - rect().center());
 }

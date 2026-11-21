@@ -1775,6 +1775,7 @@ void CMainWindow::slotHelp() {
     }
     help = new CHelp(home, this);
     addDockWidget(Qt::LeftDockWidgetArea, help);
+    help->place(this);
   }
 
   help->setVisible(true);

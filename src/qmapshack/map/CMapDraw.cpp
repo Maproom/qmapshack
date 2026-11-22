@@ -23,6 +23,7 @@
 
 #include "CMainWindow.h"
 #include "canvas/CCanvas.h"
+#include "helpers/CFolderWatcher.h"
 #include "helpers/CSettings.h"
 #include "map/CMapItem.h"
 #include "map/CMapList.h"
@@ -39,6 +40,18 @@ QString CMapDraw::cachePath = "";
 bool CMapDraw::cacheRootPinned = false;
 QStringList CMapDraw::mapPaths;
 QStringList CMapDraw::supportedFormats = QString("*.vrt|*.jnx|*.img|*.rmap|*.wmts|*.tms|*.gemf").split('|');
+
+namespace {
+/** @brief Watch the map folders; a map file added, removed or replaced there reloads the maps of all views */
+void watchMapPaths(const QStringList& paths) {
+  static CFolderWatcher* watcher = nullptr;
+  if (watcher == nullptr) {
+    watcher = new CFolderWatcher(CMapDraw::getSupportedFormats(), qApp);
+    QObject::connect(watcher, &CFolderWatcher::sigChanged, qApp, &CMapDraw::reloadMaps);
+  }
+  watcher->setPaths(paths);
+}
+}  // namespace
 
 CMapDraw::CMapDraw(CCanvas* parent) : IDrawContext("map", CCanvas::eRedrawMap, parent) {
   // sigOverviewAdvisory crosses threads (emitted from the render thread); QPointer<CMapVRT>
@@ -106,11 +119,19 @@ void CMapDraw::setupMapPath(const QString& path) {
 void CMapDraw::setupMapPath(const QStringList& paths) {
   qDebug() << "CMapDraw::setupMapPath(paths)";
   mapPaths = paths;
+  watchMapPaths(mapPaths);
 
   for (CMapDraw* map : std::as_const(maps)) {
     map->saveMapList();
     map->loadMapList();
   }
+}
+
+void CMapDraw::reloadMaps() {
+  for (CMapDraw* map : std::as_const(maps)) {
+    map->mapList->resetDelegate();
+  }
+  setupMapPath(mapPaths);
 }
 
 void CMapDraw::saveMapPath(QSettings& cfg) {
@@ -122,6 +143,7 @@ void CMapDraw::saveMapPath(QSettings& cfg) {
 void CMapDraw::loadMapPath(QSettings& cfg) {
   qDebug() << "CMapDraw::loadMapPath(cfg)";
   mapPaths = cfg.value("mapPath", mapPaths).toStringList();
+  watchMapPaths(mapPaths);
   if (!cacheRootPinned) {
     cachePath = cfg.value("cachePath", cachePath).toString();
   }

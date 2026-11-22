@@ -940,15 +940,13 @@ CVrtAdvisoryDialog* CCanvas::showOverviewAdvisory(QPointer<T> source) {
 
 void CCanvas::slotShowDemOverviewAdvisory(QPointer<CDemVRT> source) {
   if (auto* dlg = showOverviewAdvisory(source)) {
-    connect(dlg, &CVrtAdvisoryDialog::sigContainerRebuilt, this,
-            []() { CDemDraw::setupDemPath(CDemDraw::getDemPaths()); });
+    connect(dlg, &CVrtAdvisoryDialog::sigContainerRebuilt, this, &CDemDraw::reloadDems);
   }
 }
 
 void CCanvas::slotShowMapOverviewAdvisory(QPointer<CMapVRT> source) {
   if (auto* dlg = showOverviewAdvisory(source)) {
-    connect(dlg, &CVrtAdvisoryDialog::sigContainerRebuilt, this,
-            []() { CMapDraw::setupMapPath(CMapDraw::getMapPaths()); });
+    connect(dlg, &CVrtAdvisoryDialog::sigContainerRebuilt, this, &CMapDraw::reloadMaps);
   }
 }
 

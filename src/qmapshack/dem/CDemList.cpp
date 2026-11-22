@@ -296,13 +296,14 @@ void CDemList::slotOverviewInfo() {
   }
 }
 
-void CDemList::slotReloadDem() {
+void CDemList::resetDelegate() {
   CMapItemDelegate* delegate = dynamic_cast<CMapItemDelegate*>(treeWidget->itemDelegate());
   if (delegate != nullptr) {
     delegate->reset();
   }
-  CDemDraw::setupDemPath(CDemDraw::getDemPaths());
 }
+
+void CDemList::slotReloadDem() { CDemDraw::reloadDems(); }
 
 void CDemList::slotFilter(const QString& str) {
   actionClearFilter->setIcon(str.isEmpty() ? QIcon("://icons/Filter.svgt") : QIcon("://icons/Cancel.svgt"));

@@ -41,6 +41,8 @@ class CMapVrtBuilder : public IToolShell, private Ui::IMapVrtBuilder {
  private:
   void finished(int exitCode, QProcess::ExitStatus status) override;
   void enableStartButton();
+  /** @return false if the built files could not replace the target, which is then left as it was */
+  bool moveIntoTarget();
 
   bool last = false;
   QTemporaryFile* tempFile;

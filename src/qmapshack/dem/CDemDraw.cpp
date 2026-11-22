@@ -28,6 +28,7 @@
 #include "dem/CDemVRT.h"
 #include "dem/IDem.h"
 #include "gis/IGisLine.h"
+#include "helpers/CFolderWatcher.h"
 #include "helpers/CSettings.h"
 #include "misc.h"
 #include "units/IUnit.h"
@@ -35,6 +36,18 @@
 QList<CDemDraw*> CDemDraw::dems;
 QStringList CDemDraw::demPaths;
 QStringList CDemDraw::supportedFormats = QString("*.vrt|*.wcs").split('|');
+
+namespace {
+/** @brief Watch the DEM folders; a DEM file added, removed or replaced there reloads the DEMs */
+void watchDemPaths(const QStringList& paths) {
+  static CFolderWatcher* watcher = nullptr;
+  if (watcher == nullptr) {
+    watcher = new CFolderWatcher(CDemDraw::getSupportedFormats(), qApp);
+    QObject::connect(watcher, &CFolderWatcher::sigChanged, qApp, &CDemDraw::reloadDems);
+  }
+  watcher->setPaths(paths);
+}
+}  // namespace
 
 CDemDraw::CDemDraw(CCanvas* canvas) : IDrawContext("dem", CCanvas::eRedrawDem, canvas) {
   // sigOverviewAdvisory crosses threads (emitted from the render thread); QPointer<CDemVRT>
@@ -98,11 +111,19 @@ void CDemDraw::setupDemPath(const QString& path) {
 void CDemDraw::setupDemPath(const QStringList& paths) {
   qDebug() << "CDemDraw::setupDemPath(paths)";
   demPaths = paths;
+  watchDemPaths(demPaths);
 
   for (CDemDraw* dem : std::as_const(dems)) {
     dem->saveDemList();
     dem->loadDemList();
   }
+}
+
+void CDemDraw::reloadDems() {
+  for (CDemDraw* dem : std::as_const(dems)) {
+    dem->demList->resetDelegate();
+  }
+  setupDemPath(demPaths);
 }
 
 void CDemDraw::saveDemPath(QSettings& cfg) {
@@ -113,6 +134,7 @@ void CDemDraw::saveDemPath(QSettings& cfg) {
 void CDemDraw::loadDemPath(QSettings& cfg) {
   qDebug() << "CDemDraw::loadDemPath(cfg)";
   demPaths = cfg.value("demPaths", demPaths).toStringList();
+  watchDemPaths(demPaths);
 }
 
 void CDemDraw::saveConfig(QSettings& cfg) {

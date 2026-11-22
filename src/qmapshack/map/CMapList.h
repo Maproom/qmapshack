@@ -126,7 +126,6 @@ class CMapList : public QWidget, private Ui::IMapList {
   void slotMoveDown();
   void slotMoveEnd();
   void slotRemove();
-  void slotReloadMaps();
   void slotOverviewInfo();
   void slotContextMenu(const QPoint& point);
   void slotFilter(const QString& str);

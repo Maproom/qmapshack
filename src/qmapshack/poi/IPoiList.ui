@@ -126,18 +126,6 @@
     <string>Activate</string>
    </property>
   </action>
-  <action name="actionReloadPoi">
-   <property name="icon">
-    <iconset resource="../resources.qrc">
-     <normaloff>:/icons/Reset.svgt</normaloff>:/icons/Reset.svgt</iconset>
-   </property>
-   <property name="text">
-    <string>Reload POI</string>
-   </property>
-   <property name="toolTip">
-    <string>Reload POI</string>
-   </property>
-  </action>
  </widget>
  <customwidgets>
   <customwidget>

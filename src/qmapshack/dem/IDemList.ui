@@ -219,18 +219,6 @@
     <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
-  <action name="actionReloadDem">
-   <property name="icon">
-    <iconset resource="../resources.qrc">
-     <normaloff>:/icons/Reset.svgt</normaloff>:/icons/Reset.svgt</iconset>
-   </property>
-   <property name="text">
-    <string>Reload DEM</string>
-   </property>
-   <property name="menuRole">
-    <enum>QAction::MenuRole::NoRole</enum>
-   </property>
-  </action>
   <action name="actionClearFilter">
    <property name="icon">
     <iconset resource="../resources.qrc">

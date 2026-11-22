@@ -30,6 +30,7 @@
 #include "gis/rte/CGisItemRte.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
+#include "helpers/CClock.h"
 #include "helpers/CDraw.h"
 #include "mouse/CScrOptRuler.h"
 
@@ -155,7 +156,7 @@ void CMouseRuler::slotToWpt() {
       first = false;
     }
     qreal ele = canvas->getElevationAt(pt, false);
-    CGisItemWpt* wpt = new CGisItemWpt(pt * RAD_TO_DEG, ele, QDateTime::currentDateTimeUtc(), name, icon, project);
+    CGisItemWpt* wpt = new CGisItemWpt(pt * RAD_TO_DEG, ele, CClock::nowUtc(), name, icon, project);
     wpt->updateDecoration(CGisItemWpt::eMarkChanged, CGisItemWpt::eMarkNone);
   }
 }

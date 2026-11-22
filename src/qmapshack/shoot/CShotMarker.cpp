@@ -122,7 +122,8 @@ QString nameOf(const QWidget* w) {
   if (const QAbstractButton* button = qobject_cast<const QAbstractButton*>(w); nullptr != button) {
     // Designer gives a tool button the text "..." until it has an icon.
     static const QRegularExpression placeholder(R"(^[.\s]*$)");
-    const QString& text = QString(button->text()).remove('&');
+    // A copy: remove() returns a reference into the temporary.
+    const QString text = QString(button->text()).remove('&');
     if (!text.contains(placeholder)) {
       return text;
     }

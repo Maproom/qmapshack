@@ -21,6 +21,7 @@
 #include "gis/rte/CGisItemRte.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
+#include "helpers/CClock.h"
 #include "helpers/CWptIconManager.h"
 #include "qlgt/CQlgtDiary.h"
 #include "qlgt/CQlgtFolder.h"
@@ -170,7 +171,7 @@ CGisItemTrk::CGisItemTrk(const CQlgtTrack& trk1, IGisProject* project)
     // append history by new entry
     history.events << history_event_t();
     history_event_t& event = history.events.last();
-    event.time = QDateTime::currentDateTimeUtc();
+    event.time = CClock::nowUtc();
     event.comment = tr("Copy flag information from QLandkarte GT track");
     event.icon = "://icons/PointHide.svgt";
 

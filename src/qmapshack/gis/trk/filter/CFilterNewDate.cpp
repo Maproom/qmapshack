@@ -20,6 +20,7 @@
 
 #include "canvas/CCanvas.h"
 #include "gis/trk/CGisItemTrk.h"
+#include "helpers/CClock.h"
 #include "svgticon/CSvgtIcon.h"
 #include "units/IUnit.h"
 
@@ -34,14 +35,15 @@ CFilterNewDate::CFilterNewDate(CGisItemTrk& trk, QWidget* parent) : QWidget(pare
 
   switch (mode) {
     case IUnit::eTZUtc: {
-      labelTimeZone->setText(QTimeZone::utc().abbreviation(QDateTime::currentDateTimeUtc()));
-      dateTimeEdit->setDateTime(QDateTime::currentDateTimeUtc());
+      labelTimeZone->setText(QTimeZone::utc().abbreviation(CClock::nowUtc()));
+      dateTimeEdit->setDateTime(CClock::nowUtc());
       break;
     }
 
     case IUnit::eTZLocal: {
-      labelTimeZone->setText(QDateTime::currentDateTime().timeZone().abbreviation(QDateTime::currentDateTime()));
-      dateTimeEdit->setDateTime(QDateTime::currentDateTime());
+      const QDateTime& local = CClock::nowUtc().toLocalTime();
+      labelTimeZone->setText(local.timeZone().abbreviation(local));
+      dateTimeEdit->setDateTime(local);
       break;
     }
 
@@ -52,7 +54,7 @@ CFilterNewDate::CFilterNewDate(CGisItemTrk& trk, QWidget* parent) : QWidget(pare
     }
 
     case IUnit::eTZSelected: {
-      const QDateTime& datetime = QDateTime::currentDateTimeUtc().toTimeZone(QTimeZone(zone));
+      const QDateTime& datetime = CClock::nowUtc().toTimeZone(QTimeZone(zone));
       labelTimeZone->setText(datetime.timeZone().abbreviation(datetime));
       dateTimeEdit->setDateTime(datetime);
       break;

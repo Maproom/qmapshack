@@ -48,8 +48,8 @@ doc/shots/_cache/                   tile caches, workspace databases, images wai
 ```json
 {
   "shots": [
-    { "id": "test/menu-project", "widget": "menuProject" },
-    { "id": "test/workspace-filter", "set": { "lineFilter.text": "track" },
+    { "id": "test/test-menu-project", "widget": "menuProject" },
+    { "id": "test/test-workspace-filter", "set": { "lineFilter.text": "track" },
       "size": [1200, 800], "widget": "dockWorkspace" }
   ],
   "scenarios": {

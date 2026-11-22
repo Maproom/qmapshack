@@ -37,6 +37,7 @@
 #include "gis/rte/CGisItemRte.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
+#include "helpers/CClock.h"
 #include "helpers/CSettings.h"
 #include "misc.h"
 #include "units/IUnit.h"
@@ -319,7 +320,7 @@ void IGisItem::changed(const QString& what, const QString& icon) {
   // append history by new entry
   history.events << history_event_t();
   history_event_t& event = history.events.last();
-  event.time = QDateTime::currentDateTimeUtc();
+  event.time = CClock::nowUtc();
   event.comment = what;
   event.icon = icon;
   event.who = CMainWindow::getUser();
@@ -369,7 +370,7 @@ void IGisItem::setupHistory() {
   if (history.events.isEmpty()) {
     history.events << history_event_t();
     history_event_t& event = history.events.last();
-    event.time = QDateTime::currentDateTimeUtc();
+    event.time = CClock::nowUtc();
     event.comment = tr("Initial version.");
     event.icon = "://icons/Start.svgt";
   }

@@ -34,6 +34,7 @@
 #include "gis/rte/CDetailsRte.h"
 #include "gis/rte/CScrOptRte.h"
 #include "gis/trk/CGisItemTrk.h"
+#include "helpers/CClock.h"
 #include "helpers/CDraw.h"
 #include "helpers/CWptIconManager.h"
 #include "units/IUnit.h"
@@ -776,7 +777,7 @@ void CGisItemRte::setResultFromRoutino(Routino_Output* route, const QString& opt
   qint32 idxRtept = -1;
   rtept_t* rtept = nullptr;
 
-  QDateTime time = QDateTime::currentDateTimeUtc();
+  QDateTime time = CClock::nowUtc();
 
   Routino_Output* next = route;
   while (next) {
@@ -826,7 +827,7 @@ void CGisItemRte::setResultFromRoutino(Routino_Output* route, const QString& opt
     next = next->next;
   }
 
-  rte.lastRoutedTime = QDateTime::currentDateTimeUtc();
+  rte.lastRoutedTime = CClock::nowUtc();
   rte.lastRoutedWith = "Routino, " + options;
 
   deriveSecondaryData();
@@ -887,7 +888,7 @@ void CGisItemRte::setResultFromBRouter(const QDomDocument& xml, const QString& o
   if (!xmlLeg.isNull()) {
     const QDomNodeList& xmlManeuvers = xmlLeg.elementsByTagName("rtept");
     const qint32 M = xmlManeuvers.size();
-    const QDateTime& time = QDateTime::currentDateTimeUtc();
+    const QDateTime& time = CClock::nowUtc();
     int prevIdx = -1;
     QString valDist, unitDist;
     QString valTime, unitTime;
@@ -1015,7 +1016,7 @@ void CGisItemRte::setResultFromBRouter(const QDomDocument& xml, const QString& o
   rtept.fakeSubpt.lat = rtept.lat;
   rtept.fakeSubpt.ele = rtept.ele;
 
-  rte.lastRoutedTime = QDateTime::currentDateTimeUtc();
+  rte.lastRoutedTime = CClock::nowUtc();
   rte.lastRoutedWith = QString("BRouter %1").arg(options);
 
   deriveSecondaryData();

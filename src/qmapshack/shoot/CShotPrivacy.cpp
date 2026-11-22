@@ -252,8 +252,9 @@ void CShotPrivacy::rewriteDocument(QWidget* edit, QTextDocument* doc, const QLis
     for (const rule_t& rule : list) {
       QTextCursor found = doc->find(rule.pattern);
       while (!found.isNull()) {
-        const QString& before = found.selectedText();
-        const QString& after = QString(before).replace(rule.pattern, rule.replacement);
+        const QString before = found.selectedText();
+        // A copy: replace() returns a reference into the temporary.
+        const QString after = QString(before).replace(rule.pattern, rule.replacement);
         const qint32 position = found.selectionStart();
         found.insertText(after);
         replaced << replaced_t{position, qint32(after.size()), before};

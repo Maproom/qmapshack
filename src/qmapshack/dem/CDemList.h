@@ -80,6 +80,9 @@ class CDemList : public QWidget, private Ui::IDemsList {
    */
   void updateHelpText();
 
+  /** @brief Drop the cached icons and animation state of all rows, before the list is rebuilt */
+  void resetDelegate();
+
   /**
    * @brief Add DEM item to the list
    *

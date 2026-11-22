@@ -21,7 +21,9 @@
 #include <QtWidgets>
 
 #include "CMainWindow.h"
+#include "dem/CDemDraw.h"
 #include "helpers/CSettings.h"
+#include "map/CMapDraw.h"
 #include "misc.h"
 #include "svgticon/CSvgtIcon.h"
 #include "theme/CUiTheme.h"
@@ -151,10 +153,11 @@ void CMapVrtBuilder::slotStart() {
     }
   }
 
-  args << labelTargetFilename->text();
-  if (QFile::exists(labelTargetFilename->text())) {
-    QFile::remove(labelTargetFilename->text());
-  }
+  // built as .part, which no map or DEM folder lists, and renamed when its overviews are done
+  const QString& part = labelTargetFilename->text() + ".part";
+  args << part;
+  QFile::remove(part);
+  QFile::remove(part + ".ovr");
 
   openFileCheckSuccess(QIODevice::ReadWrite, *tempFile);
   tempFile->resize(0);
@@ -173,7 +176,7 @@ void CMapVrtBuilder::slotStart() {
 void CMapVrtBuilder::finished(int exitCode, QProcess::ExitStatus status) {
   if (!last && groupOverviews->isChecked()) {
     QStringList args;
-    args << labelTargetFilename->text();
+    args << labelTargetFilename->text() + ".part";
     if (checkBy2->isChecked()) {
       args << "2";
     }
@@ -198,9 +201,69 @@ void CMapVrtBuilder::finished(int exitCode, QProcess::ExitStatus status) {
     last = true;
     return;
   }
+  pushStart->setEnabled(true);
+  if (!moveIntoTarget()) {
+    textBrowser->setTextColor(CUiTheme::foreground(CUiTheme::Role::eError));
+    textBrowser->append(tr("!!! failed !!!\n"));
+    return;
+  }
   textBrowser->setTextColor(CUiTheme::foreground(CUiTheme::Role::eOk));
   textBrowser->append(tr("!!! done !!!\n"));
-  pushStart->setEnabled(true);
+
+  // at once, not after the folder watchers' delay
+  const QString& folder = QFileInfo(labelTargetFilename->text()).absolutePath();
+  if (containsPath(CMapDraw::getMapPaths(), folder)) {
+    CMapDraw::reloadMaps();
+  }
+  if (containsPath(CDemDraw::getDemPaths(), folder)) {
+    CDemDraw::reloadDems();
+  }
+}
+
+bool CMapVrtBuilder::moveIntoTarget() {
+  const QString& target = labelTargetFilename->text();
+  // built file -> its final name; an old overview must not outlive its .vrt
+  const QList<QPair<QString, QString>> files = {{target + ".part", target}, {target + ".part.ovr", target + ".ovr"}};
+
+  // The old files are moved aside, not deleted, so a failure leaves the map as it was.
+  QStringList aside;
+  QList<QPair<QString, QString>> placed;
+  auto restore = [&]() {
+    for (const auto& [from, to] : placed) {
+      QFile::rename(to, from);
+    }
+    for (const QString& file : aside) {
+      QFile::rename(file + ".old", file);
+    }
+  };
+
+  for (const auto& [from, to] : files) {
+    if (!QFile::exists(to)) {
+      continue;
+    }
+    QFile::remove(to + ".old");
+    if (!QFile::rename(to, to + ".old")) {
+      stdErr(tr("Cannot replace %1. Is it in use?").arg(to));
+      restore();
+      return false;
+    }
+    aside << to;
+  }
+  for (const auto& [from, to] : files) {
+    if (!QFile::exists(from)) {
+      continue;
+    }
+    if (!QFile::rename(from, to)) {
+      stdErr(tr("Cannot rename %1 to %2.").arg(from, to));
+      restore();
+      return false;
+    }
+    placed << qMakePair(from, to);
+  }
+  for (const QString& file : aside) {
+    QFile::remove(file + ".old");
+  }
+  return true;
 }
 
 void CMapVrtBuilder::slotLinkActivated(const QUrl& url) { QDesktopServices::openUrl(url); }

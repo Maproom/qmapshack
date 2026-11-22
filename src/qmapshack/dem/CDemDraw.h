@@ -57,6 +57,8 @@ class CDemDraw : public IDrawContext {
   static void setupDemPath();
   static void setupDemPath(const QString& path);
   static void setupDemPath(const QStringList& paths);
+  /** @brief Rebuild the DEM list of every view from the registered paths, as after adding or removing a DEM file */
+  static void reloadDems();
   static void saveDemPath(QSettings& cfg);
   static void loadDemPath(QSettings& cfg);
   static const QStringList& getSupportedFormats() { return supportedFormats; }

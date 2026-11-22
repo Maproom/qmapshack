@@ -30,7 +30,6 @@ CPoiList::CPoiList(CCanvas* parent) : QWidget(parent), canvas(parent) {
 
   connect(treeWidget, &CPoiTreeWidget::customContextMenuRequested, this, &CPoiList::slotContextMenu);
   connect(actionActivate, &QAction::triggered, this, &CPoiList::slotActivate);
-  connect(actionReloadPoi, &QAction::triggered, this, &CPoiList::slotReloadPoi);
   connect(treeWidget, &CPoiTreeWidget::sigChanged, this, &CPoiList::sigChanged);
   connect(labelHelpFillPoiList, &QLabel::linkActivated, &CMainWindow::self(),
           static_cast<void (CMainWindow::*)(const QString&)>(&CMainWindow::slotLinkActivated));
@@ -38,7 +37,6 @@ CPoiList::CPoiList(CCanvas* parent) : QWidget(parent), canvas(parent) {
   menu = new QMenu(this);
   menu->addAction(actionActivate);
   menu->addSeparator();
-  menu->addAction(actionReloadPoi);
   menu->addAction(CMainWindow::self().getPoiSetupAction());
 }
 
@@ -117,8 +115,6 @@ void CPoiList::slotActivate() {
 
   updateHelpText();
 }
-
-void CPoiList::slotReloadPoi() { CPoiDraw::setupPoiPath(CPoiDraw::getPoiPaths()); }
 
 void CPoiList::slotContextMenu(const QPoint& point) {
   CPoiFileItem* item = dynamic_cast<CPoiFileItem*>(treeWidget->currentItem());

@@ -68,7 +68,6 @@ class CPoiList : public QWidget, private Ui::IPoiList {
 
  private slots:
   void slotActivate();
-  void slotReloadPoi();
   void slotContextMenu(const QPoint& point);
 
  private:

@@ -114,7 +114,6 @@ CMapList::CMapList(CCanvas* parent) : QWidget(parent), canvas(parent) {
   connect(actionMoveDown, &QAction::triggered, this, &CMapList::slotMoveDown);
   connect(actionMoveEnd, &QAction::triggered, this, &CMapList::slotMoveEnd);
   connect(actionRemove, &QAction::triggered, this, &CMapList::slotRemove);
-  connect(actionReloadMaps, &QAction::triggered, this, &CMapList::slotReloadMaps);
   connect(actionOverviewInfo, &QAction::triggered, this, &CMapList::slotOverviewInfo);
   connect(labelHelpFillMapList, &QLabel::linkActivated, &CMainWindow::self(),
           static_cast<void (CMainWindow::*)(const QString&)>(&CMainWindow::slotLinkActivated));
@@ -130,7 +129,6 @@ CMapList::CMapList(CCanvas* parent) : QWidget(parent), canvas(parent) {
   menu->addSeparator();
   menu->addAction(actionOverviewInfo);
   menu->addSeparator();
-  menu->addAction(actionReloadMaps);
   menu->addAction(CMainWindow::self().getMapSetupAction());
   menu->setToolTipsVisible(true);
 }
@@ -340,8 +338,6 @@ void CMapList::resetDelegate() {
     delegate->reset();
   }
 }
-
-void CMapList::slotReloadMaps() { CMapDraw::reloadMaps(); }
 
 void CMapList::slotFilter(const QString& str) {
   actionClearFilter->setIcon(str.isEmpty() ? QIcon("://icons/Filter.svgt") : QIcon("://icons/Cancel.svgt"));

@@ -114,7 +114,6 @@ CDemList::CDemList(CCanvas* parent) : QWidget(parent), canvas(parent) {
   connect(actionMoveDown, &QAction::triggered, this, &CDemList::slotMoveDown);
   connect(actionMoveEnd, &QAction::triggered, this, &CDemList::slotMoveEnd);
   connect(actionRemove, &QAction::triggered, this, &CDemList::slotRemove);
-  connect(actionReloadDem, &QAction::triggered, this, &CDemList::slotReloadDem);
   connect(actionOverviewInfo, &QAction::triggered, this, &CDemList::slotOverviewInfo);
   connect(labelHelpFillMapList, &QLabel::linkActivated, &CMainWindow::self(),
           static_cast<void (CMainWindow::*)(const QString&)>(&CMainWindow::slotLinkActivated));
@@ -130,7 +129,6 @@ CDemList::CDemList(CCanvas* parent) : QWidget(parent), canvas(parent) {
   menu->addSeparator();
   menu->addAction(actionOverviewInfo);
   menu->addSeparator();
-  menu->addAction(actionReloadDem);
   menu->addAction(CMainWindow::self().getDemSetupAction());
   menu->setToolTipsVisible(true);
 }
@@ -302,8 +300,6 @@ void CDemList::resetDelegate() {
     delegate->reset();
   }
 }
-
-void CDemList::slotReloadDem() { CDemDraw::reloadDems(); }
 
 void CDemList::slotFilter(const QString& str) {
   actionClearFilter->setIcon(str.isEmpty() ? QIcon("://icons/Filter.svgt") : QIcon("://icons/Cancel.svgt"));

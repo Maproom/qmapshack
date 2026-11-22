@@ -108,7 +108,6 @@ class CDemList : public QWidget, private Ui::IDemsList {
   void slotMoveDown();
   void slotMoveEnd();
   void slotRemove();
-  void slotReloadDem();
   void slotOverviewInfo();
   void slotContextMenu(const QPoint& point);
   void slotFilter(const QString& str);

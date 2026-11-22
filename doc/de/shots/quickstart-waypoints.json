@@ -1,0 +1,333 @@
+{
+    "scenarios": {
+        "closed": [
+            {
+                "do": "view",
+                "lat": 47.53,
+                "lon": 10.5606,
+                "zoom": 5
+            },
+            {
+                "button": "activate",
+                "do": "click",
+                "row": "OpenStreetMap",
+                "widget": "dockMaps/treeWidget"
+            },
+            {
+                "button": "right",
+                "do": "click",
+                "lat": 47.52375,
+                "lon": 10.55796,
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0"
+            },
+            {
+                "action": "actionAddWpt",
+                "do": "trigger"
+            },
+            {
+                "do": "key",
+                "enter": true,
+                "text": "Meine Wegpunkte",
+                "widget": "ISelectProjectDialog/lineEdit"
+            },
+            {
+                "do": "key",
+                "enter": true,
+                "text": "Treffpunkt",
+                "widget": "IDetailsWpt/lineName"
+            },
+            {
+                "do": "keypress",
+                "key": "Esc",
+                "widget": "IDetailsWpt"
+            }
+        ],
+        "details": [
+            {
+                "do": "view",
+                "lat": 47.53,
+                "lon": 10.5606,
+                "zoom": 5
+            },
+            {
+                "button": "activate",
+                "do": "click",
+                "row": "OpenStreetMap",
+                "widget": "dockMaps/treeWidget"
+            },
+            {
+                "button": "right",
+                "do": "click",
+                "lat": 47.52375,
+                "lon": 10.55796,
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0"
+            },
+            {
+                "action": "actionAddWpt",
+                "do": "trigger"
+            },
+            {
+                "do": "key",
+                "enter": true,
+                "text": "Meine Wegpunkte",
+                "widget": "ISelectProjectDialog/lineEdit"
+            }
+        ],
+        "menu": [
+            {
+                "do": "view",
+                "lat": 47.53,
+                "lon": 10.5606,
+                "zoom": 5
+            },
+            {
+                "button": "activate",
+                "do": "click",
+                "row": "OpenStreetMap",
+                "widget": "dockMaps/treeWidget"
+            },
+            {
+                "button": "right",
+                "do": "click",
+                "lat": 47.52375,
+                "lon": 10.55796,
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0"
+            }
+        ],
+        "named": [
+            {
+                "do": "view",
+                "lat": 47.53,
+                "lon": 10.5606,
+                "zoom": 5
+            },
+            {
+                "button": "activate",
+                "do": "click",
+                "row": "OpenStreetMap",
+                "widget": "dockMaps/treeWidget"
+            },
+            {
+                "button": "right",
+                "do": "click",
+                "lat": 47.52375,
+                "lon": 10.55796,
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0"
+            },
+            {
+                "action": "actionAddWpt",
+                "do": "trigger"
+            },
+            {
+                "do": "key",
+                "enter": true,
+                "text": "Meine Wegpunkte",
+                "widget": "ISelectProjectDialog/lineEdit"
+            },
+            {
+                "do": "key",
+                "enter": true,
+                "text": "Treffpunkt",
+                "widget": "IDetailsWpt/lineName"
+            }
+        ],
+        "project-typed": [
+            {
+                "do": "view",
+                "lat": 47.53,
+                "lon": 10.5606,
+                "zoom": 5
+            },
+            {
+                "button": "activate",
+                "do": "click",
+                "row": "OpenStreetMap",
+                "widget": "dockMaps/treeWidget"
+            },
+            {
+                "button": "right",
+                "do": "click",
+                "lat": 47.52375,
+                "lon": 10.55796,
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0"
+            },
+            {
+                "action": "actionAddWpt",
+                "do": "trigger"
+            },
+            {
+                "do": "key",
+                "text": "Meine Wegpunkte",
+                "widget": "ISelectProjectDialog/lineEdit"
+            }
+        ],
+        "saved": [
+            {
+                "do": "view",
+                "lat": 47.53,
+                "lon": 10.5606,
+                "zoom": 5
+            },
+            {
+                "button": "activate",
+                "do": "click",
+                "row": "OpenStreetMap",
+                "widget": "dockMaps/treeWidget"
+            },
+            {
+                "button": "right",
+                "do": "click",
+                "lat": 47.52375,
+                "lon": 10.55796,
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0"
+            },
+            {
+                "action": "actionAddWpt",
+                "do": "trigger"
+            },
+            {
+                "do": "key",
+                "enter": true,
+                "text": "Meine Wegpunkte",
+                "widget": "ISelectProjectDialog/lineEdit"
+            },
+            {
+                "do": "key",
+                "enter": true,
+                "text": "Treffpunkt",
+                "widget": "IDetailsWpt/lineName"
+            },
+            {
+                "do": "keypress",
+                "key": "Esc",
+                "widget": "IDetailsWpt"
+            },
+            {
+                "do": "expand",
+                "row": "Meine Wegpunkte",
+                "widget": "dockWorkspace/treeWks"
+            }
+        ]
+    },
+    "shots": [
+        {
+            "active": "actionAddWpt",
+            "id": "quickstart-waypoints/quickstart-waypoints-add-waypoint",
+            "scenario": "menu",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "id": "quickstart-waypoints/quickstart-waypoints-project",
+            "mark": [
+                {
+                    "root": "window",
+                    "shape": "frame",
+                    "widget": "frameType"
+                }
+            ],
+            "scenario": "project-typed",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "id": "quickstart-waypoints/quickstart-waypoints-details",
+            "scenario": "details",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "id": "quickstart-waypoints/quickstart-waypoints-named",
+            "mark": [
+                {
+                    "root": "window",
+                    "shape": "frame",
+                    "widget": "lineName"
+                }
+            ],
+            "rect": [
+                0,
+                21,
+                550,
+                61
+            ],
+            "scenario": "named",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "id": "quickstart-waypoints/quickstart-waypoints-symbol",
+            "mark": [
+                {
+                    "root": "window",
+                    "shape": "frame",
+                    "widget": "Waypoint"
+                }
+            ],
+            "rect": [
+                0,
+                21,
+                240,
+                61
+            ],
+            "scenario": "named",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "id": "quickstart-waypoints/quickstart-waypoints-closed",
+            "rect": [
+                560,
+                560,
+                300,
+                140
+            ],
+            "scenario": "closed",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "id": "quickstart-waypoints/quickstart-waypoints-saved",
+            "mark": [
+                {
+                    "button": "save",
+                    "part": "button",
+                    "root": "main",
+                    "row": "1:0",
+                    "shape": "frame",
+                    "widget": "dockWorkspace/treeWks"
+                }
+            ],
+            "rect": [
+                14,
+                106,
+                300,
+                102
+            ],
+            "scenario": "saved",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        }
+    ]
+}

@@ -28,6 +28,8 @@ class CRouterSetup : public QWidget, private Ui::IRouterSetup {
   Q_OBJECT
  public:
   static CRouterSetup& self() { return *pSelf; }
+  /** @brief Tell the line editors whether the current router can route on the fly, after its data changed */
+  void updateFastRouting() { emit sigHasFastRouting(hasFastRouting()); }
   virtual ~CRouterSetup();
 
   void calcRoute(const IGisItem::key_t& key);
@@ -41,7 +43,7 @@ class CRouterSetup : public QWidget, private Ui::IRouterSetup {
   void setRouterTitle(router_e, QString title);
 
  signals:
-  void sigHasFastRouting (bool on);
+  void sigHasFastRouting(bool on);
 
  private slots:
   void slotSelectRouter(int i);

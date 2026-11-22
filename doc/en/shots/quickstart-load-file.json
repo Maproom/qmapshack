@@ -1,0 +1,168 @@
+{
+    "scenarios": {
+        "expanded": [
+            {
+                "do": "view",
+                "lat": 47.51,
+                "lon": 10.56,
+                "zoom": 7
+            },
+            {
+                "button": "activate",
+                "do": "click",
+                "row": "OpenStreetMap",
+                "widget": "dockMaps/treeWidget"
+            },
+            {
+                "do": "expand",
+                "row": "Example",
+                "widget": "dockWorkspace/treeWks"
+            }
+        ],
+        "hidden": [
+            {
+                "do": "view",
+                "lat": 47.51,
+                "lon": 10.56,
+                "zoom": 7
+            },
+            {
+                "button": "activate",
+                "do": "click",
+                "row": "OpenStreetMap",
+                "widget": "dockMaps/treeWidget"
+            },
+            {
+                "do": "expand",
+                "row": "Example",
+                "widget": "dockWorkspace/treeWks"
+            },
+            {
+                "button": "visible",
+                "do": "click",
+                "row": "Example",
+                "widget": "dockWorkspace/treeWks"
+            }
+        ],
+        "loaded": [
+            {
+                "do": "view",
+                "lat": 47.51,
+                "lon": 10.56,
+                "zoom": 7
+            },
+            {
+                "button": "activate",
+                "do": "click",
+                "row": "OpenStreetMap",
+                "widget": "dockMaps/treeWidget"
+            }
+        ],
+        "zoomed": [
+            {
+                "do": "view",
+                "lat": 47.51,
+                "lon": 10.56,
+                "zoom": 7
+            },
+            {
+                "button": "activate",
+                "do": "click",
+                "row": "OpenStreetMap",
+                "widget": "dockMaps/treeWidget"
+            },
+            {
+                "do": "expand",
+                "row": "Example",
+                "widget": "dockWorkspace/treeWks"
+            },
+            {
+                "do": "dclick",
+                "row": "Example/trk:Track",
+                "widget": "dockWorkspace/treeWks"
+            }
+        ]
+    },
+    "shots": [
+        {
+            "id": "quickstart-load-file/quickstart-load-file-items",
+            "mark": [
+                {
+                    "part": "branch",
+                    "root": "main",
+                    "row": "0:0",
+                    "shape": "disc",
+                    "widget": "dockWorkspace/treeWks"
+                }
+            ],
+            "rect": [
+                8,
+                103,
+                292,
+                167
+            ],
+            "scenario": "expanded",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "id": "quickstart-load-file/quickstart-load-file-dclick",
+            "rect": [
+                8,
+                103,
+                292,
+                167
+            ],
+            "scenario": "zoomed",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "id": "quickstart-load-file/quickstart-load-file-zoomed",
+            "rect": [
+                310,
+                180,
+                888,
+                596
+            ],
+            "scenario": "zoomed",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "id": "quickstart-load-file/quickstart-load-file-hide",
+            "mark": [
+                {
+                    "button": "visible",
+                    "cursor": "pointer",
+                    "part": "button",
+                    "root": "main",
+                    "row": "0:0",
+                    "shape": "cursor",
+                    "widget": "dockWorkspace/treeWks"
+                }
+            ],
+            "rect": [
+                16,
+                100,
+                300,
+                170
+            ],
+            "scenario": "hidden",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        }
+    ]
+}

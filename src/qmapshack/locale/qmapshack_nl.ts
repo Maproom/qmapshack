@@ -77,17 +77,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="237"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="240"/>
         <source>Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="264"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="267"/>
         <source>Ascent:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="285"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="288"/>
         <source>Descent:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -102,27 +102,27 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="243"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="246"/>
         <source>Distance:</source>
         <translation>Afstand:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="306"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="309"/>
         <source>Speed Moving:</source>
         <translation>Bewogen snelheid:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="327"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="330"/>
         <source>Speed Total:</source>
         <translation>Totale snelheid:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="348"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="351"/>
         <source>Time Moving:</source>
         <translation>Bewogen tijd:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="369"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="372"/>
         <source>Time Total:</source>
         <translation>Totale tijd:</translation>
     </message>
@@ -204,33 +204,28 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="350"/>
+        <location filename="../canvas/CCanvas.cpp" line="327"/>
+        <source>&lt;h2&gt;Maps!&lt;/h2&gt;&lt;p&gt;A map must always be defined by a single file that is recognized by QMapShack. This file has to be placed into one of the registered map folders (&lt;a href=&apos;MapFolders&apos;&gt;File-&gt;Setup Map Paths&lt;/a&gt;). QMapShack will find it and list it within a few seconds.&lt;/p&gt; &lt;p&gt;A map must be activated to be visible. Right click on the map entry and select &apos;Activate&apos; from the menu. The moment a map is activated this help will disappear. To see it again you simply add another map view (&lt;a href=&apos;NewView&apos;&gt;View-&gt;Add Map View&lt;/a&gt;).&lt;/p&gt; &lt;p&gt;To start with some online maps click on the link for &lt;a href=&apos;GetMaps&apos;&gt;impatient users&lt;/a&gt;. If you have a Garmin GPS device with non-commercial maps you can copy the *.img and *.jnx files from your device into the map folder.&lt;/p&gt; &lt;/p&gt;If you own raster maps in a format that is supported by GDAL you have to create a virtual map definition file (*.vrt), first. A *.vrt file can reference one or several other files. You can use QMapShack&apos;s built-in VRT Builder (&lt;a href=&apos;VrtBuilder&apos;&gt;Tool-&gt;VRT Builder&lt;/a&gt;) to create such a file.&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../canvas/CCanvas.cpp" line="349"/>
         <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocGisDatabase&apos;&gt;Databases&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/AdvProjects&apos;&gt;Databases &amp; Projects&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="367"/>
+        <location filename="../canvas/CCanvas.cpp" line="366"/>
         <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Sources for DEM&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="374"/>
-        <source>&lt;h2&gt;Elevation Data&lt;/h2&gt;&lt;p&gt;Elevation data (Digital Elevation Model - DEM) is used in various functions of QMapShack and is completely independent from the maps. However the same principles as for maps apply. DEM data must always be defined by a single file that is recognized by QMapShack. This file has to be placed into one of the registered DEM folders (&lt;a href=&apos;DemFolders&apos;&gt;File-&gt;Setup DEM Paths&lt;/a&gt;). QMapShack will find it and list it. You can reload the list of DEM files by doing a right click on the DEM list and select &apos;Reload DEM&apos; from the menu.&lt;/p&gt;&lt;p&gt;Similar to raster maps DEM files have to be wrapped by a *.vrt file to be recognized. A *.vrt file can reference one or several other files. Again, you can use QMapShack&apos;s built-in VRT Builder (&lt;a href=&apos;VrtBuilder&apos;&gt;Tool-&gt;VRT Builder&lt;/a&gt;) to create such a file.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../canvas/CCanvas.cpp" line="1156"/>
+        <location filename="../canvas/CCanvas.cpp" line="1151"/>
         <source>Map Projection...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="1157"/>
+        <location filename="../canvas/CCanvas.cpp" line="1152"/>
         <source>Failed to setup map projection. Please configure a valid projection.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../canvas/CCanvas.cpp" line="327"/>
-        <source>&lt;h2&gt;Maps!&lt;/h2&gt;&lt;p&gt;A map must always be defined by a single file that is recognized by QMapShack. This file has to be placed into one of the registered map folders (&lt;a href=&apos;MapFolders&apos;&gt;File-&gt;Setup Map Paths&lt;/a&gt;). QMapShack will find it and list it. You can reload the list of maps by doing a right click on the map list and select &apos;Reload Maps&apos; from the menu.&lt;/p&gt; &lt;p&gt;A map must be activated to be visible. Right click on the map entry and select &apos;Activate&apos; from the menu. The moment a map is activated this help will disappear. To see it again you simply add another map view (&lt;a href=&apos;NewView&apos;&gt;View-&gt;Add Map View&lt;/a&gt;).&lt;/p&gt; &lt;p&gt;To start with some online maps click on the link for &lt;a href=&apos;GetMaps&apos;&gt;impatient users&lt;/a&gt;. If you have a Garmin GPS device with non-commercial maps you can copy the *.img and *.jnx files from your device into the map folder.&lt;/p&gt; &lt;/p&gt;If you own raster maps in a format that is supported by GDAL you have to create a virtual map definition file (*.vrt), first. A *.vrt file can reference one or several other files. You can use QMapShack&apos;s built-in VRT Builder (&lt;a href=&apos;VrtBuilder&apos;&gt;Tool-&gt;VRT Builder&lt;/a&gt;) to create such a file.&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -244,17 +239,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="357"/>
+        <location filename="../canvas/CCanvas.cpp" line="356"/>
         <source>&lt;h2&gt;Your Data&lt;/h2&gt;&lt;p&gt;To load tracks and waypoints use &lt;a href=&apos;LoadData&apos;&gt;File-&gt;Load GIS Data&lt;/a&gt; from the menu. Each file will be an independent project in the workspace. You can manage your data in single files or you use a database. You can &lt;a href=&apos;CreateDB&apos;&gt;create a database&lt;/a&gt; in the database dockwidget.&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="393"/>
+        <location filename="../canvas/CCanvas.cpp" line="373"/>
+        <source>&lt;h2&gt;Elevation Data&lt;/h2&gt;&lt;p&gt;Elevation data (Digital Elevation Model - DEM) is used in various functions of QMapShack and is completely independent from the maps. However the same principles as for maps apply. DEM data must always be defined by a single file that is recognized by QMapShack. This file has to be placed into one of the registered DEM folders (&lt;a href=&apos;DemFolders&apos;&gt;File-&gt;Setup DEM Paths&lt;/a&gt;). QMapShack will find it and list it within a few seconds.&lt;/p&gt;&lt;p&gt;Similar to raster maps DEM files have to be wrapped by a *.vrt file to be recognized. A *.vrt file can reference one or several other files. Again, you can use QMapShack&apos;s built-in VRT Builder (&lt;a href=&apos;VrtBuilder&apos;&gt;Tool-&gt;VRT Builder&lt;/a&gt;) to create such a file.&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../canvas/CCanvas.cpp" line="390"/>
         <source>&lt;h2&gt;Routing&lt;/h2&gt;&lt;p&gt;QMapShack supports online routing services. But if you really want to make use of the routing possibilities you need the routing database stored locally. There are two offline routing engines available.&lt;/p&gt;&lt;h3&gt;Routino&lt;/h3&gt;&lt;p&gt;For Routino you have to create routing data from the Open Street Map database files. QMapShack has a built-in Routino Database Creator (&lt;a href=&apos;CreateRoutino&apos;&gt;Tool-&gt;Create Routino Database&lt;/a&gt;).&lt;/p&gt;&lt;h3&gt;BRouter&lt;/h3&gt;&lt;p&gt;A second option is to use a local BRouter installation with a local routing database. Use the &lt;a href=&apos;BRouterSetup&apos;&gt;BRouter setup&lt;/a&gt; to download and install all necessary data.&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="1107"/>
+        <location filename="../canvas/CCanvas.cpp" line="1102"/>
         <source>Setup Map Background</source>
         <translation type="unfinished"></translation>
     </message>
@@ -262,78 +262,84 @@
 <context>
     <name>CCommandProcessor</name>
     <message>
-        <location filename="../setup/CCommandProcessor.cpp" line="33"/>
+        <location filename="../setup/CCommandProcessor.cpp" line="35"/>
         <source>Print debug output to console.</source>
         <translation>Toon debug resultaat op scherm.</translation>
     </message>
     <message>
-        <location filename="../setup/CCommandProcessor.cpp" line="30"/>
+        <location filename="../setup/CCommandProcessor.cpp" line="32"/>
         <source>Do not show splash screen.</source>
         <translation>Toon geen splash scherm.</translation>
     </message>
     <message>
-        <location filename="../setup/CCommandProcessor.cpp" line="46"/>
+        <location filename="../setup/CCommandProcessor.cpp" line="48"/>
         <location filename="../setup/CCommandProcessor.cpp" line="55"/>
+        <location filename="../setup/CCommandProcessor.cpp" line="61"/>
         <source>name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setup/CCommandProcessor.cpp" line="49"/>
+        <location filename="../setup/CCommandProcessor.cpp" line="51"/>
         <source>size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setup/CCommandProcessor.cpp" line="43"/>
+        <location filename="../setup/CCommandProcessor.cpp" line="45"/>
         <source>code</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setup/CCommandProcessor.cpp" line="39"/>
+        <location filename="../setup/CCommandProcessor.cpp" line="41"/>
         <source>File with QMapShack configuration.</source>
         <translation>Bestand met QMapShack. configuratie.</translation>
     </message>
     <message>
-        <location filename="../setup/CCommandProcessor.cpp" line="36"/>
+        <location filename="../setup/CCommandProcessor.cpp" line="38"/>
         <source>Print debug output to logfile.</source>
         <translation>Sla debug resultaat op als bestand.</translation>
     </message>
     <message>
-        <location filename="../setup/CCommandProcessor.cpp" line="40"/>
+        <location filename="../setup/CCommandProcessor.cpp" line="42"/>
         <source>file</source>
         <translation>bestand</translation>
     </message>
     <message>
-        <location filename="../setup/CCommandProcessor.cpp" line="43"/>
+        <location filename="../setup/CCommandProcessor.cpp" line="45"/>
         <source>Application locale.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setup/CCommandProcessor.cpp" line="46"/>
+        <location filename="../setup/CCommandProcessor.cpp" line="48"/>
         <source>Application font family.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setup/CCommandProcessor.cpp" line="49"/>
+        <location filename="../setup/CCommandProcessor.cpp" line="51"/>
         <source>Application font size.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setup/CCommandProcessor.cpp" line="53"/>
+        <location filename="../setup/CCommandProcessor.cpp" line="55"/>
+        <source>Color scheme instead of the desktop&apos;s: light or dark.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../setup/CCommandProcessor.cpp" line="59"/>
         <source>Qt style.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setup/CCommandProcessor.cpp" line="53"/>
+        <location filename="../setup/CCommandProcessor.cpp" line="59"/>
         <source>Available:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setup/CCommandProcessor.cpp" line="54"/>
+        <location filename="../setup/CCommandProcessor.cpp" line="60"/>
         <source>Recommended:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setup/CCommandProcessor.cpp" line="58"/>
+        <location filename="../setup/CCommandProcessor.cpp" line="66"/>
         <source>Files for future use.</source>
         <translation>Bestanden voor toekomstig gebruik.</translation>
     </message>
@@ -431,12 +437,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CDBItemDelegate.cpp" line="448"/>
+        <location filename="../gis/CDBItemDelegate.cpp" line="459"/>
         <source>Load item into workspace.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CDBItemDelegate.cpp" line="426"/>
+        <location filename="../gis/CDBItemDelegate.cpp" line="437"/>
         <source>Load project into workspace</source>
         <translation type="unfinished"></translation>
     </message>
@@ -476,12 +482,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CDBItemDelegate.cpp" line="450"/>
+        <location filename="../gis/CDBItemDelegate.cpp" line="461"/>
         <source>Remove item from workspace.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CDBItemDelegate.cpp" line="428"/>
+        <location filename="../gis/CDBItemDelegate.cpp" line="439"/>
         <source>Remove project from workspace</source>
         <translation type="unfinished"></translation>
     </message>
@@ -994,17 +1000,17 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
     <name>CDeviceGarminArchiveMtp</name>
     <message>
         <location filename="../device/CDeviceGarminArchiveMtp.cpp" line="31"/>
-        <location filename="../device/CDeviceGarminArchiveMtp.cpp" line="111"/>
+        <location filename="../device/CDeviceGarminArchiveMtp.cpp" line="136"/>
         <source>Archive - expand to load</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../device/CDeviceGarminArchiveMtp.cpp" line="48"/>
+        <location filename="../device/CDeviceGarminArchiveMtp.cpp" line="63"/>
         <source>Archive - loading</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../device/CDeviceGarminArchiveMtp.cpp" line="93"/>
+        <location filename="../device/CDeviceGarminArchiveMtp.cpp" line="109"/>
         <source>Archive - loaded</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1012,7 +1018,7 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
 <context>
     <name>CDeviceGenericMtp</name>
     <message>
-        <location filename="../device/CDeviceGenericMtp.cpp" line="57"/>
+        <location filename="../device/CDeviceGenericMtp.cpp" line="62"/>
         <source>Unknown MTP</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1478,70 +1484,70 @@ You can modify both parameters to customize the behavior of the filter. For the 
     </message>
     <message>
         <location filename="../gis/search/CGeoSearch.cpp" line="66"/>
-        <location filename="../gis/search/CGeoSearch.cpp" line="113"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="114"/>
         <source>OSM Nominatim</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearch.cpp" line="62"/>
-        <location filename="../gis/search/CGeoSearch.cpp" line="114"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="116"/>
         <source>Geonames Places</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearch.cpp" line="64"/>
-        <location filename="../gis/search/CGeoSearch.cpp" line="115"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="118"/>
         <source>Geonames Address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearch.cpp" line="68"/>
-        <location filename="../gis/search/CGeoSearch.cpp" line="116"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="119"/>
         <source>Google</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearch.cpp" line="119"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="122"/>
         <source>Accumulative Results</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearch.cpp" line="124"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="128"/>
         <source>Reset Results</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearch.cpp" line="130"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="135"/>
         <source>Configure Services</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearch.cpp" line="131"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="137"/>
         <source>configure providers of geocoding search services</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearch.cpp" line="178"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="186"/>
         <source>no service configured - please click setup-icon in search-field</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearch.cpp" line="255"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="263"/>
         <source>unexpected service-identifier %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearch.cpp" line="352"/>
-        <location filename="../gis/search/CGeoSearch.cpp" line="397"/>
-        <location filename="../gis/search/CGeoSearch.cpp" line="465"/>
-        <location filename="../gis/search/CGeoSearch.cpp" line="589"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="360"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="405"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="473"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="597"/>
         <source>Unknown response</source>
         <translation type="unfinished">Onbekende reactie</translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearch.cpp" line="359"/>
-        <location filename="../gis/search/CGeoSearch.cpp" line="404"/>
-        <location filename="../gis/search/CGeoSearch.cpp" line="472"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="367"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="412"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="480"/>
         <source>Error: </source>
         <translation type="unfinished">Fout: </translation>
     </message>
@@ -1554,7 +1560,7 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearchWeb.cpp" line="125"/>
+        <location filename="../gis/search/CGeoSearchWeb.cpp" line="127"/>
         <source>Configure Services</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2787,7 +2793,7 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation>Element verwijderen</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="141"/>
+        <location filename="../gis/CGisListDB.cpp" line="140"/>
         <source>Search Database</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2807,73 +2813,73 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation>Leeg</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="418"/>
+        <location filename="../gis/CGisListDB.cpp" line="433"/>
         <source>Remove database...</source>
         <translation>Database verwijderen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="419"/>
+        <location filename="../gis/CGisListDB.cpp" line="434"/>
         <source>Do you really want to remove &apos;%1&apos; from the list?</source>
         <translation>Moet &apos;%1&apos; werkelijk uit de lijst verwijderd worden?</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="475"/>
+        <location filename="../gis/CGisListDB.cpp" line="490"/>
         <source>Delete database folder...</source>
         <translation>Verwijder database map...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="476"/>
+        <location filename="../gis/CGisListDB.cpp" line="491"/>
         <source>Are you sure you want to delete selected folders and all subfolders from the database?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="618"/>
+        <location filename="../gis/CGisListDB.cpp" line="633"/>
         <source>Bad operation....</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="619"/>
+        <location filename="../gis/CGisListDB.cpp" line="634"/>
         <source>The target folder is a subfolder of the one to move. This will not work.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="674"/>
+        <location filename="../gis/CGisListDB.cpp" line="689"/>
         <source>Folder name...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="674"/>
+        <location filename="../gis/CGisListDB.cpp" line="689"/>
         <source>Rename folder:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="693"/>
-        <location filename="../gis/CGisListDB.cpp" line="713"/>
+        <location filename="../gis/CGisListDB.cpp" line="708"/>
+        <location filename="../gis/CGisListDB.cpp" line="728"/>
         <source>Remove items...</source>
         <translation>Elementen verwijderen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="694"/>
+        <location filename="../gis/CGisListDB.cpp" line="709"/>
         <source>Are you sure you want to delete all items from Lost&amp;Found? This will remove them permanently.</source>
         <translation>Moeten alle elementen worden verwijderd uit Verloren &amp; Gevonden? Dit zal pemanent zijn.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="714"/>
+        <location filename="../gis/CGisListDB.cpp" line="729"/>
         <source>Are you sure you want to delete all selected items from Lost&amp;Found? This will remove them permanently.</source>
         <translation>Moeten alle geselecteerde elementen worden verwijderd uit Verloren &amp; Gevonden? Dit zal pemanent zijn.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="786"/>
+        <location filename="../gis/CGisListDB.cpp" line="801"/>
         <source>Are you sure you want to delete &apos;%1&apos; from folder &apos;%2&apos;?</source>
         <translation>Moet &apos;%1&apos; uit map &apos;%2&apos; verwijderd worden?</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="787"/>
+        <location filename="../gis/CGisListDB.cpp" line="802"/>
         <source>Delete...</source>
         <translation>Verwijderen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="956"/>
+        <location filename="../gis/CGisListDB.cpp" line="970"/>
         <source>Import GIS Data...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2881,278 +2887,278 @@ You can modify both parameters to customize the behavior of the filter. For the 
 <context>
     <name>CGisListWks</name>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="113"/>
+        <location filename="../gis/CGisListWks.cpp" line="117"/>
         <source>Edit..</source>
         <translation>Bewerken..</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="115"/>
+        <location filename="../gis/CGisListWks.cpp" line="120"/>
         <source>Show on Map</source>
         <translation>Toon op kaart</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="116"/>
+        <location filename="../gis/CGisListWks.cpp" line="122"/>
         <source>Hide from Map</source>
         <translation>Toon niet op kaart</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="120"/>
+        <location filename="../gis/CGisListWks.cpp" line="126"/>
         <source>Sort by Time</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="122"/>
+        <location filename="../gis/CGisListWks.cpp" line="129"/>
         <source>Sort by Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="138"/>
+        <location filename="../gis/CGisListWks.cpp" line="145"/>
         <source>Save</source>
         <translation>Opslaan</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="140"/>
+        <location filename="../gis/CGisListWks.cpp" line="149"/>
         <source>Save as GPX 1.1 w/o ext...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="143"/>
+        <location filename="../gis/CGisListWks.cpp" line="150"/>
         <source>Send to Devices</source>
         <translation>Verzend naar GPS</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="145"/>
+        <location filename="../gis/CGisListWks.cpp" line="152"/>
         <source>Sync. with Database</source>
         <translation>Syngroniseren met database</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="146"/>
+        <location filename="../gis/CGisListWks.cpp" line="155"/>
         <source>Close</source>
         <translation>Sluiten</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="150"/>
+        <location filename="../gis/CGisListWks.cpp" line="158"/>
         <source>Update Project on Device</source>
         <translation>Update project op GPS</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="151"/>
-        <location filename="../gis/CGisListWks.cpp" line="157"/>
+        <location filename="../gis/CGisListWks.cpp" line="161"/>
+        <location filename="../gis/CGisListWks.cpp" line="171"/>
         <source>Delete</source>
         <translation>Verwijder</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="154"/>
+        <location filename="../gis/CGisListWks.cpp" line="164"/>
         <source>Edit...</source>
         <translation>Bewerken...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="114"/>
-        <location filename="../gis/CGisListWks.cpp" line="156"/>
+        <location filename="../gis/CGisListWks.cpp" line="119"/>
+        <location filename="../gis/CGisListWks.cpp" line="169"/>
         <source>Copy to...</source>
         <translation>Kopieer naar...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="124"/>
+        <location filename="../gis/CGisListWks.cpp" line="131"/>
         <source>Sort by Rating</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="126"/>
+        <location filename="../gis/CGisListWks.cpp" line="132"/>
         <source>Filter Project</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="129"/>
+        <location filename="../gis/CGisListWks.cpp" line="135"/>
         <source>Autom. Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="132"/>
+        <location filename="../gis/CGisListWks.cpp" line="138"/>
         <source>Active Project</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="134"/>
+        <location filename="../gis/CGisListWks.cpp" line="142"/>
         <source>Autom. Sync. w. Device</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="139"/>
+        <location filename="../gis/CGisListWks.cpp" line="146"/>
         <source>Save as...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="155"/>
+        <location filename="../gis/CGisListWks.cpp" line="167"/>
         <source>Set Tags</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="163"/>
+        <location filename="../gis/CGisListWks.cpp" line="177"/>
         <source>Select Range</source>
         <translation>Selecteer afstand</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="164"/>
+        <location filename="../gis/CGisListWks.cpp" line="179"/>
         <source>Edit Track Points</source>
         <translation>Trackpunten bewerken</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="165"/>
+        <location filename="../gis/CGisListWks.cpp" line="181"/>
         <source>Reverse Track</source>
         <translation>Track omdraaien</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="167"/>
+        <location filename="../gis/CGisListWks.cpp" line="183"/>
         <source>Combine Tracks</source>
         <translation>Combineer tracks</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="169"/>
+        <location filename="../gis/CGisListWks.cpp" line="185"/>
         <source>Replace Elevation by DEM</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="170"/>
+        <location filename="../gis/CGisListWks.cpp" line="188"/>
         <source>Copy Track with Waypoints</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="172"/>
+        <location filename="../gis/CGisListWks.cpp" line="190"/>
         <source>Convert to Route</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="173"/>
+        <location filename="../gis/CGisListWks.cpp" line="192"/>
         <source>Convert to Area</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="174"/>
-        <location filename="../gis/CGisListWks.cpp" line="200"/>
+        <location filename="../gis/CGisListWks.cpp" line="194"/>
+        <location filename="../gis/CGisListWks.cpp" line="230"/>
         <source>Toggle Nogo-Line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="178"/>
+        <location filename="../gis/CGisListWks.cpp" line="199"/>
         <source>Show Bubble</source>
         <translation>Toon ballon</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="180"/>
+        <location filename="../gis/CGisListWks.cpp" line="202"/>
         <source>Move Waypoint</source>
         <translation>Verplaats waypoint</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="181"/>
+        <location filename="../gis/CGisListWks.cpp" line="203"/>
         <source>Proj. Waypoint...</source>
         <translation>Projecteer waypoint...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="183"/>
+        <location filename="../gis/CGisListWks.cpp" line="205"/>
         <source>Change Radius</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="186"/>
-        <location filename="../gis/CGisListWks.cpp" line="205"/>
+        <location filename="../gis/CGisListWks.cpp" line="210"/>
+        <location filename="../gis/CGisListWks.cpp" line="236"/>
         <source>Toggle Nogo-Area</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="189"/>
+        <location filename="../gis/CGisListWks.cpp" line="212"/>
         <source>Copy position</source>
         <translation type="unfinished">Kopieer positie</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="209"/>
+        <location filename="../gis/CGisListWks.cpp" line="241"/>
         <source>Create Route...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="211"/>
+        <location filename="../gis/CGisListWks.cpp" line="243"/>
         <source>Change Proximity...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="213"/>
+        <location filename="../gis/CGisListWks.cpp" line="245"/>
         <source>Change Icon...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1096"/>
+        <location filename="../gis/CGisListWks.cpp" line="1140"/>
         <source>Waypoints</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1100"/>
+        <location filename="../gis/CGisListWks.cpp" line="1144"/>
         <source>Wayp. &amp; Tracks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1102"/>
+        <location filename="../gis/CGisListWks.cpp" line="1146"/>
         <source>Tracks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="185"/>
+        <location filename="../gis/CGisListWks.cpp" line="207"/>
         <source>Delete Radius</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="161"/>
+        <location filename="../gis/CGisListWks.cpp" line="174"/>
         <source>Track Information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="193"/>
+        <location filename="../gis/CGisListWks.cpp" line="216"/>
         <source>Route Instructions</source>
         <translation>Route instructies</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="195"/>
+        <location filename="../gis/CGisListWks.cpp" line="220"/>
         <source>Calculate Route</source>
         <translation>Route berekenen</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="196"/>
+        <location filename="../gis/CGisListWks.cpp" line="222"/>
         <source>Reset Route</source>
         <translation>Route omkeren</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="197"/>
+        <location filename="../gis/CGisListWks.cpp" line="224"/>
         <source>Edit Route</source>
         <translation>Bewerk route</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="198"/>
+        <location filename="../gis/CGisListWks.cpp" line="225"/>
         <source>Reverse Route</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="199"/>
+        <location filename="../gis/CGisListWks.cpp" line="228"/>
         <source>Convert to Track</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="204"/>
+        <location filename="../gis/CGisListWks.cpp" line="234"/>
         <source>Edit Area Points</source>
         <translation>Bewerk gebied punten</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1018"/>
-        <location filename="../gis/CGisListWks.cpp" line="1106"/>
+        <location filename="../gis/CGisListWks.cpp" line="1061"/>
+        <location filename="../gis/CGisListWks.cpp" line="1150"/>
         <source>Set Track Color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="654"/>
+        <location filename="../gis/CGisListWks.cpp" line="692"/>
         <source>Drop items...</source>
         <translation>Elementen wissen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1909"/>
-        <location filename="../gis/CGisListWks.cpp" line="1970"/>
+        <location filename="../gis/CGisListWks.cpp" line="1971"/>
+        <location filename="../gis/CGisListWks.cpp" line="2034"/>
         <source>&lt;b&gt;Update devices&lt;/b&gt;&lt;p&gt;Update %1&lt;br/&gt;Please wait...&lt;/p&gt;</source>
         <translation>&lt;b&gt;Updaten GPS&lt;/b&gt;&lt;p&gt;Updaten %1&lt;br/&gt;Moment geduld...&lt;/p&gt;</translation>
     </message>
@@ -3161,22 +3167,22 @@ You can modify both parameters to customize the behavior of the filter. For the 
         <translation type="vanished">Werkruimte opslaan. Moment geduld.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1379"/>
+        <location filename="../gis/CGisListWks.cpp" line="1437"/>
         <source>Close all projects...</source>
         <translation>Sluit alle projecten...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1379"/>
+        <location filename="../gis/CGisListWks.cpp" line="1437"/>
         <source>This will remove all projects from the workspace.</source>
         <translation>Dit zal alle projecten uit de werkruimte verwijderen.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1402"/>
+        <location filename="../gis/CGisListWks.cpp" line="1462"/>
         <source>Delete project...</source>
         <translation>Project verwijderen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1403"/>
+        <location filename="../gis/CGisListWks.cpp" line="1463"/>
         <source>Do you really want to delete %1?</source>
         <translation>Moet %1 werkelijk verwijderd worden?</translation>
     </message>
@@ -3369,6 +3375,7 @@ lijn %2, kolom %3:
     <name>CHelp</name>
     <message>
         <location filename="../../common/help/CHelp.cpp" line="42"/>
+        <location filename="../../common/help/CHelp.cpp" line="96"/>
         <source>Help</source>
         <translation type="unfinished">Help</translation>
     </message>
@@ -3391,17 +3398,17 @@ lijn %2, kolom %3:
 <context>
     <name>CHelpBrowser</name>
     <message>
-        <location filename="../../common/help/CHelpBrowser.cpp" line="72"/>
+        <location filename="../../common/help/CHelpBrowser.cpp" line="239"/>
         <source>Go back one page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../common/help/CHelpBrowser.cpp" line="76"/>
+        <location filename="../../common/help/CHelpBrowser.cpp" line="244"/>
         <source>Go forward one page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../common/help/CHelpBrowser.cpp" line="80"/>
+        <location filename="../../common/help/CHelpBrowser.cpp" line="249"/>
         <source>Go to initial page</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3425,7 +3432,7 @@ lijn %2, kolom %3:
 <context>
     <name>CHistoryListWidget</name>
     <message>
-        <location filename="../widgets/CHistoryListWidget.cpp" line="60"/>
+        <location filename="../widgets/CHistoryListWidget.cpp" line="62"/>
         <source> by %1</source>
         <translation> per %1</translation>
     </message>
@@ -3440,12 +3447,12 @@ lijn %2, kolom %3:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../widgets/CHistoryListWidget.cpp" line="137"/>
+        <location filename="../widgets/CHistoryListWidget.cpp" line="139"/>
         <source>History removal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../widgets/CHistoryListWidget.cpp" line="138"/>
+        <location filename="../widgets/CHistoryListWidget.cpp" line="140"/>
         <source>The removal is permanent and cannot be undone. &lt;b&gt;Do you really want to delete history before this step?&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3914,89 +3921,99 @@ lijn %2, kolom %3:
 <context>
     <name>CMainWindow</name>
     <message>
-        <location filename="../CMainWindow.cpp" line="673"/>
+        <location filename="../CMainWindow.cpp" line="683"/>
         <source>Select folder...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="992"/>
+        <location filename="../CMainWindow.cpp" line="1002"/>
         <source>Use &lt;b&gt;Menu-&gt;View-&gt;Add Map View&lt;/b&gt; to open a new view. Or &lt;b&gt;Menu-&gt;File-&gt;Load Map View&lt;/b&gt; to restore a saved one. Or click &lt;a href=&apos;NewView&apos;&gt;here&lt;/a&gt;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1132"/>
+        <location filename="../CMainWindow.cpp" line="1142"/>
         <source>Ele.: %1%2</source>
         <translation type="unfinished">Hoogte.: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1142"/>
+        <location filename="../CMainWindow.cpp" line="1152"/>
         <source>Slope: %1%2</source>
         <comment>terrain</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1154"/>
+        <location filename="../CMainWindow.cpp" line="1164"/>
         <source>[Grid: %1]</source>
         <translation>[Raster: %1]</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1308"/>
+        <location filename="../CMainWindow.cpp" line="1318"/>
         <source>Load GIS Data...</source>
         <translation>GIS gegevens laden...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1335"/>
+        <location filename="../CMainWindow.cpp" line="1345"/>
         <source>Select output file</source>
         <translation>Selecteer bestand</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1335"/>
-        <location filename="../CMainWindow.cpp" line="1359"/>
+        <location filename="../CMainWindow.cpp" line="1345"/>
+        <location filename="../CMainWindow.cpp" line="1369"/>
         <source>QMapShack View (*.view)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1359"/>
+        <location filename="../CMainWindow.cpp" line="1369"/>
         <source>Select file to load</source>
         <translation>Selecteer bestand</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1372"/>
+        <location filename="../CMainWindow.cpp" line="1382"/>
         <source>Can not add view...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1373"/>
+        <location filename="../CMainWindow.cpp" line="1383"/>
         <source>The view is already loaded as &apos;%1&apos;. You have to close it before loading it again.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1594"/>
+        <location filename="../CMainWindow.cpp" line="1607"/>
         <source>Rename View...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1594"/>
+        <location filename="../CMainWindow.cpp" line="1607"/>
         <source>Enter new name for view</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1737"/>
+        <location filename="../CMainWindow.cpp" line="1750"/>
         <source>Fatal...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1738"/>
+        <location filename="../CMainWindow.cpp" line="1751"/>
         <source>QMapShack detected a badly installed Proj library. Please contact the package maintainer of your distribution to fix it.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1806"/>
+        <location filename="../CMainWindow.cpp" line="1766"/>
+        <source>Help</source>
+        <translation type="unfinished">Help</translation>
+    </message>
+    <message>
+        <location filename="../CMainWindow.cpp" line="1767"/>
+        <source>The help pages are missing (%1). Please reinstall QMapShack.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CMainWindow.cpp" line="1829"/>
         <source>To link map views all map views must have the same projection and scale type. The function &apos;Link Map Views&apos; will be switched off, now.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1809"/>
+        <location filename="../CMainWindow.cpp" line="1832"/>
         <source>Link Map Views...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4661,27 +4678,27 @@ Fall back to internal types.</source>
         <translation type="unfinished">-</translation>
     </message>
     <message>
-        <location filename="../map/CMapItemDelegate.cpp" line="338"/>
+        <location filename="../map/CMapItemDelegate.cpp" line="357"/>
         <source>This file can be slow to draw on the map. Click here to see how to speed it up.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../map/CMapItemDelegate.cpp" line="341"/>
+        <location filename="../map/CMapItemDelegate.cpp" line="360"/>
         <source>Deactivate %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../map/CMapItemDelegate.cpp" line="341"/>
+        <location filename="../map/CMapItemDelegate.cpp" line="360"/>
         <source>Activate %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../map/CMapItemDelegate.cpp" line="345"/>
+        <location filename="../map/CMapItemDelegate.cpp" line="364"/>
         <source>%1 is not visible at current scale</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../map/CMapItemDelegate.cpp" line="346"/>
+        <location filename="../map/CMapItemDelegate.cpp" line="365"/>
         <source>%1 is visible at current scale</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4689,7 +4706,7 @@ Fall back to internal types.</source>
 <context>
     <name>CMapList</name>
     <message>
-        <location filename="../map/CMapList.cpp" line="316"/>
+        <location filename="../map/CMapList.cpp" line="314"/>
         <source>Where do you want to store maps?</source>
         <translation>Waar moeten de kaarten opgeslagen worden?</translation>
     </message>
@@ -4890,26 +4907,43 @@ lijn %2, kolom %3:
 <context>
     <name>CMapVrtBuilder</name>
     <message>
-        <location filename="../tool/CMapVrtBuilder.cpp" line="33"/>
+        <location filename="../tool/CMapVrtBuilder.cpp" line="35"/>
         <source>Build GDAL VRT</source>
         <translation>GDAL VRT maken</translation>
     </message>
     <message>
-        <location filename="../tool/CMapVrtBuilder.cpp" line="83"/>
+        <location filename="../tool/CMapVrtBuilder.cpp" line="85"/>
         <source>Select files...</source>
         <translation>Selecteer bestanden...</translation>
     </message>
     <message>
-        <location filename="../tool/CMapVrtBuilder.cpp" line="108"/>
+        <location filename="../tool/CMapVrtBuilder.cpp" line="110"/>
         <source>Select target file...</source>
         <translation>Selecteer doel bestand...</translation>
     </message>
     <message>
-        <location filename="../tool/CMapVrtBuilder.cpp" line="202"/>
+        <location filename="../tool/CMapVrtBuilder.cpp" line="207"/>
+        <source>!!! failed !!!
+</source>
+        <translation type="unfinished">!!! Mislukt !!!
+</translation>
+    </message>
+    <message>
+        <location filename="../tool/CMapVrtBuilder.cpp" line="211"/>
         <source>!!! done !!!
 </source>
         <translation>!!! klaar !!!
 </translation>
+    </message>
+    <message>
+        <location filename="../tool/CMapVrtBuilder.cpp" line="246"/>
+        <source>Cannot replace %1. Is it in use?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../tool/CMapVrtBuilder.cpp" line="257"/>
+        <source>Cannot rename %1 to %2.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5007,52 +5041,52 @@ Onbekende structuur.</translation>
 <context>
     <name>CMouseNormal</name>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="372"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="382"/>
         <source>Add POI %1 as Waypoint</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="376"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="387"/>
         <source>Zoom in to add POIs as Waypoints</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="381"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="393"/>
         <source>Add Waypoint</source>
         <translation>Maak waypoint</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="382"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="395"/>
         <source>Add Track</source>
         <translation>Maak track</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="383"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="397"/>
         <source>Add Route</source>
         <translation>Maak route</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="384"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="399"/>
         <source>Add Area</source>
         <translation>Maak gebied</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="386"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="402"/>
         <source>Ruler</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="388"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="405"/>
         <source>Select Items On Map</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="391"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="409"/>
         <source>Copy position</source>
         <translation>Kopieer positie</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="392"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="411"/>
         <source>Copy position (Grid)</source>
         <translation>Kopieer positie (Raster)</translation>
     </message>
@@ -5361,12 +5395,12 @@ Onbekende structuur.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../plot/CPlotProfile.cpp" line="84"/>
+        <location filename="../plot/CPlotProfile.cpp" line="85"/>
         <source>Distance [%1]</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../plot/CPlotProfile.cpp" line="85"/>
+        <location filename="../plot/CPlotProfile.cpp" line="86"/>
         <source>Ele. [%1]</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5374,53 +5408,53 @@ Onbekende structuur.</translation>
 <context>
     <name>CPoiFilePOI</name>
     <message>
-        <location filename="../poi/CPoiFilePOI.cpp" line="81"/>
-        <location filename="../poi/CPoiFilePOI.cpp" line="99"/>
+        <location filename="../poi/CPoiFilePOI.cpp" line="85"/>
+        <location filename="../poi/CPoiFilePOI.cpp" line="103"/>
         <source>POI file error...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../poi/CPoiFilePOI.cpp" line="55"/>
+        <location filename="../poi/CPoiFilePOI.cpp" line="59"/>
         <source>Failed to open SQL database:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../poi/CPoiFilePOI.cpp" line="58"/>
+        <location filename="../poi/CPoiFilePOI.cpp" line="62"/>
         <source>SQL error...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../poi/CPoiFilePOI.cpp" line="79"/>
+        <location filename="../poi/CPoiFilePOI.cpp" line="83"/>
         <source>No valid POI file &apos;%1&apos;. Failed to retrieve bounding box!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../poi/CPoiFilePOI.cpp" line="95"/>
+        <location filename="../poi/CPoiFilePOI.cpp" line="99"/>
         <source>POI file &apos;%1&apos; is POI version %2. Only versions 2, 3 and 4 are supported!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../poi/CPoiFilePOI.cpp" line="97"/>
+        <location filename="../poi/CPoiFilePOI.cpp" line="101"/>
         <source>See &lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocGisItemsPOI&apos;&gt;Wiki&lt;/a&gt; for more information.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../poi/CPoiFilePOI.cpp" line="332"/>
+        <location filename="../poi/CPoiFilePOI.cpp" line="342"/>
         <source>Category: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../poi/CPoiFilePOI.cpp" line="337"/>
+        <location filename="../poi/CPoiFilePOI.cpp" line="347"/>
         <source>Links: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../poi/CPoiFilePOI.cpp" line="349"/>
+        <location filename="../poi/CPoiFilePOI.cpp" line="359"/>
         <source>Zoom in to see more details.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../poi/CPoiFilePOI.cpp" line="351"/>
+        <location filename="../poi/CPoiFilePOI.cpp" line="361"/>
         <source>POIs at this point:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5497,12 +5531,12 @@ addr:country</source>
 <context>
     <name>CPoiList</name>
     <message>
-        <location filename="../poi/CPoiList.cpp" line="131"/>
+        <location filename="../poi/CPoiList.cpp" line="127"/>
         <source>Deactivate</source>
         <translation type="unfinished">Deactiveer</translation>
     </message>
     <message>
-        <location filename="../poi/CPoiList.cpp" line="131"/>
+        <location filename="../poi/CPoiList.cpp" line="127"/>
         <source>Activate</source>
         <translation type="unfinished">Activeer</translation>
     </message>
@@ -6472,247 +6506,247 @@ Please check the logs if Brouter fails to start.</source>
 <context>
     <name>CRouterRoutino</name>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="65"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="66"/>
         <source>Warning...</source>
         <translation>Waarschuwing...</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="66"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="67"/>
         <source>Found Routino with a wrong version. Expected %1 found %2</source>
         <translation>Routini gevonden met verkeerde versie. Verwachtte %1 gevonden %2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="71"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="72"/>
         <source>Shortest</source>
         <translation>Kortst</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="72"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="73"/>
         <source>Quickest</source>
         <translation>Snelst</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="82"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="83"/>
         <source>Foot</source>
         <translation>Wandelen</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="83"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="84"/>
         <source>Horse</source>
         <translation>Paard</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="84"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="85"/>
         <source>Wheelchair</source>
         <translation>Rolstoel</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="85"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="86"/>
         <source>Bicycle</source>
         <translation>Fiets</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="86"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="87"/>
         <source>Moped</source>
         <translation>Brommer</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="87"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="88"/>
         <source>Motorcycle</source>
         <translation>Motorfiets</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="88"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="89"/>
         <source>Motorcar</source>
         <translation>Auto</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="89"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="90"/>
         <source>Goods</source>
         <translation>Goederen</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="93"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="94"/>
         <source>English</source>
         <translation>Engels</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="94"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="95"/>
         <source>German</source>
         <translation>Duits</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="95"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="96"/>
         <source>French</source>
         <translation>Frans</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="99"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="100"/>
         <source>Hungarian</source>
         <translation>Hongaars</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="98"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="99"/>
         <source>Dutch</source>
         <translation>Nederlands</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="100"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="101"/>
         <source>Russian</source>
         <translation>Russisch</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="101"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="102"/>
         <source>Polish</source>
         <translation>Pools</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="102"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="103"/>
         <source>Czech</source>
         <translation>Tsjechisch</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="97"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="98"/>
         <source>Spanish</source>
         <translation>Spaans</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="90"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="91"/>
         <source>Heavy Goods Vehicle</source>
         <translation>Zware goederen</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="91"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="92"/>
         <source>Public Service Vehicle</source>
         <translation>Openbare dienst</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="96"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="97"/>
         <source>Italian</source>
         <translation>Italiaans</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="103"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="104"/>
         <source>Slovak</source>
         <translation>Slowaaks</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="136"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="139"/>
         <source>A function was called without the database variable set.</source>
         <translation>Een functie werd aangeroepen zonder database variabelen.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="139"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="142"/>
         <source>A function was called without the profile variable set.</source>
         <translation>Een functie werd aangeroepen zonder profiel variabelen.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="142"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="145"/>
         <source>A function was called without the translation variable set.</source>
         <translation>Een functie werd aangeroepen zonder vertaling variabelen.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="145"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="148"/>
         <source>The specified database to load did not exist.</source>
         <translation>De opgegeven database bestaat niet.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="148"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="151"/>
         <source>The specified database could not be loaded.</source>
         <translation>De opgegeven database kan niet geladen worden.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="151"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="154"/>
         <source>The specified profiles XML file did not exist.</source>
         <translation>Het opgegeven XML profiel bestaat niet.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="154"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="157"/>
         <source>The specified profiles XML file could not be loaded.</source>
         <translation>Het opgegeven XML profiel kan niet geladen worden.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="157"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="160"/>
         <source>The specified translations XML file did not exist.</source>
         <translation>De opgegeven XML vertaling bestaat niet.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="160"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="163"/>
         <source>The specified translations XML file could not be loaded.</source>
         <translation>De opgegeven XML vertaling kan niet geladen worden.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="163"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="166"/>
         <source>The requested profile name does not exist in the loaded XML file.</source>
         <translation>De opgevraagde profielnaam bestaat niet in geladen XML bestand.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="166"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="169"/>
         <source>The requested translation language does not exist in the loaded XML file.</source>
         <translation>De opgevraagde vertaling bestaat niet in geladen XML bestand.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="169"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="172"/>
         <source>In the routing database there is no highway near the coordinates to place a waypoint.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="172"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="175"/>
         <source>The profile and database do not work together.</source>
         <translation>Profiel en database kunnen niet samenwerken.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="175"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="178"/>
         <source>The profile being used has not been validated.</source>
         <translation>Het gebruikte profiel is niet gevalideerd.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="178"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="181"/>
         <source>The user specified profile contained invalid data.</source>
         <translation>Door gebruiker opgegeven profiel bevat ongeldige gegevens.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="181"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="184"/>
         <source>The routing options specified are not consistent with each other.</source>
         <translation>De opgegeven routing opties komen niet overeen.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="184"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="187"/>
         <source>There is a mismatch between the library and caller API version.</source>
         <translation>Er is een verschil is tussen de bibliotheek en de gebruiker API-versie.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="187"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="190"/>
         <source>Route calculation was aborted by user.</source>
         <translation>Berekening route was geanuleerd door gebruiker.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="192"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="195"/>
         <source>A route could not be found to waypoint %1.</source>
         <translation>Er kon geen route gevonden worden naar waypoint %1.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="195"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="198"/>
         <source>Unknown error: %1</source>
         <translation>Onbekende fout: %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="203"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="206"/>
         <source>profile &quot;%1&quot;</source>
         <translation>Profiel &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="204"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="207"/>
         <source>, mode &quot;%1&quot;</source>
         <translation>, modus &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="277"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="301"/>
         <source>Could not find a profiles XML file in expected folders. Routino Routing will not function</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="291"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="315"/>
         <source>%1
 Error in &apos;%2&apos;
 This needs to be fixed
@@ -6720,19 +6754,19 @@ The associated database &apos;%3&apos; is ignored</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="358"/>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="434"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="387"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="463"/>
         <source>Required profile &apos;%1&apos; is not in the current profiles file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="388"/>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="462"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="417"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="491"/>
         <source>Calculate route with %1</source>
         <translation>Bereken route met %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="397"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="426"/>
         <source>&lt;br/&gt;Calculation time: %1s</source>
         <translation>&lt;br/&gt;Berekenen tijd: %1s</translation>
     </message>
@@ -6766,22 +6800,63 @@ The associated database &apos;%3&apos; is ignored</source>
 <context>
     <name>CRoutinoDatabaseBuilder</name>
     <message>
-        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="35"/>
+        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="37"/>
         <source>Create Routino Database</source>
         <translation>Maak Routino database</translation>
     </message>
     <message>
-        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="63"/>
+        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="47"/>
+        <source>Add a path with the button on the left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="73"/>
         <source>Select files...</source>
         <translation>Selecteer bestanden...</translation>
     </message>
     <message>
-        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="84"/>
-        <source>Select target path...</source>
-        <translation>Selecteer doel map...</translation>
+        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="142"/>
+        <source>%1 is no longer a Routino path. Select the target again.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="145"/>
+        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="164"/>
+        <source>Cannot create a folder in %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="176"/>
+        <source>planetsplitter wrote no database.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="183"/>
+        <source>Cannot replace %1. Is the database in use? Restart QMapShack and build it again.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="187"/>
+        <source>Cannot move %1 to %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="200"/>
+        <source>The built files stay in %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="202"/>
+        <source>!!! failed !!!
+</source>
+        <translation type="unfinished">!!! Mislukt !!!
+</translation>
+    </message>
+    <message>
+        <source>Select target path...</source>
+        <translation type="vanished">Selecteer doel map...</translation>
+    </message>
+    <message>
+        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="206"/>
         <source>!!! done !!!
 </source>
         <translation>!!! klaar !!!
@@ -8341,43 +8416,43 @@ For configuration you need to know your Android device&apos;s IP address or it&a
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearchLineEdit.cpp" line="66"/>
+        <location filename="../gis/search/CSearchLineEdit.cpp" line="75"/>
         <source>start typing...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearchLineEdit.cpp" line="68"/>
+        <location filename="../gis/search/CSearchLineEdit.cpp" line="77"/>
         <source>Filter: Start to type and the list will be reduced to matching items. An example would be &quot;date between 2010 and 2012&quot;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearchLineEdit.cpp" line="80"/>
+        <location filename="../gis/search/CSearchLineEdit.cpp" line="89"/>
         <source>Apply filter to</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearchLineEdit.cpp" line="83"/>
+        <location filename="../gis/search/CSearchLineEdit.cpp" line="92"/>
         <source>Case sensitivity</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearchLineEdit.cpp" line="157"/>
-        <location filename="../gis/search/CSearchLineEdit.cpp" line="160"/>
+        <location filename="../gis/search/CSearchLineEdit.cpp" line="166"/>
+        <location filename="../gis/search/CSearchLineEdit.cpp" line="169"/>
         <source>Error parsing search.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearchLineEdit.cpp" line="158"/>
+        <location filename="../gis/search/CSearchLineEdit.cpp" line="167"/>
         <source>Continuing with search for match in names</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearchLineEdit.cpp" line="161"/>
+        <location filename="../gis/search/CSearchLineEdit.cpp" line="170"/>
         <source>Continuing with search for match in full text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CSearchLineEdit.cpp" line="170"/>
+        <location filename="../gis/search/CSearchLineEdit.cpp" line="179"/>
         <source>Automatically set the property, please make sure the results are correct.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9047,37 +9122,37 @@ from %2, built %3</source>
 <context>
     <name>CSurfaceDb</name>
     <message>
-        <location filename="../gis/trk/surface/CSurfaceDb.cpp" line="67"/>
+        <location filename="../gis/trk/surface/CSurfaceDb.cpp" line="76"/>
         <source>Not a surface database: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/surface/CSurfaceDb.cpp" line="74"/>
+        <location filename="../gis/trk/surface/CSurfaceDb.cpp" line="83"/>
         <source>Unsupported surface database version %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/surface/CSurfaceDb.cpp" line="205"/>
+        <location filename="../gis/trk/surface/CSurfaceDb.cpp" line="214"/>
         <source>%1 S</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/surface/CSurfaceDb.cpp" line="205"/>
+        <location filename="../gis/trk/surface/CSurfaceDb.cpp" line="214"/>
         <source>%1 N</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/surface/CSurfaceDb.cpp" line="206"/>
+        <location filename="../gis/trk/surface/CSurfaceDb.cpp" line="215"/>
         <source>%1 W</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/surface/CSurfaceDb.cpp" line="206"/>
+        <location filename="../gis/trk/surface/CSurfaceDb.cpp" line="215"/>
         <source>%1 E</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/surface/CSurfaceDb.cpp" line="207"/>
+        <location filename="../gis/trk/surface/CSurfaceDb.cpp" line="216"/>
         <source>%1..%2, %3..%4</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9269,7 +9344,7 @@ from %2, built %3</source>
         <translation type="unfinished">Verwijder</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CTableTrkInfo.cpp" line="52"/>
+        <location filename="../gis/trk/CTableTrkInfo.cpp" line="54"/>
         <source>Description</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9428,7 +9503,7 @@ lijn %2, kolom %3:
         <translation>&amp;Kleur...</translation>
     </message>
     <message>
-        <location filename="../widgets/CTextEditWidget.cpp" line="125"/>
+        <location filename="../widgets/CTextEditWidget.cpp" line="126"/>
         <source>Reset format</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9774,73 +9849,73 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
     <name>CWksItemDelegate</name>
     <message>
         <location filename="../gis/CWksItemDelegate.cpp" line="664"/>
-        <location filename="../gis/CWksItemDelegate.cpp" line="952"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="1006"/>
         <source>Enter address...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CWksItemDelegate.cpp" line="835"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="888"/>
         <source>Hide project on map.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CWksItemDelegate.cpp" line="837"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="890"/>
         <source>Show project on map.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CWksItemDelegate.cpp" line="843"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="896"/>
         <source>Save project.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CWksItemDelegate.cpp" line="846"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="899"/>
         <source>Disable auto save.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CWksItemDelegate.cpp" line="848"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="901"/>
         <source>Enable auto save.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CWksItemDelegate.cpp" line="852"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="905"/>
         <source>Copy content of project into a project in the workspace.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CWksItemDelegate.cpp" line="858"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="911"/>
         <source>Disable automatic synchronization with GPS device.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CWksItemDelegate.cpp" line="861"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="914"/>
         <source>Enable automatic synchronization with GPS device.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CWksItemDelegate.cpp" line="868"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="922"/>
         <source>This is the active project. All new items will be attached to this project automatically.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CWksItemDelegate.cpp" line="874"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="928"/>
         <source>Make this project the active one. All new items will be attached to this project automatically.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CWksItemDelegate.cpp" line="886"/>
-        <location filename="../gis/CWksItemDelegate.cpp" line="910"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="940"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="964"/>
         <source>This is the status line. You can select additional information to be displayed in the workspace setup. See menu-&gt;Workspace-&gt;Setup Workspace</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CWksItemDelegate.cpp" line="919"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="973"/>
         <source>Item is changed and needs to be saved.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CWksItemDelegate.cpp" line="930"/>
+        <location filename="../gis/CWksItemDelegate.cpp" line="984"/>
         <source>Setup Search</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11880,7 +11955,7 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CWptIconManager.cpp" line="2136"/>
+        <location filename="../helpers/CWptIconManager.cpp" line="2137"/>
         <source>Clear List</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11919,6 +11994,9 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../templates/Cycling_Tour_Summary.ui" line="14"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="14"/>
         <location filename="../templates/Running_Summary.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="478"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="528"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="602"/>
         <source>Form</source>
         <translation type="unfinished">Formulier</translation>
     </message>
@@ -11926,6 +12004,9 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../templates/Cycling_Tour_Summary.ui" line="26"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="20"/>
         <location filename="../templates/Running_Summary.ui" line="20"/>
+        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="479"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="529"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="603"/>
         <source>Weather</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11933,6 +12014,9 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../templates/Cycling_Tour_Summary.ui" line="59"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="53"/>
         <location filename="../templates/Running_Summary.ui" line="26"/>
+        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="483"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="533"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="604"/>
         <source>clouds</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11940,6 +12024,9 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../templates/Cycling_Tour_Summary.ui" line="32"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="26"/>
         <location filename="../templates/Running_Summary.ui" line="36"/>
+        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="480"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="530"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="605"/>
         <source>sunny</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11947,6 +12034,9 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../templates/Cycling_Tour_Summary.ui" line="89"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="83"/>
         <location filename="../templates/Running_Summary.ui" line="56"/>
+        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="486"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="536"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="607"/>
         <source>rain</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11954,6 +12044,9 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../templates/Cycling_Tour_Summary.ui" line="69"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="63"/>
         <location filename="../templates/Running_Summary.ui" line="76"/>
+        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="484"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="534"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="609"/>
         <source>windy</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11961,6 +12054,9 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../templates/Cycling_Tour_Summary.ui" line="119"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="113"/>
         <location filename="../templates/Running_Summary.ui" line="86"/>
+        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="489"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="539"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="610"/>
         <source>snow</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11968,6 +12064,9 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../templates/Cycling_Tour_Summary.ui" line="129"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="123"/>
         <location filename="../templates/Running_Summary.ui" line="116"/>
+        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="490"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="540"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="612"/>
         <source>hail/soft hail</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11975,6 +12074,9 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../templates/Cycling_Tour_Summary.ui" line="79"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="73"/>
         <location filename="../templates/Running_Summary.ui" line="46"/>
+        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="485"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="535"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="606"/>
         <source>warm</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11982,6 +12084,9 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../templates/Cycling_Tour_Summary.ui" line="136"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="130"/>
         <location filename="../templates/Running_Summary.ui" line="66"/>
+        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="491"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="541"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="608"/>
         <source>freezing</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11989,6 +12094,9 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../templates/Cycling_Tour_Summary.ui" line="109"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="103"/>
         <location filename="../templates/Running_Summary.ui" line="96"/>
+        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="488"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="538"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="611"/>
         <source>cold</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11996,6 +12104,9 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../templates/Cycling_Tour_Summary.ui" line="49"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="43"/>
         <location filename="../templates/Running_Summary.ui" line="123"/>
+        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="482"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="532"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="613"/>
         <source>hot</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12003,6 +12114,9 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../templates/Cycling_Tour_Summary.ui" line="99"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="93"/>
         <location filename="../templates/Running_Summary.ui" line="133"/>
+        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="487"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="537"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="614"/>
         <source>humid</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12010,6 +12124,9 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../templates/Cycling_Tour_Summary.ui" line="42"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="36"/>
         <location filename="../templates/Running_Summary.ui" line="143"/>
+        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="481"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="531"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="615"/>
         <source>foggy</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12017,6 +12134,9 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../templates/Cycling_Tour_Summary.ui" line="152"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="153"/>
         <location filename="../templates/Running_Summary.ui" line="153"/>
+        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="492"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="542"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="616"/>
         <source>Character</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12024,6 +12144,9 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../templates/Cycling_Tour_Summary.ui" line="227"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="172"/>
         <location filename="../templates/Running_Summary.ui" line="165"/>
+        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="503"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="545"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="618"/>
         <source>Rating 5 stars</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12031,6 +12154,9 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../templates/Cycling_Tour_Summary.ui" line="232"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="177"/>
         <location filename="../templates/Running_Summary.ui" line="170"/>
+        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="504"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="546"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="619"/>
         <source>Rating 4 stars</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12038,6 +12164,9 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../templates/Cycling_Tour_Summary.ui" line="237"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="182"/>
         <location filename="../templates/Running_Summary.ui" line="175"/>
+        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="505"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="547"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="620"/>
         <source>Rating 3 stars</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12045,6 +12174,9 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../templates/Cycling_Tour_Summary.ui" line="242"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="187"/>
         <location filename="../templates/Running_Summary.ui" line="180"/>
+        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="506"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="548"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="621"/>
         <source>Rating 2 stars</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12052,6 +12184,9 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../templates/Cycling_Tour_Summary.ui" line="247"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="192"/>
         <location filename="../templates/Running_Summary.ui" line="185"/>
+        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="507"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="549"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="622"/>
         <source>Rating 1 star</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12059,6 +12194,9 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../templates/Cycling_Tour_Summary.ui" line="214"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="217"/>
         <location filename="../templates/Running_Summary.ui" line="193"/>
+        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="501"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="553"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="624"/>
         <source>Rating</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12066,6 +12204,9 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../templates/Cycling_Tour_Summary.ui" line="193"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="203"/>
         <location filename="../templates/Running_Summary.ui" line="200"/>
+        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="498"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="551"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="625"/>
         <source>long distance</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12073,27 +12214,35 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../templates/Cycling_Tour_Summary.ui" line="207"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="210"/>
         <location filename="../templates/Running_Summary.ui" line="207"/>
+        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="500"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="552"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="626"/>
         <source>night</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="214"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="627"/>
         <source>trail running</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="186"/>
         <location filename="../templates/Running_Summary.ui" line="224"/>
+        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="497"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="628"/>
         <source>city/road</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="231"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="629"/>
         <source> track</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="238"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="630"/>
         <source>ultra long dist</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12101,12 +12250,17 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../templates/Cycling_Tour_Summary.ui" line="179"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="245"/>
         <location filename="../templates/Running_Summary.ui" line="245"/>
+        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="496"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="557"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="631"/>
         <source>large ascend</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="252"/>
         <location filename="../templates/Running_Summary.ui" line="252"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="558"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="632"/>
         <source>easy hiking</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12114,37 +12268,47 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../templates/Cycling_Tour_Summary.ui" line="261"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="444"/>
         <location filename="../templates/Running_Summary.ui" line="262"/>
+        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="509"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="594"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="633"/>
         <source>Equipment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="270"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="634"/>
         <source>shoes:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="282"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="635"/>
         <source>backpack</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="289"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="636"/>
         <source>gloves</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="296"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="637"/>
         <source>hip pack</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="303"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="638"/>
         <source>poles</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="481"/>
         <location filename="../templates/Running_Summary.ui" line="310"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="599"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="639"/>
         <source>crampon</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12152,161 +12316,215 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../templates/Cycling_Tour_Summary.ui" line="274"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="467"/>
         <location filename="../templates/Running_Summary.ui" line="317"/>
+        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="511"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="597"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="640"/>
         <source>night gear</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="324"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="641"/>
         <source>calf guard comp.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="264"/>
         <location filename="../templates/Running_Summary.ui" line="346"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="559"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="642"/>
         <source>MIDE: Severity Environment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="270"/>
         <location filename="../templates/Running_Summary.ui" line="352"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="568"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="651"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="279"/>
         <location filename="../templates/Running_Summary.ui" line="361"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="561"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="644"/>
         <source>1. The environment is not risk free</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="284"/>
         <location filename="../templates/Running_Summary.ui" line="366"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="562"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="645"/>
         <source>2. More than 1 risk factor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="289"/>
         <location filename="../templates/Running_Summary.ui" line="371"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="563"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="646"/>
         <source>3. Various risk factors</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="294"/>
         <location filename="../templates/Running_Summary.ui" line="376"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="564"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="647"/>
         <source>4. Considerable risk factors</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="299"/>
         <location filename="../templates/Running_Summary.ui" line="381"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="565"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="648"/>
         <source>5. Many risk factors</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="310"/>
         <location filename="../templates/Running_Summary.ui" line="392"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="570"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="653"/>
         <source>MIDE: Orientation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="322"/>
         <location filename="../templates/Running_Summary.ui" line="404"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="572"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="655"/>
         <source>1. Paths and junctions well signed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="327"/>
         <location filename="../templates/Running_Summary.ui" line="409"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="573"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="656"/>
         <source>2. Footpaths or way marks which follow the route</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="332"/>
         <location filename="../templates/Running_Summary.ui" line="414"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="574"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="657"/>
         <source>3. Demands orientation by identification of geographic features and compass points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="337"/>
         <location filename="../templates/Running_Summary.ui" line="419"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="575"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="658"/>
         <source>4. Requires advanced navigation techniques, beyond interpretation of features on the map and the ground</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="342"/>
         <location filename="../templates/Running_Summary.ui" line="424"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="576"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="659"/>
         <source>5. Difficult navigation is interrupted by obstacles which must be avoided</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="353"/>
         <location filename="../templates/Running_Summary.ui" line="435"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="578"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="661"/>
         <source>MIDE: Terrain underfoot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="368"/>
         <location filename="../templates/Running_Summary.ui" line="450"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="580"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="663"/>
         <source>1. Easy walking</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="373"/>
         <location filename="../templates/Running_Summary.ui" line="455"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="581"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="664"/>
         <source>2. Bridleways and well made footpaths</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="378"/>
         <location filename="../templates/Running_Summary.ui" line="460"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="582"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="665"/>
         <source>3. Rocky stairways, rough ground and screes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="383"/>
         <location filename="../templates/Running_Summary.ui" line="465"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="583"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="666"/>
         <source>4. Contains sections where the use of hands is necessary for balance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="388"/>
         <location filename="../templates/Running_Summary.ui" line="470"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="584"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="667"/>
         <source>5. Scrambling, pulling on hands and arms for progress</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="399"/>
         <location filename="../templates/Running_Summary.ui" line="481"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="586"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="669"/>
         <source>MIDE: Effort required </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="411"/>
         <location filename="../templates/Running_Summary.ui" line="493"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="588"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="671"/>
         <source>1. Less than one hour of continuous walking</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="416"/>
         <location filename="../templates/Running_Summary.ui" line="498"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="589"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="672"/>
         <source>2. From 1 to 3 hours of continuous walking</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="421"/>
         <location filename="../templates/Running_Summary.ui" line="503"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="590"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="673"/>
         <source>3. From 3 to 6 hours of continuous walking</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="426"/>
         <location filename="../templates/Running_Summary.ui" line="508"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="591"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="674"/>
         <source>4. From 6 to 10 hours of continuous walking</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="431"/>
         <location filename="../templates/Running_Summary.ui" line="513"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="592"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="675"/>
         <source>5. More than 10 hours of continuous walking</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12314,77 +12532,103 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../templates/Cycling_Tour_Summary.ui" line="338"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="603"/>
         <location filename="../templates/Running_Summary.ui" line="526"/>
+        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="516"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="614"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="677"/>
         <source>Details</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Running_Summary.ui" line="538"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="678"/>
         <source>IBP Index (RNG)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="396"/>
         <location filename="../templates/Running_Summary.ui" line="565"/>
+        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="519"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="679"/>
         <source>Max. heart rate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="408"/>
         <location filename="../templates/Running_Summary.ui" line="577"/>
+        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="520"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="680"/>
         <source>Avg. heart rate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="420"/>
         <location filename="../templates/Running_Summary.ui" line="589"/>
+        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="521"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="681"/>
         <source>Min. heart rate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="432"/>
         <location filename="../templates/Running_Summary.ui" line="601"/>
+        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="522"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="682"/>
         <source>Cal. consumption</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="512"/>
         <location filename="../templates/Running_Summary.ui" line="615"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="603"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="683"/>
         <source>SAC scale</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="524"/>
         <location filename="../templates/Running_Summary.ui" line="627"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="605"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="685"/>
         <source>T-1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="529"/>
         <location filename="../templates/Running_Summary.ui" line="632"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="606"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="686"/>
         <source>T-2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="534"/>
         <location filename="../templates/Running_Summary.ui" line="637"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="607"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="687"/>
         <source>T-3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="539"/>
         <location filename="../templates/Running_Summary.ui" line="642"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="608"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="688"/>
         <source>T-4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="544"/>
         <location filename="../templates/Running_Summary.ui" line="647"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="609"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="689"/>
         <source>T-5</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="549"/>
         <location filename="../templates/Running_Summary.ui" line="652"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="610"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="690"/>
         <source>T-6</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12392,111 +12636,135 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../templates/Cycling_Tour_Summary.ui" line="301"/>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="585"/>
         <location filename="../templates/Running_Summary.ui" line="663"/>
+        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="514"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="613"/>
+        <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="692"/>
         <source>Participants</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="159"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="543"/>
         <source>aborted</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="224"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="554"/>
         <source>climbing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="231"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="555"/>
         <source>via ferrata</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="238"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="556"/>
         <source>alpine</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="460"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="596"/>
         <source>climbing gear</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="453"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="595"/>
         <source>ski</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="474"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="598"/>
         <source>ferrata gear</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="502"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="602"/>
         <source>ice pick</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="495"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="601"/>
         <source>camping gear</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="488"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="600"/>
         <source>snow shoes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="560"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="612"/>
         <source>IBP Index (HKG)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="158"/>
+        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="493"/>
         <source>enduro</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="165"/>
+        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="494"/>
         <source>freeride</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="172"/>
+        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="495"/>
         <source>XC</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="200"/>
+        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="499"/>
         <source>downhill</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="267"/>
+        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="510"/>
         <source>protections</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="281"/>
+        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="512"/>
         <source>E-Bike</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="288"/>
+        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="513"/>
         <source>saddlebags</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="320"/>
+        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="515"/>
         <source>Bike</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="352"/>
+        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="517"/>
         <source>IBP Index (BYC)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Cycling_Tour_Summary.ui" line="377"/>
+        <location filename="../../../build/src/qmapshack/ui_Cycling_Tour_Summary.h" line="518"/>
         <source>% Cycling</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12505,11 +12773,13 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
     <name>IAbout</name>
     <message>
         <location filename="../IAbout.ui" line="6"/>
+        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="212"/>
         <source>About....</source>
         <translation>Over...</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="22"/>
+        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="213"/>
         <source>&lt;b&gt;QMapShack&lt;/b&gt;, Version</source>
         <translation>&lt;b&gt;QMapShack&lt;b&gt;, Versie</translation>
     </message>
@@ -12519,46 +12789,59 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../IAbout.ui" line="88"/>
         <location filename="../IAbout.ui" line="102"/>
         <location filename="../IAbout.ui" line="116"/>
+        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="214"/>
+        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="217"/>
+        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="219"/>
+        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="221"/>
+        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="223"/>
         <source>TextLabel</source>
         <translation>TextLabel</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="67"/>
+        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="216"/>
         <source>Qt</source>
         <translation>Qt</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="81"/>
+        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="218"/>
         <source>GDAL</source>
         <translation>GDAL</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="95"/>
+        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="220"/>
         <source>PROJ</source>
         <translation>PROJ</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="109"/>
+        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="222"/>
         <source>Routino</source>
         <translation>Routino</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="132"/>
+        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="224"/>
         <source>&lt;b&gt;Contributors to the code:&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="145"/>
+        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="225"/>
         <source>-</source>
         <translation type="unfinished">-</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="169"/>
+        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="227"/>
         <source>© 2017 Oliver Eichler (oliver.eichler@gmx.de)</source>
         <translation type="unfinished">© 2014 Oliver Eichler (oliver.eichler@gmx.de) {2016 ?} {2017 ?}</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="162"/>
+        <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="226"/>
         <source>This software is licensed under GPL3 or any later version</source>
         <translation>Deze software is gelicenseerd onder GPL3 of latere versies</translation>
     </message>
@@ -12567,6 +12850,7 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
     <name>IActionSelect</name>
     <message>
         <location filename="../mouse/range/IActionSelect.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IActionSelect.h" line="66"/>
         <source>Form</source>
         <translation type="unfinished">Formulier</translation>
     </message>
@@ -12575,11 +12859,13 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
     <name>ICanvasSelect</name>
     <message>
         <location filename="../canvas/ICanvasSelect.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_ICanvasSelect.h" line="71"/>
         <source>Select...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../canvas/ICanvasSelect.ui" line="20"/>
+        <location filename="../../../build/src/qmapshack/ui_ICanvasSelect.h" line="72"/>
         <source>Select a view to work with</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12588,31 +12874,37 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
     <name>ICanvasSetup</name>
     <message>
         <location filename="../canvas/ICanvasSetup.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_ICanvasSetup.h" line="125"/>
         <source>Setup Map View...</source>
         <translation>Kaartinstellingen...</translation>
     </message>
     <message>
         <location filename="../canvas/ICanvasSetup.ui" line="22"/>
+        <location filename="../../../build/src/qmapshack/ui_ICanvasSetup.h" line="126"/>
         <source>Projection &amp; Datum</source>
         <translation>Projectie &amp; Datum</translation>
     </message>
     <message>
         <location filename="../canvas/ICanvasSetup.ui" line="32"/>
+        <location filename="../../../build/src/qmapshack/ui_ICanvasSetup.h" line="127"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
         <location filename="../canvas/ICanvasSetup.ui" line="53"/>
+        <location filename="../../../build/src/qmapshack/ui_ICanvasSetup.h" line="128"/>
         <source>Scales</source>
         <translation>Schalen</translation>
     </message>
     <message>
         <location filename="../canvas/ICanvasSetup.ui" line="59"/>
+        <location filename="../../../build/src/qmapshack/ui_ICanvasSetup.h" line="129"/>
         <source>Logarithmic</source>
         <translation>Logarithmisch</translation>
     </message>
     <message>
         <location filename="../canvas/ICanvasSetup.ui" line="66"/>
+        <location filename="../../../build/src/qmapshack/ui_ICanvasSetup.h" line="130"/>
         <source>Square (optimized for TMS and WMTS tiles)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12621,6 +12913,7 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
     <name>IColorChooser</name>
     <message>
         <location filename="../widgets/IColorChooser.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IColorChooser.h" line="49"/>
         <source>Dialog</source>
         <translation>Dialoog</translation>
     </message>
@@ -12629,11 +12922,13 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
     <name>ICombineTrk</name>
     <message>
         <location filename="../gis/trk/ICombineTrk.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_ICombineTrk.h" line="205"/>
         <source>Combine Tracks...</source>
         <translation>Combineer tracks...</translation>
     </message>
     <message>
         <location filename="../gis/trk/ICombineTrk.ui" line="24"/>
+        <location filename="../../../build/src/qmapshack/ui_ICombineTrk.h" line="206"/>
         <source>Available Tracks</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12642,11 +12937,16 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../gis/trk/ICombineTrk.ui" line="81"/>
         <location filename="../gis/trk/ICombineTrk.ui" line="139"/>
         <location filename="../gis/trk/ICombineTrk.ui" line="166"/>
+        <location filename="../../../build/src/qmapshack/ui_ICombineTrk.h" line="207"/>
+        <location filename="../../../build/src/qmapshack/ui_ICombineTrk.h" line="208"/>
+        <location filename="../../../build/src/qmapshack/ui_ICombineTrk.h" line="210"/>
+        <location filename="../../../build/src/qmapshack/ui_ICombineTrk.h" line="211"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/trk/ICombineTrk.ui" line="109"/>
+        <location filename="../../../build/src/qmapshack/ui_ICombineTrk.h" line="209"/>
         <source>Combined Tracks</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12655,21 +12955,25 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
     <name>ICoordFormatSetup</name>
     <message>
         <location filename="../units/ICoordFormatSetup.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_ICoordFormatSetup.h" line="82"/>
         <source>Coordinate Format...</source>
         <translation>Coördinaat formaat...</translation>
     </message>
     <message>
         <location filename="../units/ICoordFormatSetup.ui" line="36"/>
+        <location filename="../../../build/src/qmapshack/ui_ICoordFormatSetup.h" line="85"/>
         <source>N48° 53.660 E013° 31.113</source>
         <translation>N48° 53.660 O013° 31.113</translation>
     </message>
     <message>
         <location filename="../units/ICoordFormatSetup.ui" line="29"/>
+        <location filename="../../../build/src/qmapshack/ui_ICoordFormatSetup.h" line="84"/>
         <source>N48.8943° E013.51855°</source>
         <translation>N48.8943° O013.51855°</translation>
     </message>
     <message>
         <location filename="../units/ICoordFormatSetup.ui" line="22"/>
+        <location filename="../../../build/src/qmapshack/ui_ICoordFormatSetup.h" line="83"/>
         <source>N48° 53&apos; 39.6&quot; E13° 31&apos; 6.78&quot;</source>
         <translation>N48° 53&apos; 39.6&quot; O13° 31&apos; 6.78&quot;</translation>
     </message>
@@ -12678,12 +12982,15 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
     <name>ICreateRouteFromWpt</name>
     <message>
         <location filename="../gis/rte/ICreateRouteFromWpt.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_ICreateRouteFromWpt.h" line="101"/>
         <source>Create Route from Waypoints</source>
         <translation>Maak route van waypoints</translation>
     </message>
     <message>
         <location filename="../gis/rte/ICreateRouteFromWpt.ui" line="30"/>
         <location filename="../gis/rte/ICreateRouteFromWpt.ui" line="50"/>
+        <location filename="../../../build/src/qmapshack/ui_ICreateRouteFromWpt.h" line="102"/>
+        <location filename="../../../build/src/qmapshack/ui_ICreateRouteFromWpt.h" line="103"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -12692,31 +12999,37 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
     <name>ICutTrk</name>
     <message>
         <location filename="../gis/trk/ICutTrk.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_ICutTrk.h" line="139"/>
         <source>Cut Track</source>
         <translation>Track knippen</translation>
     </message>
     <message>
         <location filename="../gis/trk/ICutTrk.ui" line="20"/>
+        <location filename="../../../build/src/qmapshack/ui_ICutTrk.h" line="140"/>
         <source>Delete first part of the track and keep second one</source>
         <translation>Verwijder eerste deel van track en bewaar tweede deel</translation>
     </message>
     <message>
         <location filename="../gis/trk/ICutTrk.ui" line="30"/>
+        <location filename="../../../build/src/qmapshack/ui_ICutTrk.h" line="141"/>
         <source>Keep both parts of the track</source>
         <translation>Bewaar beide delen van track</translation>
     </message>
     <message>
         <location filename="../gis/trk/ICutTrk.ui" line="43"/>
+        <location filename="../../../build/src/qmapshack/ui_ICutTrk.h" line="142"/>
         <source>Keep first part of the track and delete second one</source>
         <translation>Bewaar eerste deel van track en verwijder tweede deel</translation>
     </message>
     <message>
         <location filename="../gis/trk/ICutTrk.ui" line="55"/>
+        <location filename="../../../build/src/qmapshack/ui_ICutTrk.h" line="143"/>
         <source>Cut Mode:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/ICutTrk.ui" line="136"/>
+        <location filename="../../../build/src/qmapshack/ui_ICutTrk.h" line="147"/>
         <source>Check this to store the result into a new track. 
 
 If you keep both parts of the track you have to create new ones. 
@@ -12730,6 +13043,7 @@ Als er alleen een halve track bewaard moet worden kunnen de overige punten verwi
     </message>
     <message>
         <location filename="../gis/trk/ICutTrk.ui" line="143"/>
+        <location filename="../../../build/src/qmapshack/ui_ICutTrk.h" line="153"/>
         <source>Create a new track</source>
         <translation>Maak een nieuwe track</translation>
     </message>
@@ -12833,17 +13147,21 @@ Als er alleen een halve track bewaard moet worden kunnen de overige punten verwi
     <name>IDemPathSetup</name>
     <message>
         <location filename="../dem/IDemPathSetup.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemPathSetup.h" line="139"/>
         <source>Setup DEM file paths</source>
         <translation>Map met DEM bestanden instellen</translation>
     </message>
     <message>
         <location filename="../dem/IDemPathSetup.ui" line="31"/>
         <location filename="../dem/IDemPathSetup.ui" line="51"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemPathSetup.h" line="140"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemPathSetup.h" line="141"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
         <location filename="../dem/IDemPathSetup.ui" line="109"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemPathSetup.h" line="142"/>
         <source>-</source>
         <translation>-</translation>
     </message>
@@ -12852,79 +13170,94 @@ Als er alleen een halve track bewaard moet worden kunnen de overige punten verwi
     <name>IDemPropSetup</name>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="412"/>
         <source>Form</source>
         <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="54"/>
         <location filename="../dem/IDemPropSetup.ui" line="82"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="420"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="425"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="35"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="414"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Change opacity of layer&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="50"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="417"/>
         <source>Click to use the current zoom as maximum 
 zoom-in for use of the DEM data.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="78"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="422"/>
         <source>Click to use the current zoom as maximum 
 zoom-out for use of the DEM data.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="117"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="427"/>
         <source>Enable relief shading based on aspect and slope,
  and illuminated from NW.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="121"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="430"/>
         <source>Hillshading</source>
         <translation>Hillshading</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="128"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="432"/>
         <source>Move to the right to raise the angle of the light.
  Light comes from NW</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="151"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="436"/>
         <source>Enable relief shading based on slope.
  The steeper, the darker.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="155"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="439"/>
         <source>Slope Shading</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="162"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="441"/>
         <source>Move to the right to increase the scale factor.
  Higher values are better for flatter areas.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="199"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="445"/>
         <source>Enable color shading
  based on slope ranges.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="203"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="448"/>
         <source>Slope </source>
         <translation>Helling </translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="210"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="450"/>
         <source>Select color scheme.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12934,6 +13267,11 @@ zoom-out for use of the DEM data.</source>
         <location filename="../dem/IDemPropSetup.ui" line="442"/>
         <location filename="../dem/IDemPropSetup.ui" line="515"/>
         <location filename="../dem/IDemPropSetup.ui" line="588"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="452"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="456"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="459"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="462"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="465"/>
         <source>°</source>
         <translation>°</translation>
     </message>
@@ -12943,6 +13281,11 @@ zoom-out for use of the DEM data.</source>
         <location filename="../dem/IDemPropSetup.ui" line="445"/>
         <location filename="../dem/IDemPropSetup.ui" line="518"/>
         <location filename="../dem/IDemPropSetup.ui" line="591"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="453"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="457"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="460"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="463"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="466"/>
         <source>&gt; </source>
         <translation>&gt; </translation>
     </message>
@@ -12952,59 +13295,76 @@ zoom-out for use of the DEM data.</source>
         <location filename="../dem/IDemPropSetup.ui" line="397"/>
         <location filename="../dem/IDemPropSetup.ui" line="470"/>
         <location filename="../dem/IDemPropSetup.ui" line="543"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="454"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="455"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="458"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="461"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="464"/>
         <source>TextLabel</source>
         <translation>Benaming</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="649"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="468"/>
         <source>Tint areas above the given elevation.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="652"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="470"/>
         <source>Elevation Limit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="676"/>
         <location filename="../dem/IDemPropSetup.ui" line="698"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="472"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="475"/>
         <source>Lower elevation to be colored.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="701"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="477"/>
         <source>Elevation Low</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="714"/>
         <location filename="../dem/IDemPropSetup.ui" line="747"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="479"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="487"/>
         <source>Higher elevation to be colored.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="730"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="482"/>
         <source>Enable color shading
  based on elevation.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="734"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="485"/>
         <source>Elevation Shading</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="750"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="489"/>
         <source>Elevation High</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="757"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="491"/>
         <source>Enable / Disable elevation legend.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="760"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="493"/>
         <source>Legend</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13013,116 +13373,138 @@ zoom-out for use of the DEM data.</source>
     <name>IDemsList</name>
     <message>
         <location filename="../dem/IDemList.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="170"/>
         <source>Form</source>
         <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="35"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="210"/>
         <source>Filter: Start to type and the list will be reduced to matching items.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="38"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="212"/>
         <source>start typing...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="122"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="213"/>
         <source>To add files with elevation data use &lt;a href=&apos;DemFolders&apos;&gt;File-&gt;Setup DEM Paths&lt;/a&gt;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="135"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="214"/>
         <source>Use the buttons to activate a DEM. Use drag-n-drop to move the DEM in the draw order. </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="156"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="171"/>
         <source>Move to Top</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="159"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="173"/>
         <source>Hide DEM behind others</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="162"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="176"/>
         <source>Shift+Home</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="174"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="178"/>
         <source>Move Up</source>
         <translation>Omhoog</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="177"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="180"/>
         <source>Hide DEM behind previous one</source>
         <translation>Verberg DEM onder vorige</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="180"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="183"/>
         <source>Shift+Up</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="192"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="185"/>
         <source>Move Down</source>
         <translation>Omlaag</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="195"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="187"/>
         <source>Show DEM on top of next one</source>
         <translation>Toon DEM op de volgende</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="198"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="190"/>
         <source>Shift+Down</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="210"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="192"/>
         <source>Move to Bottom</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="213"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="194"/>
         <source>Show DEM on top of others</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="216"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="197"/>
         <source>Shift+End</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="228"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="199"/>
         <source>Reload DEM</source>
         <translation>DEM herladen</translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="240"/>
+        <location filename="../dem/IDemList.ui" line="228"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="200"/>
         <source>Clear Filter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="252"/>
+        <location filename="../dem/IDemList.ui" line="240"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="201"/>
         <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="255"/>
+        <location filename="../dem/IDemList.ui" line="243"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="203"/>
         <source>Remove DEM from list</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="267"/>
+        <location filename="../dem/IDemList.ui" line="255"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="205"/>
         <source>Overview Info...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="270"/>
+        <location filename="../dem/IDemList.ui" line="258"/>
+        <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="207"/>
         <source>Show overview pyramid info for this file</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13131,6 +13513,7 @@ zoom-out for use of the DEM data.</source>
     <name>IDetailsGeoCache</name>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="20"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="443"/>
         <source>Dialog</source>
         <translation>Dialoog</translation>
     </message>
@@ -13141,17 +13524,26 @@ zoom-out for use of the DEM data.</source>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="538"/>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="571"/>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="578"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="445"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="446"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="461"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="464"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="467"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="468"/>
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="168"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="453"/>
         <source>Update spoilers</source>
         <translation>Spoilers bijwerken</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="34"/>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="171"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="444"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="455"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -13162,71 +13554,85 @@ zoom-out for use of the DEM data.</source>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="281"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="459"/>
         <source>Owner:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="294"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="460"/>
         <source>Terrain:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="512"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="462"/>
         <source>Difficulty:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="525"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="463"/>
         <source>Size:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="551"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="465"/>
         <source>Date Hidden:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="564"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="466"/>
         <source>Last Found:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="589"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="469"/>
         <source>No Attributes present</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="85"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="450"/>
         <source>Listing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="107"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="447"/>
         <source>Hint:</source>
         <translation>Hint:</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="134"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="449"/>
         <source>Visit Website</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="144"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="451"/>
         <source>Logs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="160"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="457"/>
         <source>Pictures</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="205"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="456"/>
         <source>TextLabel</source>
         <translation>Benaming</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="231"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="458"/>
         <source>QMS</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13235,66 +13641,79 @@ zoom-out for use of the DEM data.</source>
     <name>IDetailsOvlArea</name>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsOvlArea.h" line="234"/>
         <source>Dialog</source>
         <translation>Dialoog</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="132"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsOvlArea.h" line="236"/>
         <source>The area was imported to QMapShack and was changed. It does not show the original data anymore. Please see history for changes. </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="151"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsOvlArea.h" line="239"/>
         <source>This is a NoGo-Area</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="158"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsOvlArea.h" line="242"/>
         <source>Toggle read only mode. You have to open the lock to edit the item.</source>
         <translation>Schrijfbeveiliging ingeschakeld. Klik op het slot om te kunnen bewerken.</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="161"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsOvlArea.h" line="244"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="189"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsOvlArea.h" line="245"/>
         <source>Color</source>
         <translation>Kleur</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="206"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsOvlArea.h" line="246"/>
         <source>Border width</source>
         <translation>Lijndikte</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="216"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsOvlArea.h" line="247"/>
         <source>Style</source>
         <translation>Stijl</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="233"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsOvlArea.h" line="248"/>
         <source>Opacity</source>
         <translation>Transparantie</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="246"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsOvlArea.h" line="249"/>
         <source>Info</source>
         <translation>Info</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="275"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsOvlArea.h" line="252"/>
         <source>Points</source>
         <translation>Punten</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="302"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsOvlArea.h" line="251"/>
         <source>Position</source>
         <translation>Positie</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="311"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsOvlArea.h" line="253"/>
         <source>Hist.</source>
         <translation>Historie</translation>
     </message>
@@ -13303,37 +13722,45 @@ zoom-out for use of the DEM data.</source>
     <name>IDetailsPrj</name>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsPrj.h" line="132"/>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="43"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsPrj.h" line="133"/>
         <source>Keywords:</source>
         <translation>Sleutelwoorden:</translation>
     </message>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="50"/>
         <location filename="../gis/prj/IDetailsPrj.ui" line="57"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsPrj.h" line="134"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsPrj.h" line="135"/>
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="71"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsPrj.h" line="136"/>
         <source>Keep order of project</source>
         <translation>Behoud volgorde van project</translation>
     </message>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="76"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsPrj.h" line="137"/>
         <source>Sort along track (multiple)</source>
         <translation>Sorteer langs route (multi)</translation>
     </message>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="81"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsPrj.h" line="138"/>
         <source>Sort along track (single)</source>
         <translation>Sorteer langs route (enkel)</translation>
     </message>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="86"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsPrj.h" line="139"/>
         <source>Track with details</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13341,16 +13768,21 @@ zoom-out for use of the DEM data.</source>
         <location filename="../gis/prj/IDetailsPrj.ui" line="94"/>
         <location filename="../gis/prj/IDetailsPrj.ui" line="118"/>
         <location filename="../gis/prj/IDetailsPrj.ui" line="138"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsPrj.h" line="141"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsPrj.h" line="145"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsPrj.h" line="149"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="115"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsPrj.h" line="143"/>
         <source>Print diary</source>
         <translation>Dagboek afdrukken</translation>
     </message>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="135"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsPrj.h" line="147"/>
         <source>Rebuild diary.</source>
         <translation>Dagboek herindelen.</translation>
     </message>
@@ -13359,36 +13791,43 @@ zoom-out for use of the DEM data.</source>
     <name>IDetailsRte</name>
     <message>
         <location filename="../gis/rte/IDetailsRte.ui" line="36"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsRte.h" line="180"/>
         <source>Info</source>
         <translation>Info</translation>
     </message>
     <message>
         <location filename="../gis/rte/IDetailsRte.ui" line="154"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsRte.h" line="170"/>
         <source>The route was imported to QMapShack and was changed. It does not show the original data anymore. Please see history for changes. </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/IDetailsRte.ui" line="173"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsRte.h" line="173"/>
         <source>This Route is a NoGo-Line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/IDetailsRte.ui" line="215"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsRte.h" line="179"/>
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
         <location filename="../gis/rte/IDetailsRte.ui" line="180"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsRte.h" line="176"/>
         <source>Toggle read only mode. You have to open the lock to edit the item.</source>
         <translation>Schrijfbeveiliging ingeschakeld. Klik op het slot om te kunnen bewerken.</translation>
     </message>
     <message>
         <location filename="../gis/rte/IDetailsRte.ui" line="183"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsRte.h" line="178"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/rte/IDetailsRte.ui" line="239"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsRte.h" line="181"/>
         <source>Hist.</source>
         <translation>Hist.</translation>
     </message>
@@ -13397,12 +13836,15 @@ zoom-out for use of the DEM data.</source>
     <name>IDetailsTrk</name>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1053"/>
         <source>Form</source>
         <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="99"/>
         <location filename="../gis/trk/IDetailsTrk.ui" line="123"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1057"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1059"/>
         <source>-
 -</source>
         <translation>-
@@ -13410,11 +13852,13 @@ zoom-out for use of the DEM data.</source>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1199"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1120"/>
         <source>Profile</source>
         <translation>Profiel</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="313"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1068"/>
         <source>Toggle read only mode. You have to open the lock to edit the item.</source>
         <translation>Schrijfbeveiliging ingeschakeld. Klik op het slot om te kunnen bewerken.</translation>
     </message>
@@ -13437,27 +13881,50 @@ zoom-out for use of the DEM data.</source>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1414"/>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1443"/>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1475"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1070"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1072"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1080"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1084"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1088"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1092"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1096"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1102"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1106"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1124"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1128"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1132"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1136"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1140"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1144"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1148"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1152"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1156"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="342"/>
         <location filename="../gis/trk/IDetailsTrk.ui" line="500"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1071"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1073"/>
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="416"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1074"/>
         <source>Info</source>
         <translation>Info</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="560"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1110"/>
         <source>Style</source>
         <translation>Stijl</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="602"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1075"/>
         <source>Source</source>
         <translation>Bron</translation>
     </message>
@@ -13466,6 +13933,10 @@ zoom-out for use of the DEM data.</source>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1217"/>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1314"/>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1411"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1086"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1122"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1134"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1146"/>
         <source>Use user defined limits that only apply to this particular track.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13474,36 +13945,46 @@ zoom-out for use of the DEM data.</source>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1278"/>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1375"/>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1472"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1094"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1130"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1142"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1154"/>
         <source>Use global user defined limits.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="807"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1097"/>
         <source>Maximum</source>
         <translation>Maximum</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="928"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1107"/>
         <source>Minimum</source>
         <translation>Minimum</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="609"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1076"/>
         <source>Width</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="814"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1098"/>
         <source>with arrows</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="965"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1109"/>
         <source> points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1012"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1157"/>
         <source>Graphs</source>
         <translation>Grafieken</translation>
     </message>
@@ -13511,6 +13992,9 @@ zoom-out for use of the DEM data.</source>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1025"/>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1045"/>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1131"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1112"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1113"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1116"/>
         <source>max.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13518,11 +14002,15 @@ zoom-out for use of the DEM data.</source>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1164"/>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1171"/>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1185"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1117"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1118"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1119"/>
         <source>min.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="74"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1054"/>
         <source>-
 -
 -</source>
@@ -13530,21 +14018,25 @@ zoom-out for use of the DEM data.</source>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="281"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1062"/>
         <source>The track was imported to QMapShack and was changed. It does not show the original data anymore. Please see history for changes. </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="300"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1065"/>
         <source>This Track is a NoGo-Line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="624"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1078"/>
         <source>Set visibility of the arrows for this particular track.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="653"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1082"/>
         <source>Set visibility of the arrows globally for all tracks that use the global settings.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13553,36 +14045,46 @@ zoom-out for use of the DEM data.</source>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1246"/>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1343"/>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1440"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1090"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1126"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1138"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1150"/>
         <source>Automatic limits</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="843"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1100"/>
         <source>Change the line width for this particular track.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="872"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1104"/>
         <source>Change the line width globally for all tracks that use the global settings.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="948"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1108"/>
         <source>Color</source>
         <translation>Kleur</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1504"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1161"/>
         <source>Activity</source>
         <translation>Activiteit</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1527"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1158"/>
         <source>Set Track Activity</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1570"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1160"/>
         <source>To differentiate the track statistics select an activity from the list for the complete track. Or select a part of the track to assign an activity.</source>
         <translation>Om de track statistieken te onderscheiden selecteer een activiteit uit de lijst voor de volledige track. Of selecteer een deel van de track om een activieteit toe te kennen.</translation>
     </message>
@@ -13593,16 +14095,19 @@ zoom-out for use of the DEM data.</source>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1630"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1162"/>
         <source>Points</source>
         <translation>Punten</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1676"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1163"/>
         <source>Filter</source>
         <translation>Filter</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1713"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1164"/>
         <source>Hist.</source>
         <translation>Hist.</translation>
     </message>
@@ -13611,16 +14116,19 @@ zoom-out for use of the DEM data.</source>
     <name>IDetailsWpt</name>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsWpt.h" line="300"/>
         <source>Dialog</source>
         <translation>Dialoog</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="43"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsWpt.h" line="328"/>
         <source>Info</source>
         <translation>Info</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="86"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsWpt.h" line="301"/>
         <source>Position:</source>
         <translation>Positie:</translation>
     </message>
@@ -13629,31 +14137,40 @@ zoom-out for use of the DEM data.</source>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="119"/>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="145"/>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="356"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsWpt.h" line="302"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsWpt.h" line="304"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsWpt.h" line="306"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsWpt.h" line="318"/>
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="106"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsWpt.h" line="303"/>
         <source>Elevation:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="132"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsWpt.h" line="305"/>
         <source>Proximity:</source>
         <translation>Nabijheid:</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="277"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsWpt.h" line="308"/>
         <source>The waypoint was imported to QMapShack and was changed. It does not show the original data anymore. Please see history for changes. </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="296"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsWpt.h" line="311"/>
         <source>This Waypoint is a NoGo-Area</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="303"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsWpt.h" line="314"/>
         <source>Toggle read only mode. You have to open the lock to edit the item.</source>
         <translation>Schrijfbeveiliging ingeschakeld. Klik op het slot om te kunnen bewerken.</translation>
     </message>
@@ -13662,26 +14179,34 @@ zoom-out for use of the DEM data.</source>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="370"/>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="390"/>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="422"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsWpt.h" line="316"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsWpt.h" line="322"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsWpt.h" line="326"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsWpt.h" line="327"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="343"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsWpt.h" line="317"/>
         <source>Date/Time:</source>
         <translation>Datum/Tijd:</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="367"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsWpt.h" line="320"/>
         <source>Add images.</source>
         <translation>Afbeelding toevoegen.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="387"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsWpt.h" line="324"/>
         <source>Delete selected image.</source>
         <translation>Verwijder geselecteerde afbeelding.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="441"/>
+        <location filename="../../../build/src/qmapshack/ui_IDetailsWpt.h" line="329"/>
         <source>Hist.</source>
         <translation>Hist.</translation>
     </message>
@@ -13689,7 +14214,7 @@ zoom-out for use of the DEM data.</source>
 <context>
     <name>IDevice</name>
     <message>
-        <location filename="../device/IDevice.cpp" line="282"/>
+        <location filename="../device/IDevice.cpp" line="309"/>
         <source>There is another project with the same name. If you press &apos;ok&apos; it will be removed and replaced.</source>
         <translation>Er is al een ander project met dezelfde naam. Bij drukken op &apos;OK&apos; zal deze overschreven worden.</translation>
     </message>
@@ -13698,26 +14223,31 @@ zoom-out for use of the DEM data.</source>
     <name>IElevationDialog</name>
     <message>
         <location filename="../helpers/IElevationDialog.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IElevationDialog.h" line="95"/>
         <source>Edit elevation...</source>
         <translation>Bewerk hoogte...</translation>
     </message>
     <message>
         <location filename="../helpers/IElevationDialog.ui" line="22"/>
+        <location filename="../../../build/src/qmapshack/ui_IElevationDialog.h" line="96"/>
         <source>Elevation</source>
         <translation>Hoogte</translation>
     </message>
     <message>
         <location filename="../helpers/IElevationDialog.ui" line="32"/>
+        <location filename="../../../build/src/qmapshack/ui_IElevationDialog.h" line="97"/>
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
         <location filename="../helpers/IElevationDialog.ui" line="39"/>
+        <location filename="../../../build/src/qmapshack/ui_IElevationDialog.h" line="99"/>
         <source>Get elevation from active digital elevation model.</source>
         <translation>Neem hoogte gegevens over van DEM (digital elevation model).</translation>
     </message>
     <message>
         <location filename="../helpers/IElevationDialog.ui" line="42"/>
+        <location filename="../../../build/src/qmapshack/ui_IElevationDialog.h" line="101"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -13726,31 +14256,37 @@ zoom-out for use of the DEM data.</source>
     <name>IEnergyCyclingDialog</name>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="38"/>
+        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="511"/>
         <source>Set parameters to compute &quot;Energy Use Cycling&quot; for a cycling tour</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="88"/>
+        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="513"/>
         <source>Positive Pedal Force:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="98"/>
+        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="514"/>
         <source>Gravity Slope Force:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="108"/>
+        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="515"/>
         <source>Frontal Area:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="121"/>
+        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="519"/>
         <source>Total Weight:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="157"/>
+        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="524"/>
         <source>&lt;p&gt;The air density depends on barometric air pressure, altitude and temperature.&lt;/p&gt;
 &lt;p&gt;Examples:
 &lt;ul&gt;
@@ -13762,6 +14298,7 @@ zoom-out for use of the DEM data.</source>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="227"/>
+        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="544"/>
         <source>&lt;p&gt;The wind drag coefficient (cw value) indicates the wind slip of the driver and bicycle in relation to the air (wind).&lt;/p&gt;
 &lt;p&gt;The greater this value, the more force is required to overcome the wind force.&lt;/p&gt;
 &lt;p&gt;Typical values for bicycles are between 0.2 and 1.2.&lt;/p&gt;</source>
@@ -13769,45 +14306,53 @@ zoom-out for use of the DEM data.</source>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="304"/>
+        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="559"/>
         <source>&lt;p&gt;The values for the type of seat position as pre-selection for the wind frontal area in m2 and the drag coefficient (cw value).&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="393"/>
+        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="575"/>
         <source>&lt;p&gt;The gravity slope force is the force in Newton needed on average over all track points to overcome the slope on downhill or uphill.&lt;/p&gt;
 &lt;p&gt;When mostly downhill driving, the gravity slope force can be negative.&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="407"/>
+        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="578"/>
         <source>Positive Power:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="437"/>
+        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="581"/>
         <source>Power:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="447"/>
+        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="583"/>
         <source>&lt;p&gt;The sum of the average force required for the track to overcome wind resistance, rolling resistance and slope.&lt;/p&gt;
 &lt;p&gt;This value can be negative for strong tailwind and/or downhill.&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="471"/>
+        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="588"/>
         <source>&lt;p&gt;The average pedal cadence in rpm is needed to calculate the Positive Pedal Force.&lt;/p&gt;
 &lt;p&gt;Realistic values are between 50 and 100 rpm.&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="497"/>
+        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="593"/>
         <source>&lt;p&gt;The values for the wind speed in Beaufort scale for specifying the wind speed in km/h.&lt;/p&gt;
 &lt;p&gt;Positive values for headwind and negative values for tailwind.&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="557"/>
+        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="611"/>
         <source>&lt;p&gt;The wind speed in km/h is taken into account when calculating the force required to overcome the air drag.&lt;/p&gt;
 &lt;p&gt;Positive values for headwind and negative values for tailwind are taken into account.&lt;/p&gt;
 &lt;p&gt;The value can be changed independently of the Beaufort scale value.&lt;/p&gt;</source>
@@ -13815,22 +14360,26 @@ zoom-out for use of the DEM data.</source>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="605"/>
+        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="621"/>
         <source>&lt;p&gt;The weight of the driver in kg including clothes.&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="643"/>
+        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="627"/>
         <source>Ground/Tyres:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="653"/>
+        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="629"/>
         <source>&lt;p&gt;The predefined selection for the type of ground surface and the tyres.&lt;/p&gt;
 &lt;p&gt;To be used to determine the rolling resistance coefficient.&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="671"/>
+        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="634"/>
         <source>&lt;p&gt;The rolling resistance coefficient (cr value) specifies the force used to overcome the rolling resistance.&lt;/p&gt;
 &lt;p&gt;The relevant factors are the road surface and the tyres.&lt;/p&gt;
 &lt;p&gt;The higher this value is, the more force is required to overcome the rolling resistance.&lt;/p&gt;</source>
@@ -13839,36 +14388,44 @@ zoom-out for use of the DEM data.</source>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="701"/>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="725"/>
+        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="639"/>
+        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="644"/>
         <source>Energy Use:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="144"/>
+        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="521"/>
         <source>&lt;p&gt;The rolling resistance force is the force in Newton required on average over all track points to overcome the rolling resistance.&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="661"/>
+        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="632"/>
         <source>Rolling Coeff:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="188"/>
+        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="532"/>
         <source>Air Resistance Force:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="510"/>
         <source>Energy Use Cycling Parameter Set</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="201"/>
+        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="536"/>
         <source>Bike Weight:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="211"/>
+        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="538"/>
         <source>&lt;p&gt;The force in Newton applied to the pedal on average over all track points.&lt;/p&gt;
 &lt;p&gt;Negative forces from strong tail wind or downhill driving are not considered.&lt;/p&gt;
 &lt;p&gt;This force must be applied to the pedal by the driver.&lt;/p&gt;
@@ -13877,17 +14434,20 @@ zoom-out for use of the DEM data.</source>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="711"/>
+        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="641"/>
         <source>&lt;p&gt;The energy use (consumption) in kJoule by transforming the positive power by the driver.&lt;/p&gt;
 &lt;p&gt;The muscle efficiency ratio ist considered by 23%.&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="254"/>
+        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="549"/>
         <source>Pos. Power Moving Time:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="264"/>
+        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="551"/>
         <source>&lt;p&gt;The air resistance force is the force in Newton required on average over all track points to overcome the air resistance.&lt;/p&gt;
 &lt;p&gt;The airstream, headwind and tailwind are taken into account.&lt;/p&gt;
 &lt;p&gt;With a strong tailwind this value can be negative.&lt;/p&gt;</source>
@@ -13895,84 +14455,100 @@ zoom-out for use of the DEM data.</source>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="279"/>
+        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="556"/>
         <source>&lt;p&gt;The weight of the bicycle in kg including luggage.&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="311"/>
+        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="561"/>
         <source>Pedal Cadence:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="321"/>
+        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="563"/>
         <source>&lt;p&gt;The frontal area in m2 (driver, bicycle, bags, etc.) exposed to the wind.&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="735"/>
+        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="646"/>
         <source>&lt;p&gt;The energy use (consumption) in kcal by transforming the positive power by the driver.&lt;/p&gt;
 &lt;p&gt;The muscle efficiency ratio ist considered by 23%.&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="346"/>
+        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="565"/>
         <source>Air Density:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="356"/>
+        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="566"/>
         <source>Wind Drag Coeff:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="366"/>
+        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="568"/>
         <source>&lt;p&gt;The total weight in kg of driver and bike including clothes and luggage.&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="379"/>
+        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="571"/>
         <source>&lt;p&gt;The time in moving and with positive power by the driver.&lt;/p&gt;
 &lt;p&gt;Times with negative power in strong tail wind or downhill driving are not taken into account.&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="417"/>
+        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="579"/>
         <source>Wind Speed km/h:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="427"/>
+        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="580"/>
         <source>Ratio to Moving Time:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="461"/>
+        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="586"/>
         <source>Sum Forces:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="475"/>
+        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="591"/>
         <source>rpm</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="505"/>
+        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="597"/>
         <source>&lt;p&gt;The power in Watt on average over all track points.&lt;/p&gt;
 &lt;p&gt;Negative power from strong tailwind or downhill driving are taken into account.&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="522"/>
+        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="603"/>
         <source>Driver Weight:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="532"/>
+        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="604"/>
         <source>Rolling Resist. Force:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="542"/>
+        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="606"/>
         <source>&lt;p&gt;The positive power in Watt that must be applied on average for all track points.&lt;/p&gt;
 &lt;p&gt;Negative power from strong tailwind or downhill driving are not taken into account.&lt;/p&gt;
 &lt;p&gt;This power must be applied by the driver on average for the track.&lt;/p&gt;</source>
@@ -13980,17 +14556,20 @@ zoom-out for use of the DEM data.</source>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="581"/>
+        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="616"/>
         <source>&lt;p&gt;The ratio of the power moving time related to the track moving time in percent.&lt;/p&gt;
 &lt;p&gt;The lower the ratio the greater the influence of tailwind and/or downhill driving.&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="595"/>
+        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="619"/>
         <source>Position in Wind:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IEnergyCyclingDialog.ui" line="633"/>
+        <location filename="../../../build/src/qmapshack/ui_IEnergyCyclingDialog.h" line="626"/>
         <source>Wind Speed Bft:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13999,41 +14578,49 @@ zoom-out for use of the DEM data.</source>
     <name>IExportDatabase</name>
     <message>
         <location filename="../gis/db/IExportDatabase.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IExportDatabase.h" line="123"/>
         <source>Export database to GPX...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/db/IExportDatabase.ui" line="22"/>
+        <location filename="../../../build/src/qmapshack/ui_IExportDatabase.h" line="124"/>
         <source>...</source>
         <translation type="unfinished">...</translation>
     </message>
     <message>
         <location filename="../gis/db/IExportDatabase.ui" line="33"/>
+        <location filename="../../../build/src/qmapshack/ui_IExportDatabase.h" line="125"/>
         <source>Export Path:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/db/IExportDatabase.ui" line="46"/>
+        <location filename="../../../build/src/qmapshack/ui_IExportDatabase.h" line="126"/>
         <source>-</source>
         <translation type="unfinished">-</translation>
     </message>
     <message>
         <location filename="../gis/db/IExportDatabase.ui" line="55"/>
+        <location filename="../../../build/src/qmapshack/ui_IExportDatabase.h" line="127"/>
         <source>GPX 1.1 without extensions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/db/IExportDatabase.ui" line="83"/>
+        <location filename="../../../build/src/qmapshack/ui_IExportDatabase.h" line="128"/>
         <source>Start</source>
         <translation type="unfinished">Start</translation>
     </message>
     <message>
         <location filename="../gis/db/IExportDatabase.ui" line="93"/>
+        <location filename="../../../build/src/qmapshack/ui_IExportDatabase.h" line="129"/>
         <source>Abort</source>
         <translation type="unfinished">Annuleren</translation>
     </message>
     <message>
         <location filename="../gis/db/IExportDatabase.ui" line="100"/>
+        <location filename="../../../build/src/qmapshack/ui_IExportDatabase.h" line="130"/>
         <source>Close</source>
         <translation type="unfinished">Sluiten</translation>
     </message>
@@ -14042,21 +14629,25 @@ zoom-out for use of the DEM data.</source>
     <name>IFilterChangeStartPoint</name>
     <message>
         <location filename="../gis/trk/filter/IFilterChangeStartPoint.ui" line="20"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterChangeStartPoint.h" line="114"/>
         <source>Form</source>
         <translation type="unfinished">Formulier</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterChangeStartPoint.ui" line="49"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterChangeStartPoint.h" line="115"/>
         <source>Start Track at Point:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterChangeStartPoint.ui" line="72"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterChangeStartPoint.h" line="116"/>
         <source>...</source>
         <translation type="unfinished">...</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterChangeStartPoint.ui" line="108"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterChangeStartPoint.h" line="117"/>
         <source>&lt;b&gt;Change Start Point&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -14065,21 +14656,25 @@ zoom-out for use of the DEM data.</source>
     <name>IFilterDelete</name>
     <message>
         <location filename="../gis/trk/filter/IFilterDelete.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterDelete.h" line="96"/>
         <source>Form</source>
         <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterDelete.ui" line="45"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterDelete.h" line="97"/>
         <source>&lt;b&gt;Remove Track Points&lt;/b&gt;</source>
         <translation>&lt;b&gt;Verwijder trackpunten&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterDelete.ui" line="57"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterDelete.h" line="98"/>
         <source>Remove all hidden track points permanently.</source>
         <translation>Verwijder permanent alle verborgen trackpunten.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterDelete.ui" line="67"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterDelete.h" line="99"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -14088,26 +14683,31 @@ zoom-out for use of the DEM data.</source>
     <name>IFilterDeleteExtension</name>
     <message>
         <location filename="../gis/trk/filter/IFilterDeleteExtension.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterDeleteExtension.h" line="121"/>
         <source>Form</source>
         <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterDeleteExtension.ui" line="45"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterDeleteExtension.h" line="122"/>
         <source>&lt;b&gt;Remove Extension from all Track Points&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterDeleteExtension.ui" line="60"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterDeleteExtension.h" line="123"/>
         <source>Remove </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterDeleteExtension.ui" line="80"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterDeleteExtension.h" line="124"/>
         <source>from all Track Points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterDeleteExtension.ui" line="100"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterDeleteExtension.h" line="125"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -14116,31 +14716,37 @@ zoom-out for use of the DEM data.</source>
     <name>IFilterDouglasPeuker</name>
     <message>
         <location filename="../gis/trk/filter/IFilterDouglasPeuker.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterDouglasPeuker.h" line="118"/>
         <source>Form</source>
         <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterDouglasPeuker.ui" line="45"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterDouglasPeuker.h" line="119"/>
         <source>&lt;b&gt;Hide Points (Douglas Peuker)&lt;/b&gt;</source>
         <translation>&lt;b&gt;Verberg punten (Douglas Peuker)&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterDouglasPeuker.ui" line="57"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterDouglasPeuker.h" line="120"/>
         <source>Hide track points if the distance to a line between neighboring points is less than</source>
         <translation>Verberg trackpunten wanneer de afstand tussen naaste punten minder is dan</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterDouglasPeuker.ui" line="73"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterDouglasPeuker.h" line="121"/>
         <source>m</source>
         <translation>m</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterDouglasPeuker.ui" line="96"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterDouglasPeuker.h" line="123"/>
         <source>Apply filter now.</source>
         <translation>Nu filter toepassen.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterDouglasPeuker.ui" line="99"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterDouglasPeuker.h" line="125"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -14149,31 +14755,37 @@ zoom-out for use of the DEM data.</source>
     <name>IFilterInterpolateElevation</name>
     <message>
         <location filename="../gis/trk/filter/IFilterInterpolateElevation.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterInterpolateElevation.h" line="132"/>
         <source>Form</source>
         <translation type="unfinished">Formulier</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterInterpolateElevation.ui" line="45"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterInterpolateElevation.h" line="133"/>
         <source>&lt;b&gt;Interpolate Elevation Data&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterInterpolateElevation.ui" line="63"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterInterpolateElevation.h" line="134"/>
         <source>Replace elevation of track points with interpolated data.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterInterpolateElevation.ui" line="73"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterInterpolateElevation.h" line="135"/>
         <source>Quality</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterInterpolateElevation.ui" line="102"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterInterpolateElevation.h" line="136"/>
         <source>Preview</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterInterpolateElevation.ui" line="109"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterInterpolateElevation.h" line="137"/>
         <source>...</source>
         <translation type="unfinished">...</translation>
     </message>
@@ -14182,21 +14794,25 @@ zoom-out for use of the DEM data.</source>
     <name>IFilterInvalid</name>
     <message>
         <location filename="../gis/trk/filter/IFilterInvalid.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterInvalid.h" line="99"/>
         <source>Form</source>
         <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterInvalid.ui" line="41"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterInvalid.h" line="100"/>
         <source>Hide Invalid Points</source>
         <translation>Verberg ongeldige punten</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterInvalid.ui" line="56"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterInvalid.h" line="101"/>
         <source>Hide points with invalid data.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterInvalid.ui" line="63"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterInvalid.h" line="102"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -14205,31 +14821,37 @@ zoom-out for use of the DEM data.</source>
     <name>IFilterLoopsCut</name>
     <message>
         <location filename="../gis/trk/filter/IFilterLoopsCut.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterLoopsCut.h" line="146"/>
         <source>Form</source>
         <translation type="unfinished">Formulier</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterLoopsCut.ui" line="35"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterLoopsCut.h" line="147"/>
         <source>Cut track when loop length is greater than</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterLoopsCut.ui" line="73"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterLoopsCut.h" line="148"/>
         <source>m</source>
         <translation type="unfinished">m</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterLoopsCut.ui" line="102"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterLoopsCut.h" line="150"/>
         <source>Apply filter now.</source>
         <translation type="unfinished">Nu filter toepassen.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterLoopsCut.ui" line="105"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterLoopsCut.h" line="152"/>
         <source>...</source>
         <translation type="unfinished">...</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterLoopsCut.ui" line="135"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterLoopsCut.h" line="153"/>
         <source>Cut loops into separate tracks</source>
         <translation type="unfinished"></translation>
     </message>
@@ -14238,26 +14860,31 @@ zoom-out for use of the DEM data.</source>
     <name>IFilterMedian</name>
     <message>
         <location filename="../gis/trk/filter/IFilterMedian.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterMedian.h" line="117"/>
         <source>Form</source>
         <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterMedian.ui" line="45"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterMedian.h" line="118"/>
         <source>&lt;b&gt;Smooth Profile (Median Method)&lt;/b&gt;</source>
         <translation>&lt;b&gt;Vloeiend profiel (Mediaans methode)&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterMedian.ui" line="57"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterMedian.h" line="119"/>
         <source>Smooth deviation of the track points elevation with a Median filter of size </source>
         <translation>Vloeiend hoogteverschil van trackpunten-maken met een Mediaans filter van </translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterMedian.ui" line="73"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterMedian.h" line="120"/>
         <source>points</source>
         <translation>punten</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterMedian.ui" line="102"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterMedian.h" line="121"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -14266,31 +14893,37 @@ zoom-out for use of the DEM data.</source>
     <name>IFilterNewDate</name>
     <message>
         <location filename="../gis/trk/filter/IFilterNewDate.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterNewDate.h" line="114"/>
         <source>Form</source>
         <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterNewDate.ui" line="35"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterNewDate.h" line="115"/>
         <source>&lt;b&gt;Change Time&lt;/b&gt;</source>
         <translation>&lt;b&gt;Verander tijd&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterNewDate.ui" line="44"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterNewDate.h" line="116"/>
         <source>Change start of track to </source>
         <translation>Verander start van track naar </translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterNewDate.ui" line="51"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterNewDate.h" line="117"/>
         <source>dd.MM.yy HH:mm:ss</source>
         <translation>dd.MM.yy UU:mm:ss</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterNewDate.ui" line="61"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterNewDate.h" line="118"/>
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterNewDate.ui" line="81"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterNewDate.h" line="119"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -14299,31 +14932,37 @@ zoom-out for use of the DEM data.</source>
     <name>IFilterObscureDate</name>
     <message>
         <location filename="../gis/trk/filter/IFilterObscureDate.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterObscureDate.h" line="114"/>
         <source>Form</source>
         <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterObscureDate.ui" line="45"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterObscureDate.h" line="115"/>
         <source>&lt;b&gt;Obscure Timestamps&lt;/b&gt;</source>
         <translation>&lt;b&gt;Onduidelijke tijdstempels&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterObscureDate.ui" line="54"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterObscureDate.h" line="116"/>
         <source>Increase timestamp by</source>
         <translation>Verhoog tijdstempels met</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterObscureDate.ui" line="61"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterObscureDate.h" line="117"/>
         <source> sec.</source>
         <translation> sec.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterObscureDate.ui" line="68"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterObscureDate.h" line="118"/>
         <source>with each track point. 0 sec. will remove timestamps.</source>
         <translation>voor elk trackpunt. 0 sec. zal tijdstempels verwijderen.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterObscureDate.ui" line="91"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterObscureDate.h" line="119"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -14332,26 +14971,31 @@ zoom-out for use of the DEM data.</source>
     <name>IFilterOffsetElevation</name>
     <message>
         <location filename="../gis/trk/filter/IFilterOffsetElevation.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterOffsetElevation.h" line="127"/>
         <source>Form</source>
         <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterOffsetElevation.ui" line="45"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterOffsetElevation.h" line="128"/>
         <source>&lt;b&gt;Offset Elevation&lt;/b&gt;</source>
         <translation>&lt;b&gt;Hoogte aanpassen&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterOffsetElevation.ui" line="63"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterOffsetElevation.h" line="129"/>
         <source>Add offset of</source>
         <translation>Verander hoogte naar</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterOffsetElevation.ui" line="89"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterOffsetElevation.h" line="130"/>
         <source>to track points elevation.</source>
         <translation>van trackpunt hoogte.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterOffsetElevation.ui" line="109"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterOffsetElevation.h" line="131"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -14360,21 +15004,25 @@ zoom-out for use of the DEM data.</source>
     <name>IFilterReplaceElevation</name>
     <message>
         <location filename="../gis/trk/filter/IFilterReplaceElevation.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterReplaceElevation.h" line="109"/>
         <source>Form</source>
         <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterReplaceElevation.ui" line="45"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterReplaceElevation.h" line="110"/>
         <source>&lt;b&gt;Replace Elevation Data&lt;/b&gt;</source>
         <translation>&lt;b&gt;Vervang hoogtegegevens&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterReplaceElevation.ui" line="57"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterReplaceElevation.h" line="111"/>
         <source>Replace elevation of track points with the values from loaded DEM files in view</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterReplaceElevation.ui" line="83"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterReplaceElevation.h" line="112"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -14383,21 +15031,25 @@ zoom-out for use of the DEM data.</source>
     <name>IFilterReset</name>
     <message>
         <location filename="../gis/trk/filter/IFilterReset.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterReset.h" line="95"/>
         <source>Form</source>
         <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterReset.ui" line="35"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterReset.h" line="96"/>
         <source>&lt;b&gt;Reset Hidden Track Points&lt;/b&gt;</source>
         <translation>&lt;b&gt;Herstel verborgen trackpunten&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterReset.ui" line="47"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterReset.h" line="97"/>
         <source>Make all trackpoints visible again.</source>
         <translation>Maak alle trackpunten weer zichtbaar.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterReset.ui" line="54"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterReset.h" line="98"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -14406,41 +15058,49 @@ zoom-out for use of the DEM data.</source>
     <name>IFilterSpeed</name>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="29"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterSpeed.h" line="179"/>
         <source>Form</source>
         <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="64"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterSpeed.h" line="180"/>
         <source>&lt;b&gt;Change Speed&lt;/b&gt;</source>
         <translation>&lt;b&gt;Verander snelheid&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="84"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterSpeed.h" line="181"/>
         <source>labelWarning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="191"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterSpeed.h" line="188"/>
         <source>Hiking</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="181"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterSpeed.h" line="186"/>
         <source>Constant</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="186"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterSpeed.h" line="187"/>
         <source>Cycling</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="114"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterSpeed.h" line="183"/>
         <source>Apply filter now.</source>
         <translation type="unfinished">Nu filter toepassen.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="117"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterSpeed.h" line="185"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -14449,16 +15109,19 @@ zoom-out for use of the DEM data.</source>
     <name>IFilterSpeedConst</name>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedConst.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterSpeedConst.h" line="70"/>
         <source>Form</source>
         <translation type="unfinished">Formulier</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedConst.ui" line="54"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterSpeedConst.h" line="72"/>
         <source>Speed</source>
         <translation type="unfinished">Snelheid</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedConst.ui" line="35"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterSpeedConst.h" line="71"/>
         <source> km/h</source>
         <translation type="unfinished"> km/u</translation>
     </message>
@@ -14467,56 +15130,67 @@ zoom-out for use of the DEM data.</source>
     <name>IFilterSpeedCycle</name>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="26"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterSpeedCycle.h" line="216"/>
         <source>Form</source>
         <translation type="unfinished">Formulier</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="208"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterSpeedCycle.h" line="225"/>
         <source>User defined positive and negative slope values will be replaced by the minimum and maximum slope values from the track.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="211"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterSpeedCycle.h" line="227"/>
         <source>Set min/max slopes from Track</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="228"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterSpeedCycle.h" line="229"/>
         <source>Max Speed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="260"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterSpeedCycle.h" line="231"/>
         <source>Min Speed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="176"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterSpeedCycle.h" line="222"/>
         <source>Plain Level:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="270"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterSpeedCycle.h" line="232"/>
         <source>Uphill:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="218"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterSpeedCycle.h" line="228"/>
         <source>at negative Slope</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="153"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterSpeedCycle.h" line="221"/>
         <source>at positive Slope</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="280"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterSpeedCycle.h" line="233"/>
         <source>Speed at zero Slope</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="121"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterSpeedCycle.h" line="219"/>
         <source>Downhill:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -14525,21 +15199,25 @@ zoom-out for use of the DEM data.</source>
     <name>IFilterSpeedHike</name>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedHike.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterSpeedHike.h" line="134"/>
         <source>Form</source>
         <translation type="unfinished">Formulier</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedHike.ui" line="75"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterSpeedHike.h" line="135"/>
         <source>Ascending Speed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedHike.ui" line="153"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterSpeedHike.h" line="137"/>
         <source>Descending Speed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedHike.ui" line="130"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterSpeedHike.h" line="136"/>
         <source>Speed at zero Slope</source>
         <translation type="unfinished"></translation>
     </message>
@@ -14548,21 +15226,25 @@ zoom-out for use of the DEM data.</source>
     <name>IFilterSplitSegment</name>
     <message>
         <location filename="../gis/trk/filter/IFilterSplitSegment.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterSplitSegment.h" line="97"/>
         <source>Form</source>
         <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSplitSegment.ui" line="45"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterSplitSegment.h" line="98"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Split Segments into Tracks&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Maak delen in een track&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSplitSegment.ui" line="60"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterSplitSegment.h" line="99"/>
         <source>Creates a new track for every segment within this track.</source>
         <translation>Maakt een nieuwe track van delen in deze track.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSplitSegment.ui" line="70"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterSplitSegment.h" line="100"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -14571,26 +15253,31 @@ zoom-out for use of the DEM data.</source>
     <name>IFilterSplitTrack</name>
     <message>
         <location filename="../gis/trk/filter/IFilterSplitTrack.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterSplitTrack.h" line="146"/>
         <source>Form</source>
         <translation type="unfinished">Formulier</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSplitTrack.ui" line="35"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterSplitTrack.h" line="147"/>
         <source>Number of tracks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSplitTrack.ui" line="99"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterSplitTrack.h" line="150"/>
         <source>Apply filter now.</source>
         <translation type="unfinished">Nu filter toepassen.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSplitTrack.ui" line="102"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterSplitTrack.h" line="152"/>
         <source>...</source>
         <translation type="unfinished">...</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSplitTrack.ui" line="132"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterSplitTrack.h" line="153"/>
         <source>Split track into multiple shorter tracks</source>
         <translation type="unfinished"></translation>
     </message>
@@ -14599,21 +15286,25 @@ zoom-out for use of the DEM data.</source>
     <name>IFilterSubPt2Pt</name>
     <message>
         <location filename="../gis/trk/filter/IFilterSubPt2Pt.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterSubPt2Pt.h" line="97"/>
         <source>Form</source>
         <translation type="unfinished">Formulier</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSubPt2Pt.ui" line="35"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterSubPt2Pt.h" line="98"/>
         <source>&lt;b&gt;Convert track subpoints to points&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSubPt2Pt.ui" line="50"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterSubPt2Pt.h" line="99"/>
         <source>Convert subpoints obtained from routing to ordinary track points </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSubPt2Pt.ui" line="60"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterSubPt2Pt.h" line="100"/>
         <source>...</source>
         <translation type="unfinished">...</translation>
     </message>
@@ -14622,21 +15313,25 @@ zoom-out for use of the DEM data.</source>
     <name>IFilterTerrainSlope</name>
     <message>
         <location filename="../gis/trk/filter/IFilterTerrainSlope.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterTerrainSlope.h" line="96"/>
         <source>Form</source>
         <translation type="unfinished">Formulier</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterTerrainSlope.ui" line="45"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterTerrainSlope.h" line="97"/>
         <source>&lt;b&gt;Calculate Terrain Slope&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterTerrainSlope.ui" line="57"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterTerrainSlope.h" line="98"/>
         <source>Calculate slope of the terrain based on loaded DEM files.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterTerrainSlope.ui" line="67"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterTerrainSlope.h" line="99"/>
         <source>...</source>
         <translation type="unfinished">...</translation>
     </message>
@@ -14645,36 +15340,43 @@ zoom-out for use of the DEM data.</source>
     <name>IFilterZeroSpeedDriftCleaner</name>
     <message>
         <location filename="../gis/trk/filter/IFilterZeroSpeedDriftCleaner.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterZeroSpeedDriftCleaner.h" line="160"/>
         <source>Form</source>
         <translation type="unfinished">Formulier</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterZeroSpeedDriftCleaner.ui" line="35"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterZeroSpeedDriftCleaner.h" line="161"/>
         <source>Distance</source>
         <translation type="unfinished">Afstand</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterZeroSpeedDriftCleaner.ui" line="70"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterZeroSpeedDriftCleaner.h" line="162"/>
         <source>m</source>
         <translation type="unfinished">m</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterZeroSpeedDriftCleaner.ui" line="86"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterZeroSpeedDriftCleaner.h" line="163"/>
         <source>Ratio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterZeroSpeedDriftCleaner.ui" line="119"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterZeroSpeedDriftCleaner.h" line="165"/>
         <source>Apply filter now.</source>
         <translation type="unfinished">Nu filter toepassen.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterZeroSpeedDriftCleaner.ui" line="122"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterZeroSpeedDriftCleaner.h" line="167"/>
         <source>...</source>
         <translation type="unfinished">...</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterZeroSpeedDriftCleaner.ui" line="152"/>
+        <location filename="../../../build/src/qmapshack/ui_IFilterZeroSpeedDriftCleaner.h" line="168"/>
         <source>Hide zero speed drift knots</source>
         <translation type="unfinished"></translation>
     </message>
@@ -14683,44 +15385,52 @@ zoom-out for use of the DEM data.</source>
     <name>IGeoSearchConfigDialog</name>
     <message>
         <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IGeoSearchConfigDialog.h" line="214"/>
         <source>Setup Geo-Search</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="47"/>
+        <location filename="../../../build/src/qmapshack/ui_IGeoSearchConfigDialog.h" line="215"/>
         <source>&lt;p&gt;&lt;a href=&quot;https://nominatim.openstreetmap.org/&quot; target=&quot;_blank&quot;&gt;Nominatim&lt;/a&gt; © &lt;a href=&quot;https://openstreetmap.org/copyright&quot; target=&quot;_blank&quot;&gt;OpenStreetMap ODbL&lt;/a&gt;&lt;/p&gt;&lt;p&gt;to use please specify a valid email-address:&lt;/p&gt;
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="60"/>
+        <location filename="../../../build/src/qmapshack/ui_IGeoSearchConfigDialog.h" line="218"/>
         <source>please specify a valid email-address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="82"/>
+        <location filename="../../../build/src/qmapshack/ui_IGeoSearchConfigDialog.h" line="220"/>
         <source>maximum number of results (default is 10):</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="141"/>
+        <location filename="../../../build/src/qmapshack/ui_IGeoSearchConfigDialog.h" line="221"/>
         <source>&lt;p&gt;&lt;a href=&quot;http://www.geonames.org/&quot; target=&quot;_blank&quot;&gt;Geonames&lt;/a&gt; © &lt;a href=&quot;http://creativecommons.org/licenses/by/4.0/&quot; target=&quot;_blank&quot;&gt;Creative Commons Attribution 4.0 License&lt;/a&gt;&lt;/p&gt;&lt;p&gt;to use please create a geonames &lt;a href=&quot;http://www.geonames.org/login&quot; target=&quot;_blank&quot;&gt;username&lt;/a&gt;,&lt;/p&gt;&lt;p&gt;then enable &apos;Free Webservices&apos; in your &lt;a href=&quot;http://www.geonames.org/manageaccount&quot; target=&quot;_blank&quot;&gt;Account&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;enter your geonames username here:&lt;/p&gt;
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="154"/>
+        <location filename="../../../build/src/qmapshack/ui_IGeoSearchConfigDialog.h" line="224"/>
         <source>enter geonames username here</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="191"/>
+        <location filename="../../../build/src/qmapshack/ui_IGeoSearchConfigDialog.h" line="226"/>
         <source>&lt;p&gt;&lt;a href=&quot;https://developers.google.com/maps/documentation/geocoding/start&quot; target=&quot;_blank&quot;&gt;Google Geocoding API&lt;/a&gt; © &lt;a href=&quot;https://developers.google.com/terms&quot; target=&quot;_blank&quot;&gt;Google.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;please enter your &lt;a href=&quot;https://developers.google.com/maps/documentation/geocoding/get-api-key&quot; target=&quot;_blank&quot;&gt;Google API-Key&lt;/a&gt; here:&lt;/p&gt;
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="204"/>
+        <location filename="../../../build/src/qmapshack/ui_IGeoSearchConfigDialog.h" line="229"/>
         <source>enter Google API-key here</source>
         <translation type="unfinished"></translation>
     </message>
@@ -14729,51 +15439,61 @@ zoom-out for use of the DEM data.</source>
     <name>IGeoSearchWebConfigDialog</name>
     <message>
         <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IGeoSearchWebConfigDialog.h" line="108"/>
         <source>Configure Services...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="24"/>
+        <location filename="../../../build/src/qmapshack/ui_IGeoSearchWebConfigDialog.h" line="109"/>
         <source>TextLabel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="50"/>
+        <location filename="../../../build/src/qmapshack/ui_IGeoSearchWebConfigDialog.h" line="112"/>
         <source>Name</source>
         <translation type="unfinished">Naam </translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="55"/>
+        <location filename="../../../build/src/qmapshack/ui_IGeoSearchWebConfigDialog.h" line="111"/>
         <source>URL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="65"/>
+        <location filename="../../../build/src/qmapshack/ui_IGeoSearchWebConfigDialog.h" line="114"/>
         <source>Add a new web service to the list.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="68"/>
+        <location filename="../../../build/src/qmapshack/ui_IGeoSearchWebConfigDialog.h" line="116"/>
         <source>Add new</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="78"/>
+        <location filename="../../../build/src/qmapshack/ui_IGeoSearchWebConfigDialog.h" line="118"/>
         <source>Remove all selected services from the list.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="81"/>
+        <location filename="../../../build/src/qmapshack/ui_IGeoSearchWebConfigDialog.h" line="120"/>
         <source>Delete selected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="88"/>
+        <location filename="../../../build/src/qmapshack/ui_IGeoSearchWebConfigDialog.h" line="122"/>
         <source>Remove all services and restore default list.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="91"/>
+        <location filename="../../../build/src/qmapshack/ui_IGeoSearchWebConfigDialog.h" line="124"/>
         <source>Reset</source>
         <translation type="unfinished"></translation>
     </message>
@@ -14782,16 +15502,19 @@ zoom-out for use of the DEM data.</source>
     <name>IGisDatabase</name>
     <message>
         <location filename="../gis/IGisDatabase.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IGisDatabase.h" line="108"/>
         <source>Form</source>
         <translation type="unfinished">Formulier</translation>
     </message>
     <message>
         <location filename="../gis/IGisDatabase.ui" line="96"/>
+        <location filename="../../../build/src/qmapshack/ui_IGisDatabase.h" line="110"/>
         <source>To add a database do a right click on the database list above.</source>
         <translation type="unfinished">Om nieuwe database te maken doe een rechterklik op database erboven.</translation>
     </message>
     <message>
         <location filename="../gis/IGisDatabase.ui" line="119"/>
+        <location filename="../../../build/src/qmapshack/ui_IGisDatabase.h" line="109"/>
         <source>Show Summary Drop Zones</source>
         <translation type="unfinished"></translation>
     </message>
@@ -14799,159 +15522,159 @@ zoom-out for use of the DEM data.</source>
 <context>
     <name>IGisItem</name>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="47"/>
+        <location filename="../gis/IGisItem.cpp" line="48"/>
         <source>[no name]</source>
         <translation>[geen naam]</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="127"/>
+        <location filename="../gis/IGisItem.cpp" line="128"/>
         <source>Black</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="128"/>
+        <location filename="../gis/IGisItem.cpp" line="129"/>
         <source>Dark Red</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="129"/>
+        <location filename="../gis/IGisItem.cpp" line="130"/>
         <source>Dark Green</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="130"/>
+        <location filename="../gis/IGisItem.cpp" line="131"/>
         <source>Dark Yellow</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="131"/>
+        <location filename="../gis/IGisItem.cpp" line="132"/>
         <source>Dark Blue</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="132"/>
+        <location filename="../gis/IGisItem.cpp" line="133"/>
         <source>Dark Magenta</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="133"/>
+        <location filename="../gis/IGisItem.cpp" line="134"/>
         <source>Dark Cyan</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="134"/>
+        <location filename="../gis/IGisItem.cpp" line="135"/>
         <source>Light Gray</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="135"/>
+        <location filename="../gis/IGisItem.cpp" line="136"/>
         <source>Dark Gray</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="136"/>
+        <location filename="../gis/IGisItem.cpp" line="137"/>
         <source>Red</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="137"/>
+        <location filename="../gis/IGisItem.cpp" line="138"/>
         <source>Green</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="138"/>
+        <location filename="../gis/IGisItem.cpp" line="139"/>
         <source>Yellow</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="139"/>
+        <location filename="../gis/IGisItem.cpp" line="140"/>
         <source>Blue</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="140"/>
+        <location filename="../gis/IGisItem.cpp" line="141"/>
         <source>Magenta</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="141"/>
+        <location filename="../gis/IGisItem.cpp" line="142"/>
         <source>Cyan</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="142"/>
+        <location filename="../gis/IGisItem.cpp" line="143"/>
         <source>White</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="143"/>
+        <location filename="../gis/IGisItem.cpp" line="144"/>
         <source>Transparent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="365"/>
+        <location filename="../gis/IGisItem.cpp" line="373"/>
         <source>Initial version.</source>
         <translation>Orginele versie.</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="483"/>
+        <location filename="../gis/IGisItem.cpp" line="491"/>
         <source>Never ask again.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="484"/>
+        <location filename="../gis/IGisItem.cpp" line="492"/>
         <source>&lt;h3&gt;%1&lt;/h3&gt; This element is probably read-only because it was not created within QMapShack. Usually you should not want to change imported data. But if you think that is ok press &apos;Ok&apos;.</source>
         <translation>&lt;h3&gt;%1&lt;h3&gt;Dit element is waarschijnlijk alleen lezen omdat dit niet gemaakt is in QMapShack. Normaal hoeven geen gegevens aangepast te worden na het importeren.  Om toch aan te passen druk dan op &apos;OK&apos;.</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="487"/>
+        <location filename="../gis/IGisItem.cpp" line="495"/>
         <source>Read Only Mode...</source>
         <translation>Alleen lezen modus...</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="688"/>
-        <location filename="../gis/IGisItem.cpp" line="721"/>
+        <location filename="../gis/IGisItem.cpp" line="696"/>
+        <location filename="../gis/IGisItem.cpp" line="729"/>
         <source>&lt;h4&gt;Description:&lt;/h4&gt;</source>
         <translation>&lt;h4&gt;Beschrijving:&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="723"/>
+        <location filename="../gis/IGisItem.cpp" line="731"/>
         <source>&lt;p&gt;--- no description ---&lt;/p&gt;</source>
         <translation>&lt;p&gt;--- geen beschrijving ---&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="905"/>
+        <location filename="../gis/IGisItem.cpp" line="913"/>
         <source>Rating: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="909"/>
+        <location filename="../gis/IGisItem.cpp" line="917"/>
         <source>Keywords: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="696"/>
+        <location filename="../gis/IGisItem.cpp" line="704"/>
         <source>&lt;h4&gt;Comment:&lt;/h4&gt;</source>
         <translation>&lt;h4&gt;Notitie:&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="704"/>
-        <location filename="../gis/IGisItem.cpp" line="731"/>
+        <location filename="../gis/IGisItem.cpp" line="712"/>
+        <location filename="../gis/IGisItem.cpp" line="739"/>
         <source>&lt;h4&gt;Links:&lt;/h4&gt;</source>
         <translation>&lt;h4&gt;Links:&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="733"/>
+        <location filename="../gis/IGisItem.cpp" line="741"/>
         <source>&lt;p&gt;--- no links ---&lt;/p&gt;</source>
         <translation>&lt;p&gt;--- geen links ---&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="843"/>
+        <location filename="../gis/IGisItem.cpp" line="851"/>
         <source>Edit name...</source>
         <translation type="unfinished">Bewerk naam...</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="844"/>
+        <location filename="../gis/IGisItem.cpp" line="852"/>
         <source>Enter new %1 name.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -14960,16 +15683,19 @@ zoom-out for use of the DEM data.</source>
     <name>IGisItemRate</name>
     <message>
         <location filename="../gis/IGisItemRate.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IGisItemRate.h" line="142"/>
         <source>Rating and tags...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/IGisItemRate.ui" line="22"/>
+        <location filename="../../../build/src/qmapshack/ui_IGisItemRate.h" line="143"/>
         <source>Set rating:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/IGisItemRate.ui" line="139"/>
+        <location filename="../../../build/src/qmapshack/ui_IGisItemRate.h" line="149"/>
         <source>Separate keywords by colons:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -14977,60 +15703,60 @@ zoom-out for use of the DEM data.</source>
 <context>
     <name>IGisProject</name>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="193"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="194"/>
         <source>Save project?</source>
         <translation>Project opslaan?</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="194"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="195"/>
         <source>&lt;h3&gt;%1&lt;/h3&gt;The project was changed. Save before closing it?</source>
         <translation>&lt;h3&gt;%1&lt;/h3&gt;Het project is veranderd. Voor het sluiten opslaan?</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="383"/>
-        <location filename="../gis/prj/IGisProject.cpp" line="431"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="384"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="432"/>
         <source>Save &quot;%1&quot; to...</source>
         <translation>Opslaan &quot;%1&quot; als...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="495"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="496"/>
         <source>&lt;br/&gt;
 Filename: %1</source>
         <translation>&lt;br/&gt;
 Bestandsnaam: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="499"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="500"/>
         <source>Keywords: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="503"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="504"/>
         <source>Waypoints: %1</source>
         <translation>Waypoints: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="506"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="507"/>
         <source>Tracks: %1</source>
         <translation>Tracks: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="509"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="510"/>
         <source>Routes: %1</source>
         <translation>Routes: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="512"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="513"/>
         <source>Areas: %1</source>
         <translation>Gebieden: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="616"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="617"/>
         <source>Are you sure you want to delete &apos;%1&apos; from project &apos;%2&apos;?</source>
         <translation>Moet &apos;%1&apos; werkelijk verwijderd worden uit project &apos;%2&apos;?</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="617"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="618"/>
         <source>Delete...</source>
         <translation>Verwijderen...</translation>
     </message>
@@ -15039,21 +15765,25 @@ Bestandsnaam: %1</translation>
     <name>IGisSummary</name>
     <message>
         <location filename="../gis/summary/IGisSummary.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IGisSummary.h" line="59"/>
         <source>Form</source>
         <translation type="unfinished">Formulier</translation>
     </message>
     <message>
         <location filename="../gis/summary/IGisSummary.ui" line="35"/>
+        <location filename="../../../build/src/qmapshack/ui_IGisSummary.h" line="61"/>
         <source>Setup summary drop zones.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/summary/IGisSummary.ui" line="38"/>
+        <location filename="../../../build/src/qmapshack/ui_IGisSummary.h" line="63"/>
         <source>...</source>
         <translation type="unfinished">...</translation>
     </message>
     <message>
         <location filename="../gis/summary/IGisSummary.ui" line="49"/>
+        <location filename="../../../build/src/qmapshack/ui_IGisSummary.h" line="64"/>
         <source>Needs setup...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -15062,16 +15792,19 @@ Bestandsnaam: %1</translation>
     <name>IGisSummarySetup</name>
     <message>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IGisSummarySetup.h" line="314"/>
         <source>Setup summary projects...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="20"/>
+        <location filename="../../../build/src/qmapshack/ui_IGisSummarySetup.h" line="315"/>
         <source>-</source>
         <translation type="unfinished">-</translation>
     </message>
     <message>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="37"/>
+        <location filename="../../../build/src/qmapshack/ui_IGisSummarySetup.h" line="319"/>
         <source>Drop Zone 1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -15084,6 +15817,14 @@ Bestandsnaam: %1</translation>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="220"/>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="276"/>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="290"/>
+        <location filename="../../../build/src/qmapshack/ui_IGisSummarySetup.h" line="316"/>
+        <location filename="../../../build/src/qmapshack/ui_IGisSummarySetup.h" line="317"/>
+        <location filename="../../../build/src/qmapshack/ui_IGisSummarySetup.h" line="320"/>
+        <location filename="../../../build/src/qmapshack/ui_IGisSummarySetup.h" line="321"/>
+        <location filename="../../../build/src/qmapshack/ui_IGisSummarySetup.h" line="325"/>
+        <location filename="../../../build/src/qmapshack/ui_IGisSummarySetup.h" line="326"/>
+        <location filename="../../../build/src/qmapshack/ui_IGisSummarySetup.h" line="329"/>
+        <location filename="../../../build/src/qmapshack/ui_IGisSummarySetup.h" line="330"/>
         <source>...</source>
         <translation type="unfinished">...</translation>
     </message>
@@ -15092,21 +15833,28 @@ Bestandsnaam: %1</translation>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="164"/>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="185"/>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="255"/>
+        <location filename="../../../build/src/qmapshack/ui_IGisSummarySetup.h" line="318"/>
+        <location filename="../../../build/src/qmapshack/ui_IGisSummarySetup.h" line="322"/>
+        <location filename="../../../build/src/qmapshack/ui_IGisSummarySetup.h" line="324"/>
+        <location filename="../../../build/src/qmapshack/ui_IGisSummarySetup.h" line="328"/>
         <source>Name</source>
         <translation type="unfinished">Naam </translation>
     </message>
     <message>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="107"/>
+        <location filename="../../../build/src/qmapshack/ui_IGisSummarySetup.h" line="323"/>
         <source>Drop Zone 2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="177"/>
+        <location filename="../../../build/src/qmapshack/ui_IGisSummarySetup.h" line="327"/>
         <source>Drop Zone 3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="247"/>
+        <location filename="../../../build/src/qmapshack/ui_IGisSummarySetup.h" line="331"/>
         <source>Drop Zone 4</source>
         <translation type="unfinished"></translation>
     </message>
@@ -15115,16 +15863,19 @@ Bestandsnaam: %1</translation>
     <name>IGisWorkspace</name>
     <message>
         <location filename="../gis/IGisWorkspace.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IGisWorkspace.h" line="92"/>
         <source>Form</source>
         <translation type="unfinished">Formulier</translation>
     </message>
     <message>
         <location filename="../gis/IGisWorkspace.ui" line="43"/>
+        <location filename="../../../build/src/qmapshack/ui_IGisWorkspace.h" line="93"/>
         <source>Opacity</source>
         <translation type="unfinished">Transparantie</translation>
     </message>
     <message>
         <location filename="../gis/IGisWorkspace.ui" line="50"/>
+        <location filename="../../../build/src/qmapshack/ui_IGisWorkspace.h" line="95"/>
         <source>Change the opacity of all GIS Items on the map.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -15133,16 +15884,19 @@ Bestandsnaam: %1</translation>
     <name>IGridSetup</name>
     <message>
         <location filename="../grid/IGridSetup.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IGridSetup.h" line="151"/>
         <source>Setup Grid...</source>
         <translation>Raster instelling...</translation>
     </message>
     <message>
         <location filename="../grid/IGridSetup.ui" line="22"/>
+        <location filename="../../../build/src/qmapshack/ui_IGridSetup.h" line="152"/>
         <source>Projection</source>
         <translation>Projectie</translation>
     </message>
     <message>
         <location filename="../grid/IGridSetup.ui" line="37"/>
+        <location filename="../../../build/src/qmapshack/ui_IGridSetup.h" line="154"/>
         <source>restore default</source>
         <translation>standaardinstellingen herstellen</translation>
     </message>
@@ -15151,26 +15905,34 @@ Bestandsnaam: %1</translation>
         <location filename="../grid/IGridSetup.ui" line="66"/>
         <location filename="../grid/IGridSetup.ui" line="92"/>
         <location filename="../grid/IGridSetup.ui" line="146"/>
+        <location filename="../../../build/src/qmapshack/ui_IGridSetup.h" line="156"/>
+        <location filename="../../../build/src/qmapshack/ui_IGridSetup.h" line="160"/>
+        <location filename="../../../build/src/qmapshack/ui_IGridSetup.h" line="164"/>
+        <location filename="../../../build/src/qmapshack/ui_IGridSetup.h" line="169"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
         <location filename="../grid/IGridSetup.ui" line="63"/>
+        <location filename="../../../build/src/qmapshack/ui_IGridSetup.h" line="158"/>
         <source>Get projection from current map.</source>
         <translation>Neem projectie van huidige kaart.</translation>
     </message>
     <message>
         <location filename="../grid/IGridSetup.ui" line="89"/>
+        <location filename="../../../build/src/qmapshack/ui_IGridSetup.h" line="162"/>
         <source>projection wizzard</source>
         <translation>projectie wizzard</translation>
     </message>
     <message>
         <location filename="../grid/IGridSetup.ui" line="130"/>
+        <location filename="../../../build/src/qmapshack/ui_IGridSetup.h" line="165"/>
         <source>Grid color</source>
         <translation>Rasterkleur</translation>
     </message>
     <message>
         <location filename="../grid/IGridSetup.ui" line="143"/>
+        <location filename="../../../build/src/qmapshack/ui_IGridSetup.h" line="167"/>
         <source>setup grid color</source>
         <translation>Instelling rasterkleur</translation>
     </message>
@@ -15179,33 +15941,41 @@ Bestandsnaam: %1</translation>
     <name>IImportDatabase</name>
     <message>
         <location filename="../tool/IImportDatabase.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IImportDatabase.h" line="120"/>
         <source>Form</source>
         <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../tool/IImportDatabase.ui" line="22"/>
         <location filename="../tool/IImportDatabase.ui" line="63"/>
+        <location filename="../../../build/src/qmapshack/ui_IImportDatabase.h" line="121"/>
+        <location filename="../../../build/src/qmapshack/ui_IImportDatabase.h" line="124"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
         <location filename="../tool/IImportDatabase.ui" line="45"/>
+        <location filename="../../../build/src/qmapshack/ui_IImportDatabase.h" line="122"/>
         <source>Source Database:</source>
         <translation>Bron database:</translation>
     </message>
     <message>
         <location filename="../tool/IImportDatabase.ui" line="52"/>
         <location filename="../tool/IImportDatabase.ui" line="93"/>
+        <location filename="../../../build/src/qmapshack/ui_IImportDatabase.h" line="123"/>
+        <location filename="../../../build/src/qmapshack/ui_IImportDatabase.h" line="126"/>
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
         <location filename="../tool/IImportDatabase.ui" line="86"/>
+        <location filename="../../../build/src/qmapshack/ui_IImportDatabase.h" line="125"/>
         <source>Target Database:</source>
         <translation>Doel database:</translation>
     </message>
     <message>
         <location filename="../tool/IImportDatabase.ui" line="102"/>
+        <location filename="../../../build/src/qmapshack/ui_IImportDatabase.h" line="127"/>
         <source>Start</source>
         <translation>Start</translation>
     </message>
@@ -15214,11 +15984,13 @@ Bestandsnaam: %1</translation>
     <name>IInputDialog</name>
     <message>
         <location filename="../helpers/IInputDialog.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IInputDialog.h" line="87"/>
         <source>Edit...</source>
         <translation>Bewerken...</translation>
     </message>
     <message>
         <location filename="../helpers/IInputDialog.ui" line="20"/>
+        <location filename="../../../build/src/qmapshack/ui_IInputDialog.h" line="88"/>
         <source>TextLabel</source>
         <translation>Benaming</translation>
     </message>
@@ -15227,27 +15999,33 @@ Bestandsnaam: %1</translation>
     <name>IInvalidTrk</name>
     <message>
         <location filename="../gis/trk/IInvalidTrk.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IInvalidTrk.h" line="127"/>
         <source>Invalid points...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IInvalidTrk.ui" line="28"/>
         <location filename="../gis/trk/IInvalidTrk.ui" line="44"/>
+        <location filename="../../../build/src/qmapshack/ui_IInvalidTrk.h" line="128"/>
+        <location filename="../../../build/src/qmapshack/ui_IInvalidTrk.h" line="130"/>
         <source>TextLabel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IInvalidTrk.ui" line="37"/>
+        <location filename="../../../build/src/qmapshack/ui_IInvalidTrk.h" line="129"/>
         <source>Invalid points:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IInvalidTrk.ui" line="54"/>
+        <location filename="../../../build/src/qmapshack/ui_IInvalidTrk.h" line="131"/>
         <source>Do not ask again for this project</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IInvalidTrk.ui" line="63"/>
+        <location filename="../../../build/src/qmapshack/ui_IInvalidTrk.h" line="132"/>
         <source>Show Details...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -15264,27 +16042,33 @@ Bestandsnaam: %1</translation>
     <name>ILinksDialog</name>
     <message>
         <location filename="../helpers/ILinksDialog.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_ILinksDialog.h" line="95"/>
         <source>Links...</source>
         <translation>Links...</translation>
     </message>
     <message>
         <location filename="../helpers/ILinksDialog.ui" line="23"/>
+        <location filename="../../../build/src/qmapshack/ui_ILinksDialog.h" line="99"/>
         <source>Type</source>
         <translation>Soort</translation>
     </message>
     <message>
         <location filename="../helpers/ILinksDialog.ui" line="28"/>
+        <location filename="../../../build/src/qmapshack/ui_ILinksDialog.h" line="98"/>
         <source>Text</source>
         <translation>Tekst</translation>
     </message>
     <message>
         <location filename="../helpers/ILinksDialog.ui" line="33"/>
+        <location filename="../../../build/src/qmapshack/ui_ILinksDialog.h" line="97"/>
         <source>Uri</source>
         <translation>URL</translation>
     </message>
     <message>
         <location filename="../helpers/ILinksDialog.ui" line="43"/>
         <location filename="../helpers/ILinksDialog.ui" line="63"/>
+        <location filename="../../../build/src/qmapshack/ui_ILinksDialog.h" line="100"/>
+        <location filename="../../../build/src/qmapshack/ui_ILinksDialog.h" line="101"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -15293,12 +16077,15 @@ Bestandsnaam: %1</translation>
     <name>IListTrkPts</name>
     <message>
         <location filename="../gis/trk/IListTrkPts.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IListTrkPts.h" line="56"/>
         <source>Form</source>
         <translation type="unfinished">Formulier</translation>
     </message>
     <message>
         <location filename="../gis/trk/IListTrkPts.ui" line="32"/>
         <location filename="../gis/trk/IListTrkPts.ui" line="45"/>
+        <location filename="../../../build/src/qmapshack/ui_IListTrkPts.h" line="57"/>
+        <location filename="../../../build/src/qmapshack/ui_IListTrkPts.h" line="58"/>
         <source>-</source>
         <translation type="unfinished">-</translation>
     </message>
@@ -15307,420 +16094,507 @@ Bestandsnaam: %1</translation>
     <name>IMainWindow</name>
     <message>
         <location filename="../IMainWindow.ui" line="17"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="638"/>
         <source>QMapShack</source>
         <translation>QMapShack</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="66"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="825"/>
         <source>File</source>
         <translation>Bestand</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="85"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="826"/>
         <source>View</source>
         <translation>Instellingen</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="111"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="827"/>
         <source>Window</source>
         <translation>Venster</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="122"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="828"/>
         <source>?</source>
         <translation>?</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="141"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="830"/>
         <source>Tool</source>
         <translation>Extra</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="162"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="831"/>
         <source>Maps</source>
         <translation>Kaarten</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="199"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="832"/>
         <source>Dig. Elev. Model (DEM)</source>
         <translation>Dig. Elev. Model (DEM)</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="131"/>
         <location filename="../IMainWindow.ui" line="232"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="829"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="833"/>
         <source>Workspace</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="241"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="834"/>
         <source>Toolbar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="331"/>
         <location filename="../IMainWindow.ui" line="334"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="639"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="641"/>
         <source>Add Map View</source>
         <translation>Nieuw venster</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="337"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="644"/>
         <source>Ctrl+T</source>
         <translation>Ctrl+T</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="352"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="646"/>
         <source>Show Scale</source>
         <translation>Toon schaal</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="364"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="647"/>
         <source>Setup Map Font</source>
         <translation>Lettertype kaart instellen</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="379"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="648"/>
         <source>Show Grid</source>
         <translation>Toon raster</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="382"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="650"/>
         <source>Ctrl+G</source>
         <translation>Ctrl+G</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="394"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="652"/>
         <source>Setup Grid</source>
         <translation>Raster instellen</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="397"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="654"/>
         <source>Ctrl+Alt+G</source>
         <translation>Ctrl+Alt+G</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="412"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="656"/>
         <source>Flip Mouse Wheel</source>
         <translation>Draai muiswiel om</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="424"/>
         <location filename="../IMainWindow.ui" line="427"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="657"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="659"/>
         <source>Setup Map Paths</source>
         <translation>Map met kaarten instellen</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="442"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="661"/>
         <source>POI Text</source>
         <translation>POI tekst</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="457"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="662"/>
         <source>Night / Day</source>
         <translation>Dag/Nacht</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="475"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="665"/>
         <source>Ctrl+I</source>
         <translation>Ctrl+I</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="487"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="667"/>
         <source>Setup DEM Paths</source>
         <translation>Map DEM instellen</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="499"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="668"/>
         <source>About</source>
         <translation>Over</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="1064"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="809"/>
         <source>Help</source>
         <translation>Help</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="1067"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="811"/>
         <source>F1</source>
         <translation>F1</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="523"/>
         <location filename="../IMainWindow.ui" line="526"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="670"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="672"/>
         <source>Setup Map View</source>
         <translation>Kaartinstellingen</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="538"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="674"/>
         <source>Load GIS Data</source>
         <translation>GIS gegevens laden</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="541"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="676"/>
         <source>Load projects from file</source>
         <translation>Project laden uit bestand</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="544"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="679"/>
         <source>Ctrl+L</source>
         <translation>Ctrl+L</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="556"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="681"/>
         <source>Save All GIS Data</source>
         <translation>GIS gegevens opslaan</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="559"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="683"/>
         <source>Save all projects in the workspace</source>
         <translation>Sla alle projecten op in werkruimte</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="562"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="686"/>
         <source>Ctrl+S</source>
         <translation>Ctrl+S</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="586"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="689"/>
         <source>Add empty project</source>
         <translation>Nieuw leeg project</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="718"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="716"/>
         <source>Track Profile as Window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="721"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="718"/>
         <source>Show the track profile in it&apos;s own window instead within the map view.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="793"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="732"/>
         <source>Save(Print) Map</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="898"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="761"/>
         <source>Fullscreen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="913"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="765"/>
         <source>Min./Max. Labels</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="946"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="774"/>
         <source>Track Info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="949"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="776"/>
         <source>Select what information is shown for a highlighted track.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="961"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="778"/>
         <source>Track Point Info Table</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="964"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="780"/>
         <source>Show a legend for all track point info bullets along the track.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="976"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="782"/>
         <source>Track Summary</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="979"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="784"/>
         <source>Show the track summary.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="991"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="786"/>
         <source>Min./Max Summary</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="994"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="788"/>
         <source>Show the minimum and the maximum values of the track properties in a table.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="1006"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="790"/>
         <source>Track Profile</source>
         <translation type="unfinished">Track profiel</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="1009"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="792"/>
         <source>Show the track profile.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="1018"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="794"/>
         <source>Take Screenshot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="1021"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="796"/>
         <source>Take a screenshot from the current active map view.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="1024"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="799"/>
         <source>Ctrl+Alt+P</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="1036"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="801"/>
         <source>Track Point Info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="1039"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="803"/>
         <source>Mark track points with additional information by auto-numbered bullets.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="1052"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="805"/>
         <source>Track Highlight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="1055"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="807"/>
         <source>Mark the highlighted track with a red border.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="267"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="836"/>
         <source>Routing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="285"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="837"/>
         <source>Realtime</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="297"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="838"/>
         <source>POI Collections</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="472"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="663"/>
         <source>Map Tooltip</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="511"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="669"/>
         <source>Online Wiki</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="574"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="688"/>
         <source>Setup Timezone</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="601"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="690"/>
         <source>Geosearch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="613"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="691"/>
         <source>Close all projects</source>
         <translation>Sluit alle projecten</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="616"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="693"/>
         <source>F8</source>
         <translation>F8</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="628"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="695"/>
         <source>Setup Units</source>
         <translation>Eenheden instellen</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="640"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="696"/>
         <source>Setup Workspace</source>
         <translation>Werkruimte instellen</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="643"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="698"/>
         <source>Setup save on exit.</source>
         <translation>Oplaan bij afsluiten instellen.</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="655"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="700"/>
         <source>Import Database from QLandkarte</source>
         <translation>Database van QLandkarte importeren</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="658"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="702"/>
         <source>Import QLandkarte GT database</source>
         <translation>QLandkarte database importeren</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="670"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="704"/>
         <source>VRT Builder</source>
         <translation>VRT maken</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="673"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="706"/>
         <source>GUI front end to gdalbuildvrt</source>
         <translation>GUI front end naar gdalbuildvrt</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="685"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="708"/>
         <source>Store Map View</source>
         <translation>Kaart opslaan</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="688"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="710"/>
         <source>Write current active map and DEM list including the properties to a file</source>
         <translation>Schrijf huidige actieve kaart en DEM lijst inclusief de eigenschappen naar een bestand</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="700"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="712"/>
         <source>Load Map View</source>
         <translation>Kaart laden</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="703"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="714"/>
         <source>Restore view with active map and DEM list including the properties from a file</source>
         <translation>Herstel huidige actieve kaart en DEM lijst inclusief de eigenschappen naar een bestand</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="724"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="721"/>
         <source>Ctrl+E</source>
         <translation>Ctrl+E</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="736"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="723"/>
         <source>Close</source>
         <translation>Sluiten</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="739"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="725"/>
         <source>Ctrl+Q</source>
         <translation>Ctrl+Q</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="751"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="727"/>
         <source>Clone Map View</source>
         <translation>Kloon venster</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="754"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="729"/>
         <source>Ctrl+Shift+T</source>
         <translation>Ctrl+Shift+T</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="766"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="731"/>
         <source>Create Routino Database</source>
         <translation>Maak Routino database</translation>
     </message>
@@ -15736,127 +16610,153 @@ Bestandsnaam: %1</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="796"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="734"/>
         <source>Print a selected area of the map</source>
         <translation>Geselecteerde deel van kaart afdrukken</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="799"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="737"/>
         <source>Ctrl+P</source>
         <translation>Ctrl+P</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="811"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="739"/>
         <source>Setup Coord. Format</source>
         <translation>Coördinaat formaat instellen</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="814"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="741"/>
         <source>Change the format coordinates are displayed</source>
         <translation>Getoonde coördinaat formaat aanpassen</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="826"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="743"/>
         <source>Setup Map Background</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="838"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="744"/>
         <source>Close Tab</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="841"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="746"/>
         <source>Ctrl+W</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="850"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="748"/>
         <source>Quickstart Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="859"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="749"/>
         <source>Setup Toolbar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="868"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="750"/>
         <source>Setup Keyboard Shortcuts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="871"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="752"/>
         <source>Assign keyboard shortcuts to actions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="883"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="754"/>
         <source>Toggle Docks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="886"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="756"/>
         <source>Toggle visibility of dockable windows</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="889"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="759"/>
         <source>Ctrl+D</source>
         <translation type="unfinished">Ctrl+D</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="901"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="763"/>
         <source>F11</source>
         <translation type="unfinished">F11</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="916"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="767"/>
         <source>Show the minimum and maximum values of the track properties along the track in the map view.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="919"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="770"/>
         <source>Ctrl+N</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="928"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="772"/>
         <source>Start QMapTool</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="937"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="773"/>
         <source>Change Map View Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="1079"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="813"/>
         <source>Link Map Views</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="1082"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="815"/>
         <source>All map views move and zoom to the same point.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="1091"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="817"/>
         <source>Setup POI Paths</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="1094"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="819"/>
         <source>Setup paths to POI collections</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="1103"/>
         <location filename="../IMainWindow.ui" line="1106"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="821"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="823"/>
         <source>Setup Map Icon Sizes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="255"/>
+        <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="835"/>
         <source>Database</source>
         <translation type="unfinished">Database</translation>
     </message>
@@ -15865,28 +16765,35 @@ Bestandsnaam: %1</translation>
     <name>IMapIconSizesSetup</name>
     <message>
         <location filename="../helpers/IMapIconSizesSetup.ui" line="20"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapIconSizesSetup.h" line="173"/>
         <source>Set Map Icon Sizes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../helpers/IMapIconSizesSetup.ui" line="50"/>
         <location filename="../helpers/IMapIconSizesSetup.ui" line="84"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapIconSizesSetup.h" line="174"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapIconSizesSetup.h" line="177"/>
         <source>px</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../helpers/IMapIconSizesSetup.ui" line="57"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapIconSizesSetup.h" line="175"/>
         <source>Waypoint Icons</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../helpers/IMapIconSizesSetup.ui" line="74"/>
         <location filename="../helpers/IMapIconSizesSetup.ui" line="120"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapIconSizesSetup.h" line="176"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapIconSizesSetup.h" line="179"/>
         <source>Size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../helpers/IMapIconSizesSetup.ui" line="91"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapIconSizesSetup.h" line="178"/>
         <source>POI Icons</source>
         <translation type="unfinished"></translation>
     </message>
@@ -15895,116 +16802,138 @@ Bestandsnaam: %1</translation>
     <name>IMapList</name>
     <message>
         <location filename="../map/IMapList.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="168"/>
         <source>Form</source>
         <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="35"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="208"/>
         <source>Filter: Start to type and the list will be reduced to matching items.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="107"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="211"/>
         <source>To add maps use &lt;a href=&apos;MapFolders&apos;&gt;File-&gt;Setup Map Paths&lt;/a&gt;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="38"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="210"/>
         <source>start typing...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="120"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="212"/>
         <source>Use the buttons to activate a map. Use drag-n-drop to move the map in the draw order. </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="144"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="171"/>
         <source>Hide map behind others</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="159"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="176"/>
         <source>Move Up</source>
         <translation>Omhoog</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="162"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="178"/>
         <source>Hide map behind previous map</source>
         <translation>Verberg DEM onder vorige kaart</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="165"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="181"/>
         <source>Shift+Up</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="177"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="183"/>
         <source>Move Down</source>
         <translation>Omlaag</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="180"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="185"/>
         <source>Show map on top of next map</source>
         <translation>Toon DEM op de volgende kaart</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="183"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="188"/>
         <source>Shift+Down</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="198"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="192"/>
         <source>Show map on top of others</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../map/IMapList.ui" line="213"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="197"/>
         <source>Reload Maps</source>
         <translation>Kaarten herladen</translation>
     </message>
     <message>
-        <location filename="../map/IMapList.ui" line="225"/>
+        <location filename="../map/IMapList.ui" line="213"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="198"/>
         <source>Clear Filter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../map/IMapList.ui" line="237"/>
+        <location filename="../map/IMapList.ui" line="225"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="199"/>
         <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../map/IMapList.ui" line="240"/>
+        <location filename="../map/IMapList.ui" line="228"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="201"/>
         <source>Remove map from list</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../map/IMapList.ui" line="252"/>
+        <location filename="../map/IMapList.ui" line="240"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="203"/>
         <source>Overview Info...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../map/IMapList.ui" line="255"/>
+        <location filename="../map/IMapList.ui" line="243"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="205"/>
         <source>Show overview pyramid info for this file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="141"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="169"/>
         <source>Move to Top</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="147"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="174"/>
         <source>Shift+Home</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="195"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="190"/>
         <source>Move to Bottom</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="201"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="195"/>
         <source>Shift+End</source>
         <translation type="unfinished"></translation>
     </message>
@@ -16017,12 +16946,12 @@ Bestandsnaam: %1</translation>
         <translation>Deze kaart heeft OpenSSL onderteuning nodig. Door restricte beperkingen in bepaalde landen kan QMapShack geen OpenSSL pakket aanbieden. Neem een kijkje op &lt;a href=&apos;https://github.com/openssl/openssl/wiki/Binaries&apos;&gt;OpenSSL Wiki&lt;/a&gt; voor binaries. Er kan wel libcrypto-3-x64.dll en libssl-3-x64.dll in de QMapShack map gekopieerd worden.</translation>
     </message>
     <message>
-        <location filename="../map/IMapOnline.cpp" line="49"/>
+        <location filename="../map/IMapOnline.cpp" line="50"/>
         <source>Error...</source>
         <translation type="unfinished">Fout...</translation>
     </message>
     <message>
-        <location filename="../map/IMapOnline.cpp" line="97"/>
+        <location filename="../map/IMapOnline.cpp" line="108"/>
         <source>&lt;b&gt;%1&lt;/b&gt;: %2 tiles pending&lt;br/&gt;</source>
         <translation type="unfinished">&lt;b&gt;%1&lt;/b&gt;: %2 delen ontvangen&lt;br/&gt;</translation>
     </message>
@@ -16031,17 +16960,21 @@ Bestandsnaam: %1</translation>
     <name>IMapPathSetup</name>
     <message>
         <location filename="../map/IMapPathSetup.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapPathSetup.h" line="183"/>
         <source>Setup map paths</source>
         <translation>Map met kaarten instellen</translation>
     </message>
     <message>
         <location filename="../map/IMapPathSetup.ui" line="20"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapPathSetup.h" line="184"/>
         <source>Root path of tile cache for online maps:</source>
         <translation>Hoofdmap voor oplslaan van online kaarten:</translation>
     </message>
     <message>
         <location filename="../map/IMapPathSetup.ui" line="29"/>
         <location filename="../map/IMapPathSetup.ui" line="151"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapPathSetup.h" line="185"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapPathSetup.h" line="189"/>
         <source>-</source>
         <translation>-</translation>
     </message>
@@ -16049,11 +16982,15 @@ Bestandsnaam: %1</translation>
         <location filename="../map/IMapPathSetup.ui" line="36"/>
         <location filename="../map/IMapPathSetup.ui" line="73"/>
         <location filename="../map/IMapPathSetup.ui" line="93"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapPathSetup.h" line="186"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapPathSetup.h" line="187"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapPathSetup.h" line="188"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
         <location filename="../map/IMapPathSetup.ui" line="182"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapPathSetup.h" line="190"/>
         <source>Help! I want maps!
 I don&apos;t want to read the documentation!</source>
         <translation>Help! Ik wil kaarten!
@@ -16064,11 +17001,13 @@ Ik wil de documentatie niet lezen!</translation>
     <name>IMapPropSetup</name>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapPropSetup.h" line="289"/>
         <source>Form</source>
         <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="35"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapPropSetup.h" line="291"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Change opacity of map&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Verander transparantie van kaart&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -16077,73 +17016,90 @@ Ik wil de documentatie niet lezen!</translation>
         <location filename="../map/IMapPropSetup.ui" line="82"/>
         <location filename="../map/IMapPropSetup.ui" line="365"/>
         <location filename="../map/IMapPropSetup.ui" line="379"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapPropSetup.h" line="297"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapPropSetup.h" line="302"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapPropSetup.h" line="316"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapPropSetup.h" line="320"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="50"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapPropSetup.h" line="294"/>
         <source>Click to use the current zoom as maximum 
 zoom-in to display the map.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="78"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapPropSetup.h" line="299"/>
         <source>Click to use the current zoom as maximum 
 zoom-out to display the map.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="131"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapPropSetup.h" line="303"/>
         <source>Areas</source>
         <translation>Gebieden</translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="138"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapPropSetup.h" line="304"/>
         <source>Lines</source>
         <translation>Lijnen</translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="145"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapPropSetup.h" line="305"/>
         <source>Points</source>
         <translation>Punten</translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="162"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapPropSetup.h" line="306"/>
         <source>Details</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="219"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapPropSetup.h" line="307"/>
         <source>Cache Size (MB)</source>
         <translation>Cache grootte (MB)</translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="239"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapPropSetup.h" line="308"/>
         <source>Expiration (Days)</source>
         <translation>Vervaltijd (dagen)</translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="256"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapPropSetup.h" line="309"/>
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="266"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapPropSetup.h" line="310"/>
         <source>Cache Path</source>
         <translation>Cachemap</translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="348"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapPropSetup.h" line="311"/>
         <source>Type File:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="362"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapPropSetup.h" line="314"/>
         <source>Forget external type file and use internal types.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="376"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapPropSetup.h" line="318"/>
         <source>Load an external type file.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -16152,36 +17108,43 @@ zoom-out to display the map.</source>
     <name>IMapVrtBuilder</name>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapVrtBuilder.h" line="278"/>
         <source>Form</source>
         <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="61"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapVrtBuilder.h" line="281"/>
         <source>Advanced Options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="73"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapVrtBuilder.h" line="282"/>
         <source>Source No Data (-srcnodata)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="80"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapVrtBuilder.h" line="283"/>
         <source>Target No Data (-vrtnodata)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="90"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapVrtBuilder.h" line="284"/>
         <source>Target Projection (-a_srs)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="97"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapVrtBuilder.h" line="285"/>
         <source>These options are for particular cases and usually you would like to leave blank.See GDAL &lt;a href=&apos;http://www.gdal.org/gdalbuildvrt.html&apos;&gt;Help&lt;/a&gt; for more information.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="158"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapVrtBuilder.h" line="287"/>
         <source>&lt;ol&gt;
 &lt;li&gt;Select one or multiple source files.&lt;/li&gt;
 &lt;li&gt;Select a file name for the target VRT file.&lt;/li&gt;
@@ -16199,71 +17162,86 @@ Tip:
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="22"/>
         <location filename="../tool/IMapVrtBuilder.ui" line="246"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapVrtBuilder.h" line="279"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapVrtBuilder.h" line="309"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="39"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapVrtBuilder.h" line="280"/>
         <source>Select source files:</source>
         <translation>Selecteer bronbestand:</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="130"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapVrtBuilder.h" line="286"/>
         <source>User defined options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="184"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapVrtBuilder.h" line="300"/>
         <source>Overviews will allow you to show the map for a larger range of zooms.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="187"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapVrtBuilder.h" line="302"/>
         <source>Create overviews for result.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="199"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapVrtBuilder.h" line="303"/>
         <source>:2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="206"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapVrtBuilder.h" line="304"/>
         <source>:4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="213"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapVrtBuilder.h" line="305"/>
         <source>:8</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="220"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapVrtBuilder.h" line="306"/>
         <source>:16</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="227"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapVrtBuilder.h" line="307"/>
         <source>:32</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="234"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapVrtBuilder.h" line="308"/>
         <source>:64</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="269"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapVrtBuilder.h" line="310"/>
         <source>Target Filename:</source>
         <translation>Doel bestandsnaam:</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="276"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapVrtBuilder.h" line="311"/>
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="285"/>
+        <location filename="../../../build/src/qmapshack/ui_IMapVrtBuilder.h" line="312"/>
         <source>Start</source>
         <translation>Start</translation>
     </message>
@@ -16402,12 +17380,15 @@ Any modifications done will be discarded.</source>
     <name>IPhotoAlbum</name>
     <message>
         <location filename="../widgets/IPhotoAlbum.ui" line="20"/>
+        <location filename="../../../build/src/qmapshack/ui_IPhotoAlbum.h" line="82"/>
         <source>Form</source>
         <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../widgets/IPhotoAlbum.ui" line="50"/>
         <location filename="../widgets/IPhotoAlbum.ui" line="77"/>
+        <location filename="../../../build/src/qmapshack/ui_IPhotoAlbum.h" line="83"/>
+        <location filename="../../../build/src/qmapshack/ui_IPhotoAlbum.h" line="85"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -16415,48 +17396,48 @@ Any modifications done will be discarded.</source>
 <context>
     <name>IPlot</name>
     <message>
-        <location filename="../plot/IPlot.cpp" line="79"/>
+        <location filename="../plot/IPlot.cpp" line="80"/>
         <source>Reset Zoom</source>
         <translation>Herstel zoom</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="80"/>
+        <location filename="../plot/IPlot.cpp" line="82"/>
         <source>Reset Range</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="81"/>
+        <location filename="../plot/IPlot.cpp" line="84"/>
         <source>Save...</source>
         <translation>Opslaan...</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="83"/>
+        <location filename="../plot/IPlot.cpp" line="87"/>
         <source>Add Waypoint</source>
         <translation type="unfinished">Maak waypoint</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="85"/>
+        <location filename="../plot/IPlot.cpp" line="90"/>
         <source>Add Trackpoint Info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="86"/>
+        <location filename="../plot/IPlot.cpp" line="92"/>
         <source>Cut Track...</source>
         <translation type="unfinished">Track knippen...</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="521"/>
+        <location filename="../plot/IPlot.cpp" line="528"/>
         <source>Hold CTRL key for vertical zoom, only.
 Hold ALT key for horizontal zoom, only.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="672"/>
+        <location filename="../plot/IPlot.cpp" line="700"/>
         <source>No or bad data.</source>
         <translation>Geen of ontbrekende gegevens.</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="1286"/>
+        <location filename="../plot/IPlot.cpp" line="1314"/>
         <source>Select output file</source>
         <translation>Selecteer bestand</translation>
     </message>
@@ -16465,27 +17446,31 @@ Hold ALT key for horizontal zoom, only.</source>
     <name>IPoiList</name>
     <message>
         <location filename="../poi/IPoiList.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IPoiList.h" line="115"/>
         <source>Form</source>
         <translation type="unfinished">Formulier</translation>
     </message>
     <message>
         <location filename="../poi/IPoiList.ui" line="88"/>
+        <location filename="../../../build/src/qmapshack/ui_IPoiList.h" line="121"/>
         <source>To add POI collections use &lt;a href=&apos;PoiFolders&apos;&gt;File-&gt;Setup POI Paths&lt;/a&gt;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../poi/IPoiList.ui" line="101"/>
+        <location filename="../../../build/src/qmapshack/ui_IPoiList.h" line="122"/>
         <source>Use the context menu (right mouse button click on entry) to activate a file. </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../poi/IPoiList.ui" line="126"/>
+        <location filename="../../../build/src/qmapshack/ui_IPoiList.h" line="116"/>
         <source>Activate</source>
         <translation type="unfinished">Activeer</translation>
     </message>
     <message>
-        <location filename="../poi/IPoiList.ui" line="135"/>
-        <location filename="../poi/IPoiList.ui" line="138"/>
+        <location filename="../../../build/src/qmapshack/ui_IPoiList.h" line="117"/>
+        <location filename="../../../build/src/qmapshack/ui_IPoiList.h" line="119"/>
         <source>Reload POI</source>
         <translation type="unfinished"></translation>
     </message>
@@ -16494,17 +17479,21 @@ Hold ALT key for horizontal zoom, only.</source>
     <name>IPoiPathSetup</name>
     <message>
         <location filename="../poi/IPoiPathSetup.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IPoiPathSetup.h" line="134"/>
         <source>Dialog</source>
         <translation type="unfinished">Dialoog</translation>
     </message>
     <message>
         <location filename="../poi/IPoiPathSetup.ui" line="31"/>
         <location filename="../poi/IPoiPathSetup.ui" line="51"/>
+        <location filename="../../../build/src/qmapshack/ui_IPoiPathSetup.h" line="135"/>
+        <location filename="../../../build/src/qmapshack/ui_IPoiPathSetup.h" line="136"/>
         <source>...</source>
         <translation type="unfinished">...</translation>
     </message>
     <message>
         <location filename="../poi/IPoiPathSetup.ui" line="109"/>
+        <location filename="../../../build/src/qmapshack/ui_IPoiPathSetup.h" line="137"/>
         <source>-</source>
         <translation type="unfinished">-</translation>
     </message>
@@ -16513,16 +17502,19 @@ Hold ALT key for horizontal zoom, only.</source>
     <name>IPoiPropSetup</name>
     <message>
         <location filename="../poi/IPoiPropSetup.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IPoiPropSetup.h" line="61"/>
         <source>Form</source>
         <translation type="unfinished">Formulier</translation>
     </message>
     <message>
         <location filename="../poi/IPoiPropSetup.ui" line="35"/>
+        <location filename="../../../build/src/qmapshack/ui_IPoiPropSetup.h" line="63"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Change opacity of map&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Verander transparantie van kaart&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../poi/IPoiPropSetup.ui" line="60"/>
+        <location filename="../../../build/src/qmapshack/ui_IPoiPropSetup.h" line="66"/>
         <source>Name</source>
         <translation type="unfinished">Naam </translation>
     </message>
@@ -16531,16 +17523,19 @@ Hold ALT key for horizontal zoom, only.</source>
     <name>IPositionDialog</name>
     <message>
         <location filename="../helpers/IPositionDialog.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IPositionDialog.h" line="78"/>
         <source>Position ...</source>
         <translation>Positie...</translation>
     </message>
     <message>
         <location filename="../helpers/IPositionDialog.ui" line="20"/>
+        <location filename="../../../build/src/qmapshack/ui_IPositionDialog.h" line="79"/>
         <source>Enter new position</source>
         <translation>Geef nieuwe positie op</translation>
     </message>
     <message>
         <location filename="../helpers/IPositionDialog.ui" line="30"/>
+        <location filename="../../../build/src/qmapshack/ui_IPositionDialog.h" line="80"/>
         <source>Bad position format. Must be: 
 &quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot;
 or
@@ -16555,21 +17550,25 @@ of
     <name>IPrintDialog</name>
     <message>
         <location filename="../print/IPrintDialog.ui" line="20"/>
+        <location filename="../../../build/src/qmapshack/ui_IPrintDialog.h" line="165"/>
         <source>Print map...</source>
         <translation>Kaart afdrukken...</translation>
     </message>
     <message>
         <location filename="../print/IPrintDialog.ui" line="79"/>
+        <location filename="../../../build/src/qmapshack/ui_IPrintDialog.h" line="168"/>
         <source>When printing online maps make sure that the map has been loaded into the cache for the extent to be printed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../print/IPrintDialog.ui" line="60"/>
+        <location filename="../../../build/src/qmapshack/ui_IPrintDialog.h" line="167"/>
         <source>Save</source>
         <translation>Opslaan</translation>
     </message>
     <message>
         <location filename="../print/IPrintDialog.ui" line="37"/>
+        <location filename="../../../build/src/qmapshack/ui_IPrintDialog.h" line="166"/>
         <source>When saving online maps make sure that the map has been loaded into the cache for the extent to be saved.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -16577,16 +17576,21 @@ of
         <location filename="../print/IPrintDialog.ui" line="89"/>
         <location filename="../print/IPrintDialog.ui" line="102"/>
         <location filename="../print/IPrintDialog.ui" line="158"/>
+        <location filename="../../../build/src/qmapshack/ui_IPrintDialog.h" line="169"/>
+        <location filename="../../../build/src/qmapshack/ui_IPrintDialog.h" line="170"/>
+        <location filename="../../../build/src/qmapshack/ui_IPrintDialog.h" line="173"/>
         <source>TextLabel</source>
         <translation>Benaming</translation>
     </message>
     <message>
         <location filename="../print/IPrintDialog.ui" line="112"/>
+        <location filename="../../../build/src/qmapshack/ui_IPrintDialog.h" line="171"/>
         <source>Draw scale on all pages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../print/IPrintDialog.ui" line="125"/>
+        <location filename="../../../build/src/qmapshack/ui_IPrintDialog.h" line="172"/>
         <source>Print</source>
         <translation>Afdrukken</translation>
     </message>
@@ -16595,12 +17599,15 @@ of
     <name>IProgressDialog</name>
     <message>
         <location filename="../helpers/IProgressDialog.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IProgressDialog.h" line="72"/>
         <source>Please wait...</source>
         <translation>Moment geduld...</translation>
     </message>
     <message>
         <location filename="../helpers/IProgressDialog.ui" line="20"/>
         <location filename="../helpers/IProgressDialog.ui" line="27"/>
+        <location filename="../../../build/src/qmapshack/ui_IProgressDialog.h" line="73"/>
+        <location filename="../../../build/src/qmapshack/ui_IProgressDialog.h" line="74"/>
         <source>TextLabel</source>
         <translation>Benaming</translation>
     </message>
@@ -16609,56 +17616,67 @@ of
     <name>IProjWizard</name>
     <message>
         <location filename="../grid/IProjWizard.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IProjWizard.h" line="191"/>
         <source>PROJ Wizard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../grid/IProjWizard.ui" line="29"/>
+        <location filename="../../../build/src/qmapshack/ui_IProjWizard.h" line="192"/>
         <source>Mercator</source>
         <translation>Mercator</translation>
     </message>
     <message>
         <location filename="../grid/IProjWizard.ui" line="38"/>
+        <location filename="../../../build/src/qmapshack/ui_IProjWizard.h" line="193"/>
         <source>UTM</source>
         <translation>UTM</translation>
     </message>
     <message>
         <location filename="../grid/IProjWizard.ui" line="45"/>
+        <location filename="../../../build/src/qmapshack/ui_IProjWizard.h" line="194"/>
         <source>zone</source>
         <translation>zone</translation>
     </message>
     <message>
         <location filename="../grid/IProjWizard.ui" line="82"/>
+        <location filename="../../../build/src/qmapshack/ui_IProjWizard.h" line="195"/>
         <source>user defined</source>
         <translation>gebruikersinstelling</translation>
     </message>
     <message>
         <location filename="../grid/IProjWizard.ui" line="94"/>
+        <location filename="../../../build/src/qmapshack/ui_IProjWizard.h" line="196"/>
         <source>Datum</source>
         <translation>Datum</translation>
     </message>
     <message>
         <location filename="../grid/IProjWizard.ui" line="104"/>
+        <location filename="../../../build/src/qmapshack/ui_IProjWizard.h" line="197"/>
         <source>World Mercator (OSM)</source>
         <translation>Wereld Mercator (OSM)</translation>
     </message>
     <message>
         <location filename="../grid/IProjWizard.ui" line="124"/>
+        <location filename="../../../build/src/qmapshack/ui_IProjWizard.h" line="198"/>
         <source>Result:</source>
         <translation>Resultaat:</translation>
     </message>
     <message>
         <location filename="../grid/IProjWizard.ui" line="138"/>
+        <location filename="../../../build/src/qmapshack/ui_IProjWizard.h" line="200"/>
         <source>UPS North (North Pole)</source>
         <translation>UPS noord (Noordpool)</translation>
     </message>
     <message>
         <location filename="../grid/IProjWizard.ui" line="145"/>
+        <location filename="../../../build/src/qmapshack/ui_IProjWizard.h" line="201"/>
         <source>UPS South (South Pole)</source>
         <translation>UPS zuid (Zuidpool)</translation>
     </message>
     <message>
         <location filename="../grid/IProjWizard.ui" line="152"/>
+        <location filename="../../../build/src/qmapshack/ui_IProjWizard.h" line="202"/>
         <source>Projection</source>
         <translation>Projectie</translation>
     </message>
@@ -16667,31 +17685,37 @@ of
     <name>IProjWpt</name>
     <message>
         <location filename="../gis/wpt/IProjWpt.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IProjWpt.h" line="129"/>
         <source>Waypoint Projection</source>
         <translation>Waypoint projectie</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IProjWpt.ui" line="22"/>
+        <location filename="../../../build/src/qmapshack/ui_IProjWpt.h" line="130"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IProjWpt.ui" line="45"/>
+        <location filename="../../../build/src/qmapshack/ui_IProjWpt.h" line="131"/>
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IProjWpt.ui" line="54"/>
+        <location filename="../../../build/src/qmapshack/ui_IProjWpt.h" line="132"/>
         <source>Clone waypoint and move by:</source>
         <translation>Kopieer waypoint en verplaats naar:</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IProjWpt.ui" line="66"/>
+        <location filename="../../../build/src/qmapshack/ui_IProjWpt.h" line="133"/>
         <source>m</source>
         <translation>m</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IProjWpt.ui" line="76"/>
+        <location filename="../../../build/src/qmapshack/ui_IProjWpt.h" line="134"/>
         <source>°</source>
         <translation>°</translation>
     </message>
@@ -16700,61 +17724,73 @@ of
     <name>IRangeToolSetup</name>
     <message>
         <location filename="../mouse/range/IRangeToolSetup.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IRangeToolSetup.h" line="323"/>
         <source>Setup Range Tool...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/range/IRangeToolSetup.ui" line="22"/>
+        <location filename="../../../build/src/qmapshack/ui_IRangeToolSetup.h" line="324"/>
         <source>Delete</source>
         <translation type="unfinished">Verwijder</translation>
     </message>
     <message>
         <location filename="../mouse/range/IRangeToolSetup.ui" line="29"/>
+        <location filename="../../../build/src/qmapshack/ui_IRangeToolSetup.h" line="325"/>
         <source>Activity</source>
         <translation type="unfinished">Activiteit</translation>
     </message>
     <message>
         <location filename="../mouse/range/IRangeToolSetup.ui" line="93"/>
+        <location filename="../../../build/src/qmapshack/ui_IRangeToolSetup.h" line="326"/>
         <source>Show Points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/range/IRangeToolSetup.ui" line="100"/>
+        <location filename="../../../build/src/qmapshack/ui_IRangeToolSetup.h" line="327"/>
         <source>Hide Points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/range/IRangeToolSetup.ui" line="129"/>
+        <location filename="../../../build/src/qmapshack/ui_IRangeToolSetup.h" line="328"/>
         <source>Copy</source>
         <translation type="unfinished">Kopiëren</translation>
     </message>
     <message>
         <location filename="../mouse/range/IRangeToolSetup.ui" line="285"/>
+        <location filename="../../../build/src/qmapshack/ui_IRangeToolSetup.h" line="329"/>
         <source>Select one of the actions to be applied after the operations from above executed on a selection.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/range/IRangeToolSetup.ui" line="297"/>
+        <location filename="../../../build/src/qmapshack/ui_IRangeToolSetup.h" line="330"/>
         <source>Do nothing. Just keep the selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/range/IRangeToolSetup.ui" line="351"/>
+        <location filename="../../../build/src/qmapshack/ui_IRangeToolSetup.h" line="331"/>
         <source>Reset selection. User has to start a new one.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/range/IRangeToolSetup.ui" line="383"/>
+        <location filename="../../../build/src/qmapshack/ui_IRangeToolSetup.h" line="332"/>
         <source>Start a new selection at the end of the current one.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/range/IRangeToolSetup.ui" line="415"/>
+        <location filename="../../../build/src/qmapshack/ui_IRangeToolSetup.h" line="333"/>
         <source>Start a new selection at the start of the current one.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/range/IRangeToolSetup.ui" line="434"/>
+        <location filename="../../../build/src/qmapshack/ui_IRangeToolSetup.h" line="334"/>
         <source>Move map with selection focus</source>
         <translation type="unfinished"></translation>
     </message>
@@ -16763,36 +17799,43 @@ of
     <name>IResolveDatabaseConflict</name>
     <message>
         <location filename="../gis/db/IResolveDatabaseConflict.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IResolveDatabaseConflict.h" line="92"/>
         <source>Database Conflict</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/db/IResolveDatabaseConflict.ui" line="26"/>
+        <location filename="../../../build/src/qmapshack/ui_IResolveDatabaseConflict.h" line="93"/>
         <source>TextLabel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/db/IResolveDatabaseConflict.ui" line="39"/>
+        <location filename="../../../build/src/qmapshack/ui_IResolveDatabaseConflict.h" line="94"/>
         <source>Remember choice for all items of this project</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/db/IResolveDatabaseConflict.ui" line="48"/>
+        <location filename="../../../build/src/qmapshack/ui_IResolveDatabaseConflict.h" line="95"/>
         <source>Clone &amp;&amp; Save</source>
         <translation type="unfinished">Kloon &amp;&amp; Opslaan</translation>
     </message>
     <message>
         <location filename="../gis/db/IResolveDatabaseConflict.ui" line="55"/>
+        <location filename="../../../build/src/qmapshack/ui_IResolveDatabaseConflict.h" line="96"/>
         <source>Take Remote</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/db/IResolveDatabaseConflict.ui" line="62"/>
+        <location filename="../../../build/src/qmapshack/ui_IResolveDatabaseConflict.h" line="97"/>
         <source>Force Save</source>
         <translation type="unfinished">Forceer opslaan</translation>
     </message>
     <message>
         <location filename="../gis/db/IResolveDatabaseConflict.ui" line="69"/>
+        <location filename="../../../build/src/qmapshack/ui_IResolveDatabaseConflict.h" line="98"/>
         <source>Abort</source>
         <translation type="unfinished">Annuleren</translation>
     </message>
@@ -16801,21 +17844,25 @@ of
     <name>IRouterBRouter</name>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="20"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="235"/>
         <source>Form</source>
         <translation type="unfinished">Formulier</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="43"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="236"/>
         <source>Profile</source>
         <translation type="unfinished">Profiel</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="50"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="237"/>
         <source>Alternative</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="79"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="239"/>
         <source>display selected routing profile</source>
         <translation type="unfinished"></translation>
     </message>
@@ -16823,56 +17870,69 @@ of
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="82"/>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="119"/>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="133"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="241"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="247"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="251"/>
         <source>...</source>
         <translation type="unfinished">...</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="102"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="242"/>
         <source>BRouter: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="109"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="243"/>
         <source>not running</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="116"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="245"/>
         <source>start/stop BRouter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="130"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="249"/>
         <source>show BRouter console</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="163"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="252"/>
         <source>Setup</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="172"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="253"/>
         <source>Caution! BRouter is listening on all ports for connections.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="210"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="254"/>
         <source>Dismiss</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="232"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="255"/>
         <source>&lt;p&gt;&lt;a href=&quot;http://brouter.de/brouter/&quot; target=&quot;_blank&quot;&gt;BRouter&lt;/a&gt; © &lt;a href=&quot;https://github.com/abrensch/brouter/blob/master/LICENSE&quot; target=&quot;_blank&quot;&gt;ABrensch, License GPLv3&lt;/a&gt;&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="245"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="256"/>
         <source>&lt;p&gt;Directions Courtesy of &lt;a href=&quot;http://brouter.de/brouter-web/&quot; target=&quot;_blank&quot;&gt;BRouter-web&lt;/a&gt; &lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="258"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="257"/>
         <source>&lt;p&gt;Routing data &lt;a href=&quot;http://www.openstreetmap.org/copyright&quot; target=&quot;_blank&quot;&gt;© OpenStreetMap&lt;/a&gt; contributors&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -16881,11 +17941,13 @@ of
     <name>IRouterBRouterInfo</name>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterInfo.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterInfo.h" line="65"/>
         <source>BRouter Profile</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterInfo.ui" line="20"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterInfo.h" line="66"/>
         <source>TextLabel</source>
         <translation type="unfinished"></translation>
     </message>
@@ -16894,36 +17956,43 @@ of
     <name>IRouterBRouterSetupWizard</name>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="23"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="669"/>
         <source>BRouter Setup</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="51"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="670"/>
         <source>choose which BRouter to use</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="57"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="671"/>
         <source>BRouter-Web (online)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="64"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="672"/>
         <source>local Installation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="71"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="673"/>
         <source>Expert Mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="94"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="674"/>
         <source>local BRouter Installation directory:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="106"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="676"/>
         <source>select installation directory</source>
         <translation type="unfinished"></translation>
     </message>
@@ -16935,161 +18004,199 @@ of
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="375"/>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="408"/>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="419"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="678"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="680"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="684"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="696"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="700"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="702"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="703"/>
         <source>...</source>
         <translation type="unfinished">...</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="122"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="679"/>
         <source>labelLocalDirResult</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="147"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="681"/>
         <source>labelLocalBRouterResult</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="156"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="682"/>
         <source>create or update installation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="180"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="683"/>
         <source>Java Executable</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="203"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="685"/>
         <source>labelLocalJavaResult</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="212"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="686"/>
         <source>search for installed java</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="282"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="690"/>
         <source>File to install</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="291"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="691"/>
         <source>Download and Install</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="340"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="692"/>
         <source>available Profiles</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="358"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="694"/>
         <source>install profile</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="372"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="698"/>
         <source>remove profile</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="390"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="701"/>
         <source>installed Profiles</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="434"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="704"/>
         <source>content of profile</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="500"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="708"/>
         <source>Service-URL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="490"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="707"/>
         <source>Profile-URL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="269"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="689"/>
         <source>select BRouter Version:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="473"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="705"/>
         <source>BRouter-Config-URL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="483"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="706"/>
         <source>load Service and Profile-URL from BRouter-Config-URL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="510"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="709"/>
         <source>BRouter-Version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="550"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="710"/>
         <source>BRouter-Binaries URL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="570"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="712"/>
         <source>Segments Url</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="580"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="713"/>
         <source>Hostname</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="590"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="714"/>
         <source>Port</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="614"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="716"/>
         <source>Profile directory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="624"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="717"/>
         <source>Segments directory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="634"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="718"/>
         <source>Custom Profiles dir</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="644"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="719"/>
         <source>Max Runtime</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="654"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="720"/>
         <source>Number Threads</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="664"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="721"/>
         <source>Java Options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="600"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="715"/>
         <source>Bind to hostname only</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="560"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="711"/>
         <source>Profiles Url</source>
         <translation type="unfinished"></translation>
     </message>
@@ -17098,36 +18205,43 @@ of
     <name>IRouterRoutino</name>
     <message>
         <location filename="../gis/rte/router/IRouterRoutino.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterRoutino.h" line="158"/>
         <source>Form</source>
         <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterRoutino.ui" line="49"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterRoutino.h" line="159"/>
         <source>Profile</source>
         <translation>Profiel</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterRoutino.ui" line="56"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterRoutino.h" line="160"/>
         <source>Mode</source>
         <translation>Modus</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterRoutino.ui" line="63"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterRoutino.h" line="161"/>
         <source>Database</source>
         <translation>Database</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterRoutino.ui" line="70"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterRoutino.h" line="163"/>
         <source>Add paths with Routino database.</source>
         <translation>Map toevoegen met Routino database.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterRoutino.ui" line="73"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterRoutino.h" line="165"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterRoutino.ui" line="84"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterRoutino.h" line="166"/>
         <source>Language</source>
         <translation>Taal</translation>
     </message>
@@ -17148,6 +18262,7 @@ of
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterRoutino.ui" line="162"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterRoutino.h" line="167"/>
         <source>To use offline routing you need to define paths to local routing data. Use the setup tool button to register a path. You can create your own routing data with &lt;a href=&apos;CreateRoutino&apos;&gt;Tool-&gt;Create Routino Database&lt;/a&gt;.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -17156,17 +18271,21 @@ of
     <name>IRouterRoutinoPathSetup</name>
     <message>
         <location filename="../gis/rte/router/routino/IRouterRoutinoPathSetup.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterRoutinoPathSetup.h" line="127"/>
         <source>Setup Routino database...</source>
         <translation>Routino database instellen...</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/routino/IRouterRoutinoPathSetup.ui" line="27"/>
         <location filename="../gis/rte/router/routino/IRouterRoutinoPathSetup.ui" line="47"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterRoutinoPathSetup.h" line="128"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterRoutinoPathSetup.h" line="129"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/routino/IRouterRoutinoPathSetup.ui" line="93"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterRoutinoPathSetup.h" line="130"/>
         <source>-</source>
         <translation>-</translation>
     </message>
@@ -17175,6 +18294,7 @@ of
     <name>IRouterSetup</name>
     <message>
         <location filename="../gis/rte/router/IRouterSetup.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IRouterSetup.h" line="64"/>
         <source>Form</source>
         <translation>Formulier</translation>
     </message>
@@ -17183,42 +18303,55 @@ of
     <name>IRoutinoDatabaseBuilder</name>
     <message>
         <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IRoutinoDatabaseBuilder.h" line="181"/>
         <source>Form</source>
         <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="25"/>
-        <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="63"/>
+        <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="66"/>
+        <location filename="../../../build/src/qmapshack/ui_IRoutinoDatabaseBuilder.h" line="182"/>
+        <location filename="../../../build/src/qmapshack/ui_IRoutinoDatabaseBuilder.h" line="185"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
         <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="42"/>
+        <location filename="../../../build/src/qmapshack/ui_IRoutinoDatabaseBuilder.h" line="183"/>
         <source>Select source files:</source>
         <translation>Selecteer bronbestand:</translation>
     </message>
     <message>
         <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="54"/>
+        <location filename="../../../build/src/qmapshack/ui_IRoutinoDatabaseBuilder.h" line="184"/>
         <source>Start</source>
         <translation>Start</translation>
     </message>
     <message>
-        <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="86"/>
+        <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="63"/>
+        <source>Add or remove paths containing Routino databases.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="89"/>
+        <location filename="../../../build/src/qmapshack/ui_IRoutinoDatabaseBuilder.h" line="186"/>
         <source>Target Path:</source>
         <translation>Doelmap:</translation>
     </message>
     <message>
-        <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="93"/>
+        <location filename="../../../build/src/qmapshack/ui_IRoutinoDatabaseBuilder.h" line="187"/>
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="100"/>
+        <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="106"/>
+        <location filename="../../../build/src/qmapshack/ui_IRoutinoDatabaseBuilder.h" line="188"/>
         <source>File Prefix</source>
         <translation>Bestandsextentie</translation>
     </message>
     <message>
-        <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="124"/>
+        <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="130"/>
+        <location filename="../../../build/src/qmapshack/ui_IRoutinoDatabaseBuilder.h" line="189"/>
         <source>&lt;p&gt;To create a Routino routing database you need to download *pbf files from &lt;a href=&apos;http://download.geofabrik.de/&apos;&gt;GeoFabrik&lt;/a&gt;. The process of creating a Routino database is quite slow and the resulting files quite large. Therefore it&apos;s recommended not to download whole continents. Limit your download to those countries you really need. However as Routino can&apos;t route over several databases you have to include all countries that are touched by a cross country border route.&lt;/p&gt;
 
 &lt;ol&gt;
@@ -17230,7 +18363,8 @@ of
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="148"/>
+        <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="154"/>
+        <location filename="../../../build/src/qmapshack/ui_IRoutinoDatabaseBuilder.h" line="197"/>
         <source>Unable to find Routino&apos;s planetsplitter. Searched for &quot;planetsplitter&quot; and &quot;routino-planetsplitter&quot;.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -17239,6 +18373,7 @@ of
     <name>IRtAisInfo</name>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="253"/>
         <source>Form</source>
         <translation type="unfinished">Formulier</translation>
     </message>
@@ -17250,31 +18385,43 @@ of
         <location filename="../realtime/ais/IRtAisInfo.ui" line="216"/>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="230"/>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="244"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="254"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="256"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="269"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="273"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="277"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="281"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="285"/>
         <source>...</source>
         <translation type="unfinished">...</translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="46"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="255"/>
         <source>Port</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="89"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="257"/>
         <source>Host</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="96"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="259"/>
         <source>Automatically connect to the host.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="99"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="261"/>
         <source>auto. conn.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="134"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="262"/>
         <source>Ships seen:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -17282,51 +18429,63 @@ of
         <location filename="../realtime/ais/IRtAisInfo.ui" line="141"/>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="270"/>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="293"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="263"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="286"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="291"/>
         <source>-</source>
         <translation type="unfinished">-</translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="148"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="264"/>
         <source>Record by mmsi</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="155"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="265"/>
         <source>Show names</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="170"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="267"/>
         <source>Start recording.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="190"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="271"/>
         <source>Pause recording.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="213"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="275"/>
         <source>Convert record to track.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="227"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="279"/>
         <source>Reset record.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="241"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="283"/>
         <source>Select record file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="277"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="287"/>
         <source>Last update</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="284"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="289"/>
         <source>Enter a valid key.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -17335,6 +18494,7 @@ of
     <name>IRtGpsTetherInfo</name>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="275"/>
         <source>Form</source>
         <translation type="unfinished">Formulier</translation>
     </message>
@@ -17346,51 +18506,67 @@ of
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="173"/>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="187"/>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="201"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="276"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="278"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="287"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="291"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="295"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="299"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="303"/>
         <source>...</source>
         <translation type="unfinished">...</translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="46"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="277"/>
         <source>Port</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="89"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="279"/>
         <source>Host</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="96"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="281"/>
         <source>Automatically connect to the host.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="99"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="283"/>
         <source>auto. conn.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="127"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="285"/>
         <source>Start recording.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="147"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="289"/>
         <source>Pause recording.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="170"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="293"/>
         <source>Convert record to track.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="184"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="297"/>
         <source>Reset record.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="198"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="301"/>
         <source>Select record file.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -17401,36 +18577,48 @@ of
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="253"/>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="260"/>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="297"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="304"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="306"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="307"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="309"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="310"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="315"/>
         <source>-</source>
         <translation type="unfinished">-</translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="221"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="305"/>
         <source>Position</source>
         <translation type="unfinished">Positie</translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="246"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="308"/>
         <source>Time</source>
         <translation type="unfinished">Tijd</translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="267"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="311"/>
         <source>Speed</source>
         <translation type="unfinished">Snelheid</translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="274"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="312"/>
         <source>Elevation</source>
         <translation type="unfinished">Hoogte</translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="281"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="313"/>
         <source>Record</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="288"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="314"/>
         <source>center to position</source>
         <translation type="unfinished"></translation>
     </message>
@@ -17457,47 +18645,57 @@ of
     <name>IRtOpenSkyInfo</name>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtOpenSkyInfo.h" line="160"/>
         <source>Form</source>
         <translation type="unfinished">Formulier</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="42"/>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="63"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtOpenSkyInfo.h" line="162"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtOpenSkyInfo.h" line="165"/>
         <source>-</source>
         <translation type="unfinished">-</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="35"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtOpenSkyInfo.h" line="161"/>
         <source>Last update</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="49"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtOpenSkyInfo.h" line="163"/>
         <source>Aircrafts seen:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="56"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtOpenSkyInfo.h" line="164"/>
         <source>Show names</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="70"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtOpenSkyInfo.h" line="166"/>
         <source>See &lt;a href=&apos;https://opensky-network.org/&apos;&gt;OpenSky&lt;/a&gt; for details.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="80"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtOpenSkyInfo.h" line="168"/>
         <source>Enter a valid key.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="87"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtOpenSkyInfo.h" line="170"/>
         <source>Record by key</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="102"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtOpenSkyInfo.h" line="172"/>
         <source>Start recording.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -17507,26 +18705,35 @@ of
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="148"/>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="162"/>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="176"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtOpenSkyInfo.h" line="174"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtOpenSkyInfo.h" line="178"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtOpenSkyInfo.h" line="182"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtOpenSkyInfo.h" line="186"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtOpenSkyInfo.h" line="190"/>
         <source>...</source>
         <translation type="unfinished">...</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="122"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtOpenSkyInfo.h" line="176"/>
         <source>Pause recording.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="145"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtOpenSkyInfo.h" line="180"/>
         <source>Convert record to track.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="159"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtOpenSkyInfo.h" line="184"/>
         <source>Reset record.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="173"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtOpenSkyInfo.h" line="188"/>
         <source>Select record file.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -17558,6 +18765,7 @@ of
     <name>IRtSelectSource</name>
     <message>
         <location filename="../realtime/IRtSelectSource.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtSelectSource.h" line="67"/>
         <source>Select a source...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -17566,26 +18774,31 @@ of
     <name>IRtWorkspace</name>
     <message>
         <location filename="../realtime/IRtWorkspace.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtWorkspace.h" line="101"/>
         <source>Form</source>
         <translation type="unfinished">Formulier</translation>
     </message>
     <message>
         <location filename="../realtime/IRtWorkspace.ui" line="47"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtWorkspace.h" line="105"/>
         <source>Source</source>
         <translation type="unfinished">Bron</translation>
     </message>
     <message>
         <location filename="../realtime/IRtWorkspace.ui" line="89"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtWorkspace.h" line="106"/>
         <source>TextLabel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../realtime/IRtWorkspace.ui" line="109"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtWorkspace.h" line="102"/>
         <source>Add Source</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../realtime/IRtWorkspace.ui" line="118"/>
+        <location filename="../../../build/src/qmapshack/ui_IRtWorkspace.h" line="103"/>
         <source>Delete Source</source>
         <translation type="unfinished"></translation>
     </message>
@@ -17594,26 +18807,31 @@ of
     <name>IScrOptEditLine</name>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="32"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="244"/>
         <source>Form</source>
         <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="40"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="245"/>
         <source>Save to original</source>
         <translation>Opslaan als origineel</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="47"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="246"/>
         <source>Save as new</source>
         <translation>Opslaan als nieuw</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="54"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="247"/>
         <source>Abort</source>
         <translation>Annuleren</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="89"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="249"/>
         <source>Move points. (Ctrl+M)</source>
         <translation>Verplaats punten. (Ctrl+M)</translation>
     </message>
@@ -17625,109 +18843,138 @@ of
         <location filename="../mouse/line/IScrOptEditLine.ui" line="287"/>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="334"/>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="351"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="251"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="258"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="265"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="272"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="300"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="312"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="316"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="99"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="253"/>
         <source>Ctrl+M</source>
         <translation>Ctrl+M</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="115"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="256"/>
         <source>Add new points. (Ctrl++)</source>
         <translation>Maak nieuwe punten. (Ctrl++)</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="125"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="260"/>
         <source>Ctrl++</source>
         <translation>Ctrl++</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="138"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="263"/>
         <source>Select a range of points. (Ctrl+R)</source>
         <translation>Selecteer een reeks punten. (Ctrl+R)</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="148"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="267"/>
         <source>Ctrl+R</source>
         <translation>Ctrl+R</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="161"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="270"/>
         <source>Delete a point. (Ctrl+-)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="171"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="274"/>
         <source>Ctrl+-</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="215"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="277"/>
         <source>No auto-routing or line snapping (Key: O)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="225"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="281"/>
         <source>O</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="261"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="291"/>
         <source>Snap line along lines of a vector map. (Key: V)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="284"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="298"/>
         <source>Connect points with a line from a loaded track if possible. (Key: T)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="294"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="302"/>
         <source>T</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="310"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="305"/>
         <source>Optimizes the route by reordering the points using the router specified in the &quot;Routing&quot; tab. 
 This is known as solving the Traveling Salesman Problem, however start and end are kept fixed here</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="314"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="308"/>
         <source>Optimize</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="218"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="279"/>
         <source>0</source>
         <translation>O</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="238"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="284"/>
         <source>Use auto-routing in between points. (Key: A)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="241"/>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="248"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="286"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="288"/>
         <source>A</source>
         <translation>A</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="264"/>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="271"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="293"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="295"/>
         <source>V</source>
         <translation>V</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="331"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="310"/>
         <source>Undo last change</source>
         <translation>Wis laatste verandering</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="348"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="314"/>
         <source>Redo last change</source>
         <translation>Herplaats laatste verandering</translation>
     </message>
@@ -17736,11 +18983,13 @@ This is known as solving the Traveling Salesman Problem, however start and end a
     <name>IScrOptOvlArea</name>
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptOvlArea.h" line="130"/>
         <source>Form</source>
         <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="40"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptOvlArea.h" line="132"/>
         <source>View details and edit.</source>
         <translation>Bekijk details en bewerk.</translation>
     </message>
@@ -17751,36 +19000,48 @@ This is known as solving the Traveling Salesman Problem, however start and end a
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="85"/>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="106"/>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="120"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptOvlArea.h" line="134"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptOvlArea.h" line="138"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptOvlArea.h" line="142"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptOvlArea.h" line="146"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptOvlArea.h" line="150"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptOvlArea.h" line="154"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="54"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptOvlArea.h" line="136"/>
         <source>Set tags and rating.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="68"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptOvlArea.h" line="140"/>
         <source>Copy area into another project.</source>
         <translation>Kopieer gebied in ander project.</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="82"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptOvlArea.h" line="144"/>
         <source>Delete area from project.</source>
         <translation>Verwijder gebied uit project.</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="103"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptOvlArea.h" line="148"/>
         <source>Edit shape of the area.</source>
         <translation>Verander vorm van het gebied.</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="117"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptOvlArea.h" line="152"/>
         <source>Toggle Nogo-Area</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="152"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptOvlArea.h" line="155"/>
         <source>TextLabel</source>
         <translation>TextLabel</translation>
     </message>
@@ -17789,22 +19050,27 @@ This is known as solving the Traveling Salesman Problem, however start and end a
     <name>IScrOptPrint</name>
     <message>
         <location filename="../mouse/IScrOptPrint.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptPrint.h" line="63"/>
         <source>Form</source>
         <translation type="unfinished">Formulier</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptPrint.ui" line="35"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptPrint.h" line="65"/>
         <source>Save selected area as image.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptPrint.ui" line="38"/>
         <location filename="../mouse/IScrOptPrint.ui" line="58"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptPrint.h" line="67"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptPrint.h" line="71"/>
         <source>...</source>
         <translation type="unfinished">...</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptPrint.ui" line="55"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptPrint.h" line="69"/>
         <source>Print selected area.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -17813,22 +19079,27 @@ This is known as solving the Traveling Salesman Problem, however start and end a
     <name>IScrOptRangeLine</name>
     <message>
         <location filename="../mouse/line/IScrOptRangeLine.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeLine.h" line="60"/>
         <source>Form</source>
         <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptRangeLine.ui" line="32"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeLine.h" line="62"/>
         <source>Delete all points between the first and last one.</source>
         <translation>Verwijder alle punten tussen eerste en laatste punt.</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptRangeLine.ui" line="35"/>
         <location filename="../mouse/line/IScrOptRangeLine.ui" line="49"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeLine.h" line="64"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeLine.h" line="68"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptRangeLine.ui" line="46"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeLine.h" line="66"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Calculate a route between the first and last selected point.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Bereken een route tussen het eerste en laatst geselecteerde punt..&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -17837,16 +19108,19 @@ This is known as solving the Traveling Salesman Problem, however start and end a
     <name>IScrOptRangeTool</name>
     <message>
         <location filename="../mouse/range/IScrOptRangeTool.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="253"/>
         <source>Form</source>
         <translation type="unfinished">Formulier</translation>
     </message>
     <message>
         <location filename="../mouse/range/IScrOptRangeTool.ui" line="35"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="254"/>
         <source>Action</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/range/IScrOptRangeTool.ui" line="54"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="256"/>
         <source>Hide selected track points.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -17865,81 +19139,110 @@ This is known as solving the Traveling Salesman Problem, however start and end a
         <location filename="../mouse/range/IScrOptRangeTool.ui" line="265"/>
         <location filename="../mouse/range/IScrOptRangeTool.ui" line="282"/>
         <location filename="../mouse/range/IScrOptRangeTool.ui" line="302"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="258"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="262"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="266"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="270"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="274"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="278"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="282"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="287"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="291"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="295"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="299"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="303"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="307"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="311"/>
         <source>...</source>
         <translation type="unfinished">...</translation>
     </message>
     <message>
         <location filename="../mouse/range/IScrOptRangeTool.ui" line="68"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="260"/>
         <source>Show selected track points.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/range/IScrOptRangeTool.ui" line="82"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="264"/>
         <source>Select activity for selected range.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/range/IScrOptRangeTool.ui" line="96"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="268"/>
         <source>Copy selected track points.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/range/IScrOptRangeTool.ui" line="110"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="272"/>
         <source>Convert selected track points to route.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/range/IScrOptRangeTool.ui" line="124"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="276"/>
         <source>Delete selected track points.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/range/IScrOptRangeTool.ui" line="148"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="280"/>
         <source>Setup range tool behavior.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/range/IScrOptRangeTool.ui" line="178"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="283"/>
         <source>Start</source>
         <translation type="unfinished">Start</translation>
     </message>
     <message>
         <location filename="../mouse/range/IScrOptRangeTool.ui" line="188"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="285"/>
         <source>Move start of range toward start of track. If you keep the key pressed the action is repeated. </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/range/IScrOptRangeTool.ui" line="208"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="289"/>
         <source>Move start of range toward end of track. If you keep the key pressed the action is repeated. </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/range/IScrOptRangeTool.ui" line="228"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="293"/>
         <source>Start a new range right at the end of the selected range.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/range/IScrOptRangeTool.ui" line="245"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="297"/>
         <source>Reset selected range.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/range/IScrOptRangeTool.ui" line="262"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="301"/>
         <source>Start a new range right at the start of the selected range.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/range/IScrOptRangeTool.ui" line="279"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="305"/>
         <source>Move end of range toward start of track. If you keep the key pressed the action is repeated. </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/range/IScrOptRangeTool.ui" line="299"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="309"/>
         <source>Move end of range toward end of track. If you keep the key pressed the action is repeated. </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/range/IScrOptRangeTool.ui" line="316"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTool.h" line="312"/>
         <source>End</source>
         <translation type="unfinished">Einde</translation>
     </message>
@@ -17948,11 +19251,13 @@ This is known as solving the Traveling Salesman Problem, however start and end a
     <name>IScrOptRangeTrk</name>
     <message>
         <location filename="../mouse/range/IScrOptRangeTrk.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTrk.h" line="106"/>
         <source>Form</source>
         <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../mouse/range/IScrOptRangeTrk.ui" line="40"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTrk.h" line="108"/>
         <source>Hide all points.</source>
         <translation>Verberg alle punten.</translation>
     </message>
@@ -17961,26 +19266,34 @@ This is known as solving the Traveling Salesman Problem, however start and end a
         <location filename="../mouse/range/IScrOptRangeTrk.ui" line="57"/>
         <location filename="../mouse/range/IScrOptRangeTrk.ui" line="71"/>
         <location filename="../mouse/range/IScrOptRangeTrk.ui" line="85"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTrk.h" line="110"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTrk.h" line="114"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTrk.h" line="118"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTrk.h" line="122"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
         <location filename="../mouse/range/IScrOptRangeTrk.ui" line="54"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTrk.h" line="112"/>
         <source>Show all points.</source>
         <translation>Toon alle punten.</translation>
     </message>
     <message>
         <location filename="../mouse/range/IScrOptRangeTrk.ui" line="68"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTrk.h" line="116"/>
         <source>Set an activity for the selected range.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/range/IScrOptRangeTrk.ui" line="82"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTrk.h" line="120"/>
         <source>Copy track points as new track.</source>
         <translation>Kopieer trackpunten naar een nieuwe track.</translation>
     </message>
     <message>
         <location filename="../mouse/range/IScrOptRangeTrk.ui" line="117"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTrk.h" line="123"/>
         <source>TextLabel</source>
         <translation>Benaming</translation>
     </message>
@@ -17989,11 +19302,13 @@ This is known as solving the Traveling Salesman Problem, however start and end a
     <name>IScrOptRte</name>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="177"/>
         <source>Form</source>
         <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="40"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="179"/>
         <source>View details and edit.</source>
         <translation>Bekijk details en bewerk.</translation>
     </message>
@@ -18009,61 +19324,83 @@ This is known as solving the Traveling Salesman Problem, however start and end a
         <location filename="../gis/rte/IScrOptRte.ui" line="165"/>
         <location filename="../gis/rte/IScrOptRte.ui" line="179"/>
         <location filename="../gis/rte/IScrOptRte.ui" line="193"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="181"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="185"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="189"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="193"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="197"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="201"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="205"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="209"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="213"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="217"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="221"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="54"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="183"/>
         <source>Set tags and rating.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="68"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="187"/>
         <source>Copy route into another project.</source>
         <translation>Kopieer route in een ander project.</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="82"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="191"/>
         <source>Delete route from project.</source>
         <translation>Verwijder route uit project.</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="103"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="195"/>
         <source>Show instructions and details.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="120"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="199"/>
         <source>Calculate route.</source>
         <translation>Bereken route.</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="134"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="203"/>
         <source>Reset route calculation.</source>
         <translation>Herstel route berekening.</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="148"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="207"/>
         <source>Move route points.</source>
         <translation>Verplaats route punten.</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="162"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="211"/>
         <source>Reverse Route</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="176"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="215"/>
         <source>Convert route to track</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="190"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="219"/>
         <source>Toggle Nogo-Line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="222"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="222"/>
         <source>TextLabel</source>
         <translation>Benaming</translation>
     </message>
@@ -18072,81 +19409,97 @@ This is known as solving the Traveling Salesman Problem, however start and end a
     <name>IScrOptRuler</name>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRuler.h" line="213"/>
         <source>Form</source>
         <translation type="unfinished">Formulier</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="20"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRuler.h" line="214"/>
         <source>Close</source>
         <translation type="unfinished">Sluiten</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="34"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRuler.h" line="216"/>
         <source>Convert into a group of waypoints.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="48"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRuler.h" line="220"/>
         <source>Convert into a track.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="62"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRuler.h" line="224"/>
         <source>Convert into a route.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="76"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRuler.h" line="228"/>
         <source>Convert into an area.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="97"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRuler.h" line="232"/>
         <source>Show table.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="117"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRuler.h" line="236"/>
         <source>Show course of each segment.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="137"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRuler.h" line="240"/>
         <source>Show ascent or descent of each segment.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="157"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRuler.h" line="244"/>
         <source>Show angle between line segments.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="174"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRuler.h" line="248"/>
         <source>Show distances in high precision.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="198"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRuler.h" line="252"/>
         <source>Change the distance in a fixed step.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="205"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRuler.h" line="255"/>
         <source>Change the angle in a fixed step.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="222"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRuler.h" line="258"/>
         <source>Reset ruler.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="239"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRuler.h" line="262"/>
         <source>Undo</source>
         <translation type="unfinished">Ongedaan maken</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="256"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRuler.h" line="266"/>
         <source>Redo</source>
         <translation type="unfinished">Opnieuw</translation>
     </message>
@@ -18161,6 +19514,16 @@ This is known as solving the Traveling Salesman Problem, however start and end a
         <location filename="../mouse/IScrOptRuler.ui" line="225"/>
         <location filename="../mouse/IScrOptRuler.ui" line="242"/>
         <location filename="../mouse/IScrOptRuler.ui" line="259"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRuler.h" line="218"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRuler.h" line="222"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRuler.h" line="226"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRuler.h" line="230"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRuler.h" line="234"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRuler.h" line="246"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRuler.h" line="250"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRuler.h" line="260"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRuler.h" line="264"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptRuler.h" line="268"/>
         <source>...</source>
         <translation type="unfinished">...</translation>
     </message>
@@ -18169,11 +19532,13 @@ This is known as solving the Traveling Salesman Problem, however start and end a
     <name>IScrOptSelect</name>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="288"/>
         <source>Form</source>
         <translation type="unfinished">Formulier</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="47"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="290"/>
         <source>Copy all selected items to a project.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -18194,81 +19559,112 @@ This is known as solving the Traveling Salesman Problem, however start and end a
         <location filename="../mouse/IScrOptSelect.ui" line="304"/>
         <location filename="../mouse/IScrOptSelect.ui" line="376"/>
         <location filename="../mouse/IScrOptSelect.ui" line="399"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="292"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="296"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="300"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="304"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="308"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="312"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="316"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="320"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="324"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="328"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="332"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="336"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="340"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="344"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="348"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="352"/>
         <source>...</source>
         <translation type="unfinished">...</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="61"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="294"/>
         <source>Create a route from selected waypoints.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="75"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="298"/>
         <source>Set proximity and no-go area option.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="89"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="302"/>
         <source>Change the icon of all selected waypoints.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="103"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="306"/>
         <source>Replace the elevation in all selected waypoints and tracks by values from the view&apos;s DEM data.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="117"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="310"/>
         <source>Combine all selected tracks to a new one.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="131"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="314"/>
         <source>Set an activity for all selected tracks.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="145"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="318"/>
         <source>Change the color of all selected tracks.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="159"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="322"/>
         <source>Delete all selected items.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="301"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="342"/>
         <source>Add POIs to selection.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="373"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="346"/>
         <source>Select all items that intersect the selected area.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="396"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="350"/>
         <source>Select all items that are completely inside the selected area.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="217"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="326"/>
         <source>Add tracks to selection.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="238"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="330"/>
         <source>Add waypoints to selection.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="259"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="334"/>
         <source>Add routes to selection.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="280"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="338"/>
         <source>Add areas to selection.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -18277,11 +19673,13 @@ This is known as solving the Traveling Salesman Problem, however start and end a
     <name>IScrOptTrk</name>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="241"/>
         <source>Form</source>
         <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="40"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="243"/>
         <source>View details and edit properties of track.</source>
         <translation>Bekijk details en bewerk eigenschappen van de track.</translation>
     </message>
@@ -18304,31 +19702,54 @@ This is known as solving the Traveling Salesman Problem, however start and end a
         <location filename="../gis/trk/IScrOptTrk.ui" line="284"/>
         <location filename="../gis/trk/IScrOptTrk.ui" line="301"/>
         <location filename="../gis/trk/IScrOptTrk.ui" line="318"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="245"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="249"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="253"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="257"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="261"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="273"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="282"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="286"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="290"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="299"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="303"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="310"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="314"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="318"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="322"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="326"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="330"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="334"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="54"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="247"/>
         <source>Set tags and rating.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="68"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="251"/>
         <source>Copy track into another project.</source>
         <translation>Kopieer track in een ander project.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="82"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="255"/>
         <source>Delete track from project.</source>
         <translation>Verwijder track uit project.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="103"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="259"/>
         <source>Show on-screen profile and detailed information about points.</source>
         <translation>Toon op scherm het profiel en gedetaileerde informatie van de punten.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="120"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="263"/>
         <source>Select a range of points. You can use that tool to:
 
 * Hide or show points of a track. 
@@ -18343,6 +19764,7 @@ this is the right tool. Simply select the section of bad points
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="142"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="275"/>
         <source>Edit the position of track points and use automatic routing 
 to create new track points. This is used to create new tracks 
 to plan a tour.
@@ -18354,16 +19776,19 @@ recording. Use the range tool. </source>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="161"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="284"/>
         <source>Reverse track.</source>
         <translation>Draai trackrichting.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="175"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="288"/>
         <source>Combine tracks.</source>
         <translation>Combineer tracks.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="189"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="292"/>
         <source>Cut track at selected point. You can use this to:
 
 * remove bad points at the start or end of the track
@@ -18379,11 +19804,13 @@ recording. Use the range tool. </source>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="208"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="301"/>
         <source>Set an activity for the complete track.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="222"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="305"/>
         <source>Add a description to the selected track point.
 The track point will be marked with an auto-numbered bullet.
 A table with all descriptions will be shown in the track details dialog
@@ -18393,36 +19820,43 @@ and for highlighted tracks in the map view.</source>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="239"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="312"/>
         <source>Change the color of the track.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="253"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="316"/>
         <source>Replace elevation by the view&apos;s DEM data.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="267"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="320"/>
         <source>Copy track together with all attached waypoints into another project.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="281"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="324"/>
         <source>Convert track to route.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="298"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="328"/>
         <source>Convert track to area.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="315"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="332"/>
         <source>Toggle Nogo-Line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="347"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="335"/>
         <source>TextLabel</source>
         <translation>Benaming</translation>
     </message>
@@ -18431,11 +19865,13 @@ and for highlighted tracks in the map view.</source>
     <name>IScrOptWpt</name>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="20"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="233"/>
         <source>Form</source>
         <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="49"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="235"/>
         <source>View details and edit.</source>
         <translation>Bekijk details en bewerk.</translation>
     </message>
@@ -18452,71 +19888,96 @@ and for highlighted tracks in the map view.</source>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="212"/>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="236"/>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="250"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="237"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="241"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="245"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="249"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="253"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="257"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="261"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="265"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="269"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="277"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="281"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="285"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="63"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="239"/>
         <source>Set tags and rating.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="77"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="243"/>
         <source>Copy waypoint into another project.</source>
         <translation>Kopieer waypoint in een ander project.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="91"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="247"/>
         <source>Delete waypoint from project.</source>
         <translation>Verwijder waypoint uit project.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="112"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="251"/>
         <source>Show content as static bubble.</source>
         <translation>Toon gegevens in een statische ballon.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="129"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="255"/>
         <source>Move waypoint to a new location.</source>
         <translation>Verplaats waypoint naar een nieuwe locatie.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="143"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="259"/>
         <source>Clone waypoint and move clone a given distance and angle.</source>
         <translation>Kloon waypoint en verplaats deze naar aangegeven afstand en hoek.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="157"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="263"/>
         <source>Replace elevation by the view&apos;s DEM data.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="178"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="267"/>
         <source>edit radius of circular area</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="209"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="275"/>
         <source>Switch between proximity and nogo-area</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="195"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="271"/>
         <source>Delete circle defined by waypoint</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="233"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="279"/>
         <source>Search for information about the waypoint&apos;s position on selected websites.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="247"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="283"/>
         <source>Copy position of waypoint to Clipboard.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="294"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="286"/>
         <source>TextLabel</source>
         <translation>Benaming</translation>
     </message>
@@ -18525,11 +19986,13 @@ and for highlighted tracks in the map view.</source>
     <name>IScrOptWptRadius</name>
     <message>
         <location filename="../gis/wpt/IScrOptWptRadius.ui" line="20"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWptRadius.h" line="107"/>
         <source>Form</source>
         <translation type="unfinished">Formulier</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWptRadius.ui" line="49"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWptRadius.h" line="109"/>
         <source>edit radius of circular area</source>
         <translation type="unfinished"></translation>
     </message>
@@ -18537,21 +20000,27 @@ and for highlighted tracks in the map view.</source>
         <location filename="../gis/wpt/IScrOptWptRadius.ui" line="52"/>
         <location filename="../gis/wpt/IScrOptWptRadius.ui" line="66"/>
         <location filename="../gis/wpt/IScrOptWptRadius.ui" line="80"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWptRadius.h" line="111"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWptRadius.h" line="115"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWptRadius.h" line="119"/>
         <source>...</source>
         <translation type="unfinished">...</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWptRadius.ui" line="77"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWptRadius.h" line="117"/>
         <source>Switch between proximity and nogo-area</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWptRadius.ui" line="63"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWptRadius.h" line="113"/>
         <source>Delete circle defined by waypoint</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWptRadius.ui" line="127"/>
+        <location filename="../../../build/src/qmapshack/ui_IScrOptWptRadius.h" line="120"/>
         <source>TextLabel</source>
         <translation type="unfinished"></translation>
     </message>
@@ -18560,22 +20029,27 @@ and for highlighted tracks in the map view.</source>
     <name>IScreenshotDialog</name>
     <message>
         <location filename="../print/IScreenshotDialog.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IScreenshotDialog.h" line="87"/>
         <source>Screenshot...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../print/IScreenshotDialog.ui" line="20"/>
         <location filename="../print/IScreenshotDialog.ui" line="30"/>
+        <location filename="../../../build/src/qmapshack/ui_IScreenshotDialog.h" line="88"/>
+        <location filename="../../../build/src/qmapshack/ui_IScreenshotDialog.h" line="89"/>
         <source>TextLabel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../print/IScreenshotDialog.ui" line="55"/>
+        <location filename="../../../build/src/qmapshack/ui_IScreenshotDialog.h" line="90"/>
         <source>Save Screenshot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../print/IScreenshotDialog.ui" line="66"/>
+        <location filename="../../../build/src/qmapshack/ui_IScreenshotDialog.h" line="91"/>
         <source>Print Screenshot</source>
         <translation type="unfinished"></translation>
     </message>
@@ -18584,22 +20058,26 @@ and for highlighted tracks in the map view.</source>
     <name>ISearchDatabase</name>
     <message>
         <location filename="../gis/db/ISearchDatabase.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_ISearchDatabase.h" line="96"/>
         <source>Search...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/db/ISearchDatabase.ui" line="34"/>
+        <location filename="../../../build/src/qmapshack/ui_ISearchDatabase.h" line="98"/>
         <source>Type the word you want to search for and press the search button. 
 If you enter &apos;word&apos; a search with an exact match is done. If you enter &apos;word*&apos;, &apos;word&apos; has to be at the beginning of a string.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/db/ISearchDatabase.ui" line="67"/>
+        <location filename="../../../build/src/qmapshack/ui_ISearchDatabase.h" line="100"/>
         <source>Search</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/db/ISearchDatabase.ui" line="74"/>
+        <location filename="../../../build/src/qmapshack/ui_ISearchDatabase.h" line="101"/>
         <source>Close</source>
         <translation type="unfinished">Sluiten</translation>
     </message>
@@ -18608,11 +20086,13 @@ If you enter &apos;word&apos; a search with an exact match is done. If you enter
     <name>ISearchExplanationDialog</name>
     <message>
         <location filename="../gis/search/ISearchExplanationDialog.ui" line="20"/>
+        <location filename="../../../build/src/qmapshack/ui_ISearchExplanationDialog.h" line="105"/>
         <source>Help</source>
         <translation type="unfinished">Help</translation>
     </message>
     <message>
         <location filename="../gis/search/ISearchExplanationDialog.ui" line="44"/>
+        <location filename="../../../build/src/qmapshack/ui_ISearchExplanationDialog.h" line="106"/>
         <source>Following keywords are available for searching:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -18621,6 +20101,7 @@ If you enter &apos;word&apos; a search with an exact match is done. If you enter
     <name>ISelDevices</name>
     <message>
         <location filename="../gis/ISelDevices.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_ISelDevices.h" line="58"/>
         <source>Select devices...</source>
         <translation>Selecteer GPS...</translation>
     </message>
@@ -18629,6 +20110,7 @@ If you enter &apos;word&apos; a search with an exact match is done. If you enter
     <name>ISelectActivityColor</name>
     <message>
         <location filename="../gis/trk/ISelectActivityColor.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_ISelectActivityColor.h" line="49"/>
         <source>Form</source>
         <translation>Formulier</translation>
     </message>
@@ -18637,11 +20119,13 @@ If you enter &apos;word&apos; a search with an exact match is done. If you enter
     <name>ISelectCopyAction</name>
     <message>
         <location filename="../helpers/ISelectCopyAction.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_ISelectCopyAction.h" line="169"/>
         <source>Copy item...</source>
         <translation>Element kopiëren...</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectCopyAction.ui" line="91"/>
+        <location filename="../../../build/src/qmapshack/ui_ISelectCopyAction.h" line="173"/>
         <source>Replace existing item</source>
         <translation>Vervang bestand element</translation>
     </message>
@@ -18650,36 +20134,46 @@ If you enter &apos;word&apos; a search with an exact match is done. If you enter
         <location filename="../helpers/ISelectCopyAction.ui" line="104"/>
         <location filename="../helpers/ISelectCopyAction.ui" line="179"/>
         <location filename="../helpers/ISelectCopyAction.ui" line="189"/>
+        <location filename="../../../build/src/qmapshack/ui_ISelectCopyAction.h" line="171"/>
+        <location filename="../../../build/src/qmapshack/ui_ISelectCopyAction.h" line="174"/>
+        <location filename="../../../build/src/qmapshack/ui_ISelectCopyAction.h" line="179"/>
+        <location filename="../../../build/src/qmapshack/ui_ISelectCopyAction.h" line="180"/>
         <source>TextLabel</source>
         <translation>Benaming</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectCopyAction.ui" line="32"/>
+        <location filename="../../../build/src/qmapshack/ui_ISelectCopyAction.h" line="170"/>
         <source>Do not copy item</source>
         <translation>Element niet kopiëren</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectCopyAction.ui" line="149"/>
+        <location filename="../../../build/src/qmapshack/ui_ISelectCopyAction.h" line="177"/>
         <source>Create a clone</source>
         <translation>Maak een kloon</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectCopyAction.ui" line="130"/>
+        <location filename="../../../build/src/qmapshack/ui_ISelectCopyAction.h" line="176"/>
         <source>Replace with:</source>
         <translation>Vervang door:</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectCopyAction.ui" line="65"/>
+        <location filename="../../../build/src/qmapshack/ui_ISelectCopyAction.h" line="172"/>
         <source>Keep item:</source>
         <translation>Behoud element:</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectCopyAction.ui" line="162"/>
+        <location filename="../../../build/src/qmapshack/ui_ISelectCopyAction.h" line="178"/>
         <source>The clone&apos;s name will be appended with &apos;_Clone&apos;</source>
         <translation>De naam van de kloon zal aangeduid worden als &apos;_Kloon&apos;</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectCopyAction.ui" line="123"/>
+        <location filename="../../../build/src/qmapshack/ui_ISelectCopyAction.h" line="175"/>
         <source>And for all other items, too.</source>
         <translation>En ook voor alle andere elementen.</translation>
     </message>
@@ -18688,6 +20182,7 @@ If you enter &apos;word&apos; a search with an exact match is done. If you enter
     <name>ISelectDBFolder</name>
     <message>
         <location filename="../gis/db/ISelectDBFolder.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_ISelectDBFolder.h" line="59"/>
         <source>Select Parent Folder...</source>
         <translation>Selecteer map...</translation>
     </message>
@@ -18696,36 +20191,43 @@ If you enter &apos;word&apos; a search with an exact match is done. If you enter
     <name>ISelectDoubleListWidget</name>
     <message>
         <location filename="../widgets/ISelectDoubleListWidget.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_ISelectDoubleListWidget.h" line="134"/>
         <source>Form</source>
         <translation type="unfinished">Formulier</translation>
     </message>
     <message>
         <location filename="../widgets/ISelectDoubleListWidget.ui" line="22"/>
+        <location filename="../../../build/src/qmapshack/ui_ISelectDoubleListWidget.h" line="135"/>
         <source>Available</source>
         <translation type="unfinished">Beschikbaar</translation>
     </message>
     <message>
         <location filename="../widgets/ISelectDoubleListWidget.ui" line="46"/>
+        <location filename="../../../build/src/qmapshack/ui_ISelectDoubleListWidget.h" line="137"/>
         <source>Add to selected items</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../widgets/ISelectDoubleListWidget.ui" line="60"/>
+        <location filename="../../../build/src/qmapshack/ui_ISelectDoubleListWidget.h" line="141"/>
         <source>Remove from selected items</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../widgets/ISelectDoubleListWidget.ui" line="78"/>
+        <location filename="../../../build/src/qmapshack/ui_ISelectDoubleListWidget.h" line="144"/>
         <source>Selected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../widgets/ISelectDoubleListWidget.ui" line="102"/>
+        <location filename="../../../build/src/qmapshack/ui_ISelectDoubleListWidget.h" line="146"/>
         <source>Move selected items up</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../widgets/ISelectDoubleListWidget.ui" line="116"/>
+        <location filename="../../../build/src/qmapshack/ui_ISelectDoubleListWidget.h" line="150"/>
         <source>Move selected items down</source>
         <translation type="unfinished"></translation>
     </message>
@@ -18734,6 +20236,10 @@ If you enter &apos;word&apos; a search with an exact match is done. If you enter
         <location filename="../widgets/ISelectDoubleListWidget.ui" line="63"/>
         <location filename="../widgets/ISelectDoubleListWidget.ui" line="105"/>
         <location filename="../widgets/ISelectDoubleListWidget.ui" line="119"/>
+        <location filename="../../../build/src/qmapshack/ui_ISelectDoubleListWidget.h" line="139"/>
+        <location filename="../../../build/src/qmapshack/ui_ISelectDoubleListWidget.h" line="143"/>
+        <location filename="../../../build/src/qmapshack/ui_ISelectDoubleListWidget.h" line="148"/>
+        <location filename="../../../build/src/qmapshack/ui_ISelectDoubleListWidget.h" line="152"/>
         <source>...</source>
         <translation type="unfinished">...</translation>
     </message>
@@ -18742,36 +20248,43 @@ If you enter &apos;word&apos; a search with an exact match is done. If you enter
     <name>ISelectProjectDialog</name>
     <message>
         <location filename="../helpers/ISelectProjectDialog.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_ISelectProjectDialog.h" line="133"/>
         <source>Select a project...</source>
         <translation>Selecteer een project...</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectProjectDialog.ui" line="20"/>
+        <location filename="../../../build/src/qmapshack/ui_ISelectProjectDialog.h" line="134"/>
         <source>Select project from list or enter new project name.</source>
         <translation>Selecteer project uit lijst of maak nieuw project.</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectProjectDialog.ui" line="33"/>
+        <location filename="../../../build/src/qmapshack/ui_ISelectProjectDialog.h" line="135"/>
         <source>New project&apos;s name</source>
         <translation>Naam nieuw project</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectProjectDialog.ui" line="43"/>
+        <location filename="../../../build/src/qmapshack/ui_ISelectProjectDialog.h" line="136"/>
         <source>New project is created as:</source>
         <translation>Nieuw project wordt gemaakt als:</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectProjectDialog.ui" line="93"/>
+        <location filename="../../../build/src/qmapshack/ui_ISelectProjectDialog.h" line="138"/>
         <source>*.qms</source>
         <translation>*.qms</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectProjectDialog.ui" line="103"/>
+        <location filename="../../../build/src/qmapshack/ui_ISelectProjectDialog.h" line="139"/>
         <source>*.gpx</source>
         <translation>*.gpx</translation>
     </message>
     <message>
         <location filename="../helpers/ISelectProjectDialog.ui" line="110"/>
+        <location filename="../../../build/src/qmapshack/ui_ISelectProjectDialog.h" line="140"/>
         <source>Database</source>
         <translation>Database</translation>
     </message>
@@ -18780,26 +20293,31 @@ If you enter &apos;word&apos; a search with an exact match is done. If you enter
     <name>ISelectSaveAction</name>
     <message>
         <location filename="../gis/db/ISelectSaveAction.ui" line="20"/>
+        <location filename="../../../build/src/qmapshack/ui_ISelectSaveAction.h" line="162"/>
         <source>Copy item...</source>
         <translation>Element kopiëren...</translation>
     </message>
     <message>
         <location filename="../gis/db/ISelectSaveAction.ui" line="35"/>
+        <location filename="../../../build/src/qmapshack/ui_ISelectSaveAction.h" line="163"/>
         <source>Replace existing item</source>
         <translation>Vervang bestand element</translation>
     </message>
     <message>
         <location filename="../gis/db/ISelectSaveAction.ui" line="87"/>
+        <location filename="../../../build/src/qmapshack/ui_ISelectSaveAction.h" line="167"/>
         <source>Add a clone</source>
         <translation>Maak een kloon</translation>
     </message>
     <message>
         <location filename="../gis/db/ISelectSaveAction.ui" line="100"/>
+        <location filename="../../../build/src/qmapshack/ui_ISelectSaveAction.h" line="168"/>
         <source>The clone&apos;s name will be appended with &apos;_Clone&apos;</source>
         <translation>De naam van de kloon zal aangeduid worden als &apos;_Kloon&apos;</translation>
     </message>
     <message>
         <location filename="../gis/db/ISelectSaveAction.ui" line="171"/>
+        <location filename="../../../build/src/qmapshack/ui_ISelectSaveAction.h" line="173"/>
         <source>Replace with:</source>
         <translation>Vervang door:</translation>
     </message>
@@ -18808,21 +20326,28 @@ If you enter &apos;word&apos; a search with an exact match is done. If you enter
         <location filename="../gis/db/ISelectSaveAction.ui" line="68"/>
         <location filename="../gis/db/ISelectSaveAction.ui" line="130"/>
         <location filename="../gis/db/ISelectSaveAction.ui" line="140"/>
+        <location filename="../../../build/src/qmapshack/ui_ISelectSaveAction.h" line="164"/>
+        <location filename="../../../build/src/qmapshack/ui_ISelectSaveAction.h" line="166"/>
+        <location filename="../../../build/src/qmapshack/ui_ISelectSaveAction.h" line="171"/>
+        <location filename="../../../build/src/qmapshack/ui_ISelectSaveAction.h" line="172"/>
         <source>TextLabel</source>
         <translation>Benaming</translation>
     </message>
     <message>
         <location filename="../gis/db/ISelectSaveAction.ui" line="61"/>
+        <location filename="../../../build/src/qmapshack/ui_ISelectSaveAction.h" line="165"/>
         <source>Do not replace item</source>
         <translation>Vervang element niet</translation>
     </message>
     <message>
         <location filename="../gis/db/ISelectSaveAction.ui" line="123"/>
+        <location filename="../../../build/src/qmapshack/ui_ISelectSaveAction.h" line="170"/>
         <source>Use item:</source>
         <translation>Gebruik element:</translation>
     </message>
     <message>
         <location filename="../gis/db/ISelectSaveAction.ui" line="116"/>
+        <location filename="../../../build/src/qmapshack/ui_ISelectSaveAction.h" line="169"/>
         <source>And for all other items, too.</source>
         <translation>En ook voor alle andere elementen.</translation>
     </message>
@@ -18831,87 +20356,105 @@ If you enter &apos;word&apos; a search with an exact match is done. If you enter
     <name>ISetupDatabase</name>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupDatabase.h" line="291"/>
         <source>Add database...</source>
         <translation>Database toevoegen...</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="68"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupDatabase.h" line="294"/>
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="25"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupDatabase.h" line="292"/>
         <source>Name</source>
         <translation>Naam </translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="252"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupDatabase.h" line="311"/>
         <source>&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Caution!&lt;/span&gt; It is recommended to leave the password blank, as QMapShack will store it as plain text. If you don&apos;t give a password you will be asked for it on each startup.&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="239"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupDatabase.h" line="310"/>
         <source>Do not use a password.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="153"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupDatabase.h" line="304"/>
         <source>SQLite</source>
         <translation>SQLite</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="115"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupDatabase.h" line="303"/>
         <source>MySQL</source>
         <translation>MySQL</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="181"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupDatabase.h" line="305"/>
         <source>Server</source>
         <translation>Server</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="193"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupDatabase.h" line="306"/>
         <source>Port</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="206"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupDatabase.h" line="307"/>
         <source>00000</source>
         <translation>O {00000?}</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="215"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupDatabase.h" line="308"/>
         <source>User</source>
         <translation>Gebruiker</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="225"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupDatabase.h" line="309"/>
         <source>Password</source>
         <translation>Wachtwoord</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="275"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupDatabase.h" line="312"/>
         <source>&lt;b&gt;Port:&lt;/b&gt; Leave the port field empty to use the default port.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="61"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupDatabase.h" line="293"/>
         <source>File:</source>
         <translation>Bestand:</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="75"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupDatabase.h" line="296"/>
         <source>Add new database.</source>
         <translation>Maak nieuwe database.</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="78"/>
         <location filename="../gis/db/ISetupDatabase.ui" line="92"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupDatabase.h" line="298"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupDatabase.h" line="302"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="89"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupDatabase.h" line="300"/>
         <source>Open existing database.</source>
         <translation>Open bestaande database.</translation>
     </message>
@@ -18920,26 +20463,31 @@ If you enter &apos;word&apos; a search with an exact match is done. If you enter
     <name>ISetupFolder</name>
     <message>
         <location filename="../gis/db/ISetupFolder.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupFolder.h" line="95"/>
         <source>Database Folder...</source>
         <translation>Databasemap...</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupFolder.ui" line="20"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupFolder.h" line="96"/>
         <source>Folder name</source>
         <translation>Mapnaam</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupFolder.ui" line="30"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupFolder.h" line="97"/>
         <source>Group</source>
         <translation>Groep</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupFolder.ui" line="41"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupFolder.h" line="98"/>
         <source>Project</source>
         <translation>Project</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupFolder.ui" line="55"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupFolder.h" line="99"/>
         <source>Other</source>
         <translation>Anders</translation>
     </message>
@@ -18948,21 +20496,25 @@ If you enter &apos;word&apos; a search with an exact match is done. If you enter
     <name>ISetupIconAndName</name>
     <message>
         <location filename="../gis/wpt/ISetupIconAndName.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupIconAndName.h" line="92"/>
         <source>Icon &amp; Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/wpt/ISetupIconAndName.ui" line="22"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupIconAndName.h" line="93"/>
         <source>...</source>
         <translation type="unfinished">...</translation>
     </message>
     <message>
         <location filename="../gis/wpt/ISetupIconAndName.ui" line="32"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupIconAndName.h" line="94"/>
         <source>Symbol</source>
         <translation type="unfinished">Symbool</translation>
     </message>
     <message>
         <location filename="../gis/wpt/ISetupIconAndName.ui" line="39"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupIconAndName.h" line="95"/>
         <source>Name</source>
         <translation type="unfinished">Naam </translation>
     </message>
@@ -18971,110 +20523,135 @@ If you enter &apos;word&apos; a search with an exact match is done. If you enter
     <name>ISetupWorkspace</name>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="561"/>
         <source>Setup workspace...</source>
         <translation>Instelling werkruimte...</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="24"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="569"/>
         <source>General</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="45"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="563"/>
         <source>save workspace on exit, and every</source>
         <translation>sla werkruimte op bij afsluiten en elke</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="55"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="564"/>
         <source>minutes</source>
         <translation>minuten</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="66"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="565"/>
         <source>listen for database changes from other instances of QMapShack. On port</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="73"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="566"/>
         <source>00000</source>
         <translation>O {00000?}</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="132"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="568"/>
         <source>Enable device support. When enabled the device will be automatically detected when plugged in. It&apos;s file structure will be parsed and all projects will be loaded and listed. Depending on the device QMapShack will add the necessary glue logic like to link pictures with waypoints, etc.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="537"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="628"/>
         <source>Database</source>
         <translation type="unfinished">Database</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="543"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="608"/>
         <source>Select additional information displayed in the database item tree. Changes take effect immediately. Look at the items to fine tune your choice.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="555"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="609"/>
         <source>Folders</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="561"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="610"/>
         <source>Subfolder Count</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="594"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="612"/>
         <source>Items</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="180"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="570"/>
         <source>Select additional information displayed in the workspace item tree. Changes take effect immediately. Look at the items to fine tune your choice.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="174"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="607"/>
         <source>Workspace</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="192"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="571"/>
         <source>Project</source>
         <translation type="unfinished">Project</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="198"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="572"/>
         <source>Keywords</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="205"/>
         <location filename="../gis/ISetupWorkspace.ui" line="568"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="573"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="611"/>
         <source>Item Count</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="212"/>
         <location filename="../gis/ISetupWorkspace.ui" line="375"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="574"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="594"/>
         <source>Distance</source>
         <translation type="unfinished">Afstand</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="219"/>
         <location filename="../gis/ISetupWorkspace.ui" line="382"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="575"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="595"/>
         <source>Ascent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="226"/>
         <location filename="../gis/ISetupWorkspace.ui" line="389"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="576"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="596"/>
         <source>Descent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="251"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="577"/>
         <source>Font Size Status Project</source>
         <translation type="unfinished"></translation>
     </message>
@@ -19083,6 +20660,10 @@ If you enter &apos;word&apos; a search with an exact match is done. If you enter
         <location filename="../gis/ISetupWorkspace.ui" line="295"/>
         <location filename="../gis/ISetupWorkspace.ui" line="636"/>
         <location filename="../gis/ISetupWorkspace.ui" line="672"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="578"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="585"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="615"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="622"/>
         <source>large</source>
         <translation type="unfinished"></translation>
     </message>
@@ -19091,6 +20672,10 @@ If you enter &apos;word&apos; a search with an exact match is done. If you enter
         <location filename="../gis/ISetupWorkspace.ui" line="300"/>
         <location filename="../gis/ISetupWorkspace.ui" line="641"/>
         <location filename="../gis/ISetupWorkspace.ui" line="677"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="579"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="586"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="616"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="623"/>
         <source>small</source>
         <translation type="unfinished"></translation>
     </message>
@@ -19099,6 +20684,10 @@ If you enter &apos;word&apos; a search with an exact match is done. If you enter
         <location filename="../gis/ISetupWorkspace.ui" line="305"/>
         <location filename="../gis/ISetupWorkspace.ui" line="646"/>
         <location filename="../gis/ISetupWorkspace.ui" line="682"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="580"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="587"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="617"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="624"/>
         <source>smaller</source>
         <translation type="unfinished"></translation>
     </message>
@@ -19107,6 +20696,10 @@ If you enter &apos;word&apos; a search with an exact match is done. If you enter
         <location filename="../gis/ISetupWorkspace.ui" line="310"/>
         <location filename="../gis/ISetupWorkspace.ui" line="651"/>
         <location filename="../gis/ISetupWorkspace.ui" line="687"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="581"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="588"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="618"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="625"/>
         <source>tiny</source>
         <translation type="unfinished"></translation>
     </message>
@@ -19115,17 +20708,24 @@ If you enter &apos;word&apos; a search with an exact match is done. If you enter
         <location filename="../gis/ISetupWorkspace.ui" line="315"/>
         <location filename="../gis/ISetupWorkspace.ui" line="656"/>
         <location filename="../gis/ISetupWorkspace.ui" line="692"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="582"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="589"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="619"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="626"/>
         <source>none</source>
         <translation type="unfinished">geen</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="287"/>
         <location filename="../gis/ISetupWorkspace.ui" line="664"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="584"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="621"/>
         <source>Font Size Status Item</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="355"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="591"/>
         <source>Tracks</source>
         <translation type="unfinished"></translation>
     </message>
@@ -19134,6 +20734,10 @@ If you enter &apos;word&apos; a search with an exact match is done. If you enter
         <location filename="../gis/ISetupWorkspace.ui" line="418"/>
         <location filename="../gis/ISetupWorkspace.ui" line="461"/>
         <location filename="../gis/ISetupWorkspace.ui" line="497"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="592"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="598"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="602"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="605"/>
         <source>Rating</source>
         <translation type="unfinished"></translation>
     </message>
@@ -19142,36 +20746,46 @@ If you enter &apos;word&apos; a search with an exact match is done. If you enter
         <location filename="../gis/ISetupWorkspace.ui" line="425"/>
         <location filename="../gis/ISetupWorkspace.ui" line="468"/>
         <location filename="../gis/ISetupWorkspace.ui" line="504"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="593"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="599"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="603"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="606"/>
         <source>Tags</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="412"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="597"/>
         <source>Waypoints</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="432"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="600"/>
         <source>Elevation</source>
         <translation type="unfinished">Hoogte</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="455"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="601"/>
         <source>Routes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="491"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="604"/>
         <source>Areas</source>
         <translation type="unfinished">Gebieden</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="600"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="613"/>
         <source>Info Text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="628"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="614"/>
         <source>Font Size Status Folder</source>
         <translation type="unfinished"></translation>
     </message>
@@ -19180,31 +20794,37 @@ If you enter &apos;word&apos; a search with an exact match is done. If you enter
     <name>IShortcutSetupDialog</name>
     <message>
         <location filename="../helpers/IShortcutSetupDialog.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IShortcutSetupDialog.h" line="97"/>
         <source>Setup Keyboard Shortcuts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../helpers/IShortcutSetupDialog.ui" line="20"/>
+        <location filename="../../../build/src/qmapshack/ui_IShortcutSetupDialog.h" line="98"/>
         <source>Filter actions...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../helpers/IShortcutSetupDialog.ui" line="40"/>
+        <location filename="../../../build/src/qmapshack/ui_IShortcutSetupDialog.h" line="101"/>
         <source>Action</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../helpers/IShortcutSetupDialog.ui" line="45"/>
+        <location filename="../../../build/src/qmapshack/ui_IShortcutSetupDialog.h" line="100"/>
         <source>Shortcut</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../helpers/IShortcutSetupDialog.ui" line="55"/>
+        <location filename="../../../build/src/qmapshack/ui_IShortcutSetupDialog.h" line="102"/>
         <source>Shortcut:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../helpers/IShortcutSetupDialog.ui" line="65"/>
+        <location filename="../../../build/src/qmapshack/ui_IShortcutSetupDialog.h" line="103"/>
         <source>Reset to Default</source>
         <translation type="unfinished"></translation>
     </message>
@@ -19213,26 +20833,31 @@ If you enter &apos;word&apos; a search with an exact match is done. If you enter
     <name>ITemplateWidget</name>
     <message>
         <location filename="../widgets/ITemplateWidget.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_ITemplateWidget.h" line="121"/>
         <source>Insert Template...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../widgets/ITemplateWidget.ui" line="32"/>
+        <location filename="../../../build/src/qmapshack/ui_ITemplateWidget.h" line="122"/>
         <source>Templates</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../widgets/ITemplateWidget.ui" line="42"/>
+        <location filename="../../../build/src/qmapshack/ui_ITemplateWidget.h" line="124"/>
         <source>Select a path with your own templates.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../widgets/ITemplateWidget.ui" line="45"/>
+        <location filename="../../../build/src/qmapshack/ui_ITemplateWidget.h" line="126"/>
         <source>...</source>
         <translation type="unfinished">...</translation>
     </message>
     <message>
         <location filename="../widgets/ITemplateWidget.ui" line="77"/>
+        <location filename="../../../build/src/qmapshack/ui_ITemplateWidget.h" line="127"/>
         <source>Preview</source>
         <translation type="unfinished"></translation>
     </message>
@@ -19241,290 +20866,355 @@ If you enter &apos;word&apos; a search with an exact match is done. If you enter
     <name>ITextEditWidget</name>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="355"/>
         <source>Edit text...</source>
         <translation>Bewerk tekst...</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="45"/>
         <location filename="../widgets/ITextEditWidget.ui" line="351"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="356"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="440"/>
         <source>Undo</source>
         <translation>Ongedaan maken</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="354"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="358"/>
         <source>Ctrl+Z</source>
         <translation>Ctrl+Z</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="58"/>
         <location filename="../widgets/ITextEditWidget.ui" line="363"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="360"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="441"/>
         <source>Redo</source>
         <translation>Opnieuw</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="366"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="362"/>
         <source>Ctrl+Shift+Z</source>
         <translation>Ctrl+Shift+Z</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="71"/>
         <location filename="../widgets/ITextEditWidget.ui" line="375"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="364"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="442"/>
         <source>Cut</source>
         <translation>Knippen</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="378"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="366"/>
         <source>Ctrl+X</source>
         <translation>Ctrl+X</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="84"/>
         <location filename="../widgets/ITextEditWidget.ui" line="387"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="368"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="443"/>
         <source>Copy</source>
         <translation>Kopiëren</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="390"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="370"/>
         <source>Ctrl+C</source>
         <translation>Ctrl+C</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="97"/>
         <location filename="../widgets/ITextEditWidget.ui" line="395"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="372"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="444"/>
         <source>Paste</source>
         <translation>Plakken</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="25"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="439"/>
         <source>Templ.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="120"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="445"/>
         <source>A:L</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="133"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="446"/>
         <source>A:C</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="146"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="447"/>
         <source>A:R</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="159"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="448"/>
         <source>A:B</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="192"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="449"/>
         <source>B</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="205"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="450"/>
         <source>I</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="218"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="451"/>
         <source>U</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="238"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="452"/>
         <source>C</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="285"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="453"/>
         <source>Standard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="290"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="454"/>
         <source>Bullet List (Disc)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="295"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="455"/>
         <source>Bullet List (Circle)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="300"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="456"/>
         <source>Bullet List (Square)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="305"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="457"/>
         <source>Ordered List (Decimal)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="310"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="458"/>
         <source>Ordered List (Alpha lower)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="315"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="459"/>
         <source>Ordered List (Alpha upper)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="320"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="460"/>
         <source>Ordered List (Roman lower)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="325"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="461"/>
         <source>Ordered List (Roman upper)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="398"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="374"/>
         <source>Ctrl+V</source>
         <translation>Ctrl+V</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="410"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="376"/>
         <source>Align Left</source>
         <translation>Links uitlijnen</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="413"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="378"/>
         <source>Ctrl+L</source>
         <translation>Ctrl+L</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="425"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="380"/>
         <source>Align Right</source>
         <translation>Rechts uitlijnen</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="428"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="382"/>
         <source>Ctrl+R</source>
         <translation>Ctrl+R</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="440"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="384"/>
         <source>Align Center</source>
         <translation>Gecentreerd</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="443"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="386"/>
         <source>Ctrl+E</source>
         <translation>Ctrl+E</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="455"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="388"/>
         <source>Align Block</source>
         <translation>Uitgevuld</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="458"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="390"/>
         <source>Ctrl+J</source>
         <translation>Ctrl+J</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="470"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="392"/>
         <source>Underline</source>
         <translation>Onderstrepen</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="473"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="394"/>
         <source>Ctrl+U</source>
         <translation>Ctrl+U</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="485"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="396"/>
         <source>Bold</source>
         <translation>Vet</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="488"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="398"/>
         <source>Ctrl+B</source>
         <translation>Ctrl+B</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="500"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="400"/>
         <source>Italic</source>
         <translation>Cursief</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="503"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="402"/>
         <source>Ctrl+I</source>
         <translation>Ctrl+I</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="515"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="404"/>
         <source>Plain</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="518"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="406"/>
         <source>Reset the text&apos;s format before pasting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="523"/>
         <location filename="../widgets/ITextEditWidget.ui" line="526"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="408"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="410"/>
         <source>Select All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="529"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="413"/>
         <source>Ctrl+A</source>
         <translation type="unfinished">Ctrl+A</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="534"/>
         <location filename="../widgets/ITextEditWidget.ui" line="537"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="415"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="417"/>
         <source>Delete</source>
         <translation type="unfinished">Verwijder</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="542"/>
         <location filename="../widgets/ITextEditWidget.ui" line="545"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="419"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="421"/>
         <source>Reset Font</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="550"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="423"/>
         <source>Reset Text Color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="553"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="425"/>
         <source>Drop the text color and follow the color scheme again</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="558"/>
         <location filename="../widgets/ITextEditWidget.ui" line="561"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="427"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="429"/>
         <source>Reset Layout</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="573"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="431"/>
         <source>Normal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="576"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="433"/>
         <source>Paste without resetting the text&apos;s format</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="585"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="435"/>
         <source>Insert From Template</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="588"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="437"/>
         <source>Create text from template.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -19533,31 +21223,37 @@ If you enter &apos;word&apos; a search with an exact match is done. If you enter
     <name>ITextEditWidgetSelMenu</name>
     <message>
         <location filename="../widgets/ITextEditWidgetSelMenu.ui" line="61"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidgetSelMenu.h" line="112"/>
         <source>B</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidgetSelMenu.ui" line="74"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidgetSelMenu.h" line="113"/>
         <source>I</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidgetSelMenu.ui" line="87"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidgetSelMenu.h" line="114"/>
         <source>U</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidgetSelMenu.ui" line="107"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidgetSelMenu.h" line="115"/>
         <source>Cut</source>
         <translation type="unfinished">Knippen</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidgetSelMenu.ui" line="120"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidgetSelMenu.h" line="116"/>
         <source>Copy</source>
         <translation type="unfinished">Kopiëren</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidgetSelMenu.ui" line="133"/>
+        <location filename="../../../build/src/qmapshack/ui_ITextEditWidgetSelMenu.h" line="117"/>
         <source>Paste</source>
         <translation type="unfinished">Plakken</translation>
     </message>
@@ -19566,11 +21262,13 @@ If you enter &apos;word&apos; a search with an exact match is done. If you enter
     <name>ITimeDialog</name>
     <message>
         <location filename="../helpers/ITimeDialog.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_ITimeDialog.h" line="78"/>
         <source>Edit timestamp...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../helpers/ITimeDialog.ui" line="22"/>
+        <location filename="../../../build/src/qmapshack/ui_ITimeDialog.h" line="80"/>
         <source>You can use the up, down, left and right key of 
 your keyboard to change the time/date. Or you 
 simply type the new time/date.</source>
@@ -19581,41 +21279,49 @@ simply type the new time/date.</source>
     <name>ITimeZoneSetup</name>
     <message>
         <location filename="../units/ITimeZoneSetup.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_ITimeZoneSetup.h" line="163"/>
         <source>Setup Timezone ...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../units/ITimeZoneSetup.ui" line="22"/>
+        <location filename="../../../build/src/qmapshack/ui_ITimeZoneSetup.h" line="164"/>
         <source>UTC</source>
         <translation>UTC</translation>
     </message>
     <message>
         <location filename="../units/ITimeZoneSetup.ui" line="32"/>
+        <location filename="../../../build/src/qmapshack/ui_ITimeZoneSetup.h" line="165"/>
         <source>Local</source>
         <translation>Lokaal</translation>
     </message>
     <message>
         <location filename="../units/ITimeZoneSetup.ui" line="42"/>
+        <location filename="../../../build/src/qmapshack/ui_ITimeZoneSetup.h" line="166"/>
         <source>Automatic</source>
         <translation>Automatisch</translation>
     </message>
     <message>
         <location filename="../units/ITimeZoneSetup.ui" line="75"/>
+        <location filename="../../../build/src/qmapshack/ui_ITimeZoneSetup.h" line="168"/>
         <source>Print date/time in </source>
         <translation>Toon datum/tijd als</translation>
     </message>
     <message>
         <location filename="../units/ITimeZoneSetup.ui" line="82"/>
+        <location filename="../../../build/src/qmapshack/ui_ITimeZoneSetup.h" line="169"/>
         <source>long format, or</source>
         <translation>lang formaat, of</translation>
     </message>
     <message>
         <location filename="../units/ITimeZoneSetup.ui" line="92"/>
+        <location filename="../../../build/src/qmapshack/ui_ITimeZoneSetup.h" line="170"/>
         <source>short format</source>
         <translation>kort formaat</translation>
     </message>
     <message>
         <location filename="../units/ITimeZoneSetup.ui" line="123"/>
+        <location filename="../../../build/src/qmapshack/ui_ITimeZoneSetup.h" line="171"/>
         <source>&lt;b&gt;Note:&lt;/b&gt; For some GUI elements changing the units will not take effect until you restart QMapShack.</source>
         <translation type="unfinished">&lt;b&gt;Notitie:&lt;/b&gt;Na het wijzigingen  van de eenheden is het nodig om QMapShack opnieuw op te starten.</translation>
     </message>
@@ -19624,11 +21330,13 @@ simply type the new time/date.</source>
     <name>IToolBarSetupDialog</name>
     <message>
         <location filename="../helpers/IToolBarSetupDialog.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IToolBarSetupDialog.h" line="64"/>
         <source>Setup Toolbar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../helpers/IToolBarSetupDialog.ui" line="23"/>
+        <location filename="../../../build/src/qmapshack/ui_IToolBarSetupDialog.h" line="65"/>
         <source>Toolbar is visible in Fullscreen-mode</source>
         <translation type="unfinished"></translation>
     </message>
@@ -19680,21 +21388,25 @@ simply type the new time/date.</source>
     <name>ITrkToAreaDialog</name>
     <message>
         <location filename="../gis/trk/ITrkToAreaDialog.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_ITrkToAreaDialog.h" line="101"/>
         <source>Convert to Area</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/ITrkToAreaDialog.ui" line="25"/>
+        <location filename="../../../build/src/qmapshack/ui_ITrkToAreaDialog.h" line="103"/>
         <source>Change Project</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/ITrkToAreaDialog.ui" line="39"/>
+        <location filename="../../../build/src/qmapshack/ui_ITrkToAreaDialog.h" line="106"/>
         <source>Name</source>
         <translation type="unfinished">Naam </translation>
     </message>
     <message>
         <location filename="../gis/trk/ITrkToAreaDialog.ui" line="46"/>
+        <location filename="../../../build/src/qmapshack/ui_ITrkToAreaDialog.h" line="107"/>
         <source>Project</source>
         <translation type="unfinished">Project</translation>
     </message>
@@ -19703,31 +21415,37 @@ simply type the new time/date.</source>
     <name>ITrkToRteDialog</name>
     <message>
         <location filename="../gis/trk/ITrkToRteDialog.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_ITrkToRteDialog.h" line="132"/>
         <source>Convert to Route</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/ITrkToRteDialog.ui" line="22"/>
+        <location filename="../../../build/src/qmapshack/ui_ITrkToRteDialog.h" line="133"/>
         <source>Project</source>
         <translation type="unfinished">Project</translation>
     </message>
     <message>
         <location filename="../gis/trk/ITrkToRteDialog.ui" line="36"/>
+        <location filename="../../../build/src/qmapshack/ui_ITrkToRteDialog.h" line="136"/>
         <source>Change Project</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/ITrkToRteDialog.ui" line="50"/>
+        <location filename="../../../build/src/qmapshack/ui_ITrkToRteDialog.h" line="139"/>
         <source>Name</source>
         <translation type="unfinished">Naam </translation>
     </message>
     <message>
         <location filename="../gis/trk/ITrkToRteDialog.ui" line="73"/>
+        <location filename="../../../build/src/qmapshack/ui_ITrkToRteDialog.h" line="141"/>
         <source>Include sub-points of tracks in converted route.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/ITrkToRteDialog.ui" line="86"/>
+        <location filename="../../../build/src/qmapshack/ui_ITrkToRteDialog.h" line="142"/>
         <source>Enabling this feature leads to routes with many points. Not recommended for devices which have only limited space for saving route points.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -19758,51 +21476,61 @@ of
     <name>IUnitsSetup</name>
     <message>
         <location filename="../units/IUnitsSetup.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IUnitsSetup.h" line="133"/>
         <source>Setup units...</source>
         <translation>Eenheden instellen...</translation>
     </message>
     <message>
         <location filename="../units/IUnitsSetup.ui" line="24"/>
+        <location filename="../../../build/src/qmapshack/ui_IUnitsSetup.h" line="138"/>
         <source>Length unit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../units/IUnitsSetup.ui" line="30"/>
+        <location filename="../../../build/src/qmapshack/ui_IUnitsSetup.h" line="134"/>
         <source>Nautical</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../units/IUnitsSetup.ui" line="44"/>
+        <location filename="../../../build/src/qmapshack/ui_IUnitsSetup.h" line="136"/>
         <source>Metric</source>
         <translation>Metrisch</translation>
     </message>
     <message>
         <location filename="../units/IUnitsSetup.ui" line="51"/>
+        <location filename="../../../build/src/qmapshack/ui_IUnitsSetup.h" line="137"/>
         <source>Aviation (nm, feet)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../units/IUnitsSetup.ui" line="59"/>
+        <location filename="../../../build/src/qmapshack/ui_IUnitsSetup.h" line="141"/>
         <source>Slope unit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../units/IUnitsSetup.ui" line="65"/>
+        <location filename="../../../build/src/qmapshack/ui_IUnitsSetup.h" line="139"/>
         <source>Degrees (°)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../units/IUnitsSetup.ui" line="72"/>
+        <location filename="../../../build/src/qmapshack/ui_IUnitsSetup.h" line="140"/>
         <source>Percent (%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../units/IUnitsSetup.ui" line="102"/>
+        <location filename="../../../build/src/qmapshack/ui_IUnitsSetup.h" line="142"/>
         <source>&lt;b&gt;Note:&lt;/b&gt; For some GUI elements changing the units will not take effect until you restart QMapShack.</source>
         <translation>&lt;b&gt;Notitie:&lt;/b&gt;Na het wijzigingen  van de eenheden is het nodig om QMapShack opnieuw op te starten.</translation>
     </message>
     <message>
         <location filename="../units/IUnitsSetup.ui" line="37"/>
+        <location filename="../../../build/src/qmapshack/ui_IUnitsSetup.h" line="135"/>
         <source>Imperial</source>
         <translation>Imperial</translation>
     </message>
@@ -19811,21 +21539,25 @@ of
     <name>IVrtAdvisoryDialog</name>
     <message>
         <location filename="../helpers/IVrtAdvisoryDialog.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IVrtAdvisoryDialog.h" line="107"/>
         <source>Slow rendering — overview pyramids</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../helpers/IVrtAdvisoryDialog.ui" line="43"/>
+        <location filename="../../../build/src/qmapshack/ui_IVrtAdvisoryDialog.h" line="110"/>
         <source>&lt;b&gt;Current overview situation:&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../helpers/IVrtAdvisoryDialog.ui" line="57"/>
+        <location filename="../../../build/src/qmapshack/ui_IVrtAdvisoryDialog.h" line="111"/>
         <source>&lt;b&gt;After fix:&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../helpers/IVrtAdvisoryDialog.ui" line="81"/>
+        <location filename="../../../build/src/qmapshack/ui_IVrtAdvisoryDialog.h" line="113"/>
         <source>Don&apos;t show this again for this file</source>
         <translation type="unfinished"></translation>
     </message>
@@ -19834,26 +21566,31 @@ of
     <name>IWptIconDialog</name>
     <message>
         <location filename="../helpers/IWptIconDialog.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_IWptIconDialog.h" line="92"/>
         <source>Icons...</source>
         <translation>Iconen...</translation>
     </message>
     <message>
         <location filename="../helpers/IWptIconDialog.ui" line="61"/>
+        <location filename="../../../build/src/qmapshack/ui_IWptIconDialog.h" line="93"/>
         <source>External Icons:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../helpers/IWptIconDialog.ui" line="68"/>
+        <location filename="../../../build/src/qmapshack/ui_IWptIconDialog.h" line="94"/>
         <source>-</source>
         <translation type="unfinished">-</translation>
     </message>
     <message>
         <location filename="../helpers/IWptIconDialog.ui" line="75"/>
+        <location filename="../../../build/src/qmapshack/ui_IWptIconDialog.h" line="95"/>
         <source>...</source>
         <translation type="unfinished">...</translation>
     </message>
     <message>
         <location filename="../helpers/IWptIconDialog.ui" line="88"/>
+        <location filename="../../../build/src/qmapshack/ui_IWptIconDialog.h" line="96"/>
         <source>All custom icons have to be *.bmp or *.png format.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -19862,196 +21599,235 @@ of
     <name>THikingTourSummary</name>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="14"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="363"/>
         <source>Form</source>
         <translation type="unfinished">Formulier</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="20"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="364"/>
         <source>Participants</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="32"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="365"/>
         <source>Weather</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="38"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="366"/>
         <source>rain</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="48"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="367"/>
         <source>sunny</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="58"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="368"/>
         <source>snow</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="68"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="369"/>
         <source>clouds</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="81"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="370"/>
         <source>hot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="91"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="371"/>
         <source>warm</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="101"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="372"/>
         <source>cold</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="111"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="373"/>
         <source>freezing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="121"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="374"/>
         <source>foggy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="128"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="375"/>
         <source>windy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="138"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="376"/>
         <source>humid</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="161"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="377"/>
         <source>hail/soft hail</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="171"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="378"/>
         <source>Character</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="183"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="380"/>
         <source>Rating 5 stars</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="188"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="381"/>
         <source>Rating 4 stars</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="193"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="382"/>
         <source>Rating 3 stars</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="198"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="383"/>
         <source>Rating 2 stars</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="203"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="384"/>
         <source>Rating 1 star</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="211"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="386"/>
         <source>easy hiking</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="218"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="387"/>
         <source>long distance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="225"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="388"/>
         <source>alpine</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="232"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="389"/>
         <source>aborted</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="239"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="390"/>
         <source>large ascend</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="249"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="391"/>
         <source>Rating</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="256"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="392"/>
         <source>climbing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="263"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="393"/>
         <source>via ferrata</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="273"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="394"/>
         <source>Equipment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="279"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="395"/>
         <source>camping gear</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="286"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="396"/>
         <source>ski</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="293"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="397"/>
         <source>snow shoes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="300"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="398"/>
         <source>climbing gear</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="307"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="399"/>
         <source>ferrata gear</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="314"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="400"/>
         <source>night gear</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="321"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="401"/>
         <source>crampon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="328"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="402"/>
         <source>ice pick</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="338"/>
+        <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary.h" line="403"/>
         <source>Details</source>
         <translation type="unfinished"></translation>
     </message>

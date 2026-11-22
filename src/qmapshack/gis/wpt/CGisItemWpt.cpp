@@ -35,6 +35,7 @@
 #include "gis/wpt/CScrOptWpt.h"
 #include "gis/wpt/CScrOptWptRadius.h"
 #include "gis/wpt/CSetupIconAndName.h"
+#include "helpers/CClock.h"
 #include "helpers/CDraw.h"
 #include "helpers/CSettings.h"
 #include "helpers/CWptIconManager.h"
@@ -65,7 +66,7 @@ CGisItemWpt::CGisItemWpt(const QPointF& pos, qreal ele, const QDateTime& time, c
 
 /// used to add a new waypoint
 CGisItemWpt::CGisItemWpt(const QPointF& pos, const QString& name, const QString& icon, IGisProject* project)
-    : CGisItemWpt(pos, NOFLOAT, QDateTime::currentDateTimeUtc(), name, icon, project) {
+    : CGisItemWpt(pos, NOFLOAT, CClock::nowUtc(), name, icon, project) {
   flags = eFlagCreatedInQms | eFlagWriteAllowed;
   qreal ele = CMainWindow::self().getElevationAt(pos * DEG_TO_RAD, false);
   wpt.ele = (ele == NOFLOAT) ? NOINT : qRound(ele);
@@ -82,7 +83,7 @@ CGisItemWpt::CGisItemWpt(const QPointF& pos, const CGisItemWpt& parentWpt, IGisP
   *this = parentWpt;
   wpt.lon = pos.x();
   wpt.lat = pos.y();
-  wpt.time = QDateTime::currentDateTimeUtc();
+  wpt.time = CClock::nowUtc();
 
   key.clear();
   history.events.clear();

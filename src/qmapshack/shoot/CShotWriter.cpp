@@ -21,12 +21,14 @@
 #include <QAbstractAnimation>
 #include <QApplication>
 #include <QDebug>
+#include <QDialog>
 #include <QDir>
 #include <QElapsedTimer>
 #include <QEventLoop>
 #include <QFileInfo>
 #include <QLayout>
 #include <QSaveFile>
+#include <QThread>
 #include <QWidget>
 #include <algorithm>
 
@@ -60,6 +62,25 @@ bool holdsCanvas(QWidget* w) { return !canvasesIn(w).isEmpty(); }
 bool drawComplete(QWidget* w) {
   const QList<CCanvas*>& canvases = canvasesIn(w);
   return std::all_of(canvases.begin(), canvases.end(), [](const CCanvas* canvas) { return canvas->isDrawComplete(); });
+}
+
+/** @return false when a worker thread of @p w's dialog is still running after kTimeoutMs */
+bool dialogThreadsFinished(QWidget* w) {
+  // A main window's threads are its maps', which the canvas wait covers.
+  QDialog* dialog = qobject_cast<QDialog*>(w->window());
+  if (nullptr == dialog) {
+    return true;
+  }
+  const QList<QThread*>& threads = dialog->findChildren<QThread*>();
+  const bool finished = CShotWait::waitFor(
+      [&threads]() {
+        return std::none_of(threads.begin(), threads.end(), [](const QThread* t) { return t->isRunning(); });
+      },
+      kTimeoutMs, kPollMs);
+  if (!finished) {
+    qWarning() << "shoot: a task of the dialog did not finish within" << kTimeoutMs << "ms";
+  }
+  return finished;
 }
 }  // namespace
 
@@ -138,6 +159,11 @@ QImage CShotWriter::render(QWidget* w, const QSize& size) {
     settle(w);
   }
 
+  if (!dialogThreadsFinished(w)) {
+    return QImage();
+  }
+  // A finished worker's last signals are queued: settle once more to show them.
+  settle(w);
   if (holdsCanvas(w) && !settleStable(w)) {
     return QImage();
   }
@@ -149,6 +175,11 @@ QHash<const QWidget*, QImage> CShotWriter::renderAll(const QList<QWidget*>& part
   QHash<const QWidget*, bool> mapsComplete;
   QHash<const QWidget*, QImage> images;
   for (QWidget* w : parts) {
+    settle(w);
+    if (!dialogThreadsFinished(w)) {
+      images.insert(w, QImage());
+      continue;
+    }
     settle(w);
     if (holdsCanvas(w)) {
       QWidget* window = w->window();

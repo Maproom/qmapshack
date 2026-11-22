@@ -304,6 +304,7 @@ void CShotDocLauncher::stopState() {
 }
 
 void CShotDocLauncher::onStateReady(const QString& text) {
+  stateText = text;
   updateBusy();
   refreshPanel(text);
   // Not on connect: the fixture is not loaded then.
@@ -372,6 +373,7 @@ void CShotDocLauncher::onStateEnded(CShotDocState::end_e how, const QString& det
   // Its answers never come.
   afterDrift = nullptr;
   marking = false;
+  stateText.clear();
   // Only the current state emits: a replaced one was stopped.
   if (!state.isNull()) {
     state->deleteLater();
@@ -603,8 +605,11 @@ void CShotDocLauncher::showShot(const QString& id) {
 
   selectedScenario = shot["scenario"].toString();
   if (!state.isNull() && state->scenario() == selectedScenario) {
-    refreshPanel(QString("The application is in %1. Point at what to photograph and press Ctrl+Shift+F9.")
-                     .arg(CShotFiles::label(selectedScenario)));
+    // The state's own words: a scenario that did not replay must keep saying so.
+    refreshPanel(!stateText.isEmpty()
+                     ? stateText
+                     : QString("The application is in %1. Point at what to photograph and press Ctrl+Shift+F9.")
+                           .arg(CShotFiles::label(selectedScenario)));
     sendSelection();
     return;
   }

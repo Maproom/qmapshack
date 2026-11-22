@@ -28,6 +28,7 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/CKnownExtension.h"
 #include "gis/trk/CPropertyTrk.h"
+#include "helpers/CClock.h"
 
 void CGisItemTrk::filterReducePoints(qreal dist) {
   QVector<pointDP> line;
@@ -276,7 +277,7 @@ void CGisItemTrk::filterObscureDate(int delta) {
   } else {
     QDateTime timestamp = timeStart;
     if (!timestamp.isValid()) {
-      timestamp = QDateTime::currentDateTimeUtc();
+      timestamp = CClock::nowUtc();
     }
 
     for (CTrackData::trkpt_t& pt : trk) {
@@ -293,7 +294,7 @@ void CGisItemTrk::filterSpeed(qreal speed)  // Constant speed
 {
   QDateTime timestamp = timeStart;
   if (!timestamp.isValid()) {
-    timestamp = QDateTime::currentDateTimeUtc();
+    timestamp = CClock::nowUtc();
   }
 
   for (CTrackData::trkpt_t& pt : trk) {
@@ -320,7 +321,7 @@ void CGisItemTrk::filterSpeed(const CFilterSpeedCycle::cycling_type_t& cyclingTy
 
   QDateTime timestamp = timeStart;
   if (!timestamp.isValid()) {
-    timestamp = QDateTime::currentDateTimeUtc();
+    timestamp = CClock::nowUtc();
   }
 
   qreal speed = 0;
@@ -368,7 +369,7 @@ void CGisItemTrk::filterSpeed(const CFilterSpeedHike::hiking_type_t& hikingType)
 
   QDateTime timestamp = timeStart;
   if (!timestamp.isValid()) {
-    timestamp = QDateTime::currentDateTimeUtc();
+    timestamp = CClock::nowUtc();
   }
 
   // Curve algorithm based on carloscoi curves

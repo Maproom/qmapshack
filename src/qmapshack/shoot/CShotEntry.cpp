@@ -35,6 +35,7 @@
 
 #include "CMainWindow.h"
 #include "gis/CGisListWks.h"
+#include "helpers/CClock.h"
 #include "map/CMapDraw.h"
 #include "setup/CAppOpts.h"
 #include "shoot/CShotApplication.h"
@@ -220,6 +221,8 @@ bool CShotEntry::prepare(const CAppOpts& opts) {
   CShotApplication::setTrace(opts.debug);
   pinAppearance(opts.colorscheme);
   registerFonts();
+  // New items show their creation time; a fixed one keeps images the same in every run.
+  CClock::pin(QDateTime(QDate(2026, 7, 15), QTime(9, 30), QTimeZone::UTC));
 
   if (!opts.doc.shootDir.isEmpty()) {
     // The shot file lies in the checkout: tiles are kept across runs. The workspace sits beside the output, which

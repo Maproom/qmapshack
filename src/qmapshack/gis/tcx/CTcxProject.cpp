@@ -26,6 +26,7 @@
 #include "gis/CGisListWks.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
+#include "helpers/CClock.h"
 #include "helpers/CSelectCopyAction.h"
 #include "misc.h"
 #include "version.h"
@@ -300,7 +301,7 @@ void CTcxProject::loadCourse(const QDomNode& courseRootNode) {
                                         // "turn left", "turn right", etc... See list in
                                         // http://www8.garmin.com/xmlschemas/TrainingCenterDatabasev2.xsd)
 
-      new CGisItemWpt(QPointF(lon, lat), ele, QDateTime::currentDateTimeUtc(), name, icon,
+      new CGisItemWpt(QPointF(lon, lat), ele, CClock::nowUtc(), name, icon,
                       this);  // 1 TCX course point gives 1 GPX waypoint
     }
   }

@@ -167,6 +167,8 @@ class CShotDocLauncher : public QObject {
   /** The writer's selection; a new image is taken in `selectedScenario`. */
   QString selectedScenario;
   QString selectedShot;
+  /** What the running state said on entering its scenario, a failed replay included; empty without a state. */
+  QString stateText;
   bool ending = false;
 
   CShotDocPanel* panel = nullptr;

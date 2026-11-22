@@ -29,6 +29,7 @@
 #include "gis/db/IDB.h"
 #include "gis/db/macros.h"
 #include "gis/prj/CDetailsPrj.h"
+#include "helpers/CClock.h"
 #include "helpers/CProgressDialog.h"
 CDBProject::CDBProject(type_e type, CGisListWks* parent) : IGisProject(type, "", parent), id(0) {
   icon = QIcon("://icons/DBProject.svgt");
@@ -63,7 +64,7 @@ CDBProject::CDBProject(const QString& dbName, quint64 id, CGisListWks* parent)
 
     // Still no valid date? Bad as we need it to produce an unique key.
     if (!metadata.time.isValid()) {
-      metadata.time = QDateTime::currentDateTimeUtc();
+      metadata.time = CClock::nowUtc();
     }
 
     query.prepare("UPDATE folders SET keyqms=:keyqms WHERE id=:id");

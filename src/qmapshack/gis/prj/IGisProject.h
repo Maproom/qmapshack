@@ -28,6 +28,7 @@
 #include "gis/IWksItem.h"
 #include "gis/search/CProjectFilterItem.h"
 #include "gis/search/CSearch.h"
+#include "helpers/CClock.h"
 #include "helpers/CSelectCopyAction.h"
 
 class CGisListWks;
@@ -67,7 +68,7 @@ class IGisProject : public IWksItem {
   };
 
   struct metadata_t {
-    metadata_t() : time(QDateTime::currentDateTimeUtc()) {}
+    metadata_t() : time(CClock::nowUtc()) {}
     QString name;
     QString desc;
     person_t author;

@@ -20,6 +20,9 @@ The writer's guide is `doc/WRITING_DOCS.md`: short, facts only, updated with eve
   `CQmsStyle::pinThemeIndependentHints()` and registers the bundled DejaVu
   fonts (offscreen on Windows has no font database). It fails without `--config`, and `main()`
   exits 1.
+- **`prepare()` pins `CClock` to 2026-07-15 09:30 UTC**: a new waypoint's Date/Time, history events and project
+  times are the same in every run. Realtime, tile cache, BRouter timing, search and the Lost&Found age keep the real
+  clock.
 - **A doc run skips the splash and `CSingleInstanceProxy`**, which would hand the arguments to a
   running QMapShack and exit.
 - **`pinEnvironment()` sets `QT_QPA_PLATFORMTHEME=generic` except on Windows**, where a demo run
@@ -44,6 +47,9 @@ The writer's guide is `doc/WRITING_DOCS.md`: short, facts only, updated with eve
   mid-render passes with the load indicator in it. It skips a canvas not `isVisibleTo(w)` and
   refuses one that is but not `isVisible()` (a hidden canvas never clears `needsRedraw`). It also
   refuses an image with any `failedTiles()`.
+- **A dialog's image waits for the dialog's `QThread` children** (`dialogThreadsFinished()`), then settles again for
+  their queued signals: a worker still running when the run ends aborts it ("QThread: Destroyed while thread is still
+  running"). A main window's threads are its maps', left to the canvas wait.
 - **`processEvents(flags, ms)` does not wait**; wait with `CShotWait::wait()`/`waitFor()`, a `QEventLoop` quit by a
   `QTimer` without user input.
 - **A main window image depends on its resize history**: a window's minimum silently wins, and
@@ -264,6 +270,18 @@ The writer's guide is `doc/WRITING_DOCS.md`: short, facts only, updated with eve
   dropped if any step was made meanwhile, so a viewport or a surface's child stays its owner's. Named
   only then: a completer's viewport cannot be named and needs no name. Moved past the drag distance it
   is no step and warns. The right button is the context menu request, a `menu` step once one answers.
+- **A written scenario picks a project in `ISelectProjectDialog` by typing a new name with `enter`**, as the quick
+  start pages do: a `click` on a list row does not replay, and `select` leaves **OK** disabled (cause unchecked).
+- **`CDetailsWpt`'s symbol button is named after the symbol** (`toolIcon->setObjectName()`): a mark addresses it
+  as `Waypoint` while the fixture's last symbol is that.
+- **Open: `move` steps after the waypoint bar's Move button do not reach `CMouseMoveWpt`**: the image shows
+  "0.0 m", though the moves reach the canvas (`-v`); a click then drops the waypoint correctly.
+- **A scenario opens an item view's context menu with a `menu` step**, then `trigger`s the entry; a right `click` on
+  the view fails ("the row has no such button"). Without `row`, `at` is a fraction of the viewport.
+- **Which tab of a dock tab stack shows comes from the base**: in `[MainWindow] state` each stack's `\xfa` is followed
+  by its current index as four bytes (page 7: Routing = 1 in the upper stack; page 10: Database = 2 in the lower).
+  A step on a hidden tab's widget fails with "something else covers the place".
+- **`QFileDialog` has no exposure**: a save or open file dialog cannot be shot.
 - **An item view's `select` and `dclick` carry the modifiers**: Ctrl and Shift extend a selection.
 - **A menu entry is addressed by its action's `objectName`, never its text**, a menu by its own
   `objectName`. Every new entry needs one: without it the recorder warns and drops the step.

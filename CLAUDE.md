@@ -160,6 +160,8 @@ those in) or guard the block with `// clang-format off` as `CMainWindow.cpp` doe
   ticket/bug/PR history behind it.
 - **Pass `QString` and complex objects (`QVector`, `QImage`, …) by `const&`** unless the function
   mutates them. Plain `T&` is for genuine out-parameters only.
+- **A time stamped on an item, project or filter result comes from `CClock::nowUtc()`** (`helpers/CClock.h`),
+  never `QDateTime::currentDateTime*()`: a documentation run pins it so images stay the same.
 - **Prefer static `QFileInfo::exists(path)`** over `QFileInfo(path).exists()` for a bare existence
   check.
 - **Prefer Qt fixed-width typedefs**: `qint32`/`quint32`, `qreal`, `qsizetype` for Qt container

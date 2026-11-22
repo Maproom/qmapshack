@@ -591,6 +591,7 @@ set( HDRS
     grid/CGridSetup.h
     grid/CProjWizard.h
     grid/mitab.h
+    helpers/CClock.h
     helpers/CDraw.h
     helpers/CElevationDialog.h
     helpers/CFileExt.h

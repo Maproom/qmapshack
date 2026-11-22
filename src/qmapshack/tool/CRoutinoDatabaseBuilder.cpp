@@ -21,6 +21,8 @@
 #include <QtWidgets>
 
 #include "CMainWindow.h"
+#include "gis/rte/router/CRouterRoutino.h"
+#include "gis/rte/router/routino/CRouterRoutinoPathSetup.h"
 #include "helpers/CSettings.h"
 #include "setup/IAppSetup.h"
 #include "svgticon/CSvgtIcon.h"
@@ -35,26 +37,34 @@ CRoutinoDatabaseBuilder::CRoutinoDatabaseBuilder(QWidget* parent) : IToolShell(p
   setObjectName(tr("Create Routino Database"));
 
   connect(toolSourceFiles, &QToolButton::clicked, this, &CRoutinoDatabaseBuilder::slotSelectSourceFiles);
-  connect(toolTargetPath, &QToolButton::clicked, this, &CRoutinoDatabaseBuilder::slotSelectTargetPath);
+  connect(toolTargetPath, &QToolButton::clicked, this, &CRoutinoDatabaseBuilder::slotSetupPaths);
+  connect(comboTargetPath, &QComboBox::currentIndexChanged, this, &CRoutinoDatabaseBuilder::enabelStartButton);
   connect(pushStart, &QPushButton::clicked, this, &CRoutinoDatabaseBuilder::slotStart);
   connect(lineTargetPrefix, &QLineEdit::textChanged, this, &CRoutinoDatabaseBuilder::enabelStartButton);
   connect(labelHelp, &QLabel::linkActivated, this, &CRoutinoDatabaseBuilder::slotLinkActivated);
+  // a prefix is a file name: a path in it would build and clean up outside the target path
+  lineTargetPrefix->setValidator(new QRegularExpressionValidator(QRegularExpression("[^/\\\\]+"), this));
+  comboTargetPath->setPlaceholderText(tr("Add a path with the button on the left"));
 
   pushStart->setDisabled(true);
 
   SETTINGS;
-  QString path = CMainWindow::self().getRoutinoPath();
-  if (path.isEmpty()) {
-    path = QDir::homePath();
+  fillPaths();
+  const qint32 idx = comboTargetPath->findText(cfg.value("RoutinoDatabaseBuilder/targetPath", QString()).toString());
+  if (idx >= 0) {
+    comboTargetPath->setCurrentIndex(idx);
   }
-  path = cfg.value("RoutinoDatabaseBuilder/targetPath", path).toString();
-
-  labelTargetPath->setText(path);
 
   enabelStartButton();
 }
 
-CRoutinoDatabaseBuilder::~CRoutinoDatabaseBuilder() {}
+CRoutinoDatabaseBuilder::~CRoutinoDatabaseBuilder() {
+  // planetsplitter must end before buildDir is removed: Windows cannot delete open files
+  if (cmd.state() != QProcess::NotRunning) {
+    cmd.kill();
+    cmd.waitForFinished();
+  }
+}
 
 void CRoutinoDatabaseBuilder::slotSelectSourceFiles() {
   SETTINGS;
@@ -77,20 +87,24 @@ void CRoutinoDatabaseBuilder::slotSelectSourceFiles() {
   enabelStartButton();
 }
 
-void CRoutinoDatabaseBuilder::slotSelectTargetPath() {
-  SETTINGS;
-  QString path = cfg.value("RoutinoDatabaseBuilder/targetPath", QDir::homePath()).toString();
+void CRoutinoDatabaseBuilder::fillPaths() {
+  const QString current = comboTargetPath->currentText();
+  comboTargetPath->blockSignals(true);
+  comboTargetPath->clear();
+  comboTargetPath->addItems(CRouterRoutino::self().getPaths());
+  comboTargetPath->setCurrentIndex(qMax(0, comboTargetPath->findText(current)));
+  comboTargetPath->blockSignals(false);
+  enabelStartButton();
+}
 
-  path = QFileDialog::getExistingDirectory(this, tr("Select target path..."), path);
-  if (path.isEmpty()) {
+void CRoutinoDatabaseBuilder::slotSetupPaths() {
+  QStringList paths = CRouterRoutino::self().getPaths();
+  CRouterRoutinoPathSetup dlg(paths);
+  if (dlg.exec() != QDialog::Accepted) {
     return;
   }
-
-  cfg.setValue("RoutinoDatabaseBuilder/targetPath", path);
-
-  labelTargetPath->setText(path);
-
-  enabelStartButton();
+  CRouterRoutino::self().setPaths(paths);
+  fillPaths();
 }
 
 void CRoutinoDatabaseBuilder::enabelStartButton() {
@@ -109,7 +123,7 @@ void CRoutinoDatabaseBuilder::enabelStartButton() {
   if (listWidget->count() == 0) {
     return;
   }
-  if (labelTargetPath->text() == "-") {
+  if (comboTargetPath->currentText().isEmpty()) {
     return;
   }
 
@@ -121,6 +135,13 @@ void CRoutinoDatabaseBuilder::enabelStartButton() {
 }
 
 void CRoutinoDatabaseBuilder::slotStart() {
+  // the registered paths may have changed since this tab was opened
+  const QString wanted = comboTargetPath->currentText();
+  fillPaths();
+  if (comboTargetPath->currentText() != wanted) {
+    stdErr(tr("%1 is no longer a Routino path. Select the target again.").arg(wanted));
+    return;
+  }
   pushStart->setDisabled(true);
 
   sourceFiles.clear();
@@ -130,27 +151,67 @@ void CRoutinoDatabaseBuilder::slotStart() {
   }
 
   targetPrefix = lineTargetPrefix->text();
-  targetPath = labelTargetPath->text();
+  targetPath = comboTargetPath->currentText();
+  SETTINGS;
+  cfg.setValue("RoutinoDatabaseBuilder/targetPath", targetPath);
   first = true;
   last = false;
 
   textBrowser->clear();
 
+  buildDir = std::make_unique<QTemporaryDir>(QDir(targetPath).absoluteFilePath(".routino-build-XXXXXX"));
+  if (!buildDir->isValid()) {
+    stdErr(tr("Cannot create a folder in %1.").arg(targetPath));
+    pushStart->setEnabled(true);
+    return;
+  }
+
   slotFinished(0, QProcess::NormalExit);
+}
+
+bool CRoutinoDatabaseBuilder::moveIntoTarget() {
+  const QDir target(targetPath);
+  const QFileInfoList& files = QDir(buildDir->path()).entryInfoList({targetPrefix + "-*.mem"}, QDir::Files);
+  if (files.isEmpty()) {
+    stdErr(tr("planetsplitter wrote no database."));
+    return false;
+  }
+  for (const QFileInfo& file : files) {
+    const QString& to = target.absoluteFilePath(file.fileName());
+    // QFile::rename() does not overwrite
+    if (QFile::exists(to) && !QFile::remove(to)) {
+      stdErr(tr("Cannot replace %1. Is the database in use? Restart QMapShack and build it again.").arg(to));
+      return false;
+    }
+    if (!QFile::rename(file.absoluteFilePath(), to)) {
+      stdErr(tr("Cannot move %1 to %2.").arg(file.absoluteFilePath(), targetPath));
+      return false;
+    }
+  }
+  buildDir.reset();
+  return true;
 }
 
 void CRoutinoDatabaseBuilder::finished(int exitCode, QProcess::ExitStatus status) {
   if (last) {
+    pushStart->setEnabled(true);
+    if (!moveIntoTarget()) {
+      buildDir->setAutoRemove(false);
+      stdErr(tr("The built files stay in %1.").arg(buildDir->path()));
+      textBrowser->setTextColor(CUiTheme::foreground(CUiTheme::Role::eError));
+      textBrowser->append(tr("!!! failed !!!\n"));
+      return;
+    }
     textBrowser->setTextColor(CUiTheme::foreground(CUiTheme::Role::eOk));
     textBrowser->append(tr("!!! done !!!\n"));
-    pushStart->setEnabled(true);
+    CRouterRoutino::self().reloadDatabases();
     return;
   }
 
   IAppSetup* instance = IAppSetup::getPlatformInstance();
   if (sourceFiles.isEmpty()) {
     QStringList args;
-    args << QString("--dir=%1").arg(targetPath);
+    args << QString("--dir=%1").arg(buildDir->path());
     args << QString("--prefix=%1").arg(targetPrefix);
     args << QString("--tagging=%1").arg(instance->routinoPath("tagging.xml"));
     args << "--process-only";
@@ -161,7 +222,7 @@ void CRoutinoDatabaseBuilder::finished(int exitCode, QProcess::ExitStatus status
     last = true;
   } else {
     QStringList args;
-    args << QString("--dir=%1").arg(targetPath);
+    args << QString("--dir=%1").arg(buildDir->path());
     args << QString("--prefix=%1").arg(targetPrefix);
     args << QString("--tagging=%1").arg(instance->routinoPath("tagging.xml"));
 

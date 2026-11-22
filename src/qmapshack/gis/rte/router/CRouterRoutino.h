@@ -24,6 +24,7 @@
 #include <QPoint>
 
 #include "gis/rte/router/IRouter.h"
+#include "helpers/CFolderWatcher.h"
 #include "ui_IRouterRoutino.h"
 
 class CProgressDialog;
@@ -44,6 +45,12 @@ class CRouterRoutino : public IRouter, private Ui::IRouterRoutino {
   static QPointer<CProgressDialog> progress;
 
   void setupPath(const QString& path);
+  const QStringList& getPaths() const { return dbPaths; }
+  /** @brief Register these paths only, and rebuild the database list from them */
+  void setPaths(const QStringList& paths);
+
+  /** @brief Rebuild the database list from the registered paths, as after adding or removing a database */
+  void reloadDatabases();
 
  private slots:
   void slotSetupPaths();
@@ -59,6 +66,7 @@ class CRouterRoutino : public IRouter, private Ui::IRouterRoutino {
 
   QStringList dbPaths;
   QString currentProfilesPath;
+  CFolderWatcher folderWatcher{QStringList{"*.mem"}};
 
   QMutex mutex;
 };

@@ -19,7 +19,8 @@
 #ifndef CROUTINODATABASEBUILDER_H
 #define CROUTINODATABASEBUILDER_H
 
-#include <QTemporaryFile>
+#include <QTemporaryDir>
+#include <memory>
 
 #include "tool/IToolShell.h"
 #include "ui_IRoutinoDatabaseBuilder.h"
@@ -32,7 +33,7 @@ class CRoutinoDatabaseBuilder : public IToolShell, private Ui::IRoutinoDatabaseB
 
  private slots:
   void slotSelectSourceFiles();
-  void slotSelectTargetPath();
+  void slotSetupPaths();
   void slotStart();
 
   void enabelStartButton();
@@ -40,6 +41,10 @@ class CRoutinoDatabaseBuilder : public IToolShell, private Ui::IRoutinoDatabaseB
 
  private:
   void finished(int exitCode, QProcess::ExitStatus status) override;
+  /** @return false if a built file could not replace the one in the target path */
+  bool moveIntoTarget();
+  /** @brief Offer Routino's registered paths as targets: a database built elsewhere would not be listed */
+  void fillPaths();
 
   bool first = false;
   bool tainted = false;
@@ -48,6 +53,8 @@ class CRoutinoDatabaseBuilder : public IToolShell, private Ui::IRoutinoDatabaseB
   QStringList sourceFiles;
   QString targetPrefix;
   QString targetPath;
+  /** where planetsplitter writes: Routino and its folder watcher look at the target path's files only */
+  std::unique_ptr<QTemporaryDir> buildDir;
 
   QString planetsplitter;
 };

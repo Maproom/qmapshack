@@ -405,6 +405,10 @@ void CPoiFilePOI::addTreeWidgetItems(QTreeWidget* widget) {
       categoryMap[categoryID] = new CPoiCategory(categoryName, categoryID, widget);
     }
   }
+
+  // an open connection would keep reading a file that was replaced since
+  query = QSqlQuery();
+  QSqlDatabase::removeDatabase(filename + "_widget");
 }
 
 void CPoiFilePOI::slotCheckedStateChanged(QTreeWidgetItem* item) {

@@ -26,14 +26,16 @@
 
 /**
    @brief Emits sigChanged() once the files matching the filters changed and all files in the folders stayed unchanged
-          for one poll; silent while a modal window or a progress dialog is open
+          for one poll; silent while a modal window or a progress dialog is open. Missing folders are checked until
+          they appear, e.g. on a disk mounted later. A mount point itself is an existing empty folder while
+          unmounted, so mounting it is not noticed: configure a folder on the disk.
  */
 class CFolderWatcher : public QObject {
   Q_OBJECT
  public:
   explicit CFolderWatcher(const QStringList& nameFilters, QObject* parent = nullptr);
 
-  /** @brief Watch these folders and take their files as seen; missing folders are skipped */
+  /** @brief Watch these folders and take their files as seen; missing folders are watched once they appear */
   void setPaths(const QStringList& paths);
 
  signals:
@@ -42,17 +44,23 @@ class CFolderWatcher : public QObject {
  private slots:
   void slotDirectoryChanged();
   void slotPoll();
+  void slotCheckMissing();
 
  private:
   /** @return path, size and modification time of each file matching @p filters, all files if empty */
   QStringList snapshot(const QStringList& filters) const;
+  /** @brief Watch the existing folders of #configured, check the missing ones by timer; @return true if the watched
+   * folders changed */
+  bool updateWatch();
 
   QFileSystemWatcher watcher;
   QTimer timerPoll;
+  QTimer timerMissing;
   const QStringList nameFilters;
-  QStringList paths;
-  QStringList known;  /**< the matching files last reported or seen by setPaths() */
-  QStringList polled; /**< all files at the last poll */
+  QStringList configured; /**< the folders as given to setPaths() */
+  QStringList paths;      /**< the folders of #configured that exist and are watched */
+  QStringList known;      /**< the matching files last reported or seen by setPaths() */
+  QStringList polled;     /**< all files at the last poll */
 };
 
 #endif  // CFOLDERWATCHER_H

@@ -714,6 +714,15 @@ Used by the BRouter installer only.
 
 ---
 
+## Folder watcher — `CFolderWatcher`
+
+Maps, DEMs, POIs, Routino and surface DBs reload through it. `QFileSystemWatcher` never adds a missing
+path and drops a folder once it is removed or unmounted, even if it is back already; `updateWatch()`
+re-adds against `watcher.directories()` and a timer checks missing folders until they appear. A
+configured mount point stays an empty folder while unmounted, so its mount is not noticed.
+Test mounts without root through FUSE: `gocryptfs -init`, mount and `fusermount -u` a scratch folder
+while `build/bin/qmapshack -n -d -c <conf>` runs offscreen (`unshare`/`bwrap` are blocked by AppArmor).
+
 ## Subsystem notes elsewhere
 
 Loaded when files there are touched; read them before working on the subsystem from outside.

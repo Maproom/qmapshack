@@ -26,6 +26,8 @@
 #include <QThreadPool>
 #include <QTimer>
 
+#include "helpers/CFolderWatcher.h"
+
 /**
    @brief Knows the surface databases (see CSurfaceDb) in the configured paths
 
@@ -109,6 +111,7 @@ class CSurfaceDbManager : public QObject {
   QList<db_t> databases;
   QThreadPool pool;
   QTimer timerCanvasUpdate;
+  CFolderWatcher folderWatcher;
 };
 
 #endif  // CSURFACEDBMANAGER_H

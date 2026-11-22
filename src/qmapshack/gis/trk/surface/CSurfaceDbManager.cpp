@@ -30,7 +30,7 @@
 #include "misc.h"
 #include "setup/IAppSetup.h"
 
-CSurfaceDbManager::CSurfaceDbManager() {
+CSurfaceDbManager::CSurfaceDbManager() : folderWatcher({"*." + CSurfaceDbBuilder::suffix()}) {
   SETTINGS;
   if (cfg.contains("Surface/paths")) {
     paths = cfg.value("Surface/paths").toStringList();
@@ -48,6 +48,9 @@ CSurfaceDbManager::CSurfaceDbManager() {
   timerCanvasUpdate.setSingleShot(true);
   timerCanvasUpdate.setInterval(200);
   connect(&timerCanvasUpdate, &QTimer::timeout, this, [] { CCanvas::triggerCompleteUpdate(CCanvas::eRedrawGis); });
+
+  // A database built by qms_surfacedb or copied in; the built-in builder rescans by itself.
+  connect(&folderWatcher, &CFolderWatcher::sigChanged, this, &CSurfaceDbManager::rescan);
 
   rescan();
 }
@@ -103,6 +106,7 @@ void CSurfaceDbManager::setActive(const QString& file, bool yes) {
 }
 
 void CSurfaceDbManager::rescan() {
+  folderWatcher.setPaths(paths);
   QList<db_t> found;
   QStringList scanned;
   for (const QString& path : std::as_const(paths)) {

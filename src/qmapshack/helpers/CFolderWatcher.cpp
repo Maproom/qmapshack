@@ -33,35 +33,63 @@ constexpr qint32 kPollMs = 5000;
 CFolderWatcher::CFolderWatcher(const QStringList& nameFilters, QObject* parent)
     : QObject(parent), nameFilters(nameFilters) {
   timerPoll.setInterval(kPollMs);
+  timerMissing.setInterval(kPollMs);
   connect(&watcher, &QFileSystemWatcher::directoryChanged, this, &CFolderWatcher::slotDirectoryChanged);
   connect(&timerPoll, &QTimer::timeout, this, &CFolderWatcher::slotPoll);
+  connect(&timerMissing, &QTimer::timeout, this, &CFolderWatcher::slotCheckMissing);
 }
 
 void CFolderWatcher::setPaths(const QStringList& newPaths) {
+  configured = newPaths;
+  updateWatch();
+  // A poll still running keeps going: a copy may not be finished yet.
+  known = snapshot(nameFilters);
+}
+
+bool CFolderWatcher::updateWatch() {
   QStringList existing;
-  for (const QString& path : newPaths) {
+  bool missing = false;
+  for (const QString& path : std::as_const(configured)) {
     const QFileInfo fi(path);
-    if (fi.isDir() && !existing.contains(fi.absoluteFilePath())) {
+    if (!fi.isDir()) {
+      missing = true;
+    } else if (!existing.contains(fi.absoluteFilePath())) {
       existing << fi.absoluteFilePath();
     }
   }
 
-  if (existing != paths) {
-    const QStringList& watched = watcher.directories();
-    if (!watched.isEmpty()) {
-      watcher.removePaths(watched);
+  if (missing) {
+    if (!timerMissing.isActive()) {
+      timerMissing.start();
     }
-    paths = existing;
-    if (!paths.isEmpty()) {
-      const QStringList& failed = watcher.addPaths(paths);
-      if (!failed.isEmpty()) {
-        qWarning() << "Changes in these folders are noticed only at the next start:" << failed;
-      }
-    }
+  } else {
+    timerMissing.stop();
   }
 
-  // A poll still running keeps going: a copy may not be finished yet.
-  known = snapshot(nameFilters);
+  // Qt drops a folder once it is removed or unmounted, even if it is back already
+  if (existing == paths && watcher.directories().size() == paths.size()) {
+    return false;
+  }
+
+  const QStringList& watched = watcher.directories();
+  if (!watched.isEmpty()) {
+    watcher.removePaths(watched);
+  }
+  paths = existing;
+  if (!paths.isEmpty()) {
+    const QStringList& failed = watcher.addPaths(paths);
+    if (!failed.isEmpty()) {
+      qWarning() << "Changes in these folders are noticed only at the next start:" << failed;
+    }
+  }
+  return true;
+}
+
+void CFolderWatcher::slotCheckMissing() {
+  // known stays: the poll reports the files of a folder that appeared once they are complete
+  if (updateWatch()) {
+    slotDirectoryChanged();
+  }
 }
 
 void CFolderWatcher::slotDirectoryChanged() {
@@ -73,6 +101,12 @@ void CFolderWatcher::slotDirectoryChanged() {
 }
 
 void CFolderWatcher::slotPoll() {
+  // a folder that vanished or appeared since the last poll: its files must settle first
+  if (updateWatch()) {
+    polled = snapshot({});
+    return;
+  }
+
   // all files: tiles beside a .vrt must be complete too
   const QStringList& all = snapshot({});
   // a progress dialog runs nested event loops even while it is not shown yet

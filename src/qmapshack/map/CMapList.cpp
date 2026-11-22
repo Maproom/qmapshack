@@ -334,13 +334,14 @@ void CMapList::slotMapHonk() {
   }
 }
 
-void CMapList::slotReloadMaps() {
+void CMapList::resetDelegate() {
   CMapItemDelegate* delegate = dynamic_cast<CMapItemDelegate*>(treeWidget->itemDelegate());
   if (delegate != nullptr) {
     delegate->reset();
   }
-  CMapDraw::setupMapPath(CMapDraw::getMapPaths());
 }
+
+void CMapList::slotReloadMaps() { CMapDraw::reloadMaps(); }
 
 void CMapList::slotFilter(const QString& str) {
   actionClearFilter->setIcon(str.isEmpty() ? QIcon("://icons/Filter.svgt") : QIcon("://icons/Cancel.svgt"));

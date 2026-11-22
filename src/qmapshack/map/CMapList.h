@@ -95,6 +95,9 @@ class CMapList : public QWidget, private Ui::IMapList {
    */
   void updateHelpText();
 
+  /** @brief Drop the cached icons and animation state of all rows, before the list is rebuilt */
+  void resetDelegate();
+
   /**
    * @brief Add map item to the list
    *

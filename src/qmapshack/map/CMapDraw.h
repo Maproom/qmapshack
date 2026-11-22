@@ -74,6 +74,8 @@ class CMapDraw : public IDrawContext {
   static void setupMapPath();
   static void setupMapPath(const QString& path);
   static void setupMapPath(const QStringList& paths);
+  /** @brief Rebuild the map list of every view from the registered paths, as after adding or removing a map file */
+  static void reloadMaps();
   static void saveMapPath(QSettings& cfg);
   static void loadMapPath(QSettings& cfg);
   static const QStringList& getSupportedFormats() { return supportedFormats; }

@@ -190,6 +190,7 @@ set( SRCS
     helpers/CGdalVrtUtil.cpp
     helpers/COverviewAdvisory.cpp
     helpers/CGdalZip.cpp
+    helpers/CFolderWatcher.cpp
     helpers/CInputDialog.cpp
     helpers/CLimit.cpp
     helpers/CLinksDialog.cpp
@@ -596,6 +597,7 @@ set( HDRS
     helpers/CGdalVrtUtil.h
     helpers/COverviewAdvisory.h
     helpers/CGdalZip.h
+    helpers/CFolderWatcher.h
     gis/search/CSearch.h
     helpers/CInputDialog.h
     helpers/CLimit.h

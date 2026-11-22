@@ -26,6 +26,7 @@ V1.XX.X
 [QMS-1314] Fix: Surface database is "unusable": database is locked
 [QMS-1317] Offline help: generate it with Sphinx from Markdown pages in this repository
 [QMS-1319] Documentation images: marks on controls that survive retaking
+[QMS-1324] Watch the map, DEM, POI, Routino and surface database folders for new files
 
 V1.21.1
 [QMS-1212] Update macOS build scripts

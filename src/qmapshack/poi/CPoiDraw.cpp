@@ -22,6 +22,7 @@
 #include <QtWidgets>
 
 #include "CMainWindow.h"
+#include "helpers/CFolderWatcher.h"
 #include "helpers/CSettings.h"
 #include "misc.h"
 #include "poi/CPoiFileItem.h"
@@ -32,6 +33,19 @@
 QList<CPoiDraw*> CPoiDraw::pois;
 QStringList CPoiDraw::poiPaths;
 QStringList CPoiDraw::supportedFormats = QString("*.poi").split('|');
+
+namespace {
+/** @brief Watch the POI folders; a POI file added, removed or replaced there reloads the POI collections */
+void watchPoiPaths(const QStringList& paths) {
+  static CFolderWatcher* watcher = nullptr;
+  if (watcher == nullptr) {
+    watcher = new CFolderWatcher(CPoiDraw::getSupportedFormats(), qApp);
+    QObject::connect(watcher, &CFolderWatcher::sigChanged, qApp,
+                     [] { CPoiDraw::setupPoiPath(CPoiDraw::getPoiPaths()); });
+  }
+  watcher->setPaths(paths);
+}
+}  // namespace
 
 CPoiDraw::CPoiDraw(CCanvas* canvas) : IDrawContext("poi", CCanvas::eRedrawPoi, canvas) {
   poiList = new CPoiList(canvas);
@@ -105,6 +119,7 @@ void CPoiDraw::setupPoiPath(const QString& path) {
 
 void CPoiDraw::setupPoiPath(const QStringList& paths) {
   poiPaths = paths;
+  watchPoiPaths(poiPaths);
 
   for (CPoiDraw* poi : std::as_const(pois)) {
     QStringList keys;
@@ -116,7 +131,10 @@ void CPoiDraw::setupPoiPath(const QStringList& paths) {
 
 void CPoiDraw::savePoiPath(QSettings& cfg) { cfg.setValue("poiPaths", poiPaths); }
 
-void CPoiDraw::loadPoiPath(QSettings& cfg) { poiPaths = cfg.value("poiPaths", poiPaths).toStringList(); }
+void CPoiDraw::loadPoiPath(QSettings& cfg) {
+  poiPaths = cfg.value("poiPaths", poiPaths).toStringList();
+  watchPoiPaths(poiPaths);
+}
 
 void CPoiDraw::findPoiCloseBy(const QPoint& px, QSet<IPoiItem>& poiItems, QList<QPointF>& posPoiHighlight) const {
   if (poiList && CPoiFileItem::mutexActivePois.tryLock()) {

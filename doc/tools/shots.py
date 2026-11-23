@@ -160,7 +160,7 @@ def page_base(page):
 
 
 # A fixture's parts, one folder each; CShotFiles kFixtureParts.
-FIXTURE_PARTS = ("projects", "maps", "dem", "poi", "routino", "database")
+FIXTURE_PARTS = ("projects", "maps", "dem", "poi", "routino", "database", "device")
 # Describe a part, and are no part of it; CShotFiles kFixtureNotes.
 FIXTURE_NOTES = ("SOURCE.md", "README.md")
 # Marks a page's part as empty: the page shows the application without this data; CShotFiles kFixtureEmpty.
@@ -296,6 +296,17 @@ def compose_config(page, scenario, out, source=None):
         data["Database/names"] = name
         data[f"Database/Entries\\{name}\\type"] = "SQLite"
         data[f"Database/Entries\\{name}\\filename"] = ini_string(copy.as_posix())
+
+    # A device is written to (folders made, projects sent), so a run only ever sees a copy. The workspace names a device
+    # after its folder, as after a mount point; GARMIN is a Garmin's volume label.
+    device = out.parent / "GARMIN"
+    shutil.rmtree(device, ignore_errors=True)
+    folder = fixture_part(page, "device")
+    if folder is not None and folder.is_dir():
+        shutil.copytree(folder, device, ignore=shutil.ignore_patterns(*FIXTURE_NOTES))
+        data["Shoot/fixtureDevice"] = ini_string(device.as_posix())
+    else:
+        data.pop("Shoot/fixtureDevice", None)
 
     write_ini(out, data)
     return source

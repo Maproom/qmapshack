@@ -28,6 +28,7 @@
 #include <QWidget>
 
 #include "dem/CDemList.h"
+#include "device/IDevice.h"
 #include "gis/CGisListDB.h"
 #include "gis/CGisListWks.h"
 #include "gis/IDBItem.h"
@@ -189,8 +190,10 @@ QString CShotAddress::itemPathOf(const QTreeWidgetItem* item) {
   }
 
   QString path;
-  if (nullptr != dynamic_cast<const IGisProject*>(item)) {
-    path = nameOf(item);
+  const bool isDevice = nullptr != dynamic_cast<const IDevice*>(item) && nullptr == item->parent();
+  if (nullptr != dynamic_cast<const IGisProject*>(item) || isDevice) {
+    // A project on a device is named below it.
+    path = (nullptr == item->parent()) ? nameOf(item) : QString("%1/%2").arg(nameOf(item->parent()), nameOf(item));
   } else if (!typeTag(item).isEmpty()) {
     const QTreeWidgetItem* project = item;
     while (nullptr != project->parent()) {
@@ -219,7 +222,16 @@ QTreeWidgetItem* CShotAddress::resolveItemPath(const CGisListWks& list, const QS
   }
 
   const QString& rest = path.section('/', 1);
-  return rest.contains(':') ? findItem(project, rest.section(':', 0, 0), rest.section(':', 1)) : nullptr;
+  if (rest.contains(':')) {
+    return findItem(project, rest.section(':', 0, 0), rest.section(':', 1));
+  }
+  // A device's project.
+  for (int i = 0; i < project->childCount(); i++) {
+    if (nullptr != dynamic_cast<const IGisProject*>(project->child(i)) && nameOf(project->child(i)) == rest) {
+      return project->child(i);
+    }
+  }
+  return nullptr;
 }
 
 QString CShotAddress::namePathOf(const QTreeWidgetItem* item) {

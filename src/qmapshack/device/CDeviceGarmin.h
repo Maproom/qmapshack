@@ -40,6 +40,9 @@ class CDeviceGarmin : public QObject, public IDevice {
   void aboutToRemoveProject(IGisProject* project) override;
   QString getInfo(quint32) const override;
 
+  /** @return True while the thread creating projects from the device's files exists */
+  bool isLoading() const { return !threadLoadData.isNull(); }
+
  private:
   void createProjectsFromFiles(QString subdirecoty, QString fileEnding, quint32& count, const quint32 total);
   void createAdventureFromProject(IGisProject* project, const QString& gpxFilename);

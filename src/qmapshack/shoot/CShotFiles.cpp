@@ -34,7 +34,7 @@
 
 namespace {
 /** A fixture's parts, one folder each; shots.py FIXTURE_PARTS. */
-const QStringList kFixtureParts = {"projects", "maps", "dem", "poi", "routino", "database"};
+const QStringList kFixtureParts = {"projects", "maps", "dem", "poi", "routino", "database", "device"};
 /** Describe a part and are no part of it; shots.py FIXTURE_NOTES. */
 const QStringList kFixtureNotes = {"SOURCE.md", "README.md"};
 /** Marks a page's part as empty; shots.py FIXTURE_EMPTY. */
@@ -235,7 +235,7 @@ QString CShotFiles::makeFixtureDir() const {
       readme,
       QString("# Fixture of the page %1\n\n"
               "Put into a part's folder only what this page needs different from `../default/`: "
-              "`projects/`, `maps/`, `dem/`, `poi/`, `routino/`, `database/`. A part holding something "
+              "`projects/`, `maps/`, `dem/`, `poi/`, `routino/`, `database/`, `device/`. A part holding something "
               "replaces the default's part whole; an empty or missing one is the default's. A file `EMPTY` in a "
               "part's folder leaves the page without that part, as on a first start.\n")
           .arg(page)

@@ -54,7 +54,8 @@ QWidget* resolve(QWidget* root, const QString& address);
 QWidget* resolveUnique(QWidget* root, const QString& address, QString& problem);
 
 /**
-   @brief The path of a workspace item: `Example/trk:Track`, a project by its name alone; folders are skipped.
+   @brief The path of a workspace item: `Example/trk:Track`, a project or device by its name alone, a device's project
+   as `Device/Project`; folders are skipped.
 
    @return empty for anything but a project or GIS item, or when the path would not resolve to it
  */

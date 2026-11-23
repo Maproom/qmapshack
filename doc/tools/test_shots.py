@@ -158,6 +158,27 @@ class Fixture(ScratchTree):
         # A page without a base yet composes the default's.
         self.assertEqual(shots.compose_config("q", None, self.root / "out" / "q.ini"), shots.DEFAULT_BASE)
 
+    def test_a_page_device_is_a_scratch_copy(self):
+        self.put(shots.DEFAULT_BASE, b"[General]\nfrom=default\n")
+        self.put(shots.FIXTURES_DIR / "p" / "projects" / "Own.gpx")
+        self.put(shots.FIXTURES_DIR / "p" / "device" / "Garmin" / "GarminDevice.xml", b"xml")
+        self.put(shots.FIXTURES_DIR / "p" / "device" / "SOURCE.md")
+        out = self.root / "out" / "p.ini"
+        out.parent.mkdir()
+        shots.compose_config("p", None, out)
+        copy = out.parent / "GARMIN"
+        self.assertEqual(shots.read_ini(out)["Shoot/fixtureDevice"], shots.ini_string(copy.as_posix()))
+        self.assertEqual((copy / "Garmin" / "GarminDevice.xml").read_bytes(), b"xml")
+        self.assertFalse((copy / "SOURCE.md").exists())
+        # What a run sent to the device is gone on the next compose.
+        self.put(copy / "Garmin" / "GPX" / "Sent.gpx")
+        shots.compose_config("p", None, out)
+        self.assertFalse((copy / "Garmin" / "GPX" / "Sent.gpx").exists())
+        # A page without a device has none, and no copy is left.
+        shots.compose_config("q", None, self.root / "out" / "q.ini")
+        self.assertNotIn("Shoot/fixtureDevice", shots.read_ini(self.root / "out" / "q.ini"))
+        self.assertFalse(copy.exists())
+
 
 class Unused(ScratchTree):
     def test_deletes_all_three_copies_and_keeps_what_another_page_uses(self):

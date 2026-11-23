@@ -24,7 +24,7 @@ doc/shots/_cache/                   tile caches, workspace databases, images wai
 - **The page says which images exist**; the shot file says how each is taken.
 - **The images are repository content.** A checkout shows its documentation with no command run.
 - **A page's fixture holds only what differs.** A part it has (`projects/`, `maps/`, `dem/`,
-  `poi/`, `routino/`, `database/`) replaces the default's whole; a part it lacks, or one holding only
+  `poi/`, `routino/`, `database/`, `device/`) replaces the default's whole; a part it lacks, or one holding only
   `SOURCE.md`, `README.md` or dotfiles, is the default's (`fixture_part()`, `CShotFiles::ownFixtureParts()`).
   A part holding a file `EMPTY` is left out, as on a first start.
 

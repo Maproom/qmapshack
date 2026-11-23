@@ -187,10 +187,13 @@ The writer's guide is `doc/WRITING_DOCS.md`: short, facts only, updated with eve
   (`compose` writes the page fixture's first `*.qms` or `*.gpx`), waits for
   `CGisListWks::isWorkspaceLoaded()` (the restore runs ~1100 ms after `CMainWindow` and does not
   check duplicates) and `IGisProject::isLoading()`, refuses a workspace already holding the project,
-  and hands the first trk/wpt/rte/area to `CShotContext`.
+  and hands the first trk/wpt/rte/area to `CShotContext`. Before the project it adds the folder
+  `Shoot/fixtureDevice` names as a `CDeviceGarmin` and waits for `CDeviceGarmin::isLoading()`; an archive
+  loads only when expanded. Linux logs a failed UDisks mount for it, as the folder is no UDisks object.
 - **`shots.py compose`** adds to the base the absolute `mapPath`,
-  `demPaths`, `poiPaths`, `Route/routino\paths`, `Shoot/fixtureProject` and a `Database/Entries` on
-  a scratch copy of the fixture's first `database/*.db`, plus `Database/saveOnExit=false`. A scenario `.ini` is a whole
+  `demPaths`, `poiPaths`, `Route/routino\paths`, `Shoot/fixtureProject`, a `Database/Entries` on
+  a scratch copy of the fixture's first `database/*.db` and `Shoot/fixtureDevice` on a scratch copy of its
+  `device/` named `GARMIN`, plus `Database/saveOnExit=false`. A scenario `.ini` is a whole
   configuration, never a patch; settings are read in constructors, so one process per scenario.
 - **A map or DEM activates from the configuration only with more than two keys**
   (`noShadowConfig()`): store `opacity`, `minScale`, `maxScale` with `isActive`.
@@ -310,7 +313,8 @@ The writer's guide is `doc/WRITING_DOCS.md`: short, facts only, updated with eve
 - **Row buttons** are a `click` with `row` and `button` from `sigButtonPressed`. A button is named by
   its `Q_ENUM` enumerator without the `e`, so renaming an enumerator renames it in every recording.
   Database, map and DEM rows are named by what they show (`CShotAddress::namePathOf()`); workspace
-  device and geo search rows have no name, and their buttons are dropped with a warning.
+  geo search rows have no name, and their buttons are dropped with a warning. A device is named
+  like a project, a project on it `Device/Project`.
 - **Not recorded**: a window closed by its title bar, re-docking through a window frame, a main
   window separator drag, typing into a cell editor, touch, drag and drop (a `Drop` warns).
 - **A replay starts from nothing**: `CShotReplay::replay()` calls `clear()` first, because steps are

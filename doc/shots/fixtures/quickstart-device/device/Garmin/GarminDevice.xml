@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Device xmlns="http://www.garmin.com/xmlschemas/GarminDevice/v2">
+  <Model>
+    <PartNumber>006-B0000-00</PartNumber>
+    <Description>GPSMAP 64s</Description>
+  </Model>
+  <Id>0</Id>
+  <MassStorageMode>
+    <DataType>
+      <Name>GPSData</Name>
+      <File>
+        <Location>
+          <Path>Garmin/GPX</Path>
+          <FileExtension>GPX</FileExtension>
+        </Location>
+      </File>
+    </DataType>
+    <DataType>
+      <Name>GeotaggedPhotos</Name>
+      <File>
+        <Location>
+          <Path>Garmin/JPEG</Path>
+          <FileExtension>JPG</FileExtension>
+        </Location>
+      </File>
+    </DataType>
+    <DataType>
+      <Name>GeocachePhotos</Name>
+      <File>
+        <Location>
+          <Path>Garmin/GeocachePhotos</Path>
+          <FileExtension>JPG</FileExtension>
+        </Location>
+      </File>
+    </DataType>
+  </MassStorageMode>
+</Device>

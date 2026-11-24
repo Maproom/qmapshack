@@ -934,19 +934,16 @@ void CMainWindow::slotAbout() {
 void CMainWindow::slotWiki() { QDesktopServices::openUrl(QUrl("https://github.com/Maproom/qmapshack/wiki/DocMain")); }
 
 void CMainWindow::slotQuickstart() {
-  // show menu action for German help if system language is German.
-  QString locale = QLocale::system().name();
-  if (locale.size() >= 2) {
-    locale = locale.left(2).toLower();
-    if (locale == "de") {
-      QDesktopServices::openUrl(QUrl("https://github.com/Maproom/qmapshack/wiki/DocQuickStartGerman"));
-    } else if (locale == "ru") {
-      QDesktopServices::openUrl(QUrl("https://github.com/Maproom/qmapshack/wiki/DocQuickStartRussian"));
-    } else if (locale == "es") {
-      QDesktopServices::openUrl(QUrl("https://github.com/Maproom/qmapshack/wiki/DocQuickStartSpanish"));
-    } else {
-      QDesktopServices::openUrl(QUrl("https://github.com/Maproom/qmapshack/wiki/DocQuickStartEnglish"));
-    }
+  // The local page in the GUI's language, else the wiki's quick start for that language.
+  const QString& language = IAppSetup::getPlatformInstance()->language();
+  if (QFileInfo::exists(helpRoot().absoluteFilePath(language + "/pages/quickstart.html"))) {
+    showHelp("pages/quickstart.html");
+  } else if (language == "de") {
+    QDesktopServices::openUrl(QUrl("https://github.com/Maproom/qmapshack/wiki/DocQuickStartGerman"));
+  } else if (language == "ru") {
+    QDesktopServices::openUrl(QUrl("https://github.com/Maproom/qmapshack/wiki/DocQuickStartRussian"));
+  } else if (language == "es") {
+    QDesktopServices::openUrl(QUrl("https://github.com/Maproom/qmapshack/wiki/DocQuickStartSpanish"));
   } else {
     QDesktopServices::openUrl(QUrl("https://github.com/Maproom/qmapshack/wiki/DocQuickStartEnglish"));
   }
@@ -1755,27 +1752,37 @@ void CMainWindow::slotSanityTest() {
   }
 }
 
-void CMainWindow::slotHelp() {
+void CMainWindow::slotHelp() { showHelp("index.html"); }
+
+QDir CMainWindow::helpRoot() {
+  // The source tree's pages match the code this binary was built from; an installed package has no source tree.
+  QDir root(QString::fromUtf8(QMS_SOURCE_DOC_HTML));
+  if (!QFileInfo::exists(root.absoluteFilePath("en/index.html"))) {
+    root = QFileInfo(IAppSetup::getPlatformInstance()->helpFile()).absoluteDir();
+  }
+  return root;
+}
+
+void CMainWindow::showHelp(const QString& page) {
+  // The GUI's language, else English: each language is a folder of its own.
+  const QDir& root = helpRoot();
+  QString file = root.absoluteFilePath(IAppSetup::getPlatformInstance()->language() + "/" + page);
+  if (!QFileInfo::exists(file)) {
+    file = root.absoluteFilePath("en/" + page);
+  }
+  qDebug() << "help page" << file;
+  if (!QFileInfo::exists(file)) {
+    QMessageBox::warning(this, tr("Help"),
+                         tr("The help pages are missing (%1). Please reinstall QMapShack.").arg(file));
+    return;
+  }
+
   if (help.isNull()) {
-    // The source tree's pages match the code this binary was built from; an installed package has no source tree.
-    QDir root(QString::fromUtf8(QMS_SOURCE_DOC_HTML));
-    if (!QFileInfo::exists(root.absoluteFilePath("en/index.html"))) {
-      root = QFileInfo(IAppSetup::getPlatformInstance()->helpFile()).absoluteDir();
-    }
-    // The GUI's language, else English: each language is a folder of its own.
-    QString home = root.absoluteFilePath(IAppSetup::getPlatformInstance()->language() + "/index.html");
-    if (!QFileInfo::exists(home)) {
-      home = root.absoluteFilePath("en/index.html");
-    }
-    qDebug() << "help pages" << home;
-    if (!QFileInfo::exists(home)) {
-      QMessageBox::warning(this, tr("Help"),
-                           tr("The help pages are missing (%1). Please reinstall QMapShack.").arg(home));
-      return;
-    }
-    help = new CHelp(home, this);
+    help = new CHelp(file, this);
     addDockWidget(Qt::LeftDockWidgetArea, help);
     help->place(this);
+  } else {
+    help->setPage(file);
   }
 
   help->setVisible(true);

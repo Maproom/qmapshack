@@ -212,6 +212,10 @@ class CMainWindow : public QMainWindow, private Ui::IMainWindow {
   CCanvas* createCanvas(const QString& name);
   void setupHomePath();
   CCanvas* addCanvas(const QString& key);
+  /** @brief The folder holding one subfolder of generated help pages per language. */
+  static QDir helpRoot();
+  /** @brief Open @p page, relative to a language folder, in the GUI's language or else English. */
+  void showHelp(const QString& page);
 
   static CMainWindow* pSelf;
   static QDir homeDir;

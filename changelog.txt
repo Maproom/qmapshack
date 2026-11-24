@@ -28,6 +28,7 @@ V1.XX.X
 [QMS-1319] Documentation images: marks on controls that survive retaking
 [QMS-1322] Documentation: a new quick start guide with images from the shot tool
 [QMS-1324] Watch the map, DEM, POI, Routino and surface database folders for new files
+[QMS-1330] Nicer help blocks and Quick Start in the offline help
 
 V1.21.1
 [QMS-1212] Update macOS build scripts

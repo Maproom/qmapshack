@@ -113,8 +113,8 @@ void CShotSynth::type(QWidget* widget, const QString& text) {
   focus(widget);
   QWindow* window = widget->window()->windowHandle();
   for (const QChar& ch : text) {
-    const char latin = ch.toLatin1();
-    const Qt::Key code = (0 != latin) ? QTest::asciiToKey(latin) : Qt::Key_unknown;
+    // asciiToKey() asserts beyond ASCII, and toLatin1() is not 0 for Latin-1 letters such as ñ or ó.
+    const Qt::Key code = (ch.unicode() < 0x80) ? QTest::asciiToKey(char(ch.unicode())) : Qt::Key_unknown;
     QTest::sendKeyEvent(QTest::Click, window, code, QString(ch), Qt::NoModifier);
   }
 }

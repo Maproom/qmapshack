@@ -158,7 +158,9 @@ The writer's guide is `doc/WRITING_DOCS.md`: short, facts only, updated with eve
   orientation, count, items; a widget item is `fb`, objectName, flags, pos, size, min, max; a nested group is `fc`,
   pos, size, min, max, then the group.
 - **Longer labels in another language:** a shot's `"set": {"dockMaps.minimumWidth": 340}` widens that dock area for
-  the image only; widen that language's crops to match. A map list's context menu is `dockMaps/IMapList/QMenu#0`
+  the image only; widen that language's crops to match. Wider docks shrink the canvas, and a map crop then
+  shifts and its overlays move; widen the shot's `size` by the dock difference to keep the canvas width
+  (es: docks +77 px). A map list's context menu is `dockMaps/IMapList/QMenu#0`
   (its parent is the form, not the tree); a spin box replays as `key` + `endedit`, not `set`.
 - **Addresses learned on the quick start pages:** the welcome page is `…/CCanvas#0/QTextBrowser#1`
   (`#0` is `textStatusMessages`); a scroll area scrolls with `set` on `…/qt_scrollarea_vcontainer/QScrollBar#0.value`;
@@ -314,6 +316,8 @@ The writer's guide is `doc/WRITING_DOCS.md`: short, facts only, updated with eve
   position, so replay moves the pointer there first. The Menu key's context menu comes from the
   platform plugin, none offscreen.
 - **The wheel over a list goes to its viewport**: an item view's scroll is `scroll` (top row).
+- **`CShotSynth::type()` sends a character beyond ASCII as `Qt::Key_unknown` with its text**: `QTest::asciiToKey()`
+  asserts on it, and `QChar::toLatin1()` is not 0 for Latin-1 letters (ñ, ó, ü), so a scenario typing one aborted.
 - **Replay and `CShotSelfTest` use `CShotSynth`, never QTest's `QWidget` functions**, which bypass
   window routing (grabs, popups, double-click synthesis, focus). Replay refuses a point another
   widget would get (`CShotSynth::missed()`).

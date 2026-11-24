@@ -22,7 +22,6 @@
 
 #include "CMainWindow.h"
 #include "misc.h"
-#include "svgticon/CSvgtIcon.h"
 
 CRouterRoutinoPathSetup::CRouterRoutinoPathSetup(QStringList& paths)
     : CRouterRoutinoPathSetup(paths, QString(),
@@ -37,7 +36,6 @@ CRouterRoutinoPathSetup::CRouterRoutinoPathSetup(QStringList& paths, const QStri
   if (!title.isEmpty()) {
     setWindowTitle(title);
   }
-  CSvgtIcon::load(label, "://icons/Help.svgt");
 
   connect(toolAdd, &QToolButton::clicked, this, &CRouterRoutinoPathSetup::slotAddPath);
   connect(toolDelete, &QToolButton::clicked, this, &CRouterRoutinoPathSetup::slotDelPath);

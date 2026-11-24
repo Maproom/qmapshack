@@ -20,6 +20,7 @@
 #define CHELP_H
 
 #include <QDockWidget>
+class CHelpBrowser;
 class QHelpEngine;
 class QMainWindow;
 class QSplitter;
@@ -43,12 +44,16 @@ class CHelp : public QDockWidget {
    */
   void place(QMainWindow* main);
 
+  /** @brief Show the generated HTML page @p file. */
+  void setPage(const QString& file);
+
  private:
   void restoreSplitter();
 
   QHelpEngine* engine = nullptr;
   QTabWidget* tabWidget = nullptr;
   QSplitter* splitter = nullptr;
+  CHelpBrowser* browser = nullptr;
   CHelpIndex* index = nullptr;
   CHelpSearch* search = nullptr;
 };

@@ -87,7 +87,7 @@ CHelp::CHelp(const QString& sourceQhc, const QString& homepage, QWidget* parent)
 
   splitter->insertWidget(0, tabWidget);
 
-  CHelpBrowser* browser = new CHelpBrowser(engine, this);
+  browser = new CHelpBrowser(engine, this);
   browser->setSource(QUrl(homepage));
   splitter->insertWidget(1, browser);
 
@@ -99,7 +99,7 @@ CHelp::CHelp(const QString& homepage, QWidget* parent) : QDockWidget(tr("Help"),
   setWindowFlag(Qt::Tool, true);
   setAttribute(Qt::WA_DeleteOnClose, true);
 
-  CHelpBrowser* browser = new CHelpBrowser(nullptr, this);
+  browser = new CHelpBrowser(nullptr, this);
   browser->setSource(QUrl::fromLocalFile(homepage));
   setWidget(browser);
 }
@@ -140,3 +140,5 @@ void CHelp::place(QMainWindow* main) {
   resize(kDefaultSize.boundedTo(main->size()));
   move(main->geometry().center() - rect().center());
 }
+
+void CHelp::setPage(const QString& file) { browser->setSource(QUrl::fromLocalFile(file)); }

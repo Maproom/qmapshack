@@ -29,6 +29,7 @@ CGisDatabase::CGisDatabase(QWidget* parent) : QWidget(parent) {
   setupUi(this);
 
   connect(treeDB, &CGisListDB::sigChanged, this, &CGisDatabase::slotHelpText);
+  connect(labelHelp2, &QLabel::linkActivated, this, &CGisDatabase::createDatabase);
   connect(actionShowSummaryDropZones, &QAction::toggled, widgetSummary, &CGisSummary::setVisible);
 
   QList<QAction*> actions;

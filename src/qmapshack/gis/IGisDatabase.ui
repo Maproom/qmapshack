@@ -77,7 +77,7 @@
       <item>
        <widget class="QLabel" name="labelHelp2">
         <property name="text">
-         <string>To add a database do a right click on the database list above.</string>
+         <string>To add a database do a right click on the database list above and choose &lt;a href='CreateDB'&gt;Add Database&lt;/a&gt;.</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>

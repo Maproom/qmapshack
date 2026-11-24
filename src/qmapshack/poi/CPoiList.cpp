@@ -22,11 +22,9 @@
 #include "misc.h"
 #include "poi/CPoiDraw.h"
 #include "poi/CPoiFileItem.h"
-#include "svgticon/CSvgtIcon.h"
 
 CPoiList::CPoiList(CCanvas* parent) : QWidget(parent), canvas(parent) {
   setupUi(this);
-  CSvgtIcon::load(labelIcon, "://icons/Help.svgt");
 
   connect(treeWidget, &CPoiTreeWidget::customContextMenuRequested, this, &CPoiList::slotContextMenu);
   connect(actionActivate, &QAction::triggered, this, &CPoiList::slotActivate);
@@ -71,7 +69,7 @@ CPoiFileItem* CPoiList::item(int i) { return dynamic_cast<CPoiFileItem*>(treeWid
 
 void CPoiList::updateHelpText() {
   if (treeWidget->topLevelItemCount() == 0) {
-    labelIcon->show();
+    helpBlock->show();
     labelHelpFillPoiList->show();
     labelHelpActivatePoi->hide();
   } else {
@@ -79,7 +77,7 @@ void CPoiList::updateHelpText() {
 
     CPoiFileItem* item = dynamic_cast<CPoiFileItem*>(treeWidget->topLevelItem(0));
     bool haveActive = item && item->isActivated();
-    labelIcon->setVisible(!haveActive);
+    helpBlock->setVisible(!haveActive);
     labelHelpActivatePoi->setVisible(!haveActive);
   }
 }

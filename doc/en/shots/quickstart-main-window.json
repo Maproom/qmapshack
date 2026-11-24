@@ -34,7 +34,7 @@
             "rect": [
                 0,
                 240,
-                300,
+                285,
                 110
             ],
             "size": [
@@ -56,9 +56,9 @@
                 }
             ],
             "rect": [
-                826,
-                180,
-                300,
+                909,
+                211,
+                291,
                 180
             ],
             "size": [
@@ -92,8 +92,8 @@
                 }
             ],
             "rect": [
-                826,
-                130,
+                900,
+                161,
                 300,
                 150
             ],
@@ -118,7 +118,7 @@
             "rect": [
                 0,
                 430,
-                300,
+                290,
                 130
             ],
             "scenario": "stacked",
@@ -135,10 +135,10 @@
         {
             "id": "quickstart-main-window/quickstart-main-window-give-it-a-home",
             "rect": [
-                600,
-                618,
-                200,
-                104
+                604,
+                268,
+                260,
+                76
             ],
             "set": {
                 "tabWidget/QStackedWidget#0/CCanvas#0/QTextBrowser#1/qt_scrollarea_vcontainer/QScrollBar#0.value": 1122

@@ -94,13 +94,8 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk) : INotifyTrk(CGisItemTrk::eVisualDeta
 
   labelHelpTrackPointInfo->setText(
       tr("<b>Track Point Information</b><br/>"
-         "To document your tracks you can add a short description to a track "
-         "point. All points with description will be marked along the track "
-         "with auto-numbered bullets.<br/>"
-         "You can add a description by a right click on a track point in the graphs. "
-         "Or you do a left click on a track point in the map view.<br/>"
-         "With the first track point you add information to this text will be replaced "
-         "by a table. Use it to edit and delete track point information.<br/>"));
+         "Add a short description to a track point: right click on it in the graphs, "
+         "or left click on it on the map. Points with a description get numbered bullets along the track."));
 
   widgetColorLayout->setAlignment(Qt::AlignTop);
 
@@ -278,7 +273,7 @@ CDetailsTrk::~CDetailsTrk() {
 }
 
 void CDetailsTrk::slotHasTrkPtInfo(bool yes) {
-  labelHelpTrackPointInfo->setVisible(!yes);
+  scrollHelpTrackPointInfo->setVisible(!yes);
   treeTrackPointInfo->setVisible(yes);
 }
 
@@ -461,7 +456,7 @@ void CDetailsTrk::updateData() {
   labelActivityInfo->setText(str);
 
   bool hasActivity = !trk.getActivities().getAllActivities().isEmpty();
-  labelActivityHelp->setVisible(!hasActivity);
+  helpBlockActivity->setVisible(!hasActivity);
   labelActivityInfo->setVisible(hasActivity);
   pushSetActivities->setEnabled(!isReadOnly);
 

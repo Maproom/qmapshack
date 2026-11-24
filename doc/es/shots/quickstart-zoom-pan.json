@@ -1,0 +1,381 @@
+{
+    "scenarios": {
+        "drag": [
+            {
+                "do": "view",
+                "lat": 47.51,
+                "lon": 10.56,
+                "zoom": 7
+            },
+            {
+                "button": "activate",
+                "do": "click",
+                "row": "OpenStreetMap",
+                "widget": "dockMaps/treeWidget"
+            },
+            {
+                "do": "move",
+                "lat": 47.4995,
+                "lon": 10.5537,
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0"
+            },
+            {
+                "button": "left",
+                "do": "drag",
+                "dx": 150,
+                "dy": 0,
+                "lat": 47.4995,
+                "lon": 10.5537,
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0"
+            }
+        ],
+        "range-open": [
+            {
+                "do": "view",
+                "lat": 47.51,
+                "lon": 10.56,
+                "zoom": 7
+            },
+            {
+                "button": "activate",
+                "do": "click",
+                "row": "OpenStreetMap",
+                "widget": "dockMaps/treeWidget"
+            },
+            {
+                "do": "expand",
+                "row": "OpenStreetMap",
+                "widget": "dockMaps/treeWidget"
+            }
+        ],
+        "range-out": [
+            {
+                "do": "view",
+                "lat": 47.51,
+                "lon": 10.56,
+                "zoom": 7
+            },
+            {
+                "button": "activate",
+                "do": "click",
+                "row": "OpenStreetMap",
+                "widget": "dockMaps/treeWidget"
+            },
+            {
+                "do": "expand",
+                "row": "OpenStreetMap",
+                "widget": "dockMaps/treeWidget"
+            },
+            {
+                "do": "click",
+                "widget": "dockMaps/treeWidget/QWidget#0/CMapPropSetup#0/toolSetMaxScale"
+            },
+            {
+                "do": "move",
+                "lat": 47.51,
+                "lon": 10.56,
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0"
+            },
+            {
+                "angle": [
+                    0,
+                    -120
+                ],
+                "do": "wheel",
+                "lat": 47.51,
+                "lon": 10.56,
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0"
+            }
+        ],
+        "range-set": [
+            {
+                "do": "view",
+                "lat": 47.51,
+                "lon": 10.56,
+                "zoom": 7
+            },
+            {
+                "button": "activate",
+                "do": "click",
+                "row": "OpenStreetMap",
+                "widget": "dockMaps/treeWidget"
+            },
+            {
+                "do": "expand",
+                "row": "OpenStreetMap",
+                "widget": "dockMaps/treeWidget"
+            },
+            {
+                "do": "click",
+                "widget": "dockMaps/treeWidget/QWidget#0/CMapPropSetup#0/toolSetMaxScale"
+            }
+        ],
+        "wheel-before": [
+            {
+                "do": "view",
+                "lat": 47.51,
+                "lon": 10.56,
+                "zoom": 7
+            },
+            {
+                "button": "activate",
+                "do": "click",
+                "row": "OpenStreetMap",
+                "widget": "dockMaps/treeWidget"
+            },
+            {
+                "do": "move",
+                "lat": 47.5028,
+                "lon": 10.5537,
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0"
+            }
+        ],
+        "wheel-in": [
+            {
+                "do": "view",
+                "lat": 47.51,
+                "lon": 10.56,
+                "zoom": 7
+            },
+            {
+                "button": "activate",
+                "do": "click",
+                "row": "OpenStreetMap",
+                "widget": "dockMaps/treeWidget"
+            },
+            {
+                "do": "move",
+                "lat": 47.5028,
+                "lon": 10.5537,
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0"
+            },
+            {
+                "angle": [
+                    0,
+                    120
+                ],
+                "do": "wheel",
+                "lat": 47.5028,
+                "lon": 10.5537,
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0"
+            },
+            {
+                "angle": [
+                    0,
+                    120
+                ],
+                "do": "wheel",
+                "lat": 47.5028,
+                "lon": 10.5537,
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0"
+            }
+        ]
+    },
+    "shots": [
+        {
+            "id": "quickstart-zoom-pan/quickstart-zoom-pan-wheel-before",
+            "mark": [
+                {
+                    "cursor": "pointer",
+                    "lat": 47.5028,
+                    "lon": 10.5537,
+                    "part": "point",
+                    "root": "main",
+                    "shape": "cursor",
+                    "widget": "tabWidget/QStackedWidget#0/CCanvas#0"
+                }
+            ],
+            "rect": [
+                375,
+                350,
+                300,
+                300
+            ],
+            "scenario": "wheel-before",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "id": "quickstart-zoom-pan/quickstart-zoom-pan-wheel-in",
+            "mark": [
+                {
+                    "cursor": "pointer",
+                    "lat": 47.5028,
+                    "lon": 10.5537,
+                    "part": "point",
+                    "root": "main",
+                    "shape": "cursor",
+                    "widget": "tabWidget/QStackedWidget#0/CCanvas#0"
+                }
+            ],
+            "rect": [
+                375,
+                350,
+                300,
+                300
+            ],
+            "scenario": "wheel-in",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "id": "quickstart-zoom-pan/quickstart-zoom-pan-drag",
+            "mark": [
+                {
+                    "lat": 47.4995,
+                    "lon": 10.5537,
+                    "part": "point",
+                    "root": "main",
+                    "shape": "arrow",
+                    "tail": [
+                        -150,
+                        0
+                    ],
+                    "widget": "tabWidget/QStackedWidget#0/CCanvas#0"
+                },
+                {
+                    "cursor": "pointer",
+                    "lat": 47.4995,
+                    "lon": 10.5537,
+                    "part": "point",
+                    "root": "main",
+                    "shape": "cursor",
+                    "widget": "tabWidget/QStackedWidget#0/CCanvas#0"
+                }
+            ],
+            "rect": [
+                470,
+                370,
+                300,
+                300
+            ],
+            "scenario": "drag",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "id": "quickstart-zoom-pan/quickstart-zoom-pan-scale-bar",
+            "rect": [
+                575,
+                665,
+                260,
+                110
+            ],
+            "scenario": "wheel-before",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "exposure": "CanvasSetup",
+            "id": "quickstart-zoom-pan/quickstart-zoom-pan-scales-setup",
+            "mark": [
+                {
+                    "root": "window",
+                    "shape": "frame",
+                    "widget": "groupBox"
+                }
+            ]
+        },
+        {
+            "id": "quickstart-zoom-pan/quickstart-zoom-pan-range-open",
+            "mark": [
+                {
+                    "part": "branch",
+                    "root": "main",
+                    "row": "1:0",
+                    "shape": "disc",
+                    "widget": "dockMaps/treeWidget"
+                }
+            ],
+            "rect": [
+                4,
+                86,
+                280,
+                200
+            ],
+            "scenario": "range-open",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "id": "quickstart-zoom-pan/quickstart-zoom-pan-range-buttons",
+            "mark": [
+                {
+                    "root": "main",
+                    "shape": "frame",
+                    "widget": "dockMaps/treeWidget/QWidget#0/CMapPropSetup#0/toolSetMinScale"
+                },
+                {
+                    "root": "main",
+                    "shape": "frame",
+                    "widget": "dockMaps/treeWidget/QWidget#0/CMapPropSetup#0/toolSetMaxScale"
+                }
+            ],
+            "rect": [
+                4,
+                86,
+                280,
+                200
+            ],
+            "scenario": "range-open",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "id": "quickstart-zoom-pan/quickstart-zoom-pan-range-set",
+            "mark": [
+                {
+                    "cursor": "hand",
+                    "root": "main",
+                    "shape": "cursor",
+                    "widget": "dockMaps/treeWidget/QWidget#0/CMapPropSetup#0/toolSetMaxScale"
+                }
+            ],
+            "rect": [
+                4,
+                86,
+                280,
+                200
+            ],
+            "scenario": "range-set",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "id": "quickstart-zoom-pan/quickstart-zoom-pan-range-out",
+            "rect": [
+                14,
+                86,
+                822,
+                205
+            ],
+            "scenario": "range-out",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        }
+    ]
+}

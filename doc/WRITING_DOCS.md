@@ -18,7 +18,8 @@ This also needs Qt's Test module and, from Qt 6.9 on, its GuiPrivate package.
 Run `shots.py` from the top folder of your checkout: `python3 doc/tools/shots.py <command>`, on
 Windows `py doc\tools\shots.py <command>`. It uses `build/bin/qmapshack`; pass
 `--binary path/to/qmapshack` for another one. By default it works on the English pages in
-`doc/en/`. With `--lang de` before the command, it works on `doc/de/` and takes the images with a German QMapShack.
+`doc/en/`. With `--lang de` or `--lang es` before the command, it works on `doc/de/` or `doc/es/` and takes the
+images with a German or Spanish QMapShack.
 
 With bash, Tab completes commands, page names and shot ids: `doc/tools/shots.py take quickstart-d` and Tab. The
 first run sets it up for new terminals; it needs the bash-completion package, as git's completion does.
@@ -334,7 +335,7 @@ doc/en/images/_check/               what `shots.py replay` renders when run by h
 
 ## Not built yet
 
-Animations, dark mode, languages other than English and German, recording tooltips.
+Animations, dark mode, languages other than English, German and Spanish, recording tooltips.
 
 If a dialog says **Cannot photograph this yet**, click **Copy** and put it into a ticket.
 

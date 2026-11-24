@@ -1,0 +1,283 @@
+{
+    "scenarios": {
+        "connected": [
+            {
+                "do": "expand",
+                "row": "GPSMAP 64s (GARMIN)",
+                "widget": "dockWorkspace/treeWks"
+            }
+        ],
+        "copied": [
+            {
+                "do": "expand",
+                "row": "GPSMAP 64s (GARMIN)",
+                "widget": "dockWorkspace/treeWks"
+            },
+            {
+                "do": "expand",
+                "row": "GPSMAP 64s (GARMIN)/Track 2025-06-14 101530",
+                "widget": "dockWorkspace/treeWks"
+            },
+            {
+                "do": "select",
+                "row": "GPSMAP 64s (GARMIN)/trk:2025-06-14 10:15:30",
+                "widget": "dockWorkspace/treeWks"
+            },
+            {
+                "at": [
+                    0.3,
+                    0.5
+                ],
+                "do": "menu",
+                "row": "GPSMAP 64s (GARMIN)/trk:2025-06-14 10:15:30",
+                "widget": "dockWorkspace/treeWks"
+            },
+            {
+                "action": "actionCopyItem",
+                "do": "trigger"
+            },
+            {
+                "do": "key",
+                "text": "Mis grabaciones",
+                "widget": "ISelectProjectDialog/lineEdit"
+            },
+            {
+                "do": "keypress",
+                "key": "Return",
+                "widget": "ISelectProjectDialog/lineEdit"
+            },
+            {
+                "do": "expand",
+                "row": "Mis grabaciones",
+                "widget": "dockWorkspace/treeWks"
+            }
+        ],
+        "copy-dialog": [
+            {
+                "do": "expand",
+                "row": "GPSMAP 64s (GARMIN)",
+                "widget": "dockWorkspace/treeWks"
+            },
+            {
+                "do": "expand",
+                "row": "GPSMAP 64s (GARMIN)/Track 2025-06-14 101530",
+                "widget": "dockWorkspace/treeWks"
+            },
+            {
+                "do": "select",
+                "row": "GPSMAP 64s (GARMIN)/trk:2025-06-14 10:15:30",
+                "widget": "dockWorkspace/treeWks"
+            },
+            {
+                "at": [
+                    0.3,
+                    0.5
+                ],
+                "do": "menu",
+                "row": "GPSMAP 64s (GARMIN)/trk:2025-06-14 10:15:30",
+                "widget": "dockWorkspace/treeWks"
+            },
+            {
+                "action": "actionCopyItem",
+                "do": "trigger"
+            },
+            {
+                "do": "key",
+                "text": "Mis grabaciones",
+                "widget": "ISelectProjectDialog/lineEdit"
+            }
+        ],
+        "copy-menu": [
+            {
+                "do": "expand",
+                "row": "GPSMAP 64s (GARMIN)",
+                "widget": "dockWorkspace/treeWks"
+            },
+            {
+                "do": "expand",
+                "row": "GPSMAP 64s (GARMIN)/Track 2025-06-14 101530",
+                "widget": "dockWorkspace/treeWks"
+            },
+            {
+                "do": "select",
+                "row": "GPSMAP 64s (GARMIN)/trk:2025-06-14 10:15:30",
+                "widget": "dockWorkspace/treeWks"
+            }
+        ],
+        "recording": [
+            {
+                "do": "expand",
+                "row": "GPSMAP 64s (GARMIN)",
+                "widget": "dockWorkspace/treeWks"
+            },
+            {
+                "do": "expand",
+                "row": "GPSMAP 64s (GARMIN)/Track 2025-06-14 101530",
+                "widget": "dockWorkspace/treeWks"
+            }
+        ],
+        "send-menu": [
+            {
+                "do": "expand",
+                "row": "GPSMAP 64s (GARMIN)",
+                "widget": "dockWorkspace/treeWks"
+            },
+            {
+                "do": "select",
+                "row": "Example",
+                "widget": "dockWorkspace/treeWks"
+            }
+        ],
+        "sent": [
+            {
+                "do": "expand",
+                "row": "GPSMAP 64s (GARMIN)",
+                "widget": "dockWorkspace/treeWks"
+            },
+            {
+                "do": "select",
+                "row": "Example",
+                "widget": "dockWorkspace/treeWks"
+            },
+            {
+                "action": "actionSyncWksDev",
+                "do": "trigger"
+            }
+        ]
+    },
+    "shots": [
+        {
+            "id": "quickstart-device/quickstart-device-connected",
+            "rect": [
+                6,
+                104,
+                300,
+                110
+            ],
+            "scenario": "connected",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "active": "actionSyncWksDev",
+            "id": "quickstart-device/quickstart-device-send-menu",
+            "open": {
+                "at": [
+                    0.3,
+                    0.5
+                ],
+                "do": "menu",
+                "row": "Example",
+                "widget": "dockWorkspace/treeWks"
+            },
+            "scenario": "send-menu",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": "dockWorkspace/treeWks/QMenu#0"
+        },
+        {
+            "id": "quickstart-device/quickstart-device-sent",
+            "rect": [
+                6,
+                104,
+                300,
+                160
+            ],
+            "scenario": "sent",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "id": "quickstart-device/quickstart-device-recording",
+            "mark": [
+                {
+                    "part": "branch",
+                    "root": "main",
+                    "row": "1/0:0",
+                    "shape": "disc",
+                    "widget": "dockWorkspace/treeWks"
+                }
+            ],
+            "rect": [
+                6,
+                104,
+                300,
+                140
+            ],
+            "scenario": "recording",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "active": "actionCopyItem",
+            "id": "quickstart-device/quickstart-device-copy-menu",
+            "open": {
+                "at": [
+                    0.3,
+                    0.5
+                ],
+                "do": "menu",
+                "row": "GPSMAP 64s (GARMIN)/trk:2025-06-14 10:15:30",
+                "widget": "dockWorkspace/treeWks"
+            },
+            "scenario": "copy-menu",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": "dockWorkspace/treeWks/QMenu#0"
+        },
+        {
+            "id": "quickstart-device/quickstart-device-copy-dialog",
+            "mark": [
+                {
+                    "root": "window",
+                    "shape": "frame",
+                    "widget": "lineEdit"
+                }
+            ],
+            "scenario": "copy-dialog",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "id": "quickstart-device/quickstart-device-copied",
+            "mark": [
+                {
+                    "button": "save",
+                    "part": "button",
+                    "root": "main",
+                    "row": "1:0",
+                    "shape": "frame",
+                    "widget": "dockWorkspace/treeWks"
+                }
+            ],
+            "rect": [
+                6,
+                104,
+                354,
+                170
+            ],
+            "scenario": "copied",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        }
+    ]
+}

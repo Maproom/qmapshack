@@ -60,6 +60,12 @@ translations are good, some wrong or cut off.
 4. Each language's `index.md` says the translation is by AI, not reviewed by a native speaker, and where to report
    errors. A Discussions post asks for reviewers.
 
+**Spanish: steps 1 to 4 done** (`QMS-1337`). Catalogs complete; the pages in `doc/es/`, 89 images, `doc/es/translation.json`.
+Example names: Tours → Excursiones, Alpine tour → Excursión de montaña, Planning → Planificación, My recordings → Mis
+grabaciones, My tracks → Mis tracks, My waypoints → Mis waypoints, Meeting point → Punto de encuentro, Lake tour → Vuelta
+al lago. The Spanish docks and edit bar are wider than the German ones: 19 shots have their own `rect`, the welcome
+page its own scroll value.
+
 ## Open
 
 - `check_pages.py` checks every language; outside English it skips sentence case and the "Words" list. German

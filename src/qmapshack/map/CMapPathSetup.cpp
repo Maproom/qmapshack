@@ -24,12 +24,10 @@
 #include "map/CMapDraw.h"
 #include "map/CMapList.h"
 #include "misc.h"
-#include "svgticon/CSvgtIcon.h"
 
 CMapPathSetup::CMapPathSetup(QStringList& paths, QString& pathCache)
     : QDialog(CMainWindow::getBestWidgetForParent()), paths(paths), pathCache(pathCache) {
   setupUi(this);
-  CSvgtIcon::load(label_3, "://icons/Help.svgt");
 
   connect(toolAdd, &QToolButton::clicked, this, &CMapPathSetup::slotAddPath);
   connect(toolDelete, &QToolButton::clicked, this, &CMapPathSetup::slotDelPath);

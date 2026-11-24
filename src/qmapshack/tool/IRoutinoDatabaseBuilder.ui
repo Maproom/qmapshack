@@ -115,33 +115,41 @@
    <item row="2" column="1">
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QSvgWidget" name="label_4">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="labelHelp">
-       <property name="text">
-        <string>&lt;p&gt;To create a Routino routing database you need to download *pbf files from &lt;a href='http://download.geofabrik.de/'&gt;GeoFabrik&lt;/a&gt;. The process of creating a Routino database is quite slow and the resulting files quite large. Therefore it's recommended not to download whole continents. Limit your download to those countries you really need. However as Routino can't route over several databases you have to include all countries that are touched by a cross country border route.&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Select one or multiple source *.pbf files.&lt;/li&gt;
-&lt;li&gt;Select a path for your Routino database.&lt;/li&gt;
-&lt;li&gt;Select a prefix. The database will be listed by this prefix.&lt;/li&gt;
-&lt;li&gt;Press &quot;Start&quot; button.&lt;/li&gt;
-&lt;/ol&gt;</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-       </property>
-       <property name="wordWrap">
-        <bool>true</bool>
-       </property>
+      <widget class="CHelpBlock" name="helpBlock">
+       <layout class="QVBoxLayout" name="layoutHelpBlock">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QLabel" name="labelHelp">
+          <property name="text">
+           <string>&lt;p&gt;To create a Routino routing database you need to download *pbf files from &lt;a href='http://download.geofabrik.de/'&gt;GeoFabrik&lt;/a&gt;. The process of creating a Routino database is quite slow and the resulting files quite large. Therefore it's recommended not to download whole continents. Limit your download to those countries you really need. However as Routino can't route over several databases you have to include all countries that are touched by a cross country border route.&lt;/p&gt;
+   
+   &lt;ol&gt;
+   &lt;li&gt;Select one or multiple source *.pbf files.&lt;/li&gt;
+   &lt;li&gt;Select a path for your Routino database.&lt;/li&gt;
+   &lt;li&gt;Select a prefix. The database will be listed by this prefix.&lt;/li&gt;
+   &lt;li&gt;Press &quot;Start&quot; button.&lt;/li&gt;
+   &lt;/ol&gt;</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </widget>
      </item>
     </layout>
@@ -180,9 +188,10 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>QSvgWidget</class>
-   <extends>QWidget</extends>
-   <header location="global">QSvgWidget</header>
+   <class>CHelpBlock</class>
+   <extends>QFrame</extends>
+   <header>widgets/CHelpBlock.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources>

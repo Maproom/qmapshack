@@ -25,12 +25,10 @@
 #include "helpers/CSettings.h"
 #include "map/CMapDraw.h"
 #include "misc.h"
-#include "svgticon/CSvgtIcon.h"
 #include "theme/CUiTheme.h"
 
 CMapVrtBuilder::CMapVrtBuilder(QWidget* parent) : IToolShell(parent) {
   setupUi(this);
-  CSvgtIcon::load(label_7, "://icons/Help.svgt");
   setTextBrowser(textBrowser);
   setObjectName(tr("Build GDAL VRT"));
 

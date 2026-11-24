@@ -1,7 +1,7 @@
 # Quick start plan
 
-Step 7 of `documentation-plan.md`: the quick start as the first real page. Developed step by step
-with Oliver; decisions are recorded here only once he has made them.
+Step 7 of `documentation-plan.md`: the quick start as the first real page. Done: all twelve pages, English and
+German, are on `dev` (`doc/en/pages/`, `doc/de/pages/`). Decisions are recorded here only once Oliver has made them.
 
 ## Goal
 
@@ -49,21 +49,27 @@ images are taken with the shot tool from fixture data.
 - Claude may write scenarios and shot entries by hand instead of recording them; a person must still be able to
   take, switch to and re-record them in the shot tool.
 - One page per topic, linked in order from a quick start overview page, so each page can have its
-  own base in the shot tool. Working file names in `doc/en/pages/`, may change with the content:
-  `quickstart.md` (overview), `quickstart-main-window.md`, `quickstart-maps.md`,
-  `quickstart-vector-map.md`, `quickstart-zoom-pan.md`, `quickstart-dem.md`,
+  own base in the shot tool. Files in `doc/<lang>/pages/`: `quickstart.md` (overview), `quickstart-main-window.md`,
+  `quickstart-maps.md`, `quickstart-vector-map.md`, `quickstart-zoom-pan.md`, `quickstart-dem.md`,
   `quickstart-load-file.md`, `quickstart-routing.md`, `quickstart-draw-track.md`, `quickstart-waypoints.md`,
-  `quickstart-save.md`, `quickstart-device.md`.
+  `quickstart-database.md`, `quickstart-save.md`, `quickstart-device.md`.
+
 
 ## Open
 
-- Marking elements in images. Prototype on branch `QMS-1319` (Maproom/qmapshack#1319): shot key `mark`, a widget address
-  (frame) or `{widget, part: handle|branch, row, shape: disc|frame}`, drawn in
-  `CShotContext::emitImage()`; a hidden or missing target fails the shot. Tested headless on the test
-  page incl. a map row's opacity knob. Open: interactive placement in the panel, docs (`DESIGN.md`,
-  `WRITING_DOCS.md`), a self-test case, menu entries/toolbar actions, main window splitters, cursors.
+- Marks in images: `shot-marks-plan.md`.
 - Device rows in scenarios: a replay expands the device by its name (`GPSMAP 64s (GARMIN)`, trial run), but recording
   writes no name for it (`CShotAddress::itemPathOf()`); a device project's menu in a replay is untested.
+- Code bug, not fixed: **Save as...** with the QLB filter saves nothing and reports nothing (`IGisProject::saveAs()`
+  offers `filedialogFilterQLB` but has no branch for it).
+- Page 6 (en, de), section 5: "save the project" does not link to page 11 (`quickstart-save.md`) yet.
+- Unchecked, read in code only:
+  - Page 4: number-pad + and − zoom (Qt maps KP_Add to `Key_Plus`, measured; the canvas ignores the keypad flag);
+    whether recording writes a scenario's leading `view` step (written by hand in `quickstart-zoom-pan.json`).
+  - Page 11: the save button disappears after saving; Save as another type keeps it.
+  - Page 10: the database dialog opens in the home folder's `Databases`; a new database shows in the panel after **OK**.
+  - Page 12: sending and reading recordings in a run; the wiki's "device projects cannot be copied" against
+    **Copy to...** in the device project's menu.
 
 ## Spanish guide — analysis
 
@@ -114,84 +120,9 @@ online vs local, database folder colors (l. 453–457), map views (l. 301–359)
 | GPS device | none; to be faked |
 | Installation | not a fixture topic |
 
-## Next
+## How a page is made
 
-State: pages 1–3 are written in English and German, with images in both languages, and pushed
-(`kiozen/QMS-1322`); their bases now use Square scales and their map images were retaken (uncommitted). Page 4,
-zooming and panning (`quickstart-zoom-pan.md`, uncommitted): English and German written, all five sections, images
-in both languages (German crops need no wider dock), linked from both `quickstart.md`: wheel (`wheel-before`/`wheel-in`, zoom 7 → 5), dragging (`drag`), keyboard (table, no image; + zooms
-around the view centre, Up moves the view a quarter of the map's height north, both from trial shots), zoom steps and
-scale (`scale-bar`, `scales-setup`), a map's zoom range (`range-open`, `range-buttons`, `range-set`, `range-out`; out
-of range the map is not drawn and its row bar turns gray, back in range it is drawn again, from trial shots). Next:
-page 5, the DEM and hillshading (`quickstart-dem.md`, uncommitted): English and German written, four sections,
-linked from both `quickstart.md` (German status bar crop wider); fixture `quickstart-dem` (online maps, the default's DEM). Trial shots showed: the status bar shows
-`Ele.:` and slope only with the DEM on; Hillshading is off by default (`IDem.h:406`), opacity starts at 17
-(`IDem.cpp:65`); a new DEM shows up by itself (folder watcher, QMS-1324); the DEM's south edge is a hard line south of Haldensee, so crops stay
-north of it. The bullet on adding elevations to tracks etc. links nowhere yet: link it from page 8 (drawing a track) once that
-shows it. Page 5 is committed. Page 6, loading a GPX file (`quickstart-load-file.md`, uncommitted): English and
-German written, five sections, images in both languages, reviewed by an agent and fixed, linked from both
-`quickstart.md`. Example `Example.gpx`, converted from `Example.qms` with keys of its own, in
-`doc/shots/fixtures/default/GPX/` (no fixture part) and as the page fixture's project. First page with the new layout
-(step 8 below); German crops wider (dock ends ≈ 315 px). Section 5's "save the project" should link to page 11 (saving) once it
-exists. Page 6 is committed and pushed. Page 7, setting up routing (`quickstart-routing.md`, uncommitted): English
-written, four sections, images; section 4 builds the database with **Tool → Create Routino Database** (QMS-1324, merged:
-folder watchers, target list of registered Routino paths, no manual reload). Pages 3 and 5 lost their reload step
-(en, de; `reload-menu` shot removed). German page 7 written (German crops x = 14, 300 px wide). All pages reviewed by an agent and fixed.
-Page 7 reviewed, committed and pushed (router-list image dropped: a closed combo box shows nothing, and shots
-cannot open its list). Page 8, drawing a track (`quickstart-draw-track.md`): English written, seven sections, two
-agent reviews applied; fixture `quickstart-draw-track` (online maps, Example.gpx; DEM and Routino from the default),
-base = page 6's base (Workspace shown). Shots replay drawing: right-click + `actionAddTrk`, clicks by lat/lon; **T**
-needs a move 2 px beside the end point before the move onto it (the lead line is searched at the point's previous
-position). Tested by replay: resume via red end square, range buttons, *.gpx preselected after Load GIS Data; Esc only
-read. German page 8 written and linked from the German page 5 bullet (MyST anchors keep umlauts:
-`#höhen-aus-dem-dem`). Page 9, waypoints (`quickstart-waypoints.md`): goal agreed, POIs left out. English section 1 written (seven steps, page 8's pattern: new project **My waypoints**, the full details window once, then name and symbol crops), images published; German written (`Enter`/`Esc` stay untranslated, as in `qtbase_de.qm`), images published. Section on
-changing a waypoint dropped: the quick start only creates items. Page 9 committed and pushed (PR #1323 and
-ticket #1322 updated). Pages renumbered (Oliver): 10 databases (`quickstart-database.md`), 11 saving (`quickstart-save.md`), 12 device.
-
-Pages 10 and 11 (en, de) are committed and pushed. Earlier notes on them, kept for reference (English only, both pages linked from the English
-`quickstart.md`, images published, `doc/html` generated):
-
-- Page 11, saving: sections 1 (**Saved or not**: save button on a changed project's row, change indicator on an
-  item's row) and 2 (**Saving to a file**: Save/Save as in one step, the file types QMS/GPX/GPX 1.1 from Oliver, a copy
-  when saved as another type, **File → Save All GIS Data**, Close asks) agreed. Section 3, saving into a database,
-  written: **Copy to...** with **Database**, folder dialog, save button; images published, reviewed by Oliver. Fixture `quickstart-save` (page 9's, default `Example.db`), base =
-  page 9's.
-- Page 10, databases: section 1 (**Creating a database**: Add Database menu, dialog with name *Example* and the new-file
-  button marked, the panel with *Example*) agreed. Next: section 2 **Folders** (Group, Project, Other with Oliver's
-  trip example; written, images published, reviewed by Oliver; the menu shot needs
-  `select` first and `QMenu#3`, the database menu), 3 **Importing files** (written, images published, reviewed by Oliver;
-  `compose` sets `Paths/lastGisPath` to the fixture's `projects`, so the scenario types `Example.gpx`), 4 **Exporting to GPX** (written, images published, reviewed by Oliver; `compose` sets
-  `ExportDB/path` to the run's `export`), 5 **Working with the workspace** (written: load, save, unload, removing vs deleting; images of loading only, the
-  delete confirmation box is not reachable by a replay; reviewed by Oliver). Fixture `quickstart-database` (page 9's, `database/EMPTY`, `projects/Vilsalpsee.gpx`): every scenario creates
-  `Example.db` anew and repeats the sections before it, so the tree grows along the page; base = page 9's with the lower
-  tab stack's current index set to 2 (Database). No image credit line: `Example.db` is our own data (Oliver).
-- Pages 8 and 9 (en, de) say "save button" / "change indicator" ("Speichern-Knopf" / "Änderungsanzeige"), as page 11.
-- Done meanwhile: menu entries on pages 8 and 9 (en, de) highlighted instead of framed, images retaken and published;
-  rule in `doc/WRITING_DOCS.md`.
-- German page 10 written (uncommitted), linked from the German `quickstart.md`, images published; folders *Touren*,
-  *Bergtour*, *Planung*, the database stays `Example`; tree crops 297 px wide, the add dialog's 425 px. Reviewed
-  by Oliver.
-- German page 11 written (uncommitted), linked from the German `quickstart.md`, images published; `Seetour`,
-  *Meine Wegpunkte*, *Treffpunkt*; the group **Projects** is fixture data and stays; tree crops 297 px wide. Not yet
-  reviewed by Oliver. Both pages name the GPX type as the save dialog does, `GPS Exchange Format (*.gpx *.GPX)`.
-- Pages 10 and 11 (en, de) reviewed for facts, language and style (three agent reviews, findings checked, each section
-  rewritten with Oliver). Page 3 (en, de): the settings action is a numbered step, so its image no longer floats into
-  the bullets. Code bug found, not fixed: **Save as...** with the QLB filter saves nothing and reports nothing
-  (`IGisProject::saveAs()` has no QLB branch).
-- Uncommitted fixups to committed pages 6, 8, 9 (en, de): "If you have set up the home folder" / "Wenn Sie das
-  Hauptverzeichnis eingerichtet haben"; page 10 (en): "projects in one file" without "many", the Other-folder example.
-- Unchecked: the save button disappears after saving; Save as another type keeps the button; the database dialog
-  opens in the home folder's `Databases`; a new database shows in the panel after **OK** (all read in code only).
-
-Page 4, still unchecked: number-pad + and − zooming (Qt maps KP_Add to `Key_Plus`, measured; the canvas ignores the
-keypad flag, read only); whether recording writes the scenario's leading `view` step (written by hand in
-`quickstart-zoom-pan.json`).
-
-Shot tool changes made for page 4 (uncommitted, belong to the shoot commit): mark part `point` (`lat`/`lon`, a place
-on the map) offered first by Ctrl+Shift+F10 on the map; marker buttons with their own tooltips; panel tooltips rich
-text through `tipOf()` and shown while the panel is inactive (`WA_AlwaysShowToolTips`). Self-test 148/148 and 60/60.
-
-How a page is made (agreed with Oliver while making pages 1–3):
+Agreed with Oliver while making pages 1–3; applies to any new page.
 
 1. Goal first, as topics for the reader; Oliver reviews. Check each behaviour in code or in a trial shot before
    writing it; mark what is unchecked.
@@ -214,21 +145,8 @@ How a page is made (agreed with Oliver while making pages 1–3):
    carries the default `shots.ini`'s `dem2` keys (opacity 20).
 9. Check: `check_pages.py`, `shots.py [--lang de] unused`, `generate_html.py`, the page in a browser or a headless
    Chrome screenshot (`google-chrome --headless=new --screenshot`).
-
-Commits on `QMS-1322`, ten groups in this order: the move to `doc/en`; shoot (C++ in `src/qmapshack/shoot/` and
-`doc/tools/shots.py`, `test_shots.py`; reviewed by an agent, not Oliver); other C++ (Oliver reviews); doc build
-(`conf.py`, `_static`, `.gitignore`, `doc/locales`, `check_pages.py`, `generate_html.py`); the default fixture's
-vector map; one commit per page with all its languages, shot files, images and fixture; start page and overview;
-plans, guides, notes and changelog; generated `doc/html` last. A change goes in with `git commit --fixup=<commit>
--- <paths>` (only those paths: a staged rename otherwise rides along), then
-`GIT_SEQUENCE_EDITOR=: git rebase -i --autosquash <base>`; check `git diff --stat <old tip> HEAD` is empty before
-`git push --force-with-lease`. A new page is a new commit moved after the previous page. Ask Oliver before
-committing and before pushing.
-
-The bar under the opacity slider in a map's settings is no slider: `CScaleWidget` indicates the current zoom. The
-button left of it takes the current zoom as the map's maximum zoom-in, the right one as its maximum zoom-out
-(tooltips in `IMapPropSetup.ui`); outside that range the map is not drawn. That belongs on page 4. Dragging a map to
-reorder works (checked by Oliver).
+10. Terms as on pages 8–11: "save button" / "Speichern-Knopf", "change indicator" / "Änderungsanzeige". MyST
+    anchors keep umlauts (`#höhen-aus-dem-dem`).
 
 ## Page 7 goal — agreed
 

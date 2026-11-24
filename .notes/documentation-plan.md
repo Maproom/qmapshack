@@ -47,7 +47,8 @@ Worst case, all wiki pages (96 pages, 630 images). `git gc`, then `git count-obj
 4. Done: `release.py` builds only QMapTool's help from the wiki.
 5. Pages Action.
 6. Style guide: wthaem's draft as a PR. The term is image, not picture.
-7. Rewrite the quick start as the first real page. Link to the wiki for what is not written yet.
+7. Done: the quick start, twelve pages in English and German (`quickstart-plan.md`). Link to the wiki for what is not
+   written yet.
 8. Concept pages: concepts, data preparation, workspace and database.
 9. Freeze the wiki with pointers to the new pages. Convert its index entries for pages that are carried over.
 
@@ -60,4 +61,18 @@ Worst case, all wiki pages (96 pages, 630 images). `git gc`, then `git count-obj
   sentence case and `…`?
 - Translations: `translation-plan.md`.
 - `src/qmapshack/doc/QMSHelp.*` can go once the new help replaces it.
+- Keeping the images current costs too much. The help cards (QMS-1330) made the left dock column 18 px narrower
+  and changed 65 of 89 images per language, most of them only by a shifted map or a crop that no longer fits.
+  Whether an image is taken again is a judgement: the subject can keep its texts and controls and still change
+  its style. Proposal, not built:
+  - `shots.py review` replays en and de, one after the other, into a scratch folder and writes one HTML contact
+    sheet: a section per page, per image the published and the new one side by side, its name and a checkbox.
+    Shots that do not replay come first. Pairs identical in RGB and alpha are folded away; Pillow's `getbbox()`
+    on an RGBA difference looks at alpha only.
+  - The reviewer ticks the images that need attention; the sheet gives the list to copy.
+  - `shots.py accept <list>` copies only those images into `doc/<lang>/images`; then `doc/tools/generate_html.py`.
+  - Policy: an image is taken again only when what the page explains changed (a control, its label, place or
+    style, a dialog's content). An image shows a concept; its values (coordinates, map, track) are examples. A
+    shifted map, other example values, another crop size or pixel noise keep the published image. A shot that no
+    longer replays, or crops something else, is fixed; its image is taken again only by the first rule.
 

@@ -41,6 +41,26 @@ install `python3-venv`. On Windows install Python from python.org, which brings 
    installed with it.
 4. Commit the sources, the shot files, the images and `doc/html/` in one pull request.
 
+## Keeping translations up to date
+
+`doc/<lang>/translation.json` records which version of each English page and shot file a translation was made
+from. After translating a page, or a change to it, record it:
+
+```
+python3 doc/tools/check_translations.py --done de pages/quickstart-maps.md
+```
+
+To list the translated files whose English file changed since, and to see what changed:
+
+```
+python3 doc/tools/check_translations.py
+python3 doc/tools/check_translations.py --diff de
+```
+
+On Windows use `py doc\tools\check_translations.py`. The documentation check on GitHub shows the list as a
+warning; it does not fail a pull request, because whoever changes an English page may not write the other
+languages.
+
 ## A conflict in doc/html
 
 Two pull requests can both change generated files, usually `searchindex.js`. Merge the sources, then

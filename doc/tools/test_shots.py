@@ -248,7 +248,7 @@ class Completion(ScratchTree):
         self.assertEqual(shots.completions("shots.py ta"), ["take"])
         self.assertEqual(shots.completions("shots.py take al"), ["alpha", "alps"])
         self.assertEqual(shots.completions("shots.py --lang de take al"), ["alps"])
-        self.assertEqual(shots.completions("shots.py --lang "), ["de", "en"])
+        self.assertEqual(shots.completions("shots.py --lang "), ["de", "en", "es"])
         self.assertEqual(shots.completions("shots.py replay --only alps/a"), ["alps/alps-menu"])
         self.assertEqual(shots.completions("shots.py take alps "), [])
         # A file or folder after these options is bash's own completion.

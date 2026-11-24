@@ -45,7 +45,9 @@ WORD = re.compile(r"[A-Za-z][\w'’-]*")
 CODE = re.compile(r"(`+).+?\1")
 URL = re.compile(r"\b[a-z][a-z0-9+.-]*://[^\s)\]>]+")
 QUOTED = re.compile(r'"[^"]*"|“[^”]*”')
-SENTENCE_END = re.compile(r"(?<=[.!?])\s+(?=[A-Z0-9*`\[(\"“§])")
+# A sentence starts with any capital letter (Ä, É, …), a digit, markup or an opening mark (¿ ¡ „ «).
+CAPITALS = "".join(chr(c) for c in range(0x250) if chr(c).isupper())
+SENTENCE_END = re.compile(r"(?<=[.!?])\s+(?=[" + CAPITALS + r"0-9*`\[(\"“„«§¿¡])")
 
 
 def strip_inline(text):

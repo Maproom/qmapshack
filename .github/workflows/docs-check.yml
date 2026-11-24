@@ -39,3 +39,10 @@ jobs:
             echo "::error::doc/html does not match the pages. Run 'python3 doc/tools/generate_html.py' and commit doc/html."
             exit 1
           fi
+
+      - name: Translations behind English
+        run: |
+          if ! python doc/tools/check_translations.py > translations.txt; then
+            cat translations.txt
+            while read -r line; do echo "::warning::$line"; done < translations.txt
+          fi

@@ -137,7 +137,7 @@
     <message>
         <location filename="../setup/CAppSetupLinux.cpp" line="111"/>
         <source>Failed to lock file&lt;br&gt;%1&lt;br&gt;%2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fallo al bloquear el archivo&lt;br&gt;%1&lt;br&gt;%2</translation>
     </message>
 </context>
 <context>
@@ -150,7 +150,7 @@
     <message>
         <location filename="../setup/CAppSetupMac.cpp" line="173"/>
         <source>Failed to lock file&lt;br&gt;%1&lt;br&gt;%2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fallo al bloquear el archivo&lt;br&gt;%1&lt;br&gt;%2</translation>
     </message>
 </context>
 <context>
@@ -163,7 +163,7 @@
     <message>
         <location filename="../setup/CAppSetupWin.cpp" line="127"/>
         <source>Failed to lock file&lt;br&gt;%1&lt;br&gt;%2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fallo al bloquear el archivo&lt;br&gt;%1&lt;br&gt;%2</translation>
     </message>
 </context>
 <context>
@@ -201,22 +201,22 @@
     <message>
         <location filename="../canvas/CCanvas.cpp" line="288"/>
         <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Current home:&lt;br/&gt;%1&lt;/p&gt;</source>
-        <translation>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Configuración actual:&lt;br/&gt;%1&lt;/p&gt;</translation>
+        <translation type="unfinished">&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Carpeta principal actual:&lt;br/&gt;%1&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="313"/>
         <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Impatient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;GetMaps&apos;&gt;I want some online maps.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Patient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;ShowQuickStart&apos;&gt;Quick Start Guide.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocGettingStarted#add-maps&apos;&gt;Getting Started.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocInstallMapDem&apos;&gt;Install Maps &amp; DEM&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocBasicsMapDem&apos;&gt;Basics Maps &amp; DEM.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Sources for Maps&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
-        <translation type="unfinished">&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Usuarios impacientes:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;Obtener Mapas&apos;&gt;Quiero mapas online.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Usuarios pacientes:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;ShowQuickStart&apos;&gt;Guia Rápida.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocGettingStarted#markdown-header-add-maps&apos;&gt;Primeros Pasos.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocInstallMapDem&apos;&gt;Instalar Mapas y DEM&apos;s&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocBasicsMapDem&apos;&gt;Mapas Base y DEM&apos;s.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Donde obtener Mapas&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</translation>
+        <translation type="unfinished">&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Usuarios impacientes:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;GetMaps&apos;&gt;Quiero mapas online.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Usuarios pacientes:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;ShowQuickStart&apos;&gt;Guía rápida.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocGettingStarted#add-maps&apos;&gt;Primeros pasos.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocInstallMapDem&apos;&gt;Instalar mapas y DEM&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocBasicsMapDem&apos;&gt;Conceptos básicos de mapas y DEM.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Fuentes de mapas&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="327"/>
         <source>&lt;h2&gt;Maps!&lt;/h2&gt;&lt;p&gt;A map must always be defined by a single file that is recognized by QMapShack. This file has to be placed into one of the registered map folders (&lt;a href=&apos;MapFolders&apos;&gt;File-&gt;Setup Map Paths&lt;/a&gt;). QMapShack will find it and list it within a few seconds.&lt;/p&gt; &lt;p&gt;A map must be activated to be visible. Right click on the map entry and select &apos;Activate&apos; from the menu. The moment a map is activated this help will disappear. To see it again you simply add another map view (&lt;a href=&apos;NewView&apos;&gt;View-&gt;Add Map View&lt;/a&gt;).&lt;/p&gt; &lt;p&gt;To start with some online maps click on the link for &lt;a href=&apos;GetMaps&apos;&gt;impatient users&lt;/a&gt;. If you have a Garmin GPS device with non-commercial maps you can copy the *.img and *.jnx files from your device into the map folder.&lt;/p&gt; &lt;/p&gt;If you own raster maps in a format that is supported by GDAL you have to create a virtual map definition file (*.vrt), first. A *.vrt file can reference one or several other files. You can use QMapShack&apos;s built-in VRT Builder (&lt;a href=&apos;VrtBuilder&apos;&gt;Tool-&gt;VRT Builder&lt;/a&gt;) to create such a file.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h2&gt;¡Mapas!&lt;/h2&gt;&lt;p&gt;Un mapa siempre debe estar definido por un único archivo que QMapShack reconozca. Este archivo debe colocarse en una de las carpetas de mapas registradas (&lt;a href=&apos;MapFolders&apos;&gt;Archivo-&gt;Configurar rutas a los mapas&lt;/a&gt;). QMapShack lo encontrará y lo mostrará en la lista en pocos segundos.&lt;/p&gt; &lt;p&gt;Un mapa debe estar activado para ser visible. Haz clic derecho en la entrada del mapa y selecciona &apos;Activar&apos; en el menú. En cuanto se active un mapa, esta ayuda desaparecerá. Para volver a verla, basta con añadir otra vista de mapa (&lt;a href=&apos;NewView&apos;&gt;Vista-&gt;Añadir vista&lt;/a&gt;).&lt;/p&gt; &lt;p&gt;Para empezar con algunos mapas online, haz clic en el enlace para &lt;a href=&apos;GetMaps&apos;&gt;usuarios impacientes&lt;/a&gt;. Si tienes un dispositivo GPS Garmin con mapas no comerciales, puedes copiar los archivos *.img y *.jnx de tu dispositivo a la carpeta de mapas.&lt;/p&gt; &lt;/p&gt;Si tienes mapas ráster en un formato compatible con GDAL, primero tienes que crear un archivo de definición de mapa virtual (*.vrt). Un archivo *.vrt puede hacer referencia a uno o varios archivos. Puedes usar el asistente VRT integrado en QMapShack (&lt;a href=&apos;VrtBuilder&apos;&gt;Herramientas-&gt;Asistente VRT&lt;/a&gt;) para crear dicho archivo.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="366"/>
         <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Sources for DEM&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Fuentes de datos DEM&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="1151"/>
@@ -240,7 +240,7 @@
     <message>
         <location filename="../canvas/CCanvas.cpp" line="293"/>
         <source>&lt;h2&gt;Give it a home&lt;/h2&gt;&lt;p&gt;QMapShack needs a folder on your hard drive where all data is kept. Naturally this will grow very large. We recommend a folder with some subfolders:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Maps - where all maps are stored&lt;/li&gt;&lt;li&gt;DEM - where all elevation data is stored&lt;/li&gt;&lt;li&gt;POI - where all POI collections are stored&lt;/li&gt;&lt;li&gt;Routino - where routing data for the Routino offline router is stored&lt;/li&gt;&lt;li&gt;BRouter - where routing data for the BRouter offline router is stored&lt;/li&gt;&lt;li&gt;Databases - where you create databases to organize your GIS data&lt;/li&gt;&lt;li&gt;GPX - where you keep GPX files&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Do you want to create these folders right now? Give me a &lt;a  href=&apos;SetupHome&apos;&gt;path&lt;/a&gt; and QMapShack will create all sub-folder and update all settings.&lt;/p&gt;</source>
-        <translation>&lt;h2&gt;Almacenar los datos&lt;/h2&gt;&lt;p&gt;Para usar QMapShack recomendamos crear una carpeta en su disco duro para guardar todos los datos. Alcanzará un gran tamaño y será mas ordenado si se crean algunas subcarpetas:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Maps - Para los mapas&lt;/li&gt;&lt;li&gt;DEM - Para los datos de altitud&lt;/li&gt;&lt;li&gt;Routino - Para los datos del enrutador offline Routino&lt;/li&gt;&lt;li&gt;BRouter - Para los datos del enrutador offline BRouter&lt;/li&gt;&lt;li&gt;DataBases - Donde se crean las bases de datos para organizar sus datos GIS&lt;/li&gt;&lt;li&gt;GPX - Donde guardar los archivos GPX&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;¿Quieres crear esto ahora?  Indica &lt;a  href=&apos;SetupHome&apos;&gt;una carpeta raíz&lt;/a&gt; y QMapShack creará las subcarpetas y las configurará.&lt;/p&gt;</translation>
+        <translation type="unfinished">&lt;h2&gt;Almacenar los datos&lt;/h2&gt;&lt;p&gt;QMapShack necesita una carpeta en tu disco duro donde guardar todos los datos. Con el tiempo crecerá mucho. Te recomendamos una carpeta con algunas subcarpetas:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Maps - para todos los mapas&lt;/li&gt;&lt;li&gt;DEM - para todos los datos de altitud&lt;/li&gt;&lt;li&gt;POI - para todas las colecciones de POI&lt;/li&gt;&lt;li&gt;Routino - para los datos del enrutador offline Routino&lt;/li&gt;&lt;li&gt;BRouter - para los datos del enrutador offline BRouter&lt;/li&gt;&lt;li&gt;Databases - donde creas las bases de datos para organizar tus datos GIS&lt;/li&gt;&lt;li&gt;GPX - donde guardas los archivos GPX&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;¿Quieres crear estas carpetas ahora? Indica &lt;a  href=&apos;SetupHome&apos;&gt;una carpeta raíz&lt;/a&gt; y QMapShack creará todas las subcarpetas y actualizará la configuración.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="356"/>
@@ -250,7 +250,7 @@
     <message>
         <location filename="../canvas/CCanvas.cpp" line="373"/>
         <source>&lt;h2&gt;Elevation Data&lt;/h2&gt;&lt;p&gt;Elevation data (Digital Elevation Model - DEM) is used in various functions of QMapShack and is completely independent from the maps. However the same principles as for maps apply. DEM data must always be defined by a single file that is recognized by QMapShack. This file has to be placed into one of the registered DEM folders (&lt;a href=&apos;DemFolders&apos;&gt;File-&gt;Setup DEM Paths&lt;/a&gt;). QMapShack will find it and list it within a few seconds.&lt;/p&gt;&lt;p&gt;Similar to raster maps DEM files have to be wrapped by a *.vrt file to be recognized. A *.vrt file can reference one or several other files. Again, you can use QMapShack&apos;s built-in VRT Builder (&lt;a href=&apos;VrtBuilder&apos;&gt;Tool-&gt;VRT Builder&lt;/a&gt;) to create such a file.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h2&gt;Datos de altitud&lt;/h2&gt;&lt;p&gt;QMapShack usa los datos de altitud (modelo digital de elevación, DEM) en varias funciones, y son completamente independientes de los mapas. Sin embargo, se aplican los mismos principios que para los mapas. Los datos DEM siempre deben estar definidos por un único archivo que QMapShack reconozca. Este archivo debe colocarse en una de las carpetas DEM registradas (&lt;a href=&apos;DemFolders&apos;&gt;Archivo-&gt;Configurar rutas a los DEM&lt;/a&gt;). QMapShack lo encontrará y lo mostrará en la lista en pocos segundos.&lt;/p&gt;&lt;p&gt;Al igual que los mapas ráster, los archivos DEM deben estar envueltos en un archivo *.vrt para ser reconocidos. Un archivo *.vrt puede hacer referencia a uno o varios archivos. También aquí puedes usar el asistente VRT integrado en QMapShack (&lt;a href=&apos;VrtBuilder&apos;&gt;Herramientas-&gt;Asistente VRT&lt;/a&gt;) para crear dicho archivo.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="390"/>
@@ -290,7 +290,7 @@
     <message>
         <location filename="../setup/CCommandProcessor.cpp" line="45"/>
         <source>code</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">código</translation>
     </message>
     <message>
         <location filename="../setup/CCommandProcessor.cpp" line="41"/>
@@ -310,37 +310,37 @@
     <message>
         <location filename="../setup/CCommandProcessor.cpp" line="45"/>
         <source>Application locale.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Idioma de la aplicación.</translation>
     </message>
     <message>
         <location filename="../setup/CCommandProcessor.cpp" line="48"/>
         <source>Application font family.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Familia tipográfica de la aplicación.</translation>
     </message>
     <message>
         <location filename="../setup/CCommandProcessor.cpp" line="51"/>
         <source>Application font size.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tamaño de letra de la aplicación.</translation>
     </message>
     <message>
         <location filename="../setup/CCommandProcessor.cpp" line="55"/>
         <source>Color scheme instead of the desktop&apos;s: light or dark.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Esquema de colores que sustituye al del escritorio: light o dark.</translation>
     </message>
     <message>
         <location filename="../setup/CCommandProcessor.cpp" line="59"/>
         <source>Qt style.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Estilo Qt.</translation>
     </message>
     <message>
         <location filename="../setup/CCommandProcessor.cpp" line="59"/>
         <source>Available:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Disponibles:</translation>
     </message>
     <message>
         <location filename="../setup/CCommandProcessor.cpp" line="60"/>
         <source>Recommended:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Recomendado:</translation>
     </message>
     <message>
         <location filename="../setup/CCommandProcessor.cpp" line="66"/>
@@ -361,7 +361,7 @@
     <message>
         <location filename="../gis/db/CDBFolderLostFound.cpp" line="29"/>
         <source>All your data removed from projects.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Todos los datos que has quitado de los proyectos.</translation>
     </message>
     <message>
         <location filename="../gis/db/CDBFolderLostFound.cpp" line="56"/>
@@ -423,7 +423,7 @@
         <location filename="../gis/CDBItemDelegate.cpp" line="309"/>
         <location filename="../gis/CDBItemDelegate.cpp" line="311"/>
         <source>since: </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">desde hace: </translation>
     </message>
     <message>
         <location filename="../gis/CDBItemDelegate.cpp" line="307"/>
@@ -443,57 +443,57 @@
     <message>
         <location filename="../gis/CDBItemDelegate.cpp" line="459"/>
         <source>Load item into workspace.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Cargar elemento en el espacio de trabajo.</translation>
     </message>
     <message>
         <location filename="../gis/CDBItemDelegate.cpp" line="437"/>
         <source>Load project into workspace</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Cargar proyecto en el espacio de trabajo</translation>
     </message>
     <message>
         <location filename="../gis/CDBItemDelegate.cpp" line="240"/>
         <source>Groups: %1 </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Grupos: %1 </translation>
     </message>
     <message>
         <location filename="../gis/CDBItemDelegate.cpp" line="243"/>
         <source>Projects: %1 </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Proyectos: %1 </translation>
     </message>
     <message>
         <location filename="../gis/CDBItemDelegate.cpp" line="246"/>
         <source>Other: %1 </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Otros: %1 </translation>
     </message>
     <message>
         <location filename="../gis/CDBItemDelegate.cpp" line="253"/>
         <source>W: %1 </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">W: %1 </translation>
     </message>
     <message>
         <location filename="../gis/CDBItemDelegate.cpp" line="256"/>
         <source>T: %1 </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">T: %1 </translation>
     </message>
     <message>
         <location filename="../gis/CDBItemDelegate.cpp" line="259"/>
         <source>R: %1 </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">R: %1 </translation>
     </message>
     <message>
         <location filename="../gis/CDBItemDelegate.cpp" line="262"/>
         <source>A: %1 </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">A: %1 </translation>
     </message>
     <message>
         <location filename="../gis/CDBItemDelegate.cpp" line="461"/>
         <source>Remove item from workspace.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Quitar elemento del espacio de trabajo.</translation>
     </message>
     <message>
         <location filename="../gis/CDBItemDelegate.cpp" line="439"/>
         <source>Remove project from workspace</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Quitar proyecto del espacio de trabajo</translation>
     </message>
 </context>
 <context>
@@ -598,7 +598,7 @@ Para resolver este conflicto puedes crear una copia y guardarla , forzar tu vers
     <message>
         <location filename="../dem/CDemVRT.cpp" line="47"/>
         <source>File is not UTF-8 encoded and cannot be loaded. Convert it to UTF-8 first:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">El archivo no está codificado en UTF-8 y no se puede cargar. Conviértelo primero a UTF-8:</translation>
     </message>
     <message>
         <location filename="../dem/CDemVRT.cpp" line="54"/>
@@ -619,17 +619,17 @@ Para resolver este conflicto puedes crear una copia y guardarla , forzar tu vers
         <location filename="../dem/CDemVRT.cpp" line="70"/>
         <location filename="../dem/CDemVRT.cpp" line="78"/>
         <source>DEM must have exactly one raster band:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">El DEM debe tener exactamente una banda ráster:</translation>
     </message>
     <message>
         <location filename="../dem/CDemVRT.cpp" line="92"/>
         <source>DEM must have one band with 16bit, 32bit or 64bit numeric data:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">El DEM debe tener una banda con datos numéricos de 16, 32 o 64 bits:</translation>
     </message>
     <message>
         <location filename="../dem/CDemVRT.cpp" line="124"/>
         <source>Failed to create Warp for:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fallo al crear la transformación (Warp) para:</translation>
     </message>
     <message>
         <source>DEM must have one band with 16bit or 32bit data:</source>
@@ -643,7 +643,7 @@ Para resolver este conflicto puedes crear una copia y guardarla , forzar tu vers
     <message>
         <location filename="../dem/CDemVRT.cpp" line="148"/>
         <source>No pixel-to-map transform found:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">No se encontró ninguna transformación de píxel a mapa:</translation>
     </message>
     <message>
         <location filename="../dem/CDemVRT.cpp" line="538"/>
@@ -860,8 +860,8 @@ Para resolver este conflicto puedes crear una copia y guardarla , forzar tu vers
     <name>CDetailsTrk</name>
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="96"/>
-        <source>&lt;b&gt;Track Point Information&lt;/b&gt;&lt;br/&gt;To document your tracks you can add a short description to a track point. All points with description will be marked along the track with auto-numbered bullets.&lt;br/&gt;You can add a description by a right click on a track point in the graphs. Or you do a left click on a track point in the map view.&lt;br/&gt;With the first track point you add information to this text will be replaced by a table. Use it to edit and delete track point information.&lt;br/&gt;</source>
-        <translation>&lt;b&gt;Etiquetas numeradas&lt;/b&gt;&lt;br/&gt;Se puede añadir una breve descripción a ciertos puntos del track y todos ellos se marcarán con una etiqueta auto-numerada.&lt;/br&gt;Es útil para para mostrar  una leyenda de las etiquetas numeradas sobre la vista del mapa y crear una reseña.&lt;br/&gt;Para añadir una etiqueta a un punto haz clic derecho sobre una de las gráficas o clic izquierdo sobre la vista del mapa&lt;br/&gt;Se pueden editar o borrar las etiquetas en la lista que se mostrará en este mismo panel.&lt;br/&gt;</translation>
+        <source>&lt;b&gt;Track Point Information&lt;/b&gt;&lt;br/&gt;Add a short description to a track point: right click on it in the graphs, or left click on it on the map. Points with a description get numbered bullets along the track.</source>
+        <translation type="unfinished">&lt;b&gt;Información de puntos del track&lt;/b&gt;&lt;br/&gt;Añade una breve descripción a un punto del track: haz clic con el botón derecho sobre él en los gráficos, o con el izquierdo sobre él en el mapa. Los puntos con descripción se marcan con viñetas numeradas a lo largo del track.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="198"/>
@@ -909,7 +909,7 @@ Para resolver este conflicto puedes crear una copia y guardarla , forzar tu vers
     <message>
         <location filename="../gis/wpt/CDetailsWpt.cpp" line="87"/>
         <source>Select icon</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Seleccionar icono</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CDetailsWpt.cpp" line="158"/>
@@ -927,22 +927,22 @@ Para resolver este conflicto puedes crear una copia y guardarla , forzar tu vers
     <message>
         <location filename="../device/CDeviceAccessGvfsMtp.cpp" line="97"/>
         <source>Send to Devices...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Enviar a dispositivos...</translation>
     </message>
     <message>
         <location filename="../device/CDeviceAccessGvfsMtp.cpp" line="98"/>
         <source>Failed to send file &quot;%1&quot; to device. Reason: %2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fallo al enviar el archivo &quot;%1&quot; al dispositivo. Motivo: %2</translation>
     </message>
     <message>
         <location filename="../device/CDeviceAccessGvfsMtp.cpp" line="111"/>
         <source>Delete from Devices...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Borrar de dispositivos...</translation>
     </message>
     <message>
         <location filename="../device/CDeviceAccessGvfsMtp.cpp" line="112"/>
         <source>Failed to delete file &quot;%1&quot; from device. Reason: %2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fallo al borrar el archivo &quot;%1&quot; del dispositivo. Motivo: %2</translation>
     </message>
 </context>
 <context>
@@ -950,22 +950,22 @@ Para resolver este conflicto puedes crear una copia y guardarla , forzar tu vers
     <message>
         <location filename="../device/CDeviceAccessKMtp.cpp" line="89"/>
         <source>Send to Devices...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Enviar a dispositivos...</translation>
     </message>
     <message>
         <location filename="../device/CDeviceAccessKMtp.cpp" line="90"/>
         <source>Failed to send file &quot;%1&quot; to device.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fallo al enviar el archivo &quot;%1&quot; al dispositivo.</translation>
     </message>
     <message>
         <location filename="../device/CDeviceAccessKMtp.cpp" line="103"/>
         <source>Delete from Devices...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Borrar de dispositivos...</translation>
     </message>
     <message>
         <location filename="../device/CDeviceAccessKMtp.cpp" line="104"/>
         <source>Failed to delete file &quot;%1&quot; from device. Reason: %2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fallo al borrar el archivo &quot;%1&quot; del dispositivo. Motivo: %2</translation>
     </message>
 </context>
 <context>
@@ -992,7 +992,7 @@ Para resolver este conflicto puedes crear una copia y guardarla , forzar tu vers
     <message>
         <location filename="../device/CDeviceGarminArchive.cpp" line="48"/>
         <source>Archive - loading</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Archivo - cargando</translation>
     </message>
     <message>
         <location filename="../device/CDeviceGarminArchive.cpp" line="84"/>
@@ -1006,12 +1006,12 @@ Para resolver este conflicto puedes crear una copia y guardarla , forzar tu vers
         <location filename="../device/CDeviceGarminArchiveMtp.cpp" line="31"/>
         <location filename="../device/CDeviceGarminArchiveMtp.cpp" line="136"/>
         <source>Archive - expand to load</source>
-        <translation type="unfinished">Archivo: expanda para cargar</translation>
+        <translation type="unfinished">Archivo - expandir para cargar</translation>
     </message>
     <message>
         <location filename="../device/CDeviceGarminArchiveMtp.cpp" line="63"/>
         <source>Archive - loading</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Archivo - cargando</translation>
     </message>
     <message>
         <location filename="../device/CDeviceGarminArchiveMtp.cpp" line="109"/>
@@ -1024,7 +1024,7 @@ Para resolver este conflicto puedes crear una copia y guardarla , forzar tu vers
     <message>
         <location filename="../device/CDeviceGenericMtp.cpp" line="62"/>
         <source>Unknown MTP</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">MTP desconocido</translation>
     </message>
 </context>
 <context>
@@ -1382,7 +1382,9 @@ El único valor a introducir es la longitud mínima del bucle: Esto sirve para e
         <source>Sometimes tracks have too many points to be transferred to a gps device.
 
 This filter splits the track into multiple smaller tracks.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">A veces los tracks tienen demasiados puntos para transferirlos a un dispositivo GPS.
+
+Este filtro divide el track en varios tracks más pequeños.</translation>
     </message>
 </context>
 <context>
@@ -1427,57 +1429,57 @@ Se pueden modificar ambos parámetros para personalizar el comportamiento. Para 
     <message>
         <location filename="../gis/fit2/CFit2Project.cpp" line="63"/>
         <source>Failed to load file %1...</source>
-        <translation type="unfinished">Falló al cargar archivo %1...</translation>
+        <translation type="unfinished">Fallo al cargar el archivo %1...</translation>
     </message>
     <message>
         <location filename="../gis/fit2/CFit2Project.cpp" line="223"/>
         <source>total elapsed time: %1%2&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">tiempo total transcurrido: %1%2&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../gis/fit2/CFit2Project.cpp" line="233"/>
         <source>total distance: %1%2&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">distancia total: %1%2&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../gis/fit2/CFit2Project.cpp" line="228"/>
         <source>total timer time: %1%2&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">tiempo total del cronómetro: %1%2&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../gis/fit2/CFit2Project.cpp" line="238"/>
         <source>enhanced max speed: %1%2&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">velocidad máx. mejorada: %1%2&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../gis/fit2/CFit2Project.cpp" line="243"/>
         <source>enhanced min altitude: %1%2&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">altitud mín. mejorada: %1%2&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../gis/fit2/CFit2Project.cpp" line="248"/>
         <source>enhanced max altitude: %1%2&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">altitud máx. mejorada: %1%2&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../gis/fit2/CFit2Project.cpp" line="252"/>
         <source>total calories: %1kcal&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">calorías totales: %1kcal&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../gis/fit2/CFit2Project.cpp" line="257"/>
         <source>total ascent: %1%2&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ascenso total: %1%2&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../gis/fit2/CFit2Project.cpp" line="262"/>
         <source>total descent: %1%2&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">descenso total: %1%2&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../gis/fit2/CFit2Project.cpp" line="266"/>
         <source>number of laps: %1&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">número de vueltas: %1&lt;br/&gt;</translation>
     </message>
 </context>
 <context>
@@ -1548,7 +1550,7 @@ Se pueden modificar ambos parámetros para personalizar el comportamiento. Para 
     <message>
         <location filename="../gis/search/CGeoSearch.cpp" line="137"/>
         <source>configure providers of geocoding search services</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">configurar proveedores de servicios de búsqueda por geocodificación</translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearch.cpp" line="186"/>
@@ -1772,102 +1774,102 @@ Se pueden modificar ambos parámetros para personalizar el comportamiento. Para 
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="914"/>
         <source>Go straight</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Seguir recto</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="917"/>
         <source>Turn left</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Girar a la izquierda</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="920"/>
         <source>Turn slightly left</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Girar ligeramente a la izquierda</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="923"/>
         <source>Turn sharply left</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Girar bruscamente a la izquierda</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="926"/>
         <source>Turn right</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Girar a la derecha</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="929"/>
         <source>Turn slightly right</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Girar ligeramente a la derecha</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="932"/>
         <source>Turn sharply right</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Girar bruscamente a la derecha</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="935"/>
         <source>Keep left</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Mantenerse a la izquierda</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="938"/>
         <source>Keep right</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Mantenerse a la derecha</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="941"/>
         <source>U-turn left</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Cambio de sentido por la izquierda</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="944"/>
         <source>U-turn</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Cambio de sentido</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="947"/>
         <source>U-turn right</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Cambio de sentido por la derecha</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="950"/>
         <source>Roundabout exit %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Rotonda, salida %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="953"/>
         <source>Roundabout left exit %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Rotonda (sentido horario), salida %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="956"/>
         <source>Exit left</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Salir por la izquierda</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="959"/>
         <source>Exit right</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Salir por la derecha</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="961"/>
         <source>Start</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Inicio</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="963"/>
         <source>Destination</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Destino</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="967"/>
         <source>, %1 degrees</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">, %1 grados</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="980"/>
         <source>Follow the route for %1%2 or %3%4</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Seguir la ruta durante %1%2 o %3%4</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="328"/>
@@ -2076,7 +2078,7 @@ Se pueden modificar ambos parámetros para personalizar el comportamiento. Para 
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="464"/>
         <source>Start</source>
-        <translation></translation>
+        <translation type="unfinished">Inicio</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="472"/>
@@ -2101,7 +2103,7 @@ Se pueden modificar ambos parámetros para personalizar el comportamiento. Para 
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="648"/>
         <source>Surface: %1 (%2), %3</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Superficie: %1 (%2), %3</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1396"/>
@@ -2253,12 +2255,12 @@ Se pueden modificar ambos parámetros para personalizar el comportamiento. Para 
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="575"/>
         <source>The filter can not be applied</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">No se puede aplicar el filtro</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="576"/>
         <source>The number of points in the track must be higher than the number of tracks to split into.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">El número de puntos del track debe ser mayor que el número de tracks en que se divide.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="716"/>
@@ -2396,12 +2398,12 @@ Se pueden modificar ambos parámetros para personalizar el comportamiento. Para 
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="504"/>
         <source>Changed timestamp</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Se cambió la marca de tiempo</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="976"/>
         <source>QMS Attribute Flag</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Indicador de atributo QMS</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="977"/>
@@ -2622,7 +2624,7 @@ Se pueden modificar ambos parámetros para personalizar el comportamiento. Para 
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1022"/>
         <source>Truck Driver/RV</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Camioneros/autocaravanas</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1023"/>
@@ -2727,7 +2729,7 @@ Se pueden modificar ambos parámetros para personalizar el comportamiento. Para 
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1043"/>
         <source>GeoTour</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">GeoTour</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="1062"/>
@@ -2770,7 +2772,7 @@ Se pueden modificar ambos parámetros para personalizar el comportamiento. Para 
     <message>
         <location filename="../gis/CGisListDB.cpp" line="115"/>
         <source>Add Database</source>
-        <translation>Añadir Base de Datos</translation>
+        <translation type="unfinished">Añadir base de datos</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="119"/>
@@ -2811,7 +2813,7 @@ Se pueden modificar ambos parámetros para personalizar el comportamiento. Para 
         <location filename="../gis/CGisListDB.cpp" line="136"/>
         <location filename="../gis/CGisListDB.cpp" line="155"/>
         <source>Delete Item</source>
-        <translation>Eliminar Elemento</translation>
+        <translation type="unfinished">Eliminar elemento</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="140"/>
@@ -2915,7 +2917,7 @@ Se pueden modificar ambos parámetros para personalizar el comportamiento. Para 
     <message>
         <location filename="../gis/CGisListWks.cpp" line="117"/>
         <source>Edit..</source>
-        <translation>Editar..</translation>
+        <translation type="unfinished">Editar...</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="155"/>
@@ -3017,7 +3019,7 @@ Se pueden modificar ambos parámetros para personalizar el comportamiento. Para 
     <message>
         <location filename="../gis/CGisListWks.cpp" line="245"/>
         <source>Change Icon...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Cambiar icono...</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="1061"/>
@@ -3144,13 +3146,13 @@ Se pueden modificar ambos parámetros para personalizar el comportamiento. Para 
     <message>
         <location filename="../gis/CGisListWks.cpp" line="192"/>
         <source>Convert to Area</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Convertir en área</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="194"/>
         <location filename="../gis/CGisListWks.cpp" line="230"/>
         <source>Toggle Nogo-Line</source>
-        <translation>Herramienta Linea de Prohibición</translation>
+        <translation type="unfinished">Activar/desactivar línea de prohibición</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="212"/>
@@ -3259,7 +3261,7 @@ Se pueden modificar ambos parámetros para personalizar el comportamiento. Para 
     <message>
         <location filename="../gis/CGisWorkspace.cpp" line="135"/>
         <source>The project &quot;%1&quot; has the same project key as the project &quot;%2&quot;, which is already in the workspace. A project is identified by its key, not by its name or file name. Copying a project file copies its key, too.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">El proyecto &quot;%1&quot; tiene la misma clave de proyecto que el proyecto &quot;%2&quot;, que ya está en el espacio de trabajo. Un proyecto se identifica por su clave, no por su nombre ni por su nombre de archivo. Al copiar un archivo de proyecto también se copia su clave.</translation>
     </message>
     <message>
         <location filename="../gis/CGisWorkspace.cpp" line="204"/>
@@ -3427,17 +3429,17 @@ línea %2, columna %3.
     <message>
         <location filename="../../common/help/CHelpBrowser.cpp" line="239"/>
         <source>Go back one page</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Retroceder una página</translation>
     </message>
     <message>
         <location filename="../../common/help/CHelpBrowser.cpp" line="244"/>
         <source>Go forward one page</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Avanzar una página</translation>
     </message>
     <message>
         <location filename="../../common/help/CHelpBrowser.cpp" line="249"/>
         <source>Go to initial page</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ir a la página inicial</translation>
     </message>
 </context>
 <context>
@@ -3718,7 +3720,7 @@ línea %2, columna %3.
         <location filename="../gis/trk/CKnownExtension.cpp" line="155"/>
         <source>Speed (device)</source>
         <comment>extLongName</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Velocidad (dispositivo)</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="159"/>
@@ -3730,19 +3732,19 @@ línea %2, columna %3.
         <location filename="../gis/trk/CKnownExtension.cpp" line="159"/>
         <source>Distance (device)</source>
         <comment>extLongName</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Distancia (dispositivo)</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="165"/>
         <source>Resp. Rate</source>
         <comment>extShortName</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Frec. resp.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="165"/>
         <source>Respiration Rate</source>
         <comment>extLongName</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Frecuencia respiratoria</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="182"/>
@@ -3796,25 +3798,25 @@ línea %2, columna %3.
         <location filename="../gis/trk/CKnownExtension.cpp" line="210"/>
         <source>Surface</source>
         <comment>extShortName</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Superficie</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="210"/>
         <source>Surface*</source>
         <comment>extLongName</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Superficie*</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="215"/>
         <source>Way Type</source>
         <comment>extShortName</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tipo de vía</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="215"/>
         <source>Way Type*</source>
         <comment>extLongName</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tipo de vía*</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="182"/>
@@ -3976,7 +3978,7 @@ línea %2, columna %3.
     <message>
         <location filename="../CMainWindow.cpp" line="1318"/>
         <source>Load GIS Data...</source>
-        <translation>Cargar Datos GIS...</translation>
+        <translation type="unfinished">Cargar datos GIS...</translation>
     </message>
     <message>
         <location filename="../CMainWindow.cpp" line="1345"/>
@@ -3997,12 +3999,12 @@ línea %2, columna %3.
     <message>
         <location filename="../CMainWindow.cpp" line="1382"/>
         <source>Can not add view...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">No se puede añadir la vista...</translation>
     </message>
     <message>
         <location filename="../CMainWindow.cpp" line="1383"/>
         <source>The view is already loaded as &apos;%1&apos;. You have to close it before loading it again.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">La vista ya está cargada como &apos;%1&apos;. Tienes que cerrarla antes de volver a cargarla.</translation>
     </message>
     <message>
         <location filename="../CMainWindow.cpp" line="1607"/>
@@ -4032,7 +4034,7 @@ línea %2, columna %3.
     <message>
         <location filename="../CMainWindow.cpp" line="1767"/>
         <source>The help pages are missing (%1). Please reinstall QMapShack.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Faltan las páginas de ayuda (%1). Vuelve a instalar QMapShack.</translation>
     </message>
     <message>
         <location filename="../CMainWindow.cpp" line="1829"/>
@@ -4047,12 +4049,12 @@ línea %2, columna %3.
     <message>
         <location filename="../misc.h" line="55"/>
         <source>File access failed...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fallo al acceder al archivo...</translation>
     </message>
     <message>
         <location filename="../misc.h" line="56"/>
         <source>Failed to open %1 with error %2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fallo al abrir %1 con el error %2</translation>
     </message>
 </context>
 <context>
@@ -4618,7 +4620,7 @@ línea %2, columna %3.
     <message>
         <location filename="../map/CMapIMG.cpp" line="666"/>
         <source>???</source>
-        <translation></translation>
+        <translation type="unfinished">???</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="677"/>
@@ -4661,7 +4663,7 @@ Se vuelve al TYP interno.</translation>
     <message>
         <location filename="../map/CMapIMG.cpp" line="982"/>
         <source>File contains locked / encrypted data. Garmin does not want you to use this file with any other software than the one supplied by Garmin.</source>
-        <translation>El archivo contiene datos bloqueados y/o encriptados. Garmin no quiere que se use este archivo con ningún otro software que el suministrado por ellos.</translation>
+        <translation type="unfinished">El archivo contiene datos bloqueados y/o cifrados. Garmin no quiere que se use este archivo con ningún otro software que el suministrado por ellos.</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="2410"/>
@@ -4688,17 +4690,17 @@ Se vuelve al TYP interno.</translation>
     <message>
         <location filename="../map/CMapItemDelegate.cpp" line="227"/>
         <source>inactive</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">inactivo</translation>
     </message>
     <message>
         <location filename="../map/CMapItemDelegate.cpp" line="230"/>
         <source>active</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">activo</translation>
     </message>
     <message>
         <location filename="../map/CMapItemDelegate.cpp" line="233"/>
         <source>missing</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">no encontrado</translation>
     </message>
     <message>
         <location filename="../map/CMapItemDelegate.cpp" line="237"/>
@@ -4708,27 +4710,27 @@ Se vuelve al TYP interno.</translation>
     <message>
         <location filename="../map/CMapItemDelegate.cpp" line="357"/>
         <source>This file can be slow to draw on the map. Click here to see how to speed it up.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Este archivo puede dibujarse lentamente en el mapa. Haz clic aquí para ver cómo acelerarlo.</translation>
     </message>
     <message>
         <location filename="../map/CMapItemDelegate.cpp" line="360"/>
         <source>Deactivate %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Desactivar %1</translation>
     </message>
     <message>
         <location filename="../map/CMapItemDelegate.cpp" line="360"/>
         <source>Activate %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Activar %1</translation>
     </message>
     <message>
         <location filename="../map/CMapItemDelegate.cpp" line="364"/>
         <source>%1 is not visible at current scale</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 no es visible a la escala actual</translation>
     </message>
     <message>
         <location filename="../map/CMapItemDelegate.cpp" line="365"/>
         <source>%1 is visible at current scale</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 es visible a la escala actual</translation>
     </message>
 </context>
 <context>
@@ -4736,7 +4738,7 @@ Se vuelve al TYP interno.</translation>
     <message>
         <location filename="../map/CMapList.cpp" line="314"/>
         <source>Where do you want to store maps?</source>
-        <translation>¿Dónde se almacenaran los mapas?</translation>
+        <translation type="unfinished">¿Dónde quieres guardar los mapas?</translation>
     </message>
 </context>
 <context>
@@ -4852,7 +4854,7 @@ línea %2, columna %3.
     <message>
         <location filename="../map/CMapTMS.cpp" line="123"/>
         <source>Malformed TMS file. The layer numbers do not index the available layers. Layer numbers start from index 0.</source>
-        <translation type="unfinished">Archivo TMS incorrecto. Los números de capa no indexan las capas disponibles. Los números de capa deben comenzar desde el índice 0.</translation>
+        <translation type="unfinished">Archivo TMS incorrecto. Los números de capa no corresponden a las capas disponibles. Los números de capa empiezan en el índice 0.</translation>
     </message>
     <message>
         <location filename="../map/CMapTMS.cpp" line="142"/>
@@ -4876,7 +4878,7 @@ línea %2, columna %3.
     <message>
         <location filename="../map/CMapVRT.cpp" line="45"/>
         <source>File is not UTF-8 encoded and cannot be loaded. Convert it to UTF-8 first:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">El archivo no está codificado en UTF-8 y no se puede cargar. Conviértelo primero a UTF-8:</translation>
     </message>
     <message>
         <location filename="../map/CMapVRT.cpp" line="57"/>
@@ -4886,17 +4888,17 @@ línea %2, columna %3.
     <message>
         <location filename="../map/CMapVRT.cpp" line="57"/>
         <source>referenced by file:</source>
-        <translation type="unfinished">referenciado por archivo:</translation>
+        <translation type="unfinished">referenciado por el archivo:</translation>
     </message>
     <message>
         <location filename="../map/CMapVRT.cpp" line="64"/>
         <source>File has no raster bands:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">El archivo no tiene bandas ráster:</translation>
     </message>
     <message>
         <location filename="../map/CMapVRT.cpp" line="78"/>
         <source>Palette band has no color table:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">La banda de paleta no tiene tabla de colores:</translation>
     </message>
     <message>
         <location filename="../map/CMapVRT.cpp" line="90"/>
@@ -4906,7 +4908,7 @@ línea %2, columna %3.
     <message>
         <location filename="../map/CMapVRT.cpp" line="156"/>
         <source>Failed to create Warp for:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fallo al crear la transformación (Warp) para:</translation>
     </message>
     <message>
         <location filename="../map/CMapVRT.cpp" line="168"/>
@@ -4916,12 +4918,12 @@ línea %2, columna %3.
     <message>
         <location filename="../map/CMapVRT.cpp" line="176"/>
         <source>Raster has an invalid (zero) size:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">El ráster tiene un tamaño no válido (cero):</translation>
     </message>
     <message>
         <location filename="../map/CMapVRT.cpp" line="182"/>
         <source>No pixel-to-map transform found:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">No se encontró ninguna transformación de píxel a mapa:</translation>
     </message>
     <message>
         <source>Failed to read: %1
@@ -4953,7 +4955,8 @@ línea %2, columna %3.
         <location filename="../tool/CMapVrtBuilder.cpp" line="207"/>
         <source>!!! failed !!!
 </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">¡¡¡ fallo !!!
+</translation>
     </message>
     <message>
         <location filename="../tool/CMapVrtBuilder.cpp" line="211"/>
@@ -4965,12 +4968,12 @@ línea %2, columna %3.
     <message>
         <location filename="../tool/CMapVrtBuilder.cpp" line="246"/>
         <source>Cannot replace %1. Is it in use?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">No se puede reemplazar %1. ¿Está en uso?</translation>
     </message>
     <message>
         <location filename="../tool/CMapVrtBuilder.cpp" line="257"/>
         <source>Cannot rename %1 to %2.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">No se puede renombrar %1 a %2.</translation>
     </message>
 </context>
 <context>
@@ -5080,12 +5083,12 @@ Estructura desconocida.</translation>
     <message>
         <location filename="../mouse/CMouseNormal.cpp" line="393"/>
         <source>Add Waypoint</source>
-        <translation>Añadir Waypoint</translation>
+        <translation type="unfinished">Añadir waypoint</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseNormal.cpp" line="395"/>
         <source>Add Track</source>
-        <translation>Añadir Track</translation>
+        <translation type="unfinished">Añadir track</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseNormal.cpp" line="397"/>
@@ -5115,7 +5118,7 @@ Estructura desconocida.</translation>
     <message>
         <location filename="../mouse/CMouseNormal.cpp" line="411"/>
         <source>Copy position (Grid)</source>
-        <translation>Copiar posicion (cuadrícula)</translation>
+        <translation type="unfinished">Copiar posición (cuadrícula)</translation>
     </message>
 </context>
 <context>
@@ -5266,131 +5269,131 @@ Estructura desconocida.</translation>
     <message>
         <location filename="../gis/trk/surface/CPbfReader.cpp" line="44"/>
         <source>truncated varint</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">varint truncado</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CPbfReader.cpp" line="52"/>
         <source>varint too long</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">varint demasiado largo</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CPbfReader.cpp" line="74"/>
         <location filename="../gis/trk/surface/CPbfReader.cpp" line="103"/>
         <source>truncated field</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">campo truncado</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CPbfReader.cpp" line="96"/>
         <source>unsupported wire type</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">tipo de codificación (wire type) no soportado</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CPbfReader.cpp" line="120"/>
         <source>value out of range</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">valor fuera de rango</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CPbfReader.cpp" line="152"/>
         <source>coordinate out of range</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">coordenada fuera de rango</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CPbfReader.cpp" line="199"/>
         <source>inconsistent dense nodes</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">nodos densos incoherentes</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CPbfReader.cpp" line="232"/>
         <source>inconsistent way tags</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">etiquetas de vía incoherentes</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CPbfReader.cpp" line="252"/>
         <source>The file is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">El archivo está vacío.</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CPbfReader.cpp" line="257"/>
         <source>Not an OSM PBF file: first block is &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">No es un archivo OSM PBF: el primer bloque es &apos;%1&apos;</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CPbfReader.cpp" line="264"/>
         <source>Broken OSM header: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Cabecera OSM dañada: %1</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CPbfReader.cpp" line="271"/>
         <source>This is an OSM history file (.osh.pbf), it is not supported. Please use a regular extract (.osm.pbf).</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Es un archivo de historial OSM (.osh.pbf), no está soportado. Usa un extracto normal (.osm.pbf).</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CPbfReader.cpp" line="279"/>
         <source>Unsupported PBF feature: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Característica PBF no soportada: %1</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CPbfReader.cpp" line="295"/>
         <source>Failed to read at offset %1: %2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fallo al leer en la posición %1: %2</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CPbfReader.cpp" line="301"/>
         <location filename="../gis/trk/surface/CPbfReader.cpp" line="309"/>
         <source>truncated block header</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">cabecera de bloque truncada</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CPbfReader.cpp" line="305"/>
         <source>block header too large</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">cabecera de bloque demasiado grande</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CPbfReader.cpp" line="325"/>
         <location filename="../gis/trk/surface/CPbfReader.cpp" line="356"/>
         <source>block too large</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">bloque demasiado grande</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CPbfReader.cpp" line="330"/>
         <source>truncated block</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">bloque truncado</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CPbfReader.cpp" line="359"/>
         <source>zlib decompression failed</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">fallo en la descompresión zlib</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CPbfReader.cpp" line="362"/>
         <source>unsupported compression (only zlib is supported)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">compresión no soportada (solo se soporta zlib)</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CPbfReader.cpp" line="365"/>
         <source>Broken PBF file at offset %1: %2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Archivo PBF dañado en la posición %1: %2</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CPbfReader.cpp" line="477"/>
         <location filename="../gis/trk/surface/CPbfReader.cpp" line="482"/>
         <source>string index out of range</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">índice de cadena fuera de rango</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CPbfReader.cpp" line="496"/>
         <source>PBF file is not open</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">El archivo PBF no está abierto</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CPbfReader.cpp" line="512"/>
         <source>Broken PBF data block before offset %1: %2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Bloque de datos PBF dañado antes de la posición %1: %2</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CPbfReader.cpp" line="517"/>
         <source>aborted</source>
-        <translation type="unfinished">Intento frustrado</translation>
+        <translation type="unfinished">cancelado</translation>
     </message>
 </context>
 <context>
@@ -5438,52 +5441,52 @@ Estructura desconocida.</translation>
         <location filename="../poi/CPoiFilePOI.cpp" line="85"/>
         <location filename="../poi/CPoiFilePOI.cpp" line="103"/>
         <source>POI file error...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Error en el archivo POI...</translation>
     </message>
     <message>
         <location filename="../poi/CPoiFilePOI.cpp" line="59"/>
         <source>Failed to open SQL database:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fallo al abrir la base de datos SQL:</translation>
     </message>
     <message>
         <location filename="../poi/CPoiFilePOI.cpp" line="62"/>
         <source>SQL error...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Error SQL...</translation>
     </message>
     <message>
         <location filename="../poi/CPoiFilePOI.cpp" line="83"/>
         <source>No valid POI file &apos;%1&apos;. Failed to retrieve bounding box!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&apos;%1&apos; no es un archivo POI válido. ¡Fallo al obtener el rectángulo envolvente!</translation>
     </message>
     <message>
         <location filename="../poi/CPoiFilePOI.cpp" line="99"/>
         <source>POI file &apos;%1&apos; is POI version %2. Only versions 2, 3 and 4 are supported!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">El archivo POI &apos;%1&apos; es de la versión POI %2. ¡Solo se soportan las versiones 2, 3 y 4!</translation>
     </message>
     <message>
         <location filename="../poi/CPoiFilePOI.cpp" line="101"/>
         <source>See &lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocGisItemsPOI&apos;&gt;Wiki&lt;/a&gt; for more information.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Consulta la &lt;a href=&apos;https://github.com/Maproom/qmapshack/wiki/DocGisItemsPOI&apos;&gt;Wiki&lt;/a&gt; para más información.</translation>
     </message>
     <message>
         <location filename="../poi/CPoiFilePOI.cpp" line="342"/>
         <source>Category: </source>
-        <translation type="unfinished">Categoría:</translation>
+        <translation type="unfinished">Categoría: </translation>
     </message>
     <message>
         <location filename="../poi/CPoiFilePOI.cpp" line="347"/>
         <source>Links: </source>
-        <translation type="unfinished">Enlaces:</translation>
+        <translation type="unfinished">Enlaces: </translation>
     </message>
     <message>
         <location filename="../poi/CPoiFilePOI.cpp" line="359"/>
         <source>Zoom in to see more details.</source>
-        <translation type="unfinished">Zoom para ver más detalles.</translation>
+        <translation type="unfinished">Acerca la vista para ver más detalles.</translation>
     </message>
     <message>
         <location filename="../poi/CPoiFilePOI.cpp" line="361"/>
         <source>POIs at this point:</source>
-        <translation type="unfinished">POIs en esta ubicación:</translation>
+        <translation type="unfinished">POI en este punto:</translation>
     </message>
 </context>
 <context>
@@ -5493,28 +5496,30 @@ Estructura desconocida.</translation>
         <source>addr:housenumber addr:street&lt;br&gt;
 addr:city addr:postcode&lt;br&gt;
 addr:country</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">addr:street addr:housenumber&lt;br&gt;
+addr:postcode addr:city&lt;br&gt;
+addr:country</translation>
     </message>
     <message>
         <location filename="../poi/CPoiItemPOI.cpp" line="138"/>
         <source>Alternative names: </source>
-        <translation type="unfinished">Nombres alternativos:</translation>
+        <translation type="unfinished">Nombres alternativos: </translation>
     </message>
     <message>
         <location filename="../poi/CPoiItemPOI.cpp" line="157"/>
         <location filename="../poi/CPoiItemPOI.cpp" line="163"/>
         <source>Phone number: </source>
-        <translation type="unfinished">Teléfono:</translation>
+        <translation type="unfinished">Teléfono: </translation>
     </message>
     <message>
         <location filename="../poi/CPoiItemPOI.cpp" line="169"/>
         <source>Mobile phone number: </source>
-        <translation type="unfinished">Móvil:</translation>
+        <translation type="unfinished">Teléfono móvil: </translation>
     </message>
     <message>
         <location filename="../poi/CPoiItemPOI.cpp" line="175"/>
         <source>Fax: </source>
-        <translation type="unfinished">Fax:</translation>
+        <translation type="unfinished">Fax: </translation>
     </message>
     <message>
         <location filename="../poi/CPoiItemPOI.cpp" line="206"/>
@@ -5532,12 +5537,12 @@ addr:country</source>
     <message>
         <location filename="../poi/CPoiItemPOI.cpp" line="233"/>
         <source>OpenStreetMap</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">OpenStreetMap</translation>
     </message>
     <message>
         <location filename="../poi/CPoiItemPOI.cpp" line="239"/>
         <source>wikimedia</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">wikimedia</translation>
     </message>
     <message>
         <location filename="../poi/CPoiItemPOI.cpp" line="242"/>
@@ -5547,12 +5552,12 @@ addr:country</source>
     <message>
         <location filename="../poi/CPoiItemPOI.cpp" line="258"/>
         <source>Wikipedia</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Wikipedia</translation>
     </message>
     <message>
         <location filename="../poi/CPoiItemPOI.cpp" line="281"/>
         <source>Wikidata</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Wikidata</translation>
     </message>
 </context>
 <context>
@@ -5948,13 +5953,13 @@ no es una definición de un sistema de coordenadas válido:
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="295"/>
         <source>Calculate route failed.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fallo al calcular la ruta.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="335"/>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="449"/>
         <source>this version of BRouter does not support more than 1 nogo-area</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">esta versión de BRouter no admite más de 1 área prohibida (nogo)</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="344"/>
@@ -5966,7 +5971,7 @@ no es una definición de un sistema de coordenadas válido:
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="350"/>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="465"/>
         <source>Failed to parse BRouter response (line %1): %2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fallo al analizar la respuesta de BRouter (línea %1): %2</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="391"/>
@@ -6010,12 +6015,12 @@ no es una definición de un sistema de coordenadas válido:
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterDownloadPage.cpp" line="67"/>
         <source>no brouter-version to install selected</source>
-        <translation type="unfinished">Ninguna versión de BRouter para instalar seleccionada</translation>
+        <translation type="unfinished">no se ha seleccionado ninguna versión de BRouter para instalar</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterDownloadPage.cpp" line="87"/>
         <source>selected %1 for download and installation</source>
-        <translation type="unfinished">Seleccione %1 para descargar e instalar</translation>
+        <translation type="unfinished">%1 seleccionado para descargar e instalar</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterDownloadPage.cpp" line="120"/>
@@ -6026,22 +6031,22 @@ no es una definición de un sistema de coordenadas válido:
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterDownloadPage.cpp" line="126"/>
         <source>Error parsing json: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Error al analizar el JSON: %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterDownloadPage.cpp" line="129"/>
         <source>Error parsing json: response is not an array: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Error al analizar el JSON: la respuesta no es un array: %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterDownloadPage.cpp" line="148"/>
         <source>No releases found at %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">No se encontraron versiones en %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterDownloadPage.cpp" line="152"/>
         <source>loading brouter version-data failed: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">fallo al cargar los datos de versión de BRouter: %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterDownloadPage.cpp" line="162"/>
@@ -6051,7 +6056,7 @@ no es una definición de un sistema de coordenadas válido:
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterDownloadPage.cpp" line="167"/>
         <source>Download: %1&lt;br/&gt;&lt;br/&gt;This will download and install a zip file from a download location that is not secured by any standard at all, using plain HTTP. Usually this should be HTTPS. The risk is someone redirecting the request and sending you a replacement zip with malware. There is no way for QMapShack to detect this. &lt;br/&gt;If you do not understand this or if you are in doubt, do not proceed and abort. Use the Web version of BRouter instead.</source>
-        <translation type="unfinished">Descarga:%1&lt;br/&gt;&lt;br/&gt; Se descargará e instalará un archivo zip desde un servidor de descarga no protegido por ningún estándar usando HTTP normal. Normalmente sería HTTPS. El riesgo es que alguien redireccione la solicitud y envíe un código malicioso indetectable por QMapShack. &lt;br/&gt; Si esto no se comprende o si se tienen dudas es mejor cancelar y usar la versión web de BRouter.</translation>
+        <translation type="unfinished">Descarga: %1&lt;br/&gt;&lt;br/&gt;Se descargará e instalará un archivo zip desde una ubicación de descarga que no está protegida por ningún estándar, usando HTTP sin cifrar. Normalmente debería ser HTTPS. El riesgo es que alguien redirija la solicitud y te envíe un zip sustituto con malware. QMapShack no tiene forma de detectarlo. &lt;br/&gt;Si no entiendes esto o tienes dudas, no continúes y cancela. Usa en su lugar la versión web de BRouter.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterDownloadPage.cpp" line="179"/>
@@ -6061,52 +6066,52 @@ no es una definición de un sistema de coordenadas válido:
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterDownloadPage.cpp" line="193"/>
         <source>download %1 started</source>
-        <translation type="unfinished">Iniciada descarga %1 </translation>
+        <translation type="unfinished">descarga de %1 iniciada</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterDownloadPage.cpp" line="207"/>
         <source>Error directory %1 does not exist</source>
-        <translation type="unfinished">Error: La carpeta %1 no existe</translation>
+        <translation type="unfinished">Error: la carpeta %1 no existe</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterDownloadPage.cpp" line="214"/>
         <source>Error creating file %1</source>
-        <translation type="unfinished">Error creando archivo %1</translation>
+        <translation type="unfinished">Error al crear el archivo %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterDownloadPage.cpp" line="217"/>
         <source>Error writing to file %1</source>
-        <translation type="unfinished">Error escribiendo el archivo %1</translation>
+        <translation type="unfinished">Error al escribir en el archivo %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterDownloadPage.cpp" line="221"/>
         <source>download %1 finished</source>
-        <translation type="unfinished">Finalizada descarga %1</translation>
+        <translation type="unfinished">descarga de %1 finalizada</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterDownloadPage.cpp" line="224"/>
         <source>Error unzipping %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Error al descomprimir %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterDownloadPage.cpp" line="226"/>
         <source>unzipping:</source>
-        <translation type="unfinished">Descomprimiendo:</translation>
+        <translation type="unfinished">descomprimiendo:</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterDownloadPage.cpp" line="230"/>
         <source>installing into %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">instalando en %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterDownloadPage.cpp" line="237"/>
         <source>installation successful</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">instalación correcta</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterDownloadPage.cpp" line="258"/>
         <source>installation of brouter failed: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">fallo en la instalación de BRouter: %1</translation>
     </message>
 </context>
 <context>
@@ -6162,37 +6167,37 @@ no es una definición de un sistema de coordenadas válido:
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="309"/>
         <source>no brouter-jar found</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">no se encontró ningún jar de BRouter</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="315"/>
         <source>brouter jar-file: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">archivo jar de BRouter: %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="318"/>
         <source>conflicting alternative jar-file %1, go back to previous page to select!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">archivo jar alternativo en conflicto %1, ¡vuelve a la página anterior para seleccionarlo!</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="335"/>
         <source>backup: %1 to %2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">copia de seguridad: %1 a %2</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="337"/>
         <source>error renaming file %1 to %2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">error al renombrar el archivo %1 a %2</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="343"/>
         <source>installed: %1 to %2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">instalado: %1 en %2</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="345"/>
         <source>error copying %1 to %2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">error al copiar %1 a %2</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="624"/>
@@ -6230,7 +6235,7 @@ no es una definición de un sistema de coordenadas válido:
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="289"/>
         <source>select BRouter jar file</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">seleccionar archivo jar de BRouter</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="299"/>
@@ -6261,27 +6266,27 @@ no es una definición de un sistema de coordenadas válido:
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="352"/>
         <source>is an existing BRouter version %1.%2.%3 installation</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">es una instalación existente de BRouter versión %1.%2.%3</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="357"/>
         <source>seems to be an existing BRouter installation</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">parece ser una instalación existente de BRouter</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="367"/>
         <source>is a valid BRouter jar-file (optionally select a different *jar file)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">es un archivo jar de BRouter válido (opcionalmente, selecciona otro archivo *jar)</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="376"/>
         <source>It seems there is an existing BRouter installation but the *.jar file is not valid or outdated.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Parece que hay una instalación de BRouter, pero el archivo *.jar no es válido o está obsoleto.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="385"/>
         <source>Choose a different *.jar file or create/update the installation.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Elige otro archivo *.jar o crea/actualiza la instalación.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="393"/>
@@ -6303,12 +6308,14 @@ no es una definición de un sistema de coordenadas válido:
         <source>Your Java version %1 seems to be older than the required version %2.
 BRouter will probably not work as expected.
 Please check the logs if Brouter fails to start.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tu versión de Java %1 parece ser anterior a la versión requerida %2.
+Es probable que BRouter no funcione como se espera.
+Revisa los registros si BRouter no arranca.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="413"/>
         <source>&lt;unknown&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;desconocida&gt;</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="417"/>
@@ -6344,12 +6351,12 @@ Please check the logs if Brouter fails to start.</source>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="593"/>
         <source>BRouter-Version: not accessible</source>
-        <translation>BRouter-Version: no accessible</translation>
+        <translation type="unfinished">Versión de BRouter: no accesible</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="596"/>
         <source>BRouter-Version: %1.%2.%3</source>
-        <translation>BRouter-Version: %1.%2.%3</translation>
+        <translation type="unfinished">Versión de BRouter: %1.%2.%3</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="431"/>
@@ -6362,17 +6369,17 @@ Please check the logs if Brouter fails to start.</source>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesPage.cpp" line="59"/>
         <source>Download of routing data is in progress.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">La descarga de los datos de enrutamiento está en curso.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesPage.cpp" line="61"/>
         <source>You did not yet download the selected routing data.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Todavía no has descargado los datos de enrutamiento seleccionados.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesPage.cpp" line="65"/>
         <source>Do you want to cancel or continue with setup</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">¿Quieres cancelar o continuar con la configuración?</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesPage.cpp" line="67"/>
@@ -6836,7 +6843,7 @@ La base de datos asociada &apos;%3&apos; se ignorará</translation>
     <message>
         <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="47"/>
         <source>Add a path with the button on the left</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Añade una ruta con el botón de la izquierda</translation>
     </message>
     <message>
         <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="73"/>
@@ -6846,38 +6853,39 @@ La base de datos asociada &apos;%3&apos; se ignorará</translation>
     <message>
         <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="142"/>
         <source>%1 is no longer a Routino path. Select the target again.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 ya no es una ruta de Routino. Selecciona de nuevo el destino.</translation>
     </message>
     <message>
         <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="164"/>
         <source>Cannot create a folder in %1.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">No se puede crear una carpeta en %1.</translation>
     </message>
     <message>
         <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="176"/>
         <source>planetsplitter wrote no database.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">planetsplitter no escribió ninguna base de datos.</translation>
     </message>
     <message>
         <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="183"/>
         <source>Cannot replace %1. Is the database in use? Restart QMapShack and build it again.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">No se puede reemplazar %1. ¿Está la base de datos en uso? Reinicia QMapShack y vuelve a crearla.</translation>
     </message>
     <message>
         <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="187"/>
         <source>Cannot move %1 to %2.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">No se puede mover %1 a %2.</translation>
     </message>
     <message>
         <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="200"/>
         <source>The built files stay in %1.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Los archivos creados se quedan en %1.</translation>
     </message>
     <message>
         <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="202"/>
         <source>!!! failed !!!
 </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">¡¡¡ fallo !!!
+</translation>
     </message>
     <message>
         <source>Select target path...</source>
@@ -6895,37 +6903,37 @@ La base de datos asociada &apos;%3&apos; se ignorará</translation>
     <message>
         <location filename="../realtime/ais/CRtAis.cpp" line="76"/>
         <source>&lt;b&gt;AIS&lt;/b&gt;&lt;br/&gt;Get vessel positions via AIS over TCP/IP</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;AIS&lt;/b&gt;&lt;br/&gt;Obtener posiciones de buques mediante AIS sobre TCP/IP</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAis.cpp" line="151"/>
         <source>unkn.</source>
-        <translation type="unfinished">Desc.</translation>
+        <translation type="unfinished">Descon.</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAis.cpp" line="178"/>
         <source>name:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nombre:</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAis.cpp" line="179"/>
         <source>type:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tipo:</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAis.cpp" line="180"/>
         <source>callsign:</source>
-        <translation type="unfinished">Señal de llamada:</translation>
+        <translation type="unfinished">Distintivo de llamada:</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAis.cpp" line="181"/>
         <source>imo:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">IMO:</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAis.cpp" line="182"/>
         <source>mmsi:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">MMSI:</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAis.cpp" line="183"/>
@@ -6955,22 +6963,22 @@ La base de datos asociada &apos;%3&apos; se ignorará</translation>
     <message>
         <location filename="../realtime/ais/CRtAis.cpp" line="192"/>
         <source>destination:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Destino:</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAis.cpp" line="194"/>
         <source>length:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Eslora:</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAis.cpp" line="195"/>
         <source>width:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Manga:</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAis.cpp" line="197"/>
         <source>draught:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Calado:</translation>
     </message>
 </context>
 <context>
@@ -6987,7 +6995,7 @@ La base de datos asociada &apos;%3&apos; se ignorará</translation>
         <location filename="../realtime/ais/CRtAisInfo.h" line="131"/>
         <location filename="../realtime/ais/CRtAisInfo.h" line="132"/>
         <source>Wing in ground</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nave de efecto suelo (WIG)</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="124"/>
@@ -6997,7 +7005,7 @@ La base de datos asociada &apos;%3&apos; se ignorará</translation>
         <location filename="../realtime/ais/CRtAisInfo.h" line="190"/>
         <location filename="../realtime/ais/CRtAisInfo.h" line="201"/>
         <source>Hazardous category A</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Mercancías peligrosas, categoría A</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="125"/>
@@ -7007,7 +7015,7 @@ La base de datos asociada &apos;%3&apos; se ignorará</translation>
         <location filename="../realtime/ais/CRtAisInfo.h" line="191"/>
         <location filename="../realtime/ais/CRtAisInfo.h" line="202"/>
         <source>Hazardous category B</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Mercancías peligrosas, categoría B</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="126"/>
@@ -7017,7 +7025,7 @@ La base de datos asociada &apos;%3&apos; se ignorará</translation>
         <location filename="../realtime/ais/CRtAisInfo.h" line="192"/>
         <location filename="../realtime/ais/CRtAisInfo.h" line="203"/>
         <source>Hazardous category C</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Mercancías peligrosas, categoría C</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="127"/>
@@ -7027,53 +7035,53 @@ La base de datos asociada &apos;%3&apos; se ignorará</translation>
         <location filename="../realtime/ais/CRtAisInfo.h" line="193"/>
         <location filename="../realtime/ais/CRtAisInfo.h" line="204"/>
         <source>Hazardous category D</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Mercancías peligrosas, categoría D</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="134"/>
         <source>Fishing</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Pesquero</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="135"/>
         <source>Towing</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Remolcando</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="136"/>
         <source>Towing, large</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Remolcando, grandes dimensiones</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="137"/>
         <source>Dredger</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Draga</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="138"/>
         <source>Dive Vessel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Operaciones de buceo</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="139"/>
         <source>Military ops</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Operaciones militares</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="140"/>
         <source>Sailing Vessel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Velero</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="141"/>
         <source>Pleasure Craft</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Embarcación de recreo</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="142"/>
         <location filename="../realtime/ais/CRtAisInfo.h" line="143"/>
         <source>Reserved</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Reservado</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="145"/>
@@ -7087,53 +7095,53 @@ La base de datos asociada &apos;%3&apos; se ignorará</translation>
         <location filename="../realtime/ais/CRtAisInfo.h" line="153"/>
         <location filename="../realtime/ais/CRtAisInfo.h" line="154"/>
         <source>High speed craft</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nave de gran velocidad</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="156"/>
         <source>Pilot Vessel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Embarcación de práctico</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="157"/>
         <source>Search and Rescue</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Búsqueda y salvamento</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="158"/>
         <source>Tug</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Remolcador</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="159"/>
         <source>Port Tender</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Embarcación auxiliar de puerto</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="160"/>
         <source>Anti-pollution equipment</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Equipo anticontaminación</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="161"/>
         <source>Law Enforcement</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fuerzas del orden</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="162"/>
         <location filename="../realtime/ais/CRtAisInfo.h" line="163"/>
         <source>Local Vessel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Embarcación local</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="164"/>
         <source>Medical Transport</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Transporte sanitario</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="165"/>
         <source>Special Craft</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Embarcación especial</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="167"/>
@@ -7147,7 +7155,7 @@ La base de datos asociada &apos;%3&apos; se ignorará</translation>
         <location filename="../realtime/ais/CRtAisInfo.h" line="175"/>
         <location filename="../realtime/ais/CRtAisInfo.h" line="176"/>
         <source>Passenger</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Pasajeros</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="178"/>
@@ -7161,7 +7169,7 @@ La base de datos asociada &apos;%3&apos; se ignorará</translation>
         <location filename="../realtime/ais/CRtAisInfo.h" line="186"/>
         <location filename="../realtime/ais/CRtAisInfo.h" line="187"/>
         <source>Cargo</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Carga</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="189"/>
@@ -7175,7 +7183,7 @@ La base de datos asociada &apos;%3&apos; se ignorará</translation>
         <location filename="../realtime/ais/CRtAisInfo.h" line="197"/>
         <location filename="../realtime/ais/CRtAisInfo.h" line="198"/>
         <source>Tanker</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Buque tanque</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="200"/>
@@ -7194,152 +7202,152 @@ La base de datos asociada &apos;%3&apos; se ignorará</translation>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="212"/>
         <source>Reference point</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Punto de referencia</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="213"/>
         <source>RACON</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">RACON</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="214"/>
         <source>Fixed structure</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Estructura fija</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="215"/>
         <source>Light, without sectors</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Luz, sin sectores</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="216"/>
         <source>Light, with sectors</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Luz, con sectores</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="217"/>
         <source>Leading Light Front</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Luz de enfilación anterior</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="218"/>
         <source>Leading Light Rear</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Luz de enfilación posterior</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="219"/>
         <source>Beacon, Cardinal N</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Baliza, cardinal N</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="220"/>
         <source>Beacon, Cardinal E</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Baliza, cardinal E</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="221"/>
         <source>Beacon, Cardinal S</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Baliza, cardinal S</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="222"/>
         <source>Beacon, Cardinal W</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Baliza, cardinal W</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="223"/>
         <source>Beacon, Port hand</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Baliza, babor</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="224"/>
         <source>Beacon, Starboard hand</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Baliza, estribor</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="225"/>
         <source>Beacon, Preferred Channel port hand</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Baliza, canal preferido a babor</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="226"/>
         <source>Beacon, Preferred Channel starboard hand</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Baliza, canal preferido a estribor</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="227"/>
         <source>Beacon, Isolated danger</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Baliza, peligro aislado</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="228"/>
         <source>Beacon, Safe water</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Baliza, aguas navegables</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="229"/>
         <source>Beacon, Special mark</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Baliza, marca especial</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="230"/>
         <source>Cardinal Mark N</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Marca cardinal N</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="231"/>
         <source>Cardinal Mark E</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Marca cardinal E</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="232"/>
         <source>Cardinal Mark S</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Marca cardinal S</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="233"/>
         <source>Cardinal Mark W</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Marca cardinal W</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="234"/>
         <source>Port hand Mark</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Marca de babor</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="235"/>
         <source>Starboard hand Mark</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Marca de estribor</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="236"/>
         <source>Preferred Channel Port hand</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Canal preferido a babor</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="237"/>
         <source>Preferred Channel Starboard hand</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Canal preferido a estribor</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="238"/>
         <source>Isolated danger</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Peligro aislado</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="239"/>
         <source>Safe Water</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Aguas navegables</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="240"/>
         <source>Special Mark</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Marca especial</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.h" line="241"/>
         <source>Light Vessel / LANBY / Rigs</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Buque faro / LANBY / plataformas</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.cpp" line="92"/>
@@ -7354,7 +7362,12 @@ Use this to receive AIS NMEA data from a network source. This could be a publicl
 Example sharing from Linux:
 ncat -v -k -l 5631 &lt; /dev/ttyUSB0
 Replace /dev/ttyUSB0 with the tty device of your AIS receiver</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">AIS
+Úsalo para recibir datos AIS NMEA desde una fuente de red. Puede ser una fuente pública que emite datos AIS en texto plano por un puerto TCP. También puede compartirse desde un puerto serie de Linux con ncat. 
+
+Ejemplo de compartición desde Linux:
+ncat -v -k -l 5631 &lt; /dev/ttyUSB0
+Sustituye /dev/ttyUSB0 por el dispositivo tty de tu receptor AIS</translation>
     </message>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.cpp" line="186"/>
@@ -7372,7 +7385,7 @@ Replace /dev/ttyUSB0 with the tty device of your AIS receiver</source>
     <message>
         <location filename="../realtime/ais/CRtAisInfo.cpp" line="547"/>
         <source>Failed...</source>
-        <translation type="unfinished">Falló...</translation>
+        <translation type="unfinished">Fallo...</translation>
     </message>
 </context>
 <context>
@@ -7395,9 +7408,9 @@ Replace /dev/ttyUSB0 with the tty device of your AIS receiver</source>
         <source>GPS Tether
 The basic idea of this GPS source is to receive a NMEA stream via Ethernet connection. You can use the Android app &quot;GPS Tether&quot; to provide a host streaming NMEA data. Your Android device must be in the same network or provide a network as a hotspot.
 For configuration you need to know your Android device&apos;s IP address or it&apos;s host name provided by a DNS. The app will tell you the address. Additionally you need the port number as configured in the app.</source>
-        <translation type="unfinished">Vincular GPS:
-La idea básica es recibir un flujo NMEA a través de una conexión Ethernet. Se puede usar la aplicación Android &quot;GPS Tether&quot; para proporcionar un flujo de datos NMEA. El dispositivo Android debe estar en la misma red o proporcionar una red como punto de acceso
-Para la configuración es necesario indicar a QMapShack la dirección IP del dispositivo o su nombre de host, y también el número de puerto. La aplicación Android te indicará cuál es esa dirección IP y el número del puerto.</translation>
+        <translation type="unfinished">GPS Tether
+La idea básica de esta fuente GPS es recibir un flujo NMEA a través de una conexión Ethernet. Puedes usar la aplicación Android &quot;GPS Tether&quot; para proporcionar un host que transmita datos NMEA. Tu dispositivo Android debe estar en la misma red o proporcionar una red como punto de acceso.
+Para la configuración necesitas conocer la dirección IP de tu dispositivo Android o su nombre de host proporcionado por un DNS. La aplicación te indicará la dirección. Además necesitas el número de puerto configurado en la aplicación.</translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/CRtGpsTetherInfo.cpp" line="413"/>
@@ -7415,7 +7428,7 @@ Para la configuración es necesario indicar a QMapShack la dirección IP del dis
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="151"/>
         <source>unkn.</source>
-        <translation>Desc.</translation>
+        <translation type="unfinished">Descon.</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="178"/>
@@ -7425,7 +7438,7 @@ Para la configuración es necesario indicar a QMapShack la dirección IP del dis
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="179"/>
         <source>callsign:</source>
-        <translation>Señal de llamada:</translation>
+        <translation type="unfinished">Distintivo de llamada:</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="180"/>
@@ -7435,7 +7448,7 @@ Para la configuración es necesario indicar a QMapShack la dirección IP del dis
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="181"/>
         <source>time position:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Hora de posición:</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="183"/>
@@ -7485,12 +7498,12 @@ Para la configuración es necesario indicar a QMapShack la dirección IP del dis
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="193"/>
         <source>squawk:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Squawk:</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="194"/>
         <source>spi:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">SPI:</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="195"/>
@@ -7523,8 +7536,8 @@ Para la configuración es necesario indicar a QMapShack la dirección IP del dis
     <name>CRtWorkspace</name>
     <message>
         <location filename="../realtime/CRtWorkspace.cpp" line="66"/>
-        <source>To add a realtime source do a right click on the list above. </source>
-        <translation>Para agregar una fuente en tiempo real haga un clic derecho en la lista de arriba.</translation>
+        <source>To add a realtime source do a right click on the list above and choose &lt;a href=&apos;AddSource&apos;&gt;Add Source&lt;/a&gt;.</source>
+        <translation type="unfinished">Para añadir una fuente en tiempo real, haz clic con el botón derecho en la lista de arriba y elige &lt;a href=&apos;AddSource&apos;&gt;Añadir fuente&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="../realtime/CRtWorkspace.cpp" line="225"/>
@@ -8493,7 +8506,7 @@ Ten en cuenta que para hacer la comparación las horas que indiques se trasladan
     <message>
         <location filename="../gis/search/CSearchLineEdit.cpp" line="77"/>
         <source>Filter: Start to type and the list will be reduced to matching items. An example would be &quot;date between 2010 and 2012&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Filtro: empieza a escribir y la lista se reducirá a los elementos que coincidan. Un ejemplo sería &quot;date between 2010 and 2012&quot;</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearchLineEdit.cpp" line="89"/>
@@ -8509,22 +8522,22 @@ Ten en cuenta que para hacer la comparación las horas que indiques se trasladan
         <location filename="../gis/search/CSearchLineEdit.cpp" line="166"/>
         <location filename="../gis/search/CSearchLineEdit.cpp" line="169"/>
         <source>Error parsing search.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Error al analizar la búsqueda.</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearchLineEdit.cpp" line="167"/>
         <source>Continuing with search for match in names</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Se continúa buscando coincidencias en los nombres</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearchLineEdit.cpp" line="170"/>
         <source>Continuing with search for match in full text</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Se continúa buscando coincidencias en el texto completo</translation>
     </message>
     <message>
         <location filename="../gis/search/CSearchLineEdit.cpp" line="179"/>
         <source>Automatically set the property, please make sure the results are correct.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Propiedad asignada automáticamente; comprueba que los resultados sean correctos.</translation>
     </message>
 </context>
 <context>
@@ -8537,7 +8550,7 @@ Ten en cuenta que para hacer la comparación las horas que indiques se trasladan
     <message>
         <location filename="../gis/db/CSetupDatabase.cpp" line="45"/>
         <source>MySQL cannot be used at this point, because the corresponding driver (QMYSQL) is not available.&lt;br /&gt;Please make sure you have installed the corresponding package.&lt;br /&gt;If you don&apos;t know what to do now you should have &lt;a href=&quot;%1&quot;&gt;a look at the wiki&lt;/a&gt;.</source>
-        <translation>SQL no se puede utilizar en este momento, ya que el controlador correspondiente (QMYSQL) no está disponible.&lt;br /&gt;Asegúrese de haber instalado el paquete.&lt;br /&gt;Si no sabe qué hacer puede &lt;a href=&quot;%1&quot;&gt;consultar la wiki&lt;/a&gt;.</translation>
+        <translation>MySQL no se puede utilizar en este momento, ya que el controlador correspondiente (QMYSQL) no está disponible.&lt;br /&gt;Asegúrese de haber instalado el paquete.&lt;br /&gt;Si no sabe qué hacer puede &lt;a href=&quot;%1&quot;&gt;consultar la wiki&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="../gis/db/CSetupDatabase.cpp" line="91"/>
@@ -8578,7 +8591,7 @@ Ten en cuenta que para hacer la comparación las horas que indiques se trasladan
     <message>
         <location filename="../../common/shell/CShell.cpp" line="48"/>
         <source>Execution of external program `%1` failed: </source>
-        <translation type="unfinished">La ejecución del programa externo %1 falló:</translation>
+        <translation type="unfinished">La ejecución del programa externo `%1` falló: </translation>
     </message>
     <message>
         <location filename="../../common/shell/CShell.cpp" line="51"/>
@@ -8591,39 +8604,45 @@ Ten en cuenta que para hacer la comparación las horas que indiques se trasladan
         <location filename="../../common/shell/CShell.cpp" line="52"/>
         <source>Make sure the required packages are installed, `%1` exists and is executable.
 </source>
-        <translation type="unfinished">Asegúrese de que los paquetes necesarios estén instalados, `%1` existe y es ejecutable</translation>
+        <translation type="unfinished">Asegúrate de que los paquetes necesarios estén instalados y de que `%1` exista y sea ejecutable.
+</translation>
     </message>
     <message>
         <location filename="../../common/shell/CShell.cpp" line="61"/>
         <source>External process crashed.
 </source>
-        <translation type="unfinished">El proceso externo falló.
+        <translation type="unfinished">El proceso externo ha terminado de forma inesperada.
 </translation>
     </message>
     <message>
         <location filename="../../common/shell/CShell.cpp" line="65"/>
         <source>An unknown error occurred.
 </source>
-        <translation type="unfinished">A ocurrido un error desconocido</translation>
+        <translation type="unfinished">Se ha producido un error desconocido.
+</translation>
     </message>
     <message>
         <location filename="../../common/shell/CShell.cpp" line="143"/>
         <source>!!! failed !!!
 </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">¡¡¡ fallo !!!
+</translation>
     </message>
     <message>
         <location filename="../../common/shell/CShell.cpp" line="156"/>
         <source>
 Canceled by user&apos;s request.
 </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">
+Cancelado a petición del usuario.
+</translation>
     </message>
     <message>
         <location filename="../../common/shell/CShell.cpp" line="179"/>
         <source>!!! done !!!
 </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">¡¡¡ hecho !!!
+</translation>
     </message>
 </context>
 <context>
@@ -8631,12 +8650,12 @@ Canceled by user&apos;s request.
     <message>
         <location filename="../helpers/CShortcutSetupDialog.cpp" line="126"/>
         <source>Shortcut already in use</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Atajo de teclado ya en uso</translation>
     </message>
     <message>
         <location filename="../helpers/CShortcutSetupDialog.cpp" line="127"/>
         <source>The shortcut &apos;%1&apos; is already assigned to &apos;%2&apos;. Do you want to reassign it to &apos;%3&apos;?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">El atajo de teclado &apos;%1&apos; ya está asignado a &apos;%2&apos;. ¿Quieres reasignarlo a &apos;%3&apos;?</translation>
     </message>
 </context>
 <context>
@@ -8767,241 +8786,241 @@ línea %2, columna %3.
         <location filename="../gis/trk/surface/CSurface.cpp" line="133"/>
         <source>paved</source>
         <comment>surface class</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">pavimentado</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurface.cpp" line="135"/>
         <source>semi-paved</source>
         <comment>surface class</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">semipavimentado</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurface.cpp" line="137"/>
         <source>unpaved</source>
         <comment>surface class</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">sin pavimentar</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurface.cpp" line="139"/>
         <source>unknown</source>
         <comment>surface class</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">desconocido</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurface.cpp" line="146"/>
         <source>path</source>
         <comment>way type</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">sendero</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurface.cpp" line="148"/>
         <source>forest/field track</source>
         <comment>way type</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">pista forestal/agrícola</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurface.cpp" line="150"/>
         <source>cycleway</source>
         <comment>way type</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">carril bici</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurface.cpp" line="152"/>
         <source>steps</source>
         <comment>way type</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">escaleras</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurface.cpp" line="154"/>
         <source>street</source>
         <comment>way type</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">calle</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurface.cpp" line="156"/>
         <source>road</source>
         <comment>way type</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">carretera</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurface.cpp" line="158"/>
         <source>busy road</source>
         <comment>way type</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">carretera con mucho tráfico</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurface.cpp" line="160"/>
         <source>other</source>
         <comment>way type</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">otro</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurface.cpp" line="162"/>
         <source>no data</source>
         <comment>way type</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">sin datos</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurface.cpp" line="169"/>
         <source>asphalt</source>
         <comment>surface</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">asfalto</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurface.cpp" line="171"/>
         <source>paved</source>
         <comment>surface</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">pavimentado</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurface.cpp" line="173"/>
         <source>concrete</source>
         <comment>surface</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">hormigón</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurface.cpp" line="175"/>
         <source>concrete lanes</source>
         <comment>surface</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">rodadas de hormigón</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurface.cpp" line="177"/>
         <source>concrete plates</source>
         <comment>surface</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">losas de hormigón</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurface.cpp" line="179"/>
         <source>paving stones</source>
         <comment>surface</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">adoquines</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurface.cpp" line="181"/>
         <source>cobblestones</source>
         <comment>surface</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">empedrado</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurface.cpp" line="183"/>
         <source>metal</source>
         <comment>surface</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">metal</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurface.cpp" line="185"/>
         <source>wood</source>
         <comment>surface</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">madera</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurface.cpp" line="187"/>
         <source>compacted</source>
         <comment>surface</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">compactado</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurface.cpp" line="189"/>
         <source>fine gravel</source>
         <comment>surface</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">grava fina</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurface.cpp" line="191"/>
         <source>gravel</source>
         <comment>surface</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">grava</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurface.cpp" line="193"/>
         <source>pebblestone</source>
         <comment>surface</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">guijarros</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurface.cpp" line="195"/>
         <source>grass pavers</source>
         <comment>surface</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">adoquines con césped</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurface.cpp" line="197"/>
         <source>semi-paved</source>
         <comment>surface</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">semipavimentado</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurface.cpp" line="199"/>
         <source>unpaved</source>
         <comment>surface</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">sin pavimentar</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurface.cpp" line="201"/>
         <source>dirt</source>
         <comment>surface</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">tierra</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurface.cpp" line="203"/>
         <source>natural ground</source>
         <comment>surface</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">terreno natural</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurface.cpp" line="205"/>
         <source>grass</source>
         <comment>surface</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">hierba</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurface.cpp" line="207"/>
         <source>mud</source>
         <comment>surface</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">barro</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurface.cpp" line="209"/>
         <source>sand</source>
         <comment>surface</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">arena</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurface.cpp" line="211"/>
         <source>woodchips</source>
         <comment>surface</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">astillas de madera</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurface.cpp" line="213"/>
         <source>rock</source>
         <comment>surface</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">roca</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurface.cpp" line="215"/>
         <source>stepping stones</source>
         <comment>surface</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">pasaderas</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurface.cpp" line="217"/>
         <source>paved (assumed)</source>
         <comment>surface</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">pavimentado (supuesto)</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurface.cpp" line="219"/>
         <source>unpaved (assumed)</source>
         <comment>surface</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">sin pavimentar (supuesto)</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurface.cpp" line="221"/>
         <source>unknown</source>
         <comment>surface</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">desconocido</translation>
     </message>
 </context>
 <context>
@@ -9009,32 +9028,32 @@ línea %2, columna %3.
     <message>
         <location filename="../tool/CSurfaceDatabaseBuilder.cpp" line="42"/>
         <source>Create Surface Database</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Crear base de datos de superficies</translation>
     </message>
     <message>
         <location filename="../tool/CSurfaceDatabaseBuilder.cpp" line="50"/>
         <source>Surface Database</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Base de datos de superficies</translation>
     </message>
     <message>
         <location filename="../tool/CSurfaceDatabaseBuilder.cpp" line="51"/>
         <source>A surface database holds the roads and paths of an OpenStreetMap extract with their surface and type. With it, QMapShack shows the surfaces and way types of every track in the track&apos;s Surface tab and can color tracks by surface (Style tab). Download an extract (.osm.pbf) e.g. from %1, the same file as for a Routino database. For a small country building takes about a minute and some 300 MB of memory.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Una base de datos de superficies contiene las carreteras y caminos de un extracto de OpenStreetMap con su tipo de superficie y de vía. Con ella, QMapShack muestra las superficies y tipos de vía de cada track en la pestaña Superficie del track y puede colorear los tracks según la superficie (pestaña Estilo). Descarga un extracto (.osm.pbf), p. ej. de %1, el mismo archivo que para una base de datos de Routino. Para un país pequeño, la creación tarda aproximadamente un minuto y necesita unos 300 MB de memoria.</translation>
     </message>
     <message>
         <location filename="../tool/CSurfaceDatabaseBuilder.cpp" line="61"/>
         <source>OSM extract</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Extracto OSM</translation>
     </message>
     <message>
         <location filename="../tool/CSurfaceDatabaseBuilder.cpp" line="63"/>
         <source>e.g. belgium-latest.osm.pbf</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">p. ej. belgium-latest.osm.pbf</translation>
     </message>
     <message>
         <location filename="../tool/CSurfaceDatabaseBuilder.cpp" line="67"/>
         <source>Select the .osm.pbf file.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Seleccionar el archivo .osm.pbf.</translation>
     </message>
     <message>
         <location filename="../tool/CSurfaceDatabaseBuilder.cpp" line="70"/>
@@ -9045,27 +9064,27 @@ línea %2, columna %3.
     <message>
         <location filename="../tool/CSurfaceDatabaseBuilder.cpp" line="72"/>
         <source>e.g. Belgium</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">p. ej. Bélgica</translation>
     </message>
     <message>
         <location filename="../tool/CSurfaceDatabaseBuilder.cpp" line="75"/>
         <source>Path</source>
-        <translation type="unfinished">Sendero</translation>
+        <translation type="unfinished">Carpeta</translation>
     </message>
     <message>
         <location filename="../tool/CSurfaceDatabaseBuilder.cpp" line="77"/>
         <source>The new database is stored in this path.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">La nueva base de datos se guarda en esta carpeta.</translation>
     </message>
     <message>
         <location filename="../tool/CSurfaceDatabaseBuilder.cpp" line="78"/>
         <source>Add a path first</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Añade primero una carpeta</translation>
     </message>
     <message>
         <location filename="../tool/CSurfaceDatabaseBuilder.cpp" line="82"/>
         <source>Add paths with surface databases.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Añadir carpetas con bases de datos de superficies.</translation>
     </message>
     <message>
         <location filename="../tool/CSurfaceDatabaseBuilder.cpp" line="85"/>
@@ -9076,7 +9095,7 @@ línea %2, columna %3.
     <message>
         <location filename="../tool/CSurfaceDatabaseBuilder.cpp" line="90"/>
         <source>Build</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Crear</translation>
     </message>
     <message>
         <location filename="../tool/CSurfaceDatabaseBuilder.cpp" line="91"/>
@@ -9086,7 +9105,7 @@ línea %2, columna %3.
     <message>
         <location filename="../tool/CSurfaceDatabaseBuilder.cpp" line="104"/>
         <source>Surface databases (checked ones are used)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Bases de datos de superficies (se usan las marcadas)</translation>
     </message>
     <message>
         <location filename="../tool/CSurfaceDatabaseBuilder.cpp" line="107"/>
@@ -9096,93 +9115,94 @@ línea %2, columna %3.
     <message>
         <location filename="../tool/CSurfaceDatabaseBuilder.cpp" line="107"/>
         <source>OSM data of</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fecha de los datos OSM</translation>
     </message>
     <message>
         <location filename="../tool/CSurfaceDatabaseBuilder.cpp" line="181"/>
         <source>Select OSM extract...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Seleccionar extracto OSM...</translation>
     </message>
     <message>
         <location filename="../tool/CSurfaceDatabaseBuilder.cpp" line="181"/>
         <source>OSM extract (*.osm.pbf *.pbf)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Extracto OSM (*.osm.pbf *.pbf)</translation>
     </message>
     <message>
         <location filename="../tool/CSurfaceDatabaseBuilder.cpp" line="192"/>
         <source>Setup surface database paths...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Configurar carpetas de bases de datos de superficies...</translation>
     </message>
     <message>
         <location filename="../tool/CSurfaceDatabaseBuilder.cpp" line="193"/>
         <source>Add or remove paths containing surface databases. There can be multiple databases in a path but no sub-path is parsed.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Añadir o quitar carpetas que contienen bases de datos de superficies. Puede haber varias bases de datos en una carpeta, pero no se analizan las subcarpetas.</translation>
     </message>
     <message>
         <location filename="../tool/CSurfaceDatabaseBuilder.cpp" line="195"/>
         <source>Select surface database path...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Seleccionar carpeta de bases de datos de superficies...</translation>
     </message>
     <message>
         <location filename="../tool/CSurfaceDatabaseBuilder.cpp" line="208"/>
         <source>%1 already exists. Replace it?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 ya existe. ¿Reemplazarlo?</translation>
     </message>
     <message>
         <location filename="../tool/CSurfaceDatabaseBuilder.cpp" line="211"/>
         <source>%1 already exists. It holds &quot;%2&quot;, built from %3. Replace it with the data of %4?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 ya existe. Contiene &quot;%2&quot;, creado a partir de %3. ¿Reemplazarlo con los datos de %4?</translation>
     </message>
     <message>
         <location filename="../tool/CSurfaceDatabaseBuilder.cpp" line="215"/>
         <source>Replace database?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">¿Reemplazar la base de datos?</translation>
     </message>
     <message>
         <location filename="../tool/CSurfaceDatabaseBuilder.cpp" line="223"/>
         <source>Can&apos;t create %1.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">No se puede crear %1.</translation>
     </message>
     <message>
         <location filename="../tool/CSurfaceDatabaseBuilder.cpp" line="240"/>
         <source>Starting...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Iniciando...</translation>
     </message>
     <message>
         <location filename="../tool/CSurfaceDatabaseBuilder.cpp" line="266"/>
         <source>Done: %1 roads and paths with %2 nodes.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Terminado: %1 carreteras y caminos con %2 nodos.</translation>
     </message>
     <message>
         <location filename="../tool/CSurfaceDatabaseBuilder.cpp" line="273"/>
         <source>Canceling...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Cancelando...</translation>
     </message>
     <message>
         <location filename="../tool/CSurfaceDatabaseBuilder.cpp" line="285"/>
         <source>Canceled.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Cancelado.</translation>
     </message>
     <message>
         <location filename="../tool/CSurfaceDatabaseBuilder.cpp" line="288"/>
         <source>Failed: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Error: %1</translation>
     </message>
     <message>
         <location filename="../tool/CSurfaceDatabaseBuilder.cpp" line="303"/>
         <source>unusable</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">inutilizable</translation>
     </message>
     <message>
         <location filename="../tool/CSurfaceDatabaseBuilder.cpp" line="312"/>
         <source>unknown</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">desconocido</translation>
     </message>
     <message>
         <location filename="../tool/CSurfaceDatabaseBuilder.cpp" line="314"/>
         <source>%1
 from %2, built %3</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1
+de %2, creada %3</translation>
     </message>
 </context>
 <context>
@@ -9190,37 +9210,37 @@ from %2, built %3</source>
     <message>
         <location filename="../gis/trk/surface/CSurfaceDb.cpp" line="76"/>
         <source>Not a surface database: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">No es una base de datos de superficies: %1</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurfaceDb.cpp" line="83"/>
         <source>Unsupported surface database version %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Versión de base de datos de superficies no compatible: %1</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurfaceDb.cpp" line="214"/>
         <source>%1 S</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 S</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurfaceDb.cpp" line="214"/>
         <source>%1 N</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 N</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurfaceDb.cpp" line="215"/>
         <source>%1 W</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 O</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurfaceDb.cpp" line="215"/>
         <source>%1 E</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 E</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurfaceDb.cpp" line="216"/>
         <source>%1..%2, %3..%4</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1..%2, %3..%4</translation>
     </message>
 </context>
 <context>
@@ -9228,50 +9248,50 @@ from %2, built %3</source>
     <message>
         <location filename="../gis/trk/surface/CSurfaceDbBuilder.cpp" line="67"/>
         <source>Reading ways...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Leyendo vías...</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurfaceDbBuilder.cpp" line="116"/>
         <location filename="../gis/trk/surface/CSurfaceDbBuilder.cpp" line="154"/>
         <location filename="../gis/trk/surface/CSurfaceDbBuilder.cpp" line="274"/>
         <source>Canceled.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Cancelado.</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurfaceDbBuilder.cpp" line="122"/>
         <source>Reading node locations...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Leyendo posiciones de nodos...</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurfaceDbBuilder.cpp" line="159"/>
         <source>Writing database...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Escribiendo base de datos...</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurfaceDbBuilder.cpp" line="301"/>
         <source>No roads or paths found in %1.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">No se han encontrado carreteras ni caminos en %1.</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurfaceDbBuilder.cpp" line="329"/>
         <source>Failed to write %1: %2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fallo al escribir %1: %2</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurfaceDbBuilder.cpp" line="354"/>
         <source>Done.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Terminado.</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurfaceDbBuilder.cpp" line="383"/>
         <location filename="../gis/trk/surface/CSurfaceDbBuilder.cpp" line="398"/>
         <source>Failed to write %1.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fallo al escribir %1.</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurfaceDbBuilder.cpp" line="393"/>
         <source>Failed to replace %1. Is it in use?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fallo al reemplazar %1. ¿Está en uso?</translation>
     </message>
 </context>
 <context>
@@ -9284,22 +9304,22 @@ from %2, built %3</source>
         <location filename="../gis/trk/surface/CSurfaceWidget.cpp" line="128"/>
         <location filename="../gis/trk/surface/CSurfaceWidget.cpp" line="137"/>
         <source>Surfaces</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Superficies</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurfaceWidget.cpp" line="51"/>
         <source>Way types</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tipos de vía</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurfaceWidget.cpp" line="54"/>
         <source>Surfaces in detail</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Superficies en detalle</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurfaceWidget.cpp" line="111"/>
         <source>The surface database covering this track is switched off. Switch it on in %1.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">La base de datos de superficies que cubre este track está desactivada. Actívala en %1.</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurfaceWidget.cpp" line="112"/>
@@ -9311,27 +9331,27 @@ from %2, built %3</source>
         <location filename="../gis/trk/surface/CSurfaceWidget.cpp" line="112"/>
         <location filename="../gis/trk/surface/CSurfaceWidget.cpp" line="120"/>
         <source>Create Surface Database</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Crear base de datos de superficies</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurfaceWidget.cpp" line="118"/>
         <source>No surface database covers this track. Build one from an OpenStreetMap extract (.osm.pbf, e.g. from download.geofabrik.de) with %1.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ninguna base de datos de superficies cubre este track. Crea una a partir de un extracto de OpenStreetMap (.osm.pbf, p. ej. de download.geofabrik.de) con %1.</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurfaceWidget.cpp" line="124"/>
         <source>Analyzing the track...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Analizando el track...</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurfaceWidget.cpp" line="129"/>
         <source>Surfaces are shown for tracks in a project. Copy the track into a project to see them.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Las superficies se muestran para tracks de un proyecto. Copia el track a un proyecto para verlas.</translation>
     </message>
     <message>
         <location filename="../gis/trk/surface/CSurfaceWidget.cpp" line="137"/>
         <source>The track is too short.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">El track es demasiado corto.</translation>
     </message>
 </context>
 <context>
@@ -9632,27 +9652,27 @@ línea %2, columna %3.
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="45"/>
         <source>Fix overviews</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Corregir vistas generales</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="46"/>
         <source>Later</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Más tarde</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="63"/>
         <source>%1 × %2 px  ·  %3/px × %4/px  ·  %5 × %6</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 × %2 px  ·  %3/px × %4/px  ·  %5 × %6</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="72"/>
         <source>⚠ This file references %1 source files. Reading gets inefficient past %2 - consider combining them into fewer files.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">⚠ Este archivo hace referencia a %1 archivos de origen. La lectura pierde eficiencia a partir de %2; plantéate combinarlos en menos archivos.</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="87"/>
         <source>Combine files...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Combinar archivos...</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="147"/>
@@ -9663,17 +9683,17 @@ línea %2, columna %3.
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="147"/>
         <source>Existing overview sizes (px)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tamaños de vistas generales existentes (px)</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="147"/>
         <source>Status</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Estado</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="172"/>
         <source>New overview levels</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nuevos niveles de vistas generales</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="172"/>
@@ -9683,52 +9703,52 @@ línea %2, columna %3.
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="287"/>
         <source>Clean + rebuild</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Limpiar y regenerar</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="285"/>
         <source>Build new</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Crear nuevas</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="291"/>
         <source>Update &lt;OverviewList&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Actualizar &lt;OverviewList&gt;</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="289"/>
         <source>Add &lt;OverviewList&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Añadir &lt;OverviewList&gt;</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="210"/>
         <source>%1 file(s) will have new overviews built</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Se crearán vistas generales nuevas para %1 archivo(s)</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="213"/>
         <source>%1 file(s) will have existing overviews cleaned and rebuilt</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Se limpiarán y regenerarán las vistas generales existentes de %1 archivo(s)</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="220"/>
         <source>Estimated disk usage: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Uso de disco estimado: %1.</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="220"/>
         <source>Disk usage: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Uso de disco: %1.</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="117"/>
         <source>Overview info</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Información de vistas generales</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="79"/>
         <source>The source files are spread over several directories, so they cannot be combined - there is no one place the merged files would belong.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Los archivos de origen están repartidos en varias carpetas, por lo que no se pueden combinar: no hay un único lugar al que pertenezcan los archivos combinados.</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="119"/>
@@ -9739,78 +9759,79 @@ línea %2, columna %3.
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="238"/>
         <source>none</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ninguno</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="260"/>
         <source>✓ covered by .ovr</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">✓ cubierto por .ovr</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="264"/>
         <source>✗ None</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">✗ Ninguna</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="268"/>
         <source>⚠ Shallow (coarsest %1px)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">⚠ Insuficiente (menor resolución: %1px)</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="271"/>
         <source>✓ OK</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">✓ OK</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="279"/>
         <source> (own .ovr)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"> (.ovr propio)</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="279"/>
         <source> (via &lt;OverviewList&gt;)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"> (mediante &lt;OverviewList&gt;)</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="335"/>
         <source>gdaladdo not found</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">No se encuentra gdaladdo</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="336"/>
         <source>Could not locate gdaladdo. Make sure the GDAL tools are installed and on PATH.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">No se ha podido encontrar gdaladdo. Asegúrate de que las herramientas de GDAL estén instaladas y en el PATH.</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="357"/>
         <source>The following operations will be performed:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Se realizarán las siguientes operaciones:</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="357"/>
         <source>Confirm fix</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Confirmar corrección</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="439"/>
         <source>Removed %1.
 </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 eliminado.
+</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="461"/>
         <source>GDAL tools not found</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">No se encuentran las herramientas de GDAL</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="462"/>
         <source>Could not locate gdal_translate/gdalbuildvrt. Make sure the GDAL tools are installed and on PATH.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">No se ha podido encontrar gdal_translate/gdalbuildvrt. Asegúrate de que las herramientas de GDAL estén instaladas y en el PATH.</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="472"/>
         <source>Could not read the raster layout of %1.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">No se ha podido leer la estructura ráster de %1.</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -9821,32 +9842,32 @@ línea %2, columna %3.
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="485"/>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="519"/>
         <source>Combine failed</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Error al combinar</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="485"/>
         <source>No data found in %1.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">No se han encontrado datos en %1.</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="498"/>
         <source>This will split %1 into %2 compressed GeoTIFF(s) in %3, then rewrite %1 to reference them. The current file will be backed up as %4.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Se dividirá %1 en %2 GeoTIFF comprimido(s) en %3 y después se reescribirá %1 para que haga referencia a ellos. Se hará una copia de seguridad del archivo actual como %4.</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="502"/>
         <source>%1 grid cell(s) contained no data and will be skipped.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 celda(s) de la cuadrícula no contenían datos y se omitirán.</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="505"/>
         <source>Confirm combine</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Confirmar combinación</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="519"/>
         <source>Could not back up %1.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">No se ha podido hacer una copia de seguridad de %1.</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="569"/>
@@ -9858,61 +9879,72 @@ línea %2, columna %3.
         <source>An operation is in progress.
 
 Abort and remove any partially written files?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Hay una operación en curso.
+
+¿Cancelarla y eliminar los archivos escritos parcialmente?</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="620"/>
         <source>Rebuilt %1&apos;s &lt;OverviewList&gt; from its source files.
 </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;OverviewList&gt; de %1 regenerada a partir de sus archivos de origen.
+</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="622"/>
         <source>Failed to update %1.
 </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fallo al actualizar %1.
+</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="641"/>
         <source>Restored %1 from backup.
 </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 restaurado desde la copia de seguridad.
+</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="643"/>
         <source>Failed to restore %1 from backup - %2 is still available for manual recovery.
 </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fallo al restaurar %1 desde la copia de seguridad; %2 sigue disponible para recuperarlo manualmente.
+</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="645"/>
         <source>Restore failed</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Error al restaurar</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="646"/>
         <source>Combine failed and %1 could not be automatically restored from its backup.
 
 Rename %2 back to %1 yourself to recover the original file.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">La combinación ha fallado y %1 no se ha podido restaurar automáticamente desde su copia de seguridad.
+
+Renombra tú mismo %2 a %1 para recuperar el archivo original.</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="657"/>
         <source>Combined %1 source file(s) into %2 tile(s); %3 rewritten.
 </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 archivo(s) de origen combinado(s) en %2 tesela(s); %3 reescrito.
+</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="665"/>
         <source>Combine finished</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Combinación terminada</translation>
     </message>
     <message>
         <location filename="../helpers/CVrtAdvisoryDialog.cpp" line="666"/>
         <source>%1 has been rewritten to reference %2 merged tile(s).
 
 The %3 original source file(s) are still in %4 - delete them yourself once you&apos;ve confirmed the merged file works as expected.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 se ha reescrito para hacer referencia a %2 tesela(s) combinada(s).
+
+Los %3 archivo(s) de origen originales siguen en %4; bórralos tú mismo cuando hayas comprobado que el archivo combinado funciona correctamente.</translation>
     </message>
 </context>
 <context>
@@ -9921,73 +9953,73 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../gis/CWksItemDelegate.cpp" line="664"/>
         <location filename="../gis/CWksItemDelegate.cpp" line="1006"/>
         <source>Enter address...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Introducir dirección...</translation>
     </message>
     <message>
         <location filename="../gis/CWksItemDelegate.cpp" line="888"/>
         <source>Hide project on map.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ocultar el proyecto en el mapa.</translation>
     </message>
     <message>
         <location filename="../gis/CWksItemDelegate.cpp" line="890"/>
         <source>Show project on map.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Mostrar el proyecto en el mapa.</translation>
     </message>
     <message>
         <location filename="../gis/CWksItemDelegate.cpp" line="896"/>
         <source>Save project.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Guardar el proyecto.</translation>
     </message>
     <message>
         <location filename="../gis/CWksItemDelegate.cpp" line="899"/>
         <source>Disable auto save.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Desactivar el guardado automático.</translation>
     </message>
     <message>
         <location filename="../gis/CWksItemDelegate.cpp" line="901"/>
         <source>Enable auto save.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Activar el guardado automático.</translation>
     </message>
     <message>
         <location filename="../gis/CWksItemDelegate.cpp" line="905"/>
         <source>Copy content of project into a project in the workspace.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Copiar el contenido del proyecto a un proyecto del espacio de trabajo.</translation>
     </message>
     <message>
         <location filename="../gis/CWksItemDelegate.cpp" line="911"/>
         <source>Disable automatic synchronization with GPS device.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Desactivar la sincronización automática con el dispositivo GPS.</translation>
     </message>
     <message>
         <location filename="../gis/CWksItemDelegate.cpp" line="914"/>
         <source>Enable automatic synchronization with GPS device.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Activar la sincronización automática con el dispositivo GPS.</translation>
     </message>
     <message>
         <location filename="../gis/CWksItemDelegate.cpp" line="922"/>
         <source>This is the active project. All new items will be attached to this project automatically.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Este es el proyecto activo. Todos los elementos nuevos se añadirán automáticamente a este proyecto.</translation>
     </message>
     <message>
         <location filename="../gis/CWksItemDelegate.cpp" line="928"/>
         <source>Make this project the active one. All new items will be attached to this project automatically.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Hacer de este el proyecto activo. Todos los elementos nuevos se añadirán automáticamente a este proyecto.</translation>
     </message>
     <message>
         <location filename="../gis/CWksItemDelegate.cpp" line="940"/>
         <location filename="../gis/CWksItemDelegate.cpp" line="964"/>
         <source>This is the status line. You can select additional information to be displayed in the workspace setup. See menu-&gt;Workspace-&gt;Setup Workspace</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Esta es la línea de estado. Puedes elegir qué información adicional se muestra en la configuración del espacio de trabajo. Ver menú-&gt;Espacio de trabajo-&gt;Configurar espacio de trabajo</translation>
     </message>
     <message>
         <location filename="../gis/CWksItemDelegate.cpp" line="973"/>
         <source>Item is changed and needs to be saved.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">El elemento ha cambiado y hay que guardarlo.</translation>
     </message>
     <message>
         <location filename="../gis/CWksItemDelegate.cpp" line="984"/>
         <source>Setup Search</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Configurar búsqueda</translation>
     </message>
 </context>
 <context>
@@ -10096,7 +10128,7 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../helpers/CWptIconManager.cpp" line="623"/>
         <location filename="../helpers/CWptIconManager.cpp" line="629"/>
         <source>markers</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">marcadores</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="78"/>
@@ -10105,7 +10137,7 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../helpers/CWptIconManager.cpp" line="96"/>
         <location filename="../helpers/CWptIconManager.cpp" line="630"/>
         <source>dot</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">punto</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="78"/>
@@ -10113,7 +10145,7 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../helpers/CWptIconManager.cpp" line="90"/>
         <location filename="../helpers/CWptIconManager.cpp" line="96"/>
         <source>city</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ciudad</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="102"/>
@@ -10123,7 +10155,7 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../helpers/CWptIconManager.cpp" line="540"/>
         <location filename="../helpers/CWptIconManager.cpp" line="691"/>
         <source>flag</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">bandera</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="102"/>
@@ -10155,7 +10187,7 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../helpers/CWptIconManager.cpp" line="976"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1000"/>
         <source>red</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">rojo</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="108"/>
@@ -10183,7 +10215,7 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../helpers/CWptIconManager.cpp" line="504"/>
         <location filename="../helpers/CWptIconManager.cpp" line="934"/>
         <source>blue</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">azul</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="114"/>
@@ -10215,21 +10247,21 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../helpers/CWptIconManager.cpp" line="970"/>
         <location filename="../helpers/CWptIconManager.cpp" line="994"/>
         <source>green</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">verde</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="120"/>
         <location filename="../helpers/CWptIconManager.cpp" line="126"/>
         <location filename="../helpers/CWptIconManager.cpp" line="132"/>
         <source>pin</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">chincheta</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="138"/>
         <location filename="../helpers/CWptIconManager.cpp" line="144"/>
         <location filename="../helpers/CWptIconManager.cpp" line="150"/>
         <source>block</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">bloque</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="138"/>
@@ -10254,7 +10286,7 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../helpers/CWptIconManager.cpp" line="252"/>
         <location filename="../helpers/CWptIconManager.cpp" line="258"/>
         <source>shape</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">forma</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="156"/>
@@ -10265,28 +10297,28 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../helpers/CWptIconManager.cpp" line="776"/>
         <location filename="../helpers/CWptIconManager.cpp" line="782"/>
         <source>circle</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">círculo</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="174"/>
         <location filename="../helpers/CWptIconManager.cpp" line="180"/>
         <location filename="../helpers/CWptIconManager.cpp" line="186"/>
         <source>diamond</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">rombo</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="192"/>
         <location filename="../helpers/CWptIconManager.cpp" line="198"/>
         <location filename="../helpers/CWptIconManager.cpp" line="204"/>
         <source>oval</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">óvalo</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="210"/>
         <location filename="../helpers/CWptIconManager.cpp" line="216"/>
         <location filename="../helpers/CWptIconManager.cpp" line="222"/>
         <source>rectangle</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">rectángulo</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="228"/>
@@ -10295,14 +10327,14 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../helpers/CWptIconManager.cpp" line="618"/>
         <location filename="../helpers/CWptIconManager.cpp" line="624"/>
         <source>square</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">cuadrado</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="246"/>
         <location filename="../helpers/CWptIconManager.cpp" line="252"/>
         <location filename="../helpers/CWptIconManager.cpp" line="258"/>
         <source>triangle</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">triángulo</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="264"/>
@@ -10318,7 +10350,7 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../helpers/CWptIconManager.cpp" line="324"/>
         <location filename="../helpers/CWptIconManager.cpp" line="330"/>
         <source>letter</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">letra</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="264"/>
@@ -10364,7 +10396,7 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../helpers/CWptIconManager.cpp" line="504"/>
         <location filename="../helpers/CWptIconManager.cpp" line="510"/>
         <source>alphanumerical</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">alfanumérico</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="336"/>
@@ -10398,12 +10430,12 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../helpers/CWptIconManager.cpp" line="504"/>
         <location filename="../helpers/CWptIconManager.cpp" line="510"/>
         <source>number</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">número</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="516"/>
         <source>residence</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">residencia</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="516"/>
@@ -10446,98 +10478,98 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../helpers/CWptIconManager.cpp" line="1638"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1644"/>
         <source>building</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">edificio</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="522"/>
         <source>favorite</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">favorito</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="534"/>
         <source>crossing</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">cruce</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="546"/>
         <source>trail head</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">inicio de sendero</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="552"/>
         <source>bike trail</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">sendero ciclista</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="606"/>
         <location filename="../helpers/CWptIconManager.cpp" line="612"/>
         <source>smiley</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">emoticono</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1765"/>
         <source>Final Location</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ubicación final</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1771"/>
         <source>Physical Stage</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Etapa física</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1777"/>
         <source>Reference Waypoint</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Waypoint de referencia</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1783"/>
         <source>Trailhead</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Inicio de sendero</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1789"/>
         <source>Virtual Stage</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Etapa virtual</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1868"/>
         <source>afro</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">afro</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1874"/>
         <source>alien</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">alienígena</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1880"/>
         <source>ball cap</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">gorra</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1886"/>
         <source>big ears</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">orejas grandes</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1892"/>
         <source>biker</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ciclista</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1898"/>
         <source>bug</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">bicho</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1904"/>
         <source>cat</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">gato</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1910"/>
         <source>dog</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">perro</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="630"/>
@@ -10548,24 +10580,24 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../helpers/CWptIconManager.cpp" line="637"/>
         <location filename="../helpers/CWptIconManager.cpp" line="643"/>
         <source>anchor</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ancla</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="679"/>
         <location filename="../helpers/CWptIconManager.cpp" line="685"/>
         <source>beacon</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">baliza</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="697"/>
         <location filename="../helpers/CWptIconManager.cpp" line="703"/>
         <source>diver down flag</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">bandera de buceo</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="709"/>
         <source>man overboard</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">hombre al agua</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="715"/>
@@ -10590,17 +10622,17 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../helpers/CWptIconManager.cpp" line="993"/>
         <location filename="../helpers/CWptIconManager.cpp" line="999"/>
         <source>navaid</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ayuda a la navegación</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="922"/>
         <source>amber</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ámbar</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="928"/>
         <source>black</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">negro</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="673"/>
@@ -10610,17 +10642,17 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../helpers/CWptIconManager.cpp" line="994"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1000"/>
         <source>white</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">blanco</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="958"/>
         <source>orange</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">naranja</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="982"/>
         <source>violet</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">violeta</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1006"/>
@@ -10650,7 +10682,7 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../helpers/CWptIconManager.cpp" line="1150"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1156"/>
         <source>cycling</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ciclismo</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1007"/>
@@ -10658,17 +10690,17 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../helpers/CWptIconManager.cpp" line="1019"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1025"/>
         <source>category</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">categoría</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1031"/>
         <source>danger</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">peligro</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1037"/>
         <source>first aid</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">primeros auxilios</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1043"/>
@@ -10683,102 +10715,102 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../helpers/CWptIconManager.cpp" line="1638"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1644"/>
         <source>food</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">comida</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1049"/>
         <source>generic</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">genérico</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1055"/>
         <source>hors category</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">categoría especial</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1061"/>
         <source>left</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">izquierda</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1067"/>
         <source>right</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">derecha</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1073"/>
         <source>sprint</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">sprint</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1079"/>
         <source>straight</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">recto</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1085"/>
         <source>summit</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">cumbre</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1091"/>
         <source>valley</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">valle</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1097"/>
         <source>water</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">agua</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1103"/>
         <source>left fork</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">bifurcación izquierda</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1109"/>
         <source>right fork</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">bifurcación derecha</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1115"/>
         <source>middle fork</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">bifurcación central</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1121"/>
         <source>slight left</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ligeramente a la izquierda</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1127"/>
         <source>sharp left</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">cerrada a la izquierda</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1133"/>
         <source>slight right</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ligeramente a la derecha</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1139"/>
         <source>sharp right</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">cerrada a la derecha</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1145"/>
         <source>uturn</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">cambio de sentido</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1151"/>
         <source>start</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">salida</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1157"/>
         <source>end</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">llegada</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1163"/>
@@ -10865,7 +10897,7 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../helpers/CWptIconManager.cpp" line="1649"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1655"/>
         <source>poi</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">poi</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1164"/>
@@ -10873,17 +10905,17 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../helpers/CWptIconManager.cpp" line="1176"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1182"/>
         <source>bank</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">banco</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1200"/>
         <source>church</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">iglesia</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1218"/>
         <source>mine</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">mina</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1218"/>
@@ -10896,13 +10928,13 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../helpers/CWptIconManager.cpp" line="1470"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1608"/>
         <source>landmark</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">lugar de interés</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1230"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1236"/>
         <source>tower</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">torre</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1187"/>
@@ -10925,92 +10957,92 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../helpers/CWptIconManager.cpp" line="1409"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1505"/>
         <source>transport</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">transporte</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1584"/>
         <source>golf course</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">campo de golf</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1916"/>
         <source>dreadlocks</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">rastas</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1922"/>
         <source>female1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">mujer1</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1928"/>
         <source>female2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">mujer2</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1934"/>
         <source>female3</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">mujer3</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1940"/>
         <source>goatee</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">perilla</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1946"/>
         <source>kung-fu</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">kung-fu</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1952"/>
         <source>pig</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">cerdo</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1958"/>
         <source>pirate</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">pirata</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1964"/>
         <source>ranger</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">guardabosques</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1970"/>
         <source>spike</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">pelo de punta</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1976"/>
         <source>sumo</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">sumo</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1982"/>
         <source>blonde</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">rubia</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1988"/>
         <source>clown</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">payaso</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1994"/>
         <source>glasses</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">gafas</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="2000"/>
         <source>panda</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">panda</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="2129"/>
         <source>More...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Más...</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="636"/>
@@ -11044,7 +11076,7 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../helpers/CWptIconManager.cpp" line="1409"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1463"/>
         <source>marine</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">náutico</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="84"/>
@@ -11196,12 +11228,12 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../helpers/CWptIconManager.cpp" line="1663"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1669"/>
         <source>etrex</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">etrex</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="558"/>
         <source>atv</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">quad</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="558"/>
@@ -11209,37 +11241,37 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../helpers/CWptIconManager.cpp" line="570"/>
         <location filename="../helpers/CWptIconManager.cpp" line="576"/>
         <source>vehicle</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">vehículo</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="564"/>
         <source>car</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">coche</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="570"/>
         <source>truck</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">camión</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="576"/>
         <source>wrecker</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">grúa</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="582"/>
         <source>water hydrant</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">boca de incendios</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="588"/>
         <source>mile marker</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">hito kilométrico</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="594"/>
         <source>tracback point</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">punto TracBack</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="605"/>
@@ -11267,67 +11299,67 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../helpers/CWptIconManager.cpp" line="1993"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1999"/>
         <source>contact</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">contacto</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="649"/>
         <source>bell</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">campana</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="655"/>
         <source>horn</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">bocina</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="661"/>
         <source>light</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">luz</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="667"/>
         <source>skull and crossbones</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">calavera y tibias</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="673"/>
         <source>buoy</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">boya</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="679"/>
         <source>radio</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">radio</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="733"/>
         <source>reef</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">arrecife</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="739"/>
         <source>weed bed</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">lecho de algas</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="745"/>
         <source>dropoff</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">cantil</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="751"/>
         <source>dock</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">muelle</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="757"/>
         <source>bait and tackle</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">cebo y aparejos</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="763"/>
         <source>stump</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">tocón</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="769"/>
@@ -11339,22 +11371,22 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../helpers/CWptIconManager.cpp" line="1229"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1235"/>
         <source>aerial</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">aéreo</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="788"/>
         <source>glider area</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">zona de planeo</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="794"/>
         <source>ultralight area</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">zona de ultraligeros</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="800"/>
         <source>parachute area</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">zona de paracaidismo</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="806"/>
@@ -11378,137 +11410,137 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../helpers/CWptIconManager.cpp" line="914"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1571"/>
         <source>hunting</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">caza</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="807"/>
         <source>big game</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">caza mayor</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="813"/>
         <source>blind</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">puesto de caza</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="819"/>
         <source>blood trail</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">rastro de sangre</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="825"/>
         <source>cover</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">refugio</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="831"/>
         <source>covey</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">bando</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="837"/>
         <source>food source</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">fuente de alimento</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="843"/>
         <source>furbearer</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">animal de piel</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="849"/>
         <source>small game</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">caza menor</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="855"/>
         <source>animal tracks</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">huellas de animales</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="861"/>
         <source>treed quarry</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">presa acorralada en árbol</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="867"/>
         <source>tree stand</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">puesto en árbol</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="873"/>
         <source>upland game</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">caza de pluma</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="879"/>
         <source>waterfowl</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">aves acuáticas</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="885"/>
         <source>water source</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">fuente de agua</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="891"/>
         <source>dog running</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">perro corriendo</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="897"/>
         <source>dog pointing</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">perro de muestra</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="903"/>
         <source>dog treed</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">perro ladrando al árbol</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="909"/>
         <source>dog sitting</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">perro sentado</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="915"/>
         <source>dog unknown</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">perro (estado desconocido)</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1188"/>
         <source>bridge</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">puente</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1206"/>
         <source>cemetery</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">cementerio</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1212"/>
         <source>military</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">militar</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1224"/>
         <source>oil field</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">campo petrolífero</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1242"/>
         <source>toll booth</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">peaje</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1248"/>
         <source>tunnel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">túnel</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1254"/>
         <source>gas station</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">gasolinera</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1260"/>
@@ -11516,62 +11548,62 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../helpers/CWptIconManager.cpp" line="1272"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1278"/>
         <source>parking</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">aparcamiento</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1284"/>
         <source>car rental</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">alquiler de coches</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1290"/>
         <source>truck stop</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">área de camiones</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1296"/>
         <source>boat ramp</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">rampa de botadura</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1302"/>
         <source>marina</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">puerto deportivo</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1308"/>
         <source>ferry</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ferry</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1314"/>
         <source>seaplane</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">hidroavión</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1320"/>
         <source>transportation</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">transportes</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1326"/>
         <source>funicular</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">funicular</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1332"/>
         <source>railway</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ferrocarril</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1338"/>
         <source>airport</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">aeropuerto</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1344"/>
         <source>heliport</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">helipuerto</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1349"/>
@@ -11580,7 +11612,7 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../helpers/CWptIconManager.cpp" line="1421"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1505"/>
         <source>outdoors</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">aire libre</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1349"/>
@@ -11588,128 +11620,128 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../helpers/CWptIconManager.cpp" line="1361"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1367"/>
         <source>accommodation</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">alojamiento</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1350"/>
         <source>campground</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">camping</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1356"/>
         <source>lodge</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">refugio de montaña</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1362"/>
         <source>lodging</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">hospedaje</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1368"/>
         <source>rv park</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">área de autocaravanas</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1374"/>
         <source>dam</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">presa</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1380"/>
         <source>levee</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">dique</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1386"/>
         <source>bar</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">bar</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1392"/>
         <source>drinking water</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">agua potable</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1398"/>
         <source>fast food</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">comida rápida</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1404"/>
         <source>pizza</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">pizza</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1410"/>
         <source>restaurant</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">restaurante</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1416"/>
         <source>amusement park</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">parque de atracciones</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1422"/>
         <source>beach</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">playa</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1428"/>
         <source>ghost town</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">pueblo fantasma</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1434"/>
         <source>information</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">información</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1440"/>
         <source>live theatre</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">teatro</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1446"/>
         <source>museum</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">museo</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1452"/>
         <source>picnic area</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">zona de pícnic</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1458"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1464"/>
         <source>scenic area</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">mirador</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1470"/>
         <source>zoo</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">zoo</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1476"/>
         <source>city hall</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ayuntamiento</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1482"/>
         <source>library</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">biblioteca</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1488"/>
         <source>movie theater</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">cine</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1494"/>
         <source>police station</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">comisaría</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1494"/>
@@ -11717,63 +11749,63 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../helpers/CWptIconManager.cpp" line="1536"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1542"/>
         <source>help</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ayuda</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1500"/>
         <source>post office</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">oficina de correos</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1506"/>
         <source>restroom</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">aseos</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1512"/>
         <source>shower</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ducha</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1518"/>
         <source>scales</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">balanza</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1518"/>
         <source>court</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">juzgado</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1524"/>
         <source>telephone</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">teléfono</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1530"/>
         <source>medical facility</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">centro médico</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1530"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1542"/>
         <source>hospital</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">hospital</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1536"/>
         <source>pharmacy</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">farmacia</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1542"/>
         <source>hospital euro</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">hospital (símbolo europeo)</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1548"/>
         <source>school</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">escuela</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1553"/>
@@ -11788,109 +11820,109 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../helpers/CWptIconManager.cpp" line="1607"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1613"/>
         <source>sport</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">deporte</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1554"/>
         <source>bowling</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">bolos</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1560"/>
         <source>fishing area</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">zona de pesca</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1566"/>
         <source>fishing hot sport facility</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">instalación de pesca</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1572"/>
         <source>hunting area</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">zona de caza</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1578"/>
         <source>fitness center</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">centro de fitness</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1578"/>
         <source>gym</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">gimnasio</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1590"/>
         <source>ice skating</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">patinaje sobre hielo</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1596"/>
         <source>skiing area</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">zona de esquí</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1602"/>
         <source>ski resort</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">estación de esquí</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1608"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1614"/>
         <source>stadium</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">estadio</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1620"/>
         <source>car repair</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">taller mecánico</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1626"/>
         <source>convenience store</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">tienda de alimentación</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1632"/>
         <source>department store</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">grandes almacenes</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1638"/>
         <source>shopping center</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">centro comercial</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1638"/>
         <source>supermarket</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">supermercado</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1644"/>
         <source>winery</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">bodega</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1644"/>
         <source>bottle shop</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">tienda de bebidas</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1650"/>
         <source>forest</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">bosque</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1650"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1656"/>
         <source>land</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">terreno</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1656"/>
         <source>park</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">parque</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1662"/>
@@ -11929,105 +11961,105 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../helpers/CWptIconManager.cpp" line="1854"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1860"/>
         <source>geocache</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">geocache</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1669"/>
         <source>geocache found</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">geocache encontrado</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1681"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1795"/>
         <source>traditional cache</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">cache tradicional</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1687"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1693"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1801"/>
         <source>multi cache</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">multicache</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1699"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1807"/>
         <source>unknown cache</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">cache misterioso</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1705"/>
         <source>letterbox hybrid</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">letterbox híbrido</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1717"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1813"/>
         <source>wherigo cache</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">cache wherigo</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1741"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1819"/>
         <source>event cache</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">cache de evento</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1747"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1825"/>
         <source>mega-event cache</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">cache de megaevento</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1753"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1831"/>
         <source>giga-event cache</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">cache de gigaevento</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1759"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1837"/>
         <source>cache in trash out event</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">evento cache in trash out</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1723"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1843"/>
         <source>earthcache</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">earthcache</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1711"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1849"/>
         <source>letterbox cache</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">cache letterbox</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1729"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1855"/>
         <source>virtual cache</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">cache virtual</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1735"/>
         <location filename="../helpers/CWptIconManager.cpp" line="1861"/>
         <source>webcam cache</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">cache webcam</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="1675"/>
         <source>puzzle cache</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">cache enigma</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="2018"/>
         <source>external</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">externo</translation>
     </message>
     <message>
         <location filename="../helpers/CWptIconManager.cpp" line="2137"/>
         <source>Clear List</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Vaciar lista</translation>
     </message>
 </context>
 <context>
@@ -12035,27 +12067,27 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
     <message>
         <location filename="../widgets/CWptIconSelectWidget.cpp" line="54"/>
         <source>Clear Filter</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Limpiar filtro</translation>
     </message>
     <message>
         <location filename="../widgets/CWptIconSelectWidget.cpp" line="58"/>
         <source>start typing...</source>
-        <translation type="unfinished">Escribir...</translation>
+        <translation type="unfinished">empieza a escribir...</translation>
     </message>
     <message>
         <location filename="../widgets/CWptIconSelectWidget.cpp" line="59"/>
         <source>Filter: Start to type and the list will be reduced to matching items.</source>
-        <translation type="unfinished">Filtro: Empezar a escribir para reducir la lista.</translation>
+        <translation type="unfinished">Filtro: empieza a escribir y la lista se reducirá a los elementos que coincidan.</translation>
     </message>
     <message>
         <location filename="../widgets/CWptIconSelectWidget.cpp" line="63"/>
         <source>Filter: Show only icons in selected category</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Filtro: mostrar solo los iconos de la categoría seleccionada</translation>
     </message>
     <message>
         <location filename="../widgets/CWptIconSelectWidget.cpp" line="66"/>
         <source>Filter: Show only icons for selected vendor</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Filtro: mostrar solo los iconos del fabricante seleccionado</translation>
     </message>
 </context>
 <context>
@@ -12285,7 +12317,7 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="651"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translatorcomment>no es necesario traducir</translatorcomment>
-        <translation></translation>
+        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="294"/>
@@ -12371,7 +12403,7 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="605"/>
         <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="685"/>
         <source>T-1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">T-1</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="529"/>
@@ -12379,7 +12411,7 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="606"/>
         <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="686"/>
         <source>T-2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">T-2</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="534"/>
@@ -12387,7 +12419,7 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="607"/>
         <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="687"/>
         <source>T-3</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">T-3</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="539"/>
@@ -12395,7 +12427,7 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="608"/>
         <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="688"/>
         <source>T-4</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">T-4</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="544"/>
@@ -12403,7 +12435,7 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="609"/>
         <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="689"/>
         <source>T-5</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">T-5</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="549"/>
@@ -12411,7 +12443,7 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../../../build/src/qmapshack/ui_Hiking_Tour_Summary_(Advanced).h" line="610"/>
         <location filename="../../../build/src/qmapshack/ui_Running_Summary.h" line="690"/>
         <source>T-6</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">T-6</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="224"/>
@@ -12867,7 +12899,7 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="221"/>
         <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="223"/>
         <source>TextLabel</source>
-        <translation>Denominación</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="67"/>
@@ -12891,7 +12923,7 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../IAbout.ui" line="109"/>
         <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="222"/>
         <source>Routino</source>
-        <translation></translation>
+        <translation type="unfinished">Routino</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="132"/>
@@ -12909,7 +12941,7 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../IAbout.ui" line="169"/>
         <location filename="../../../build/src/qmapshack/ui_IAbout.h" line="227"/>
         <source>© 2017 Oliver Eichler (oliver.eichler@gmx.de)</source>
-        <translation></translation>
+        <translation type="unfinished">© 2017 Oliver Eichler (oliver.eichler@gmx.de)</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="162"/>
@@ -12987,7 +13019,7 @@ The %3 original source file(s) are still in %4 - delete them yourself once you&a
         <location filename="../widgets/IColorChooser.ui" line="14"/>
         <location filename="../../../build/src/qmapshack/ui_IColorChooser.h" line="49"/>
         <source>Dialog</source>
-        <translation>Diálogo</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -13244,7 +13276,7 @@ Si quieres mantener sólo una parte se pùeden eliminar los puntos simplemente, 
         <location filename="../dem/IDemPropSetup.ui" line="14"/>
         <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="412"/>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="54"/>
@@ -13258,7 +13290,7 @@ Si quieres mantener sólo una parte se pùeden eliminar los puntos simplemente, 
         <location filename="../dem/IDemPropSetup.ui" line="35"/>
         <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="414"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Change opacity of layer&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Cambiar la opacidad de la capa&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="50"/>
@@ -13281,7 +13313,8 @@ en el que se visualiza este DEM.</translation>
         <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="427"/>
         <source>Enable relief shading based on aspect and slope,
  and illuminated from NW.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Activar el sombreado del relieve según orientación y pendiente,
+ con iluminación desde el NO.</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="121"/>
@@ -13294,34 +13327,38 @@ en el que se visualiza este DEM.</translation>
         <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="432"/>
         <source>Move to the right to raise the angle of the light.
  Light comes from NW</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Mover a la derecha para aumentar el ángulo de la luz.
+ La luz viene del NO</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="151"/>
         <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="436"/>
         <source>Enable relief shading based on slope.
  The steeper, the darker.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Activar el sombreado del relieve según la pendiente.
+ Cuanto más empinado, más oscuro.</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="155"/>
         <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="439"/>
         <source>Slope Shading</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Sombreado de pendiente</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="162"/>
         <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="441"/>
         <source>Move to the right to increase the scale factor.
  Higher values are better for flatter areas.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Mover a la derecha para aumentar el factor de escala.
+ Los valores altos son mejores para zonas más llanas.</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="199"/>
         <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="445"/>
         <source>Enable color shading
  based on slope ranges.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Activar el coloreado
+ según intervalos de pendiente.</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="203"/>
@@ -13333,7 +13370,7 @@ en el que se visualiza este DEM.</translation>
         <location filename="../dem/IDemPropSetup.ui" line="210"/>
         <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="450"/>
         <source>Select color scheme.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Seleccionar el esquema de colores.</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="280"/>
@@ -13361,7 +13398,7 @@ en el que se visualiza este DEM.</translation>
         <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="463"/>
         <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="466"/>
         <source>&gt; </source>
-        <translation></translation>
+        <translation type="unfinished">&gt; </translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="305"/>
@@ -13375,13 +13412,13 @@ en el que se visualiza este DEM.</translation>
         <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="461"/>
         <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="464"/>
         <source>TextLabel</source>
-        <translation>Denominación</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="649"/>
         <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="468"/>
         <source>Tint areas above the given elevation.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Colorear las zonas por encima de la altitud indicada.</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="652"/>
@@ -13395,7 +13432,7 @@ en el que se visualiza este DEM.</translation>
         <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="472"/>
         <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="475"/>
         <source>Lower elevation to be colored.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Altitud inferior a colorear.</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="701"/>
@@ -13409,14 +13446,15 @@ en el que se visualiza este DEM.</translation>
         <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="479"/>
         <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="487"/>
         <source>Higher elevation to be colored.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Altitud superior a colorear.</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="730"/>
         <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="482"/>
         <source>Enable color shading
  based on elevation.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Activar el coloreado
+ según la altitud.</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="734"/>
@@ -13434,7 +13472,7 @@ en el que se visualiza este DEM.</translation>
         <location filename="../dem/IDemPropSetup.ui" line="757"/>
         <location filename="../../../build/src/qmapshack/ui_IDemPropSetup.h" line="491"/>
         <source>Enable / Disable elevation legend.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Activar / desactivar la leyenda de altitud.</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="760"/>
@@ -13449,7 +13487,7 @@ en el que se visualiza este DEM.</translation>
         <location filename="../dem/IDemList.ui" line="14"/>
         <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="170"/>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="35"/>
@@ -13473,25 +13511,25 @@ en el que se visualiza este DEM.</translation>
         <location filename="../dem/IDemList.ui" line="135"/>
         <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="214"/>
         <source>Use the buttons to activate a DEM. Use drag-n-drop to move the DEM in the draw order. </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Usa los botones para activar un DEM. Arrastra y suelta para cambiar el orden de dibujo del DEM. </translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="156"/>
         <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="171"/>
         <source>Move to Top</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Mover al principio</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="159"/>
         <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="173"/>
         <source>Hide DEM behind others</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ocultar el DEM detrás de los demás</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="162"/>
         <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="176"/>
         <source>Shift+Home</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Shift+Home</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="174"/>
@@ -13509,7 +13547,7 @@ en el que se visualiza este DEM.</translation>
         <location filename="../dem/IDemList.ui" line="180"/>
         <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="183"/>
         <source>Shift+Up</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Shift+Up</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="192"/>
@@ -13527,25 +13565,25 @@ en el que se visualiza este DEM.</translation>
         <location filename="../dem/IDemList.ui" line="198"/>
         <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="190"/>
         <source>Shift+Down</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Shift+Down</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="210"/>
         <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="192"/>
         <source>Move to Bottom</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Mover al final</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="213"/>
         <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="194"/>
         <source>Show DEM on top of others</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Mostrar el DEM encima de los demás</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="216"/>
         <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="197"/>
         <source>Shift+End</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Shift+End</translation>
     </message>
     <message>
         <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="199"/>
@@ -13562,25 +13600,25 @@ en el que se visualiza este DEM.</translation>
         <location filename="../dem/IDemList.ui" line="240"/>
         <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="201"/>
         <source>Remove</source>
-        <translation type="unfinished">Borrar</translation>
+        <translation type="unfinished">Quitar</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="243"/>
         <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="203"/>
         <source>Remove DEM from list</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Quitar el DEM de la lista</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="255"/>
         <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="205"/>
         <source>Overview Info...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Información de vistas generales...</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="258"/>
         <location filename="../../../build/src/qmapshack/ui_IDemList.h" line="207"/>
         <source>Show overview pyramid info for this file</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Mostrar información de la pirámide de vistas generales (overviews) de este archivo</translation>
     </message>
 </context>
 <context>
@@ -13589,7 +13627,7 @@ en el que se visualiza este DEM.</translation>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="20"/>
         <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="443"/>
         <source>Dialog</source>
-        <translation>Diálogo</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="50"/>
@@ -13676,7 +13714,7 @@ en el que se visualiza este DEM.</translation>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="231"/>
         <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="458"/>
         <source>QMS</source>
-        <translation></translation>
+        <translation type="unfinished">QMS</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="168"/>
@@ -13708,7 +13746,7 @@ en el que se visualiza este DEM.</translation>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="205"/>
         <location filename="../../../build/src/qmapshack/ui_IDetailsGeoCache.h" line="456"/>
         <source>TextLabel</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -13717,7 +13755,7 @@ en el que se visualiza este DEM.</translation>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="14"/>
         <location filename="../../../build/src/qmapshack/ui_IDetailsOvlArea.h" line="234"/>
         <source>Dialog</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="132"/>
@@ -13798,7 +13836,7 @@ en el que se visualiza este DEM.</translation>
         <location filename="../gis/prj/IDetailsPrj.ui" line="14"/>
         <location filename="../../../build/src/qmapshack/ui_IDetailsPrj.h" line="132"/>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="50"/>
@@ -13912,7 +13950,7 @@ en el que se visualiza este DEM.</translation>
         <location filename="../gis/trk/IDetailsTrk.ui" line="14"/>
         <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1053"/>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="99"/>
@@ -14038,7 +14076,9 @@ en el que se visualiza este DEM.</translation>
         <source>-
 -
 -</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">-
+-
+-</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="281"/>
@@ -14050,7 +14090,7 @@ en el que se visualiza este DEM.</translation>
         <location filename="../gis/trk/IDetailsTrk.ui" line="300"/>
         <location filename="../../../build/src/qmapshack/ui_IDetailsTrk.h" line="1065"/>
         <source>This Track is a NoGo-Line</source>
-        <translation>Este Track es una Linea de Prohibición</translation>
+        <translation type="unfinished">Este track es una línea de prohibición</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="609"/>
@@ -14151,7 +14191,7 @@ en el que se visualiza este DEM.</translation>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1597"/>
         <source>Surface</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Superficie</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1630"/>
@@ -14192,7 +14232,7 @@ en el que se visualiza este DEM.</translation>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="14"/>
         <location filename="../../../build/src/qmapshack/ui_IDetailsWpt.h" line="300"/>
         <source>Dialog</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="106"/>
@@ -14726,7 +14766,7 @@ en el que se visualiza este DEM.</translation>
         <location filename="../gis/trk/filter/IFilterChangeStartPoint.ui" line="20"/>
         <location filename="../../../build/src/qmapshack/ui_IFilterChangeStartPoint.h" line="114"/>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterChangeStartPoint.ui" line="49"/>
@@ -14753,7 +14793,7 @@ en el que se visualiza este DEM.</translation>
         <location filename="../gis/trk/filter/IFilterDelete.ui" line="14"/>
         <location filename="../../../build/src/qmapshack/ui_IFilterDelete.h" line="96"/>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterDelete.ui" line="45"/>
@@ -14780,7 +14820,7 @@ en el que se visualiza este DEM.</translation>
         <location filename="../gis/trk/filter/IFilterDeleteExtension.ui" line="14"/>
         <location filename="../../../build/src/qmapshack/ui_IFilterDeleteExtension.h" line="121"/>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterDeleteExtension.ui" line="45"/>
@@ -14813,7 +14853,7 @@ en el que se visualiza este DEM.</translation>
         <location filename="../gis/trk/filter/IFilterDouglasPeuker.ui" line="14"/>
         <location filename="../../../build/src/qmapshack/ui_IFilterDouglasPeuker.h" line="118"/>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterDouglasPeuker.ui" line="45"/>
@@ -14852,7 +14892,7 @@ en el que se visualiza este DEM.</translation>
         <location filename="../gis/trk/filter/IFilterInterpolateElevation.ui" line="14"/>
         <location filename="../../../build/src/qmapshack/ui_IFilterInterpolateElevation.h" line="132"/>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterInterpolateElevation.ui" line="45"/>
@@ -14891,7 +14931,7 @@ en el que se visualiza este DEM.</translation>
         <location filename="../gis/trk/filter/IFilterInvalid.ui" line="14"/>
         <location filename="../../../build/src/qmapshack/ui_IFilterInvalid.h" line="99"/>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterInvalid.ui" line="41"/>
@@ -14918,7 +14958,7 @@ en el que se visualiza este DEM.</translation>
         <location filename="../gis/trk/filter/IFilterLoopsCut.ui" line="14"/>
         <location filename="../../../build/src/qmapshack/ui_IFilterLoopsCut.h" line="146"/>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterLoopsCut.ui" line="35"/>
@@ -14957,7 +14997,7 @@ en el que se visualiza este DEM.</translation>
         <location filename="../gis/trk/filter/IFilterMedian.ui" line="14"/>
         <location filename="../../../build/src/qmapshack/ui_IFilterMedian.h" line="117"/>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterMedian.ui" line="45"/>
@@ -14990,7 +15030,7 @@ en el que se visualiza este DEM.</translation>
         <location filename="../gis/trk/filter/IFilterNewDate.ui" line="14"/>
         <location filename="../../../build/src/qmapshack/ui_IFilterNewDate.h" line="114"/>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterNewDate.ui" line="35"/>
@@ -15029,7 +15069,7 @@ en el que se visualiza este DEM.</translation>
         <location filename="../gis/trk/filter/IFilterObscureDate.ui" line="14"/>
         <location filename="../../../build/src/qmapshack/ui_IFilterObscureDate.h" line="114"/>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterObscureDate.ui" line="45"/>
@@ -15047,7 +15087,7 @@ en el que se visualiza este DEM.</translation>
         <location filename="../gis/trk/filter/IFilterObscureDate.ui" line="61"/>
         <location filename="../../../build/src/qmapshack/ui_IFilterObscureDate.h" line="117"/>
         <source> sec.</source>
-        <translation></translation>
+        <translation type="unfinished"> s</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterObscureDate.ui" line="68"/>
@@ -15068,7 +15108,7 @@ en el que se visualiza este DEM.</translation>
         <location filename="../gis/trk/filter/IFilterOffsetElevation.ui" line="14"/>
         <location filename="../../../build/src/qmapshack/ui_IFilterOffsetElevation.h" line="127"/>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterOffsetElevation.ui" line="45"/>
@@ -15101,7 +15141,7 @@ en el que se visualiza este DEM.</translation>
         <location filename="../gis/trk/filter/IFilterReplaceElevation.ui" line="14"/>
         <location filename="../../../build/src/qmapshack/ui_IFilterReplaceElevation.h" line="109"/>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterReplaceElevation.ui" line="45"/>
@@ -15128,7 +15168,7 @@ en el que se visualiza este DEM.</translation>
         <location filename="../gis/trk/filter/IFilterReset.ui" line="14"/>
         <location filename="../../../build/src/qmapshack/ui_IFilterReset.h" line="95"/>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterReset.ui" line="35"/>
@@ -15155,7 +15195,7 @@ en el que se visualiza este DEM.</translation>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="29"/>
         <location filename="../../../build/src/qmapshack/ui_IFilterSpeed.h" line="179"/>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="64"/>
@@ -15168,7 +15208,7 @@ en el que se visualiza este DEM.</translation>
         <location filename="../../../build/src/qmapshack/ui_IFilterSpeed.h" line="181"/>
         <source>labelWarning</source>
         <translatorcomment>No traducir</translatorcomment>
-        <translation></translation>
+        <translation type="unfinished">labelWarning</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="191"/>
@@ -15207,7 +15247,7 @@ en el que se visualiza este DEM.</translation>
         <location filename="../gis/trk/filter/IFilterSpeedConst.ui" line="14"/>
         <location filename="../../../build/src/qmapshack/ui_IFilterSpeedConst.h" line="70"/>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedConst.ui" line="54"/>
@@ -15228,7 +15268,7 @@ en el que se visualiza este DEM.</translation>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="26"/>
         <location filename="../../../build/src/qmapshack/ui_IFilterSpeedCycle.h" line="216"/>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="208"/>
@@ -15297,7 +15337,7 @@ en el que se visualiza este DEM.</translation>
         <location filename="../gis/trk/filter/IFilterSpeedHike.ui" line="14"/>
         <location filename="../../../build/src/qmapshack/ui_IFilterSpeedHike.h" line="134"/>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedHike.ui" line="75"/>
@@ -15324,7 +15364,7 @@ en el que se visualiza este DEM.</translation>
         <location filename="../gis/trk/filter/IFilterSplitSegment.ui" line="14"/>
         <location filename="../../../build/src/qmapshack/ui_IFilterSplitSegment.h" line="97"/>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSplitSegment.ui" line="45"/>
@@ -15357,7 +15397,7 @@ en el que se visualiza este DEM.</translation>
         <location filename="../gis/trk/filter/IFilterSplitTrack.ui" line="35"/>
         <location filename="../../../build/src/qmapshack/ui_IFilterSplitTrack.h" line="147"/>
         <source>Number of tracks</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Número de tracks</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSplitTrack.ui" line="99"/>
@@ -15375,7 +15415,7 @@ en el que se visualiza este DEM.</translation>
         <location filename="../gis/trk/filter/IFilterSplitTrack.ui" line="132"/>
         <location filename="../../../build/src/qmapshack/ui_IFilterSplitTrack.h" line="153"/>
         <source>Split track into multiple shorter tracks</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Dividir el track en varios tracks más cortos</translation>
     </message>
 </context>
 <context>
@@ -15384,7 +15424,7 @@ en el que se visualiza este DEM.</translation>
         <location filename="../gis/trk/filter/IFilterSubPt2Pt.ui" line="14"/>
         <location filename="../../../build/src/qmapshack/ui_IFilterSubPt2Pt.h" line="97"/>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSubPt2Pt.ui" line="35"/>
@@ -15411,7 +15451,7 @@ en el que se visualiza este DEM.</translation>
         <location filename="../gis/trk/filter/IFilterTerrainSlope.ui" line="14"/>
         <location filename="../../../build/src/qmapshack/ui_IFilterTerrainSlope.h" line="96"/>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterTerrainSlope.ui" line="45"/>
@@ -15438,7 +15478,7 @@ en el que se visualiza este DEM.</translation>
         <location filename="../gis/trk/filter/IFilterZeroSpeedDriftCleaner.ui" line="14"/>
         <location filename="../../../build/src/qmapshack/ui_IFilterZeroSpeedDriftCleaner.h" line="160"/>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterZeroSpeedDriftCleaner.ui" line="35"/>
@@ -15543,7 +15583,7 @@ en el que se visualiza este DEM.</translation>
         <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="24"/>
         <location filename="../../../build/src/qmapshack/ui_IGeoSearchWebConfigDialog.h" line="109"/>
         <source>TextLabel</source>
-        <translation type="unfinished">Denominación</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="50"/>
@@ -15555,7 +15595,7 @@ en el que se visualiza este DEM.</translation>
         <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="55"/>
         <location filename="../../../build/src/qmapshack/ui_IGeoSearchWebConfigDialog.h" line="111"/>
         <source>URL</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">URL</translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="65"/>
@@ -15600,13 +15640,13 @@ en el que se visualiza este DEM.</translation>
         <location filename="../gis/IGisDatabase.ui" line="14"/>
         <location filename="../../../build/src/qmapshack/ui_IGisDatabase.h" line="108"/>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/IGisDatabase.ui" line="96"/>
         <location filename="../../../build/src/qmapshack/ui_IGisDatabase.h" line="110"/>
-        <source>To add a database do a right click on the database list above.</source>
-        <translation>Para añadir una base de datos hacer click con el botón derecho en la lista de bases de datos.</translation>
+        <source>To add a database do a right click on the database list above and choose &lt;a href=&apos;CreateDB&apos;&gt;Add Database&lt;/a&gt;.</source>
+        <translation type="unfinished">Para añadir una base de datos, haz clic con el botón derecho en la lista de bases de datos de arriba y elige &lt;a href=&apos;CreateDB&apos;&gt;Añadir base de datos&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="../gis/IGisDatabase.ui" line="119"/>
@@ -16042,7 +16082,7 @@ Nombre de archivo %1</translation>
         <location filename="../tool/IImportDatabase.ui" line="14"/>
         <location filename="../../../build/src/qmapshack/ui_IImportDatabase.h" line="120"/>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IImportDatabase.ui" line="45"/>
@@ -16091,7 +16131,7 @@ Nombre de archivo %1</translation>
         <location filename="../helpers/IInputDialog.ui" line="20"/>
         <location filename="../../../build/src/qmapshack/ui_IInputDialog.h" line="88"/>
         <source>TextLabel</source>
-        <translation>Denominación</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -16108,7 +16148,7 @@ Nombre de archivo %1</translation>
         <location filename="../../../build/src/qmapshack/ui_IInvalidTrk.h" line="128"/>
         <location filename="../../../build/src/qmapshack/ui_IInvalidTrk.h" line="130"/>
         <source>TextLabel</source>
-        <translation type="unfinished">Denominación</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IInvalidTrk.ui" line="37"/>
@@ -16256,7 +16296,7 @@ Nombre de archivo %1</translation>
         <location filename="../IMainWindow.ui" line="285"/>
         <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="837"/>
         <source>Realtime</source>
-        <translation>Tiempo Real</translation>
+        <translation type="unfinished">Tiempo real</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="331"/>
@@ -16276,7 +16316,7 @@ Nombre de archivo %1</translation>
         <location filename="../IMainWindow.ui" line="352"/>
         <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="646"/>
         <source>Show Scale</source>
-        <translation>Mostrar Escala</translation>
+        <translation type="unfinished">Mostrar escala</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="364"/>
@@ -16312,7 +16352,7 @@ Nombre de archivo %1</translation>
         <location filename="../IMainWindow.ui" line="412"/>
         <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="656"/>
         <source>Flip Mouse Wheel</source>
-        <translation>Invertir la Rueda del Ratón</translation>
+        <translation type="unfinished">Invertir la rueda del ratón</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="424"/>
@@ -16320,7 +16360,7 @@ Nombre de archivo %1</translation>
         <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="657"/>
         <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="659"/>
         <source>Setup Map Paths</source>
-        <translation>Configurar Rutas a los Mapas</translation>
+        <translation type="unfinished">Configurar rutas a los mapas</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="442"/>
@@ -16376,7 +16416,7 @@ Nombre de archivo %1</translation>
         <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="670"/>
         <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="672"/>
         <source>Setup Map View</source>
-        <translation>Configurar Vista</translation>
+        <translation type="unfinished">Configurar vista</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="297"/>
@@ -16453,12 +16493,12 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="778"/>
         <source>Create Surface Database</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Crear base de datos de superficies</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="781"/>
         <source>Build a database of road and path surfaces from an OpenStreetMap extract, to show the surfaces and way types of tracks.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Crear una base de datos de superficies de carreteras y caminos a partir de un extracto de OpenStreetMap, para mostrar las superficies y los tipos de vía de los tracks.</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="793"/>
@@ -16470,13 +16510,13 @@ Nombre de archivo %1</translation>
         <location filename="../IMainWindow.ui" line="868"/>
         <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="750"/>
         <source>Setup Keyboard Shortcuts</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Configurar atajos de teclado</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="871"/>
         <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="752"/>
         <source>Assign keyboard shortcuts to actions</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Asignar atajos de teclado a las acciones</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="898"/>
@@ -16488,7 +16528,7 @@ Nombre de archivo %1</translation>
         <location filename="../IMainWindow.ui" line="913"/>
         <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="765"/>
         <source>Min./Max. Labels</source>
-        <translation type="unfinished">Etiquetas de Min./Max.</translation>
+        <translation type="unfinished">Etiquetas de mín./máx.</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="946"/>
@@ -16622,7 +16662,7 @@ Nombre de archivo %1</translation>
         <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="821"/>
         <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="823"/>
         <source>Setup Map Icon Sizes</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Configurar tamaño de los iconos del mapa</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="724"/>
@@ -16718,7 +16758,7 @@ Nombre de archivo %1</translation>
         <location filename="../IMainWindow.ui" line="883"/>
         <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="754"/>
         <source>Toggle Docks</source>
-        <translation>Panel de herramientas</translation>
+        <translation type="unfinished">Mostrar/ocultar paneles</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="886"/>
@@ -16780,7 +16820,7 @@ Nombre de archivo %1</translation>
         <location filename="../IMainWindow.ui" line="538"/>
         <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="674"/>
         <source>Load GIS Data</source>
-        <translation>Cargar Datos GIS</translation>
+        <translation type="unfinished">Cargar datos GIS</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="541"/>
@@ -16798,7 +16838,7 @@ Nombre de archivo %1</translation>
         <location filename="../IMainWindow.ui" line="556"/>
         <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="681"/>
         <source>Save All GIS Data</source>
-        <translation>Guardar todos los Datos GIS</translation>
+        <translation type="unfinished">Guardar todos los datos GIS</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="559"/>
@@ -16840,7 +16880,7 @@ Nombre de archivo %1</translation>
         <location filename="../IMainWindow.ui" line="640"/>
         <location filename="../../../build/src/qmapshack/ui_IMainWindow.h" line="696"/>
         <source>Setup Workspace</source>
-        <translation>Configurar Espacio de trabajo</translation>
+        <translation type="unfinished">Configurar espacio de trabajo</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="643"/>
@@ -16867,7 +16907,7 @@ Nombre de archivo %1</translation>
         <location filename="../helpers/IMapIconSizesSetup.ui" line="20"/>
         <location filename="../../../build/src/qmapshack/ui_IMapIconSizesSetup.h" line="173"/>
         <source>Set Map Icon Sizes</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tamaño de los iconos del mapa</translation>
     </message>
     <message>
         <location filename="../helpers/IMapIconSizesSetup.ui" line="50"/>
@@ -16875,13 +16915,13 @@ Nombre de archivo %1</translation>
         <location filename="../../../build/src/qmapshack/ui_IMapIconSizesSetup.h" line="174"/>
         <location filename="../../../build/src/qmapshack/ui_IMapIconSizesSetup.h" line="177"/>
         <source>px</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">px</translation>
     </message>
     <message>
         <location filename="../helpers/IMapIconSizesSetup.ui" line="57"/>
         <location filename="../../../build/src/qmapshack/ui_IMapIconSizesSetup.h" line="175"/>
         <source>Waypoint Icons</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Iconos de waypoints</translation>
     </message>
     <message>
         <location filename="../helpers/IMapIconSizesSetup.ui" line="74"/>
@@ -16889,13 +16929,13 @@ Nombre de archivo %1</translation>
         <location filename="../../../build/src/qmapshack/ui_IMapIconSizesSetup.h" line="176"/>
         <location filename="../../../build/src/qmapshack/ui_IMapIconSizesSetup.h" line="179"/>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tamaño</translation>
     </message>
     <message>
         <location filename="../helpers/IMapIconSizesSetup.ui" line="91"/>
         <location filename="../../../build/src/qmapshack/ui_IMapIconSizesSetup.h" line="178"/>
         <source>POI Icons</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Iconos de POI</translation>
     </message>
 </context>
 <context>
@@ -16904,7 +16944,7 @@ Nombre de archivo %1</translation>
         <location filename="../map/IMapList.ui" line="14"/>
         <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="168"/>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="35"/>
@@ -16928,13 +16968,13 @@ Nombre de archivo %1</translation>
         <location filename="../map/IMapList.ui" line="120"/>
         <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="212"/>
         <source>Use the buttons to activate a map. Use drag-n-drop to move the map in the draw order. </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Usa los botones para activar un mapa. Arrastra y suelta para cambiar el orden de dibujo de los mapas. </translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="144"/>
         <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="171"/>
         <source>Hide map behind others</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ocultar el mapa detrás de los demás</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="159"/>
@@ -16952,7 +16992,7 @@ Nombre de archivo %1</translation>
         <location filename="../map/IMapList.ui" line="165"/>
         <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="181"/>
         <source>Shift+Up</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Shift+Up</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="177"/>
@@ -16970,13 +17010,13 @@ Nombre de archivo %1</translation>
         <location filename="../map/IMapList.ui" line="183"/>
         <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="188"/>
         <source>Shift+Down</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Shift+Down</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="198"/>
         <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="192"/>
         <source>Show map on top of others</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Mostrar el mapa encima de los demás</translation>
     </message>
     <message>
         <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="197"/>
@@ -16993,49 +17033,49 @@ Nombre de archivo %1</translation>
         <location filename="../map/IMapList.ui" line="225"/>
         <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="199"/>
         <source>Remove</source>
-        <translation type="unfinished">Borrar</translation>
+        <translation type="unfinished">Quitar</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="228"/>
         <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="201"/>
         <source>Remove map from list</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Quitar el mapa de la lista</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="240"/>
         <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="203"/>
         <source>Overview Info...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Información de vistas generales...</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="243"/>
         <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="205"/>
         <source>Show overview pyramid info for this file</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Mostrar información de la pirámide de vistas generales (overviews) de este archivo</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="141"/>
         <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="169"/>
         <source>Move to Top</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Mover al principio</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="147"/>
         <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="174"/>
         <source>Shift+Home</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Shift+Home</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="195"/>
         <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="190"/>
         <source>Move to Bottom</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Mover al final</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="201"/>
         <location filename="../../../build/src/qmapshack/ui_IMapList.h" line="195"/>
         <source>Shift+End</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Shift+End</translation>
     </message>
 </context>
 <context>
@@ -17103,7 +17143,7 @@ I don&apos;t want to read the documentation!</source>
         <location filename="../map/IMapPropSetup.ui" line="14"/>
         <location filename="../../../build/src/qmapshack/ui_IMapPropSetup.h" line="289"/>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="35"/>
@@ -17212,7 +17252,7 @@ en el que se visualiza este mapa.</translation>
         <location filename="../tool/IMapVrtBuilder.ui" line="14"/>
         <location filename="../../../build/src/qmapshack/ui_IMapVrtBuilder.h" line="278"/>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="61"/>
@@ -17312,37 +17352,37 @@ Consejos:
         <location filename="../tool/IMapVrtBuilder.ui" line="199"/>
         <location filename="../../../build/src/qmapshack/ui_IMapVrtBuilder.h" line="303"/>
         <source>:2</source>
-        <translation></translation>
+        <translation type="unfinished">:2</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="206"/>
         <location filename="../../../build/src/qmapshack/ui_IMapVrtBuilder.h" line="304"/>
         <source>:4</source>
-        <translation></translation>
+        <translation type="unfinished">:4</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="213"/>
         <location filename="../../../build/src/qmapshack/ui_IMapVrtBuilder.h" line="305"/>
         <source>:8</source>
-        <translation></translation>
+        <translation type="unfinished">:8</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="220"/>
         <location filename="../../../build/src/qmapshack/ui_IMapVrtBuilder.h" line="306"/>
         <source>:16</source>
-        <translation></translation>
+        <translation type="unfinished">:16</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="227"/>
         <location filename="../../../build/src/qmapshack/ui_IMapVrtBuilder.h" line="307"/>
         <source>:32</source>
-        <translation></translation>
+        <translation type="unfinished">:32</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="234"/>
         <location filename="../../../build/src/qmapshack/ui_IMapVrtBuilder.h" line="308"/>
         <source>:64</source>
-        <translation></translation>
+        <translation type="unfinished">:64</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="269"/>
@@ -17444,7 +17484,8 @@ Consejos:
         <location filename="../mouse/line/IMouseEditLine.cpp" line="382"/>
         <source>Do you really want to abort?
 Any modifications done will be discarded.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">¿Seguro que quieres cancelar?
+Se descartarán todas las modificaciones realizadas.</translation>
     </message>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="516"/>
@@ -17506,7 +17547,7 @@ Any modifications done will be discarded.</source>
         <location filename="../widgets/IPhotoAlbum.ui" line="20"/>
         <location filename="../../../build/src/qmapshack/ui_IPhotoAlbum.h" line="82"/>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../widgets/IPhotoAlbum.ui" line="50"/>
@@ -17537,7 +17578,7 @@ Any modifications done will be discarded.</source>
     <message>
         <location filename="../plot/IPlot.cpp" line="87"/>
         <source>Add Waypoint</source>
-        <translation>Añadir Waypoint</translation>
+        <translation type="unfinished">Añadir waypoint</translation>
     </message>
     <message>
         <location filename="../plot/IPlot.cpp" line="90"/>
@@ -17607,7 +17648,7 @@ Pulse tecla ALT para hacer zoom sólo verticalmente</translation>
         <location filename="../../../build/src/qmapshack/ui_IPoiPathSetup.h" line="134"/>
         <source>Dialog</source>
         <translatorcomment>Falta el titulo en el original ·: Setup  paths to POI collections...</translatorcomment>
-        <translation>Configurar rutas a los POI...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../poi/IPoiPathSetup.ui" line="31"/>
@@ -17706,7 +17747,7 @@ o
         <location filename="../../../build/src/qmapshack/ui_IPrintDialog.h" line="170"/>
         <location filename="../../../build/src/qmapshack/ui_IPrintDialog.h" line="173"/>
         <source>TextLabel</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../print/IPrintDialog.ui" line="112"/>
@@ -17735,7 +17776,7 @@ o
         <location filename="../../../build/src/qmapshack/ui_IProgressDialog.h" line="73"/>
         <location filename="../../../build/src/qmapshack/ui_IProgressDialog.h" line="74"/>
         <source>TextLabel</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -17927,13 +17968,13 @@ o
         <location filename="../gis/db/IResolveDatabaseConflict.ui" line="14"/>
         <location filename="../../../build/src/qmapshack/ui_IResolveDatabaseConflict.h" line="92"/>
         <source>Database Conflict</source>
-        <translation type="unfinished">Conflicto en Base de Datos</translation>
+        <translation type="unfinished">Conflicto en la base de datos</translation>
     </message>
     <message>
         <location filename="../gis/db/IResolveDatabaseConflict.ui" line="26"/>
         <location filename="../../../build/src/qmapshack/ui_IResolveDatabaseConflict.h" line="93"/>
         <source>TextLabel</source>
-        <translation>Denominación</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/db/IResolveDatabaseConflict.ui" line="39"/>
@@ -17972,7 +18013,7 @@ o
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="20"/>
         <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="235"/>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="43"/>
@@ -18048,7 +18089,7 @@ o
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="232"/>
         <location filename="../../../build/src/qmapshack/ui_IRouterBRouter.h" line="255"/>
         <source>&lt;p&gt;&lt;a href=&quot;http://brouter.de/brouter/&quot; target=&quot;_blank&quot;&gt;BRouter&lt;/a&gt; © &lt;a href=&quot;https://github.com/abrensch/brouter/blob/master/LICENSE&quot; target=&quot;_blank&quot;&gt;ABrensch, License GPLv3&lt;/a&gt;&lt;/p&gt;</source>
-        <translation></translation>
+        <translation type="unfinished">&lt;p&gt;&lt;a href=&quot;http://brouter.de/brouter/&quot; target=&quot;_blank&quot;&gt;BRouter&lt;/a&gt; © &lt;a href=&quot;https://github.com/abrensch/brouter/blob/master/LICENSE&quot; target=&quot;_blank&quot;&gt;ABrensch, licencia GPLv3&lt;/a&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="245"/>
@@ -18075,7 +18116,7 @@ o
         <location filename="../gis/rte/router/brouter/IRouterBRouterInfo.ui" line="20"/>
         <location filename="../../../build/src/qmapshack/ui_IRouterBRouterInfo.h" line="66"/>
         <source>TextLabel</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -18144,13 +18185,13 @@ o
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="122"/>
         <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="679"/>
         <source>labelLocalDirResult</source>
-        <translation></translation>
+        <translation type="unfinished">labelLocalDirResult</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="147"/>
         <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="681"/>
         <source>labelLocalBRouterResult</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">labelLocalBRouterResult</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="156"/>
@@ -18168,7 +18209,7 @@ o
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="203"/>
         <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="685"/>
         <source>labelLocalJavaResult</source>
-        <translation></translation>
+        <translation type="unfinished">labelLocalJavaResult</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="212"/>
@@ -18234,7 +18275,7 @@ o
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="269"/>
         <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="689"/>
         <source>select BRouter Version:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">seleccionar versión de BRouter:</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="473"/>
@@ -18252,7 +18293,7 @@ o
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="510"/>
         <location filename="../../../build/src/qmapshack/ui_IRouterBRouterSetupWizard.h" line="709"/>
         <source>BRouter-Version</source>
-        <translation></translation>
+        <translation type="unfinished">Versión de BRouter</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="550"/>
@@ -18333,7 +18374,7 @@ o
         <location filename="../gis/rte/router/IRouterRoutino.ui" line="14"/>
         <location filename="../../../build/src/qmapshack/ui_IRouterRoutino.h" line="158"/>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterRoutino.ui" line="49"/>
@@ -18374,23 +18415,23 @@ o
     <message>
         <location filename="../gis/rte/router/IRouterRoutino.ui" line="94"/>
         <source>Surface</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Superficie</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterRoutino.ui" line="101"/>
         <source>Build surface databases from the same OpenStreetMap extracts, to show the surfaces and way types of tracks.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Crear bases de datos de superficies a partir de los mismos extractos de OpenStreetMap, para mostrar las superficies y los tipos de vía de los tracks.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterRoutino.ui" line="104"/>
         <source>Surface databases...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Bases de datos de superficies...</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterRoutino.ui" line="162"/>
         <location filename="../../../build/src/qmapshack/ui_IRouterRoutino.h" line="167"/>
-        <source>To use offline routing you need to define paths to local routing data. Use the setup tool button to register a path. You can create your own routing data with &lt;a href=&apos;CreateRoutino&apos;&gt;Tool-&gt;Create Routino Database&lt;/a&gt;.</source>
-        <translation>Para usar el enrutamiento offline hay que configurar las rutas a las carpetas que contienen los datos de ruteo, clic en el botón de configuración para hacerlo. Se pueden crear en &lt;a href=&apos;CreateRoutino&apos;&gt;Herramientas-&gt;Crear base de datos de Routino&lt;/a&gt;.</translation>
+        <source>To use offline routing you need paths to local routing data. Add them with the &lt;a href=&apos;RoutinoFolders&apos;&gt;folder button next to &quot;Database&quot;&lt;/a&gt;. You can create your own routing data with &lt;a href=&apos;CreateRoutino&apos;&gt;Tool-&gt;Create Routino Database&lt;/a&gt;.</source>
+        <translation type="unfinished">Para el enrutamiento sin conexión necesitas rutas a datos de enrutamiento locales. Añádelas con el &lt;a href=&apos;RoutinoFolders&apos;&gt;botón de carpeta junto a &quot;Base de datos&quot;&lt;/a&gt;. Puedes crear tus propios datos de enrutamiento con &lt;a href=&apos;CreateRoutino&apos;&gt;Herramientas-&gt;Crear una base de datos de Routino&lt;/a&gt;.</translation>
     </message>
 </context>
 <context>
@@ -18422,7 +18463,7 @@ o
         <location filename="../gis/rte/router/IRouterSetup.ui" line="14"/>
         <location filename="../../../build/src/qmapshack/ui_IRouterSetup.h" line="64"/>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -18431,7 +18472,7 @@ o
         <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="14"/>
         <location filename="../../../build/src/qmapshack/ui_IRoutinoDatabaseBuilder.h" line="181"/>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="25"/>
@@ -18456,7 +18497,7 @@ o
     <message>
         <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="63"/>
         <source>Add or remove paths containing Routino databases.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Añadir o quitar carpetas que contienen bases de datos de Routino.</translation>
     </message>
     <message>
         <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="89"/>
@@ -18499,7 +18540,7 @@ o
         <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="154"/>
         <location filename="../../../build/src/qmapshack/ui_IRoutinoDatabaseBuilder.h" line="197"/>
         <source>Unable to find Routino&apos;s planetsplitter. Searched for &quot;planetsplitter&quot; and &quot;routino-planetsplitter&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">No se encuentra el planetsplitter de Routino. Se ha buscado &quot;planetsplitter&quot; y &quot;routino-planetsplitter&quot;.</translation>
     </message>
     <message>
         <source>&lt;b style = &apos;color: red&apos;&gt; Unable to find Routino&apos;s planetsplitter. Searched for &quot;planetsplitter&quot; and &quot;routino-planetsplitter&quot;.&lt;/b&gt;</source>
@@ -18542,7 +18583,7 @@ o
         <location filename="../realtime/ais/IRtAisInfo.ui" line="89"/>
         <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="257"/>
         <source>Host</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Host</translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="96"/>
@@ -18560,7 +18601,7 @@ o
         <location filename="../realtime/ais/IRtAisInfo.ui" line="134"/>
         <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="262"/>
         <source>Ships seen:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Barcos detectados:</translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="141"/>
@@ -18576,7 +18617,7 @@ o
         <location filename="../realtime/ais/IRtAisInfo.ui" line="148"/>
         <location filename="../../../build/src/qmapshack/ui_IRtAisInfo.h" line="264"/>
         <source>Record by mmsi</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Grabar por MMSI</translation>
     </message>
     <message>
         <location filename="../realtime/ais/IRtAisInfo.ui" line="155"/>
@@ -18633,7 +18674,7 @@ o
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="14"/>
         <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="275"/>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="25"/>
@@ -18663,7 +18704,7 @@ o
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="89"/>
         <location filename="../../../build/src/qmapshack/ui_IRtGpsTetherInfo.h" line="279"/>
         <source>Host</source>
-        <translation></translation>
+        <translation type="unfinished">Host</translation>
     </message>
     <message>
         <location filename="../realtime/gpstether/IRtGpsTetherInfo.ui" line="96"/>
@@ -18784,7 +18825,7 @@ o
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="14"/>
         <location filename="../../../build/src/qmapshack/ui_IRtOpenSkyInfo.h" line="160"/>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="42"/>
@@ -18913,7 +18954,7 @@ o
         <location filename="../realtime/IRtWorkspace.ui" line="14"/>
         <location filename="../../../build/src/qmapshack/ui_IRtWorkspace.h" line="101"/>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../realtime/IRtWorkspace.ui" line="47"/>
@@ -18925,7 +18966,7 @@ o
         <location filename="../realtime/IRtWorkspace.ui" line="89"/>
         <location filename="../../../build/src/qmapshack/ui_IRtWorkspace.h" line="106"/>
         <source>TextLabel</source>
-        <translation>Denominación</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../realtime/IRtWorkspace.ui" line="109"/>
@@ -18946,7 +18987,7 @@ o
         <location filename="../mouse/line/IScrOptEditLine.ui" line="32"/>
         <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="244"/>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="40"/>
@@ -19006,7 +19047,7 @@ o
         <location filename="../mouse/line/IScrOptEditLine.ui" line="238"/>
         <location filename="../../../build/src/qmapshack/ui_IScrOptEditLine.h" line="284"/>
         <source>Use auto-routing in between points. (Key: A)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Usar enrutamiento automático entre los puntos. (Tecla: A)</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="284"/>
@@ -19123,7 +19164,7 @@ Esto se conoce como resolver el Problema del Viajante, sin embargo aquí se mant
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="14"/>
         <location filename="../../../build/src/qmapshack/ui_IScrOptOvlArea.h" line="130"/>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="40"/>
@@ -19181,7 +19222,7 @@ Esto se conoce como resolver el Problema del Viajante, sin embargo aquí se mant
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="152"/>
         <location filename="../../../build/src/qmapshack/ui_IScrOptOvlArea.h" line="155"/>
         <source>TextLabel</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -19433,7 +19474,7 @@ Esto se conoce como resolver el Problema del Viajante, sin embargo aquí se mant
         <location filename="../mouse/range/IScrOptRangeTrk.ui" line="117"/>
         <location filename="../../../build/src/qmapshack/ui_IScrOptRangeTrk.h" line="123"/>
         <source>TextLabel</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -19534,13 +19575,13 @@ Esto se conoce como resolver el Problema del Viajante, sin embargo aquí se mant
         <location filename="../gis/rte/IScrOptRte.ui" line="190"/>
         <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="219"/>
         <source>Toggle Nogo-Line</source>
-        <translation>Herramienta Linea de Prohibición</translation>
+        <translation type="unfinished">Activar/desactivar línea de prohibición</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="222"/>
         <location filename="../../../build/src/qmapshack/ui_IScrOptRte.h" line="222"/>
         <source>TextLabel</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -19672,7 +19713,7 @@ Esto se conoce como resolver el Problema del Viajante, sin embargo aquí se mant
         <location filename="../mouse/IScrOptSelect.ui" line="14"/>
         <location filename="../../../build/src/qmapshack/ui_IScrOptSelect.h" line="288"/>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="47"/>
@@ -19813,7 +19854,7 @@ Esto se conoce como resolver el Problema del Viajante, sin embargo aquí se mant
         <location filename="../gis/trk/IScrOptTrk.ui" line="14"/>
         <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="241"/>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="103"/>
@@ -20000,19 +20041,19 @@ Se pueden editar en la pestaña de edición del track.</translation>
         <location filename="../gis/trk/IScrOptTrk.ui" line="298"/>
         <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="328"/>
         <source>Convert track to area.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Convertir track en área.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="315"/>
         <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="332"/>
         <source>Toggle Nogo-Line</source>
-        <translation>Herramienta Linea de Prohibición</translation>
+        <translation type="unfinished">Activar/desactivar línea de prohibición</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="347"/>
         <location filename="../../../build/src/qmapshack/ui_IScrOptTrk.h" line="335"/>
         <source>TextLabel</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -20021,7 +20062,7 @@ Se pueden editar en la pestaña de edición del track.</translation>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="20"/>
         <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="233"/>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="49"/>
@@ -20133,7 +20174,7 @@ Se pueden editar en la pestaña de edición del track.</translation>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="294"/>
         <location filename="../../../build/src/qmapshack/ui_IScrOptWpt.h" line="286"/>
         <source>TextLabel</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -20142,7 +20183,7 @@ Se pueden editar en la pestaña de edición del track.</translation>
         <location filename="../gis/wpt/IScrOptWptRadius.ui" line="20"/>
         <location filename="../../../build/src/qmapshack/ui_IScrOptWptRadius.h" line="107"/>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWptRadius.ui" line="49"/>
@@ -20176,7 +20217,7 @@ Se pueden editar en la pestaña de edición del track.</translation>
         <location filename="../gis/wpt/IScrOptWptRadius.ui" line="127"/>
         <location filename="../../../build/src/qmapshack/ui_IScrOptWptRadius.h" line="120"/>
         <source>TextLabel</source>
-        <translation>Denominación</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -20193,7 +20234,7 @@ Se pueden editar en la pestaña de edición del track.</translation>
         <location filename="../../../build/src/qmapshack/ui_IScreenshotDialog.h" line="88"/>
         <location filename="../../../build/src/qmapshack/ui_IScreenshotDialog.h" line="89"/>
         <source>TextLabel</source>
-        <translation>Denominación</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../print/IScreenshotDialog.ui" line="55"/>
@@ -20294,7 +20335,7 @@ Si se introduce la &apos;palabra&apos; entre apostrofes se busca una coincidenci
         <location filename="../../../build/src/qmapshack/ui_ISelectCopyAction.h" line="179"/>
         <location filename="../../../build/src/qmapshack/ui_ISelectCopyAction.h" line="180"/>
         <source>TextLabel</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../helpers/ISelectCopyAction.ui" line="32"/>
@@ -20339,7 +20380,7 @@ Si se introduce la &apos;palabra&apos; entre apostrofes se busca una coincidenci
         <location filename="../gis/db/ISelectDBFolder.ui" line="14"/>
         <location filename="../../../build/src/qmapshack/ui_ISelectDBFolder.h" line="59"/>
         <source>Select Parent Folder...</source>
-        <translation>Seleccionar la carpeta principal...</translation>
+        <translation type="unfinished">Seleccionar la carpeta superior...</translation>
     </message>
 </context>
 <context>
@@ -20486,7 +20527,7 @@ Si se introduce la &apos;palabra&apos; entre apostrofes se busca una coincidenci
         <location filename="../../../build/src/qmapshack/ui_ISelectSaveAction.h" line="171"/>
         <location filename="../../../build/src/qmapshack/ui_ISelectSaveAction.h" line="172"/>
         <source>TextLabel</source>
-        <translation>Denominación</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/db/ISelectSaveAction.ui" line="61"/>
@@ -20686,7 +20727,7 @@ Si se introduce la &apos;palabra&apos; entre apostrofes se busca una coincidenci
         <location filename="../gis/ISetupWorkspace.ui" line="24"/>
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="569"/>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">General</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="45"/>
@@ -20715,44 +20756,50 @@ Si se introduce la &apos;palabra&apos; entre apostrofes se busca una coincidenci
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="132"/>
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="568"/>
-        <source>Enable device support. When enabled the device will be automatically detected when plugged in. It&apos;s file structure will be parsed and all projects will be loaded and listed. Depending on the device QMapShack will add the necessary glue logic like to link pictures with waypoints, etc.</source>
-        <translation>Habilitar detección del dispositivo. Si está habilitado los dispositivos GPS se detectan, se analiza su contenido y se muestran  sus elementos y proyectos. QMapShack instalará lo necesario para poder enlazar imágenes a los waypoints, etc. </translation>
+        <source>Enable device support</source>
+        <translation type="unfinished">Activar compatibilidad con dispositivos</translation>
+    </message>
+    <message>
+        <location filename="../gis/ISetupWorkspace.ui" line="132"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="568"/>
+        <source>When enabled the device will be automatically detected when plugged in. Its file structure will be parsed and all projects will be loaded and listed. Depending on the device QMapShack will add the necessary glue logic like to link pictures with waypoints, etc.</source>
+        <translation type="unfinished">Si está activado, el dispositivo se detecta automáticamente al conectarlo. Se analiza su estructura de archivos y se cargan y muestran todos sus proyectos. Según el dispositivo, QMapShack añade la lógica necesaria, por ejemplo para enlazar fotos con waypoints, etc.</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="537"/>
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="628"/>
         <source>Database</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Base de datos</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="543"/>
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="608"/>
         <source>Select additional information displayed in the database item tree. Changes take effect immediately. Look at the items to fine tune your choice.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Selecciona la información adicional que se muestra en el árbol de elementos de la base de datos. Los cambios se aplican de inmediato. Mira los elementos para ajustar tu elección.</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="555"/>
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="609"/>
         <source>Folders</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Carpetas</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="561"/>
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="610"/>
         <source>Subfolder Count</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Número de subcarpetas</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="594"/>
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="612"/>
         <source>Items</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Elementos</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="180"/>
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="570"/>
         <source>Select additional information displayed in the workspace item tree. Changes take effect immediately. Look at the items to fine tune your choice.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Selecciona la información adicional que se muestra en el árbol de elementos del espacio de trabajo. Los cambios se aplican de inmediato. Mira los elementos para ajustar tu elección.</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="174"/>
@@ -20770,7 +20817,7 @@ Si se introduce la &apos;palabra&apos; entre apostrofes se busca una coincidenci
         <location filename="../gis/ISetupWorkspace.ui" line="198"/>
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="572"/>
         <source>Keywords</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Etiquetas</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="205"/>
@@ -20778,7 +20825,7 @@ Si se introduce la &apos;palabra&apos; entre apostrofes se busca una coincidenci
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="573"/>
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="611"/>
         <source>Item Count</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Número de elementos</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="212"/>
@@ -20808,7 +20855,7 @@ Si se introduce la &apos;palabra&apos; entre apostrofes se busca una coincidenci
         <location filename="../gis/ISetupWorkspace.ui" line="251"/>
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="577"/>
         <source>Font Size Status Project</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tamaño de letra del estado del proyecto</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="259"/>
@@ -20820,7 +20867,7 @@ Si se introduce la &apos;palabra&apos; entre apostrofes se busca una coincidenci
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="615"/>
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="622"/>
         <source>large</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">grande</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="264"/>
@@ -20832,7 +20879,7 @@ Si se introduce la &apos;palabra&apos; entre apostrofes se busca una coincidenci
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="616"/>
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="623"/>
         <source>small</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">pequeño</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="269"/>
@@ -20844,7 +20891,7 @@ Si se introduce la &apos;palabra&apos; entre apostrofes se busca una coincidenci
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="617"/>
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="624"/>
         <source>smaller</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">más pequeño</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="274"/>
@@ -20856,7 +20903,7 @@ Si se introduce la &apos;palabra&apos; entre apostrofes se busca una coincidenci
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="618"/>
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="625"/>
         <source>tiny</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">diminuto</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="279"/>
@@ -20868,7 +20915,7 @@ Si se introduce la &apos;palabra&apos; entre apostrofes se busca una coincidenci
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="619"/>
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="626"/>
         <source>none</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ninguno</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="287"/>
@@ -20876,7 +20923,7 @@ Si se introduce la &apos;palabra&apos; entre apostrofes se busca una coincidenci
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="584"/>
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="621"/>
         <source>Font Size Status Item</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tamaño de letra del estado del elemento</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="355"/>
@@ -20906,7 +20953,7 @@ Si se introduce la &apos;palabra&apos; entre apostrofes se busca una coincidenci
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="603"/>
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="606"/>
         <source>Tags</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Etiquetas</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="412"/>
@@ -20936,13 +20983,13 @@ Si se introduce la &apos;palabra&apos; entre apostrofes se busca una coincidenci
         <location filename="../gis/ISetupWorkspace.ui" line="600"/>
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="613"/>
         <source>Info Text</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Texto informativo</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="628"/>
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="614"/>
         <source>Font Size Status Folder</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tamaño de letra del estado de la carpeta</translation>
     </message>
 </context>
 <context>
@@ -20951,13 +20998,13 @@ Si se introduce la &apos;palabra&apos; entre apostrofes se busca una coincidenci
         <location filename="../helpers/IShortcutSetupDialog.ui" line="14"/>
         <location filename="../../../build/src/qmapshack/ui_IShortcutSetupDialog.h" line="97"/>
         <source>Setup Keyboard Shortcuts</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Configurar atajos de teclado</translation>
     </message>
     <message>
         <location filename="../helpers/IShortcutSetupDialog.ui" line="20"/>
         <location filename="../../../build/src/qmapshack/ui_IShortcutSetupDialog.h" line="98"/>
         <source>Filter actions...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Filtrar acciones...</translation>
     </message>
     <message>
         <location filename="../helpers/IShortcutSetupDialog.ui" line="40"/>
@@ -20969,19 +21016,19 @@ Si se introduce la &apos;palabra&apos; entre apostrofes se busca una coincidenci
         <location filename="../helpers/IShortcutSetupDialog.ui" line="45"/>
         <location filename="../../../build/src/qmapshack/ui_IShortcutSetupDialog.h" line="100"/>
         <source>Shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Atajo</translation>
     </message>
     <message>
         <location filename="../helpers/IShortcutSetupDialog.ui" line="55"/>
         <location filename="../../../build/src/qmapshack/ui_IShortcutSetupDialog.h" line="102"/>
         <source>Shortcut:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Atajo:</translation>
     </message>
     <message>
         <location filename="../helpers/IShortcutSetupDialog.ui" line="65"/>
         <location filename="../../../build/src/qmapshack/ui_IShortcutSetupDialog.h" line="103"/>
         <source>Reset to Default</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Restablecer valor predeterminado</translation>
     </message>
 </context>
 <context>
@@ -21333,13 +21380,13 @@ Si se introduce la &apos;palabra&apos; entre apostrofes se busca una coincidenci
         <location filename="../widgets/ITextEditWidget.ui" line="550"/>
         <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="423"/>
         <source>Reset Text Color</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Restablecer color del texto</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="553"/>
         <location filename="../../../build/src/qmapshack/ui_ITextEditWidget.h" line="425"/>
         <source>Drop the text color and follow the color scheme again</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Descartar el color del texto y volver a seguir el esquema de colores</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="558"/>
@@ -21419,7 +21466,7 @@ Si se introduce la &apos;palabra&apos; entre apostrofes se busca una coincidenci
         <location filename="../helpers/ITimeDialog.ui" line="14"/>
         <location filename="../../../build/src/qmapshack/ui_ITimeDialog.h" line="78"/>
         <source>Edit timestamp...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Editar marca de tiempo...</translation>
     </message>
     <message>
         <location filename="../helpers/ITimeDialog.ui" line="22"/>
@@ -21427,7 +21474,9 @@ Si se introduce la &apos;palabra&apos; entre apostrofes se busca una coincidenci
         <source>You can use the up, down, left and right key of 
 your keyboard to change the time/date. Or you 
 simply type the new time/date.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Puedes usar las teclas de flecha arriba, abajo, izquierda y derecha 
+de tu teclado para cambiar la hora/fecha. O 
+simplemente escribe la nueva hora/fecha.</translation>
     </message>
 </context>
 <context>
@@ -21520,7 +21569,7 @@ simply type the new time/date.</source>
         <location filename="../tool/IToolShell.cpp" line="51"/>
         <source>External process crashed.
 </source>
-        <translation>El proceso externo falló.
+        <translation type="unfinished">El proceso externo ha terminado de forma inesperada.
 </translation>
     </message>
     <message>
@@ -21542,13 +21591,13 @@ simply type the new time/date.</source>
         <location filename="../gis/trk/ITrkToAreaDialog.ui" line="14"/>
         <location filename="../../../build/src/qmapshack/ui_ITrkToAreaDialog.h" line="101"/>
         <source>Convert to Area</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Convertir en área</translation>
     </message>
     <message>
         <location filename="../gis/trk/ITrkToAreaDialog.ui" line="25"/>
         <location filename="../../../build/src/qmapshack/ui_ITrkToAreaDialog.h" line="103"/>
         <source>Change Project</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Cambiar proyecto</translation>
     </message>
     <message>
         <location filename="../gis/trk/ITrkToAreaDialog.ui" line="39"/>
@@ -21569,7 +21618,7 @@ simply type the new time/date.</source>
         <location filename="../gis/trk/ITrkToRteDialog.ui" line="14"/>
         <location filename="../../../build/src/qmapshack/ui_ITrkToRteDialog.h" line="132"/>
         <source>Convert to Route</source>
-        <translation type="unfinished">Convertir en Ruta</translation>
+        <translation type="unfinished">Convertir en ruta</translation>
     </message>
     <message>
         <location filename="../gis/trk/ITrkToRteDialog.ui" line="22"/>
@@ -21581,7 +21630,7 @@ simply type the new time/date.</source>
         <location filename="../gis/trk/ITrkToRteDialog.ui" line="36"/>
         <location filename="../../../build/src/qmapshack/ui_ITrkToRteDialog.h" line="136"/>
         <source>Change Project</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Cambiar proyecto</translation>
     </message>
     <message>
         <location filename="../gis/trk/ITrkToRteDialog.ui" line="50"/>
@@ -21593,7 +21642,7 @@ simply type the new time/date.</source>
         <location filename="../gis/trk/ITrkToRteDialog.ui" line="73"/>
         <location filename="../../../build/src/qmapshack/ui_ITrkToRteDialog.h" line="141"/>
         <source>Include sub-points of tracks in converted route.</source>
-        <translation type="unfinished">Incluir sub-puntos del track en la ruta.</translation>
+        <translation type="unfinished">Incluir los subpuntos del track en la ruta convertida.</translation>
     </message>
     <message>
         <location filename="../gis/trk/ITrkToRteDialog.ui" line="86"/>
@@ -21651,7 +21700,7 @@ simply type the new time/date.</source>
         <location filename="../units/IUnitsSetup.ui" line="51"/>
         <location filename="../../../build/src/qmapshack/ui_IUnitsSetup.h" line="137"/>
         <source>Aviation (nm, feet)</source>
-        <translation type="unfinished">Aviación (nm, feet)</translation>
+        <translation type="unfinished">Aviación (nm, pies)</translation>
     </message>
     <message>
         <location filename="../units/IUnitsSetup.ui" line="59"/>
@@ -21690,25 +21739,25 @@ simply type the new time/date.</source>
         <location filename="../helpers/IVrtAdvisoryDialog.ui" line="14"/>
         <location filename="../../../build/src/qmapshack/ui_IVrtAdvisoryDialog.h" line="107"/>
         <source>Slow rendering — overview pyramids</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Renderizado lento — pirámides de vistas generales</translation>
     </message>
     <message>
         <location filename="../helpers/IVrtAdvisoryDialog.ui" line="43"/>
         <location filename="../../../build/src/qmapshack/ui_IVrtAdvisoryDialog.h" line="110"/>
         <source>&lt;b&gt;Current overview situation:&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;Situación actual de las vistas generales:&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../helpers/IVrtAdvisoryDialog.ui" line="57"/>
         <location filename="../../../build/src/qmapshack/ui_IVrtAdvisoryDialog.h" line="111"/>
         <source>&lt;b&gt;After fix:&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;Después de la corrección:&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../helpers/IVrtAdvisoryDialog.ui" line="81"/>
         <location filename="../../../build/src/qmapshack/ui_IVrtAdvisoryDialog.h" line="113"/>
         <source>Don&apos;t show this again for this file</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">No volver a mostrar para este archivo</translation>
     </message>
 </context>
 <context>

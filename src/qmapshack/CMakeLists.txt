@@ -347,6 +347,7 @@ set( SRCS
     widgets/CDoubleSpinBox.cpp
     widgets/CFadingIcon.cpp
     widgets/CFadingLabel.cpp
+    widgets/CHelpBlock.cpp
     widgets/CHistoryListWidget.cpp
     widgets/CIconGrid.cpp
     widgets/CLedIndicator.cpp
@@ -766,6 +767,7 @@ set( HDRS
     widgets/CDoubleSpinBox.h
     widgets/CFadingIcon.h
     widgets/CFadingLabel.h
+    widgets/CHelpBlock.h
     widgets/CHistoryListWidget.h
     widgets/CIconGrid.h
     widgets/CLedIndicator.h

@@ -9,8 +9,8 @@ Nothing here is built or tested yet.
   layouts differ with text length, so every language's images are taken and checked on their own. No gettext/`.po`.
 - One Sphinx build per language, `doc/html/<lang>/`; a reader sees one language only, no language links in the pages.
 - Pages keep their English names in every language.
-- English and German first. Spanish later, once the pages are stable, ideally with a reviewer: Oliver cannot
-  review it.
+- English and German first. Spanish and Italian follow without a reviewer (Oliver reviews neither), in the
+  order of "Spanish and Italian" below.
 - Everything on `QMS-1322`: its result is the quick start in at least two languages, with every shot tool change
   that needs.
 
@@ -44,6 +44,21 @@ GUI's language, German pages 1–3. `check_pages.py` checks every language and s
 list outside English. Furo's labels come from `doc/locales/<lang>/LC_MESSAGES/sphinx.po`, which Sphinx compiles
 itself; its icon tooltips stay English. New pages are written in English and German together (see
 `quickstart-plan.md`, Next).
+
+## Spanish and Italian
+
+Both catalogs are unmaintained since 2019/2022: `qmapshack_es.ts` 71 % done, `_it.ts` 66 %; most present
+translations are good, some wrong or cut off.
+
+1. Claude completes `qmapshack_<lang>.ts` and `qmaptool_<lang>.ts`, the missing and the outdated entries, keeping
+   the catalog's existing terms. Its entries stay `type="unfinished"`: `qt_add_lrelease` runs without
+   `-nounfinished`, so the app shows them, and Linguist lists them for a later review.
+2. The check from "Proposed": a page records its English commit, a check lists pages whose source changed. Needed
+   before a third and fourth language, or they fall behind unnoticed.
+3. Claude translates the pages and takes the images in the locale; reading every image is the layout check of the
+   new UI strings (cut-off labels). Address form as each GUI uses it.
+4. Each language's `index.md` says the translation is by AI, not reviewed by a native speaker, and where to report
+   errors. A Discussions post asks for reviewers.
 
 ## Open
 

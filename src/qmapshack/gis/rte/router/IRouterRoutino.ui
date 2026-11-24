@@ -143,7 +143,7 @@
         <item>
          <widget class="QLabel" name="labelHelp">
           <property name="text">
-           <string>To use offline routing you need to &lt;a href='RoutinoFolders'&gt;add paths to local routing data&lt;/a&gt;. You can create your own routing data with &lt;a href='CreateRoutino'&gt;Tool-&gt;Create Routino Database&lt;/a&gt;.</string>
+           <string>To use offline routing you need paths to local routing data. Add them with the &lt;a href='RoutinoFolders'&gt;folder button next to "Database"&lt;/a&gt;. You can create your own routing data with &lt;a href='CreateRoutino'&gt;Tool-&gt;Create Routino Database&lt;/a&gt;.</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>

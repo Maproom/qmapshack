@@ -37,14 +37,19 @@
 #include "gis/trk/surface/CSurfaceDbManager.h"
 #include "helpers/CSettings.h"
 #include "theme/CUiTheme.h"
+#include "widgets/CHelpBlock.h"
 
 CSurfaceDatabaseBuilder::CSurfaceDatabaseBuilder(QWidget* parent) : QWidget(parent) {
   setObjectName(tr("Create Surface Database"));
 
   QVBoxLayout* layout = new QVBoxLayout(this);
 
-  QLabel* help = new QLabel(this);
+  CHelpBlock* helpBlock = new CHelpBlock(this);
+  QVBoxLayout* layoutHelpBlock = new QVBoxLayout(helpBlock);
+  layoutHelpBlock->setContentsMargins(0, 0, 0, 0);
+  QLabel* help = new QLabel(helpBlock);
   help->setWordWrap(true);
+  help->setAlignment(Qt::AlignLeft | Qt::AlignTop);
   help->setOpenExternalLinks(true);
   help->setText(
       "<b>" + tr("Surface Database") + "</b><br/>" +
@@ -53,7 +58,8 @@ CSurfaceDatabaseBuilder::CSurfaceDatabaseBuilder(QWidget* parent) : QWidget(pare
          "tracks by surface (Style tab). Download an extract (.osm.pbf) e.g. from %1, the same file as for a Routino "
          "database. For a small country building takes about a minute and some 300 MB of memory.")
           .arg("<a href='https://download.geofabrik.de'>download.geofabrik.de</a>"));
-  layout->addWidget(help);
+  layoutHelpBlock->addWidget(help);
+  layout->addWidget(helpBlock);
 
   QGridLayout* grid = new QGridLayout();
   layout->addLayout(grid);

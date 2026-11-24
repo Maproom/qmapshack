@@ -495,16 +495,63 @@
               <number>0</number>
              </property>
              <item>
-              <widget class="QLabel" name="labelHelpTrackPointInfo">
-               <property name="text">
-                <string>-</string>
+              <widget class="QScrollArea" name="scrollHelpTrackPointInfo">
+               <property name="frameShape">
+                <enum>QFrame::Shape::NoFrame</enum>
                </property>
-               <property name="alignment">
-                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+               <property name="horizontalScrollBarPolicy">
+                <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
                </property>
-               <property name="wordWrap">
+               <property name="widgetResizable">
                 <bool>true</bool>
                </property>
+               <widget class="QWidget" name="scrollHelpTrackPointInfoContents">
+                <layout class="QVBoxLayout" name="layoutScrollHelpTrackPointInfo">
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>0</number>
+                 </property>
+                 <item>
+                  <widget class="CHelpBlock" name="helpBlockTrackPointInfo">
+                   <layout class="QVBoxLayout" name="layoutHelpBlockTrackPointInfo">
+                    <property name="leftMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="topMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="rightMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="bottomMargin">
+                     <number>0</number>
+                    </property>
+                    <item>
+                     <widget class="QLabel" name="labelHelpTrackPointInfo">
+                      <property name="text">
+                       <string>-</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
+                      </property>
+                      <property name="wordWrap">
+                       <bool>true</bool>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
               </widget>
              </item>
              <item>
@@ -1565,16 +1612,34 @@
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="labelActivityHelp">
-           <property name="text">
-            <string>To differentiate the track statistics select an activity from the list for the complete track. Or select a part of the track to assign an activity.</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-           </property>
-           <property name="wordWrap">
-            <bool>true</bool>
-           </property>
+          <widget class="CHelpBlock" name="helpBlockActivity">
+           <layout class="QVBoxLayout" name="layoutHelpBlockActivity">
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="labelActivityHelp">
+              <property name="text">
+               <string>To differentiate the track statistics select an activity from the list for the complete track. Or select a part of the track to assign an activity.</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
+              </property>
+              <property name="wordWrap">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </widget>
          </item>
          <item>
@@ -1747,6 +1812,12 @@
   </layout>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>CHelpBlock</class>
+   <extends>QFrame</extends>
+   <header>widgets/CHelpBlock.h</header>
+   <container>1</container>
+  </customwidget>
   <customwidget>
    <class>QSvgWidget</class>
    <extends>QWidget</extends>

@@ -31,6 +31,10 @@ QMS-#
 
 - [ ] yes
 
+### Did you check if the documentation (`doc/`) needs changes, and make them? Check the pages and images that show what you changed.
+
+- [ ] yes
+
 ### Did you add the ticket number and title into the changelog? Keep the numeric order in each release block.
 
 - [ ] yes, I didn't forget to change changelog.txt

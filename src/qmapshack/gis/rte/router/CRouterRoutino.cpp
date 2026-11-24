@@ -33,7 +33,6 @@
 #include "helpers/CSettings.h"
 #include "misc.h"
 #include "setup/IAppSetup.h"
-#include "svgticon/CSvgtIcon.h"
 
 QPointer<CProgressDialog> CRouterRoutino::progress;
 
@@ -52,7 +51,6 @@ CRouterRoutino* CRouterRoutino::pSelf = nullptr;
 CRouterRoutino::CRouterRoutino(QWidget* parent) : IRouter(true, parent) {
   pSelf = this;
   setupUi(this);
-  CSvgtIcon::load(label_3, "://icons/Help.svgt");
 
   const QFontMetrics& fm(comboDatabase->fontMetrics());
   int minWidth = fm.boundingRect(QString("A").repeated(16)).width();

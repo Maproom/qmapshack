@@ -73,78 +73,51 @@
     </widget>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <property name="spacing">
-      <number>3</number>
-     </property>
-     <property name="leftMargin">
-      <number>3</number>
-     </property>
-     <property name="topMargin">
-      <number>3</number>
-     </property>
-     <property name="rightMargin">
-      <number>3</number>
-     </property>
-     <property name="bottomMargin">
-      <number>3</number>
-     </property>
-     <item>
-      <widget class="QSvgWidget" name="labelIcon">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <layout class="QVBoxLayout" name="verticalLayout">
-       <property name="spacing">
-        <number>8</number>
-       </property>
-       <property name="leftMargin">
-        <number>0</number>
-       </property>
-       <property name="topMargin">
-        <number>0</number>
-       </property>
-       <property name="rightMargin">
-        <number>0</number>
-       </property>
-       <property name="bottomMargin">
-        <number>0</number>
-       </property>
-       <item>
-        <widget class="QLabel" name="labelHelpFillMapList">
-         <property name="text">
-          <string>To add files with elevation data use &lt;a href='DemFolders'&gt;File-&gt;Setup DEM Paths&lt;/a&gt;.</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignmentFlag::AlignJustify|Qt::AlignmentFlag::AlignVCenter</set>
-         </property>
-         <property name="wordWrap">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="labelHelpActivateMap">
-         <property name="text">
-          <string>Use the buttons to activate a DEM. Use drag-n-drop to move the DEM in the draw order. </string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignmentFlag::AlignJustify|Qt::AlignmentFlag::AlignVCenter</set>
-         </property>
-         <property name="wordWrap">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-    </layout>
+    <widget class="CHelpBlock" name="helpBlock">
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <property name="spacing">
+       <number>8</number>
+      </property>
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QLabel" name="labelHelpFillMapList">
+        <property name="text">
+         <string>To add files with elevation data use &lt;a href='DemFolders'&gt;File-&gt;Setup DEM Paths&lt;/a&gt;.</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignJustify|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="labelHelpActivateMap">
+        <property name="text">
+         <string>Use the buttons to activate a DEM. Use drag-n-drop to move the DEM in the draw order. </string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignJustify|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
    </item>
   </layout>
   <action name="actionMoveHome">
@@ -264,9 +237,10 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>QSvgWidget</class>
-   <extends>QWidget</extends>
-   <header location="global">QSvgWidget</header>
+   <class>CHelpBlock</class>
+   <extends>QFrame</extends>
+   <header>widgets/CHelpBlock.h</header>
+   <container>1</container>
   </customwidget>
   <customwidget>
    <class>CDemTreeWidget</class>

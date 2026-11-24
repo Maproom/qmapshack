@@ -860,8 +860,8 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     <name>CDetailsTrk</name>
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="96"/>
-        <source>&lt;b&gt;Track Point Information&lt;/b&gt;&lt;br/&gt;To document your tracks you can add a short description to a track point. All points with description will be marked along the track with auto-numbered bullets.&lt;br/&gt;You can add a description by a right click on a track point in the graphs. Or you do a left click on a track point in the map view.&lt;br/&gt;With the first track point you add information to this text will be replaced by a table. Use it to edit and delete track point information.&lt;br/&gt;</source>
-        <translation>&lt;b&gt;Trackpunktinformation&lt;/b&gt;&lt;br/&gt;Sie können einem Trackpunkt eine kurze Beschreibung hinzufügen, um Ihre Tracks zu dokumentieren. Alle Punkte mit einer Beschreibung werden entlang des Tracks mit automatischen Nummern versehen.&lt;br/&gt;Sie können eine Beschreibung hinzufügen, indem Sie mit der rechten Maustaste in einen der Graphen klicken. Oder Sie klicken mit der linken Maustaste auf den Trackpunkt in der Kartenansicht.&lt;br/&gt;Mit dem ersten Trackpunkt, dem Sie Information hinzufügen, wird dieser Text durch eine Tabelle ersetzt. Mit deren Hilfe können Sie die Trackpunktinformation löschen oder ändern.&lt;br/&gt;</translation>
+        <source>&lt;b&gt;Track Point Information&lt;/b&gt;&lt;br/&gt;Add a short description to a track point: right click on it in the graphs, or left click on it on the map. Points with a description get numbered bullets along the track.</source>
+        <translation>&lt;b&gt;Trackpunktinformation&lt;/b&gt;&lt;br/&gt;Fügen Sie einem Trackpunkt eine kurze Beschreibung hinzu: mit einem Rechtsklick auf den Punkt in den Graphen oder einem Linksklick auf den Punkt in der Karte. Punkte mit Beschreibung werden entlang des Tracks nummeriert markiert.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="198"/>
@@ -7684,8 +7684,8 @@ Für die Konfiguration benötigen Sie die IP Adresse Ihres Android Gerätes oder
     <name>CRtWorkspace</name>
     <message>
         <location filename="../realtime/CRtWorkspace.cpp" line="66"/>
-        <source>To add a realtime source do a right click on the list above. </source>
-        <translation>Eine neue Quelle mit Echtzeitdaten wird über einen Rechtsklick im Fenster hinzugefügt. </translation>
+        <source>To add a realtime source do a right click on the list above and choose &lt;a href=&apos;AddSource&apos;&gt;Add Source&lt;/a&gt;.</source>
+        <translation>Um eine Echtzeitquelle hinzuzufügen, klicken Sie mit der rechten Maustaste in die Liste oben und wählen &lt;a href=&apos;AddSource&apos;&gt;Quelle hinzufügen&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="../realtime/CRtWorkspace.cpp" line="225"/>
@@ -15787,8 +15787,8 @@ nach der Höhe.</translation>
     <message>
         <location filename="../gis/IGisDatabase.ui" line="96"/>
         <location filename="../../../build/src/qmapshack/ui_IGisDatabase.h" line="110"/>
-        <source>To add a database do a right click on the database list above.</source>
-        <translation>Eine neue Datenbank wird über einen Rechtsklick im Fenster erstellt.</translation>
+        <source>To add a database do a right click on the database list above and choose &lt;a href=&apos;CreateDB&apos;&gt;Add Database&lt;/a&gt;.</source>
+        <translation>Um eine Datenbank hinzuzufügen, klicken Sie mit der rechten Maustaste in die Datenbankliste oben und wählen &lt;a href=&apos;CreateDB&apos;&gt;Datenbank hinzufügen&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="../gis/IGisDatabase.ui" line="119"/>
@@ -18588,8 +18588,8 @@ sein</translation>
     <message>
         <location filename="../gis/rte/router/IRouterRoutino.ui" line="162"/>
         <location filename="../../../build/src/qmapshack/ui_IRouterRoutino.h" line="167"/>
-        <source>To use offline routing you need to define paths to local routing data. Use the setup tool button to register a path. You can create your own routing data with &lt;a href=&apos;CreateRoutino&apos;&gt;Tool-&gt;Create Routino Database&lt;/a&gt;.</source>
-        <translation>Um Offline-Routing zu nutzen, müssen Sie einen Pfad zu einer lokalen Routendatenbank angeben. Benutzen Sie dazu den Knopf mit dem blauen Ordner. Mit &lt;a href=&apos;CreateRoutino&apos;&gt;Werkzeug-&gt;Routino Datenbank erstellen&lt;/a&gt; können Sie eine solche Routendatenbank selber erzeugen.</translation>
+        <source>To use offline routing you need paths to local routing data. Add them with the &lt;a href=&apos;RoutinoFolders&apos;&gt;folder button next to &quot;Database&quot;&lt;/a&gt;. You can create your own routing data with &lt;a href=&apos;CreateRoutino&apos;&gt;Tool-&gt;Create Routino Database&lt;/a&gt;.</source>
+        <translation>Für Offline-Routing brauchen Sie Pfade zu lokalen Routingdaten. Fügen Sie diese mit dem &lt;a href=&apos;RoutinoFolders&apos;&gt;Ordner-Knopf neben „Datenbank“&lt;/a&gt; hinzu. Mit &lt;a href=&apos;CreateRoutino&apos;&gt;Werkzeug-&gt;Routino Datenbank erstellen&lt;/a&gt; können Sie eigene Routingdaten erzeugen.</translation>
     </message>
 </context>
 <context>
@@ -20917,8 +20917,14 @@ Wenn Sie das Wort &apos;wort&apos; eingeben, wird exakt nach dem Wort gesucht. W
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="132"/>
         <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="568"/>
-        <source>Enable device support. When enabled the device will be automatically detected when plugged in. It&apos;s file structure will be parsed and all projects will be loaded and listed. Depending on the device QMapShack will add the necessary glue logic like to link pictures with waypoints, etc.</source>
-        <translation>Geräteunterstützung aktivieren. Wenn diese Option aktiviert ist, wird das Gerät beim Anschließen automatisch erkannt. Seine Dateistruktur wird analysiert und alle Projekte werden geladen und aufgelistet. Je nach Gerät fügt QMapShack die erforderliche Logik hinzu, um beispielsweise Bilder mit Wegpunkten zu verknüpfen usw.</translation>
+        <source>Enable device support</source>
+        <translation>Geräteunterstützung aktivieren</translation>
+    </message>
+    <message>
+        <location filename="../gis/ISetupWorkspace.ui" line="132"/>
+        <location filename="../../../build/src/qmapshack/ui_ISetupWorkspace.h" line="568"/>
+        <source>When enabled the device will be automatically detected when plugged in. Its file structure will be parsed and all projects will be loaded and listed. Depending on the device QMapShack will add the necessary glue logic like to link pictures with waypoints, etc.</source>
+        <translation>Wenn diese Option aktiviert ist, wird das Gerät beim Anschließen automatisch erkannt. Seine Dateistruktur wird analysiert und alle Projekte werden geladen und aufgelistet. Je nach Gerät fügt QMapShack die erforderliche Logik hinzu, um beispielsweise Bilder mit Wegpunkten zu verknüpfen usw.</translation>
     </message>
     <message>
         <location filename="../gis/ISetupWorkspace.ui" line="537"/>

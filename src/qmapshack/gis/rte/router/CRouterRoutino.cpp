@@ -56,8 +56,13 @@ CRouterRoutino::CRouterRoutino(QWidget* parent) : IRouter(true, parent) {
   int minWidth = fm.boundingRect(QString("A").repeated(16)).width();
   comboDatabase->setMinimumWidth(minWidth);
 
-  connect(labelHelp, &QLabel::linkActivated, &CMainWindow::self(),
-          static_cast<void (CMainWindow::*)(const QString&)>(&CMainWindow::slotLinkActivated));
+  connect(labelHelp, &QLabel::linkActivated, this, [this](const QString& link) {
+    if (link == "RoutinoFolders") {
+      slotSetupPaths();
+    } else {
+      CMainWindow::self().slotLinkActivated(link);
+    }
+  });
 
   if (Routino_CheckAPIVersion() != ROUTINO_ERROR_NONE) {
     QMessageBox::warning(

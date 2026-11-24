@@ -96,7 +96,7 @@
          <string>To add files with elevation data use &lt;a href='DemFolders'&gt;File-&gt;Setup DEM Paths&lt;/a&gt;.</string>
         </property>
         <property name="alignment">
-         <set>Qt::AlignmentFlag::AlignJustify|Qt::AlignmentFlag::AlignVCenter</set>
+         <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
         </property>
         <property name="wordWrap">
          <bool>true</bool>
@@ -109,7 +109,7 @@
          <string>Use the buttons to activate a DEM. Use drag-n-drop to move the DEM in the draw order. </string>
         </property>
         <property name="alignment">
-         <set>Qt::AlignmentFlag::AlignJustify|Qt::AlignmentFlag::AlignVCenter</set>
+         <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
         </property>
         <property name="wordWrap">
          <bool>true</bool>

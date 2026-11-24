@@ -54,7 +54,19 @@
     <widget class="CHelpBlock" name="helpBlock">
      <layout class="QVBoxLayout" name="verticalLayout">
       <property name="spacing">
-       <number>9</number>
+       <number>8</number>
+      </property>
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
       </property>
       <item>
        <widget class="QLabel" name="labelHelpFillPoiList">
@@ -62,7 +74,7 @@
          <string>To add POI collections use &lt;a href='PoiFolders'&gt;File-&gt;Setup POI Paths&lt;/a&gt;.</string>
         </property>
         <property name="alignment">
-         <set>Qt::AlignJustify|Qt::AlignVCenter</set>
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
         </property>
         <property name="wordWrap">
          <bool>true</bool>
@@ -75,7 +87,7 @@
          <string>Use the context menu (right mouse button click on entry) to activate a file. </string>
         </property>
         <property name="alignment">
-         <set>Qt::AlignJustify|Qt::AlignVCenter</set>
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
         </property>
         <property name="wordWrap">
          <bool>true</bool>

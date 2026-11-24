@@ -25,7 +25,6 @@
 #include "map/CMapItem.h"
 #include "map/CMapItemDelegate.h"
 #include "misc.h"
-#include "svgticon/CSvgtIcon.h"
 
 CMapTreeWidget::CMapTreeWidget(QWidget* parent) : QTreeWidget(parent) {
   CMapItemDelegate* delegate = new CMapItemDelegate(this);
@@ -100,7 +99,6 @@ void CMapTreeWidget::dropEvent(QDropEvent* e) {
 
 CMapList::CMapList(CCanvas* parent) : QWidget(parent), canvas(parent) {
   setupUi(this);
-  CSvgtIcon::load(labelIcon, "://icons/Help.svgt");
   lineFilter->addAction(actionClearFilter, QLineEdit::TrailingPosition);
 
   connect(treeWidget, &CMapTreeWidget::customContextMenuRequested, this, &CMapList::slotContextMenu);
@@ -175,7 +173,7 @@ void CMapList::updateHelpText() {
   labelHelpFillMapList->setVisible(!haveMaps);
 
   if (!haveMaps) {
-    labelIcon->show();
+    helpBlock->show();
     labelHelpActivateMap->hide();
   } else {
     bool showHelp = true;
@@ -190,7 +188,7 @@ void CMapList::updateHelpText() {
         showHelp = false;
       }
     }
-    labelIcon->setVisible(showHelp);
+    helpBlock->setVisible(showHelp);
     labelHelpActivateMap->setVisible(showHelp);
   }
 }

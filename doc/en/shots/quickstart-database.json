@@ -1528,7 +1528,7 @@
             "rect": [
                 0,
                 0,
-                280,
+                266,
                 40
             ],
             "scenario": "created",
@@ -1571,7 +1571,7 @@
             "rect": [
                 0,
                 0,
-                280,
+                266,
                 165
             ],
             "scenario": "folders",
@@ -1605,7 +1605,7 @@
             "rect": [
                 0,
                 0,
-                280,
+                266,
                 195
             ],
             "scenario": "imported",
@@ -1620,7 +1620,7 @@
             "rect": [
                 0,
                 0,
-                280,
+                266,
                 100
             ],
             "scenario": "folder-group",
@@ -1635,7 +1635,7 @@
             "rect": [
                 0,
                 0,
-                280,
+                266,
                 135
             ],
             "scenario": "folder-project",
@@ -1709,7 +1709,7 @@
             "rect": [
                 0,
                 0,
-                280,
+                266,
                 195
             ],
             "scenario": "loaded",

@@ -93,7 +93,7 @@
          <string>To add maps use &lt;a href='MapFolders'&gt;File-&gt;Setup Map Paths&lt;/a&gt;.</string>
         </property>
         <property name="alignment">
-         <set>Qt::AlignmentFlag::AlignJustify|Qt::AlignmentFlag::AlignVCenter</set>
+         <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
         </property>
         <property name="wordWrap">
          <bool>true</bool>
@@ -106,7 +106,7 @@
          <string>Use the buttons to activate a map. Use drag-n-drop to move the map in the draw order. </string>
         </property>
         <property name="alignment">
-         <set>Qt::AlignmentFlag::AlignJustify|Qt::AlignmentFlag::AlignVCenter</set>
+         <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
         </property>
         <property name="wordWrap">
          <bool>true</bool>

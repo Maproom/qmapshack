@@ -6,12 +6,12 @@
     <message>
         <location filename="../setup/CAppSetupLinux.cpp" line="106"/>
         <source>Fatal...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fatal...</translation>
     </message>
     <message>
         <location filename="../setup/CAppSetupLinux.cpp" line="106"/>
         <source>Failed to lock file&lt;br&gt;%1&lt;br&gt;%2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fallo al bloquear el archivo&lt;br&gt;%1&lt;br&gt;%2</translation>
     </message>
 </context>
 <context>
@@ -19,12 +19,12 @@
     <message>
         <location filename="../setup/CAppSetupMac.cpp" line="169"/>
         <source>Fatal...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fatal...</translation>
     </message>
     <message>
         <location filename="../setup/CAppSetupMac.cpp" line="169"/>
         <source>Failed to lock file&lt;br&gt;%1&lt;br&gt;%2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fallo al bloquear el archivo&lt;br&gt;%1&lt;br&gt;%2</translation>
     </message>
 </context>
 <context>
@@ -32,12 +32,12 @@
     <message>
         <location filename="../setup/CAppSetupWin.cpp" line="119"/>
         <source>Fatal...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fatal...</translation>
     </message>
     <message>
         <location filename="../setup/CAppSetupWin.cpp" line="120"/>
         <source>Failed to lock file&lt;br&gt;%1&lt;br&gt;%2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fallo al bloquear el archivo&lt;br&gt;%1&lt;br&gt;%2</translation>
     </message>
 </context>
 <context>
@@ -68,7 +68,7 @@
     <message>
         <location filename="../setup/CCommandProcessor.cpp" line="43"/>
         <source>code</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">código</translation>
     </message>
     <message>
         <location filename="../setup/CCommandProcessor.cpp" line="39"/>
@@ -83,49 +83,49 @@
     <message>
         <location filename="../setup/CCommandProcessor.cpp" line="43"/>
         <source>Application locale.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Idioma de la aplicación.</translation>
     </message>
     <message>
         <location filename="../setup/CCommandProcessor.cpp" line="46"/>
         <source>Application font family.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Familia tipográfica de la aplicación.</translation>
     </message>
     <message>
         <location filename="../setup/CCommandProcessor.cpp" line="46"/>
         <location filename="../setup/CCommandProcessor.cpp" line="53"/>
         <location filename="../setup/CCommandProcessor.cpp" line="59"/>
         <source>name</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">nombre</translation>
     </message>
     <message>
         <location filename="../setup/CCommandProcessor.cpp" line="49"/>
         <source>Application font size.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tamaño de letra de la aplicación.</translation>
     </message>
     <message>
         <location filename="../setup/CCommandProcessor.cpp" line="49"/>
         <source>size</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">tamaño</translation>
     </message>
     <message>
         <location filename="../setup/CCommandProcessor.cpp" line="53"/>
         <source>Color scheme instead of the desktop&apos;s: light or dark.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Esquema de colores que sustituye al del escritorio: light o dark.</translation>
     </message>
     <message>
         <location filename="../setup/CCommandProcessor.cpp" line="57"/>
         <source>Qt style.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Estilo Qt.</translation>
     </message>
     <message>
         <location filename="../setup/CCommandProcessor.cpp" line="57"/>
         <source>Available:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Disponibles:</translation>
     </message>
     <message>
         <location filename="../setup/CCommandProcessor.cpp" line="58"/>
         <source>Recommended:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Recomendado:</translation>
     </message>
 </context>
 <context>
@@ -303,22 +303,22 @@
         <location filename="../../common/help/CHelp.cpp" line="42"/>
         <location filename="../../common/help/CHelp.cpp" line="96"/>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ayuda</translation>
     </message>
     <message>
         <location filename="../../common/help/CHelp.cpp" line="80"/>
         <source>Content</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Contenido</translation>
     </message>
     <message>
         <location filename="../../common/help/CHelp.cpp" line="81"/>
         <source>Index</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Índice</translation>
     </message>
     <message>
         <location filename="../../common/help/CHelp.cpp" line="82"/>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Buscar</translation>
     </message>
 </context>
 <context>
@@ -326,17 +326,17 @@
     <message>
         <location filename="../../common/help/CHelpBrowser.cpp" line="239"/>
         <source>Go back one page</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Retroceder una página</translation>
     </message>
     <message>
         <location filename="../../common/help/CHelpBrowser.cpp" line="244"/>
         <source>Go forward one page</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Avanzar una página</translation>
     </message>
     <message>
         <location filename="../../common/help/CHelpBrowser.cpp" line="249"/>
         <source>Go to initial page</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ir a la página inicial</translation>
     </message>
 </context>
 <context>
@@ -344,7 +344,7 @@
     <message>
         <location filename="../../common/help/CHelpIndex.cpp" line="26"/>
         <source>Search:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Buscar:</translation>
     </message>
 </context>
 <context>
@@ -352,7 +352,7 @@
     <message>
         <location filename="../../common/help/CHelpSearch.cpp" line="30"/>
         <source>Search:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Buscar:</translation>
     </message>
 </context>
 <context>
@@ -368,7 +368,7 @@
     <message>
         <location filename="../items/CItemMapLayer.cpp" line="33"/>
         <source>Layer</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Capa</translation>
     </message>
 </context>
 <context>
@@ -376,7 +376,7 @@
     <message>
         <location filename="../items/CItemTreeWidget.cpp" line="133"/>
         <source>&lt;p&gt;The current map &lt;i&gt;&apos;%1&apos;&lt;/i&gt; does not match the projection of previous loaded maps. All map files need to have the same projection.&lt;/p&gt;&lt;p&gt;&lt;b&gt;This file&lt;/b&gt;: %2&lt;/p&gt;&lt;p&gt;&lt;b&gt;Expected&lt;/b&gt;: %3&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;p&gt;La proyección del mapa actual &lt;i&gt;&apos;%1&apos;&lt;/i&gt; no coincide con la de los mapas cargados previamente. Todos los archivos de mapa deben tener la misma proyección.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Este archivo&lt;/b&gt;: %2&lt;/p&gt;&lt;p&gt;&lt;b&gt;Esperada&lt;/b&gt;: %3&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../items/CItemTreeWidget.cpp" line="139"/>
@@ -394,12 +394,12 @@
     <message>
         <location filename="../misc.h" line="29"/>
         <source>File access failed...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fallo al acceder al archivo...</translation>
     </message>
     <message>
         <location filename="../misc.h" line="30"/>
         <source>Failed to open %1 with error %2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fallo al abrir %1 con el error %2</translation>
     </message>
 </context>
 <context>
@@ -515,7 +515,7 @@ No es una definición válida del sistema de coordenadas:
     <message>
         <location filename="../../common/gis/proj_x.cpp" line="162"/>
         <source>Lat/Lon projection is not allowed in this case.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">La proyección lat/lon no está permitida en este caso.</translation>
     </message>
 </context>
 <context>
@@ -523,7 +523,7 @@ No es una definición válida del sistema de coordenadas:
     <message>
         <location filename="../overlay/refmap/CProjWizard.cpp" line="45"/>
         <source> (Spheroid: %1)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"> (Esferoide: %1)</translation>
     </message>
     <message>
         <location filename="../overlay/refmap/CProjWizard.cpp" line="59"/>
@@ -578,7 +578,8 @@ No es una definición válida del sistema de coordenadas:
         <location filename="../../common/shell/CShell.cpp" line="61"/>
         <source>External process crashed.
 </source>
-        <translation>Proceso externo bloqueado.</translation>
+        <translation type="unfinished">El proceso externo ha terminado de forma inesperada.
+</translation>
     </message>
     <message>
         <location filename="../../common/shell/CShell.cpp" line="65"/>
@@ -729,19 +730,19 @@ Canceled by user&apos;s request.
         <location filename="../IAbout.ui" line="70"/>
         <location filename="../../../build/src/qmaptool/ui_IAbout.h" line="170"/>
         <source>Qt</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Qt</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="84"/>
         <location filename="../../../build/src/qmaptool/ui_IAbout.h" line="172"/>
         <source>GDAL</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">GDAL</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="98"/>
         <location filename="../../../build/src/qmaptool/ui_IAbout.h" line="174"/>
         <source>PROJ</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">PROJ</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="121"/>
@@ -753,7 +754,7 @@ Canceled by user&apos;s request.
         <location filename="../IAbout.ui" line="128"/>
         <location filename="../../../build/src/qmaptool/ui_IAbout.h" line="177"/>
         <source>© 2017 Oliver Eichler (oliver.eichler@gmx.de)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">© 2017 Oliver Eichler (oliver.eichler@gmx.de)</translation>
     </message>
 </context>
 <context>
@@ -768,19 +769,19 @@ Canceled by user&apos;s request.
         <location filename="../units/ICoordFormatSetup.ui" line="24"/>
         <location filename="../../../build/src/qmaptool/ui_ICoordFormatSetup.h" line="104"/>
         <source>N48° 53&apos; 39.6&quot; E13° 31&apos; 6.78&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">N48° 53&apos; 39.6&quot; E13° 31&apos; 6.78&quot;</translation>
     </message>
     <message>
         <location filename="../units/ICoordFormatSetup.ui" line="31"/>
         <location filename="../../../build/src/qmaptool/ui_ICoordFormatSetup.h" line="105"/>
         <source>N48.8943° E013.51855°</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">N48.8943° E013.51855°</translation>
     </message>
     <message>
         <location filename="../units/ICoordFormatSetup.ui" line="38"/>
         <location filename="../../../build/src/qmaptool/ui_ICoordFormatSetup.h" line="106"/>
         <source>N48° 53.660 E013° 31.113</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">N48° 53.660 E013° 31.113</translation>
     </message>
     <message>
         <location filename="../units/ICoordFormatSetup.ui" line="53"/>
@@ -807,19 +808,19 @@ Canceled by user&apos;s request.
         <location filename="../overlay/refmap/IDialogRefPoint.ui" line="32"/>
         <location filename="../../../build/src/qmaptool/ui_IDialogRefPoint.h" line="117"/>
         <source>x</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">x</translation>
     </message>
     <message>
         <location filename="../overlay/refmap/IDialogRefPoint.ui" line="42"/>
         <location filename="../../../build/src/qmaptool/ui_IDialogRefPoint.h" line="118"/>
         <source>y</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">y</translation>
     </message>
     <message>
         <location filename="../overlay/refmap/IDialogRefPoint.ui" line="49"/>
         <location filename="../../../build/src/qmaptool/ui_IDialogRefPoint.h" line="119"/>
         <source>Coord. lat/lon WGS84 [°]</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Coord. lat/lon WGS84 [°]</translation>
     </message>
     <message>
         <location filename="../overlay/refmap/IDialogRefPoint.ui" line="59"/>
@@ -888,7 +889,7 @@ o
         <location filename="../overlay/gridtool/IGridSetRef.ui" line="47"/>
         <location filename="../../../build/src/qmaptool/ui_IGridSetRef.h" line="137"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">...</translation>
     </message>
     <message>
         <location filename="../overlay/gridtool/IGridSetRef.ui" line="60"/>
@@ -900,7 +901,7 @@ o
         <location filename="../overlay/gridtool/IGridSetRef.ui" line="72"/>
         <location filename="../../../build/src/qmaptool/ui_IGridSetRef.h" line="139"/>
         <source>Easting</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Coordenada este</translation>
     </message>
     <message>
         <location filename="../overlay/gridtool/IGridSetRef.ui" line="82"/>
@@ -912,7 +913,7 @@ o
         <location filename="../overlay/gridtool/IGridSetRef.ui" line="92"/>
         <location filename="../../../build/src/qmaptool/ui_IGridSetRef.h" line="141"/>
         <source>Northing</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Coordenada norte</translation>
     </message>
     <message>
         <location filename="../overlay/gridtool/IGridSetRef.ui" line="102"/>
@@ -945,7 +946,7 @@ o
         <location filename="../../../build/src/qmaptool/ui_IItemListWidget.h" line="115"/>
         <location filename="../../../build/src/qmaptool/ui_IItemListWidget.h" line="119"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">...</translation>
     </message>
     <message>
         <location filename="../items/IItemListWidget.ui" line="57"/>
@@ -990,7 +991,7 @@ o
         <location filename="../../../build/src/qmaptool/ui_IItemTreeWidget.h" line="120"/>
         <location filename="../../../build/src/qmaptool/ui_IItemTreeWidget.h" line="124"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">...</translation>
     </message>
     <message>
         <location filename="../items/IItemTreeWidget.ui" line="57"/>
@@ -1017,7 +1018,7 @@ o
         <location filename="../IMainWindow.ui" line="14"/>
         <location filename="../../../build/src/qmaptool/ui_IMainWindow.h" line="166"/>
         <source>MainWindow</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">MainWindow</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="32"/>
@@ -1041,7 +1042,7 @@ o
         <location filename="../IMainWindow.ui" line="52"/>
         <location filename="../../../build/src/qmaptool/ui_IMainWindow.h" line="192"/>
         <source>?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">?</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="68"/>
@@ -1053,7 +1054,7 @@ o
         <location filename="../IMainWindow.ui" line="101"/>
         <location filename="../../../build/src/qmaptool/ui_IMainWindow.h" line="194"/>
         <source>Shell</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Consola</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="120"/>
@@ -1111,13 +1112,13 @@ o
         <location filename="../IMainWindow.ui" line="191"/>
         <location filename="../../../build/src/qmaptool/ui_IMainWindow.h" line="185"/>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ayuda</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="194"/>
         <location filename="../../../build/src/qmaptool/ui_IMainWindow.h" line="187"/>
         <source>F1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">F1</translation>
     </message>
 </context>
 <context>
@@ -1154,7 +1155,7 @@ o
         <location filename="../../../build/src/qmaptool/ui_IOverlayCutMap.h" line="166"/>
         <location filename="../../../build/src/qmaptool/ui_IOverlayCutMap.h" line="170"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">...</translation>
     </message>
     <message>
         <location filename="../overlay/IOverlayCutMap.ui" line="81"/>
@@ -1244,7 +1245,7 @@ o
         <location filename="../../../build/src/qmaptool/ui_IOverlayRefMap.h" line="282"/>
         <location filename="../../../build/src/qmaptool/ui_IOverlayRefMap.h" line="294"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">...</translation>
     </message>
     <message>
         <location filename="../overlay/IOverlayRefMap.ui" line="86"/>
@@ -1298,13 +1299,13 @@ o
         <location filename="../overlay/IOverlayRefMap.ui" line="281"/>
         <location filename="../../../build/src/qmaptool/ui_IOverlayRefMap.h" line="285"/>
         <source>(x, y)[pixel]</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">(x, y)[pixel]</translation>
     </message>
     <message>
         <location filename="../overlay/IOverlayRefMap.ui" line="286"/>
         <location filename="../../../build/src/qmaptool/ui_IOverlayRefMap.h" line="284"/>
         <source>(lat, lon)[°]</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">(lat, lon)[°]</translation>
     </message>
     <message>
         <location filename="../overlay/IOverlayRefMap.ui" line="294"/>
@@ -1322,7 +1323,7 @@ o
         <location filename="../overlay/IOverlayRefMap.ui" line="316"/>
         <location filename="../../../build/src/qmaptool/ui_IOverlayRefMap.h" line="289"/>
         <source>Enter a valid projection string. Valid strings are &quot;+proj...&quot; or &quot;EPSG:...&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Introduce una cadena de proyección válida. Son válidas las cadenas &quot;+proj...&quot; o &quot;EPSG:...&quot;.</translation>
     </message>
     <message>
         <location filename="../overlay/IOverlayRefMap.ui" line="323"/>
@@ -1349,13 +1350,13 @@ o
         <location filename="../overlay/refmap/IProjWizard.ui" line="29"/>
         <location filename="../../../build/src/qmaptool/ui_IProjWizard.h" line="192"/>
         <source>Mercator</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Mercator</translation>
     </message>
     <message>
         <location filename="../overlay/refmap/IProjWizard.ui" line="38"/>
         <location filename="../../../build/src/qmaptool/ui_IProjWizard.h" line="193"/>
         <source>UTM</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">UTM</translation>
     </message>
     <message>
         <location filename="../overlay/refmap/IProjWizard.ui" line="45"/>
@@ -1373,13 +1374,13 @@ o
         <location filename="../overlay/refmap/IProjWizard.ui" line="94"/>
         <location filename="../../../build/src/qmaptool/ui_IProjWizard.h" line="196"/>
         <source>Datum</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Datum</translation>
     </message>
     <message>
         <location filename="../overlay/refmap/IProjWizard.ui" line="104"/>
         <location filename="../../../build/src/qmaptool/ui_IProjWizard.h" line="197"/>
         <source>World Mercator (OSM)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Mercator mundial (OSM)</translation>
     </message>
     <message>
         <location filename="../overlay/refmap/IProjWizard.ui" line="124"/>
@@ -1440,31 +1441,31 @@ o
         <location filename="../../../build/src/qmaptool/ui_ISetupExtTools.h" line="297"/>
         <location filename="../../../build/src/qmaptool/ui_ISetupExtTools.h" line="298"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">...</translation>
     </message>
     <message>
         <location filename="../setup/ISetupExtTools.ui" line="112"/>
         <location filename="../../../build/src/qmaptool/ui_ISetupExtTools.h" line="265"/>
         <source>gdal_translate:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">gdal_translate:</translation>
     </message>
     <message>
         <location filename="../setup/ISetupExtTools.ui" line="43"/>
         <location filename="../../../build/src/qmaptool/ui_ISetupExtTools.h" line="250"/>
         <source>gdalbuildvrt</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">gdalbuildvrt</translation>
     </message>
     <message>
         <location filename="../setup/ISetupExtTools.ui" line="166"/>
         <location filename="../../../build/src/qmaptool/ui_ISetupExtTools.h" line="275"/>
         <source>gdaladdo:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">gdaladdo:</translation>
     </message>
     <message>
         <location filename="../setup/ISetupExtTools.ui" line="125"/>
         <location filename="../../../build/src/qmaptool/ui_ISetupExtTools.h" line="266"/>
         <source>gdalwarp:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">gdalwarp:</translation>
     </message>
     <message>
         <location filename="../setup/ISetupExtTools.ui" line="22"/>
@@ -1500,7 +1501,7 @@ o
         <location filename="../setup/ISetupExtTools.ui" line="201"/>
         <location filename="../../../build/src/qmaptool/ui_ISetupExtTools.h" line="282"/>
         <source>qmt_rgb2pct</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">qmt_rgb2pct</translation>
     </message>
     <message>
         <location filename="../setup/ISetupExtTools.ui" line="50"/>
@@ -1520,7 +1521,7 @@ o
         <location filename="../setup/ISetupExtTools.ui" line="250"/>
         <location filename="../../../build/src/qmaptool/ui_ISetupExtTools.h" line="295"/>
         <source>qmt_map2jnx</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">qmt_map2jnx</translation>
     </message>
     <message>
         <location filename="../setup/ISetupExtTools.ui" line="288"/>
@@ -1535,19 +1536,19 @@ o
         <location filename="../units/ITimeZoneSetup.ui" line="14"/>
         <location filename="../../../build/src/qmaptool/ui_ITimeZoneSetup.h" line="150"/>
         <source>Setup Timezone ...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Configurar zona horaria ...</translation>
     </message>
     <message>
         <location filename="../units/ITimeZoneSetup.ui" line="22"/>
         <location filename="../../../build/src/qmaptool/ui_ITimeZoneSetup.h" line="151"/>
         <source>UTC</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">UTC</translation>
     </message>
     <message>
         <location filename="../units/ITimeZoneSetup.ui" line="32"/>
         <location filename="../../../build/src/qmaptool/ui_ITimeZoneSetup.h" line="152"/>
         <source>Local</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Local</translation>
     </message>
     <message>
         <location filename="../units/ITimeZoneSetup.ui" line="42"/>
@@ -1592,37 +1593,37 @@ o
         <location filename="../tool/IToolAddOverview.ui" line="119"/>
         <location filename="../../../build/src/qmaptool/ui_IToolAddOverview.h" line="206"/>
         <source>:2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">:2</translation>
     </message>
     <message>
         <location filename="../tool/IToolAddOverview.ui" line="126"/>
         <location filename="../../../build/src/qmaptool/ui_IToolAddOverview.h" line="207"/>
         <source>:4</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">:4</translation>
     </message>
     <message>
         <location filename="../tool/IToolAddOverview.ui" line="133"/>
         <location filename="../../../build/src/qmaptool/ui_IToolAddOverview.h" line="208"/>
         <source>:8</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">:8</translation>
     </message>
     <message>
         <location filename="../tool/IToolAddOverview.ui" line="140"/>
         <location filename="../../../build/src/qmaptool/ui_IToolAddOverview.h" line="209"/>
         <source>:16</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">:16</translation>
     </message>
     <message>
         <location filename="../tool/IToolAddOverview.ui" line="147"/>
         <location filename="../../../build/src/qmaptool/ui_IToolAddOverview.h" line="210"/>
         <source>:32</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">:32</translation>
     </message>
     <message>
         <location filename="../tool/IToolAddOverview.ui" line="154"/>
         <location filename="../../../build/src/qmaptool/ui_IToolAddOverview.h" line="211"/>
         <source>:64</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">:64</translation>
     </message>
     <message>
         <location filename="../tool/IToolAddOverview.ui" line="164"/>
@@ -1709,7 +1710,7 @@ o
         <location filename="../tool/IToolCutMap.ui" line="155"/>
         <location filename="../../../build/src/qmaptool/ui_IToolCutMap.h" line="208"/>
         <source>GDAL Parameters</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Parámetros GDAL</translation>
     </message>
     <message>
         <location filename="../tool/IToolCutMap.ui" line="183"/>
@@ -1756,19 +1757,19 @@ o
         <location filename="../../../build/src/qmaptool/ui_IToolExport.h" line="175"/>
         <location filename="../../../build/src/qmaptool/ui_IToolExport.h" line="176"/>
         <source>do not translate</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">no traducir</translation>
     </message>
     <message>
         <location filename="../tool/IToolExport.ui" line="83"/>
         <location filename="../../../build/src/qmaptool/ui_IToolExport.h" line="177"/>
         <source>Garmin BirdsEye (*.jnx)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Garmin BirdsEye (*.jnx)</translation>
     </message>
     <message>
         <location filename="../tool/IToolExport.ui" line="88"/>
         <location filename="../../../build/src/qmaptool/ui_IToolExport.h" line="178"/>
         <source>TwoNav Raster (*.rmap)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">TwoNav Raster (*.rmap)</translation>
     </message>
     <message>
         <location filename="../tool/IToolExport.ui" line="101"/>
@@ -1821,13 +1822,13 @@ o
         <location filename="../../../build/src/qmaptool/ui_IToolExportJnx.h" line="181"/>
         <location filename="../../../build/src/qmaptool/ui_IToolExportJnx.h" line="186"/>
         <source>BirdsEye</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">BirdsEye</translation>
     </message>
     <message>
         <location filename="../tool/export/IToolExportJnx.ui" line="50"/>
         <location filename="../../../build/src/qmaptool/ui_IToolExportJnx.h" line="182"/>
         <source>Product ID</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ID de producto</translation>
     </message>
     <message>
         <location filename="../tool/export/IToolExportJnx.ui" line="57"/>
@@ -1859,7 +1860,7 @@ o
         <location filename="../tool/export/IToolExportJnx.ui" line="105"/>
         <location filename="../../../build/src/qmaptool/ui_IToolExportJnx.h" line="189"/>
         <source>JPEG</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">JPEG</translation>
     </message>
     <message>
         <location filename="../tool/export/IToolExportJnx.ui" line="133"/>
@@ -1877,19 +1878,19 @@ o
         <location filename="../tool/export/IToolExportJnx.ui" line="148"/>
         <location filename="../../../build/src/qmaptool/ui_IToolExportJnx.h" line="192"/>
         <source>411</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">411</translation>
     </message>
     <message>
         <location filename="../tool/export/IToolExportJnx.ui" line="153"/>
         <location filename="../../../build/src/qmaptool/ui_IToolExportJnx.h" line="193"/>
         <source>422</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">422</translation>
     </message>
     <message>
         <location filename="../tool/export/IToolExportJnx.ui" line="158"/>
         <location filename="../../../build/src/qmaptool/ui_IToolExportJnx.h" line="194"/>
         <source>444</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">444</translation>
     </message>
     <message>
         <location filename="../tool/export/IToolExportJnx.ui" line="169"/>
@@ -1901,7 +1902,7 @@ o
         <location filename="../tool/export/IToolExportJnx.ui" line="184"/>
         <location filename="../../../build/src/qmaptool/ui_IToolExportJnx.h" line="197"/>
         <source>Z-Order</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Orden Z</translation>
     </message>
 </context>
 <context>
@@ -1910,43 +1911,43 @@ o
         <location filename="../tool/IToolGDALGroupBox.ui" line="14"/>
         <location filename="../../../build/src/qmaptool/ui_IToolGDALGroupBox.h" line="167"/>
         <source>GroupBox</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">GroupBox</translation>
     </message>
     <message>
         <location filename="../tool/IToolGDALGroupBox.ui" line="17"/>
         <location filename="../../../build/src/qmaptool/ui_IToolGDALGroupBox.h" line="168"/>
         <source>GDAL Parameters</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Parámetros GDAL</translation>
     </message>
     <message>
         <location filename="../tool/IToolGDALGroupBox.ui" line="50"/>
         <location filename="../../../build/src/qmaptool/ui_IToolGDALGroupBox.h" line="169"/>
         <source>Resampling</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Remuestreo</translation>
     </message>
     <message>
         <location filename="../tool/IToolGDALGroupBox.ui" line="84"/>
         <location filename="../../../build/src/qmaptool/ui_IToolGDALGroupBox.h" line="170"/>
         <source>Compression</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Compresión</translation>
     </message>
     <message>
         <location filename="../tool/IToolGDALGroupBox.ui" line="118"/>
         <location filename="../../../build/src/qmaptool/ui_IToolGDALGroupBox.h" line="171"/>
         <source>Tiled</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Teselado</translation>
     </message>
     <message>
         <location filename="../tool/IToolGDALGroupBox.ui" line="144"/>
         <location filename="../../../build/src/qmaptool/ui_IToolGDALGroupBox.h" line="172"/>
         <source>x</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">x</translation>
     </message>
     <message>
         <location filename="../tool/IToolGDALGroupBox.ui" line="188"/>
         <location filename="../../../build/src/qmaptool/ui_IToolGDALGroupBox.h" line="173"/>
         <source>Other:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Otros:</translation>
     </message>
 </context>
 <context>
@@ -1973,7 +1974,7 @@ o
         <location filename="../tool/IToolGrid.ui" line="90"/>
         <location filename="../../../build/src/qmaptool/ui_IToolGrid.h" line="132"/>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ok</translation>
     </message>
     <message>
         <location filename="../tool/IToolGrid.ui" line="101"/>
@@ -1994,43 +1995,43 @@ o
         <location filename="../tool/IToolOverviewGroupBox.ui" line="14"/>
         <location filename="../../../build/src/qmaptool/ui_IToolOverviewGroupBox.h" line="104"/>
         <source>GroupBox</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">GroupBox</translation>
     </message>
     <message>
         <location filename="../tool/IToolOverviewGroupBox.ui" line="71"/>
         <location filename="../../../build/src/qmaptool/ui_IToolOverviewGroupBox.h" line="105"/>
         <source>:2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">:2</translation>
     </message>
     <message>
         <location filename="../tool/IToolOverviewGroupBox.ui" line="78"/>
         <location filename="../../../build/src/qmaptool/ui_IToolOverviewGroupBox.h" line="106"/>
         <source>:4</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">:4</translation>
     </message>
     <message>
         <location filename="../tool/IToolOverviewGroupBox.ui" line="85"/>
         <location filename="../../../build/src/qmaptool/ui_IToolOverviewGroupBox.h" line="107"/>
         <source>:8</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">:8</translation>
     </message>
     <message>
         <location filename="../tool/IToolOverviewGroupBox.ui" line="92"/>
         <location filename="../../../build/src/qmaptool/ui_IToolOverviewGroupBox.h" line="108"/>
         <source>:16</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">:16</translation>
     </message>
     <message>
         <location filename="../tool/IToolOverviewGroupBox.ui" line="99"/>
         <location filename="../../../build/src/qmaptool/ui_IToolOverviewGroupBox.h" line="109"/>
         <source>:32</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">:32</translation>
     </message>
     <message>
         <location filename="../tool/IToolOverviewGroupBox.ui" line="106"/>
         <location filename="../../../build/src/qmaptool/ui_IToolOverviewGroupBox.h" line="110"/>
         <source>:64</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">:64</translation>
     </message>
     <message>
         <location filename="../tool/IToolOverviewGroupBox.ui" line="119"/>
@@ -2071,7 +2072,7 @@ o
         <location filename="../tool/IToolPalettize.ui" line="109"/>
         <location filename="../../../build/src/qmaptool/ui_IToolPalettize.h" line="226"/>
         <source>_8bit</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">_8bit</translation>
     </message>
     <message>
         <location filename="../tool/IToolPalettize.ui" line="123"/>
@@ -2095,7 +2096,7 @@ o
         <location filename="../tool/IToolPalettize.ui" line="149"/>
         <location filename="../../../build/src/qmaptool/ui_IToolPalettize.h" line="230"/>
         <source>GDAL Parameter</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Parámetros GDAL</translation>
     </message>
     <message>
         <location filename="../tool/IToolPalettize.ui" line="177"/>
@@ -2158,7 +2159,7 @@ o
         <location filename="../tool/IToolRefMap.ui" line="132"/>
         <location filename="../../../build/src/qmaptool/ui_IToolRefMap.h" line="215"/>
         <source>_ref</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">_ref</translation>
     </message>
     <message>
         <location filename="../tool/IToolRefMap.ui" line="144"/>
@@ -2176,7 +2177,7 @@ o
         <location filename="../tool/IToolRefMap.ui" line="158"/>
         <location filename="../../../build/src/qmaptool/ui_IToolRefMap.h" line="218"/>
         <source>GDAL Parameters</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Parámetros GDAL</translation>
     </message>
     <message>
         <location filename="../tool/IToolRefMap.ui" line="186"/>

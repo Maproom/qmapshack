@@ -7,13 +7,13 @@
 
 ![QMapShack main window](https://github.com/Maproom/qmapshack/wiki/images/maproom1.png)
 
-> **Full documentation:** [QMapShack Wiki](https://github.com/Maproom/qmapshack/wiki/DocMain)
+> **Documentation:** [QMapShack manual](https://maproom.github.io/qmapshack/) (English, German), also in QMapShack's help (F1). What it does not cover yet is in the [QMapShack Wiki](https://github.com/Maproom/qmapshack/wiki/DocMain).
 
 ---
 
 ## Features
 
-- **Maps** — Garmin vector maps (`.img`, `.jnx`), GDAL raster maps (GeoTIFF, OziExplorer, …), and online maps via TMS/WMTS. Multiple maps can be displayed simultaneously, reprojected on-the-fly.
+- **Maps** — Garmin vector maps (`.img`), Garmin BirdsEye (`.jnx`), TwoNav (`.rmap`) and GEMF raster maps, GDAL raster maps through VRT files (GeoTIFF, OziExplorer, MBTiles, …), and online maps via TMS/WMTS. Multiple maps can be displayed simultaneously, reprojected on-the-fly.
 - **Elevation data** — Digital elevation models (DEM) independent from the base map, with hillshading and slope colouring.
 - **Tracks & routes** — Full-featured track editor with unlimited undo/redo; cut, copy, combine, reverse; rich filter set for smoothing, resampling, speed, elevation, and timestamps.
 - **Routing** — Offline routing via [Routino](http://www.routino.org/); offline and online routing via [BRouter](https://brouter.de/) (local process or HTTP API); vector/track snapping for precise alignment.
@@ -29,19 +29,14 @@
 
 ### Pre-built packages (recommended)
 
-**Windows** — 64-bit installer available on the [releases page](https://github.com/Maproom/qmapshack/releases).
-
-**macOS** — Binary bundle on the [releases page](https://github.com/Maproom/qmapshack/releases).
+**Windows and macOS** — Binaries are built by contributors. The text of each release on the [releases page](https://github.com/Maproom/qmapshack/releases) links to them.
 
 **Linux — distribution packages:**
 
 | Distribution | Package |
 |---|---|
-| Debian | [packages.debian.org](https://packages.debian.org/testing/qmapshack) |
 | Ubuntu | [packages.ubuntu.com](https://packages.ubuntu.com/search?keywords=qmapshack) |
-| openSUSE | [software.opensuse.org](https://software.opensuse.org/package/qmapshack) |
 | Arch Linux | [archlinux.org](https://archlinux.org/packages/extra/x86_64/qmapshack/) / [AUR (dev)](https://aur.archlinux.org/packages/qmapshack-git) |
-| Other (deb, rpm, …) | [pkgs.org](https://pkgs.org/download/qmapshack) |
 
 **Linux — AppImages** for Fedora, openSUSE, and Ubuntu are available from the [QMapShack AppImage project](https://github.com/kkarsten62/QMapShack.AppImage/releases). See the [AppImage wiki page](https://github.com/Maproom/qmapshack/wiki/DocQMSAppImage) for details.
 
@@ -53,22 +48,21 @@
 
 | Library | Minimum version | Purpose |
 |---|---|---|
-| [Qt6](https://www.qt.io/) | 6.8 | Core, Widgets, Svg, SvgWidgets, Xml, Sql, Network, PrintSupport, WebEngineWidgets, Qml, UiTools, Help, LinguistTools |
+| [Qt6](https://www.qt.io/) | 6.8 | Core, Core5Compat, Concurrent, Widgets, Svg, SvgWidgets, Xml, Sql, Network, PrintSupport, WebEngineWidgets, Qml, UiTools, Help, LinguistTools |
 | [GDAL](https://gdal.org/) | 3.10.0 | Map and raster data I/O, ZIP archive reading |
 | [PROJ](https://proj.org/) | 9.4.0 | Coordinate reference system transformations |
 | [Routino](http://www.routino.org/) | 3.4 | Offline routing |
 | libjpeg | — | JNX and JPEG raster support |
+| [Blend2D](https://blend2d.com/) | — | Drawing Garmin vector maps; downloaded by CMake |
 | CMake | 3.20 | Build system |
 | C++20 compiler | — | GCC ≥ 10, Clang ≥ 12, MSVC 2022 |
 
-Install dependencies via your distribution's package manager and make sure the **development packages** (`-dev` / `-devel`) are included. On Linux, device support additionally requires **DBus** and **UDisk2**.
+CMake downloads Blend2D and its AsmJit backend from GitHub while configuring, so configuring needs `git` and internet access. Install the other dependencies via your distribution's package manager and make sure the **development packages** (`-dev` / `-devel`) are included. On Linux, device support additionally requires **DBus** and **UDisks2**.
 
 Distro-specific setup guides are on the wiki:
 [Ubuntu 24.04](https://github.com/Maproom/qmapshack/wiki/Build-Ubuntu-24-04-3) ·
-[Ubuntu 22.04](https://github.com/Maproom/qmapshack/wiki/BuildUbuntu22-04) ·
 [Fedora](https://github.com/Maproom/qmapshack/wiki/BuildFedora) ·
-[macOS](https://github.com/Maproom/qmapshack/wiki/BuildOSX) ·
-[Windows](https://github.com/Maproom/qmapshack/wiki/BuildWindowsVisualStudio)
+[macOS](https://github.com/Maproom/qmapshack/wiki/BuildOSX)
 
 ### Linux / Unix
 
@@ -124,7 +118,7 @@ Finished app bundles appear in the `release/` subdirectory. See [MacOSX/README.m
 <details>
 <summary><strong>Windows</strong></summary>
 
-Windows builds use MSVC 2022 (64-bit). Build scripts and step-by-step instructions are in the `msvc_64/` directory and on the [wiki](https://github.com/Maproom/qmapshack/wiki/BuildWindowsVisualStudio).
+Windows builds use MSVC 2022 (64-bit). Build scripts are in the `msvc_64/` directory.
 
 </details>
 
@@ -132,13 +126,7 @@ Windows builds use MSVC 2022 (64-bit). Build scripts and step-by-step instructio
 
 ## Getting Started
 
-After installation, follow the [Quick Start guide](https://github.com/Maproom/qmapshack/wiki/DocQuickStartEnglish) to set up maps, elevation data, and routing, then load your first GPX file.
-
-Quick starts are also available in
-[German](https://github.com/Maproom/qmapshack/wiki/DocQuickStartGerman),
-[French](https://github.com/Maproom/qmapshack/wiki/DocQuickStartFrench),
-[Spanish](https://github.com/Maproom/qmapshack/wiki/DocQuickStartSpanish), and
-[Russian](https://github.com/Maproom/qmapshack/wiki/DocQuickStartRussian).
+After installation, follow the [Quick Start](https://maproom.github.io/qmapshack/en/pages/quickstart.html) in the manual to set up maps, elevation data, and routing, then load your first GPX file. It is also available in [German](https://maproom.github.io/qmapshack/de/pages/quickstart.html).
 
 ---
 
@@ -147,7 +135,7 @@ Quick starts are also available in
 - **Bug reports & feature requests:** [GitHub Issues](https://github.com/Maproom/qmapshack/issues) — please use the provided issue templates.
 - **Code contributions:** Pull requests target the `dev` branch. Read [README_CODING.md](README_CODING.md) first, then the [commit guide](https://github.com/Maproom/qmapshack/wiki/DeveloperCommitCode) on the wiki.
 - **Translations:** See [Add translations](https://github.com/Maproom/qmapshack/wiki/DeveloperTranslate) on the wiki.
-- **Documentation:** Wiki contributions are welcome — see [Developing Documentation](https://github.com/Maproom/qmapshack/wiki/DevelopingDocumentation).
+- **Documentation:** The manual is written in this repository — see [doc/CREATING_DOCS.md](doc/CREATING_DOCS.md) for the text and [doc/WRITING_DOCS.md](doc/WRITING_DOCS.md) for the images.
 
 ---
 

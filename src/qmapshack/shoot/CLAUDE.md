@@ -245,6 +245,18 @@ The writer's guide is `doc/WRITING_DOCS.md`: short, facts only, updated with eve
   newline**, identical to `QJsonDocument::Indented`.
 - **Output is UTF-8** (`CLogHandler`); decode it as such, not in the console code page.
 
+## Updating the images after a code change
+
+1. `shots.py --lang <lang> -o <scratch> replay`, en and de one after the other: two `replay` processes side by side
+   break each other's scenarios.
+2. Compare `<scratch>` with `doc/<lang>/images` on RGB and alpha. Pillow's `getbbox()` on an RGBA difference
+   looks at alpha only and calls changed images identical.
+3. Take an image again only when what its page explains changed (`.notes/documentation-plan.md`, Open). Shifted maps
+   and other example values keep the published image.
+4. A shot that does not replay or crops something else: fix its `rect` in `doc/<lang>/shots/*.json`. A crop of a dock
+   ends at the dock's edge, no map strip. A scratch copy of a shot folder needs its `.ini` and fixture folders too.
+5. Copy only the images taken again, run `doc/tools/generate_html.py`, check `git status -s doc`.
+
 ## Recorder (`CShotRecorder`, `CShotApplication`, `IShotHandler`, `CShotHandlers`)
 
 - **A recording is its start state (`layout`, `view`) plus every change as a step**, always from the

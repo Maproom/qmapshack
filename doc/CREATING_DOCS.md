@@ -9,7 +9,7 @@ Images are covered by [WRITING_DOCS.md](WRITING_DOCS.md), the rules for the text
 
 ## Setting up
 
-You need only Python 3.9 or newer; you don't need a QMapShack build. On Debian and Ubuntu also
+You need only Python 3.12 or newer; you don't need a QMapShack build. On Debian and Ubuntu also
 install `python3-venv`. On Windows install Python from python.org, which brings the `py` launcher.
 
 ## Changing a page

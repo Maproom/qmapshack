@@ -1,0 +1,61 @@
+# Publishes doc/html of the latest release to GitHub Pages. Nothing is built: doc/html is committed.
+# Needs, once, in the repository settings: Pages source "GitHub Actions", and the tag pattern V_* in the
+# deployment branches and tags of the github-pages environment.
+name: Pages
+
+on:
+  # A prerelease made a full release later sends 'released', not 'published': start the workflow by hand then.
+  release:
+    types: [published]
+  # By hand: start it from the default branch (dev); the github-pages environment refuses other branches.
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      # Always the latest release, whichever release started the run: a fix of an older version
+      # must not replace the current manual.
+      - name: Find the latest release
+        id: release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          tag=$(gh release view -R "$GITHUB_REPOSITORY" --json tagName -q .tagName)
+          echo "Publishing the documentation of $tag"
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ steps.release.outputs.tag }}
+
+      - name: Check doc/html
+        env:
+          TAG: ${{ steps.release.outputs.tag }}
+        run: |
+          if [ ! -f doc/html/index.html ]; then
+            echo "::error::$TAG has no doc/html/index.html, so there is nothing to publish."
+            exit 1
+          fi
+
+      - uses: actions/configure-pages@v6
+
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: doc/html
+
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v5

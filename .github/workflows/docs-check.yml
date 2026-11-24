@@ -1,0 +1,41 @@
+# Fails when the committed doc/html does not match the pages in doc/<lang>/: Pages publishes doc/html as it is.
+name: Documentation
+
+on:
+  pull_request:
+    branches: [dev]
+    paths:
+      - "doc/**"
+      - ".gitattributes"
+      - ".github/workflows/docs-check.yml"
+  push:
+    branches: [dev]
+    paths:
+      - "doc/**"
+      - ".gitattributes"
+      - ".github/workflows/docs-check.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  html-up-to-date:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Generate doc/html
+        run: python doc/tools/generate_html.py
+
+      - name: Compare with the committed doc/html
+        run: |
+          if [ -n "$(git status --porcelain -- doc/html)" ]; then
+            git status --short -- doc/html
+            echo "::error::doc/html does not match the pages. Run 'python3 doc/tools/generate_html.py' and commit doc/html."
+            exit 1
+          fi

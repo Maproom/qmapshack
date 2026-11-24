@@ -29,6 +29,7 @@ V1.XX.X
 [QMS-1322] Documentation: a new quick start guide with images from the shot tool
 [QMS-1324] Watch the map, DEM, POI, Routino and surface database folders for new files
 [QMS-1330] Nicer help blocks and Quick Start in the offline help
+[QMS-1334] Fix: Coordinates show 60 seconds or 60 minutes instead of carrying over
 
 V1.21.1
 [QMS-1212] Update macOS build scripts

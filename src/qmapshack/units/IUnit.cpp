@@ -725,16 +725,16 @@ void IUnit::degToStr(const qreal& x, const qreal& y, QString& str) {
 
   switch (coordFormat) {
     case eCoordFormat1: {
-      qint32 degN, degE;
-      qreal minN, minE;
+      // Round to the printed thousandth of a minute before splitting off the
+      // degrees, so that 59.9996' carries into the degrees instead of showing 60.000
+      const qint64 thousandthsN = qRound64(qAbs(y) * 60000.0);
+      const qint64 thousandthsE = qRound64(qAbs(x) * 60000.0);
 
-      bool signLat = GPS_Math_Deg_To_DegMin(y, &degN, &minN);
-      bool signLon = GPS_Math_Deg_To_DegMin(x, &degE, &minE);
-
-      const QString& lat = signLat ? "S" : "N";
-      const QString& lng = signLon ? "W" : "E";
-      str = QString::asprintf("%s%02d° %06.3f %s%03d° %06.3f", lat.toUtf8().data(), qAbs(degN), minN,
-                              lng.toUtf8().data(), qAbs(degE), minE);
+      const QString& lat = (y < 0) ? "S" : "N";
+      const QString& lng = (x < 0) ? "W" : "E";
+      str = QString::asprintf("%s%02d° %06.3f %s%03d° %06.3f", lat.toUtf8().data(), int(thousandthsN / 60000),
+                              (thousandthsN % 60000) / 1000.0, lng.toUtf8().data(), int(thousandthsE / 60000),
+                              (thousandthsE % 60000) / 1000.0);
       break;
     }
 
@@ -746,19 +746,16 @@ void IUnit::degToStr(const qreal& x, const qreal& y, QString& str) {
     }
 
     case eCoordFormat3: {
-      qint32 degN, degE;
-      qreal minN, minE;
+      // Round to the printed hundredth of a second first, see above
+      const qint64 hundredthsN = qRound64(qAbs(y) * 360000.0);
+      const qint64 hundredthsE = qRound64(qAbs(x) * 360000.0);
 
-      bool signLat = GPS_Math_Deg_To_DegMin(y, &degN, &minN);
-      bool signLon = GPS_Math_Deg_To_DegMin(x, &degE, &minE);
-
-      qreal secN = (minN - qFloor(minN)) * 60;
-      qreal secE = (minE - qFloor(minE)) * 60;
-
-      const QString& lat = signLat ? "S" : "N";
-      const QString& lng = signLon ? "W" : "E";
-      str = QString::asprintf("%s%02d° %02d' %02.2f'' %s%03d° %02d' %02.2f''", lat.toUtf8().data(), qAbs(degN),
-                              qFloor(minN), secN, lng.toUtf8().data(), qAbs(degE), qFloor(minE), secE);
+      const QString& lat = (y < 0) ? "S" : "N";
+      const QString& lng = (x < 0) ? "W" : "E";
+      str = QString::asprintf("%s%02d° %02d' %02.2f'' %s%03d° %02d' %02.2f''", lat.toUtf8().data(),
+                              int(hundredthsN / 360000), int(hundredthsN / 6000 % 60), (hundredthsN % 6000) / 100.0,
+                              lng.toUtf8().data(), int(hundredthsE / 360000), int(hundredthsE / 6000 % 60),
+                              (hundredthsE % 6000) / 100.0);
       break;
     }
   }

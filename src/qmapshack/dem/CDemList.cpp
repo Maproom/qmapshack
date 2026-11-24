@@ -24,7 +24,6 @@
 #include "dem/CDemDraw.h"
 #include "dem/CDemItem.h"
 #include "map/CMapItemDelegate.h"
-#include "svgticon/CSvgtIcon.h"
 
 CDemTreeWidget::CDemTreeWidget(QWidget* parent) : QTreeWidget(parent) {
   CMapItemDelegate* delegate = new CMapItemDelegate(this);
@@ -100,7 +99,6 @@ void CDemTreeWidget::dropEvent(QDropEvent* e) {
 
 CDemList::CDemList(CCanvas* parent) : QWidget(parent), canvas(parent) {
   setupUi(this);
-  CSvgtIcon::load(labelIcon, "://icons/Help.svgt");
   lineFilter->addAction(actionClearFilter, QLineEdit::TrailingPosition);
 
   connect(treeWidget, &CDemTreeWidget::customContextMenuRequested, this, &CDemList::slotContextMenu);
@@ -175,7 +173,7 @@ void CDemList::updateHelpText() {
   labelHelpFillMapList->setVisible(!haveMaps);
 
   if (!haveMaps) {
-    labelIcon->show();
+    helpBlock->show();
     labelHelpActivateMap->hide();
   } else {
     bool showHelp = true;
@@ -190,7 +188,7 @@ void CDemList::updateHelpText() {
         showHelp = false;
       }
     }
-    labelIcon->setVisible(showHelp);
+    helpBlock->setVisible(showHelp);
     labelHelpActivateMap->setVisible(showHelp);
   }
 }

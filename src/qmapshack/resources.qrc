@@ -1555,6 +1555,7 @@
         <file alias="icons/GridSetup.svgt">../icons/GridSetup.svg</file>
         <file alias="icons/GridWizard.svgt">../icons/GridWizard.svg</file>
         <file alias="icons/Help.svgt">../icons/Help.svg</file>
+        <file alias="icons/HelpHint.svgt">../icons/HelpHint.svg</file>
         <file alias="icons/Hint.svgt">../icons/Hint.svg</file>
         <file alias="icons/I.svgt">../icons/I.svg</file>
         <file alias="icons/IconSize.svgt">../icons/IconSize.svg</file>

@@ -344,8 +344,8 @@ endif(BUILD_QMAPTOOL)
 # The documentation: "doc" runs doc/tools/generate_html.py, which sets up its own environment in
 # .doc-venv. Not part of "all"; the first run needs internet access.
 ###############################################################################################
-find_package(Python3 COMPONENTS Interpreter QUIET)
-if(Python3_Interpreter_FOUND)
+find_package(Python3 3.12 COMPONENTS Interpreter QUIET)
+if(Python3_Interpreter_FOUND AND Python3_VERSION VERSION_GREATER_EQUAL 3.12)
     add_custom_target(doc
         COMMAND ${Python3_EXECUTABLE} ${CMAKE_SOURCE_DIR}/doc/tools/generate_html.py
         COMMENT "Generating doc/html"
@@ -353,7 +353,7 @@ if(Python3_Interpreter_FOUND)
         VERBATIM)
 else()
     add_custom_target(doc
-        COMMAND ${CMAKE_COMMAND} -E echo "No Python 3 found: the documentation needs Python 3.9 or newer"
+        COMMAND ${CMAKE_COMMAND} -E echo "No Python 3.12 or newer found: generating the documentation needs it"
         COMMAND ${CMAKE_COMMAND} -E false
         VERBATIM)
 endif()

@@ -3,7 +3,7 @@
 
 doc/html/index.html sends a browser to the first of its languages that is built, English otherwise.
 
-Run it with any Python 3.9 or newer, from any directory:
+Run it with Python 3.12 or newer (Sphinx needs it), from any directory:
 
   python3 doc/tools/generate_html.py        (Linux, macOS)
   py doc\\tools\\generate_html.py             (Windows)
@@ -183,8 +183,8 @@ def generate():
 
 
 def main():
-    if sys.version_info < (3, 9):
-        sys.exit("The documentation needs Python 3.9 or newer.")
+    if sys.version_info < (3, 12):
+        sys.exit("Generating the documentation needs Python 3.12 or newer, which Sphinx requires.")
 
     if os.environ.get(INSIDE) != "1":
         import check_pages

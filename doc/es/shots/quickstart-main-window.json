@@ -1,0 +1,153 @@
+{
+    "scenarios": {
+        "stacked": [
+            {
+                "do": "layout",
+                "state": "AAAA/wAAAAD9AAAAAgAAAAAAAAEaAAAC0PwCAAAAAvwAAAAAAAAB4AAAANUA////+gAAAAABAAAAAvsAAAAQAGQAbwBjAGsATQBhAHAAcwEAAAAA/////wAAAH0A////+wAAAA4AZABvAGMAawBEAGUAbQEAAAAA/////wAAAH0A////+wAAAA4AZABvAGMAawBQAG8AaQEAAAHkAAAA7AAAAH0A////AAAAAQAAAWoAAALQ/AIAAAAE+wAAABoAZABvAGMAawBXAG8AcgBrAHMAcABhAGMAZQEAAAAAAAAAdgAAAH0A////+wAAABgAZABvAGMAawBEAGEAdABhAGIAYQBzAGUBAAAAegAAAKoAAAB9AP////sAAAAOAGQAbwBjAGsAUgB0AGUBAAABKAAAAQoAAAB9AP////sAAAAYAGQAbwBjAGsAUgBlAGEAbAB0AGkAbQBlAQAAAjYAAACaAAAAfQD///8AAAIkAAAC0AAAAAQAAAAEAAAACAAAAAj8AAAAAQAAAAIAAAABAAAADgB0AG8AbwBsAEIAYQByAQAAAAD/////AAAAAAAAAAA=",
+                "tab": 0
+            }
+        ]
+    },
+    "shots": [
+        {
+            "id": "quickstart-main-window/quickstart-main-window-first-start",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "id": "quickstart-main-window/quickstart-main-window-panel-resize",
+            "mark": [
+                {
+                    "between": [
+                        "dockMaps",
+                        "dockDem"
+                    ],
+                    "cursor": "resize",
+                    "part": "splitter",
+                    "root": "main",
+                    "shape": "cursor"
+                }
+            ],
+            "rect": [
+                0,
+                240,
+                285,
+                110
+            ],
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "id": "quickstart-main-window/quickstart-main-window-panel-move",
+            "mark": [
+                {
+                    "cursor": "hand",
+                    "name": "drag here",
+                    "part": "title",
+                    "root": "main",
+                    "shape": "cursor",
+                    "widget": "dockDatabase"
+                }
+            ],
+            "rect": [
+                832,
+                211,
+                294,
+                180
+            ],
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "id": "quickstart-main-window/quickstart-main-window-panel-buttons",
+            "mark": [
+                {
+                    "name": "close",
+                    "root": "main",
+                    "shape": "arrow",
+                    "tail": [
+                        45,
+                        -30
+                    ],
+                    "widget": "dockDatabase/QDockWidgetTitleButton#1"
+                },
+                {
+                    "name": "detach",
+                    "root": "main",
+                    "shape": "arrow",
+                    "tail": [
+                        45,
+                        30
+                    ],
+                    "widget": "dockDatabase/QDockWidgetTitleButton#0"
+                }
+            ],
+            "rect": [
+                828,
+                161,
+                300,
+                150
+            ],
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "id": "quickstart-main-window/quickstart-main-window-panel-stack",
+            "mark": [
+                {
+                    "cursor": "pointer",
+                    "name": "click to switch",
+                    "part": "tab",
+                    "root": "main",
+                    "shape": "cursor",
+                    "widget": "dockDem"
+                }
+            ],
+            "rect": [
+                0,
+                430,
+                290,
+                130
+            ],
+            "scenario": "stacked",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "id": "quickstart-main-window/quickstart-main-window-menu-window",
+            "widget": "menuWindow"
+        },
+        {
+            "id": "quickstart-main-window/quickstart-main-window-give-it-a-home",
+            "rect": [
+                604,
+                255,
+                200,
+                120
+            ],
+            "set": {
+                "tabWidget/QStackedWidget#0/CCanvas#0/QTextBrowser#1/qt_scrollarea_vcontainer/QScrollBar#0.value": 1590
+            },
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        }
+    ]
+}

@@ -1,0 +1,1732 @@
+{
+    "scenarios": {
+        "add-dialog": [
+            {
+                "do": "view",
+                "lat": 47.53,
+                "lon": 10.5606,
+                "zoom": 5
+            },
+            {
+                "at": [
+                    0.5,
+                    0.9
+                ],
+                "do": "menu",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "action": "actionAddDatabase",
+                "do": "trigger"
+            },
+            {
+                "do": "key",
+                "text": "Example",
+                "widget": "ISetupDatabase/lineName"
+            }
+        ],
+        "created": [
+            {
+                "do": "view",
+                "lat": 47.53,
+                "lon": 10.5606,
+                "zoom": 5
+            },
+            {
+                "at": [
+                    0.5,
+                    0.9
+                ],
+                "do": "menu",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "action": "actionAddDatabase",
+                "do": "trigger"
+            },
+            {
+                "do": "key",
+                "text": "Example",
+                "widget": "ISetupDatabase/lineName"
+            },
+            {
+                "do": "click",
+                "widget": "ISetupDatabase/toolNewDB"
+            },
+            {
+                "do": "key",
+                "enter": true,
+                "text": "Example.db",
+                "widget": "QFileDialog/fileNameEdit"
+            },
+            {
+                "do": "keypress",
+                "key": "Return",
+                "widget": "ISetupDatabase/lineName"
+            }
+        ],
+        "export-dialog": [
+            {
+                "do": "view",
+                "lat": 47.53,
+                "lon": 10.5606,
+                "zoom": 5
+            },
+            {
+                "at": [
+                    0.5,
+                    0.9
+                ],
+                "do": "menu",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "action": "actionAddDatabase",
+                "do": "trigger"
+            },
+            {
+                "do": "key",
+                "text": "Example",
+                "widget": "ISetupDatabase/lineName"
+            },
+            {
+                "do": "click",
+                "widget": "ISetupDatabase/toolNewDB"
+            },
+            {
+                "do": "key",
+                "enter": true,
+                "text": "Example.db",
+                "widget": "QFileDialog/fileNameEdit"
+            },
+            {
+                "do": "keypress",
+                "key": "Return",
+                "widget": "ISetupDatabase/lineName"
+            },
+            {
+                "do": "expand",
+                "row": "Example",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "do": "select",
+                "row": "Example",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "at": [
+                    0.1,
+                    0.5
+                ],
+                "do": "menu",
+                "row": "Example",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "action": "actionAddFolder",
+                "do": "trigger"
+            },
+            {
+                "do": "click",
+                "widget": "ISetupFolder/radioGroup"
+            },
+            {
+                "do": "key",
+                "enter": true,
+                "text": "Excursiones",
+                "widget": "ISetupFolder/lineName"
+            },
+            {
+                "do": "select",
+                "row": "Example/Excursiones",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "at": [
+                    0.1,
+                    0.5
+                ],
+                "do": "menu",
+                "row": "Example/Excursiones",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "action": "actionAddFolder",
+                "do": "trigger"
+            },
+            {
+                "do": "key",
+                "enter": true,
+                "text": "Excursión de montaña",
+                "widget": "ISetupFolder/lineName"
+            },
+            {
+                "do": "select",
+                "row": "Example/Excursiones/Excursión de montaña",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "at": [
+                    0.1,
+                    0.5
+                ],
+                "do": "menu",
+                "row": "Example/Excursiones/Excursión de montaña",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "action": "actionAddFolder",
+                "do": "trigger"
+            },
+            {
+                "do": "click",
+                "widget": "ISetupFolder/radioOther"
+            },
+            {
+                "do": "key",
+                "enter": true,
+                "text": "Planificación",
+                "widget": "ISetupFolder/lineName"
+            },
+            {
+                "do": "select",
+                "row": "Example/Excursiones",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "at": [
+                    0.1,
+                    0.5
+                ],
+                "do": "menu",
+                "row": "Example/Excursiones",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "action": "actionImport",
+                "do": "trigger"
+            },
+            {
+                "do": "key",
+                "enter": true,
+                "text": "Vilsalpsee.gpx",
+                "widget": "QFileDialog/fileNameEdit"
+            },
+            {
+                "do": "expand",
+                "row": "Example/Excursiones/Excursión de montaña",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "do": "select",
+                "row": "Example/Excursiones/Vilsalpsee",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "do": "select",
+                "row": "Example",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "at": [
+                    0.1,
+                    0.5
+                ],
+                "do": "menu",
+                "row": "Example",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "action": "actionExportToGpx",
+                "do": "trigger"
+            }
+        ],
+        "export-menu": [
+            {
+                "do": "view",
+                "lat": 47.53,
+                "lon": 10.5606,
+                "zoom": 5
+            },
+            {
+                "at": [
+                    0.5,
+                    0.9
+                ],
+                "do": "menu",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "action": "actionAddDatabase",
+                "do": "trigger"
+            },
+            {
+                "do": "key",
+                "text": "Example",
+                "widget": "ISetupDatabase/lineName"
+            },
+            {
+                "do": "click",
+                "widget": "ISetupDatabase/toolNewDB"
+            },
+            {
+                "do": "key",
+                "enter": true,
+                "text": "Example.db",
+                "widget": "QFileDialog/fileNameEdit"
+            },
+            {
+                "do": "keypress",
+                "key": "Return",
+                "widget": "ISetupDatabase/lineName"
+            },
+            {
+                "do": "expand",
+                "row": "Example",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "do": "select",
+                "row": "Example",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "at": [
+                    0.1,
+                    0.5
+                ],
+                "do": "menu",
+                "row": "Example",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "action": "actionAddFolder",
+                "do": "trigger"
+            },
+            {
+                "do": "click",
+                "widget": "ISetupFolder/radioGroup"
+            },
+            {
+                "do": "key",
+                "enter": true,
+                "text": "Excursiones",
+                "widget": "ISetupFolder/lineName"
+            },
+            {
+                "do": "select",
+                "row": "Example/Excursiones",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "at": [
+                    0.1,
+                    0.5
+                ],
+                "do": "menu",
+                "row": "Example/Excursiones",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "action": "actionAddFolder",
+                "do": "trigger"
+            },
+            {
+                "do": "key",
+                "enter": true,
+                "text": "Excursión de montaña",
+                "widget": "ISetupFolder/lineName"
+            },
+            {
+                "do": "select",
+                "row": "Example/Excursiones/Excursión de montaña",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "at": [
+                    0.1,
+                    0.5
+                ],
+                "do": "menu",
+                "row": "Example/Excursiones/Excursión de montaña",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "action": "actionAddFolder",
+                "do": "trigger"
+            },
+            {
+                "do": "click",
+                "widget": "ISetupFolder/radioOther"
+            },
+            {
+                "do": "key",
+                "enter": true,
+                "text": "Planificación",
+                "widget": "ISetupFolder/lineName"
+            },
+            {
+                "do": "select",
+                "row": "Example/Excursiones",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "at": [
+                    0.1,
+                    0.5
+                ],
+                "do": "menu",
+                "row": "Example/Excursiones",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "action": "actionImport",
+                "do": "trigger"
+            },
+            {
+                "do": "key",
+                "enter": true,
+                "text": "Vilsalpsee.gpx",
+                "widget": "QFileDialog/fileNameEdit"
+            },
+            {
+                "do": "expand",
+                "row": "Example/Excursiones/Excursión de montaña",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "do": "select",
+                "row": "Example/Excursiones/Vilsalpsee",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "do": "select",
+                "row": "Example",
+                "widget": "dockDatabase/treeDB"
+            }
+        ],
+        "exported": [
+            {
+                "do": "view",
+                "lat": 47.53,
+                "lon": 10.5606,
+                "zoom": 5
+            },
+            {
+                "at": [
+                    0.5,
+                    0.9
+                ],
+                "do": "menu",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "action": "actionAddDatabase",
+                "do": "trigger"
+            },
+            {
+                "do": "key",
+                "text": "Example",
+                "widget": "ISetupDatabase/lineName"
+            },
+            {
+                "do": "click",
+                "widget": "ISetupDatabase/toolNewDB"
+            },
+            {
+                "do": "key",
+                "enter": true,
+                "text": "Example.db",
+                "widget": "QFileDialog/fileNameEdit"
+            },
+            {
+                "do": "keypress",
+                "key": "Return",
+                "widget": "ISetupDatabase/lineName"
+            },
+            {
+                "do": "expand",
+                "row": "Example",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "do": "select",
+                "row": "Example",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "at": [
+                    0.1,
+                    0.5
+                ],
+                "do": "menu",
+                "row": "Example",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "action": "actionAddFolder",
+                "do": "trigger"
+            },
+            {
+                "do": "click",
+                "widget": "ISetupFolder/radioGroup"
+            },
+            {
+                "do": "key",
+                "enter": true,
+                "text": "Excursiones",
+                "widget": "ISetupFolder/lineName"
+            },
+            {
+                "do": "select",
+                "row": "Example/Excursiones",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "at": [
+                    0.1,
+                    0.5
+                ],
+                "do": "menu",
+                "row": "Example/Excursiones",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "action": "actionAddFolder",
+                "do": "trigger"
+            },
+            {
+                "do": "key",
+                "enter": true,
+                "text": "Excursión de montaña",
+                "widget": "ISetupFolder/lineName"
+            },
+            {
+                "do": "select",
+                "row": "Example/Excursiones/Excursión de montaña",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "at": [
+                    0.1,
+                    0.5
+                ],
+                "do": "menu",
+                "row": "Example/Excursiones/Excursión de montaña",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "action": "actionAddFolder",
+                "do": "trigger"
+            },
+            {
+                "do": "click",
+                "widget": "ISetupFolder/radioOther"
+            },
+            {
+                "do": "key",
+                "enter": true,
+                "text": "Planificación",
+                "widget": "ISetupFolder/lineName"
+            },
+            {
+                "do": "select",
+                "row": "Example/Excursiones",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "at": [
+                    0.1,
+                    0.5
+                ],
+                "do": "menu",
+                "row": "Example/Excursiones",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "action": "actionImport",
+                "do": "trigger"
+            },
+            {
+                "do": "key",
+                "enter": true,
+                "text": "Vilsalpsee.gpx",
+                "widget": "QFileDialog/fileNameEdit"
+            },
+            {
+                "do": "expand",
+                "row": "Example/Excursiones/Excursión de montaña",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "do": "select",
+                "row": "Example/Excursiones/Vilsalpsee",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "do": "select",
+                "row": "Example",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "at": [
+                    0.1,
+                    0.5
+                ],
+                "do": "menu",
+                "row": "Example",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "action": "actionExportToGpx",
+                "do": "trigger"
+            },
+            {
+                "do": "click",
+                "widget": "IExportDatabase/pushStart"
+            }
+        ],
+        "folder-dialog": [
+            {
+                "do": "view",
+                "lat": 47.53,
+                "lon": 10.5606,
+                "zoom": 5
+            },
+            {
+                "at": [
+                    0.5,
+                    0.9
+                ],
+                "do": "menu",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "action": "actionAddDatabase",
+                "do": "trigger"
+            },
+            {
+                "do": "key",
+                "text": "Example",
+                "widget": "ISetupDatabase/lineName"
+            },
+            {
+                "do": "click",
+                "widget": "ISetupDatabase/toolNewDB"
+            },
+            {
+                "do": "key",
+                "enter": true,
+                "text": "Example.db",
+                "widget": "QFileDialog/fileNameEdit"
+            },
+            {
+                "do": "keypress",
+                "key": "Return",
+                "widget": "ISetupDatabase/lineName"
+            },
+            {
+                "do": "expand",
+                "row": "Example",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "do": "select",
+                "row": "Example",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "at": [
+                    0.1,
+                    0.5
+                ],
+                "do": "menu",
+                "row": "Example",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "action": "actionAddFolder",
+                "do": "trigger"
+            },
+            {
+                "do": "click",
+                "widget": "ISetupFolder/radioGroup"
+            },
+            {
+                "do": "key",
+                "text": "Excursiones",
+                "widget": "ISetupFolder/lineName"
+            }
+        ],
+        "folder-group": [
+            {
+                "do": "view",
+                "lat": 47.53,
+                "lon": 10.5606,
+                "zoom": 5
+            },
+            {
+                "at": [
+                    0.5,
+                    0.9
+                ],
+                "do": "menu",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "action": "actionAddDatabase",
+                "do": "trigger"
+            },
+            {
+                "do": "key",
+                "text": "Example",
+                "widget": "ISetupDatabase/lineName"
+            },
+            {
+                "do": "click",
+                "widget": "ISetupDatabase/toolNewDB"
+            },
+            {
+                "do": "key",
+                "enter": true,
+                "text": "Example.db",
+                "widget": "QFileDialog/fileNameEdit"
+            },
+            {
+                "do": "keypress",
+                "key": "Return",
+                "widget": "ISetupDatabase/lineName"
+            },
+            {
+                "do": "expand",
+                "row": "Example",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "do": "select",
+                "row": "Example",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "at": [
+                    0.1,
+                    0.5
+                ],
+                "do": "menu",
+                "row": "Example",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "action": "actionAddFolder",
+                "do": "trigger"
+            },
+            {
+                "do": "click",
+                "widget": "ISetupFolder/radioGroup"
+            },
+            {
+                "do": "key",
+                "enter": true,
+                "text": "Excursiones",
+                "widget": "ISetupFolder/lineName"
+            },
+            {
+                "do": "select",
+                "row": "Example/Excursiones",
+                "widget": "dockDatabase/treeDB"
+            }
+        ],
+        "folder-menu": [
+            {
+                "do": "view",
+                "lat": 47.53,
+                "lon": 10.5606,
+                "zoom": 5
+            },
+            {
+                "at": [
+                    0.5,
+                    0.9
+                ],
+                "do": "menu",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "action": "actionAddDatabase",
+                "do": "trigger"
+            },
+            {
+                "do": "key",
+                "text": "Example",
+                "widget": "ISetupDatabase/lineName"
+            },
+            {
+                "do": "click",
+                "widget": "ISetupDatabase/toolNewDB"
+            },
+            {
+                "do": "key",
+                "enter": true,
+                "text": "Example.db",
+                "widget": "QFileDialog/fileNameEdit"
+            },
+            {
+                "do": "keypress",
+                "key": "Return",
+                "widget": "ISetupDatabase/lineName"
+            },
+            {
+                "do": "expand",
+                "row": "Example",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "do": "select",
+                "row": "Example",
+                "widget": "dockDatabase/treeDB"
+            }
+        ],
+        "folder-project": [
+            {
+                "do": "view",
+                "lat": 47.53,
+                "lon": 10.5606,
+                "zoom": 5
+            },
+            {
+                "at": [
+                    0.5,
+                    0.9
+                ],
+                "do": "menu",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "action": "actionAddDatabase",
+                "do": "trigger"
+            },
+            {
+                "do": "key",
+                "text": "Example",
+                "widget": "ISetupDatabase/lineName"
+            },
+            {
+                "do": "click",
+                "widget": "ISetupDatabase/toolNewDB"
+            },
+            {
+                "do": "key",
+                "enter": true,
+                "text": "Example.db",
+                "widget": "QFileDialog/fileNameEdit"
+            },
+            {
+                "do": "keypress",
+                "key": "Return",
+                "widget": "ISetupDatabase/lineName"
+            },
+            {
+                "do": "expand",
+                "row": "Example",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "do": "select",
+                "row": "Example",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "at": [
+                    0.1,
+                    0.5
+                ],
+                "do": "menu",
+                "row": "Example",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "action": "actionAddFolder",
+                "do": "trigger"
+            },
+            {
+                "do": "click",
+                "widget": "ISetupFolder/radioGroup"
+            },
+            {
+                "do": "key",
+                "enter": true,
+                "text": "Excursiones",
+                "widget": "ISetupFolder/lineName"
+            },
+            {
+                "do": "select",
+                "row": "Example/Excursiones",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "at": [
+                    0.1,
+                    0.5
+                ],
+                "do": "menu",
+                "row": "Example/Excursiones",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "action": "actionAddFolder",
+                "do": "trigger"
+            },
+            {
+                "do": "key",
+                "enter": true,
+                "text": "Excursión de montaña",
+                "widget": "ISetupFolder/lineName"
+            },
+            {
+                "do": "select",
+                "row": "Example/Excursiones/Excursión de montaña",
+                "widget": "dockDatabase/treeDB"
+            }
+        ],
+        "folders": [
+            {
+                "do": "view",
+                "lat": 47.53,
+                "lon": 10.5606,
+                "zoom": 5
+            },
+            {
+                "at": [
+                    0.5,
+                    0.9
+                ],
+                "do": "menu",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "action": "actionAddDatabase",
+                "do": "trigger"
+            },
+            {
+                "do": "key",
+                "text": "Example",
+                "widget": "ISetupDatabase/lineName"
+            },
+            {
+                "do": "click",
+                "widget": "ISetupDatabase/toolNewDB"
+            },
+            {
+                "do": "key",
+                "enter": true,
+                "text": "Example.db",
+                "widget": "QFileDialog/fileNameEdit"
+            },
+            {
+                "do": "keypress",
+                "key": "Return",
+                "widget": "ISetupDatabase/lineName"
+            },
+            {
+                "do": "expand",
+                "row": "Example",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "do": "select",
+                "row": "Example",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "at": [
+                    0.1,
+                    0.5
+                ],
+                "do": "menu",
+                "row": "Example",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "action": "actionAddFolder",
+                "do": "trigger"
+            },
+            {
+                "do": "click",
+                "widget": "ISetupFolder/radioGroup"
+            },
+            {
+                "do": "key",
+                "enter": true,
+                "text": "Excursiones",
+                "widget": "ISetupFolder/lineName"
+            },
+            {
+                "do": "select",
+                "row": "Example/Excursiones",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "at": [
+                    0.1,
+                    0.5
+                ],
+                "do": "menu",
+                "row": "Example/Excursiones",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "action": "actionAddFolder",
+                "do": "trigger"
+            },
+            {
+                "do": "key",
+                "enter": true,
+                "text": "Excursión de montaña",
+                "widget": "ISetupFolder/lineName"
+            },
+            {
+                "do": "select",
+                "row": "Example/Excursiones/Excursión de montaña",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "at": [
+                    0.1,
+                    0.5
+                ],
+                "do": "menu",
+                "row": "Example/Excursiones/Excursión de montaña",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "action": "actionAddFolder",
+                "do": "trigger"
+            },
+            {
+                "do": "click",
+                "widget": "ISetupFolder/radioOther"
+            },
+            {
+                "do": "key",
+                "enter": true,
+                "text": "Planificación",
+                "widget": "ISetupFolder/lineName"
+            },
+            {
+                "do": "select",
+                "row": "Example/Excursiones/Excursión de montaña/Planificación",
+                "widget": "dockDatabase/treeDB"
+            }
+        ],
+        "import-menu": [
+            {
+                "do": "view",
+                "lat": 47.53,
+                "lon": 10.5606,
+                "zoom": 5
+            },
+            {
+                "at": [
+                    0.5,
+                    0.9
+                ],
+                "do": "menu",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "action": "actionAddDatabase",
+                "do": "trigger"
+            },
+            {
+                "do": "key",
+                "text": "Example",
+                "widget": "ISetupDatabase/lineName"
+            },
+            {
+                "do": "click",
+                "widget": "ISetupDatabase/toolNewDB"
+            },
+            {
+                "do": "key",
+                "enter": true,
+                "text": "Example.db",
+                "widget": "QFileDialog/fileNameEdit"
+            },
+            {
+                "do": "keypress",
+                "key": "Return",
+                "widget": "ISetupDatabase/lineName"
+            },
+            {
+                "do": "expand",
+                "row": "Example",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "do": "select",
+                "row": "Example",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "at": [
+                    0.1,
+                    0.5
+                ],
+                "do": "menu",
+                "row": "Example",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "action": "actionAddFolder",
+                "do": "trigger"
+            },
+            {
+                "do": "click",
+                "widget": "ISetupFolder/radioGroup"
+            },
+            {
+                "do": "key",
+                "enter": true,
+                "text": "Excursiones",
+                "widget": "ISetupFolder/lineName"
+            },
+            {
+                "do": "select",
+                "row": "Example/Excursiones",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "at": [
+                    0.1,
+                    0.5
+                ],
+                "do": "menu",
+                "row": "Example/Excursiones",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "action": "actionAddFolder",
+                "do": "trigger"
+            },
+            {
+                "do": "key",
+                "enter": true,
+                "text": "Excursión de montaña",
+                "widget": "ISetupFolder/lineName"
+            },
+            {
+                "do": "select",
+                "row": "Example/Excursiones/Excursión de montaña",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "at": [
+                    0.1,
+                    0.5
+                ],
+                "do": "menu",
+                "row": "Example/Excursiones/Excursión de montaña",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "action": "actionAddFolder",
+                "do": "trigger"
+            },
+            {
+                "do": "click",
+                "widget": "ISetupFolder/radioOther"
+            },
+            {
+                "do": "key",
+                "enter": true,
+                "text": "Planificación",
+                "widget": "ISetupFolder/lineName"
+            },
+            {
+                "do": "select",
+                "row": "Example/Excursiones",
+                "widget": "dockDatabase/treeDB"
+            }
+        ],
+        "imported": [
+            {
+                "do": "view",
+                "lat": 47.53,
+                "lon": 10.5606,
+                "zoom": 5
+            },
+            {
+                "at": [
+                    0.5,
+                    0.9
+                ],
+                "do": "menu",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "action": "actionAddDatabase",
+                "do": "trigger"
+            },
+            {
+                "do": "key",
+                "text": "Example",
+                "widget": "ISetupDatabase/lineName"
+            },
+            {
+                "do": "click",
+                "widget": "ISetupDatabase/toolNewDB"
+            },
+            {
+                "do": "key",
+                "enter": true,
+                "text": "Example.db",
+                "widget": "QFileDialog/fileNameEdit"
+            },
+            {
+                "do": "keypress",
+                "key": "Return",
+                "widget": "ISetupDatabase/lineName"
+            },
+            {
+                "do": "expand",
+                "row": "Example",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "do": "select",
+                "row": "Example",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "at": [
+                    0.1,
+                    0.5
+                ],
+                "do": "menu",
+                "row": "Example",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "action": "actionAddFolder",
+                "do": "trigger"
+            },
+            {
+                "do": "click",
+                "widget": "ISetupFolder/radioGroup"
+            },
+            {
+                "do": "key",
+                "enter": true,
+                "text": "Excursiones",
+                "widget": "ISetupFolder/lineName"
+            },
+            {
+                "do": "select",
+                "row": "Example/Excursiones",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "at": [
+                    0.1,
+                    0.5
+                ],
+                "do": "menu",
+                "row": "Example/Excursiones",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "action": "actionAddFolder",
+                "do": "trigger"
+            },
+            {
+                "do": "key",
+                "enter": true,
+                "text": "Excursión de montaña",
+                "widget": "ISetupFolder/lineName"
+            },
+            {
+                "do": "select",
+                "row": "Example/Excursiones/Excursión de montaña",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "at": [
+                    0.1,
+                    0.5
+                ],
+                "do": "menu",
+                "row": "Example/Excursiones/Excursión de montaña",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "action": "actionAddFolder",
+                "do": "trigger"
+            },
+            {
+                "do": "click",
+                "widget": "ISetupFolder/radioOther"
+            },
+            {
+                "do": "key",
+                "enter": true,
+                "text": "Planificación",
+                "widget": "ISetupFolder/lineName"
+            },
+            {
+                "do": "select",
+                "row": "Example/Excursiones",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "at": [
+                    0.1,
+                    0.5
+                ],
+                "do": "menu",
+                "row": "Example/Excursiones",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "action": "actionImport",
+                "do": "trigger"
+            },
+            {
+                "do": "key",
+                "enter": true,
+                "text": "Vilsalpsee.gpx",
+                "widget": "QFileDialog/fileNameEdit"
+            },
+            {
+                "do": "expand",
+                "row": "Example/Excursiones/Excursión de montaña",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "do": "select",
+                "row": "Example/Excursiones/Vilsalpsee",
+                "widget": "dockDatabase/treeDB"
+            }
+        ],
+        "loaded": [
+            {
+                "do": "view",
+                "lat": 47.53,
+                "lon": 10.5606,
+                "zoom": 5
+            },
+            {
+                "at": [
+                    0.5,
+                    0.9
+                ],
+                "do": "menu",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "action": "actionAddDatabase",
+                "do": "trigger"
+            },
+            {
+                "do": "key",
+                "text": "Example",
+                "widget": "ISetupDatabase/lineName"
+            },
+            {
+                "do": "click",
+                "widget": "ISetupDatabase/toolNewDB"
+            },
+            {
+                "do": "key",
+                "enter": true,
+                "text": "Example.db",
+                "widget": "QFileDialog/fileNameEdit"
+            },
+            {
+                "do": "keypress",
+                "key": "Return",
+                "widget": "ISetupDatabase/lineName"
+            },
+            {
+                "do": "expand",
+                "row": "Example",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "do": "select",
+                "row": "Example",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "at": [
+                    0.1,
+                    0.5
+                ],
+                "do": "menu",
+                "row": "Example",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "action": "actionAddFolder",
+                "do": "trigger"
+            },
+            {
+                "do": "click",
+                "widget": "ISetupFolder/radioGroup"
+            },
+            {
+                "do": "key",
+                "enter": true,
+                "text": "Excursiones",
+                "widget": "ISetupFolder/lineName"
+            },
+            {
+                "do": "select",
+                "row": "Example/Excursiones",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "at": [
+                    0.1,
+                    0.5
+                ],
+                "do": "menu",
+                "row": "Example/Excursiones",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "action": "actionAddFolder",
+                "do": "trigger"
+            },
+            {
+                "do": "key",
+                "enter": true,
+                "text": "Excursión de montaña",
+                "widget": "ISetupFolder/lineName"
+            },
+            {
+                "do": "select",
+                "row": "Example/Excursiones/Excursión de montaña",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "at": [
+                    0.1,
+                    0.5
+                ],
+                "do": "menu",
+                "row": "Example/Excursiones/Excursión de montaña",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "action": "actionAddFolder",
+                "do": "trigger"
+            },
+            {
+                "do": "click",
+                "widget": "ISetupFolder/radioOther"
+            },
+            {
+                "do": "key",
+                "enter": true,
+                "text": "Planificación",
+                "widget": "ISetupFolder/lineName"
+            },
+            {
+                "do": "select",
+                "row": "Example/Excursiones",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "at": [
+                    0.1,
+                    0.5
+                ],
+                "do": "menu",
+                "row": "Example/Excursiones",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "action": "actionImport",
+                "do": "trigger"
+            },
+            {
+                "do": "key",
+                "enter": true,
+                "text": "Vilsalpsee.gpx",
+                "widget": "QFileDialog/fileNameEdit"
+            },
+            {
+                "do": "expand",
+                "row": "Example/Excursiones/Excursión de montaña",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "do": "select",
+                "row": "Example/Excursiones/Vilsalpsee",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "button": "checkState",
+                "do": "click",
+                "row": "Example/Excursiones/Vilsalpsee",
+                "widget": "dockDatabase/treeDB"
+            }
+        ],
+        "panel": [
+            {
+                "do": "view",
+                "lat": 47.53,
+                "lon": 10.5606,
+                "zoom": 5
+            }
+        ]
+    },
+    "shots": [
+        {
+            "active": "actionAddDatabase",
+            "id": "quickstart-database/quickstart-database-add-menu",
+            "open": {
+                "at": [
+                    0.5,
+                    0.9
+                ],
+                "do": "menu",
+                "widget": "dockDatabase/treeDB"
+            },
+            "scenario": "panel",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": "dockDatabase/treeDB/QMenu#0"
+        },
+        {
+            "id": "quickstart-database/quickstart-database-add-dialog",
+            "mark": [
+                {
+                    "root": "window",
+                    "shape": "frame",
+                    "widget": "toolNewDB"
+                }
+            ],
+            "rect": [
+                0,
+                0,
+                435,
+                90
+            ],
+            "scenario": "add-dialog",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "id": "quickstart-database/quickstart-database-panel",
+            "rect": [
+                0,
+                0,
+                266,
+                40
+            ],
+            "scenario": "created",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": "dockDatabase/treeDB"
+        },
+        {
+            "active": "actionAddFolder",
+            "id": "quickstart-database/quickstart-database-folder-menu",
+            "open": {
+                "at": [
+                    0.1,
+                    0.5
+                ],
+                "do": "menu",
+                "row": "Example",
+                "widget": "dockDatabase/treeDB"
+            },
+            "scenario": "folder-menu",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": "dockDatabase/treeDB/QMenu#3"
+        },
+        {
+            "id": "quickstart-database/quickstart-database-folder-dialog",
+            "scenario": "folder-dialog",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "id": "quickstart-database/quickstart-database-folders",
+            "rect": [
+                0,
+                0,
+                266,
+                165
+            ],
+            "scenario": "folders",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": "dockDatabase/treeDB"
+        },
+        {
+            "active": "actionImport",
+            "id": "quickstart-database/quickstart-database-import-menu",
+            "open": {
+                "at": [
+                    0.1,
+                    0.5
+                ],
+                "do": "menu",
+                "row": "Example/Excursiones",
+                "widget": "dockDatabase/treeDB"
+            },
+            "scenario": "import-menu",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": "dockDatabase/treeDB/QMenu#1"
+        },
+        {
+            "id": "quickstart-database/quickstart-database-imported",
+            "rect": [
+                0,
+                0,
+                266,
+                195
+            ],
+            "scenario": "imported",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": "dockDatabase/treeDB"
+        },
+        {
+            "id": "quickstart-database/quickstart-database-folder-group",
+            "rect": [
+                0,
+                0,
+                266,
+                100
+            ],
+            "scenario": "folder-group",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": "dockDatabase/treeDB"
+        },
+        {
+            "id": "quickstart-database/quickstart-database-folder-project",
+            "rect": [
+                0,
+                0,
+                266,
+                135
+            ],
+            "scenario": "folder-project",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": "dockDatabase/treeDB"
+        },
+        {
+            "active": "actionExportToGpx",
+            "id": "quickstart-database/quickstart-database-export-menu",
+            "open": {
+                "at": [
+                    0.1,
+                    0.5
+                ],
+                "do": "menu",
+                "row": "Example",
+                "widget": "dockDatabase/treeDB"
+            },
+            "scenario": "export-menu",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": "dockDatabase/treeDB/QMenu#3"
+        },
+        {
+            "id": "quickstart-database/quickstart-database-export-dialog",
+            "mark": [
+                {
+                    "root": "window",
+                    "shape": "frame",
+                    "widget": "toolPath"
+                }
+            ],
+            "rect": [
+                0,
+                0,
+                340,
+                62
+            ],
+            "scenario": "export-dialog",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "id": "quickstart-database/quickstart-database-exported",
+            "scenario": "exported",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "id": "quickstart-database/quickstart-database-loaded-db",
+            "mark": [
+                {
+                    "button": "checkState",
+                    "part": "button",
+                    "row": "0/1/1:0",
+                    "shape": "frame",
+                    "widget": "dockDatabase/treeDB"
+                }
+            ],
+            "rect": [
+                0,
+                0,
+                343,
+                195
+            ],
+            "scenario": "loaded",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": "dockDatabase/treeDB"
+        },
+        {
+            "id": "quickstart-database/quickstart-database-loaded-wks",
+            "scenario": "loaded",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": "dockWorkspace/treeWks"
+        }
+    ]
+}

@@ -1,0 +1,389 @@
+{
+    "scenarios": {
+        "changed": [
+            {
+                "do": "view",
+                "lat": 47.53,
+                "lon": 10.5606,
+                "zoom": 5
+            },
+            {
+                "button": "right",
+                "do": "click",
+                "lat": 47.52375,
+                "lon": 10.55796,
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0"
+            },
+            {
+                "action": "actionAddWpt",
+                "do": "trigger"
+            },
+            {
+                "do": "key",
+                "enter": true,
+                "text": "Mis waypoints",
+                "widget": "ISelectProjectDialog/lineEdit"
+            },
+            {
+                "do": "key",
+                "enter": true,
+                "text": "Punto de encuentro",
+                "widget": "IDetailsWpt/lineName"
+            },
+            {
+                "do": "keypress",
+                "key": "Esc",
+                "widget": "IDetailsWpt"
+            },
+            {
+                "do": "expand",
+                "row": "Mis waypoints",
+                "widget": "dockWorkspace/treeWks"
+            }
+        ],
+        "copied": [
+            {
+                "do": "view",
+                "lat": 47.53,
+                "lon": 10.5606,
+                "zoom": 5
+            },
+            {
+                "do": "select",
+                "row": "Example",
+                "widget": "dockWorkspace/treeWks"
+            },
+            {
+                "at": [
+                    0.3,
+                    0.5
+                ],
+                "do": "menu",
+                "row": "Example",
+                "widget": "dockWorkspace/treeWks"
+            },
+            {
+                "action": "actionCopyPrj",
+                "do": "trigger"
+            },
+            {
+                "do": "key",
+                "text": "Vuelta al lago",
+                "widget": "ISelectProjectDialog/lineEdit"
+            },
+            {
+                "do": "click",
+                "widget": "ISelectProjectDialog/radioDatabase"
+            },
+            {
+                "do": "keypress",
+                "key": "Return",
+                "widget": "ISelectProjectDialog/lineEdit"
+            },
+            {
+                "do": "expand",
+                "row": "0:0",
+                "widget": "ISelectDBFolder/treeWidget"
+            },
+            {
+                "do": "select",
+                "row": "0/0:0",
+                "widget": "ISelectDBFolder/treeWidget"
+            },
+            {
+                "do": "keypress",
+                "key": "Return",
+                "widget": "ISelectDBFolder/treeWidget"
+            },
+            {
+                "do": "keypress",
+                "key": "Return",
+                "widget": "ISetupFolder/lineName"
+            }
+        ],
+        "copied-db": [
+            {
+                "do": "view",
+                "lat": 47.53,
+                "lon": 10.5606,
+                "zoom": 5
+            },
+            {
+                "do": "select",
+                "row": "Example",
+                "widget": "dockWorkspace/treeWks"
+            },
+            {
+                "at": [
+                    0.3,
+                    0.5
+                ],
+                "do": "menu",
+                "row": "Example",
+                "widget": "dockWorkspace/treeWks"
+            },
+            {
+                "action": "actionCopyPrj",
+                "do": "trigger"
+            },
+            {
+                "do": "key",
+                "text": "Vuelta al lago",
+                "widget": "ISelectProjectDialog/lineEdit"
+            },
+            {
+                "do": "click",
+                "widget": "ISelectProjectDialog/radioDatabase"
+            },
+            {
+                "do": "keypress",
+                "key": "Return",
+                "widget": "ISelectProjectDialog/lineEdit"
+            },
+            {
+                "do": "expand",
+                "row": "0:0",
+                "widget": "ISelectDBFolder/treeWidget"
+            },
+            {
+                "do": "select",
+                "row": "0/0:0",
+                "widget": "ISelectDBFolder/treeWidget"
+            },
+            {
+                "do": "keypress",
+                "key": "Return",
+                "widget": "ISelectDBFolder/treeWidget"
+            },
+            {
+                "do": "keypress",
+                "key": "Return",
+                "widget": "ISetupFolder/lineName"
+            },
+            {
+                "do": "expand",
+                "row": "Example",
+                "widget": "dockDatabase/treeDB"
+            },
+            {
+                "do": "expand",
+                "row": "Example/Projects",
+                "widget": "dockDatabase/treeDB"
+            }
+        ],
+        "copy-dialog": [
+            {
+                "do": "view",
+                "lat": 47.53,
+                "lon": 10.5606,
+                "zoom": 5
+            },
+            {
+                "do": "select",
+                "row": "Example",
+                "widget": "dockWorkspace/treeWks"
+            },
+            {
+                "at": [
+                    0.3,
+                    0.5
+                ],
+                "do": "menu",
+                "row": "Example",
+                "widget": "dockWorkspace/treeWks"
+            },
+            {
+                "action": "actionCopyPrj",
+                "do": "trigger"
+            },
+            {
+                "do": "key",
+                "text": "Vuelta al lago",
+                "widget": "ISelectProjectDialog/lineEdit"
+            },
+            {
+                "do": "click",
+                "widget": "ISelectProjectDialog/radioDatabase"
+            }
+        ],
+        "copy-folder": [
+            {
+                "do": "view",
+                "lat": 47.53,
+                "lon": 10.5606,
+                "zoom": 5
+            },
+            {
+                "do": "select",
+                "row": "Example",
+                "widget": "dockWorkspace/treeWks"
+            },
+            {
+                "at": [
+                    0.3,
+                    0.5
+                ],
+                "do": "menu",
+                "row": "Example",
+                "widget": "dockWorkspace/treeWks"
+            },
+            {
+                "action": "actionCopyPrj",
+                "do": "trigger"
+            },
+            {
+                "do": "key",
+                "text": "Vuelta al lago",
+                "widget": "ISelectProjectDialog/lineEdit"
+            },
+            {
+                "do": "click",
+                "widget": "ISelectProjectDialog/radioDatabase"
+            },
+            {
+                "do": "keypress",
+                "key": "Return",
+                "widget": "ISelectProjectDialog/lineEdit"
+            },
+            {
+                "do": "expand",
+                "row": "0:0",
+                "widget": "ISelectDBFolder/treeWidget"
+            },
+            {
+                "do": "select",
+                "row": "0/0:0",
+                "widget": "ISelectDBFolder/treeWidget"
+            }
+        ],
+        "copy-menu": [
+            {
+                "do": "view",
+                "lat": 47.53,
+                "lon": 10.5606,
+                "zoom": 5
+            },
+            {
+                "do": "select",
+                "row": "Example",
+                "widget": "dockWorkspace/treeWks"
+            }
+        ]
+    },
+    "shots": [
+        {
+            "id": "quickstart-save/quickstart-save-changed",
+            "mark": [
+                {
+                    "button": "save",
+                    "part": "button",
+                    "root": "main",
+                    "row": "1:0",
+                    "shape": "frame",
+                    "widget": "dockWorkspace/treeWks"
+                }
+            ],
+            "rect": [
+                6,
+                106,
+                354,
+                102
+            ],
+            "scenario": "changed",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "active": "actionCopyPrj",
+            "id": "quickstart-save/quickstart-save-copy-menu",
+            "open": {
+                "at": [
+                    0.3,
+                    0.5
+                ],
+                "do": "menu",
+                "row": "Example",
+                "widget": "dockWorkspace/treeWks"
+            },
+            "scenario": "copy-menu",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": "dockWorkspace/treeWks/QMenu#0"
+        },
+        {
+            "id": "quickstart-save/quickstart-save-copy-dialog",
+            "mark": [
+                {
+                    "root": "window",
+                    "shape": "frame",
+                    "widget": "radioDatabase"
+                }
+            ],
+            "scenario": "copy-dialog",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "id": "quickstart-save/quickstart-save-copy-folder",
+            "rect": [
+                0,
+                0,
+                300,
+                110
+            ],
+            "scenario": "copy-folder",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "id": "quickstart-save/quickstart-save-copied",
+            "mark": [
+                {
+                    "button": "save",
+                    "part": "button",
+                    "row": "1:0",
+                    "shape": "frame",
+                    "widget": "dockWorkspace/treeWks"
+                }
+            ],
+            "rect": [
+                0,
+                0,
+                343,
+                70
+            ],
+            "scenario": "copied",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": "dockWorkspace/treeWks"
+        },
+        {
+            "id": "quickstart-save/quickstart-save-copied-db",
+            "rect": [
+                0,
+                0,
+                266,
+                160
+            ],
+            "scenario": "copied-db",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": "dockDatabase/treeDB"
+        }
+    ]
+}

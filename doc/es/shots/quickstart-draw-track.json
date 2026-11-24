@@ -1,0 +1,704 @@
+{
+    "scenarios": {
+        "draw-0": [
+            {
+                "do": "view",
+                "lat": 47.53,
+                "lon": 10.5606,
+                "zoom": 5
+            },
+            {
+                "button": "activate",
+                "do": "click",
+                "row": "OpenStreetMap",
+                "widget": "dockMaps/treeWidget"
+            },
+            {
+                "button": "right",
+                "do": "click",
+                "lat": 47.52375,
+                "lon": 10.55796,
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0"
+            },
+            {
+                "action": "actionAddTrk",
+                "do": "trigger"
+            },
+            {
+                "button": "left",
+                "do": "click",
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0/IScrOptEditLine/toolNoRoute"
+            },
+            {
+                "do": "move",
+                "lat": 47.5278,
+                "lon": 10.57514,
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0"
+            },
+            {
+                "do": "move",
+                "lat": 47.5284,
+                "lon": 10.57634,
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0"
+            },
+            {
+                "button": "left",
+                "do": "click",
+                "lat": 47.5284,
+                "lon": 10.57634,
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0"
+            }
+        ],
+        "draw-a": [
+            {
+                "do": "view",
+                "lat": 47.53,
+                "lon": 10.5606,
+                "zoom": 5
+            },
+            {
+                "button": "activate",
+                "do": "click",
+                "row": "OpenStreetMap",
+                "widget": "dockMaps/treeWidget"
+            },
+            {
+                "button": "right",
+                "do": "click",
+                "lat": 47.52375,
+                "lon": 10.55796,
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0"
+            },
+            {
+                "action": "actionAddTrk",
+                "do": "trigger"
+            },
+            {
+                "button": "left",
+                "do": "click",
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0/IScrOptEditLine/toolAutoRoute"
+            },
+            {
+                "do": "move",
+                "lat": 47.5278,
+                "lon": 10.57514,
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0"
+            },
+            {
+                "do": "move",
+                "lat": 47.5284,
+                "lon": 10.57634,
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0"
+            },
+            {
+                "button": "left",
+                "do": "click",
+                "lat": 47.5284,
+                "lon": 10.57634,
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0"
+            }
+        ],
+        "draw-t": [
+            {
+                "do": "view",
+                "lat": 47.53,
+                "lon": 10.5606,
+                "zoom": 5
+            },
+            {
+                "button": "activate",
+                "do": "click",
+                "row": "OpenStreetMap",
+                "widget": "dockMaps/treeWidget"
+            },
+            {
+                "button": "right",
+                "do": "click",
+                "lat": 47.52617,
+                "lon": 10.572774,
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0"
+            },
+            {
+                "action": "actionAddTrk",
+                "do": "trigger"
+            },
+            {
+                "button": "left",
+                "do": "click",
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0/IScrOptEditLine/toolTrackRoute"
+            },
+            {
+                "do": "move",
+                "lat": 47.524301,
+                "lon": 10.562801,
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0"
+            },
+            {
+                "do": "move",
+                "lat": 47.524301,
+                "lon": 10.562711,
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0"
+            },
+            {
+                "button": "left",
+                "do": "click",
+                "lat": 47.524301,
+                "lon": 10.562711,
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0"
+            }
+        ],
+        "menu": [
+            {
+                "do": "view",
+                "lat": 47.53,
+                "lon": 10.5606,
+                "zoom": 5
+            },
+            {
+                "button": "activate",
+                "do": "click",
+                "row": "OpenStreetMap",
+                "widget": "dockMaps/treeWidget"
+            },
+            {
+                "button": "right",
+                "do": "click",
+                "lat": 47.52375,
+                "lon": 10.55796,
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0"
+            }
+        ],
+        "name-typed": [
+            {
+                "do": "view",
+                "lat": 47.53,
+                "lon": 10.5606,
+                "zoom": 5
+            },
+            {
+                "button": "activate",
+                "do": "click",
+                "row": "OpenStreetMap",
+                "widget": "dockMaps/treeWidget"
+            },
+            {
+                "button": "right",
+                "do": "click",
+                "lat": 47.52375,
+                "lon": 10.55796,
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0"
+            },
+            {
+                "action": "actionAddTrk",
+                "do": "trigger"
+            },
+            {
+                "button": "left",
+                "do": "click",
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0/IScrOptEditLine/toolAutoRoute"
+            },
+            {
+                "do": "move",
+                "lat": 47.5278,
+                "lon": 10.57514,
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0"
+            },
+            {
+                "do": "move",
+                "lat": 47.5284,
+                "lon": 10.57634,
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0"
+            },
+            {
+                "button": "left",
+                "do": "click",
+                "lat": 47.5284,
+                "lon": 10.57634,
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0"
+            },
+            {
+                "button": "left",
+                "do": "click",
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0/IScrOptEditLine/pushSaveNew"
+            },
+            {
+                "do": "key",
+                "text": "Seebach",
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0/QInputDialog#0/QLineEdit#0"
+            }
+        ],
+        "project-typed": [
+            {
+                "do": "view",
+                "lat": 47.53,
+                "lon": 10.5606,
+                "zoom": 5
+            },
+            {
+                "button": "activate",
+                "do": "click",
+                "row": "OpenStreetMap",
+                "widget": "dockMaps/treeWidget"
+            },
+            {
+                "button": "right",
+                "do": "click",
+                "lat": 47.52375,
+                "lon": 10.55796,
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0"
+            },
+            {
+                "action": "actionAddTrk",
+                "do": "trigger"
+            },
+            {
+                "button": "left",
+                "do": "click",
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0/IScrOptEditLine/toolAutoRoute"
+            },
+            {
+                "do": "move",
+                "lat": 47.5278,
+                "lon": 10.57514,
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0"
+            },
+            {
+                "do": "move",
+                "lat": 47.5284,
+                "lon": 10.57634,
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0"
+            },
+            {
+                "button": "left",
+                "do": "click",
+                "lat": 47.5284,
+                "lon": 10.57634,
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0"
+            },
+            {
+                "button": "left",
+                "do": "click",
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0/IScrOptEditLine/pushSaveNew"
+            },
+            {
+                "do": "key",
+                "enter": true,
+                "text": "Seebach",
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0/QInputDialog#0/QLineEdit#0"
+            },
+            {
+                "do": "key",
+                "text": "Mis tracks",
+                "widget": "ISelectProjectDialog/lineEdit"
+            }
+        ],
+        "save": [
+            {
+                "do": "view",
+                "lat": 47.53,
+                "lon": 10.5606,
+                "zoom": 5
+            },
+            {
+                "button": "activate",
+                "do": "click",
+                "row": "OpenStreetMap",
+                "widget": "dockMaps/treeWidget"
+            },
+            {
+                "button": "right",
+                "do": "click",
+                "lat": 47.52375,
+                "lon": 10.55796,
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0"
+            },
+            {
+                "action": "actionAddTrk",
+                "do": "trigger"
+            },
+            {
+                "button": "left",
+                "do": "click",
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0/IScrOptEditLine/toolAutoRoute"
+            },
+            {
+                "do": "move",
+                "lat": 47.5278,
+                "lon": 10.57514,
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0"
+            },
+            {
+                "do": "move",
+                "lat": 47.5284,
+                "lon": 10.57634,
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0"
+            },
+            {
+                "button": "left",
+                "do": "click",
+                "lat": 47.5284,
+                "lon": 10.57634,
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0"
+            },
+            {
+                "button": "left",
+                "do": "click",
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0/IScrOptEditLine/pushSaveNew"
+            }
+        ],
+        "save-project": [
+            {
+                "do": "view",
+                "lat": 47.53,
+                "lon": 10.5606,
+                "zoom": 5
+            },
+            {
+                "button": "activate",
+                "do": "click",
+                "row": "OpenStreetMap",
+                "widget": "dockMaps/treeWidget"
+            },
+            {
+                "button": "right",
+                "do": "click",
+                "lat": 47.52375,
+                "lon": 10.55796,
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0"
+            },
+            {
+                "action": "actionAddTrk",
+                "do": "trigger"
+            },
+            {
+                "button": "left",
+                "do": "click",
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0/IScrOptEditLine/toolAutoRoute"
+            },
+            {
+                "do": "move",
+                "lat": 47.5278,
+                "lon": 10.57514,
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0"
+            },
+            {
+                "do": "move",
+                "lat": 47.5284,
+                "lon": 10.57634,
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0"
+            },
+            {
+                "button": "left",
+                "do": "click",
+                "lat": 47.5284,
+                "lon": 10.57634,
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0"
+            },
+            {
+                "button": "left",
+                "do": "click",
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0/IScrOptEditLine/pushSaveNew"
+            },
+            {
+                "do": "key",
+                "enter": true,
+                "text": "Seebach",
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0/QInputDialog#0/QLineEdit#0"
+            }
+        ],
+        "saved": [
+            {
+                "do": "view",
+                "lat": 47.53,
+                "lon": 10.5606,
+                "zoom": 5
+            },
+            {
+                "button": "activate",
+                "do": "click",
+                "row": "OpenStreetMap",
+                "widget": "dockMaps/treeWidget"
+            },
+            {
+                "button": "right",
+                "do": "click",
+                "lat": 47.52375,
+                "lon": 10.55796,
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0"
+            },
+            {
+                "action": "actionAddTrk",
+                "do": "trigger"
+            },
+            {
+                "button": "left",
+                "do": "click",
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0/IScrOptEditLine/toolAutoRoute"
+            },
+            {
+                "do": "move",
+                "lat": 47.5278,
+                "lon": 10.57514,
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0"
+            },
+            {
+                "do": "move",
+                "lat": 47.5284,
+                "lon": 10.57634,
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0"
+            },
+            {
+                "button": "left",
+                "do": "click",
+                "lat": 47.5284,
+                "lon": 10.57634,
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0"
+            },
+            {
+                "button": "left",
+                "do": "click",
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0/IScrOptEditLine/pushSaveNew"
+            },
+            {
+                "do": "key",
+                "enter": true,
+                "text": "Seebach",
+                "widget": "tabWidget/QStackedWidget#0/CCanvas#0/QInputDialog#0/QLineEdit#0"
+            },
+            {
+                "do": "key",
+                "enter": true,
+                "text": "Mis tracks",
+                "widget": "ISelectProjectDialog/lineEdit"
+            },
+            {
+                "do": "expand",
+                "row": "Mis tracks",
+                "widget": "dockWorkspace/treeWks"
+            }
+        ]
+    },
+    "shots": [
+        {
+            "active": "actionAddTrk",
+            "id": "quickstart-draw-track/quickstart-draw-track-add-track",
+            "scenario": "menu",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "id": "quickstart-draw-track/quickstart-draw-track-drawing",
+            "rect": [
+                650,
+                440,
+                545,
+                230
+            ],
+            "scenario": "draw-0",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "id": "quickstart-draw-track/quickstart-draw-track-edit-bar",
+            "mark": [
+                {
+                    "root": "main",
+                    "shape": "frame",
+                    "widget": "tabWidget/QStackedWidget#0/CCanvas#0/IScrOptEditLine/pushSaveNew"
+                },
+                {
+                    "root": "main",
+                    "shape": "frame",
+                    "widget": "tabWidget/QStackedWidget#0/CCanvas#0/IScrOptEditLine/pushAbort"
+                }
+            ],
+            "rect": [
+                372,
+                96,
+                692,
+                36
+            ],
+            "scenario": "draw-0",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "id": "quickstart-draw-track/quickstart-draw-track-mode-a",
+            "mark": [
+                {
+                    "root": "main",
+                    "shape": "frame",
+                    "widget": "tabWidget/QStackedWidget#0/CCanvas#0/IScrOptEditLine/toolAutoRoute"
+                }
+            ],
+            "rect": [
+                756,
+                96,
+                124,
+                36
+            ],
+            "scenario": "draw-a",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "id": "quickstart-draw-track/quickstart-draw-track-routed",
+            "rect": [
+                650,
+                440,
+                545,
+                230
+            ],
+            "scenario": "draw-a",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "id": "quickstart-draw-track/quickstart-draw-track-mode-t",
+            "mark": [
+                {
+                    "root": "main",
+                    "shape": "frame",
+                    "widget": "tabWidget/QStackedWidget#0/CCanvas#0/IScrOptEditLine/toolTrackRoute"
+                }
+            ],
+            "rect": [
+                756,
+                96,
+                124,
+                36
+            ],
+            "scenario": "draw-t",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "id": "quickstart-draw-track/quickstart-draw-track-along-track",
+            "rect": [
+                740,
+                490,
+                360,
+                180
+            ],
+            "scenario": "draw-t",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "id": "quickstart-draw-track/quickstart-draw-track-name",
+            "scenario": "name-typed",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "id": "quickstart-draw-track/quickstart-draw-track-project",
+            "mark": [
+                {
+                    "root": "window",
+                    "shape": "frame",
+                    "widget": "frameType"
+                }
+            ],
+            "scenario": "project-typed",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "id": "quickstart-draw-track/quickstart-draw-track-saved",
+            "mark": [
+                {
+                    "button": "save",
+                    "part": "button",
+                    "root": "main",
+                    "row": "1:0",
+                    "shape": "frame",
+                    "widget": "dockWorkspace/treeWks"
+                }
+            ],
+            "rect": [
+                6,
+                106,
+                354,
+                102
+            ],
+            "scenario": "saved",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "id": "quickstart-draw-track/quickstart-draw-track-metrics",
+            "rect": [
+                377,
+                132,
+                322,
+                110
+            ],
+            "scenario": "draw-a",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "id": "quickstart-draw-track/quickstart-draw-track-point-tools",
+            "rect": [
+                624,
+                96,
+                130,
+                36
+            ],
+            "scenario": "draw-0",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "id": "quickstart-draw-track/quickstart-draw-track-undo-redo",
+            "rect": [
+                966,
+                96,
+                76,
+                36
+            ],
+            "scenario": "draw-0",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        }
+    ]
+}

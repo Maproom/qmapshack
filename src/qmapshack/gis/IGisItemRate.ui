@@ -136,7 +136,7 @@
    <item>
     <widget class="QLabel" name="keywordLabel">
      <property name="text">
-      <string>Separate keywords by colons:</string>
+      <string>Separate keywords by commas:</string>
      </property>
     </widget>
    </item>

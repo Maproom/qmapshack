@@ -15730,8 +15730,8 @@ zoom-out for use of the DEM data.</source>
     <message>
         <location filename="../gis/IGisItemRate.ui" line="139"/>
         <location filename="../../../build/src/qmapshack/ui_IGisItemRate.h" line="149"/>
-        <source>Separate keywords by colons:</source>
-        <translation>Mots-clés séparés par deux points:</translation>
+        <source>Separate keywords by commas:</source>
+        <translation type="unfinished">Mots-clés séparés par des virgules:</translation>
     </message>
 </context>
 <context>

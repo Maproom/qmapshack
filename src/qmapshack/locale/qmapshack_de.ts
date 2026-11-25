@@ -15974,7 +15974,7 @@ nach der Höhe.</translation>
     <message>
         <location filename="../gis/IGisItemRate.ui" line="139"/>
         <location filename="../../../build/src/qmapshack/ui_IGisItemRate.h" line="149"/>
-        <source>Separate keywords by colons:</source>
+        <source>Separate keywords by commas:</source>
         <translation>Schlagworte mit Komma trennen:</translation>
     </message>
 </context>

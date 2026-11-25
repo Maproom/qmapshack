@@ -2338,7 +2338,16 @@ void CMapIMG::drawText(BLContext& ctx) {
   for (const textpath_t& textpath : std::as_const(textpaths)) {
     const QFont& font = textpath.font;
     const QFontMetricsF fm(font);
-    const qreal width = fm.horizontalAdvance(textpath.text);
+    // Letters are set one by one, so the label is as wide as their advances add up to, which can be more than
+    // the advance of the whole text.
+    const QString& text = textpath.text;
+    QVector<qreal> advances;
+    advances.reserve(text.size());
+    qreal width = 0;
+    for (const QChar& c : text) {
+      advances << fm.horizontalAdvance(c);
+      width += advances.last();
+    }
 
     // The label goes on the line's longest stretch without a sharp bend, or not at all.
     QPolygonF stretch;
@@ -2365,7 +2374,6 @@ void CMapIMG::drawText(BLContext& ctx) {
 
     // Read left to right; within kLabelVertical of vertical the label keeps the direction of its line. The label is
     // centred, so reversing keeps its place.
-    const QString& text = textpath.text;
     QPointF point1 = path.pointAtPercent(offset / length);
     QPointF point2 = path.pointAtPercent((offset + width) / length);
     const qreal dx = point2.x() - point1.x();
@@ -2389,7 +2397,7 @@ void CMapIMG::drawText(BLContext& ctx) {
 
     for (int i = 0; i < size; ++i) {
       // percent1 = percent2;
-      percent2 = (offset + fm.size(Qt::TextSingleLine, text[i]).width()) / length;
+      percent2 = (offset + advances[i]) / length;
 
       point1 = point2;
       point2 = path.pointAtPercent(percent2);
@@ -2409,7 +2417,7 @@ void CMapIMG::drawText(BLContext& ctx) {
 
       ctx.restore();
 
-      offset += fm.size(Qt::TextSingleLine, text[i]).width();
+      offset += advances[i];
     }
   }
 }

@@ -477,7 +477,6 @@ class CMapIMG : public IMap {
     QPolygonF polyline;
     QString text;
     QFont font;
-    QVector<qreal> lengths;
     qint32 lineWidth;
     QColor color;
   };

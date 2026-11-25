@@ -7,7 +7,7 @@
 
 ![QMapShack main window](https://github.com/Maproom/qmapshack/wiki/images/maproom1.png)
 
-> **Documentation:** [QMapShack manual](https://maproom.github.io/qmapshack/) (English, German), also in QMapShack's help (F1). What it does not cover yet is in the [QMapShack Wiki](https://github.com/Maproom/qmapshack/wiki/DocMain).
+> **Documentation:** [QMapShack manual](https://maproom.github.io/qmapshack/) (English, German, Spanish, Italian), also in QMapShack's help (F1). What it does not cover yet is in the [QMapShack Wiki](https://github.com/Maproom/qmapshack/wiki/DocMain).
 
 ---
 
@@ -126,7 +126,7 @@ Windows builds use MSVC 2022 (64-bit). Build scripts are in the `msvc_64/` direc
 
 ## Getting Started
 
-After installation, follow the [Quick Start](https://maproom.github.io/qmapshack/en/pages/quickstart.html) in the manual to set up maps, elevation data, and routing, then load your first GPX file. It is also available in [German](https://maproom.github.io/qmapshack/de/pages/quickstart.html).
+After installation, follow the [Quick Start](https://maproom.github.io/qmapshack/en/pages/quickstart.html) in the manual to set up maps, elevation data, and routing, then load your first GPX file. It is also available in [German](https://maproom.github.io/qmapshack/de/pages/quickstart.html), [Spanish](https://maproom.github.io/qmapshack/es/pages/quickstart.html) and [Italian](https://maproom.github.io/qmapshack/it/pages/quickstart.html).
 
 ---
 

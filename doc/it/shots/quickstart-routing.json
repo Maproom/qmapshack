@@ -1,0 +1,77 @@
+{
+    "scenarios": {
+        "routing": [
+            {
+                "do": "view",
+                "lat": 47.51,
+                "lon": 10.56,
+                "zoom": 7
+            },
+            {
+                "button": "activate",
+                "do": "click",
+                "row": "OpenStreetMap",
+                "widget": "dockMaps/treeWidget"
+            }
+        ]
+    },
+    "shots": [
+        {
+            "id": "quickstart-routing/quickstart-routing-brouter-setup",
+            "mark": [
+                {
+                    "root": "main",
+                    "shape": "frame",
+                    "widget": "dockRte/comboRouter"
+                },
+                {
+                    "root": "main",
+                    "shape": "frame",
+                    "widget": "dockRte/IRouterBRouter/toolSetup"
+                }
+            ],
+            "rect": [
+                5,
+                53,
+                265,
+                126
+            ],
+            "scenario": "routing",
+            "set": {
+                "comboRouter.currentIndex": 1
+            },
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "id": "quickstart-routing/quickstart-routing-routino-select",
+            "mark": [
+                {
+                    "root": "main",
+                    "shape": "frame",
+                    "widget": "dockRte/IRouterRoutino/comboDatabase"
+                },
+                {
+                    "root": "main",
+                    "shape": "frame",
+                    "widget": "dockRte/IRouterRoutino/comboProfile"
+                }
+            ],
+            "rect": [
+                14,
+                62,
+                252,
+                176
+            ],
+            "scenario": "routing",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        }
+    ]
+}

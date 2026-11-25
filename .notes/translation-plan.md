@@ -66,6 +66,14 @@ grabaciones, My tracks → Mis tracks, My waypoints → Mis waypoints, Meeting p
 al lago. The Spanish docks and edit bar are wider than the German ones: 19 shots have their own `rect`, the welcome
 page its own scroll value.
 
+**Italian: steps 1 to 4 done** (`QMS-1337`). Catalogs complete; the pages in `doc/it/`, 89 images, `doc/it/translation.json`.
+Example names: Tours → Escursioni, Alpine tour → Escursione alpina, Planning → Pianificazione, My recordings → Le mie
+registrazioni, My tracks → Le mie tracce, My waypoints → I miei waypoint, Meeting point → Punto d'incontro, Lake tour →
+Giro del lago. The left docks are 19 px narrower than the English ones, the edit bar wider: 46 shots have their own
+`rect`, `quickstart-save-copied` widens the workspace tree (`"set": {"minimumWidth": 290}`), the welcome page scrolls to
+1047. Labels shortened to fit: Ombreggiatura, Ombr. pendenza, Percorso cache, Dim. cache (MB), Zone di rilascio, DEM
+(dock title).
+
 ## Open
 
 - `check_pages.py` checks every language; outside English it skips sentence case and the "Words" list. German

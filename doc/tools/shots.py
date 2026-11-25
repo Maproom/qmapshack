@@ -40,7 +40,7 @@ FONT_SIZE = "10"
 COLOR_SCHEME = "light"
 # The documentation's languages and the system locale each is rendered in. --locale drives Qt's catalogs and
 # QLocale, the environment everything else; the application takes the language from --locale as well.
-LANGUAGES = {"en": "en_US.UTF-8", "de": "de_DE.UTF-8", "es": "es_ES.UTF-8"}
+LANGUAGES = {"en": "en_US.UTF-8", "de": "de_DE.UTF-8", "es": "es_ES.UTF-8", "it": "it_IT.UTF-8"}
 LOCALE = "en"
 SYSTEM_LOCALE = LANGUAGES[LOCALE]
 SCALING_VARIABLES = ("QT_SCALE_FACTOR", "QT_SCALE_FACTOR_ROUNDING_POLICY", "QT_SCREEN_SCALE_FACTORS",

@@ -1,0 +1,212 @@
+{
+    "scenarios": {
+        "both-on": [
+            {
+                "button": "activate",
+                "do": "click",
+                "row": "OpenStreetMap",
+                "widget": "dockMaps/treeWidget"
+            },
+            {
+                "button": "activate",
+                "do": "click",
+                "row": "OSM Topo",
+                "widget": "dockMaps/treeWidget"
+            }
+        ],
+        "osm-on": [
+            {
+                "button": "activate",
+                "do": "click",
+                "row": "OpenStreetMap",
+                "widget": "dockMaps/treeWidget"
+            }
+        ],
+        "topo-half": [
+            {
+                "button": "activate",
+                "do": "click",
+                "row": "OpenStreetMap",
+                "widget": "dockMaps/treeWidget"
+            },
+            {
+                "button": "activate",
+                "do": "click",
+                "row": "OSM Topo",
+                "widget": "dockMaps/treeWidget"
+            },
+            {
+                "do": "expand",
+                "row": "OSM Topo",
+                "widget": "dockMaps/treeWidget"
+            },
+            {
+                "do": "set",
+                "property": "value",
+                "value": 50,
+                "widget": "dockMaps/treeWidget/QWidget#0/CMapPropSetup#1/sliderOpacity"
+            }
+        ],
+        "topo-up": [
+            {
+                "button": "activate",
+                "do": "click",
+                "row": "OpenStreetMap",
+                "widget": "dockMaps/treeWidget"
+            },
+            {
+                "button": "activate",
+                "do": "click",
+                "row": "OSM Topo",
+                "widget": "dockMaps/treeWidget"
+            },
+            {
+                "do": "select",
+                "row": "OSM Topo",
+                "widget": "dockMaps/treeWidget"
+            },
+            {
+                "do": "keypress",
+                "key": "Up",
+                "mods": [
+                    "shift"
+                ],
+                "widget": "dockMaps/treeWidget"
+            }
+        ]
+    },
+    "shots": [
+        {
+            "exposure": "MapPathSetup",
+            "id": "quickstart-maps/quickstart-maps-map-path-setup",
+            "mark": [
+                {
+                    "root": "window",
+                    "shape": "frame",
+                    "widget": "pushMapHonk"
+                }
+            ],
+            "rect": [
+                0,
+                268,
+                561,
+                140
+            ]
+        },
+        {
+            "id": "quickstart-maps/quickstart-maps-maps-panel",
+            "rect": [
+                16,
+                84,
+                323,
+                212
+            ],
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "id": "quickstart-maps/quickstart-maps-osm-button",
+            "mark": [
+                {
+                    "button": "activate",
+                    "cursor": "pointer",
+                    "part": "button",
+                    "root": "main",
+                    "row": "1:0",
+                    "shape": "cursor",
+                    "widget": "dockMaps/treeWidget"
+                }
+            ],
+            "rect": [
+                16,
+                84,
+                323,
+                112
+            ],
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "id": "quickstart-maps/quickstart-maps-osm-on",
+            "rect": [
+                0,
+                56,
+                700,
+                250
+            ],
+            "scenario": "osm-on",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "id": "quickstart-maps/quickstart-maps-both-on",
+            "rect": [
+                0,
+                56,
+                700,
+                250
+            ],
+            "scenario": "both-on",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "id": "quickstart-maps/quickstart-maps-topo-up",
+            "rect": [
+                0,
+                56,
+                700,
+                250
+            ],
+            "scenario": "topo-up",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "id": "quickstart-maps/quickstart-maps-topo-half",
+            "mark": [
+                {
+                    "part": "branch",
+                    "root": "main",
+                    "row": "2:0",
+                    "shape": "disc",
+                    "widget": "dockMaps/treeWidget"
+                },
+                {
+                    "cursor": "hand",
+                    "part": "handle",
+                    "root": "main",
+                    "shape": "cursor",
+                    "widget": "dockMaps/treeWidget/QWidget#0/CMapPropSetup#1/sliderOpacity"
+                }
+            ],
+            "rect": [
+                0,
+                56,
+                700,
+                250
+            ],
+            "scenario": "topo-half",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        }
+    ]
+}

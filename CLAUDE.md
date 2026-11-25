@@ -44,6 +44,8 @@ src/
 - **Run it before reporting it.** Verify headlessly with `doc/tools/shots.py` (`-o <scratch> replay`,
   `selftest`), read the images and the JSON/INI written. Name the command that showed it, or say
   nothing was run and what would settle it.
+- **Garmin's own rendering is the reference for IMG maps**: BaseCamp under Wine, set up in `~/wine/basecamp`;
+  how to run and rebuild it: `.notes/basecamp-wine.md`.
 - **Syntax-check changed files**: `.notes/syntax-check.sh <file.cpp>...` (each file's command from
   `ninja -t compdb` with `-fsyntax-only`; a header is checked through a `.cpp`). Catches shadowing and stale identifiers; not
   moc, AUTOUIC, linking, or anything inside `#if defined(Q_OS_WIN32)`.

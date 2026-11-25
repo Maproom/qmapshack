@@ -1914,123 +1914,140 @@ void CMapIMG::drawPolylines(BLContext& ctx, polytype_t& lines, const QPointF& sc
     dict[lines[i].type].push_back(i);
   }
 
-  QMap<quint32, CGarminTyp::polyline_property>::iterator props = polylineProperties.begin();
-  QMap<quint32, CGarminTyp::polyline_property>::iterator end = polylineProperties.end();
-  for (; props != end; ++props) {
-    const quint32& type = props.key();
-    const CGarminTyp::polyline_property& property = props.value();
-
-    const auto it = dict.constFind(type);
-    if (it == dict.constEnd()) {
-      continue;
-    }
-    const QList<quint32>& indices = *it;
-
-    if (property.hasPixmap) {
-      const BLImage& pixmap = night ? property.imgNight : property.imgDay;
-      const qreal h = pixmap.height();
-
-      for (quint32 idx : indices) {
-        CGarminPolygon& item = lines[idx];
-        QPolygonF& poly = item.pixel;
-        const int size = poly.size();
-
-        if (size < 2) {
-          continue;
-        }
-
-        map->convertRad2Px(poly);
-
-        lengths.resize(0);
-        lengths.reserve(size);
-
-        qreal u1 = poly[0].x();
-        qreal v1 = poly[0].y();
-        for (int i = 1; i < size; ++i) {
-          qreal u2 = poly[i].x();
-          qreal v2 = poly[i].y();
-
-          qreal segLength = qSqrt((u2 - u1) * (u2 - u1) + (v2 - v1) * (v2 - v1));
-          lengths << segLength;
-
-          u1 = u2;
-          v1 = v2;
-        }
-
-        if (scale.x() < kStreetNameThreshold && property.labelType != CGarminTyp::eNone) {
-          QFont f(font);
-          switch (property.labelType) {
-            case CGarminTyp::eSmall:
-              f.setPointSize(font.pointSize() - 2);
-              break;
-            case CGarminTyp::eLarge:
-              f.setPointSize(font.pointSize() + 2);
-              break;
-            default:;
-          }
-
-          collectText(item, poly, f, h, night ? property.colorLabelNight : property.colorLabelDay);
-        }
-
-        // Lay the pixmap along each straight segment of the polyline. The arc-length
-        // breakpoints used to coincide with the polyline vertices, so we can index
-        // the vertices directly instead of re-walking a QPainterPath.
-        for (int i = 0; i + 1 < size; ++i) {
-          const qreal segLength = lengths.at(i);
-          if (segLength < 1.0) {
-            continue;
-          }
-
-          const QPointF& p1 = poly[i];
-          const QPointF& p2 = poly[i + 1];
-          const double angle = std::atan2(p2.y() - p1.y(), p2.x() - p1.x());
-
-          const BLImage seg = img2line(pixmap, static_cast<int>(segLength));
-          if (seg.is_empty()) {
-            continue;
-          }
-
-          ctx.save();
-          ctx.translate(p1.x(), p1.y());
-          ctx.rotate(angle);
-          ctx.blit_image(BLPoint(0.0, -h / 2.0), seg);
-          ctx.restore();
-        }
+  auto drawTypes = [&](const QList<quint32>& types) {
+    for (quint32 type : types) {
+      const auto prop = polylineProperties.constFind(type);
+      if (prop == polylineProperties.constEnd()) {
+        continue;
       }
-    } else {
-      // First run: the background (border) line for bordered types, otherwise the
-      // line itself. Either way the labels are collected here.
-      const QPen& pen = property.hasBorder ? (night ? property.penBorderNight : property.penBorderDay)
-                                           : (night ? property.penLineNight : property.penLineDay);
-      const bool stroke = applyPen(ctx, pen);
-      const int lineWidth = pen.width();
+      const CGarminTyp::polyline_property& property = *prop;
 
-      for (quint32 idx : indices) {
-        drawLine(ctx, lines[idx], stroke, lineWidth, property, font, scale);
+      const auto it = dict.constFind(type);
+      if (it == dict.constEnd()) {
+        continue;
       }
-    }
-  }
+      const QList<quint32>& indices = *it;
 
-  // 2nd run to draw the foreground lines over their borders.
-  for (props = polylineProperties.begin(); props != end; ++props) {
-    const quint32& type = props.key();
-    const CGarminTyp::polyline_property& property = props.value();
+      if (property.hasPixmap) {
+        const BLImage& pixmap = night ? property.imgNight : property.imgDay;
+        const qreal h = pixmap.height();
 
-    const auto it = dict.constFind(type);
-    if (it == dict.constEnd()) {
-      continue;
-    }
-    const QList<quint32>& indices = *it;
-
-    if (property.hasBorder && !property.hasPixmap) {
-      const QPen& pen = night ? property.penLineNight : property.penLineDay;
-      if (applyPen(ctx, pen)) {
         for (quint32 idx : indices) {
-          drawLine(ctx, lines[idx]);
+          CGarminPolygon& item = lines[idx];
+          QPolygonF& poly = item.pixel;
+          const int size = poly.size();
+
+          if (size < 2) {
+            continue;
+          }
+
+          map->convertRad2Px(poly);
+
+          lengths.resize(0);
+          lengths.reserve(size);
+
+          qreal u1 = poly[0].x();
+          qreal v1 = poly[0].y();
+          for (int i = 1; i < size; ++i) {
+            qreal u2 = poly[i].x();
+            qreal v2 = poly[i].y();
+
+            qreal segLength = qSqrt((u2 - u1) * (u2 - u1) + (v2 - v1) * (v2 - v1));
+            lengths << segLength;
+
+            u1 = u2;
+            v1 = v2;
+          }
+
+          if (scale.x() < kStreetNameThreshold && property.labelType != CGarminTyp::eNone) {
+            QFont f(font);
+            switch (property.labelType) {
+              case CGarminTyp::eSmall:
+                f.setPointSize(font.pointSize() - 2);
+                break;
+              case CGarminTyp::eLarge:
+                f.setPointSize(font.pointSize() + 2);
+                break;
+              default:;
+            }
+
+            collectText(item, poly, f, h, night ? property.colorLabelNight : property.colorLabelDay);
+          }
+
+          // Lay the pixmap along each straight segment of the polyline. The arc-length
+          // breakpoints used to coincide with the polyline vertices, so we can index
+          // the vertices directly instead of re-walking a QPainterPath.
+          for (int i = 0; i + 1 < size; ++i) {
+            const qreal segLength = lengths.at(i);
+            if (segLength < 1.0) {
+              continue;
+            }
+
+            const QPointF& p1 = poly[i];
+            const QPointF& p2 = poly[i + 1];
+            const double angle = std::atan2(p2.y() - p1.y(), p2.x() - p1.x());
+
+            const BLImage seg = img2line(pixmap, static_cast<int>(segLength));
+            if (seg.is_empty()) {
+              continue;
+            }
+
+            ctx.save();
+            ctx.translate(p1.x(), p1.y());
+            ctx.rotate(angle);
+            ctx.blit_image(BLPoint(0.0, -h / 2.0), seg);
+            ctx.restore();
+          }
+        }
+      } else {
+        // First run: the background (border) line for bordered types, otherwise the
+        // line itself. Either way the labels are collected here.
+        const QPen& pen = property.hasBorder ? (night ? property.penBorderNight : property.penBorderDay)
+                                             : (night ? property.penLineNight : property.penLineDay);
+        const bool stroke = applyPen(ctx, pen);
+        const int lineWidth = pen.width();
+
+        for (quint32 idx : indices) {
+          drawLine(ctx, lines[idx], stroke, lineWidth, property, font, scale);
         }
       }
     }
-  }
+
+    // 2nd run to draw the foreground lines over their borders.
+    for (quint32 type : types) {
+      const auto prop = polylineProperties.constFind(type);
+      if (prop == polylineProperties.constEnd()) {
+        continue;
+      }
+      const CGarminTyp::polyline_property& property = *prop;
+
+      const auto it = dict.constFind(type);
+      if (it == dict.constEnd()) {
+        continue;
+      }
+      const QList<quint32>& indices = *it;
+
+      if (property.hasBorder && !property.hasPixmap) {
+        const QPen& pen = night ? property.penLineNight : property.penLineDay;
+        if (applyPen(ctx, pen)) {
+          for (quint32 idx : indices) {
+            drawLine(ctx, lines[idx]);
+          }
+        }
+      }
+    }
+  };
+
+  // Types are drawn in ascending order, 0x01-0x03 last: Garmin draws them over all other lines, and maps put
+  // overlays like cycle routes there.
+  QList<quint32> types = dict.keys();
+  std::sort(types.begin(), types.end());
+  const auto top =
+      std::stable_partition(types.begin(), types.end(), [](quint32 type) { return type < 0x01 || type > 0x03; });
+  const QList<quint32> topTypes(top, types.end());
+  types.erase(top, types.end());
+  drawTypes(types);
+  drawTypes(topTypes);
 }
 
 void CMapIMG::drawLine(BLContext& ctx, CGarminPolygon& l, bool stroke, int lineWidth,

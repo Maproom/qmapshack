@@ -1,0 +1,401 @@
+<!doctype html>
+<html class="no-js" lang="it" data-content_root="../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Indice" href="../genindex.html"><link rel="search" title="Cerca" href="../search.html"><link rel="next" title="Configurare il routing" href="quickstart-routing.html"><link rel="prev" title="Dati altimetrici e ombreggiatura" href="quickstart-dem.html">
+
+    <!-- Generated with Sphinx 9.1.1 and Furo 2025.12.19 -->
+        <title>Caricare un file GPX - Documentazione di QMapShack</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../_static/qms-layout.css?v=518cad67" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  --color-highlight-on-target: transparent;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-highlight-on-target: transparent;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-highlight-on-target: transparent;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Vai al contenuto</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">Documentazione di QMapShack</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  <span class="sidebar-brand-text">Documentazione di QMapShack</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Cerca" name="q" aria-label="Cerca">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="quickstart.html">Guida rapida</a><input aria-label="Toggle navigation of Guida rapida" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="quickstart-main-window.html">La finestra principale</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart-maps.html">Attivare le mappe</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart-vector-map.html">Attivare una mappa Garmin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart-zoom-pan.html">Zoom e spostamento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart-dem.html">Dati altimetrici e ombreggiatura</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Caricare un file GPX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart-routing.html">Configurare il routing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart-draw-track.html">Disegnare una traccia</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart-waypoints.html">Aggiungere waypoint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart-database.html">Database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart-save.html">Salvare il lavoro</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart-device.html">Usare un dispositivo GPS</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Indice</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Torna all'inizio</span>
+        </a>
+        <div class="content-icon-container">
+          
+
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="caricare-un-file-gpx">
+<h1>Caricare un file GPX<a class="headerlink" href="#caricare-un-file-gpx" title="Link to this heading">#</a></h1>
+<p>Questa pagina mostra come caricare un file GPX in QMapShack, guardarne le tracce e i waypoint e trovarli sulla mappa.</p>
+<p>Immagini: <em>© OpenStreetMap contributors</em>; <em>Datenquelle: Land Tirol - data.tirol.gv.at, CC BY 4.0</em>;
+<em><code class="docutils literal notranslate"><span class="pre">Example.gpx</span></code>: fuzzybear, CC BY-SA 4.0</em>.</p>
+<section id="caricare-il-file">
+<span id="index-1"></span><span id="index-0"></span><h2>Caricare il file<a class="headerlink" href="#caricare-il-file" title="Link to this heading">#</a></h2>
+<p>Un file GPX (GPS Exchange Format) contiene tracce, waypoint e itinerari. Dispositivi GPS, app e siti web di
+pianificazione di percorsi lo usano per salvarli e condividerli. Le immagini di questa pagina mostrano <code class="docutils literal notranslate"><span class="pre">Example.gpx</span></code>,
+un’escursione attorno all’Aggenstein.</p>
+<ol class="arabic simple">
+<li><p>Fai clic su <strong>File → Caricamento dati GIS</strong> o premi <strong>Ctrl+L</strong>.</p></li>
+<li><p>Seleziona il file GPX e fai clic su <strong>Apri</strong>. Per caricare più file insieme, tieni premuto <strong>Ctrl</strong> e fai clic su
+ogni file.</p></li>
+</ol>
+<p>La finestra di dialogo si apre nella cartella da cui hai caricato o in cui hai salvato l’ultima volta. Se hai
+impostato la <a class="reference internal" href="quickstart-main-window.html#impostare-la-cartella-home"><span class="std std-ref">cartella home</span></a>, QMapShack apre la
+finestra di dialogo nella sottocartella <code class="docutils literal notranslate"><span class="pre">GPX</span></code> della cartella home, un buon posto per tenere i tuoi file.</p>
+<p>Invece di usare il menu, puoi trascinare i file dal tuo file manager sulla mappa.</p>
+<p>QMapShack carica anche i suoi file <code class="docutils literal notranslate"><span class="pre">.qms</span></code> e file di altri dispositivi e programmi: <code class="docutils literal notranslate"><span class="pre">.fit</span></code>, <code class="docutils literal notranslate"><span class="pre">.tcx</span></code>, <code class="docutils literal notranslate"><span class="pre">.slf</span></code>,
+<code class="docutils literal notranslate"><span class="pre">.sml</span></code>, <code class="docutils literal notranslate"><span class="pre">.log</span></code> e <code class="docutils literal notranslate"><span class="pre">.qlb</span></code>.</p>
+</section>
+<section id="il-progetto-nello-spazio-di-lavoro">
+<span id="index-3"></span><span id="index-2"></span><h2>Il progetto nello spazio di lavoro<a class="headerlink" href="#il-progetto-nello-spazio-di-lavoro" title="Link to this heading">#</a></h2>
+<p>QMapShack carica un file come <em>progetto</em>: le tracce, gli itinerari, i waypoint e le aree di un file, tenuti insieme.
+Il riquadro <strong>Spazio di lavoro</strong> lo elenca con il nome salvato nel file, o con il nome del file se non ce n’è uno.
+QMapShack mostra subito sulla mappa tutto il contenuto del progetto. Vedi anche
+<a class="reference internal" href="quickstart-main-window.html#la-finestra-al-primo-avvio"><span class="std std-ref">La finestra principale</span></a>.</p>
+<ol class="arabic">
+<li><img alt="Quickstart load file items" class="align-right" src="../_images/quickstart-load-file-items.png" />
+<p>Fai clic sulla freccia a sinistra del nome del progetto. Sotto compaiono le sue tracce, i suoi itinerari, waypoint
+e aree. Tracce, itinerari e aree hanno un’icona che ne indica il tipo, e un waypoint mostra il suo simbolo.</p>
+</li>
+<li><p>Tieni il puntatore del mouse sul nome di un elemento (una traccia, un itinerario, un waypoint o un’area). Un
+suggerimento mostra un riepilogo dell’elemento.</p></li>
+</ol>
+</section>
+<section id="trovare-un-elemento-sulla-mappa">
+<span id="index-4"></span><h2>Trovare un elemento sulla mappa<a class="headerlink" href="#trovare-un-elemento-sulla-mappa" title="Link to this heading">#</a></h2>
+<img alt="Quickstart load file dclick" class="align-right" src="../_images/quickstart-load-file-dclick.png" />
+<p>Fai doppio clic su un elemento nel riquadro <strong>Spazio di lavoro</strong>. La mappa inquadra l’elemento.</p>
+<p>Se è una traccia, QMapShack la evidenzia anche sulla mappa. Un box in basso a destra mostra un riepilogo della
+traccia: lunghezza, salita, tempo, velocità e altro. Un piccolo grafico nell’angolo in basso a sinistra mostra il
+profilo altimetrico della traccia.</p>
+<img alt="Quickstart load file zoomed" class="below-right" src="../_images/quickstart-load-file-zoomed.png" />
+</section>
+<section id="nascondere-un-progetto-sulla-mappa">
+<span id="index-5"></span><h2>Nascondere un progetto sulla mappa<a class="headerlink" href="#nascondere-un-progetto-sulla-mappa" title="Link to this heading">#</a></h2>
+<ol class="arabic">
+<li><img alt="Quickstart load file hide" class="align-right" src="../_images/quickstart-load-file-hide.png" />
+<p>Fai clic sul pulsante con l’occhio all’estremità destra della riga del progetto. Tutto il contenuto del progetto
+scompare dalla mappa, e il progetto e i suoi elementi diventano grigi.</p>
+</li>
+<li><p>Fai di nuovo clic sul pulsante con l’occhio per mostrare il progetto.</p></li>
+</ol>
+<p>Mentre un progetto è nascosto, un doppio clic su uno dei suoi elementi non cambia lo zoom della mappa.</p>
+</section>
+<section id="conservare-lo-spazio-di-lavoro">
+<span id="index-6"></span><h2>Conservare lo spazio di lavoro<a class="headerlink" href="#conservare-lo-spazio-di-lavoro" title="Link to this heading">#</a></h2>
+<p>QMapShack conserva i progetti del riquadro <strong>Spazio di lavoro</strong> per il prossimo avvio.</p>
+<p>Per farlo, salva una propria copia di ogni progetto e lascia invariato il file che hai caricato. QMapShack scrive le
+modifiche nel file solo quando salvi il progetto.</p>
+<p>QMapShack salva lo spazio di lavoro ogni 5 minuti e quando chiudi il programma. Per cambiare la frequenza:</p>
+<ol class="arabic simple">
+<li><p>Fai clic su <strong>Spazio di lavoro → Modifica spazio di lavoro</strong>.</p></li>
+<li><p>Nella scheda <strong>Generale</strong>, imposta i minuti accanto a <strong>Salva lo spazio di lavoro all’uscita, ed ogni</strong>. Se imposti
+0, QMapShack salva lo spazio di lavoro solo quando chiudi il programma.</p></li>
+<li><p>Fai clic su <strong>OK</strong>, conferma il messaggio e riavvia QMapShack. La nuova impostazione ha effetto solo dopo il riavvio.</p></li>
+</ol>
+<p>Se togli la spunta dalla casella davanti a <strong>Salva lo spazio di lavoro all’uscita, ed ogni</strong>, QMapShack smette di
+salvare lo spazio di lavoro. Al prossimo avvio, lo spazio di lavoro è com’era l’ultima volta che è stato salvato.</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="quickstart-routing.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Successivo</span>
+                </div>
+                <div class="title">Configurare il routing</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="quickstart-dem.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Precedente</span>
+                </div>
+                
+                <div class="title">Dati altimetrici e ombreggiatura</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; the QMapShack authors
+            </div>
+            Realizzato con <a href="https://www.sphinx-doc.org/">Sphinx</a> e <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            In questa pagina
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Caricare un file GPX</a><ul>
+<li><a class="reference internal" href="#caricare-il-file">Caricare il file</a></li>
+<li><a class="reference internal" href="#il-progetto-nello-spazio-di-lavoro">Il progetto nello spazio di lavoro</a></li>
+<li><a class="reference internal" href="#trovare-un-elemento-sulla-mappa">Trovare un elemento sulla mappa</a></li>
+<li><a class="reference internal" href="#nascondere-un-progetto-sulla-mappa">Nascondere un progetto sulla mappa</a></li>
+<li><a class="reference internal" href="#conservare-lo-spazio-di-lavoro">Conservare lo spazio di lavoro</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=144c7b13"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="../_static/translations.js?v=45930005"></script>
+    <script src="../_static/qms-search.js?v=dd172957"></script>
+    </body>
+</html>

@@ -1,0 +1,239 @@
+{
+    "scenarios": {
+        "detail-more": [
+            {
+                "button": "activate",
+                "do": "click",
+                "row": "Tannheimer Tal",
+                "widget": "dockMaps/treeWidget"
+            },
+            {
+                "do": "expand",
+                "row": "Tannheimer Tal",
+                "widget": "dockMaps/treeWidget"
+            },
+            {
+                "do": "scroll",
+                "row": "Tannheimer Tal",
+                "widget": "dockMaps/treeWidget"
+            },
+            {
+                "do": "key",
+                "text": "5",
+                "widget": "dockMaps/treeWidget/QWidget#0/CMapPropSetup#0/spinAdjustDetails"
+            },
+            {
+                "do": "endedit",
+                "widget": "dockMaps/treeWidget/QWidget#0/CMapPropSetup#0/spinAdjustDetails"
+            }
+        ],
+        "listed": [
+            {
+                "do": "scroll",
+                "row": "OSM Topo",
+                "widget": "dockMaps/treeWidget"
+            }
+        ],
+        "no-areas": [
+            {
+                "button": "activate",
+                "do": "click",
+                "row": "Tannheimer Tal",
+                "widget": "dockMaps/treeWidget"
+            },
+            {
+                "do": "expand",
+                "row": "Tannheimer Tal",
+                "widget": "dockMaps/treeWidget"
+            },
+            {
+                "do": "scroll",
+                "row": "Tannheimer Tal",
+                "widget": "dockMaps/treeWidget"
+            },
+            {
+                "do": "click",
+                "widget": "dockMaps/treeWidget/QWidget#0/CMapPropSetup#0/checkPolygons"
+            }
+        ],
+        "on": [
+            {
+                "button": "activate",
+                "do": "click",
+                "row": "Tannheimer Tal",
+                "widget": "dockMaps/treeWidget"
+            }
+        ],
+        "settings": [
+            {
+                "button": "activate",
+                "do": "click",
+                "row": "Tannheimer Tal",
+                "widget": "dockMaps/treeWidget"
+            },
+            {
+                "do": "expand",
+                "row": "Tannheimer Tal",
+                "widget": "dockMaps/treeWidget"
+            },
+            {
+                "do": "scroll",
+                "row": "Tannheimer Tal",
+                "widget": "dockMaps/treeWidget"
+            }
+        ]
+    },
+    "shots": [
+        {
+            "id": "quickstart-vector-map/quickstart-vector-map-listed",
+            "rect": [
+                16,
+                84,
+                323,
+                112
+            ],
+            "scenario": "listed",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "id": "quickstart-vector-map/quickstart-vector-map-map-on",
+            "mark": [
+                {
+                    "button": "activate",
+                    "cursor": "pointer",
+                    "part": "button",
+                    "root": "main",
+                    "row": "3:0",
+                    "shape": "cursor",
+                    "widget": "dockMaps/treeWidget"
+                }
+            ],
+            "rect": [
+                0,
+                56,
+                700,
+                250
+            ],
+            "scenario": "on",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "id": "quickstart-vector-map/quickstart-vector-map-settings",
+            "mark": [
+                {
+                    "part": "branch",
+                    "root": "main",
+                    "row": "3:0",
+                    "shape": "disc",
+                    "widget": "dockMaps/treeWidget"
+                },
+                {
+                    "root": "main",
+                    "shape": "frame",
+                    "widget": "dockMaps/treeWidget/QWidget#0/CMapPropSetup#0/frameVectorItems"
+                }
+            ],
+            "rect": [
+                0,
+                84,
+                278,
+                146
+            ],
+            "scenario": "settings",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "id": "quickstart-vector-map/quickstart-vector-map-detail-more",
+            "mark": [
+                {
+                    "root": "main",
+                    "shape": "frame",
+                    "widget": "dockMaps/treeWidget/QWidget#0/CMapPropSetup#0/spinAdjustDetails"
+                }
+            ],
+            "rect": [
+                0,
+                56,
+                700,
+                250
+            ],
+            "scenario": "detail-more",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "id": "quickstart-vector-map/quickstart-vector-map-no-areas",
+            "mark": [
+                {
+                    "root": "main",
+                    "shape": "frame",
+                    "widget": "dockMaps/treeWidget/QWidget#0/CMapPropSetup#0/checkPolygons"
+                }
+            ],
+            "rect": [
+                0,
+                56,
+                700,
+                250
+            ],
+            "scenario": "no-areas",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        },
+        {
+            "id": "quickstart-vector-map/quickstart-vector-map-typ-row",
+            "mark": [
+                {
+                    "name": "own TYP",
+                    "root": "main",
+                    "shape": "arrow",
+                    "tail": [
+                        -40,
+                        35
+                    ],
+                    "widget": "dockMaps/treeWidget/QWidget#0/CMapPropSetup#0/toolClearTypFile"
+                },
+                {
+                    "name": "load TYP",
+                    "root": "main",
+                    "shape": "arrow",
+                    "tail": [
+                        40,
+                        35
+                    ],
+                    "widget": "dockMaps/treeWidget/QWidget#0/CMapPropSetup#0/toolOpenTypFile"
+                }
+            ],
+            "rect": [
+                16,
+                206,
+                300,
+                90
+            ],
+            "scenario": "settings",
+            "size": [
+                1200,
+                800
+            ],
+            "widget": ""
+        }
+    ]
+}

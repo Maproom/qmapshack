@@ -160,7 +160,11 @@ The writer's guide is `doc/WRITING_DOCS.md`: short, facts only, updated with eve
 - **Longer labels in another language:** a shot's `"set": {"dockMaps.minimumWidth": 340}` widens that dock area for
   the image only; widen that language's crops to match. Wider docks shrink the canvas, and a map crop then
   shifts and its overlays move; widen the shot's `size` by the dock difference to keep the canvas width
-  (es: docks +77 px). A map list's context menu is `dockMaps/IMapList/QMenu#0`
+  (es: docks +77 px). A `set` key without a dot is a property of the photographed widget itself
+  (`"minimumWidth": 290` on `dockWorkspace/treeWks` widens the workspace dock).
+- **A new language's crops:** some English `rect`s no longer match the current layout, though their published images
+  stay right; frame each crop on what the published English image shows, measured in the language's render without
+  `rect` and `mark` (`shots.py replay`: an exposure dialog renders at another size when driven another way). A map list's context menu is `dockMaps/IMapList/QMenu#0`
   (its parent is the form, not the tree); a spin box replays as `key` + `endedit`, not `set`.
 - **Addresses learned on the quick start pages:** the welcome page is `…/CCanvas#0/QTextBrowser#1`
   (`#0` is `textStatusMessages`); a scroll area scrolls with `set` on `…/qt_scrollarea_vcontainer/QScrollBar#0.value`;

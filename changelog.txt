@@ -32,6 +32,7 @@ V1.XX.X
 [QMS-1330] Nicer help blocks and Quick Start in the offline help
 [QMS-1334] Fix: Coordinates show 60 seconds or 60 minutes instead of carrying over
 [QMS-1337] Complete the Spanish and Italian translation of the interface and the manual
+[QMS-1341] Garmin maps: readable street names along roads
 
 
 V1.21.1

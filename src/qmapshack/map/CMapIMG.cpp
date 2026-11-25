@@ -52,6 +52,8 @@
 
 /// Maximum map scale [m/px] at which street / way names are still drawn.
 constexpr qreal kStreetNameThreshold = 5.0;
+/// Largest bend [deg] between two segments a street name may follow.
+constexpr qreal kLabelMaxBend = 30.0;
 
 int CFileExt::cnt = 0;
 
@@ -139,6 +141,55 @@ static inline bool isCluttered(QVector<QRectF>& rectPois, const QRectF& rect) {
   }
   rectPois << rect;
   return false;
+}
+
+/**
+   @brief Find the longest stretch of a line without a bend over kLabelMaxBend
+
+   Segments shorter than 1 px are taken along without testing their direction.
+
+   @param line     the line in screen pixels
+   @param stretch  receives the stretch's points
+   @return the stretch's length, 0 if the line has no segment
+ */
+static qreal longestStraightStretch(const QPolygonF& line, QPolygonF& stretch) {
+  qreal bestLength = 0;
+  int bestFirst = 0;
+  int bestLast = 0;
+
+  int first = 0;
+  qreal length = 0;
+  qreal lastAngle = 0;
+  bool hasAngle = false;
+
+  for (int i = 0; i + 1 < line.size(); ++i) {
+    const QLineF segment(line[i], line[i + 1]);
+    const qreal segLength = segment.length();
+
+    if (segLength >= 1.0) {
+      const qreal angle = segment.angle();
+      qreal bend = qAbs(angle - lastAngle);
+      if (bend > 180) {
+        bend = 360 - bend;
+      }
+      if (hasAngle && bend > kLabelMaxBend) {
+        first = i;
+        length = 0;
+      }
+      lastAngle = angle;
+      hasAngle = true;
+    }
+
+    length += segLength;
+    if (length > bestLength) {
+      bestLength = length;
+      bestFirst = first;
+      bestLast = i + 1;
+    }
+  }
+
+  stretch = line.mid(bestFirst, bestLast - bestFirst + 1);
+  return bestLength;
 }
 
 namespace {
@@ -2109,15 +2160,6 @@ void CMapIMG::collectText(const CGarminPolygon& item, const QPolygonF& line, con
   tp.lineWidth = lineWidth;
   tp.color = color;
 
-  const int size = line.size();
-  for (int i = 1; i < size; ++i) {
-    const QPointF& p1 = line[i - 1];
-    const QPointF& p2 = line[i];
-    qreal dx = p2.x() - p1.x();
-    qreal dy = p2.y() - p1.y();
-    tp.lengths << qSqrt(dx * dx + dy * dy);
-  }
-
   textpaths << tp;
 }
 
@@ -2257,59 +2299,29 @@ void CMapIMG::drawText(BLContext& ctx) {
   ctx.set_fill_rule(BL_FILL_RULE_NON_ZERO);
 
   for (const textpath_t& textpath : std::as_const(textpaths)) {
-    QPainterPath path;
-    QFont font = textpath.font;
-    QFontMetricsF fm(font);
+    const QFont& font = textpath.font;
+    const QFontMetricsF fm(font);
+    const qreal width = fm.horizontalAdvance(textpath.text);
 
-    path.addPolygon(textpath.polyline);
-
-    // get path length and string length
-    qreal length = qAbs(path.length());
-    qreal width = fm.size(Qt::TextSingleLine, textpath.text).width();
-
-    // adjust font size until string fits into polyline
-    while (width > (length * 0.7)) {
-      font.setPointSize(font.pointSize() - 1);
-      fm = QFontMetricsF(font);
-      width = fm.size(Qt::TextSingleLine, textpath.text).width();
-
-      if ((font.pointSize() < 6)) {
-        break;
-      }
-    }
-
-    // no way to draw a readable string - skip
-    if ((font.pointSize() < 6)) {
+    // The label goes on the line's longest stretch without a sharp bend, or not at all.
+    QPolygonF stretch;
+    const qreal length = longestStraightStretch(textpath.polyline, stretch);
+    if (length < width) {
       continue;
     }
 
-    fm = QFontMetricsF(font);
-    // Layout still uses QFontMetricsF (above); glyph outlines are rasterised by Blend2D from
-    // QRawFont (cached across frames), keeping Qt's font matching at the same resolved size.
-    // Glyph ids for the whole label are looked up once here rather than per character.
+    QPainterPath path;
+    path.addPolygon(stretch);
+
+    // Glyph outlines are rasterised by Blend2D from QRawFont (cached across frames), keeping
+    // Qt's font matching at the same resolved size. Glyph ids are looked up once per label.
     FontGlyphs& fg = fontGlyphsFor(font);
     const QList<quint32> glyphIds = fg.raw.glyphIndexesForString(textpath.text);
     const BLRgba32 fill = toBLColor(textpath.color);
     const BLRgba32 halo = toBLColor(Qt::white);
 
-    // adjust exact offset to first half of segment
-    const QVector<qreal>& lengths = textpath.lengths;
-    const qreal ref = (length - width) / 2;
-    qreal offset = 0;
-
-    for (int i = 0; i < lengths.size(); ++i) {
-      const qreal d = lengths[i];
-
-      if ((offset + d / 2) >= ref) {
-        offset = ref;
-        break;
-      }
-      if ((offset + d) >= ref) {
-        offset += d / 2;
-        break;
-      }
-      offset += d;
-    }
+    // centre the label on the stretch
+    qreal offset = (length - width) / 2;
 
     // get starting angle of first two letters
     const QString& text = textpath.text;

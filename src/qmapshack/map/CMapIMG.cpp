@@ -54,6 +54,8 @@
 constexpr qreal kStreetNameThreshold = 5.0;
 /// Largest bend [deg] between two segments a street name may follow.
 constexpr qreal kLabelMaxBend = 30.0;
+/// Street names this close [deg] to vertical keep the direction of their line; all others read left to right.
+constexpr qreal kLabelVertical = 10.0;
 
 int CFileExt::cnt = 0;
 
@@ -2323,23 +2325,21 @@ void CMapIMG::drawText(BLContext& ctx) {
     // centre the label on the stretch
     qreal offset = (length - width) / 2;
 
-    // get starting angle of first two letters
+    // Read left to right; within kLabelVertical of vertical the label keeps the direction of its line. The label is
+    // centred, so reversing keeps its place.
     const QString& text = textpath.text;
-    qreal percent1 = offset / length;
-    qreal percent2 = (offset + fm.size(Qt::TextSingleLine, text.left(2)).width()) / length;
-
-    QPointF point1 = path.pointAtPercent(percent1);
-    QPointF point2 = path.pointAtPercent(percent2);
-
-    // flip path if string start is E->W direction
-    // this helps, sometimes, in 50 % of the cases :)
-    if (point2.x() - point1.x() < 0) {
+    QPointF point1 = path.pointAtPercent(offset / length);
+    QPointF point2 = path.pointAtPercent((offset + width) / length);
+    const qreal dx = point2.x() - point1.x();
+    const qreal dy = point2.y() - point1.y();
+    const bool vertical = qAbs(dx) <= qAbs(dy) * qTan(qDegreesToRadians(kLabelVertical));
+    if (!vertical && dx < 0) {
       path = path.toReversed();
     }
 
     // draw string letter by letter and adjust angle
     const int size = text.size();
-    percent2 = offset / length;
+    qreal percent2 = offset / length;
     point2 = path.pointAtPercent(percent2);
 
     for (int i = 0; i < size; ++i) {

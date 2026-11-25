@@ -2024,7 +2024,7 @@ void CMapIMG::drawPolylines(BLContext& ctx, polytype_t& lines, const QPointF& sc
               default:;
             }
 
-            collectText(item, poly, f, h, night ? property.colorLabelNight : property.colorLabelDay);
+            collectText(item, poly, f, night ? property.colorLabelNight : property.colorLabelDay);
           }
 
           // Lay the pixmap along each straight segment of the polyline. The arc-length
@@ -2058,10 +2058,8 @@ void CMapIMG::drawPolylines(BLContext& ctx, polytype_t& lines, const QPointF& sc
         const QPen& pen = property.hasBorder ? (night ? property.penBorderNight : property.penBorderDay)
                                              : (night ? property.penLineNight : property.penLineDay);
         const bool stroke = applyPen(ctx, pen);
-        const int lineWidth = pen.width();
-
         for (quint32 idx : indices) {
-          drawLine(ctx, lines[idx], stroke, lineWidth, property, font, scale);
+          drawLine(ctx, lines[idx], stroke, property, font, scale);
         }
       }
     }
@@ -2103,8 +2101,8 @@ void CMapIMG::drawPolylines(BLContext& ctx, polytype_t& lines, const QPointF& sc
   drawTypes(topTypes);
 }
 
-void CMapIMG::drawLine(BLContext& ctx, CGarminPolygon& l, bool stroke, int lineWidth,
-                       const CGarminTyp::polyline_property& property, const QFont& font, const QPointF& scale) {
+void CMapIMG::drawLine(BLContext& ctx, CGarminPolygon& l, bool stroke, const CGarminTyp::polyline_property& property,
+                       const QFont& font, const QPointF& scale) {
   QPolygonF& poly = l.pixel;
   const int size = poly.size();
 
@@ -2126,8 +2124,7 @@ void CMapIMG::drawLine(BLContext& ctx, CGarminPolygon& l, bool stroke, int lineW
       default:;
     }
 
-    collectText(l, poly, f, lineWidth,
-                CMainWindow::self().isNight() ? property.colorLabelNight : property.colorLabelDay);
+    collectText(l, poly, f, CMainWindow::self().isNight() ? property.colorLabelNight : property.colorLabelDay);
   }
 
   if (stroke) {
@@ -2144,8 +2141,7 @@ void CMapIMG::drawLine(BLContext& ctx, const CGarminPolygon& l) {
   ctx.stroke_polyline(toBLPoints(poly), static_cast<size_t>(poly.size()));
 }
 
-void CMapIMG::collectText(const CGarminPolygon& item, const QPolygonF& line, const QFont& font, qint32 lineWidth,
-                          const QColor& color) {
+void CMapIMG::collectText(const CGarminPolygon& item, const QPolygonF& line, const QFont& font, const QColor& color) {
   QString str;
   if (item.hasLabel()) {
     str = item.getLabelText();
@@ -2159,7 +2155,6 @@ void CMapIMG::collectText(const CGarminPolygon& item, const QPolygonF& line, con
   tp.polyline = line;
   tp.font = font;
   tp.text = str;
-  tp.lineWidth = lineWidth;
   tp.color = color;
 
   textpaths << tp;
@@ -2322,6 +2317,9 @@ void CMapIMG::drawText(BLContext& ctx) {
     const BLRgba32 fill = toBLColor(textpath.color);
     const BLRgba32 halo = toBLColor(Qt::white);
 
+    // vertical middle of the text on the line; glyphs sit on their baseline
+    const qreal baselineShift = (fm.ascent() - fm.descent()) / 2;
+
     // centre the label on the stretch
     qreal offset = (length - width) / 2;
 
@@ -2356,7 +2354,7 @@ void CMapIMG::drawText(BLContext& ctx) {
       ctx.save();
       ctx.translate(point1.x(), point1.y());
       ctx.rotate(angle);
-      ctx.translate(0, -(textpath.lineWidth + 2));
+      ctx.translate(0, baselineShift);
 
       if (i < glyphIds.size()) {
         fillGlyphRun(ctx, glyphPathsFor(fg, glyphIds[i]), BLPoint(0, 0), fill, halo);

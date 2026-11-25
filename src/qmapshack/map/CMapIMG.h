@@ -177,12 +177,11 @@ class CMapIMG : public IMap {
   void drawLabels(BLContext& ctx, const QVector<strlbl_t>& lbls);
   void drawText(BLContext& ctx);
 
-  void drawLine(BLContext& ctx, CGarminPolygon& l, bool stroke, int lineWidth,
-                const CGarminTyp::polyline_property& property, const QFont& font, const QPointF& scale);
+  void drawLine(BLContext& ctx, CGarminPolygon& l, bool stroke, const CGarminTyp::polyline_property& property,
+                const QFont& font, const QPointF& scale);
   void drawLine(BLContext& ctx, const CGarminPolygon& l);
 
-  void collectText(const CGarminPolygon& item, const QPolygonF& line, const QFont& font, qint32 lineWidth,
-                   const QColor& color);
+  void collectText(const CGarminPolygon& item, const QPolygonF& line, const QFont& font, const QColor& color);
 
   void getInfoPoints(const pointtype_t& points, const QPoint& pt, QMultiMap<QString, QString>& dict) const;
   void getInfoPolylines(const QPoint& pt, QMultiMap<QString, QString>& dict) const;
@@ -477,7 +476,6 @@ class CMapIMG : public IMap {
     QPolygonF polyline;
     QString text;
     QFont font;
-    qint32 lineWidth;
     QColor color;
   };
 

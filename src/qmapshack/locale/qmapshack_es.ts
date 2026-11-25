@@ -15833,8 +15833,8 @@ en el que se visualiza este DEM.</translation>
     <message>
         <location filename="../gis/IGisItemRate.ui" line="139"/>
         <location filename="../../../build/src/qmapshack/ui_IGisItemRate.h" line="149"/>
-        <source>Separate keywords by colons:</source>
-        <translation>Etiquetas separadas con punto y coma:</translation>
+        <source>Separate keywords by commas:</source>
+        <translation type="unfinished">Etiquetas separadas con comas:</translation>
     </message>
 </context>
 <context>

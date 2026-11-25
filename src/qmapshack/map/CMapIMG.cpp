@@ -194,6 +194,28 @@ static qreal longestStraightStretch(const QPolygonF& line, QPolygonF& stretch) {
   return bestLength;
 }
 
+/**
+   @brief The area a label covers along a line
+
+   @param path    the line the label follows
+   @param from    start of the label as a fraction of the line's length
+   @param to      end of the label as a fraction of the line's length
+   @param height  the text height
+   @return the label's section of the line, widened to the text height
+ */
+static QPainterPath labelOutline(const QPainterPath& path, qreal from, qreal to, qreal height) {
+  QPainterPath section(path.pointAtPercent(from));
+  const int steps = 8;
+  for (int i = 1; i <= steps; ++i) {
+    section.lineTo(path.pointAtPercent(from + (to - from) * i / steps));
+  }
+
+  QPainterPathStroker stroker;
+  stroker.setWidth(height);
+  stroker.setCapStyle(Qt::FlatCap);
+  return stroker.createStroke(section);
+}
+
 namespace {
 /// Convert a QColor to a Blend2D non-premultiplied 0xAARRGGBB colour.
 inline BLRgba32 toBLColor(const QColor& c) { return BLRgba32(c.rgba()); }
@@ -2160,6 +2182,21 @@ void CMapIMG::collectText(const CGarminPolygon& item, const QPolygonF& line, con
   textpaths << tp;
 }
 
+bool CMapIMG::overlapsLabel(const QPainterPath& outline, const QList<QPainterPath>& placed) const {
+  const QRectF bounds = outline.boundingRect();
+  for (const strlbl_t& label : labels) {
+    if (bounds.intersects(label.rect) && outline.intersects(QRectF(label.rect))) {
+      return true;
+    }
+  }
+  for (const QPainterPath& other : placed) {
+    if (bounds.intersects(other.boundingRect()) && outline.intersects(other)) {
+      return true;
+    }
+  }
+  return false;
+}
+
 bool CMapIMG::intersectsWithExistingLabel(const QRect& rect) const {
   for (const strlbl_t& label : labels) {
     if (label.rect.intersects(rect)) {
@@ -2295,6 +2332,9 @@ void CMapIMG::drawText(BLContext& ctx) {
   // the cached halo is a union of offset copies that only fills correctly under non-zero.
   ctx.set_fill_rule(BL_FILL_RULE_NON_ZERO);
 
+  // outlines of the street names placed so far
+  QList<QPainterPath> placed;
+
   for (const textpath_t& textpath : std::as_const(textpaths)) {
     const QFont& font = textpath.font;
     const QFontMetricsF fm(font);
@@ -2334,6 +2374,13 @@ void CMapIMG::drawText(BLContext& ctx) {
     if (!vertical && dx < 0) {
       path = path.toReversed();
     }
+
+    // A name that would overlap a point label or another name is dropped.
+    const QPainterPath outline = labelOutline(path, offset / length, (offset + width) / length, fm.height());
+    if (overlapsLabel(outline, placed)) {
+      continue;
+    }
+    placed << outline;
 
     // draw string letter by letter and adjust angle
     const int size = text.size();

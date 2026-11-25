@@ -167,6 +167,7 @@ class CMapIMG : public IMap {
                   bool fast, const QRectF& viewport, polytype_t& polylines, polytype_t& polygons, pointtype_t& points,
                   pointtype_t& pois);
   bool intersectsWithExistingLabel(const QRect& rect) const;
+  bool overlapsLabel(const QPainterPath& outline, const QList<QPainterPath>& placed) const;
   void addLabel(const CGarminPoint& pt, const QRect& rect, const CGarminTyp::point_property& property, bool isDay);
   void drawPolygons(BLContext& ctx, polytype_t& lines);
   void drawPolylines(BLContext& ctx, polytype_t& lines, const QPointF& scale);

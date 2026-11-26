@@ -21,6 +21,8 @@ concurrency:
 
 jobs:
   deploy:
+    # Forks have no Pages site: the job runs in the main repository only.
+    if: github.repository == 'Maproom/qmapshack'
     runs-on: ubuntu-latest
     environment:
       name: github-pages

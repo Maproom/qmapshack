@@ -23,6 +23,7 @@
 #include <QMap>
 #include <QPointer>
 #include <QSqlDatabase>
+#include <QTimer>
 #include <QTreeWidget>
 #include <initializer_list>
 
@@ -169,6 +170,9 @@ class CGisListWks : public QTreeWidget {
      @return the context menu for the selection
    */
   menu_e updateActionState();
+
+  /** @brief Run updateActionState() once control is back in the event loop */
+  void scheduleActionStateUpdate();
 
   /** @brief Category of an action */
   enum category_e { eCategoryProject, eCategoryItem, eCategoryTrack, eCategoryWaypoint, eCategoryRoute, eCategoryArea };
@@ -330,6 +334,8 @@ class CGisListWks : public QTreeWidget {
   QAction* actionEleWptTrk;
 
   QMenu* menuNone = nullptr;
+
+  QTimer* timerActionState = nullptr;
 
   enum menu_scope_e { eMenuScopeAll, eMenuScopeProjects, eMenuScopeItems };
   menu_scope_e menuScope = eMenuScopeAll;

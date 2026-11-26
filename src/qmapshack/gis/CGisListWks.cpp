@@ -241,8 +241,14 @@ CGisListWks::CGisListWks(QWidget* parent) : QTreeWidget(parent) {
   connect(this, &CGisListWks::customContextMenuRequested, this, &CGisListWks::slotContextMenu);
   connect(this, &CGisListWks::itemDoubleClicked, this, &CGisListWks::slotItemDoubleClicked);
   connect(this, &CGisListWks::itemChanged, this, &CGisListWks::slotItemChanged);
-  connect(this, &CGisListWks::itemSelectionChanged, this, &CGisListWks::updateActionState);
-  connect(this, &CGisListWks::currentItemChanged, this, &CGisListWks::updateActionState);
+  timerActionState = new QTimer(this);
+  timerActionState->setSingleShot(true);
+  timerActionState->setInterval(0);
+  connect(timerActionState, &QTimer::timeout, this, &CGisListWks::updateActionState);
+
+  connect(this, &CGisListWks::itemSelectionChanged, this, &CGisListWks::scheduleActionStateUpdate);
+  connect(model(), &QAbstractItemModel::rowsInserted, this, &CGisListWks::scheduleActionStateUpdate);
+  connect(model(), &QAbstractItemModel::rowsRemoved, this, &CGisListWks::scheduleActionStateUpdate);
 
   updateActionState();
 
@@ -1551,6 +1557,8 @@ CGisListWks::menu_e CGisListWks::updateActionState() {
   return eMenuNone;
 }
 
+void CGisListWks::scheduleActionStateUpdate() { timerActionState->start(); }
+
 void CGisListWks::slotContextMenu(const QPoint& point) {
   const QPoint p = mapToGlobal(point);
 
@@ -1560,7 +1568,7 @@ void CGisListWks::slotContextMenu(const QPoint& point) {
   }
   const auto restoreScope = qScopeGuard([this]() {
     menuScope = eMenuScopeAll;
-    updateActionState();
+    scheduleActionStateUpdate();
   });
 
   switch (updateActionState()) {
@@ -1809,9 +1817,8 @@ void CGisListWks::slotItemDoubleClicked(QTreeWidgetItem* item, int) {
 }
 
 void CGisListWks::slotItemChanged(QTreeWidgetItem* item, int /*column*/) {
-  if (item->isSelected()) {
-    updateActionState();
-  }
+  // a change to an unselected item matters too: hiding the project of a selected track enables "Show on Map"
+  scheduleActionStateUpdate();
 
   // Check if the project or the item's project is flagged for no update.
   // First try to derive the pointer to the project

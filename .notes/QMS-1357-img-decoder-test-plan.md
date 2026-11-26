@@ -27,16 +27,16 @@ Moves to the reader:
 - `readFile`, `readBasics`, `readSubfileBasics`, `processPrimaryMapData`, `loadSubDiv`, `isCompletelyOutside`;
 - the subfile/subdiv loop of `loadVisibleData` as `load(level, viewport, filter, abort, out)`: `filter` carries the
   three show flags and `fast`, `abort` is a callable for `needsRedraw()`, `out` the four vectors;
-- `typData()`: the raw bytes of the first TYP subfile, for `setupTyp()`;
+- `readFile()` and `getSubfiles()` public: `setupTyp()` reads the TYP subfile through them;
 - `int CFileExt::cnt`.
 
 Stays in `CMapIMG`: TYP properties and `setupTyp()`, languages, `fm`, `scale2bits`, `draw*`, labels, tooltips,
 `getInfo*`, `findPolylineCloseBy`, the decoded vectors, the `QMessageBox` on a read error.
 
-- Translations: the reader declares `Q_DECLARE_TR_FUNCTIONS(CMapIMG)`, so its moved messages keep their context
-  and existing `.ts` entries.
+- Translations: `QCoreApplication::translate("CMapIMG", …)`. `Q_DECLARE_TR_FUNCTIONS(CMapIMG)` is not enough:
+  lupdate files the strings under `CGarminImg`.
 - Errors: the reader throws its own `exce_t`; `CMapIMG()` catches it as today.
-- `strtbl` ownership: the reader is a QObject and parents them, as `CMapIMG` does now.
+- `strtbl` ownership: created without parent, deleted in `~CGarminImg()`.
 
 ## Test
 
@@ -44,21 +44,23 @@ Stays in `CMapIMG`: TYP properties and `setupTyp()`, languages, `fm`, `scale2bit
 - Fixture folder from `QMS_IMG_FIXTURES`; `QSKIP` without it.
 - Per fixture a hand-written Polish-format `.mp` in `map/garmin/test/mp/`; the test parses it and compares
   each point, line and polygon (type, label, coordinates within the level's resolution) with what the reader
-  decodes at level 0.
+  decodes at level 0. mkgmap adds a `0x4b` background polygon and drops a polygon's closing point; labels
+  keep their case only with `--lower-case`.
 - The three mkgmap test tiles (`63240001–3.img`) only have to load without error.
 - First fixture: points, lines, polygons with labels, codepage 1252, one level. Bug fixtures come with their
   tickets.
 
 `map/garmin/test/make_fixtures.py` builds every `.mp` with a given `mkgmap.jar` into a given folder. Paths via
-`pathlib`, files written with `newline="\n"`. mkgmap release pinned in the script: r4924.
+`pathlib`. A source's first line `; mkgmap: <options>` passes options. mkgmap release named in the script: r4924.
 
 ## Open
 
-- **IUnit in the test:** linking `IUnit.cpp` pulls in `CMainWindow`. Either a test-only `IUnit` subclass with stubs of
-  the out-of-line members, or the decoders keep the raw elevation and formatting moves to display (a behaviour
-  change, so not in this PR). Decide when the first link fails.
+- **IUnit in the test:** reader and decoders link with `IUnit::m_self` and `IUnit::meter2elevation` stubbed. An
+  elevation label (0x1f) calls `IUnit::self()` (`IGarminStrTbl.cpp:145`), so the test needs a real `IUnit` object
+  once a fixture has one.
 - mkgmap may simplify or merge lines even at one level: unverified; the comparison may need to match by label.
-- Before/after check of the move: `shots.py replay` must report no changed image. Not run yet.
+- Before/after check of the move: the six `quickstart-vector-map` shots rendered pixel-identical to the
+  published images. Other levels, several tiles and error dialogs are not covered by it.
 
 ## Steps
 

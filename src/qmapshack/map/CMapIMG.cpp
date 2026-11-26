@@ -818,14 +818,6 @@ void CMapIMG::draw(IDrawContext::buffer_t& buf) /* override */
 
   quint8 bits = scale2bits(bufferScale);
 
-  QVector<CGarminImg::map_level_t>::const_iterator maplevel = img.getMapLevels().constEnd();
-  do {
-    --maplevel;
-    if (bits >= maplevel->bits) {
-      break;
-    }
-  } while (maplevel != img.getMapLevels().constBegin());
-
   qreal u1 = qMin(buf.ref1.x(), buf.ref4.x());
   qreal u2 = qMax(buf.ref2.x(), buf.ref3.x());
   qreal v1 = qMax(buf.ref1.y(), buf.ref2.y());
@@ -890,9 +882,7 @@ void CMapIMG::draw(IDrawContext::buffer_t& buf) /* override */
         filter.points = getShowPOIs();
         filter.polylines = getShowPolylines();
         filter.polygons = getShowPolygons();
-        img.load(
-            maplevel->level, viewport, filter, [this]() { return map->needsRedraw(); }, polygons, polylines, points,
-            pois);
+        img.load(bits, viewport, filter, [this]() { return map->needsRedraw(); }, polygons, polylines, points, pois);
 #if defined(DEBUG_SHOW_SECTION_BORDERS) || defined(DEBUG_SHOW_SUBDIV_BORDERS)
         // An aborted load is drawn again; its borders would show subdivisions not loaded.
         for (const CGarminImg::subfile_desc_t& subfile : img.getSubfiles()) {
@@ -904,7 +894,7 @@ void CMapIMG::draw(IDrawContext::buffer_t& buf) /* override */
           }
 #ifdef DEBUG_SHOW_SECTION_BORDERS
           for (const CGarminImg::subdiv_desc_t& subdiv : subfile.subdivs) {
-            if (subdiv.level != maplevel->level || !subdiv.area.intersects(viewport)) {
+            if (qint32(subdiv.level) != CGarminImg::level(subfile, bits) || !subdiv.area.intersects(viewport)) {
               continue;
             }
             const QRectF& a = subdiv.area;

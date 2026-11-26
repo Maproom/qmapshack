@@ -39,6 +39,11 @@
 int CFileExt::cnt = 0;
 
 static inline bool isCompletelyOutside(const QPolygonF& poly, const QRectF& viewport) {
+  // a line cut off by the section's end
+  if (poly.isEmpty()) {
+    return true;
+  }
+
   qreal north = qDegreesToRadians(-90.0);
   qreal south = qDegreesToRadians(90.0);
   qreal west = qDegreesToRadians(180.0);
@@ -978,8 +983,8 @@ void CGarminImg::loadSubDiv(CFileExt& file, const subdiv_desc_t& subdiv, IGarmin
       //             qDebug() << "rgn offset:" << Qt::hex << (rgnoff + (pData - pRawData));
       pData += p.decode2(subdiv.iCenterLng, subdiv.iCenterLat, subdiv.shift, pData, pEnd);
 
-      // skip points outside our current viewport
-      if (!viewport.contains(p.pos)) {
+      // skip points cut off by the section's end and points outside our current viewport
+      if (p.type == 0 || !viewport.contains(p.pos)) {
         continue;
       }
 

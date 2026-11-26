@@ -1,6 +1,6 @@
 # Garmin IMG decoder vs mkgmap — gap list
 
-Tickets: top QMS-1343; 1357 decoder test (reader split out of CMapIMG, mkgmap fixtures); 1344 C1–C2, 1345 R1–R3, 1346 R4–R5, 1347 L1/L2/L5–L8, 1348 T1–T6, 1349 L3/L4 road labels and
+Tickets: top QMS-1343; 1357 decoder test (reader split out of CMapIMG, mkgmap fixtures); 1344 C1–C2, 1345 R1–R3/R6, 1346 R4–R5, 1347 L1/L2/L5–L8, 1348 T1–T6, 1349 L3/L4 road labels and
 shields, 1350 prefix/suffix hiding, 1351 one-way arrows, 1352 draw priority, 1353 marine extra data, 1354 POI
 details and copyright, 1355 TYP languages/icon sets/several TYPs.
 
@@ -21,6 +21,7 @@ Effort: S ≤ 0.5 d, M 0.5–2 d, L > 2 d. Each item needs an mkgmap-built fixtu
 | R3 | `lbl_in_NET` not reset by `decode2()` on the reused `p` | `CMapIMG.cpp:1728, 1844, 1864`; `CGarminPolygon.cpp:96` | routable map with labelled ext. lines | read | S |
 | R4 | Levels matched by number, not bits, across tiles | `CMapIMG.cpp:1467-1473, 1613` | gmapsupp mixing `--levels` | agent | M |
 | R5 | +180° (0x800000) read as −180° | `CMapIMG.cpp:1029-1035, 1158, 1204` | tiles at the antimeridian | agent | S |
+| R6 | Extended object cut off by the section's end: read past it, line pushed with the previous `pixel` | `CGarminPoint.cpp`/`CGarminPolygon.cpp` `decode2`; `CGarminImg.cpp` `isCompletelyOutside` | damaged or cut section | read (review) | S |
 | L1 | Format 6: `str6tbl3[c1]` out of bounds for escape 0x2B/0x2C (table has 27 entries) | `CGarminStrTbl6.cpp:81-82, 152` | ASCII map + `--road-name-config` | read | S |
 | L2 | NET label at offset 0 skipped (`p.lbl_info` must be non-zero) | `CMapIMG.cpp:1789, 1813` | first road in NET1 | read (QMS side) | S |
 | L3 | Only the first of up to 4 NET labels read; street name behind shield ref lost | `IGarminStrTbl.cpp:119-124` | default style motorways/primaries | read | S |

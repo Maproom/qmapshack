@@ -14,7 +14,7 @@ Effort: S ≤ 0.5 d, M 0.5–2 d, L > 2 d. Each item needs an mkgmap-built fixtu
 
 | # | Bug | Where | Trigger | Status | Effort |
 |---|---|---|---|---|---|
-| C1 | Subfile offset truncated to 32 bit | `CMapIMG.cpp:924`, `CMapIMG.h:49`, `IGarminStrTbl` offsets | gmapsupp > 4 GiB | read | S |
+| C1 | Files over 4 GB refused; Garmin devices cannot load them (FAT32) | `CGarminImg.h:53`, `CGarminImg.cpp:218` (32 bit offsets) | file > 4 GiB | read | S |
 | C2 | Image without TRE/RGN activates, `draw()` decrements `maplevels.constEnd()` of an empty vector | `CMapIMG.cpp:991-993, 479, 1467-1469` | `<name>_mdr.img` from `--index` | read | S |
 | R1 | Extended point extra bytes skipped as 1 byte; mkgmap writes 1/2/3/nob+2 | `CGarminPoint.cpp:77-79`; mk `ExtTypeAttributes.java:564,686,761,765,788,797` | marine style, `mkgmap:xt-*` | read | S |
 | R2 | Extended line/polygon extra bytes (0x80) not skipped | `CGarminPolygon.cpp:205-300` (`decode2`); mk `Polyline.java` | `xt-style`, depth areas | read | S |

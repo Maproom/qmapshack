@@ -3,8 +3,8 @@
 
 usage: make_fixtures.py MKGMAP_JAR OUT_DIR
 
-Each mp/<name>.mp becomes OUT_DIR/<name>.img. A first line "; mkgmap: <options>" passes options to
-mkgmap. The jar must be mkgmap r4924 (https://www.mkgmap.org.uk/download/mkgmap.html), the release the
+Each mp/<name>.mp becomes OUT_DIR/<name>.img and its search index OUT_DIR/<name>_mdr.img, an IMG file
+without map tiles. A first line "; mkgmap: <options>" passes options to mkgmap. The jar must be mkgmap r4924 (https://www.mkgmap.org.uk/download/mkgmap.html), the release the
 test was written against.
 
 The test also loads any other IMG file in OUT_DIR, e.g. mkgmap's own test tiles 63240001-3.img from
@@ -52,13 +52,16 @@ def main() -> int:
     sources = sorted((Path(__file__).resolve().parent / "mp").glob("*.mp"))
     for source in sources:
         with tempfile.TemporaryDirectory() as tmp:
-            result = run(["java", "-jar", str(jar), f"--output-dir={tmp}", *options(source), str(source)])
+            result = run(["java", "-jar", str(jar), f"--output-dir={tmp}", "--index", "--overview-mapname=index",
+                          *options(source), str(source)])
             images = [p for p in Path(tmp).glob("*.img") if p.stem.isdigit()]
-            if result.returncode != 0 or len(images) != 1:
+            index = Path(tmp) / "index_mdr.img"
+            if result.returncode != 0 or len(images) != 1 or not index.is_file():
                 print(f"{source.name}: mkgmap failed\n{result.stdout}{result.stderr}", file=sys.stderr)
                 return 1
             shutil.copyfile(images[0], out / f"{source.stem}.img")
-        print(f"{source.stem}.img")
+            shutil.copyfile(index, out / f"{source.stem}_mdr.img")
+        print(f"{source.stem}.img, {source.stem}_mdr.img")
 
     print(f"{len(sources)} test map(s) in {out}, built with mkgmap r{MKGMAP_RELEASE}")
     return 0

@@ -257,6 +257,7 @@ class CGisListWks : public QTreeWidget {
     action->setObjectName(QString::fromLatin1(id));
     // register with the widget so a user-assigned shortcut can actually trigger it,
     // independent of the transient context menu the action is also shown in
+    action->setShortcutContext(Qt::WidgetWithChildrenShortcut);
     QWidget::addAction(action);
     connect(action, &QAction::triggered, this, slot);
     tagCategory(action, category);

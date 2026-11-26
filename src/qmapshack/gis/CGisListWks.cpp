@@ -456,6 +456,7 @@ QAction* CGisListWks::addSortAction(const char* id, QObject* parent, QActionGrou
   QAction* action = new QAction(QIcon(icon), text, parent);
   action->setObjectName(QString::fromLatin1(id));
   action->setCheckable(true);
+  action->setShortcutContext(Qt::WidgetWithChildrenShortcut);
   QWidget::addAction(action);
 
   connect(action, &QAction::toggled, this, [this, mode](bool checked) { slotSetSortMode(mode, checked); });
@@ -2096,15 +2097,16 @@ void CGisListWks::slotSyncWksDev() {
     return;
   }
 
-  IGisProject* project = singleTargetProject();
-  if (nullptr == project) {
+  const QList<IGisProject*>& projects = targetProjects();
+  if (projects.isEmpty()) {
     return;
   }
 
   const int N = topLevelItemCount();
   QSet<QString> keys;
   if (IDevice::count() > 1) {
-    CSelDevices dlg(project, this);
+    // the project only presets which devices are checked
+    CSelDevices dlg(projects.first(), this);
     if (dlg.exec() != QDialog::Accepted) {
       return;
     }
@@ -2118,9 +2120,8 @@ void CGisListWks::slotSyncWksDev() {
       }
     }
   }
-  const QList<IGisProject*>& projects = targetProjects();
-  for (IGisProject* targetProject : projects) {
-    syncPrjToDevices(targetProject, keys);
+  for (IGisProject* project : projects) {
+    syncPrjToDevices(project, keys);
   }
 }
 

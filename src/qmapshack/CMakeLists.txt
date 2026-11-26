@@ -1246,4 +1246,5 @@ endif()
 ###############################################################################################
 if(BUILD_TESTING)
     add_subdirectory(gis/trk/surface/test)
+    add_subdirectory(map/garmin/test)
 endif()

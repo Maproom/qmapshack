@@ -58,8 +58,13 @@ src/
   `gh api -X PATCH repos/Maproom/qmapshack/pulls/<n> --input <json>`.
 - **Pull requests go to `Maproom/qmapshack` `dev`** from `kiozen:<branch>`, the body from
   `.github/PULL_REQUEST_TEMPLATE.md` with every section kept.
+- **A ticket's branch is named `QMS-nnnn`**, nothing appended.
+- **A ticket referenced in a ticket or PR is written `QMS-#nnnn`**, so GitHub links it; `changelog.txt` keeps
+  `[QMS-nnnn]`.
 - **Every PR is checked for documentation changes**: which `doc/<lang>/pages` text and images show what
   changed, and whether the PR changes them. The template's documentation section says both.
+- **Name no other map viewer** in anything committed, in tickets or in PRs; mkgmap and BaseCamp are the only
+  references named.
 - **No Claude attribution** in commit messages or PR descriptions: no `Co-Authored-By`, no "Generated with
   Claude Code".
 - **Working on a ticket adds its line to `changelog.txt`** as part of the change, under the top
@@ -796,6 +801,7 @@ file.
   cancelled.
 - `waypoint-icon-resolution-plan.md` — 32 → 96 px waypoint icons, gated on storing `icon_t::focus`
   relative.
+- `img-mkgmap-gap-plan.md` (QMS-1343) — Garmin IMG decoder vs mkgmap: decoding bugs and missing features with effort.
 
 ### CMake — remaining
 

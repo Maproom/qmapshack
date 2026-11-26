@@ -486,7 +486,6 @@ QString CGisListWks::categoryName(category_e category) const {
 
 void CGisListWks::tagCategory(QAction* action, category_e category) {
   action->setProperty("shortcutCategory", categoryName(category));
-  categoryActions[category] << action;
 }
 
 QList<QAction*> CGisListWks::shortcutActions() const { return actions(); }
@@ -1229,35 +1228,6 @@ bool CGisListWks::hasSelectedItemOnDevice() const {
   return false;
 }
 
-void CGisListWks::enableActionsOnly(const std::initializer_list<QAction*>& enabled) {
-  const QList<QAction*>& allActions = actions();
-  for (QAction* action : allActions) {
-    action->setEnabled(false);
-  }
-
-  for (QAction* action : enabled) {
-    action->setEnabled(true);
-  }
-}
-
-void CGisListWks::disableActionsOutside(const std::initializer_list<category_e>& categories) {
-  QSet<category_e> keep(categories);
-  keep << eCategoryProject;
-
-  for (auto it = categoryActions.constBegin(); it != categoryActions.constEnd(); ++it) {
-    if (keep.contains(it.key())) {
-      continue;
-    }
-
-    const QList<QAction*>& actionsOfCategory = it.value();
-    for (QAction* action : actionsOfCategory) {
-      action->setEnabled(false);
-    }
-  }
-}
-
-QList<QAction*> CGisListWks::projectActions() const { return categoryActions.value(eCategoryProject); }
-
 QList<IGisProject*> CGisListWks::targetProjects() const {
   QList<IGisProject*> projects;
 
@@ -1284,99 +1254,193 @@ IGisProject* CGisListWks::singleTargetProject() const {
   return projects.count() == 1 ? projects.first() : nullptr;
 }
 
-CGisListWks::menu_e CGisListWks::updateProjectActions(const QList<IGisProject*>& projects) {
-  const QList<QAction*>& projectOnly = projectActions();
-  for (QAction* action : projectOnly) {
-    action->setEnabled(false);
+CGisListWks::action_context_t CGisListWks::actionContext() const {
+  action_context_t c;
+
+  // mixing projects and items has no common operation
+  const selection_e selection = selectionType();
+  if (selection != eSelectionProjects && selection != eSelectionItems) {
+    return c;
   }
 
-  if (projects.isEmpty()) {
-    return eMenuNone;
-  }
+  const QList<QTreeWidgetItem*>& items = actionItems();
+  c.onProjects = selection == eSelectionProjects;
+  // a context menu counts the whole selection, also the entries of the other kind
+  c.numSelected = selectedItems().count();
 
-  // check whether all projects are checked or unchecked...
-  bool allChecked = true;
-  bool allUnchecked = true;
-  bool allCantSave = true;
-  bool allOnDevice = true;
+  c.projects = targetProjects();
+  bool allOnDevice = !c.projects.isEmpty();
   bool anyLostFound = false;
-
-  for (IGisProject* project : projects) {
-    // as soon as we find an unchecked element, not all elements are checked (and vice versa)
-    if (project->isVisible() == false) {
-      allChecked = false;
+  for (IGisProject* project : std::as_const(c.projects)) {
+    if (project->isVisible()) {
+      c.prjAllHidden = false;
     } else {
-      allUnchecked = false;
+      c.prjAllVisible = false;
     }
-
-    if (project->canSave()) {
-      allCantSave = false;
-    }
-
-    if (!project->isOnDevice()) {
-      allOnDevice = false;
-    }
-
-    if (project->getType() == IGisProject::eTypeLostFound) {
-      anyLostFound = true;
-    }
+    c.prjAnyCanSave = c.prjAnyCanSave || project->canSave();
+    allOnDevice = allOnDevice && project->isOnDevice();
+    anyLostFound = anyLostFound || project->getType() == IGisProject::eTypeLostFound;
   }
 
   // a context menu on several entries takes the clicked project's menu, never the trash menu
   IGisProject* clicked = dynamic_cast<IGisProject*>(currentItem());
-  const bool menuOnSeveral = menuScope == eMenuScopeProjects && selectedItems().count() > 1 && clicked != nullptr;
-  if (menuOnSeveral) {
+  if (menuScope == eMenuScopeProjects && c.numSelected > 1 && clicked != nullptr) {
     anyLostFound = false;
     allOnDevice = clicked->isOnDevice();
   }
 
-  if (anyLostFound) {
-    actionSaveAs->setEnabled(true);
-    actionSaveAsStrict->setEnabled(true);
-    actionCloseProj->setEnabled(true);
-    return eMenuProjectTrash;
+  c.prjTrash = anyLostFound;
+  c.prjDev = !anyLostFound && allOnDevice;
+  c.prjWks = !c.projects.isEmpty() && !anyLostFound && !allOnDevice;
+  if (c.prjWks && c.projects.count() == 1 && (!c.onProjects || c.numSelected == 1)) {
+    c.project = c.projects.first();
   }
 
-  // ...and disable entries without any effect
-  actionShowOnMap->setEnabled(!allChecked);
-  actionHideFrMap->setEnabled(!allUnchecked);
-
-  if (allOnDevice) {
-    actionSyncDevWks->setEnabled(projects.count() == 1);
-    return eMenuProjectDev;
+  if (c.onProjects) {
+    c.menu = c.prjTrash ? eMenuProjectTrash : (c.prjDev ? eMenuProjectDev : eMenuProjectWks);
+    return c;
   }
 
-  IGisProject* firstProject = projects.first();
-  actionSave->setEnabled(!allCantSave);
-  actionSaveAs->setEnabled(true);
-  actionSaveAsStrict->setEnabled(true);
-  actionSyncDB->setEnabled(firstProject->getType() == IGisProject::eTypeDb);
-
-  if (projects.count() > 1 || menuOnSeveral) {
-    // a state toggle needs one project to read the state from
-    actionSyncWksDev->setEnabled(IDevice::count());
-    actionCloseProj->setEnabled(true);
-    actionAutoSyncToDev->setVisible(false);
-    actionAutoSave->setVisible(false);
-    actionUserFocusPrj->setVisible(false);
-    return eMenuProjectWks;
+  for (QTreeWidgetItem* item : items) {
+    IGisItem* gisItem = dynamic_cast<IGisItem*>(item);
+    if (gisItem == nullptr) {
+      continue;
+    }
+    c.numItems++;
+    c.itemOnDevice = c.itemOnDevice || gisItem->isOnDevice();
+    if (dynamic_cast<CGisItemTrk*>(item) != nullptr) {
+      c.numTrk++;
+    }
+    if (dynamic_cast<CGisItemWpt*>(item) != nullptr) {
+      c.numWpt++;
+    }
   }
 
-  bool autoSyncToDev = firstProject->isAutoSyncToDev();
-  actionAutoSyncToDev->setEnabled(hasDeviceSupport());
+  if (c.numSelected > 1) {
+    c.menu = c.numItems > 0 ? eMenuItemMulti : eMenuNone;
+    return c;
+  }
+
+  IGisItem* gisItem = dynamic_cast<IGisItem*>(items.first());
+  if (gisItem == nullptr) {
+    return c;
+  }
+
+  c.trk = dynamic_cast<CGisItemTrk*>(gisItem);
+  c.wpt = dynamic_cast<CGisItemWpt*>(gisItem);
+  c.rte = dynamic_cast<CGisItemRte*>(gisItem);
+  c.ovl = dynamic_cast<CGisItemOvlArea*>(gisItem);
+  if (c.trk != nullptr) {
+    c.menu = eMenuItemTrk;
+  } else if (c.wpt != nullptr) {
+    c.menu = eMenuItemWpt;
+  } else if (c.rte != nullptr) {
+    c.menu = eMenuItemRte;
+  } else if (c.ovl != nullptr) {
+    c.menu = eMenuItemOvl;
+  } else {
+    return c;
+  }
+
+  c.item = gisItem;
+  c.itemProject = gisItem->getParentProject();
+  return c;
+}
+
+CGisListWks::menu_e CGisListWks::updateActionState() {
+  const action_context_t& c = actionContext();
+
+  const bool oneWks = c.project != nullptr;
+  const bool manyWks = c.prjWks && !oneWks;
+  const bool autoSync = oneWks && c.project->isAutoSyncToDev();
+  const bool onMap = c.prjDev || c.prjWks;
+
+  actionShowOnMap->setEnabled(onMap && !c.prjAllVisible);
+  actionHideFrMap->setEnabled(onMap && !c.prjAllHidden);
+  actionSave->setEnabled(c.prjWks && c.prjAnyCanSave);
+  actionSaveAs->setEnabled(c.prjWks || c.prjTrash);
+  actionSaveAsStrict->setEnabled(c.prjWks || c.prjTrash);
+  actionCloseProj->setEnabled(c.prjTrash || (c.prjWks && !autoSync));
+  actionSyncDB->setEnabled(c.prjWks && c.projects.first()->getType() == IGisProject::eTypeDb);
+  actionSyncWksDev->setEnabled(c.prjWks && IDevice::count() > 0 && !autoSync);
+  actionSyncDevWks->setEnabled(c.prjDev && c.projects.count() == 1);
+  actionAutoSyncToDev->setEnabled(oneWks && hasDeviceSupport());
+  actionAutoSave->setEnabled(oneWks && c.project->canSave());
+  actionUserFocusPrj->setEnabled(oneWks);
+  actionFilterProject->setEnabled(oneWks);
+  actionSortByTime->setEnabled(oneWks);
+  actionSortByName->setEnabled(oneWks);
+  actionSortByRating->setEnabled(oneWks);
+
+  actionAutoSyncToDev->setVisible(!manyWks);
+  actionAutoSave->setVisible(!manyWks);
+  actionUserFocusPrj->setVisible(!manyWks);
+
+  const bool onPrjs = c.onProjects && !c.prjTrash;
+  const bool onItems = c.numItems > 0;
+  const bool canEdit = onItems && !c.itemOnDevice;
+  const bool visible = c.itemProject != nullptr && c.itemProject->isVisible();
+  const bool canEditOnMap = visible && !c.itemOnDevice;
+
+  actionEditDetails->setEnabled((onPrjs && c.numSelected == 1) || (c.item != nullptr && !c.itemOnDevice));
+  actionCopyItem->setEnabled(onPrjs || onItems);
+  actionDelete->setEnabled((c.onProjects && c.prjDev) || canEdit);
+  actionTagItem->setEnabled(canEdit);
+  actionEleWptTrk->setEnabled(canEdit && c.numTrk + c.numWpt > 0);
+  actionNogoTrk->setEnabled((c.trk != nullptr || c.rte != nullptr) && canEditOnMap);
+  actionNogoArea->setEnabled(((c.wpt != nullptr && c.wpt->hasRadius()) || c.ovl != nullptr) && canEditOnMap);
+
+  actionFocusTrk->setEnabled(c.trk != nullptr && visible);
+  actionRangeTrk->setEnabled(c.trk != nullptr && canEditOnMap);
+  actionEditTrk->setEnabled(c.trk != nullptr && canEditOnMap);
+  actionReverseTrk->setEnabled(c.trk != nullptr && !c.itemOnDevice);
+  actionCombineTrk->setEnabled(c.numTrk > 1 || (c.trk != nullptr && c.itemProject != nullptr &&
+                                                c.itemProject->getItemCountByType(IGisItem::eTypeTrk) > 1));
+  actionCopyTrkWithWpt->setEnabled(c.trk != nullptr && c.trk->getNumberOfAttachedWpt() != 0);
+  actionToRoute->setEnabled(c.trk != nullptr);
+  actionToArea->setEnabled(c.trk != nullptr);
+
+  actionBubbleWpt->setEnabled(c.wpt != nullptr && canEditOnMap);
+  actionMoveWpt->setEnabled(c.wpt != nullptr && canEditOnMap);
+  actionProjWpt->setEnabled(c.wpt != nullptr && !c.itemOnDevice);
+  actionEditRadiusWpt->setEnabled(c.wpt != nullptr && canEditOnMap);
+  actionDelRadiusWpt->setEnabled(c.wpt != nullptr && c.wpt->hasRadius() && canEditOnMap);
+  actionCopyCoordWpt->setEnabled(c.wpt != nullptr);
+  actionRteFromWpt->setEnabled(c.numWpt > 1);
+  actionEditPrxWpt->setEnabled(canEdit && c.numWpt > 0);
+  actionChangeIconWpt->setEnabled(canEdit && c.numWpt > 0);
+
+  actionFocusRte->setEnabled(c.rte != nullptr && visible && c.rte->isCalculated());
+  actionCalcRte->setEnabled(c.rte != nullptr && canEditOnMap);
+  actionResetRte->setEnabled(c.rte != nullptr && canEditOnMap);
+  actionEditRte->setEnabled(c.rte != nullptr && canEditOnMap);
+  actionReverseRte->setEnabled(c.rte != nullptr && !c.itemOnDevice);
+  actionRte2Trk->setEnabled(c.rte != nullptr);
+
+  actionEditArea->setEnabled(c.ovl != nullptr && canEditOnMap);
+
+  updateCheckedStates(c);
+  return c.menu;
+}
+
+void CGisListWks::updateCheckedStates(const action_context_t& c) {
+  actionNogoTrk->setChecked((c.trk != nullptr || c.rte != nullptr) && c.item->isNogo());
+  actionNogoArea->setChecked((c.wpt != nullptr && c.wpt->hasRadius() && c.wpt->isNogo()) ||
+                             (c.ovl != nullptr && c.ovl->isNogo()));
+  actionFocusTrk->setChecked(c.trk != nullptr && c.trk->hasUserFocus());
+  actionBubbleWpt->setChecked(c.wpt != nullptr && c.wpt->hasBubble());
+  actionFocusRte->setChecked(c.rte != nullptr && c.rte->hasUserFocus());
+
+  if (c.project == nullptr) {
+    return;
+  }
+
+  const bool autoSyncToDev = c.project->isAutoSyncToDev();
   actionAutoSyncToDev->setChecked(autoSyncToDev);
   actionAutoSyncToDev->setIcon(autoSyncToDev ? QIcon("://icons/DeviceSync.svgt") : QIcon("://icons/DeviceNoSync.svgt"));
 
-  actionSyncWksDev->setEnabled(IDevice::count() && !autoSyncToDev);
-  actionCloseProj->setEnabled(!autoSyncToDev);
-
-  const QList<QAction*>& sortActions = actionGroupSort->actions();
-  for (QAction* action : sortActions) {
-    action->setEnabled(true);
-  }
-
   blockSorting = true;
-  switch (firstProject->getSortingFolder()) {
+  switch (c.project->getSortingFolder()) {
     case IGisProject::eSortFolderName:
       actionSortByName->setChecked(true);
       break;
@@ -1391,170 +1455,15 @@ CGisListWks::menu_e CGisListWks::updateProjectActions(const QList<IGisProject*>&
   }
   blockSorting = false;
 
-  actionFilterProject->setEnabled(true);
-  actionFilterProject->setChecked(firstProject->getProjectFilterItem() != nullptr);
+  actionFilterProject->setChecked(c.project->getProjectFilterItem() != nullptr);
 
-  bool isAutoSave = firstProject->isAutoSave();
-  actionAutoSave->setEnabled(firstProject->canSave());
+  const bool isAutoSave = c.project->isAutoSave();
   actionAutoSave->setChecked(isAutoSave);
   actionAutoSave->setIcon(isAutoSave ? QIcon("://icons/AutoSaveA.svgt") : QIcon("://icons/AutoSaveNoA.svgt"));
 
-  bool hasUserFocus = firstProject->hasUserFocus();
-  actionUserFocusPrj->setEnabled(true);
+  const bool hasUserFocus = c.project->hasUserFocus();
   actionUserFocusPrj->setChecked(hasUserFocus);
   actionUserFocusPrj->setIcon(hasUserFocus ? QIcon("://icons/Focus.svgt") : QIcon("://icons/UnFocus.svgt"));
-
-  return eMenuProjectWks;
-}
-
-CGisListWks::menu_e CGisListWks::updateActionState() {
-  const QList<QAction*>& allActions = actions();
-  for (QAction* action : allActions) {
-    action->setVisible(true);
-    action->setEnabled(true);
-  }
-
-  // a selection mixing projects and items has no common operation
-  const selection_e selection = selectionType();
-  if (selection == eSelectionNone || selection == eSelectionMixed) {
-    enableActionsOnly({});
-    return eMenuNone;
-  }
-
-  const menu_e projectMenu = updateProjectActions(targetProjects());
-
-  if (selection == eSelectionProjects) {
-    disableActionsOutside({});
-
-    if (projectMenu != eMenuProjectTrash) {
-      actionEditDetails->setEnabled(singleSelectedItem() != nullptr);
-      actionCopyItem->setEnabled(true);
-      actionDelete->setEnabled(projectMenu == eMenuProjectDev);
-    }
-
-    return projectMenu;
-  }
-
-  const QList<QTreeWidgetItem*>& items = actionItems();
-  // a context menu counts the whole selection, also the entries of the other kind
-  if (selectedItems().count() > 1) {
-    disableActionsOutside({eCategoryItem});
-    actionEditDetails->setEnabled(false);
-    actionNogoTrk->setEnabled(false);
-    actionNogoArea->setEnabled(false);
-
-    const QList<IGisItem::key_t>& keysTrk = selectedItems2Keys<CGisItemTrk>();
-    const QList<IGisItem::key_t>& keysWpt = selectedItems2Keys<CGisItemWpt>();
-
-    bool hasWpts = !keysWpt.isEmpty();
-    bool hasTrks = !keysTrk.isEmpty();
-
-    bool hasItemOnDevice = hasSelectedItemOnDevice();
-
-    actionRteFromWpt->setEnabled(keysWpt.count() > 1);
-    actionEditPrxWpt->setEnabled(hasWpts && !hasItemOnDevice);
-    actionChangeIconWpt->setEnabled(hasWpts && !hasItemOnDevice);
-    actionCombineTrk->setEnabled(keysTrk.count() > 1);
-    actionEleWptTrk->setEnabled((hasWpts | hasTrks) && !hasItemOnDevice);
-    actionTagItem->setDisabled(hasItemOnDevice);
-    actionDelete->setDisabled(hasItemOnDevice);
-    return eMenuItemMulti;
-  }
-
-  IGisItem* gisItem = dynamic_cast<IGisItem*>(items.first());
-  if (nullptr != gisItem) {
-    bool isOnDevice = gisItem->isOnDevice();
-    IGisProject* parentProject = gisItem->getParentProject();
-    bool isProjectVisible = parentProject == nullptr ? false : parentProject->isVisible();
-
-    actionEditDetails->setDisabled(isOnDevice);
-    actionTagItem->setDisabled(isOnDevice);
-    actionEleWptTrk->setDisabled(isOnDevice);
-    actionDelete->setDisabled(isOnDevice);
-
-    switch (gisItem->type()) {
-      case IGisItem::eTypeTrk: {
-        CGisItemTrk* trk = dynamic_cast<CGisItemTrk*>(gisItem);
-        if (trk == nullptr) {
-          break;
-        }
-
-        disableActionsOutside({eCategoryItem, eCategoryTrack});
-        actionNogoArea->setEnabled(false);
-
-        if (parentProject != nullptr) {
-          actionCombineTrk->setEnabled(parentProject->getItemCountByType(IGisItem::eTypeTrk) > 1);
-        } else {
-          actionCombineTrk->setEnabled(false);
-        }
-        actionRangeTrk->setEnabled(isProjectVisible && !isOnDevice);
-        actionReverseTrk->setDisabled(isOnDevice);
-        actionEditTrk->setEnabled(isProjectVisible && !isOnDevice);
-        actionNogoTrk->setEnabled(isProjectVisible && !isOnDevice);
-        actionNogoTrk->setChecked(gisItem->isNogo());
-        actionCopyTrkWithWpt->setEnabled(trk->getNumberOfAttachedWpt() != 0);
-        actionFocusTrk->setChecked(gisItem->hasUserFocus());
-        actionFocusTrk->setEnabled(isProjectVisible);
-        return eMenuItemTrk;
-      }
-
-      case IGisItem::eTypeWpt: {
-        CGisItemWpt* wpt = dynamic_cast<CGisItemWpt*>(gisItem);
-        if (wpt == nullptr) {
-          break;
-        }
-
-        disableActionsOutside({eCategoryItem, eCategoryWaypoint});
-        actionNogoTrk->setEnabled(false);
-        actionRteFromWpt->setEnabled(false);
-
-        actionBubbleWpt->setChecked(wpt->hasBubble());
-        actionBubbleWpt->setEnabled(isProjectVisible && !isOnDevice);
-        actionEditRadiusWpt->setEnabled(isProjectVisible && !isOnDevice);
-        bool radius = wpt->hasRadius();
-        actionDelRadiusWpt->setEnabled(isProjectVisible && radius && !isOnDevice);
-        actionNogoArea->setEnabled(isProjectVisible && radius && !isOnDevice);
-        actionNogoArea->setChecked(radius && wpt->isNogo());
-        actionMoveWpt->setEnabled(isProjectVisible && !isOnDevice);
-        actionProjWpt->setDisabled(isOnDevice);
-        return eMenuItemWpt;
-      }
-
-      case IGisItem::eTypeRte: {
-        CGisItemRte* rte = dynamic_cast<CGisItemRte*>(gisItem);
-        if (rte == nullptr) {
-          break;
-        }
-
-        disableActionsOutside({eCategoryItem, eCategoryRoute});
-        actionNogoArea->setEnabled(false);
-        actionEleWptTrk->setEnabled(false);
-
-        actionFocusRte->setChecked(rte->hasUserFocus());
-        actionFocusRte->setEnabled(isProjectVisible && rte->isCalculated());
-        actionCalcRte->setEnabled(isProjectVisible && !isOnDevice);
-        actionEditRte->setEnabled(isProjectVisible && !isOnDevice);
-        actionNogoTrk->setEnabled(isProjectVisible && !isOnDevice);
-        actionNogoTrk->setChecked(gisItem->isNogo());
-        actionResetRte->setEnabled(isProjectVisible && !isOnDevice);
-        actionReverseRte->setDisabled(isOnDevice);
-        return eMenuItemRte;
-      }
-
-      case IGisItem::eTypeOvl:
-        disableActionsOutside({eCategoryItem, eCategoryArea});
-        actionNogoTrk->setEnabled(false);
-        actionEleWptTrk->setEnabled(false);
-
-        actionEditArea->setEnabled(isProjectVisible && !isOnDevice);
-        actionNogoArea->setEnabled(isProjectVisible && !isOnDevice);
-        actionNogoArea->setChecked(gisItem->isNogo());
-        return eMenuItemOvl;
-    }
-  }
-
-  enableActionsOnly({});
-  return eMenuNone;
 }
 
 void CGisListWks::scheduleActionStateUpdate() { timerActionState->start(); }

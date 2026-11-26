@@ -20,12 +20,10 @@
 #ifndef CGISLISTWKS_H
 #define CGISLISTWKS_H
 
-#include <QMap>
 #include <QPointer>
 #include <QSqlDatabase>
 #include <QTimer>
 #include <QTreeWidget>
-#include <initializer_list>
 
 #include "gis/prj/IGisProject.h"
 #include "gis/trk/CTrackData.h"
@@ -37,6 +35,10 @@ class IGisProject;
 class CDBProject;
 class IDeviceWatcher;
 class QActionGroup;
+class CGisItemTrk;
+class CGisItemWpt;
+class CGisItemRte;
+class CGisItemOvlArea;
 
 class CGisListWks : public QTreeWidget {
   Q_OBJECT
@@ -194,17 +196,6 @@ class CGisListWks : public QTreeWidget {
   /** @brief True if any selected item lives on a device */
   bool hasSelectedItemOnDevice() const;
 
-  /** @brief Disable every action, then enable the listed ones */
-  void enableActionsOnly(const std::initializer_list<QAction*>& enabled);
-
-  /**
-     @brief Disable every action outside the given categories
-   */
-  void disableActionsOutside(const std::initializer_list<category_e>& categories);
-
-  /** @brief The actions for a project */
-  QList<QAction*> projectActions() const;
-
   /**
      @brief The projects an action applies to
 
@@ -215,12 +206,36 @@ class CGisListWks : public QTreeWidget {
   /** @brief The one project an action applies to, or nullptr if the selection does not resolve to exactly one */
   IGisProject* singleTargetProject() const;
 
-  /**
-     @brief Bring the project actions in sync with the projects they would act on
+  struct action_context_t {
+    menu_e menu = eMenuNone;
+    bool onProjects = false;
+    qsizetype numSelected = 0;
 
-     @return the project menu those projects ask for
-   */
-  menu_e updateProjectActions(const QList<IGisProject*>& projects);
+    QList<IGisProject*> projects;
+    bool prjTrash = false;
+    bool prjDev = false;
+    bool prjWks = false;
+    bool prjAllVisible = true;
+    bool prjAllHidden = true;
+    bool prjAnyCanSave = false;
+    IGisProject* project = nullptr;
+
+    qsizetype numItems = 0;
+    qsizetype numTrk = 0;
+    qsizetype numWpt = 0;
+    bool itemOnDevice = false;
+
+    IGisItem* item = nullptr;
+    CGisItemTrk* trk = nullptr;
+    CGisItemWpt* wpt = nullptr;
+    CGisItemRte* rte = nullptr;
+    CGisItemOvlArea* ovl = nullptr;
+    IGisProject* itemProject = nullptr;
+  };
+
+  action_context_t actionContext() const;
+
+  void updateCheckedStates(const action_context_t& c);
 
   void configDB();
   void initDB();
@@ -248,7 +263,7 @@ class CGisListWks : public QTreeWidget {
     return action;
   }
 
-  /** @brief Record the action's category, for the shortcut setup dialog and for categoryActions */
+  /** @brief Record the action's category for the shortcut setup dialog */
   void tagCategory(QAction* action, category_e category);
 
   void showMenuProjectWks(const QPoint& p);
@@ -280,8 +295,6 @@ class CGisListWks : public QTreeWidget {
   QSqlDatabase db;
   /** @brief Set by setDatabasePath(); empty for the user's own. */
   static QString databasePathOverride;
-
-  QMap<category_e, QList<QAction*>> categoryActions;
 
   QActionGroup* actionGroupSort;
   QAction* actionSave;

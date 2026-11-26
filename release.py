@@ -166,13 +166,13 @@ header("Merge Changes to Master")
 asw = get_input("Do you want ot merge to master and create a tag? [Y/n]") or "Y"
 
 if asw.upper() == "Y":
-    run('git checkout master')
-    run('git pull')
-    run('git checkout dev')
-    run('git merge master')
-    run('git checkout master')
-    run(f'git merge -m "Release V{next_version}" --log dev')
-    run(f'git tag -a {tag} -m "Release V{next_version}"')
+    # master is never checked out: an old master can hold a file whose checkout shows as modified under the
+    # current .gitattributes, which blocks every later checkout and merge. Once dev contains origin/master,
+    # the release merge is a fast-forward, which 'fetch . dev:master' does on the ref alone.
+    run('git fetch origin')
+    run('git merge origin/master')
+    run('git fetch . dev:master')
+    run(f'git tag -a {tag} -m "Release V{next_version}" master')
     tagged = True
     print(bcolors.OKGREEN + f"Successfully merged into master." + bcolors.ENDC)
 
@@ -181,10 +181,7 @@ print("Nothing is pushed yet. Please check logs in 'dev' and 'master' to be corr
 print("Release notes:\n" + notes)
 asw = get_input("Do you want to do the push? [y/N]") or "N"
 if asw.upper() == "Y":
-    run('git checkout master')
-    run('git push')
-    run('git checkout dev')
-    run('git push')
+    run('git push origin master dev')
 
     if tagged:
         run(f'git push origin {tag}')
@@ -214,11 +211,9 @@ if asw.upper() == "Y":
 else:
     asw = get_input("Do you want to revert the release? [Y/n]") or "Y"
     if asw.upper() == "Y":
-        run('git checkout master')
-        run('git reset --hard origin/master')
+        run('git branch -f master origin/master')
         if tagged:
             run(f'git tag -d {tag}')
-        run('git checkout dev')
         run('git reset --hard origin/dev')
 
 print(bcolors.OKGREEN + f"Release done!" + bcolors.ENDC)

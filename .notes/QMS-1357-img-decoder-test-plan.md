@@ -67,4 +67,4 @@ Stays in `CMapIMG`: TYP properties and `setupTyp()`, languages, `fm`, `scale2bit
 1. Reader class, `CMapIMG` uses it; clang-format, syntax check; user builds; `shots.py replay`.
 2. Fixture script and first `.mp`; build fixtures with r4924.
 3. Test target and test; user builds and runs ctest.
-4. `changelog.txt` line, PR with documentation check (none expected: no visible change).
+4. PR with documentation check (none expected: no visible change). No `changelog.txt` line: development ticket.

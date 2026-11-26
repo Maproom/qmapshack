@@ -59,6 +59,8 @@ src/
 - **Pull requests go to `Maproom/qmapshack` `dev`** from `kiozen:<branch>`, the body from
   `.github/PULL_REQUEST_TEMPLATE.md` with every section kept.
 - **A ticket's branch is named `QMS-nnnn`**, nothing appended.
+- **A development ticket's PR goes to `dev` only complete**: its fix whole and checked, nothing that worked before
+  broken. A ticket that cannot be finished in one step stays on its branch.
 - **A ticket referenced in a ticket or PR is written `QMS-#nnnn`**, so GitHub links it; `changelog.txt` keeps
   `[QMS-nnnn]`.
 - **Every PR is checked for documentation changes**: which `doc/<lang>/pages` text and images show what
@@ -69,7 +71,8 @@ src/
   Claude Code".
 - **Working on a ticket adds its line to `changelog.txt`** as part of the change, under the top
   version block, sorted by ticket number: `[QMS-nnnn] <commit subject>`. Skip it only if the line
-  is already there.
+  is already there. A development ticket (label `development`) gets no line; its parent gets one when
+  it is done.
 - For "what were we working on", read `git status && git diff` first — the live diff is ground
   truth, notes are not.
 - Store project learnings in this file or the subsystem's own `CLAUDE.md` (see "Subsystem notes

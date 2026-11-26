@@ -232,6 +232,7 @@ set( SRCS
     map/IMapOnline.cpp
     map/IMapProp.cpp
     map/cache/CDiskCache.cpp
+    map/garmin/CGarminImg.cpp
     map/garmin/CGarminPoint.cpp
     map/garmin/CGarminPolygon.cpp
     map/garmin/CGarminStrTbl6.cpp
@@ -650,6 +651,7 @@ set( HDRS
     map/IMapProp.h
     map/IMapPropSetup.h
     map/cache/CDiskCache.h
+    map/garmin/CGarminImg.h
     map/garmin/CGarminPoint.h
     map/garmin/CGarminPolygon.h
     map/garmin/CGarminStrTbl6.h

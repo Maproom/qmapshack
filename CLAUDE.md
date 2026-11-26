@@ -801,6 +801,8 @@ file.
   cancelled.
 - `waypoint-icon-resolution-plan.md` — 32 → 96 px waypoint icons, gated on storing `icon_t::focus`
   relative.
+- `QMS-1357-img-decoder-test-plan.md` — GUI-free IMG reader out of `CMapIMG`, decoder test with mkgmap test maps;
+  first step of QMS-1343.
 - `img-mkgmap-gap-plan.md` (QMS-1343) — Garmin IMG decoder vs mkgmap: decoding bugs and missing features with effort.
 
 ### CMake — remaining

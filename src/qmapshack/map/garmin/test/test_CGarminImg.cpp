@@ -46,6 +46,7 @@ class test_CGarminImg : public QObject {
   void refuseIndex();
   void refuseLarger4GB();
   void cutOffExtended();
+  void levelsAcrossTiles();
 };
 
 namespace {
@@ -136,7 +137,7 @@ quint8 readImg(const QString& path, QVector<img_object_t>& objects) {
   polytype_t polygons, polylines;
   pointtype_t points, pois;
   const QRectF world(-M_PI, M_PI / 2, 2 * M_PI, -M_PI);
-  img.load(level.level, world, CGarminImg::filter_t(), [] { return false; }, polygons, polylines, points, pois);
+  img.load(level.bits, world, CGarminImg::filter_t(), [] { return false; }, polygons, polylines, points, pois);
 
   for (const pointtype_t* list : {&points, &pois}) {
     for (const CGarminPoint& p : *list) {
@@ -322,6 +323,33 @@ void test_CGarminImg::cutOffExtended() {
     CGarminPolygon p;
     QCOMPARE(p.decode2(0, 0, 0, true, line, line + size), quint32(size));
     QCOMPARE(p.pixel.isEmpty(), size < 13);
+  }
+}
+
+void test_CGarminImg::levelsAcrossTiles() {
+  // levels.img: tile A with data at 24 bits, tile B at 24 and 20 bits (mp/levels/). Each tile draws at its own
+  // level for every resolution, so both roads are there however far out the map is zoomed.
+  if (fixtureDir().isEmpty()) {
+    QSKIP("QMS_IMG_FIXTURES not set; build the test maps with make_fixtures.py");
+  }
+  const QString path = QDir(fixtureDir()).filePath("levels.img");
+  if (!QFileInfo::exists(path)) {
+    QSKIP(qPrintable("Test map not built: " + path));
+  }
+
+  CGarminImg img(path);
+  img.read();
+  const QRectF world(-M_PI, M_PI / 2, 2 * M_PI, -M_PI);
+  for (quint8 bits = 16; bits <= 24; ++bits) {
+    polytype_t polygons, polylines;
+    pointtype_t points, pois;
+    img.load(bits, world, CGarminImg::filter_t(), [] { return false; }, polygons, polylines, points, pois);
+    QStringList labels;
+    for (const CGarminPolygon& line : polylines) {
+      labels << line.labels.join(" ");
+    }
+    labels.sort();
+    QCOMPARE(labels, QStringList({"A Road", "B Road"}));
   }
 }
 

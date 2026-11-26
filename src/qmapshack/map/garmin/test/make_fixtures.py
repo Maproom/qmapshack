@@ -4,7 +4,8 @@
 usage: make_fixtures.py MKGMAP_JAR OUT_DIR
 
 Each mp/<name>.mp becomes OUT_DIR/<name>.img and its search index OUT_DIR/<name>_mdr.img, an IMG file
-without map tiles. A first line "; mkgmap: <options>" passes options to mkgmap. The jar must be mkgmap r4924 (https://www.mkgmap.org.uk/download/mkgmap.html), the release the
+without map tiles. Each folder mp/<name>/ becomes OUT_DIR/<name>.img, a gmapsupp of its *.mp tiles.
+A first line "; mkgmap: <options>" passes options to mkgmap; in a folder, the first tile's line counts. The jar must be mkgmap r4924 (https://www.mkgmap.org.uk/download/mkgmap.html), the release the
 test was written against.
 
 The test also loads any other IMG file in OUT_DIR, e.g. mkgmap's own test tiles 63240001-3.img from
@@ -63,7 +64,20 @@ def main() -> int:
             shutil.copyfile(index, out / f"{source.stem}_mdr.img")
         print(f"{source.stem}.img, {source.stem}_mdr.img")
 
-    print(f"{len(sources)} test map(s) in {out}, built with mkgmap r{MKGMAP_RELEASE}")
+    groups = sorted(p for p in (Path(__file__).resolve().parent / "mp").iterdir() if p.is_dir() and any(p.glob("*.mp")))
+    for group in groups:
+        tiles = sorted(group.glob("*.mp"))
+        with tempfile.TemporaryDirectory() as tmp:
+            result = run(["java", "-jar", str(jar), f"--output-dir={tmp}", "--gmapsupp", *options(tiles[0]),
+                          *[str(t) for t in tiles]])
+            gmapsupp = Path(tmp) / "gmapsupp.img"
+            if result.returncode != 0 or not gmapsupp.is_file():
+                print(f"{group.name}: mkgmap failed\n{result.stdout}{result.stderr}", file=sys.stderr)
+                return 1
+            shutil.copyfile(gmapsupp, out / f"{group.name}.img")
+        print(f"{group.name}.img ({len(tiles)} tiles)")
+
+    print(f"{len(sources) + len(groups)} test map(s) in {out}, built with mkgmap r{MKGMAP_RELEASE}")
     return 0
 
 

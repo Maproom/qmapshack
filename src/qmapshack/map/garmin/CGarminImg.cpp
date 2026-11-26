@@ -707,9 +707,27 @@ void CGarminImg::processPrimaryMapData() {
 #endif
 }
 
-void CGarminImg::load(unsigned level, const QRectF& viewport, const filter_t& filter,
-                      const std::function<bool()>& abort, polytype_t& polygons, polytype_t& polylines,
-                      pointtype_t& points, pointtype_t& pois) {
+qint32 CGarminImg::level(const subfile_desc_t& subfile, quint8 bits) {
+  const maplevel_t* finest = nullptr;
+  const maplevel_t* coarsest = nullptr;
+  for (const maplevel_t& maplevel : subfile.maplevels) {
+    // an inherited level holds no data
+    if (maplevel.inherited) {
+      continue;
+    }
+    if (maplevel.bits <= bits && (finest == nullptr || maplevel.bits >= finest->bits)) {
+      finest = &maplevel;
+    }
+    if (coarsest == nullptr || maplevel.bits < coarsest->bits) {
+      coarsest = &maplevel;
+    }
+  }
+  const maplevel_t* chosen = finest != nullptr ? finest : coarsest;
+  return chosen != nullptr ? qint32(chosen->level) : -1;
+}
+
+void CGarminImg::load(quint8 bits, const QRectF& viewport, const filter_t& filter, const std::function<bool()>& abort,
+                      polytype_t& polygons, polytype_t& polylines, pointtype_t& points, pointtype_t& pois) {
 #ifndef Q_OS_WIN32
   CFileExt file(filename);
   if (!file.open(QIODevice::ReadOnly)) {
@@ -744,12 +762,13 @@ void CGarminImg::load(unsigned level, const QRectF& viewport, const filter_t& fi
     // qDebug() << "rgn range" << Qt::hex << subfile.parts["RGN"].offset << (subfile.parts["RGN"].offset +
     // subfile.parts["RGN"].size);
 
+    const qint32 tileLevel = level(subfile, bits);
     const QVector<subdiv_desc_t>& subdivs = subfile.subdivs;
     // collect polylines
     for (const subdiv_desc_t& subdiv : subdivs) {
       // if(subdiv.level == level) qDebug() << "subdiv:" << subdiv.level << level <<  subdiv.area << viewport <<
       // subdiv.area.intersects(viewport);
-      if (subdiv.level != level || !subdiv.area.intersects(viewport)) {
+      if (qint32(subdiv.level) != tileLevel || !subdiv.area.intersects(viewport)) {
         continue;
       }
       if (abort()) {

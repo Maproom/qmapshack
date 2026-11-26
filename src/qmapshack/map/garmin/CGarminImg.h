@@ -153,9 +153,9 @@ class CGarminImg {
   void read();
 
   /**
-     @brief Decode all objects of one map level inside the viewport
+     @brief Decode all objects inside the viewport, each tile at its level for @p bits
 
-     @param level       the map level
+     @param bits        the resolution to draw at, see level()
      @param viewport    the area in [rad]
      @param filter      the object kinds to decode
      @param abort       called between tiles and subdivisions; returning true stops loading
@@ -164,8 +164,17 @@ class CGarminImg {
      @param points      receives the decoded points
      @param pois        receives the decoded indexed and extended points
    */
-  void load(unsigned level, const QRectF& viewport, const filter_t& filter, const std::function<bool()>& abort,
+  void load(quint8 bits, const QRectF& viewport, const filter_t& filter, const std::function<bool()>& abort,
             polytype_t& polygons, polytype_t& polylines, pointtype_t& points, pointtype_t& pois);
+
+  /**
+     @brief The level of @p subfile to draw at resolution @p bits
+
+     The finest level with data not finer than @p bits, else the coarsest level with data.
+
+     @return the level, or -1 if the tile has no level with data
+   */
+  static qint32 level(const subfile_desc_t& subfile, quint8 bits);
 
   /** Read @p size bytes at @p offset and remove the XOR mask */
   void readFile(CFileExt& file, quint32 offset, quint32 size, QByteArray& data) const;

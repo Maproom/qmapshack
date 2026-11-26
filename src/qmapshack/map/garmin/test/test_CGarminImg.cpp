@@ -19,6 +19,7 @@
 #include <QDir>
 #include <QFile>
 #include <QRegularExpression>
+#include <QTemporaryDir>
 #include <QTest>
 #include <QTextCodec>
 #include <QtMath>
@@ -28,9 +29,9 @@
 /**
    @brief The reader decodes every object of an mkgmap-built test map as written in its Polish-format source.
 
-   The test maps come from make_fixtures.py; QMS_IMG_FIXTURES names their folder. Any other IMG file there,
-   e.g. mkgmap's own test tiles 63240001-3.img from https://www.mkgmap.org.uk/testinput/img/,
-   only has to load without error.
+   The test maps come from make_fixtures.py; QMS_IMG_FIXTURES names their folder. Their search indexes
+   (*_mdr.img) hold no map tile and must be refused. Any other IMG file there, e.g. mkgmap's own test
+   tiles 63240001-3.img from https://www.mkgmap.org.uk/testinput/img/, only has to load without error.
  */
 class test_CGarminImg : public QObject {
   Q_OBJECT
@@ -39,6 +40,9 @@ class test_CGarminImg : public QObject {
   void decode();
   void load_data();
   void load();
+  void refuseIndex_data();
+  void refuseIndex();
+  void refuseLarger4GB();
 };
 
 namespace {
@@ -224,7 +228,7 @@ void test_CGarminImg::load_data() {
   const QDir images(fixtureDir());
   qint32 rows = 0;
   for (const QString& name : images.entryList({"*.img"}, QDir::Files, QDir::Name)) {
-    if (!sources.exists(QFileInfo(name).completeBaseName() + ".mp")) {
+    if (!sources.exists(QFileInfo(name).completeBaseName() + ".mp") && !name.endsWith("_mdr.img")) {
       QTest::newRow(qPrintable(name)) << images.filePath(name);
       ++rows;
     }
@@ -245,6 +249,58 @@ void test_CGarminImg::load() {
     QFAIL(qPrintable(e.msg));
   }
   QVERIFY(!decoded.isEmpty());
+}
+
+void test_CGarminImg::refuseIndex_data() {
+  QTest::addColumn<QString>("image");
+
+  if (fixtureDir().isEmpty()) {
+    QSKIP("QMS_IMG_FIXTURES not set; build the test maps with make_fixtures.py");
+  }
+
+  const QDir images(fixtureDir());
+  const QStringList names = images.entryList({"*_mdr.img"}, QDir::Files, QDir::Name);
+  for (const QString& name : names) {
+    QTest::newRow(qPrintable(name)) << images.filePath(name);
+  }
+  // QFETCH without a row is a fatal error in QtTest.
+  if (names.isEmpty()) {
+    QSKIP("No search index *_mdr.img in QMS_IMG_FIXTURES; build the test maps with make_fixtures.py");
+  }
+}
+
+void test_CGarminImg::refuseIndex() {
+  QFETCH(QString, image);
+
+  CGarminImg img(image);
+  try {
+    img.read();
+  } catch (const CGarminImg::exce_t& e) {
+    QCOMPARE(e.err, CGarminImg::errFormat);
+    QVERIFY2(e.msg.startsWith("The file holds no map tile"), qPrintable(e.msg));
+    return;
+  }
+  QFAIL("A file without map tiles was read");
+}
+
+void test_CGarminImg::refuseLarger4GB() {
+  // A sparse file: its size is all the check reads.
+  QTemporaryDir dir;
+  QVERIFY(dir.isValid());
+  QFile file(dir.filePath("large.img"));
+  QVERIFY(file.open(QIODevice::WriteOnly));
+  QVERIFY(file.resize(qint64(std::numeric_limits<quint32>::max()) + 1));
+  file.close();
+
+  CGarminImg img(file.fileName());
+  try {
+    img.read();
+  } catch (const CGarminImg::exce_t& e) {
+    QCOMPARE(e.err, CGarminImg::errFormat);
+    QVERIFY2(e.msg.startsWith("The file is larger than 4 GB"), qPrintable(e.msg));
+    return;
+  }
+  QFAIL("A file larger than 4 GB was read");
 }
 
 QTEST_GUILESS_MAIN(test_CGarminImg)

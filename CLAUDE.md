@@ -44,6 +44,7 @@ src/
 - **Run it before reporting it.** Verify headlessly with `doc/tools/shots.py` (`-o <scratch> replay`,
   `selftest`), read the images and the JSON/INI written. Name the command that showed it, or say
   nothing was run and what would settle it.
+- **IMG support ends where Garmin devices end**: nothing they cannot load (e.g. a gmapsupp over 4 GB, FAT32).
 - **Garmin's own rendering is the reference for IMG maps**: BaseCamp under Wine, set up in `~/wine/basecamp`;
   how to run and rebuild it: `.notes/basecamp-wine.md`.
 - **Syntax-check changed files**: `.notes/syntax-check.sh <file.cpp>...` (each file's command from
@@ -108,6 +109,9 @@ Everything must work on Windows, though only Linux is run here. Check each chang
 Target-scoped CMake. Directory scope holds only platform and toolchain flags (PIC, MSVC, Apple
 libc++, ASan).
 
+- **A test run of the app gets its own `HOME`, `XDG_CONFIG_HOME` and `XDG_DATA_HOME`.** `-c <conf>` replaces
+  only the settings; the workspace database stays in `userDataPath()` (`CGisListWks.cpp`). A run stopped by `timeout`
+  saves its state back into `<conf>`.
 - **Never touch the translation block's gating.** With `UPDATE_TRANSLATIONS` off no lupdate target
   exists, so no build rewrites the tracked `.ts` files; Qt's `update_translations` is no substitute.
   Keep the `/locale` resource in the `else` branch: nothing reads it, but it makes the `.qm` files
@@ -804,8 +808,6 @@ file.
   cancelled.
 - `waypoint-icon-resolution-plan.md` — 32 → 96 px waypoint icons, gated on storing `icon_t::focus`
   relative.
-- `QMS-1357-img-decoder-test-plan.md` — GUI-free IMG reader out of `CMapIMG`, decoder test with mkgmap test maps;
-  first step of QMS-1343.
 - `img-mkgmap-gap-plan.md` (QMS-1343) — Garmin IMG decoder vs mkgmap: decoding bugs and missing features with effort.
 
 ### CMake — remaining

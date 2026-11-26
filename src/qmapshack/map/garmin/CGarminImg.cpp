@@ -23,6 +23,7 @@
 #include <QFileInfo>
 #include <QtMath>
 #include <algorithm>
+#include <limits>
 
 #include "helpers/CFileExt.h"
 #include "helpers/Platform.h"
@@ -77,6 +78,11 @@ CGarminImg::~CGarminImg() = default;
 void CGarminImg::read() {
   readBasics();
   processPrimaryMapData();
+  if (maplevels.isEmpty()) {
+    throw exce_t(
+        errFormat,
+        QCoreApplication::translate("CMapIMG", "The file holds no map tile, e.g. a search index: ") + filename);
+  }
 }
 
 void CGarminImg::readFile(CFileExt& file, quint32 offset, quint32 size, QByteArray& data) const {
@@ -114,6 +120,12 @@ void CGarminImg::readFile(CFileExt& file, quint32 offset, quint32 size, QByteArr
 void CGarminImg::readBasics() {
   char tmpstr[64];
   qint64 fsize = QFileInfo(filename).size();
+  // Garmin devices cannot load larger files (FAT32); subfile offsets are 32 bit.
+  if (fsize > std::numeric_limits<quint32>::max()) {
+    throw exce_t(errFormat, QCoreApplication::translate(
+                                "CMapIMG", "The file is larger than 4 GB. Garmin devices cannot load it: ") +
+                                filename);
+  }
 
   CFileExt file(filename);
   if (!file.open(QIODevice::ReadOnly)) {

@@ -1,6 +1,6 @@
 # Garmin BaseCamp under Wine — reference renderer for Garmin maps
 
-BaseCamp shows how Garmin draws an IMG map; QMapShack's and GPXSee's rendering are compared against it.
+BaseCamp shows how Garmin draws an IMG map; QMapShack's rendering is compared against it.
 
 ## Ready setup
 

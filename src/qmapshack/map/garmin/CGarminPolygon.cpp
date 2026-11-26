@@ -208,6 +208,15 @@ quint32 CGarminPolygon::decode2(qint32 iCenterLon, qint32 iCenterLat, quint32 sh
   labels.clear();
   coords.resize(0);
   coords.reserve(maxVecSize);
+  // an extended line's label is never in NET
+  lbl_in_NET = false;
+  lbl_info = 0;
+  pixel.clear();
+
+  // a line cut off by the section's end keeps no points
+  if (pEnd - pStart < 7 || (!(pStart[6] & 0x1) && pEnd - pStart < 8)) {
+    return pEnd - pStart;
+  }
 
   type = *pData++;
   subtype = *pData++;
@@ -231,8 +240,15 @@ quint32 CGarminPolygon::decode2(qint32 iCenterLon, qint32 iCenterLat, quint32 sh
     bytes_total += 1;
   }
 
-  bs_info = *pData++;
   bytes_total += bs_len + 1;
+  if (subtype & 0x20) {
+    bytes_total += 3;
+  }
+  if (((quint32)(pEnd - pStart)) < bytes_total) {
+    return pEnd - pStart;
+  }
+
+  bs_info = *pData++;
 
 #ifdef DEBUG_SHOW_POLY2_DATA
   qDebug() << "type:      " << type << Qt::hex << type;
@@ -248,11 +264,6 @@ quint32 CGarminPolygon::decode2(qint32 iCenterLon, qint32 iCenterLat, quint32 sh
   bits_per_coord(bs_info, *pData, bx, by, signinfo, true);
 
   //     qDebug() << ">>" << bs_len << bytes_total << (pEnd - pStart);
-
-  //     assert((pEnd - pStart) >= bytes_total);
-  if (((quint32)(pEnd - pStart)) < bytes_total) {
-    return pEnd - pStart;
-  }
 
   CShiftReg sr(pData, bs_len, bx, by, false, signinfo);
   qint32 x1, y1, x = 0, y = 0;
@@ -286,18 +297,27 @@ quint32 CGarminPolygon::decode2(qint32 iCenterLon, qint32 iCenterLat, quint32 sh
     //            qDebug() << xy.u << xy.v << pStart << pEnd << (pEnd - pStart) << (cnt + 1) << line;
     //            //assert(0);
     //        }
-    //#ifdef DEBUG_SHOW_POLY_PTS
+    // #ifdef DEBUG_SHOW_POLY_PTS
     //        qDebug() << xy.u << xy.v << (RAD_TO_DEG * xy.u) << (RAD_TO_DEG * xy.v);
-    //#endif
+    // #endif
     coords << QPointF(GARMIN_RAD(x1), GARMIN_RAD(y1));
   }
 
   if (hasV2Label) {
     quint32 offset = gar_ptr_load(uint24_t, pData + bs_len);
-    bytes_total += 3;
     lbl_info = offset & 0x3FFFFF;
   } else {
     lbl_info = 0;
+  }
+
+  if (subtype & 0x80) {
+    const quint32 size = garminExtraDataSize(pStart + bytes_total, pEnd);
+    if (size == 0) {
+      // unknown form: the rest of the section cannot be read
+      bytes_total = pEnd - pStart;
+    } else {
+      bytes_total += size;
+    }
   }
 
   id = cnt++;

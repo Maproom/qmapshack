@@ -43,7 +43,8 @@ src/
   not be checked.
 - **Run it before reporting it.** Verify headlessly with `doc/tools/shots.py` (`-o <scratch> replay`,
   `selftest`), read the images and the JSON/INI written. Name the command that showed it, or say
-  nothing was run and what would settle it.
+  nothing was run and what would settle it. GUI steps (clicks, dialogs): run the app on `Xephyr :7` with its own
+  `HOME`/`XDG_*`, drive it with `xdotool`, read `import -display :7 -window root` screenshots; stop both by PID.
 - **IMG support ends where Garmin devices end**: nothing they cannot load (e.g. a gmapsupp over 4 GB, FAT32).
 - **Garmin's own rendering is the reference for IMG maps**: BaseCamp under Wine, set up in `~/wine/basecamp`;
   how to run and rebuild it: `.notes/basecamp-wine.md`.

@@ -67,6 +67,12 @@ quint32 CGarminPoint::decode2(qint32 iCenterLon, qint32 iCenterLat, quint32 shif
                               const quint8* pEnd) {
   quint32 byte_size = 6;
   quint8 subtype;
+  const quint8* const pStart = pData;
+
+  // a point cut off by the section's end keeps type 0
+  if (pEnd - pStart < 2 || quint32(pEnd - pStart) < byte_size + ((pData[1] & 0x20) ? 3 : 0)) {
+    return pEnd - pStart;
+  }
 
   type = (quint16)(*pData) << 8;
   ++pData;
@@ -74,10 +80,6 @@ quint32 CGarminPoint::decode2(qint32 iCenterLon, qint32 iCenterLat, quint32 shif
   ++pData;
 
   type = 0x10000 + type + (subtype & 0x1F);
-
-  if (subtype & 0x80) {
-    byte_size += 1;
-  }
 
   qint16 dLng = gar_ptr_load(int16_t, pData);
   pData += 2;
@@ -95,6 +97,16 @@ quint32 CGarminPoint::decode2(qint32 iCenterLon, qint32 iCenterLat, quint32 shif
     lbl_ptr = gar_ptr_load(uint24_t, pData);
     isLbl6 = lbl_ptr & 0x00400000;
     lbl_ptr &= 0x003FFFFF;
+    pData += 3;
+  }
+
+  if (subtype & 0x80) {
+    const quint32 size = garminExtraDataSize(pData, pEnd);
+    if (size == 0) {
+      // unknown form: the rest of the section cannot be read
+      return pEnd - pStart;
+    }
+    byte_size += size;
   }
 
   return byte_size;

@@ -25,6 +25,8 @@
 #include <QtMath>
 
 #include "map/garmin/CGarminImg.h"
+#include "map/garmin/CGarminPoint.h"
+#include "map/garmin/CGarminPolygon.h"
 
 /**
    @brief The reader decodes every object of an mkgmap-built test map as written in its Polish-format source.
@@ -43,6 +45,7 @@ class test_CGarminImg : public QObject {
   void refuseIndex_data();
   void refuseIndex();
   void refuseLarger4GB();
+  void cutOffExtended();
 };
 
 namespace {
@@ -301,6 +304,25 @@ void test_CGarminImg::refuseLarger4GB() {
     return;
   }
   QFAIL("A file larger than 4 GB was read");
+}
+
+void test_CGarminImg::cutOffExtended() {
+  // An extended point and line with label and one byte of extra data, as mkgmap writes them.
+  const quint8 point[] = {0x11, 0xA1, 0x10, 0x00, 0x20, 0x00, 0x01, 0x00, 0x00, 0x05};
+  const quint8 line[] = {0x10, 0xA0, 0x10, 0x00, 0x20, 0x00, 0x07, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x05};
+
+  for (qsizetype size = 0; size <= qsizetype(sizeof(point)); ++size) {
+    CGarminPoint p;
+    QCOMPARE(p.decode2(0, 0, 0, point, point + size), quint32(size));
+    // Cut before the end of the label: nothing decoded. Only the extra data cut: the point itself is whole.
+    QCOMPARE(p.type, size < 9 ? quint32(0) : quint32(0x11101));
+  }
+
+  for (qsizetype size = 0; size <= qsizetype(sizeof(line)); ++size) {
+    CGarminPolygon p;
+    QCOMPARE(p.decode2(0, 0, 0, true, line, line + size), quint32(size));
+    QCOMPARE(p.pixel.isEmpty(), size < 13);
+  }
 }
 
 QTEST_GUILESS_MAIN(test_CGarminImg)

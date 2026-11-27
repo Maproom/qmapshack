@@ -40,5 +40,6 @@ class CGarminStrTbl6 : public IGarminStrTbl {
   quint32 bits = 0;
   /// pointer to current data;
   const quint8* p = nullptr;
+  const quint8* pEnd = nullptr; /**< end of the data read */
 };
 #endif  // CGARMINSTRTBL6_H

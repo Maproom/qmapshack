@@ -18,6 +18,6 @@
 
 #include "units/IUnit.h"
 
-// IUnit.cpp needs CMainWindow. No unit is set: a test map with an elevation label (0x1f) would dereference it.
+// IUnit.cpp needs CMainWindow. No unit is set: CGarminPoint/CGarminPolygon::getLabelText() would dereference it.
 const IUnit* IUnit::m_self = nullptr;
 void IUnit::meter2elevation(qreal, QString&, QString&) const {}

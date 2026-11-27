@@ -1,6 +1,6 @@
 ; mkgmap: --code-page=1252 --lower-case --route --transparent
 ; A routable road, labelled through NET, then labelled extended lines and polygons; no standard polygon.
-; The unlabelled road comes first and takes NET1 offset 0, which QMS-#1347 (L2) fixes.
+; The labelled road takes NET1 offset 0, an unlabelled road follows.
 [IMG ID]
 CodePage=1252
 LblCoding=9
@@ -16,21 +16,21 @@ Zoom1=1
 
 [POLYLINE]
 Type=0x06
-Data0=(47.4800000,10.4900000), (47.4850000,10.5050000)
-RoadID=1
-RouteParam=3,0,0,0,0,0,0,0,0,0,0,0
-Nod1=0,1,0
-Nod2=1,2,0
-[END]
-
-[POLYLINE]
-Type=0x06
 Data0=(47.4900000,10.4900000), (47.4950000,10.5050000), (47.5050000,10.5150000)
 Label=Main Street
 RoadID=2
 RouteParam=3,0,0,0,0,0,0,0,0,0,0,0
 Nod1=0,3,0
 Nod2=2,4,0
+[END]
+
+[POLYLINE]
+Type=0x06
+Data0=(47.4800000,10.4900000), (47.4850000,10.5050000)
+RoadID=1
+RouteParam=3,0,0,0,0,0,0,0,0,0,0,0
+Nod1=0,1,0
+Nod2=1,2,0
 [END]
 
 [POLYLINE]

@@ -27,6 +27,7 @@
 #include "map/garmin/CGarminImg.h"
 #include "map/garmin/CGarminPoint.h"
 #include "map/garmin/CGarminPolygon.h"
+#include "map/garmin/IGarminStrTbl.h"
 
 /**
    @brief The reader decodes every object of an mkgmap-built test map as written in its Polish-format source.
@@ -47,6 +48,10 @@ class test_CGarminImg : public QObject {
   void refuseLarger4GB();
   void cutOffExtended();
   void levelsAcrossTiles();
+  void displayText_data();
+  void displayText();
+  void splitHeight_data();
+  void splitHeight();
 };
 
 namespace {
@@ -67,6 +72,21 @@ struct img_object_t {
 };
 
 QString fixtureDir() { return qEnvironmentVariable("QMS_IMG_FIXTURES"); }
+
+/** A Polish-format label with each "~[0xNN]" replaced by that character, as mkgmap reads it. */
+QString unescape(const QString& label) {
+  static const QRegularExpression reEscape(R"(~\[0x([0-9a-fA-F]{2})\])");
+  QString result;
+  qsizetype last = 0;
+  QRegularExpressionMatchIterator it = reEscape.globalMatch(label);
+  while (it.hasNext()) {
+    const QRegularExpressionMatch m = it.next();
+    result += label.mid(last, m.capturedStart() - last);
+    result += QChar(m.captured(1).toUShort(nullptr, 16));
+    last = m.capturedEnd();
+  }
+  return result + label.mid(last);
+}
 
 QVector<mp_object_t> readMp(const QString& path) {
   QVector<mp_object_t> objects;
@@ -102,7 +122,7 @@ QVector<mp_object_t> readMp(const QString& path) {
     } else if (current != nullptr && line.startsWith("Type=")) {
       current->type = line.mid(5).toUInt(nullptr, 16);
     } else if (current != nullptr && line.startsWith("Label=")) {
-      current->label = line.mid(6);
+      current->label = unescape(line.mid(6));
     } else if (current != nullptr && line.startsWith("Data0=")) {
       QRegularExpressionMatchIterator it = reCoord.globalMatch(line);
       while (it.hasNext()) {
@@ -351,6 +371,51 @@ void test_CGarminImg::levelsAcrossTiles() {
     labels.sort();
     QCOMPARE(labels, QStringList({"A Road", "B Road"}));
   }
+}
+
+void test_CGarminImg::displayText_data() {
+  QTest::addColumn<QString>("label");
+  QTest::addColumn<QString>("text");
+
+  // As BaseCamp 4.7.5 shows these labels zoomed in.
+  QTest::newRow("plain") << "Plain Road" << "Plain Road";
+  QTest::newRow("prefix 0x1b") << unescape("Rue d'~[0x1b]Alsace") << "Rue d'Alsace";
+  QTest::newRow("prefix 0x1e") << unescape("Rue de la~[0x1e]Concorde") << "Rue de la Concorde";
+  QTest::newRow("suffix 0x1c") << unescape("Haupt~[0x1c]strasse") << "Hauptstrasse";
+  QTest::newRow("suffix 0x1f") << unescape("Main~[0x1f]Street") << "Main Street";
+  QTest::newRow("both") << unescape("Carrer d'~[0x1b]Europa~[0x1c]kalea") << "Carrer d'Europakalea";
+  QTest::newRow("0x1d") << unescape("Alpha~[0x1d]Beta") << "Alpha";
+}
+
+void test_CGarminImg::displayText() {
+  QFETCH(QString, label);
+  QFETCH(QString, text);
+  QCOMPARE(IGarminStrTbl::displayText(label), text);
+}
+
+void test_CGarminImg::splitHeight_data() {
+  QTest::addColumn<QString>("label");
+  QTest::addColumn<bool>("hasHeight");
+  QTest::addColumn<QString>("name");
+  QTest::addColumn<qreal>("feet");
+
+  QTest::newRow("name and height") << unescape("Gipfel~[0x1f]1234") << true << "Gipfel" << 1234.0;
+  QTest::newRow("height only") << unescape("~[0x1f]1234") << true << "" << 1234.0;
+  QTest::newRow("suffix") << unescape("Main~[0x1f]Street") << false << "" << 0.0;
+  QTest::newRow("no separator") << "Spitze 1234" << false << "" << 0.0;
+}
+
+void test_CGarminImg::splitHeight() {
+  QFETCH(QString, label);
+  QFETCH(bool, hasHeight);
+  QFETCH(QString, name);
+  QFETCH(qreal, feet);
+
+  QString gotName;
+  qreal gotFeet = 0;
+  QCOMPARE(IGarminStrTbl::splitHeight(label, gotName, gotFeet), hasHeight);
+  QCOMPARE(gotName, name);
+  QCOMPARE(gotFeet, feet);
 }
 
 QTEST_GUILESS_MAIN(test_CGarminImg)

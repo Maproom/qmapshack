@@ -46,3 +46,5 @@ Stop BaseCamp and Xephyr by PID, then `WINEPREFIX=~/wine/basecamp/prefix wineser
 - Zoom with the mouse wheel (`click 4`/`click 5`); `+`/`-` keys do nothing. Steps by scale bar (~100 px):
   … 1 km, 700 m, 500 m, 300 m, 200 m.
 - Screenshot: `import -display :7 -window root -crop 1100x850+298+55 out.png` (map area of a 1400x950 window at 0,0).
+- `winebrowser.exe` is disabled (`HKCU\Software\Wine\DllOverrides`, empty value): BaseCamp opened tabs in the host's
+  browser at start. Now it shows "Modul nicht gefunden" once; click OK.

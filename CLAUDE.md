@@ -130,6 +130,7 @@ libc++, ASan).
   further difference goes into that override, never a per-symptom patch.
 - **`QLocale::system()` follows `LANGUAGE`, not only `LANG`.** A desktop-independent run passes
   `--locale`.
+- **Run tests with `/usr/bin/ctest`**: `/usr/local/bin/ctest` is a broken pip shim.
 - **Stack smashing at startup after a checkout:** stale objects; `ninja -C build -t clean qmapshack`.
 - **`qms_options`** is the INTERFACE target carrying the project's warning set. First-party targets
   link it `PRIVATE`; bundled 3rdparty must not. Add flags through `qms_add_flag_if_supported()`.
@@ -397,6 +398,11 @@ preview curve.
 `get()` is a non-virtual wrapper over a bounded LRU `QCache` (key `(type << 32) | offset`); a miss
 calls the pure-virtual `decode()` of `CGarminStrTbl6/8/Utf8`. Keep the split so the cache lives in one
 place. Only the draw thread touches it, so no lock.
+
+**A decoded label keeps the separators 0x1b-0x1f**; display text goes through `IGarminStrTbl::displayText()`, never
+`labels.join()`. The decoder cannot tell a point from a line (both pass `norm`, one cache entry per offset). As in
+BaseCamp, a number after 0x1f is a height in feet only on points 0x6200, 0x6300 and 0x6400-0x66FF; other points hide
+it, and on a line 0x1f is a suffix separator.
 
 ---
 

@@ -39,35 +39,23 @@ void CGarminStrTblUtf8::decode(CFileExt& file, quint32 offset, type_e t, QString
   }
 
   QByteArray data;
-  quint32 size = (sizeLBL1 - offset) < 200 ? (sizeLBL1 - offset) : 200;
+  // mkgmap writes up to 170 code points, at most 4 bytes each in UTF-8
+  const quint32 size = qMin(sizeLBL1 - offset, quint32(sizeof(buffer) - 1));
   readFile(file, offsetLBL1 + offset, size, data);
-  char* lbl = data.data();
+  const char* lbl = data.constData();
+  const char* const end = lbl + data.size();
 
   char* pBuffer = buffer;
-  *pBuffer = 0;
-
-  unsigned lastSeperator = 0;
-  while (*lbl != 0) {
-    if ((unsigned)*lbl >= 0x1B && (unsigned)*lbl <= 0x1F) {
-      lastSeperator = *lbl;
-      *pBuffer = 0;
-      if (strlen(buffer)) {
-        labels << processLabel(buffer, lastSeperator);
-        pBuffer = buffer;
-        *pBuffer = 0;
-      }
+  while (lbl < end && *lbl != 0) {
+    if ((unsigned)*lbl < 0x07) {
       ++lbl;
       continue;
-    } else if ((unsigned)*lbl < 0x07) {
-      ++lbl;
-      continue;
-    } else {
-      *pBuffer++ = *lbl++;
     }
+    *pBuffer++ = *lbl++;
   }
 
   *pBuffer = 0;
   if (strlen(buffer)) {
-    labels << processLabel(buffer, lastSeperator);
+    labels << processLabel(buffer);
   }
 }

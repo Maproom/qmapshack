@@ -26,6 +26,7 @@
 
 #include <QtCore>
 
+#include "CGarminMarine.h"
 #include "Garmin.h"
 #include "IGarminStrTbl.h"
 #include "helpers/Platform.h"
@@ -107,15 +108,36 @@ quint32 CGarminPoint::decode2(qint32 iCenterLon, qint32 iCenterLat, quint32 shif
       // unknown form: the rest of the section cannot be read
       return pEnd - pStart;
     }
+    extra = QByteArray(reinterpret_cast<const char*>(pData), size);
     byte_size += size;
   }
 
   return byte_size;
 }
 
+namespace {
+/** A buoy's colours in chart notation (INT 1 Q): "black-yellow" is "BY". */
+QString buoyColours(quint8 colour) {
+  QString text;
+  for (const QString& name : QString(CGarminMarine::colourName(colour)).split('-', Qt::SkipEmptyParts)) {
+    text += name == "black" ? "B" : (name == "orange" ? "Or" : name.left(1).toUpper());
+  }
+  return text;
+}
+}  // namespace
+
 QString CGarminPoint::getLabelText() const {
   if (labels.isEmpty()) {
     return QString();
+  }
+
+  // BaseCamp labels an obstruction with its height: "Obstruction - 3"
+  if ((type & 0x1FF00) == 0x10400 && !extra.isEmpty()) {
+    const CGarminMarine marine = CGarminMarine::decode(type, CGarminMarine::Kind::ePoint, extra);
+    if (marine.depth.valid) {
+      // BaseCamp leaves out the unit on the map
+      return IGarminStrTbl::displayText(labels) + " - " + distanceText(marine.depth).section(' ', 0, 0);
+    }
   }
 
   QString name;
@@ -157,4 +179,71 @@ QString CGarminPoint::getName() const {
     return name;
   }
   return IGarminStrTbl::displayText(labels.first());
+}
+
+QString CGarminPoint::distanceText(const CGarminMarine::distance_t& d) {
+  qreal val = 0;
+  QString unit;
+  IUnit::self().meter2elevation(d.metric ? d.value : d.value * 0.3048, val, unit);
+  const qreal rounded = qRound(val * 10) / 10.0;
+  return QString::number(rounded, 'f', qAbs(rounded - qRound(rounded)) < 0.05 ? 0 : 1) + " " + unit;
+}
+
+QString CGarminPoint::getInfoText() const {
+  QStringList lines;
+  if (hasLabel()) {
+    lines << getLabelText();
+  }
+  const CGarminMarine marine = CGarminMarine::decode(type, CGarminMarine::Kind::ePoint, extra);
+  if (marine.isEmpty()) {
+    return lines.join("\n");
+  }
+
+  if ((type & 0x1FF00) == 0x10200 && marine.colour != 0) {
+    lines << tr("Colour: %1").arg(buoyColours(marine.colour));
+  }
+  const QString light = marine.lightCharacteristic();
+  if (!light.isEmpty()) {
+    lines << tr("Light: %1").arg(light);
+  }
+  for (const QString& sector : marine.sectorTexts()) {
+    lines << tr("Sector: %1").arg(sector);
+  }
+  if (marine.heightAboveFoundation.valid) {
+    lines << tr("Height above foundation: %1").arg(distanceText(marine.heightAboveFoundation));
+  }
+  if (marine.leadingAngle >= 0) {
+    lines << tr("Leading angle: %1°").arg(marine.leadingAngle);
+  }
+  if (marine.racon) {
+    lines << tr("Racon");
+  }
+  if (marine.depth.valid) {
+    const QString value = distanceText(marine.depth);
+    lines << (CGarminMarine::isHeight(type, CGarminMarine::Kind::ePoint) ? tr("Height: %1").arg(value)
+                                                                         : tr("Depth: %1").arg(value));
+  }
+  static const char* positions[] = {nullptr,
+                                    nullptr,
+                                    QT_TRANSLATE_NOOP("CGarminPoint", "doubtful"),
+                                    QT_TRANSLATE_NOOP("CGarminPoint", "existence doubtful"),
+                                    QT_TRANSLATE_NOOP("CGarminPoint", "approximate"),
+                                    QT_TRANSLATE_NOOP("CGarminPoint", "reported")};
+  if (marine.position < std::size(positions) && positions[marine.position] != nullptr) {
+    lines << tr("Position: %1").arg(tr(positions[marine.position]));
+  }
+  const QStringList facilities = marine.facilityNames();
+  if (!facilities.isEmpty()) {
+    lines << tr("Facilities: %1").arg(facilities.join(", "));
+  }
+  if (!localDesignator.isEmpty()) {
+    lines << tr("Local designator: %1").arg(localDesignator);
+  }
+  if (!internationalDesignator.isEmpty()) {
+    lines << tr("International designator: %1").arg(internationalDesignator);
+  }
+  if (!note.isEmpty()) {
+    lines << note;
+  }
+  return lines.join("\n");
 }

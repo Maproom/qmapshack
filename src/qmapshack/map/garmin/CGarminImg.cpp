@@ -27,6 +27,7 @@
 
 #include "helpers/CFileExt.h"
 #include "helpers/Platform.h"
+#include "map/garmin/CGarminMarine.h"
 #include "map/garmin/CGarminStrTbl6.h"
 #include "map/garmin/CGarminStrTbl8.h"
 #include "map/garmin/CGarminStrTblUtf8.h"
@@ -789,6 +790,27 @@ void CGarminImg::load(quint8 bits, const QRectF& viewport, const filter_t& filte
 #endif
 }
 
+namespace {
+/** Note and designators of a light or buoy: LBL offsets in its extra data. */
+void readMarineTexts(CFileExt& file, IGarminStrTbl* strtbl, CGarminPoint& p) {
+  const quint32 r = p.type & 0x1FF00;
+  if (p.extra.isEmpty() || (r != 0x10100 && r != 0x10200)) {
+    return;
+  }
+  const CGarminMarine marine = CGarminMarine::decode(p.type, CGarminMarine::Kind::ePoint, p.extra);
+  const auto read = [&](quint32 offset, QString& text) {
+    if (offset != CGarminMarine::kNoLabel) {
+      QStringList labels;
+      strtbl->get(file, offset, IGarminStrTbl::norm, labels);
+      text = IGarminStrTbl::displayText(labels);
+    }
+  };
+  read(marine.note, p.note);
+  read(marine.localDesignator, p.localDesignator);
+  read(marine.internationalDesignator, p.internationalDesignator);
+}
+}  // namespace
+
 void CGarminImg::loadSubDiv(CFileExt& file, const subdiv_desc_t& subdiv, IGarminStrTbl* strtbl,
                             const QByteArray& rgndata, const filter_t& filter, const QRectF& viewport,
                             polytype_t& polylines, polytype_t& polygons, pointtype_t& points, pointtype_t& pois) {
@@ -1011,6 +1033,7 @@ void CGarminImg::loadSubDiv(CFileExt& file, const subdiv_desc_t& subdiv, IGarmin
       if (strtbl) {
         p.isLbl6 ? strtbl->get(file, p.lbl_ptr, IGarminStrTbl::poi, p.labels)
                  : strtbl->get(file, p.lbl_ptr, IGarminStrTbl::norm, p.labels);
+        readMarineTexts(file, strtbl, p);
       }
       pois.push_back(p);
     }

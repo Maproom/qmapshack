@@ -21,3 +21,4 @@
 // IUnit.cpp needs CMainWindow. No unit is set: CGarminPoint/CGarminPolygon::getLabelText() would dereference it.
 const IUnit* IUnit::m_self = nullptr;
 void IUnit::meter2elevation(qreal, QString&, QString&) const {}
+void IUnit::meter2elevation(qreal, qreal&, QString&) const {}

@@ -1,0 +1,14 @@
+; mkgmap:
+; Without --code-page mkgmap writes code page 0 into the TYP header; the labels are still readable text.
+[_id]
+FID=6357
+ProductCode=1
+[end]
+
+[_line]
+Type=0x01
+String=0x04,Line no code page
+LineWidth=2
+Xpm="0 0 1 0"
+"a c #ff0000"
+[end]

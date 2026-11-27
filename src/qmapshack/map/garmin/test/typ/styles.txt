@@ -1,0 +1,91 @@
+; mkgmap: --code-page=1252
+; Styles mkgmap writes that the TYP decoder must read: a line with three colours and a transparent fourth, extended
+; types, a POI with per-colour transparency, true-colour POIs (opaque, a transparent pixel, a half transparent pixel).
+; FID and product code differ to tell them apart.
+[_id]
+FID=6357
+ProductCode=2
+CodePage=1252
+[end]
+
+[_drawOrder]
+Type=0x02,1
+Type=0x18a00,2
+[end]
+
+[_polygon]
+Type=0x02
+String=0x04,Area plain
+Xpm="0 0 1 0"
+"a c #778899"
+[end]
+
+[_polygon]
+Type=0x18a00
+String=0x04,Area ext
+Xpm="0 0 1 0"
+"a c #112233"
+[end]
+
+[_line]
+Type=0x01
+String=0x04,Line four colours
+LineWidth=4
+BorderWidth=2
+Xpm="0 0 4 0"
+"a c #ff0000"
+"b c #000000"
+"3 c #00ff00"
+"4 c none"
+[end]
+
+[_line]
+Type=0x18a00
+String=0x04,Line ext
+LineWidth=3
+Xpm="0 0 1 0"
+"a c #0000ff"
+[end]
+
+[_point]
+Type=0x2f06
+String=0x04,Alpha icon
+DayXpm="4 2 3 1"
+"a c #ff0000"
+"b c #00ff0088"
+"c c #00000000"
+"aabb"
+"ccaa"
+[end]
+
+[_point]
+Type=0x2f07
+String=0x04,True colour icon
+DayXpm="2 2 0 0"
+"#ff0000#00ff00"
+"#0000ff#ffffff"
+[end]
+
+[_point]
+Type=0x2f08
+String=0x04,True colour clear pixel
+DayXpm="2 2 0 0"
+"#ff0000#00ff00"
+"#0000ff#00000000"
+[end]
+
+[_point]
+Type=0x2f09
+String=0x04,True colour half pixel
+DayXpm="2 2 0 0"
+"#ff0000#00ff00"
+"#0000ff#ffffff88"
+[end]
+
+[_point]
+Type=0x2f0a
+String=0x04,True colour odd width
+DayXpm="3 2 0 0"
+"#ff0000#00ff00#0000ff"
+"#ffff00#00ffff#ffffff88"
+[end]

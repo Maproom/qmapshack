@@ -200,6 +200,9 @@ fails with `winnt.h: #error "No Target Architecture"`. clang-format sorts alphab
 those in) or guard the block with `// clang-format off` as `CMainWindow.cpp` does.
 
 - **Every control-flow block requires braces**, including single-statement bodies.
+- **No preprocessor switches unless unavoidable.** A deprecation that goes away with the next minimum Qt version
+  stays a warning (`QImage::mirrored()`: `flipped()` needs Qt 6.9).
+- **Platform-specific code (`#pragma pack`, Windows branches) is not changed without a build on that platform.**
 - **Doc comments are `/** */` doxygen blocks** (`@brief`, `@param`, `@return`); inline member docs
   are `/**< */`; plain `//` for non-doxygen annotations.
 - **Comments state the fact needed to understand the code — one terse line.** Explain a non-obvious
@@ -403,6 +406,10 @@ place. Only the draw thread touches it, so no lock.
 `labels.join()`. The decoder cannot tell a point from a line (both pass `norm`, one cache entry per offset). As in
 BaseCamp, a number after 0x1f is a height in feet only on points 0x6200, 0x6300 and 0x6400-0x66FF; other points hide
 it, and on a line 0x1f is a suffix separator.
+
+**`test_CGarminImg` compiles `CGarminTyp`** with `test/stub/CMainWindow.h` ahead of `src/qmapshack` on the include
+path: the application's header needs the generated main window UI. A test source using more of `CMainWindow` needs
+more stub.
 
 ---
 

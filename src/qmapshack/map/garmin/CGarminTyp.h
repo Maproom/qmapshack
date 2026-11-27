@@ -187,6 +187,12 @@ class CGarminTyp {
   void decodeBitmap(QDataStream& in, QImage& img, int w, int h, int bpp);
   bool decodeBppAndBytes(int ncolors, int w, int flags, int& bpp, int& bytes);
   bool decodeColorTable(QDataStream& in, QImage& img, int ncolors, int maxcolor, bool hasAlpha);
+  /**
+     @brief Decode a true colour POI image: every pixel blue, green, red, no colour table.
+
+     @param mode 0x00 opaque, 0x10 a transparent colour first, 0x20 4 bit transparency after each pixel
+   */
+  QImage decodeTrueColor(QDataStream& in, qint32 w, qint32 h, quint8 mode);
 
   struct typ_section_t {
     typ_section_t() : dataOffset(0), dataLength(0), arrayOffset(0), arrayModulo(0), arraySize(0) {}

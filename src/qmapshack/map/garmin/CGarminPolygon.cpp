@@ -402,16 +402,31 @@ QString CGarminPolygon::getLabelText() const {
         QString val, unit;
         IUnit::self().feet2elevation(feet, val, unit);
         str = val + " " + unit;
-      } else {
-        str = IGarminStrTbl::displayText(labels).simplified();
+      } else if (!labels.isEmpty()) {
+        str = IGarminStrTbl::displayText(labels.first()).simplified();
       }
     } break;
 
     default:
-      str = IGarminStrTbl::displayText(labels).simplified();
+      str = labels.isEmpty() ? QString() : IGarminStrTbl::displayText(labels.first()).simplified();
   }
 
   return str;
+}
+
+QString CGarminPolygon::getInfoText() const {
+  if (labels.size() < 2) {
+    return getLabelText();
+  }
+
+  QStringList texts;
+  for (const QString& label : labels) {
+    const QString text = IGarminStrTbl::displayText(label).simplified();
+    if (!text.isEmpty()) {
+      texts << text;
+    }
+  }
+  return texts.join(", ");
 }
 
 // extract bits per coordinate

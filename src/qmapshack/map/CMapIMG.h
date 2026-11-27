@@ -115,9 +115,12 @@ class CMapIMG : public IMap {
     QString text;
     QFont font;
     QColor color;
+    quint8 shield = 0; /**< highway shield code of the label, 0 for none */
   };
 
   QVector<textpath_t> textpaths;
+  /** Draw a road's ref as a highway shield on the middle of its longest straight stretch, as BaseCamp does. */
+  void drawShield(BLContext& ctx, const textpath_t& textpath, QList<QPainterPath>& placed);
   qint8 selectedLanguage;
   /** reads and decodes the file */
   CGarminImg img;

@@ -1,5 +1,6 @@
 ; mkgmap: --code-page=1252 --lower-case
-; Labels with the separators 0x1b-0x1f, heights after 0x1f and a 170-character label, the most mkgmap writes.
+; Labels with the separators 0x1b-0x1f, heights after 0x1f, a highway shield and a 170-character label, the most
+; mkgmap writes.
 [IMG ID]
 CodePage=1252
 LblCoding=9
@@ -64,4 +65,10 @@ Label=~[0x1f]1234
 Type=0x6616
 Data0=(47.5800000,10.5000000)
 Label=Gipfel~[0x1f]1234
+[END]
+
+[POLYLINE]
+Type=0x01
+Data0=(47.5900000,10.5000000), (47.5950000,10.5100000)
+Label=~[0x04]A7
 [END]

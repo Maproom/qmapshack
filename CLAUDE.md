@@ -402,7 +402,7 @@ preview curve.
 calls the pure-virtual `decode()` of `CGarminStrTbl6/8/Utf8`. Keep the split so the cache lives in one
 place. Only the draw thread touches it, so no lock.
 
-**A decoded label keeps the separators 0x1b-0x1f**; display text goes through `IGarminStrTbl::displayText()`, never
+**A decoded label keeps the separators 0x1b-0x1f and a leading highway shield code 0x01-0x06**; display text goes through `IGarminStrTbl::displayText()`, never
 `labels.join()`. The decoder cannot tell a point from a line (both pass `norm`, one cache entry per offset). As in
 BaseCamp, a number after 0x1f is a height in feet only on points 0x6200, 0x6300 and 0x6400-0x66FF; other points hide
 it, and on a line 0x1f is a suffix separator.

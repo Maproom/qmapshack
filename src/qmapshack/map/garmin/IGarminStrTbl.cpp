@@ -71,7 +71,21 @@ void IGarminStrTbl::get(CFileExt& file, quint32 offset, type_e t, QStringList& i
     info = *cached;
     return;
   }
-  decode(file, offset, t, info);
+  if (t == net) {
+    // a road's labels in NET1: each decoded on its own, in their order
+    info.clear();
+    for (quint32 label : netLabels(file, offset)) {
+      QStringList one;
+      decode(file, label, norm, one);
+      // an empty label keeps its place: the first one is the one drawn
+      info << (one.isEmpty() ? QString() : one.first());
+    }
+    while (!info.isEmpty() && info.last().isEmpty()) {
+      info.removeLast();
+    }
+  } else {
+    decode(file, offset, t, info);
+  }
   labelCache.insert(key, new QStringList(info));
 }
 
@@ -120,21 +134,6 @@ quint32 IGarminStrTbl::calcOffset(CFileExt& file, const quint32 offset, type_e t
     }
     newOffset = gar_ptr_load(quint32, buffer.data());
     newOffset = (newOffset & 0x003FFFFF);
-  } else if (t == net) {
-    if (offsetNET1 == 0) {
-      return 0xFFFFFFFF;
-    }
-
-    QByteArray data;
-    readFile(file, offsetNET1 + (offset << addrshift2), sizeof(quint32), data);
-    if (data.size() < qsizetype(sizeof(quint32))) {
-      return 0xFFFFFFFF;
-    }
-    newOffset = gar_ptr_load(quint32, data.data());
-    if (newOffset & 0x00400000) {
-      return 0xFFFFFFFF;
-    }
-    newOffset = (newOffset & 0x003FFFFF);
   }
 
   newOffset <<= addrshift1;
@@ -142,13 +141,40 @@ quint32 IGarminStrTbl::calcOffset(CFileExt& file, const quint32 offset, type_e t
   return newOffset;
 }
 
+QList<quint32> IGarminStrTbl::netLabels(CFileExt& file, quint32 offset) {
+  QList<quint32> labels;
+  if (offsetNET1 == 0) {
+    return labels;
+  }
+
+  // up to 4 label offsets of 3 bytes, the last one with bit 23 set
+  const quint32 record = offsetNET1 + (offset << addrshift2);
+  for (quint32 i = 0; i < 4; ++i) {
+    QByteArray data;
+    readFile(file, record + 3 * i, 3, data);
+    if (data.size() < 3) {
+      break;
+    }
+    const quint8* p = reinterpret_cast<const quint8*>(data.constData());
+    const quint32 value = p[0] | (p[1] << 8) | (p[2] << 16);
+    if (value & 0x00400000) {
+      break;
+    }
+    labels << (value & 0x003FFFFF);
+    if (value & 0x00800000) {
+      break;
+    }
+  }
+  return labels;
+}
+
 QString IGarminStrTbl::processLabel(const char* buffer) {
-  // The separators 0x1b-0x1f are taken over as they are: Shift_JIS decodes 0x1c as U+007F. No code page uses
-  // these bytes inside a multi-byte character.
+  // The separators 0x1b-0x1f and shield codes 0x01-0x06 are taken over as they are: Shift_JIS decodes 0x1c as
+  // U+007F. No code page uses these bytes inside a multi-byte character.
   QString label;
   const char* start = buffer;
   for (const char* c = buffer;; ++c) {
-    const bool isSeparator = *c >= 0x1B && *c <= 0x1F;
+    const bool isSeparator = (*c >= 0x1B && *c <= 0x1F) || (*c >= 0x01 && *c <= 0x06);
     if (*c != 0 && !isSeparator) {
       continue;
     }
@@ -165,11 +191,21 @@ QString IGarminStrTbl::processLabel(const char* buffer) {
 
 QString IGarminStrTbl::displayText(const QString& label) {
   QString text = label.left(label.indexOf(QChar(0x1d)));
+  // a shield code is no text, wherever it stands
+  text.removeIf([](QChar c) { return c.unicode() >= 0x01 && c.unicode() <= 0x06; });
   text.remove(QChar(0x1b));
   text.remove(QChar(0x1c));
   text.replace(QChar(0x1e), ' ');
   text.replace(QChar(0x1f), ' ');
   return text;
+}
+
+quint8 IGarminStrTbl::shieldCode(const QString& label) {
+  if (label.isEmpty()) {
+    return 0;
+  }
+  const char16_t c = label.front().unicode();
+  return (c >= 0x01 && c <= 0x06) ? quint8(c) : 0;
 }
 
 QString IGarminStrTbl::displayText(const QStringList& labels) {
@@ -188,7 +224,7 @@ bool IGarminStrTbl::splitHeight(const QString& label, QString& name, qreal& feet
   }
 
   bool ok = false;
-  const qreal value = text.mid(idx + 1).toDouble(&ok);
+  const qreal value = QStringView(text).mid(idx + 1).toDouble(&ok);
   if (!ok) {
     return false;
   }

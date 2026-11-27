@@ -160,6 +160,9 @@ void CGarminStrTbl6::decode(CFileExt& file, quint32 offset, type_e t, QStringLis
         }
       } else if (c1 >= 0x1D && c1 <= 0x1F) {
         buffer[idx++] = c1;
+      } else if (c1 >= 0x2A && c1 <= 0x2F) {
+        // shield codes 0x01-0x06, written as code + 0x29
+        buffer[idx++] = c1 - 0x29;
       }
     } else {
       buffer[idx++] = str6tbl1[c1];

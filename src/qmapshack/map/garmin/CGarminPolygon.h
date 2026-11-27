@@ -43,7 +43,10 @@ class CGarminPolygon {
   quint32 decode2(qint32 iCenterLon, qint32 iCenterLat, quint32 shift, bool line, const quint8* pData,
                   const quint8* pEnd);
 
+  /** The first label as drawn on the map, a contour's height converted from feet. */
   QString getLabelText() const;
+  /** All labels, as listed in the map's info: a road can have up to 4. */
+  QString getInfoText() const;
 
   bool hasLabel() const { return !labels.isEmpty(); }
 

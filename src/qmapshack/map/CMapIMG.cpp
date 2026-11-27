@@ -1194,7 +1194,7 @@ void CMapIMG::drawPolylines(BLContext& ctx, polytype_t& lines, const QPointF& sc
   const auto top =
       std::stable_partition(types.begin(), types.end(), [](quint32 type) { return type < 0x01 || type > 0x03; });
   const QList<quint32> topTypes(top, types.end());
-  types.erase(top, types.end());
+  types.resize(std::distance(types.begin(), top));
   drawTypes(types);
   drawTypes(topTypes);
 }
@@ -1254,6 +1254,7 @@ void CMapIMG::collectText(const CGarminPolygon& item, const QPolygonF& line, con
   tp.font = font;
   tp.text = str;
   tp.color = color;
+  tp.shield = IGarminStrTbl::shieldCode(item.labels.first());
 
   textpaths << tp;
 }
@@ -1412,6 +1413,11 @@ void CMapIMG::drawText(BLContext& ctx) {
   QList<QPainterPath> placed;
 
   for (const textpath_t& textpath : std::as_const(textpaths)) {
+    if (textpath.shield != 0) {
+      drawShield(ctx, textpath, placed);
+      continue;
+    }
+
     const QFont& font = textpath.font;
     const QFontMetricsF fm(font);
     // Letters are set one by one, so the label is as wide as their advances add up to, which can be more than
@@ -1496,6 +1502,88 @@ void CMapIMG::drawText(BLContext& ctx) {
       offset += advances[i];
     }
   }
+}
+
+void CMapIMG::drawShield(BLContext& ctx, const textpath_t& textpath, QList<QPainterPath>& placed) {
+  const QFontMetricsF fm(textpath.font);
+  const qreal pad = 3;
+  const qreal h = fm.height() + 2;
+  qreal w = fm.horizontalAdvance(textpath.text) + 2 * pad;
+  if (textpath.shield == 0x03) {
+    // round: an ellipse needs room left and right of the text
+    w = qMax(w * 1.3, h);
+  }
+
+  QPolygonF stretch;
+  const qreal length = longestStraightStretch(textpath.polyline, stretch);
+  if (length < w) {
+    return;
+  }
+  QPainterPath path;
+  path.addPolygon(stretch);
+  const QPointF centre = path.pointAtPercent(0.5);
+  const QRectF box(centre.x() - w / 2, centre.y() - h / 2, w, h);
+
+  QPainterPath outline;
+  outline.addRect(box);
+  if (overlapsLabel(outline, placed)) {
+    return;
+  }
+  placed << outline;
+
+  // the shields' look, from BaseCamp; map symbols, not themed UI colours
+  const BLRgba32 white(0xFFFFFFFF);
+  const BLRgba32 black(0xFF000000);
+  const BLRgba32 blue(0xFF2F6CA8);
+  const BLRgba32 red(0xFFD7262E);
+  BLRgba32 text = black;
+
+  // the polylines leave their pen on the context: a dash pattern, caps and join
+  ctx.save();
+  ctx.set_stroke_dash_array(BLArray<double>());
+  ctx.set_stroke_caps(BL_STROKE_CAP_BUTT);
+  ctx.set_stroke_join(BL_STROKE_JOIN_MITER_CLIP);
+  ctx.set_stroke_width(1);
+  ctx.set_stroke_style(black);
+  switch (textpath.shield) {
+    case 0x01:  // interstate: red top, blue below, both rounded on the outside
+      ctx.fill_round_rect(box.x(), box.y(), w, h, h / 4, h / 4, red);
+      ctx.fill_round_rect(box.x(), box.y() + h / 3, w, h - h / 3, h / 4, h / 4, blue);
+      ctx.fill_rect(BLRect(box.x(), box.y() + h / 3, w, h / 4), blue);
+      text = white;
+      break;
+    case 0x02:  // shield
+      ctx.fill_round_rect(box.x(), box.y(), w, h, h / 4, h / 4, white);
+      ctx.stroke_round_rect(box.x(), box.y(), w, h, h / 4);
+      break;
+    case 0x03:  // round
+      ctx.fill_ellipse(centre.x(), centre.y(), w / 2, h / 2, white);
+      ctx.stroke_ellipse(centre.x(), centre.y(), w / 2, h / 2);
+      break;
+    case 0x04:  // hbox: blue, red bars top and bottom
+      ctx.fill_rect(BLRect(box.x(), box.y(), w, h), blue);
+      ctx.fill_rect(BLRect(box.x(), box.y(), w, 2), red);
+      ctx.fill_rect(BLRect(box.x(), box.bottom() - 2, w, 2), red);
+      text = white;
+      break;
+    case 0x05:  // box: white, black bars top and bottom
+      ctx.fill_rect(BLRect(box.x(), box.y(), w, h), white);
+      ctx.stroke_rect(box.x(), box.y(), w, h);
+      ctx.fill_rect(BLRect(box.x(), box.y(), w, 2), black);
+      ctx.fill_rect(BLRect(box.x(), box.bottom() - 2, w, 2), black);
+      break;
+    default:  // oval
+      ctx.fill_round_rect(box.x(), box.y(), w, h, h / 2, h / 2, white);
+      ctx.stroke_round_rect(box.x(), box.y(), w, h, h / 2);
+  }
+
+  FontGlyphs& fg = fontGlyphsFor(textpath.font);
+  const GlyphPaths run = buildTextRun(fg, textpath.text);
+  const qreal textWidth = fm.horizontalAdvance(textpath.text);
+  const BLPoint base(centre.x() - textWidth / 2, centre.y() + (fm.ascent() - fm.descent()) / 2);
+  ctx.set_fill_style(text);
+  ctx.fill_path(base, run.glyph);
+  ctx.restore();
 }
 
 void CMapIMG::getToolTip(const QPoint& px, QString& infotext) const /* override */
@@ -1626,7 +1714,7 @@ void CMapIMG::getInfoPolylines(const QPoint& pt, QMultiMap<QString, QString>& di
       if (distance < shortest) {
         type = line.type;
         value.clear();
-        value << (line.hasLabel() ? line.getLabelText() : "-");
+        value << (line.hasLabel() ? line.getInfoText() : "-");
 
         resPt.setX(x);
         resPt.setY(y);
@@ -1634,7 +1722,7 @@ void CMapIMG::getInfoPolylines(const QPoint& pt, QMultiMap<QString, QString>& di
         found = true;
       } else if (distance == shortest) {
         if (line.hasLabel()) {
-          value << line.getLabelText();
+          value << line.getInfoText();
         }
       }
     }

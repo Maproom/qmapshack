@@ -47,11 +47,8 @@ void CGarminStrTbl8::decode(CFileExt& file, quint32 offset, type_e t, QStringLis
   const char* const end = lbl + data.size();
 
   char* pBuffer = buffer;
+  // shield codes 0x01-0x06 stay in the label
   while (lbl < end && *lbl != 0) {
-    if ((unsigned)*lbl < 0x07) {
-      ++lbl;
-      continue;
-    }
     *pBuffer++ = *lbl++;
   }
 

@@ -51,6 +51,8 @@ class test_CGarminImg : public QObject {
   void levelsAcrossTiles();
   void displayText_data();
   void displayText();
+  void shieldCode_data();
+  void shieldCode();
   void splitHeight_data();
   void splitHeight();
   void typStyles();
@@ -62,7 +64,7 @@ namespace {
 struct mp_object_t {
   QString kind; /**< "POI", "POLYLINE" or "POLYGON" */
   quint32 type = 0;
-  QString label;
+  QStringList labels; /**< Label, Label2, Label3 */
   QVector<QPointF> coords;
 };
 
@@ -70,7 +72,7 @@ struct mp_object_t {
 struct img_object_t {
   QString kind;
   quint32 type = 0;
-  QString label;
+  QStringList labels;
   QVector<QPointF> coords;
 };
 
@@ -124,8 +126,9 @@ QVector<mp_object_t> readMp(const QString& path) {
       current = nullptr;
     } else if (current != nullptr && line.startsWith("Type=")) {
       current->type = QStringView(line).mid(5).toUInt(nullptr, 16);
-    } else if (current != nullptr && line.startsWith("Label=")) {
-      current->label = unescape(line.mid(6));
+    } else if (current != nullptr &&
+               (line.startsWith("Label=") || line.startsWith("Label2=") || line.startsWith("Label3="))) {
+      current->labels << unescape(line.mid(line.indexOf('=') + 1));
     } else if (current != nullptr && line.startsWith("Data0=")) {
       QRegularExpressionMatchIterator it = reCoord.globalMatch(line);
       while (it.hasNext()) {
@@ -186,12 +189,12 @@ quint8 readImg(const QString& path, QVector<img_object_t>& objects) {
 
   for (const pointtype_t* list : {&points, &pois}) {
     for (const CGarminPoint& p : *list) {
-      objects.append({"POI", p.type, p.labels.join(" "), {toDeg(p.pos)}});
+      objects.append({"POI", p.type, p.labels, {toDeg(p.pos)}});
     }
   }
   for (const polytype_t* list : {&polylines, &polygons}) {
     for (const CGarminPolygon& p : *list) {
-      img_object_t object{list == &polylines ? "POLYLINE" : "POLYGON", p.type, p.labels.join(" "), {}};
+      img_object_t object{list == &polylines ? "POLYLINE" : "POLYGON", p.type, p.labels, {}};
       for (const QPointF& c : p.coords) {
         object.coords << toDeg(c);
       }
@@ -244,9 +247,9 @@ void test_CGarminImg::decode() {
   const qreal tolerance = 360.0 / (1 << bits) + 1e-9;
 
   for (const mp_object_t& want : expected) {
-    const QString what = QString("%1 0x%2 \"%3\"").arg(want.kind).arg(want.type, 0, 16).arg(want.label);
+    const QString what = QString("%1 0x%2 \"%3\"").arg(want.kind).arg(want.type, 0, 16).arg(want.labels.join("\", \""));
     auto match = std::find_if(decoded.begin(), decoded.end(), [&](const img_object_t& got) {
-      return got.kind == want.kind && got.type == want.type && got.label == want.label;
+      return got.kind == want.kind && got.type == want.type && got.labels == want.labels;
     });
     QVERIFY2(match != decoded.end(), qPrintable("Not decoded: " + what));
     QCOMPARE(match->coords.size(), want.coords.size());
@@ -259,7 +262,7 @@ void test_CGarminImg::decode() {
   }
 
   for (const img_object_t& extra : decoded) {
-    qWarning() << "Not in the source:" << extra.kind << Qt::hex << extra.type << extra.label;
+    qWarning() << "Not in the source:" << extra.kind << Qt::hex << extra.type << extra.labels;
   }
   QVERIFY2(decoded.isEmpty(), "Decoded objects that are not in the source");
 }
@@ -408,12 +411,32 @@ void test_CGarminImg::displayText_data() {
   QTest::newRow("suffix 0x1f") << unescape("Main~[0x1f]Street") << "Main Street";
   QTest::newRow("both") << unescape("Carrer d'~[0x1b]Europa~[0x1c]kalea") << "Carrer d'Europakalea";
   QTest::newRow("0x1d") << unescape("Alpha~[0x1d]Beta") << "Alpha";
+  QTest::newRow("shield") << unescape("~[0x04]A7") << "A7";
+  QTest::newRow("code inside") << unescape("A~[0x02]7") << "A7";
 }
 
 void test_CGarminImg::displayText() {
   QFETCH(QString, label);
   QFETCH(QString, text);
   QCOMPARE(IGarminStrTbl::displayText(label), text);
+}
+
+void test_CGarminImg::shieldCode_data() {
+  QTest::addColumn<QString>("label");
+  QTest::addColumn<int>("code");
+
+  // mkgmap's highway-symbol: interstate, shield, round, hbox, box, oval
+  for (int code = 1; code <= 6; ++code) {
+    QTest::newRow(qPrintable(QString("code %1").arg(code))) << QString(QChar(code)) + "A7" << code;
+  }
+  QTest::newRow("none") << "A7" << 0;
+  QTest::newRow("empty") << "" << 0;
+}
+
+void test_CGarminImg::shieldCode() {
+  QFETCH(QString, label);
+  QFETCH(int, code);
+  QCOMPARE(int(IGarminStrTbl::shieldCode(label)), code);
 }
 
 void test_CGarminImg::splitHeight_data() {

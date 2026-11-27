@@ -59,10 +59,16 @@ class IGarminStrTbl : public QObject {
   void get(CFileExt& file, quint32 offset, type_e t, QStringList& info);
 
   /**
-     @brief The label as shown zoomed in, as BaseCamp does: 0x1b/0x1c (prefix/suffix without blank) dropped,
-            0x1e/0x1f (prefix/suffix replacing a blank) shown as a blank, nothing from 0x1d on.
+     @brief The label as shown zoomed in, as BaseCamp does: shield codes 0x01-0x06 dropped, 0x1b/0x1c (prefix/suffix
+            without blank) dropped, 0x1e/0x1f (prefix/suffix replacing a blank) shown as a blank, nothing from 0x1d on.
    */
   static QString displayText(const QString& label);
+  /**
+     @brief The highway shield a label starts with, as mkgmap's highway-symbol writes it.
+
+     @return 0x01 interstate, 0x02 shield, 0x03 round, 0x04 hbox, 0x05 box, 0x06 oval, 0 none
+   */
+  static quint8 shieldCode(const QString& label);
   /** displayText() of each label, joined by a blank. */
   static QString displayText(const QStringList& labels);
 
@@ -82,8 +88,10 @@ class IGarminStrTbl : public QObject {
 
   void readFile(CFileExt& file, quint32 offset, quint32 size, QByteArray& data);
   quint32 calcOffset(CFileExt& file, const quint32 offset, type_e t);
+  /** The LBL offsets of a road's labels in its NET1 record, at most 4. */
+  QList<quint32> netLabels(CFileExt& file, quint32 offset);
 
-  /** Decode @p buffer with the map's code page; the separators 0x1b-0x1f stay in the label. */
+  /** Decode @p buffer with the map's code page; the separators 0x1b-0x1f and shield codes 0x01-0x06 stay. */
   QString processLabel(const char* buffer);
 
   quint32 offsetLBL1 = 0;

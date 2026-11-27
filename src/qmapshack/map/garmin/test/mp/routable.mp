@@ -1,6 +1,7 @@
 ; mkgmap: --code-page=1252 --lower-case --route --transparent
 ; A routable road, labelled through NET, then labelled extended lines and polygons; no standard polygon.
 ; The labelled road takes NET1 offset 0, an unlabelled road follows.
+; A road with three labels, the first a ref with a highway shield (0x04 hbox), as mkgmap's default style writes.
 [IMG ID]
 CodePage=1252
 LblCoding=9
@@ -31,6 +32,18 @@ RoadID=1
 RouteParam=3,0,0,0,0,0,0,0,0,0,0,0
 Nod1=0,1,0
 Nod2=1,2,0
+[END]
+
+[POLYLINE]
+Type=0x01
+Data0=(47.4700000,10.4900000), (47.4750000,10.5050000)
+Label=~[0x04]A7
+Label2=Main Street
+Label3=Third Label
+RoadID=3
+RouteParam=7,4,0,1,0,0,0,0,0,0,0,0
+Nod1=0,5,0
+Nod2=1,6,0
 [END]
 
 [POLYLINE]

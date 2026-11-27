@@ -911,7 +911,8 @@ void CGarminImg::loadSubDiv(CFileExt& file, const subdiv_desc_t& subdiv, IGarmin
 
       if (strtbl && !p.lbl_in_NET && p.lbl_info) {
         strtbl->get(file, p.lbl_info, IGarminStrTbl::norm, p.labels);
-      } else if (strtbl && p.lbl_in_NET && p.lbl_info) {
+      } else if (strtbl && p.lbl_in_NET) {
+        // offset 0 is the first road in NET1
         strtbl->get(file, p.lbl_info, IGarminStrTbl::net, p.labels);
       }
 

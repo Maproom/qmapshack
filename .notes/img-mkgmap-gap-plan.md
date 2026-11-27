@@ -46,7 +46,7 @@ Effort: S ≤ 0.5 d, M 0.5–2 d, L > 2 d. Each item needs an mkgmap-built fixtu
 | Extra-byte content: lights | agent | L |
 | TRE draw priority (0x40) for overlay maps | agent | M |
 | TRE3 copyright list; map-info text in the LBL codepage | agent | S |
-| Prefix/suffix hiding (0x1e/0x1f) at low zoom; 0x1d split | agent | M |
+| Prefix/suffix hiding (0x1b/0x1c/0x1e/0x1f) at low zoom; text after 0x1d hidden | BaseCamp checked (QMS-1347 plan) | M |
 | POI address/phone/city/zip (LBL tables) | agent | M |
 | Highway exits | agent | M |
 | NET road data, house numbers | agent | L |

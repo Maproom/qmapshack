@@ -27,6 +27,7 @@
 #include <assert.h>
 
 #include "Garmin.h"
+#include "IGarminStrTbl.h"
 #include "helpers/Platform.h"
 #include "units/IUnit.h"
 
@@ -394,14 +395,20 @@ QString CGarminPolygon::getLabelText() const {
     case 0x25:  //< "Major depth contour"
     case 0x22:  //< "Major land contour"
     {
-      QString unit;
-      QString val = labels[0];
-      IUnit::self().meter2elevation(val.toFloat() / 3.28084f, val, unit);
-      str = QString("%1 %2").arg(val, unit);
+      // a contour's label is its height in feet as a plain number
+      bool ok = false;
+      const qreal feet = labels.isEmpty() ? 0 : IGarminStrTbl::displayText(labels.first()).toDouble(&ok);
+      if (ok) {
+        QString val, unit;
+        IUnit::self().feet2elevation(feet, val, unit);
+        str = val + " " + unit;
+      } else {
+        str = IGarminStrTbl::displayText(labels).simplified();
+      }
     } break;
 
     default:
-      str = labels.join(" ").simplified();
+      str = IGarminStrTbl::displayText(labels).simplified();
   }
 
   return str;

@@ -23,7 +23,6 @@
 
 #include "helpers/CFileExt.h"
 #include "helpers/Platform.h"
-#include "units/IUnit.h"
 
 IGarminStrTbl::IGarminStrTbl(const quint16 codepage, const quint8 mask, QObject* parent)
     : QObject(parent), codepage(codepage), mask(mask) {
@@ -31,6 +30,11 @@ IGarminStrTbl::IGarminStrTbl(const quint16 codepage, const quint8 mask, QObject*
     if (1250 <= codepage && codepage <= 1258) {
       char strcp[64];
       snprintf(strcp, sizeof(strcp), "Windows-%i", codepage);
+      codec = QTextCodec::codecForName(strcp);
+    } else if (codepage == 874 || codepage == 932 || codepage == 936 || codepage == 949) {
+      // only the lower case name is found on the first lookup
+      char strcp[64];
+      snprintf(strcp, sizeof(strcp), "windows-%i", codepage);
       codec = QTextCodec::codecForName(strcp);
     } else if (codepage == 950) {
       codec = QTextCodec::codecForName("Big5");
@@ -40,6 +44,8 @@ IGarminStrTbl::IGarminStrTbl(const quint16 codepage, const quint8 mask, QObject*
       codec = QTextCodec::codecForName("UTF-8");
     } else {
       qDebug() << "unknown codepage:" << codepage << "0x" << Qt::hex << codepage;
+    }
+    if (codec == nullptr) {
       codec = QTextCodec::codecForName("Latin1");
     }
   }
@@ -108,6 +114,10 @@ quint32 IGarminStrTbl::calcOffset(CFileExt& file, const quint32 offset, type_e t
   if (t == poi) {
     QByteArray buffer;
     readFile(file, offsetLBL6 + offset, sizeof(quint32), buffer);
+    // nothing read: the offset points past the end of the file
+    if (buffer.size() < qsizetype(sizeof(quint32))) {
+      return 0xFFFFFFFF;
+    }
     newOffset = gar_ptr_load(quint32, buffer.data());
     newOffset = (newOffset & 0x003FFFFF);
   } else if (t == net) {
@@ -117,6 +127,9 @@ quint32 IGarminStrTbl::calcOffset(CFileExt& file, const quint32 offset, type_e t
 
     QByteArray data;
     readFile(file, offsetNET1 + (offset << addrshift2), sizeof(quint32), data);
+    if (data.size() < qsizetype(sizeof(quint32))) {
+      return 0xFFFFFFFF;
+    }
     newOffset = gar_ptr_load(quint32, data.data());
     if (newOffset & 0x00400000) {
       return 0xFFFFFFFF;
@@ -129,22 +142,57 @@ quint32 IGarminStrTbl::calcOffset(CFileExt& file, const quint32 offset, type_e t
   return newOffset;
 }
 
-QString IGarminStrTbl::processLabel(const char* buffer, unsigned lastSeperator) {
+QString IGarminStrTbl::processLabel(const char* buffer) {
+  // The separators 0x1b-0x1f are taken over as they are: Shift_JIS decodes 0x1c as U+007F. No code page uses
+  // these bytes inside a multi-byte character.
   QString label;
-  if (codepage != 0) {
-    label = codec->toUnicode(buffer);
-  } else {
-    label = buffer;
-  }
-
-  if (lastSeperator == 0x1F) {
-    bool ok = false;
-    qreal ele = label.toDouble(&ok);
-    if (ok) {
-      QString val, unit;
-      IUnit::self().feet2elevation(ele, val, unit);
-      label = val + " " + unit;
+  const char* start = buffer;
+  for (const char* c = buffer;; ++c) {
+    const bool isSeparator = *c >= 0x1B && *c <= 0x1F;
+    if (*c != 0 && !isSeparator) {
+      continue;
     }
+    const QByteArray part(start, c - start);
+    label += (codepage != 0) ? codec->toUnicode(part) : QString::fromUtf8(part);
+    if (*c == 0) {
+      break;
+    }
+    label += QChar(*c);
+    start = c + 1;
   }
   return label;
+}
+
+QString IGarminStrTbl::displayText(const QString& label) {
+  QString text = label.left(label.indexOf(QChar(0x1d)));
+  text.remove(QChar(0x1b));
+  text.remove(QChar(0x1c));
+  text.replace(QChar(0x1e), ' ');
+  text.replace(QChar(0x1f), ' ');
+  return text;
+}
+
+QString IGarminStrTbl::displayText(const QStringList& labels) {
+  QStringList texts;
+  for (const QString& label : labels) {
+    texts << displayText(label);
+  }
+  return texts.join(' ');
+}
+
+bool IGarminStrTbl::splitHeight(const QString& label, QString& name, qreal& feet) {
+  const QString text = label.left(label.indexOf(QChar(0x1d)));
+  const qsizetype idx = text.indexOf(QChar(0x1f));
+  if (idx < 0) {
+    return false;
+  }
+
+  bool ok = false;
+  const qreal value = text.mid(idx + 1).toDouble(&ok);
+  if (!ok) {
+    return false;
+  }
+  name = displayText(text.left(idx));
+  feet = value;
+  return true;
 }

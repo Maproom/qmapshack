@@ -36,6 +36,7 @@
 #include "map/Blend2dUtil.h"
 #include "map/CMapDraw.h"
 #include "map/garmin/CGarminTyp.h"
+#include "map/garmin/IGarminStrTbl.h"
 #include "misc.h"
 #include "poi/IPoiItem.h"
 #include "units/IUnit.h"
@@ -1326,7 +1327,7 @@ void CMapIMG::drawPoints(BLContext& ctx, pointtype_t& pts, QVector<QRectF>& rect
 
     if (CMainWindow::self().isPoiText() && property.labelType != CGarminTyp::eNone) {
       // calculate bounding rectangle with a border of 2 px
-      QRect rect = fm.boundingRect(pt->labels.join(" "));
+      QRect rect = fm.boundingRect(pt->getLabelText());
       rect.adjust(0, 0, 4, 4);
       rect.moveCenter(pt->pos.toPoint());
 
@@ -1364,7 +1365,7 @@ void CMapIMG::drawPois(BLContext& ctx, pointtype_t& pts, QVector<QRectF>& rectPo
 
     if (CMainWindow::self().isPoiText()) {
       // calculate bounding rectangle with a border of 2 px
-      QRect rect = fm.boundingRect(pt.labels.join(" "));
+      QRect rect = fm.boundingRect(pt.getLabelText());
       rect.adjust(0, 0, 4, 4);
       rect.moveCenter(pt.pos.toPoint());
 
@@ -1544,9 +1545,10 @@ void CMapIMG::findPOICloseBy(const QPoint& pt, IPoiItem& poi) const /*override;*
         map->convertPx2Rad(radPos);
         poi.pos = radPos;
         if (!point.labels.isEmpty()) {
-          poi.name = point.labels.first();
           poi.desc = point.getLabelText();
-        } else {
+        }
+        poi.name = point.getName();
+        if (poi.name.isEmpty()) {
           if (pointProperties.contains(point.type)) {
             poi.name = pointProperties[point.type].strings[selectedLanguage != NOIDX ? selectedLanguage : 0];
           } else {
@@ -1685,7 +1687,7 @@ void CMapIMG::getInfoPolygons(const QPoint& pt, QMultiMap<QString, QString>& dic
 
       if (c) {
         if (line.labels.size()) {
-          dict.insert(tr("Area"), line.labels.join(" ").simplified());
+          dict.insert(tr("Area"), IGarminStrTbl::displayText(line.labels).simplified());
         } else {
           if (selectedLanguage != NOIDX) {
             if (polygonProperties[line.type].strings[selectedLanguage].size()) {

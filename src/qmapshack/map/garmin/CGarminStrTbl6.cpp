@@ -89,7 +89,8 @@ CGarminStrTbl6::~CGarminStrTbl6() {}
 void CGarminStrTbl6::fill() {
   quint32 tmp;
   if (bits < 6) {
-    tmp = *p++;
+    // past the data read: all ones, which reads as the terminator
+    tmp = (p < pEnd) ? *p++ : 0xFF;
     reg |= tmp << (24 - bits);
     bits += 8;
   }
@@ -117,15 +118,15 @@ void CGarminStrTbl6::decode(CFileExt& file, quint32 offset, type_e t, QStringLis
   bits = 0;
 
   QByteArray data;
-  quint32 size = (sizeLBL1 - offset) < 200 ? (sizeLBL1 - offset) : 200;
-
+  // mkgmap writes up to 170 characters, at most 12 bits each
+  const quint32 size = qMin(sizeLBL1 - offset, quint32(sizeof(buffer) - 1));
   readFile(file, offsetLBL1 + offset, size, data);
 
-  p = (quint8*)data.data();
+  p = (const quint8*)data.constData();
+  pEnd = p + data.size();
 
   fill();
 
-  unsigned lastSeperator = 0;
   while (idx < (sizeof(buffer) - 1)) {
     c1 = reg >> 26;
     reg <<= 6;
@@ -143,21 +144,22 @@ void CGarminStrTbl6::decode(CFileExt& file, quint32 offset, type_e t, QStringLis
         reg <<= 6;
         bits -= 6;
         fill();
-        buffer[idx++] = str6tbl2[c1];
+        if (c1 < sizeof(str6tbl2) && str6tbl2[c1] != 0) {
+          buffer[idx++] = str6tbl2[c1];
+        }
       } else if (c1 == 0x1B) {
         c1 = reg >> 26;
         reg <<= 6;
         bits -= 6;
         fill();
-        buffer[idx++] = str6tbl3[c1];
-      } else if (c1 > 0x1C && c1 < 0x20) {
-        lastSeperator = c1;
-        buffer[idx] = 0;
-        if (strlen(buffer)) {
-          labels << processLabel(buffer, lastSeperator);
+        if (c1 < sizeof(str6tbl3)) {
+          buffer[idx++] = str6tbl3[c1];
+        } else if (c1 == 0x2B || c1 == 0x2C) {
+          // separators 0x1b/0x1c, written as lower case escape + 0x10
+          buffer[idx++] = c1 - 0x10;
         }
-        idx = 0;
-        buffer[0] = 0;
+      } else if (c1 >= 0x1D && c1 <= 0x1F) {
+        buffer[idx++] = c1;
       }
     } else {
       buffer[idx++] = str6tbl1[c1];
@@ -166,6 +168,6 @@ void CGarminStrTbl6::decode(CFileExt& file, quint32 offset, type_e t, QStringLis
 
   buffer[idx] = 0;
   if (strlen(buffer)) {
-    labels << processLabel(buffer, lastSeperator);
+    labels << processLabel(buffer);
   }
 }

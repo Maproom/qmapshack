@@ -58,6 +58,24 @@ class IGarminStrTbl : public QObject {
    */
   void get(CFileExt& file, quint32 offset, type_e t, QStringList& info);
 
+  /**
+     @brief The label as shown zoomed in, as BaseCamp does: 0x1b/0x1c (prefix/suffix without blank) dropped,
+            0x1e/0x1f (prefix/suffix replacing a blank) shown as a blank, nothing from 0x1d on.
+   */
+  static QString displayText(const QString& label);
+  /** displayText() of each label, joined by a blank. */
+  static QString displayText(const QStringList& labels);
+
+  /**
+     @brief Split a point's label at its first 0x1f into the name and a height in feet.
+
+     @param label  the label as decoded
+     @param name   receives displayText() of the part before 0x1f
+     @param feet   receives the height
+     @return false if the part after 0x1f is not a number
+   */
+  static bool splitHeight(const QString& label, QString& name, qreal& feet);
+
  protected:
   /// Decode the label(s) at @p offset straight from the file (the cache-miss path).
   virtual void decode(CFileExt& file, quint32 offset, type_e t, QStringList& info) = 0;
@@ -65,7 +83,8 @@ class IGarminStrTbl : public QObject {
   void readFile(CFileExt& file, quint32 offset, quint32 size, QByteArray& data);
   quint32 calcOffset(CFileExt& file, const quint32 offset, type_e t);
 
-  QString processLabel(const char* buffer, unsigned lastSeperator);
+  /** Decode @p buffer with the map's code page; the separators 0x1b-0x1f stay in the label. */
+  QString processLabel(const char* buffer);
 
   quint32 offsetLBL1 = 0;
   quint32 sizeLBL1 = 0;

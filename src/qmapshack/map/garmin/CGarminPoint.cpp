@@ -27,6 +27,7 @@
 #include <QtCore>
 
 #include "Garmin.h"
+#include "IGarminStrTbl.h"
 #include "helpers/Platform.h"
 #include "units/IUnit.h"
 
@@ -113,33 +114,47 @@ quint32 CGarminPoint::decode2(qint32 iCenterLon, qint32 iCenterLat, quint32 shif
 }
 
 QString CGarminPoint::getLabelText() const {
-  QString str;
-  if (!labels.isEmpty()) {
-    if ((type == 0x6200) || (type == 0x6300)) {
-      qDebug() << "1" << labels;
-      QString unit;
-      QString val = labels[0];
-      IUnit::self().meter2elevation(val.toFloat() / 3.28084f, val, unit);
-      str = QString("%1 %2").arg(val, unit);
-    }
-    //        else if(type == 0x6616) //669 DAV
-    //        {
-    //            qDebug() << "2" << labels;
-    //            if(labels.size() > 1)
-    //            {
-    //                QString unit;
-    //                QString val = labels[1];
-    //                IUnit::self().meter2elevation(val.toFloat() / 3.28084f, val, unit);
-    //                str = QString("%1 %2 %3").arg(labels[0]).arg(val, unit);
-    //            }
-    //            else
-    //            {
-    //                str = labels[0];
-    //            }
-    //        }
-    else {
-      str = labels.join(" ");
-    }
+  if (labels.isEmpty()) {
+    return QString();
   }
-  return str;
+
+  QString name;
+  qreal feet = 0;
+  bool hasHeight = false;
+  // a depth or height point's label is a plain number
+  if ((type == 0x6200) || (type == 0x6300)) {
+    feet = IGarminStrTbl::displayText(labels.first()).toDouble(&hasHeight);
+  }
+  if (!hasHeight) {
+    hasHeight = IGarminStrTbl::splitHeight(labels.first(), name, feet);
+  }
+  if (!hasHeight) {
+    return IGarminStrTbl::displayText(labels);
+  }
+  // BaseCamp shows a height after 0x1f only on depth/height points and landmarks 0x64-0x66, hides it elsewhere
+  const bool showsHeight = (type == 0x6200) || (type == 0x6300) || ((type >= 0x6400) && (type <= 0x66FF));
+  if (!showsHeight) {
+    return name;
+  }
+
+  QString val, unit;
+  IUnit::self().feet2elevation(feet, val, unit);
+  const QString height = val + " " + unit;
+  return name.isEmpty() ? height : name + ", " + height;
+}
+
+QString CGarminPoint::getName() const {
+  if (labels.isEmpty()) {
+    return QString();
+  }
+  if ((type == 0x6200) || (type == 0x6300)) {
+    return getLabelText();
+  }
+
+  QString name;
+  qreal feet = 0;
+  if (IGarminStrTbl::splitHeight(labels.first(), name, feet)) {
+    return name;
+  }
+  return IGarminStrTbl::displayText(labels.first());
 }

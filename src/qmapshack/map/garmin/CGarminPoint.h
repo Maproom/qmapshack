@@ -38,7 +38,10 @@ class CGarminPoint {
   quint32 decode(qint32 iCenterLon, qint32 iCenterLat, quint32 shift, const quint8* pData);
   quint32 decode2(qint32 iCenterLon, qint32 iCenterLat, quint32 shift, const quint8* pData, const quint8* pEnd);
 
+  /** The label as shown on the map, a height in feet converted to the user's unit. */
   QString getLabelText() const;
+  /** The label without a height after 0x1f; a depth or height point's converted height. */
+  QString getName() const;
 
   bool hasLabel() const { return !labels.isEmpty(); }
 

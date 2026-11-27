@@ -4,7 +4,8 @@
 usage: make_fixtures.py MKGMAP_JAR OUT_DIR
 
 Each mp/<name>.mp becomes OUT_DIR/<name>.img and its search index OUT_DIR/<name>_mdr.img, an IMG file
-without map tiles. Each folder mp/<name>/ becomes OUT_DIR/<name>.img, a gmapsupp of its *.mp tiles.
+without map tiles. Each folder mp/<name>/ becomes OUT_DIR/<name>.img, a gmapsupp of its *.mp tiles. Each
+typ/<name>.txt becomes OUT_DIR/<name>.typ.
 A first line "; mkgmap: <options>" passes options to mkgmap; in a folder, the first tile's line counts. The jar must be mkgmap r4924 (https://www.mkgmap.org.uk/download/mkgmap.html), the release the
 test was written against.
 
@@ -77,7 +78,19 @@ def main() -> int:
             shutil.copyfile(gmapsupp, out / f"{group.name}.img")
         print(f"{group.name}.img ({len(tiles)} tiles)")
 
-    print(f"{len(sources) + len(groups)} test map(s) in {out}, built with mkgmap r{MKGMAP_RELEASE}")
+    typs = sorted((Path(__file__).resolve().parent / "typ").glob("*.txt"))
+    for typ in typs:
+        with tempfile.TemporaryDirectory() as tmp:
+            result = run(["java", "-jar", str(jar), f"--output-dir={tmp}", *options(typ), str(typ)])
+            compiled = Path(tmp) / f"{typ.stem}.typ"
+            if result.returncode != 0 or not compiled.is_file():
+                print(f"{typ.name}: mkgmap failed\n{result.stdout}{result.stderr}", file=sys.stderr)
+                return 1
+            shutil.copyfile(compiled, out / compiled.name)
+        print(f"{typ.stem}.typ")
+
+    print(f"{len(sources) + len(groups)} test map(s) and {len(typs)} TYP file(s) in {out}, built with mkgmap "
+          f"r{MKGMAP_RELEASE}")
     return 0
 
 

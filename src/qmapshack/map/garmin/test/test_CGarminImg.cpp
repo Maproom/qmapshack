@@ -27,6 +27,7 @@
 #include "map/garmin/CGarminImg.h"
 #include "map/garmin/CGarminPoint.h"
 #include "map/garmin/CGarminPolygon.h"
+#include "map/garmin/CGarminTyp.h"
 #include "map/garmin/IGarminStrTbl.h"
 
 /**
@@ -52,6 +53,8 @@ class test_CGarminImg : public QObject {
   void displayText();
   void splitHeight_data();
   void splitHeight();
+  void typStyles();
+  void typNoCodePage();
 };
 
 namespace {
@@ -81,7 +84,7 @@ QString unescape(const QString& label) {
   QRegularExpressionMatchIterator it = reEscape.globalMatch(label);
   while (it.hasNext()) {
     const QRegularExpressionMatch m = it.next();
-    result += label.mid(last, m.capturedStart() - last);
+    result += QStringView(label).mid(last, m.capturedStart() - last);
     result += QChar(m.captured(1).toUShort(nullptr, 16));
     last = m.capturedEnd();
   }
@@ -120,7 +123,7 @@ QVector<mp_object_t> readMp(const QString& path) {
     } else if (line == "[END]") {
       current = nullptr;
     } else if (current != nullptr && line.startsWith("Type=")) {
-      current->type = line.mid(5).toUInt(nullptr, 16);
+      current->type = QStringView(line).mid(5).toUInt(nullptr, 16);
     } else if (current != nullptr && line.startsWith("Label=")) {
       current->label = unescape(line.mid(6));
     } else if (current != nullptr && line.startsWith("Data0=")) {
@@ -139,6 +142,28 @@ QVector<mp_object_t> readMp(const QString& path) {
     }
   }
   return objects;
+}
+
+/** Decode OUT_DIR/@p name with CGarminTyp; false if the file cannot be read or decoded. */
+bool readTyp(const QString& name, CGarminTyp& typ, QMap<quint32, CGarminTyp::polygon_property>& polygons,
+             QMap<quint32, CGarminTyp::polyline_property>& polylines, QList<quint32>& drawOrder,
+             QMap<quint32, CGarminTyp::point_property>& points) {
+  QFile file(QDir(fixtureDir()).filePath(name));
+  if (!file.open(QIODevice::ReadOnly)) {
+    return false;
+  }
+  return typ.decode(file.readAll(), polygons, polylines, drawOrder, points);
+}
+
+/** A copy of @p img, unpremultiplied, to read its pixels. */
+QImage toQImage(const BLImage& img) {
+  BLImageData data;
+  if (img.get_data(&data) != BL_SUCCESS || data.pixel_data == nullptr) {
+    return QImage();
+  }
+  const QImage view(static_cast<const uchar*>(data.pixel_data), data.size.w, data.size.h, data.stride,
+                    QImage::Format_ARGB32_Premultiplied);
+  return view.convertToFormat(QImage::Format_ARGB32);
 }
 
 QPointF toDeg(const QPointF& rad) { return QPointF(qRadiansToDegrees(rad.y()), qRadiansToDegrees(rad.x())); }
@@ -213,9 +238,7 @@ void test_CGarminImg::decode() {
   QVERIFY(bits > 0);
 
   // mkgmap adds a background polygon to every tile.
-  decoded.erase(std::remove_if(decoded.begin(), decoded.end(),
-                               [](const img_object_t& o) { return o.kind == "POLYGON" && o.type == 0x4b; }),
-                decoded.end());
+  decoded.removeIf([](const img_object_t& o) { return o.kind == "POLYGON" && o.type == 0x4b; });
 
   // One unit of the level's resolution, plus rounding.
   const qreal tolerance = 360.0 / (1 << bits) + 1e-9;
@@ -232,7 +255,7 @@ void test_CGarminImg::decode() {
       QVERIFY2(qAbs(d.x()) <= tolerance && qAbs(d.y()) <= tolerance,
                qPrintable(QString("%1 point %2 is off by %3, %4 deg").arg(what).arg(i).arg(d.x()).arg(d.y())));
     }
-    decoded.erase(match);
+    decoded.removeAt(std::distance(decoded.begin(), match));
   }
 
   for (const img_object_t& extra : decoded) {
@@ -416,6 +439,106 @@ void test_CGarminImg::splitHeight() {
   QCOMPARE(IGarminStrTbl::splitHeight(label, gotName, gotFeet), hasHeight);
   QCOMPARE(gotName, name);
   QCOMPARE(gotFeet, feet);
+}
+
+void test_CGarminImg::typStyles() {
+  // typ/styles.txt, compiled by make_fixtures.py
+  if (fixtureDir().isEmpty()) {
+    QSKIP("QMS_IMG_FIXTURES not set; build the test maps with make_fixtures.py");
+  }
+  if (!QFileInfo::exists(QDir(fixtureDir()).filePath("styles.typ"))) {
+    QSKIP("Test TYP file not built: styles.typ");
+  }
+
+  CGarminTyp typ;
+  QMap<quint32, CGarminTyp::polygon_property> polygons;
+  QMap<quint32, CGarminTyp::polyline_property> polylines;
+  QList<quint32> drawOrder;
+  QMap<quint32, CGarminTyp::point_property> points;
+  QVERIFY(readTyp("styles.typ", typ, polygons, polylines, drawOrder, points));
+
+  QCOMPARE(typ.getFid(), quint16(6357));
+  QCOMPARE(typ.getPid(), quint16(2));
+
+  // Three colours and a transparent fourth: line, border, night line; the label follows the widths.
+  QVERIFY(polylines.contains(0x01));
+  const CGarminTyp::polyline_property& line = polylines[0x01];
+  QCOMPARE(line.penLineDay.color(), QColor(255, 0, 0));
+  QCOMPARE(line.penBorderDay.color(), QColor(0, 0, 0));
+  QCOMPARE(line.penLineNight.color(), QColor(0, 255, 0));
+  QCOMPARE(line.penLineDay.width(), 4);
+  QCOMPARE(line.strings.value(0x04), QString("Line four colours"));
+  QCOMPARE(line.strings.keys(), QList<int>({0x04}));
+  QVERIFY(line.hasBorder);
+  QCOMPARE(line.penBorderDay.width(), 8);
+
+  // Extended types keep their full number.
+  QVERIFY2(polylines.contains(0x18a00), "extended line 0x18a00 missing");
+  QCOMPARE(polylines[0x18a00].strings.value(0x04), QString("Line ext"));
+  QVERIFY2(polygons.contains(0x18a00), "extended polygon 0x18a00 missing");
+  QCOMPARE(polygons[0x18a00].strings.value(0x04), QString("Area ext"));
+
+  // Per-colour transparency: an opaque colour stays fully opaque.
+  QVERIFY(points.contains(0x2f06));
+  const QImage alpha = toQImage(points[0x2f06].imgDay);
+  QCOMPARE(alpha.size(), QSize(4, 2));
+  QCOMPARE(QColor::fromRgba(alpha.pixel(0, 0)), QColor(255, 0, 0, 255));
+  QVERIFY2(qAbs(qAlpha(alpha.pixel(2, 0)) - 0x88) <= 0x11, qPrintable(QString::number(qAlpha(alpha.pixel(2, 0)))));
+  QCOMPARE(qAlpha(alpha.pixel(0, 1)), 0);
+
+  // True colour: one colour per pixel, no colour table.
+  QVERIFY(points.contains(0x2f07));
+  const QImage rgb = toQImage(points[0x2f07].imgDay);
+  QCOMPARE(rgb.size(), QSize(2, 2));
+  QCOMPARE(QColor::fromRgba(rgb.pixel(0, 0)), QColor(255, 0, 0));
+  QCOMPARE(QColor::fromRgba(rgb.pixel(1, 0)), QColor(0, 255, 0));
+  QCOMPARE(QColor::fromRgba(rgb.pixel(0, 1)), QColor(0, 0, 255));
+  QCOMPARE(QColor::fromRgba(rgb.pixel(1, 1)), QColor(255, 255, 255));
+  QCOMPARE(points[0x2f07].strings.value(0x04), QString("True colour icon"));
+
+  // True colour with a transparent pixel: the transparent colour comes first.
+  QVERIFY(points.contains(0x2f08));
+  const QImage clear = toQImage(points[0x2f08].imgDay);
+  QCOMPARE(clear.size(), QSize(2, 2));
+  QCOMPARE(QColor::fromRgba(clear.pixel(0, 1)), QColor(0, 0, 255));
+  QCOMPARE(qAlpha(clear.pixel(1, 1)), 0);
+  QCOMPARE(points[0x2f08].strings.value(0x04), QString("True colour clear pixel"));
+
+  // True colour with transparency: 4 bit after each pixel.
+  QVERIFY(points.contains(0x2f09));
+  const QImage half = toQImage(points[0x2f09].imgDay);
+  QCOMPARE(half.size(), QSize(2, 2));
+  QCOMPARE(QColor::fromRgba(half.pixel(1, 0)), QColor(0, 255, 0));
+  QVERIFY2(qAbs(qAlpha(half.pixel(1, 1)) - 0x88) <= 0x11, qPrintable(QString::number(qAlpha(half.pixel(1, 1)))));
+  QCOMPARE(points[0x2f09].strings.value(0x04), QString("True colour half pixel"));
+
+  // An odd width: the 28 bit pixels run on across rows without padding.
+  QVERIFY(points.contains(0x2f0a));
+  const QImage odd = toQImage(points[0x2f0a].imgDay);
+  QCOMPARE(odd.size(), QSize(3, 2));
+  QCOMPARE(QColor::fromRgba(odd.pixel(2, 0)), QColor(0, 0, 255));
+  QCOMPARE(QColor::fromRgba(odd.pixel(0, 1)), QColor(255, 255, 0));
+  QVERIFY2(qAbs(qAlpha(odd.pixel(2, 1)) - 0x88) <= 0x11, qPrintable(QString::number(qAlpha(odd.pixel(2, 1)))));
+  QCOMPARE(points[0x2f0a].strings.value(0x04), QString("True colour odd width"));
+}
+
+void test_CGarminImg::typNoCodePage() {
+  // typ/nocodepage.txt: mkgmap writes code page 0 without --code-page.
+  if (fixtureDir().isEmpty()) {
+    QSKIP("QMS_IMG_FIXTURES not set; build the test maps with make_fixtures.py");
+  }
+  if (!QFileInfo::exists(QDir(fixtureDir()).filePath("nocodepage.typ"))) {
+    QSKIP("Test TYP file not built: nocodepage.typ");
+  }
+
+  CGarminTyp typ;
+  QMap<quint32, CGarminTyp::polygon_property> polygons;
+  QMap<quint32, CGarminTyp::polyline_property> polylines;
+  QList<quint32> drawOrder;
+  QMap<quint32, CGarminTyp::point_property> points;
+  QVERIFY(readTyp("nocodepage.typ", typ, polygons, polylines, drawOrder, points));
+  QVERIFY(polylines.contains(0x01));
+  QCOMPARE(polylines[0x01].strings.value(0x04), QString("Line no code page"));
 }
 
 QTEST_GUILESS_MAIN(test_CGarminImg)

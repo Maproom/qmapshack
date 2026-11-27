@@ -71,11 +71,19 @@ bool CGarminTyp::decode(const QByteArray& array, QMap<quint32, polygon_property>
 }
 
 QTextCodec* CGarminTyp::getCodec(quint16 codepage) {
-  QTextCodec* codec = QTextCodec::codecForName(QString("CP%1").arg(codepage).toLatin1());
+  if (codepage == 0) {
+    // mkgmap without --code-page
+    return QTextCodec::codecForName("Latin1");
+  }
   if (codepage == 65001) {
-    codec = QTextCodec::codecForName("UTF-8");
+    return QTextCodec::codecForName("UTF-8");
   }
 
+  QTextCodec* codec = QTextCodec::codecForName(QString("CP%1").arg(codepage).toLatin1());
+  if (codec == nullptr) {
+    // Qt knows code page 949 only as windows-949
+    codec = QTextCodec::codecForName(QString("windows-%1").arg(codepage).toLatin1());
+  }
   return codec;
 }
 
@@ -106,7 +114,7 @@ bool CGarminTyp::parseHeader(QDataStream& in) {
   in >> sectPolylines.dataOffset >> sectPolylines.dataLength;
   in >> sectPolygons.dataOffset >> sectPolygons.dataLength;
 
-  in >> pid >> fid;
+  in >> fid >> pid;
 
   /* Read Array datas */
   in >> sectPoints.arrayOffset >> sectPoints.arrayModulo >> sectPoints.arraySize;
@@ -237,7 +245,7 @@ bool CGarminTyp::parsePolygon(QDataStream& in, QMap<quint32, polygon_property>& 
     }
 
     t16_2 = (t16_1 >> 5) | ((t16_1 & 0x1f) << 11);
-    typ = t16_2 & 0x7F;
+    typ = t16_2 & 0xFF;
     subtyp = t16_1 & 0x1F;
 
     if (t16_1 & 0x2000) {
@@ -533,7 +541,7 @@ bool CGarminTyp::parsePolyline(QDataStream& in, QMap<quint32, polyline_property>
     }
 
     t16_2 = (t16_1 >> 5) | ((t16_1 & 0x1f) << 11);
-    typ = t16_2 & 0x7F;
+    typ = t16_2 & 0xFF;
     subtyp = t16_1 & 0x1F;
 
     if (t16_1 & 0x2000) {
@@ -690,7 +698,8 @@ bool CGarminTyp::parsePolyline(QDataStream& in, QMap<quint32, polyline_property>
           property.hasPixmap = true;
           property.known = true;
         } else {
-          quint8 w1;
+          // line and border by day, line only at night; mkgmap writes both widths
+          quint8 w1, w2;
           in >> b >> g >> r;
           property.penLineDay = QPen(QBrush(qRgb(r, g, b)), 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
           in >> b >> g >> r;
@@ -698,10 +707,11 @@ bool CGarminTyp::parsePolyline(QDataStream& in, QMap<quint32, polyline_property>
           in >> b >> g >> r;
           property.penLineNight = QPen(QBrush(qRgb(r, g, b)), 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
           property.penBorderNight = QPen(Qt::NoPen);
-          in >> w1;
+          in >> w1 >> w2;
           property.penLineDay.setWidth(w1);
           property.penLineNight.setWidth(w1);
-          property.hasBorder = false;
+          property.penBorderDay.setWidth(w2);
+          property.hasBorder = w2 > w1;
           property.hasPixmap = false;
           property.known = true;
         }
@@ -925,11 +935,13 @@ bool CGarminTyp::decodeColorTable(QDataStream& in, QImage& img, int ncolors, int
         in >> byte;
         mask = 0x000000FF << bits;
         reg = reg & (~mask);
-        reg = reg | (byte << bits);
+        reg = reg | (quint32(byte) << bits);
         bits += 8;
       }
 
-      img.setColor(i, qRgba((reg >> 16) & 0x0FF, (reg >> 8) & 0x0FF, reg & 0x0FF, ~((reg >> 24) & 0x0F) << 4));
+      // 4 bit transparency: 0 opaque, 15 transparent
+      const qint32 alpha = (15 - ((reg >> 24) & 0x0F)) * 17;
+      img.setColor(i, qRgba((reg >> 16) & 0x0FF, (reg >> 8) & 0x0FF, reg & 0x0FF, alpha));
 
       reg = reg >> 28;
       bits -= 28;
@@ -949,6 +961,42 @@ bool CGarminTyp::decodeColorTable(QDataStream& in, QImage& img, int ncolors, int
     }
   }
   return true;
+}
+
+QImage CGarminTyp::decodeTrueColor(QDataStream& in, qint32 w, qint32 h, quint8 mode) {
+  QImage img(w, h, QImage::Format_ARGB32);
+  quint8 r, g, b;
+
+  QRgb transparent = 0;
+  if (mode == 0x10) {
+    in >> b >> g >> r;
+    transparent = qRgb(r, g, b);
+  }
+
+  // mode 0x20: 28 bit per pixel, least significant bit first, as in a colour table with alpha
+  quint32 reg = 0;
+  quint32 bits = 0;
+  for (qint32 y = 0; y < h; ++y) {
+    for (qint32 x = 0; x < w; ++x) {
+      if (mode == 0x20) {
+        while (bits < 28) {
+          quint8 byte;
+          in >> byte;
+          reg |= quint32(byte) << bits;
+          bits += 8;
+        }
+        const qint32 alpha = (15 - ((reg >> 24) & 0x0F)) * 17;
+        img.setPixel(x, y, qRgba((reg >> 16) & 0x0FF, (reg >> 8) & 0x0FF, reg & 0x0FF, alpha));
+        reg >>= 28;
+        bits -= 28;
+      } else {
+        in >> b >> g >> r;
+        const QRgb pixel = qRgb(r, g, b);
+        img.setPixel(x, y, (mode == 0x10 && pixel == transparent) ? qRgba(0, 0, 0, 0) : pixel);
+      }
+    }
+  }
+  return img;
 }
 
 void CGarminTyp::decodeBitmap(QDataStream& in, QImage& img, int w, int h, int bpp) {
@@ -1033,7 +1081,6 @@ bool CGarminTyp::parsePoint(QDataStream& in, QMap<quint32, point_property>& poin
 
     in.device()->seek(sectPoints.dataOffset + offset);
 
-    int bpp = 0, wbytes = 0;
     quint8 w, h, ncolors, ctyp;
     in >> t8_1 >> w >> h >> ncolors >> ctyp;
 
@@ -1045,49 +1092,51 @@ bool CGarminTyp::parsePoint(QDataStream& in, QMap<quint32, point_property>& poin
              << "orig data:" << t16_1;
 #endif
 
-    if (!decodeBppAndBytes(ncolors, w, ctyp, bpp, wbytes)) {
-      continue;
-    }
-
-#ifdef DBG
-    qDebug() << "          " << dec << "w" << w << "h" << h << "ncolors" << ncolors << "bpp" << bpp << "wbytes"
-             << wbytes;
-#endif
-
-    if (ctyp == 0x20 || ctyp == 0x00) {
-      if ((ncolors == 0) && (bpp >= 16)) {
-        ncolors = w * h;
+    // One image: true colour without a colour table (0 colours), else a colour table and a bitmap.
+    auto decodeImage = [&](quint8 ncolors, quint8 ctyp, QImage& img) {
+      if (ncolors == 0) {
+        if (ctyp != 0x00 && ctyp != 0x10 && ctyp != 0x20) {
+          return false;
+        }
+        img = decodeTrueColor(in, w, h, ctyp);
+        return true;
       }
-    }
+      int bpp = 0, wbytes = 0;
+      if (!decodeBppAndBytes(ncolors, w, ctyp, bpp, wbytes)) {
+        return false;
+      }
+      img = QImage(w, h, QImage::Format_Indexed8);
+      if (!decodeColorTable(in, img, ncolors, 1 << bpp, ctyp == 0x20)) {
+        return false;
+      }
+      decodeBitmap(in, img, w, h, bpp);
+      return true;
+    };
 
+    QImage imgDay;
+    if (!decodeImage(ncolors, ctyp, imgDay)) {
+      continue;
+    }
     point_property& property = points[typ];
-    QImage imgDay(w, h, QImage::Format_Indexed8);
-    QImage imgNight(w, h, QImage::Format_Indexed8);
-
-    if (!decodeColorTable(in, imgDay, ncolors, 1 << bpp, ctyp == 0x20)) {
-      continue;
-    }
-
-    if (bpp >= 16) {
-      continue;
-    } else {
-      decodeBitmap(in, imgDay, w, h, bpp);
-      // Snapshot now: the night variant below re-colours this very bitmap.
-      property.imgDay = toOwnedBLImage(imgDay);
-    }
+    // Snapshot now: the night variant below may re-colour this very bitmap.
+    property.imgDay = toOwnedBLImage(imgDay);
 
     if (t8_1 == 0x03) {
       in >> ncolors >> ctyp;
-      if (!decodeBppAndBytes(ncolors, w, ctyp, bpp, wbytes)) {
+      QImage imgNight;
+      if (!decodeImage(ncolors, ctyp, imgNight)) {
+        // the labels' position is unknown now: keep the day icon, drop the labels
+        property.imgNight = property.imgDay;
         continue;
       }
-      if (!decodeColorTable(in, imgNight, ncolors, 1 << bpp, ctyp == 0x20)) {
-        continue;
-      }
-      decodeBitmap(in, imgNight, w, h, bpp);
       property.imgNight = toOwnedBLImage(imgNight);
+    } else if (t8_1 == 0x02 && imgDay.format() != QImage::Format_Indexed8) {
+      // a night colour table for a true colour icon: its size is unknown, so are the labels' position
+      property.imgNight = property.imgDay;
+      continue;
     } else if (t8_1 == 0x02) {
       in >> ncolors >> ctyp;
+      int bpp = 0, wbytes = 0;
       if (!decodeBppAndBytes(ncolors, w, ctyp, bpp, wbytes)) {
         continue;
       }

@@ -20,6 +20,8 @@ import tempfile
 from pathlib import Path
 
 MKGMAP_RELEASE = "4924"
+# mkgmap reads decimals such as Depth=5.5 in the default locale: "5.5" is 55 in German.
+JAVA = ["java", "-Duser.language=en", "-Duser.country=US", "-jar"]
 
 
 def options(source: Path) -> list:
@@ -45,7 +47,7 @@ def main() -> int:
     if not jar.is_file():
         print(f"mkgmap jar not found: {jar}", file=sys.stderr)
         return 2
-    version = run(["java", "-jar", str(jar), "--version"])
+    version = run([*JAVA, str(jar), "--version"])
     if f"version {MKGMAP_RELEASE}" not in version.stdout + version.stderr:
         print(f"{jar} is not mkgmap r{MKGMAP_RELEASE}:\n{version.stdout}{version.stderr}", file=sys.stderr)
         return 2
@@ -54,7 +56,7 @@ def main() -> int:
     sources = sorted((Path(__file__).resolve().parent / "mp").glob("*.mp"))
     for source in sources:
         with tempfile.TemporaryDirectory() as tmp:
-            result = run(["java", "-jar", str(jar), f"--output-dir={tmp}", "--index", "--overview-mapname=index",
+            result = run([*JAVA, str(jar), f"--output-dir={tmp}", "--index", "--overview-mapname=index",
                           *options(source), str(source)])
             images = [p for p in Path(tmp).glob("*.img") if p.stem.isdigit()]
             index = Path(tmp) / "index_mdr.img"
@@ -69,7 +71,7 @@ def main() -> int:
     for group in groups:
         tiles = sorted(group.glob("*.mp"))
         with tempfile.TemporaryDirectory() as tmp:
-            result = run(["java", "-jar", str(jar), f"--output-dir={tmp}", "--gmapsupp", *options(tiles[0]),
+            result = run([*JAVA, str(jar), f"--output-dir={tmp}", "--gmapsupp", *options(tiles[0]),
                           *[str(t) for t in tiles]])
             gmapsupp = Path(tmp) / "gmapsupp.img"
             if result.returncode != 0 or not gmapsupp.is_file():
@@ -81,7 +83,7 @@ def main() -> int:
     typs = sorted((Path(__file__).resolve().parent / "typ").glob("*.txt"))
     for typ in typs:
         with tempfile.TemporaryDirectory() as tmp:
-            result = run(["java", "-jar", str(jar), f"--output-dir={tmp}", *options(typ), str(typ)])
+            result = run([*JAVA, str(jar), f"--output-dir={tmp}", *options(typ), str(typ)])
             compiled = Path(tmp) / f"{typ.stem}.typ"
             if result.returncode != 0 or not compiled.is_file():
                 print(f"{typ.name}: mkgmap failed\n{result.stdout}{result.stderr}", file=sys.stderr)

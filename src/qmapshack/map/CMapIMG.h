@@ -78,6 +78,8 @@ class CMapIMG : public IMap {
   void drawPolygons(BLContext& ctx, polytype_t& lines);
   void drawPolylines(BLContext& ctx, polytype_t& lines, const QPointF& scale);
   void drawPoints(BLContext& ctx, pointtype_t& pts, QVector<QRectF>& rectPois);
+  /** Sectors of marine lights as on charts (INT 1 P40): arcs and limit lines. */
+  void drawLightSectors(BLContext& ctx, const pointtype_t& pts);
   void drawPois(BLContext& ctx, pointtype_t& pts, QVector<QRectF>& rectPois);
   // Text and labels are rendered through Blend2D as well: glyph outlines come from
   // QRawFont (cmap-only mapping, no complex shaping) and are filled in the shared context.
@@ -87,6 +89,9 @@ class CMapIMG : public IMap {
   void drawLine(BLContext& ctx, CGarminPolygon& l, bool stroke, const CGarminTyp::polyline_property& property,
                 const QFont& font, const QPointF& scale);
   void drawLine(BLContext& ctx, const CGarminPolygon& l);
+  /** Marine lines without a TYP style: colour, dash and ticks from their extra data, as BaseCamp draws them. */
+  void drawMarineLines(BLContext& ctx, polytype_t& lines, const QList<quint32>& indices, const QFont& font,
+                       const QPointF& scale);
 
   void collectText(const CGarminPolygon& item, const QPolygonF& line, const QFont& font, const QColor& color,
                    bool shortName);

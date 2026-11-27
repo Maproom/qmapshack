@@ -1483,6 +1483,190 @@ Se pueden modificar ambos parámetros para personalizar el comportamiento. Para 
     </message>
 </context>
 <context>
+    <name>CGarminMarine</name>
+    <message>
+        <location filename="../../../../../../home/oeichler/projects/qmapshack/src/qmapshack/map/garmin/CGarminMarine.cpp" line="515"/>
+        <source>boat ramp</source>
+        <translation type="unfinished">rampa de botadura</translation>
+    </message>
+    <message>
+        <location filename="../../../../../../home/oeichler/projects/qmapshack/src/qmapshack/map/garmin/CGarminMarine.cpp" line="516"/>
+        <source>drinking water</source>
+        <translation type="unfinished">agua potable</translation>
+    </message>
+    <message>
+        <location filename="../../../../../../home/oeichler/projects/qmapshack/src/qmapshack/map/garmin/CGarminMarine.cpp" line="517"/>
+        <source>restrooms</source>
+        <translation type="unfinished">aseos</translation>
+    </message>
+    <message>
+        <location filename="../../../../../../home/oeichler/projects/qmapshack/src/qmapshack/map/garmin/CGarminMarine.cpp" line="518"/>
+        <source>picnic area</source>
+        <translation type="unfinished">zona de pícnic</translation>
+    </message>
+    <message>
+        <location filename="../../../../../../home/oeichler/projects/qmapshack/src/qmapshack/map/garmin/CGarminMarine.cpp" line="519"/>
+        <source>campground</source>
+        <translation type="unfinished">camping</translation>
+    </message>
+    <message>
+        <location filename="../../../../../../home/oeichler/projects/qmapshack/src/qmapshack/map/garmin/CGarminMarine.cpp" line="520"/>
+        <source>marina</source>
+        <translation type="unfinished">puerto deportivo</translation>
+    </message>
+    <message>
+        <location filename="../../../../../../home/oeichler/projects/qmapshack/src/qmapshack/map/garmin/CGarminMarine.cpp" line="521"/>
+        <source>fuel</source>
+        <translation type="unfinished">combustible</translation>
+    </message>
+    <message>
+        <location filename="../../../../../../home/oeichler/projects/qmapshack/src/qmapshack/map/garmin/CGarminMarine.cpp" line="522"/>
+        <source>marine supply</source>
+        <translation type="unfinished">efectos navales</translation>
+    </message>
+    <message>
+        <location filename="../../../../../../home/oeichler/projects/qmapshack/src/qmapshack/map/garmin/CGarminMarine.cpp" line="523"/>
+        <source>bait and tackle</source>
+        <translation type="unfinished">cebo y aparejos</translation>
+    </message>
+    <message>
+        <location filename="../../../../../../home/oeichler/projects/qmapshack/src/qmapshack/map/garmin/CGarminMarine.cpp" line="524"/>
+        <source>groceries</source>
+        <translation type="unfinished">comestibles</translation>
+    </message>
+    <message>
+        <location filename="../../../../../../home/oeichler/projects/qmapshack/src/qmapshack/map/garmin/CGarminMarine.cpp" line="525"/>
+        <source>restaurant</source>
+        <translation type="unfinished">restaurante</translation>
+    </message>
+    <message>
+        <location filename="../../../../../../home/oeichler/projects/qmapshack/src/qmapshack/map/garmin/CGarminMarine.cpp" line="526"/>
+        <source>water and electric hook-up</source>
+        <translation type="unfinished">toma de agua y electricidad</translation>
+    </message>
+    <message>
+        <location filename="../../../../../../home/oeichler/projects/qmapshack/src/qmapshack/map/garmin/CGarminMarine.cpp" line="527"/>
+        <source>boat and motor rental</source>
+        <translation type="unfinished">alquiler de embarcaciones y motores</translation>
+    </message>
+    <message>
+        <location filename="../../../../../../home/oeichler/projects/qmapshack/src/qmapshack/map/garmin/CGarminMarine.cpp" line="528"/>
+        <source>guide service</source>
+        <translation type="unfinished">servicio de guías</translation>
+    </message>
+    <message>
+        <location filename="../../../../../../home/oeichler/projects/qmapshack/src/qmapshack/map/garmin/CGarminMarine.cpp" line="529"/>
+        <source>lodging</source>
+        <translation type="unfinished">hospedaje</translation>
+    </message>
+    <message>
+        <location filename="../../../../../../home/oeichler/projects/qmapshack/src/qmapshack/map/garmin/CGarminMarine.cpp" line="530"/>
+        <source>dump station</source>
+        <translation type="unfinished">punto de vaciado</translation>
+    </message>
+    <message>
+        <location filename="../../../../../../home/oeichler/projects/qmapshack/src/qmapshack/map/garmin/CGarminMarine.cpp" line="531"/>
+        <source>handicap accessible</source>
+        <translation type="unfinished">accesible para discapacitados</translation>
+    </message>
+</context>
+<context>
+    <name>CGarminPoint</name>
+    <message>
+        <location filename="../../../../../../home/oeichler/projects/qmapshack/src/qmapshack/map/garmin/CGarminPoint.cpp" line="203"/>
+        <source>Colour: %1</source>
+        <translation type="unfinished">Color: %1</translation>
+    </message>
+    <message>
+        <location filename="../../../../../../home/oeichler/projects/qmapshack/src/qmapshack/map/garmin/CGarminPoint.cpp" line="207"/>
+        <source>Light: %1</source>
+        <translation type="unfinished">Luz: %1</translation>
+    </message>
+    <message>
+        <location filename="../../../../../../home/oeichler/projects/qmapshack/src/qmapshack/map/garmin/CGarminPoint.cpp" line="210"/>
+        <source>Sector: %1</source>
+        <translation type="unfinished">Sector: %1</translation>
+    </message>
+    <message>
+        <location filename="../../../../../../home/oeichler/projects/qmapshack/src/qmapshack/map/garmin/CGarminPoint.cpp" line="213"/>
+        <source>Height above foundation: %1</source>
+        <translation type="unfinished">Altura sobre la base: %1</translation>
+    </message>
+    <message>
+        <location filename="../../../../../../home/oeichler/projects/qmapshack/src/qmapshack/map/garmin/CGarminPoint.cpp" line="216"/>
+        <source>Leading angle: %1°</source>
+        <translation type="unfinished">Ángulo de enfilación: %1°</translation>
+    </message>
+    <message>
+        <location filename="../../../../../../home/oeichler/projects/qmapshack/src/qmapshack/map/garmin/CGarminPoint.cpp" line="219"/>
+        <source>Racon</source>
+        <translation type="unfinished">Racon</translation>
+    </message>
+    <message>
+        <location filename="../../../../../../home/oeichler/projects/qmapshack/src/qmapshack/map/garmin/CGarminPoint.cpp" line="223"/>
+        <source>Height: %1</source>
+        <translation type="unfinished">Altura: %1</translation>
+    </message>
+    <message>
+        <location filename="../../../../../../home/oeichler/projects/qmapshack/src/qmapshack/map/garmin/CGarminPoint.cpp" line="224"/>
+        <source>Depth: %1</source>
+        <translation type="unfinished">Profundidad: %1</translation>
+    </message>
+    <message>
+        <location filename="../../../../../../home/oeichler/projects/qmapshack/src/qmapshack/map/garmin/CGarminPoint.cpp" line="228"/>
+        <source>doubtful</source>
+        <translation type="unfinished">dudosa</translation>
+    </message>
+    <message>
+        <location filename="../../../../../../home/oeichler/projects/qmapshack/src/qmapshack/map/garmin/CGarminPoint.cpp" line="229"/>
+        <source>existence doubtful</source>
+        <translation type="unfinished">existencia dudosa</translation>
+    </message>
+    <message>
+        <location filename="../../../../../../home/oeichler/projects/qmapshack/src/qmapshack/map/garmin/CGarminPoint.cpp" line="230"/>
+        <source>approximate</source>
+        <translation type="unfinished">aproximada</translation>
+    </message>
+    <message>
+        <location filename="../../../../../../home/oeichler/projects/qmapshack/src/qmapshack/map/garmin/CGarminPoint.cpp" line="231"/>
+        <source>reported</source>
+        <translation type="unfinished">notificada</translation>
+    </message>
+    <message>
+        <location filename="../../../../../../home/oeichler/projects/qmapshack/src/qmapshack/map/garmin/CGarminPoint.cpp" line="233"/>
+        <source>Position: %1</source>
+        <translation type="unfinished">Posición: %1</translation>
+    </message>
+    <message>
+        <location filename="../../../../../../home/oeichler/projects/qmapshack/src/qmapshack/map/garmin/CGarminPoint.cpp" line="237"/>
+        <source>Facilities: %1</source>
+        <translation type="unfinished">Instalaciones: %1</translation>
+    </message>
+    <message>
+        <location filename="../../../../../../home/oeichler/projects/qmapshack/src/qmapshack/map/garmin/CGarminPoint.cpp" line="240"/>
+        <source>Local designator: %1</source>
+        <translation type="unfinished">Designación local: %1</translation>
+    </message>
+    <message>
+        <location filename="../../../../../../home/oeichler/projects/qmapshack/src/qmapshack/map/garmin/CGarminPoint.cpp" line="243"/>
+        <source>International designator: %1</source>
+        <translation type="unfinished">Designación internacional: %1</translation>
+    </message>
+</context>
+<context>
+    <name>CGarminPolygon</name>
+    <message>
+        <location filename="../../../../../../home/oeichler/projects/qmapshack/src/qmapshack/map/garmin/CGarminPolygon.cpp" line="469"/>
+        <source>Height: %1</source>
+        <translation type="unfinished">Altura: %1</translation>
+    </message>
+    <message>
+        <location filename="../../../../../../home/oeichler/projects/qmapshack/src/qmapshack/map/garmin/CGarminPolygon.cpp" line="469"/>
+        <source>Depth: %1</source>
+        <translation type="unfinished">Profundidad: %1</translation>
+    </message>
+</context>
+<context>
     <name>CGarminTyp</name>
     <message>
         <location filename="../map/garmin/CGarminTyp.cpp" line="426"/>

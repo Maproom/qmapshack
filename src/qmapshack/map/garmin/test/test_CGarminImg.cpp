@@ -25,9 +25,11 @@
 #include <QtMath>
 
 #include "map/garmin/CGarminImg.h"
+#include "map/garmin/CGarminMarine.h"
 #include "map/garmin/CGarminPoint.h"
 #include "map/garmin/CGarminPolygon.h"
 #include "map/garmin/CGarminTyp.h"
+#include "map/garmin/CMarineSymbol.h"
 #include "map/garmin/IGarminStrTbl.h"
 
 /**
@@ -60,6 +62,14 @@ class test_CGarminImg : public QObject {
   void splitHeight();
   void typStyles();
   void typNoCodePage();
+  void marineBytes_data();
+  void marineBytes();
+  void marine();
+  void lightCharacteristic_data();
+  void lightCharacteristic();
+  void facilities();
+  void isHeight();
+  void marineTypes();
 };
 
 namespace {
@@ -69,6 +79,7 @@ struct mp_object_t {
   quint32 type = 0;
   QStringList labels; /**< Label, Label2, Label3 */
   QVector<QPointF> coords;
+  QMap<QString, QString> attributes; /**< every other key, e.g. Depth */
 };
 
 /** One decoded object in the same terms. */
@@ -77,6 +88,7 @@ struct img_object_t {
   quint32 type = 0;
   QStringList labels;
   QVector<QPointF> coords;
+  QByteArray extra;
 };
 
 QString fixtureDir() { return qEnvironmentVariable("QMS_IMG_FIXTURES"); }
@@ -138,6 +150,9 @@ QVector<mp_object_t> readMp(const QString& path) {
         const QRegularExpressionMatch m = it.next();
         current->coords << QPointF(m.captured(1).toDouble(), m.captured(2).toDouble());
       }
+    } else if (current != nullptr && line.contains('=')) {
+      const qsizetype eq = line.indexOf('=');
+      current->attributes[line.left(eq)] = line.mid(eq + 1);
     }
   }
 
@@ -192,12 +207,12 @@ quint8 readImg(const QString& path, QVector<img_object_t>& objects) {
 
   for (const pointtype_t* list : {&points, &pois}) {
     for (const CGarminPoint& p : *list) {
-      objects.append({"POI", p.type, p.labels, {toDeg(p.pos)}});
+      objects.append({"POI", p.type, p.labels, {toDeg(p.pos)}, p.extra});
     }
   }
   for (const polytype_t* list : {&polylines, &polygons}) {
     for (const CGarminPolygon& p : *list) {
-      img_object_t object{list == &polylines ? "POLYLINE" : "POLYGON", p.type, p.labels, {}};
+      img_object_t object{list == &polylines ? "POLYLINE" : "POLYGON", p.type, p.labels, {}, p.extra};
       for (const QPointF& c : p.coords) {
         object.coords << toDeg(c);
       }
@@ -600,3 +615,296 @@ void test_CGarminImg::typNoCodePage() {
 
 QTEST_GUILESS_MAIN(test_CGarminImg)
 #include "test_CGarminImg.moc"
+
+namespace {
+QString distanceText(const CGarminMarine::distance_t& d) {
+  return QString("%1 %2").arg(d.value).arg(d.metric ? "m" : "ft");
+}
+
+/** All decoded fields of @p m as one line; LBL offsets only if @p withOffsets. */
+QString describe(const CGarminMarine& m, bool withOffsets) {
+  QStringList parts;
+  if (m.depth.valid) {
+    parts << "depth " + distanceText(m.depth);
+  }
+  if (m.position != 0) {
+    parts << QString("position %1").arg(m.position);
+  }
+  if (m.colour != 0) {
+    parts << QString("colour %1").arg(CGarminMarine::colourName(m.colour));
+  }
+  if (m.lineStyle != 0) {
+    parts << QString("style 0x%1").arg(m.lineStyle, 0, 16);
+  }
+  if (m.lightType != 0) {
+    parts << QString("type %1").arg(CGarminMarine::lightTypeName(m.lightType));
+  }
+  if (m.morse != 0) {
+    parts << QString("morse %1").arg(QChar(m.morse));
+  }
+  for (const CGarminMarine::light_t& l : m.lights) {
+    parts << QString("light %1 %2 nm at %3").arg(CGarminMarine::lightColourName(l.colour)).arg(l.range).arg(l.angle);
+  }
+  if (m.period != 0) {
+    parts << QString("period %1 s").arg(m.period);
+  }
+  if (!m.phases.isEmpty()) {
+    QStringList phases;
+    for (qreal p : m.phases) {
+      phases << QString::number(p);
+    }
+    parts << "phases " + phases.join(',');
+  }
+  if (m.racon) {
+    parts << "racon";
+  }
+  if (m.heightAboveFoundation.valid) {
+    parts << "above foundation " + distanceText(m.heightAboveFoundation);
+  }
+  if (m.heightAboveDatum.valid) {
+    parts << "above datum " + distanceText(m.heightAboveDatum);
+  }
+  if (m.leadingAngle >= 0) {
+    parts << QString("leading %1").arg(m.leadingAngle);
+  }
+  const QList<QPair<const char*, quint32>> labels = {
+      {"note", m.note}, {"local", m.localDesignator}, {"international", m.internationalDesignator}};
+  for (const auto& [name, offset] : labels) {
+    if (offset != CGarminMarine::kNoLabel) {
+      parts << (withOffsets ? QString("%1 0x%2").arg(name).arg(offset, 0, 16) : QString(name));
+    }
+  }
+  if (m.facilities != 0) {
+    parts << QString("facilities 0x%1").arg(m.facilities, 0, 16);
+  }
+  return parts.join("; ");
+}
+
+/** Index of @p name in a name list of CGarminMarine, 0 if not found. */
+quint8 indexOf(const char* (*names)(quint8), const QString& name) {
+  for (quint8 i = 1; i < 32; ++i) {
+    if (name.compare(names(i), Qt::CaseInsensitive) == 0) {
+      return i;
+    }
+  }
+  return 0;
+}
+
+CGarminMarine::distance_t expectedDistance(const QMap<QString, QString>& attributes, const QString& key) {
+  CGarminMarine::distance_t d;
+  if (attributes.contains(key)) {
+    d.valid = true;
+    d.value = attributes[key].toDouble();
+    d.metric = attributes.value(key + "Unit") != "f";
+  }
+  return d;
+}
+
+/** The extra data an mkgmap source asks for, in CGarminMarine's terms (PolishMapDataSource.makeExtTypeAttributes). */
+CGarminMarine expectedMarine(const mp_object_t& object) {
+  const QMap<QString, QString>& a = object.attributes;
+  const quint32 t = object.type & 0xFFFF;
+  CGarminMarine m;
+
+  m.depth = expectedDistance(a, a.contains("Depth") ? "Depth" : "Height");
+  if (a.contains("Position")) {
+    const QStringList positions = {"unknown", "", "doubtful", "existence doubtful", "approximate", "reported"};
+    m.position = positions.indexOf(a["Position"]);
+  }
+  // Color and Style form mkgmap's style value
+  const quint32 style = (a.value("Style", "0").toUInt(nullptr, 0) << 8) | a.value("Color", "0").toUInt(nullptr, 0);
+  if (object.kind == "POLYLINE" || (t & 0xFF00) == 0x0500) {
+    m.colour = style & 0x0F;
+    // mkgmap keeps bits 0-1 and 4-5 of the style byte
+    m.lineStyle = (style >> 8) & 0x33;
+  }
+  if (a.contains("FoundationColor")) {
+    m.colour = indexOf(CGarminMarine::colourName, a["FoundationColor"]);
+  }
+
+  if (a.contains("LightType")) {
+    const QString type = a["LightType"];
+    if (type.size() == 1) {
+      m.lightType = 11;
+      m.morse = type[0].toLatin1();
+    } else {
+      m.lightType = indexOf(CGarminMarine::lightTypeName, type);
+    }
+  }
+  static const QRegularExpression reLight(R"(\(([a-z]+),([0-9.]+),([0-9.]+)\))");
+  QRegularExpressionMatchIterator it = reLight.globalMatch(a.value("Light"));
+  const bool isBuoy = (t & 0xFF00) == 0x0200;
+  while (it.hasNext()) {
+    const QRegularExpressionMatch match = it.next();
+    CGarminMarine::light_t light;
+    light.colour = indexOf(CGarminMarine::lightColourName, match.captured(1));
+    // a buoy keeps the light colour only
+    light.range = isBuoy ? 0 : quint8(match.captured(2).toDouble());
+    light.angle = isBuoy ? 0 : qint32(match.captured(3).toDouble() * 10) / 10.0;
+    m.lights << light;
+  }
+  if (a.contains("Period")) {
+    for (const QString& p : a["Period"].split(',')) {
+      m.period += qint32(p.toDouble() * 10) / 10.0;
+    }
+  }
+  m.racon = a.contains("Racon");
+  // BaseCamp reads mkgmap's two light heights the other way round
+  m.heightAboveDatum = expectedDistance(a, "HeightAboveFoundation");
+  m.heightAboveFoundation = expectedDistance(a, "HeightAboveDatum");
+  if (a.contains("LeadingAngle")) {
+    m.leadingAngle = qint32(a["LeadingAngle"].toDouble() * 10) / 10.0;
+  }
+  m.note = a.contains("Note") ? 0 : CGarminMarine::kNoLabel;
+  m.localDesignator = a.contains("LocalDesignator") ? 0 : CGarminMarine::kNoLabel;
+  m.internationalDesignator = a.contains("InternationalDesignator") ? 0 : CGarminMarine::kNoLabel;
+  m.facilities = a.value("FacilityPoint", "0").toUInt(nullptr, 0);
+  return m;
+}
+
+CGarminMarine::Kind kindOf(const QString& kind) {
+  return kind == "POI" ? CGarminMarine::Kind::ePoint
+                       : (kind == "POLYLINE" ? CGarminMarine::Kind::eLine : CGarminMarine::Kind::ePolygon);
+}
+}  // namespace
+
+void test_CGarminImg::marineBytes_data() {
+  QTest::addColumn<quint32>("type");
+  QTest::addColumn<int>("kind");
+  QTest::addColumn<QByteArray>("bytes");
+  QTest::addColumn<QString>("text");
+
+  const int point = int(CGarminMarine::Kind::ePoint);
+  const int line = int(CGarminMarine::Kind::eLine);
+  const int polygon = int(CGarminMarine::Kind::ePolygon);
+
+  // Bytes as mkgmap r4924 ExtTypeAttributes writes them.
+  QTest::newRow("depth m") << 0x10301u << point << QByteArray::fromHex("900c") << "depth 12 m";
+  QTest::newRow("depth tenths") << 0x10301u << point << QByteArray::fromHex("9837") << "depth 5.5 m";
+  QTest::newRow("depth 2 bytes") << 0x10301u << point << QByteArray::fromHex("b02c01") << "depth 300 m";
+  QTest::newRow("obstruction ft") << 0x10400u << point << QByteArray::fromHex("8403") << "depth 3 ft; position 4";
+  QTest::newRow("depth line") << 0x10301u << line << QByteArray::fromHex("900a") << "depth 10 m";
+  QTest::newRow("depth area") << 0x10301u << polygon << QByteArray::fromHex("984b") << "depth 7.5 m";
+  QTest::newRow("label colour") << 0x10500u << point << QByteArray::fromHex("03") << "colour yellow";
+  QTest::newRow("line colour") << 0x10400u << line << QByteArray::fromHex("01") << "colour red";
+  QTest::newRow("line style") << 0x10500u << line << QByteArray::fromHex("8201") << "colour green; style 0x1";
+  QTest::newRow("line style high") << 0x10600u << line << QByteArray::fromHex("840b") << "colour white; style 0x13";
+  QTest::newRow("facilities") << 0x10903u << point << QByteArray::fromHex("a10110") << "facilities 0x10021";
+  QTest::newRow("light") << 0x10100u << point << QByteArray::fromHex("e00d800022282a01")
+                         << "light red 10 nm at 0; period 4 s";
+  // nob counts a single-light byte that is not written with several lights: one trailing 0
+  QTest::newRow("light sectors") << 0x10101u << point << QByteArray::fromHex("e0218008260c3200100ab0240860b90c0100")
+                                 << "light red 10 nm at 0; light green 8 nm at 120; light white 12 nm at 240; "
+                                    "period 5 s; above foundation 12 m";
+  QTest::newRow("light morse") << 0x10102u << point << QByteArray::fromHex("e00d8b0122000041")
+                               << "type morse code letter; morse A";
+  QTest::newRow("light note") << 0x10103u << point << QByteArray::fromHex("e213800022005634120001") << "note 0x123456";
+  QTest::newRow("buoy") << 0x10206u << point << QByteArray::fromHex("e00b8100801e01")
+                        << "colour red; light green 0 nm at 0; period 3 s";
+  QTest::newRow("no extra data type") << 0x10e00u << line << QByteArray::fromHex("01") << "";
+}
+
+void test_CGarminImg::marineBytes() {
+  QFETCH(quint32, type);
+  QFETCH(int, kind);
+  QFETCH(QByteArray, bytes);
+  QFETCH(QString, text);
+
+  const CGarminMarine m = CGarminMarine::decode(type, CGarminMarine::Kind(kind), bytes);
+  QCOMPARE(m.isEmpty(), text.isEmpty());
+  QCOMPARE(describe(m, true), text);
+}
+
+void test_CGarminImg::marine() {
+  if (fixtureDir().isEmpty()) {
+    QSKIP("QMS_IMG_FIXTURES not set; build the test maps with make_fixtures.py");
+  }
+  const QString image = QDir(fixtureDir()).filePath("marine.img");
+  if (!QFileInfo::exists(image)) {
+    QSKIP(qPrintable("Test map not built: " + image));
+  }
+
+  QVector<img_object_t> decoded;
+  try {
+    QVERIFY(readImg(image, decoded) > 0);
+  } catch (const CGarminImg::exce_t& e) {
+    QFAIL(qPrintable(e.msg));
+  }
+
+  const QVector<mp_object_t> sources = readMp(QDir(QMS_IMG_SOURCES).filePath("marine.mp"));
+  QVERIFY(!sources.isEmpty());
+  for (const mp_object_t& want : sources) {
+    const QString what = QString("%1 0x%2 \"%3\"").arg(want.kind).arg(want.type, 0, 16).arg(want.labels.join(", "));
+    auto match = std::find_if(decoded.begin(), decoded.end(), [&](const img_object_t& got) {
+      return got.kind == want.kind && got.type == want.type && got.labels == want.labels;
+    });
+    QVERIFY2(match != decoded.end(), qPrintable("Not decoded: " + what));
+
+    const CGarminMarine m = CGarminMarine::decode(match->type, kindOf(match->kind), match->extra);
+    QVERIFY2(!m.isEmpty(), qPrintable("No extra data decoded: " + what + ", bytes " + match->extra.toHex()));
+    const QString got = describe(m, false);
+    const QString expected = describe(expectedMarine(want), false);
+    QVERIFY2(got == expected, qPrintable(QString("%1\n   got: %2\n  want: %3").arg(what, got, expected)));
+  }
+}
+
+void test_CGarminImg::lightCharacteristic_data() {
+  QTest::addColumn<quint32>("type");
+  QTest::addColumn<QByteArray>("bytes");
+  QTest::addColumn<QString>("characteristic");
+  QTest::addColumn<QString>("sectors");
+
+  // Chart notation, INT 1 P16: character, colours, period, elevation, range.
+  QTest::newRow("single") << 0x10100u << QByteArray::fromHex("e00d800022282a01") << "R.4s10M" << "";
+  QTest::newRow("sectors") << 0x10101u << QByteArray::fromHex("e0218008260c3200100ab0240860b90c0100") << "RGW.5s12-8M"
+                           << "R 0°-120° 10M; G 120°-240° 8M; W 240°-0° 12M";
+  QTest::newRow("morse") << 0x10102u << QByteArray::fromHex("e00d8b0122000041") << "Mo(A)" << "";
+  QTest::newRow("buoy") << 0x10206u << QByteArray::fromHex("e00b8100801e01") << "G.3s" << "";
+  // white alone is not written; two flashes per group from the phases record
+  QTest::newRow("group known") << 0x10100u << QByteArray::fromHex("e01584012232658205050a1e") << "Fl(2).5s5M" << "";
+  QTest::newRow("group unknown") << 0x10100u << QByteArray::fromHex("e00d8400220a4501") << "Fl(…)G.1s5M" << "";
+  QTest::newRow("no light") << 0x10301u << QByteArray::fromHex("900c") << "" << "";
+}
+
+void test_CGarminImg::lightCharacteristic() {
+  QFETCH(quint32, type);
+  QFETCH(QByteArray, bytes);
+  QFETCH(QString, characteristic);
+  QFETCH(QString, sectors);
+
+  const CGarminMarine m = CGarminMarine::decode(type, CGarminMarine::Kind::ePoint, bytes);
+  QVERIFY(!m.isEmpty());
+  QCOMPARE(m.lightCharacteristic(), characteristic);
+  QCOMPARE(m.sectorTexts().join("; "), sectors);
+}
+
+void test_CGarminImg::facilities() {
+  const CGarminMarine m = CGarminMarine::decode(0x10903, CGarminMarine::Kind::ePoint, QByteArray::fromHex("a10110"));
+  QCOMPARE(m.facilityNames(), QStringList({"boat ramp", "marina", "handicap accessible"}));
+}
+
+void test_CGarminImg::isHeight() {
+  // as BaseCamp 4.7.5 labels them
+  QVERIFY(!CGarminMarine::isHeight(0x10301, CGarminMarine::Kind::ePoint));
+  QVERIFY(CGarminMarine::isHeight(0x10302, CGarminMarine::Kind::ePoint));
+  QVERIFY(CGarminMarine::isHeight(0x10400, CGarminMarine::Kind::ePoint));
+  QVERIFY(!CGarminMarine::isHeight(0x10301, CGarminMarine::Kind::eLine));
+  QVERIFY(CGarminMarine::isHeight(0x10105, CGarminMarine::Kind::eLine));
+  QVERIFY(!CGarminMarine::isHeight(0x10301, CGarminMarine::Kind::ePolygon));
+}
+
+void test_CGarminImg::marineTypes() {
+  // standard types share the low bytes with marine ones: a city 0x0200 is no buoy
+  QVERIFY(!CMarineSymbol::hasSymbol(0x0200));
+  QVERIFY(!CMarineSymbol::hasSymbol(0x0209));
+  QVERIFY(CMarineSymbol::hasSymbol(0x10200));
+  QVERIFY(CMarineSymbol::hasSymbol(0x10100));
+  QVERIFY(CMarineSymbol::hasSymbol(0x10400));
+  QVERIFY(!CMarineSymbol::hasSymbol(0x11100));
+  // only the line ranges with marine extra data
+  QVERIFY(CGarminMarine::isMarineLine(0x10301));
+  QVERIFY(CGarminMarine::isMarineLine(0x10105));
+  QVERIFY(CGarminMarine::isMarineLine(0x10600));
+  QVERIFY(!CGarminMarine::isMarineLine(0x10e00));
+  QVERIFY(!CGarminMarine::isMarineLine(0x0301));
+}

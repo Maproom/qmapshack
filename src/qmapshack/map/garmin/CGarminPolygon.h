@@ -35,6 +35,8 @@ struct subdiv_desc_t;
 struct sign_info_t;
 
 class CGarminPolygon {
+  Q_DECLARE_TR_FUNCTIONS(CGarminPolygon)
+
  public:
   CGarminPolygon() = default;
 
@@ -47,8 +49,10 @@ class CGarminPolygon {
   QString getLabelText() const;
   /** The first label without prefix and suffix, as drawn zoomed out; a contour's height. */
   QString getShortText() const;
-  /** All labels, as listed in the map's info: a road can have up to 4. */
+  /** All labels, as listed in the map's info: a road can have up to 4. A marine line adds its depth or height. */
   QString getInfoText() const;
+  /** Depth or height of a marine line (@p line) or area from its extra data, "Depth: 10 m"; empty if none. */
+  QString getMarineText(bool line) const;
 
   bool hasLabel() const { return !labels.isEmpty(); }
 
@@ -76,6 +80,9 @@ class CGarminPolygon {
   quint32 id = 0;
 
   QStringList labels;
+
+  /** Extra data of an extended line or polygon, see CGarminMarine; empty if none. */
+  QByteArray extra;
 
   static quint32 cnt;
   static qint32 maxVecSize;

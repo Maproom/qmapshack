@@ -26,6 +26,8 @@
 
 #include <assert.h>
 
+#include "CGarminMarine.h"
+#include "CGarminPoint.h"
 #include "Garmin.h"
 #include "IGarminStrTbl.h"
 #include "helpers/Platform.h"
@@ -213,6 +215,7 @@ quint32 CGarminPolygon::decode2(qint32 iCenterLon, qint32 iCenterLat, quint32 sh
   lbl_in_NET = false;
   lbl_info = 0;
   pixel.clear();
+  extra.clear();
 
   // a line cut off by the section's end keeps no points
   if (pEnd - pStart < 7 || (!(pStart[6] & 0x1) && pEnd - pStart < 8)) {
@@ -317,6 +320,7 @@ quint32 CGarminPolygon::decode2(qint32 iCenterLon, qint32 iCenterLat, quint32 sh
       // unknown form: the rest of the section cannot be read
       bytes_total = pEnd - pStart;
     } else {
+      extra = QByteArray(reinterpret_cast<const char*>(pStart + bytes_total), size);
       bytes_total += size;
     }
   }
@@ -434,18 +438,35 @@ QString CGarminPolygon::getShortText() const {
 }
 
 QString CGarminPolygon::getInfoText() const {
+  QString text;
   if (labels.size() < 2) {
-    return getLabelText();
+    text = getLabelText();
+  } else {
+    QStringList texts;
+    for (const QString& label : labels) {
+      const QString t = IGarminStrTbl::displayText(label).simplified();
+      if (!t.isEmpty()) {
+        texts << t;
+      }
+    }
+    text = texts.join(", ");
   }
 
-  QStringList texts;
-  for (const QString& label : labels) {
-    const QString text = IGarminStrTbl::displayText(label).simplified();
-    if (!text.isEmpty()) {
-      texts << text;
-    }
+  const QString marine = getMarineText(true);
+  if (marine.isEmpty()) {
+    return text;
   }
-  return texts.join(", ");
+  return text.isEmpty() ? marine : text + "\n" + marine;
+}
+
+QString CGarminPolygon::getMarineText(bool line) const {
+  const CGarminMarine::Kind kind = line ? CGarminMarine::Kind::eLine : CGarminMarine::Kind::ePolygon;
+  const CGarminMarine marine = CGarminMarine::decode(type, kind, extra);
+  if (!marine.depth.valid) {
+    return QString();
+  }
+  const QString value = CGarminPoint::distanceText(marine.depth);
+  return CGarminMarine::isHeight(type, kind) ? tr("Height: %1").arg(value) : tr("Depth: %1").arg(value);
 }
 
 // extract bits per coordinate

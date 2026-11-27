@@ -35,7 +35,9 @@
 #include "helpers/Platform.h"
 #include "map/Blend2dUtil.h"
 #include "map/CMapDraw.h"
+#include "map/garmin/CGarminMarine.h"
 #include "map/garmin/CGarminTyp.h"
+#include "map/garmin/CMarineSymbol.h"
 #include "map/garmin/IGarminStrTbl.h"
 #include "misc.h"
 #include "poi/IPoiItem.h"
@@ -48,6 +50,8 @@
 constexpr qreal kShortLabelThreshold = 5.0;
 /** Maximum map scale [m/px] at which line labels are drawn; BaseCamp still draws them at its 5 km scale bar. */
 constexpr qreal kLineLabelThreshold = 50.0;
+/** Maximum map scale [m/px] at which light sectors are drawn. */
+constexpr qreal kLightSectorThreshold = 10.0;
 /// Largest bend [deg] between two segments a street name may follow.
 constexpr qreal kLabelMaxBend = 30.0;
 /// Street names this close [deg] to vertical keep the direction of their line; all others read left to right.
@@ -188,6 +192,55 @@ static_assert(sizeof(QPointF) == 2 * sizeof(double), "QPointF must be two double
 
 /// View a QPolygonF as a contiguous array of BLPoint for Blend2D bulk geometry calls.
 inline const BLPoint* toBLPoints(const QPolygonF& poly) { return reinterpret_cast<const BLPoint*>(poly.constData()); }
+
+/**
+   @brief The dashes of @p poly as separate sub-paths: Blend2D ignores a stroke dash array and strokes solid.
+   @param pattern On and off lengths [px], alternating, starting with on; empty for a solid line.
+ */
+BLPath dashedPath(const QPolygonF& poly, const QVector<double>& pattern) {
+  BLPath path;
+  if (poly.size() < 2) {
+    return path;
+  }
+  if (pattern.isEmpty()) {
+    path.move_to(poly[0].x(), poly[0].y());
+    for (qsizetype i = 1; i < poly.size(); ++i) {
+      path.line_to(poly[i].x(), poly[i].y());
+    }
+    return path;
+  }
+
+  qsizetype k = 0;          // current pattern entry
+  qreal left = pattern[0];  // length left in it
+  bool on = true;
+  path.move_to(poly[0].x(), poly[0].y());
+  for (qsizetype i = 0; i + 1 < poly.size(); ++i) {
+    const QPointF a = poly[i];
+    const QPointF d = poly[i + 1] - a;
+    const qreal len = qSqrt(d.x() * d.x() + d.y() * d.y());
+    qreal pos = 0;
+    while (len - pos > left) {
+      pos += left;
+      const QPointF p = a + d * (pos / len);
+      if (on) {
+        path.line_to(p.x(), p.y());
+      } else {
+        path.move_to(p.x(), p.y());
+      }
+      on = !on;
+      k = (k + 1) % pattern.size();
+      left = pattern[k];
+    }
+    left -= len - pos;
+    const QPointF b = poly[i + 1];
+    if (on) {
+      path.line_to(b.x(), b.y());
+    } else {
+      path.move_to(b.x(), b.y());
+    }
+  }
+  return path;
+}
 
 BLStrokeCap toBLCap(Qt::PenCapStyle cap) {
   switch (cap) {
@@ -948,6 +1001,9 @@ void CMapIMG::draw(IDrawContext::buffer_t& buf) /* override */
     if (ok && !map->needsRedraw()) {
       drawPoints(ctx, points, rectPois);
     }
+    if (ok && !map->needsRedraw() && bufferScale.x() < kLightSectorThreshold) {
+      drawLightSectors(ctx, pois);
+    }
     if (ok && !map->needsRedraw()) {
       drawPois(ctx, pois, rectPois);
     }
@@ -1194,12 +1250,96 @@ void CMapIMG::drawPolylines(BLContext& ctx, polytype_t& lines, const QPointF& sc
   // overlays like cycle routes there.
   QList<quint32> types = dict.keys();
   std::sort(types.begin(), types.end());
+
+  // extended lines the TYP does not style: marine lines, drawn from their extra data below all others
+  QList<quint32> marine;
+  for (quint32 type : std::as_const(types)) {
+    if (CGarminMarine::isMarineLine(type) && !polylineProperties.contains(type)) {
+      marine << dict[type];
+    }
+  }
+  if (!marine.isEmpty()) {
+    drawMarineLines(ctx, lines, marine, font, scale);
+  }
+
   const auto top =
       std::stable_partition(types.begin(), types.end(), [](quint32 type) { return type < 0x01 || type > 0x03; });
   const QList<quint32> topTypes(top, types.end());
   types.resize(std::distance(types.begin(), top));
   drawTypes(types);
   drawTypes(topTypes);
+}
+
+void CMapIMG::drawMarineLines(BLContext& ctx, polytype_t& lines, const QList<quint32>& indices, const QFont& font,
+                              const QPointF& scale) {
+  // BaseCamp 4.7.5, sampled: colour index of the extra data
+  static const QRgb colours[16] = {0x727267, 0x2ba3f8, 0x6ade60, 0xbff4f4, 0xfc484d, 0xe828e4, 0xfdea5d, 0xfd9b4e,
+                                   0x171715, 0x8ce8f8, 0xad8e5b, 0xdbfdf4, 0xc6f1c0, 0xfcbef8, 0xe0d99e, 0xf0f0e8};
+  // style bits 0-1: solid, short dashes, long dash short gap, long dashes
+  static const QVector<double> dashes[4] = {{}, {3.0, 3.0}, {7.0, 2.0}, {8.0, 4.0}};
+  constexpr qreal kTickSpacing = 6.0;
+  constexpr qreal kTickLength = 3.0;
+
+  for (quint32 idx : indices) {
+    CGarminPolygon& item = lines[idx];
+    QPolygonF& poly = item.pixel;
+    if (poly.size() < 2) {
+      continue;
+    }
+    map->convertRad2Px(poly);
+
+    const CGarminMarine marine = CGarminMarine::decode(item.type, CGarminMarine::Kind::eLine, item.extra);
+    QRgb rgb = colours[0];
+    if (!marine.isEmpty() && marine.colour != 0) {
+      rgb = colours[marine.colour & 0x0F];
+    } else if ((item.type & 0x1FF00) == 0x10300) {
+      // depth lines without a colour are blue, contours black, line 0x105xx pink
+      rgb = colours[1];
+    } else if (item.type >= 0x10105 && item.type <= 0x10107) {
+      rgb = colours[8];
+    } else if ((item.type & 0x1FF00) == 0x10500) {
+      rgb = 0xfcbef8;
+    }
+
+    ctx.set_stroke_width(1.0);
+    ctx.set_stroke_caps(BL_STROKE_CAP_BUTT);
+    ctx.set_stroke_join(BL_STROKE_JOIN_ROUND);
+    ctx.set_stroke_dash_array(BLArray<double>());
+    ctx.set_stroke_style(BLRgba32(0xFF000000u | rgb));
+    ctx.stroke_path(dashedPath(poly, dashes[marine.lineStyle & 0x03]));
+
+    // ticks: 0x10 on one side, 0x20 on the other, 0x30 both
+    const quint8 ticks = (marine.lineStyle >> 4) & 0x03;
+    if (ticks != 0) {
+      BLPath path;
+      qreal carry = kTickSpacing / 2;
+      for (qsizetype i = 0; i + 1 < poly.size(); ++i) {
+        const QPointF d = poly[i + 1] - poly[i];
+        const qreal len = qSqrt(d.x() * d.x() + d.y() * d.y());
+        if (len < 0.5) {
+          continue;
+        }
+        const QPointF n(-d.y() / len, d.x() / len);
+        // ticks at carry, carry + spacing, ... below len
+        const qint32 count = carry < len ? qint32(qFloor((len - carry) / kTickSpacing)) + 1 : 0;
+        for (qint32 k = 0; k < count; ++k) {
+          const qreal s = carry + k * kTickSpacing;
+          const QPointF p = poly[i] + d * (s / len);
+          const QPointF a = (ticks & 0x01) ? p + n * kTickLength : p;
+          const QPointF b = (ticks & 0x02) ? p - n * kTickLength : p;
+          path.move_to(a.x(), a.y());
+          path.line_to(b.x(), b.y());
+        }
+        // the next tick continues the spacing across the vertex
+        carry = carry + count * kTickSpacing - len;
+      }
+      ctx.stroke_path(path);
+    }
+
+    if (scale.x() < kLineLabelThreshold && item.hasLabel()) {
+      collectText(item, poly, font, Qt::black, scale.x() >= kShortLabelThreshold);
+    }
+  }
 }
 
 void CMapIMG::drawLine(BLContext& ctx, CGarminPolygon& l, bool stroke, const CGarminTyp::polyline_property& property,
@@ -1351,6 +1491,67 @@ void CMapIMG::drawPoints(BLContext& ctx, pointtype_t& pts, QVector<QRectF>& rect
   }
 }
 
+void CMapIMG::drawLightSectors(BLContext& ctx, const pointtype_t& pts) {
+  // arcs at 0.2 nm, as mkgmap stores no light radius; white drawn yellow as on multicoloured charts
+  constexpr qreal kRadius = 0.2 * 1852.0;  // [m]
+  static const QRgb colours[8] = {0, 0xff0000, 0x00ff00, 0xffff00, 0x0000ff, 0xffff00, 0xee82ee, 0xffc200};
+  static const QVector<double> kLimitDash = {4.0, 4.0};
+
+  for (const CGarminPoint& pt : pts) {
+    if ((pt.type & 0x1FF00) != 0x10100 || pt.extra.isEmpty()) {
+      continue;
+    }
+    const CGarminMarine marine = CGarminMarine::decode(pt.type, CGarminMarine::Kind::ePoint, pt.extra);
+    if (marine.lights.size() < 2) {
+      continue;
+    }
+
+    QPointF centre = pt.pos;
+    QPointF north(pt.pos.x(), pt.pos.y() + kRadius / 6378137.0);
+    map->convertRad2Px(centre);
+    map->convertRad2Px(north);
+    const qreal radius = QLineF(centre, north).length();
+
+    // a sector's limits are bearings seen from seaward: the arc lies on the opposite side of the light
+    const auto at = [&](qreal bearing, qreal r) {
+      const qreal a = qDegreesToRadians(bearing + 180.0);
+      return QPointF(centre.x() + r * qSin(a), centre.y() - r * qCos(a));
+    };
+
+    BLPath limits;
+    for (qsizetype i = 0; i < marine.lights.size(); ++i) {
+      const CGarminMarine::light_t& light = marine.lights[i];
+      if (light.colour == 0) {
+        continue;
+      }
+      const qreal start = light.angle;
+      qreal end = marine.lights[(i + 1) % marine.lights.size()].angle;
+      if (end <= start) {
+        end += 360.0;
+      }
+
+      QPolygonF arc;
+      const qint32 steps = qMax(1, qCeil((end - start) / 2.0));
+      for (qint32 k = 0; k < steps; ++k) {
+        arc << at(start + (end - start) * k / steps, radius);
+      }
+      arc << at(end, radius);
+      ctx.set_stroke_width(4.0);
+      ctx.set_stroke_caps(BL_STROKE_CAP_BUTT);
+      ctx.set_stroke_style(BLRgba32(0xFF000000u | colours[light.colour & 0x07]));
+      ctx.stroke_polyline(toBLPoints(arc), static_cast<size_t>(arc.size()));
+
+      for (qreal b : {start, end}) {
+        const QPointF p = at(b, radius);
+        limits.add_path(dashedPath(QPolygonF({centre, p}), kLimitDash));
+      }
+    }
+    ctx.set_stroke_width(1.0);
+    ctx.set_stroke_style(BLRgba32(0xFF808080u));
+    ctx.stroke_path(limits);
+  }
+}
+
 void CMapIMG::drawPois(BLContext& ctx, pointtype_t& pts, QVector<QRectF>& rectPois) {
   const bool night = CMainWindow::self().isNight();
   static const CGarminTyp::point_property unknownProperty;
@@ -1360,6 +1561,28 @@ void CMapIMG::drawPois(BLContext& ctx, pointtype_t& pts, QVector<QRectF>& rectPo
     const auto propIt = pointProperties.constFind(pt.type);
     const CGarminTyp::point_property& property =
         (propIt != pointProperties.constEnd()) ? propIt.value() : unknownProperty;
+
+    // a marine point the TYP does not style gets its chart symbol, the label beside it
+    if (propIt == pointProperties.constEnd() && CMarineSymbol::hasSymbol(pt.type)) {
+      const QRectF area = CMarineSymbol::bounds(pt.type).translated(pt.pos);
+      if (isCluttered(rectPois, area)) {
+        blitBullet(ctx, pt.pos.x() - 4, pt.pos.y() - 4);
+        continue;
+      }
+      CMarineSymbol::draw(ctx, pt.pos, pt.type, CGarminMarine::decode(pt.type, CGarminMarine::Kind::ePoint, pt.extra));
+      if (CMainWindow::self().isPoiText() && pt.hasLabel()) {
+        QRect rect = fm.boundingRect(pt.getLabelText());
+        rect.adjust(0, 0, 4, 4);
+        rect.moveBottomLeft(QPoint(qRound(area.right()) + 2, qRound(pt.pos.y())));
+        if (!intersectsWithExistingLabel(rect)) {
+          addLabel(pt, rect, property, night);
+          // drawLabels() centres the text on the point; here it goes beside the symbol
+          labels.last().pt = rect.center();
+        }
+      }
+      continue;
+    }
+
     const BLImage& icon = night ? property.imgNight : property.imgDay;
     const QSizeF size(icon.width(), icon.height());
 
@@ -1663,8 +1886,10 @@ void CMapIMG::getInfoPoints(const pointtype_t& points, const QPoint& pt, QMultiM
   for (const CGarminPoint& point : points) {
     QPoint x = pt - QPoint(point.pos.x(), point.pos.y());
     if (x.manhattanLength() < 10) {
-      if (point.hasLabel()) {
-        dict.insert(tr("Point of Interest"), point.getLabelText());
+      // the label and marine data; the type's name when neither gives a text
+      const QString text = point.getInfoText();
+      if (!text.isEmpty()) {
+        dict.insert(tr("Point of Interest"), text);
       } else {
         if (pointProperties.contains(point.type)) {
           dict.insert(tr("Point of Interest"),
@@ -1724,15 +1949,17 @@ void CMapIMG::getInfoPolylines(const QPoint& pt, QMultiMap<QString, QString>& di
       if (distance < shortest) {
         type = line.type;
         value.clear();
-        value << (line.hasLabel() ? line.getInfoText() : "-");
+        const QString text = line.getInfoText();
+        value << (text.isEmpty() ? QString("-") : text);
 
         resPt.setX(x);
         resPt.setY(y);
         shortest = distance;
         found = true;
       } else if (distance == shortest) {
-        if (line.hasLabel()) {
-          value << line.getInfoText();
+        const QString text = line.getInfoText();
+        if (!text.isEmpty()) {
+          value << text;
         }
       }
     }
@@ -1784,8 +2011,12 @@ void CMapIMG::getInfoPolygons(const QPoint& pt, QMultiMap<QString, QString>& dic
       }
 
       if (c) {
+        const QString marine = line.getMarineText(false);
         if (line.labels.size()) {
-          dict.insert(tr("Area"), IGarminStrTbl::displayText(line.labels).simplified());
+          const QString name = IGarminStrTbl::displayText(line.labels).simplified();
+          dict.insert(tr("Area"), marine.isEmpty() ? name : name + "\n" + marine);
+        } else if (!marine.isEmpty()) {
+          dict.insert(tr("Area"), marine);
         } else {
           if (selectedLanguage != NOIDX) {
             if (polygonProperties[line.type].strings[selectedLanguage].size()) {

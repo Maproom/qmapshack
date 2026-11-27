@@ -45,6 +45,8 @@ class CGarminPolygon {
 
   /** The first label as drawn on the map, a contour's height converted from feet. */
   QString getLabelText() const;
+  /** The first label without prefix and suffix, as drawn zoomed out; a contour's height. */
+  QString getShortText() const;
   /** All labels, as listed in the map's info: a road can have up to 4. */
   QString getInfoText() const;
 

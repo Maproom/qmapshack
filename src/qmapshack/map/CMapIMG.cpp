@@ -44,8 +44,10 @@
 #undef DEBUG_SHOW_SECTION_BORDERS
 #undef DEBUG_SHOW_SUBDIV_BORDERS
 
-/// Maximum map scale [m/px] at which street / way names are still drawn.
-constexpr qreal kStreetNameThreshold = 5.0;
+/** Map scale [m/px] from which line labels are drawn short, without prefix and suffix, as BaseCamp does. */
+constexpr qreal kShortLabelThreshold = 5.0;
+/** Maximum map scale [m/px] at which line labels are drawn; BaseCamp still draws them at its 5 km scale bar. */
+constexpr qreal kLineLabelThreshold = 50.0;
 /// Largest bend [deg] between two segments a street name may follow.
 constexpr qreal kLabelMaxBend = 30.0;
 /// Street names this close [deg] to vertical keep the direction of their line; all others read left to right.
@@ -1110,7 +1112,7 @@ void CMapIMG::drawPolylines(BLContext& ctx, polytype_t& lines, const QPointF& sc
             v1 = v2;
           }
 
-          if (scale.x() < kStreetNameThreshold && property.labelType != CGarminTyp::eNone) {
+          if (scale.x() < kLineLabelThreshold && property.labelType != CGarminTyp::eNone) {
             QFont f(font);
             switch (property.labelType) {
               case CGarminTyp::eSmall:
@@ -1122,7 +1124,8 @@ void CMapIMG::drawPolylines(BLContext& ctx, polytype_t& lines, const QPointF& sc
               default:;
             }
 
-            collectText(item, poly, f, night ? property.colorLabelNight : property.colorLabelDay);
+            collectText(item, poly, f, night ? property.colorLabelNight : property.colorLabelDay,
+                        scale.x() >= kShortLabelThreshold);
           }
 
           // Lay the pixmap along each straight segment of the polyline. The arc-length
@@ -1210,7 +1213,7 @@ void CMapIMG::drawLine(BLContext& ctx, CGarminPolygon& l, bool stroke, const CGa
 
   map->convertRad2Px(poly);
 
-  if (scale.x() < kStreetNameThreshold && property.labelType != CGarminTyp::eNone) {
+  if (scale.x() < kLineLabelThreshold && property.labelType != CGarminTyp::eNone) {
     QFont f(font);
     switch (property.labelType) {
       case CGarminTyp::eSmall:
@@ -1222,7 +1225,8 @@ void CMapIMG::drawLine(BLContext& ctx, CGarminPolygon& l, bool stroke, const CGa
       default:;
     }
 
-    collectText(l, poly, f, CMainWindow::self().isNight() ? property.colorLabelNight : property.colorLabelDay);
+    collectText(l, poly, f, CMainWindow::self().isNight() ? property.colorLabelNight : property.colorLabelDay,
+                scale.x() >= kShortLabelThreshold);
   }
 
   if (stroke) {
@@ -1239,10 +1243,16 @@ void CMapIMG::drawLine(BLContext& ctx, const CGarminPolygon& l) {
   ctx.stroke_polyline(toBLPoints(poly), static_cast<size_t>(poly.size()));
 }
 
-void CMapIMG::collectText(const CGarminPolygon& item, const QPolygonF& line, const QFont& font, const QColor& color) {
+void CMapIMG::collectText(const CGarminPolygon& item, const QPolygonF& line, const QFont& font, const QColor& color,
+                          bool shortName) {
+  // BaseCamp leaves minor contours and boundaries unlabelled zoomed out
+  if (shortName && (item.type == 0x20 || item.type == 0x1c)) {
+    return;
+  }
+
   QString str;
   if (item.hasLabel()) {
-    str = item.getLabelText();
+    str = shortName ? item.getShortText() : item.getLabelText();
   }
 
   if (str.isEmpty()) {

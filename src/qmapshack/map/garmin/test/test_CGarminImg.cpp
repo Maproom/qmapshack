@@ -53,6 +53,9 @@ class test_CGarminImg : public QObject {
   void displayText();
   void shieldCode_data();
   void shieldCode();
+  void shortText_data();
+  void shortText();
+  void shortTextOfLine();
   void splitHeight_data();
   void splitHeight();
   void typStyles();
@@ -419,6 +422,37 @@ void test_CGarminImg::displayText() {
   QFETCH(QString, label);
   QFETCH(QString, text);
   QCOMPARE(IGarminStrTbl::displayText(label), text);
+}
+
+void test_CGarminImg::shortText_data() {
+  QTest::addColumn<QString>("label");
+  QTest::addColumn<QString>("text");
+
+  // As BaseCamp 4.7.5 shows these labels zoomed out.
+  QTest::newRow("plain") << "Plain Road" << "Plain Road";
+  QTest::newRow("prefix 0x1b") << unescape("Rue d'~[0x1b]Alsace") << "Alsace";
+  QTest::newRow("prefix 0x1e") << unescape("Rue de la~[0x1e]Concorde") << "Concorde";
+  QTest::newRow("suffix 0x1c") << unescape("Haupt~[0x1c]strasse") << "Haupt";
+  QTest::newRow("suffix 0x1f") << unescape("Main~[0x1f]Street") << "Main";
+  QTest::newRow("both, blanks") << unescape("West~[0x1e]Lincoln~[0x1f]Road") << "Lincoln";
+  QTest::newRow("both") << unescape("Carrer d'~[0x1b]Europa~[0x1c]kalea") << "Europa";
+  QTest::newRow("0x1d") << unescape("Alpha~[0x1d]Beta") << "Alpha";
+  QTest::newRow("shield") << unescape("~[0x04]A7") << "A7";
+  QTest::newRow("empty core") << unescape("~[0x1f]Street") << "Street";
+}
+
+void test_CGarminImg::shortText() {
+  QFETCH(QString, label);
+  QFETCH(QString, text);
+  QCOMPARE(IGarminStrTbl::shortText(label), text);
+}
+
+void test_CGarminImg::shortTextOfLine() {
+  CGarminPolygon line;
+  line.type = 0x06;
+  QCOMPARE(line.getShortText(), QString());
+  line.labels << unescape("West~[0x1e]Lincoln~[0x1f]Road") << "Second";
+  QCOMPARE(line.getShortText(), QString("Lincoln"));
 }
 
 void test_CGarminImg::shieldCode_data() {

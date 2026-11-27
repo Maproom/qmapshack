@@ -69,6 +69,11 @@ class IGarminStrTbl : public QObject {
      @return 0x01 interstate, 0x02 shield, 0x03 round, 0x04 hbox, 0x05 box, 0x06 oval, 0 none
    */
   static quint8 shieldCode(const QString& label);
+  /**
+     @brief The label as BaseCamp shows it zoomed out: only the part between prefix (0x1b/0x1e) and suffix (0x1c/0x1f)
+            marker, "Rue de la Concorde" as "Concorde". A label without markers stays whole.
+   */
+  static QString shortText(const QString& label);
   /** displayText() of each label, joined by a blank. */
   static QString displayText(const QStringList& labels);
 

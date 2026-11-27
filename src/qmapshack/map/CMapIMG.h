@@ -88,7 +88,8 @@ class CMapIMG : public IMap {
                 const QFont& font, const QPointF& scale);
   void drawLine(BLContext& ctx, const CGarminPolygon& l);
 
-  void collectText(const CGarminPolygon& item, const QPolygonF& line, const QFont& font, const QColor& color);
+  void collectText(const CGarminPolygon& item, const QPolygonF& line, const QFont& font, const QColor& color,
+                   bool shortName);
 
   void getInfoPoints(const pointtype_t& points, const QPoint& pt, QMultiMap<QString, QString>& dict) const;
   void getInfoPolylines(const QPoint& pt, QMultiMap<QString, QString>& dict) const;

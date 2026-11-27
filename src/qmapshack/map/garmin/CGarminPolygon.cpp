@@ -414,6 +414,25 @@ QString CGarminPolygon::getLabelText() const {
   return str;
 }
 
+QString CGarminPolygon::getShortText() const {
+  if (labels.isEmpty()) {
+    return QString();
+  }
+  switch (type) {
+    case 0x20:
+    case 0x21:
+    case 0x22:
+    case 0x23:
+    case 0x24:
+    case 0x25:
+      // contours: their height
+      return getLabelText();
+
+    default:
+      return IGarminStrTbl::shortText(labels.first()).simplified();
+  }
+}
+
 QString CGarminPolygon::getInfoText() const {
   if (labels.size() < 2) {
     return getLabelText();

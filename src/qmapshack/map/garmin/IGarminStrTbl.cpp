@@ -200,6 +200,32 @@ QString IGarminStrTbl::displayText(const QString& label) {
   return text;
 }
 
+QString IGarminStrTbl::shortText(const QString& label) {
+  const QString text = label.left(label.indexOf(QChar(0x1d)));
+  // mkgmap writes at most one prefix and one suffix marker; the core lies between them
+  qsizetype start = 0;
+  for (qsizetype i = 0; i < text.size(); ++i) {
+    const char16_t c = text[i].unicode();
+    if (c == 0x1c || c == 0x1f) {
+      break;
+    }
+    if (c == 0x1b || c == 0x1e) {
+      start = i + 1;
+    }
+  }
+  qsizetype end = text.size();
+  for (qsizetype i = start; i < text.size(); ++i) {
+    const char16_t c = text[i].unicode();
+    if (c == 0x1c || c == 0x1f) {
+      end = i;
+      break;
+    }
+  }
+  const QString core = displayText(text.mid(start, end - start));
+  // markers around nothing: keep the whole label rather than none
+  return core.trimmed().isEmpty() ? displayText(label).trimmed() : core;
+}
+
 quint8 IGarminStrTbl::shieldCode(const QString& label) {
   if (label.isEmpty()) {
     return 0;

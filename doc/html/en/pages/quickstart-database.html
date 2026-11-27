@@ -197,8 +197,8 @@
   <ul class="current">
 <li class="toctree-l1 current has-children"><a class="reference internal" href="quickstart.html">Quick start</a><input aria-label="Toggle navigation of Quick start" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="quickstart-main-window.html">The main window</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart-maps.html">Turning on maps</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart-vector-map.html">Turning on a Garmin map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart-maps.html">Enabling maps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart-vector-map.html">Enabling a Garmin map</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-zoom-pan.html">Zooming and panning</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-dem.html">Elevation data and hillshading</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-load-file.html">Loading a GPX file</a></li>
@@ -250,19 +250,17 @@
 <p>This page shows how to keep projects in a QMapShack database. The images use the example database <code class="docutils literal notranslate"><span class="pre">Example.db</span></code>.</p>
 <section id="creating-a-database">
 <span id="index-0"></span><h2>Creating a database<a class="headerlink" href="#creating-a-database" title="Link to this heading">#</a></h2>
-<p>A database is one file that holds your projects, sorted into folders. The <strong>Database</strong> panel lists your databases.</p>
+<p>A database is a single file that stores your projects, organized into folders. The <strong>Database</strong> panel displays a list of your databases.</p>
 <ol class="arabic">
 <li><img alt="Quickstart database add menu" class="align-right" src="../_images/quickstart-database-add-menu.png" />
-<p>Right-click an empty spot in the <strong>Database</strong> panel and click <strong>Add Database</strong>.</p>
+<p>Right-click an empty area in the <strong>Database</strong> panel and select <strong>Add Database</strong>.</p>
 </li>
 <li><img alt="Quickstart database add dialog" class="align-right" src="../_images/quickstart-database-add-dialog.png" />
 <p>Enter <code class="docutils literal notranslate"><span class="pre">Example</span></code> as <strong>Name</strong> and leave <strong>SQLite</strong> selected.</p>
 </li>
-<li><p>Click the plus button marked in the image of step 2. Choose a folder, enter a file name and click <strong>Save</strong>.</p>
-<p>The dialog opens in the folder you last chose a database in. If you have set up the
-<a class="reference internal" href="quickstart-main-window.html#setting-up-the-home-folder"><span class="std std-ref">home folder</span></a>, QMapShack points it to its <code class="docutils literal notranslate"><span class="pre">Databases</span></code> folder.</p>
-<p>If you already have a database file, click the folder button to the right of the plus button instead. Select the
-file and click <strong>Open</strong>.</p>
+<li><p>Click the plus button highlighted in step 2. Choose a folder, enter a file name, and click <strong>Save</strong>.</p>
+<p>The dialog opens in the folder where you last saved a database. If you have set up the <a class="reference internal" href="quickstart-main-window.html#setting-up-the-home-folder"><span class="std std-ref">home folder</span></a>, QMapShack opens the <code class="docutils literal notranslate"><span class="pre">Databases</span></code> folder within it.</p>
+<p>If you already have a database file, click the folder button to the right of the plus button instead. Select the file and click <strong>Open</strong>.</p>
 </li>
 <li><img alt="Quickstart database panel" class="align-right" src="../_images/quickstart-database-panel.png" />
 <p>Click <strong>OK</strong>. The database appears in the <strong>Database</strong> panel.</p>
@@ -271,14 +269,11 @@ file and click <strong>Open</strong>.</p>
 </section>
 <section id="folders">
 <span id="index-1"></span><h2>Folders<a class="headerlink" href="#folders" title="Link to this heading">#</a></h2>
-<p>A database keeps its data in folders. The color of a folder shows its type:</p>
+<p>A database organizes its data into folders. The color of a folder shows its type:</p>
 <ul class="simple">
-<li><p>A <strong>Group</strong> folder (blue) holds other folders and helps to structure the data. You can’t load it into the
-workspace. Put <strong>Project</strong> folders into a <strong>Group</strong> folder, not directly into the database.</p></li>
-<li><p>A <strong>Project</strong> folder (green) holds tracks, waypoints, routes and areas, like a project file. You can load it into
-the workspace.</p></li>
-<li><p>An <strong>Other</strong> folder (orange) works like a <strong>Project</strong> folder. Use it as you like. For example, put a trip’s
-recording into a <strong>Project</strong> folder and the planning into an <strong>Other</strong> folder below it.</p></li>
+<li><p>A <strong>Group</strong> folder (blue) contains other folders and helps structure your data. You can’t load a <strong>Group</strong> folder into the workspace. Place <strong>Project</strong> folders inside a <strong>Group</strong> folder rather than directly in the database.</p></li>
+<li><p>A <strong>Project</strong> folder (green) contains tracks, waypoints, routes and areas much like a project file. You can load it into the workspace.</p></li>
+<li><p>An <strong>Other</strong> folder (orange) works like a <strong>Project</strong> folder, but you can use it for any purpose. For example, store a trip’s recording in a <strong>Project</strong> folder and its planning in an <strong>Other</strong> folder nested inside it.</p></li>
 </ul>
 <ol class="arabic">
 <li><img alt="Quickstart database folder menu" class="align-right" src="../_images/quickstart-database-folder-menu.png" />
@@ -300,33 +295,29 @@ recording into a <strong>Project</strong> folder and the planning into an <stron
 </section>
 <section id="importing-files">
 <span id="index-2"></span><h2>Importing files<a class="headerlink" href="#importing-files" title="Link to this heading">#</a></h2>
-<p>You can put project files into a database without loading them into the workspace.</p>
+<p>You can store project files into a database without loading them into the workspace.</p>
 <ol class="arabic">
 <li><img alt="Quickstart database import menu" class="align-right" src="../_images/quickstart-database-import-menu.png" />
-<p>Right-click the folder for the projects, in this example the group <strong>Tours</strong>, and click
+<p>Right-click the folder for the projects, in this example, the group <strong>Tours</strong>, and click
 <strong>Import from Files…</strong>.</p>
 </li>
 <li><p>Select one or more files, for example <code class="docutils literal notranslate"><span class="pre">Vilsalpsee.gpx</span></code>, and click <strong>Open</strong>.</p></li>
 <li><img alt="Quickstart database imported" class="align-right" src="../_images/quickstart-database-imported.png" />
-<p>QMapShack creates a <strong>Project</strong> folder for each file inside the folder you right-clicked. In this example,
-<strong>Vilsalpsee</strong> appears below <strong>Tours</strong>. The folder takes the name of the project in the file. QMapShack skips a
-project that is already in the database.</p>
+<p>QMapShack creates a <strong>Project</strong> folder for each file inside the folder you right-clicked. In this example, <strong>Vilsalpsee</strong> appears under <strong>Tours</strong>. The folder takes its name from the project in the file. QMapShack skips any project that is already in the database.</p>
 </li>
 </ol>
 </section>
 <section id="exporting-to-gpx">
 <span id="index-3"></span><h2>Exporting to GPX<a class="headerlink" href="#exporting-to-gpx" title="Link to this heading">#</a></h2>
-<p>You can export a database, or one of its folders, to GPX files, for example to share the data.</p>
+<p>You can export an entire database or individual folders as .gpx files, for example, to share your data with others.</p>
 <ol class="arabic">
 <li><img alt="Quickstart database export menu" class="align-right" src="../_images/quickstart-database-export-menu.png" />
 <p>Right-click the <strong>Example</strong> database and click <strong>Export to GPX…</strong>.</p>
 </li>
 <li><img alt="Quickstart database export dialog" class="align-right" src="../_images/quickstart-database-export-dialog.png" />
-<p>Click the folder button marked in the image and choose a folder on your computer. Check
-<strong>GPX 1.1 without extensions</strong> to leave out QMapShack’s own data.</p>
+<p>Click the folder button highlighted in the image and select a folder on your computer. Check <strong>GPX 1.1 without extensions</strong> to exclude QMapShack-specific data.</p>
 </li>
-<li><p>Click <strong>Start</strong>. QMapShack creates a folder for the database and for each group, and a GPX file for each
-<strong>Project</strong> and <strong>Other</strong> folder. The file name of an <strong>Other</strong> folder starts with the name of the folder above it.</p></li>
+<li><p>Click <strong>Start</strong>. QMapShack creates a folder for the database and a separate folder for each group. It also creates a .gpx file for each <strong>Project</strong> and <strong>Other</strong> folder. The file name of an <strong>Other</strong> folder begins with the name of its parent folder.</p></li>
 <li><p>When <strong>Done!</strong> appears, click <strong>Close</strong>.</p>
 <img alt="Quickstart database exported" class="below-right" src="../_images/quickstart-database-exported.png" />
 </li>
@@ -334,24 +325,24 @@ project that is already in the database.</p>
 </section>
 <section id="working-with-the-workspace">
 <span id="index-4"></span><h2>Working with the workspace<a class="headerlink" href="#working-with-the-workspace" title="Link to this heading">#</a></h2>
-<p>The database stores your data. You change it in the workspace: load a project, change it, save it back to the
-database and unload it again.</p>
+<p>The database stores your data, but you edit it in the workspace. Load a project, make your changes, save it back to the database, and then unload it from the workspace.</p>
 <ol class="arabic">
 <li><img alt="Quickstart database loaded db" class="align-right" src="../_images/quickstart-database-loaded-db.png" />
-<p>Click the load button marked in the image, at the right end of the row of <strong>Vilsalpsee</strong>.</p>
+<p>Click the load button highlighted in the image at the right end of the <strong>Vilsalpsee</strong> row.</p>
 </li>
 <li><img alt="Quickstart database loaded wks" class="align-right" src="../_images/quickstart-database-loaded-wks.png" />
-<p>The project appears in the <strong>Workspace</strong> panel as <strong>Vilsalpsee &#64; Tours</strong>: its name and the folder it is in.</p>
+<p>The project appears in the <strong>Workspace</strong> panel as <strong>Vilsalpsee &#64; Tours</strong>, showing its name and parent folder.</p>
 </li>
-<li><p>Change the project as you would change a project file, for example <a class="reference internal" href="quickstart-waypoints.html"><span class="std std-doc">add a waypoint</span></a>.
-Then click the save button on the project’s row in the <strong>Workspace</strong> panel. QMapShack writes the changes to the
-database.</p></li>
-<li><p>Click the load button in the <strong>Database</strong> panel again to unload the project. If the project has unsaved changes,
-QMapShack asks first: <strong>Save</strong> saves them, <strong>No</strong> discards them, <strong>Abort</strong> keeps the project loaded.</p></li>
+<li><p>Edit the project just as you would edit a project file, for example, by <a class="reference internal" href="quickstart-waypoints.html"><span class="std std-doc">adding a waypoint</span></a>. When you’re done, click the save button in the project’s row in the <strong>Workspace</strong> panel. QMapShack saves your changes to the database.</p></li>
+<li><p>Click the load button in the <strong>Database</strong> panel again to unload the project. If the project has unsaved changes, QMapShack asks what you want to do:</p>
+<ul class="simple">
+<li><p><strong>Save</strong> saves the changes before unloading the project.</p></li>
+<li><p><strong>No</strong> discards the changes and unloads the project.</p></li>
+<li><p><strong>Abort</strong> cancels the operation and leaves the project loaded.</p></li>
+</ul>
+</li>
 </ol>
-<p>Removing an item from a project in the workspace leaves it in the database, even after saving. To delete it from a
-folder, right-click it in the <strong>Database</strong> panel and click <strong>Delete Item</strong>. An item that is no longer in any folder
-moves to <strong>Lost &amp; Found</strong>. Deleting it there removes it permanently.</p>
+<p>Removing an item from a project in the workspace does not delete it from the database, even after saving. To delete an item from a folder, right-click it in the <strong>Database</strong> panel and select <strong>Delete Item</strong>. If an item is no longer in any folder, QMapShack moves it to <strong>Lost &amp; Found</strong>. Deleting it from there removes it permanently.</p>
 </section>
 </section>
 

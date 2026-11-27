@@ -1,6 +1,6 @@
-# Turning on a Garmin map
+# Enabling a Garmin map
 
-This page shows how to add a Garmin map to QMapShack, turn it on and adjust what it shows.
+This page shows how to add a Garmin map to QMapShack, enable it on and adjust what it shows.
 
 Images: *© OpenStreetMap contributors, created by BBBike*.
 
@@ -12,36 +12,28 @@ Images: *© OpenStreetMap contributors, created by BBBike*.
 
 ## Garmin maps
 
-An online map is a set of images that QMapShack loads while you look at it. A Garmin map is a vector map
-instead: a file of roads, paths, areas and points that QMapShack draws itself. It needs no internet
-connection.
+An online map is a collection of images that QMapShack loads as you browse the map. A Garmin map, by contrast, is an offline vector map: a file containing roads, paths, areas and points that QMapShack renders itself. No internet connection is required.
 
-Garmin maps are `.img` files, and they are the only vector maps QMapShack reads. The example on this page is an
-extract of OpenStreetMap data, made with the [BBBike extract service][BBBIKE]. You can make one for your own
-area there.
+Garmin maps are stored in .img files, the only vector map format supported by QMapShack. The example on this page is an extract of OpenStreetMap data, created using the [BBBike extract service][BBBIKE]. You can use this service to create an extract for your own area.
 
-QMapShack can't open two kinds of `.img` files:
+QMapShack cannot open two types of .img files:
 
-- Maps in Garmin's newer NT format, which some free maps use as well. QMapShack reports **File is NT format.**
-- Locked maps, as Garmin sells them. QMapShack reports that the file contains locked or encrypted data.
+- Maps in Garmin's newer NT format, which is also used by some free maps. QMapShack displays the error message **File is NT format.**
+- Locked maps, such as those sold by Garmin. QMapShack reports that the file contains locked or encrypted data.
 
 ```{index} single: Map; add
 ```
 
 ## Adding the map
 
-QMapShack lists every map that lies directly in one of its map folders. The `Maps` folder of your
-[home folder](quickstart-main-window.md#setting-up-the-home-folder) is one of them.
+QMapShack lists all maps stored directly in one of its map folders. One of these folders is the `Maps` folder in your [home folder][HOMEFOLDER].
 
-1. Copy the `.img` file into the `Maps` folder.
+1. Copy the .img file into the `Maps` folder.
 2. ```{image} ../images/quickstart-vector-map/quickstart-vector-map-listed.png
     :align: right
     ```
-
-    After a few seconds the map appears in the list in the **Maps** panel, gray like every map that is off. It is
-    named after its file, without the file type and with underscores as spaces: QMapShack lists `Tannheimer_Tal.img`
-    as **Tannheimer Tal**.
-3. To turn the map on, click the button in its row. The row turns bold and says **active**.
+    After a few seconds, the map appears in the **Maps** panel. Like all inactive maps, it is shown in gray. Its name is derived from the filename: the file extension is removed and underscores are replaced with spaces. For example, QMapShack displays `Tannheimer_Tal.img` as **Tannheimer Tal**.
+3. To activate a map, click the button in its row. Its name then appears in bold, and its status changes to **active**.
 
     ```{image} ../images/quickstart-vector-map/quickstart-vector-map-map-on.png
     :class: below-right
@@ -50,26 +42,25 @@ QMapShack lists every map that lies directly in one of its map folders. The `Map
 ```{index} single: Map; detail
 ```
 
-## Adjusting the detail
+## Adjusting the details
 
-A Garmin map holds several levels of detail, and QMapShack picks one to suit the zoom. You can shift that choice
-for each map.
+A Garmin map contains several levels of detail, and QMapShack automatically selects the appropriate level based on the current zoom level. You can adjust this selection individually for each map.
 
-1. ```{image} ../images/quickstart-vector-map/quickstart-vector-map-settings.png
+- ```{image} ../images/quickstart-vector-map/quickstart-vector-map-settings.png
     :align: right
     ```
 
     Click the arrow to the left of the map's name to open its settings.
 
-- **Details** sets how much the map shows: above 0 more than usual at the same zoom, below 0 less. 0 is the
-    default. In the image below, **Details** is 5.
+
+- **Details** controls how much information is displayed on the map. A value above 0 displays more detail than usual at the same zoom level, while a value below 0 displays less. The default value is 0. In the image below, **Details** is set to 5.
+
 
     ```{image} ../images/quickstart-vector-map/quickstart-vector-map-detail-more.png
     :class: below-right
     ```
 
-- Check or clear **Areas**, **Lines** and **Points** to show or hide these parts of the map. Without areas, for
-    example, the forests disappear and paths stand out.
+- Select or clear **Areas**, **Lines**, and **Points** to show or hide the corresponding map elements. For example, hiding areas makes forests disappear, allowing paths to stand out more clearly.
 
     ```{image} ../images/quickstart-vector-map/quickstart-vector-map-no-areas.png
     :class: below-right
@@ -78,18 +69,18 @@ for each map.
 ```{index} single: Map; TYP file
 ```
 
-## The map's look: TYP files
+## The map's appearance: TYP files
 
-The colors and symbols of a Garmin map come from a TYP file. Most Garmin maps include their own, as this one does.
+A Garmin map's colors and symbols are defined by a TYP file. Most Garmin maps include their own TYP file, and this map is no exception.
 
 - ```{image} ../images/quickstart-vector-map/quickstart-vector-map-typ-row.png
     :align: right
-    ```
+    ```    
+    
+    At the bottom of the map's settings, **Type File** shows the name of an external TYP file if one has been loaded. If the field is empty, the map uses its built-in TYP file.
+- To load a different TYP file, click the folder icon and select a .typ file. To switch back to the map's built-in TYP file, click the button with the cross icon.
+- Each TYP file is designed for a particular map style. Using a TYP file designed for a different map may result in incorrect colors and symbols.
 
-    At the bottom of the map's settings, **Type File** names an external TYP file once you load one. If the field is
-    empty, the map uses its own.
-- To load another one, click the button with the folder icon and select a `.typ` file. Click the button with the
-    cross icon to use the map's own TYP file again.
-- A TYP file is made for one map style. One made for another map can give this map the wrong colors and symbols.
 
 [BBBIKE]: https://extract.bbbike.org/
+[HOMEFOLDER]: quickstart-main-window.md#setting-up-the-home-folder

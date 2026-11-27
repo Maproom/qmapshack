@@ -3,7 +3,7 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Stichwortverzeichnis" href="../genindex.html"><link rel="search" title="Suche" href="../search.html"><link rel="next" title="Eine Garmin-Karte einschalten" href="quickstart-vector-map.html"><link rel="prev" title="Das Hauptfenster" href="quickstart-main-window.html">
+<link rel="index" title="Stichwortverzeichnis" href="../genindex.html"><link rel="search" title="Suche" href="../search.html"><link rel="next" title="Eine Garmin-Karte anzeigen" href="quickstart-vector-map.html"><link rel="prev" title="Das Hauptfenster" href="quickstart-main-window.html">
 
     <!-- Generated with Sphinx 9.1.1 and Furo 2025.12.19 -->
         <title>Karten einschalten - QMapShack-Dokumentation</title>
@@ -198,10 +198,10 @@
 <li class="toctree-l1 current has-children"><a class="reference internal" href="quickstart.html">Schnellstart</a><input aria-label="Toggle navigation of Schnellstart" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="quickstart-main-window.html">Das Hauptfenster</a></li>
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Karten einschalten</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart-vector-map.html">Eine Garmin-Karte einschalten</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart-vector-map.html">Eine Garmin-Karte anzeigen</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-zoom-pan.html">Zoomen und Verschieben</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-dem.html">Höhendaten und Schummerung</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart-load-file.html">Eine GPX-Datei laden</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart-load-file.html">Eine GPX Datei laden</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-routing.html">Routing einrichten</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-draw-track.html">Einen Track zeichnen</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-waypoints.html">Wegpunkte hinzufügen</a></li>
@@ -252,20 +252,19 @@
 <section id="die-eingebauten-karten-einrichten">
 <span id="index-0"></span><h2>Die eingebauten Karten einrichten<a class="headerlink" href="#die-eingebauten-karten-einrichten" title="Link to this heading">#</a></h2>
 <p>QMapShack bringt fünf Online-Karten mit, darunter OpenStreetMap und OSM Topo. Eine Online-Karte braucht eine
-Internetverbindung: QMapShack lädt die Karte, während Sie sie ansehen.</p>
+Internetverbindung. QMapShack lädt die Karte, während Sie sie ansehen.</p>
 <ol class="arabic">
 <li><p>Klicken Sie auf <strong>Datei → Kartenverzeichnisse angeben</strong>. Denselben Eintrag finden Sie, wenn Sie mit der
 rechten Maustaste in die Liste im Bereich <strong>Karten</strong> klicken.</p></li>
 <li><img alt="Quickstart maps map path setup" class="align-right" src="../_images/quickstart-maps-map-path-setup.png" />
 <p>Klicken Sie auf <strong>Hilfe! Ich will Karten! Keine Lust die Anleitung zu lesen!</strong></p>
 </li>
-<li><p>QMapShack fragt <strong>Wo wollen Sie die Karten speichern?</strong> und schlägt schon das Verzeichnis <code class="docutils literal notranslate"><span class="pre">Maps</span></code> in Ihrem
+<li><p>QMapShack fragt <strong>Wo wollen Sie die Karten speichern?</strong> und schlägt das Verzeichnis <code class="docutils literal notranslate"><span class="pre">Maps</span></code> in Ihrem
 <a class="reference internal" href="quickstart-main-window.html#das-hauptverzeichnis-einrichten"><span class="std std-ref">Hauptverzeichnis</span></a> vor. Bestätigen Sie es. Der
-Dialog <strong>Kartenverzeichnisse angeben</strong> schließt sich dann von selbst.</p></li>
+Dialog <strong>Kartenverzeichnisse angeben</strong> schließt sich dann automatisch.</p></li>
 <li><img alt="Quickstart maps maps panel" class="align-right" src="../_images/quickstart-maps-maps-panel.png" />
-<p>Der Bereich <strong>Karten</strong> führt die Karten auf. Eine Karte ist grau, solange sie ausgeschaltet ist.</p>
-<p>Jede Karte heißt wie ihre Datei, ohne den Dateityp und mit Leerzeichen statt Unterstrichen: <code class="docutils literal notranslate"><span class="pre">OSM_Topo.tms</span></code>
-steht in der Liste als <strong>OSM Topo</strong>. QMapShack benennt Höhendaten und POI-Dateien genauso.</p>
+<p>Im Bereich <strong>Karten</strong> werden alle verfügbaren Karten aufgelistet. Nicht aktivierte Karten sind grau dargestellt.</p>
+<p>Jede Karte erhält den Namen ihrer Datei, wobei die Dateiendung weggelassen und Unterstriche durch Leerzeichen ersetzt werden. So erscheint <code class="docutils literal notranslate"><span class="pre">OSM_Topo.tms</span></code> in der Liste als <strong>OSM Topo</strong>. Höhendaten und POI-Dateien benennt QMapShack nach demselben Schema.</p>
 </li>
 </ol>
 </section>
@@ -273,37 +272,30 @@ steht in der Liste als <strong>OSM Topo</strong>. QMapShack benennt Höhendaten 
 <span id="index-1"></span><h2>Eine Karte einschalten<a class="headerlink" href="#eine-karte-einschalten" title="Link to this heading">#</a></h2>
 <ol class="arabic">
 <li><img alt="Quickstart maps osm button" class="align-right" src="../_images/quickstart-maps-osm-button.png" />
-<p>Um eine Karte einzuschalten, klicken Sie auf den Knopf in ihrer Zeile im Bereich <strong>Karten</strong>. Ein weiterer
-Klick schaltet die Karte wieder aus.</p>
+<p>Um eine Karte zu aktivieren, klicken Sie auf die Schaltfläche rechts neben ihrem Namen im Bereich <strong>Karten</strong>. Ein erneuter Klick deaktiviert die Karte wieder.</p>
 </li>
-<li><p>Schalten Sie <strong>OpenStreetMap</strong> ein. Die Zeile der Karte wird fett und zeigt <strong>aktiv</strong>, und die Karte ersetzt die
-Begrüßungsseite.</p>
+<li><p>Aktivieren Sie <strong>OpenStreetMap</strong>. Der Name der Karte wird nun fett dargestellt und ihr Status wechselt zu aktiv. Die Karte ersetzt daraufhin die Begrüßungsseite.</p>
 <img alt="Quickstart maps osm on" class="below-right" src="../_images/quickstart-maps-osm-on.png" />
 </li>
 </ol>
 </section>
 <section id="karten-stapeln">
 <span id="index-2"></span><h2>Karten stapeln<a class="headerlink" href="#karten-stapeln" title="Link to this heading">#</a></h2>
-<p>Wenn mehrere Karten eingeschaltet sind, liegen sie in der Reihenfolge der Liste übereinander: Eine Karte verdeckt
-die Karten über ihr.</p>
+<p>Wenn mehrere Karten aktiviert sind, werden sie in der Reihenfolge ihrer Einträge übereinandergelegt. Dabei verdeckt jede Karte die Karten, die in der Liste oberhalb von ihr stehen.</p>
 <ol class="arabic">
-<li><p>Schalten Sie auch <strong>OSM Topo</strong> ein. Die Karte steht in der Liste unter <strong>OpenStreetMap</strong> und verdeckt diese
+<li><p>Aktivieren Sie auch <strong>OSM Topo</strong>. Die Karte steht in der Liste unter <strong>OpenStreetMap</strong> und verdeckt diese
 deshalb.</p>
 <img alt="Quickstart maps both on" class="below-right" src="../_images/quickstart-maps-both-on.png" />
 </li>
-<li><p>Um die Reihenfolge zu ändern, ziehen Sie eine Karte in der Liste nach oben oder unten. Oder wählen Sie sie aus
-und drücken <strong>Umschalt+Hoch</strong> oder <strong>Umschalt+Herunter</strong>; das Kontextmenü hat dafür auch
-<strong>Nach oben verschieben</strong> und <strong>Nach unten verschieben</strong>. Steht <strong>OSM Topo</strong> weiter oben,
-verdeckt <strong>OpenStreetMap</strong> sie.</p>
+<li><p>Um die Reihenfolge zu ändern, ziehen Sie eine Karte in der Liste nach oben oder unten. Alternativ können Sie die Karte auswählen und <strong>Umschalt+Pfeil nach oben</strong> oder <strong>Umschalt+Pfeil nach unten</strong> drücken. Im Kontextmenü stehen dafür die Einträge <strong>Nach oben verschieben</strong> und <strong>Nach unten verschieben</strong> ebenfalls zur Verfügung. Verschieben Sie <strong>OSM Topo</strong> weiter nach oben, wird die Karte von <strong>OpenStreetMap</strong> überlagert.</p>
 <img alt="Quickstart maps topo up" class="below-right" src="../_images/quickstart-maps-topo-up.png" />
 </li>
 </ol>
 </section>
-<section id="eine-karte-durchscheinend-machen">
-<span id="index-3"></span><h2>Eine Karte durchscheinend machen<a class="headerlink" href="#eine-karte-durchscheinend-machen" title="Link to this heading">#</a></h2>
+<section id="eine-karte-transparent-machen">
+<span id="index-3"></span><h2>Eine Karte transparent machen<a class="headerlink" href="#eine-karte-transparent-machen" title="Link to this heading">#</a></h2>
 <ol class="arabic">
-<li><p>Um die untere Karte durch die obere hindurch zu sehen, klicken Sie auf den Pfeil links vom Namen der oberen Karte.
-Ihre Einstellungen öffnen sich unter der Zeile.</p></li>
+<li><p>Um die untere Karte durch die obere hindurch sichtbar zu machen, klicken Sie auf den Pfeil links neben dem Namen der oberen Karte. Dadurch werden die Einstellungen unterhalb der Zeile eingeblendet.</p></li>
 <li><p>Ziehen Sie den Schieberegler unter dem Namen nach links, um die Deckkraft der Karte zu senken. Hier ist
 <strong>OSM Topo</strong> halb durchscheinend über <strong>OpenStreetMap</strong>.</p>
 <img alt="Quickstart maps topo half" class="below-right" src="../_images/quickstart-maps-topo-half.png" />
@@ -322,7 +314,7 @@ Ihre Einstellungen öffnen sich unter der Zeile.</p></li>
                 <div class="context">
                   <span>Weiter</span>
                 </div>
-                <div class="title">Eine Garmin-Karte einschalten</div>
+                <div class="title">Eine Garmin-Karte anzeigen</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -371,7 +363,7 @@ Ihre Einstellungen öffnen sich unter der Zeile.</p></li>
 <li><a class="reference internal" href="#die-eingebauten-karten-einrichten">Die eingebauten Karten einrichten</a></li>
 <li><a class="reference internal" href="#eine-karte-einschalten">Eine Karte einschalten</a></li>
 <li><a class="reference internal" href="#karten-stapeln">Karten stapeln</a></li>
-<li><a class="reference internal" href="#eine-karte-durchscheinend-machen">Eine Karte durchscheinend machen</a></li>
+<li><a class="reference internal" href="#eine-karte-transparent-machen">Eine Karte transparent machen</a></li>
 </ul>
 </li>
 </ul>

@@ -3,10 +3,10 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Turning on a Garmin map" href="quickstart-vector-map.html"><link rel="prev" title="The main window" href="quickstart-main-window.html">
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Enabling a Garmin map" href="quickstart-vector-map.html"><link rel="prev" title="The main window" href="quickstart-main-window.html">
 
     <!-- Generated with Sphinx 9.1.1 and Furo 2025.12.19 -->
-        <title>Turning on maps - QMapShack documentation</title>
+        <title>Enabling maps - QMapShack documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
@@ -197,8 +197,8 @@
   <ul class="current">
 <li class="toctree-l1 current has-children"><a class="reference internal" href="quickstart.html">Quick start</a><input aria-label="Toggle navigation of Quick start" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="quickstart-main-window.html">The main window</a></li>
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Turning on maps</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart-vector-map.html">Turning on a Garmin map</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Enabling maps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart-vector-map.html">Enabling a Garmin map</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-zoom-pan.html">Zooming and panning</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-dem.html">Elevation data and hillshading</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-load-file.html">Loading a GPX file</a></li>
@@ -245,63 +245,53 @@
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="turning-on-maps">
-<h1>Turning on maps<a class="headerlink" href="#turning-on-maps" title="Link to this heading">#</a></h1>
-<p>This page shows how to get your first maps into QMapShack and how to show them.</p>
+          <section id="enabling-maps">
+<h1>Enabling maps<a class="headerlink" href="#enabling-maps" title="Link to this heading">#</a></h1>
+<p>This page explains how to add your first maps to QMapShack and display them.</p>
 <p>Images: <em>© OpenStreetMap contributors</em>; <em>OpenTopoMap, CC-BY-SA</em>; <em>trails by waymarkedtrails.org</em>.</p>
 <section id="getting-the-built-in-maps">
 <span id="index-0"></span><h2>Getting the built-in maps<a class="headerlink" href="#getting-the-built-in-maps" title="Link to this heading">#</a></h2>
-<p>QMapShack comes with five online maps, among them OpenStreetMap and OSM Topo. An online map needs an internet
-connection: QMapShack loads the map while you look at it.</p>
+<p>QMapShack comes with five online maps, including OpenStreetMap and OSM Topo. Online maps require an internet connection because QMapShack downloads map tiles as you view them.</p>
 <ol class="arabic">
-<li><p>Click <strong>File → Setup Map Paths</strong>. The same entry is on the menu when you right-click the
-list in the <strong>Maps</strong> panel.</p></li>
+<li><p>Select <strong>File → Setup Map Paths</strong>. You can also access this option by right-clicking the list in the <strong>Maps</strong> panel.</p></li>
 <li><img alt="Quickstart maps map path setup" class="align-right" src="../_images/quickstart-maps-map-path-setup.png" />
 <p>Click <strong>Help! I want maps! I don’t want to read the documentation!</strong></p>
 </li>
-<li><p>QMapShack asks <strong>Where do you want to store maps?</strong> and already offers the <code class="docutils literal notranslate"><span class="pre">Maps</span></code> folder of your
-<a class="reference internal" href="quickstart-main-window.html#setting-up-the-home-folder"><span class="std std-ref">home folder</span></a>.
-Confirm it. The <strong>Setup Map Paths</strong> dialog then closes by itself.</p></li>
+<li><p>QMapShack asks <strong>Where do you want to store maps?</strong> and suggests the <code class="docutils literal notranslate"><span class="pre">Maps</span></code> folder in your <a class="reference internal" href="quickstart-main-window.html#setting-up-the-home-folder"><span class="std std-ref">home folder</span></a> as the default location. Confirm it. The <strong>Setup Map Paths</strong> dialog then closes automatically.</p></li>
 <li><img alt="Quickstart maps maps panel" class="align-right" src="../_images/quickstart-maps-maps-panel.png" />
-<p>The <strong>Maps</strong> panel lists the maps. A map is gray while it is off.</p>
-<p>QMapShack names each map after its file, without the file type and with underscores as spaces: it lists
-<code class="docutils literal notranslate"><span class="pre">OSM_Topo.tms</span></code> as <strong>OSM Topo</strong>. It names elevation data and POI files the same way.</p>
+<p>The <strong>Maps</strong> panel lists the maps. A map is gray while it is inactive.</p>
+<p>QMapShack derives each map’s name from its filename, removing the file extension and replacing underscores with spaces. For example, it displays <code class="docutils literal notranslate"><span class="pre">OSM_Topo.tms</span></code> as <strong>OSM Topo</strong>. The same naming convention applies to elevation data and POI files.</p>
 </li>
 </ol>
 </section>
-<section id="turning-on-a-map">
-<span id="index-1"></span><h2>Turning on a map<a class="headerlink" href="#turning-on-a-map" title="Link to this heading">#</a></h2>
+<section id="activating-a-map">
+<span id="index-1"></span><h2>Activating a map<a class="headerlink" href="#activating-a-map" title="Link to this heading">#</a></h2>
 <ol class="arabic">
 <li><img alt="Quickstart maps osm button" class="align-right" src="../_images/quickstart-maps-osm-button.png" />
-<p>To turn a map on, click the button in its row in the <strong>Maps</strong> panel. Click it again to turn the map off.</p>
+<p>To activate a map, click the button in its row in the <strong>Maps</strong> panel. Click it again to deactivate the map.</p>
 </li>
-<li><p>Turn on <strong>OpenStreetMap</strong>. Its row turns bold and says <strong>active</strong>, and the map replaces the welcome page.</p>
+<li><p>Activate <strong>OpenStreetMap</strong>. Its name appears in bold, and its status changes to <strong>active</strong>. The map then replaces the welcome page.</p>
 <img alt="Quickstart maps osm on" class="below-right" src="../_images/quickstart-maps-osm-on.png" />
 </li>
 </ol>
 </section>
 <section id="stacking-maps">
 <span id="index-2"></span><h2>Stacking maps<a class="headerlink" href="#stacking-maps" title="Link to this heading">#</a></h2>
-<p>When several maps are on, they lie on top of each other in the order of the list: a map covers the maps above it.</p>
+<p>When multiple maps are active, they are layered in the order shown in the list. Each map covers the maps above it.</p>
 <ol class="arabic">
-<li><p>Turn on <strong>OSM Topo</strong> as well. It is below <strong>OpenStreetMap</strong> in the list, so <strong>OSM Topo</strong> covers
-<strong>OpenStreetMap</strong>.</p>
+<li><p>Activate <strong>OSM Topo</strong> as well. Since it appears below <strong>OpenStreetMap</strong> in the list, it is displayed on top and covers <strong>OpenStreetMap</strong>.</p>
 <img alt="Quickstart maps both on" class="below-right" src="../_images/quickstart-maps-both-on.png" />
 </li>
-<li><p>To change the order, drag a map up or down in the list. Or select it and press <strong>Shift+Up</strong> or <strong>Shift+Down</strong>;
-the right-click menu has <strong>Move Up</strong> and <strong>Move Down</strong> as well. With <strong>OSM Topo</strong> moved up, <strong>OpenStreetMap</strong>
-covers it.</p>
+<li><p>To change the order, drag a map up or down in the list. Alternatively, select it and press <strong>Shift+Up</strong> or <strong>Shift+Down</strong>. You can also use <strong>Move Up</strong> and <strong>Move Down</strong> in the right-click menu. Move <strong>OSM Topo</strong> up in the list, and <strong>OpenStreetMap</strong> will appear on top of it.</p>
 <img alt="Quickstart maps topo up" class="below-right" src="../_images/quickstart-maps-topo-up.png" />
 </li>
 </ol>
 </section>
-<section id="making-a-map-see-through">
-<span id="index-3"></span><h2>Making a map see-through<a class="headerlink" href="#making-a-map-see-through" title="Link to this heading">#</a></h2>
+<section id="making-a-map-transparent">
+<span id="index-3"></span><h2>Making a map transparent<a class="headerlink" href="#making-a-map-transparent" title="Link to this heading">#</a></h2>
 <ol class="arabic">
-<li><p>To see the lower map through the upper one, click the arrow to the left of the upper map’s name. Its settings open
-below the row.</p></li>
-<li><p>Drag the slider under the name to the left to lower the map’s opacity. Here <strong>OSM Topo</strong> is half see-through
-over <strong>OpenStreetMap</strong>.</p>
+<li><p>To make the lower map visible through the upper one, click the arrow to the left of the upper map’s name. This expands the map’s settings below the row.</p></li>
+<li><p>Drag the slider below the name to the left to reduce the map’s opacity. Here, <strong>OSM Topo</strong> is set to 50% opacity, allowing <strong>OpenStreetMap</strong> to show through.</p>
 <img alt="Quickstart maps topo half" class="below-right" src="../_images/quickstart-maps-topo-half.png" />
 </li>
 </ol>
@@ -318,7 +308,7 @@ over <strong>OpenStreetMap</strong>.</p>
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Turning on a Garmin map</div>
+                <div class="title">Enabling a Garmin map</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -363,11 +353,11 @@ over <strong>OpenStreetMap</strong>.</p>
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Turning on maps</a><ul>
+<li><a class="reference internal" href="#">Enabling maps</a><ul>
 <li><a class="reference internal" href="#getting-the-built-in-maps">Getting the built-in maps</a></li>
-<li><a class="reference internal" href="#turning-on-a-map">Turning on a map</a></li>
+<li><a class="reference internal" href="#activating-a-map">Activating a map</a></li>
 <li><a class="reference internal" href="#stacking-maps">Stacking maps</a></li>
-<li><a class="reference internal" href="#making-a-map-see-through">Making a map see-through</a></li>
+<li><a class="reference internal" href="#making-a-map-transparent">Making a map transparent</a></li>
 </ul>
 </li>
 </ul>

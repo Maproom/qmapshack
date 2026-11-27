@@ -1,107 +1,87 @@
 # Ihre Arbeit speichern
 
-Diese Seite zeigt, wie Sie Ihre Projekte speichern: als Datei oder in einer Datenbank.
+Diese Seite erklärt, wie Sie Ihre Projekte als Datei oder in einer Datenbank speichern.
 
 ```{index} single: Projekt; speichern
 ```
 
 ## Ungespeicherte Änderungen erkennen
 
-Beim nächsten Start stellt QMapShack alle Projekte im Bereich **Arbeitsplatz** wieder her. Dafür speichert es eine
-eigene Kopie jedes Projekts. Die Datei, aus der ein Projekt geladen wurde, ändert sich erst, wenn Sie das Projekt
-speichern. Ein Projekt, das Sie angelegt haben, hat keine Datei, bis Sie es speichern.
+Beim erneuten Start stellt QMapShack alle Projekte im Bereich **Arbeitsplatz** wieder her. Dazu speichert QMapShack eine eigene Kopie jedes Projekts.
+
+Die Originaldatei, aus der Sie ein Projekt geladen haben, bleibt unverändert, bis Sie das Projekt speichern. Ein neu angelegtes Projekt hat zunächst keine zugehörige Datei. Diese wird erst beim Speichern erstellt.
 
 1. ```{image} ../images/quickstart-save/quickstart-save-changed.png
     :align: right
     ```
 
-    Suchen Sie im Bereich **Arbeitsplatz** das Projekt mit ungespeicherten Änderungen: Es zeigt einen Speichern-Knopf in
-    seiner Zeile, im Bild markiert. Hier hat **Meine Wegpunkte** einen neuen Wegpunkt, und **Example** hat keine
-    Änderungen.
+    Suchen Sie im Bereich **Arbeitsplatz** das Projekt mit ungespeicherten Änderungen. In seiner Zeile erscheint eine Speichern-Schaltfläche, die im Bild hervorgehoben ist.
 
-2. Klicken Sie auf den Speichern-Knopf. Wurde das Projekt noch nie gespeichert, fragt QMapShack zuerst nach dem
-    Speicherort; siehe [In eine Datei speichern](#in-eine-datei-speichern). Nach dem Speichern verschwindet der Knopf.
+    Im Beispiel enthält **Meine Wegpunkte** einen neu hinzugefügten Wegpunkt, während **Example** unverändert ist.
+2. Klicken Sie auf die Speichern-Schaltfläche. Wurde das Projekt noch nie gespeichert, fragt QMapShack zunächst nach dem Speicherort. Weitere Informationen finden Sie unter [In eine Datei speichern](#in-eine-datei-speichern). Nach dem Speichern verschwindet die Schaltfläche.
 
-In der Zeile eines Elements ist dasselbe Symbol kein Knopf, sondern eine Änderungsanzeige. Sie zeigt, dass sich das
-Element seit dem letzten Speichern des Projekts geändert hat.
+In der Zeile eines Elements dient dasselbe Symbol nicht als Schaltfläche, sondern als Änderungsanzeige. Es signalisiert, dass das Element seit dem letzten Speichern des Projekts geändert wurde.
 
 ## In eine Datei speichern
 
-1. Klicken Sie im Bereich **Arbeitsplatz** mit der rechten Maustaste auf das Projekt und dann auf
-    **Speichern unter...**.
-2. Wählen Sie im Dialog den Dateityp aus, geben Sie einen Dateinamen ein und klicken Sie auf **Speichern**.
+1. Klicken Sie im Bereich **Arbeitsplatz** mit der rechten Maustaste auf das Projekt und wählen Sie **Speichern unter...**.
+2. Wählen Sie im Dialog den gewünschten Dateityp aus, geben Sie einen Dateinamen ein und klicken Sie auf **Speichern**.
 
-Hat das Projekt schon eine Datei, klicken Sie im selben Menü auf **Speichern**. QMapShack überschreibt die Datei ohne
-Nachfrage.
+Ist dem Projekt bereits eine Datei zugeordnet, wählen Sie im selben Menü den Eintrag **Speichern**. QMapShack überschreibt die vorhandene Datei ohne Rückfrage.
 
-Die Dateitypen:
+Folgende Dateitypen werden unterstützt:
 
-- **QMapShack Binary (\*.qms)** ist das eigene Format von QMapShack. Es enthält alles, was QMapShack zu einem Projekt
-    speichert, auch die Liste der Änderungen. Damit können Sie Änderungen rückgängig machen. Nutzen Sie es für Ihre
-    eigenen Projekte.
-- **GPS Exchange Format (\*.gpx \*.GPX)** können auch andere Programme und Geräte lesen. Die Liste der Änderungen
-    bleibt erhalten, nach dem erneuten Laden können Sie die Änderungen aber nicht mehr rückgängig machen.
+- **QMapShack Binary .qms** ist das native Dateiformat von QMapShack. Es speichert alle Projektdaten, einschließlich der Änderungshistorie. Dadurch können Sie Änderungen auch später noch rückgängig machen. Verwenden Sie dieses Format für Ihre eigenen Projekte.
+- **GPS Exchange Format .gpx** wird auch von vielen anderen Programmen und GPS-Geräten unterstützt. Die Änderungshistorie bleibt beim Speichern erhalten. Nach dem erneuten Laden der Datei können Sie die Änderungen jedoch nicht mehr rückgängig machen.
 
-**Als GPX o. Erw. speichern...** im Menü des Projekts schreibt eine reine GPX-1.1-Datei ohne die eigenen Daten von
-QMapShack. Sie ist für Programme gedacht, die die Erweiterungen von QMapShack nicht lesen können.
+**Als GPX o. Erw. speichern...** im Projektmenü speichert eine standardkonforme GPX-1.1-Datei ohne QMapShack-spezifische Daten. Verwenden Sie diese Option für Programme, die die Erweiterungen von QMapShack nicht unterstützen.
 
-Speichern Sie ein Projekt in einem anderen Dateityp, schreibt QMapShack eine Kopie. Das Projekt behält seine eigene
-Datei und seinen Speichern-Knopf.
+Wenn Sie ein Projekt in einem anderen Dateiformat speichern, erstellt QMapShack eine Kopie. Die ursprüngliche Datei bleibt dem Projekt zugeordnet, und die Speichern-Schaltfläche bleibt erhalten.
 
-**Datei → Alle GIS Daten speichern** (**Strg+S**) speichert jedes Projekt im Arbeitsplatz. Bei einem Projekt, das
-noch nie gespeichert wurde, fragt QMapShack nach dem Speicherort.
+**Datei → Alle GIS-Daten speichern** (**Strg+S**) speichert alle Projekte im Bereich **Arbeitsplatz**. Wurde ein Projekt noch nie gespeichert, fragt QMapShack nach dem gewünschten Speicherort.
 
-Schließen Sie ein Projekt mit ungespeicherten Änderungen, fragt QMapShack, ob Sie es vorher speichern möchten.
+Wenn Sie ein Projekt mit ungespeicherten Änderungen schließen, fragt QMapShack, ob Sie die Änderungen vorher speichern möchten.
 
 ```{index} single: Projekt; in Datenbank speichern
 ```
 
 ## In eine Datenbank speichern
 
-Ein Projekt aus einer Datenbank speichern Sie mit seinem Speichern-Knopf in seinen Ordner zurück. Mehr dazu unter
-[Mit dem Arbeitsplatz arbeiten](quickstart-database.md#mit-dem-arbeitsplatz-arbeiten). Eine Datei legen Sie auf zwei
-Wegen als Projekt in einer Datenbank ab. Kopieren Sie Ihr Projekt im Arbeitsplatz, wie unten gezeigt, oder
-importieren Sie die Datei; siehe [Dateien importieren](quickstart-database.md#dateien-importieren).
+Ein Projekt, das Sie aus einer Datenbank geladen haben, speichern Sie mit seiner Speichern-Schaltfläche wieder in den zugehörigen Datenbankordner. Weitere Informationen finden Sie unter [Mit dem Arbeitsplatz arbeiten](quickstart-database.md#mit-dem-arbeitsplatz-arbeiten).
+
+Um eine Datei als Projekt in einer Datenbank abzulegen, haben Sie zwei Möglichkeiten: 
+
+- Kopieren Sie das Projekt im Bereich **Arbeitsplatz**, wie unten beschrieben, oder 
+- importieren Sie die Datei. Siehe [Dateien importieren](quickstart-database.md#dateien-importieren).
 
 1. ```{image} ../images/quickstart-save/quickstart-save-copy-menu.png
     :align: right
     ```
 
-    Klicken Sie im Bereich **Arbeitsplatz** mit der rechten Maustaste auf das Projekt und dann auf
-    **Kopieren nach...**.
-
+    Klicken Sie im Bereich **Arbeitsplatz** mit der rechten Maustaste auf das Projekt und wählen Sie **Kopieren nach...**.
 2. ```{image} ../images/quickstart-save/quickstart-save-copy-dialog.png
     :align: right
     ```
 
-    Geben Sie im Dialog **Ein Projekt auswählen...** einen Namen für das neue Projekt ein, hier `Seetour`. Wählen Sie
-    **Datenbank** aus und klicken Sie auf **OK**.
-
+    Geben Sie im Dialog **Ein Projekt auswählen...** einen Namen für das neue Projekt ein, hier beispielsweise `Seetour`. Wählen Sie als Ziel **Datenbank** aus und klicken Sie auf **OK**.
 3. ```{image} ../images/quickstart-save/quickstart-save-copy-folder.png
     :align: right
     ```
 
-    Klicken Sie im Dialog **Übergeordneten Ordner auswählen...** auf den Pfeil links neben der Datenbank, um sie
-    aufzuklappen. Wählen Sie den Ordner aus, unter dem das Projekt liegen soll, hier die Gruppe **Projects**, und
-    klicken Sie auf **OK**.
-
-4. Lassen Sie im Dialog **Datenbankordner...** **Projekt** ausgewählt und klicken Sie auf **OK**.
-
+    Klicken Sie im Dialog **Übergeordneten Ordner auswählen...** auf den Pfeil links neben der Datenbank, um deren Inhalt aufzuklappen. Wählen Sie den Ordner aus, in dem das Projekt abgelegt werden soll (hier die Gruppe **Projects**) und klicken Sie auf **OK**.
+4. Lassen Sie im Dialog **Datenbankordner...** die Option **Projekt** ausgewählt und klicken Sie auf **OK**.
 5. ```{image} ../images/quickstart-save/quickstart-save-copied.png
     :align: right
     ```
 
-    Die Kopie erscheint im Bereich **Arbeitsplatz** als **Seetour @ Projects** und zeigt einen Speichern-Knopf.
-
+    Die Kopie erscheint im Bereich **Arbeitsplatz** unter dem Namen **Seetour @ Projects**. Daneben wird eine Speichern-Schaltfläche angezeigt.
 6. ```{image} ../images/quickstart-save/quickstart-save-copied-db.png
     :align: right
     ```
 
-    Im Bereich **Datenbank** erscheint der Ordner **Seetour** ebenfalls. Er ist noch leer.
+    Auch im Bereich **Datenbank** erscheint der Ordner **Seetour**. Er ist zunächst noch leer.
+7. Klicken Sie im Bereich **Arbeitsplatz** auf die Speichern-Schaltfläche neben **Seetour @ Projects**. QMapShack speichert daraufhin die Elemente des Projekts im entsprechenden Datenbankordner.
 
-7. Klicken Sie im Bereich **Arbeitsplatz** auf den Speichern-Knopf von **Seetour @ Projects**. QMapShack schreibt
-    die Elemente in den Ordner.
+Der Dialog **Ein Projekt auswählen...** aus Schritt 2 erscheint auch, wenn Sie **Arbeitsplatz → Leeres Projekt hinzufügen** wählen oder ein neues Element in einem neuen Projekt anlegen.
 
-Den Dialog **Ein Projekt auswählen...** aus Schritt 2 sehen Sie auch bei **Arbeitsplatz → Leeres Projekt hinzufügen**
-und wenn Sie ein neues Element in ein neues Projekt legen. Wählen Sie dort **Datenbank** aus, legt QMapShack auch
-dieses Projekt in einer Datenbank an.
+Wählen Sie in diesem Dialog **Datenbank** aus, um das neue Projekt direkt in einer Datenbank anzulegen.

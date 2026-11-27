@@ -3,7 +3,7 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Stichwortverzeichnis" href="../genindex.html"><link rel="search" title="Suche" href="../search.html"><link rel="next" title="Eine GPX-Datei laden" href="quickstart-load-file.html"><link rel="prev" title="Zoomen und Verschieben" href="quickstart-zoom-pan.html">
+<link rel="index" title="Stichwortverzeichnis" href="../genindex.html"><link rel="search" title="Suche" href="../search.html"><link rel="next" title="Eine GPX Datei laden" href="quickstart-load-file.html"><link rel="prev" title="Zoomen und Verschieben" href="quickstart-zoom-pan.html">
 
     <!-- Generated with Sphinx 9.1.1 and Furo 2025.12.19 -->
         <title>Höhendaten und Schummerung - QMapShack-Dokumentation</title>
@@ -198,10 +198,10 @@
 <li class="toctree-l1 current has-children"><a class="reference internal" href="quickstart.html">Schnellstart</a><input aria-label="Toggle navigation of Schnellstart" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="quickstart-main-window.html">Das Hauptfenster</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-maps.html">Karten einschalten</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart-vector-map.html">Eine Garmin-Karte einschalten</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart-vector-map.html">Eine Garmin-Karte anzeigen</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-zoom-pan.html">Zoomen und Verschieben</a></li>
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Höhendaten und Schummerung</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart-load-file.html">Eine GPX-Datei laden</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart-load-file.html">Eine GPX Datei laden</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-routing.html">Routing einrichten</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-draw-track.html">Einen Track zeichnen</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-waypoints.html">Wegpunkte hinzufügen</a></li>
@@ -247,77 +247,58 @@
         <article role="main" id="furo-main-content">
           <section id="hohendaten-und-schummerung">
 <h1>Höhendaten und Schummerung<a class="headerlink" href="#hohendaten-und-schummerung" title="Link to this heading">#</a></h1>
-<p>Diese Seite zeigt, wie Sie Höhendaten zu QMapShack hinzufügen, sie einschalten und das Gelände damit schummern.</p>
+<p>Diese Seite beschreibt, wie Sie Höhendaten zu QMapShack hinzufügen, diese aktivieren und das Gelände damit schummern.</p>
 <p>Bilder: <em>© OpenStreetMap contributors</em>; <em>Datenquelle: Land Tirol - data.tirol.gv.at, CC BY 4.0</em>.</p>
 <section id="was-hohendaten-leisten">
 <span id="index-1"></span><span id="index-0"></span><h2>Was Höhendaten leisten<a class="headerlink" href="#was-hohendaten-leisten" title="Link to this heading">#</a></h2>
 <p>Höhendaten, ein DEM (digitales Höhenmodell), enthalten die Höhe des Geländes. QMapShack nutzt sie auf drei Arten:</p>
 <ul>
-<li><p>Das DEM zeigt die Höhe jedes Punktes. Mit eingeschaltetem DEM zeigt die Statusleiste unten rechts bei <strong>Höhe</strong> und
-<strong>Hangneigung</strong> die Höhe und die Neigung am Mauszeiger.</p>
+<li><p>Das DEM enthält die Höheninformationen für jeden Geländepunkt. Bei aktiviertem DEM zeigt die Statusleiste unten rechts unter <strong>Höhe</strong> und <strong>Hangneigung</strong> die entsprechenden Werte an der Position des Mauszeigers an.</p>
 <img alt="Quickstart dem status bar" class="below-right" src="../_images/quickstart-dem-status-bar.png" />
 </li>
-<li><p>Auf Wunsch fügt es Tracks und Wegpunkten eine Höhe hinzu oder ersetzt die vorhandene. Ein Track, den Sie
-zeichnen, bekommt seine Höhen daraus, wenn Sie ihn speichern; siehe
-<a class="reference internal" href="quickstart-draw-track.html#hohen-aus-dem-dem"><span class="std std-ref">Einen Track zeichnen</span></a>. Routen bekommen ihre Höhen daraus, wenn
-QMapShack sie berechnet.</p></li>
-<li><p>Es schummert das Gelände auf der Karte, sodass Berge und Täler hervortreten.</p></li>
+<li><p>Auf Wunsch fügt es zu Tracks und Wegpunkten Höheninformationen hinzu oder ersetzt die bereits vorhandenen. Ein von Ihnen gezeichneter Track erhält seine Höhenwerte aus dem DEM beim Speichern. Siehe <a class="reference internal" href="quickstart-draw-track.html#hohen-aus-dem-dem"><span class="std std-ref">Einen Track zeichnen</span></a>. Routen erhalten ihre Höhenwerte aus dem DEM während QMapShack sie berechnet.</p></li>
+<li><p>Sie schummern das Gelände auf der Karte, sodass Berge und Täler hervortreten.</p></li>
 </ul>
 </section>
 <section id="ein-dem-hinzufugen">
 <span id="index-2"></span><h2>Ein DEM hinzufügen<a class="headerlink" href="#ein-dem-hinzufugen" title="Link to this heading">#</a></h2>
-<p>Höhendaten liegen meist als eine oder mehrere Bilddateien vor, zum Beispiel GeoTIFF. QMapShack öffnet sie nicht direkt:
-Es liest eine <code class="docutils literal notranslate"><span class="pre">.vrt</span></code>-Datei (ein virtuelles Raster), die die Bilddateien auflistet und zu einem DEM zusammenfügt.</p>
+<p>Höhendaten liegen meist als eine oder mehrere Bilddateien vor, beispielsweise im GeoTIFF-Format. QMapShack kann diese Dateien nicht direkt öffnen. Stattdessen liest es eine .vrt Datei (ein virtuelles Raster), die auf die Bilddateien verweist und sie zu einem einzigen DEM zusammenfasst.</p>
 <ol class="arabic">
-<li><p>Kopieren Sie die Dateien in das Verzeichnis <code class="docutils literal notranslate"><span class="pre">DEM</span></code> Ihres
-<a class="reference internal" href="quickstart-main-window.html#das-hauptverzeichnis-einrichten"><span class="std std-ref">Hauptverzeichnisses</span></a>: eine einzelne Datei direkt
-hinein, mehrere Dateien in ein eigenes Unterverzeichnis.</p></li>
+<li><p>Kopieren Sie die Dateien in das Unterverzeichnis <code class="docutils literal notranslate"><span class="pre">DEM</span></code> Ihres <a class="reference internal" href="quickstart-main-window.html#das-hauptverzeichnis-einrichten"><span class="std std-ref">Hauptverzeichnisses</span></a>. Legen Sie eine einzelne Datei direkt dort ab. Mehrere Dateien speichern Sie gemeinsam in einem eigenen Unterverzeichnis.</p></li>
 <li><p>Klicken Sie auf <strong>Werkzeug → VRT Builder</strong>.</p></li>
-<li><p>Klicken Sie auf den Knopf mit dem Ordner neben <strong>Quelldateien auswählen</strong> und wählen Sie die kopierten Dateien
-aus.</p></li>
-<li><p>Klicken Sie auf den Knopf mit dem Ordner neben <strong>Zieldatei auswählen</strong>. Beim ersten Mal öffnet sich der Dialog im
-Verzeichnis <code class="docutils literal notranslate"><span class="pre">Maps</span></code>: Wechseln Sie in das Verzeichnis <code class="docutils literal notranslate"><span class="pre">DEM</span></code>, geben Sie einen Namen mit der Endung <code class="docutils literal notranslate"><span class="pre">.vrt</span></code> ein und
-speichern Sie.</p></li>
+<li><p>Klicken Sie auf die Ordnerschaltfläche neben <strong>Quelldateien auswählen</strong> und wählen Sie die zuvor kopierten Dateien aus.</p></li>
+<li><p>Klicken Sie auf die Ordnerschaltfläche neben <strong>Zieldatei auswählen</strong>. Beim ersten Mal öffnet sich der Dialog im Verzeichnis <code class="docutils literal notranslate"><span class="pre">Maps</span></code>. Wechseln Sie in das Verzeichnis <code class="docutils literal notranslate"><span class="pre">DEM</span></code>, geben Sie einen Dateinamen mit der Endung <code class="docutils literal notranslate"><span class="pre">.vrt</span></code> ein und klicken Sie auf <strong>Speichern</strong>.</p></li>
 <li><p>Klicken Sie auf <strong>Start</strong>.</p></li>
 <li><img alt="Quickstart dem listed" class="align-right" src="../_images/quickstart-dem-listed.png" />
-<p>Wenn der VRT Builder fertig ist, steht das DEM in der Liste, grau wie jedes ausgeschaltete DEM.</p>
+<p>Sobald der VRT Builder fertig ist, erscheint das DEM in der Liste. Es wird grau dargestellt, wie jedes andere inaktive DEM.</p>
 </li>
 </ol>
-<p>Eine anderswo erstellte <code class="docutils literal notranslate"><span class="pre">.vrt</span></code>-Datei kann ihre Dateien mit dem vollen Pfad nennen und findet sie nach dem Kopieren
-dann möglicherweise nicht mehr. Wenn Sie sie im Verzeichnis <code class="docutils literal notranslate"><span class="pre">DEM</span></code> erstellen, passiert das nicht.</p>
+<p>Eine an anderer Stelle erstellte .vrt Datei kann die Quelldateien über ihre absoluten Pfade referenzieren. Werden die Dateien anschließend kopiert oder verschoben, stimmen diese Pfade möglicherweise nicht mehr. Wenn Sie die .vrt Datei direkt im Verzeichnis <code class="docutils literal notranslate"><span class="pre">DEM</span></code> erstellen, vermeiden Sie dieses Problem.</p>
 </section>
 <section id="das-dem-einschalten">
 <span id="index-3"></span><h2>Das DEM einschalten<a class="headerlink" href="#das-dem-einschalten" title="Link to this heading">#</a></h2>
 <ol class="arabic">
 <li><img alt="Quickstart dem dem button" class="align-right" src="../_images/quickstart-dem-dem-button.png" />
-<p>Klicken Sie auf den Knopf in der Zeile des DEM im Bereich <strong>Dig. Höhenmodell (DEM)</strong>. Die Zeile wird fett und
-zeigt <strong>aktiv</strong>.</p>
+<p>Klicken Sie auf die Schaltfläche in der Zeile des DEM im Bereich <strong>Dig. Höhenmodell (DEM)</strong>. Die Zeile wird daraufhin fett dargestellt und mit <strong>aktiv</strong> gekennzeichnet.</p>
 </li>
-<li><p>Die Karte sieht aus wie vorher: Das DEM schummert nichts, bis Sie die Schummerung einschalten. Aber wo das DEM
-Daten hat, zeigt die Statusleiste jetzt die Höhe und die Neigung am Mauszeiger.
-Wenn nicht, stimmt etwas mit dem DEM nicht.</p></li>
+<li><p>Die Karte sieht zunächst unverändert aus. Das DEM schattiert das Gelände erst, wenn Sie die Schummerung einschalten. Wo das DEM Daten enthält, zeigt die Statusleiste jetzt die Höhe und die Hangneigung an der Position des Mauszeigers an. Werden diese Werte nicht angezeigt, stimmt möglicherweise etwas mit dem DEM nicht.</p></li>
 </ol>
 </section>
 <section id="das-gelande-schummern">
 <span id="index-5"></span><span id="index-4"></span><h2>Das Gelände schummern<a class="headerlink" href="#das-gelande-schummern" title="Link to this heading">#</a></h2>
 <ol class="arabic">
 <li><img alt="Quickstart dem hillshading" class="align-right" src="../_images/quickstart-dem-hillshading.png" />
-<p>Klicken Sie auf den Pfeil links vom Namen des DEM. Seine Einstellungen öffnen sich darunter. Aktivieren Sie
-<strong>Schummerung</strong>.</p>
+<p>Klicken Sie auf den Pfeil links neben dem Namen des DEM, um dessen Einstellungen auszuklappen. Aktivieren Sie anschließend <strong>Schummerung</strong>.</p>
 </li>
 <li><img alt="Quickstart dem shaded" class="align-right" src="../_images/quickstart-dem-shaded.png" />
-<p>Das Gelände ist jetzt auf der Karte geschummert: Hänge, die vom Licht abgewandt sind, sind dunkler.</p>
+<p>Das Gelände wird jetzt auf der Karte schattiert dargestellt. Hänge, die vom Licht abgewandt sind, erscheinen dunkler.</p>
 </li>
-<li><p>Der Schieberegler unter dem Namen des DEM stellt seine Deckkraft ein. QMapShack zeichnet das DEM über die Karte.
-Ziehen Sie den Regler deshalb nach rechts, wird die Schummerung stärker und die Karte dunkler. Der Schieberegler
-neben <strong>Schummerung</strong> ändert das Relief selbst: nach links wirken die Hänge steiler, nach rechts das Gelände
-flacher. Das Licht kommt immer aus Nordwesten.</p>
+<li><p>Der Schieberegler unter dem Namen des DEM steuert dessen Deckkraft. QMapShack legt das DEM als Ebene über die Karte. Wenn Sie den Regler nach rechts schieben, wird die Schummerung stärker und die Karte dunkler.</p>
+<p>Der Schieberegler neben <strong>Schummerung</strong> steuert die Stärke des Reliefs. Schieben Sie ihn nach links, erscheinen die Hänge steiler, nach rechts wirkt das Gelände flacher. Die Lichtquelle kommt immer aus Nordwesten.</p>
 <img alt="Quickstart dem stronger" class="below-right" src="../_images/quickstart-dem-stronger.png" />
 </li>
 </ol>
-<p>Wie eine Karte lässt sich ein DEM auf bestimmte Zoomstufen begrenzen, mit den zwei Knöpfen neben dem Balken
-unter dem Schieberegler. Siehe
-<a class="reference internal" href="quickstart-zoom-pan.html#eine-karte-auf-einen-zoombereich-begrenzen"><span class="std std-ref">Eine Karte auf einen Zoombereich begrenzen</span></a>.</p>
+<p>Wie bei Karten können Sie auch bei einem DEM den Zoombereich mit den beiden Schaltflächen neben dem Balken unterhalb des Schiebereglers einschränken. Siehe <a class="reference internal" href="quickstart-zoom-pan.html#eine-karte-auf-einen-zoombereich-begrenzen"><span class="std std-ref">Eine Karte auf einen Zoombereich begrenzen</span></a>.</p>
 </section>
 </section>
 
@@ -331,7 +312,7 @@ unter dem Schieberegler. Siehe
                 <div class="context">
                   <span>Weiter</span>
                 </div>
-                <div class="title">Eine GPX-Datei laden</div>
+                <div class="title">Eine GPX Datei laden</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>

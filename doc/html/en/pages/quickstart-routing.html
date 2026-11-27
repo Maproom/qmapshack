@@ -197,8 +197,8 @@
   <ul class="current">
 <li class="toctree-l1 current has-children"><a class="reference internal" href="quickstart.html">Quick start</a><input aria-label="Toggle navigation of Quick start" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="quickstart-main-window.html">The main window</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart-maps.html">Turning on maps</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart-vector-map.html">Turning on a Garmin map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart-maps.html">Enabling maps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart-vector-map.html">Enabling a Garmin map</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-zoom-pan.html">Zooming and panning</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-dem.html">Elevation data and hillshading</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-load-file.html">Loading a GPX file</a></li>
@@ -247,61 +247,53 @@
         <article role="main" id="furo-main-content">
           <section id="setting-up-routing">
 <h1>Setting up routing<a class="headerlink" href="#setting-up-routing" title="Link to this heading">#</a></h1>
-<p>This page shows how to set up a router, so that QMapShack can draw a track along paths and roads for you.</p>
+<p>This page explains how to configure a router so that QMapShack can automatically create tracks along paths and roads.</p>
 <section id="what-a-router-does">
 <span id="index-1"></span><span id="index-0"></span><h2>What a router does<a class="headerlink" href="#what-a-router-does" title="Link to this heading">#</a></h2>
-<p>A <em>router</em> calculates the way along paths and roads from one point to the next. When you draw a track, you click
-only the points the track should pass, and the router adds the way between them.</p>
-<p>To add the way while you click, the router has to work <em>on the fly</em>: it answers at once, from routing data on your
-computer. A router that asks a server on the internet can’t do that. It would send a request for every click, and to
-prevent abuse, servers block clients that send too many requests in a short time.</p>
+<p>A <em>router</em> calculates routes along paths and roads between two points. When drawing a track, you only need to click the points you want to pass through. The router automatically calculates the route between them.</p>
+<p>To add the route as you click, the router must work <em>on the fly</em>. It needs to respond immediately using routing data stored on your computer.</p>
+<p>An online router that relies on an internet server cannot do this. It would have to send a request for every click. To prevent abuse, servers block clients that send too many requests in a short period of time.</p>
 </section>
 <section id="choosing-a-router">
 <span id="index-2"></span><h2>Choosing a router<a class="headerlink" href="#choosing-a-router" title="Link to this heading">#</a></h2>
-<p>QMapShack can use two routers, Routino and BRouter. Select one in the list at the top of the
-<strong>Routing</strong> panel.</p>
+<p>QMapShack supports two routers: Routino and BRouter. Select the one you want to use from the list at the top of the <strong>Routing</strong> panel.</p>
 <ul class="simple">
-<li><p><strong>Routino (offline)</strong> routes with data on your computer. You make that data from OpenStreetMap data with
-<strong>Tool → Create Routino Database</strong>. The steps on this page use Routino.</p></li>
-<li><p><strong>BRouter</strong> is easier to set up. As <strong>BRouter (online)</strong> it asks the BRouter-Web server, so it can’t route on the
-fly. Installed on your computer, it appears as <strong>BRouter (offline)</strong> and then routes on the fly.</p></li>
+<li><p><strong>Routino (offline)</strong> calculates routes using data stored on your computer. You create this data from OpenStreetMap data using <strong>Tool → Create Routino Database</strong>. The instructions on this page describe how to set up and use Routino.</p></li>
+<li><p><strong>BRouter</strong> is easier to set up. In <strong>BRouter (online)</strong> mode, it sends requests to the BRouter-Web server, so it cannot calculate routes on the fly. When installed on your computer, it appears as <strong>BRouter (offline)</strong> and can calculate routes on the fly.</p></li>
 </ul>
 </section>
 <section id="installing-brouter">
 <span id="index-3"></span><h2>Installing BRouter<a class="headerlink" href="#installing-brouter" title="Link to this heading">#</a></h2>
 <img alt="Quickstart routing brouter setup" class="align-right" src="../_images/quickstart-routing-brouter-setup.png" />
-<p>BRouter runs on Java. Install Java first: the setup wizard doesn’t continue without it.</p>
-<p>A wizard installs BRouter for you. Select <strong>BRouter (online)</strong> in the list and click <strong>Setup</strong>. In the
-<strong>BRouter Setup</strong> wizard, choose <strong>local Installation</strong> and follow its pages. The wizard downloads BRouter and the
-routing data for the areas you select on its map into the <code class="docutils literal notranslate"><span class="pre">BRouter</span></code> folder of your
-<a class="reference internal" href="quickstart-main-window.html#setting-up-the-home-folder"><span class="std std-ref">home folder</span></a>.</p>
-<p>When the wizard is done, the list shows <strong>BRouter (offline)</strong>.</p>
+<p>BRouter requires Java. Install Java before proceeding. Otherwise, the setup wizard cannot continue.</p>
+<p>A setup wizard guides you through installing BRouter. Select <strong>BRouter (online)</strong> from the list and click <strong>Setup</strong>.</p>
+<p>In the <strong>BRouter Setup</strong> wizard, choose <strong>Local Installation</strong> and follow the instructions on each page. The wizard downloads BRouter and the routing data for the areas you select on the map. It saves them in the <code class="docutils literal notranslate"><span class="pre">BRouter</span></code> folder inside your <a class="reference internal" href="quickstart-main-window.html#setting-up-the-home-folder"><span class="std std-ref">home folder</span></a>.</p>
+<p>When the setup is complete, the list shows <strong>BRouter (offline)</strong>.</p>
 </section>
 <section id="setting-up-routino">
 <span id="index-4"></span><h2>Setting up Routino<a class="headerlink" href="#setting-up-routino" title="Link to this heading">#</a></h2>
-<p>Routino routes with a database that QMapShack builds from OpenStreetMap data. You need an extract of your area as a
-<code class="docutils literal notranslate"><span class="pre">.pbf</span></code> file, for example from <a class="reference external" href="https://download.geofabrik.de/" title="Geofabrik downloads">Geofabrik</a>. Routino can’t route from one database into another, so the
-extract must cover every area a route crosses. You can combine several <code class="docutils literal notranslate"><span class="pre">.pbf</span></code> files in one database.</p>
-<p>On Linux, install your distribution’s Routino package first: the tool needs its <code class="docutils literal notranslate"><span class="pre">planetsplitter</span></code> program.</p>
+<p>Routino calculates routes using a database that QMapShack builds from OpenStreetMap data. You need an extract of your area in <code class="docutils literal notranslate"><span class="pre">.pbf</span></code> format, available, for example, from <a class="reference external" href="https://download.geofabrik.de/" title="Geofabrik downloads">Geofabrik</a>.</p>
+<p>Routino cannot calculate routes across separate databases. Therefore, the extract must cover all areas that a route passes through.</p>
+<p>You can also combine several <code class="docutils literal notranslate"><span class="pre">.pbf</span></code> files into a single database.</p>
+<p>On Linux, first install your distribution’s Routino package. It provides the required <code class="docutils literal notranslate"><span class="pre">planetsplitter</span></code> tool. On Windows, <code class="docutils literal notranslate"><span class="pre">planetsplitter</span></code> is included in the QMapShack installation.</p>
 <ol class="arabic">
-<li><p>Select <strong>Routino (offline)</strong> in the list at the top of the <strong>Routing</strong> panel.</p></li>
+<li><p>At the top of the <strong>Routing</strong> panel, select <strong>Routino (offline)</strong> from the list.</p></li>
 <li><p>Click <strong>Tool → Create Routino Database</strong>.</p></li>
-<li><p>Click the folder button beside <strong>Select source files</strong> and select the <code class="docutils literal notranslate"><span class="pre">.pbf</span></code> files.</p></li>
-<li><p>Select where the database goes in the <strong>Target Path</strong> list. It offers the folders registered for Routino, among
-them the <code class="docutils literal notranslate"><span class="pre">Routino</span></code> folder of your <a class="reference internal" href="quickstart-main-window.html#setting-up-the-home-folder"><span class="std std-ref">home folder</span></a>. The folder
-button to the left of <strong>Target Path</strong> adds other folders.</p></li>
-<li><p>Enter a name for the database in the <strong>File Prefix</strong> box.</p></li>
-<li><p>Click <strong>Start</strong>. Building takes a while. When the tool says <strong>!!! done !!!</strong>, the database appears under
-<strong>Database</strong> in the <strong>Routing</strong> panel.</p></li>
+<li><p>Click the folder button next to <strong>Select source files</strong> and choose the desired <code class="docutils literal notranslate"><span class="pre">.pbf</span></code> files.</p></li>
+<li><p>In the <strong>Target Path</strong> list, select the folder where you want to store the database. The list contains all folders registered with Routino, including the <code class="docutils literal notranslate"><span class="pre">Routino</span></code> folder in your <a class="reference internal" href="quickstart-main-window.html#setting-up-the-home-folder"><span class="std std-ref">home folder</span></a>.</p>
+<p>Click the folder button to the left of <strong>Target Path</strong> to add more folders.</p>
+</li>
+<li><p>Enter a name for the database in the <strong>File Prefix</strong> field.</p></li>
+<li><p>Click <strong>Start</strong> to build the database. This may take a while.</p>
+<p>When the tool reports <strong>!!! done !!!</strong>, the database appears under <strong>Database</strong> in the <strong>Routing</strong> panel.</p>
+</li>
 <li><img alt="Quickstart routing routino select" class="align-right" src="../_images/quickstart-routing-routino-select.png" />
-<p>Select the database under <strong>Database</strong>. Select how you travel under <strong>Profile</strong>, for example <strong>Foot</strong> or
-<strong>Bicycle</strong>.</p>
+<p>Select the database under <strong>Database</strong>. Then choose your mode of travel under <strong>Profile</strong>, for example <strong>Foot</strong> or <strong>Bicycle</strong>.</p>
 </li>
 </ol>
-<p>A database built elsewhere is a set of four files: <code class="docutils literal notranslate"><span class="pre">&lt;name&gt;-nodes.mem</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;name&gt;-segments.mem</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;name&gt;-ways.mem</span></code> and
-<code class="docutils literal notranslate"><span class="pre">&lt;name&gt;-relations.mem</span></code>. Copy them directly into the <code class="docutils literal notranslate"><span class="pre">Routino</span></code> folder, not into a subfolder. After a few seconds the
-database appears under <strong>Database</strong>, named after its files with underscores as spaces: the files
-<code class="docutils literal notranslate"><span class="pre">tannheimer_tal-*.mem</span></code> show as <strong>tannheimer tal</strong>.</p>
+<p>A database created elsewhere consists of four files: <code class="docutils literal notranslate"><span class="pre">&lt;name&gt;-nodes.mem</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;name&gt;-segments.mem</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;name&gt;-ways.mem</span></code>, and <code class="docutils literal notranslate"><span class="pre">&lt;name&gt;-relations.mem</span></code>.</p>
+<p>Copy these files directly into the <code class="docutils literal notranslate"><span class="pre">Routino</span></code> folder, not into a subfolder. After a few seconds, the database appears under <strong>Database</strong>.</p>
+<p>Its name is derived from the filenames, with underscores replaced by spaces. For example, the files <code class="docutils literal notranslate"><span class="pre">tannheimer_tal-*.mem</span></code> appear in the list as <strong>tannheimer tal</strong>.</p>
 </section>
 </section>
 

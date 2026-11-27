@@ -6,7 +6,7 @@
 <link rel="index" title="Stichwortverzeichnis" href="../genindex.html"><link rel="search" title="Suche" href="../search.html"><link rel="next" title="Routing einrichten" href="quickstart-routing.html"><link rel="prev" title="Höhendaten und Schummerung" href="quickstart-dem.html">
 
     <!-- Generated with Sphinx 9.1.1 and Furo 2025.12.19 -->
-        <title>Eine GPX-Datei laden - QMapShack-Dokumentation</title>
+        <title>Eine GPX Datei laden - QMapShack-Dokumentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
@@ -198,10 +198,10 @@
 <li class="toctree-l1 current has-children"><a class="reference internal" href="quickstart.html">Schnellstart</a><input aria-label="Toggle navigation of Schnellstart" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="quickstart-main-window.html">Das Hauptfenster</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-maps.html">Karten einschalten</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart-vector-map.html">Eine Garmin-Karte einschalten</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart-vector-map.html">Eine Garmin-Karte anzeigen</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-zoom-pan.html">Zoomen und Verschieben</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-dem.html">Höhendaten und Schummerung</a></li>
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Eine GPX-Datei laden</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Eine GPX Datei laden</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-routing.html">Routing einrichten</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-draw-track.html">Einen Track zeichnen</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-waypoints.html">Wegpunkte hinzufügen</a></li>
@@ -246,80 +246,62 @@
         </div>
         <article role="main" id="furo-main-content">
           <section id="eine-gpx-datei-laden">
-<h1>Eine GPX-Datei laden<a class="headerlink" href="#eine-gpx-datei-laden" title="Link to this heading">#</a></h1>
-<p>Diese Seite zeigt, wie Sie eine GPX-Datei in QMapShack laden, ihre Tracks und Wegpunkte ansehen und sie auf der Karte
+<h1>Eine GPX Datei laden<a class="headerlink" href="#eine-gpx-datei-laden" title="Link to this heading">#</a></h1>
+<p>Diese Seite beschreibt, wie Sie eine .gpx Datei in QMapShack laden, ihre Tracks und Wegpunkte ansehen und sie auf der Karte
 finden.</p>
 <p>Bilder: <em>© OpenStreetMap contributors</em>; <em>Datenquelle: Land Tirol - data.tirol.gv.at, CC BY 4.0</em>;
 <em><code class="docutils literal notranslate"><span class="pre">Example.gpx</span></code>: fuzzybear, CC BY-SA 4.0</em>.</p>
 <section id="die-datei-laden">
 <span id="index-1"></span><span id="index-0"></span><h2>Die Datei laden<a class="headerlink" href="#die-datei-laden" title="Link to this heading">#</a></h2>
-<p>Eine GPX-Datei (GPS Exchange Format) enthält Tracks, Wegpunkte und Routen. GPS-Geräte, Apps und Websites zur
-Tourenplanung speichern und teilen sie in diesem Format. Die Bilder auf dieser Seite zeigen <code class="docutils literal notranslate"><span class="pre">Example.gpx</span></code>, eine Tour
-rund um den Aggenstein.</p>
+<p>Eine <code class="docutils literal notranslate"><span class="pre">.gpx</span></code>-Datei (GPS Exchange Format) enthält Tracks, Wegpunkte und Routen. GPS-Geräte, Apps und Tourenplanungs-Webseiten verwenden dieses Format, um solche Daten zu speichern und auszutauschen. Die Abbildungen auf dieser Seite zeigen die Datei <code class="docutils literal notranslate"><span class="pre">Example.gpx</span></code> mit einer Tour rund um den Aggenstein.</p>
 <ol class="arabic simple">
 <li><p>Klicken Sie auf <strong>Datei → GIS Daten laden</strong> oder drücken Sie <strong>Strg+L</strong>.</p></li>
-<li><p>Wählen Sie die GPX-Datei aus und klicken Sie auf <strong>Öffnen</strong>. Um mehrere Dateien auf einmal zu laden, halten Sie
-<strong>Strg</strong> gedrückt und klicken Sie nacheinander auf die Dateien.</p></li>
+<li><p>Wählen Sie die .gpx Datei aus und klicken Sie auf <strong>Öffnen</strong>. Um mehrere Dateien gleichzeitig zu laden, halten Sie die Taste <strong>Strg</strong> gedrückt und klicken Sie nacheinander auf die gewünschten Dateien.</p></li>
 </ol>
-<p>Der Dialog öffnet sich in dem Verzeichnis, aus dem Sie zuletzt geladen oder in das Sie zuletzt gespeichert haben.
-Wenn Sie das <a class="reference internal" href="quickstart-main-window.html#das-hauptverzeichnis-einrichten"><span class="std std-ref">Hauptverzeichnis</span></a> eingerichtet haben, stellt
-QMapShack den Dialog auf dessen Verzeichnis <code class="docutils literal notranslate"><span class="pre">GPX</span></code>, einen guten Ort für Ihre Dateien.</p>
-<p>Statt über das Menü können Sie Dateien auch aus Ihrem Dateimanager auf die Karte ziehen.</p>
-<p>QMapShack lädt auch seine eigenen <code class="docutils literal notranslate"><span class="pre">.qms</span></code>-Dateien und Dateien anderer Geräte und Programme: <code class="docutils literal notranslate"><span class="pre">.fit</span></code>, <code class="docutils literal notranslate"><span class="pre">.tcx</span></code>, <code class="docutils literal notranslate"><span class="pre">.slf</span></code>,
-<code class="docutils literal notranslate"><span class="pre">.sml</span></code>, <code class="docutils literal notranslate"><span class="pre">.log</span></code> und <code class="docutils literal notranslate"><span class="pre">.qlb</span></code>.</p>
+<p>Der Dialog öffnet sich in dem Verzeichnis, aus dem Sie zuletzt eine Datei geladen oder in dem Sie zuletzt eine Datei gespeichert haben. Wenn Sie das <a class="reference internal" href="quickstart-main-window.html#das-hauptverzeichnis-einrichten"><span class="std std-ref">Hauptverzeichnis</span></a> eingerichtet haben, öffnet QMapShack den Dialog direkt im Unterverzeichnis <code class="docutils literal notranslate"><span class="pre">GPX</span></code>. Dort können Sie Ihre .gpx Dateien übersichtlich ablegen.</p>
+<p>Alternativ zum Menü können Sie Dateien einfach aus Ihrem Dateimanager auf die Karte ziehen.</p>
+<p>QMapShack kann auch eigene .qms Dateien sowie Dateien anderer Geräte und Programme in den Formaten .fit, .tcx, .slf, .sml, .log und .qlb laden.</p>
 </section>
 <section id="das-projekt-im-arbeitsplatz">
 <span id="index-3"></span><span id="index-2"></span><h2>Das Projekt im Arbeitsplatz<a class="headerlink" href="#das-projekt-im-arbeitsplatz" title="Link to this heading">#</a></h2>
-<p>QMapShack lädt eine Datei als <em>Projekt</em>: die Tracks, Routen, Wegpunkte und Gebiete einer Datei, zusammengefasst. Der
-Bereich <strong>Arbeitsplatz</strong> (siehe <a class="reference internal" href="quickstart-main-window.html#das-fenster-beim-ersten-start"><span class="std std-ref">Das Hauptfenster</span></a>) listet es
-unter dem Namen, der in der Datei steht, oder unter dem Dateinamen, wenn die Datei keinen enthält. QMapShack zeigt alles
-im Projekt sofort auf der Karte.</p>
+<p>QMapShack lädt jede Datei als <em>Projekt</em>. Darin werden alle Tracks, Routen, Wegpunkte und Gebiete der Datei zusammengefasst. Der Bereich <strong>Arbeitsplatz</strong> (siehe <a class="reference internal" href="quickstart-main-window.html#das-fenster-beim-ersten-start"><span class="std std-ref">Das Hauptfenster</span></a>) zeigt das Projekt unter dem in der Datei gespeicherten Namen an. Ist dort kein Name hinterlegt, wird stattdessen der Dateiname verwendet.</p>
+<p>Alle Elemente des Projekts werden sofort auf der Karte angezeigt.</p>
 <ol class="arabic">
 <li><img alt="Quickstart load file items" class="align-right" src="../_images/quickstart-load-file-items.png" />
-<p>Klicken Sie auf den Pfeil links neben dem Projektnamen. Die Tracks, Routen, Wegpunkte und Gebiete des Projekts
-erscheinen darunter. Tracks, Routen und Gebiete haben ein Symbol für ihre Art, ein Wegpunkt zeigt sein
-Wegpunktsymbol.</p>
+<p>Klicken Sie auf den Pfeil links neben dem Projektnamen, um das Projekt aufzuklappen. Darunter erscheinen seine Tracks, Routen, Wegpunkte und Gebiete. Tracks, Routen und Gebiete sind jeweils durch ein Symbol gekennzeichnet, während Wegpunkte ihr zugewiesenes Symbol anzeigen.</p>
 </li>
-<li><p>Halten Sie den Mauszeiger über den Namen eines Elements (Track, Route, Wegpunkt oder Gebiet). Ein Tooltip zeigt eine
-Zusammenfassung des Elements.</p></li>
+<li><p>Bewegen Sie den Mauszeiger über den Namen eines Elements (Track, Route, Wegpunkt oder Gebiet). Daraufhin erscheint ein Tooltip mit einer kurzen Zusammenfassung des Elements.</p></li>
 </ol>
 </section>
 <section id="ein-element-auf-der-karte-finden">
 <span id="index-4"></span><h2>Ein Element auf der Karte finden<a class="headerlink" href="#ein-element-auf-der-karte-finden" title="Link to this heading">#</a></h2>
 <img alt="Quickstart load file dclick" class="align-right" src="../_images/quickstart-load-file-dclick.png" />
-<p>Doppelklicken Sie auf ein Element im Bereich <strong>Arbeitsplatz</strong>. Die Karte zoomt auf das Element.</p>
-<p>Bei einem Track hebt QMapShack den Track außerdem auf der Karte hervor. Ein Kasten unten rechts zeigt eine
-Zusammenfassung des Tracks: Länge, Anstieg, Zeit, Geschwindigkeit und mehr. Ein kleines Diagramm unten links zeigt das
-Höhenprofil des Tracks.</p>
+<p>Doppelklicken Sie im Bereich <strong>Arbeitsplatz</strong> auf ein Element, um die Karte darauf zu zoomen.</p>
+<p>Bei einem Track hebt QMapShack diesen zusätzlich auf der Karte hervor. Ein Kasten unten rechts zeigt eine Zusammenfassung mit Angaben zu Länge, Höhengewinn, Dauer, Geschwindigkeit und weiteren Werten. Ein kleines Diagramm unten links stellt das Höhenprofil des Tracks dar.</p>
 <img alt="Quickstart load file zoomed" class="below-right" src="../_images/quickstart-load-file-zoomed.png" />
 </section>
 <section id="ein-projekt-auf-der-karte-ausblenden">
 <span id="index-5"></span><h2>Ein Projekt auf der Karte ausblenden<a class="headerlink" href="#ein-projekt-auf-der-karte-ausblenden" title="Link to this heading">#</a></h2>
 <ol class="arabic">
 <li><img alt="Quickstart load file hide" class="align-right" src="../_images/quickstart-load-file-hide.png" />
-<p>Klicken Sie auf den Knopf mit dem Auge rechts in der Zeile des Projekts. Alles im Projekt verschwindet von
-der Karte, und das Projekt und seine Elemente werden grau.</p>
+<p>Klicken Sie auf die Augenschaltfläche rechts in der Projektzeile. Alle Elemente des Projekts werden daraufhin auf der Karte ausgeblendet. Das Projekt und seine Elemente erscheinen nun grau.</p>
 </li>
-<li><p>Klicken Sie noch einmal auf den Knopf mit dem Auge, um das Projekt wieder anzuzeigen.</p></li>
+<li><p>Klicken Sie erneut auf die Augenschaltfläche, um das Projekt wieder auf der Karte einzublenden.</p></li>
 </ol>
-<p>Solange ein Projekt ausgeblendet ist, ändert ein Doppelklick auf eines seiner Elemente den Kartenausschnitt nicht.</p>
+<p>Solange ein Projekt ausgeblendet ist, hat ein Doppelklick auf eines seiner Elemente keine Auswirkung auf den Kartenausschnitt.</p>
 </section>
 <section id="den-arbeitsplatz-behalten">
 <span id="index-6"></span><h2>Den Arbeitsplatz behalten<a class="headerlink" href="#den-arbeitsplatz-behalten" title="Link to this heading">#</a></h2>
-<p>QMapShack merkt sich die Projekte im Bereich <strong>Arbeitsplatz</strong> bis zum nächsten Start.</p>
-<p>Dafür speichert es eine eigene Kopie jedes Projekts und lässt die geladene Datei unverändert. QMapShack schreibt eine
-Änderung erst in die Datei, wenn Sie das Projekt speichern.</p>
-<p>QMapShack speichert den Arbeitsplatz alle 5 Minuten und beim Beenden. So ändern Sie das Intervall:</p>
+<p>QMapShack speichert die Projekte im Bereich <strong>Arbeitsplatz</strong>, so dass sie beim nächsten Programmstart wieder zur Verfügung stehen.</p>
+<p>Dazu legt QMapShack eine eigene Kopie jedes Projekts an und lässt die ursprünglich geladene Datei unverändert.</p>
+<p>Änderungen werden erst dann in die Datei übernommen, wenn Sie das Projekt speichern.</p>
+<p>QMapShack speichert den Arbeitsplatz alle fünf Minuten sowie beim Beenden des Programms. So ändern Sie das Speicherintervall:</p>
 <ol class="arabic simple">
 <li><p>Klicken Sie auf <strong>Arbeitsplatz → Arbeitsplatz konfigurieren</strong>.</p></li>
-<li><p>Stellen Sie auf dem Reiter <strong>Allgemein</strong> die Minuten neben
-<strong>Arbeitsplatz beim Beenden speichern, und alle</strong> ein. Mit 0 speichert QMapShack den Arbeitsplatz nur beim
-Beenden.</p></li>
-<li><p>Klicken Sie auf <strong>OK</strong>, bestätigen Sie die Meldung und starten Sie QMapShack neu. Die neue Einstellung gilt erst
-nach einem Neustart.</p></li>
+<li><p>Legen Sie im Reiter <strong>Allgemein</strong> neben <strong>Arbeitsplatz beim Beenden speichern, und alle</strong> das gewünschte Speicherintervall in Minuten fest. Bei einem Wert von <code class="docutils literal notranslate"><span class="pre">0</span></code> speichert QMapShack den Arbeitsplatz nur beim Beenden des Programms.</p></li>
+<li><p>Klicken Sie auf <strong>OK</strong>, bestätigen Sie die Meldung und starten Sie QMapShack neu. Die neue Einstellung wird erst nach einem Neustart wirksam.</p></li>
 </ol>
-<p>Wenn Sie das Kontrollkästchen vor <strong>Arbeitsplatz beim Beenden speichern, und alle</strong> deaktivieren, speichert QMapShack
-den Arbeitsplatz nicht mehr. Beim nächsten Start ist der Arbeitsplatz so, wie er zuletzt gespeichert wurde.</p>
+<p>Wenn Sie das Kontrollkästchen vor <strong>Arbeitsplatz beim Beenden speichern, und alle</strong> deaktivieren, speichert QMapShack den Arbeitsplatz nicht mehr automatisch. Beim nächsten Programmstart wird der zuletzt gespeicherte Zustand des Arbeitsplatzes wiederhergestellt.</p>
 </section>
 </section>
 
@@ -378,7 +360,7 @@ den Arbeitsplatz nicht mehr. Beim nächsten Start ist der Arbeitsplatz so, wie e
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Eine GPX-Datei laden</a><ul>
+<li><a class="reference internal" href="#">Eine GPX Datei laden</a><ul>
 <li><a class="reference internal" href="#die-datei-laden">Die Datei laden</a></li>
 <li><a class="reference internal" href="#das-projekt-im-arbeitsplatz">Das Projekt im Arbeitsplatz</a></li>
 <li><a class="reference internal" href="#ein-element-auf-der-karte-finden">Ein Element auf der Karte finden</a></li>

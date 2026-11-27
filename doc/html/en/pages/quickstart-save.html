@@ -197,8 +197,8 @@
   <ul class="current">
 <li class="toctree-l1 current has-children"><a class="reference internal" href="quickstart.html">Quick start</a><input aria-label="Toggle navigation of Quick start" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="quickstart-main-window.html">The main window</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart-maps.html">Turning on maps</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart-vector-map.html">Turning on a Garmin map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart-maps.html">Enabling maps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart-vector-map.html">Enabling a Garmin map</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-zoom-pan.html">Zooming and panning</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-dem.html">Elevation data and hillshading</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-load-file.html">Loading a GPX file</a></li>
@@ -247,75 +247,61 @@
         <article role="main" id="furo-main-content">
           <section id="saving-your-work">
 <h1>Saving your work<a class="headerlink" href="#saving-your-work" title="Link to this heading">#</a></h1>
-<p>This page shows how to save your projects to a file or to a database.</p>
-<section id="seeing-unsaved-changes">
-<span id="index-0"></span><h2>Seeing unsaved changes<a class="headerlink" href="#seeing-unsaved-changes" title="Link to this heading">#</a></h2>
-<p>When you start QMapShack again, it restores every project in the <strong>Workspace</strong> panel. To do this, it keeps its own copy
-of each project. The file a project was loaded from changes only when you save the project. A project you created has no
-file until you save it.</p>
+<p>This page explains how to save your projects to a file or database.</p>
+<section id="recognizing-unsaved-changes">
+<span id="index-0"></span><h2>Recognizing unsaved changes<a class="headerlink" href="#recognizing-unsaved-changes" title="Link to this heading">#</a></h2>
+<p>When you start QMapShack again, it restores all projects in the <strong>Workspace</strong> panel. To do this, QMapShack keeps its own copy of each project.</p>
+<p>The original file from which you loaded a project is not modified until you save the project. A newly created project has no associated file until you save it.</p>
 <ol class="arabic">
 <li><img alt="Quickstart save changed" class="align-right" src="../_images/quickstart-save-changed.png" />
-<p>In the <strong>Workspace</strong> panel, find the project with unsaved changes: it shows a save button in its row,
-marked in the image. In this example, <strong>My waypoints</strong> has a new waypoint and <strong>Example</strong> has no changes.</p>
+<p>In the <strong>Workspace</strong> panel, locate the project with unsaved changes. Its row displays a save button, highlighted in the image. In this example, <strong>My waypoints</strong> contains a newly added waypoint, while <strong>Example</strong> has no unsaved changes.</p>
 </li>
-<li><p>Click the save button. If the project has never been saved, QMapShack first asks where to save it; see
-<a class="reference internal" href="#saving-to-a-file">Saving to a file</a>. After saving, the save button disappears.</p></li>
+<li><p>Click the save button. If the project has never been saved before, QMapShack first asks you where to save it. See <a class="reference internal" href="#saving-to-a-file">Saving to a file</a>. Once the project is saved, the save button disappears.</p></li>
 </ol>
-<p>On an item’s row, the same symbol is not a button but a change indicator. It shows that the item has changed since the
-project was last saved.</p>
+<p>In an item’s row, the same symbol serves as a change indicator rather than a button. It indicates that the item has been modified since the project was last saved.</p>
 </section>
 <section id="saving-to-a-file">
 <h2>Saving to a file<a class="headerlink" href="#saving-to-a-file" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p>Right-click the project in the <strong>Workspace</strong> panel and click <strong>Save as…</strong>.</p></li>
-<li><p>In the dialog, choose the file type, enter a file name and click <strong>Save</strong>.</p></li>
+<li><p>In the dialog, select the file type, enter a file name, and click <strong>Save</strong>.</p></li>
 </ol>
-<p>If the project already has a file, click <strong>Save</strong> in the same menu. QMapShack overwrites the file without asking.</p>
-<p>The file types:</p>
+<p>If the project already has an associated file, select <strong>Save</strong> from the same menu. QMapShack overwrites the existing file without prompting for confirmation.</p>
+<p>The following file types are supported:</p>
 <ul class="simple">
-<li><p><strong>QMapShack Binary (*.qms)</strong> is QMapShack’s own format. It keeps everything QMapShack stores about a project,
-including the list of changes, so you can undo them. Use it for your own projects.</p></li>
-<li><p><strong>GPS Exchange Format (*.gpx *.GPX)</strong>: other programs and devices can read it too. It keeps the list of
-changes, but after loading the file again you can’t undo them.</p></li>
+<li><p><strong>QMapShack Binary .qms</strong> is QMapShack’s native file format. It preserves all project data stored by QMapShack, including the change history, so you can undo your changes. Use this format for your own projects.</p></li>
+<li><p><strong>GPS Exchange Format .gpx</strong> is supported by many other programs and GPS devices. It preserves the list of changes, but you cannot undo them after loading the file again.</p></li>
 </ul>
-<p><strong>Save as GPX 1.1 w/o ext…</strong> in the project’s menu writes a plain GPX 1.1 file without any of QMapShack’s own data,
-for programs that can’t read QMapShack’s extensions.</p>
-<p>If you save a project as another file type, QMapShack writes a copy. The project keeps its own file and its save
-button.</p>
-<p><strong>File → Save All GIS Data</strong> (<strong>Ctrl+S</strong>) saves every project in the workspace. For a project that has never been
-saved, QMapShack asks where to save it.</p>
-<p>When you close a project with unsaved changes, QMapShack asks whether to save it first.</p>
+<p><strong>Save as GPX 1.1 w/o ext…</strong> in the project menu saves a standard GPX 1.1 file without any QMapShack-specific data. Use this option for programs that do not support QMapShack’s extensions.</p>
+<p>When you save a project in a different file format, QMapShack creates a copy and leaves the project’s original file unchanged. The project remains associated with its original file, and its save button remains visible.</p>
+<p><strong>File → Save All GIS Data</strong> (<strong>Ctrl+S</strong>) saves all projects in the workspace. If a project has never been saved before, QMapShack prompts you to choose where to save it.</p>
+<p>When you close a project with unsaved changes, QMapShack asks whether you want to save it first.</p>
 </section>
-<section id="saving-into-a-database">
-<span id="index-1"></span><h2>Saving into a database<a class="headerlink" href="#saving-into-a-database" title="Link to this heading">#</a></h2>
-<p>To save a project loaded from a database back into its folder, click its save button; see
-<a class="reference internal" href="quickstart-database.html#working-with-the-workspace"><span class="std std-ref">Working with the workspace</span></a>. To store a file in a database, copy its
-project in the workspace as shown below, or import the file; see
-<a class="reference internal" href="quickstart-database.html#importing-files"><span class="std std-ref">Importing files</span></a>.</p>
+<section id="saving-to-a-database">
+<span id="index-1"></span><h2>Saving to a database<a class="headerlink" href="#saving-to-a-database" title="Link to this heading">#</a></h2>
+<p>To save a project loaded from a database back to its folder, click its save button. See <a class="reference internal" href="quickstart-database.html#working-with-the-workspace"><span class="std std-ref">Working with the workspace</span></a>.</p>
+<p>To store a file in a database, either copy its project in the workspace as described below or import the file.
+See <a class="reference internal" href="quickstart-database.html#importing-files"><span class="std std-ref">Importing files</span></a>.</p>
 <ol class="arabic">
 <li><img alt="Quickstart save copy menu" class="align-right" src="../_images/quickstart-save-copy-menu.png" />
-<p>Right-click the project in the <strong>Workspace</strong> panel and click <strong>Copy to…</strong>.</p>
+<p>Right-click the project in the <strong>Workspace</strong> panel and select <strong>Copy to…</strong>.</p>
 </li>
 <li><img alt="Quickstart save copy dialog" class="align-right" src="../_images/quickstart-save-copy-dialog.png" />
-<p>In the <strong>Select a project…</strong> dialog, enter a name for the new project, in this example <code class="docutils literal notranslate"><span class="pre">Lake</span> <span class="pre">tour</span></code>. Choose
-<strong>Database</strong> and click <strong>OK</strong>.</p>
+<p>In the <strong>Select a project…</strong> dialog, enter a name for the new project (in this example, <code class="docutils literal notranslate"><span class="pre">Lake</span> <span class="pre">tour</span></code>). Select <strong>Database</strong> as the destination and click <strong>OK</strong>.</p>
 </li>
 <li><img alt="Quickstart save copy folder" class="align-right" src="../_images/quickstart-save-copy-folder.png" />
-<p>In the <strong>Select Parent Folder…</strong> dialog, click the arrow to the left of the database to expand it. Select the
-folder for the project, in this example the group <strong>Projects</strong>, and click <strong>OK</strong>.</p>
+<p>In the <strong>Select Parent Folder…</strong> dialog, click the arrow to the left of the database to expand its contents. Select the folder where you want to store the project (in this example, the <strong>Projects</strong> group) and click <strong>OK</strong>.</p>
 </li>
 <li><p>In the <strong>Database Folder…</strong> dialog, leave <strong>Project</strong> selected and click <strong>OK</strong>.</p></li>
 <li><img alt="Quickstart save copied" class="align-right" src="../_images/quickstart-save-copied.png" />
-<p>The copy appears in the <strong>Workspace</strong> panel as <strong>Lake tour &#64; Projects</strong>, with a save button.</p>
+<p>The copy appears in the <strong>Workspace</strong> panel as <strong>Lake tour &#64; Projects</strong>, with a save button next to it.</p>
 </li>
 <li><img alt="Quickstart save copied db" class="align-right" src="../_images/quickstart-save-copied-db.png" />
-<p>In the <strong>Database</strong> panel, the folder <strong>Lake tour</strong> appears too. It’s still empty.</p>
+<p>The <strong>Lake tour</strong> folder also appears in the <strong>Database</strong> panel, but it is still empty.</p>
 </li>
-<li><p>Click the save button of <strong>Lake tour &#64; Projects</strong> in the <strong>Workspace</strong> panel. QMapShack writes the items into the
-folder.</p></li>
+<li><p>In the <strong>Workspace</strong> panel, click the save button next to <strong>Lake tour &#64; Projects</strong>. QMapShack then saves the project’s items in the database folder.</p></li>
 </ol>
-<p>The <strong>Select a project…</strong> dialog from step 2 also opens for <strong>Workspace → Add empty project</strong> and when you add a new
-item to a new project. Choose <strong>Database</strong> there to create the new project in a database, too.</p>
+<p>The <strong>Select a project…</strong> dialog described in step 2 also appears when you choose <strong>Workspace → Add empty project</strong> or add a new item to a new project. Select <strong>Database</strong> in this dialog to create the new project directly in a database, too.</p>
 </section>
 </section>
 
@@ -375,9 +361,9 @@ item to a new project. Choose <strong>Database</strong> there to create the new 
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Saving your work</a><ul>
-<li><a class="reference internal" href="#seeing-unsaved-changes">Seeing unsaved changes</a></li>
+<li><a class="reference internal" href="#recognizing-unsaved-changes">Recognizing unsaved changes</a></li>
 <li><a class="reference internal" href="#saving-to-a-file">Saving to a file</a></li>
-<li><a class="reference internal" href="#saving-into-a-database">Saving into a database</a></li>
+<li><a class="reference internal" href="#saving-to-a-database">Saving to a database</a></li>
 </ul>
 </li>
 </ul>

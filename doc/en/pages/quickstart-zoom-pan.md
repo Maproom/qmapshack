@@ -1,6 +1,7 @@
 # Zooming and panning
 
-This page shows how to move around the map: zoom in and out, move the map, and limit the zoom range of a map.
+This page explains how to navigate the map: zoom in and out, pan the map, and set zoom limits.
+
 
 Images: *© OpenStreetMap contributors*.
 
@@ -13,49 +14,43 @@ Images: *© OpenStreetMap contributors*.
     :align: right
     ```
 
-    Point the mouse at the place you want to look at more closely, here the village of Grän.
-
+    Move the mouse pointer over the place you want to examine more closely, in this example the village of Grän.
 2. ```{image} ../images/quickstart-zoom-pan/quickstart-zoom-pan-wheel-in.png
     :align: right
     ```
 
-    Turn the mouse wheel forward to zoom in, backward to zoom out. Each step of the wheel is one zoom step. The place
-    under the mouse pointer stays where it is. Here the wheel turned two steps forward, and Grän is still under the
-    pointer.
+    Roll the mouse wheel forward to zoom in and backward to zoom out. Each wheel step changes the zoom level by one. The map stays centered on the place under the mouse pointer. Here, the wheel was turned two steps forward, and Grän remains under the pointer.
 
-If the direction feels wrong to you, click **View → Flip Mouse Wheel**. QMapShack remembers this
-setting.
+If you prefer the opposite scroll direction, click **View → Flip Mouse Wheel**. QMapShack remembers this setting.
 
 ```{index} single: Map; move
 ```
 
-## Moving the map
+## Panning the map
 
 - ```{image} ../images/quickstart-zoom-pan/quickstart-zoom-pan-drag.png
     :align: right
     ```
 
-    Drag the map with the left mouse button: hold the button down and move the mouse. The map moves with the pointer;
-    release the button when the part you want to see is in view. Here you drag the map to the right, and Grän moves
-    along with the pointer.
+    To pan the map, hold down the left mouse button and move the mouse. The map follows the pointer. Release the button when the area you want to see is in view. Here, you drag the map to the right, and Grän moves along with the pointer.
 
 ```{index} single: Map; keyboard
 ```
 
 ## Using the keyboard
 
-Click the map once so that it receives the key presses. Then press:
+Click the map once to give it keyboard focus. Then press:
 
 | Key | What it does |
 |---|---|
-| **+** | Zoom in one step, around the middle of the map |
-| **-** | Zoom out one step, around the middle of the map |
-| **Up** | Move the map down by a quarter of the view, to show what lies above |
-| **Down** | Move the map up by a quarter of the view, to show what lies below |
-| **Left** | Move the map right by a quarter of the map, to show what lies to the left |
-| **Right** | Move the map left by a quarter of the map, to show what lies to the right |
+| **+** | Zoom in one step, centered on the middle of the map |
+| **-** | Zoom out one step, centered on the middle of the map |
+| **Up** | Move the map down by a quarter of the view to reveal the area above |
+| **Down** | Move the map up by a quarter of the view to reveal the area below |
+| **Left** | Move the map right by a quarter of the view to reveal the area on the left |
+| **Right** | Move the map left by a quarter of the view to reveal the area on the right |
 
-**+** and **-** work on the main keys and on the number pad.
+**+** and **-** work on both the main keyboard and the numeric keypad.
 
 ```{index} single: Map; scale
 ```
@@ -65,16 +60,17 @@ Click the map once so that it receives the key presses. Then press:
 - ```{image} ../images/quickstart-zoom-pan/quickstart-zoom-pan-scale-bar.png
     :align: right
     ```
-
-    The scale bar at the bottom right of the map shows how long a distance is at the current zoom. To hide it or show
+    
+    The scale bar in the bottom-right corner of the map shows the actual distance represented by its length at the current zoom level. To hide it or show
     it again, click **View → Show Scale**.
+- QMapShack zooms in fixed steps. To change the zoom steps, click **View → Setup Map View** and select an option under **Scales**.
 
-- QMapShack zooms in fixed steps. To change them, click **View → Setup Map View** and choose an option under **Scales**.
-    **Logarithmic** steps through round scales, such as 1, 1.5, 2, 3, 5, 7 and 10 meters per pixel.
-    **Square (optimized for TMS and WMTS tiles)** doubles or halves the scale with each step. Online maps are made
-    of square images, called tiles, and with these steps QMapShack draws them sharp. With **Logarithmic**,
-    QMapShack scales online maps, and they look blurred. If you added the built-in online maps as described in
-    [Turning on maps](quickstart-maps.md), QMapShack has already chosen **Square**.
+    - **Logarithmic** uses steps through rounded scales, such as 1, 1.5, 2, 3, 5, 7, and 10 meters per pixel.
+    - **Square (optimized for TMS and WMTS tiles)** doubles or halves the scale with each step. 
+    
+        Online maps consist of square images called tiles. These zoom steps allow QMapShack to display the tiles sharply. With **Logarithmic**, QMapShack has to resize the tiles, which makes the map look blurred.
+
+        If you added the built-in online maps as described in [Enabling maps](quickstart-maps.md), QMapShack has already selected **Square**.
 
     ```{image} ../images/quickstart-zoom-pan/quickstart-zoom-pan-scales-setup.png
     :class: below-right
@@ -85,34 +81,27 @@ Click the map once so that it receives the key presses. Then press:
 
 ## Limiting a map to a zoom range
 
-You can limit a map to a range of zoom steps. Outside that range, QMapShack does not draw it. A detailed map, for
-example, can then appear only when you zoom in.
+You can restrict a map to a specific zoom range. QMapShack displays the map only within that range. For example, you can make a detailed map appear only when you zoom in.
 
 1. ```{image} ../images/quickstart-zoom-pan/quickstart-zoom-pan-range-open.png
     :align: right
     ```
-
-    Click the arrow to the left of the map's name in the **Maps** panel. Its settings open below it.
-
+    In the **Maps** panel, click the arrow to the left of the map name to expand its settings.
 2. ```{image} ../images/quickstart-zoom-pan/quickstart-zoom-pan-range-buttons.png
     :align: right
     ```
-
-    The bar below the opacity slider shows the current zoom with an indicator. The button to the left of the bar
-    makes the current zoom the limit for zooming in: closer in, QMapShack no longer draws the map. The button to the
-    right of the bar does the same for zooming out. Click a button again to remove its limit.
-
+    
+    The bar below the opacity slider shows the current zoom level with an indicator. 
+    
+    Click the button to the left of the bar to set the current zoom level as the limit for zooming in. QMapShack will then stop displaying the map at closer zoom levels. The button to the right sets the limit for zooming out. Click either button again to remove its limit.
 3. ```{image} ../images/quickstart-zoom-pan/quickstart-zoom-pan-range-set.png
     :align: right
     ```
-
-    Click the right button. Green on the bar now marks the zoom steps at which QMapShack draws the map.
-
-4. Zoom out one step further. The indicator on the bar leaves the green range, and QMapShack no longer draws the
-    map. Zoom in again, and the map comes back.
+    
+    Click the right-hand button. The green section of the bar now shows the zoom levels at which QMapShack displays the map.
+4. Zoom out one more step. The indicator moves outside the green range, and QMapShack stops displaying the map. Zoom in again, and the map reappears.
 
     ```{image} ../images/quickstart-zoom-pan/quickstart-zoom-pan-range-out.png
     :class: below-right
     ```
 
-To remove a limit, click its button again.

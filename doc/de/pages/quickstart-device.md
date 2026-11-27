@@ -9,19 +9,18 @@ holen, die es aufgezeichnet hat.
 ## Das Gerät anschließen
 
 Diese Seite nutzt ein Garmin-Gerät, das als USB-Massenspeicher angeschlossen ist und das Ihr Computer als Laufwerk
-zeigt. Geräte, die über MTP (Media Transfer Protocol) angeschlossen sind, und Geräte anderer Hersteller behandelt
-QMapShack genauso. Was Ihr Computer für ein Gerät braucht, steht auf der Wiki-Seite [GPS Devices][WIKI_DEVICES].
+zeigt. Geräte, die über MTP (Media Transfer Protocol) angeschlossen sind, und Geräte anderer Hersteller behandelt QMapShack genauso. Was Ihr Computer benötigt, um das Gerät zu erkennen, erfahren Sie auf der Wiki-Seite [GPS Devices][WIKI_DEVICES].
 
 1. Schließen Sie das Gerät mit seinem USB-Kabel an Ihren Computer an.
 2. ```{image} ../images/quickstart-device/quickstart-device-connected.png
     :align: right
     ```
 
-    Das Gerät erscheint im Bereich **Arbeitsplatz** unter seinem Modellnamen. QMapShack listet jede Datei mit Tracks
-    und Wegpunkten auf dem Gerät als Projekt darunter auf.
+    Das Gerät erscheint im Bereich **Arbeitsplatz** unter seinem Modellnamen. QMapShack listet darunter jede Datei mit Tracks
+    und Wegpunkten auf dem Gerät als Projekt auf.
 
-Erscheint das Gerät nicht, klicken Sie auf **Arbeitsplatz → Arbeitsplatz konfigurieren** und aktivieren Sie auf der
-Registerkarte **Allgemein** die Option **Geräteunterstützung aktivieren**, falls sie deaktiviert ist. Sie ist
+Erscheint das Gerät nicht, klicken Sie auf **Arbeitsplatz → Arbeitsplatz konfigurieren**. Aktivieren Sie auf der
+Registerkarte **Allgemein** die Option **Geräteunterstützung aktivieren**, falls diese deaktiviert ist. Diese Option ist
 standardmäßig aktiviert.
 
 ```{index} single: Gerät; Projekt senden
@@ -40,11 +39,11 @@ standardmäßig aktiviert.
     :align: right
     ```
 
-    Das Projekt erscheint unter dem Gerät. QMapShack speichert es auf dem Gerät als GPX-Datei mit dem Namen des
-    Projekts, hier `Example.gpx`. Im Dateinamen lässt QMapShack alle Zeichen außer Buchstaben, Ziffern und `_` weg.
+    Das Projekt erscheint unter dem Gerät. QMapShack speichert es auf dem Gerät als  .gpx Datei mit dem Namen des
+    Projekts, hier `Example.gpx`. Im Dateinamen lässt QMapShack alle Zeichen außer Buchstaben, Ziffern und Unterstrich weg.
 
-Sind mehrere Geräte angeschlossen, fragt QMapShack, an welche es das Projekt senden soll. Senden Sie das Projekt noch
-einmal, ersetzt QMapShack seine Kopie auf dem Gerät.
+Sind mehrere Geräte angeschlossen, fragt QMapShack, an welches das Projekt gesendet werden soll. Senden Sie das Projekt noch
+einmal, überschreibt QMapShack die vorhandene Kopie auf dem Gerät.
 
 ```{index} single: Gerät; Aufzeichnung holen
 ```
@@ -55,14 +54,14 @@ einmal, ersetzt QMapShack seine Kopie auf dem Gerät.
     :align: right
     ```
 
-    Klicken Sie auf den Pfeil links neben dem Projekt mit Ihrer Aufzeichnung, hier **Track 2025-06-14 101530**, um
-    seinen Track zu sehen.
+    Klicken Sie auf den Pfeil links neben dem Projekt mit Ihrer Aufzeichnung (hier **Track 2025-06-14 101530**), um es zu öffnen und den Track anzuzeigen.
+    
 
 2. ```{image} ../images/quickstart-device/quickstart-device-copy-menu.png
     :align: right
     ```
 
-    Elemente auf dem Gerät können Sie nicht ändern. Kopieren Sie den Track deshalb in den Arbeitsplatz: Klicken Sie
+    Dateien auf dem Gerät können Sie nicht ändern. Kopieren Sie den Track deshalb in den Arbeitsplatz: Klicken Sie
     mit der rechten Maustaste auf den Track und dann auf **Kopieren nach...**.
 
 3. ```{image} ../images/quickstart-device/quickstart-device-copy-dialog.png
@@ -70,13 +69,13 @@ einmal, ersetzt QMapShack seine Kopie auf dem Gerät.
     ```
 
     Wählen Sie im Dialog **Ein Projekt auswählen...** ein Projekt im Arbeitsplatz aus oder geben Sie einen Namen für
-    ein neues ein, hier `Meine Aufzeichnungen`, und klicken Sie auf **OK**.
+    ein neues Projekt ein (hier `Meine Aufzeichnungen`), und klicken Sie auf **OK**.
 
 4. ```{image} ../images/quickstart-device/quickstart-device-copied.png
     :align: right
     ```
 
-    Der Track liegt jetzt im Projekt im Arbeitsplatz, wo Sie ihn ändern können. Speichern Sie das Projekt, um ihn zu
-    behalten; siehe [Ihre Arbeit speichern](quickstart-save.md).
+    Der Track liegt jetzt im Projekt auf dem Arbeitsplatz, wo Sie ihn ändern können. Speichern Sie das Projekt, um Ihre Änderungen zu
+    behalten. Siehe [Ihre Arbeit speichern](quickstart-save.md).
 
 [WIKI_DEVICES]: https://github.com/Maproom/qmapshack/wiki/DocGisDevices

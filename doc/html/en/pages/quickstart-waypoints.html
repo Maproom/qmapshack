@@ -197,8 +197,8 @@
   <ul class="current">
 <li class="toctree-l1 current has-children"><a class="reference internal" href="quickstart.html">Quick start</a><input aria-label="Toggle navigation of Quick start" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="quickstart-main-window.html">The main window</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart-maps.html">Turning on maps</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart-vector-map.html">Turning on a Garmin map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart-maps.html">Enabling maps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart-vector-map.html">Enabling a Garmin map</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-zoom-pan.html">Zooming and panning</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-dem.html">Elevation data and hillshading</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-load-file.html">Loading a GPX file</a></li>
@@ -247,7 +247,7 @@
         <article role="main" id="furo-main-content">
           <section id="adding-waypoints">
 <h1>Adding waypoints<a class="headerlink" href="#adding-waypoints" title="Link to this heading">#</a></h1>
-<p>This page shows how to add a waypoint to the map. The images use the map from <a class="reference internal" href="quickstart-maps.html"><span class="std std-doc">Turning on maps</span></a>,
+<p>This page shows how to add a waypoint to a map. The images on this page use the map from <a class="reference internal" href="quickstart-maps.html"><span class="std std-doc">Enabling maps</span></a>,
 the DEM from <a class="reference internal" href="quickstart-dem.html"><span class="std std-doc">Elevation data and hillshading</span></a> and <code class="docutils literal notranslate"><span class="pre">Example.gpx</span></code> from
 <a class="reference internal" href="quickstart-load-file.html"><span class="std std-doc">Loading a GPX file</span></a>.</p>
 <p>Images: <em>© OpenStreetMap contributors</em>; <em>Datenquelle: Land Tirol - data.tirol.gv.at, CC BY 4.0</em>;
@@ -256,20 +256,22 @@ the DEM from <a class="reference internal" href="quickstart-dem.html"><span clas
 <span id="index-0"></span><h2>Adding a waypoint<a class="headerlink" href="#adding-a-waypoint" title="Link to this heading">#</a></h2>
 <ol class="arabic">
 <li><img alt="Quickstart waypoints add waypoint" class="align-right" src="../_images/quickstart-waypoints-add-waypoint.png" />
-<p>Right-click the map where the waypoint should go and click <strong>Add Waypoint</strong>. Holding the left mouse button down
-on the map for a moment opens the same menu.</p>
+<p>Right-click the map at the desired waypoint location and select <strong>Add Waypoint</strong>. You can also open the same menu by pressing and holding the left mouse button on the map.</p>
 </li>
 <li><img alt="Quickstart waypoints project" class="align-right" src="../_images/quickstart-waypoints-project.png" />
-<p>Select the project the waypoint goes into, or enter a name for a new project under <strong>New project’s name</strong>.</p>
-<p>For a new project, after you enter the name, under <strong>New project is created as</strong>, choose how QMapShack saves it.
-<strong>*.qms</strong> is QMapShack’s own file format, <strong>*.gpx</strong> a GPX file that other programs and devices read too.
-QMapShack preselects one, so make sure it’s the one you want. The third choice, <strong>Database</strong>, is explained in
-<a class="reference internal" href="quickstart-database.html"><span class="std std-doc">Databases</span></a>.</p>
+<p>Select the project you want to add the waypoint to, or enter a name under <strong>New project’s name</strong> to create a new project.</p>
+<p>For a new project, enter its name and choose how QMapShack should save it under <strong>New project is created as</strong>:</p>
+<ul class="simple">
+<li><p><strong>*.qms</strong> is QMapShack’s own file format.</p></li>
+<li><p><strong>*.gpx</strong> is a .gpx file format that other programs and devices can also read.</p></li>
+</ul>
+<p>QMapShack preselects one of these formats, so make sure it matches your needs.</p>
+<p>The third option, <strong>Database</strong>, is explained in <a class="reference internal" href="quickstart-database.html"><span class="std std-doc">Databases</span></a>.</p>
 <p>Click <strong>OK</strong>.</p>
 </li>
-<li><p>The waypoint’s details window opens. It shows the waypoint’s name, symbol, position, elevation and time.</p>
+<li><p>The waypoint details window opens, showing the waypoint’s name, symbol, position, elevation, and time.</p>
 <img alt="Quickstart waypoints details" class="below-right" src="../_images/quickstart-waypoints-details.png" />
-<p>The <strong>Elevation</strong> comes from the DEM; see <a class="reference internal" href="quickstart-dem.html"><span class="std std-doc">Elevation data and hillshading</span></a>.</p>
+<p>The Elevation value is obtained from the DEM. See <a class="reference internal" href="quickstart-dem.html"><span class="std std-doc">Elevation data and hillshading</span></a>.</p>
 </li>
 <li><p>Click the name, type a new one and press <strong>Enter</strong>.</p>
 <img alt="Quickstart waypoints named" class="below-right" src="../_images/quickstart-waypoints-named.png" />
@@ -278,21 +280,16 @@ QMapShack preselects one, so make sure it’s the one you want. The third choice
 <p>Click the symbol left of the name to choose another one.</p>
 </li>
 <li><img alt="Quickstart waypoints closed" class="align-right" src="../_images/quickstart-waypoints-closed.png" />
-<p>Press <strong>Esc</strong> to close the window. The waypoint now shows on the map with its name.</p>
+<p>Press <strong>Esc</strong> to close the window. The waypoint now appears on the map, with its name displayed next to it.</p>
 </li>
 <li><img alt="Quickstart waypoints saved" class="align-right" src="../_images/quickstart-waypoints-saved.png" />
-<p>The <strong>Workspace</strong> panel now lists the waypoint under its project.</p>
+<p>The <strong>Workspace</strong> panel now shows the waypoint listed under its project.</p>
 </li>
 </ol>
-<p>The save button on the project’s row, marked in the image, means the project has changes that aren’t saved
-to a file. Click it to save the project.</p>
-<p>The first time you save the project, QMapShack asks where to save it. The dialog suggests the
-project’s name as the file name and opens in the folder you last loaded from or saved to. If you have set up the
-<a class="reference internal" href="quickstart-main-window.html#setting-up-the-home-folder"><span class="std std-ref">home folder</span></a>, QMapShack points the dialog to its <code class="docutils literal notranslate"><span class="pre">GPX</span></code> folder.</p>
-<p>On the waypoint’s row, the same symbol is not a button but a change indicator. It shows that the waypoint has changed since the project
-was last saved.</p>
-<p>The first waypoint is called <code class="docutils literal notranslate"><span class="pre">wpt</span></code>. A new waypoint gets the symbol you chose last and the name you gave last. If that
-name ends in a number, QMapShack counts it up: after <code class="docutils literal notranslate"><span class="pre">Hut</span> <span class="pre">3</span></code> comes <code class="docutils literal notranslate"><span class="pre">Hut</span> <span class="pre">4</span></code>.</p>
+<p>The save button in the project’s row, highlighted in the image, indicates that the project has unsaved changes. Click it to save the project to its file.</p>
+<p>The first time you save a project, QMapShack asks where to save it. The dialog suggests the project name as the file name and opens in the folder you last loaded a project from or saved one to. If you have set up the <a class="reference internal" href="quickstart-main-window.html#setting-up-the-home-folder"><span class="std std-ref">home folder</span></a>, QMapShack opens the dialog in its <code class="docutils literal notranslate"><span class="pre">GPX</span></code> subfolder.</p>
+<p>In the waypoint’s row, the same symbol is not a button but serves as a change indicator. It shows that the waypoint has been modified since the project was last saved.</p>
+<p>The first waypoint is named <code class="docutils literal notranslate"><span class="pre">wpt</span></code>. Each new waypoint uses the symbol and name you last selected. If the name ends with a number, QMapShack automatically increments it. For example, after <code class="docutils literal notranslate"><span class="pre">Hut</span> <span class="pre">3</span></code> comes <code class="docutils literal notranslate"><span class="pre">Hut</span> <span class="pre">4</span></code>.</p>
 </section>
 </section>
 

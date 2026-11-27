@@ -198,10 +198,10 @@
 <li class="toctree-l1 current has-children"><a class="reference internal" href="quickstart.html">Schnellstart</a><input aria-label="Toggle navigation of Schnellstart" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="quickstart-main-window.html">Das Hauptfenster</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-maps.html">Karten einschalten</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart-vector-map.html">Eine Garmin-Karte einschalten</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart-vector-map.html">Eine Garmin-Karte anzeigen</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-zoom-pan.html">Zoomen und Verschieben</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-dem.html">Höhendaten und Schummerung</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart-load-file.html">Eine GPX-Datei laden</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart-load-file.html">Eine GPX Datei laden</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-routing.html">Routing einrichten</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-draw-track.html">Einen Track zeichnen</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-waypoints.html">Wegpunkte hinzufügen</a></li>
@@ -247,82 +247,66 @@
         <article role="main" id="furo-main-content">
           <section id="ihre-arbeit-speichern">
 <h1>Ihre Arbeit speichern<a class="headerlink" href="#ihre-arbeit-speichern" title="Link to this heading">#</a></h1>
-<p>Diese Seite zeigt, wie Sie Ihre Projekte speichern: als Datei oder in einer Datenbank.</p>
+<p>Diese Seite erklärt, wie Sie Ihre Projekte als Datei oder in einer Datenbank speichern.</p>
 <section id="ungespeicherte-anderungen-erkennen">
 <span id="index-0"></span><h2>Ungespeicherte Änderungen erkennen<a class="headerlink" href="#ungespeicherte-anderungen-erkennen" title="Link to this heading">#</a></h2>
-<p>Beim nächsten Start stellt QMapShack alle Projekte im Bereich <strong>Arbeitsplatz</strong> wieder her. Dafür speichert es eine
-eigene Kopie jedes Projekts. Die Datei, aus der ein Projekt geladen wurde, ändert sich erst, wenn Sie das Projekt
-speichern. Ein Projekt, das Sie angelegt haben, hat keine Datei, bis Sie es speichern.</p>
+<p>Beim erneuten Start stellt QMapShack alle Projekte im Bereich <strong>Arbeitsplatz</strong> wieder her. Dazu speichert QMapShack eine eigene Kopie jedes Projekts.</p>
+<p>Die Originaldatei, aus der Sie ein Projekt geladen haben, bleibt unverändert, bis Sie das Projekt speichern. Ein neu angelegtes Projekt hat zunächst keine zugehörige Datei. Diese wird erst beim Speichern erstellt.</p>
 <ol class="arabic">
 <li><img alt="Quickstart save changed" class="align-right" src="../_images/quickstart-save-changed.png" />
-<p>Suchen Sie im Bereich <strong>Arbeitsplatz</strong> das Projekt mit ungespeicherten Änderungen: Es zeigt einen Speichern-Knopf in
-seiner Zeile, im Bild markiert. Hier hat <strong>Meine Wegpunkte</strong> einen neuen Wegpunkt, und <strong>Example</strong> hat keine
-Änderungen.</p>
+<p>Suchen Sie im Bereich <strong>Arbeitsplatz</strong> das Projekt mit ungespeicherten Änderungen. In seiner Zeile erscheint eine Speichern-Schaltfläche, die im Bild hervorgehoben ist.</p>
+<p>Im Beispiel enthält <strong>Meine Wegpunkte</strong> einen neu hinzugefügten Wegpunkt, während <strong>Example</strong> unverändert ist.</p>
 </li>
-<li><p>Klicken Sie auf den Speichern-Knopf. Wurde das Projekt noch nie gespeichert, fragt QMapShack zuerst nach dem
-Speicherort; siehe <a class="reference internal" href="#in-eine-datei-speichern">In eine Datei speichern</a>. Nach dem Speichern verschwindet der Knopf.</p></li>
+<li><p>Klicken Sie auf die Speichern-Schaltfläche. Wurde das Projekt noch nie gespeichert, fragt QMapShack zunächst nach dem Speicherort. Weitere Informationen finden Sie unter <a class="reference internal" href="#in-eine-datei-speichern">In eine Datei speichern</a>. Nach dem Speichern verschwindet die Schaltfläche.</p></li>
 </ol>
-<p>In der Zeile eines Elements ist dasselbe Symbol kein Knopf, sondern eine Änderungsanzeige. Sie zeigt, dass sich das
-Element seit dem letzten Speichern des Projekts geändert hat.</p>
+<p>In der Zeile eines Elements dient dasselbe Symbol nicht als Schaltfläche, sondern als Änderungsanzeige. Es signalisiert, dass das Element seit dem letzten Speichern des Projekts geändert wurde.</p>
 </section>
 <section id="in-eine-datei-speichern">
 <h2>In eine Datei speichern<a class="headerlink" href="#in-eine-datei-speichern" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
-<li><p>Klicken Sie im Bereich <strong>Arbeitsplatz</strong> mit der rechten Maustaste auf das Projekt und dann auf
-<strong>Speichern unter…</strong>.</p></li>
-<li><p>Wählen Sie im Dialog den Dateityp aus, geben Sie einen Dateinamen ein und klicken Sie auf <strong>Speichern</strong>.</p></li>
+<li><p>Klicken Sie im Bereich <strong>Arbeitsplatz</strong> mit der rechten Maustaste auf das Projekt und wählen Sie <strong>Speichern unter…</strong>.</p></li>
+<li><p>Wählen Sie im Dialog den gewünschten Dateityp aus, geben Sie einen Dateinamen ein und klicken Sie auf <strong>Speichern</strong>.</p></li>
 </ol>
-<p>Hat das Projekt schon eine Datei, klicken Sie im selben Menü auf <strong>Speichern</strong>. QMapShack überschreibt die Datei ohne
-Nachfrage.</p>
-<p>Die Dateitypen:</p>
+<p>Ist dem Projekt bereits eine Datei zugeordnet, wählen Sie im selben Menü den Eintrag <strong>Speichern</strong>. QMapShack überschreibt die vorhandene Datei ohne Rückfrage.</p>
+<p>Folgende Dateitypen werden unterstützt:</p>
 <ul class="simple">
-<li><p><strong>QMapShack Binary (*.qms)</strong> ist das eigene Format von QMapShack. Es enthält alles, was QMapShack zu einem Projekt
-speichert, auch die Liste der Änderungen. Damit können Sie Änderungen rückgängig machen. Nutzen Sie es für Ihre
-eigenen Projekte.</p></li>
-<li><p><strong>GPS Exchange Format (*.gpx *.GPX)</strong> können auch andere Programme und Geräte lesen. Die Liste der Änderungen
-bleibt erhalten, nach dem erneuten Laden können Sie die Änderungen aber nicht mehr rückgängig machen.</p></li>
+<li><p><strong>QMapShack Binary .qms</strong> ist das native Dateiformat von QMapShack. Es speichert alle Projektdaten, einschließlich der Änderungshistorie. Dadurch können Sie Änderungen auch später noch rückgängig machen. Verwenden Sie dieses Format für Ihre eigenen Projekte.</p></li>
+<li><p><strong>GPS Exchange Format .gpx</strong> wird auch von vielen anderen Programmen und GPS-Geräten unterstützt. Die Änderungshistorie bleibt beim Speichern erhalten. Nach dem erneuten Laden der Datei können Sie die Änderungen jedoch nicht mehr rückgängig machen.</p></li>
 </ul>
-<p><strong>Als GPX o. Erw. speichern…</strong> im Menü des Projekts schreibt eine reine GPX-1.1-Datei ohne die eigenen Daten von
-QMapShack. Sie ist für Programme gedacht, die die Erweiterungen von QMapShack nicht lesen können.</p>
-<p>Speichern Sie ein Projekt in einem anderen Dateityp, schreibt QMapShack eine Kopie. Das Projekt behält seine eigene
-Datei und seinen Speichern-Knopf.</p>
-<p><strong>Datei → Alle GIS Daten speichern</strong> (<strong>Strg+S</strong>) speichert jedes Projekt im Arbeitsplatz. Bei einem Projekt, das
-noch nie gespeichert wurde, fragt QMapShack nach dem Speicherort.</p>
-<p>Schließen Sie ein Projekt mit ungespeicherten Änderungen, fragt QMapShack, ob Sie es vorher speichern möchten.</p>
+<p><strong>Als GPX o. Erw. speichern…</strong> im Projektmenü speichert eine standardkonforme GPX-1.1-Datei ohne QMapShack-spezifische Daten. Verwenden Sie diese Option für Programme, die die Erweiterungen von QMapShack nicht unterstützen.</p>
+<p>Wenn Sie ein Projekt in einem anderen Dateiformat speichern, erstellt QMapShack eine Kopie. Die ursprüngliche Datei bleibt dem Projekt zugeordnet, und die Speichern-Schaltfläche bleibt erhalten.</p>
+<p><strong>Datei → Alle GIS-Daten speichern</strong> (<strong>Strg+S</strong>) speichert alle Projekte im Bereich <strong>Arbeitsplatz</strong>. Wurde ein Projekt noch nie gespeichert, fragt QMapShack nach dem gewünschten Speicherort.</p>
+<p>Wenn Sie ein Projekt mit ungespeicherten Änderungen schließen, fragt QMapShack, ob Sie die Änderungen vorher speichern möchten.</p>
 </section>
 <section id="in-eine-datenbank-speichern">
 <span id="index-1"></span><h2>In eine Datenbank speichern<a class="headerlink" href="#in-eine-datenbank-speichern" title="Link to this heading">#</a></h2>
-<p>Ein Projekt aus einer Datenbank speichern Sie mit seinem Speichern-Knopf in seinen Ordner zurück. Mehr dazu unter
-<a class="reference internal" href="quickstart-database.html#mit-dem-arbeitsplatz-arbeiten"><span class="std std-ref">Mit dem Arbeitsplatz arbeiten</span></a>. Eine Datei legen Sie auf zwei
-Wegen als Projekt in einer Datenbank ab. Kopieren Sie Ihr Projekt im Arbeitsplatz, wie unten gezeigt, oder
-importieren Sie die Datei; siehe <a class="reference internal" href="quickstart-database.html#dateien-importieren"><span class="std std-ref">Dateien importieren</span></a>.</p>
+<p>Ein Projekt, das Sie aus einer Datenbank geladen haben, speichern Sie mit seiner Speichern-Schaltfläche wieder in den zugehörigen Datenbankordner. Weitere Informationen finden Sie unter <a class="reference internal" href="quickstart-database.html#mit-dem-arbeitsplatz-arbeiten"><span class="std std-ref">Mit dem Arbeitsplatz arbeiten</span></a>.</p>
+<p>Um eine Datei als Projekt in einer Datenbank abzulegen, haben Sie zwei Möglichkeiten:</p>
+<ul class="simple">
+<li><p>Kopieren Sie das Projekt im Bereich <strong>Arbeitsplatz</strong>, wie unten beschrieben, oder</p></li>
+<li><p>importieren Sie die Datei. Siehe <a class="reference internal" href="quickstart-database.html#dateien-importieren"><span class="std std-ref">Dateien importieren</span></a>.</p></li>
+</ul>
 <ol class="arabic">
 <li><img alt="Quickstart save copy menu" class="align-right" src="../_images/quickstart-save-copy-menu.png" />
-<p>Klicken Sie im Bereich <strong>Arbeitsplatz</strong> mit der rechten Maustaste auf das Projekt und dann auf
-<strong>Kopieren nach…</strong>.</p>
+<p>Klicken Sie im Bereich <strong>Arbeitsplatz</strong> mit der rechten Maustaste auf das Projekt und wählen Sie <strong>Kopieren nach…</strong>.</p>
 </li>
 <li><img alt="Quickstart save copy dialog" class="align-right" src="../_images/quickstart-save-copy-dialog.png" />
-<p>Geben Sie im Dialog <strong>Ein Projekt auswählen…</strong> einen Namen für das neue Projekt ein, hier <code class="docutils literal notranslate"><span class="pre">Seetour</span></code>. Wählen Sie
-<strong>Datenbank</strong> aus und klicken Sie auf <strong>OK</strong>.</p>
+<p>Geben Sie im Dialog <strong>Ein Projekt auswählen…</strong> einen Namen für das neue Projekt ein, hier beispielsweise <code class="docutils literal notranslate"><span class="pre">Seetour</span></code>. Wählen Sie als Ziel <strong>Datenbank</strong> aus und klicken Sie auf <strong>OK</strong>.</p>
 </li>
 <li><img alt="Quickstart save copy folder" class="align-right" src="../_images/quickstart-save-copy-folder.png" />
-<p>Klicken Sie im Dialog <strong>Übergeordneten Ordner auswählen…</strong> auf den Pfeil links neben der Datenbank, um sie
-aufzuklappen. Wählen Sie den Ordner aus, unter dem das Projekt liegen soll, hier die Gruppe <strong>Projects</strong>, und
-klicken Sie auf <strong>OK</strong>.</p>
+<p>Klicken Sie im Dialog <strong>Übergeordneten Ordner auswählen…</strong> auf den Pfeil links neben der Datenbank, um deren Inhalt aufzuklappen. Wählen Sie den Ordner aus, in dem das Projekt abgelegt werden soll (hier die Gruppe <strong>Projects</strong>) und klicken Sie auf <strong>OK</strong>.</p>
 </li>
-<li><p>Lassen Sie im Dialog <strong>Datenbankordner…</strong> <strong>Projekt</strong> ausgewählt und klicken Sie auf <strong>OK</strong>.</p></li>
+<li><p>Lassen Sie im Dialog <strong>Datenbankordner…</strong> die Option <strong>Projekt</strong> ausgewählt und klicken Sie auf <strong>OK</strong>.</p></li>
 <li><img alt="Quickstart save copied" class="align-right" src="../_images/quickstart-save-copied.png" />
-<p>Die Kopie erscheint im Bereich <strong>Arbeitsplatz</strong> als <strong>Seetour &#64; Projects</strong> und zeigt einen Speichern-Knopf.</p>
+<p>Die Kopie erscheint im Bereich <strong>Arbeitsplatz</strong> unter dem Namen <strong>Seetour &#64; Projects</strong>. Daneben wird eine Speichern-Schaltfläche angezeigt.</p>
 </li>
 <li><img alt="Quickstart save copied db" class="align-right" src="../_images/quickstart-save-copied-db.png" />
-<p>Im Bereich <strong>Datenbank</strong> erscheint der Ordner <strong>Seetour</strong> ebenfalls. Er ist noch leer.</p>
+<p>Auch im Bereich <strong>Datenbank</strong> erscheint der Ordner <strong>Seetour</strong>. Er ist zunächst noch leer.</p>
 </li>
-<li><p>Klicken Sie im Bereich <strong>Arbeitsplatz</strong> auf den Speichern-Knopf von <strong>Seetour &#64; Projects</strong>. QMapShack schreibt
-die Elemente in den Ordner.</p></li>
+<li><p>Klicken Sie im Bereich <strong>Arbeitsplatz</strong> auf die Speichern-Schaltfläche neben <strong>Seetour &#64; Projects</strong>. QMapShack speichert daraufhin die Elemente des Projekts im entsprechenden Datenbankordner.</p></li>
 </ol>
-<p>Den Dialog <strong>Ein Projekt auswählen…</strong> aus Schritt 2 sehen Sie auch bei <strong>Arbeitsplatz → Leeres Projekt hinzufügen</strong>
-und wenn Sie ein neues Element in ein neues Projekt legen. Wählen Sie dort <strong>Datenbank</strong> aus, legt QMapShack auch
-dieses Projekt in einer Datenbank an.</p>
+<p>Der Dialog <strong>Ein Projekt auswählen…</strong> aus Schritt 2 erscheint auch, wenn Sie <strong>Arbeitsplatz → Leeres Projekt hinzufügen</strong> wählen oder ein neues Element in einem neuen Projekt anlegen.</p>
+<p>Wählen Sie in diesem Dialog <strong>Datenbank</strong> aus, um das neue Projekt direkt in einer Datenbank anzulegen.</p>
 </section>
 </section>
 

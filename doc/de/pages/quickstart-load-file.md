@@ -1,6 +1,6 @@
-# Eine GPX-Datei laden
+# Eine GPX Datei laden
 
-Diese Seite zeigt, wie Sie eine GPX-Datei in QMapShack laden, ihre Tracks und Wegpunkte ansehen und sie auf der Karte
+Diese Seite beschreibt, wie Sie eine .gpx Datei in QMapShack laden, ihre Tracks und Wegpunkte ansehen und sie auf der Karte
 finden.
 
 Bilder: *© OpenStreetMap contributors*; *Datenquelle: Land Tirol - data.tirol.gv.at, CC BY 4.0*;
@@ -14,22 +14,16 @@ Bilder: *© OpenStreetMap contributors*; *Datenquelle: Land Tirol - data.tirol.g
 
 ## Die Datei laden
 
-Eine GPX-Datei (GPS Exchange Format) enthält Tracks, Wegpunkte und Routen. GPS-Geräte, Apps und Websites zur
-Tourenplanung speichern und teilen sie in diesem Format. Die Bilder auf dieser Seite zeigen `Example.gpx`, eine Tour
-rund um den Aggenstein.
+Eine `.gpx`-Datei (GPS Exchange Format) enthält Tracks, Wegpunkte und Routen. GPS-Geräte, Apps und Tourenplanungs-Webseiten verwenden dieses Format, um solche Daten zu speichern und auszutauschen. Die Abbildungen auf dieser Seite zeigen die Datei `Example.gpx` mit einer Tour rund um den Aggenstein.
 
 1. Klicken Sie auf **Datei → GIS Daten laden** oder drücken Sie **Strg+L**.
-2. Wählen Sie die GPX-Datei aus und klicken Sie auf **Öffnen**. Um mehrere Dateien auf einmal zu laden, halten Sie
-    **Strg** gedrückt und klicken Sie nacheinander auf die Dateien.
+2. Wählen Sie die .gpx Datei aus und klicken Sie auf **Öffnen**. Um mehrere Dateien gleichzeitig zu laden, halten Sie die Taste **Strg** gedrückt und klicken Sie nacheinander auf die gewünschten Dateien.
 
-Der Dialog öffnet sich in dem Verzeichnis, aus dem Sie zuletzt geladen oder in das Sie zuletzt gespeichert haben.
-Wenn Sie das [Hauptverzeichnis](quickstart-main-window.md#das-hauptverzeichnis-einrichten) eingerichtet haben, stellt
-QMapShack den Dialog auf dessen Verzeichnis `GPX`, einen guten Ort für Ihre Dateien.
+Der Dialog öffnet sich in dem Verzeichnis, aus dem Sie zuletzt eine Datei geladen oder in dem Sie zuletzt eine Datei gespeichert haben. Wenn Sie das [Hauptverzeichnis](quickstart-main-window.md#das-hauptverzeichnis-einrichten) eingerichtet haben, öffnet QMapShack den Dialog direkt im Unterverzeichnis `GPX`. Dort können Sie Ihre .gpx Dateien übersichtlich ablegen.
 
-Statt über das Menü können Sie Dateien auch aus Ihrem Dateimanager auf die Karte ziehen.
+Alternativ zum Menü können Sie Dateien einfach aus Ihrem Dateimanager auf die Karte ziehen.
 
-QMapShack lädt auch seine eigenen `.qms`-Dateien und Dateien anderer Geräte und Programme: `.fit`, `.tcx`, `.slf`,
-`.sml`, `.log` und `.qlb`.
+QMapShack kann auch eigene .qms Dateien sowie Dateien anderer Geräte und Programme in den Formaten .fit, .tcx, .slf, .sml, .log und .qlb laden.
 
 ```{index} single: Projekt
 ```
@@ -39,21 +33,16 @@ QMapShack lädt auch seine eigenen `.qms`-Dateien und Dateien anderer Geräte un
 
 ## Das Projekt im Arbeitsplatz
 
-QMapShack lädt eine Datei als *Projekt*: die Tracks, Routen, Wegpunkte und Gebiete einer Datei, zusammengefasst. Der
-Bereich **Arbeitsplatz** (siehe [Das Hauptfenster](quickstart-main-window.md#das-fenster-beim-ersten-start)) listet es
-unter dem Namen, der in der Datei steht, oder unter dem Dateinamen, wenn die Datei keinen enthält. QMapShack zeigt alles
-im Projekt sofort auf der Karte.
+QMapShack lädt jede Datei als *Projekt*. Darin werden alle Tracks, Routen, Wegpunkte und Gebiete der Datei zusammengefasst. Der Bereich **Arbeitsplatz** (siehe [Das Hauptfenster](quickstart-main-window.md#das-fenster-beim-ersten-start)) zeigt das Projekt unter dem in der Datei gespeicherten Namen an. Ist dort kein Name hinterlegt, wird stattdessen der Dateiname verwendet. 
+
+Alle Elemente des Projekts werden sofort auf der Karte angezeigt.
 
 1. ```{image} ../images/quickstart-load-file/quickstart-load-file-items.png
     :align: right
     ```
 
-    Klicken Sie auf den Pfeil links neben dem Projektnamen. Die Tracks, Routen, Wegpunkte und Gebiete des Projekts
-    erscheinen darunter. Tracks, Routen und Gebiete haben ein Symbol für ihre Art, ein Wegpunkt zeigt sein
-    Wegpunktsymbol.
-
-2. Halten Sie den Mauszeiger über den Namen eines Elements (Track, Route, Wegpunkt oder Gebiet). Ein Tooltip zeigt eine
-    Zusammenfassung des Elements.
+    Klicken Sie auf den Pfeil links neben dem Projektnamen, um das Projekt aufzuklappen. Darunter erscheinen seine Tracks, Routen, Wegpunkte und Gebiete. Tracks, Routen und Gebiete sind jeweils durch ein Symbol gekennzeichnet, während Wegpunkte ihr zugewiesenes Symbol anzeigen.
+2. Bewegen Sie den Mauszeiger über den Namen eines Elements (Track, Route, Wegpunkt oder Gebiet). Daraufhin erscheint ein Tooltip mit einer kurzen Zusammenfassung des Elements.
 
 ```{index} single: Element; auf der Karte finden
 ```
@@ -64,11 +53,9 @@ im Projekt sofort auf der Karte.
 :align: right
 ```
 
-Doppelklicken Sie auf ein Element im Bereich **Arbeitsplatz**. Die Karte zoomt auf das Element.
+Doppelklicken Sie im Bereich **Arbeitsplatz** auf ein Element, um die Karte darauf zu zoomen.
 
-Bei einem Track hebt QMapShack den Track außerdem auf der Karte hervor. Ein Kasten unten rechts zeigt eine
-Zusammenfassung des Tracks: Länge, Anstieg, Zeit, Geschwindigkeit und mehr. Ein kleines Diagramm unten links zeigt das
-Höhenprofil des Tracks.
+Bei einem Track hebt QMapShack diesen zusätzlich auf der Karte hervor. Ein Kasten unten rechts zeigt eine Zusammenfassung mit Angaben zu Länge, Höhengewinn, Dauer, Geschwindigkeit und weiteren Werten. Ein kleines Diagramm unten links stellt das Höhenprofil des Tracks dar.
 
 ```{image} ../images/quickstart-load-file/quickstart-load-file-zoomed.png
 :class: below-right
@@ -83,31 +70,26 @@ Höhenprofil des Tracks.
     :align: right
     ```
 
-    Klicken Sie auf den Knopf mit dem Auge rechts in der Zeile des Projekts. Alles im Projekt verschwindet von
-    der Karte, und das Projekt und seine Elemente werden grau.
+    Klicken Sie auf die Augenschaltfläche rechts in der Projektzeile. Alle Elemente des Projekts werden daraufhin auf der Karte ausgeblendet. Das Projekt und seine Elemente erscheinen nun grau.
+2. Klicken Sie erneut auf die Augenschaltfläche, um das Projekt wieder auf der Karte einzublenden.
 
-2. Klicken Sie noch einmal auf den Knopf mit dem Auge, um das Projekt wieder anzuzeigen.
-
-Solange ein Projekt ausgeblendet ist, ändert ein Doppelklick auf eines seiner Elemente den Kartenausschnitt nicht.
+Solange ein Projekt ausgeblendet ist, hat ein Doppelklick auf eines seiner Elemente keine Auswirkung auf den Kartenausschnitt.
 
 ```{index} single: Arbeitsplatz; für den nächsten Start behalten
 ```
 
 ## Den Arbeitsplatz behalten
 
-QMapShack merkt sich die Projekte im Bereich **Arbeitsplatz** bis zum nächsten Start.
+QMapShack speichert die Projekte im Bereich **Arbeitsplatz**, so dass sie beim nächsten Programmstart wieder zur Verfügung stehen.
 
-Dafür speichert es eine eigene Kopie jedes Projekts und lässt die geladene Datei unverändert. QMapShack schreibt eine
-Änderung erst in die Datei, wenn Sie das Projekt speichern.
+Dazu legt QMapShack eine eigene Kopie jedes Projekts an und lässt die ursprünglich geladene Datei unverändert. 
 
-QMapShack speichert den Arbeitsplatz alle 5 Minuten und beim Beenden. So ändern Sie das Intervall:
+Änderungen werden erst dann in die Datei übernommen, wenn Sie das Projekt speichern.
+
+QMapShack speichert den Arbeitsplatz alle fünf Minuten sowie beim Beenden des Programms. So ändern Sie das Speicherintervall:
 
 1. Klicken Sie auf **Arbeitsplatz → Arbeitsplatz konfigurieren**.
-2. Stellen Sie auf dem Reiter **Allgemein** die Minuten neben
-    **Arbeitsplatz beim Beenden speichern, und alle** ein. Mit 0 speichert QMapShack den Arbeitsplatz nur beim
-    Beenden.
-3. Klicken Sie auf **OK**, bestätigen Sie die Meldung und starten Sie QMapShack neu. Die neue Einstellung gilt erst
-    nach einem Neustart.
+2. Legen Sie im Reiter **Allgemein** neben **Arbeitsplatz beim Beenden speichern, und alle** das gewünschte Speicherintervall in Minuten fest. Bei einem Wert von `0` speichert QMapShack den Arbeitsplatz nur beim Beenden des Programms.
+3. Klicken Sie auf **OK**, bestätigen Sie die Meldung und starten Sie QMapShack neu. Die neue Einstellung wird erst nach einem Neustart wirksam.
 
-Wenn Sie das Kontrollkästchen vor **Arbeitsplatz beim Beenden speichern, und alle** deaktivieren, speichert QMapShack
-den Arbeitsplatz nicht mehr. Beim nächsten Start ist der Arbeitsplatz so, wie er zuletzt gespeichert wurde.
+Wenn Sie das Kontrollkästchen vor **Arbeitsplatz beim Beenden speichern, und alle** deaktivieren, speichert QMapShack den Arbeitsplatz nicht mehr automatisch. Beim nächsten Programmstart wird der zuletzt gespeicherte Zustand des Arbeitsplatzes wiederhergestellt.

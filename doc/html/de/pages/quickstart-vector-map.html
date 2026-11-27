@@ -6,7 +6,7 @@
 <link rel="index" title="Stichwortverzeichnis" href="../genindex.html"><link rel="search" title="Suche" href="../search.html"><link rel="next" title="Zoomen und Verschieben" href="quickstart-zoom-pan.html"><link rel="prev" title="Karten einschalten" href="quickstart-maps.html">
 
     <!-- Generated with Sphinx 9.1.1 and Furo 2025.12.19 -->
-        <title>Eine Garmin-Karte einschalten - QMapShack-Dokumentation</title>
+        <title>Eine Garmin-Karte anzeigen - QMapShack-Dokumentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
@@ -198,10 +198,10 @@
 <li class="toctree-l1 current has-children"><a class="reference internal" href="quickstart.html">Schnellstart</a><input aria-label="Toggle navigation of Schnellstart" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="quickstart-main-window.html">Das Hauptfenster</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-maps.html">Karten einschalten</a></li>
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Eine Garmin-Karte einschalten</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Eine Garmin-Karte anzeigen</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-zoom-pan.html">Zoomen und Verschieben</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-dem.html">Höhendaten und Schummerung</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart-load-file.html">Eine GPX-Datei laden</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart-load-file.html">Eine GPX Datei laden</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-routing.html">Routing einrichten</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-draw-track.html">Einen Track zeichnen</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-waypoints.html">Wegpunkte hinzufügen</a></li>
@@ -245,76 +245,68 @@
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="eine-garmin-karte-einschalten">
-<h1>Eine Garmin-Karte einschalten<a class="headerlink" href="#eine-garmin-karte-einschalten" title="Link to this heading">#</a></h1>
-<p>Diese Seite zeigt, wie Sie eine Garmin-Karte zu QMapShack hinzufügen, einschalten und einstellen, was sie zeigt.</p>
+          <section id="eine-garmin-karte-anzeigen">
+<h1>Eine Garmin-Karte anzeigen<a class="headerlink" href="#eine-garmin-karte-anzeigen" title="Link to this heading">#</a></h1>
+<p>Diese Seite zeigt, wie Sie eine Garmin-Karte zu QMapShack hinzufügen, anzeigen und einstellen, was sie zeigt.</p>
 <p>Bilder: <em>© OpenStreetMap contributors, created by BBBike</em>.</p>
 <section id="garmin-karten">
 <span id="index-1"></span><span id="index-0"></span><h2>Garmin-Karten<a class="headerlink" href="#garmin-karten" title="Link to this heading">#</a></h2>
-<p>Eine Online-Karte besteht aus Bildern, die QMapShack lädt, während Sie sie ansehen. Eine Garmin-Karte ist dagegen
-eine Vektorkarte: eine Datei mit Straßen, Wegen, Gebieten und Punkten, die QMapShack selbst zeichnet. Sie braucht
+<p>Eine Online-Karte besteht aus Bildern, die QMapShack während der Betrachtung der Karte lädt. Eine Garmin-Karte ist dagegen
+eine Vektorkarte: eine Datei mit Straßen, Wegen, Gebieten und Punkten, die QMapShack selbst darstellt. Sie braucht
 keine Internetverbindung.</p>
-<p>Garmin-Karten sind <code class="docutils literal notranslate"><span class="pre">.img</span></code>-Dateien, und sie sind die einzigen Vektorkarten, die QMapShack liest. Das Beispiel auf dieser
-Seite ist ein Ausschnitt aus OpenStreetMap-Daten, erstellt mit dem <a class="reference external" href="https://extract.bbbike.org/">BBBike extract service</a>. Dort können Sie
-auch einen für Ihre eigene Gegend erstellen.</p>
-<p>Zwei Arten von <code class="docutils literal notranslate"><span class="pre">.img</span></code>-Dateien lassen sich nicht öffnen:</p>
+<p>Garmin-Karten sind .img Dateien. Dies sind die einzigen Vektorkarten, die QMapShack liest.</p>
+<p>Das Beispiel auf dieser
+Seite ist ein Ausschnitt aus OpenStreetMap-Daten. Dieser wurde mit dem <a class="reference external" href="https://extract.bbbike.org/">BBBike extract service</a> erstellt. Dort können Sie
+auch einen Ausschnitt für Ihre eigene Gegend erstellen.</p>
+<p>Zwei Arten von .img Dateien lassen sich nicht in QMapShack öffnen:</p>
 <ul class="simple">
-<li><p>Karten im neueren NT-Format von Garmin, das auch manche freie Karten nutzen. QMapShack meldet <strong>Die Datei hat
-das NT Format.</strong></p></li>
-<li><p>Gesperrte Karten, wie Garmin sie verkauft. QMapShack meldet, dass die Datei verschlüsselte Daten enthält.</p></li>
+<li><p>Karten im neueren NT-Format von Garmin, das auch manche freie Karten nutzen. QMapShack meldet dann <strong>Die Datei hat das NT Format.</strong></p></li>
+<li><p>Gesperrte Karten, wie Garmin sie vertreibt. QMapShack meldet dann, dass die Datei verschlüsselte Daten enthält.</p></li>
 </ul>
 </section>
 <section id="die-karte-hinzufugen">
 <span id="index-2"></span><h2>Die Karte hinzufügen<a class="headerlink" href="#die-karte-hinzufugen" title="Link to this heading">#</a></h2>
-<p>QMapShack zeigt jede Karte an, die direkt in einem seiner Kartenverzeichnisse liegt. Das Verzeichnis <code class="docutils literal notranslate"><span class="pre">Maps</span></code> in Ihrem
-<a class="reference internal" href="quickstart-main-window.html#das-hauptverzeichnis-einrichten"><span class="std std-ref">Hauptverzeichnis</span></a> ist eines davon.</p>
+<p>QMapShack zeigt jede Karte an, die in einem seiner Kartenverzeichnisse liegt. Das Verzeichnis <code class="docutils literal notranslate"><span class="pre">Maps</span></code> in Ihrem
+<a class="reference internal" href="quickstart-main-window.html#das-hauptverzeichnis-einrichten"><span class="std std-ref">Hauptverzeichnis</span></a> ist eines dieser Verzeichnisse.</p>
 <ol class="arabic">
-<li><p>Kopieren Sie die <code class="docutils literal notranslate"><span class="pre">.img</span></code>-Datei in das Verzeichnis <code class="docutils literal notranslate"><span class="pre">Maps</span></code>.</p></li>
+<li><p>Kopieren Sie die .img Datei in das Verzeichnis <code class="docutils literal notranslate"><span class="pre">Maps</span></code>.</p></li>
 <li><img alt="Quickstart vector map listed" class="align-right" src="../_images/quickstart-vector-map-listed.png" />
-<p>Nach einigen Sekunden erscheint die Karte in der Liste im Bereich <strong>Karten</strong>, grau wie jede ausgeschaltete
-Karte. Sie heißt wie ihre Datei, ohne den Dateityp und mit Leerzeichen statt Unterstrichen: <code class="docutils literal notranslate"><span class="pre">Tannheimer_Tal.img</span></code>
+<p>Nach einigen Sekunden erscheint die Karte in der Liste im Bereich <strong>Karten</strong> in grauer Schrift wie jede ausgeschaltete
+Karte. Sie heißt wie die zugehörige Datei, aber ohne den Dateityp und mit Leerzeichen statt Unterstrichen: <code class="docutils literal notranslate"><span class="pre">Tannheimer_Tal.img</span></code>
 steht in der Liste als <strong>Tannheimer Tal</strong>.</p>
 </li>
-<li><p>Um die Karte einzuschalten, klicken Sie auf den Knopf in ihrer Zeile. Die Zeile wird fett und zeigt
-<strong>aktiv</strong>.</p>
+<li><p>Um die Karte zu aktivieren, klicken Sie auf die Schaltfläche am Ende der Zeile. Die Zeile zeigt jetzt fett den Status <strong>aktiv</strong> an.</p>
 <img alt="Quickstart vector map map on" class="below-right" src="../_images/quickstart-vector-map-map-on.png" />
 </li>
 </ol>
 </section>
 <section id="die-detailstufe-einstellen">
 <span id="index-3"></span><h2>Die Detailstufe einstellen<a class="headerlink" href="#die-detailstufe-einstellen" title="Link to this heading">#</a></h2>
-<p>Eine Garmin-Karte enthält mehrere Detailstufen, und QMapShack wählt eine passend zum Zoom. Für jede Karte können
+<p>Eine Garmin-Karte enthält mehrere Detailstufen. QMapShack wählt eine passend zum Zoom aus. Für jede Karte können
 Sie einstellen, ob sie mehr oder weniger Details zeigt.</p>
-<ol class="arabic">
-<li><img alt="Quickstart vector map settings" class="align-right" src="../_images/quickstart-vector-map-settings.png" />
-<p>Klicken Sie auf den Pfeil links vom Namen der Karte, um ihre Einstellungen zu öffnen.</p>
-</li>
-</ol>
 <ul>
-<li><p><strong>Details</strong> legt fest, wie viel die Karte zeigt: über 0 mehr als üblich bei derselben Zoomstufe, unter 0 weniger.
-0 ist die Voreinstellung. Im Bild unten steht <strong>Details</strong> auf 5.</p>
+<li><img alt="Quickstart vector map settings" class="align-right" src="../_images/quickstart-vector-map-settings.png" />
+<p>Klicken Sie auf den Pfeil links vom Namen der Karte, um deren Einstellungen zu öffnen.</p>
+</li>
+<li><p><strong>Details</strong> legt fest, wie viele Informationen auf der Karte angezeigt werden. Ein Wert größer als 0 zeigt bei gleicher Zoomstufe mehr Details als üblich an, ein Wert kleiner als 0 entsprechend weniger. Der Standardwert ist 0. In der Abbildung unten ist <strong>Details</strong> auf 5 eingestellt.</p>
 <img alt="Quickstart vector map detail more" class="below-right" src="../_images/quickstart-vector-map-detail-more.png" />
 </li>
 <li><p>Aktivieren oder deaktivieren Sie <strong>Gebiete</strong>, <strong>Linien</strong> und <strong>Punkte</strong>, um diese Teile der Karte ein- oder
 auszublenden. Ohne Gebiete zum Beispiel
-verschwinden die Wälder, und Wege treten hervor.</p>
+verschwinden die Wälder, und die Wege treten hervor.</p>
 <img alt="Quickstart vector map no areas" class="below-right" src="../_images/quickstart-vector-map-no-areas.png" />
 </li>
 </ul>
 </section>
 <section id="das-aussehen-der-karte-typ-dateien">
 <span id="index-4"></span><h2>Das Aussehen der Karte: TYP-Dateien<a class="headerlink" href="#das-aussehen-der-karte-typ-dateien" title="Link to this heading">#</a></h2>
-<p>Farben und Symbole einer Garmin-Karte kommen aus einer TYP-Datei. Die meisten Garmin-Karten bringen ihre eigene
-mit, so auch diese.</p>
+<p>Farben und Symbole einer Garmin-Karte werden in einer TYP Datei festgelegt. Die meisten Garmin-Karten enthalten eine eigene TYP-Datei. Bei der auf dieser Seite benutzten Karte ist das nicht anders.</p>
 <ul>
 <li><img alt="Quickstart vector map typ row" class="align-right" src="../_images/quickstart-vector-map-typ-row.png" />
-<p>Unten in den Einstellungen der Karte nennt <strong>TYP Datei</strong> eine externe TYP-Datei, sobald Sie eine laden. Ist
-das Feld leer, nutzt die Karte ihre eigene.</p>
+<p>Am unteren Ende der Karteneinstellungen zeigt das Feld <strong>TYP Datei</strong> den Namen einer externen TYP Datei an, sofern eine solche geladen wurde. Ist das Feld leer, verwendet die Karte ihre integrierte TYP Datei.</p>
 </li>
-<li><p>Um eine andere zu laden, klicken Sie auf den Knopf mit dem Ordnersymbol und wählen eine <code class="docutils literal notranslate"><span class="pre">.typ</span></code>-Datei aus.
-Um wieder die eigene TYP-Datei der Karte zu nutzen, klicken Sie auf den Knopf mit dem Kreuzsymbol.</p></li>
-<li><p>Eine TYP-Datei ist für einen Kartenstil gemacht. Eine TYP-Datei für eine andere Karte kann dieser Karte
-falsche Farben und Symbole geben.</p></li>
+<li><p>Um eine andere TYP Datei zu laden, klicken Sie auf die Schaltfläche mit dem Ordnersymbol und wähle eine .typ Datei aus. Um wieder die integrierte TYP Datei der Karte zu verwenden, klicken Sie auf die Schaltfläche mit dem Kreuzsymbol.</p></li>
+<li><p>Jede TYP Datei ist für einen bestimmten Kartenstil ausgelegt. Die Verwendung einer TYP Datei, die für eine andere Karte bestimmt ist, kann zu falschen Farben und Symbolen führen.</p></li>
 </ul>
 </section>
 </section>
@@ -374,7 +366,7 @@ falsche Farben und Symbole geben.</p></li>
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Eine Garmin-Karte einschalten</a><ul>
+<li><a class="reference internal" href="#">Eine Garmin-Karte anzeigen</a><ul>
 <li><a class="reference internal" href="#garmin-karten">Garmin-Karten</a></li>
 <li><a class="reference internal" href="#die-karte-hinzufugen">Die Karte hinzufügen</a></li>
 <li><a class="reference internal" href="#die-detailstufe-einstellen">Die Detailstufe einstellen</a></li>

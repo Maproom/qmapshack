@@ -198,10 +198,10 @@
 <li class="toctree-l1 current has-children"><a class="reference internal" href="quickstart.html">Schnellstart</a><input aria-label="Toggle navigation of Schnellstart" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="quickstart-main-window.html">Das Hauptfenster</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-maps.html">Karten einschalten</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart-vector-map.html">Eine Garmin-Karte einschalten</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart-vector-map.html">Eine Garmin-Karte anzeigen</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-zoom-pan.html">Zoomen und Verschieben</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-dem.html">Höhendaten und Schummerung</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart-load-file.html">Eine GPX-Datei laden</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart-load-file.html">Eine GPX Datei laden</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-routing.html">Routing einrichten</a></li>
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Einen Track zeichnen</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-waypoints.html">Wegpunkte hinzufügen</a></li>
@@ -248,29 +248,27 @@
           <section id="einen-track-zeichnen">
 <h1>Einen Track zeichnen<a class="headerlink" href="#einen-track-zeichnen" title="Link to this heading">#</a></h1>
 <p>Diese Seite zeigt, wie Sie mit dem Router aus <a class="reference internal" href="quickstart-routing.html"><span class="std std-doc">Routing einrichten</span></a> einen eigenen Track zeichnen.
-Die Bilder nutzen außerdem die Karte aus <a class="reference internal" href="quickstart-maps.html"><span class="std std-doc">Karten einschalten</span></a>, das DEM aus
-<a class="reference internal" href="quickstart-dem.html"><span class="std std-doc">Höhendaten und Schummerung</span></a> und <code class="docutils literal notranslate"><span class="pre">Example.gpx</span></code> aus <a class="reference internal" href="quickstart-load-file.html"><span class="std std-doc">Eine GPX-Datei laden</span></a>.</p>
+Die Bilder nutzen</p>
+<ul class="simple">
+<li><p>die Karte aus <a class="reference internal" href="quickstart-maps.html"><span class="std std-doc">Karten einschalten</span></a>,</p></li>
+<li><p>das DEM aus
+<a class="reference internal" href="quickstart-dem.html"><span class="std std-doc">Höhendaten und Schummerung</span></a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Example.gpx</span></code> aus <a class="reference internal" href="quickstart-load-file.html"><span class="std std-doc">Eine GPX-Datei laden</span></a>.</p></li>
+</ul>
 <p>Bilder: <em>© OpenStreetMap contributors</em>; <em>Datenquelle: Land Tirol - data.tirol.gv.at, CC BY 4.0</em>;
 <em><code class="docutils literal notranslate"><span class="pre">Example.gpx</span></code>: fuzzybear, CC BY-SA 4.0</em>.</p>
 <section id="einen-track-beginnen">
 <span id="index-0"></span><h2>Einen Track beginnen<a class="headerlink" href="#einen-track-beginnen" title="Link to this heading">#</a></h2>
-<p>Während Sie zeichnen, enthält eine Leiste oben auf der Karte die Werkzeuge zum Zeichnen. <strong>Als neu speichern</strong>
-speichert den Track, siehe <a class="reference internal" href="#den-track-speichern">Den Track speichern</a>; <strong>Abbrechen</strong> verwirft ihn.</p>
+<p>Während Sie zeichnen, zeigt eine Leiste oben auf der Karte die Zeichenwerkzeuge an. Mit <strong>Als neu speichern</strong> speichern Sie den Track, siehe <a class="reference internal" href="#den-track-speichern">Den Track speichern</a>. <strong>Abbrechen</strong> verwirft den Track.</p>
 <img alt="Quickstart draw track edit bar" class="below-right" src="../_images/quickstart-draw-track-edit-bar.png" />
 <ol class="arabic">
 <li><img alt="Quickstart draw track add track" class="align-right" src="../_images/quickstart-draw-track-add-track.png" />
-<p>Klicken Sie mit der rechten Maustaste auf die Karte, wo der Track beginnen soll, und klicken Sie auf
-<strong>Track hinzufügen</strong>. Dasselbe Menü öffnet sich, wenn Sie die linke Maustaste einen Moment auf der Karte gedrückt
-halten.</p>
+<p>Klicken Sie mit der rechten Maustaste auf die gewünschte Startposition in der Karte und wählen Sie <strong>Track hinzufügen</strong>. Dasselbe Menü öffnet sich, wenn Sie die linke Maustaste  auf der Karte gedrückt halten.</p>
 </li>
-<li><p>Bewegen Sie die Maus dorthin, wo der Track weitergeht, und klicken Sie. Jeder Klick fügt einen Punkt hinzu, und
-eine gerade Linie verbindet ihn mit dem Punkt davor. Für gerade Linien muss in der Leiste <strong>O</strong> aktiv sein; ist
-ein anderer Buchstabe aktiv, klicken Sie zuerst auf <strong>O</strong>.</p>
+<li><p>Bewegen Sie die Maus zum nächsten Punkt des Tracks und klicken Sie. Jeder Klick fügt einen Punkt hinzu, der durch eine gerade Linie mit dem vorherigen Punkt verbunden wird. Damit QMapShack gerade Linien zeichnet, muss in der Leiste <strong>O</strong> aktiv sein. Ist ein anderer Buchstabe aktiv, klicken Sie zuerst auf <strong>O</strong>.</p>
 <img alt="Quickstart draw track drawing" class="below-right" src="../_images/quickstart-draw-track-drawing.png" />
 </li>
-<li><p>Wenn der Track fertig ist, klicken Sie mit der rechten Maustaste, um keine Punkte mehr hinzuzufügen. Um
-weiterzuzeichnen, bewegen Sie die Maus knapp über den ersten oder letzten Punkt hinaus, bis ein rotes Quadrat ihn
-markiert, und klicken Sie.</p></li>
+<li><p>Wenn Sie den Track fertig gezeichnet haben, klicken Sie mit der rechten Maustaste, um das Hinzufügen von Punkten zu beenden. Um weiterzuzeichnen, bewegen Sie die Maus knapp über den ersten oder letzten Punkt hinaus. Sobald ein rotes Quadrat erscheint, klicken Sie.</p></li>
 </ol>
 </section>
 <section id="entlang-von-wegen-zeichnen">
@@ -279,98 +277,71 @@ markiert, und klicken Sie.</p></li>
 <li><img alt="Quickstart draw track mode a" class="align-right" src="../_images/quickstart-draw-track-mode-a.png" />
 <p>Während Sie Punkte hinzufügen, klicken Sie in der Leiste auf <strong>A</strong> oder drücken Sie die Taste <strong>A</strong>.</p>
 </li>
-<li><p>Bewegen Sie die Maus zum nächsten Punkt und halten Sie sie einen Moment still. Der Router findet die Strecke
-entlang von Wegen und Straßen, und die Linie folgt ihr. Er berechnet sie für das Profil, das im Bereich
-<strong>Streckenführung</strong> ausgewählt ist. Klicken Sie, um diesen Teil zum Track hinzuzufügen.</p>
+<li><p>Bewegen Sie die Maus zum nächsten Punkt und halten Sie sie kurz still. Der Router berechnet eine Strecke entlang von Wegen und Straßen, der der Track folgt. Dabei verwendet er das Profil, das im Bereich <strong>Streckenführung</strong> ausgewählt ist. Klicken Sie, um den berechneten Abschnitt zum Track hinzuzufügen.</p>
 <img alt="Quickstart draw track routed" class="below-right" src="../_images/quickstart-draw-track-routed.png" />
+<p>Dies funktioniert nur mit einem Router, der Strecken sofort berechnen kann. Siehe <a class="reference internal" href="quickstart-routing.html#was-ein-router-macht"><span class="std std-ref">Was ein Router macht</span></a>. Ohne einen solchen Router ist die Schaltfläche ausgegraut. Der Modus, der beim Speichern oder Abbrechen eines Tracks aktiv ist, bleibt auch beim nächsten Track eingestellt.</p>
 </li>
 </ol>
-<p><strong>A</strong> funktioniert nur mit einem Router, der sofort antwortet; siehe
-<a class="reference internal" href="quickstart-routing.html#was-ein-router-macht"><span class="std std-ref">Was ein Router macht</span></a>. Ohne einen solchen Router ist der Knopf grau.
-Der Buchstabe, der beim Speichern oder Abbrechen des Tracks aktiv ist, ist beim nächsten Track wieder aktiv.</p>
 </section>
 <section id="entlang-eines-tracks-zeichnen">
 <span id="index-2"></span><h2>Entlang eines Tracks zeichnen<a class="headerlink" href="#entlang-eines-tracks-zeichnen" title="Link to this heading">#</a></h2>
 <ol class="arabic">
 <li><img alt="Quickstart draw track mode t" class="align-right" src="../_images/quickstart-draw-track-mode-t.png" />
-<p>Klicken Sie mit der rechten Maustaste auf einen geladenen Track, wo Ihr Track beginnen soll, zum Beispiel auf den
-in <code class="docutils literal notranslate"><span class="pre">Example.gpx</span></code>, und klicken Sie auf <strong>Track hinzufügen</strong>. Klicken Sie dann in der Leiste auf <strong>T</strong> oder drücken
-Sie die Taste <strong>T</strong>.</p>
+<p>Klicken Sie mit der rechten Maustaste auf den geladenen Track, an dem Ihr neuer Track beginnen soll, zum Beispiel auf den Track in <code class="docutils literal notranslate"><span class="pre">Example.gpx</span></code>. Wählen Sie danach <strong>Track hinzufügen</strong>. Klicken Sie anschließend in der Leiste auf <strong>T</strong> oder drücken Sie die Taste <strong>T</strong>.</p>
 </li>
-<li><p>Bewegen Sie die Maus entlang dieses Tracks zum nächsten Punkt. QMapShack zeigt diesen Track gelb, und Ihre Linie
-folgt ihm. Das klappt nur, wenn Ihr letzter Punkt und der Mauszeiger beide auf diesem Track liegen. Klicken Sie,
-um diesen Teil zum Track hinzuzufügen.</p>
+<li><p>Bewegen Sie die Maus entlang des geladenen Tracks zum nächsten Punkt. QMapShack hebt den Track gelb hervor. Ihr neuer Track folgt seinem Verlauf. Das funktioniert nur, wenn sich sowohl Ihr letzter Punkt als auch der Mauszeiger auf dem geladenen Track befinden. Klicken Sie, um den hervorgehobenen Abschnitt zu Ihrem Track hinzuzufügen.</p>
 <img alt="Quickstart draw track along track" class="below-right" src="../_images/quickstart-draw-track-along-track.png" />
 </li>
 </ol>
 </section>
 <section id="gerade-linien-und-vektorkarten">
 <span id="index-3"></span><h2>Gerade Linien und Vektorkarten<a class="headerlink" href="#gerade-linien-und-vektorkarten" title="Link to this heading">#</a></h2>
-<p>Klicken Sie auf <strong>O</strong> oder drücken Sie die Taste <strong>O</strong>, um wieder gerade Linien zu zeichnen. <strong>V</strong> oder die Taste
-<strong>V</strong> folgt den Linien einer <a class="reference internal" href="quickstart-vector-map.html"><span class="std std-doc">Vektorkarte</span></a>, etwa einer Garmin-Karte. Das brauchen Sie selten:
-Karte und Routingdaten stammen meist beide aus OpenStreetMap, deshalb folgt <strong>A</strong> schon denselben Wegen.</p>
+<p>Klicken Sie auf <strong>O</strong> oder drücken Sie die Taste <strong>O</strong>, um wieder gerade Linien zu zeichnen.</p>
+<p>Mit <strong>V</strong> oder der Taste <strong>V</strong> folgen Sie den Strecken einer <a class="reference internal" href="quickstart-vector-map.html"><span class="std std-doc">Vektorkarte</span></a>, beispielsweise einer Garmin-Karte. Diesen Modus brauchen Sie nur selten: Da Karte und Routingdaten meist beide aus OpenStreetMap stammen, folgt <strong>A</strong> bereits denselben Strecken.</p>
 </section>
-<section id="den-track-korrigieren">
-<span id="index-4"></span><h2>Den Track korrigieren<a class="headerlink" href="#den-track-korrigieren" title="Link to this heading">#</a></h2>
+<section id="den-track-bearbeiten">
+<span id="index-4"></span><h2>Den Track bearbeiten<a class="headerlink" href="#den-track-bearbeiten" title="Link to this heading">#</a></h2>
 <img alt="Quickstart draw track point tools" class="align-right" src="../_images/quickstart-draw-track-point-tools.png" />
-<p>Mit den vier Knöpfen rechts von <strong>Abbrechen</strong> ändern Sie die Punkte der Linie. Von links nach rechts verschieben
-sie Punkte, fügen Punkte hinzu, wählen einen Punktebereich und löschen Punkte.</p>
+<p>Mit den vier Schaltflächen rechts neben <strong>Abbrechen</strong> bearbeiten Sie die Trackpunkte. Von links nach rechts: Punkte verschieben, Punkte hinzufügen, einen Bereich von Punkten auswählen und Punkte löschen.</p>
 <ul class="simple">
-<li><p>Um einen Punkt zu verschieben, klicken Sie auf den ersten Knopf oder drücken Sie <strong>Strg+M</strong>. Klicken Sie auf den
-Punkt, bewegen Sie die Maus und klicken Sie erneut, um ihn abzusetzen.</p></li>
-<li><p>Um einen Punkt hinzuzufügen, klicken Sie auf den zweiten Knopf oder drücken Sie <strong>Strg++</strong>. Klicken Sie auf die
-Linie zwischen zwei Punkten: Der neue Punkt hängt an der Maus. Klicken Sie erneut, um ihn abzusetzen. Für Punkte am
-Anfang oder Ende bewegen Sie die Maus knapp über den ersten oder letzten Punkt hinaus. Wenn ein rotes Quadrat
-diesen Punkt markiert, klicken Sie. Jeder Klick fügt dort einen Punkt hinzu; die rechte Maustaste beendet das.</p></li>
-<li><p>Um einen Punktebereich zu wählen, klicken Sie auf den dritten Knopf oder drücken Sie <strong>Strg+R</strong>. Klicken Sie dann auf
-den ersten und den letzten Punkt des Punktebereichs. Zwei Knöpfe erscheinen: Einer löscht die Punkte dazwischen, der
-andere verbindet die beiden Punkte neu. Wie, gibt der aktive Buchstabe in der Leiste vor.</p></li>
-<li><p>Um einen Punkt zu löschen, klicken Sie auf den vierten Knopf oder drücken Sie <strong>Strg+-</strong> und klicken Sie dann auf
-den Punkt.</p></li>
+<li><p>Um einen Punkt zu verschieben, klicken Sie auf die erste Schaltfläche oder drücken Sie <strong>Strg+M</strong>. Klicken Sie auf den gewünschten Punkt, bewegen Sie ihn mit der Maus an die neue Position und klicken Sie erneut, um ihn dort abzusetzen.</p></li>
+<li><p>Um einen Punkt hinzuzufügen, klicken Sie auf die zweite Schaltfläche oder drücken Sie <strong>Strg++</strong>. Klicken Sie auf die Linie zwischen zwei vorhandenen Punkten. Der neue Punkt hängt nun an der Maus. Klicken Sie erneut, um ihn an der gewünschten Position abzusetzen. Um am Anfang oder Ende der Linie einen Punkt hinzuzufügen, bewegen Sie die Maus knapp über den ersten oder letzten Punkt hinaus. Sobald ein rotes Quadrat erscheint, klicken Sie. Jeder weitere Klick fügt einen zusätzlichen Punkt hinzu. Klicken Sie mit der rechten Maustaste, um das Hinzufügen zu beenden.</p></li>
+<li><p>Um einen Punktebereich auszuwählen, klicken Sie auf die dritte Schaltfläche oder drücken Sie <strong>Strg+R</strong>. Klicken Sie anschließend auf den ersten und den letzten Punkt des gewünschten Bereichs. Daraufhin erscheinen zwei Schaltflächen: Mit der einen löschen Sie die ausgewählten Punkte, mit der anderen verbinden Sie die beiden Endpunkte direkt miteinander. Wie die Verbindung verläuft, bestimmt der aktive Modus in der Leiste.</p></li>
+<li><p>Um einen Punkt zu löschen, klicken Sie auf die vierte Schaltfläche oder drücken Sie <strong>Strg+-</strong>. Klicken Sie anschließend auf den Punkt, den Sie löschen möchten.</p></li>
 </ul>
-<p>Wenn Sie einen Punkt verschieben, hinzufügen oder löschen, verbindet QMapShack die Punkte daneben neu. Wie, gibt
-der aktive Buchstabe in der Leiste vor. Um das Verschieben oder Hinzufügen eines Punkts
-abzubrechen, klicken Sie mit der rechten Maustaste oder drücken Sie <strong>Esc</strong>.</p>
+<p>Wenn Sie einen Punkt verschieben, hinzufügen oder löschen, verbindet QMapShack die benachbarten Punkte neu. Wie die Verbindung verläuft, bestimmt der aktive Modus in der Werkzeugleiste. Um das Verschieben oder Hinzufügen eines Punkts abzubrechen, klicken Sie mit der rechten Maustaste oder drücken Sie <strong>Esc</strong>.</p>
 <img alt="Quickstart draw track undo redo" class="align-right" src="../_images/quickstart-draw-track-undo-redo.png" />
-<p>Die Pfeilknöpfe am rechten Ende der Leiste machen die letzte Änderung rückgängig und stellen sie wieder her.</p>
+<p>Mit den Pfeilschaltflächen am rechten Ende der Werkzeugleiste können Sie die letzte Änderung rückgängig machen oder wiederherstellen.</p>
 </section>
 <section id="den-track-speichern">
 <span id="index-5"></span><h2>Den Track speichern<a class="headerlink" href="#den-track-speichern" title="Link to this heading">#</a></h2>
 <ol class="arabic">
 <li><img alt="Quickstart draw track name" class="align-right" src="../_images/quickstart-draw-track-name.png" />
-<p>Klicken Sie in der Leiste auf <strong>Als neu speichern</strong>. Geben Sie einen Namen für den Track ein und klicken Sie auf
+<p>Klicken Sie in der Werkzeugleiste auf <strong>Als neu speichern</strong>. Geben Sie einen Namen für den Track ein und klicken Sie auf
 <strong>OK</strong>.</p>
 </li>
 <li><img alt="Quickstart draw track project" class="align-right" src="../_images/quickstart-draw-track-project.png" />
-<p>Wählen Sie das Projekt aus, in das der Track gehört, oder geben Sie unter <strong>Neuer Projektname</strong> einen Namen für ein
-neues Projekt ein.</p>
-<p>Bei einem neuen Projekt wählen Sie nach dem Namen unter <strong>Das neue Projekt wird erstellt als</strong> aus, wie QMapShack
-es speichert. <strong>*.qms</strong> ist das eigene Dateiformat von
-QMapShack, <strong>*.gpx</strong> eine GPX-Datei, die auch andere Programme und Geräte lesen. QMapShack wählt eines vor,
-achten Sie deshalb darauf, dass es das gewünschte ist.
-Die dritte Möglichkeit, <strong>Datenbank</strong>, erklärt <a class="reference internal" href="quickstart-database.html"><span class="std std-doc">Datenbanken</span></a>.</p>
+<p>Wählen Sie das Projekt aus, zu dem Sie den Track hinzufügen möchten, oder geben Sie unter <strong>Neuer Projektname</strong> einen Namen für ein neues Projekt ein.</p>
+<p>Bei einem neuen Projekt geben Sie zunächst einen Namen ein und wählen dann unter <strong>Das neue Projekt wird erstellt als</strong> das gewünschte Speicherformat aus.</p>
+<ul class="simple">
+<li><p><strong>*.qms</strong> ist das Dateiformat von QMapShack,</p></li>
+<li><p><strong>*.gpx</strong> ist das .gpx Format, das auch andere Programme und Geräte lesen können.</p></li>
+</ul>
+<p>QMapShack wählt automatisch ein Format aus. Prüfen Sie daher, ob die Vorauswahl Ihren Wünschen entspricht. Die dritte Möglichkeit, <strong>Datenbank</strong>, wird unter <a class="reference internal" href="quickstart-database.html"><span class="std std-doc">Datenbanken</span></a> erläutert.</p>
 <p>Klicken Sie auf <strong>OK</strong>.</p>
 </li>
 <li><img alt="Quickstart draw track saved" class="align-right" src="../_images/quickstart-draw-track-saved.png" />
-<p>Der Bereich <strong>Arbeitsplatz</strong> listet den Track jetzt unter seinem Projekt.</p>
+<p>Der Bereich <strong>Arbeitsplatz</strong> zeigt den Track jetzt unter dem zugehörigen Projekt an.</p>
 </li>
 </ol>
-<p>Der Speichern-Knopf in der Zeile des Projekts ist im Bild markiert. Er zeigt, dass das Projekt Änderungen hat,
-die noch nicht in einer Datei gespeichert sind. Klicken Sie darauf, um das Projekt zu speichern.</p>
-<p>Beim ersten Mal fragt QMapShack, wohin es das Projekt speichern soll. Der Dialog schlägt den Namen des Projekts vor und
-öffnet sich im Verzeichnis, aus dem Sie zuletzt geladen oder in das Sie zuletzt gespeichert haben. Wenn Sie das
-<a class="reference internal" href="quickstart-main-window.html#das-hauptverzeichnis-einrichten"><span class="std std-ref">Hauptverzeichnis</span></a> eingerichtet haben, stellt QMapShack den
-Dialog auf dessen Verzeichnis <code class="docutils literal notranslate"><span class="pre">GPX</span></code>.</p>
-<p>In der Zeile des Tracks ist dasselbe Symbol kein Knopf, sondern eine Änderungsanzeige. Sie zeigt, dass sich der Track seit dem letzten Speichern
-des Projekts geändert hat.</p>
+<p>Die im Bild markierte Speichern-Schaltfläche in der Projektzeile zeigt an, dass das Projekt Änderungen enthält, die noch nicht in der Datei gespeichert wurden. Klicken Sie darauf, um das Projekt zu speichern.</p>
+<p>Beim ersten Speichern fragt QMapShack, wo das Projekt abgelegt werden soll. Der Dialog schlägt den Projektnamen als Dateinamen vor. Er öffnet sich in dem Verzeichnis, aus dem Sie zuletzt ein Projekt geladen oder in das Sie zuletzt eines gespeichert haben. Wenn Sie das <a class="reference internal" href="quickstart-main-window.html#das-hauptverzeichnis-einrichten"><span class="std std-ref">Hauptverzeichnis</span></a> eingerichtet haben, öffnet QMapShack den Dialog standardmäßig in dessen Unterverzeichnis <code class="docutils literal notranslate"><span class="pre">GPX</span></code>.</p>
+<p>In der Trackzeile dient dasselbe Symbol nicht als Schaltfläche, sondern als Änderungsanzeige. Es zeigt an, dass der Track seit dem letzten Speichern des Projekts geändert wurde.</p>
 </section>
 <section id="hohen-aus-dem-dem">
 <span id="index-6"></span><h2>Höhen aus dem DEM<a class="headerlink" href="#hohen-aus-dem-dem" title="Link to this heading">#</a></h2>
-<p>Während Sie zeichnen, zeigt der Kasten <strong>Trackmaße</strong> oben links auf der Karte die Länge des Tracks und wie viel er
-ansteigt und abfällt. Die Höhen kommen aus dem DEM; siehe <a class="reference internal" href="quickstart-dem.html"><span class="std std-doc">Höhendaten und Schummerung</span></a>. Schalten
-Sie das DEM also ein, bevor Sie zeichnen, und zeichnen Sie dort, wo es Daten hat.</p>
-<p>Wenn Sie den Track speichern, gibt QMapShack seinen Punkten ihre Höhen. Wo das DEM keine Daten hat, bekommt ein Punkt
-keine, und <strong>Trackmaße</strong> zeigt <strong>Ungültige Höhenwerte!</strong> statt Anstieg und Abstieg.</p>
+<p>Während Sie zeichnen, zeigt der Kasten <strong>Trackmaße</strong> oben links auf der Karte die Länge des Tracks sowie seinen gesamten Auf- und Abstieg an. Die Höhen stammen aus dem DEM. Siehe <a class="reference internal" href="quickstart-dem.html"><span class="std std-doc">Höhendaten und Schummerung</span></a>. Schalten Sie das DEM daher ein, bevor Sie mit dem Zeichnen beginnen, und zeichnen Sie nur in Bereichen, für die Höhendaten verfügbar sind.</p>
+<p>Beim Speichern des Tracks weist QMapShack seinen Punkten die entsprechenden Höhen aus dem DEM zu. Wo keine DEM-Daten verfügbar sind, bleibt die Höhe eines Punkts leer. In diesem Fall zeigt <strong>Trackmaße</strong> statt des Auf- und Abstiegs den Hinweis <strong>Ungültige Höhenwerte!</strong> an.</p>
 <img alt="Quickstart draw track metrics" class="below-right" src="../_images/quickstart-draw-track-metrics.png" />
 </section>
 </section>
@@ -435,7 +406,7 @@ keine, und <strong>Trackmaße</strong> zeigt <strong>Ungültige Höhenwerte!</st
 <li><a class="reference internal" href="#entlang-von-wegen-zeichnen">Entlang von Wegen zeichnen</a></li>
 <li><a class="reference internal" href="#entlang-eines-tracks-zeichnen">Entlang eines Tracks zeichnen</a></li>
 <li><a class="reference internal" href="#gerade-linien-und-vektorkarten">Gerade Linien und Vektorkarten</a></li>
-<li><a class="reference internal" href="#den-track-korrigieren">Den Track korrigieren</a></li>
+<li><a class="reference internal" href="#den-track-bearbeiten">Den Track bearbeiten</a></li>
 <li><a class="reference internal" href="#den-track-speichern">Den Track speichern</a></li>
 <li><a class="reference internal" href="#hohen-aus-dem-dem">Höhen aus dem DEM</a></li>
 </ul>

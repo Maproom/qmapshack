@@ -3,10 +3,10 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Zooming and panning" href="quickstart-zoom-pan.html"><link rel="prev" title="Turning on maps" href="quickstart-maps.html">
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Zooming and panning" href="quickstart-zoom-pan.html"><link rel="prev" title="Enabling maps" href="quickstart-maps.html">
 
     <!-- Generated with Sphinx 9.1.1 and Furo 2025.12.19 -->
-        <title>Turning on a Garmin map - QMapShack documentation</title>
+        <title>Enabling a Garmin map - QMapShack documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
@@ -197,8 +197,8 @@
   <ul class="current">
 <li class="toctree-l1 current has-children"><a class="reference internal" href="quickstart.html">Quick start</a><input aria-label="Toggle navigation of Quick start" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="quickstart-main-window.html">The main window</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart-maps.html">Turning on maps</a></li>
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Turning on a Garmin map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart-maps.html">Enabling maps</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Enabling a Garmin map</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-zoom-pan.html">Zooming and panning</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-dem.html">Elevation data and hillshading</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-load-file.html">Loading a GPX file</a></li>
@@ -245,71 +245,57 @@
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="turning-on-a-garmin-map">
-<h1>Turning on a Garmin map<a class="headerlink" href="#turning-on-a-garmin-map" title="Link to this heading">#</a></h1>
-<p>This page shows how to add a Garmin map to QMapShack, turn it on and adjust what it shows.</p>
+          <section id="enabling-a-garmin-map">
+<h1>Enabling a Garmin map<a class="headerlink" href="#enabling-a-garmin-map" title="Link to this heading">#</a></h1>
+<p>This page shows how to add a Garmin map to QMapShack, enable it on and adjust what it shows.</p>
 <p>Images: <em>© OpenStreetMap contributors, created by BBBike</em>.</p>
 <section id="garmin-maps">
 <span id="index-1"></span><span id="index-0"></span><h2>Garmin maps<a class="headerlink" href="#garmin-maps" title="Link to this heading">#</a></h2>
-<p>An online map is a set of images that QMapShack loads while you look at it. A Garmin map is a vector map
-instead: a file of roads, paths, areas and points that QMapShack draws itself. It needs no internet
-connection.</p>
-<p>Garmin maps are <code class="docutils literal notranslate"><span class="pre">.img</span></code> files, and they are the only vector maps QMapShack reads. The example on this page is an
-extract of OpenStreetMap data, made with the <a class="reference external" href="https://extract.bbbike.org/">BBBike extract service</a>. You can make one for your own
-area there.</p>
-<p>QMapShack can’t open two kinds of <code class="docutils literal notranslate"><span class="pre">.img</span></code> files:</p>
+<p>An online map is a collection of images that QMapShack loads as you browse the map. A Garmin map, by contrast, is an offline vector map: a file containing roads, paths, areas and points that QMapShack renders itself. No internet connection is required.</p>
+<p>Garmin maps are stored in .img files, the only vector map format supported by QMapShack. The example on this page is an extract of OpenStreetMap data, created using the <a class="reference external" href="https://extract.bbbike.org/">BBBike extract service</a>. You can use this service to create an extract for your own area.</p>
+<p>QMapShack cannot open two types of .img files:</p>
 <ul class="simple">
-<li><p>Maps in Garmin’s newer NT format, which some free maps use as well. QMapShack reports <strong>File is NT format.</strong></p></li>
-<li><p>Locked maps, as Garmin sells them. QMapShack reports that the file contains locked or encrypted data.</p></li>
+<li><p>Maps in Garmin’s newer NT format, which is also used by some free maps. QMapShack displays the error message <strong>File is NT format.</strong></p></li>
+<li><p>Locked maps, such as those sold by Garmin. QMapShack reports that the file contains locked or encrypted data.</p></li>
 </ul>
 </section>
 <section id="adding-the-map">
 <span id="index-2"></span><h2>Adding the map<a class="headerlink" href="#adding-the-map" title="Link to this heading">#</a></h2>
-<p>QMapShack lists every map that lies directly in one of its map folders. The <code class="docutils literal notranslate"><span class="pre">Maps</span></code> folder of your
-<a class="reference internal" href="quickstart-main-window.html#setting-up-the-home-folder"><span class="std std-ref">home folder</span></a> is one of them.</p>
+<p>QMapShack lists all maps stored directly in one of its map folders. One of these folders is the <code class="docutils literal notranslate"><span class="pre">Maps</span></code> folder in your <a class="reference internal" href="quickstart-main-window.html#setting-up-the-home-folder"><span class="std std-ref">home folder</span></a>.</p>
 <ol class="arabic">
-<li><p>Copy the <code class="docutils literal notranslate"><span class="pre">.img</span></code> file into the <code class="docutils literal notranslate"><span class="pre">Maps</span></code> folder.</p></li>
+<li><p>Copy the .img file into the <code class="docutils literal notranslate"><span class="pre">Maps</span></code> folder.</p></li>
 <li><img alt="Quickstart vector map listed" class="align-right" src="../_images/quickstart-vector-map-listed.png" />
-<p>After a few seconds the map appears in the list in the <strong>Maps</strong> panel, gray like every map that is off. It is
-named after its file, without the file type and with underscores as spaces: QMapShack lists <code class="docutils literal notranslate"><span class="pre">Tannheimer_Tal.img</span></code>
-as <strong>Tannheimer Tal</strong>.</p>
+<p>After a few seconds, the map appears in the <strong>Maps</strong> panel. Like all inactive maps, it is shown in gray. Its name is derived from the filename: the file extension is removed and underscores are replaced with spaces. For example, QMapShack displays <code class="docutils literal notranslate"><span class="pre">Tannheimer_Tal.img</span></code> as <strong>Tannheimer Tal</strong>.</p>
 </li>
-<li><p>To turn the map on, click the button in its row. The row turns bold and says <strong>active</strong>.</p>
+<li><p>To activate a map, click the button in its row. Its name then appears in bold, and its status changes to <strong>active</strong>.</p>
 <img alt="Quickstart vector map map on" class="below-right" src="../_images/quickstart-vector-map-map-on.png" />
 </li>
 </ol>
 </section>
-<section id="adjusting-the-detail">
-<span id="index-3"></span><h2>Adjusting the detail<a class="headerlink" href="#adjusting-the-detail" title="Link to this heading">#</a></h2>
-<p>A Garmin map holds several levels of detail, and QMapShack picks one to suit the zoom. You can shift that choice
-for each map.</p>
-<ol class="arabic">
+<section id="adjusting-the-details">
+<span id="index-3"></span><h2>Adjusting the details<a class="headerlink" href="#adjusting-the-details" title="Link to this heading">#</a></h2>
+<p>A Garmin map contains several levels of detail, and QMapShack automatically selects the appropriate level based on the current zoom level. You can adjust this selection individually for each map.</p>
+<ul>
 <li><img alt="Quickstart vector map settings" class="align-right" src="../_images/quickstart-vector-map-settings.png" />
 <p>Click the arrow to the left of the map’s name to open its settings.</p>
 </li>
-</ol>
-<ul>
-<li><p><strong>Details</strong> sets how much the map shows: above 0 more than usual at the same zoom, below 0 less. 0 is the
-default. In the image below, <strong>Details</strong> is 5.</p>
+<li><p><strong>Details</strong> controls how much information is displayed on the map. A value above 0 displays more detail than usual at the same zoom level, while a value below 0 displays less. The default value is 0. In the image below, <strong>Details</strong> is set to 5.</p>
 <img alt="Quickstart vector map detail more" class="below-right" src="../_images/quickstart-vector-map-detail-more.png" />
 </li>
-<li><p>Check or clear <strong>Areas</strong>, <strong>Lines</strong> and <strong>Points</strong> to show or hide these parts of the map. Without areas, for
-example, the forests disappear and paths stand out.</p>
+<li><p>Select or clear <strong>Areas</strong>, <strong>Lines</strong>, and <strong>Points</strong> to show or hide the corresponding map elements. For example, hiding areas makes forests disappear, allowing paths to stand out more clearly.</p>
 <img alt="Quickstart vector map no areas" class="below-right" src="../_images/quickstart-vector-map-no-areas.png" />
 </li>
 </ul>
 </section>
-<section id="the-map-s-look-typ-files">
-<span id="index-4"></span><h2>The map’s look: TYP files<a class="headerlink" href="#the-map-s-look-typ-files" title="Link to this heading">#</a></h2>
-<p>The colors and symbols of a Garmin map come from a TYP file. Most Garmin maps include their own, as this one does.</p>
+<section id="the-map-s-appearance-typ-files">
+<span id="index-4"></span><h2>The map’s appearance: TYP files<a class="headerlink" href="#the-map-s-appearance-typ-files" title="Link to this heading">#</a></h2>
+<p>A Garmin map’s colors and symbols are defined by a TYP file. Most Garmin maps include their own TYP file, and this map is no exception.</p>
 <ul>
 <li><img alt="Quickstart vector map typ row" class="align-right" src="../_images/quickstart-vector-map-typ-row.png" />
-<p>At the bottom of the map’s settings, <strong>Type File</strong> names an external TYP file once you load one. If the field is
-empty, the map uses its own.</p>
+<p>At the bottom of the map’s settings, <strong>Type File</strong> shows the name of an external TYP file if one has been loaded. If the field is empty, the map uses its built-in TYP file.</p>
 </li>
-<li><p>To load another one, click the button with the folder icon and select a <code class="docutils literal notranslate"><span class="pre">.typ</span></code> file. Click the button with the
-cross icon to use the map’s own TYP file again.</p></li>
-<li><p>A TYP file is made for one map style. One made for another map can give this map the wrong colors and symbols.</p></li>
+<li><p>To load a different TYP file, click the folder icon and select a .typ file. To switch back to the map’s built-in TYP file, click the button with the cross icon.</p></li>
+<li><p>Each TYP file is designed for a particular map style. Using a TYP file designed for a different map may result in incorrect colors and symbols.</p></li>
 </ul>
 </section>
 </section>
@@ -335,7 +321,7 @@ cross icon to use the map’s own TYP file again.</p></li>
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Turning on maps</div>
+                <div class="title">Enabling maps</div>
                 
               </div>
             </a>
@@ -369,11 +355,11 @@ cross icon to use the map’s own TYP file again.</p></li>
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Turning on a Garmin map</a><ul>
+<li><a class="reference internal" href="#">Enabling a Garmin map</a><ul>
 <li><a class="reference internal" href="#garmin-maps">Garmin maps</a></li>
 <li><a class="reference internal" href="#adding-the-map">Adding the map</a></li>
-<li><a class="reference internal" href="#adjusting-the-detail">Adjusting the detail</a></li>
-<li><a class="reference internal" href="#the-map-s-look-typ-files">The map’s look: TYP files</a></li>
+<li><a class="reference internal" href="#adjusting-the-details">Adjusting the details</a></li>
+<li><a class="reference internal" href="#the-map-s-appearance-typ-files">The map’s appearance: TYP files</a></li>
 </ul>
 </li>
 </ul>

@@ -198,10 +198,10 @@
 <li class="toctree-l1 current has-children"><a class="reference internal" href="quickstart.html">Schnellstart</a><input aria-label="Toggle navigation of Schnellstart" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="quickstart-main-window.html">Das Hauptfenster</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-maps.html">Karten einschalten</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart-vector-map.html">Eine Garmin-Karte einschalten</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart-vector-map.html">Eine Garmin-Karte anzeigen</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-zoom-pan.html">Zoomen und Verschieben</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-dem.html">Höhendaten und Schummerung</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart-load-file.html">Eine GPX-Datei laden</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart-load-file.html">Eine GPX Datei laden</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-routing.html">Routing einrichten</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-draw-track.html">Einen Track zeichnen</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-waypoints.html">Wegpunkte hinzufügen</a></li>
@@ -252,17 +252,16 @@ holen, die es aufgezeichnet hat.</p>
 <section id="das-gerat-anschlieszen">
 <span id="index-0"></span><h2>Das Gerät anschließen<a class="headerlink" href="#das-gerat-anschlieszen" title="Link to this heading">#</a></h2>
 <p>Diese Seite nutzt ein Garmin-Gerät, das als USB-Massenspeicher angeschlossen ist und das Ihr Computer als Laufwerk
-zeigt. Geräte, die über MTP (Media Transfer Protocol) angeschlossen sind, und Geräte anderer Hersteller behandelt
-QMapShack genauso. Was Ihr Computer für ein Gerät braucht, steht auf der Wiki-Seite <a class="reference external" href="https://github.com/Maproom/qmapshack/wiki/DocGisDevices">GPS Devices</a>.</p>
+zeigt. Geräte, die über MTP (Media Transfer Protocol) angeschlossen sind, und Geräte anderer Hersteller behandelt QMapShack genauso. Was Ihr Computer benötigt, um das Gerät zu erkennen, erfahren Sie auf der Wiki-Seite <a class="reference external" href="https://github.com/Maproom/qmapshack/wiki/DocGisDevices">GPS Devices</a>.</p>
 <ol class="arabic">
 <li><p>Schließen Sie das Gerät mit seinem USB-Kabel an Ihren Computer an.</p></li>
 <li><img alt="Quickstart device connected" class="align-right" src="../_images/quickstart-device-connected.png" />
-<p>Das Gerät erscheint im Bereich <strong>Arbeitsplatz</strong> unter seinem Modellnamen. QMapShack listet jede Datei mit Tracks
-und Wegpunkten auf dem Gerät als Projekt darunter auf.</p>
+<p>Das Gerät erscheint im Bereich <strong>Arbeitsplatz</strong> unter seinem Modellnamen. QMapShack listet darunter jede Datei mit Tracks
+und Wegpunkten auf dem Gerät als Projekt auf.</p>
 </li>
 </ol>
-<p>Erscheint das Gerät nicht, klicken Sie auf <strong>Arbeitsplatz → Arbeitsplatz konfigurieren</strong> und aktivieren Sie auf der
-Registerkarte <strong>Allgemein</strong> die Option <strong>Geräteunterstützung aktivieren</strong>, falls sie deaktiviert ist. Sie ist
+<p>Erscheint das Gerät nicht, klicken Sie auf <strong>Arbeitsplatz → Arbeitsplatz konfigurieren</strong>. Aktivieren Sie auf der
+Registerkarte <strong>Allgemein</strong> die Option <strong>Geräteunterstützung aktivieren</strong>, falls diese deaktiviert ist. Diese Option ist
 standardmäßig aktiviert.</p>
 </section>
 <section id="ein-projekt-an-das-gerat-senden">
@@ -273,31 +272,30 @@ standardmäßig aktiviert.</p>
 <strong>Ans Gerät senden</strong>. Sie können den Eintrag nur anklicken, solange ein Gerät angeschlossen ist.</p>
 </li>
 <li><img alt="Quickstart device sent" class="align-right" src="../_images/quickstart-device-sent.png" />
-<p>Das Projekt erscheint unter dem Gerät. QMapShack speichert es auf dem Gerät als GPX-Datei mit dem Namen des
-Projekts, hier <code class="docutils literal notranslate"><span class="pre">Example.gpx</span></code>. Im Dateinamen lässt QMapShack alle Zeichen außer Buchstaben, Ziffern und <code class="docutils literal notranslate"><span class="pre">_</span></code> weg.</p>
+<p>Das Projekt erscheint unter dem Gerät. QMapShack speichert es auf dem Gerät als  .gpx Datei mit dem Namen des
+Projekts, hier <code class="docutils literal notranslate"><span class="pre">Example.gpx</span></code>. Im Dateinamen lässt QMapShack alle Zeichen außer Buchstaben, Ziffern und Unterstrich weg.</p>
 </li>
 </ol>
-<p>Sind mehrere Geräte angeschlossen, fragt QMapShack, an welche es das Projekt senden soll. Senden Sie das Projekt noch
-einmal, ersetzt QMapShack seine Kopie auf dem Gerät.</p>
+<p>Sind mehrere Geräte angeschlossen, fragt QMapShack, an welches das Projekt gesendet werden soll. Senden Sie das Projekt noch
+einmal, überschreibt QMapShack die vorhandene Kopie auf dem Gerät.</p>
 </section>
 <section id="eine-aufzeichnung-vom-gerat-holen">
 <span id="index-2"></span><h2>Eine Aufzeichnung vom Gerät holen<a class="headerlink" href="#eine-aufzeichnung-vom-gerat-holen" title="Link to this heading">#</a></h2>
 <ol class="arabic">
 <li><img alt="Quickstart device recording" class="align-right" src="../_images/quickstart-device-recording.png" />
-<p>Klicken Sie auf den Pfeil links neben dem Projekt mit Ihrer Aufzeichnung, hier <strong>Track 2025-06-14 101530</strong>, um
-seinen Track zu sehen.</p>
+<p>Klicken Sie auf den Pfeil links neben dem Projekt mit Ihrer Aufzeichnung (hier <strong>Track 2025-06-14 101530</strong>), um es zu öffnen und den Track anzuzeigen.</p>
 </li>
 <li><img alt="Quickstart device copy menu" class="align-right" src="../_images/quickstart-device-copy-menu.png" />
-<p>Elemente auf dem Gerät können Sie nicht ändern. Kopieren Sie den Track deshalb in den Arbeitsplatz: Klicken Sie
+<p>Dateien auf dem Gerät können Sie nicht ändern. Kopieren Sie den Track deshalb in den Arbeitsplatz: Klicken Sie
 mit der rechten Maustaste auf den Track und dann auf <strong>Kopieren nach…</strong>.</p>
 </li>
 <li><img alt="Quickstart device copy dialog" class="align-right" src="../_images/quickstart-device-copy-dialog.png" />
 <p>Wählen Sie im Dialog <strong>Ein Projekt auswählen…</strong> ein Projekt im Arbeitsplatz aus oder geben Sie einen Namen für
-ein neues ein, hier <code class="docutils literal notranslate"><span class="pre">Meine</span> <span class="pre">Aufzeichnungen</span></code>, und klicken Sie auf <strong>OK</strong>.</p>
+ein neues Projekt ein (hier <code class="docutils literal notranslate"><span class="pre">Meine</span> <span class="pre">Aufzeichnungen</span></code>), und klicken Sie auf <strong>OK</strong>.</p>
 </li>
 <li><img alt="Quickstart device copied" class="align-right" src="../_images/quickstart-device-copied.png" />
-<p>Der Track liegt jetzt im Projekt im Arbeitsplatz, wo Sie ihn ändern können. Speichern Sie das Projekt, um ihn zu
-behalten; siehe <a class="reference internal" href="quickstart-save.html"><span class="std std-doc">Ihre Arbeit speichern</span></a>.</p>
+<p>Der Track liegt jetzt im Projekt auf dem Arbeitsplatz, wo Sie ihn ändern können. Speichern Sie das Projekt, um Ihre Änderungen zu
+behalten. Siehe <a class="reference internal" href="quickstart-save.html"><span class="std std-doc">Ihre Arbeit speichern</span></a>.</p>
 </li>
 </ol>
 </section>

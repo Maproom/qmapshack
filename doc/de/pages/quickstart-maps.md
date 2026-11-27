@@ -10,7 +10,7 @@ Bilder: *© OpenStreetMap contributors*; *OpenTopoMap, CC-BY-SA*; *trails by way
 ## Die eingebauten Karten einrichten
 
 QMapShack bringt fünf Online-Karten mit, darunter OpenStreetMap und OSM Topo. Eine Online-Karte braucht eine
-Internetverbindung: QMapShack lädt die Karte, während Sie sie ansehen.
+Internetverbindung. QMapShack lädt die Karte, während Sie sie ansehen.
 
 1. Klicken Sie auf **Datei → Kartenverzeichnisse angeben**. Denselben Eintrag finden Sie, wenn Sie mit der
     rechten Maustaste in die Liste im Bereich **Karten** klicken.
@@ -19,18 +19,16 @@ Internetverbindung: QMapShack lädt die Karte, während Sie sie ansehen.
     ```
 
     Klicken Sie auf **Hilfe! Ich will Karten! Keine Lust die Anleitung zu lesen!**
-
-3. QMapShack fragt **Wo wollen Sie die Karten speichern?** und schlägt schon das Verzeichnis `Maps` in Ihrem
+3. QMapShack fragt **Wo wollen Sie die Karten speichern?** und schlägt das Verzeichnis `Maps` in Ihrem
     [Hauptverzeichnis](quickstart-main-window.md#das-hauptverzeichnis-einrichten) vor. Bestätigen Sie es. Der
-    Dialog **Kartenverzeichnisse angeben** schließt sich dann von selbst.
+    Dialog **Kartenverzeichnisse angeben** schließt sich dann automatisch.
 4. ```{image} ../images/quickstart-maps/quickstart-maps-maps-panel.png
     :align: right
     ```
 
-    Der Bereich **Karten** führt die Karten auf. Eine Karte ist grau, solange sie ausgeschaltet ist.
+    Im Bereich **Karten** werden alle verfügbaren Karten aufgelistet. Nicht aktivierte Karten sind grau dargestellt.
 
-    Jede Karte heißt wie ihre Datei, ohne den Dateityp und mit Leerzeichen statt Unterstrichen: `OSM_Topo.tms`
-    steht in der Liste als **OSM Topo**. QMapShack benennt Höhendaten und POI-Dateien genauso.
+    Jede Karte erhält den Namen ihrer Datei, wobei die Dateiendung weggelassen und Unterstriche durch Leerzeichen ersetzt werden. So erscheint `OSM_Topo.tms` in der Liste als **OSM Topo**. Höhendaten und POI-Dateien benennt QMapShack nach demselben Schema.
 
 ```{index} single: Karte; einschalten
 ```
@@ -41,11 +39,9 @@ Internetverbindung: QMapShack lädt die Karte, während Sie sie ansehen.
     :align: right
     ```
 
-    Um eine Karte einzuschalten, klicken Sie auf den Knopf in ihrer Zeile im Bereich **Karten**. Ein weiterer
-    Klick schaltet die Karte wieder aus.
+    Um eine Karte zu aktivieren, klicken Sie auf die Schaltfläche rechts neben ihrem Namen im Bereich **Karten**. Ein erneuter Klick deaktiviert die Karte wieder.
 
-2. Schalten Sie **OpenStreetMap** ein. Die Zeile der Karte wird fett und zeigt **aktiv**, und die Karte ersetzt die
-    Begrüßungsseite.
+2. Aktivieren Sie **OpenStreetMap**. Der Name der Karte wird nun fett dargestellt und ihr Status wechselt zu aktiv. Die Karte ersetzt daraufhin die Begrüßungsseite.
 
     ```{image} ../images/quickstart-maps/quickstart-maps-osm-on.png
     :class: below-right
@@ -56,20 +52,15 @@ Internetverbindung: QMapShack lädt die Karte, während Sie sie ansehen.
 
 ## Karten stapeln
 
-Wenn mehrere Karten eingeschaltet sind, liegen sie in der Reihenfolge der Liste übereinander: Eine Karte verdeckt
-die Karten über ihr.
+Wenn mehrere Karten aktiviert sind, werden sie in der Reihenfolge ihrer Einträge übereinandergelegt. Dabei verdeckt jede Karte die Karten, die in der Liste oberhalb von ihr stehen.
 
-1. Schalten Sie auch **OSM Topo** ein. Die Karte steht in der Liste unter **OpenStreetMap** und verdeckt diese
+1. Aktivieren Sie auch **OSM Topo**. Die Karte steht in der Liste unter **OpenStreetMap** und verdeckt diese
     deshalb.
 
     ```{image} ../images/quickstart-maps/quickstart-maps-both-on.png
     :class: below-right
     ```
-
-2. Um die Reihenfolge zu ändern, ziehen Sie eine Karte in der Liste nach oben oder unten. Oder wählen Sie sie aus
-    und drücken **Umschalt+Hoch** oder **Umschalt+Herunter**; das Kontextmenü hat dafür auch
-    **Nach oben verschieben** und **Nach unten verschieben**. Steht **OSM Topo** weiter oben,
-    verdeckt **OpenStreetMap** sie.
+2. Um die Reihenfolge zu ändern, ziehen Sie eine Karte in der Liste nach oben oder unten. Alternativ können Sie die Karte auswählen und **Umschalt+Pfeil nach oben** oder **Umschalt+Pfeil nach unten** drücken. Im Kontextmenü stehen dafür die Einträge **Nach oben verschieben** und **Nach unten verschieben** ebenfalls zur Verfügung. Verschieben Sie **OSM Topo** weiter nach oben, wird die Karte von **OpenStreetMap** überlagert.
 
     ```{image} ../images/quickstart-maps/quickstart-maps-topo-up.png
     :class: below-right
@@ -78,10 +69,9 @@ die Karten über ihr.
 ```{index} single: Karte; Deckkraft
 ```
 
-## Eine Karte durchscheinend machen
+## Eine Karte transparent machen
 
-1. Um die untere Karte durch die obere hindurch zu sehen, klicken Sie auf den Pfeil links vom Namen der oberen Karte.
-    Ihre Einstellungen öffnen sich unter der Zeile.
+1. Um die untere Karte durch die obere hindurch sichtbar zu machen, klicken Sie auf den Pfeil links neben dem Namen der oberen Karte. Dadurch werden die Einstellungen unterhalb der Zeile eingeblendet.
 2. Ziehen Sie den Schieberegler unter dem Namen nach links, um die Deckkraft der Karte zu senken. Hier ist
     **OSM Topo** halb durchscheinend über **OpenStreetMap**.
 

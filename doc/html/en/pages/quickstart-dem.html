@@ -197,8 +197,8 @@
   <ul class="current">
 <li class="toctree-l1 current has-children"><a class="reference internal" href="quickstart.html">Quick start</a><input aria-label="Toggle navigation of Quick start" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="quickstart-main-window.html">The main window</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart-maps.html">Turning on maps</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart-vector-map.html">Turning on a Garmin map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart-maps.html">Enabling maps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart-vector-map.html">Enabling a Garmin map</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-zoom-pan.html">Zooming and panning</a></li>
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Elevation data and hillshading</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-load-file.html">Loading a GPX file</a></li>
@@ -247,72 +247,59 @@
         <article role="main" id="furo-main-content">
           <section id="elevation-data-and-hillshading">
 <h1>Elevation data and hillshading<a class="headerlink" href="#elevation-data-and-hillshading" title="Link to this heading">#</a></h1>
-<p>This page shows how to add elevation data to QMapShack, turn it on and shade the terrain with it.</p>
+<p>This page shows how to add elevation data to QMapShack, enable it, and shade the terrain with it.</p>
 <p>Images: <em>© OpenStreetMap contributors</em>; <em>Datenquelle: Land Tirol - data.tirol.gv.at, CC BY 4.0</em>.</p>
 <section id="what-elevation-data-does">
 <span id="index-1"></span><span id="index-0"></span><h2>What elevation data does<a class="headerlink" href="#what-elevation-data-does" title="Link to this heading">#</a></h2>
-<p>Elevation data, a DEM (digital elevation model), holds the height of the terrain. QMapShack uses it in three ways:</p>
+<p>Elevation data, also known as a Digital Elevation Model (DEM), represents the height of the terrain. QMapShack uses it in three ways:</p>
 <ul>
-<li><p>It shows the elevation of any point. With a DEM turned on, the status bar at the bottom right shows the elevation
+<li><p>It shows the elevation of any point. With a DEM enabled, the status bar at the bottom right shows the elevation
 (<strong>Ele.</strong>) and slope (<strong>Slope</strong>) at the mouse pointer.</p>
 <img alt="Quickstart dem status bar" class="below-right" src="../_images/quickstart-dem-status-bar.png" />
 </li>
-<li><p>On request, it adds an elevation to tracks and waypoints, or replaces the one they have. A track you draw gets
-its elevations from it when you save it; see
-<a class="reference internal" href="quickstart-draw-track.html#elevations-from-the-dem"><span class="std std-ref">Drawing a track</span></a>. Routes get theirs from it when QMapShack
-calculates them.</p></li>
-<li><p>It shades the terrain on the map, so that mountains and valleys stand out.</p></li>
+<li><p>On request, it adds elevation data to tracks and waypoints, or replaces their existing elevation data. When you save a track you have drawn, its elevation data is obtained from the DEM. See <a class="reference internal" href="quickstart-draw-track.html#elevations-from-the-dem"><span class="std std-ref">Drawing a track</span></a>. Routes obtain their elevation data from the DEM when QMapShack calculates them.</p></li>
+<li><p>It adds shaded relief to the map, making mountains and valleys stand out.</p></li>
 </ul>
 </section>
 <section id="adding-a-dem">
 <span id="index-2"></span><h2>Adding a DEM<a class="headerlink" href="#adding-a-dem" title="Link to this heading">#</a></h2>
-<p>Elevation data usually comes as one or several image files, for example GeoTIFF. QMapShack doesn’t open them
-directly: it reads a <code class="docutils literal notranslate"><span class="pre">.vrt</span></code> file (a virtual raster), which lists the image files and joins them into one DEM.</p>
+<p>Elevation data is usually provided as one or more image files, such as GeoTIFF files. QMapShack cannot open these files directly. Instead, it reads a .vrt file (a virtual raster), which references the image files and combines them into a single DEM.</p>
 <ol class="arabic">
-<li><p>Copy the files into the <code class="docutils literal notranslate"><span class="pre">DEM</span></code> folder of your
-<a class="reference internal" href="quickstart-main-window.html#setting-up-the-home-folder"><span class="std std-ref">home folder</span></a>: a single file directly into it, several
-files into a subfolder of their own.</p></li>
+<li><p>Copy the files into the <code class="docutils literal notranslate"><span class="pre">DEM</span></code> folder in your <a class="reference internal" href="quickstart-main-window.html#setting-up-the-home-folder"><span class="std std-ref">home folder</span></a>. Place a single file directly in the <code class="docutils literal notranslate"><span class="pre">DEM</span></code> folder. If you have several files, put them together in a separate subfolder.</p></li>
 <li><p>Click <strong>Tool → VRT Builder</strong>.</p></li>
-<li><p>Click the folder button beside <strong>Select source files</strong> and select the files you copied.</p></li>
-<li><p>Click the folder button beside <strong>Target Filename</strong>. The first time, the dialog opens in the <code class="docutils literal notranslate"><span class="pre">Maps</span></code> folder: go to
-the <code class="docutils literal notranslate"><span class="pre">DEM</span></code> folder, enter a name ending in <code class="docutils literal notranslate"><span class="pre">.vrt</span></code> and save.</p></li>
+<li><p>Click the folder button next to <strong>Select source files</strong> and choose the files you copied.</p></li>
+<li><p>Click the folder button next to <strong>Target Filename</strong>. The first time you do this, the dialog opens in the <code class="docutils literal notranslate"><span class="pre">Maps</span></code> folder. Navigate to the <code class="docutils literal notranslate"><span class="pre">DEM</span></code> folder, enter a file name ending in .vrt, and click <strong>Save</strong>.</p></li>
 <li><p>Click <strong>Start</strong>.</p></li>
 <li><img alt="Quickstart dem listed" class="align-right" src="../_images/quickstart-dem-listed.png" />
-<p>When the VRT Builder is done, the DEM appears in the list, gray like every DEM that is off.</p>
+<p>When the VRT Builder finishes, the DEM appears in the list, grayed out, like all inactive DEMs.</p>
 </li>
 </ol>
-<p>A <code class="docutils literal notranslate"><span class="pre">.vrt</span></code> made elsewhere can point to its files by their full path, so it may not find them after a copy. Making it
-in the <code class="docutils literal notranslate"><span class="pre">DEM</span></code> folder avoids that.</p>
+<p>A .vrt file created elsewhere may reference its source files using absolute paths, which can become invalid if the files are moved. Creating the .vrt file in the <code class="docutils literal notranslate"><span class="pre">DEM</span></code> folder avoids this problem.</p>
 </section>
-<section id="turning-on-the-dem">
-<span id="index-3"></span><h2>Turning on the DEM<a class="headerlink" href="#turning-on-the-dem" title="Link to this heading">#</a></h2>
+<section id="enabling-the-dem">
+<span id="index-3"></span><h2>Enabling the DEM<a class="headerlink" href="#enabling-the-dem" title="Link to this heading">#</a></h2>
 <ol class="arabic">
 <li><img alt="Quickstart dem dem button" class="align-right" src="../_images/quickstart-dem-dem-button.png" />
-<p>Click the button on the DEM’s row in the <strong>Dig. Elev. Model (DEM)</strong> panel. The row turns bold and says <strong>active</strong>.</p>
+<p>Click the button in the DEM’s row in the <strong>Dig. Elev. Model (DEM)</strong> panel. The row is displayed in bold and marked <strong>active</strong>.</p>
 </li>
-<li><p>The map looks the same as before: the DEM shades nothing until you turn on hillshading. But where the DEM has
-data, the status bar now shows the elevation and slope at the mouse pointer. If it doesn’t, something is wrong
-with the DEM.</p></li>
+<li><p>The map looks unchanged. The DEM does not shade the terrain until you enable hillshading. However, wherever the DEM contains data, the status bar now displays the elevation and slope at the mouse pointer. If these values are not displayed, there may be a problem with the DEM.</p></li>
 </ol>
 </section>
 <section id="shading-the-terrain">
 <span id="index-5"></span><span id="index-4"></span><h2>Shading the terrain<a class="headerlink" href="#shading-the-terrain" title="Link to this heading">#</a></h2>
 <ol class="arabic">
 <li><img alt="Quickstart dem hillshading" class="align-right" src="../_images/quickstart-dem-hillshading.png" />
-<p>Click the arrow left of the DEM’s name. Its settings open below it. Check <strong>Hillshading</strong>.</p>
+<p>Click the arrow to the left of the DEM’s name to expand its settings. Then check <strong>Hillshading</strong>.</p>
 </li>
 <li><img alt="Quickstart dem shaded" class="align-right" src="../_images/quickstart-dem-shaded.png" />
-<p>The terrain is now shaded on the map: slopes facing away from the light are darker.</p>
+<p>The terrain is now shaded on the map, with slopes facing away from the light appearing darker.</p>
 </li>
-<li><p>The slider below the DEM’s name sets its opacity. QMapShack draws the DEM over the map, so dragging the slider
-to the right makes the shading stronger and the map darker. The slider beside <strong>Hillshading</strong> changes the relief
-itself: drag it to the left and slopes look steeper, to the right and the terrain looks flatter. The light always
-comes from the northwest.</p>
+<li><p>The slider below the DEM’s name controls the opacity. QMapShack draws the DEM as an overlay on the map. Moving the slider to the right makes the shading more pronounced and the map darker.</p>
+<p>The slider next to <strong>Hillshading</strong> controls the strength of the relief shading. Moving it to the left makes slopes appear steeper, while moving it to the right makes the terrain look flatter. The light source always comes from the northwest.</p>
 <img alt="Quickstart dem stronger" class="below-right" src="../_images/quickstart-dem-stronger.png" />
 </li>
 </ol>
-<p>As with a map, you can limit a DEM to a range of zoom steps with the two buttons beside the bar below the slider.
-See <a class="reference internal" href="quickstart-zoom-pan.html#limiting-a-map-to-a-zoom-range"><span class="std std-ref">Limiting a map to a zoom range</span></a>.</p>
+<p>As with maps, you can restrict a DEM to a specific zoom range using the two buttons beside the bar below the slider. See <a class="reference internal" href="quickstart-zoom-pan.html#limiting-a-map-to-a-zoom-range"><span class="std std-ref">Limiting a map to a zoom range</span></a>.</p>
 </section>
 </section>
 
@@ -374,7 +361,7 @@ See <a class="reference internal" href="quickstart-zoom-pan.html#limiting-a-map-
 <li><a class="reference internal" href="#">Elevation data and hillshading</a><ul>
 <li><a class="reference internal" href="#what-elevation-data-does">What elevation data does</a></li>
 <li><a class="reference internal" href="#adding-a-dem">Adding a DEM</a></li>
-<li><a class="reference internal" href="#turning-on-the-dem">Turning on the DEM</a></li>
+<li><a class="reference internal" href="#enabling-the-dem">Enabling the DEM</a></li>
 <li><a class="reference internal" href="#shading-the-terrain">Shading the terrain</a></li>
 </ul>
 </li>

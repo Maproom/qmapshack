@@ -3,7 +3,7 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Stichwortverzeichnis" href="../genindex.html"><link rel="search" title="Suche" href="../search.html"><link rel="next" title="Einen Track zeichnen" href="quickstart-draw-track.html"><link rel="prev" title="Eine GPX-Datei laden" href="quickstart-load-file.html">
+<link rel="index" title="Stichwortverzeichnis" href="../genindex.html"><link rel="search" title="Suche" href="../search.html"><link rel="next" title="Einen Track zeichnen" href="quickstart-draw-track.html"><link rel="prev" title="Eine GPX Datei laden" href="quickstart-load-file.html">
 
     <!-- Generated with Sphinx 9.1.1 and Furo 2025.12.19 -->
         <title>Routing einrichten - QMapShack-Dokumentation</title>
@@ -198,10 +198,10 @@
 <li class="toctree-l1 current has-children"><a class="reference internal" href="quickstart.html">Schnellstart</a><input aria-label="Toggle navigation of Schnellstart" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="quickstart-main-window.html">Das Hauptfenster</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-maps.html">Karten einschalten</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart-vector-map.html">Eine Garmin-Karte einschalten</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart-vector-map.html">Eine Garmin-Karte anzeigen</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-zoom-pan.html">Zoomen und Verschieben</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-dem.html">Höhendaten und Schummerung</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart-load-file.html">Eine GPX-Datei laden</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart-load-file.html">Eine GPX Datei laden</a></li>
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Routing einrichten</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-draw-track.html">Einen Track zeichnen</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-waypoints.html">Wegpunkte hinzufügen</a></li>
@@ -247,68 +247,55 @@
         <article role="main" id="furo-main-content">
           <section id="routing-einrichten">
 <h1>Routing einrichten<a class="headerlink" href="#routing-einrichten" title="Link to this heading">#</a></h1>
-<p>Diese Seite zeigt, wie Sie einen Router einrichten, damit QMapShack einen Track für Sie entlang von Wegen und Straßen
+<p>Diese Seite beschreibt, wie Sie einen Router einrichten, damit QMapShack einen Track für Sie entlang von Wegen und Straßen
 zeichnen kann.</p>
 <section id="was-ein-router-macht">
 <span id="index-1"></span><span id="index-0"></span><h2>Was ein Router macht<a class="headerlink" href="#was-ein-router-macht" title="Link to this heading">#</a></h2>
-<p>Ein <em>Router</em> berechnet die Strecke entlang von Wegen und Straßen von einem Punkt zum nächsten. Wenn Sie einen Track
-zeichnen, klicken Sie nur auf die Punkte, durch die der Track führen soll, und der Router ergänzt den Weg dazwischen.</p>
-<p>Damit der Router den Weg schon beim Klicken ergänzt, muss er <em>sofort</em> antworten, mit Routingdaten auf Ihrem Computer.
-Ein Router, der einen Server im Internet fragt, kann das nicht. Er würde bei jedem Klick eine Anfrage schicken, und um
-Missbrauch zu verhindern, sperren Server Programme, die in kurzer Zeit zu viele Anfragen schicken.</p>
+<p>Ein <em>Router</em> berechnet die Strecke zwischen zwei Punkten entlang vorhandener Wege und Straßen. Wenn Sie einen Track zeichnen, müssen Sie lediglich die Punkte anklicken, durch die er führen soll. Der Router ermittelt automatisch den Weg dazwischen.</p>
+<p>Damit der Router den Weg bereits beim Klicken ergänzen kann, muss er <em>sofort</em> auf Routingdaten zugreifen können, die auf Ihrem Computer gespeichert sind.</p>
+<p>Ein Router, der die Daten von einem Internetserver abruft, kann das nicht leisten. Er müsste bei jedem Klick eine neue Anfrage senden. Um Missbrauch zu vermeiden, begrenzen die Server jedoch die Anzahl der Anfragen innerhalb eines bestimmten Zeitraums. Oder sie sperren Programme, die zu viele Anfragen in kurzer Zeit senden.</p>
 </section>
 <section id="einen-router-auswahlen">
 <span id="index-2"></span><h2>Einen Router auswählen<a class="headerlink" href="#einen-router-auswahlen" title="Link to this heading">#</a></h2>
-<p>QMapShack kann zwei verschiedene Router verwenden, Routino und BRouter. Sie wählen einen in der Liste oben im Bereich
-<strong>Streckenführung</strong> aus.</p>
+<p>QMapShack unterstützt zwei verschiedene Router: Routino und BRouter. Wählen Sie den gewünschten Router aus der Liste oben im Bereich <strong>Streckenführung</strong> aus.</p>
 <ul class="simple">
-<li><p><strong>Routino (offline)</strong> berechnet Routen mit Daten auf Ihrem Computer. Diese Daten erstellen Sie aus
-OpenStreetMap-Daten mit <strong>Werkzeug → Routino Datenbank erstellen</strong>. Die Schritte auf dieser Seite nutzen Routino.</p></li>
-<li><p><strong>BRouter</strong> ist einfacher einzurichten. Als <strong>BRouter (online)</strong> fragt er den Server von BRouter-Web und kann
-deshalb nicht sofort antworten. Auf Ihrem Computer installiert, heißt er <strong>BRouter (offline)</strong> und antwortet dann
-sofort.</p></li>
+<li><p><strong>Routino (offline)</strong> berechnet Routen anhand von Daten, die auf Ihrem Computer gespeichert sind. Diese Daten erstellen Sie aus OpenStreetMap-Daten über <strong>Werkzeug → Routino-Datenbank erstellen</strong>. Die Anleitung auf dieser Seite beschreibt die Verwendung von Routino.</p></li>
+<li><p><strong>BRouter</strong> ist einfacher einzurichten. Als <strong>BRouter (online)</strong> sendet er Anfragen an den Server von BRouter-Web und kann daher nicht sofort antworten. Wenn Sie BRouter auf Ihrem Computer installieren und lokal ausführen, steht er als <strong>BRouter (offline)</strong> zur Verfügung und kann sofort antworten.</p></li>
 </ul>
 </section>
 <section id="brouter-installieren">
 <span id="index-3"></span><h2>BRouter installieren<a class="headerlink" href="#brouter-installieren" title="Link to this heading">#</a></h2>
 <img alt="Quickstart routing brouter setup" class="align-right" src="../_images/quickstart-routing-brouter-setup.png" />
-<p>BRouter braucht Java. Installieren Sie Java zuerst: Ohne Java geht der Einrichtungsassistent nicht weiter.</p>
-<p>Ein Assistent installiert BRouter für Sie. Wählen Sie <strong>BRouter (online)</strong> in der Liste aus und klicken Sie auf
-<strong>Einrichten</strong>. Wählen Sie im Assistenten <strong>BRouter Einrichtung</strong> die Option <strong>lokale Installation</strong> aus und folgen
-Sie den Seiten des Assistenten. Der Assistent lädt BRouter und die Routingdaten für die
-Gebiete, die Sie auf seiner Karte auswählen, in das Verzeichnis <code class="docutils literal notranslate"><span class="pre">BRouter</span></code> Ihres
-<a class="reference internal" href="quickstart-main-window.html#das-hauptverzeichnis-einrichten"><span class="std std-ref">Hauptverzeichnisses</span></a> herunter.</p>
-<p>Wenn der Assistent fertig ist, zeigt die Liste <strong>BRouter (offline)</strong>.</p>
+<p>BRouter benötigt Java. Installieren Sie daher zuerst Java. Ohne Java kann der Einrichtungsassistent nicht fortgesetzt werden.</p>
+<p>Ein Assistent hilft Ihnen BRouter zu installieren. Wählen Sie in der Liste <strong>BRouter (online)</strong> aus und klicken Sie auf <strong>Einrichten</strong>.</p>
+<p>Wählen Sie im Assistenten <strong>BRouter Einrichtung</strong> die Option <strong>Lokale Installation</strong> aus und folgen Sie den Anweisungen auf den einzelnen Seiten.</p>
+<p>Der Assistent lädt BRouter sowie die Routingdaten für die Gebiete, die Sie auf der Karte auswählen, herunter und speichert sie im Verzeichnis <code class="docutils literal notranslate"><span class="pre">BRouter</span></code> Ihres <a class="reference internal" href="quickstart-main-window.html#das-hauptverzeichnis-einrichten"><span class="std std-ref">Hauptverzeichnisses</span></a>.</p>
+<p>Nach Abschluss der Einrichtung zeigt die Liste der Router den Eintrag <strong>BRouter (offline)</strong> an.</p>
 </section>
 <section id="routino-einrichten">
 <span id="index-4"></span><h2>Routino einrichten<a class="headerlink" href="#routino-einrichten" title="Link to this heading">#</a></h2>
-<p>Routino berechnet Routen mit einer Datenbank, die QMapShack aus OpenStreetMap-Daten erstellt. Dafür brauchen Sie einen
-Ausschnitt Ihrer Gegend als <code class="docutils literal notranslate"><span class="pre">.pbf</span></code>-Datei, zum Beispiel von <a class="reference external" href="https://download.geofabrik.de/" title="Geofabrik downloads">Geofabrik</a>. Routino kann nicht von einer
-Datenbank in eine andere routen, deshalb muss der Ausschnitt jedes Gebiet abdecken, durch das eine Route führt.
-Sie können mehrere <code class="docutils literal notranslate"><span class="pre">.pbf</span></code>-Dateien in einer Datenbank zusammenfassen.</p>
-<p>Unter Linux installieren Sie zuerst das Routino-Paket Ihrer Distribution: Das Werkzeug braucht dessen
-<code class="docutils literal notranslate"><span class="pre">planetsplitter</span></code>.</p>
+<p>Routino berechnet Routen mithilfe einer Datenbank, die QMapShack aus OpenStreetMap-Daten erstellt. Dazu benötigen Sie einen Kartenausschnitt Ihrer Region im .pbf Format, beispielsweise von <a class="reference external" href="https://download.geofabrik.de" title="Geofabrik downloads">Geofabrik</a>.</p>
+<p>Da Routino keine Routen zwischen verschiedenen Datenbanken berechnen kann, muss der Kartenausschnitt alle Gebiete abdecken, durch die eine Route führen soll.</p>
+<p>Sie können auch mehrere .pbf Dateien zu einer gemeinsamen Datenbank zusammenfassen.</p>
+<p>Unter Linux installieren Sie zunächst das Routino-Paket Ihrer Distribution. Dieses enthält das benötigte Werkzeug <code class="docutils literal notranslate"><span class="pre">planetsplitter</span></code>. Unter Windows wird <code class="docutils literal notranslate"><span class="pre">planetsplitter</span></code> bei der Installation von Routino automatisch mitinstalliert.</p>
 <ol class="arabic">
-<li><p>Wählen Sie <strong>Routino (offline)</strong> in der Liste oben im Bereich <strong>Streckenführung</strong> aus.</p></li>
+<li><p>Wählen Sie oben im Bereich <strong>Streckenführung</strong> den Eintrag <strong>Routino (offline)</strong> aus.</p></li>
 <li><p>Klicken Sie auf <strong>Werkzeug → Routino Datenbank erstellen</strong>.</p></li>
-<li><p>Klicken Sie auf den Knopf mit dem Ordnersymbol neben <strong>Quelldateien auswählen</strong> und wählen Sie die <code class="docutils literal notranslate"><span class="pre">.pbf</span></code>-Dateien
-aus.</p></li>
-<li><p>Wählen Sie in der Liste <strong>Zielpfad</strong> aus, wohin die Datenbank kommt. Die Liste bietet die für Routino angemeldeten
-Verzeichnisse an, darunter das Verzeichnis <code class="docutils literal notranslate"><span class="pre">Routino</span></code> Ihres
-<a class="reference internal" href="quickstart-main-window.html#das-hauptverzeichnis-einrichten"><span class="std std-ref">Hauptverzeichnisses</span></a>. Der Knopf mit dem Ordnersymbol
-links von <strong>Zielpfad</strong> fügt weitere Verzeichnisse hinzu.</p></li>
+<li><p>Klicken Sie auf die Schaltfläche mit dem Ordnersymbol neben <strong>Quelldateien auswählen</strong> und wählen Sie die gewünschten .pbf Dateien aus.</p></li>
+<li><p>Wählen Sie in der Liste <strong>Zielpfad</strong> das Verzeichnis aus, in dem die Datenbank gespeichert werden soll. Die Liste enthält alle für Routino registrierten Verzeichnisse, darunter auch das Verzeichnis <code class="docutils literal notranslate"><span class="pre">Routino</span></code> Ihres <a class="reference internal" href="quickstart-main-window.html#das-hauptverzeichnis-einrichten"><span class="std std-ref">Hauptverzeichnisses</span></a>.</p>
+<p>Über die Schaltfläche mit dem Ordnersymbol links neben <strong>Zielpfad</strong> können Sie weitere Verzeichnisse hinzufügen.</p>
+</li>
 <li><p>Geben Sie im Feld <strong>Dateipräfix</strong> einen Namen für die Datenbank ein.</p></li>
-<li><p>Klicken Sie auf <strong>Starten</strong>. Das Erstellen dauert eine Weile. Wenn das Werkzeug <strong>!!! erledigt !!!</strong> meldet,
-erscheint die Datenbank unter <strong>Datenbank</strong> im Bereich <strong>Streckenführung</strong>.</p></li>
+<li><p>Klicken Sie auf <strong>Starten</strong>, um die Datenbank zu erstellen. Dieser Vorgang kann einige Zeit in Anspruch nehmen.</p>
+<p>Sobald das Werkzeug <strong>!!! erledigt !!!</strong> meldet, wird die erstellte Datenbank im Bereich <strong>Streckenführung</strong> unter <strong>Datenbank</strong> angezeigt.</p>
+</li>
 <li><img alt="Quickstart routing routino select" class="align-right" src="../_images/quickstart-routing-routino-select.png" />
-<p>Wählen Sie die Datenbank unter <strong>Datenbank</strong> aus. Wählen Sie unter <strong>Profil</strong> aus, wie Sie unterwegs sind, zum
-Beispiel <strong>Fußgänger</strong> oder <strong>Fahrrad</strong>.</p>
+<p>Wählen Sie unter <strong>Datenbank</strong> die gewünschte Datenbank aus. Legen Sie anschließend unter <strong>Profil</strong> fest, wie Sie unterwegs sind, beispielsweise als <strong>Fußgänger</strong> oder mit dem <strong>Fahrrad</strong>.</p>
 </li>
 </ol>
-<p>Eine anderswo erstellte Datenbank besteht aus vier Dateien: <code class="docutils literal notranslate"><span class="pre">&lt;name&gt;-nodes.mem</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;name&gt;-segments.mem</span></code>,
-<code class="docutils literal notranslate"><span class="pre">&lt;name&gt;-ways.mem</span></code> und <code class="docutils literal notranslate"><span class="pre">&lt;name&gt;-relations.mem</span></code>. Kopieren Sie sie direkt in das Verzeichnis <code class="docutils literal notranslate"><span class="pre">Routino</span></code>, nicht in ein
-Unterverzeichnis. Nach einigen Sekunden erscheint die Datenbank unter <strong>Datenbank</strong>. Sie heißt wie ihre Dateien, mit
-Leerzeichen statt Unterstrichen: Die Dateien <code class="docutils literal notranslate"><span class="pre">tannheimer_tal-*.mem</span></code> stehen in der Liste als <strong>tannheimer tal</strong>.</p>
+<p>Eine extern erstellte Datenbank besteht aus vier Dateien: <code class="docutils literal notranslate"><span class="pre">&lt;name&gt;-nodes.mem</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;name&gt;-segments.mem</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;name&gt;-ways.mem</span></code> und <code class="docutils literal notranslate"><span class="pre">&lt;name&gt;-relations.mem</span></code>.</p>
+<p>Kopieren Sie diese Dateien direkt in das Verzeichnis <code class="docutils literal notranslate"><span class="pre">Routino</span></code>, nicht in ein Unterverzeichnis. Nach einigen Sekunden erscheint die Datenbank unter <strong>Datenbank</strong>.</p>
+<p>Als Name wird der gemeinsame Dateiname verwendet. Dabei werden Unterstriche durch Leerzeichen ersetzt. So erscheint beispielsweise die Datenbank aus den Dateien <code class="docutils literal notranslate"><span class="pre">tannheimer_tal-*.mem</span></code> in der Liste unter dem Namen <strong>tannheimer tal</strong>.</p>
 </section>
 </section>
 
@@ -333,7 +320,7 @@ Leerzeichen statt Unterstrichen: Die Dateien <code class="docutils literal notra
                   <span>Zurück</span>
                 </div>
                 
-                <div class="title">Eine GPX-Datei laden</div>
+                <div class="title">Eine GPX Datei laden</div>
                 
               </div>
             </a>

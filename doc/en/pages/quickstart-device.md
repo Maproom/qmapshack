@@ -7,20 +7,18 @@ This page shows how to put your tracks and waypoints on a Garmin GPS device and 
 
 ## Connecting the device
 
-This page uses a Garmin device connected as USB mass storage, which your computer shows as a drive. QMapShack handles
-devices that connect over MTP (Media Transfer Protocol), and devices of other makes, the same way. What your computer
-needs for a device is on the wiki page [GPS Devices][WIKI_DEVICES].
+This page describes how to use in QMapShack a Garmin device connected as USB mass storage, which your computer recognizes as a drive. QMapShack handles devices that connect via MTP (Media Transfer Protocol), as well as devices from other manufacturers, in a similar way. For information about the requirements your computer must meet to work with a particular device, see the wiki page [GPS Devices][WIKI_DEVICES].
+
 
 1. Connect the device to your computer with its USB cable.
 2. ```{image} ../images/quickstart-device/quickstart-device-connected.png
     :align: right
     ```
 
-    The device appears in the **Workspace** panel under its model name. Below it, QMapShack lists each track and
-    waypoint file on the device as a project.
+    The device appears in the **Workspace** panel under its model name. QMapShack lists each track and waypoint file on the device as a separate project beneath it.
 
 If the device does not appear, click **Workspace → Setup Workspace** and make sure **Enable device support** is checked
-on the **General** tab. It's checked by default.
+on the **General** tab. This option is enabled by default.
 
 ```{index} single: Device; send project
 ```
@@ -31,18 +29,16 @@ on the **General** tab. It's checked by default.
     :align: right
     ```
 
-    Right-click the project in the **Workspace** panel and click **Send to Devices**. You can click it only while a
-    device is connected.
+    Right-click the project in the **Workspace** panel and click **Send to Devices**. You can only click it when a device is connected.
 
 2. ```{image} ../images/quickstart-device/quickstart-device-sent.png
     :align: right
     ```
 
-    The project appears below the device. QMapShack stores it on the device as a GPX file named after the project, in
-    this example `Example.gpx`. In the file name, QMapShack leaves out every character except letters, digits and `_`.
+    The project appears below the device. QMapShack stores it on the device as a .gpx file named after the project, in
+    this example `Example.gpx`. When creating the file name, QMapShack removes all characters except letters, digits, and underscores.
 
-If more than one device is connected, QMapShack asks which ones to send the project to. Sending the project again
-replaces its copy on the device.
+If more than one device is connected, QMapShack asks which devices you want to send the project to. Sending the project again overwrites the existing copy on the device.
 
 ```{index} single: Device; get recording
 ```
@@ -52,29 +48,27 @@ replaces its copy on the device.
 1. ```{image} ../images/quickstart-device/quickstart-device-recording.png
     :align: right
     ```
-
-    Click the arrow to the left of the project with your recording, in this example **Track 2025-06-14 101530**, to
-    see its track.
+   
+    Click the arrow to the left of the project containing your recording (in this example, **Track 2025-06-14 101530**) to expand it and display the track.
 
 2. ```{image} ../images/quickstart-device/quickstart-device-copy-menu.png
     :align: right
     ```
 
-    You can't change items on the device, so copy the track into the workspace: right-click the track and click
-    **Copy to...**.
+    You cannot modify items directly on the device, so first copy the track to the workspace. To do this, right-click the track and select **Copy to...**.
 
 3. ```{image} ../images/quickstart-device/quickstart-device-copy-dialog.png
     :align: right
     ```
 
-    In the **Select a project...** dialog, select a project in the workspace or enter a name for a new one, in this
-    example `My recordings`, and click **OK**.
+    In the **Select a project...** dialog, select a project in the workspace or enter a name for a new project (in this
+    example `My recordings`). Then click **OK**.
 
 4. ```{image} ../images/quickstart-device/quickstart-device-copied.png
     :align: right
     ```
 
-    The track is now in the project in the workspace, where you can change it. Save the project to keep it; see
+    The track is now in the project in the workspace, where you can edit it. Save the project to keep your changes. See
     [Saving your work](quickstart-save.md).
 
 [WIKI_DEVICES]: https://github.com/Maproom/qmapshack/wiki/DocGisDevices

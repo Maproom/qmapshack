@@ -198,10 +198,10 @@
 <li class="toctree-l1 current has-children"><a class="reference internal" href="quickstart.html">Schnellstart</a><input aria-label="Toggle navigation of Schnellstart" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="quickstart-main-window.html">Das Hauptfenster</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-maps.html">Karten einschalten</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart-vector-map.html">Eine Garmin-Karte einschalten</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart-vector-map.html">Eine Garmin-Karte anzeigen</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-zoom-pan.html">Zoomen und Verschieben</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-dem.html">Höhendaten und Schummerung</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart-load-file.html">Eine GPX-Datei laden</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart-load-file.html">Eine GPX Datei laden</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-routing.html">Routing einrichten</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-draw-track.html">Einen Track zeichnen</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-waypoints.html">Wegpunkte hinzufügen</a></li>
@@ -251,8 +251,7 @@
 Beispieldatenbank <code class="docutils literal notranslate"><span class="pre">Example.db</span></code>.</p>
 <section id="eine-datenbank-anlegen">
 <span id="index-0"></span><h2>Eine Datenbank anlegen<a class="headerlink" href="#eine-datenbank-anlegen" title="Link to this heading">#</a></h2>
-<p>Eine Datenbank ist eine Datei, in der Ihre Projekte in Ordnern liegen. Der Bereich <strong>Datenbank</strong> zeigt Ihre
-Datenbanken.</p>
+<p>Eine Datenbank ist eine einzelne Datei, in der Ihre Projekte in Ordnern organisiert sind. Der Bereich <strong>Datenbank</strong> listet Ihre Datenbanken auf.</p>
 <ol class="arabic">
 <li><img alt="Quickstart database add menu" class="align-right" src="../_images/quickstart-database-add-menu.png" />
 <p>Klicken Sie mit der rechten Maustaste auf eine freie Stelle im Bereich <strong>Datenbank</strong> und dann auf
@@ -261,41 +260,34 @@ Datenbanken.</p>
 <li><img alt="Quickstart database add dialog" class="align-right" src="../_images/quickstart-database-add-dialog.png" />
 <p>Geben Sie bei <strong>Name</strong> <code class="docutils literal notranslate"><span class="pre">Example</span></code> ein und lassen Sie <strong>SQLite</strong> ausgewählt.</p>
 </li>
-<li><p>Klicken Sie auf den Plus-Knopf, der im Bild von Schritt 2 markiert ist. Wählen Sie ein Verzeichnis aus, geben Sie
+<li><p>Klicken Sie auf die im Bild zu Schritt 2 markierte Plus-Schaltfläche. Wählen Sie ein Verzeichnis aus, geben Sie
 einen Dateinamen ein und klicken Sie auf <strong>Speichern</strong>.</p>
-<p>Der Dialog öffnet sich in dem Verzeichnis, in dem Sie zuletzt eine Datenbank gewählt haben. Wenn Sie das
-<a class="reference internal" href="quickstart-main-window.html#das-hauptverzeichnis-einrichten"><span class="std std-ref">Hauptverzeichnis</span></a> eingerichtet haben, stellt
-QMapShack ihn auf dessen Verzeichnis <code class="docutils literal notranslate"><span class="pre">Databases</span></code>.</p>
-<p>Haben Sie schon eine Datenbankdatei, klicken Sie stattdessen auf den Ordner-Knopf rechts neben dem Plus-Knopf.
-Wählen Sie die Datei aus und klicken Sie auf <strong>Öffnen</strong>.</p>
+<p>Der Dialog öffnet sich in dem Verzeichnis, in dem Sie zuletzt eine Datenbank ausgewählt haben. Wenn Sie das <a class="reference external" href="https://quickstart-main-window.md#das-hauptverzeichnis-einrichten">Hauptverzeichnis</a> eingerichtet haben, öffnet QMapShack den Dialog standardmäßig im Unterverzeichnis <code class="docutils literal notranslate"><span class="pre">Databases</span></code> dieses Hauptverzeichnisses.</p>
+<p>Wenn Sie bereits eine Datenbankdatei haben, klicken Sie stattdessen auf die Ordner-Schaltfläche rechts neben der Plus-Schaltfläche. Wählen Sie die Datei aus und klicken Sie auf <strong>Öffnen</strong>.</p>
 </li>
 <li><img alt="Quickstart database panel" class="align-right" src="../_images/quickstart-database-panel.png" />
-<p>Klicken Sie auf <strong>OK</strong>. Die Datenbank erscheint im Bereich <strong>Datenbank</strong>.</p>
+<p>Klicken Sie auf <strong>OK</strong>. Anschließend erscheint die Datenbank im Bereich <strong>Datenbank</strong>.</p>
 </li>
 </ol>
 </section>
 <section id="ordner">
 <span id="index-1"></span><h2>Ordner<a class="headerlink" href="#ordner" title="Link to this heading">#</a></h2>
-<p>In einer Datenbank liegen die Daten in Ordnern. Die Farbe eines Ordners zeigt seine Art:</p>
+<p>Eine Datenbank organisiert ihre Daten in Ordnern. Die Farbe eines Ordners zeigt seine Art:</p>
 <ul class="simple">
-<li><p>Ein Ordner vom Typ <strong>Gruppe</strong> (blau) enthält andere Ordner und hilft, die Daten zu strukturieren. Sie können ihn nicht
-in den Arbeitsplatz laden. Legen Sie Ordner vom Typ <strong>Projekt</strong> in einen Ordner vom Typ <strong>Gruppe</strong>, nicht direkt in
-die Datenbank.</p></li>
+<li><p>Ein Ordner vom Typ <strong>Gruppe</strong> (blau) enthält weitere Ordner und dient dazu, die Daten zu strukturieren. Sie können ihn nicht in den Arbeitsplatz laden. Legen Sie Ordner vom Typ <strong>Projekt</strong> in einem Ordner vom Typ <strong>Gruppe</strong> ab, nicht direkt in die Datenbank.</p></li>
 <li><p>Ein Ordner vom Typ <strong>Projekt</strong> (grün) enthält wie eine Projektdatei Tracks, Wegpunkte, Routen und Gebiete. Sie können
 ihn in den Arbeitsplatz laden.</p></li>
-<li><p>Ein Ordner vom Typ <strong>Sonstige</strong> (orange) funktioniert wie ein Ordner vom Typ <strong>Projekt</strong>. Wofür Sie ihn nutzen,
-entscheiden Sie selbst. So können Sie etwa die Aufzeichnung einer Tour in einen Ordner vom Typ <strong>Projekt</strong> legen und
-die Planung in einen Ordner vom Typ <strong>Sonstige</strong> darunter.</p></li>
+<li><p>Ein Ordner vom Typ <strong>Sonstige</strong> (orange) funktioniert wie ein Ordner vom Typ <strong>Projekt</strong>. Sie können ihn jedoch frei verwenden. Beispielsweise können Sie die Aufzeichnung einer Tour in einem Ordner vom Typ <strong>Projekt</strong> und die dazugehörige Planung in einem darunterliegenden Ordner vom Typ <strong>Sonstige</strong> ablegen.</p></li>
 </ul>
 <ol class="arabic">
 <li><img alt="Quickstart database folder menu" class="align-right" src="../_images/quickstart-database-folder-menu.png" />
 <p>Klicken Sie mit der rechten Maustaste auf die Datenbank <strong>Example</strong> und dann auf <strong>Ordner hinzufügen</strong>.</p>
 </li>
 <li><img alt="Quickstart database folder dialog" class="align-right" src="../_images/quickstart-database-folder-dialog.png" />
-<p>Geben Sie bei <strong>Ordnername</strong> <code class="docutils literal notranslate"><span class="pre">Touren</span></code> ein und wählen Sie <strong>Gruppe</strong> aus.</p>
+<p>Geben Sie bei <strong>Ordnername</strong> <code class="docutils literal notranslate"><span class="pre">Touren</span></code> ein und wählen Sie als Typ <strong>Gruppe</strong> aus.</p>
 </li>
 <li><img alt="Quickstart database folder group" class="align-right" src="../_images/quickstart-database-folder-group.png" />
-<p>Klicken Sie auf <strong>OK</strong>. Die Gruppe <strong>Touren</strong> erscheint unter <strong>Example</strong>.</p>
+<p>Klicken Sie auf <strong>OK</strong>. Die Gruppe <strong>Touren</strong> erscheint unterhalb von <strong>Example</strong>.</p>
 </li>
 <li><img alt="Quickstart database folder project" class="align-right" src="../_images/quickstart-database-folder-project.png" />
 <p>Klicken Sie mit der rechten Maustaste auf <strong>Touren</strong> und dann auf <strong>Ordner hinzufügen</strong>. Geben Sie
@@ -309,23 +301,20 @@ die Planung in einen Ordner vom Typ <strong>Sonstige</strong> darunter.</p></li>
 </section>
 <section id="dateien-importieren">
 <span id="index-2"></span><h2>Dateien importieren<a class="headerlink" href="#dateien-importieren" title="Link to this heading">#</a></h2>
-<p>Sie können Projektdateien in einer Datenbank ablegen, ohne sie in den Arbeitsplatz zu laden.</p>
+<p>Sie können Projektdateien in einer Datenbank speichern, ohne sie in den Arbeitsplatz zu laden.</p>
 <ol class="arabic">
 <li><img alt="Quickstart database import menu" class="align-right" src="../_images/quickstart-database-import-menu.png" />
-<p>Klicken Sie mit der rechten Maustaste auf den Ordner, unter dem die Projekte liegen sollen, hier die
-Gruppe <strong>Touren</strong>, und dann auf <strong>Aus Dateien importieren…</strong>.</p>
+<p>Klicken Sie mit der rechten Maustaste auf den Ordner, in dem die Projekte abgelegt werden sollen, hier die Gruppe <strong>Touren</strong>, und wählen Sie <strong>Aus Dateien importieren…</strong>.</p>
 </li>
 <li><p>Wählen Sie eine oder mehrere Dateien aus, zum Beispiel <code class="docutils literal notranslate"><span class="pre">Vilsalpsee.gpx</span></code>, und klicken Sie auf <strong>Öffnen</strong>.</p></li>
 <li><img alt="Quickstart database imported" class="align-right" src="../_images/quickstart-database-imported.png" />
-<p>QMapShack legt für jede Datei einen Ordner vom Typ <strong>Projekt</strong> in dem Ordner an, auf den Sie geklickt haben. Hier
-erscheint <strong>Vilsalpsee</strong> unter <strong>Touren</strong>. Der Ordner trägt den Namen des Projekts aus der Datei. Ein Projekt,
-das schon in der Datenbank liegt, überspringt QMapShack.</p>
+<p>QMapShack legt für jede Datei einen Ordner vom Typ <strong>Projekt</strong> in dem zuvor ausgewählten Ordner an. In diesem Beispiel erscheint <strong>Vilsalpsee</strong> unter <strong>Touren</strong>. Der neue Ordner erhält den Namen des Projekts aus der Datei. Projekte, die bereits in der Datenbank vorhanden sind, überspringt QMapShack.</p>
 </li>
 </ol>
 </section>
 <section id="als-gpx-exportieren">
 <span id="index-3"></span><h2>Als GPX exportieren<a class="headerlink" href="#als-gpx-exportieren" title="Link to this heading">#</a></h2>
-<p>Sie können eine Datenbank oder einen ihrer Ordner als GPX-Dateien exportieren, zum Beispiel um die Daten
+<p>Sie können eine Datenbank oder einen ihrer Ordner als .gpx Dateien exportieren, zum Beispiel um die Daten
 weiterzugeben.</p>
 <ol class="arabic">
 <li><img alt="Quickstart database export menu" class="align-right" src="../_images/quickstart-database-export-menu.png" />
@@ -333,12 +322,9 @@ weiterzugeben.</p>
 <strong>Als GPX exportieren…</strong>.</p>
 </li>
 <li><img alt="Quickstart database export dialog" class="align-right" src="../_images/quickstart-database-export-dialog.png" />
-<p>Klicken Sie auf den im Bild markierten Ordner-Knopf und wählen Sie das Zielverzeichnis aus. Aktivieren Sie
-<strong>GPX 1.1 ohne Erweiterungen</strong>, um die eigenen Daten von QMapShack wegzulassen.</p>
+<p>Klicken Sie auf die im Bild markierte Ordner-Schaltfläche und wählen Sie das Zielverzeichnis aus. Aktivieren Sie <strong>GPX 1.1 ohne Erweiterungen</strong>, um QMapShack-spezifische Daten auszuschließen.</p>
 </li>
-<li><p>Klicken Sie auf <strong>Starten</strong>. QMapShack legt für die Datenbank und jede Gruppe ein Verzeichnis an und schreibt jeden
-Ordner vom Typ <strong>Projekt</strong> und <strong>Sonstige</strong> in eine eigene GPX-Datei. Der Dateiname eines Ordners vom Typ
-<strong>Sonstige</strong> beginnt mit dem Namen des Ordners darüber.</p></li>
+<li><p>Klicken Sie auf <strong>Starten</strong>. QMapShack legt ein Verzeichnis für die Datenbank und jeweils ein eigenes Verzeichnis für jede Gruppe an. Für jeden Ordner vom Typ <strong>Projekt</strong> und <strong>Sonstige</strong> erstellt es eine eigene .gpx Datei. Der Dateiname eines Ordners vom Typ <strong>Sonstige</strong> beginnt mit dem Namen seines übergeordneten Ordners.</p></li>
 <li><p>Wenn <strong>Fertig!</strong> erscheint, klicken Sie auf <strong>Schließen</strong>.</p>
 <img alt="Quickstart database exported" class="below-right" src="../_images/quickstart-database-exported.png" />
 </li>
@@ -346,27 +332,25 @@ Ordner vom Typ <strong>Projekt</strong> und <strong>Sonstige</strong> in eine ei
 </section>
 <section id="mit-dem-arbeitsplatz-arbeiten">
 <span id="index-4"></span><h2>Mit dem Arbeitsplatz arbeiten<a class="headerlink" href="#mit-dem-arbeitsplatz-arbeiten" title="Link to this heading">#</a></h2>
-<p>Die Datenbank speichert Ihre Daten. Ändern können Sie sie im Arbeitsplatz. Laden Sie ein Projekt, ändern Sie es,
+<p>Die Datenbank speichert Ihre Daten. Sie können diese im Arbeitsplatz bearbeiten. Laden Sie ein Projekt, ändern Sie es,
 speichern Sie es in die Datenbank zurück und entladen Sie es wieder.</p>
 <ol class="arabic">
 <li><img alt="Quickstart database loaded db" class="align-right" src="../_images/quickstart-database-loaded-db.png" />
-<p>Klicken Sie in der Zeile von <strong>Vilsalpsee</strong> ganz rechts auf den Lade-Knopf, der im Bild markiert ist.</p>
+<p>Klicken Sie in der Zeile von <strong>Vilsalpsee</strong> ganz rechts auf die im Bild markierte Laden-Schaltfläche.</p>
 </li>
 <li><img alt="Quickstart database loaded wks" class="align-right" src="../_images/quickstart-database-loaded-wks.png" />
-<p>Das Projekt erscheint im Bereich <strong>Arbeitsplatz</strong> als <strong>Vilsalpsee &#64; Touren</strong>: sein Name und der Ordner, in
-dem es liegt.</p>
+<p>Das Projekt erscheint im Bereich <strong>Arbeitsplatz</strong> unter dem Namen <strong>Vilsalpsee &#64; Touren</strong>. Dieser setzt sich aus dem Projektnamen und dem Ordner zusammen, in dem es liegt.</p>
 </li>
-<li><p>Bearbeiten Sie das Projekt wie eine Projektdatei, zum Beispiel indem Sie
-<a class="reference internal" href="quickstart-waypoints.html"><span class="std std-doc">einen Wegpunkt hinzufügen</span></a>. Klicken Sie dann im Bereich <strong>Arbeitsplatz</strong> auf den
-Speichern-Knopf in der Zeile des Projekts. QMapShack schreibt die Änderungen in die Datenbank.</p></li>
-<li><p>Klicken Sie im Bereich <strong>Datenbank</strong> noch einmal auf den Lade-Knopf, um das Projekt zu entladen. Hat das Projekt
-ungespeicherte Änderungen, fragt QMapShack zuerst: <strong>Speichern</strong> speichert sie, <strong>Nein</strong> verwirft sie,
-<strong>Abbrechen</strong> lässt das Projekt geladen.</p></li>
+<li><p>Bearbeiten Sie das Projekt wie eine normale Projektdatei, zum Beispiel indem Sie <a class="reference external" href="https://quickstart-waypoints.md">einen Wegpunkt hinzufügen</a>. Klicken Sie anschließend im Bereich <strong>Arbeitsplatz</strong> in der Projektzeile auf die Speichern-Schaltfläche. QMapShack übernimmt die Änderungen in die Datenbank.</p></li>
+<li><p>Klicken Sie im Bereich <strong>Datenbank</strong> erneut auf die Laden-Schaltfläche, um das Projekt zu entladen. Hat das Projekt ungespeicherte Änderungen, fragt QMapShack zunächst, wie es weitergehen soll:</p>
+<ul class="simple">
+<li><p><strong>Speichern</strong> speichert die Änderungen vor dem Entladen.</p></li>
+<li><p><strong>Nein</strong> verwirft die Änderungen und entlädt das Projekt.</p></li>
+<li><p><strong>Abbrechen</strong> bricht den Vorgang ab und lässt das Projekt geladen.</p></li>
+</ul>
+</li>
 </ol>
-<p>Wenn Sie im Arbeitsplatz ein Element aus einem Projekt entfernen, bleibt es in der Datenbank, auch nach dem
-Speichern. Um es aus einem Ordner zu löschen, klicken Sie im Bereich <strong>Datenbank</strong> mit der rechten Maustaste darauf
-und dann auf <strong>Element löschen</strong>. Ein Element, das in keinem Ordner mehr liegt, landet in <strong>Verloren &amp; Gefunden</strong>.
-Löschen Sie es dort, ist es endgültig entfernt.</p>
+<p>Wenn Sie ein Element im Arbeitsplatz aus einem Projekt entfernen, bleibt es in der Datenbank erhalten, auch wenn Sie das Projekt speichern. Um ein Element aus einem Ordner zu löschen, klicken Sie im Bereich <strong>Datenbank</strong> mit der rechten Maustaste darauf und wählen <strong>Element löschen</strong>. Ein Element, das keinem Ordner mehr zugeordnet ist, wird nach <strong>Verloren &amp; Gefunden</strong> verschoben. Wenn Sie es dort löschen, wird es endgültig entfernt.</p>
 </section>
 </section>
 

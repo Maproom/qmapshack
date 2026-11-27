@@ -3,7 +3,7 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Turning on maps" href="quickstart-maps.html"><link rel="prev" title="Quick start" href="quickstart.html">
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Enabling maps" href="quickstart-maps.html"><link rel="prev" title="Quick start" href="quickstart.html">
 
     <!-- Generated with Sphinx 9.1.1 and Furo 2025.12.19 -->
         <title>The main window - QMapShack documentation</title>
@@ -197,8 +197,8 @@
   <ul class="current">
 <li class="toctree-l1 current has-children"><a class="reference internal" href="quickstart.html">Quick start</a><input aria-label="Toggle navigation of Quick start" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">The main window</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart-maps.html">Turning on maps</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart-vector-map.html">Turning on a Garmin map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart-maps.html">Enabling maps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart-vector-map.html">Enabling a Garmin map</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-zoom-pan.html">Zooming and panning</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-dem.html">Elevation data and hillshading</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-load-file.html">Loading a GPX file</a></li>
@@ -252,61 +252,57 @@
 <span id="index-0"></span><h2>The window on first start<a class="headerlink" href="#the-window-on-first-start" title="Link to this heading">#</a></h2>
 <p><img alt="Quickstart main window first start" src="../_images/quickstart-main-window-first-start.png" /></p>
 <p>The map takes up the middle of the window, with the menu bar and the toolbar above it.</p>
-<p>On first start, no map is active, so a welcome page appears instead. It closes once you turn on a map.</p>
-<p>The panels left and right of the map are mostly empty at first; many show a hint on how to fill them:</p>
+<p>On first start, no map is active, so a welcome page appears instead. It closes once you activate a map.</p>
+<p>The panels to the left and right of the map are mostly empty initially. Many display hints explain how to populate them:</p>
 <ul class="simple">
-<li><p><strong>Maps</strong>: turn maps on and off.</p></li>
-<li><p><strong>Dig. Elev. Model (DEM)</strong>: turn elevation data on and off, for example to shade the terrain on the map.</p></li>
+<li><p><strong>Maps</strong>: activate or deactivate maps.</p></li>
+<li><p><strong>Dig. Elev. Model (DEM)</strong>: activate or deactivate elevation data, for example, to add terrain shading to the map.</p></li>
 <li><p><strong>POI Collections</strong>: show points of interest from POI files.</p></li>
-<li><p><strong>Workspace</strong>: the projects you have open, with their tracks, waypoints, routes and areas.</p></li>
+<li><p><strong>Workspace</strong>: Your open projects, including their tracks, waypoints, routes, and areas.</p></li>
 <li><p><strong>Database</strong>: keep your projects in a database.</p></li>
 <li><p><strong>Routing</strong>: set up how QMapShack calculates routes.</p></li>
 <li><p><strong>Realtime</strong>: show live positions, for example of ships or aircraft.</p></li>
 </ul>
-<p>The quick start doesn’t need <strong>POI Collections</strong> and <strong>Realtime</strong>.</p>
+<p>The Quick Start doesn’t cover <strong>POI Collections</strong> and <strong>Realtime</strong>.</p>
 </section>
 <section id="arranging-the-window">
 <span id="index-4"></span><span id="index-3"></span><span id="index-2"></span><span id="index-1"></span><h2>Arranging the window<a class="headerlink" href="#arranging-the-window" title="Link to this heading">#</a></h2>
-<p>Each panel has a title bar with its name along its left edge.</p>
+<p>Each panel has a title bar displaying its name on the left edge.</p>
 <ul>
 <li><img alt="Quickstart main window panel move" class="align-right" src="../_images/quickstart-main-window-panel-move.png" />
-<p>To move a panel, drag it by its title bar. You can drop it left, right, above or below the map.</p>
+<p>To move a panel, drag its title bar. You can drop it to the left, right, above, or below the map.</p>
 </li>
 <li><img alt="Quickstart main window panel stack" class="align-right" src="../_images/quickstart-main-window-panel-stack.png" />
-<p>To stack panels, drop one panel onto another. Then use the tabs to switch between them.</p>
+<p>To stack panels, drag one panel onto another. Use the tabs to switch between the stacked panels.</p>
 </li>
 <li><img alt="Quickstart main window panel resize" class="align-right" src="../_images/quickstart-main-window-panel-resize.png" />
-<p>To resize a panel, drag the border between two panels, or between a panel and the map.</p>
+<p>To resize a panel, drag the border between two panels or between a panel and the map.</p>
 </li>
 <li><img alt="Quickstart main window panel buttons" class="align-right" src="../_images/quickstart-main-window-panel-buttons.png" />
-<p>To close a panel you don’t need, click the top button of its title bar. The button below it detaches the panel from the window.</p>
+<p>To close a panel you no longer need, click the top button in its title bar. The button below it detaches the panel from the main window.</p>
 </li>
 </ul>
 </section>
-<section id="getting-a-panel-back">
-<span id="index-8"></span><span id="index-7"></span><span id="index-6"></span><span id="index-5"></span><h2>Getting a panel back<a class="headerlink" href="#getting-a-panel-back" title="Link to this heading">#</a></h2>
+<section id="restoring-a-panel">
+<span id="index-8"></span><span id="index-7"></span><span id="index-6"></span><span id="index-5"></span><h2>Restoring a panel<a class="headerlink" href="#restoring-a-panel" title="Link to this heading">#</a></h2>
 <ul>
 <li><img alt="Quickstart main window menu window" class="align-right" src="../_images/quickstart-main-window-menu-window.png" />
-<p>To show a closed panel again, click its name in the <strong>Window</strong> menu. The menu lists every panel and
-the toolbar, and highlights the ones on screen.</p>
+<p>To show a closed panel again, click its name in the <strong>Window</strong> menu. The menu lists all panels and the toolbar, highlighting those currently visible.</p>
 </li>
-<li><p>To hide all panels at once, click <strong>Window → Toggle Docks</strong> or press <strong>Ctrl+D</strong>; the menu calls panels docks. Do the same again to bring them back.</p></li>
-<li><p>To give the whole screen to the map, click <strong>Window → Fullscreen</strong> or press <strong>F11</strong>. Full screen also hides the menu bar, so press <strong>F11</strong> to leave it.</p></li>
+<li><p>To hide all panels at once, select <strong>Window → Toggle Docks</strong> or press <strong>Ctrl+D</strong>. The menu refers to panels as docks. Repeat the action to show them again.</p></li>
+<li><p>To give the map the entire screen, select <strong>Window → Fullscreen</strong> or press <strong>F11</strong>. The fullscreen mode also hides the menu bar. Press <strong>F11</strong> again to exit the fullscreen mode.</p></li>
 </ul>
-<p>QMapShack keeps your arrangement for the next start.</p>
+<p>QMapShack saves your panel arrangement and restores it the next time you start the application.</p>
 </section>
 <section id="setting-up-the-home-folder">
 <span id="index-9"></span><h2>Setting up the home folder<a class="headerlink" href="#setting-up-the-home-folder" title="Link to this heading">#</a></h2>
-<p>QMapShack keeps its data in one folder, with a subfolder for each kind of data: <code class="docutils literal notranslate"><span class="pre">Maps</span></code>, <code class="docutils literal notranslate"><span class="pre">DEM</span></code>, <code class="docutils literal notranslate"><span class="pre">POI</span></code>, <code class="docutils literal notranslate"><span class="pre">Routino</span></code> and
-<code class="docutils literal notranslate"><span class="pre">BRouter</span></code> (routing data), <code class="docutils literal notranslate"><span class="pre">Databases</span></code> and <code class="docutils literal notranslate"><span class="pre">GPX</span></code>. The welcome page sets this up for you, and the other quick start
-pages put their data there.</p>
+<p>QMapShack stores all its data in a single folder, with a separate subfolder for each data type: <code class="docutils literal notranslate"><span class="pre">Maps</span></code>, <code class="docutils literal notranslate"><span class="pre">DEM</span></code>, <code class="docutils literal notranslate"><span class="pre">POI</span></code>, <code class="docutils literal notranslate"><span class="pre">Routino</span></code> and <code class="docutils literal notranslate"><span class="pre">BRouter</span></code> (routing data), <code class="docutils literal notranslate"><span class="pre">Databases</span></code>, and <code class="docutils literal notranslate"><span class="pre">GPX</span></code>. The welcome page sets up this folder structure for you, and the other Quick Start pages store their data there.</p>
 <ol class="arabic">
 <li><img alt="Quickstart main window give it a home" class="align-right" src="../_images/quickstart-main-window-give-it-a-home.png" />
-<p>Scroll the welcome page down to <strong>Give it a home</strong> and click the <strong>path</strong> link.</p>
+<p>Scroll down the welcome page to <strong>Give it a home</strong>, then click the <strong>path</strong> link.</p>
 </li>
 <li><p>Select a folder, or create a new one, and confirm.</p></li>
-<li><p>QMapShack creates the subfolders that are missing and registers them for maps, elevation data, POIs and
-routing. The welcome page then shows the folder under <strong>Current home</strong>.</p></li>
+<li><p>QMapShack creates any missing subfolders and registers them for maps, elevation data, POIs, and routing data. The welcome page then displays the folder under <strong>Current home</strong>.</p></li>
 </ol>
 </section>
 </section>
@@ -321,7 +317,7 @@ routing. The welcome page then shows the folder under <strong>Current home</stro
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Turning on maps</div>
+                <div class="title">Enabling maps</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -369,7 +365,7 @@ routing. The welcome page then shows the folder under <strong>Current home</stro
 <li><a class="reference internal" href="#">The main window</a><ul>
 <li><a class="reference internal" href="#the-window-on-first-start">The window on first start</a></li>
 <li><a class="reference internal" href="#arranging-the-window">Arranging the window</a></li>
-<li><a class="reference internal" href="#getting-a-panel-back">Getting a panel back</a></li>
+<li><a class="reference internal" href="#restoring-a-panel">Restoring a panel</a></li>
 <li><a class="reference internal" href="#setting-up-the-home-folder">Setting up the home folder</a></li>
 </ul>
 </li>

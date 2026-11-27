@@ -1,6 +1,6 @@
-# Eine Garmin-Karte einschalten
+# Eine Garmin-Karte anzeigen
 
-Diese Seite zeigt, wie Sie eine Garmin-Karte zu QMapShack hinzufügen, einschalten und einstellen, was sie zeigt.
+Diese Seite zeigt, wie Sie eine Garmin-Karte zu QMapShack hinzufügen, anzeigen und einstellen, was sie zeigt.
 
 Bilder: *© OpenStreetMap contributors, created by BBBike*.
 
@@ -12,38 +12,38 @@ Bilder: *© OpenStreetMap contributors, created by BBBike*.
 
 ## Garmin-Karten
 
-Eine Online-Karte besteht aus Bildern, die QMapShack lädt, während Sie sie ansehen. Eine Garmin-Karte ist dagegen
-eine Vektorkarte: eine Datei mit Straßen, Wegen, Gebieten und Punkten, die QMapShack selbst zeichnet. Sie braucht
+Eine Online-Karte besteht aus Bildern, die QMapShack während der Betrachtung der Karte lädt. Eine Garmin-Karte ist dagegen
+eine Vektorkarte: eine Datei mit Straßen, Wegen, Gebieten und Punkten, die QMapShack selbst darstellt. Sie braucht
 keine Internetverbindung.
 
-Garmin-Karten sind `.img`-Dateien, und sie sind die einzigen Vektorkarten, die QMapShack liest. Das Beispiel auf dieser
-Seite ist ein Ausschnitt aus OpenStreetMap-Daten, erstellt mit dem [BBBike extract service][BBBIKE]. Dort können Sie
-auch einen für Ihre eigene Gegend erstellen.
+Garmin-Karten sind .img Dateien. Dies sind die einzigen Vektorkarten, die QMapShack liest. 
 
-Zwei Arten von `.img`-Dateien lassen sich nicht öffnen:
+Das Beispiel auf dieser
+Seite ist ein Ausschnitt aus OpenStreetMap-Daten. Dieser wurde mit dem [BBBike extract service][BBBIKE] erstellt. Dort können Sie
+auch einen Ausschnitt für Ihre eigene Gegend erstellen.
 
-- Karten im neueren NT-Format von Garmin, das auch manche freie Karten nutzen. QMapShack meldet **Die Datei hat
-    das NT Format.**
-- Gesperrte Karten, wie Garmin sie verkauft. QMapShack meldet, dass die Datei verschlüsselte Daten enthält.
+Zwei Arten von .img Dateien lassen sich nicht in QMapShack öffnen:
+
+- Karten im neueren NT-Format von Garmin, das auch manche freie Karten nutzen. QMapShack meldet dann **Die Datei hat das NT Format.**
+- Gesperrte Karten, wie Garmin sie vertreibt. QMapShack meldet dann, dass die Datei verschlüsselte Daten enthält.
 
 ```{index} single: Karte; hinzufügen
 ```
 
 ## Die Karte hinzufügen
 
-QMapShack zeigt jede Karte an, die direkt in einem seiner Kartenverzeichnisse liegt. Das Verzeichnis `Maps` in Ihrem
-[Hauptverzeichnis](quickstart-main-window.md#das-hauptverzeichnis-einrichten) ist eines davon.
+QMapShack zeigt jede Karte an, die in einem seiner Kartenverzeichnisse liegt. Das Verzeichnis `Maps` in Ihrem
+[Hauptverzeichnis][HAUPTVERZ] ist eines dieser Verzeichnisse.
 
-1. Kopieren Sie die `.img`-Datei in das Verzeichnis `Maps`.
+1. Kopieren Sie die .img Datei in das Verzeichnis `Maps`.
 2. ```{image} ../images/quickstart-vector-map/quickstart-vector-map-listed.png
     :align: right
     ```
 
-    Nach einigen Sekunden erscheint die Karte in der Liste im Bereich **Karten**, grau wie jede ausgeschaltete
-    Karte. Sie heißt wie ihre Datei, ohne den Dateityp und mit Leerzeichen statt Unterstrichen: `Tannheimer_Tal.img`
+    Nach einigen Sekunden erscheint die Karte in der Liste im Bereich **Karten** in grauer Schrift wie jede ausgeschaltete
+    Karte. Sie heißt wie die zugehörige Datei, aber ohne den Dateityp und mit Leerzeichen statt Unterstrichen: `Tannheimer_Tal.img`
     steht in der Liste als **Tannheimer Tal**.
-3. Um die Karte einzuschalten, klicken Sie auf den Knopf in ihrer Zeile. Die Zeile wird fett und zeigt
-    **aktiv**.
+3. Um die Karte zu aktivieren, klicken Sie auf die Schaltfläche am Ende der Zeile. Die Zeile zeigt jetzt fett den Status **aktiv** an.
 
     ```{image} ../images/quickstart-vector-map/quickstart-vector-map-map-on.png
     :class: below-right
@@ -54,17 +54,16 @@ QMapShack zeigt jede Karte an, die direkt in einem seiner Kartenverzeichnisse li
 
 ## Die Detailstufe einstellen
 
-Eine Garmin-Karte enthält mehrere Detailstufen, und QMapShack wählt eine passend zum Zoom. Für jede Karte können
+Eine Garmin-Karte enthält mehrere Detailstufen. QMapShack wählt eine passend zum Zoom aus. Für jede Karte können
 Sie einstellen, ob sie mehr oder weniger Details zeigt.
 
-1. ```{image} ../images/quickstart-vector-map/quickstart-vector-map-settings.png
+- ```{image} ../images/quickstart-vector-map/quickstart-vector-map-settings.png
     :align: right
     ```
 
-    Klicken Sie auf den Pfeil links vom Namen der Karte, um ihre Einstellungen zu öffnen.
+    Klicken Sie auf den Pfeil links vom Namen der Karte, um deren Einstellungen zu öffnen.
 
-- **Details** legt fest, wie viel die Karte zeigt: über 0 mehr als üblich bei derselben Zoomstufe, unter 0 weniger.
-    0 ist die Voreinstellung. Im Bild unten steht **Details** auf 5.
+- **Details** legt fest, wie viele Informationen auf der Karte angezeigt werden. Ein Wert größer als 0 zeigt bei gleicher Zoomstufe mehr Details als üblich an, ein Wert kleiner als 0 entsprechend weniger. Der Standardwert ist 0. In der Abbildung unten ist **Details** auf 5 eingestellt.
 
     ```{image} ../images/quickstart-vector-map/quickstart-vector-map-detail-more.png
     :class: below-right
@@ -72,7 +71,7 @@ Sie einstellen, ob sie mehr oder weniger Details zeigt.
 
 - Aktivieren oder deaktivieren Sie **Gebiete**, **Linien** und **Punkte**, um diese Teile der Karte ein- oder
     auszublenden. Ohne Gebiete zum Beispiel
-    verschwinden die Wälder, und Wege treten hervor.
+    verschwinden die Wälder, und die Wege treten hervor.
 
     ```{image} ../images/quickstart-vector-map/quickstart-vector-map-no-areas.png
     :class: below-right
@@ -83,18 +82,15 @@ Sie einstellen, ob sie mehr oder weniger Details zeigt.
 
 ## Das Aussehen der Karte: TYP-Dateien
 
-Farben und Symbole einer Garmin-Karte kommen aus einer TYP-Datei. Die meisten Garmin-Karten bringen ihre eigene
-mit, so auch diese.
+Farben und Symbole einer Garmin-Karte werden in einer TYP Datei festgelegt. Die meisten Garmin-Karten enthalten eine eigene TYP-Datei. Bei der auf dieser Seite benutzten Karte ist das nicht anders.
 
 - ```{image} ../images/quickstart-vector-map/quickstart-vector-map-typ-row.png
     :align: right
     ```
-
-    Unten in den Einstellungen der Karte nennt **TYP Datei** eine externe TYP-Datei, sobald Sie eine laden. Ist
-    das Feld leer, nutzt die Karte ihre eigene.
-- Um eine andere zu laden, klicken Sie auf den Knopf mit dem Ordnersymbol und wählen eine `.typ`-Datei aus.
-    Um wieder die eigene TYP-Datei der Karte zu nutzen, klicken Sie auf den Knopf mit dem Kreuzsymbol.
-- Eine TYP-Datei ist für einen Kartenstil gemacht. Eine TYP-Datei für eine andere Karte kann dieser Karte
-    falsche Farben und Symbole geben.
+ 
+    Am unteren Ende der Karteneinstellungen zeigt das Feld **TYP Datei** den Namen einer externen TYP Datei an, sofern eine solche geladen wurde. Ist das Feld leer, verwendet die Karte ihre integrierte TYP Datei.
+- Um eine andere TYP Datei zu laden, klicken Sie auf die Schaltfläche mit dem Ordnersymbol und wähle eine .typ Datei aus. Um wieder die integrierte TYP Datei der Karte zu verwenden, klicken Sie auf die Schaltfläche mit dem Kreuzsymbol.
+- Jede TYP Datei ist für einen bestimmten Kartenstil ausgelegt. Die Verwendung einer TYP Datei, die für eine andere Karte bestimmt ist, kann zu falschen Farben und Symbolen führen.    
 
 [BBBIKE]: https://extract.bbbike.org/
+[HAUPTVERZ]: quickstart-main-window.md#das-hauptverzeichnis-einrichten

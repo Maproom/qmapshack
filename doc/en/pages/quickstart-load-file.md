@@ -1,6 +1,6 @@
 # Loading a GPX file
 
-This page shows how to load a GPX file into QMapShack, look at its tracks and waypoints and find them on the map.
+This page explains how to load a .gpx file into QMapShack, explore its tracks and waypoints, and locate them on the map.
 
 Images: *© OpenStreetMap contributors*; *Datenquelle: Land Tirol - data.tirol.gv.at, CC BY 4.0*;
 *`Example.gpx`: fuzzybear, CC BY-SA 4.0*.
@@ -13,20 +13,16 @@ Images: *© OpenStreetMap contributors*; *Datenquelle: Land Tirol - data.tirol.g
 
 ## Loading the file
 
-A GPX file (GPS Exchange Format) holds tracks, waypoints and routes. GPS devices, apps and route-planning websites
-use it to save and share them. The images on this page show `Example.gpx`, a tour around the Aggenstein.
+A `.gpx` file (GPS Exchange Format) stores tracks, waypoints, and routes. GPS devices, apps, and route-planning websites use this format to save and share them. The images on this page show `Example.gpx`, which contains a tour around the Aggenstein.
 
 1. Click **File → Load GIS Data**, or press **Ctrl+L**.
-2. Select the GPX file and click **Open**. To load several files at once, hold **Ctrl** and click each file.
+2. Select the `.gpx` file and click **Open**. To load multiple files at once, hold down **Ctrl** while selecting each file.
 
-The dialog opens in the folder you last loaded from or saved to. If you have set up the
-[home folder](quickstart-main-window.md#setting-up-the-home-folder), QMapShack points the dialog to its `GPX` folder,
-a good place to keep your files.
+The dialog opens in the folder you last loaded files from or saved files to. If you have set up your [home folder](quickstart-main-window.md#setting-up-the-home-folder), QMapShack opens the dialog in its `GPX` folder, a convenient place to store your files.
 
-Instead of using the menu, you can drag files from your file manager onto the map.
+Instead of using the menu, you can simply drag files from your file manager onto the map.
 
-QMapShack also loads its own `.qms` files and files from other devices and programs: `.fit`, `.tcx`, `.slf`,
-`.sml`, `.log` and `.qlb`.
+QMapShack can also load its own `.qms` files, as well as files from other devices and applications in the following formats: `.fit`, `.tcx`, `.slf`, `.sml`, `.log`, and `.qlb`.
 
 ```{index} single: Project
 ```
@@ -36,20 +32,14 @@ QMapShack also loads its own `.qms` files and files from other devices and progr
 
 ## The project in the workspace
 
-QMapShack loads a file as a *project*: the tracks, routes, waypoints and areas of one file, kept together. The
-**Workspace** panel (see [The main window](quickstart-main-window.md#the-window-on-first-start)) lists it under the name
-stored in the file, or under the file name if there is none. QMapShack shows everything in the project on the map
-right away.
+QMapShack loads each file as a *project*, keeping all its tracks, routes, waypoints, and areas together. The **Workspace** panel lists the project by the name stored in the file, or by the file name if no name is stored. See [The main window](quickstart-main-window.md#the-window-on-first-start). All items in the project are immediately displayed on the map.
 
 1. ```{image} ../images/quickstart-load-file/quickstart-load-file-items.png
     :align: right
     ```
 
-    Click the arrow left of the project's name. The project's tracks, routes, waypoints and areas appear below it.
-    Tracks, routes and areas have an icon for their kind, and a waypoint shows its symbol.
-
-2. Hold the mouse pointer over the name of an item (a track, route, waypoint or area). A tooltip shows a summary of the
-    item.
+    Click the arrow to the left of the project name to expand the project. Its tracks, routes, waypoints, and areas are listed below. Tracks, routes, and areas are marked with an icon indicating their type, while waypoints display their assigned symbols.
+2. Hover the mouse pointer over an item's name (track, route, waypoint, or area) to display a tooltip with a summary of the item.
 
 ```{index} single: Item; find on the map
 ```
@@ -60,10 +50,9 @@ right away.
 :align: right
 ```
 
-Double-click an item in the **Workspace** panel. The map zooms to it.
+Double-click an item in the **Workspace** panel to zoom the map to it.
 
-For a track, QMapShack also highlights it on the map. A box at the bottom right shows a summary of the track: length,
-ascent, time, speed and more. A small plot in the bottom left corner shows the track's elevation profile.
+For a track, QMapShack also highlights it on the map. A summary box in the bottom-right corner shows the track's length, total ascent, duration, speed, and other statistics. A small plot in the bottom-left corner displays its elevation profile.
 
 ```{image} ../images/quickstart-load-file/quickstart-load-file-zoomed.png
 :class: below-right
@@ -78,29 +67,24 @@ ascent, time, speed and more. A small plot in the bottom left corner shows the t
     :align: right
     ```
 
-    Click the eye button at the right end of the project's row. Everything in the project disappears from the map,
-    and the project and its items turn gray.
+    Click the eye button at the right end of the project's row. All items in the project disappear from the map, and the project and its contents are grayed out.
+2. Click the eye button again to make the project visible on the map.
 
-2. Click the eye button again to show the project.
-
-While a project is hidden, double-clicking one of its items doesn't zoom the map.
+While a project is hidden, double-clicking one of its items has no effect on the map's zoom level.
 
 ```{index} single: Workspace; keep for the next start
 ```
 
-## Keeping the workspace
+## Saving the workspace
 
-QMapShack keeps the projects in the **Workspace** panel for the next start.
+QMapShack saves the projects in the **Workspace** panel to a special file. They are restored the next time you start the application.
 
-To do this, it stores its own copy of each project and leaves the file you loaded unchanged. QMapShack writes a change
-to the file only when you save the project.
+To do this, QMapShack keeps its own copy of each project, leaving the original file unchanged. Changes are written to the file only when you save the project.
 
-QMapShack saves the workspace every 5 minutes and when you close the program. To change how often:
+QMapShack saves the workspace every five minutes and whenever you close the application. To change the save interval:
 
 1. Click **Workspace → Setup Workspace**.
-2. On the **General** tab, set the minutes beside **save workspace on exit, and every**. If you set it to 0, QMapShack
-    saves the workspace only when you close it.
-3. Click **OK**, confirm the message and restart QMapShack. The new setting applies only after a restart.
+2. On the **General** tab, set the interval in minutes next to **Save workspace on exit, and every**. Set it to `0` to save the workspace only when you close QMapShack.
+3. Click **OK**, confirm the message, and restart QMapShack. The new setting takes effect only after restarting the application.
 
-If you clear the check box in front of **save workspace on exit, and every**, QMapShack stops saving the workspace. At
-the next start, the workspace is as it was last saved.
+If you clear the check box next to **Save workspace on exit, and every**, QMapShack stops saving the workspace. The next time you start the application, the workspace is restored to its last saved state.

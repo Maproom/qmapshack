@@ -198,10 +198,10 @@
 <li class="toctree-l1 current has-children"><a class="reference internal" href="quickstart.html">Schnellstart</a><input aria-label="Toggle navigation of Schnellstart" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="quickstart-main-window.html">Das Hauptfenster</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-maps.html">Karten einschalten</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart-vector-map.html">Eine Garmin-Karte einschalten</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart-vector-map.html">Eine Garmin-Karte anzeigen</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-zoom-pan.html">Zoomen und Verschieben</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-dem.html">Höhendaten und Schummerung</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart-load-file.html">Eine GPX-Datei laden</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart-load-file.html">Eine GPX Datei laden</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-routing.html">Routing einrichten</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-draw-track.html">Einen Track zeichnen</a></li>
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Wegpunkte hinzufügen</a></li>
@@ -247,7 +247,7 @@
         <article role="main" id="furo-main-content">
           <section id="wegpunkte-hinzufugen">
 <h1>Wegpunkte hinzufügen<a class="headerlink" href="#wegpunkte-hinzufugen" title="Link to this heading">#</a></h1>
-<p>Diese Seite zeigt, wie Sie einen Wegpunkt auf der Karte hinzufügen. Die Bilder nutzen die Karte aus
+<p>Diese Seite zeigt, wie Sie einen Wegpunkt auf der Karte hinzufügen. Die Bilder auf dieser Seite nutzen die Karte aus
 <a class="reference internal" href="quickstart-maps.html"><span class="std std-doc">Karten einschalten</span></a>, das DEM aus <a class="reference internal" href="quickstart-dem.html"><span class="std std-doc">Höhendaten und Schummerung</span></a> und
 <code class="docutils literal notranslate"><span class="pre">Example.gpx</span></code> aus <a class="reference internal" href="quickstart-load-file.html"><span class="std std-doc">Eine GPX-Datei laden</span></a>.</p>
 <p>Bilder: <em>© OpenStreetMap contributors</em>; <em>Datenquelle: Land Tirol - data.tirol.gv.at, CC BY 4.0</em>;
@@ -256,23 +256,23 @@
 <span id="index-0"></span><h2>Einen Wegpunkt hinzufügen<a class="headerlink" href="#einen-wegpunkt-hinzufugen" title="Link to this heading">#</a></h2>
 <ol class="arabic">
 <li><img alt="Quickstart waypoints add waypoint" class="align-right" src="../_images/quickstart-waypoints-add-waypoint.png" />
-<p>Klicken Sie mit der rechten Maustaste auf die Stelle der Karte, an der der Wegpunkt liegen soll, und klicken Sie auf
-<strong>Wegpunkt hinzufügen</strong>. Dasselbe Menü öffnet sich, wenn Sie die linke Maustaste einen Moment auf der Karte
-gedrückt halten.</p>
+<p>Klicken Sie mit der rechten Maustaste auf die gewünschte Position in der Karte und wählen Sie <strong>Wegpunkt hinzufügen</strong>. Dasselbe Menü öffnet sich, wenn Sie die linke Maustaste auf der Karte gedrückt halten.</p>
 </li>
 <li><img alt="Quickstart waypoints project" class="align-right" src="../_images/quickstart-waypoints-project.png" />
-<p>Wählen Sie das Projekt aus, in das der Wegpunkt gehört, oder geben Sie unter <strong>Neuer Projektname</strong> einen Namen für
-ein neues Projekt ein.</p>
-<p>Bei einem neuen Projekt wählen Sie nach dem Namen unter <strong>Das neue Projekt wird erstellt als</strong> aus, wie QMapShack es
-speichert. <strong>*.qms</strong> ist das eigene Dateiformat von QMapShack, <strong>*.gpx</strong> eine GPX-Datei, die auch andere Programme
-und Geräte lesen. QMapShack wählt eines vor, achten Sie deshalb darauf, dass es das gewünschte ist. Die dritte
-Möglichkeit, <strong>Datenbank</strong>, erklärt <a class="reference internal" href="quickstart-database.html"><span class="std std-doc">Datenbanken</span></a>.</p>
+<p>Wählen Sie das Projekt aus, dem Sie den Wegpunkt hinzufügen möchten, oder geben Sie unter <strong>Neuer Projektname</strong> einen Namen für ein neues Projekt ein.</p>
+<p>Wenn Sie ein neues Projekt anlegen, wählen Sie nach der Eingabe des Namens unter <strong>Das neue Projekt wird erstellt als</strong> das gewünschte Speicherformat aus:</p>
+<ul class="simple">
+<li><p><strong>*.qms</strong> ist das eigene Dateiformat von QMapShack.</p></li>
+<li><p><strong>*.gpx</strong> ist das .gpx Format, das auch von anderen Programmen und Geräten gelesen werden kann.</p></li>
+</ul>
+<p>QMapShack wählt automatisch ein Format aus. Prüfen Sie daher, ob die Vorauswahl Ihren Wünschen entspricht.</p>
+<p>Die dritte Möglichkeit, <strong>Datenbank</strong>, wird unter <a class="reference external" href="https://quickstart-database.md">Datenbanken</a> erläutert.</p>
 <p>Klicken Sie auf <strong>OK</strong>.</p>
 </li>
 <li><p>Das Fenster mit den Details des Wegpunkts öffnet sich. Es zeigt Name, Symbol, Position, Höhe und Zeit des
 Wegpunkts.</p>
 <img alt="Quickstart waypoints details" class="below-right" src="../_images/quickstart-waypoints-details.png" />
-<p>Die <strong>Höhe</strong> kommt aus dem DEM; siehe <a class="reference internal" href="quickstart-dem.html"><span class="std std-doc">Höhendaten und Schummerung</span></a>.</p>
+<p>Die <strong>Höhe</strong> wird aus dem DEM ermittelt. Siehe <a class="reference internal" href="quickstart-dem.html"><span class="std std-doc">Höhendaten und Schummerung</span></a>.</p>
 </li>
 <li><p>Klicken Sie auf den Namen, geben Sie einen neuen ein und drücken Sie <strong>Enter</strong>.</p>
 <img alt="Quickstart waypoints named" class="below-right" src="../_images/quickstart-waypoints-named.png" />
@@ -284,19 +284,16 @@ Wegpunkts.</p>
 <p>Drücken Sie <strong>Esc</strong>, um das Fenster zu schließen. Der Wegpunkt erscheint mit seinem Namen auf der Karte.</p>
 </li>
 <li><img alt="Quickstart waypoints saved" class="align-right" src="../_images/quickstart-waypoints-saved.png" />
-<p>Der Bereich <strong>Arbeitsplatz</strong> listet den Wegpunkt jetzt unter seinem Projekt.</p>
+<p>Der Bereich <strong>Arbeitsplatz</strong> zeigt den Wegpunkt jetzt unter dem zugehörigen Projekt an.</p>
 </li>
 </ol>
-<p>Der Speichern-Knopf in der Zeile des Projekts ist im Bild markiert. Er zeigt, dass das Projekt Änderungen hat,
-die noch nicht in einer Datei gespeichert sind. Klicken Sie darauf, um das Projekt zu speichern.</p>
-<p>Beim ersten Mal fragt QMapShack, wohin es das Projekt speichern soll. Der Dialog schlägt den Namen des Projekts vor und
-öffnet sich im Verzeichnis, aus dem Sie zuletzt geladen oder in das Sie zuletzt gespeichert haben. Wenn Sie das
-<a class="reference internal" href="quickstart-main-window.html#das-hauptverzeichnis-einrichten"><span class="std std-ref">Hauptverzeichnis</span></a> eingerichtet haben, stellt QMapShack den
-Dialog auf dessen Verzeichnis <code class="docutils literal notranslate"><span class="pre">GPX</span></code>.</p>
-<p>In der Zeile des Wegpunkts ist dasselbe Symbol kein Knopf, sondern eine Änderungsanzeige. Sie zeigt, dass sich der Wegpunkt seit dem letzten
+<p>Die im Bild markierte Speichern-Schaltfläche in der Projektzeile zeigt an, dass das Projekt Änderungen enthält, die noch nicht in der Datei gespeichert wurden. Klicken Sie darauf, um das Projekt zu speichern.</p>
+<p>Beim ersten Speichern fragt QMapShack, wo das Projekt abgelegt werden soll. Der Dialog schlägt den Projektnamen als Dateinamen vor. Der Dialog öffnet sich in dem Verzeichnis, aus dem Sie zuletzt ein Projekt geladen oder in das Sie zuletzt eines gespeichert haben.</p>
+<p>Wenn Sie das <a class="reference external" href="https://quickstart-main-window.md#das-hauptverzeichnis-einrichten">Hauptverzeichnis</a> eingerichtet haben, öffnet QMapShack den Dialog standardmäßig in dessen Unterverzeichnis <code class="docutils literal notranslate"><span class="pre">GPX</span></code>.
+In der Zeile des Wegpunkts ist dasselbe Symbol keine Schaltfläche, sondern eine Änderungsanzeige. Sie zeigt, dass sich der Wegpunkt seit dem letzten
 Speichern des Projekts geändert hat.</p>
 <p>Der erste Wegpunkt heißt <code class="docutils literal notranslate"><span class="pre">wpt</span></code>. Ein neuer Wegpunkt bekommt das zuletzt gewählte Symbol und den zuletzt vergebenen
-Namen. Endet dieser auf eine Zahl, zählt QMapShack hoch: nach <code class="docutils literal notranslate"><span class="pre">Hütte</span> <span class="pre">3</span></code> kommt <code class="docutils literal notranslate"><span class="pre">Hütte</span> <span class="pre">4</span></code>.</p>
+Namen. Endet der Name mit einer Zahl, erhöht QMapShack diese automatisch: Auf <code class="docutils literal notranslate"><span class="pre">Hütte</span> <span class="pre">3</span></code> folgt <code class="docutils literal notranslate"><span class="pre">Hütte</span> <span class="pre">4</span></code>.</p>
 </section>
 </section>
 

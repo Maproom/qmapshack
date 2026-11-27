@@ -197,8 +197,8 @@
   <ul class="current">
 <li class="toctree-l1 current has-children"><a class="reference internal" href="quickstart.html">Quick start</a><input aria-label="Toggle navigation of Quick start" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="quickstart-main-window.html">The main window</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart-maps.html">Turning on maps</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart-vector-map.html">Turning on a Garmin map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart-maps.html">Enabling maps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart-vector-map.html">Enabling a Garmin map</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-zoom-pan.html">Zooming and panning</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-dem.html">Elevation data and hillshading</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-load-file.html">Loading a GPX file</a></li>
@@ -247,121 +247,104 @@
         <article role="main" id="furo-main-content">
           <section id="drawing-a-track">
 <h1>Drawing a track<a class="headerlink" href="#drawing-a-track" title="Link to this heading">#</a></h1>
-<p>This page shows how to draw a track of your own, with the router from <a class="reference internal" href="quickstart-routing.html"><span class="std std-doc">Setting up routing</span></a>.
-The images also use the map from <a class="reference internal" href="quickstart-maps.html"><span class="std std-doc">Turning on maps</span></a>, the DEM from
-<a class="reference internal" href="quickstart-dem.html"><span class="std std-doc">Elevation data and hillshading</span></a> and <code class="docutils literal notranslate"><span class="pre">Example.gpx</span></code> from
-<a class="reference internal" href="quickstart-load-file.html"><span class="std std-doc">Loading a GPX file</span></a>.</p>
+<p>This page shows you how to draw your own track using the router described in <a class="reference internal" href="quickstart-routing.html"><span class="std std-doc">Setting up routing</span></a>.
+The images also show</p>
+<ul class="simple">
+<li><p>the map used in <a class="reference internal" href="quickstart-maps.html"><span class="std std-doc">Enabling on maps</span></a>,</p></li>
+<li><p>the DEM used in
+<a class="reference internal" href="quickstart-dem.html"><span class="std std-doc">Elevation data and hillshading</span></a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Example.gpx</span></code> used in
+<a class="reference internal" href="quickstart-load-file.html"><span class="std std-doc">Loading a GPX file</span></a>.</p></li>
+</ul>
 <p>Images: <em>© OpenStreetMap contributors</em>; <em>Datenquelle: Land Tirol - data.tirol.gv.at, CC BY 4.0</em>;
 <em><code class="docutils literal notranslate"><span class="pre">Example.gpx</span></code>: fuzzybear, CC BY-SA 4.0</em>.</p>
 <section id="starting-a-track">
 <span id="index-0"></span><h2>Starting a track<a class="headerlink" href="#starting-a-track" title="Link to this heading">#</a></h2>
-<p>While you draw, a bar at the top of the map holds the drawing tools. <strong>Save as new</strong> saves the track (see
-<a class="reference internal" href="#saving-the-track">Saving the track</a>); <strong>Abort</strong> throws it away.</p>
+<p>While you draw, a toolbar at the top of the map provides the drawing tools.  <strong>Save as new</strong> saves the track (see
+<a class="reference internal" href="#saving-the-track">Saving the track</a>). <strong>Abort</strong> discards it.</p>
 <img alt="Quickstart draw track edit bar" class="below-right" src="../_images/quickstart-draw-track-edit-bar.png" />
 <ol class="arabic">
 <li><img alt="Quickstart draw track add track" class="align-right" src="../_images/quickstart-draw-track-add-track.png" />
-<p>Right-click the map where the track should start and click <strong>Add Track</strong>. Holding the left mouse button down
-on the map for a moment opens the same menu.</p>
+<p>Right-click the map at the desired starting point and select <strong>Add Track</strong>. You can also open the same menu by pressing and holding the left mouse button on the map.</p>
 </li>
-<li><p>Move the mouse to where the track goes next and click. Each click adds a point, and a straight line joins it to
-the point before. For straight lines, <strong>O</strong> must be active in the bar; if another letter is active, click <strong>O</strong>
-first.</p>
+<li><p>Move the mouse to the next point along the track and click to add it. Each click adds a point, which is connected to the previous one by a straight line. To draw straight lines, <strong>O</strong> must be active in the toolbar. If another letter is active, click <strong>O</strong> first.</p>
 <img alt="Quickstart draw track drawing" class="below-right" src="../_images/quickstart-draw-track-drawing.png" />
 </li>
-<li><p>When the track is done, right-click to stop adding points. To continue drawing, move the mouse just past the first
-or last point until a red square marks it, and click.</p></li>
+<li><p>When you’ve finished drawing the track, right-click to stop adding points. To continue drawing, move the mouse just beyond the first or last point until a red square appears, then click.</p></li>
 </ol>
 </section>
 <section id="drawing-along-paths">
 <span id="index-1"></span><h2>Drawing along paths<a class="headerlink" href="#drawing-along-paths" title="Link to this heading">#</a></h2>
 <ol class="arabic">
 <li><img alt="Quickstart draw track mode a" class="align-right" src="../_images/quickstart-draw-track-mode-a.png" />
-<p>While you add points, click <strong>A</strong> in the bar, or press the <strong>A</strong> key.</p>
+<p>While you add points, click <strong>A</strong> in the toolbar, or press the <strong>A</strong> key.</p>
 </li>
-<li><p>Move the mouse to the next point and hold it still for a moment. The router finds the way along paths and roads,
-and the line follows it. It routes for the profile selected in the <strong>Routing</strong> panel. Click to add that part to
-the track.</p>
+<li><p>Move the mouse to the next point and pause briefly. The router calculates a route along paths and roads, and the track follows them. The route is calculated using the profile selected in the <strong>Routing</strong> panel. Click to add the routed section to the track.</p>
 <img alt="Quickstart draw track routed" class="below-right" src="../_images/quickstart-draw-track-routed.png" />
 </li>
 </ol>
-<p><strong>A</strong> needs a router that routes on the fly; see
-<a class="reference internal" href="quickstart-routing.html#what-a-router-does"><span class="std std-ref">What a router does</span></a>. Without one, its button is gray. The letter that is
-active when you save or abort the track is active again when you start the next one.</p>
+<p><strong>A</strong> requires a router that can calculate routes on the fly. See <a class="reference internal" href="quickstart-routing.html#what-a-router-does"><span class="std std-ref">What a router does</span></a>. If no such router is available, the button is grayed out. The active mode when you save or abort a track remains active when you start drawing the next track.</p>
 </section>
 <section id="drawing-along-a-track">
 <span id="index-2"></span><h2>Drawing along a track<a class="headerlink" href="#drawing-along-a-track" title="Link to this heading">#</a></h2>
 <ol class="arabic">
 <li><img alt="Quickstart draw track mode t" class="align-right" src="../_images/quickstart-draw-track-mode-t.png" />
-<p>Right-click a loaded track where your track should start, for example the one in <code class="docutils literal notranslate"><span class="pre">Example.gpx</span></code>, and click
-<strong>Add Track</strong>. Then click <strong>T</strong> in the bar, or press the <strong>T</strong> key.</p>
+<p>Right-click a loaded track at the point where you want your new track to start, for example, the track in <code class="docutils literal notranslate"><span class="pre">Example.gpx</span></code>. Select <strong>Add Track</strong>, then click <strong>T</strong> in the toolbar or press the <strong>T</strong> key.</p>
 </li>
-<li><p>Move the mouse along that track to the next point. QMapShack shows that track in yellow, and your line follows it.
-This works only when your last point and the mouse pointer both lie on that track. Click to add that part to the
-track.</p>
+<li><p>Move the mouse along the loaded track to the next point. QMapShack highlights the track in yellow, and your new track follows it. This works only if both your last point and the mouse pointer are on the loaded track. Click to add the highlighted section to your track.</p>
 <img alt="Quickstart draw track along track" class="below-right" src="../_images/quickstart-draw-track-along-track.png" />
 </li>
 </ol>
 </section>
 <section id="straight-lines-and-vector-maps">
 <span id="index-3"></span><h2>Straight lines and vector maps<a class="headerlink" href="#straight-lines-and-vector-maps" title="Link to this heading">#</a></h2>
-<p>Click <strong>O</strong>, or press the <strong>O</strong> key, to draw straight lines again. <strong>V</strong>, or the <strong>V</strong> key, follows the lines of a
-<a class="reference internal" href="quickstart-vector-map.html"><span class="std std-doc">vector map</span></a>, such as a Garmin map. You rarely need it: the map and the routing data usually
-both come from OpenStreetMap, so <strong>A</strong> already follows the same paths.</p>
+<p>Click <strong>O</strong> or press the <strong>O</strong> key to switch back to drawing straight lines.</p>
+<p>Click <strong>V</strong> or press the <strong>V</strong> key to follow the lines of a vector map, such as a Garmin map. You rarely need this mode because both the map and the routing data usually come from OpenStreetMap. In that case, <strong>A</strong> already follows the same paths.</p>
 </section>
-<section id="correcting-the-track">
-<span id="index-4"></span><h2>Correcting the track<a class="headerlink" href="#correcting-the-track" title="Link to this heading">#</a></h2>
+<section id="editing-the-track">
+<span id="index-4"></span><h2>Editing the track<a class="headerlink" href="#editing-the-track" title="Link to this heading">#</a></h2>
 <img alt="Quickstart draw track point tools" class="align-right" src="../_images/quickstart-draw-track-point-tools.png" />
-<p>Use the four buttons to the right of <strong>Abort</strong> to change the points of the line. From left to right, they move, add,
-select a range of and delete points.</p>
-<ul class="simple">
-<li><p>To move a point, click the first button or press <strong>Ctrl+M</strong>. Click the point, move the mouse and click again to
-drop it.</p></li>
-<li><p>To add a point, click the second button or press <strong>Ctrl++</strong>. Click the line between two points: the new point
-sticks to the mouse. Click again to drop it. To add points at the start or end, move the mouse just past the first
-or last point. When a red square marks that point, click. Each click adds a point there; right-click to stop.</p></li>
-<li><p>To select a range, click the third button or press <strong>Ctrl+R</strong>, then click the first and the last point of the
-range. Two buttons appear: one deletes the points in between, the other reconnects the two points. The active
-letter in the bar decides how.</p></li>
-<li><p>To delete a point, click the fourth button or press <strong>Ctrl+-</strong>, then click the point.</p></li>
+<p>Use the four buttons to the right of <strong>Abort</strong> to edit the line’s points. From left to right, the buttons let you move, add, select a range of, and delete points.</p>
+<ul>
+<li><p>To move a point, click the first button or press <strong>Ctrl+M</strong>. Click the point you want to move, move the mouse to the new position of the point, and click again to place it.</p></li>
+<li><p>To add a point, click the second button or press <strong>Ctrl++</strong>. Click the line between two existing points. The new point attaches to the mouse pointer. Click again to place it.</p>
+<p>To add points at the beginning or end of the line, move the mouse just beyond the first or last point. When a red square appears to mark the point, click to add a new point. Each click adds another point. Right-click to stop adding points.</p>
+</li>
+<li><p>To select a range of points, click the third button or press <strong>Ctrl+R</strong>. Then click the first and last points of the range. Two buttons appear: one deletes the selected points, while the other connects the two end points directly. The active mode in the toolbar determines how the points are reconnected.</p></li>
+<li><p>To delete a point, click the fourth button or press <strong>Ctrl+-</strong>, then click the point you want to delete.</p></li>
 </ul>
-<p>When you move, add or delete a point, QMapShack joins the points next to it again. The active letter in
-the bar decides how. Right-click or press <strong>Esc</strong> to cancel moving or adding a point.</p>
+<p>When you move, add, or delete a point, QMapShack reconnects the adjacent points. The active mode in the toolbar determines how they are connected. Right-click or press <strong>Esc</strong> to cancel moving or adding a point.</p>
 <img alt="Quickstart draw track undo redo" class="align-right" src="../_images/quickstart-draw-track-undo-redo.png" />
-<p>The arrow buttons at the right end of the bar undo and redo the last change.</p>
+<p>The arrow buttons at the right end of the toolbar undo and redo the last change.</p>
 </section>
 <section id="saving-the-track">
 <span id="index-5"></span><h2>Saving the track<a class="headerlink" href="#saving-the-track" title="Link to this heading">#</a></h2>
 <ol class="arabic">
 <li><img alt="Quickstart draw track name" class="align-right" src="../_images/quickstart-draw-track-name.png" />
-<p>Click <strong>Save as new</strong> in the bar. Enter a name for the track and click <strong>OK</strong>.</p>
+<p>Click <strong>Save as new</strong> in the toolbar. Enter a name for the track and click <strong>OK</strong>.</p>
 </li>
 <li><img alt="Quickstart draw track project" class="align-right" src="../_images/quickstart-draw-track-project.png" />
-<p>Select the project the track goes into, or enter a name for a new project under <strong>New project’s name</strong>.</p>
-<p>For a new project, after you enter the name, under <strong>New project is created as</strong>, choose how QMapShack saves it.
-<strong>*.qms</strong> is QMapShack’s own file format, <strong>*.gpx</strong> a GPX file that other programs and devices read too.
-QMapShack preselects one, so make sure it’s the one you want. The third choice, <strong>Database</strong>, is explained in
-<a class="reference internal" href="quickstart-database.html"><span class="std std-doc">Databases</span></a>.</p>
+<p>Select the project to which you want to add the track, or enter a name for a new project under <strong>New project’s name</strong>.</p>
+<p>For a new project, enter a name and then choose how QMapShack should save it under <strong>New project is created as</strong>.</p>
+<ul class="simple">
+<li><p><strong>*.qms</strong> is QMapShack’s own file format</p></li>
+<li><p><strong>*.gpx</strong> is the .gpx format, which other programs and devices can also read.</p></li>
+</ul>
+<p>QMapShack preselects a format, so make sure it’s the one you want. The third option, <strong>Database</strong>, is explained in <a class="reference internal" href="quickstart-database.html"><span class="std std-doc">Databases</span></a>.</p>
 <p>Click <strong>OK</strong>.</p>
 </li>
 <li><img alt="Quickstart draw track saved" class="align-right" src="../_images/quickstart-draw-track-saved.png" />
-<p>The <strong>Workspace</strong> panel now lists the track under its project.</p>
+<p>The <strong>Workspace</strong> panel now lists the track under the selected project.</p>
 </li>
 </ol>
-<p>The save button on the project’s row, marked in the image, means the project has changes that aren’t saved
-to a file. Click it to save the project.</p>
-<p>The first time you save the project, QMapShack asks where to save it. The dialog suggests the
-project’s name as the file name and opens in the folder you last loaded from or saved to. If you have set up the
-<a class="reference internal" href="quickstart-main-window.html#setting-up-the-home-folder"><span class="std std-ref">home folder</span></a>, QMapShack points the dialog to its <code class="docutils literal notranslate"><span class="pre">GPX</span></code> folder.</p>
-<p>On the track’s row, the same symbol is not a button but a change indicator. It shows that the track has changed since the project was
-last saved.</p>
+<p>The save button in the project’s row, highlighted in the image, indicates that the project has unsaved changes. Click it to save the project to a file.</p>
+<p>The first time you save a project, QMapShack asks where to save it. The dialog suggests the project name as the file name and opens in the folder you last loaded a project from or saved one to. If you have set up the <a class="reference internal" href="quickstart-main-window.html#setting-up-the-home-folder"><span class="std std-ref">home folder</span></a>, the dialog opens in its <code class="docutils literal notranslate"><span class="pre">GPX</span></code> subfolder.</p>
+<p>In the track’s row, the same symbol serves as a change indicator rather than a button. It shows that the track has been modified since the project was last saved.</p>
 </section>
 <section id="elevations-from-the-dem">
 <span id="index-6"></span><h2>Elevations from the DEM<a class="headerlink" href="#elevations-from-the-dem" title="Link to this heading">#</a></h2>
-<p>While you draw, the <strong>Track Metrics</strong> box at the top left of the map shows the track’s length and how far it climbs
-and descends. The elevations come from the DEM; see <a class="reference internal" href="quickstart-dem.html"><span class="std std-doc">Elevation data and hillshading</span></a>. So turn the
-DEM on before you draw, and draw where it has data.</p>
-<p>When you save the track, QMapShack gives its points their elevations. Where the DEM has no data, a point gets none,
-and <strong>Track Metrics</strong> shows <strong>Invalid elevations!</strong> instead of the ascent and descent.</p>
+<p>While you draw, the <strong>Track Metrics</strong> box in the top-left corner of the map displays the track length and its total ascent and descent. Elevation data comes from the DEM. See <a class="reference internal" href="quickstart-dem.html"><span class="std std-doc">Elevation data and hillshading</span></a>. Make sure the DEM is enabled before you start drawing, and draw in areas where elevation data is available.</p>
+<p>When you save the track, QMapShack assigns elevations to its points based on the DEM. Points in areas without DEM data have no elevation. In this case, <strong>Track Metrics</strong> displays <strong>Invalid elevations!</strong> instead of the total ascent and descent.</p>
 <img alt="Quickstart draw track metrics" class="below-right" src="../_images/quickstart-draw-track-metrics.png" />
 </section>
 </section>
@@ -426,7 +409,7 @@ and <strong>Track Metrics</strong> shows <strong>Invalid elevations!</strong> in
 <li><a class="reference internal" href="#drawing-along-paths">Drawing along paths</a></li>
 <li><a class="reference internal" href="#drawing-along-a-track">Drawing along a track</a></li>
 <li><a class="reference internal" href="#straight-lines-and-vector-maps">Straight lines and vector maps</a></li>
-<li><a class="reference internal" href="#correcting-the-track">Correcting the track</a></li>
+<li><a class="reference internal" href="#editing-the-track">Editing the track</a></li>
 <li><a class="reference internal" href="#saving-the-track">Saving the track</a></li>
 <li><a class="reference internal" href="#elevations-from-the-dem">Elevations from the DEM</a></li>
 </ul>

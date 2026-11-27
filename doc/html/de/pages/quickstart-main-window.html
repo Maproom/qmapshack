@@ -198,10 +198,10 @@
 <li class="toctree-l1 current has-children"><a class="reference internal" href="quickstart.html">Schnellstart</a><input aria-label="Toggle navigation of Schnellstart" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Das Hauptfenster</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-maps.html">Karten einschalten</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart-vector-map.html">Eine Garmin-Karte einschalten</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart-vector-map.html">Eine Garmin-Karte anzeigen</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-zoom-pan.html">Zoomen und Verschieben</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-dem.html">Höhendaten und Schummerung</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart-load-file.html">Eine GPX-Datei laden</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart-load-file.html">Eine GPX Datei laden</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-routing.html">Routing einrichten</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-draw-track.html">Einen Track zeichnen</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart-waypoints.html">Wegpunkte hinzufügen</a></li>
@@ -247,59 +247,57 @@
         <article role="main" id="furo-main-content">
           <section id="das-hauptfenster">
 <h1>Das Hauptfenster<a class="headerlink" href="#das-hauptfenster" title="Link to this heading">#</a></h1>
-<p>Diese Seite zeigt das QMapShack-Fenster, wie Sie es beim ersten Start sehen, und wofür seine Teile da sind.</p>
+<p>Diese Seite zeigt das QMapShack-Fenster, wie es beim ersten Start aussieht, und erläutert die Funktionen der einzelnen Bereiche.</p>
 <section id="das-fenster-beim-ersten-start">
 <span id="index-0"></span><h2>Das Fenster beim ersten Start<a class="headerlink" href="#das-fenster-beim-ersten-start" title="Link to this heading">#</a></h2>
 <p><img alt="Quickstart main window first start" src="../_images/quickstart-main-window-first-start.png" /></p>
-<p>Die Karte nimmt die Mitte des Fensters ein, darüber liegen die Menüleiste und die Werkzeugleiste.</p>
+<p>Die Karte nimmt die Mitte des Fensters ein, darüber befinden sich die Menüleiste und die Werkzeugleiste.</p>
 <p>Beim ersten Start ist keine Karte aktiv, deshalb steht dort eine Begrüßungsseite. Sie schließt sich, sobald Sie
-eine Karte einschalten.</p>
-<p>Die Bereiche links und rechts der Karte sind anfangs größtenteils leer; die meisten zeigen einen Hinweis, wie Sie
+eine Karte aktivieren.</p>
+<p>Die Bereiche links und rechts der Karte sind anfangs größtenteils leer. Die meisten zeigen einen Hinweis, wie Sie
 sie füllen:</p>
 <ul class="simple">
-<li><p><strong>Karten</strong>: Karten ein- und ausschalten.</p></li>
-<li><p><strong>Dig. Höhenmodell (DEM)</strong>: Höhendaten ein- und ausschalten, zum Beispiel um das Gelände auf der Karte zu
+<li><p><strong>Karten</strong>: Karten aktivieren und deaktivieren.</p></li>
+<li><p><strong>Dig. Höhenmodell (DEM)</strong>: Höhendaten aktivieren und deaktivieren, zum Beispiel, um das Gelände auf der Karte zu
 schummern.</p></li>
 <li><p><strong>Sehenswürdigkeiten</strong>: Sehenswürdigkeiten aus POI-Dateien anzeigen.</p></li>
-<li><p><strong>Arbeitsplatz</strong>: die Projekte, die Sie geöffnet haben, mit ihren Tracks, Wegpunkten, Routen und Gebieten.</p></li>
+<li><p><strong>Arbeitsplatz</strong>: die geöffneten Projekte mit den darin enthaltenen Tracks, Wegpunkten, Routen und Gebieten.</p></li>
 <li><p><strong>Datenbank</strong>: Ihre Projekte in einer Datenbank speichern.</p></li>
-<li><p><strong>Streckenführung</strong>: einstellen, wie QMapShack Routen berechnet.</p></li>
+<li><p><strong>Streckenführung</strong>: konfigurieren, wie QMapShack Routen berechnet.</p></li>
 <li><p><strong>Echtzeit</strong>: Live-Positionen anzeigen, zum Beispiel von Schiffen oder Flugzeugen.</p></li>
 </ul>
-<p>Für den Schnellstart brauchen Sie <strong>Sehenswürdigkeiten</strong> und <strong>Echtzeit</strong> nicht.</p>
+<p>Diese Schnellstartanleitung behandelt <strong>POI-Sammlungen</strong> und <strong>Echtzeit</strong> nicht.</p>
 </section>
 <section id="das-fenster-anordnen">
 <span id="index-4"></span><span id="index-3"></span><span id="index-2"></span><span id="index-1"></span><h2>Das Fenster anordnen<a class="headerlink" href="#das-fenster-anordnen" title="Link to this heading">#</a></h2>
 <p>Jeder Bereich hat am linken Rand eine Titelleiste mit seinem Namen.</p>
 <ul>
 <li><img alt="Quickstart main window panel move" class="align-right" src="../_images/quickstart-main-window-panel-move.png" />
-<p>Um einen Bereich zu verschieben, ziehen Sie ihn an seiner Titelleiste. Sie können ihn links, rechts, über oder
-unter der Karte ablegen.</p>
+<p>Um einen Bereich zu verschieben, ziehen Sie ihn an seiner Titelleiste an die gewünschte Position. Sie können ihn links, rechts, über oder unter der Karte ablegen.</p>
 </li>
 <li><img alt="Quickstart main window panel stack" class="align-right" src="../_images/quickstart-main-window-panel-stack.png" />
-<p>Um Bereiche zu stapeln, legen Sie einen Bereich auf einem anderen ab. Über Reiter wechseln Sie dann zwischen ihnen.</p>
+<p>Um Bereiche zu übereinander zu stapeln, legen Sie einen Bereich auf einem anderen ab. Über Reiter wechseln Sie dann zwischen ihnen.</p>
 </li>
 <li><img alt="Quickstart main window panel resize" class="align-right" src="../_images/quickstart-main-window-panel-resize.png" />
-<p>Um die Größe eines Bereichs zu ändern, ziehen Sie die Trennlinie zwischen zwei Bereichen oder zwischen einem
-Bereich und der Karte.</p>
+<p>Um die Größe eines Bereichs zu ändern, ziehen Sie die Trennlinie zwischen zwei Bereichen oder zwischen einem Bereich und der Karte an die gewünschte Position.</p>
 </li>
 <li><img alt="Quickstart main window panel buttons" class="align-right" src="../_images/quickstart-main-window-panel-buttons.png" />
-<p>Um einen Bereich zu schließen, den Sie nicht brauchen, klicken Sie auf den oberen Knopf seiner
-Titelleiste. Der Knopf darunter löst den Bereich aus dem Fenster.</p>
+<p>Um einen Bereich zu schließen, den Sie nicht brauchen, klicken Sie auf die obere Schaltfläche seiner
+Titelleiste. Die Schaltfläche darunter löst den Bereich aus dem Fenster.</p>
 </li>
 </ul>
 </section>
-<section id="einen-bereich-zuruckholen">
-<span id="index-8"></span><span id="index-7"></span><span id="index-6"></span><span id="index-5"></span><h2>Einen Bereich zurückholen<a class="headerlink" href="#einen-bereich-zuruckholen" title="Link to this heading">#</a></h2>
+<section id="einen-bereich-wiederherstellen">
+<span id="index-8"></span><span id="index-7"></span><span id="index-6"></span><span id="index-5"></span><h2>Einen Bereich wiederherstellen<a class="headerlink" href="#einen-bereich-wiederherstellen" title="Link to this heading">#</a></h2>
 <ul>
 <li><img alt="Quickstart main window menu window" class="align-right" src="../_images/quickstart-main-window-menu-window.png" />
 <p>Um einen geschlossenen Bereich wieder anzuzeigen, klicken Sie auf seinen Namen im Menü <strong>Fenster</strong>. Das Menü
 führt jeden Bereich und die Werkzeugleiste auf und hebt die sichtbaren hervor.</p>
 </li>
-<li><p>Um alle Bereiche auf einmal auszublenden, klicken Sie auf <strong>Fenster → Fenster umschalten</strong> oder drücken
-<strong>Strg+D</strong>; das Menü nennt die Bereiche hier Fenster. Wiederholen Sie das, um sie zurückzuholen.</p></li>
-<li><p>Um der Karte den ganzen Bildschirm zu geben, klicken Sie auf <strong>Fenster → Vollbild</strong> oder drücken <strong>F11</strong>. Das
-Vollbild blendet auch die Menüleiste aus, verlassen Sie es also mit <strong>F11</strong>.</p></li>
+<li><p>Um alle Bereiche auf einmal auszublenden, klicken Sie auf <strong>Fenster → Fenster umschalten</strong> oder drücken Sie
+<strong>Strg+D</strong>. Das Menü bezeichnet die Bereiche als Fenster. Wiederholen Sie diesen Schritt, um die Bereiche/Fenster zurückzuholen.</p></li>
+<li><p>Um die Karte im Vollbildmodus anzuzeigen, wählen Sie <strong>Fenster → Vollbild</strong> oder drücken Sie <strong>F11</strong>. Das
+Vollbild blendet auch die Menüleiste aus. Verlassen Sie das Vollbild mit <strong>F11</strong>.</p></li>
 </ul>
 <p>QMapShack merkt sich Ihre Anordnung für den nächsten Start.</p>
 </section>
@@ -308,14 +306,14 @@ Vollbild blendet auch die Menüleiste aus, verlassen Sie es also mit <strong>F11
 <p>QMapShack speichert seine Daten in einem Verzeichnis, mit einem Unterverzeichnis für jede Art von Daten: <code class="docutils literal notranslate"><span class="pre">Maps</span></code>, <code class="docutils literal notranslate"><span class="pre">DEM</span></code>,
 <code class="docutils literal notranslate"><span class="pre">POI</span></code>, <code class="docutils literal notranslate"><span class="pre">Routino</span></code> und <code class="docutils literal notranslate"><span class="pre">BRouter</span></code> (Daten für die Streckenführung), <code class="docutils literal notranslate"><span class="pre">Databases</span></code> und <code class="docutils literal notranslate"><span class="pre">GPX</span></code>. Die Begrüßungsseite richtet
 es für Sie ein, und die anderen Seiten des Schnellstarts legen ihre Daten dort ab.</p>
+<p>QMapShack speichert seine Daten in einem Verzeichnis ab, das für jede Datenart ein eigenes Unterverzeichnis enthält: <code class="docutils literal notranslate"><span class="pre">Maps</span></code>, <code class="docutils literal notranslate"><span class="pre">DEM</span></code>, <code class="docutils literal notranslate"><span class="pre">POI</span></code>, <code class="docutils literal notranslate"><span class="pre">Routino</span></code> und <code class="docutils literal notranslate"><span class="pre">BRouter</span></code> (Daten für die Streckenführung), <code class="docutils literal notranslate"><span class="pre">Databases</span></code> und <code class="docutils literal notranslate"><span class="pre">GPX</span></code>. Die Begrüßungsseite richtet diese Verzeichnisstruktur für Sie ein. Die übrigen Seiten des Schnellstarts speichern ihre Daten in den entsprechenden Unterverzeichnissen.</p>
 <ol class="arabic">
 <li><img alt="Quickstart main window give it a home" class="align-right" src="../_images/quickstart-main-window-give-it-a-home.png" />
 <p>Scrollen Sie auf der Begrüßungsseite nach unten bis zu <strong>Wählen Sie ein Hauptverzeichnis</strong> und klicken Sie
 auf den Link <strong>Pfad</strong>.</p>
 </li>
 <li><p>Wählen Sie ein Verzeichnis aus oder legen Sie ein neues an, und bestätigen Sie.</p></li>
-<li><p>QMapShack legt die fehlenden Unterverzeichnisse an und meldet sie für Karten, Höhendaten, POIs und die
-Streckenführung an. Die Begrüßungsseite zeigt das Verzeichnis dann unter <strong>Aktuelles Hauptverzeichnis</strong>.</p></li>
+<li><p>QMapShack erstellt alle noch fehlenden Unterverzeichnisse und meldet sie für Karten, Höhendaten, POIs und die Streckenführung an. Anschließend zeigt die Begrüßungsseite das Verzeichnis unter <strong>Aktuelles Hauptverzeichnis</strong> an.</p></li>
 </ol>
 </section>
 </section>
@@ -378,7 +376,7 @@ Streckenführung an. Die Begrüßungsseite zeigt das Verzeichnis dann unter <str
 <li><a class="reference internal" href="#">Das Hauptfenster</a><ul>
 <li><a class="reference internal" href="#das-fenster-beim-ersten-start">Das Fenster beim ersten Start</a></li>
 <li><a class="reference internal" href="#das-fenster-anordnen">Das Fenster anordnen</a></li>
-<li><a class="reference internal" href="#einen-bereich-zuruckholen">Einen Bereich zurückholen</a></li>
+<li><a class="reference internal" href="#einen-bereich-wiederherstellen">Einen Bereich wiederherstellen</a></li>
 <li><a class="reference internal" href="#das-hauptverzeichnis-einrichten">Das Hauptverzeichnis einrichten</a></li>
 </ul>
 </li>

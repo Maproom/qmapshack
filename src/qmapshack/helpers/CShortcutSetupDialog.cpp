@@ -19,8 +19,10 @@
 
 #include <QAction>
 #include <QHeaderView>
+#include <QMenu>
 #include <QMessageBox>
 #include <QSignalBlocker>
+#include <utility>
 
 #include "helpers/CShortcutConfig.h"
 
@@ -37,11 +39,16 @@ CShortcutSetupDialog::CShortcutSetupDialog(QWidget* const& parent, CShortcutConf
     QTreeWidgetItem* item = new QTreeWidgetItem(treeActions);
     item->setIcon(eColumnAction, action->icon());
     item->setText(eColumnAction, action->iconText());
+    item->setText(eColumnCategory, actionCategory(action));
     item->setToolTip(eColumnAction, action->toolTip());
     item->setData(eColumnAction, Qt::UserRole, QVariant::fromValue(action));
     setItemShortcut(item, action->shortcut());
   }
+  // QTreeModel sorts stably, so sorting by action first leaves it as the tiebreak within a category
   treeActions->sortItems(eColumnAction, Qt::AscendingOrder);
+  treeActions->sortItems(eColumnCategory, Qt::AscendingOrder);
+  treeActions->setSortingEnabled(true);
+  treeActions->header()->setSectionResizeMode(eColumnCategory, QHeaderView::ResizeToContents);
   treeActions->header()->setSectionResizeMode(eColumnAction, QHeaderView::Stretch);
   treeActions->header()->setSectionResizeMode(eColumnShortcut, QHeaderView::ResizeToContents);
   treeActions->header()->setStretchLastSection(false);
@@ -78,8 +85,12 @@ void CShortcutSetupDialog::accept() {
 
 void CShortcutSetupDialog::slotButtonClicked(QAbstractButton* button) {
   if (buttonBox->buttonRole(button) == QDialogButtonBox::ResetRole) {
+    QList<QTreeWidgetItem*> items;
     for (qint32 i = 0; i < treeActions->topLevelItemCount(); i++) {
-      QTreeWidgetItem* item = treeActions->topLevelItem(i);
+      items << treeActions->topLevelItem(i);
+    }
+
+    for (QTreeWidgetItem* const item : std::as_const(items)) {
       setItemShortcut(item, config->defaultShortcut(itemAction(item)));
     }
     updateEditor(treeActions->currentItem());
@@ -90,6 +101,7 @@ void CShortcutSetupDialog::slotFilterChanged(const QString& text) {
   for (qint32 i = 0; i < treeActions->topLevelItemCount(); i++) {
     QTreeWidgetItem* item = treeActions->topLevelItem(i);
     const bool match = item->text(eColumnAction).contains(text, Qt::CaseInsensitive) ||
+                       item->text(eColumnCategory).contains(text, Qt::CaseInsensitive) ||
                        item->text(eColumnShortcut).contains(text, Qt::CaseInsensitive);
     item->setHidden(!match);
   }
@@ -125,7 +137,7 @@ void CShortcutSetupDialog::slotApplyEditor() {
     const QMessageBox::StandardButton answer = QMessageBox::question(
         this, tr("Shortcut already in use"),
         tr("The shortcut '%1' is already assigned to '%2'. Do you want to reassign it to '%3'?")
-            .arg(shortcut.toString(QKeySequence::NativeText), conflict->text(eColumnAction), item->text(eColumnAction)),
+            .arg(shortcut.toString(QKeySequence::NativeText), itemLabel(conflict), itemLabel(item)),
         QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
     if (answer == QMessageBox::Yes) {
       setItemShortcut(conflict, QKeySequence());
@@ -142,6 +154,12 @@ void CShortcutSetupDialog::slotApplyEditor() {
 
 QAction* CShortcutSetupDialog::itemAction(const QTreeWidgetItem* const item) const {
   return item->data(eColumnAction, Qt::UserRole).value<QAction*>();
+}
+
+QString CShortcutSetupDialog::itemLabel(const QTreeWidgetItem* const item) const {
+  const QString& category = item->text(eColumnCategory);
+  const QString& action = item->text(eColumnAction);
+  return category.isEmpty() ? action : tr("%1 (%2)").arg(action, category);
 }
 
 QKeySequence CShortcutSetupDialog::itemShortcut(const QTreeWidgetItem* const item) const {
@@ -176,4 +194,21 @@ void CShortcutSetupDialog::updateEditor(const QTreeWidgetItem* const item) {
   keySequenceEdit->setEnabled(item != nullptr);
   pushDefault->setEnabled(item != nullptr);
   keySequenceEdit->setKeySequence(item != nullptr ? itemShortcut(item) : QKeySequence());
+}
+
+QString CShortcutSetupDialog::actionCategory(const QAction* const action) const {
+  const QVariant tagged = action->property("shortcutCategory");
+  if (tagged.isValid()) {
+    return tagged.toString();
+  }
+  // fall back to the title of the QMenu the action was added to via the .ui file
+  for (QObject* const object : action->associatedObjects()) {
+    const QMenu* const menu = qobject_cast<const QMenu*>(object);
+    if (menu != nullptr) {
+      QString title = menu->title();
+      title.remove('&');
+      return title;
+    }
+  }
+  return QString();
 }

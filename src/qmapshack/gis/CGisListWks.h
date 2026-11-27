@@ -22,6 +22,7 @@
 
 #include <QPointer>
 #include <QSqlDatabase>
+#include <QTimer>
 #include <QTreeWidget>
 
 #include "gis/prj/IGisProject.h"
@@ -34,6 +35,10 @@ class IGisProject;
 class CDBProject;
 class IDeviceWatcher;
 class QActionGroup;
+class CGisItemTrk;
+class CGisItemWpt;
+class CGisItemRte;
+class CGisItemOvlArea;
 
 class CGisListWks : public QTreeWidget {
   Q_OBJECT
@@ -69,6 +74,9 @@ class CGisListWks : public QTreeWidget {
   /** @return true once slotLoadWorkspace() has run, whether it restored a project or not */
   bool isWorkspaceLoaded() const { return workspaceLoaded; }
 
+  /// all context-menu actions of this widget, for keyboard shortcut configuration
+  QList<QAction*> shortcutActions() const;
+
  public slots:
   void slotLoadWorkspace();
   void slotCopyProject();
@@ -96,8 +104,10 @@ class CGisListWks : public QTreeWidget {
   void slotItemDoubleClicked(QTreeWidgetItem* item, int);
   void slotItemChanged(QTreeWidgetItem* item, int column);
   void slotEditItem();
+  void slotEdit();
   void slotTagItem();
   void slotDeleteItem();
+  void slotDelete();
   void slotBubbleWpt();
   void slotNogoItem();
   void slotDelRadiusWpt();
@@ -124,6 +134,7 @@ class CGisListWks : public QTreeWidget {
   void slotCloseAllProjects();
   void slotGeoSearch(bool on);
   void slotCopyItem();
+  void slotCopy();
   void slotSyncWksDev();
   void slotSyncDevWks();
   void slotRteFromWpt();
@@ -142,6 +153,90 @@ class CGisListWks : public QTreeWidget {
   void slotToArea();
 
  private:
+  /** @brief The context menu matching the current selection, as decided by updateActionState() */
+  enum menu_e {
+    eMenuNone,
+    eMenuProjectWks,
+    eMenuProjectDev,
+    eMenuProjectTrash,
+    eMenuItemTrk,
+    eMenuItemWpt,
+    eMenuItemRte,
+    eMenuItemOvl,
+    eMenuItemMulti
+  };
+
+  /**
+     @brief Bring all actions in sync with the current selection
+
+     @return the context menu for the selection
+   */
+  menu_e updateActionState();
+
+  /** @brief Run updateActionState() once control is back in the event loop */
+  void scheduleActionStateUpdate();
+
+  /** @brief Category of an action */
+  enum category_e { eCategoryProject, eCategoryItem, eCategoryTrack, eCategoryWaypoint, eCategoryRoute, eCategoryArea };
+
+  /** @brief The translated name for a category */
+  QString categoryName(category_e category) const;
+
+  /** @brief What the selection holds, which decides what an action can apply to */
+  enum selection_e { eSelectionNone, eSelectionProjects, eSelectionItems, eSelectionMixed };
+
+  selection_e selectionType() const;
+
+  /** @brief The selected items an action applies to: all of them, or those of the open context menu's kind */
+  QList<QTreeWidgetItem*> actionItems() const;
+
+  /** @brief The one selected item, or nullptr if the selection does not hold exactly one */
+  QTreeWidgetItem* singleSelectedItem() const;
+
+  /** @brief True if any selected item lives on a device */
+  bool hasSelectedItemOnDevice() const;
+
+  /**
+     @brief The projects an action applies to
+
+     Either the selected projects, or the projects the selected items belong to
+   */
+  QList<IGisProject*> targetProjects() const;
+
+  /** @brief The one project an action applies to, or nullptr if the selection does not resolve to exactly one */
+  IGisProject* singleTargetProject() const;
+
+  struct action_context_t {
+    menu_e menu = eMenuNone;
+    bool onProjects = false;
+    qsizetype numSelected = 0;
+
+    QList<IGisProject*> projects;
+    bool prjTrash = false;
+    bool prjDev = false;
+    bool prjWks = false;
+    bool prjAllVisible = true;
+    bool prjAllHidden = true;
+    bool prjAnyCanSave = false;
+    IGisProject* project = nullptr;
+
+    qsizetype numItems = 0;
+    qsizetype numTrk = 0;
+    qsizetype numWpt = 0;
+    bool itemOnDevice = false;
+
+    IGisItem* item = nullptr;
+    CGisItemTrk* trk = nullptr;
+    CGisItemWpt* wpt = nullptr;
+    CGisItemRte* rte = nullptr;
+    CGisItemOvlArea* ovl = nullptr;
+    IGisProject* itemProject = nullptr;
+  };
+
+  action_context_t actionContext() const;
+
+  void updateCheckedStates(const action_context_t& c);
+
   void configDB();
   void initDB();
   void migrateDB(int version);
@@ -152,16 +247,25 @@ class CGisListWks : public QTreeWidget {
   void setVisibilityOnMap(bool visible);
   /// @param id  the objectName: the member's name
   QAction* addSortAction(const char* id, QObject* parent, QActionGroup* actionGroup, const QString& icon,
-                         const QString& text, IGisProject::sorting_folder_e mode);
+                         const QString& text, IGisProject::sorting_folder_e mode, category_e category);
 
   /// @param id  the objectName: the member's name
   template <typename Func>
-  QAction* addAction(const char* id, const QIcon& icon, const QString& name, QObject* parent, Func slot) {
+  QAction* addAction(const char* id, const QIcon& icon, const QString& name, QObject* parent, Func slot,
+                     category_e category) {
     QAction* action = new QAction(icon, name, parent);
     action->setObjectName(QString::fromLatin1(id));
+    // register with the widget so a user-assigned shortcut can actually trigger it,
+    // independent of the transient context menu the action is also shown in
+    action->setShortcutContext(Qt::WidgetWithChildrenShortcut);
+    QWidget::addAction(action);
     connect(action, &QAction::triggered, this, slot);
+    tagCategory(action, category);
     return action;
   }
+
+  /** @brief Record the action's category for the shortcut setup dialog */
+  void tagCategory(QAction* action, category_e category);
 
   void showMenuProjectWks(const QPoint& p);
   void showMenuProjectDev(const QPoint& p);
@@ -179,7 +283,7 @@ class CGisListWks : public QTreeWidget {
   template <typename T>
   QList<IGisItem::key_t> selectedItems2Keys() const {
     QList<IGisItem::key_t> keys;
-    const QList<QTreeWidgetItem*>& items = selectedItems();
+    const QList<QTreeWidgetItem*>& items = actionItems();
     for (const QTreeWidgetItem* item : items) {
       const T* gisItem = dynamic_cast<const T*>(item);
       if (nullptr != gisItem) {
@@ -200,8 +304,6 @@ class CGisListWks : public QTreeWidget {
   QAction* actionAutoSave;
   QAction* actionUserFocusPrj;
   QAction* actionAutoSyncToDev;
-  QAction* actionCopyPrj;
-  QAction* actionEditPrj;
   QAction* actionCloseProj;
   QAction* actionShowOnMap;
   QAction* actionHideFrMap;
@@ -211,7 +313,6 @@ class CGisListWks : public QTreeWidget {
   QAction* actionSortByName;
   QAction* actionSortByRating;
   QAction* actionFilterProject;
-  QAction* actionDelProj;
   QAction* actionSyncDevWks;
   QAction* actionEditDetails;
   QAction* actionTagItem;
@@ -219,7 +320,6 @@ class CGisListWks : public QTreeWidget {
   QAction* actionDelete;
   QAction* actionBubbleWpt;
   QAction* actionDelRadiusWpt;
-  QAction* actionNogoWpt;
   QAction* actionEditRadiusWpt;
   QAction* actionProjWpt;
   QAction* actionMoveWpt;
@@ -235,7 +335,6 @@ class CGisListWks : public QTreeWidget {
   QAction* actionCalcRte;
   QAction* actionResetRte;
   QAction* actionEditRte;
-  QAction* actionNogoRte;
   QAction* actionReverseRte;
   QAction* actionRte2Trk;
   QAction* actionEditArea;
@@ -249,6 +348,11 @@ class CGisListWks : public QTreeWidget {
   QAction* actionEleWptTrk;
 
   QMenu* menuNone = nullptr;
+
+  QTimer* timerActionState = nullptr;
+
+  enum menu_scope_e { eMenuScopeAll, eMenuScopeProjects, eMenuScopeItems };
+  menu_scope_e menuScope = eMenuScopeAll;
 
   QPointer<CGeoSearch> geoSearch;
 

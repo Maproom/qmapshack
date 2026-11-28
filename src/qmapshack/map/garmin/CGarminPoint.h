@@ -28,6 +28,9 @@
 #include <QByteArray>
 #include <QCoreApplication>
 #include <QPointF>
+#include <QRect>
+#include <QRectF>
+#include <QSize>
 #include <QStringList>
 #include <QVector>
 #include <QtGlobal>
@@ -67,6 +70,16 @@ class CGarminPoint {
   static QString facilityText(const exit_facility_t& facility);
 
   bool hasLabel() const { return !labels.isEmpty(); }
+
+  /**
+     @brief Where a point's label goes, as BaseCamp places it: 1 px right of the symbol, the text's bottom on the point
+
+     @param pos     the point in screen pixels
+     @param symbol  the symbol drawn for the point in screen pixels, empty at @p pos for none
+     @param text    advance and height (ascent plus descent) of the label in its font
+     @return the text box
+   */
+  static QRect labelBox(const QPointF& pos, const QRectF& symbol, const QSize& text);
 
   /** A marine depth or height in the user's unit, one decimal where the value has one: "5.5 m". */
   static QString distanceText(const CGarminMarine::distance_t& d);

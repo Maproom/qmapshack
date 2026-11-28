@@ -82,6 +82,8 @@ class test_CGarminImg : public QObject {
   void facilityText_data();
   void facilityText();
   void poiSymbols();
+  void pointLabelBox_data();
+  void pointLabelBox();
   void placesRecords();
   void corruptPlaces();
 };
@@ -1226,6 +1228,26 @@ void test_CGarminImg::poiSymbols() {
     }
   }
   QCOMPARE(drawn, QRect(bounds.topLeft() * 2, bounds.size() * 2));
+}
+
+void test_CGarminImg::pointLabelBox_data() {
+  QTest::addColumn<QPointF>("pos");
+  QTest::addColumn<QRectF>("symbol");
+  QTest::addColumn<QRect>("box");
+
+  // icons of a TYP as BaseCamp 4.7.5 draws them: text from 1 px right of the icon, its bottom row above the point
+  QTest::newRow("8x8") << QPointF(763, 344) << QRectF(759, 340, 8, 8) << QRect(768, 331, 80, 13);
+  QTest::newRow("16x16") << QPointF(763, 411) << QRectF(755, 403, 16, 16) << QRect(772, 398, 80, 13);
+  QTest::newRow("24x24") << QPointF(763, 478) << QRectF(751, 466, 24, 24) << QRect(776, 465, 80, 13);
+  QTest::newRow("no symbol") << QPointF(100.4, 200.6) << QRectF(100.4, 200.6, 0, 0) << QRect(101, 188, 80, 13);
+}
+
+void test_CGarminImg::pointLabelBox() {
+  QFETCH(QPointF, pos);
+  QFETCH(QRectF, symbol);
+  QFETCH(QRect, box);
+
+  QCOMPARE(CGarminPoint::labelBox(pos, symbol, QSize(80, 13)), box);
 }
 
 void test_CGarminImg::placesRecords() {

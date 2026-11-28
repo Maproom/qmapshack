@@ -68,8 +68,7 @@ src/
   Its `<location>` paths are relative to the scratch copy; rewrite them to `../<path below src/qmapshack>`.
   The user checks Claude's German before it loses `type="unfinished"`; Spanish and Italian are taken as Claude writes
   them, without `unfinished` (user, 2026-11-28: no reviewer for them).
-- **Documentation after a Garmin map change**: only `quickstart-vector-map` loads an IMG map. Images differ by
-  machine, so compare a `replay` of that page against one from a `dev` worktree build on the same machine.
+- **Documentation after a Garmin map change**: only `quickstart-vector-map` loads an IMG map.
 - **`/code-review` needs the checkout as target** (`/home/oeichler/projects/qmapshack …`): the session starts
   outside the repository.
 - **`gh pr edit` fails on GitHub's Projects (classic) deprecation**; set a PR body with
@@ -83,6 +82,9 @@ src/
   `[QMS-nnnn]`.
 - **Every PR is checked for documentation changes**: which `doc/<lang>/pages` text and images show what
   changed, and whether the PR changes them. The template's documentation section says both.
+- **`dev`'s documentation images are the ones in the repo** (`doc/<lang>/images`): compare a `replay` of the
+  branch's build against them. Never build `dev` for a comparison. When in doubt which to take again, show the
+  user an HTML contact sheet (published beside replayed) in the browser.
 - **Name no other map viewer** in anything committed, in tickets or in PRs; mkgmap and BaseCamp are the only
   references named.
 - **No Claude attribution** in commit messages or PR descriptions: no `Co-Authored-By`, no "Generated with
@@ -849,7 +851,7 @@ file.
 - `waypoint-icon-resolution-plan.md` — 32 → 96 px waypoint icons, gated on storing `icon_t::focus`
   relative.
 - `img-mkgmap-gap-plan.md` (QMS-1343) — Garmin IMG decoder vs mkgmap: decoding bugs and missing features with effort.
-- `QMS-1354-poi-details-plan.md` — POI address/phone, highway exits, TRE3 copyright; branch `QMS-1354`.
+- `QMS-1370-point-labels-plan.md` — point labels beside the symbol; branch `QMS-1370`.
 
 ### CMake — remaining
 

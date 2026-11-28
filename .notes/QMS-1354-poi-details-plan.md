@@ -4,6 +4,8 @@ Ticket: QMS-#1354, parent QMS-#1343 (`img-mkgmap-gap-plan.md`, "POI address/phon
 list"). Branch `QMS-1354` from `dev` at `aa5cdd434`. Development ticket: no `changelog.txt` line; PR to `dev` only
 when complete. Work in chunks, each reviewed by the user before the next.
 
+Done: PR #1374 merged as `120e6520c` (2026-11-28), ticket closed.
+
 ## State (2026-11-28)
 
 Step 1 in progress: `mp/poi.mp`, `osm/exits.osm` built with r4924 and dumped (scratchpad `lbldump.py`); every

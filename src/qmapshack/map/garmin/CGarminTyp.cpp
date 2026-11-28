@@ -850,10 +850,10 @@ bool CGarminTyp::parsePolyline(QDataStream& in, QMap<quint32, polyline_property>
     }
 
     // Skip an element that left the pixmaps empty: a previous element of the same type may
-    // already have filled the property, and flipping/converting that again would corrupt it.
+    // already have filled the property. The first row lies left of the line's direction, as in BaseCamp.
     if (property.hasPixmap && !pixmapDay.isNull()) {
-      property.imgDay = toOwnedBLImage(pixmapDay.mirrored(false, true));
-      property.imgNight = toOwnedBLImage(pixmapNight.mirrored(false, true));
+      property.imgDay = toOwnedBLImage(pixmapDay);
+      property.imgNight = toOwnedBLImage(pixmapNight);
     }
   }
   return true;

@@ -3,6 +3,8 @@
 Ticket: QMS-#1370, parent QMS-#1343 (`img-mkgmap-gap-plan.md`). Branch `QMS-1370` from `dev` at `120e6520c`.
 Development ticket: no `changelog.txt` line; PR to `dev` only when complete.
 
+Done: PR #1375 merged as `64dcc38d6` (2026-11-28), ticket closed.
+
 ## State (2026-11-28)
 
 Step 1 done: branch, this plan. Step 2 (BaseCamp measured) done, see below.

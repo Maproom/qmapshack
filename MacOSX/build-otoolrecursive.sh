@@ -11,7 +11,7 @@ echo "${ATTN}---------------------------${NC}"
 cd $QMSDEVDIR/qmapshack/MacOSX/helpers/otoolrecursive
 mkdir build
 cd ./build
-$PACKAGES_PATH/bin/cmake .. -DCMAKE_INSTALL_PREFIX=$LOCAL_ENV
+$PACKAGES_PATH/bin/cmake .. -DCMAKE_INSTALL_PREFIX=$LOCAL_DEV_PATH
 $PACKAGES_PATH/bin/cmake --build . -j4
 $PACKAGES_PATH/bin/cmake --build . --target install
 cd $QMSDEVDIR

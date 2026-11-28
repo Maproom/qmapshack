@@ -29,8 +29,7 @@ mkdir build
 cd build
 
 # Ensure local PROJ is used
-export PKG_CONFIG_PATH="$LOCAL_ENV/lib/pkgconfig"
-GDAL_CMAKE_PREFIX_PATH="$LOCAL_ENV;$CMAKE_PREFIX_PATH"
+GDAL_CMAKE_PREFIX_PATH="$PROJ_DEV_PATH"
 
 if [ -z "$MACPORTS_BUILD" ]
 then
@@ -42,16 +41,15 @@ then
 fi
 
 # Boost headers need to be in the include path
-export CPATH="$LOCAL_ENV/include:$PACKAGES_PATH/include:${CPATH}"
-export LIBRARY_PATH="$LOCAL_ENV/lib:$PACKAGES_PATH/lib"
-export LD_LIBRARY_PATH="$LOCAL_ENV/lib:$PACKAGES_PATH/lib"
-
-GDAL=$LOCAL_ENV
+export CPATH="$LOCAL_DEV_PATH/include:$PACKAGES_PATH/include:${CPATH}"
+export LIBRARY_PATH="$LOCAL_DEV_PATH/lib:$PACKAGES_PATH/lib"
+export LD_LIBRARY_PATH="$LOCAL_DEV_PATH/lib:$PACKAGES_PATH/lib"
+#export PKG_CONFIG_PATH="$LOCAL_DEV_PATH/lib/pkgconfig"
 
 $PACKAGES_PATH/bin/cmake .. \
 	-DCMAKE_PREFIX_PATH="$GDAL_CMAKE_PREFIX_PATH" \
 	-DCMAKE_BUILD_TYPE=Release \
-	-DCMAKE_INSTALL_PREFIX=$LOCAL_ENV \
+	-DCMAKE_INSTALL_PREFIX=$GDAL_DEV_PATH \
 	-DGDAL_SET_INSTALL_RELATIVE_RPATH=ON \
 	-DGDAL_USE_INTERNAL_LIBS=ON \
 	-DGDAL_USE_EXTERNAL_LIBS=OFF \
@@ -74,7 +72,9 @@ $PACKAGES_PATH/bin/cmake .. \
 	-DGDAL_USE_ZSTD=ON \
 	-DGDAL_USE_SQLITE3=ON \
 	-DGDAL_USE_OPENSSL=ON \
-	-DBUILD_PYTHON_BINDINGS=OFF
+	-DBUILD_PYTHON_BINDINGS=OFF \
+	-DBUILD_TESTING=OFF \
+	-Wno-author
 
 $PACKAGES_PATH/bin/cmake --build . -j"$(sysctl -n hw.ncpu)"
 $PACKAGES_PATH/bin/cmake --build . --target install

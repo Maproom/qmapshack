@@ -16,7 +16,7 @@ rm -rf $QMSDEVDIR/otoolrecursive
 rm -rf $QMSDEVDIR/gdal
 rm -rf $QMSDEVDIR/routino*
 rm -rf $QMSDEVDIR/proj*
-rm -rf $QMSDEVDIR/build_QMapShack
+rm -rf $QMSDEVDIR/build
 
 echo "${ATTN}You can remove the qmapshack git repo from $QMSDEVDIR by rm -rf $QMSDEVDIR/qmapshack ${NC}"
 

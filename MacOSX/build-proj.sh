@@ -28,8 +28,6 @@ fi
 mkdir build
 cd build
 
-PROJ=$LOCAL_ENV
-
 if [ -z "$MACPORTS_BUILD" ]
 then
   # Prefer homebrew packages
@@ -41,7 +39,7 @@ fi
 
 $PACKAGES_PATH/bin/cmake .. \
 	-DCMAKE_PREFIX_PATH="$PROJ_CMAKE_PREFIX_PATH" \
-	-DCMAKE_INSTALL_PREFIX=$LOCAL_ENV \
+	-DCMAKE_INSTALL_PREFIX=$PROJ_DEV_PATH \
 	-DBUILD_TESTING=OFF
 
 $PACKAGES_PATH/bin/cmake --build . -j4
@@ -49,7 +47,7 @@ $PACKAGES_PATH/bin/cmake --build . --target install
 
 PROJ_DATA=proj-data-$PROJ_DATA_RELEASE
 
-cd $LOCAL_ENV/share/proj
+cd $PROJ_DEV_PATH/share/proj
 if [ ! -e $PROJ_DATA.txt ]
 then
   echo "----Installing PROJ DATA -----------"

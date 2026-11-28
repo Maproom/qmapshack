@@ -3,6 +3,8 @@
 Ticket: QMS-#1376, parent QMS-#1343 (`img-mkgmap-gap-plan.md`). Development ticket: no `changelog.txt` line; PR to
 `dev` only when complete. Branch `QMS-1376` from `dev` at `64dcc38d6`.
 
+Done: PR #1377 merged as `d709515f1` (2026-11-28), ticket closed.
+
 ## State (2026-11-28)
 
 Fixed, not committed: `CGarminTyp.cpp` mirrored every line bitmap top to bottom (`mirrored(false, true)` before

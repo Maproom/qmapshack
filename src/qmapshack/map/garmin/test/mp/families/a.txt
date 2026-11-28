@@ -1,0 +1,16 @@
+; mkgmap: --code-page=1252
+; The TYP of family 7017 in families.img.
+[_id]
+FID=7017
+ProductCode=1
+CodePage=1252
+[end]
+
+[_line]
+Type=0x14
+String=0x04,Family A line
+LineWidth=4
+Xpm="0 0 1 0"
+"a c #ff0000"
+[end]
+

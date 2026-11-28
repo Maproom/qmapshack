@@ -287,9 +287,47 @@ void CGarminImg::readBasics() {
 
     ++subfile;
   }
+  readMapFamilies(file);
 
   qDebug() << "dimensions:\t" << "N" << qRadiansToDegrees(maparea.bottom()) << "E" << qRadiansToDegrees(maparea.right())
            << "S" << qRadiansToDegrees(maparea.top()) << "W" << qRadiansToDegrees(maparea.left());
+}
+
+void CGarminImg::readMapFamilies(CFileExt& file) {
+  QHash<quint32, quint16> families;
+  for (const subfile_desc_t& subfile : std::as_const(subfiles)) {
+    if (!subfile.parts.contains("MPS")) {
+      continue;
+    }
+    QByteArray data;
+    readFile(file, subfile.parts["MPS"].offset, subfile.parts["MPS"].size, data);
+    // records: type, 16 bit length, body; a map ('L') starts with product, family and map number
+    const quint8* p = reinterpret_cast<const quint8*>(data.constData());
+    qsizetype i = 0;
+    while (i + 3 <= data.size()) {
+      const quint8 record = p[i];
+      const qsizetype length = p[i + 1] | (p[i + 2] << 8);
+      const qsizetype body = i + 3;
+      if (body + length > data.size()) {
+        break;
+      }
+      if (record == 'L' && length >= 8) {
+        const quint16 family = quint16(p[body + 2] | (p[body + 3] << 8));
+        const quint32 map = quint32(p[body + 4]) | (quint32(p[body + 5]) << 8) | (quint32(p[body + 6]) << 16) |
+                            (quint32(p[body + 7]) << 24);
+        families[map] = family;
+      }
+      i = body + length;
+    }
+  }
+
+  for (subfile_desc_t& subfile : subfiles) {
+    bool ok = false;
+    const quint32 map = subfile.name.toUInt(&ok);
+    if (ok) {
+      subfile.family = families.value(map, 0);
+    }
+  }
 }
 
 void CGarminImg::readSubfileBasics(subfile_desc_t& subfile, CFileExt& file) {
@@ -844,6 +882,11 @@ void CGarminImg::load(quint8 bits, const QRectF& viewport, const filter_t& filte
     // qDebug() << "rgn range" << Qt::hex << subfile.parts["RGN"].offset << (subfile.parts["RGN"].offset +
     // subfile.parts["RGN"].size);
 
+    // the objects of this tile start here; they get its family below
+    const struct {
+      qsizetype polygons, polylines, points, pois;
+    } first = {polygons.size(), polylines.size(), points.size(), pois.size()};
+
     const qint32 tileLevel = level(subfile, bits);
     const QVector<subdiv_desc_t>& subdivs = subfile.subdivs;
     // collect polylines
@@ -857,6 +900,18 @@ void CGarminImg::load(quint8 bits, const QRectF& viewport, const filter_t& filte
         break;
       }
       loadSubDiv(file, subdiv, subfile, rgndata, filter, viewport, polylines, polygons, points, pois);
+    }
+    for (qsizetype i = first.polygons; i < polygons.size(); ++i) {
+      polygons[i].family = subfile.family;
+    }
+    for (qsizetype i = first.polylines; i < polylines.size(); ++i) {
+      polylines[i].family = subfile.family;
+    }
+    for (qsizetype i = first.points; i < points.size(); ++i) {
+      points[i].family = subfile.family;
+    }
+    for (qsizetype i = first.pois; i < pois.size(); ++i) {
+      pois[i].family = subfile.family;
     }
 
 #ifdef Q_OS_WIN32

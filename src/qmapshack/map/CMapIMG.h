@@ -109,11 +109,21 @@ class CMapIMG : public IMap {
   void getInfoPolylines(const QPoint& pt, QMultiMap<QString, QString>& dict) const;
   void getInfoPolygons(const QPoint& pt, QMultiMap<QString, QString>& dict) const;
 
-  QMap<quint32, CGarminTyp::polyline_property> polylineProperties;
-  QMap<quint32, CGarminTyp::polygon_property> polygonProperties;
-  QList<quint32> polygonDrawOrder;
-  QMap<quint32, CGarminTyp::point_property> pointProperties;
-  QMap<quint8, QString> languages;
+  /** The styles of one TYP on top of the built-in ones. */
+  struct style_t {
+    QMap<quint32, CGarminTyp::polyline_property> polylineProperties;
+    QMap<quint32, CGarminTyp::polygon_property> polygonProperties;
+    QList<quint32> polygonDrawOrder;
+    QMap<quint32, CGarminTyp::point_property> pointProperties;
+  };
+  /** the styles of all tiles: the external TYP file, else the image's first TYP; its draw order serves all */
+  style_t base;
+  /** with several TYP files in the image: the built-in styles, for a family without a TYP */
+  style_t builtin;
+  /** with several TYP files in the image: each family's styles, by the TYP's family id */
+  QMap<quint16, style_t> familyStyles;
+  /** The styles of a family's objects. */
+  const style_t& styleOf(quint16 family) const;
 
   polytype_t polygons;
   polytype_t polylines;
@@ -135,7 +145,7 @@ class CMapIMG : public IMap {
   QVector<textpath_t> textpaths;
   /** Draw a road's ref as a highway shield on the middle of its longest straight stretch, as BaseCamp does. */
   void drawShield(BLContext& ctx, const textpath_t& textpath, QList<QPainterPath>& placed);
-  qint8 selectedLanguage;
+  quint8 typLanguage; /**< the user's TYP language code */
   /** reads and decodes the file */
   CGarminImg img;
 };

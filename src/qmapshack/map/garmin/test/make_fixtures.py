@@ -4,9 +4,9 @@
 usage: make_fixtures.py MKGMAP_JAR OUT_DIR
 
 Each mp/<name>.mp and osm/<name>.osm becomes OUT_DIR/<name>.img and its search index OUT_DIR/<name>_mdr.img, an
-IMG file without map tiles. Each folder mp/<name>/ becomes OUT_DIR/<name>.img, a gmapsupp of its *.mp tiles. Each
-typ/<name>.txt becomes OUT_DIR/<name>.typ.
-A first line "; mkgmap: <options>" passes options to mkgmap; in a folder, the first tile's line counts. An .osm
+IMG file without map tiles. Each folder mp/<name>/ becomes OUT_DIR/<name>.img, a gmapsupp of its *.mp tiles, a
+<tile>.txt beside a tile as its TYP. Each typ/<name>.txt becomes OUT_DIR/<name>.typ.
+A first line "; mkgmap: <options>" passes options to mkgmap; in a folder, a tile's line applies from that tile on. An .osm
 source gives them in its first comment, "<!-- mkgmap: <options> -->", without the leading dashes: XML comments
 cannot hold two dashes. The jar must be mkgmap r4924 (https://www.mkgmap.org.uk/download/mkgmap.html), the release the
 test was written against.
@@ -82,8 +82,12 @@ def main() -> int:
     for group in groups:
         tiles = sorted(group.glob("*.mp"))
         with tempfile.TemporaryDirectory() as tmp:
-            result = run([*JAVA, str(jar), f"--output-dir={tmp}", "--gmapsupp", *options(tiles[0]),
-                          *[str(t) for t in tiles]])
+            # each tile's options apply from that tile on; a <tile>.txt beside it is its TYP
+            inputs = []
+            for tile in tiles:
+                typ = tile.with_suffix(".txt")
+                inputs += [*options(tile), str(tile)] + ([str(typ)] if typ.is_file() else [])
+            result = run([*JAVA, str(jar), f"--output-dir={tmp}", "--gmapsupp", *inputs])
             gmapsupp = Path(tmp) / "gmapsupp.img"
             if result.returncode != 0 or not gmapsupp.is_file():
                 print(f"{group.name}: mkgmap failed\n{result.stdout}{result.stderr}", file=sys.stderr)

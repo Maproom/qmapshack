@@ -57,6 +57,7 @@ class CGarminPolygon {
   bool hasLabel() const { return !labels.isEmpty(); }
 
   quint32 type = 0;
+  quint16 family = 0; /**< map family of the object's tile, from the MPS map list; 0 if unknown */
   /// direction of line (polyline, only)
   bool direction = false;
   /// the label offset

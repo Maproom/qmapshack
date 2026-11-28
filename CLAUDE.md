@@ -401,6 +401,14 @@ preview curve.
 - **Blend2D ignores stroke dash arrays**: `CMapIMG::dashedPath()` cuts dashes by hand. The Qt dash styles in
   `applyPen()` are drawn solid as well (not fixed).
 
+## DEM lookups — `CDemDraw`
+
+The draw thread holds `CDemItem::mutexActiveDems` for a whole draw. `getElevationAt()`/`getSlopeAt()` wait for it;
+only the mouse-move status and the ruler's status and paint pass `wait = false` and get `NOFLOAT` during a draw. Line
+lookups take the lock once for all points.
+
+---
+
 ## Garmin label cache — `IGarminStrTbl`
 
 `get()` is a non-virtual wrapper over a bounded LRU `QCache` (key `(type << 32) | offset`); a miss

@@ -91,7 +91,8 @@ class CCanvas : public QWidget {
   const QString& getName() const { return _name; }
   void setName(const QString& newName);
 
-  qreal getElevationAt(const QPointF& pos, bool checkScale) const;
+  /// @p wait: see CDemDraw::getElevationAt()
+  qreal getElevationAt(const QPointF& pos, bool checkScale, bool wait = true) const;
   void getElevationAt(const QPolygonF& pos, QPolygonF& ele) const;
   void getElevationAt(SGisLine& line) const;
 

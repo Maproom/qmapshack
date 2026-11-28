@@ -40,10 +40,15 @@ class CDemDraw : public IDrawContext {
   void saveConfig(QSettings& cfg);
   void loadConfig(QSettings& cfg);
 
-  qreal getElevationAt(const QPointF& pos, bool checkScale);
+  /**
+     @brief The elevation at @p pos from the first active DEM covering it.
+
+     @param wait  wait for a running DEM draw; false gives NOFLOAT at once while one runs (mouse move, painting)
+   */
+  qreal getElevationAt(const QPointF& pos, bool checkScale, bool wait = true);
   void getElevationAt(const QPolygonF& pos, QPolygonF& ele);
   void getElevationAt(SGisLine& line);
-  qreal getSlopeAt(const QPointF& pos, bool checkScale = false);
+  qreal getSlopeAt(const QPointF& pos, bool checkScale = false, bool wait = true);
   void getSlopeAt(const QPolygonF& pos, QPolygonF& slope);
 
   /**

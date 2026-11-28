@@ -2,7 +2,7 @@
 
 Tickets: top QMS-1343; 1357 decoder test (reader split out of CMapIMG, mkgmap fixtures); 1344 C1–C2, 1345 R1–R3/R6, 1346 R4, 1347 L1/L2/L5–L8, 1348 T1–T6, 1349 L3/L4 road labels and
 shields, 1350 prefix/suffix hiding, 1351 one-way arrows, 1352 draw priority, 1353 marine extra data, 1354 POI
-details and copyright, 1355 TYP languages/icon sets/several TYPs, 1370 point labels beside the symbol.
+details and copyright, 1355 TYP languages/icon sets/several TYPs, 1370 point labels beside the symbol, 1376 line bitmaps on the wrong side.
 
 Changelog (user, 2026-11-27): QMS-#1343's line leads with the support of the marine extensions (QMS-1353).
 

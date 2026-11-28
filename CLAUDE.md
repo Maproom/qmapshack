@@ -851,7 +851,7 @@ file.
 - `waypoint-icon-resolution-plan.md` — 32 → 96 px waypoint icons, gated on storing `icon_t::focus`
   relative.
 - `img-mkgmap-gap-plan.md` (QMS-1343) — Garmin IMG decoder vs mkgmap: decoding bugs and missing features with effort.
-- `QMS-1370-point-labels-plan.md` — point labels beside the symbol; branch `QMS-1370`.
+- `QMS-1376-line-bitmap-plan.md` — TYP line bitmaps (cliffs) drawn flipped; findings, not started.
 
 ### CMake — remaining
 

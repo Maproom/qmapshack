@@ -597,6 +597,16 @@ void test_CGarminImg::typStyles() {
   QVERIFY(line.hasBorder);
   QCOMPARE(line.penBorderDay.width(), 8);
 
+  // A line bitmap keeps its rows in order: the first row is drawn left of the line's direction.
+  QVERIFY(polylines.contains(0x03));
+  QVERIFY(polylines[0x03].hasPixmap);
+  const QImage bitmap = toQImage(polylines[0x03].imgDay);
+  QCOMPARE(bitmap.size(), QSize(32, 3));
+  QCOMPARE(QColor::fromRgba(bitmap.pixel(31, 0)), QColor(255, 0, 0));
+  QCOMPARE(QColor::fromRgba(bitmap.pixel(0, 1)), QColor(255, 0, 0));
+  QCOMPARE(qAlpha(bitmap.pixel(4, 1)), 0);
+  QCOMPARE(qAlpha(bitmap.pixel(0, 2)), 0);
+
   // Extended types keep their full number.
   QVERIFY2(polylines.contains(0x18a00), "extended line 0x18a00 missing");
   QCOMPARE(polylines[0x18a00].strings.value(0x04), QString("Line ext"));

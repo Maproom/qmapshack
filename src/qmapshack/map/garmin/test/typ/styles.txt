@@ -1,6 +1,7 @@
 ; mkgmap: --code-page=1252
 ; Styles mkgmap writes that the TYP decoder must read: a line with three colours and a transparent fourth, extended
-; types, a POI with per-colour transparency, true-colour POIs (opaque, a transparent pixel, a half transparent pixel).
+; types, a line bitmap with its rows in order, a POI with per-colour transparency, true-colour POIs (opaque, a
+; transparent pixel, a half transparent pixel).
 ; FID and product code differ to tell them apart.
 [_id]
 FID=6357
@@ -37,6 +38,17 @@ Xpm="0 0 4 0"
 "b c #000000"
 "3 c #00ff00"
 "4 c none"
+[end]
+
+[_line]
+Type=0x03
+String=0x04,Line bitmap
+Xpm="32 3 2 1"
+"a c #ff0000"
+". c none"
+"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+"aaaa............................"
+"................................"
 [end]
 
 [_line]

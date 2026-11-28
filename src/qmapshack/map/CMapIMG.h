@@ -19,7 +19,9 @@
 #ifndef CMAPIMG_H
 #define CMAPIMG_H
 
+#include <QFont>
 #include <QMap>
+#include <array>
 
 #include "map/IMap.h"
 #include "map/garmin/CGarminImg.h"
@@ -63,8 +65,8 @@ class CMapIMG : public IMap {
 
  private:
   struct strlbl_t {
-    QPoint pt;
-    QRect rect;
+    QPoint pen; /**< baseline-left origin of the text */
+    QRect rect; /**< text box with a 2 px border, for the overlap tests */
     QString str;
     CGarminTyp::point_property property;
     bool isNight = false;
@@ -74,7 +76,8 @@ class CMapIMG : public IMap {
   void setupTyp();
   bool intersectsWithExistingLabel(const QRect& rect) const;
   bool overlapsLabel(const QPainterPath& outline, const QList<QPainterPath>& placed) const;
-  void addLabel(const CGarminPoint& pt, const QRect& rect, const CGarminTyp::point_property& property, bool isDay);
+  /** Add a point's label beside @p symbol (screen pixels) unless it overlaps another or the TYP hides it. */
+  void addLabel(const CGarminPoint& pt, const QRectF& symbol, const CGarminTyp::point_property& property, bool isNight);
   void drawPolygons(BLContext& ctx, polytype_t& lines);
   void drawPolylines(BLContext& ctx, polytype_t& lines, const QPointF& scale);
   /**
@@ -106,8 +109,6 @@ class CMapIMG : public IMap {
   void getInfoPolylines(const QPoint& pt, QMultiMap<QString, QString>& dict) const;
   void getInfoPolygons(const QPoint& pt, QMultiMap<QString, QString>& dict) const;
 
-  QFontMetrics fm;
-
   QMap<quint32, CGarminTyp::polyline_property> polylineProperties;
   QMap<quint32, CGarminTyp::polygon_property> polygonProperties;
   QList<quint32> polygonDrawOrder;
@@ -120,6 +121,7 @@ class CMapIMG : public IMap {
   pointtype_t pois;
 
   QVector<strlbl_t> labels;
+  std::array<QFont, 8> labelFonts; /**< the map font per TYP label type, taken at the start of each draw */
 
   struct textpath_t {
     // QPainterPath path;

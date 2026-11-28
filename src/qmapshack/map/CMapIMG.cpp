@@ -472,13 +472,34 @@ void fillGlyphRun(BLContext& ctx, const GlyphPaths& gp, const BLPoint& base, BLR
   ctx.set_fill_style(fill);
   ctx.fill_path(base, gp.glyph);
 }
+
+/** @p base in the size a TYP label type asks for: 2 smaller or larger, in points or, for a pixel font, pixels. */
+QFont labelFont(const QFont& base, qint32 type) {
+  const qint32 step = type == CGarminTyp::eSmall ? -2 : (type == CGarminTyp::eLarge ? 2 : 0);
+  QFont font = base;
+  if (step == 0) {
+    return font;
+  }
+  if (font.pointSize() > 0) {
+    font.setPointSize(qMax(1, font.pointSize() + step));
+  } else {
+    font.setPixelSize(qMax(1, font.pixelSize() + step));
+  }
+  return font;
+}
+
+/** The advance of @p text as buildTextRun() lays it out. */
+qreal textAdvance(FontGlyphs& fg, const QString& text) {
+  qreal advance = 0;
+  for (const QPointF& a : fg.raw.advancesForGlyphIndexes(fg.raw.glyphIndexesForString(text))) {
+    advance += a.x();
+  }
+  return advance;
+}
 }  // namespace
 
 CMapIMG::CMapIMG(const QString& filename, CMapDraw* parent)
-    : IMap(eFeatVisibility | eFeatVectorItems | eFeatTypFile, parent),
-      fm(CMainWindow::self().getMapFont()),
-      selectedLanguage(NOIDX),
-      img(filename) {
+    : IMap(eFeatVisibility | eFeatVectorItems | eFeatTypFile, parent), selectedLanguage(NOIDX), img(filename) {
   qDebug() << "------------------------------";
   qDebug() << "IMG: try to open" << filename;
 
@@ -888,6 +909,10 @@ void CMapIMG::draw(IDrawContext::buffer_t& buf) /* override */
   pois.clear();
   points.clear();
   labels.clear();
+  const QFont& mapFont = CMainWindow::self().getMapFont();
+  for (size_t type = 0; type < labelFonts.size(); ++type) {
+    labelFonts[type] = labelFont(mapFont, static_cast<qint32>(type));
+  }
 
   /**
      convertRad2Px() converts positions into screen coordinates. However the painter
@@ -1435,16 +1460,24 @@ bool CMapIMG::intersectsWithExistingLabel(const QRect& rect) const {
   return false;
 }
 
-void CMapIMG::addLabel(const CGarminPoint& pt, const QRect& rect, const CGarminTyp::point_property& property,
+void CMapIMG::addLabel(const CGarminPoint& pt, const QRectF& symbol, const CGarminTyp::point_property& property,
                        bool isNight) {
-  QString str;
-  if (pt.hasLabel()) {
-    str = pt.getLabelText();
+  if (property.labelType == CGarminTyp::eNone || !pt.hasLabel()) {
+    return;
+  }
+  const QString str = pt.getLabelText();
+  FontGlyphs& fg = fontGlyphsFor(labelFonts[property.labelType]);
+  const qint32 ascent = qCeil(fg.raw.ascent());
+  const qint32 height = ascent + qCeil(fg.raw.descent());
+  const QRect box = CGarminPoint::labelBox(pt.pos, symbol, QSize(qCeil(textAdvance(fg, str)), height));
+  const QRect rect = box.adjusted(-2, -2, 2, 2);
+  if (intersectsWithExistingLabel(rect)) {
+    return;
   }
 
   labels.push_back(strlbl_t());
   strlbl_t& strlbl = labels.last();
-  strlbl.pt = pt.pos.toPoint();
+  strlbl.pen = QPoint(box.left(), box.top() + ascent);
   strlbl.str = str;
   strlbl.rect = rect;
   strlbl.property = property;
@@ -1467,28 +1500,8 @@ bool CMapIMG::drawSymbol(BLContext& ctx, const CGarminPoint& pt, const CGarminTy
   } else {
     CPoiSymbol::draw(ctx, pt.pos, pt.type);
   }
-  if (CMainWindow::self().isPoiText() && pt.hasLabel()) {
-    const QRect text = fm.boundingRect(pt.getLabelText());
-    QRect rect = text.adjusted(0, 0, 4, 4);
-    QPoint anchor;
-    if (marine) {
-      // on the waterline
-      rect.moveBottomLeft(QPoint(qRound(area.right()) + 2, qRound(pt.pos.y())));
-      anchor = rect.center();
-    } else {
-      // drawLabels() puts the baseline at the top of the text box centred on the anchor: the capitals centred
-      // on the symbol
-      const int baseline = qRound(pt.pos.y()) + fm.capHeight() / 2;
-      rect.moveTopLeft(QPoint(qRound(area.right()) + 2, baseline - fm.ascent() - 2));
-      QRect box = text;
-      box.moveTop(baseline);
-      anchor = QPoint(rect.center().x(), box.center().y());
-    }
-    if (!intersectsWithExistingLabel(rect)) {
-      addLabel(pt, rect, property, night);
-      // drawLabels() centres the text on the point; here it goes beside the symbol
-      labels.last().pt = anchor;
-    }
+  if (CMainWindow::self().isPoiText()) {
+    addLabel(pt, area, property, night);
   }
   return true;
 }
@@ -1511,8 +1524,9 @@ void CMapIMG::drawPoints(BLContext& ctx, pointtype_t& pts, QVector<QRectF>& rect
 
     const BLImage& icon = night ? property.imgNight : property.imgDay;
     const QSizeF size(icon.width(), icon.height());
+    const QRectF area(pt->pos - QPointF(size.width() / 2, size.height() / 2), size);
 
-    if (isCluttered(rectPois, QRectF(pt->pos, size))) {
+    if (isCluttered(rectPois, area)) {
       if (size.width() <= 8 && size.height() <= 8) {
         blitIcon(ctx, pt->pos.x() - (size.width() / 2), pt->pos.y() - (size.height() / 2), icon);
       } else {
@@ -1524,16 +1538,8 @@ void CMapIMG::drawPoints(BLContext& ctx, pointtype_t& pts, QVector<QRectF>& rect
 
     blitIcon(ctx, pt->pos.x() - (size.width() / 2), pt->pos.y() - (size.height() / 2), icon);
 
-    if (CMainWindow::self().isPoiText() && property.labelType != CGarminTyp::eNone) {
-      // calculate bounding rectangle with a border of 2 px
-      QRect rect = fm.boundingRect(pt->getLabelText());
-      rect.adjust(0, 0, 4, 4);
-      rect.moveCenter(pt->pos.toPoint());
-
-      // if no intersection was found, add label to list
-      if (!intersectsWithExistingLabel(rect)) {
-        addLabel(*pt, rect, property, night);
-      }
+    if (CMainWindow::self().isPoiText()) {
+      addLabel(*pt, area, property, night);
     }
     ++pt;
   }
@@ -1616,8 +1622,9 @@ void CMapIMG::drawPois(BLContext& ctx, pointtype_t& pts, QVector<QRectF>& rectPo
 
     const BLImage& icon = night ? property.imgNight : property.imgDay;
     const QSizeF size(icon.width(), icon.height());
+    const QRectF area(pt.pos - QPointF(size.width() / 2, size.height() / 2), size);
 
-    if (isCluttered(rectPois, QRectF(pt.pos, size))) {
+    if (isCluttered(rectPois, area)) {
       if (size.width() <= 8 && size.height() <= 8) {
         blitIcon(ctx, pt.pos.x() - (size.width() / 2), pt.pos.y() - (size.height() / 2), icon);
       } else {
@@ -1629,15 +1636,7 @@ void CMapIMG::drawPois(BLContext& ctx, pointtype_t& pts, QVector<QRectF>& rectPo
     blitIcon(ctx, pt.pos.x() - (size.width() / 2), pt.pos.y() - (size.height() / 2), icon);
 
     if (CMainWindow::self().isPoiText()) {
-      // calculate bounding rectangle with a border of 2 px
-      QRect rect = fm.boundingRect(pt.getLabelText());
-      rect.adjust(0, 0, 4, 4);
-      rect.moveCenter(pt.pos.toPoint());
-
-      // if no intersection was found, add label to list
-      if (!intersectsWithExistingLabel(rect)) {
-        addLabel(pt, rect, property, night);
-      }
+      addLabel(pt, area, property, night);
     }
   }
 }
@@ -1646,25 +1645,13 @@ void CMapIMG::drawLabels(BLContext& ctx, const QVector<strlbl_t>& lbls) {
   // See drawText(): non-zero winding for glyph outlines and the unioned halo.
   ctx.set_fill_rule(BL_FILL_RULE_NON_ZERO);
 
-  QFont f = CMainWindow::self().getMapFont();
-  QVector<QFont> fonts(8, f);
-  fonts[CGarminTyp::eSmall].setPointSize(f.pointSize() - 2);
-  fonts[CGarminTyp::eLarge].setPointSize(f.pointSize() + 2);
-
   const BLRgba32 halo = toBLColor(Qt::white);
 
   for (const strlbl_t& lbl : lbls) {
-    const int type = lbl.property.labelType;
-    FontGlyphs& fg = fontGlyphsFor(fonts[type]);
-
-    // Match CDraw::text()'s placement: centre the metrics bounding box on the anchor and
-    // use its top-left as the baseline-left pen origin.
-    QRect r = QFontMetrics(fonts[type]).boundingRect(lbl.str);
-    r.moveCenter(lbl.pt);
-
+    FontGlyphs& fg = fontGlyphsFor(labelFonts[lbl.property.labelType]);
     const GlyphPaths run = buildTextRun(fg, lbl.str);
     const BLRgba32 fill = toBLColor(lbl.isNight ? lbl.property.colorLabelNight : lbl.property.colorLabelDay);
-    fillGlyphRun(ctx, run, BLPoint(r.left(), r.top()), fill, halo);
+    fillGlyphRun(ctx, run, BLPoint(lbl.pen.x(), lbl.pen.y()), fill, halo);
   }
 }
 

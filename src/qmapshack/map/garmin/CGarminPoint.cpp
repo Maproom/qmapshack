@@ -126,6 +126,10 @@ QString buoyColours(quint8 colour) {
 }
 }  // namespace
 
+QRect CGarminPoint::labelBox(const QPointF& pos, const QRectF& symbol, const QSize& text) {
+  return QRect(QPoint(qRound(symbol.right()) + 1, qRound(pos.y()) - text.height()), text);
+}
+
 QString CGarminPoint::getLabelText() const {
   if (labels.isEmpty()) {
     return QString();

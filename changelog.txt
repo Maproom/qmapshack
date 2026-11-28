@@ -1,6 +1,7 @@
 V1.XX.X
 [QMS-1339] Documentation: English and German complete text revision
 [QMS-1343] Garmin maps: marine charts with depths, lights and buoys, highway shields, POI addresses and symbols
+[QMS-1365] Documentation: replay the documentation shots in parallel
 [QMS-1372] macOS build scripts: disable broken Xcode build switch, add debug build switch
 
 V1.22.0

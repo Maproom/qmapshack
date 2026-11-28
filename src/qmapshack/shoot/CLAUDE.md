@@ -217,6 +217,8 @@ The writer's guide is `doc/WRITING_DOCS.md`: short, facts only, updated with eve
 - **Starts every headless run** (`replay`, `selftest`) and the session (`take`). Python 3.9, standard
   library only. One process per page and scenario group into `doc/<lang>/images/_check` (or `-o`), pinned
   command line (`app_args()`) and environment (`pinned_env()`), scratch working directory, killed after 600 s.
+  `replay -j` runs them side by side (default: processor count); each has its own configuration, workspace and
+  render folder, output is printed in page order.
 - **A run's result** is its `shoot:` warnings on stderr, its exit code (failure count, capped at
   123; 124 is a step that never returned, `CShotReplay::kDeadlineExitCode`) and whether
   `<id>.png` came out in its render folder (`doc/shots/_cache/render-*`); only one that did replaces
@@ -235,7 +237,9 @@ The writer's guide is `doc/WRITING_DOCS.md`: short, facts only, updated with eve
 - **Directories come from the application** (`-d` prints `"CACHE"` and `"USER DATA"`). A running
   QMapShack is detected by `USER DATA/.QMapShack.lock` (`.lock` on macOS); `replay` refuses while it
   is held and never creates it. The leak guard compares mtime and size of everything below both
-  directories before and after each run, `replay` and `selftest` alike.
+  directories before and after the whole `replay` or `selftest`: runs side by side cannot be told apart.
+  The lock check takes the lock it tests, so two checks at once see each other; `replay` checks only from its main
+  thread, before the first run and after each reported one. Tiles are refreshed once, before the runs.
 - **SIGTERM is an exception in `shots.py`** (`sys.exit`), so every run kills the application it
   started and removes its scratch directory; SIGKILL leaves both behind. `CShotsJob`
   therefore terminates before it kills, except on Windows, which has no such request for a console
@@ -248,8 +252,8 @@ The writer's guide is `doc/WRITING_DOCS.md`: short, facts only, updated with eve
 
 ## Updating the images after a code change
 
-1. `shots.py --lang <lang> -o <scratch> replay`, en and de one after the other: two `replay` processes side by side
-   break each other's scenarios.
+1. `shots.py --lang <lang> -o <scratch> replay`, en and de one after the other: two `shots.py` at once can take
+   each other's lock check for a running QMapShack.
 2. Compare `<scratch>` with `doc/<lang>/images` on RGB and alpha. Pillow's `getbbox()` on an RGBA difference
    looks at alpha only and calls changed images identical.
 3. Take an image again only when what its page explains changed (`.notes/documentation-plan.md`, Open). Shifted maps
@@ -334,8 +338,7 @@ The writer's guide is `doc/WRITING_DOCS.md`: short, facts only, updated with eve
   not idempotent. `clear()` must `sendPostedEvents(nullptr, QEvent::DeferredDelete)`:
   `CMouseRangeTrk`'s destructor resets the track, and `processEvents()` does not deliver
   `DeferredDelete`.
-- **Steps start only once the start state's map is drawn** (`settleStable()`): during a redraw
-  `CDemDraw::getElevationAt()` answers `NOFLOAT`.
+- **Steps start only once the start state's map is drawn** (`settleStable()`).
 - **The image is the replay's last step**: a dialog a step opened is still inside its `exec()`.
   The popups and modal dialogs the steps opened are closed after it, or the loops below cannot
   return; what was up before `perform()` stays (`closeAbove()`), so a shot's `open` menu closes and

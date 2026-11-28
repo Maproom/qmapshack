@@ -315,7 +315,12 @@ def compose_config(page, scenario, out, source=None):
 def refresh_tile_cache():
     """CDiskCache deletes tiles older than their map's expiry while a run uses them."""
     for tile in CACHE_DIR.rglob("*.png"):
-        os.utime(tile)
+        if tile.relative_to(CACHE_DIR).parts[0].startswith("render-"):
+            continue
+        try:
+            os.utime(tile)
+        except FileNotFoundError:
+            pass  # deleted meanwhile by a run's CDiskCache
 
 
 def has_doc_mode(binary):
@@ -431,10 +436,13 @@ def app_args(config):
 # Applications started by run_app() and not yet ended, so a stopped parallel run can kill them all.
 RUNNING = set()
 RUNNING_LOCK = threading.Lock()
+# Set by kill_running(): an application a worker starts after it is killed at once.
+STOPPING = threading.Event()
 
 
 def kill_running():
     with RUNNING_LOCK:
+        STOPPING.set()
         for process in RUNNING:
             process.kill()
 
@@ -449,6 +457,8 @@ def run_app(cmd, scratch, verbose, on_line):
                                stderr=subprocess.PIPE, encoding="utf-8", errors="replace")
     with RUNNING_LOCK:
         RUNNING.add(process)
+        if STOPPING.is_set():
+            process.kill()
     timed_out = threading.Event()
 
     def kill():
@@ -532,6 +542,24 @@ def page_references():
     return used
 
 
+# The render folders of this replay's runs, removed when it ends; another replay's stay.
+RENDERED = []
+
+
+def replay_run(binary, page_file, group, only, ids, verbose):
+    """One run of cmd_replay(), rendered aside: an image that does not come out keeps the one `out` holds.
+
+    @return the exit code, the application's `shoot:` lines, the ids that did not come out and the folder they were
+            rendered into; the caller moves the others into `out` and removes the folder
+    """
+    rendered = Path(tempfile.mkdtemp(prefix="render-", dir=CACHE_DIR))
+    with RUNNING_LOCK:
+        RENDERED.append(rendered)
+    code, said = run_group(binary, rendered, page_file, group, only, verbose)
+    missing = [shot_id for shot_id in ids if not (rendered / f"{shot_id}.png").is_file()]
+    return code, said, missing, rendered
+
+
 def cmd_replay(args):
     binary = find_binary(args.binary)
     cache, user_data = user_paths(binary)
@@ -543,9 +571,9 @@ def cmd_replay(args):
     CACHE_DIR.mkdir(parents=True, exist_ok=True)
     watched = (cache, user_data)
 
-    taken = 0
+    # Every page's runs, planned before any starts: a broken shot file ends the replay before a run.
+    pages = []
     untaken = 0
-    broken = {}
     for page_file in sorted(SHOTS_DIR.glob("*.json")):
         if not may_match(page_file, args.only):
             continue
@@ -559,13 +587,14 @@ def cmd_replay(args):
         shots = [shot for shot in shots if "widget" in shot or "exposure" in shot]
         if not shots and not waiting:
             continue
-        print(f"{page_file.stem}.md")
-        for shot_id in waiting:
-            print(f"    {shot_label(shot_id):<44} not taken yet")
         untaken += len(waiting)
 
         groups = [BASE_SCENARIO] if any(not shot.get("scenario") for shot in shots) else []
         groups += sorted({shot["scenario"] for shot in shots if shot.get("scenario")})
+        outside = [group for group in groups if group != BASE_SCENARIO and not stays_inside(group)]
+        if outside:
+            sys.exit(f"{page_file.name}: these scenario names name a place outside "
+                     f"{SHOTS_DIR.relative_to(REPO) / page_file.stem}: {', '.join(outside)}")
         # A scenario is replayed once per process, with the window at the first shot's size: each other size runs alone.
         runs = []
         for group in groups:
@@ -574,52 +603,79 @@ def cmd_replay(args):
             apart = [shot.get("id", "") for shot in members if group != BASE_SCENARIO and shot.get("size") != first]
             runs.append((group, args.only, [shot.get("id", "") for shot in members if shot.get("id", "") not in apart]))
             runs += [(group, shot_id, [shot_id]) for shot_id in apart]
-        for group, only, ids in runs:
-            if another_instance_runs(user_data):
-                sys.exit("QMapShack was started during the replay. Close it and replay again.")
+        pages.append((page_file, waiting, runs))
 
-            refresh_tile_cache()
-            before = snapshot(watched)
-            # Rendered aside and moved in: an image that does not come out keeps the one out holds.
-            with tempfile.TemporaryDirectory(prefix="render-", dir=CACHE_DIR) as rendered:
-                code, said = run_group(binary, Path(rendered), page_file, group, only, args.verbose)
-                missing = [shot_id for shot_id in ids if not (Path(rendered) / f"{shot_id}.png").is_file()]
+    # The runs side by side; each has its own configuration, workspace and render folder (run_group()). Reported in
+    # page order as they finish.
+    before = snapshot(watched)
+    refresh_tile_cache()
+    taken = 0
+    broken = {}
+    # -v shows each application's output as it comes: side by side the runs' lines would interleave.
+    jobs = 1 if args.verbose else max(1, args.jobs)
+    pool = concurrent.futures.ThreadPoolExecutor(max_workers=jobs)
+    try:
+        planned = [(page_file, waiting, [(run, pool.submit(replay_run, binary, page_file, *run, args.verbose))
+                                         for run in runs])
+                   for page_file, waiting, runs in pages]
+        for page_file, waiting, runs in planned:
+            print(f"{page_file.stem}.md")
+            for shot_id in waiting:
+                print(f"    {shot_label(shot_id):<44} not taken yet")
+            for (group, _, ids), future in runs:
+                code, said, missing, rendered = future.result()
                 for shot_id in ids:
                     if shot_id not in missing:
-                        move_image(Path(rendered) / f"{shot_id}.png", out / f"{shot_id}.png")
-            leaked = changed(before, snapshot(watched))
-            for shot_id in ids:
-                print(f"    {shot_label(shot_id):<44} {group_label(group)}{'   did not come out' if shot_id in missing else ''}")
-            told = condense(said)
-            for line in told:
-                print(f"      {line}")
-            for path in leaked:
-                print(f"      the run changed {path}")
+                        move_image(rendered / f"{shot_id}.png", out / f"{shot_id}.png")
+                shutil.rmtree(rendered, ignore_errors=True)
+                for shot_id in ids:
+                    print(f"    {shot_label(shot_id):<44} {group_label(group)}{'   did not come out' if shot_id in missing else ''}")
+                for line in condense(said):
+                    print(f"      {line}")
+                sys.stdout.flush()
 
-            taken += len(ids) - len(missing)
-            if code != 0 or missing or leaked:
-                entry = broken.setdefault(page_file.stem, {"groups": [], "leaked": []})
-                entry["groups"].append((group, missing, said[0].removeprefix("shoot:").strip() if said else ""))
-                entry["leaked"] += [str(path) for path in leaked]
+                taken += len(ids) - len(missing)
+                if code != 0 or missing:
+                    entry = broken.setdefault(page_file.stem, [])
+                    entry.append((group, missing, said[0].removeprefix("shoot:").strip() if said else ""))
+                # Only this thread checks, so no check sees another's lock.
+                if another_instance_runs(user_data):
+                    sys.exit("QMapShack was started during the replay. Close it and replay again.")
+    finally:
+        # Only after an error or Ctrl+C is anything left to cancel or kill.
+        pool.shutdown(wait=False, cancel_futures=True)
+        kill_running()
+        pool.shutdown(wait=True)
+        for rendered in RENDERED:
+            shutil.rmtree(rendered, ignore_errors=True)
 
-    if not broken and taken == 0 and untaken == 0:
+    # Runs side by side cannot be told apart, so the leak guard spans the whole replay.
+    leaked = changed(before, snapshot(watched))
+
+    if not broken and not leaked and taken == 0 and untaken == 0:
         sys.exit(f"no shot matches {args.only}" if args.only else f"no shots in {SHOTS_DIR}")
     print(f"\n{taken} image(s) in {out}")
+    problems = []
     if broken:
         # On standard error, where the panel reads the reason a Retake or All failed.
         sys.stdout.flush()
-        for page, entry in sorted(broken.items()):
-            count = sum(len(missing) for _, missing, _ in entry["groups"])
+        for page, groups in sorted(broken.items()):
+            count = sum(len(missing) for _, missing, _ in groups)
             print(f"{page}.md: {count} image(s) did not come out", file=sys.stderr)
-            for group, missing, first in entry["groups"]:
+            for group, missing, first in groups:
                 print(f"  {group_label(group)}: {len(missing)} image(s) - {first or 'the run gave no reason'}",
                       file=sys.stderr)
                 if group != BASE_SCENARIO and "did not replay" in first:
                     print(f"    To fix it: record {group} again under the same name in the panel "
                           f"(shots.py take {page}), then take its images again.", file=sys.stderr)
-            for path in entry["leaked"]:
-                print(f"  wrote outside the scratch tree: {path}", file=sys.stderr)
-        sys.exit(f"{len(broken)} page(s) did not replay")
+        problems.append(f"{len(broken)} page(s) did not replay")
+    if leaked:
+        sys.stdout.flush()
+        for path in leaked:
+            print(f"the replay changed {path}", file=sys.stderr)
+        problems.append(f"the replay wrote outside the scratch tree: {len(leaked)} file(s)")
+    if problems:
+        sys.exit("\n".join(problems))
 
 
 def run_selftest_group(binary, out, page_file, group, verbose):
@@ -875,7 +931,7 @@ def cmd_compose(args):
 
 COMMANDS = ("take", "publish", "replay", "selftest", "unused", "completion")
 GLOBAL_OPTIONS = ("--binary", "--lang", "-o", "--out", "-v", "--verbose", "-h", "--help")
-COMMAND_OPTIONS = {"publish": ("--report", "--only"), "replay": ("--only",), "selftest": ("-j", "--jobs", "--page"),
+COMMAND_OPTIONS = {"publish": ("--report", "--only"), "replay": ("--only", "-j", "--jobs"), "selftest": ("-j", "--jobs", "--page"),
                    "unused": ("--delete",)}
 # Options whose value is a file or directory: bash completes those itself.
 PATH_OPTIONS = ("--binary", "-o", "--out", "--report")
@@ -968,6 +1024,8 @@ def main():
 
     replay = commands.add_parser("replay", parents=[common], help="replay every shot and report the ones that do not come out")
     replay.add_argument("--only", metavar="GLOB", help="shot ids: test/* is one page, test/test-menu-project one image")
+    replay.add_argument("-j", "--jobs", type=int, default=os.cpu_count() or 1,
+                        help="runs side by side (default: the number of processors, %(default)s; 1 with -v)")
     replay.set_defaults(func=cmd_replay)
 
     selftest = commands.add_parser("selftest", parents=[common], help="the recorder's own cases: record real input, compare the steps")

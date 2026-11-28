@@ -321,9 +321,20 @@ void CDemDraw::saveDemList(QSettings& cfg) {
   cfg.endGroup();  // dem2
 }
 
-qreal CDemDraw::getElevationAt(const QPointF& pos, bool checkScale) {
+namespace {
+// The draw thread holds the lock for a whole draw.
+bool lockActiveDems(bool wait) {
+  if (wait) {
+    CDemItem::mutexActiveDems.lock();
+    return true;
+  }
+  return CDemItem::mutexActiveDems.tryLock();
+}
+}  // namespace
+
+qreal CDemDraw::getElevationAt(const QPointF& pos, bool checkScale, bool wait) {
   qreal ele = NOFLOAT;
-  if (CDemItem::mutexActiveDems.tryLock()) {
+  if (lockActiveDems(wait)) {
     if (demList) {
       for (int i = 0; i < demList->count(); i++) {
         CDemItem* item = demList->item(i);
@@ -347,9 +358,9 @@ qreal CDemDraw::getElevationAt(const QPointF& pos, bool checkScale) {
   return ele;
 }
 
-qreal CDemDraw::getSlopeAt(const QPointF& pos, bool checkScale) {
+qreal CDemDraw::getSlopeAt(const QPointF& pos, bool checkScale, bool wait) {
   qreal slope = NOFLOAT;
-  if (CDemItem::mutexActiveDems.tryLock()) {
+  if (lockActiveDems(wait)) {
     if (demList) {
       for (int i = 0; i < demList->count(); i++) {
         CDemItem* item = demList->item(i);
@@ -370,6 +381,8 @@ qreal CDemDraw::getSlopeAt(const QPointF& pos, bool checkScale) {
 }
 
 void CDemDraw::getElevationAt(const QPolygonF& pos, QPolygonF& ele) {
+  // Once for the whole line, so a draw cannot start between two points.
+  QMutexLocker lock(&CDemItem::mutexActiveDems);
   for (int i = 0; i < pos.size(); i++) {
     qreal tmp = getElevationAt(pos[i], false);
     ele[i].ry() = (tmp == NOFLOAT) ? NOFLOAT : tmp;
@@ -377,12 +390,16 @@ void CDemDraw::getElevationAt(const QPolygonF& pos, QPolygonF& ele) {
 }
 
 void CDemDraw::getSlopeAt(const QPolygonF& pos, QPolygonF& slope) {
+  QMutexLocker lock(&CDemItem::mutexActiveDems);
   for (int i = 0; i < pos.size(); i++) {
     slope[i].ry() = getSlopeAt(pos[i]);
   }
 }
 
-void CDemDraw::getElevationAt(SGisLine& line) { line.updateElevation(this); }
+void CDemDraw::getElevationAt(SGisLine& line) {
+  QMutexLocker lock(&CDemItem::mutexActiveDems);
+  line.updateElevation(this);
+}
 
 void CDemDraw::drawt(buffer_t& currentBuffer) {
   // iterate over all active dems and call the draw method

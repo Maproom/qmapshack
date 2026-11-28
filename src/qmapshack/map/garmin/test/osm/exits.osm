@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- mkgmap: code-page=1252 lower-case route -->
+<!-- Highway exits: a motorway junction with and without facilities. -->
+<osm version="0.6" generator="QMapShack test">
+  <bounds minlat="47.5900000" minlon="10.4900000" maxlat="47.6300000" maxlon="10.5300000"/>
+  <node id="1" version="1" lat="47.5950000" lon="10.4950000"/>
+  <node id="2" version="1" lat="47.6050000" lon="10.5050000">
+    <tag k="highway" v="motorway_junction"/>
+    <tag k="ref" v="12"/>
+    <tag k="name" v="Hilltown North"/>
+    <tag k="exit_to" v="Hilltown"/>
+    <tag k="exit:facility" v="0x02,I,0x47,Truck Stop"/>
+  </node>
+  <node id="3" version="1" lat="47.6150000" lon="10.5150000">
+    <tag k="highway" v="motorway_junction"/>
+    <tag k="ref" v="13"/>
+    <tag k="name" v="Rivertown"/>
+  </node>
+  <node id="4" version="1" lat="47.6250000" lon="10.5250000"/>
+  <way id="10" version="1">
+    <nd ref="1"/>
+    <nd ref="2"/>
+    <nd ref="3"/>
+    <nd ref="4"/>
+    <tag k="highway" v="motorway"/>
+    <tag k="ref" v="A 1"/>
+    <tag k="name" v="Test Motorway"/>
+  </way>
+</osm>

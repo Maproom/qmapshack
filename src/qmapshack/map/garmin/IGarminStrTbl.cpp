@@ -168,6 +168,10 @@ QList<quint32> IGarminStrTbl::netLabels(CFileExt& file, quint32 offset) {
   return labels;
 }
 
+QString IGarminStrTbl::decodeText(const QByteArray& text) const {
+  return (codepage != 0) ? codec->toUnicode(text) : QString::fromUtf8(text);
+}
+
 QString IGarminStrTbl::processLabel(const char* buffer) {
   // The separators 0x1b-0x1f and shield codes 0x01-0x06 are taken over as they are: Shift_JIS decodes 0x1c as
   // U+007F. No code page uses these bytes inside a multi-byte character.

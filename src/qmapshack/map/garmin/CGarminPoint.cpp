@@ -189,10 +189,93 @@ QString CGarminPoint::distanceText(const CGarminMarine::distance_t& d) {
   return QString::number(rounded, 'f', qAbs(rounded - qRound(rounded)) < 0.05 ? 0 : 1) + " " + unit;
 }
 
+QString CGarminPoint::getAddressText() const {
+  QStringList lines;
+  const QString street = QStringList({houseNumber, this->street}).join(' ').trimmed();
+  if (!street.isEmpty()) {
+    lines << street;
+  }
+  // "Hilltown, Upper Valley 87654"; BaseCamp leaves out the country
+  QStringList cityRegion;
+  for (const QString& part : {city, region}) {
+    if (!part.isEmpty()) {
+      cityRegion << part;
+    }
+  }
+  const QString place = QStringList({cityRegion.join(", "), zip}).join(' ').trimmed();
+  if (!place.isEmpty()) {
+    lines << place;
+  }
+  if (!phone.isEmpty()) {
+    lines << phone;
+  }
+  return lines.join("\n");
+}
+
+QString CGarminPoint::facilityText(const exit_facility_t& facility) {
+  // BaseCamp's names; types 14 and 15 have none
+  static const char* types[] = {QT_TRANSLATE_NOOP("CGarminPoint", "24-hour Diesel Fuel With Restaurant"),
+                                QT_TRANSLATE_NOOP("CGarminPoint", "Diesel Fuel With Large Vehicle Clearance"),
+                                QT_TRANSLATE_NOOP("CGarminPoint", "Automobile Fuel"),
+                                QT_TRANSLATE_NOOP("CGarminPoint", "Restaurant"),
+                                QT_TRANSLATE_NOOP("CGarminPoint", "Hotel/Motel"),
+                                QT_TRANSLATE_NOOP("CGarminPoint", "Vehicle Repair and Service"),
+                                QT_TRANSLATE_NOOP("CGarminPoint", "Diesel Engine Service"),
+                                QT_TRANSLATE_NOOP("CGarminPoint", "Commercial Vehicle Wash"),
+                                QT_TRANSLATE_NOOP("CGarminPoint", "Campground and RV Service"),
+                                QT_TRANSLATE_NOOP("CGarminPoint", "Medical Facilities"),
+                                QT_TRANSLATE_NOOP("CGarminPoint", "Automated Teller Machines"),
+                                QT_TRANSLATE_NOOP("CGarminPoint", "Forest, Park, Preserve, or Lake"),
+                                QT_TRANSLATE_NOOP("CGarminPoint", "Useful Services, Sites, or Attractions"),
+                                QT_TRANSLATE_NOOP("CGarminPoint", "Fast Food")};
+  static const char* directions[] = {
+      QT_TRANSLATE_NOOP("CGarminPoint", "north of exit"),      QT_TRANSLATE_NOOP("CGarminPoint", "south of exit"),
+      QT_TRANSLATE_NOOP("CGarminPoint", "east of exit"),       QT_TRANSLATE_NOOP("CGarminPoint", "west of exit"),
+      QT_TRANSLATE_NOOP("CGarminPoint", "inner side of exit"), QT_TRANSLATE_NOOP("CGarminPoint", "outer side of exit"),
+      QT_TRANSLATE_NOOP("CGarminPoint", "both sides of exit")};
+  QStringList parts;
+  if (facility.type < std::size(types)) {
+    parts << tr(types[facility.type]);
+  }
+  if (facility.direction < std::size(directions)) {
+    parts << tr(directions[facility.direction]);
+  }
+  const QString text = parts.join(", ");
+  if (facility.description.isEmpty()) {
+    return text;
+  }
+  return text.isEmpty() ? facility.description : facility.description + ": " + text;
+}
+
+QString CGarminPoint::getExitText() const {
+  if (!isExit) {
+    return QString();
+  }
+  QStringList lines;
+  if (!exitHighway.isEmpty()) {
+    lines << tr("Exit on %1").arg(exitHighway);
+  }
+  if (!exitTo.isEmpty()) {
+    lines << tr("Exit to %1").arg(exitTo);
+  }
+  if (exitOvernightParking) {
+    lines << tr("Overnight parking");
+  }
+  for (const exit_facility_t& facility : exitFacilities) {
+    lines << facilityText(facility);
+  }
+  return lines.join("\n");
+}
+
 QString CGarminPoint::getInfoText() const {
   QStringList lines;
   if (hasLabel()) {
     lines << getLabelText();
+  }
+  for (const QString& text : {getAddressText(), getExitText()}) {
+    if (!text.isEmpty()) {
+      lines << text;
+    }
   }
   const CGarminMarine marine = CGarminMarine::decode(type, CGarminMarine::Kind::ePoint, extra);
   if (marine.isEmpty()) {

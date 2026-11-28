@@ -234,6 +234,7 @@ set( SRCS
     map/cache/CDiskCache.cpp
     map/garmin/CGarminImg.cpp
     map/garmin/CGarminMarine.cpp
+    map/garmin/CGarminPlaces.cpp
     map/garmin/CMarineSymbol.cpp
     map/garmin/CGarminPoint.cpp
     map/garmin/CGarminPolygon.cpp
@@ -655,6 +656,7 @@ set( HDRS
     map/cache/CDiskCache.h
     map/garmin/CGarminImg.h
     map/garmin/CGarminMarine.h
+    map/garmin/CGarminPlaces.h
     map/garmin/CMarineSymbol.h
     map/garmin/CGarminPoint.h
     map/garmin/CGarminPolygon.h

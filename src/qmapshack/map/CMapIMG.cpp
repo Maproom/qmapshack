@@ -1865,9 +1865,19 @@ void CMapIMG::findPOICloseBy(const QPoint& pt, IPoiItem& poi) const /*override;*
         QPointF radPos = point.pos;
         map->convertPx2Rad(radPos);
         poi.pos = radPos;
-        if (!point.labels.isEmpty()) {
-          poi.desc = point.getLabelText();
+        // a waypoint made from the POI keeps its address and phone; the description is rich text
+        QStringList lines;
+        if (point.hasLabel()) {
+          lines << point.getLabelText();
         }
+        const QString address = point.getAddressText();
+        if (!address.isEmpty()) {
+          lines << address.split('\n');
+        }
+        for (QString& line : lines) {
+          line = line.toHtmlEscaped();
+        }
+        poi.desc = lines.join("<br>\n");
         poi.name = point.getName();
         if (poi.name.isEmpty()) {
           if (pointProperties.contains(point.type)) {

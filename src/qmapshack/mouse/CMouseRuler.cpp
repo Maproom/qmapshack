@@ -294,11 +294,11 @@ void CMouseRuler::updateStatus(const QPolygonF& line) {
 
     msg += "<td align=right>" + val + unit + "</td>";
 
-    qreal ele1 = qRound(canvas->getElevationAt(pt1, false, false));
-    qreal ele2 = qRound(canvas->getElevationAt(pt2, false, false));
+    const qreal ele1 = canvas->getElevationAt(pt1, false, false);
+    const qreal ele2 = canvas->getElevationAt(pt2, false, false);
 
     if ((ele1 != NOFLOAT) && (ele2 != NOFLOAT)) {
-      int delta = ele2 - ele1;
+      int delta = qRound(ele2) - qRound(ele1);
 
       IUnit::self().meter2elevation(qAbs(delta), val, unit);
       if (delta >= 0) {
@@ -312,7 +312,8 @@ void CMouseRuler::updateStatus(const QPolygonF& line) {
       IUnit::self().slope2string(slope, val, unit);
       msg += QString("<td align=right>%1%2</td>").arg(val, unit);
     } else {
-      msg += "<td></td><td></td>";
+      // ascent, descent, slope
+      msg += "<td></td><td></td><td></td>";
     }
 
     val = QString::asprintf("%1.1f", (a1 < 0) ? (a1 + 360) : a1);

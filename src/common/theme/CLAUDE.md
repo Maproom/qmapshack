@@ -20,12 +20,12 @@ void CFilterSpeed::changeEvent(QEvent* e) {
 
 - **Regenerate, do not patch.** The producer is normally a method that already exists
   (`updateData()`, `buildHelpText()`, `renderThemedContent()`), and re-running it fixes the palette
-  colours (links) and the themed markup (`CUiTheme::span`) in one pass. That is why no rich-text
-  widget subclass is needed: every browser in the tree has an owner that regenerates it.
+  colours (links) and the themed markup (`CUiTheme::span`) in one pass. No rich-text widget subclass
+  is needed (`QTextEdit::setHtml()` is not virtual anyway): every browser has an owner that regenerates it.
 - **Do not run something re-entrant from the handler.** `CDetailsPrj` restarts its timer because
   `slotSetupGui()` drives a nested event loop; `CGridPlacer` checks `points` is populated first.
 - **A handler that answers with `setPalette()`/`setFont()` needs a re-entrancy guard** — both
-  re-deliver the event to the same widget (measured: one `updateStyle()` emits two `FontChange`s).
+  re-deliver the event to the same widget.
   `CLineEdit`/`CTinySpinBox` use `applyingStyle`.
 - **Do not hand a themed string to something that stores it.** Pass the role and resolve at render
   time: `CCanvas::reportStatus(key, role, msg)` keeps the role unresolved in `statusMessages`.
@@ -38,7 +38,7 @@ void CFilterSpeed::changeEvent(QEvent* e) {
   beside `CQmsStyle::install()`, once per application — qmaptool needs it too. Do not extend the
   sweep further; anything else belongs in the owning widget's `changeEvent()`.
 
-Everything below is why a given surface needs rebuilding at all:
+### Surfaces that must be rebuilt
 
 - **Never cache a themed colour in a member.** Resolve in the apply path. A cached one is stuck on
   the scheme it was built under and looks correct until the user switches.
@@ -48,7 +48,6 @@ Everything below is why a given surface needs rebuilding at all:
 - **Every map layer paints into a buffer rebuilt only on demand**, so nothing themed on the canvas
   follows a switch by itself. `CCanvas::changeEvent` forces `slotTriggerCompleteUpdate(eRedrawAll)`
   — per canvas, not the static `triggerCompleteUpdate()`, which reaches only the visible one.
-- **Subclassing a `QTextBrowser` does not help**: `QTextEdit::setHtml()` is not virtual.
 - **`setPalette()` freezes only the roles in the palette's resolve mask.** Build a fresh `QPalette`
   and set just the role you own; every other role keeps following the application palette.
   `setPalette(QPalette())` clears the override. A copy of `palette()` carries `resolveMask 0` and is
@@ -72,22 +71,20 @@ Everything below is why a given surface needs rebuilding at all:
 and checkable menu items (`CE_MenuItem`), which every style draws too faintly to read on a dark
 palette.
 
-- **Paint a themed cue in a style, never in a style sheet.** A style resolves at paint time, so it
-  follows the palette, cannot go stale and needs no opt-in. An app style sheet using `palette()`
-  resolves once, re-polishes every widget on re-apply, and that re-polish echoes another palette
-  event.
+- **Paint a themed cue in a style, never in a style sheet.** A style resolves at paint time; a style
+  sheet's `palette()` resolves once and its re-polish echoes another palette event.
 - **`install()` re-creates the active style by name** — `setStyle()` deletes the style it replaces,
   so the running one cannot be the base. That is what preserves `-style` / `QT_STYLE_OVERRIDE`.
 - **Paint the menu tint before delegating to the base**, or it dims the text it marks; `CE_MenuItem`
   fills the row only when selected. Checked rows also go bold, so the cue is not colour alone.
 - **Resolve a cue's colour through `cueColorGroup()`, never the palette's current group.** The
   current group turns `Inactive` while the window is not the active one, and KDE's
-  `[ColorEffects:Inactive] ChangeSelectionColor` mutes `Highlight` to near the button face there
-  (measured `#1b4155` on `#292c30`), so a cue drawn with the one-argument `color()` overload
+  `[ColorEffects:Inactive] ChangeSelectionColor` mutes `Highlight` to near the button face there, so a
+  cue drawn with the one-argument `color()` overload
   disappears whenever the app loses focus. A cue marks state, not focus, so `Active` is pinned and
   only the disabled dimming is kept.
-- **Never fill a checked button with `Highlight`** — `ink` drops to ~1.3:1 on it. A border over the
-  untouched face keeps ~4.9:1.
+- **Never fill a checked button with `Highlight`**: its text becomes unreadable. Draw a border over the
+  untouched face.
 - **Menus resist style sheets:** Qt ignores `QMenu::item:checked`, and `QMenu::indicator` needs an
   `image:`, which for a `.svgt` bypasses `CSvgtIconEngine` and renders black.
 
@@ -109,10 +106,8 @@ palette.
 - **Printing:** `const CUiTheme::CForceLight paperColours(printable)` in `CDetailsPrj::draw()`,
   beside the two palette branches it completes. It does not touch `QPalette`, so palette colours
   still need their own paper branch.
-- `QTextBrowser` applies a `<link>`ed stylesheet (`loadResource`, `StyleSheetResource`), so
-  `CHelpBrowser::loadResource()` appends a themed `code, pre` rule to whatever the packaged help
-  ships. That CSS lives outside this repo; `Role::Code`'s light arm matches its `code` background,
-  so light mode renders unchanged.
+- `CHelpBrowser` injects a `qms-theme` `<style>` after the help's own CSS; its `code, pre` rule is
+  `CUiTheme::css(Role::eCode)`, whose light arm matches the help's `code` background.
 - `paletteIsDark()` is `inline` in `CUiTheme.h` so `CSvgtIconEngine::roleColor()` can share it with
   nothing to link (the plugin needs only `target_include_directories(svgticonengine PRIVATE ..)`).
   It is for that plugin and for `CUiTheme::isDark()` alone — **app code branches on

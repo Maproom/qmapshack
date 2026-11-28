@@ -675,9 +675,9 @@ void CVrtAdvisoryDialog::finishCombine() {
 }
 
 bool CVrtAdvisoryDialog::fixContainerOverviewList() {
-  // Safe to declare directly: every file in filesToFix() was just rebuilt with exactly
+  // Safe to declare directly: every file in fixPlan() was just rebuilt with exactly
   // this list (see slotFixOverviews()), and every other source was excluded from the fix
-  // because it already had it in its own native pyramid (see filesToFix()) - and this is
+  // because it already had it in its own native pyramid (see fixPlan()) - and this is
   // only reached after CShell reports the whole gdaladdo job succeeded.
   const QVector<qint32>& factors = advice_.suggestedLevels;
 

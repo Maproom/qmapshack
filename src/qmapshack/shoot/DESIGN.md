@@ -8,14 +8,14 @@ command. Working rules and details per class: `CLAUDE.md` in this directory.
 A **page** is one Markdown file, one shot file and one directory of images:
 
 ```
-doc/en/pages/<page>.md              the page; references ../images/<page>/<name>.png
-doc/en/shots/<page>.json            how each image is taken, and the page's scenarios
-doc/en/shots/<page>.ini             the page's base configuration
-doc/en/shots/<page>/<scenario>.ini  a scenario's whole configuration
+doc/<lang>/pages/<page>.md              the page; references ../images/<page>/<name>.png
+doc/<lang>/shots/<page>.json            how each image is taken, and the page's scenarios
+doc/<lang>/shots/<page>.ini             the page's base configuration
+doc/<lang>/shots/<page>/<scenario>.ini  a scenario's whole configuration
 doc/shots/fixtures/default/         the example data; fixtures/<page>/ holds what a page's differs in
-doc/en/images/<page>/<name>.png     the published images
-doc/en/images/_work/                images taken again and their <id>.shot.json, not published (git-ignored)
-doc/en/images/_check/               what shots.py replay renders (git-ignored)
+doc/<lang>/images/<page>/<name>.png     the published images
+doc/<lang>/images/_work/                images taken again and their <id>.shot.json, not published (git-ignored)
+doc/<lang>/images/_check/               what shots.py replay renders (git-ignored)
 doc/shots/_cache/                   tile caches, workspace databases, images waiting for Keep, parked
                                     recordings, doc-panel.ini, <page>-marks.json, render-* run directories
                                     (git-ignored)
@@ -30,7 +30,7 @@ doc/shots/_cache/                   tile caches, workspace databases, images wai
 
 ## Base and scenarios
 
-- **`(base)` is the page's start state**, `doc/en/shots/<page>.ini`. An image taken in it has no
+- **`(base)` is the page's start state**, `doc/<lang>/shots/<page>.ini`. An image taken in it has no
   `scenario` key; `--shoot-scenario -` selects those images, and `-` is no valid scenario name.
 - **A scenario is a recording on top of the base**: its steps, and the whole configuration on
   screen when the recording started. Never a difference to the base, so a later change of the base
@@ -43,7 +43,7 @@ doc/shots/_cache/                   tile caches, workspace databases, images wai
 
 ## Shot file
 
-`doc/en/shots/<page>.json`, written by `CShotFiles::writeShotFile()` and by `shots.py`:
+`doc/<lang>/shots/<page>.json`, written by `CShotFiles::writeShotFile()` and by `shots.py`:
 
 ```json
 {
@@ -209,8 +209,8 @@ qmapshack --doc <repo> --doc-page <page> …          the launcher: the panel on
 | Command | Does |
 |---|---|
 | `take PAGE` | open the launcher on a page |
-| `replay [--only GLOB]` | replay every shot into `doc/en/images/_check/`, one process per scenario; report what no longer comes out |
-| `publish [--only GLOB] [--report FILE]` | move `doc/en/images/_work/`'s images into `doc/en/images/` and delete their `<id>.shot.json`; one without an image stays |
+| `replay [--only GLOB]` | replay every shot into `doc/<lang>/images/_check/`, one process per scenario; report what no longer comes out |
+| `publish [--only GLOB] [--report FILE]` | move `doc/<lang>/images/_work/`'s images into `doc/<lang>/images/` and delete their `<id>.shot.json`; one without an image stays |
 | `unused [--delete]` | shots and images no page references |
 | `selftest [--page PAGE]` | the recorder's and documentation mode's own cases |
 | `compose` | the one composer of a run's configuration; used by the launcher, hidden from `--help` |
@@ -245,8 +245,7 @@ qmapshack --doc <repo> --doc-page <page> …          the launcher: the panel on
 - `CProgressDialog` is exposed only as a fresh instance (`ProgressDialog`), not in the state of a
   running operation.
 - WebEngine content (`CWebPage`, `QWebEngineView`) is not shown in a render (not verified).
-- Other languages than English (`--locale en`), a dark image set (`--color-scheme light`), animations
-  (`CShotWriter` writes one PNG per image).
+- A dark image set (`--color-scheme light`), animations (`CShotWriter` writes one PNG per image).
 - `QMS_DOC_MODE` is OFF by default; a Windows run uses a developer's build tree.
 - Images of online map services as documentation subjects. The fixture's maps include the online
   `osm.tms` beside the offline `bev_km50`.

@@ -11,9 +11,8 @@ The writer's guide is `doc/WRITING_DOCS.md`: short, facts only, updated with eve
   `shoot/CShotEntry.cpp`/`CShotOptions.cpp` or the `*Stub.cpp` pair, and `shoot/doc.qrc` (fonts and `Doc*` icons) only
   with it. A user's binary rejects `--shoot`, `--doc` and companions through
   `QCommandLineParser`; `main.cpp`, `CCommandProcessor` and `CAppOpts` carry no `#if`.
-  `src/qmaptool/setup/` never had the switches.
 - **`CShotEntry` is all `main.cpp` knows**: `pinEnvironment()`, `createApplication()`, `isDocRun()`,
-  `prepare()`, `run()`. `CShotOptions` defines and reads every switch; they reach the app as
+  `prepare()`, `showsMainWindow()`, `run()`. `CShotOptions` defines and reads every switch; they reach the app as
   `CAppOpts::doc`, empty without the subsystem.
 - **`prepare()` runs before `CMainWindow`** and sets the cache root, the workspace database
   (`CGisListWks::setDatabasePath()`), Fusion's palette for `--color-scheme` (`CUiTheme::pinColorScheme(scheme, true)`),
@@ -25,9 +24,9 @@ The writer's guide is `doc/WRITING_DOCS.md`: short, facts only, updated with eve
   clock.
 - **A doc run skips the splash and `CSingleInstanceProxy`**, which would hand the arguments to a
   running QMapShack and exit.
-- **`pinEnvironment()` sets `QT_QPA_PLATFORMTHEME=generic` except on Windows**, where a demo run
-  with it crashed (access violation) and there is no desktop theme to keep out. macOS unmeasured.
-- **A Windows build owns no console** (GUI subsystem). `pinEnvironment()`, first thing in `main()`,
+- **`pinEnvironment()` sets `QT_QPA_PLATFORMTHEME=generic` except on Windows**, where it crashes the
+  `QApplication` constructor.
+- **A Windows build owns no console** (GUI subsystem). `pinEnvironment()`, early in `main()`,
   attaches to the parent's console for `--shoot`/`--doc` and reopens a stream on `CONOUT$` only if its
   handle is not already a pipe or file. Untested on Windows. Anything the writer must
   see is a dialog, never only a log line.
@@ -52,9 +51,8 @@ The writer's guide is `doc/WRITING_DOCS.md`: short, facts only, updated with eve
   running"). A main window's threads are its maps', left to the canvas wait.
 - **`processEvents(flags, ms)` does not wait**; wait with `CShotWait::wait()`/`waitFor()`, a `QEventLoop` quit by a
   `QTimer` without user input.
-- **A main window image depends on its resize history**: a window's minimum silently wins, and
-  returning to a size can shift the right dock column by 1 px. Two runs on fresh configurations are
-  byte-identical.
+- **A main window image depends on its resize history**: a window's minimum silently wins; compare only
+  runs on fresh configurations.
 - **No `MainWindow/geometry` maximizes the window 500 ms after construction**; `CShotEntry::run()`
   waits 1000 ms before the first shot.
 - **`-platform offscreen` takes no parameters**; resize the window instead of pinning a screen size.
@@ -103,7 +101,7 @@ The writer's guide is `doc/WRITING_DOCS.md`: short, facts only, updated with eve
 - **A plain name in an address is `findChild()`, which may return a hidden widget**: with one map expanded,
   `sliderOpacity` below the map tree named a hidden one, the visible one was `CMapPropSetup#1`. Where from is unchecked.
 - **Dock tab bars are `QMainWindowTabBar`**, direct children of the main window: `QMainWindowTabBar#n`, not `QTabBar`.
-- **A map tree row is addressed by its name**, the file's base name with `_` as a space (`CMapDraw.cpp:260`);
+- **A map tree row is addressed by its name**, the file's base name with `_` as a space (`CMapDraw`, `setName()`);
   other item views take `row/…:column`.
 - **Marks (`mark`) are `CShotMarks`**: placed after the render from the live widgets, in global coordinates, and
   drawn in `CShotContext::emitImage()`; a live Ctrl+Shift+F9 take places the selected row's marks at the key press
@@ -159,8 +157,8 @@ The writer's guide is `doc/WRITING_DOCS.md`: short, facts only, updated with eve
   pos, size, min, max, then the group.
 - **Longer labels in another language:** a shot's `"set": {"dockMaps.minimumWidth": 340}` widens that dock area for
   the image only; widen that language's crops to match. Wider docks shrink the canvas, and a map crop then
-  shifts and its overlays move; widen the shot's `size` by the dock difference to keep the canvas width
-  (es: docks +77 px). A `set` key without a dot is a property of the photographed widget itself
+  shifts and its overlays move; widen the shot's `size` by the dock difference to keep the canvas width.
+  A `set` key without a dot is a property of the photographed widget itself
   (`"minimumWidth": 290` on `dockWorkspace/treeWks` widens the workspace dock).
 - **A new language's crops:** some English `rect`s no longer match the current layout, though their published images
   stay right; frame each crop on what the published English image shows, measured in the language's render without
@@ -186,13 +184,12 @@ The writer's guide is `doc/WRITING_DOCS.md`: short, facts only, updated with eve
   `default` is no page name. Every session start adds what the folder lacks: an empty folder per part
   and a git-ignored `README.md`. The panel header says which parts are the page's own, and the file
   watcher updates it when a part is filled or emptied.
-- **A page owns its base**, `doc/en/shots/<page>.ini`. The launcher asks which base to copy when a page
+- **A page owns its base**, `doc/<lang>/shots/<page>.ini`. The launcher asks which base to copy when a page
   has none (`chooseBase()`); Base / Save writes it, Base / Copy replaces it. Nothing writes a
   fixture's `shots.ini`. `compose` falls back to the default's only for a page without a base yet.
 - **`CShotFixture::load()`** loads the project the configuration names as `Shoot/fixtureProject`
   (`compose` writes the page fixture's first `*.qms` or `*.gpx`), waits for
-  `CGisListWks::isWorkspaceLoaded()` (the restore runs ~1100 ms after `CMainWindow` and does not
-  check duplicates) and `IGisProject::isLoading()`, refuses a workspace already holding the project,
+  `CGisListWks::isWorkspaceLoaded()` (the restore does not check duplicates) and `IGisProject::isLoading()`, refuses a workspace already holding the project,
   and hands the first trk/wpt/rte/area to `CShotContext`. Before the project it adds the folder
   `Shoot/fixtureDevice` names as a `CDeviceGarmin` and waits for `CDeviceGarmin::isLoading()`; an archive
   loads only when expanded. Linux logs a failed UDisks mount for it, as the folder is no UDisks object.
@@ -206,11 +203,10 @@ The writer's guide is `doc/WRITING_DOCS.md`: short, facts only, updated with eve
 - **A map's or DEM's configuration key is the MD5 of the file's first 4096 bytes** (`CMapItem`,
   `CDemItem`). A CRLF checkout of a `.vrt`/`.tms` (Windows `core.autocrlf`) changes the key, the
   configuration names nothing, and no map is active: the canvas' `labelHelp` then covers the map and
-  takes its input. `.gitattributes` pins the fixtures' `.vrt`/`.tms`/`.wmts` to LF; a checkout made
-  before that keeps its CRLF until the files are deleted and checked out again.
+  takes its input. `.gitattributes` makes every text file LF in every checkout.
 - **The DEM draws over maps and POIs**; the base uses opacity 20.
 - **Tile files expire during a run** (`cacheExpiration`, 20 s timer) and come back as holes
-  offline; refresh modification times on an old cache first.
+  offline; `shots.py` refreshes their modification times before every run (`refresh_tile_cache()`).
 - **Network reachability changes the right dock column** (database vs routing dock height), cause
   unknown.
 - **No configuration sets checked POI categories** (`CPoiFilePOI::categoryActivated`) or the
@@ -218,10 +214,9 @@ The writer's guide is `doc/WRITING_DOCS.md`: short, facts only, updated with eve
 
 ## `doc/tools/shots.py`
 
-- **Starts every headless run**: `replay`, `selftest`, `unused`, hidden `compose`. Python 3.9,
-  standard library only. One process per page and scenario group into `doc/en/images/_check` (or
-  `-o`), pinned command line and environment (`QT_QPA_PLATFORMTHEME=generic`, `LANGUAGE`,
-  `--locale`), scratch working directory, killed after 600 s.
+- **Starts every headless run** (`replay`, `selftest`) and the session (`take`). Python 3.9, standard
+  library only. One process per page and scenario group into `doc/<lang>/images/_check` (or `-o`), pinned
+  command line (`app_args()`) and environment (`pinned_env()`), scratch working directory, killed after 600 s.
 - **A run's result** is its `shoot:` warnings on stderr, its exit code (failure count, capped at
   123; 124 is a step that never returned, `CShotReplay::kDeadlineExitCode`) and whether
   `<id>.png` came out in its render folder (`doc/shots/_cache/render-*`); only one that did replaces
@@ -242,13 +237,13 @@ The writer's guide is `doc/WRITING_DOCS.md`: short, facts only, updated with eve
   is held and never creates it. The leak guard compares mtime and size of everything below both
   directories before and after each run, `replay` and `selftest` alike.
 - **SIGTERM is an exception in `shots.py`** (`sys.exit`), so every run kills the application it
-  started and removes its scratch directory; SIGKILL leaves both behind (measured). `CShotsJob`
+  started and removes its scratch directory; SIGKILL leaves both behind. `CShotsJob`
   therefore terminates before it kills, except on Windows, which has no such request for a console
   program.
 - **INI for QSettings**: Qt key form (`routino\paths`), forward slashes, every path quoted (comma
   splits, semicolon comments).
-- **A shot file is written as `json.dumps(indent=4, sort_keys=True, ensure_ascii=False)` plus a
-  newline**, identical to `QJsonDocument::Indented`.
+- **`write_shot_file()` writes `QJsonDocument::Indented`'s format**: `json.dumps(indent=4, sort_keys=True,
+  ensure_ascii=False)`, empty containers on two lines, a trailing newline.
 - **Output is UTF-8** (`CLogHandler`); decode it as such, not in the console code page.
 
 ## Updating the images after a code change
@@ -295,8 +290,6 @@ The writer's guide is `doc/WRITING_DOCS.md`: short, facts only, updated with eve
   start pages do: a `click` on a list row does not replay, and `select` leaves **OK** disabled (cause unchecked).
 - **`CDetailsWpt`'s symbol button is named after the symbol** (`toolIcon->setObjectName()`): a mark addresses it
   as `Waypoint` while the fixture's last symbol is that.
-- **Open: `move` steps after the waypoint bar's Move button do not reach `CMouseMoveWpt`**: the image shows
-  "0.0 m", though the moves reach the canvas (`-v`); a click then drops the waypoint correctly.
 - **A scenario opens an item view's context menu with a `menu` step**, then `trigger`s the entry; a right `click` on
   the view fails ("the row has no such button"). Without `row`, `at` is a fraction of the viewport.
 - **Which tab of a dock tab stack shows comes from the base**: in `[MainWindow] state` each stack's `\xfa` is followed
@@ -321,7 +314,7 @@ The writer's guide is `doc/WRITING_DOCS.md`: short, facts only, updated with eve
   platform plugin, none offscreen.
 - **The wheel over a list goes to its viewport**: an item view's scroll is `scroll` (top row).
 - **`CShotSynth::type()` sends a character beyond ASCII as `Qt::Key_unknown` with its text**: `QTest::asciiToKey()`
-  asserts on it, and `QChar::toLatin1()` is not 0 for Latin-1 letters (ñ, ó, ü), so a scenario typing one aborted.
+  asserts on it, and `QChar::toLatin1()` is not 0 for Latin-1 letters (ñ, ó, ü).
 - **Replay and `CShotSelfTest` use `CShotSynth`, never QTest's `QWidget` functions**, which bypass
   window routing (grabs, popups, double-click synthesis, focus). Replay refuses a point another
   widget would get (`CShotSynth::missed()`).
@@ -376,14 +369,9 @@ it belongs to is the bug this subsystem invites:
   process with `--doc-scenario <name|->`; nothing is reset in place. The two need separate workspace
   databases: a shared SQLite file locks.
 - **Channel** `QLocalServer` `qms-doc-<pid>`, one line per message, every report handled queued. A field after an
-  image id is split off by a tab: ids may hold spaces.
-  Launcher → state: `region`, `update`, `record <name>`, `stop`, `select`.
-  State → launcher: `status`, `in <scenario|->`, `ready`, `tagged`, `recording`, `recorded`,
-  `recorded-none`, `trial-failed`, `setup-failed` (the fixture did not load; the launcher stops that state).
-  `in` comes before each `ready`: a scenario the state could not
-  enter leaves it in the base, and the launcher's `CShotDocState::scenario()` follows it. Every `recording` ends in `recorded` or `recorded-none`. Before its `ready` a state
-  answers every verb but `select` with a `status` line. Without a listening channel no state is
-  started.
+  image id is split off by a tab: ids may hold spaces. The messages are listed in `DESIGN.md`.
+  `in` comes before each `ready`: a scenario the state could not enter leaves it in the base, and the
+  launcher's `CShotDocState::scenario()` follows it. Without a listening channel no state is started.
 - **Lifetime:** state killed → the panel stays and says so; state window closed → the session ends
   once `mayClose()` agrees, which asks about the page's unpublished images as closing the panel does;
   launcher killed → the state quits on `disconnected`. SIGTERM only closes the main window
@@ -400,13 +388,14 @@ it belongs to is the bug this subsystem invites:
   `_work/<id>.shot.json` (`{}` for a new shot). A revert entry that does not parse reverts nothing.
 - **A shot file with `shots` not a list or `scenarios` not an object is refused** like one that is
   no JSON: read as empty, the next write would drop it.
-- **Deleting a scenario or rebinding a shot reduces the shot to its `id` and deletes its images.**
+- **Deleting a scenario or rebinding a shot reduces the shot to its `id`** (and the new `scenario` on a
+  rebind) **and deletes its images.**
 - **A shot id or scenario name that leaves its directory has no path** (`CShotFiles::staysInside()`);
   `shots.py`'s `stays_inside()` is the same rule — change both.
 - **Scenario names are file names and arguments**: no `/ \ : * ? " < > |`, no leading `-`, no spaces
   or dots at the ends, not `-` or `(base)`, no Windows device name, none differing from another only
   in case.
-- **A page is a file directly in `doc/en/pages`** and lists and rebinds only its own ids
+- **A page is a file directly in `doc/<lang>/pages`** and lists and rebinds only its own ids
   (`<page>/<name>`).
 - **Image references need `QRegularExpression::UseUnicodePropertiesOption`**: without it Qt's `\w`
   is ASCII.
@@ -418,8 +407,8 @@ it belongs to is the bug this subsystem invites:
 - **Placement** of panel and window is kept in `doc/shots/_cache/doc-panel.ini` and moved fully onto
   a screen by `CShotFiles::onScreen()`.
 - **Tests:** `shots.py selftest` runs `CShotDocSelfTest` too (page rules on a temp checkout, job and
-  state handles against real processes); `python3 -m unittest doc/tools/test_shots.py` covers
-  `publish`, `unused --delete` and page names.
+  state handles against real processes); `python3 -m unittest doc/tools/test_shots.py` covers `shots.py`'s
+  file logic without an application.
 - **Driving the panel with xdotool on KDE**: `windowactivate` does not raise it; check the window
   under the pointer before every click.
 
@@ -438,7 +427,7 @@ it belongs to is the bug this subsystem invites:
 - **A scenario is never performed on top of itself** (`CShotContext::liveScenario()`): a shot of the
   live scenario photographs what is there; a build sets none and performs every scenario.
 - **`CShotReplay::perform()` closes popups and modal dialogs only when it ran steps.** Without steps
-  a window up is the writer's own; closing it anyway shut the About box F9 was pressed on.
+  a window up is the writer's own.
 - **F9 names a part the way the writer sees it** (`onScreenName()`): a dock's caption, a tab's text, a
   group box's title, a window's title, the class name only when nothing else names it. `qt_`-prefixed
   widgets are not offered, and the address is appended only where two entries would read the same -
@@ -463,7 +452,7 @@ it belongs to is the bug this subsystem invites:
   launcher returns to the base.
 - **Save config writes only `(base)`**, through `CMainWindow::saveConfig()` (what `~CMainWindow`
   writes): a scenario keeps its recorded configuration. `compose --from <ini>` names the source file.
-- **Take again is headless**: the launcher runs `shots.py -o doc/en/images/_work replay --only <id>`,
+- **Take again is headless**: the launcher runs `shots.py -o doc/<lang>/images/_work replay --only <id>`,
   what a build does; a failure keeps the work image.
 - **An image is written from what F9 rendered only for a live part.** An exposed dialog parented to
   the main window is in that render too, and its shot says `exposure`, which the build renders from.

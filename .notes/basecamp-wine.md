@@ -46,5 +46,18 @@ Stop BaseCamp and Xephyr by PID, then `WINEPREFIX=~/wine/basecamp/prefix wineser
 - Zoom with the mouse wheel (`click 4`/`click 5`); `+`/`-` keys do nothing. Steps by scale bar (~100 px):
   … 1 km, 700 m, 500 m, 300 m, 200 m.
 - Screenshot: `import -display :7 -window root -crop 1100x850+298+55 out.png` (map area of a 1400x950 window at 0,0).
-- `winebrowser.exe` is disabled (`HKCU\Software\Wine\DllOverrides`, empty value): BaseCamp opened tabs in the host's
-  browser at start. Now it shows "Modul nicht gefunden" once; click OK.
+- `winebrowser.exe` is disabled (`HKCU\Software\Wine\DllOverrides`, empty value); BaseCamp shows "Modul nicht
+  gefunden" once; click OK.
+- A hidden "Aufgabenportal" window blocks input after start: close it with `xdotool key --window <id> Escape`.
+- Quit with Datei → Beenden, not by PID: only then does BaseCamp save changes to "Meine Sammlung".
+- The selected map is kept across starts; a new `.gmap` needs a restart, then Karten → its name.
+
+## Test maps
+
+- Build each with `--gmapi --family-id=<FID>` from a `.mp` and a TYP `.txt` of the same FID; the same tiles with
+  `--gmapsupp` (options apply from the next file on) give the gmapsupp for QMapShack.
+- BaseCamp shows one map product at a time, a `--transparent` one too, and one tile per area: test tiles must not
+  overlap.
+- It draws nothing for line types 0x30/0x31 and ignores a gmap of family 6357; use standard types and other FIDs.
+- Most 0x2fxx POIs show only zoomed in (50 m bar). Hover shows a POI's or line's TYP name.
+- mkgmap exits without a message on a POI subtype above 0x1f and on a line bitmap of more than two colours.

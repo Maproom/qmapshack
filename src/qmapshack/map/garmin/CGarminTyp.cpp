@@ -440,6 +440,11 @@ bool CGarminTyp::parsePolygon(QDataStream& in, QMap<quint32, polygon_property>& 
     }
 
     if (hasLocalization) {
+      // a TYP's names replace the built-in ones, if they can be read
+      if (codec != nullptr) {
+        property.strings.clear();
+      }
+      bool firstName = true;
       qint16 len;
       quint8 n = 1;
 
@@ -457,6 +462,10 @@ bool CGarminTyp::parsePolygon(QDataStream& in, QMap<quint32, polygon_property>& 
         QByteArray str;
         in >> langcode;
         languages << langcode;
+        if (firstName) {
+          property.firstLanguage = langcode;
+          firstName = false;
+        }
         len -= 2 * n;
         while (len > 0) {
           in >> t8;
@@ -793,6 +802,11 @@ bool CGarminTyp::parsePolyline(QDataStream& in, QMap<quint32, polyline_property>
     }
 
     if (hasLocalization) {
+      // a TYP's names replace the built-in ones, if they can be read
+      if (codec != nullptr) {
+        property.strings.clear();
+      }
+      bool firstName = true;
       qint16 len;
       quint8 n = 1;
 
@@ -810,6 +824,10 @@ bool CGarminTyp::parsePolyline(QDataStream& in, QMap<quint32, polyline_property>
         QByteArray str;
         in >> langcode;
         languages << langcode;
+        if (firstName) {
+          property.firstLanguage = langcode;
+          firstName = false;
+        }
         len -= 2 * n;
         while (len > 0) {
           in >> t8_1;
@@ -1151,6 +1169,11 @@ bool CGarminTyp::parsePoint(QDataStream& in, QMap<quint32, point_property>& poin
     }
 
     if (hasLocalization) {
+      // a TYP's names replace the built-in ones, if they can be read
+      if (codec != nullptr) {
+        property.strings.clear();
+      }
+      bool firstName = true;
       qint16 len;
       quint8 n = 1;
 
@@ -1168,6 +1191,10 @@ bool CGarminTyp::parsePoint(QDataStream& in, QMap<quint32, point_property>& poin
         QByteArray str;
         in >> langcode;
         languages << langcode;
+        if (firstName) {
+          property.firstLanguage = langcode;
+          firstName = false;
+        }
         len -= 2 * n;
         while (len > 0) {
           in >> t8_1;
@@ -1209,4 +1236,23 @@ bool CGarminTyp::parsePoint(QDataStream& in, QMap<quint32, point_property>& poin
   }
 
   return true;
+}
+
+QString CGarminTyp::name(const names_t& strings, quint8 first, quint8 language) {
+  for (int code : {int(language), 0x00, int(first)}) {
+    const QString& name = strings.value(code);
+    if (!name.isEmpty()) {
+      return name;
+    }
+  }
+  return QString();
+}
+
+quint8 CGarminTyp::languageCode(const QString& iso) {
+  static const QStringList codes = {"",   "fr", "de", "nl", "en", "it", "fi", "sv", "es", "eu", "ca", "gl",
+                                    "cy", "gd", "da", "no", "pt", "sk", "cs", "hr", "hu", "pl", "tr", "el",
+                                    "sl", "ru", "et", "lv", "ro", "sq", "bs", "lt", "sr", "mk", "bg"};
+  const QString language = iso == "nb" || iso == "nn" ? QString("no") : iso;
+  const qsizetype code = codes.indexOf(language);
+  return code > 0 ? quint8(code) : 0x00;
 }

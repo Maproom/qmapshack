@@ -85,6 +85,7 @@ class CGarminPoint {
   static QString distanceText(const CGarminMarine::distance_t& d);
 
   quint32 type = 0;
+  quint16 family = 0; /**< map family of the object's tile, from the MPS map list; 0 if unknown */
   bool isLbl6 = false;
   bool hasSubType = false;
 

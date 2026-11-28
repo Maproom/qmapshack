@@ -114,6 +114,8 @@ class CGarminImg {
     QVector<maplevel_t> maplevels;
     /// bit 1 of POI_flags (TRE header @ 0x3F)
     bool isTransparent = false;
+    /** map family from the MPS map list; 0 if the image has none */
+    quint16 family = 0;
     /** object to manage the string tables, owned by CGarminImg::strtbls */
     IGarminStrTbl* strtbl = nullptr;
     /** the place tables and POI records, owned by CGarminImg::places; null without them */
@@ -195,6 +197,8 @@ class CGarminImg {
 
   void readBasics();
   void readSubfileBasics(subfile_desc_t& subfile, CFileExt& file);
+  /** Give each tile its family from the map list (MPS subfile) a gmapsupp carries. */
+  void readMapFamilies(CFileExt& file);
   void processPrimaryMapData();
   /** The label of indexed point @p index of subdivision @p number, both 1-based; empty if none. */
   QString indexedPointLabel(CFileExt& file, const subfile_desc_t& subfile, const QByteArray& rgndata, quint32 number,

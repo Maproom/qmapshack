@@ -90,6 +90,7 @@ class CGarminTyp {
     BLImage imgNight;
 
     QMap<int, QString> strings;
+    quint8 firstLanguage = 0; /**< language code of the TYP's first name */
     label_type_e labelType;
     QColor colorLabelDay;
     QColor colorLabelNight;
@@ -136,6 +137,7 @@ class CGarminTyp {
     QBrush brushNight;
 
     QMap<int, QString> strings;
+    quint8 firstLanguage = 0; /**< language code of the TYP's first name */
     label_type_e labelType;
     QColor colorLabelDay;
     QColor colorLabelNight;
@@ -148,6 +150,7 @@ class CGarminTyp {
     BLImage imgNight;
 
     QMap<int, QString> strings;
+    quint8 firstLanguage = 0; /**< language code of the TYP's first name */
     label_type_e labelType;
     QColor colorLabelDay;
     QColor colorLabelNight;
@@ -171,6 +174,21 @@ class CGarminTyp {
               QMap<quint32, point_property>& points);
 
   QSet<quint8> getLanguages() { return languages; }
+
+  using names_t = QMap<int, QString>; /**< names by language code */
+
+  /**
+     @brief A type's name as BaseCamp picks it: in the user's language, else unspecified (0x00), else the TYP's first
+
+     @param strings   the names by language code
+     @param first     language code of the TYP's first name
+     @param language  the user's language code
+     @return the name, empty if there is none
+   */
+  static QString name(const names_t& strings, quint8 first, quint8 language);
+
+  /** The TYP language code of an ISO 639-1 language ("de"), 0x00 (unspecified) if TYP files have none. */
+  static quint8 languageCode(const QString& iso);
 
   quint16 getFid() { return fid; }
 

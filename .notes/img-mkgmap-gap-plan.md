@@ -4,7 +4,13 @@ Tickets: top QMS-1343; 1357 decoder test (reader split out of CMapIMG, mkgmap fi
 shields, 1350 prefix/suffix hiding, 1351 one-way arrows, 1352 draw priority, 1353 marine extra data, 1354 POI
 details and copyright, 1355 TYP languages/icon sets/several TYPs, 1370 point labels beside the symbol, 1376 line bitmaps on the wrong side.
 
-Changelog (user, 2026-11-27): QMS-#1343's line leads with the support of the marine extensions (QMS-1353).
+Changelog (user, 2026-11-28): QMS-1355 is the last child; when it is done QMS-#1343 is closed and gets this line:
+`[QMS-1343] Garmin maps: marine charts with depths, lights and buoys, highway shields, POI addresses and symbols`
+
+When the last child ticket is done (user, 2026-11-28): clean up the BaseCamp setup (`basecamp-wine.md`): the test maps
+`QMS label test.gmap` and `QMS cliff test.gmap` in `drive_c/ProgramData/Garmin/Maps/`, `lbl1370.gpx` and `cliff.gpx`
+in `drive_c`, and the waypoints imported from them into "Meine Sammlung" (LBLCENTER, CLIFFC; lists `lbl1370`,
+`cliff`).
 
 Reference: mkgmap trunk (`svn export https://svn.mkgmap.org.uk/mkgmap/mkgmap/trunk`), encoder in
 `src/uk/me/parabola/imgfmt/`. Nothing below was run against a real mkgmap

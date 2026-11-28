@@ -42,6 +42,7 @@
 #include "map/garmin/IGarminStrTbl.h"
 #include "misc.h"
 #include "poi/IPoiItem.h"
+#include "setup/IAppSetup.h"
 #include "units/IUnit.h"
 
 #undef DEBUG_SHOW_SECTION_BORDERS
@@ -499,7 +500,9 @@ qreal textAdvance(FontGlyphs& fg, const QString& text) {
 }  // namespace
 
 CMapIMG::CMapIMG(const QString& filename, CMapDraw* parent)
-    : IMap(eFeatVisibility | eFeatVectorItems | eFeatTypFile, parent), selectedLanguage(NOIDX), img(filename) {
+    : IMap(eFeatVisibility | eFeatVectorItems | eFeatTypFile, parent),
+      typLanguage(CGarminTyp::languageCode(IAppSetup::getPlatformInstance()->language())),
+      img(filename) {
   qDebug() << "------------------------------";
   qDebug() << "IMG: try to open" << filename;
 
@@ -539,42 +542,11 @@ void CMapIMG::slotSetTypeFile(const QString& filename) {
 }
 
 void CMapIMG::setupTyp() {
-  languages.clear();
-  languages[0x00] = tr("Unspecified");
-  languages[0x01] = tr("French");
-  languages[0x02] = tr("German");
-  languages[0x03] = tr("Dutch");
-  languages[0x04] = tr("English");
-  languages[0x05] = tr("Italian");
-  languages[0x06] = tr("Finnish");
-  languages[0x07] = tr("Swedish");
-  languages[0x08] = tr("Spanish");
-  languages[0x09] = tr("Basque");
-  languages[0x0a] = tr("Catalan");
-  languages[0x0b] = tr("Galician");
-  languages[0x0c] = tr("Welsh");
-  languages[0x0d] = tr("Gaelic");
-  languages[0x0e] = tr("Danish");
-  languages[0x0f] = tr("Norwegian");
-  languages[0x10] = tr("Portuguese");
-  languages[0x11] = tr("Slovak");
-  languages[0x12] = tr("Czech");
-  languages[0x13] = tr("Croatian");
-  languages[0x14] = tr("Hungarian");
-  languages[0x15] = tr("Polish");
-  languages[0x16] = tr("Turkish");
-  languages[0x17] = tr("Greek");
-  languages[0x18] = tr("Slovenian");
-  languages[0x19] = tr("Russian");
-  languages[0x1a] = tr("Estonian");
-  languages[0x1b] = tr("Latvian");
-  languages[0x1c] = tr("Romanian");
-  languages[0x1d] = tr("Albanian");
-  languages[0x1e] = tr("Bosnian");
-  languages[0x1f] = tr("Lithuanian");
-  languages[0x20] = tr("Serbian");
-  languages[0x21] = tr("Macedonian");
-  languages[0x22] = tr("Bulgarian");
+  auto& polylineProperties = base.polylineProperties;
+  auto& polygonProperties = base.polygonProperties;
+  auto& polygonDrawOrder = base.polygonDrawOrder;
+  auto& pointProperties = base.pointProperties;
+  familyStyles.clear();
 
   polylineProperties.clear();
   polylineProperties[0x01] = CGarminTyp::polyline_property(0x01, Qt::blue, 6, Qt::SolidLine);
@@ -808,27 +780,53 @@ void CMapIMG::setupTyp() {
 
     file.close();
   } else {
-    const QMap<QString, CGarminImg::subfile_desc_t>& subfiles = img.getSubfiles();
-    QMap<QString, CGarminImg::subfile_desc_t>::const_iterator subfile = subfiles.begin();
-    while (subfile != subfiles.end()) {
-      if (!(*subfile).parts.contains("TYP")) {
-        ++subfile;
+    QList<QByteArray> typs;
+    CFileExt file(img.getFilename());
+    for (const CGarminImg::subfile_desc_t& subfile : img.getSubfiles()) {
+      if (!subfile.parts.contains("TYP")) {
         continue;
       }
-
-      CFileExt file(img.getFilename());
-      openFileCheckSuccess(QIODevice::ReadOnly, file);
-
+      if (!file.isOpen()) {
+        openFileCheckSuccess(QIODevice::ReadOnly, file);
+      }
       QByteArray array;
-      img.readFile(file, (*subfile).parts["TYP"].offset, (*subfile).parts["TYP"].size, array);
-
-      CGarminTyp typ;
-      typ.decode(array, polygonProperties, polylineProperties, polygonDrawOrder, pointProperties);
-
-      file.close();
-      break;
+      img.readFile(file, subfile.parts["TYP"].offset, subfile.parts["TYP"].size, array);
+      typs << array;
     }
+    file.close();
+
+    if (typs.isEmpty()) {
+      return;
+    }
+    if (typs.size() == 1) {
+      CGarminTyp typ;
+      typ.decode(typs.first(), polygonProperties, polylineProperties, polygonDrawOrder, pointProperties);
+      return;
+    }
+    // a gmapsupp with several map families carries a TYP for each; each family's tiles take their own, a family
+    // without one the built-in styles. The first TYP gives the draw order of all.
+    builtin = base;
+    quint16 first = 0;
+    for (const QByteArray& array : std::as_const(typs)) {
+      style_t style = builtin;
+      CGarminTyp typ;
+      typ.decode(array, style.polygonProperties, style.polylineProperties, style.polygonDrawOrder,
+                 style.pointProperties);
+      if (familyStyles.isEmpty()) {
+        first = typ.getFid();
+      }
+      familyStyles.insert(typ.getFid(), style);
+    }
+    base = familyStyles.value(first);
   }
+}
+
+const CMapIMG::style_t& CMapIMG::styleOf(quint16 family) const {
+  if (familyStyles.isEmpty()) {
+    return base;
+  }
+  const auto it = familyStyles.constFind(family);
+  return it != familyStyles.constEnd() ? *it : builtin;
 }
 
 quint8 CMapIMG::scale2bits(const QPointF& scale) {
@@ -1052,6 +1050,8 @@ void CMapIMG::draw(IDrawContext::buffer_t& buf) /* override */
 }
 
 void CMapIMG::drawPolygons(BLContext& ctx, polytype_t& lines) {
+  // one draw order for all families: the image's first TYP's
+  const auto& polygonDrawOrder = base.polygonDrawOrder;
   const bool night = CMainWindow::self().isNight();
 
   // QPainter::drawPolygon fills using the odd-even rule; Blend2D defaults to non-zero.
@@ -1067,9 +1067,9 @@ void CMapIMG::drawPolygons(BLContext& ctx, polytype_t& lines) {
 
   // Bucket the polygon indices by type once, so each draw-order pass visits only the
   // polygons of its type instead of scanning the whole list once per type.
-  QHash<quint32, QVector<qsizetype> > byType;
+  QHash<quint32, QMap<quint16, QVector<qsizetype> > > byType;
   for (qsizetype i = 0; i < lines.size(); ++i) {
-    byType[lines[i].type].push_back(i);
+    byType[lines[i].type][lines[i].family].push_back(i);
   }
 
   // Fallback for types that have geometry but no matching property (magenta hatch,
@@ -1083,51 +1083,54 @@ void CMapIMG::drawPolygons(BLContext& ctx, polytype_t& lines) {
       continue;
     }
 
-    const auto propIt = polygonProperties.constFind(type);
-    const CGarminTyp::polygon_property& property =
-        (propIt != polygonProperties.constEnd()) ? propIt.value() : unknownProperty;
-    if (!property.known) {
-      qDebug() << "unknown polygon" << Qt::hex << type;
-    }
-
-    const QBrush& brush = night ? property.brushNight : property.brushDay;
-
-    // Configure the fill style once per type. Solid colours map directly; texture
-    // images and hatch patterns are realised as a repeating BLPattern. The pattern's
-    // pixel data (tile) must outlive every fill that uses it, hence the outer scope.
-    BLPattern pattern;
-    if (brush.style() == Qt::SolidPattern) {
-      ctx.set_fill_style(toBLColor(brush.color()));
-    } else {
-      const QImage tile = brushToTile(brush);
-      // Owning copy so the pattern's pixels outlive this per-type scope and any
-      // deferred fills that reference it (see toOwnedBLImage()).
-      const BLImage tileBL = toOwnedBLImage(tile);
-      if (!tileBL.is_empty()) {
-        pattern.set_image(tileBL);
-        pattern.set_extend_mode(BL_EXTEND_MODE_REPEAT);
-        // REPEAT makes only the fractional offset matter; fmod keeps the translation small
-        // so we don't lose sub-pixel precision at high zoom.
-        pattern.translate(std::fmod(anchorPx.x(), tile.width()), std::fmod(anchorPx.y(), tile.height()));
-        ctx.set_fill_style(pattern);
-      } else {
-        ctx.set_fill_style(toBLColor(brush.color()));
+    for (auto group = bucket->constBegin(); group != bucket->constEnd(); ++group) {
+      const auto& polygonProperties = styleOf(group.key()).polygonProperties;
+      const auto propIt = polygonProperties.constFind(type);
+      const CGarminTyp::polygon_property& property =
+          (propIt != polygonProperties.constEnd()) ? propIt.value() : unknownProperty;
+      if (!property.known) {
+        qDebug() << "unknown polygon" << Qt::hex << type;
       }
-    }
 
-    const bool hasOutline = applyPen(ctx, property.pen);
+      const QBrush& brush = night ? property.brushNight : property.brushDay;
 
-    for (const qsizetype idx : *bucket) {
-      QPolygonF& poly = lines[idx].pixel;
-      map->convertRad2Px(poly);
+      // Configure the fill style once per type. Solid colours map directly; texture
+      // images and hatch patterns are realised as a repeating BLPattern. The pattern's
+      // pixel data (tile) must outlive every fill that uses it, hence the outer scope.
+      BLPattern pattern;
+      if (brush.style() == Qt::SolidPattern) {
+        ctx.set_fill_style(toBLColor(brush.color()));
+      } else {
+        const QImage tile = brushToTile(brush);
+        // Owning copy so the pattern's pixels outlive this per-type scope and any
+        // deferred fills that reference it (see toOwnedBLImage()).
+        const BLImage tileBL = toOwnedBLImage(tile);
+        if (!tileBL.is_empty()) {
+          pattern.set_image(tileBL);
+          pattern.set_extend_mode(BL_EXTEND_MODE_REPEAT);
+          // REPEAT makes only the fractional offset matter; fmod keeps the translation small
+          // so we don't lose sub-pixel precision at high zoom.
+          pattern.translate(std::fmod(anchorPx.x(), tile.width()), std::fmod(anchorPx.y(), tile.height()));
+          ctx.set_fill_style(pattern);
+        } else {
+          ctx.set_fill_style(toBLColor(brush.color()));
+        }
+      }
 
-      // Blend2D treats a polygon as implicitly closed, matching the closed BLPath used
-      // before; stroke_polygon adds the closing edge just like QPainter::drawPolygon.
-      const BLPoint* pts = toBLPoints(poly);
-      const size_t n = static_cast<size_t>(poly.size());
-      ctx.fill_polygon(pts, n);
-      if (hasOutline) {
-        ctx.stroke_polygon(pts, n);
+      const bool hasOutline = applyPen(ctx, property.pen);
+
+      for (const qsizetype idx : *group) {
+        QPolygonF& poly = lines[idx].pixel;
+        map->convertRad2Px(poly);
+
+        // Blend2D treats a polygon as implicitly closed, matching the closed BLPath used
+        // before; stroke_polygon adds the closing edge just like QPainter::drawPolygon.
+        const BLPoint* pts = toBLPoints(poly);
+        const size_t n = static_cast<size_t>(poly.size());
+        ctx.fill_polygon(pts, n);
+        if (hasOutline) {
+          ctx.stroke_polygon(pts, n);
+        }
       }
     }
   }
@@ -1144,20 +1147,26 @@ void CMapIMG::drawPolylines(BLContext& ctx, polytype_t& lines, const QPointF& sc
   QVector<qreal> lengths;
   lengths.reserve(100);
 
-  QHash<quint32, QList<quint32> > dict;
+  // the lines by type and family: key (family << 32) | type
+  QHash<quint64, QList<quint32> > dict;
   for (int i = 0; i < lines.count(); ++i) {
-    dict[lines[i].type].push_back(i);
+    dict[(quint64(lines[i].family) << 32) | lines[i].type].push_back(i);
   }
+  const auto propertiesOf = [this](quint64 key) -> const QMap<quint32, CGarminTyp::polyline_property>& {
+    return styleOf(quint16(key >> 32)).polylineProperties;
+  };
 
-  auto drawTypes = [&](const QList<quint32>& types) {
-    for (quint32 type : types) {
+  auto drawTypes = [&](const QList<quint64>& keys) {
+    for (quint64 key : keys) {
+      const quint32 type = quint32(key);
+      const auto& polylineProperties = propertiesOf(key);
       const auto prop = polylineProperties.constFind(type);
       if (prop == polylineProperties.constEnd()) {
         continue;
       }
       const CGarminTyp::polyline_property& property = *prop;
 
-      const auto it = dict.constFind(type);
+      const auto it = dict.constFind(key);
       if (it == dict.constEnd()) {
         continue;
       }
@@ -1248,14 +1257,16 @@ void CMapIMG::drawPolylines(BLContext& ctx, polytype_t& lines, const QPointF& sc
     }
 
     // 2nd run to draw the foreground lines over their borders.
-    for (quint32 type : types) {
+    for (quint64 key : keys) {
+      const quint32 type = quint32(key);
+      const auto& polylineProperties = propertiesOf(key);
       const auto prop = polylineProperties.constFind(type);
       if (prop == polylineProperties.constEnd()) {
         continue;
       }
       const CGarminTyp::polyline_property& property = *prop;
 
-      const auto it = dict.constFind(type);
+      const auto it = dict.constFind(key);
       if (it == dict.constEnd()) {
         continue;
       }
@@ -1274,23 +1285,24 @@ void CMapIMG::drawPolylines(BLContext& ctx, polytype_t& lines, const QPointF& sc
 
   // Types are drawn in ascending order, 0x01-0x03 last: Garmin draws them over all other lines, and maps put
   // overlays like cycle routes there.
-  QList<quint32> types = dict.keys();
-  std::sort(types.begin(), types.end());
+  QList<quint64> types = dict.keys();
+  std::sort(types.begin(), types.end(),
+            [](quint64 a, quint64 b) { return quint32(a) != quint32(b) ? quint32(a) < quint32(b) : a < b; });
 
   // extended lines the TYP does not style: marine lines, drawn from their extra data below all others
   QList<quint32> marine;
-  for (quint32 type : std::as_const(types)) {
-    if (CGarminMarine::isMarineLine(type) && !polylineProperties.contains(type)) {
-      marine << dict[type];
+  for (quint64 key : std::as_const(types)) {
+    if (CGarminMarine::isMarineLine(quint32(key)) && !propertiesOf(key).contains(quint32(key))) {
+      marine << dict[key];
     }
   }
   if (!marine.isEmpty()) {
     drawMarineLines(ctx, lines, marine, font, scale);
   }
 
-  const auto top =
-      std::stable_partition(types.begin(), types.end(), [](quint32 type) { return type < 0x01 || type > 0x03; });
-  const QList<quint32> topTypes(top, types.end());
+  const auto top = std::stable_partition(types.begin(), types.end(),
+                                         [](quint64 key) { return quint32(key) < 0x01 || quint32(key) > 0x03; });
+  const QList<quint64> topTypes(top, types.end());
   types.resize(std::distance(types.begin(), top));
   drawTypes(types);
   drawTypes(topTypes);
@@ -1511,6 +1523,7 @@ void CMapIMG::drawPoints(BLContext& ctx, pointtype_t& pts, QVector<QRectF>& rect
   static const CGarminTyp::point_property unknownProperty;
   pointtype_t::iterator pt = pts.begin();
   while (pt != pts.end()) {
+    const auto& pointProperties = styleOf(pt->family).pointProperties;
     map->convertRad2Px(pt->pos);
 
     const auto propIt = pointProperties.constFind(pt->type);
@@ -1610,6 +1623,7 @@ void CMapIMG::drawPois(BLContext& ctx, pointtype_t& pts, QVector<QRectF>& rectPo
   const bool night = CMainWindow::self().isNight();
   static const CGarminTyp::point_property unknownProperty;
   for (CGarminPoint& pt : pts) {
+    const auto& pointProperties = styleOf(pt.family).pointProperties;
     map->convertRad2Px(pt.pos);
 
     const auto propIt = pointProperties.constFind(pt.type);
@@ -1898,8 +1912,10 @@ void CMapIMG::findPOICloseBy(const QPoint& pt, IPoiItem& poi) const /*override;*
         poi.desc = lines.join("<br>\n");
         poi.name = point.getName();
         if (poi.name.isEmpty()) {
+          const auto& pointProperties = styleOf(point.family).pointProperties;
           if (pointProperties.contains(point.type)) {
-            poi.name = pointProperties[point.type].strings[selectedLanguage != NOIDX ? selectedLanguage : 0];
+            const CGarminTyp::point_property& property = pointProperties[point.type];
+            poi.name = CGarminTyp::name(property.strings, property.firstLanguage, typLanguage);
           } else {
             poi.name = QString(" (%1)").arg(point.type, 2, 16, QChar('0'));
           }
@@ -1919,9 +1935,10 @@ void CMapIMG::getInfoPoints(const pointtype_t& points, const QPoint& pt, QMultiM
       if (!text.isEmpty()) {
         dict.insert(tr("Point of Interest"), text);
       } else {
+        const auto& pointProperties = styleOf(point.family).pointProperties;
         if (pointProperties.contains(point.type)) {
-          dict.insert(tr("Point of Interest"),
-                      pointProperties[point.type].strings[selectedLanguage != NOIDX ? selectedLanguage : 0]);
+          const CGarminTyp::point_property& property = pointProperties[point.type];
+          dict.insert(tr("Point of Interest"), CGarminTyp::name(property.strings, property.firstLanguage, typLanguage));
         } else {
           dict.insert(tr("Point of Interest"), QString(" (%1)").arg(point.type, 2, 16, QChar('0')));
         }
@@ -1939,6 +1956,7 @@ void CMapIMG::getInfoPolylines(const QPoint& pt, QMultiMap<QString, QString>& di
   QString key;
   QStringList value;
   quint32 type = 0;
+  quint16 family = 0;
 
   bool found = false;
 
@@ -1976,6 +1994,7 @@ void CMapIMG::getInfoPolylines(const QPoint& pt, QMultiMap<QString, QString>& di
 
       if (distance < shortest) {
         type = line.type;
+        family = line.family;
         value.clear();
         const QString text = line.getInfoText();
         value << (text.isEmpty() ? QString("-") : text);
@@ -1999,19 +2018,12 @@ void CMapIMG::getInfoPolylines(const QPoint& pt, QMultiMap<QString, QString>& di
     return;
   }
 
-  if (selectedLanguage != NOIDX) {
-    key = polylineProperties[type].strings[selectedLanguage];
+  const CGarminTyp::polyline_property& property = styleOf(family).polylineProperties[type];
+  key = CGarminTyp::name(property.strings, property.firstLanguage, typLanguage);
+  if (key.isEmpty()) {
+    key = tr("Unknown");
   }
-
-  if (!key.isEmpty()) {
-    dict.insert(key + QString("(%1)").arg(type, 2, 16, QChar('0')), value.join("\n"));
-  } else {
-    if (polylineProperties[type].strings.isEmpty()) {
-      dict.insert(tr("Unknown") + QString("(%1)").arg(type, 2, 16, QChar('0')), value.join("\n"));
-    } else {
-      dict.insert(polylineProperties[type].strings[0] + QString("(%1)").arg(type, 2, 16, QChar('0')), value.join("\n"));
-    }
-  }
+  dict.insert(key + QString("(%1)").arg(type, 2, 16, QChar('0')), value.join("\n"));
 
   //    pt = resPt.toPoint();
 }
@@ -2046,14 +2058,10 @@ void CMapIMG::getInfoPolygons(const QPoint& pt, QMultiMap<QString, QString>& dic
         } else if (!marine.isEmpty()) {
           dict.insert(tr("Area"), marine);
         } else {
-          if (selectedLanguage != NOIDX) {
-            if (polygonProperties[line.type].strings[selectedLanguage].size()) {
-              dict.insert(tr("Area"), polygonProperties[line.type].strings[selectedLanguage]);
-            }
-          } else {
-            if (polygonProperties[line.type].strings[0].size()) {
-              dict.insert(tr("Area"), polygonProperties[line.type].strings[0]);
-            }
+          const CGarminTyp::polygon_property& property = styleOf(line.family).polygonProperties[line.type];
+          const QString& typName = CGarminTyp::name(property.strings, property.firstLanguage, typLanguage);
+          if (!typName.isEmpty()) {
+            dict.insert(tr("Area"), typName);
           }
         }
       }

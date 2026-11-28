@@ -54,6 +54,7 @@ class test_CGarminImg : public QObject {
   void refuseLarger4GB();
   void cutOffExtended();
   void levelsAcrossTiles();
+  void mapFamilies();
   void displayText_data();
   void displayText();
   void shieldCode_data();
@@ -65,6 +66,7 @@ class test_CGarminImg : public QObject {
   void splitHeight();
   void typStyles();
   void typNoCodePage();
+  void typIconSet();
   void marineBytes_data();
   void marineBytes();
   void marine();
@@ -82,6 +84,10 @@ class test_CGarminImg : public QObject {
   void facilityText_data();
   void facilityText();
   void poiSymbols();
+  void typName_data();
+  void typName();
+  void languageCode_data();
+  void languageCode();
   void pointLabelBox_data();
   void pointLabelBox();
   void placesRecords();
@@ -470,6 +476,39 @@ void test_CGarminImg::levelsAcrossTiles() {
   }
 }
 
+void test_CGarminImg::mapFamilies() {
+  // families.img: tile A of family 7017 and tile B of family 7018, each with its own TYP (mp/families/). Each tile
+  // takes its family from the map list, and so does every object loaded from it.
+  if (fixtureDir().isEmpty()) {
+    QSKIP("QMS_IMG_FIXTURES not set; build the test maps with make_fixtures.py");
+  }
+  const QString path = QDir(fixtureDir()).filePath("families.img");
+  if (!QFileInfo::exists(path)) {
+    QSKIP(qPrintable("Test map not built: " + path));
+  }
+
+  CGarminImg img(path);
+  img.read();
+  QList<quint16> families;
+  for (const CGarminImg::subfile_desc_t& subfile : img.getSubfiles()) {
+    if (subfile.parts.contains("TRE")) {
+      families << subfile.family;
+    }
+  }
+  std::sort(families.begin(), families.end());
+  QCOMPARE(families, QList<quint16>({7017, 7018}));
+
+  polytype_t polygons, polylines;
+  pointtype_t points, pois;
+  const QRectF world(-M_PI, M_PI / 2, 2 * M_PI, -M_PI);
+  img.load(24, world, CGarminImg::filter_t(), [] { return false; }, polygons, polylines, points, pois);
+  QMap<QString, quint16> byLabel;
+  for (const CGarminPolygon& line : polylines) {
+    byLabel[line.labels.join(" ")] = line.family;
+  }
+  QCOMPARE(byLabel, (QMap<QString, quint16>{{"A Line", 7017}, {"B Line", 7018}}));
+}
+
 void test_CGarminImg::displayText_data() {
   QTest::addColumn<QString>("label");
   QTest::addColumn<QString>("text");
@@ -580,6 +619,8 @@ void test_CGarminImg::typStyles() {
   QMap<quint32, CGarminTyp::polyline_property> polylines;
   QList<quint32> drawOrder;
   QMap<quint32, CGarminTyp::point_property> points;
+  // a built-in name the TYP's names replace
+  polylines[0x01].strings[0x00] = "built-in";
   QVERIFY(readTyp("styles.typ", typ, polygons, polylines, drawOrder, points));
 
   QCOMPARE(typ.getFid(), quint16(6357));
@@ -594,6 +635,7 @@ void test_CGarminImg::typStyles() {
   QCOMPARE(line.penLineDay.width(), 4);
   QCOMPARE(line.strings.value(0x04), QString("Line four colours"));
   QCOMPARE(line.strings.keys(), QList<int>({0x04}));
+  QCOMPARE(line.firstLanguage, quint8(0x04));
   QVERIFY(line.hasBorder);
   QCOMPARE(line.penBorderDay.width(), 8);
 
@@ -674,6 +716,28 @@ void test_CGarminImg::typNoCodePage() {
   QVERIFY(readTyp("nocodepage.typ", typ, polygons, polylines, drawOrder, points));
   QVERIFY(polylines.contains(0x01));
   QCOMPARE(polylines[0x01].strings.value(0x04), QString("Line no code page"));
+}
+
+void test_CGarminImg::typIconSet() {
+  // typ/iconset.txt: [_icons] sets are not drawn, as in BaseCamp; the points around them still decode.
+  if (fixtureDir().isEmpty()) {
+    QSKIP("QMS_IMG_FIXTURES not set; build the test maps with make_fixtures.py");
+  }
+  if (!QFileInfo::exists(QDir(fixtureDir()).filePath("iconset.typ"))) {
+    QSKIP("Test TYP file not built: iconset.typ");
+  }
+
+  CGarminTyp typ;
+  QMap<quint32, CGarminTyp::polygon_property> polygons;
+  QMap<quint32, CGarminTyp::polyline_property> polylines;
+  QList<quint32> drawOrder;
+  QMap<quint32, CGarminTyp::point_property> points;
+  QVERIFY(readTyp("iconset.typ", typ, polygons, polylines, drawOrder, points));
+  QVERIFY(points.contains(0x2f04));
+  QCOMPARE(toQImage(points[0x2f04].imgDay).size(), QSize(16, 16));
+  QCOMPARE(points[0x2f04].strings.value(0x04), QString("P04 point and set"));
+  QVERIFY(points.contains(0x2f06));
+  QVERIFY(!points.contains(0x2f05));
 }
 
 namespace {
@@ -1238,6 +1302,56 @@ void test_CGarminImg::poiSymbols() {
     }
   }
   QCOMPARE(drawn, QRect(bounds.topLeft() * 2, bounds.size() * 2));
+}
+
+void test_CGarminImg::typName_data() {
+  QTest::addColumn<CGarminTyp::names_t>("strings");
+  QTest::addColumn<int>("first");
+  QTest::addColumn<QString>("name");
+
+  // as BaseCamp 4.7.5 in German (0x02) picks them; the first name in the TYP comes first in each row
+  QTest::newRow("user's language") << CGarminTyp::names_t{{0x00, "default"}, {0x02, "deutsch"}, {0x04, "english"}}
+                                   << 0x00 << "deutsch";
+  QTest::newRow("user's language, not first")
+      << CGarminTyp::names_t{{0x04, "english"}, {0x02, "deutsch"}} << 0x04 << "deutsch";
+  QTest::newRow("only one") << CGarminTyp::names_t{{0x04, "english"}} << 0x04 << "english";
+  QTest::newRow("unspecified only") << CGarminTyp::names_t{{0x00, "default"}} << 0x00 << "default";
+  QTest::newRow("first, lowest code") << CGarminTyp::names_t{{0x01, "french"}, {0x03, "dutch"}} << 0x01 << "french";
+  QTest::newRow("first, not English") << CGarminTyp::names_t{{0x01, "french"}, {0x04, "english"}} << 0x01 << "french";
+  QTest::newRow("first, not lowest code")
+      << CGarminTyp::names_t{{0x04, "english"}, {0x01, "french"}} << 0x04 << "english";
+  QTest::newRow("unspecified before first")
+      << CGarminTyp::names_t{{0x04, "english"}, {0x00, "default"}} << 0x04 << "default";
+  QTest::newRow("none") << CGarminTyp::names_t{} << 0x00 << "";
+}
+
+void test_CGarminImg::typName() {
+  QFETCH(CGarminTyp::names_t, strings);
+  QFETCH(int, first);
+  QFETCH(QString, name);
+
+  QCOMPARE(CGarminTyp::name(strings, quint8(first), 0x02), name);
+}
+
+void test_CGarminImg::languageCode_data() {
+  QTest::addColumn<QString>("iso");
+  QTest::addColumn<int>("code");
+
+  QTest::newRow("French") << "fr" << 0x01;
+  QTest::newRow("German") << "de" << 0x02;
+  QTest::newRow("English") << "en" << 0x04;
+  QTest::newRow("Spanish") << "es" << 0x08;
+  QTest::newRow("Bokmål") << "nb" << 0x0f;
+  QTest::newRow("Bulgarian") << "bg" << 0x22;
+  QTest::newRow("no TYP code") << "ja" << 0x00;
+  QTest::newRow("empty") << "" << 0x00;
+}
+
+void test_CGarminImg::languageCode() {
+  QFETCH(QString, iso);
+  QFETCH(int, code);
+
+  QCOMPARE(int(CGarminTyp::languageCode(iso)), code);
 }
 
 void test_CGarminImg::pointLabelBox_data() {

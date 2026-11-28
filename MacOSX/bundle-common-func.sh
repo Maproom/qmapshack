@@ -3,8 +3,8 @@
 source $QMSDEVDIR/qmapshack/MacOSX/config.sh   # check for important parameters
 
 # Directories for QMS
-SRC_RESOURCES_DIR=$SRC_OSX_DIR/resources
-BUILD_BIN_DIR=$QMSDEVDIR/build_QMapShack/bin
+QMS_RESOURCES_DIR=$QMS_OSX_DIR/resources
+BUILD_BIN_DIR=$QMSDEVDIR/build/$BUILD_TYPE/bin
 
 # vars for bundling
 set -a
@@ -46,16 +46,16 @@ COMMIT_STATUS=0
 function buildIcon {
     rm -rf $BUILD_BIN_DIR/$APP_NAME.iconset
     mkdir $BUILD_BIN_DIR/$APP_NAME.iconset
-    sips -z 16 16     $SRC_RESOURCES_DIR/$APP_NAME.png --out $BUILD_BIN_DIR/$APP_NAME.iconset/icon_16x16.png
-    sips -z 32 32     $SRC_RESOURCES_DIR/$APP_NAME.png --out $BUILD_BIN_DIR/$APP_NAME.iconset/icon_16x16@2x.png
-    sips -z 32 32     $SRC_RESOURCES_DIR/$APP_NAME.png --out $BUILD_BIN_DIR/$APP_NAME.iconset/icon_32x32.png
-    sips -z 64 64     $SRC_RESOURCES_DIR/$APP_NAME.png --out $BUILD_BIN_DIR/$APP_NAME.iconset/icon_32x32@2x.png
-    sips -z 128 128   $SRC_RESOURCES_DIR/$APP_NAME.png --out $BUILD_BIN_DIR/$APP_NAME.iconset/icon_128x128.png
-    sips -z 256 256   $SRC_RESOURCES_DIR/$APP_NAME.png --out $BUILD_BIN_DIR/$APP_NAME.iconset/icon_128x128@2x.png
-    sips -z 256 256   $SRC_RESOURCES_DIR/$APP_NAME.png --out $BUILD_BIN_DIR/$APP_NAME.iconset/icon_256x256.png
-    sips -z 512 512   $SRC_RESOURCES_DIR/$APP_NAME.png --out $BUILD_BIN_DIR/$APP_NAME.iconset/icon_256x256@2x.png
-    sips -z 512 512   $SRC_RESOURCES_DIR/$APP_NAME.png --out $BUILD_BIN_DIR/$APP_NAME.iconset/icon_512x512.png
-    cp -v             $SRC_RESOURCES_DIR/$APP_NAME.png       $BUILD_BIN_DIR/$APP_NAME.iconset/icon_512x512@2x.png
+    sips -z 16 16     $QMS_RESOURCES_DIR/$APP_NAME.png --out $BUILD_BIN_DIR/$APP_NAME.iconset/icon_16x16.png
+    sips -z 32 32     $QMS_RESOURCES_DIR/$APP_NAME.png --out $BUILD_BIN_DIR/$APP_NAME.iconset/icon_16x16@2x.png
+    sips -z 32 32     $QMS_RESOURCES_DIR/$APP_NAME.png --out $BUILD_BIN_DIR/$APP_NAME.iconset/icon_32x32.png
+    sips -z 64 64     $QMS_RESOURCES_DIR/$APP_NAME.png --out $BUILD_BIN_DIR/$APP_NAME.iconset/icon_32x32@2x.png
+    sips -z 128 128   $QMS_RESOURCES_DIR/$APP_NAME.png --out $BUILD_BIN_DIR/$APP_NAME.iconset/icon_128x128.png
+    sips -z 256 256   $QMS_RESOURCES_DIR/$APP_NAME.png --out $BUILD_BIN_DIR/$APP_NAME.iconset/icon_128x128@2x.png
+    sips -z 256 256   $QMS_RESOURCES_DIR/$APP_NAME.png --out $BUILD_BIN_DIR/$APP_NAME.iconset/icon_256x256.png
+    sips -z 512 512   $QMS_RESOURCES_DIR/$APP_NAME.png --out $BUILD_BIN_DIR/$APP_NAME.iconset/icon_256x256@2x.png
+    sips -z 512 512   $QMS_RESOURCES_DIR/$APP_NAME.png --out $BUILD_BIN_DIR/$APP_NAME.iconset/icon_512x512.png
+    cp -v             $QMS_RESOURCES_DIR/$APP_NAME.png       $BUILD_BIN_DIR/$APP_NAME.iconset/icon_512x512@2x.png
     iconutil -c icns -o $BUILD_BIN_DIR/$APP_NAME.icns $BUILD_BIN_DIR/$APP_NAME.iconset
     # rm -r $BUILD_BIN_DIR/$APP_NAME.iconset
 }
@@ -95,14 +95,14 @@ function buildAppStructure {
     do
         BUILD_BUNDLE_LOCVERSION_DIR=$BUILD_BUNDLE_RES_DIR/${i}.lproj
         mkdir $BUILD_BUNDLE_LOCVERSION_DIR
-        cp -v $SRC_RESOURCES_DIR/locversion.plist $BUILD_BUNDLE_LOCVERSION_DIR
+        cp -v $QMS_RESOURCES_DIR/locversion.plist $BUILD_BUNDLE_LOCVERSION_DIR
         /usr/libexec/PlistBuddy -c "Set :LprojLocale $i" "$BUILD_BUNDLE_LOCVERSION_DIR/locversion.plist"
         echo "$i"
      done
 
-    cp -v $SRC_RESOURCES_DIR/$APP_NAME.icns $BUILD_BUNDLE_RES_DIR
+    cp -v $QMS_RESOURCES_DIR/$APP_NAME.icns $BUILD_BUNDLE_RES_DIR
     # inject PATH of PACKAGES_PATH, so that external tools can be run from the app bundles
-    sed  "s|PACKAGES_PATH|$PACKAGES_PATH|" $SRC_RESOURCES_DIR/Info.plist > $QMSDEVDIR/Info.plist
+    sed  "s|PACKAGES_PATH|$PACKAGES_PATH|" $QMS_RESOURCES_DIR/Info.plist > $QMSDEVDIR/Info.plist
     mv $QMSDEVDIR/Info.plist $BUILD_BUNDLE_CONTENTS_DIR
 
     # new icon, if one has been created (otherwise the one from predefined data)
@@ -137,9 +137,12 @@ function copyQtTranslations {
 
 
 function qtDeploy {
-    # -no-strip
     echo "MACdeployQT  $QT_DEV_PATH/ and  $BUILD_BUNDLE_DIR/"
-    $QT_DEV_PATH/bin/macdeployqt $BUILD_BUNDLE_DIR -always-overwrite -verbose=2
+    DEPLOY_PARAMS="-always-overwrite -verbose=2"
+    if [ $BUILD_TYPE != "Release" ]; then
+      DEPLOY_PARAMS="$DEPLOY_PARAMS -no-strip"
+    fi
+    $QT_DEV_PATH/bin/macdeployqt $BUILD_BUNDLE_DIR $DEPLOY_PARAMS
 }
 
 

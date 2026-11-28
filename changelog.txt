@@ -1,4 +1,5 @@
 V1.XX.X
+[QMS-1372] macOS build scripts: disable broken Xcode build switch, add debug build switch
 
 V1.22.0
 [QMS-1217] Documentation mode: take the manual's pictures from QMapShack itself
@@ -36,8 +37,6 @@ V1.22.0
 [QMS-1337] Complete the Spanish and Italian translation of the interface and the manual
 [QMS-1339] Documentation: English and German complete text revision
 [QMS-1341] Garmin maps: readable street names along roads
-
-
 
 V1.21.1
 [QMS-1212] Update macOS build scripts

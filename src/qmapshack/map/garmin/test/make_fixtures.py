@@ -3,10 +3,12 @@
 
 usage: make_fixtures.py MKGMAP_JAR OUT_DIR
 
-Each mp/<name>.mp becomes OUT_DIR/<name>.img and its search index OUT_DIR/<name>_mdr.img, an IMG file
-without map tiles. Each folder mp/<name>/ becomes OUT_DIR/<name>.img, a gmapsupp of its *.mp tiles. Each
+Each mp/<name>.mp and osm/<name>.osm becomes OUT_DIR/<name>.img and its search index OUT_DIR/<name>_mdr.img, an
+IMG file without map tiles. Each folder mp/<name>/ becomes OUT_DIR/<name>.img, a gmapsupp of its *.mp tiles. Each
 typ/<name>.txt becomes OUT_DIR/<name>.typ.
-A first line "; mkgmap: <options>" passes options to mkgmap; in a folder, the first tile's line counts. The jar must be mkgmap r4924 (https://www.mkgmap.org.uk/download/mkgmap.html), the release the
+A first line "; mkgmap: <options>" passes options to mkgmap; in a folder, the first tile's line counts. An .osm
+source gives them in its first comment, "<!-- mkgmap: <options> -->", without the leading dashes: XML comments
+cannot hold two dashes. The jar must be mkgmap r4924 (https://www.mkgmap.org.uk/download/mkgmap.html), the release the
 test was written against.
 
 The test also loads any other IMG file in OUT_DIR, e.g. mkgmap's own test tiles 63240001-3.img from
@@ -25,11 +27,19 @@ JAVA = ["java", "-Duser.language=en", "-Duser.country=US", "-jar"]
 
 
 def options(source: Path) -> list:
-    """The mkgmap options from the source's first line \"; mkgmap: ...\", if any."""
+    """The mkgmap options from the source's first line \"; mkgmap: ...\", or an .osm source's first comment."""
     with open(source, encoding="latin-1") as f:
-        first = f.readline().strip()
-    prefix = "; mkgmap:"
-    return first[len(prefix):].split() if first.startswith(prefix) else []
+        if source.suffix != ".osm":
+            first = f.readline().strip()
+            prefix = "; mkgmap:"
+            return first[len(prefix):].split() if first.startswith(prefix) else []
+        for line in f:
+            line = line.strip()
+            if line.startswith("<!--"):
+                body = line[len("<!--"):].removesuffix("-->").strip()
+                prefix = "mkgmap:"
+                return ["--" + o for o in body[len(prefix):].split()] if body.startswith(prefix) else []
+    return []
 
 
 def run(command: list) -> subprocess.CompletedProcess:
@@ -53,7 +63,8 @@ def main() -> int:
         return 2
     out.mkdir(parents=True, exist_ok=True)
 
-    sources = sorted((Path(__file__).resolve().parent / "mp").glob("*.mp"))
+    here = Path(__file__).resolve().parent
+    sources = sorted([*(here / "mp").glob("*.mp"), *(here / "osm").glob("*.osm")])
     for source in sources:
         with tempfile.TemporaryDirectory() as tmp:
             result = run([*JAVA, str(jar), f"--output-dir={tmp}", "--index", "--overview-mapname=index",

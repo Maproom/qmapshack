@@ -22,6 +22,7 @@
 #include <QMap>
 #include <QRectF>
 #include <QSet>
+#include <QStringList>
 #include <QVector>
 #include <functional>
 #include <memory>
@@ -32,6 +33,7 @@
 #include "map/garmin/Garmin.h"
 
 class CFileExt;
+class CGarminPlaces;
 class IGarminStrTbl;
 
 using polytype_t = QVector<CGarminPolygon>;
@@ -114,6 +116,8 @@ class CGarminImg {
     bool isTransparent = false;
     /** object to manage the string tables, owned by CGarminImg::strtbls */
     IGarminStrTbl* strtbl = nullptr;
+    /** the place tables and POI records, owned by CGarminImg::places; null without them */
+    CGarminPlaces* places = nullptr;
   };
 
   struct map_level_t {
@@ -183,8 +187,8 @@ class CGarminImg {
   const QMap<QString, subfile_desc_t>& getSubfiles() const { return subfiles; }
   /** combined maplevels of all tiles */
   const QVector<map_level_t>& getMapLevels() const { return maplevels; }
-  /** copyright strings of all tiles */
-  const QSet<QString>& getCopyrights() const { return copyrights; }
+  /** Per tile its copyright messages (TRE3), then its text after the TRE header; each text once, in order. */
+  const QStringList& getCopyrights() const { return copyrights; }
 
  private:
   Q_DISABLE_COPY(CGarminImg)
@@ -192,7 +196,10 @@ class CGarminImg {
   void readBasics();
   void readSubfileBasics(subfile_desc_t& subfile, CFileExt& file);
   void processPrimaryMapData();
-  void loadSubDiv(CFileExt& file, const subdiv_desc_t& subdiv, IGarminStrTbl* strtbl, const QByteArray& rgndata,
+  /** The label of indexed point @p index of subdivision @p number, both 1-based; empty if none. */
+  QString indexedPointLabel(CFileExt& file, const subfile_desc_t& subfile, const QByteArray& rgndata, quint32 number,
+                            quint32 index) const;
+  void loadSubDiv(CFileExt& file, const subdiv_desc_t& subdiv, const subfile_desc_t& subfile, const QByteArray& rgndata,
                   const filter_t& filter, const QRectF& viewport, polytype_t& polylines, polytype_t& polygons,
                   pointtype_t& points, pointtype_t& pois);
 
@@ -454,10 +461,12 @@ class CGarminImg {
   /// combined maplevels of all tiles
   QVector<map_level_t> maplevels;
 
-  QSet<QString> copyrights;
+  QStringList copyrights;
 
   /** the string tables of all subfiles */
   std::vector<std::unique_ptr<IGarminStrTbl>> strtbls;
+  /** the place tables of all subfiles */
+  std::vector<std::unique_ptr<CGarminPlaces>> places;
 };
 
 #endif  // CGARMINIMG_H

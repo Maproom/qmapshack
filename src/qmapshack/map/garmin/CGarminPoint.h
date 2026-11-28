@@ -29,6 +29,7 @@
 #include <QCoreApplication>
 #include <QPointF>
 #include <QStringList>
+#include <QVector>
 #include <QtGlobal>
 
 #include "map/garmin/CGarminMarine.h"
@@ -39,6 +40,14 @@ class CGarminPoint {
   Q_DECLARE_TR_FUNCTIONS(CGarminPoint)
 
  public:
+  /** One facility at a highway exit (LBL10). */
+  struct exit_facility_t {
+    QString description;
+    quint8 type = 0;       /**< 4 bit, as mkgmap's exit:facility writes it */
+    quint8 direction = 7;  /**< index into "NSEWIOB", 7 none */
+    quint8 facilities = 0; /**< bit set, as mkgmap's exit:facility writes it */
+  };
+
   CGarminPoint() = default;
 
   quint32 decode(qint32 iCenterLon, qint32 iCenterLat, quint32 shift, const quint8* pData);
@@ -50,6 +59,12 @@ class CGarminPoint {
   QString getName() const;
   /** The label and, for a marine point, its extra data: light in chart notation, depth, facilities, ... */
   QString getInfoText() const;
+  /** Address and phone as BaseCamp shows them: "12 Main Street", "Hilltown, Upper Valley 87654", phone; one per line */
+  QString getAddressText() const;
+  /** A highway exit: its highway, exit_to, overnight parking and one line per facility; empty if not an exit */
+  QString getExitText() const;
+  /** A facility as BaseCamp shows it: "<description>: <type>, <direction>" */
+  static QString facilityText(const exit_facility_t& facility);
 
   bool hasLabel() const { return !labels.isEmpty(); }
 
@@ -72,5 +87,19 @@ class CGarminPoint {
   QString note;
   QString localDesignator;
   QString internationalDesignator;
+  /** Address and phone of a POI, read from its LBL6 record; empty if none. */
+  QString houseNumber;
+  QString street;
+  QString city;
+  QString region;
+  QString country;
+  QString zip;
+  QString phone;
+  /** A highway exit: its highway, its description (OSM exit_to) and facilities */
+  bool isExit = false;
+  QString exitHighway;
+  QString exitTo;
+  bool exitOvernightParking = false;
+  QVector<exit_facility_t> exitFacilities;
 };
 #endif  // CGARMINPOINT_H

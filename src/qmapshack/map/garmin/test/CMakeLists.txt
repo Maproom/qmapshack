@@ -9,6 +9,7 @@ add_executable(test_CGarminImg
     CMainWindowStub.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/../CGarminImg.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/../CGarminMarine.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../CGarminPlaces.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/../CMarineSymbol.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/../CGarminPoint.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/../CGarminPolygon.cpp

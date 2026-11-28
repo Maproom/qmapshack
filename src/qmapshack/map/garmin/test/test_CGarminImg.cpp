@@ -24,8 +24,10 @@
 #include <QTextCodec>
 #include <QtMath>
 
+#include "helpers/CFileExt.h"
 #include "map/garmin/CGarminImg.h"
 #include "map/garmin/CGarminMarine.h"
+#include "map/garmin/CGarminPlaces.h"
 #include "map/garmin/CGarminPoint.h"
 #include "map/garmin/CGarminPolygon.h"
 #include "map/garmin/CGarminTyp.h"
@@ -70,6 +72,16 @@ class test_CGarminImg : public QObject {
   void facilities();
   void isHeight();
   void marineTypes();
+  void base11_data();
+  void base11();
+  void poiDetails();
+  void exits();
+  void copyrights();
+  void infoTexts();
+  void facilityText_data();
+  void facilityText();
+  void placesRecords();
+  void corruptPlaces();
 };
 
 namespace {
@@ -89,7 +101,12 @@ struct img_object_t {
   QStringList labels;
   QVector<QPointF> coords;
   QByteArray extra;
+  QMap<QString, QString> details; /**< a POI's address and phone, by their Polish-format keys */
 };
+
+/** The Polish-format keys of a POI's address and phone. */
+const QStringList kDetailKeys = {"HouseNumber", "StreetDesc", "CityName", "RegionName",
+                                 "CountryName", "ZipCode",    "Phone"};
 
 QString fixtureDir() { return qEnvironmentVariable("QMS_IMG_FIXTURES"); }
 
@@ -176,6 +193,28 @@ bool readTyp(const QString& name, CGarminTyp& typ, QMap<quint32, CGarminTyp::pol
   return typ.decode(file.readAll(), polygons, polylines, drawOrder, points);
 }
 
+/** Labels named after their offset, "L<offset>", without a file. */
+class CFakeStrTbl : public IGarminStrTbl {
+ public:
+  CFakeStrTbl() : IGarminStrTbl(0, 0, nullptr) {}
+
+ protected:
+  void decode(CFileExt& /*file*/, quint32 offset, type_e /*t*/, QStringList& info) override {
+    info << QString("L%1").arg(offset);
+  }
+};
+
+void put(QByteArray& buf, qsizetype at, std::initializer_list<quint8> bytes) {
+  if (buf.size() < at + qsizetype(bytes.size())) {
+    buf.resize(at + bytes.size(), 0);
+  }
+  for (const quint8 b : bytes) {
+    buf[at++] = char(b);
+  }
+}
+
+void put3(QByteArray& buf, qsizetype at, quint32 v) { put(buf, at, {quint8(v), quint8(v >> 8), quint8(v >> 16)}); }
+
 /** A copy of @p img, unpremultiplied, to read its pixels. */
 QImage toQImage(const BLImage& img) {
   BLImageData data;
@@ -207,12 +246,19 @@ quint8 readImg(const QString& path, QVector<img_object_t>& objects) {
 
   for (const pointtype_t* list : {&points, &pois}) {
     for (const CGarminPoint& p : *list) {
-      objects.append({"POI", p.type, p.labels, {toDeg(p.pos)}, p.extra});
+      const QStringList values = {p.houseNumber, p.street, p.city, p.region, p.country, p.zip, p.phone};
+      QMap<QString, QString> details;
+      for (qsizetype i = 0; i < kDetailKeys.size(); ++i) {
+        if (!values[i].isEmpty()) {
+          details[kDetailKeys[i]] = values[i];
+        }
+      }
+      objects.append({"POI", p.type, p.labels, {toDeg(p.pos)}, p.extra, details});
     }
   }
   for (const polytype_t* list : {&polylines, &polygons}) {
     for (const CGarminPolygon& p : *list) {
-      img_object_t object{list == &polylines ? "POLYLINE" : "POLYGON", p.type, p.labels, {}, p.extra};
+      img_object_t object{list == &polylines ? "POLYLINE" : "POLYGON", p.type, p.labels, {}, p.extra, {}};
       for (const QPointF& c : p.coords) {
         object.coords << toDeg(c);
       }
@@ -613,9 +659,6 @@ void test_CGarminImg::typNoCodePage() {
   QCOMPARE(polylines[0x01].strings.value(0x04), QString("Line no code page"));
 }
 
-QTEST_GUILESS_MAIN(test_CGarminImg)
-#include "test_CGarminImg.moc"
-
 namespace {
 QString distanceText(const CGarminMarine::distance_t& d) {
   return QString("%1 %2").arg(d.value).arg(d.metric ? "m" : "ft");
@@ -908,3 +951,353 @@ void test_CGarminImg::marineTypes() {
   QVERIFY(!CGarminMarine::isMarineLine(0x10e00));
   QVERIFY(!CGarminMarine::isMarineLine(0x0301));
 }
+
+void test_CGarminImg::base11_data() {
+  QTest::addColumn<QByteArray>("bytes");
+  QTest::addColumn<QString>("number");
+  QTest::addColumn<qint32>("size");
+
+  // as mkgmap's POIRecord writes them: c1 * 11 + c2, '-' is 10, bit 7 on the first and the last byte
+  QTest::newRow("two digits") << QByteArray::fromHex("8df8") << "12" << 2;
+  QTest::newRow("phone") << QByteArray::fromHex("8810724e95") << "0815-4711" << 5;
+  QTest::newRow("one digit") << QByteArray::fromHex("a0f8") << "2" << 2;
+  QTest::newRow("cut off") << QByteArray::fromHex("8810") << "" << 2;
+}
+
+void test_CGarminImg::base11() {
+  QFETCH(QByteArray, bytes);
+  QFETCH(QString, number);
+  QFETCH(qint32, size);
+
+  const quint8* p = reinterpret_cast<const quint8*>(bytes.constData());
+  const quint8* const start = p;
+  QCOMPARE(CGarminPlaces::base11(p, start + bytes.size()), number);
+  QCOMPARE(qint32(p - start), size);
+}
+
+void test_CGarminImg::poiDetails() {
+  if (fixtureDir().isEmpty()) {
+    QSKIP("QMS_IMG_FIXTURES not set; build the test maps with make_fixtures.py");
+  }
+  const QString image = QDir(fixtureDir()).filePath("poi.img");
+  if (!QFileInfo::exists(image)) {
+    QSKIP(qPrintable("Test map not built: " + image));
+  }
+
+  QVector<img_object_t> decoded;
+  try {
+    QVERIFY(readImg(image, decoded) > 0);
+  } catch (const CGarminImg::exce_t& e) {
+    QFAIL(qPrintable(e.msg));
+  }
+
+  const QVector<mp_object_t> sources = readMp(QDir(QMS_IMG_SOURCES).filePath("poi.mp"));
+  QVERIFY(!sources.isEmpty());
+  for (const mp_object_t& want : sources) {
+    // mkgmap writes no POI record for a city point
+    if (want.kind != "POI" || want.type < 0x1200) {
+      continue;
+    }
+    const QString what = QString("POI 0x%1 \"%2\"").arg(want.type, 0, 16).arg(want.labels.join(", "));
+    auto match = std::find_if(decoded.begin(), decoded.end(), [&](const img_object_t& got) {
+      return got.kind == "POI" && got.type == want.type && got.labels == want.labels;
+    });
+    QVERIFY2(match != decoded.end(), qPrintable("Not decoded: " + what));
+
+    QMap<QString, QString> expected;
+    for (const QString& key : kDetailKeys) {
+      if (want.attributes.contains(key)) {
+        expected[key] = want.attributes[key];
+      }
+    }
+    // region and country come with the city
+    if (!expected.contains("CityName")) {
+      expected.remove("RegionName");
+      expected.remove("CountryName");
+    }
+    const auto text = [](const QMap<QString, QString>& m) {
+      QStringList parts;
+      for (auto it = m.constBegin(); it != m.constEnd(); ++it) {
+        parts << it.key() + "=" + it.value();
+      }
+      return parts.join(", ");
+    };
+    QVERIFY2(match->details == expected,
+             qPrintable(QString("%1\n   got: %2\n  want: %3").arg(what, text(match->details), text(expected))));
+  }
+}
+
+void test_CGarminImg::exits() {
+  if (fixtureDir().isEmpty()) {
+    QSKIP("QMS_IMG_FIXTURES not set; build the test maps with make_fixtures.py");
+  }
+  const QString image = QDir(fixtureDir()).filePath("exits.img");
+  if (!QFileInfo::exists(image)) {
+    QSKIP(qPrintable("Test map not built: " + image));
+  }
+
+  CGarminImg img(image);
+  img.read();
+  const QVector<CGarminImg::map_level_t>& levels = img.getMapLevels();
+  QVERIFY(!levels.isEmpty());
+  polytype_t polygons, polylines;
+  pointtype_t points, pois;
+  const QRectF world(-M_PI, M_PI / 2, 2 * M_PI, -M_PI);
+  img.load(levels.last().bits, world, CGarminImg::filter_t(), [] { return false; }, polygons, polylines, points, pois);
+
+  // osm/exits.osm: mkgmap names an exit "<ref> <name>" and takes its description from exit_to
+  QMap<QString, const CGarminPoint*> exits;
+  for (const pointtype_t* list : {&points, &pois}) {
+    for (const CGarminPoint& p : *list) {
+      if (p.isExit) {
+        exits[IGarminStrTbl::displayText(p.labels)] = &p;
+      }
+    }
+  }
+  QCOMPARE(exits.keys(), QStringList({"12 Hilltown North", "13 Rivertown"}));
+
+  const CGarminPoint& north = *exits["12 Hilltown North"];
+  QCOMPARE(north.exitHighway, QString("A 1"));
+  QCOMPARE(north.exitTo, QString("Hilltown"));
+  QVERIFY(!north.exitOvernightParking);
+  QCOMPARE(north.exitFacilities.size(), 1);
+  // exit:facility="0x02,I,0x47,Truck Stop"
+  QCOMPARE(north.exitFacilities[0].description, QString("Truck Stop"));
+  QCOMPARE(north.exitFacilities[0].type, quint8(0x02));
+  QCOMPARE(north.exitFacilities[0].direction, quint8(4));
+  QCOMPARE(north.exitFacilities[0].facilities, quint8(0x47));
+
+  const CGarminPoint& river = *exits["13 Rivertown"];
+  QCOMPARE(river.exitHighway, QString("A 1"));
+  QVERIFY(river.exitTo.isEmpty());
+  QVERIFY(river.exitFacilities.isEmpty());
+}
+
+void test_CGarminImg::copyrights() {
+  if (fixtureDir().isEmpty()) {
+    QSKIP("QMS_IMG_FIXTURES not set; build the test maps with make_fixtures.py");
+  }
+  const QString image = QDir(fixtureDir()).filePath("poi.img");
+  if (!QFileInfo::exists(image)) {
+    QSKIP(qPrintable("Test map not built: " + image));
+  }
+  CGarminImg img(image);
+  img.read();
+
+  // TRE3: mkgmap's own message and the source's Copyright= in code page 1252; then mkgmap's licence text
+  const QStringList copyrights = img.getCopyrights();
+  QCOMPARE(copyrights.size(), 3);
+  QCOMPARE(copyrights[0], QString("program licenced under GPL v2"));
+  QCOMPARE(copyrights[1], QString("QMS test data © Müller"));
+  QVERIFY2(copyrights[2].startsWith("Map data (c) OpenStreetMap and its contributors"), qPrintable(copyrights[2]));
+  QVERIFY(copyrights[2].endsWith("Program released under the GPL"));
+}
+
+void test_CGarminImg::infoTexts() {
+  if (fixtureDir().isEmpty()) {
+    QSKIP("QMS_IMG_FIXTURES not set; build the test maps with make_fixtures.py");
+  }
+  QMap<QString, QString> address;
+  QMap<QString, QString> exit;
+  for (const QString& name : {QString("poi.img"), QString("exits.img")}) {
+    const QString image = QDir(fixtureDir()).filePath(name);
+    if (!QFileInfo::exists(image)) {
+      QSKIP(qPrintable("Test map not built: " + image));
+    }
+    CGarminImg img(image);
+    img.read();
+    polytype_t polygons, polylines;
+    pointtype_t points, pois;
+    const QRectF world(-M_PI, M_PI / 2, 2 * M_PI, -M_PI);
+    img.load(
+        img.getMapLevels().last().bits, world, CGarminImg::filter_t(), [] { return false; }, polygons, polylines,
+        points, pois);
+    for (const pointtype_t* list : {&points, &pois}) {
+      for (const CGarminPoint& p : *list) {
+        address[p.getName()] = p.getAddressText();
+        exit[p.getName()] = p.getExitText();
+      }
+    }
+  }
+
+  // as BaseCamp 4.7.5 shows them, without the country
+  QCOMPARE(address["Restaurant One"], QString("12 Main Street\nHilltown, Upper Valley 87654\n0815-4711"));
+  QCOMPARE(address["Bank Two"], QString("221b Baker Street\nRivertown, Lower Valley\n+49 89 1234"));
+  QCOMPARE(address["Museum Three"], QString("Main Street"));
+  QCOMPARE(address["Peak Four"], QString());
+  QCOMPARE(exit["12 Hilltown North"],
+           QString("Exit on A 1\nExit to Hilltown\nTruck Stop: Automobile Fuel, inner side of exit"));
+  QCOMPARE(exit["13 Rivertown"], QString("Exit on A 1"));
+  QCOMPARE(exit["Restaurant One"], QString());
+}
+
+void test_CGarminImg::facilityText_data() {
+  QTest::addColumn<QString>("description");
+  QTest::addColumn<quint8>("type");
+  QTest::addColumn<quint8>("direction");
+  QTest::addColumn<QString>("text");
+
+  QTest::newRow("all") << "D0" << quint8(0) << quint8(0) << "D0: 24-hour Diesel Fuel With Restaurant, north of exit";
+  QTest::newRow("last type") << "D13" << quint8(13) << quint8(6) << "D13: Fast Food, both sides of exit";
+  // BaseCamp: "D14: , North of Exit"
+  QTest::newRow("type without name") << "D14" << quint8(14) << quint8(0) << "D14: north of exit";
+  QTest::newRow("no direction") << "D3" << quint8(3) << quint8(7) << "D3: Restaurant";
+  QTest::newRow("no description") << "" << quint8(2) << quint8(7) << "Automobile Fuel";
+}
+
+void test_CGarminImg::facilityText() {
+  QFETCH(QString, description);
+  QFETCH(quint8, type);
+  QFETCH(quint8, direction);
+  QFETCH(QString, text);
+
+  CGarminPoint::exit_facility_t facility;
+  facility.description = description;
+  facility.type = type;
+  facility.direction = direction;
+  QCOMPARE(CGarminPoint::facilityText(facility), text);
+}
+
+void test_CGarminImg::placesRecords() {
+  // tables as mkgmap's PlacesFile writes them; more than 255 cities and zips make their indexes 2 bytes
+  QByteArray buf;
+  CGarminPlaces::layout_t layout;
+  layout.country = {0x000, 2 * 3, 3};
+  put3(buf, 0x000, 16);
+  put3(buf, 0x003, 17);
+  layout.region = {0x010, 5, 5};
+  put(buf, 0x010, {1, 0});
+  put3(buf, 0x012, 32);
+  layout.city = {0x100, 300 * 5, 5};
+  put3(buf, 0x100, 48);  // city 1 in region 1
+  put(buf, 0x103, {0x01, 0x00});
+  put3(buf, 0x100 + 299 * 5, 49);  // city 300 in country 2, no region
+  put(buf, 0x100 + 299 * 5 + 3, {0x02, 0x40});
+  layout.zip = {0x800, 300 * 3, 3};
+  put3(buf, 0x800 + 298 * 3, 64);  // zip 299
+  layout.highway = {0xC00, 6, 6};
+  put3(buf, 0xC00, 80);
+  // two facilities, the second marked last; the third belongs to another exit
+  layout.exitFacility = {0xC10, 3 * 5, 5};
+  const auto facility = [&](qsizetype at, quint32 label, quint32 type, quint32 direction, bool last) {
+    const quint32 word = label | (last ? 0x00800000 : 0) | (type << 24) | (direction << 29);
+    put(buf, at, {quint8(word), quint8(word >> 8), quint8(word >> 16), quint8(word >> 24), 0x47});
+  };
+  facility(0xC10, 96, 2, 4, false);
+  facility(0xC15, 97, 3, 6, true);
+  facility(0xC1A, 98, 5, 0, true);
+  // house number, city, zip and exit set globally
+  layout.offsetPoiProps = 0xD00;
+  layout.sizePoiProps = 0x100;
+  layout.globalFlags = 0x01 | 0x04 | 0x08 | 0x20;
+  // all global fields: "12", city 300, zip 299, exit with overnight parking and facility 1
+  put3(buf, 0xD00, 1);
+  put(buf, 0xD03, {0x8d, 0xf8, 0x2c, 0x01, 0x2b, 0x01});
+  put3(buf, 0xD09, 112 | 0x00400000 | 0x00800000);
+  put(buf, 0xD0C, {1, 1});
+  // own flags: only the city (the second global field), city 1
+  put3(buf, 0xD20, 2 | 0x00800000);
+  put(buf, 0xD23, {0x80 | 0x02, 0x01, 0x00});
+  buf.resize(0xE00);
+
+  const CGarminPlaces::read_t read = [&](CFileExt&, quint32 offset, quint32 size, QByteArray& data) {
+    data = quint64(offset) + size <= quint64(buf.size()) ? buf.mid(offset, size) : QByteArray();
+  };
+  const CGarminPlaces::point_label_t noPoint = [](CFileExt&, quint32, quint32) { return QString(); };
+  CFakeStrTbl strtbl;
+  CFileExt file(QCoreApplication::applicationFilePath());
+  CGarminPlaces places(layout, strtbl, read);
+
+  CGarminPoint all;
+  places.readDetails(file, 0x00, noPoint, all);
+  QCOMPARE(all.houseNumber, QString("12"));
+  QCOMPARE(all.city, QString("L49"));
+  QCOMPARE(all.region, QString());
+  QCOMPARE(all.country, QString("L17"));
+  QCOMPARE(all.zip, QString("L64"));
+  QVERIFY(all.isExit);
+  QCOMPARE(all.exitTo, QString("L112"));
+  QVERIFY(all.exitOvernightParking);
+  QCOMPARE(all.exitHighway, QString("L80"));
+  QCOMPARE(all.exitFacilities.size(), 2);
+  QCOMPARE(all.exitFacilities[0].description, QString("L96"));
+  QCOMPARE(all.exitFacilities[0].type, quint8(2));
+  QCOMPARE(all.exitFacilities[0].direction, quint8(4));
+  QCOMPARE(all.exitFacilities[0].facilities, quint8(0x47));
+  QCOMPARE(all.exitFacilities[1].description, QString("L97"));
+  QCOMPARE(all.exitFacilities[1].direction, quint8(6));
+
+  // the cached record gives the same
+  CGarminPoint again;
+  places.readDetails(file, 0x00, noPoint, again);
+  QCOMPARE(again.getAddressText(), all.getAddressText());
+  QCOMPARE(again.getExitText(), all.getExitText());
+
+  CGarminPoint own;
+  places.readDetails(file, 0x20, noPoint, own);
+  QCOMPARE(own.houseNumber, QString());
+  QCOMPARE(own.city, QString("L48"));
+  QCOMPARE(own.region, QString("L32"));
+  QCOMPARE(own.country, QString("L16"));
+  QCOMPARE(own.zip, QString());
+  QVERIFY(!own.isExit);
+
+  // a record past LBL6 and tables past the data read as nothing
+  CGarminPoint past;
+  places.readDetails(file, 0x100, noPoint, past);
+  QVERIFY(past.getAddressText().isEmpty());
+  CGarminPlaces::layout_t broken = layout;
+  broken.city.offset = 0x100000;
+  broken.zip.offset = 0xFFFFFFF0;
+  CGarminPlaces brokenPlaces(broken, strtbl, read);
+  CGarminPoint none;
+  brokenPlaces.readDetails(file, 0x00, noPoint, none);
+  QCOMPARE(none.houseNumber, QString("12"));
+  QCOMPARE(none.city, QString());
+  QCOMPARE(none.zip, QString());
+}
+
+void test_CGarminImg::corruptPlaces() {
+  if (fixtureDir().isEmpty()) {
+    QSKIP("QMS_IMG_FIXTURES not set; build the test maps with make_fixtures.py");
+  }
+  const QString image = QDir(fixtureDir()).filePath("poi.img");
+  if (!QFileInfo::exists(image)) {
+    QSKIP(qPrintable("Test map not built: " + image));
+  }
+  // the city table moved past the end of the file: the map loads and draws, the POIs lose their city
+  QFile in(image);
+  QVERIFY(in.open(QIODevice::ReadOnly));
+  QByteArray bytes = in.readAll();
+  const qsizetype hdr = bytes.indexOf("GARMIN LBL") - 2;
+  QVERIFY(hdr >= 0);
+  const qsizetype lbl4 = hdr + 0x3B;
+  for (int i = 0; i < 4; ++i) {
+    bytes[lbl4 + i] = char(i == 2 ? 0x10 : 0);
+  }
+  QTemporaryDir dir;
+  const QString broken = dir.filePath("poi.img");
+  QFile out(broken);
+  QVERIFY(out.open(QIODevice::WriteOnly));
+  out.write(bytes);
+  out.close();
+
+  QVector<img_object_t> decoded;
+  try {
+    QVERIFY(readImg(broken, decoded) > 0);
+  } catch (const CGarminImg::exce_t& e) {
+    QFAIL(qPrintable(e.msg));
+  }
+  bool restaurant = false;
+  for (const img_object_t& o : std::as_const(decoded)) {
+    if (o.labels == QStringList{"Restaurant One"}) {
+      restaurant = true;
+      QCOMPARE(o.details.value("StreetDesc"), QString("Main Street"));
+      QCOMPARE(o.details.value("CityName"), QString());
+    }
+  }
+  QVERIFY(restaurant);
+}
+
+QTEST_GUILESS_MAIN(test_CGarminImg)
+#include "test_CGarminImg.moc"

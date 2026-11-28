@@ -28,6 +28,7 @@
 #include "helpers/CFileExt.h"
 #include "helpers/Platform.h"
 #include "map/garmin/CGarminMarine.h"
+#include "map/garmin/CGarminPlaces.h"
 #include "map/garmin/CGarminStrTbl6.h"
 #include "map/garmin/CGarminStrTbl8.h"
 #include "map/garmin/CGarminStrTblUtf8.h"
@@ -92,7 +93,7 @@ void CGarminImg::read() {
 }
 
 void CGarminImg::readFile(CFileExt& file, quint32 offset, quint32 size, QByteArray& data) const {
-  if (offset + size > file.size()) {
+  if (quint64(offset) + size > quint64(file.size())) {
     throw exce_t(eErrOpen, QCoreApplication::translate("CMapIMG", "Failed to read: ") + filename);
   }
 
@@ -318,7 +319,31 @@ void CGarminImg::readSubfileBasics(subfile_desc_t& subfile, CFileExt& file) {
   qDebug() << "TRE2 size          :" << dec << gar_load(quint32, pTreHdr->tre2_size);
 #endif  // DEBUG_SHOW_TRE_DATA
 
-  copyrights << QString(file.data(trePart.offset + gar_load(uint16_t, pTreHdr->length), 0x7FFF));
+  // the text after the header (mkgmap: the licence) and the copyright messages (TRE3, label offsets) need the LBL
+  // code page; decoded once the string table is set up
+  const quint32 treHdrLength = gar_load(uint16_t, pTreHdr->length);
+  QByteArray mapInfo;
+  if (treHdrLength < trePart.size) {
+    readFile(file, trePart.offset + treHdrLength, qMin(trePart.size - treHdrLength, quint32(0x7FFF)), mapInfo);
+    const qsizetype end = mapInfo.indexOf('\0');
+    if (end >= 0) {
+      mapInfo.truncate(end);
+    }
+  }
+  QList<quint32> copyrightLabels;
+  // the TRE3 fields end the header at 0x3B
+  const bool hasTre3 = treHdrLength >= 0x3B;
+  const quint32 tre3Offset = gar_load(quint32, pTreHdr->tre3_offset);
+  const quint32 tre3Size = gar_load(quint32, pTreHdr->tre3_size);
+  const quint16 tre3RecSize = gar_load(uint16_t, pTreHdr->tre3_rec_size);
+  if (hasTre3 && tre3RecSize >= 3 && quint64(tre3Offset) + tre3Size <= trePart.size) {
+    QByteArray tre3;
+    readFile(file, trePart.offset + tre3Offset, tre3Size, tre3);
+    const quint8* p = reinterpret_cast<const quint8*>(tre3.constData());
+    for (quint32 i = 0; i + 3 <= tre3Size; i += tre3RecSize) {
+      copyrightLabels << ((p[i] | (p[i + 1] << 8) | (p[i + 2] << 16)) & 0x003FFFFF);
+    }
+  }
 
   // read map boundaries from header
   qint32 i32;
@@ -673,8 +698,64 @@ void CGarminImg::readSubfileBasics(subfile_desc_t& subfile, CFileExt& file) {
       if (nullptr != pNetHdr) {
         subfile.strtbl->registerNET1(offsetNet1, gar_load(quint32, pNetHdr->net1_length), pNetHdr->net1_addr_shift);
       }
+
+      // the zip table, the last one a POI record refers to, ends the header at 0x7B
+      if (gar_load(uint16_t, pLblHdr->length) >= 0x7C) {
+        const auto section = [&](quint32 offset, quint32 size, quint16 recSize) {
+          return CGarminPlaces::section_t{lblPart.offset + offset, size, recSize};
+        };
+        CGarminPlaces::layout_t layout;
+        layout.country = section(gar_load(quint32, pLblHdr->lbl2_offset), gar_load(quint32, pLblHdr->lbl2_length),
+                                 gar_load(uint16_t, pLblHdr->lbl2_rec_size));
+        layout.region = section(gar_load(quint32, pLblHdr->lbl3_offset), gar_load(quint32, pLblHdr->lbl3_length),
+                                gar_load(uint16_t, pLblHdr->lbl3_rec_size));
+        layout.city = section(gar_load(quint32, pLblHdr->lbl4_offset), gar_load(quint32, pLblHdr->lbl4_length),
+                              gar_load(uint16_t, pLblHdr->lbl4_rec_size));
+        layout.zip = section(gar_load(quint32, pLblHdr->lbl8_offset), gar_load(quint32, pLblHdr->lbl8_length),
+                             gar_load(uint16_t, pLblHdr->lbl8_rec_size));
+        // highways and exit facilities end the header at 0x97
+        if (gar_load(uint16_t, pLblHdr->length) >= 0x98) {
+          layout.highway = section(gar_load(quint32, pLblHdr->lbl9_offset), gar_load(quint32, pLblHdr->lbl9_length),
+                                   gar_load(uint16_t, pLblHdr->lbl9_rec_size));
+          layout.exitFacility =
+              section(gar_load(quint32, pLblHdr->lbl10_offset), gar_load(quint32, pLblHdr->lbl10_length),
+                      gar_load(uint16_t, pLblHdr->lbl10_rec_size));
+        }
+        layout.offsetPoiProps = offsetLbl6;
+        layout.sizePoiProps = gar_load(quint32, pLblHdr->lbl6_length);
+        layout.globalFlags = pLblHdr->lbl6_glob_mask;
+        // the tables are read while a tile is drawn: a section outside the LBL part reads as nothing
+        const quint64 lblBegin = lblPart.offset;
+        const quint64 lblEnd = lblBegin + lblPart.size;
+        places.push_back(std::make_unique<CGarminPlaces>(
+            layout, *subfile.strtbl,
+            [this, lblBegin, lblEnd](CFileExt& f, quint32 offset, quint32 size, QByteArray& data) {
+              const quint64 end = quint64(offset) + size;
+              if (offset < lblBegin || end > lblEnd || end > quint64(f.size())) {
+                data.clear();
+                return;
+              }
+              readFile(f, offset, size, data);
+            }));
+        subfile.places = places.back().get();
+      }
     }
   }
+
+  const auto addCopyright = [&](const QString& text) {
+    const QString trimmed = text.trimmed();
+    if (!trimmed.isEmpty() && !copyrights.contains(trimmed)) {
+      copyrights << trimmed;
+    }
+  };
+  if (subfile.strtbl != nullptr) {
+    for (const quint32 offset : std::as_const(copyrightLabels)) {
+      QStringList labels;
+      subfile.strtbl->get(file, offset, IGarminStrTbl::norm, labels);
+      addCopyright(IGarminStrTbl::displayText(labels));
+    }
+  }
+  addCopyright(subfile.strtbl != nullptr ? subfile.strtbl->decodeText(mapInfo) : QString::fromUtf8(mapInfo));
 }
 
 void CGarminImg::processPrimaryMapData() {
@@ -775,7 +856,7 @@ void CGarminImg::load(quint8 bits, const QRectF& viewport, const filter_t& filte
       if (abort()) {
         break;
       }
-      loadSubDiv(file, subdiv, subfile.strtbl, rgndata, filter, viewport, polylines, polygons, points, pois);
+      loadSubDiv(file, subdiv, subfile, rgndata, filter, viewport, polylines, polygons, points, pois);
     }
 
 #ifdef Q_OS_WIN32
@@ -811,7 +892,78 @@ void readMarineTexts(CFileExt& file, IGarminStrTbl* strtbl, CGarminPoint& p) {
 }
 }  // namespace
 
-void CGarminImg::loadSubDiv(CFileExt& file, const subdiv_desc_t& subdiv, IGarminStrTbl* strtbl,
+namespace {
+/** Offsets into the RGN part of the four object sections of a subdivision; 0 if absent. */
+struct rgn_sections_t {
+  quint32 points = 0;
+  quint32 idxPoints = 0;
+  quint32 polylines = 0;
+  quint32 polygons = 0;
+};
+
+rgn_sections_t rgnSections(const CGarminImg::subdiv_desc_t& subdiv, const quint8* pRawData) {
+  rgn_sections_t s;
+  const quint32 objCnt = subdiv.hasIdxPoints + subdiv.hasPoints + subdiv.hasPolylines + subdiv.hasPolygons;
+  // the first section follows a 2-byte offset for each further one
+  const quint32 first = (objCnt - 1) * sizeof(quint16) + subdiv.rgn_start;
+  const quint16* pOffset = reinterpret_cast<const quint16*>(pRawData + subdiv.rgn_start);
+  bool any = false;
+  const auto next = [&](bool has, quint32& offset) {
+    if (!has) {
+      return;
+    }
+    if (any) {
+      offset = gar_load(uint16_t, *pOffset) + subdiv.rgn_start;
+      ++pOffset;
+    } else {
+      offset = first;
+    }
+    any = true;
+  };
+  next(subdiv.hasPoints, s.points);
+  next(subdiv.hasIdxPoints, s.idxPoints);
+  next(subdiv.hasPolylines, s.polylines);
+  next(subdiv.hasPolygons, s.polygons);
+  return s;
+}
+}  // namespace
+
+QString CGarminImg::indexedPointLabel(CFileExt& file, const subfile_desc_t& subfile, const QByteArray& rgndata,
+                                      quint32 number, quint32 index) const {
+  // subdivisions are numbered from 1, points from 1
+  if (number == 0 || number > quint32(subfile.subdivs.size()) || index == 0 || subfile.strtbl == nullptr) {
+    return QString();
+  }
+  const subdiv_desc_t& subdiv = subfile.subdivs[number - 1];
+  if (!subdiv.hasIdxPoints || subdiv.rgn_end > quint32(rgndata.size())) {
+    return QString();
+  }
+  const quint8* pRawData = reinterpret_cast<const quint8*>(rgndata.constData());
+  const rgn_sections_t s = rgnSections(subdiv, pRawData);
+  const quint32 end = qMin(subdiv.rgn_end, s.polylines ? s.polylines : s.polygons ? s.polygons : subdiv.rgn_end);
+  if (s.idxPoints >= end) {
+    return QString();
+  }
+  const quint8* pData = pRawData + s.idxPoints;
+  const quint8* const pEnd = pRawData + end;
+  for (quint32 i = 1; pData < pEnd; ++i) {
+    CGarminPoint p;
+    // a point is 8 bytes, 9 with a subtype (bit 23 of the label)
+    const qsizetype left = pEnd - pData;
+    if (left < 8 || ((pData[3] & 0x80) && left < 9)) {
+      break;
+    }
+    pData += p.decode(subdiv.iCenterLng, subdiv.iCenterLat, subdiv.shift, pData);
+    if (i == index) {
+      QStringList labels;
+      subfile.strtbl->get(file, p.lbl_ptr, p.isLbl6 ? IGarminStrTbl::poi : IGarminStrTbl::norm, labels);
+      return IGarminStrTbl::displayText(labels);
+    }
+  }
+  return QString();
+}
+
+void CGarminImg::loadSubDiv(CFileExt& file, const subdiv_desc_t& subdiv, const subfile_desc_t& subfile,
                             const QByteArray& rgndata, const filter_t& filter, const QRectF& viewport,
                             polytype_t& polylines, polytype_t& polygons, pointtype_t& points, pointtype_t& pois) {
   if (subdiv.rgn_start == subdiv.rgn_end && !subdiv.lengthPolygons2 && !subdiv.lengthPolylines2 &&
@@ -822,46 +974,28 @@ void CGarminImg::loadSubDiv(CFileExt& file, const subdiv_desc_t& subdiv, IGarmin
   //      qDebug() << "---------" << file.fileName() << "---------";
 
   const quint8* pRawData = reinterpret_cast<const quint8*>(rgndata.constData());
+  IGarminStrTbl* const strtbl = subfile.strtbl;
 
-  quint32 opnt = 0, oidx = 0, opline = 0, opgon = 0;
-  quint32 objCnt = subdiv.hasIdxPoints + subdiv.hasPoints + subdiv.hasPolylines + subdiv.hasPolygons;
+  const rgn_sections_t sections = rgnSections(subdiv, pRawData);
+  const quint32 opnt = sections.points;
+  const quint32 oidx = sections.idxPoints;
+  const quint32 opline = sections.polylines;
+  const quint32 opgon = sections.polygons;
 
-  const quint16* pOffset = reinterpret_cast<const quint16*>(pRawData + subdiv.rgn_start);
-
-  // test for points
-  if (subdiv.hasPoints) {
-    opnt = (objCnt - 1) * sizeof(quint16) + subdiv.rgn_start;
-  }
-  // test for indexed points
-  if (subdiv.hasIdxPoints) {
-    if (opnt) {
-      oidx = gar_load(uint16_t, *pOffset);
-      oidx += subdiv.rgn_start;
-      ++pOffset;
-    } else {
-      oidx = (objCnt - 1) * sizeof(quint16) + subdiv.rgn_start;
+  // a POI's city may be the label of an indexed point of this tile
+  const CGarminPlaces::point_label_t pointLabel = [&](CFileExt& f, quint32 number, quint32 index) {
+    return indexedPointLabel(f, subfile, rgndata, number, index);
+  };
+  const auto readLabels = [&](CGarminPoint& p) {
+    if (strtbl == nullptr) {
+      return;
     }
-  }
-  // test for polylines
-  if (subdiv.hasPolylines) {
-    if (opnt || oidx) {
-      opline = gar_load(uint16_t, *pOffset);
-      opline += subdiv.rgn_start;
-      ++pOffset;
-    } else {
-      opline = (objCnt - 1) * sizeof(quint16) + subdiv.rgn_start;
+    p.isLbl6 ? strtbl->get(file, p.lbl_ptr, IGarminStrTbl::poi, p.labels)
+             : strtbl->get(file, p.lbl_ptr, IGarminStrTbl::norm, p.labels);
+    if (p.isLbl6 && subfile.places != nullptr) {
+      subfile.places->readDetails(file, p.lbl_ptr, pointLabel, p);
     }
-  }
-  // test for polygons
-  if (subdiv.hasPolygons) {
-    if (opnt || oidx || opline) {
-      opgon = gar_load(uint16_t, *pOffset);
-      opgon += subdiv.rgn_start;
-      ++pOffset;
-    } else {
-      opgon = (objCnt - 1) * sizeof(quint16) + subdiv.rgn_start;
-    }
-  }
+  };
 
 #ifdef DEBUG_SHOW_POLY_DATA
   qDebug() << "--- Subdivision" << subdiv.n << "---";
@@ -887,10 +1021,7 @@ void CGarminImg::loadSubDiv(CFileExt& file, const subdiv_desc_t& subdiv, IGarmin
         continue;
       }
 
-      if (strtbl) {
-        p.isLbl6 ? strtbl->get(file, p.lbl_ptr, IGarminStrTbl::poi, p.labels)
-                 : strtbl->get(file, p.lbl_ptr, IGarminStrTbl::norm, p.labels);
-      }
+      readLabels(p);
 
       points.push_back(p);
     }
@@ -909,10 +1040,7 @@ void CGarminImg::loadSubDiv(CFileExt& file, const subdiv_desc_t& subdiv, IGarmin
         continue;
       }
 
-      if (strtbl) {
-        p.isLbl6 ? strtbl->get(file, p.lbl_ptr, IGarminStrTbl::poi, p.labels)
-                 : strtbl->get(file, p.lbl_ptr, IGarminStrTbl::norm, p.labels);
-      }
+      readLabels(p);
 
       pois.push_back(p);
     }
@@ -1030,9 +1158,8 @@ void CGarminImg::loadSubDiv(CFileExt& file, const subdiv_desc_t& subdiv, IGarmin
         continue;
       }
 
+      readLabels(p);
       if (strtbl) {
-        p.isLbl6 ? strtbl->get(file, p.lbl_ptr, IGarminStrTbl::poi, p.labels)
-                 : strtbl->get(file, p.lbl_ptr, IGarminStrTbl::norm, p.labels);
         readMarineTexts(file, strtbl, p);
       }
       pois.push_back(p);

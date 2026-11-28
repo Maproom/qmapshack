@@ -87,6 +87,9 @@ class IGarminStrTbl : public QObject {
    */
   static bool splitHeight(const QString& label, QString& name, qreal& feet);
 
+  /** @p text in the map's code page, UTF-8 without one; no separators expected. */
+  QString decodeText(const QByteArray& text) const;
+
  protected:
   /// Decode the label(s) at @p offset straight from the file (the cache-miss path).
   virtual void decode(CFileExt& file, quint32 offset, type_e t, QStringList& info) = 0;

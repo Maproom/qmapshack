@@ -32,6 +32,7 @@
 #include "map/garmin/CGarminPolygon.h"
 #include "map/garmin/CGarminTyp.h"
 #include "map/garmin/CMarineSymbol.h"
+#include "map/garmin/CPoiSymbol.h"
 #include "map/garmin/IGarminStrTbl.h"
 
 /**
@@ -80,6 +81,7 @@ class test_CGarminImg : public QObject {
   void infoTexts();
   void facilityText_data();
   void facilityText();
+  void poiSymbols();
   void placesRecords();
   void corruptPlaces();
 };
@@ -105,8 +107,11 @@ struct img_object_t {
 };
 
 /** The Polish-format keys of a POI's address and phone. */
-const QStringList kDetailKeys = {"HouseNumber", "StreetDesc", "CityName", "RegionName",
-                                 "CountryName", "ZipCode",    "Phone"};
+const QStringList& detailKeys() {
+  static const QStringList keys = {"HouseNumber", "StreetDesc", "CityName", "RegionName",
+                                   "CountryName", "ZipCode",    "Phone"};
+  return keys;
+}
 
 QString fixtureDir() { return qEnvironmentVariable("QMS_IMG_FIXTURES"); }
 
@@ -248,9 +253,9 @@ quint8 readImg(const QString& path, QVector<img_object_t>& objects) {
     for (const CGarminPoint& p : *list) {
       const QStringList values = {p.houseNumber, p.street, p.city, p.region, p.country, p.zip, p.phone};
       QMap<QString, QString> details;
-      for (qsizetype i = 0; i < kDetailKeys.size(); ++i) {
+      for (qsizetype i = 0; i < detailKeys().size(); ++i) {
         if (!values[i].isEmpty()) {
-          details[kDetailKeys[i]] = values[i];
+          details[detailKeys()[i]] = values[i];
         }
       }
       objects.append({"POI", p.type, p.labels, {toDeg(p.pos)}, p.extra, details});
@@ -1005,7 +1010,7 @@ void test_CGarminImg::poiDetails() {
     QVERIFY2(match != decoded.end(), qPrintable("Not decoded: " + what));
 
     QMap<QString, QString> expected;
-    for (const QString& key : kDetailKeys) {
+    for (const QString& key : detailKeys()) {
       if (want.attributes.contains(key)) {
         expected[key] = want.attributes[key];
       }
@@ -1156,6 +1161,71 @@ void test_CGarminImg::facilityText() {
   facility.type = type;
   facility.direction = direction;
   QCOMPARE(CGarminPoint::facilityText(facility), text);
+}
+
+void test_CGarminImg::poiSymbols() {
+  // standard types only: a marine type shares the low bytes, a city has a label only
+  QVERIFY(CPoiSymbol::hasSymbol(0x2a00));
+  QVERIFY(CPoiSymbol::hasSymbol(0x6616));
+  QVERIFY(!CPoiSymbol::hasSymbol(0x12a00));
+  QVERIFY(!CPoiSymbol::hasSymbol(0x0800));
+
+  // every type of mkgmap's default style but the cities; each icon loads and is drawn inside the symbol
+  qint32 count = 0;
+  for (quint32 type = 0; type <= 0xffff; ++type) {
+    if (!CPoiSymbol::hasSymbol(type)) {
+      continue;
+    }
+    ++count;
+    BLImage img(40, 40, BL_FORMAT_PRGB32);
+    BLContext ctx(img);
+    ctx.clear_all();
+    CPoiSymbol::draw(ctx, QPointF(20, 20), type);
+    ctx.end();
+    const QImage q = toQImage(img);
+    const QRect bounds = CPoiSymbol::bounds(type).translated(20, 20).toAlignedRect();
+    // the icon: white on a badge, coloured for a geographic sign
+    const bool sign = (type >> 8) >= 0x64;
+    bool outside = false;
+    qint32 ink = 0;
+    for (int y = 0; y < q.height(); ++y) {
+      for (int x = 0; x < q.width(); ++x) {
+        const QRgb px = q.pixel(x, y);
+        if (qAlpha(px) == 0) {
+          continue;
+        }
+        if (!bounds.contains(x, y)) {
+          outside = true;
+        } else if (bounds.adjusted(3, 3, -3, -3).contains(x, y) && qAlpha(px) == 255) {
+          const bool white = qRed(px) > 200 && qGreen(px) > 200 && qBlue(px) > 200;
+          ink += sign != white ? 1 : 0;
+        }
+      }
+    }
+    const QString what = QString("type 0x%1").arg(type, 0, 16);
+    QVERIFY2(!outside, qPrintable(what + ": drawn outside its bounds"));
+    QVERIFY2(ink >= 5, qPrintable(what + ": no icon drawn"));
+  }
+  QCOMPARE(count, 130);
+
+  // at a pixel ratio of 2 the symbol is rendered for it and keeps its logical size
+  BLImage img(80, 80, BL_FORMAT_PRGB32);
+  BLContext ctx(img);
+  ctx.clear_all();
+  ctx.scale(2.0);
+  CPoiSymbol::draw(ctx, QPointF(20, 20), 0x2a00);
+  ctx.end();
+  const QImage q = toQImage(img);
+  const QRect bounds = CPoiSymbol::bounds(0x2a00).translated(20, 20).toAlignedRect();
+  QRect drawn;
+  for (int y = 0; y < q.height(); ++y) {
+    for (int x = 0; x < q.width(); ++x) {
+      if (qAlpha(q.pixel(x, y)) != 0) {
+        drawn |= QRect(x, y, 1, 1);
+      }
+    }
+  }
+  QCOMPARE(drawn, QRect(bounds.topLeft() * 2, bounds.size() * 2));
 }
 
 void test_CGarminImg::placesRecords() {

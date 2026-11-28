@@ -38,6 +38,7 @@
 #include "map/garmin/CGarminMarine.h"
 #include "map/garmin/CGarminTyp.h"
 #include "map/garmin/CMarineSymbol.h"
+#include "map/garmin/CPoiSymbol.h"
 #include "map/garmin/IGarminStrTbl.h"
 #include "misc.h"
 #include "poi/IPoiItem.h"
@@ -1450,6 +1451,48 @@ void CMapIMG::addLabel(const CGarminPoint& pt, const QRect& rect, const CGarminT
   strlbl.isNight = isNight;
 }
 
+bool CMapIMG::drawSymbol(BLContext& ctx, const CGarminPoint& pt, const CGarminTyp::point_property& property,
+                         QVector<QRectF>& rectPois, bool night) {
+  const bool marine = CMarineSymbol::hasSymbol(pt.type);
+  if (!marine && !CPoiSymbol::hasSymbol(pt.type)) {
+    return false;
+  }
+  const QRectF area = (marine ? CMarineSymbol::bounds(pt.type) : CPoiSymbol::bounds(pt.type)).translated(pt.pos);
+  if (isCluttered(rectPois, area)) {
+    blitBullet(ctx, pt.pos.x() - 4, pt.pos.y() - 4);
+    return true;
+  }
+  if (marine) {
+    CMarineSymbol::draw(ctx, pt.pos, pt.type, CGarminMarine::decode(pt.type, CGarminMarine::Kind::ePoint, pt.extra));
+  } else {
+    CPoiSymbol::draw(ctx, pt.pos, pt.type);
+  }
+  if (CMainWindow::self().isPoiText() && pt.hasLabel()) {
+    const QRect text = fm.boundingRect(pt.getLabelText());
+    QRect rect = text.adjusted(0, 0, 4, 4);
+    QPoint anchor;
+    if (marine) {
+      // on the waterline
+      rect.moveBottomLeft(QPoint(qRound(area.right()) + 2, qRound(pt.pos.y())));
+      anchor = rect.center();
+    } else {
+      // drawLabels() puts the baseline at the top of the text box centred on the anchor: the capitals centred
+      // on the symbol
+      const int baseline = qRound(pt.pos.y()) + fm.capHeight() / 2;
+      rect.moveTopLeft(QPoint(qRound(area.right()) + 2, baseline - fm.ascent() - 2));
+      QRect box = text;
+      box.moveTop(baseline);
+      anchor = QPoint(rect.center().x(), box.center().y());
+    }
+    if (!intersectsWithExistingLabel(rect)) {
+      addLabel(pt, rect, property, night);
+      // drawLabels() centres the text on the point; here it goes beside the symbol
+      labels.last().pt = anchor;
+    }
+  }
+  return true;
+}
+
 void CMapIMG::drawPoints(BLContext& ctx, pointtype_t& pts, QVector<QRectF>& rectPois) {
   const bool night = CMainWindow::self().isNight();
   static const CGarminTyp::point_property unknownProperty;
@@ -1460,6 +1503,11 @@ void CMapIMG::drawPoints(BLContext& ctx, pointtype_t& pts, QVector<QRectF>& rect
     const auto propIt = pointProperties.constFind(pt->type);
     const CGarminTyp::point_property& property =
         (propIt != pointProperties.constEnd()) ? propIt.value() : unknownProperty;
+
+    if (propIt == pointProperties.constEnd() && drawSymbol(ctx, *pt, property, rectPois, night)) {
+      ++pt;
+      continue;
+    }
 
     const BLImage& icon = night ? property.imgNight : property.imgDay;
     const QSizeF size(icon.width(), icon.height());
@@ -1562,24 +1610,7 @@ void CMapIMG::drawPois(BLContext& ctx, pointtype_t& pts, QVector<QRectF>& rectPo
     const CGarminTyp::point_property& property =
         (propIt != pointProperties.constEnd()) ? propIt.value() : unknownProperty;
 
-    // a marine point the TYP does not style gets its chart symbol, the label beside it
-    if (propIt == pointProperties.constEnd() && CMarineSymbol::hasSymbol(pt.type)) {
-      const QRectF area = CMarineSymbol::bounds(pt.type).translated(pt.pos);
-      if (isCluttered(rectPois, area)) {
-        blitBullet(ctx, pt.pos.x() - 4, pt.pos.y() - 4);
-        continue;
-      }
-      CMarineSymbol::draw(ctx, pt.pos, pt.type, CGarminMarine::decode(pt.type, CGarminMarine::Kind::ePoint, pt.extra));
-      if (CMainWindow::self().isPoiText() && pt.hasLabel()) {
-        QRect rect = fm.boundingRect(pt.getLabelText());
-        rect.adjust(0, 0, 4, 4);
-        rect.moveBottomLeft(QPoint(qRound(area.right()) + 2, qRound(pt.pos.y())));
-        if (!intersectsWithExistingLabel(rect)) {
-          addLabel(pt, rect, property, night);
-          // drawLabels() centres the text on the point; here it goes beside the symbol
-          labels.last().pt = rect.center();
-        }
-      }
+    if (propIt == pointProperties.constEnd() && drawSymbol(ctx, pt, property, rectPois, night)) {
       continue;
     }
 

@@ -77,6 +77,12 @@ class CMapIMG : public IMap {
   void addLabel(const CGarminPoint& pt, const QRect& rect, const CGarminTyp::point_property& property, bool isDay);
   void drawPolygons(BLContext& ctx, polytype_t& lines);
   void drawPolylines(BLContext& ctx, polytype_t& lines, const QPointF& scale);
+  /**
+     @brief Draw the chart or POI symbol of a point the TYP does not style, its label beside it.
+     @return false if the type has no symbol
+   */
+  bool drawSymbol(BLContext& ctx, const CGarminPoint& pt, const CGarminTyp::point_property& property,
+                  QVector<QRectF>& rectPois, bool night);
   void drawPoints(BLContext& ctx, pointtype_t& pts, QVector<QRectF>& rectPois);
   /** Sectors of marine lights as on charts (INT 1 P40): arcs and limit lines. */
   void drawLightSectors(BLContext& ctx, const pointtype_t& pts);

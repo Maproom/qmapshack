@@ -236,6 +236,7 @@ set( SRCS
     map/garmin/CGarminMarine.cpp
     map/garmin/CGarminPlaces.cpp
     map/garmin/CMarineSymbol.cpp
+    map/garmin/CPoiSymbol.cpp
     map/garmin/CGarminPoint.cpp
     map/garmin/CGarminPolygon.cpp
     map/garmin/CGarminStrTbl6.cpp
@@ -658,6 +659,7 @@ set( HDRS
     map/garmin/CGarminMarine.h
     map/garmin/CGarminPlaces.h
     map/garmin/CMarineSymbol.h
+    map/garmin/CPoiSymbol.h
     map/garmin/CGarminPoint.h
     map/garmin/CGarminPolygon.h
     map/garmin/CGarminStrTbl6.h
@@ -979,6 +981,7 @@ set( UIS
 
 set( RCS
     resources.qrc
+    ../icons/garmin-poi/garmin-poi.qrc
 )
 
 # Separate, so a user's binary carries no fonts or icons only a documentation run loads.
@@ -1192,7 +1195,7 @@ target_link_libraries(${APPLICATION_NAME} PRIVATE
     svgticonengine
     Qt6::Widgets
     Qt6::Concurrent
-    # Nothing includes a QtSvg header: QIcon(":/x.svg") is served by the qsvg image plugin and
+    # CPoiSymbol renders through QSvgRenderer; QIcon(":/x.svg") is served by the qsvg image plugin and
     # the qsvgicon icon engine, both loaded at runtime. Linking the module is what makes
     # windeployqt/macdeployqt detect and ship those plugins. Linux distros package them anyway.
     # Drop the link and both plugins go missing: icons render blank. The failure that actually

@@ -11,6 +11,7 @@ add_executable(test_CGarminImg
     ${CMAKE_CURRENT_SOURCE_DIR}/../CGarminMarine.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/../CGarminPlaces.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/../CMarineSymbol.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../CPoiSymbol.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/../CGarminPoint.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/../CGarminPolygon.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/../CGarminStrTbl6.cpp
@@ -19,11 +20,13 @@ add_executable(test_CGarminImg
     ${CMAKE_CURRENT_SOURCE_DIR}/../CGarminTyp.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/../IGarminStrTbl.cpp
 )
+qt_add_resources(GARMIN_POI_RCS ${CMAKE_CURRENT_SOURCE_DIR}/../../../../icons/garmin-poi/garmin-poi.qrc)
+target_sources(test_CGarminImg PRIVATE ${GARMIN_POI_RCS})
 # stub/ first: its CMainWindow.h stands in for the application's, which needs the generated main window UI.
 target_include_directories(test_CGarminImg PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/stub ${CMAKE_CURRENT_SOURCE_DIR}/../../..
                                                    ${CMAKE_BINARY_DIR})
 target_compile_definitions(test_CGarminImg PRIVATE QMS_IMG_SOURCES="${CMAKE_CURRENT_SOURCE_DIR}/mp")
-target_link_libraries(test_CGarminImg PRIVATE qms_options Qt6::Core Qt6::Gui Qt6::Widgets Qt6::Core5Compat Qt6::Test
+target_link_libraries(test_CGarminImg PRIVATE qms_options Qt6::Core Qt6::Gui Qt6::Widgets Qt6::Core5Compat Qt6::Svg Qt6::Test
                                               blend2d::blend2d)
 add_test(NAME test_CGarminImg COMMAND test_CGarminImg)
 set_tests_properties(test_CGarminImg PROPERTIES LABELS "data")

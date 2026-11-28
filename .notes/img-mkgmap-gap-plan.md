@@ -2,7 +2,7 @@
 
 Tickets: top QMS-1343; 1357 decoder test (reader split out of CMapIMG, mkgmap fixtures); 1344 C1–C2, 1345 R1–R3/R6, 1346 R4, 1347 L1/L2/L5–L8, 1348 T1–T6, 1349 L3/L4 road labels and
 shields, 1350 prefix/suffix hiding, 1351 one-way arrows, 1352 draw priority, 1353 marine extra data, 1354 POI
-details and copyright, 1355 TYP languages/icon sets/several TYPs.
+details and copyright, 1355 TYP languages/icon sets/several TYPs, 1370 point labels beside the symbol.
 
 Changelog (user, 2026-11-27): QMS-#1343's line leads with the support of the marine extensions (QMS-1353).
 
@@ -44,13 +44,13 @@ Effort: S ≤ 0.5 d, M 0.5–2 d, L > 2 d. Each item needs an mkgmap-built fixtu
 | Feature | Status | Effort |
 |---|---|---|
 | One-way arrows (direction flag decoded, unused) | checked, nothing to do: BaseCamp draws none from the flag; OMTB's come from its TYP (QMS-1351 plan) | – |
-| Extra-byte content: depth/height values, extended line styles | agent | M |
-| Extra-byte content: lights | agent | L |
+| Extra-byte content: depth/height values, extended line styles | done, QMS-1353 | – |
+| Extra-byte content: lights | done, QMS-1353 (sectors and symbols too) | – |
 | TRE draw priority (0x40) for overlay maps | checked, nothing to do: BaseCamp ignores it, the later tile is on top (QMS-1352 plan) | – |
-| TRE3 copyright list; map-info text in the LBL codepage | agent | S |
+| TRE3 copyright list; map-info text in the LBL codepage | done, QMS-1354 | – |
 | Prefix/suffix hiding (0x1b/0x1c/0x1e/0x1f) at low zoom; text after 0x1d hidden | BaseCamp checked (QMS-1347 plan) | M |
-| POI address/phone/city/zip (LBL tables) | agent | M |
-| Highway exits | agent | M |
+| POI address/phone/city/zip (LBL tables) | done, QMS-1354 | – |
+| Highway exits | done, QMS-1354 | – |
 | NET road data, house numbers | agent | L |
 | TYP multi-language selection | agent | S |
 | TYP icon sets | agent | M |

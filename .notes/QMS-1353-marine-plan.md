@@ -3,6 +3,8 @@
 Ticket: QMS-#1353, parent QMS-#1343 (`img-mkgmap-gap-plan.md`, "Extra-byte content"). Branch `QMS-1353` from `dev` at
 `77bc4e8f0`. Development ticket: no `changelog.txt` line; PR to `dev` only when complete.
 
+Done: PR #1369 merged as `aa5cdd434` (2026-11-27), ticket closed. Follow-up: QMS-#1370 point labels beside the symbol.
+
 ## State (2026-11-27)
 
 Step 1a done, not committed (2026-11-27): `CGarminMarine` decodes the extra data; `CGarminPoint`/`CGarminPolygon` keep

@@ -45,17 +45,33 @@ src/
   `selftest`), read the images and the JSON/INI written. Name the command that showed it, or say
   nothing was run and what would settle it. GUI steps (clicks, dialogs): run the app on `Xephyr :7` with its own
   `HOME`/`XDG_*`, drive it with `xdotool`, read `import -display :7 -window root` screenshots; stop both by PID.
+  A map is keyed by the MD5 of its first 4096 bytes: a swapped file needs its key renamed in the config, and an
+  entry with only `filename` and `isActive` stays unused (`CMapItem::noShadowConfig()`); copy another map's keys.
 - **IMG support ends where Garmin devices end**: nothing they cannot load (e.g. a gmapsupp over 4 GB, FAT32).
 - **Garmin's own rendering is the reference for IMG maps**: BaseCamp under Wine, set up in `~/wine/basecamp`;
   how to run and rebuild it: `.notes/basecamp-wine.md`.
 - **Syntax-check changed files**: `.notes/syntax-check.sh <file.cpp>...` (each file's command from
   `ninja -t compdb` with `-fsyntax-only`; a header is checked through a `.cpp`). Catches shadowing and stale identifiers; not
   moc, AUTOUIC, linking, or anything inside `#if defined(Q_OS_WIN32)`.
+- **Clang-Tidy and Clazy before a PR** (`README_CODING.md`): Qt Creator's binaries in
+  `/opt/Qt/Tools/QtCreator/libexec/qtcreator/clang/bin`, not on `PATH`; `ninja -C build -t compdb > <scratch>/compile_commands.json`,
+  then `clang-tidy -p <scratch> <files>` and `clazy-standalone -p <scratch> <files>`. `#pragma pack` from `CGarminImg.h`
+  is known.
 - **Never commit or push** without being asked for that specific change.
 - **Folding fixes into a branch's commits**: one `--fixup` per group of whole files, into the last commit touching
   them; files using each other's new API go together. Then `rebase -i --autosquash --exec '<build>'` and check
   `git diff <before> HEAD` is empty. Hunk-wise folding conflicts with later commits, and `git apply
   --unidiff-zero` misplaces zero-context hunks.
+- **New `tr()` strings into the catalogs**: run `lupdate src/qmapshack src/common -ts <scratch copy>` and insert
+  only the new contexts into the tracked `.ts`; a full run rewrites thousands of location lines. lupdate's
+  same-text heuristic pre-fills entries from other contexts (e.g. `CWptIconManager` icon names): review those too.
+  Its `<location>` paths are relative to the scratch copy; rewrite them to `../<path below src/qmapshack>`.
+  The user checks Claude's German before it loses `type="unfinished"`; Spanish and Italian are taken as Claude writes
+  them, without `unfinished` (user, 2026-11-28: no reviewer for them).
+- **Documentation after a Garmin map change**: only `quickstart-vector-map` loads an IMG map. Images differ by
+  machine, so compare a `replay` of that page against one from a `dev` worktree build on the same machine.
+- **`/code-review` needs the checkout as target** (`/home/oeichler/projects/qmapshack …`): the session starts
+  outside the repository.
 - **`gh pr edit` fails on GitHub's Projects (classic) deprecation**; set a PR body with
   `gh api -X PATCH repos/Maproom/qmapshack/pulls/<n> --input <json>`.
 - **Pull requests go to `Maproom/qmapshack` `dev`** from `kiozen:<branch>`, the body from
@@ -396,11 +412,21 @@ preview curve.
 
 ---
 
+## Garmin marine data — `CGarminMarine`, `CMarineSymbol`
+
+- `CGarminMarine` decodes the extra data of 0x1xxxx objects as mkgmap's `ExtTypeAttributes` writes it; BaseCamp reads
+  the two light heights the other way round from mkgmap's names. Chart notation follows INT 1 and stays untranslated.
+- Symbols, line styles and light sectors apply only without a TYP style, and only to 0x1xxxx types
+  (`isMarineLine()`, `hasSymbol()`): standard types share the low bytes.
+- **Blend2D ignores stroke dash arrays**: `CMapIMG::dashedPath()` cuts dashes by hand. The Qt dash styles in
+  `applyPen()` are drawn solid as well (not fixed).
+
 ## Garmin label cache — `IGarminStrTbl`
 
 `get()` is a non-virtual wrapper over a bounded LRU `QCache` (key `(type << 32) | offset`); a miss
 calls the pure-virtual `decode()` of `CGarminStrTbl6/8/Utf8`. Keep the split so the cache lives in one
-place. Only the draw thread touches it, so no lock.
+place. The map's copyright labels are read while the map opens, before any draw; after that only the draw
+thread touches it, so no lock.
 
 **A decoded label keeps the separators 0x1b-0x1f and a leading highway shield code 0x01-0x06**; display text goes through `IGarminStrTbl::displayText()`, never
 `labels.join()`. The decoder cannot tell a point from a line (both pass `norm`, one cache entry per offset). As in
@@ -823,6 +849,7 @@ file.
 - `waypoint-icon-resolution-plan.md` — 32 → 96 px waypoint icons, gated on storing `icon_t::focus`
   relative.
 - `img-mkgmap-gap-plan.md` (QMS-1343) — Garmin IMG decoder vs mkgmap: decoding bugs and missing features with effort.
+- `QMS-1354-poi-details-plan.md` — POI address/phone, highway exits, TRE3 copyright; branch `QMS-1354`.
 
 ### CMake — remaining
 
